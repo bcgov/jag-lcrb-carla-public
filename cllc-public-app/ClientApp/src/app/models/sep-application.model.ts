@@ -35,9 +35,15 @@ export class SepLocation {
     eventLocationCity: string;
     eventLocationProvince: string;
     eventLocationPostalCode: string;
-
-    eventDates: SepSchedule[] = [];
     serviceAreas: SepServiceArea[] = [];
+
+    // get eventDates(): SepSchedule[]{
+    //     let res = [];
+    //     this.serviceAreas.forEach(area => {
+    //         res = res.concat(area.eventDates || []);
+    //     });
+    //     return res;
+    // }
 }
 
 export class SepSchedule {
@@ -56,4 +62,5 @@ export class SepServiceArea {
     setting: string;
     isMinorsPresent: boolean;
     numMinors: number;
+    eventDates: SepSchedule[] = [];
 }

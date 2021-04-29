@@ -38,27 +38,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        public int? Top276 { get; set; }
+        public int? Top320 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        public int? Skip276 { get; set; }
+        public int? Skip320 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        public bool? Count276 { get; set; }
+        public bool? Count320 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        public string Filter276 { get; set; }
+        public string Filter320 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        public string Search276 { get; set; }
+        public string Search320 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client subscription.
@@ -84,6 +84,66 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IAccountinvestigationsubjects.
         /// </summary>
         public virtual IAccountinvestigationsubjects Accountinvestigationsubjects { get; private set; }
+
+        /// <summary>
+        /// Gets the IAccountspecialevents.
+        /// </summary>
+        public virtual IAccountspecialevents Accountspecialevents { get; private set; }
+
+        /// <summary>
+        /// Gets the IPolicejurisdictionid.
+        /// </summary>
+        public virtual IPolicejurisdictionid Policejurisdictionid { get; private set; }
+
+        /// <summary>
+        /// Gets the IAdditionalinspectors.
+        /// </summary>
+        public virtual IAdditionalinspectors Additionalinspectors { get; private set; }
+
+        /// <summary>
+        /// Gets the IAdditionalinspectorasyncoperations.
+        /// </summary>
+        public virtual IAdditionalinspectorasyncoperations Additionalinspectorasyncoperations { get; private set; }
+
+        /// <summary>
+        /// Gets the IAdditionalinspectorbulkdeletefailures.
+        /// </summary>
+        public virtual IAdditionalinspectorbulkdeletefailures Additionalinspectorbulkdeletefailures { get; private set; }
+
+        /// <summary>
+        /// Gets the IAdditionalinspectormailboxtrackingfolders.
+        /// </summary>
+        public virtual IAdditionalinspectormailboxtrackingfolders Additionalinspectormailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IAdditionalinspectorprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IAdditionalinspectorprincipalobjectattributeaccesses Additionalinspectorprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IAdditionalinspectorprocesssession.
+        /// </summary>
+        public virtual IAdditionalinspectorprocesssession Additionalinspectorprocesssession { get; private set; }
+
+        /// <summary>
+        /// Gets the IAdditionalinspectorsyncerrors.
+        /// </summary>
+        public virtual IAdditionalinspectorsyncerrors Additionalinspectorsyncerrors { get; private set; }
+
+        /// <summary>
+        /// Gets the IInspectionid.
+        /// </summary>
+        public virtual IInspectionid Inspectionid { get; private set; }
+
+        /// <summary>
+        /// Gets the IInspectorid.
+        /// </summary>
+        public virtual IInspectorid Inspectorid { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegionid.
+        /// </summary>
+        public virtual IRegionid Regionid { get; private set; }
 
         /// <summary>
         /// Gets the IAdminactivities.
@@ -181,6 +241,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IApplications Applications { get; private set; }
 
         /// <summary>
+        /// Gets the IApplicationadoxiostatuscounterapplication.
+        /// </summary>
+        public virtual IApplicationadoxiostatuscounterapplication Applicationadoxiostatuscounterapplication { get; private set; }
+
+        /// <summary>
         /// Gets the IApplicationinvestigationrequests.
         /// </summary>
         public virtual IApplicationinvestigationrequests Applicationinvestigationrequests { get; private set; }
@@ -249,6 +314,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IAreainvestigationrequests.
         /// </summary>
         public virtual IAreainvestigationrequests Areainvestigationrequests { get; private set; }
+
+        /// <summary>
+        /// Gets the IAreaspecialevents.
+        /// </summary>
+        public virtual IAreaspecialevents Areaspecialevents { get; private set; }
 
         /// <summary>
         /// Gets the IAuditlogrequests.
@@ -706,11 +776,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IOfficeid Officeid { get; private set; }
 
         /// <summary>
-        /// Gets the IRegionid.
-        /// </summary>
-        public virtual IRegionid Regionid { get; private set; }
-
-        /// <summary>
         /// Gets the IInvestigations.
         /// </summary>
         public virtual IInvestigations Investigations { get; private set; }
@@ -876,6 +941,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILocalgovindigenousnations Localgovindigenousnations { get; private set; }
 
         /// <summary>
+        /// Gets the ILginpolicejurisdiction.
+        /// </summary>
+        public virtual ILginpolicejurisdiction Lginpolicejurisdiction { get; private set; }
+
+        /// <summary>
+        /// Gets the ILocalgovspecialevents.
+        /// </summary>
+        public virtual ILocalgovspecialevents Localgovspecialevents { get; private set; }
+
+        /// <summary>
         /// Gets the ILogins.
         /// </summary>
         public virtual ILogins Logins { get; private set; }
@@ -1006,9 +1081,24 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IPmuareaestablishments Pmuareaestablishments { get; private set; }
 
         /// <summary>
+        /// Gets the IPmuareaspecialevents.
+        /// </summary>
+        public virtual IPmuareaspecialevents Pmuareaspecialevents { get; private set; }
+
+        /// <summary>
         /// Gets the IPolicejurisdictions.
         /// </summary>
         public virtual IPolicejurisdictions Policejurisdictions { get; private set; }
+
+        /// <summary>
+        /// Gets the ILginid.
+        /// </summary>
+        public virtual ILginid Lginid { get; private set; }
+
+        /// <summary>
+        /// Gets the IPolicejurisdictionaccount.
+        /// </summary>
+        public virtual IPolicejurisdictionaccount Policejurisdictionaccount { get; private set; }
 
         /// <summary>
         /// Gets the IPolicydocuments.
@@ -1041,9 +1131,19 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IManagerofinvestigationsid Managerofinvestigationsid { get; private set; }
 
         /// <summary>
+        /// Gets the IRegionadditionalinspectors.
+        /// </summary>
+        public virtual IRegionadditionalinspectors Regionadditionalinspectors { get; private set; }
+
+        /// <summary>
         /// Gets the IRegioninvestigationrequests.
         /// </summary>
         public virtual IRegioninvestigationrequests Regioninvestigationrequests { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegionspecialevents.
+        /// </summary>
+        public virtual IRegionspecialevents Regionspecialevents { get; private set; }
 
         /// <summary>
         /// Gets the IRelatedlicences.
@@ -1146,6 +1246,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ISpecialeventlicencedareas Specialeventlicencedareas { get; private set; }
 
         /// <summary>
+        /// Gets the ISpecialeventareaeventschedules.
+        /// </summary>
+        public virtual ISpecialeventareaeventschedules Specialeventareaeventschedules { get; private set; }
+
+        /// <summary>
         /// Gets the ISpecialeventlocations.
         /// </summary>
         public virtual ISpecialeventlocations Specialeventlocations { get; private set; }
@@ -1161,6 +1266,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ISpecialevents Specialevents { get; private set; }
 
         /// <summary>
+        /// Gets the IInspector.
+        /// </summary>
+        public virtual IInspector Inspector { get; private set; }
+
+        /// <summary>
+        /// Gets the ILocalgovernmentid.
+        /// </summary>
+        public virtual ILocalgovernmentid Localgovernmentid { get; private set; }
+
+        /// <summary>
         /// Gets the ISpecialeventinspection.
         /// </summary>
         public virtual ISpecialeventinspection Specialeventinspection { get; private set; }
@@ -1174,6 +1289,51 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ISpecialeventtandcs.
         /// </summary>
         public virtual ISpecialeventtandcs Specialeventtandcs { get; private set; }
+
+        /// <summary>
+        /// Gets the IStatuscounters.
+        /// </summary>
+        public virtual IStatuscounters Statuscounters { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplication.
+        /// </summary>
+        public virtual IApplication Application { get; private set; }
+
+        /// <summary>
+        /// Gets the IStatuscounterasyncoperations.
+        /// </summary>
+        public virtual IStatuscounterasyncoperations Statuscounterasyncoperations { get; private set; }
+
+        /// <summary>
+        /// Gets the IStatuscounterbulkdeletefailures.
+        /// </summary>
+        public virtual IStatuscounterbulkdeletefailures Statuscounterbulkdeletefailures { get; private set; }
+
+        /// <summary>
+        /// Gets the IStatuscountermailboxtrackingfolders.
+        /// </summary>
+        public virtual IStatuscountermailboxtrackingfolders Statuscountermailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the IStatuscounterprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual IStatuscounterprincipalobjectattributeaccesses Statuscounterprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the IStatuscounterprocesssession.
+        /// </summary>
+        public virtual IStatuscounterprocesssession Statuscounterprocesssession { get; private set; }
+
+        /// <summary>
+        /// Gets the IStatuscountersharepointdocumentlocations.
+        /// </summary>
+        public virtual IStatuscountersharepointdocumentlocations Statuscountersharepointdocumentlocations { get; private set; }
+
+        /// <summary>
+        /// Gets the IStatuscountersyncerrors.
+        /// </summary>
+        public virtual IStatuscountersyncerrors Statuscountersyncerrors { get; private set; }
 
         /// <summary>
         /// Gets the ITaxandaccountings.
@@ -1221,6 +1381,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IWorkers Workers { get; private set; }
 
         /// <summary>
+        /// Gets the IRegardingobjectidadoxioadditionalinspector.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioadditionalinspector Regardingobjectidadoxioadditionalinspector { get; private set; }
+
+        /// <summary>
         /// Gets the IRegardingobjectidadoxioadminactivity.
         /// </summary>
         public virtual IRegardingobjectidadoxioadminactivity Regardingobjectidadoxioadminactivity { get; private set; }
@@ -1259,6 +1424,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IRegardingobjectidadoxiorelatedlicence.
         /// </summary>
         public virtual IRegardingobjectidadoxiorelatedlicence Regardingobjectidadoxiorelatedlicence { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiostatuscounter.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiostatuscounter Regardingobjectidadoxiostatuscounter { get; private set; }
+
+        /// <summary>
+        /// Gets the IBusinessunitadoxioadditionalinspector.
+        /// </summary>
+        public virtual IBusinessunitadoxioadditionalinspector Businessunitadoxioadditionalinspector { get; private set; }
 
         /// <summary>
         /// Gets the IBusinessunitadoxioadminactivity.
@@ -1301,6 +1476,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IBusinessunitadoxiorelatedlicence Businessunitadoxiorelatedlicence { get; private set; }
 
         /// <summary>
+        /// Gets the IBusinessunitadoxiostatuscounter.
+        /// </summary>
+        public virtual IBusinessunitadoxiostatuscounter Businessunitadoxiostatuscounter { get; private set; }
+
+        /// <summary>
         /// Gets the IContacts.
         /// </summary>
         public virtual IContacts Contacts { get; private set; }
@@ -1314,6 +1494,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IContactinvestigationsubjects.
         /// </summary>
         public virtual IContactinvestigationsubjects Contactinvestigationsubjects { get; private set; }
+
+        /// <summary>
+        /// Gets the IContactspecialevents.
+        /// </summary>
+        public virtual IContactspecialevents Contactspecialevents { get; private set; }
 
         /// <summary>
         /// Gets the IBaserecordidadoxioadminactivity.
@@ -1396,6 +1581,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IGlobaloptionsetdefinitions Globaloptionsetdefinitions { get; private set; }
 
         /// <summary>
+        /// Gets the IInspectionadditionalinspectors.
+        /// </summary>
+        public virtual IInspectionadditionalinspectors Inspectionadditionalinspectors { get; private set; }
+
+        /// <summary>
+        /// Gets the IInspectionrelatedparties.
+        /// </summary>
+        public virtual IInspectionrelatedparties Inspectionrelatedparties { get; private set; }
+
+        /// <summary>
         /// Gets the ISpecialeventid.
         /// </summary>
         public virtual ISpecialeventid Specialeventid { get; private set; }
@@ -1424,6 +1619,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILists.
         /// </summary>
         public virtual ILists Lists { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxioadditionalinspector.
+        /// </summary>
+        public virtual IObjectidadoxioadditionalinspector Objectidadoxioadditionalinspector { get; private set; }
 
         /// <summary>
         /// Gets the IObjectidadoxioadminactivity.
@@ -1466,6 +1666,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IObjectidadoxiorelatedlicence Objectidadoxiorelatedlicence { get; private set; }
 
         /// <summary>
+        /// Gets the IObjectidadoxiostatuscounter.
+        /// </summary>
+        public virtual IObjectidadoxiostatuscounter Objectidadoxiostatuscounter { get; private set; }
+
+        /// <summary>
         /// Gets the IProductadoxioapplicationtyperenewalfeeproduct.
         /// </summary>
         public virtual IProductadoxioapplicationtyperenewalfeeproduct Productadoxioapplicationtyperenewalfeeproduct { get; private set; }
@@ -1496,9 +1701,39 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ISystemusers Systemusers { get; private set; }
 
         /// <summary>
+        /// Gets the IInspectoradditionalinspectors.
+        /// </summary>
+        public virtual IInspectoradditionalinspectors Inspectoradditionalinspectors { get; private set; }
+
+        /// <summary>
         /// Gets the IInvestigationsmanagerregions.
         /// </summary>
         public virtual IInvestigationsmanagerregions Investigationsmanagerregions { get; private set; }
+
+        /// <summary>
+        /// Gets the ISystemuseradoxiospecialeventinspector.
+        /// </summary>
+        public virtual ISystemuseradoxiospecialeventinspector Systemuseradoxiospecialeventinspector { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioadditionalinspectorcreatedby.
+        /// </summary>
+        public virtual ILkadoxioadditionalinspectorcreatedby Lkadoxioadditionalinspectorcreatedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioadditionalinspectorcreatedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxioadditionalinspectorcreatedonbehalfby Lkadoxioadditionalinspectorcreatedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioadditionalinspectormodifiedby.
+        /// </summary>
+        public virtual ILkadoxioadditionalinspectormodifiedby Lkadoxioadditionalinspectormodifiedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioadditionalinspectormodifiedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxioadditionalinspectormodifiedonbehalfby Lkadoxioadditionalinspectormodifiedonbehalfby { get; private set; }
 
         /// <summary>
         /// Gets the ILkadoxioadminactivitycreatedby.
@@ -1661,6 +1896,31 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILkadoxiorelatedlicencemodifiedonbehalfby Lkadoxiorelatedlicencemodifiedonbehalfby { get; private set; }
 
         /// <summary>
+        /// Gets the ILkadoxiostatuscountercreatedby.
+        /// </summary>
+        public virtual ILkadoxiostatuscountercreatedby Lkadoxiostatuscountercreatedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxiostatuscountercreatedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxiostatuscountercreatedonbehalfby Lkadoxiostatuscountercreatedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxiostatuscountermodifiedby.
+        /// </summary>
+        public virtual ILkadoxiostatuscountermodifiedby Lkadoxiostatuscountermodifiedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxiostatuscountermodifiedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxiostatuscountermodifiedonbehalfby Lkadoxiostatuscountermodifiedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the IUseradoxioadditionalinspector.
+        /// </summary>
+        public virtual IUseradoxioadditionalinspector Useradoxioadditionalinspector { get; private set; }
+
+        /// <summary>
         /// Gets the IUseradoxioadminactivity.
         /// </summary>
         public virtual IUseradoxioadminactivity Useradoxioadminactivity { get; private set; }
@@ -1701,6 +1961,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IUseradoxiorelatedlicence Useradoxiorelatedlicence { get; private set; }
 
         /// <summary>
+        /// Gets the IUseradoxiostatuscounter.
+        /// </summary>
+        public virtual IUseradoxiostatuscounter Useradoxiostatuscounter { get; private set; }
+
+        /// <summary>
+        /// Gets the ITeamadoxioadditionalinspector.
+        /// </summary>
+        public virtual ITeamadoxioadditionalinspector Teamadoxioadditionalinspector { get; private set; }
+
+        /// <summary>
         /// Gets the ITeamadoxioadminactivity.
         /// </summary>
         public virtual ITeamadoxioadminactivity Teamadoxioadminactivity { get; private set; }
@@ -1739,6 +2009,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ITeamadoxiorelatedlicence.
         /// </summary>
         public virtual ITeamadoxiorelatedlicence Teamadoxiorelatedlicence { get; private set; }
+
+        /// <summary>
+        /// Gets the ITeamadoxiostatuscounter.
+        /// </summary>
+        public virtual ITeamadoxiostatuscounter Teamadoxiostatuscounter { get; private set; }
 
         /// <summary>
         /// Gets the IWorkflows.
@@ -1990,6 +2265,18 @@ namespace Gov.Lclb.Cllb.Interfaces
             Accountadoxiologinrelatedaccount = new Accountadoxiologinrelatedaccount(this);
             Accountinvestigationrequests = new Accountinvestigationrequests(this);
             Accountinvestigationsubjects = new Accountinvestigationsubjects(this);
+            Accountspecialevents = new Accountspecialevents(this);
+            Policejurisdictionid = new Policejurisdictionid(this);
+            Additionalinspectors = new Additionalinspectors(this);
+            Additionalinspectorasyncoperations = new Additionalinspectorasyncoperations(this);
+            Additionalinspectorbulkdeletefailures = new Additionalinspectorbulkdeletefailures(this);
+            Additionalinspectormailboxtrackingfolders = new Additionalinspectormailboxtrackingfolders(this);
+            Additionalinspectorprincipalobjectattributeaccesses = new Additionalinspectorprincipalobjectattributeaccesses(this);
+            Additionalinspectorprocesssession = new Additionalinspectorprocesssession(this);
+            Additionalinspectorsyncerrors = new Additionalinspectorsyncerrors(this);
+            Inspectionid = new Inspectionid(this);
+            Inspectorid = new Inspectorid(this);
+            Regionid = new Regionid(this);
             Adminactivities = new Adminactivities(this);
             Adminactivityasyncoperations = new Adminactivityasyncoperations(this);
             Adminactivitybulkdeletefailures = new Adminactivitybulkdeletefailures(this);
@@ -2009,6 +2296,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Applicationliquorbpfv2s = new Applicationliquorbpfv2s(this);
             Applicationrelocationv1s = new Applicationrelocationv1s(this);
             Applications = new Applications(this);
+            Applicationadoxiostatuscounterapplication = new Applicationadoxiostatuscounterapplication(this);
             Applicationinvestigationrequests = new Applicationinvestigationrequests(this);
             Changingtermsandconditions = new Changingtermsandconditions(this);
             Relatedlicence = new Relatedlicence(this);
@@ -2023,6 +2311,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Applicenseechangebpfv2s = new Applicenseechangebpfv2s(this);
             Areas = new Areas(this);
             Areainvestigationrequests = new Areainvestigationrequests(this);
+            Areaspecialevents = new Areaspecialevents(this);
             Auditlogrequests = new Auditlogrequests(this);
             Businessaccounts = new Businessaccounts(this);
             Cannabisinventoryreports = new Cannabisinventoryreports(this);
@@ -2114,7 +2403,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             Investigationrequestsyncerrors = new Investigationrequestsyncerrors(this);
             Licenceid = new Licenceid(this);
             Officeid = new Officeid(this);
-            Regionid = new Regionid(this);
             Investigations = new Investigations(this);
             Adoxioinvestigationadoxioenforcementactionfinancialinvestigationid = new Adoxioinvestigationadoxioenforcementactionfinancialinvestigationid(this);
             Investigationinvestigationcontacts = new Investigationinvestigationcontacts(this);
@@ -2148,6 +2436,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             Licenseechangelogs = new Licenseechangelogs(this);
             Loans = new Loans(this);
             Localgovindigenousnations = new Localgovindigenousnations(this);
+            Lginpolicejurisdiction = new Lginpolicejurisdiction(this);
+            Localgovspecialevents = new Localgovspecialevents(this);
             Logins = new Logins(this);
             Contact = new Contact(this);
             Loginasyncoperations = new Loginasyncoperations(this);
@@ -2174,14 +2464,19 @@ namespace Gov.Lclb.Cllb.Interfaces
             Personalhistorysummaries = new Personalhistorysummaries(this);
             Pmuareas = new Pmuareas(this);
             Pmuareaestablishments = new Pmuareaestablishments(this);
+            Pmuareaspecialevents = new Pmuareaspecialevents(this);
             Policejurisdictions = new Policejurisdictions(this);
+            Lginid = new Lginid(this);
+            Policejurisdictionaccount = new Policejurisdictionaccount(this);
             Policydocuments = new Policydocuments(this);
             Postalcodes = new Postalcodes(this);
             Previousaddresses = new Previousaddresses(this);
             Proratedlicencefeeschedules = new Proratedlicencefeeschedules(this);
             Regions = new Regions(this);
             Managerofinvestigationsid = new Managerofinvestigationsid(this);
+            Regionadditionalinspectors = new Regionadditionalinspectors(this);
             Regioninvestigationrequests = new Regioninvestigationrequests(this);
+            Regionspecialevents = new Regionspecialevents(this);
             Relatedlicences = new Relatedlicences(this);
             Childlicence = new Childlicence(this);
             Parentlicence = new Parentlicence(this);
@@ -2202,12 +2497,24 @@ namespace Gov.Lclb.Cllb.Interfaces
             Spddatarows = new Spddatarows(this);
             Spdexportses = new Spdexportses(this);
             Specialeventlicencedareas = new Specialeventlicencedareas(this);
+            Specialeventareaeventschedules = new Specialeventareaeventschedules(this);
             Specialeventlocations = new Specialeventlocations(this);
             Specialeventnotes = new Specialeventnotes(this);
             Specialevents = new Specialevents(this);
+            Inspector = new Inspector(this);
+            Localgovernmentid = new Localgovernmentid(this);
             Specialeventinspection = new Specialeventinspection(this);
             Specialeventschedules = new Specialeventschedules(this);
             Specialeventtandcs = new Specialeventtandcs(this);
+            Statuscounters = new Statuscounters(this);
+            Application = new Application(this);
+            Statuscounterasyncoperations = new Statuscounterasyncoperations(this);
+            Statuscounterbulkdeletefailures = new Statuscounterbulkdeletefailures(this);
+            Statuscountermailboxtrackingfolders = new Statuscountermailboxtrackingfolders(this);
+            Statuscounterprincipalobjectattributeaccesses = new Statuscounterprincipalobjectattributeaccesses(this);
+            Statuscounterprocesssession = new Statuscounterprocesssession(this);
+            Statuscountersharepointdocumentlocations = new Statuscountersharepointdocumentlocations(this);
+            Statuscountersyncerrors = new Statuscountersyncerrors(this);
             Taxandaccountings = new Taxandaccountings(this);
             Termsconditionslimitationspresets = new Termsconditionslimitationspresets(this);
             Territories = new Territories(this);
@@ -2217,6 +2524,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Witnesses = new Witnesses(this);
             Workerinvoicehistories = new Workerinvoicehistories(this);
             Workers = new Workers(this);
+            Regardingobjectidadoxioadditionalinspector = new Regardingobjectidadoxioadditionalinspector(this);
             Regardingobjectidadoxioadminactivity = new Regardingobjectidadoxioadminactivity(this);
             Regardingobjectidadoxioeventlocation = new Regardingobjectidadoxioeventlocation(this);
             Regardingobjectidadoxioinvestigationcontact = new Regardingobjectidadoxioinvestigationcontact(this);
@@ -2225,6 +2533,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             Regardingobjectidadoxiologin = new Regardingobjectidadoxiologin(this);
             Regardingobjectidadoxioonestopmessageitem = new Regardingobjectidadoxioonestopmessageitem(this);
             Regardingobjectidadoxiorelatedlicence = new Regardingobjectidadoxiorelatedlicence(this);
+            Regardingobjectidadoxiostatuscounter = new Regardingobjectidadoxiostatuscounter(this);
+            Businessunitadoxioadditionalinspector = new Businessunitadoxioadditionalinspector(this);
             Businessunitadoxioadminactivity = new Businessunitadoxioadminactivity(this);
             Businessunitadoxioeventlocation = new Businessunitadoxioeventlocation(this);
             Businessunitadoxioinvestigationcontact = new Businessunitadoxioinvestigationcontact(this);
@@ -2233,9 +2543,11 @@ namespace Gov.Lclb.Cllb.Interfaces
             Businessunitadoxiologin = new Businessunitadoxiologin(this);
             Businessunitadoxioonestopmessageitem = new Businessunitadoxioonestopmessageitem(this);
             Businessunitadoxiorelatedlicence = new Businessunitadoxiorelatedlicence(this);
+            Businessunitadoxiostatuscounter = new Businessunitadoxiostatuscounter(this);
             Contacts = new Contacts(this);
             Contactadoxiologincontact = new Contactadoxiologincontact(this);
             Contactinvestigationsubjects = new Contactinvestigationsubjects(this);
+            Contactspecialevents = new Contactspecialevents(this);
             Baserecordidadoxioadminactivity = new Baserecordidadoxioadminactivity(this);
             Baserecordidadoxioinvestigationcontact = new Baserecordidadoxioinvestigationcontact(this);
             Baserecordidadoxioinvestigationrequest = new Baserecordidadoxioinvestigationrequest(this);
@@ -2252,12 +2564,15 @@ namespace Gov.Lclb.Cllb.Interfaces
             Duplicaterecordidadoxiorelatedlicence = new Duplicaterecordidadoxiorelatedlicence(this);
             Entitydefinitions = new Entitydefinitions(this);
             Globaloptionsetdefinitions = new Globaloptionsetdefinitions(this);
+            Inspectionadditionalinspectors = new Inspectionadditionalinspectors(this);
+            Inspectionrelatedparties = new Inspectionrelatedparties(this);
             Specialeventid = new Specialeventid(this);
             Invoices = new Invoices(this);
             Contraventionid = new Contraventionid(this);
             Invoiceadoxiocontraventioninvoice = new Invoiceadoxiocontraventioninvoice(this);
             Leads = new Leads(this);
             Lists = new Lists(this);
+            Objectidadoxioadditionalinspector = new Objectidadoxioadditionalinspector(this);
             Objectidadoxioadminactivity = new Objectidadoxioadminactivity(this);
             Objectidadoxioeventlocation = new Objectidadoxioeventlocation(this);
             Objectidadoxioinvestigationcontact = new Objectidadoxioinvestigationcontact(this);
@@ -2266,13 +2581,20 @@ namespace Gov.Lclb.Cllb.Interfaces
             Objectidadoxiologin = new Objectidadoxiologin(this);
             Objectidadoxioonestopmessageitem = new Objectidadoxioonestopmessageitem(this);
             Objectidadoxiorelatedlicence = new Objectidadoxiorelatedlicence(this);
+            Objectidadoxiostatuscounter = new Objectidadoxiostatuscounter(this);
             Productadoxioapplicationtyperenewalfeeproduct = new Productadoxioapplicationtyperenewalfeeproduct(this);
             Savedqueries = new Savedqueries(this);
             Sharepointdocumentlocations = new Sharepointdocumentlocations(this);
             Sharepointsites = new Sharepointsites(this);
             Systemforms = new Systemforms(this);
             Systemusers = new Systemusers(this);
+            Inspectoradditionalinspectors = new Inspectoradditionalinspectors(this);
             Investigationsmanagerregions = new Investigationsmanagerregions(this);
+            Systemuseradoxiospecialeventinspector = new Systemuseradoxiospecialeventinspector(this);
+            Lkadoxioadditionalinspectorcreatedby = new Lkadoxioadditionalinspectorcreatedby(this);
+            Lkadoxioadditionalinspectorcreatedonbehalfby = new Lkadoxioadditionalinspectorcreatedonbehalfby(this);
+            Lkadoxioadditionalinspectormodifiedby = new Lkadoxioadditionalinspectormodifiedby(this);
+            Lkadoxioadditionalinspectormodifiedonbehalfby = new Lkadoxioadditionalinspectormodifiedonbehalfby(this);
             Lkadoxioadminactivitycreatedby = new Lkadoxioadminactivitycreatedby(this);
             Lkadoxioadminactivitycreatedonbehalfby = new Lkadoxioadminactivitycreatedonbehalfby(this);
             Lkadoxioadminactivitymodifiedby = new Lkadoxioadminactivitymodifiedby(this);
@@ -2305,6 +2627,11 @@ namespace Gov.Lclb.Cllb.Interfaces
             Lkadoxiorelatedlicencecreatedonbehalfby = new Lkadoxiorelatedlicencecreatedonbehalfby(this);
             Lkadoxiorelatedlicencemodifiedby = new Lkadoxiorelatedlicencemodifiedby(this);
             Lkadoxiorelatedlicencemodifiedonbehalfby = new Lkadoxiorelatedlicencemodifiedonbehalfby(this);
+            Lkadoxiostatuscountercreatedby = new Lkadoxiostatuscountercreatedby(this);
+            Lkadoxiostatuscountercreatedonbehalfby = new Lkadoxiostatuscountercreatedonbehalfby(this);
+            Lkadoxiostatuscountermodifiedby = new Lkadoxiostatuscountermodifiedby(this);
+            Lkadoxiostatuscountermodifiedonbehalfby = new Lkadoxiostatuscountermodifiedonbehalfby(this);
+            Useradoxioadditionalinspector = new Useradoxioadditionalinspector(this);
             Useradoxioadminactivity = new Useradoxioadminactivity(this);
             Useradoxioeventlocation = new Useradoxioeventlocation(this);
             Useradoxioinvestigationcontact = new Useradoxioinvestigationcontact(this);
@@ -2313,6 +2640,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             Useradoxiologin = new Useradoxiologin(this);
             Useradoxioonestopmessageitem = new Useradoxioonestopmessageitem(this);
             Useradoxiorelatedlicence = new Useradoxiorelatedlicence(this);
+            Useradoxiostatuscounter = new Useradoxiostatuscounter(this);
+            Teamadoxioadditionalinspector = new Teamadoxioadditionalinspector(this);
             Teamadoxioadminactivity = new Teamadoxioadminactivity(this);
             Teamadoxioeventlocation = new Teamadoxioeventlocation(this);
             Teamadoxioinvestigationcontact = new Teamadoxioinvestigationcontact(this);
@@ -2321,6 +2650,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Teamadoxiologin = new Teamadoxiologin(this);
             Teamadoxioonestopmessageitem = new Teamadoxioonestopmessageitem(this);
             Teamadoxiorelatedlicence = new Teamadoxiorelatedlicence(this);
+            Teamadoxiostatuscounter = new Teamadoxiostatuscounter(this);
             Workflows = new Workflows(this);
             BaseUri = new System.Uri("http://localhost");
             SerializationSettings = new JsonSerializerSettings

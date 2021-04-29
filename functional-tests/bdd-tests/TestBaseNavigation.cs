@@ -143,8 +143,7 @@ namespace bdd_tests
                     uiSEPMyApplications.Click();
                     break;
                 case "Plan Your Drinks":
-                    //TODO
-                    var uiSEPPlanYourDrinks = ngDriver.FindElement(By.CssSelector(""));
+                    var uiSEPPlanYourDrinks = ngDriver.FindElement(By.XPath("//section[2]/app-resources/mat-card/section[4]/div[2]/button"));
                     var executor4 = (IJavaScriptExecutor)ngDriver.WrappedDriver;
                     executor4.ExecuteScript("arguments[0].scrollIntoView(true);", uiSEPPlanYourDrinks);
                     uiSEPPlanYourDrinks.Click();

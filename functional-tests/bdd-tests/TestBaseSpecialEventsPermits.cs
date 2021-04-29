@@ -26,6 +26,7 @@ namespace bdd_tests
             uiTermsAndConditions.Click();
         }
 
+
         [And(@"the SEP Checklist content is displayed")]
         public void SpecialEventsPermtsChecklist()
         {
@@ -45,6 +46,7 @@ namespace bdd_tests
                 { }
         }
 
+
         [And(@"Account Profile is displayed")]
         public void AccountProfileDisplayed()
         {
@@ -62,6 +64,7 @@ namespace bdd_tests
                 { }
         }
 
+
         [And(@"the Current Applications label is displayed")]
         public void CurrentApplicationsDisplayed()
         {
@@ -70,6 +73,78 @@ namespace bdd_tests
             */
 
             Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Current Applications')]")).Displayed);
+        }
+
+
+        [And(@"the Plan Your Drinks label is displayed")]
+        public void DrinkPlannerDisplayed()
+        {
+            /* 
+            Page Title: Drink Planner
+            */
+
+            Assert.True(ngDriver.FindElement(By.XPath("//body[contains(.,'Drink Planner')]")).Displayed);
+        }
+
+
+        [And(@"I complete the Drink Planner form")]
+        public void CompleteDrinkPlanner()
+        {
+            /* 
+            Page Title: Drink Planner
+            */
+
+            string hours = "5";
+            string guests = "500";
+            string beer = "30";
+            string wine = "20";
+            string spirits = "10";
+
+            // enter the event hours
+            var uiEventHours = ngDriver.FindElement(By.CssSelector("input[formcontrolname='hours']"));
+            uiEventHours.Clear();
+            uiEventHours.SendKeys(hours);
+
+            // enter the event guests
+            var uiEventGuests = ngDriver.FindElement(By.CssSelector("input[formcontrolname='guests']"));
+            uiEventGuests.Clear();
+            uiEventGuests.SendKeys(guests);
+ 
+            // enter the beer percentage
+            var uiBeer = ngDriver.FindElement(By.XPath("//app-drink-planner/div/form/div[3]/div[1]/app-field/section/div/section/input"));
+            uiBeer.Clear();
+            uiBeer.SendKeys(beer);
+
+            // enter the wine percentage
+            var uiWine = ngDriver.FindElement(By.XPath("//app-drink-planner/div/form/div[3]/div[2]/app-field/section/div/section/input"));
+            uiWine.Clear();
+            uiWine.SendKeys(wine);
+    
+            // enter the spirits percentage
+            var uiSpirits = ngDriver.FindElement(By.XPath("//app-drink-planner/div/form/div[3]/div[3]/app-field/section/div/section/input"));
+            uiSpirits.Clear();
+            uiSpirits.SendKeys(spirits);
+        }
+
+
+        [And(@"the Drink Planner calculations are correct")]
+        public void DrinkPlannerCalculations()
+        {
+            /* 
+            Page Title: Drink Planner
+            */
+
+                for (var i = 0; i< 10; i++)
+                try
+                {
+                    Thread.Sleep(3000);
+
+                    // check the total number of drinks
+                    Assert.True(ngDriver.FindElement(By.XPath("//app-drink-planner/div/form/div[4]/div/div/div[2]/h3/span[contains(.,'3,333')]")).Displayed);
+                    break;
+                }
+                catch (Exception e)
+                { }
         }
     }
 }
