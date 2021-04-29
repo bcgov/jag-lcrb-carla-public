@@ -10,9 +10,11 @@
     <mat-divider></mat-divider>
 
     <div class="d-flex">
-        <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1000" step="1000" min="0" max="100000"
+        <mat-slider class="flex-fill" thumbLabel [displayWith]="formatLabel" tickInterval="1" step="1" min="1" max="114"
             aria-label="units"></mat-slider>
-        <input type="text" class="form-control">
+        <div class="flex-fill">
+            <input type="text" class="form-control bev-slider">
+        </div>
     </div>
 
     <p>
@@ -21,13 +23,13 @@
         responsible for the safety of your guests and are required to prevent over-service and intoxication.
     </p>
 
-    <mat-expansion-panel>
+    <mat-expansion-panel [expanded]="true">
         <mat-expansion-panel-header>
             <mat-panel-title>
                 HOSTING A LIQUOR TASTING? USE THIS CONVERSION TOOL
             </mat-panel-title>
         </mat-expansion-panel-header>
-        <section>
+        <section class="tool-container">
             <h3>HOW TO USE THIS TOOL?</h3>
 
             <div class="d-flex">

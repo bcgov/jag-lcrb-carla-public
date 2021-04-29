@@ -1,0 +1,33 @@
+mat-card {
+    margin-bottom: 16px;
+    mat-card-header {
+        background-color: #38598A;
+        margin: -16px;
+        margin-bottom: 0;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        padding-top: 8px;
+        color: #fff;
+    }
+
+    mat-card-content{
+        padding-top: 8px;
+    }
+
+    .lead-label{
+        flex: 0 0 200px;
+    }
+
+    .first-box,
+    .sec-box{
+        flex: 0 0 200px;
+        margin: 0 8px;
+    }
+
+    .item-row{
+        margin-bottom: 16px;
+        align-items: center;
+    }
+
+
+}
