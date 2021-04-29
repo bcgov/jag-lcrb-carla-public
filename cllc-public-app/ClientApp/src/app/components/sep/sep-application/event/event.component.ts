@@ -216,7 +216,6 @@ export class EventComponent extends FormBase implements OnInit {
     this.showValidationMessages = false;
     if (this.isValid()) {
       this.save();
-      debugger;
       this.saveComplete.emit(true);
     } else {
       this.showValidationMessages = true;
