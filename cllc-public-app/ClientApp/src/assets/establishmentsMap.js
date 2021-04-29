@@ -1,3 +1,10 @@
+/**
+ * Leaflet Map Implementation
+ *
+ *  Troubleshooting - if the background of the map is blank, adjust the wmsLayers array to refer to different layers
+ *  available from the BC Government openmaps service.  Over time the names and availability of layers may change.
+ *
+ */
 
 var searchMap = null;
 
