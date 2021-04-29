@@ -1,5 +1,8 @@
 flask
+flask-cors
 requests
 pyyaml
 gunicorn
 gevent
+pytest
+python-jose[cryptography]
