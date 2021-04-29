@@ -11,21 +11,7 @@ import { distinct, distinctUntilChanged } from 'rxjs/operators';
 @Component({
   selector: 'app-eligibility',
   templateUrl: './eligibility.component.html',
-  styleUrls: ['./eligibility.component.scss'],
-  // animations: [
-  //   trigger(
-  //     'inOutAnimation',
-  //     [
-  //       transition(':enter', [
-  //         style({ opacity: 0 }),
-  //         animate('3000ms', style({ opacity: 1 })),
-  //       ]),
-  //       transition(':leave', [
-  //         animate('1000ms', style({ opacity: 0 }))
-  //       ])
-  //     ]
-  //   )
-  // ]
+  styleUrls: ['./eligibility.component.scss']
 })
 export class EligibilityComponent extends FormBase implements OnInit {
   @Input() account: Account;
@@ -99,7 +85,7 @@ export class EligibilityComponent extends FormBase implements OnInit {
 
     this.form.get('eligibilityMajorSignificance').valueChanges
       .pipe(distinctUntilChanged())
-      .subscribe((hasMajorSignificance: Boolean) => {
+      .subscribe((hasMajorSignificance: boolean) => {
         if (hasMajorSignificance) {
           this.form.get('eligibilityMajorSignificanceRationale').setValidators([Validators.required]);
         } else {
