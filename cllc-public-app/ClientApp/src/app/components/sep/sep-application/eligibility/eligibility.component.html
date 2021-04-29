@@ -93,9 +93,14 @@
                 </app-field>
             </app-field>
             <div>
-                <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip1.toggle()"
-                    matTooltip="In order for your event to be deemed municipally significant the event must take place primarily in the Municipality and you must 
-                obtain a municipal resolution or a letter from a delegated municipal official designating the event to be of municipal significance." #tooltip1="matTooltip">
+                <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip1.toggle()" matTooltipClass="custom-tooltip" 
+                    matTooltip="LCRB will determine events of a provincial, national, or international significance on a case-by-case basis. Some criteria used include whether:
+                    
+                    &bull; participants or performers at your event are primarily from the province, Canada, or around the world;
+                    
+                    &bull; your event attracts spectators from around the province, Canada, or around the world;
+                    
+                    &bull; there is provincial, national, or world-wide media coverage of your event." #tooltip1="matTooltip">
                 </fa-icon>
             </div>
         </div>
@@ -113,8 +118,7 @@
                 <app-error-alert *ngIf="form.get('eventStartDate').value">
                     Your event starts soon. Please be aware that if your application requires review, you may or may not
                     receive an SEP before the event start date. Continue and submit your application or change your
-                    event to
-                    a later date.
+                    event to a later date.
                 </app-error-alert>
             </app-field>
             <div>
@@ -142,10 +146,18 @@
                 </select>
             </app-field>
             <div>
-                <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip3.toggle()"
-                    matTooltip="Private Events Entry is limited to family, friends, an organization’s members or staff, invited guests and ticket holders (tickets must be sold or given away before the start time of the event - Tickets for hobbyist events cannot be sold)
+                <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip3.toggle()"  matTooltipClass="custom-tooltip"
+                    matTooltip="Private Events:
+                    
+                    Entry is limited to family, friends, an organization’s members or staff, invited guests and ticket holders (tickets must be sold or given away before the start time of the event - Tickets for hobbyist events cannot be sold)
+                    
                     Examples: social, cultural, recreational, religious, sporting or community events as well as family events such as weddings, anniversaries, or birthdays. Hobby brewer/vintner competitions are also private events.
-                    Public Events Entry is open to anyone who wishes to participate or buy a ticket (either at the door or in advance of the event)
+                    
+
+                    Public Events: 
+
+                    Entry is open to anyone who wishes to participate or buy a ticket (either at the door or in advance of the event)
+                    
                     Examples: events that are community or public celebrations, such as community festivals or outdoor concerts." #tooltip3="matTooltip">
                 </fa-icon>
             </div>

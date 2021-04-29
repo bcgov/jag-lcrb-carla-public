@@ -2,11 +2,14 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faMapMarkerAlt, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
-import { SepApplication, SepLocation, SepSchedule, SepServiceArea } from '@models/sep-application.model';
+import { SepApplication} from '@models/sep-application.model';
 import { IndexDBService } from '@services/index-db.service';
 import { FormBase } from '@shared/form-base';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { Account } from '@models/account.model';
+import { SepLocation } from '@models/sep-location.model';
+import { SepSchedule } from '@models/sep-schedule.model';
+import { SepServiceArea } from '@models/sep-service-are.model';
 
 @Component({
   selector: 'app-event',
@@ -142,8 +145,8 @@ export class EventComponent extends FormBase implements OnInit {
       eventDate: [''],
       eventStart: [''],
       eventEnd: [''],
-      ServiceStart: [''],
-      ServiceEnd: [''],
+      serviceStart: [''],
+      serviceEnd: [''],
     });
     datesForm.patchValue(eventDate);
     return datesForm;

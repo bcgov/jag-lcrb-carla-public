@@ -11,21 +11,7 @@ import { distinct, distinctUntilChanged } from 'rxjs/operators';
 @Component({
   selector: 'app-eligibility',
   templateUrl: './eligibility.component.html',
-  styleUrls: ['./eligibility.component.scss'],
-  // animations: [
-  //   trigger(
-  //     'inOutAnimation',
-  //     [
-  //       transition(':enter', [
-  //         style({ opacity: 0 }),
-  //         animate('3000ms', style({ opacity: 1 })),
-  //       ]),
-  //       transition(':leave', [
-  //         animate('1000ms', style({ opacity: 0 }))
-  //       ])
-  //     ]
-  //   )
-  // ]
+  styleUrls: ['./eligibility.component.scss']
 })
 export class EligibilityComponent extends FormBase implements OnInit {
   @Input() account: Account;
@@ -40,6 +26,7 @@ export class EligibilityComponent extends FormBase implements OnInit {
   get minDate() {
     return new Date();
   }
+
   @Input()
   set applicationId(value: number) {
     this._appID = value;
@@ -53,7 +40,6 @@ export class EligibilityComponent extends FormBase implements OnInit {
       });
   };
 
-
   constructor(private fb: FormBuilder,
     private router: Router,
     private db: IndexDBService) {
@@ -65,7 +51,7 @@ export class EligibilityComponent extends FormBase implements OnInit {
       eligibilityAtPrivateResidence: ['', [Validators.required]],
       eligibilityOnPublicProperty: ['', [Validators.required]],
       eligibilityMajorSignificance: [false, [Validators.required]],
-      eligibilityMajorSignificanceRationale: ['', [Validators.required]],
+      eligibilityMajorSignificanceRationale: [''],
       eligibilityLocalSignificance: [false, [Validators.required]],
       eventStartDate: ['', [Validators.required]],
       eligibilityPrivateOrPublic: ['', [Validators.required]],
@@ -79,9 +65,8 @@ export class EligibilityComponent extends FormBase implements OnInit {
       hostingOrganizationCategory: [''],
     });
 
-
     this.form.get('eligibilityPrivateOrPublic').valueChanges
-    .pipe(distinctUntilChanged())
+      .pipe(distinctUntilChanged())
       .subscribe(selectedValue => {
         // if not Private – Family and invited friends only
         if (selectedValue && selectedValue !== '1') {
@@ -98,9 +83,21 @@ export class EligibilityComponent extends FormBase implements OnInit {
         }
       });
 
+    this.form.get('eligibilityMajorSignificance').valueChanges
+      .pipe(distinctUntilChanged())
+      .subscribe((hasMajorSignificance: boolean) => {
+        if (hasMajorSignificance) {
+          this.form.get('eligibilityMajorSignificanceRationale').setValidators([Validators.required]);
+        } else {
+          this.form.get('eligibilityMajorSignificanceRationale').clearValidators();
+          this.form.get('eligibilityMajorSignificanceRationale').reset();
+        }
+      });
+
+
     this.form.get('eligibilityResponsibleBevServiceNumber').valueChanges
-    .pipe(distinctUntilChanged())
-    .subscribe(value => {
+      .pipe(distinctUntilChanged())
+      .subscribe(value => {
         if (value) {
           // if the value is entered disable the checkbox and clear its validation
           this.form.get('eligibilityResponsibleBevServiceNumberDoesNotHave').clearValidators();
@@ -114,8 +111,8 @@ export class EligibilityComponent extends FormBase implements OnInit {
       });
 
     this.form.get('eligibilityResponsibleBevServiceNumberDoesNotHave').valueChanges
-    .pipe(distinctUntilChanged())
-    .subscribe(value => {
+      .pipe(distinctUntilChanged())
+      .subscribe(value => {
         if (value === false) {
           this.form.get('eligibilityResponsibleBevServiceNumber').setValidators([Validators.required, Validators.minLength(6), Validators.maxLength(6)]);
           this.form.get('eligibilityResponsibleBevServiceNumber').enable();
