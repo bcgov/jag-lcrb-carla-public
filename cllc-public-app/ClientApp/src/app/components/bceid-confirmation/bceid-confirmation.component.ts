@@ -45,7 +45,7 @@ export class BceidConfirmationComponent extends FormBase {
     { value: "Society", name: "Society" },
     { value: "SoleProprietorship", name: "Sole Proprietorship" },
     { value: "University", name: "University" },
-    // { value: "Church", name:"Church"},	
+    // { value: "Church", name:"Church"},
     // that does not fill a role similar to a Local Government in the licensing process
   ];;
 
@@ -74,6 +74,14 @@ export class BceidConfirmationComponent extends FormBase {
         // add the Local Government option if the feature is enabled
         if (this.lgApprovals) {
           this.businessTypes.push({ value: "LocalGovernment", name: "Local Government" });
+          this.businessTypes = this.businessTypes.sort((a, b) => a.name.localeCompare(b.name));
+        }
+      });
+
+    featureFlagService.featureOn("Sep")
+      .subscribe(isSepEnabled => {
+        if (isSepEnabled) {
+          this.businessTypes.push({ value: "Police", name: "Police" });
           this.businessTypes = this.businessTypes.sort((a, b) => a.name.localeCompare(b.name));
         }
       });

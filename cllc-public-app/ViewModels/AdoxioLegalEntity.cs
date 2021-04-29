@@ -30,13 +30,15 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         [Display(Name = "Co-op")]
         Coop = 845280011,
         Trust = 845280012,
-        Estate = 845280013, 
+        Estate = 845280013,
         [Display(Name = "Local Government")]
         LocalGovernment = 845280014,
         University = 845280016,
         Partnership = 845280005,
         Marketer = 845280015,
-        MilitaryMess = 845280017
+        MilitaryMess = 845280017,
+        [Display(Name = "Police")]
+        Police = 845280019
     }
     public enum AdoxioAccountTypeCodes
     {
@@ -89,7 +91,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string accountId { get; set; } //_adoxio_account_value
         public string contactId { get; set; } //_adoxioContactValue 
         public GeneralYesNo? isContactComplete { get; set; } //_adoxioContactValue.AdoxioPhscomplete
-        public string CasLink{ get; set; }
+        public string CasLink { get; set; }
         public string PhsLink { get; set; }
         public string shareholderAccountId { get; set; } //_adoxio_shareholderaccountid_value
 
