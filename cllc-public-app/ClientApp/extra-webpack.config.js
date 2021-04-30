@@ -45,8 +45,8 @@ module.exports = {
 		  options: {
 		  presets: ['@babel/preset-env'],
           plugins: ['@babel/plugin-transform-runtime'],
-		  cacheDirectory: false,
-		  cacheCompression: false
+		  cacheDirectory: true,
+		  cacheCompression: true
 		  
 		  }
           
