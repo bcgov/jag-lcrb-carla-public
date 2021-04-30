@@ -1,31 +1,36 @@
-<mat-card>
+<mat-card class="mat-elevation-z0">
     <mat-card-header>
-        <mat-card-title>Beer, Ciders and Coolers</mat-card-title>
+        <mat-card-title>{{LiquorTypes[toolType]?.title}}</mat-card-title>
     </mat-card-header>
-    <mat-card-content>
+    <mat-card-content [formGroup]="form">
         <div class="d-flex item-row">
-            <span class="lead-label">Size of tasting (1-4Oz.)</span>
-            <input type="text" class="form-control first-box">
-            <span class="flex-fill"></span>
+            <ng-container *ngIf="toolType !== 'spirits'">
+                <span class="lead-label">Size of tasting (1-{{LiquorTypes[toolType]?.maxTastingSize}}Oz.)</span>
+                <input type="number" formControlName="sizeOfTasting" class="form-control first-box">
+                <span class="flex-fill"></span>
+            </ng-container>
+            <ng-container *ngIf="toolType === 'spirits'">
+                <span>Spirit Tastings Limited to 1/2 Oz. each.</span>
+            </ng-container>
         </div>
         <hr>
         <div class="d-flex item-row">
             <span class="lead-label">Number of tastings</span>
-            <input type="text" class="form-control first-box">
+            <input type="number" formControlName="numberOfTastings" class="form-control first-box">
             <span class="eq-text">is equal to</span>
-            <input type="text" class="form-control sec-box">
+            <input type="number" disabled [value]="numberOfStandardDrinks || ''" class="form-control sec-box">
             <span class="flex-fill">Number of standard drinks</span>
         </div>
         <div class="d-flex item-row">
             <span class="lead-label">Price per tasting drink</span>
-            <input type="text" class="form-control first-box">
+            <input type="text" formControlName="pricePerTastingDrink" class="form-control first-box">
             <span class="eq-text">is equal to</span>
-            <input type="text" class="form-control sec-box">
-            <span class="flex-fill">Price per 12 Oz. standard drink</span>
+            <input type="text" disabled [value]="pricePerStandardDrink || ''" class="form-control sec-box">
+            <span class="flex-fill">Price per {{LiquorTypes[toolType]?.standardDrinkSizeOz}} Oz. standard drink</span>
         </div>
         <hr>
-        <div class="d-flex item-row">
-            <button mat-raised-button color="primary">Clear</button>
+        <div class="d-flex flex-row-reverse">
+            <button mat-raised-button color="secondary" (click)="resetValues()">Clear</button>
         </div>
     </mat-card-content>
 </mat-card>

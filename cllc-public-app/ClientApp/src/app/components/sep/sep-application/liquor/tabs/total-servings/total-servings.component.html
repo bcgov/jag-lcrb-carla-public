@@ -1,4 +1,4 @@
-<form>
+<div>
     <p>
         Use the tool below to declare the appropriate number of drink servings for your event. You can adjust the total
         number at any time before you submit your application.
@@ -10,10 +10,10 @@
     <mat-divider></mat-divider>
 
     <div class="d-flex">
-        <mat-slider class="flex-fill" thumbLabel [displayWith]="formatLabel" tickInterval="1" step="1" min="1" max="114"
+        <mat-slider  [(ngModel)]="declaredMaxServings" class="flex-fill" thumbLabel [displayWith]="formatLabel" tickInterval="10" step="1" [min]="minServings" [max]="maxServings"
             aria-label="units"></mat-slider>
         <div class="flex-fill">
-            <input type="text" class="form-control bev-slider">
+            <input type="number" [max]="maxServings" [min]="minServings" [(ngModel)]="declaredMaxServings" class="form-control bev-slider">
         </div>
     </div>
 
@@ -75,12 +75,12 @@
                 </section>
             </div>
 
-            <app-conversion-tool title="Beer, Ciders and Coolers"></app-conversion-tool>
+            <app-conversion-tool toolType="beer"></app-conversion-tool>
 
-            <app-conversion-tool title="Wine"></app-conversion-tool>
+            <app-conversion-tool toolType="wine"></app-conversion-tool>
 
-            <app-conversion-tool title="Spirits"></app-conversion-tool>
+            <app-conversion-tool toolType="spirits"></app-conversion-tool>
         </section>
     </mat-expansion-panel>
 
-</form>
+</div>
