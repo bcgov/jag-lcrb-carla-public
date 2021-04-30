@@ -942,6 +942,8 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
 
                 case ConnectionType.KeyPersonnel:
                 case ConnectionType.Representative:
+                case ConnectionType.SeniorManager:
+                case ConnectionType.Associate:
                     positions.Add("key personnel");
                     break;
 

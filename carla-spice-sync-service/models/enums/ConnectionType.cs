@@ -10,6 +10,8 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         KeyPersonnel = 845280005,
         Trustee = 845280006,
         Beneficiary = 845280007,
-        Representative = 845280008
+        Representative = 845280008,
+        Associate = 845280009,
+        SeniorManager = 100000000
     }
 }
