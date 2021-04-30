@@ -2695,7 +2695,7 @@
       <app-file-uploader *ngIf="applicationId" documentType="Licence Application Supporting"
                          [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
                          fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [entityId]="applicationId"
-                         [maxNumberOfFiles]="200" (numberOfUploadedFiles)="uploadedCentralSecuritiesRegisterDocuments = $event"
+                         [maxNumberOfFiles]="200" (numberOfUploadedFiles)="uploadedSupportingDocuments = $event"
                          [extensions]="['pdf', 'jpg', 'jpeg', 'png']" [enableFileDeletion]="false" #supportingDocuments>
       </app-file-uploader>
     </section>

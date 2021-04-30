@@ -40,12 +40,13 @@ export class BceidConfirmationComponent extends FormBase {
     { value: "IndigenousNation", name: "Indigenous nation " },
     { value: "MilitaryMess", name: "Military Mess" },
     { value: "Partnership", name: "Partnership" },
+    { value: "Police", name: "Police" },
     { value: "PrivateCorporation", name: "Private Corporation" },
     { value: "PublicCorporation", name: "Public Corporation" },
     { value: "Society", name: "Society" },
     { value: "SoleProprietorship", name: "Sole Proprietorship" },
     { value: "University", name: "University" },
-    // { value: "Church", name:"Church"},	
+    // { value: "Church", name:"Church"},
     // that does not fill a role similar to a Local Government in the licensing process
   ];;
 
