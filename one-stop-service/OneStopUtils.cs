@@ -493,74 +493,92 @@ namespace Gov.Jag.Lcrb.OneStopService
                     var item = dynamicsClient.GetLicenceByIdWithChildren(queueItem._adoxioLicenceValue);
                     
                     string licenceId = item.AdoxioLicencesid;
-
-                    switch ((OneStopHubStatusChange)queueItem.AdoxioStatuschangedescription)
+                    try
                     {
-                        case OneStopHubStatusChange.Issued:
-                        case OneStopHubStatusChange.TransferComplete:
-                            if ((OneStopHubStatusChange)queueItem.AdoxioStatuschangedescription ==
-                                OneStopHubStatusChange.TransferComplete)
-                            {
-                                // send a change status to the old licensee
+
+
+                        switch ((OneStopHubStatusChange) queueItem.AdoxioStatuschangedescription)
+                        {
+                            case OneStopHubStatusChange.Issued:
+                            case OneStopHubStatusChange.TransferComplete:
+                                if ((OneStopHubStatusChange) queueItem.AdoxioStatuschangedescription ==
+                                    OneStopHubStatusChange.TransferComplete)
+                                {
+                                    // send a change status to the old licensee
+                                    await SendChangeStatusRest(hangfireContext, licenceId,
+                                        (OneStopHubStatusChange) queueItem.AdoxioStatuschangedescription,
+                                        queueItem.AdoxioOnestopmessageitemid);
+                                }
+
+                                // Do not attempt to send licence records that have no establishment (for example, Marketer Licence records)
+                                if (item.AdoxioEstablishment != null)
+                                {
+
+                                    string programAccountCode = "001";
+                                    if (item.AdoxioBusinessprogramaccountreferencenumber != null)
+                                    {
+                                        programAccountCode = item.AdoxioBusinessprogramaccountreferencenumber;
+                                    }
+
+                                    // set the maximum code.
+                                    string cacheKey = "_BPAR_" + item.AdoxioLicencesid;
+                                    string suffix = programAccountCode.TrimStart('0');
+                                    if (int.TryParse(suffix, out int newNumber))
+                                    {
+                                        newNumber += 10; // 10 tries.                           
+                                    }
+                                    else
+                                    {
+                                        newNumber = 10;
+                                    }
+
+                                    _cache.Set(cacheKey, newNumber);
+
+                                    if (hangfireContext != null)
+                                    {
+                                        hangfireContext.WriteLine($"SET key {cacheKey} to {newNumber}");
+                                    }
+
+                                    await SendProgramAccountRequestREST(hangfireContext, licenceId, suffix,
+                                        queueItem.AdoxioOnestopmessageitemid);
+
+                                }
+
+                                break;
+                            case OneStopHubStatusChange.Cancelled:
+                            case OneStopHubStatusChange.EnteredDormancy:
+                            case OneStopHubStatusChange.DormancyEnded:
+                            case OneStopHubStatusChange.Expired:
+                            case OneStopHubStatusChange.CancellationRemoved:
+                            case OneStopHubStatusChange.Renewed:
+                            case OneStopHubStatusChange.Suspended:
+                            case OneStopHubStatusChange.SuspensionEnded:
+
                                 await SendChangeStatusRest(hangfireContext, licenceId,
-                                    (OneStopHubStatusChange)queueItem.AdoxioStatuschangedescription, queueItem.AdoxioOnestopmessageitemid);
-                            }
-                            // Do not attempt to send licence records that have no establishment (for example, Marketer Licence records)
-                            if (item.AdoxioEstablishment != null)
-                            {
+                                    (OneStopHubStatusChange) queueItem.AdoxioStatuschangedescription,
+                                    queueItem.AdoxioOnestopmessageitemid);
+                                break;
 
-                                string programAccountCode = "001";
-                                if (item.AdoxioBusinessprogramaccountreferencenumber != null)
-                                {
-                                    programAccountCode = item.AdoxioBusinessprogramaccountreferencenumber;
-                                }
+                            case OneStopHubStatusChange.ChangeOfAddress:
+                                await SendChangeAddressRest(hangfireContext, licenceId,
+                                    queueItem.AdoxioOnestopmessageitemid);
+                                break;
+                            case OneStopHubStatusChange.ChangeOfName:
+                                await SendChangeNameRest(hangfireContext, licenceId,
+                                    queueItem.AdoxioOnestopmessageitemid, false);
+                                break;
+                            case OneStopHubStatusChange.LicenceDeemedAtTransfer:
+                                await SendChangeNameRest(hangfireContext, licenceId,
+                                    queueItem.AdoxioOnestopmessageitemid, true);
+                                break;
+                        }
 
-                                // set the maximum code.
-                                string cacheKey = "_BPAR_" + item.AdoxioLicencesid;
-                                string suffix = programAccountCode.TrimStart('0');
-                                if (int.TryParse(suffix, out int newNumber))
-                                {
-                                    newNumber += 10; // 10 tries.                           
-                                }
-                                else
-                                {
-                                    newNumber = 10;
-                                }
-                                _cache.Set(cacheKey, newNumber);
-
-                                if (hangfireContext != null)
-                                {
-                                    hangfireContext.WriteLine($"SET key {cacheKey} to {newNumber}");
-                                }
-                                await SendProgramAccountRequestREST(hangfireContext, licenceId, suffix, queueItem.AdoxioOnestopmessageitemid);
-
-                            }
-
-                            break;
-                        case OneStopHubStatusChange.Cancelled:
-                        case OneStopHubStatusChange.EnteredDormancy:
-                        case OneStopHubStatusChange.DormancyEnded:
-                        case OneStopHubStatusChange.Expired:
-                        case OneStopHubStatusChange.CancellationRemoved:
-                        case OneStopHubStatusChange.Renewed:
-                        case OneStopHubStatusChange.Suspended:
-                        case OneStopHubStatusChange.SuspensionEnded:
-
-                            await SendChangeStatusRest(hangfireContext, licenceId,
-                                (OneStopHubStatusChange)queueItem.AdoxioStatuschangedescription, queueItem.AdoxioOnestopmessageitemid);
-                            break;
-
-                        case OneStopHubStatusChange.ChangeOfAddress:
-                            await SendChangeAddressRest(hangfireContext, licenceId, queueItem.AdoxioOnestopmessageitemid);
-                            break;
-                        case OneStopHubStatusChange.ChangeOfName:
-                            await SendChangeNameRest(hangfireContext, licenceId, queueItem.AdoxioOnestopmessageitemid, false);
-                            break;
-                        case OneStopHubStatusChange.LicenceDeemedAtTransfer:
-                            await SendChangeNameRest(hangfireContext, licenceId, queueItem.AdoxioOnestopmessageitemid, true);
-                            break;
+                        currentItem++;
                     }
-                    currentItem++;
+                    catch (Exception e)
+                    {
+                        Log.Logger.Error(e, "Unexpected Error while processing item.");
+                    }
 
                     if (currentItem > maxLicencesPerInterval)
                     {
