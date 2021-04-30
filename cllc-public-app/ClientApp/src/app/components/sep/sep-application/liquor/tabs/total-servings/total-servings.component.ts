@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-total-servings',
@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TotalServingsComponent implements OnInit {
   declaredMaxServings: number = 1;
+  @Output() saved: EventEmitter<{declaredServings: number}> = new EventEmitter<{declaredServings: number}>();
   minServings = 1;
   maxServings = 114;
 
@@ -17,6 +18,11 @@ export class TotalServingsComponent implements OnInit {
 
   formatLabel(value: number) {
     return value;
+  }
+
+  next() {
+    let declaredServings = this.declaredMaxServings;
+    this.saved.next({declaredServings});
   }
 
 }
