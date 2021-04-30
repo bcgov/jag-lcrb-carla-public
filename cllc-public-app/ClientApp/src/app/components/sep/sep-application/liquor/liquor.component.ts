@@ -6,22 +6,22 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./liquor.component.scss']
 })
 export class LiquorComponent implements OnInit {
-  selectedIndex=0;
+  selectedIndex = 0;
   value: any = {};
   @Output()
   saveComplete = new EventEmitter<boolean>();
 
   constructor() { }
 
-  updateValue(value){
-    this.value = {...this.value, ...value};
+  updateValue(value) {
+    this.value = { ...this.value, ...value };
   }
 
   ngOnInit(): void {
   }
 
-  save(){
-    
+  save() {
+    debugger;
   }
 
 }
