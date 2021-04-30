@@ -153,21 +153,23 @@ namespace Gov.Jag.Lcrb.OneStopService
             }
             else
             {
-                var innerXML = req.CreateXML(licence);
+                var innerXml = req.CreateXML(licence);
+                innerXml = _onestopRestClient.CleanXML(innerXml);
 
                 if (Log.Logger != null)
                 {
-                    Log.Logger.Information(innerXML);
+                    Log.Logger.Information(innerXml);
                 }
 
                 if (hangfireContext != null)
                 {
-                    hangfireContext.WriteLine(innerXML);
+                    hangfireContext.WriteLine(innerXml);
                 }
 
                 //send message to Onestop hub
-                var outputXML = await _onestopRestClient.ReceiveFromPartner(innerXML);
-                UpdateQueueItemForSend(dynamicsClient, hangfireContext, queueItemId, innerXML, outputXML);
+
+                var outputXML = await _onestopRestClient.ReceiveFromPartner(innerXml);
+                UpdateQueueItemForSend(dynamicsClient, hangfireContext, queueItemId, innerXml, outputXML);
 
                 if (hangfireContext != null)
                 {
@@ -222,24 +224,25 @@ namespace Gov.Jag.Lcrb.OneStopService
                         targetBusinessNumber = targetOwner.Accountnumber;
                     }
                 }
-                var innerXML = req.CreateXML(licence, isTransfer, targetBusinessNumber);
+                var innerXml = req.CreateXML(licence, isTransfer, targetBusinessNumber);
 
 
+                innerXml = _onestopRestClient.CleanXML(innerXml);
 
                 if (Log.Logger != null)
                 {
-                    Log.Logger.Information(innerXML);
+                    Log.Logger.Information(innerXml);
                 }
 
                 if (hangfireContext != null)
                 {
-                    hangfireContext.WriteLine(innerXML);
+                    hangfireContext.WriteLine(innerXml);
                 }
 
                 //send message to Onestop hub
-                var outputXML = await _onestopRestClient.ReceiveFromPartner(innerXML);
+                var outputXML = await _onestopRestClient.ReceiveFromPartner(innerXml);
 
-                UpdateQueueItemForSend(dynamicsClient, hangfireContext, queueItemId, innerXML, outputXML);
+                UpdateQueueItemForSend(dynamicsClient, hangfireContext, queueItemId, innerXml, outputXML);
 
                 if (hangfireContext != null)
                 {
@@ -287,22 +290,23 @@ namespace Gov.Jag.Lcrb.OneStopService
             {
 
 
-                var innerXML = req.CreateXML(licence, statusChange);
+                var innerXml = req.CreateXML(licence, statusChange);
+                innerXml = _onestopRestClient.CleanXML(innerXml);
 
                 if (Log.Logger != null)
                 {
-                    Log.Logger.Information(innerXML);
+                    Log.Logger.Information(innerXml);
                 }
 
                 if (hangfireContext != null)
                 {
-                    hangfireContext.WriteLine(innerXML);
+                    hangfireContext.WriteLine(innerXml);
                 }
 
                 //send message to Onestop hub
-                var outputXML = await _onestopRestClient.ReceiveFromPartner(innerXML);
+                var outputXML = await _onestopRestClient.ReceiveFromPartner(innerXml);
 
-                UpdateQueueItemForSend(dynamicsClient, hangfireContext, queueItemId, innerXML, outputXML);
+                UpdateQueueItemForSend(dynamicsClient, hangfireContext, queueItemId, innerXml, outputXML);
 
                 if (hangfireContext != null)
                 {
@@ -352,12 +356,14 @@ namespace Gov.Jag.Lcrb.OneStopService
                 {
 
                     var innerXml = req.CreateXML(licence, suffix);
+
+                    innerXml = _onestopRestClient.CleanXML(innerXml);
+
                     Log.Logger?.Information(innerXml);
                     // send message to Onestop hub
                     var outputXml = await _onestopRestClient.ReceiveFromPartner(innerXml);
 
                     UpdateQueueItemForSend(dynamicsClient, hangfireContext, queueItemId, innerXml, outputXml);
-
 
                     if (hangfireContext != null)
                     {
@@ -417,20 +423,22 @@ namespace Gov.Jag.Lcrb.OneStopService
             }
             else
             {
-                var innerXML = req.CreateXML(licence);
+                var innerXml = req.CreateXML(licence);
+
+                innerXml = _onestopRestClient.CleanXML(innerXml);
 
                 if (Log.Logger != null)
                 {
-                    Log.Logger.Information(innerXML);
+                    Log.Logger.Information(innerXml);
                 }
 
                 if (hangfireContext != null)
                 {
-                    hangfireContext.WriteLine(innerXML);
+                    hangfireContext.WriteLine(innerXml);
                 }
 
                 //send message to Onestop hub
-                var outputXML = await _onestopRestClient.ReceiveFromPartner(innerXML);
+                var outputXML = await _onestopRestClient.ReceiveFromPartner(innerXml);
 
                 if (hangfireContext != null)
                 {
