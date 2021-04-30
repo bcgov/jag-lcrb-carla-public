@@ -629,6 +629,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   private isHoursOfSaleValid(): boolean {
     return !this.application.applicationType.showHoursOfSale ||
+        this.application.applicationType.name === ApplicationTypeNames.FP ||
+        this.application.applicationType.name === ApplicationTypeNames.FPRelo ||
       (this.form.get('serviceHoursSundayOpen').valid
         && this.form.get('serviceHoursMondayOpen').valid
         && this.form.get('serviceHoursTuesdayOpen').valid
@@ -1490,8 +1492,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   showValidInterestforTransfer() {
     return (this.application.applicationType.name === ApplicationTypeNames.LiquorLicenceTransfer &&
-      (this.application.licenseType === "Licensee Retail Store" || this.application.licenseType === "Wine Store")
-      || this.application.applicationType.name === ApplicationTypeNames.MFG);
+      (this.application.licenseType === "Licensee Retail Store" || this.application.licenseType === "Wine Store"));
   }
 
   showDynamicForm(formReference, tabs) {
