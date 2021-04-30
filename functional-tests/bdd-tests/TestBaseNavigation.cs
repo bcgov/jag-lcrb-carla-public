@@ -154,6 +154,18 @@ namespace bdd_tests
                     executor5.ExecuteScript("arguments[0].scrollIntoView(true);", uiMyUserAccount);
                     uiMyUserAccount.Click();
                     break;
+                case "Learn More":
+                    var uiLearnMore = ngDriver.FindElement(By.CssSelector(""));
+                    var executor6 = (IJavaScriptExecutor)ngDriver.WrappedDriver;
+                    executor6.ExecuteScript("arguments[0].scrollIntoView(true);", uiLearnMore);
+                    uiLearnMore.Click();
+                    break;
+                case "Get Certified":
+                    var uiGetCertified = ngDriver.FindElement(By.CssSelector(""));
+                    var executor7 = (IJavaScriptExecutor)ngDriver.WrappedDriver;
+                    executor7.ExecuteScript("arguments[0].scrollIntoView(true);", uiGetCertified);
+                    uiGetCertified.Click();
+                    break;
             }
         }
 
