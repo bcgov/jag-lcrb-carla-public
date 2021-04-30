@@ -23,7 +23,7 @@
         responsible for the safety of your guests and are required to prevent over-service and intoxication.
     </p>
 
-    <mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel>
         <mat-expansion-panel-header>
             <mat-panel-title>
                 HOSTING A LIQUOR TASTING? USE THIS CONVERSION TOOL
@@ -83,4 +83,8 @@
         </section>
     </mat-expansion-panel>
 
+    <section class="pt-3">
+        <button mat-raised-button color="secondary" matStepperPrevious>BACK</button>
+        <button mat-raised-button color="primary" (click)="next()">NEXT</button>
+    </section>
 </div>
