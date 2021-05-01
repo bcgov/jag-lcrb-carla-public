@@ -88,6 +88,7 @@ import { SepApplicationComponent } from "@components/sep/sep-application/sep-app
 import { MyApplicationsComponent } from "@components/sep/my-applications/my-applications.component";
 import { ServiceCardProfileComponent } from "@components/servicecard-profile/servicecard-profile.component";
 import { DrinkPlannerComponent } from "@components/sep/drink-planner/drink-planner.component";
+import { DashboardComponent as PoliceDashboardComponent } from "@components/police-representative/dashboard/dashboard.component";
 
 const routes: Routes = [
   {
@@ -128,6 +129,12 @@ const routes: Routes = [
   {
     path: "sep/drink-planner",
     component: DrinkPlannerComponent,
+    canActivate: [BCeidOrServiceCardAuthGuard, FeatureGuard],
+    data: { feature: "Sep" }
+  },
+  {
+    path: "sep/police/dashboard",
+    component: PoliceDashboardComponent,
     canActivate: [BCeidOrServiceCardAuthGuard, FeatureGuard],
     data: { feature: "Sep" }
   },

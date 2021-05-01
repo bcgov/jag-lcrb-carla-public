@@ -297,6 +297,7 @@ import { NavbarComponent } from "@components/navbar/navbar.component";
 import { PublicNavComponent } from "@components/navbar/public-nav/public-nav.component";
 import { UserNavComponent } from "@components/navbar/user-nav/user-nav.component";
 import { PoliceNavComponent } from "@components/navbar/police-nav/police-nav.component";
+import { DashboardComponent as PoliceDashboardComponent } from "@components/police-representative/dashboard/dashboard.component";
 
 
 @NgModule({
@@ -466,6 +467,7 @@ import { PoliceNavComponent } from "@components/navbar/police-nav/police-nav.com
     PublicNavComponent,
     UserNavComponent,
     PoliceNavComponent,
+    PoliceDashboardComponent,
   ],
   imports: [
     AppRoutingModule,
