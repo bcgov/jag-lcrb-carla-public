@@ -1,0 +1,14 @@
+<app-public-nav *ngIf="isAnonymous" [showMapLink]="showMapLink"></app-public-nav>
+
+<ng-container *ngIf="isAuthenticated">
+  <ng-container *ngIf="isPoliceRepresentative; then thenBlock else elseBlock">
+    <ng-template #thenBlock>
+      <app-police-nav [currentUser]="currentUser" [account]="account"></app-police-nav>
+    </ng-template>
+    <ng-template #elseBlock>
+      <app-user-nav [currentUser]="currentUser" [account]="account" [showNoticesBadge]="showNoticesBadge"
+        [showMessageCenterBadge]="showMessageCenterBadge" (messageCenterClick)="messageCenterClick.emit()">
+      </app-user-nav>
+    </ng-template>
+  </ng-container>
+</ng-container>
