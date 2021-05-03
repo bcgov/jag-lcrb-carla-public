@@ -1,30 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
-using Gov.Lclb.Cllb.Public.Extensions;
 using Gov.Lclb.Cllb.Public.Models;
-using Gov.Lclb.Cllb.Public.Utils;
-using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Rest;
-using Newtonsoft.Json;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
-using Application = Gov.Lclb.Cllb.Public.ViewModels.Application;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/special-events")]
     [ApiController]
     [Authorize(Policy = "Business-User")]
     public class SpecialEventsController : ControllerBase
