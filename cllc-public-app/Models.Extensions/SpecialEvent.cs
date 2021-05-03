@@ -54,7 +54,6 @@ namespace Gov.Lclb.Cllb.Public.Models
 
         public static void CopyValues(this MicrosoftDynamicsCRMadoxioSpecialevent to, ViewModels.SpecialEvent from)
         {
-            to.AdoxioSpecialeventid = from.Id;
             to.AdoxioAdmissionfee = from.AdmissionFee;
             to.AdoxioEventstartdate = from.EventStartDate;
             to.AdoxioEventname = from.EventName;
