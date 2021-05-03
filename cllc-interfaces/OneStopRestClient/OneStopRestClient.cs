@@ -21,14 +21,18 @@ namespace Gov.Lclb.Cllb.Interfaces
             this._logger = logger;
         }
 
-        public async Task<string> ReceiveFromPartner(string inputXml)
+        public string CleanXML(string inputXml)
         {
-            var url = $"{BaseUri}?inputXML={Uri.EscapeDataString(inputXml)}";
-
             // clean any namespaces.
             inputXml = Regex.Replace(inputXml, @" xmlns:.*?"".*?""", "");
             // adjust the header.
             inputXml = inputXml.Replace("encoding=\"utf-16\"?>", "?>");
+            return inputXml;
+        }
+
+        public async Task<string> ReceiveFromPartner(string inputXml)
+        {
+            var url = $"{BaseUri}?inputXML={Uri.EscapeDataString(inputXml)}";
 
             Log.Logger.Information($"InputXML to send = {inputXml}");
 
@@ -53,6 +57,7 @@ namespace Gov.Lclb.Cllb.Interfaces
     {
         Uri BaseUri { get; set; }
         string AuthorizationHeaderValue { get; set; }
+        string CleanXML(string inputXml);
         Task<string> ReceiveFromPartner(string inputXml);
     }
 }
