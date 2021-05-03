@@ -136,7 +136,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             try
             {
-
                 newSpecialEvent = _dynamicsClient.Specialevents.Create(newSpecialEvent);
             }
             catch (HttpOperationException httpOperationException)
