@@ -6,7 +6,7 @@ import { User } from '@models/user.model';
 @Component({
   selector: 'app-user-nav',
   templateUrl: './user-nav.component.html',
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./user-nav.component.scss']
 })
 export class UserNavComponent implements OnInit {
   // icons

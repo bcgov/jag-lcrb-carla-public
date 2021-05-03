@@ -2,12 +2,12 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } fro
 import { Account } from "@models/account.model";
 import { User } from '@models/user.model';
 import { FeatureFlagService } from '@services/feature-flag.service';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
   @Input() currentUser: User;
@@ -19,6 +19,7 @@ export class NavbarComponent implements OnInit {
   showMapLink = false;
   isAssociate = false;
   sepFeatureOn = false;
+  dataLoaded = false;
 
   get isAnonymous() {
     return !this.currentUser;
@@ -33,7 +34,12 @@ export class NavbarComponent implements OnInit {
   constructor(public featureFlagService: FeatureFlagService) { }
 
   ngOnInit() {
-    this.featureFlagService.featureOn("Maps").subscribe(value => this.showMapLink = value);
-    this.featureFlagService.featureOn("Sep").subscribe(value => this.sepFeatureOn = value);
+    const flag1 = this.featureFlagService.featureOn("Maps");
+    const flag2 = this.featureFlagService.featureOn("Sep");
+    combineLatest([flag1, flag2]).subscribe(([maps, sep]) => {
+      this.showMapLink = maps;
+      this.sepFeatureOn = sep;
+      this.dataLoaded = true;
+    });
   }
 }

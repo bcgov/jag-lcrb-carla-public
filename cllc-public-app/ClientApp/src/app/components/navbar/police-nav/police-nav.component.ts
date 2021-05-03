@@ -5,7 +5,7 @@ import { User } from '@models/user.model';
 @Component({
   selector: 'app-police-nav',
   templateUrl: './police-nav.component.html',
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./police-nav.component.scss']
 })
 export class PoliceNavComponent implements OnInit {
   @Input() currentUser: User;
