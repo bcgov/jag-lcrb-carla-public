@@ -190,9 +190,11 @@
         </section>
     </mat-expansion-panel>
 
-    <div class="note">
-        Remember: Liquor product purchased from and returned to BC Liquor Stores is subject to the Product Return policy and a restocking fee.
+    <div class="note mb-3">
+        Remember: Liquor product purchased from and returned to BC Liquor Stores is subject to the Product Return policy
+        and a restocking fee.
     </div>
 
-
+    <button mat-raised-button color="secondary" (click)="back.emit(true)">BACK</button>
+    <button mat-raised-button color="primary" (click)="next()">NEXT</button>
 </form>
