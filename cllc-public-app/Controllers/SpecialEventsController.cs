@@ -100,30 +100,30 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     newLocation.CopyValues(location);
                     newSpecialEvent.AdoxioSpecialeventSpecialeventlocations.Add(newLocation);
 
-                    // Add service areas to new location
-                    if (location.ServiceAreas?.Count > 0)
-                    {
-                        location.ServiceAreas.ForEach(area =>
-                        {
-                            var newArea = new MicrosoftDynamicsCRMadoxioSpecialeventlicencedarea()
-                            {
-                                AdoxioSpecialeventareaEventschedules = new List<MicrosoftDynamicsCRMadoxioSpecialeventschedule>()
-                            };
-                            newArea.CopyValues(area);
-                            newLocation.AdoxioSpecialeventlocationLicencedareas.Add(newArea);
+                    // // Add service areas to new location
+                    // if (location.ServiceAreas?.Count > 0)
+                    // {
+                    //     location.ServiceAreas.ForEach(area =>
+                    //     {
+                    //         var newArea = new MicrosoftDynamicsCRMadoxioSpecialeventlicencedarea()
+                    //         {
+                    //             AdoxioSpecialeventareaEventschedules = new List<MicrosoftDynamicsCRMadoxioSpecialeventschedule>()
+                    //         };
+                    //         newArea.CopyValues(area);
+                    //         newLocation.AdoxioSpecialeventlocationLicencedareas.Add(newArea);
 
-                            // Add event dates to the new Area
-                            if (area.EventDates?.Count > 0)
-                            {
-                                area.EventDates.ForEach(dates =>
-                                {
-                                    var newDates = new MicrosoftDynamicsCRMadoxioSpecialeventschedule();
-                                    newDates.CopyValues(dates);
-                                    newArea.AdoxioSpecialeventareaEventschedules.Add(newDates);
-                                });
-                            }
-                        });
-                    }
+                    //         // Add event dates to the new Area
+                    //         if (area.EventDates?.Count > 0)
+                    //         {
+                    //             area.EventDates.ForEach(dates =>
+                    //             {
+                    //                 var newDates = new MicrosoftDynamicsCRMadoxioSpecialeventschedule();
+                    //                 newDates.CopyValues(dates);
+                    //                 newArea.AdoxioSpecialeventareaEventschedules.Add(newDates);
+                    //             });
+                    //         }
+                    //     });
+                    // }
 
 
                 });
