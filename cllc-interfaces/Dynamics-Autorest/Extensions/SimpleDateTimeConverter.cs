@@ -6,12 +6,12 @@ namespace Gov.Lclb.Cllb.Interfaces
 
     public class SimpleDateTimeConverter : JsonConverter
     {
-        public override bool CanConvert(Type objectType)
+        public override bool CanConvert(System.Type objectType)
         {
             return objectType == typeof(DateTime) || objectType == typeof(DateTimeOffset) || objectType == typeof(DateTimeOffset?);
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object ReadJson(JsonReader reader, System.Type objectType, object existingValue, JsonSerializer serializer)
         {
             if (reader.Value == null) return null;
 
