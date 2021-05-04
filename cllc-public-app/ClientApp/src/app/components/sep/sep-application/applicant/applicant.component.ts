@@ -6,6 +6,10 @@ import { Account } from '@models/account.model';
 import { SepApplication } from '@models/sep-application.model';
 import { IndexDBService } from '@services/index-db.service';
 import { FormBase } from '@shared/form-base';
+import { Observable } from 'rxjs';
+import { from } from 'rxjs/internal/observable/from';
+import { of } from 'rxjs/internal/observable/of';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-applicant',
@@ -78,7 +82,7 @@ export class ApplicantComponent implements OnInit {
     return this.form.valid;
   }
 
-  save() {
+  save(): Observable<number> {
     const data = {
       ...this.application,
       lastUpdated: new Date(),
@@ -106,21 +110,25 @@ export class ApplicantComponent implements OnInit {
 
     if (data.id) {
       this.db.applications.update(data.id, data);
+      return of(data.id);
     } else {
       data.dateCreated = new Date();
-      this.db.addSepApplication(data);
+      return from(this.db.addSepApplication(data));
     }
   }
 
   next(){  
     if(this.isValid()){
-      this.save();
-      this.saveComplete.emit(true);
+      this.save().subscribe((appId: number) => {
+        this.router.navigateByUrl(`/sep/application/${appId}/eligibility`);
+      });
     }
   }
 
   saveForLater(){  
-      this.save();
-      this.router.navigateByUrl('/sep/my-applications')
+      this.save()
+      .subscribe( id => {
+        this.router.navigateByUrl('/sep/my-applications')
+      });
   }
 }
