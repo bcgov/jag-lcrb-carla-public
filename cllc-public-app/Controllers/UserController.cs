@@ -71,7 +71,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 user.isNewUser = true;
                 // get details from the headers.
 
-
                 user.lastname = user.name.GetLastName();
                 user.firstname = user.name.GetFirstName();
                 user.accountid = userSettings.AccountId;
@@ -80,6 +79,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 string siteminderUserGuid = _httpContextAccessor.HttpContext.Request.Headers[siteMinderAuthOptions.SiteMinderUserGuidKey];
 
                 user.contactid = string.IsNullOrEmpty(siteminderUserGuid) ? userSettings.ContactId : siteminderUserGuid;
+                // handle Basic BCeID
+                if (string.IsNullOrEmpty(user.contactid))
+                {
+                    user.contactid = userSettings.SiteMinderGuid;
+                }
+
                 user.accountid = string.IsNullOrEmpty(siteminderBusinessGuid) ? userSettings.AccountId : siteminderBusinessGuid;
                 user.isEligibilityRequired = true;
             }
