@@ -28,7 +28,7 @@ export class NavbarComponent implements OnInit {
     return this.currentUser && !this.isAssociate;
   }
   get isPoliceRepresentative() {
-    return this.sepFeatureOn && this.isAuthenticated && this.account?.businessType === 'Police';
+    return this.sepFeatureOn && this.isAuthenticated && this.currentUser.isPoliceRepresentative;
   }
 
   constructor(public featureFlagService: FeatureFlagService) { }
