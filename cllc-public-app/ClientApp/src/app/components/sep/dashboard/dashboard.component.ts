@@ -1,18 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { filter } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
 import { User } from '@models/user.model';
+import { Account } from '@models/account.model';
 import { StarterChecklistComponent } from '@components/sep/starter-checklist/starter-checklist.component';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-sep-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
   currentUser: User;
+  account: Account;
   isNewUser = false;
   dataLoaded = false;
 
@@ -24,6 +27,15 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.store.select(state => state.currentUserState.currentUser)
       .subscribe(user => this.loadUser(user));
+
+    this.store.select(state => state.currentAccountState.currentAccount)
+      .pipe(filter(account => !!account))
+      .subscribe((account) => {
+        this.account = account;
+        if (this.account.businessType === 'Police') {
+          this.router.navigateByUrl('/sep/police/dashboard');
+        }
+      });
   }
 
   loadUser(user: User) {
