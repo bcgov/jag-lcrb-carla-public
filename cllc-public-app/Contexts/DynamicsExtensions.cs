@@ -372,7 +372,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                     pos = value.IndexOf(" "); // For example, Basic BCeID is Firstname<space>Lastname
                     if (pos > -1)
                     {
-                        result = value.Substring(pos);
+                        result = value.Substring(pos+1);
                     }
                     else
                     {
