@@ -15,7 +15,6 @@ import { StarterChecklistComponent } from '@components/sep/starter-checklist/sta
 })
 export class DashboardComponent implements OnInit {
   currentUser: User;
-  account: Account;
   isNewUser = false;
   dataLoaded = false;
 
@@ -27,15 +26,6 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.store.select(state => state.currentUserState.currentUser)
       .subscribe(user => this.loadUser(user));
-
-    this.store.select(state => state.currentAccountState.currentAccount)
-      .pipe(filter(account => !!account))
-      .subscribe((account) => {
-        this.account = account;
-        if (this.account.businessType === 'Police') {
-          this.router.navigateByUrl('/sep/police/dashboard');
-        }
-      });
   }
 
   loadUser(user: User) {
