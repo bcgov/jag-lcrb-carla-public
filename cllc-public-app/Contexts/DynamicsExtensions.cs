@@ -369,10 +369,10 @@ namespace Gov.Lclb.Cllb.Interfaces
                 }
                 else
                 {
-                    pos = value.IndexOf(" ");
+                    pos = value.IndexOf(" "); // For example, Basic BCeID is Firstname<space>Lastname
                     if (pos > -1)
                     {
-                        result = value.Substring(0, pos);
+                        result = value.Substring(pos);
                     }
                     else
                     {
