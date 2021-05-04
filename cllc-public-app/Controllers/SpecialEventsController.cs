@@ -1,30 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
-using Gov.Lclb.Cllb.Public.Extensions;
 using Gov.Lclb.Cllb.Public.Models;
-using Gov.Lclb.Cllb.Public.Utils;
-using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Rest;
-using Newtonsoft.Json;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
-using Application = Gov.Lclb.Cllb.Public.ViewModels.Application;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/special-events")]
     [ApiController]
     [Authorize(Policy = "Business-User")]
     public class SpecialEventsController : ControllerBase
@@ -107,30 +100,30 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     newLocation.CopyValues(location);
                     newSpecialEvent.AdoxioSpecialeventSpecialeventlocations.Add(newLocation);
 
-                    // Add service areas to new location
-                    if (location.ServiceAreas?.Count > 0)
-                    {
-                        location.ServiceAreas.ForEach(area =>
-                        {
-                            var newArea = new MicrosoftDynamicsCRMadoxioSpecialeventlicencedarea()
-                            {
-                                AdoxioSpecialeventareaEventschedules = new List<MicrosoftDynamicsCRMadoxioSpecialeventschedule>()
-                            };
-                            newArea.CopyValues(area);
-                            newLocation.AdoxioSpecialeventlocationLicencedareas.Add(newArea);
+                    // // Add service areas to new location
+                    // if (location.ServiceAreas?.Count > 0)
+                    // {
+                    //     location.ServiceAreas.ForEach(area =>
+                    //     {
+                    //         var newArea = new MicrosoftDynamicsCRMadoxioSpecialeventlicencedarea()
+                    //         {
+                    //             AdoxioSpecialeventareaEventschedules = new List<MicrosoftDynamicsCRMadoxioSpecialeventschedule>()
+                    //         };
+                    //         newArea.CopyValues(area);
+                    //         newLocation.AdoxioSpecialeventlocationLicencedareas.Add(newArea);
 
-                            // Add event dates to the new Area
-                            if (area.EventDates?.Count > 0)
-                            {
-                                area.EventDates.ForEach(dates =>
-                                {
-                                    var newDates = new MicrosoftDynamicsCRMadoxioSpecialeventschedule();
-                                    newDates.CopyValues(dates);
-                                    newArea.AdoxioSpecialeventareaEventschedules.Add(newDates);
-                                });
-                            }
-                        });
-                    }
+                    //         // Add event dates to the new Area
+                    //         if (area.EventDates?.Count > 0)
+                    //         {
+                    //             area.EventDates.ForEach(dates =>
+                    //             {
+                    //                 var newDates = new MicrosoftDynamicsCRMadoxioSpecialeventschedule();
+                    //                 newDates.CopyValues(dates);
+                    //                 newArea.AdoxioSpecialeventareaEventschedules.Add(newDates);
+                    //             });
+                    //         }
+                    //     });
+                    // }
 
 
                 });
@@ -143,7 +136,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             try
             {
-
                 newSpecialEvent = _dynamicsClient.Specialevents.Create(newSpecialEvent);
             }
             catch (HttpOperationException httpOperationException)

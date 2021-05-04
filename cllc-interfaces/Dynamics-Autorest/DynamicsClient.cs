@@ -38,27 +38,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        public int? Top320 { get; set; }
+        public int? Top360 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        public int? Skip320 { get; set; }
+        public int? Skip360 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        public bool? Count320 { get; set; }
+        public bool? Count360 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        public string Filter320 { get; set; }
+        public string Filter360 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        public string Search320 { get; set; }
+        public string Search360 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client subscription.
@@ -89,6 +89,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IAccountspecialevents.
         /// </summary>
         public virtual IAccountspecialevents Accountspecialevents { get; private set; }
+
+        /// <summary>
+        /// Gets the IPoliceaccountspecialevents.
+        /// </summary>
+        public virtual IPoliceaccountspecialevents Policeaccountspecialevents { get; private set; }
 
         /// <summary>
         /// Gets the IPolicejurisdictionid.
@@ -1101,6 +1106,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IPolicejurisdictionaccount Policejurisdictionaccount { get; private set; }
 
         /// <summary>
+        /// Gets the IPolicejurisdictionspecialevents.
+        /// </summary>
+        public virtual IPolicejurisdictionspecialevents Policejurisdictionspecialevents { get; private set; }
+
+        /// <summary>
         /// Gets the IPolicydocuments.
         /// </summary>
         public virtual IPolicydocuments Policydocuments { get; private set; }
@@ -1216,6 +1226,111 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IInvestigationenforcement Investigationenforcement { get; private set; }
 
         /// <summary>
+        /// Gets the ISepdrinksalesforecasts.
+        /// </summary>
+        public virtual ISepdrinksalesforecasts Sepdrinksalesforecasts { get; private set; }
+
+        /// <summary>
+        /// Gets the ISepdrinksalesforecastasyncoperations.
+        /// </summary>
+        public virtual ISepdrinksalesforecastasyncoperations Sepdrinksalesforecastasyncoperations { get; private set; }
+
+        /// <summary>
+        /// Gets the ISepdrinksalesforecastbulkdeletefailures.
+        /// </summary>
+        public virtual ISepdrinksalesforecastbulkdeletefailures Sepdrinksalesforecastbulkdeletefailures { get; private set; }
+
+        /// <summary>
+        /// Gets the ISepdrinksalesforecastduplicatebaserecord.
+        /// </summary>
+        public virtual ISepdrinksalesforecastduplicatebaserecord Sepdrinksalesforecastduplicatebaserecord { get; private set; }
+
+        /// <summary>
+        /// Gets the ISepdrinksalesforecastduplicatematchingrecord.
+        /// </summary>
+        public virtual ISepdrinksalesforecastduplicatematchingrecord Sepdrinksalesforecastduplicatematchingrecord { get; private set; }
+
+        /// <summary>
+        /// Gets the ISepdrinksalesforecastmailboxtrackingfolders.
+        /// </summary>
+        public virtual ISepdrinksalesforecastmailboxtrackingfolders Sepdrinksalesforecastmailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the ISepdrinksalesforecastprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual ISepdrinksalesforecastprincipalobjectattributeaccesses Sepdrinksalesforecastprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the ISepdrinksalesforecastprocesssession.
+        /// </summary>
+        public virtual ISepdrinksalesforecastprocesssession Sepdrinksalesforecastprocesssession { get; private set; }
+
+        /// <summary>
+        /// Gets the ISepdrinksalesforecastsyncerrors.
+        /// </summary>
+        public virtual ISepdrinksalesforecastsyncerrors Sepdrinksalesforecastsyncerrors { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialevent.
+        /// </summary>
+        public virtual ISpecialevent Specialevent { get; private set; }
+
+        /// <summary>
+        /// Gets the IType.
+        /// </summary>
+        public virtual IType Type { get; private set; }
+
+        /// <summary>
+        /// Gets the ISepdrinktypes.
+        /// </summary>
+        public virtual ISepdrinktypes Sepdrinktypes { get; private set; }
+
+        /// <summary>
+        /// Gets the ISepdrinktypeadoxiosepdrinksalesforecasttype.
+        /// </summary>
+        public virtual ISepdrinktypeadoxiosepdrinksalesforecasttype Sepdrinktypeadoxiosepdrinksalesforecasttype { get; private set; }
+
+        /// <summary>
+        /// Gets the ISepdrinktypeasyncoperations.
+        /// </summary>
+        public virtual ISepdrinktypeasyncoperations Sepdrinktypeasyncoperations { get; private set; }
+
+        /// <summary>
+        /// Gets the ISepdrinktypebulkdeletefailures.
+        /// </summary>
+        public virtual ISepdrinktypebulkdeletefailures Sepdrinktypebulkdeletefailures { get; private set; }
+
+        /// <summary>
+        /// Gets the ISepdrinktypeduplicatebaserecord.
+        /// </summary>
+        public virtual ISepdrinktypeduplicatebaserecord Sepdrinktypeduplicatebaserecord { get; private set; }
+
+        /// <summary>
+        /// Gets the ISepdrinktypeduplicatematchingrecord.
+        /// </summary>
+        public virtual ISepdrinktypeduplicatematchingrecord Sepdrinktypeduplicatematchingrecord { get; private set; }
+
+        /// <summary>
+        /// Gets the ISepdrinktypemailboxtrackingfolders.
+        /// </summary>
+        public virtual ISepdrinktypemailboxtrackingfolders Sepdrinktypemailboxtrackingfolders { get; private set; }
+
+        /// <summary>
+        /// Gets the ISepdrinktypeprincipalobjectattributeaccesses.
+        /// </summary>
+        public virtual ISepdrinktypeprincipalobjectattributeaccesses Sepdrinktypeprincipalobjectattributeaccesses { get; private set; }
+
+        /// <summary>
+        /// Gets the ISepdrinktypeprocesssession.
+        /// </summary>
+        public virtual ISepdrinktypeprocesssession Sepdrinktypeprocesssession { get; private set; }
+
+        /// <summary>
+        /// Gets the ISepdrinktypesyncerrors.
+        /// </summary>
+        public virtual ISepdrinktypesyncerrors Sepdrinktypesyncerrors { get; private set; }
+
+        /// <summary>
         /// Gets the IServiceareas.
         /// </summary>
         public virtual IServiceareas Serviceareas { get; private set; }
@@ -1256,6 +1371,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ISpecialeventlocations Specialeventlocations { get; private set; }
 
         /// <summary>
+        /// Gets the ISpecialeventlocationinspections.
+        /// </summary>
+        public virtual ISpecialeventlocationinspections Specialeventlocationinspections { get; private set; }
+
+        /// <summary>
         /// Gets the ISpecialeventnotes.
         /// </summary>
         public virtual ISpecialeventnotes Specialeventnotes { get; private set; }
@@ -1271,14 +1391,39 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IInspector Inspector { get; private set; }
 
         /// <summary>
+        /// Gets the ILcrbrepresentativeid.
+        /// </summary>
+        public virtual ILcrbrepresentativeid Lcrbrepresentativeid { get; private set; }
+
+        /// <summary>
         /// Gets the ILocalgovernmentid.
         /// </summary>
         public virtual ILocalgovernmentid Localgovernmentid { get; private set; }
 
         /// <summary>
+        /// Gets the IPoliceaccountid.
+        /// </summary>
+        public virtual IPoliceaccountid Policeaccountid { get; private set; }
+
+        /// <summary>
+        /// Gets the IPolicerepresentativeid.
+        /// </summary>
+        public virtual IPolicerepresentativeid Policerepresentativeid { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventadoxiosepdrinksalesforecastspecialevent.
+        /// </summary>
+        public virtual ISpecialeventadoxiosepdrinksalesforecastspecialevent Specialeventadoxiosepdrinksalesforecastspecialevent { get; private set; }
+
+        /// <summary>
         /// Gets the ISpecialeventinspection.
         /// </summary>
         public virtual ISpecialeventinspection Specialeventinspection { get; private set; }
+
+        /// <summary>
+        /// Gets the ISpecialeventinvoices.
+        /// </summary>
+        public virtual ISpecialeventinvoices Specialeventinvoices { get; private set; }
 
         /// <summary>
         /// Gets the ISpecialeventschedules.
@@ -1426,6 +1571,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IRegardingobjectidadoxiorelatedlicence Regardingobjectidadoxiorelatedlicence { get; private set; }
 
         /// <summary>
+        /// Gets the IRegardingobjectidadoxiosepdrinksalesforecast.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiosepdrinksalesforecast Regardingobjectidadoxiosepdrinksalesforecast { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiosepdrinktype.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiosepdrinktype Regardingobjectidadoxiosepdrinktype { get; private set; }
+
+        /// <summary>
         /// Gets the IRegardingobjectidadoxiostatuscounter.
         /// </summary>
         public virtual IRegardingobjectidadoxiostatuscounter Regardingobjectidadoxiostatuscounter { get; private set; }
@@ -1476,6 +1631,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IBusinessunitadoxiorelatedlicence Businessunitadoxiorelatedlicence { get; private set; }
 
         /// <summary>
+        /// Gets the IBusinessunitadoxiosepdrinksalesforecast.
+        /// </summary>
+        public virtual IBusinessunitadoxiosepdrinksalesforecast Businessunitadoxiosepdrinksalesforecast { get; private set; }
+
+        /// <summary>
+        /// Gets the IBusinessunitadoxiosepdrinktype.
+        /// </summary>
+        public virtual IBusinessunitadoxiosepdrinktype Businessunitadoxiosepdrinktype { get; private set; }
+
+        /// <summary>
         /// Gets the IBusinessunitadoxiostatuscounter.
         /// </summary>
         public virtual IBusinessunitadoxiostatuscounter Businessunitadoxiostatuscounter { get; private set; }
@@ -1499,6 +1664,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IContactspecialevents.
         /// </summary>
         public virtual IContactspecialevents Contactspecialevents { get; private set; }
+
+        /// <summary>
+        /// Gets the IPolicerepresentativespecialevents.
+        /// </summary>
+        public virtual IPolicerepresentativespecialevents Policerepresentativespecialevents { get; private set; }
 
         /// <summary>
         /// Gets the IBaserecordidadoxioadminactivity.
@@ -1536,6 +1706,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IBaserecordidadoxiorelatedlicence Baserecordidadoxiorelatedlicence { get; private set; }
 
         /// <summary>
+        /// Gets the IBaserecordidadoxiosepdrinksalesforecast.
+        /// </summary>
+        public virtual IBaserecordidadoxiosepdrinksalesforecast Baserecordidadoxiosepdrinksalesforecast { get; private set; }
+
+        /// <summary>
+        /// Gets the IBaserecordidadoxiosepdrinktype.
+        /// </summary>
+        public virtual IBaserecordidadoxiosepdrinktype Baserecordidadoxiosepdrinktype { get; private set; }
+
+        /// <summary>
         /// Gets the IDuplicaterecordidadoxioadminactivity.
         /// </summary>
         public virtual IDuplicaterecordidadoxioadminactivity Duplicaterecordidadoxioadminactivity { get; private set; }
@@ -1571,6 +1751,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IDuplicaterecordidadoxiorelatedlicence Duplicaterecordidadoxiorelatedlicence { get; private set; }
 
         /// <summary>
+        /// Gets the IDuplicaterecordidadoxiosepdrinksalesforecast.
+        /// </summary>
+        public virtual IDuplicaterecordidadoxiosepdrinksalesforecast Duplicaterecordidadoxiosepdrinksalesforecast { get; private set; }
+
+        /// <summary>
+        /// Gets the IDuplicaterecordidadoxiosepdrinktype.
+        /// </summary>
+        public virtual IDuplicaterecordidadoxiosepdrinktype Duplicaterecordidadoxiosepdrinktype { get; private set; }
+
+        /// <summary>
         /// Gets the IEntitydefinitions.
         /// </summary>
         public virtual IEntitydefinitions Entitydefinitions { get; private set; }
@@ -1579,6 +1769,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IGlobaloptionsetdefinitions.
         /// </summary>
         public virtual IGlobaloptionsetdefinitions Globaloptionsetdefinitions { get; private set; }
+
+        /// <summary>
+        /// Gets the IEventlocationid.
+        /// </summary>
+        public virtual IEventlocationid Eventlocationid { get; private set; }
 
         /// <summary>
         /// Gets the IInspectionadditionalinspectors.
@@ -1666,6 +1861,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IObjectidadoxiorelatedlicence Objectidadoxiorelatedlicence { get; private set; }
 
         /// <summary>
+        /// Gets the IObjectidadoxiosepdrinksalesforecast.
+        /// </summary>
+        public virtual IObjectidadoxiosepdrinksalesforecast Objectidadoxiosepdrinksalesforecast { get; private set; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiosepdrinktype.
+        /// </summary>
+        public virtual IObjectidadoxiosepdrinktype Objectidadoxiosepdrinktype { get; private set; }
+
+        /// <summary>
         /// Gets the IObjectidadoxiostatuscounter.
         /// </summary>
         public virtual IObjectidadoxiostatuscounter Objectidadoxiostatuscounter { get; private set; }
@@ -1709,6 +1914,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IInvestigationsmanagerregions.
         /// </summary>
         public virtual IInvestigationsmanagerregions Investigationsmanagerregions { get; private set; }
+
+        /// <summary>
+        /// Gets the ILcrbrepresentativespecialevents.
+        /// </summary>
+        public virtual ILcrbrepresentativespecialevents Lcrbrepresentativespecialevents { get; private set; }
 
         /// <summary>
         /// Gets the ISystemuseradoxiospecialeventinspector.
@@ -1896,6 +2106,46 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILkadoxiorelatedlicencemodifiedonbehalfby Lkadoxiorelatedlicencemodifiedonbehalfby { get; private set; }
 
         /// <summary>
+        /// Gets the ILkadoxiosepdrinksalesforecastcreatedby.
+        /// </summary>
+        public virtual ILkadoxiosepdrinksalesforecastcreatedby Lkadoxiosepdrinksalesforecastcreatedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxiosepdrinksalesforecastcreatedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxiosepdrinksalesforecastcreatedonbehalfby Lkadoxiosepdrinksalesforecastcreatedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxiosepdrinksalesforecastmodifiedby.
+        /// </summary>
+        public virtual ILkadoxiosepdrinksalesforecastmodifiedby Lkadoxiosepdrinksalesforecastmodifiedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxiosepdrinksalesforecastmodifiedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxiosepdrinksalesforecastmodifiedonbehalfby Lkadoxiosepdrinksalesforecastmodifiedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxiosepdrinktypecreatedby.
+        /// </summary>
+        public virtual ILkadoxiosepdrinktypecreatedby Lkadoxiosepdrinktypecreatedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxiosepdrinktypecreatedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxiosepdrinktypecreatedonbehalfby Lkadoxiosepdrinktypecreatedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxiosepdrinktypemodifiedby.
+        /// </summary>
+        public virtual ILkadoxiosepdrinktypemodifiedby Lkadoxiosepdrinktypemodifiedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxiosepdrinktypemodifiedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxiosepdrinktypemodifiedonbehalfby Lkadoxiosepdrinktypemodifiedonbehalfby { get; private set; }
+
+        /// <summary>
         /// Gets the ILkadoxiostatuscountercreatedby.
         /// </summary>
         public virtual ILkadoxiostatuscountercreatedby Lkadoxiostatuscountercreatedby { get; private set; }
@@ -1961,6 +2211,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IUseradoxiorelatedlicence Useradoxiorelatedlicence { get; private set; }
 
         /// <summary>
+        /// Gets the IUseradoxiosepdrinksalesforecast.
+        /// </summary>
+        public virtual IUseradoxiosepdrinksalesforecast Useradoxiosepdrinksalesforecast { get; private set; }
+
+        /// <summary>
+        /// Gets the IUseradoxiosepdrinktype.
+        /// </summary>
+        public virtual IUseradoxiosepdrinktype Useradoxiosepdrinktype { get; private set; }
+
+        /// <summary>
         /// Gets the IUseradoxiostatuscounter.
         /// </summary>
         public virtual IUseradoxiostatuscounter Useradoxiostatuscounter { get; private set; }
@@ -2009,6 +2269,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ITeamadoxiorelatedlicence.
         /// </summary>
         public virtual ITeamadoxiorelatedlicence Teamadoxiorelatedlicence { get; private set; }
+
+        /// <summary>
+        /// Gets the ITeamadoxiosepdrinksalesforecast.
+        /// </summary>
+        public virtual ITeamadoxiosepdrinksalesforecast Teamadoxiosepdrinksalesforecast { get; private set; }
+
+        /// <summary>
+        /// Gets the ITeamadoxiosepdrinktype.
+        /// </summary>
+        public virtual ITeamadoxiosepdrinktype Teamadoxiosepdrinktype { get; private set; }
 
         /// <summary>
         /// Gets the ITeamadoxiostatuscounter.
@@ -2266,6 +2536,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Accountinvestigationrequests = new Accountinvestigationrequests(this);
             Accountinvestigationsubjects = new Accountinvestigationsubjects(this);
             Accountspecialevents = new Accountspecialevents(this);
+            Policeaccountspecialevents = new Policeaccountspecialevents(this);
             Policejurisdictionid = new Policejurisdictionid(this);
             Additionalinspectors = new Additionalinspectors(this);
             Additionalinspectorasyncoperations = new Additionalinspectorasyncoperations(this);
@@ -2468,6 +2739,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Policejurisdictions = new Policejurisdictions(this);
             Lginid = new Lginid(this);
             Policejurisdictionaccount = new Policejurisdictionaccount(this);
+            Policejurisdictionspecialevents = new Policejurisdictionspecialevents(this);
             Policydocuments = new Policydocuments(this);
             Postalcodes = new Postalcodes(this);
             Previousaddresses = new Previousaddresses(this);
@@ -2491,6 +2763,27 @@ namespace Gov.Lclb.Cllb.Interfaces
             Relatedparties = new Relatedparties(this);
             Rmreviews = new Rmreviews(this);
             Investigationenforcement = new Investigationenforcement(this);
+            Sepdrinksalesforecasts = new Sepdrinksalesforecasts(this);
+            Sepdrinksalesforecastasyncoperations = new Sepdrinksalesforecastasyncoperations(this);
+            Sepdrinksalesforecastbulkdeletefailures = new Sepdrinksalesforecastbulkdeletefailures(this);
+            Sepdrinksalesforecastduplicatebaserecord = new Sepdrinksalesforecastduplicatebaserecord(this);
+            Sepdrinksalesforecastduplicatematchingrecord = new Sepdrinksalesforecastduplicatematchingrecord(this);
+            Sepdrinksalesforecastmailboxtrackingfolders = new Sepdrinksalesforecastmailboxtrackingfolders(this);
+            Sepdrinksalesforecastprincipalobjectattributeaccesses = new Sepdrinksalesforecastprincipalobjectattributeaccesses(this);
+            Sepdrinksalesforecastprocesssession = new Sepdrinksalesforecastprocesssession(this);
+            Sepdrinksalesforecastsyncerrors = new Sepdrinksalesforecastsyncerrors(this);
+            Specialevent = new Specialevent(this);
+            Type = new Type(this);
+            Sepdrinktypes = new Sepdrinktypes(this);
+            Sepdrinktypeadoxiosepdrinksalesforecasttype = new Sepdrinktypeadoxiosepdrinksalesforecasttype(this);
+            Sepdrinktypeasyncoperations = new Sepdrinktypeasyncoperations(this);
+            Sepdrinktypebulkdeletefailures = new Sepdrinktypebulkdeletefailures(this);
+            Sepdrinktypeduplicatebaserecord = new Sepdrinktypeduplicatebaserecord(this);
+            Sepdrinktypeduplicatematchingrecord = new Sepdrinktypeduplicatematchingrecord(this);
+            Sepdrinktypemailboxtrackingfolders = new Sepdrinktypemailboxtrackingfolders(this);
+            Sepdrinktypeprincipalobjectattributeaccesses = new Sepdrinktypeprincipalobjectattributeaccesses(this);
+            Sepdrinktypeprocesssession = new Sepdrinktypeprocesssession(this);
+            Sepdrinktypesyncerrors = new Sepdrinktypesyncerrors(this);
             Serviceareas = new Serviceareas(this);
             Serviceareaeventlocations = new Serviceareaeventlocations(this);
             Settings = new Settings(this);
@@ -2499,11 +2792,17 @@ namespace Gov.Lclb.Cllb.Interfaces
             Specialeventlicencedareas = new Specialeventlicencedareas(this);
             Specialeventareaeventschedules = new Specialeventareaeventschedules(this);
             Specialeventlocations = new Specialeventlocations(this);
+            Specialeventlocationinspections = new Specialeventlocationinspections(this);
             Specialeventnotes = new Specialeventnotes(this);
             Specialevents = new Specialevents(this);
             Inspector = new Inspector(this);
+            Lcrbrepresentativeid = new Lcrbrepresentativeid(this);
             Localgovernmentid = new Localgovernmentid(this);
+            Policeaccountid = new Policeaccountid(this);
+            Policerepresentativeid = new Policerepresentativeid(this);
+            Specialeventadoxiosepdrinksalesforecastspecialevent = new Specialeventadoxiosepdrinksalesforecastspecialevent(this);
             Specialeventinspection = new Specialeventinspection(this);
+            Specialeventinvoices = new Specialeventinvoices(this);
             Specialeventschedules = new Specialeventschedules(this);
             Specialeventtandcs = new Specialeventtandcs(this);
             Statuscounters = new Statuscounters(this);
@@ -2533,6 +2832,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             Regardingobjectidadoxiologin = new Regardingobjectidadoxiologin(this);
             Regardingobjectidadoxioonestopmessageitem = new Regardingobjectidadoxioonestopmessageitem(this);
             Regardingobjectidadoxiorelatedlicence = new Regardingobjectidadoxiorelatedlicence(this);
+            Regardingobjectidadoxiosepdrinksalesforecast = new Regardingobjectidadoxiosepdrinksalesforecast(this);
+            Regardingobjectidadoxiosepdrinktype = new Regardingobjectidadoxiosepdrinktype(this);
             Regardingobjectidadoxiostatuscounter = new Regardingobjectidadoxiostatuscounter(this);
             Businessunitadoxioadditionalinspector = new Businessunitadoxioadditionalinspector(this);
             Businessunitadoxioadminactivity = new Businessunitadoxioadminactivity(this);
@@ -2543,11 +2844,14 @@ namespace Gov.Lclb.Cllb.Interfaces
             Businessunitadoxiologin = new Businessunitadoxiologin(this);
             Businessunitadoxioonestopmessageitem = new Businessunitadoxioonestopmessageitem(this);
             Businessunitadoxiorelatedlicence = new Businessunitadoxiorelatedlicence(this);
+            Businessunitadoxiosepdrinksalesforecast = new Businessunitadoxiosepdrinksalesforecast(this);
+            Businessunitadoxiosepdrinktype = new Businessunitadoxiosepdrinktype(this);
             Businessunitadoxiostatuscounter = new Businessunitadoxiostatuscounter(this);
             Contacts = new Contacts(this);
             Contactadoxiologincontact = new Contactadoxiologincontact(this);
             Contactinvestigationsubjects = new Contactinvestigationsubjects(this);
             Contactspecialevents = new Contactspecialevents(this);
+            Policerepresentativespecialevents = new Policerepresentativespecialevents(this);
             Baserecordidadoxioadminactivity = new Baserecordidadoxioadminactivity(this);
             Baserecordidadoxioinvestigationcontact = new Baserecordidadoxioinvestigationcontact(this);
             Baserecordidadoxioinvestigationrequest = new Baserecordidadoxioinvestigationrequest(this);
@@ -2555,6 +2859,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             Baserecordidadoxiologin = new Baserecordidadoxiologin(this);
             Baserecordidadoxioonestopmessageitem = new Baserecordidadoxioonestopmessageitem(this);
             Baserecordidadoxiorelatedlicence = new Baserecordidadoxiorelatedlicence(this);
+            Baserecordidadoxiosepdrinksalesforecast = new Baserecordidadoxiosepdrinksalesforecast(this);
+            Baserecordidadoxiosepdrinktype = new Baserecordidadoxiosepdrinktype(this);
             Duplicaterecordidadoxioadminactivity = new Duplicaterecordidadoxioadminactivity(this);
             Duplicaterecordidadoxioinvestigationcontact = new Duplicaterecordidadoxioinvestigationcontact(this);
             Duplicaterecordidadoxioinvestigationrequest = new Duplicaterecordidadoxioinvestigationrequest(this);
@@ -2562,8 +2868,11 @@ namespace Gov.Lclb.Cllb.Interfaces
             Duplicaterecordidadoxiologin = new Duplicaterecordidadoxiologin(this);
             Duplicaterecordidadoxioonestopmessageitem = new Duplicaterecordidadoxioonestopmessageitem(this);
             Duplicaterecordidadoxiorelatedlicence = new Duplicaterecordidadoxiorelatedlicence(this);
+            Duplicaterecordidadoxiosepdrinksalesforecast = new Duplicaterecordidadoxiosepdrinksalesforecast(this);
+            Duplicaterecordidadoxiosepdrinktype = new Duplicaterecordidadoxiosepdrinktype(this);
             Entitydefinitions = new Entitydefinitions(this);
             Globaloptionsetdefinitions = new Globaloptionsetdefinitions(this);
+            Eventlocationid = new Eventlocationid(this);
             Inspectionadditionalinspectors = new Inspectionadditionalinspectors(this);
             Inspectionrelatedparties = new Inspectionrelatedparties(this);
             Specialeventid = new Specialeventid(this);
@@ -2581,6 +2890,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             Objectidadoxiologin = new Objectidadoxiologin(this);
             Objectidadoxioonestopmessageitem = new Objectidadoxioonestopmessageitem(this);
             Objectidadoxiorelatedlicence = new Objectidadoxiorelatedlicence(this);
+            Objectidadoxiosepdrinksalesforecast = new Objectidadoxiosepdrinksalesforecast(this);
+            Objectidadoxiosepdrinktype = new Objectidadoxiosepdrinktype(this);
             Objectidadoxiostatuscounter = new Objectidadoxiostatuscounter(this);
             Productadoxioapplicationtyperenewalfeeproduct = new Productadoxioapplicationtyperenewalfeeproduct(this);
             Savedqueries = new Savedqueries(this);
@@ -2590,6 +2901,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Systemusers = new Systemusers(this);
             Inspectoradditionalinspectors = new Inspectoradditionalinspectors(this);
             Investigationsmanagerregions = new Investigationsmanagerregions(this);
+            Lcrbrepresentativespecialevents = new Lcrbrepresentativespecialevents(this);
             Systemuseradoxiospecialeventinspector = new Systemuseradoxiospecialeventinspector(this);
             Lkadoxioadditionalinspectorcreatedby = new Lkadoxioadditionalinspectorcreatedby(this);
             Lkadoxioadditionalinspectorcreatedonbehalfby = new Lkadoxioadditionalinspectorcreatedonbehalfby(this);
@@ -2627,6 +2939,14 @@ namespace Gov.Lclb.Cllb.Interfaces
             Lkadoxiorelatedlicencecreatedonbehalfby = new Lkadoxiorelatedlicencecreatedonbehalfby(this);
             Lkadoxiorelatedlicencemodifiedby = new Lkadoxiorelatedlicencemodifiedby(this);
             Lkadoxiorelatedlicencemodifiedonbehalfby = new Lkadoxiorelatedlicencemodifiedonbehalfby(this);
+            Lkadoxiosepdrinksalesforecastcreatedby = new Lkadoxiosepdrinksalesforecastcreatedby(this);
+            Lkadoxiosepdrinksalesforecastcreatedonbehalfby = new Lkadoxiosepdrinksalesforecastcreatedonbehalfby(this);
+            Lkadoxiosepdrinksalesforecastmodifiedby = new Lkadoxiosepdrinksalesforecastmodifiedby(this);
+            Lkadoxiosepdrinksalesforecastmodifiedonbehalfby = new Lkadoxiosepdrinksalesforecastmodifiedonbehalfby(this);
+            Lkadoxiosepdrinktypecreatedby = new Lkadoxiosepdrinktypecreatedby(this);
+            Lkadoxiosepdrinktypecreatedonbehalfby = new Lkadoxiosepdrinktypecreatedonbehalfby(this);
+            Lkadoxiosepdrinktypemodifiedby = new Lkadoxiosepdrinktypemodifiedby(this);
+            Lkadoxiosepdrinktypemodifiedonbehalfby = new Lkadoxiosepdrinktypemodifiedonbehalfby(this);
             Lkadoxiostatuscountercreatedby = new Lkadoxiostatuscountercreatedby(this);
             Lkadoxiostatuscountercreatedonbehalfby = new Lkadoxiostatuscountercreatedonbehalfby(this);
             Lkadoxiostatuscountermodifiedby = new Lkadoxiostatuscountermodifiedby(this);
@@ -2640,6 +2960,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             Useradoxiologin = new Useradoxiologin(this);
             Useradoxioonestopmessageitem = new Useradoxioonestopmessageitem(this);
             Useradoxiorelatedlicence = new Useradoxiorelatedlicence(this);
+            Useradoxiosepdrinksalesforecast = new Useradoxiosepdrinksalesforecast(this);
+            Useradoxiosepdrinktype = new Useradoxiosepdrinktype(this);
             Useradoxiostatuscounter = new Useradoxiostatuscounter(this);
             Teamadoxioadditionalinspector = new Teamadoxioadditionalinspector(this);
             Teamadoxioadminactivity = new Teamadoxioadminactivity(this);
@@ -2650,6 +2972,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             Teamadoxiologin = new Teamadoxiologin(this);
             Teamadoxioonestopmessageitem = new Teamadoxioonestopmessageitem(this);
             Teamadoxiorelatedlicence = new Teamadoxiorelatedlicence(this);
+            Teamadoxiosepdrinksalesforecast = new Teamadoxiosepdrinksalesforecast(this);
+            Teamadoxiosepdrinktype = new Teamadoxiosepdrinktype(this);
             Teamadoxiostatuscounter = new Teamadoxiostatuscounter(this);
             Workflows = new Workflows(this);
             BaseUri = new System.Uri("http://localhost");
