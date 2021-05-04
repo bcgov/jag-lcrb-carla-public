@@ -35,7 +35,7 @@
 
             <mat-step [completed]="isStepCompleted(step)" *ngIf="step === 'liquor'">
                 <ng-template matStepLabel>Liquor</ng-template>
-                <app-liquor *ngIf="stepper.selectedIndex === index" class="w-100" #liquor>
+                <app-liquor [applicationId]="application?.id" *ngIf="stepper.selectedIndex === index" class="w-100" #liquor>
                 </app-liquor>
             </mat-step>
 

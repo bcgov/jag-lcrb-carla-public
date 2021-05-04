@@ -292,6 +292,7 @@ import { TotalServingsComponent } from './components/sep/sep-application/liquor/
 import { SellingDrinksComponent } from './components/sep/sep-application/liquor/tabs/selling-drinks/selling-drinks.component';
 import { DrinkAmountsComponent } from './components/sep/sep-application/liquor/tabs/drink-amounts/drink-amounts.component';
 import { ConversionToolComponent } from './components/sep/sep-application/liquor/tabs/total-servings/conversion-tool/conversion-tool.component';
+import { SpecialEventsDataService } from "@services/special-events-data.service";
 
 @NgModule({
   declarations: [
@@ -592,6 +593,7 @@ import { ConversionToolComponent } from './components/sep/sep-application/liquor
     WorkerDataService,
     FeatureFlagService,
     LEConnectionsDataService,
+    SpecialEventsDataService,
     BCeidOrServiceCardAuthGuard,
     {
       provide: APP_INITIALIZER,
