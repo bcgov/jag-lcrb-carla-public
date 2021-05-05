@@ -95,33 +95,33 @@ export class EligibilityComponent extends FormBase implements OnInit {
       });
 
 
-    this.form.get('eligibilityResponsibleBevServiceNumber').valueChanges
-      .pipe(distinctUntilChanged())
-      .subscribe(value => {
-        if (value) {
-          // if the value is entered disable the checkbox and clear its validation
-          this.form.get('eligibilityResponsibleBevServiceNumberDoesNotHave').clearValidators();
-          this.form.get('eligibilityResponsibleBevServiceNumberDoesNotHave').reset();
-          this.form.get('eligibilityResponsibleBevServiceNumberDoesNotHave').disable();
-        } else {
-          // enable the checkbox and its validation
-          this.form.get('eligibilityResponsibleBevServiceNumberDoesNotHave').setValidators([this.customRequiredCheckboxValidator()]);
-          this.form.get('eligibilityResponsibleBevServiceNumberDoesNotHave').enable();
-        }
-      });
+    // this.form.get('eligibilityResponsibleBevServiceNumber').valueChanges
+    //   .pipe(distinctUntilChanged())
+    //   .subscribe(value => {
+    //     if (value) {
+    //       // if the value is entered disable the checkbox and clear its validation
+    //       this.form.get('eligibilityResponsibleBevServiceNumberDoesNotHave').clearValidators();
+    //       this.form.get('eligibilityResponsibleBevServiceNumberDoesNotHave').reset();
+    //       this.form.get('eligibilityResponsibleBevServiceNumberDoesNotHave').disable();
+    //     } else {
+    //       // enable the checkbox and its validation
+    //       this.form.get('eligibilityResponsibleBevServiceNumberDoesNotHave').setValidators([this.customRequiredCheckboxValidator()]);
+    //       this.form.get('eligibilityResponsibleBevServiceNumberDoesNotHave').enable();
+    //     }
+    //   });
 
-    this.form.get('eligibilityResponsibleBevServiceNumberDoesNotHave').valueChanges
-      .pipe(distinctUntilChanged())
-      .subscribe(value => {
-        if (value === false) {
-          this.form.get('eligibilityResponsibleBevServiceNumber').setValidators([Validators.required, Validators.minLength(6), Validators.maxLength(6)]);
-          this.form.get('eligibilityResponsibleBevServiceNumber').enable();
-        } else {
-          this.form.get('eligibilityResponsibleBevServiceNumber').clearValidators();
-          this.form.get('eligibilityResponsibleBevServiceNumber').reset();
-          this.form.get('eligibilityResponsibleBevServiceNumber').disable();
-        }
-      });
+    // this.form.get('eligibilityResponsibleBevServiceNumberDoesNotHave').valueChanges
+    //   .pipe(distinctUntilChanged())
+    //   .subscribe(value => {
+    //     if (value === false) {
+    //       this.form.get('eligibilityResponsibleBevServiceNumber').setValidators([Validators.required, Validators.minLength(6), Validators.maxLength(6)]);
+    //       this.form.get('eligibilityResponsibleBevServiceNumber').enable();
+    //     } else {
+    //       this.form.get('eligibilityResponsibleBevServiceNumber').clearValidators();
+    //       this.form.get('eligibilityResponsibleBevServiceNumber').reset();
+    //       this.form.get('eligibilityResponsibleBevServiceNumber').disable();
+    //     }
+    //   });
 
     if (this.sepApplication) {
       this.form.patchValue(this.sepApplication);

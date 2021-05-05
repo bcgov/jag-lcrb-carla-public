@@ -50,6 +50,24 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _fileManagerClient = fileManagerClient;
         }
 
+        public static bool IsPoliceRepresentative(string contactId, IConfiguration config, IDynamicsClient dynamics)
+        {
+            if (string.IsNullOrEmpty(config["FEATURE_SEP"]) || string.IsNullOrEmpty(contactId))
+            {
+                return false;
+            }
+
+            try
+            {
+                MicrosoftDynamicsCRMcontact contact = dynamics.Contacts.GetByKey(contactId);
+                return contact.AdoxioIspolicerepresentative ?? false;
+            }
+            catch (HttpOperationException)
+            {
+                // if we fail, then all G.
+                return false;
+            }
+        }
 
         /// <summary>
         ///     Get a specific legal entity
@@ -96,7 +114,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // get the contact
 
 
-            
+
             // Allow access if the current user is the contact - for scenarios such as a worker update.
             if (DynamicsExtensions.CurrentUserIsContact(id, _httpContextAccessor))
             {
@@ -177,7 +195,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             if (item == null || string.IsNullOrEmpty(contactId)) return BadRequest();
 
-            
+
             var alias = new MicrosoftDynamicsCRMadoxioAlias();
             // copy received values to Dynamics Application
             alias.CopyValues(item);
@@ -553,7 +571,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         token = code,
                         shortName = contact.Firstname + " " + contact.Lastname,
                         dateOfBirth = contact.AdoxioDateofbirthshortdatestring,
-                        gender = ((ViewModels.Gender?) contact.AdoxioGendercode).ToString(),
+                        gender = ((ViewModels.Gender?)contact.AdoxioGendercode).ToString(),
                         streetAddress = contact.Address1Line1,
                         city = contact.Address1City,
                         province = contact.Address1Stateorprovince,

@@ -104,20 +104,39 @@ namespace Gov.Lclb.Cllb.Public.Authentication
         {
             string temp = httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings;
-
-            try
+            if (temp != null)
             {
-                userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+                try
+                {
+                    userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+                }
+                catch (Exception)
+                {
+                    userSettings = null;
+                }
             }
-            catch (Exception)
+            else
             {
-                userSettings = new UserSettings();
-                userSettings.AccountId = httpContextAccessor.HttpContext.User.FindFirst(User.AccountidClaim)?.Value;
-                userSettings.ContactId = httpContextAccessor.HttpContext.User.FindFirst(User.UseridClaim)?.Value;
-                userSettings.SiteMinderGuid = httpContextAccessor.HttpContext.User.FindFirst(User.SiteMinderGuidClaim)?.Value;
-                userSettings.SiteMinderBusinessGuid = httpContextAccessor.HttpContext.User.FindFirst(User.SiteMinderBusinessGuidClaim)?.Value;
+                userSettings = null;
             }
-
+            if (userSettings == null)
+            {
+                try
+                {
+                    userSettings = new UserSettings();
+                    userSettings.AccountId = httpContextAccessor.HttpContext.User.FindFirst(User.AccountidClaim)?.Value;
+                    userSettings.ContactId = httpContextAccessor.HttpContext.User.FindFirst(User.UseridClaim)?.Value;
+                    userSettings.SiteMinderGuid =
+                        httpContextAccessor.HttpContext.User.FindFirst(User.SiteMinderGuidClaim)?.Value;
+                    userSettings.SiteMinderBusinessGuid = httpContextAccessor.HttpContext.User
+                        .FindFirst(User.SiteMinderBusinessGuidClaim)?.Value;
+                }
+                catch (Exception)
+                {
+                    userSettings = null;
+                }
+            }
+            
             return userSettings;
         }
 

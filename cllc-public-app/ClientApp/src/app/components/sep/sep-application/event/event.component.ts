@@ -38,6 +38,7 @@ export class EventComponent extends FormBase implements OnInit {
     this.db.getSepApplication(value)
       .then(app => {
         this.sepApplication = app;
+        debugger;
         if (this.form) {
           this.form.patchValue(this.sepApplication);
         }
@@ -96,7 +97,7 @@ export class EventComponent extends FormBase implements OnInit {
   addLocation(location: SepLocation = new SepLocation()) {
     let locationForm = this.fb.group({
       locationPermitNumber: [''],
-      locationName: ['1'],
+      locationName: [''],
       venueType: [''],
       locationMaxGuests: [''],
       eventLocationStreet1: [''],
@@ -192,6 +193,7 @@ export class EventComponent extends FormBase implements OnInit {
 
   save() {
     const data = {
+      id: this._appID,
       ...this.sepApplication,
       lastUpdated: new Date(),
       status: 'unsubmitted',
