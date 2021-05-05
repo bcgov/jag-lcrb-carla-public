@@ -27,6 +27,38 @@ namespace bdd_tests
         }
 
 
+        [And(@"I complete the SEP eligibility form")]
+        public void SpecialEventsPermtsEligibility()
+        {
+            /* 
+            Page Title: Eligibility
+            */
+
+            string responsibleBeverageServiceNumber = "1234567";
+            // string 
+
+            // select 'No' for 'Is this event being hosted at a private residence?'
+            var uiPrivateResidence = ngDriver.FindElement(By.CssSelector("#mat-radio-16 .mat-radio-outer-circle"));
+            uiPrivateResidence.Click();
+
+            // select 'No' for 'Is your event being held on public property?'
+            var uiPublicProperty = ngDriver.FindElement(By.CssSelector(""));
+            uiPublicProperty.Click();
+
+            // select 'No' for 'Is this an event of provincial, national, or international significance?'
+            var uiEventSignificance = ngDriver.FindElement(By.CssSelector(""));
+            uiEventSignificance.Click();
+
+            // select event start date
+
+            // select public/private options re event
+
+            // enter Responsible Beverage Service Number
+
+
+        }
+
+
         [And(@"the SEP Checklist content is displayed")]
         public void SpecialEventsPermtsChecklist()
         {
