@@ -38,7 +38,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             ViewModels.User user = new ViewModels.User();
 
             // determine if we are a new registrant.
-            
+
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             user.id = userSettings.UserId;
             user.contactid = userSettings.ContactId;
@@ -64,7 +64,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     userSettings.IsNewUserRegistration = true;
                 }
             }
-
 
             if (userSettings.IsNewUserRegistration)
             {
@@ -95,8 +94,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 user.email = userSettings.AuthenticatedUser.Email;
                 user.isNewUser = false;
                 user.isEligibilityRequired = EligibilityController.IsEligibilityCheckRequired(user.accountid, _configuration, _dynamicsClient);
+                user.isPoliceRepresentative = ContactController.IsPoliceRepresentative(user.contactid, _configuration, _dynamicsClient);
             }
-
 
             return new JsonResult(user);
         }
