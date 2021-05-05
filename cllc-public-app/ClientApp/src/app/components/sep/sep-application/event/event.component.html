@@ -4,7 +4,7 @@
     <span class="mat-title">{{sepApplication?.eventName}}</span>
 
     <div class="mat-subheading-1">Application number: {{application?.id}}</div>
-    <p>Tell us about your event. and venue location
+    <p>Tell us about your event and venue location.
     </p>
     <span class="error-states">*All fields are required</span>
 
@@ -67,7 +67,7 @@
                                 </section>
                                 <div>
                                     <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip.toggle()"
-                                        matTooltip="For example: community centre, sports field, wedding hall etc."
+                                        matTooltip="For example: community centre, sports field, wedding hall, etc."
                                         #tooltip="matTooltip">
                                     </fa-icon>
                                 </div>
@@ -76,7 +76,7 @@
                                 [valid]="!location.get('venueType').touched || location.get('venueType').valid"
                                 errorMessage="Please enter a value">
                                 <input type="text" formControlName="venueType" class="form-control"
-                                    placeholder="For example, community centre, convention centre, banquet hall">
+                                    placeholder="For example: community centre, convention centre, banquet hall, etc.">
                             </app-field>
                             <app-field label="Address Line 1" [required]="true" [isFullWidth]="true"
                                 [valid]="!location.get('eventLocationStreet1').touched || location.get('eventLocationStreet1').valid"
@@ -129,7 +129,7 @@
                                                         </p>
                                                         <input type="text" formControlName="eventName"
                                                             class="form-control"
-                                                            placeholder="For example, beverage garden, bar area, courtyard, etc.">
+                                                            placeholder="For example: beverage garden, bar area, courtyard, etc.">
                                                     </app-field>
                                                     <app-field
                                                         label="Maximum number of guests in the service area at any given time">
@@ -174,9 +174,9 @@
                                                     seated.
                                                 </p>
                                                 <p>
-                                                    Permitted event times are: Indoor events: 9:00a.m. ? 2:00 a.m. the
-                                                    following day
-                                                    Outdoor events: 9:00a.m. ? 10:00p.m. the same day Under very limited
+                                                    Permitted event times are: Indoor events: 9:00 a.m. - 2:00 a.m. the
+                                                    following day.
+                                                    Outdoor events: 9:00 a.m. - 10:00 p.m. the same day. Under very limited
                                                     circumstances,
                                                     you may receive permission from the Liquor and Cannabis Regulation
                                                     Branch to extend
