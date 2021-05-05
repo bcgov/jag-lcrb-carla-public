@@ -78,14 +78,6 @@ export class BceidConfirmationComponent extends FormBase {
           this.businessTypes = this.businessTypes.sort((a, b) => a.name.localeCompare(b.name));
         }
       });
-
-    featureFlagService.featureOn("Sep")
-      .subscribe(isSepEnabled => {
-        if (isSepEnabled) {
-          this.businessTypes.push({ value: "Police", name: "Police" });
-          this.businessTypes = this.businessTypes.sort((a, b) => a.name.localeCompare(b.name));
-        }
-      });
   }
 
   confirmBceidAccountYes() {

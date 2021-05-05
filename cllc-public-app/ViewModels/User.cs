@@ -19,6 +19,7 @@
         public string accountid { get; set; }
         public string UserType { get; set; }
         public bool isEligibilityRequired { get; set; }
+        public bool isPoliceRepresentative { get; set; }
 
     }
 }
