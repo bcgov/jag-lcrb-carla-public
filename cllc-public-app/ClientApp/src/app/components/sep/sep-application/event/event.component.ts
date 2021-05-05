@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faMapMarkerAlt, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
-import { SepApplication} from '@models/sep-application.model';
+import { SepApplication } from '@models/sep-application.model';
 import { IndexDBService } from '@services/index-db.service';
 import { FormBase } from '@shared/form-base';
 import { distinctUntilChanged } from 'rxjs/operators';
@@ -46,7 +46,7 @@ export class EventComponent extends FormBase implements OnInit {
   };
 
   get locations(): FormArray {
-    return this.form.get('locations') as FormArray;
+    return this.form.get('eventLocations') as FormArray;
   }
 
   constructor(private fb: FormBuilder,
@@ -59,15 +59,15 @@ export class EventComponent extends FormBase implements OnInit {
     this.form = this.fb.group({
       lgIn: [''],
       isAnnualEvent: [''],
-      locations: this.fb.array([]),
+      eventLocations: this.fb.array([]),
     });
 
     if (this.sepApplication) {
       this.form.patchValue(this.sepApplication);
     }
 
-    if (this?.sepApplication?.locations?.length > 0) {
-      this.sepApplication.locations.forEach(loc => {
+    if (this?.sepApplication?.eventLocations?.length > 0) {
+      this.sepApplication.eventLocations.forEach(loc => {
         this.addLocation(loc);
       });
     } else {
@@ -135,7 +135,7 @@ export class EventComponent extends FormBase implements OnInit {
     this.locations.removeAt(locationIndex);
   }
 
-  addEventDate(sched: SepSchedule, area: FormGroup){
+  addEventDate(sched: SepSchedule, area: FormGroup) {
     const eventDates = area.get('eventDates') as FormArray;
     const dates = this.createEventDate(sched);
     eventDates.push(dates);
@@ -158,7 +158,7 @@ export class EventComponent extends FormBase implements OnInit {
     eventDates.removeAt(eventDateIndex);
   }
 
-  addServiceArea(area: SepServiceArea, location: FormGroup){
+  addServiceArea(area: SepServiceArea, location: FormGroup) {
     const areaArray = location.get('serviceAreas') as FormArray;
     const areaFormGroup = this.createServiceArea(area);
     areaArray.push(areaFormGroup);
@@ -166,14 +166,23 @@ export class EventComponent extends FormBase implements OnInit {
 
   createServiceArea(area: SepServiceArea) {
     let areaForm = this.fb.group({
-      description: [''],
-      numAreaMaxGuests: [''],
+      eventName: [''],
+      isBothOutdoorIndoor: [''],
+      isIndoors: [''],
+      isOutdoors: [''],
+      licencedAreaDescription: [''],
+      licencedAreaMaxNumberOfGuests: [''],
+      licencedAreaNumberOfMinors: [''],
+      maximumNumberOfGuests: [''],
+      minorPresent: [''],
+      numberOfMinors: [''],
       setting: [''],
-      isMinorsPresent: [''],
-      numMinors: [''],
+      stateCode: [''],
+      statusCode: [''],
       eventDates: this.fb.array([]),
     });
     areaForm.patchValue(area);
+    
     return areaForm;
   }
 

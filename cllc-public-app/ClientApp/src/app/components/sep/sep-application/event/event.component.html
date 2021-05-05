@@ -36,8 +36,7 @@
             </div>
         </div>
 
-        <app-field label="Is this an annual event?" [required]="true"
-            [valid]="isValidOrNotTouched('isAnnualEvent')"
+        <app-field label="Is this an annual event?" [required]="true" [valid]="isValidOrNotTouched('isAnnualEvent')"
             errorMessage="Please choose a value">
             <mat-radio-group formControlName="isAnnualEvent">
                 <mat-radio-button color="primary" class="mr-3" [value]="true">Yes</mat-radio-button>
@@ -45,7 +44,7 @@
             </mat-radio-group>
         </app-field>
 
-        <section formGroupName="locations">
+        <section formGroupName="eventLocations">
 
             <mat-accordion multi>
                 <mat-expansion-panel [expanded]="true" [formGroupName]="i" class="location-panel"
@@ -73,18 +72,18 @@
                                     </fa-icon>
                                 </div>
                             </div>
-                            <app-field label="Venue Type" [required]="true"  [isFullWidth]="true"
+                            <app-field label="Venue Type" [required]="true" [isFullWidth]="true"
                                 [valid]="!location.get('venueType').touched || location.get('venueType').valid"
                                 errorMessage="Please enter a value">
                                 <input type="text" formControlName="venueType" class="form-control"
                                     placeholder="For example, community centre, convention centre, banquet hall">
                             </app-field>
-                            <app-field label="Address Line 1" [required]="true"  [isFullWidth]="true"
+                            <app-field label="Address Line 1" [required]="true" [isFullWidth]="true"
                                 [valid]="!location.get('eventLocationStreet1').touched || location.get('eventLocationStreet1').valid"
                                 errorMessage="Address line 1 can't be blank">
                                 <input type="text" formControlName="eventLocationStreet1" class="form-control">
                             </app-field>
-                            <app-field label="Address Line 2"  [isFullWidth]="true">
+                            <app-field label="Address Line 2" [isFullWidth]="true">
                                 <input type="text" formControlName="eventLocationStreet2" class="form-control">
                             </app-field>
                             <app-field label="Postal Code" [required]="true"
@@ -94,15 +93,8 @@
                             </app-field>
                             <app-field label="Maximum number of guests at this location at any time" [required]="true"
                                 [valid]="!location.get('locationMaxGuests').touched || location.get('locationMaxGuests').valid"
-                                errorMessage="Name can't be blank">
-                                <mat-radio-group formControlName="locationMaxGuests">
-                                    <mat-radio-button color="primary" class="mr-3" value="indoors">Indoors
-                                    </mat-radio-button>
-                                    <mat-radio-button color="primary" class="mr-3" value="outdoors">Outdoors
-                                    </mat-radio-button>
-                                    <mat-radio-button color="primary" class="mr-3" value="both">Both
-                                    </mat-radio-button>
-                                </mat-radio-group>
+                                errorMessage="Maximum number of guests is required">
+                                <input type="number" class="form-control" formControlName="locationMaxGuests">
                             </app-field>
 
                             <section formGroupName="serviceAreas">
@@ -135,17 +127,18 @@
                                                             i.e.
                                                             beverage garden, bar area, courtyard, etc.
                                                         </p>
-                                                        <input type="text" formControlName="description"
+                                                        <input type="text" formControlName="licencedAreaDescription"
                                                             class="form-control"
                                                             placeholder="For example, beverage garden, bar area, courtyard, etc.">
                                                     </app-field>
                                                     <app-field
                                                         label="Maximum number of guests in the service area at any given time">
-                                                        <input type="text" formControlName="numAreaMaxGuests"
+                                                        <input type="text"
+                                                            formControlName="licencedAreaMaxNumberOfGuests"
                                                             class="form-control">
                                                     </app-field>
                                                     <app-field label="Will minors be in the service area?">
-                                                        <mat-radio-group formControlName="isMinorsPresent">
+                                                        <mat-radio-group formControlName="minorPresent">
                                                             <mat-radio-button color="primary" class="mr-3"
                                                                 [value]="true">Yes
                                                             </mat-radio-button>
@@ -154,6 +147,13 @@
                                                             </mat-radio-button>
                                                         </mat-radio-group>
                                                     </app-field>
+
+                                                    <mat-checkbox color="primary" formControlName="isIndoors">Service area is indoors
+                                                    </mat-checkbox> <br>
+                                                    <mat-checkbox color="primary" formControlName="isOutdoors">Service area is outdoors
+                                                    </mat-checkbox> <br>
+                                                    <mat-checkbox color="primary" formControlName="isBothOutdoorIndoor">Service area is
+                                                        both indoors and outdoors</mat-checkbox>
                                                 </section>
                                                 <div>
                                                     <button mat-raised-button color="warn"
@@ -190,10 +190,13 @@
                                                             <mat-panel-title *ngIf="!isOpen">
                                                                 Event Date: {{ item.get('eventDate')?.value | date}}
                                                                 <br>
-                                                                Event Times: {{ item.get('eventStart').value}} - {{ item.get('eventEnd').value}}
+                                                                Event Times: {{ item.get('eventStart').value}} - {{
+                                                                item.get('eventEnd').value}}
                                                             </mat-panel-title>
                                                             <mat-panel-title *ngIf="!isOpen">
-                                                                Liquor will be served: {{ item.get('serviceStart').value}} - {{ item.get('serviceEnd').value}}
+                                                                Liquor will be served: {{
+                                                                item.get('serviceStart').value}} - {{
+                                                                item.get('serviceEnd').value}}
                                                             </mat-panel-title>
                                                         </mat-expansion-panel-header>
 
@@ -213,7 +216,8 @@
                                                                 </td>
                                                                 <td>
                                                                     <app-field label="From">
-                                                                        <select class="form-control" formControlName="eventStart">
+                                                                        <select class="form-control"
+                                                                            formControlName="eventStart">
                                                                             <option value=""></option>
                                                                             <option [value]="item.value"
                                                                                 *ngFor="let item of timeSlots">
@@ -224,7 +228,8 @@
                                                                 </td>
                                                                 <td>
                                                                     <app-field label="To">
-                                                                        <select class="form-control"  formControlName="eventEnd">
+                                                                        <select class="form-control"
+                                                                            formControlName="eventEnd">
                                                                             <option value=""></option>
                                                                             <option [value]="item.value"
                                                                                 *ngFor="let item of timeSlots">
@@ -244,7 +249,8 @@
                                                                 </td>
                                                                 <td>
                                                                     <app-field label="From">
-                                                                        <select class="form-control"  formControlName="serviceStart">
+                                                                        <select class="form-control"
+                                                                            formControlName="serviceStart">
                                                                             <option value=""></option>
                                                                             <option [value]="item.value"
                                                                                 *ngFor="let item of timeSlots">
@@ -255,7 +261,8 @@
                                                                 </td>
                                                                 <td>
                                                                     <app-field label="To">
-                                                                        <select class="form-control"  formControlName="serviceEnd">
+                                                                        <select class="form-control"
+                                                                            formControlName="serviceEnd">
                                                                             <option value=""></option>
                                                                             <option [value]="item.value"
                                                                                 *ngFor="let item of timeSlots">
