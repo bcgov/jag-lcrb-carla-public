@@ -95,7 +95,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     var newLocation = new MicrosoftDynamicsCRMadoxioSpecialeventlocation()
                     {
-                        AdoxioSpecialeventlocationSchedule = new List<MicrosoftDynamicsCRMadoxioSpecialeventschedule>()
+                        AdoxioSpecialeventlocationLicencedareas = new List<MicrosoftDynamicsCRMadoxioSpecialeventlicencedarea>()
                     };
                     newLocation.CopyValues(location);
                     newSpecialEvent.AdoxioSpecialeventSpecialeventlocations.Add(newLocation);
@@ -124,8 +124,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     //         }
                     //     });
                     // }
-
-
                 });
             }
 

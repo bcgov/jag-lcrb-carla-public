@@ -22,6 +22,6 @@ export class SepApplication {
     isBeerGarden: boolean;
     numMaxGuests: number;
 
-    locations: SepLocation[] = [];
+    eventLocations: SepLocation[] = [];
 
 }
