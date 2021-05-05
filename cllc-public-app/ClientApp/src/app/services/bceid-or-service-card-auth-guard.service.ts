@@ -17,7 +17,8 @@ export class BCeidOrServiceCardAuthGuard implements CanActivate {
     console.log("AuthGuard#canActivate called");
     return this.store.select((s) => s.currentUserState.currentUser)
       .pipe(map(user => {
-        const allowAccess = (user && (user.userType === "Business" || user.userType === "VerifiedIndividual"));
+        // 2021-05-05 - added support for Individual, for Basic BCeID logins.
+        const allowAccess = (user && (user.userType === "Business" || user.userType === "VerifiedIndividual" || user.userType === "Individual"));
         if (!allowAccess) {
           this.router.navigate(["/"]);
         }
