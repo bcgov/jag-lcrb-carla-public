@@ -38,7 +38,6 @@ export class EventComponent extends FormBase implements OnInit {
     this.db.getSepApplication(value)
       .then(app => {
         this.sepApplication = app;
-        debugger;
         if (this.form) {
           this.form.patchValue(this.sepApplication);
         }
