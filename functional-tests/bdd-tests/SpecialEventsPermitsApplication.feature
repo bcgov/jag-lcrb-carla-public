@@ -12,6 +12,7 @@ Scenario: SEP Application (Private Corporation)
     And I complete the special events permits applicant info
     # Next button
     And I click on the Submit button
+    And I complete the SEP eligibility form
     # Next button
     And I click on the Submit button
     # To be completed
