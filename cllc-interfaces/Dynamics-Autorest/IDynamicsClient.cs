@@ -33,27 +33,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        int? Top320 { get; set; }
+        int? Top360 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        int? Skip320 { get; set; }
+        int? Skip360 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        bool? Count320 { get; set; }
+        bool? Count360 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        string Filter320 { get; set; }
+        string Filter360 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        string Search320 { get; set; }
+        string Search360 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client
@@ -86,6 +86,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IAccountspecialevents.
         /// </summary>
         IAccountspecialevents Accountspecialevents { get; }
+
+        /// <summary>
+        /// Gets the IPoliceaccountspecialevents.
+        /// </summary>
+        IPoliceaccountspecialevents Policeaccountspecialevents { get; }
 
         /// <summary>
         /// Gets the IPolicejurisdictionid.
@@ -1098,6 +1103,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IPolicejurisdictionaccount Policejurisdictionaccount { get; }
 
         /// <summary>
+        /// Gets the IPolicejurisdictionspecialevents.
+        /// </summary>
+        IPolicejurisdictionspecialevents Policejurisdictionspecialevents { get; }
+
+        /// <summary>
         /// Gets the IPolicydocuments.
         /// </summary>
         IPolicydocuments Policydocuments { get; }
@@ -1213,6 +1223,111 @@ namespace Gov.Lclb.Cllb.Interfaces
         IInvestigationenforcement Investigationenforcement { get; }
 
         /// <summary>
+        /// Gets the ISepdrinksalesforecasts.
+        /// </summary>
+        ISepdrinksalesforecasts Sepdrinksalesforecasts { get; }
+
+        /// <summary>
+        /// Gets the ISepdrinksalesforecastasyncoperations.
+        /// </summary>
+        ISepdrinksalesforecastasyncoperations Sepdrinksalesforecastasyncoperations { get; }
+
+        /// <summary>
+        /// Gets the ISepdrinksalesforecastbulkdeletefailures.
+        /// </summary>
+        ISepdrinksalesforecastbulkdeletefailures Sepdrinksalesforecastbulkdeletefailures { get; }
+
+        /// <summary>
+        /// Gets the ISepdrinksalesforecastduplicatebaserecord.
+        /// </summary>
+        ISepdrinksalesforecastduplicatebaserecord Sepdrinksalesforecastduplicatebaserecord { get; }
+
+        /// <summary>
+        /// Gets the ISepdrinksalesforecastduplicatematchingrecord.
+        /// </summary>
+        ISepdrinksalesforecastduplicatematchingrecord Sepdrinksalesforecastduplicatematchingrecord { get; }
+
+        /// <summary>
+        /// Gets the ISepdrinksalesforecastmailboxtrackingfolders.
+        /// </summary>
+        ISepdrinksalesforecastmailboxtrackingfolders Sepdrinksalesforecastmailboxtrackingfolders { get; }
+
+        /// <summary>
+        /// Gets the ISepdrinksalesforecastprincipalobjectattributeaccesses.
+        /// </summary>
+        ISepdrinksalesforecastprincipalobjectattributeaccesses Sepdrinksalesforecastprincipalobjectattributeaccesses { get; }
+
+        /// <summary>
+        /// Gets the ISepdrinksalesforecastprocesssession.
+        /// </summary>
+        ISepdrinksalesforecastprocesssession Sepdrinksalesforecastprocesssession { get; }
+
+        /// <summary>
+        /// Gets the ISepdrinksalesforecastsyncerrors.
+        /// </summary>
+        ISepdrinksalesforecastsyncerrors Sepdrinksalesforecastsyncerrors { get; }
+
+        /// <summary>
+        /// Gets the ISpecialevent.
+        /// </summary>
+        ISpecialevent Specialevent { get; }
+
+        /// <summary>
+        /// Gets the IType.
+        /// </summary>
+        IType Type { get; }
+
+        /// <summary>
+        /// Gets the ISepdrinktypes.
+        /// </summary>
+        ISepdrinktypes Sepdrinktypes { get; }
+
+        /// <summary>
+        /// Gets the ISepdrinktypeadoxiosepdrinksalesforecasttype.
+        /// </summary>
+        ISepdrinktypeadoxiosepdrinksalesforecasttype Sepdrinktypeadoxiosepdrinksalesforecasttype { get; }
+
+        /// <summary>
+        /// Gets the ISepdrinktypeasyncoperations.
+        /// </summary>
+        ISepdrinktypeasyncoperations Sepdrinktypeasyncoperations { get; }
+
+        /// <summary>
+        /// Gets the ISepdrinktypebulkdeletefailures.
+        /// </summary>
+        ISepdrinktypebulkdeletefailures Sepdrinktypebulkdeletefailures { get; }
+
+        /// <summary>
+        /// Gets the ISepdrinktypeduplicatebaserecord.
+        /// </summary>
+        ISepdrinktypeduplicatebaserecord Sepdrinktypeduplicatebaserecord { get; }
+
+        /// <summary>
+        /// Gets the ISepdrinktypeduplicatematchingrecord.
+        /// </summary>
+        ISepdrinktypeduplicatematchingrecord Sepdrinktypeduplicatematchingrecord { get; }
+
+        /// <summary>
+        /// Gets the ISepdrinktypemailboxtrackingfolders.
+        /// </summary>
+        ISepdrinktypemailboxtrackingfolders Sepdrinktypemailboxtrackingfolders { get; }
+
+        /// <summary>
+        /// Gets the ISepdrinktypeprincipalobjectattributeaccesses.
+        /// </summary>
+        ISepdrinktypeprincipalobjectattributeaccesses Sepdrinktypeprincipalobjectattributeaccesses { get; }
+
+        /// <summary>
+        /// Gets the ISepdrinktypeprocesssession.
+        /// </summary>
+        ISepdrinktypeprocesssession Sepdrinktypeprocesssession { get; }
+
+        /// <summary>
+        /// Gets the ISepdrinktypesyncerrors.
+        /// </summary>
+        ISepdrinktypesyncerrors Sepdrinktypesyncerrors { get; }
+
+        /// <summary>
         /// Gets the IServiceareas.
         /// </summary>
         IServiceareas Serviceareas { get; }
@@ -1253,6 +1368,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         ISpecialeventlocations Specialeventlocations { get; }
 
         /// <summary>
+        /// Gets the ISpecialeventlocationinspections.
+        /// </summary>
+        ISpecialeventlocationinspections Specialeventlocationinspections { get; }
+
+        /// <summary>
         /// Gets the ISpecialeventnotes.
         /// </summary>
         ISpecialeventnotes Specialeventnotes { get; }
@@ -1268,14 +1388,39 @@ namespace Gov.Lclb.Cllb.Interfaces
         IInspector Inspector { get; }
 
         /// <summary>
+        /// Gets the ILcrbrepresentativeid.
+        /// </summary>
+        ILcrbrepresentativeid Lcrbrepresentativeid { get; }
+
+        /// <summary>
         /// Gets the ILocalgovernmentid.
         /// </summary>
         ILocalgovernmentid Localgovernmentid { get; }
 
         /// <summary>
+        /// Gets the IPoliceaccountid.
+        /// </summary>
+        IPoliceaccountid Policeaccountid { get; }
+
+        /// <summary>
+        /// Gets the IPolicerepresentativeid.
+        /// </summary>
+        IPolicerepresentativeid Policerepresentativeid { get; }
+
+        /// <summary>
+        /// Gets the ISpecialeventadoxiosepdrinksalesforecastspecialevent.
+        /// </summary>
+        ISpecialeventadoxiosepdrinksalesforecastspecialevent Specialeventadoxiosepdrinksalesforecastspecialevent { get; }
+
+        /// <summary>
         /// Gets the ISpecialeventinspection.
         /// </summary>
         ISpecialeventinspection Specialeventinspection { get; }
+
+        /// <summary>
+        /// Gets the ISpecialeventinvoices.
+        /// </summary>
+        ISpecialeventinvoices Specialeventinvoices { get; }
 
         /// <summary>
         /// Gets the ISpecialeventschedules.
@@ -1423,6 +1568,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         IRegardingobjectidadoxiorelatedlicence Regardingobjectidadoxiorelatedlicence { get; }
 
         /// <summary>
+        /// Gets the IRegardingobjectidadoxiosepdrinksalesforecast.
+        /// </summary>
+        IRegardingobjectidadoxiosepdrinksalesforecast Regardingobjectidadoxiosepdrinksalesforecast { get; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiosepdrinktype.
+        /// </summary>
+        IRegardingobjectidadoxiosepdrinktype Regardingobjectidadoxiosepdrinktype { get; }
+
+        /// <summary>
         /// Gets the IRegardingobjectidadoxiostatuscounter.
         /// </summary>
         IRegardingobjectidadoxiostatuscounter Regardingobjectidadoxiostatuscounter { get; }
@@ -1473,6 +1628,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         IBusinessunitadoxiorelatedlicence Businessunitadoxiorelatedlicence { get; }
 
         /// <summary>
+        /// Gets the IBusinessunitadoxiosepdrinksalesforecast.
+        /// </summary>
+        IBusinessunitadoxiosepdrinksalesforecast Businessunitadoxiosepdrinksalesforecast { get; }
+
+        /// <summary>
+        /// Gets the IBusinessunitadoxiosepdrinktype.
+        /// </summary>
+        IBusinessunitadoxiosepdrinktype Businessunitadoxiosepdrinktype { get; }
+
+        /// <summary>
         /// Gets the IBusinessunitadoxiostatuscounter.
         /// </summary>
         IBusinessunitadoxiostatuscounter Businessunitadoxiostatuscounter { get; }
@@ -1496,6 +1661,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IContactspecialevents.
         /// </summary>
         IContactspecialevents Contactspecialevents { get; }
+
+        /// <summary>
+        /// Gets the IPolicerepresentativespecialevents.
+        /// </summary>
+        IPolicerepresentativespecialevents Policerepresentativespecialevents { get; }
 
         /// <summary>
         /// Gets the IBaserecordidadoxioadminactivity.
@@ -1533,6 +1703,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         IBaserecordidadoxiorelatedlicence Baserecordidadoxiorelatedlicence { get; }
 
         /// <summary>
+        /// Gets the IBaserecordidadoxiosepdrinksalesforecast.
+        /// </summary>
+        IBaserecordidadoxiosepdrinksalesforecast Baserecordidadoxiosepdrinksalesforecast { get; }
+
+        /// <summary>
+        /// Gets the IBaserecordidadoxiosepdrinktype.
+        /// </summary>
+        IBaserecordidadoxiosepdrinktype Baserecordidadoxiosepdrinktype { get; }
+
+        /// <summary>
         /// Gets the IDuplicaterecordidadoxioadminactivity.
         /// </summary>
         IDuplicaterecordidadoxioadminactivity Duplicaterecordidadoxioadminactivity { get; }
@@ -1568,6 +1748,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         IDuplicaterecordidadoxiorelatedlicence Duplicaterecordidadoxiorelatedlicence { get; }
 
         /// <summary>
+        /// Gets the IDuplicaterecordidadoxiosepdrinksalesforecast.
+        /// </summary>
+        IDuplicaterecordidadoxiosepdrinksalesforecast Duplicaterecordidadoxiosepdrinksalesforecast { get; }
+
+        /// <summary>
+        /// Gets the IDuplicaterecordidadoxiosepdrinktype.
+        /// </summary>
+        IDuplicaterecordidadoxiosepdrinktype Duplicaterecordidadoxiosepdrinktype { get; }
+
+        /// <summary>
         /// Gets the IEntitydefinitions.
         /// </summary>
         IEntitydefinitions Entitydefinitions { get; }
@@ -1576,6 +1766,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IGlobaloptionsetdefinitions.
         /// </summary>
         IGlobaloptionsetdefinitions Globaloptionsetdefinitions { get; }
+
+        /// <summary>
+        /// Gets the IEventlocationid.
+        /// </summary>
+        IEventlocationid Eventlocationid { get; }
 
         /// <summary>
         /// Gets the IInspectionadditionalinspectors.
@@ -1663,6 +1858,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         IObjectidadoxiorelatedlicence Objectidadoxiorelatedlicence { get; }
 
         /// <summary>
+        /// Gets the IObjectidadoxiosepdrinksalesforecast.
+        /// </summary>
+        IObjectidadoxiosepdrinksalesforecast Objectidadoxiosepdrinksalesforecast { get; }
+
+        /// <summary>
+        /// Gets the IObjectidadoxiosepdrinktype.
+        /// </summary>
+        IObjectidadoxiosepdrinktype Objectidadoxiosepdrinktype { get; }
+
+        /// <summary>
         /// Gets the IObjectidadoxiostatuscounter.
         /// </summary>
         IObjectidadoxiostatuscounter Objectidadoxiostatuscounter { get; }
@@ -1706,6 +1911,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IInvestigationsmanagerregions.
         /// </summary>
         IInvestigationsmanagerregions Investigationsmanagerregions { get; }
+
+        /// <summary>
+        /// Gets the ILcrbrepresentativespecialevents.
+        /// </summary>
+        ILcrbrepresentativespecialevents Lcrbrepresentativespecialevents { get; }
 
         /// <summary>
         /// Gets the ISystemuseradoxiospecialeventinspector.
@@ -1893,6 +2103,46 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILkadoxiorelatedlicencemodifiedonbehalfby Lkadoxiorelatedlicencemodifiedonbehalfby { get; }
 
         /// <summary>
+        /// Gets the ILkadoxiosepdrinksalesforecastcreatedby.
+        /// </summary>
+        ILkadoxiosepdrinksalesforecastcreatedby Lkadoxiosepdrinksalesforecastcreatedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxiosepdrinksalesforecastcreatedonbehalfby.
+        /// </summary>
+        ILkadoxiosepdrinksalesforecastcreatedonbehalfby Lkadoxiosepdrinksalesforecastcreatedonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxiosepdrinksalesforecastmodifiedby.
+        /// </summary>
+        ILkadoxiosepdrinksalesforecastmodifiedby Lkadoxiosepdrinksalesforecastmodifiedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxiosepdrinksalesforecastmodifiedonbehalfby.
+        /// </summary>
+        ILkadoxiosepdrinksalesforecastmodifiedonbehalfby Lkadoxiosepdrinksalesforecastmodifiedonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxiosepdrinktypecreatedby.
+        /// </summary>
+        ILkadoxiosepdrinktypecreatedby Lkadoxiosepdrinktypecreatedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxiosepdrinktypecreatedonbehalfby.
+        /// </summary>
+        ILkadoxiosepdrinktypecreatedonbehalfby Lkadoxiosepdrinktypecreatedonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxiosepdrinktypemodifiedby.
+        /// </summary>
+        ILkadoxiosepdrinktypemodifiedby Lkadoxiosepdrinktypemodifiedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxiosepdrinktypemodifiedonbehalfby.
+        /// </summary>
+        ILkadoxiosepdrinktypemodifiedonbehalfby Lkadoxiosepdrinktypemodifiedonbehalfby { get; }
+
+        /// <summary>
         /// Gets the ILkadoxiostatuscountercreatedby.
         /// </summary>
         ILkadoxiostatuscountercreatedby Lkadoxiostatuscountercreatedby { get; }
@@ -1958,6 +2208,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         IUseradoxiorelatedlicence Useradoxiorelatedlicence { get; }
 
         /// <summary>
+        /// Gets the IUseradoxiosepdrinksalesforecast.
+        /// </summary>
+        IUseradoxiosepdrinksalesforecast Useradoxiosepdrinksalesforecast { get; }
+
+        /// <summary>
+        /// Gets the IUseradoxiosepdrinktype.
+        /// </summary>
+        IUseradoxiosepdrinktype Useradoxiosepdrinktype { get; }
+
+        /// <summary>
         /// Gets the IUseradoxiostatuscounter.
         /// </summary>
         IUseradoxiostatuscounter Useradoxiostatuscounter { get; }
@@ -2006,6 +2266,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ITeamadoxiorelatedlicence.
         /// </summary>
         ITeamadoxiorelatedlicence Teamadoxiorelatedlicence { get; }
+
+        /// <summary>
+        /// Gets the ITeamadoxiosepdrinksalesforecast.
+        /// </summary>
+        ITeamadoxiosepdrinksalesforecast Teamadoxiosepdrinksalesforecast { get; }
+
+        /// <summary>
+        /// Gets the ITeamadoxiosepdrinktype.
+        /// </summary>
+        ITeamadoxiosepdrinktype Teamadoxiosepdrinktype { get; }
 
         /// <summary>
         /// Gets the ITeamadoxiostatuscounter.

@@ -421,27 +421,6 @@ namespace Gov.Lclb.Cllb.Public
                 }
 
             }
-#else
-            // seed for newsletter.
-
-            using (IServiceScope serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-            {
-                log.LogDebug("Fetching the application's MS Dynamics interface ...");
-                var httpClientFactory = serviceScope.ServiceProvider.GetService<System.Net.Http.IHttpClientFactory>();
-
-                
-                var httpClient = httpClientFactory.CreateClient("Dynamics");
-
-                IDynamicsClient dynamicsClient = new DynamicsClient(httpClient, _configuration);
-
-
-                // run the database seeders
-                log.LogDebug("Adding/Updating seed data ...");
-                Seeders.SeedFactory<AppDbContext> seederFactory = new Seeders.SeedFactory<AppDbContext>(_configuration, env, loggerFactory, dynamicsClient);
-                seederFactory.Seed(null);
-                log.LogDebug("Seeding operations are complete.");
-            }
-
 #endif
 
 

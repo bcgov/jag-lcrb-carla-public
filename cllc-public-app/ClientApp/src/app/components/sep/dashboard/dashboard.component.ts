@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { filter } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
 import { User } from '@models/user.model';
+import { Account } from '@models/account.model';
 import { StarterChecklistComponent } from '@components/sep/starter-checklist/starter-checklist.component';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-sep-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })

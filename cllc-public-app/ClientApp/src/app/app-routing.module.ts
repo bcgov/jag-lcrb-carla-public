@@ -88,6 +88,8 @@ import { SepApplicationComponent } from "@components/sep/sep-application/sep-app
 import { MyApplicationsComponent } from "@components/sep/my-applications/my-applications.component";
 import { ServiceCardProfileComponent } from "@components/servicecard-profile/servicecard-profile.component";
 import { DrinkPlannerComponent } from "@components/sep/drink-planner/drink-planner.component";
+import { DashboardComponent as PoliceDashboardComponent } from "@components/police-representative/dashboard/dashboard.component";
+import { SepHomeComponent } from "@components/sep/home/home.component";
 
 const routes: Routes = [
   {
@@ -102,8 +104,8 @@ const routes: Routes = [
     data: { feature: "Sep" },
   },
   {
-    path: "sep/dashboard",
-    component: SepDashboardComponent,
+    path: "sep/dashboard",  // this route displays either the regular SEP dashboard or the Police dashboard based on user role
+    component: SepHomeComponent,
     canActivate: [BCeidOrServiceCardAuthGuard, FeatureGuard],
     data: { feature: "Sep" }
   },
