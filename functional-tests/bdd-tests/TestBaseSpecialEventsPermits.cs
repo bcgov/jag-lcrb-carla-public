@@ -35,7 +35,7 @@ namespace bdd_tests
             */
 
             string responsibleBeverageServiceNumber = "1234567";
-            // string 
+            string occasionOfEvent = "Description of event occasion.";
 
             // select 'No' for 'Is this event being hosted at a private residence?'
             var uiPrivateResidence = ngDriver.FindElement(By.CssSelector("#mat-radio-16 .mat-radio-outer-circle"));
@@ -51,10 +51,20 @@ namespace bdd_tests
 
             // select event start date
 
+
+            SharedCalendarDate();
+
             // select public/private options re event
+
+
 
             // enter Responsible Beverage Service Number
 
+            // enter the occasion of the event
+
+            // select 'No' for 'Are you charging an event admission price?'
+
+            // select 'No' for 'Is there currently a liquor licence at your event location?'
 
         }
 
