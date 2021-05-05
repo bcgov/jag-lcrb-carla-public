@@ -1,0 +1,2 @@
+<app-sep-dashboard *ngIf="dataLoaded && !currentUser.isPoliceRepresentative"></app-sep-dashboard>
+<app-police-dashboard *ngIf="dataLoaded && currentUser.isPoliceRepresentative"></app-police-dashboard>
