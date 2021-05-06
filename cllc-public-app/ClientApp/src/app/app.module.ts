@@ -300,6 +300,7 @@ import { PoliceNavComponent } from "@components/navbar/police-nav/police-nav.com
 import { DashboardComponent as PoliceDashboardComponent } from "@components/police-representative/dashboard/dashboard.component";
 import { SepHomeComponent } from "@components/sep/home/home.component";
 import { ApprovalSettingsComponent } from "@components/police-representative/approval-settings/approval-settings.component";
+import { PoliceAuthGuard } from "@services/police-auth-guard.service";
 
 
 @NgModule({
@@ -610,6 +611,7 @@ import { ApprovalSettingsComponent } from "@components/police-representative/app
     LEConnectionsDataService,
     SpecialEventsDataService,
     BCeidOrServiceCardAuthGuard,
+    PoliceAuthGuard,
     {
       provide: APP_INITIALIZER,
       useFactory: (featureFlagService: FeatureFlagService) => function () {
