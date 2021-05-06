@@ -299,6 +299,7 @@ import { UserNavComponent } from "@components/navbar/user-nav/user-nav.component
 import { PoliceNavComponent } from "@components/navbar/police-nav/police-nav.component";
 import { DashboardComponent as PoliceDashboardComponent } from "@components/police-representative/dashboard/dashboard.component";
 import { SepHomeComponent } from "@components/sep/home/home.component";
+import { ApprovalSettingsComponent } from "@components/police-representative/approval-settings/approval-settings.component";
 
 
 @NgModule({
@@ -470,6 +471,7 @@ import { SepHomeComponent } from "@components/sep/home/home.component";
     PoliceNavComponent,
     PoliceDashboardComponent,
     SepHomeComponent,
+    ApprovalSettingsComponent,
   ],
   imports: [
     AppRoutingModule,
