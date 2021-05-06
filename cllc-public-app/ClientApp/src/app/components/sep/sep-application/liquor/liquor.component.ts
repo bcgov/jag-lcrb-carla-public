@@ -66,16 +66,13 @@ export class LiquorComponent implements OnInit {
   saveToAPI() {
     this.db.getSepApplication(this.applicationId)
       .then((appData) => {
-        debugger;
         this.sepDataService.createSepApplication(appData)
           .subscribe(result => {
-            debugger;
           });
       });
   }
 
   save() {
-    debugger;
     this.saveToDB();
     this.saveToAPI();
   }

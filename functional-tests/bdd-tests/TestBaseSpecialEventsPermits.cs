@@ -27,6 +27,54 @@ namespace bdd_tests
         }
 
 
+        [And(@"I complete the SEP eligibility form")]
+        public void SpecialEventsPermtsEligibility()
+        {
+            /* 
+            Page Title: Eligibility
+            */
+
+            string responsibleBeverageServiceNumber = "1234567";
+            string occasionOfEvent = "Description of event occasion.";
+
+            // select 'No' for 'Is this event being hosted at a private residence?'
+            var uiPrivateResidence = ngDriver.FindElement(By.CssSelector("#mat-radio-16 .mat-radio-outer-circle"));
+            uiPrivateResidence.Click();
+
+            // select 'No' for 'Is your event being held on public property?'
+            var uiPublicProperty = ngDriver.FindElement(By.CssSelector("#mat-radio-19 .mat-radio-outer-circle"));
+            uiPublicProperty.Click();
+
+            // select 'No' for 'Is this an event of provincial, national, or international significance?'
+            // * already selected 'No' by default
+
+            // select event start date
+            //eventStartDate
+            var uiEventStartDate = ngDriver.FindElement(By.CssSelector(""));
+            uiEventStartDate.Click();
+
+            SharedCalendarDate();
+
+            // select public/private options re event
+
+            // enter Responsible Beverage Service Number
+            var uiResponsibleBeverageServiceNumber = ngDriver.FindElement(By.CssSelector(""));
+            uiResponsibleBeverageServiceNumber.SendKeys(responsibleBeverageServiceNumber);
+
+            // enter the occasion of the event
+            var uiEventOccasion = ngDriver.FindElement(By.CssSelector(""));
+            uiEventOccasion.SendKeys(occasionOfEvent);
+
+            // select 'No' for 'Are you charging an event admission price?'
+            var uiEventAdmissionPrice = ngDriver.FindElement(By.CssSelector(""));
+            uiEventAdmissionPrice.Click();
+            
+            // select 'No' for 'Is there currently a liquor licence at your event location?'
+            var uiCurrentLiquorLicence = ngDriver.FindElement(By.CssSelector(""));
+            uiCurrentLiquorLicence.Click();
+        }
+
+
         [And(@"the SEP Checklist content is displayed")]
         public void SpecialEventsPermtsChecklist()
         {
