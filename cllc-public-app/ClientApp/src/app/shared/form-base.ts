@@ -26,6 +26,7 @@ export class ApplicationHTMLContent {
   capacityArea: string;
   signage: string;
   grocery: string;
+  patio: string;
   CannabisAssociateContent: string;
   LiquorPHSContent: string;
   paymentConfirmation: string;
@@ -63,7 +64,8 @@ export class FormBase implements OnDestroy {
         grocery: this.getApplicationContent('Grocery'),
         CannabisAssociateContent: this.getApplicationContent('CannabisAssociateContent'),
         LiquorPHSContent: this.getApplicationContent('LiquorPHSContent'),
-        paymentConfirmation: this.getApplicationContent('LicencepaymentConfirmation')
+        paymentConfirmation: this.getApplicationContent('LicencepaymentConfirmation'),
+        patio: this.getApplicationContent('Patio')
       };
     }
   }
