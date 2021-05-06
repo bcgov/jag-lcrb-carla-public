@@ -7,34 +7,43 @@ namespace Gov.Lclb.Cllb.Public.Models
     /// <summary>
     /// ViewModel transforms.
     /// </summary>
-    public static class SepDrinkTypeExtensions
+    public static class SepEventDatesExtensions
     {
         /// <summary>
         /// Convert a given voteQuestion to a ViewModel
         /// </summary>
-        public static ViewModels.SepDrinkType ToViewModel(this MicrosoftDynamicsCRMadoxioSepdrinktype drinkType)
+        public static ViewModels.SepEventDates ToViewModel(this MicrosoftDynamicsCRMadoxioSpecialeventschedule eventDates)
         {
-            ViewModels.SepDrinkType result = null;
-            if (drinkType != null)
+            ViewModels.SepEventDates result = null;
+            if (eventDates != null)
             {
-                result = new ViewModels.SepDrinkType
+                result = new ViewModels.SepEventDates
                 {
-                    Id = drinkType.AdoxioSepdrinktypeid,
-                    UnitSize = drinkType.AdoxioUnitsize,
-                    BulkSize = drinkType.AdoxioBulksize,
-                    BulkMultiplier = drinkType.AdoxioBulkmultiplier,
-                    CostPerServing = drinkType.AdoxioCostperserving,
-                    IsHomeMade = drinkType.AdoxioIshomemade,
-                    Group = (ViewModels.DrinkTypeGroup?)drinkType.AdoxioGroup,
-                    StorageMethod = (ViewModels.StorageMethod?)drinkType.AdoxioStoragemethod,
-                    ServingMethod = (ViewModels.ServingMethod?)drinkType.AdoxioServingmethod,
-                    ServingSizeMl = drinkType.AdoxioServingsizeml,
-                    StoraheSizeMl = drinkType.AdoxioStoragesizeml,
+                    Id = eventDates.AdoxioSpecialeventscheduleid,
+                    SpecialEventId = eventDates._adoxioSpecialeventidValue,
+                    LocationId = eventDates._adoxioSpecialeventlocationidValue,
+                    EventStart = eventDates.AdoxioEventstart,
+                    EventEnd = eventDates.AdoxioEventend,
+                    ServiceStart = eventDates.AdoxioServicestart,
+                    ServiceEnd = eventDates.AdoxioServiceend,
                 };
 
             }
             return result;
         }
+
+
+        public static void CopyValues(this MicrosoftDynamicsCRMadoxioSpecialeventschedule to, ViewModels.SepEventDates from)
+        {
+            // to.AdoxioSpecialeventscheduleid = from.Id;
+            to._adoxioSpecialeventidValue = from.SpecialEventId;
+            to._adoxioSpecialeventlocationidValue = from.LocationId;
+            to.AdoxioEventstart = from.EventStart;
+            to.AdoxioEventend = from.EventEnd;
+            to.AdoxioServicestart = from.ServiceStart;
+            to.AdoxioServiceend = from.ServiceEnd;
+        }
+
+
     }
 }
-

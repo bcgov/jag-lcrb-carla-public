@@ -7,44 +7,36 @@ namespace Gov.Lclb.Cllb.Public.Models
     /// <summary>
     /// ViewModel transforms.
     /// </summary>
-    public static class SepEventDatesExtensions
+    public static class SepDrinkTypeExtensions
     {
         /// <summary>
         /// Convert a given voteQuestion to a ViewModel
         /// </summary>
-        public static ViewModels.SepEventDates ToViewModel(this MicrosoftDynamicsCRMadoxioSpecialeventschedule eventDates)
+        public static ViewModels.SepDrinkType ToViewModel(this MicrosoftDynamicsCRMadoxioSepdrinktype drinkType)
         {
-            ViewModels.SepEventDates result = null;
-            if (eventDates != null)
+            ViewModels.SepDrinkType result = null;
+            if (drinkType != null)
             {
-                result = new ViewModels.SepEventDates
+                result = new ViewModels.SepDrinkType
                 {
-                    Id = eventDates.AdoxioSpecialeventscheduleid,
-                    SpecialEventId = eventDates._adoxioSpecialeventidValue,
-                    LocationId = eventDates._adoxioSpecialeventlocationidValue,
-                    EventStart = eventDates.AdoxioEventstart,
-                    EventEnd = eventDates.AdoxioEventend,
-                    ServiceStart = eventDates.AdoxioServicestart,
-                    ServiceEnd = eventDates.AdoxioServiceend,
+                    Id = drinkType.AdoxioSepdrinktypeid,
+                    UnitSize = drinkType.AdoxioUnitsize,
+                    BulkSize = drinkType.AdoxioBulksize,
+                    BulkMultiplier = drinkType.AdoxioBulkmultiplier,
+                    CostPerServing = drinkType.AdoxioCostperserving,
+                    IsHomeMade = drinkType.AdoxioIshomemade,
+                    Group = (ViewModels.DrinkTypeGroup?)drinkType.AdoxioGroup,
+                    StorageMethod = (ViewModels.StorageMethod?)drinkType.AdoxioStoragemethod,
+                    ServingMethod = (ViewModels.ServingMethod?)drinkType.AdoxioServingmethod,
+                    ServingSizeMl = drinkType.AdoxioServingsizeml,
+                    StoraheSizeMl = drinkType.AdoxioStoragesizeml,
                 };
 
             }
             return result;
         }
-
-
-        public static void CopyValues(this MicrosoftDynamicsCRMadoxioSpecialeventschedule to, ViewModels.SepEventDates from)
-        {
-            // to.AdoxioSpecialeventscheduleid = from.Id;
-            to._adoxioSpecialeventidValue = from.SpecialEventId;
-            to._adoxioSpecialeventlocationidValue = from.LocationId;
-            to.AdoxioEventstart = from.EventStart;
-            to.AdoxioEventend = from.EventEnd;
-            to.AdoxioServicestart = from.ServiceStart;
-            to.AdoxioServiceend = from.ServiceEnd;
-        }
-
-
     }
 }
+
+
 
