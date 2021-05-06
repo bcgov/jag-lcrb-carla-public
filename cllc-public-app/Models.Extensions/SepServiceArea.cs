@@ -43,7 +43,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
         public static void CopyValues(this MicrosoftDynamicsCRMadoxioSpecialeventlicencedarea to, ViewModels.SepServiceArea from)
         {
-            to.AdoxioSpecialeventlicencedareaid = from.Id;
+            // to.AdoxioSpecialeventlicencedareaid = from.Id;
             to._adoxioSpecialeventlocationidValue = from.SepLocationId;
             to._adoxioSpecialeventidValue = from.SpecialEventId;
             to.AdoxioMinorpresent = from.MinorPresent;

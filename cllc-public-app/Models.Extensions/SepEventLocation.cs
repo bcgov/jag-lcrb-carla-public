@@ -59,7 +59,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 return;
             }
 
-            to.AdoxioSpecialeventlocationid = from.Id;
+            // to.AdoxioSpecialeventlocationid = from.Id;
             to._adoxioSpecialeventidValue = from.SpecialEventId;
             to.AdoxioLocationdescription = from.LocationDescription;
             to.AdoxioEventlocationcity = from.EventLocationCity;
