@@ -24,7 +24,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         Grocery = 845280016,
         CannabisAssociateContent = 845280017,
         LiquorPHSContent = 845280018,
-        LicencepaymentConfirmation = 845280004
+        LicencepaymentConfirmation = 845280004,
+        Patio = 845280019,
     
     }
     public class ApplicationTypeContent
