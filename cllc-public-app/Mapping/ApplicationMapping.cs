@@ -121,8 +121,26 @@ namespace Gov.Lclb.Cllb.Public.Mapping
                 {"adoxio_hasotherproducts", new FieldMapping("hasOtherProducts", true)},
                 {"adoxio_hasadditionalservices", new FieldMapping("hasAdditionalServices", true)},
                 {"adoxio_storeopendate", new FieldMapping("storeOpenDate", true)},
-                {"adoxio_confirmliquorsalesisnotprimarybusiness", new FieldMapping("confirmLiquorSalesIsNotPrimaryBusiness", true)}
-
+                {"adoxio_confirmliquorsalesisnotprimarybusiness", new FieldMapping("confirmLiquorSalesIsNotPrimaryBusiness", true)},
+                // patio application fields
+                {"adoxio_ispatioboundingsufficientforcontrol", new FieldMapping("isBoundingSufficientForControl", true)},
+                {"adoxio_ispatioboundingsufficienttodefinearea", new FieldMapping("isBoundingSufficientToDefine", true)},
+                {"adoxio_isadequatecareandcontroloverthepatio", new FieldMapping("isAdequateCare", true)},
+                {"adoxio_ispatioincompliancewithbylaws", new FieldMapping("isInCompliance", true)},
+                {"adoxio_statusofconstruction", new FieldMapping("statusOfConstruction", true)},
+                {"adoxio_ispatiotesa", new FieldMapping("isTESA", true)},
+                {"adoxio_m01", new FieldMapping("isMonth01", false)},
+                {"adoxio_m02", new FieldMapping("isMonth02", false)},
+                {"adoxio_m03", new FieldMapping("isMonth03", false)},
+                {"adoxio_m04", new FieldMapping("isMonth04", false)},
+                {"adoxio_m05", new FieldMapping("isMonth05", false)},
+                {"adoxio_m06", new FieldMapping("isMonth06", false)},
+                {"adoxio_m07", new FieldMapping("isMonth07", false)},
+                {"adoxio_m08", new FieldMapping("isMonth08", false)},
+                {"adoxio_m09", new FieldMapping("isMonth09", false)},
+                {"adoxio_m10", new FieldMapping("isMonth10", false)},
+                {"adoxio_m11", new FieldMapping("isMonth11", false)},
+                {"adoxio_m12", new FieldMapping("isMonth12", false)}
         };
         }
     }
