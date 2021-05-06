@@ -1,11 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormArray, AbstractControl } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faMapMarkerAlt, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
-import { SepApplication} from '@models/sep-application.model';
+import { SepApplication } from '@models/sep-application.model';
 import { IndexDBService } from '@services/index-db.service';
 import { FormBase } from '@shared/form-base';
-import { distinctUntilChanged } from 'rxjs/operators';
 import { Account } from '@models/account.model';
 import { SepLocation } from '@models/sep-location.model';
 import { SepSchedule } from '@models/sep-schedule.model';
@@ -38,7 +37,6 @@ export class EventComponent extends FormBase implements OnInit {
     this.db.getSepApplication(value)
       .then(app => {
         this.sepApplication = app;
-        debugger;
         if (this.form) {
           this.form.patchValue(this.sepApplication);
         }
@@ -46,7 +44,7 @@ export class EventComponent extends FormBase implements OnInit {
   };
 
   get locations(): FormArray {
-    return this.form.get('locations') as FormArray;
+    return this.form.get('eventLocations') as FormArray;
   }
 
   constructor(private fb: FormBuilder,
@@ -59,15 +57,15 @@ export class EventComponent extends FormBase implements OnInit {
     this.form = this.fb.group({
       lgIn: [''],
       isAnnualEvent: [''],
-      locations: this.fb.array([]),
+      eventLocations: this.fb.array([]),
     });
 
     if (this.sepApplication) {
       this.form.patchValue(this.sepApplication);
     }
 
-    if (this?.sepApplication?.locations?.length > 0) {
-      this.sepApplication.locations.forEach(loc => {
+    if (this?.sepApplication?.eventLocations?.length > 0) {
+      this.sepApplication.eventLocations.forEach(loc => {
         this.addLocation(loc);
       });
     } else {
@@ -135,7 +133,7 @@ export class EventComponent extends FormBase implements OnInit {
     this.locations.removeAt(locationIndex);
   }
 
-  addEventDate(sched: SepSchedule, area: FormGroup){
+  addEventDate(sched: SepSchedule, area: FormGroup) {
     const eventDates = area.get('eventDates') as FormArray;
     const dates = this.createEventDate(sched);
     eventDates.push(dates);
@@ -158,7 +156,7 @@ export class EventComponent extends FormBase implements OnInit {
     eventDates.removeAt(eventDateIndex);
   }
 
-  addServiceArea(area: SepServiceArea, location: FormGroup){
+  addServiceArea(area: SepServiceArea, location: FormGroup) {
     const areaArray = location.get('serviceAreas') as FormArray;
     const areaFormGroup = this.createServiceArea(area);
     areaArray.push(areaFormGroup);
@@ -166,14 +164,23 @@ export class EventComponent extends FormBase implements OnInit {
 
   createServiceArea(area: SepServiceArea) {
     let areaForm = this.fb.group({
-      description: [''],
-      numAreaMaxGuests: [''],
+      eventName: [''],
+      isBothOutdoorIndoor: [''],
+      isIndoors: [''],
+      isOutdoors: [''],
+      licencedAreaDescription: [''],
+      licencedAreaMaxNumberOfGuests: [''],
+      licencedAreaNumberOfMinors: [''],
+      maximumNumberOfGuests: [''],
+      minorPresent: [''],
+      numberOfMinors: [''],
       setting: [''],
-      isMinorsPresent: [''],
-      numMinors: [''],
+      stateCode: [''],
+      statusCode: [''],
       eventDates: this.fb.array([]),
     });
     areaForm.patchValue(area);
+    
     return areaForm;
   }
 
@@ -232,51 +239,51 @@ export class EventComponent extends FormBase implements OnInit {
 }
 
 const TIME_SLOTS = [
-  { value: "8: 00 AM", name: "8: 00 AM" },
+  { value: "8:00 AM", name: "8:00 AM" },
   { value: "8:30 AM ", name: "8:30 AM " },
-  { value: "9: 00 AM", name: "9: 00 AM" },
+  { value: "9:00 AM", name: "9:00 AM" },
   { value: "9:30 AM", name: "9:30 AM" },
-  { value: "10: 00 AM", name: "10: 00 AM" },
+  { value: "10:00 AM", name: "10:00 AM" },
   { value: "10:30 AM ", name: "10:30 AM " },
-  { value: "11: 00 AM", name: "11: 00 AM" },
+  { value: "11:00 AM", name: "11:00 AM" },
   { value: "11:30 AM ", name: "11:30 AM " },
-  { value: "12: 00 PM", name: "12: 00 PM" },
+  { value: "12:00 PM", name: "12:00 PM" },
   { value: "12:30 PM ", name: "12:30 PM " },
-  { value: "1: 00 PM", name: "1: 00 PM" },
+  { value: "1:00 PM", name: "1:00 PM" },
   { value: "1:30 PM ", name: "1:30 PM " },
-  { value: "2: 00 PM", name: "2: 00 PM" },
+  { value: "2:00 PM", name: "2:00 PM" },
   { value: "2:30 PM ", name: "2:30 PM " },
-  { value: "3: 00 PM", name: "3: 00 PM" },
+  { value: "3:00 PM", name: "3:00 PM" },
   { value: "3:30 PM ", name: "3:30 PM " },
-  { value: "4: 00 PM", name: "4: 00 PM" },
+  { value: "4:00 PM", name: "4:00 PM" },
   { value: "4:30 PM ", name: "4:30 PM " },
-  { value: "5: 00 PM", name: "5: 00 PM" },
+  { value: "5:00 PM", name: "5:00 PM" },
   { value: "5:30 PM ", name: "5:30 PM " },
-  { value: "6: 00 PM", name: "6: 00 PM" },
+  { value: "6:00 PM", name: "6:00 PM" },
   { value: "6:30 PM ", name: "6:30 PM " },
-  { value: "7: 00 PM", name: "7: 00 PM" },
+  { value: "7:00 PM", name: "7:00 PM" },
   { value: "7:30 PM ", name: "7:30 PM " },
-  { value: "8: 00 PM", name: "8: 00 PM" },
+  { value: "8:00 PM", name: "8:00 PM" },
   { value: "8:30 PM ", name: "8:30 PM " },
-  { value: "9: 00 PM", name: "9: 00 PM" },
+  { value: "9:00 PM", name: "9:00 PM" },
   { value: "9:30 PM ", name: "9:30 PM " },
-  { value: "10: 00 PM", name: "10: 00 PM" },
+  { value: "10:00 PM", name: "10:00 PM" },
   { value: "10:30 PM ", name: "10:30 PM " },
-  { value: "11: 00 PM", name: "11: 00 PM" },
+  { value: "11:00 PM", name: "11:00 PM" },
   { value: "11:30 PM ", name: "11:30 PM " },
-  { value: "12: 00 AM", name: "12: 00 AM" },
+  { value: "12:00 AM", name: "12:00 AM" },
   { value: "12:30 AM ", name: "12:30 AM " },
-  { value: "1: 00 AM", name: "1: 00 AM" },
+  { value: "1:00 AM", name: "1:00 AM" },
   { value: "1:30 AM ", name: "1:30 AM " },
-  { value: "2: 00 AM", name: "2: 00 AM" },
+  { value: "2:00 AM", name: "2:00 AM" },
   { value: "2:30 AM ", name: "2:30 AM " },
-  { value: "3: 00 AM", name: "3: 00 AM" },
+  { value: "3:00 AM", name: "3:00 AM" },
   { value: "3:30 AM ", name: "3:30 AM " },
-  { value: "4: 00 AM", name: "4: 00 AM" },
+  { value: "4:00 AM", name: "4:00 AM" },
   { value: "4:30 AM ", name: "4:30 AM " },
-  { value: "5: 00 AM", name: "5: 00 AM" },
+  { value: "5:00 AM", name: "5:00 AM" },
   { value: "5:30 AM ", name: "5:30 AM " },
-  { value: "6: 00 AM", name: "6: 00 AM" },
+  { value: "6:00 AM", name: "6:00 AM" },
   { value: "6:30 AM ", name: "6:30 AM " },
-  { value: "7: 00 AM", name: "7: 00 AM" },
+  { value: "7:00 AM", name: "7:00 AM" },
 ];
