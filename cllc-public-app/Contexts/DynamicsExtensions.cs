@@ -911,6 +911,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <returns></returns>
         public static IList<MicrosoftDynamicsCRMcontact> GetActiveContactsByDetails(this IDynamicsClient system, string firstname, string middlename, string lastname, string emailaddress1)
         {
+            // do not check Dynamics if we have no data to search for.
+            if (firstname == null && lastname == null && emailaddress1 == null)
+            {
+                return null;
+            }
             IList<MicrosoftDynamicsCRMcontact> result = null;
             string filter = "statecode eq 0";
             if (!string.IsNullOrEmpty(firstname))
