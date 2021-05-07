@@ -1,0 +1,25 @@
+.form-wrapper {
+  max-width: 1000px;
+}
+
+.button-row {
+  display: flex;
+  button:last-child {
+    margin-left: auto;
+  }
+
+  button {
+    fa-icon {
+      margin-right: 10px;
+    }
+  }
+}
+
+.label {
+  font-size: 16px;
+  font-weight: normal;
+  color: #000;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  margin-left: -8px;
+}
