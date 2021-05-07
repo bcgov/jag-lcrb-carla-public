@@ -19,7 +19,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 result = new ViewModels.SepServiceArea()
                 {
-                    Id = serviceArea.AdoxioSpecialeventlicencedareaid,
+                    LicencedAreaId = serviceArea.AdoxioSpecialeventlicencedareaid,
                     SepLocationId = serviceArea._adoxioSpecialeventlocationidValue,
                     SpecialEventId = serviceArea._adoxioSpecialeventidValue,
                     MinorPresent = serviceArea.AdoxioMinorpresent,

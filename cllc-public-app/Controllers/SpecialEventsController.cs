@@ -84,6 +84,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             try
             {
                 newSpecialEvent = _dynamicsClient.Specialevents.Create(newSpecialEvent);
+                specialEvent.SpecialEventId = newSpecialEvent.AdoxioSpecialeventid;
             }
             catch (HttpOperationException httpOperationException)
             {
@@ -104,6 +105,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     try
                     {
                         newLocation = _dynamicsClient.Specialeventlocations.Create(newLocation);
+                        location.LocationId = newLocation.AdoxioSpecialeventlocationid;
                     }
                     catch (HttpOperationException httpOperationException)
                     {
@@ -124,6 +126,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             try
                             {
                                 newArea = _dynamicsClient.Specialeventlicencedareas.Create(newArea);
+                                area.LicencedAreaId = newArea.AdoxioSpecialeventlicencedareaid;
                             }
                             catch (HttpOperationException httpOperationException)
                             {
@@ -145,6 +148,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                     try
                                     {
                                         newDates = _dynamicsClient.Specialeventschedules.Create(newDates);
+                                        dates.SpecialEventId = newDates.AdoxioSpecialeventscheduleid;
                                     }
                                     catch (HttpOperationException httpOperationException)
                                     {
@@ -157,7 +161,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                 });
             }
-            return new JsonResult(newSpecialEvent.ToViewModel());
+            return new JsonResult(specialEvent );
         }
 
         [HttpPost("old")]
@@ -230,7 +234,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPut("{eventId}")]
         public IActionResult UpdateSpecialEvent(string eventId, [FromBody] ViewModels.SpecialEvent specialEvent)
         {
-            if (String.IsNullOrEmpty(eventId) || eventId != specialEvent?.Id)
+            if (String.IsNullOrEmpty(eventId) || eventId != specialEvent?.SpecialEventId)
             {
                 return BadRequest();
             }
