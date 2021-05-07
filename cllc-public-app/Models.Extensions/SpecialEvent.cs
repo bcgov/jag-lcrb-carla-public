@@ -21,7 +21,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 {
                     EventLocations = new List<ViewModels.SepEventLocation>()
                 };
-                result.Id = specialEvent.AdoxioSpecialeventid;
+                result.SpecialEventId = specialEvent.AdoxioSpecialeventid;
                 result.AdmissionFee = specialEvent.AdoxioAdmissionfee;
                 result.EventStartDate = specialEvent.AdoxioEventstartdate;
                 result.EventName = specialEvent.AdoxioEventname;
@@ -54,6 +54,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
         public static void CopyValues(this MicrosoftDynamicsCRMadoxioSpecialevent to, ViewModels.SpecialEvent from)
         {
+            to.AdoxioSpecialeventid = from.SpecialEventId;
             to.AdoxioAdmissionfee = from.AdmissionFee;
             to.AdoxioEventstartdate = from.EventStartDate;
             to.AdoxioEventname = from.EventName;
