@@ -1,3 +1,59 @@
-<p>
-  approval-settings works!
-</p>
+<div class="form-wrapper" class="position-relative">
+  <h1 class="mat-heading">Administration</h1>
+  <p>Edit police approval settings for all applications in your area.</p>
+  <form [formGroup]="form">
+    <h3 class="blue-header">POLICE APPROVAL</h3>
+    <section formGroupName="contact" class="content-bottom clearfix">
+      <p>Maximum Number of guests permitted before Police Approval is required at this detachment.</p>
+
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Public Events" [required]="true" [isFullWidth]="true"
+          [valid]="isValidOrNotTouched('maxGuestsForPublicEvents')"
+          errorMessage="Please enter the maximum number of guests permitted before Police Approval is required for Public Events">
+          <input class="form-control" type="number" formControlName="maxGuestsForPublicEvents">
+        </app-field>
+      </div>
+
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Private Events" [required]="true" [isFullWidth]="true"
+          [valid]="isValidOrNotTouched('maxGuestsForPrivateEvents')"
+          errorMessage="Please enter the maximum number of guests permitted before Police Approval is required for Private Events">
+          <input class="form-control" type="number" formControlName="maxGuestsForPrivateEvents">
+        </app-field>
+      </div>
+
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Family Events" [required]="true" [isFullWidth]="true"
+          [valid]="isValidOrNotTouched('maxGuestsForFamilyEvents')"
+          errorMessage="Please enter the maximum number of guests permitted before Police Approval is required for Family Events">
+          <input class="form-control" type="number" formControlName="maxGuestsForFamilyEvents">
+        </app-field>
+      </div>
+
+      <div class="row">
+        <mat-checkbox formControlName="isLateHoursApproval">Police Approval is required if late hours are being
+          requested</mat-checkbox>
+      </div>
+    </section>
+  </form>
+
+  <section class="error mt-3" *ngIf="showErrorSection">
+    <p *ngFor="let message of validationMessages">
+      <span class="app-cancel">
+        <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
+        {{message}}
+      </span>
+    </p>
+  </section>
+
+
+  <section class="position-relative py-4 button-row">
+    <button color="primary" mat-raised-button (click)="save()" class="save-cont">
+      <span>SAVE</span>
+      <fa-icon [icon]="faChevronRight" class="ml-3 mr-0"></fa-icon>
+    </button>
+    <button class="btn btn-link btn-cancel" routerLink="/sep/dashboard">
+      <fa-icon [icon]="faTrash"></fa-icon>CANCEL
+    </button>
+  </section>
+</div>
