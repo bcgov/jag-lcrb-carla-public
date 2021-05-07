@@ -40,7 +40,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.EventEndDate = specialEvent.AdoxioEventenddate;
                 result.Statuscode = specialEvent.Statuscode;
                 result.SpecialEventStreet1 = specialEvent.AdoxioSpecialeventstreet1;
-                result.MaximumNumberOfGuests = specialEvent.AdoxioMaximumnumberofguests;
+                result.MaximumNumberOfGuests = specialEvent.AdoxioMaxnumofguests;
 
                 if (specialEvent?.AdoxioSpecialeventSpecialeventlocations?.Count > 0)
                 {
@@ -73,7 +73,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioEventenddate = from.EventEndDate;
             to.Statuscode = from.Statuscode;
             to.AdoxioSpecialeventstreet1 = from.SpecialEventStreet1;
-            to.AdoxioMaximumnumberofguests = from.MaximumNumberOfGuests;
+            to.AdoxioMaxnumofguests = from.MaximumNumberOfGuests;
 
             // if (specialEvent?.AdoxioSpecialeventSpecialeventlocations?.Count > 0)
             // {

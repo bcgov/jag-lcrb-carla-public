@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public System.DateTimeOffset? EventEndDate { get; set; }
         public int? Statuscode { get; set; }
         public string SpecialEventStreet1 { get; set; }
-        public string MaximumNumberOfGuests { get; set; }
+        public int? MaximumNumberOfGuests { get; set; }
         public List<SepEventLocation> EventLocations { get; set; }
     }
 }

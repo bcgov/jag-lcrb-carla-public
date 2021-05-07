@@ -38,27 +38,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        public int? Top360 { get; set; }
+        public int? Top129 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        public int? Skip360 { get; set; }
+        public int? Skip129 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        public bool? Count360 { get; set; }
+        public bool? Count129 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        public string Filter360 { get; set; }
+        public string Filter129 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        public string Search360 { get; set; }
+        public string Search129 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client subscription.
@@ -71,129 +71,14 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IAccounts Accounts { get; private set; }
 
         /// <summary>
-        /// Gets the IAccountadoxiologinrelatedaccount.
-        /// </summary>
-        public virtual IAccountadoxiologinrelatedaccount Accountadoxiologinrelatedaccount { get; private set; }
-
-        /// <summary>
-        /// Gets the IAccountinvestigationrequests.
-        /// </summary>
-        public virtual IAccountinvestigationrequests Accountinvestigationrequests { get; private set; }
-
-        /// <summary>
-        /// Gets the IAccountinvestigationsubjects.
-        /// </summary>
-        public virtual IAccountinvestigationsubjects Accountinvestigationsubjects { get; private set; }
-
-        /// <summary>
-        /// Gets the IAccountspecialevents.
-        /// </summary>
-        public virtual IAccountspecialevents Accountspecialevents { get; private set; }
-
-        /// <summary>
-        /// Gets the IPoliceaccountspecialevents.
-        /// </summary>
-        public virtual IPoliceaccountspecialevents Policeaccountspecialevents { get; private set; }
-
-        /// <summary>
-        /// Gets the IPolicejurisdictionid.
-        /// </summary>
-        public virtual IPolicejurisdictionid Policejurisdictionid { get; private set; }
-
-        /// <summary>
         /// Gets the IAdditionalinspectors.
         /// </summary>
         public virtual IAdditionalinspectors Additionalinspectors { get; private set; }
 
         /// <summary>
-        /// Gets the IAdditionalinspectorasyncoperations.
-        /// </summary>
-        public virtual IAdditionalinspectorasyncoperations Additionalinspectorasyncoperations { get; private set; }
-
-        /// <summary>
-        /// Gets the IAdditionalinspectorbulkdeletefailures.
-        /// </summary>
-        public virtual IAdditionalinspectorbulkdeletefailures Additionalinspectorbulkdeletefailures { get; private set; }
-
-        /// <summary>
-        /// Gets the IAdditionalinspectormailboxtrackingfolders.
-        /// </summary>
-        public virtual IAdditionalinspectormailboxtrackingfolders Additionalinspectormailboxtrackingfolders { get; private set; }
-
-        /// <summary>
-        /// Gets the IAdditionalinspectorprincipalobjectattributeaccesses.
-        /// </summary>
-        public virtual IAdditionalinspectorprincipalobjectattributeaccesses Additionalinspectorprincipalobjectattributeaccesses { get; private set; }
-
-        /// <summary>
-        /// Gets the IAdditionalinspectorprocesssession.
-        /// </summary>
-        public virtual IAdditionalinspectorprocesssession Additionalinspectorprocesssession { get; private set; }
-
-        /// <summary>
-        /// Gets the IAdditionalinspectorsyncerrors.
-        /// </summary>
-        public virtual IAdditionalinspectorsyncerrors Additionalinspectorsyncerrors { get; private set; }
-
-        /// <summary>
-        /// Gets the IInspectionid.
-        /// </summary>
-        public virtual IInspectionid Inspectionid { get; private set; }
-
-        /// <summary>
-        /// Gets the IInspectorid.
-        /// </summary>
-        public virtual IInspectorid Inspectorid { get; private set; }
-
-        /// <summary>
-        /// Gets the IRegionid.
-        /// </summary>
-        public virtual IRegionid Regionid { get; private set; }
-
-        /// <summary>
         /// Gets the IAdminactivities.
         /// </summary>
         public virtual IAdminactivities Adminactivities { get; private set; }
-
-        /// <summary>
-        /// Gets the IAdminactivityasyncoperations.
-        /// </summary>
-        public virtual IAdminactivityasyncoperations Adminactivityasyncoperations { get; private set; }
-
-        /// <summary>
-        /// Gets the IAdminactivitybulkdeletefailures.
-        /// </summary>
-        public virtual IAdminactivitybulkdeletefailures Adminactivitybulkdeletefailures { get; private set; }
-
-        /// <summary>
-        /// Gets the IAdminactivityduplicatebaserecord.
-        /// </summary>
-        public virtual IAdminactivityduplicatebaserecord Adminactivityduplicatebaserecord { get; private set; }
-
-        /// <summary>
-        /// Gets the IAdminactivityduplicatematchingrecord.
-        /// </summary>
-        public virtual IAdminactivityduplicatematchingrecord Adminactivityduplicatematchingrecord { get; private set; }
-
-        /// <summary>
-        /// Gets the IAdminactivitymailboxtrackingfolders.
-        /// </summary>
-        public virtual IAdminactivitymailboxtrackingfolders Adminactivitymailboxtrackingfolders { get; private set; }
-
-        /// <summary>
-        /// Gets the IAdminactivityprincipalobjectattributeaccesses.
-        /// </summary>
-        public virtual IAdminactivityprincipalobjectattributeaccesses Adminactivityprincipalobjectattributeaccesses { get; private set; }
-
-        /// <summary>
-        /// Gets the IAdminactivityprocesssession.
-        /// </summary>
-        public virtual IAdminactivityprocesssession Adminactivityprocesssession { get; private set; }
-
-        /// <summary>
-        /// Gets the IAdminactivitysyncerrors.
-        /// </summary>
-        public virtual IAdminactivitysyncerrors Adminactivitysyncerrors { get; private set; }
 
         /// <summary>
         /// Gets the IAdoxiolicencetypeadoxioinvestigationset.
@@ -246,26 +131,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IApplications Applications { get; private set; }
 
         /// <summary>
-        /// Gets the IApplicationadoxiostatuscounterapplication.
-        /// </summary>
-        public virtual IApplicationadoxiostatuscounterapplication Applicationadoxiostatuscounterapplication { get; private set; }
-
-        /// <summary>
-        /// Gets the IApplicationinvestigationrequests.
-        /// </summary>
-        public virtual IApplicationinvestigationrequests Applicationinvestigationrequests { get; private set; }
-
-        /// <summary>
-        /// Gets the IChangingtermsandconditions.
-        /// </summary>
-        public virtual IChangingtermsandconditions Changingtermsandconditions { get; private set; }
-
-        /// <summary>
-        /// Gets the IRelatedlicence.
-        /// </summary>
-        public virtual IRelatedlicence Relatedlicence { get; private set; }
-
-        /// <summary>
         /// Gets the IApplicationstructurechangev1s.
         /// </summary>
         public virtual IApplicationstructurechangev1s Applicationstructurechangev1s { get; private set; }
@@ -274,11 +139,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IApplicationtermsconditionslimitations.
         /// </summary>
         public virtual IApplicationtermsconditionslimitations Applicationtermsconditionslimitations { get; private set; }
-
-        /// <summary>
-        /// Gets the IApplicationtermsconditionslimitationadoxioapplicationchangingtermsandconditions.
-        /// </summary>
-        public virtual IApplicationtermsconditionslimitationadoxioapplicationchangingtermsandconditions Applicationtermsconditionslimitationadoxioapplicationchangingtermsandconditions { get; private set; }
 
         /// <summary>
         /// Gets the IApplicationtransferownershipv1s.
@@ -301,11 +161,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IApplicationtypes Applicationtypes { get; private set; }
 
         /// <summary>
-        /// Gets the IRenewalfeeproduct.
-        /// </summary>
-        public virtual IRenewalfeeproduct Renewalfeeproduct { get; private set; }
-
-        /// <summary>
         /// Gets the IApplicenseechangebpfv2s.
         /// </summary>
         public virtual IApplicenseechangebpfv2s Applicenseechangebpfv2s { get; private set; }
@@ -314,16 +169,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IAreas.
         /// </summary>
         public virtual IAreas Areas { get; private set; }
-
-        /// <summary>
-        /// Gets the IAreainvestigationrequests.
-        /// </summary>
-        public virtual IAreainvestigationrequests Areainvestigationrequests { get; private set; }
-
-        /// <summary>
-        /// Gets the IAreaspecialevents.
-        /// </summary>
-        public virtual IAreaspecialevents Areaspecialevents { get; private set; }
 
         /// <summary>
         /// Gets the IAuditlogrequests.
@@ -361,29 +206,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IComplaints Complaints { get; private set; }
 
         /// <summary>
-        /// Gets the IComplaintinvestigationrequests.
-        /// </summary>
-        public virtual IComplaintinvestigationrequests Complaintinvestigationrequests { get; private set; }
-
-        /// <summary>
-        /// Gets the IComplaintinvestigationsunit.
-        /// </summary>
-        public virtual IComplaintinvestigationsunit Complaintinvestigationsunit { get; private set; }
-
-        /// <summary>
         /// Gets the IComplianceinvestigations.
         /// </summary>
         public virtual IComplianceinvestigations Complianceinvestigations { get; private set; }
-
-        /// <summary>
-        /// Gets the IComplianceinvestigationadoxiormreviewinvestigationenforcement.
-        /// </summary>
-        public virtual IComplianceinvestigationadoxiormreviewinvestigationenforcement Complianceinvestigationadoxiormreviewinvestigationenforcement { get; private set; }
-
-        /// <summary>
-        /// Gets the IComplianceinvestigationenforcementaction.
-        /// </summary>
-        public virtual IComplianceinvestigationenforcementaction Complianceinvestigationenforcementaction { get; private set; }
 
         /// <summary>
         /// Gets the ICompliancemeetings.
@@ -399,21 +224,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IContraventions.
         /// </summary>
         public virtual IContraventions Contraventions { get; private set; }
-
-        /// <summary>
-        /// Gets the IContraventioninvoices.
-        /// </summary>
-        public virtual IContraventioninvoices Contraventioninvoices { get; private set; }
-
-        /// <summary>
-        /// Gets the IInvestigationunitid.
-        /// </summary>
-        public virtual IInvestigationunitid Investigationunitid { get; private set; }
-
-        /// <summary>
-        /// Gets the IInvoice.
-        /// </summary>
-        public virtual IInvoice Invoice { get; private set; }
 
         /// <summary>
         /// Gets the ICorporatehistorysummaries.
@@ -451,11 +261,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IEndorsements Endorsements { get; private set; }
 
         /// <summary>
-        /// Gets the ILicencewhencancelled.
-        /// </summary>
-        public virtual ILicencewhencancelled Licencewhencancelled { get; private set; }
-
-        /// <summary>
         /// Gets the IEnforcementactionbpfs.
         /// </summary>
         public virtual IEnforcementactionbpfs Enforcementactionbpfs { get; private set; }
@@ -466,16 +271,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IEnforcementactions Enforcementactions { get; private set; }
 
         /// <summary>
-        /// Gets the IFinancialinvestigationid.
-        /// </summary>
-        public virtual IFinancialinvestigationid Financialinvestigationid { get; private set; }
-
-        /// <summary>
-        /// Gets the IInvestigationid.
-        /// </summary>
-        public virtual IInvestigationid Investigationid { get; private set; }
-
-        /// <summary>
         /// Gets the IEstablishmentincidents.
         /// </summary>
         public virtual IEstablishmentincidents Establishmentincidents { get; private set; }
@@ -484,16 +279,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IEstablishments.
         /// </summary>
         public virtual IEstablishments Establishments { get; private set; }
-
-        /// <summary>
-        /// Gets the IEstablishmentinvestigationrequests.
-        /// </summary>
-        public virtual IEstablishmentinvestigationrequests Establishmentinvestigationrequests { get; private set; }
-
-        /// <summary>
-        /// Gets the IPmuareaid.
-        /// </summary>
-        public virtual IPmuareaid Pmuareaid { get; private set; }
 
         /// <summary>
         /// Gets the IEstablishmentwatchwords.
@@ -511,54 +296,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IEventlocations Eventlocations { get; private set; }
 
         /// <summary>
-        /// Gets the IEventid.
-        /// </summary>
-        public virtual IEventid Eventid { get; private set; }
-
-        /// <summary>
-        /// Gets the IEventlocationasyncoperations.
-        /// </summary>
-        public virtual IEventlocationasyncoperations Eventlocationasyncoperations { get; private set; }
-
-        /// <summary>
-        /// Gets the IEventlocationbulkdeletefailures.
-        /// </summary>
-        public virtual IEventlocationbulkdeletefailures Eventlocationbulkdeletefailures { get; private set; }
-
-        /// <summary>
-        /// Gets the IEventlocationmailboxtrackingfolders.
-        /// </summary>
-        public virtual IEventlocationmailboxtrackingfolders Eventlocationmailboxtrackingfolders { get; private set; }
-
-        /// <summary>
-        /// Gets the IEventlocationprincipalobjectattributeaccesses.
-        /// </summary>
-        public virtual IEventlocationprincipalobjectattributeaccesses Eventlocationprincipalobjectattributeaccesses { get; private set; }
-
-        /// <summary>
-        /// Gets the IEventlocationprocesssession.
-        /// </summary>
-        public virtual IEventlocationprocesssession Eventlocationprocesssession { get; private set; }
-
-        /// <summary>
-        /// Gets the IEventlocationsyncerrors.
-        /// </summary>
-        public virtual IEventlocationsyncerrors Eventlocationsyncerrors { get; private set; }
-
-        /// <summary>
-        /// Gets the IServiceareaid.
-        /// </summary>
-        public virtual IServiceareaid Serviceareaid { get; private set; }
-
-        /// <summary>
         /// Gets the IEvents.
         /// </summary>
         public virtual IEvents Events { get; private set; }
-
-        /// <summary>
-        /// Gets the IEventeventlocations.
-        /// </summary>
-        public virtual IEventeventlocations Eventeventlocations { get; private set; }
 
         /// <summary>
         /// Gets the IEventschedules.
@@ -646,46 +386,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IInvestigationcontacts Investigationcontacts { get; private set; }
 
         /// <summary>
-        /// Gets the IInvestigationcontactasyncoperations.
-        /// </summary>
-        public virtual IInvestigationcontactasyncoperations Investigationcontactasyncoperations { get; private set; }
-
-        /// <summary>
-        /// Gets the IInvestigationcontactbulkdeletefailures.
-        /// </summary>
-        public virtual IInvestigationcontactbulkdeletefailures Investigationcontactbulkdeletefailures { get; private set; }
-
-        /// <summary>
-        /// Gets the IInvestigationcontactduplicatebaserecord.
-        /// </summary>
-        public virtual IInvestigationcontactduplicatebaserecord Investigationcontactduplicatebaserecord { get; private set; }
-
-        /// <summary>
-        /// Gets the IInvestigationcontactduplicatematchingrecord.
-        /// </summary>
-        public virtual IInvestigationcontactduplicatematchingrecord Investigationcontactduplicatematchingrecord { get; private set; }
-
-        /// <summary>
-        /// Gets the IInvestigationcontactmailboxtrackingfolders.
-        /// </summary>
-        public virtual IInvestigationcontactmailboxtrackingfolders Investigationcontactmailboxtrackingfolders { get; private set; }
-
-        /// <summary>
-        /// Gets the IInvestigationcontactprincipalobjectattributeaccesses.
-        /// </summary>
-        public virtual IInvestigationcontactprincipalobjectattributeaccesses Investigationcontactprincipalobjectattributeaccesses { get; private set; }
-
-        /// <summary>
-        /// Gets the IInvestigationcontactprocesssession.
-        /// </summary>
-        public virtual IInvestigationcontactprocesssession Investigationcontactprocesssession { get; private set; }
-
-        /// <summary>
-        /// Gets the IInvestigationcontactsyncerrors.
-        /// </summary>
-        public virtual IInvestigationcontactsyncerrors Investigationcontactsyncerrors { get; private set; }
-
-        /// <summary>
         /// Gets the IInvestigationreactivationhistories.
         /// </summary>
         public virtual IInvestigationreactivationhistories Investigationreactivationhistories { get; private set; }
@@ -696,169 +396,14 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IInvestigationrequests Investigationrequests { get; private set; }
 
         /// <summary>
-        /// Gets the IAccountid.
-        /// </summary>
-        public virtual IAccountid Accountid { get; private set; }
-
-        /// <summary>
-        /// Gets the IApplicationid.
-        /// </summary>
-        public virtual IApplicationid Applicationid { get; private set; }
-
-        /// <summary>
-        /// Gets the IAreaid.
-        /// </summary>
-        public virtual IAreaid Areaid { get; private set; }
-
-        /// <summary>
-        /// Gets the IComplaintid.
-        /// </summary>
-        public virtual IComplaintid Complaintid { get; private set; }
-
-        /// <summary>
-        /// Gets the IEstablishmentid.
-        /// </summary>
-        public virtual IEstablishmentid Establishmentid { get; private set; }
-
-        /// <summary>
-        /// Gets the IInvestigationrequestasyncoperations.
-        /// </summary>
-        public virtual IInvestigationrequestasyncoperations Investigationrequestasyncoperations { get; private set; }
-
-        /// <summary>
-        /// Gets the IInvestigationrequestbulkdeletefailures.
-        /// </summary>
-        public virtual IInvestigationrequestbulkdeletefailures Investigationrequestbulkdeletefailures { get; private set; }
-
-        /// <summary>
-        /// Gets the IInvestigationrequestduplicatebaserecord.
-        /// </summary>
-        public virtual IInvestigationrequestduplicatebaserecord Investigationrequestduplicatebaserecord { get; private set; }
-
-        /// <summary>
-        /// Gets the IInvestigationrequestduplicatematchingrecord.
-        /// </summary>
-        public virtual IInvestigationrequestduplicatematchingrecord Investigationrequestduplicatematchingrecord { get; private set; }
-
-        /// <summary>
-        /// Gets the IInvestigationrequestinvestigations.
-        /// </summary>
-        public virtual IInvestigationrequestinvestigations Investigationrequestinvestigations { get; private set; }
-
-        /// <summary>
-        /// Gets the IInvestigationrequestmailboxtrackingfolders.
-        /// </summary>
-        public virtual IInvestigationrequestmailboxtrackingfolders Investigationrequestmailboxtrackingfolders { get; private set; }
-
-        /// <summary>
-        /// Gets the IInvestigationrequestprincipalobjectattributeaccesses.
-        /// </summary>
-        public virtual IInvestigationrequestprincipalobjectattributeaccesses Investigationrequestprincipalobjectattributeaccesses { get; private set; }
-
-        /// <summary>
-        /// Gets the IInvestigationrequestprocesssession.
-        /// </summary>
-        public virtual IInvestigationrequestprocesssession Investigationrequestprocesssession { get; private set; }
-
-        /// <summary>
-        /// Gets the IInvestigationrequestsharepointdocumentlocations.
-        /// </summary>
-        public virtual IInvestigationrequestsharepointdocumentlocations Investigationrequestsharepointdocumentlocations { get; private set; }
-
-        /// <summary>
-        /// Gets the IInvestigationrequestsyncerrors.
-        /// </summary>
-        public virtual IInvestigationrequestsyncerrors Investigationrequestsyncerrors { get; private set; }
-
-        /// <summary>
-        /// Gets the ILicenceid.
-        /// </summary>
-        public virtual ILicenceid Licenceid { get; private set; }
-
-        /// <summary>
-        /// Gets the IOfficeid.
-        /// </summary>
-        public virtual IOfficeid Officeid { get; private set; }
-
-        /// <summary>
         /// Gets the IInvestigations.
         /// </summary>
         public virtual IInvestigations Investigations { get; private set; }
 
         /// <summary>
-        /// Gets the IAdoxioinvestigationadoxioenforcementactionfinancialinvestigationid.
-        /// </summary>
-        public virtual IAdoxioinvestigationadoxioenforcementactionfinancialinvestigationid Adoxioinvestigationadoxioenforcementactionfinancialinvestigationid { get; private set; }
-
-        /// <summary>
-        /// Gets the IInvestigationinvestigationcontacts.
-        /// </summary>
-        public virtual IInvestigationinvestigationcontacts Investigationinvestigationcontacts { get; private set; }
-
-        /// <summary>
-        /// Gets the IInvestigationinvestigations.
-        /// </summary>
-        public virtual IInvestigationinvestigations Investigationinvestigations { get; private set; }
-
-        /// <summary>
-        /// Gets the IInvestigationrequestid.
-        /// </summary>
-        public virtual IInvestigationrequestid Investigationrequestid { get; private set; }
-
-        /// <summary>
-        /// Gets the IInvestigationunitcontraventions.
-        /// </summary>
-        public virtual IInvestigationunitcontraventions Investigationunitcontraventions { get; private set; }
-
-        /// <summary>
         /// Gets the IInvestigationsubjects.
         /// </summary>
         public virtual IInvestigationsubjects Investigationsubjects { get; private set; }
-
-        /// <summary>
-        /// Gets the IContactid.
-        /// </summary>
-        public virtual IContactid Contactid { get; private set; }
-
-        /// <summary>
-        /// Gets the IInvestigationsubjectasyncoperations.
-        /// </summary>
-        public virtual IInvestigationsubjectasyncoperations Investigationsubjectasyncoperations { get; private set; }
-
-        /// <summary>
-        /// Gets the IInvestigationsubjectbulkdeletefailures.
-        /// </summary>
-        public virtual IInvestigationsubjectbulkdeletefailures Investigationsubjectbulkdeletefailures { get; private set; }
-
-        /// <summary>
-        /// Gets the IInvestigationsubjectduplicatebaserecord.
-        /// </summary>
-        public virtual IInvestigationsubjectduplicatebaserecord Investigationsubjectduplicatebaserecord { get; private set; }
-
-        /// <summary>
-        /// Gets the IInvestigationsubjectduplicatematchingrecord.
-        /// </summary>
-        public virtual IInvestigationsubjectduplicatematchingrecord Investigationsubjectduplicatematchingrecord { get; private set; }
-
-        /// <summary>
-        /// Gets the IInvestigationsubjectmailboxtrackingfolders.
-        /// </summary>
-        public virtual IInvestigationsubjectmailboxtrackingfolders Investigationsubjectmailboxtrackingfolders { get; private set; }
-
-        /// <summary>
-        /// Gets the IInvestigationsubjectprincipalobjectattributeaccesses.
-        /// </summary>
-        public virtual IInvestigationsubjectprincipalobjectattributeaccesses Investigationsubjectprincipalobjectattributeaccesses { get; private set; }
-
-        /// <summary>
-        /// Gets the IInvestigationsubjectprocesssession.
-        /// </summary>
-        public virtual IInvestigationsubjectprocesssession Investigationsubjectprocesssession { get; private set; }
-
-        /// <summary>
-        /// Gets the IInvestigationsubjectsyncerrors.
-        /// </summary>
-        public virtual IInvestigationsubjectsyncerrors Investigationsubjectsyncerrors { get; private set; }
 
         /// <summary>
         /// Gets the ILdborders.
@@ -884,36 +429,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILicenceses.
         /// </summary>
         public virtual ILicenceses Licenceses { get; private set; }
-
-        /// <summary>
-        /// Gets the ILicencesadoxioapplicationrelatedlicence.
-        /// </summary>
-        public virtual ILicencesadoxioapplicationrelatedlicence Licencesadoxioapplicationrelatedlicence { get; private set; }
-
-        /// <summary>
-        /// Gets the ILicencesadoxioendorsementlicencewhencancelled.
-        /// </summary>
-        public virtual ILicencesadoxioendorsementlicencewhencancelled Licencesadoxioendorsementlicencewhencancelled { get; private set; }
-
-        /// <summary>
-        /// Gets the ILicencesadoxioonestopmessageitemlicence.
-        /// </summary>
-        public virtual ILicencesadoxioonestopmessageitemlicence Licencesadoxioonestopmessageitemlicence { get; private set; }
-
-        /// <summary>
-        /// Gets the ILicencesadoxiorelatedlicencechildlicence.
-        /// </summary>
-        public virtual ILicencesadoxiorelatedlicencechildlicence Licencesadoxiorelatedlicencechildlicence { get; private set; }
-
-        /// <summary>
-        /// Gets the ILicencesadoxiorelatedlicenceparentlicence.
-        /// </summary>
-        public virtual ILicencesadoxiorelatedlicenceparentlicence Licencesadoxiorelatedlicenceparentlicence { get; private set; }
-
-        /// <summary>
-        /// Gets the ILicencesinvestigationrequests.
-        /// </summary>
-        public virtual ILicencesinvestigationrequests Licencesinvestigationrequests { get; private set; }
 
         /// <summary>
         /// Gets the ILicencesubcategories.
@@ -946,69 +461,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILocalgovindigenousnations Localgovindigenousnations { get; private set; }
 
         /// <summary>
-        /// Gets the ILginpolicejurisdiction.
-        /// </summary>
-        public virtual ILginpolicejurisdiction Lginpolicejurisdiction { get; private set; }
-
-        /// <summary>
-        /// Gets the ILocalgovspecialevents.
-        /// </summary>
-        public virtual ILocalgovspecialevents Localgovspecialevents { get; private set; }
-
-        /// <summary>
         /// Gets the ILogins.
         /// </summary>
         public virtual ILogins Logins { get; private set; }
-
-        /// <summary>
-        /// Gets the IContact.
-        /// </summary>
-        public virtual IContact Contact { get; private set; }
-
-        /// <summary>
-        /// Gets the ILoginasyncoperations.
-        /// </summary>
-        public virtual ILoginasyncoperations Loginasyncoperations { get; private set; }
-
-        /// <summary>
-        /// Gets the ILoginbulkdeletefailures.
-        /// </summary>
-        public virtual ILoginbulkdeletefailures Loginbulkdeletefailures { get; private set; }
-
-        /// <summary>
-        /// Gets the ILoginduplicatebaserecord.
-        /// </summary>
-        public virtual ILoginduplicatebaserecord Loginduplicatebaserecord { get; private set; }
-
-        /// <summary>
-        /// Gets the ILoginduplicatematchingrecord.
-        /// </summary>
-        public virtual ILoginduplicatematchingrecord Loginduplicatematchingrecord { get; private set; }
-
-        /// <summary>
-        /// Gets the ILoginmailboxtrackingfolders.
-        /// </summary>
-        public virtual ILoginmailboxtrackingfolders Loginmailboxtrackingfolders { get; private set; }
-
-        /// <summary>
-        /// Gets the ILoginprincipalobjectattributeaccesses.
-        /// </summary>
-        public virtual ILoginprincipalobjectattributeaccesses Loginprincipalobjectattributeaccesses { get; private set; }
-
-        /// <summary>
-        /// Gets the ILoginprocesssession.
-        /// </summary>
-        public virtual ILoginprocesssession Loginprocesssession { get; private set; }
-
-        /// <summary>
-        /// Gets the ILoginsyncerrors.
-        /// </summary>
-        public virtual ILoginsyncerrors Loginsyncerrors { get; private set; }
-
-        /// <summary>
-        /// Gets the IRelatedaccount.
-        /// </summary>
-        public virtual IRelatedaccount Relatedaccount { get; private set; }
 
         /// <summary>
         /// Gets the ILqrlicencetransferbpfs.
@@ -1026,51 +481,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IOnestopmessageitems Onestopmessageitems { get; private set; }
 
         /// <summary>
-        /// Gets the ILicence.
-        /// </summary>
-        public virtual ILicence Licence { get; private set; }
-
-        /// <summary>
-        /// Gets the IOnestopmessageitemasyncoperations.
-        /// </summary>
-        public virtual IOnestopmessageitemasyncoperations Onestopmessageitemasyncoperations { get; private set; }
-
-        /// <summary>
-        /// Gets the IOnestopmessageitembulkdeletefailures.
-        /// </summary>
-        public virtual IOnestopmessageitembulkdeletefailures Onestopmessageitembulkdeletefailures { get; private set; }
-
-        /// <summary>
-        /// Gets the IOnestopmessageitemduplicatebaserecord.
-        /// </summary>
-        public virtual IOnestopmessageitemduplicatebaserecord Onestopmessageitemduplicatebaserecord { get; private set; }
-
-        /// <summary>
-        /// Gets the IOnestopmessageitemduplicatematchingrecord.
-        /// </summary>
-        public virtual IOnestopmessageitemduplicatematchingrecord Onestopmessageitemduplicatematchingrecord { get; private set; }
-
-        /// <summary>
-        /// Gets the IOnestopmessageitemmailboxtrackingfolders.
-        /// </summary>
-        public virtual IOnestopmessageitemmailboxtrackingfolders Onestopmessageitemmailboxtrackingfolders { get; private set; }
-
-        /// <summary>
-        /// Gets the IOnestopmessageitemprincipalobjectattributeaccesses.
-        /// </summary>
-        public virtual IOnestopmessageitemprincipalobjectattributeaccesses Onestopmessageitemprincipalobjectattributeaccesses { get; private set; }
-
-        /// <summary>
-        /// Gets the IOnestopmessageitemprocesssession.
-        /// </summary>
-        public virtual IOnestopmessageitemprocesssession Onestopmessageitemprocesssession { get; private set; }
-
-        /// <summary>
-        /// Gets the IOnestopmessageitemsyncerrors.
-        /// </summary>
-        public virtual IOnestopmessageitemsyncerrors Onestopmessageitemsyncerrors { get; private set; }
-
-        /// <summary>
         /// Gets the IPersonalhistorysummaries.
         /// </summary>
         public virtual IPersonalhistorysummaries Personalhistorysummaries { get; private set; }
@@ -1081,34 +491,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IPmuareas Pmuareas { get; private set; }
 
         /// <summary>
-        /// Gets the IPmuareaestablishments.
-        /// </summary>
-        public virtual IPmuareaestablishments Pmuareaestablishments { get; private set; }
-
-        /// <summary>
-        /// Gets the IPmuareaspecialevents.
-        /// </summary>
-        public virtual IPmuareaspecialevents Pmuareaspecialevents { get; private set; }
-
-        /// <summary>
         /// Gets the IPolicejurisdictions.
         /// </summary>
         public virtual IPolicejurisdictions Policejurisdictions { get; private set; }
-
-        /// <summary>
-        /// Gets the ILginid.
-        /// </summary>
-        public virtual ILginid Lginid { get; private set; }
-
-        /// <summary>
-        /// Gets the IPolicejurisdictionaccount.
-        /// </summary>
-        public virtual IPolicejurisdictionaccount Policejurisdictionaccount { get; private set; }
-
-        /// <summary>
-        /// Gets the IPolicejurisdictionspecialevents.
-        /// </summary>
-        public virtual IPolicejurisdictionspecialevents Policejurisdictionspecialevents { get; private set; }
 
         /// <summary>
         /// Gets the IPolicydocuments.
@@ -1136,79 +521,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IRegions Regions { get; private set; }
 
         /// <summary>
-        /// Gets the IManagerofinvestigationsid.
-        /// </summary>
-        public virtual IManagerofinvestigationsid Managerofinvestigationsid { get; private set; }
-
-        /// <summary>
-        /// Gets the IRegionadditionalinspectors.
-        /// </summary>
-        public virtual IRegionadditionalinspectors Regionadditionalinspectors { get; private set; }
-
-        /// <summary>
-        /// Gets the IRegioninvestigationrequests.
-        /// </summary>
-        public virtual IRegioninvestigationrequests Regioninvestigationrequests { get; private set; }
-
-        /// <summary>
-        /// Gets the IRegionspecialevents.
-        /// </summary>
-        public virtual IRegionspecialevents Regionspecialevents { get; private set; }
-
-        /// <summary>
         /// Gets the IRelatedlicences.
         /// </summary>
         public virtual IRelatedlicences Relatedlicences { get; private set; }
-
-        /// <summary>
-        /// Gets the IChildlicence.
-        /// </summary>
-        public virtual IChildlicence Childlicence { get; private set; }
-
-        /// <summary>
-        /// Gets the IParentlicence.
-        /// </summary>
-        public virtual IParentlicence Parentlicence { get; private set; }
-
-        /// <summary>
-        /// Gets the IRelatedlicenceasyncoperations.
-        /// </summary>
-        public virtual IRelatedlicenceasyncoperations Relatedlicenceasyncoperations { get; private set; }
-
-        /// <summary>
-        /// Gets the IRelatedlicencebulkdeletefailures.
-        /// </summary>
-        public virtual IRelatedlicencebulkdeletefailures Relatedlicencebulkdeletefailures { get; private set; }
-
-        /// <summary>
-        /// Gets the IRelatedlicenceduplicatebaserecord.
-        /// </summary>
-        public virtual IRelatedlicenceduplicatebaserecord Relatedlicenceduplicatebaserecord { get; private set; }
-
-        /// <summary>
-        /// Gets the IRelatedlicenceduplicatematchingrecord.
-        /// </summary>
-        public virtual IRelatedlicenceduplicatematchingrecord Relatedlicenceduplicatematchingrecord { get; private set; }
-
-        /// <summary>
-        /// Gets the IRelatedlicencemailboxtrackingfolders.
-        /// </summary>
-        public virtual IRelatedlicencemailboxtrackingfolders Relatedlicencemailboxtrackingfolders { get; private set; }
-
-        /// <summary>
-        /// Gets the IRelatedlicenceprincipalobjectattributeaccesses.
-        /// </summary>
-        public virtual IRelatedlicenceprincipalobjectattributeaccesses Relatedlicenceprincipalobjectattributeaccesses { get; private set; }
-
-        /// <summary>
-        /// Gets the IRelatedlicenceprocesssession.
-        /// </summary>
-        public virtual IRelatedlicenceprocesssession Relatedlicenceprocesssession { get; private set; }
-
-        /// <summary>
-        /// Gets the IRelatedlicencesyncerrors.
-        /// </summary>
-        public virtual IRelatedlicencesyncerrors Relatedlicencesyncerrors { get; private set; }
 
         /// <summary>
         /// Gets the IRelatedparties.
@@ -1221,9 +536,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IRmreviews Rmreviews { get; private set; }
 
         /// <summary>
-        /// Gets the IInvestigationenforcement.
+        /// Gets the ISepcities.
         /// </summary>
-        public virtual IInvestigationenforcement Investigationenforcement { get; private set; }
+        public virtual ISepcities Sepcities { get; private set; }
 
         /// <summary>
         /// Gets the ISepdrinksalesforecasts.
@@ -1231,114 +546,19 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ISepdrinksalesforecasts Sepdrinksalesforecasts { get; private set; }
 
         /// <summary>
-        /// Gets the ISepdrinksalesforecastasyncoperations.
-        /// </summary>
-        public virtual ISepdrinksalesforecastasyncoperations Sepdrinksalesforecastasyncoperations { get; private set; }
-
-        /// <summary>
-        /// Gets the ISepdrinksalesforecastbulkdeletefailures.
-        /// </summary>
-        public virtual ISepdrinksalesforecastbulkdeletefailures Sepdrinksalesforecastbulkdeletefailures { get; private set; }
-
-        /// <summary>
-        /// Gets the ISepdrinksalesforecastduplicatebaserecord.
-        /// </summary>
-        public virtual ISepdrinksalesforecastduplicatebaserecord Sepdrinksalesforecastduplicatebaserecord { get; private set; }
-
-        /// <summary>
-        /// Gets the ISepdrinksalesforecastduplicatematchingrecord.
-        /// </summary>
-        public virtual ISepdrinksalesforecastduplicatematchingrecord Sepdrinksalesforecastduplicatematchingrecord { get; private set; }
-
-        /// <summary>
-        /// Gets the ISepdrinksalesforecastmailboxtrackingfolders.
-        /// </summary>
-        public virtual ISepdrinksalesforecastmailboxtrackingfolders Sepdrinksalesforecastmailboxtrackingfolders { get; private set; }
-
-        /// <summary>
-        /// Gets the ISepdrinksalesforecastprincipalobjectattributeaccesses.
-        /// </summary>
-        public virtual ISepdrinksalesforecastprincipalobjectattributeaccesses Sepdrinksalesforecastprincipalobjectattributeaccesses { get; private set; }
-
-        /// <summary>
-        /// Gets the ISepdrinksalesforecastprocesssession.
-        /// </summary>
-        public virtual ISepdrinksalesforecastprocesssession Sepdrinksalesforecastprocesssession { get; private set; }
-
-        /// <summary>
-        /// Gets the ISepdrinksalesforecastsyncerrors.
-        /// </summary>
-        public virtual ISepdrinksalesforecastsyncerrors Sepdrinksalesforecastsyncerrors { get; private set; }
-
-        /// <summary>
-        /// Gets the ISpecialevent.
-        /// </summary>
-        public virtual ISpecialevent Specialevent { get; private set; }
-
-        /// <summary>
-        /// Gets the IType.
-        /// </summary>
-        public virtual IType Type { get; private set; }
-
-        /// <summary>
         /// Gets the ISepdrinktypes.
         /// </summary>
         public virtual ISepdrinktypes Sepdrinktypes { get; private set; }
 
         /// <summary>
-        /// Gets the ISepdrinktypeadoxiosepdrinksalesforecasttype.
+        /// Gets the ISepinvoicehistories.
         /// </summary>
-        public virtual ISepdrinktypeadoxiosepdrinksalesforecasttype Sepdrinktypeadoxiosepdrinksalesforecasttype { get; private set; }
-
-        /// <summary>
-        /// Gets the ISepdrinktypeasyncoperations.
-        /// </summary>
-        public virtual ISepdrinktypeasyncoperations Sepdrinktypeasyncoperations { get; private set; }
-
-        /// <summary>
-        /// Gets the ISepdrinktypebulkdeletefailures.
-        /// </summary>
-        public virtual ISepdrinktypebulkdeletefailures Sepdrinktypebulkdeletefailures { get; private set; }
-
-        /// <summary>
-        /// Gets the ISepdrinktypeduplicatebaserecord.
-        /// </summary>
-        public virtual ISepdrinktypeduplicatebaserecord Sepdrinktypeduplicatebaserecord { get; private set; }
-
-        /// <summary>
-        /// Gets the ISepdrinktypeduplicatematchingrecord.
-        /// </summary>
-        public virtual ISepdrinktypeduplicatematchingrecord Sepdrinktypeduplicatematchingrecord { get; private set; }
-
-        /// <summary>
-        /// Gets the ISepdrinktypemailboxtrackingfolders.
-        /// </summary>
-        public virtual ISepdrinktypemailboxtrackingfolders Sepdrinktypemailboxtrackingfolders { get; private set; }
-
-        /// <summary>
-        /// Gets the ISepdrinktypeprincipalobjectattributeaccesses.
-        /// </summary>
-        public virtual ISepdrinktypeprincipalobjectattributeaccesses Sepdrinktypeprincipalobjectattributeaccesses { get; private set; }
-
-        /// <summary>
-        /// Gets the ISepdrinktypeprocesssession.
-        /// </summary>
-        public virtual ISepdrinktypeprocesssession Sepdrinktypeprocesssession { get; private set; }
-
-        /// <summary>
-        /// Gets the ISepdrinktypesyncerrors.
-        /// </summary>
-        public virtual ISepdrinktypesyncerrors Sepdrinktypesyncerrors { get; private set; }
+        public virtual ISepinvoicehistories Sepinvoicehistories { get; private set; }
 
         /// <summary>
         /// Gets the IServiceareas.
         /// </summary>
         public virtual IServiceareas Serviceareas { get; private set; }
-
-        /// <summary>
-        /// Gets the IServiceareaeventlocations.
-        /// </summary>
-        public virtual IServiceareaeventlocations Serviceareaeventlocations { get; private set; }
 
         /// <summary>
         /// Gets the ISettings.
@@ -1361,19 +581,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ISpecialeventlicencedareas Specialeventlicencedareas { get; private set; }
 
         /// <summary>
-        /// Gets the ISpecialeventareaeventschedules.
-        /// </summary>
-        public virtual ISpecialeventareaeventschedules Specialeventareaeventschedules { get; private set; }
-
-        /// <summary>
         /// Gets the ISpecialeventlocations.
         /// </summary>
         public virtual ISpecialeventlocations Specialeventlocations { get; private set; }
-
-        /// <summary>
-        /// Gets the ISpecialeventlocationinspections.
-        /// </summary>
-        public virtual ISpecialeventlocationinspections Specialeventlocationinspections { get; private set; }
 
         /// <summary>
         /// Gets the ISpecialeventnotes.
@@ -1384,46 +594,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ISpecialevents.
         /// </summary>
         public virtual ISpecialevents Specialevents { get; private set; }
-
-        /// <summary>
-        /// Gets the IInspector.
-        /// </summary>
-        public virtual IInspector Inspector { get; private set; }
-
-        /// <summary>
-        /// Gets the ILcrbrepresentativeid.
-        /// </summary>
-        public virtual ILcrbrepresentativeid Lcrbrepresentativeid { get; private set; }
-
-        /// <summary>
-        /// Gets the ILocalgovernmentid.
-        /// </summary>
-        public virtual ILocalgovernmentid Localgovernmentid { get; private set; }
-
-        /// <summary>
-        /// Gets the IPoliceaccountid.
-        /// </summary>
-        public virtual IPoliceaccountid Policeaccountid { get; private set; }
-
-        /// <summary>
-        /// Gets the IPolicerepresentativeid.
-        /// </summary>
-        public virtual IPolicerepresentativeid Policerepresentativeid { get; private set; }
-
-        /// <summary>
-        /// Gets the ISpecialeventadoxiosepdrinksalesforecastspecialevent.
-        /// </summary>
-        public virtual ISpecialeventadoxiosepdrinksalesforecastspecialevent Specialeventadoxiosepdrinksalesforecastspecialevent { get; private set; }
-
-        /// <summary>
-        /// Gets the ISpecialeventinspection.
-        /// </summary>
-        public virtual ISpecialeventinspection Specialeventinspection { get; private set; }
-
-        /// <summary>
-        /// Gets the ISpecialeventinvoices.
-        /// </summary>
-        public virtual ISpecialeventinvoices Specialeventinvoices { get; private set; }
 
         /// <summary>
         /// Gets the ISpecialeventschedules.
@@ -1441,46 +611,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IStatuscounters Statuscounters { get; private set; }
 
         /// <summary>
-        /// Gets the IApplication.
-        /// </summary>
-        public virtual IApplication Application { get; private set; }
-
-        /// <summary>
-        /// Gets the IStatuscounterasyncoperations.
-        /// </summary>
-        public virtual IStatuscounterasyncoperations Statuscounterasyncoperations { get; private set; }
-
-        /// <summary>
-        /// Gets the IStatuscounterbulkdeletefailures.
-        /// </summary>
-        public virtual IStatuscounterbulkdeletefailures Statuscounterbulkdeletefailures { get; private set; }
-
-        /// <summary>
-        /// Gets the IStatuscountermailboxtrackingfolders.
-        /// </summary>
-        public virtual IStatuscountermailboxtrackingfolders Statuscountermailboxtrackingfolders { get; private set; }
-
-        /// <summary>
-        /// Gets the IStatuscounterprincipalobjectattributeaccesses.
-        /// </summary>
-        public virtual IStatuscounterprincipalobjectattributeaccesses Statuscounterprincipalobjectattributeaccesses { get; private set; }
-
-        /// <summary>
-        /// Gets the IStatuscounterprocesssession.
-        /// </summary>
-        public virtual IStatuscounterprocesssession Statuscounterprocesssession { get; private set; }
-
-        /// <summary>
-        /// Gets the IStatuscountersharepointdocumentlocations.
-        /// </summary>
-        public virtual IStatuscountersharepointdocumentlocations Statuscountersharepointdocumentlocations { get; private set; }
-
-        /// <summary>
-        /// Gets the IStatuscountersyncerrors.
-        /// </summary>
-        public virtual IStatuscountersyncerrors Statuscountersyncerrors { get; private set; }
-
-        /// <summary>
         /// Gets the ITaxandaccountings.
         /// </summary>
         public virtual ITaxandaccountings Taxandaccountings { get; private set; }
@@ -1494,11 +624,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ITerritories.
         /// </summary>
         public virtual ITerritories Territories { get; private set; }
-
-        /// <summary>
-        /// Gets the IOfficeinvestigationrequests.
-        /// </summary>
-        public virtual IOfficeinvestigationrequests Officeinvestigationrequests { get; private set; }
 
         /// <summary>
         /// Gets the ITiedhouseassociations.
@@ -1526,239 +651,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IWorkers Workers { get; private set; }
 
         /// <summary>
-        /// Gets the IRegardingobjectidadoxioadditionalinspector.
-        /// </summary>
-        public virtual IRegardingobjectidadoxioadditionalinspector Regardingobjectidadoxioadditionalinspector { get; private set; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioadminactivity.
-        /// </summary>
-        public virtual IRegardingobjectidadoxioadminactivity Regardingobjectidadoxioadminactivity { get; private set; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioeventlocation.
-        /// </summary>
-        public virtual IRegardingobjectidadoxioeventlocation Regardingobjectidadoxioeventlocation { get; private set; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioinvestigationcontact.
-        /// </summary>
-        public virtual IRegardingobjectidadoxioinvestigationcontact Regardingobjectidadoxioinvestigationcontact { get; private set; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioinvestigationrequest.
-        /// </summary>
-        public virtual IRegardingobjectidadoxioinvestigationrequest Regardingobjectidadoxioinvestigationrequest { get; private set; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioinvestigationsubject.
-        /// </summary>
-        public virtual IRegardingobjectidadoxioinvestigationsubject Regardingobjectidadoxioinvestigationsubject { get; private set; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiologin.
-        /// </summary>
-        public virtual IRegardingobjectidadoxiologin Regardingobjectidadoxiologin { get; private set; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxioonestopmessageitem.
-        /// </summary>
-        public virtual IRegardingobjectidadoxioonestopmessageitem Regardingobjectidadoxioonestopmessageitem { get; private set; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiorelatedlicence.
-        /// </summary>
-        public virtual IRegardingobjectidadoxiorelatedlicence Regardingobjectidadoxiorelatedlicence { get; private set; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiosepdrinksalesforecast.
-        /// </summary>
-        public virtual IRegardingobjectidadoxiosepdrinksalesforecast Regardingobjectidadoxiosepdrinksalesforecast { get; private set; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiosepdrinktype.
-        /// </summary>
-        public virtual IRegardingobjectidadoxiosepdrinktype Regardingobjectidadoxiosepdrinktype { get; private set; }
-
-        /// <summary>
-        /// Gets the IRegardingobjectidadoxiostatuscounter.
-        /// </summary>
-        public virtual IRegardingobjectidadoxiostatuscounter Regardingobjectidadoxiostatuscounter { get; private set; }
-
-        /// <summary>
-        /// Gets the IBusinessunitadoxioadditionalinspector.
-        /// </summary>
-        public virtual IBusinessunitadoxioadditionalinspector Businessunitadoxioadditionalinspector { get; private set; }
-
-        /// <summary>
-        /// Gets the IBusinessunitadoxioadminactivity.
-        /// </summary>
-        public virtual IBusinessunitadoxioadminactivity Businessunitadoxioadminactivity { get; private set; }
-
-        /// <summary>
-        /// Gets the IBusinessunitadoxioeventlocation.
-        /// </summary>
-        public virtual IBusinessunitadoxioeventlocation Businessunitadoxioeventlocation { get; private set; }
-
-        /// <summary>
-        /// Gets the IBusinessunitadoxioinvestigationcontact.
-        /// </summary>
-        public virtual IBusinessunitadoxioinvestigationcontact Businessunitadoxioinvestigationcontact { get; private set; }
-
-        /// <summary>
-        /// Gets the IBusinessunitadoxioinvestigationrequest.
-        /// </summary>
-        public virtual IBusinessunitadoxioinvestigationrequest Businessunitadoxioinvestigationrequest { get; private set; }
-
-        /// <summary>
-        /// Gets the IBusinessunitadoxioinvestigationsubject.
-        /// </summary>
-        public virtual IBusinessunitadoxioinvestigationsubject Businessunitadoxioinvestigationsubject { get; private set; }
-
-        /// <summary>
-        /// Gets the IBusinessunitadoxiologin.
-        /// </summary>
-        public virtual IBusinessunitadoxiologin Businessunitadoxiologin { get; private set; }
-
-        /// <summary>
-        /// Gets the IBusinessunitadoxioonestopmessageitem.
-        /// </summary>
-        public virtual IBusinessunitadoxioonestopmessageitem Businessunitadoxioonestopmessageitem { get; private set; }
-
-        /// <summary>
-        /// Gets the IBusinessunitadoxiorelatedlicence.
-        /// </summary>
-        public virtual IBusinessunitadoxiorelatedlicence Businessunitadoxiorelatedlicence { get; private set; }
-
-        /// <summary>
-        /// Gets the IBusinessunitadoxiosepdrinksalesforecast.
-        /// </summary>
-        public virtual IBusinessunitadoxiosepdrinksalesforecast Businessunitadoxiosepdrinksalesforecast { get; private set; }
-
-        /// <summary>
-        /// Gets the IBusinessunitadoxiosepdrinktype.
-        /// </summary>
-        public virtual IBusinessunitadoxiosepdrinktype Businessunitadoxiosepdrinktype { get; private set; }
-
-        /// <summary>
-        /// Gets the IBusinessunitadoxiostatuscounter.
-        /// </summary>
-        public virtual IBusinessunitadoxiostatuscounter Businessunitadoxiostatuscounter { get; private set; }
-
-        /// <summary>
         /// Gets the IContacts.
         /// </summary>
         public virtual IContacts Contacts { get; private set; }
-
-        /// <summary>
-        /// Gets the IContactadoxiologincontact.
-        /// </summary>
-        public virtual IContactadoxiologincontact Contactadoxiologincontact { get; private set; }
-
-        /// <summary>
-        /// Gets the IContactinvestigationsubjects.
-        /// </summary>
-        public virtual IContactinvestigationsubjects Contactinvestigationsubjects { get; private set; }
-
-        /// <summary>
-        /// Gets the IContactspecialevents.
-        /// </summary>
-        public virtual IContactspecialevents Contactspecialevents { get; private set; }
-
-        /// <summary>
-        /// Gets the IPolicerepresentativespecialevents.
-        /// </summary>
-        public virtual IPolicerepresentativespecialevents Policerepresentativespecialevents { get; private set; }
-
-        /// <summary>
-        /// Gets the IBaserecordidadoxioadminactivity.
-        /// </summary>
-        public virtual IBaserecordidadoxioadminactivity Baserecordidadoxioadminactivity { get; private set; }
-
-        /// <summary>
-        /// Gets the IBaserecordidadoxioinvestigationcontact.
-        /// </summary>
-        public virtual IBaserecordidadoxioinvestigationcontact Baserecordidadoxioinvestigationcontact { get; private set; }
-
-        /// <summary>
-        /// Gets the IBaserecordidadoxioinvestigationrequest.
-        /// </summary>
-        public virtual IBaserecordidadoxioinvestigationrequest Baserecordidadoxioinvestigationrequest { get; private set; }
-
-        /// <summary>
-        /// Gets the IBaserecordidadoxioinvestigationsubject.
-        /// </summary>
-        public virtual IBaserecordidadoxioinvestigationsubject Baserecordidadoxioinvestigationsubject { get; private set; }
-
-        /// <summary>
-        /// Gets the IBaserecordidadoxiologin.
-        /// </summary>
-        public virtual IBaserecordidadoxiologin Baserecordidadoxiologin { get; private set; }
-
-        /// <summary>
-        /// Gets the IBaserecordidadoxioonestopmessageitem.
-        /// </summary>
-        public virtual IBaserecordidadoxioonestopmessageitem Baserecordidadoxioonestopmessageitem { get; private set; }
-
-        /// <summary>
-        /// Gets the IBaserecordidadoxiorelatedlicence.
-        /// </summary>
-        public virtual IBaserecordidadoxiorelatedlicence Baserecordidadoxiorelatedlicence { get; private set; }
-
-        /// <summary>
-        /// Gets the IBaserecordidadoxiosepdrinksalesforecast.
-        /// </summary>
-        public virtual IBaserecordidadoxiosepdrinksalesforecast Baserecordidadoxiosepdrinksalesforecast { get; private set; }
-
-        /// <summary>
-        /// Gets the IBaserecordidadoxiosepdrinktype.
-        /// </summary>
-        public virtual IBaserecordidadoxiosepdrinktype Baserecordidadoxiosepdrinktype { get; private set; }
-
-        /// <summary>
-        /// Gets the IDuplicaterecordidadoxioadminactivity.
-        /// </summary>
-        public virtual IDuplicaterecordidadoxioadminactivity Duplicaterecordidadoxioadminactivity { get; private set; }
-
-        /// <summary>
-        /// Gets the IDuplicaterecordidadoxioinvestigationcontact.
-        /// </summary>
-        public virtual IDuplicaterecordidadoxioinvestigationcontact Duplicaterecordidadoxioinvestigationcontact { get; private set; }
-
-        /// <summary>
-        /// Gets the IDuplicaterecordidadoxioinvestigationrequest.
-        /// </summary>
-        public virtual IDuplicaterecordidadoxioinvestigationrequest Duplicaterecordidadoxioinvestigationrequest { get; private set; }
-
-        /// <summary>
-        /// Gets the IDuplicaterecordidadoxioinvestigationsubject.
-        /// </summary>
-        public virtual IDuplicaterecordidadoxioinvestigationsubject Duplicaterecordidadoxioinvestigationsubject { get; private set; }
-
-        /// <summary>
-        /// Gets the IDuplicaterecordidadoxiologin.
-        /// </summary>
-        public virtual IDuplicaterecordidadoxiologin Duplicaterecordidadoxiologin { get; private set; }
-
-        /// <summary>
-        /// Gets the IDuplicaterecordidadoxioonestopmessageitem.
-        /// </summary>
-        public virtual IDuplicaterecordidadoxioonestopmessageitem Duplicaterecordidadoxioonestopmessageitem { get; private set; }
-
-        /// <summary>
-        /// Gets the IDuplicaterecordidadoxiorelatedlicence.
-        /// </summary>
-        public virtual IDuplicaterecordidadoxiorelatedlicence Duplicaterecordidadoxiorelatedlicence { get; private set; }
-
-        /// <summary>
-        /// Gets the IDuplicaterecordidadoxiosepdrinksalesforecast.
-        /// </summary>
-        public virtual IDuplicaterecordidadoxiosepdrinksalesforecast Duplicaterecordidadoxiosepdrinksalesforecast { get; private set; }
-
-        /// <summary>
-        /// Gets the IDuplicaterecordidadoxiosepdrinktype.
-        /// </summary>
-        public virtual IDuplicaterecordidadoxiosepdrinktype Duplicaterecordidadoxiosepdrinktype { get; private set; }
 
         /// <summary>
         /// Gets the IEntitydefinitions.
@@ -1771,39 +666,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IGlobaloptionsetdefinitions Globaloptionsetdefinitions { get; private set; }
 
         /// <summary>
-        /// Gets the IEventlocationid.
-        /// </summary>
-        public virtual IEventlocationid Eventlocationid { get; private set; }
-
-        /// <summary>
-        /// Gets the IInspectionadditionalinspectors.
-        /// </summary>
-        public virtual IInspectionadditionalinspectors Inspectionadditionalinspectors { get; private set; }
-
-        /// <summary>
-        /// Gets the IInspectionrelatedparties.
-        /// </summary>
-        public virtual IInspectionrelatedparties Inspectionrelatedparties { get; private set; }
-
-        /// <summary>
-        /// Gets the ISpecialeventid.
-        /// </summary>
-        public virtual ISpecialeventid Specialeventid { get; private set; }
-
-        /// <summary>
         /// Gets the IInvoices.
         /// </summary>
         public virtual IInvoices Invoices { get; private set; }
-
-        /// <summary>
-        /// Gets the IContraventionid.
-        /// </summary>
-        public virtual IContraventionid Contraventionid { get; private set; }
-
-        /// <summary>
-        /// Gets the IInvoiceadoxiocontraventioninvoice.
-        /// </summary>
-        public virtual IInvoiceadoxiocontraventioninvoice Invoiceadoxiocontraventioninvoice { get; private set; }
 
         /// <summary>
         /// Gets the ILeads.
@@ -1814,71 +679,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILists.
         /// </summary>
         public virtual ILists Lists { get; private set; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioadditionalinspector.
-        /// </summary>
-        public virtual IObjectidadoxioadditionalinspector Objectidadoxioadditionalinspector { get; private set; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioadminactivity.
-        /// </summary>
-        public virtual IObjectidadoxioadminactivity Objectidadoxioadminactivity { get; private set; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioeventlocation.
-        /// </summary>
-        public virtual IObjectidadoxioeventlocation Objectidadoxioeventlocation { get; private set; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioinvestigationcontact.
-        /// </summary>
-        public virtual IObjectidadoxioinvestigationcontact Objectidadoxioinvestigationcontact { get; private set; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioinvestigationrequest.
-        /// </summary>
-        public virtual IObjectidadoxioinvestigationrequest Objectidadoxioinvestigationrequest { get; private set; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioinvestigationsubject.
-        /// </summary>
-        public virtual IObjectidadoxioinvestigationsubject Objectidadoxioinvestigationsubject { get; private set; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiologin.
-        /// </summary>
-        public virtual IObjectidadoxiologin Objectidadoxiologin { get; private set; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxioonestopmessageitem.
-        /// </summary>
-        public virtual IObjectidadoxioonestopmessageitem Objectidadoxioonestopmessageitem { get; private set; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiorelatedlicence.
-        /// </summary>
-        public virtual IObjectidadoxiorelatedlicence Objectidadoxiorelatedlicence { get; private set; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiosepdrinksalesforecast.
-        /// </summary>
-        public virtual IObjectidadoxiosepdrinksalesforecast Objectidadoxiosepdrinksalesforecast { get; private set; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiosepdrinktype.
-        /// </summary>
-        public virtual IObjectidadoxiosepdrinktype Objectidadoxiosepdrinktype { get; private set; }
-
-        /// <summary>
-        /// Gets the IObjectidadoxiostatuscounter.
-        /// </summary>
-        public virtual IObjectidadoxiostatuscounter Objectidadoxiostatuscounter { get; private set; }
-
-        /// <summary>
-        /// Gets the IProductadoxioapplicationtyperenewalfeeproduct.
-        /// </summary>
-        public virtual IProductadoxioapplicationtyperenewalfeeproduct Productadoxioapplicationtyperenewalfeeproduct { get; private set; }
 
         /// <summary>
         /// Gets the ISavedqueries.
@@ -1904,386 +704,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ISystemusers.
         /// </summary>
         public virtual ISystemusers Systemusers { get; private set; }
-
-        /// <summary>
-        /// Gets the IInspectoradditionalinspectors.
-        /// </summary>
-        public virtual IInspectoradditionalinspectors Inspectoradditionalinspectors { get; private set; }
-
-        /// <summary>
-        /// Gets the IInvestigationsmanagerregions.
-        /// </summary>
-        public virtual IInvestigationsmanagerregions Investigationsmanagerregions { get; private set; }
-
-        /// <summary>
-        /// Gets the ILcrbrepresentativespecialevents.
-        /// </summary>
-        public virtual ILcrbrepresentativespecialevents Lcrbrepresentativespecialevents { get; private set; }
-
-        /// <summary>
-        /// Gets the ISystemuseradoxiospecialeventinspector.
-        /// </summary>
-        public virtual ISystemuseradoxiospecialeventinspector Systemuseradoxiospecialeventinspector { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxioadditionalinspectorcreatedby.
-        /// </summary>
-        public virtual ILkadoxioadditionalinspectorcreatedby Lkadoxioadditionalinspectorcreatedby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxioadditionalinspectorcreatedonbehalfby.
-        /// </summary>
-        public virtual ILkadoxioadditionalinspectorcreatedonbehalfby Lkadoxioadditionalinspectorcreatedonbehalfby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxioadditionalinspectormodifiedby.
-        /// </summary>
-        public virtual ILkadoxioadditionalinspectormodifiedby Lkadoxioadditionalinspectormodifiedby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxioadditionalinspectormodifiedonbehalfby.
-        /// </summary>
-        public virtual ILkadoxioadditionalinspectormodifiedonbehalfby Lkadoxioadditionalinspectormodifiedonbehalfby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxioadminactivitycreatedby.
-        /// </summary>
-        public virtual ILkadoxioadminactivitycreatedby Lkadoxioadminactivitycreatedby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxioadminactivitycreatedonbehalfby.
-        /// </summary>
-        public virtual ILkadoxioadminactivitycreatedonbehalfby Lkadoxioadminactivitycreatedonbehalfby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxioadminactivitymodifiedby.
-        /// </summary>
-        public virtual ILkadoxioadminactivitymodifiedby Lkadoxioadminactivitymodifiedby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxioadminactivitymodifiedonbehalfby.
-        /// </summary>
-        public virtual ILkadoxioadminactivitymodifiedonbehalfby Lkadoxioadminactivitymodifiedonbehalfby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxioeventlocationcreatedby.
-        /// </summary>
-        public virtual ILkadoxioeventlocationcreatedby Lkadoxioeventlocationcreatedby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxioeventlocationcreatedonbehalfby.
-        /// </summary>
-        public virtual ILkadoxioeventlocationcreatedonbehalfby Lkadoxioeventlocationcreatedonbehalfby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxioeventlocationmodifiedby.
-        /// </summary>
-        public virtual ILkadoxioeventlocationmodifiedby Lkadoxioeventlocationmodifiedby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxioeventlocationmodifiedonbehalfby.
-        /// </summary>
-        public virtual ILkadoxioeventlocationmodifiedonbehalfby Lkadoxioeventlocationmodifiedonbehalfby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxioinvestigationcontactcreatedby.
-        /// </summary>
-        public virtual ILkadoxioinvestigationcontactcreatedby Lkadoxioinvestigationcontactcreatedby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxioinvestigationcontactcreatedonbehalfby.
-        /// </summary>
-        public virtual ILkadoxioinvestigationcontactcreatedonbehalfby Lkadoxioinvestigationcontactcreatedonbehalfby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxioinvestigationcontactmodifiedby.
-        /// </summary>
-        public virtual ILkadoxioinvestigationcontactmodifiedby Lkadoxioinvestigationcontactmodifiedby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxioinvestigationcontactmodifiedonbehalfby.
-        /// </summary>
-        public virtual ILkadoxioinvestigationcontactmodifiedonbehalfby Lkadoxioinvestigationcontactmodifiedonbehalfby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxioinvestigationrequestcreatedby.
-        /// </summary>
-        public virtual ILkadoxioinvestigationrequestcreatedby Lkadoxioinvestigationrequestcreatedby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxioinvestigationrequestcreatedonbehalfby.
-        /// </summary>
-        public virtual ILkadoxioinvestigationrequestcreatedonbehalfby Lkadoxioinvestigationrequestcreatedonbehalfby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxioinvestigationrequestmodifiedby.
-        /// </summary>
-        public virtual ILkadoxioinvestigationrequestmodifiedby Lkadoxioinvestigationrequestmodifiedby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxioinvestigationrequestmodifiedonbehalfby.
-        /// </summary>
-        public virtual ILkadoxioinvestigationrequestmodifiedonbehalfby Lkadoxioinvestigationrequestmodifiedonbehalfby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxioinvestigationsubjectcreatedby.
-        /// </summary>
-        public virtual ILkadoxioinvestigationsubjectcreatedby Lkadoxioinvestigationsubjectcreatedby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxioinvestigationsubjectcreatedonbehalfby.
-        /// </summary>
-        public virtual ILkadoxioinvestigationsubjectcreatedonbehalfby Lkadoxioinvestigationsubjectcreatedonbehalfby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxioinvestigationsubjectmodifiedby.
-        /// </summary>
-        public virtual ILkadoxioinvestigationsubjectmodifiedby Lkadoxioinvestigationsubjectmodifiedby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxioinvestigationsubjectmodifiedonbehalfby.
-        /// </summary>
-        public virtual ILkadoxioinvestigationsubjectmodifiedonbehalfby Lkadoxioinvestigationsubjectmodifiedonbehalfby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxiologincreatedby.
-        /// </summary>
-        public virtual ILkadoxiologincreatedby Lkadoxiologincreatedby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxiologincreatedonbehalfby.
-        /// </summary>
-        public virtual ILkadoxiologincreatedonbehalfby Lkadoxiologincreatedonbehalfby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxiologinmodifiedby.
-        /// </summary>
-        public virtual ILkadoxiologinmodifiedby Lkadoxiologinmodifiedby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxiologinmodifiedonbehalfby.
-        /// </summary>
-        public virtual ILkadoxiologinmodifiedonbehalfby Lkadoxiologinmodifiedonbehalfby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxioonestopmessageitemcreatedby.
-        /// </summary>
-        public virtual ILkadoxioonestopmessageitemcreatedby Lkadoxioonestopmessageitemcreatedby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxioonestopmessageitemcreatedonbehalfby.
-        /// </summary>
-        public virtual ILkadoxioonestopmessageitemcreatedonbehalfby Lkadoxioonestopmessageitemcreatedonbehalfby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxioonestopmessageitemmodifiedby.
-        /// </summary>
-        public virtual ILkadoxioonestopmessageitemmodifiedby Lkadoxioonestopmessageitemmodifiedby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxioonestopmessageitemmodifiedonbehalfby.
-        /// </summary>
-        public virtual ILkadoxioonestopmessageitemmodifiedonbehalfby Lkadoxioonestopmessageitemmodifiedonbehalfby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxiorelatedlicencecreatedby.
-        /// </summary>
-        public virtual ILkadoxiorelatedlicencecreatedby Lkadoxiorelatedlicencecreatedby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxiorelatedlicencecreatedonbehalfby.
-        /// </summary>
-        public virtual ILkadoxiorelatedlicencecreatedonbehalfby Lkadoxiorelatedlicencecreatedonbehalfby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxiorelatedlicencemodifiedby.
-        /// </summary>
-        public virtual ILkadoxiorelatedlicencemodifiedby Lkadoxiorelatedlicencemodifiedby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxiorelatedlicencemodifiedonbehalfby.
-        /// </summary>
-        public virtual ILkadoxiorelatedlicencemodifiedonbehalfby Lkadoxiorelatedlicencemodifiedonbehalfby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxiosepdrinksalesforecastcreatedby.
-        /// </summary>
-        public virtual ILkadoxiosepdrinksalesforecastcreatedby Lkadoxiosepdrinksalesforecastcreatedby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxiosepdrinksalesforecastcreatedonbehalfby.
-        /// </summary>
-        public virtual ILkadoxiosepdrinksalesforecastcreatedonbehalfby Lkadoxiosepdrinksalesforecastcreatedonbehalfby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxiosepdrinksalesforecastmodifiedby.
-        /// </summary>
-        public virtual ILkadoxiosepdrinksalesforecastmodifiedby Lkadoxiosepdrinksalesforecastmodifiedby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxiosepdrinksalesforecastmodifiedonbehalfby.
-        /// </summary>
-        public virtual ILkadoxiosepdrinksalesforecastmodifiedonbehalfby Lkadoxiosepdrinksalesforecastmodifiedonbehalfby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxiosepdrinktypecreatedby.
-        /// </summary>
-        public virtual ILkadoxiosepdrinktypecreatedby Lkadoxiosepdrinktypecreatedby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxiosepdrinktypecreatedonbehalfby.
-        /// </summary>
-        public virtual ILkadoxiosepdrinktypecreatedonbehalfby Lkadoxiosepdrinktypecreatedonbehalfby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxiosepdrinktypemodifiedby.
-        /// </summary>
-        public virtual ILkadoxiosepdrinktypemodifiedby Lkadoxiosepdrinktypemodifiedby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxiosepdrinktypemodifiedonbehalfby.
-        /// </summary>
-        public virtual ILkadoxiosepdrinktypemodifiedonbehalfby Lkadoxiosepdrinktypemodifiedonbehalfby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxiostatuscountercreatedby.
-        /// </summary>
-        public virtual ILkadoxiostatuscountercreatedby Lkadoxiostatuscountercreatedby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxiostatuscountercreatedonbehalfby.
-        /// </summary>
-        public virtual ILkadoxiostatuscountercreatedonbehalfby Lkadoxiostatuscountercreatedonbehalfby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxiostatuscountermodifiedby.
-        /// </summary>
-        public virtual ILkadoxiostatuscountermodifiedby Lkadoxiostatuscountermodifiedby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxiostatuscountermodifiedonbehalfby.
-        /// </summary>
-        public virtual ILkadoxiostatuscountermodifiedonbehalfby Lkadoxiostatuscountermodifiedonbehalfby { get; private set; }
-
-        /// <summary>
-        /// Gets the IUseradoxioadditionalinspector.
-        /// </summary>
-        public virtual IUseradoxioadditionalinspector Useradoxioadditionalinspector { get; private set; }
-
-        /// <summary>
-        /// Gets the IUseradoxioadminactivity.
-        /// </summary>
-        public virtual IUseradoxioadminactivity Useradoxioadminactivity { get; private set; }
-
-        /// <summary>
-        /// Gets the IUseradoxioeventlocation.
-        /// </summary>
-        public virtual IUseradoxioeventlocation Useradoxioeventlocation { get; private set; }
-
-        /// <summary>
-        /// Gets the IUseradoxioinvestigationcontact.
-        /// </summary>
-        public virtual IUseradoxioinvestigationcontact Useradoxioinvestigationcontact { get; private set; }
-
-        /// <summary>
-        /// Gets the IUseradoxioinvestigationrequest.
-        /// </summary>
-        public virtual IUseradoxioinvestigationrequest Useradoxioinvestigationrequest { get; private set; }
-
-        /// <summary>
-        /// Gets the IUseradoxioinvestigationsubject.
-        /// </summary>
-        public virtual IUseradoxioinvestigationsubject Useradoxioinvestigationsubject { get; private set; }
-
-        /// <summary>
-        /// Gets the IUseradoxiologin.
-        /// </summary>
-        public virtual IUseradoxiologin Useradoxiologin { get; private set; }
-
-        /// <summary>
-        /// Gets the IUseradoxioonestopmessageitem.
-        /// </summary>
-        public virtual IUseradoxioonestopmessageitem Useradoxioonestopmessageitem { get; private set; }
-
-        /// <summary>
-        /// Gets the IUseradoxiorelatedlicence.
-        /// </summary>
-        public virtual IUseradoxiorelatedlicence Useradoxiorelatedlicence { get; private set; }
-
-        /// <summary>
-        /// Gets the IUseradoxiosepdrinksalesforecast.
-        /// </summary>
-        public virtual IUseradoxiosepdrinksalesforecast Useradoxiosepdrinksalesforecast { get; private set; }
-
-        /// <summary>
-        /// Gets the IUseradoxiosepdrinktype.
-        /// </summary>
-        public virtual IUseradoxiosepdrinktype Useradoxiosepdrinktype { get; private set; }
-
-        /// <summary>
-        /// Gets the IUseradoxiostatuscounter.
-        /// </summary>
-        public virtual IUseradoxiostatuscounter Useradoxiostatuscounter { get; private set; }
-
-        /// <summary>
-        /// Gets the ITeamadoxioadditionalinspector.
-        /// </summary>
-        public virtual ITeamadoxioadditionalinspector Teamadoxioadditionalinspector { get; private set; }
-
-        /// <summary>
-        /// Gets the ITeamadoxioadminactivity.
-        /// </summary>
-        public virtual ITeamadoxioadminactivity Teamadoxioadminactivity { get; private set; }
-
-        /// <summary>
-        /// Gets the ITeamadoxioeventlocation.
-        /// </summary>
-        public virtual ITeamadoxioeventlocation Teamadoxioeventlocation { get; private set; }
-
-        /// <summary>
-        /// Gets the ITeamadoxioinvestigationcontact.
-        /// </summary>
-        public virtual ITeamadoxioinvestigationcontact Teamadoxioinvestigationcontact { get; private set; }
-
-        /// <summary>
-        /// Gets the ITeamadoxioinvestigationrequest.
-        /// </summary>
-        public virtual ITeamadoxioinvestigationrequest Teamadoxioinvestigationrequest { get; private set; }
-
-        /// <summary>
-        /// Gets the ITeamadoxioinvestigationsubject.
-        /// </summary>
-        public virtual ITeamadoxioinvestigationsubject Teamadoxioinvestigationsubject { get; private set; }
-
-        /// <summary>
-        /// Gets the ITeamadoxiologin.
-        /// </summary>
-        public virtual ITeamadoxiologin Teamadoxiologin { get; private set; }
-
-        /// <summary>
-        /// Gets the ITeamadoxioonestopmessageitem.
-        /// </summary>
-        public virtual ITeamadoxioonestopmessageitem Teamadoxioonestopmessageitem { get; private set; }
-
-        /// <summary>
-        /// Gets the ITeamadoxiorelatedlicence.
-        /// </summary>
-        public virtual ITeamadoxiorelatedlicence Teamadoxiorelatedlicence { get; private set; }
-
-        /// <summary>
-        /// Gets the ITeamadoxiosepdrinksalesforecast.
-        /// </summary>
-        public virtual ITeamadoxiosepdrinksalesforecast Teamadoxiosepdrinksalesforecast { get; private set; }
-
-        /// <summary>
-        /// Gets the ITeamadoxiosepdrinktype.
-        /// </summary>
-        public virtual ITeamadoxiosepdrinktype Teamadoxiosepdrinktype { get; private set; }
-
-        /// <summary>
-        /// Gets the ITeamadoxiostatuscounter.
-        /// </summary>
-        public virtual ITeamadoxiostatuscounter Teamadoxiostatuscounter { get; private set; }
 
         /// <summary>
         /// Gets the IWorkflows.
@@ -2532,31 +952,8 @@ namespace Gov.Lclb.Cllb.Interfaces
         private void Initialize()
         {
             Accounts = new Accounts(this);
-            Accountadoxiologinrelatedaccount = new Accountadoxiologinrelatedaccount(this);
-            Accountinvestigationrequests = new Accountinvestigationrequests(this);
-            Accountinvestigationsubjects = new Accountinvestigationsubjects(this);
-            Accountspecialevents = new Accountspecialevents(this);
-            Policeaccountspecialevents = new Policeaccountspecialevents(this);
-            Policejurisdictionid = new Policejurisdictionid(this);
             Additionalinspectors = new Additionalinspectors(this);
-            Additionalinspectorasyncoperations = new Additionalinspectorasyncoperations(this);
-            Additionalinspectorbulkdeletefailures = new Additionalinspectorbulkdeletefailures(this);
-            Additionalinspectormailboxtrackingfolders = new Additionalinspectormailboxtrackingfolders(this);
-            Additionalinspectorprincipalobjectattributeaccesses = new Additionalinspectorprincipalobjectattributeaccesses(this);
-            Additionalinspectorprocesssession = new Additionalinspectorprocesssession(this);
-            Additionalinspectorsyncerrors = new Additionalinspectorsyncerrors(this);
-            Inspectionid = new Inspectionid(this);
-            Inspectorid = new Inspectorid(this);
-            Regionid = new Regionid(this);
             Adminactivities = new Adminactivities(this);
-            Adminactivityasyncoperations = new Adminactivityasyncoperations(this);
-            Adminactivitybulkdeletefailures = new Adminactivitybulkdeletefailures(this);
-            Adminactivityduplicatebaserecord = new Adminactivityduplicatebaserecord(this);
-            Adminactivityduplicatematchingrecord = new Adminactivityduplicatematchingrecord(this);
-            Adminactivitymailboxtrackingfolders = new Adminactivitymailboxtrackingfolders(this);
-            Adminactivityprincipalobjectattributeaccesses = new Adminactivityprincipalobjectattributeaccesses(this);
-            Adminactivityprocesssession = new Adminactivityprocesssession(this);
-            Adminactivitysyncerrors = new Adminactivitysyncerrors(this);
             Adoxiolicencetypeadoxioinvestigationset = new Adoxiolicencetypeadoxioinvestigationset(this);
             Aliases = new Aliases(this);
             Annualvolumes = new Annualvolumes(this);
@@ -2567,22 +964,14 @@ namespace Gov.Lclb.Cllb.Interfaces
             Applicationliquorbpfv2s = new Applicationliquorbpfv2s(this);
             Applicationrelocationv1s = new Applicationrelocationv1s(this);
             Applications = new Applications(this);
-            Applicationadoxiostatuscounterapplication = new Applicationadoxiostatuscounterapplication(this);
-            Applicationinvestigationrequests = new Applicationinvestigationrequests(this);
-            Changingtermsandconditions = new Changingtermsandconditions(this);
-            Relatedlicence = new Relatedlicence(this);
             Applicationstructurechangev1s = new Applicationstructurechangev1s(this);
             Applicationtermsconditionslimitations = new Applicationtermsconditionslimitations(this);
-            Applicationtermsconditionslimitationadoxioapplicationchangingtermsandconditions = new Applicationtermsconditionslimitationadoxioapplicationchangingtermsandconditions(this);
             Applicationtransferownershipv1s = new Applicationtransferownershipv1s(this);
             Applicationtypecontents = new Applicationtypecontents(this);
             Applicationtypefeeschedules = new Applicationtypefeeschedules(this);
             Applicationtypes = new Applicationtypes(this);
-            Renewalfeeproduct = new Renewalfeeproduct(this);
             Applicenseechangebpfv2s = new Applicenseechangebpfv2s(this);
             Areas = new Areas(this);
-            Areainvestigationrequests = new Areainvestigationrequests(this);
-            Areaspecialevents = new Areaspecialevents(this);
             Auditlogrequests = new Auditlogrequests(this);
             Businessaccounts = new Businessaccounts(this);
             Cannabisinventoryreports = new Cannabisinventoryreports(this);
@@ -2590,17 +979,10 @@ namespace Gov.Lclb.Cllb.Interfaces
             Cannabisproductadmins = new Cannabisproductadmins(this);
             Citydistricts = new Citydistricts(this);
             Complaints = new Complaints(this);
-            Complaintinvestigationrequests = new Complaintinvestigationrequests(this);
-            Complaintinvestigationsunit = new Complaintinvestigationsunit(this);
             Complianceinvestigations = new Complianceinvestigations(this);
-            Complianceinvestigationadoxiormreviewinvestigationenforcement = new Complianceinvestigationadoxiormreviewinvestigationenforcement(this);
-            Complianceinvestigationenforcementaction = new Complianceinvestigationenforcementaction(this);
             Compliancemeetings = new Compliancemeetings(this);
             Contraventionadmins = new Contraventionadmins(this);
             Contraventions = new Contraventions(this);
-            Contraventioninvoices = new Contraventioninvoices(this);
-            Investigationunitid = new Investigationunitid(this);
-            Invoice = new Invoice(this);
             Corporatehistorysummaries = new Corporatehistorysummaries(this);
             Corporateroles = new Corporateroles(this);
             Customautonumberdefinitions = new Customautonumberdefinitions(this);
@@ -2608,28 +990,14 @@ namespace Gov.Lclb.Cllb.Interfaces
             Documentadmins = new Documentadmins(this);
             Documents = new Documents(this);
             Endorsements = new Endorsements(this);
-            Licencewhencancelled = new Licencewhencancelled(this);
             Enforcementactionbpfs = new Enforcementactionbpfs(this);
             Enforcementactions = new Enforcementactions(this);
-            Financialinvestigationid = new Financialinvestigationid(this);
-            Investigationid = new Investigationid(this);
             Establishmentincidents = new Establishmentincidents(this);
             Establishments = new Establishments(this);
-            Establishmentinvestigationrequests = new Establishmentinvestigationrequests(this);
-            Pmuareaid = new Pmuareaid(this);
             Establishmentwatchwords = new Establishmentwatchwords(this);
             Eventaddresses = new Eventaddresses(this);
             Eventlocations = new Eventlocations(this);
-            Eventid = new Eventid(this);
-            Eventlocationasyncoperations = new Eventlocationasyncoperations(this);
-            Eventlocationbulkdeletefailures = new Eventlocationbulkdeletefailures(this);
-            Eventlocationmailboxtrackingfolders = new Eventlocationmailboxtrackingfolders(this);
-            Eventlocationprincipalobjectattributeaccesses = new Eventlocationprincipalobjectattributeaccesses(this);
-            Eventlocationprocesssession = new Eventlocationprocesssession(this);
-            Eventlocationsyncerrors = new Eventlocationsyncerrors(this);
-            Serviceareaid = new Serviceareaid(this);
             Events = new Events(this);
-            Eventeventlocations = new Eventeventlocations(this);
             Eventschedules = new Eventschedules(this);
             Exhibits = new Exhibits(this);
             Federalreportexports = new Federalreportexports(this);
@@ -2647,334 +1015,70 @@ namespace Gov.Lclb.Cllb.Interfaces
             Interests = new Interests(this);
             Investigationactivities = new Investigationactivities(this);
             Investigationcontacts = new Investigationcontacts(this);
-            Investigationcontactasyncoperations = new Investigationcontactasyncoperations(this);
-            Investigationcontactbulkdeletefailures = new Investigationcontactbulkdeletefailures(this);
-            Investigationcontactduplicatebaserecord = new Investigationcontactduplicatebaserecord(this);
-            Investigationcontactduplicatematchingrecord = new Investigationcontactduplicatematchingrecord(this);
-            Investigationcontactmailboxtrackingfolders = new Investigationcontactmailboxtrackingfolders(this);
-            Investigationcontactprincipalobjectattributeaccesses = new Investigationcontactprincipalobjectattributeaccesses(this);
-            Investigationcontactprocesssession = new Investigationcontactprocesssession(this);
-            Investigationcontactsyncerrors = new Investigationcontactsyncerrors(this);
             Investigationreactivationhistories = new Investigationreactivationhistories(this);
             Investigationrequests = new Investigationrequests(this);
-            Accountid = new Accountid(this);
-            Applicationid = new Applicationid(this);
-            Areaid = new Areaid(this);
-            Complaintid = new Complaintid(this);
-            Establishmentid = new Establishmentid(this);
-            Investigationrequestasyncoperations = new Investigationrequestasyncoperations(this);
-            Investigationrequestbulkdeletefailures = new Investigationrequestbulkdeletefailures(this);
-            Investigationrequestduplicatebaserecord = new Investigationrequestduplicatebaserecord(this);
-            Investigationrequestduplicatematchingrecord = new Investigationrequestduplicatematchingrecord(this);
-            Investigationrequestinvestigations = new Investigationrequestinvestigations(this);
-            Investigationrequestmailboxtrackingfolders = new Investigationrequestmailboxtrackingfolders(this);
-            Investigationrequestprincipalobjectattributeaccesses = new Investigationrequestprincipalobjectattributeaccesses(this);
-            Investigationrequestprocesssession = new Investigationrequestprocesssession(this);
-            Investigationrequestsharepointdocumentlocations = new Investigationrequestsharepointdocumentlocations(this);
-            Investigationrequestsyncerrors = new Investigationrequestsyncerrors(this);
-            Licenceid = new Licenceid(this);
-            Officeid = new Officeid(this);
             Investigations = new Investigations(this);
-            Adoxioinvestigationadoxioenforcementactionfinancialinvestigationid = new Adoxioinvestigationadoxioenforcementactionfinancialinvestigationid(this);
-            Investigationinvestigationcontacts = new Investigationinvestigationcontacts(this);
-            Investigationinvestigations = new Investigationinvestigations(this);
-            Investigationrequestid = new Investigationrequestid(this);
-            Investigationunitcontraventions = new Investigationunitcontraventions(this);
             Investigationsubjects = new Investigationsubjects(this);
-            Contactid = new Contactid(this);
-            Investigationsubjectasyncoperations = new Investigationsubjectasyncoperations(this);
-            Investigationsubjectbulkdeletefailures = new Investigationsubjectbulkdeletefailures(this);
-            Investigationsubjectduplicatebaserecord = new Investigationsubjectduplicatebaserecord(this);
-            Investigationsubjectduplicatematchingrecord = new Investigationsubjectduplicatematchingrecord(this);
-            Investigationsubjectmailboxtrackingfolders = new Investigationsubjectmailboxtrackingfolders(this);
-            Investigationsubjectprincipalobjectattributeaccesses = new Investigationsubjectprincipalobjectattributeaccesses(this);
-            Investigationsubjectprocesssession = new Investigationsubjectprocesssession(this);
-            Investigationsubjectsyncerrors = new Investigationsubjectsyncerrors(this);
             Ldborders = new Ldborders(this);
             Leconnections = new Leconnections(this);
             Legalentities = new Legalentities(this);
             Licenceldbordertotalhistories = new Licenceldbordertotalhistories(this);
             Licenceses = new Licenceses(this);
-            Licencesadoxioapplicationrelatedlicence = new Licencesadoxioapplicationrelatedlicence(this);
-            Licencesadoxioendorsementlicencewhencancelled = new Licencesadoxioendorsementlicencewhencancelled(this);
-            Licencesadoxioonestopmessageitemlicence = new Licencesadoxioonestopmessageitemlicence(this);
-            Licencesadoxiorelatedlicencechildlicence = new Licencesadoxiorelatedlicencechildlicence(this);
-            Licencesadoxiorelatedlicenceparentlicence = new Licencesadoxiorelatedlicenceparentlicence(this);
-            Licencesinvestigationrequests = new Licencesinvestigationrequests(this);
             Licencesubcategories = new Licencesubcategories(this);
             Licencetypes = new Licencetypes(this);
             Licencetypesapplicationtypesset = new Licencetypesapplicationtypesset(this);
             Licenseechangelogs = new Licenseechangelogs(this);
             Loans = new Loans(this);
             Localgovindigenousnations = new Localgovindigenousnations(this);
-            Lginpolicejurisdiction = new Lginpolicejurisdiction(this);
-            Localgovspecialevents = new Localgovspecialevents(this);
             Logins = new Logins(this);
-            Contact = new Contact(this);
-            Loginasyncoperations = new Loginasyncoperations(this);
-            Loginbulkdeletefailures = new Loginbulkdeletefailures(this);
-            Loginduplicatebaserecord = new Loginduplicatebaserecord(this);
-            Loginduplicatematchingrecord = new Loginduplicatematchingrecord(this);
-            Loginmailboxtrackingfolders = new Loginmailboxtrackingfolders(this);
-            Loginprincipalobjectattributeaccesses = new Loginprincipalobjectattributeaccesses(this);
-            Loginprocesssession = new Loginprocesssession(this);
-            Loginsyncerrors = new Loginsyncerrors(this);
-            Relatedaccount = new Relatedaccount(this);
             Lqrlicencetransferbpfs = new Lqrlicencetransferbpfs(this);
             Offsitestorages = new Offsitestorages(this);
             Onestopmessageitems = new Onestopmessageitems(this);
-            Licence = new Licence(this);
-            Onestopmessageitemasyncoperations = new Onestopmessageitemasyncoperations(this);
-            Onestopmessageitembulkdeletefailures = new Onestopmessageitembulkdeletefailures(this);
-            Onestopmessageitemduplicatebaserecord = new Onestopmessageitemduplicatebaserecord(this);
-            Onestopmessageitemduplicatematchingrecord = new Onestopmessageitemduplicatematchingrecord(this);
-            Onestopmessageitemmailboxtrackingfolders = new Onestopmessageitemmailboxtrackingfolders(this);
-            Onestopmessageitemprincipalobjectattributeaccesses = new Onestopmessageitemprincipalobjectattributeaccesses(this);
-            Onestopmessageitemprocesssession = new Onestopmessageitemprocesssession(this);
-            Onestopmessageitemsyncerrors = new Onestopmessageitemsyncerrors(this);
             Personalhistorysummaries = new Personalhistorysummaries(this);
             Pmuareas = new Pmuareas(this);
-            Pmuareaestablishments = new Pmuareaestablishments(this);
-            Pmuareaspecialevents = new Pmuareaspecialevents(this);
             Policejurisdictions = new Policejurisdictions(this);
-            Lginid = new Lginid(this);
-            Policejurisdictionaccount = new Policejurisdictionaccount(this);
-            Policejurisdictionspecialevents = new Policejurisdictionspecialevents(this);
             Policydocuments = new Policydocuments(this);
             Postalcodes = new Postalcodes(this);
             Previousaddresses = new Previousaddresses(this);
             Proratedlicencefeeschedules = new Proratedlicencefeeschedules(this);
             Regions = new Regions(this);
-            Managerofinvestigationsid = new Managerofinvestigationsid(this);
-            Regionadditionalinspectors = new Regionadditionalinspectors(this);
-            Regioninvestigationrequests = new Regioninvestigationrequests(this);
-            Regionspecialevents = new Regionspecialevents(this);
             Relatedlicences = new Relatedlicences(this);
-            Childlicence = new Childlicence(this);
-            Parentlicence = new Parentlicence(this);
-            Relatedlicenceasyncoperations = new Relatedlicenceasyncoperations(this);
-            Relatedlicencebulkdeletefailures = new Relatedlicencebulkdeletefailures(this);
-            Relatedlicenceduplicatebaserecord = new Relatedlicenceduplicatebaserecord(this);
-            Relatedlicenceduplicatematchingrecord = new Relatedlicenceduplicatematchingrecord(this);
-            Relatedlicencemailboxtrackingfolders = new Relatedlicencemailboxtrackingfolders(this);
-            Relatedlicenceprincipalobjectattributeaccesses = new Relatedlicenceprincipalobjectattributeaccesses(this);
-            Relatedlicenceprocesssession = new Relatedlicenceprocesssession(this);
-            Relatedlicencesyncerrors = new Relatedlicencesyncerrors(this);
             Relatedparties = new Relatedparties(this);
             Rmreviews = new Rmreviews(this);
-            Investigationenforcement = new Investigationenforcement(this);
+            Sepcities = new Sepcities(this);
             Sepdrinksalesforecasts = new Sepdrinksalesforecasts(this);
-            Sepdrinksalesforecastasyncoperations = new Sepdrinksalesforecastasyncoperations(this);
-            Sepdrinksalesforecastbulkdeletefailures = new Sepdrinksalesforecastbulkdeletefailures(this);
-            Sepdrinksalesforecastduplicatebaserecord = new Sepdrinksalesforecastduplicatebaserecord(this);
-            Sepdrinksalesforecastduplicatematchingrecord = new Sepdrinksalesforecastduplicatematchingrecord(this);
-            Sepdrinksalesforecastmailboxtrackingfolders = new Sepdrinksalesforecastmailboxtrackingfolders(this);
-            Sepdrinksalesforecastprincipalobjectattributeaccesses = new Sepdrinksalesforecastprincipalobjectattributeaccesses(this);
-            Sepdrinksalesforecastprocesssession = new Sepdrinksalesforecastprocesssession(this);
-            Sepdrinksalesforecastsyncerrors = new Sepdrinksalesforecastsyncerrors(this);
-            Specialevent = new Specialevent(this);
-            Type = new Type(this);
             Sepdrinktypes = new Sepdrinktypes(this);
-            Sepdrinktypeadoxiosepdrinksalesforecasttype = new Sepdrinktypeadoxiosepdrinksalesforecasttype(this);
-            Sepdrinktypeasyncoperations = new Sepdrinktypeasyncoperations(this);
-            Sepdrinktypebulkdeletefailures = new Sepdrinktypebulkdeletefailures(this);
-            Sepdrinktypeduplicatebaserecord = new Sepdrinktypeduplicatebaserecord(this);
-            Sepdrinktypeduplicatematchingrecord = new Sepdrinktypeduplicatematchingrecord(this);
-            Sepdrinktypemailboxtrackingfolders = new Sepdrinktypemailboxtrackingfolders(this);
-            Sepdrinktypeprincipalobjectattributeaccesses = new Sepdrinktypeprincipalobjectattributeaccesses(this);
-            Sepdrinktypeprocesssession = new Sepdrinktypeprocesssession(this);
-            Sepdrinktypesyncerrors = new Sepdrinktypesyncerrors(this);
+            Sepinvoicehistories = new Sepinvoicehistories(this);
             Serviceareas = new Serviceareas(this);
-            Serviceareaeventlocations = new Serviceareaeventlocations(this);
             Settings = new Settings(this);
             Spddatarows = new Spddatarows(this);
             Spdexportses = new Spdexportses(this);
             Specialeventlicencedareas = new Specialeventlicencedareas(this);
-            Specialeventareaeventschedules = new Specialeventareaeventschedules(this);
             Specialeventlocations = new Specialeventlocations(this);
-            Specialeventlocationinspections = new Specialeventlocationinspections(this);
             Specialeventnotes = new Specialeventnotes(this);
             Specialevents = new Specialevents(this);
-            Inspector = new Inspector(this);
-            Lcrbrepresentativeid = new Lcrbrepresentativeid(this);
-            Localgovernmentid = new Localgovernmentid(this);
-            Policeaccountid = new Policeaccountid(this);
-            Policerepresentativeid = new Policerepresentativeid(this);
-            Specialeventadoxiosepdrinksalesforecastspecialevent = new Specialeventadoxiosepdrinksalesforecastspecialevent(this);
-            Specialeventinspection = new Specialeventinspection(this);
-            Specialeventinvoices = new Specialeventinvoices(this);
             Specialeventschedules = new Specialeventschedules(this);
             Specialeventtandcs = new Specialeventtandcs(this);
             Statuscounters = new Statuscounters(this);
-            Application = new Application(this);
-            Statuscounterasyncoperations = new Statuscounterasyncoperations(this);
-            Statuscounterbulkdeletefailures = new Statuscounterbulkdeletefailures(this);
-            Statuscountermailboxtrackingfolders = new Statuscountermailboxtrackingfolders(this);
-            Statuscounterprincipalobjectattributeaccesses = new Statuscounterprincipalobjectattributeaccesses(this);
-            Statuscounterprocesssession = new Statuscounterprocesssession(this);
-            Statuscountersharepointdocumentlocations = new Statuscountersharepointdocumentlocations(this);
-            Statuscountersyncerrors = new Statuscountersyncerrors(this);
             Taxandaccountings = new Taxandaccountings(this);
             Termsconditionslimitationspresets = new Termsconditionslimitationspresets(this);
             Territories = new Territories(this);
-            Officeinvestigationrequests = new Officeinvestigationrequests(this);
             Tiedhouseassociations = new Tiedhouseassociations(this);
             Tiedhouseconnections = new Tiedhouseconnections(this);
             Witnesses = new Witnesses(this);
             Workerinvoicehistories = new Workerinvoicehistories(this);
             Workers = new Workers(this);
-            Regardingobjectidadoxioadditionalinspector = new Regardingobjectidadoxioadditionalinspector(this);
-            Regardingobjectidadoxioadminactivity = new Regardingobjectidadoxioadminactivity(this);
-            Regardingobjectidadoxioeventlocation = new Regardingobjectidadoxioeventlocation(this);
-            Regardingobjectidadoxioinvestigationcontact = new Regardingobjectidadoxioinvestigationcontact(this);
-            Regardingobjectidadoxioinvestigationrequest = new Regardingobjectidadoxioinvestigationrequest(this);
-            Regardingobjectidadoxioinvestigationsubject = new Regardingobjectidadoxioinvestigationsubject(this);
-            Regardingobjectidadoxiologin = new Regardingobjectidadoxiologin(this);
-            Regardingobjectidadoxioonestopmessageitem = new Regardingobjectidadoxioonestopmessageitem(this);
-            Regardingobjectidadoxiorelatedlicence = new Regardingobjectidadoxiorelatedlicence(this);
-            Regardingobjectidadoxiosepdrinksalesforecast = new Regardingobjectidadoxiosepdrinksalesforecast(this);
-            Regardingobjectidadoxiosepdrinktype = new Regardingobjectidadoxiosepdrinktype(this);
-            Regardingobjectidadoxiostatuscounter = new Regardingobjectidadoxiostatuscounter(this);
-            Businessunitadoxioadditionalinspector = new Businessunitadoxioadditionalinspector(this);
-            Businessunitadoxioadminactivity = new Businessunitadoxioadminactivity(this);
-            Businessunitadoxioeventlocation = new Businessunitadoxioeventlocation(this);
-            Businessunitadoxioinvestigationcontact = new Businessunitadoxioinvestigationcontact(this);
-            Businessunitadoxioinvestigationrequest = new Businessunitadoxioinvestigationrequest(this);
-            Businessunitadoxioinvestigationsubject = new Businessunitadoxioinvestigationsubject(this);
-            Businessunitadoxiologin = new Businessunitadoxiologin(this);
-            Businessunitadoxioonestopmessageitem = new Businessunitadoxioonestopmessageitem(this);
-            Businessunitadoxiorelatedlicence = new Businessunitadoxiorelatedlicence(this);
-            Businessunitadoxiosepdrinksalesforecast = new Businessunitadoxiosepdrinksalesforecast(this);
-            Businessunitadoxiosepdrinktype = new Businessunitadoxiosepdrinktype(this);
-            Businessunitadoxiostatuscounter = new Businessunitadoxiostatuscounter(this);
             Contacts = new Contacts(this);
-            Contactadoxiologincontact = new Contactadoxiologincontact(this);
-            Contactinvestigationsubjects = new Contactinvestigationsubjects(this);
-            Contactspecialevents = new Contactspecialevents(this);
-            Policerepresentativespecialevents = new Policerepresentativespecialevents(this);
-            Baserecordidadoxioadminactivity = new Baserecordidadoxioadminactivity(this);
-            Baserecordidadoxioinvestigationcontact = new Baserecordidadoxioinvestigationcontact(this);
-            Baserecordidadoxioinvestigationrequest = new Baserecordidadoxioinvestigationrequest(this);
-            Baserecordidadoxioinvestigationsubject = new Baserecordidadoxioinvestigationsubject(this);
-            Baserecordidadoxiologin = new Baserecordidadoxiologin(this);
-            Baserecordidadoxioonestopmessageitem = new Baserecordidadoxioonestopmessageitem(this);
-            Baserecordidadoxiorelatedlicence = new Baserecordidadoxiorelatedlicence(this);
-            Baserecordidadoxiosepdrinksalesforecast = new Baserecordidadoxiosepdrinksalesforecast(this);
-            Baserecordidadoxiosepdrinktype = new Baserecordidadoxiosepdrinktype(this);
-            Duplicaterecordidadoxioadminactivity = new Duplicaterecordidadoxioadminactivity(this);
-            Duplicaterecordidadoxioinvestigationcontact = new Duplicaterecordidadoxioinvestigationcontact(this);
-            Duplicaterecordidadoxioinvestigationrequest = new Duplicaterecordidadoxioinvestigationrequest(this);
-            Duplicaterecordidadoxioinvestigationsubject = new Duplicaterecordidadoxioinvestigationsubject(this);
-            Duplicaterecordidadoxiologin = new Duplicaterecordidadoxiologin(this);
-            Duplicaterecordidadoxioonestopmessageitem = new Duplicaterecordidadoxioonestopmessageitem(this);
-            Duplicaterecordidadoxiorelatedlicence = new Duplicaterecordidadoxiorelatedlicence(this);
-            Duplicaterecordidadoxiosepdrinksalesforecast = new Duplicaterecordidadoxiosepdrinksalesforecast(this);
-            Duplicaterecordidadoxiosepdrinktype = new Duplicaterecordidadoxiosepdrinktype(this);
             Entitydefinitions = new Entitydefinitions(this);
             Globaloptionsetdefinitions = new Globaloptionsetdefinitions(this);
-            Eventlocationid = new Eventlocationid(this);
-            Inspectionadditionalinspectors = new Inspectionadditionalinspectors(this);
-            Inspectionrelatedparties = new Inspectionrelatedparties(this);
-            Specialeventid = new Specialeventid(this);
             Invoices = new Invoices(this);
-            Contraventionid = new Contraventionid(this);
-            Invoiceadoxiocontraventioninvoice = new Invoiceadoxiocontraventioninvoice(this);
             Leads = new Leads(this);
             Lists = new Lists(this);
-            Objectidadoxioadditionalinspector = new Objectidadoxioadditionalinspector(this);
-            Objectidadoxioadminactivity = new Objectidadoxioadminactivity(this);
-            Objectidadoxioeventlocation = new Objectidadoxioeventlocation(this);
-            Objectidadoxioinvestigationcontact = new Objectidadoxioinvestigationcontact(this);
-            Objectidadoxioinvestigationrequest = new Objectidadoxioinvestigationrequest(this);
-            Objectidadoxioinvestigationsubject = new Objectidadoxioinvestigationsubject(this);
-            Objectidadoxiologin = new Objectidadoxiologin(this);
-            Objectidadoxioonestopmessageitem = new Objectidadoxioonestopmessageitem(this);
-            Objectidadoxiorelatedlicence = new Objectidadoxiorelatedlicence(this);
-            Objectidadoxiosepdrinksalesforecast = new Objectidadoxiosepdrinksalesforecast(this);
-            Objectidadoxiosepdrinktype = new Objectidadoxiosepdrinktype(this);
-            Objectidadoxiostatuscounter = new Objectidadoxiostatuscounter(this);
-            Productadoxioapplicationtyperenewalfeeproduct = new Productadoxioapplicationtyperenewalfeeproduct(this);
             Savedqueries = new Savedqueries(this);
             Sharepointdocumentlocations = new Sharepointdocumentlocations(this);
             Sharepointsites = new Sharepointsites(this);
             Systemforms = new Systemforms(this);
             Systemusers = new Systemusers(this);
-            Inspectoradditionalinspectors = new Inspectoradditionalinspectors(this);
-            Investigationsmanagerregions = new Investigationsmanagerregions(this);
-            Lcrbrepresentativespecialevents = new Lcrbrepresentativespecialevents(this);
-            Systemuseradoxiospecialeventinspector = new Systemuseradoxiospecialeventinspector(this);
-            Lkadoxioadditionalinspectorcreatedby = new Lkadoxioadditionalinspectorcreatedby(this);
-            Lkadoxioadditionalinspectorcreatedonbehalfby = new Lkadoxioadditionalinspectorcreatedonbehalfby(this);
-            Lkadoxioadditionalinspectormodifiedby = new Lkadoxioadditionalinspectormodifiedby(this);
-            Lkadoxioadditionalinspectormodifiedonbehalfby = new Lkadoxioadditionalinspectormodifiedonbehalfby(this);
-            Lkadoxioadminactivitycreatedby = new Lkadoxioadminactivitycreatedby(this);
-            Lkadoxioadminactivitycreatedonbehalfby = new Lkadoxioadminactivitycreatedonbehalfby(this);
-            Lkadoxioadminactivitymodifiedby = new Lkadoxioadminactivitymodifiedby(this);
-            Lkadoxioadminactivitymodifiedonbehalfby = new Lkadoxioadminactivitymodifiedonbehalfby(this);
-            Lkadoxioeventlocationcreatedby = new Lkadoxioeventlocationcreatedby(this);
-            Lkadoxioeventlocationcreatedonbehalfby = new Lkadoxioeventlocationcreatedonbehalfby(this);
-            Lkadoxioeventlocationmodifiedby = new Lkadoxioeventlocationmodifiedby(this);
-            Lkadoxioeventlocationmodifiedonbehalfby = new Lkadoxioeventlocationmodifiedonbehalfby(this);
-            Lkadoxioinvestigationcontactcreatedby = new Lkadoxioinvestigationcontactcreatedby(this);
-            Lkadoxioinvestigationcontactcreatedonbehalfby = new Lkadoxioinvestigationcontactcreatedonbehalfby(this);
-            Lkadoxioinvestigationcontactmodifiedby = new Lkadoxioinvestigationcontactmodifiedby(this);
-            Lkadoxioinvestigationcontactmodifiedonbehalfby = new Lkadoxioinvestigationcontactmodifiedonbehalfby(this);
-            Lkadoxioinvestigationrequestcreatedby = new Lkadoxioinvestigationrequestcreatedby(this);
-            Lkadoxioinvestigationrequestcreatedonbehalfby = new Lkadoxioinvestigationrequestcreatedonbehalfby(this);
-            Lkadoxioinvestigationrequestmodifiedby = new Lkadoxioinvestigationrequestmodifiedby(this);
-            Lkadoxioinvestigationrequestmodifiedonbehalfby = new Lkadoxioinvestigationrequestmodifiedonbehalfby(this);
-            Lkadoxioinvestigationsubjectcreatedby = new Lkadoxioinvestigationsubjectcreatedby(this);
-            Lkadoxioinvestigationsubjectcreatedonbehalfby = new Lkadoxioinvestigationsubjectcreatedonbehalfby(this);
-            Lkadoxioinvestigationsubjectmodifiedby = new Lkadoxioinvestigationsubjectmodifiedby(this);
-            Lkadoxioinvestigationsubjectmodifiedonbehalfby = new Lkadoxioinvestigationsubjectmodifiedonbehalfby(this);
-            Lkadoxiologincreatedby = new Lkadoxiologincreatedby(this);
-            Lkadoxiologincreatedonbehalfby = new Lkadoxiologincreatedonbehalfby(this);
-            Lkadoxiologinmodifiedby = new Lkadoxiologinmodifiedby(this);
-            Lkadoxiologinmodifiedonbehalfby = new Lkadoxiologinmodifiedonbehalfby(this);
-            Lkadoxioonestopmessageitemcreatedby = new Lkadoxioonestopmessageitemcreatedby(this);
-            Lkadoxioonestopmessageitemcreatedonbehalfby = new Lkadoxioonestopmessageitemcreatedonbehalfby(this);
-            Lkadoxioonestopmessageitemmodifiedby = new Lkadoxioonestopmessageitemmodifiedby(this);
-            Lkadoxioonestopmessageitemmodifiedonbehalfby = new Lkadoxioonestopmessageitemmodifiedonbehalfby(this);
-            Lkadoxiorelatedlicencecreatedby = new Lkadoxiorelatedlicencecreatedby(this);
-            Lkadoxiorelatedlicencecreatedonbehalfby = new Lkadoxiorelatedlicencecreatedonbehalfby(this);
-            Lkadoxiorelatedlicencemodifiedby = new Lkadoxiorelatedlicencemodifiedby(this);
-            Lkadoxiorelatedlicencemodifiedonbehalfby = new Lkadoxiorelatedlicencemodifiedonbehalfby(this);
-            Lkadoxiosepdrinksalesforecastcreatedby = new Lkadoxiosepdrinksalesforecastcreatedby(this);
-            Lkadoxiosepdrinksalesforecastcreatedonbehalfby = new Lkadoxiosepdrinksalesforecastcreatedonbehalfby(this);
-            Lkadoxiosepdrinksalesforecastmodifiedby = new Lkadoxiosepdrinksalesforecastmodifiedby(this);
-            Lkadoxiosepdrinksalesforecastmodifiedonbehalfby = new Lkadoxiosepdrinksalesforecastmodifiedonbehalfby(this);
-            Lkadoxiosepdrinktypecreatedby = new Lkadoxiosepdrinktypecreatedby(this);
-            Lkadoxiosepdrinktypecreatedonbehalfby = new Lkadoxiosepdrinktypecreatedonbehalfby(this);
-            Lkadoxiosepdrinktypemodifiedby = new Lkadoxiosepdrinktypemodifiedby(this);
-            Lkadoxiosepdrinktypemodifiedonbehalfby = new Lkadoxiosepdrinktypemodifiedonbehalfby(this);
-            Lkadoxiostatuscountercreatedby = new Lkadoxiostatuscountercreatedby(this);
-            Lkadoxiostatuscountercreatedonbehalfby = new Lkadoxiostatuscountercreatedonbehalfby(this);
-            Lkadoxiostatuscountermodifiedby = new Lkadoxiostatuscountermodifiedby(this);
-            Lkadoxiostatuscountermodifiedonbehalfby = new Lkadoxiostatuscountermodifiedonbehalfby(this);
-            Useradoxioadditionalinspector = new Useradoxioadditionalinspector(this);
-            Useradoxioadminactivity = new Useradoxioadminactivity(this);
-            Useradoxioeventlocation = new Useradoxioeventlocation(this);
-            Useradoxioinvestigationcontact = new Useradoxioinvestigationcontact(this);
-            Useradoxioinvestigationrequest = new Useradoxioinvestigationrequest(this);
-            Useradoxioinvestigationsubject = new Useradoxioinvestigationsubject(this);
-            Useradoxiologin = new Useradoxiologin(this);
-            Useradoxioonestopmessageitem = new Useradoxioonestopmessageitem(this);
-            Useradoxiorelatedlicence = new Useradoxiorelatedlicence(this);
-            Useradoxiosepdrinksalesforecast = new Useradoxiosepdrinksalesforecast(this);
-            Useradoxiosepdrinktype = new Useradoxiosepdrinktype(this);
-            Useradoxiostatuscounter = new Useradoxiostatuscounter(this);
-            Teamadoxioadditionalinspector = new Teamadoxioadditionalinspector(this);
-            Teamadoxioadminactivity = new Teamadoxioadminactivity(this);
-            Teamadoxioeventlocation = new Teamadoxioeventlocation(this);
-            Teamadoxioinvestigationcontact = new Teamadoxioinvestigationcontact(this);
-            Teamadoxioinvestigationrequest = new Teamadoxioinvestigationrequest(this);
-            Teamadoxioinvestigationsubject = new Teamadoxioinvestigationsubject(this);
-            Teamadoxiologin = new Teamadoxiologin(this);
-            Teamadoxioonestopmessageitem = new Teamadoxioonestopmessageitem(this);
-            Teamadoxiorelatedlicence = new Teamadoxiorelatedlicence(this);
-            Teamadoxiosepdrinksalesforecast = new Teamadoxiosepdrinksalesforecast(this);
-            Teamadoxiosepdrinktype = new Teamadoxiosepdrinktype(this);
-            Teamadoxiostatuscounter = new Teamadoxiostatuscounter(this);
             Workflows = new Workflows(this);
             BaseUri = new System.Uri("http://localhost");
             SerializationSettings = new JsonSerializerSettings
