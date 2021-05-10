@@ -33,7 +33,7 @@ namespace bdd_tests
             var indigenousNation = "Cowichan Tribes";
             var policeJurisdiction = "Shawnigan Lake RCMP";
             // var indigenousNation = "Parksville";
-            // var policeJurisdiction = "RCMP Oceanside";
+            // var policeJurisdiction = "Oceanside RCMP";
 
             if (bizType == "private corporation")
             {

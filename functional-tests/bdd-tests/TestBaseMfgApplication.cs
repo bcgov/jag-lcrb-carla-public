@@ -29,7 +29,7 @@ namespace bdd_tests
             var indigenousNation = "Cowichan Tribes";
             var policeJurisdiction = "Shawnigan Lake RCMP";
             var localGovernmentParksville = "Parksville";
-            var policeJurisdictionParksville = "RCMP Oceanside";
+            var policeJurisdictionParksville = "Oceanside RCMP";
 
             // upload central securities register
             FileUpload("central_securities_register.pdf", "(//input[@type='file'])[3]");
