@@ -14,7 +14,7 @@ namespace bdd_tests
 
 
         public void CompleteLiquorPrimaryApplicationFull(string bizType, string localGovernment = "Parksville",
-            string policeJurisdiction = "RCMP Oceanside")
+            string policeJurisdiction = "Oceanside RCMP")
         {
             /* 
             Page Title: Liquor Primary Licence Application
