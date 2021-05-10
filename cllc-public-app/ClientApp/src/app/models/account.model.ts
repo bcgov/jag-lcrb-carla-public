@@ -46,6 +46,12 @@ export class Account {
 
   websiteUrl: string;
 
+  // SEP Police Review Limits
+  isLateHoursApproval: boolean;
+  maxGuestsForPublicEvents: number;
+  maxGuestsForPrivateEvents: number;
+  maxGuestsForFamilyEvents: number;
+
   isPartnership(): boolean {
     const isPartnership = [
       "GeneralPartnership",
