@@ -75,6 +75,12 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public string websiteUrl { get; set; }
 
+        // SEP Police Review Limits
+        public bool? isLateHoursApproval { get; set; }
+        public int? maxGuestsForPublicEvents { get; set; }
+        public int? maxGuestsForPrivateEvents { get; set; }
+        public int? maxGuestsForFamilyEvents { get; set; }
+
         public bool isCorporateDetailsComplete(AdoxioApplicantTypeCodes? legalentitytype, bool corporateDetailsFilesExists)
         {
             var isComplete = false;
