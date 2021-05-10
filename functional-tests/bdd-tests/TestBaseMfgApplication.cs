@@ -27,7 +27,7 @@ namespace bdd_tests
             var contactPhone = "778-181-1818";
             var contactEmail = "contact@email.com";
             var indigenousNation = "Cowichan Tribes";
-            var policeJurisdiction = "RCMP Shawnigan Lake";
+            var policeJurisdiction = "Shawnigan Lake RCMP";
             var localGovernmentParksville = "Parksville";
             var policeJurisdictionParksville = "RCMP Oceanside";
 
