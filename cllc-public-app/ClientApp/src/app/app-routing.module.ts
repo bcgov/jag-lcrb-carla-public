@@ -90,6 +90,8 @@ import { ServiceCardProfileComponent } from "@components/servicecard-profile/ser
 import { DrinkPlannerComponent } from "@components/sep/drink-planner/drink-planner.component";
 import { DashboardComponent as PoliceDashboardComponent } from "@components/police-representative/dashboard/dashboard.component";
 import { SepHomeComponent } from "@components/sep/home/home.component";
+import { ApprovalSettingsComponent } from "@components/police-representative/approval-settings/approval-settings.component";
+import { PoliceAuthGuard } from "@services/police-auth-guard.service";
 
 const routes: Routes = [
   {
@@ -119,6 +121,12 @@ const routes: Routes = [
     path: "sep/my-applications",
     component: MyApplicationsComponent,
     canActivate: [BCeidOrServiceCardAuthGuard, FeatureGuard],
+    data: { feature: "Sep" }
+  },
+  {
+    path: "sep/police/approval-settings",
+    component: ApprovalSettingsComponent,
+    canActivate: [PoliceAuthGuard, FeatureGuard],
     data: { feature: "Sep" }
   },
   {
