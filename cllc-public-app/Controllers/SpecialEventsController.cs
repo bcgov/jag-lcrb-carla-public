@@ -161,7 +161,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                 });
             }
-            return new JsonResult(specialEvent );
+            return new JsonResult(specialEvent);
         }
 
         [HttpPost("old")]
@@ -241,20 +241,107 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             var patchEvent = new MicrosoftDynamicsCRMadoxioSpecialevent();
             patchEvent.CopyValues(specialEvent);
-
             try
             {
-                _dynamicsClient.Specialevents.Update(eventId, patchEvent);
+                _dynamicsClient.Specialevents.Update(specialEvent.SpecialEventId, patchEvent);
+                specialEvent.SpecialEventId = patchEvent.AdoxioSpecialeventid;
             }
             catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(httpOperationException, "Error updating special event");
+                _logger.LogError(httpOperationException, "Error creating special event");
                 throw httpOperationException;
             }
 
-            patchEvent = _dynamicsClient.Specialevents.GetByKey(eventId);
+            if (specialEvent.EventLocations?.Count > 0)
+            {
+                patchEvent.AdoxioSpecialeventSpecialeventlocations = new List<MicrosoftDynamicsCRMadoxioSpecialeventlocation>();
+                // add locations to the new special event
+                specialEvent.EventLocations.ForEach(location =>
+                {
+                    var newLocation = new MicrosoftDynamicsCRMadoxioSpecialeventlocation();
+                    newLocation.CopyValues(location);
+                    newLocation.AdoxioSpecialEventODataBind = _dynamicsClient.GetEntityURI("adoxio_specialevents", patchEvent.AdoxioSpecialeventid);
+                    try
+                    {
 
-            return new JsonResult(patchEvent.ToViewModel());
+                        if (string.IsNullOrEmpty(location.LocationId))
+                        { // create record
+                            newLocation = _dynamicsClient.Specialeventlocations.Create(newLocation);
+                            location.LocationId = newLocation.AdoxioSpecialeventlocationid;
+                        }
+                        else
+                        { // update record
+                            _dynamicsClient.Specialeventlocations.Update(location.LocationId, newLocation);
+                        }
+                    }
+                    catch (HttpOperationException httpOperationException)
+                    {
+                        _logger.LogError(httpOperationException, "Error creating special event location");
+                        throw httpOperationException;
+                    }
+
+                    // Add service areas to new location
+                    if (location.ServiceAreas?.Count > 0)
+                    {
+                        newLocation.AdoxioSpecialeventlocationLicencedareas = new List<MicrosoftDynamicsCRMadoxioSpecialeventlicencedarea>();
+                        location.ServiceAreas.ForEach(area =>
+                        {
+                            var newArea = new MicrosoftDynamicsCRMadoxioSpecialeventlicencedarea();
+                            newArea.CopyValues(area);
+                            newArea.AdoxioSpecialEventODataBind = _dynamicsClient.GetEntityURI("adoxio_specialevents", patchEvent.AdoxioSpecialeventid);
+                            newArea.AdoxioSpecialEventLocationODataBind = _dynamicsClient.GetEntityURI("adoxio_specialeventlocations", newLocation.AdoxioSpecialeventlocationid);
+                            try
+                            {
+                                if (string.IsNullOrEmpty(area.LicencedAreaId))
+                                { // create record
+                                    newArea = _dynamicsClient.Specialeventlicencedareas.Create(newArea);
+                                    area.LicencedAreaId = newArea.AdoxioSpecialeventlicencedareaid;
+                                }
+                                else
+                                { // update record
+                                    _dynamicsClient.Specialeventlicencedareas.Update(area.LicencedAreaId, newArea);
+                                }
+                            }
+                            catch (HttpOperationException httpOperationException)
+                            {
+                                _logger.LogError(httpOperationException, "Error creating special event location");
+                                throw httpOperationException;
+                            }
+
+                            // Add event dates to the new Area
+                            if (area.EventDates?.Count > 0)
+                            {
+                                area.EventDates.ForEach(dates =>
+                                {
+                                    var newDates = new MicrosoftDynamicsCRMadoxioSpecialeventschedule();
+                                    newDates.CopyValues(dates);
+                                    newDates.AdoxioSpecialEventODataBind = _dynamicsClient.GetEntityURI("adoxio_specialevents", patchEvent.AdoxioSpecialeventid);
+                                    newDates.AdoxioSpecialEventLocationODataBind = _dynamicsClient.GetEntityURI("adoxio_specialeventlocations", newLocation.AdoxioSpecialeventlocationid);
+                                    newDates.AdoxioServiceAreaODataBind = _dynamicsClient.GetEntityURI("adoxio_specialeventlicencedareas", newArea.AdoxioSpecialeventlicencedareaid);
+                                    try
+                                    {
+                                        if (string.IsNullOrEmpty(dates.EventScheduleId))
+                                        { // create record
+                                            newDates = _dynamicsClient.Specialeventschedules.Create(newDates);
+                                            dates.SpecialEventId = newDates.AdoxioSpecialeventscheduleid;
+                                        }
+                                        else
+                                        { // update record
+                                            _dynamicsClient.Specialeventschedules.Update(dates.EventScheduleId, newDates);
+                                        }
+                                    }
+                                    catch (HttpOperationException httpOperationException)
+                                    {
+                                        _logger.LogError(httpOperationException, "Error creating special event location");
+                                        throw httpOperationException;
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+            return new JsonResult(specialEvent);
         }
 
         [HttpGet("drink-types")]
