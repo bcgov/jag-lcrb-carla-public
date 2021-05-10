@@ -49,7 +49,7 @@
 
   <app-field label="Business Number (9 digit number from the Canada Revenue Agency)" [required]="true"
              [valid]="form.get('businessProfile.businessNumber').valid || !form.get('businessProfile.businessNumber').touched"
-             errorMessage="Please enter the business number (9 digits)">
+             errorMessage="Please enter the business number (9 digits)" *ngIf="['Police'].indexOf(getBusinessTypeName()) == -1">
     <input class="form-control" style="width: 150px;" maxlength="9" type="text"
            formControlName="businessNumber" (keydown)="rejectIfNotDigitOrBackSpace($event)">
   </app-field>
@@ -64,9 +64,9 @@
 
   <!-- Incorporation/ BC Registration Number Box-->
   <section
-    *ngIf="!account.isOtherBusinessType() &&  ['Partnership', 'Sole Proprietorship', 'University', 'Church', 'Indigenous Nation', 'Local Government'].indexOf(getBusinessTypeName()) == -1">
+    *ngIf="!account?.isOtherBusinessType() &&  ['Partnership', 'Sole Proprietorship', 'University', 'Church', 'Indigenous Nation', 'Local Government', 'Police'].indexOf(getBusinessTypeName()) == -1">
     <div [ngClass]="{'has-error': false}">
-      <label *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1 || account.isOtherBusinessType()" for="">
+      <label *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1 || account?.isOtherBusinessType()" for="">
         Incorporation
         Number
       </label>
@@ -90,7 +90,7 @@
 
   <!-- Incorporation Date -->
   <section
-    *ngIf="['Partnership', 'Sole Proprietorship', 'University', 'Church', 'Local Government', 'Indigenous Nation'].indexOf(getBusinessTypeName()) == -1">
+    *ngIf="['Partnership', 'Sole Proprietorship', 'University', 'Church', 'Local Government', 'Indigenous Nation', 'Police'].indexOf(getBusinessTypeName()) == -1">
     <div [ngClass]="{'has-error': false}">
       <label >Date of Incorporation in B.C.
       </label>
@@ -294,7 +294,7 @@
 </div>
 
 
-<div *ngIf="saveFormData?.businessProfile?.id">
+<div *ngIf="saveFormData?.businessProfile?.id && ['Police'].indexOf(getBusinessTypeName()) == -1">
   <app-connection-to-producers *ngIf="account?.tiedHouse" [tiedHouse]="account?.tiedHouse"
                                [account]="account" (value)="tiedHouseFormData = $event">
   </app-connection-to-producers>
