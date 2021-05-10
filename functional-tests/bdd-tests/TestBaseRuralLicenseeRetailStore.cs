@@ -116,9 +116,9 @@ namespace bdd_tests
                 FileUpload("proof_of_zoning.pdf", "(//input[@type='file'])[6]");
 
             // select 'Yes' for Treaty First Nation land
-            var uiIsOnINLand =
-                ngDriver.FindElement(By.CssSelector("[formcontrolname='isOnINLand'] mat-radio-button#mat-radio-13"));
-            uiIsOnINLand.Click();
+            // var uiIsOnINLand =
+            //    ngDriver.FindElement(By.CssSelector("[formcontrolname='isOnINLand'] mat-radio-button#mat-radio-13"));
+            // uiIsOnINLand.Click();
 
             // search for and select the indigenous nation
             var uiIndigenousNation = ngDriver.FindElement(By.CssSelector("input[formcontrolname='indigenousNation']"));
