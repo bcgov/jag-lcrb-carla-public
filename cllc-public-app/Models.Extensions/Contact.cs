@@ -2,6 +2,8 @@
 using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Http;
 using System;
+using Gov.Lclb.Cllb.Interfaces;
+using Contact = Gov.Lclb.Cllb.Public.ViewModels.Contact;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
@@ -232,6 +234,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             string smgov_givenname = headers["smgov_givenname"];
             string smgov_givennames = headers["smgov_givennames"];
             string smgov_surname = headers["smgov_surname"];
+            string smgov_userdisplayname = headers["smgov_userdisplayname"];
 
             to.address1_line1 = smgov_streetaddress;
             to.address1_postalcode = smgov_postalcode;
@@ -264,6 +267,18 @@ namespace Gov.Lclb.Cllb.Public.Models
             if (!string.IsNullOrEmpty(smgov_birthdate) && DateTimeOffset.TryParse(smgov_birthdate, out DateTimeOffset tempDate))
             {
                 to.Birthdate = tempDate;
+            }
+            
+            if (string.IsNullOrEmpty(to.lastname) && smgov_userdisplayname != null)
+            {
+                // get from smgov_userdisplayname
+                to.lastname = smgov_userdisplayname.GetLastName();
+            }
+
+            if (string.IsNullOrEmpty(to.firstname) && smgov_userdisplayname != null)
+            {
+                // get from smgov_userdisplayname
+                to.firstname = smgov_userdisplayname.GetFirstName();
             }
 
         }
