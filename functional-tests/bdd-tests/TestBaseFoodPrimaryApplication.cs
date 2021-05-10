@@ -139,11 +139,6 @@ namespace bdd_tests
                 ngDriver.FindElement(By.CssSelector("textarea#patioLiquorCarriedDescription"));
             uiPatioLiquorCarriedDescription.SendKeys(patioLiquorCarriedDescription);
 
-            // enter patio access control description
-            var uiPatioAccessControlDescription =
-                ngDriver.FindElement(By.CssSelector("textarea#patioAccessControlDescription"));
-            uiPatioAccessControlDescription.SendKeys(patioAccessControlDescription);
-
             // click Fixed option
             var uiFixedOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-1-button"));
             uiFixedOption.Click();
