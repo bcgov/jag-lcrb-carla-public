@@ -22,7 +22,7 @@ namespace bdd_tests
             var estPhone = "2505555555";
 
             var indigenousNation = "Cowichan Tribes";
-            var policeJurisdiction = "RCMP Shawnigan Lake";
+            var policeJurisdiction = "Shawnigan Lake RCMP";
 
             var resortDescription = "Sample resort description";
             var otherBusinesses = "Sample other businesses";
