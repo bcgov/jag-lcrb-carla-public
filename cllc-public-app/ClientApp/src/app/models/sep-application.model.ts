@@ -2,6 +2,7 @@ import { SepLocation } from "./sep-location.model";
 
 export class SepApplication {
     id: number
+    specialEventId: string;
     tempJobNumber: string;
     dateCreated: Date;
     lastUpdated: Date;
@@ -11,6 +12,7 @@ export class SepApplication {
     dateAgreedToTnC: Date;
     stepsCompleted: string[];
     eventStatus: string;
+    totalServings: number;
 
     eligibilityAtPrivateResidence: boolean;
     eligibilityMajorSignificance: boolean;
