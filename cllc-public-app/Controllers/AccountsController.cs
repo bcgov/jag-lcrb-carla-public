@@ -638,13 +638,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 }
 
-                // create the bridge entity for login.
-
-                if (!string.IsNullOrEmpty(_configuration["FEATURE_BRIDGE_LOGIN"]))
-                {
-                    _dynamicsClient.UpdateContactBridgeLogin(userContact.Contactid, contactSiteminderGuid, account.Accountid, accountSiteminderGuid);
-                }
-
                 // create the sharepoint document location for the account
 
                 var accountFolderName = await _dynamicsClient.GetFolderName("account", account.Accountid).ConfigureAwait(true);
@@ -727,27 +720,32 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             
-                _logger.LogDebug(LoggingEvents.Save, "Patching the userContact so it relates to the account.");
-                // parent customer id relationship will be created using the method here:
-                //https://msdn.microsoft.com/en-us/library/mt607875.aspx
-                MicrosoftDynamicsCRMcontact patchUserContact = new MicrosoftDynamicsCRMcontact();
-                patchUserContact.ParentCustomerIdAccountODataBind = _dynamicsClient.GetEntityURI("accounts", account.Accountid);
-                try
-                {
-                    await _dynamicsClient.Contacts.UpdateAsync(userContact.Contactid, patchUserContact);
-                }
-                catch (HttpOperationException httpOperationException)
-                {
-                    _logger.LogError(httpOperationException, "Error binding contact to account. ");
-                    throw new Exception("Error binding contact to account");
-                }
-                catch (Exception e)
-                {
-                    _logger.LogError(e, "Error binding contact to account");
-                    throw new Exception("Error binding contact to account");
-                }
-           
-            
+            _logger.LogDebug(LoggingEvents.Save, "Patching the userContact so it relates to the account.");
+            // parent customer id relationship will be created using the method here:
+            //https://msdn.microsoft.com/en-us/library/mt607875.aspx
+            MicrosoftDynamicsCRMcontact patchUserContact = new MicrosoftDynamicsCRMcontact();
+            patchUserContact.ParentCustomerIdAccountODataBind = _dynamicsClient.GetEntityURI("accounts", account.Accountid);
+            try
+            {
+                await _dynamicsClient.Contacts.UpdateAsync(userContact.Contactid, patchUserContact);
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Error binding contact to account. ");
+                throw new Exception("Error binding contact to account");
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error binding contact to account");
+                throw new Exception("Error binding contact to account");
+            }
+
+            // create the bridge entity for login.
+
+            if (!string.IsNullOrEmpty(_configuration["FEATURE_BRIDGE_LOGIN"]))
+            {
+                _dynamicsClient.UpdateContactBridgeLogin(userContact.Contactid, contactSiteminderGuid, account.Accountid, accountSiteminderGuid);
+            }
 
             // if we have not yet authenticated, then this is the new record for the user.
             if (userSettings.IsNewUserRegistration)
