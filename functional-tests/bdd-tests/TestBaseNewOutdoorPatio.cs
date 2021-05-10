@@ -14,21 +14,21 @@ namespace bdd_tests
             */
 
             // create test data
-            var patioCompDescription = "Sample patio composition description.";
             var patioLocationDescription = "Sample patio location description.";
             var patioAccessDescription = "Sample patio access description.";
             var patioLiquorCarriedDescription = "Sample liquor carried description.";
-            var patioAccessControlDescription = "Sample patio access control description.";
             var areaDescription = "Sample area description";
             var occupantLoad = "99999";
-
-            // enter patio composition description
-            var uiPatioCompDescription = ngDriver.FindElement(By.CssSelector("textarea#patioCompDescription"));
-            uiPatioCompDescription.SendKeys(patioCompDescription);
 
             // enter patio location description
             var uiPatioLocationDescription = ngDriver.FindElement(By.CssSelector("textarea#patioLocationDescription"));
             uiPatioLocationDescription.SendKeys(patioLocationDescription);
+
+            // select construction completion date
+            var uiStoreOpenDate = ngDriver.FindElement(By.Id("storeOpenDate"));
+            uiStoreOpenDate.Click();
+
+            SharedCalendarDate();
 
             // enter patio access description
             var uiPatioAccessDescription = ngDriver.FindElement(By.CssSelector("textarea#patioAccessDescription"));
@@ -42,11 +42,6 @@ namespace bdd_tests
             var uiPatioLiquorCarriedDescription =
                 ngDriver.FindElement(By.CssSelector("textarea#patioLiquorCarriedDescription"));
             uiPatioLiquorCarriedDescription.SendKeys(patioLiquorCarriedDescription);
-
-            // enter patio access control description
-            var uiPatioAccessControlDescription =
-                ngDriver.FindElement(By.CssSelector("textarea#patioAccessControlDescription"));
-            uiPatioAccessControlDescription.SendKeys(patioAccessControlDescription);
 
             // click Fixed option
             var uiFixedOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-33-button"));
