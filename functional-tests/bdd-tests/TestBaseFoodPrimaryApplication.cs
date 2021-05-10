@@ -113,16 +113,18 @@ namespace bdd_tests
 
             // select 'Yes' for patio
             var uiHasPatio =
-                ngDriver.FindElement(By.CssSelector("[formcontrolname='isHasPatio'] mat-radio-button#mat-radio-13"));
+                ngDriver.FindElement(By.CssSelector("mat-radio-button#mat-radio-14"));
             uiHasPatio.Click();
-
-            // enter the patio comp description
-            var uiPatioCompDescription = ngDriver.FindElement(By.CssSelector("textarea#patioCompDescription"));
-            uiPatioCompDescription.SendKeys(patioCompDescription);
 
             // enter the patio location description
             var uiPatioLocationDescription = ngDriver.FindElement(By.CssSelector("textarea#patioLocationDescription"));
             uiPatioLocationDescription.SendKeys(patioLocationDescription);
+
+            // select construction completion date
+            var uiStoreOpenDate = ngDriver.FindElement(By.Id("storeOpenDate"));
+            uiStoreOpenDate.Click();
+
+            SharedCalendarDate();
 
             // enter the patio access description
             var uiPatioAccessDescription = ngDriver.FindElement(By.CssSelector("textarea#patioAccessDescription"));
