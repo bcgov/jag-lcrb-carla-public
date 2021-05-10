@@ -1,9 +1,9 @@
-<div class="form-wrapper" class="position-relative">
+<div class="form-wrapper position-relative">
   <h1 class="mat-heading">Administration</h1>
   <p>Edit police approval settings for all applications in your area.</p>
   <form [formGroup]="form">
     <h3 class="blue-header">POLICE APPROVAL</h3>
-    <section formGroupName="contact" class="content-bottom clearfix">
+    <section class="content-bottom clearfix">
       <p>Maximum Number of guests permitted before Police Approval is required at this detachment.</p>
 
       <div class="row">
@@ -31,8 +31,9 @@
       </div>
 
       <div class="row">
-        <mat-checkbox formControlName="isLateHoursApproval">Police Approval is required if late hours are being
-          requested</mat-checkbox>
+        <mat-checkbox formControlName="isLateHoursApproval" class="col">
+          Police Approval is required if late hours are being requested
+        </mat-checkbox>
       </div>
     </section>
   </form>

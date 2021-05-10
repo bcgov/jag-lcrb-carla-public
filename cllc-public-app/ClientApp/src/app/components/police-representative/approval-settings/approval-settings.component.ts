@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faChevronRight, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { filter, takeWhile } from 'rxjs/operators';
+import { filter, switchMap, takeWhile } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
 import { Account } from '@models/account.model';
@@ -56,7 +56,7 @@ export class ApprovalSettingsComponent extends FormBase implements OnInit {
 
   private loadAccount(account: Account): void {
     this.account = account;
-    this.form.patchValue({
+    this.form.setValue({
       id: account.id,
       isLateHoursApproval: account.isLateHoursApproval,
       maxGuestsForPublicEvents: account.maxGuestsForPublicEvents,
@@ -78,6 +78,7 @@ export class ApprovalSettingsComponent extends FormBase implements OnInit {
     // Update Police account record
     const data = { ...this.form.value } as Account;
     this.accountDataService.updateAccount(data)
+      .pipe(switchMap(() => this.accountDataService.loadCurrentAccountToStore(this.account.id)))
       .subscribe(() => this.router.navigate(['/sep/dashboard']));
   }
 
