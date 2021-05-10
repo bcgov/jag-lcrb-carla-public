@@ -312,7 +312,7 @@
       </a>.
     </p>
     <app-file-uploader *ngIf="application?.id" documentType="PHS"
-                       fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+                       fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
                        [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedPHS = $event"
                        [entityId]="application.id"
                        [uploadHeader]="'TO UPLOAD PERSONAL HISTORY SUMMARY FORMS, DRAG FILES HERE OR'">
