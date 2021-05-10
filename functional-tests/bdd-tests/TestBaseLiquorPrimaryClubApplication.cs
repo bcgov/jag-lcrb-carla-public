@@ -140,6 +140,7 @@ namespace bdd_tests
             var uiEstabType = ngDriver.FindElement(By.CssSelector("input[formcontrolname='description1']"));
             uiEstabType.SendKeys(estType);
 
+            /*
             // select 'Yes' for patio
             var uiHasPatioYes =
                 ngDriver.FindElement(By.CssSelector("[formcontrolname='isHasPatio'] mat-radio-button#mat-radio-13"));
@@ -182,6 +183,7 @@ namespace bdd_tests
             // click Interior option
             var uiInteriorOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-3-button"));
             uiInteriorOption.Click();
+            */
 
             if (bizType == "partnership" || bizType == "society")
             {
