@@ -22,7 +22,7 @@ namespace bdd_tests
             var estPhone = "2505555555";
 
             var indigenousNation = "Cowichan Tribes";
-            var policeJurisdiction = "RCMP Shawnigan Lake";
+            var policeJurisdiction = "Shawnigan Lake RCMP";
 
             var resortDescription = "Sample resort description";
             var otherBusinesses = "Sample other businesses";
@@ -116,9 +116,9 @@ namespace bdd_tests
                 FileUpload("proof_of_zoning.pdf", "(//input[@type='file'])[6]");
 
             // select 'Yes' for Treaty First Nation land
-            var uiIsOnINLand =
-                ngDriver.FindElement(By.CssSelector("[formcontrolname='isOnINLand'] mat-radio-button#mat-radio-13"));
-            uiIsOnINLand.Click();
+            // var uiIsOnINLand =
+            //    ngDriver.FindElement(By.CssSelector("[formcontrolname='isOnINLand'] mat-radio-button#mat-radio-13"));
+            // uiIsOnINLand.Click();
 
             // search for and select the indigenous nation
             var uiIndigenousNation = ngDriver.FindElement(By.CssSelector("input[formcontrolname='indigenousNation']"));
