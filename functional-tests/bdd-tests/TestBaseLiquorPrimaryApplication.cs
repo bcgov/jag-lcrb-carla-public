@@ -137,15 +137,34 @@ namespace bdd_tests
             var patioButton = patioRadioGroup.FindElements(By.TagName("mat-radio-button"))[0];
             patioButton.Click();
 
+            // select monitor and control checkbox
+            var uiIsBoundingSufficientForControl = ngDriver.FindElement(By.Id("isBoundingSufficientForControl"));
+            uiIsBoundingSufficientForControl.Click();
+
+            // select definition checkbox
+            var uiIsBoundingSufficientToDefine = ngDriver.FindElement(By.Id("isBoundingSufficientToDefine"));
+            uiIsBoundingSufficientToDefine.Click();
+
+            // select adequate care checkbox
+            var uiIsAdequateCare = ngDriver.FindElement(By.Id("isAdequateCare"));
+            uiIsAdequateCare.Click();
+
             // enter the patio location description
             var uiPatioLocationDescription = ngDriver.FindElement(By.CssSelector("textarea#patioLocationDescription"));
             uiPatioLocationDescription.SendKeys(patioLocationDescription);
+
+            // select status of patio area construction
+            var uiConstructionStatus = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-1-button"));
+            uiConstructionStatus.Click();
 
             // select construction completion date
             var uiStoreOpenDate = ngDriver.FindElement(By.Id("storeOpenDate"));
             uiStoreOpenDate.Click();
 
             SharedCalendarDate();
+
+            // select TESA checkbox
+
 
             // enter the patio access description
             var uiPatioAccessDescription = ngDriver.FindElement(By.CssSelector("textarea#patioAccessDescription"));
