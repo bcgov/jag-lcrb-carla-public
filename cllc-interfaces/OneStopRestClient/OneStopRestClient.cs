@@ -1,6 +1,7 @@
 ﻿using Serilog;
 using System;
 using System.Net.Http;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Interfaces
@@ -20,10 +21,21 @@ namespace Gov.Lclb.Cllb.Interfaces
             this._logger = logger;
         }
 
+        public string CleanXML(string inputXml)
+        {
+            // clean any namespaces.
+            inputXml = Regex.Replace(inputXml, @" xmlns:.*?"".*?""", "");
+            // adjust the header.
+            inputXml = inputXml.Replace("encoding=\"utf-16\"?>", "?>");
+            return inputXml;
+        }
+
         public async Task<string> ReceiveFromPartner(string inputXml)
         {
             var url = $"{BaseUri}?inputXML={Uri.EscapeDataString(inputXml)}";
-            _logger.Debug($"InputXML to send = {inputXml}");
+
+            Log.Logger.Information($"InputXML to send = {inputXml}");
+
             var response = await _httpClient.GetAsync(url);
             if (response.IsSuccessStatusCode)
             {
@@ -45,6 +57,7 @@ namespace Gov.Lclb.Cllb.Interfaces
     {
         Uri BaseUri { get; set; }
         string AuthorizationHeaderValue { get; set; }
+        string CleanXML(string inputXml);
         Task<string> ReceiveFromPartner(string inputXml);
     }
 }

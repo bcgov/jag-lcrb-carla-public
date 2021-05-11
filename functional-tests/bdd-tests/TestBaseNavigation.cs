@@ -130,6 +130,42 @@ namespace bdd_tests
                     executor.ExecuteScript("arguments[0].scrollIntoView(true);", uiSubmitAChange);
                     uiSubmitAChange.Click();
                     break;
+                case "SEP Start Application":
+                    var uiSEPStartApplication = ngDriver.FindElement(By.CssSelector("button#startAppBtn.mat-raised-button.mat-primary"));
+                    var executor2 = (IJavaScriptExecutor)ngDriver.WrappedDriver;
+                    executor2.ExecuteScript("arguments[0].scrollIntoView(true);", uiSEPStartApplication);
+                    uiSEPStartApplication.Click();
+                    break;
+                case "Go To My Applications":
+                    var uiSEPMyApplications = ngDriver.FindElement(By.CssSelector("button.mat-secondary[routerlink='/sep/my-applications']"));
+                    var executor3 = (IJavaScriptExecutor)ngDriver.WrappedDriver;
+                    executor3.ExecuteScript("arguments[0].scrollIntoView(true);", uiSEPMyApplications);
+                    uiSEPMyApplications.Click();
+                    break;
+                case "Plan Your Drinks":
+                    var uiSEPPlanYourDrinks = ngDriver.FindElement(By.XPath("//section[2]/app-resources/mat-card/section[4]/div[2]/button"));
+                    var executor4 = (IJavaScriptExecutor)ngDriver.WrappedDriver;
+                    executor4.ExecuteScript("arguments[0].scrollIntoView(true);", uiSEPPlanYourDrinks);
+                    uiSEPPlanYourDrinks.Click();
+                    break;
+                case "my user account":
+                    var uiMyUserAccount = ngDriver.FindElement(By.CssSelector("svg.fa-chevron-down[data-icon='chevron-down']"));
+                    var executor5 = (IJavaScriptExecutor)ngDriver.WrappedDriver;
+                    executor5.ExecuteScript("arguments[0].scrollIntoView(true);", uiMyUserAccount);
+                    uiMyUserAccount.Click();
+                    break;
+                case "Learn More":
+                    var uiLearnMore = ngDriver.FindElement(By.CssSelector(""));
+                    var executor6 = (IJavaScriptExecutor)ngDriver.WrappedDriver;
+                    executor6.ExecuteScript("arguments[0].scrollIntoView(true);", uiLearnMore);
+                    uiLearnMore.Click();
+                    break;
+                case "Get Certified":
+                    var uiGetCertified = ngDriver.FindElement(By.CssSelector(""));
+                    var executor7 = (IJavaScriptExecutor)ngDriver.WrappedDriver;
+                    executor7.ExecuteScript("arguments[0].scrollIntoView(true);", uiGetCertified);
+                    uiGetCertified.Click();
+                    break;
             }
         }
 

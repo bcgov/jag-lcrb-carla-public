@@ -312,7 +312,7 @@
       </a>.
     </p>
     <app-file-uploader *ngIf="application?.id" documentType="PHS"
-                       fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+                       fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
                        [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedPHS = $event"
                        [entityId]="application.id"
                        [uploadHeader]="'TO UPLOAD PERSONAL HISTORY SUMMARY FORMS, DRAG FILES HERE OR'">
@@ -923,6 +923,10 @@
   </app-field>
 </div>
 
+<div *ngIf="htmlContent.patio && showDynamicForm(application?.applicationType?.formReference, dynamicsForm?.tabs)">
+  <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.patio"></section>
+</div>
+
 <!-- Dynamic form details-->
 <section *ngIf="showDynamicForm(application?.applicationType?.formReference, dynamicsForm?.tabs)">
   <h3 class="blue-header">Application Details</h3>
@@ -939,7 +943,7 @@
         <!-- for each field on the section-->
         <div *ngFor="let formField of formSection.fields">
           <!-- if the field is visible-->
-          <div *ngIf="formField.visible">
+          <section *ngIf="formField.visible">
             <!-- if it's a textbox, show it like a text box-->
             <app-field *ngIf="formField.controltype == 'TextBoxControl' && formField.datafieldname !== 'establishmentParcelId'"
                        [label]="formField.name" [required]="formField.required" [errorMessage]="'This field is required.'">
@@ -957,7 +961,7 @@
 
             <!-- show text area-->
 
-            <div class="padded-section" style="padding-left: 10px;" *ngIf="formField.controltype == 'TextAreaControl'">
+            <div class="padded-section" *ngIf="formField.controltype == 'TextAreaControl'">
               <app-field [label]="formField.name" [required]="formField.required" [errorMessage]="'This field is required.'" [isFullWidth]="true"
                          [valid]="isValidOrNotTouched(formField.datafieldname)" [showChevrons]="false">
                 <textarea rows="8" style="width: 100%;" maxlength="5000" [formControlName]="formField.datafieldname"
@@ -968,14 +972,14 @@
             <!-- date time controls-->
             <app-field *ngIf="formField.controltype == 'DateTimeControl'" [label]="formField.name"
                        [required]="formField.required" [errorMessage]="'This field is required.'">
-              <input type="text" style="background-color: #fff; width: 200px;"
+              <input type="text" style="background-color: #fff; width: 200px; margin-left: 15px;"
                      [formControlName]="formField.datafieldname" [id]="formField.datafieldname" placeholder="yyyy-mm-dd"
                      readonly class="form-control" [matDatepicker]="picker" (focus)="picker.open()" (click)="picker.open()">
               <mat-datepicker #picker></mat-datepicker>
             </app-field>
 
             <!-- pick list-->
-            <div *ngIf="formField.controltype == 'PicklistControl'" style="padding-left: 10px;">
+            <div *ngIf="formField.controltype == 'PicklistControl'">
               <app-field [label]="formField.name" [required]="formField.required" [errorMessage]="'This field is required.'" [valid]="isValidOrNotTouched(formField.datafieldname)">
 
                 <mat-card *ngIf="formField.controltype == 'PicklistControl'" class="mat-elevation-z0"
@@ -1006,17 +1010,17 @@
                        [valid]="!showValidationMessages || form.get(formField.datafieldname).valid" [required]="formField.required" [errorMessage]="'This field is required.'"
                        [showChevrons]="false">
               <mat-checkbox [formControlName]="formField.datafieldname" [id]="formField.datafieldname">
-                <span class="error-states">*</span>
+                <span class="error-states" *ngIf="formField.required">*</span>
                 <span class="ml-2 question-label">
                   {{formField.name}}
                 </span>
               </mat-checkbox>
             </app-field>
 
-          </div>
+          </section>
 
         </div>
-
+        <hr>
       </div>
     </div>
   </div>
@@ -2695,7 +2699,7 @@
       <app-file-uploader *ngIf="applicationId" documentType="Licence Application Supporting"
                          [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
                          fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [entityId]="applicationId"
-                         [maxNumberOfFiles]="200" (numberOfUploadedFiles)="uploadedCentralSecuritiesRegisterDocuments = $event"
+                         [maxNumberOfFiles]="200" (numberOfUploadedFiles)="uploadedSupportingDocuments = $event"
                          [extensions]="['pdf', 'jpg', 'jpeg', 'png']" [enableFileDeletion]="false" #supportingDocuments>
       </app-file-uploader>
     </section>

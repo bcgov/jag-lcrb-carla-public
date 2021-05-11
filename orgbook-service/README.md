@@ -1,5 +1,24 @@
 # Orgbook Service
 
+## Setup of a project namespace
+
+1. Obtain an invitation JSON from the OrgBook team
+2. Login to the OpenShift console
+3. Observe the value of the secret for the admin-key
+4. Port forward port 8024 on the agent-orgbook-issuer pod
+5. Enter http://localhost:8024/api/doc
+6. Click the Authorize link and enter the value for the admin-key found above in step #3
+7. Use the /connections/receive-invitation service to add the invitation JSON to the agent
+8. In the response to this service there will be a connection_id - make note of this for the next step
+9. Use the GET /connections/{conn_id} service to get the status of the connection
+10. You may need to restart the Agent if you do not see "active" in the "state" field of the response after a few minutes
+
+## Increasing the schema version to re-establish the wallet
+This is done in a situation such as DEV or TEST when the wallet database is lost or created new.
+1. Edit the config/schemas.yml file and increase the version numbers of each schema in the file.
+2. Build the Controller
+3. Deploy the Controller. 
+
 ## Recurring Jobs
 - SyncLicencesToOrgbook
   - Check for new licences and issue them to orgbook
@@ -21,3 +40,4 @@
       - `All accounts with a bcincorporationnumber and no orgbook organization link and no business registration number`
     - Action
       - `Add the orgbook organization link and success status to the account`
+

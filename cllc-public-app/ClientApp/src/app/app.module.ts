@@ -286,6 +286,22 @@ import { ErrorAlertComponent } from './components/sep/error-alert/error-alert.co
 import { DrinkPlannerComponent } from "@components/sep/drink-planner/drink-planner.component";
 import { DrinkPlannerDialog } from "@components/sep/drink-planner/drink-planner.dialog";
 import { UserMenuComponent } from "@components/user-menu/user-menu.component";
+import { ServicecardUserConfirmationComponent } from "@components/sep/servicecard-user-confirmation/servicecard-user-confirmation.component";
+import { ServicecardUserTermsAndConditionsComponent } from "@components/sep/servicecard-user-terms-and-conditions/servicecard-user-terms-and-conditions.component";
+import { TotalServingsComponent } from './components/sep/sep-application/liquor/tabs/total-servings/total-servings.component';
+import { SellingDrinksComponent } from './components/sep/sep-application/liquor/tabs/selling-drinks/selling-drinks.component';
+import { DrinkAmountsComponent } from './components/sep/sep-application/liquor/tabs/drink-amounts/drink-amounts.component';
+import { ConversionToolComponent } from './components/sep/sep-application/liquor/tabs/total-servings/conversion-tool/conversion-tool.component';
+import { SpecialEventsDataService } from "@services/special-events-data.service";
+import { NavbarComponent } from "@components/navbar/navbar.component";
+import { PublicNavComponent } from "@components/navbar/public-nav/public-nav.component";
+import { UserNavComponent } from "@components/navbar/user-nav/user-nav.component";
+import { PoliceNavComponent } from "@components/navbar/police-nav/police-nav.component";
+import { DashboardComponent as PoliceDashboardComponent } from "@components/police-representative/dashboard/dashboard.component";
+import { SepHomeComponent } from "@components/sep/home/home.component";
+import { ApprovalSettingsComponent } from "@components/police-representative/approval-settings/approval-settings.component";
+import { PoliceAuthGuard } from "@services/police-auth-guard.service";
+
 
 @NgModule({
   declarations: [
@@ -444,6 +460,19 @@ import { UserMenuComponent } from "@components/user-menu/user-menu.component";
     DrinkPlannerComponent,
     DrinkPlannerDialog,
     UserMenuComponent,
+    ServicecardUserConfirmationComponent,
+    ServicecardUserTermsAndConditionsComponent,
+    TotalServingsComponent,
+    SellingDrinksComponent,
+    DrinkAmountsComponent,
+    ConversionToolComponent,
+    NavbarComponent,
+    PublicNavComponent,
+    UserNavComponent,
+    PoliceNavComponent,
+    PoliceDashboardComponent,
+    SepHomeComponent,
+    ApprovalSettingsComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -580,7 +609,9 @@ import { UserMenuComponent } from "@components/user-menu/user-menu.component";
     WorkerDataService,
     FeatureFlagService,
     LEConnectionsDataService,
+    SpecialEventsDataService,
     BCeidOrServiceCardAuthGuard,
+    PoliceAuthGuard,
     {
       provide: APP_INITIALIZER,
       useFactory: (featureFlagService: FeatureFlagService) => function () {

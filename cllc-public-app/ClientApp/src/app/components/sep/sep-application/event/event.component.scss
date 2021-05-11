@@ -1,3 +1,7 @@
+.wrapp {
+    max-width: 1100px;
+}
+
 mat-divider {
     margin: 16px;
 }
@@ -8,4 +12,8 @@ td {
 
 .text-right {
     text-align: right;
+}
+
+.location-panel {
+    background-color: #eee;
 }

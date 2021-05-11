@@ -249,6 +249,9 @@ export class AccountProfileComponent extends FormBase implements OnInit {
       case "LocalGovernment":
         name = "Local Government";
         break;
+      case "Police":
+        name = "Police";
+        break;
       case "PublicCorporation":
       case "PrivateCorporation":
       case "UnlimitedLiabilityCorporation":
@@ -264,7 +267,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
 
   legalNameLabel() {
     const businessType = this.getBusinessTypeName();
-    let label = `${businessType} ${this.account.isOtherBusinessType() ? '' : '-'} Legal Name`;
+    let label = `${businessType} ${this.account?.isOtherBusinessType() ? '' : '-'} Legal Name`;
     if (businessType === "IndigenousNation") {
       label = "Full name of Indigenous Nation";
     }
@@ -364,6 +367,12 @@ export class AccountProfileComponent extends FormBase implements OnInit {
 
   gotoReview() {
     this.validationMessages = [];
+
+    if (this.getBusinessTypeName() == 'Police') {
+      this.form.get('businessProfile.businessNumber').setValidators([]);
+      this.form.get('businessProfile.businessNumber').updateValueAndValidity();
+    }
+
     if (this.form.valid && (!this.connectionsToProducers || this.connectionsToProducers.form.valid)) {
       this.busy = this.save().subscribe(() => {
         if (this.useInStepperMode) {

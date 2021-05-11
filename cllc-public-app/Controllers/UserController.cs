@@ -38,7 +38,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             ViewModels.User user = new ViewModels.User();
 
             // determine if we are a new registrant.
-            
+
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             user.id = userSettings.UserId;
             user.contactid = userSettings.ContactId;
@@ -65,12 +65,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
             }
 
-
             if (userSettings.IsNewUserRegistration)
             {
                 user.isNewUser = true;
                 // get details from the headers.
-
 
                 user.lastname = user.name.GetLastName();
                 user.firstname = user.name.GetFirstName();
@@ -80,6 +78,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 string siteminderUserGuid = _httpContextAccessor.HttpContext.Request.Headers[siteMinderAuthOptions.SiteMinderUserGuidKey];
 
                 user.contactid = string.IsNullOrEmpty(siteminderUserGuid) ? userSettings.ContactId : siteminderUserGuid;
+                // handle Basic BCeID
+                if (string.IsNullOrEmpty(user.contactid))
+                {
+                    user.contactid = userSettings.SiteMinderGuid;
+                }
+
                 user.accountid = string.IsNullOrEmpty(siteminderBusinessGuid) ? userSettings.AccountId : siteminderBusinessGuid;
                 user.isEligibilityRequired = true;
             }
@@ -90,8 +94,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 user.email = userSettings.AuthenticatedUser.Email;
                 user.isNewUser = false;
                 user.isEligibilityRequired = EligibilityController.IsEligibilityCheckRequired(user.accountid, _configuration, _dynamicsClient);
+                user.isPoliceRepresentative = ContactController.IsPoliceRepresentative(user.contactid, _configuration, _dynamicsClient);
             }
-
 
             return new JsonResult(user);
         }

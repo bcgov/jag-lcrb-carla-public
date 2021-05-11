@@ -9,19 +9,26 @@ mat-divider {
     margin: 20px 0;
 }
 
-fa-icon[mattooltip]{
-    color: #38598A;
+fa-icon[mattooltip] {
+    color: #38598a;
 }
+
 ::ng-deep {
     .app-field > label {
         font-size: 16px;
     }
 
     .mat-tooltip-panel .mat-tooltip {
-        background-color: #F1F4FA;
+        background-color: #f1f4fa;
         margin: 4px;
-        color: #38598A;
+        color: #222;
         font-size: 16px;
         border: solid 1px #ccc;
+    }
+
+    .mat-tooltip {
+        &.custom-tooltip {
+            white-space: pre-line;
+        }
     }
 }
