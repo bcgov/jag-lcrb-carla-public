@@ -27,4 +27,3 @@ for component in ${components}; do
 	popd >/dev/null
 done
 
-echo "DONE.  SETTINGSFOLDER is ${SETTINGSFOLDER}"

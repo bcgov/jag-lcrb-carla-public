@@ -23,19 +23,17 @@ namespace bdd_tests
             var estEmail = "test@test.com";
             var estPhone = "2505555555";
 
-            var patioCompDescription = "Sample patio comp description";
             var patioLocationDescription = "Sample patio location description";
             var patioAccessDescription = "Sample patio access description";
             var patioLiquorCarriedDescription = "Sample liquor carried description";
-            var patioAccessControlDescription = "Sample patio access control description";
 
             var conRole = "CEO";
             var conPhone = "2508888888";
             var conEmail = "contact@email.com";
             var indigenousNation = "Cowichan Tribes";
-            var policeJurisdiction = "RCMP Shawnigan Lake";
+            var policeJurisdiction = "Shawnigan Lake RCMP";
             // var indigenousNation = "Parksville";
-            // var policeJurisdiction = "RCMP Oceanside";
+            // var policeJurisdiction = "Oceanside RCMP";
 
             if (bizType == "private corporation")
             {
@@ -113,16 +111,18 @@ namespace bdd_tests
 
             // select 'Yes' for patio
             var uiHasPatio =
-                ngDriver.FindElement(By.CssSelector("[formcontrolname='isHasPatio'] mat-radio-button#mat-radio-13"));
+                ngDriver.FindElement(By.CssSelector("mat-radio-button#mat-radio-14"));
             uiHasPatio.Click();
-
-            // enter the patio comp description
-            var uiPatioCompDescription = ngDriver.FindElement(By.CssSelector("textarea#patioCompDescription"));
-            uiPatioCompDescription.SendKeys(patioCompDescription);
 
             // enter the patio location description
             var uiPatioLocationDescription = ngDriver.FindElement(By.CssSelector("textarea#patioLocationDescription"));
             uiPatioLocationDescription.SendKeys(patioLocationDescription);
+
+            // select construction completion date
+            var uiStoreOpenDate = ngDriver.FindElement(By.Id("storeOpenDate"));
+            uiStoreOpenDate.Click();
+
+            SharedCalendarDate();
 
             // enter the patio access description
             var uiPatioAccessDescription = ngDriver.FindElement(By.CssSelector("textarea#patioAccessDescription"));
@@ -136,11 +136,6 @@ namespace bdd_tests
             var uiPatioLiquorCarriedDescription =
                 ngDriver.FindElement(By.CssSelector("textarea#patioLiquorCarriedDescription"));
             uiPatioLiquorCarriedDescription.SendKeys(patioLiquorCarriedDescription);
-
-            // enter patio access control description
-            var uiPatioAccessControlDescription =
-                ngDriver.FindElement(By.CssSelector("textarea#patioAccessControlDescription"));
-            uiPatioAccessControlDescription.SendKeys(patioAccessControlDescription);
 
             // click Fixed option
             var uiFixedOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-1-button"));

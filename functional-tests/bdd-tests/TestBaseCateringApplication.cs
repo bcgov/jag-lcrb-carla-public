@@ -105,7 +105,6 @@ namespace bdd_tests
                 catch (Exception)
                 {
                 }
-
             uiEstabName.SendKeys(estName);
 
             // enter the establishment address

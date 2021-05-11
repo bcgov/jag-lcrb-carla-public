@@ -1,12 +1,14 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormArray, AbstractControl } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faMapMarkerAlt, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
-import { SepApplication, SepLocation, SepSchedule, SepServiceArea } from '@models/sep-application.model';
+import { SepApplication } from '@models/sep-application.model';
 import { IndexDBService } from '@services/index-db.service';
 import { FormBase } from '@shared/form-base';
-import { distinctUntilChanged } from 'rxjs/operators';
 import { Account } from '@models/account.model';
+import { SepLocation } from '@models/sep-location.model';
+import { SepSchedule } from '@models/sep-schedule.model';
+import { SepServiceArea } from '@models/sep-service-are.model';
 
 @Component({
   selector: 'app-event',
@@ -42,7 +44,7 @@ export class EventComponent extends FormBase implements OnInit {
   };
 
   get locations(): FormArray {
-    return this.form.get('locations') as FormArray;
+    return this.form.get('eventLocations') as FormArray;
   }
 
   constructor(private fb: FormBuilder,
@@ -55,15 +57,15 @@ export class EventComponent extends FormBase implements OnInit {
     this.form = this.fb.group({
       lgIn: [''],
       isAnnualEvent: [''],
-      locations: this.fb.array([]),
+      eventLocations: this.fb.array([]),
     });
 
     if (this.sepApplication) {
       this.form.patchValue(this.sepApplication);
     }
 
-    if (this?.sepApplication?.locations?.length > 0) {
-      this.sepApplication.locations.forEach(loc => {
+    if (this?.sepApplication?.eventLocations?.length > 0) {
+      this.sepApplication.eventLocations.forEach(loc => {
         this.addLocation(loc);
       });
     } else {
@@ -72,18 +74,19 @@ export class EventComponent extends FormBase implements OnInit {
 
   }
 
-  getServiceAreas(location: FormGroup): AbstractControl[] {
-    let result = [];
+  getServiceAreas(locationIndex: number): FormArray {
+    let result = this.fb.array([]);
     if (location) {
-      result = (location.get('serviceAreas') as FormArray).controls;
+      result = this.locations.at(locationIndex)
+        .get('serviceAreas') as FormArray;
     }
     return result;
   }
 
-  getEventDates(location: FormGroup): AbstractControl[] {
-    let result = [];
+  getEventDates(location: FormGroup): FormArray {
+    let result = this.fb.array([]);
     if (location) {
-      result = (location.get('eventDates') as FormArray).controls;
+      result = location.get('eventDates') as FormArray;
     }
     return result;
   }
@@ -92,7 +95,7 @@ export class EventComponent extends FormBase implements OnInit {
   addLocation(location: SepLocation = new SepLocation()) {
     let locationForm = this.fb.group({
       locationPermitNumber: [''],
-      locationName: ['1'],
+      locationName: [''],
       venueType: [''],
       locationMaxGuests: [''],
       eventLocationStreet1: [''],
@@ -100,53 +103,93 @@ export class EventComponent extends FormBase implements OnInit {
       eventLocationCity: [''],
       eventLocationProvince: [''],
       eventLocationPostalCode: [''],
-      eventDates: this.fb.array([]),
       serviceAreas: this.fb.array([]),
     });
     locationForm.patchValue(location);
 
-    if (location?.eventDates?.length > 0) {
-      location.eventDates.forEach(ed => {
-        this.addEventDate(ed, locationForm.get('eventDates') as FormArray);
-      });
-    } else {
-      this.addEventDate({} as SepSchedule, locationForm.get('eventDates') as FormArray);
+    if (!location.serviceAreas || location.serviceAreas.length == 0) {
+      location.serviceAreas = [{} as SepServiceArea];
     }
+    location.serviceAreas.forEach(area => {
+      const areaForm = this.createServiceArea(area);
+      (locationForm.get('serviceAreas') as FormArray).push(areaForm);
 
-    if (location?.serviceAreas?.length > 0) {
-      location.serviceAreas.forEach(ed => {
-        this.addServiceArea(ed, locationForm.get('serviceAreas') as FormArray);
+      if (!area.eventDates || area.eventDates.length == 0) {
+        area.eventDates = [{} as SepSchedule];
+      }
+      area.eventDates.forEach(ed => {
+        const edForm = this.createEventDate(ed);
+        (areaForm.get('eventDates') as FormArray).push(edForm);
       });
-    } else {
-      this.addServiceArea({} as SepServiceArea, locationForm.get('serviceAreas') as FormArray);
-    }
+
+    });
+
 
     this.locations.push(locationForm);
   }
 
-  addEventDate(eventDate: SepSchedule, eventDates: FormArray) {
+
+  removeLocation(locationIndex: number) {
+    this.locations.removeAt(locationIndex);
+  }
+
+  addEventDate(sched: SepSchedule, area: FormGroup) {
+    const eventDates = area.get('eventDates') as FormArray;
+    const dates = this.createEventDate(sched);
+    eventDates.push(dates);
+  }
+
+  createEventDate(eventDate: SepSchedule) {
     let datesForm = this.fb.group({
       eventDate: [''],
       eventStart: [''],
       eventEnd: [''],
-      ServiceStart: [''],
-      ServiceEnd: [''],
+      serviceStart: [''],
+      serviceEnd: [''],
     });
     datesForm.patchValue(eventDate);
-    eventDates.push(datesForm);
+    return datesForm;
   }
 
-  addServiceArea(area: SepServiceArea, serviceAreas: FormArray) {
+  removeEventDate(eventDateIndex: number, serviceArea: FormGroup) {
+    const eventDates = serviceArea.get('eventDates') as FormArray;
+    eventDates.removeAt(eventDateIndex);
+  }
+
+  addServiceArea(area: SepServiceArea, location: FormGroup) {
+    const areaArray = location.get('serviceAreas') as FormArray;
+    const areaFormGroup = this.createServiceArea(area);
+    areaArray.push(areaFormGroup);
+  }
+
+  createServiceArea(area: SepServiceArea) {
     let areaForm = this.fb.group({
-      description: [''],
-      numAreaMaxGuests: [''],
+      eventName: [''],
+      isBothOutdoorIndoor: [''],
+      isIndoors: [''],
+      isOutdoors: [''],
+      licencedAreaDescription: [''],
+      licencedAreaMaxNumberOfGuests: [''],
+      licencedAreaNumberOfMinors: [''],
+      maximumNumberOfGuests: [''],
+      minorPresent: [''],
+      numberOfMinors: [''],
       setting: [''],
-      isMinorsPresent: [''],
-      numMinors: [''],
+      stateCode: [''],
+      statusCode: [''],
+      eventDates: this.fb.array([]),
     });
     areaForm.patchValue(area);
-    serviceAreas.push(areaForm);
+    
+    return areaForm;
   }
+
+
+  removeServiceArea(serviceAreaIndex: number, location: FormGroup) {
+    let serviceAreas = location.get('serviceAreas') as FormArray;
+    serviceAreas.removeAt(serviceAreaIndex);
+  }
+
 
   isValid() {
     this.markControlsAsTouched(this.form);
@@ -157,6 +200,7 @@ export class EventComponent extends FormBase implements OnInit {
 
   save() {
     const data = {
+      id: this._appID,
       ...this.sepApplication,
       lastUpdated: new Date(),
       status: 'unsubmitted',
@@ -167,7 +211,7 @@ export class EventComponent extends FormBase implements OnInit {
         }
         return steps;
       })(this?.sepApplication?.stepsCompleted || []),
-      ...this.form.value
+      ...this.form.value,
     } as SepApplication;
 
     if (data.id) {
@@ -195,51 +239,51 @@ export class EventComponent extends FormBase implements OnInit {
 }
 
 const TIME_SLOTS = [
-  { value: "8: 00 AM", name: "8: 00 AM" },
+  { value: "8:00 AM", name: "8:00 AM" },
   { value: "8:30 AM ", name: "8:30 AM " },
-  { value: "9: 00 AM", name: "9: 00 AM" },
+  { value: "9:00 AM", name: "9:00 AM" },
   { value: "9:30 AM", name: "9:30 AM" },
-  { value: "10: 00 AM", name: "10: 00 AM" },
+  { value: "10:00 AM", name: "10:00 AM" },
   { value: "10:30 AM ", name: "10:30 AM " },
-  { value: "11: 00 AM", name: "11: 00 AM" },
+  { value: "11:00 AM", name: "11:00 AM" },
   { value: "11:30 AM ", name: "11:30 AM " },
-  { value: "12: 00 PM", name: "12: 00 PM" },
+  { value: "12:00 PM", name: "12:00 PM" },
   { value: "12:30 PM ", name: "12:30 PM " },
-  { value: "1: 00 PM", name: "1: 00 PM" },
+  { value: "1:00 PM", name: "1:00 PM" },
   { value: "1:30 PM ", name: "1:30 PM " },
-  { value: "2: 00 PM", name: "2: 00 PM" },
+  { value: "2:00 PM", name: "2:00 PM" },
   { value: "2:30 PM ", name: "2:30 PM " },
-  { value: "3: 00 PM", name: "3: 00 PM" },
+  { value: "3:00 PM", name: "3:00 PM" },
   { value: "3:30 PM ", name: "3:30 PM " },
-  { value: "4: 00 PM", name: "4: 00 PM" },
+  { value: "4:00 PM", name: "4:00 PM" },
   { value: "4:30 PM ", name: "4:30 PM " },
-  { value: "5: 00 PM", name: "5: 00 PM" },
+  { value: "5:00 PM", name: "5:00 PM" },
   { value: "5:30 PM ", name: "5:30 PM " },
-  { value: "6: 00 PM", name: "6: 00 PM" },
+  { value: "6:00 PM", name: "6:00 PM" },
   { value: "6:30 PM ", name: "6:30 PM " },
-  { value: "7: 00 PM", name: "7: 00 PM" },
+  { value: "7:00 PM", name: "7:00 PM" },
   { value: "7:30 PM ", name: "7:30 PM " },
-  { value: "8: 00 PM", name: "8: 00 PM" },
+  { value: "8:00 PM", name: "8:00 PM" },
   { value: "8:30 PM ", name: "8:30 PM " },
-  { value: "9: 00 PM", name: "9: 00 PM" },
+  { value: "9:00 PM", name: "9:00 PM" },
   { value: "9:30 PM ", name: "9:30 PM " },
-  { value: "10: 00 PM", name: "10: 00 PM" },
+  { value: "10:00 PM", name: "10:00 PM" },
   { value: "10:30 PM ", name: "10:30 PM " },
-  { value: "11: 00 PM", name: "11: 00 PM" },
+  { value: "11:00 PM", name: "11:00 PM" },
   { value: "11:30 PM ", name: "11:30 PM " },
-  { value: "12: 00 AM", name: "12: 00 AM" },
+  { value: "12:00 AM", name: "12:00 AM" },
   { value: "12:30 AM ", name: "12:30 AM " },
-  { value: "1: 00 AM", name: "1: 00 AM" },
+  { value: "1:00 AM", name: "1:00 AM" },
   { value: "1:30 AM ", name: "1:30 AM " },
-  { value: "2: 00 AM", name: "2: 00 AM" },
+  { value: "2:00 AM", name: "2:00 AM" },
   { value: "2:30 AM ", name: "2:30 AM " },
-  { value: "3: 00 AM", name: "3: 00 AM" },
+  { value: "3:00 AM", name: "3:00 AM" },
   { value: "3:30 AM ", name: "3:30 AM " },
-  { value: "4: 00 AM", name: "4: 00 AM" },
+  { value: "4:00 AM", name: "4:00 AM" },
   { value: "4:30 AM ", name: "4:30 AM " },
-  { value: "5: 00 AM", name: "5: 00 AM" },
+  { value: "5:00 AM", name: "5:00 AM" },
   { value: "5:30 AM ", name: "5:30 AM " },
-  { value: "6: 00 AM", name: "6: 00 AM" },
+  { value: "6:00 AM", name: "6:00 AM" },
   { value: "6:30 AM ", name: "6:30 AM " },
-  { value: "7: 00 AM", name: "7: 00 AM" },
+  { value: "7:00 AM", name: "7:00 AM" },
 ];

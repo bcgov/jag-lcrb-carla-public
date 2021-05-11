@@ -108,7 +108,7 @@ namespace bdd_tests
             var uiIndigenousNation2 = FindFirstElementByCssWithRetry("span[class='mat-option-text']");
             if (uiIndigenousNation2 != null) JavaScriptClick(uiIndigenousNation2);
 
-            // search for and select RCMP Oceanside as the police jurisdiction
+            // search for and select Oceanside RCMP as the police jurisdiction
             var uiPoliceJurisdiction =
                 ngDriver.FindElement(By.CssSelector("input[formcontrolname='policeJurisdiction']"));
             uiPoliceJurisdiction.SendKeys(police);

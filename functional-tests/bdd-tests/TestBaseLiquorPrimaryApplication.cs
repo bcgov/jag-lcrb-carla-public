@@ -14,7 +14,7 @@ namespace bdd_tests
 
 
         public void CompleteLiquorPrimaryApplicationFull(string bizType, string localGovernment = "Parksville",
-            string policeJurisdiction = "RCMP Oceanside")
+            string policeJurisdiction = "Oceanside RCMP")
         {
             /* 
             Page Title: Liquor Primary Licence Application
@@ -137,13 +137,15 @@ namespace bdd_tests
             var patioButton = patioRadioGroup.FindElements(By.TagName("mat-radio-button"))[0];
             patioButton.Click();
 
-            // enter the patio comp description
-            var uiPatioCompDescription = ngDriver.FindElement(By.CssSelector("textarea#patioCompDescription"));
-            uiPatioCompDescription.SendKeys(patioCompDescription);
-
             // enter the patio location description
             var uiPatioLocationDescription = ngDriver.FindElement(By.CssSelector("textarea#patioLocationDescription"));
             uiPatioLocationDescription.SendKeys(patioLocationDescription);
+
+            // select construction completion date
+            var uiStoreOpenDate = ngDriver.FindElement(By.Id("storeOpenDate"));
+            uiStoreOpenDate.Click();
+
+            SharedCalendarDate();
 
             // enter the patio access description
             var uiPatioAccessDescription = ngDriver.FindElement(By.CssSelector("textarea#patioAccessDescription"));
@@ -158,26 +160,17 @@ namespace bdd_tests
                 ngDriver.FindElement(By.CssSelector("textarea#patioLiquorCarriedDescription"));
             uiPatioLiquorCarriedDescription.SendKeys(patioLiquorCarriedDescription);
 
-            // enter patio access control description
-            var uiPatioAccessControlDescription =
-                ngDriver.FindElement(By.CssSelector("textarea#patioAccessControlDescription"));
-            uiPatioAccessControlDescription.SendKeys(patioAccessControlDescription);
-
             // click Fixed option
-            var patioServiceBarGroup =
-                ngDriver.FindElement(By.CssSelector("mat-button-toggle-group[id='patioServiceBar']"));
-            // click the first button in the group.
-            patioServiceBarGroup.FindElements(By.CssSelector("button"))[0].Click();
+            var uiFixedOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-1-button"));
+            uiFixedOption.Click();
 
-            /* commented out as this is coming from the Dynamics meta data and is not hard coded
             // click Portable option
-            NgWebElement uiPortableOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-2-button"));
+            var uiPortableOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-2-button"));
             uiPortableOption.Click();
 
             // click Interior option
-            NgWebElement uiInteriorOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-3-button"));
+            var uiInteriorOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-3-button"));
             uiInteriorOption.Click();
-            */
 
             // enter the establishment type
             var uiEstabType = ngDriver.FindElement(By.CssSelector("input[formcontrolname='description1']"));

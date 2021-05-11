@@ -25,7 +25,7 @@ namespace bdd_tests
             var conPhone = "2508888888";
             var conEmail = "contact@email.com";
             var indigenousNation = "Cowichan Tribes";
-            var policeJurisdiction = "RCMP Shawnigan Lake";
+            var policeJurisdiction = "Shawnigan Lake RCMP";
 
             if (businessType != " sole proprietorship")
             {
