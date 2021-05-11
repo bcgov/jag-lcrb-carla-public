@@ -164,7 +164,12 @@ namespace bdd_tests
             SharedCalendarDate();
 
             // select TESA checkbox
+            var uiIsTESA = ngDriver.FindElement(By.Id("isTESA"));
+            uiIsTESA.Click();
 
+            // select January checkbox
+            var uiJanuary = ngDriver.FindElement(By.Id("isMonth01"));
+            uiJanuary.Click();
 
             // enter the patio access description
             var uiPatioAccessDescription = ngDriver.FindElement(By.CssSelector("textarea#patioAccessDescription"));
