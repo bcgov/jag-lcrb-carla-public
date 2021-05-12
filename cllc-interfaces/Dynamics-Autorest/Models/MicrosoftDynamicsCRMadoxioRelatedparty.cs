@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioRelatedparty class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioRelatedparty(int? utcconversiontimezonecode = default(int?), string _owningteamValue = default(string), string _modifiedonbehalfbyValue = default(string), int? statuscode = default(int?), string _createdbyValue = default(string), string versionnumber = default(string), string adoxioEmail = default(string), int? statecode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string adoxioPhone = default(string), string _modifiedbyValue = default(string), string _createdonbehalfbyValue = default(string), int? importsequencenumber = default(int?), string adoxioName = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? adoxioType = default(int?), string adoxioRelatedpartyid = default(string), string _adoxioCompliancemeetingidValue = default(string), string adoxioAddress = default(string), string _owneridValue = default(string), string _adoxioInvestigationidValue = default(string), string _owninguserValue = default(string), bool? adoxioIswitness = default(bool?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _owningbusinessunitValue = default(string), string adoxioOthertype = default(string), int? timezoneruleversionnumber = default(int?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioRelatedpartySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioRelatedpartyDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioRelatedpartyDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioRelatedpartyAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioRelatedpartyMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioRelatedpartyProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioRelatedpartyBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioRelatedpartyPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMadoxioComplianceinvestigation adoxioInvestigationId = default(MicrosoftDynamicsCRMadoxioComplianceinvestigation), MicrosoftDynamicsCRMadoxioCompliancemeeting adoxioComplianceMeetingId = default(MicrosoftDynamicsCRMadoxioCompliancemeeting))
+        public MicrosoftDynamicsCRMadoxioRelatedparty(int? utcconversiontimezonecode = default(int?), string _owningteamValue = default(string), string _modifiedonbehalfbyValue = default(string), int? statuscode = default(int?), string _createdbyValue = default(string), string versionnumber = default(string), string adoxioEmail = default(string), int? statecode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string adoxioPhone = default(string), string _modifiedbyValue = default(string), string _createdonbehalfbyValue = default(string), int? importsequencenumber = default(int?), string adoxioName = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? adoxioType = default(int?), string adoxioRelatedpartyid = default(string), string _adoxioInspectionidValue = default(string), string _adoxioCompliancemeetingidValue = default(string), string adoxioAddress = default(string), string adoxioRole = default(string), string _owneridValue = default(string), string _adoxioInvestigationidValue = default(string), string _owninguserValue = default(string), bool? adoxioIswitness = default(bool?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _owningbusinessunitValue = default(string), string adoxioOthertype = default(string), int? timezoneruleversionnumber = default(int?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioRelatedpartySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioRelatedpartyDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioRelatedpartyDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioRelatedpartyAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioRelatedpartyMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioRelatedpartyProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioRelatedpartyBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioRelatedpartyPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMadoxioComplianceinvestigation adoxioInvestigationId = default(MicrosoftDynamicsCRMadoxioComplianceinvestigation), MicrosoftDynamicsCRMadoxioCompliancemeeting adoxioComplianceMeetingId = default(MicrosoftDynamicsCRMadoxioCompliancemeeting), MicrosoftDynamicsCRMincident adoxioInspectionId = default(MicrosoftDynamicsCRMincident))
         {
             Utcconversiontimezonecode = utcconversiontimezonecode;
             this._owningteamValue = _owningteamValue;
@@ -48,8 +48,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Overriddencreatedon = overriddencreatedon;
             AdoxioType = adoxioType;
             AdoxioRelatedpartyid = adoxioRelatedpartyid;
+            this._adoxioInspectionidValue = _adoxioInspectionidValue;
             this._adoxioCompliancemeetingidValue = _adoxioCompliancemeetingidValue;
             AdoxioAddress = adoxioAddress;
+            AdoxioRole = adoxioRole;
             this._owneridValue = _owneridValue;
             this._adoxioInvestigationidValue = _adoxioInvestigationidValue;
             this._owninguserValue = _owninguserValue;
@@ -76,6 +78,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioRelatedpartyPrincipalObjectAttributeAccesses = adoxioRelatedpartyPrincipalObjectAttributeAccesses;
             AdoxioInvestigationId = adoxioInvestigationId;
             AdoxioComplianceMeetingId = adoxioComplianceMeetingId;
+            AdoxioInspectionId = adoxioInspectionId;
             CustomInit();
         }
 
@@ -171,6 +174,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_inspectionid_value")]
+        public string _adoxioInspectionidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_adoxio_compliancemeetingid_value")]
         public string _adoxioCompliancemeetingidValue { get; set; }
 
@@ -178,6 +186,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_address")]
         public string AdoxioAddress { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_role")]
+        public string AdoxioRole { get; set; }
 
         /// <summary>
         /// </summary>
@@ -308,6 +321,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_ComplianceMeetingId")]
         public MicrosoftDynamicsCRMadoxioCompliancemeeting AdoxioComplianceMeetingId { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_InspectionId")]
+        public MicrosoftDynamicsCRMincident AdoxioInspectionId { get; set; }
 
     }
 }

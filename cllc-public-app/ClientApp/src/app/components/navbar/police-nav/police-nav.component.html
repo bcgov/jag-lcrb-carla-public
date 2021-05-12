@@ -1,0 +1,31 @@
+<section class="navigationRibbon">
+  <div class="level2Navigation ">
+    <div class="d-flex justify-content-between align-items-center">
+      <nav class="navbar navbar-expand-md navbar-light justify-content-end mb-0 w-100">
+        <button class="navbar-toggler btn-mobile" type="button" data-toggle="collapse" style="float: right"
+          data-target="#loggedInMenu" aria-controls="loggedInMenu" aria-expanded="false" aria-label="Toggle navigation"
+          #toggleButtonPolice>
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="loggedInMenu">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a appRemoveIfFeatureOff="Sep" (click)="toggleButtonPolice.click()" class="nav-link"
+                routerLink="/sep/dashboard">
+                Home
+              </a>
+              <a appRemoveIfFeatureOff="Sep" (click)="toggleButtonPolice.click()" class="nav-link"
+                routerLink="/sep/police/applications">
+                All Applications
+              </a>
+              <a appRemoveIfFeatureOff="Sep" (click)="toggleButtonPolice.click()" class="nav-link"
+                routerLink="/sep/police/my-jobs">
+                My Jobs
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </div>
+</section>

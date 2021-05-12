@@ -19,13 +19,13 @@ namespace Gov.Lclb.Cllb.Interfaces
     public static partial class ApplicationExtensions
     {
             /// <summary>
-            /// Get adoxio_Application from adoxio_hoursofservices
+            /// Get adoxio_Application from adoxio_statuscounters
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioHoursofserviceid'>
-            /// key: adoxio_hoursofserviceid of adoxio_hoursofservice
+            /// <param name='adoxioStatuscounterid'>
+            /// key: adoxio_statuscounterid of adoxio_statuscounter
             /// </param>
             /// <param name='select'>
             /// Select properties to be returned
@@ -33,19 +33,19 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioApplication Get(this IApplication operations, string adoxioHoursofserviceid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioApplication Get(this IApplication operations, string adoxioStatuscounterid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.GetAsync(adoxioHoursofserviceid, select, expand).GetAwaiter().GetResult();
+                return operations.GetAsync(adoxioStatuscounterid, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Get adoxio_Application from adoxio_hoursofservices
+            /// Get adoxio_Application from adoxio_statuscounters
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioHoursofserviceid'>
-            /// key: adoxio_hoursofserviceid of adoxio_hoursofservice
+            /// <param name='adoxioStatuscounterid'>
+            /// key: adoxio_statuscounterid of adoxio_statuscounter
             /// </param>
             /// <param name='select'>
             /// Select properties to be returned
@@ -56,22 +56,22 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioApplication> GetAsync(this IApplication operations, string adoxioHoursofserviceid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioApplication> GetAsync(this IApplication operations, string adoxioStatuscounterid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetWithHttpMessagesAsync(adoxioHoursofserviceid, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetWithHttpMessagesAsync(adoxioStatuscounterid, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
             }
 
             /// <summary>
-            /// Get adoxio_Application from adoxio_hoursofservices
+            /// Get adoxio_Application from adoxio_statuscounters
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='adoxioHoursofserviceid'>
-            /// key: adoxio_hoursofserviceid of adoxio_hoursofservice
+            /// <param name='adoxioStatuscounterid'>
+            /// key: adoxio_statuscounterid of adoxio_statuscounter
             /// </param>
             /// <param name='select'>
             /// Select properties to be returned
@@ -82,78 +82,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioApplication> GetWithHttpMessages(this IApplication operations, string adoxioHoursofserviceid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioApplication> GetWithHttpMessages(this IApplication operations, string adoxioStatuscounterid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.GetWithHttpMessagesAsync(adoxioHoursofserviceid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Get adoxio_Application from adoxio_leconnections
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='adoxioLeconnectionid'>
-            /// key: adoxio_leconnectionid of adoxio_leconnection
-            /// </param>
-            /// <param name='select'>
-            /// Select properties to be returned
-            /// </param>
-            /// <param name='expand'>
-            /// Expand related entities
-            /// </param>
-            public static MicrosoftDynamicsCRMadoxioApplication Get1(this IApplication operations, string adoxioLeconnectionid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
-            {
-                return operations.Get1Async(adoxioLeconnectionid, select, expand).GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Get adoxio_Application from adoxio_leconnections
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='adoxioLeconnectionid'>
-            /// key: adoxio_leconnectionid of adoxio_leconnection
-            /// </param>
-            /// <param name='select'>
-            /// Select properties to be returned
-            /// </param>
-            /// <param name='expand'>
-            /// Expand related entities
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioApplication> Get1Async(this IApplication operations, string adoxioLeconnectionid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
-            {
-                using (var _result = await operations.Get1WithHttpMessagesAsync(adoxioLeconnectionid, select, expand, null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
-            /// Get adoxio_Application from adoxio_leconnections
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='adoxioLeconnectionid'>
-            /// key: adoxio_leconnectionid of adoxio_leconnection
-            /// </param>
-            /// <param name='select'>
-            /// Select properties to be returned
-            /// </param>
-            /// <param name='expand'>
-            /// Expand related entities
-            /// </param>
-            /// <param name='customHeaders'>
-            /// Headers that will be added to request.
-            /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioApplication> Get1WithHttpMessages(this IApplication operations, string adoxioLeconnectionid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
-            {
-                return operations.Get1WithHttpMessagesAsync(adoxioLeconnectionid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetWithHttpMessagesAsync(adoxioStatuscounterid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
     }

@@ -13,6 +13,7 @@ export class User {
   accountid: string;
   userType: string;
   isEligibilityRequired: boolean;
+  isPoliceRepresentative: boolean;
 
-  constructor() {}
+  constructor() { }
 }

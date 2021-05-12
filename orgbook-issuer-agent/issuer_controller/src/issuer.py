@@ -35,14 +35,14 @@ TRACE_MSG_PCT = max(min(TRACE_MSG_PCT, 100), 0)
 ACK_ERROR_PCT = int(os.getenv("ACK_ERROR_PCT", "0"))
 ACK_ERROR_PCT = max(min(ACK_ERROR_PCT, 100), 0)
 
-LOG_LEVEL = os.environ.get('LOG_LEVEL', 'WARNING').upper()
+LOG_LEVEL = os.environ.get("LOG_LEVEL", "WARNING").upper()
 
 LOGGER = logging.getLogger(__name__)
 if TRACE_EVENTS and TRACE_TARGET == TRACE_LOG_TARGET:
     LOGGER.setLevel(logging.INFO)
 elif LOG_LEVEL and 0 < len(LOG_LEVEL):
     LOGGER.setLevel(LOG_LEVEL)
-DT_FMT = '%Y-%m-%d %H:%M:%S.%f%z'
+DT_FMT = "%Y-%m-%d %H:%M:%S.%f%z"
 
 # list of cred defs per schema name/version
 app_config = {}
@@ -96,9 +96,9 @@ def agent_schemas_cred_defs(agent_admin_url):
         if schema:
             schema_key = schema["name"] + "::" + schema["version"]
             ret_schemas[schema_key] = {
-            "schema": schema,
-            "schema_id": str(schema["seqNo"])
-        }
+                "schema": schema,
+                "schema_id": str(schema["seqNo"]),
+            }
 
     response = requests.get(
         agent_admin_url + "/credential-definitions/created",
@@ -154,9 +154,11 @@ def register_issuer_with_orgbook(connection_id):
                     "CRED_DEF_" + schema_name + "_" + schema_info["version"]
                 ],
             }
-            credential_type['attributes'] = schema_info["attributes"]
+            credential_type["attributes"] = schema_info["attributes"]
             ctype_config.update(credential_type)
-            ctype = config.assemble_credential_type_spec(ctype_config, schema_info.get("attributes"))
+            ctype = config.assemble_credential_type_spec(
+                ctype_config, schema_info.get("attributes")
+            )
             if ctype is not None:
                 credential_types.append(ctype)
 
@@ -278,7 +280,9 @@ class StartupProcessingThread(threading.Thread):
             app_config["schemas"][
                 "CRED_DEF_" + schema_name + "_" + schema_version
             ] = credential_definition_id["credential_definition_id"]
-            LOGGER.info("Registered credential definition: %s", credential_definition_id)
+            LOGGER.info(
+                "Registered credential definition: %s", credential_definition_id
+            )
 
         # what is the TOB connection name?
         tob_connection_params = config_services["verifiers"]["bctob"]
@@ -301,10 +305,13 @@ class StartupProcessingThread(threading.Thread):
             # (agent_admin_url is provided if we can directly ask the TOB agent for an invitation,
             #   ... otherwise the invitation has to be provided manually through the admin api
             #   ... WITH THE CORRECT ALIAS)
-            if ("agent_admin_url" in tob_connection_params["connection"] 
+            if (
+                "agent_admin_url" in tob_connection_params["connection"]
                 and tob_connection_params["connection"]["agent_admin_url"]
             ):
-                tob_agent_admin_url = tob_connection_params["connection"]["agent_admin_url"]
+                tob_agent_admin_url = tob_connection_params["connection"][
+                    "agent_admin_url"
+                ]
                 response = requests.post(
                     tob_agent_admin_url + "/connections/create-invitation",
                     headers=TOB_REQUEST_HEADERS,
@@ -322,14 +329,18 @@ class StartupProcessingThread(threading.Thread):
                 response.raise_for_status()
                 tob_connection = response.json()
 
-                LOGGER.info("Established tob connection: %s", json.dumps(tob_connection))
+                LOGGER.info(
+                    "Established tob connection: %s", json.dumps(tob_connection)
+                )
                 time.sleep(5)
 
         # if we have a connection to the TOB agent, we can register our issuer
         if tob_connection:
             register_issuer_with_orgbook(tob_connection["connection_id"])
         else:
-            print("No TOB connection found or established, awaiting invitation to connect to TOB ...")
+            print(
+                "No TOB connection found or established, awaiting invitation to connect to TOB ..."
+            )
 
 
 def tob_connection_synced():
@@ -347,7 +358,7 @@ def tob_connection_active():
     """
     if not tob_connection_synced():
         return False
-    return (0 < len(list(credential_requests.keys())))
+    return 0 < len(list(credential_requests.keys()))
 
 
 def issuer_liveness_check():
@@ -400,9 +411,9 @@ credential_responses = {}
 credential_threads = {}
 
 
-USE_LOCK = os.getenv('USE_LOCK', 'True').lower() == 'true'
+USE_LOCK = os.getenv("USE_LOCK", "True").lower() == "true"
 # need to specify an env variable RECORD_TIMINGS=True to get method timings
-RECORD_TIMINGS = os.getenv('RECORD_TIMINGS', 'False').lower() == 'true'
+RECORD_TIMINGS = os.getenv("RECORD_TIMINGS", "False").lower() == "true"
 
 timing_lock = threading.Lock()
 timings = {}
@@ -416,12 +427,14 @@ def clear_stats():
     finally:
         timing_lock.release()
 
+
 def get_stats():
     timing_lock.acquire()
     try:
         return timings
     finally:
         timing_lock.release()
+
 
 def log_timing_method(method, start_time, end_time, success, data=None):
     if not RECORD_TIMINGS:
@@ -501,14 +514,14 @@ def log_timing_event(method, message, start_time, end_time, success, outcome=Non
             _ = requests.post(
                 TRACE_TARGET + TRACE_TAG,
                 data=event_str,
-                headers={"Content-Type": "application/json"}
+                headers={"Content-Type": "application/json"},
             )
     except Exception as e:
         LOGGER.error(
             "Error logging trace target: %s tag: %s event: %s",
             TRACE_TARGET,
             TRACE_TAG,
-            event_str
+            event_str,
         )
         LOGGER.exception(e)
 
@@ -568,7 +581,9 @@ def add_credential_response(cred_exch_id, response):
 
 
 def add_credential_problem_report(thread_id, response):
-    LOGGER.error("get problem report for thread %s %s", thread_id, str(len(credential_requests)))
+    LOGGER.error(
+        "get problem report for thread %s %s", thread_id, str(len(credential_requests))
+    )
     if thread_id in credential_threads:
         cred_exch_id = credential_threads[thread_id]
         LOGGER.error(" ... cred_exch_id is %s: %s", cred_exch_id, str(response))
@@ -580,10 +595,14 @@ def add_credential_problem_report(thread_id, response):
             cred_exch_id = list(credential_requests.keys())[0]
             add_credential_response(cred_exch_id, response)
         elif 0 == len(list(credential_requests.keys())):
-            LOGGER.error("NO outstanding requests, can't map problem report to request :-(")
+            LOGGER.error(
+                "NO outstanding requests, can't map problem report to request :-("
+            )
             LOGGER.error(credential_requests)
         else:
-            LOGGER.error("Too many outstanding requests, can't map problem report to request :-(")
+            LOGGER.error(
+                "Too many outstanding requests, can't map problem report to request :-("
+            )
             LOGGER.error(credential_requests)
 
 
@@ -636,7 +655,7 @@ TOPIC_ISSUER_REGISTRATION = "issuer_registration"
 TOPIC_PROBLEM_REPORT = "problem_report"
 
 # max 15 second wait for a credential response (prevents blocking forever)
-MAX_CRED_RESPONSE_TIMEOUT = int(os.getenv('MAX_CRED_RESPONSE_TIMEOUT', '120'))
+MAX_CRED_RESPONSE_TIMEOUT = int(os.getenv("MAX_CRED_RESPONSE_TIMEOUT", "120"))
 
 
 def handle_connections(state, message):
@@ -668,7 +687,9 @@ def handle_credentials(state, message):
         # raise 10% errors
         do_error = random.randint(1, 100)
         if do_error <= ACK_ERROR_PCT:
-            raise Exception("Fake exception to test error handling: " + message["thread_id"])
+            raise Exception(
+                "Fake exception to test error handling: " + message["thread_id"]
+            )
         response = {"success": True, "result": message["credential_exchange_id"]}
         add_credential_response(message["credential_exchange_id"], response)
 
@@ -742,7 +763,9 @@ class SendCredentialThread(threading.Thread):
             if result_available and not result_available.wait(
                 MAX_CRED_RESPONSE_TIMEOUT
             ):
-                add_credential_timeout_report(cred_data["credential_exchange_id"], cred_data["thread_id"])
+                add_credential_timeout_report(
+                    cred_data["credential_exchange_id"], cred_data["thread_id"]
+                )
                 LOGGER.error(
                     "Got credential TIMEOUT: %s %s %s",
                     cred_data["thread_id"],
@@ -750,13 +773,17 @@ class SendCredentialThread(threading.Thread):
                     cred_data["connection_id"],
                 )
                 end_time = time.perf_counter()
-                log_timing_method(method, start_time, end_time, False, 
+                log_timing_method(
+                    method,
+                    start_time,
+                    end_time,
+                    False,
                     data={
-                        'thread_id':cred_data["thread_id"], 
-                        'credential_exchange_id':cred_data["credential_exchange_id"], 
-                        'Error': 'Timeout',
-                        'elapsed_time': (end_time-start_time)
-                    }
+                        "thread_id": cred_data["thread_id"],
+                        "credential_exchange_id": cred_data["credential_exchange_id"],
+                        "Error": "Timeout",
+                        "elapsed_time": (end_time - start_time),
+                    },
                 )
                 success = False
                 outcome = "timeout"
@@ -789,20 +816,17 @@ class SendCredentialThread(threading.Thread):
                     "elapsed_time": (end_time - start_time),
                 }
             else:
-                data = {
-                "Error": str(exc),
-                "elapsed_time": (end_time - start_time)
-            }
-            log_timing_method(method, start_time, end_time, False,
-                data=data
-            )
+                data = {"Error": str(exc), "elapsed_time": (end_time - start_time)}
+            log_timing_method(method, start_time, end_time, False, data=data)
 
             # don't re-raise; we want to log the exception as the credential error response
             self.cred_response = {"success": False, "result": str(exc)}
 
         processing_time = end_time - start_time
         message = {"thread_id": self.cred_response["result"]}
-        log_timing_event("issue_credential", message, start_time, end_time, success, outcome=outcome)
+        log_timing_event(
+            "issue_credential", message, start_time, end_time, success, outcome=outcome
+        )
 
 
 def handle_send_credential(cred_input):
@@ -814,13 +838,13 @@ def handle_send_credential(cred_input):
             "version": "1.0.0",
             "attributes": {
                 "corp_num": "ABC12345",
-                "registration_date": "2018-01-01", 
+                "registration_date": "2018-01-01",
                 "entity_name": "Ima Permit",
-                "entity_name_effective": "2018-01-01", 
-                "entity_status": "ACT", 
+                "entity_name_effective": "2018-01-01",
+                "entity_status": "ACT",
                 "entity_status_effective": "2019-01-01",
-                "entity_type": "ABC", 
-                "registered_jurisdiction": "BC", 
+                "entity_type": "ABC",
+                "registered_jurisdiction": "BC",
                 "effective_date": "2019-01-01",
                 "expiry_date": ""
             }
@@ -832,9 +856,9 @@ def handle_send_credential(cred_input):
                 "permit_id": str(uuid.uuid4()),
                 "entity_name": "Ima Permit",
                 "corp_num": "ABC12345",
-                "permit_issued_date": "2018-01-01", 
-                "permit_type": "ABC", 
-                "permit_status": "OK", 
+                "permit_issued_date": "2018-01-01",
+                "permit_type": "ABC",
+                "permit_status": "OK",
                 "effective_date": "2019-01-01"
             }
         }
@@ -858,26 +882,28 @@ def handle_send_credential(cred_input):
 
         credential_attributes = []
         for attribute in credential["attributes"]:
-            credential_attributes.append({
-                "name": attribute,
-                "mime-type": "text/plain",
-                "value": credential["attributes"][attribute]
-                })
+            credential_attributes.append(
+                {
+                    "name": attribute,
+                    "mime-type": "text/plain",
+                    "value": credential["attributes"][attribute],
+                }
+            )
         cred_offer = {
-          "schema_id": app_config["schemas"][
-                    "SCHEMA_" + credential["schema"] + "_" + credential["version"]
-                ],
-          "schema_name": credential["schema"],
-          "issuer_did": app_config["DID"],
-          "schema_version": credential["version"],
-          "credential_proposal": {
-            "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/credential-preview",
-            "attributes": credential_attributes
-          },
-          "schema_issuer_did": app_config["DID"],
-          "cred_def_id": credential_definition_id,
-          "comment": "",
-          "connection_id": app_config["TOB_CONNECTION"],
+            "schema_id": app_config["schemas"][
+                "SCHEMA_" + credential["schema"] + "_" + credential["version"]
+            ],
+            "schema_name": credential["schema"],
+            "issuer_did": app_config["DID"],
+            "schema_version": credential["version"],
+            "credential_proposal": {
+                "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/credential-preview",
+                "attributes": credential_attributes,
+            },
+            "schema_issuer_did": app_config["DID"],
+            "cred_def_id": credential_definition_id,
+            "comment": "",
+            "connection_id": app_config["TOB_CONNECTION"],
         }
         do_trace = random.randint(1, 100)
         if do_trace <= TRACE_MSG_PCT:

@@ -46,6 +46,12 @@ export class Account {
 
   websiteUrl: string;
 
+  // SEP Police Review Limits
+  isLateHoursApproval: boolean;
+  maxGuestsForPublicEvents: number;
+  maxGuestsForPrivateEvents: number;
+  maxGuestsForFamilyEvents: number;
+
   isPartnership(): boolean {
     const isPartnership = [
       "GeneralPartnership",
@@ -137,6 +143,7 @@ export const BUSINESS_TYPE_LIST = [
   { value: "Marketer", name: "Marketer" },
   { value: "MilitaryMess", name: "Military Mess" },
   { value: "Partnership", name: "Partnership" },
+  { value: "Police", name: "Police" },
   { value: "PrivateCorporation", name: "Private Corporation" },
   { value: "PublicCorporation", name: "Public Corporation" },
   { value: "Society", name: "Society" },

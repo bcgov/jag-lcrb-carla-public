@@ -1,3 +1,10 @@
+/**
+ * Leaflet Map Implementation
+ *
+ *  Troubleshooting - if the background of the map is blank, adjust the wmsLayers array to refer to different layers
+ *  available from the BC Government openmaps service.  Over time the names and availability of layers may change.
+ *
+ */
 
 var searchMap = null;
 
@@ -31,6 +38,13 @@ var searchMapOptions = {
   ],
   // WMS layers associated with the map
   wmsLayers: [
+    {
+      rootUrl: "https://openmaps.gov.bc.ca/geo/pub/WHSE_IMAGERY_AND_BASE_MAPS.AIMG_ORTHOPHOTO_TILES_POINT/ows?",
+  format: "image/png",
+    layers: "pub:WHSE_IMAGERY_AND_BASE_MAPS.AIMG_ORTHOPHOTO_TILES_POINT",
+    styles: "Airborne_Imagery_Orthophoto_Tile_Points",
+  transparent: false
+},
     {
       rootUrl: "https://openmaps.gov.bc.ca/geo/pub/WHSE_CADASTRE.PMBC_PARCEL_FABRIC_POLY_SVW/ows?",
       format: "image/png",

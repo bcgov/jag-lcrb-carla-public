@@ -23,19 +23,17 @@ namespace bdd_tests
             var estEmail = "test@test.com";
             var estPhone = "2505555555";
 
-            var patioCompDescription = "Sample patio comp description";
             var patioLocationDescription = "Sample patio location description";
             var patioAccessDescription = "Sample patio access description";
             var patioLiquorCarriedDescription = "Sample liquor carried description";
-            var patioAccessControlDescription = "Sample patio access control description";
 
             var conRole = "CEO";
             var conPhone = "2508888888";
             var conEmail = "contact@email.com";
             var indigenousNation = "Cowichan Tribes";
-            var policeJurisdiction = "RCMP Shawnigan Lake";
+            var policeJurisdiction = "Shawnigan Lake RCMP";
             // var indigenousNation = "Parksville";
-            // var policeJurisdiction = "RCMP Oceanside";
+            // var policeJurisdiction = "Oceanside RCMP";
 
             if (bizType == "private corporation")
             {
@@ -111,18 +109,46 @@ namespace bdd_tests
             var uiEstabPhone = ngDriver.FindElement(By.Id("establishmentPhone"));
             uiEstabPhone.SendKeys(estPhone);
 
-            // select 'Yes' for patio
-            var uiHasPatio =
-                ngDriver.FindElement(By.CssSelector("[formcontrolname='isHasPatio'] mat-radio-button#mat-radio-13"));
-            uiHasPatio.Click();
-
-            // enter the patio comp description
-            var uiPatioCompDescription = ngDriver.FindElement(By.CssSelector("textarea#patioCompDescription"));
-            uiPatioCompDescription.SendKeys(patioCompDescription);
+            // first find the material radio group.	
+            var patioRadioGroup = ngDriver.FindElement(By.CssSelector("mat-radio-group[formcontrolname='isHasPatio']"));
+            // then find the first radio button (YES)	
+            ScrollToElement(patioRadioGroup);
+            var patioButton = patioRadioGroup.FindElements(By.TagName("mat-radio-button"))[0];
+            patioButton.Click();
+            
+            // select monitor and control checkbox	
+            var uiIsBoundingSufficientForControl = ngDriver.FindElement(By.Id("isBoundingSufficientForControl"));
+            uiIsBoundingSufficientForControl.Click();
+           
+            // select definition checkbox	
+            var uiIsBoundingSufficientToDefine = ngDriver.FindElement(By.Id("isBoundingSufficientToDefine"));
+            uiIsBoundingSufficientToDefine.Click();
+            
+            // select adequate care checkbox	
+            var uiIsAdequateCare = ngDriver.FindElement(By.Id("isAdequateCare"));
+            uiIsAdequateCare.Click();
 
             // enter the patio location description
             var uiPatioLocationDescription = ngDriver.FindElement(By.CssSelector("textarea#patioLocationDescription"));
             uiPatioLocationDescription.SendKeys(patioLocationDescription);
+
+            // select status of patio area construction
+            var uiConstructionStatus = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-1-button"));
+            uiConstructionStatus.Click();
+
+            // select construction completion date
+            var uiStoreOpenDate = ngDriver.FindElement(By.Id("storeOpenDate"));
+            uiStoreOpenDate.Click();
+
+            SharedCalendarDate();
+
+            // select TESA checkbox
+            var uiIsTESA = ngDriver.FindElement(By.Id("isTESA"));
+            uiIsTESA.Click();
+
+            // select January checkbox
+            var uiJanuary = ngDriver.FindElement(By.Id("isMonth01"));
+            uiJanuary.Click();
 
             // enter the patio access description
             var uiPatioAccessDescription = ngDriver.FindElement(By.CssSelector("textarea#patioAccessDescription"));
@@ -137,21 +163,16 @@ namespace bdd_tests
                 ngDriver.FindElement(By.CssSelector("textarea#patioLiquorCarriedDescription"));
             uiPatioLiquorCarriedDescription.SendKeys(patioLiquorCarriedDescription);
 
-            // enter patio access control description
-            var uiPatioAccessControlDescription =
-                ngDriver.FindElement(By.CssSelector("textarea#patioAccessControlDescription"));
-            uiPatioAccessControlDescription.SendKeys(patioAccessControlDescription);
-
-            // click Fixed option
-            var uiFixedOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-1-button"));
+            // click Fixed service bar(s) on patio option
+            var uiFixedOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-5-button"));
             uiFixedOption.Click();
 
-            // click Portable option
-            var uiPortableOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-2-button"));
+            // click Portable service bar(s) on patio option
+            var uiPortableOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-6-button"));
             uiPortableOption.Click();
 
-            // click Interior option
-            var uiInteriorOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-3-button"));
+            // click The interior service bar(s) option
+            var uiInteriorOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-7-button"));
             uiInteriorOption.Click();
 
             // upload signage document

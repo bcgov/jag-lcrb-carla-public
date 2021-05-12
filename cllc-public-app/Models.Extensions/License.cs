@@ -264,7 +264,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 const int ACTIVE = 0;
                 var applicationTypes = licence.AdoxioLicenceType.AdoxioLicencetypesApplicationtypes
                                         .Where(appType => appType.Statecode == ACTIVE)
-                                        .ToList();
+                                        .ToList()
+                                        .OrderBy(appType => appType.AdoxioActiontext);
 
                 foreach (var item in applicationTypes)
                 {

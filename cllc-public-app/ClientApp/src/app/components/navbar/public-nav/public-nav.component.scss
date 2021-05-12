@@ -1,0 +1,62 @@
+/*-----main nav-----*/
+
+.navigationRibbon {
+  border-top: 1px solid #fcba19;
+  width: 100%;
+
+  a {
+    display: table-cell;
+    text-align: left;
+    vertical-align: middle;
+    padding: 15px 20px;
+    position: relative;
+
+    &.with-badge {
+      padding-right: 15px;
+    }
+
+    /* unvisited link */
+    &:link {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    /* visited link */
+    &:visited {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    /* mouse over link */
+    &:hover {
+      color: #fff;
+      text-decoration: underline;
+      font-weight: 600;
+    }
+
+    /* selected link */
+    &:active {
+      color: #fff;
+      text-decoration: underline;
+      font-weight: 900;
+    }
+  }
+
+  .level2Navigation {
+    background-color: #38598a;
+  }
+
+  .level3Navigation {
+    background-color: #5475a7;
+  }
+}
+
+.nav-link {
+  font-weight: 600 !important;
+  color: white !important;
+  padding-bottom: 0 !important;
+  padding-top: 0 !important;
+  cursor: pointer;
+}
