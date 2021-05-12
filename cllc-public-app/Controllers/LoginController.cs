@@ -62,7 +62,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet]
         [Route("token/{userid}")]
         [AllowAnonymous]
-        public virtual IActionResult GetDevAuthenticationCookie(string userId)
+        public virtual IActionResult GetDevAuthenticationCookie(string userId, [FromQuery] string source)
         {
             if (_env.IsProduction()) return BadRequest("This API is not available outside a development environment.");
 
@@ -105,6 +105,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string basePath = string.IsNullOrEmpty(_configuration["BASE_PATH"]) ? "" : _configuration["BASE_PATH"];
 
             string url = "dashboard";
+            if (source == "sep")
+            {
+                url = "sep/dashboard";
+            }
 
             basePath += "/" + url;
 

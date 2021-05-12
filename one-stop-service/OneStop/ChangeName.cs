@@ -16,14 +16,12 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
          * XML Message sent to the Hub broadcasting the details of the new cannabis licence issued.
          * The purpose is to broadcast licence details to partners subscribed to the Hub
          */
-        public string CreateXML(MicrosoftDynamicsCRMadoxioLicences licence, bool isTransfer)
+        public string CreateXML(MicrosoftDynamicsCRMadoxioLicences licence, bool isTransfer, string targetBusinessNumber)
         {
             if (licence == null)
             {
                 throw new Exception("The licence can not be null");
             }
-
-           
 
             if (licence.AdoxioLicencee == null)
             {
@@ -37,7 +35,9 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
             }
             var sbnChangeStatus = new SBNChangeName();
             sbnChangeStatus.header = GetHeader(licence, isTransfer);
-            sbnChangeStatus.body = GetBody(licence);
+
+
+            sbnChangeStatus.body = GetBody(licence, isTransfer, targetBusinessNumber);
 
             var serializer = new XmlSerializer(typeof(SBNChangeName));
             using (StringWriter textWriter = new StringWriter())
@@ -66,7 +66,7 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
             header.senderID = OneStopUtils.SENDER_ID;
             header.receiverID = OneStopUtils.RECEIVER_ID;
             //any note wanted by LCRB. Currently in liquor is: licence Id, licence number - sequence number
-            header.partnerNote = licence.AdoxioLicencenumber;
+            header.partnerNote = licence.AdoxioLicencenumber + "-" + DateTime.Now.Ticks;
 
             header.CCRAHeader = GetCCRAHeader(licence);
 
@@ -100,12 +100,9 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
             return userCredentials;
         }
 
-        private SBNChangeNameBody GetBody(MicrosoftDynamicsCRMadoxioLicences licence)
+        private SBNChangeNameBody GetBody(MicrosoftDynamicsCRMadoxioLicences licence, bool isTransfer, string targetBusinessNumber)
         {
             var body = new SBNChangeNameBody();
-
-            // licence number
-            body.partnerInfo1 = licence.AdoxioLicencenumber;
 
             body.name = new SBNChangeNameBodyName();
             body.name.clientNameTypeCode = OneStopUtils.CLIENT_NAME_TYPE_CODE;
@@ -124,6 +121,13 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
             
             // partnerInfo1
             body.partnerInfo1 = licence.AdoxioLicencenumber;
+
+            if (isTransfer)
+            {
+                body.partnerInfo2 = targetBusinessNumber;
+            }
+
+            body.timeStamp = DateTime.Now.ToString("yyyy-MM-DD-hh.mm.ss");
 
             return body;
         }

@@ -1,1 +1,26 @@
-<p>liquor works!</p>
+<div class="form-wrapper">
+    <h1>Liquor</h1>
+    <h2>Function</h2>
+    <h3>Application number: [id]</h3>
+
+    <p>
+        In this step, you are required to provide the amount and type of drinks that will be served and/or sold at your
+        event. This information is important to help you estimate the appropriate serving quantities for your event and,
+        if you are selling drinks, the most accurate calculation of Provincial Sales Tax (PST). The quantities you
+        provide are subject to review and approval and may be used by police and liquor inspectors during inspections.
+    </p>
+
+    <mat-divider></mat-divider>
+    
+    <mat-tab-group class="serving-slide" [selectedIndex]="selectedIndex" mat-align-tabs="start">
+        <mat-tab label="Total Servings">
+            <app-total-servings (saved)="updateValue($event); selectedIndex = 1;"></app-total-servings>
+        </mat-tab>
+        <mat-tab label="Selling Drinks">
+            <app-selling-drinks (back)="selectedIndex = 0" (saved)="updateValue($event); selectedIndex = 2;"></app-selling-drinks>
+        </mat-tab>
+        <mat-tab label="Drink Amounts">
+            <app-drink-amounts (back)="selectedIndex = 1" (saved)="updateValue($event); save();"></app-drink-amounts>
+        </mat-tab>
+    </mat-tab-group>
+</div>

@@ -342,45 +342,58 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     var contact = _dynamicsClient.GetActiveContactByExternalIdBridged(false, siteMinderGuid);
                     if (contact == null)
                     {
+                        _logger.Information($"No bridged contact found for {siteMinderGuid}");
                         // try by other means.
                         var contactVM = new ViewModels.Contact();
                         contactVM.CopyHeaderValues(context.Request.Headers);
                         var temp = _dynamicsClient.GetContactByContactVmBlankSmGuid(contactVM);
-                        if (temp != null && temp.Statecode == 0) // ensure it is active.
+                        if (temp != null) // ensure it is active.
                         {
                             contact = temp;
                             // update the contact.
-                            _dynamicsClient.UpdateContactBridgeLogin(contact.Contactid, siteMinderGuid, contact._accountidValue, siteMinderBusinessGuid);
+                            _logger.Information(
+                                $"Adding bridge record for login.  ContactID is {contact.Contactid}, GUID is {siteMinderGuid}");
+                            _dynamicsClient.UpdateContactBridgeLogin(contact.Contactid, siteMinderGuid,
+                                contact._accountidValue, siteMinderBusinessGuid);
+                        }
+                        else
+                        {
+                            _logger.Error("No existing contact found by search by header info.");
                         }
                     }
                     if (contact != null && contact.Contactid != null)
                     {
                         await CreateSharePointContactDocumentLocation(_fileManagerClient, contact);
                     }
-
-                    // Note that this will search for active accounts
-                    var account = await _dynamicsClient.GetActiveAccountBySiteminderBusinessGuid(siteMinderBusinessGuid);
-                    if (account == null)
-                    {
-                        // try by other means.
-                        account = _dynamicsClient.GetActiveAccountByLegalName(userSettings.BusinessLegalName);
-                    }
-                    if (account != null && account.Accountid != null)
-                    {
-                        userSettings.AccountId = account.Accountid;
-                        userSettings.AuthenticatedUser.AccountId = Guid.Parse(account.Accountid);
-
-                        // ensure that the given account has a documents folder.
-                        await CreateSharePointAccountDocumentLocation(_fileManagerClient, account);
-                    }
-                    else  // force the new user process if contact exists but account does not.
-                    {
-                        userSettings.AuthenticatedUser = null;
-                        userSettings.IsNewUserRegistration = true;
-                    }
                 }
                 
             }
+
+            // populate the Account settings.
+            if (siteMinderBusinessGuid != null) // BCeID user
+            {
+                // Note that this will search for active accounts
+                var account = await _dynamicsClient.GetActiveAccountBySiteminderBusinessGuid(siteMinderBusinessGuid);
+                if (account == null)
+                {
+                    // try by other means.
+                    account = _dynamicsClient.GetActiveAccountByLegalName(userSettings.BusinessLegalName);
+                }
+                if (account != null && account.Accountid != null)
+                {
+                    userSettings.AccountId = account.Accountid;
+                    userSettings.AuthenticatedUser.AccountId = Guid.Parse(account.Accountid);
+
+                    // ensure that the given account has a documents folder.
+                    await CreateSharePointAccountDocumentLocation(_fileManagerClient, account);
+                }
+                else  // force the new user process if contact exists but account does not.
+                {
+                    userSettings.AuthenticatedUser = null;
+                    userSettings.IsNewUserRegistration = true;
+                }
+            }
+                                               
 
             // add the worker settings if it is a new user.
             if (userSettings.IsNewUserRegistration)

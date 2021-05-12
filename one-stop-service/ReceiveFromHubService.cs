@@ -102,11 +102,11 @@ namespace Gov.Jag.Lcrb.OneStopService
             }
         }
 
-        private string HandleSBNCreateProgramAccountResponse(string inputXML)
+        private string HandleResponse(string inputXML)
         {
             IDynamicsClient dynamicsClient = DynamicsSetupUtil.SetupDynamics(_configuration);
 
-            Log.Logger.Information("Reached HandleSBNCreateProgramAccountResponse");
+            Log.Logger.Information("Reached HandleResponse");
             if (!_env.IsProduction())
             {
                 Log.Logger.Information($"InputXML is: {inputXML}");
@@ -287,7 +287,7 @@ namespace Gov.Jag.Lcrb.OneStopService
                 switch (rootNodeName)
                 {
                     case "SBNCreateProgramAccountResponse":
-                        result = HandleSBNCreateProgramAccountResponse(inputXML);
+                        result = HandleResponse(inputXML);
                         break;
                     case "SBNErrorNotification":
                         result = HandleSBNErrorNotification(inputXML);

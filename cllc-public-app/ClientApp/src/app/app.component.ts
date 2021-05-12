@@ -47,9 +47,7 @@ export class AppComponent extends FormBase implements OnInit {
   currentUser: User;
   isNewUser: boolean;
   isDevMode: boolean;
-  showMap: boolean;
   versionInfo: VersionInfo;
-  isAssociate = false;
   account: Account;
   showMessageCenterContent = false;
   linkedFederalReports: MonthlyReport[];
@@ -79,12 +77,9 @@ export class AppComponent extends FormBase implements OnInit {
     private userDataService: UserDataService,
   ) {
     super();
-    featureFlagService.featureOn("Maps")
-      .subscribe(x => this.showMap = x);
 
     featureFlagService.featureOn("LicenseeChanges")
       .subscribe(x => this.licenseeChangeFeatureOn = x);
-
 
     this.isDevMode = isDevMode();
     this.router.events

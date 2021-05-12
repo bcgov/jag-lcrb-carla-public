@@ -46,7 +46,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             if (string.IsNullOrEmpty(result))
             {
                 string serverRelativeUrl = "";
-string accountIdCleaned = account.Accountid.ToUpper().Replace("-", "");
+                string accountIdCleaned = account.Accountid.ToUpper().Replace("-", "");
                 string folderName = $"_{accountIdCleaned}";
 
                 serverRelativeUrl += "/" + GetServerRelativeURL(AccountDocumentListTitle, folderName);
@@ -57,17 +57,17 @@ string accountIdCleaned = account.Accountid.ToUpper().Replace("-", "");
             return result;
         }
 
-    
 
-    /// <summary>
-    /// Copy values from a ViewModel to a Dynamics Account.
-    /// If parameter copyIfNull is false then do not copy a null value. Mainly applies to updates to the account.
-    /// updateIfNull defaults to true
-    /// </summary>
-    /// <param name="toDynamics"></param>
-    /// <param name="fromVM"></param>
-    /// <param name="copyIfNull"></param>
-    public static void CopyValues(this MicrosoftDynamicsCRMaccount toDynamics, ViewModels.Account fromVM, Boolean copyIfNull)
+
+        /// <summary>
+        /// Copy values from a ViewModel to a Dynamics Account.
+        /// If parameter copyIfNull is false then do not copy a null value. Mainly applies to updates to the account.
+        /// updateIfNull defaults to true
+        /// </summary>
+        /// <param name="toDynamics"></param>
+        /// <param name="fromVM"></param>
+        /// <param name="copyIfNull"></param>
+        public static void CopyValues(this MicrosoftDynamicsCRMaccount toDynamics, ViewModels.Account fromVM, Boolean copyIfNull)
         {
             if (copyIfNull || (!copyIfNull && fromVM.name != null))
             {
@@ -148,7 +148,7 @@ string accountIdCleaned = account.Accountid.ToUpper().Replace("-", "");
                 {
                     toDynamics.Address1Postalcode = null;
                 }
-                
+
             }
 
             if (copyIfNull || (!copyIfNull && fromVM.physicalAddressName != null))
@@ -185,13 +185,31 @@ string accountIdCleaned = account.Accountid.ToUpper().Replace("-", "");
                 {
                     toDynamics.Address2Postalcode = null;
                 }
-                    
+
             }
 
             toDynamics.Websiteurl = fromVM.websiteUrl;
 
             // business type must be set only during creation, not in update (removed from copyValues() )
             //	toDynamics.AdoxioBusinesstype = (int)Enum.Parse(typeof(ViewModels.Adoxio_applicanttypecodes), fromVM.businessType, true);
+
+            // SEP Police Review Limits
+            if (copyIfNull || (!copyIfNull && fromVM.isLateHoursApproval != null))
+            {
+                toDynamics.AdoxioIslatehoursapproval = fromVM.isLateHoursApproval;
+            }
+            if (copyIfNull || (!copyIfNull && fromVM.maxGuestsForPublicEvents != null))
+            {
+                toDynamics.AdoxioMaxguestsforpublic = fromVM.maxGuestsForPublicEvents;
+            }
+            if (copyIfNull || (!copyIfNull && fromVM.maxGuestsForPrivateEvents != null))
+            {
+                toDynamics.AdoxioMaxguestsforprivate = fromVM.maxGuestsForPrivateEvents;
+            }
+            if (copyIfNull || (!copyIfNull && fromVM.maxGuestsForFamilyEvents != null))
+            {
+                toDynamics.AdoxioMaxguestsforfamily = fromVM.maxGuestsForFamilyEvents;
+            }
         }
 
         /// <summary>
@@ -257,6 +275,12 @@ string accountIdCleaned = account.Accountid.ToUpper().Replace("-", "");
                 accountVM.LocalGovernmentId = account._adoxioLginlinkidValue;
 
                 accountVM.websiteUrl = account.Websiteurl;
+
+                // SEP Police Review Limits
+                accountVM.isLateHoursApproval = account.AdoxioIslatehoursapproval;
+                accountVM.maxGuestsForPublicEvents = account.AdoxioMaxguestsforpublic;
+                accountVM.maxGuestsForPrivateEvents = account.AdoxioMaxguestsforprivate;
+                accountVM.maxGuestsForFamilyEvents = account.AdoxioMaxguestsforfamily;
 
                 if (account.Primarycontactid != null)
                 {
