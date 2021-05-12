@@ -30,7 +30,7 @@
             <mat-step [completed]="isStepCompleted(step)" *ngIf="step === 'event'">
                 <ng-template matStepLabel>Event</ng-template>
                 <app-event [applicationId]="applicationId" *ngIf="stepper.selectedIndex === index" class="w-100"
-                    (saveComplete)="completeStep(step); stepper.next(); debu" #event>
+                    (saveComplete)="completeStep(step); stepper.next();" #event>
                 </app-event>
             </mat-step>
 
