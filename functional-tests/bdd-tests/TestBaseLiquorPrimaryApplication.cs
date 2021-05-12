@@ -184,15 +184,15 @@ namespace bdd_tests
                 ngDriver.FindElement(By.CssSelector("textarea#patioLiquorCarriedDescription"));
             uiPatioLiquorCarriedDescription.SendKeys(patioLiquorCarriedDescription);
 
-            // click Fixed option
+            // click Fixed service bar(s) on patio option
             var uiFixedOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-5-button"));
             uiFixedOption.Click();
 
-            // click Portable option
+            // click Portable service bar(s) on patio option
             var uiPortableOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-6-button"));
             uiPortableOption.Click();
 
-            // click Interior option
+            // click The interior service bar(s) option
             var uiInteriorOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-7-button"));
             uiInteriorOption.Click();
 

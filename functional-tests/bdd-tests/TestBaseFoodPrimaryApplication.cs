@@ -159,16 +159,16 @@ namespace bdd_tests
                 ngDriver.FindElement(By.CssSelector("textarea#patioLiquorCarriedDescription"));
             uiPatioLiquorCarriedDescription.SendKeys(patioLiquorCarriedDescription);
 
-            // click Fixed option
-            var uiFixedOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-1-button"));
+            // click Fixed service bar(s) on patio option
+            var uiFixedOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-5-button"));
             uiFixedOption.Click();
 
-            // click Portable option
-            var uiPortableOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-2-button"));
+            // click Portable service bar(s) on patio option
+            var uiPortableOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-6-button"));
             uiPortableOption.Click();
 
-            // click Interior option
-            var uiInteriorOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-3-button"));
+            // click The interior service bar(s) option
+            var uiInteriorOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-7-button"));
             uiInteriorOption.Click();
 
             // upload signage document
