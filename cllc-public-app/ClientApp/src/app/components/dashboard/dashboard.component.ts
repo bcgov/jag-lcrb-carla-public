@@ -13,7 +13,7 @@ import { LicenseeChangeLog } from "@models/licensee-change-log.model";
 import { LegalEntity } from "@models/legal-entity.model";
 import { LegalEntityDataService } from "@services/legal-entity-data.service";
 import { LicenseDataService } from "@services/license-data.service";
-import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
+import { faPencilAlt, faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: "app-dashboard",
@@ -22,6 +22,7 @@ import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 })
 export class DashboardComponent extends FormBase implements OnInit {
   faPencilAlt = faPencilAlt;
+  faExclamationTriangle = faExclamationTriangle;
   account: Account;
   indigenousNationModeActive: boolean;
   currentLegalEntities: LegalEntity;
