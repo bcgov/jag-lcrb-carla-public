@@ -24,6 +24,10 @@ namespace bdd_tests
             var uiIsBoundingSufficientForControl = ngDriver.FindElement(By.Id("isBoundingSufficientForControl"));
             uiIsBoundingSufficientForControl.Click();
 
+            // enter patio location description
+            var uiPatioLocationDescription = ngDriver.FindElement(By.CssSelector("textarea#patioLocationDescription"));
+            uiPatioLocationDescription.SendKeys(patioLocationDescription);
+
             // select definition checkbox	
             var uiIsBoundingSufficientToDefine = ngDriver.FindElement(By.Id("isBoundingSufficientToDefine"));
             uiIsBoundingSufficientToDefine.Click();
@@ -32,12 +36,8 @@ namespace bdd_tests
             var uiIsAdequateCare = ngDriver.FindElement(By.Id("isAdequateCare"));
             uiIsAdequateCare.Click();
 
-            // enter patio location description
-            var uiPatioLocationDescription = ngDriver.FindElement(By.CssSelector("textarea#patioLocationDescription"));
-            uiPatioLocationDescription.SendKeys(patioLocationDescription);
-
             // select status of patio area construction
-            var uiConstructionStatus = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-1-button"));
+            var uiConstructionStatus = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-65-button"));
             uiConstructionStatus.Click();
 
             // select construction completion date
