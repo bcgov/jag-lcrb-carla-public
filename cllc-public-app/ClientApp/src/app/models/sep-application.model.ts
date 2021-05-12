@@ -1,8 +1,8 @@
 import { SepLocation } from "./sep-location.model";
 
 export class SepApplication {
-    id: number
-    specialEventId: string;
+    id?: number;  // indexed db primary key
+    specialEventId: string; // server side primary key
     tempJobNumber: string;
     dateCreated: Date;
     lastUpdated: Date;
@@ -11,8 +11,9 @@ export class SepApplication {
     agreeToTnC: boolean;
     dateAgreedToTnC: Date;
     stepsCompleted: string[];
-    eventStatus: string;
+    eventStatus: string; 
     totalServings: number;
+    invoiceTrigger: number;
 
     eligibilityAtPrivateResidence: boolean;
     eligibilityMajorSignificance: boolean;
@@ -26,4 +27,4 @@ export class SepApplication {
 
     eventLocations: SepLocation[] = [];
 
-}
+} 
