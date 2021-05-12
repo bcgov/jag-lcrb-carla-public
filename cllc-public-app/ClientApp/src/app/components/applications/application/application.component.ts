@@ -489,8 +489,12 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.updateRequiredValidator('', 'patioLiquorCarriedDescription');
     }
 
-
     this.updateRequiredValidator(val, 'patioLocationDescription');
+    this.updateRequiredValidator(val, 'isBoundingSufficientForControl');
+    this.updateRequiredValidator(val, 'isBoundingSufficientToDefine');
+    this.updateRequiredValidator(val, 'isAdequateCare');
+    this.updateRequiredValidator(val, 'isInCompliance');
+    this.updateRequiredValidator(val, 'statusOfConstruction');
     this.updateRequiredValidator(val, 'patioServiceBar');
   }
 
