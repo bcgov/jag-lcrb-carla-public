@@ -67,7 +67,7 @@ export class LiquorComponent implements OnInit {
     this.db.getSepApplication(this.applicationId)
       .then((appData) => {
         if (appData.specialEventId) { // do an update ( the record exists in dynamics)
-          this.sepDataService.updateSepApplication(appData, appData.specialEventId)
+          this.sepDataService.updateSepApplication({...appData, invoiceTrigger: 1 }, appData.specialEventId)
             .subscribe(result => {
               if (result.id) {
                 this.db.applications.update(result.id, result);
@@ -75,7 +75,7 @@ export class LiquorComponent implements OnInit {
               }
             });
         } else {
-          this.sepDataService.createSepApplication(appData)
+          this.sepDataService.createSepApplication({...appData, invoiceTrigger: 1 })
             .subscribe(result => {
               if (result.id) {
                 this.db.applications.update(result.id, result);
