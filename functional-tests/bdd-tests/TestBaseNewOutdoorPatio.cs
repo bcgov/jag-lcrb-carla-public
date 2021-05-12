@@ -20,15 +20,39 @@ namespace bdd_tests
             var areaDescription = "Sample area description";
             var occupantLoad = "99999";
 
+            // select monitor and control checkbox	
+            var uiIsBoundingSufficientForControl = ngDriver.FindElement(By.Id("isBoundingSufficientForControl"));
+            uiIsBoundingSufficientForControl.Click();
+
+            // select definition checkbox	
+            var uiIsBoundingSufficientToDefine = ngDriver.FindElement(By.Id("isBoundingSufficientToDefine"));
+            uiIsBoundingSufficientToDefine.Click();
+
+            // select adequate care checkbox	
+            var uiIsAdequateCare = ngDriver.FindElement(By.Id("isAdequateCare"));
+            uiIsAdequateCare.Click();
+
             // enter patio location description
             var uiPatioLocationDescription = ngDriver.FindElement(By.CssSelector("textarea#patioLocationDescription"));
             uiPatioLocationDescription.SendKeys(patioLocationDescription);
+
+            // select status of patio area construction
+            var uiConstructionStatus = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-1-button"));
+            uiConstructionStatus.Click();
 
             // select construction completion date
             var uiStoreOpenDate = ngDriver.FindElement(By.Id("storeOpenDate"));
             uiStoreOpenDate.Click();
 
             SharedCalendarDate();
+
+            // select TESA checkbox
+            var uiIsTESA = ngDriver.FindElement(By.Id("isTESA"));
+            uiIsTESA.Click();
+
+            // select January checkbox
+            var uiJanuary = ngDriver.FindElement(By.Id("isMonth01"));
+            uiJanuary.Click();
 
             // enter patio access description
             var uiPatioAccessDescription = ngDriver.FindElement(By.CssSelector("textarea#patioAccessDescription"));
@@ -43,16 +67,16 @@ namespace bdd_tests
                 ngDriver.FindElement(By.CssSelector("textarea#patioLiquorCarriedDescription"));
             uiPatioLiquorCarriedDescription.SendKeys(patioLiquorCarriedDescription);
 
-            // click Fixed option
-            var uiFixedOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-33-button"));
+            // click Fixed service bar(s) on patio option
+            var uiFixedOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-69-button"));
             uiFixedOption.Click();
 
-            // click Portable option
-            var uiPortableOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-34-button"));
+            // click Portable service bar(s) on patio option
+            var uiPortableOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-70-button"));
             uiPortableOption.Click();
 
-            // click Interior option
-            var uiInteriorOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-35-button"));
+            // click The interior service bar(s) option
+            var uiInteriorOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-71-button"));
             uiInteriorOption.Click();
 
             // upload floor plan
@@ -71,7 +95,7 @@ namespace bdd_tests
             uiOccupantLoad.SendKeys(occupantLoad);
 
             // upload exterior photos
-            FileUpload("exterior_photos.pdf", "(//input[@type='file'])[5]");
+            // FileUpload("exterior_photos.pdf", "(//input[@type='file'])[5]");
 
             // click on the isOwnerBusiness checkbox
             var uiIsOwnerBusiness =
