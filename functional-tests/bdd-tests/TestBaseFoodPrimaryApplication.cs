@@ -132,6 +132,10 @@ namespace bdd_tests
             var uiPatioLocationDescription = ngDriver.FindElement(By.CssSelector("textarea#patioLocationDescription"));
             uiPatioLocationDescription.SendKeys(patioLocationDescription);
 
+            // select status of patio area construction
+            var uiConstructionStatus = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-1-button"));
+            uiConstructionStatus.Click();
+
             // select construction completion date
             var uiStoreOpenDate = ngDriver.FindElement(By.Id("storeOpenDate"));
             uiStoreOpenDate.Click();
