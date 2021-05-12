@@ -200,7 +200,6 @@ namespace bdd_tests
             var uiEstabType = ngDriver.FindElement(By.CssSelector("input[formcontrolname='description1']"));
             uiEstabType.SendKeys(estType);
 
-
             switch (bizType)
             {
                 case "partnership":

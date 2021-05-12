@@ -109,10 +109,24 @@ namespace bdd_tests
             var uiEstabPhone = ngDriver.FindElement(By.Id("establishmentPhone"));
             uiEstabPhone.SendKeys(estPhone);
 
-            // select 'Yes' for patio
-            var uiHasPatio =
-                ngDriver.FindElement(By.CssSelector("mat-radio-button#mat-radio-14"));
-            uiHasPatio.Click();
+            // first find the material radio group.	
+            var patioRadioGroup = ngDriver.FindElement(By.CssSelector("mat-radio-group[formcontrolname='isHasPatio']"));
+            // then find the first radio button (YES)	
+            ScrollToElement(patioRadioGroup);
+            var patioButton = patioRadioGroup.FindElements(By.TagName("mat-radio-button"))[0];
+            patioButton.Click();
+            
+            // select monitor and control checkbox	
+            var uiIsBoundingSufficientForControl = ngDriver.FindElement(By.Id("isBoundingSufficientForControl"));
+            uiIsBoundingSufficientForControl.Click();
+           
+            // select definition checkbox	
+            var uiIsBoundingSufficientToDefine = ngDriver.FindElement(By.Id("isBoundingSufficientToDefine"));
+            uiIsBoundingSufficientToDefine.Click();
+            
+            // select adequate care checkbox	
+            var uiIsAdequateCare = ngDriver.FindElement(By.Id("isAdequateCare"));
+            uiIsAdequateCare.Click();
 
             // enter the patio location description
             var uiPatioLocationDescription = ngDriver.FindElement(By.CssSelector("textarea#patioLocationDescription"));
@@ -123,6 +137,14 @@ namespace bdd_tests
             uiStoreOpenDate.Click();
 
             SharedCalendarDate();
+
+            // select TESA checkbox
+            var uiIsTESA = ngDriver.FindElement(By.Id("isTESA"));
+            uiIsTESA.Click();
+
+            // select January checkbox
+            var uiJanuary = ngDriver.FindElement(By.Id("isMonth01"));
+            uiJanuary.Click();
 
             // enter the patio access description
             var uiPatioAccessDescription = ngDriver.FindElement(By.CssSelector("textarea#patioAccessDescription"));
