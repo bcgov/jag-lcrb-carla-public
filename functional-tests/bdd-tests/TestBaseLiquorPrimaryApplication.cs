@@ -31,11 +31,9 @@ namespace bdd_tests
             var estPhone = "2505555555";
             var estType = "Military Mess";
 
-            var patioCompDescription = "Sample patio comp description";
             var patioLocationDescription = "Sample patio location description";
             var patioAccessDescription = "Sample patio access description";
             var patioLiquorCarriedDescription = "Sample liquor carried description";
-            var patioAccessControlDescription = "Sample patio access control description";
 
             var conRole = "CEO";
             var conPhone = "2508888888";
