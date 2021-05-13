@@ -38,8 +38,6 @@ export class EventComponent extends FormBase implements OnInit {
       .then(app => {
         this.sepApplication = app;
         if (this.form) {
-          this.form.patchValue(this.sepApplication);
-          this.locations.clear();
           this.setFormValue(this.sepApplication);
         }
       });
@@ -64,10 +62,11 @@ export class EventComponent extends FormBase implements OnInit {
     this.setFormValue(this.sepApplication);
   }
 
-  setFormValue(app: SepApplication){
+  setFormValue(app: SepApplication) {
     if (app) {
       this.form.patchValue(app);
     }
+    this.locations.clear();
 
     if (app?.eventLocations?.length > 0) {
       app.eventLocations.forEach(loc => {
@@ -122,7 +121,7 @@ export class EventComponent extends FormBase implements OnInit {
       if (!area.eventDates || area.eventDates.length == 0) {
         area.eventDates = [{} as SepSchedule];
       }
-      
+
       area.eventDates.forEach(ed => {
         const edForm = this.createEventDate(ed);
         (areaForm.get('eventDates') as FormArray).push(edForm);
@@ -149,12 +148,14 @@ export class EventComponent extends FormBase implements OnInit {
     let datesForm = this.fb.group({
       eventScheduleId: [null],
       eventDate: [''],
-      eventStart: [''],
-      eventEnd: [''],
-      serviceStart: [''],
-      serviceEnd: [''],
+      eventStartValue: [''],
+      eventEndValue: [''],
+      serviceStartValue: [''],
+      serviceEndValue: [''],
     });
-    datesForm.patchValue(eventDate);
+    eventDate = Object.assign(new SepSchedule(null), eventDate);
+    const val = eventDate.toEventFormValue();
+    datesForm.patchValue(val);
     return datesForm;
   }
 
@@ -188,7 +189,7 @@ export class EventComponent extends FormBase implements OnInit {
       eventDates: this.fb.array([]),
     });
     areaForm.patchValue(area);
-    
+
     return areaForm;
   }
 
@@ -206,10 +207,28 @@ export class EventComponent extends FormBase implements OnInit {
     return this.form.valid;
   }
 
+  getFormValue(): SepApplication {
+    let data = {
+      ...this.sepApplication,
+      ...this.form.value
+    };
+    data?.eventLocations.forEach(loc => {
+      loc?.serviceAreas.forEach(area => {
+        let dateValues = [];
+        area?.eventDates.forEach(sched => {
+          dateValues.push(new SepSchedule(sched));
+        });
+        area.eventDates = dateValues;
+      });
+    });
+
+    return data as SepApplication;
+
+  }
+
   save() {
     const data = {
       id: this._appID,
-      ...this.sepApplication,
       lastUpdated: new Date(),
       status: 'unsubmitted',
       stepsCompleted: (steps => {
@@ -219,7 +238,7 @@ export class EventComponent extends FormBase implements OnInit {
         }
         return steps;
       })(this?.sepApplication?.stepsCompleted || []),
-      ...this.form.value,
+      ...this.getFormValue()
     } as SepApplication;
 
     if (data.id) {
