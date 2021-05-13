@@ -611,7 +611,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   startEndorsementApplication(application: Application, endorsementType: string) {
     const newLicenceApplicationData = {
       parentApplicationId: application.id,
-      licenseType: application.licenseType,
+      licenseType: application.applicationTypeName,
       applicantType: this.account.businessType,
       applicationType: { name: endorsementType } as ApplicationType,
       establishmentAddress: application.establishmentAddress,
