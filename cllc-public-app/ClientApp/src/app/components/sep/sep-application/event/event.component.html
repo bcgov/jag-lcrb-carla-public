@@ -190,13 +190,13 @@
                                                             <mat-panel-title *ngIf="!isOpen">
                                                                 Event Date: {{ item.get('eventDate')?.value | date}}
                                                                 <br>
-                                                                Event Times: {{ item.get('eventStart').value}} - {{
-                                                                item.get('eventEnd').value}}
+                                                                Event Times: {{ item.get('eventStartValue').value}} - {{
+                                                                item.get('eventEndValue').value}}
                                                             </mat-panel-title>
                                                             <mat-panel-title *ngIf="!isOpen">
                                                                 Liquor will be served: {{
-                                                                item.get('serviceStart').value}} - {{
-                                                                item.get('serviceEnd').value}}
+                                                                item.get('serviceStartValue').value}} - {{
+                                                                item.get('serviceEndValue').value}}
                                                             </mat-panel-title>
                                                         </mat-expansion-panel-header>
 
@@ -217,7 +217,7 @@
                                                                 <td>
                                                                     <app-field label="From">
                                                                         <select class="form-control"
-                                                                            formControlName="eventStart">
+                                                                            formControlName="eventStartValue">
                                                                             <option value=""></option>
                                                                             <option [value]="item.value"
                                                                                 *ngFor="let item of timeSlots">
@@ -229,7 +229,7 @@
                                                                 <td>
                                                                     <app-field label="To">
                                                                         <select class="form-control"
-                                                                            formControlName="eventEnd">
+                                                                            formControlName="eventEndValue">
                                                                             <option value=""></option>
                                                                             <option [value]="item.value"
                                                                                 *ngFor="let item of timeSlots">
@@ -250,7 +250,7 @@
                                                                 <td>
                                                                     <app-field label="From">
                                                                         <select class="form-control"
-                                                                            formControlName="serviceStart">
+                                                                            formControlName="serviceStartValue">
                                                                             <option value=""></option>
                                                                             <option [value]="item.value"
                                                                                 *ngFor="let item of timeSlots">
@@ -262,7 +262,7 @@
                                                                 <td>
                                                                     <app-field label="To">
                                                                         <select class="form-control"
-                                                                            formControlName="serviceEnd">
+                                                                            formControlName="serviceEndValue">
                                                                             <option value=""></option>
                                                                             <option [value]="item.value"
                                                                                 *ngFor="let item of timeSlots">
