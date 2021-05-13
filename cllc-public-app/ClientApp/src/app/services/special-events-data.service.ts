@@ -48,6 +48,16 @@ export class SpecialEventsDataService extends DataService {
   }
 
   getPoliceApprovalSepApplications(): Observable<SepApplicationSummary[]> {
-    return of([]);
+    const data: SepApplicationSummary = {
+      specialEventId: '7d98a02b-e14f-43e4-a8c9-6763ba6a5e76',
+      eventStartDate: new Date('2021-02-16T19:20:48+00:00'),
+      dateSubmitted: new Date('2020-04-01T07:00:00+00:00'),
+      eventName: 'Annual Block Watch Party',
+      eventStatus: 999999,
+      typeOfEvent: 1,
+      maximumNumberOfGuests: 200,
+    };
+
+    return of([data]);
   }
 }
