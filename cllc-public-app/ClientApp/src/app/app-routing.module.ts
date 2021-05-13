@@ -154,11 +154,10 @@ const routes: Routes = [
     data: { feature: "CovidApplication" }
   },
   {
-    path: "org-structure",
-    component: ApplicationLicenseeChangesComponent,
+    path: "org-structure",               // block access to old page
+    component: PermanentChangeToALicenseeComponent,
     canActivate: [BCeidAuthGuard, FeatureGuard],
-    canDeactivate: [CanDeactivateGuard], // Comment this out if there are problems with duplicate saves
-    data: { feature: "LicenseeChanges" }
+    data: { feature: "PermanentChangesToLicensee" }
   },
   {
     path: "lg-approvals",
