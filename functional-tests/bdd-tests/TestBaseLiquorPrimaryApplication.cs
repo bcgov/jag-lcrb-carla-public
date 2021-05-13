@@ -31,11 +31,9 @@ namespace bdd_tests
             var estPhone = "2505555555";
             var estType = "Military Mess";
 
-            var patioCompDescription = "Sample patio comp description";
             var patioLocationDescription = "Sample patio location description";
             var patioAccessDescription = "Sample patio access description";
             var patioLiquorCarriedDescription = "Sample liquor carried description";
-            var patioAccessControlDescription = "Sample patio access control description";
 
             var conRole = "CEO";
             var conPhone = "2508888888";
@@ -137,15 +135,39 @@ namespace bdd_tests
             var patioButton = patioRadioGroup.FindElements(By.TagName("mat-radio-button"))[0];
             patioButton.Click();
 
+            // select monitor and control checkbox
+            var uiIsBoundingSufficientForControl = ngDriver.FindElement(By.Id("isBoundingSufficientForControl"));
+            uiIsBoundingSufficientForControl.Click();
+
+            // select definition checkbox
+            var uiIsBoundingSufficientToDefine = ngDriver.FindElement(By.Id("isBoundingSufficientToDefine"));
+            uiIsBoundingSufficientToDefine.Click();
+
+            // select adequate care checkbox
+            var uiIsAdequateCare = ngDriver.FindElement(By.Id("isAdequateCare"));
+            uiIsAdequateCare.Click();
+
             // enter the patio location description
             var uiPatioLocationDescription = ngDriver.FindElement(By.CssSelector("textarea#patioLocationDescription"));
             uiPatioLocationDescription.SendKeys(patioLocationDescription);
+
+            // select status of patio area construction
+            var uiConstructionStatus = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-1-button"));
+            uiConstructionStatus.Click();
 
             // select construction completion date
             var uiStoreOpenDate = ngDriver.FindElement(By.Id("storeOpenDate"));
             uiStoreOpenDate.Click();
 
             SharedCalendarDate();
+
+            // select TESA checkbox
+            var uiIsTESA = ngDriver.FindElement(By.Id("isTESA"));
+            uiIsTESA.Click();
+
+            // select January checkbox
+            var uiJanuary = ngDriver.FindElement(By.Id("isMonth01"));
+            uiJanuary.Click();
 
             // enter the patio access description
             var uiPatioAccessDescription = ngDriver.FindElement(By.CssSelector("textarea#patioAccessDescription"));
@@ -160,22 +182,21 @@ namespace bdd_tests
                 ngDriver.FindElement(By.CssSelector("textarea#patioLiquorCarriedDescription"));
             uiPatioLiquorCarriedDescription.SendKeys(patioLiquorCarriedDescription);
 
-            // click Fixed option
-            var uiFixedOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-1-button"));
+            // click Fixed service bar(s) on patio option
+            var uiFixedOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-5-button"));
             uiFixedOption.Click();
 
-            // click Portable option
-            var uiPortableOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-2-button"));
+            // click Portable service bar(s) on patio option
+            var uiPortableOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-6-button"));
             uiPortableOption.Click();
 
-            // click Interior option
-            var uiInteriorOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-3-button"));
+            // click The interior service bar(s) option
+            var uiInteriorOption = ngDriver.FindElement(By.CssSelector("#mat-button-toggle-7-button"));
             uiInteriorOption.Click();
 
             // enter the establishment type
             var uiEstabType = ngDriver.FindElement(By.CssSelector("input[formcontrolname='description1']"));
             uiEstabType.SendKeys(estType);
-
 
             switch (bizType)
             {
