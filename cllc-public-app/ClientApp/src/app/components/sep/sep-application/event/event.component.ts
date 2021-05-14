@@ -39,6 +39,8 @@ export class EventComponent extends FormBase implements OnInit {
         this.sepApplication = app;
         if (this.form) {
           this.form.patchValue(this.sepApplication);
+          this.locations.clear();
+          this.setFormValue(this.sepApplication);
         }
       });
   };
@@ -59,19 +61,21 @@ export class EventComponent extends FormBase implements OnInit {
       isAnnualEvent: [''],
       eventLocations: this.fb.array([]),
     });
+    this.setFormValue(this.sepApplication);
+  }
 
-    if (this.sepApplication) {
-      this.form.patchValue(this.sepApplication);
+  setFormValue(app: SepApplication){
+    if (app) {
+      this.form.patchValue(app);
     }
 
-    if (this?.sepApplication?.eventLocations?.length > 0) {
-      this.sepApplication.eventLocations.forEach(loc => {
+    if (app?.eventLocations?.length > 0) {
+      app.eventLocations.forEach(loc => {
         this.addLocation(loc);
       });
     } else {
       this.addLocation();
     }
-
   }
 
   getServiceAreas(locationIndex: number): FormArray {
@@ -94,6 +98,7 @@ export class EventComponent extends FormBase implements OnInit {
 
   addLocation(location: SepLocation = new SepLocation()) {
     let locationForm = this.fb.group({
+      locationId: [null],
       locationPermitNumber: [''],
       locationName: [''],
       venueType: [''],
@@ -117,6 +122,7 @@ export class EventComponent extends FormBase implements OnInit {
       if (!area.eventDates || area.eventDates.length == 0) {
         area.eventDates = [{} as SepSchedule];
       }
+      
       area.eventDates.forEach(ed => {
         const edForm = this.createEventDate(ed);
         (areaForm.get('eventDates') as FormArray).push(edForm);
@@ -141,6 +147,7 @@ export class EventComponent extends FormBase implements OnInit {
 
   createEventDate(eventDate: SepSchedule) {
     let datesForm = this.fb.group({
+      eventScheduleId: [null],
       eventDate: [''],
       eventStart: [''],
       eventEnd: [''],
@@ -164,6 +171,7 @@ export class EventComponent extends FormBase implements OnInit {
 
   createServiceArea(area: SepServiceArea) {
     let areaForm = this.fb.group({
+      licencedAreaId: [null],
       eventName: [''],
       isBothOutdoorIndoor: [''],
       isIndoors: [''],
