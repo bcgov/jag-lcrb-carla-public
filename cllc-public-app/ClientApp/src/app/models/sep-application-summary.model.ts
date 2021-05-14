@@ -3,15 +3,15 @@ import { Contact } from "./contact.model";
 
 export class SepApplicationSummary {
   specialEventId: string; // server side primary key
-  eventStartDate: Date;
+  eventStartDate: Date | string;
   eventName: string;
   typeOfEvent: number;
   eventStatus: number;
   maximumNumberOfGuests: number;
-  dateSubmitted: Date;
+  dateSubmitted: Date | string;
 
   policeAccount?: Account;
   policeDecisionBy?: Contact;
   policeDecision?: number;
-  dateOfPoliceDecision?: Date;
+  dateOfPoliceDecision?: Date | string;
 }
