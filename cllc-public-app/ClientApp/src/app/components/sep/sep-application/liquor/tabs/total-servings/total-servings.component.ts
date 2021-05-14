@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-total-servings',
@@ -6,7 +6,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./total-servings.component.scss']
 })
 export class TotalServingsComponent implements OnInit {
-  declaredMaxServings: number = 1;
+  @Input() declaredMaxServings: number = 1;
   @Output() saved: EventEmitter<{declaredServings: number}> = new EventEmitter<{declaredServings: number}>();
   minServings = 1;
   maxServings = 114;
