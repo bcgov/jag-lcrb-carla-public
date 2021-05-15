@@ -62,7 +62,15 @@ export class MyApplicationsComponent implements OnInit {
     dialogRef.afterClosed()
       .subscribe((startApplication: boolean) => {
         if (startApplication) {
-          this.router.navigateByUrl('/sep/application/new/applicant')
+          const data = {
+            dateCreated: new Date()
+          } as SepApplication;
+          
+          this.db.saveSepApplication(data)
+          .then(id => {
+            this.router.navigateByUrl(`/sep/application/${id}/applicant`)
+          });
+
         }
       });
   }
@@ -109,7 +117,7 @@ export class MyApplicationsComponent implements OnInit {
   }
 
   async cloneApplication(app: SepApplication) {
-    let newId = await this.db.addSepApplication({
+    let newId = await this.db.saveSepApplication({
       ...app,
       id: undefined,
       dateAgreedToTnC: undefined,

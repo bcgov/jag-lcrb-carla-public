@@ -1,7 +1,7 @@
 import { SepServiceArea } from "./sep-service-are.model";
 
 export class SepLocation {
-    id: number;
+    locationId: string; // server side primary key
     locationPermitNumber: string;
     locationName: string;
     venueType: string;

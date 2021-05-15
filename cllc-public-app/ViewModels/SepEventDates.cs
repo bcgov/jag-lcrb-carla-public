@@ -4,7 +4,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 {
     public class SepEventDates
     {
-        public string Id { get; set; }
+        public string EventScheduleId { get; set; }
         public string SpecialEventId { get; set; }
         public string LocationId { get; set; }
         public System.DateTimeOffset? EventStart { get; set; }
