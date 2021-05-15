@@ -48,16 +48,36 @@ export class SpecialEventsDataService extends DataService {
   }
 
   getPoliceApprovalSepApplications(): Observable<SepApplicationSummary[]> {
-    const data: SepApplicationSummary = {
+    const mock1: SepApplicationSummary = {
       specialEventId: '7d98a02b-e14f-43e4-a8c9-6763ba6a5e76',
-      eventStartDate: new Date('2021-02-16T19:20:48+00:00'),
-      dateSubmitted: new Date('2020-04-01T07:00:00+00:00'),
+      eventStartDate: new Date('2021-10-25T19:20:48+00:00'),
+      dateSubmitted: new Date('2020-02-01T07:00:00+00:00'),
       eventName: 'Annual Block Watch Party',
       eventStatus: 999999,
       typeOfEvent: 1,
       maximumNumberOfGuests: 200,
     };
 
-    return of([data]);
+    const mock2: SepApplicationSummary = {
+      specialEventId: '7d98a02b-e14f-43e4-a8c9-6763ba6a5e76',
+      eventStartDate: new Date('2021-02-16T19:20:48+00:00'),
+      dateSubmitted: new Date('2020-03-01T07:00:00+00:00'),
+      eventName: 'Office Christmas Party',
+      eventStatus: 999999,
+      typeOfEvent: 1,
+      maximumNumberOfGuests: 50,
+    };
+
+    const mock3: SepApplicationSummary = {
+      specialEventId: '7d98a02b-e14f-43e4-a8c9-6763ba6a5e76',
+      eventStartDate: new Date('2021-06-20T19:20:48+00:00'),
+      dateSubmitted: new Date('2020-08-11T07:00:00+00:00'),
+      eventName: 'Community Event',
+      eventStatus: 999999,
+      typeOfEvent: 1,
+      maximumNumberOfGuests: 1300,
+    };
+
+    return of([mock1, mock2, mock3]);
   }
 }
