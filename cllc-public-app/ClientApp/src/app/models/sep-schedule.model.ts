@@ -1,8 +1,10 @@
 export class SepSchedule {
-    id: number;
-    eventDate: Date;
-    eventStart: string;
-    eventEnd: string;
-    serviceStart: string;
-    serviceEnd: string;
+    eventScheduleId: string; // server side primary key
+    specialEventId: string; // server side foreign key
+    locationId: string; // server side foreign key
+    eventStart: Date;
+    eventEnd: Date;
+    serviceStart: Date;
+    serviceEnd: Date;
+
 }

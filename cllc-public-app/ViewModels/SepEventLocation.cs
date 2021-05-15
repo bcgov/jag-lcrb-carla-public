@@ -4,7 +4,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 {
     public class SepEventLocation
     {
-        public string Id { get; set; }
+        public int Id { get; set; } // Client side local db id
+        public string LocationId { get; set; }
         public string SpecialEventId { get; set; }
         public string LocationDescription { get; set; }
         public string EventLocationCity { get; set; }

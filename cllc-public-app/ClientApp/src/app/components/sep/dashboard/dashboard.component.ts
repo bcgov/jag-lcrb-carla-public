@@ -7,6 +7,8 @@ import { AppState } from '@app/app-state/models/app-state';
 import { User } from '@models/user.model';
 import { Account } from '@models/account.model';
 import { StarterChecklistComponent } from '@components/sep/starter-checklist/starter-checklist.component';
+import { SepApplication } from '@models/sep-application.model';
+import { IndexDBService } from '@services/index-db.service';
 
 @Component({
   selector: 'app-sep-dashboard',
@@ -19,6 +21,7 @@ export class DashboardComponent implements OnInit {
   dataLoaded = false;
 
   constructor(public dialog: MatDialog,
+    private db: IndexDBService,
     private router: Router,
     private store: Store<AppState>) {
   }
@@ -49,7 +52,15 @@ export class DashboardComponent implements OnInit {
     dialogRef.afterClosed()
       .subscribe((startApplication: boolean) => {
         if (startApplication) {
-          this.router.navigateByUrl('/sep/application/new/applicant')
+          const data = {
+            dateCreated: new Date()
+          } as SepApplication;
+          
+          this.db.saveSepApplication(data)
+          .then(id => {
+            this.router.navigateByUrl(`/sep/application/${id}/applicant`)
+          });
+
         }
       });
   }

@@ -7,35 +7,37 @@
         </ng-template>
 
         <ng-container *ngFor="let step of steps; let index = index;">
-            <mat-step [stepControl]="applicantForm" [completed]="isStepCompleted(step)" *ngIf="step === 'applicant'">
+            <mat-step  [completed]="isStepCompleted(step)" *ngIf="step === 'applicant'">
                 <ng-template matStepLabel>Applicant</ng-template>
-                <form [formGroup]="applicantForm">
+                <!-- <form [formGroup]="applicantForm"> -->
                     <app-applicant [account]="account" [application]="application"
-                        *ngIf="stepper.selectedIndex === index" class="w-100" (saveComplete)="stepper.next()"
-                        #applicant>
+                        *ngIf="stepper.selectedIndex === index" class="w-100"
+                        (saveComplete)="completeStep(step); stepper.next()" #applicant>
                     </app-applicant>
-                </form>
+                <!-- </form> -->
             </mat-step>
 
-            <mat-step [stepControl]="eligibilityForm" [completed]="isStepCompleted(step)"
+            <mat-step [completed]="isStepCompleted(step)"
                 *ngIf="step === 'eligibility'">
                 <ng-template matStepLabel>Eligibility</ng-template>
-                <app-eligibility [account]="account" [applicationId]="application?.id"
-                    *ngIf="stepper.selectedIndex === index" class="w-100" (saveComplete)="stepper.next()" #eligibility>
+                <app-eligibility [account]="account" [applicationId]="applicationId"
+                    *ngIf="stepper.selectedIndex === index" class="w-100"
+                    (saveComplete)="completeStep(step); stepper.next()" #eligibility>
                 </app-eligibility>
             </mat-step>
 
 
             <mat-step [completed]="isStepCompleted(step)" *ngIf="step === 'event'">
                 <ng-template matStepLabel>Event</ng-template>
-                <app-event [applicationId]="application?.id" *ngIf="stepper.selectedIndex === index" class="w-100"
-                    (saveComplete)="stepper.next()" #event>
+                <app-event [applicationId]="applicationId" *ngIf="stepper.selectedIndex === index" class="w-100"
+                    (saveComplete)="completeStep(step); stepper.next();" #event>
                 </app-event>
             </mat-step>
 
             <mat-step [completed]="isStepCompleted(step)" *ngIf="step === 'liquor'">
                 <ng-template matStepLabel>Liquor</ng-template>
-                <app-liquor [applicationId]="application?.id" *ngIf="stepper.selectedIndex === index" class="w-100" #liquor>
+                <app-liquor [applicationId]="applicationId" *ngIf="stepper.selectedIndex === index" class="w-100"
+                    #liquor>
                 </app-liquor>
             </mat-step>
 
