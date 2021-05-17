@@ -66,9 +66,23 @@ export class LiquorComponent implements OnInit {
   saveToAPI() {
     this.db.getSepApplication(this.applicationId)
       .then((appData) => {
-        this.sepDataService.createSepApplication(appData)
-          .subscribe(result => {
-          });
+        if (appData.specialEventId) { // do an update ( the record exists in dynamics)
+          this.sepDataService.updateSepApplication({...appData, invoiceTrigger: 1 }, appData.specialEventId)
+            .subscribe(result => {
+              if (result.id) {
+                this.db.applications.update(result.id, result);
+                this.applicationId = result.id;
+              }
+            });
+        } else {
+          this.sepDataService.createSepApplication({...appData, invoiceTrigger: 1 })
+            .subscribe(result => {
+              if (result.id) {
+                this.db.applications.update(result.id, result);
+                this.applicationId = result.id;
+              }
+            });
+        }
       });
   }
 
