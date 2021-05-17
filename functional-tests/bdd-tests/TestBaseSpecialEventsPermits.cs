@@ -82,13 +82,31 @@ namespace bdd_tests
             Event Location
             */
 
+            var eventLocationName = "Point Ellis Winery";
+            var venueType = "banquet hall";
+            var addressLine1 = "Point Ellis Avenue";
+            var addressLine2 = "Victoria West";
+            var postalCode = "V9A6X3";
+            var maxGuests = "100";
+            var areaDescription = "Description of area";
+
             // select event location
+            var uiEventLocation =
+                ngDriver.FindElement(
+                By.CssSelector("[formcontrolname='lgIn'] option[value='Vancouver']"));
+            uiEventLocation.Click();
 
             // select 'Yes' for annual event
+            var uiAnnualEventYes = ngDriver.FindElement(By.Id("mat-radio-34"));
+            uiAnnualEventYes.Click();
 
-            // enter event loction name
+            // enter event location name
+            var uiEventLocationName = ngDriver.FindElement(By.CssSelector("locationName"));
+            uiEventLocationName.SendKeys(eventLocationName);
 
             // enter venue type
+            var uiVenueType = ngDriver.FindElement(By.CssSelector("venueType"));
+            uiVenueType.SendKeys(venueType);
 
             // enter address line 1
 
