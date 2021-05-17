@@ -19,7 +19,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 result = new ViewModels.SepEventDates
                 {
-                    Id = eventDates.AdoxioSpecialeventscheduleid,
+                    EventScheduleId = eventDates.AdoxioSpecialeventscheduleid,
                     SpecialEventId = eventDates._adoxioSpecialeventidValue,
                     LocationId = eventDates._adoxioSpecialeventlocationidValue,
                     EventStart = eventDates.AdoxioEventstart,

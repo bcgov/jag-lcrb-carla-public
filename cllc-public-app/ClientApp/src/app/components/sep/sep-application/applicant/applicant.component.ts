@@ -39,7 +39,6 @@ export class ApplicantComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private router: Router,
-    private ctrlContainer: FormGroupDirective,
     private db: IndexDBService) {
   }
 
@@ -50,8 +49,6 @@ export class ApplicantComponent implements OnInit {
       agreeToTnC: ['', [this.customRequiredCheckboxValidator()]],
       dateAgreedToTnC: ['']
     });
-
-    this.ctrlContainer.form.addControl("eligibility", this.form);
 
     if (this.application) {
       this.form.patchValue(this.application);
@@ -77,7 +74,7 @@ export class ApplicantComponent implements OnInit {
     };
   }
 
-  isValid(){
+  isValid() {
     this.form.markAsTouched();
     return this.form.valid;
   }
@@ -87,9 +84,9 @@ export class ApplicantComponent implements OnInit {
       ...this.application,
       lastUpdated: new Date(),
       status: 'unsubmitted',
-      stepsCompleted: (steps =>{
+      stepsCompleted: (steps => {
         const step = 'applicant';
-        if(steps.indexOf(step) === -1){
+        if (steps.indexOf(step) === -1) {
           steps.push(step);
         }
         return steps;
@@ -113,21 +110,21 @@ export class ApplicantComponent implements OnInit {
       return of(data.id);
     } else {
       data.dateCreated = new Date();
-      return from(this.db.addSepApplication(data));
+      return from(this.db.saveSepApplication(data));
     }
   }
 
-  next(){  
-    if(this.isValid()){
+  next() {
+    if (this.isValid()) {
       this.save().subscribe((appId: number) => {
-        this.router.navigateByUrl(`/sep/application/${appId}/eligibility`);
+        this.saveComplete.emit(true);
       });
     }
   }
 
-  saveForLater(){  
-      this.save()
-      .subscribe( id => {
+  saveForLater() {
+    this.save()
+      .subscribe(id => {
         this.router.navigateByUrl('/sep/my-applications')
       });
   }

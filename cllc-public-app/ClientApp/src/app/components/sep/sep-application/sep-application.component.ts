@@ -24,24 +24,17 @@ export const SEP_APPLICATION_STEPS = ["applicant", "eligibility", "event", "liqu
 export class SepApplicationComponent implements OnInit {
   faCheck = faCheck;
   securityScreeningEnabled: boolean;
-  applicationId: string;
+  applicationId: number;
   isFree: boolean = false;
   hasLGApproval: boolean = false;
 
-  @ViewChild("applicant")
-  accountProfileComponent: ApplicantComponent;
-  @ViewChild("eligibility")
-  licenseeChangesComponent: EligibilityComponent;
-  @ViewChild("event") applicationComponent: EventComponent;
-  @ViewChild("liquor") dynamicApplicationComponent: LiquorComponent;
+
   stepType: "summary";
   application: SepApplication;
   steps = SEP_APPLICATION_STEPS;
   account: Account;
   step: string;
-  applicantForm: FormGroup;
-  eligibilityForm: FormGroup;
-  eventForm: FormGroup;
+
   get selectedIndex(): number {
     let index = 0;
     if (this.step) {
@@ -50,7 +43,6 @@ export class SepApplicationComponent implements OnInit {
         index = 0
       }
     }
-
     return index;
   }
 
@@ -62,25 +54,26 @@ export class SepApplicationComponent implements OnInit {
       .subscribe(account => this.account = account);
     this.route.paramMap.subscribe(pmap => {
       // if the id is 'new' set it to null ( this will dictate whether the save is a create or an update)
-      this.applicationId = pmap.get('id') === 'new' ? null : pmap.get('id');
+      this.applicationId = pmap.get('id') === 'new' ? null : parseInt(pmap.get('id'), 10);
       this.step = pmap.get('step');
     });
   }
 
   ngOnInit() {
-    this.applicantForm = this.fb.group({});
-    this.eligibilityForm = this.fb.group({});
-    this.eventForm = this.fb.group({});
-    
+
+    this.getApplication();
+
+  }
+
+  getApplication() {
     if (this.applicationId) {
-      this.db.getSepApplication(parseInt(this.applicationId, 10))
+      this.db.getSepApplication(this.applicationId)
         .then(app => {
           this.application = app;
         }, err => {
           console.error(err);
         });
     }
-
   }
 
   canActivate(): Observable<boolean> {
@@ -96,6 +89,12 @@ export class SepApplicationComponent implements OnInit {
       }
     }
     return completed;
+  }
+
+  completeStep(step: string) {
+    if (this?.application?.stepsCompleted && step) {
+      this.application.stepsCompleted.push(step);
+    }
   }
 
   selectionChange(event) {
