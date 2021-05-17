@@ -15,6 +15,8 @@ Scenario: SEP Application (Private Corporation)
     And I complete the SEP eligibility form
     # Next button
     And I click on the Submit button
-    # To be completed
+    And I complete the SEP event form
+    # Next button
+    And I click on the Submit button
     And the account is deleted
     Then I see the login page
