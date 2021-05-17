@@ -33,27 +33,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        int? Top129 { get; set; }
+        int? Top130 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        int? Skip129 { get; set; }
+        int? Skip130 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        bool? Count129 { get; set; }
+        bool? Count130 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        string Filter129 { get; set; }
+        string Filter130 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        string Search129 { get; set; }
+        string Search130 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client
@@ -166,6 +166,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IAreas.
         /// </summary>
         IAreas Areas { get; }
+
+        /// <summary>
+        /// Gets the IAssignmenthistories.
+        /// </summary>
+        IAssignmenthistories Assignmenthistories { get; }
 
         /// <summary>
         /// Gets the IAuditlogrequests.
