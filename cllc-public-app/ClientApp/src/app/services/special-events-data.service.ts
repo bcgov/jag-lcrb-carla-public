@@ -49,7 +49,7 @@ export class SpecialEventsDataService extends DataService {
 
   getPoliceApprovalSepApplications(): Observable<SepApplicationSummary[]> {
     const mock1: SepApplicationSummary = {
-      specialEventId: '7d98a02b-e14f-43e4-a8c9-6763ba6a5e76',
+      specialEventId: '00000000-0000-0000-0000-00000000000',
       eventStartDate: new Date('2021-10-25T19:20:48+00:00'),
       dateSubmitted: new Date('2020-02-01T07:00:00+00:00'),
       eventName: 'Annual Block Watch Party',
@@ -59,7 +59,7 @@ export class SpecialEventsDataService extends DataService {
     };
 
     const mock2: SepApplicationSummary = {
-      specialEventId: '7d98a02b-e14f-43e4-a8c9-6763ba6a5e76',
+      specialEventId: '11111111-1111-1111-1111-111111111111',
       eventStartDate: new Date('2021-02-16T19:20:48+00:00'),
       dateSubmitted: new Date('2020-03-01T07:00:00+00:00'),
       eventName: 'Office Christmas Party',
@@ -69,7 +69,7 @@ export class SpecialEventsDataService extends DataService {
     };
 
     const mock3: SepApplicationSummary = {
-      specialEventId: '7d98a02b-e14f-43e4-a8c9-6763ba6a5e76',
+      specialEventId: '22222222-2222-2222-2222-222222222222',
       eventStartDate: new Date('2021-06-20T19:20:48+00:00'),
       dateSubmitted: new Date('2020-08-11T07:00:00+00:00'),
       eventName: 'Community Event',
