@@ -9,7 +9,7 @@ namespace bdd_tests
     public abstract partial class TestBase : Feature, IDisposable
     {
         [And(@"I complete the special events permits applicant info")]
-        public void SpecialEventsPermtsApplicantInfo()
+        public void SpecialEventsPermitsApplicantInfo()
         {
             /* 
             Page Title: Applicant Info
@@ -28,7 +28,7 @@ namespace bdd_tests
 
 
         [And(@"I complete the SEP eligibility form")]
-        public void SpecialEventsPermtsEligibility()
+        public void SpecialEventsPermitsEligibility()
         {
             /* 
             Page Title: Eligibility
@@ -75,8 +75,54 @@ namespace bdd_tests
         }
 
 
+        [And(@"I complete the SEP event form")]
+        public void SpecialEventsPermitsEventForm()
+        {
+            /* 
+            Event Location
+            */
+
+            // select event location
+
+            // select 'Yes' for annual event
+
+            // enter event loction name
+
+            // enter venue type
+
+            // enter address line 1
+
+            // enter address line 2
+
+            // enter postal code
+
+            // enter maximum number of guests
+
+            // enter area description
+
+            // enter maximum number of guests
+
+            // select 'No' for minors admission
+
+            // select service area is indoors checkbox
+
+            // select service area is outdoors checkbox
+
+            // select service area is both indoors and outdoors checkbox
+
+            // select event date
+
+            // select event start time
+
+            // select event end time
+
+            // select liquor service start time
+
+            // select liquor service end time
+        }
+
         [And(@"the SEP Checklist content is displayed")]
-        public void SpecialEventsPermtsChecklist()
+        public void SpecialEventsPermitsChecklist()
         {
             /* 
             Page Title: Application Checklist
