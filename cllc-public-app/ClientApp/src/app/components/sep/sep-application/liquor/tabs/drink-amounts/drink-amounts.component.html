@@ -1,4 +1,4 @@
-<form>
+<form [formGroup]="form">
     <p>
         In this step tell us the drink quantities, types and prices, if applicable, for your event.
     </p>
@@ -88,9 +88,29 @@
         sale price based on an average cost per drink for your guests.
     </p>
 
-    <!-- <section *ngFor="let item of form.controls">
+    <section [formGroupName]="i" *ngFor="let item of form.controls; let i = index;">
+        <select>
+            <option value=""></option>
+            <option value="1" selected="">Draught Beer (12 oz or 341 ml)</option>
+            <option value="2">Packaged Beer (bottle or can up to 340 ml)</option>
+            <option value="3">Draught Cider (12 oz or 341 ml)</option>
+            <option value="4">Packaged Cider/Cooler (bottle or can up to 341 ml)</option>
+            <option value="5">Wine by glass (5 oz or 142 ml)</option>
+            <option value="6">Spirits (1.5 oz or 43 ml)</option>
+            <option value="7" data-home-made="">UVin / Homemade Wine (5 oz or 142 ml)</option>
+            <option value="8" data-home-made="">UBrew / Homemade Beer and Cider (12 oz or 341 ml)</option>
+        </select>
+        <span>
+            Equivalent to 1 [750 ml bottle] of Wine
+        </span>
+        <input type="text">
+        <button>REMOVE</button>
+        <span>
+            Total = 113 servings (out of 113 servings)
+        </span>
+    </section>
 
-    </section> -->
+    <button mat-raised-button color="primary" (click)="addDrinkType()">ADD MORE DRINKS</button>
 
     <mat-expansion-panel>
         <mat-expansion-panel-header>

@@ -22,16 +22,16 @@ export class SepSchedule {
         let result = {} as IEventFormValue;
         result.eventDate = this.eventStart;
         if (this.eventStart) {
-            result.eventStartValue = format(this.eventStart, 'h:mm aa');
+            result.eventStartValue = format(new Date(this.eventStart), 'h:mm aa');
         }
         if (this.eventEnd) {
-            result.eventEndValue = format(this.eventEnd, 'h:mm aa');
+            result.eventEndValue = format(new Date(this.eventEnd), 'h:mm aa');
         }
         if (this.serviceStart) {
-            result.serviceStartValue = format(this.serviceStart, 'h:mm aa');
+            result.serviceStartValue = format(new Date(this.serviceStart), 'h:mm aa');
         }
         if (this.serviceEnd) {
-            result.serviceEndValue = format(this.serviceEnd, 'h:mm aa');
+            result.serviceEndValue = format(new Date(this.serviceEnd), 'h:mm aa');
         }
 
         return result;
