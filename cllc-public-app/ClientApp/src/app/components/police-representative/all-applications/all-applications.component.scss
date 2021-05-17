@@ -18,12 +18,6 @@ table {
     text-align: center;
   }
 
-  th.mat-column-status,
-  td.mat-column-status {
-    background-color: #e1e8f2 !important;
-    text-align: center;
-  }
-
   mat-row,
   mat-header-row,
   mat-footer-row,
@@ -34,7 +28,7 @@ table {
     border-left: 2px solid white;
   }
 
-  /* Column Widths */
+  /* Column Widths & Adjustments */
 
   .mat-column-eventName {
     max-width: 350px;
@@ -43,5 +37,9 @@ table {
   .mat-column-actions {
     max-width: 300px;
     text-align: center;
+  }
+
+  .mat-column-select {
+    overflow: visible;
   }
 }
