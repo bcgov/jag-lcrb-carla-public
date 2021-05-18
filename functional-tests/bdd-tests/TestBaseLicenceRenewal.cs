@@ -419,10 +419,6 @@ namespace bdd_tests
                 // confirm that correct information re positive responses for a Catering licensing renewal is displayed
                 Assert.True(ngDriver
                     .FindElement(By.XPath(
-                        "//body[contains(.,'Update your Shareholder Information on the Organization Details page')]"))
-                    .Displayed);
-                Assert.True(ngDriver
-                    .FindElement(By.XPath(
                         "//body[contains(.,'Submit a Third Party Operator application from the Licences Dashboard')]"))
                     .Displayed);
                 Assert.True(ngDriver
