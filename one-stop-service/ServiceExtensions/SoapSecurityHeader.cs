@@ -57,7 +57,7 @@ namespace OneStopServiceReference
             writer.WriteEndElement();
 
             writer.WriteStartElement("wsse", "Created", Namespace);
-            writer.WriteValue(_createdDate.ToString("YYYY-MM-DDThh:mm:ss"));
+            writer.WriteValue(_createdDate.ToString("yyyy-MM-ddThh:mm:ss"));
             writer.WriteEndElement();
 
             writer.WriteEndElement();
