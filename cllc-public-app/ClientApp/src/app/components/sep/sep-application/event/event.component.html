@@ -13,22 +13,40 @@
     <h3>Event Information</h3>
     <section [formGroup]="form" style="padding: 16px 32px;">
         <div class="d-flex justify-content-between">
-            <app-field label="Please select your event location (city/town/district or First Nation)" [required]="true"
-                [valid]="isValidOrNotTouched('lgIn')"
-                errorMessage="Events held in a private residence are not eligible for Special Event Permits">
-                <select formControlName="lgIn" class="form-control">
-                    <option value=""></option>
-                    <option value="334">100 Mile House</option>
-                    <option value="27">Abbotsford</option>
-                    <option value="49">Agassiz</option>
-                    <option value="39">Burnaby</option>
-                    <option value="259">Kelowna</option>
-                    <option value="261">Lake Country</option>
-                    <option value="36">Langley (Township Of)</option>
-                    <option value="397">Terrace</option>
-                    <option value="10">Vancouver</option>
-                </select>
-            </app-field>
+            <section>
+                <app-field label="Special event city" [required]="false"
+                    [valid]="isValidOrNotTouched('sepCity')" errorMessage="Please select a value">
+                    <input type="text" class="form-control" style="width: 500px;"
+                        placeholder="Type to search and then select a value" formControlName="sepCity"
+                        [matAutocomplete]="lgAutoCompleteBox" #lgAutoCompleteTrigger>
+                    <mat-autocomplete #lgAutoCompleteBox="matAutocomplete" [displayWith]="autocompleteDisplay">
+                        <mat-option *ngFor="let item of cities" [value]="item">
+                            {{item.name}}
+                        </mat-option>
+                    </mat-autocomplete>
+                    <br>
+                    <mat-progress-bar *ngIf="sepCityRequestInProgress" mode="indeterminate"></mat-progress-bar>
+                </app-field>
+                <section>
+                    <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
+                    <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
+                        <section *ngIf="form.get('sepCity').value.id">
+
+                            <mat-card class="mb-3">
+                                <label for="">Selected City </label>
+                                <div class="ml-2">
+                                    <label for="" class="mr-2">Name:</label>
+                                    <span>{{form.get('sepCity').value.name}}</span>
+                                </div>
+                            </mat-card>
+                        </section>
+
+                        <section *ngIf="!form.get('sepCity').value.id">
+                            No City selected
+                        </section>
+                    </div>
+                </section>
+            </section>
             <div>
                 <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip.toggle()" matTooltip="All locations in the application must be in the same municipality. You may submit more than one application 
                     if your event is in multiple municipalities." #tooltip="matTooltip">
@@ -148,11 +166,14 @@
                                                         </mat-radio-group>
                                                     </app-field>
 
-                                                    <mat-checkbox color="primary" formControlName="isIndoors">Service area is indoors
+                                                    <mat-checkbox color="primary" formControlName="isIndoors">Service
+                                                        area is indoors
                                                     </mat-checkbox> <br>
-                                                    <mat-checkbox color="primary" formControlName="isOutdoors">Service area is outdoors
+                                                    <mat-checkbox color="primary" formControlName="isOutdoors">Service
+                                                        area is outdoors
                                                     </mat-checkbox> <br>
-                                                    <mat-checkbox color="primary" formControlName="isBothOutdoorIndoor">Service area is
+                                                    <mat-checkbox color="primary" formControlName="isBothOutdoorIndoor">
+                                                        Service area is
                                                         both indoors and outdoors</mat-checkbox>
                                                 </section>
                                                 <div>
@@ -176,7 +197,8 @@
                                                 <p>
                                                     Permitted event times are: Indoor events: 9:00 a.m. - 2:00 a.m. the
                                                     following day.
-                                                    Outdoor events: 9:00 a.m. - 10:00 p.m. the same day. Under very limited
+                                                    Outdoor events: 9:00 a.m. - 10:00 p.m. the same day. Under very
+                                                    limited
                                                     circumstances,
                                                     you may receive permission from the Liquor and Cannabis Regulation
                                                     Branch to extend

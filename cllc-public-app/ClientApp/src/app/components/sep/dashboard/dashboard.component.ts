@@ -8,7 +8,7 @@ import { User } from '@models/user.model';
 import { Account } from '@models/account.model';
 import { StarterChecklistComponent } from '@components/sep/starter-checklist/starter-checklist.component';
 import { SepApplication } from '@models/sep-application.model';
-import { IndexDBService } from '@services/index-db.service';
+import { IndexedDBService } from '@services/indexed-db.service';
 
 @Component({
   selector: 'app-sep-dashboard',
@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
   dataLoaded = false;
 
   constructor(public dialog: MatDialog,
-    private db: IndexDBService,
+    private db: IndexedDBService,
     private router: Router,
     private store: Store<AppState>) {
   }

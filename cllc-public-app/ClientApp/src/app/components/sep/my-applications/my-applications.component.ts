@@ -6,7 +6,7 @@ import { ApplicationCancellationDialogComponent } from '@components/dashboard/ap
 import { SepApplication } from '@models/sep-application.model';
 import { User } from '@models/user.model';
 import { Store } from '@ngrx/store';
-import { IndexDBService } from '@services/index-db.service';
+import { IndexedDBService } from '@services/indexed-db.service';
 import { takeWhile } from 'rxjs/operators';
 import { StarterChecklistComponent } from '../starter-checklist/starter-checklist.component';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
@@ -23,7 +23,7 @@ export class MyApplicationsComponent implements OnInit {
   faEdit = faEdit;
 
   constructor(private store: Store<AppState>,
-    private db: IndexDBService,
+    private db: IndexedDBService,
     private route: ActivatedRoute,
     private router: Router,
     private dialog: MatDialog) {
@@ -65,9 +65,10 @@ export class MyApplicationsComponent implements OnInit {
           const data = {
             dateCreated: new Date()
           } as SepApplication;
-          
+          debugger;
           this.db.saveSepApplication(data)
           .then(id => {
+            debugger;
             this.router.navigateByUrl(`/sep/application/${id}/applicant`)
           });
 
@@ -119,7 +120,7 @@ export class MyApplicationsComponent implements OnInit {
   async cloneApplication(app: SepApplication) {
     let newId = await this.db.saveSepApplication({
       ...app,
-      id: undefined,
+      localId: undefined,
       dateAgreedToTnC: undefined,
       agreeToTnC: false,
       dateCreated: new Date()

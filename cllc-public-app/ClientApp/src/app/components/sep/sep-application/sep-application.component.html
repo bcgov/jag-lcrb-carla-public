@@ -1,5 +1,4 @@
 <div>
-    <!-- <h1></h1> -->
     <mat-horizontal-stepper [linear]="true" [selectedIndex]="selectedIndex" (selectionChange)="selectionChange($event)"
         #stepper>
         <ng-template matStepperIcon="edit">
@@ -20,7 +19,7 @@
             <mat-step [completed]="isStepCompleted(step)"
                 *ngIf="step === 'eligibility'">
                 <ng-template matStepLabel>Eligibility</ng-template>
-                <app-eligibility [account]="account" [applicationId]="applicationId"
+                <app-eligibility [account]="account" [localId]="localId"
                     *ngIf="stepper.selectedIndex === index" class="w-100"
                     (saveComplete)="completeStep(step); stepper.next()" #eligibility>
                 </app-eligibility>
@@ -29,14 +28,14 @@
 
             <mat-step [completed]="isStepCompleted(step)" *ngIf="step === 'event'">
                 <ng-template matStepLabel>Event</ng-template>
-                <app-event [applicationId]="applicationId" *ngIf="stepper.selectedIndex === index" class="w-100"
+                <app-event [localId]="localId" *ngIf="stepper.selectedIndex === index" class="w-100"
                     (saveComplete)="completeStep(step); stepper.next();" #event>
                 </app-event>
             </mat-step>
 
             <mat-step [completed]="isStepCompleted(step)" *ngIf="step === 'liquor'">
                 <ng-template matStepLabel>Liquor</ng-template>
-                <app-liquor [applicationId]="applicationId" *ngIf="stepper.selectedIndex === index" class="w-100"
+                <app-liquor (saveComplete)="completeStep(step); stepper.next();" [localId]="localId" *ngIf="stepper.selectedIndex === index" class="w-100"
                     #liquor>
                 </app-liquor>
             </mat-step>

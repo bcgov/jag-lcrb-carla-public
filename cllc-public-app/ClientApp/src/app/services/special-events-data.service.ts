@@ -46,5 +46,18 @@ export class SpecialEventsDataService extends DataService {
       .pipe(catchError(this.handleError));
   }
 
+  getSepCityAutocompleteData(name: string, defaults: boolean) {
+    const apiPath = `api/special-events/sep-city/autocomplete?name=${name}&defaults=${defaults}`;
+    return this.http.get<AutoCompleteItem[]>(apiPath, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
 
+
+}
+
+export class AutoCompleteItem {
+  id: string;
+  name: string;
+  policeJurisdictionName: string;
+  lGINName: string;
 }

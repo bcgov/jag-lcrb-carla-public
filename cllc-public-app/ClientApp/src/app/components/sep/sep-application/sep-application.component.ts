@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { AppState } from '@app/app-state/models/app-state';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
@@ -10,7 +10,7 @@ import { LiquorComponent } from './liquor/liquor.component';
 import { SummaryComponent } from './summary/summary.component';
 import { Account } from '@models/account.model';
 import { ActivatedRoute } from '@angular/router';
-import { IndexDBService } from '@services/index-db.service';
+import { IndexedDBService } from '@services/indexed-db.service';
 import { SepApplication } from '@models/sep-application.model';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
@@ -47,8 +47,8 @@ export class SepApplicationComponent implements OnInit {
   }
 
   constructor(private store: Store<AppState>,
-    private db: IndexDBService,
-    private fb: FormBuilder,
+    private db: IndexedDBService,
+    private cd: ChangeDetectorRef,
     private route: ActivatedRoute) {
     this.store.select(state => state.currentAccountState.currentAccount)
       .subscribe(account => this.account = account);
@@ -70,6 +70,7 @@ export class SepApplicationComponent implements OnInit {
       this.db.getSepApplication(this.applicationId)
         .then(app => {
           this.application = app;
+          debugger;
         }, err => {
           console.error(err);
         });
@@ -92,9 +93,11 @@ export class SepApplicationComponent implements OnInit {
   }
 
   completeStep(step: string) {
-    if (this?.application?.stepsCompleted && step) {
+    const steps = this?.application?.stepsCompleted;
+    if (steps && step && steps.indexOf(step) == -1) {
       this.application.stepsCompleted.push(step);
     }
+    this.cd.detectChanges();
   }
 
   selectionChange(event) {

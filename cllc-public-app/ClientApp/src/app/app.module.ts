@@ -279,7 +279,7 @@ import { EligibilityComponent } from './components/sep/sep-application/eligibili
 import { EventComponent } from './components/sep/sep-application/event/event.component';
 import { LiquorComponent } from './components/sep/sep-application/liquor/liquor.component';
 import { SummaryComponent } from './components/sep/sep-application/summary/summary.component';
-import { IndexDBService } from "@services/index-db.service";
+import { IndexedDBService } from "@services/indexed-db.service";
 import { MyApplicationsComponent } from './components/sep/my-applications/my-applications.component';
 import { ServiceCardProfileComponent } from "@components/servicecard-profile/servicecard-profile.component";
 import { ErrorAlertComponent } from './components/sep/error-alert/error-alert.component';
@@ -596,7 +596,7 @@ import { PoliceAuthGuard } from "@services/police-auth-guard.service";
     PolicyDocumentDataService,
     PreviousAddressDataService,
     ServiceCardAuthGuard,
-    IndexDBService,
+    IndexedDBService,
     EligibilityFormDataService,
     SurveyDataService,
     TiedHouseConnectionsDataService,
