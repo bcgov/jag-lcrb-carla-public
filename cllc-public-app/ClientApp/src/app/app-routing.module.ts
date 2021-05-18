@@ -92,6 +92,7 @@ import { DashboardComponent as PoliceDashboardComponent } from "@components/poli
 import { SepHomeComponent } from "@components/sep/home/home.component";
 import { ApprovalSettingsComponent } from "@components/police-representative/approval-settings/approval-settings.component";
 import { PoliceAuthGuard } from "@services/police-auth-guard.service";
+import { AllApplicationsComponent } from "@components/police-representative/all-applications/all-applications.component";
 
 const routes: Routes = [
   {
@@ -126,6 +127,12 @@ const routes: Routes = [
   {
     path: "sep/police/approval-settings",
     component: ApprovalSettingsComponent,
+    canActivate: [PoliceAuthGuard, FeatureGuard],
+    data: { feature: "Sep" }
+  },
+  {
+    path: "sep/police/all-applications",
+    component: AllApplicationsComponent,
     canActivate: [PoliceAuthGuard, FeatureGuard],
     data: { feature: "Sep" }
   },
