@@ -65,11 +65,9 @@ export class MyApplicationsComponent implements OnInit {
           const data = {
             dateCreated: new Date()
           } as SepApplication;
-          debugger;
           this.db.saveSepApplication(data)
-          .then(id => {
-            debugger;
-            this.router.navigateByUrl(`/sep/application/${id}/applicant`)
+          .then(localId => {
+            this.router.navigateByUrl(`/sep/application/${localId}/applicant`)
           });
 
         }
@@ -118,14 +116,14 @@ export class MyApplicationsComponent implements OnInit {
   }
 
   async cloneApplication(app: SepApplication) {
-    let newId = await this.db.saveSepApplication({
+    let localId = await this.db.saveSepApplication({
       ...app,
       localId: undefined,
       dateAgreedToTnC: undefined,
       agreeToTnC: false,
       dateCreated: new Date()
     });
-    this.router.navigateByUrl(`/sep/application/${newId}/applicant`)
+    this.router.navigateByUrl(`/sep/application/${localId}/applicant`)
   }
 
 

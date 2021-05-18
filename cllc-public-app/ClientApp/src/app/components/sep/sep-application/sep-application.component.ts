@@ -24,7 +24,7 @@ export const SEP_APPLICATION_STEPS = ["applicant", "eligibility", "event", "liqu
 export class SepApplicationComponent implements OnInit {
   faCheck = faCheck;
   securityScreeningEnabled: boolean;
-  applicationId: number;
+  localId: number;
   isFree: boolean = false;
   hasLGApproval: boolean = false;
 
@@ -54,7 +54,7 @@ export class SepApplicationComponent implements OnInit {
       .subscribe(account => this.account = account);
     this.route.paramMap.subscribe(pmap => {
       // if the id is 'new' set it to null ( this will dictate whether the save is a create or an update)
-      this.applicationId = pmap.get('id') === 'new' ? null : parseInt(pmap.get('id'), 10);
+      this.localId = pmap.get('id') === 'new' ? null : parseInt(pmap.get('id'), 10);
       this.step = pmap.get('step');
     });
   }
@@ -66,11 +66,10 @@ export class SepApplicationComponent implements OnInit {
   }
 
   getApplication() {
-    if (this.applicationId) {
-      this.db.getSepApplication(this.applicationId)
+    if (this.localId) {
+      this.db.getSepApplication(this.localId)
         .then(app => {
           this.application = app;
-          debugger;
         }, err => {
           console.error(err);
         });

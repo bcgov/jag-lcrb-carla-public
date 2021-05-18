@@ -23,7 +23,7 @@ export class SepApplication {
     permitNumber: string;
     isTastingEvent: boolean;
     isBeerGarden: boolean;
-    numMaxGuests: number;
+    maximumNumberOfGuests: number;
 
     eventLocations: SepLocation[] = [];
 
