@@ -32,7 +32,7 @@ export class AccountDataService extends DataService {
   }
 
   getCurrentAccountContacts(): Observable<Contact[]> {
-    return this.http.get<Account>(this.apiPath + "current/contacts", { headers: this.headers })
+    return this.http.get<Contact[]>(this.apiPath + "current/contacts", { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
