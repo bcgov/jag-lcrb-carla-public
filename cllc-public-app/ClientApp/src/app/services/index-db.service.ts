@@ -4,7 +4,6 @@ import { SepLocation } from '@models/sep-location.model';
 import { SepSchedule } from '@models/sep-schedule.model';
 import { SepServiceArea } from '@models/sep-service-are.model';
 import Dexie, { Collection, PromiseExtended, Table } from 'dexie';
-import relationships from 'dexie-relationships';
 
 @Injectable()
 export class IndexDBService {
@@ -15,7 +14,7 @@ export class IndexDBService {
   eventDates: Table<SepSchedule, number>;
 
   constructor() {
-    this.db = new Dexie('SepApplicationDatabase', { addons: [relationships] });
+    this.db = new Dexie('SepApplicationDatabase', { addons: [] });
     this.db.version(2).stores({
       applications: '++id,specialEventId, tempJobNumber,dateCreated,lastUpdated,eventName,applicantInfo,agreeToTnC,dateAgreedToTnC,stepsCompleted,eventStatus,totalServings,invoiceTrigger,eligibilityAtPrivateResidence,eligibilityMajorSignificance,eligibilityMajorSignificanceRational,eligibilityLocalSignificance,permitNumber,isTastingEvent,isBeerGarden,numMaxGuest',
     });
