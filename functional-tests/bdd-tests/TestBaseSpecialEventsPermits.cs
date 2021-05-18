@@ -9,7 +9,7 @@ namespace bdd_tests
     public abstract partial class TestBase : Feature, IDisposable
     {
         [And(@"I complete the special events permits applicant info")]
-        public void SpecialEventsPermtsApplicantInfo()
+        public void SpecialEventsPermitsApplicantInfo()
         {
             /* 
             Page Title: Applicant Info
@@ -28,7 +28,7 @@ namespace bdd_tests
 
 
         [And(@"I complete the SEP eligibility form")]
-        public void SpecialEventsPermtsEligibility()
+        public void SpecialEventsPermitsEligibility()
         {
             /* 
             Page Title: Eligibility
@@ -75,8 +75,72 @@ namespace bdd_tests
         }
 
 
+        [And(@"I complete the SEP event form")]
+        public void SpecialEventsPermitsEventForm()
+        {
+            /* 
+            Event Location
+            */
+
+            var eventLocationName = "Point Ellis Winery";
+            var venueType = "banquet hall";
+            var addressLine1 = "Point Ellis Avenue";
+            var addressLine2 = "Victoria West";
+            var postalCode = "V9A6X3";
+            var maxGuests = "100";
+            var areaDescription = "Description of area";
+
+            // select event location
+            var uiEventLocation =
+                ngDriver.FindElement(
+                By.CssSelector("[formcontrolname='lgIn'] option[value='Vancouver']"));
+            uiEventLocation.Click();
+
+            // select 'Yes' for annual event
+            var uiAnnualEventYes = ngDriver.FindElement(By.Id("mat-radio-34"));
+            uiAnnualEventYes.Click();
+
+            // enter event location name
+            var uiEventLocationName = ngDriver.FindElement(By.CssSelector("locationName"));
+            uiEventLocationName.SendKeys(eventLocationName);
+
+            // enter venue type
+            var uiVenueType = ngDriver.FindElement(By.CssSelector("venueType"));
+            uiVenueType.SendKeys(venueType);
+
+            // enter address line 1
+
+            // enter address line 2
+
+            // enter postal code
+
+            // enter maximum number of guests
+
+            // enter area description
+
+            // enter maximum number of guests
+
+            // select 'No' for minors admission
+
+            // select service area is indoors checkbox
+
+            // select service area is outdoors checkbox
+
+            // select service area is both indoors and outdoors checkbox
+
+            // select event date
+
+            // select event start time
+
+            // select event end time
+
+            // select liquor service start time
+
+            // select liquor service end time
+        }
+
         [And(@"the SEP Checklist content is displayed")]
-        public void SpecialEventsPermtsChecklist()
+        public void SpecialEventsPermitsChecklist()
         {
             /* 
             Page Title: Application Checklist

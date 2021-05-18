@@ -60,7 +60,7 @@ namespace Gov.Jag.Lcrb.OneStopService
             IList<MicrosoftDynamicsCRMadoxioOnestopmessageitem> result = null;
             try
             {
-                string filter = $"adoxio_dateacknowledgementreceived eq null and _adoxioLicenceValue eq {licenceId}";
+                string filter = $"adoxio_dateacknowledgementreceived eq null and _adoxio_licence_value eq {licenceId}";
                 List<string> _orderby = new List<String>() { "createdon" };
 
                 result = dynamicsClient.Onestopmessageitems.Get(filter: filter, orderby: _orderby).Value;

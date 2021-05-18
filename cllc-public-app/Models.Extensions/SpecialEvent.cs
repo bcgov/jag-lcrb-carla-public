@@ -38,9 +38,11 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.SpecialEventCity = specialEvent.AdoxioSpecialeventcity;
                 result.SpecialEventStreet2 = specialEvent.AdoxioSpecialeventstreet2;
                 result.EventEndDate = specialEvent.AdoxioEventenddate;
-                result.Statuscode = specialEvent.Statuscode;
+                result.Statuscode = specialEvent.Statuscode; // Event Status: Draft, Submitted, Pending Review, etc.
                 result.SpecialEventStreet1 = specialEvent.AdoxioSpecialeventstreet1;
                 result.MaximumNumberOfGuests = specialEvent.AdoxioMaxnumofguests;
+                result.DateSubmitted = specialEvent.AdoxioDatesubmitted;
+                result.PoliceApproval = specialEvent.AdoxioPoliceapproval;
 
                 if (specialEvent?.AdoxioSpecialeventSpecialeventlocations?.Count > 0)
                 {
@@ -71,9 +73,11 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioSpecialeventcity = from.SpecialEventCity;
             to.AdoxioSpecialeventstreet2 = from.SpecialEventStreet2;
             to.AdoxioEventenddate = from.EventEndDate;
-            to.Statuscode = from.Statuscode;
+            to.Statuscode = from.Statuscode; // Event Status: Draft, Submitted, Pending Review, etc.
             to.AdoxioSpecialeventstreet1 = from.SpecialEventStreet1;
             to.AdoxioMaxnumofguests = from.MaximumNumberOfGuests;
+            to.AdoxioDatesubmitted = from.DateSubmitted;
+            to.AdoxioPoliceapproval = from.PoliceApproval;
 
             // if (specialEvent?.AdoxioSpecialeventSpecialeventlocations?.Count > 0)
             // {

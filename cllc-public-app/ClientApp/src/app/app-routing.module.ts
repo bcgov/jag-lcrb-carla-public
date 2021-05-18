@@ -92,6 +92,7 @@ import { DashboardComponent as PoliceDashboardComponent } from "@components/poli
 import { SepHomeComponent } from "@components/sep/home/home.component";
 import { ApprovalSettingsComponent } from "@components/police-representative/approval-settings/approval-settings.component";
 import { PoliceAuthGuard } from "@services/police-auth-guard.service";
+import { AllApplicationsComponent } from "@components/police-representative/all-applications/all-applications.component";
 
 const routes: Routes = [
   {
@@ -130,6 +131,12 @@ const routes: Routes = [
     data: { feature: "Sep" }
   },
   {
+    path: "sep/police/all-applications",
+    component: AllApplicationsComponent,
+    canActivate: [PoliceAuthGuard, FeatureGuard],
+    data: { feature: "Sep" }
+  },
+  {
     path: "servicecard-profile",
     component: ServiceCardProfileComponent,
     canActivate: [ServiceCardAuthGuard, FeatureGuard],
@@ -154,11 +161,10 @@ const routes: Routes = [
     data: { feature: "CovidApplication" }
   },
   {
-    path: "org-structure",
-    component: ApplicationLicenseeChangesComponent,
+    path: "org-structure",               // block access to old page
+    component: PermanentChangeToALicenseeComponent,
     canActivate: [BCeidAuthGuard, FeatureGuard],
-    canDeactivate: [CanDeactivateGuard], // Comment this out if there are problems with duplicate saves
-    data: { feature: "LicenseeChanges" }
+    data: { feature: "PermanentChangesToLicensee" }
   },
   {
     path: "lg-approvals",
