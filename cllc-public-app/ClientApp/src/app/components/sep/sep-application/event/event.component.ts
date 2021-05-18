@@ -74,6 +74,7 @@ export class EventComponent extends FormBase implements OnInit {
     this.form = this.fb.group({
       sepCity: [''],
       isAnnualEvent: [''],
+      maximumNumberOfGuests: [''],
       eventLocations: this.fb.array([]),
     });
     this.setFormValue(this.sepApplication);
@@ -121,10 +122,11 @@ export class EventComponent extends FormBase implements OnInit {
     return result;
   }
 
-  getEventDates(location: FormGroup): FormArray {
+  getEventDates(locationIndex: number): FormArray {
     let result = this.fb.array([]);
     if (location) {
-      result = location.get('eventDates') as FormArray;
+      result = this.locations.at(locationIndex)
+        .get('eventDates') as FormArray;
     }
     return result;
   }
@@ -143,6 +145,7 @@ export class EventComponent extends FormBase implements OnInit {
       eventLocationProvince: [''],
       eventLocationPostalCode: [''],
       serviceAreas: this.fb.array([]),
+      eventDates: this.fb.array([]),
     });
     locationForm.patchValue(location);
 
@@ -152,17 +155,22 @@ export class EventComponent extends FormBase implements OnInit {
     location.serviceAreas.forEach(area => {
       const areaForm = this.createServiceArea(area);
       (locationForm.get('serviceAreas') as FormArray).push(areaForm);
-
-      if (!area.eventDates || area.eventDates.length == 0) {
-        area.eventDates = [{} as SepSchedule];
-      }
-
-      area.eventDates.forEach(ed => {
-        const edForm = this.createEventDate(ed);
-        (areaForm.get('eventDates') as FormArray).push(edForm);
-      });
-
     });
+
+    if (!location.serviceAreas || location.serviceAreas.length == 0) {
+      location.serviceAreas = [{} as SepServiceArea];
+    }
+
+    if (!location.eventDates || location.eventDates.length == 0) {
+      location.eventDates = [{} as SepSchedule];
+    }
+
+    location.eventDates.forEach(ed => {
+      const edForm = this.createEventDate(ed);
+      (locationForm.get('eventDates') as FormArray).push(edForm);
+    });
+
+
 
 
     this.locations.push(locationForm);
@@ -221,7 +229,6 @@ export class EventComponent extends FormBase implements OnInit {
       setting: [''],
       stateCode: [''],
       statusCode: [''],
-      eventDates: this.fb.array([]),
     });
     areaForm.patchValue(area);
 
@@ -250,14 +257,12 @@ export class EventComponent extends FormBase implements OnInit {
       ...this.sepApplication,
       ...this.form.value
     };
-    data?.eventLocations.forEach(loc => {
-      loc?.serviceAreas.forEach(area => {
-        let dateValues = [];
-        area?.eventDates.forEach(sched => {
-          dateValues.push(new SepSchedule(sched));
-        });
-        area.eventDates = dateValues;
+    data?.eventLocations.forEach(location => {
+      let dateValues = [];
+      location?.eventDates.forEach(sched => {
+        dateValues.push(new SepSchedule(sched));
       });
+      location.eventDates = dateValues;
     });
 
     return data as SepApplication;

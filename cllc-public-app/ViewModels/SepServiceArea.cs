@@ -21,7 +21,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string EventName { get; set; }
         public bool? IsOutdoors { get; set; }
         public string LicencedAreaDescription { get; set; }
-        public List<SepEventDates> EventDates { get; set; }
 
     }
 }

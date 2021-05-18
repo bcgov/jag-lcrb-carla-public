@@ -35,14 +35,12 @@ export class LiquorComponent implements OnInit {
 
   updateValue(value) {
     this.value = { ...this.value, ...value };
-    debugger;
   }
 
   ngOnInit(): void {
   }
 
   saveToDB() {
-    debugger;
     const data = {
       ...this.sepApplication,
       lastUpdated: new Date(),

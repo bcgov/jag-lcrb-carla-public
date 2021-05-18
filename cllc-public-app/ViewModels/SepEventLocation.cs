@@ -17,6 +17,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string LocationName { get; set; }
         public string PermitNumber { get; set; }
          public List<SepServiceArea> ServiceAreas { get; set; }
+        public List<SepEventDates> EventDates { get; set; }
         public int? Statecode { get; set; }
 
     }

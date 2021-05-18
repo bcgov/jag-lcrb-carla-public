@@ -7,7 +7,7 @@
         drink type you need? Use the handy tool below as a guide.
     </p>
 
-    <mat-expansion-panel>
+    <mat-expansion-panel  [expanded]="true">
         <mat-expansion-panel-header>
             <mat-panel-title>
                 NEED HELP TO DETERMINE YOUR DRINK TYPES?
@@ -18,7 +18,7 @@
         </section>
     </mat-expansion-panel>
 
-    <mat-expansion-panel>
+    <mat-expansion-panel  [expanded]="true">
         <mat-expansion-panel-header>
             <mat-panel-title>
                 NEED HELP PLANNING YOUR DRINK SIZES?
@@ -89,7 +89,7 @@
     </p>
 
     <section [formGroupName]="i" *ngFor="let item of form.controls; let i = index;">
-        <select>
+        <select class="form-control">
             <option value=""></option>
             <option value="1" selected="">Draught Beer (12 oz or 341 ml)</option>
             <option value="2">Packaged Beer (bottle or can up to 340 ml)</option>
@@ -112,7 +112,7 @@
 
     <button mat-raised-button color="primary" (click)="addDrinkType()">ADD MORE DRINKS</button>
 
-    <mat-expansion-panel>
+    <mat-expansion-panel  [expanded]="true">
         <mat-expansion-panel-header>
             <mat-panel-title>
                 PST Facts

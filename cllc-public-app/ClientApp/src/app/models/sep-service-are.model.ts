@@ -17,5 +17,4 @@ export class SepServiceArea {
     eventName: string;
     isOutdoors: boolean;
     licencedAreaDescription: string;
-    eventDates: SepSchedule[] = [];
 }

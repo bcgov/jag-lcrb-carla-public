@@ -57,8 +57,8 @@ export class DashboardComponent implements OnInit {
           } as SepApplication;
           
           this.db.saveSepApplication(data)
-          .then(id => {
-            this.router.navigateByUrl(`/sep/application/${id}/applicant`)
+          .then(localId => {
+            this.router.navigateByUrl(`/sep/application/${localId}/applicant`)
           });
 
         }
