@@ -301,6 +301,7 @@ import { DashboardComponent as PoliceDashboardComponent } from "@components/poli
 import { SepHomeComponent } from "@components/sep/home/home.component";
 import { ApprovalSettingsComponent } from "@components/police-representative/approval-settings/approval-settings.component";
 import { PoliceAuthGuard } from "@services/police-auth-guard.service";
+import { AllApplicationsComponent } from "@components/police-representative/all-applications/all-applications.component";
 
 
 @NgModule({
@@ -473,6 +474,7 @@ import { PoliceAuthGuard } from "@services/police-auth-guard.service";
     PoliceDashboardComponent,
     SepHomeComponent,
     ApprovalSettingsComponent,
+    AllApplicationsComponent,
   ],
   imports: [
     AppRoutingModule,
