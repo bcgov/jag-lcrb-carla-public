@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Account } from '@models/account.model';
 import { SepApplication } from '@models/sep-application.model';
 import { trigger, state, style, animate, transition } from '@angular/animations';
-import { IndexDBService } from '@services/index-db.service';
+import { IndexedDBService } from '@services/indexed-db.service';
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { FormBase } from '@shared/form-base';
@@ -28,7 +28,7 @@ export class EligibilityComponent extends FormBase implements OnInit {
   }
 
   @Input()
-  set applicationId(value: number) {
+  set localId(value: number) {
     this._appID = value;
     //get the last saved application
     this.db.getSepApplication(value)
@@ -42,7 +42,7 @@ export class EligibilityComponent extends FormBase implements OnInit {
 
   constructor(private fb: FormBuilder,
     private router: Router,
-    private db: IndexDBService) {
+    private db: IndexedDBService) {
     super();
   }
 
@@ -150,8 +150,8 @@ export class EligibilityComponent extends FormBase implements OnInit {
       ...this.form.value
     } as SepApplication;
 
-    if (data.id) {
-      this.db.applications.update(data.id, data);
+    if (data.localId) {
+      this.db.applications.update(data.localId, data);
     } else {
       console.error("The id should already exist at this point.")
     }

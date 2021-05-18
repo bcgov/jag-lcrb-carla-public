@@ -289,18 +289,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                 {
                                     if (string.IsNullOrEmpty(area.LicencedAreaId))
                                     { // create record
-                                    newArea = _dynamicsClient.Specialeventlicencedareas.Create(newArea);
+                                        newArea = _dynamicsClient.Specialeventlicencedareas.Create(newArea);
                                         area.LicencedAreaId = newArea.AdoxioSpecialeventlicencedareaid;
                                     }
                                     else
                                     { // update record
-                                    _dynamicsClient.Specialeventlicencedareas.Update(area.LicencedAreaId, newArea);
+                                        _dynamicsClient.Specialeventlicencedareas.Update(area.LicencedAreaId, newArea);
                                         newArea.AdoxioSpecialeventlicencedareaid = area.LicencedAreaId;
                                     }
 
 
-                                // Add event dates to the new Area
-                                if (area.EventDates?.Count > 0)
+                                    // Add event dates to the new Area
+                                    if (area.EventDates?.Count > 0)
                                     {
                                         area.EventDates.ForEach(dates =>
                                         {
@@ -313,12 +313,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                             {
                                                 if (string.IsNullOrEmpty(dates.EventScheduleId))
                                                 { // create record
-                                                newDates = _dynamicsClient.Specialeventschedules.Create(newDates);
+                                                    newDates = _dynamicsClient.Specialeventschedules.Create(newDates);
                                                     dates.SpecialEventId = newDates.AdoxioSpecialeventscheduleid;
                                                 }
                                                 else
                                                 { // update record
-                                                _dynamicsClient.Specialeventschedules.Update(dates.EventScheduleId, newDates);
+                                                    _dynamicsClient.Specialeventschedules.Update(dates.EventScheduleId, newDates);
                                                 }
                                             }
                                             catch (HttpOperationException httpOperationException)
@@ -359,6 +359,55 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 result.Add(item.ToViewModel());
             }
             return new JsonResult(result);
+        }
+
+        /// <summary>
+        /// Gets SepCity Autocomplete data for a given name using startswith
+        /// </summary>
+        /// <param name="defaults">If set to true, the name parameter is ignored and a list of `preview` cities is returned instead</param>
+        /// <param name="name">The name to filter by using startswith</param>
+        /// <returns>Dictionary of key value pairs with accountid and name as the pairs</returns>
+        [HttpGet("sep-city/autocomplete")]
+        // [Authorize(Policy = "Business-User")]
+        public IActionResult GetAutocomplete(string name, bool defaults)
+        {
+            var results = new List<ViewModels.SepCity>();
+            try
+            {
+                string filter = null;
+                // escape any apostophes.
+                if (name != null)
+                {
+                    name = name.Replace("'", "''");
+                    // select active accounts that match the given name
+                    if (defaults)
+                    {
+                        filter = $"statecode eq 0 and adoxio_ispreview req true)";
+                    } else {
+                        filter = $"statecode eq 0 and contains(adoxio_name,'{name}')";
+                    }
+                }
+                var cities = _dynamicsClient.Sepcities.Get(filter: filter, top: 20).Value;
+                foreach (var city in cities)
+                {
+                    var transferAccount = new ViewModels.SepCity
+                    {
+                        Id = city.AdoxioSepcityid,
+                        Name = city.AdoxioName
+                    };
+                    results.Add(transferAccount);
+                }
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Error while getting sep city autocomplete data.");
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error while getting sep city autocomplete data.");
+            }
+
+            return new JsonResult(results);
         }
     }
 }

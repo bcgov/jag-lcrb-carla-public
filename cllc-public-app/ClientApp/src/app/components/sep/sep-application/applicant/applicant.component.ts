@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { PolicyDocumentComponent } from '@components/policy-document/policy-document.component';
 import { Account } from '@models/account.model';
 import { SepApplication } from '@models/sep-application.model';
-import { IndexDBService } from '@services/index-db.service';
+import { IndexedDBService } from '@services/indexed-db.service';
 import { FormBase } from '@shared/form-base';
 import { Observable } from 'rxjs';
 import { from } from 'rxjs/internal/observable/from';
@@ -39,7 +39,7 @@ export class ApplicantComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private router: Router,
-    private db: IndexDBService) {
+    private db: IndexedDBService) {
   }
 
   ngOnInit(): void {
@@ -105,9 +105,9 @@ export class ApplicantComponent implements OnInit {
       ...this.form.value
     } as SepApplication;
 
-    if (data.id) {
-      this.db.applications.update(data.id, data);
-      return of(data.id);
+    if (data.localId) {
+      this.db.applications.update(data.localId, data);
+      return of(data.localId);
     } else {
       data.dateCreated = new Date();
       return from(this.db.saveSepApplication(data));

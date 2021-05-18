@@ -1,14 +1,17 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faMapMarkerAlt, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { SepApplication } from '@models/sep-application.model';
-import { IndexDBService } from '@services/index-db.service';
+import { IndexedDBService } from '@services/indexed-db.service';
 import { FormBase } from '@shared/form-base';
 import { Account } from '@models/account.model';
 import { SepLocation } from '@models/sep-location.model';
 import { SepSchedule } from '@models/sep-schedule.model';
 import { SepServiceArea } from '@models/sep-service-are.model';
+import { AutoCompleteItem, SpecialEventsDataService } from '@services/special-events-data.service';
+import { filter, tap, switchMap } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-event',
@@ -27,11 +30,13 @@ export class EventComponent extends FormBase implements OnInit {
   form: FormGroup;
   showValidationMessages: boolean;
   validationMessages: string[];
+  previewCities: AutoCompleteItem[] = [];
+  autocompleteCities: AutoCompleteItem[] = [];
   get minDate() {
     return new Date();
   }
   @Input()
-  set applicationId(value: number) {
+  set localId(value: number) {
     this._appID = value;
     //get the last saved application
     this.db.getSepApplication(value)
@@ -43,23 +48,53 @@ export class EventComponent extends FormBase implements OnInit {
       });
   };
 
+  get cities(): AutoCompleteItem[] {
+    return [...this.autocompleteCities, ...this.previewCities];
+  }
+
   get locations(): FormArray {
     return this.form.get('eventLocations') as FormArray;
   }
+  sepCityRequestInProgress: boolean;
 
   constructor(private fb: FormBuilder,
     private router: Router,
-    private db: IndexDBService) {
+    private cd: ChangeDetectorRef,
+    private snackBar: MatSnackBar,
+    private specialEventsDataService: SpecialEventsDataService,
+    private db: IndexedDBService) {
     super();
+    specialEventsDataService.getSepCityAutocompleteData(null, true)
+      .subscribe(results => {
+        this.previewCities = results;
+      });
   }
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      lgIn: [''],
+      sepCity: [''],
       isAnnualEvent: [''],
       eventLocations: this.fb.array([]),
     });
     this.setFormValue(this.sepApplication);
+
+    this.form.get('sepCity').valueChanges
+      .pipe(filter(value => value && value.length >= 3),
+        tap(_ => {
+          this.autocompleteCities = [];
+          this.sepCityRequestInProgress = true;
+        }),
+        switchMap(value => this.specialEventsDataService.getSepCityAutocompleteData(value, false))
+      )
+      .subscribe(data => {
+        this.autocompleteCities = data;
+        this.sepCityRequestInProgress = false;
+
+        this.cd.detectChanges();
+        if (data && data.length === 0) {
+          this.snackBar.open('No match found', '', { duration: 2500, panelClass: ['green-snackbar'] });
+        }
+      });
   }
 
   setFormValue(app: SepApplication) {
@@ -199,6 +234,9 @@ export class EventComponent extends FormBase implements OnInit {
     serviceAreas.removeAt(serviceAreaIndex);
   }
 
+  autocompleteDisplay(item: AutoCompleteItem) {
+    return item?.name;
+  }
 
   isValid() {
     this.markControlsAsTouched(this.form);
@@ -228,7 +266,7 @@ export class EventComponent extends FormBase implements OnInit {
 
   save() {
     const data = {
-      id: this._appID,
+      localId: this._appID,
       lastUpdated: new Date(),
       status: 'unsubmitted',
       stepsCompleted: (steps => {
@@ -241,8 +279,8 @@ export class EventComponent extends FormBase implements OnInit {
       ...this.getFormValue()
     } as SepApplication;
 
-    if (data.id) {
-      this.db.applications.update(data.id, data);
+    if (data.localId) {
+      this.db.applications.update(data.localId, data);
     } else {
       console.error("The id should already exist at this point.")
     }
