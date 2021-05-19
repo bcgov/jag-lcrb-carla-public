@@ -1051,11 +1051,10 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <returns></returns>
         public static List<MicrosoftDynamicsCRMcontact> GetActiveContactsByAccountId(this IDynamicsClient system, string accountId)
         {
-            string sanitizedSiteminderId = GuidUtility.SanitizeGuidString(accountId);
             List<MicrosoftDynamicsCRMcontact> result = null;
             try
             {
-                var contactsResponse = system.Contacts.Get(filter: "statecode eq 0 and _accountid_value eq " + sanitizedSiteminderId);
+                var contactsResponse = system.Contacts.Get(filter: $"statecode eq 0 and _accountid_value eq {accountId}");
                 result = contactsResponse.Value.ToList();
             }
             catch (HttpOperationException)
