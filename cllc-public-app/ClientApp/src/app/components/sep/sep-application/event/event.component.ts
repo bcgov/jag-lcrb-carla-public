@@ -181,8 +181,8 @@ export class EventComponent extends FormBase implements OnInit {
     this.locations.removeAt(locationIndex);
   }
 
-  addEventDate(sched: SepSchedule, area: FormGroup) {
-    const eventDates = area.get('eventDates') as FormArray;
+  addEventDate(sched: SepSchedule, location: FormGroup) {
+    const eventDates = location.get('eventDates') as FormArray;
     const dates = this.createEventDate(sched);
     eventDates.push(dates);
   }
@@ -198,6 +198,11 @@ export class EventComponent extends FormBase implements OnInit {
     });
     eventDate = Object.assign(new SepSchedule(null), eventDate);
     const val = eventDate.toEventFormValue();
+    
+    // Set default to event start date
+    if (!val.eventDate) {
+      val.eventDate = this?.sepApplication?.eventStartDate;
+    }
     datesForm.patchValue(val);
     return datesForm;
   }
