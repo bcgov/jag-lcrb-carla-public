@@ -63,24 +63,24 @@ export class MyApplicationsComponent implements OnInit {
       .subscribe((startApplication: boolean) => {
         if (startApplication) {
           const data = {
+            stepsCompleted: [],
             dateCreated: new Date()
           } as SepApplication;
           this.db.saveSepApplication(data)
           .then(localId => {
             this.router.navigateByUrl(`/sep/application/${localId}/applicant`)
           });
-
         }
       });
   }
 
   /**
    *
-   * @param applicationId
+   * @param localId
    * @param establishmentName
    * @param applicationName
    */
-  cancelApplication(applicationId: string, establishmentName: string, applicationName: string) {
+  cancelApplication(localId: number, establishmentName: string, applicationName: string) {
     const dialogConfig = {
       disableClose: true,
       autoFocus: true,
@@ -97,7 +97,7 @@ export class MyApplicationsComponent implements OnInit {
     dialogRef.afterClosed()
       .subscribe(async (cancelApplication) => {
         if (cancelApplication) {
-          this.db.deleteSepApplication(parseInt(applicationId, 10));
+          this.db.deleteSepApplication(localId);
           await this.getApplications()
         }
       });
