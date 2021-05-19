@@ -128,7 +128,7 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
             }
 
             // 
-            body.timeStamp = DateTime.Now.ToString("yyyy-MM-dd-hh.mm.ssssss");
+            body.timeStamp = Utils.GetTimeStamp();
 
             return body;
         }
