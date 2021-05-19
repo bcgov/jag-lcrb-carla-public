@@ -4,10 +4,10 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 {
     public class SepServiceArea
     {
-        public int Id { get; set; } // Client side local db id
-        public string LicencedAreaId { get; set; }
-        public string SepLocationId { get; set; }
+        public string Id { get; set; }
+        public string LocationId { get; set; }
         public string SpecialEventId { get; set; }
+        public int LocalId { get; set; } // Client side local db id
         public bool? MinorPresent { get; set; }
         public int? LicencedAreaMaxNumberOfGuests { get; set; }
         public int? MaximumNumberOfGuests { get; set; }
