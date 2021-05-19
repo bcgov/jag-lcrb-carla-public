@@ -9,8 +9,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
     public class SpecialEvent
     {
-        public int Id { get; set; } //client side local db id
-        public string SpecialEventId { get; set; }
+        public string Id { get; set; }
+        public int LocalId { get; set; } //client side local db id
         public bool? AdmissionFee { get; set; }
         public System.DateTimeOffset? EventStartDate { get; set; }
         public System.DateTimeOffset? EventEndDate { get; set; }
