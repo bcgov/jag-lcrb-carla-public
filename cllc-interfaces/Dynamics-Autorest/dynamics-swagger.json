@@ -37103,6 +37103,10 @@
         "adoxio_lgtitleposition": {
           "type": "string"
         },
+        "adoxio_checklistinspectionreviewcomplete": {
+          "format": "int32",
+          "type": "integer"
+        },
         "adoxio_checklistopenapplicationsreviewed": {
           "format": "int32",
           "type": "integer"
@@ -59410,9 +59414,6 @@
         "adoxio_responsibleindividualposition": {
           "type": "string"
         },
-        "adoxio_removalofintoxicatedpatronsdetails": {
-          "type": "string"
-        },
         "adoxio_isinvoicepaid": {
           "type": "boolean"
         },
@@ -59514,6 +59515,9 @@
         "_adoxio_customer_value": {
           "type": "string"
         },
+        "_adoxio_pmuareaid_value": {
+          "type": "string"
+        },
         "adoxio_fundraisingpurpose": {
           "format": "int32",
           "type": "integer"
@@ -59562,6 +59566,9 @@
           "type": "integer"
         },
         "adoxio_responsibleindividualfirstname": {
+          "type": "string"
+        },
+        "adoxio_lcrbapprovalcomment": {
           "type": "string"
         },
         "_owningbusinessunit_value": {
@@ -59706,11 +59713,15 @@
           "format": "date-time",
           "type": "string"
         },
+        "adoxio_donatedorconsular": {
+          "format": "int32",
+          "type": "integer"
+        },
         "versionnumber": {
           "format": "int64",
           "type": "string"
         },
-        "_adoxio_pmuareaid_value": {
+        "adoxio_removalofintoxicatedpatronsdetails": {
           "type": "string"
         },
         "adoxio_securitycompanystreet2": {
