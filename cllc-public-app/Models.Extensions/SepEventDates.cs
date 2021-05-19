@@ -27,7 +27,6 @@ namespace Gov.Lclb.Cllb.Public.Models
                     ServiceStart = eventDates.AdoxioServicestart,
                     ServiceEnd = eventDates.AdoxioServiceend,
                 };
-
             }
             return result;
         }

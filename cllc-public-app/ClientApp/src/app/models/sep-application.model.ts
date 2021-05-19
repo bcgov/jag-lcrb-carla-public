@@ -4,6 +4,7 @@ export class SepApplication {
     id: string; // server side primary key
     localId?: number;  // indexed db primary key
     tempJobNumber: string;
+    eventStartDate: Date;
     dateCreated: Date;
     lastUpdated: Date;
     eventName: string;
