@@ -41,7 +41,7 @@ export class DashboardComponent implements OnInit {
     const dialogConfig = {
       disableClose: true,
       autoFocus: true,
-      width: "500px",
+      width: "600px",
       data: {
         showStartApp: true
       }
@@ -55,7 +55,7 @@ export class DashboardComponent implements OnInit {
           const data = {
             dateCreated: new Date()
           } as SepApplication;
-          
+
           this.db.saveSepApplication(data)
           .then(id => {
             this.router.navigateByUrl(`/sep/application/${id}/applicant`)

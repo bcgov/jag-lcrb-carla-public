@@ -31,7 +31,7 @@ export class ResourcesComponent implements OnInit {
     const dialogConfig = {
       disableClose: true,
       autoFocus: true,
-      width: '500px',
+      width: '600px',
       data: {
         showStartApp: false
       }

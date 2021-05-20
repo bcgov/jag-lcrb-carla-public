@@ -1,4 +1,5 @@
-<div class="ml-4 mr-4" style="width:1000px;">
+<div class="row" style="padding:20px;">
+  <div class="col-md-8 col-sm-12">
     <h1>{{title}}</h1>
     <section class="m-3 mat-elevation-z0" [innerHtml]="body">
     </section>
@@ -6,49 +7,63 @@
     <section class="d-flex justify-content-around m-3">
         <mat-card style="flex: 1;" class="m-3 mat-elevation-z0">
             <mat-card-header>
-                <mat-card-title>Secure Sign In</mat-card-title>
+                <mat-card-title>Option 1: BCeID</mat-card-title>
             </mat-card-header>
-            <mat-card-content>
-                <p>
-                    Sign into our secure portal to create or view multiple permit applications
-                </p>
-                <section
-                    class="d-flex flex-column align-items-center pb-3">
-                    <h4>Login Using Business BCeID</h4>
+            <mat-card-content class="d-flex flex-column align-items-center">
+
+                  <img src="assets/bceid_default_logo.jpg"  alt="BCeID logo">
                     <div class="d-flex justify-content-around w-100">
-                        <button mat-raised-button color="secondary"
-                            (click)="window.location.href='https://www.bceid.ca/register/'">
-                            Register for BCeID
-                        </button>
                         <button [disabled]="disableLogin" mat-raised-button color="primary"
                             (click)="window.location.href='login?source=sep'">
-                            Login with BCeID
+                            Login with Basic or Business BCeID
                         </button>
                     </div>
-                </section>
-                <section
-                    class="d-flex flex-column align-items-center mt-2 pb-3">
-                    <h4>BC Services Card</h4>
-                    <div class="d-flex justify-content-around w-100">
-                        <button [disabled]="disableLogin" mat-raised-button color="primary"
-                            (click)="window.location.href='bcservice?source=sep'">Login with BC Services
-                            Card</button>
-                    </div>
-                </section>
+
+
+                <a href="http://www.bceid.ca" style="margin-top:20px;" target="_blank"><fa-icon [icon]="faExclamationCircle" style="margin-right: 5px;"></fa-icon> Don't have a BCeID account? Find out how to get one.</a>
             </mat-card-content>
         </mat-card>
         <mat-card style="flex: 1;" class="m-3 mat-elevation-z0">
             <mat-card-header>
-                <mat-card-title>Apply as Guest</mat-card-title>
+                <mat-card-title>Option 2: BC Services Card</mat-card-title>
             </mat-card-header>
             <mat-card-content class="d-flex flex-column align-items-center">
-                <p>
-                    If you are applying for a simple event for less than 500 people and [other low risk profile
-                    criteria] you may apply as a guest:
-                </p>
-                <button style="margin: auto;" mat-raised-button color="primary">Apply as Guest</button>
+              <img src="assets/bc-logo-white-bg.jpg" height="51" alt="BC logo">
+              <div class="d-flex justify-content-around w-100">
+                  <button [disabled]="disableLogin" mat-raised-button color="primary"
+                      (click)="window.location.href='bcservice?source=sep'">Login with BC Services
+                      Card</button>
+              </div>
+
+              <a href="http://www.gov.bc.ca/mobilebcservicescard" style="margin-top:20px;" target="_blank"><fa-icon [icon]="faExclamationCircle" style="margin-right: 5px;"></fa-icon>Don't have a mobile BC Services Card? Get Set up.</a>
             </mat-card-content>
         </mat-card>
     </section>
 
+</div>
+
+<div style="padding-left: 0px;" class="col-md-4 col-sm-12">
+  <div class="side-box-wrapper">
+    <section class="side-box">
+      <section style="display: flex">
+        <table>
+          <tr>
+            <td>
+              <h2 style="margin: 0px; margin-bottom: 10px;">{{calloutTitle}}</h2>
+              <section [innerHtml]="callout" style="color: white;"></section>
+            </td>
+          </tr>
+        </table>
+      </section>
+      <p style="padding-top: 30px;">
+        <span>
+
+        </span>
+      </p>
+
+    </section>
+
+
+  </div>
+</div>
 </div>
