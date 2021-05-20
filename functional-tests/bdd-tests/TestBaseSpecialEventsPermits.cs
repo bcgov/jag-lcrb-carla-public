@@ -176,7 +176,7 @@ namespace bdd_tests
 
 
         [And(@"I complete the Liquor form for total servings")]
-        public void SpecialEventsPermitLiquorForm()
+        public void SpecialEventsPermitLiquorFormTotalServings()
         {
             var beerSizeOfTasting = "100";
             var beerNumberOfTastings = "5";
@@ -224,6 +224,30 @@ namespace bdd_tests
             // enter the spirits price per tasting drink
             var uiSpiritsPricePerTastingDrink = ngDriver.FindElement(By.CssSelector("[formcontrolname='pricePerTastingDrink']"));
             uiSpiritsPricePerTastingDrink.SendKeys(spiritsPricePerTastingDrink);
+        }
+
+
+        [And(@"I complete the Liquor form for selling drinks")]
+        public void SpecialEventsPermitLiquorFormSellingDrinks()
+        {
+            // select 'Yes' for charging for drinks
+            var uiChargingForDrinksYes = ngDriver.FindElement(By.CssSelector("[formcontrolname='chargingForDrinks'] option[value='recover_cost']"));
+            uiChargingForDrinksYes.Click();
+
+            // select 'No' for 'Are you hosting this event as a GST registered organization?'
+            var uiGSTRegisteredOrganizationNo = ngDriver.FindElement(By.Id("mat-radio-43"));
+            uiGSTRegisteredOrganizationNo.Click();
+
+            // select 'No' for 'Are you entering into an exclusivity agreement with a manufacturer for your charity event?'
+            var uiExclusivityAgreementNo = ngDriver.FindElement(By.Id("mat-radio-40"));
+            uiExclusivityAgreementNo.Click();
+        }
+
+
+        [And(@"I complete the Liquor form for drink amounts")]
+        public void SpecialEventsPermitLiquorFormDrinkAmounts()
+        { 
+            //TODO
         }
 
 
