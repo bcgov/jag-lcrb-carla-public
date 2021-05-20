@@ -175,6 +175,58 @@ namespace bdd_tests
         }
 
 
+        [And(@"I complete the Liquor form for total servings")]
+        public void SpecialEventsPermitLiquorForm()
+        {
+            var beerSizeOfTasting = "100";
+            var beerNumberOfTastings = "5";
+            var beerPricePerTastingDrink = "7";
+
+            var wineSizeOfTasting = "100";
+            var wineNumberOfTastings = "5";
+            var winePricePerTastingDrink = "7";
+
+            var spiritsNumberOfTastings = "5";
+            var spiritsPricePerTastingDrink = "7";
+
+            // open the conversion tool
+            var uiLiquorServiceEndTime = ngDriver.FindElement(By.Id("mat-expansion-panel-header-16"));
+            uiLiquorServiceEndTime.Click();
+
+            // enter the beer, ciders and coolers size of tasting
+            var uiBeerSizeOfTasting = ngDriver.FindElement(By.CssSelector("[formcontrolname='sizeOfTasting']"));
+            uiBeerSizeOfTasting.SendKeys(beerSizeOfTasting);
+
+            // enter the beer, ciders and coolers number of tastings
+            var uiBeerNumberOfTastings = ngDriver.FindElement(By.CssSelector("[formcontrolname='numberOfTastings']"));
+            uiBeerNumberOfTastings.SendKeys(beerNumberOfTastings);
+
+            // enter the beer, ciders and coolers price per tasting drink
+            var uiBeerPricePerTastingDrink = ngDriver.FindElement(By.CssSelector("[formcontrolname='pricePerTastingDrink']"));
+            uiBeerPricePerTastingDrink.SendKeys(beerPricePerTastingDrink);
+
+            // enter the wine size of tasting
+            var uiWineSizeOfTasting = ngDriver.FindElement(By.CssSelector("[formcontrolname='sizeOfTasting']"));
+            uiWineSizeOfTasting.SendKeys(wineSizeOfTasting);
+
+            // enter the wine number of tastings
+            var uiWineNumberOfTastings = ngDriver.FindElement(By.CssSelector("[formcontrolname='numberOfTastings']"));
+            uiWineNumberOfTastings.SendKeys(wineNumberOfTastings);
+
+            // enter the wine price per tasting drink
+            var uiWinePricePerTastingDrink = ngDriver.FindElement(By.CssSelector("[formcontrolname='pricePerTastingDrink']"));
+            uiWinePricePerTastingDrink.SendKeys(winePricePerTastingDrink);
+
+            // enter the spirits number of tastings
+            var uiSpiritsNumberOfTastings = ngDriver.FindElement(By.CssSelector("[formcontrolname='numberOfTastings']"));
+            uiSpiritsNumberOfTastings.SendKeys(spiritsNumberOfTastings);
+
+            // enter the spirits price per tasting drink
+            var uiSpiritsPricePerTastingDrink = ngDriver.FindElement(By.CssSelector("[formcontrolname='pricePerTastingDrink']"));
+            uiSpiritsPricePerTastingDrink.SendKeys(spiritsPricePerTastingDrink);
+        }
+
+
         [And(@"the SEP Checklist content is displayed")]
         public void SpecialEventsPermitsChecklist()
         {
