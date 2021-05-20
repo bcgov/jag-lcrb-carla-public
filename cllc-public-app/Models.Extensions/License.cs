@@ -233,8 +233,6 @@ namespace Gov.Lclb.Cllb.Public.Models
 
             var mainApplication = applications.Where(app => app.Statuscode == (int)AdoxioApplicationStatusCodes.Approved).FirstOrDefault();
 
-            // 2-13-2020 adjust criteria so that we get the first approved CRS rather than simply the first CRS, to ensure that we get the correct record.
-            var crsApplication = applications.Where(app => app.Statuscode == (int)AdoxioApplicationStatusCodes.Approved && app.AdoxioApplicationTypeId.AdoxioName == "Cannabis Retail Store").FirstOrDefault();
             if (mainApplication != null)
             {
                 licenseSummary.ApplicationId = mainApplication.AdoxioApplicationid;
@@ -244,12 +242,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                     licenseSummary.ApplicationTypeCategory = (ApplicationTypeCategory?)mainApplication.AdoxioApplicationTypeId.AdoxioCategory;
                 }
             }
-            if (crsApplication != null)
-            {
-                // 2-7-2020 set the criteria to be No Contraventions rather than Pass.  LCSD-2524
-                licenseSummary.StoreInspected = crsApplication.AdoxioAppchecklistinspectionresults == (int)InspectionStatus.NoContraventions;
-            }
-
+           
             if (licence.AdoxioLicenceType != null)
             {
                 licenseSummary.LicenceTypeName = licence.AdoxioLicenceType.AdoxioName;

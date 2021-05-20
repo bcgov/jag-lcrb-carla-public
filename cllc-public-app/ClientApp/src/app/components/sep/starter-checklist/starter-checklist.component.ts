@@ -1,5 +1,6 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {  faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-starter-checklist',
@@ -8,6 +9,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class StarterChecklistComponent implements OnInit {
   showCreateButton = false;
+  faCheckCircle = faCheckCircle;
 
   constructor(
     public dialogRef: MatDialogRef<StarterChecklistComponent>,

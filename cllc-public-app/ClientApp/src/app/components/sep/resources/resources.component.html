@@ -1,36 +1,21 @@
 <mat-card class="res">
-  <h5>Resources</h5>
+  <h6 style="background-color: #41598b; padding: 5px;color: white; font-weight: 900; padding-left: 10px;">Resources</h6>
   <section class="d-flex mb-3">
     <div class="icon border">
-      <fa-icon [icon]="faUserCircle"></fa-icon>
+
     </div>
     <div class="border res-content">
-      <h5>MANAGE ACCOUNT</h5>
-      <p>View your complete account profile, and update your address or contact details.</p>
-      <a *ngIf="currentUser.userType == 'VerifiedIndividual'" routerLink="/servicecard-profile" mat-raised-button color="secondary">
-        <fa-icon [icon]="faPencilAlt" style="margin-right: 5px;"></fa-icon>Edit Account Profile
-      </a>
-      <a *ngIf="currentUser.userType == 'Business'" routerLink="/account-profile" mat-raised-button color="secondary">
-        <fa-icon [icon]="faPencilAlt" style="margin-right: 5px;"></fa-icon>Edit Account Profile
-      </a>
-    </div>
-  </section>
-  <section class="d-flex mb-3">
-    <div class="icon border">
-      <fa-icon [icon]="faCheck"></fa-icon>
-    </div>
-    <div class="border res-content">
-      <h5>APPLICATION CHECKLIST</h5>
+      <h6>APPLICATION CHECKLIST</h6>
       <p>Know what you need before starting your application.</p>
       <button mat-raised-button color="secondary" (click)="openChecklist()">SEE CHECKLIST</button>
     </div>
   </section>
   <section class="d-flex mb-3">
     <div class="icon border">
-      <fa-icon [icon]="faCocktail"></fa-icon>
+
     </div>
     <div class="border res-content">
-      <h5>GET CERTIFIED</h5>
+      <h6>GET CERTIFIED</h6>
       <p>Find out what RBS training course certificate you need for your event and complete and online course</p>
       <a href="https://www.responsibleservicebc.gov.bc.ca/" target="blank" mat-raised-button color="secondary">LEARN
         MORE</a>
@@ -38,20 +23,20 @@
   </section>
   <section class="d-flex mb-3">
     <div class="icon border">
-      <fa-icon [icon]="faCalculator"></fa-icon>
+
     </div>
     <div class="border res-content">
-      <h5>PLAN YOUR DRINKS</h5>
+      <h6>PLAN YOUR DRINKS</h6>
       <p>Know what you need before starting your application.</p>
       <button mat-raised-button color="secondary" (click)="openDrinkPlanner()">PLAN</button>
     </div>
   </section>
   <section class="d-flex mb-2 ">
     <div class="icon border">
-      <fa-icon [icon]="faQuestion"></fa-icon>
+
     </div>
     <div class="border res-content">
-      <h5>LEARN MORE</h5>
+      <h6>LEARN MORE</h6>
       <p>About SEP policies - visit the BC Liquor and Cannabis Regulation Branch website.</p>
       <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing"
         target="blank" mat-raised-button color="secondary">LEARN MORE</a>

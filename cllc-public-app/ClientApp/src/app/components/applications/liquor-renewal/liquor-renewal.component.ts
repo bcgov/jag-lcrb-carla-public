@@ -76,6 +76,7 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
   accountId: string;
   // need access to the licence to handle subcategory cases
   licenseSubCategory: string;
+  licenseType: string;
   payMethod: string;
   validationMessages: any[];
   showValidationMessages: boolean;
@@ -121,16 +122,17 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
     this.form = this.fb.group({
       id: [""],
 
-      renewalBusinessType: ["", Validators.required],
-      renewalCriminalOffenceCheck: ["", Validators.required],
-      renewalDUI: ["", Validators.required],
-      renewalFloorPlan: ["", Validators.required],
-      renewalkeypersonnel: ["", Validators.required],
-      renewalShareholders: ["", Validators.required],
-      renewalThirdParty: ["", Validators.required],
-      renewalTiedhouse: ["", Validators.required],
-      renewalUnreportedSaleOfBusiness: ["", Validators.required],
-      renewalValidInterest: ["", Validators.required],
+
+      renewalCriminalOffenceCheck: ["", Validators.required], // #1
+      renewalDUI: ["", Validators.required],                  // #2
+      renewalBusinessType: ["", Validators.required],         // #3
+      renewalShareholders: ["", Validators.required],         // #4
+      renewalThirdParty: ["", Validators.required],           // #5
+      renewalFloorPlan: ["", Validators.required],            // #6
+      renewalTiedhouse: ["", Validators.required],                  //#7
+      renewalUnreportedSaleOfBusiness: ["", Validators.required],   //#8
+      renewalValidInterest: ["", Validators.required],              //#9
+      renewalkeypersonnel: ["", Validators.required],               // #10
 
       contactPersonFirstName: ["", Validators.required],
       contactPersonLastName: ["", Validators.required],
@@ -192,6 +194,7 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
 
         this.application = data;
         this.licenseSubCategory = this.application.assignedLicence.licenseSubCategory;
+        this.licenseType = this.application.assignedLicence.licenseType;
 
         // if (this.isSubcategory('Winery'))
 
@@ -226,6 +229,11 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
     const label = this.isSubcategory("Brewery") ? "hectolitres" : "litres";
     return `What was your ${this.licenseSubCategory}'s total volume produced (in ${label
       }) between January 1 and December 31?`;
+  }
+
+  isAgent() {
+    return false;
+    //return this.licenseType == 'Agent';
   }
 
   canDeactivate(): Observable<boolean> | boolean {
@@ -346,6 +354,18 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
 
   isValid(): boolean {
     this.showValidationMessages = false;
+
+    if(this.isAgent()){
+      this.form.get("renewalFloorPlan").setValidators([]);
+      this.form.get("renewalFloorPlan").updateValueAndValidity();
+      this.form.get("renewalTiedhouse").setValidators([]);
+      this.form.get("renewalTiedhouse").updateValueAndValidity();
+      this.form.get("renewalUnreportedSaleOfBusiness").setValidators([]);
+      this.form.get("renewalUnreportedSaleOfBusiness").updateValueAndValidity();
+      this.form.get("renewalValidInterest").setValidators([]);
+      this.form.get("renewalValidInterest").updateValueAndValidity();
+    }
+
     this.markControlsAsTouched(this.form);
     this.validationMessages = this.listControlsWithErrors(this.form, ValidationErrorMap);
 
