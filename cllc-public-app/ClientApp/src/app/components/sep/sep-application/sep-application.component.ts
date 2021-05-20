@@ -69,6 +69,8 @@ export class SepApplicationComponent implements OnInit {
     if (this.localId) {
       this.db.getSepApplication(this.localId)
         .then(app => {
+          // make sure the steps completed array is setup
+          app.stepsCompleted = app.stepsCompleted || [];
           this.application = app;
         }, err => {
           console.error(err);
