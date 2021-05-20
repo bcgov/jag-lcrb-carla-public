@@ -10,10 +10,10 @@
     <mat-divider></mat-divider>
 
     <div class="d-flex">
-        <mat-slider  [(ngModel)]="declaredMaxServings" class="flex-fill" thumbLabel [displayWith]="formatLabel" tickInterval="10" step="1" [min]="minServings" [max]="maxServings"
+        <mat-slider  [(ngModel)]="totalServings" class="flex-fill" thumbLabel [displayWith]="formatLabel" tickInterval="10" step="1" [min]="minServings" [max]="maxServings"
             aria-label="units"></mat-slider>
         <div class="flex-fill">
-            <input type="number" [max]="maxServings" [min]="minServings" [(ngModel)]="declaredMaxServings" class="form-control bev-slider">
+            <input type="number" [max]="maxServings" [min]="minServings" [(ngModel)]="totalServings" class="form-control bev-slider">
         </div>
     </div>
 

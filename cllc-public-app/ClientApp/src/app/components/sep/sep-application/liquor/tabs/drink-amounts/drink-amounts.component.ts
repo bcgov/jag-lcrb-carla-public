@@ -17,7 +17,16 @@ export class DrinkAmountsComponent implements OnInit {
     this.form = this.fb.array([]);
   }
 
+  addDrinkType(value: any = {}){
+    let drinkType = this.fb.group({
+      drinkType: [''],
+      drinkAmount: [''],
+    });
+    drinkType.patchValue(value);
+    this.form.push(drinkType);
+  }
+
   next() {
-    this.saved.next(<any>{});
+    this.saved.next(<any>{...this.form.value});
   }
 }

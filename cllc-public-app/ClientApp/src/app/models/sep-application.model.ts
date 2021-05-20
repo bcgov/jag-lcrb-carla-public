@@ -1,9 +1,10 @@
 import { SepLocation } from "./sep-location.model";
 
 export class SepApplication {
-    id?: number;  // indexed db primary key
-    specialEventId: string; // server side primary key
+    id: string; // server side primary key
+    localId?: number;  // indexed db primary key
     tempJobNumber: string;
+    eventStartDate: Date;
     dateCreated: Date;
     lastUpdated: Date;
     eventName: string;
@@ -23,7 +24,7 @@ export class SepApplication {
     permitNumber: string;
     isTastingEvent: boolean;
     isBeerGarden: boolean;
-    numMaxGuests: number;
+    maximumNumberOfGuests: number;
 
     eventLocations: SepLocation[] = [];
 

@@ -47,6 +47,12 @@ export class SpecialEventsDataService extends DataService {
       .pipe(catchError(this.handleError));
   }
 
+  getSepCityAutocompleteData(name: string, defaults: boolean) {
+    const apiPath = `api/special-events/sep-city/autocomplete?name=${name}&defaults=${defaults}`;
+    return this.http.get<AutoCompleteItem[]>(apiPath, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
   getPoliceApprovalSepApplications(): Observable<SepApplicationSummary[]> {
     const mock1: SepApplicationSummary = {
       specialEventId: '00000000-0000-0000-0000-00000000000',
@@ -80,4 +86,11 @@ export class SpecialEventsDataService extends DataService {
 
     return of([mock1, mock2, mock3]);
   }
+}
+
+export class AutoCompleteItem {
+  id: string;
+  name: string;
+  policeJurisdictionName: string;
+  lGINName: string;
 }

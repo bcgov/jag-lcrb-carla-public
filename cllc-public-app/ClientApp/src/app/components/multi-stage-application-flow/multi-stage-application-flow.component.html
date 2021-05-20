@@ -1,7 +1,6 @@
-<section class="form-wrapper" *ngIf="!isNewUser && dataLoaded"></section>
+<!-- <section class="form-wrapper" *ngIf="!isNewUser && dataLoaded"></section> -->
 <div class="row">
   <section class="col-md-8">
-  <!-- <h1></h1> -->
   <mat-horizontal-stepper [linear]="true" (selectionChange)="selectionChange($event)" #stepper>
     <ng-template matStepperIcon="edit">
       <fa-icon [icon]="faCheck"></fa-icon>
@@ -50,7 +49,7 @@
 
   <section class="col-md-4">
     <p>text</p>
-    <app-resources [currentUser]="currentUser"></app-resources>
+    <app-resources [currentUser]="{}"></app-resources>
   </section>
 
 </div>
