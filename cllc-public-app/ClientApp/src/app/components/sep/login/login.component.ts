@@ -9,6 +9,7 @@ import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
 import { PolicyDocument } from "@models/policy-document.model";
 import { FeatureFlagDataService } from "@services/feature-flag-data.service";
 import { FeatureFlagService } from "@services/feature-flag.service";
+import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons"
 
 @Component({
   selector: 'app-login',
@@ -20,6 +21,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
   title: string;
   category: string;
   body: SafeHtml;
+  calloutTitle: string;
+  callout: SafeHtml;
 
   faIdCard = faIdCard;
   faQuestion = faQuestion;
@@ -27,6 +30,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   policyDocs: PolicyDocumentComponent;
   window = window;
   disableLogin: boolean;
+  faExclamationCircle = faExclamationCircle;
 
   constructor(public dialog: MatDialog,
     private sanitizer: DomSanitizer,
@@ -52,7 +56,18 @@ export class LoginComponent implements OnInit, AfterViewInit {
         this.cd.detectChanges();
       },
         error => {
-          console.error('failed to get policy documents', error);
+          console.error('failed to get body policy documents', error);
+        });
+
+    const calloutSlug = "sep-welcome-callout";
+    this.policyDocumentDataService.getPolicyDocument(calloutSlug)
+      .subscribe((data: PolicyDocument) => {
+        this.calloutTitle = data.title;
+        this.callout = this.sanitizer.bypassSecurityTrustHtml(data.body);
+        this.cd.detectChanges();
+      },
+        error => {
+          console.error('failed to get callout policy document', error);
         });
   }
 

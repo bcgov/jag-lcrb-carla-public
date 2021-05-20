@@ -1,9 +1,14 @@
 .res{
-    max-width: 300px;
+    width: 400;
+    padding: 0px;
+    border: solid white 0px;
+    box-shadow:none;
+
 }
 
+
 .border {
-    border-radius: 5px;
+
     padding: 8px;
 }
 
@@ -15,11 +20,12 @@
 a[mat-raised-button],
 button {
     float: right;
+    width: 200px;
 }
 
 .icon{
     display: flex;
     align-items: center;
-    background-color: #F1F4FA;
+    background-color: #e1e7f2;
 }
 
