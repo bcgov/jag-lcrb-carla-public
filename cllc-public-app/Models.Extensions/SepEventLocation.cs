@@ -24,7 +24,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 ServiceAreas = new List<ViewModels.SepServiceArea>(),
             };
-            result.LocationId = location.AdoxioSpecialeventlocationid;
+            result.Id = location.AdoxioSpecialeventlocationid;
             result.SpecialEventId = location._adoxioSpecialeventidValue;
             result.LocationDescription = location.AdoxioLocationdescription;
             result.EventLocationCity = location.AdoxioEventlocationcity;
@@ -59,7 +59,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 return;
             }
 
-            to.AdoxioSpecialeventlocationid = from.LocationId;
+            to.AdoxioSpecialeventlocationid = from.Id;
             to._adoxioSpecialeventidValue = from.SpecialEventId;
             to.AdoxioLocationdescription = from.LocationDescription;
             to.AdoxioEventlocationcity = from.EventLocationCity;

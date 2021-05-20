@@ -38,27 +38,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        public int? Top129 { get; set; }
+        public int? Top130 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        public int? Skip129 { get; set; }
+        public int? Skip130 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        public bool? Count129 { get; set; }
+        public bool? Count130 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        public string Filter129 { get; set; }
+        public string Filter130 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        public string Search129 { get; set; }
+        public string Search130 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client subscription.
@@ -169,6 +169,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IAreas.
         /// </summary>
         public virtual IAreas Areas { get; private set; }
+
+        /// <summary>
+        /// Gets the IAssignmenthistories.
+        /// </summary>
+        public virtual IAssignmenthistories Assignmenthistories { get; private set; }
 
         /// <summary>
         /// Gets the IAuditlogrequests.
@@ -972,6 +977,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Applicationtypes = new Applicationtypes(this);
             Applicenseechangebpfv2s = new Applicenseechangebpfv2s(this);
             Areas = new Areas(this);
+            Assignmenthistories = new Assignmenthistories(this);
             Auditlogrequests = new Auditlogrequests(this);
             Businessaccounts = new Businessaccounts(this);
             Cannabisinventoryreports = new Cannabisinventoryreports(this);
