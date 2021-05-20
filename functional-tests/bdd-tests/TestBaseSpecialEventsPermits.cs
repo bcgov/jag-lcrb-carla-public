@@ -34,43 +34,58 @@ namespace bdd_tests
             Page Title: Eligibility
             */
 
-            string responsibleBeverageServiceNumber = "1234567";
-            string occasionOfEvent = "Description of event occasion.";
+            var responsibleBeverageServiceNumber = "1234567";
+            var occasionOfEvent = "Description of event occasion.";
+            var organizationName = "Test organization name";
+            var organizationAddress = "645 Tyee RdVictoria, BC V9A 6X5";
 
             // select 'No' for 'Is this event being hosted at a private residence?'
-            var uiPrivateResidence = ngDriver.FindElement(By.CssSelector("#mat-radio-16 .mat-radio-outer-circle"));
+            var uiPrivateResidence = ngDriver.FindElement(By.Id("mat-radio-3"));
             uiPrivateResidence.Click();
 
             // select 'No' for 'Is your event being held on public property?'
-            var uiPublicProperty = ngDriver.FindElement(By.CssSelector("#mat-radio-19 .mat-radio-outer-circle"));
+            var uiPublicProperty = ngDriver.FindElement(By.Id("mat-radio-6"));
             uiPublicProperty.Click();
 
             // select 'No' for 'Is this an event of provincial, national, or international significance?'
             // * already selected 'No' by default
 
             // select event start date
-            //eventStartDate
-            var uiEventStartDate = ngDriver.FindElement(By.CssSelector(""));
+            var uiEventStartDate = ngDriver.FindElement(By.CssSelector("input[formControlName='eventStartDate']"));
             uiEventStartDate.Click();
 
             SharedCalendarDate();
 
             // select public/private options re event
+            var uiPrivateEvent = ngDriver.FindElement(By.CssSelector("[formcontrolname='eligibilityPrivateOrPublic'] option[value='2']"));
+            uiPrivateEvent.Click();
+
+            // enter name of organization hosting the event
+            var uiOrganizationName = ngDriver.FindElement(By.CssSelector("[formcontrolname='hostingOrganizationName']"));
+            uiOrganizationName.SendKeys(organizationName);
+
+            // enter the organization address
+            var uiOrganizationAddress = ngDriver.FindElement(By.CssSelector("[formcontrolname='hostingOrganizationAddress']"));
+            uiOrganizationAddress.SendKeys(organizationAddress);
+
+            // select organization category
+            var uiOrganizationCategory = ngDriver.FindElement(By.CssSelector("[formcontrolname='hostingOrganizationCategory'] option[value='incorporated_non_profit']"));
+            uiPrivateEvent.Click();
 
             // enter Responsible Beverage Service Number
-            var uiResponsibleBeverageServiceNumber = ngDriver.FindElement(By.CssSelector(""));
+            var uiResponsibleBeverageServiceNumber = ngDriver.FindElement(By.CssSelector("input[formControlName='eligibilityResponsibleBevServiceNumber']"));
             uiResponsibleBeverageServiceNumber.SendKeys(responsibleBeverageServiceNumber);
 
             // enter the occasion of the event
-            var uiEventOccasion = ngDriver.FindElement(By.CssSelector(""));
+            var uiEventOccasion = ngDriver.FindElement(By.CssSelector("[formcontrolname='eventDescription']"));
             uiEventOccasion.SendKeys(occasionOfEvent);
 
             // select 'No' for 'Are you charging an event admission price?'
-            var uiEventAdmissionPrice = ngDriver.FindElement(By.CssSelector(""));
+            var uiEventAdmissionPrice = ngDriver.FindElement(By.Id("mat-radio-12"));
             uiEventAdmissionPrice.Click();
             
             // select 'No' for 'Is there currently a liquor licence at your event location?'
-            var uiCurrentLiquorLicence = ngDriver.FindElement(By.CssSelector(""));
+            var uiCurrentLiquorLicence = ngDriver.FindElement(By.Id("mat-radio-15"));
             uiCurrentLiquorLicence.Click();
         }
 
