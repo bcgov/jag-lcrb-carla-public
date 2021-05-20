@@ -112,47 +112,68 @@ namespace bdd_tests
             uiEventLocation.Click();
 
             // select 'Yes' for annual event
-            var uiAnnualEventYes = ngDriver.FindElement(By.Id("mat-radio-34"));
+            var uiAnnualEventYes = ngDriver.FindElement(By.Id("mat-radio-19"));
             uiAnnualEventYes.Click();
 
             // enter event location name
-            var uiEventLocationName = ngDriver.FindElement(By.CssSelector("locationName"));
+            var uiEventLocationName = ngDriver.FindElement(By.CssSelector("[formcontrolname='locationName']"));
             uiEventLocationName.SendKeys(eventLocationName);
 
             // enter venue type
-            var uiVenueType = ngDriver.FindElement(By.CssSelector("venueType"));
+            var uiVenueType = ngDriver.FindElement(By.CssSelector("[formcontrolname='venueType']"));
             uiVenueType.SendKeys(venueType);
 
             // enter address line 1
+            var uiAddressLine1 = ngDriver.FindElement(By.CssSelector("[formcontrolname='eventLocationStreet1']"));
+            uiAddressLine1.SendKeys(addressLine1);
 
             // enter address line 2
+            var uiAddressLine2 = ngDriver.FindElement(By.CssSelector("[formcontrolname='eventLocationStreet2']"));
+            uiAddressLine2.SendKeys(addressLine2);
 
             // enter postal code
+            var uiPostalCode = ngDriver.FindElement(By.CssSelector("[formcontrolname='eventLocationPostalCode']"));
+            uiPostalCode.SendKeys(postalCode);
 
             // enter maximum number of guests
+            var uiMaxGuests = ngDriver.FindElement(By.CssSelector("[formcontrolname='locationMaxGuests']"));
+            uiMaxGuests.SendKeys(maxGuests);
 
             // enter area description
+            var uiAreaDescription = ngDriver.FindElement(By.CssSelector("[formcontrolname='eventName']"));
+            uiAreaDescription.SendKeys(areaDescription);
 
             // enter maximum number of guests
+            var uiMaxGuests2 = ngDriver.FindElement(By.CssSelector("[formcontrolname='licencedAreaMaxNumberOfGuests']"));
+            uiMaxGuests2.SendKeys(maxGuests);
 
             // select 'No' for minors admission
-
-            // select service area is indoors checkbox
-
-            // select service area is outdoors checkbox
-
-            // select service area is both indoors and outdoors checkbox
+            var uiMinorsAdmissionNo = ngDriver.FindElement(By.Id("mat-radio-25"));
+            uiMinorsAdmissionNo.Click();
 
             // select event date
+            var uiEventDate = ngDriver.FindElement(By.CssSelector("[formcontrolname='eventDate']"));
+            uiEventDate.Click();
+
+            SharedCalendarDate();
 
             // select event start time
+            var uiEventStartTime = ngDriver.FindElement(By.CssSelector("[formcontrolname='eventStart'] option[value='8:00 AM']"));
+            uiEventStartTime.Click();
 
             // select event end time
+            var uiEventEndTime = ngDriver.FindElement(By.CssSelector("[formcontrolname='eventEnd'] option[value='4:00 PM']"));
+            uiEventEndTime.Click();
 
             // select liquor service start time
+            var uiLiquorServiceStartTime = ngDriver.FindElement(By.CssSelector("[formcontrolname='serviceStart'] option[value='9:00 AM']"));
+            uiLiquorServiceStartTime.Click();
 
             // select liquor service end time
+            var uiLiquorServiceEndTime = ngDriver.FindElement(By.CssSelector("[formcontrolname='serviceEnd'] option[value='4:00 PM']"));
+            uiLiquorServiceEndTime.Click();
         }
+
 
         [And(@"the SEP Checklist content is displayed")]
         public void SpecialEventsPermitsChecklist()
