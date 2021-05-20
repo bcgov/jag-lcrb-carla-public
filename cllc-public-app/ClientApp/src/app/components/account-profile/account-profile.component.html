@@ -237,6 +237,7 @@
     <input class="form-control" style="width: 350px;" type="text" formControlName="contactEmail"
            (blur)="trimValue(form.get('businessProfile.contactEmail'))">
   </app-field>
+  <p *ngIf="getBusinessTypeName() == 'Local Government'"><em>This will be the primary email used for communication from LCRB.</em></p>
 
   <app-field *ngIf="getBusinessTypeName() === 'Indigenous Nation' || getBusinessTypeName() == 'Local Government'" label="Liquor Policy Information Link" [required]="true"
              [valid]="form.get('businessProfile.websiteUrl').valid || !form.get('businessProfile.websiteUrl').touched"
