@@ -696,14 +696,16 @@
           </section>
 
     <section>
-      <app-file-uploader *ngIf="applicationId && !application?.applicationType?.name.includes('Temporary Expanded')" documentType="letterOfIntent"
+
+      <app-file-uploader *ngIf="application?.id && !application?.applicationType?.name.includes('Temporary Expanded')" documentType="letterOfIntent"
                          [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
                          [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()" [useDocumentTypeForName]="true"
                          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
                          [extensions]="['pdf']"
-                         (numberOfUploadedFiles)="uploadedletterOfIntentDocuments = $event" [entityId]="applicationId"
+                         (numberOfUploadedFiles)="uploadedletterOfIntentDocuments = $event" [entityId]="application?.id"
                          [uploadHeader]="'TO UPLOAD LETTER OF INTENT, DRAG FILES HERE OR'">
       </app-file-uploader>
+
       <app-file-uploader *ngIf="applicationId && application?.applicationType?.name.includes('Temporary Expanded')" documentType="letterOfIntent"
         [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
         [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()" [useDocumentTypeForName]="true"
@@ -858,29 +860,6 @@
       </div>
     </div>
   </section>
-
-
-  <!-- Letter of Intent -->
-  <!--section *ngIf="application?.applicationType.name === 'Special Event Area Endorsement'">
-    <h3 class="blue-header">Letter of Intent</h3>
-    <section class="content-bottom">
-      <div *ngIf="htmlContent.letterOfIntent">
-        <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.letterOfIntent"></section>
-      </div>
-
-
-      <section>
-        <app-file-uploader *ngIf="applicationId" documentType="letterOfIntent"
-                           [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
-                           [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()" [useDocumentTypeForName]="true"
-                           fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
-                           [extensions]="['pdf']"
-                           (numberOfUploadedFiles)="uploadedletterOfIntentDocuments = $event" [entityId]="applicationId"
-                           [uploadHeader]="'TO UPLOAD LETTER OF INTENT, DRAG FILES HERE OR'">
-        </app-file-uploader>
-      </section>
-    </section>
-  </section-->
 </section>
 
 <!-- Store Contact Info -->
