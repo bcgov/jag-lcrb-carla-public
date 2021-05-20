@@ -118,7 +118,7 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
             // partnerInfo1
             body.partnerInfo1 = licence.AdoxioLicencenumber;
 
-            body.timeStamp = DateTime.Now.ToString("yyyy-MM-dd-hh.mm.ssssss");
+            body.timeStamp = Utils.GetTimeStamp();
 
             return body;
         }
