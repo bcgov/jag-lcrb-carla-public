@@ -10,6 +10,8 @@ import { AppState } from '@app/app-state/models/app-state';
 import { SepApplicationSummary } from '@models/sep-application-summary.model';
 import { User } from '@models/user.model';
 import { SpecialEventsDataService } from '@services/special-events-data.service';
+import { AccountDataService } from '@services/account-data.service';
+import { Contact } from '@models/contact.model';
 
 // Show text labels instead of numeric enum values in the table; e.g. Status = "In Progress" vs. 100,000,001
 interface SepTableElement extends SepApplicationSummary {
@@ -29,6 +31,7 @@ export class AllApplicationsComponent implements OnInit {
   // angular material table columns to display
   columnsToDisplay = ['select', 'dateSubmitted', 'eventName', 'eventStartDate', 'eventStatusLabel', 'policeDecisionByLabel', 'maximumNumberOfGuests', 'typeOfEventLabel', 'actions'];
   currentUser: User;
+  availableContacts = [];
 
   // table state
   dataSource = new MatTableDataSource<SepTableElement>();
@@ -42,6 +45,7 @@ export class AllApplicationsComponent implements OnInit {
   constructor(
     private store: Store<AppState>,
     private sepDataService: SpecialEventsDataService,
+    private accountDataService: AccountDataService,
     private router: Router
   ) {
   }
@@ -73,11 +77,24 @@ export class AllApplicationsComponent implements OnInit {
         this.currentUser = user;
       });
 
+    // fetch possible contacts we can assign to.
+    this.loadAccountContacts()
+      .subscribe(availableContacts => this.availableContacts = availableContacts);
+   
     // fetch SEP applications waiting for Police Approval
     this.loadSepApplications()
       .subscribe(applications => this.dataSource.data = applications);
   }
 
+  private loadAccountContacts()
+  {
+    return this.accountDataService.getCurrentAccountContacts()
+    .pipe(map(array => array.map(accountContactData => {
+      return {
+        ...accountContactData        
+      } as Contact;
+    })));
+  }
   private loadSepApplications() {
     return this.sepDataService.getPoliceApprovalSepApplications()
       .pipe(map(array => array.map(sepData => {
