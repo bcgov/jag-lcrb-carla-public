@@ -1,0 +1,20 @@
+name: ci-agent-dotnet
+on:
+  pull_request:
+    types: [opened, reopened, edited, synchronize]
+    paths:
+      - "/openshift/other-templates/agent-dotnet/**"
+      - ".github/workflows/ci-agent-dotnet.yml"
+
+env:
+  IMAGE_NAME: "agent-dotnet"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build image
+        working-directory: ./openshift/other-templates/agent-dotnet
+        run: docker build . --file Dockerfile.rhel7 --tag $IMAGE_NAME
