@@ -1,7 +1,10 @@
 name: ci-agent-dotnet
 on:
-  pull_request:
-    types: [opened, reopened, edited, synchronize]
+  push:
+    # Publish `master` as Docker `latest` image.
+    branches:
+      - develop
+      
     paths:
       - "/openshift/other-templates/agent-dotnet/**"
       - ".github/workflows/ci-agent-dotnet.yml"
