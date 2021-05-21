@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { AppState } from '@app/app-state/models/app-state';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
@@ -10,7 +10,7 @@ import { LiquorComponent } from './liquor/liquor.component';
 import { SummaryComponent } from './summary/summary.component';
 import { Account } from '@models/account.model';
 import { ActivatedRoute } from '@angular/router';
-import { IndexDBService } from '@services/index-db.service';
+import { IndexedDBService } from '@services/indexed-db.service';
 import { SepApplication } from '@models/sep-application.model';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
@@ -24,24 +24,17 @@ export const SEP_APPLICATION_STEPS = ["applicant", "eligibility", "event", "liqu
 export class SepApplicationComponent implements OnInit {
   faCheck = faCheck;
   securityScreeningEnabled: boolean;
-  applicationId: string;
+  localId: number;
   isFree: boolean = false;
   hasLGApproval: boolean = false;
 
-  @ViewChild("applicant")
-  accountProfileComponent: ApplicantComponent;
-  @ViewChild("eligibility")
-  licenseeChangesComponent: EligibilityComponent;
-  @ViewChild("event") applicationComponent: EventComponent;
-  @ViewChild("liquor") dynamicApplicationComponent: LiquorComponent;
+
   stepType: "summary";
   application: SepApplication;
   steps = SEP_APPLICATION_STEPS;
   account: Account;
   step: string;
-  applicantForm: FormGroup;
-  eligibilityForm: FormGroup;
-  eventForm: FormGroup;
+
   get selectedIndex(): number {
     let index = 0;
     if (this.step) {
@@ -50,37 +43,39 @@ export class SepApplicationComponent implements OnInit {
         index = 0
       }
     }
-
     return index;
   }
 
   constructor(private store: Store<AppState>,
-    private db: IndexDBService,
-    private fb: FormBuilder,
+    private db: IndexedDBService,
+    private cd: ChangeDetectorRef,
     private route: ActivatedRoute) {
     this.store.select(state => state.currentAccountState.currentAccount)
       .subscribe(account => this.account = account);
     this.route.paramMap.subscribe(pmap => {
       // if the id is 'new' set it to null ( this will dictate whether the save is a create or an update)
-      this.applicationId = pmap.get('id') === 'new' ? null : pmap.get('id');
+      this.localId = pmap.get('id') === 'new' ? null : parseInt(pmap.get('id'), 10);
       this.step = pmap.get('step');
     });
   }
 
   ngOnInit() {
-    this.applicantForm = this.fb.group({});
-    this.eligibilityForm = this.fb.group({});
-    this.eventForm = this.fb.group({});
-    
-    if (this.applicationId) {
-      this.db.getSepApplication(parseInt(this.applicationId, 10))
+
+    this.getApplication();
+
+  }
+
+  getApplication() {
+    if (this.localId) {
+      this.db.getSepApplication(this.localId)
         .then(app => {
+          // make sure the steps completed array is setup
+          app.stepsCompleted = app.stepsCompleted || [];
           this.application = app;
         }, err => {
           console.error(err);
         });
     }
-
   }
 
   canActivate(): Observable<boolean> {
@@ -96,6 +91,14 @@ export class SepApplicationComponent implements OnInit {
       }
     }
     return completed;
+  }
+
+  completeStep(step: string) {
+    const steps = this?.application?.stepsCompleted;
+    if (steps && step && steps.indexOf(step) == -1) {
+      this.application.stepsCompleted.push(step);
+    }
+    this.cd.detectChanges();
   }
 
   selectionChange(event) {

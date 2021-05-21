@@ -25,6 +25,7 @@ export interface Application {
   applicantType: string;
   applicationStatus: string;
   applicationType: ApplicationType;
+  applicationTypeName: string;
   applyingPerson: string;
   assignedLicence: License;
   authorizedToSubmit: boolean;

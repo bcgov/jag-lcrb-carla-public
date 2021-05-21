@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormArray, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-drink-amounts',
@@ -8,13 +9,24 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 export class DrinkAmountsComponent implements OnInit {
   @Output() saved: EventEmitter<{declaredServings: number}> = new EventEmitter<{declaredServings: number}>();
   @Output() back: EventEmitter<boolean> = new EventEmitter<boolean>();
-
-  constructor() { }
+  form: FormArray;
+  
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    this.form = this.fb.array([]);
+  }
+
+  addDrinkType(value: any = {}){
+    let drinkType = this.fb.group({
+      drinkType: [''],
+      drinkAmount: [''],
+    });
+    drinkType.patchValue(value);
+    this.form.push(drinkType);
   }
 
   next() {
-    this.saved.next(<any>{});
+    this.saved.next(<any>{...this.form.value});
   }
 }

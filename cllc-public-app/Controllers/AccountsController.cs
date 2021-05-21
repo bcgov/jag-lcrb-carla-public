@@ -22,6 +22,7 @@ using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 using System.Security.Claims;
 using Gov.Lclb.Cllb.Public.Extensions;
 using Gov.Lclb.Cllb.Services.FileManager;
+using Contact = Gov.Lclb.Cllb.Public.ViewModels.Contact;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -95,6 +96,36 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             _logger.LogDebug(LoggingEvents.HttpGet, "Current Account Result: " +
                JsonConvert.SerializeObject(result, Formatting.Indented, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
+            return new JsonResult(result);
+        }
+
+        /// GET the contacts for the current account.
+        [HttpGet("current/contacts")]
+        [Authorize(Policy = "Business-User")]
+        public async Task<IActionResult> GetCurrentAccountContacts()
+        {
+            List<ViewModels.Contact> result = new List<Contact>();
+
+            // get the current user.
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+
+            // query the Dynamics system to get the account record.
+            if (userSettings.AccountId != null && userSettings.AccountId.Length > 0)
+            {
+                List<MicrosoftDynamicsCRMcontact> contacts = _dynamicsClient.GetActiveContactsByAccountId(userSettings.AccountId);
+                if (contacts != null)
+                {
+                    foreach (var contact in contacts)
+                    {
+                        result.Add(contact.ToViewModel());
+                    }
+                }
+            }
+            else
+            {
+                _logger.LogWarning(LoggingEvents.NotFound, "GetCurrentAccountContacts - No Current Account Found.");
+            }
+
             return new JsonResult(result);
         }
 

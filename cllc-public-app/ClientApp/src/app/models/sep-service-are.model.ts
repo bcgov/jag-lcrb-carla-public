@@ -1,7 +1,7 @@
 import { SepSchedule } from "./sep-schedule.model";
 
 export class SepServiceArea {
-    id: number;
+    licencedAreaId: string; // server side primary key
     sepLocationId: string;
     specialEventId: string;
     minorPresent: boolean;
@@ -17,5 +17,4 @@ export class SepServiceArea {
     eventName: string;
     isOutdoors: boolean;
     licencedAreaDescription: string;
-    eventDates: SepSchedule[] = [];
 }

@@ -6,7 +6,7 @@ import { ApplicationCancellationDialogComponent } from '@components/dashboard/ap
 import { SepApplication } from '@models/sep-application.model';
 import { User } from '@models/user.model';
 import { Store } from '@ngrx/store';
-import { IndexDBService } from '@services/index-db.service';
+import { IndexedDBService } from '@services/indexed-db.service';
 import { takeWhile } from 'rxjs/operators';
 import { StarterChecklistComponent } from '../starter-checklist/starter-checklist.component';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
@@ -23,7 +23,7 @@ export class MyApplicationsComponent implements OnInit {
   faEdit = faEdit;
 
   constructor(private store: Store<AppState>,
-    private db: IndexDBService,
+    private db: IndexedDBService,
     private route: ActivatedRoute,
     private router: Router,
     private dialog: MatDialog) {
@@ -51,7 +51,7 @@ export class MyApplicationsComponent implements OnInit {
     const dialogConfig = {
       disableClose: true,
       autoFocus: true,
-      width: "500px",
+      width: "600px",
       data: {
         showStartApp: true
       }
@@ -62,18 +62,25 @@ export class MyApplicationsComponent implements OnInit {
     dialogRef.afterClosed()
       .subscribe((startApplication: boolean) => {
         if (startApplication) {
-          this.router.navigateByUrl('/sep/application/new/applicant')
+          const data = {
+            stepsCompleted: [],
+            dateCreated: new Date()
+          } as SepApplication;
+          this.db.saveSepApplication(data)
+          .then(localId => {
+            this.router.navigateByUrl(`/sep/application/${localId}/applicant`)
+          });
         }
       });
   }
 
   /**
    *
-   * @param applicationId
+   * @param localId
    * @param establishmentName
    * @param applicationName
    */
-  cancelApplication(applicationId: string, establishmentName: string, applicationName: string) {
+  cancelApplication(localId: number, establishmentName: string, applicationName: string) {
     const dialogConfig = {
       disableClose: true,
       autoFocus: true,
@@ -90,7 +97,7 @@ export class MyApplicationsComponent implements OnInit {
     dialogRef.afterClosed()
       .subscribe(async (cancelApplication) => {
         if (cancelApplication) {
-          this.db.deleteSepApplication(parseInt(applicationId, 10));
+          this.db.deleteSepApplication(localId);
           await this.getApplications()
         }
       });
@@ -109,14 +116,14 @@ export class MyApplicationsComponent implements OnInit {
   }
 
   async cloneApplication(app: SepApplication) {
-    let newId = await this.db.addSepApplication({
+    let localId = await this.db.saveSepApplication({
       ...app,
-      id: undefined,
+      localId: undefined,
       dateAgreedToTnC: undefined,
       agreeToTnC: false,
       dateCreated: new Date()
     });
-    this.router.navigateByUrl(`/sep/application/${newId}/applicant`)
+    this.router.navigateByUrl(`/sep/application/${localId}/applicant`)
   }
 
 

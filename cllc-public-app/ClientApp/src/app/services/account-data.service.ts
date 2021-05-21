@@ -12,6 +12,7 @@ import { SetCurrentAccountAction } from "@app/app-state/actions/current-account.
 import { TiedHouseConnectionsDataService } from "@services/tied-house-connections-data.service";
 import { LegalEntityDataService } from "@services/legal-entity-data.service";
 import { FileSystemItem } from "@models/file-system-item.model";
+import { Contact } from "../models/contact.model";
 
 @Injectable()
 export class AccountDataService extends DataService {
@@ -27,6 +28,11 @@ export class AccountDataService extends DataService {
 
   getAccount(accountId: string): Observable<Account> {
     return this.http.get<Account>(this.apiPath + accountId, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
+  getCurrentAccountContacts(): Observable<Contact[]> {
+    return this.http.get<Contact[]>(this.apiPath + "current/contacts", { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 

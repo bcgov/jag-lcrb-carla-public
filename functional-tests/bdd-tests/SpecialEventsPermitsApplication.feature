@@ -15,6 +15,17 @@ Scenario: SEP Application (Private Corporation)
     And I complete the SEP eligibility form
     # Next button
     And I click on the Submit button
-    # To be completed
+    And I complete the SEP event form
+    # Next button
+    And I click on the Submit button
+    And I complete the Liquor form for total servings
+    # Next button
+    And I click on the Submit button
+    And I complete the Liquor form for selling drinks
+    # Next button
+    And I click on the Submit button
+    And I complete the Liquor form for drink amounts
+    # Next button
+    And I click on the Submit button
     And the account is deleted
     Then I see the login page

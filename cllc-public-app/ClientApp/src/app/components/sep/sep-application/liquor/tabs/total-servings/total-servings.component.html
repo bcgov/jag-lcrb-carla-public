@@ -5,15 +5,15 @@
     </p>
 
     <p>
-        Hosting a liquor tasting? Use the conversion tool below
+        Hosting a liquor tasting? Use the conversion tool below.
     </p>
     <mat-divider></mat-divider>
 
     <div class="d-flex">
-        <mat-slider  [(ngModel)]="declaredMaxServings" class="flex-fill" thumbLabel [displayWith]="formatLabel" tickInterval="10" step="1" [min]="minServings" [max]="maxServings"
+        <mat-slider  [(ngModel)]="totalServings" class="flex-fill" thumbLabel [displayWith]="formatLabel" tickInterval="10" step="1" [min]="minServings" [max]="maxServings"
             aria-label="units"></mat-slider>
         <div class="flex-fill">
-            <input type="number" [max]="maxServings" [min]="minServings" [(ngModel)]="declaredMaxServings" class="form-control bev-slider">
+            <input type="number" [max]="maxServings" [min]="minServings" [(ngModel)]="totalServings" class="form-control bev-slider">
         </div>
     </div>
 
@@ -37,7 +37,7 @@
                 <section>
                     <p>
                         Input the size of your tasting drink in ounces. In the case of spirits, the tasting size is
-                        fixed and cannot be adjusted
+                        fixed and cannot be adjusted.
                     </p>
                     <p>
                         Note: if the number of standard drinks is showing zero, you may have to increase the number of

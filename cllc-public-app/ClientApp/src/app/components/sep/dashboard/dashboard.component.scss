@@ -1,14 +1,54 @@
 .border{
     border: 1px solid;
-    border-radius: 5px;
+    border-radius: 0px;
     padding: 16px;
 }
 
 .app-button {
     text-align: center;
-    background-color: #fff;
+    background-color: transparent;
+    box-shadow:none;
+    width: 500px;
 }
 
 .header-wrap {
     background-color: #F1F4FA;
+}
+
+.linewrapper {
+  position: relative;
+  width: 250px;
+  height: 150px;
+  border: 0px dashed #F1F4FA;
+  margin: 10px;
+}
+
+.line {
+  position: absolute;
+  left: 49%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: black;
+  z-index: 1;
+}
+
+.wordwrapper {
+  text-align: center;
+  height: 12px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  margin-top: -12px;
+  z-index: 2;
+}
+
+.word {
+  color: black;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 3px;
+  font: bold 12px arial,sans-serif;
+  background: #F1F4FA;
 }
