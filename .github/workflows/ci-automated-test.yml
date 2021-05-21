@@ -1,0 +1,21 @@
+name: ci-phsa-adapter
+
+on:
+  pull_request:
+    types: [opened, reopened, edited, synchronize]
+    paths:
+      - "phsa-adapter/src/**"
+      - ".github/workflows/ci-phsa-adapter.yml"
+
+env:
+  IMAGE_NAME: phsa-adapter
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build image
+        working-directory: ./phsa-adapter/src
+        run: docker build . --file Dockerfile --tag $IMAGE_NAME
