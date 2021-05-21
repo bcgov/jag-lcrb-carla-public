@@ -8,7 +8,7 @@ on:
 
 env:
   IMAGE_NAME: "agent-dotnet"
-
+  SOURCE_IMAGE_ID: ${{ secrets.OCP4_REGISTRY }}/${{ secrets.OCP4_NAMESPACE }}/ose-jenkins-agent-base
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,7 +19,7 @@ jobs:
         run: echo "${{ secrets.OCP4_PASSWORD  }}" | docker login ${{ secrets.OCP4_REGISTRY }}/${{ secrets.OCP4_NAMESPACE }} -u ${{ secrets.OCP4_USERNAME }} --password-stdin
 
       - name: Pull image
-        run: docker pull ose-jenkins-agent-base || true         
+        run: docker pull $SOURCE_IMAGE_ID || true         
 
       - name: Build image
         working-directory: ./openshift/other-templates/agent-dotnet
