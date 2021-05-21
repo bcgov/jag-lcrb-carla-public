@@ -1,4 +1,4 @@
-FROM ose-jenkins-agent-base
+FROM ose-jenkins-agent-base:latest
 # registry.redhat.io/openshift4/ose-jenkins-agent-base
 
 # Labels consumed by Red Hat build service
