@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SepApplication } from '@models/sep-application.model';
-import { IndexDBService } from '@services/index-db.service';
+import { IndexedDBService } from '@services/indexed-db.service';
 import { SpecialEventsDataService } from '@services/special-events-data.service';
 
 @Component({
@@ -18,7 +18,7 @@ export class LiquorComponent implements OnInit {
   sepApplication: SepApplication;
 
   @Input()
-  set applicationId(value: number) {
+  set localId(value: number) {
     this._appID = value;
     //get the last saved application
     this.db.getSepApplication(value)
@@ -27,11 +27,11 @@ export class LiquorComponent implements OnInit {
       });
   };
 
-  get applicationId() {
+  get localId() {
     return this._appID;
   }
 
-  constructor(private db: IndexDBService, private sepDataService: SpecialEventsDataService) { }
+  constructor(private db: IndexedDBService, private sepDataService: SpecialEventsDataService) { }
 
   updateValue(value) {
     this.value = { ...this.value, ...value };
@@ -55,26 +55,41 @@ export class LiquorComponent implements OnInit {
       ...this.value,
     } as SepApplication;
 
-    if (data.id) {
-      this.db.applications.update(data.id, data);
-      this.applicationId = data.id;
+    if (data.localId) {
+      this.db.applications.update(data.localId, data);
+      this.localId = data.localId;
     } else {
       console.error("The id should already exist at this point.")
     }
   }
 
   saveToAPI() {
-    this.db.getSepApplication(this.applicationId)
+    this.db.getSepApplication(this.localId)
       .then((appData) => {
-        this.sepDataService.createSepApplication(appData)
-          .subscribe(result => {
-          });
+        if (appData.id) { // do an update ( the record exists in dynamics)
+          this.sepDataService.updateSepApplication({...appData, invoiceTrigger: 1 }, appData.id)
+            .subscribe(result => {
+              if (result.localId) {
+                this.db.applications.update(result.localId, result);
+                this.localId = result.localId;
+              }
+            });
+        } else {
+          this.sepDataService.createSepApplication({...appData, invoiceTrigger: 1 })
+            .subscribe(result => {
+              if (result.localId) {
+                this.db.applications.update(result.localId, result);
+                this.localId = result.localId;
+              }
+            });
+        }
       });
   }
 
   save() {
     this.saveToDB();
-    this.saveToAPI();
+    // this.saveToAPI();
+    this.saveComplete.emit(true);
   }
 
 }

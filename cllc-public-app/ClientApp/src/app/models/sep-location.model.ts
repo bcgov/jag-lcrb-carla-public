@@ -1,7 +1,8 @@
+import { SepSchedule } from "./sep-schedule.model";
 import { SepServiceArea } from "./sep-service-are.model";
 
 export class SepLocation {
-    id: number;
+    locationId: string; // server side primary key
     locationPermitNumber: string;
     locationName: string;
     venueType: string;
@@ -12,4 +13,5 @@ export class SepLocation {
     eventLocationProvince: string;
     eventLocationPostalCode: string;
     serviceAreas: SepServiceArea[] = [];
+    eventDates: SepSchedule[] = [];
 }

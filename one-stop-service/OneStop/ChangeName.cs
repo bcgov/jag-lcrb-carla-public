@@ -127,7 +127,8 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
                 body.partnerInfo2 = targetBusinessNumber;
             }
 
-            body.timeStamp = DateTime.Now.ToString("yyyy-MM-DD-hh.mm.ss");
+            // 
+            body.timeStamp = Utils.GetTimeStamp();
 
             return body;
         }

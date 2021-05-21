@@ -6,6 +6,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
     {
         public string Id { get; set; }
         public string SpecialEventId { get; set; }
+        public int LocalId { get; set; } // Client side local db id
         public string LocationDescription { get; set; }
         public string EventLocationCity { get; set; }
         public string EventLocationPostalCode { get; set; }
@@ -16,6 +17,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string LocationName { get; set; }
         public string PermitNumber { get; set; }
          public List<SepServiceArea> ServiceAreas { get; set; }
+        public List<SepEventDates> EventDates { get; set; }
         public int? Statecode { get; set; }
 
     }

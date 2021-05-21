@@ -32,8 +32,8 @@ namespace bdd_tests
 
             var bizPhoneNumber = "2501811818";
             var bizEmail = "test@automation.com";
-            var corpGiven = "Automated";
-            var corpSurname = "Testing";
+            // var corpGiven = "Automated";
+            // var corpSurname = "Testing";
             var corpTitle = "CEO";
             var corpContactPhone = "7781811818";
             var corpContactEmail = "automated@test.com";

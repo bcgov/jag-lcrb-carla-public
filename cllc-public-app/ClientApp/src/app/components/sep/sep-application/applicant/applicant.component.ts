@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { PolicyDocumentComponent } from '@components/policy-document/policy-document.component';
 import { Account } from '@models/account.model';
 import { SepApplication } from '@models/sep-application.model';
-import { IndexDBService } from '@services/index-db.service';
+import { IndexedDBService } from '@services/indexed-db.service';
 import { FormBase } from '@shared/form-base';
 import { Observable } from 'rxjs';
 import { from } from 'rxjs/internal/observable/from';
@@ -39,8 +39,7 @@ export class ApplicantComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private router: Router,
-    private ctrlContainer: FormGroupDirective,
-    private db: IndexDBService) {
+    private db: IndexedDBService) {
   }
 
   ngOnInit(): void {
@@ -50,8 +49,6 @@ export class ApplicantComponent implements OnInit {
       agreeToTnC: ['', [this.customRequiredCheckboxValidator()]],
       dateAgreedToTnC: ['']
     });
-
-    this.ctrlContainer.form.addControl("eligibility", this.form);
 
     if (this.application) {
       this.form.patchValue(this.application);
@@ -77,7 +74,7 @@ export class ApplicantComponent implements OnInit {
     };
   }
 
-  isValid(){
+  isValid() {
     this.form.markAsTouched();
     return this.form.valid;
   }
@@ -87,9 +84,9 @@ export class ApplicantComponent implements OnInit {
       ...this.application,
       lastUpdated: new Date(),
       status: 'unsubmitted',
-      stepsCompleted: (steps =>{
+      stepsCompleted: (steps => {
         const step = 'applicant';
-        if(steps.indexOf(step) === -1){
+        if (steps.indexOf(step) === -1) {
           steps.push(step);
         }
         return steps;
@@ -108,26 +105,26 @@ export class ApplicantComponent implements OnInit {
       ...this.form.value
     } as SepApplication;
 
-    if (data.id) {
-      this.db.applications.update(data.id, data);
-      return of(data.id);
+    if (data.localId) {
+      this.db.applications.update(data.localId, data);
+      return of(data.localId);
     } else {
       data.dateCreated = new Date();
-      return from(this.db.addSepApplication(data));
+      return from(this.db.saveSepApplication(data));
     }
   }
 
-  next(){  
-    if(this.isValid()){
+  next() {
+    if (this.isValid()) {
       this.save().subscribe((appId: number) => {
-        this.router.navigateByUrl(`/sep/application/${appId}/eligibility`);
+        this.saveComplete.emit(true);
       });
     }
   }
 
-  saveForLater(){  
-      this.save()
-      .subscribe( id => {
+  saveForLater() {
+    this.save()
+      .subscribe(id => {
         this.router.navigateByUrl('/sep/my-applications')
       });
   }

@@ -20,7 +20,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result = new ViewModels.SepServiceArea()
                 {
                     Id = serviceArea.AdoxioSpecialeventlicencedareaid,
-                    SepLocationId = serviceArea._adoxioSpecialeventlocationidValue,
+                    LocationId = serviceArea._adoxioSpecialeventlocationidValue,
                     SpecialEventId = serviceArea._adoxioSpecialeventidValue,
                     MinorPresent = serviceArea.AdoxioMinorpresent,
                     LicencedAreaMaxNumberOfGuests = serviceArea.AdoxioLicencedareamaxnumberofguests,
@@ -44,7 +44,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         public static void CopyValues(this MicrosoftDynamicsCRMadoxioSpecialeventlicencedarea to, ViewModels.SepServiceArea from)
         {
             // to.AdoxioSpecialeventlicencedareaid = from.Id;
-            to._adoxioSpecialeventlocationidValue = from.SepLocationId;
+            to._adoxioSpecialeventlocationidValue = from.LocationId;
             to._adoxioSpecialeventidValue = from.SpecialEventId;
             to.AdoxioMinorpresent = from.MinorPresent;
             to.AdoxioLicencedareamaxnumberofguests = from.LicencedAreaMaxNumberOfGuests;

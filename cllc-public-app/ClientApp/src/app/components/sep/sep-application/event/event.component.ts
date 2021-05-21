@@ -1,14 +1,17 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faMapMarkerAlt, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { SepApplication } from '@models/sep-application.model';
-import { IndexDBService } from '@services/index-db.service';
+import { IndexedDBService } from '@services/indexed-db.service';
 import { FormBase } from '@shared/form-base';
 import { Account } from '@models/account.model';
 import { SepLocation } from '@models/sep-location.model';
 import { SepSchedule } from '@models/sep-schedule.model';
 import { SepServiceArea } from '@models/sep-service-are.model';
+import { AutoCompleteItem, SpecialEventsDataService } from '@services/special-events-data.service';
+import { filter, tap, switchMap } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-event',
@@ -27,51 +30,87 @@ export class EventComponent extends FormBase implements OnInit {
   form: FormGroup;
   showValidationMessages: boolean;
   validationMessages: string[];
+  previewCities: AutoCompleteItem[] = [];
+  autocompleteCities: AutoCompleteItem[] = [];
   get minDate() {
     return new Date();
   }
   @Input()
-  set applicationId(value: number) {
+  set localId(value: number) {
     this._appID = value;
     //get the last saved application
     this.db.getSepApplication(value)
       .then(app => {
         this.sepApplication = app;
         if (this.form) {
-          this.form.patchValue(this.sepApplication);
+          this.setFormValue(this.sepApplication);
         }
       });
   };
 
+  get cities(): AutoCompleteItem[] {
+    return [...this.autocompleteCities, ...this.previewCities];
+  }
+
   get locations(): FormArray {
     return this.form.get('eventLocations') as FormArray;
   }
+  sepCityRequestInProgress: boolean;
 
   constructor(private fb: FormBuilder,
     private router: Router,
-    private db: IndexDBService) {
+    private cd: ChangeDetectorRef,
+    private snackBar: MatSnackBar,
+    private specialEventsDataService: SpecialEventsDataService,
+    private db: IndexedDBService) {
     super();
+    specialEventsDataService.getSepCityAutocompleteData(null, true)
+      .subscribe(results => {
+        this.previewCities = results;
+      });
   }
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      lgIn: [''],
+      sepCity: [''],
       isAnnualEvent: [''],
+      maximumNumberOfGuests: [''],
       eventLocations: this.fb.array([]),
     });
+    this.setFormValue(this.sepApplication);
 
-    if (this.sepApplication) {
-      this.form.patchValue(this.sepApplication);
+    this.form.get('sepCity').valueChanges
+      .pipe(filter(value => value && value.length >= 3),
+        tap(_ => {
+          this.autocompleteCities = [];
+          this.sepCityRequestInProgress = true;
+        }),
+        switchMap(value => this.specialEventsDataService.getSepCityAutocompleteData(value, false))
+      )
+      .subscribe(data => {
+        this.autocompleteCities = data;
+        this.sepCityRequestInProgress = false;
+
+        this.cd.detectChanges();
+        if (data && data.length === 0) {
+          this.snackBar.open('No match found', '', { duration: 2500, panelClass: ['green-snackbar'] });
+        }
+      });
+  }
+
+  setFormValue(app: SepApplication) {
+    if (app) {
+      this.form.patchValue(app);
     }
+    this.locations.clear();
 
-    if (this?.sepApplication?.eventLocations?.length > 0) {
-      this.sepApplication.eventLocations.forEach(loc => {
+    if (app?.eventLocations?.length > 0) {
+      app.eventLocations.forEach(loc => {
         this.addLocation(loc);
       });
     } else {
       this.addLocation();
     }
-
   }
 
   getServiceAreas(locationIndex: number): FormArray {
@@ -83,10 +122,11 @@ export class EventComponent extends FormBase implements OnInit {
     return result;
   }
 
-  getEventDates(location: FormGroup): FormArray {
+  getEventDates(locationIndex: number): FormArray {
     let result = this.fb.array([]);
     if (location) {
-      result = location.get('eventDates') as FormArray;
+      result = this.locations.at(locationIndex)
+        .get('eventDates') as FormArray;
     }
     return result;
   }
@@ -94,6 +134,7 @@ export class EventComponent extends FormBase implements OnInit {
 
   addLocation(location: SepLocation = new SepLocation()) {
     let locationForm = this.fb.group({
+      locationId: [null],
       locationPermitNumber: [''],
       locationName: [''],
       venueType: [''],
@@ -104,6 +145,7 @@ export class EventComponent extends FormBase implements OnInit {
       eventLocationProvince: [''],
       eventLocationPostalCode: [''],
       serviceAreas: this.fb.array([]),
+      eventDates: this.fb.array([]),
     });
     locationForm.patchValue(location);
 
@@ -113,16 +155,22 @@ export class EventComponent extends FormBase implements OnInit {
     location.serviceAreas.forEach(area => {
       const areaForm = this.createServiceArea(area);
       (locationForm.get('serviceAreas') as FormArray).push(areaForm);
-
-      if (!area.eventDates || area.eventDates.length == 0) {
-        area.eventDates = [{} as SepSchedule];
-      }
-      area.eventDates.forEach(ed => {
-        const edForm = this.createEventDate(ed);
-        (areaForm.get('eventDates') as FormArray).push(edForm);
-      });
-
     });
+
+    if (!location.serviceAreas || location.serviceAreas.length == 0) {
+      location.serviceAreas = [{} as SepServiceArea];
+    }
+
+    if (!location.eventDates || location.eventDates.length == 0) {
+      location.eventDates = [{} as SepSchedule];
+    }
+
+    location.eventDates.forEach(ed => {
+      const edForm = this.createEventDate(ed);
+      (locationForm.get('eventDates') as FormArray).push(edForm);
+    });
+
+
 
 
     this.locations.push(locationForm);
@@ -133,21 +181,29 @@ export class EventComponent extends FormBase implements OnInit {
     this.locations.removeAt(locationIndex);
   }
 
-  addEventDate(sched: SepSchedule, area: FormGroup) {
-    const eventDates = area.get('eventDates') as FormArray;
+  addEventDate(sched: SepSchedule, location: FormGroup) {
+    const eventDates = location.get('eventDates') as FormArray;
     const dates = this.createEventDate(sched);
     eventDates.push(dates);
   }
 
   createEventDate(eventDate: SepSchedule) {
     let datesForm = this.fb.group({
+      eventScheduleId: [null],
       eventDate: [''],
-      eventStart: [''],
-      eventEnd: [''],
-      serviceStart: [''],
-      serviceEnd: [''],
+      eventStartValue: [''],
+      eventEndValue: [''],
+      serviceStartValue: [''],
+      serviceEndValue: [''],
     });
-    datesForm.patchValue(eventDate);
+    eventDate = Object.assign(new SepSchedule(null), eventDate);
+    const val = eventDate.toEventFormValue();
+    
+    // Set default to event start date
+    if (!val.eventDate) {
+      val.eventDate = this?.sepApplication?.eventStartDate;
+    }
+    datesForm.patchValue(val);
     return datesForm;
   }
 
@@ -164,6 +220,7 @@ export class EventComponent extends FormBase implements OnInit {
 
   createServiceArea(area: SepServiceArea) {
     let areaForm = this.fb.group({
+      licencedAreaId: [null],
       eventName: [''],
       isBothOutdoorIndoor: [''],
       isIndoors: [''],
@@ -177,10 +234,9 @@ export class EventComponent extends FormBase implements OnInit {
       setting: [''],
       stateCode: [''],
       statusCode: [''],
-      eventDates: this.fb.array([]),
     });
     areaForm.patchValue(area);
-    
+
     return areaForm;
   }
 
@@ -190,6 +246,9 @@ export class EventComponent extends FormBase implements OnInit {
     serviceAreas.removeAt(serviceAreaIndex);
   }
 
+  autocompleteDisplay(item: AutoCompleteItem) {
+    return item?.name;
+  }
 
   isValid() {
     this.markControlsAsTouched(this.form);
@@ -198,10 +257,26 @@ export class EventComponent extends FormBase implements OnInit {
     return this.form.valid;
   }
 
+  getFormValue(): SepApplication {
+    let data = {
+      ...this.sepApplication,
+      ...this.form.value
+    };
+    data?.eventLocations.forEach(location => {
+      let dateValues = [];
+      location?.eventDates.forEach(sched => {
+        dateValues.push(new SepSchedule(sched));
+      });
+      location.eventDates = dateValues;
+    });
+
+    return data as SepApplication;
+
+  }
+
   save() {
     const data = {
-      id: this._appID,
-      ...this.sepApplication,
+      localId: this._appID,
       lastUpdated: new Date(),
       status: 'unsubmitted',
       stepsCompleted: (steps => {
@@ -211,11 +286,11 @@ export class EventComponent extends FormBase implements OnInit {
         }
         return steps;
       })(this?.sepApplication?.stepsCompleted || []),
-      ...this.form.value,
+      ...this.getFormValue()
     } as SepApplication;
 
-    if (data.id) {
-      this.db.applications.update(data.id, data);
+    if (data.localId) {
+      this.db.applications.update(data.localId, data);
     } else {
       console.error("The id should already exist at this point.")
     }

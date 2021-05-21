@@ -24,5 +24,10 @@ namespace Gov.Jag.Lcrb.OneStopService
             }
             return result;
         }
+
+        public static string GetTimeStamp()
+        {
+            return DateTime.Now.ToString("yyyy-MM-dd-hh.mm.ss.000000");
+        }
     }
 }

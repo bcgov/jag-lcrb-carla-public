@@ -27,7 +27,6 @@ namespace Gov.Lclb.Cllb.Public.Models
                     ServiceStart = eventDates.AdoxioServicestart,
                     ServiceEnd = eventDates.AdoxioServiceend,
                 };
-
             }
             return result;
         }
@@ -36,7 +35,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         public static void CopyValues(this MicrosoftDynamicsCRMadoxioSpecialeventschedule to, ViewModels.SepEventDates from)
         {
             // to.AdoxioSpecialeventscheduleid = from.Id;
-            to._adoxioSpecialeventidValue = from.SpecialEventId;
+            to._adoxioSpecialeventidValue = from.Id;
             to._adoxioSpecialeventlocationidValue = from.LocationId;
             to.AdoxioEventstart = from.EventStart;
             to.AdoxioEventend = from.EventEnd;

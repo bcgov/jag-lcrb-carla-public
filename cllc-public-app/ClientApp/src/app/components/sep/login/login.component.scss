@@ -1,3 +1,52 @@
 mat-card{
     background-color: #EFF3FC !important;
+    padding: 0px;
+    border: solid #ccc 1px;
+}
+mat-card-content{
+  background-color:white;
+  margin: 1px;
+  padding: 5px;
+}
+mat-card-header{
+  border-bottom: solid #ccc 1px;
+  padding: 5px;
+}
+.mat-card-title {
+  font-size: 14px;
+  font-weight: 900;
+  margin: 5px;
+  margin-bottom: 5px;
+}
+
+.mad-card-header{
+  font-size: 14px;
+  font-weight: 900;
+  margin: 5px;
+  margin-bottom: 5px;
+}
+
+mat-raised-button{
+  width: 200px;
+}
+
+.side-box {
+  max-width: 400px;
+  margin: 40px 0px 40px -15px;
+  padding: 45px;
+  background-color: rgba(56, 89, 138, 1);
+  border-bottom: 3px solid #fcba19 !important;
+  h2,
+  p,li {
+      color: white;
+  }
+
+  h2 {
+      font-size: 22px;
+      margin-top: 0;
+      margin-bottom: 30px;
+  }
+  .btn {
+      background-color: #003366;
+  }
 }

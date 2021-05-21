@@ -1,8 +1,10 @@
 import { SepLocation } from "./sep-location.model";
 
 export class SepApplication {
-    id: number
+    id: string; // server side primary key
+    localId?: number;  // indexed db primary key
     tempJobNumber: string;
+    eventStartDate: Date;
     dateCreated: Date;
     lastUpdated: Date;
     eventName: string;
@@ -10,7 +12,9 @@ export class SepApplication {
     agreeToTnC: boolean;
     dateAgreedToTnC: Date;
     stepsCompleted: string[];
-    eventStatus: string;
+    eventStatus: string; 
+    totalServings: number;
+    invoiceTrigger: number;
 
     eligibilityAtPrivateResidence: boolean;
     eligibilityMajorSignificance: boolean;
@@ -20,8 +24,8 @@ export class SepApplication {
     permitNumber: string;
     isTastingEvent: boolean;
     isBeerGarden: boolean;
-    numMaxGuests: number;
+    maximumNumberOfGuests: number;
 
     eventLocations: SepLocation[] = [];
 
-}
+} 

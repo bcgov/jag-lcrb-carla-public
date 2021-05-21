@@ -13,6 +13,7 @@ import { Application } from "@models/application.model";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 
+
 @Component({
   selector: "app-multi-stage-application-flow",
   templateUrl: "./multi-stage-application-flow.component.html",

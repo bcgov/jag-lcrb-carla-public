@@ -1044,6 +1044,32 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
 
         /// <summary>
+        /// Get a list of active contacts by their account ID
+        /// </summary>
+        /// <param name="system"></param>
+        /// <param name="siteminderId"></param>
+        /// <returns></returns>
+        public static List<MicrosoftDynamicsCRMcontact> GetActiveContactsByAccountId(this IDynamicsClient system, string accountId)
+        {
+            List<MicrosoftDynamicsCRMcontact> result = null;
+            try
+            {
+                var contactsResponse = system.Contacts.Get(filter: $"statecode eq 0 and _accountid_value eq {accountId}");
+                result = contactsResponse.Value.ToList();
+            }
+            catch (HttpOperationException)
+            {
+                result = null;
+            }
+            catch (Exception)
+            {
+                result = null;
+            }
+
+            return result;
+        }
+
+        /// <summary>
         /// Get a contact by their First Initial, Last Name and Birthdate
         /// </summary>
         /// <param name="system"></param>

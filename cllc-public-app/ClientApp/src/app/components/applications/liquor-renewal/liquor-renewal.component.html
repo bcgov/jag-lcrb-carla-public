@@ -195,10 +195,9 @@
   <section style="padding-right: 95px;">
     <!-- link to Org Structure-->
     <div *ngIf="form.get('renewalShareholders').value === 'Yes'" class="field-changed">
-      <button routerLink="/org-structure" class="btn btn-missing" target="_blank">
-        <fa-icon [icon]="faPenclilAlt" style="margin-right: 10px;"></fa-icon>Update your
-        <strong>Shareholder Information</strong> on the <strong>Organization Details</strong>
-        page
+      <button routerLink="/permanent-change-to-a-licensee" class="btn btn-missing" target="_blank">
+        <fa-icon [icon]="faPenclilAlt" style="margin-right: 10px;"></fa-icon>Submit a
+        <strong>Permanent Change to a Licensee</strong> application.
       </button>
     </div>
   </section>
@@ -228,7 +227,7 @@
   </section>
 </mat-card>
 
-<mat-card class="mat-elevation-z1" style="margin-bottom: 10px;">
+<mat-card class="mat-elevation-z1" style="margin-bottom: 10px;" *ngIf="!isAgent()">
   <section class="d-flex justify-content-between w-100">
     <div class="question-label align-self-center">
       6. Have you made any unreported structural changes to your establishment within the past 12
@@ -252,7 +251,7 @@
   </section>
 </mat-card>
 
-<mat-card class="mat-elevation-z1" style="margin-bottom: 10px;">
+<mat-card class="mat-elevation-z1" style="margin-bottom: 10px;" *ngIf="!isAgent()">
   <section class="d-flex justify-content-between w-100">
     <div class="question-label align-self-center">
       7. Have you acquired a new interest or expanded an existing interest financial or otherwise
@@ -279,7 +278,7 @@
     </div>
   </section>
 </mat-card>
-<mat-card class="mat-elevation-z1" style="margin-bottom: 10px;">
+<mat-card class="mat-elevation-z1" style="margin-bottom: 10px;" *ngIf="!isAgent()">
   <section class="d-flex justify-content-between w-100">
     <div class="question-label align-self-center">
       8. Have you sold the business associated with this liquor licence within the last 12 months
@@ -303,7 +302,7 @@
     </div>
   </section>
 </mat-card>
-<mat-card class="mat-elevation-z1" style="margin-bottom: 10px;">
+<mat-card class="mat-elevation-z1" style="margin-bottom: 10px;" *ngIf="!isAgent()">
   <section class="d-flex justify-content-between w-100">
     <div class="question-label align-self-center">
       9. Have you sold the property or transferred the lease associated with this liquor licence
@@ -330,7 +329,7 @@
 <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;">
   <section class="d-flex justify-content-between w-100">
     <div class="question-label align-self-center">
-      10. Have you added, changed or removed a licensee representative within the past 12 months?
+      <span *ngIf="!isAgent()">10.</span><span *ngIf="isAgent()">6.</span> Have you added, changed or removed a licensee representative within the past 12 months?
     </div>
     <div style="flex: 0 0 85px;">
       <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalkeypersonnel')}"

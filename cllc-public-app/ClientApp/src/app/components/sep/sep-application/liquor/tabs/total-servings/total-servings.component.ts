@@ -1,4 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SepApplication } from '@models/sep-application.model';
 
 @Component({
   selector: 'app-total-servings',
@@ -6,14 +8,25 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./total-servings.component.scss']
 })
 export class TotalServingsComponent implements OnInit {
-  declaredMaxServings: number = 1;
-  @Output() saved: EventEmitter<{declaredServings: number}> = new EventEmitter<{declaredServings: number}>();
+  _application: SepApplication
+  @Input()
+  set application(value: SepApplication) {
+    this._application = value;
+    this.totalServings = value.totalServings
+  };
+  get application() {
+    return this._application;
+  }
+  @Output() saved: EventEmitter<{ totalServings: number }> = new EventEmitter<{ totalServings: number }>();
   minServings = 1;
   maxServings = 114;
+  form: FormGroup;
+  @Input() totalServings: number;
 
-  constructor() { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
+
   }
 
   formatLabel(value: number) {
@@ -21,8 +34,7 @@ export class TotalServingsComponent implements OnInit {
   }
 
   next() {
-    let declaredServings = this.declaredMaxServings;
-    this.saved.next({declaredServings});
+    this.saved.next({ totalServings: this.totalServings });
   }
 
 }
