@@ -17,4 +17,4 @@ jobs:
 
       - name: Build image
         working-directory: ./openshift/other-templates/agent-dotnet
-        run: docker build . --file Dockerfile.rhel7 --tag $IMAGE_NAME
+        run: docker build . --file Dockerfile --tag $IMAGE_NAME
