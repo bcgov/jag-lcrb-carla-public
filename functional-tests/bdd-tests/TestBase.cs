@@ -54,15 +54,15 @@ namespace bdd_tests
 
             // var timeout = 45.0;
             // temp change to explore pipeline impact
-            var timeout = 90.0;
+            var timeout = 45.0;
 
             driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(timeout);
             //driver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(timeout * 2);
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(timeout);
+            //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(timeout);
 
             ngDriver = new NgWebDriver(driver);
 
-            ngDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(timeout);
+            //ngDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(timeout);
             ngDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(timeout);
             //ngDriver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(timeout * 2);
 
