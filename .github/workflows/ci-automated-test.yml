@@ -1,14 +1,18 @@
-name: ci-phsa-adapter
+name: ci-automated-test
 
 on:
-  pull_request:
-    types: [opened, reopened, edited, synchronize]
+  push:
+
+    branches:
+      - develop
     paths:
-      - "phsa-adapter/src/**"
-      - ".github/workflows/ci-phsa-adapter.yml"
+      - "functional-tests/**"
+      - ".github/workflows/ci-automated-test"
 
 env:
-  IMAGE_NAME: phsa-adapter
+  IMAGE_NAME: "agent-dotnet"
+  SOURCE_IMAGE_ID: ${{ secrets.OCP4_REGISTRY }}/${{ secrets.OCP4_NAMESPACE }}/ose-jenkins-agent-base
+  IMAGE_ID: ${{ secrets.OCP4_REGISTRY }}/${{ secrets.OCP4_NAMESPACE }}/agent-dotnet
 
 jobs:
   build:
@@ -16,6 +20,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Build image
-        working-directory: ./phsa-adapter/src
-        run: docker build . --file Dockerfile --tag $IMAGE_NAME
+      - name: Log into registry
+        run: echo "${{ secrets.OCP4_PASSWORD  }}" | docker login ${{ secrets.OCP4_REGISTRY }}/${{ secrets.OCP4_NAMESPACE }} -u ${{ secrets.OCP4_USERNAME }} --password-stdin
+
+      - name: Pull image
+        run: docker pull $SOURCE_IMAGE_ID || true  
+        
+      - name: Run Test
+        run: docker exec -it $IMAGE_NAME pwd
