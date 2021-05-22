@@ -26,4 +26,4 @@ jobs:
         run: docker pull $IMAGE_ID || true  
         
       - name: Run Test
-        run: docker run `pwd`:/test -w /test/functional-tests/bdd-tests -i -t $IMAGE_NAME dotnet test
+        run: docker run "`pwd`:/test" -w /test/functional-tests/bdd-tests -i -t $IMAGE_NAME dotnet test
