@@ -382,6 +382,10 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 if (account != null && account.Accountid != null)
                 {
                     userSettings.AccountId = account.Accountid;
+                    if (userSettings.AuthenticatedUser == null)
+                    {
+                        userSettings.AuthenticatedUser = new Models.User();
+                    }
                     userSettings.AuthenticatedUser.AccountId = Guid.Parse(account.Accountid);
 
                     // ensure that the given account has a documents folder.
