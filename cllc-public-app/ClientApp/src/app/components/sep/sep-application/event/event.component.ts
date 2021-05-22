@@ -198,7 +198,7 @@ export class EventComponent extends FormBase implements OnInit {
     });
     eventDate = Object.assign(new SepSchedule(null), eventDate);
     const val = eventDate.toEventFormValue();
-    
+
     // Set default to event start date
     if (!val.eventDate) {
       val.eventDate = this?.sepApplication?.eventStartDate;
@@ -226,11 +226,11 @@ export class EventComponent extends FormBase implements OnInit {
       isIndoors: [''],
       isOutdoors: [''],
       licencedAreaDescription: [''],
-      licencedAreaMaxNumberOfGuests: [''],
-      licencedAreaNumberOfMinors: [''],
-      maximumNumberOfGuests: [''],
+      licencedAreaMaxNumberOfGuests: [0],
+      licencedAreaNumberOfMinors: [0],
+      maximumNumberOfGuests: [0],
       minorPresent: [''],
-      numberOfMinors: [''],
+      numberOfMinors: [0],
       setting: [''],
       stateCode: [''],
       statusCode: [''],
