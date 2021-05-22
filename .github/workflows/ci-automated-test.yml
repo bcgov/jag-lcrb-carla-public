@@ -26,4 +26,4 @@ jobs:
         run: docker pull $IMAGE_ID || true  
         
       - name: Run Test
-        run: docker run -e baseUri="${{ secrets.TEST_BASE_URI }}" -e test_start="${{ secrets.TEST_START }}"  -e test_start_worker="${{ secrets.TEST_START_WORKER }}" -e test_cc="${{ secrets.TEST_CC }}" -e test_ccv="${{ secrets.TEST_CCV }}" -e CHROME_BINARY_LOCATION="/opt/google/chrome/chrome" -v "`pwd`:/test" -w /test/functional-tests/bdd-tests -t $IMAGE_ID --entrypoint "/bin/bash -c dotnet test"
+        run: docker run -e baseUri="${{ secrets.TEST_BASE_URI }}" -e test_start="${{ secrets.TEST_START }}"  -e test_start_worker="${{ secrets.TEST_START_WORKER }}" -e test_cc="${{ secrets.TEST_CC }}" -e test_ccv="${{ secrets.TEST_CCV }}" -e CHROME_BINARY_LOCATION="/opt/google/chrome/chrome" -v "`pwd`:/test" -w /test/functional-tests/bdd-tests -t $IMAGE_ID --entrypoint /bin/bash /test -c dotnet test
