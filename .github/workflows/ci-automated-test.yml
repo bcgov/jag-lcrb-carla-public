@@ -7,7 +7,7 @@ on:
       - develop
     paths:
       - "functional-tests/**"
-      - ".github/workflows/ci-automated-test"
+      - ".github/workflows/ci-automated-test.yml"
 
 env:
   IMAGE_NAME: "agent-dotnet"
@@ -26,4 +26,4 @@ jobs:
         run: docker pull $IMAGE_ID || true  
         
       - name: Run Test
-        run: docker exec -it $IMAGE_NAME pwd
+        run: docker run `pwd`:/test -w /test/functional-tests/bdd-tests -i -t $IMAGE_NAME dotnet test
