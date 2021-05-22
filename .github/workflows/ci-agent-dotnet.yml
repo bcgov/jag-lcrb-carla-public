@@ -1,7 +1,7 @@
 name: ci-agent-dotnet
 on:
   push:
-    # Publish `master` as Docker `latest` image.
+
     branches:
       - develop
       
@@ -12,6 +12,7 @@ on:
 env:
   IMAGE_NAME: "agent-dotnet"
   SOURCE_IMAGE_ID: ${{ secrets.OCP4_REGISTRY }}/${{ secrets.OCP4_NAMESPACE }}/ose-jenkins-agent-base
+  MYAPP_IMAGE: ${{ secrets.OCP4_REGISTRY }}/${{ secrets.OCP4_NAMESPACE }}/ose-jenkins-agent-base:latest
   IMAGE_ID: ${{ secrets.OCP4_REGISTRY }}/${{ secrets.OCP4_NAMESPACE }}/agent-dotnet
 jobs:
   build:
@@ -27,7 +28,7 @@ jobs:
 
       - name: Build image
         working-directory: ./openshift/other-templates/agent-dotnet
-        run: docker build . --file Dockerfile --tag $IMAGE_NAME
+        run: docker build . --file Dockerfile --tag $IMAGE_NAME --build-arg MYAPP_IMAGE=$MYAPP_IMAGE
 
       - name: Push image
         run: |
