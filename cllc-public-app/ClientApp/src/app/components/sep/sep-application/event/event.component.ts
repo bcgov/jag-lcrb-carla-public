@@ -222,9 +222,6 @@ export class EventComponent extends FormBase implements OnInit {
     let areaForm = this.fb.group({
       licencedAreaId: [null],
       eventName: [''],
-      isBothOutdoorIndoor: [''],
-      isIndoors: [''],
-      isOutdoors: [''],
       licencedAreaDescription: [''],
       licencedAreaMaxNumberOfGuests: [''],
       licencedAreaNumberOfMinors: [''],

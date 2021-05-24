@@ -30,7 +30,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                     // IsOutdoors = serviceArea.,
                     NumberOfMinors = serviceArea.AdoxioLicencedareanumberofminors,
                     LicencedAreaNumberOfMinors = serviceArea.AdoxioLicencedareanumberofminors,
-                    Setting = serviceArea.AdoxioSetting,
+                    Setting = (ViewModels.ServiceAreaSetting?)serviceArea.AdoxioSetting,
                     StatusCode = serviceArea.Statecode,
                     StateCode = serviceArea.Statecode,
                     EventName = serviceArea.AdoxioEventname,
@@ -54,7 +54,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             // to.AdoxioIsoutdoors = from.IsOutdoors;
             to.AdoxioLicencedareanumberofminors = from.NumberOfMinors;
             to.AdoxioLicencedareanumberofminors = from.LicencedAreaNumberOfMinors;
-            to.AdoxioSetting = from.Setting;
+            to.AdoxioSetting = (int?)from.Setting;
             to.Statecode = from.StatusCode;
             to.Statecode = from.StateCode;
             to.AdoxioEventname = from.EventName;

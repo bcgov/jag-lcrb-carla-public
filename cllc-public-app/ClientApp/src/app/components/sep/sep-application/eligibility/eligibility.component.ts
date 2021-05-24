@@ -50,47 +50,47 @@ export class EligibilityComponent extends FormBase implements OnInit {
     this.form = this.fb.group({
       eligibilityAtPrivateResidence: ['', [Validators.required]],
       eligibilityOnPublicProperty: ['', [Validators.required]],
-      eligibilityMajorSignificance: [false, [Validators.required]],
-      eligibilityMajorSignificanceRationale: [''],
+      isMajorSignificance: [false, [Validators.required]],
+      isMajorSignificanceRationale: [''],
       eligibilityLocalSignificance: [false, [Validators.required]],
       eventStartDate: ['', [Validators.required]],
-      eligibilityPrivateOrPublic: ['', [Validators.required]],
+      privateOrPublic: ['', [Validators.required]],
       eligibilityResponsibleBevServiceNumber: ['', [Validators.required]],
       eligibilityResponsibleBevServiceNumberDoesNotHave: [false],
       eventDescription: ['', [Validators.required, Validators.maxLength(255)]],
       eligibilityChargingAdmission: ['', [Validators.required]],
       eligibilityLocalIsLicensed: [null, [Validators.required]],
-      hostingOrganizationName: [''],
-      hostingOrganizationAddress: [''],
-      hostingOrganizationCategory: [''],
+      hostOrganizationName: [''],
+      hostOrganizationAddress: [''],
+      hostOrganizationCategory: [''],
     });
 
-    this.form.get('eligibilityPrivateOrPublic').valueChanges
+    this.form.get('privateOrPublic').valueChanges
       .pipe(distinctUntilChanged())
       .subscribe(selectedValue => {
         // if not Private – Family and invited friends only
         if (selectedValue && selectedValue !== '1') {
-          this.form.get('hostingOrganizationName').setValidators([Validators.required]);
-          this.form.get('hostingOrganizationAddress').setValidators([Validators.required]);
-          this.form.get('hostingOrganizationCategory').setValidators([Validators.required]);
+          this.form.get('hostOrganizationName').setValidators([Validators.required]);
+          this.form.get('hostOrganizationAddress').setValidators([Validators.required]);
+          this.form.get('hostOrganizationCategory').setValidators([Validators.required]);
         } else {
-          this.form.get('hostingOrganizationName').clearValidators();
-          this.form.get('hostingOrganizationName').reset();
-          this.form.get('hostingOrganizationAddress').clearValidators();
-          this.form.get('hostingOrganizationAddress').reset();
-          this.form.get('hostingOrganizationCategory').clearValidators();
-          this.form.get('hostingOrganizationCategory').reset();
+          this.form.get('hostOrganizationName').clearValidators();
+          this.form.get('hostOrganizationName').reset();
+          this.form.get('hostOrganizationAddress').clearValidators();
+          this.form.get('hostOrganizationAddress').reset();
+          this.form.get('hostOrganizationCategory').clearValidators();
+          this.form.get('hostOrganizationCategory').reset();
         }
       });
 
-    this.form.get('eligibilityMajorSignificance').valueChanges
+    this.form.get('isMajorSignificance').valueChanges
       .pipe(distinctUntilChanged())
       .subscribe((hasMajorSignificance: boolean) => {
         if (hasMajorSignificance) {
-          this.form.get('eligibilityMajorSignificanceRationale').setValidators([Validators.required]);
+          this.form.get('isMajorSignificanceRationale').setValidators([Validators.required]);
         } else {
-          this.form.get('eligibilityMajorSignificanceRationale').clearValidators();
-          this.form.get('eligibilityMajorSignificanceRationale').reset();
+          this.form.get('isMajorSignificanceRationale').clearValidators();
+          this.form.get('isMajorSignificanceRationale').reset();
         }
       });
 

@@ -1,4 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { SepApplication } from '@models/sep-application.model';
+import { IndexedDBService } from '@services/indexed-db.service';
 
 @Component({
   selector: 'app-summary',
@@ -6,9 +8,26 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./summary.component.scss']
 })
 export class SummaryComponent implements OnInit {
-  @Output()
-  saveComplete = new EventEmitter<boolean>();
-  constructor() { }
+  @Input() account: Account;
+  @Output() saveComplete = new EventEmitter<boolean>();
+
+  _appID: number;
+  application: SepApplication;
+
+  @Input() set localId(value: number) {
+    this._appID = value;
+    //get the last saved application
+    this.db.getSepApplication(value)
+      .then(app => {
+        this.application = app;
+      });
+  };
+
+  get localId() {
+    return this._appID;
+  }
+
+  constructor(private db: IndexedDBService) { }
 
   ngOnInit(): void {
   }
