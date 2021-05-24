@@ -37,7 +37,7 @@
 
             <mat-step [completed]="isStepCompleted(step)" *ngIf="step === 'summary'">
                 <ng-template matStepLabel>Summary</ng-template>
-                <app-summary *ngIf="stepper.selectedIndex === index" class="w-100" #summary>
+                <app-summary  [localId]="localId"  [account]="account" *ngIf="stepper.selectedIndex === index" class="w-100" #summary>
                 </app-summary>
             </mat-step>
 

@@ -1,8 +1,12 @@
 ::ng-deep {
-    .form-wrapper {
+    .form-wrapper-summary {
         max-width: 1000px;
         mat-divider {
             margin: 16px 0;
+        }
+
+        div.d-flex > label{
+                width: 160px;
         }
 
         .declaration-content {
@@ -19,6 +23,19 @@
 
         .mat-expansion-panel {
             margin-bottom: 16px;
+            .mat-expansion-panel-header {
+                background-color: #41598b;
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+                height: 40px;
+                .mat-expansion-panel-header-title {
+                    color: #fff;
+                }
+            }
+            .mat-expansion-panel-content {
+                background-color: #fff;
+                padding-top: 8px;
+            }
         }
     }
 }

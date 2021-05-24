@@ -69,11 +69,11 @@
         <div class="d-flex justify-content-between">
             <app-field [isFullWidth]="true"
                 label="Is this an event of provincial, national, or international significance?" [required]="true">
-                <mat-radio-group formControlName="eligibilityMajorSignificance">
+                <mat-radio-group formControlName="isMajorSignificance">
                     <mat-radio-button color="primary" class="mr-3" [value]="true">Yes</mat-radio-button>
                     <mat-radio-button color="primary" class="mr-3" [value]="false">No</mat-radio-button>
                 </mat-radio-group>
-                <app-error-alert *ngIf="form.get('eligibilityMajorSignificance').value">
+                <app-error-alert *ngIf="form.get('isMajorSignificance').value">
                     <p>
                         Please complete the rationale section below and state why you believe your event is of a
                         provincial,
@@ -85,10 +85,10 @@
                         to the right of the text box for more information.
                     </p>
                 </app-error-alert>
-                <br *ngIf="form.get('eligibilityMajorSignificance').value">
-                <app-field *ngIf="form.get('eligibilityMajorSignificance').value" [isFullWidth]="true"
+                <br *ngIf="form.get('isMajorSignificance').value">
+                <app-field *ngIf="form.get('isMajorSignificance').value" [isFullWidth]="true"
                     label="Describe rationale" [required]="true">
-                    <textarea formControlName="eligibilityMajorSignificanceRationale" class="w-80 form-control"
+                    <textarea formControlName="isMajorSignificanceRationale" class="w-80 form-control"
                         rows="3"></textarea>
                 </app-field>
             </app-field>
@@ -132,15 +132,15 @@
         <mat-divider></mat-divider>
         <div class="d-flex justify-content-between">
             <app-field [isFullWidth]="true" label="Is your event private or public?" [required]="true"
-                [valid]="!form.get('eligibilityPrivateOrPublic').touched || form.get('eligibilityPrivateOrPublic').valid"
+                [valid]="!form.get('privateOrPublic').touched || form.get('privateOrPublic').valid"
                 errorMessage="Licence category can't be blank">
-                <select formControlName="eligibilityPrivateOrPublic" class="form-control">
+                <select formControlName="privateOrPublic" class="form-control">
                     <option value=""></option>
-                    <option value="2">Private – An organization's members or staff, invited guests and ticket holders
+                    <option value="Members">Private – An organization's members or staff, invited guests and ticket holders
                     </option>
-                    <option selected="selected" value="1">Private – Family and invited friends only</option>
-                    <option value="5">Private – Hobbyist competition</option>
-                    <option value="3">Public – Open to the general public or anyone who wishes to participate or buy a
+                    <option value="Family">Private – Family and invited friends only</option>
+                    <option value="Hobbyist">Private – Hobbyist competition</option>
+                    <option value="Anyone">Public – Open to the general public or anyone who wishes to participate or buy a
                         ticket
                     </option>
                 </select>
@@ -162,11 +162,11 @@
                 </fa-icon>
             </div>
         </div>
-        <ng-container *ngIf="this.form.get('eligibilityPrivateOrPublic').value && this.form.get('eligibilityPrivateOrPublic').value !== '1'">
+        <ng-container *ngIf="this.form.get('privateOrPublic').value && this.form.get('privateOrPublic').value !== '1'">
             <section class="d-flex justify-content-between" style="padding: 0 32px 0 32px;">
                 <app-field style="flex: 1" [isFullWidth]="true"
                     label="What is the name of the organization hosting the event?" [required]="true">
-                    <input formControlName="hostingOrganizationName" class="form-control w-100">
+                    <input formControlName="hostOrganizationName" class="form-control w-100">
                 </app-field>
                 <div>
                     <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip3a.toggle()"
@@ -179,21 +179,20 @@
             </section>
             <section style="padding: 0 50px 0 32px;">
                 <app-field [isFullWidth]="true" label="What is the address of the organization?" [required]="true">
-                    <input formControlName="hostingOrganizationAddress" class="form-control w-100">
+                    <input formControlName="hostOrganizationAddress" class="form-control w-100">
                 </app-field>
             </section>
             <section class="d-flex justify-content-between" style="padding: 0 32px 0 32px;">
                 <app-field style="flex: 1" [isFullWidth]="true"
                     label="Select a category that best describes your organization " [required]="true">
                     <i>Before selecting a category, please read tool tip</i>
-                    <select formControlName="hostingOrganizationCategory" class="form-control w-100">
+                    <select formControlName="hostOrganizationCategory" class="form-control w-100">
                         <option value=""></option>
-                        <option value="incorporated_non_profit">Incorporated Non-profit organization</option>
-                        <option value="unincorporated_non_profit">Unincorporated Non-profit organization</option>
-                        <option value="incorporated_business_or_partnership">Incorporated Business or Partnership
+                        <option value="IncorporatedNonProfitOrganization">Incorporated Non-profit organization</option>
+                        <option value="UnincorporatedNonProfitOrganization">Unincorporated Non-profit organization</option>
+                        <option value="IncorporatedBusinessOrPartnership">Incorporated Business or Partnership
                         </option>
-                        <option value="unincorporated_business">Unincorporated Business</option>
-                        <option value="government_or_public_organization">Government or Public organization</option>
+                        <option value="GovernmentOrPublicOrganization">Government or Public organization</option>
                     </select>
                 </app-field>
                 <div>
