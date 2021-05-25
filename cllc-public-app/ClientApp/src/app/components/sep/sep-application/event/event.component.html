@@ -120,9 +120,9 @@
                                 <input type="text" formControlName="eventLocationPostalCode" class="form-control">
                             </app-field>
                             <app-field label="Maximum number of guests at this location at any time" [required]="true"
-                                [valid]="!location.get('locationMaxGuests').touched || location.get('locationMaxGuests').valid"
+                                [valid]="!location.get('maximumNumberOfGuests').touched || location.get('maximumNumberOfGuests').valid"
                                 errorMessage="Maximum number of guests is required">
-                                <input type="number" class="form-control" formControlName="locationMaxGuests">
+                                <input type="number" class="form-control" formControlName="maximumNumberOfGuests">
                             </app-field>
 
                             <section formGroupName="serviceAreas">
@@ -180,7 +180,7 @@
                                                         <option value=""></option>
                                                         <option value="Indoors">Indoors</option>
                                                         <option value="Outdoors">Outdoors</option>
-                                                        <option value="BothIndoorsAndOutdoors">Both Indoors & Outdoors</option>
+                                                        <option value="BothOutdoorsAndIndoors">Both Indoors & Outdoors</option>
                                                     </select>
 
                                                 </section>
