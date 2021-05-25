@@ -290,6 +290,45 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(result);
         }
 
+        // police get summary list of applications waiting approval
+        [HttpGet("police/current")]
+        public IActionResult GetPoliceCurrent()
+        {
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+            // get the account details.
+            var userAccount = _dynamicsClient.GetAccountById(userSettings.AccountId);
+            if (string.IsNullOrEmpty(userAccount._adoxioPolicejurisdictionidValue))  // ensure the current account has a police jurisdiction.
+            {
+                return Unauthorized();
+            }
+
+            List<ViewModels.SpecialEventSummary> result = new List<ViewModels.SpecialEventSummary>();
+
+            string filter = $"_adoxio_policejurisdictionid_value eq {userAccount._adoxioPolicejurisdictionidValue}";
+            string[] expand = new[] {"adoxio_PoliceRepresentativeId", "adoxio_PoliceAccountId" };
+            IList<MicrosoftDynamicsCRMadoxioSpecialevent> items = null;
+            try
+            {
+                items = _dynamicsClient.Specialevents.Get(filter:filter, expand:expand).Value;
+                
+                foreach (var item in items)
+                {
+                    result.Add(item.ToSummaryViewModel());
+                }
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Error getting special events");
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(exception, "Unexpected Error getting special events");
+            }
+
+            return new JsonResult(result);
+        }
+
+
         /// <summary>
         /// Gets SepCity Autocomplete data for a given name using startswith
         /// </summary>

@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Gov.Lclb.Cllb.Interfaces.Models;
+using Gov.Lclb.Cllb.Public.ViewModels;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
@@ -64,6 +66,29 @@ namespace Gov.Lclb.Cllb.Public.Models
                         .Select(specialEvent => specialEvent.ToViewModel())
                         .ToList();
                 }
+            }
+            return result;
+        }
+
+        public static ViewModels.SpecialEventSummary ToSummaryViewModel(this MicrosoftDynamicsCRMadoxioSpecialevent specialEvent)
+        {
+            ViewModels.SpecialEventSummary result = null;
+            if (specialEvent != null)
+            {
+                result = new ViewModels.SpecialEventSummary()
+                {
+                    SpecialEventId = specialEvent.AdoxioSpecialeventid,
+                    EventStartDate = specialEvent.AdoxioEventstartdate,
+                    EventName = specialEvent.AdoxioEventname,
+                    // TypeOfEvent =
+                    EventStatus = specialEvent.Statuscode,
+                    MaximumNumberOfGuests = specialEvent.AdoxioMaxnumofguests,
+                    DateSubmitted = specialEvent.AdoxioDatesubmitted,
+                    PoliceAccount = specialEvent.AdoxioPoliceAccountId.ToViewModel(),
+                    PoliceDecisionBy = specialEvent.AdoxioPoliceRepresentativeId.ToViewModel(),
+                    PoliceDecision = specialEvent.AdoxioPoliceapproval,
+                    DateOfPoliceDecision = specialEvent.AdoxioDatepoliceapproved
+                };
             }
             return result;
         }
