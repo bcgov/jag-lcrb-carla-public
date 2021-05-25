@@ -34,9 +34,6 @@ namespace Gov.Lclb.Cllb.Public.Models
 
         public static void CopyValues(this MicrosoftDynamicsCRMadoxioSpecialeventschedule to, ViewModels.SepEventDates from)
         {
-            // to.AdoxioSpecialeventscheduleid = from.Id;
-            to._adoxioSpecialeventidValue = from.Id;
-            to._adoxioSpecialeventlocationidValue = from.LocationId;
             to.AdoxioEventstart = from.EventStart;
             to.AdoxioEventend = from.EventEnd;
             to.AdoxioServicestart = from.ServiceStart;

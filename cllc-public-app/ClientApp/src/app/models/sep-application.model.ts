@@ -17,8 +17,8 @@ export class SepApplication {
     invoiceTrigger: number;
 
     eligibilityAtPrivateResidence: boolean;
-    eligibilityMajorSignificance: boolean;
-    eligibilityMajorSignificanceRational: string;
+    isMajorSignificance: boolean;
+    isMajorSignificanceRational: string;
     eligibilityLocalSignificance: boolean;
 
     permitNumber: string;
