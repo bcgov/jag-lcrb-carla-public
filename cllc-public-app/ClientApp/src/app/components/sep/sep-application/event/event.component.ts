@@ -138,7 +138,7 @@ export class EventComponent extends FormBase implements OnInit {
       locationPermitNumber: [''],
       locationName: [''],
       venueType: [''],
-      locationMaxGuests: [''],
+      maximumNumberOfGuests: [''],
       eventLocationStreet1: [''],
       eventLocationStreet2: [''],
       eventLocationCity: [''],
