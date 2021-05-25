@@ -16,7 +16,7 @@ export class IndexedDBService {
   constructor() {
     this.db = new Dexie('SepApplicationDatabase');
     this.db.version(3).stores({
-      applications: '++localId, id, tempJobNumber,dateCreated,lastUpdated,eventName,applicantInfo,agreeToTnC,dateAgreedToTnC,stepsCompleted,eventStatus,totalServings,invoiceTrigger,eligibilityAtPrivateResidence,eligibilityMajorSignificance,eligibilityMajorSignificanceRational,eligibilityLocalSignificance,permitNumber,isTastingEvent,isBeerGarden,numMaxGuest',
+      applications: '++localId, id, tempJobNumber,dateCreated,lastUpdated,eventName,applicantInfo,agreeToTnC,dateAgreedToTnC,stepsCompleted,eventStatus,totalServings,invoiceTrigger,eligibilityAtPrivateResidence,isMajorSignificance,isMajorSignificanceRational,eligibilityLocalSignificance,permitNumber,isTastingEvent,isBeerGarden,numMaxGuest',
     });
     this.applications = this.db.table("applications");
 

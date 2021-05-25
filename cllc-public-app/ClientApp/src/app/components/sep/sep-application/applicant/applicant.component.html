@@ -25,15 +25,15 @@
             <hr>
             <app-field label="Applicant information">
                 <div class="ml-3 p-3 applcant-info">
-                    <h6>{{account?.primarycontact?.firstname}} {{account?.primarycontact?.lastname}}</h6>
+                    <h6>{{account?.name}}</h6>
 
-                    {{account?.primarycontact?.address1_line1}} <br>
-                    {{account?.primarycontact?.address1_city}}, {{account?.primarycontact?.address1_stateorprovince}}
+                    {{account?.physicalAddressStreet}},  <br>
+                    {{account?.physicalAddressCity}}, {{account?.physicalAddressProvince}}
                     <br>
-                    {{account?.primarycontact?.address1_postalcode}} <br>
+                    {{account?.physicalAddressPostalCode}} <br>
                     <br>
-                    {{account?.primarycontact?.telephone1}} <br>
-                    {{account?.primarycontact?.emailaddress1}}
+                    {{account?.contactPhone}} <br>
+                    {{account?.contactEmail}}
                 </div>
             </app-field>
             <p>

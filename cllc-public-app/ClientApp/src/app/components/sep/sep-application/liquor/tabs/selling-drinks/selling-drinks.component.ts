@@ -15,13 +15,13 @@ export class SellingDrinksComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      chargingForDrinks: [''],
-      hostingAsAGSTOrg: [''],
+      chargingForLiquorReason: [''],
+      isGSTRegisteredOrg: [''],
       donateOrConsularPrevLiqour: [''],
-      nameOfNonProfitOrg: [''],
+      nonProfitName: [''],
       fundraisingPurposeOfEvent: [''],
-      howWillProceedsBeUsed: [''],
-      exclusivityAgreementWithAManufacturer: ['']
+      wowProceedsWillBeUsedDescription: [''],
+      isManufacturingExclusivity: ['']
     });
   }
 
