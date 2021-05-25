@@ -8,7 +8,7 @@ import { IndexedDBService } from '@services/indexed-db.service';
   styleUrls: ['./summary.component.scss']
 })
 export class SummaryComponent implements OnInit {
-  @Input() account: Account;
+  @Input() account: any; // TODO: change to Account and fix prod error
   @Output() saveComplete = new EventEmitter<boolean>();
 
   _appID: number;
