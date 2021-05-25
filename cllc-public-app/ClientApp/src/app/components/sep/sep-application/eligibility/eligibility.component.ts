@@ -151,7 +151,7 @@ export class EligibilityComponent extends FormBase implements OnInit {
     } as SepApplication;
 
     if (data.localId) {
-      this.db.applications.update(data.localId, data);
+      return this.db.applications.update(data.localId, data);
     } else {
       console.error("The id should already exist at this point.")
     }
@@ -160,8 +160,9 @@ export class EligibilityComponent extends FormBase implements OnInit {
   next() {
     this.showValidationMessages = false;
     if (this.isValid()) {
-      this.save();
-      this.saveComplete.emit(true);
+      this.save().then( id => {
+        this.saveComplete.emit(true);
+      });
     } else {
       this.showValidationMessages = true;
     }
