@@ -30,7 +30,7 @@
                 <section>
                     <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
                     <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
-                        <section *ngIf="form.get('sepCity').value.id">
+                        <section *ngIf="form.get('sepCity')?.value?.id">
 
                             <mat-card class="mb-3">
                                 <label for="">Selected City </label>
@@ -46,7 +46,7 @@
                             </mat-card>
                         </section>
 
-                        <section *ngIf="!form.get('sepCity').value.id">
+                        <section *ngIf="!form.get('sepCity')?.value?.id">
                             No City selected
                         </section>
                     </div>
