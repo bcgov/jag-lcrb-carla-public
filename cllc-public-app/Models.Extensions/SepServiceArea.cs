@@ -43,15 +43,9 @@ namespace Gov.Lclb.Cllb.Public.Models
 
         public static void CopyValues(this MicrosoftDynamicsCRMadoxioSpecialeventlicencedarea to, ViewModels.SepServiceArea from)
         {
-            // to.AdoxioSpecialeventlicencedareaid = from.Id;
-            to._adoxioSpecialeventlocationidValue = from.LocationId;
-            to._adoxioSpecialeventidValue = from.SpecialEventId;
             to.AdoxioMinorpresent = from.MinorPresent;
             to.AdoxioLicencedareamaxnumberofguests = from.LicencedAreaMaxNumberOfGuests;
             to.AdoxioLicencedareamaxnumberofguests = from.MaximumNumberOfGuests;
-            // to.AdoxioIsbothoutdoorindoor = from.IsBothOutdoorIndoor;
-            // to.AdoxioIsindoors = from.IsIndoors;
-            // to.AdoxioIsoutdoors = from.IsOutdoors;
             to.AdoxioLicencedareanumberofminors = from.NumberOfMinors;
             to.AdoxioLicencedareanumberofminors = from.LicencedAreaNumberOfMinors;
             to.AdoxioSetting = (int?)from.Setting;
