@@ -247,21 +247,21 @@ namespace bdd_tests
                 case "Catering":
                     // click on the Catering Start Application button
                     var startCatering =
-                        ngDriver.WrappedDriver.FindElement(By.CssSelector("button[id='startCatering']"));
+                        ngDriver.FindElement(By.CssSelector("button[id='startCatering']"));
                     JavaScriptClick(startCatering);
                     break;
                 case "a Cannabis Retail Store":
                     // click on the Cannabis Start Application button
-                    var startCRS = ngDriver.WrappedDriver.FindElement(By.CssSelector("button[id='startCRS']"));
+                    var startCRS = ngDriver.FindElement(By.CssSelector("button[id='startCRS']"));
                     JavaScriptClick(startCRS);
                     break;
                 case "a Rural Agency Store":
                     // click on the Rural Store Start Application button
-                    var startRas = ngDriver.WrappedDriver.FindElement(By.CssSelector("button[id='startRAS']"));
+                    var startRas = ngDriver.FindElement(By.CssSelector("button[id='startRAS']"));
                     JavaScriptClick(startRas);
                     break;
                 case "a Manufacturer Licence":
-                    var startMfg = ngDriver.WrappedDriver.FindElement(By.CssSelector("button[id='startMfg']"));
+                    var startMfg = ngDriver.FindElement(By.CssSelector("button[id='startMfg']"));
                     JavaScriptClick(startMfg);
                     break;
                 case "a Cannabis Marketing Licence":

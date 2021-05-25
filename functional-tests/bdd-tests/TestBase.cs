@@ -52,8 +52,6 @@ namespace bdd_tests
             // setup ChromeDriver with a command timeout of 2 minutes.
             var driver = new ChromeDriver(path, options, TimeSpan.FromMinutes(2));
 
-            // var timeout = 45.0;
-            // temp change to explore pipeline impact
             var timeout = 45.0;
 
             driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(timeout);
