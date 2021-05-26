@@ -9,6 +9,7 @@ import { IndexedDBService } from '@services/indexed-db.service';
 import { SepApplication } from '@models/sep-application.model';
 import { environment } from 'environments/environment';
 import { SpecialEventsDataService } from '@services/special-events-data.service';
+import { debug } from 'console';
 
 export const SEP_APPLICATION_STEPS = ["applicant", "eligibility", "event", "liquor", "summary"];
 
@@ -114,7 +115,6 @@ export class SepApplicationComponent implements OnInit {
       this.application.stepsCompleted.push(step);
     }
     this.cd.detectChanges();
-    debugger;
     if (environment.development) {
       this.saveToAPI().then(_ => { // Save to dynamics on transitions on DEV
         stepper.next();
