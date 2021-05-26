@@ -88,7 +88,7 @@ export class LiquorComponent implements OnInit {
 
   save() {
     this.saveToDB();
-    // this.saveToAPI();
+    this.saveToAPI();
     this.saveComplete.emit(true);
   }
 

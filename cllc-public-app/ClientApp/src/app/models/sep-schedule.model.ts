@@ -52,8 +52,8 @@ export class SepSchedule {
     private formatDate(eventDate: Date, time: string): Date {
         let result = new Date(eventDate);
 
-        let matches = time.match(/(\d+):(\d+)\s?(AM|PM)/);
-        if (matches.length > 0) {
+        let matches = time && time.match(/(\d+):(\d+)\s?(AM|PM)/);
+        if (matches?.length > 0) {
             let hour: number = parseInt(matches[1], 10);
             let minute = parseInt(matches[2], 10);
             let amPm = matches[3];

@@ -330,7 +330,9 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         public string RemoveInvalidCharacters(string filename)
         {
-            string invalidChars = System.Text.RegularExpressions.Regex.Escape(new string(System.IO.Path.GetInvalidFileNameChars()));
+            var osInvalidChars = new string(System.IO.Path.GetInvalidFileNameChars());
+            osInvalidChars += "~#%&*()[]{}"; // add additional characters that do not work with SharePoint
+            string invalidChars = System.Text.RegularExpressions.Regex.Escape(osInvalidChars);
             string invalidRegStr = string.Format(@"([{0}]*\.+$)|([{0}]+)", invalidChars);
 
             // Get the validated file name string
