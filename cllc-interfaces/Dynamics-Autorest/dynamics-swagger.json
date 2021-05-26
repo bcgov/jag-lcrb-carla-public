@@ -58975,9 +58975,9 @@
         "_modifiedonbehalfby_value": {
           "type": "string"
         },
-        "modifiedon": {
-          "format": "date-time",
-          "type": "string"
+        "adoxio_maximumnumberofguestsservicearea": {
+          "format": "int32",
+          "type": "integer"
         },
         "timezoneruleversionnumber": {
           "format": "int32",
@@ -59007,9 +59007,6 @@
         "adoxio_eventlocationpostalcode": {
           "type": "string"
         },
-        "adoxio_maximumnumberofguests": {
-          "type": "string"
-        },
         "adoxio_eventlocationstreet2": {
           "type": "string"
         },
@@ -59030,8 +59027,9 @@
         "_createdonbehalfby_value": {
           "type": "string"
         },
-        "adoxio_eventlocationstreet1": {
-          "type": "string"
+        "adoxio_maximumnumberofguestslocation": {
+          "format": "int32",
+          "type": "integer"
         },
         "adoxio_locationname": {
           "type": "string"
@@ -59061,8 +59059,15 @@
         "_createdby_value": {
           "type": "string"
         },
+        "modifiedon": {
+          "format": "date-time",
+          "type": "string"
+        },
         "adoxio_iscreateinspection": {
           "type": "boolean"
+        },
+        "adoxio_eventlocationstreet1": {
+          "type": "string"
         },
         "overriddencreatedon": {
           "format": "date-time",
@@ -83724,10 +83729,6 @@
           "format": "int32",
           "type": "integer"
         },
-        "resolvebyslastatus": {
-          "format": "int32",
-          "type": "integer"
-        },
         "adoxio_servicehourswednesdayopen": {
           "format": "int32",
           "type": "integer"
@@ -83877,6 +83878,9 @@
         "sentimentvalue": {
           "format": "decimal",
           "type": "number"
+        },
+        "adoxio_routinechecklisttakehomenotes": {
+          "type": "string"
         },
         "adoxio_sepchecklistsecurityplancomment": {
           "type": "string"
@@ -84114,6 +84118,10 @@
           "format": "int32",
           "type": "integer"
         },
+        "resolvebyslastatus": {
+          "format": "int32",
+          "type": "integer"
+        },
         "_slaid_value": {
           "type": "string"
         },
@@ -84308,6 +84316,9 @@
         "casetypecode": {
           "format": "int32",
           "type": "integer"
+        },
+        "adoxio_routinechecklisttakehome": {
+          "type": "boolean"
         },
         "adoxio_checklistadvertisingnotes": {
           "type": "string"
