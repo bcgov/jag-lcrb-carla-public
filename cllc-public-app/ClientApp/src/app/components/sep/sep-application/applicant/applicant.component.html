@@ -43,7 +43,7 @@
             </p>
 
             <hr>
-            <app-field label="General Terms and Conditions"  [valid]="!form.get('agreeToTnC').touched || form.get('agreeToTnC').valid"
+            <app-field label="General Terms and Conditions"  [valid]="!form.get('isagreeToTnC').touched || form.get('isagreeToTnC').valid"
             errorMessage="Please read and acknowledge the terms and conditions to continue your application">
                 <p>
                     Please read and acknowledge the Terms and Conditions to begin your application:
@@ -54,7 +54,7 @@
                 </div>
 
 
-                <mat-checkbox color="primary" formControlName="agreeToTnC">
+                <mat-checkbox color="primary" formControlName="isagreeToTnC">
                     <span class="error-states">*</span>
                     <span class="ml-2 question-label">
                         I have read and agree to these terms and conditions.
