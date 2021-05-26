@@ -74,12 +74,18 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public int? TotalServings { get; set; }
         public int? InvoiceTrigger { get; set; }
         public string SpecialEventProvince { get; set; }
-        public string MajorSignificanceRationale { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
         public SEPPublicOrPrivate? PrivateOrPublic { get; set; }
+        public string ResponsibleBevServiceNumber { get; set; }
+        public bool? ResponsibleBevServiceNumberDoesNotHave { get; set; }
         public string SpecialEventDescripton { get; set; }
         public int? Capacity { get; set; }
+        public bool? IsAgreeTsAndCs { get; set; }
+        public bool? IsPrivateResidence { get; set; }
+        public bool? IsOnPublicProperty { get; set; }
+        public bool? IsLocalSignificance { get; set; }
+        public DateTimeOffset? DateAgreedToTsAndCs { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
         public ChargingForLiquorReasons? ChargingForLiquorReason { get; set; }
@@ -93,9 +99,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string SpecialEventStreet2 { get; set; }
         public int? Statuscode { get; set; }
 
-        public bool? IsMajorSignigicance { get; set; }
+        public bool? IsMajorSignificance { get; set; }
         public bool? IsGstRegisteredOrg { get; set; }
-        public string MajorSignigicanceRationale { get; set; }
+        public string MajorSignificanceRationale { get; set; }
         public string HostOrganizationName { get; set; }
         public string HostOrganizationAddress { get; set; }
 
