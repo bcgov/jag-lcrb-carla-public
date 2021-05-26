@@ -53,7 +53,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.PoliceApproval = specialEvent.AdoxioPoliceapproval;
                 result.PrivateOrPublic = (ViewModels.SEPPublicOrPrivate?)specialEvent.AdoxioTypeofevent;
                 result.SpecialEventCity = specialEvent.AdoxioSpecialeventcity;
-                result.SpecialEventDescripton = specialEvent.AdoxioSpecialeventdescripton;
+                result.SpecialEventDescription = specialEvent.AdoxioSpecialeventdescripton;
                 result.SpecialEventPermitNumber = specialEvent.AdoxioSpecialeventpermitnumber;
                 result.SpecialEventPostalCode = specialEvent.AdoxioSpecialeventpostalcode;
                 result.SpecialEventProvince = specialEvent.AdoxioSpecialeventprovince;
@@ -109,7 +109,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioResponsiblebevservicenumber = from.ResponsibleBevServiceNumber;
             to.AdoxioResponsiblebevnumberdoesnothave = from.ResponsibleBevServiceNumberDoesNotHave;
             to.AdoxioSpecialeventcity = from.SpecialEventCity;
-            to.AdoxioSpecialeventdescripton = from.SpecialEventDescripton;
+            to.AdoxioSpecialeventdescripton = from.SpecialEventDescription;
             to.AdoxioSpecialeventpermitnumber = from.SpecialEventPermitNumber;
             to.AdoxioSpecialeventpostalcode = from.SpecialEventPostalCode;
             to.AdoxioSpecialeventprovince = from.SpecialEventProvince;
