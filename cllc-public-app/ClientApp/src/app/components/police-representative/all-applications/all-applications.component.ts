@@ -12,6 +12,8 @@ import { User } from '@models/user.model';
 import { SpecialEventsDataService } from '@services/special-events-data.service';
 import { AccountDataService } from '@services/account-data.service';
 import { Contact } from '@models/contact.model';
+import { Subscription } from "rxjs";
+import { MatSelectChange } from '@angular/material/select';
 
 // Show text labels instead of numeric enum values in the table; e.g. Status = "In Progress" vs. 100,000,001
 interface SepTableElement extends SepApplicationSummary {
@@ -27,11 +29,13 @@ interface SepTableElement extends SepApplicationSummary {
 })
 export class AllApplicationsComponent implements OnInit {
   // icons
-
+  busy: Subscription;
   // angular material table columns to display
   columnsToDisplay = ['select', 'dateSubmitted', 'eventName', 'eventStartDate', 'eventStatusLabel', 'policeDecisionByLabel', 'maximumNumberOfGuests', 'typeOfEventLabel', 'actions'];
   currentUser: User;
   availableContacts = [];
+
+  currentValueMap = {};
 
   // table state
   dataSource = new MatTableDataSource<SepTableElement>();
@@ -68,6 +72,10 @@ export class AllApplicationsComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.subscribeForData();
+  }
+
+  updateValue(event: MatSelectChange) {
+    this.currentValueMap[event.source.id] = event.value;
   }
 
   private subscribeForData() {
@@ -115,7 +123,10 @@ export class AllApplicationsComponent implements OnInit {
 
   assign(row: SepTableElement) {
     // TODO: Call backend endpoint to update/assign this SEP Application
-    console.log(`Call API to assign SEP application with ID: ${row.specialEventId}`);
+    var assignee = this.currentValueMap['assignee_' + row.specialEventId];
+    this.busy = this.sepDataService.policeAssignSepApplication(row.specialEventId, assignee)
+      .subscribe(() => console.log ("refresh"));
+    
   }
 
   batchAssign() {
