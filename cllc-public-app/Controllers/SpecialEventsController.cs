@@ -81,6 +81,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             var newSpecialEvent = new MicrosoftDynamicsCRMadoxioSpecialevent();
             newSpecialEvent.CopyValues(specialEvent);
+            if(!string.IsNullOrEmpty(specialEvent?.SepCity?.Id)){
+                newSpecialEvent.SepCityODataBind = _dynamicsClient.GetEntityURI("adoxio_sepcities", specialEvent.SepCity.Id);
+            }
             try
             {
                 newSpecialEvent = _dynamicsClient.Specialevents.Create(newSpecialEvent);
@@ -174,6 +177,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             var patchEvent = new MicrosoftDynamicsCRMadoxioSpecialevent();
             patchEvent.CopyValues(specialEvent);
+            if(!string.IsNullOrEmpty(specialEvent?.SepCity?.Id)){
+                patchEvent.SepCityODataBind = _dynamicsClient.GetEntityURI("adoxio_sepcities", specialEvent.SepCity.Id);
+            }
             try
             {
                 _dynamicsClient.Specialevents.Update(specialEvent.Id, patchEvent);

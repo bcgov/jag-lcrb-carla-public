@@ -75,7 +75,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public SEPPublicOrPrivate? PrivateOrPublic { get; set; }
         public string ResponsibleBevServiceNumber { get; set; }
         public bool? ResponsibleBevServiceNumberDoesNotHave { get; set; }
-        public string SpecialEventDescripton { get; set; }
+        public string SpecialEventDescription { get; set; }
         public int? Capacity { get; set; }
         public bool? IsAgreeTsAndCs { get; set; }
         public bool? IsPrivateResidence { get; set; }
