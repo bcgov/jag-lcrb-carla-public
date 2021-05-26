@@ -13,7 +13,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string EventLocationStreet1 { get; set; }
         public string EventLocationStreet2 { get; set; }
         public string EventLocationProvince { get; set; }
-        public string MaximumNumberOfGuests { get; set; }
+        public int? MaximumNumberOfGuests { get; set; }
         public string LocationName { get; set; }
         public string PermitNumber { get; set; }
          public List<SepServiceArea> ServiceAreas { get; set; }

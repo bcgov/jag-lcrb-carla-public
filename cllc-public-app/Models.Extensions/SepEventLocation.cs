@@ -32,7 +32,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             result.EventLocationStreet1 = location.AdoxioEventlocationstreet1;
             result.EventLocationStreet2 = location.AdoxioEventlocationstreet2;
             result.EventLocationProvince = location.AdoxioLocationdescription;
-            result.MaximumNumberOfGuests = location.AdoxioMaximumnumberofguests;
+            result.MaximumNumberOfGuests = location.AdoxioMaximumnumberofguestslocation;
             result.LocationName = location.AdoxioLocationname;
             result.PermitNumber = location.AdoxioPermitnumber;
 
@@ -58,19 +58,15 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 return;
             }
-
-            to.AdoxioSpecialeventlocationid = from.Id;
-            to._adoxioSpecialeventidValue = from.SpecialEventId;
             to.AdoxioLocationdescription = from.LocationDescription;
             to.AdoxioEventlocationcity = from.EventLocationCity;
             to.AdoxioEventlocationpostalcode = from.EventLocationPostalCode;
             to.AdoxioEventlocationstreet1 = from.EventLocationStreet1;
             to.AdoxioEventlocationstreet2 = from.EventLocationStreet2;
             to.AdoxioLocationdescription = from.EventLocationProvince;
-            to.AdoxioMaximumnumberofguests = from.MaximumNumberOfGuests;
+            to.AdoxioMaximumnumberofguestslocation = from.MaximumNumberOfGuests;
             to.AdoxioLocationname = from.LocationName;
             to.AdoxioPermitnumber = from.PermitNumber;
-            // to.AdoxioMaxnumberofguests = from.MaxNumberOfGuests;
         }
     }
 }

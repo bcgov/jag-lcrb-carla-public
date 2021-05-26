@@ -1,4 +1,4 @@
-<div class="form-wrapper">
+<div class="form-wrapper-summary">
     <h3>Application number: [id]</h3>
     <p>
         Here’s a summary of your event. Does everything look right?
@@ -30,34 +30,34 @@
 
     <h2>Summary</h2>
 
-    <mat-expansion-panel>
+    <mat-expansion-panel [expanded]="true">
         <mat-expansion-panel-header>
             <mat-panel-title>
                 GENERAL APPLICATION INFO
             </mat-panel-title>
         </mat-expansion-panel-header>
         <div class="d-flex">
-            <label>Event Name</label> <span>Test Ev</span>
+            <label>Event Name</label> <span>{{application?.eventName}}</span>
         </div>
         <div class="d-flex">
             <label>Event Municipality</label> <span>Agassiz</span>
         </div>
         <div class="d-flex">
-            <label>Applicant Name</label> <span>Firstname Lastname</span>
+            <label>Applicant Name</label> <span>{{account?.name}}</span>
         </div>
         <div class="d-flex">
             <label>Applicant Info</label>
             <section>
-                <span>123Test Rd</span>
-                <span>Victoria,British Columbia</span>
-                <span>V9B 0G9</span>
-                <span>123 123 2222</span>
-                <span>m@il.test</span>
+                <div>{{account?.physicalAddressStreet}}</div>
+                <div>{{account?.physicalAddressProvince}}</div>
+                <div>{{account?.physicalAddressPostalCode}}</div>
+                <div>{{account?.contactPhone}}</div>
+                <div>{{account?.contactEmail}}</div>
             </section>
         </div>
     </mat-expansion-panel>
 
-    <mat-expansion-panel>
+    <mat-expansion-panel [expanded]="true">
         <mat-expansion-panel-header>
             <mat-panel-title>
                 ELIGIBILITY
@@ -89,7 +89,7 @@
         </div>
     </mat-expansion-panel>
 
-    <mat-expansion-panel>
+    <mat-expansion-panel [expanded]="true">
         <mat-expansion-panel-header>
             <mat-panel-title>
                 EVENT LOCATION 1
@@ -137,7 +137,7 @@
         </div>
     </mat-expansion-panel>
 
-    <mat-expansion-panel>
+    <mat-expansion-panel [expanded]="true">
         <mat-expansion-panel-header>
             <mat-panel-title>
                 LIQUOR FEES

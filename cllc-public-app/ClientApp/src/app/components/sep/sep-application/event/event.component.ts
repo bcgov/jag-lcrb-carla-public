@@ -100,6 +100,7 @@ export class EventComponent extends FormBase implements OnInit {
 
   setFormValue(app: SepApplication) {
     if (app) {
+      app.eventLocations = app.eventLocations || [];
       this.form.patchValue(app);
     }
     this.locations.clear();
@@ -223,9 +224,6 @@ export class EventComponent extends FormBase implements OnInit {
     let areaForm = this.fb.group({
       licencedAreaId: [null],
       eventName: [''],
-      isBothOutdoorIndoor: [''],
-      isIndoors: [''],
-      isOutdoors: [''],
       licencedAreaDescription: [''],
       licencedAreaMaxNumberOfGuests: [''],
       minorPresent: [''],
