@@ -1,4 +1,5 @@
 <div class="form-wrapper position-relative">
+  <div [ngBusy]="[busy]"></div>
   <h1 class="mat-heading">Administration</h1>
 
   <p>Here is a list of all SEP applications. Click Assign to add an application to your My Jobs list. You may sort
@@ -76,8 +77,8 @@
           <td mat-cell *matCellDef="let row" class="p-0">
             <mat-form-field color="warn" appearance="outline">
               <mat-label>Choose assignee from list</mat-label>
-                   <mat-select id="assignee" formControlName="assignee" placeholder="Assignee">
-                         <mat-option *ngFor="let contact of availableContacts; let i = index" [value]="contact.id">
+                   <mat-select [id]="'assignee_' + row.specialEventId" placeholder="Assignee" [ngModel]="row.policeDecisionBy ? row.policeDecisionBy.id : undefined" (selectionChange)="updateValue($event)">
+                         <mat-option *ngFor="let contact of availableContacts; let i = index" [value]="contact.id" >
                               {{contact.firstname}} {{contact.lastname}}
                          </mat-option>
                    </mat-select>
