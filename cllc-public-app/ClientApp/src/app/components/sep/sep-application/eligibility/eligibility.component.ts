@@ -48,16 +48,16 @@ export class EligibilityComponent extends FormBase implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      eligibilityAtPrivateResidence: ['', [Validators.required]],
-      eligibilityOnPublicProperty: ['', [Validators.required]],
+      isPrivateResidence: ['', [Validators.required]],
+      isOnPublicProperty: ['', [Validators.required]],
       isMajorSignificance: [false, [Validators.required]],
-      isMajorSignificanceRationale: [''],
-      eligibilityLocalSignificance: [false, [Validators.required]],
+      majorSignificanceRationale: [''],
+      // isLocalSignificance: [false, [Validators.required]],
       eventStartDate: ['', [Validators.required]],
       privateOrPublic: ['', [Validators.required]],
-      eligibilityResponsibleBevServiceNumber: ['', [Validators.required]],
-      eligibilityResponsibleBevServiceNumberDoesNotHave: [false],
-      eventDescription: ['', [Validators.required, Validators.maxLength(255)]],
+      responsibleBevServiceNumber: ['', [Validators.required]],
+      responsibleBevServiceNumberDoesNotHave: [false],
+      specialEventDescription: ['', [Validators.required, Validators.maxLength(255)]],
       admissionFee: ['', [Validators.required]],
       isLocationLicensed: [null, [Validators.required]],
       hostOrganizationName: [''],
@@ -87,39 +87,39 @@ export class EligibilityComponent extends FormBase implements OnInit {
       .pipe(distinctUntilChanged())
       .subscribe((hasMajorSignificance: boolean) => {
         if (hasMajorSignificance) {
-          this.form.get('isMajorSignificanceRationale').setValidators([Validators.required]);
+          this.form.get('majorSignificanceRationale').setValidators([Validators.required]);
         } else {
-          this.form.get('isMajorSignificanceRationale').clearValidators();
-          this.form.get('isMajorSignificanceRationale').reset();
+          this.form.get('majorSignificanceRationale').clearValidators();
+          this.form.get('majorSignificanceRationale').reset();
         }
       });
 
 
-    // this.form.get('eligibilityResponsibleBevServiceNumber').valueChanges
+    // this.form.get('responsibleBevServiceNumber').valueChanges
     //   .pipe(distinctUntilChanged())
     //   .subscribe(value => {
     //     if (value) {
     //       // if the value is entered disable the checkbox and clear its validation
-    //       this.form.get('eligibilityResponsibleBevServiceNumberDoesNotHave').clearValidators();
-    //       this.form.get('eligibilityResponsibleBevServiceNumberDoesNotHave').reset();
-    //       this.form.get('eligibilityResponsibleBevServiceNumberDoesNotHave').disable();
+    //       this.form.get('responsibleBevServiceNumberDoesNotHave').clearValidators();
+    //       this.form.get('responsibleBevServiceNumberDoesNotHave').reset();
+    //       this.form.get('responsibleBevServiceNumberDoesNotHave').disable();
     //     } else {
     //       // enable the checkbox and its validation
-    //       this.form.get('eligibilityResponsibleBevServiceNumberDoesNotHave').setValidators([this.customRequiredCheckboxValidator()]);
-    //       this.form.get('eligibilityResponsibleBevServiceNumberDoesNotHave').enable();
+    //       this.form.get('responsibleBevServiceNumberDoesNotHave').setValidators([this.customRequiredCheckboxValidator()]);
+    //       this.form.get('responsibleBevServiceNumberDoesNotHave').enable();
     //     }
     //   });
 
-    // this.form.get('eligibilityResponsibleBevServiceNumberDoesNotHave').valueChanges
+    // this.form.get('responsibleBevServiceNumberDoesNotHave').valueChanges
     //   .pipe(distinctUntilChanged())
     //   .subscribe(value => {
     //     if (value === false) {
-    //       this.form.get('eligibilityResponsibleBevServiceNumber').setValidators([Validators.required, Validators.minLength(6), Validators.maxLength(6)]);
-    //       this.form.get('eligibilityResponsibleBevServiceNumber').enable();
+    //       this.form.get('responsibleBevServiceNumber').setValidators([Validators.required, Validators.minLength(6), Validators.maxLength(6)]);
+    //       this.form.get('responsibleBevServiceNumber').enable();
     //     } else {
-    //       this.form.get('eligibilityResponsibleBevServiceNumber').clearValidators();
-    //       this.form.get('eligibilityResponsibleBevServiceNumber').reset();
-    //       this.form.get('eligibilityResponsibleBevServiceNumber').disable();
+    //       this.form.get('responsibleBevServiceNumber').clearValidators();
+    //       this.form.get('responsibleBevServiceNumber').reset();
+    //       this.form.get('responsibleBevServiceNumber').disable();
     //     }
     //   });
 
@@ -132,7 +132,7 @@ export class EligibilityComponent extends FormBase implements OnInit {
   isValid() {
     this.markControlsAsTouched(this.form);
     this.validationMessages = this.listControlsWithErrors(this.form, {});
-    return this.form.valid && !this.form.get('eligibilityAtPrivateResidence').value === true;
+    return this.form.valid && !this.form.get('isPrivateResidence').value === true;
   }
 
   save() {

@@ -9,17 +9,17 @@ export class SepApplication {
     lastUpdated: Date;
     eventName: string;
     applicantInfo: any;
-    agreeToTnC: boolean;
-    dateAgreedToTnC: Date;
+    isAgreeTsAndCs: boolean;
+    dateAgreedToTsAndCs: Date;
     stepsCompleted: string[];
     eventStatus: string; 
     totalServings: number;
     invoiceTrigger: number;
 
-    eligibilityAtPrivateResidence: boolean;
+    isPrivateResidence: boolean;
     isMajorSignificance: boolean;
     isMajorSignificanceRational: string;
-    eligibilityLocalSignificance: boolean;
+    isLocalSignificance: boolean;
 
     permitNumber: string;
     isTastingEvent: boolean;
