@@ -22,7 +22,9 @@ namespace Gov.Lclb.Cllb.Public.Models
                     EventLocations = new List<ViewModels.SepEventLocation>()
                 };
                 result.Id = specialEvent.AdoxioSpecialeventid;
+
                 result.AdmissionFee = specialEvent.AdoxioAdmissionfee;
+                result.StepsCompleted = specialEvent.Adoxio
                 result.BeerGarden = specialEvent.AdoxioBeergarden;
                 result.Capacity = specialEvent.AdoxioCapacity;
                 result.ChargingForLiquorReason = (ViewModels.ChargingForLiquorReasons?)specialEvent.AdoxioChargingforliquorreason;
@@ -37,6 +39,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.HostOrganizationCategory = (ViewModels.HostOrgCatergory?)specialEvent.AdoxioHostorganisationcategory;
                 result.HostOrganizationName = specialEvent.AdoxioHostorganisationname;
                 result.HowProceedsWillBeUsedDescription = specialEvent.AdoxioHowproceedswillbeuseddescription;
+                result.IsAgreeToTnC = specialEvent.AdoxioIsagreetsandcs;
+                result.DateAgreeToTnC = specialEvent.AdoxioDateagreedtotsandcs;e
                 result.IsAnnualEvent = specialEvent.AdoxioIsannualevent;
                 result.IsMajorSignigicance = specialEvent.AdoxioIsmajorsignificance;
                 result.IsGstRegisteredOrg = specialEvent.AdoxioIsgstregisteredorg;
@@ -83,6 +87,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioEventstartdate = from.EventStartDate;
             to.AdoxioFundraisingpurpose = (int?)from.FundRaisingPurpose;
             to.AdoxioHowproceedswillbeuseddescription = from.HowProceedsWillBeUsedDescription;
+            to.AdoxioIsagreetsandcs = from.IsAgreeToTnC;
+            to.AdoxioDateagreedtotsandcs = from.DateAgreeToTnC;
             to.AdoxioIsannualevent  = from.IsAnnualEvent;
             to.AdoxioIslocationlicensedos = (int?)from.IsLocationLicensed;
             to.AdoxioIsmajorsignificance =  from.IsMajorSignigicance;
