@@ -119,8 +119,8 @@ export class MyApplicationsComponent implements OnInit {
     let localId = await this.db.saveSepApplication({
       ...app,
       localId: undefined,
-      dateAgreedToTnC: undefined,
-      agreeToTnC: false,
+      dateAgreedToTsAndCs: undefined,
+      isAgreeTsAndCs: false,
       dateCreated: new Date()
     });
     this.router.navigateByUrl(`/sep/application/${localId}/applicant`)

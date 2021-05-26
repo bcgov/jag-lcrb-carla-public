@@ -48,18 +48,18 @@ export class ApplicantComponent implements OnInit {
     this.form = this.fb.group({
       eventName: ['', [Validators.required]],
       applicantInfo: [''],
-      agreeToTnC: ['', [this.customRequiredCheckboxValidator()]],
-      dateAgreedToTnC: ['']
+      isAgreeTsAndCs: ['', [this.customRequiredCheckboxValidator()]],
+      dateAgreedToTsAndCs: ['']
     });
 
     if (this.application) {
       this.form.patchValue(this.application);
     }
 
-    this.form.get('agreeToTnC').valueChanges
+    this.form.get('isAgreeTsAndCs').valueChanges
       .subscribe((agree: boolean) => {
         if (agree) {
-          this.form.get('dateAgreedToTnC').setValue(new Date());
+          this.form.get('dateAgreedToTsAndCs').setValue(new Date());
         }
       });
 
