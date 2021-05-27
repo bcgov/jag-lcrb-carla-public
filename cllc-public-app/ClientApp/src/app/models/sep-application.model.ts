@@ -1,3 +1,4 @@
+import { SepDrinkSalesForecast } from "./sep-drink-sales-forecast.model";
 import { SepLocation } from "./sep-location.model";
 
 export class SepApplication {
@@ -9,17 +10,17 @@ export class SepApplication {
     lastUpdated: Date;
     eventName: string;
     applicantInfo: any;
-    agreeToTnC: boolean;
-    dateAgreedToTnC: Date;
+    isAgreeTsAndCs: boolean;
+    dateAgreedToTsAndCs: Date;
     stepsCompleted: string[];
     eventStatus: string; 
     totalServings: number;
     invoiceTrigger: number;
 
-    eligibilityAtPrivateResidence: boolean;
+    isPrivateResidence: boolean;
     isMajorSignificance: boolean;
     isMajorSignificanceRational: string;
-    eligibilityLocalSignificance: boolean;
+    isLocalSignificance: boolean;
 
     permitNumber: string;
     isTastingEvent: boolean;
@@ -27,5 +28,6 @@ export class SepApplication {
     maximumNumberOfGuests: number;
 
     eventLocations: SepLocation[] = [];
+    drinksSalesForecasts: SepDrinkSalesForecast[] = [];
 
 } 
