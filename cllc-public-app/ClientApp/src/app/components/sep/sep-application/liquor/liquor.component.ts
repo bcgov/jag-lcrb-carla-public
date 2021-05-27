@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SepApplication } from '@models/sep-application.model';
 import { IndexedDBService } from '@services/indexed-db.service';
 import { SpecialEventsDataService } from '@services/special-events-data.service';
+import { environment } from 'environments/environment';
+import { env } from 'process';
 
 @Component({
   selector: 'app-liquor',
@@ -35,6 +37,10 @@ export class LiquorComponent implements OnInit {
 
   updateValue(value) {
     this.value = { ...this.value, ...value };
+    this.saveToDB();
+    if (environment.development) {
+      this.saveToAPI();
+    }
   }
 
   ngOnInit(): void {
@@ -67,7 +73,7 @@ export class LiquorComponent implements OnInit {
     this.db.getSepApplication(this.localId)
       .then((appData) => {
         if (appData.id) { // do an update ( the record exists in dynamics)
-          this.sepDataService.updateSepApplication({...appData, invoiceTrigger: 1 }, appData.id)
+          this.sepDataService.updateSepApplication({ ...appData, invoiceTrigger: 1 }, appData.id)
             .subscribe(result => {
               if (result.localId) {
                 this.db.applications.update(result.localId, result);
@@ -75,7 +81,7 @@ export class LiquorComponent implements OnInit {
               }
             });
         } else {
-          this.sepDataService.createSepApplication({...appData, invoiceTrigger: 1 })
+          this.sepDataService.createSepApplication({ ...appData, invoiceTrigger: 1 })
             .subscribe(result => {
               if (result.localId) {
                 this.db.applications.update(result.localId, result);

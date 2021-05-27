@@ -5,6 +5,7 @@ import { Observable, of } from "rxjs";
 import { DataService } from "./data.service";
 import { SepApplication } from "@models/sep-application.model";
 import { SepApplicationSummary } from "@models/sep-application-summary.model";
+import { SepDrinkType } from "@models/sep-drink-type.model";
 
 @Injectable()
 export class SpecialEventsDataService extends DataService {
@@ -17,6 +18,12 @@ export class SpecialEventsDataService extends DataService {
   getSpecialEvent(id: string): Observable<SepApplication[]> {
     const apiPath = `api/special-events/${id}`;
     return this.http.get<SepApplication[]>(apiPath, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
+  getSepDrinkTypes(): Observable<SepDrinkType[]> {
+    const apiPath = 'api/special-events/drink-types';
+    return this.http.get<SepDrinkType[]>(apiPath, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
