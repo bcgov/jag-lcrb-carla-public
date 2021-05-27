@@ -10,5 +10,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         [JsonProperty(PropertyName = "adoxio_SpecialEventCityDistrictId@odata.bind")]
         public string SepCityODataBind { get; set; }
+
+        [JsonProperty(PropertyName = "adoxio_PoliceRepresentativeId@odata.bind")]
+        public string PoliceRepresentativeIdODataBind { get; set; }
     }
 }
