@@ -5,6 +5,7 @@ import { PolicyDocumentComponent } from '@components/policy-document/policy-docu
 import { Account } from '@models/account.model';
 import { SepApplication } from '@models/sep-application.model';
 import { IndexedDBService } from '@services/indexed-db.service';
+import { SpecialEventsDataService } from '@services/special-events-data.service';
 import { FormBase } from '@shared/form-base';
 import { Observable } from 'rxjs';
 import { from } from 'rxjs/internal/observable/from';
@@ -39,6 +40,7 @@ export class ApplicantComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private router: Router,
+    private sepDataService: SpecialEventsDataService,
     private db: IndexedDBService) {
   }
 
@@ -46,18 +48,18 @@ export class ApplicantComponent implements OnInit {
     this.form = this.fb.group({
       eventName: ['', [Validators.required]],
       applicantInfo: [''],
-      agreeToTnC: ['', [this.customRequiredCheckboxValidator()]],
-      dateAgreedToTnC: ['']
+      isAgreeTsAndCs: ['', [this.customRequiredCheckboxValidator()]],
+      dateAgreedToTsAndCs: ['']
     });
 
     if (this.application) {
       this.form.patchValue(this.application);
     }
 
-    this.form.get('agreeToTnC').valueChanges
+    this.form.get('isAgreeTsAndCs').valueChanges
       .subscribe((agree: boolean) => {
         if (agree) {
-          this.form.get('dateAgreedToTnC').setValue(new Date());
+          this.form.get('dateAgreedToTsAndCs').setValue(new Date());
         }
       });
 
@@ -112,6 +114,20 @@ export class ApplicantComponent implements OnInit {
       data.dateCreated = new Date();
       return from(this.db.saveSepApplication(data));
     }
+  }
+
+  saveToAPI() {
+    this.db.getSepApplication(this?.application?.localId)
+      .then((appData) => {
+        if (appData.id) { // do an update ( the record exists in dynamics)
+          this.sepDataService.updateSepApplication({ ...appData, invoiceTrigger: 1 }, appData.id)
+            .subscribe(result => {
+              if (result.localId) {
+                this.db.applications.update(result.localId, result);
+              }
+            });
+        }
+      });
   }
 
   next() {

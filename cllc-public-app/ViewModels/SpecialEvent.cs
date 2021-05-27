@@ -70,28 +70,34 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public int? TotalServings { get; set; }
         public int? InvoiceTrigger { get; set; }
         public string SpecialEventProvince { get; set; }
-        public string MajorSignificanceRationale { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
         public SEPPublicOrPrivate? PrivateOrPublic { get; set; }
-        public string SpecialEventDescripton { get; set; }
+        public string ResponsibleBevServiceNumber { get; set; }
+        public bool? ResponsibleBevServiceNumberDoesNotHave { get; set; }
+        public string SpecialEventDescription { get; set; }
         public int? Capacity { get; set; }
+        public bool? IsAgreeTsAndCs { get; set; }
+        public bool? IsPrivateResidence { get; set; }
+        public bool? IsOnPublicProperty { get; set; }
+        public bool? IsLocalSignificance { get; set; }
+        public DateTimeOffset? DateAgreedToTsAndCs { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
         public ChargingForLiquorReasons? ChargingForLiquorReason { get; set; }
         public bool? DrinksIncluded { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
-        public DonatedOrConsular? DonateOrConsular { get; set; }
+        public DonatedOrConsular? DonatedOrConsular { get; set; }
         public bool? IsAnnualEvent { get; set; }
         public string SpecialEventPermitNumber { get; set; }
         public string SpecialEventCity { get; set; }
         public string SpecialEventStreet2 { get; set; }
         public int? Statuscode { get; set; }
 
-        public bool? IsMajorSignigicance { get; set; }
+        public bool? IsMajorSignificance { get; set; }
         public bool? IsGstRegisteredOrg { get; set; }
-        public string MajorSignigicanceRationale { get; set; }
+        public string MajorSignificanceRationale { get; set; }
         public string HostOrganizationName { get; set; }
         public string HostOrganizationAddress { get; set; }
 
@@ -108,6 +114,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public LicensedSEPLocationValue? IsLocationLicensed { get; set; }
         // list of SEP locations
         public List<SepEventLocation> EventLocations { get; set; }
+        public List<SepDrinksSalesForecast> DrinksSalesForecasts { get; set; }
 
         public SepCity SepCity { get; set; }
     }

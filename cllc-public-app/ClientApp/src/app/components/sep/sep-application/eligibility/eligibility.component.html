@@ -14,13 +14,13 @@
     <h3>Tell us about your event</h3>
     <section [formGroup]="form" style="padding: 16px 32px;">
         <app-field label="Is this event being hosted at a private residence?" [required]="true"
-            [valid]="!form.get('eligibilityAtPrivateResidence').touched || form.get('eligibilityAtPrivateResidence').valid"
+            [valid]="!form.get('isPrivateResidence').touched || form.get('isPrivateResidence').valid"
             errorMessage="Events held in a private residence are not eligible for Special Event Permits">
-            <mat-radio-group formControlName="eligibilityAtPrivateResidence">
+            <mat-radio-group formControlName="isPrivateResidence">
                 <mat-radio-button color="primary" class="mr-3" [value]="true">Yes</mat-radio-button>
                 <mat-radio-button color="primary" class="mr-3" [value]="false">No</mat-radio-button>
             </mat-radio-group>
-            <app-error-alert *ngIf="form.get('eligibilityAtPrivateResidence').value" type="error">
+            <app-error-alert *ngIf="form.get('isPrivateResidence').value" type="error">
                 Private residences are not eligible for Special Event Permits. You may serve liquor free of charge
                 without a liquor permit, but cannot sell liquor at a residence. You can also hire a licensed commercial
                 caterer to serve liquor, but cannot sell liquor under a catering licence at a residence. For more
@@ -31,13 +31,13 @@
         <mat-divider></mat-divider>
         <div class="d-flex justify-content-between">
             <app-field label="Is your event being held on public property?" [required]="true"
-                [valid]="!form.get('eligibilityOnPublicProperty').touched || form.get('eligibilityOnPublicProperty').valid"
+                [valid]="!form.get('isOnPublicProperty').touched || form.get('isOnPublicProperty').valid"
                 errorMessage="Is public property Question Can't be blank">
-                <mat-radio-group formControlName="eligibilityOnPublicProperty">
+                <mat-radio-group formControlName="isOnPublicProperty">
                     <mat-radio-button color="primary" class="mr-3" [value]="true">Yes</mat-radio-button>
                     <mat-radio-button color="primary" class="mr-3" [value]="false">No</mat-radio-button>
                 </mat-radio-group>
-                <app-error-alert *ngIf="form.get('eligibilityOnPublicProperty').value">
+                <app-error-alert *ngIf="form.get('isOnPublicProperty').value">
                     <p>
                         Events on public property require approval from the local authority (local government, First
                         Nation,
@@ -88,7 +88,7 @@
                 <br *ngIf="form.get('isMajorSignificance').value">
                 <app-field *ngIf="form.get('isMajorSignificance').value" [isFullWidth]="true"
                     label="Describe rationale" [required]="true">
-                    <textarea formControlName="isMajorSignificanceRationale" class="w-80 form-control"
+                    <textarea formControlName="majorSignificanceRationale" class="w-80 form-control"
                         rows="3"></textarea>
                 </app-field>
             </app-field>
@@ -209,15 +209,15 @@
         <mat-divider></mat-divider>
         <div class="d-flex justify-content-between">
             <app-field label="Responsible Beverage Service Number (SIR or SES)" [required]="true"
-                [valid]="!form.get('eligibilityResponsibleBevServiceNumber').touched || form.get('eligibilityResponsibleBevServiceNumber').valid"
+                [valid]="!form.get('responsibleBevServiceNumber').touched || form.get('responsibleBevServiceNumber').valid"
                 errorMessage="Responsible Beverage Service Number (SIR or SES) must be entered to continue.">
-                <input formControlName="eligibilityResponsibleBevServiceNumber" maxlength="6" type="text"
+                <input formControlName="responsibleBevServiceNumber" maxlength="6" type="text"
                     class="form-control">
-                <mat-checkbox class="mt-2" formControlName="eligibilityResponsibleBevServiceNumberDoesNotHave"
+                <mat-checkbox class="mt-2" formControlName="responsibleBevServiceNumberDoesNotHave"
                     color="primary">
                     I don’t have a BC Responsible Beverage Service Certificate Number
                 </mat-checkbox>
-                <app-error-alert *ngIf="form.get('eligibilityResponsibleBevServiceNumberDoesNotHave').value">
+                <app-error-alert *ngIf="form.get('responsibleBevServiceNumberDoesNotHave').value">
                     You are required to complete Responsible Beverage Service certification prior to hosting your event.
                     For
                     more information and to get started with a training course, click here.
@@ -235,9 +235,9 @@
         <div class="d-flex justify-content-between">
             <app-field style="flex: 1" [isFullWidth]="true"
                 label="What’s the occasion of your event? (maximum 255 characters) " [required]="true"
-                [valid]="!form.get('eventDescription').touched || form.get('eventDescription').valid"
+                [valid]="!form.get('specialEventDescription').touched || form.get('specialEventDescription').valid"
                 errorMessage="Family event description can't be blank">
-                <textarea maxlength="255" formControlName="eventDescription" class="w-100 form-control"
+                <textarea maxlength="255" formControlName="specialEventDescription" class="w-100 form-control"
                     rows="5"></textarea>
             </app-field>
             <div>
