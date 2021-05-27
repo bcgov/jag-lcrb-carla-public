@@ -28,7 +28,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.ChargingForLiquorReason = (ViewModels.ChargingForLiquorReasons?)specialEvent.AdoxioChargingforliquorreason;
                 result.DateSubmitted = specialEvent.AdoxioDatesubmitted;
                 result.DrinksIncluded = specialEvent.AdoxioDrinksincluded;
-                result.DonateOrConsular = (ViewModels.DonatedOrConsular?)specialEvent.AdoxioDonatedorconsular;
+                result.DonatedOrConsular = (ViewModels.DonatedOrConsular?)specialEvent.AdoxioDonatedorconsular;
                 result.EventEndDate = specialEvent.AdoxioEventenddate;
                 result.EventName = specialEvent.AdoxioEventname;
                 result.EventStartDate = specialEvent.AdoxioEventstartdate;
@@ -86,7 +86,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioChargingforliquorreason = (int?)from.ChargingForLiquorReason;
             to.AdoxioDatesubmitted = from.DateSubmitted;
             to.AdoxioDrinksincluded = from.DrinksIncluded;
-            to.AdoxioDonatedorconsular = (int?)from.DonateOrConsular;
+            to.AdoxioDonatedorconsular = (int?)from.DonatedOrConsular;
             to.AdoxioEventenddate = from.EventEndDate;
             to.AdoxioEventname = from.EventName;
             to.AdoxioEventstartdate = from.EventStartDate;

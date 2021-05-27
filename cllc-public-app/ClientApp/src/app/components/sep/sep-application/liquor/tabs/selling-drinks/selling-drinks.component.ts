@@ -31,8 +31,8 @@ export class SellingDrinksComponent implements OnInit {
       isGSTRegisteredOrg: [''],
       donateOrConsularPrevLiqour: [''],
       nonProfitName: [''],
-      fundraisingPurposeOfEvent: [''],
-      wowProceedsWillBeUsedDescription: [''],
+      fundraisingPurpose: [''],
+      howProceedsWillBeUsedDescription: [''],
       isManufacturingExclusivity: ['']
     });
     if (this.application) {

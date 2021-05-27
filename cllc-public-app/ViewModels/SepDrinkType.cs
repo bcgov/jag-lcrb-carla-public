@@ -28,6 +28,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
     public class SepDrinkType
     {
         public string Id { get; set; }
+        public string Name { get; set; }
         public string UnitSize { get; set; }
         public string BulkSize { get; set; }
         public int? BulkMultiplier { get; set; }

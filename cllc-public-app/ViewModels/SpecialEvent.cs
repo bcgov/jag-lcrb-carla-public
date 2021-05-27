@@ -88,7 +88,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool? DrinksIncluded { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
-        public DonatedOrConsular? DonateOrConsular { get; set; }
+        public DonatedOrConsular? DonatedOrConsular { get; set; }
         public bool? IsAnnualEvent { get; set; }
         public string SpecialEventPermitNumber { get; set; }
         public string SpecialEventCity { get; set; }
@@ -114,6 +114,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public LicensedSEPLocationValue? IsLocationLicensed { get; set; }
         // list of SEP locations
         public List<SepEventLocation> EventLocations { get; set; }
+        public List<SepDrinksSalesForecast> DrinksSalesForecasts { get; set; }
 
         public SepCity SepCity { get; set; }
     }

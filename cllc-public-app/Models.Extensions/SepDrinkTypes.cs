@@ -20,6 +20,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result = new ViewModels.SepDrinkType
                 {
                     Id = drinkType.AdoxioSepdrinktypeid,
+                    Name = drinkType.AdoxioName,
                     UnitSize = drinkType.AdoxioUnitsize,
                     BulkSize = drinkType.AdoxioBulksize,
                     BulkMultiplier = drinkType.AdoxioBulkmultiplier,

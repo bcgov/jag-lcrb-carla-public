@@ -81,7 +81,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             var newSpecialEvent = new MicrosoftDynamicsCRMadoxioSpecialevent();
             newSpecialEvent.CopyValues(specialEvent);
-            if(!string.IsNullOrEmpty(specialEvent?.SepCity?.Id)){
+            if (!string.IsNullOrEmpty(specialEvent?.SepCity?.Id))
+            {
                 newSpecialEvent.SepCityODataBind = _dynamicsClient.GetEntityURI("adoxio_sepcities", specialEvent.SepCity.Id);
             }
             try
@@ -97,14 +98,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (specialEvent.EventLocations?.Count > 0)
             {
-                newSpecialEvent.AdoxioSpecialeventSpecialeventlocations = new List<MicrosoftDynamicsCRMadoxioSpecialeventlocation>();
+                // newSpecialEvent.AdoxioSpecialeventSpecialeventlocations = new List<MicrosoftDynamicsCRMadoxioSpecialeventlocation>();
                 // add locations to the new special event
                 specialEvent.EventLocations.ForEach((Action<ViewModels.SepEventLocation>)(location =>
                 {
                     var newLocation = new MicrosoftDynamicsCRMadoxioSpecialeventlocation();
                     newLocation.CopyValues(location);
                     newLocation.AdoxioSpecialEventODataBind = _dynamicsClient.GetEntityURI("adoxio_specialevents", newSpecialEvent.AdoxioSpecialeventid);
-                    newSpecialEvent.AdoxioSpecialeventSpecialeventlocations.Add(newLocation);
+                    // newSpecialEvent.AdoxioSpecialeventSpecialeventlocations.Add(newLocation);
                     try
                     {
                         newLocation = _dynamicsClient.Specialeventlocations.Create(newLocation);
@@ -177,7 +178,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             var patchEvent = new MicrosoftDynamicsCRMadoxioSpecialevent();
             patchEvent.CopyValues(specialEvent);
-            if(!string.IsNullOrEmpty(specialEvent?.SepCity?.Id)){
+            if (!string.IsNullOrEmpty(specialEvent?.SepCity?.Id))
+            {
                 patchEvent.SepCityODataBind = _dynamicsClient.GetEntityURI("adoxio_sepcities", specialEvent.SepCity.Id);
             }
             try
@@ -191,9 +193,41 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw httpOperationException;
             }
 
+            if (specialEvent.DrinksSalesForecasts?.Count > 0)
+            {
+                specialEvent.DrinksSalesForecasts.ForEach(forecast =>
+                {
+                    var newForecast = new MicrosoftDynamicsCRMadoxioSepdrinksalesforecast();
+                    newForecast.CopyValues(forecast);
+
+                    newForecast.SpecialEventODataBind = _dynamicsClient.GetEntityURI("adoxio_specialevents", specialEvent.Id);
+                    if (!string.IsNullOrEmpty(forecast?.DrinkTypeId))
+                    {
+                        newForecast.DrinkTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_sepdrinksalesforecasts", forecast.DrinkTypeId);
+                    }
+                    try
+                    {
+                        if (string.IsNullOrEmpty((string)forecast.Id))
+                        { // create record
+                            newForecast = _dynamicsClient.Sepdrinksalesforecasts.Create(newForecast);
+                            forecast.Id = newForecast.AdoxioSepdrinksalesforecastid;
+                        }
+                        else
+                        { // update record
+                            _dynamicsClient.Sepdrinksalesforecasts.Update((string)forecast.Id, newForecast);
+                        }
+                    }
+                    catch (HttpOperationException httpOperationException)
+                    {
+                        _logger.LogError(httpOperationException, "Error creating/updating sep drinks sales forecast");
+                        throw httpOperationException;
+                    }
+                });
+            }
+
             if (specialEvent.EventLocations?.Count > 0)
             {
-                patchEvent.AdoxioSpecialeventSpecialeventlocations = new List<MicrosoftDynamicsCRMadoxioSpecialeventlocation>();
+                // patchEvent.AdoxioSpecialeventSpecialeventlocations = new List<MicrosoftDynamicsCRMadoxioSpecialeventlocation>();
                 // add locations to the new special event
                 specialEvent.EventLocations.ForEach((Action<ViewModels.SepEventLocation>)(location =>
                 {
@@ -237,7 +271,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                 }
                                 catch (HttpOperationException httpOperationException)
                                 {
-                                    _logger.LogError(httpOperationException, "Error creating special event location");
+                                    _logger.LogError(httpOperationException, "Error creating/updating special event location");
                                     throw httpOperationException;
                                 }
                             }));
