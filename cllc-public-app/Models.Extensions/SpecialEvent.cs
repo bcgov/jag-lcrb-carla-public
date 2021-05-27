@@ -30,7 +30,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.ChargingForLiquorReason = (ViewModels.ChargingForLiquorReasons?)specialEvent.AdoxioChargingforliquorreason;
                 result.DateSubmitted = specialEvent.AdoxioDatesubmitted;
                 result.DrinksIncluded = specialEvent.AdoxioDrinksincluded;
-                result.DonateOrConsular = (ViewModels.DonatedOrConsular?)specialEvent.AdoxioDonatedorconsular;
+                result.DonatedOrConsular = (ViewModels.DonatedOrConsular?)specialEvent.AdoxioDonatedorconsular;
                 result.EventEndDate = specialEvent.AdoxioEventenddate;
                 result.EventName = specialEvent.AdoxioEventname;
                 result.EventStartDate = specialEvent.AdoxioEventstartdate;
@@ -57,7 +57,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.PoliceApproval = specialEvent.AdoxioPoliceapproval;
                 result.PrivateOrPublic = (ViewModels.SEPPublicOrPrivate?)specialEvent.AdoxioTypeofevent;
                 result.SpecialEventCity = specialEvent.AdoxioSpecialeventcity;
-                result.SpecialEventDescripton = specialEvent.AdoxioSpecialeventdescripton;
+                result.SpecialEventDescription = specialEvent.AdoxioSpecialeventdescripton;
                 result.SpecialEventPermitNumber = specialEvent.AdoxioSpecialeventpermitnumber;
                 result.SpecialEventPostalCode = specialEvent.AdoxioSpecialeventpostalcode;
                 result.SpecialEventProvince = specialEvent.AdoxioSpecialeventprovince;
@@ -90,7 +90,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioChargingforliquorreason = (int?)from.ChargingForLiquorReason;
             to.AdoxioDatesubmitted = from.DateSubmitted;
             to.AdoxioDrinksincluded = from.DrinksIncluded;
-            to.AdoxioDonatedorconsular = (int?)from.DonateOrConsular;
+            to.AdoxioDonatedorconsular = (int?)from.DonatedOrConsular;
             to.AdoxioEventenddate = from.EventEndDate;
             to.AdoxioEventname = from.EventName;
             to.AdoxioEventstartdate = from.EventStartDate;
@@ -113,7 +113,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioResponsiblebevservicenumber = from.ResponsibleBevServiceNumber;
             to.AdoxioResponsiblebevnumberdoesnothave = from.ResponsibleBevServiceNumberDoesNotHave;
             to.AdoxioSpecialeventcity = from.SpecialEventCity;
-            to.AdoxioSpecialeventdescripton = from.SpecialEventDescripton;
+            to.AdoxioSpecialeventdescripton = from.SpecialEventDescription;
             to.AdoxioSpecialeventpermitnumber = from.SpecialEventPermitNumber;
             to.AdoxioSpecialeventpostalcode = from.SpecialEventPostalCode;
             to.AdoxioSpecialeventprovince = from.SpecialEventProvince;

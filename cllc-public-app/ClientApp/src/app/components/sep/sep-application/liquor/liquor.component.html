@@ -17,7 +17,7 @@
             <app-total-servings [application]="sepApplication" (saved)="updateValue($event); selectedIndex = 1;"></app-total-servings>
         </mat-tab>
         <mat-tab label="Selling Drinks">
-            <app-selling-drinks (back)="selectedIndex = 0" (saved)="updateValue($event); selectedIndex = 2;"></app-selling-drinks>
+            <app-selling-drinks [application]="sepApplication" (back)="selectedIndex = 0" (saved)="updateValue($event); selectedIndex = 2;"></app-selling-drinks>
         </mat-tab>
         <mat-tab label="Drink Amounts">
             <app-drink-amounts (back)="selectedIndex = 1"  (saved)="updateValue($event); save();"></app-drink-amounts>
