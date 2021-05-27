@@ -8,7 +8,7 @@ import { FormBase } from '@shared/form-base';
 import { Account } from '@models/account.model';
 import { SepLocation } from '@models/sep-location.model';
 import { SepSchedule } from '@models/sep-schedule.model';
-import { SepServiceArea } from '@models/sep-service-are.model';
+import { SepServiceArea } from '@models/sep-service-area.model';
 import { AutoCompleteItem, SpecialEventsDataService } from '@services/special-events-data.service';
 import { filter, tap, switchMap } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';

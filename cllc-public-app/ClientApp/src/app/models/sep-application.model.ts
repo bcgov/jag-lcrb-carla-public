@@ -1,3 +1,4 @@
+import { SepDrinkSalesForecast } from "./sep-drink-sales-forecast.model";
 import { SepLocation } from "./sep-location.model";
 
 export class SepApplication {
@@ -27,5 +28,6 @@ export class SepApplication {
     maximumNumberOfGuests: number;
 
     eventLocations: SepLocation[] = [];
+    drinksSalesForecasts: SepDrinkSalesForecast[] = [];
 
 } 

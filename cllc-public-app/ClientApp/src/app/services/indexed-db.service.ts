@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { SepApplication } from '@models/sep-application.model';
 import { SepLocation } from '@models/sep-location.model';
 import { SepSchedule } from '@models/sep-schedule.model';
-import { SepServiceArea } from '@models/sep-service-are.model';
+import { SepServiceArea } from '@models/sep-service-area.model';
 import Dexie, { PromiseExtended, Table } from 'dexie';
 
 @Injectable()

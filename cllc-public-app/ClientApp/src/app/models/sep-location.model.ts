@@ -1,5 +1,5 @@
 import { SepSchedule } from "./sep-schedule.model";
-import { SepServiceArea } from "./sep-service-are.model";
+import { SepServiceArea } from "./sep-service-area.model";
 
 export class SepLocation {
     locationId: string; // server side primary key
