@@ -46,16 +46,43 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         /// <summary>
-        ///     GET a special event by id
+        /// GET a special event by id.  Used by the police view event feature.
         /// </summary>
         /// <param name="eventId"></param>
         /// <returns></returns>
         [HttpGet("{eventId}")]
         public IActionResult GetSpecialEvent(string eventId)
         {
+            string[] expand = new[] { "adoxio_PoliceRepresentativeId", "adoxio_PoliceAccountId" };
+            MicrosoftDynamicsCRMadoxioSpecialevent specialEvent = null;
+            if (!string.IsNullOrEmpty(eventId))
+            {
+                try
+                {
+                    specialEvent = _dynamicsClient.Specialevents.GetByKey(eventId, expand: expand);
+                }
+                catch (HttpOperationException)
+                {
+                    specialEvent = null;
+                }
+            }
+            return new JsonResult(specialEvent.ToViewModel());
+        }
+
+
+        // TODO - determine if this service "GetSpecialEventByApplicant" is required. 
+
+        /// <summary>
+        ///     GET a special event by id
+        /// </summary>
+        /// <param name="eventId"></param>
+        /// <returns></returns>
+        [HttpGet("applicant/{eventId}")]
+        public IActionResult GetSpecialEventByApplicant(string eventId)
+        {
             var expand = new List<string> { };
             MicrosoftDynamicsCRMadoxioSpecialevent specialEvent = null;
-            if (string.IsNullOrEmpty(eventId))
+            if (!string.IsNullOrEmpty(eventId))
             {
                 var filter = $"_adoxio_applicant_value eq {eventId}";
 
