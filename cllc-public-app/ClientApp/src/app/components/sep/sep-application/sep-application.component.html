@@ -9,14 +9,14 @@
             <mat-step [completed]="isStepCompleted(step)" *ngIf="step === 'applicant'">
                 <ng-template matStepLabel>Applicant</ng-template>
                 <app-applicant [account]="account" [application]="application" *ngIf="stepper.selectedIndex === index"
-                    class="w-100" (saveComplete)="completeStep(step, stepper)" #applicant>
+                    class="w-100" (saveComplete)="completeStep(step, stepper, $event)" #applicant>
                 </app-applicant>
             </mat-step>
 
             <mat-step [completed]="isStepCompleted(step)" *ngIf="step === 'eligibility'">
                 <ng-template matStepLabel>Eligibility</ng-template>
                 <app-eligibility [account]="account" [localId]="localId" *ngIf="stepper.selectedIndex === index"
-                    class="w-100" (saveComplete)="completeStep(step, stepper)" #eligibility>
+                    class="w-100" (saveComplete)="completeStep(step, stepper, $event)" #eligibility>
                 </app-eligibility>
             </mat-step>
 
@@ -24,20 +24,21 @@
             <mat-step [completed]="isStepCompleted(step)" *ngIf="step === 'event'">
                 <ng-template matStepLabel>Event</ng-template>
                 <app-event [localId]="localId" *ngIf="stepper.selectedIndex === index" class="w-100"
-                    (saveComplete)="completeStep(step, stepper);" #event>
+                    (saveComplete)="completeStep(step, stepper, $event);" #event>
                 </app-event>
             </mat-step>
 
             <mat-step [completed]="isStepCompleted(step)" *ngIf="step === 'liquor'">
                 <ng-template matStepLabel>Liquor</ng-template>
-                <app-liquor (saveComplete)="completeStep(step, stepper);" [localId]="localId"
+                <app-liquor (saveComplete)="completeStep(step, stepper, $event)" [localId]="localId"
                     *ngIf="stepper.selectedIndex === index" class="w-100" #liquor>
                 </app-liquor>
             </mat-step>
 
             <mat-step [completed]="isStepCompleted(step)" *ngIf="step === 'summary'">
                 <ng-template matStepLabel>Summary</ng-template>
-                <app-summary (saveComplete)="completeStep(step, stepper);" [localId]="localId"  [account]="account" *ngIf="stepper.selectedIndex === index" class="w-100" #summary>
+                <app-summary (saveComplete)="completeStep(step, stepper, $event)" [localId]="localId"
+                    [account]="account" *ngIf="stepper.selectedIndex === index" class="w-100" #summary>
                 </app-summary>
             </mat-step>
 
