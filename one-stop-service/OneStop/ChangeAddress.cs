@@ -105,8 +105,10 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
             {
                 body.address.foreignLegacy.addressDetailLine1 = licence.AdoxioEstablishment.AdoxioAddressstreet;
                 body.address.municipality = licence.AdoxioEstablishment.AdoxioAddresscity;
+                body.address.postalCode = licence.AdoxioEstablishment.AdoxioAddresspostalcode;
             }
 
+            
             body.address.provinceStateCode = OneStopUtils.PROVINCE_STATE_CODE;
             body.address.countryCode = OneStopUtils.COUNTRY_CODE;
             body.businessRegistrationNumber = licence.AdoxioLicencee.Accountnumber;

@@ -330,27 +330,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(result);
         }
 
-        // police get summary list of applications waiting approval
-        [HttpGet("police/current")]
-        public IActionResult GetPoliceCurrent()
+        private List<ViewModels.SpecialEventSummary> GetSepSummaries(string filter)
         {
-            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
-            // get the account details.
-            var userAccount = _dynamicsClient.GetAccountById(userSettings.AccountId);
-            if (string.IsNullOrEmpty(userAccount._adoxioPolicejurisdictionidValue))  // ensure the current account has a police jurisdiction.
-            {
-                return Unauthorized();
-            }
-
             List<ViewModels.SpecialEventSummary> result = new List<ViewModels.SpecialEventSummary>();
 
-            string filter = $"_adoxio_policejurisdictionid_value eq {userAccount._adoxioPolicejurisdictionidValue}";
-            string[] expand = new[] {"adoxio_PoliceRepresentativeId", "adoxio_PoliceAccountId" };
+            string[] expand = new[] { "adoxio_PoliceRepresentativeId", "adoxio_PoliceAccountId" };
             IList<MicrosoftDynamicsCRMadoxioSpecialevent> items = null;
             try
             {
-                items = _dynamicsClient.Specialevents.Get(filter:filter, expand:expand).Value;
-                
+                items = _dynamicsClient.Specialevents.Get(filter: filter, expand: expand).Value;
+
                 foreach (var item in items)
                 {
                     result.Add(item.ToSummaryViewModel());
@@ -364,6 +353,44 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 _logger.LogError(exception, "Unexpected Error getting special events");
             }
+
+            return result;
+        }
+
+        // police get summary list of applications waiting approval
+        [HttpGet("police/all")]
+        public IActionResult GetPoliceCurrent()
+        {
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+            // get the account details.
+            var userAccount = _dynamicsClient.GetAccountById(userSettings.AccountId);
+            if (string.IsNullOrEmpty(userAccount._adoxioPolicejurisdictionidValue))  // ensure the current account has a police jurisdiction.
+            {
+                return Unauthorized();
+            }
+
+            string filter = $"_adoxio_policejurisdictionid_value eq {userAccount._adoxioPolicejurisdictionidValue}";
+
+            var result = GetSepSummaries(filter);
+
+            return new JsonResult(result);
+        }
+
+        // police get summary list of applications for the current user
+        [HttpGet("police/my")]
+        public IActionResult GetPoliceMy()
+        {
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+            // get the account details.
+            var userAccount = _dynamicsClient.GetAccountById(userSettings.AccountId);
+            if (string.IsNullOrEmpty(userAccount._adoxioPolicejurisdictionidValue))  // ensure the current account has a police jurisdiction.
+            {
+                return Unauthorized();
+            }
+
+            string filter = $"_adoxio_policerepresentativeid_value eq {userSettings.ContactId}";
+
+            var result = GetSepSummaries(filter);
 
             return new JsonResult(result);
         }

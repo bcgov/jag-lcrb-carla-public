@@ -1,0 +1,211 @@
+<div class="form-wrapper-summary">
+    <h3>Application number: [id]</h3>
+    <p>
+        Here’s a summary of your event. Does everything look right?
+    </p>
+
+    <p>
+        Review your event details one more time before submitting your application for review.
+    </p>
+
+    <p>
+        Scroll down the page to complete the review and submit your application. Please be sure to complete the final
+        declaration and submit your application.
+    </p>
+
+    <p>
+        To edit, click the pencil icon next to the section you wish to update.
+    </p>
+
+    <div>
+        <h3>IMPORTANT</h3>
+        <span>Changes cannot be made once your application is submitted.</span>
+        <span>
+            If you have any questions before submitting the application please contact the SEP Online Help Line at 1 855
+            999 7656 or email LCRB.Sep@gov.bc.ca
+        </span>
+    </div>
+
+    <hr>
+
+    <h2>Summary</h2>
+
+    <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                GENERAL APPLICATION INFO
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="d-flex">
+            <label>Event Name</label> <span>{{application?.eventName}}</span>
+        </div>
+        <div class="d-flex">
+            <label>Event Municipality</label> <span>Agassiz</span>
+        </div>
+        <div class="d-flex">
+            <label>Applicant Name</label> <span>{{account?.name}}</span>
+        </div>
+        <div class="d-flex">
+            <label>Applicant Info</label>
+            <section>
+                <div>{{account?.physicalAddressStreet}}</div>
+                <div>{{account?.physicalAddressProvince}}</div>
+                <div>{{account?.physicalAddressPostalCode}}</div>
+                <div>{{account?.contactPhone}}</div>
+                <div>{{account?.contactEmail}}</div>
+            </section>
+        </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                ELIGIBILITY
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="d-flex">
+            <label>Event Starts at:</label> <span>Test Ev</span>
+        </div>
+        <div class="d-flex">
+            <label>Responsible Beverage Service #:</label> <span>Agassiz</span>
+        </div>
+        <div class="d-flex">
+            <label>Name of The Organization:</label> <span>Agassiz</span>
+        </div>
+        <div class="d-flex">
+            <label>Address of The Organization:</label> <span>Agassiz</span>
+        </div>
+        <div class="d-flex">
+            <label>Occasion of event:</label> <span>Firstname Lastname</span>
+        </div>
+        <div class="d-flex">
+            <label>Licence Already exists in location:</label> <span>Yes</span>
+        </div>
+        <div class="d-flex">
+            <label>Permit Category</label> <span>Private – Family and Invited Friends Only</span>
+        </div>
+        <div class="d-flex">
+            <label>Public Property</label> <span>Yes</span>
+        </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                EVENT LOCATION 1
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="d-flex">
+            <label>Location Name</label> <span>Test Ev</span>
+        </div>
+        <div class="d-flex">
+            <label>Location Description</label> <span>Agassiz</span>
+        </div>
+        <div class="d-flex">
+            <label>Event Address</label>
+            <section>
+                <span>123 Test Rd</span>
+                <span>Victoria,British Columbia</span>
+                <span>V9B 0G9</span>
+                <span>112 123 2233</span>
+                <span>test@mail.test</span>
+            </section>
+        </div>
+
+
+        <div class="d-flex">
+            <label>Service Area Description</label> <span>Bar area</span>
+        </div>
+        <div class="d-flex">
+            <label>Maximum # of Guests in Service Areas</label> <span>Bar area</span>
+        </div>
+        <div class="d-flex">
+            <label>Minors Present</label> <span>Bar area</span>
+        </div>
+        <div class="d-flex">
+            <label>Event Held</label> <span>Bar area</span>
+        </div>
+        <div class="d-flex">
+            <label>Maximum # of Guests at this location</label> <span>Bar area</span>
+        </div>
+
+        <h4>Event date</h4>
+        <div class="d-flex">
+            <label>Start Date</label> <span>Bar area</span>
+            <label>Start Time</label> <span>Bar area</span>
+            <label>Liquor Service</label> <span>Bar area</span>
+        </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                LIQUOR FEES
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div class="d-flex">
+            <label>Liquor Quantities</label>
+            <table class="servigns">
+                <tr>
+                    <th>Type</th>
+                    <th>Servings</th>
+                </tr>
+                <tr *ngFor="let item of [{type: 'draught beer', servings: 113},{type: 'wine', servings: 10}]">
+                    <td>{{item.type}}</td>
+                    <td>{{item.servings}}</td>
+                </tr>
+            </table>
+        </div>
+
+        <hr>
+
+        <div class="d-flex">
+            <label>Estimated total liquor sales revenue</label> <span class="fee-amount">[$0.00]</span>
+        </div>
+        <div class="d-flex">
+            <label>Estimated liquor purchase cost</label> <span class="fee-amount">[$0.00]</span>
+        </div>
+        <div class="d-flex">
+            <label>Estimated net proceeds/profit from liquor sales</label> <span class="fee-amount">[$0.00]</span>
+        </div>
+        <div class="d-flex">
+            <label>Total PST Amount Due</label> <span class="fee-amount">[$0.00]</span>
+        </div>
+        <div class="d-flex">
+            <label>Application Fees (Based on 1 event location and capacity)*
+                *0-500 – $25.00</label> <span class="fee-amount">[$0.00]</span>
+        </div>
+
+        <hr>
+
+        <div class="d-flex total-fees-due">
+            <label>Total Fees Due Upon Approval</label> <span class="fee-amount">[$0.00]</span>
+        </div>
+    </mat-expansion-panel>
+
+    <div class="d-flex">
+        <label>Declaration</label>
+        <section class="declaration-content">
+            <span class="declaration-text">
+                I, [[[[Firstname Lastname]]], certify that all of the information is true and complete to the best of my
+                knowledge. I have read the terms and conditions of the permit, and if the application is approved, the
+                permittee listed on the permit will be responsible for liquor service at the event.
+            </span>
+
+            <mat-checkbox class="declaration-checkbox">
+                By checking this box, I confirm that I have read, agree to and acknowledge the declaration. I also
+                certify that I am at least 19 years old and that no essential information has been concealed or
+                misrepresented on this application.
+            </mat-checkbox>
+        </section>
+    </div>
+
+    <hr>
+
+    <div class="d-flex flex-row-reverse">
+        <button mat-raised-button color="primary">SUMIT APPLICATION</button>
+        <button mat-raised-button color="secondary" class="mr-2">BACK</button>
+    </div>
+</div>
+
