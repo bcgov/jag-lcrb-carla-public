@@ -67,6 +67,7 @@
 
         <mat-divider></mat-divider>
         <div class="d-flex justify-content-between">
+
             <app-field [isFullWidth]="true"
                 label="Is this an event of provincial, national, or international significance?" [required]="true">
                 <mat-radio-group formControlName="isMajorSignificance">
@@ -86,21 +87,53 @@
                     </p>
                 </app-error-alert>
                 <br *ngIf="form.get('isMajorSignificance').value">
-                <app-field *ngIf="form.get('isMajorSignificance').value" [isFullWidth]="true"
-                    label="Describe rationale" [required]="true">
+                <app-field *ngIf="form.get('isMajorSignificance').value" [isFullWidth]="true" label="Describe rationale"
+                    [required]="true">
                     <textarea formControlName="majorSignificanceRationale" class="w-80 form-control"
                         rows="3"></textarea>
                 </app-field>
             </app-field>
             <div>
-                <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip1.toggle()" matTooltipClass="custom-tooltip" 
-                    matTooltip="LCRB will determine events of a provincial, national, or international significance on a case-by-case basis. Some criteria used include whether:
+                <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip1.toggle()"
+                    matTooltipClass="custom-tooltip" matTooltip="LCRB will determine events of a provincial, national, or international significance on a case-by-case basis. Some criteria used include whether:
                     
                     &bull; participants or performers at your event are primarily from the province, Canada, or around the world;
                     
                     &bull; your event attracts spectators from around the province, Canada, or around the world;
                     
-                    &bull; there is provincial, national, or world-wide media coverage of your event." #tooltip1="matTooltip">
+                    &bull; there is provincial, national, or world-wide media coverage of your event."
+                    #tooltip1="matTooltip">
+                </fa-icon>
+            </div>
+        </div>
+
+        <mat-divider></mat-divider>
+        <div class="d-flex justify-content-between">
+
+            <app-field [isFullWidth]="true"
+                label="Is this an event designated by municipal council as an event of municipal significance?"
+                [required]="true">
+                <mat-radio-group formControlName="isLocalSignificance">
+                    <mat-radio-button color="primary" class="mr-3" [value]="true">Yes</mat-radio-button>
+                    <mat-radio-button color="primary" class="mr-3" [value]="false">No</mat-radio-button>
+                </mat-radio-group>
+                <app-error-alert *ngIf="form.get('isLocalSignificance').value">
+                    <p>
+                        An event of municipal significance requires a municipal resolution or letter from a delegated
+                        municipal official designating the event municipally significant. Please see tool tip to the
+                        right of the text box for more information.
+                    </p>
+                    <p>
+                        A copy of this designation must be kept at the event site for inspection.
+                    </p>
+                </app-error-alert>
+            </app-field>
+            <div>
+                <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip1.toggle()"
+                    matTooltipClass="custom-tooltip"
+                    matTooltip="In order for your event to be deemed municipally significant the event must 
+                    take place primarily in the Municipality and you must obtain a municipal resolution or a letter from a delegated municipal official designating the event to be of municipal significance."
+                    #tooltip1="matTooltip">
                 </fa-icon>
             </div>
         </div>
@@ -108,8 +141,8 @@
         <mat-divider></mat-divider>
         <div class="d-flex justify-content-between">
             <app-field label="When does your event start? " [required]="true"
-            [valid]="!form.get('eventStartDate').touched || form.get('eventStartDate').valid"
-            errorMessage="Event start date is required and cannot be in the past">
+                [valid]="!form.get('eventStartDate').touched || form.get('eventStartDate').valid"
+                errorMessage="Event start date is required and cannot be in the past">
                 <input type="text" formControlName="eventStartDate" style="background-color: #fff; width: 200px;"
                     placeholder="yyyy-mm-dd" readonly class="form-control" [min]="minDate" [matDatepicker]="picker"
                     (focus)="picker.open()" (click)="picker.open()">
@@ -136,17 +169,20 @@
                 errorMessage="Licence category can't be blank">
                 <select formControlName="privateOrPublic" class="form-control">
                     <option value=""></option>
-                    <option value="Members">Private – An organization's members or staff, invited guests and ticket holders
+                    <option value="Members">Private – An organization's members or staff, invited guests and ticket
+                        holders
                     </option>
                     <option value="Family">Private – Family and invited friends only</option>
                     <option value="Hobbyist">Private – Hobbyist competition</option>
-                    <option value="Anyone">Public – Open to the general public or anyone who wishes to participate or buy a
+                    <option value="Anyone">Public – Open to the general public or anyone who wishes to participate or
+                        buy a
                         ticket
                     </option>
                 </select>
             </app-field>
             <div>
-                <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip3.toggle()"  matTooltipClass="custom-tooltip"
+                <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip3.toggle()"
+                    matTooltipClass="custom-tooltip"
                     matTooltip="Private Events:
                     
                     Entry is limited to family, friends, an organization’s members or staff, invited guests and ticket holders. (Tickets must be sold or given away before the start time of the event. Tickets for hobbyist events cannot be sold.)
@@ -158,7 +194,8 @@
 
                     Entry is open to anyone who wishes to participate or buy a ticket (either at the door or in advance of the event).
                     
-                    Examples: events that are community or public celebrations, such as community festivals or outdoor concerts." #tooltip3="matTooltip">
+                    Examples: events that are community or public celebrations, such as community festivals or outdoor concerts."
+                    #tooltip3="matTooltip">
                 </fa-icon>
             </div>
         </div>
@@ -189,7 +226,8 @@
                     <select formControlName="hostOrganizationCategory" class="form-control w-100">
                         <option value=""></option>
                         <option value="IncorporatedNonProfitOrganization">Incorporated Non-profit organization</option>
-                        <option value="UnincorporatedNonProfitOrganization">Unincorporated Non-profit organization</option>
+                        <option value="UnincorporatedNonProfitOrganization">Unincorporated Non-profit organization
+                        </option>
                         <option value="IncorporatedBusinessOrPartnership">Incorporated Business or Partnership
                         </option>
                         <option value="GovernmentOrPublicOrganization">Government or Public organization</option>
@@ -211,10 +249,8 @@
             <app-field label="Responsible Beverage Service Number (SIR or SES)" [required]="true"
                 [valid]="!form.get('responsibleBevServiceNumber').touched || form.get('responsibleBevServiceNumber').valid"
                 errorMessage="Responsible Beverage Service Number (SIR or SES) must be entered to continue.">
-                <input formControlName="responsibleBevServiceNumber" maxlength="6" type="text"
-                    class="form-control">
-                <mat-checkbox class="mt-2" formControlName="responsibleBevServiceNumberDoesNotHave"
-                    color="primary">
+                <input formControlName="responsibleBevServiceNumber" maxlength="6" type="text" class="form-control">
+                <mat-checkbox class="mt-2" formControlName="responsibleBevServiceNumberDoesNotHave" color="primary">
                     I don’t have a BC Responsible Beverage Service Certificate Number
                 </mat-checkbox>
                 <app-error-alert *ngIf="form.get('responsibleBevServiceNumberDoesNotHave').value">
@@ -273,8 +309,8 @@
         <mat-divider></mat-divider>
         <div class="d-flex justify-content-between">
             <app-field label="Is there currently a liquor licence at your event location?" [required]="true"
-            [valid]="!form.get('isLocationLicensed').touched || form.get('isLocationLicensed').valid"
-            errorMessage="Licence exists is not included in the list">
+                [valid]="!form.get('isLocationLicensed').touched || form.get('isLocationLicensed').valid"
+                errorMessage="Licence exists is not included in the list">
                 <mat-radio-group formControlName="isLocationLicensed">
                     <mat-radio-button color="primary" class="mr-3" value="yes">Yes</mat-radio-button>
                     <mat-radio-button color="primary" class="mr-3" value="no">No</mat-radio-button>
