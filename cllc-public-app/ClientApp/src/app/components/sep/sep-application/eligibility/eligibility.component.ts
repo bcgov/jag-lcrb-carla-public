@@ -55,7 +55,7 @@ export class EligibilityComponent extends FormBase implements OnInit {
       isOnPublicProperty: ['', [Validators.required]],
       isMajorSignificance: [false, [Validators.required]],
       majorSignificanceRationale: [''],
-      // isLocalSignificance: [false, [Validators.required]],
+      isLocalSignificance: ['', [Validators.required]],
       eventStartDate: ['', [Validators.required]],
       privateOrPublic: ['', [Validators.required]],
       responsibleBevServiceNumber: ['', [Validators.required]],
