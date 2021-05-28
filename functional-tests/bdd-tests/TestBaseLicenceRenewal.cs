@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using OpenQA.Selenium;
+using Protractor;
 using Xunit;
 using Xunit.Gherkin.Quick;
 
@@ -270,9 +271,23 @@ namespace bdd_tests
 
                 // select 'No'
                 // 1.Have you or any partner, shareholder, director, or officer of this licensee been arrested for, charged with, or convicted of a criminal offence within the past 12 months that you have not reported to the LCRB ?
-                var uiCriminalOffence =
-                    ngDriver.FindElement(By.CssSelector(
+                NgWebElement uiCriminalOffence = null;
+                for (var i = 0; i < 10; i++)
+                {
+                    try
+                    {
+                        var names = ngDriver.FindElements(By.CssSelector(
                         "[formcontrolname='renewalCriminalOffenceCheck'] button#mat-button-toggle-11-button"));
+                        if (names.Count > 0)
+                        {
+                            uiCriminalOffence = names[0];
+                            break;
+                        }
+                    }
+                    catch (Exception)
+                    { }
+                    Thread.Sleep(1000);
+                }
                 JavaScriptClick(uiCriminalOffence);
 
                 // select 'No'
