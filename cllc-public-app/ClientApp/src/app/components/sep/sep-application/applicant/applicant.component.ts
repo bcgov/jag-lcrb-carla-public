@@ -135,16 +135,8 @@ export class ApplicantComponent implements OnInit {
     } as SepApplication;
     if (this.isValid()) {
       this.saveComplete.emit(data);
-      // this.save().subscribe((appId: number) => {
-      //   this.saveComplete.emit(true);
-      // });
     }
   }
 
-  saveForLater() {
-    this.save()
-      .subscribe(id => {
-        this.router.navigateByUrl('/sep/my-applications')
-      });
-  }
+
 }
