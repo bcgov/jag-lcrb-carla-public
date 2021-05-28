@@ -13,7 +13,7 @@ export class SepApplication {
     isAgreeTsAndCs: boolean;
     dateAgreedToTsAndCs: Date;
     stepsCompleted: string[];
-    eventStatus: string; 
+    eventStatus: string;
     totalServings: number;
     invoiceTrigger: number;
 
@@ -29,5 +29,12 @@ export class SepApplication {
 
     eventLocations: SepLocation[] = [];
     drinksSalesForecasts: SepDrinkSalesForecast[] = [];
+    itemsToDelete: SepDeletedItems = new SepDeletedItems();
+}
 
-} 
+export class SepDeletedItems {
+    eventDates: string[] = [];
+    locations: string[] = [];
+    serviceAreas: string[] = [];
+    drinkSalesForecasts: string[] = [];
+}
