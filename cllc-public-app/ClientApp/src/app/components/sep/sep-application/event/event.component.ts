@@ -255,7 +255,6 @@ export class EventComponent extends FormBase implements OnInit {
     return areaForm;
   }
 
-
   removeServiceArea(serviceAreaIndex: number, location: FormGroup) {
     let serviceAreas = location.get('serviceAreas') as FormArray;
 
@@ -305,11 +304,8 @@ export class EventComponent extends FormBase implements OnInit {
       })(this?.sepApplication?.stepsCompleted || []),
       ...formData
     } as SepApplication;
-
     return data;
-
   }
-
 
   next() {
     this.showValidationMessages = false;
