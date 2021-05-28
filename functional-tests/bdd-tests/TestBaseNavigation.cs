@@ -207,7 +207,22 @@ namespace bdd_tests
         public void ContinueToApplicationButton()
         {
             // click on the Continue to Application button
-            var uiContinueButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
+            NgWebElement uiContinueButton = null;
+            for (var i = 0; i < 20; i++)
+            {
+                try
+                {
+                    var names = ngDriver.FindElements(By.CssSelector("button#continueToApp"));
+                    if (names.Count > 0)
+                    {
+                        uiContinueButton = names[0];
+                        break;
+                    }
+                }
+                catch (Exception)
+                { }
+                Thread.Sleep(1000);
+            }
             var executor = (IJavaScriptExecutor)ngDriver.WrappedDriver;
             executor.ExecuteScript("arguments[0].scrollIntoView(true);", uiContinueButton);
             uiContinueButton.Click();
