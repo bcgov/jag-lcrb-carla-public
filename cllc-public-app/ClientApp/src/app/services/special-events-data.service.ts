@@ -15,9 +15,9 @@ export class SpecialEventsDataService extends DataService {
   }
 
 
-  getSpecialEvent(id: string): Observable<SepApplication[]> {
+  getSpecialEvent(id: string): Observable<SepApplication> {
     const apiPath = `api/special-events/${id}`;
-    return this.http.get<SepApplication[]>(apiPath, { headers: this.headers })
+    return this.http.get<SepApplication>(apiPath, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
@@ -66,7 +66,13 @@ export class SpecialEventsDataService extends DataService {
   }
 
   getPoliceApprovalSepApplications(): Observable<SepApplicationSummary[]> {
-    const apiPath = `api/special-events/police/current`;
+    const apiPath = `api/special-events/police/all`;
+    return this.http.get<SepApplicationSummary[]>(apiPath, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
+  getPoliceApprovalMySepApplications(): Observable<SepApplicationSummary[]> {
+    const apiPath = `api/special-events/police/my`;
     return this.http.get<SepApplicationSummary[]>(apiPath, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
