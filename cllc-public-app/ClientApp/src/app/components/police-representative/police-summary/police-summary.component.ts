@@ -1,6 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SepApplication } from '@models/sep-application.model';
 import { SpecialEventsDataService } from '@services/special-events-data.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-police-summary',
@@ -8,26 +11,32 @@ import { SpecialEventsDataService } from '@services/special-events-data.service'
   styleUrls: ['./police-summary.component.scss']
 })
 export class PoliceSummaryComponent implements OnInit {
-  @Input() account: any; 
-  @Output() saveComplete = new EventEmitter<boolean>();
 
-  _appID: string;
-  application: SepApplication;
+  busy: Subscription;
+  specialEventId: string;
+  public application: SepApplication;
 
-  @Input() set specialEventId(value: string) {
-    this._appID = value;
-    //get the special event application
-    this.specialEventsDataService.getSpecialEvent(value)
-      .subscribe(application => this.application = application);
-  };
 
-  get specialEventId() {
-    return this._appID;
+  constructor(private specialEventsDataService: SpecialEventsDataService,
+    private router: Router,
+    private route: ActivatedRoute,
+    ) {
+      this.route.paramMap.subscribe(params => {
+        this.specialEventId = params.get("specialEventId");
+      });
+      
   }
-
-  constructor(private specialEventsDataService: SpecialEventsDataService) { }
 
   ngOnInit(): void {
+    console.log ("INIT");
+    console.log (this.specialEventId);
+    this.busy =
+    this.specialEventsDataService.getSpecialEvent(this.specialEventId)
+      .subscribe(application => {
+        this.application = application;
+        console.log (application);
+      });
   }
+
 
 }
