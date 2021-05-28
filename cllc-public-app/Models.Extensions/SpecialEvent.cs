@@ -26,7 +26,6 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.Id = specialEvent.AdoxioSpecialeventid;
 
                 result.AdmissionFee = specialEvent.AdoxioAdmissionfee;
-                result.StepsCompleted = specialEvent.Adoxio
                 result.BeerGarden = specialEvent.AdoxioBeergarden;
                 result.Capacity = specialEvent.AdoxioCapacity;
                 result.ChargingForLiquorReason = (ViewModels.ChargingForLiquorReasons?)specialEvent.AdoxioChargingforliquorreason;
@@ -42,7 +41,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.HostOrganizationName = specialEvent.AdoxioHostorganisationname;
                 result.HowProceedsWillBeUsedDescription = specialEvent.AdoxioHowproceedswillbeuseddescription;
                 result.IsAgreeToTnC = specialEvent.AdoxioIsagreetsandcs;
-                result.DateAgreeToTnC = specialEvent.AdoxioDateagreedtotsandcs;e
+                result.DateAgreeToTnC = specialEvent.AdoxioDateagreedtotsandcs;
                 result.IsAnnualEvent = specialEvent.AdoxioIsannualevent;
                 result.IsOnPublicProperty = specialEvent.AdoxioIsonpublicproperty;
                 result.IsMajorSignificance = specialEvent.AdoxioIsmajorsignificance;
