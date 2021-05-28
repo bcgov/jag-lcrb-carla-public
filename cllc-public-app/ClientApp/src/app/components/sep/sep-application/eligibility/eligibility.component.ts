@@ -18,7 +18,7 @@ export class EligibilityComponent extends FormBase implements OnInit {
   _appID: number;
   sepApplication: SepApplication;
   @Output()
-  saveComplete = new EventEmitter<boolean>();
+  saveComplete = new EventEmitter<SepApplication>();
   faQuestionCircle = faQuestionCircle;
   form: FormGroup;
   showValidationMessages: boolean;
@@ -30,11 +30,14 @@ export class EligibilityComponent extends FormBase implements OnInit {
   @Input()
   set localId(value: number) {
     this._appID = value;
+    if (!value) {
+      return;
+    }
     //get the last saved application
     this.db.getSepApplication(value)
       .then(app => {
         this.sepApplication = app;
-        if (this.form) {
+        if (this.form && app) {
           this.form.patchValue(this.sepApplication);
         }
       });
@@ -135,7 +138,7 @@ export class EligibilityComponent extends FormBase implements OnInit {
     return this.form.valid && !this.form.get('isPrivateResidence').value === true;
   }
 
-  save() {
+  getFormData(): SepApplication {
     const data = {
       ...this.sepApplication,
       lastUpdated: new Date(),
@@ -149,28 +152,15 @@ export class EligibilityComponent extends FormBase implements OnInit {
       })(this?.sepApplication?.stepsCompleted || []),
       ...this.form.value
     } as SepApplication;
-
-    if (data.localId) {
-      return this.db.applications.update(data.localId, data);
-    } else {
-      console.error("The id should already exist at this point.")
-    }
+    return data;
   }
 
   next() {
     this.showValidationMessages = false;
     if (this.isValid()) {
-      this.save().then( id => {
-        this.saveComplete.emit(true);
-      });
+      this.saveComplete.emit(this.getFormData());
     } else {
       this.showValidationMessages = true;
     }
   }
-
-  saveForLater() {
-    this.save();
-    this.router.navigateByUrl('/sep/my-applications')
-  }
-
 }

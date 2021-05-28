@@ -14,7 +14,7 @@ export class LiquorComponent implements OnInit {
   selectedIndex = 0;
   value: any = {};
   @Output()
-  saveComplete = new EventEmitter<boolean>();
+  saveComplete = new EventEmitter<SepApplication>();
 
   _appID: number;
   sepApplication: SepApplication;
@@ -37,10 +37,10 @@ export class LiquorComponent implements OnInit {
 
   updateValue(value) {
     this.value = { ...this.value, ...value };
-    this.saveToDB();
-    if (environment.development) {
-      this.saveToAPI();
-    }
+    // this.saveToDB();
+    // if (environment.development) {
+    //   this.saveToAPI();
+    // }
   }
 
   ngOnInit(): void {
@@ -69,33 +69,46 @@ export class LiquorComponent implements OnInit {
     }
   }
 
-  saveToAPI() {
-    this.db.getSepApplication(this.localId)
-      .then((appData) => {
-        if (appData.id) { // do an update ( the record exists in dynamics)
-          this.sepDataService.updateSepApplication({ ...appData, invoiceTrigger: 1 }, appData.id)
-            .subscribe(result => {
-              if (result.localId) {
-                this.db.applications.update(result.localId, result);
-                this.localId = result.localId;
-              }
-            });
-        } else {
-          this.sepDataService.createSepApplication({ ...appData, invoiceTrigger: 1 })
-            .subscribe(result => {
-              if (result.localId) {
-                this.db.applications.update(result.localId, result);
-                this.localId = result.localId;
-              }
-            });
-        }
-      });
-  }
+  // saveToAPI() {
+  //   this.db.getSepApplication(this.localId)
+  //     .then((appData) => {
+  //       if (appData.id) { // do an update ( the record exists in dynamics)
+  //         this.sepDataService.updateSepApplication({ ...appData, invoiceTrigger: 1 }, appData.id)
+  //           .subscribe(result => {
+  //             if (result.localId) {
+  //               this.db.applications.update(result.localId, result);
+  //               this.localId = result.localId;
+  //             }
+  //           });
+  //       } else {
+  //         this.sepDataService.createSepApplication({ ...appData, invoiceTrigger: 1 })
+  //           .subscribe(result => {
+  //             if (result.localId) {
+  //               this.db.applications.update(result.localId, result);
+  //               this.localId = result.localId;
+  //             }
+  //           });
+  //       }
+  //     });
+  // }
 
   save() {
-    this.saveToDB();
-    this.saveToAPI();
-    this.saveComplete.emit(true);
+    // this.saveToDB();
+    // this.saveToAPI();
+    const data = {
+      ...this.sepApplication,
+      lastUpdated: new Date(),
+      status: 'unsubmitted',
+      stepsCompleted: (steps => {
+        const step = 'event';
+        if (steps.indexOf(step) === -1) {
+          steps.push(step);
+        }
+        return steps;
+      })(this?.sepApplication?.stepsCompleted || []),
+      ...this.value,
+    } as SepApplication;
+    this.saveComplete.emit(data);
   }
 
 }

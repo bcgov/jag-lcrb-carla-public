@@ -60,9 +60,9 @@ export class SepApplicationComponent implements OnInit {
     this.getApplication();
   }
 
-  getApplication() {
+  async getApplication() {
     if (this.localId) {
-      this.db.getSepApplication(this.localId)
+      await this.db.getSepApplication(this.localId)
         .then(app => {
           // make sure the steps completed array is setup
           app.stepsCompleted = app.stepsCompleted || [];
@@ -95,24 +95,25 @@ export class SepApplicationComponent implements OnInit {
       let result = await this.sepDataService.updateSepApplication({ ...appData, invoiceTrigger: 1 }, appData.id)
         .toPromise();
       if (result.localId) {
-        this.localId = await this.db.applications.update(result.localId, result);
+        await this.db.applications.update(result.localId, result);
       }
     } else {
       let result = await this.sepDataService.createSepApplication({ ...appData, invoiceTrigger: 1 })
         .toPromise();
       if (result.localId) {
-        this.localId = await this.db.applications.update(result.localId, result);
+        await this.db.applications.update(result.localId, result);
         this.localId = result.localId;
       }
     }
   }
 
 
-  completeStep(step: string, stepper: any) {
+  completeStep(step: string, stepper: any, data: SepApplication) {
     const steps = this?.application?.stepsCompleted;
     if (steps && step && steps.indexOf(step) == -1) {
       this.application.stepsCompleted.push(step);
     }
+    this.saveToDb(data);
     this.cd.detectChanges();
     if (environment.development) {
       this.saveToAPI().then(_ => { // Save to dynamics on transitions on DEV
@@ -126,4 +127,15 @@ export class SepApplicationComponent implements OnInit {
   selectionChange(event) {
   }
 
+  async saveToDb(data) {
+    let localId: number = null;
+    if (data.localId) {
+      await this.db.applications.update(data.localId, data);
+    } else {
+      data.dateCreated = new Date();
+      this.localId = await this.db.saveSepApplication(data);
+    }
+    await this.getApplication();
+    return localId;
+  }
 }
