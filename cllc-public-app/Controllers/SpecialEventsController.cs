@@ -79,8 +79,22 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return BadRequest();
             }
 
+
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+
+
             var newSpecialEvent = new MicrosoftDynamicsCRMadoxioSpecialevent();
             newSpecialEvent.CopyValues(specialEvent);
+
+            if (!string.IsNullOrEmpty(userSettings.AccountId))
+            {
+                newSpecialEvent.AccountODataBind = _dynamicsClient.GetEntityURI("accounts", userSettings.AccountId);
+            }
+            if (!string.IsNullOrEmpty(userSettings.ContactId))
+            {
+                newSpecialEvent.ContactODataBind = _dynamicsClient.GetEntityURI("contacts", userSettings.ContactId);
+            }
+
             if (!string.IsNullOrEmpty(specialEvent?.SepCity?.Id))
             {
                 newSpecialEvent.SepCityODataBind = _dynamicsClient.GetEntityURI("adoxio_sepcities", specialEvent.SepCity.Id);
@@ -428,7 +442,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.LogError(e, "Unexpected Error updating special event");
                 return StatusCode(500);
             }
-            
+
 
             return Ok();
         }

@@ -355,7 +355,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
       );
     }
 
-    return forkJoin(...saves)
+    return forkJoin(saves)
       .pipe(catchError(() => of(false)),
         map(() => {
           this.accountDataService.loadCurrentAccountToStore(this.account.id).subscribe(() => { });
