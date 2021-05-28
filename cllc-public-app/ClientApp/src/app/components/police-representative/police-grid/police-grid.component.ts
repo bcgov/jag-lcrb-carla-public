@@ -9,6 +9,10 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { Contact } from '@models/contact.model';
 import { User } from '@models/user.model';
+import { PoliceSummaryComponent } from '../police-summary/police-summary.component';
+import { MatDialog } from '@angular/material/dialog';
+import { takeWhile } from "rxjs/operators";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-police-grid',
@@ -59,7 +63,8 @@ export class PoliceGridComponent implements OnInit {
     return this._currentUser;
   }
 
-  constructor(    private sepDataService: SpecialEventsDataService) { }
+  constructor(    private sepDataService: SpecialEventsDataService,
+    private router: Router,) { }
 
   ngOnInit(): void {
     this.dataSource.paginator = this.paginator;
@@ -103,6 +108,16 @@ export class PoliceGridComponent implements OnInit {
 
   updateValue(event: MatSelectChange) {
     this.currentValueMap[event.source.id] = event.value;
+  }
+
+  /**
+   *
+   * @param applicationId
+   * @param establishmentName
+   * @param applicationName
+   */
+   openApplication(id: string) {
+    this.router.navigateByUrl(`sep/police/${id}`);
   }
 
 }
