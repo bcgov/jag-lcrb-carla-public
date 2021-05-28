@@ -3,6 +3,7 @@ export class Contact {
   fullname: string;
   firstname: string;
   lastname: string;
+  name: string;
   emailaddress1: string;
   telephone1: string;
   address1_line1: string;
