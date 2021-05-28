@@ -1,5 +1,8 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { SelectionModel } from '@angular/cdk/collections';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
 import { filter, map } from 'rxjs/operators';
@@ -8,22 +11,25 @@ import { User } from '@models/user.model';
 import { SpecialEventsDataService } from '@services/special-events-data.service';
 import { AccountDataService } from '@services/account-data.service';
 import { Contact } from '@models/contact.model';
+import { Subscription } from "rxjs";
 import { PoliceTableElement } from '../police-table-element';
 
 @Component({
-  selector: 'app-sep-all-applications',
-  templateUrl: './all-applications.component.html',
-  styleUrls: ['./all-applications.component.scss']
+  selector: 'app-my-jobs',
+  templateUrl: './my-jobs.component.html',
+  styleUrls: ['./my-jobs.component.scss']
 })
-export class AllApplicationsComponent implements OnInit {
+export class MyJobsComponent implements OnInit {
 
+  // icons
+  busy: Subscription;
+  // angular material table columns to display
   currentUser: User;
   availableContacts = [];
-
-
-  // table state
   dataSource = new MatTableDataSource<PoliceTableElement>();
-  initialSelection = [];
+
+  selectedIndex = 0;
+  value: any = {};
 
 
   constructor(
@@ -64,7 +70,7 @@ export class AllApplicationsComponent implements OnInit {
     })));
   }
   private loadSepApplications() {
-    return this.sepDataService.getPoliceApprovalSepApplications()
+    return this.sepDataService.getPoliceApprovalMySepApplications()
       .pipe(map(array => array.map(sepData => {
         return {
           ...sepData,
