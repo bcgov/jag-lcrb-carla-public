@@ -34,7 +34,7 @@ export class ApplicantComponent implements OnInit {
     return this._app;
   }
   @Output()
-  saveComplete = new EventEmitter<boolean>();
+  saveComplete = new EventEmitter<SepApplication>();
   form: FormGroup;
 
 
@@ -93,17 +93,6 @@ export class ApplicantComponent implements OnInit {
         }
         return steps;
       })(this?.application?.stepsCompleted || []),
-      contact: {
-        firstname: this?.account?.primarycontact?.firstname,
-        lastname: this?.account?.primarycontact?.lastname,
-        address1_line1: this?.account?.primarycontact?.address1_line1,
-        address1_city: this?.account?.primarycontact?.address1_city,
-        address1_stateorprovince: this?.account?.primarycontact?.address1_stateorprovince,
-        address1_postalcode: this?.account?.primarycontact?.address1_postalcode,
-
-        telephone1: this?.account?.primarycontact?.telephone1,
-        emailaddress1: this?.account?.primarycontact?.emailaddress1,
-      },
       ...this.form.value
     } as SepApplication;
 
@@ -131,17 +120,23 @@ export class ApplicantComponent implements OnInit {
   }
 
   next() {
+    const data = {
+      ...this.application,
+      lastUpdated: new Date(),
+      status: 'unsubmitted',
+      stepsCompleted: (steps => {
+        const step = 'applicant';
+        if (steps.indexOf(step) === -1) {
+          steps.push(step);
+        }
+        return steps;
+      })(this?.application?.stepsCompleted || []),
+      ...this.form.value
+    } as SepApplication;
     if (this.isValid()) {
-      this.save().subscribe((appId: number) => {
-        this.saveComplete.emit(true);
-      });
+      this.saveComplete.emit(data);
     }
   }
 
-  saveForLater() {
-    this.save()
-      .subscribe(id => {
-        this.router.navigateByUrl('/sep/my-applications')
-      });
-  }
+
 }

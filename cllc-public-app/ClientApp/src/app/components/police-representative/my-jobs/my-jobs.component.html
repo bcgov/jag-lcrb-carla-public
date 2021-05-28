@@ -1,0 +1,19 @@
+<div class="form-wrapper position-relative">
+    <div [ngBusy]="[busy]"></div>
+    <h1 class="mat-heading">Administration</h1>
+  
+    <p>Here are your assigned jobs. To view all applications requiring review and to claim or assign new jobs, go to the <a routerLink="/sep/police/all-applications">All Applications</a> page. </p>
+  
+    <mat-tab-group [selectedIndex]="selectedIndex" mat-align-tabs="start">
+      <mat-tab label="In Progress">
+          <app-police-grid [currentUser]="currentUser" [dataSource]="dataSource" [availableContacts]="availableContacts" (saved)="selectedIndex = 1;"></app-police-grid>
+      </mat-tab>
+      <mat-tab label="Police Approved">
+        <app-police-grid [currentUser]="currentUser" [dataSource]="dataSource" [availableContacts]="availableContacts" (saved)="selectedIndex = 2;"></app-police-grid>
+      </mat-tab>
+      <mat-tab label="Issued">
+        <app-police-grid [currentUser]="currentUser" [dataSource]="dataSource" [availableContacts]="availableContacts" (saved)="selectedIndex = 3;"></app-police-grid>
+      </mat-tab>
+    </mat-tab-group> 
+  </div>
+  

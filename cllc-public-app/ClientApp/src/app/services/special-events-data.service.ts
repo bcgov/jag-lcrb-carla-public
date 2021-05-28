@@ -15,9 +15,9 @@ export class SpecialEventsDataService extends DataService {
   }
 
 
-  getSpecialEvent(id: string): Observable<SepApplication[]> {
+  getSpecialEvent(id: string): Observable<SepApplication> {
     const apiPath = `api/special-events/${id}`;
-    return this.http.get<SepApplication[]>(apiPath, { headers: this.headers })
+    return this.http.get<SepApplication>(apiPath, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
@@ -45,6 +45,11 @@ export class SpecialEventsDataService extends DataService {
       .pipe(catchError(this.handleError));
   }
 
+  policeAssignSepApplication(id: string, assigneeId: string) {
+    return this.http.post<string>(`api/special-events/police/${id}/assign`, JSON.stringify(assigneeId) , { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
   /**
    * delete a  special event application in Dynamics
    * @param data - special event application data
@@ -61,37 +66,15 @@ export class SpecialEventsDataService extends DataService {
   }
 
   getPoliceApprovalSepApplications(): Observable<SepApplicationSummary[]> {
-    const mock1: SepApplicationSummary = {
-      specialEventId: '00000000-0000-0000-0000-00000000000',
-      eventStartDate: new Date('2021-10-25T19:20:48+00:00'),
-      dateSubmitted: new Date('2020-02-01T07:00:00+00:00'),
-      eventName: 'Annual Block Watch Party',
-      eventStatus: 999999,
-      typeOfEvent: 1,
-      maximumNumberOfGuests: 200,
-    };
+    const apiPath = `api/special-events/police/all`;
+    return this.http.get<SepApplicationSummary[]>(apiPath, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
 
-    const mock2: SepApplicationSummary = {
-      specialEventId: '11111111-1111-1111-1111-111111111111',
-      eventStartDate: new Date('2021-02-16T19:20:48+00:00'),
-      dateSubmitted: new Date('2020-03-01T07:00:00+00:00'),
-      eventName: 'Office Christmas Party',
-      eventStatus: 999999,
-      typeOfEvent: 1,
-      maximumNumberOfGuests: 50,
-    };
-
-    const mock3: SepApplicationSummary = {
-      specialEventId: '22222222-2222-2222-2222-222222222222',
-      eventStartDate: new Date('2021-06-20T19:20:48+00:00'),
-      dateSubmitted: new Date('2020-08-11T07:00:00+00:00'),
-      eventName: 'Community Event',
-      eventStatus: 999999,
-      typeOfEvent: 1,
-      maximumNumberOfGuests: 1300,
-    };
-
-    return of([mock1, mock2, mock3]);
+  getPoliceApprovalMySepApplications(): Observable<SepApplicationSummary[]> {
+    const apiPath = `api/special-events/police/my`;
+    return this.http.get<SepApplicationSummary[]>(apiPath, { headers: this.headers })
+      .pipe(catchError(this.handleError));
   }
 }
 

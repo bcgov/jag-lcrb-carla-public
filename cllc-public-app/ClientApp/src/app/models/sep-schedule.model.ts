@@ -1,7 +1,7 @@
 import { format } from 'date-fns'
 
 export class SepSchedule {
-    eventScheduleId: string; // server side primary key
+    id: string; // server side primary key
     specialEventId: string; // server side foreign key
     locationId: string; // server side foreign key
     eventStart: Date;
