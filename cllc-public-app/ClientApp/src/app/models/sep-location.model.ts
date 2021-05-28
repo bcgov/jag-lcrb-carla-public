@@ -2,7 +2,7 @@ import { SepSchedule } from "./sep-schedule.model";
 import { SepServiceArea } from "./sep-service-area.model";
 
 export class SepLocation {
-    locationId: string; // server side primary key
+    id: string; // server side primary key
     locationPermitNumber: string;
     locationName: string;
     venueType: string;
