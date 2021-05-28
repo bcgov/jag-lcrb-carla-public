@@ -302,6 +302,9 @@ import { SepHomeComponent } from "@components/sep/home/home.component";
 import { ApprovalSettingsComponent } from "@components/police-representative/approval-settings/approval-settings.component";
 import { PoliceAuthGuard } from "@services/police-auth-guard.service";
 import { AllApplicationsComponent } from "@components/police-representative/all-applications/all-applications.component";
+import { MyJobsComponent } from './components/police-representative/my-jobs/my-jobs.component';
+import { PoliceSummaryComponent } from './components/police-representative/police-summary/police-summary.component';
+import { PoliceGridComponent } from './components/police-representative/police-grid/police-grid.component';
 
 
 @NgModule({
@@ -475,6 +478,9 @@ import { AllApplicationsComponent } from "@components/police-representative/all-
     SepHomeComponent,
     ApprovalSettingsComponent,
     AllApplicationsComponent,
+    MyJobsComponent,
+    PoliceSummaryComponent,
+    PoliceGridComponent,
   ],
   imports: [
     AppRoutingModule,
