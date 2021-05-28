@@ -42,6 +42,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.IsAnnualEvent = specialEvent.AdoxioIsannualevent;
                 result.IsOnPublicProperty = specialEvent.AdoxioIsonpublicproperty;
                 result.IsMajorSignificance = specialEvent.AdoxioIsmajorsignificance;
+                result.IsLocalSignificance = specialEvent.AdoxioIslocalsignificance;
                 result.IsGstRegisteredOrg = specialEvent.AdoxioIsgstregisteredorg;
                 result.IsManufacturingExclusivity = specialEvent.AdoxioIsmanufacturingexclusivity;
                 result.IsAgreeTsAndCs = specialEvent.AdoxioIsagreetsandcs;
@@ -126,6 +127,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioIsmajorsignificance = from.IsMajorSignificance;
             to.AdoxioIsgstregisteredorg = from.IsGstRegisteredOrg;
             to.AdoxioIsmanufacturingexclusivity = from.IsManufacturingExclusivity;
+            to.AdoxioIslocalsignificance = from.IsLocalSignificance;
             to.AdoxioMajorsignificancerationale = from.MajorSignificanceRationale;
             to.AdoxioMaxnumofguests = from.MaximumNumberOfGuests;
             to.AdoxioNonprofitname = from.NonProfitName;
