@@ -650,6 +650,7 @@ import { PoliceGridComponent } from './components/police-representative/police-g
     ModalComponent,
     StarterChecklistComponent,
     DrinkPlannerDialog,
+    PoliceSummaryComponent,
   ],
   bootstrap: [AppComponent]
 })
