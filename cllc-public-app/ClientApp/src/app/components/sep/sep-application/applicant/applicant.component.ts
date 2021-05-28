@@ -1,9 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, FormGroupDirective, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AppState } from '@app/app-state/models/app-state';
 import { PolicyDocumentComponent } from '@components/policy-document/policy-document.component';
 import { Account } from '@models/account.model';
+import { Contact } from '@models/contact.model';
 import { SepApplication } from '@models/sep-application.model';
+import { Store } from '@ngrx/store';
+import { ContactDataService } from '@services/contact-data.service';
 import { IndexedDBService } from '@services/indexed-db.service';
 import { SpecialEventsDataService } from '@services/special-events-data.service';
 import { FormBase } from '@shared/form-base';
@@ -23,6 +27,7 @@ export class ApplicantComponent implements OnInit {
   policyDocs: PolicyDocumentComponent;
   @Input() account: Account;
   _app: SepApplication = {} as SepApplication;
+  contact: Contact;
   @Input()
   set application(value) {
     this._app = value;
@@ -40,8 +45,18 @@ export class ApplicantComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private router: Router,
+    private store: Store<AppState>,
+    private contactDataService: ContactDataService,
     private sepDataService: SpecialEventsDataService,
     private db: IndexedDBService) {
+    store.select(state => state.currentUserState.currentUser)
+      .subscribe(user => {
+        contactDataService.getContact(user.contactid)
+          .subscribe(contact => {
+            this.contact = contact;
+            debugger;
+          });
+      });
   }
 
   ngOnInit(): void {
