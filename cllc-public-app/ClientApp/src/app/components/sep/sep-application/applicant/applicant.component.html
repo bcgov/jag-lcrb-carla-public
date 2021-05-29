@@ -25,12 +25,13 @@
             <hr>
             <app-field label="Applicant information">
                 <div class="ml-3 p-3 applcant-info">
-                    <h6>{{contact?.name}}</h6>
-
+                    <strong>{{contact?.name}}</strong>
+                  <!--
                     {{contact?.address1_line1}},  <br>
                     {{contact?.address1_city}}, {{contact?.address1_postalcode}}
                     <br>
                     {{contact?.address1_country}} <br>0-
+                    -->
                     <br>
                     {{contact?.telephone1}} <br>
                     {{contact?.emailaddress1}}
@@ -39,7 +40,7 @@
             <p>
                 Please ensure your legal name is used for the application and the information is correct. If you need to
                 update
-                your information, visit Manage Account.
+                your information, visit <a routerLink="/account-profile">Manage Account</a>.
             </p>
 
             <hr>
