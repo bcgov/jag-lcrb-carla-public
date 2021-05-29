@@ -57,8 +57,8 @@ export class TotalServingsComponent implements OnInit {
 
           // count up the guests and minors
 
-          this.total_guests += parseInt(location.locationMaxGuests.toString(), 10) || 0;
-          this.total_minors += parseInt(location.locationNumberMinors.toString(), 10) || 0;
+          this.total_guests += parseInt(location.maximumNumberOfGuests.toString(), 10) || 0;
+          this.total_minors += parseInt(location.locationNumberMinors?.toString(), 10) || 0;
 
 
           }

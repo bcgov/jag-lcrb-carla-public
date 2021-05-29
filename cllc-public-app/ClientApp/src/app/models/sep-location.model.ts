@@ -6,7 +6,7 @@ export class SepLocation {
     locationPermitNumber: string;
     locationName: string;
     venueType: string;
-    locationMaxGuests: number;
+    maximumNumberOfGuests: number;
     locationNumberMinors: number;
     eventLocationStreet1: string;
     eventLocationStreet2: string;

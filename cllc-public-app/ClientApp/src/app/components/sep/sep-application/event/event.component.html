@@ -120,7 +120,7 @@
                                 <input type="text" formControlName="eventLocationPostalCode" class="form-control">
                             </app-field>
                             <app-field label="Maximum number of guests at this location (including service areas) at any time" [required]="true"
-                                [valid]="!location.get('locationMaxGuests').touched || location.get('locationMaxGuests').valid"
+                                [valid]="!location.get('maximumNumberOfGuests').touched || location.get('maximumNumberOfGuests').valid"
                                 errorMessage="Maximum number of guests is required">
                                 <input type="number" class="form-control" formControlName="maximumNumberOfGuests">
                             </app-field>
@@ -180,13 +180,14 @@
                                                             </mat-radio-button>
                                                         </mat-radio-group>
                                                     </app-field>
-
+                                                    <app-field label="Where is the service area location?">
                                                     <select class="form-control setting-select" formControlName="setting" >
                                                         <option value=""></option>
                                                         <option value="Indoors">Indoors</option>
                                                         <option value="Outdoors">Outdoors</option>
                                                         <option value="BothOutdoorsAndIndoors">Both Indoors & Outdoors</option>
                                                     </select>
+                                                  </app-field>
 
                                                 </section>
                                                 <div>

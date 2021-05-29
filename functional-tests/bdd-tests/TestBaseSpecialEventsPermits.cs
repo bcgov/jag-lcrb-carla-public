@@ -136,7 +136,7 @@ namespace bdd_tests
             uiPostalCode.SendKeys(postalCode);
 
             // enter maximum number of guests
-            var uiMaxGuests = ngDriver.FindElement(By.CssSelector("[formcontrolname='locationMaxGuests']"));
+            var uiMaxGuests = ngDriver.FindElement(By.CssSelector("[formcontrolname='maximumNumberOfGuests']"));
             uiMaxGuests.SendKeys(maxGuests);
 
             // enter area description
