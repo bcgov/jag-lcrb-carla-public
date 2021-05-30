@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using OpenQA.Selenium;
+using Protractor;
 using Xunit;
 using Xunit.Gherkin.Quick;
 
@@ -18,8 +19,29 @@ namespace bdd_tests
             string eventName = "SEP test event";
 
             // enter the event name
-            var uiEventName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='eventName']"));
+            NgWebElement uiEventName = null;
+            for (var i = 0; i < 20; i++)
+            {
+                try
+                {
+                    var names = ngDriver.FindElements(By.CssSelector("input[formcontrolname='eventName']"));
+                    if (names.Count > 0)
+                    {
+                        uiEventName = names[0];
+                        break;
+                    }
+                }
+                catch (Exception)
+                { }
+                Thread.Sleep(1000);
+            }
+            var executor = (IJavaScriptExecutor)ngDriver.WrappedDriver;
+            executor.ExecuteScript("arguments[0].scrollIntoView(true);", uiEventName);
             uiEventName.SendKeys(eventName);
+
+            // enter the event name
+            //var uiEventName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='eventName']"));
+            //uiEventName.SendKeys(eventName);
 
             // click on the terms and conditions checkbox
             var uiTermsAndConditions = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isAgreeTsAndCs']"));
@@ -41,18 +63,18 @@ namespace bdd_tests
 
             // select 'No' for 'Is this event being hosted at a private residence?'
             var uiPrivateResidence = ngDriver.FindElement(By.Id("mat-radio-15"));
-            uiPrivateResidence.Click();
+            JavaScriptClick(uiPrivateResidence);
 
             // select 'No' for 'Is your event being held on public property?'
-            var uiPublicProperty = ngDriver.FindElement(By.Id("mat-radio-18"));
-            uiPublicProperty.Click();
+            // var uiPublicProperty = ngDriver.FindElement(By.Id("mat-radio-18"));
+            // uiPublicProperty.Click();
 
             // select 'No' for 'Is this an event of provincial, national, or international significance?'
             // * already selected 'No' by default
 
             // select 'No' for 'Is this an event designated by municipal council as an event of municipal significance?'
             var uiMunicipalSignificance = ngDriver.FindElement(By.Id("mat-radio-24"));
-            uiMunicipalSignificance.Click();
+            JavaScriptClick(uiMunicipalSignificance);
 
             // select event start date
             var uiEventStartDate = ngDriver.FindElement(By.CssSelector("input[formControlName='eventStartDate']"));
