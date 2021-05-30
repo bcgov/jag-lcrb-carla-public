@@ -39,10 +39,6 @@ namespace bdd_tests
             executor.ExecuteScript("arguments[0].scrollIntoView(true);", uiEventName);
             uiEventName.SendKeys(eventName);
 
-            // enter the event name
-            //var uiEventName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='eventName']"));
-            //uiEventName.SendKeys(eventName);
-
             // click on the terms and conditions checkbox
             var uiTermsAndConditions = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isAgreeTsAndCs']"));
             uiTermsAndConditions.Click();
@@ -62,8 +58,25 @@ namespace bdd_tests
             var organizationAddress = "645 Tyee RdVictoria, BC V9A 6X5";
 
             // select 'No' for 'Is this event being hosted at a private residence?'
-            var uiPrivateResidence = ngDriver.FindElement(By.Id("mat-radio-15"));
-            JavaScriptClick(uiPrivateResidence);
+            NgWebElement uiPrivateResidence = null;
+            for (var i = 0; i < 20; i++)
+            {
+                try
+                {
+                    var names = ngDriver.FindElements(By.Id("mat-radio-15"));
+                    if (names.Count > 0)
+                    {
+                        uiPrivateResidence = names[0];
+                        break;
+                    }
+                }
+                catch (Exception)
+                { }
+                Thread.Sleep(1000);
+            }
+            var executor = (IJavaScriptExecutor)ngDriver.WrappedDriver;
+            executor.ExecuteScript("arguments[0].scrollIntoView(true);", uiPrivateResidence);
+            uiPrivateResidence.Click();
 
             // select 'No' for 'Is your event being held on public property?'
             // var uiPublicProperty = ngDriver.FindElement(By.Id("mat-radio-18"));
