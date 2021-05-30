@@ -22,7 +22,7 @@ namespace bdd_tests
             uiEventName.SendKeys(eventName);
 
             // click on the terms and conditions checkbox
-            var uiTermsAndConditions = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreeToTnC']"));
+            var uiTermsAndConditions = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isAgreeTsAndCs']"));
             uiTermsAndConditions.Click();
         }
 
