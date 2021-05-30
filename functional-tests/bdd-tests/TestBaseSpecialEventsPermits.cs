@@ -40,15 +40,19 @@ namespace bdd_tests
             var organizationAddress = "645 Tyee RdVictoria, BC V9A 6X5";
 
             // select 'No' for 'Is this event being hosted at a private residence?'
-            var uiPrivateResidence = ngDriver.FindElement(By.Id("mat-radio-3"));
+            var uiPrivateResidence = ngDriver.FindElement(By.Id("mat-radio-15"));
             uiPrivateResidence.Click();
 
             // select 'No' for 'Is your event being held on public property?'
-            var uiPublicProperty = ngDriver.FindElement(By.Id("mat-radio-6"));
+            var uiPublicProperty = ngDriver.FindElement(By.Id("mat-radio-18"));
             uiPublicProperty.Click();
 
             // select 'No' for 'Is this an event of provincial, national, or international significance?'
             // * already selected 'No' by default
+
+            // select 'No' for 'Is this an event designated by municipal council as an event of municipal significance?'
+            var uiMunicipalSignificance = ngDriver.FindElement(By.Id("mat-radio-24"));
+            uiMunicipalSignificance.Click();
 
             // select event start date
             var uiEventStartDate = ngDriver.FindElement(By.CssSelector("input[formControlName='eventStartDate']"));
