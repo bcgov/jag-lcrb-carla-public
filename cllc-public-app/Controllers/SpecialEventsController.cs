@@ -53,7 +53,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("{eventId}")]
         public IActionResult GetSpecialEvent(string eventId)
         {
-            string[] expand = new[] { "adoxio_PoliceRepresentativeId", "adoxio_PoliceAccountId" };
+            string[] expand = new[] { "adoxio_PoliceRepresentativeId", 
+                "adoxio_PoliceAccountId"
+            };
             MicrosoftDynamicsCRMadoxioSpecialevent specialEvent = null;
             if (!string.IsNullOrEmpty(eventId))
             {
@@ -65,6 +67,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     specialEvent = null;
                 }
+            }
+            
+            // get the applicant.
+
+            if (specialEvent._adoxioContactidValue != null)
+            {
+                specialEvent.AdoxioContactId = _dynamicsClient.GetContactById(specialEvent._adoxioContactidValue).GetAwaiter().GetResult();
+            }
+
+            // get the city
+
+            if (specialEvent._adoxioSpecialeventcitydistrictidValue != null)
+            {
+                specialEvent.AdoxioSpecialEventCityDistrictId = _dynamicsClient.GetSepCityById(specialEvent
+                    ._adoxioSpecialeventcitydistrictidValue);
             }
             return new JsonResult(specialEvent.ToViewModel());
         }
