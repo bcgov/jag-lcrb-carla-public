@@ -59,6 +59,8 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
     }
     this.form.patchValue(values);
 
+    // replace the guests value with the number from the application
+    this.form.get("guests").setValue(this.sepApplication?.maximumNumberOfAdults);
     // setup the form's percentage fields so they always add-up to 100%
     this.initForm();
   }

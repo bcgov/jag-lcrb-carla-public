@@ -33,6 +33,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             result.EventLocationStreet2 = location.AdoxioEventlocationstreet2;
             result.EventLocationProvince = location.AdoxioLocationdescription;
             result.MaximumNumberOfGuests = location.AdoxioMaximumnumberofguestslocation;
+            //result.NumberOfMinors = location.Adoxio
             result.LocationName = location.AdoxioLocationname;
             result.PermitNumber = location.AdoxioPermitnumber;
 

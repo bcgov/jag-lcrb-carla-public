@@ -336,7 +336,7 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
   }
 
   showLiquorCostColumn(item: any){
-    const show = this.form.get(item.formControlName).value === true 
+    const show = this.form.get(item.formControlName).value === true
     && (item.name !== 'Internal Transfer of Shares')
     && !(item.name === 'Change of Directors or Officers' && this.account.businessType  === 'PrivateCorporation');
     return show;
@@ -393,7 +393,7 @@ const masterChangeList = [
   {
     name: "Change of Directors or Officers",
     formControlName: "csChangeOfDirectorsOrOfficers",
-    availableTo: ["PrivateCorporation", "PublicCorporation", "Society", "Coop", "MilitaryMess"],
+    availableTo: ["PrivateCorporation", "PublicCorporation", "Society", "Coop", "MilitaryMess","LocalGovernment", "University"],
     CannabisFee: 500,
     LiquorFee: 220,
     RequiresPHS: false,
@@ -408,7 +408,7 @@ const masterChangeList = [
     name: "Name Change, Licensee -- Corporation",
     otherName: "Name Change, Licensee -- Organization",
     formControlName: "csNameChangeLicenseeCorporation",
-    availableTo: ["PrivateCorporation", "PublicCorporation", "SoleProprietorship", "Coop", "MilitaryMess"],
+    availableTo: ["PrivateCorporation", "PublicCorporation", "SoleProprietorship", "Coop", "MilitaryMess","University"],
     CannabisFee: 220,
     LiquorFee: 220,
     RequiresPHS: false,
@@ -417,7 +417,7 @@ const masterChangeList = [
     helpText: [
       "When a corporation with an interest in a licence has legally changed its name, but existing corporate shareholders, directors and officers, and certificate number on the certificate of incorporation have not changed"
     ],
-  
+
     //helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
   },
   {
