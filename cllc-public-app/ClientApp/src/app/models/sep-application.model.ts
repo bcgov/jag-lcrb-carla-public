@@ -16,6 +16,7 @@ export class SepApplication {
     eventStatus: string;
     totalServings: number;
     invoiceTrigger: number;
+    responsibleBevServiceNumber: string;
 
     isPrivateResidence: boolean;
     isMajorSignificance: boolean;
@@ -30,6 +31,17 @@ export class SepApplication {
     eventLocations: SepLocation[] = [];
     drinksSalesForecasts: SepDrinkSalesForecast[] = [];
     itemsToDelete: SepDeletedItems = new SepDeletedItems();
+
+    isOnPublicProperty: boolean;
+    majorSignificanceRationale: string;
+    privateOrPublic: boolean;
+    responsibleBevServiceNumberDoesNotHave: boolean;
+    specialEventDescription: string;
+    admissionFee: string;
+    isLocationLicensed: string;
+    hostOrganizationName: string;
+    hostOrganizationAddress: string;
+    hostOrganizationCategory: string;
 }
 
 export class SepDeletedItems {

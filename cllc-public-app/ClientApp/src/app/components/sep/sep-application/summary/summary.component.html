@@ -42,7 +42,7 @@
         <div class="d-flex">
             <label>Event Municipality</label> <span>Agassiz</span>
         </div>
-        <div class="d-flex">
+        <!-- <div class="d-flex">
             <label>Applicant Name</label> <span>{{account?.name}}</span>
         </div>
         <div class="d-flex">
@@ -54,7 +54,7 @@
                 <div>{{account?.contactPhone}}</div>
                 <div>{{account?.contactEmail}}</div>
             </section>
-        </div>
+        </div> -->
     </mat-expansion-panel>
 
     <mat-expansion-panel [expanded]="true">
@@ -64,77 +64,78 @@
             </mat-panel-title>
         </mat-expansion-panel-header>
         <div class="d-flex">
-            <label>Event Starts at:</label> <span>Test Ev</span>
+            <label>Event Starts at:</label> <span>{{application?.eventStartDate | date: 'short'}}</span>
         </div>
         <div class="d-flex">
-            <label>Responsible Beverage Service #:</label> <span>Agassiz</span>
+            <label>Responsible Beverage Service #:</label> <span>{{application?.responsibleBevServiceNumber}}</span>
         </div>
         <div class="d-flex">
-            <label>Name of The Organization:</label> <span>Agassiz</span>
+            <label>Name of The Organization:</label> <span>{{application?.hostOrganizationName}}</span>
         </div>
         <div class="d-flex">
-            <label>Address of The Organization:</label> <span>Agassiz</span>
+            <label>Address of The Organization:</label> <span>{{application?.hostOrganizationAddress}}</span>
         </div>
         <div class="d-flex">
-            <label>Occasion of event:</label> <span>Firstname Lastname</span>
+            <label>Occasion of event:</label> <span>{{application?.specialEventDescription}}</span>
         </div>
         <div class="d-flex">
-            <label>Licence Already exists in location:</label> <span>Yes</span>
+            <label>Licence Already exists in location:</label> <span>{{application?.isLocationLicensed}}</span>
         </div>
         <div class="d-flex">
-            <label>Permit Category</label> <span>Private – Family and Invited Friends Only</span>
+            <label>Permit Category</label> <span>[[Permit Category]]</span>
         </div>
         <div class="d-flex">
-            <label>Public Property</label> <span>Yes</span>
+            <label>Public Property</label> <span>{{application?.isOnPublicProperty}}</span>
         </div>
     </mat-expansion-panel>
 
-    <mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel [expanded]="true" *ngFor="let loc of application?.eventLocations; let i = index;">
         <mat-expansion-panel-header>
             <mat-panel-title>
-                EVENT LOCATION 1
+                EVENT LOCATION {{i+1}}
             </mat-panel-title>
         </mat-expansion-panel-header>
         <div class="d-flex">
-            <label>Location Name</label> <span>Test Ev</span>
+            <label>Location Name</label> <span>{{loc.locationName}}</span>
         </div>
         <div class="d-flex">
-            <label>Location Description</label> <span>Agassiz</span>
+            <label>Location Description</label> <span>[[value needed]]</span>
         </div>
         <div class="d-flex">
             <label>Event Address</label>
             <section>
-                <span>123 Test Rd</span>
-                <span>Victoria,British Columbia</span>
-                <span>V9B 0G9</span>
-                <span>112 123 2233</span>
-                <span>test@mail.test</span>
+                <span>{{loc.eventLocationStreet1}}</span> <br>
+                <span>{{loc.eventLocationCity}}, {{eventLocationProvince}}</span> <br>
+                <span>{{loc.eventLocationPostalCode}}</span> <br>
             </section>
         </div>
 
+        <section *ngFor="let area of loc.serviceAreas; let j = index;">
+            <div class="d-flex">
+                <label>Service Area Description</label> <span>{{area.licencedAreaDescription}}</span>
+            </div>
+            <div class="d-flex">
+                <label>Maximum # of Guests in Service Areas</label> <span>{{area.maximumNumberOfGuests}}</span>
+            </div>
+            <div class="d-flex">
+                <label>Minors Present</label> <span>{{area.minorPresent}}</span>
+            </div>
+            <div class="d-flex">
+                <label>Event Held</label> <span>[[value needeed]]</span>
+            </div>
+            <div class="d-flex">
+                <label>Maximum # of Guests at this location</label> <span>{{loc.maximumNumberOfGuests}}</span>
+            </div>
+        </section>
 
-        <div class="d-flex">
-            <label>Service Area Description</label> <span>Bar area</span>
-        </div>
-        <div class="d-flex">
-            <label>Maximum # of Guests in Service Areas</label> <span>Bar area</span>
-        </div>
-        <div class="d-flex">
-            <label>Minors Present</label> <span>Bar area</span>
-        </div>
-        <div class="d-flex">
-            <label>Event Held</label> <span>Bar area</span>
-        </div>
-        <div class="d-flex">
-            <label>Maximum # of Guests at this location</label> <span>Bar area</span>
-        </div>
-
-        <h4>Event date</h4>
-        <div class="d-flex">
-            <label>Start Date</label> <span>Bar area</span>
-            <label>Start Time</label> <span>Bar area</span>
-            <label>Liquor Service</label> <span>Bar area</span>
-        </div>
+        <section *ngFor="let eventDate of loc.eventDates">
+            <h4>Event date</h4>
+            <div class="d-flex">
+                <label>Start Date</label> <span></span>
+                <label>Start Time</label> <span>Bar area</span>
+                <label>Liquor Service</label> <span>Bar area</span>
+            </div>
+        </section>
     </mat-expansion-panel>
 
     <mat-expansion-panel [expanded]="true">
