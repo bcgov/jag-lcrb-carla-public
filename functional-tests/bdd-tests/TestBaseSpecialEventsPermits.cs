@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using OpenQA.Selenium;
+using Protractor;
 using Xunit;
 using Xunit.Gherkin.Quick;
 
@@ -18,11 +19,28 @@ namespace bdd_tests
             string eventName = "SEP test event";
 
             // enter the event name
-            var uiEventName = ngDriver.FindElement(By.CssSelector("input[formcontrolname='eventName']"));
+            NgWebElement uiEventName = null;
+            for (var i = 0; i < 20; i++)
+            {
+                try
+                {
+                    var names = ngDriver.FindElements(By.CssSelector("input[formcontrolname='eventName']"));
+                    if (names.Count > 0)
+                    {
+                        uiEventName = names[0];
+                        break;
+                    }
+                }
+                catch (Exception)
+                { }
+                Thread.Sleep(1000);
+            }
+            var executor = (IJavaScriptExecutor)ngDriver.WrappedDriver;
+            executor.ExecuteScript("arguments[0].scrollIntoView(true);", uiEventName);
             uiEventName.SendKeys(eventName);
 
             // click on the terms and conditions checkbox
-            var uiTermsAndConditions = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='agreeToTnC']"));
+            var uiTermsAndConditions = ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isAgreeTsAndCs']"));
             uiTermsAndConditions.Click();
         }
 
@@ -39,17 +57,41 @@ namespace bdd_tests
             var organizationName = "Test organization name";
             var organizationAddress = "645 Tyee RdVictoria, BC V9A 6X5";
 
+            Thread.Sleep(10000);
+
             // select 'No' for 'Is this event being hosted at a private residence?'
-            var uiPrivateResidence = ngDriver.FindElement(By.Id("mat-radio-3"));
-            uiPrivateResidence.Click();
+            NgWebElement uiPrivateResidence = null;
+            for (var i = 0; i < 20; i++)
+            {
+                try
+                {
+                    var names = ngDriver.FindElements(By.Id("mat-radio-15"));
+                    if (names.Count > 0)
+                    {
+                        uiPrivateResidence = names[0];
+                        break;
+                    }
+                }
+                catch (Exception)
+                { }
+                Thread.Sleep(1000);
+            }
+            var executor = (IJavaScriptExecutor)ngDriver.WrappedDriver;
+            executor.ExecuteScript("arguments[0].scrollIntoView(true);", uiPrivateResidence);
+            JavaScriptClick(uiPrivateResidence);
 
             // select 'No' for 'Is your event being held on public property?'
-            var uiPublicProperty = ngDriver.FindElement(By.Id("mat-radio-6"));
-            uiPublicProperty.Click();
+            var uiPublicProperty = ngDriver.FindElement(By.Id("mat-radio-18"));
+            JavaScriptClick(uiPublicProperty);
 
             // select 'No' for 'Is this an event of provincial, national, or international significance?'
             // * already selected 'No' by default
 
+            // select 'No' for 'Is this an event designated by municipal council as an event of municipal significance?'
+            var uiMunicipalSignificance = ngDriver.FindElement(By.Id("mat-radio-24"));
+            JavaScriptClick(uiMunicipalSignificance);
+
+            /*
             // select event start date
             var uiEventStartDate = ngDriver.FindElement(By.CssSelector("input[formControlName='eventStartDate']"));
             uiEventStartDate.Click();
@@ -87,6 +129,7 @@ namespace bdd_tests
             // select 'No' for 'Is there currently a liquor licence at your event location?'
             var uiCurrentLiquorLicence = ngDriver.FindElement(By.Id("mat-radio-15"));
             uiCurrentLiquorLicence.Click();
+            */
         }
 
 
