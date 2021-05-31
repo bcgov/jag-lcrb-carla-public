@@ -14,11 +14,11 @@
             </mat-panel-title>
         </mat-expansion-panel-header>
         <section>
-            <app-drink-planner></app-drink-planner>
+            <app-drink-planner [sepApplication]="application"></app-drink-planner>
         </section>
     </mat-expansion-panel>
 
-    <mat-expansion-panel [expanded]="true">
+    <!--mat-expansion-panel [expanded]="true">
         <mat-expansion-panel-header>
             <mat-panel-title>
                 NEED HELP PLANNING YOUR DRINK SIZES?
@@ -72,7 +72,7 @@
                 here.
             </p>
         </section>
-    </mat-expansion-panel>
+    </mat-expansion-panel-->
     <mat-divider></mat-divider>
 
     <h2>Liquor Quantities & Selling Prices</h2>
