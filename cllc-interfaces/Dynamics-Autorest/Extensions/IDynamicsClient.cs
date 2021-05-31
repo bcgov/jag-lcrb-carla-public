@@ -41,6 +41,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         MicrosoftDynamicsCRMadoxioEstablishment GetEstablishmentById(string id);
 
         MicrosoftDynamicsCRMadoxioLocalgovindigenousnation GetLginById(string id);
+            
+        MicrosoftDynamicsCRMadoxioSepcity GetSepCityById(string id);
+
         Task<MicrosoftDynamicsCRMadoxioWorker> GetWorkerById(string id);
         Task<MicrosoftDynamicsCRMadoxioWorker> GetWorkerById(Guid id);
 

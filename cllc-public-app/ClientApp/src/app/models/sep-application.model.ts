@@ -1,3 +1,5 @@
+import { Contact } from "./contact.model";
+import { SepCity } from "./sep-city.model";
 import { SepDrinkSalesForecast } from "./sep-drink-sales-forecast.model";
 import { SepLocation } from "./sep-location.model";
 
@@ -25,6 +27,9 @@ export class SepApplication {
     permitNumber: string;
     isTastingEvent: boolean;
     isBeerGarden: boolean;
+    //maximumNumberOfGuests: number;
+    sepCity: SepCity;
+    applicant: Contact;
 
     eventLocations: SepLocation[] = [];
     drinksSalesForecasts: SepDrinkSalesForecast[] = [];

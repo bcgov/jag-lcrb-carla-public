@@ -21,7 +21,52 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 result = new ViewModels.SpecialEvent
                 {
-                    EventLocations = new List<ViewModels.SepEventLocation>()
+                    EventLocations = new List<ViewModels.SepEventLocation>(),
+                    Id = specialEvent.AdoxioSpecialeventid,
+                    AdmissionFee = specialEvent.AdoxioAdmissionfee,
+                    BeerGarden = specialEvent.AdoxioBeergarden,
+                    Capacity = specialEvent.AdoxioCapacity,
+                    ChargingForLiquorReason = (ViewModels.ChargingForLiquorReasons?)specialEvent.AdoxioChargingforliquorreason,
+                    DateSubmitted = specialEvent.AdoxioDatesubmitted,
+                    DrinksIncluded = specialEvent.AdoxioDrinksincluded,
+                    DonatedOrConsular = (ViewModels.DonatedOrConsular?)specialEvent.AdoxioDonatedorconsular,
+                    EventEndDate = specialEvent.AdoxioEventenddate,
+                    EventName = specialEvent.AdoxioEventname,
+                    EventStartDate = specialEvent.AdoxioEventstartdate,
+                    FundRaisingPurpose = (ViewModels.FundRaisingPurposes?)specialEvent.AdoxioFundraisingpurpose,
+                    HostOrganizationAddress = specialEvent.AdoxioHostorganisationaddress,
+                    HostOrganizationCategory = (ViewModels.HostOrgCatergory?)specialEvent.AdoxioHostorganisationcategory,
+                    HostOrganizationName = specialEvent.AdoxioHostorganisationname,
+                    HowProceedsWillBeUsedDescription = specialEvent.AdoxioHowproceedswillbeuseddescription,
+                    IsAnnualEvent = specialEvent.AdoxioIsannualevent,
+                    IsOnPublicProperty = specialEvent.AdoxioIsonpublicproperty,
+                    IsMajorSignificance = specialEvent.AdoxioIsmajorsignificance,
+                    IsLocalSignificance = specialEvent.AdoxioIslocalsignificance,
+                    IsGstRegisteredOrg = specialEvent.AdoxioIsgstregisteredorg,
+                    IsManufacturingExclusivity = specialEvent.AdoxioIsmanufacturingexclusivity,
+                    IsAgreeTsAndCs = specialEvent.AdoxioIsagreetsandcs,
+                    IsPrivateResidence = specialEvent.AdoxioIsprivateresidence,
+                    ResponsibleBevServiceNumber = specialEvent.AdoxioResponsiblebevservicenumber,
+                    ResponsibleBevServiceNumberDoesNotHave = specialEvent.AdoxioResponsiblebevnumberdoesnothave,
+                    DateAgreedToTsAndCs = specialEvent.AdoxioDateagreedtotsandcs,
+                    MajorSignificanceRationale = specialEvent.AdoxioMajorsignificancerationale,
+                    MaximumNumberOfGuests = specialEvent.AdoxioMaxnumofguests,
+                    NonProfitName = specialEvent.AdoxioNonprofitname,
+                    PoliceApproval = specialEvent.AdoxioPoliceapproval,
+                    PrivateOrPublic = (ViewModels.SEPPublicOrPrivate?)specialEvent.AdoxioTypeofevent,
+                    SpecialEventCity = specialEvent.AdoxioSpecialeventcity,
+                    SpecialEventDescription = specialEvent.AdoxioSpecialeventdescripton,
+                    SpecialEventPermitNumber = specialEvent.AdoxioSpecialeventpermitnumber,
+                    SpecialEventPostalCode = specialEvent.AdoxioSpecialeventpostalcode,
+                    SpecialEventProvince = specialEvent.AdoxioSpecialeventprovince,
+                    SpecialEventStreet1 = specialEvent.AdoxioSpecialeventstreet1,
+                    SpecialEventStreet2 = specialEvent.AdoxioSpecialeventstreet2,
+                    Statecode = specialEvent.Statecode,
+                    Statuscode = specialEvent.Statuscode, // Event Status: Draft, Submitted, Pending Review, etc.
+                    TastingEvent = specialEvent.AdoxioTastingevent,
+                    TotalServings = specialEvent.AdoxioTotalservings,
+                    SepCity = specialEvent.AdoxioSpecialEventCityDistrictId?.ToViewModel(),
+                    Applicant = specialEvent.AdoxioContactId?.ToViewModel()
                 };
                 result.Id = specialEvent.AdoxioSpecialeventid;
 
@@ -69,6 +114,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.Statuscode = specialEvent.Statuscode; // Event Status: Draft, Submitted, Pending Review, etc.
                 result.TastingEvent = specialEvent.AdoxioTastingevent;
                 result.TotalServings = specialEvent.AdoxioTotalservings;
+
+               
 
                 if (specialEvent?.AdoxioSpecialeventSpecialeventlocations?.Count > 0)
                 {
