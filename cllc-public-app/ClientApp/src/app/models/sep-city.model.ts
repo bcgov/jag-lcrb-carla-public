@@ -1,4 +1,4 @@
-export class SepServiceArea {
+export class SepCity {
     id: string; // server side primary key
     sepLocationId: string;
     specialEventId: string;
