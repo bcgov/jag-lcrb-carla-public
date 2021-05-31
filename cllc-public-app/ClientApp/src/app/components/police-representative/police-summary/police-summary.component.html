@@ -5,8 +5,16 @@
 <div class="form-wrapper-summary" *ngIf="application">
     <h3>Application number: {{application?.id}}</h3>
     
-
     <hr>
+    <!-- approve and deny buttons -->
+    <button class="btn btn-primary" style="float: right;">
+        APPROVE&nbsp;
+      </button>
+      &nbsp;
+      <button class="btn btn-primary" style="float: right;">
+        DENY&nbsp;
+      </button>
+    
 
     <h2>Summary</h2>
 
@@ -23,16 +31,17 @@
             <label>Event Municipality</label> <span>{{application?.sepCity?.name}}</span>
         </div>
         <div class="d-flex">
-            <label>Applicant Name</label> <span>{{account?.name}}</span>
+            <label>Applicant Name</label> <span>{{application?.applicant?.name}}</span>
         </div>
         <div class="d-flex">
             <label>Applicant Info</label>
             <section>
-                <div>{{account?.physicalAddressStreet}}</div>
-                <div>{{account?.physicalAddressProvince}}</div>
-                <div>{{account?.physicalAddressPostalCode}}</div>
-                <div>{{account?.contactPhone}}</div>
-                <div>{{account?.contactEmail}}</div>
+                <div>{{application?.applicant?.address1_line1}}</div>
+                <div>{{application?.applicant?.address1_city}}</div>
+                <div>{{application?.applicant?.address1_stateorprovince}}</div>
+                <div>{{application?.applicant?.address1_postalcode}}</div>
+                <div>{{application?.applicant?.telephone1}}</div>
+                <div>{{application?.applicant?.emailaddress1}}</div>
             </section>
         </div>
     </mat-expansion-panel>
@@ -44,7 +53,7 @@
             </mat-panel-title>
         </mat-expansion-panel-header>
         <div class="d-flex">
-            <label>Event Starts at:</label> <span>Test Ev</span>
+            <label>Event Starts at:</label> <span>{{application?.eventStartDate}}</span>
         </div>
         <div class="d-flex">
             <label>Responsible Beverage Service #:</label> <span>Agassiz</span>
@@ -70,50 +79,53 @@
     </mat-expansion-panel>
 
     <mat-expansion-panel [expanded]="true">
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                EVENT LOCATION 1
-            </mat-panel-title>
-        </mat-expansion-panel-header>
-        <div class="d-flex">
-            <label>Location Name</label> <span>Test Ev</span>
-        </div>
-        <div class="d-flex">
-            <label>Location Description</label> <span>Agassiz</span>
-        </div>
-        <div class="d-flex">
-            <label>Event Address</label>
-            <section>
-                <span>123 Test Rd</span>
-                <span>Victoria,British Columbia</span>
-                <span>V9B 0G9</span>
-                <span>112 123 2233</span>
-                <span>test@mail.test</span>
-            </section>
-        </div>
+        <div *ngFor="let location of application.eventLocations; index as i">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    EVENT LOCATION {{i+1}}
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="d-flex">
+                <label>Location Name</label> <span>{{location.locationName}}</span>
+            </div>
+            <div class="d-flex">
+                <label>Location Description</label> <span>{{location.eventStartDate}}</span>
+            </div>
+            <div class="d-flex">
+                <label>Event Address</label>
+                <section>
+                    <span>{{location.eventLocationStreet1}}</span>
+                    <span>{{location.eventLocationStreet2}}</span>
+                        
+                    <span>{{location.eventLocationCity}}, {{location.eventLocationProvince}}</span>
+                    <span>{{location.eventLocationPostalCode}}</span>
+                </section>
+            </div>
 
+            <div *ngFor="let serviceArea of location.serviceAreas">
+                <div class="d-flex">
+                    <label>Service Area Description</label> <span>{{serviceArea.licencedAreaDescription}}</span>
+                </div>
+                <div class="d-flex">
+                    <label>Maximum # of Guests in Service Areas</label> <span>{{serviceArea.licencedAreaMaxNumberOfGuests}}</span>
+                </div>
+                <div class="d-flex">
+                    <label>Minors Present</label> <span>{{serviceArea.numberOfMinors}}</span>
+                </div>
+                <div class="d-flex">
+                    <label>Maximum # of Guests at this location</label> <span>{{serviceArea.maximumNumberOfGuests}}</span>
+                </div>
 
-        <div class="d-flex">
-            <label>Service Area Description</label> <span>Bar area</span>
-        </div>
-        <div class="d-flex">
-            <label>Maximum # of Guests in Service Areas</label> <span>Bar area</span>
-        </div>
-        <div class="d-flex">
-            <label>Minors Present</label> <span>Bar area</span>
-        </div>
-        <div class="d-flex">
-            <label>Event Held</label> <span>Bar area</span>
-        </div>
-        <div class="d-flex">
-            <label>Maximum # of Guests at this location</label> <span>Bar area</span>
-        </div>
+            </div>
+            
 
-        <h4>Event date</h4>
-        <div class="d-flex">
-            <label>Start Date</label> <span>Bar area</span>
-            <label>Start Time</label> <span>Bar area</span>
-            <label>Liquor Service</label> <span>Bar area</span>
+            <h4>Event date</h4>
+            <div *ngFor="let eventDate of location.eventDates"></div>
+            <div class="d-flex">
+                <label>Start Date</label> <span>{{eventDate.eventDate}} </span>
+                <label>Start Time</label> <span>{{eventDate.eventStartValue}} - {{eventDate.eventEndValue}} </span>
+                <label>Liquor Service</label> <span>{{eventDate.serviceStartValue}} - {{eventDate.serviceStartValue}} </span>
+            </div>
         </div>
     </mat-expansion-panel>
 
@@ -126,20 +138,19 @@
 
         <div class="d-flex">
             <label>Liquor Quantities</label>
-            <table class="servigns">
+            <table class="servings">
                 <tr>
                     <th>Type</th>
                     <th>Servings</th>
                 </tr>
-                <tr *ngFor="let item of [{type: 'draught beer', servings: 113},{type: 'wine', servings: 10}]">
-                    <td>{{item.type}}</td>
-                    <td>{{item.servings}}</td>
+                <tr *ngFor="let item of application.drinksSalesForecasts">
+                    <td>{{item.name}}</td>
+                    <td>{{item.estimatedServings}}</td>
                 </tr>
             </table>
         </div>
 
         <hr>
-
         <div class="d-flex">
             <label>Estimated total liquor sales revenue</label> <span class="fee-amount">[$0.00]</span>
         </div>
@@ -160,11 +171,6 @@
         <hr>
 
     </mat-expansion-panel>
-
-   
-
     <hr>
-
-
 </div>
 
