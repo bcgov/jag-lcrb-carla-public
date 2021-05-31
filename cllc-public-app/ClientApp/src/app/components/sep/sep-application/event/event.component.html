@@ -53,16 +53,16 @@
                 </section>
             </section>
             <div>
-                <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip.toggle()" matTooltip="All locations in the application must be in the same municipality. You may submit more than one application 
+                <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip.toggle()" matTooltip="All locations in the application must be in the same municipality. You may submit more than one application
                     if your event is in multiple municipalities." #tooltip="matTooltip">
                 </fa-icon>
             </div>
         </div>
 
-        <app-field label="How many people will attend the event?" [required]="true"
+        <!--app-field label="How many people will attend the event?" [required]="true"
             [valid]="isValidOrNotTouched('maximumNumberOfGuests')" errorMessage="Please enter a value">
             <input type="number" class="form-control" formControlName="maximumNumberOfGuests">
-        </app-field>
+        </app-field-->
 
         <app-field label="Is this an annual event?" [required]="true" [valid]="isValidOrNotTouched('isAnnualEvent')"
             errorMessage="Please choose a value">
@@ -119,10 +119,15 @@
                                 errorMessage="Postal code is in the wrong format 'X3X 9Y9'">
                                 <input type="text" formControlName="eventLocationPostalCode" class="form-control">
                             </app-field>
-                            <app-field label="Maximum number of guests at this location at any time" [required]="true"
+                            <app-field label="Maximum number of guests at this location (including service areas) at any time" [required]="true"
                                 [valid]="!location.get('maximumNumberOfGuests').touched || location.get('maximumNumberOfGuests').valid"
                                 errorMessage="Maximum number of guests is required">
                                 <input type="number" class="form-control" formControlName="maximumNumberOfGuests">
+                            </app-field>
+                            <app-field label="Number of minors (people under the age of 19) at this location at any time" [required]="true"
+                            [valid]="!location.get('locationNumberMinors').touched || location.get('locationNumberMinors').valid"
+                            errorMessage="Maximum number of minors is required">
+                            <input type="number" class="form-control" formControlName="locationNumberMinors">
                             </app-field>
 
                             <section formGroupName="serviceAreas">
@@ -175,13 +180,14 @@
                                                             </mat-radio-button>
                                                         </mat-radio-group>
                                                     </app-field>
-
+                                                    <app-field label="Where is the service area location?">
                                                     <select class="form-control setting-select" formControlName="setting" >
                                                         <option value=""></option>
                                                         <option value="Indoors">Indoors</option>
                                                         <option value="Outdoors">Outdoors</option>
                                                         <option value="BothOutdoorsAndIndoors">Both Indoors & Outdoors</option>
                                                     </select>
+                                                  </app-field>
 
                                                 </section>
                                                 <div>
@@ -198,7 +204,7 @@
                                 </mat-card>
                             </section>
 
-                            
+
 
                             <mat-card formGroupName="eventDates" class="mat-elevation-z0 mt-3">
                                 <h3>Event Date(s)</h3>

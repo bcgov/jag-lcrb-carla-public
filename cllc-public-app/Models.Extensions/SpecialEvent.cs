@@ -68,6 +68,52 @@ namespace Gov.Lclb.Cllb.Public.Models
                     SepCity = specialEvent.AdoxioSpecialEventCityDistrictId?.ToViewModel(),
                     Applicant = specialEvent.AdoxioContactId?.ToViewModel()
                 };
+                result.Id = specialEvent.AdoxioSpecialeventid;
+
+                result.AdmissionFee = specialEvent.AdoxioAdmissionfee;
+                result.BeerGarden = specialEvent.AdoxioBeergarden;
+                result.Capacity = specialEvent.AdoxioCapacity;
+                result.ChargingForLiquorReason = (ViewModels.ChargingForLiquorReasons?)specialEvent.AdoxioChargingforliquorreason;
+                result.DateSubmitted = specialEvent.AdoxioDatesubmitted;
+                result.DrinksIncluded = specialEvent.AdoxioDrinksincluded;
+                result.DonatedOrConsular = (ViewModels.DonatedOrConsular?)specialEvent.AdoxioDonatedorconsular;
+                result.EventEndDate = specialEvent.AdoxioEventenddate;
+                result.EventName = specialEvent.AdoxioEventname;
+                result.EventStartDate = specialEvent.AdoxioEventstartdate;
+                result.FundRaisingPurpose = (ViewModels.FundRaisingPurposes?)specialEvent.AdoxioFundraisingpurpose;
+                result.HostOrganizationAddress = specialEvent.AdoxioHostorganisationaddress;
+                result.HostOrganizationCategory = (ViewModels.HostOrgCatergory?)specialEvent.AdoxioHostorganisationcategory;
+                result.HostOrganizationName = specialEvent.AdoxioHostorganisationname;
+                result.HowProceedsWillBeUsedDescription = specialEvent.AdoxioHowproceedswillbeuseddescription;
+                result.IsAgreeToTnC = specialEvent.AdoxioIsagreetsandcs;
+                result.DateAgreeToTnC = specialEvent.AdoxioDateagreedtotsandcs;
+                result.IsAnnualEvent = specialEvent.AdoxioIsannualevent;
+                result.IsOnPublicProperty = specialEvent.AdoxioIsonpublicproperty;
+                result.IsMajorSignificance = specialEvent.AdoxioIsmajorsignificance;
+                result.IsLocalSignificance = specialEvent.AdoxioIslocalsignificance;
+                result.IsGstRegisteredOrg = specialEvent.AdoxioIsgstregisteredorg;
+                result.IsManufacturingExclusivity = specialEvent.AdoxioIsmanufacturingexclusivity;
+                result.IsAgreeTsAndCs = specialEvent.AdoxioIsagreetsandcs;
+                result.IsPrivateResidence = specialEvent.AdoxioIsprivateresidence;
+                result.ResponsibleBevServiceNumber = specialEvent.AdoxioResponsiblebevservicenumber;
+                result.ResponsibleBevServiceNumberDoesNotHave = specialEvent.AdoxioResponsiblebevnumberdoesnothave;
+                result.DateAgreedToTsAndCs = specialEvent.AdoxioDateagreedtotsandcs;
+                result.MajorSignificanceRationale = specialEvent.AdoxioMajorsignificancerationale;
+                result.MaximumNumberOfGuests = specialEvent.AdoxioMaxnumofguests;
+                result.NonProfitName = specialEvent.AdoxioNonprofitname;
+                result.PoliceApproval = specialEvent.AdoxioPoliceapproval;
+                result.PrivateOrPublic = (ViewModels.SEPPublicOrPrivate?)specialEvent.AdoxioTypeofevent;
+                result.SpecialEventCity = specialEvent.AdoxioSpecialeventcity;
+                result.SpecialEventDescription = specialEvent.AdoxioSpecialeventdescripton;
+                result.SpecialEventPermitNumber = specialEvent.AdoxioSpecialeventpermitnumber;
+                result.SpecialEventPostalCode = specialEvent.AdoxioSpecialeventpostalcode;
+                result.SpecialEventProvince = specialEvent.AdoxioSpecialeventprovince;
+                result.SpecialEventStreet1 = specialEvent.AdoxioSpecialeventstreet1;
+                result.SpecialEventStreet2 = specialEvent.AdoxioSpecialeventstreet2;
+                result.Statecode = specialEvent.Statecode;
+                result.Statuscode = specialEvent.Statuscode; // Event Status: Draft, Submitted, Pending Review, etc.
+                result.TastingEvent = specialEvent.AdoxioTastingevent;
+                result.TotalServings = specialEvent.AdoxioTotalservings;
 
                
 
