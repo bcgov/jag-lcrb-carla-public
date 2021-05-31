@@ -26,6 +26,7 @@ export class SepApplication {
     isTastingEvent: boolean;
     isBeerGarden: boolean;
     maximumNumberOfGuests: number;
+    specialEventCity: string;
 
     eventLocations: SepLocation[] = [];
     drinksSalesForecasts: SepDrinkSalesForecast[] = [];
