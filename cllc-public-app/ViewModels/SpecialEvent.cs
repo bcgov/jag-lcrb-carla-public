@@ -61,6 +61,10 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public System.DateTimeOffset? EventEndDate { get; set; }
         public string EventName { get; set; }
 
+        public bool? IsAgreeToTnC { get; set; }
+
+        public System.DateTimeOffset? DateAgreeToTnC { get; set; }
+
         public FundRaisingPurposes? FundRaisingPurpose { get; set; }
         public string SepCityId { get; set; }  // not used
         public string SpecialEventPostalCode { get; set; }

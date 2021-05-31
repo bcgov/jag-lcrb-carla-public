@@ -37,11 +37,16 @@ export class SepSchedule {
         return result;
     }
 
+    public getServiceHours() {
+      let serviceHours = parseInt(format(new Date(this.serviceEnd), "H")) - parseInt(format(new Date(this.serviceStart), "H"));
+      return serviceHours;
+    }
+
 
 
     /**
-     * 
-     * @param eventDate 
+     *
+     * @param eventDate
      * @param time, assumed format "HH:MM [AM,PM]" e.g. '6:30 PM'
      */
     private formatDate(eventDate: Date, time: string): Date {
