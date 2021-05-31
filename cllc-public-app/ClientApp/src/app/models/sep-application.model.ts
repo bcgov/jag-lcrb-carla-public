@@ -25,42 +25,42 @@ export class SepApplication {
     permitNumber: string;
     isTastingEvent: boolean;
     isBeerGarden: boolean;
-    maximumNumberOfGuests: number;
-    maximumNumberOfAdults: number;
-    serviceHours: number;
 
     eventLocations: SepLocation[] = [];
     drinksSalesForecasts: SepDrinkSalesForecast[] = [];
     itemsToDelete: SepDeletedItems = new SepDeletedItems();
 
-    getAttendees(app: SepApplication) {
-      if(!app){
-        return;
+    public get maximumNumberOfGuests(): number {
+      let maxGuests = 0;
+      for(var location of this.eventLocations){
+        // accumulate the total hours of service by looping through the eventDates
+        maxGuests += location.maximumNumberOfGuests || 0;
       }
-        // the maximum number of guests is calculated by looping through each location
-        this.maximumNumberOfGuests = 0;
-        for(var location of app.eventLocations){
+
+      return maxGuests;
+    }
+
+    public get maximumNumberOfAdults(): number {
+
+        let maxMinors = 0;
+        for(var location of this.eventLocations){
           // accumulate the total hours of service by looping through the eventDates
-          this.maximumNumberOfGuests += location.maximumNumberOfGuests || 0;
-          this.maximumNumberOfAdults += (location.maximumNumberOfGuests || 0) - (location.locationNumberMinors || 0);
+          maxMinors +=  location.locationNumberMinors || 0;
         }
+
+      return this.maximumNumberOfGuests - maxMinors;
     }
 
-    getServiceHours(app: SepApplication){
-      if(!app){
-        return;
+    public get serviceHours(): number{
+      let serviceHours = 0;
+      for(var location of this.eventLocations){
+        for(var hours of location.eventDates){
+          serviceHours += hours.getServiceHours();
+        }
       }
-
-      this.serviceHours = 0;
-
-              for(var location of app.eventLocations){
-                for(var hours of location.eventDates){
-                  this.serviceHours += hours.getServiceHours();
-                }
-              }
+      return serviceHours;
     }
-
-  }
+}
 
 
 export class SepDeletedItems {
