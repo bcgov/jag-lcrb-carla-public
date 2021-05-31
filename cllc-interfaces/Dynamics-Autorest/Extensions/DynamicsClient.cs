@@ -414,7 +414,21 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
+        public MicrosoftDynamicsCRMadoxioSepcity GetSepCityById(string id)
+        {
+            MicrosoftDynamicsCRMadoxioSepcity result = null;
+            string[] expand = { "adoxio_LGINId", "adoxio_PoliceJurisdictionId" };
+            try
+            {
+                result = Sepcities.GetByKey(id);
+            }
+            catch (HttpOperationException)
+            {
+                result = null;
+            }
 
+            return result;
+        }
         public async Task<MicrosoftDynamicsCRMadoxioWorker> GetWorkerById(string id)
         {
             MicrosoftDynamicsCRMadoxioWorker result;

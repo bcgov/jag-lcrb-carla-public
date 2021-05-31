@@ -54,7 +54,7 @@ export class ApplicantComponent implements OnInit {
         contactDataService.getContact(user.contactid)
           .subscribe(contact => {
             this.contact = contact;
-            debugger;
+            //debugger;
           });
       });
   }
