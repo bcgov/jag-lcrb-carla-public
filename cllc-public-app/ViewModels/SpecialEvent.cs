@@ -62,7 +62,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string EventName { get; set; }
 
         public FundRaisingPurposes? FundRaisingPurpose { get; set; }
-        public string SepCityId { get; set; }
+        public string SepCityId { get; set; }  // not used
         public string SpecialEventPostalCode { get; set; }
         public int? Statecode { get; set; }
         public bool? BeerGarden { get; set; }
@@ -91,7 +91,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public DonatedOrConsular? DonatedOrConsular { get; set; }
         public bool? IsAnnualEvent { get; set; }
         public string SpecialEventPermitNumber { get; set; }
-        public string SpecialEventCity { get; set; }
+        public string SpecialEventCity { get; set; } // use SepCity instead
         public string SpecialEventStreet2 { get; set; }
         public int? Statuscode { get; set; }
 
@@ -117,5 +117,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public List<SepDrinksSalesForecast> DrinksSalesForecasts { get; set; }
 
         public SepCity SepCity { get; set; }
+
+        public Contact Applicant { get; set; }
     }
 }
