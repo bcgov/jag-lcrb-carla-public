@@ -54,7 +54,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public IActionResult GetSpecialEvent(string eventId)
         {
             string[] expand = new[] { "adoxio_PoliceRepresentativeId", 
-                "adoxio_PoliceAccountId"
+                "adoxio_PoliceAccountId","adoxio_specialevent_specialeventlocations"
             };
             MicrosoftDynamicsCRMadoxioSpecialevent specialEvent = null;
             if (!string.IsNullOrEmpty(eventId))
@@ -83,6 +83,36 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 specialEvent.AdoxioSpecialEventCityDistrictId = _dynamicsClient.GetSepCityById(specialEvent
                     ._adoxioSpecialeventcitydistrictidValue);
             }
+
+            // event locations.
+
+            foreach (var location in specialEvent.AdoxioSpecialeventSpecialeventlocations)
+            {
+                // get child elements.
+                string filter = $"_adoxio_specialeventlocationid_value eq {location.AdoxioSpecialeventlocationid}";
+                try
+                {
+                    location.AdoxioSpecialeventlocationLicencedareas = _dynamicsClient.Specialeventlicencedareas.Get(filter: filter).Value;
+
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError(e, "Error getting location service areas.");
+                }
+
+                filter = $"_adoxio_specialeventlocationid_value eq {location.AdoxioSpecialeventlocationid}";
+                try
+                {
+                    location.AdoxioSpecialeventlocationSchedule = _dynamicsClient.Specialeventschedules.Get(filter: filter).Value;
+
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError(e, "Error getting location schedule.");
+                }
+
+            }
+
             return new JsonResult(specialEvent.ToViewModel());
         }
 
