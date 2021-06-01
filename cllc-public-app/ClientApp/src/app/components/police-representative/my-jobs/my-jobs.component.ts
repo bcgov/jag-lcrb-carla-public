@@ -26,7 +26,9 @@ export class MyJobsComponent implements OnInit {
   // angular material table columns to display
   currentUser: User;
   availableContacts = [];
-  dataSource = new MatTableDataSource<PoliceTableElement>();
+  dataSourceInProgress = new MatTableDataSource<PoliceTableElement>();
+  dataSourcePoliceApproved = new MatTableDataSource<PoliceTableElement>();
+  dataSourceIssued = new MatTableDataSource<PoliceTableElement>();
 
   selectedIndex = 0;
   value: any = {};
@@ -57,7 +59,11 @@ export class MyJobsComponent implements OnInit {
    
     // fetch SEP applications waiting for Police Approval
     this.loadSepApplications()
-      .subscribe(applications => this.dataSource.data = applications);
+      .subscribe(myApplications => {
+        this.dataSourceInProgress.data = myApplications.inProgress;
+        this.dataSourcePoliceApproved.data = myApplications.policeApproved;
+        this.dataSourceIssued.data = myApplications.issued;        
+      });
   }
 
   private loadAccountContacts()
@@ -70,16 +76,7 @@ export class MyJobsComponent implements OnInit {
     })));
   }
   private loadSepApplications() {
-    return this.sepDataService.getPoliceApprovalMySepApplications()
-      .pipe(map(array => array.map(sepData => {
-        return {
-          ...sepData,
-          // TODO: These are hardcoded for now. Need to add text labels for numeric status values here (from Dynamics enums)
-          eventStatusLabel: 'In Progress',
-          typeOfEventLabel: 'Members',
-          policeDecisionByLabel: 'Vancouver PoliceUser',
-        } as PoliceTableElement;
-      })));
+    return this.sepDataService.getPoliceApprovalMySepApplications();
   }
 
 }

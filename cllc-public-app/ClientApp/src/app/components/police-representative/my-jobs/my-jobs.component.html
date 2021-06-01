@@ -6,13 +6,13 @@
   
     <mat-tab-group [selectedIndex]="selectedIndex" mat-align-tabs="start">
       <mat-tab label="In Progress">
-          <app-police-grid [currentUser]="currentUser" [dataSource]="dataSource" [availableContacts]="availableContacts" (saved)="selectedIndex = 1;"></app-police-grid>
+          <app-police-grid [currentUser]="currentUser" [dataSource]="dataSourceInProgress" [availableContacts]="availableContacts" (saved)="selectedIndex = 1;"></app-police-grid>
       </mat-tab>
       <mat-tab label="Police Approved">
-        <app-police-grid [currentUser]="currentUser" [dataSource]="dataSource" [availableContacts]="availableContacts" (saved)="selectedIndex = 2;"></app-police-grid>
+        <app-police-grid [currentUser]="currentUser" [dataSource]="dataSourcePoliceApproved" [availableContacts]="availableContacts" (saved)="selectedIndex = 2;"></app-police-grid>
       </mat-tab>
       <mat-tab label="Issued">
-        <app-police-grid [currentUser]="currentUser" [dataSource]="dataSource" [availableContacts]="availableContacts" (saved)="selectedIndex = 3;"></app-police-grid>
+        <app-police-grid [currentUser]="currentUser" [dataSource]="dataSourceIssued" [availableContacts]="availableContacts" (saved)="selectedIndex = 3;"></app-police-grid>
       </mat-tab>
     </mat-tab-group> 
   </div>
