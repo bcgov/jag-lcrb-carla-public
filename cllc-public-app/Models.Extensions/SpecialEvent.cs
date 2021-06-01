@@ -68,7 +68,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                     SepCity = specialEvent.AdoxioSpecialEventCityDistrictId?.ToViewModel(),
                     Applicant = specialEvent.AdoxioContactId?.ToViewModel()
                 };
-                
+
                 if (specialEvent?.AdoxioSpecialeventSpecialeventlocations?.Count > 0)
                 {
                     result.EventLocations = specialEvent.AdoxioSpecialeventSpecialeventlocations
@@ -148,7 +148,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioTastingevent = from.TastingEvent;
             to.AdoxioTotalservings = from.TotalServings;
             to.Statuscode = (int?)from.EventStatus;
-
+        }
     }
 }
 

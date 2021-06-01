@@ -38,7 +38,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
     public enum EventStatus
     {
         Draft = 845280001,
-        Submitted = 845280002
+        Submitted = 845280002,
+        Cancelled = 845280004,
     }
     public enum HostOrgCatergory
     {
