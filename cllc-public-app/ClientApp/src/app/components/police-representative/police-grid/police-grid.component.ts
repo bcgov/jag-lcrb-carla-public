@@ -78,11 +78,9 @@ export class PoliceGridComponent implements OnInit {
   }
 
   assign(row: PoliceTableElement) {
-    // TODO: Call backend endpoint to update/assign this SEP Application
     var assignee = this.currentValueMap['assignee_' + row.specialEventId];
     this.busy = this.sepDataService.policeAssignSepApplication(row.specialEventId, assignee)
       .subscribe(() => console.log ("refresh"));
-    
   }
 
   batchAssign() {
