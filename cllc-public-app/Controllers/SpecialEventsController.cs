@@ -521,6 +521,82 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return Ok();
         }
 
+        [HttpPost("police/{id}/approve")]
+        public IActionResult PoliceApprove(string id)
+        {
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+            // get the account details.
+            var userAccount = _dynamicsClient.GetAccountById(userSettings.AccountId);
+            if (string.IsNullOrEmpty(userAccount._adoxioPolicejurisdictionidValue))  // ensure the current account has a police jurisdiction.
+            {
+                return Unauthorized();
+            }
+            // get the special event.
+
+            var specialEvent = _dynamicsClient.Specialevents.GetByKey(id);
+            if (userAccount._adoxioPolicejurisdictionidValue != specialEvent._adoxioPolicejurisdictionidValue)  // ensure the current account has a matching police jurisdiction.
+            {
+                return Unauthorized();
+            }
+
+
+            // update the given special event.
+            var patchEvent = new MicrosoftDynamicsCRMadoxioSpecialevent()
+            {
+                AdoxioPoliceapproval = 845280000 // Approved
+            };
+            try
+            {
+                _dynamicsClient.Specialevents.Update(specialEvent.AdoxioSpecialeventid, patchEvent);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Unexpected Error updating special event");
+                return StatusCode(500);
+            }
+
+
+            return Ok();
+        }
+
+        [HttpPost("police/{id}/deny")]
+        public IActionResult PoliceDeny(string id)
+        {
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+            // get the account details.
+            var userAccount = _dynamicsClient.GetAccountById(userSettings.AccountId);
+            if (string.IsNullOrEmpty(userAccount._adoxioPolicejurisdictionidValue))  // ensure the current account has a police jurisdiction.
+            {
+                return Unauthorized();
+            }
+            // get the special event.
+
+            var specialEvent = _dynamicsClient.Specialevents.GetByKey(id);
+            if (userAccount._adoxioPolicejurisdictionidValue != specialEvent._adoxioPolicejurisdictionidValue)  // ensure the current account has a matching police jurisdiction.
+            {
+                return Unauthorized();
+            }
+
+
+            // update the given special event.
+            var patchEvent = new MicrosoftDynamicsCRMadoxioSpecialevent()
+            {
+                AdoxioPoliceapproval = 845280001 // Denied  
+            };
+            try
+            {
+                _dynamicsClient.Specialevents.Update(specialEvent.AdoxioSpecialeventid, patchEvent);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Unexpected Error updating special event");
+                return StatusCode(500);
+            }
+
+
+            return Ok();
+        }
+
 
         /// <summary>
         /// Gets SepCity Autocomplete data for a given name using startswith
