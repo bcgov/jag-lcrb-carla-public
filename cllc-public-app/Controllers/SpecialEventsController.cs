@@ -5,6 +5,7 @@ using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
+using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -476,9 +477,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return Unauthorized();
             }
 
-            string filter = $"_adoxio_policerepresentativeid_value eq {userSettings.ContactId}";
-
-            var result = GetSepSummaries(filter);
+            var result = new SpecialEventPoliceMyJobs()
+            {
+                InProgress = GetSepSummaries($"_adoxio_policerepresentativeid_value eq {userSettings.ContactId} and adoxio_policeapproval eq 100000001"), // Under review
+                PoliceApproved = GetSepSummaries($"_adoxio_policerepresentativeid_value eq {userSettings.ContactId} and adoxio_policeapproval eq 845280000"),  // Approved
+                Issued = GetSepSummaries($"_adoxio_policerepresentativeid_value eq {userSettings.ContactId} and statuscode eq 845280003") // status is issued
+            };
 
             return new JsonResult(result);
         }
