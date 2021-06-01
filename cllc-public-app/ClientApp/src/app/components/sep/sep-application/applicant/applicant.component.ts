@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, FormGroupDirective, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AppState } from '@app/app-state/models/app-state';
 import { PolicyDocumentComponent } from '@components/policy-document/policy-document.component';
@@ -10,11 +10,9 @@ import { Store } from '@ngrx/store';
 import { ContactDataService } from '@services/contact-data.service';
 import { IndexedDBService } from '@services/indexed-db.service';
 import { SpecialEventsDataService } from '@services/special-events-data.service';
-import { FormBase } from '@shared/form-base';
 import { Observable } from 'rxjs';
 import { from } from 'rxjs/internal/observable/from';
 import { of } from 'rxjs/internal/observable/of';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-applicant',
@@ -44,17 +42,14 @@ export class ApplicantComponent implements OnInit {
 
 
   constructor(private fb: FormBuilder,
-    private router: Router,
-    private store: Store<AppState>,
-    private contactDataService: ContactDataService,
-    private sepDataService: SpecialEventsDataService,
+    store: Store<AppState>,
+    contactDataService: ContactDataService,
     private db: IndexedDBService) {
     store.select(state => state.currentUserState.currentUser)
       .subscribe(user => {
         contactDataService.getContact(user.contactid)
           .subscribe(contact => {
             this.contact = contact;
-            //debugger;
           });
       });
   }
@@ -120,19 +115,6 @@ export class ApplicantComponent implements OnInit {
     }
   }
 
-  saveToAPI() {
-    this.db.getSepApplication(this?.application?.localId)
-      .then((appData) => {
-        if (appData.id) { // do an update ( the record exists in dynamics)
-          this.sepDataService.updateSepApplication({ ...appData, invoiceTrigger: 1 } as SepApplication, appData.id)
-            .subscribe(result => {
-              if (result.localId) {
-                this.db.applications.update(result.localId, result);
-              }
-            });
-        }
-      });
-  }
 
   next() {
     const data = {
