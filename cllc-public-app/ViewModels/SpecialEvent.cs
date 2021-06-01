@@ -34,6 +34,13 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         No = 845280001,
         Yes = 845280000
     }
+
+    public enum EventStatus
+    {
+        Draft = 845280001,
+        Submitted = 845280002,
+        Cancelled = 845280004,
+    }
     public enum HostOrgCatergory
     {
         IncorporatedNonProfitOrganization = 845280000,
@@ -74,7 +81,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool? BeerGarden { get; set; }
         public bool? TastingEvent { get; set; }
         public int? TotalServings { get; set; }
-        public int? InvoiceTrigger { get; set; }
+        public bool? InvoiceTrigger { get; set; }
         public string SpecialEventProvince { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
@@ -99,7 +106,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string SpecialEventPermitNumber { get; set; }
         public string SpecialEventCity { get; set; } // use SepCity instead
         public string SpecialEventStreet2 { get; set; }
-        public int? Statuscode { get; set; }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public EventStatus? EventStatus { get; set; }
 
         public bool? IsMajorSignificance { get; set; }
         public bool? IsGstRegisteredOrg { get; set; }

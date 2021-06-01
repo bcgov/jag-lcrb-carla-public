@@ -17,7 +17,7 @@ export class SepApplication {
     stepsCompleted: string[];
     eventStatus: string;
     totalServings: number;
-    invoiceTrigger: number;
+    invoiceTrigger: boolean;
     responsibleBevServiceNumber: string;
 
     isPrivateResidence: boolean;
@@ -28,11 +28,11 @@ export class SepApplication {
     permitNumber: string;
     isTastingEvent: boolean;
     isBeerGarden: boolean;
-     hostOrganizationName: string;
-     hostOrganizationAddress: string;
-     specialEventDescription: string;
-     isLocationLicensed: string;
-     isOnPublicProperty: boolean;
+    hostOrganizationName: string;
+    hostOrganizationAddress: string;
+    specialEventDescription: string;
+    isLocationLicensed: string;
+    isOnPublicProperty: boolean;
 
     //maximumNumberOfGuests: number;
     sepCity: SepCity;
@@ -43,34 +43,33 @@ export class SepApplication {
     itemsToDelete: SepDeletedItems = new SepDeletedItems();
 
     public get totalMaximumNumberOfGuests(): number {
-      let maxGuests = 0;
-      for(var location of this.eventLocations){
-        // accumulate the total hours of service by looping through the eventDates
-        maxGuests += location.maximumNumberOfGuests || 0;
-      }
+        let maxGuests = 0;
+        for (var location of this.eventLocations) {
+            // accumulate the total hours of service by looping through the eventDates
+            maxGuests += location.maximumNumberOfGuests || 0;
+        }
 
-      return maxGuests;
+        return maxGuests;
     }
 
     public get maximumNumberOfAdults(): number {
 
         let maxMinors = 0;
-        for(var location of this.eventLocations){
-          // accumulate the total hours of service by looping through the eventDates
-          maxMinors +=  location.locationNumberMinors || 0;
+        for (var location of this.eventLocations) {
+            // accumulate the total hours of service by looping through the eventDates
+            maxMinors += location.locationNumberMinors || 0;
         }
-
-      return this.totalMaximumNumberOfGuests - maxMinors;
+        return this.totalMaximumNumberOfGuests - maxMinors;
     }
 
-    public get serviceHours(): number{
-      let serviceHours = 0;
-      for(var location of this.eventLocations){
-        for(var hours of location.eventDates){
-          serviceHours += hours.getServiceHours();
+    public get serviceHours(): number {
+        let serviceHours = 0;
+        for (var location of this.eventLocations) {
+            for (var hours of location.eventDates) {
+                serviceHours += hours.getServiceHours();
+            }
         }
-      }
-      return serviceHours;
+        return serviceHours;
     }
 }
 
