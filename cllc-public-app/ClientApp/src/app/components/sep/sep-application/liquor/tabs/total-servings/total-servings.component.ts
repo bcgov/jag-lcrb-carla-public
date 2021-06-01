@@ -12,9 +12,11 @@ export class TotalServingsComponent implements OnInit {
   _application: SepApplication
   @Input()
   set application(value: SepApplication) {
-    this._application = value;
-    this.total_servings = value?.totalServings || 0;
-    this.setServings(this._application);
+    if (value) {
+      this._application = Object.assign(new SepApplication(), value);
+      this.total_servings = this._application?.totalServings || 0;
+      this.setServings(this._application);
+    }
   };
 
   get application() {
@@ -36,40 +38,42 @@ export class TotalServingsComponent implements OnInit {
 
   ngOnInit(): void {
 
-   // this.form.get('indigenousNationId').patchValue(data.indigenousNation.id);
+    // this.form.get('indigenousNationId').patchValue(data.indigenousNation.id);
 
   }
 
 
 
   setServings(app: SepApplication) {
-      if(!app){
-        return;
+    if (!app) {
+      return;
+    }
+    this.total_guests += app.totalMaximumNumberOfGuests;
+    this.total_minors += app.totalMaximumNumberOfGuests - app.maximumNumberOfAdults;
+
+    // calculate the suggested servings and maximum servings by looping through each event location
+    for (var location of app.eventLocations) {
+      // accumulate the total hours of service by looping through the eventDates
+      for (var eventDate of location.eventDates) {
+        eventDate = Object.assign(new SepSchedule(null), eventDate);
+        this.total_service_hours += eventDate.getServiceHours();
       }
 
-        // calculate the suggested servings and maximum servings by looping through each event location
-        for(var location of app.eventLocations){
-          // accumulate the total hours of service by looping through the eventDates
-          for(var eventDate of location.eventDates) {
-            eventDate = Object.assign(new SepSchedule(null), eventDate);
-            this.total_service_hours += eventDate.getServiceHours();
-          }
+      // count up the guests and minors
 
-          // count up the guests and minors
-
-          this.total_guests += parseInt(location.maximumNumberOfGuests.toString(), 10) || 0;
-          this.total_minors += parseInt(location.locationNumberMinors?.toString(), 10) || 0;
+      this.total_guests += parseInt(location.maximumNumberOfGuests.toString(), 10) || 0;
+      this.total_minors += parseInt(location.locationNumberMinors?.toString(), 10) || 0;
 
 
-          }
+    }
 
 
 
-        this.suggested_servings  = Math.floor((this.total_service_hours/3)*(this.total_guests-this.total_minors)*4);
-        this.max_servings = Math.floor(((this.total_service_hours/3)*(this.total_guests-this.total_minors)*5));
-        if(this.total_servings == 0) {
-          this.total_servings = this.suggested_servings;
-        }
+    this.suggested_servings = Math.floor((this.total_service_hours / 3) * (this.total_guests - this.total_minors) * 4);
+    this.max_servings = Math.floor(((this.total_service_hours / 3) * (this.total_guests - this.total_minors) * 5));
+    if (this.total_servings == 0) {
+      this.total_servings = this.suggested_servings;
+    }
 
 
   }

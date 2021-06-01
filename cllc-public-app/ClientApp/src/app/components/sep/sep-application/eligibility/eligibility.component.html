@@ -199,7 +199,7 @@
                 </fa-icon>
             </div>
         </div>
-        <ng-container *ngIf="this.form.get('privateOrPublic').value && this.form.get('privateOrPublic').value !== '1'">
+        <ng-container *ngIf="this.form.get('privateOrPublic').value && this.form.get('privateOrPublic').value !== 'Family'">
             <section class="d-flex justify-content-between" style="padding: 0 32px 0 32px;">
                 <app-field style="flex: 1" [isFullWidth]="true"
                     label="What is the name of the organization hosting the event?" [required]="true">
@@ -256,7 +256,7 @@
                 <app-error-alert *ngIf="form.get('responsibleBevServiceNumberDoesNotHave').value">
                     You are required to complete Responsible Beverage Service certification prior to hosting your event.
                     For
-                    more information and to get started with a training course, click here.
+                    more information and to get started with a training course, click  <a href="https://www.responsibleservicebc.gov.bc.ca/" target="_blank">here</a>.
                 </app-error-alert>
             </app-field>
             <div>

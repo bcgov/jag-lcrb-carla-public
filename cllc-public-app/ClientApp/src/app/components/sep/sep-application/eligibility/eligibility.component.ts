@@ -72,7 +72,7 @@ export class EligibilityComponent extends FormBase implements OnInit {
       .pipe(distinctUntilChanged())
       .subscribe(selectedValue => {
         // if not Private – Family and invited friends only
-        if (selectedValue && selectedValue !== '1') {
+        if (selectedValue && selectedValue !== 'Family') {
           this.form.get('hostOrganizationName').setValidators([Validators.required]);
           this.form.get('hostOrganizationAddress').setValidators([Validators.required]);
           this.form.get('hostOrganizationCategory').setValidators([Validators.required]);
