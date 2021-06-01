@@ -13,7 +13,9 @@ export class DrinkAmountsComponent implements OnInit {
   _application: SepApplication
   @Input()
   set application(value: SepApplication) {
-    this._application = value;
+    if(value){
+      this._application = Object.assign(new SepApplication(), value);
+    }
   };
 
   get application() {

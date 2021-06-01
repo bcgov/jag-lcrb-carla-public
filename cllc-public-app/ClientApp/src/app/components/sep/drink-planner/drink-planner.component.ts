@@ -17,8 +17,13 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
   _app: SepApplication;
 
   @Input() set sepApplication(value: SepApplication) {
-    this._app = value;
+    if (value) {
+      this._app = value;
+      this.form.patchValue(this._app);
+      this.form.get('totalMaximumNumberOfGuests').patchValue(this._app.totalMaximumNumberOfGuests);
+    }
   }
+
   get sepApplication() {
     return this._app;
   }
@@ -32,7 +37,7 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
   // drink planner form
   form = this.fb.group({
     hours: HOURS_OF_LIQUOR_SERVICE,
-    guests: 400,
+    totalMaximumNumberOfGuests: 400,
     beer: 0,
     wine: 0,
     spirits: 0,
@@ -59,8 +64,6 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
     }
     this.form.patchValue(values);
 
-    // replace the guests value with the number from the application
-    this.form.get("guests").setValue(this.sepApplication?.maximumNumberOfAdults);
     // setup the form's percentage fields so they always add-up to 100%
     this.initForm();
   }
