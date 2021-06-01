@@ -18,6 +18,7 @@ export class SepApplication {
     eventStatus: string;
     totalServings: number;
     invoiceTrigger: number;
+    responsibleBevServiceNumber: string;
 
     isPrivateResidence: boolean;
     isMajorSignificance: boolean;
@@ -27,6 +28,12 @@ export class SepApplication {
     permitNumber: string;
     isTastingEvent: boolean;
     isBeerGarden: boolean;
+     hostOrganizationName: string;
+     hostOrganizationAddress: string;
+     specialEventDescription: string;
+     isLocationLicensed: string;
+     isOnPublicProperty: boolean;
+
     //maximumNumberOfGuests: number;
     sepCity: SepCity;
     applicant: Contact;
@@ -35,7 +42,7 @@ export class SepApplication {
     drinksSalesForecasts: SepDrinkSalesForecast[] = [];
     itemsToDelete: SepDeletedItems = new SepDeletedItems();
 
-    public get maximumNumberOfGuests(): number {
+    public get totalMaximumNumberOfGuests(): number {
       let maxGuests = 0;
       for(var location of this.eventLocations){
         // accumulate the total hours of service by looping through the eventDates
@@ -53,7 +60,7 @@ export class SepApplication {
           maxMinors +=  location.locationNumberMinors || 0;
         }
 
-      return this.maximumNumberOfGuests - maxMinors;
+      return this.totalMaximumNumberOfGuests - maxMinors;
     }
 
     public get serviceHours(): number{

@@ -124,7 +124,7 @@ export class ApplicantComponent implements OnInit {
     this.db.getSepApplication(this?.application?.localId)
       .then((appData) => {
         if (appData.id) { // do an update ( the record exists in dynamics)
-          this.sepDataService.updateSepApplication({ ...appData, invoiceTrigger: 1 }, appData.id)
+          this.sepDataService.updateSepApplication({ ...appData, invoiceTrigger: 1 } as SepApplication, appData.id)
             .subscribe(result => {
               if (result.localId) {
                 this.db.applications.update(result.localId, result);
