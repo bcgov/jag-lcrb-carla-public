@@ -71,7 +71,7 @@ export class LiquorComponent implements OnInit {
       lastUpdated: new Date(),
       status: 'unsubmitted',
       stepsCompleted: (steps => {
-        const step = 'event';
+        const step = 'liquor';
         if (steps.indexOf(step) === -1) {
           steps.push(step);
         }
