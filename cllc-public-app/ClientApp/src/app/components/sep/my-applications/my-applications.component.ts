@@ -122,7 +122,7 @@ export class MyApplicationsComponent implements OnInit {
       dateAgreedToTsAndCs: undefined,
       isAgreeTsAndCs: false,
       dateCreated: new Date()
-    });
+    } as SepApplication);
     this.router.navigateByUrl(`/sep/application/${localId}/applicant`)
   }
 
