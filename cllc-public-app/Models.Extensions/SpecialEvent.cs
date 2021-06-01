@@ -62,7 +62,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                     SpecialEventStreet1 = specialEvent.AdoxioSpecialeventstreet1,
                     SpecialEventStreet2 = specialEvent.AdoxioSpecialeventstreet2,
                     Statecode = specialEvent.Statecode,
-                    Statuscode = specialEvent.Statuscode, // Event Status: Draft, Submitted, Pending Review, etc.
+                    EventStatus = (ViewModels.EventStatus?)specialEvent.Statuscode, // Event Status: Draft, Submitted, Pending Review, etc.
                     TastingEvent = specialEvent.AdoxioTastingevent,
                     TotalServings = specialEvent.AdoxioTotalservings,
                     SepCity = specialEvent.AdoxioSpecialEventCityDistrictId?.ToViewModel(),
@@ -123,6 +123,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioHostorganisationaddress = from.HostOrganizationAddress;
             to.AdoxioHostorganisationcategory = (int?)from.HostOrganizationCategory;
             to.AdoxioHostorganisationname = from.HostOrganizationName;
+            to.AdoxioInvoicetrigger = from.InvoiceTrigger;
             to.AdoxioIsannualevent = from.IsAnnualEvent;
             to.AdoxioIsonpublicproperty = from.IsOnPublicProperty;
             to.AdoxioIslocationlicensedos = (int?)from.IsLocationLicensed;
@@ -146,9 +147,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioSpecialeventstreet2 = from.SpecialEventStreet2;
             to.AdoxioTastingevent = from.TastingEvent;
             to.AdoxioTotalservings = from.TotalServings;
-            // to.Statecode = from.Statecode;
-            to.Statuscode = from.Statuscode; // Event Status: Draft, Submitted, Pending Review, etc.
-        }
+            to.Statuscode = (int?)from.EventStatus;
 
     }
 }
