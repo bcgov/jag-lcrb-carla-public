@@ -6,6 +6,7 @@ import { DataService } from "./data.service";
 import { SepApplication } from "@models/sep-application.model";
 import { SepApplicationSummary } from "@models/sep-application-summary.model";
 import { SepDrinkType } from "@models/sep-drink-type.model";
+import { SepPoliceMyJobs } from "@models/sep-police-my-jobs";
 
 @Injectable()
 export class SpecialEventsDataService extends DataService {
@@ -81,9 +82,9 @@ export class SpecialEventsDataService extends DataService {
       .pipe(catchError(this.handleError));
   }
 
-  getPoliceApprovalMySepApplications(): Observable<SepApplicationSummary[]> {
+  getPoliceApprovalMySepApplications(): Observable<SepPoliceMyJobs> {
     const apiPath = `api/special-events/police/my`;
-    return this.http.get<SepApplicationSummary[]>(apiPath, { headers: this.headers })
+    return this.http.get<SepPoliceMyJobs>(apiPath, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 }
