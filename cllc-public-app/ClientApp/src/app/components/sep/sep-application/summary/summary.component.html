@@ -128,12 +128,16 @@
             </div>
         </section>
 
-        <section *ngFor="let eventDate of loc.eventDates">
-            <h4>Event date</h4>
+        <section *ngFor="let eventDate of loc.eventDates; let j = index;">
+            <h4>Event date {{j+1}}</h4>
             <div class="d-flex">
-                <label>Start Date</label> <span></span>
-                <label>Start Time</label> <span>Bar area</span>
-                <label>Liquor Service</label> <span>Bar area</span>
+                <label>Start Date</label> <span>{{eventDate.eventDate | date: 'dd MMM yyyy'}}</span>
+            </div>
+            <div class="d-flex">
+                <label>Start Time</label> <span>{{eventDate.eventStartValue}} - {{eventDate.eventEndValue}}</span>
+            </div>
+            <div class="d-flex">
+                <label>Liquor Service</label> <span>{{eventDate.serviceStartValue}} - {{eventDate.serviceStartValue}}</span>
             </div>
         </section>
     </mat-expansion-panel>
