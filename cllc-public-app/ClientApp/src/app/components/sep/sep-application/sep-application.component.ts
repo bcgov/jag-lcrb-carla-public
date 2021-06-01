@@ -90,15 +90,15 @@ export class SepApplicationComponent implements OnInit {
 
 
   async saveToAPI(): Promise<void> {
-    let appData = await this.db.getSepApplication(this.localId);
+    const appData = await this.db.getSepApplication(this.localId);
     if (appData.id) { // do an update ( the record exists in dynamics)
-      let result = await this.sepDataService.updateSepApplication({ ...appData, invoiceTrigger: 1 } as SepApplication, appData.id)
+      const result = await this.sepDataService.updateSepApplication({ ...appData, invoiceTrigger: true } as SepApplication, appData.id)
         .toPromise();
       if (result.localId) {
         await this.db.applications.update(result.localId, result);
       }
     } else {
-      let result = await this.sepDataService.createSepApplication({ ...appData, invoiceTrigger: 1 } as SepApplication)
+      const result = await this.sepDataService.createSepApplication({ ...appData, invoiceTrigger: true } as SepApplication)
         .toPromise();
       if (result.localId) {
         await this.db.applications.update(result.localId, result);

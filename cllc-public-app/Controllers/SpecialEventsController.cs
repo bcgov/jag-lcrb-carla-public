@@ -260,7 +260,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPut("{eventId}")]
         public IActionResult UpdateSpecialEvent(string eventId, [FromBody] ViewModels.SpecialEvent specialEvent)
         {
-            if (String.IsNullOrEmpty(eventId) || eventId != specialEvent?.Id)
+            if (!ModelState.IsValid || String.IsNullOrEmpty(eventId) || eventId != specialEvent?.Id)
             {
                 return BadRequest();
             }

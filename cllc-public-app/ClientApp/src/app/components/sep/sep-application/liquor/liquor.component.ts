@@ -69,7 +69,7 @@ export class LiquorComponent implements OnInit {
     const data = {
       ...this.sepApplication,
       lastUpdated: new Date(),
-      status: 'unsubmitted',
+      eventStatus: 'Draft',
       stepsCompleted: (steps => {
         const step = 'liquor';
         if (steps.indexOf(step) === -1) {
