@@ -14,7 +14,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         NotSure = 845280002,
     }
 
-    public enum ChargingForLiquorReasons {
+    public enum ChargingForLiquorReasons
+    {
         RecoverCost = 845280000,
         RaiseMoney = 845280001,
         LiquorIsFree = 845280002,
@@ -64,7 +65,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool? IsAgreeToTnC { get; set; }
 
         public System.DateTimeOffset? DateAgreeToTnC { get; set; }
-
+        
+        [JsonConverter(typeof(StringEnumConverter))]
         public FundRaisingPurposes? FundRaisingPurpose { get; set; }
         public string SepCityId { get; set; }  // not used
         public string SpecialEventPostalCode { get; set; }
@@ -115,6 +117,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool? IsManufacturingExclusivity { get; set; }
         public string HowProceedsWillBeUsedDescription { get; set; }
 
+        [JsonConverter(typeof(StringEnumConverter))]
         public LicensedSEPLocationValue? IsLocationLicensed { get; set; }
         // list of SEP locations
         public List<SepEventLocation> EventLocations { get; set; }
