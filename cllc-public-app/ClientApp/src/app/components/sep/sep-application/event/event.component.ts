@@ -292,7 +292,7 @@ export class EventComponent extends FormBase implements OnInit {
     const data = {
       localId: this._appID,
       lastUpdated: new Date(),
-      status: 'unsubmitted',
+      eventStatus: 'Draft',
       stepsCompleted: (steps => {
         const step = 'event';
         if (steps.indexOf(step) === -1) {

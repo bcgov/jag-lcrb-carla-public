@@ -91,36 +91,11 @@ export class ApplicantComponent implements OnInit {
     return this.form.valid;
   }
 
-  save(): Observable<number> {
-    const data = {
-      ...this.application,
-      lastUpdated: new Date(),
-      status: 'unsubmitted',
-      stepsCompleted: (steps => {
-        const step = 'applicant';
-        if (steps.indexOf(step) === -1) {
-          steps.push(step);
-        }
-        return steps;
-      })(this?.application?.stepsCompleted || []),
-      ...this.form.value
-    } as SepApplication;
-
-    if (data.localId) {
-      this.db.applications.update(data.localId, data);
-      return of(data.localId);
-    } else {
-      data.dateCreated = new Date();
-      return from(this.db.saveSepApplication(data));
-    }
-  }
-
-
   next() {
     const data = {
       ...this.application,
       lastUpdated: new Date(),
-      status: 'unsubmitted',
+      eventStatus: 'Draft',
       stepsCompleted: (steps => {
         const step = 'applicant';
         if (steps.indexOf(step) === -1) {
