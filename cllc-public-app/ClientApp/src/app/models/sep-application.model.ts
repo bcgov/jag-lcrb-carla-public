@@ -38,6 +38,10 @@ export class SepApplication {
     sepCity: SepCity;
     applicant: Contact;
 
+    policeAccount?: Account;
+    policeDecisionBy?: Contact;
+    policeDecision?: number;
+
     eventLocations: SepLocation[] = [];
     drinksSalesForecasts: SepDrinkSalesForecast[] = [];
     itemsToDelete: SepDeletedItems = new SepDeletedItems();
