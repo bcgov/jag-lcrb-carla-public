@@ -1,10 +1,24 @@
 <div class="form-wrapper position-relative">
     <div [ngBusy]="[busy]"></div>
-    <h1 class="mat-heading">Special Event Summary</h1>
+    
 
 <div class="form-wrapper-summary" *ngIf="application">
-    <h3>Application number: {{application?.id}}</h3>
-    
+    <h1 class="mat-heading">{{application.eventName}}</h1>
+    <h3>Start Date: {{application.eventStartDate | date: 'dd MMM yyyy'}}</h3>
+    <h3>Application number: {{application.tempJobNumber}}</h3>
+    <h2>APPROVALS REQUIRED FROM LCRB AND POLICE</h2>
+    <h3>Approvals are assigned to:</h3>
+    <table class="servings">
+        <tr>
+            <th>POLICE DETACHMENT &nbsp;</th>
+            <th>LCRB &nbsp;</th>
+        </tr>
+        <tr>
+            <td>{{application?.policeDecisionBy?.name ? application.policeDecisionBy.name : "No one is assigned"}}&nbsp;</td>
+            <td>No one is assigned &nbsp;</td>
+        </tr>
+
+    </table>
     <hr>
     <!-- approve and deny buttons -->
     <button class="btn btn-primary" style="float: left;" (click)=approve()>
@@ -24,9 +38,6 @@
                 GENERAL APPLICATION INFO
             </mat-panel-title>
         </mat-expansion-panel-header>
-        <div class="d-flex">
-            <label>Event Name</label> <span>{{application?.eventName}}</span>
-        </div>
         <div class="d-flex">
             <label>Event Municipality</label> <span>{{application?.sepCity?.name}}</span>
         </div>
