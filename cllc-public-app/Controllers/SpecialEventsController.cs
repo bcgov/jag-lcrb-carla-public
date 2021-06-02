@@ -230,7 +230,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         }));
                     }
 
-
                     // Add event dates to location
                     if (location.EventDates?.Count > 0)
                     {
