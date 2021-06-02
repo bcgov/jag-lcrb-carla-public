@@ -46,8 +46,24 @@ namespace bdd_tests
         [And(@"I click on the Licences tab")]
         public void ClickLicencesTab()
         {
-            var uiRequestChange = ngDriver.FindElement(By.LinkText("Licences & Authorizations"));
-            JavaScriptClick(uiRequestChange);
+            NgWebElement uiRequestedLink = null;
+            for (var i = 0; i < 60; i++)
+                try
+                {
+                    var names = ngDriver.FindElements(By.LinkText("Licences & Authorizations"));
+                    if (names.Count > 0)
+                    {
+                        uiRequestedLink = names[0];
+                        break;
+                    }
+
+                    Thread.Sleep(2000);
+                }
+                catch (Exception)
+                {
+                }
+
+            JavaScriptClick(uiRequestedLink);
         }
 
 
