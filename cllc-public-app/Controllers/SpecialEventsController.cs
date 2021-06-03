@@ -601,6 +601,27 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return Ok();
         }
 
+        [HttpGet("police/home")]
+        public IActionResult GetPoliceHome()
+        {
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+            // get the account details.
+            var userAccount = _dynamicsClient.GetAccountById(userSettings.AccountId);
+            if (string.IsNullOrEmpty(userAccount._adoxioPolicejurisdictionidValue))  // ensure the current account has a police jurisdiction.
+            {
+                return Unauthorized();
+            }
+
+            var result = new SpecialEventPoliceHome()
+            {
+                AssignedJobsInProgress = GetSepSummaries($"_adoxio_policerepresentativeid_value eq {userSettings.ContactId} and adoxio_policeapproval eq 100000001").Count, // Under review
+                // TODO - revise the filter for this query.
+                AssignedJobsInProgressWithExceptions = GetSepSummaries($"_adoxio_policerepresentativeid_value eq {userSettings.ContactId} and adoxio_policeapproval eq 100000001").Count,  // Approved
+                AssignedApplicationsIssued = GetSepSummaries($"_adoxio_policerepresentativeid_value eq {userSettings.ContactId} and statuscode eq 845280003").Count // status is issued
+            };
+
+            return new JsonResult(result);
+        }
 
         /// <summary>
         /// Gets SepCity Autocomplete data for a given name using startswith
