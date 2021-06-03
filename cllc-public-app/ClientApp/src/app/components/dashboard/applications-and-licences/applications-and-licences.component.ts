@@ -25,6 +25,7 @@ import { UserDataService } from "@services/user-data.service";
 
 
 export const UPLOAD_FILES_MODE = "UploadFilesMode";
+export const INCOMPLETE = "Incomplete";
 // export const TRANSFER_LICENCE_MODE = 'TransferLicenceMode';
 // export const CHANGE_OF_LOCATION_MODE = 'ChangeOfLocationMode';
 
@@ -187,6 +188,10 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
 
   uploadMoreFiles(application: Application) {
     this.router.navigate([`/application/${application.id}`, { mode: UPLOAD_FILES_MODE }]);
+  }
+
+  resolveIncompleteness(application: Application) {
+    this.router.navigate([`/application/${application.id}`, { mode: INCOMPLETE }]);
   }
 
   checkIndigenousNationState(applications: ApplicationSummary[]) {
@@ -672,16 +677,19 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     }
   }
 
+  /*
   getApplicationStatusText(status: string) {
-    if (status === "Processed") {
+    if (status === "Processed" || "Submitted") {
       return "Application Under Review";
     }
     if (status === "Pending Licence Fee") {
       return "Pending First Year Fee";
     }
+
+    debugger;
     return status;
   }
-
+*/
   getApplicationLink(item: ApplicationSummary) {
     if (item.applicationTypeName == ApplicationTypeNames.PermanentChangeToALicensee) {
       return `/permanent-change-to-a-licensee/${item.id}`;
