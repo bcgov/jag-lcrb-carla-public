@@ -50,7 +50,6 @@ namespace Gov.Lclb.Cllb.Public.Models
                     ResponsibleBevServiceNumberDoesNotHave = specialEvent.AdoxioResponsiblebevnumberdoesnothave,
                     DateAgreedToTsAndCs = specialEvent.AdoxioDateagreedtotsandcs,
                     MajorSignificanceRationale = specialEvent.AdoxioMajorsignificancerationale,
-                    MaximumNumberOfGuests = specialEvent.AdoxioMaxnumofguests,
                     NonProfitName = specialEvent.AdoxioNonprofitname,
                     PoliceApproval = specialEvent.AdoxioPoliceapproval,
                     PrivateOrPublic = (ViewModels.SEPPublicOrPrivate?)specialEvent.AdoxioTypeofevent,
@@ -69,10 +68,11 @@ namespace Gov.Lclb.Cllb.Public.Models
                     Applicant = specialEvent.AdoxioContactId?.ToViewModel()
                 };
 
-                if (specialEvent?.AdoxioSpecialeventSpecialeventlocations?.Count > 0)
+                var locations = specialEvent?.AdoxioSpecialeventSpecialeventlocations;
+                if (locations?.Count > 0)
                 {
-                    result.EventLocations = specialEvent.AdoxioSpecialeventSpecialeventlocations
-                        .Select(specialEvent => specialEvent.ToViewModel())
+                    result.EventLocations =
+                        locations.Select(specialEvent => specialEvent.ToViewModel())
                         .ToList();
                 }
             }
@@ -147,7 +147,6 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioSpecialeventstreet2 = from.SpecialEventStreet2;
             to.AdoxioTastingevent = from.TastingEvent;
             to.AdoxioTotalservings = from.TotalServings;
-            to.Statuscode = (int?)from.EventStatus;
         }
     }
 }
