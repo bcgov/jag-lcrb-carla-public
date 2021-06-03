@@ -48,13 +48,13 @@
         <!-- Status -->
         <ng-container matColumnDef="eventStatusLabel">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
-          <td mat-cell *matCellDef="let row" class="mat-body-1">{{row.eventStatusLabel}}</td>
+          <td mat-cell *matCellDef="let row" class="mat-body-1">{{row.eventStatus}}</td>
         </ng-container>
 
         <!-- Assigned -->
         <ng-container matColumnDef="policeDecisionByLabel">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Assigned</th>
-          <td mat-cell *matCellDef="let row" class="mat-body-1">{{row.policeDecisionByLabel}}</td>
+          <td mat-cell *matCellDef="let row" class="mat-body-1">{{row.policeDecisionBy?.name}}</td>
         </ng-container>
 
         <!-- Size -->
