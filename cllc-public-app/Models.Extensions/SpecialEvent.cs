@@ -52,6 +52,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                     MajorSignificanceRationale = specialEvent.AdoxioMajorsignificancerationale,
                     MaximumNumberOfGuests = specialEvent.AdoxioMaxnumofguests,
                     NonProfitName = specialEvent.AdoxioNonprofitname,
+                    PoliceAccount = specialEvent.AdoxioPoliceAccountId.ToViewModel(),
+                    PoliceDecisionBy = specialEvent.AdoxioPoliceRepresentativeId.ToViewModel(),
                     PoliceApproval = specialEvent.AdoxioPoliceapproval,
                     PrivateOrPublic = (ViewModels.SEPPublicOrPrivate?)specialEvent.AdoxioTypeofevent,
                     SpecialEventCity = specialEvent.AdoxioSpecialeventcity,
@@ -75,6 +77,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                         .Select(specialEvent => specialEvent.ToViewModel())
                         .ToList();
                 }
+
             }
             return result;
         }
@@ -90,7 +93,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                     EventStartDate = specialEvent.AdoxioEventstartdate,
                     EventName = specialEvent.AdoxioEventname,
                     // TypeOfEvent =
-                    EventStatus = specialEvent.Statuscode,
+                    EventStatus = (EventStatus?)specialEvent.Statuscode,
                     MaximumNumberOfGuests = specialEvent.AdoxioMaxnumofguests,
                     DateSubmitted = specialEvent.AdoxioDatesubmitted,
                     PoliceAccount = specialEvent.AdoxioPoliceAccountId.ToViewModel(),

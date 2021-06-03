@@ -6,7 +6,7 @@ export class SepApplicationSummary {
   eventStartDate: Date | string;
   eventName: string;
   typeOfEvent: number;
-  eventStatus: number;
+  eventStatus: string;
   maximumNumberOfGuests: number;
   dateSubmitted: Date | string;
 
