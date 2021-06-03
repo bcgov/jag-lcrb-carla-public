@@ -40,7 +40,14 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         Draft = 845280001,
         Submitted = 845280002,
         Cancelled = 845280004,
+        [EnumMember(Value = "Pending Review")]
+        PendingReview = 100000000,
+        Approved = 1,
+        Issued = 845280003,
+        Denied = 845280000
     }
+
+
     public enum HostOrgCatergory
     {
         IncorporatedNonProfitOrganization = 845280000,
@@ -122,6 +129,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public int? MaximumNumberOfGuests { get; set; }
         public string NonProfitName { get; set; }
         public System.DateTimeOffset? DateSubmitted { get; set; }
+        public ViewModels.Account PoliceAccount { get; set; }
+        public ViewModels.Contact PoliceDecisionBy { get; set; }
         public int? PoliceApproval { get; set; }
         public bool? IsManufacturingExclusivity { get; set; }
         public string HowProceedsWillBeUsedDescription { get; set; }

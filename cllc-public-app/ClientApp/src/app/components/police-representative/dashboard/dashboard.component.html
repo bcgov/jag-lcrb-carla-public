@@ -1,5 +1,12 @@
-<section class="form-wrapper" *ngIf="!isNewUser && dataLoaded">
+<section class="form-wrapper" *ngIf="!isNewUser && userLoaded && dataLoaded">
   <h1>Welcome, {{currentUser?.name}}</h1>
 
   <p class="mat-body-2">Where would you like to go from here?</p>
+  <h2>My Jobs</h2>
+  <hr>
+  <table>
+    <tr><td>{{assignedJobsInProgress}}</td><th>Applications in progress</th><td><a routerLink="/sep/police/my-jobs">View</a></td></tr>
+    <tr><td>{{assignedJobsInProgressWithExceptions}}</td><th>Applications with exemptions approved</th><td><a routerLink="/sep/police/my-jobs">View</a></td></tr>
+    <tr><td>{{assignedApplicationsIssued}}</td><th>Applications issued</th><td><a routerLink="/sep/police/my-jobs">View</a></td></tr>
+  </table>
 </section>
