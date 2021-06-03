@@ -302,7 +302,7 @@
         </app-file-uploader>
 
         <hr>
-      
+
         <app-field label="Have you amalgamated with another company?"
           [valid]="true" [showChevrons]="false" [isFullWidth]="true">
           <!-- This value is not saved to dynamics. That is why it is not in the 'form' and the data model.-->
@@ -1010,8 +1010,8 @@
             <th class="paymentSummary">No. Licences</th>
             <th class="paymentSummary">Cost</th>
           </tr>
-          <ng-container *ngFor="let item of changeList">
-            <tr *ngIf="showLiquorCostColumn(item)">
+          <ng-container *ngFor="let item of selectedChangeList">
+            <tr>
               <td class="paymentSummary1">{{item.name}}</td>
               <td class="paymentSummary2">x {{liquorLicences.length}}</td>
               <td class="paymentSummary2">${{item.LiquorFee}}</td>

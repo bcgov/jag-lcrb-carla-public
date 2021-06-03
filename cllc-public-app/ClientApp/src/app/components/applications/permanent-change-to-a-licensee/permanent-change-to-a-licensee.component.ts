@@ -336,7 +336,8 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
   }
 
   showLiquorCostColumn(item: any){
-    const show = this.form.get(item.formControlName).value === true
+    //const show = this.form.get(item.formControlName).value === true
+    const show = true
     && (item.name !== 'Internal Transfer of Shares')
     && !(item.name === 'Change of Directors or Officers' && this.account.businessType  === 'PrivateCorporation');
     return show;
