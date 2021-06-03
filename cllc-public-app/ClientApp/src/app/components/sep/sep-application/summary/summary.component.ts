@@ -56,6 +56,11 @@ export class SummaryComponent implements OnInit {
     if (appData.id) { // do an update ( the record exists in dynamics)
       const result = await this.sepDataService.updateSepApplication({ ...appData, eventStatus: 'Submitted' } as SepApplication, appData.id)
         .toPromise();
+      if (result.eventStatus === 'Appoved') {
+
+      } else if (result.eventStatus === 'PendingReview') {
+
+      }
       if (result.localId) {
         await this.db.applications.update(result.localId, result);
       }

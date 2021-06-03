@@ -31,14 +31,11 @@ namespace Gov.Lclb.Cllb.Public.Models
                 EventLocationStreet2 = location.AdoxioEventlocationstreet2,
                 EventLocationProvince = location.AdoxioLocationdescription,
                 MaximumNumberOfGuests = location.AdoxioMaximumnumberofguestslocation,
-                //result.NumberOfMinors = location.Adoxio
                 LocationName = location.AdoxioLocationname,
                 PermitNumber = location.AdoxioPermitnumber
             };
-            
 
             if (location.AdoxioSpecialeventlocationLicencedareas != null)
-
             {
                  result.ServiceAreas = location.AdoxioSpecialeventlocationLicencedareas
                  .Select(area => area.ToViewModel())
