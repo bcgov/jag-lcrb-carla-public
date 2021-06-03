@@ -9,6 +9,8 @@ export class SepApplicationSummary {
   eventStatus: string;
   maximumNumberOfGuests: number;
   dateSubmitted: Date | string;
+  invoiceId: string;
+  isInvoicePaid: boolean;
 
   policeAccount?: Account;
   policeDecisionBy?: Contact;

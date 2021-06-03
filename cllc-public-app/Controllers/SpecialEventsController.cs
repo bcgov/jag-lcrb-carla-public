@@ -46,6 +46,22 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _bcep = bcep;
         }
 
+        // get summary list of applications past submission status
+        [HttpGet("current/submitted")]
+        public IActionResult GetCurrentSubmitted()
+        {
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+            string filter = $"(_adoxio_contactid_value eq {userSettings.ContactId}";
+            filter += $" or _adoxio_accountid_value eq {userSettings.AccountId})";
+            filter += $" and statuscode ne {(int)ViewModels.EventStatus.Draft}";
+            filter += $" and statuscode ne {(int)ViewModels.EventStatus.Cancelled}";
+
+            var result = GetSepSummaries(filter);
+
+            return new JsonResult(result);
+        }
+
+
         /// <summary>
         /// GET a special event by id.  Used by the police view event feature.
         /// </summary>
@@ -118,10 +134,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
 
-        // TODO - determine if this service "GetSpecialEventByApplicant" is required. 
-
         /// <summary>
-        ///     GET a special event by id
+        ///     GET a special event by id. The detailed view of the application used by the client before submission and by the summary page
         /// </summary>
         /// <param name="eventId"></param>
         /// <returns></returns>
@@ -304,7 +318,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
-            
+
 
 
             var patchEvent = new MicrosoftDynamicsCRMadoxioSpecialevent();
@@ -476,7 +490,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             List<ViewModels.SpecialEventSummary> result = new List<ViewModels.SpecialEventSummary>();
 
-            string[] expand = new[] { "adoxio_PoliceRepresentativeId", "adoxio_PoliceAccountId" };
+            string[] expand = new[] { "adoxio_PoliceRepresentativeId", "adoxio_PoliceAccountId", "" };
             IList<MicrosoftDynamicsCRMadoxioSpecialevent> items = null;
             try
             {

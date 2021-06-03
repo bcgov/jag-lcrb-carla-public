@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild  } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { PoliceTableElement } from '../police-table-element';
 import { Subscription } from "rxjs";
@@ -9,9 +9,6 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { Contact } from '@models/contact.model';
 import { User } from '@models/user.model';
-import { PoliceSummaryComponent } from '../police-summary/police-summary.component';
-import { MatDialog } from '@angular/material/dialog';
-import { takeWhile } from "rxjs/operators";
 import { Router } from '@angular/router';
 
 @Component({
@@ -21,15 +18,17 @@ import { Router } from '@angular/router';
 })
 export class PoliceGridComponent implements OnInit {
   busy: Subscription;
-  _dataSource: MatTableDataSource<PoliceTableElement>
+  _dataSource: MatTableDataSource<PoliceTableElement>;
   _availableContacts: Contact[];
   _currentUser: User;
   currentValueMap = {};
 
   // angular material table columns to display
-  columnsToDisplay = ['select', 'dateSubmitted', 'eventName', 'eventStartDate', 'eventStatusLabel', 'policeDecisionByLabel', 'maximumNumberOfGuests', 'typeOfEventLabel', 'actions'];
+  columnsToDisplay = [
+    'select', 'dateSubmitted', 'eventName', 'eventStartDate', 'eventStatusLabel',
+    'policeDecisionByLabel', 'maximumNumberOfGuests', 'typeOfEventLabel', 'actions'
+  ];
 
-  
   // table state
   initialSelection = [];
   allowMultiSelect = true;
@@ -41,29 +40,29 @@ export class PoliceGridComponent implements OnInit {
 
   @Input()
   set dataSource(value: MatTableDataSource<PoliceTableElement>) {
-    this._dataSource = value;  
-  };
+    this._dataSource = value;
+  }
   get dataSource() {
     return this._dataSource;
   }
 
   @Input()
   set availableContacts(value: Contact[]) {
-    this._availableContacts = value;  
-  };
+    this._availableContacts = value;
+  }
   get availableContacts() {
     return this._availableContacts;
   }
 
   @Input()
   set currentUser(value: User) {
-    this._currentUser = value;  
+    this._currentUser = value;
   };
   get currentUser() {
     return this._currentUser;
   }
 
-  constructor(    private sepDataService: SpecialEventsDataService,
+  constructor(private sepDataService: SpecialEventsDataService,
     private router: Router,) { }
 
   ngOnInit(): void {
@@ -71,7 +70,7 @@ export class PoliceGridComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  
+
   isAssigned(sepData: PoliceTableElement): boolean {
     // TODO: Implement logic to show appropriate button text when application has been assigned
     return sepData.policeDecisionBy != null;
@@ -80,7 +79,7 @@ export class PoliceGridComponent implements OnInit {
   assign(row: PoliceTableElement) {
     var assignee = this.currentValueMap['assignee_' + row.specialEventId];
     this.busy = this.sepDataService.policeAssignSepApplication(row.specialEventId, assignee)
-      .subscribe(() => console.log ("refresh"));
+      .subscribe(() => console.log("refresh"));
   }
 
   batchAssign() {
@@ -114,7 +113,7 @@ export class PoliceGridComponent implements OnInit {
    * @param establishmentName
    * @param applicationName
    */
-   openApplication(id: string) {
+  openApplication(id: string) {
     this.router.navigateByUrl(`sep/police/${id}`);
   }
 
