@@ -1,4 +1,4 @@
-<div class="form-wrapper-summary">
+<div *ngIf="mode === 'readonlySummary'" class="form-wrapper-summary">
     <h3>Application number: [id]</h3>
     <p>
         Here’s a summary of your event. Does everything look right?
@@ -212,4 +212,18 @@
         <button mat-raised-button color="primary" (click)="submitApplication()">SUBMIT APPLICATION</button>
         <button mat-raised-button color="secondary" class="mr-2">BACK</button>
     </div>
+</div>
+
+<div *ngIf="mode === 'pendingReview'">
+    <p>
+        Your application requires review
+    </p>
+    <button mat-raised-button routerLink="/sep/my-applications">Return to My Applications</button>
+</div>
+
+<div  *ngIf="mode === 'payNow'">
+    <p>
+        Your may now pay for your application
+    </p>
+    <button mat-raised-button routerLink="/sep/my-applications">Pay Now</button>
 </div>
