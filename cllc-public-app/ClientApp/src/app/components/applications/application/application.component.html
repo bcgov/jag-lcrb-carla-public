@@ -1,7 +1,7 @@
 <mat-progress-bar class="mt-1" *ngIf="!dataLoaded" mode="indeterminate"></mat-progress-bar>
 <div *ngIf="application && account && dataLoaded">
 <ng-template #applicationContent>
-<div *ngIf="account?.businessType" [ngClass]="{'hide': mode === UPLOAD_FILES_MODE || INCOMPLETE}">
+<div *ngIf="account?.businessType" [ngClass]="{'hide': mode === UPLOAD_FILES_MODE || mode === INCOMPLETE}">
 
 <div [formGroup]="form" style="padding-left: 45px; position: relative">
   <!-- Title -->
