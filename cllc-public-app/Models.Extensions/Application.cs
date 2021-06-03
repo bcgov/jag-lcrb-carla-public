@@ -921,7 +921,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
             if (dynamicsApplication.Statuscode != null)
             {
-                applicationSummary.ApplicationStatus = StatusUtility.GetTranslatedApplicationStatus(dynamicsApplication);
+                applicationSummary.ApplicationStatus = StatusUtility.GetTranslatedApplicationStatusV2(dynamicsApplication);
             }
 
             if (dynamicsApplication.AdoxioApplicationTypeId != null)

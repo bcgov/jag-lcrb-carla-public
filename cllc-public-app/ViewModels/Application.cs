@@ -24,13 +24,18 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         PendingForLicenceFee = 845280007,
         [EnumMember(Value = "Pending Final Inspection")]
         PendingFinalInspection = 845280008,
+        [EnumMember(Value = "Submitted")]
+        Submitted = 845280013,        
         Terminated = 845280009,
         [EnumMember(Value = "Terminated and Refunded")]
         TerminatedAndRefunded = 845280010,
 
         Processed = 845280011,
         [EnumMember(Value = "Reviewing Inspection Results")]
-        ReviewingInspectionResults = 845280012
+        ReviewingInspectionResults = 845280012,
+
+        [EnumMember(Value = "Application Assessment")]
+        ApplicationAssessment = 845280014
     }
 
     public enum AdoxioFinalDecisionCodes
