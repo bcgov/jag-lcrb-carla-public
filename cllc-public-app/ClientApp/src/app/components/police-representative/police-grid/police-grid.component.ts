@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit, ViewChild  } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { PoliceTableElement } from '../police-table-element';
 import { Subscription } from "rxjs";
@@ -22,6 +22,7 @@ export class PoliceGridComponent implements OnInit {
   _availableContacts: Contact[];
   _currentUser: User;
   currentValueMap = {};
+  currentNameMap = {};
 
   // angular material table columns to display
   columnsToDisplay = [
@@ -62,8 +63,9 @@ export class PoliceGridComponent implements OnInit {
     return this._currentUser;
   }
 
-  constructor(private sepDataService: SpecialEventsDataService,
-    private router: Router,) { }
+  constructor(    private sepDataService: SpecialEventsDataService,
+    private cd: ChangeDetectorRef,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.dataSource.paginator = this.paginator;
@@ -78,8 +80,15 @@ export class PoliceGridComponent implements OnInit {
 
   assign(row: PoliceTableElement) {
     var assignee = this.currentValueMap['assignee_' + row.specialEventId];
+
     this.busy = this.sepDataService.policeAssignSepApplication(row.specialEventId, assignee)
-      .subscribe(() => console.log("refresh"));
+      .subscribe(data => {
+        
+        row.policeDecisionBy = data;
+        // ensure the grid refreshes.
+        this.cd.detectChanges()
+      
+      });
   }
 
   batchAssign() {
@@ -105,6 +114,7 @@ export class PoliceGridComponent implements OnInit {
 
   updateValue(event: MatSelectChange) {
     this.currentValueMap[event.source.id] = event.value;
+
   }
 
   /**
