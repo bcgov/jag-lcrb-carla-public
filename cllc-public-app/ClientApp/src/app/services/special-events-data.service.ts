@@ -24,6 +24,12 @@ export class SpecialEventsDataService extends DataService {
       .pipe(catchError(this.handleError));
   }
 
+  getSubmittedApplications(): Observable<SepApplicationSummary[]> {
+    const apiPath = `api/special-events/current/submitted`;
+    return this.http.get<SepApplicationSummary[]>(apiPath, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
   getSepDrinkTypes(): Observable<SepDrinkType[]> {
     const apiPath = 'api/special-events/drink-types';
     return this.http.get<SepDrinkType[]>(apiPath, { headers: this.headers })
@@ -35,7 +41,7 @@ export class SpecialEventsDataService extends DataService {
    * @param data - special event application data
    */
   createSepApplication(data: SepApplication) {
-    return this.http.post<SepApplication>("api/special-events/", data, { headers: this.headers })
+    return this.http.post<SepApplication>('api/special-events/', data, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
