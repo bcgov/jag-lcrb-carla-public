@@ -572,6 +572,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return Unauthorized();
             }
 
+            // get the assignee.
+
+
+            var contact = _dynamicsClient.GetContactById(assignee).GetAwaiter().GetResult();
+            if (contact == null || contact.ParentcustomeridAccount._adoxioPolicejurisdictionidValue != specialEvent._adoxioPolicejurisdictionidValue)
+            {
+                return Unauthorized();
+            }
 
             // update the given special event.
             var patchEvent = new MicrosoftDynamicsCRMadoxioSpecialevent()
@@ -589,7 +597,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
 
-            return Ok();
+            return new JsonResult(contact.ToViewModel());
         }
 
         [HttpPost("police/{id}/approve")]
