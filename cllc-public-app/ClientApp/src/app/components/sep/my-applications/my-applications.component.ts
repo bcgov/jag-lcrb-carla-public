@@ -7,10 +7,10 @@ import { SepApplication } from '@models/sep-application.model';
 import { User } from '@models/user.model';
 import { Store } from '@ngrx/store';
 import { IndexedDBService } from '@services/indexed-db.service';
-import { takeWhile } from 'rxjs/operators';
 import { StarterChecklistComponent } from '../starter-checklist/starter-checklist.component';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { SEP_APPLICATION_STEPS } from '../sep-application/sep-application.component';
+import { SepApplicationSummary } from '@models/sep-application-summary.model';
 @Component({
   selector: 'app-my-applications',
   templateUrl: './my-applications.component.html',
@@ -21,6 +21,7 @@ export class MyApplicationsComponent implements OnInit {
   displayedColumns = ['status', 'info', 'actions'];
   currentUser: User;
   faEdit = faEdit;
+  submittedApplication: SepApplicationSummary[];
 
   constructor(private store: Store<AppState>,
     private db: IndexedDBService,
@@ -30,7 +31,7 @@ export class MyApplicationsComponent implements OnInit {
     store.select(state => state.currentUserState.currentUser)
       .subscribe((user: User) => {
         this.currentUser = user;
-      })
+      });
   }
 
   async ngOnInit() {
@@ -51,7 +52,7 @@ export class MyApplicationsComponent implements OnInit {
     const dialogConfig = {
       disableClose: true,
       autoFocus: true,
-      width: "600px",
+      width: '600px',
       data: {
         showStartApp: true
       }
@@ -84,8 +85,8 @@ export class MyApplicationsComponent implements OnInit {
     const dialogConfig = {
       disableClose: true,
       autoFocus: true,
-      width: "400px",
-      height: "200px",
+      width: '400px',
+      height: '200px',
       data: {
         establishmentName: establishmentName,
         applicationName: applicationName
@@ -98,7 +99,7 @@ export class MyApplicationsComponent implements OnInit {
       .subscribe(async (cancelApplication) => {
         if (cancelApplication) {
           this.db.deleteSepApplication(localId);
-          await this.getApplications()
+          await this.getApplications();
         }
       });
 
@@ -106,7 +107,7 @@ export class MyApplicationsComponent implements OnInit {
 
   getLastStep(stepsCompleted: string[] = []): string {
     let lastIndex = -1;
-    //get index of the last completed step
+    // get the index of the last completed step
     stepsCompleted.forEach(element => {
       lastIndex = Math.max(lastIndex, SEP_APPLICATION_STEPS.indexOf(element));
     });
@@ -116,13 +117,13 @@ export class MyApplicationsComponent implements OnInit {
   }
 
   async cloneApplication(app: SepApplication) {
-    let localId = await this.db.saveSepApplication({
+    const localId = await this.db.saveSepApplication({
       ...app,
       localId: undefined,
-      dateAgreedToTnC: undefined,
-      agreeToTnC: false,
+      dateAgreedToTsAndCs: undefined,
+      isAgreeTsAndCs: false,
       dateCreated: new Date()
-    });
+    } as SepApplication);
     this.router.navigateByUrl(`/sep/application/${localId}/applicant`)
   }
 

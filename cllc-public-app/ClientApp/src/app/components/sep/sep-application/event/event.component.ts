@@ -8,7 +8,7 @@ import { FormBase } from '@shared/form-base';
 import { Account } from '@models/account.model';
 import { SepLocation } from '@models/sep-location.model';
 import { SepSchedule } from '@models/sep-schedule.model';
-import { SepServiceArea } from '@models/sep-service-are.model';
+import { SepServiceArea } from '@models/sep-service-area.model';
 import { AutoCompleteItem, SpecialEventsDataService } from '@services/special-events-data.service';
 import { filter, tap, switchMap } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -25,7 +25,7 @@ export class EventComponent extends FormBase implements OnInit {
   _appID: number;
   sepApplication: SepApplication;
   @Output()
-  saveComplete = new EventEmitter<boolean>();
+  saveComplete = new EventEmitter<SepApplication>();
   faQuestionCircle = faQuestionCircle;
   form: FormGroup;
   showValidationMessages: boolean;
@@ -100,6 +100,7 @@ export class EventComponent extends FormBase implements OnInit {
 
   setFormValue(app: SepApplication) {
     if (app) {
+      app.eventLocations = app.eventLocations || [];
       this.form.patchValue(app);
     }
     this.locations.clear();
@@ -131,14 +132,14 @@ export class EventComponent extends FormBase implements OnInit {
     return result;
   }
 
-
   addLocation(location: SepLocation = new SepLocation()) {
     let locationForm = this.fb.group({
-      locationId: [null],
+      id: [null],
       locationPermitNumber: [''],
       locationName: [''],
       venueType: [''],
-      locationMaxGuests: [''],
+      maximumNumberOfGuests: [''],
+      locationNumberMinors: [''],
       eventLocationStreet1: [''],
       eventLocationStreet2: [''],
       eventLocationCity: [''],
@@ -170,14 +171,28 @@ export class EventComponent extends FormBase implements OnInit {
       (locationForm.get('eventDates') as FormArray).push(edForm);
     });
 
-
-
-
     this.locations.push(locationForm);
   }
 
 
   removeLocation(locationIndex: number) {
+    var loc: SepLocation = this.locations.at(locationIndex).value;
+    if (loc.id && this.sepApplication.itemsToDelete.locations.indexOf(loc.id) === -1) {
+      this.sepApplication.itemsToDelete.locations.push(loc.id);
+    }
+    loc.eventDates.forEach(ed => {
+      const deleteEventDates = this.sepApplication.itemsToDelete.eventDates;
+      if (ed.id && deleteEventDates.indexOf(ed.id) === -1) {
+        deleteEventDates.push(ed.id);
+      }
+    });
+
+    loc.serviceAreas.forEach(area => {
+      const deleteServiceAreas = this.sepApplication.itemsToDelete.serviceAreas;
+      if (area.id && deleteServiceAreas.indexOf(area.id) === -1) {
+        deleteServiceAreas.push(area.id);
+      }
+    });
     this.locations.removeAt(locationIndex);
   }
 
@@ -189,7 +204,7 @@ export class EventComponent extends FormBase implements OnInit {
 
   createEventDate(eventDate: SepSchedule) {
     let datesForm = this.fb.group({
-      eventScheduleId: [null],
+      id: [null],
       eventDate: [''],
       eventStartValue: [''],
       eventEndValue: [''],
@@ -198,7 +213,7 @@ export class EventComponent extends FormBase implements OnInit {
     });
     eventDate = Object.assign(new SepSchedule(null), eventDate);
     const val = eventDate.toEventFormValue();
-    
+
     // Set default to event start date
     if (!val.eventDate) {
       val.eventDate = this?.sepApplication?.eventStartDate;
@@ -207,8 +222,13 @@ export class EventComponent extends FormBase implements OnInit {
     return datesForm;
   }
 
-  removeEventDate(eventDateIndex: number, serviceArea: FormGroup) {
-    const eventDates = serviceArea.get('eventDates') as FormArray;
+  removeEventDate(eventDateIndex: number, location: FormGroup) {
+    const eventDates = location.get('eventDates') as FormArray;
+    const deleteEventDates = this.sepApplication.itemsToDelete.eventDates;
+    const ed: SepSchedule = eventDates.at(eventDateIndex).value;
+    if (ed.id && deleteEventDates.indexOf(ed.id) === -1) {
+      deleteEventDates.push(ed.id);
+    }
     eventDates.removeAt(eventDateIndex);
   }
 
@@ -220,29 +240,27 @@ export class EventComponent extends FormBase implements OnInit {
 
   createServiceArea(area: SepServiceArea) {
     let areaForm = this.fb.group({
-      licencedAreaId: [null],
+      id: [null],
       eventName: [''],
-      isBothOutdoorIndoor: [''],
-      isIndoors: [''],
-      isOutdoors: [''],
       licencedAreaDescription: [''],
       licencedAreaMaxNumberOfGuests: [''],
-      licencedAreaNumberOfMinors: [''],
-      maximumNumberOfGuests: [''],
       minorPresent: [''],
-      numberOfMinors: [''],
       setting: [''],
       stateCode: [''],
       statusCode: [''],
     });
     areaForm.patchValue(area);
-
     return areaForm;
   }
 
-
   removeServiceArea(serviceAreaIndex: number, location: FormGroup) {
     let serviceAreas = location.get('serviceAreas') as FormArray;
+
+    const deleteServiceAreas = this.sepApplication.itemsToDelete.serviceAreas;
+    const area: SepServiceArea = serviceAreas.at(serviceAreaIndex).value;
+    if (area.id && deleteServiceAreas.indexOf(area.id) === -1) {
+      deleteServiceAreas.push(area.id);
+    }
     serviceAreas.removeAt(serviceAreaIndex);
   }
 
@@ -258,11 +276,12 @@ export class EventComponent extends FormBase implements OnInit {
   }
 
   getFormValue(): SepApplication {
-    let data = {
+    let formData = {
       ...this.sepApplication,
       ...this.form.value
     };
-    data?.eventLocations.forEach(location => {
+
+    formData?.eventLocations.forEach(location => {
       let dateValues = [];
       location?.eventDates.forEach(sched => {
         dateValues.push(new SepSchedule(sched));
@@ -270,15 +289,10 @@ export class EventComponent extends FormBase implements OnInit {
       location.eventDates = dateValues;
     });
 
-    return data as SepApplication;
-
-  }
-
-  save() {
     const data = {
       localId: this._appID,
       lastUpdated: new Date(),
-      status: 'unsubmitted',
+      eventStatus: 'Draft',
       stepsCompleted: (steps => {
         const step = 'event';
         if (steps.indexOf(step) === -1) {
@@ -286,29 +300,18 @@ export class EventComponent extends FormBase implements OnInit {
         }
         return steps;
       })(this?.sepApplication?.stepsCompleted || []),
-      ...this.getFormValue()
+      ...formData
     } as SepApplication;
-
-    if (data.localId) {
-      this.db.applications.update(data.localId, data);
-    } else {
-      console.error("The id should already exist at this point.")
-    }
+    return data;
   }
 
   next() {
     this.showValidationMessages = false;
     if (this.isValid()) {
-      this.save();
-      this.saveComplete.emit(true);
+      this.saveComplete.emit(this.getFormValue());
     } else {
       this.showValidationMessages = true;
     }
-  }
-
-  saveForLater() {
-    this.save();
-    this.router.navigateByUrl('/sep/my-applications')
   }
 
 }

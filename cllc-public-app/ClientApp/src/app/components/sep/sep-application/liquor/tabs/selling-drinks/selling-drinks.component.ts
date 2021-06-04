@@ -1,6 +1,7 @@
-import { EventEmitter, Output } from '@angular/core';
+import { EventEmitter, Input, Output } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { SepApplication } from '@models/sep-application.model';
 
 @Component({
   selector: 'app-selling-drinks',
@@ -8,24 +9,38 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./selling-drinks.component.scss']
 })
 export class SellingDrinksComponent implements OnInit {
-  @Output() saved: EventEmitter<{declaredServings: number}> = new EventEmitter<{declaredServings: number}>();
+  _application: SepApplication
+  @Input()
+  set application(value: SepApplication) {
+    this._application = value;
+    if (this.form) {
+      this.form.patchValue(value);
+    }
+  };
+  get application() {
+    return this._application;
+  }
+  @Output() saved: EventEmitter<{ declaredServings: number }> = new EventEmitter<{ declaredServings: number }>();
   form: FormGroup;
   @Output() back: EventEmitter<boolean> = new EventEmitter<boolean>();
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      chargingForDrinks: [''],
-      hostingAsAGSTOrg: [''],
+      chargingForLiquorReason: [''],
+      isGSTRegisteredOrg: [''],
       donateOrConsularPrevLiqour: [''],
-      nameOfNonProfitOrg: [''],
-      fundraisingPurposeOfEvent: [''],
-      howWillProceedsBeUsed: [''],
-      exclusivityAgreementWithAManufacturer: ['']
+      nonProfitName: [''],
+      fundraisingPurpose: [''],
+      howProceedsWillBeUsedDescription: [''],
+      isManufacturingExclusivity: ['']
     });
+    if (this.application) {
+      this.form.patchValue(this.application);
+    }
   }
 
   next() {
-    this.saved.next({...this.form.value});
+    this.saved.next({ ...this.form.value });
   }
 }

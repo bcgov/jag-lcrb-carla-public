@@ -1,0 +1,187 @@
+<div class="form-wrapper position-relative">
+    <div [ngBusy]="[busy]"></div>
+    
+
+<div class="form-wrapper-summary" *ngIf="application">
+    <h1 class="mat-heading">{{application.eventName}}</h1>
+    <h3>Start Date: {{application.eventStartDate | date: 'dd MMM yyyy'}}</h3>
+    <h3>Application number: {{application.tempJobNumber}}</h3>
+    <h2>APPROVALS REQUIRED FROM LCRB AND POLICE</h2>
+    <h3>Approvals are assigned to:</h3>
+    <table class="servings">
+        <tr>
+            <th>POLICE DETACHMENT &nbsp;</th>
+            <th>LCRB &nbsp;</th>
+        </tr>
+        <tr>
+            <td>{{application?.policeDecisionBy?.name ? application.policeDecisionBy.name : "No one is assigned"}}&nbsp;</td>
+            <td>No one is assigned &nbsp;</td>
+        </tr>
+
+    </table>
+    <hr>
+    <!-- approve and deny buttons -->
+    <button class="btn btn-primary" style="float: left;" (click)=approve()>
+        APPROVE&nbsp;
+      </button>
+      &nbsp;
+      <button class="btn btn-primary" (click)="deny()">
+        DENY&nbsp;
+      </button>
+    
+
+    <h2>Summary</h2>
+
+    <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                GENERAL APPLICATION INFO
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="d-flex">
+            <label>Event Municipality</label> <span>{{application?.sepCity?.name}}</span>
+        </div>
+        <div class="d-flex">
+            <label>Applicant Name</label> <span>{{application?.applicant?.name}}</span>
+        </div>
+        <div class="d-flex">
+            <label>Applicant Info</label>
+            <section>
+                <div>{{application?.applicant?.address1_line1}}</div>
+                <div>{{application?.applicant?.address1_city}}</div>
+                <div>{{application?.applicant?.address1_stateorprovince}}</div>
+                <div>{{application?.applicant?.address1_postalcode}}</div>
+                <div>{{application?.applicant?.telephone1}}</div>
+                <div>{{application?.applicant?.emailaddress1}}</div>
+            </section>
+        </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                ELIGIBILITY
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="d-flex">
+            <label>Event Starts at:</label> <span>{{application?.eventStartDate | date: 'dd MMM yyyy'}}</span>
+        </div>
+        <div class="d-flex">
+            <label>Responsible Beverage Service #:</label> <span>Agassiz</span>
+        </div>
+        <div class="d-flex">
+            <label>Name of The Organization:</label> <span>Agassiz</span>
+        </div>
+        <div class="d-flex">
+            <label>Address of The Organization:</label> <span>Agassiz</span>
+        </div>
+        <div class="d-flex">
+            <label>Occasion of event:</label> <span>Firstname Lastname</span>
+        </div>
+        <div class="d-flex">
+            <label>Licence Already exists in location:</label> <span>Yes</span>
+        </div>
+        <div class="d-flex">
+            <label>Permit Category</label> <span>Private – Family and Invited Friends Only</span>
+        </div>
+        <div class="d-flex">
+            <label>Public Property</label> <span>Yes</span>
+        </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="true">
+        <div *ngFor="let location of application.eventLocations; index as i">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    EVENT LOCATION {{i+1}}
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="d-flex">
+                <label>Location Name</label> <span>{{location.locationName}}</span>
+            </div>
+            <div class="d-flex">
+                <label>Location Description</label> <span>UNKNOWN FIELD</span>
+            </div>
+            <div class="d-flex">
+                <label>Event Address</label>
+                <section>
+                    <span>{{location.eventLocationStreet1}}</span>
+                    <span>{{location.eventLocationStreet2}}</span>
+                        
+                    <span>{{location.eventLocationCity}}, {{location.eventLocationProvince}}</span>
+                    <span>{{location.eventLocationPostalCode}}</span>
+                </section>
+            </div>
+
+            <div *ngFor="let serviceArea of location.serviceAreas">
+                <div class="d-flex">
+                    <label>Service Area Description</label> <span>{{serviceArea.licencedAreaDescription}}</span>
+                </div>
+                <div class="d-flex">
+                    <label>Maximum # of Guests in Service Areas</label> <span>{{serviceArea.licencedAreaMaxNumberOfGuests}}</span>
+                </div>
+                <div class="d-flex">
+                    <label>Minors Present</label> <span>{{serviceArea.numberOfMinors}}</span>
+                </div>
+                <div class="d-flex">
+                    <label>Maximum # of Guests at this location</label> <span>{{serviceArea.maximumNumberOfGuests}}</span>
+                </div>
+
+            </div>
+            
+
+            <h4>Event date</h4>
+            <div *ngFor="let eventDate of location.eventDates"></div>
+            <div class="d-flex">
+                <label>Start Date</label> <span>{{eventDate.eventDate | date: 'dd MMM yyyy'}} </span>
+                <label>Start Time</label> <span>{{eventDate.eventStartValue}} - {{eventDate.eventEndValue}} </span>
+                <label>Liquor Service</label> <span>{{eventDate.serviceStartValue}} - {{eventDate.serviceStartValue}} </span>
+            </div>
+        </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                LIQUOR FEES
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div class="d-flex">
+            <label>Liquor Quantities</label>
+            <table class="servings">
+                <tr>
+                    <th>Type</th>
+                    <th>Servings</th>
+                </tr>
+                <tr *ngFor="let item of application.drinksSalesForecasts">
+                    <td>{{item.name}}</td>
+                    <td>{{item.estimatedServings}}</td>
+                </tr>
+            </table>
+        </div>
+
+        <hr>
+        <div class="d-flex">
+            <label>Estimated total liquor sales revenue</label> <span class="fee-amount">[$0.00]</span>
+        </div>
+        <div class="d-flex">
+            <label>Estimated liquor purchase cost</label> <span class="fee-amount">[$0.00]</span>
+        </div>
+        <div class="d-flex">
+            <label>Estimated net proceeds/profit from liquor sales</label> <span class="fee-amount">[$0.00]</span>
+        </div>
+        <div class="d-flex">
+            <label>Total PST Amount Due</label> <span class="fee-amount">[$0.00]</span>
+        </div>
+        <div class="d-flex">
+            <label>Application Fees (Based on 1 event location and capacity)*
+                *0-500 – $25.00</label> <span class="fee-amount">[$0.00]</span>
+        </div>
+
+        <hr>
+
+    </mat-expansion-panel>
+    <hr>
+</div>
+

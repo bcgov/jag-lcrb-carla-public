@@ -1,7 +1,7 @@
 import { format } from 'date-fns'
 
 export class SepSchedule {
-    eventScheduleId: string; // server side primary key
+    id: string; // server side primary key
     specialEventId: string; // server side foreign key
     locationId: string; // server side foreign key
     eventStart: Date;
@@ -37,18 +37,24 @@ export class SepSchedule {
         return result;
     }
 
+    public getServiceHours() {
+    //   let serviceHours = parseInt(format(new Date(this.serviceEnd), "H")) - parseInt(format(new Date(this.serviceStart), "H"));
+    //   return serviceHours;
+      return 1;
+    }
+
 
 
     /**
-     * 
-     * @param eventDate 
+     *
+     * @param eventDate
      * @param time, assumed format "HH:MM [AM,PM]" e.g. '6:30 PM'
      */
     private formatDate(eventDate: Date, time: string): Date {
         let result = new Date(eventDate);
 
-        let matches = time.match(/(\d+):(\d+)\s?(AM|PM)/);
-        if (matches.length > 0) {
+        let matches = time && time.match(/(\d+):(\d+)\s?(AM|PM)/);
+        if (matches?.length > 0) {
             let hour: number = parseInt(matches[1], 10);
             let minute = parseInt(matches[2], 10);
             let amPm = matches[3];

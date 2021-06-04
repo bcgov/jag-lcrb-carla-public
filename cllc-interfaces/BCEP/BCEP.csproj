@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>Gov.Lclb.Cllb.Interfaces</RootNamespace>
 	<ProjectGuid>{05301D75-ACF9-45D8-B572-AC052EAD4B54}</ProjectGuid>
   </PropertyGroup>

@@ -16,6 +16,7 @@ import { LicenceEventsService } from "@services/licence-events.service";
 
 
 export const UPLOAD_FILES_MODE = "UploadFilesMode";
+export const INCOMPLETE = "Incomplete";
 export const CRS_RENEWAL_LICENCE_TYPE_NAME = "crs";
 export const LIQUOR_RENEWAL_LICENCE_TYPE_NAME = "liquor";
 

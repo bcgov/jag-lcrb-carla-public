@@ -10,7 +10,7 @@ namespace Gov.Lclb.Cllb.Public.Models
     public static class SepEventDatesExtensions
     {
         /// <summary>
-        /// Convert a given voteQuestion to a ViewModel
+        /// Convert a given Special Event Schedule to a ViewModel
         /// </summary>
         public static ViewModels.SepEventDates ToViewModel(this MicrosoftDynamicsCRMadoxioSpecialeventschedule eventDates)
         {
@@ -22,6 +22,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                     Id = eventDates.AdoxioSpecialeventscheduleid,
                     SpecialEventId = eventDates._adoxioSpecialeventidValue,
                     LocationId = eventDates._adoxioSpecialeventlocationidValue,
+                    EventDate = eventDates.AdoxioEventdate,
                     EventStart = eventDates.AdoxioEventstart,
                     EventEnd = eventDates.AdoxioEventend,
                     ServiceStart = eventDates.AdoxioServicestart,
@@ -34,9 +35,6 @@ namespace Gov.Lclb.Cllb.Public.Models
 
         public static void CopyValues(this MicrosoftDynamicsCRMadoxioSpecialeventschedule to, ViewModels.SepEventDates from)
         {
-            // to.AdoxioSpecialeventscheduleid = from.Id;
-            to._adoxioSpecialeventidValue = from.Id;
-            to._adoxioSpecialeventlocationidValue = from.LocationId;
             to.AdoxioEventstart = from.EventStart;
             to.AdoxioEventend = from.EventEnd;
             to.AdoxioServicestart = from.ServiceStart;

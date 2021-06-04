@@ -22,33 +22,32 @@ namespace Gov.Lclb.Cllb.Public.Models
 
             result = new ViewModels.SepEventLocation
             {
-                ServiceAreas = new List<ViewModels.SepServiceArea>(),
+                Id = location.AdoxioSpecialeventlocationid,
+                SpecialEventId = location._adoxioSpecialeventidValue,
+                LocationDescription = location.AdoxioLocationdescription,
+                EventLocationCity = location.AdoxioEventlocationcity,
+                EventLocationPostalCode = location.AdoxioEventlocationpostalcode,
+                EventLocationStreet1 = location.AdoxioEventlocationstreet1,
+                EventLocationStreet2 = location.AdoxioEventlocationstreet2,
+                EventLocationProvince = location.AdoxioLocationdescription,
+                MaximumNumberOfGuests = location.AdoxioMaximumnumberofguestslocation,
+                LocationName = location.AdoxioLocationname,
+                PermitNumber = location.AdoxioPermitnumber
             };
-            result.Id = location.AdoxioSpecialeventlocationid;
-            result.SpecialEventId = location._adoxioSpecialeventidValue;
-            result.LocationDescription = location.AdoxioLocationdescription;
-            result.EventLocationCity = location.AdoxioEventlocationcity;
-            result.EventLocationPostalCode = location.AdoxioEventlocationpostalcode;
-            result.EventLocationStreet1 = location.AdoxioEventlocationstreet1;
-            result.EventLocationStreet2 = location.AdoxioEventlocationstreet2;
-            result.EventLocationProvince = location.AdoxioLocationdescription;
-            result.MaximumNumberOfGuests = location.AdoxioMaximumnumberofguests;
-            result.LocationName = location.AdoxioLocationname;
-            result.PermitNumber = location.AdoxioPermitnumber;
 
-            // if (location.AdoxioSpecialeventlocationLicencedareas?.Count > 0)
-            // {
-            //     result.ServiceAreas = location.AdoxioSpecialeventlocationLicencedareas
-            //     .Select(area => area.ToViewModel())
-            //     .ToList();
-            // }
+            if (location.AdoxioSpecialeventlocationLicencedareas != null)
+            {
+                 result.ServiceAreas = location.AdoxioSpecialeventlocationLicencedareas
+                 .Select(area => area.ToViewModel())
+                 .ToList();
+            }
 
-            // if (location.AdoxioSpecialeventlocationSchedule?.Count > 0)
-            // {
-            //     result.EventDates = location.AdoxioSpecialeventlocationSchedule
-            //     .Select(sched => sched.ToViewModel())
-            //     .ToList();
-            // }
+            if (location.AdoxioSpecialeventlocationSchedule != null)
+            { 
+                result.EventDates = location.AdoxioSpecialeventlocationSchedule
+                   .Select(sched => sched.ToViewModel())
+                 .ToList();
+            }
             return result;
         }
 
@@ -58,19 +57,15 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 return;
             }
-
-            to.AdoxioSpecialeventlocationid = from.Id;
-            to._adoxioSpecialeventidValue = from.SpecialEventId;
             to.AdoxioLocationdescription = from.LocationDescription;
             to.AdoxioEventlocationcity = from.EventLocationCity;
             to.AdoxioEventlocationpostalcode = from.EventLocationPostalCode;
             to.AdoxioEventlocationstreet1 = from.EventLocationStreet1;
             to.AdoxioEventlocationstreet2 = from.EventLocationStreet2;
             to.AdoxioLocationdescription = from.EventLocationProvince;
-            to.AdoxioMaximumnumberofguests = from.MaximumNumberOfGuests;
+            to.AdoxioMaximumnumberofguestslocation = from.MaximumNumberOfGuests;
             to.AdoxioLocationname = from.LocationName;
             to.AdoxioPermitnumber = from.PermitNumber;
-            // to.AdoxioMaxnumberofguests = from.MaxNumberOfGuests;
         }
     }
 }

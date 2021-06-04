@@ -1,24 +1,14 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
-import { SelectionModel } from '@angular/cdk/collections';
-import { MatSort } from '@angular/material/sort';
-import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
 import { filter, map } from 'rxjs/operators';
 import { AppState } from '@app/app-state/models/app-state';
-import { SepApplicationSummary } from '@models/sep-application-summary.model';
 import { User } from '@models/user.model';
 import { SpecialEventsDataService } from '@services/special-events-data.service';
 import { AccountDataService } from '@services/account-data.service';
 import { Contact } from '@models/contact.model';
-
-// Show text labels instead of numeric enum values in the table; e.g. Status = "In Progress" vs. 100,000,001
-interface SepTableElement extends SepApplicationSummary {
-  eventStatusLabel?: string;
-  policeDecisionByLabel?: string;
-  typeOfEventLabel?: string;
-}
+import { PoliceTableElement } from '../police-table-element';
 
 @Component({
   selector: 'app-sep-all-applications',
@@ -26,21 +16,15 @@ interface SepTableElement extends SepApplicationSummary {
   styleUrls: ['./all-applications.component.scss']
 })
 export class AllApplicationsComponent implements OnInit {
-  // icons
 
-  // angular material table columns to display
-  columnsToDisplay = ['select', 'dateSubmitted', 'eventName', 'eventStartDate', 'eventStatusLabel', 'policeDecisionByLabel', 'maximumNumberOfGuests', 'typeOfEventLabel', 'actions'];
   currentUser: User;
   availableContacts = [];
 
-  // table state
-  dataSource = new MatTableDataSource<SepTableElement>();
-  initialSelection = [];
-  allowMultiSelect = true;
-  selection = new SelectionModel<SepTableElement>(this.allowMultiSelect, this.initialSelection);
 
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  // table state
+  dataSource = new MatTableDataSource<PoliceTableElement>();
+  initialSelection = [];
+
 
   constructor(
     private store: Store<AppState>,
@@ -50,23 +34,7 @@ export class AllApplicationsComponent implements OnInit {
   ) {
   }
 
-  /** Whether the number of selected elements matches the total number of rows. */
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected === numRows;
-  }
-
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
-  masterToggle() {
-    this.isAllSelected() ?
-      this.selection.clear() :
-      this.dataSource.data.forEach(row => this.selection.select(row));
-  }
-
   ngOnInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
     this.subscribeForData();
   }
 
@@ -104,24 +72,8 @@ export class AllApplicationsComponent implements OnInit {
           eventStatusLabel: 'In Progress',
           typeOfEventLabel: 'Members',
           policeDecisionByLabel: 'Vancouver PoliceUser',
-        } as SepTableElement;
+        } as PoliceTableElement;
       })));
   }
 
-  isAssigned(sepData: SepTableElement): boolean {
-    // TODO: Implement logic to show appropriate button text when application has been assigned
-    return sepData.policeDecisionBy != null;
-  }
-
-  assign(row: SepTableElement) {
-    // TODO: Call backend endpoint to update/assign this SEP Application
-    console.log(`Call API to assign SEP application with ID: ${row.specialEventId}`);
-  }
-
-  batchAssign() {
-    // TODO: Call backend endpoint for batch updates/assignments
-    const selected = this.selection.selected;
-    console.log(`Call API to batch assign SEP applications:`);
-    selected.forEach(x => console.log(`${x.specialEventId}`));
-  }
 }

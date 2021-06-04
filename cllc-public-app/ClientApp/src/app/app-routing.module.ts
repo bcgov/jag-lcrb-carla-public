@@ -93,6 +93,8 @@ import { SepHomeComponent } from "@components/sep/home/home.component";
 import { ApprovalSettingsComponent } from "@components/police-representative/approval-settings/approval-settings.component";
 import { PoliceAuthGuard } from "@services/police-auth-guard.service";
 import { AllApplicationsComponent } from "@components/police-representative/all-applications/all-applications.component";
+import { MyJobsComponent } from "@components/police-representative/my-jobs/my-jobs.component";
+import { PoliceSummaryComponent } from "@components/police-representative/police-summary/police-summary.component";
 
 const routes: Routes = [
   {
@@ -133,6 +135,18 @@ const routes: Routes = [
   {
     path: "sep/police/all-applications",
     component: AllApplicationsComponent,
+    canActivate: [PoliceAuthGuard, FeatureGuard],
+    data: { feature: "Sep" }
+  },
+  {
+    path: "sep/police/my-jobs",
+    component: MyJobsComponent,
+    canActivate: [PoliceAuthGuard, FeatureGuard],
+    data: { feature: "Sep" }
+  },
+  {
+    path: "sep/police/:specialEventId",
+    component: PoliceSummaryComponent,
     canActivate: [PoliceAuthGuard, FeatureGuard],
     data: { feature: "Sep" }
   },

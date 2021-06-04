@@ -4,60 +4,58 @@
     </p>
 
     <app-field label="Are you charging for drinks at your event?" [required]="true" [isFullWidth]="true">
-        <select formControlName="chargingForDrinks" class="form-control w-100">
+        <select formControlName="chargingForLiquorReason" class="form-control w-100">
             <option value=""></option>
-            <option value="recover_cost">Yes - To recover event operating costs</option>
-            <option value="money_raise">Yes - To raise money for a charitable purpose</option>
-            <option value="liquor_is_free">No - Drinks will be free of charge</option>
-            <option value="combination">Combination - Some drinks will be sold and some will be given away for free
+            <option value="RecoverCost">Yes - To recover event operating costs</option>
+            <option value="RaiseMoney">Yes - To raise money for a charitable purpose</option>
+            <option value="LiquorIsFree">No - Drinks will be free of charge</option>
+            <option value="Combination">Combination - Some drinks will be sold and some will be given away for free
             </option>
-            <option value="for_profit" style="display: none;">Yes - Municipal, Provincial, National and International
-                Exemption</option>
         </select>
     </app-field>
 
-    <section *ngIf="form.get('chargingForDrinks').value === 'money_raise'" class="p-3">
+    <section *ngIf="form.get('chargingForLiquorReason').value === 'RaiseMoney'" class="p-3">
         <app-field label="Enter the name of the non-profit organization receiving charitable proceeds from this event"
             [required]="true" [isFullWidth]="true">
-            <input formControlName="nameOfNonProfitOrg" type="text" class="form-control w-100">
+            <input formControlName="nonProfitName" type="text" class="form-control w-100">
         </app-field>
         <app-field label="Select the fund-raising purpose of your event " [required]="true" [isFullWidth]="true">
-            <select formControlName="fundraisingPurposeOfEvent" class="form-control w-100">
+            <select formControlName="fundraisingPurpose" class="form-control w-100">
                 <option value=""></option>
-                <option value="poverty">Relief of poverty</option>
-                <option value="education">Advancement of education</option>
-                <option value="religious">Religious purposes</option>
-                <option value="recreation">Recreation</option>
-                <option value="sports">Sports or athletics</option>
-                <option value="disabled">Aid to the disabled and/or handicapped</option>
-                <option value="culture">Advancement of culture</option>
-                <option value="youth_and_seniors">Benefit to youth or senior citizens</option>
-                <option value="other">Other purpose beneficial to the community</option>
+                <option value="ReliefOfPoverty">Relief of poverty</option>
+                <option value="AdvancementOfEducation">Advancement of education</option>
+                <option value="ReligiousPurposes">Religious purposes</option>
+                <option value="Recreation">Recreation</option>
+                <option value="SportsOrAthletics">Sports or athletics</option>
+                <option value="AidToTheDisabledAndOrHandicapped">Aid to the disabled and/or handicapped</option>
+                <option value="AdvancementOfCulture">Advancement of culture</option>
+                <option value="BenefitToYouthOrSeniorCitizens">Benefit to youth or senior citizens</option>
+                <option value="OtherPurposeBeneficialToTheCommunity">Other purpose beneficial to the community</option>
             </select>
         </app-field>
         <app-field label="How will the proceeds from this event be used? " [required]="true" [isFullWidth]="true">
-            <textarea formControlName="howWillProceedsBeUsed" class="w-100 form-control" rows="5"></textarea>
+            <textarea formControlName="howProceedsWillBeUsedDescription" class="w-100 form-control" rows="5"></textarea>
         </app-field>
-        <app-field label="Are you hosting this event as a GST registered organization?" [required]="true"
+        <app-field label="Are you entering into an exclusivity agreement with a manufacturer for your charity event?" [required]="true"
             [isFullWidth]="true">
-            <mat-radio-group formControlName="exclusivityAgreementWithAManufacturer">
+            <mat-radio-group formControlName="isManufacturingExclusivity">
                 <mat-radio-button value="true">Yes</mat-radio-button>
                 <mat-radio-button value="false">No</mat-radio-button>
             </mat-radio-group>
         </app-field>
     </section>
 
-    <app-field   *ngIf="form.get('chargingForDrinks').value && form.get('chargingForDrinks').value !== 'liquor_is_free'"
+    <app-field   *ngIf="form.get('chargingForLiquorReason').value && form.get('chargingForLiquorReason').value !== 'LiquorIsfree'"
     label="Are you hosting this event as a GST registered organization?" [required]="true"
         [isFullWidth]="true">
-        <mat-radio-group formControlName="hostingAsAGSTOrg">
+        <mat-radio-group formControlName="isGSTRegisteredOrg">
             <mat-radio-button value="true">Yes</mat-radio-button>
             <mat-radio-button value="false">No</mat-radio-button>
         </mat-radio-group>
     </app-field>
 
     <app-field
-        label="Are you entering into an exclusivity agreement with a manufacturer for your charity event?"
+        label="Are any of the liquor products at your event donated or have they been provided under consular privilege?"
         [required]="true">
         <mat-radio-group formControlName="donateOrConsularPrevLiqour">
             <mat-radio-button value="true">Yes</mat-radio-button>

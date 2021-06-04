@@ -23,7 +23,7 @@ import { KeyValue } from '@angular/common';
 import { FeatureFlagService } from '@services/feature-flag.service';
 import { FileUploaderComponent } from '@shared/components/file-uploader/file-uploader.component';
 import { ConnectionToNonMedicalStoresComponent } from '@components/account-profile/tabs/connection-to-non-medical-stores/connection-to-non-medical-stores.component';
-import { UPLOAD_FILES_MODE } from '@components/licences/licences.component';
+import { UPLOAD_FILES_MODE, INCOMPLETE } from '@components/licences/licences.component';
 import { ApplicationCancellationDialogComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
 //import { User } from '@models/user.model';
 import { DynamicsForm } from '../../../models/dynamics-form.model';
@@ -88,6 +88,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   htmlContent: ApplicationHTMLContent = <ApplicationHTMLContent>{};
   indigenousNations: { id: string, name: string }[] = [];
   readonly UPLOAD_FILES_MODE = UPLOAD_FILES_MODE;
+  readonly INCOMPLETE = INCOMPLETE;
   FormControlState = FormControlState;
   mode: string;
   account: Account;
@@ -110,6 +111,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   autocompletePoliceDurisdictions: any[];
   LGApprovalsFeatureIsOn: boolean;
   disableSubmitForLGINApproval: boolean;
+  disableIncomplete: boolean;
   INRequestInProgress: boolean;
   policeJurisdictionReqInProgress: boolean;
   saveForLaterInProgress: boolean;
@@ -798,7 +800,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     const saveData = this.form.value;
 
     // do not save if the form is in file upload mode
-    if (this.mode === UPLOAD_FILES_MODE) {
+    if (this.mode === UPLOAD_FILES_MODE || this.mode === INCOMPLETE) {
       // a delay is need by the deactivate guard
       const res: [boolean, Application] = [true, null];
       return of(res).pipe(delay(10));
@@ -952,6 +954,38 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.disableSubmitForLGINApproval = false;
     }
   }
+
+  resolveIncompleteness() {
+    const saveData = this.form.value;
+    this.disableIncomplete = true;
+    debugger;
+    // Only save if the data is valid
+
+      this.busy = forkJoin(
+        this.applicationDataService.updateApplication({
+          ...this.application,
+          ...this.normalizeFormData(),
+          applicationStatus: 'UnderReview'
+        }),
+        this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
+      ).pipe(takeWhile(() => this.componentActive))
+        .pipe(catchError(() => {
+          this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+          return of(false);
+        }))
+        .pipe(mergeMap(() => {
+          this.savedFormData = saveData;
+          this.updateApplicationInStore();
+          this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+          return of(true);
+        })).subscribe(res => {
+          this.saveComplete.emit(true);
+          this.snackBar.open('Application Submitted to the Branch for Review', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+          this.router.navigateByUrl('/dashboard');
+        });
+
+  }
+
 
   private proceedToSecurityScreening() {
     //send event to move to the next step of the multi-step
@@ -1506,4 +1540,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
     return formReference && tabs;
   }
+
+
+
 }

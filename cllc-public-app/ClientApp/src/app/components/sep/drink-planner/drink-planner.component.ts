@@ -4,6 +4,7 @@ import { FormBase } from '@shared/form-base';
 import { Subscription } from 'rxjs';
 import { faLightbulb } from '@fortawesome/free-regular-svg-icons';
 import configuration, { DrinkConfig, HOURS_OF_LIQUOR_SERVICE, SERVINGS_PER_PERSON } from './config';
+import { SepApplication } from '@models/sep-application.model';
 
 @Component({
   selector: 'app-drink-planner',
@@ -13,6 +14,19 @@ import configuration, { DrinkConfig, HOURS_OF_LIQUOR_SERVICE, SERVINGS_PER_PERSO
 export class DrinkPlannerComponent extends FormBase implements OnInit {
   // icons
   faLightbulb = faLightbulb;
+  _app: SepApplication;
+
+  @Input() set sepApplication(value: SepApplication) {
+    if (value) {
+      this._app = value;
+      this.form.patchValue(this._app);
+      this.form.get('totalMaximumNumberOfGuests').patchValue(this._app.totalMaximumNumberOfGuests);
+    }
+  }
+
+  get sepApplication() {
+    return this._app;
+  }
 
   @Input()
   config: Array<DrinkConfig> = configuration;
@@ -23,7 +37,7 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
   // drink planner form
   form = this.fb.group({
     hours: HOURS_OF_LIQUOR_SERVICE,
-    guests: 400,
+    totalMaximumNumberOfGuests: 400,
     beer: 0,
     wine: 0,
     spirits: 0,

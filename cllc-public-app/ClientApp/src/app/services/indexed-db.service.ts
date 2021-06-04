@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { SepApplication } from '@models/sep-application.model';
 import { SepLocation } from '@models/sep-location.model';
 import { SepSchedule } from '@models/sep-schedule.model';
-import { SepServiceArea } from '@models/sep-service-are.model';
+import { SepServiceArea } from '@models/sep-service-area.model';
 import Dexie, { PromiseExtended, Table } from 'dexie';
 
 @Injectable()
@@ -16,7 +16,7 @@ export class IndexedDBService {
   constructor() {
     this.db = new Dexie('SepApplicationDatabase');
     this.db.version(3).stores({
-      applications: '++localId, id, tempJobNumber,dateCreated,lastUpdated,eventName,applicantInfo,agreeToTnC,dateAgreedToTnC,stepsCompleted,eventStatus,totalServings,invoiceTrigger,eligibilityAtPrivateResidence,eligibilityMajorSignificance,eligibilityMajorSignificanceRational,eligibilityLocalSignificance,permitNumber,isTastingEvent,isBeerGarden,numMaxGuest',
+      applications: '++localId, id, tempJobNumber,dateCreated,lastUpdated,eventName,applicantInfo,agreeToTnC,dateAgreedToTnC,stepsCompleted,eventStatus,totalServings,invoiceTrigger,eligibilityAtPrivateResidence,isMajorSignificance,isMajorSignificanceRational,eligibilityLocalSignificance,permitNumber,isTastingEvent,isBeerGarden,numMaxGuest',
     });
     this.applications = this.db.table("applications");
 
