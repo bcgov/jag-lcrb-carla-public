@@ -8,6 +8,7 @@ import { SepApplicationSummary } from "@models/sep-application-summary.model";
 import { SepDrinkType } from "@models/sep-drink-type.model";
 import { SepPoliceMyJobs } from "@models/sep-police-my-jobs";
 import { SepPoliceHome } from "@models/sep-police-home";
+import { Contact } from "@models/contact.model";
 
 @Injectable()
 export class SpecialEventsDataService extends DataService {
@@ -48,7 +49,7 @@ export class SpecialEventsDataService extends DataService {
   }
 
   policeAssignSepApplication(id: string, assigneeId: string) {
-    return this.http.post<string>(`api/special-events/police/${id}/assign`, JSON.stringify(assigneeId) , { headers: this.headers })
+    return this.http.post<Contact>(`api/special-events/police/${id}/assign`, JSON.stringify(assigneeId) , { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
