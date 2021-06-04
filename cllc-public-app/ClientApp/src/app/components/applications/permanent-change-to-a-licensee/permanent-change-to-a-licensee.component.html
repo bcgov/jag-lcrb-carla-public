@@ -498,7 +498,7 @@
             <td>
               <mat-form-field class="ml-1 mr-2">
                 <mat-label>First Name</mat-label>
-                <input matInput type="text">
+                <input matInput type="text" formControlName="firstNameOld">
                 <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                   <mat-icon>close</mat-icon>
                 </button>
@@ -507,7 +507,7 @@
             <td>
               <mat-form-field class="example-form-field">
                 <mat-label>Last Name</mat-label>
-                <input matInput type="text">
+                <input matInput type="text" formControlName="lastNameOld">
                 <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                   <mat-icon>close</mat-icon>
                 </button>
@@ -521,7 +521,7 @@
             <td>
               <mat-form-field class="ml-1 mr-2">
                 <mat-label>First Name</mat-label>
-                <input matInput type="text">
+                <input matInput type="text" formControlName="firstNameNew">
                 <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                   <mat-icon>close</mat-icon>
                 </button>
@@ -530,7 +530,7 @@
             <td>
               <mat-form-field class="example-form-field">
                 <mat-label>Last Name</mat-label>
-                <input matInput type="text">
+                <input matInput type="text" formControlName="lastNameNew">
                 <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                   <mat-icon>close</mat-icon>
                 </button>
@@ -565,7 +565,7 @@
 
           <mat-form-field class="ml-1 mr-2">
             <mat-label>Company Name</mat-label>
-            <input matInput type="text">
+            <input matInput type="text" formControlName="description2">
             <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
               <mat-icon>close</mat-icon>
             </button>
@@ -575,7 +575,7 @@
 
           <mat-form-field class="ml-1 mr-2">
             <mat-label>New Company Name</mat-label>
-            <input matInput type="text">
+            <input matInput type="text" formControlName="description3">
             <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
               <mat-icon>close</mat-icon>
             </button>
@@ -698,7 +698,7 @@
         </span>
         <mat-form-field class="ml-1 mr-2">
           <mat-label>First Name</mat-label>
-          <input matInput type="text">
+          <input matInput type="text" formControlName="firstNameNew">
           <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
             <mat-icon>close</mat-icon>
           </button>
@@ -706,7 +706,7 @@
 
         <mat-form-field class="ml-1 mr-2">
           <mat-label>Last Name</mat-label>
-          <input matInput type="text">
+          <input matInput type="text" formControlName="lastNameNew">
           <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
             <mat-icon>close</mat-icon>
           </button>
@@ -740,7 +740,7 @@
         </span>
         <mat-form-field class="ml-1 mr-2">
           <mat-label>First Name</mat-label>
-          <input matInput type="text">
+          <input matInput type="text" formControlName="firstNameNew">
           <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
             <mat-icon>close</mat-icon>
           </button>
@@ -748,7 +748,7 @@
 
         <mat-form-field class="ml-1 mr-2">
           <mat-label>Last Name</mat-label>
-          <input matInput type="text">
+          <input matInput type="text" formControlName="lastNameNew">
           <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
             <mat-icon>close</mat-icon>
           </button>
