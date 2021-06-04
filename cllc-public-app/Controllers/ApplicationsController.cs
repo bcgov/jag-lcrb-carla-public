@@ -1153,8 +1153,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         subLicencetype.AdoxioLicencesubcategoryid);
             }
 
-            if (item.ApplicationStatus == AdoxioApplicationStatusCodes.PendingForLGFNPFeedback)
+            if (item.ApplicationStatus == AdoxioApplicationStatusCodes.PendingForLGFNPFeedback 
+                || item.ApplicationStatus == AdoxioApplicationStatusCodes.UnderReview) {
+    
                 application.Statuscode = (int?)item.ApplicationStatus;
+            }
 
             try
             {

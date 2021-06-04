@@ -5,6 +5,10 @@ import { Observable, of } from "rxjs";
 import { DataService } from "./data.service";
 import { SepApplication } from "@models/sep-application.model";
 import { SepApplicationSummary } from "@models/sep-application-summary.model";
+import { SepDrinkType } from "@models/sep-drink-type.model";
+import { SepPoliceMyJobs } from "@models/sep-police-my-jobs";
+import { SepPoliceHome } from "@models/sep-police-home";
+import { Contact } from "@models/contact.model";
 
 @Injectable()
 export class SpecialEventsDataService extends DataService {
@@ -14,9 +18,21 @@ export class SpecialEventsDataService extends DataService {
   }
 
 
-  getSpecialEvent(id: string): Observable<SepApplication[]> {
+  getSpecialEvent(id: string): Observable<SepApplication> {
     const apiPath = `api/special-events/${id}`;
-    return this.http.get<SepApplication[]>(apiPath, { headers: this.headers })
+    return this.http.get<SepApplication>(apiPath, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
+  getSubmittedApplications(): Observable<SepApplicationSummary[]> {
+    const apiPath = `api/special-events/current/submitted`;
+    return this.http.get<SepApplicationSummary[]>(apiPath, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
+  getSepDrinkTypes(): Observable<SepDrinkType[]> {
+    const apiPath = 'api/special-events/drink-types';
+    return this.http.get<SepDrinkType[]>(apiPath, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
@@ -25,7 +41,7 @@ export class SpecialEventsDataService extends DataService {
    * @param data - special event application data
    */
   createSepApplication(data: SepApplication) {
-    return this.http.post<SepApplication>("api/special-events/", data, { headers: this.headers })
+    return this.http.post<SepApplication>('api/special-events/', data, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
@@ -35,6 +51,21 @@ export class SpecialEventsDataService extends DataService {
    */
   updateSepApplication(data: SepApplication, id: string) {
     return this.http.put<SepApplication>(`api/special-events/${id}`, data, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
+  policeAssignSepApplication(id: string, assigneeId: string) {
+    return this.http.post<Contact>(`api/special-events/police/${id}/assign`, JSON.stringify(assigneeId) , { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
+  policeApproveSepApplication(id: string) {
+    return this.http.post<string>(`api/special-events/police/${id}/approve`, {} , { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
+  policeDenySepApplication(id: string) {
+    return this.http.post<string>(`api/special-events/police/${id}/deny`, {} , { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
@@ -54,37 +85,21 @@ export class SpecialEventsDataService extends DataService {
   }
 
   getPoliceApprovalSepApplications(): Observable<SepApplicationSummary[]> {
-    const mock1: SepApplicationSummary = {
-      specialEventId: '00000000-0000-0000-0000-00000000000',
-      eventStartDate: new Date('2021-10-25T19:20:48+00:00'),
-      dateSubmitted: new Date('2020-02-01T07:00:00+00:00'),
-      eventName: 'Annual Block Watch Party',
-      eventStatus: 999999,
-      typeOfEvent: 1,
-      maximumNumberOfGuests: 200,
-    };
+    const apiPath = `api/special-events/police/all`;
+    return this.http.get<SepApplicationSummary[]>(apiPath, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
 
-    const mock2: SepApplicationSummary = {
-      specialEventId: '11111111-1111-1111-1111-111111111111',
-      eventStartDate: new Date('2021-02-16T19:20:48+00:00'),
-      dateSubmitted: new Date('2020-03-01T07:00:00+00:00'),
-      eventName: 'Office Christmas Party',
-      eventStatus: 999999,
-      typeOfEvent: 1,
-      maximumNumberOfGuests: 50,
-    };
+  getPoliceApprovalMySepApplications(): Observable<SepPoliceMyJobs> {
+    const apiPath = `api/special-events/police/my`;
+    return this.http.get<SepPoliceMyJobs>(apiPath, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
 
-    const mock3: SepApplicationSummary = {
-      specialEventId: '22222222-2222-2222-2222-222222222222',
-      eventStartDate: new Date('2021-06-20T19:20:48+00:00'),
-      dateSubmitted: new Date('2020-08-11T07:00:00+00:00'),
-      eventName: 'Community Event',
-      eventStatus: 999999,
-      typeOfEvent: 1,
-      maximumNumberOfGuests: 1300,
-    };
-
-    return of([mock1, mock2, mock3]);
+  getPoliceHome(): Observable<SepPoliceHome> {
+    const apiPath = `api/special-events/police/home`;
+    return this.http.get<SepPoliceHome>(apiPath, { headers: this.headers })
+      .pipe(catchError(this.handleError));
   }
 }
 

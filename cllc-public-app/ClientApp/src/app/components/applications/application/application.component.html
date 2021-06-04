@@ -1,7 +1,7 @@
 <mat-progress-bar class="mt-1" *ngIf="!dataLoaded" mode="indeterminate"></mat-progress-bar>
 <div *ngIf="application && account && dataLoaded">
 <ng-template #applicationContent>
-<div *ngIf="account?.businessType" [ngClass]="{'hide': mode === UPLOAD_FILES_MODE}">
+<div *ngIf="account?.businessType" [ngClass]="{'hide': mode === UPLOAD_FILES_MODE || mode === INCOMPLETE}">
 
 <div [formGroup]="form" style="padding-left: 45px; position: relative">
   <!-- Title -->
@@ -11,13 +11,13 @@
   </h1>
   <h1 class="ngtest-page-title"
       *ngIf="this.isOpenedByLGForApproval && isShowLGINApproval">
-    Provide Comment on
+    Provide Comment on {{application?.applicationType?.name}}
     Application
   </h1>
   <h1 class="ngtest-page-title"
       *ngIf="this.isOpenedByLGForApproval && application?.applicationType.isShowLGZoningConfirmation">
     Provide
-    Confirmation of Zoning
+    Confirmation of Zoning for {{application?.applicationType?.name}}
   </h1>
 </div>
 
@@ -2685,6 +2685,61 @@
     <br>
     <hr>
   </div>
+</div>
+
+<div [ngClass]="{'normal-mode': mode !== INCOMPLETE}">
+  <div [formGroup]="form" style="padding-left: 45px; position: relative">
+    <h1 *ngIf="application">{{application?.applicationType?.name}} Is Missing Required Information</h1>
+  </div>
+  <div *ngIf="application" class="application-wrapper">
+
+
+      <p>Your {{application?.applicationType?.name}} submission (Job No. {{application?.jobNumber}}) has been reviewed by the Branch and is missing information that is required for it to be processed. Please see the attached letter that details the missing information.</p>
+      <p><strong>Note: Your application will not be processed while required information is still outstanding.</strong></p>
+
+    <section>
+      <h3>
+      <app-file-uploader *ngIf="application?.id" documentType="Incomplete"
+                         fileTypes="FILE MUST BE IN PDF FORMAT."
+                         [disableUploads]="true"
+                         [enableFileDeletion]="false" [multipleFiles]="true"
+                         entityName="application" [useDocumentTypeForName]="true"
+                          [entityId]="application?.id"
+                         >
+      </app-file-uploader>
+      </h3>
+    </section>
+    <section>
+      <h3>Add Required Information:</h3>
+      <p>Use the upload box to provide the information requested in the letter above.</p>
+      <app-file-uploader *ngIf="application?.id" documentType="Requested Info"
+      fileTypes="FILE MUST BE IN PDF FORMAT."
+      [disableUploads]="false"
+      [enableFileDeletion]="true" [multipleFiles]="true"
+      entityName="application" [useDocumentTypeForName]="true"
+       [entityId]="application?.id"
+      >
+</app-file-uploader>
+    </section>
+    <hr>
+    <section>
+      <button mat-raised-button  color="secondary" style="margin-right: 10px;"
+      (click)="saveForLater()" [disabled]="saveForLaterInProgress">
+      <span>
+        <fa-icon [icon]="faSave"></fa-icon>
+        SAVE FOR LATER
+      </span>
+      <mat-progress-bar *ngIf="saveForLaterInProgress" mode="indeterminate"></mat-progress-bar>
+      </button>
+
+      <button mat-raised-button class="ng-test-submit-incomplete" color="primary" (click)="resolveIncompleteness();">
+        <span>SUBMIT</span>
+      </button>
+      <mat-progress-bar *ngIf="disableIncomplete" mode="indeterminate"></mat-progress-bar>
+    </section>
+
+  </div>
+
 </div>
 </ng-template>
 

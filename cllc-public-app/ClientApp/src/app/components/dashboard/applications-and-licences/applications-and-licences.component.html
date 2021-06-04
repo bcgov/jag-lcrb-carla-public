@@ -417,15 +417,11 @@
 
 
   </td>
-  <!--
-  <td style="padding: 10px; width: 110px;">
-    {{item.modifiedon | date:'mediumDate'}}
-  </td>
-  -->
+
   <td style="background-color: #E1E8F2; padding: 10px;">
     <div style="font-weight: 600; text-transform: uppercase;">
       <span *ngIf="!isApprovedByLGAndNotSubmitted(item)">
-        {{getApplicationStatusText(item.applicationStatus)}}
+        {{item.applicationStatus}}
       </span>
 
       <span *ngIf="isApprovedByLGAndNotSubmitted(item)">
@@ -433,27 +429,20 @@
       </span>
 
     </div>
-    <p *ngIf="item.applicationStatus === 'Processed'">
+    <p *ngIf="item.applicationStatus === 'Under Review'">
       This application has been received and is being reviewed by the LCRB.
     </p>
     <p *ngIf="item.applicationStatus === 'Not Submitted'">
       This application has not yet been submitted.
     </p>
+
     <p *ngIf="item.applicationStatus === 'Relocation Initiated'">
-      This relocation application has not yet been submitted
+      This relocation application has not yet been submitted.
     </p>
     <p *ngIf="item.applicationStatus === 'Transfer Initiated'">
-      This transfer application has not yet been submitted
+      This transfer application has not yet been submitted.
     </p>
-    <p *ngIf="item.applicationStatus === 'Application Under Review'">
-      Your application has been received and is being reviewed by the LCRB.
-    </p>
-    <p *ngIf="item.applicationStatus === 'Transfer Application Under Review'">
-      Your transfer application has been received and is being reviewed by the LCRB.
-    </p>
-    <p *ngIf="item.applicationStatus === 'Relocation Application Under Review'">
-      Your relocation application has been received and is being reviewed by the LCRB.
-    </p>
+
     <p *ngIf="item.applicationStatus === 'Pending Licence Fee'">
 
       <a href="javascript:void(0);" (click)="payLicenceFee(item)" class="missing">
@@ -465,19 +454,19 @@
 
     </p>
 
-    <p *ngIf="item.applicationStatus === 'Application Incomplete'">
-      Your application is incomplete. You must provide additional information for it to be processed.
+    <p *ngIf="item.applicationStatus === 'Incomplete'">
+      Your application has been found to be incomplete. You must provide additional information for it to be processed.
     </p>
     <div *ngIf="item.applicationStatus === 'Pending External Review'">
       <p *ngIf="!item.lgHasApproved">
-        Your application has been sent for local government review.
+        Your application has been sent for local government or indigenous nation review.
       </p>
       <p *ngIf="item.lgHasApproved">
-        Your application has been reviewed by the local government.
+        Your application has been reviewed by the local government or indigenous nation.
       </p>
-      <div *ngIf="item.dateApplicantSentToLG">
+      <!--div *ngIf="item.dateApplicantSentToLG">
         <strong>Date Sent to LG</strong>: {{item.dateApplicantSentToLG | date : 'dd MMM yyyy'}}
-      </div>
+      </div-->
     </div>
   </td>
   <td style="background-color: #E1E8F2; padding: 10px;">
@@ -499,16 +488,15 @@
 
     <div *ngIf="item.applicationStatus === 'Not Submitted'">
 
-        <a *ngIf="item.applicationTypeName !== ApplicationTypeNames.CRSRenewal
-                  && item.applicationTypeName !== ApplicationTypeNames.LiquorRenewal
-                  && !item.isPaid"
-           [routerLink]="getApplicationLink(item)" id="completeApp{{item.id}}">
-          <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px;"></fa-icon>
-          <span>Complete Application</span>
-        </a>
+      <a *ngIf="item.applicationTypeName !== ApplicationTypeNames.CRSRenewal
+                      && item.applicationTypeName !== ApplicationTypeNames.LiquorRenewal"
+        [routerLink]="getApplicationLink(item)" id="completeApp{{item.id}}">
+        <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px;"></fa-icon>
+        <span>Complete Application</span>
+      </a>
 
       <a *ngIf="item.applicationTypeName === ApplicationTypeNames.CRSRenewal || item.applicationTypeName === ApplicationTypeNames.LiquorRenewal || item.applicationTypeName === ApplicationTypeNames.MarketingRenewal"
-         routerLink="/renew-licence/{{getRenewalType(item.applicationTypeName)}}/{{item.id}}">
+        routerLink="/renew-licence/{{getRenewalType(item.applicationTypeName)}}/{{item.id}}">
         <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px;"></fa-icon>
         <span>Complete Renewal</span>
       </a>
@@ -569,12 +557,20 @@
     </div>
 
     <div
-      *ngIf="['Relocation Application Under Review','Transfer Application Under Review', 'Application Under Review', 'Processed'].indexOf(item.applicationStatus) !== -1">
+      *ngIf="['Relocation Application Under Review','Transfer Application Under Review', 'Under Review', 'Processed'].indexOf(item.applicationStatus) !== -1">
       <a style="margin-top: 5px;" href="javascript:void(0);" (click)="uploadMoreFiles(item)">
         <fa-icon [icon]="faPlus" style="color: #1a5a96; margin-right: 10px;"></fa-icon>
         <span>Add Supporting Documents</span>
       </a>
     </div>
+
+    <div
+    *ngIf="['Incomplete'].indexOf(item.applicationStatus) !== -1">
+    <a style="margin-top: 5px;" href="javascript:void(0);" (click)="resolveIncompleteness(item)">
+      <fa-icon [icon]="faPlus" style="color: #1a5a96; margin-right: 10px;"></fa-icon>
+      <span>Resolve Incompleteness</span>
+    </a>
+  </div>
 
   </td>
   <td>

@@ -1,4 +1,4 @@
-<div class="wrapp">
+<div class="event-form">
     <h1 class="mat-heading">Event Location</h1>
 
     <span class="mat-title">{{sepApplication?.eventName}}</span>
@@ -30,7 +30,7 @@
                 <section>
                     <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
                     <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
-                        <section *ngIf="form.get('sepCity').value.id">
+                        <section *ngIf="form.get('sepCity')?.value?.id">
 
                             <mat-card class="mb-3">
                                 <label for="">Selected City </label>
@@ -46,23 +46,23 @@
                             </mat-card>
                         </section>
 
-                        <section *ngIf="!form.get('sepCity').value.id">
+                        <section *ngIf="!form.get('sepCity')?.value?.id">
                             No City selected
                         </section>
                     </div>
                 </section>
             </section>
             <div>
-                <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip.toggle()" matTooltip="All locations in the application must be in the same municipality. You may submit more than one application 
+                <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip.toggle()" matTooltip="All locations in the application must be in the same municipality. You may submit more than one application
                     if your event is in multiple municipalities." #tooltip="matTooltip">
                 </fa-icon>
             </div>
         </div>
 
-        <app-field label="How many people will attend the event?" [required]="true"
+        <!--app-field label="How many people will attend the event?" [required]="true"
             [valid]="isValidOrNotTouched('maximumNumberOfGuests')" errorMessage="Please enter a value">
             <input type="number" class="form-control" formControlName="maximumNumberOfGuests">
-        </app-field>
+        </app-field-->
 
         <app-field label="Is this an annual event?" [required]="true" [valid]="isValidOrNotTouched('isAnnualEvent')"
             errorMessage="Please choose a value">
@@ -119,10 +119,15 @@
                                 errorMessage="Postal code is in the wrong format 'X3X 9Y9'">
                                 <input type="text" formControlName="eventLocationPostalCode" class="form-control">
                             </app-field>
-                            <app-field label="Maximum number of guests at this location at any time" [required]="true"
-                                [valid]="!location.get('locationMaxGuests').touched || location.get('locationMaxGuests').valid"
+                            <app-field label="Maximum number of guests at this location (including service areas) at any time" [required]="true"
+                                [valid]="!location.get('maximumNumberOfGuests').touched || location.get('maximumNumberOfGuests').valid"
                                 errorMessage="Maximum number of guests is required">
-                                <input type="number" class="form-control" formControlName="locationMaxGuests">
+                                <input type="number" class="form-control" formControlName="maximumNumberOfGuests">
+                            </app-field>
+                            <app-field label="Number of minors (people under the age of 19) at this location at any time" [required]="true"
+                            [valid]="!location.get('locationNumberMinors').touched || location.get('locationNumberMinors').valid"
+                            errorMessage="Maximum number of minors is required">
+                            <input type="number" class="form-control" formControlName="locationNumberMinors">
                             </app-field>
 
                             <section formGroupName="serviceAreas">
@@ -175,16 +180,15 @@
                                                             </mat-radio-button>
                                                         </mat-radio-group>
                                                     </app-field>
+                                                    <app-field label="Where is the service area location?">
+                                                    <select class="form-control setting-select" formControlName="setting" >
+                                                        <option value=""></option>
+                                                        <option value="Indoors">Indoors</option>
+                                                        <option value="Outdoors">Outdoors</option>
+                                                        <option value="BothOutdoorsAndIndoors">Both Indoors & Outdoors</option>
+                                                    </select>
+                                                  </app-field>
 
-                                                    <mat-checkbox color="primary" formControlName="isIndoors">Service
-                                                        area is indoors
-                                                    </mat-checkbox> <br>
-                                                    <mat-checkbox color="primary" formControlName="isOutdoors">Service
-                                                        area is outdoors
-                                                    </mat-checkbox> <br>
-                                                    <mat-checkbox color="primary" formControlName="isBothOutdoorIndoor">
-                                                        Service area is
-                                                        both indoors and outdoors</mat-checkbox>
                                                 </section>
                                                 <div>
                                                     <button mat-raised-button color="warn"
@@ -200,7 +204,7 @@
                                 </mat-card>
                             </section>
 
-                            
+
 
                             <mat-card formGroupName="eventDates" class="mat-elevation-z0 mt-3">
                                 <h3>Event Date(s)</h3>
@@ -316,7 +320,7 @@
                                     </mat-expansion-panel>
                                 </mat-accordion>
                                 <button mat-raised-button color="secondary" class="mt-3"
-                                    (click)="addEventDate({}, area)">Add Event Date</button>
+                                    (click)="addEventDate({}, location)">Add Event Date</button>
                             </mat-card>
                         </mat-card>
                         <div>

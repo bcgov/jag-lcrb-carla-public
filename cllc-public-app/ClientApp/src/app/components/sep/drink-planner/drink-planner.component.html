@@ -19,9 +19,10 @@
         <input class="form-control" type="number" formControlName="hours">
       </app-field>
       <app-field class="col-md-4 col-xs-12" label="Number of Guests" [required]="true" [isFullWidth]="false"
-        errorMessage="Please enter the number of guests (must be a number)" [valid]="isValidOrNotTouched('guests')">
-        <input class="form-control" type="number" formControlName="guests">
+        errorMessage="Please enter the number of guests (must be a number)" [valid]="isValidOrNotTouched('totalMaximumNumberOfGuests')">
+        <input class="form-control" type="number" formControlName="totalMaximumNumberOfGuests">
       </app-field>
+
     </div>
 
     <hr>

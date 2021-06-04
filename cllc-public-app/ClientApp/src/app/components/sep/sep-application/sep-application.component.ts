@@ -1,18 +1,14 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AppState } from '@app/app-state/models/app-state';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
-import { ApplicantComponent } from './applicant/applicant.component';
-import { EligibilityComponent } from './eligibility/eligibility.component';
-import { EventComponent } from './event/event.component';
-import { LiquorComponent } from './liquor/liquor.component';
-import { SummaryComponent } from './summary/summary.component';
 import { Account } from '@models/account.model';
 import { ActivatedRoute } from '@angular/router';
 import { IndexedDBService } from '@services/indexed-db.service';
 import { SepApplication } from '@models/sep-application.model';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { environment } from 'environments/environment';
+import { SpecialEventsDataService } from '@services/special-events-data.service';
 
 export const SEP_APPLICATION_STEPS = ["applicant", "eligibility", "event", "liquor", "summary"];
 
@@ -27,7 +23,7 @@ export class SepApplicationComponent implements OnInit {
   localId: number;
   isFree: boolean = false;
   hasLGApproval: boolean = false;
-
+  isDevEnv = environment.development;
 
   stepType: "summary";
   application: SepApplication;
@@ -49,6 +45,7 @@ export class SepApplicationComponent implements OnInit {
   constructor(private store: Store<AppState>,
     private db: IndexedDBService,
     private cd: ChangeDetectorRef,
+    private sepDataService: SpecialEventsDataService,
     private route: ActivatedRoute) {
     this.store.select(state => state.currentAccountState.currentAccount)
       .subscribe(account => this.account = account);
@@ -60,18 +57,16 @@ export class SepApplicationComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.getApplication();
-
   }
 
-  getApplication() {
+  async getApplication() {
     if (this.localId) {
-      this.db.getSepApplication(this.localId)
+      await this.db.getSepApplication(this.localId)
         .then(app => {
           // make sure the steps completed array is setup
           app.stepsCompleted = app.stepsCompleted || [];
-          this.application = app;
+          this.application = Object.assign(new SepApplication(), app);
         }, err => {
           console.error(err);
         });
@@ -93,15 +88,54 @@ export class SepApplicationComponent implements OnInit {
     return completed;
   }
 
-  completeStep(step: string) {
+
+  async saveToAPI(): Promise<void> {
+    const appData = await this.db.getSepApplication(this.localId);
+    if (appData.id) { // do an update ( the record exists in dynamics)
+      const result = await this.sepDataService.updateSepApplication({ ...appData, invoiceTrigger: true } as SepApplication, appData.id)
+        .toPromise();
+      if (result.localId) {
+        await this.db.applications.update(result.localId, result);
+      }
+    } else {
+      const result = await this.sepDataService.createSepApplication({ ...appData, invoiceTrigger: true } as SepApplication)
+        .toPromise();
+      if (result.localId) {
+        await this.db.applications.update(result.localId, result);
+        this.localId = result.localId;
+      }
+    }
+  }
+
+
+  completeStep(step: string, stepper: any, data: SepApplication) {
     const steps = this?.application?.stepsCompleted;
     if (steps && step && steps.indexOf(step) == -1) {
       this.application.stepsCompleted.push(step);
     }
+    this.saveToDb(data);
     this.cd.detectChanges();
+    if (environment.development) {
+      this.saveToAPI().then(_ => { // Save to dynamics on transitions on DEV
+        stepper.next();
+      });
+    } else {
+      stepper.next();
+    }
   }
 
   selectionChange(event) {
   }
 
+  async saveToDb(data) {
+    let localId: number = null;
+    if (data.localId) {
+      await this.db.applications.update(data.localId, data);
+    } else {
+      data.dateCreated = new Date();
+      this.localId = await this.db.saveSepApplication(data);
+    }
+    await this.getApplication();
+    return localId;
+  }
 }

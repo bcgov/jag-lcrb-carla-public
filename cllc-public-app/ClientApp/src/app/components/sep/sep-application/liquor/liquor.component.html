@@ -11,16 +11,16 @@
     </p>
 
     <mat-divider></mat-divider>
-    
+
     <mat-tab-group class="serving-slide" [selectedIndex]="selectedIndex" mat-align-tabs="start">
         <mat-tab label="Total Servings">
-            <app-total-servings [totalServings]="sepApplication?.totalServings"  (saved)="updateValue($event); selectedIndex = 1;"></app-total-servings>
+            <app-total-servings [application]="sepApplication" (saved)="updateValue($event); selectedIndex = 1;"></app-total-servings>
         </mat-tab>
         <mat-tab label="Selling Drinks">
-            <app-selling-drinks (back)="selectedIndex = 0" (saved)="updateValue($event); selectedIndex = 2;"></app-selling-drinks>
+            <app-selling-drinks [application]="sepApplication" (back)="selectedIndex = 0" (saved)="updateValue($event); selectedIndex = 2;"></app-selling-drinks>
         </mat-tab>
         <mat-tab label="Drink Amounts">
-            <app-drink-amounts (back)="selectedIndex = 1"  (saved)="updateValue($event); save();"></app-drink-amounts>
+            <app-drink-amounts [application]="sepApplication" (back)="selectedIndex = 1"  (saved)="updateValue($event); save();"></app-drink-amounts>
         </mat-tab>
     </mat-tab-group>
 </div>

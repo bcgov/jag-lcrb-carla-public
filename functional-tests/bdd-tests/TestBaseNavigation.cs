@@ -46,8 +46,24 @@ namespace bdd_tests
         [And(@"I click on the Licences tab")]
         public void ClickLicencesTab()
         {
-            var uiRequestChange = ngDriver.FindElement(By.LinkText("Licences & Authorizations"));
-            JavaScriptClick(uiRequestChange);
+            NgWebElement uiRequestedLink = null;
+            for (var i = 0; i < 60; i++)
+                try
+                {
+                    var names = ngDriver.FindElements(By.LinkText("Licences & Authorizations"));
+                    if (names.Count > 0)
+                    {
+                        uiRequestedLink = names[0];
+                        break;
+                    }
+
+                    Thread.Sleep(2000);
+                }
+                catch (Exception)
+                {
+                }
+
+            JavaScriptClick(uiRequestedLink);
         }
 
 
@@ -207,7 +223,22 @@ namespace bdd_tests
         public void ContinueToApplicationButton()
         {
             // click on the Continue to Application button
-            var uiContinueButton = ngDriver.FindElement(By.CssSelector("button#continueToApp"));
+            NgWebElement uiContinueButton = null;
+            for (var i = 0; i < 20; i++)
+            {
+                try
+                {
+                    var names = ngDriver.FindElements(By.CssSelector("button#continueToApp"));
+                    if (names.Count > 0)
+                    {
+                        uiContinueButton = names[0];
+                        break;
+                    }
+                }
+                catch (Exception)
+                { }
+                Thread.Sleep(1000);
+            }
             var executor = (IJavaScriptExecutor)ngDriver.WrappedDriver;
             executor.ExecuteScript("arguments[0].scrollIntoView(true);", uiContinueButton);
             uiContinueButton.Click();
@@ -247,21 +278,21 @@ namespace bdd_tests
                 case "Catering":
                     // click on the Catering Start Application button
                     var startCatering =
-                        ngDriver.WrappedDriver.FindElement(By.CssSelector("button[id='startCatering']"));
+                        ngDriver.FindElement(By.CssSelector("button[id='startCatering']"));
                     JavaScriptClick(startCatering);
                     break;
                 case "a Cannabis Retail Store":
                     // click on the Cannabis Start Application button
-                    var startCRS = ngDriver.WrappedDriver.FindElement(By.CssSelector("button[id='startCRS']"));
+                    var startCRS = ngDriver.FindElement(By.CssSelector("button[id='startCRS']"));
                     JavaScriptClick(startCRS);
                     break;
                 case "a Rural Agency Store":
                     // click on the Rural Store Start Application button
-                    var startRas = ngDriver.WrappedDriver.FindElement(By.CssSelector("button[id='startRAS']"));
+                    var startRas = ngDriver.FindElement(By.CssSelector("button[id='startRAS']"));
                     JavaScriptClick(startRas);
                     break;
                 case "a Manufacturer Licence":
-                    var startMfg = ngDriver.WrappedDriver.FindElement(By.CssSelector("button[id='startMfg']"));
+                    var startMfg = ngDriver.FindElement(By.CssSelector("button[id='startMfg']"));
                     JavaScriptClick(startMfg);
                     break;
                 case "a Cannabis Marketing Licence":

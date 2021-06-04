@@ -38,27 +38,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        public int? Top130 { get; set; }
+        public int? Top131 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        public int? Skip130 { get; set; }
+        public int? Skip131 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        public bool? Count130 { get; set; }
+        public bool? Count131 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        public string Filter130 { get; set; }
+        public string Filter131 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        public string Search130 { get; set; }
+        public string Search131 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client subscription.
@@ -616,6 +616,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IStatuscounters Statuscounters { get; private set; }
 
         /// <summary>
+        /// Gets the ISuitabilities.
+        /// </summary>
+        public virtual ISuitabilities Suitabilities { get; private set; }
+
+        /// <summary>
         /// Gets the ITaxandaccountings.
         /// </summary>
         public virtual ITaxandaccountings Taxandaccountings { get; private set; }
@@ -1066,6 +1071,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Specialeventschedules = new Specialeventschedules(this);
             Specialeventtandcs = new Specialeventtandcs(this);
             Statuscounters = new Statuscounters(this);
+            Suitabilities = new Suitabilities(this);
             Taxandaccountings = new Taxandaccountings(this);
             Termsconditionslimitationspresets = new Termsconditionslimitationspresets(this);
             Territories = new Territories(this);

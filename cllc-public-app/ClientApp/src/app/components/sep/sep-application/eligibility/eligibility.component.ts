@@ -18,7 +18,7 @@ export class EligibilityComponent extends FormBase implements OnInit {
   _appID: number;
   sepApplication: SepApplication;
   @Output()
-  saveComplete = new EventEmitter<boolean>();
+  saveComplete = new EventEmitter<SepApplication>();
   faQuestionCircle = faQuestionCircle;
   form: FormGroup;
   showValidationMessages: boolean;
@@ -30,11 +30,14 @@ export class EligibilityComponent extends FormBase implements OnInit {
   @Input()
   set localId(value: number) {
     this._appID = value;
+    if (!value) {
+      return;
+    }
     //get the last saved application
     this.db.getSepApplication(value)
       .then(app => {
         this.sepApplication = app;
-        if (this.form) {
+        if (this.form && app) {
           this.form.patchValue(this.sepApplication);
         }
       });
@@ -48,78 +51,78 @@ export class EligibilityComponent extends FormBase implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      eligibilityAtPrivateResidence: ['', [Validators.required]],
-      eligibilityOnPublicProperty: ['', [Validators.required]],
-      eligibilityMajorSignificance: [false, [Validators.required]],
-      eligibilityMajorSignificanceRationale: [''],
-      eligibilityLocalSignificance: [false, [Validators.required]],
+      isPrivateResidence: ['', [Validators.required]],
+      isOnPublicProperty: ['', [Validators.required]],
+      isMajorSignificance: [false, [Validators.required]],
+      majorSignificanceRationale: [''],
+      isLocalSignificance: ['', [Validators.required]],
       eventStartDate: ['', [Validators.required]],
-      eligibilityPrivateOrPublic: ['', [Validators.required]],
-      eligibilityResponsibleBevServiceNumber: ['', [Validators.required]],
-      eligibilityResponsibleBevServiceNumberDoesNotHave: [false],
-      eventDescription: ['', [Validators.required, Validators.maxLength(255)]],
-      eligibilityChargingAdmission: ['', [Validators.required]],
-      eligibilityLocalIsLicensed: [null, [Validators.required]],
-      hostingOrganizationName: [''],
-      hostingOrganizationAddress: [''],
-      hostingOrganizationCategory: [''],
+      privateOrPublic: ['', [Validators.required]],
+      responsibleBevServiceNumber: ['', [Validators.required]],
+      responsibleBevServiceNumberDoesNotHave: [false],
+      specialEventDescription: ['', [Validators.required, Validators.maxLength(255)]],
+      admissionFee: ['', [Validators.required]],
+      isLocationLicensed: [null, [Validators.required]],
+      hostOrganizationName: [''],
+      hostOrganizationAddress: [''],
+      hostOrganizationCategory: [''],
     });
 
-    this.form.get('eligibilityPrivateOrPublic').valueChanges
+    this.form.get('privateOrPublic').valueChanges
       .pipe(distinctUntilChanged())
       .subscribe(selectedValue => {
         // if not Private – Family and invited friends only
-        if (selectedValue && selectedValue !== '1') {
-          this.form.get('hostingOrganizationName').setValidators([Validators.required]);
-          this.form.get('hostingOrganizationAddress').setValidators([Validators.required]);
-          this.form.get('hostingOrganizationCategory').setValidators([Validators.required]);
+        if (selectedValue && selectedValue !== 'Family') {
+          this.form.get('hostOrganizationName').setValidators([Validators.required]);
+          this.form.get('hostOrganizationAddress').setValidators([Validators.required]);
+          this.form.get('hostOrganizationCategory').setValidators([Validators.required]);
         } else {
-          this.form.get('hostingOrganizationName').clearValidators();
-          this.form.get('hostingOrganizationName').reset();
-          this.form.get('hostingOrganizationAddress').clearValidators();
-          this.form.get('hostingOrganizationAddress').reset();
-          this.form.get('hostingOrganizationCategory').clearValidators();
-          this.form.get('hostingOrganizationCategory').reset();
+          this.form.get('hostOrganizationName').clearValidators();
+          this.form.get('hostOrganizationName').reset();
+          this.form.get('hostOrganizationAddress').clearValidators();
+          this.form.get('hostOrganizationAddress').reset();
+          this.form.get('hostOrganizationCategory').clearValidators();
+          this.form.get('hostOrganizationCategory').reset();
         }
       });
 
-    this.form.get('eligibilityMajorSignificance').valueChanges
+    this.form.get('isMajorSignificance').valueChanges
       .pipe(distinctUntilChanged())
       .subscribe((hasMajorSignificance: boolean) => {
         if (hasMajorSignificance) {
-          this.form.get('eligibilityMajorSignificanceRationale').setValidators([Validators.required]);
+          this.form.get('majorSignificanceRationale').setValidators([Validators.required]);
         } else {
-          this.form.get('eligibilityMajorSignificanceRationale').clearValidators();
-          this.form.get('eligibilityMajorSignificanceRationale').reset();
+          this.form.get('majorSignificanceRationale').clearValidators();
+          this.form.get('majorSignificanceRationale').reset();
         }
       });
 
 
-    // this.form.get('eligibilityResponsibleBevServiceNumber').valueChanges
+    // this.form.get('responsibleBevServiceNumber').valueChanges
     //   .pipe(distinctUntilChanged())
     //   .subscribe(value => {
     //     if (value) {
     //       // if the value is entered disable the checkbox and clear its validation
-    //       this.form.get('eligibilityResponsibleBevServiceNumberDoesNotHave').clearValidators();
-    //       this.form.get('eligibilityResponsibleBevServiceNumberDoesNotHave').reset();
-    //       this.form.get('eligibilityResponsibleBevServiceNumberDoesNotHave').disable();
+    //       this.form.get('responsibleBevServiceNumberDoesNotHave').clearValidators();
+    //       this.form.get('responsibleBevServiceNumberDoesNotHave').reset();
+    //       this.form.get('responsibleBevServiceNumberDoesNotHave').disable();
     //     } else {
     //       // enable the checkbox and its validation
-    //       this.form.get('eligibilityResponsibleBevServiceNumberDoesNotHave').setValidators([this.customRequiredCheckboxValidator()]);
-    //       this.form.get('eligibilityResponsibleBevServiceNumberDoesNotHave').enable();
+    //       this.form.get('responsibleBevServiceNumberDoesNotHave').setValidators([this.customRequiredCheckboxValidator()]);
+    //       this.form.get('responsibleBevServiceNumberDoesNotHave').enable();
     //     }
     //   });
 
-    // this.form.get('eligibilityResponsibleBevServiceNumberDoesNotHave').valueChanges
+    // this.form.get('responsibleBevServiceNumberDoesNotHave').valueChanges
     //   .pipe(distinctUntilChanged())
     //   .subscribe(value => {
     //     if (value === false) {
-    //       this.form.get('eligibilityResponsibleBevServiceNumber').setValidators([Validators.required, Validators.minLength(6), Validators.maxLength(6)]);
-    //       this.form.get('eligibilityResponsibleBevServiceNumber').enable();
+    //       this.form.get('responsibleBevServiceNumber').setValidators([Validators.required, Validators.minLength(6), Validators.maxLength(6)]);
+    //       this.form.get('responsibleBevServiceNumber').enable();
     //     } else {
-    //       this.form.get('eligibilityResponsibleBevServiceNumber').clearValidators();
-    //       this.form.get('eligibilityResponsibleBevServiceNumber').reset();
-    //       this.form.get('eligibilityResponsibleBevServiceNumber').disable();
+    //       this.form.get('responsibleBevServiceNumber').clearValidators();
+    //       this.form.get('responsibleBevServiceNumber').reset();
+    //       this.form.get('responsibleBevServiceNumber').disable();
     //     }
     //   });
 
@@ -132,14 +135,14 @@ export class EligibilityComponent extends FormBase implements OnInit {
   isValid() {
     this.markControlsAsTouched(this.form);
     this.validationMessages = this.listControlsWithErrors(this.form, {});
-    return this.form.valid && !this.form.get('eligibilityAtPrivateResidence').value === true;
+    return this.form.valid && !this.form.get('isPrivateResidence').value === true;
   }
 
-  save() {
+  getFormData(): SepApplication {
     const data = {
       ...this.sepApplication,
       lastUpdated: new Date(),
-      status: 'unsubmitted',
+      eventStatus: 'Draft',
       stepsCompleted: (steps => {
         const step = 'eligibility';
         if (steps.indexOf(step) === -1) {
@@ -149,27 +152,15 @@ export class EligibilityComponent extends FormBase implements OnInit {
       })(this?.sepApplication?.stepsCompleted || []),
       ...this.form.value
     } as SepApplication;
-
-    if (data.localId) {
-      this.db.applications.update(data.localId, data);
-    } else {
-      console.error("The id should already exist at this point.")
-    }
+    return data;
   }
 
   next() {
     this.showValidationMessages = false;
     if (this.isValid()) {
-      this.save();
-      this.saveComplete.emit(true);
+      this.saveComplete.emit(this.getFormData());
     } else {
       this.showValidationMessages = true;
     }
   }
-
-  saveForLater() {
-    this.save();
-    this.router.navigateByUrl('/sep/my-applications')
-  }
-
 }
