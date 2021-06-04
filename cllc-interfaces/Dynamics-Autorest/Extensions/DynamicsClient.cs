@@ -353,7 +353,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         public async Task<MicrosoftDynamicsCRMcontact> GetContactById(string id)
         {
             MicrosoftDynamicsCRMcontact result;
-            string[] expand = { "contact_SharePointDocumentLocations" };
+            string[] expand = { "contact_SharePointDocumentLocations", "parentcustomerid_account" };
             try
             {
                 // fetch from Dynamics.
