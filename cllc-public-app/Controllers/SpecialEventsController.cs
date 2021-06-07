@@ -46,6 +46,22 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _bcep = bcep;
         }
 
+        // get summary list of applications past submission status
+        [HttpGet("current/submitted")]
+        public IActionResult GetCurrentSubmitted()
+        {
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+            string filter = $"(_adoxio_contactid_value eq {userSettings.ContactId}";
+            filter += $" or _adoxio_accountid_value eq {userSettings.AccountId})";
+            filter += $" and statuscode ne {(int)ViewModels.EventStatus.Draft}";
+            filter += $" and statuscode ne {(int)ViewModels.EventStatus.Cancelled}";
+
+            var result = GetSepSummaries(filter);
+
+            return new JsonResult(result);
+        }
+
+
         /// <summary>
         /// GET a special event by id.  Used by the police view event feature.
         /// </summary>
@@ -54,7 +70,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("{eventId}")]
         public IActionResult GetSpecialEvent(string eventId)
         {
-            string[] expand = new[] { "adoxio_PoliceRepresentativeId", 
+            string[] expand = new[] { "adoxio_PoliceRepresentativeId",
                 "adoxio_PoliceAccountId","adoxio_specialevent_specialeventlocations"
             };
             MicrosoftDynamicsCRMadoxioSpecialevent specialEvent = null;
@@ -69,7 +85,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     specialEvent = null;
                 }
             }
-            
+
             // get the applicant.
 
             if (specialEvent._adoxioContactidValue != null)
@@ -118,32 +134,66 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
 
-        // TODO - determine if this service "GetSpecialEventByApplicant" is required. 
-
         /// <summary>
-        ///     GET a special event by id
+        ///     GET a special event by id. The detailed view of the application used by the client before submission and by the summary page
         /// </summary>
         /// <param name="eventId"></param>
         /// <returns></returns>
         [HttpGet("applicant/{eventId}")]
-        public IActionResult GetSpecialEventByApplicant(string eventId)
+        public IActionResult GetSpecialEventForTheApplicant(string eventId)
         {
-            var expand = new List<string> { };
+            var specialEvent = this.getSpecialEventData(eventId);
+            return new JsonResult(specialEvent);
+        }
+
+        private ViewModels.SpecialEvent getSpecialEventData(string eventId)
+        {
+            string[] expand = new[] {
+                "adoxio_Invoice",
+                "adoxio_specialevent_licencedarea",
+                "adoxio_specialevent_schedule",
+                "adoxio_specialevent_specialeventlocations",
+                "adoxio_SpecialEventCityDistrictId",
+                "adoxio_ContactId",
+                "adoxio_AccountId"
+            };
             MicrosoftDynamicsCRMadoxioSpecialevent specialEvent = null;
             if (!string.IsNullOrEmpty(eventId))
             {
-                var filter = $"_adoxio_applicant_value eq {eventId}";
-
                 try
                 {
-                    specialEvent = _dynamicsClient.Specialevents.Get(filter: filter, expand: expand, orderby: new List<string> { "modifiedon desc" }).Value.FirstOrDefault();
+                    specialEvent = _dynamicsClient.Specialevents.GetByKey(eventId, expand: expand);
+                    var locations = specialEvent.AdoxioSpecialeventSpecialeventlocations;
+                    var areas = specialEvent.AdoxioSpecialeventLicencedarea;
+                    var schedules = specialEvent.AdoxioSpecialeventSchedule;
+
+                    foreach (var schedule in schedules)
+                    {
+                        var parentLocation = locations.Where(loc => loc.AdoxioSpecialeventlocationid == schedule._adoxioSpecialeventlocationidValue).FirstOrDefault();
+                        if (parentLocation.AdoxioSpecialeventlocationSchedule == null)
+                        {
+                            parentLocation.AdoxioSpecialeventlocationSchedule = new List<MicrosoftDynamicsCRMadoxioSpecialeventschedule>();
+                        }
+                        parentLocation.AdoxioSpecialeventlocationSchedule.Add(schedule);
+                    }
+
+                    foreach (var area in areas)
+                    {
+                        var parentLocation = locations.Where(loc => loc.AdoxioSpecialeventlocationid == area._adoxioSpecialeventlocationidValue).FirstOrDefault();
+                        if (parentLocation.AdoxioSpecialeventlocationLicencedareas == null)
+                        {
+                            parentLocation.AdoxioSpecialeventlocationLicencedareas = new List<MicrosoftDynamicsCRMadoxioSpecialeventlicencedarea>();
+                        }
+                        parentLocation.AdoxioSpecialeventlocationLicencedareas.Add(area);
+                    }
                 }
                 catch (HttpOperationException)
                 {
                     specialEvent = null;
                 }
             }
-            return new JsonResult(specialEvent);
+            var result = specialEvent.ToViewModel();
+            return result;
         }
 
         [HttpPost]
@@ -160,6 +210,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             var newSpecialEvent = new MicrosoftDynamicsCRMadoxioSpecialevent();
             newSpecialEvent.CopyValues(specialEvent);
+            newSpecialEvent.Statuscode = (int?)EventStatus.Draft;
 
             if (!string.IsNullOrEmpty(userSettings.AccountId))
             {
@@ -230,7 +281,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         }));
                     }
 
-
                     // Add event dates to location
                     if (location.EventDates?.Count > 0)
                     {
@@ -254,6 +304,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                 }));
             }
+            var result = this.getSpecialEventData(newSpecialEvent.AdoxioSpecialeventid);
+            result.LocalId = specialEvent.LocalId;
             return new JsonResult(specialEvent);
         }
 
@@ -265,8 +317,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return BadRequest();
             }
 
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+
+
+
             var patchEvent = new MicrosoftDynamicsCRMadoxioSpecialevent();
             patchEvent.CopyValues(specialEvent);
+            // Only allow these status to be set by the portal. Any other status change is ignored
+            if (specialEvent.EventStatus == EventStatus.Cancelled ||
+                specialEvent.EventStatus == EventStatus.Draft ||
+                specialEvent.EventStatus == EventStatus.Submitted
+               )
+            {
+                patchEvent.Statuscode = (int?)specialEvent.EventStatus;
+            }
+
             if (!string.IsNullOrEmpty(specialEvent?.SepCity?.Id))
             {
                 patchEvent.SepCityODataBind = _dynamicsClient.GetEntityURI("adoxio_sepcities", specialEvent.SepCity.Id);
@@ -404,7 +469,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                 }));
             }
-            return new JsonResult(specialEvent);
+            var result = this.getSpecialEventData(eventId);
+            result.LocalId = specialEvent.LocalId;
+            return new JsonResult(result);
         }
 
         [HttpGet("drink-types")]
@@ -423,7 +490,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             List<ViewModels.SpecialEventSummary> result = new List<ViewModels.SpecialEventSummary>();
 
-            string[] expand = new[] { "adoxio_PoliceRepresentativeId", "adoxio_PoliceAccountId" };
+            string[] expand = new[] { "adoxio_PoliceRepresentativeId", "adoxio_PoliceAccountId", "" };
             IList<MicrosoftDynamicsCRMadoxioSpecialevent> items = null;
             try
             {

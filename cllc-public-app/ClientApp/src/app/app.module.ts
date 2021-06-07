@@ -305,6 +305,7 @@ import { AllApplicationsComponent } from "@components/police-representative/all-
 import { MyJobsComponent } from './components/police-representative/my-jobs/my-jobs.component';
 import { PoliceSummaryComponent } from './components/police-representative/police-summary/police-summary.component';
 import { PoliceGridComponent } from './components/police-representative/police-grid/police-grid.component';
+import { SubmittedApplicationsComponent } from './components/sep/my-applications/submitted-applications/submitted-applications.component';
 
 
 @NgModule({
@@ -481,6 +482,7 @@ import { PoliceGridComponent } from './components/police-representative/police-g
     MyJobsComponent,
     PoliceSummaryComponent,
     PoliceGridComponent,
+    SubmittedApplicationsComponent,
   ],
   imports: [
     AppRoutingModule,
