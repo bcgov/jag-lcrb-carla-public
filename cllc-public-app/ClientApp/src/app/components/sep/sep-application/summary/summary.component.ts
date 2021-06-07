@@ -1,8 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { SepApplication } from '@models/sep-application.model';
 import { SepSchedule } from '@models/sep-schedule.model';
 import { IndexedDBService } from '@services/indexed-db.service';
+import { PaymentDataService } from '@services/payment-data.service';
 import { SpecialEventsDataService } from '@services/special-events-data.service';
+import { map, mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-summary',
@@ -31,6 +34,8 @@ export class SummaryComponent implements OnInit {
   }
 
   constructor(private db: IndexedDBService,
+    private snackBar: MatSnackBar,
+    private paymentDataService: PaymentDataService,
     private sepDataService: SpecialEventsDataService) { }
 
   ngOnInit(): void {
@@ -59,11 +64,49 @@ export class SummaryComponent implements OnInit {
       if (result.eventStatus === 'Approved') {
         this.mode = 'payNow';
       } else if (result.eventStatus === 'Pending Review') {
-        this.mode  = 'pendingReview';
+        this.mode = 'pendingReview';
       }
       if (result.localId) {
         await this.db.applications.update(result.localId, result);
+        this.localId = this.localId; // trigger data refresh
       }
     }
   }
+
+  payNow() {
+    // and payment is required due to an invoice being generated
+    if (this?.application?.id) {
+      // proceed to payment
+      this.submitPayment()
+        .subscribe(res => {
+          debugger;
+          // this.saveComplete.emit(true);
+          // this.submitApplicationInProgress = false;
+        },
+          error => {
+            this.snackBar.open('Error submitting payment', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+            // this.submitApplicationInProgress = false;
+          }
+        );
+      // otherwise if there was no invoice generated, dynamics understood it to be a free application
+    }
+  }
+
+  /**
+ * Redirect to payment processing page (Express Pay / Bambora service)
+ * */
+  private submitPayment() {
+    return this.paymentDataService.getPaymentURI('specialEventInvoice', this.application.id)
+      .pipe(map(jsonUrl => {
+        debugger;
+        window.location.href = jsonUrl['url'];
+        return jsonUrl['url'];
+      }, (err: any) => {
+        if (err._body === 'Payment already made') {
+          this.snackBar.open('Application payment has already been made.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        }
+      }));
+  }
 }
+
+
