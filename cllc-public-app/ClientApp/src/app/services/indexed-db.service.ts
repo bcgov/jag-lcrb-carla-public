@@ -25,6 +25,7 @@ export class IndexedDBService {
   public async saveSepApplication(data: SepApplication) {
     // Save Application
     let applicationId = data.localId;
+    debugger;
     if (applicationId) { // update if exists
       await this.applications.update(applicationId, data);
     } else { // create and get new id
