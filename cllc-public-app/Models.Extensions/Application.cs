@@ -78,8 +78,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioRenewalfloorplan = (int?)from.RenewalFloorPlan;
             to.AdoxioRenewalsitemap = (int?)from.RenewalSiteMap;
             to.AdoxioRenewaltiedhousefederalinterest = (int?)from.TiedhouseFederalInterest;
-            to.AdoxioDescription1 = from.Description1;
             to.AdoxioDescription2 = from.Description2;
+            to.AdoxioDescription3 = from.Description3;
             to.AdoxioTempdatefrom = from.TempDateFrom;
             to.AdoxioTempdateto = from.TempDateTo;
 
@@ -160,6 +160,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioFirstnamenew = from.FirstNameNew;
             to.AdoxioLastnameold = from.LastNameOld;
             to.AdoxioLastnamenew = from.LastNameNew;
+
             to.AdoxioCsinternaltransferofshares = from.CsInternalTransferOfShares;
             to.AdoxioCsexternaltransferofshares = from.CsExternalTransferOfShares;
             to.AdoxioCschangeofdirectorsorofficers = from.CsChangeOfDirectorsOrOfficers;
@@ -237,7 +238,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioAuthorizedtosubmit = from.AuthorizedToSubmit;
             to.AdoxioAdditionalpropertyinformation = from.AdditionalPropertyInformation;
 
-            to.AdoxioDescription1 = from.Description1;
+
 
             //store opening
 
