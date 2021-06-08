@@ -102,6 +102,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     ._adoxioSpecialeventcitydistrictidValue);
             }
 
+
+            
             // event locations.
 
             foreach (var location in specialEvent.AdoxioSpecialeventSpecialeventlocations)
@@ -131,7 +133,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             }
 
-            return new JsonResult(specialEvent.ToViewModel());
+            var result = specialEvent.ToViewModel();
+
+            if (specialEvent._adoxioLcrbrepresentativeidValue != null)
+            {
+                var lcrbDecisionBy = _dynamicsClient.GetUserAsViewModelContact(specialEvent._adoxioLcrbrepresentativeidValue);
+                result.LcrbDecisionBy = lcrbDecisionBy;
+                result.LcrbApproval = specialEvent.AdoxioLcrbapproval;
+            }
+
+            return new JsonResult(result);
         }
 
 
