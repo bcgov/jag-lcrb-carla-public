@@ -139,6 +139,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public ViewModels.Account PoliceAccount { get; set; }
         public ViewModels.Contact PoliceDecisionBy { get; set; }
         public int? PoliceApproval { get; set; }
+        public ViewModels.Contact LcrbDecisionBy { get; set; }
+        public int? LcrbApproval { get; set; }
         public bool? IsManufacturingExclusivity { get; set; }
         public string HowProceedsWillBeUsedDescription { get; set; }
 
