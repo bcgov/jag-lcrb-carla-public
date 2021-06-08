@@ -3,16 +3,16 @@
 <div [ngBusy]="[busy]"></div>
 <div class="row mb-3">
     <div class="col" >
-      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z0 w-100">
+      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z0 w-100" style="padding:5px;">
         <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
 
         <!-- Checkbox Column -->
         <ng-container matColumnDef="select">
           <th mat-header-cell *matHeaderCellDef>
-            <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
+            <!--mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
               [indeterminate]="selection.hasValue() && !isAllSelected()">
-            </mat-checkbox>
+            </mat-checkbox-->
           </th>
           <td mat-cell *matCellDef="let row">
             <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
@@ -33,7 +33,7 @@
         <ng-container matColumnDef="eventName">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Event Name</th>
           <td mat-cell *matCellDef="let row" class="mat-body-1">
-            <button mat-button color="primary" (click)="openApplication(row.specialEventId)">{{row.eventName}}</button>  
+            <button mat-button color="primary" (click)="openApplication(row.specialEventId)">{{row.eventName}}</button>
           </td>
         </ng-container>
 
@@ -54,7 +54,7 @@
         <!-- Assigned -->
         <ng-container matColumnDef="policeDecisionByLabel">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Assigned</th>
-          <td mat-cell *matCellDef="let row" class="mat-body-1">{{row.policeDecisionBy?.name}}</td>
+          <td mat-cell *matCellDef="let row" class="mat-body-1">{{row.policeDecisionBy ? row.policeDecisionBy.name : "Unassigned"}}</td>
         </ng-container>
 
         <!-- Size -->
@@ -92,8 +92,9 @@
   </div>
 
   <div class="row">
+    <hr>
     <div class="col-3 d-flex align-items-center">
-      <button mat-raised-button color="primary" (click)="batchAssign()">Assign</button>
+      <!--button mat-raised-button color="primary" (click)="batchAssign()">Assign</button-->
     </div>
     <div class="col-2 d-flex align-items-center">
       <span>Displaying <strong>{{dataSource.data.length}}</strong> application form(s)</span>
