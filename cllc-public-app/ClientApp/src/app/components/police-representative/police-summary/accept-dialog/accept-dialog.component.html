@@ -1,0 +1,14 @@
+<mat-dialog-content>
+  <div>
+    <h1>Complete Review</h1>
+    <hr>
+    <p>Are you done reviewing this application?</p>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button class="btn btn-secondary" (click)="close()" id="cancelNo">CLOSE</button>&nbsp;
+  <button class="btn btn-primary" (click)="accept()" id="cancelYes">COMPLETE REVIEW</button>
+  <p>&nbsp;</p>
+  <p style="margin-top:20px;"><small>Once you complete your review the applicant will be notified.</small></p>
+</mat-dialog-actions>
