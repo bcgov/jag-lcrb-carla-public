@@ -1728,7 +1728,34 @@ namespace Gov.Lclb.Cllb.Interfaces
             return user;
         }
 
-        
+
+
+        /// <summary>
+        /// Returns a User based on certain contact details
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="guid"></param>
+        /// <returns></returns>
+        public static Public.ViewModels.Contact GetUserAsViewModelContact(this IDynamicsClient _dynamicsClient, string userId)
+        {
+            Public.ViewModels.Contact result = null;
+            try
+            {
+                var user = _dynamicsClient.Systemusers.GetByKey(userId);
+                result = new Public.ViewModels.Contact()
+                {
+                    id = userId,
+                    firstname = user.Firstname,
+                    lastname = user.Lastname
+                };
+            }
+            catch (Exception e)
+            {
+                Log.Logger.Error(e, "Problem getting user.");
+            }
+            
+            return result;
+        }
 
         /// <summary>
         /// Returns a User based on certain contact details
