@@ -2,6 +2,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
 
 namespace Gov.Lclb.Cllb.Public.ViewModels
@@ -90,7 +91,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool? IsAgreeToTnC { get; set; }
 
         public System.DateTimeOffset? DateAgreeToTnC { get; set; }
-        
+
         [JsonConverter(typeof(StringEnumConverter))]
         public FundRaisingPurposes? FundRaisingPurpose { get; set; }
         public string SepCityId { get; set; }  // not used
@@ -137,7 +138,13 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         [JsonConverter(typeof(StringEnumConverter))]
         public HostOrgCatergory? HostOrganizationCategory { get; set; }
         public string SpecialEventStreet1 { get; set; }
-        public int? MaximumNumberOfGuests { get; set; }
+        public int? MaximumNumberOfGuests
+        {
+            get
+            {
+                return EventLocations?.Sum(loc => loc.MaximumNumberOfGuests);
+            }
+        }
         public string NonProfitName { get; set; }
         public System.DateTimeOffset? DateSubmitted { get; set; }
         public ViewModels.Account PoliceAccount { get; set; }

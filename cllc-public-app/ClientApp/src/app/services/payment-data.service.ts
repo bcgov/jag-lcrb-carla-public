@@ -3,6 +3,14 @@ import { HttpClient } from "@angular/common/http";
 import { DataService } from "./data.service";
 import { catchError } from "rxjs/operators";
 
+type PaymentType =
+'default' |
+'worker' |
+'licenceFee' |
+'primaryInvoice' |
+'secondaryInvoice' |
+'specialEventInvoice'
+;
 /**
  * 
  */
@@ -32,6 +40,10 @@ export class PaymentDataService extends DataService {
     secondaryInvoice: {
       getPaymentURI: (id) => `api/payment/payment-uri/secondary/${id}`,
       verifyPaymentURI: (id) => `api/payment/verify-by-invoice-type/secondary/${id}`
+    },
+    specialEventInvoice: {
+      getPaymentURI: (id) => `api/payment/submit/sep-application/${id}`,
+      verifyPaymentURI: (id) => `api/payment/verify/sep-application/${id}`
     }
   };
 
@@ -39,7 +51,7 @@ export class PaymentDataService extends DataService {
     super();
   }
 
-  getPaymentURI(paymentType: string, id: string) {
+  getPaymentURI(paymentType: PaymentType, id: string) {
     const payType = this.paymentTypes[paymentType];
     if (!payType) {
       return;
@@ -48,7 +60,7 @@ export class PaymentDataService extends DataService {
       .pipe(catchError(this.handleError));
   }
 
-  verifyPaymentURI(paymentType: string, id: string) {
+  verifyPaymentURI(paymentType: PaymentType, id: string) {
     const payType = this.paymentTypes[paymentType];
     if (!payType) {
       return;
