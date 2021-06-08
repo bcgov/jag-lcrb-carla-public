@@ -138,8 +138,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (specialEvent._adoxioLcrbrepresentativeidValue != null)
             {
                 var lcrbDecisionBy = _dynamicsClient.GetUserAsViewModelContact(specialEvent._adoxioLcrbrepresentativeidValue);
-                result.LcrbDecisionBy = lcrbDecisionBy;
-                result.LcrbApproval = specialEvent.AdoxioLcrbapproval;
+                result.LcrbApprovalBy = lcrbDecisionBy;
+                result.LcrbApproval = (ApproverStatus?) specialEvent.AdoxioLcrbapproval;
             }
 
             return new JsonResult(result);
