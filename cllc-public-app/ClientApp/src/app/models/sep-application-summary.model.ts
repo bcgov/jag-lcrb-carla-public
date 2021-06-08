@@ -17,5 +17,6 @@ export class SepApplicationSummary {
   policeApproval?: string;
   lcrbApproval?: string;
   denialReason?: string;
+  cancelReason?: string;
   dateOfPoliceDecision?: Date | string;
 }

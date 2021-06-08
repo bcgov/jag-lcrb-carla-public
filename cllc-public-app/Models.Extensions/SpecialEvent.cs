@@ -58,6 +58,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                     LcrbApproval = (ViewModels.ApproverStatus?)specialEvent.AdoxioLcrbapproval,
                     PrivateOrPublic = (ViewModels.SEPPublicOrPrivate?)specialEvent.AdoxioTypeofevent,
                     DenialReason = specialEvent.AdoxioDenialreason,
+                    CancelReason = specialEvent.AdoxioCancellationreason,
                     SpecialEventCity = specialEvent.AdoxioSpecialeventcity,
                     SpecialEventDescription = specialEvent.AdoxioSpecialeventdescripton,
                     SpecialEventPermitNumber = specialEvent.AdoxioSpecialeventpermitnumber,
@@ -107,6 +108,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                     //LcrbApprovalBy = specialEvent.AdoxioLCRBRepresentativeId.ToViewModel(),
                     LcrbApproval = (ApproverStatus?)specialEvent.AdoxioLcrbapproval,
                     DenialReason = specialEvent.AdoxioDenialreason,
+                    CancelReason = specialEvent.AdoxioCancellationreason,
                     DateOfPoliceDecision = specialEvent.AdoxioDatepoliceapproved
                 };
             }
@@ -148,6 +150,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioPoliceapproval = (int?)from.PoliceApproval;
             to.AdoxioPrivateorpublic = (int?)from.PrivateOrPublic;
             to.AdoxioDenialreason = from.DenialReason;
+            to.AdoxioCancellationreason = from.CancelReason;
             to.AdoxioResponsiblebevservicenumber = from.ResponsibleBevServiceNumber;
             to.AdoxioResponsiblebevnumberdoesnothave = from.ResponsibleBevServiceNumberDoesNotHave;
             to.AdoxioSpecialeventcity = from.SpecialEventCity;
