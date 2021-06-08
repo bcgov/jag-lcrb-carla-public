@@ -96,13 +96,7 @@ export class ApplicantComponent implements OnInit {
       ...this.application,
       lastUpdated: new Date(),
       eventStatus: 'Draft',
-      stepsCompleted: (steps => {
-        const step = 'applicant';
-        if (steps.indexOf(step) === -1) {
-          steps.push(step);
-        }
-        return steps;
-      })(this?.application?.stepsCompleted || []),
+      lastStepCompleted: 'applicant',
       ...this.form.value
     } as SepApplication;
     if (this.isValid()) {

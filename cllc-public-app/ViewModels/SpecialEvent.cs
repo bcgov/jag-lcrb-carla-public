@@ -48,6 +48,17 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         Denied = 845280000
     }
 
+    public enum ApproverStatus
+    {
+        [EnumMember(Value = "Auto-Approved")]
+        AutoApproved = 100000000,
+        Approved = 845280000,
+        [EnumMember(Value = "Pending Review")]
+        PendingReview = 100000001,
+        Denied = 845280001,
+        Cancelled = 845280002
+    }
+
 
     public enum HostOrgCatergory
     {
@@ -138,7 +149,15 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public System.DateTimeOffset? DateSubmitted { get; set; }
         public ViewModels.Account PoliceAccount { get; set; }
         public ViewModels.Contact PoliceDecisionBy { get; set; }
-        public int? PoliceApproval { get; set; }
+        
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ApproverStatus? PoliceApproval { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ApproverStatus? LcrbApproval { get; set; }
+
+        public ViewModels.Contact LcrbApprovalBy {get; set;}
+        public string DenialReason {get; set;}
+        public string CancelReason {get; set;}
         public bool? IsManufacturingExclusivity { get; set; }
         public string HowProceedsWillBeUsedDescription { get; set; }
 

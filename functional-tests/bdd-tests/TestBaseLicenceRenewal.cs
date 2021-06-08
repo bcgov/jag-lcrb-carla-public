@@ -369,7 +369,7 @@ namespace bdd_tests
                 //JavaScriptClick(uiCriminalOffence);
 
                 NgWebElement uiCriminalOffence = null;
-                for (var i = 0; i < 10; i++)
+                for (var i = 0; i < 60; i++)
                 {
                     try
                     {

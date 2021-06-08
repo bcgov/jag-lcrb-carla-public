@@ -14,6 +14,9 @@ export class SepApplicationSummary {
 
   policeAccount?: Account;
   policeDecisionBy?: Contact;
-  policeDecision?: number;
+  policeApproval?: string;
+  lcrbApproval?: string;
+  denialReason?: string;
+  cancelReason?: string;
   dateOfPoliceDecision?: Date | string;
 }
