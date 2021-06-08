@@ -47,13 +47,7 @@ export class LiquorComponent implements OnInit {
       ...this.sepApplication,
       lastUpdated: new Date(),
       status: 'unsubmitted',
-      stepsCompleted: (steps => {
-        const step = 'event';
-        if (steps.indexOf(step) === -1) {
-          steps.push(step);
-        }
-        return steps;
-      })(this?.sepApplication?.stepsCompleted || []),
+      lastStepCompleted: 'event',
       ...this.value,
     } as SepApplication;
 
@@ -70,13 +64,7 @@ export class LiquorComponent implements OnInit {
       ...this.sepApplication,
       lastUpdated: new Date(),
       eventStatus: 'Draft',
-      stepsCompleted: (steps => {
-        const step = 'liquor';
-        if (steps.indexOf(step) === -1) {
-          steps.push(step);
-        }
-        return steps;
-      })(this?.sepApplication?.stepsCompleted || []),
+      lastStepCompleted: 'liquor',
       ...this.value,
     } as SepApplication;
     this.saveComplete.emit(data);
