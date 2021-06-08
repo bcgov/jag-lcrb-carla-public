@@ -6,11 +6,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { faAngleDoubleLeft, faPrint } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'app-worker-payment-confirmation',
+  selector: 'app-sep-payment-confirmation',
   templateUrl: './payment-confirmation.component.html',
   styleUrls: ['./payment-confirmation.component.scss']
 })
-export class WorkerPaymentConfirmationComponent implements OnInit {
+export class SepPaymentConfirmationComponent implements OnInit {
   faPrint = faPrint;
   faAngleDoubleLeft = faAngleDoubleLeft;
   busy: Subscription;

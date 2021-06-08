@@ -54,7 +54,7 @@
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef>Action</th>
           <td mat-cell *matCellDef="let row" class="p-0">
-            <button mat-raised-button *ngIf="row.eventStatus ==='Approved' && row.invoiceId && !row.isInvoicePaid">Pay Now</button>
+            <button mat-raised-button (click)="payNow(row.specialEventId)" *ngIf="row.eventStatus ==='Approved' && row.invoiceId && !row.isInvoicePaid">Pay Now</button>
           </td>
         </ng-container>
 
