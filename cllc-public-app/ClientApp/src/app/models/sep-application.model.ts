@@ -15,7 +15,7 @@ export class SepApplication {
     applicantInfo: any;
     isAgreeTsAndCs: boolean;
     dateAgreedToTsAndCs: Date;
-    stepsCompleted: string[];
+    lastStepCompleted: string;
     eventStatus: string;
     totalServings: number;
     invoiceTrigger: boolean;
@@ -35,7 +35,6 @@ export class SepApplication {
     isLocationLicensed: string;
     isOnPublicProperty: boolean;
 
-    //maximumNumberOfGuests: number;
     sepCity: SepCity;
     applicant: Contact;
 

@@ -293,13 +293,7 @@ export class EventComponent extends FormBase implements OnInit {
       localId: this._appID,
       lastUpdated: new Date(),
       eventStatus: 'Draft',
-      stepsCompleted: (steps => {
-        const step = 'event';
-        if (steps.indexOf(step) === -1) {
-          steps.push(step);
-        }
-        return steps;
-      })(this?.sepApplication?.stepsCompleted || []),
+      lastStepCompleted: 'event',
       ...formData
     } as SepApplication;
     return data;
