@@ -143,13 +143,7 @@ export class EligibilityComponent extends FormBase implements OnInit {
       ...this.sepApplication,
       lastUpdated: new Date(),
       eventStatus: 'Draft',
-      stepsCompleted: (steps => {
-        const step = 'eligibility';
-        if (steps.indexOf(step) === -1) {
-          steps.push(step);
-        }
-        return steps;
-      })(this?.sepApplication?.stepsCompleted || []),
+      lastStepCompleted: 'eligibility',
       ...this.form.value
     } as SepApplication;
     return data;

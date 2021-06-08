@@ -1,7 +1,6 @@
 <mat-card class="mat-elevation-z0">
-  <div [ngBusy]="busy" class="container" style="margin-left: 0px;">
+  <div class="container" style="margin-left: 0px;">
     <div *ngIf="isApproved  && loaded">
-      <p>Thank you for applying for the Worker Security Verification.</p>
       <p>
         Your payment has been received and your application will be reviewed shortly. You’ll be contacted if it’s
         incomplete or inaccurate.
@@ -55,7 +54,7 @@
     </div>
     <div *ngIf="loaded" style="padding-top: 20px">
       <p>
-        <a class="" routerLink="/worker-qualification/dashboard">
+        <a class="" routerLink="/sep/dashboard">
           <fa-icon [icon]="faAngleDoubleLeft" class="fa-lg" style="margin-right: 5px" aria-hidden="true"></fa-icon>Return to Dashboard
         </a>
       </p>

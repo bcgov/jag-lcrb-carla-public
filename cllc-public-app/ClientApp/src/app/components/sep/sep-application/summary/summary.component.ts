@@ -79,16 +79,11 @@ export class SummaryComponent implements OnInit {
       // proceed to payment
       this.submitPayment()
         .subscribe(res => {
-          debugger;
-          // this.saveComplete.emit(true);
-          // this.submitApplicationInProgress = false;
         },
           error => {
             this.snackBar.open('Error submitting payment', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-            // this.submitApplicationInProgress = false;
           }
         );
-      // otherwise if there was no invoice generated, dynamics understood it to be a free application
     }
   }
 

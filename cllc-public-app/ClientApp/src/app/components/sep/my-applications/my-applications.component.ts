@@ -41,8 +41,8 @@ export class MyApplicationsComponent implements OnInit {
   async getApplications() {
     let apps = await this.db.applications.toArray();
     apps = apps.sort((a, b) => {
-      var dateA = new Date(a.dateCreated).getTime();
-      var dateB = new Date(b.dateCreated).getTime();
+      const dateA = new Date(a.dateCreated).getTime();
+      const dateB = new Date(b.dateCreated).getTime();
       return dateB - dateA;
     });
     this.applications = apps;
@@ -64,12 +64,11 @@ export class MyApplicationsComponent implements OnInit {
       .subscribe((startApplication: boolean) => {
         if (startApplication) {
           const data = {
-            stepsCompleted: [],
             dateCreated: new Date()
           } as SepApplication;
           this.db.saveSepApplication(data)
             .then(localId => {
-              this.router.navigateByUrl(`/sep/application/${localId}/applicant`)
+              this.router.navigateByUrl(`/sep/application/${localId}/applicant`);
             });
         }
       });
@@ -105,13 +104,9 @@ export class MyApplicationsComponent implements OnInit {
 
   }
 
-  getLastStep(stepsCompleted: string[] = []): string {
-    let lastIndex = -1;
-    // get the index of the last completed step
-    stepsCompleted.forEach(element => {
-      lastIndex = Math.max(lastIndex, SEP_APPLICATION_STEPS.indexOf(element));
-    });
-
+  getLastStep(stepCompleted: string): string {
+    debugger;
+    const lastIndex = SEP_APPLICATION_STEPS.indexOf(stepCompleted);
     // return the next step to be completed
     return SEP_APPLICATION_STEPS[lastIndex + 1];
   }
