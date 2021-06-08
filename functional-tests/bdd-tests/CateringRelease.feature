@@ -36,7 +36,7 @@ Scenario: Catering Release (Private Corporation)
     And I click on the link for Licences & Authorizations
     And the expiry date is changed using the Dynamics workflow named 26E7E116-DACE-426A-A798-E9134D913F19
     And I click on the link for Renew Licence
-    # And I click on the Continue to Application button
+    And I click on the Continue to Application button
     And I renew the licence with positive responses for Catering
     # And I request a transfer of ownership for Catering
     And the account is deleted
