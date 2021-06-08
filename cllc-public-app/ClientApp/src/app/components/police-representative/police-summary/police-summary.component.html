@@ -9,12 +9,12 @@
     <h1 class="mat-heading">{{application.eventName}}</h1>
     <h3>Start Date: {{application.eventStartDate | date: 'dd MMM yyyy'}}</h3>
     <h3>Application number: {{application.specialEventPermitNumber}}</h3>
-    <h2>APPROVALS REQUIRED FROM LCRB AND POLICE</h2>
-    <h3>Approvals are assigned to:</h3>
+    <h2>REVIEWS REQUIRED FROM LCRB AND POLICE</h2>
+    <h3>Reviews are assigned to:</h3>
     <table class="servings" style="width:50%">
         <tr>
-            <th>POLICE DETACHMENT &nbsp;</th>
-            <th>LCRB &nbsp;</th>
+            <th>Police Detachment &nbsp;</th>
+            <th>LCRB Representative &nbsp;</th>
         </tr>
         <tr>
             <td>{{application?.policeDecisionBy?.name ? application.policeDecisionBy.name : "No one is assigned"}}&nbsp;</td>
@@ -35,39 +35,39 @@
 
     <section *ngIf="this.isApproved()">
       <!--if approved-->
-      <h3><fa-icon [icon]="faCheck" style="margin-right: 10px;"></fa-icon>Approved</h3>
+      <h3><fa-icon [icon]="getStatusIcon()" style="margin-right: 10px;"></fa-icon>{{application?.eventStatus}}</h3>
       <p>This application for liquor service has been reviewed and accepted.</p>
 
       <p *ngIf="application?.policeApproval == 'Auto Approved'">It was within the review threshold and was automatically accepted by your jurisdiction.</p>
 
     </section>
 
-    <section *ngIf="application?.eventStatus == 'PendingReview'">
+    <section *ngIf="application?.eventStatus == 'Pending Review'">
       <!-- if denied -->
-      <h3><fa-icon [icon]="faQuestionCircle" style="margin-right: 10px;"></fa-icon>Pending Review</h3>
-      <p>Liquor service for this event has been denied for the following reason:</p>
-      <p><em>{{application?.denialReason}}</em></p>
+      <h3><fa-icon [icon]="getStatusIcon()" style="margin-right: 10px;"></fa-icon>Pending Review</h3>
+      <p *ngIf="application.policeDecisionBy">The liquor service for this event is currently under review by {{application.policeDecisionBy?.name}}.</p>
     </section>
 
-    <section *ngIf="application?.eventStatus == 'Denied'">
+    <section *ngIf="this.isDenied()">
       <!-- if denied -->
-      <h3><fa-icon [icon]="faBan" style="margin-right: 10px;"></fa-icon>Denied</h3>
-      <p>Liquor service for this event has been denied for the following reason:</p>
+      <h3><fa-icon [icon]="getStatusIcon()" style="margin-right: 10px;"></fa-icon>{{application?.eventStatus}}</h3>
+      <p>Liquor service for this event has been {{application?.eventStatus}} for the following reason:</p>
       <p><em>{{application?.denialReason}}</em></p>
+      <p><em>{{application?.cancelReason}}</em></p>
     </section>
 
-    <section >
+    <section *ngIf="this.isCurrentUser()">
       <!-- if opened by assignee and event date has not passed -->
 
-    <button *ngIf="!this.isApproved() && this.isCurrentUser() && application?.policeApproval == 'Pending Review'" class="btn btn-primary"  (click)=approve() style="width:230px;">
+    <button *ngIf="!this.isApproved() && !this.isDenied() && application?.policeApproval == 'Pending Review'" class="btn btn-primary"  (click)=approve() style="width:230px;">
       <!-- if not already approved -->
         COMPLETE REVIEW&nbsp;
       </button>
       <p *ngIf="!this.isApproved() && application?.policeApproval == 'Approved'"><em>This application has been reviewed by your jurisdiction but is still pending review by LCRB.</em></p>
 
       <hr>
-      <button class="btn btn-secondary" (click)="deny()" style="width: 230px;">
-        DENY LIQUOR SERVICE&nbsp;
+      <button class="btn btn-secondary" *ngIf="!this.isDenied()" (click)="deny()" style="width: 230px;">
+        <span *ngIf="this.isApproved()">REVOKE</span><span *ngIf="!this.isApproved()">DENY</span> LIQUOR SERVICE&nbsp;
       </button>
     </section>
 
@@ -75,18 +75,26 @@
   </div>
   </div>
   <div class="row">
-    <div style="width: 20%; text-align:center;">
-      <p><small>status</small></p>
-      <p><strong>{{application?.eventStatus}}</strong></p>
-      <h1><fa-icon [icon]="faStopwatch"></fa-icon></h1>
-    </div>
-    <div style="width: 20%; text-align:center;">
-      <p><small>size</small></p>
-      <p><strong>{{this.getSize()}}</strong></p>
-      <p><strong>{{application?.maximumNumberOfGuests}}</strong></p>
-      <p><small><em>Accross {{this.getNumberOfLocations()}} location<span>{{this.getNumberOfLocations() > 1 ? 's' : ''}}</span></em></small></p>
+    <mat-card style="background-color: #e0e0e0; width: 100%; margin-top:20px;">
+      <table style="width:90%">
+        <tr>
+          <th style="text-align:center; width: 30%;"><small><em>status</em></small></th>
+          <th style="text-align:center; width: 30%;"><small><em>type</em></small></th>
+          <th style="text-align:center; width: 30%;"><small><em>size</em></small></th>
+        </tr>
+        <tr>
+          <td style="text-align:center;"><h2 style="color: #036;">{{application?.eventStatus}}</h2></td>
+          <td style="text-align:center;"><h2 style="color: #036;">Family</h2></td>
+          <td style="text-align:center;"><h2 style="color: #036;">{{this.getSize(application?.maximumNumberOfGuests)}}</h2><strong>{{application?.maximumNumberOfGuests}} Attendees</strong></td>
+        </tr>
+        <tr>
+          <td style="text-align:center;"><h1 style="color: #036; margin-top: 0px;"><fa-icon [icon]="this.getStatusIcon()"></fa-icon></h1></td>
+          <td style="text-align:center;"><h1 style="color: #036; margin-top: 0px;"><fa-icon [icon]="this.getTypeIcon()"></fa-icon></h1></td>
+          <td style="text-align:center;"><p><small><em>Across {{this.getNumberOfLocations()}} location<span>{{this.getNumberOfLocations() > 1 ? 's' : ''}}</span></em></small></p></td>
+      </tr></table>
 
-    </div>
+
+  </mat-card>
   </div>
 <!--
     <h2>Summary</h2>

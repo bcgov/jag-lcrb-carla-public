@@ -13,6 +13,7 @@ import { ContactDataService } from '@services/contact-data.service';
 import { Contact } from '@models/contact.model';
 import { AcceptDialogComponent } from '@components/police-representative/police-summary/accept-dialog/accept-dialog.component';
 import {
+  faAward,
   faBirthdayCake,
   faBolt,
   faBusinessTime,
@@ -27,7 +28,8 @@ import {
   faQuestionCircle,
   faShoppingCart,
   faStopwatch,
-  faTrashAlt
+  faTrashAlt,
+  IconDefinition
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faBan
@@ -70,11 +72,11 @@ export class PoliceSummaryComponent implements OnInit {
     private snackBar: MatSnackBar,
     public dialog: MatDialog,
     ) {
-      
+
       this.route.paramMap.subscribe(params => {
         this.specialEventId = params.get("specialEventId");
       });
-    
+
       store.select(state => state.currentUserState.currentUser)
       .subscribe(user => {
         contactDataService.getContact(user.contactid)
@@ -148,15 +150,20 @@ export class PoliceSummaryComponent implements OnInit {
     return this.application?.eventStatus == 'Approved' || this.application?.eventStatus == 'Issued';
   }
 
-  isCurrentUser(): boolean {
-    return this.contact?.name == this.application.policeDecisionBy.name;
+  isDenied(): boolean {
+    return this.application?.eventStatus == 'Denied' || this.application?.eventStatus == 'Cancelled';
   }
 
-  getSize(): string{
-    if(this.application?.totalMaximumNumberOfGuests < 101){
+  isCurrentUser(): boolean {
+    return this.contact?.name == this.application.policeDecisionBy?.name;
+  }
+
+  getSize(guests: number): string{
+
+    if(guests < 101){
       return "Small";
     } else {
-      if(this.application?.totalMaximumNumberOfGuests < 500){
+      if(guests < 500){
         return "Medium";
       } else {
           return "Large";
@@ -164,15 +171,33 @@ export class PoliceSummaryComponent implements OnInit {
       }
     }
 
-
-
-  getTypeIcon(): string{
-    let icon = "fa-birthday-cake";
+  getTypeIcon(): IconDefinition{
+    let icon = faBirthdayCake;
     return icon;
   }
 
+  getStatusIcon(): IconDefinition {
+    switch(this.application?.eventStatus){
+      case ("PendingReview"):
+        return faStopwatch;
+      case ("Approved"):
+        return faCheck;
+      case ("Issued"):
+        return faAward;
+      case ("Denied"):
+      case ("Cancelled"):
+        return faBan;
+      default:
+        return faStopwatch;
+    }
+  }
+
   getNumberOfLocations(): number {
-    return 1;
+    let num = 0;
+    for (var location of this.application.eventLocations) {
+      num++;
+    }
+    return num;
   }
 
   deny(): void {

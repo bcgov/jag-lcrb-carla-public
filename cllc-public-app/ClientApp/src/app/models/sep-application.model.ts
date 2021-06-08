@@ -44,6 +44,7 @@ export class SepApplication {
     lcrbApprovalBy?: Contact;
     lcrbApproval?: string;
     denialReason?: string;
+    cancelReason?: string;
 
     eventLocations: SepLocation[] = [];
     drinksSalesForecasts: SepDrinkSalesForecast[] = [];
