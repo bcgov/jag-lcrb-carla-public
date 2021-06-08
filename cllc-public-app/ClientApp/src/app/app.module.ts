@@ -306,6 +306,8 @@ import { MyJobsComponent } from './components/police-representative/my-jobs/my-j
 import { PoliceSummaryComponent } from './components/police-representative/police-summary/police-summary.component';
 import { PoliceGridComponent } from './components/police-representative/police-grid/police-grid.component';
 import { SubmittedApplicationsComponent } from './components/sep/my-applications/submitted-applications/submitted-applications.component';
+import { AcceptDialogComponent } from './components/police-representative/police-summary/accept-dialog/accept-dialog.component';
+import { DenyDialogComponent } from './components/police-representative/police-summary/deny-dialog/deny-dialog.component';
 
 
 @NgModule({
@@ -483,6 +485,8 @@ import { SubmittedApplicationsComponent } from './components/sep/my-applications
     PoliceSummaryComponent,
     PoliceGridComponent,
     SubmittedApplicationsComponent,
+    AcceptDialogComponent,
+    DenyDialogComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -653,6 +657,8 @@ import { SubmittedApplicationsComponent } from './components/sep/my-applications
     StarterChecklistComponent,
     DrinkPlannerDialog,
     PoliceSummaryComponent,
+    AcceptDialogComponent,
+    DenyDialogComponent
   ],
   bootstrap: [AppComponent]
 })
