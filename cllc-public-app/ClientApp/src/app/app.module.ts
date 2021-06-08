@@ -306,6 +306,7 @@ import { MyJobsComponent } from './components/police-representative/my-jobs/my-j
 import { PoliceSummaryComponent } from './components/police-representative/police-summary/police-summary.component';
 import { PoliceGridComponent } from './components/police-representative/police-grid/police-grid.component';
 import { SubmittedApplicationsComponent } from './components/sep/my-applications/submitted-applications/submitted-applications.component';
+import { SepPaymentConfirmationComponent } from "@components/sep/payment-confirmation/payment-confirmation.component";
 
 
 @NgModule({
@@ -352,6 +353,7 @@ import { SubmittedApplicationsComponent } from './components/sep/my-applications
     NotFoundComponent,
     OrganizationResultsComponent,
     PaymentConfirmationComponent,
+    SepPaymentConfirmationComponent,
     PolicyDocumentComponent,
     PolicyDocumentSidebarComponent,
     PrePaymentComponent,
