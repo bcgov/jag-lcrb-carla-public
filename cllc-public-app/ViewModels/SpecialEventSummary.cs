@@ -33,5 +33,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public DateTimeOffset? DateOfPoliceDecision { get; set; }
 
         public string? DenialReason {get; set;}
+        public string? CancelReason {get; set;}
     }
 }

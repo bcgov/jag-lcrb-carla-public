@@ -157,6 +157,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public ViewModels.Contact LcrbApprovalBy {get; set;}
         public string DenialReason {get; set;}
+        public string CancelReason {get; set;}
         public bool? IsManufacturingExclusivity { get; set; }
         public string HowProceedsWillBeUsedDescription { get; set; }
 
