@@ -70,6 +70,11 @@ export class PoliceSummaryComponent implements OnInit {
     private snackBar: MatSnackBar,
     public dialog: MatDialog,
     ) {
+      
+      this.route.paramMap.subscribe(params => {
+        this.specialEventId = params.get("specialEventId");
+      });
+    
       store.select(state => state.currentUserState.currentUser)
       .subscribe(user => {
         contactDataService.getContact(user.contactid)
