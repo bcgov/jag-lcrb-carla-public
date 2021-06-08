@@ -101,6 +101,7 @@ export interface Application {
 
   description1: string;
   description2: string;
+  description3: string;
 
   isReadyValidInterest: boolean;
   isReadyWorkers: boolean;
@@ -182,6 +183,8 @@ export interface Application {
   firstNameNew: string;
   lastNameOld: string;
   lastNameNew: string;
+  leNameOld: string;
+  leNameNew: string;
   csInternalTransferOfShares: boolean;
   csExternalTransferOfShares: boolean;
   csChangeOfDirectorsOrOfficers: boolean;

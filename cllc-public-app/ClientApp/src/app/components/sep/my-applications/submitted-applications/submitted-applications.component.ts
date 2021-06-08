@@ -28,4 +28,8 @@ export class SubmittedApplicationsComponent implements OnInit {
       .subscribe(data => this.dataSource.data = data);
   }
 
+  payNow(){
+    
+  }
+
 }

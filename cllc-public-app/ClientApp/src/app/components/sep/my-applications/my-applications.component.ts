@@ -68,9 +68,9 @@ export class MyApplicationsComponent implements OnInit {
             dateCreated: new Date()
           } as SepApplication;
           this.db.saveSepApplication(data)
-          .then(localId => {
-            this.router.navigateByUrl(`/sep/application/${localId}/applicant`)
-          });
+            .then(localId => {
+              this.router.navigateByUrl(`/sep/application/${localId}/applicant`)
+            });
         }
       });
   }
@@ -117,14 +117,32 @@ export class MyApplicationsComponent implements OnInit {
   }
 
   async cloneApplication(app: SepApplication) {
+    const clone = { ...app };
+    // clear dynamics IDs
+    clone.id = undefined;
+    clone.localId = undefined;
+    if (clone?.eventLocations?.length > 0) {
+      clone.eventLocations.forEach(loc => {
+        loc.id = undefined;
+        if (loc?.serviceAreas?.length > 0) {
+          loc.serviceAreas.forEach(area => {
+            area.id = undefined;
+          });
+        }
+        if (loc?.eventDates?.length > 0) {
+          loc.eventDates.forEach(ed => {
+            ed.id = undefined;
+          });
+        }
+      });
+    }
     const localId = await this.db.saveSepApplication({
-      ...app,
-      localId: undefined,
+      ...clone,
       dateAgreedToTsAndCs: undefined,
       isAgreeTsAndCs: false,
       dateCreated: new Date()
     } as SepApplication);
-    this.router.navigateByUrl(`/sep/application/${localId}/applicant`)
+    this.router.navigateByUrl(`/sep/application/${localId}/applicant`);
   }
 
 
