@@ -64,8 +64,6 @@ export class SepApplicationComponent implements OnInit {
     if (this.localId) {
       await this.db.getSepApplication(this.localId)
         .then(app => {
-          // make sure the steps completed array is setup
-          app.stepsCompleted = app.stepsCompleted || [];
           this.application = Object.assign(new SepApplication(), app);
         }, err => {
           console.error(err);
@@ -80,11 +78,8 @@ export class SepApplicationComponent implements OnInit {
 
   isStepCompleted(step: string): boolean {
     let completed = false;
-    if (this?.application?.stepsCompleted && step) {
-      if (this.application.stepsCompleted.indexOf(step) !== -1) {
-        completed = true;
-      }
-    }
+    const indexOfLastStep = this.steps.indexOf(this.application.lastStepCompleted);
+    completed = this.steps.indexOf(step) <= indexOfLastStep;
     return completed;
   }
 
@@ -109,10 +104,7 @@ export class SepApplicationComponent implements OnInit {
 
 
   completeStep(step: string, stepper: any, data: SepApplication) {
-    const steps = this?.application?.stepsCompleted;
-    if (steps && step && steps.indexOf(step) == -1) {
-      this.application.stepsCompleted.push(step);
-    }
+    this.application.lastStepCompleted = step;
     this.saveToDb(data);
     this.cd.detectChanges();
     if (environment.development) {
