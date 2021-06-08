@@ -82,6 +82,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 catch (HttpOperationException)
                 {
+                    //_logger.LogError($"Error retrieving special event: {eventId}.");
                     specialEvent = null;
                 }
             }

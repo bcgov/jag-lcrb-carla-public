@@ -15,6 +15,15 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         [JsonConverter(typeof(StringEnumConverter))]
         public EventStatus? EventStatus { get; set; }
+
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ApproverStatus? PoliceApproval { get; set; }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ApproverStatus? LcrbApproval { get; set; }
+        public Contact? LcrbApprovalBy {get; set; }
+        
         public int? MaximumNumberOfGuests { get; set; }
         public DateTimeOffset? DateSubmitted { get; set; }
 
@@ -22,5 +31,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public Contact PoliceDecisionBy { get; set; }
         public int? PoliceDecision { get; set; }
         public DateTimeOffset? DateOfPoliceDecision { get; set; }
+
+        public string? DenialReason {get; set;}
     }
 }

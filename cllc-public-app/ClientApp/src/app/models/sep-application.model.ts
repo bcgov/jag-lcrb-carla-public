@@ -9,6 +9,7 @@ export class SepApplication {
     tempJobNumber: string;
     eventStartDate: Date;
     dateCreated: Date;
+    dateSubmitted: Date;
     lastUpdated: Date;
     eventName: string;
     applicantInfo: any;
@@ -40,7 +41,10 @@ export class SepApplication {
 
     policeAccount?: Account;
     policeDecisionBy?: Contact;
-    policeDecision?: number;
+    policeApproval?: string;
+    lcrbApprovalBy?: Contact;
+    lcrbApproval?: string;
+    denialReason?: string;
 
     eventLocations: SepLocation[] = [];
     drinksSalesForecasts: SepDrinkSalesForecast[] = [];
