@@ -53,8 +53,11 @@ namespace Gov.Lclb.Cllb.Public.Models
                     NonProfitName = specialEvent.AdoxioNonprofitname,
                     PoliceAccount = specialEvent.AdoxioPoliceAccountId.ToViewModel(),
                     PoliceDecisionBy = specialEvent.AdoxioPoliceRepresentativeId.ToViewModel(),
-                    PoliceApproval = specialEvent.AdoxioPoliceapproval,
+                    PoliceApproval = (ViewModels.ApproverStatus?)specialEvent.AdoxioPoliceapproval,
+                    //LcrbApprovalBy = specialEvent.AdoxioLCRBRepresentativeId.ToViewModel(),
+                    LcrbApproval = (ViewModels.ApproverStatus?)specialEvent.AdoxioLcrbapproval,
                     PrivateOrPublic = (ViewModels.SEPPublicOrPrivate?)specialEvent.AdoxioTypeofevent,
+                    DenialReason = specialEvent.AdoxioDenialreason,
                     SpecialEventCity = specialEvent.AdoxioSpecialeventcity,
                     SpecialEventDescription = specialEvent.AdoxioSpecialeventdescripton,
                     SpecialEventPermitNumber = specialEvent.AdoxioSpecialeventpermitnumber,
@@ -100,7 +103,10 @@ namespace Gov.Lclb.Cllb.Public.Models
                     DateSubmitted = specialEvent.AdoxioDatesubmitted,
                     PoliceAccount = specialEvent.AdoxioPoliceAccountId.ToViewModel(),
                     PoliceDecisionBy = specialEvent.AdoxioPoliceRepresentativeId.ToViewModel(),
-                    PoliceDecision = specialEvent.AdoxioPoliceapproval,
+                    PoliceApproval = (ApproverStatus?)specialEvent.AdoxioPoliceapproval,
+                    //LcrbApprovalBy = specialEvent.AdoxioLCRBRepresentativeId.ToViewModel(),
+                    LcrbApproval = (ApproverStatus?)specialEvent.AdoxioLcrbapproval,
+                    DenialReason = specialEvent.AdoxioDenialreason,
                     DateOfPoliceDecision = specialEvent.AdoxioDatepoliceapproved
                 };
             }
@@ -139,8 +145,9 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioMajorsignificancerationale = from.MajorSignificanceRationale;
             to.AdoxioMaxnumofguests = from.MaximumNumberOfGuests;
             to.AdoxioNonprofitname = from.NonProfitName;
-            to.AdoxioPoliceapproval = from.PoliceApproval;
+            to.AdoxioPoliceapproval = (int?)from.PoliceApproval;
             to.AdoxioPrivateorpublic = (int?)from.PrivateOrPublic;
+            to.AdoxioDenialreason = from.DenialReason;
             to.AdoxioResponsiblebevservicenumber = from.ResponsibleBevServiceNumber;
             to.AdoxioResponsiblebevnumberdoesnothave = from.ResponsibleBevServiceNumberDoesNotHave;
             to.AdoxioSpecialeventcity = from.SpecialEventCity;

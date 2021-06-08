@@ -1,35 +1,94 @@
 <div class="form-wrapper position-relative">
     <div [ngBusy]="[busy]"></div>
-    
+
 
 <div class="form-wrapper-summary" *ngIf="application">
+
+  <div class="row">
+    <div style="width: 70%">
     <h1 class="mat-heading">{{application.eventName}}</h1>
     <h3>Start Date: {{application.eventStartDate | date: 'dd MMM yyyy'}}</h3>
     <h3>Application number: {{application.tempJobNumber}}</h3>
     <h2>APPROVALS REQUIRED FROM LCRB AND POLICE</h2>
     <h3>Approvals are assigned to:</h3>
-    <table class="servings">
+    <table class="servings" style="width:50%">
         <tr>
             <th>POLICE DETACHMENT &nbsp;</th>
             <th>LCRB &nbsp;</th>
         </tr>
         <tr>
             <td>{{application?.policeDecisionBy?.name ? application.policeDecisionBy.name : "No one is assigned"}}&nbsp;</td>
-            <td>No one is assigned &nbsp;</td>
+            <td>{{application?.lcrbApprovalBy?.name ? application.lcrbApprovalBy.name : "No one is assigned"}}&nbsp;</td>
+
         </tr>
+        <tr>
+          <td><em>{{application?.policeApproval}}</em></td>
+          <td><em>{{application?.lcrbApproval}}</em></td>
+      </tr>
 
     </table>
-    <hr>
+  </div>
+  <div style="margin-top: 30px; text-align: center; width: 30%; ">
     <!-- approve and deny buttons -->
-    <button class="btn btn-primary" style="float: left;" (click)=approve()>
-        APPROVE&nbsp;
-      </button>
-      &nbsp;
-      <button class="btn btn-primary" (click)="deny()">
-        DENY&nbsp;
-      </button>
-    
 
+    <mat-card style="background-color: #e0e0e0; min-height: 200px;">
+
+    <section *ngIf="this.isApproved()">
+      <!--if approved-->
+      <h3><fa-icon [icon]="faCheck" style="margin-right: 10px;"></fa-icon>Approved</h3>
+      <p>This application for liquor service has been reviewed and accepted.</p>
+
+      <p *ngIf="application?.policeApproval == 'Auto Approved'">It was within the review threshold and was automatically accepted by your jurisdiction.</p>
+
+    </section>
+
+    <section *ngIf="application?.eventStatus == 'PendingReview'">
+      <!-- if denied -->
+      <h3><fa-icon [icon]="faQuestionCircle" style="margin-right: 10px;"></fa-icon>Pending Review</h3>
+      <p>Liquor service for this event has been denied for the following reason:</p>
+      <p><em>{{application?.denialReason}}</em></p>
+    </section>
+
+    <section *ngIf="application?.eventStatus == 'Denied'">
+      <!-- if denied -->
+      <h3><fa-icon [icon]="faBan" style="margin-right: 10px;"></fa-icon>Denied</h3>
+      <p>Liquor service for this event has been denied for the following reason:</p>
+      <p><em>{{application?.denialReason}}</em></p>
+    </section>
+
+    <section >
+      <!-- if opened by assignee and event date has not passed -->
+
+    <button *ngIf="!this.isApproved() && this.isCurrentUser() && application?.policeApproval == 'Pending Review'" class="btn btn-primary"  (click)=approve() style="width:230px;">
+      <!-- if not already approved -->
+        COMPLETE REVIEW&nbsp;
+      </button>
+      <p *ngIf="!this.isApproved() && application?.policeApproval == 'Approved'"><em>This application has been reviewed by your jurisdiction but is still pending review by LCRB.</em></p>
+
+      <hr>
+      <button class="btn btn-secondary" (click)="deny()" style="width: 230px;">
+        DENY LIQUOR SERVICE&nbsp;
+      </button>
+    </section>
+
+    </mat-card>
+  </div>
+  </div>
+  <div class="row">
+    <div style="width: 20%; text-align:center;">
+      <p><small>status</small></p>
+      <p><strong>{{application?.eventStatus}}</strong></p>
+      <h1><fa-icon [icon]="faStopwatch"></fa-icon></h1>
+    </div>
+    <div style="width: 20%; text-align:center;">
+      <p><small>size</small></p>
+      <p><strong>{{this.getSize()}}</strong></p>
+      <p><strong>{{application?.maximumNumberOfGuests}}</strong></p>
+      <p><small><em>Accross {{this.getNumberOfLocations()}} location<span>{{this.getNumberOfLocations() > 1 ? 's' : ''}}</span></em></small></p>
+
+    </div>
+  </div>
+<!--
     <h2>Summary</h2>
 
     <mat-expansion-panel [expanded]="true">
@@ -107,7 +166,7 @@
                 <section>
                     <span>{{location.eventLocationStreet1}}</span>
                     <span>{{location.eventLocationStreet2}}</span>
-                        
+
                     <span>{{location.eventLocationCity}}, {{location.eventLocationProvince}}</span>
                     <span>{{location.eventLocationPostalCode}}</span>
                 </section>
@@ -128,7 +187,7 @@
                 </div>
 
             </div>
-            
+
 
             <h4>Event date</h4>
             <div *ngFor="let eventDate of location.eventDates"></div>
@@ -182,6 +241,7 @@
         <hr>
 
     </mat-expansion-panel>
+  -->
     <hr>
 </div>
 
