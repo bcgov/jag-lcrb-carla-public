@@ -20,7 +20,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/special-events")]
     [ApiController]
-    [Authorize(Policy = "Business-User")]
     public class SpecialEventsController : ControllerBase
     {
         private readonly IMemoryCache _cache;
@@ -103,7 +102,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
 
-            
+
             // event locations.
 
             foreach (var location in specialEvent.AdoxioSpecialeventSpecialeventlocations)
@@ -139,7 +138,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 var lcrbDecisionBy = _dynamicsClient.GetUserAsViewModelContact(specialEvent._adoxioLcrbrepresentativeidValue);
                 result.LcrbApprovalBy = lcrbDecisionBy;
-                result.LcrbApproval = (ApproverStatus?) specialEvent.AdoxioLcrbapproval;
+                result.LcrbApproval = (ApproverStatus?)specialEvent.AdoxioLcrbapproval;
             }
 
             return new JsonResult(result);
@@ -154,11 +153,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("applicant/{eventId}")]
         public IActionResult GetSpecialEventForTheApplicant(string eventId)
         {
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             var specialEvent = this.getSpecialEventData(eventId);
-            return new JsonResult(specialEvent);
+            if (specialEvent._adoxioContactidValue != userSettings.ContactId && specialEvent._adoxioAccountidValue != userSettings.AccountId)
+            {
+                return Unauthorized();
+            }
+            return new JsonResult(specialEvent.ToViewModel());
         }
 
-        private ViewModels.SpecialEvent getSpecialEventData(string eventId)
+        private MicrosoftDynamicsCRMadoxioSpecialevent getSpecialEventData(string eventId)
         {
             string[] expand = new[] {
                 "adoxio_Invoice",
@@ -204,8 +208,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     specialEvent = null;
                 }
             }
-            var result = specialEvent.ToViewModel();
-            return result;
+            return specialEvent;
         }
 
         [HttpPost]
@@ -224,11 +227,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             newSpecialEvent.CopyValues(specialEvent);
             newSpecialEvent.Statuscode = (int?)EventStatus.Draft;
 
-            if (!string.IsNullOrEmpty(userSettings.AccountId))
+            if (!string.IsNullOrEmpty(userSettings.AccountId) && userSettings.AccountId != "00000000-0000-0000-0000-000000000000")
             {
                 newSpecialEvent.AccountODataBind = _dynamicsClient.GetEntityURI("accounts", userSettings.AccountId);
             }
-            if (!string.IsNullOrEmpty(userSettings.ContactId))
+            if (!string.IsNullOrEmpty(userSettings.ContactId) && userSettings.ContactId != "00000000-0000-0000-0000-000000000000")
             {
                 newSpecialEvent.ContactODataBind = _dynamicsClient.GetEntityURI("contacts", userSettings.ContactId);
             }
@@ -316,7 +319,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                 }));
             }
-            var result = this.getSpecialEventData(newSpecialEvent.AdoxioSpecialeventid);
+            var result = this.getSpecialEventData(newSpecialEvent.AdoxioSpecialeventid).ToViewModel();
             result.LocalId = specialEvent.LocalId;
             return new JsonResult(specialEvent);
         }
@@ -330,7 +333,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
-
+            var existingEvent = getSpecialEventData(eventId);
+            if (existingEvent._adoxioAccountidValue != userSettings.AccountId &&
+               existingEvent._adoxioContactidValue != userSettings.ContactId)
+            {
+                return Unauthorized();
+            }
 
 
             var patchEvent = new MicrosoftDynamicsCRMadoxioSpecialevent();
@@ -481,7 +489,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                 }));
             }
-            var result = this.getSpecialEventData(eventId);
+            var result = this.getSpecialEventData(eventId).ToViewModel();
             result.LocalId = specialEvent.LocalId;
             return new JsonResult(result);
         }
