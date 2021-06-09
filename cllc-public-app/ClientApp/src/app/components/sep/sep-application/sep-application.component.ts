@@ -78,7 +78,7 @@ export class SepApplicationComponent implements OnInit {
 
   isStepCompleted(step: string): boolean {
     let completed = false;
-    const indexOfLastStep = this.steps.indexOf(this.application.lastStepCompleted);
+    const indexOfLastStep = this.steps.indexOf(this?.application?.lastStepCompleted);
     completed = this.steps.indexOf(step) <= indexOfLastStep;
     return completed;
   }
