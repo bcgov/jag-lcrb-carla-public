@@ -309,6 +309,7 @@ import { SubmittedApplicationsComponent } from './components/sep/my-applications
 import { SepPaymentConfirmationComponent } from "@components/sep/payment-confirmation/payment-confirmation.component";
 import { AcceptDialogComponent } from './components/police-representative/police-summary/accept-dialog/accept-dialog.component';
 import { DenyDialogComponent } from './components/police-representative/police-summary/deny-dialog/deny-dialog.component';
+import { CancelDialogComponent } from './components/police-representative/police-summary/cancel-dialog/cancel-dialog.component';
 
 
 @NgModule({
@@ -489,6 +490,7 @@ import { DenyDialogComponent } from './components/police-representative/police-s
     SubmittedApplicationsComponent,
     AcceptDialogComponent,
     DenyDialogComponent,
+    CancelDialogComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -660,7 +662,8 @@ import { DenyDialogComponent } from './components/police-representative/police-s
     DrinkPlannerDialog,
     PoliceSummaryComponent,
     AcceptDialogComponent,
-    DenyDialogComponent
+    DenyDialogComponent,
+    CancelDialogComponent
   ],
   bootstrap: [AppComponent]
 })
