@@ -132,7 +132,7 @@ export class PoliceSummaryComponent implements OnInit {
           // delete the application.
           this.busy = this.specialEventsDataService.policeApproveSepApplication(this.specialEventId)
             .subscribe(() => {
-              this.snackBar.open("Approved application.",
+              this.snackBar.open("Reviewed application.",
               "Success",
               { duration: 3500, panelClass: ["green-snackbar"] })
               this.router.navigate(['/dashboard']);
@@ -146,8 +146,8 @@ export class PoliceSummaryComponent implements OnInit {
 
   }
 
-  isApproved(): boolean {
-    return this.application?.eventStatus == 'Approved' || this.application?.eventStatus == 'Issued';
+  isReviewed(): boolean {
+    return this.application?.eventStatus == 'Reviewed' || this.application?.eventStatus == 'Issued';
   }
 
   isDenied(): boolean {
@@ -180,7 +180,7 @@ export class PoliceSummaryComponent implements OnInit {
     switch(this.application?.eventStatus){
       case ("PendingReview"):
         return faStopwatch;
-      case ("Approved"):
+      case ("Reviewed"):
         return faCheck;
       case ("Issued"):
         return faAward;
