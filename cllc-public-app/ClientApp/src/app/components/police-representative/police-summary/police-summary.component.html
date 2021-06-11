@@ -2,13 +2,56 @@
     <div [ngBusy]="[busy]"></div>
 
 
-<div class="form-wrapper-summary" *ngIf="application">
+<div class="form-wrapper-summary" *ngIf="sepApplication">
 
   <div class="row">
     <div style="width: 70%">
-    <h1 class="mat-heading">{{application.eventName}}</h1>
-    <h3>Start Date: {{application.eventStartDate | date: 'dd MMM yyyy'}}</h3>
-    <h3>Application number: {{application.specialEventPermitNumber}}</h3>
+    <h1 class="mat-heading">{{sepApplication.eventName}}</h1>
+    <h3>Start Date: {{sepApplication.eventStartDate | date: 'dd MMM yyyy'}}</h3>
+    <h3>Application Number: {{sepApplication.specialEventPermitNumber}}</h3>
+
+    <section [formGroup]="form" style="padding: 16px 32px;">
+            <section>
+                <app-field label="Municipality:" [required]="false" [valid]="isValidOrNotTouched('sepCity')"
+                    errorMessage="Please select a value">
+                    <input type="text" class="form-control" style="width: 500px;"
+                        placeholder="Type to search and then select a value" formControlName="sepCity"
+                        [matAutocomplete]="lgAutoCompleteBox" #lgAutoCompleteTrigger> &nbsp; <button mat-raised-button color="primary" (click)="updateMunicipality()">UPDATE</button>
+                    <mat-autocomplete #lgAutoCompleteBox="matAutocomplete" [displayWith]="autocompleteDisplay">
+                        <mat-option *ngFor="let item of cities" [value]="item">
+                            {{item.name}}
+                        </mat-option>
+                    </mat-autocomplete>
+                    <br>
+                    <mat-progress-bar *ngIf="sepCityRequestInProgress" mode="indeterminate"></mat-progress-bar>
+                </app-field>
+                <section>
+                    <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
+                    <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
+                        <section *ngIf="form.get('sepCity')?.value?.id">
+
+                            <mat-card class="mb-3">
+                                <label for="">Selected City </label>
+                                <div class="ml-2">
+                                    <label for="" class="mr-2">Name:</label>
+                                    <span>{{form.get('sepCity').value.name}}</span>
+                                </div>
+                                <div class="ml-2">
+                                    <label for="" class="mr-2">Police Jurisdiction:</label>
+                                    <span>{{form.get('sepCity').value.policeJurisdictionName}}</span>
+                                </div>
+
+                            </mat-card>
+                        </section>
+
+                        <section *ngIf="!form.get('sepCity')?.value?.id">
+                            No City selected
+                        </section>
+                    </div>
+                </section>
+            </section>
+    </section>
+
     <h2>REVIEWS REQUIRED FROM LCRB AND POLICE</h2>
     <h3>Reviews are assigned to:</h3>
     <table class="servings" style="width:50%">
@@ -17,13 +60,13 @@
             <th>LCRB Representative &nbsp;</th>
         </tr>
         <tr>
-            <td>{{application?.policeDecisionBy?.name ? application.policeDecisionBy.name : "No one is assigned"}}&nbsp;</td>
-            <td>{{application?.lcrbApprovalBy?.name ? application.lcrbApprovalBy.name : "No one is assigned"}}&nbsp;</td>
+            <td>{{sepApplication?.policeDecisionBy?.name ? sepApplication.policeDecisionBy.name : "No one is assigned"}}&nbsp;</td>
+            <td>{{sepApplication?.lcrbApprovalBy?.name ? sepApplication.lcrbApprovalBy.name : "No one is assigned"}}&nbsp;</td>
 
         </tr>
         <tr>
-          <td><em>{{application?.policeApproval}}</em></td>
-          <td><em>{{application?.lcrbApproval}}</em></td>
+          <td><em>{{sepApplication?.policeApproval}}</em></td>
+          <td><em>{{sepApplication?.lcrbApproval}}</em></td>
       </tr>
 
     </table>
@@ -35,31 +78,31 @@
 
     <section *ngIf="this.isApproved()">
       <!--if approved-->
-      <h3><fa-icon [icon]="getStatusIcon()" style="margin-right: 10px;"></fa-icon>{{application?.eventStatus}}</h3>
+      <h3><fa-icon [icon]="getStatusIcon()" style="margin-right: 10px;"></fa-icon>{{sepApplication?.eventStatus}}</h3>
       <p>This application for liquor service has been reviewed and accepted.</p>
 
-      <p *ngIf="application?.policeApproval == 'Auto Approved'">It was within the review threshold and was automatically accepted by your jurisdiction.</p>
+      <p *ngIf="sepApplication?.policeApproval == 'Auto Approved'">It was within the review threshold and was automatically accepted by your jurisdiction.</p>
 
     </section>
 
-    <section *ngIf="application?.eventStatus == 'Pending Review'">
+    <section *ngIf="sepApplication?.eventStatus == 'Pending Review'">
       <!-- if denied -->
       <h3><fa-icon [icon]="getStatusIcon()" style="margin-right: 10px;"></fa-icon>Pending Review</h3>
-      <p *ngIf="application.policeDecisionBy">The liquor service for this event is currently under review by {{application.policeDecisionBy?.name}}.</p>
+      <p *ngIf="sepApplication.policeDecisionBy">The liquor service for this event is currently under review by {{sepApplication.policeDecisionBy?.name}}.</p>
     </section>
 
     <section *ngIf="this.isDenied()">
       <!-- if denied -->
       <h3><fa-icon [icon]="getStatusIcon()" style="margin-right: 10px;"></fa-icon>{{application?.eventStatus}}</h3>
       <p>Liquor service for this event has been {{application?.eventStatus}} for the following reason:</p>
-      <p><em>{{application?.denialReason}}</em></p>
-      <p><em>{{application?.cancelReason}}</em></p>
+      <p><em>{{sepApplication?.denialReason}}</em></p>
+      <p><em>{{sepApplication?.cancelReason}}</em></p>
     </section>
 
     <section *ngIf="this.isCurrentUser()">
       <!-- if opened by assignee and event date has not passed -->
 
-    <button *ngIf="!this.isApproved() && !this.isDenied() && application?.policeApproval == 'Pending Review'" class="btn btn-primary"  (click)=approve() style="width:230px;">
+    <button *ngIf="!this.isApproved() && !this.isDenied() && sepApplication?.policeApproval == 'Pending Review'" class="btn btn-primary"  (click)=approve() style="width:230px;">
       <!-- if not already approved -->
         COMPLETE REVIEW&nbsp;
       </button>
@@ -157,7 +200,7 @@
     </mat-expansion-panel>
 
     <mat-expansion-panel [expanded]="true">
-        <div *ngFor="let location of application.eventLocations; index as i">
+        <div *ngFor="let location of sepApplication.eventLocations; index as i">
             <mat-expansion-panel-header>
                 <mat-panel-title>
                     EVENT LOCATION {{i+1}}
@@ -221,7 +264,7 @@
                     <th>Type</th>
                     <th>Servings</th>
                 </tr>
-                <tr *ngFor="let item of application.drinksSalesForecasts">
+                <tr *ngFor="let item of sepApplication.drinksSalesForecasts">
                     <td>{{item.name}}</td>
                     <td>{{item.estimatedServings}}</td>
                 </tr>
