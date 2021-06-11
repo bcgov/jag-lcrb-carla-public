@@ -21,15 +21,15 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
     if (value) {
       this._app = value;
       this.form.patchValue(this._app);
-      // this.form.get('totalMaximumNumberOfGuests').patchValue(this._app.totalMaximumNumberOfGuests);
       this.totalServings = this._app.totalServings;
+      debugger;
     }
   }
 
   get sepApplication() {
     return this._app;
   }
- @Input() hideGuestsAndHours = false;
+  @Input() hideGuestsAndHours = false;
   @Input()
   config: Array<DrinkConfig> = configuration;
 
@@ -73,10 +73,18 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
   private initForm(): void {
 
     this.form.get('hours').valueChanges
-    .subscribe( _ => this.totalServings = this.getTotalServings());
+      .subscribe(_ => {
+        if (!this.hideGuestsAndHours) {
+          this.totalServings = this.getTotalServings();
+        }
+      });
 
     this.form.get('totalMaximumNumberOfGuests').valueChanges
-    .subscribe( _ => this.totalServings = this.getTotalServings());
+      .subscribe(_ => {
+        if (!this.hideGuestsAndHours) {
+          this.totalServings = this.getTotalServings();
+        }
+      });
     // this.form.get('beer').valueChanges.subscribe((value: number) => {
     //   const remainder = 100 - value;
     //   const half = remainder / 2;
