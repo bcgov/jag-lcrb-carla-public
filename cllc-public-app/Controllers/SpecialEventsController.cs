@@ -772,7 +772,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     // select active accounts that match the given name
                     if (defaults)
                     {
-                        filter = $"statecode eq 0 and adoxio_ispreview req true)";
+                        filter = $"statecode eq 0 and adoxio_ispreview eq true";
                     }
                     else
                     {
