@@ -33,12 +33,12 @@
 
     <mat-card style="background-color: #e0e0e0; min-height: 200px;">
 
-    <section *ngIf="this.isApproved()">
-      <!--if approved-->
+    <section *ngIf="this.isReviewed()">
+      <!--if review-->
       <h3><fa-icon [icon]="getStatusIcon()" style="margin-right: 10px;"></fa-icon>{{application?.eventStatus}}</h3>
       <p>This application for liquor service has been reviewed and accepted.</p>
 
-      <p *ngIf="application?.policeApproval == 'Auto Approved'">It was within the review threshold and was automatically accepted by your jurisdiction.</p>
+      <p *ngIf="application?.policeApproval == 'Auto-Reviewed'">It was within the review threshold and was automatically accepted by your jurisdiction.</p>
 
     </section>
 
@@ -59,15 +59,15 @@
     <section *ngIf="this.isCurrentUser()">
       <!-- if opened by assignee and event date has not passed -->
 
-    <button *ngIf="!this.isApproved() && !this.isDenied() && application?.policeApproval == 'Pending Review'" class="btn btn-primary"  (click)=approve() style="width:230px;">
-      <!-- if not already approved -->
+    <button *ngIf="!this.isReviewed() && !this.isDenied() && application?.policeApproval == 'Pending Review'" class="btn btn-primary"  (click)=approve() style="width:230px;">
+      <!-- if not already reviewed -->
         COMPLETE REVIEW&nbsp;
       </button>
-      <p *ngIf="!this.isApproved() && application?.policeApproval == 'Approved'"><em>This application has been reviewed by your jurisdiction but is still pending review by LCRB.</em></p>
+      <p *ngIf="!this.isReviewed() && application?.policeApproval == 'Reviewed'"><em>This application has been reviewed by your jurisdiction but is still pending review by LCRB.</em></p>
 
       <hr>
       <button class="btn btn-secondary" *ngIf="!this.isDenied()" (click)="deny()" style="width: 230px;">
-        <span *ngIf="this.isApproved()">REVOKE</span><span *ngIf="!this.isApproved()">DENY</span> LIQUOR SERVICE&nbsp;
+        <span *ngIf="this.isReviewed()">REVOKE</span><span *ngIf="!this.isReviewed()">DENY</span> LIQUOR SERVICE&nbsp;
       </button>
     </section>
 
