@@ -171,7 +171,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 "adoxio_specialevent_specialeventlocations",
                 "adoxio_SpecialEventCityDistrictId",
                 "adoxio_ContactId",
-                "adoxio_AccountId"
+                "adoxio_AccountId",
+                "adoxio_specialevent_adoxio_sepdrinksalesforecast_SpecialEvent"
             };
             MicrosoftDynamicsCRMadoxioSpecialevent specialEvent = null;
             if (!string.IsNullOrEmpty(eventId))
@@ -340,7 +341,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return Unauthorized();
             }
 
-
             var patchEvent = new MicrosoftDynamicsCRMadoxioSpecialevent();
             patchEvent.CopyValues(specialEvent);
             // Only allow these status to be set by the portal. Any other status change is ignored
@@ -367,37 +367,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw httpOperationException;
             }
 
-            if (specialEvent.DrinksSalesForecasts?.Count > 0)
-            {
-                specialEvent.DrinksSalesForecasts.ForEach(forecast =>
-                {
-                    var newForecast = new MicrosoftDynamicsCRMadoxioSepdrinksalesforecast();
-                    newForecast.CopyValues(forecast);
+            saveTotalServings(specialEvent, existingEvent);
 
-                    newForecast.SpecialEventODataBind = _dynamicsClient.GetEntityURI("adoxio_specialevents", specialEvent.Id);
-                    if (!string.IsNullOrEmpty(forecast?.DrinkTypeId))
-                    {
-                        newForecast.DrinkTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_sepdrinksalesforecasts", forecast.DrinkTypeId);
-                    }
-                    try
-                    {
-                        if (string.IsNullOrEmpty((string)forecast.Id))
-                        { // create record
-                            newForecast = _dynamicsClient.Sepdrinksalesforecasts.Create(newForecast);
-                            forecast.Id = newForecast.AdoxioSepdrinksalesforecastid;
-                        }
-                        else
-                        { // update record
-                            _dynamicsClient.Sepdrinksalesforecasts.Update((string)forecast.Id, newForecast);
-                        }
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.LogError(httpOperationException, "Error creating/updating sep drinks sales forecast");
-                        throw httpOperationException;
-                    }
-                });
-            }
+
 
             if (specialEvent.EventLocations?.Count > 0)
             {
@@ -492,6 +464,67 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var result = this.getSpecialEventData(eventId).ToViewModel();
             result.LocalId = specialEvent.LocalId;
             return new JsonResult(result);
+        }
+
+        private void saveTotalServings(ViewModels.SpecialEvent specialEvent, MicrosoftDynamicsCRMadoxioSpecialevent existingEvent)
+        {
+            // get drink types
+            var filter = "adoxio_name eq 'Beer/Cider/Cooler' or ";
+            filter += "adoxio_name eq 'Wine' or ";
+            filter += "adoxio_name eq 'Spirits'";
+            var drinkTypes = _dynamicsClient.Sepdrinktypes.Get().Value
+                            .ToList();
+
+            // calculate serving amounts from percentages
+            int totalServings = specialEvent.TotalServings == null ? 0 : (int)specialEvent.TotalServings;
+            var typeData = new List<(string, int)>{
+                ("Beer/Cider/Cooler", (int)((specialEvent.beer * totalServings / 100) + 0.5)),
+                ("Wine", (int)((specialEvent.wine * totalServings / 100) + 0.5)),
+                ("Spirits", (int)((specialEvent.spirits * totalServings / 100) + 0.5)),
+            };
+
+            // Create or Update Drink Sale Forecast with the serving amounts
+            typeData.ForEach(data =>
+            {
+                string drinkTypeName = data.Item1;
+                int estimatedServings = data.Item2;
+                var drinkType = drinkTypes.Where(drinkType => drinkType.AdoxioName == drinkTypeName).FirstOrDefault();
+                var existingForecast = existingEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
+                    .Where(drink => drink._adoxioTypeValue == drinkType.AdoxioSepdrinktypeid)
+                    .FirstOrDefault();
+                createOrUpdateForecast(specialEvent, existingForecast, drinkType, estimatedServings);
+            });
+        }
+
+        private void createOrUpdateForecast(ViewModels.SpecialEvent specialEvent, MicrosoftDynamicsCRMadoxioSepdrinksalesforecast existingBeerForecast, MicrosoftDynamicsCRMadoxioSepdrinktype beerType, int estimatedServings)
+        {
+            try
+            {
+                var newForecast = new MicrosoftDynamicsCRMadoxioSepdrinksalesforecast()
+                {
+                    AdoxioIscharging = true,
+                    AdoxioPriceperserving = beerType.AdoxioMaxprice,
+                    AdoxioEstimatedservings = estimatedServings,
+                };
+                if (existingBeerForecast == null)
+                { // create record
+                    newForecast.SpecialEventODataBind = _dynamicsClient.GetEntityURI("adoxio_specialevents", specialEvent.Id);
+                    if (!string.IsNullOrEmpty(beerType?.AdoxioSepdrinktypeid))
+                    {
+                        newForecast.DrinkTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_sepdrinksalesforecasts", beerType.AdoxioSepdrinktypeid);
+                    }
+                    _dynamicsClient.Sepdrinksalesforecasts.Create(newForecast);
+                }
+                else
+                { // update record
+                    _dynamicsClient.Sepdrinksalesforecasts.Update((string)existingBeerForecast.AdoxioSepdrinksalesforecastid, newForecast);
+                }
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Error creating/updating sep drinks sales forecast");
+                throw httpOperationException;
+            }
         }
 
         [HttpGet("drink-types")]

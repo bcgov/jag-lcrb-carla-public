@@ -10,18 +10,18 @@ import { SpecialEventsDataService } from '@services/special-events-data.service'
   styleUrls: ['./drink-amounts.component.scss']
 })
 export class DrinkAmountsComponent implements OnInit {
-  _application: SepApplication
+  _application: SepApplication;
   @Input()
   set application(value: SepApplication) {
-    if(value){
+    if (value) {
       this._application = Object.assign(new SepApplication(), value);
     }
-  };
+  }
 
   get application() {
     return this._application;
   }
-  @Output() saved: EventEmitter<{declaredServings: number}> = new EventEmitter<{declaredServings: number}>();
+  @Output() saved: EventEmitter<{ declaredServings: number }> = new EventEmitter<{ declaredServings: number }>();
   @Output() back: EventEmitter<boolean> = new EventEmitter<boolean>();
   form: FormArray;
   // a list of drink types that will be fetched from the server
@@ -33,13 +33,13 @@ export class DrinkAmountsComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.fb.array([]);
     this.sepDataService.getSepDrinkTypes()
-    .subscribe(data => {
-      this.drinkTypes = data;
-    });
+      .subscribe(data => {
+        this.drinkTypes = data;
+      });
   }
 
-  addDrinkType(value: any = {}){
-    let drinkType = this.fb.group({
+  addDrinkType(value: any = {}) {
+    const drinkType = this.fb.group({
       id: [''],
       estimatedServings: [''],
       drinkTypeId: [''],
@@ -48,7 +48,8 @@ export class DrinkAmountsComponent implements OnInit {
     this.form.push(drinkType);
   }
 
-  next() {
-    this.saved.next(<any>{drinksSalesForecasts: this.form.value});
+  next(planner) {
+    const plannerValue = planner?.form?.value || {};
+    this.saved.next(<any>{ drinksSalesForecasts: this.form.value, ...plannerValue });
   }
 }

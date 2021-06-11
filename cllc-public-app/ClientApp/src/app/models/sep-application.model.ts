@@ -50,9 +50,13 @@ export class SepApplication {
     drinksSalesForecasts: SepDrinkSalesForecast[] = [];
     itemsToDelete: SepDeletedItems = new SepDeletedItems();
 
+    beer: number;
+    wine: number;
+    spirits: number;
+
     public get totalMaximumNumberOfGuests(): number {
         let maxGuests = 0;
-        for (var location of this.eventLocations) {
+        for (const location of this.eventLocations) {
             // accumulate the total hours of service by looping through the eventDates
             maxGuests += location.maximumNumberOfGuests || 0;
         }
@@ -63,7 +67,7 @@ export class SepApplication {
     public get maximumNumberOfAdults(): number {
 
         let maxMinors = 0;
-        for (var location of this.eventLocations) {
+        for (const location of this.eventLocations) {
             // accumulate the total hours of service by looping through the eventDates
             maxMinors += location.locationNumberMinors || 0;
         }
@@ -72,8 +76,8 @@ export class SepApplication {
 
     public get serviceHours(): number {
         let serviceHours = 0;
-        for (var location of this.eventLocations) {
-            for (var hours of location.eventDates) {
+        for (const location of this.eventLocations) {
+            for (const hours of location.eventDates) {
                 serviceHours += hours.getServiceHours();
             }
         }

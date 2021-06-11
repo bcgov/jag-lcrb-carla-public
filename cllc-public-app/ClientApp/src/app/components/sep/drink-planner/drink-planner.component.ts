@@ -14,20 +14,22 @@ import { SepApplication } from '@models/sep-application.model';
 export class DrinkPlannerComponent extends FormBase implements OnInit {
   // icons
   faLightbulb = faLightbulb;
+  totalServings = 0;
   _app: SepApplication;
 
   @Input() set sepApplication(value: SepApplication) {
     if (value) {
       this._app = value;
       this.form.patchValue(this._app);
-      this.form.get('totalMaximumNumberOfGuests').patchValue(this._app.totalMaximumNumberOfGuests);
+      // this.form.get('totalMaximumNumberOfGuests').patchValue(this._app.totalMaximumNumberOfGuests);
+      this.totalServings = this._app.totalServings;
     }
   }
 
   get sepApplication() {
     return this._app;
   }
-
+ @Input() hideGuestsAndHours = false;
   @Input()
   config: Array<DrinkConfig> = configuration;
 
@@ -43,9 +45,9 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
     spirits: 0,
   });
 
-  get totalServings(): number {
-    const { hours, guests } = this.form.value as { hours: number; guests: number };
-    return (hours / HOURS_OF_LIQUOR_SERVICE * guests * SERVINGS_PER_PERSON);
+  getTotalServings(): number {
+    const { hours, totalMaximumNumberOfGuests } = this.form.value;
+    return (hours / HOURS_OF_LIQUOR_SERVICE * totalMaximumNumberOfGuests * SERVINGS_PER_PERSON);
   }
 
   get totalPercentage(): number {
@@ -58,7 +60,7 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
   }
 
   ngOnInit() {
-    let values = {};
+    const values = {};
     for (const item of this.config) {
       values[item.group] = item.defaultPercentage;
     }
@@ -69,26 +71,32 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
   }
 
   private initForm(): void {
-    this.form.get('beer').valueChanges.subscribe((value: number) => {
-      const remainder = 100 - value;
-      const half = remainder / 2;
-      this.form.get('wine').setValue(Math.ceil(half), { emitEvent: false });
-      this.form.get('spirits').setValue(Math.floor(half), { emitEvent: false });
-    });
 
-    this.form.get('wine').valueChanges.subscribe((value: number) => {
-      const remainder = 100 - value;
-      const half = remainder / 2;
-      this.form.get('beer').setValue(Math.ceil(half), { emitEvent: false });
-      this.form.get('spirits').setValue(Math.floor(half), { emitEvent: false });
-    });
+    this.form.get('hours').valueChanges
+    .subscribe( _ => this.totalServings = this.getTotalServings());
 
-    this.form.get('spirits').valueChanges.subscribe((value: number) => {
-      const remainder = 100 - value;
-      const half = remainder / 2;
-      this.form.get('beer').setValue(Math.ceil(half), { emitEvent: false });
-      this.form.get('wine').setValue(Math.floor(half), { emitEvent: false });
-    });
+    this.form.get('totalMaximumNumberOfGuests').valueChanges
+    .subscribe( _ => this.totalServings = this.getTotalServings());
+    // this.form.get('beer').valueChanges.subscribe((value: number) => {
+    //   const remainder = 100 - value;
+    //   const half = remainder / 2;
+    //   this.form.get('wine').setValue(Math.ceil(half), { emitEvent: false });
+    //   this.form.get('spirits').setValue(Math.floor(half), { emitEvent: false });
+    // });
+
+    // this.form.get('wine').valueChanges.subscribe((value: number) => {
+    //   const remainder = 100 - value;
+    //   const half = remainder / 2;
+    //   this.form.get('beer').setValue(Math.ceil(half), { emitEvent: false });
+    //   this.form.get('spirits').setValue(Math.floor(half), { emitEvent: false });
+    // });
+
+    // this.form.get('spirits').valueChanges.subscribe((value: number) => {
+    //   const remainder = 100 - value;
+    //   const half = remainder / 2;
+    //   this.form.get('beer').setValue(Math.ceil(half), { emitEvent: false });
+    //   this.form.get('wine').setValue(Math.floor(half), { emitEvent: false });
+    // });
   }
 
   servings(config: DrinkConfig): number {
@@ -103,7 +111,7 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
   }
 
   storageMethodDescription(config: DrinkConfig): string {
-    if (config.storageMethod == 'kegs') {
+    if (config.storageMethod === 'kegs') {
       return `${config.storageMethod} of ${config.group}`;
     } else {
       return `${config.storageSizeMl} ml ${config.storageMethod} of ${config.group}`;
