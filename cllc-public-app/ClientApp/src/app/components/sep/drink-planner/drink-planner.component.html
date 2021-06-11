@@ -83,13 +83,13 @@
         <div class="row">
           <div class="col-md-4 offset-md-2 col-6">
             <h3 class="text-right">
-              <span class="total-percent">{{totalPercentage.toFixed(0)}} %</span>
+              <span class="total-percent">{{(totalPercentage || 0).toFixed(0)}} %</span>
             </h3>
           </div>
           <div class="col-6">
             <h3 class="w-100">
               &nbsp; = &nbsp;
-              <span class="total-servings">{{totalServings.toFixed(0) | mask : 'separator' : ','}}</span>
+              <span class="total-servings">{{(totalServings || 0).toFixed(0) | mask : 'separator' : ','}}</span>
               <small class="ml-2">total servings</small>
             </h3>
           </div>

@@ -37,6 +37,7 @@ export class LiquorComponent implements OnInit {
 
   updateValue(value) {
     this.value = { ...this.value, ...value };
+    this.saveToDB();
   }
 
   ngOnInit(): void {
