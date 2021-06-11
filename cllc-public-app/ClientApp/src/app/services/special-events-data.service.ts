@@ -69,6 +69,11 @@ export class SpecialEventsDataService extends DataService {
       .pipe(catchError(this.handleError));
   }
 
+  policeCancelSepApplication(id: string) {
+    return this.http.post<string>(`api/special-events/police/${id}/cancel`, {} , { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
   /**
    * delete a  special event application in Dynamics
    * @param data - special event application data

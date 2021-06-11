@@ -66,9 +66,15 @@
       <p *ngIf="!this.isReviewed() && application?.policeApproval == 'Reviewed'"><em>This application has been reviewed by your jurisdiction but is still pending review by LCRB.</em></p>
 
       <hr>
-      <button class="btn btn-secondary" *ngIf="!this.isDenied()" (click)="deny()" style="width: 230px;">
-        <span *ngIf="this.isReviewed()">REVOKE</span><span *ngIf="!this.isReviewed()">DENY</span> LIQUOR SERVICE&nbsp;
+      <!-- if it hasn't been reviewed, it can be denied -->
+      <button class="btn btn-secondary" *ngIf="!this.isDenied() && !this.isReviewed()" (click)="deny()" style="width: 230px;">
+        DENY LIQUOR SERVICE&nbsp;
       </button>
+      <!-- if it's been reviewed it must be revoked -->
+      <button class="btn btn-secondary" *ngIf="!this.isDenied() && this.isReviewed()" (click)="revoke()" style="width: 230px;">
+        REVOKE LIQUOR SERVICE&nbsp;
+      </button>
+
     </section>
 
     </mat-card>
