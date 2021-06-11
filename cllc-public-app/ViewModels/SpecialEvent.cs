@@ -170,5 +170,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public SepCity SepCity { get; set; }
 
         public Contact Applicant { get; set; }
+
+        public int beer { get; set; }
+        public int wine { get; set; }
+        public int spirits { get; set; }
     }
 }

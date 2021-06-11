@@ -105,6 +105,7 @@ export class SepApplicationComponent implements OnInit {
 
   completeStep(step: string, stepper: any, data: SepApplication) {
     this.application.lastStepCompleted = step;
+    data.lastStepCompleted = step;
     this.saveToDb(data);
     this.cd.detectChanges();
     if (environment.development) {
