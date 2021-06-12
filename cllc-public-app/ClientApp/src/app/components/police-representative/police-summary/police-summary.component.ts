@@ -97,7 +97,6 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
           });
       });
 
-      // super();
       specialEventsDataService.getSepCityAutocompleteData(null, true)
       .subscribe(results => {
         this.previewCities = results;
@@ -340,13 +339,21 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
     return this.form.valid;
   }
 
-  // update the municipality with the value chosen.
-  updateMunicipality(): void {
-
-
+  get cities(): AutoCompleteItem[] {
+    return [...this.autocompleteCities, ...this.previewCities];
   }
 
-
+  // update the municipality with the value chosen.
+  updateMunicipality(): void {
+    this.busy = this.specialEventsDataService.policeSetMunicipality(this.specialEventId, this.form.get('sepCity')?.value?.id)
+    .subscribe(() => {
+      this.snackBar.open("Set City.",
+      "Success",
+      { duration: 3500, panelClass: ["green-snackbar"] });
+    },
+      () => {
+        this.snackBar.open('Error setting city', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        console.error('Error setting city');
+      });    
+  }
 }
-
-
