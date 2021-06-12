@@ -130,6 +130,7 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
           this.form.patchValue(this.sepApplication);
         }
       });
+
       this.form.get('sepCity').valueChanges
       .pipe(filter(value => value && value.length >= 3),
         tap(_ => {
