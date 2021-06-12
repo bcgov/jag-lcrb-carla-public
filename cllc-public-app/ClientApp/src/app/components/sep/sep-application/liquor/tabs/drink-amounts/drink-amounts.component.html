@@ -14,98 +14,13 @@
             </mat-panel-title>
         </mat-expansion-panel-header>
         <section>
-            <app-drink-planner [sepApplication]="application"></app-drink-planner>
+            <app-drink-planner [hideGuestsAndHours]="true" [sepApplication]="application" #planner></app-drink-planner>
         </section>
     </mat-expansion-panel>
 
-    <!--mat-expansion-panel [expanded]="true">
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                NEED HELP PLANNING YOUR DRINK SIZES?
-            </mat-panel-title>
-        </mat-expansion-panel-header>
-        <section>
-            <h3>Drink Size Chart</h3>
 
-            <p>
-                These are the drink serving sizes for standard events and tasting events. Please note, tasting events
-                are limited to smaller drink sizes for sampling purposes.
-            </p>
-
-            <table class="drink-size-chart w-100">
-                <tbody>
-                    <tr>
-                        <th colspan="2">Beer, Ciders &amp; Coolers</th>
-                        <th colspan="2">Wine</th>
-                        <th colspan="2">Spirits</th>
-                    </tr>
-                    <tr>
-                        <th>Standard</th>
-                        <th>Tasting</th>
-                        <th>Standard</th>
-                        <th>Tasting</th>
-                        <th>Standard</th>
-                        <th>Tasting</th>
-                    </tr>
-                    <tr>
-                        <td>12 oz</td>
-                        <td>4 oz</td>
-                        <td>5 oz</td>
-                        <td>2 oz</td>
-                        <td>1.5 oz</td>
-                        <td>.5 oz</td>
-                    </tr>
-                    <tr>
-                        <td>340 ml</td>
-                        <td>114 ml</td>
-                        <td>142 ml</td>
-                        <td>60 ml</td>
-                        <td>43 ml</td>
-                        <td>15 ml</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <p>
-                When you submit your application you will need to provide liquor quantities and prices based on standard
-                drink sizes. For help converting tasting sizes and drink prices to standard drink sizes and prices click
-                here.
-            </p>
-        </section>
-    </mat-expansion-panel-->
     <mat-divider></mat-divider>
 
-    <h2>Liquor Quantities & Selling Prices</h2>
-
-    <p>
-        Enter the types of drinks and the number of servings for each. The quantities entered must total the
-        declared maximum servings for your event (step 1 total servings). To adjust the declared maximum go back
-        to step 1.
-    </p>
-
-    <p>
-        If liquor is included in the price of admission you will still need to provide a per-drink estimated
-        sale price based on an average cost per drink for your guests.
-    </p>
-
-    <section class="d-flex mb-2" [formGroupName]="i" *ngFor="let item of form.controls; let i = index;">
-        <select formControlName="drinkTypeId" class="form-control drink-select">
-            <option value=""></option>
-            <option [value]="drinkType.id" *ngFor="let drinkType of drinkTypes">{{drinkType.name}}
-                ({{drinkType.unitSize}})</option>
-        </select>
-        <span>
-
-            <!-- Equivalent to 1 [{{item.get('drinkTypeId').value | json}}] of {{item.get('drinkType').value?.name}} -->
-        </span>
-        <input class="form-control est-servings" type="number" formControlName="estimatedServings">
-        <button>REMOVE</button>
-    </section>
-
-    <span>
-        Total = 113 servings (out of 113 servings)
-    </span>
-    <button mat-raised-button color="primary" (click)="addDrinkType()">ADD MORE DRINKS</button>
 
     <mat-expansion-panel [expanded]="true">
         <mat-expansion-panel-header>
@@ -154,5 +69,5 @@
     </div>
 
     <button mat-raised-button color="secondary" (click)="back.emit(true)">BACK</button>
-    <button mat-raised-button color="primary" (click)="next()">NEXT</button>
+    <button mat-raised-button color="primary" (click)="next(planner)">NEXT</button>
 </form>
