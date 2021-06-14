@@ -159,6 +159,39 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return Unauthorized();
             }
+
+            var result = specialEvent.ToViewModel();
+
+            var drinkTypes = _dynamicsClient.Sepdrinktypes.Get().Value
+                            .ToList();
+
+            string beerTypeId = drinkTypes.Where(drinkType => drinkType.AdoxioName == "Beer/Cider/Cooler")
+                                .Select(drinkType => drinkType.AdoxioSepdrinktypeid)
+                                .FirstOrDefault();
+
+            string wineTypeId = drinkTypes.Where(drinkType => drinkType.AdoxioName == "Wine")
+                                .Select(drinkType => drinkType.AdoxioSepdrinktypeid)
+                                .FirstOrDefault();
+
+            string spiritsTypeId = drinkTypes.Where(drinkType => drinkType.AdoxioName == "Spirits")
+                                .Select(drinkType => drinkType.AdoxioSepdrinktypeid)
+                                .FirstOrDefault();
+
+            result.Beer = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
+                                .Where(forecast => forecast._adoxioTypeValue == beerTypeId)
+                                .Select(forecast => forecast.AdoxioEstimatedservings / specialEvent.AdoxioTotalservings * 100)
+                                .FirstOrDefault();
+
+            result.Wine = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
+                                .Where(forecast => forecast._adoxioTypeValue == wineTypeId)
+                                .Select(forecast => forecast.AdoxioEstimatedservings / specialEvent.AdoxioTotalservings * 100)
+                                .FirstOrDefault();
+
+            result.Spirits = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
+                                .Where(forecast => forecast._adoxioTypeValue == spiritsTypeId)
+                                .Select(forecast => forecast.AdoxioEstimatedservings / specialEvent.AdoxioTotalservings * 100)
+                                .FirstOrDefault();
+
             return new JsonResult(specialEvent.ToViewModel());
         }
 
@@ -203,6 +236,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         }
                         parentLocation.AdoxioSpecialeventlocationLicencedareas.Add(area);
                     }
+
                 }
                 catch (HttpOperationException)
                 {
@@ -474,13 +508,25 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             filter += "adoxio_name eq 'Spirits'";
             var drinkTypes = _dynamicsClient.Sepdrinktypes.Get().Value
                             .ToList();
+            
+            if(specialEvent.Beer == null){
+                specialEvent.Beer = 0;
+            }
+            
+            if(specialEvent.Wine == null){
+                specialEvent.Wine = 0;
+            }
+            
+            if(specialEvent.Spirits == null){
+                specialEvent.Spirits = 0;
+            }
 
             // calculate serving amounts from percentages
             int totalServings = specialEvent.TotalServings == null ? 0 : (int)specialEvent.TotalServings;
             var typeData = new List<(string, int)>{
-                ("Beer/Cider/Cooler", (int)((specialEvent.beer * totalServings / 100) + 0.5)),
-                ("Wine", (int)((specialEvent.wine * totalServings / 100) + 0.5)),
-                ("Spirits", (int)((specialEvent.spirits * totalServings / 100) + 0.5)),
+                ("Beer/Cider/Cooler", (int)((specialEvent.Beer * totalServings / 100) + 0.5)),
+                ("Wine", (int)((specialEvent.Wine * totalServings / 100) + 0.5)),
+                ("Spirits", (int)((specialEvent.Spirits * totalServings / 100) + 0.5)),
             };
 
             // Create or Update Drink Sale Forecast with the serving amounts
@@ -511,7 +557,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     newForecast.SpecialEventODataBind = _dynamicsClient.GetEntityURI("adoxio_specialevents", specialEvent.Id);
                     if (!string.IsNullOrEmpty(beerType?.AdoxioSepdrinktypeid))
                     {
-                        newForecast.DrinkTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_sepdrinksalesforecasts", beerType.AdoxioSepdrinktypeid);
+                        newForecast.DrinkTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_sepdrinktypes", beerType.AdoxioSepdrinktypeid);
                     }
                     _dynamicsClient.Sepdrinksalesforecasts.Create(newForecast);
                 }

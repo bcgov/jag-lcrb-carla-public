@@ -11,8 +11,10 @@ import { SepSchedule } from '@models/sep-schedule.model';
 export class TotalServingsComponent implements OnInit {
   _application: SepApplication
   @Input()
-  set application(value: SepApplication) {
-    if (value) {
+  set application(app: SepApplication) {
+    if (app) {
+      const value = JSON.parse(JSON.stringify(app));
+      delete value.totalMaximumNumberOfGuests;
       this._application = Object.assign(new SepApplication(), value);
       this.total_servings = this._application?.totalServings || 0;
       this.setServings(this._application);
