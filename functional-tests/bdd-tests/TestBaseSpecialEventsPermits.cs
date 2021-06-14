@@ -56,6 +56,7 @@ namespace bdd_tests
             var occasionOfEvent = "Description of event occasion.";
             var organizationName = "Test organization name";
             var organizationAddress = "645 Tyee RdVictoria, BC V9A 6X5";
+            var rationale = "Test rationale re significance.";
 
             Thread.Sleep(10000);
 
@@ -84,8 +85,13 @@ namespace bdd_tests
             var uiPublicProperty = ngDriver.FindElement(By.Id("mat-radio-18"));
             JavaScriptClick(uiPublicProperty);
 
-            // select 'No' for 'Is this an event of provincial, national, or international significance?'
-            // * already selected 'No' by default
+            // select 'Yes' for 'Is this an event of provincial, national, or international significance?'
+            var uiSignificance = ngDriver.FindElement(By.Id("mat-radio-20"));
+            JavaScriptClick(uiSignificance);
+
+            // enter rationale 
+            var uiRationale = ngDriver.FindElement(By.CssSelector("[formcontrolname='majorSignificanceRationale']"));
+            uiRationale.SendKeys(rationale);
 
             // select 'No' for 'Is this an event designated by municipal council as an event of municipal significance?'
             var uiMunicipalSignificance = ngDriver.FindElement(By.Id("mat-radio-24"));
