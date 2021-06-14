@@ -7,7 +7,7 @@ export class SepLocation {
     locationName: string;
     venueType: string;
     maximumNumberOfGuests: number;
-    locationNumberMinors: number;
+    numberOfMinors: number;
     eventLocationStreet1: string;
     eventLocationStreet2: string;
     eventLocationCity: string;
