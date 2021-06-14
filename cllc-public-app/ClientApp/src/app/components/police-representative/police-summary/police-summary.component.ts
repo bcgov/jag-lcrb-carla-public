@@ -12,6 +12,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { ContactDataService } from '@services/contact-data.service';
 import { Contact } from '@models/contact.model';
 import { AcceptDialogComponent } from '@components/police-representative/police-summary/accept-dialog/accept-dialog.component';
+import { DenyDialogComponent } from './deny-dialog/deny-dialog.component';
+import { CancelDialogComponent } from '@components/police-representative/police-summary/cancel-dialog/cancel-dialog.component';
+
 import {
   faAward,
   faBirthdayCake,
@@ -34,8 +37,6 @@ import {
 import {
   faBan
 } from "@fortawesome/free-solid-svg-icons";
-import { DenyDialogComponent } from './deny-dialog/deny-dialog.component';
-import { icon } from '@fortawesome/fontawesome-svg-core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { filter, tap, switchMap } from 'rxjs/operators';
 import { FormBase } from '@shared/form-base';
@@ -128,6 +129,7 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
           this.form.patchValue(this.sepApplication);
         }
       });
+
       this.form.get('sepCity').valueChanges
       .pipe(filter(value => value && value.length >= 3),
         tap(_ => {
@@ -168,21 +170,21 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
           // delete the application.
           this.busy = this.specialEventsDataService.policeApproveSepApplication(this.specialEventId)
             .subscribe(() => {
-              this.snackBar.open("Approved application.",
+              this.snackBar.open("Reviewed application.",
               "Success",
               { duration: 3500, panelClass: ["green-snackbar"] })
-              this.router.navigate(['/dashboard']);
+              this.router.navigate(['/sep/police/my-jobs']);
             },
               () => {
-                this.snackBar.open('Error approving the application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-                console.error('Error approving the application');
+                this.snackBar.open('Error reviewing the application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+                console.error('Error reviewing the application');
               });
         }
       });
 
   }
 
-  isApproved(): boolean {
+  isReviewed(): boolean {
     return this.sepApplication?.eventStatus == 'Approved' || this.sepApplication?.eventStatus == 'Issued';
   }
 
@@ -217,6 +219,7 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
       case ("PendingReview"):
         return faStopwatch;
       case ("Approved"):
+      case ("Reviewed"):
         return faCheck;
       case ("Issued"):
         return faAward;
@@ -257,19 +260,54 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
 
             this.busy = this.specialEventsDataService.policeDenySepApplication(this.specialEventId)
               .subscribe(() => {
-                this.snackBar.open("Cancelled application.",
+                this.snackBar.open("Denied application.",
                 "Success",
                 { duration: 3500, panelClass: ["green-snackbar"] })
-                this.router.navigate(['/dashboard']);
+                this.router.navigate(['/sep/police/my-jobs']);
               },
                 () => {
-                  this.snackBar.open('Error cancelling the application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-                  console.error('Error approving the application');
+                  this.snackBar.open('Error denying the application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+                  console.error('Error denying the application');
                 });
           }
         });
 
   }
+
+  revoke(): void {
+
+    // open dialog, get reference and process returned data from dialog
+    const dialogConfig = {
+      disableClose: true,
+      autoFocus: true,
+      width: '500px',
+      height: '500px',
+      data: {
+        showStartApp: false
+      }
+    };
+
+  const dialogRef = this.dialog.open(CancelDialogComponent, dialogConfig);
+  dialogRef.afterClosed()
+    //.pipe(takeWhile(() => this.componentActive))
+    .subscribe(cancelApplication => {
+      if (cancelApplication) {
+
+        this.busy = this.specialEventsDataService.policeCancelSepApplication(this.specialEventId)
+          .subscribe(() => {
+            this.snackBar.open("Cancelled application.",
+            "Success",
+            { duration: 3500, panelClass: ["green-snackbar"] })
+            this.router.navigate(['/sep/police/my-jobs']);
+          },
+            () => {
+              this.snackBar.open('Error cancelling the application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+              console.error('Error cancelling the application');
+            });
+      }
+    });
+
+}
 
 
   getFormValue(): SepApplication {
@@ -285,9 +323,9 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
   }
 
   setFormValue(app: SepApplication) {
-    if (app) {      
+    if (app) {
       this.form.patchValue(app);
-    } 
+    }
   }
 
   autocompleteDisplay(item: AutoCompleteItem) {
