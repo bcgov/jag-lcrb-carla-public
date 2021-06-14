@@ -5,8 +5,6 @@ export class SepServiceArea {
     minorPresent: boolean;
     licencedAreaMaxNumberOfGuests: number;
     maximumNumberOfGuests: number;
-    isBothOutdoorIndoor: boolean;
-    isIndoors: boolean;
     numberOfMinors: number;
     licencedAreaNumberOfMinors: number;
     setting: number;

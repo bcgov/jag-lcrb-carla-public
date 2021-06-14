@@ -5,6 +5,7 @@ export class SepLocation {
     id: string; // server side primary key
     locationPermitNumber: string;
     locationName: string;
+    locationDescription: string;
     venueType: string;
     maximumNumberOfGuests: number;
     numberOfMinors: number;
