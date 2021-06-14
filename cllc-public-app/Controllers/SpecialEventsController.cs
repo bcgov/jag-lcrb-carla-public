@@ -14,6 +14,7 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Rest;
+using System.Threading.Tasks;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
@@ -30,10 +31,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
         private readonly IBCEPService _bcep;
+        private readonly IPdfService _pdfClient;
 
         public SpecialEventsController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor,
             ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient, FileManagerClient fileClient, IBCEPService bcep,
-            IWebHostEnvironment env, IMemoryCache memoryCache)
+            IWebHostEnvironment env, IMemoryCache memoryCache, IPdfService pdfClient)
         {
             _cache = memoryCache;
             _configuration = configuration;
@@ -43,6 +45,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _fileManagerClient = fileClient;
             _env = env;
             _bcep = bcep;
+            _pdfClient = pdfClient;
         }
 
         // get summary list of applications past submission status
@@ -160,6 +163,65 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return Unauthorized();
             }
             return new JsonResult(specialEvent.ToViewModel());
+        }
+
+        /// <summary>
+        ///     endpoint for a pdf
+        /// </summary>
+        /// <param name="eventId"></param>
+        /// <returns></returns>
+        [HttpGet("applicant/{eventId}/pdf/{filename}")]
+        public async Task<IActionResult> GetSEPPDF(string eventId, string filename)
+        {
+            MicrosoftDynamicsCRMadoxioSpecialevent specialEvent = getSpecialEventData(eventId);
+
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+
+            var locationDetails = "";
+
+            foreach(var location in specialEvent.AdoxioSpecialeventSpecialeventlocations) {
+
+                locationDetails += $"<h2>Event Location - {location.AdoxioLocationname}</h2>";
+                locationDetails += "<table>";
+                locationDetails += $"<tr><td>Location Name</td><td>{location.AdoxioLocationname}</td></tr>";
+                locationDetails += $"<tr><td>Location Description</td><td>{location.AdoxioLocationdescription}</td></tr>";
+                locationDetails += $"<tr><td>Event Address</td><td>{location.AdoxioEventlocationstreet2} {location.AdoxioEventlocationstreet1} <br>{location.AdoxioEventlocationcity}<br>BC, {location.AdoxioEventlocationpostalcode}</td></tr>";
+                locationDetails += $"<tr><td>No. Guests</td><td>{location.AdoxioMaximumnumberofguestslocation}</td></tr>";
+                locationDetails += $"<tr><td>No. Minors</td><td>{location.AdoxioNumberofminors}</td></tr>";
+                locationDetails += "</table>";
+
+                //foreach(var sa in location.)
+
+            }
+
+            parameters.Add("title", "Special Event Permit");
+            parameters.Add("printDate", DateTime.Today.ToString("MMMM dd, yyyy"));
+            parameters.Add("locationDetails", locationDetails);
+            var templateName = "sep";
+
+            byte[] data = await _pdfClient.GetPdf(parameters, templateName);
+
+            // To Do; Save copy of generated sep PDF for auditing/logging purposes
+            /*
+            try
+            {
+                var hash = await _pdfClient.GetPdfHash(parameters, templateName);
+                var entityName = "special event";
+                var entityId = adoxioLicense.AdoxioLicencesid;
+                var folderName = await _dynamicsClient.GetFolderName(entityName, entityId).ConfigureAwait(true);
+                var documentType = "Licence";
+                _fileManagerClient.UploadPdfIfChanged(_logger, entityName, entityId, folderName, documentType, data, hash);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error uploading PDF");
+            }
+            */
+
+            return File(data, "sep/pdf", $"Special Event Permit - {specialEvent.AdoxioSpecialeventpermitnumber}.pdf");
+
+
+            //return new UnauthorizedResult();
         }
 
         private MicrosoftDynamicsCRMadoxioSpecialevent getSpecialEventData(string eventId)
