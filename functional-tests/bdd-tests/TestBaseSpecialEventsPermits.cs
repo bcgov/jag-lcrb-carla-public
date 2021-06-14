@@ -52,10 +52,10 @@ namespace bdd_tests
             Page Title: Eligibility
             */
 
-            var responsibleBeverageServiceNumber = "1234567";
-            var occasionOfEvent = "Description of event occasion.";
-            var organizationName = "Test organization name";
-            var organizationAddress = "645 Tyee RdVictoria, BC V9A 6X5";
+            // var responsibleBeverageServiceNumber = "1234567";
+            // var occasionOfEvent = "Description of event occasion.";
+            // var organizationName = "Test organization name";
+            // var organizationAddress = "645 Tyee RdVictoria, BC V9A 6X5";
             var rationale = "Test rationale re significance.";
 
             Thread.Sleep(10000);
@@ -90,7 +90,7 @@ namespace bdd_tests
             JavaScriptClick(uiSignificance);
 
             // enter rationale 
-            var uiRationale = ngDriver.FindElement(By.CssSelector("[formcontrolname='majorSignificanceRationale']"));
+            var uiRationale = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='majorSignificanceRationale']"));
             uiRationale.SendKeys(rationale);
 
             // select 'No' for 'Is this an event designated by municipal council as an event of municipal significance?'
