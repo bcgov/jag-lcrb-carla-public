@@ -50,9 +50,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
     public enum ApproverStatus
     {
-        [EnumMember(Value = "Auto-Approved")]
-        AutoApproved = 100000000,
-        Approved = 845280000,
+        [EnumMember(Value = "Auto-Reviewed")]
+        AutoReviewed = 100000000,
+        Reviewed = 845280000,
         [EnumMember(Value = "Pending Review")]
         PendingReview = 100000001,
         Denied = 845280001,

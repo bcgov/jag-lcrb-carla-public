@@ -1,0 +1,18 @@
+<mat-dialog-content>
+  <div>
+    <h1>Cancel Liquor Service</h1>
+    <hr>
+    <p>Are you sure you want to cancel liquor service for this approved event?</p>
+
+    <p><strong>Reason for Cancelling Liquor Service:</strong></p>
+    <textarea name="" id="" rows="5" style="width:90%"></textarea>
+
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button class="btn btn-secondary" (click)="close()" id="cancelNo">CLOSE</button>&nbsp;
+  <button class="btn btn-primary" (click)="cancel()" id="cancelYes">Cancel SERVICE</button>
+  <p>&nbsp;</p>
+  <p style="margin-top:20px;"><small>Once you complete your review the applicant will be notified.</small></p>
+</mat-dialog-actions>
