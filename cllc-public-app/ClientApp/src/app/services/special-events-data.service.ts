@@ -68,6 +68,11 @@ export class SpecialEventsDataService extends DataService {
       .pipe(catchError(this.handleError));
   }
 
+  policeCancelSepApplication(id: string) {
+    return this.http.post<string>(`api/special-events/police/${id}/cancel`, {} , { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
   /**
    * set the municipality for a special event to the sep city provided
    * @param id - special event id
