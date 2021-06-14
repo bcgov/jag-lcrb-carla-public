@@ -12,8 +12,10 @@ import { SpecialEventsDataService } from '@services/special-events-data.service'
 export class DrinkAmountsComponent implements OnInit {
   _application: SepApplication;
   @Input()
-  set application(value: SepApplication) {
-    if (value) {
+  set application(app: SepApplication) {
+    if (app) {
+      const value = JSON.parse(JSON.stringify(app));
+      delete value.totalMaximumNumberOfGuests;
       this._application = Object.assign(new SepApplication(), value);
     }
   }

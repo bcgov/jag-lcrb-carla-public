@@ -171,8 +171,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public Contact Applicant { get; set; }
 
-        public int beer { get; set; }
-        public int wine { get; set; }
-        public int spirits { get; set; }
+        public int? Beer { get; set; }
+        public int? Wine { get; set; }
+        public int? Spirits { get; set; }
     }
 }
