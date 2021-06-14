@@ -312,9 +312,9 @@
                 [valid]="!form.get('isLocationLicensed').touched || form.get('isLocationLicensed').valid"
                 errorMessage="Licence exists is not included in the list">
                 <mat-radio-group formControlName="isLocationLicensed">
-                    <mat-radio-button color="primary" class="mr-3" value="yes">Yes</mat-radio-button>
-                    <mat-radio-button color="primary" class="mr-3" value="no">No</mat-radio-button>
-                    <mat-radio-button color="primary" class="mr-3" value="notSure">Not sure</mat-radio-button>
+                    <mat-radio-button color="primary" class="mr-3" value="Yes">Yes</mat-radio-button>
+                    <mat-radio-button color="primary" class="mr-3" value="No">No</mat-radio-button>
+                    <mat-radio-button color="primary" class="mr-3" value="NotSure">Not sure</mat-radio-button>
                 </mat-radio-group>
                 <app-error-alert *ngIf="form.get('isLocationLicensed').value && form.get('isLocationLicensed').value !== 'no'">
                     If your event location is licensed, the liquor licence must be temporarily suspended for your event
