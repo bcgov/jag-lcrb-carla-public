@@ -24,10 +24,6 @@ namespace Gov.Lclb.Cllb.Public.Models
                     SpecialEventId = serviceArea._adoxioSpecialeventidValue,
                     MinorPresent = serviceArea.AdoxioMinorpresent,
                     LicencedAreaMaxNumberOfGuests = serviceArea.AdoxioLicencedareamaxnumberofguests,
-                    MaximumNumberOfGuests = serviceArea.AdoxioLicencedareamaxnumberofguests,
-                    // IsBothOutdoorIndoor = serviceArea.,
-                    // IsIndoors = serviceArea.,
-                    // IsOutdoors = serviceArea.,
                     NumberOfMinors = serviceArea.AdoxioLicencedareanumberofminors,
                     LicencedAreaNumberOfMinors = serviceArea.AdoxioLicencedareanumberofminors,
                     Setting = (ViewModels.ServiceAreaSetting?)serviceArea.AdoxioSetting,
@@ -45,7 +41,6 @@ namespace Gov.Lclb.Cllb.Public.Models
         {
             to.AdoxioMinorpresent = from.MinorPresent;
             to.AdoxioLicencedareamaxnumberofguests = from.LicencedAreaMaxNumberOfGuests;
-            to.AdoxioLicencedareamaxnumberofguests = from.MaximumNumberOfGuests;
             to.AdoxioLicencedareanumberofminors = from.NumberOfMinors;
             to.AdoxioLicencedareanumberofminors = from.LicencedAreaNumberOfMinors;
             to.AdoxioSetting = (int?)from.Setting;

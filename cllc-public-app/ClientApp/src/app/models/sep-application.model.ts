@@ -69,7 +69,7 @@ export class SepApplication {
         let maxMinors = 0;
         for (const location of this.eventLocations) {
             // accumulate the total hours of service by looping through the eventDates
-            maxMinors += location.locationNumberMinors || 0;
+            maxMinors += location.numberOfMinors || 0;
         }
         return this.totalMaximumNumberOfGuests - maxMinors;
     }
