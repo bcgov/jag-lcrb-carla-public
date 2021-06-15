@@ -9,14 +9,25 @@ using System.Web;
 
 namespace Gov.Lclb.Cllb.Interfaces
 {
+    public enum PaymentType
+    {
+        CANNABIS,
+        LIQUOR,
+        SPECIAL_EVENT
+    };
+
     public class BCEPService: IBCEPService
     {
-        private string bcep_pay_url;
+        
+
+    private string bcep_pay_url;
         private string bcep_verify_url;
         private string bcep_merchid;
         private string bcep_alt_merchid;
+        private string bcep_sep_merchid;
         private string bcep_hashkey;
         private string bcep_alt_hashkey;
+        private string bcep_sep_hashkey;
         private string bcep_conf_url;
        
 
@@ -57,8 +68,11 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             this.bcep_merchid = configuration["BCEP_MERCHANT_ID"]; 
             this.bcep_alt_merchid = configuration["BCEP_ALTERNATE_MERCHANT_ID"];
+            this.bcep_sep_merchid = configuration["BCEP_SEP_MERCHANT_ID"];
             this.bcep_hashkey = configuration["BCEP_HASH_KEY"];
             this.bcep_alt_hashkey = configuration["BCEP_ALTERNATE_HASH_KEY"];
+            this.bcep_sep_hashkey = configuration["BCEP_SEP_HASH_KEY"];
+
             this.bcep_conf_url = configuration["BASE_URI"] + configuration["BASE_PATH"] + configuration["BCEP_CONF_PATH"];
         }
 
@@ -72,30 +86,38 @@ namespace Gov.Lclb.Cllb.Interfaces
             this.bcep_hashkey = ut_hash_key;
         }
 
-        private string GetMerchId (bool isAlternateAccount)
+        private string GetMerchId (PaymentType paymentType)
         {
-            string merchid;
-            if (isAlternateAccount)
+            string merchid = null;
+            switch (paymentType)
             {
-                merchid = this.bcep_alt_merchid;
-            }
-            else
-            {
-                merchid = this.bcep_merchid;
+                case PaymentType.CANNABIS:
+                    merchid = bcep_merchid;
+                    break;
+                case PaymentType.LIQUOR:
+                    merchid = bcep_alt_merchid;
+                    break;
+                case PaymentType.SPECIAL_EVENT:
+                    merchid = bcep_sep_merchid;
+                    break;
             }
             return merchid;
         }
 
-        private string GetHashKey(bool isAlternateAccount)
+        private string GetHashKey(PaymentType paymentType)
         {
-            string hashKey;
-            if (isAlternateAccount)
+            string hashKey = null;
+            switch (paymentType)
             {
-                hashKey = this.bcep_alt_hashkey;
-            }
-            else
-            {
-                hashKey = this.bcep_hashkey;
+                case PaymentType.CANNABIS:
+                    hashKey = bcep_hashkey;
+                    break;
+                case PaymentType.LIQUOR:
+                    hashKey = bcep_alt_hashkey;
+                    break;
+                case PaymentType.SPECIAL_EVENT:
+                    hashKey = bcep_sep_hashkey;
+                    break;
             }
             return hashKey;
         }
@@ -106,14 +128,14 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name="applicationId">GUID of the Application to pay</param>
         /// <param name="amount">amount to pay (from invoice)</param>
         /// <returns></returns>
-        public string GeneratePaymentRedirectUrl(string orderNum, string applicationId, string amount, bool isAlternateAccount, string confUrl = null)
+        public string GeneratePaymentRedirectUrl(string orderNum, string applicationId, string amount, PaymentType paymentType, string confUrl = null)
         {
             if (confUrl == null)
             {
                 confUrl = bcep_conf_url;
             }
 
-            string merchid = GetMerchId(isAlternateAccount);
+            string merchid = GetMerchId(paymentType);
 
             // build the param string for the re-direct url
             string paramString = BCEP_P_MERCH_ID + "=" + merchid +
@@ -133,7 +155,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             // replace spaces with "%20" (do not do a full url encoding; does not work with BeanStream)
             paramString = paramString.Replace(" ", "%20");
 
-            string hashkey = GetHashKey(isAlternateAccount);
+            string hashkey = GetHashKey(paymentType);
 
             // add hash key at the end of params
             string paramStringWithHash = paramString + hashkey;
@@ -159,17 +181,17 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         /// <summary>
         /// Process a payment response from Bamboora (payment success or failed)
-        /// This can be called if no response is received from Bamboora - it will query the server directly
+        /// This can be called if no response is received from Bambora - it will query the server directly
         /// based on the Application's Invoice number
         /// </summary>
         /// <param name="orderNum">Order number (transaction id from invoice)</param>
         /// <param name="txnId">Bambora transaction id</param>
         /// <returns></returns>
-        public async Task<Dictionary<string, string>> ProcessPaymentResponse(string orderNum, string txnId, bool isAlternateAccount)
+        public async Task<Dictionary<string, string>> ProcessPaymentResponse(string orderNum, string txnId, PaymentType paymentType)
         {
             var txn = new BCEPTransaction();
 
-            var query_url = GetVerifyPaymentTransactionUrl(orderNum, txnId, isAlternateAccount);
+            var query_url = GetVerifyPaymentTransactionUrl(orderNum, txnId, paymentType);
             Dictionary<string, string> responseDict = new Dictionary<string, string>();
             responseDict["query_url"] = query_url;
 
@@ -219,10 +241,10 @@ namespace Gov.Lclb.Cllb.Interfaces
             return responseDict;
         }
 
-        public string GetVerifyPaymentTransactionUrl(string orderNum, string txnId, bool isAlternateAccount)
+        public string GetVerifyPaymentTransactionUrl(string orderNum, string txnId, PaymentType paymentType)
         {
 
-            string merchid = GetMerchId(isAlternateAccount);
+            string merchid = GetMerchId(paymentType);
 
             // build the param string for the re-direct url
             string paramString = BCEP_Q_REQUEST_TYPE +
@@ -233,7 +255,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             // replace spaces with "%20" (do not do a full url encoding; does not work with BeanStream)
             paramString = paramString.Replace(" ", "%20");
 
-            string hashkey = GetHashKey(isAlternateAccount);
+            string hashkey = GetHashKey(paymentType);
 
             // add hash key at the end of params
             string paramStringWithHash = paramString + hashkey;
