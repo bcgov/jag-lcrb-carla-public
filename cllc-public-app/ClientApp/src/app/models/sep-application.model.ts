@@ -2,6 +2,7 @@ import { Contact } from "./contact.model";
 import { SepCity } from "./sep-city.model";
 import { SepDrinkSalesForecast } from "./sep-drink-sales-forecast.model";
 import { SepLocation } from "./sep-location.model";
+import { Account } from "./account.model";
 
 export class SepApplication {
     id: string; // server side primary key
