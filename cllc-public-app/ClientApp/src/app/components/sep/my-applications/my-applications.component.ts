@@ -39,13 +39,14 @@ export class MyApplicationsComponent implements OnInit {
   }
 
   async getApplications() {
-    let apps = await this.db.applications.toArray();
-    apps = apps.sort((a, b) => {
+    let applications = await this.db.applications.toArray();
+    applications = applications.filter(app => app.eventStatus === 'Draft');
+    applications = applications.sort((a, b) => {
       const dateA = new Date(a.dateCreated).getTime();
       const dateB = new Date(b.dateCreated).getTime();
       return dateB - dateA;
     });
-    this.applications = apps;
+    this.applications = applications;
   }
 
   startApplication() {
@@ -105,7 +106,6 @@ export class MyApplicationsComponent implements OnInit {
   }
 
   getLastStep(stepCompleted: string): string {
-    debugger;
     const lastIndex = SEP_APPLICATION_STEPS.indexOf(stepCompleted);
     // return the next step to be completed
     return SEP_APPLICATION_STEPS[lastIndex + 1];
