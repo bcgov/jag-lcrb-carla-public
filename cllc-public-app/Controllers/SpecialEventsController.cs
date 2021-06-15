@@ -212,7 +212,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             var locationDetails = "";
 
-            foreach(var location in specialEvent.AdoxioSpecialeventSpecialeventlocations) {
+            foreach (var location in specialEvent.AdoxioSpecialeventSpecialeventlocations)
+            {
 
                 locationDetails += $"<h2>Event Location - {location.AdoxioLocationname}</h2>";
                 locationDetails += "<table>";
@@ -526,12 +527,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             {
                                 var newDates = new MicrosoftDynamicsCRMadoxioSpecialeventschedule();
                                 newDates.CopyValues(dates);
-                                newDates.AdoxioSpecialEventODataBind = _dynamicsClient.GetEntityURI("adoxio_specialevents", specialEvent.Id);
-                                newDates.AdoxioSpecialEventLocationODataBind = _dynamicsClient.GetEntityURI("adoxio_specialeventlocations", location.Id);
                                 try
                                 {
                                     if (string.IsNullOrEmpty(dates.Id))
                                     { // create record
+                                        newDates.AdoxioSpecialEventODataBind = _dynamicsClient.GetEntityURI("adoxio_specialevents", specialEvent.Id);
+                                        newDates.AdoxioSpecialEventLocationODataBind = _dynamicsClient.GetEntityURI("adoxio_specialeventlocations", location.Id);
                                         newDates = _dynamicsClient.Specialeventschedules.Create(newDates);
                                         dates.Id = newDates.AdoxioSpecialeventscheduleid;
                                     }
@@ -542,7 +543,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                 }
                                 catch (HttpOperationException httpOperationException)
                                 {
-                                    _logger.LogError(httpOperationException, "Error creating/updating special event location");
+                                    _logger.LogError(httpOperationException, "Error creating/updating special event schedule");
                                     throw httpOperationException;
                                 }
                             });
@@ -570,16 +571,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             filter += "adoxio_name eq 'Spirits'";
             var drinkTypes = _dynamicsClient.Sepdrinktypes.Get().Value
                             .ToList();
-            
-            if(specialEvent.Beer == null){
+
+            if (specialEvent.Beer == null)
+            {
                 specialEvent.Beer = 0;
             }
-            
-            if(specialEvent.Wine == null){
+
+            if (specialEvent.Wine == null)
+            {
                 specialEvent.Wine = 0;
             }
-            
-            if(specialEvent.Spirits == null){
+
+            if (specialEvent.Spirits == null)
+            {
                 specialEvent.Spirits = 0;
             }
 

@@ -203,7 +203,7 @@ export class EventComponent extends FormBase implements OnInit {
   }
 
   createEventDate(eventDate: SepSchedule) {
-    let datesForm = this.fb.group({
+    const datesForm = this.fb.group({
       id: [null],
       eventDate: [''],
       eventStartValue: [''],
