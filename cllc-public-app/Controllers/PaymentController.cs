@@ -132,9 +132,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 Dictionary<string, string> redirectUrl;
                 redirectUrl = new Dictionary<string, string>();
 
-                bool isAlternateAccount = application.IsLiquor(_dynamicsClient); // set to true for Liquor.
+                PaymentType paymentType = application.GetPaymentType(_dynamicsClient); // set to true for Liquor.
 
-                redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt), isAlternateAccount);
+                redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt), paymentType);
 
                 _logger.Debug(">>>>>" + redirectUrl["url"]);
 
@@ -254,8 +254,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 redirectUrl = new Dictionary<string, string>();
 
                 bool isAlternateAccount = (invoiceType == secondary); // set to true for Liquor. The secondary invoice type is for Liquor.
+                PaymentType paymentType = PaymentType.CANNABIS;
+                if (isAlternateAccount)
+                {
+                    paymentType = PaymentType.LIQUOR;
+                }
+
                 string redirectPath = $"{_configuration["BASE_URI"]}{_configuration["BASE_PATH"]}/permanent-change-to-a-licensee/{id}/{invoiceType}";
-                redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt), isAlternateAccount, redirectPath);
+                redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt), paymentType, redirectPath);
 
                 _logger.Debug(">>>>>" + redirectUrl["url"]);
 
@@ -373,13 +379,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // dynamics determines the amount based on the licence type of the application
                 var orderamt = invoice.Totalamount;
 
-                bool isAlternateAccount = application.IsLiquor(_dynamicsClient); // set to true for Liquor.
+                PaymentType paymentType = application.GetPaymentType(_dynamicsClient); // set to true for Liquor.
 
                 Dictionary<string, string> redirectUrl;
                 redirectUrl = new Dictionary<string, string>();
 
                 var redirectPath = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/licence-fee-payment-confirmation";
-                redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt), isAlternateAccount, redirectPath);
+                redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt), paymentType, redirectPath);
 
                 _logger.Debug(">>>>>" + redirectUrl["url"]);
 
@@ -416,9 +422,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var ordernum = invoice.AdoxioTransactionid;
             var orderamt = invoice.Totalamount;
 
-            bool isAlternateAccount = application.IsLiquor(_dynamicsClient); // determine if it is for liquor
+            PaymentType paymentType = application.GetPaymentType(_dynamicsClient); // determine if it is for liquor
 
-            var response = await _bcep.ProcessPaymentResponse(ordernum, id, isAlternateAccount);
+            var response = await _bcep.ProcessPaymentResponse(ordernum, id, paymentType);
 
             if (response.ContainsKey("error"))
             {
@@ -487,7 +493,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         throw (httpOperationException);
                     }
 
-                    _logger.Information($"Payment approved.  Application ID: {id} Invoice: {invoice.Invoicenumber} Liquor: {isAlternateAccount}");
+                    _logger.Information($"Payment approved.  Application ID: {id} Invoice: {invoice.Invoicenumber} Liquor: {paymentType}");
 
                 }
                 // if payment failed:
@@ -527,7 +533,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         throw (httpOperationException);
                     }
 
-                    _logger.Information($"Payment not approved.  Application ID: {id} Invoice: {invoice.Invoicenumber} Liquor: {isAlternateAccount}");
+                    _logger.Information($"Payment not approved.  Application ID: {id} Invoice: {invoice.Invoicenumber} Liquor: {paymentType}");
 
                 }
             }
@@ -565,9 +571,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var ordernum = invoice.AdoxioTransactionid;
             var orderamt = invoice.Totalamount;
 
-            bool isAlternateAccount = application.IsLiquor(_dynamicsClient); // set to true for Liquor.
+            PaymentType paymentType = application.GetPaymentType(_dynamicsClient);
 
-            var response = await _bcep.ProcessPaymentResponse(ordernum, id, isAlternateAccount);
+            var response = await _bcep.ProcessPaymentResponse(ordernum, id, paymentType);
 
             if (response.ContainsKey("error"))
             {
@@ -640,7 +646,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         await _geocoderClient.GeocodeEstablishment(application._adoxioLicenceestablishmentValue, _logger);
                     }
 
-                    _logger.Information($"Licence Fee Transaction approved.  Application ID: {id} Invoice: {invoice.Invoicenumber} Liquor: {isAlternateAccount}");
+                    _logger.Information($"Licence Fee Transaction approved.  Application ID: {id} Invoice: {invoice.Invoicenumber} Liquor: {paymentType}");
 
                 }
                 // if payment failed:
@@ -682,7 +688,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         // fail 
                         throw (httpOperationException);
                     }
-                    _logger.Information($"Licence Fee Transaction NOT approved.  Application ID: {id} Invoice: {invoice.Invoicenumber} Liquor: {isAlternateAccount}");
+                    _logger.Information($"Licence Fee Transaction NOT approved.  Application ID: {id} Invoice: {invoice.Invoicenumber} Liquor: {paymentType}");
                 }
 
 
@@ -739,7 +745,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             bool isAlternateAccount = (invoiceType == secondary); // determine if it is for liquor
 
-            var response = await _bcep.ProcessPaymentResponse(ordernum, id, isAlternateAccount);
+            PaymentType paymentType = PaymentType.CANNABIS;
+            if (isAlternateAccount)
+            {
+                paymentType = PaymentType.LIQUOR;
+            }
+
+            var response = await _bcep.ProcessPaymentResponse(ordernum, id, paymentType);
 
             if (response.ContainsKey("error"))
             {
@@ -900,8 +912,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var orderamt = invoice.Totalamount;
 
             bool isAlternateAccount = (invoiceType == secondary); // determine if it is for liquor
-
-            var response = await bcep.ProcessPaymentResponse(ordernum, application.AdoxioApplicationid, isAlternateAccount);
+            PaymentType paymentType = PaymentType.CANNABIS;
+            if (isAlternateAccount)
+            {
+                paymentType = PaymentType.LIQUOR;
+            }
+            var response = await bcep.ProcessPaymentResponse(ordernum, application.AdoxioApplicationid, paymentType);
 
             if (response.ContainsKey("error"))
             {
@@ -1205,12 +1221,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // dynamics determines the amount based on the licence type of the application
             var orderamt = invoice.Totalamount;
 
-            bool isAlternateAccount = false;  // always false for a worker.
-
+            PaymentType paymentType = PaymentType.CANNABIS; // always cannabis
+            
             Dictionary<string, string> redirectUrl;
             redirectUrl = new Dictionary<string, string>();
             var redirectPath = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/worker-qualification/payment-confirmation";
-            redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, workerId, String.Format("{0:0.00}", orderamt), isAlternateAccount, redirectPath);
+            redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, workerId, String.Format("{0:0.00}", orderamt), paymentType, redirectPath);
 
             _logger.Debug(">>>>>" + redirectUrl["url"]);
 
@@ -1243,9 +1259,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var ordernum = invoice.AdoxioTransactionid;
             var orderamt = invoice.Totalamount;
 
-            bool isAlternateAccount = false;  // in this case it is always false, as the worker process uses the Cannabis account.
-
-            var response = await _bcep.ProcessPaymentResponse(ordernum, workerId, isAlternateAccount);
+            PaymentType paymentType = PaymentType.CANNABIS; // always cannabis
+            
+            var response = await _bcep.ProcessPaymentResponse(ordernum, workerId, paymentType);
 
             if (response.ContainsKey("error"))
             {
@@ -1433,10 +1449,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 Dictionary<string, string> redirectUrl;
                 redirectUrl = new Dictionary<string, string>();
 
-                bool isAlternateAccount = true;
-
+                PaymentType paymentType = PaymentType.SPECIAL_EVENT; // always special event
+                
                 var redirectPath = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/sep/payment-confirmation";
-                redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt), isAlternateAccount, redirectPath);
+                redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt), paymentType, redirectPath);
 
                 _logger.Debug(">>>>>" + redirectUrl["url"]);
 
@@ -1473,9 +1489,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var ordernum = invoice.AdoxioTransactionid;
             var orderamt = invoice.Totalamount;
 
-            bool isAlternateAccount = true; // set to true for Liquor.
-
-            var response = await _bcep.ProcessPaymentResponse(ordernum, id, isAlternateAccount);
+            PaymentType paymentType = PaymentType.SPECIAL_EVENT; // always Special Event
+            
+            var response = await _bcep.ProcessPaymentResponse(ordernum, id, paymentType);
 
             if (response.ContainsKey("error"))
             {
@@ -1541,7 +1557,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         // fail 
                         throw (httpOperationException);
                     }
-                    _logger.Information($"SEP Application Payment Transaction approved.  Application ID: {id} Invoice: {invoice.Invoicenumber} Liquor: {isAlternateAccount}");
+                    _logger.Information($"SEP Application Payment Transaction approved.  Application ID: {id} Invoice: {invoice.Invoicenumber} PaymentType: {paymentType}");
 
                 }
                 // if payment failed:
@@ -1583,7 +1599,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         // fail 
                         throw (httpOperationException);
                     }
-                    _logger.Information($"Licence Fee Transaction NOT approved.  Application ID: {id} Invoice: {invoice.Invoicenumber} Liquor: {isAlternateAccount}");
+                    _logger.Information($"Licence Fee Transaction NOT approved.  Application ID: {id} Invoice: {invoice.Invoicenumber} Payment Type: {paymentType}");
                 }
             }
             else
