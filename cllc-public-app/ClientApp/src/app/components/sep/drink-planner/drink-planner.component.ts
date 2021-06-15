@@ -22,7 +22,6 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
       this._app = value;
       this.form.patchValue(this._app);
       this.totalServings = this._app.totalServings;
-      debugger;
     }
   }
 
