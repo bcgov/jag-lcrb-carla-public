@@ -958,7 +958,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
   resolveIncompleteness() {
     const saveData = this.form.value;
     this.disableIncomplete = true;
-    debugger;
     // Only save if the data is valid
 
       this.busy = forkJoin(
