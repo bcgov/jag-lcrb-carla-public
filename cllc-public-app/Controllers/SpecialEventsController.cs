@@ -135,7 +135,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             }
 
-            var result = specialEvent.ToViewModel();
+            var result = specialEvent.ToViewModel(_dynamicsClient);
 
             if (specialEvent._adoxioLcrbrepresentativeidValue != null)
             {
@@ -163,39 +163,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return Unauthorized();
             }
 
-            var result = specialEvent.ToViewModel();
+            var result = specialEvent.ToViewModel(_dynamicsClient);
 
-            var drinkTypes = _dynamicsClient.Sepdrinktypes.Get().Value
-                            .ToList();
-
-            string beerTypeId = drinkTypes.Where(drinkType => drinkType.AdoxioName == "Beer/Cider/Cooler")
-                                .Select(drinkType => drinkType.AdoxioSepdrinktypeid)
-                                .FirstOrDefault();
-
-            string wineTypeId = drinkTypes.Where(drinkType => drinkType.AdoxioName == "Wine")
-                                .Select(drinkType => drinkType.AdoxioSepdrinktypeid)
-                                .FirstOrDefault();
-
-            string spiritsTypeId = drinkTypes.Where(drinkType => drinkType.AdoxioName == "Spirits")
-                                .Select(drinkType => drinkType.AdoxioSepdrinktypeid)
-                                .FirstOrDefault();
-
-            result.Beer = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
-                                .Where(forecast => forecast._adoxioTypeValue == beerTypeId)
-                                .Select(forecast => forecast.AdoxioEstimatedservings / specialEvent.AdoxioTotalservings * 100)
-                                .FirstOrDefault();
-
-            result.Wine = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
-                                .Where(forecast => forecast._adoxioTypeValue == wineTypeId)
-                                .Select(forecast => forecast.AdoxioEstimatedservings / specialEvent.AdoxioTotalservings * 100)
-                                .FirstOrDefault();
-
-            result.Spirits = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
-                                .Where(forecast => forecast._adoxioTypeValue == spiritsTypeId)
-                                .Select(forecast => forecast.AdoxioEstimatedservings / specialEvent.AdoxioTotalservings * 100)
-                                .FirstOrDefault();
-
-            return new JsonResult(specialEvent.ToViewModel());
+            return new JsonResult(specialEvent.ToViewModel(_dynamicsClient));
         }
 
         /// <summary>
@@ -417,7 +387,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                 }));
             }
-            var result = this.getSpecialEventData(newSpecialEvent.AdoxioSpecialeventid).ToViewModel();
+            var result = this.getSpecialEventData(newSpecialEvent.AdoxioSpecialeventid).ToViewModel(_dynamicsClient);
             result.LocalId = specialEvent.LocalId;
             return new JsonResult(specialEvent);
         }
@@ -558,7 +528,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                 }));
             }
-            var result = this.getSpecialEventData(eventId).ToViewModel();
+            var result = this.getSpecialEventData(eventId).ToViewModel(_dynamicsClient);
             result.LocalId = specialEvent.LocalId;
             return new JsonResult(result);
         }
