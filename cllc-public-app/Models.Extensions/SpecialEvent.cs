@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.ViewModels;
 
@@ -14,7 +15,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// <summary>
         /// Convert a given voteQuestion to a ViewModel
         /// </summary>
-        public static ViewModels.SpecialEvent ToViewModel(this MicrosoftDynamicsCRMadoxioSpecialevent specialEvent)
+        public static ViewModels.SpecialEvent ToViewModel(this MicrosoftDynamicsCRMadoxioSpecialevent specialEvent, IDynamicsClient _dynamicsClient)
         {
             ViewModels.SpecialEvent result = null;
             if (specialEvent != null)
@@ -82,6 +83,36 @@ namespace Gov.Lclb.Cllb.Public.Models
                         locations.Select(specialEvent => specialEvent.ToViewModel())
                         .ToList();
                 }
+
+                var drinkTypes = _dynamicsClient.Sepdrinktypes.Get().Value
+                            .ToList();
+
+            string beerTypeId = drinkTypes.Where(drinkType => drinkType.AdoxioName == "Beer/Cider/Cooler")
+                                .Select(drinkType => drinkType.AdoxioSepdrinktypeid)
+                                .FirstOrDefault();
+
+            string wineTypeId = drinkTypes.Where(drinkType => drinkType.AdoxioName == "Wine")
+                                .Select(drinkType => drinkType.AdoxioSepdrinktypeid)
+                                .FirstOrDefault();
+
+            string spiritsTypeId = drinkTypes.Where(drinkType => drinkType.AdoxioName == "Spirits")
+                                .Select(drinkType => drinkType.AdoxioSepdrinktypeid)
+                                .FirstOrDefault();
+
+            result.Beer = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
+                                .Where(forecast => forecast._adoxioTypeValue == beerTypeId)
+                                .Select(forecast => forecast.AdoxioEstimatedservings / specialEvent.AdoxioTotalservings * 100)
+                                .FirstOrDefault();
+
+            result.Wine = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
+                                .Where(forecast => forecast._adoxioTypeValue == wineTypeId)
+                                .Select(forecast => forecast.AdoxioEstimatedservings / specialEvent.AdoxioTotalservings * 100)
+                                .FirstOrDefault();
+
+            result.Spirits = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
+                                .Where(forecast => forecast._adoxioTypeValue == spiritsTypeId)
+                                .Select(forecast => forecast.AdoxioEstimatedservings / specialEvent.AdoxioTotalservings * 100)
+                                .FirstOrDefault();
 
             }
             return result;

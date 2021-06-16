@@ -149,15 +149,15 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public System.DateTimeOffset? DateSubmitted { get; set; }
         public ViewModels.Account PoliceAccount { get; set; }
         public ViewModels.Contact PoliceDecisionBy { get; set; }
-        
+
         [JsonConverter(typeof(StringEnumConverter))]
         public ApproverStatus? PoliceApproval { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
         public ApproverStatus? LcrbApproval { get; set; }
 
-        public ViewModels.Contact LcrbApprovalBy {get; set;}
-        public string DenialReason {get; set;}
-        public string CancelReason {get; set;}
+        public ViewModels.Contact LcrbApprovalBy { get; set; }
+        public string DenialReason { get; set; }
+        public string CancelReason { get; set; }
         public bool? IsManufacturingExclusivity { get; set; }
         public string HowProceedsWillBeUsedDescription { get; set; }
 
@@ -174,5 +174,13 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public int? Beer { get; set; }
         public int? Wine { get; set; }
         public int? Spirits { get; set; }
+
+    }
+
+    public class ItemsToDelete
+    {
+        public List<string> Locations { get; set; } = new List<string>();
+        public List<string> EventDates { get; set; } = new List<string>();
+        public List<string> ServiceAreas { get; set; } = new List<string>();
     }
 }

@@ -38,7 +38,7 @@ export class EventComponent extends FormBase implements OnInit {
   @Input()
   set localId(value: number) {
     this._appID = value;
-    //get the last saved application
+    // get the last saved application
     this.db.getSepApplication(value)
       .then(app => {
         this.sepApplication = app;
@@ -46,7 +46,7 @@ export class EventComponent extends FormBase implements OnInit {
           this.setFormValue(this.sepApplication);
         }
       });
-  };
+  }
 
   get cities(): AutoCompleteItem[] {
     return [...this.autocompleteCities, ...this.previewCities];
@@ -79,8 +79,9 @@ export class EventComponent extends FormBase implements OnInit {
       maximumNumberOfGuests: [''],
       eventLocations: this.fb.array([]), // the form array for all of the locations and their data structures
     });
-
-    this.setFormValue(this.sepApplication);
+    if (this.sepApplication) {
+      this.setFormValue(this.sepApplication);
+    }
 
     this.form.get('sepCity').valueChanges
       .pipe(filter(value => value && value.length >= 3),
@@ -118,6 +119,8 @@ export class EventComponent extends FormBase implements OnInit {
       console.log("we have locations")
       app.eventLocations.forEach(loc => {
         console.log("loading location")
+        loc.eventDates = loc.eventDates || [];
+        loc.serviceAreas = loc.serviceAreas || [];
         this.addLocation(loc);
       });
     } else {
@@ -208,23 +211,6 @@ export class EventComponent extends FormBase implements OnInit {
 
 
   removeLocation(locationIndex: number) {
-    const loc: SepLocation = this.locations.at(locationIndex).value;
-    if (loc.id && this.sepApplication.itemsToDelete.locations.indexOf(loc.id) === -1) {
-      this.sepApplication.itemsToDelete.locations.push(loc.id);
-    }
-    loc.eventDates.forEach(ed => {
-      const deleteEventDates = this.sepApplication.itemsToDelete.eventDates;
-      if (ed.id && deleteEventDates.indexOf(ed.id) === -1) {
-        deleteEventDates.push(ed.id);
-      }
-    });
-
-    loc.serviceAreas.forEach(area => {
-      const deleteServiceAreas = this.sepApplication.itemsToDelete.serviceAreas;
-      if (area.id && deleteServiceAreas.indexOf(area.id) === -1) {
-        deleteServiceAreas.push(area.id);
-      }
-    });
     this.locations.removeAt(locationIndex);
   }
 
@@ -236,7 +222,7 @@ export class EventComponent extends FormBase implements OnInit {
   }
 
   createEventDate(eventDate: SepSchedule) {
-    let datesForm = this.fb.group({
+    const datesForm = this.fb.group({
       id: [null],
       eventDate: [''],
       eventStartValue: [''],
@@ -257,11 +243,6 @@ export class EventComponent extends FormBase implements OnInit {
 
   removeEventDate(eventDateIndex: number, location: FormGroup) {
     const eventDates = location.get('eventDates') as FormArray;
-    const deleteEventDates = this.sepApplication.itemsToDelete.eventDates;
-    const ed: SepSchedule = eventDates.at(eventDateIndex).value;
-    if (ed.id && deleteEventDates.indexOf(ed.id) === -1) {
-      deleteEventDates.push(ed.id);
-    }
     eventDates.removeAt(eventDateIndex);
   }
 
@@ -288,13 +269,7 @@ export class EventComponent extends FormBase implements OnInit {
   }
 
   removeServiceArea(serviceAreaIndex: number, location: FormGroup) {
-    let serviceAreas = location.get('serviceAreas') as FormArray;
-
-    const deleteServiceAreas = this.sepApplication.itemsToDelete.serviceAreas;
-    const area: SepServiceArea = serviceAreas.at(serviceAreaIndex).value;
-    if (area.id && deleteServiceAreas.indexOf(area.id) === -1) {
-      deleteServiceAreas.push(area.id);
-    }
+    const serviceAreas = location.get('serviceAreas') as FormArray;
     serviceAreas.removeAt(serviceAreaIndex);
   }
 
