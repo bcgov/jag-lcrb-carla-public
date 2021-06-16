@@ -1746,7 +1746,8 @@ namespace Gov.Lclb.Cllb.Interfaces
                 {
                     id = userId,
                     firstname = user.Firstname,
-                    lastname = user.Lastname
+                    lastname = user.Lastname,
+                    name = user.Firstname + " " + user.Lastname
                 };
             }
             catch (Exception e)
