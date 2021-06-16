@@ -18,6 +18,11 @@ import { SepApplicationSummary } from '@models/sep-application-summary.model';
   styleUrls: ['./my-applications.component.scss']
 })
 export class MyApplicationsComponent implements OnInit {
+  applications: any[];
+  displayedColumns = ['status', 'info', 'actions'];
+  currentUser: User;
+  submittedApplication: SepApplicationSummary[];
+
   constructor(private store: Store<AppState>,
     private db: IndexedDBService,
     private route: ActivatedRoute,
