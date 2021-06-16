@@ -408,6 +408,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return Unauthorized();
             }
 
+            DeleteSpecialEventItems(specialEvent.ItemsToDelete);
+
             var patchEvent = new MicrosoftDynamicsCRMadoxioSpecialevent();
             patchEvent.CopyValues(specialEvent);
             // Only allow these status to be set by the portal. Any other status change is ignored
@@ -533,6 +535,30 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(result);
         }
 
+        private void DeleteSpecialEventItems(ViewModels.ItemsToDelete itemsToDelete)
+        {
+            if (itemsToDelete.Locations.Count > 0)
+            {
+                itemsToDelete.Locations.ForEach(id =>
+                {
+                    _dynamicsClient.Specialeventlocations.Delete(id);
+                });
+            }
+            if (itemsToDelete.EventDates.Count > 0)
+            {
+                itemsToDelete.EventDates.ForEach(id =>
+                {
+                    _dynamicsClient.Specialeventschedules.Delete(id);
+                });
+            }
+            if (itemsToDelete.ServiceAreas.Count > 0)
+            {
+                itemsToDelete.ServiceAreas.ForEach(id =>
+                {
+                    _dynamicsClient.Specialeventlicencedareas.Delete(id);
+                });
+            }
+        }
         private void saveTotalServings(ViewModels.SpecialEvent specialEvent, MicrosoftDynamicsCRMadoxioSpecialevent existingEvent)
         {
             // get drink types

@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } fro
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faMapMarkerAlt, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
-import { SepApplication } from '@models/sep-application.model';
+import { SepApplication, SepDeletedItems } from '@models/sep-application.model';
 import { IndexedDBService } from '@services/indexed-db.service';
 import { FormBase } from '@shared/form-base';
 import { Account } from '@models/account.model';
@@ -107,6 +107,8 @@ export class EventComponent extends FormBase implements OnInit {
 
     if (app?.eventLocations?.length > 0) {
       app.eventLocations.forEach(loc => {
+        loc.eventDates = loc.eventDates || [];
+        loc.serviceAreas = loc.serviceAreas || [];
         this.addLocation(loc);
       });
     } else {
@@ -176,6 +178,7 @@ export class EventComponent extends FormBase implements OnInit {
 
 
   removeLocation(locationIndex: number) {
+    this.sepApplication.itemsToDelete = this.sepApplication.itemsToDelete || new SepDeletedItems();
     const loc: SepLocation = this.locations.at(locationIndex).value;
     if (loc.id && this.sepApplication.itemsToDelete.locations.indexOf(loc.id) === -1) {
       this.sepApplication.itemsToDelete.locations.push(loc.id);
@@ -224,6 +227,7 @@ export class EventComponent extends FormBase implements OnInit {
 
   removeEventDate(eventDateIndex: number, location: FormGroup) {
     const eventDates = location.get('eventDates') as FormArray;
+    this.sepApplication.itemsToDelete = this.sepApplication.itemsToDelete || new SepDeletedItems();
     const deleteEventDates = this.sepApplication.itemsToDelete.eventDates;
     const ed: SepSchedule = eventDates.at(eventDateIndex).value;
     if (ed.id && deleteEventDates.indexOf(ed.id) === -1) {
@@ -254,8 +258,8 @@ export class EventComponent extends FormBase implements OnInit {
   }
 
   removeServiceArea(serviceAreaIndex: number, location: FormGroup) {
-    let serviceAreas = location.get('serviceAreas') as FormArray;
-
+    const serviceAreas = location.get('serviceAreas') as FormArray;
+    this.sepApplication.itemsToDelete = this.sepApplication.itemsToDelete || new SepDeletedItems();
     const deleteServiceAreas = this.sepApplication.itemsToDelete.serviceAreas;
     const area: SepServiceArea = serviceAreas.at(serviceAreaIndex).value;
     if (area.id && deleteServiceAreas.indexOf(area.id) === -1) {
