@@ -408,7 +408,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return Unauthorized();
             }
 
-            DeleteSpecialEventItems(specialEvent.ItemsToDelete);
+            var itemsToDelete = GetItemsToDelete(specialEvent, existingEvent);
+            DeleteSpecialEventItems(itemsToDelete);
 
             var patchEvent = new MicrosoftDynamicsCRMadoxioSpecialevent();
             patchEvent.CopyValues(specialEvent);
@@ -535,15 +536,62 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(result);
         }
 
+        private ItemsToDelete GetItemsToDelete(ViewModels.SpecialEvent updateEvent, MicrosoftDynamicsCRMadoxioSpecialevent existingEvent)
+        {
+            var toDelete = new ItemsToDelete();
+
+            // create a list of id that exist in dynamics
+            List<string> existingLocations = existingEvent.AdoxioSpecialeventSpecialeventlocations
+                .Select(loc => loc.AdoxioSpecialeventlocationid)
+                .ToList();
+            List<string> existingEventDates = existingEvent.AdoxioSpecialeventSchedule
+                .Select(eventDate => eventDate.AdoxioSpecialeventscheduleid)
+                .ToList();
+            List<string> existingServiceAreas = existingEvent.AdoxioSpecialeventLicencedarea
+                .Select(area => area.AdoxioSpecialeventlicencedareaid)
+                .ToList();
+
+            // make the list of id present in the special event being sent to dynamis
+            List<string> updateLocations = new List<string>();
+            List<string> updateEventDates = new List<string>();
+            List<string> updateServiceAreas = new List<string>();
+
+            updateEvent?.EventLocations?.ForEach(loc =>
+            {
+                if (!string.IsNullOrEmpty(loc.Id))
+                {
+                    updateLocations.Add(loc.Id);
+                }
+
+                loc?.EventDates?.ForEach(eventDate =>
+                {
+                    if (!string.IsNullOrEmpty(eventDate.Id))
+                    {
+                        updateEventDates.Add(eventDate.Id);
+                    }
+                });
+
+                loc?.ServiceAreas?.ForEach(area =>
+                {
+                    if (!string.IsNullOrEmpty(area.Id))
+                    {
+                        updateServiceAreas.Add(area.Id);
+                    }
+                });
+            });
+
+            
+            // Subtract the sets of list to get ids due for deletion
+            toDelete.Locations = existingLocations.Except(updateLocations).ToList();
+            toDelete.ServiceAreas = existingServiceAreas.Except(updateServiceAreas).ToList();
+            toDelete.EventDates = existingEventDates.Except(updateEventDates).ToList();
+
+            return toDelete;
+        }
+
         private void DeleteSpecialEventItems(ViewModels.ItemsToDelete itemsToDelete)
         {
-            if (itemsToDelete.Locations.Count > 0)
-            {
-                itemsToDelete.Locations.ForEach(id =>
-                {
-                    _dynamicsClient.Specialeventlocations.Delete(id);
-                });
-            }
+
             if (itemsToDelete.EventDates.Count > 0)
             {
                 itemsToDelete.EventDates.ForEach(id =>
@@ -556,6 +604,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 itemsToDelete.ServiceAreas.ForEach(id =>
                 {
                     _dynamicsClient.Specialeventlicencedareas.Delete(id);
+                });
+            }
+            if (itemsToDelete.Locations.Count > 0)
+            {
+                itemsToDelete.Locations.ForEach(id =>
+                {
+                    _dynamicsClient.Specialeventlocations.Delete(id);
                 });
             }
         }

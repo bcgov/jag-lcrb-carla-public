@@ -1,3 +1,4 @@
+import { Account } from "./account.model";
 import { Contact } from "./contact.model";
 import { SepCity } from "./sep-city.model";
 import { SepDrinkSalesForecast } from "./sep-drink-sales-forecast.model";
@@ -48,7 +49,6 @@ export class SepApplication {
 
     eventLocations: SepLocation[] = [];
     drinksSalesForecasts: SepDrinkSalesForecast[] = [];
-    itemsToDelete: SepDeletedItems = new SepDeletedItems();
 
     beer: number;
     wine: number;
@@ -85,10 +85,3 @@ export class SepApplication {
     }
 }
 
-
-export class SepDeletedItems {
-    eventDates: string[] = [];
-    locations: string[] = [];
-    serviceAreas: string[] = [];
-    drinkSalesForecasts: string[] = [];
-}
