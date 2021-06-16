@@ -11,61 +11,13 @@ import { StarterChecklistComponent } from '../starter-checklist/starter-checklis
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { SEP_APPLICATION_STEPS } from '../sep-application/sep-application.component';
 import { SepApplicationSummary } from '@models/sep-application-summary.model';
-import {
-  faAward,
-  faCopy,
-  faBirthdayCake,
-  faBolt,
-  faBusinessTime,
-  faCalendarAlt,
-  faCertificate,
-  faCheck,
-  faDownload,
-  faExchangeAlt,
-  faExclamationTriangle,
-  faFlag,
-  faPencilAlt,
-  faQuestionCircle,
-  faShoppingCart,
-  faStopwatch,
-  faTrashAlt,
-  IconDefinition
-} from "@fortawesome/free-solid-svg-icons";
-import {
-  faBan
-} from "@fortawesome/free-solid-svg-icons";
+
 @Component({
   selector: 'app-my-applications',
   templateUrl: './my-applications.component.html',
   styleUrls: ['./my-applications.component.scss']
 })
 export class MyApplicationsComponent implements OnInit {
-  applications: any[];
-  displayedColumns = ['status', 'info', 'actions'];
-  currentUser: User;
-  faEdit = faEdit;
-  faDownload = faDownload;
-  faCopy = faCopy;
-  faExclamationTriangle = faExclamationTriangle;
-  faFlag = faFlag;
-  faQuestionCircle = faQuestionCircle;
-  faPencilAlt = faPencilAlt;
-  faStopwatch = faStopwatch;
-  faCertificate = faCertificate;
-  faShoppingCart = faShoppingCart;
-  faTrashAlt = faTrashAlt;
-  faCalendarAlt = faCalendarAlt;
-  faBusinessTime = faBusinessTime;
-  faExchangeAlt = faExchangeAlt;
-  faBirthdayCake = faBirthdayCake;
-  faBolt = faBolt;
-  faCheck = faCheck;
-  faBan = faBan;
-  submittedApplication: SepApplicationSummary[];
-  columnsToDisplay = [
-    'eventStatusLabel', 'eventName','eventStartDate','dateSubmitted', 'actions'
-  ];
-
   constructor(private store: Store<AppState>,
     private db: IndexedDBService,
     private route: ActivatedRoute,
@@ -135,9 +87,6 @@ export class MyApplicationsComponent implements OnInit {
         applicationName: applicationName
       }
     };
-
-
-
     // open dialog, get reference and process returned data from dialog
     const dialogRef = this.dialog.open(ApplicationCancellationDialogComponent, dialogConfig);
     dialogRef.afterClosed()
@@ -150,30 +99,6 @@ export class MyApplicationsComponent implements OnInit {
 
   }
 
-  printSummary(id: string) {
-    this.router.navigateByUrl(`api/special-events/applicant/${id.toUpperCase()}/pdf/Special Event Permit.pdf`);
-
-    //'api/special-events/applicant/' + row.specialEventId + '/pdf/Special Event Permit - #' + row.specialEventId + '.pdf'"
-  }
-
-  getStatusIcon(status: string): IconDefinition {
-    switch(status){
-      case ("PendingReview"):
-        return faStopwatch;
-      case ("Approved"):
-      case ("Reviewed"):
-        return faCheck;
-
-      case ("Issued"):
-        return faAward;
-      case ("Denied"):
-      case ("Cancelled"):
-        return faBan;
-      case ("Draft"):
-      default:
-        return faPencilAlt;
-    }
-  }
   getLastStep(stepCompleted: string): string {
     //debugger;
     const lastIndex = SEP_APPLICATION_STEPS.indexOf(stepCompleted);

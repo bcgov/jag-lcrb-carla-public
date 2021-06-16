@@ -55,9 +55,19 @@ export class SubmittedApplicationsComponent implements OnInit {
   faBolt = faBolt;
   faCheck = faCheck;
   faBan = faBan;
+  @Input()
+  set dataSourceOverride(value: MatTableDataSource<PoliceTableElement>) {
+    this.dataSource = value;
+  }
+  get dataSourceOverride() {
+    return this.dataSource;
+  }
+
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+
   dataSource = new MatTableDataSource<PoliceTableElement>();
+
   // angular material table columns to display
   columnsToDisplay = [
     'eventStatusLabel', 'eventName','eventStartDate','dateSubmitted', 'actions'
@@ -71,6 +81,12 @@ export class SubmittedApplicationsComponent implements OnInit {
     this.sepDataService.getSubmittedApplications()
       .subscribe(data => this.dataSource.data = data);
   }
+
+  /*
+  openApplication(id: string) {
+    this.router.navigateByUrl(`sep/police/${id}`);
+  }
+  */
 
   payNow(applicationId: string) {
     // and payment is required due to an invoice being generated
