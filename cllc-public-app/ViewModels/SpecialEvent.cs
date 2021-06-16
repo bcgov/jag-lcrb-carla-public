@@ -174,5 +174,13 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public int? Beer { get; set; }
         public int? Wine { get; set; }
         public int? Spirits { get; set; }
+
+        public ItemsToDelete ItemsToDelete { get; set; }
+    }
+
+    public class ItemsToDelete {
+        public List<string> Locations { get; set; }
+        public List<string> EventDates { get; set; }
+        public List<string> ServiceAreas { get; set; }
     }
 }
