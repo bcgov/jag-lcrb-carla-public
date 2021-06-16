@@ -3,10 +3,10 @@ export class SepServiceArea {
     sepLocationId: string;
     specialEventId: string;
     minorPresent: boolean;
-    //licencedAreaMaxNumberOfGuests: number;
+    licencedAreaMaxNumberOfGuests: number;
     maximumNumberOfGuests: number;
     numberOfMinors: number;
-    //licencedAreaNumberOfMinors: number;
+    licencedAreaNumberOfMinors: number;
     setting: number;
     statusCode: number;
     stateCode: number;
