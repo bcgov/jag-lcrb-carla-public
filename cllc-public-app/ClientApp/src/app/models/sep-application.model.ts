@@ -3,7 +3,6 @@ import { Contact } from "./contact.model";
 import { SepCity } from "./sep-city.model";
 import { SepDrinkSalesForecast } from "./sep-drink-sales-forecast.model";
 import { SepLocation } from "./sep-location.model";
-import { Account } from "./account.model";
 import { differenceInHours } from 'date-fns'
 
 export class SepApplication {
@@ -64,10 +63,10 @@ export class SepApplication {
         for (const location of this.eventLocations) {
             // accumulate the total hours of service by looping through the eventDates
             for(const area of location.serviceAreas){
-              maxGuests += area.maximumNumberOfGuests || 0;
+              maxGuests += area.licencedAreaMaxNumberOfGuests || 0;
             }
         }
-
+        //debugger
         return maxGuests;
     }
 
@@ -77,7 +76,7 @@ export class SepApplication {
         for (const location of this.eventLocations) {
             for(const area of location.serviceAreas) {
               // accumulate the total hours of service by looping through the eventDates
-              maxMinors += area.numberOfMinors || 0;
+              maxMinors += area.licencedAreaNumberOfMinors || 0;
             }
         }
         console.log("max adults:",this.totalMaximumNumberOfGuests, maxMinors);
@@ -99,6 +98,9 @@ export class SepApplication {
     }
 
     public get suggestedServings(): number {
+        //this.suggested_servings = Math.floor((this.total_service_hours / 3) * (this.total_guests - this.total_minors) * 4);
+        //this.max_servings = Math.floor(((this.total_service_hours / 3) * (this.total_guests - this.total_minors) * 5));
+
       return Math.floor((this.serviceHours / 3) * (this.maximumNumberOfAdults) * 4);
     }
 
