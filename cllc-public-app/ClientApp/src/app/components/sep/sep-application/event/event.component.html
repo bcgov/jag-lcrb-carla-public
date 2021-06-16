@@ -124,11 +124,11 @@
                                 errorMessage="Maximum number of guests is required">
                                 <input type="number" class="form-control" formControlName="maximumNumberOfGuests">
                             </app-field>
-                            <app-field label="Number of minors (people under the age of 19) at this location at any time" [required]="true"
+                            <!--app-field label="Number of minors (people under the age of 19) at this location at any time" [required]="true"
                             [valid]="!location.get('numberOfMinors').touched || location.get('numberOfMinors').valid"
                             errorMessage="Maximum number of minors is required">
                             <input type="number" class="form-control" formControlName="numberOfMinors">
-                            </app-field>
+                            </app-field-->
 
                             <section formGroupName="serviceAreas">
                                 <mat-card class="mat-elevation-z0">
@@ -153,12 +153,8 @@
                                                     <app-field
                                                         label="Describe the area(s) where liquor will be served, sold and consumed">
                                                         <p>
-                                                            The area within the event location where liquor will be
-                                                            consumed by
-                                                            guests at
-                                                            any time
                                                             i.e.
-                                                            beverage garden, bar area, courtyard, etc.
+                                                            community centrebeverage garden, bar area, courtyard, etc.
                                                         </p>
                                                         <input type="text" formControlName="eventName"
                                                             class="form-control"
@@ -180,6 +176,12 @@
                                                             </mat-radio-button>
                                                         </mat-radio-group>
                                                     </app-field>
+                                                    <app-field
+                                                    label="How many minors will be in the service area?" *ngIf="area.get('minorPresent').value">
+                                                    <input type="text"
+                                                        formControlName="numberOfMinors"
+                                                        class="form-control">
+                                                </app-field>
                                                     <app-field label="Where is the service area location?">
                                                     <select class="form-control setting-select" formControlName="setting" >
                                                         <option value=""></option>
