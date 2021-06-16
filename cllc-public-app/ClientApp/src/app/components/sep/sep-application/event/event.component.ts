@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } fro
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faMapMarkerAlt, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
-import { SepApplication, SepDeletedItems } from '@models/sep-application.model';
+import { SepApplication } from '@models/sep-application.model';
 import { IndexedDBService } from '@services/indexed-db.service';
 import { FormBase } from '@shared/form-base';
 import { Account } from '@models/account.model';
@@ -180,24 +180,6 @@ export class EventComponent extends FormBase implements OnInit {
 
 
   removeLocation(locationIndex: number) {
-    this.sepApplication.itemsToDelete = this.sepApplication.itemsToDelete || new SepDeletedItems();
-    const loc: SepLocation = this.locations.at(locationIndex).value;
-    if (loc.id && this.sepApplication.itemsToDelete.locations.indexOf(loc.id) === -1) {
-      this.sepApplication.itemsToDelete.locations.push(loc.id);
-    }
-    loc.eventDates.forEach(ed => {
-      const deleteEventDates = this.sepApplication.itemsToDelete.eventDates;
-      if (ed.id && deleteEventDates.indexOf(ed.id) === -1) {
-        deleteEventDates.push(ed.id);
-      }
-    });
-
-    loc.serviceAreas.forEach(area => {
-      const deleteServiceAreas = this.sepApplication.itemsToDelete.serviceAreas;
-      if (area.id && deleteServiceAreas.indexOf(area.id) === -1) {
-        deleteServiceAreas.push(area.id);
-      }
-    });
     this.locations.removeAt(locationIndex);
   }
 
@@ -229,12 +211,6 @@ export class EventComponent extends FormBase implements OnInit {
 
   removeEventDate(eventDateIndex: number, location: FormGroup) {
     const eventDates = location.get('eventDates') as FormArray;
-    this.sepApplication.itemsToDelete = this.sepApplication.itemsToDelete || new SepDeletedItems();
-    const deleteEventDates = this.sepApplication.itemsToDelete.eventDates;
-    const ed: SepSchedule = eventDates.at(eventDateIndex).value;
-    if (ed.id && deleteEventDates.indexOf(ed.id) === -1) {
-      deleteEventDates.push(ed.id);
-    }
     eventDates.removeAt(eventDateIndex);
   }
 
@@ -261,12 +237,6 @@ export class EventComponent extends FormBase implements OnInit {
 
   removeServiceArea(serviceAreaIndex: number, location: FormGroup) {
     const serviceAreas = location.get('serviceAreas') as FormArray;
-    this.sepApplication.itemsToDelete = this.sepApplication.itemsToDelete || new SepDeletedItems();
-    const deleteServiceAreas = this.sepApplication.itemsToDelete.serviceAreas;
-    const area: SepServiceArea = serviceAreas.at(serviceAreaIndex).value;
-    if (area.id && deleteServiceAreas.indexOf(area.id) === -1) {
-      deleteServiceAreas.push(area.id);
-    }
     serviceAreas.removeAt(serviceAreaIndex);
   }
 
