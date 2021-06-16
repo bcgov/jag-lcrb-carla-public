@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SepApplication } from '@models/sep-application.model';
 import { SepSchedule } from '@models/sep-schedule.model';
+import { SepServiceArea } from '@models/sep-service-area.model';
 
 @Component({
   selector: 'app-total-servings',
@@ -50,9 +51,13 @@ export class TotalServingsComponent implements OnInit {
     if (!app) {
       return;
     }
+
     this.total_guests += app.totalMaximumNumberOfGuests;
     this.total_minors += app.totalMaximumNumberOfGuests - app.maximumNumberOfAdults;
 
+    this.total_service_hours = app.serviceHours;
+
+    /*
     // calculate the suggested servings and maximum servings by looping through each event location
     for (var location of app.eventLocations) {
       // accumulate the total hours of service by looping through the eventDates
@@ -63,18 +68,24 @@ export class TotalServingsComponent implements OnInit {
 
       // count up the guests and minors
 
-      this.total_guests += parseInt(location.maximumNumberOfGuests.toString(), 10) || 0;
-      this.total_minors += parseInt(location.numberOfMinors?.toString(), 10) || 0;
+      for(var area of location.serviceAreas) {
+        area = Object.assign(new SepServiceArea(null), area);
+        this.total_guests += parseInt(area.maximumNumberOfGuests.toString(), 10) || 0;
+        this.total_minors += parseInt(area.numberOfMinors.toString(), 10) || 0;
+      }
 
 
     }
+    */
 
+    //this.suggested_servings = Math.floor((this.total_service_hours / 3) * (this.total_guests - this.total_minors) * 4);
+    //this.max_servings = Math.floor(((this.total_service_hours / 3) * (this.total_guests - this.total_minors) * 5));
 
+    this.suggested_servings = app.suggestedServings;
+    this.max_servings = app.maxSuggestedServings;
 
-    this.suggested_servings = Math.floor((this.total_service_hours / 3) * (this.total_guests - this.total_minors) * 4);
-    this.max_servings = Math.floor(((this.total_service_hours / 3) * (this.total_guests - this.total_minors) * 5));
     if (this.total_servings == 0) {
-      this.total_servings = this.suggested_servings;
+      this.total_servings = app.suggestedServings;
     }
 
 

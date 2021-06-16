@@ -3,6 +3,7 @@ import { SepCity } from "./sep-city.model";
 import { SepDrinkSalesForecast } from "./sep-drink-sales-forecast.model";
 import { SepLocation } from "./sep-location.model";
 import { Account } from "./account.model";
+import { differenceInHours } from 'date-fns'
 
 export class SepApplication {
     id: string; // server side primary key
@@ -47,6 +48,9 @@ export class SepApplication {
     denialReason?: string;
     cancelReason?: string;
 
+    //suggestedServings: number;
+    maxServings: number;
+
     eventLocations: SepLocation[] = [];
     drinksSalesForecasts: SepDrinkSalesForecast[] = [];
     itemsToDelete: SepDeletedItems = new SepDeletedItems();
@@ -59,7 +63,9 @@ export class SepApplication {
         let maxGuests = 0;
         for (const location of this.eventLocations) {
             // accumulate the total hours of service by looping through the eventDates
-            maxGuests += location.maximumNumberOfGuests || 0;
+            for(const area of location.serviceAreas){
+              maxGuests += area.maximumNumberOfGuests || 0;
+            }
         }
 
         return maxGuests;
@@ -69,21 +75,38 @@ export class SepApplication {
 
         let maxMinors = 0;
         for (const location of this.eventLocations) {
-            // accumulate the total hours of service by looping through the eventDates
-            maxMinors += location.numberOfMinors || 0;
+            for(const area of location.serviceAreas) {
+              // accumulate the total hours of service by looping through the eventDates
+              maxMinors += area.numberOfMinors || 0;
+            }
         }
+        console.log("max adults:",this.totalMaximumNumberOfGuests, maxMinors);
         return this.totalMaximumNumberOfGuests - maxMinors;
     }
 
     public get serviceHours(): number {
         let serviceHours = 0;
         for (const location of this.eventLocations) {
+
             for (const hours of location.eventDates) {
-                serviceHours += hours.getServiceHours();
+
+                serviceHours += differenceInHours(new Date(hours.serviceEnd), new Date(hours.serviceStart)) || 0;
+                console.log("hours:",hours.serviceEnd, hours.serviceStart, differenceInHours(new Date(hours.serviceEnd), new Date(hours.serviceStart)) );
+
             }
         }
         return serviceHours;
     }
+
+    public get suggestedServings(): number {
+      return Math.floor((this.serviceHours / 3) * (this.maximumNumberOfAdults) * 4);
+    }
+
+    public get maxSuggestedServings(): number {
+      return  Math.floor(((this.serviceHours / 3) * (this.maximumNumberOfAdults) * 5));
+    }
+
+    //public get servings()
 }
 
 
