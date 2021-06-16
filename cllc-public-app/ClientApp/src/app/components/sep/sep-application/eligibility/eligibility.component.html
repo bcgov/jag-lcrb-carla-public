@@ -3,7 +3,7 @@
 
     <span class="mat-title">{{sepApplication?.eventName}}</span>
 
-    <div class="mat-subheading-1">Application number: {{application?.id}}</div>
+    <!--div class="mat-subheading-1">Application number: {{application?.id}}</div-->
     <p>Tell us about your event. This information is used to determine the eligibility of your event and what type of
         permit you require.
     </p>
@@ -96,11 +96,11 @@
             <div>
                 <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip1.toggle()"
                     matTooltipClass="custom-tooltip" matTooltip="LCRB will determine events of a provincial, national, or international significance on a case-by-case basis. Some criteria used include whether:
-                    
+
                     &bull; participants or performers at your event are primarily from the province, Canada, or around the world;
-                    
+
                     &bull; your event attracts spectators from around the province, Canada, or around the world;
-                    
+
                     &bull; there is provincial, national, or world-wide media coverage of your event."
                     #tooltip1="matTooltip">
                 </fa-icon>
@@ -131,7 +131,7 @@
             <div>
                 <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip1.toggle()"
                     matTooltipClass="custom-tooltip"
-                    matTooltip="In order for your event to be deemed municipally significant the event must 
+                    matTooltip="In order for your event to be deemed municipally significant the event must
                     take place primarily in the Municipality and you must obtain a municipal resolution or a letter from a delegated municipal official designating the event to be of municipal significance."
                     #tooltip1="matTooltip">
                 </fa-icon>
@@ -156,7 +156,7 @@
             </app-field>
             <div>
                 <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip2.toggle()"
-                    matTooltip="Your event starts soon. Please be aware that if your application requires review, you may or may not receive an SEP 
+                    matTooltip="Your event starts soon. Please be aware that if your application requires review, you may or may not receive an SEP
                     before the event start date. For questions, contact the SEP Online Help Line at 1 855 999 7656 after submitting your application." #tooltip2="matTooltip">
                 </fa-icon>
             </div>
@@ -184,16 +184,16 @@
                 <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip3.toggle()"
                     matTooltipClass="custom-tooltip"
                     matTooltip="Private Events:
-                    
-                    Entry is limited to family, friends, an organization’s members or staff, invited guests and ticket holders. (Tickets must be sold or given away before the start time of the event. Tickets for hobbyist events cannot be sold.)
-                    
-                    Examples: social, cultural, recreational, religious, sporting or community events as well as family events such as weddings, anniversaries, or birthdays. Hobby brewer/vintner competitions are also private events.
-                    
 
-                    Public Events: 
+                    Entry is limited to family, friends, an organization’s members or staff, invited guests and ticket holders. (Tickets must be sold or given away before the start time of the event. Tickets for hobbyist events cannot be sold.)
+
+                    Examples: social, cultural, recreational, religious, sporting or community events as well as family events such as weddings, anniversaries, or birthdays. Hobby brewer/vintner competitions are also private events.
+
+
+                    Public Events:
 
                     Entry is open to anyone who wishes to participate or buy a ticket (either at the door or in advance of the event).
-                    
+
                     Examples: events that are community or public celebrations, such as community festivals or outdoor concerts."
                     #tooltip3="matTooltip">
                 </fa-icon>
@@ -207,9 +207,9 @@
                 </app-field>
                 <div>
                     <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip3a.toggle()"
-                        matTooltip="Responsible beverage service (RBS) programs educate permittees, managers and servers about their responsibilities when serving alcohol 
-                    and provide effective techniques to prevent problems related to liquor service. An online self-study course is available to anyone to complete and 
-                    obtain the SIR or SES certificate. The SEP applicant must possess certification before the event starts. RBS certification is required for all events, 
+                        matTooltip="Responsible beverage service (RBS) programs educate permittees, managers and servers about their responsibilities when serving alcohol
+                    and provide effective techniques to prevent problems related to liquor service. An online self-study course is available to anyone to complete and
+                    obtain the SIR or SES certificate. The SEP applicant must possess certification before the event starts. RBS certification is required for all events,
                     including family events.  the Serving it Right website for more information or to complete the course online." #tooltip3a="matTooltip">
                     </fa-icon>
                 </div>
@@ -235,9 +235,9 @@
                 </app-field>
                 <div>
                     <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip3b.toggle()" matTooltip="If you are not sure, please confirm which category your organization falls under with a senior manager or board member before completing the application.
-                    It is extremely important for you to know what category your organization falls under because the permittee is subject to legal and financial obligations. Whether the 
+                    It is extremely important for you to know what category your organization falls under because the permittee is subject to legal and financial obligations. Whether the
                     proper permittee is an individual or an organization depends on the type of organization.
-                    Entering the wrong type of organization could result in an individual being held legally responsible for any contraventions when it should have been the organization, 
+                    Entering the wrong type of organization could result in an individual being held legally responsible for any contraventions when it should have been the organization,
                     or it will cause issues regarding PST payment and/or PST rebate." #tooltip3b="matTooltip">
                     </fa-icon>
                 </div>
@@ -246,10 +246,10 @@
 
         <mat-divider></mat-divider>
         <div class="d-flex justify-content-between">
-            <app-field label="Responsible Beverage Service Number (SIR or SES)" [required]="true"
+            <app-field label="Responsible Beverage Service Number (SIR or SES)" [required]="false"
                 [valid]="!form.get('responsibleBevServiceNumber').touched || form.get('responsibleBevServiceNumber').valid"
                 errorMessage="Responsible Beverage Service Number (SIR or SES) must be entered to continue.">
-                <input formControlName="responsibleBevServiceNumber" maxlength="6" type="text" class="form-control">
+                <input formControlName="responsibleBevServiceNumber" maxlength="22" type="text" class="form-control">
                 <mat-checkbox class="mt-2" formControlName="responsibleBevServiceNumberDoesNotHave" color="primary">
                     I don’t have a BC Responsible Beverage Service Certificate Number
                 </mat-checkbox>
@@ -278,9 +278,9 @@
             </app-field>
             <div>
                 <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip5.toggle()"
-                    matTooltip="SEPs are not intended for the purpose of making a profit. 
-                Permittees are required to follow the cost recovery price list and donate profits from the event to a non-profit organization with charitable purposes, 
-                unless exempted. A list of drink prices for the purpose of cost recovery has been established. If you sell liquor for amounts exceeding 
+                    matTooltip="SEPs are not intended for the purpose of making a profit.
+                Permittees are required to follow the cost recovery price list and donate profits from the event to a non-profit organization with charitable purposes,
+                unless exempted. A list of drink prices for the purpose of cost recovery has been established. If you sell liquor for amounts exceeding
                 the established cost recovery price, all profits from your event must be directed to a non-profit organization with charitable purposes." #tooltip5="matTooltip">
                 </fa-icon>
             </div>
@@ -296,10 +296,16 @@
                     <mat-radio-button color="primary" class="mr-3" [value]="true">Yes</mat-radio-button>
                     <mat-radio-button color="primary" class="mr-3" [value]="false">No</mat-radio-button>
                 </mat-radio-group>
+                <app-error-alert *ngIf="form.get('admissionFee').value">
+                  <p>
+                    If liquor is included in your admission price, please ensure that you declare your estimated liquor costs on step 4.
+                  </p>
+              </app-error-alert>
             </app-field>
+
             <div>
-                <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip6.toggle()" matTooltip="Unless exempted, SEPs are not issued if the primary purpose of 
-                an event is to gain individual or business profit. 
+                <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip6.toggle()" matTooltip="Unless exempted, SEPs are not issued if the primary purpose of
+                an event is to gain individual or business profit.
                     All proceeds from an event must be directed to a charitable purpose once expenses are paid."
                     #tooltip6="matTooltip">
                 </fa-icon>
@@ -316,7 +322,7 @@
                     <mat-radio-button color="primary" class="mr-3" value="No">No</mat-radio-button>
                     <mat-radio-button color="primary" class="mr-3" value="NotSure">Not sure</mat-radio-button>
                 </mat-radio-group>
-                <app-error-alert *ngIf="form.get('isLocationLicensed').value && form.get('isLocationLicensed').value !== 'no'">
+                <app-error-alert *ngIf="form.get('isLocationLicensed').value && form.get('isLocationLicensed').value !== 'No'">
                     If your event location is licensed, the liquor licence must be temporarily suspended for your event
                     date/s before you can apply for an SEP. It is the responsibility of the venue establishment owner to
                     temporarily suspend their licence for your event dates. Contact the LCRB for more information at
@@ -326,7 +332,7 @@
             </app-field>
             <div>
                 <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip7.toggle()"
-                    matTooltip="i.e. Does your event venue have a permanent liquor licence in place? Establishments that serve liquor on a frequent 
+                    matTooltip="i.e. Does your event venue have a permanent liquor licence in place? Establishments that serve liquor on a frequent
                     basis normally have a permanent liquor licence. If you are not sure, contact the establishment owner or operator or the LCRB at 1-866 209-2111." #tooltip7="matTooltip">
                 </fa-icon>
             </div>
