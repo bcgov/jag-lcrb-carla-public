@@ -11,6 +11,7 @@ export class SepSchedule {
 
     constructor(sched: IEventFormValue) {
         if (sched) {
+            this.id = sched.id;
             this.eventStart = this.formatDate(sched.eventDate, sched.eventStartValue);
             this.eventEnd = this.formatDate(sched.eventDate, sched.eventEndValue);
             this.serviceStart = this.formatDate(sched.eventDate, sched.serviceStartValue);
@@ -19,7 +20,7 @@ export class SepSchedule {
     }
 
     toEventFormValue(): IEventFormValue {
-        let result = {} as IEventFormValue;
+        const result = { id: this.id } as IEventFormValue;
         result.eventDate = this.eventStart;
         if (this.eventStart) {
             result.eventStartValue = format(new Date(this.eventStart), 'h:mm aa');
@@ -33,16 +34,13 @@ export class SepSchedule {
         if (this.serviceEnd) {
             result.serviceEndValue = format(new Date(this.serviceEnd), 'h:mm aa');
         }
-
         return result;
     }
 
-    public getServiceHours() {
-    //   let serviceHours = parseInt(format(new Date(this.serviceEnd), "H")) - parseInt(format(new Date(this.serviceStart), "H"));
-    //   return serviceHours;
-      return 1;
+    getServiceHours(): number {
+        const serviceHours = parseInt(format(new Date(this.serviceEnd), "H")) - parseInt(format(new Date(this.serviceStart), "H"));
+        return serviceHours;
     }
-
 
 
     /**
@@ -76,6 +74,7 @@ export class SepSchedule {
 }
 
 export interface IEventFormValue {
+    id: string;
     eventDate: Date;
     eventStartValue: string;
     eventEndValue: string;
