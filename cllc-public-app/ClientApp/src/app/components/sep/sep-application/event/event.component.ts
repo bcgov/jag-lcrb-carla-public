@@ -38,7 +38,7 @@ export class EventComponent extends FormBase implements OnInit {
   @Input()
   set localId(value: number) {
     this._appID = value;
-    //get the last saved application
+    // get the last saved application
     this.db.getSepApplication(value)
       .then(app => {
         this.sepApplication = app;
@@ -46,7 +46,7 @@ export class EventComponent extends FormBase implements OnInit {
           this.setFormValue(this.sepApplication);
         }
       });
-  };
+  }
 
   get cities(): AutoCompleteItem[] {
     return [...this.autocompleteCities, ...this.previewCities];
@@ -77,7 +77,9 @@ export class EventComponent extends FormBase implements OnInit {
       maximumNumberOfGuests: [''],
       eventLocations: this.fb.array([]),
     });
-    this.setFormValue(this.sepApplication);
+    if (this.sepApplication) {
+      this.setFormValue(this.sepApplication);
+    }
 
     this.form.get('sepCity').valueChanges
       .pipe(filter(value => value && value.length >= 3),
