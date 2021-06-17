@@ -19,7 +19,7 @@
             [required]="true" [isFullWidth]="true">
             <input formControlName="nonProfitName" type="text" class="form-control w-100">
         </app-field>
-        <app-field label="Select the fund-raising purpose of your event " [required]="true" [isFullWidth]="true">
+        <!--app-field label="Select the fund-raising purpose of your event " [required]="true" [isFullWidth]="true">
             <select formControlName="fundraisingPurpose" class="form-control w-100">
                 <option value=""></option>
                 <option value="ReliefOfPoverty">Relief of poverty</option>
@@ -42,7 +42,7 @@
                 <mat-radio-button value="true">Yes</mat-radio-button>
                 <mat-radio-button value="false">No</mat-radio-button>
             </mat-radio-group>
-        </app-field>
+        </app-field-->
     </section>
 
     <app-field   *ngIf="form.get('chargingForLiquorReason').value && form.get('chargingForLiquorReason').value !== 'LiquorIsfree'"

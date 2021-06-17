@@ -8,6 +8,29 @@ import { SepApplicationSummary } from '@models/sep-application-summary.model';
 import { PaymentDataService } from '@services/payment-data.service';
 import { SpecialEventsDataService } from '@services/special-events-data.service';
 import { map } from 'rxjs/operators';
+import {
+  faAward,
+  faCopy,
+  faBirthdayCake,
+  faBolt,
+  faBusinessTime,
+  faCalendarAlt,
+  faCertificate,
+  faCheck,
+  faDownload,
+  faExchangeAlt,
+  faExclamationTriangle,
+  faFlag,
+  faPencilAlt,
+  faQuestionCircle,
+  faShoppingCart,
+  faStopwatch,
+  faTrashAlt,
+  IconDefinition
+} from "@fortawesome/free-solid-svg-icons";
+import {
+  faBan
+} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-submitted-applications',
@@ -15,13 +38,39 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./submitted-applications.component.scss']
 })
 export class SubmittedApplicationsComponent implements OnInit {
+  faDownload = faDownload;
+  faCopy = faCopy;
+  faExclamationTriangle = faExclamationTriangle;
+  faFlag = faFlag;
+  faQuestionCircle = faQuestionCircle;
+  faPencilAlt = faPencilAlt;
+  faStopwatch = faStopwatch;
+  faCertificate = faCertificate;
+  faShoppingCart = faShoppingCart;
+  faTrashAlt = faTrashAlt;
+  faCalendarAlt = faCalendarAlt;
+  faBusinessTime = faBusinessTime;
+  faExchangeAlt = faExchangeAlt;
+  faBirthdayCake = faBirthdayCake;
+  faBolt = faBolt;
+  faCheck = faCheck;
+  faBan = faBan;
+  @Input()
+  set dataSourceOverride(value: MatTableDataSource<PoliceTableElement>) {
+    this.dataSource = value;
+  }
+  get dataSourceOverride() {
+    return this.dataSource;
+  }
+
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+
   dataSource = new MatTableDataSource<PoliceTableElement>();
+
   // angular material table columns to display
   columnsToDisplay = [
-    'dateSubmitted', 'eventName', 'eventStartDate',
-    'eventStatusLabel', 'maximumNumberOfGuests', 'actions'
+    'eventStatusLabel', 'eventName','eventStartDate','dateSubmitted', 'actions'
   ];
 
   constructor(private sepDataService: SpecialEventsDataService,
@@ -32,6 +81,12 @@ export class SubmittedApplicationsComponent implements OnInit {
     this.sepDataService.getSubmittedApplications()
       .subscribe(data => this.dataSource.data = data);
   }
+
+  /*
+  openApplication(id: string) {
+    this.router.navigateByUrl(`sep/police/${id}`);
+  }
+  */
 
   payNow(applicationId: string) {
     // and payment is required due to an invoice being generated
@@ -44,6 +99,23 @@ export class SubmittedApplicationsComponent implements OnInit {
             this.snackBar.open('Error submitting payment', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
           }
         );
+    }
+  }
+
+  getStatusIcon(status: string): IconDefinition {
+    switch(status){
+      case ("PendingReview"):
+        return faStopwatch;
+      case ("Approved"):
+      case ("Reviewed"):
+        return faCheck;
+      case ("Issued"):
+        return faAward;
+      case ("Denied"):
+      case ("Cancelled"):
+        return faBan;
+      default:
+        return faStopwatch;
     }
   }
 

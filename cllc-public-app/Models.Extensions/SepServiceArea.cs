@@ -42,7 +42,6 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioMinorpresent = from.MinorPresent;
             to.AdoxioLicencedareamaxnumberofguests = from.LicencedAreaMaxNumberOfGuests;
             to.AdoxioLicencedareanumberofminors = from.NumberOfMinors;
-            to.AdoxioLicencedareanumberofminors = from.LicencedAreaNumberOfMinors;
             to.AdoxioSetting = (int?)from.Setting;
             to.Statecode = from.StatusCode;
             to.Statecode = from.StateCode;
