@@ -11,6 +11,7 @@ import { StarterChecklistComponent } from '../starter-checklist/starter-checklis
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { SEP_APPLICATION_STEPS } from '../sep-application/sep-application.component';
 import { SepApplicationSummary } from '@models/sep-application-summary.model';
+
 @Component({
   selector: 'app-my-applications',
   templateUrl: './my-applications.component.html',
@@ -20,7 +21,6 @@ export class MyApplicationsComponent implements OnInit {
   applications: any[];
   displayedColumns = ['status', 'info', 'actions'];
   currentUser: User;
-  faEdit = faEdit;
   submittedApplication: SepApplicationSummary[];
 
   constructor(private store: Store<AppState>,
@@ -92,7 +92,6 @@ export class MyApplicationsComponent implements OnInit {
         applicationName: applicationName
       }
     };
-
     // open dialog, get reference and process returned data from dialog
     const dialogRef = this.dialog.open(ApplicationCancellationDialogComponent, dialogConfig);
     dialogRef.afterClosed()

@@ -69,7 +69,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                     SpecialEventStreet1 = specialEvent.AdoxioSpecialeventstreet1,
                     SpecialEventStreet2 = specialEvent.AdoxioSpecialeventstreet2,
                     Statecode = specialEvent.Statecode,
-                    EventStatus = (ViewModels.EventStatus?)specialEvent.Statuscode, // Event Status: Draft, Submitted, Pending Review, etc.
+                    EventStatus = (EventStatus?)specialEvent.Statuscode, // Event Status: Draft, Submitted, Pending Review, etc.
                     TastingEvent = specialEvent.AdoxioTastingevent,
                     TotalServings = specialEvent.AdoxioTotalservings,
                     SepCity = specialEvent.AdoxioSpecialEventCityDistrictId?.ToViewModel(),
