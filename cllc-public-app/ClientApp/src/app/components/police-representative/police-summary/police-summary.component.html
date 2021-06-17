@@ -35,10 +35,10 @@
 
     <section *ngIf="this.isReviewed()">
       <!--if review-->
-      <h3><fa-icon [icon]="getStatusIcon()" style="margin-right: 10px;"></fa-icon>{{application?.eventStatus}}</h3>
+      <h3><fa-icon [icon]="getStatusIcon()" style="margin-right: 10px;"></fa-icon>{{sepApplication?.eventStatus}}</h3>
       <p>This application for liquor service has been reviewed and accepted.</p>
 
-      <p *ngIf="application?.policeApproval == 'Auto-Reviewed'">It was within the review threshold and was automatically accepted by your jurisdiction.</p>
+      <p *ngIf="sepApplication?.policeApproval == 'Auto-Reviewed'">It was within the review threshold and was automatically accepted by your jurisdiction.</p>
 
     </section>
 
@@ -50,8 +50,8 @@
 
     <section *ngIf="this.isDenied()">
       <!-- if denied -->
-      <h3><fa-icon [icon]="getStatusIcon()" style="margin-right: 10px;"></fa-icon>{{application?.eventStatus}}</h3>
-      <p>Liquor service for this event has been {{application?.eventStatus}} for the following reason:</p>
+      <h3><fa-icon [icon]="getStatusIcon()" style="margin-right: 10px;"></fa-icon>{{sepApplication?.eventStatus}}</h3>
+      <p>Liquor service for this event has been {{sepApplication?.eventStatus}} for the following reason:</p>
       <p><em>{{sepApplication?.denialReason}}</em></p>
       <p><em>{{sepApplication?.cancelReason}}</em></p>
     </section>
@@ -59,11 +59,11 @@
     <section *ngIf="this.isCurrentUser()">
       <!-- if opened by assignee and event date has not passed -->
 
-    <button *ngIf="!this.isReviewed() && !this.isDenied() && application?.policeApproval == 'Pending Review'" class="btn btn-primary"  (click)=approve() style="width:230px;">
+    <button *ngIf="!this.isReviewed() && !this.isDenied() && sepApplication?.policeApproval == 'Pending Review'" class="btn btn-primary"  (click)=approve() style="width:230px;">
       <!-- if not already reviewed -->
         COMPLETE REVIEW&nbsp;
       </button>
-      <p *ngIf="!this.isReviewed() && application?.policeApproval == 'Reviewed'"><em>This application has been reviewed by your jurisdiction but is still pending review by LCRB.</em></p>
+      <p *ngIf="!this.isReviewed() && sepApplication?.policeApproval == 'Reviewed'"><em>This application has been reviewed by your jurisdiction but is still pending review by LCRB.</em></p>
 
       <hr>
       <!-- if it hasn't been reviewed, it can be denied -->

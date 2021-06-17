@@ -1,5 +1,6 @@
 import { Account } from "./account.model";
 import { Contact } from "./contact.model";
+import { SepCity } from "./sep-city.model";
 
 export class SepApplicationSummary {
   specialEventId: string; // server side primary key
