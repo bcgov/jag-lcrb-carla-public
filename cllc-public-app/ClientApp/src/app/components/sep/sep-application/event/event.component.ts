@@ -7,7 +7,7 @@ import { IndexedDBService } from '@services/indexed-db.service';
 import { FormBase } from '@shared/form-base';
 import { Account } from '@models/account.model';
 import { SepLocation } from '@models/sep-location.model';
-import { SepSchedule } from '@models/sep-schedule.model';
+import { SepSchedule, TIME_SLOTS } from '@models/sep-schedule.model';
 import { SepServiceArea } from '@models/sep-service-area.model';
 import { AutoCompleteItem, SpecialEventsDataService } from '@services/special-events-data.service';
 import { filter, tap, switchMap } from 'rxjs/operators';
@@ -318,53 +318,3 @@ export class EventComponent extends FormBase implements OnInit {
   }
 
 }
-
-const TIME_SLOTS = [
-  { value: '8:00 AM', name: '8:00 AM' },
-  { value: '8:30 AM ', name: '8:30 AM' },
-  { value: '9:00 AM', name: '9:00 AM' },
-  { value: '9:30 AM', name: '9:30 AM' },
-  { value: '10:00 AM', name: '10:00 AM' },
-  { value: '10:30 AM', name: '10:30 AM' },
-  { value: '11:00 AM', name: '11:00 AM' },
-  { value: '11:30 AM', name: '11:30 AM' },
-  { value: '12:00 PM', name: '12:00 PM' },
-  { value: '12:30 PM', name: '12:30 PM' },
-  { value: '1:00 PM', name: '1:00 PM' },
-  { value: '1:30 PM', name: '1:30 PM' },
-  { value: '2:00 PM', name: '2:00 PM' },
-  { value: '2:30 PM', name: '2:30 PM' },
-  { value: '3:00 PM', name: '3:00 PM' },
-  { value: '3:30 PM', name: '3:30 PM' },
-  { value: '4:00 PM', name: '4:00 PM' },
-  { value: '4:30 PM', name: '4:30 PM' },
-  { value: '5:00 PM', name: '5:00 PM' },
-  { value: '5:30 PM', name: '5:30 PM' },
-  { value: '6:00 PM', name: '6:00 PM' },
-  { value: '6:30 PM', name: '6:30 PM' },
-  { value: '7:00 PM', name: '7:00 PM' },
-  { value: '7:30 PM', name: '7:30 PM' },
-  { value: '8:00 PM', name: '8:00 PM' },
-  { value: '8:30 PM', name: '8:30 PM' },
-  { value: '9:00 PM', name: '9:00 PM' },
-  { value: '9:30 PM', name: '9:30 PM' },
-  { value: '10:00 PM', name: '10:00 PM' },
-  { value: '10:30 PM', name: '10:30 PM' },
-  { value: '11:00 PM', name: '11:00 PM' },
-  { value: '11:30 PM', name: '11:30 PM' },
-  { value: '12:00 AM', name: '12:00 AM' },
-  { value: '12:30 AM', name: '12:30 AM' },
-  { value: '1:00 AM', name: '1:00 AM' },
-  { value: '1:30 AM', name: '1:30 AM' },
-  { value: '2:00 AM', name: '2:00 AM' },
-  { value: '2:30 AM', name: '2:30 AM' },
-  { value: '3:00 AM', name: '3:00 AM' },
-  { value: '3:30 AM', name: '3:30 AM' },
-  { value: '4:00 AM', name: '4:00 AM' },
-  { value: '4:30 AM', name: '4:30 AM' },
-  { value: '5:00 AM', name: '5:00 AM' },
-  { value: '5:30 AM', name: '5:30 AM' },
-  { value: '6:00 AM', name: '6:00 AM' },
-  { value: '6:30 AM', name: '6:30 AM' },
-  { value: '7:00 AM', name: '7:00 AM' },
-];
