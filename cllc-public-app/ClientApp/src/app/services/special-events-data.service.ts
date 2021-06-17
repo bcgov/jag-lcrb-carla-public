@@ -17,7 +17,6 @@ export class SpecialEventsDataService extends DataService {
     super();
   }
 
-
   getSpecialEvent(id: string): Observable<SepApplication> {
     const apiPath = `api/special-events/${id}`;
     return this.http.get<SepApplication>(apiPath, { headers: this.headers })
@@ -69,11 +68,27 @@ export class SpecialEventsDataService extends DataService {
       .pipe(catchError(this.handleError));
   }
 
+  policeCancelSepApplication(id: string) {
+    return this.http.post<string>(`api/special-events/police/${id}/cancel`, {} , { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
+  /**
+   * set the municipality for a special event to the sep city provided
+   * @param id - special event id
+   * @param cityId - sep city id
+   */
+   policeSetMunicipality(id: string, cityId: string) {
+    return this.http.post<SepApplication>(`api/special-events/police/${id}/setMunicipality/${cityId}`, {}, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
+  
   /**
    * delete a  special event application in Dynamics
    * @param data - special event application data
    */
-  deleteSepApplication(id: string) {
+   deleteSepApplication(id: string) {
     return this.http.post<SepApplication>(`api/special-events/${id}/delete`, {}, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }

@@ -93,7 +93,6 @@ export class SummaryComponent implements OnInit {
   private submitPayment() {
     return this.paymentDataService.getPaymentURI('specialEventInvoice', this.application.id)
       .pipe(map(jsonUrl => {
-        debugger;
         window.location.href = jsonUrl['url'];
         return jsonUrl['url'];
       }, (err: any) => {

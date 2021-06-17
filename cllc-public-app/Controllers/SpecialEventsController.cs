@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Globalization;
 using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
@@ -14,13 +15,13 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Rest;
+using System.Threading.Tasks;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/special-events")]
     [ApiController]
-    [Authorize(Policy = "Business-User")]
     public class SpecialEventsController : ControllerBase
     {
         private readonly IMemoryCache _cache;
@@ -31,10 +32,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
         private readonly IBCEPService _bcep;
+        private readonly IPdfService _pdfClient;
 
         public SpecialEventsController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor,
             ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient, FileManagerClient fileClient, IBCEPService bcep,
-            IWebHostEnvironment env, IMemoryCache memoryCache)
+            IWebHostEnvironment env, IMemoryCache memoryCache, IPdfService pdfClient)
         {
             _cache = memoryCache;
             _configuration = configuration;
@@ -44,6 +46,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _fileManagerClient = fileClient;
             _env = env;
             _bcep = bcep;
+            _pdfClient = pdfClient;
         }
 
         // get summary list of applications past submission status
@@ -103,7 +106,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
 
-            
+
             // event locations.
 
             foreach (var location in specialEvent.AdoxioSpecialeventSpecialeventlocations)
@@ -133,14 +136,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             }
 
-            var result = specialEvent.ToViewModel();
+            var result = specialEvent.ToViewModel(_dynamicsClient);
 
             if (specialEvent._adoxioLcrbrepresentativeidValue != null)
             {
                 var lcrbDecisionBy = _dynamicsClient.GetUserAsViewModelContact(specialEvent._adoxioLcrbrepresentativeidValue);
                 result.LcrbApprovalBy = lcrbDecisionBy;
-                result.LcrbApproval = (ApproverStatus?) specialEvent.AdoxioLcrbapproval;
             }
+            result.LcrbApproval = (ApproverStatus?)specialEvent.AdoxioLcrbapproval;
 
             return new JsonResult(result);
         }
@@ -154,11 +157,135 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("applicant/{eventId}")]
         public IActionResult GetSpecialEventForTheApplicant(string eventId)
         {
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             var specialEvent = this.getSpecialEventData(eventId);
-            return new JsonResult(specialEvent);
+            if (specialEvent._adoxioContactidValue != userSettings.ContactId && specialEvent._adoxioAccountidValue != userSettings.AccountId)
+            {
+                return Unauthorized();
+            }
+
+            var result = specialEvent.ToViewModel(_dynamicsClient);
+
+            return new JsonResult(specialEvent.ToViewModel(_dynamicsClient));
         }
 
-        private ViewModels.SpecialEvent getSpecialEventData(string eventId)
+        /// <summary>
+        ///     endpoint for a pdf
+        /// </summary>
+        /// <param name="eventId"></param>
+        /// <returns></returns>
+        [HttpGet("applicant/{eventId}/pdf/{filename}")]
+        public async Task<IActionResult> GetSEPPDF(string eventId, string filename)
+        {
+            MicrosoftDynamicsCRMadoxioSpecialevent specialEvent = getSpecialEventData(eventId);
+
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+
+            var title = "LCRB SPECIAL EVENTS PERMIT";
+            var heading = "<h1>SPECIAL EVENT PERMIT</h1>";
+            
+            // if special event is submitted or approved, but not issued...
+            if( 1 == 2) {
+                heading = "<h1 class='error'>This is not your special event permit</h1>";
+            }
+
+            var locationDetails = "";
+
+            foreach (var location in specialEvent.AdoxioSpecialeventSpecialeventlocations)
+            {
+
+                // draw the location
+                locationDetails += $"<h2 class='info'>Event Location: {location.AdoxioLocationname}</h2>";
+                locationDetails += "<table class='info'>";
+                locationDetails += $"<tr><th class='heading'>Location Name:</td><td class='field'>{location.AdoxioLocationname}</td></tr>";
+                locationDetails += $"<tr><th class='heading'>Location Description:</td><td class='field'>{location.AdoxioLocationdescription}</td></tr>";
+                locationDetails += $"<tr><th class='heading'>Event Address:</td><td class='field'>{location.AdoxioEventlocationstreet2} {location.AdoxioEventlocationstreet1}, {location.AdoxioEventlocationcity} BC, {location.AdoxioEventlocationpostalcode}</td></tr>";
+                locationDetails += $"<tr><th class='heading'>No. Guests:</td><td class='field'>{location.AdoxioMaximumnumberofguestslocation}</td></tr>";
+                locationDetails += $"<tr><th class='heading'>No. Minors:</td><td class='field'>{location.AdoxioNumberofminors}</td></tr>";
+                locationDetails += "</table>";
+
+                // show all service areas
+                locationDetails += "<h3 class='info'>Service Area(s):</h2>";
+                foreach(var sched in location.AdoxioSpecialeventlocationLicencedareas) {
+
+                    var minors = sched.AdoxioMinorpresent.HasValue && sched.AdoxioMinorpresent == true ? "Yes" : "No";
+
+                    locationDetails += "<table class='info'>";
+                    locationDetails += $"<tr><th class='heading'>Description:</td><td class='field'>{sched.AdoxioEventname}</td></tr>";
+                    locationDetails += $"<tr><th class='heading'>No. Guests in Service Area:</td><td class='field'>{sched.AdoxioLicencedareamaxnumberofguests}</td></tr>";
+                    locationDetails += $"<tr><th class='heading'>Minors Present?:</td><td class='field'>{minors}</td></tr>";
+                    locationDetails += $"<tr><th class='heading'>Setting:</td><td class='field'>{(ViewModels.ServiceAreaSetting?)sched.AdoxioSetting}</td></tr>";
+                    locationDetails += "</table>";
+                }
+
+                // show all event dates
+                locationDetails += "<h3 class='info'>Event Date(s):</h2>";
+                foreach(var sched in location.AdoxioSpecialeventlocationSchedule) {
+
+                    var startDateParam = "";
+                    if (sched.AdoxioEventstart.HasValue) {
+                        DateTime startDate = sched.AdoxioEventstart.Value.LocalDateTime;
+                        startDateParam = startDate.ToString("MMMM dd, yyyy");
+                    }
+
+                    var eventTimeParam = "";
+                    if(sched.AdoxioEventstart.HasValue && sched.AdoxioEventend.HasValue){
+                        DateTime startTime = sched.AdoxioEventstart.Value.LocalDateTime;
+                        DateTime endTime = sched.AdoxioEventend.Value.LocalDateTime;
+                        eventTimeParam = startTime.ToString("t", CultureInfo.CreateSpecificCulture("en-US")) + " - " + endTime.ToString("t",CultureInfo.CreateSpecificCulture("en-US"));
+                    }
+
+                    var serviceTimeParam = "";
+                    
+                    if(sched.AdoxioServicestart.HasValue && sched.AdoxioServiceend.HasValue){
+                        DateTime startTime = sched.AdoxioServicestart.Value.LocalDateTime;
+                        DateTime endTime = sched.AdoxioServiceend.Value.LocalDateTime;
+                        serviceTimeParam = startTime.ToString("t",CultureInfo.CreateSpecificCulture("en-US")) + " - " + endTime.ToString("t",CultureInfo.CreateSpecificCulture("en-US"));
+                    }
+                
+
+
+                    locationDetails += "<table class='info'>";
+                    locationDetails += $"<tr><th class='heading'>Date:</td><td class='field'>{startDateParam}</td></tr>";
+                    locationDetails += $"<tr><th class='heading'>Event Times:</td><td class='field'>{eventTimeParam}</td></tr>";
+                    locationDetails += $"<tr><th class='heading'>Service Times:</td><td class='field'>{serviceTimeParam}</td></tr>";
+                    locationDetails += "</table>";
+                }
+
+            }
+
+            parameters.Add("title", title);
+            parameters.Add("heading", heading);
+            parameters.Add("printDate", DateTime.Today.ToString("MMMM dd, yyyy"));
+            parameters.Add("locationDetails", locationDetails);
+            var templateName = "sep";
+
+            byte[] data = await _pdfClient.GetPdf(parameters, templateName);
+
+            // To Do; Save copy of generated sep PDF for auditing/logging purposes
+            /*
+            try
+            {
+                var hash = await _pdfClient.GetPdfHash(parameters, templateName);
+                var entityName = "special event";
+                var entityId = adoxioLicense.AdoxioLicencesid;
+                var folderName = await _dynamicsClient.GetFolderName(entityName, entityId).ConfigureAwait(true);
+                var documentType = "Licence";
+                _fileManagerClient.UploadPdfIfChanged(_logger, entityName, entityId, folderName, documentType, data, hash);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error uploading PDF");
+            }
+            */
+
+            return File(data, "sep/pdf", $"Special Event Permit - {specialEvent.AdoxioSpecialeventpermitnumber}.pdf");
+
+
+            //return new UnauthorizedResult();
+        }
+
+        private MicrosoftDynamicsCRMadoxioSpecialevent getSpecialEventData(string eventId)
         {
             string[] expand = new[] {
                 "adoxio_Invoice",
@@ -167,7 +294,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 "adoxio_specialevent_specialeventlocations",
                 "adoxio_SpecialEventCityDistrictId",
                 "adoxio_ContactId",
-                "adoxio_AccountId"
+                "adoxio_AccountId",
+                "adoxio_specialevent_adoxio_sepdrinksalesforecast_SpecialEvent"
             };
             MicrosoftDynamicsCRMadoxioSpecialevent specialEvent = null;
             if (!string.IsNullOrEmpty(eventId))
@@ -198,14 +326,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         }
                         parentLocation.AdoxioSpecialeventlocationLicencedareas.Add(area);
                     }
+
                 }
                 catch (HttpOperationException)
                 {
                     specialEvent = null;
                 }
             }
-            var result = specialEvent.ToViewModel();
-            return result;
+            return specialEvent;
         }
 
         [HttpPost]
@@ -224,11 +352,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             newSpecialEvent.CopyValues(specialEvent);
             newSpecialEvent.Statuscode = (int?)EventStatus.Draft;
 
-            if (!string.IsNullOrEmpty(userSettings.AccountId))
+            if (!string.IsNullOrEmpty(userSettings.AccountId) && userSettings.AccountId != "00000000-0000-0000-0000-000000000000")
             {
                 newSpecialEvent.AccountODataBind = _dynamicsClient.GetEntityURI("accounts", userSettings.AccountId);
             }
-            if (!string.IsNullOrEmpty(userSettings.ContactId))
+            if (!string.IsNullOrEmpty(userSettings.ContactId) && userSettings.ContactId != "00000000-0000-0000-0000-000000000000")
             {
                 newSpecialEvent.ContactODataBind = _dynamicsClient.GetEntityURI("contacts", userSettings.ContactId);
             }
@@ -316,7 +444,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                 }));
             }
-            var result = this.getSpecialEventData(newSpecialEvent.AdoxioSpecialeventid);
+            var result = this.getSpecialEventData(newSpecialEvent.AdoxioSpecialeventid).ToViewModel(_dynamicsClient);
             result.LocalId = specialEvent.LocalId;
             return new JsonResult(specialEvent);
         }
@@ -330,8 +458,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+            var existingEvent = getSpecialEventData(eventId);
+            if (existingEvent._adoxioAccountidValue != userSettings.AccountId &&
+               existingEvent._adoxioContactidValue != userSettings.ContactId)
+            {
+                return Unauthorized();
+            }
 
-
+            var itemsToDelete = GetItemsToDelete(specialEvent, existingEvent);
+            DeleteSpecialEventItems(itemsToDelete);
 
             var patchEvent = new MicrosoftDynamicsCRMadoxioSpecialevent();
             patchEvent.CopyValues(specialEvent);
@@ -359,37 +494,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw httpOperationException;
             }
 
-            if (specialEvent.DrinksSalesForecasts?.Count > 0)
-            {
-                specialEvent.DrinksSalesForecasts.ForEach(forecast =>
-                {
-                    var newForecast = new MicrosoftDynamicsCRMadoxioSepdrinksalesforecast();
-                    newForecast.CopyValues(forecast);
+            saveTotalServings(specialEvent, existingEvent);
 
-                    newForecast.SpecialEventODataBind = _dynamicsClient.GetEntityURI("adoxio_specialevents", specialEvent.Id);
-                    if (!string.IsNullOrEmpty(forecast?.DrinkTypeId))
-                    {
-                        newForecast.DrinkTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_sepdrinksalesforecasts", forecast.DrinkTypeId);
-                    }
-                    try
-                    {
-                        if (string.IsNullOrEmpty((string)forecast.Id))
-                        { // create record
-                            newForecast = _dynamicsClient.Sepdrinksalesforecasts.Create(newForecast);
-                            forecast.Id = newForecast.AdoxioSepdrinksalesforecastid;
-                        }
-                        else
-                        { // update record
-                            _dynamicsClient.Sepdrinksalesforecasts.Update((string)forecast.Id, newForecast);
-                        }
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.LogError(httpOperationException, "Error creating/updating sep drinks sales forecast");
-                        throw httpOperationException;
-                    }
-                });
-            }
+
 
             if (specialEvent.EventLocations?.Count > 0)
             {
@@ -450,12 +557,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             {
                                 var newDates = new MicrosoftDynamicsCRMadoxioSpecialeventschedule();
                                 newDates.CopyValues(dates);
-                                newDates.AdoxioSpecialEventODataBind = _dynamicsClient.GetEntityURI("adoxio_specialevents", specialEvent.Id);
-                                newDates.AdoxioSpecialEventLocationODataBind = _dynamicsClient.GetEntityURI("adoxio_specialeventlocations", location.Id);
                                 try
                                 {
                                     if (string.IsNullOrEmpty(dates.Id))
                                     { // create record
+                                        newDates.AdoxioSpecialEventODataBind = _dynamicsClient.GetEntityURI("adoxio_specialevents", specialEvent.Id);
+                                        newDates.AdoxioSpecialEventLocationODataBind = _dynamicsClient.GetEntityURI("adoxio_specialeventlocations", location.Id);
                                         newDates = _dynamicsClient.Specialeventschedules.Create(newDates);
                                         dates.Id = newDates.AdoxioSpecialeventscheduleid;
                                     }
@@ -466,7 +573,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                 }
                                 catch (HttpOperationException httpOperationException)
                                 {
-                                    _logger.LogError(httpOperationException, "Error creating/updating special event location");
+                                    _logger.LogError(httpOperationException, "Error creating/updating special event schedule");
                                     throw httpOperationException;
                                 }
                             });
@@ -481,9 +588,163 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                 }));
             }
-            var result = this.getSpecialEventData(eventId);
+            var result = this.getSpecialEventData(eventId).ToViewModel(_dynamicsClient);
             result.LocalId = specialEvent.LocalId;
             return new JsonResult(result);
+        }
+
+        private ItemsToDelete GetItemsToDelete(ViewModels.SpecialEvent updateEvent, MicrosoftDynamicsCRMadoxioSpecialevent existingEvent)
+        {
+            var toDelete = new ItemsToDelete();
+
+            // create a list of id that exist in dynamics
+            List<string> existingLocations = existingEvent.AdoxioSpecialeventSpecialeventlocations
+                .Select(loc => loc.AdoxioSpecialeventlocationid)
+                .ToList();
+            List<string> existingEventDates = existingEvent.AdoxioSpecialeventSchedule
+                .Select(eventDate => eventDate.AdoxioSpecialeventscheduleid)
+                .ToList();
+            List<string> existingServiceAreas = existingEvent.AdoxioSpecialeventLicencedarea
+                .Select(area => area.AdoxioSpecialeventlicencedareaid)
+                .ToList();
+
+            // make the list of id present in the special event being sent to dynamis
+            List<string> updateLocations = new List<string>();
+            List<string> updateEventDates = new List<string>();
+            List<string> updateServiceAreas = new List<string>();
+
+            updateEvent?.EventLocations?.ForEach(loc =>
+            {
+                if (!string.IsNullOrEmpty(loc.Id))
+                {
+                    updateLocations.Add(loc.Id);
+                }
+
+                loc?.EventDates?.ForEach(eventDate =>
+                {
+                    if (!string.IsNullOrEmpty(eventDate.Id))
+                    {
+                        updateEventDates.Add(eventDate.Id);
+                    }
+                });
+
+                loc?.ServiceAreas?.ForEach(area =>
+                {
+                    if (!string.IsNullOrEmpty(area.Id))
+                    {
+                        updateServiceAreas.Add(area.Id);
+                    }
+                });
+            });
+
+            
+            // Subtract the sets of list to get ids due for deletion
+            toDelete.Locations = existingLocations.Except(updateLocations).ToList();
+            toDelete.ServiceAreas = existingServiceAreas.Except(updateServiceAreas).ToList();
+            toDelete.EventDates = existingEventDates.Except(updateEventDates).ToList();
+
+            return toDelete;
+        }
+
+        private void DeleteSpecialEventItems(ViewModels.ItemsToDelete itemsToDelete)
+        {
+
+            if (itemsToDelete.EventDates.Count > 0)
+            {
+                itemsToDelete.EventDates.ForEach(id =>
+                {
+                    _dynamicsClient.Specialeventschedules.Delete(id);
+                });
+            }
+            if (itemsToDelete.ServiceAreas.Count > 0)
+            {
+                itemsToDelete.ServiceAreas.ForEach(id =>
+                {
+                    _dynamicsClient.Specialeventlicencedareas.Delete(id);
+                });
+            }
+            if (itemsToDelete.Locations.Count > 0)
+            {
+                itemsToDelete.Locations.ForEach(id =>
+                {
+                    _dynamicsClient.Specialeventlocations.Delete(id);
+                });
+            }
+        }
+        private void saveTotalServings(ViewModels.SpecialEvent specialEvent, MicrosoftDynamicsCRMadoxioSpecialevent existingEvent)
+        {
+            // get drink types
+            var filter = "adoxio_name eq 'Beer/Cider/Cooler' or ";
+            filter += "adoxio_name eq 'Wine' or ";
+            filter += "adoxio_name eq 'Spirits'";
+            var drinkTypes = _dynamicsClient.Sepdrinktypes.Get().Value
+                            .ToList();
+
+            if (specialEvent.Beer == null)
+            {
+                specialEvent.Beer = 0;
+            }
+
+            if (specialEvent.Wine == null)
+            {
+                specialEvent.Wine = 0;
+            }
+
+            if (specialEvent.Spirits == null)
+            {
+                specialEvent.Spirits = 0;
+            }
+
+            // calculate serving amounts from percentages
+            int totalServings = specialEvent.TotalServings == null ? 0 : (int)specialEvent.TotalServings;
+            var typeData = new List<(string, int)>{
+                ("Beer/Cider/Cooler", (int)((specialEvent.Beer * totalServings / 100) + 0.5)),
+                ("Wine", (int)((specialEvent.Wine * totalServings / 100) + 0.5)),
+                ("Spirits", (int)((specialEvent.Spirits * totalServings / 100) + 0.5)),
+            };
+
+            // Create or Update Drink Sale Forecast with the serving amounts
+            typeData.ForEach(data =>
+            {
+                string drinkTypeName = data.Item1;
+                int estimatedServings = data.Item2;
+                var drinkType = drinkTypes.Where(drinkType => drinkType.AdoxioName == drinkTypeName).FirstOrDefault();
+                var existingForecast = existingEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
+                    .Where(drink => drink._adoxioTypeValue == drinkType.AdoxioSepdrinktypeid)
+                    .FirstOrDefault();
+                createOrUpdateForecast(specialEvent, existingForecast, drinkType, estimatedServings);
+            });
+        }
+
+        private void createOrUpdateForecast(ViewModels.SpecialEvent specialEvent, MicrosoftDynamicsCRMadoxioSepdrinksalesforecast existingBeerForecast, MicrosoftDynamicsCRMadoxioSepdrinktype beerType, int estimatedServings)
+        {
+            try
+            {
+                var newForecast = new MicrosoftDynamicsCRMadoxioSepdrinksalesforecast()
+                {
+                    AdoxioIscharging = true,
+                    AdoxioPriceperserving = beerType.AdoxioMaxprice,
+                    AdoxioEstimatedservings = estimatedServings,
+                };
+                if (existingBeerForecast == null)
+                { // create record
+                    newForecast.SpecialEventODataBind = _dynamicsClient.GetEntityURI("adoxio_specialevents", specialEvent.Id);
+                    if (!string.IsNullOrEmpty(beerType?.AdoxioSepdrinktypeid))
+                    {
+                        newForecast.DrinkTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_sepdrinktypes", beerType.AdoxioSepdrinktypeid);
+                    }
+                    _dynamicsClient.Sepdrinksalesforecasts.Create(newForecast);
+                }
+                else
+                { // update record
+                    _dynamicsClient.Sepdrinksalesforecasts.Update((string)existingBeerForecast.AdoxioSepdrinksalesforecastid, newForecast);
+                }
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Error creating/updating sep drinks sales forecast");
+                throw httpOperationException;
+            }
         }
 
         [HttpGet("drink-types")]
@@ -688,6 +949,80 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return Ok();
         }
 
+        [HttpPost("police/{id}/cancel")]
+        public IActionResult PoliceCancel(string id)
+        {
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+            // get the account details.
+            var userAccount = _dynamicsClient.GetAccountById(userSettings.AccountId);
+            if (string.IsNullOrEmpty(userAccount._adoxioPolicejurisdictionidValue))  // ensure the current account has a police jurisdiction.
+            {
+                return Unauthorized();
+            }
+            // get the special event.
+
+            var specialEvent = _dynamicsClient.Specialevents.GetByKey(id);
+            if (userAccount._adoxioPolicejurisdictionidValue != specialEvent._adoxioPolicejurisdictionidValue)  // ensure the current account has a matching police jurisdiction.
+            {
+                return Unauthorized();
+            }
+
+            // update the given special event.
+            var patchEvent = new MicrosoftDynamicsCRMadoxioSpecialevent()
+            {
+                AdoxioPoliceapproval = 845280002 // Cancelled
+            };
+            try
+            {
+                _dynamicsClient.Specialevents.Update(specialEvent.AdoxioSpecialeventid, patchEvent);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Unexpected Error updating special event");
+                return StatusCode(500);
+            }
+
+
+            return Ok();
+        }
+
+        [HttpPost("police/{id}/setMunicipality/{cityId}")]
+        public IActionResult PoliceSetMunicipality(string id, string cityId)
+        {
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+            // get the account details.
+            var userAccount = _dynamicsClient.GetAccountById(userSettings.AccountId);
+            if (string.IsNullOrEmpty(userAccount._adoxioPolicejurisdictionidValue))  // ensure the current account has a police jurisdiction.
+            {
+                return Unauthorized();
+            }
+            // get the special event.
+
+            var specialEvent = _dynamicsClient.Specialevents.GetByKey(id);
+            if (userAccount._adoxioPolicejurisdictionidValue != specialEvent._adoxioPolicejurisdictionidValue)  // ensure the current account has a matching police jurisdiction.
+            {
+                return Unauthorized();
+            }
+
+            // update the given special event.
+            var patchEvent = new MicrosoftDynamicsCRMadoxioSpecialevent()
+            {
+                SepCityODataBind = _dynamicsClient.GetEntityURI("adoxio_sepcities", cityId)
+            };
+            try
+            {
+                _dynamicsClient.Specialevents.Update(specialEvent.AdoxioSpecialeventid, patchEvent);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Unexpected Error updating special event");
+                return StatusCode(500);
+            }
+
+
+            return Ok();
+        }
+
         [HttpGet("police/home")]
         public IActionResult GetPoliceHome()
         {
@@ -731,7 +1066,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     // select active accounts that match the given name
                     if (defaults)
                     {
-                        filter = $"statecode eq 0 and adoxio_ispreview req true)";
+                        filter = $"statecode eq 0 and adoxio_ispreview eq true";
                     }
                     else
                     {

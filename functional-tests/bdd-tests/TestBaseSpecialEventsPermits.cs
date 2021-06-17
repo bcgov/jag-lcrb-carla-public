@@ -52,16 +52,15 @@ namespace bdd_tests
             Page Title: Eligibility
             */
 
-            var responsibleBeverageServiceNumber = "1234567";
-            var occasionOfEvent = "Description of event occasion.";
-            var organizationName = "Test organization name";
-            var organizationAddress = "645 Tyee RdVictoria, BC V9A 6X5";
-
-            Thread.Sleep(10000);
+            // var responsibleBeverageServiceNumber = "1234567";
+            // var occasionOfEvent = "Description of event occasion.";
+            // var organizationName = "Test organization name";
+            // var organizationAddress = "645 Tyee RdVictoria, BC V9A 6X5";
+            // var rationale = "Test rationale re significance.";
 
             // select 'No' for 'Is this event being hosted at a private residence?'
             NgWebElement uiPrivateResidence = null;
-            for (var i = 0; i < 20; i++)
+            for (var i = 0; i < 60; i++)
             {
                 try
                 {
@@ -81,15 +80,20 @@ namespace bdd_tests
             JavaScriptClick(uiPrivateResidence);
 
             // select 'No' for 'Is your event being held on public property?'
-            var uiPublicProperty = ngDriver.FindElement(By.Id("mat-radio-18"));
-            JavaScriptClick(uiPublicProperty);
+            // var uiPublicProperty = ngDriver.FindElement(By.Id("mat-radio-18"));
+            // JavaScriptClick(uiPublicProperty);
 
-            // select 'No' for 'Is this an event of provincial, national, or international significance?'
-            // * already selected 'No' by default
+            // select 'Yes' for 'Is this an event of provincial, national, or international significance?'
+            // var uiSignificance = ngDriver.FindElement(By.Id("mat-radio-20"));
+            // JavaScriptClick(uiSignificance);
+
+            // enter rationale 
+            // var uiRationale = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='majorSignificanceRationale']"));
+            // uiRationale.SendKeys(rationale);
 
             // select 'No' for 'Is this an event designated by municipal council as an event of municipal significance?'
-            var uiMunicipalSignificance = ngDriver.FindElement(By.Id("mat-radio-24"));
-            JavaScriptClick(uiMunicipalSignificance);
+            // var uiMunicipalSignificance = ngDriver.FindElement(By.Id("mat-radio-24"));
+            // JavaScriptClick(uiMunicipalSignificance);
 
             /*
             // select event start date

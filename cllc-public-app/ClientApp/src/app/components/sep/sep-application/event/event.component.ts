@@ -7,7 +7,7 @@ import { IndexedDBService } from '@services/indexed-db.service';
 import { FormBase } from '@shared/form-base';
 import { Account } from '@models/account.model';
 import { SepLocation } from '@models/sep-location.model';
-import { SepSchedule } from '@models/sep-schedule.model';
+import { SepSchedule, TIME_SLOTS } from '@models/sep-schedule.model';
 import { SepServiceArea } from '@models/sep-service-area.model';
 import { AutoCompleteItem, SpecialEventsDataService } from '@services/special-events-data.service';
 import { filter, tap, switchMap } from 'rxjs/operators';
@@ -38,7 +38,7 @@ export class EventComponent extends FormBase implements OnInit {
   @Input()
   set localId(value: number) {
     this._appID = value;
-    //get the last saved application
+    // get the last saved application
     this.db.getSepApplication(value)
       .then(app => {
         this.sepApplication = app;
@@ -46,7 +46,7 @@ export class EventComponent extends FormBase implements OnInit {
           this.setFormValue(this.sepApplication);
         }
       });
-  };
+  }
 
   get cities(): AutoCompleteItem[] {
     return [...this.autocompleteCities, ...this.previewCities];
@@ -71,13 +71,17 @@ export class EventComponent extends FormBase implements OnInit {
   }
 
   ngOnInit(): void {
+
+    // create a form for the basic details
     this.form = this.fb.group({
       sepCity: [''],
       isAnnualEvent: [''],
       maximumNumberOfGuests: [''],
-      eventLocations: this.fb.array([]),
+      eventLocations: this.fb.array([]), // the form array for all of the locations and their data structures
     });
-    this.setFormValue(this.sepApplication);
+    if (this.sepApplication) {
+      this.setFormValue(this.sepApplication);
+    }
 
     this.form.get('sepCity').valueChanges
       .pipe(filter(value => value && value.length >= 3),
@@ -99,17 +103,29 @@ export class EventComponent extends FormBase implements OnInit {
   }
 
   setFormValue(app: SepApplication) {
+    // if there's an app
     if (app) {
+      // create an empty array of locations or use what's there
       app.eventLocations = app.eventLocations || [];
+      // add the form values
       this.form.patchValue(app);
     }
+
+    // clear out the locations form array
     this.locations.clear();
 
+    // if we've got any event locations loaded
     if (app?.eventLocations?.length > 0) {
+      console.log("we have locations")
       app.eventLocations.forEach(loc => {
+        console.log("loading location")
+        loc.eventDates = loc.eventDates || [];
+        loc.serviceAreas = loc.serviceAreas || [];
         this.addLocation(loc);
       });
     } else {
+      // otherwise add a blank one
+      console.log("adding blank location")
       this.addLocation();
     }
   }
@@ -132,78 +148,81 @@ export class EventComponent extends FormBase implements OnInit {
     return result;
   }
 
+  // add a location and its minimum required data structures
   addLocation(location: SepLocation = new SepLocation()) {
     let locationForm = this.fb.group({
       id: [null],
       locationPermitNumber: [''],
       locationName: [''],
-      venueType: [''],
+      locationDescription: [''],
       maximumNumberOfGuests: [''],
-      locationNumberMinors: [''],
+      numberOfMinors: [''],
       eventLocationStreet1: [''],
       eventLocationStreet2: [''],
       eventLocationCity: [''],
       eventLocationProvince: [''],
       eventLocationPostalCode: [''],
-      serviceAreas: this.fb.array([]),
-      eventDates: this.fb.array([]),
+      serviceAreas: this.fb.array([]),    // form array of service areas
+      eventDates: this.fb.array([]),      // form array of event dates
     });
+
+    // patch the values in
     locationForm.patchValue(location);
 
+    // if there aren't any service areas..
     if (!location.serviceAreas || location.serviceAreas.length == 0) {
+      // add one
       location.serviceAreas = [{} as SepServiceArea];
     }
+    // then loop through the service areas
     location.serviceAreas.forEach(area => {
+      // create the required structure
       const areaForm = this.createServiceArea(area);
+      // then add it to the form array
       (locationForm.get('serviceAreas') as FormArray).push(areaForm);
     });
 
+    // if there STILL aren't service areas
     if (!location.serviceAreas || location.serviceAreas.length == 0) {
+      // add an empty one for some reason...
       location.serviceAreas = [{} as SepServiceArea];
     }
 
+    // if there aren't event dates
     if (!location.eventDates || location.eventDates.length == 0) {
+      // create one
+      console.log(!location.eventDates)
+      console.log(location.eventDates.length == 0)
+      console.log("creating blank event date")
       location.eventDates = [{} as SepSchedule];
     }
 
+    // loop through the event dates
     location.eventDates.forEach(ed => {
+      // create the required structure
       const edForm = this.createEventDate(ed);
+      // then add it to the form array
       (locationForm.get('eventDates') as FormArray).push(edForm);
     });
 
+    // then add the whole mess to the location array
     this.locations.push(locationForm);
   }
 
 
   removeLocation(locationIndex: number) {
-    var loc: SepLocation = this.locations.at(locationIndex).value;
-    if (loc.id && this.sepApplication.itemsToDelete.locations.indexOf(loc.id) === -1) {
-      this.sepApplication.itemsToDelete.locations.push(loc.id);
-    }
-    loc.eventDates.forEach(ed => {
-      const deleteEventDates = this.sepApplication.itemsToDelete.eventDates;
-      if (ed.id && deleteEventDates.indexOf(ed.id) === -1) {
-        deleteEventDates.push(ed.id);
-      }
-    });
-
-    loc.serviceAreas.forEach(area => {
-      const deleteServiceAreas = this.sepApplication.itemsToDelete.serviceAreas;
-      if (area.id && deleteServiceAreas.indexOf(area.id) === -1) {
-        deleteServiceAreas.push(area.id);
-      }
-    });
     this.locations.removeAt(locationIndex);
   }
 
   addEventDate(sched: SepSchedule, location: FormGroup) {
     const eventDates = location.get('eventDates') as FormArray;
     const dates = this.createEventDate(sched);
+
     eventDates.push(dates);
   }
 
   createEventDate(eventDate: SepSchedule) {
-    let datesForm = this.fb.group({
+    const datesForm = this.fb.group({
       id: [null],
       eventDate: [''],
       eventStartValue: [''],
@@ -224,11 +243,6 @@ export class EventComponent extends FormBase implements OnInit {
 
   removeEventDate(eventDateIndex: number, location: FormGroup) {
     const eventDates = location.get('eventDates') as FormArray;
-    const deleteEventDates = this.sepApplication.itemsToDelete.eventDates;
-    const ed: SepSchedule = eventDates.at(eventDateIndex).value;
-    if (ed.id && deleteEventDates.indexOf(ed.id) === -1) {
-      deleteEventDates.push(ed.id);
-    }
     eventDates.removeAt(eventDateIndex);
   }
 
@@ -245,6 +259,7 @@ export class EventComponent extends FormBase implements OnInit {
       licencedAreaDescription: [''],
       licencedAreaMaxNumberOfGuests: [''],
       minorPresent: [''],
+      numberOfMinors: [''],
       setting: [''],
       stateCode: [''],
       statusCode: [''],
@@ -254,13 +269,7 @@ export class EventComponent extends FormBase implements OnInit {
   }
 
   removeServiceArea(serviceAreaIndex: number, location: FormGroup) {
-    let serviceAreas = location.get('serviceAreas') as FormArray;
-
-    const deleteServiceAreas = this.sepApplication.itemsToDelete.serviceAreas;
-    const area: SepServiceArea = serviceAreas.at(serviceAreaIndex).value;
-    if (area.id && deleteServiceAreas.indexOf(area.id) === -1) {
-      deleteServiceAreas.push(area.id);
-    }
+    const serviceAreas = location.get('serviceAreas') as FormArray;
     serviceAreas.removeAt(serviceAreaIndex);
   }
 
@@ -309,53 +318,3 @@ export class EventComponent extends FormBase implements OnInit {
   }
 
 }
-
-const TIME_SLOTS = [
-  { value: "8:00 AM", name: "8:00 AM" },
-  { value: "8:30 AM ", name: "8:30 AM " },
-  { value: "9:00 AM", name: "9:00 AM" },
-  { value: "9:30 AM", name: "9:30 AM" },
-  { value: "10:00 AM", name: "10:00 AM" },
-  { value: "10:30 AM ", name: "10:30 AM " },
-  { value: "11:00 AM", name: "11:00 AM" },
-  { value: "11:30 AM ", name: "11:30 AM " },
-  { value: "12:00 PM", name: "12:00 PM" },
-  { value: "12:30 PM ", name: "12:30 PM " },
-  { value: "1:00 PM", name: "1:00 PM" },
-  { value: "1:30 PM ", name: "1:30 PM " },
-  { value: "2:00 PM", name: "2:00 PM" },
-  { value: "2:30 PM ", name: "2:30 PM " },
-  { value: "3:00 PM", name: "3:00 PM" },
-  { value: "3:30 PM ", name: "3:30 PM " },
-  { value: "4:00 PM", name: "4:00 PM" },
-  { value: "4:30 PM ", name: "4:30 PM " },
-  { value: "5:00 PM", name: "5:00 PM" },
-  { value: "5:30 PM ", name: "5:30 PM " },
-  { value: "6:00 PM", name: "6:00 PM" },
-  { value: "6:30 PM ", name: "6:30 PM " },
-  { value: "7:00 PM", name: "7:00 PM" },
-  { value: "7:30 PM ", name: "7:30 PM " },
-  { value: "8:00 PM", name: "8:00 PM" },
-  { value: "8:30 PM ", name: "8:30 PM " },
-  { value: "9:00 PM", name: "9:00 PM" },
-  { value: "9:30 PM ", name: "9:30 PM " },
-  { value: "10:00 PM", name: "10:00 PM" },
-  { value: "10:30 PM ", name: "10:30 PM " },
-  { value: "11:00 PM", name: "11:00 PM" },
-  { value: "11:30 PM ", name: "11:30 PM " },
-  { value: "12:00 AM", name: "12:00 AM" },
-  { value: "12:30 AM ", name: "12:30 AM " },
-  { value: "1:00 AM", name: "1:00 AM" },
-  { value: "1:30 AM ", name: "1:30 AM " },
-  { value: "2:00 AM", name: "2:00 AM" },
-  { value: "2:30 AM ", name: "2:30 AM " },
-  { value: "3:00 AM", name: "3:00 AM" },
-  { value: "3:30 AM ", name: "3:30 AM " },
-  { value: "4:00 AM", name: "4:00 AM" },
-  { value: "4:30 AM ", name: "4:30 AM " },
-  { value: "5:00 AM", name: "5:00 AM" },
-  { value: "5:30 AM ", name: "5:30 AM " },
-  { value: "6:00 AM", name: "6:00 AM" },
-  { value: "6:30 AM ", name: "6:30 AM " },
-  { value: "7:00 AM", name: "7:00 AM" },
-];
