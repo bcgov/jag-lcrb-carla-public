@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Globalization;
 using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
@@ -180,25 +181,81 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             Dictionary<string, string> parameters = new Dictionary<string, string>();
 
+            var title = "LCRB SPECIAL EVENTS PERMIT";
+            var heading = "<h1>SPECIAL EVENT PERMIT</h1>";
+            
+            // if special event is submitted or approved, but not issued...
+            if( 1 == 2) {
+                heading = "<h1 class='error'>This is not your special event permit</h1>";
+            }
+
             var locationDetails = "";
 
             foreach (var location in specialEvent.AdoxioSpecialeventSpecialeventlocations)
             {
 
-                locationDetails += $"<h2>Event Location - {location.AdoxioLocationname}</h2>";
-                locationDetails += "<table>";
-                locationDetails += $"<tr><td>Location Name</td><td>{location.AdoxioLocationname}</td></tr>";
-                locationDetails += $"<tr><td>Location Description</td><td>{location.AdoxioLocationdescription}</td></tr>";
-                locationDetails += $"<tr><td>Event Address</td><td>{location.AdoxioEventlocationstreet2} {location.AdoxioEventlocationstreet1} <br>{location.AdoxioEventlocationcity}<br>BC, {location.AdoxioEventlocationpostalcode}</td></tr>";
-                locationDetails += $"<tr><td>No. Guests</td><td>{location.AdoxioMaximumnumberofguestslocation}</td></tr>";
-                locationDetails += $"<tr><td>No. Minors</td><td>{location.AdoxioNumberofminors}</td></tr>";
+                // draw the location
+                locationDetails += $"<h2 class='info'>Event Location: {location.AdoxioLocationname}</h2>";
+                locationDetails += "<table class='info'>";
+                locationDetails += $"<tr><th class='heading'>Location Name:</td><td class='field'>{location.AdoxioLocationname}</td></tr>";
+                locationDetails += $"<tr><th class='heading'>Location Description:</td><td class='field'>{location.AdoxioLocationdescription}</td></tr>";
+                locationDetails += $"<tr><th class='heading'>Event Address:</td><td class='field'>{location.AdoxioEventlocationstreet2} {location.AdoxioEventlocationstreet1}, {location.AdoxioEventlocationcity} BC, {location.AdoxioEventlocationpostalcode}</td></tr>";
+                locationDetails += $"<tr><th class='heading'>No. Guests:</td><td class='field'>{location.AdoxioMaximumnumberofguestslocation}</td></tr>";
+                locationDetails += $"<tr><th class='heading'>No. Minors:</td><td class='field'>{location.AdoxioNumberofminors}</td></tr>";
                 locationDetails += "</table>";
 
-                //foreach(var sa in location.)
+                // show all service areas
+                locationDetails += "<h3 class='info'>Service Area(s):</h2>";
+                foreach(var sched in location.AdoxioSpecialeventlocationLicencedareas) {
+
+                    var minors = sched.AdoxioMinorpresent.HasValue && sched.AdoxioMinorpresent == true ? "Yes" : "No";
+
+                    locationDetails += "<table class='info'>";
+                    locationDetails += $"<tr><th class='heading'>Description:</td><td class='field'>{sched.AdoxioEventname}</td></tr>";
+                    locationDetails += $"<tr><th class='heading'>No. Guests in Service Area:</td><td class='field'>{sched.AdoxioLicencedareamaxnumberofguests}</td></tr>";
+                    locationDetails += $"<tr><th class='heading'>Minors Present?:</td><td class='field'>{minors}</td></tr>";
+                    locationDetails += $"<tr><th class='heading'>Setting:</td><td class='field'>{(ViewModels.ServiceAreaSetting?)sched.AdoxioSetting}</td></tr>";
+                    locationDetails += "</table>";
+                }
+
+                // show all event dates
+                locationDetails += "<h3 class='info'>Event Date(s):</h2>";
+                foreach(var sched in location.AdoxioSpecialeventlocationSchedule) {
+
+                    var startDateParam = "";
+                    if (sched.AdoxioEventstart.HasValue) {
+                        DateTime startDate = sched.AdoxioEventstart.Value.LocalDateTime;
+                        startDateParam = startDate.ToString("MMMM dd, yyyy");
+                    }
+
+                    var eventTimeParam = "";
+                    if(sched.AdoxioEventstart.HasValue && sched.AdoxioEventend.HasValue){
+                        DateTime startTime = sched.AdoxioEventstart.Value.LocalDateTime;
+                        DateTime endTime = sched.AdoxioEventend.Value.LocalDateTime;
+                        eventTimeParam = startTime.ToString("t", CultureInfo.CreateSpecificCulture("en-US")) + " - " + endTime.ToString("t",CultureInfo.CreateSpecificCulture("en-US"));
+                    }
+
+                    var serviceTimeParam = "";
+                    
+                    if(sched.AdoxioServicestart.HasValue && sched.AdoxioServiceend.HasValue){
+                        DateTime startTime = sched.AdoxioServicestart.Value.LocalDateTime;
+                        DateTime endTime = sched.AdoxioServiceend.Value.LocalDateTime;
+                        serviceTimeParam = startTime.ToString("t",CultureInfo.CreateSpecificCulture("en-US")) + " - " + endTime.ToString("t",CultureInfo.CreateSpecificCulture("en-US"));
+                    }
+                
+
+
+                    locationDetails += "<table class='info'>";
+                    locationDetails += $"<tr><th class='heading'>Date:</td><td class='field'>{startDateParam}</td></tr>";
+                    locationDetails += $"<tr><th class='heading'>Event Times:</td><td class='field'>{eventTimeParam}</td></tr>";
+                    locationDetails += $"<tr><th class='heading'>Service Times:</td><td class='field'>{serviceTimeParam}</td></tr>";
+                    locationDetails += "</table>";
+                }
 
             }
 
-            parameters.Add("title", "Special Event Permit");
+            parameters.Add("title", title);
+            parameters.Add("heading", heading);
             parameters.Add("printDate", DateTime.Today.ToString("MMMM dd, yyyy"));
             parameters.Add("locationDetails", locationDetails);
             var templateName = "sep";

@@ -71,11 +71,13 @@ export class EventComponent extends FormBase implements OnInit {
   }
 
   ngOnInit(): void {
+
+    // create a form for the basic details
     this.form = this.fb.group({
       sepCity: [''],
       isAnnualEvent: [''],
       maximumNumberOfGuests: [''],
-      eventLocations: this.fb.array([]),
+      eventLocations: this.fb.array([]), // the form array for all of the locations and their data structures
     });
     if (this.sepApplication) {
       this.setFormValue(this.sepApplication);
@@ -101,19 +103,29 @@ export class EventComponent extends FormBase implements OnInit {
   }
 
   setFormValue(app: SepApplication) {
+    // if there's an app
     if (app) {
+      // create an empty array of locations or use what's there
       app.eventLocations = app.eventLocations || [];
+      // add the form values
       this.form.patchValue(app);
     }
+
+    // clear out the locations form array
     this.locations.clear();
 
+    // if we've got any event locations loaded
     if (app?.eventLocations?.length > 0) {
+      console.log("we have locations")
       app.eventLocations.forEach(loc => {
+        console.log("loading location")
         loc.eventDates = loc.eventDates || [];
         loc.serviceAreas = loc.serviceAreas || [];
         this.addLocation(loc);
       });
     } else {
+      // otherwise add a blank one
+      console.log("adding blank location")
       this.addLocation();
     }
   }
@@ -136,6 +148,7 @@ export class EventComponent extends FormBase implements OnInit {
     return result;
   }
 
+  // add a location and its minimum required data structures
   addLocation(location: SepLocation = new SepLocation()) {
     let locationForm = this.fb.group({
       id: [null],
@@ -149,32 +162,50 @@ export class EventComponent extends FormBase implements OnInit {
       eventLocationCity: [''],
       eventLocationProvince: [''],
       eventLocationPostalCode: [''],
-      serviceAreas: this.fb.array([]),
-      eventDates: this.fb.array([]),
+      serviceAreas: this.fb.array([]),    // form array of service areas
+      eventDates: this.fb.array([]),      // form array of event dates
     });
+
+    // patch the values in
     locationForm.patchValue(location);
 
+    // if there aren't any service areas..
     if (!location.serviceAreas || location.serviceAreas.length == 0) {
+      // add one
       location.serviceAreas = [{} as SepServiceArea];
     }
+    // then loop through the service areas
     location.serviceAreas.forEach(area => {
+      // create the required structure
       const areaForm = this.createServiceArea(area);
+      // then add it to the form array
       (locationForm.get('serviceAreas') as FormArray).push(areaForm);
     });
 
+    // if there STILL aren't service areas
     if (!location.serviceAreas || location.serviceAreas.length == 0) {
+      // add an empty one for some reason...
       location.serviceAreas = [{} as SepServiceArea];
     }
 
+    // if there aren't event dates
     if (!location.eventDates || location.eventDates.length == 0) {
+      // create one
+      console.log(!location.eventDates)
+      console.log(location.eventDates.length == 0)
+      console.log("creating blank event date")
       location.eventDates = [{} as SepSchedule];
     }
 
+    // loop through the event dates
     location.eventDates.forEach(ed => {
+      // create the required structure
       const edForm = this.createEventDate(ed);
+      // then add it to the form array
       (locationForm.get('eventDates') as FormArray).push(edForm);
     });
 
+    // then add the whole mess to the location array
     this.locations.push(locationForm);
   }
 
@@ -186,6 +217,7 @@ export class EventComponent extends FormBase implements OnInit {
   addEventDate(sched: SepSchedule, location: FormGroup) {
     const eventDates = location.get('eventDates') as FormArray;
     const dates = this.createEventDate(sched);
+
     eventDates.push(dates);
   }
 
@@ -227,6 +259,7 @@ export class EventComponent extends FormBase implements OnInit {
       licencedAreaDescription: [''],
       licencedAreaMaxNumberOfGuests: [''],
       minorPresent: [''],
+      numberOfMinors: [''],
       setting: [''],
       stateCode: [''],
       statusCode: [''],

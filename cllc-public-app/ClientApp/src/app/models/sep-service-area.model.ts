@@ -13,4 +13,22 @@ export class SepServiceArea {
     eventName: string;
     isOutdoors: boolean;
     licencedAreaDescription: string;
+
+    constructor(area: IAreaFormValue) {
+      if (area) {
+          this.setting = area.setting;
+          this.licencedAreaDescription = area.licencedAreaDescription;
+          this.maximumNumberOfGuests = area.maximumNumberOfGuests;
+          this.numberOfMinors = area.numberOfMinors;
+          this.minorPresent = area.minorPresent;
+      }
+  }
+}
+
+export interface IAreaFormValue {
+  setting: number
+  licencedAreaDescription: string;
+  maximumNumberOfGuests: number;
+  numberOfMinors: number;
+  minorPresent: boolean;
 }
