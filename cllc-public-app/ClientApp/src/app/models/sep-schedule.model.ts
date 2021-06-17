@@ -69,7 +69,7 @@ export class SepSchedule {
 
 export const TIME_SLOTS = [
     { value: '8:00 AM', name: '8:00 AM' },
-    { value: '8:30 AM ', name: '8:30 AM' },
+    { value: '8:30 AM', name: '8:30 AM' },
     { value: '9:00 AM', name: '9:00 AM' },
     { value: '9:30 AM', name: '9:30 AM' },
     { value: '10:00 AM', name: '10:00 AM' },
