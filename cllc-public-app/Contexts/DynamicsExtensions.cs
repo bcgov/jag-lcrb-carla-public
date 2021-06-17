@@ -1746,7 +1746,8 @@ namespace Gov.Lclb.Cllb.Interfaces
                 {
                     id = userId,
                     firstname = user.Firstname,
-                    lastname = user.Lastname
+                    lastname = user.Lastname,
+                    name = user.Firstname + " " + user.Lastname
                 };
             }
             catch (Exception e)
@@ -1951,21 +1952,31 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
-        public static bool IsLiquor(this MicrosoftDynamicsCRMadoxioApplication application, IDynamicsClient dynamicsClient)
+        public static PaymentType GetPaymentType(this MicrosoftDynamicsCRMadoxioApplication application, IDynamicsClient dynamicsClient)
         {
-            bool result = false;
+            PaymentType result;
+            bool isLiquor = false;
             // determine if the application is for liquor.
             if (application != null && application.AdoxioApplicationTypeId != null && application.AdoxioApplicationTypeId.AdoxioCategory != null)
             {
                 if (application.AdoxioApplicationTypeId.AdoxioName != null && application.AdoxioApplicationTypeId.AdoxioName == "Licensee Changes" && application.AdoxioApplicant != null)
                 {
-                    result = application.AdoxioApplicant.IsMostlyLiquor(dynamicsClient);
+                    isLiquor = application.AdoxioApplicant.IsMostlyLiquor(dynamicsClient);
                 }
                 else
                 {
-                    result = (Public.ViewModels.ApplicationTypeCategory)application.AdoxioApplicationTypeId.AdoxioCategory == Public.ViewModels.ApplicationTypeCategory.Liquor;
+                    isLiquor = (Public.ViewModels.ApplicationTypeCategory)application.AdoxioApplicationTypeId.AdoxioCategory == Public.ViewModels.ApplicationTypeCategory.Liquor;
                 }
 
+            }
+
+            if (isLiquor)
+            {
+                result = PaymentType.LIQUOR;
+            }
+            else
+            {
+                result = PaymentType.CANNABIS;
             }
 
             // TODO - if this is a licencee changes application then check the account's licences.  

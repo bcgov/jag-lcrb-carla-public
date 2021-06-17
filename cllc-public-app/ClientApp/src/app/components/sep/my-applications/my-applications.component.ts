@@ -11,6 +11,7 @@ import { StarterChecklistComponent } from '../starter-checklist/starter-checklis
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { SEP_APPLICATION_STEPS } from '../sep-application/sep-application.component';
 import { SepApplicationSummary } from '@models/sep-application-summary.model';
+
 @Component({
   selector: 'app-my-applications',
   templateUrl: './my-applications.component.html',
@@ -20,7 +21,6 @@ export class MyApplicationsComponent implements OnInit {
   applications: any[];
   displayedColumns = ['status', 'info', 'actions'];
   currentUser: User;
-  faEdit = faEdit;
   submittedApplication: SepApplicationSummary[];
 
   constructor(private store: Store<AppState>,
@@ -39,13 +39,14 @@ export class MyApplicationsComponent implements OnInit {
   }
 
   async getApplications() {
-    let apps = await this.db.applications.toArray();
-    apps = apps.sort((a, b) => {
+    let applications = await this.db.applications.toArray();
+    applications = applications.filter(app => app.eventStatus === 'Draft');
+    applications = applications.sort((a, b) => {
       const dateA = new Date(a.dateCreated).getTime();
       const dateB = new Date(b.dateCreated).getTime();
       return dateB - dateA;
     });
-    this.applications = apps;
+    this.applications = applications;
   }
 
   startApplication() {
@@ -91,7 +92,6 @@ export class MyApplicationsComponent implements OnInit {
         applicationName: applicationName
       }
     };
-
     // open dialog, get reference and process returned data from dialog
     const dialogRef = this.dialog.open(ApplicationCancellationDialogComponent, dialogConfig);
     dialogRef.afterClosed()
@@ -105,7 +105,6 @@ export class MyApplicationsComponent implements OnInit {
   }
 
   getLastStep(stepCompleted: string): string {
-    debugger;
     const lastIndex = SEP_APPLICATION_STEPS.indexOf(stepCompleted);
     // return the next step to be completed
     return SEP_APPLICATION_STEPS[lastIndex + 1];

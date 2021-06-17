@@ -11,21 +11,24 @@
     </div>
 
     <!-- Section 1 -->
-    <h3>1. Enter guests and hours</h3>
-    <div class="row">
-      <app-field class="col-md-4 col-xs-12" label="Liquor Service Duration (hrs)" [required]="true"
-        [isFullWidth]="false" errorMessage="Please enter the Liquor Service Duration in hours (must be a number)"
-        [valid]="isValidOrNotTouched('hours')">
-        <input class="form-control" type="number" formControlName="hours">
-      </app-field>
-      <app-field class="col-md-4 col-xs-12" label="Number of Guests" [required]="true" [isFullWidth]="false"
-        errorMessage="Please enter the number of guests (must be a number)" [valid]="isValidOrNotTouched('totalMaximumNumberOfGuests')">
-        <input class="form-control" type="number" formControlName="totalMaximumNumberOfGuests">
-      </app-field>
+    <ng-container *ngIf="!hideGuestsAndHours">
+      <h3>Enter guests and hours</h3>
+      <div class="row">
+        <app-field class="col-md-4 col-xs-12" label="Liquor Service Duration (hrs)" [required]="true"
+          [isFullWidth]="false" errorMessage="Please enter the Liquor Service Duration in hours (must be a number)"
+          [valid]="isValidOrNotTouched('hours')">
+          <input class="form-control" type="number" formControlName="hours">
+        </app-field>
+        <app-field class="col-md-4 col-xs-12" label="Number of Guests" [required]="true" [isFullWidth]="false"
+          errorMessage="Please enter the number of guests (must be a number)"
+          [valid]="isValidOrNotTouched('totalMaximumNumberOfGuests')">
+          <input class="form-control" type="number" formControlName="totalMaximumNumberOfGuests">
+        </app-field>
 
-    </div>
+      </div>
 
-    <hr>
+      <hr>
+    </ng-container>
     <!-- Section 2 -->
     <fa-icon [icon]="faLightbulb" class="float-right rounded-tooltip-icon" data-html="true"
       matTooltipClass="multiline-tooltip custom-tooltip" matTooltip="Standard Drink Serving Sizes:&#010;
@@ -34,7 +37,7 @@
       &bull; 12 ounces for draught beer, cider or coolers
       &bull; 5 ounces for individual glasses of wine">
     </fa-icon>
-    <h3>2. Enter the &#37; of each drink type appropriate for your event</h3>
+    <h3>Enter the &#37; of each drink type appropriate for your event</h3>
     <div class="row">
       <div *ngFor="let item of config" class="col-md-3 col-md-offset-1 col-xs-12">
         <div class="row">
@@ -80,13 +83,13 @@
         <div class="row">
           <div class="col-md-4 offset-md-2 col-6">
             <h3 class="text-right">
-              <span class="total-percent">{{totalPercentage.toFixed(0)}} %</span>
+              <span class="total-percent">{{(totalPercentage || 0).toFixed(0)}} %</span>
             </h3>
           </div>
           <div class="col-6">
             <h3 class="w-100">
               &nbsp; = &nbsp;
-              <span class="total-servings">{{totalServings.toFixed(0) | mask : 'separator' : ','}}</span>
+              <span class="total-servings">{{(totalServings || 0).toFixed(0) | mask : 'separator' : ','}}</span>
               <small class="ml-2">total servings</small>
             </h3>
           </div>

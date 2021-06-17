@@ -1,5 +1,6 @@
 export class SepCity {
     id: string; // server side primary key
+    name: string;
     sepLocationId: string;
     specialEventId: string;
     minorPresent: boolean;

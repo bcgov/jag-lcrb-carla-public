@@ -50,9 +50,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
     public enum ApproverStatus
     {
-        [EnumMember(Value = "Auto-Approved")]
-        AutoApproved = 100000000,
-        Approved = 845280000,
+        [EnumMember(Value = "Auto-Reviewed")]
+        AutoReviewed = 100000000,
+        Reviewed = 845280000,
         [EnumMember(Value = "Pending Review")]
         PendingReview = 100000001,
         Denied = 845280001,
@@ -149,15 +149,15 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public System.DateTimeOffset? DateSubmitted { get; set; }
         public ViewModels.Account PoliceAccount { get; set; }
         public ViewModels.Contact PoliceDecisionBy { get; set; }
-        
+
         [JsonConverter(typeof(StringEnumConverter))]
         public ApproverStatus? PoliceApproval { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
         public ApproverStatus? LcrbApproval { get; set; }
 
-        public ViewModels.Contact LcrbApprovalBy {get; set;}
-        public string DenialReason {get; set;}
-        public string CancelReason {get; set;}
+        public ViewModels.Contact LcrbApprovalBy { get; set; }
+        public string DenialReason { get; set; }
+        public string CancelReason { get; set; }
         public bool? IsManufacturingExclusivity { get; set; }
         public string HowProceedsWillBeUsedDescription { get; set; }
 
@@ -170,5 +170,17 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public SepCity SepCity { get; set; }
 
         public Contact Applicant { get; set; }
+
+        public int? Beer { get; set; }
+        public int? Wine { get; set; }
+        public int? Spirits { get; set; }
+
+    }
+
+    public class ItemsToDelete
+    {
+        public List<string> Locations { get; set; } = new List<string>();
+        public List<string> EventDates { get; set; } = new List<string>();
+        public List<string> ServiceAreas { get; set; } = new List<string>();
     }
 }

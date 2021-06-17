@@ -9,6 +9,7 @@ import { IndexedDBService } from '@services/indexed-db.service';
 import { SepApplication } from '@models/sep-application.model';
 import { environment } from 'environments/environment';
 import { SpecialEventsDataService } from '@services/special-events-data.service';
+import { de } from 'date-fns/locale';
 
 export const SEP_APPLICATION_STEPS = ["applicant", "eligibility", "event", "liquor", "summary"];
 
@@ -64,7 +65,9 @@ export class SepApplicationComponent implements OnInit {
     if (this.localId) {
       await this.db.getSepApplication(this.localId)
         .then(app => {
-          this.application = Object.assign(new SepApplication(), app);
+          const value = JSON.parse(JSON.stringify(app));
+          delete value.totalMaximumNumberOfGuests;
+          this.application = Object.assign(new SepApplication(), value);
         }, err => {
           console.error(err);
         });
@@ -78,7 +81,7 @@ export class SepApplicationComponent implements OnInit {
 
   isStepCompleted(step: string): boolean {
     let completed = false;
-    const indexOfLastStep = this.steps.indexOf(this.application.lastStepCompleted);
+    const indexOfLastStep = this.steps.indexOf(this?.application?.lastStepCompleted);
     completed = this.steps.indexOf(step) <= indexOfLastStep;
     return completed;
   }
@@ -105,6 +108,7 @@ export class SepApplicationComponent implements OnInit {
 
   completeStep(step: string, stepper: any, data: SepApplication) {
     this.application.lastStepCompleted = step;
+    data.lastStepCompleted = step;
     this.saveToDb(data);
     this.cd.detectChanges();
     if (environment.development) {

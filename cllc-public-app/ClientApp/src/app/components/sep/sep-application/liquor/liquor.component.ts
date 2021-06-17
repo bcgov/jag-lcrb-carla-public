@@ -22,12 +22,12 @@ export class LiquorComponent implements OnInit {
   @Input()
   set localId(value: number) {
     this._appID = value;
-    //get the last saved application
+    // get the last saved application
     this.db.getSepApplication(value)
       .then(app => {
         this.sepApplication = app;
       });
-  };
+  }
 
   get localId() {
     return this._appID;
@@ -37,6 +37,7 @@ export class LiquorComponent implements OnInit {
 
   updateValue(value) {
     this.value = { ...this.value, ...value };
+    this.saveToDB();
   }
 
   ngOnInit(): void {
