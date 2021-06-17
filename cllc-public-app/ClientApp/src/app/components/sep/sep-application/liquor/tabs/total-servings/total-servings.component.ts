@@ -61,7 +61,7 @@ export class TotalServingsComponent implements OnInit {
     this.max_servings = app.maxSuggestedServings;
 
     if (this.total_servings == 0) {
-      this.total_servings = app.suggestedServings;
+      app.totalServings = app.suggestedServings;
     }
 
   }
