@@ -140,7 +140,7 @@ export class EligibilityComponent extends FormBase implements OnInit {
       message = 'Invalid choice. Data values in conflict';
     } else if (bevNumberDoesNotHave !== true && !bevNumber) {
       message = 'Please enter the Responsible Beverage Service Number';
-    } else if (bevNumber.length !== 6 && bevNumber.length !== 22) {
+    } else if (bevNumber && bevNumber.length !== 6 && bevNumber.length !== 22) {
       message = 'The Responsible Beverage Service Number can only be 6 or 22 characters long';
     }
     return message;
