@@ -216,7 +216,13 @@ export class FormBase implements OnDestroy {
 
   listControlsWithErrors(form: FormGroup | FormArray, ValidationFieldNameMap: any = {}, parentName: string = ''): string[] {
     let list = [];
+    // list errors at the form level
     if (form instanceof FormGroup) {
+      // tslint:disable-next-line: forin
+      for (const error in form.errors) {
+        list.push(`${parentName} ${form.errors[error]}`);
+      }
+
       for (const c in form.controls) {
         if (c) {
           const control = form.get(c);
@@ -257,12 +263,14 @@ export class FormBase implements OnDestroy {
   markControlsAsTouched(form: FormGroup | FormArray) {
     if (form instanceof FormGroup) {
       for (const c in form.controls) {
-        let control = form.get(c);
-        if (!control.valid) {
-          if (control instanceof FormGroup || control instanceof FormArray) {
-            this.markControlsAsTouched(control);
-          } else {
-            control.markAsTouched();
+        if (c) {
+          const control = form.get(c);
+          if (!control.valid) {
+            if (control instanceof FormGroup || control instanceof FormArray) {
+              this.markControlsAsTouched(control);
+            } else {
+              control.markAsTouched();
+            }
           }
         }
       }
