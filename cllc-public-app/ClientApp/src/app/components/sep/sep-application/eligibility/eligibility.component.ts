@@ -8,6 +8,7 @@ import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { FormBase } from '@shared/form-base';
 import { distinct, distinctUntilChanged } from 'rxjs/operators';
+import { be } from 'date-fns/locale';
 @Component({
   selector: 'app-eligibility',
   templateUrl: './eligibility.component.html',
@@ -58,7 +59,7 @@ export class EligibilityComponent extends FormBase implements OnInit {
       isLocalSignificance: ['', [Validators.required]],
       eventStartDate: ['', [Validators.required]],
       privateOrPublic: ['', [Validators.required]],
-      responsibleBevServiceNumber: ['', [Validators.required]],
+      responsibleBevServiceNumber: [''],
       responsibleBevServiceNumberDoesNotHave: [false],
       specialEventDescription: ['', [Validators.required, Validators.maxLength(255)]],
       admissionFee: ['', [Validators.required]],
@@ -97,35 +98,6 @@ export class EligibilityComponent extends FormBase implements OnInit {
         }
       });
 
-
-    // this.form.get('responsibleBevServiceNumber').valueChanges
-    //   .pipe(distinctUntilChanged())
-    //   .subscribe(value => {
-    //     if (value) {
-    //       // if the value is entered disable the checkbox and clear its validation
-    //       this.form.get('responsibleBevServiceNumberDoesNotHave').clearValidators();
-    //       this.form.get('responsibleBevServiceNumberDoesNotHave').reset();
-    //       this.form.get('responsibleBevServiceNumberDoesNotHave').disable();
-    //     } else {
-    //       // enable the checkbox and its validation
-    //       this.form.get('responsibleBevServiceNumberDoesNotHave').setValidators([this.customRequiredCheckboxValidator()]);
-    //       this.form.get('responsibleBevServiceNumberDoesNotHave').enable();
-    //     }
-    //   });
-
-    // this.form.get('responsibleBevServiceNumberDoesNotHave').valueChanges
-    //   .pipe(distinctUntilChanged())
-    //   .subscribe(value => {
-    //     if (value === false) {
-    //       this.form.get('responsibleBevServiceNumber').setValidators([Validators.required, Validators.minLength(6), Validators.maxLength(6)]);
-    //       this.form.get('responsibleBevServiceNumber').enable();
-    //     } else {
-    //       this.form.get('responsibleBevServiceNumber').clearValidators();
-    //       this.form.get('responsibleBevServiceNumber').reset();
-    //       this.form.get('responsibleBevServiceNumber').disable();
-    //     }
-    //   });
-
     if (this.sepApplication) {
       this.form.patchValue(this.sepApplication);
     }
@@ -134,8 +106,44 @@ export class EligibilityComponent extends FormBase implements OnInit {
 
   isValid() {
     this.markControlsAsTouched(this.form);
-    this.validationMessages = this.listControlsWithErrors(this.form, {});
-    return this.form.valid && !this.form.get('isPrivateResidence').value === true;
+    this.validationMessages = this.listControlsWithErrors(this.form, {
+      isPrivateResidence: 'Please indicate whether this event is being hosted at a private residence',
+      isOnPublicProperty: 'Please indicate whether this event is being held on public property',
+      isMajorSignificance: 'Is this an event of provincial, national, or international significance? ',
+      isLocalSignificance: 'Is this an event designated by municipal council as an event of municipal significance? ',
+      eventStartDate: 'Please enter the Event start date',
+      privateOrPublic: 'Is your event private or public?',
+      responsibleBevServiceNumber: ' Please enter the Responsible Beverage Service Number',
+      specialEventDescription: 'What’s the occasion of your event?',
+      admissionFee: 'Are you charging an event admission price?',
+      isLocationLicensed: 'Is there currently a liquor licence at your event location?',
+      hostOrganizationName: 'What is the name of the organization hosting the event? ',
+      hostOrganizationAddress: 'What is the address of the organization?',
+      hostOrganizationCategory: 'Select a category that best describes the organization hosting the event',
+    });
+    const bevMsg = this.bevNumberValidationMessage();
+    if (bevMsg !== null) {
+      this.validationMessages.push(bevMsg);
+    }
+
+    const valid = this.form.valid
+      && !this.form.get('isPrivateResidence').value === true
+      && bevMsg === null;
+    return valid;
+  }
+
+  bevNumberValidationMessage(): string {
+    const bevNumber: string = this.form.get('responsibleBevServiceNumber').value;
+    const bevNumberDoesNotHave: boolean = this.form.get('responsibleBevServiceNumberDoesNotHave').value;
+    let message: string = null;
+    if (bevNumberDoesNotHave === true && bevNumber) {
+      message = 'Invalid choice. Data values in conflict';
+    } else if (bevNumberDoesNotHave !== true && !bevNumber) {
+      message = 'Please enter the Responsible Beverage Service Number';
+    } else if (bevNumber.length !== 6 && bevNumber.length !== 22) {
+      message = 'The Responsible Beverage Service Number can only be 6 or 22 characters long';
+    }
+    return message;
   }
 
   getFormData(): SepApplication {
