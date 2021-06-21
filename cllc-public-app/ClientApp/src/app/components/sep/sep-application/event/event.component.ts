@@ -1,17 +1,18 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faMapMarkerAlt, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { SepApplication } from '@models/sep-application.model';
 import { IndexedDBService } from '@services/indexed-db.service';
-import { FormBase } from '@shared/form-base';
+import { CanadaPostalRegex, FormBase } from '@shared/form-base';
 import { Account } from '@models/account.model';
 import { SepLocation } from '@models/sep-location.model';
 import { SepSchedule, TIME_SLOTS } from '@models/sep-schedule.model';
 import { SepServiceArea } from '@models/sep-service-area.model';
 import { AutoCompleteItem, SpecialEventsDataService } from '@services/special-events-data.service';
-import { filter, tap, switchMap } from 'rxjs/operators';
+import { filter, tap, switchMap, takeUntil, takeWhile, distinct } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { timeMasks } from 'ngx-mask';
 
 @Component({
   selector: 'app-event',
@@ -71,10 +72,9 @@ export class EventComponent extends FormBase implements OnInit {
   }
 
   ngOnInit(): void {
-
     // create a form for the basic details
     this.form = this.fb.group({
-      sepCity: [''],
+      sepCity: ['', [Validators.required]],
       isAnnualEvent: [''],
       maximumNumberOfGuests: [''],
       eventLocations: this.fb.array([]), // the form array for all of the locations and their data structures
@@ -116,16 +116,16 @@ export class EventComponent extends FormBase implements OnInit {
 
     // if we've got any event locations loaded
     if (app?.eventLocations?.length > 0) {
-      console.log("we have locations")
+      console.log('we have locations');
       app.eventLocations.forEach(loc => {
-        console.log("loading location")
+        console.log('loading location');
         loc.eventDates = loc.eventDates || [];
         loc.serviceAreas = loc.serviceAreas || [];
         this.addLocation(loc);
       });
     } else {
       // otherwise add a blank one
-      console.log("adding blank location")
+      console.log('adding blank location');
       this.addLocation();
     }
   }
@@ -150,18 +150,17 @@ export class EventComponent extends FormBase implements OnInit {
 
   // add a location and its minimum required data structures
   addLocation(location: SepLocation = new SepLocation()) {
-    let locationForm = this.fb.group({
+    const locationForm = this.fb.group({
       id: [null],
-      locationPermitNumber: [''],
-      locationName: [''],
-      locationDescription: [''],
-      maximumNumberOfGuests: [''],
-      numberOfMinors: [''],
-      eventLocationStreet1: [''],
+      locationName: ['', [Validators.required]],
+      locationDescription: ['', [Validators.required]],
+      maximumNumberOfGuests: ['', [Validators.required]],
+      // numberOfMinors: ['', [Validators.required]],
+      eventLocationStreet1: ['', [Validators.required]],
       eventLocationStreet2: [''],
-      eventLocationCity: [''],
-      eventLocationProvince: [''],
-      eventLocationPostalCode: [''],
+      // eventLocationCity: ['', [Validators.required]],
+      // eventLocationProvince: ['', [Validators.required]],
+      eventLocationPostalCode: ['', [Validators.required, Validators.pattern(CanadaPostalRegex)]],
       serviceAreas: this.fb.array([]),    // form array of service areas
       eventDates: this.fb.array([]),      // form array of event dates
     });
@@ -170,7 +169,7 @@ export class EventComponent extends FormBase implements OnInit {
     locationForm.patchValue(location);
 
     // if there aren't any service areas..
-    if (!location.serviceAreas || location.serviceAreas.length == 0) {
+    if (!location.serviceAreas || location.serviceAreas.length === 0) {
       // add one
       location.serviceAreas = [{} as SepServiceArea];
     }
@@ -183,17 +182,17 @@ export class EventComponent extends FormBase implements OnInit {
     });
 
     // if there STILL aren't service areas
-    if (!location.serviceAreas || location.serviceAreas.length == 0) {
+    if (!location.serviceAreas || location.serviceAreas.length === 0) {
       // add an empty one for some reason...
       location.serviceAreas = [{} as SepServiceArea];
     }
 
     // if there aren't event dates
-    if (!location.eventDates || location.eventDates.length == 0) {
+    if (!location.eventDates || location.eventDates.length === 0) {
       // create one
-      console.log(!location.eventDates)
-      console.log(location.eventDates.length == 0)
-      console.log("creating blank event date")
+      console.log(!location.eventDates);
+      console.log(location.eventDates.length === 0);
+      console.log('creating blank event date');
       location.eventDates = [{} as SepSchedule];
     }
 
@@ -222,14 +221,21 @@ export class EventComponent extends FormBase implements OnInit {
   }
 
   createEventDate(eventDate: SepSchedule) {
+    const eventTimesValidator: ValidatorFn = (fg: FormGroup) => {
+      const errorMsg = this.getEventTimeValidationError(fg);
+      return errorMsg === null
+        ? null
+        : { range: errorMsg };
+    };
+
     const datesForm = this.fb.group({
       id: [null],
-      eventDate: [''],
-      eventStartValue: [''],
-      eventEndValue: [''],
-      serviceStartValue: [''],
-      serviceEndValue: [''],
-    });
+      eventDate: ['', [Validators.required]],
+      eventStartValue: ['9:00 AM', [Validators.required]],
+      eventEndValue: ['10:00 PM', [Validators.required]],
+      serviceStartValue: ['9:00 AM', [Validators.required]],
+      serviceEndValue: ['10:00 PM', [Validators.required]],
+    }, { validators: eventTimesValidator });
     eventDate = Object.assign(new SepSchedule(null), eventDate);
     const val = eventDate.toEventFormValue();
 
@@ -239,6 +245,16 @@ export class EventComponent extends FormBase implements OnInit {
     }
     datesForm.patchValue(val);
     return datesForm;
+  }
+
+  customRequiredCheckboxValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      if (control.value === true) {
+        return null;
+      } else {
+        return { 'shouldBeTrue': 'But value is false' };
+      }
+    };
   }
 
   removeEventDate(eventDateIndex: number, location: FormGroup) {
@@ -253,17 +269,25 @@ export class EventComponent extends FormBase implements OnInit {
   }
 
   createServiceArea(area: SepServiceArea) {
-    let areaForm = this.fb.group({
+    const areaForm = this.fb.group({
       id: [null],
-      eventName: [''],
-      licencedAreaDescription: [''],
-      licencedAreaMaxNumberOfGuests: [''],
-      minorPresent: [''],
+      licencedAreaDescription: ['', [Validators.required]],
+      licencedAreaMaxNumberOfGuests: ['', [Validators.required]],
+      minorPresent: ['', [Validators.required]],
       numberOfMinors: [''],
-      setting: [''],
-      stateCode: [''],
-      statusCode: [''],
+      setting: ['', [Validators.required]],
     });
+
+    areaForm.get('minorPresent').valueChanges
+      .pipe(distinct(value => value))
+      .subscribe(val => {
+        if (val === true) {
+          areaForm.get('numberOfMinors').setValidators([Validators.required]);
+        } else {
+          areaForm.get('numberOfMinors').clearValidators();
+          areaForm.get('numberOfMinors').reset();
+        }
+      });
     areaForm.patchValue(area);
     return areaForm;
   }
@@ -281,17 +305,43 @@ export class EventComponent extends FormBase implements OnInit {
     this.markControlsAsTouched(this.form);
     this.form.updateValueAndValidity();
     this.validationMessages = this.listControlsWithErrors(this.form, {});
-    return this.form.valid;
+    const valid = this.form.valid;
+    return valid;
+  }
+
+  getEventTimeValidationError(dateForm: FormGroup): string {
+    let error: string = null;
+    const eventFromItem = TIME_SLOTS.find(time => time.value === dateForm.get('eventStartValue').value);
+    const eventFromIndex = TIME_SLOTS.indexOf(eventFromItem);
+
+    const eventToItem = TIME_SLOTS.find(time => time.value === dateForm.get('eventEndValue').value);
+    const eventToIndex = TIME_SLOTS.indexOf(eventToItem);
+
+    const serviceFromItem = TIME_SLOTS.find(time => time.value === dateForm.get('serviceStartValue').value);
+    const serviceFromIndex = TIME_SLOTS.indexOf(serviceFromItem);
+
+    const serviceToItem = TIME_SLOTS.find(time => time.value === dateForm.get('serviceEndValue').value);
+    const serviceToIndex = TIME_SLOTS.indexOf(serviceToItem);
+
+    if (eventFromIndex > eventToIndex) {
+      error = 'The event start time should be ealier that the end time';
+    } else if (serviceFromIndex > serviceFromIndex) {
+      error = 'The event  services start time should be ealier that the end time';
+    } else if (eventFromIndex > serviceFromIndex ||
+      eventToIndex < serviceToIndex) {
+      error = 'The service times should be within the specified event times';
+    }
+    return error;
   }
 
   getFormValue(): SepApplication {
-    let formData = {
+    const formData = {
       ...this.sepApplication,
       ...this.form.value
     };
 
     formData?.eventLocations.forEach(location => {
-      let dateValues = [];
+      const dateValues = [];
       location?.eventDates.forEach(sched => {
         dateValues.push(new SepSchedule(sched));
       });
