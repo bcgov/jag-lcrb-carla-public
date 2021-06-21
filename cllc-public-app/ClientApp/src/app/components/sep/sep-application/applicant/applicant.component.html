@@ -1,72 +1,99 @@
-<div class="form-wrapper">
+<div class="">
     <h1>Applicant Information</h1>
 
-    <div class="row pl-3">
-        <section [formGroup]="form" class="col-md-8">
-            <p>
-                Collect the information outlined on your application checklist to begin your application. The more
-                information you have about your event, the easier it should be to complete your application. Stuck on a
-                question? Don't worry, you can log out at any time and come back to your question when you're ready.
-                Answers will automatically be saved on your application so you can continue where you left off next time
-                you sign in.
-            </p>
+    <section [formGroup]="form" class="">
+        <p>
+            Collect the information outlined on your application checklist to begin your application. The more
+            information you have about your event, the easier it should be to complete your application. Stuck on a
+            question? Don't worry, you can log out at any time and come back to your question when you're ready.
+            Answers will automatically be saved on your application so you can continue where you left off next time
+            you sign in.
+        </p>
 
-            <p>
-                View Frequently Asked Questions (FAQS) located on the Help page for everything you need to know about
-                SEPs.
-            </p>
+        <p>
+            View Frequently Asked Questions (FAQS) located on the Help page for everything you need to know about
+            SEPs.
+        </p>
 
-            <hr>
-            <app-field label="Event Name" [valid]="!form.get('eventName').touched || form.get('eventName').valid"
-                errorMessage="Name must have a descriptive name">
-                <input type="text" formControlName="eventName" class="form-control ml-3" maxlength="100" style="width:500px;" placeholder="Enter a descriptive name">
-            </app-field>
+        <hr>
+        <app-field label="Event Name" [valid]="!form.get('eventName').touched || form.get('eventName').valid"
+            errorMessage="Please enter the event name">
+            <input type="text" formControlName="eventName" class="form-control ml-3" maxlength="100"
+                style="width:500px;" placeholder="Enter a descriptive name">
+        </app-field>
 
-            <hr>
-            <app-field label="Applicant information">
-                <div class="ml-3 p-3 applcant-info" style="width: 500px; border: solid #e0e0e0 1px;">
-                    <strong>{{contact?.name}}</strong>
-                  <!--
+        <hr>
+        <app-field label="Applicant information">
+            <div class="ml-3 p-3 applcant-info" style="width: 500px; border: solid #e0e0e0 1px;">
+                <strong>{{contact?.name}}</strong>
+                <!--
                     {{contact?.address1_line1}},  <br>
                     {{contact?.address1_city}}, {{contact?.address1_postalcode}}
                     <br>
                     {{contact?.address1_country}} <br>0-
                     -->
-                    <br>
-                    {{contact?.telephone1}} <br>
-                    {{contact?.emailaddress1}}
+                <br>
+                <div *ngIf="contact?.telephone1">
+                    {{contact?.telephone1}}
                 </div>
-            </app-field>
+                <div *ngIf="!contact?.telephone1">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Telephone</mat-label>
+                        <input matInput type="text" formControlName="telephone1" mask="(000) 000-0000"
+                        autocomplete="tel">
+                    </mat-form-field>
+                </div>
+                <div *ngIf="contact?.emailaddress1">
+                    {{contact?.emailaddress1}}
+
+                </div>
+                <div *ngIf="!contact?.emailaddress1">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Email Address</mat-label>
+                        <input matInput type="text" formControlName="emailaddress1" autocomplete="email">
+                    </mat-form-field>
+                </div>
+            </div>
+        </app-field>
+        <p>
+            Please ensure your legal name is used for the application and the information is correct. If you need to
+            update
+            your information, visit <a routerLink="/account-profile">Manage Account</a>.
+        </p>
+
+        <hr>
+        <app-field label="General Terms and Conditions"
+            [valid]="!form.get('isAgreeTsAndCs').touched || form.get('isAgreeTsAndCs').valid"
+            errorMessage="Please read and acknowledge the terms and conditions to continue your application">
             <p>
-                Please ensure your legal name is used for the application and the information is correct. If you need to
-                update
-                your information, visit <a routerLink="/account-profile">Manage Account</a>.
+                Please read and acknowledge the Terms and Conditions to begin your application:
             </p>
 
-            <hr>
-            <app-field label="General Terms and Conditions"  [valid]="!form.get('isAgreeTsAndCs').touched || form.get('isAgreeTsAndCs').valid"
-            errorMessage="Please read and acknowledge the terms and conditions to continue your application">
-                <p>
-                    Please read and acknowledge the Terms and Conditions to begin your application:
-                </p>
-
-                <div class="tnc mb-3" >
-                    <app-policy-document [fullWidth]="true" #policyDocs></app-policy-document>
-                </div>
+            <div class="tnc mb-3">
+                <app-policy-document [fullWidth]="true" #policyDocs></app-policy-document>
+            </div>
 
 
-                <mat-checkbox color="primary" formControlName="isAgreeTsAndCs">
-                    <span class="error-states">*</span>
-                    <span class="ml-2 question-label">
-                        I have read and agree to these terms and conditions.
-                    </span>
-                </mat-checkbox>
-            </app-field>
+            <mat-checkbox color="primary" formControlName="isAgreeTsAndCs">
+                <span class="error-states">*</span>
+                <span class="ml-2 question-label">
+                    I have read and agree to these terms and conditions.
+                </span>
+            </mat-checkbox>
+        </app-field>
 
-            <section class="d-flex justify-content-between">
-                <button mat-raised-button color="primary" (click)="next()">Next</button>
-                <!--button mat-button color="primary" routerLink="/sep/my-applications">My Applications</button-->
-            </section>
+        <section class="d-flex justify-content-between">
+            <button mat-raised-button color="primary" (click)="next()">Next</button>
+            <!--button mat-button color="primary" routerLink="/sep/my-applications">My Applications</button-->
         </section>
-    </div>
+
+        <section class="error mt-3" *ngIf="showValidationMessages">
+            <p *ngFor="let message of validationMessages">
+                <span class="app-cancel">
+                    <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
+                    {{message}}
+                </span>
+            </p>
+        </section>
+    </section>
 </div>
