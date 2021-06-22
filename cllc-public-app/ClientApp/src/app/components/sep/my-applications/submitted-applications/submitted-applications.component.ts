@@ -5,7 +5,9 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { PoliceTableElement } from '@components/police-representative/police-table-element';
 import { SepApplicationSummary } from '@models/sep-application-summary.model';
+import { SepApplication } from '@models/sep-application.model';
 import { PaymentDataService } from '@services/payment-data.service';
+import { IndexedDBService } from '@services/indexed-db.service';
 import { SpecialEventsDataService } from '@services/special-events-data.service';
 import { map } from 'rxjs/operators';
 import {
@@ -57,6 +59,7 @@ export class SubmittedApplicationsComponent implements OnInit {
   faBolt = faBolt;
   faCheck = faCheck;
   faBan = faBan;
+
   @Input()
   set dataSourceOverride(value: MatTableDataSource<PoliceTableElement>) {
     this.dataSource = value;
@@ -129,6 +132,47 @@ export class SubmittedApplicationsComponent implements OnInit {
       default:
         return faStopwatch;
     }
+  }
+
+  async cloneApplication(app: SepApplication) {
+    const clone = { ...app };
+    // clear dynamics IDs
+    clone.id = undefined;
+    clone.localId = undefined;
+    if (clone?.eventLocations?.length > 0) {
+      clone.eventLocations.forEach(loc => {
+        loc.id = undefined;
+        if (loc?.serviceAreas?.length > 0) {
+          loc.serviceAreas.forEach(area => {
+            area.id = undefined;
+          });
+        }
+        if (loc?.eventDates?.length > 0) {
+          loc.eventDates.forEach(ed => {
+            ed.id = undefined;
+          });
+        }
+      });
+    }
+    const localId = await this.db.saveSepApplication({
+      ...clone,
+      dateAgreedToTsAndCs: undefined,
+      isAgreeTsAndCs: false,
+      dateCreated: new Date()
+    } as SepApplication);
+    this.router.navigateByUrl(`/sep/application/${localId}/applicant`);
+
+  }
+
+  async getApplications() {
+    let applications = await this.db.applications.toArray();
+    applications = applications.filter(app => app.eventStatus === 'Draft');
+    applications = applications.sort((a, b) => {
+      const dateA = new Date(a.dateCreated).getTime();
+      const dateB = new Date(b.dateCreated).getTime();
+      return dateB - dateA;
+    });
+    this.applications = applications;
   }
 
   /**
