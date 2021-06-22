@@ -1,4 +1,4 @@
-<h3 class="blue-header">Manufacturer Business Plan</h3>
+<h3 class="blue-header">Manufacturer Supporting Information</h3>
 <div class="content-bottom" [formGroup]="form">
 
 <p>Please select the type of application you are submitting:</p>
@@ -12,76 +12,23 @@
   </mat-radio-group>
 </app-field>
 
-<div *ngIf="!hasType()">
+<!--div *ngIf="!hasType()">
   <p>In order to complete your business plan, you must select a type of manufacturer licence.</p>
-</div>
+</div-->
 
 <div *ngIf="hasType()">
-  <p>Your application must include a business plan that describes your proposed operations, including:</p>
+  <p *ngIf="isCopacker()">Your application must include a business plan that describes your proposed operations including:</p>
   <ul>
     <li *ngIf="isCopacker()">Which of the following manufacturing activities will take place at your manufacturing site on behalf of a BC licenced winery, brewery, or distillery: packaging, bottling, blending and/or flavouring of liquor. </li>
-    <li *ngIf="!isCopacker()">
-      What stages of manufacturing will be taking place at your manufacturing site.
-      <span *ngIf="isWinery()">
-        <strong>
-          You must
-          demonstrate that they will produce at least 4,500 litres per year on site.
-        </strong> Onsite production means
-        fermenting
-        and at least one of the
-        following winemaking steps: blending, crushing, filtering, aging for at least 3 months, secondary
-        fermentation
-        or carbonation, and packaging.
-      </span>
-    </li>
-    <li *ngIf="!isCopacker()">
-      Financial statements outlining production (in litres) and sales forecasts for a three year period.
-    </li>
-    <li *ngIf="!isCopacker()">
-      Your proposed product(s), and any plans regarding contract manufacturing (you manufacturing for
-      others,
-      and/or them manufacturing for you) and
-      the manufacturer(s) involved.
-    </li>
-    <li *ngIf="!isCopacker()">
-      Your proposed agricultural sources (e.g. grapes, hops) and whether all sources will be from B.C.
-    </li>
-
-    <li *ngIf="!isCopacker()">Whether you will be using neutral grain spirits.</li>
-    <li>
-      A list of all manufacturing equipment including equipment costs (to be eligible for a licence, you
+    <li *ngIf="isCopacker()">
+      A list of all manufacturing equipment -- to be eligible for a licence, you
       must
       demonstrate that you own or lease the equipment
       necessary to manufacture on-site, and you must continue to maintain that equipment to renew your
-      licence).
+      licence.
     </li>
-    <li *ngIf="!isCopacker()">Where you will store packaged products, if not on-site. </li>
-    <li *ngIf="isBrewery()">
-      Whether your brewery will operate in conjunction with a liquor primary (brewpub)
-      at the
-      same site, and whether product will be piped in from the brewery to serve on tap.
-    </li>
-    <li *ngIf="isBrewery()">A sample of the brew sheets you intend to use in your production.</li>
-    <li *ngIf="isBrewery() || isWinery()">Your business insurance certificate (if available).</li>
-    <li *ngIf="isBrewery() || isDistillery()">How you plan to distribute your packaged product.</li>
-    <li *ngIf="isWinery()">
-      If you don't have productive crops yet, explain when planting will take place and
-      when
-      you will have product (e.g. grapes) to use in production.
-    </li>
-    <li *ngIf="isWinery()">Explain how you plan to distribute your packaged product.</li>
-    <li *ngIf="isWinery()">
-      Explain if you will be leasing any of your agricultural land to others, or
-      selling
-      agricultural products to others, and identify who.
-    </li>
-    <li *ngIf="isWinery()">
-      Explain if you will be leasing lands from others, or buying agricultural products
-      from
-      others, identify who, and provide lease and/or contract fruit documents.
-    </li>
-    <li *ngIf="isWinery()">Identify your winemaker, and whether they produce for another winery.</li>
-  </ul>
+
+
   <p *ngIf="isDistillery()">
     The Office of the Fire Commissioner (OFC) requires that a distillery
     owner/applicant
@@ -89,6 +36,7 @@
     requirements for fire prevention/protection. A copy of the Approval in Principal letter will be provided
     to OFC.
   </p>
+<div *ngIf="isCopacker()">
   <hr>
   <h4>Business Plan</h4>
   <p>Upload your business plan: </p>
@@ -100,7 +48,8 @@
                        [uploadHeader]="'TO UPLOAD BUSINESS PLAN, DRAG FILES HERE OR'">
     </app-file-uploader>
   </section>
-  <section *ngIf="!isCopacker()">
+</div>
+  <!--section *ngIf="!isCopacker() && !isBrewery()">
     <hr>
     <h4>Production and Sales Forecasts</h4>
     <p>
@@ -115,8 +64,8 @@
                          [uploadHeader]="'TO UPLOAD PRODUCTION AND FORECASTS, DRAG FILES HERE OR'">
       </app-file-uploader>
     </section>
-  </section>
-  <section *ngIf="isWinery()">
+  </section-->
+  <!--section *ngIf="isWinery()">
     <hr>
     <h4>Proposed Agricultural Sources</h4>
     <section class="content-bottom" style="border-top: solid #aaa 1px; margin-top: 0px;" *ngIf="isWinery()">
@@ -150,7 +99,7 @@
       </div>
 
     </section>
-  </section>
+  </section-->
   <section *ngIf="isWinery()">
     <hr>
     <h4>Stages of Manufacturing Taking Place Onsite</h4>
@@ -166,7 +115,7 @@
       <app-production-stages [application]="application" [form]="form"></app-production-stages>
     </section>
   </section>
-  <section *ngIf="!isCopacker()">
+  <!--section *ngIf="!isCopacker() && !isBrewery()">
     <hr>
     <app-field label="Will you be using neutral grain spirits?" [valid]="isValidOrNotTouched('neutralGrain')" [showChevrons]="false"
                errorMessage="Specify whether you will be useing neutral grain spirits" [isFullWidth]="true">
@@ -176,7 +125,7 @@
       </mat-radio-group>
     </app-field>
   </section>
-</div>
+</div-->
 
 
 <div *ngIf="isBrewery()">
@@ -204,7 +153,7 @@
       </mat-radio-group>
     </app-field>
 
-    <p>
+    <!--p>
       Upload a sample of the brew sheets you intend to use in your
       production:
     </p>
@@ -216,7 +165,7 @@
                          [uploadHeader]="'TO UPLOAD SAMPLE BREW SHEET, DRAG FILES HERE OR'">
       </app-file-uploader>
     </section>
-  </section>
+  </section-->
 
   <div *ngIf="isDistillery()">
     <hr>
@@ -232,7 +181,7 @@
     </section>
   </div>
 
-  <div *ngIf="isBrewery() || isWinery()">
+  <div *ngIf="isWinery()">
     <hr>
     <h4>Business Insurance</h4>
     <p>Upload your business insurance certificate:</p>
@@ -248,5 +197,4 @@
 
   <!-- TO DO wineries questions-->
 
-</div>
-</div>
+<!--/div-->
