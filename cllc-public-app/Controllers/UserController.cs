@@ -94,7 +94,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 user.email = userSettings.AuthenticatedUser.Email;
                 user.isNewUser = false;
                 user.isEligibilityRequired = EligibilityController.IsEligibilityCheckRequired(user.accountid, _configuration, _dynamicsClient);
-                user.isPoliceRepresentative = ContactController.IsPoliceRepresentative(user.contactid, _configuration, _dynamicsClient);
+                user.isPoliceRepresentative = ContactController.IsSepPoliceRepresentative(user.contactid, _configuration, _dynamicsClient);
             }
 
             return new JsonResult(user);
