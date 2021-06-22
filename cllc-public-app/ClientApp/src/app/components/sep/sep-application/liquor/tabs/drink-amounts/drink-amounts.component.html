@@ -7,19 +7,17 @@
         drink type you need? Use the handy tool below as a guide.
     </p>
 
-    <mat-expansion-panel [expanded]="true">
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                NEED HELP TO DETERMINE YOUR DRINK TYPES?
-            </mat-panel-title>
-        </mat-expansion-panel-header>
-        <section>
+    <mat-card class="mb-3 mat-elevation-z2">
+        <h3 class="blue-header">
+            NEED HELP TO DETERMINE YOUR DRINK TYPES?
+        </h3>
+        <section class="p-3">
             <app-drink-planner [hideGuestsAndHours]="true" [sepApplication]="application" #planner></app-drink-planner>
         </section>
-    </mat-expansion-panel>
+    </mat-card>
 
 
-    <mat-divider></mat-divider>
+    <!-- <mat-divider></mat-divider> -->
 
 
     <mat-expansion-panel [expanded]="true">
@@ -68,6 +66,6 @@
         and a restocking fee.
     </div>
 
-    <button mat-raised-button color="secondary" (click)="back.emit(true)">BACK</button>
+    <button mat-raised-button color="secondary" class="mr-3" (click)="back.emit(true)">BACK</button>
     <button mat-raised-button color="primary" (click)="next(planner)">NEXT</button>
 </form>

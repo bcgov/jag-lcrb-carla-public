@@ -10,17 +10,17 @@ import { SepServiceArea } from '@models/sep-service-area.model';
   styleUrls: ['./total-servings.component.scss']
 })
 export class TotalServingsComponent implements OnInit {
-  _application: SepApplication
+  _application: SepApplication;
   @Input()
   set application(app: SepApplication) {
     if (app) {
       const value = JSON.parse(JSON.stringify(app));
       delete value.totalMaximumNumberOfGuests;
       this._application = Object.assign(new SepApplication(), value);
-      this.total_servings = this._application?.totalServings || 0;
       this.setServings(this._application);
+      this.total_servings = this._application?.totalServings || this.suggested_servings;
     }
-  };
+  }
 
   get application() {
     return this._application;
@@ -35,14 +35,10 @@ export class TotalServingsComponent implements OnInit {
   total_service_hours = 0;
 
   form: FormGroup;
-  //@Input() total_servings: number;
 
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
-
-    // this.form.get('indigenousNationId').patchValue(data.indigenousNation.id);
-
   }
 
 
@@ -60,15 +56,15 @@ export class TotalServingsComponent implements OnInit {
     this.suggested_servings = app.suggestedServings;
     this.max_servings = app.maxSuggestedServings;
 
-    if (this.total_servings == 0) {
-      app.totalServings = app.suggestedServings;
-    }
-
   }
 
 
   formatLabel(value: number) {
     return value;
+  }
+
+  isValid(): boolean{
+    return this.total_servings > 0;
   }
 
   next() {

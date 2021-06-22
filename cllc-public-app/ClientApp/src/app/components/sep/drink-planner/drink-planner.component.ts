@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { faLightbulb } from '@fortawesome/free-regular-svg-icons';
 import configuration, { DrinkConfig, HOURS_OF_LIQUOR_SERVICE, SERVINGS_PER_PERSON } from './config';
 import { SepApplication } from '@models/sep-application.model';
+import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-drink-planner',
@@ -14,6 +15,7 @@ import { SepApplication } from '@models/sep-application.model';
 export class DrinkPlannerComponent extends FormBase implements OnInit {
   // icons
   faLightbulb = faLightbulb;
+  faQuestionCircle = faQuestionCircle;
   totalServings = 0;
   _app: SepApplication;
 
@@ -84,26 +86,6 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
           this.totalServings = this.getTotalServings();
         }
       });
-    // this.form.get('beer').valueChanges.subscribe((value: number) => {
-    //   const remainder = 100 - value;
-    //   const half = remainder / 2;
-    //   this.form.get('wine').setValue(Math.ceil(half), { emitEvent: false });
-    //   this.form.get('spirits').setValue(Math.floor(half), { emitEvent: false });
-    // });
-
-    // this.form.get('wine').valueChanges.subscribe((value: number) => {
-    //   const remainder = 100 - value;
-    //   const half = remainder / 2;
-    //   this.form.get('beer').setValue(Math.ceil(half), { emitEvent: false });
-    //   this.form.get('spirits').setValue(Math.floor(half), { emitEvent: false });
-    // });
-
-    // this.form.get('spirits').valueChanges.subscribe((value: number) => {
-    //   const remainder = 100 - value;
-    //   const half = remainder / 2;
-    //   this.form.get('beer').setValue(Math.ceil(half), { emitEvent: false });
-    //   this.form.get('wine').setValue(Math.floor(half), { emitEvent: false });
-    // });
   }
 
   servings(config: DrinkConfig): number {
