@@ -154,6 +154,7 @@ export class SubmittedApplicationsComponent implements OnInit {
         }
       });
     }
+    /*
     const localId = await this.db.saveSepApplication({
       ...clone,
       dateAgreedToTsAndCs: undefined,
@@ -161,10 +162,11 @@ export class SubmittedApplicationsComponent implements OnInit {
       dateCreated: new Date()
     } as SepApplication);
     this.router.navigateByUrl(`/sep/application/${localId}/applicant`);
-
+    */
   }
 
   async getApplications() {
+    /*
     let applications = await this.db.applications.toArray();
     applications = applications.filter(app => app.eventStatus === 'Draft');
     applications = applications.sort((a, b) => {
@@ -173,6 +175,7 @@ export class SubmittedApplicationsComponent implements OnInit {
       return dateB - dateA;
     });
     this.applications = applications;
+    */
   }
 
   /**
