@@ -1,12 +1,13 @@
-﻿using Gov.Lclb.Cllb.Public.Authentication;
+﻿using Gov.Lclb.Cllb.Interfaces;
+using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using System;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -15,13 +16,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     public class LoginController : ControllerBase
     {
         private readonly IConfiguration _configuration;
+        private readonly IDynamicsClient _dynamicsClient;
         private readonly IWebHostEnvironment _env;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly SiteMinderAuthOptions _options = new SiteMinderAuthOptions();
 
-        public LoginController(IConfiguration configuration, IWebHostEnvironment env)
+        public LoginController(IConfiguration configuration, IWebHostEnvironment env, IDynamicsClient dynamicsClient,
+            IHttpContextAccessor httpContextAccessor)
         {
             _configuration = configuration;
+            _dynamicsClient = dynamicsClient;
             _env = env;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         [HttpGet]
@@ -29,35 +35,40 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public ActionResult Login(string path, [FromQuery] string source)
         {
             // check to see if we have a local path.  (do not allow a redirect to another website)
-            if (!string.IsNullOrEmpty(path) && (Url.IsLocalUrl(path) || (!_env.IsProduction() && path.Equals("headers"))))
+            if (!string.IsNullOrEmpty(path) && (Url.IsLocalUrl(path) || !_env.IsProduction() && path.Equals("headers")))
             {
                 // diagnostic feature for development - echo headers back.
-                if ((!_env.IsProduction()) && path.Equals("headers"))
+                if (!_env.IsProduction() && path.Equals("headers"))
                 {
-                    ContentResult contentResult = new ContentResult();
+                    var contentResult = new ContentResult();
                     contentResult.Content = LoggingEvents.GetHeaders(Request);
                     contentResult.ContentType = "text/html";
                     return contentResult;
                 }
+
                 return LocalRedirect(path);
             }
 
-            string basePath = string.IsNullOrEmpty(_configuration["BASE_PATH"]) ? "/" : _configuration["BASE_PATH"];
+
+            // get the current user.
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+
+            bool isSep = source != null && source == "sep" ||
+                userSettings?.ContactId != null &&
+                ContactController.IsSepPoliceRepresentative(userSettings?.ContactId, _configuration, _dynamicsClient);
+
+            var basePath = string.IsNullOrEmpty(_configuration["BASE_PATH"]) ? "/" : _configuration["BASE_PATH"];
             // we want to redirect to the dashboard.
-            string url = "dashboard";
-            if (source == "sep")
-            {
-                url = "sep/dashboard";
-            }
+            var url = "dashboard";
+            if (isSep) url = "sep/dashboard";
 
             return Redirect(basePath + "/" + url);
         }
 
 
-
         /// <summary>
-        /// Injects an authentication token cookie into the response for use with the 
-        /// SiteMinder authentication middleware
+        ///     Injects an authentication token cookie into the response for use with the
+        ///     SiteMinder authentication middleware
         /// </summary>
         [HttpGet]
         [Route("token/{userid}")]
@@ -75,11 +86,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             HttpContext.Session.Clear();
 
             // expire "dev" user cookie
-            string temp = HttpContext.Request.Cookies[_options.DevBCSCAuthenticationTokenKey];
-            if (temp == null)
-            {
-                temp = "";
-            }
+            var temp = HttpContext.Request.Cookies[_options.DevBCSCAuthenticationTokenKey];
+            if (temp == null) temp = "";
             Response.Cookies.Append(
                 _options.DevBCSCAuthenticationTokenKey,
                 temp,
@@ -102,18 +110,22 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
             );
 
-            string basePath = string.IsNullOrEmpty(_configuration["BASE_PATH"]) ? "" : _configuration["BASE_PATH"];
 
-            string url = "dashboard";
-            if (source == "sep")
-            {
-                url = "sep/dashboard";
-            }
+            // get the current user.
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+
+            bool isSep = source != null && source == "sep" ||
+                        userSettings?.ContactId != null &&
+                        ContactController.IsSepPoliceRepresentative(userSettings?.ContactId, _configuration, _dynamicsClient);
+
+            var basePath = string.IsNullOrEmpty(_configuration["BASE_PATH"]) ? "/" : _configuration["BASE_PATH"];
+            // we want to redirect to the dashboard.
+            var url = "dashboard";
+            if (isSep) url = "sep/dashboard";
 
             basePath += "/" + url;
 
             return Redirect(basePath);
         }
-
     }
 }
