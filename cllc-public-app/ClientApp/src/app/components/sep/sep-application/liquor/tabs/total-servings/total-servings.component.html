@@ -9,28 +9,38 @@
     </p>
     <mat-divider></mat-divider>
 
-    <div class="d-flex" style="margin-bottom: 25px; background-color:#e1e8f2; border-bottom: #ccc; padding-top: 25px; padding-bottom: 25px;">
+    <div class="d-flex"
+        style="margin-bottom: 25px; background-color:#e1e8f2; border-bottom: #ccc; padding-top: 25px; padding-bottom: 25px;">
 
-      <!--div class="slider-box"-->
-        <mat-slider  [(ngModel)]="total_servings" class="flex-fill" thumbLabel [displayWith]="formatLabel" tickInterval="auto" step="1" [min]="1" [max]="max_servings"
-            aria-label="units"></mat-slider>
+        <!--div class="slider-box"-->
+        <mat-slider [(ngModel)]="total_servings" class="flex-fill" thumbLabel [displayWith]="formatLabel"
+            tickInterval="auto" step="1" [min]="1" [max]="max_servings" aria-label="units"></mat-slider>
 
-            <div class="slider-labels">
-              <div class="minimum">1<br>Minimum<br>Amount</div>
-              <div class="declared">{{suggested_servings}}<br>Suggested<br>Amount</div>
-              <div class="real-maximum">{{max_servings}}<br>Suggested<br>Maximum</div>
-          </div>
-      <!--/div-->
+        <div class="slider-labels">
+            <div class="minimum">1<br>Minimum<br>Amount</div>
+            <div class="declared">{{suggested_servings}}<br>Suggested<br>Amount</div>
+            <div class="real-maximum">{{max_servings}}<br>Suggested<br>Maximum</div>
+        </div>
+        <!--/div-->
 
         <div class="flex-fill slider-box">
-            <input type="number" [max]="max_servings" [min]="1" [(ngModel)]="total_servings" name="totalServings" class="form-control bev-slider" style="text-align:center; height:50px; font-size:20px; font-weight: 900;"><br>
+            <input type="number" [ngStyle]="{'border-color': !isValid() ? 'red': '#ccc'}"
+            [max]="max_servings" [min]="1" [(ngModel)]="total_servings" name="totalServings"
+                class="form-control bev-slider"
+                style="text-align:center; height:50px; font-size:20px; font-weight: 900;"><br>
             <strong>Declared Maximum Servings</strong><br>
+
+            <ng-container *ngIf="!isValid()">
+                <span class="error-states">Please enter a number greater than 0</span> <br>
+            </ng-container>
+
             <small>You can enter a different number of <br>drinks here.</small>
         </div>
     </div>
 
     <p>
-        According to the information you provided, the number of drinks served at your event should not exceed {{max_servings}}. This
+        According to the information you provided, the number of drinks served at your event should not exceed
+        {{max_servings}}. This
         is a basic guideline. You may enter your own declared maximum servings, however, please remember that you are
         responsible for the safety of your guests and are required to prevent over-service and intoxication.
     </p>
@@ -96,7 +106,7 @@
     </mat-expansion-panel>
 
     <section class="pt-3">
-        <button mat-raised-button color="secondary" matStepperPrevious>BACK</button>
-        <button mat-raised-button color="primary" (click)="next()">NEXT</button>
+        <button mat-raised-button color="secondary" class="mr-3" matStepperPrevious>BACK</button>
+        <button mat-raised-button color="primary" [disabled]="!isValid()" (click)="next()">NEXT</button>
     </section>
 </div>
