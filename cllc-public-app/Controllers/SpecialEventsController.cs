@@ -1104,7 +1104,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return Unauthorized();
             }
 
-            string filter = $"_adoxio_policejurisdictionid_value eq {userAccount._adoxioPolicejurisdictionidValue}";
+            // Pending Review, Approved, Issued, Cancelled, Denied
+            string filter = $"(statuscode eq {(int?)EventStatus.PendingReview} or statuscode eq {(int?)EventStatus.Approved}"
+                + $" or statuscode eq {(int?)EventStatus.Issued} or statuscode eq {(int?)EventStatus.Cancelled} or statuscode eq {(int?)EventStatus.Denied})"
+                + $" and _adoxio_policejurisdictionid_value eq {userAccount._adoxioPolicejurisdictionidValue}";
 
             var result = GetSepSummaries(filter);
 
