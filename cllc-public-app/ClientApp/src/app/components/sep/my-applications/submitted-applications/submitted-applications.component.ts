@@ -80,6 +80,7 @@ export class SubmittedApplicationsComponent implements OnInit {
 
   constructor(private sepDataService: SpecialEventsDataService,
     private snackBar: MatSnackBar,
+    private db: IndexedDBService,
     private router: Router,
     private paymentDataService: PaymentDataService) { }
 
@@ -154,7 +155,7 @@ export class SubmittedApplicationsComponent implements OnInit {
         }
       });
     }
-    /*
+
     const localId = await this.db.saveSepApplication({
       ...clone,
       dateAgreedToTsAndCs: undefined,
@@ -162,25 +163,23 @@ export class SubmittedApplicationsComponent implements OnInit {
       dateCreated: new Date()
     } as SepApplication);
     this.router.navigateByUrl(`/sep/application/${localId}/applicant`);
-    */
   }
 
-  async getApplications() {
-    /*
-    let applications = await this.db.applications.toArray();
-    applications = applications.filter(app => app.eventStatus === 'Draft');
-    applications = applications.sort((a, b) => {
-      const dateA = new Date(a.dateCreated).getTime();
-      const dateB = new Date(b.dateCreated).getTime();
-      return dateB - dateA;
-    });
-    this.applications = applications;
-    */
-  }
+  // async getApplications() {
+  //   let applications = await this.db.applications.toArray();
+  //   applications = applications.filter(app => app.eventStatus === 'Draft');
+  //   applications = applications.sort((a, b) => {
+  //     const dateA = new Date(a.dateCreated).getTime();
+  //     const dateB = new Date(b.dateCreated).getTime();
+  //     return dateB - dateA;
+  //   });
+  //   this.applications = applications;
+  // }
 
   /**
  * Redirect to payment processing page (Express Pay / Bambora service)
  * */
+
   private submitPayment(applicationId: string) {
     return this.paymentDataService.getPaymentURI('specialEventInvoice', applicationId)
       .pipe(map(jsonUrl => {
