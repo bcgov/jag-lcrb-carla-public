@@ -1126,7 +1126,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var result = new SpecialEventPoliceMyJobs()
             {
                 InProgress = GetSepSummaries($"_adoxio_policerepresentativeid_value eq {userSettings.ContactId} and adoxio_policeapproval eq 100000001"), // Under review
-                PoliceApproved = GetSepSummaries($"_adoxio_policerepresentativeid_value eq {userSettings.ContactId} and adoxio_policeapproval eq 845280000"),  // Approved
+                PoliceApproved = GetSepSummaries($"statuscode ne 845280003 _adoxio_policerepresentativeid_value eq {userSettings.ContactId} and adoxio_policeapproval eq 845280000"),  // Approved
                 Issued = GetSepSummaries($"_adoxio_policerepresentativeid_value eq {userSettings.ContactId} and statuscode eq 845280003") // status is issued
             };
 
