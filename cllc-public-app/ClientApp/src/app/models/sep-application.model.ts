@@ -3,70 +3,68 @@ import { Contact } from "./contact.model";
 import { SepCity } from "./sep-city.model";
 import { SepDrinkSalesForecast } from "./sep-drink-sales-forecast.model";
 import { SepLocation } from "./sep-location.model";
-import { differenceInHours } from 'date-fns'
+import { differenceInHours } from "date-fns";
 
 export class SepApplication {
-    id: string; // server side primary key
-    localId?: number;  // indexed db primary key
-    tempJobNumber: string;
-    eventStartDate: Date;
+    applicant: Contact;
+    applicantInfo: any;
+    beer: number;
+    cancelReason?: string;
+    chargingForLiquorReason: string;
+    dateAgreedToTsAndCs: Date;
     dateCreated: Date;
     dateSubmitted: Date;
-    lastUpdated: Date;
+    denialReason?: string;
+    donateOrConsularPrevLiqour: boolean;
     eventName: string;
-    applicantInfo: any;
-    isAgreeTsAndCs: boolean;
-    dateAgreedToTsAndCs: Date;
-    lastStepCompleted: string;
+    eventStartDate: Date;
     eventStatus: string;
-    totalServings: number;
+    fundraisingPurpose: string;
+    hostOrganizationAddress: string;
+    hostOrganizationName: string;
+    howProceedsWillBeUsedDescription: string;
+    id: string; // server side primary key
     invoiceTrigger: boolean;
-    responsibleBevServiceNumber: string;
-
-    isPrivateResidence: boolean;
+    isAgreeTsAndCs: boolean;
+    isBeerGarden: boolean;
+    isGSTRegisteredOrg: boolean;
+    isLocalSignificance: boolean;
+    isLocationLicensed: string;
     isMajorSignificance: boolean;
     isMajorSignificanceRational: string;
-    isLocalSignificance: boolean;
-
-    permitNumber: string;
-    isTastingEvent: boolean;
-    isBeerGarden: boolean;
-    hostOrganizationName: string;
-    hostOrganizationAddress: string;
-    specialEventDescription: string;
-    isLocationLicensed: string;
+    isManufacturingExclusivity: boolean;
     isOnPublicProperty: boolean;
-
-    sepCity: SepCity;
-    applicant: Contact;
-
-    policeAccount?: Account;
-    policeDecisionBy?: Contact;
-    policeApproval?: string;
-    lcrbApprovalBy?: Contact;
+    isPrivateResidence: boolean;
+    isTastingEvent: boolean;
+    lastStepCompleted: string;
+    lastUpdated: Date;
     lcrbApproval?: string;
-    denialReason?: string;
-    cancelReason?: string;
-
-    //suggestedServings: number;
+    lcrbApprovalBy?: Contact;
+    localId?: number;  // indexed db primary key
     maxServings: number;
+    nonProfitName: string;
+    permitNumber: string;
+    policeAccount?: Account;
+    policeApproval?: string;
+    policeDecisionBy?: Contact;
+    responsibleBevServiceNumber: string;
+    sepCity: SepCity;
+    specialEventDescription: string;
+    spirits: number;
+    tempJobNumber: string;
+    totalServings: number;
+    wine: number;
 
     eventLocations: SepLocation[] = [];
     drinksSalesForecasts: SepDrinkSalesForecast[] = [];
 
-    beer: number;
-    wine: number;
-    spirits: number;
-
     public get totalMaximumNumberOfGuests(): number {
         let maxGuests = 0;
         for (const location of this.eventLocations) {
-            // accumulate the total hours of service by looping through the eventDates
-            for(const area of location.serviceAreas){
-              maxGuests += area.licencedAreaMaxNumberOfGuests || 0;
+            for (const area of location.serviceAreas) {
+                maxGuests += area.licencedAreaMaxNumberOfGuests || 0;
             }
         }
-        //debugger
         return maxGuests;
     }
 
@@ -74,40 +72,32 @@ export class SepApplication {
 
         let maxMinors = 0;
         for (const location of this.eventLocations) {
-            for(const area of location.serviceAreas) {
-              // accumulate the total hours of service by looping through the eventDates
-              maxMinors += area.licencedAreaNumberOfMinors || 0;
+            for (const area of location.serviceAreas) {
+                maxMinors += area.licencedAreaNumberOfMinors || 0;
             }
         }
-        console.log("max adults:",this.totalMaximumNumberOfGuests, maxMinors);
+        console.log("max adults:", this.totalMaximumNumberOfGuests, maxMinors);
         return this.totalMaximumNumberOfGuests - maxMinors;
     }
 
     public get serviceHours(): number {
         let serviceHours = 0;
         for (const location of this.eventLocations) {
-
             for (const hours of location.eventDates) {
-
                 serviceHours += differenceInHours(new Date(hours.serviceEnd), new Date(hours.serviceStart)) || 0;
-                console.log("hours:",hours.serviceEnd, hours.serviceStart, differenceInHours(new Date(hours.serviceEnd), new Date(hours.serviceStart)) );
-
+                console.log("hours:", hours.serviceEnd, hours.serviceStart,
+                    differenceInHours(new Date(hours.serviceEnd), new Date(hours.serviceStart)));
             }
         }
         return serviceHours;
     }
 
     public get suggestedServings(): number {
-        //this.suggested_servings = Math.floor((this.total_service_hours / 3) * (this.total_guests - this.total_minors) * 4);
-        //this.max_servings = Math.floor(((this.total_service_hours / 3) * (this.total_guests - this.total_minors) * 5));
-
-      return Math.floor((this.serviceHours / 3) * (this.maximumNumberOfAdults) * 4);
+        return Math.floor((this.serviceHours / 3) * (this.maximumNumberOfAdults) * 4);
     }
 
     public get maxSuggestedServings(): number {
-      return  Math.floor(((this.serviceHours / 3) * (this.maximumNumberOfAdults) * 5));
+        return Math.floor(((this.serviceHours / 3) * (this.maximumNumberOfAdults) * 5));
     }
-
-    //public get servings()
 }
 
