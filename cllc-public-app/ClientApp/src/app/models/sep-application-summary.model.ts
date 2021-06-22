@@ -3,6 +3,8 @@ import { Contact } from "./contact.model";
 import { SepCity } from "./sep-city.model";
 
 export class SepApplicationSummary {
+  localId: string; // local memory primary key
+  lastCompletedStep: string;
   specialEventId: string; // server side primary key
   eventStartDate: Date | string;
   eventName: string;

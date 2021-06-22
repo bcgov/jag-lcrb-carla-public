@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { AppState } from '@app/app-state/models/app-state';
 import { PolicyDocumentComponent } from '@components/policy-document/policy-document.component';
 import { Account } from '@models/account.model';
@@ -9,62 +8,63 @@ import { SepApplication } from '@models/sep-application.model';
 import { Store } from '@ngrx/store';
 import { ContactDataService } from '@services/contact-data.service';
 import { IndexedDBService } from '@services/indexed-db.service';
-import { SpecialEventsDataService } from '@services/special-events-data.service';
-import { Observable } from 'rxjs';
-import { from } from 'rxjs/internal/observable/from';
-import { of } from 'rxjs/internal/observable/of';
+import { FormBase } from '@shared/form-base';
 
 @Component({
   selector: 'app-applicant',
   templateUrl: './applicant.component.html',
   styleUrls: ['./applicant.component.scss']
 })
-export class ApplicantComponent implements OnInit {
-  policySlug = "sep-terms-and-conditions";
-  @ViewChild("policyDocs", { static: true })
+export class ApplicantComponent extends FormBase implements OnInit {
+  policySlug = 'sep-terms-and-conditions';
+  validationMessages: string[] = [];
+  @ViewChild('policyDocs', { static: true })
   policyDocs: PolicyDocumentComponent;
   @Input() account: Account;
   _app: SepApplication = {} as SepApplication;
   contact: Contact;
+  showValidationMessages: boolean;
   @Input()
-  set application(value) {
+  set sepApplication(value) {
     this._app = value;
     if (this.form) {
       this.form.patchValue(value);
     }
-  };
-  get application() {
+  }
+  get sepApplication() {
     return this._app;
   }
   @Output()
   saveComplete = new EventEmitter<SepApplication>();
   form: FormGroup;
 
-
   constructor(private fb: FormBuilder,
-    store: Store<AppState>,
-    contactDataService: ContactDataService,
+    private store: Store<AppState>,
+    private contactDataService: ContactDataService,
     private db: IndexedDBService) {
+    super();
     store.select(state => state.currentUserState.currentUser)
       .subscribe(user => {
         contactDataService.getContact(user.contactid)
           .subscribe(contact => {
             this.contact = contact;
+            if (this.form) {
+              this.form.get('telephone1').patchValue(contact.telephone1);
+              this.form.get('emailaddress1').patchValue(contact.emailaddress1);
+            }
           });
       });
   }
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      eventName: ['', [Validators.required]],
-      applicantInfo: [''],
-      isAgreeTsAndCs: ['', [this.customRequiredCheckboxValidator()]],
-      dateAgreedToTsAndCs: ['']
+      eventName: [this?.sepApplication?.eventName, [Validators.required]],
+      applicantInfo: [],
+      isAgreeTsAndCs: [this?.sepApplication?.isAgreeTsAndCs, [this.customRequiredCheckboxValidator()]],
+      dateAgreedToTsAndCs: [this?.sepApplication?.dateAgreedToTsAndCs],
+      telephone1: [this?.contact?.telephone1, [Validators.required]],
+      emailaddress1: [this?.contact?.emailaddress1, [Validators.required, Validators.email]],
     });
-
-    if (this.application) {
-      this.form.patchValue(this.application);
-    }
 
     this.form.get('isAgreeTsAndCs').valueChanges
       .subscribe((agree: boolean) => {
@@ -87,7 +87,17 @@ export class ApplicantComponent implements OnInit {
   }
 
   isValid() {
-    this.form.markAsTouched();
+    this.showValidationMessages = false;
+    this.markControlsAsTouched(this.form);
+    this.validationMessages = this.listControlsWithErrors(this.form, {
+      eventName: 'Please enter the Event Name',
+      isAgreeTsAndCs: 'Please indicate agreement to the general terms and conditions',
+      telephone1: 'Please enter the Telephone',
+      emailaddress1: 'Please enter the Email Address'
+    });
+    if (!this.form.valid) {
+      this.showValidationMessages = true;
+    }
     return this.form.valid;
   }
 
@@ -100,8 +110,20 @@ export class ApplicantComponent implements OnInit {
       ...this.form.value
     } as SepApplication;
     if (this.isValid()) {
-      this.saveComplete.emit(data);
+      this.saveContactInfo()
+        .subscribe(result => {
+          this.saveComplete.emit(data);
+        });
     }
+  }
+
+  saveContactInfo() {
+    const patchContact = {
+      ...this.contact,
+      telephone1: this.form.get('telephone1').value,
+      emailaddress1: this.form.get('emailaddress1').value,
+    };
+    return this.contactDataService.updateContact(patchContact);
   }
 
 

@@ -104,11 +104,6 @@ export class MyApplicationsComponent implements OnInit {
 
   }
 
-  getLastStep(stepCompleted: string): string {
-    const lastIndex = SEP_APPLICATION_STEPS.indexOf(stepCompleted);
-    // return the next step to be completed
-    return SEP_APPLICATION_STEPS[lastIndex + 1];
-  }
 
   async cloneApplication(app: SepApplication) {
     const clone = { ...app };

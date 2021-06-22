@@ -33,6 +33,8 @@ import {
 import {
   faBan
 } from "@fortawesome/free-solid-svg-icons";
+import { SEP_APPLICATION_STEPS } from '@components/sep/sep-application/sep-application.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-submitted-applications',
@@ -73,11 +75,12 @@ export class SubmittedApplicationsComponent implements OnInit {
 
   // angular material table columns to display
   columnsToDisplay = [
-    'eventStatusLabel', 'eventName','eventStartDate','dateSubmitted', 'actions'
+    'eventStatusLabel', 'eventName', 'eventStartDate', 'dateSubmitted', 'actions'
   ];
 
   constructor(private sepDataService: SpecialEventsDataService,
     private snackBar: MatSnackBar,
+    private router: Router,
     private paymentDataService: PaymentDataService) { }
 
   ngOnInit(): void {
@@ -85,11 +88,20 @@ export class SubmittedApplicationsComponent implements OnInit {
       .subscribe(data => this.dataSource.data = data);
   }
 
-  /*
-  openApplication(id: string) {
-    this.router.navigateByUrl(`sep/police/${id}`);
+
+  openApplication(app: SepApplicationSummary) {
+    if (app.eventStatus === 'Draft') {
+      this.router.navigateByUrl(`sep/application/${app.localId}/${this.getLastStep(app.lastCompletedStep)}`);
+    } else {
+      this.router.navigateByUrl(`sep/application-summary/${app.specialEventId}`);
+    }
   }
-  */
+
+  getLastStep(stepCompleted: string): string {
+    const lastIndex = SEP_APPLICATION_STEPS.indexOf(stepCompleted);
+    // return the next step to be completed
+    return SEP_APPLICATION_STEPS[lastIndex + 1];
+  }
 
   payNow(applicationId: string) {
     // and payment is required due to an invoice being generated
@@ -106,7 +118,7 @@ export class SubmittedApplicationsComponent implements OnInit {
   }
 
   getStatusIcon(status: string): IconDefinition {
-    switch(status){
+    switch (status) {
       case ("PendingReview"):
         return faStopwatch;
       case ("Approved"):
