@@ -288,9 +288,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     var filter = $"_adoxio_localgovindigenousnationid_value eq {account._adoxioLginlinkidValue}";
                     filter += $" and (statuscode eq {(int)AdoxioApplicationStatusCodes.PendingForLGFNPFeedback}";
-                    filter += $"       or ( statuscode eq {(int)AdoxioApplicationStatusCodes.Intake}"; 
-                    filter += $"             and adoxio_lgapprovaldecision eq {(int)LGDecision.Pending}";
-                    filter += "           )";
+                    filter += $"         or adoxio_lgapprovaldecision eq {(int)LGDecision.Pending}";
+                    //filter += $"       or ( statuscode eq {(int)AdoxioApplicationStatusCodes.Intake}"; 
+                    //filter += $"             and adoxio_lgapprovaldecision eq {(int)LGDecision.Pending}";
+                    //filter += "           )";
                     filter += "      )";
 
                     var expand = new List<string>
