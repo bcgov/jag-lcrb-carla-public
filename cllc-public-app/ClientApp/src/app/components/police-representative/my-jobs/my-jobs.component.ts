@@ -58,7 +58,7 @@ export class MyJobsComponent implements OnInit {
       .subscribe(availableContacts => this.availableContacts = availableContacts);
    
     // fetch SEP applications waiting for Police Approval
-    this.loadSepApplications()
+    this.busy = this.loadSepApplications()
       .subscribe(myApplications => {
         this.dataSourceInProgress.data = myApplications.inProgress;
         this.dataSourcePoliceApproved.data = myApplications.policeApproved;
