@@ -155,12 +155,12 @@
                                                     <app-field
                                                         label="Describe the area(s) where liquor will be served, sold and consumed"
                                                         errorMessage="Please enter a value"
-                                                        [valid]="!area.get('licencedAreaDescription').touched || area.get('licencedAreaDescription').valid">
+                                                        [valid]="!area.get('eventName').touched || area.get('eventName').valid">
                                                         <p>
                                                             i.e.
                                                             community centrebeverage garden, bar area, courtyard, etc.
                                                         </p>
-                                                        <input type="text" formControlName="licencedAreaDescription"
+                                                        <input type="text" formControlName="eventName"
                                                             class="form-control"
                                                             placeholder="For example: beverage garden, bar area, courtyard, etc.">
                                                     </app-field>
