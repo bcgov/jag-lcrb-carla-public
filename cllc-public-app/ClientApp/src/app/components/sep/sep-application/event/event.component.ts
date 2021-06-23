@@ -271,7 +271,7 @@ export class EventComponent extends FormBase implements OnInit {
   createServiceArea(area: SepServiceArea) {
     const areaForm = this.fb.group({
       id: [null],
-      licencedAreaDescription: ['', [Validators.required]],
+      eventName: ['', [Validators.required]],
       licencedAreaMaxNumberOfGuests: ['', [Validators.required]],
       minorPresent: ['', [Validators.required]],
       numberOfMinors: [''],

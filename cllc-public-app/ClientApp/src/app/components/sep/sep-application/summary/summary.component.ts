@@ -1,23 +1,33 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { SepApplication } from '@models/sep-application.model';
-import { SepSchedule } from '@models/sep-schedule.model';
-import { IndexedDBService } from '@services/indexed-db.service';
-import { PaymentDataService } from '@services/payment-data.service';
-import { SpecialEventsDataService } from '@services/special-events-data.service';
-import { map, mergeMap } from 'rxjs/operators';
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { ActivatedRoute, Params } from "@angular/router";
+import { AppState } from "@app/app-state/models/app-state";
+import { SepApplication } from "@models/sep-application.model";
+import { SepSchedule } from "@models/sep-schedule.model";
+import { Store } from "@ngrx/store";
+import { ContactDataService } from "@services/contact-data.service";
+import { IndexedDBService } from "@services/indexed-db.service";
+import { PaymentDataService } from "@services/payment-data.service";
+import { SpecialEventsDataService } from "@services/special-events-data.service";
+import { map, mergeMap } from "rxjs/operators";
 
 @Component({
-  selector: 'app-summary',
-  templateUrl: './summary.component.html',
-  styleUrls: ['./summary.component.scss']
+  selector: "app-summary",
+  templateUrl: "./summary.component.html",
+  styleUrls: ["./summary.component.scss"]
 })
 export class SummaryComponent implements OnInit {
   @Input() account: any; // TODO: change to Account and fix prod error
   @Output() saveComplete = new EventEmitter<boolean>();
-  mode: 'readonlySummary' | 'pendingReview' | 'payNow' = 'readonlySummary';
+  mode: "readonlySummary" | "pendingReview" | "payNow" = "readonlySummary";
   _appID: number;
   application: SepApplication;
+  /**
+   * Controls whether or not the form show the submit button.
+   * The value true by default
+   */
+  @Input() showSubmitButton = true;
+  contact: import("d:/code/jag-lcrb-carla-public/cllc-public-app/ClientApp/src/app/models/contact.model").Contact;
 
   @Input() set localId(value: number) {
     this._appID = value;
@@ -35,8 +45,30 @@ export class SummaryComponent implements OnInit {
 
   constructor(private db: IndexedDBService,
     private snackBar: MatSnackBar,
+    private route: ActivatedRoute,
+    private store: Store<AppState>,
     private paymentDataService: PaymentDataService,
-    private sepDataService: SpecialEventsDataService) { }
+    private sepDataService: SpecialEventsDataService,
+    private contactDataService: ContactDataService) {
+    store.select(state => state.currentUserState.currentUser)
+      .subscribe(user => {
+        contactDataService.getContact(user.contactid)
+          .subscribe(contact => {
+            this.contact = contact;
+          });
+      });
+    route.params.subscribe((params: Params) => {
+      const id = params.apiId;
+      if (id) {
+        sepDataService.getSpecialEventForApplicant(id)
+          .subscribe(app => {
+            this.showSubmitButton = false;
+            this.application = app;
+            this.formatEventDatesForDisplay();
+          });
+      }
+    });
+  }
 
   ngOnInit(): void {
   }
@@ -59,12 +91,12 @@ export class SummaryComponent implements OnInit {
   async submitApplication(): Promise<void> {
     const appData = await this.db.getSepApplication(this.localId);
     if (appData.id) { // do an update ( the record exists in dynamics)
-      const result = await this.sepDataService.updateSepApplication({ ...appData, eventStatus: 'Submitted' } as SepApplication, appData.id)
+      const result = await this.sepDataService.updateSepApplication({ ...appData, eventStatus: "Submitted" } as SepApplication, appData.id)
         .toPromise();
-      if (result.eventStatus === 'Approved') {
-        this.mode = 'payNow';
-      } else if (result.eventStatus === 'Pending Review') {
-        this.mode = 'pendingReview';
+      if (result.eventStatus === "Approved") {
+        this.mode = "payNow";
+      } else if (result.eventStatus === "Pending Review") {
+        this.mode = "pendingReview";
       }
       if (result.localId) {
         await this.db.applications.update(result.localId, result);
@@ -81,7 +113,7 @@ export class SummaryComponent implements OnInit {
         .subscribe(res => {
         },
           error => {
-            this.snackBar.open('Error submitting payment', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+            this.snackBar.open("Error submitting payment", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
           }
         );
     }
@@ -91,13 +123,13 @@ export class SummaryComponent implements OnInit {
  * Redirect to payment processing page (Express Pay / Bambora service)
  * */
   private submitPayment() {
-    return this.paymentDataService.getPaymentURI('specialEventInvoice', this.application.id)
+    return this.paymentDataService.getPaymentURI("specialEventInvoice", this.application.id)
       .pipe(map(jsonUrl => {
-        window.location.href = jsonUrl['url'];
-        return jsonUrl['url'];
+        window.location.href = jsonUrl["url"];
+        return jsonUrl["url"];
       }, (err: any) => {
-        if (err._body === 'Payment already made') {
-          this.snackBar.open('Application payment has already been made.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        if (err._body === "Payment already made") {
+          this.snackBar.open("Application payment has already been made.", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
         }
       }));
   }

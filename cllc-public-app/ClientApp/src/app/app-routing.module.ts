@@ -123,7 +123,7 @@ const routes: Routes = [
     data: { feature: "Sep" }
   },
   {
-    path: "sep/application-summary/:id",
+    path: "sep/application-summary/:apiId",
     component: SummaryComponent,
     canActivate: [BCeidOrServiceCardAuthGuard, FeatureGuard],
     data: { feature: "Sep" }

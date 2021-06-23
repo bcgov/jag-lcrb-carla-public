@@ -23,6 +23,12 @@ export class SpecialEventsDataService extends DataService {
       .pipe(catchError(this.handleError));
   }
 
+  getSpecialEventForApplicant(id: string): Observable<SepApplication> {
+    const apiPath = `api/special-events/applicant/${id}`;
+    return this.http.get<SepApplication>(apiPath, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
   getSubmittedApplications(): Observable<SepApplicationSummary[]> {
     const apiPath = `api/special-events/current/submitted`;
     return this.http.get<SepApplicationSummary[]>(apiPath, { headers: this.headers })
