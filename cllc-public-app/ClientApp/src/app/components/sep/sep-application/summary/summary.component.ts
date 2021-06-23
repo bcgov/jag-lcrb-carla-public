@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { ActivatedRoute, Params } from "@angular/router";
 import { AppState } from "@app/app-state/models/app-state";
+import { Contact } from "@models/contact.model";
 import { SepApplication } from "@models/sep-application.model";
 import { SepSchedule } from "@models/sep-schedule.model";
 import { Store } from "@ngrx/store";
@@ -27,7 +28,7 @@ export class SummaryComponent implements OnInit {
    * The value true by default
    */
   @Input() showSubmitButton = true;
-  contact: import("d:/code/jag-lcrb-carla-public/cllc-public-app/ClientApp/src/app/models/contact.model").Contact;
+  contact: Contact;
 
   @Input() set localId(value: number) {
     this._appID = value;
