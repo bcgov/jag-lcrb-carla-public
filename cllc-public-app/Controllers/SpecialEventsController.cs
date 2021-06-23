@@ -118,8 +118,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// </summary>
         /// <param name="eventId"></param>
         /// <returns></returns>
-        [HttpGet("{eventId}")]
-        public IActionResult GetSpecialEvent(string eventId)
+        [HttpGet("police/{eventId}")]
+        public IActionResult GetSpecialEventPolice(string eventId)
         {
             string[] expand = new[] { "adoxio_PoliceRepresentativeId",
                 "adoxio_PoliceAccountId","adoxio_specialevent_specialeventlocations"
@@ -138,48 +138,55 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
             }
 
-            // get the applicant.
-
-            if (specialEvent._adoxioContactidValue != null)
+            if (specialEvent == null)
             {
-                specialEvent.AdoxioContactId = _dynamicsClient.GetContactById(specialEvent._adoxioContactidValue).GetAwaiter().GetResult();
+                return NotFound();
             }
-
-            // get the city
-
-            if (specialEvent._adoxioSpecialeventcitydistrictidValue != null)
+            else
             {
-                specialEvent.AdoxioSpecialEventCityDistrictId = _dynamicsClient.GetSepCityById(specialEvent
-                    ._adoxioSpecialeventcitydistrictidValue);
-            }
+                // get the applicant.
 
-
-
-            // event locations.
-
-            foreach (var location in specialEvent.AdoxioSpecialeventSpecialeventlocations)
-            {
-                // get child elements.
-                string filter = $"_adoxio_specialeventlocationid_value eq {location.AdoxioSpecialeventlocationid}";
-                try
+                if (specialEvent._adoxioContactidValue != null)
                 {
-                    location.AdoxioSpecialeventlocationLicencedareas = _dynamicsClient.Specialeventlicencedareas.Get(filter: filter).Value;
-
-                }
-                catch (Exception e)
-                {
-                    _logger.LogError(e, "Error getting location service areas.");
+                    specialEvent.AdoxioContactId = _dynamicsClient.GetContactById(specialEvent._adoxioContactidValue).GetAwaiter().GetResult();
                 }
 
-                filter = $"_adoxio_specialeventlocationid_value eq {location.AdoxioSpecialeventlocationid}";
-                try
-                {
-                    location.AdoxioSpecialeventlocationSchedule = _dynamicsClient.Specialeventschedules.Get(filter: filter).Value;
+                // get the city
 
-                }
-                catch (Exception e)
+                if (specialEvent._adoxioSpecialeventcitydistrictidValue != null)
                 {
-                    _logger.LogError(e, "Error getting location schedule.");
+                    specialEvent.AdoxioSpecialEventCityDistrictId = _dynamicsClient.GetSepCityById(specialEvent
+                        ._adoxioSpecialeventcitydistrictidValue);
+                }
+
+
+
+                // event locations.
+
+                foreach (var location in specialEvent.AdoxioSpecialeventSpecialeventlocations)
+                {
+                    // get child elements.
+                    string filter = $"_adoxio_specialeventlocationid_value eq {location.AdoxioSpecialeventlocationid}";
+                    try
+                    {
+                        location.AdoxioSpecialeventlocationLicencedareas = _dynamicsClient.Specialeventlicencedareas.Get(filter: filter).Value;
+
+                    }
+                    catch (Exception e)
+                    {
+                        _logger.LogError(e, "Error getting location service areas.");
+                    }
+
+                    filter = $"_adoxio_specialeventlocationid_value eq {location.AdoxioSpecialeventlocationid}";
+                    try
+                    {
+                        location.AdoxioSpecialeventlocationSchedule = _dynamicsClient.Specialeventschedules.Get(filter: filter).Value;
+
+                    }
+                    catch (Exception e)
+                    {
+                        _logger.LogError(e, "Error getting location schedule.");
+                    }
                 }
 
             }
