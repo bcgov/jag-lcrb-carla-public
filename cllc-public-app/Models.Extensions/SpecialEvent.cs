@@ -87,32 +87,35 @@ namespace Gov.Lclb.Cllb.Public.Models
                 var drinkTypes = _dynamicsClient.Sepdrinktypes.Get().Value
                             .ToList();
 
-            string beerTypeId = drinkTypes.Where(drinkType => drinkType.AdoxioName == "Beer/Cider/Cooler")
-                                .Select(drinkType => drinkType.AdoxioSepdrinktypeid)
-                                .FirstOrDefault();
+                string beerTypeId = drinkTypes.Where(drinkType => drinkType.AdoxioName == "Beer/Cider/Cooler")
+                                    .Select(drinkType => drinkType.AdoxioSepdrinktypeid)
+                                    .FirstOrDefault();
 
-            string wineTypeId = drinkTypes.Where(drinkType => drinkType.AdoxioName == "Wine")
-                                .Select(drinkType => drinkType.AdoxioSepdrinktypeid)
-                                .FirstOrDefault();
+                string wineTypeId = drinkTypes.Where(drinkType => drinkType.AdoxioName == "Wine")
+                                    .Select(drinkType => drinkType.AdoxioSepdrinktypeid)
+                                    .FirstOrDefault();
 
-            string spiritsTypeId = drinkTypes.Where(drinkType => drinkType.AdoxioName == "Spirits")
-                                .Select(drinkType => drinkType.AdoxioSepdrinktypeid)
-                                .FirstOrDefault();
+                string spiritsTypeId = drinkTypes.Where(drinkType => drinkType.AdoxioName == "Spirits")
+                                    .Select(drinkType => drinkType.AdoxioSepdrinktypeid)
+                                    .FirstOrDefault();
 
-            result.Beer = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
-                                .Where(forecast => forecast._adoxioTypeValue == beerTypeId)
-                                .Select(forecast => forecast.AdoxioEstimatedservings / specialEvent.AdoxioTotalservings * 100)
-                                .FirstOrDefault();
+                if (specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent != null)
+                {
+                    result.Beer = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
+                                        .Where(forecast => forecast._adoxioTypeValue == beerTypeId)
+                                        .Select(forecast => (100 * forecast.AdoxioEstimatedservings) / specialEvent.AdoxioTotalservings)
+                                        .FirstOrDefault();
 
-            result.Wine = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
-                                .Where(forecast => forecast._adoxioTypeValue == wineTypeId)
-                                .Select(forecast => forecast.AdoxioEstimatedservings / specialEvent.AdoxioTotalservings * 100)
-                                .FirstOrDefault();
+                    result.Wine = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
+                                        .Where(forecast => forecast._adoxioTypeValue == wineTypeId)
+                                        .Select(forecast => (100 * forecast.AdoxioEstimatedservings) / specialEvent.AdoxioTotalservings)
+                                        .FirstOrDefault();
 
-            result.Spirits = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
-                                .Where(forecast => forecast._adoxioTypeValue == spiritsTypeId)
-                                .Select(forecast => forecast.AdoxioEstimatedservings / specialEvent.AdoxioTotalservings * 100)
-                                .FirstOrDefault();
+                    result.Spirits = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
+                                        .Where(forecast => forecast._adoxioTypeValue == spiritsTypeId)
+                                        .Select(forecast => (100 * forecast.AdoxioEstimatedservings) / specialEvent.AdoxioTotalservings)
+                                        .FirstOrDefault();
+                }
 
             }
             return result;
