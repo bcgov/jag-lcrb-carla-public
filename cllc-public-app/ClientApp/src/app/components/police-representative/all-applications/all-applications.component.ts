@@ -9,6 +9,7 @@ import { SpecialEventsDataService } from '@services/special-events-data.service'
 import { AccountDataService } from '@services/account-data.service';
 import { Contact } from '@models/contact.model';
 import { PoliceTableElement } from '../police-table-element';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-sep-all-applications',
@@ -19,7 +20,7 @@ export class AllApplicationsComponent implements OnInit {
 
   currentUser: User;
   availableContacts = [];
-
+  busy: Subscription;
 
   // table state
   dataSource = new MatTableDataSource<PoliceTableElement>();
@@ -50,7 +51,7 @@ export class AllApplicationsComponent implements OnInit {
       .subscribe(availableContacts => this.availableContacts = availableContacts);
    
     // fetch SEP applications waiting for Police Approval
-    this.loadSepApplications()
+    this.busy = this.loadSepApplications()
       .subscribe(applications => this.dataSource.data = applications);
   }
 

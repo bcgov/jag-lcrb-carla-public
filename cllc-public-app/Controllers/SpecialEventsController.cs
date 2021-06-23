@@ -1320,7 +1320,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return Unauthorized();
             }
 
-            string filter = $"_adoxio_policejurisdictionid_value eq {userAccount._adoxioPolicejurisdictionidValue}";
+            // Pending Review, Approved, Issued, Cancelled, Denied
+            string filter = $"(statuscode eq {(int?)EventStatus.PendingReview} or statuscode eq {(int?)EventStatus.Approved}"
+                + $" or statuscode eq {(int?)EventStatus.Issued} or statuscode eq {(int?)EventStatus.Cancelled} or statuscode eq {(int?)EventStatus.Denied})"
+                + $" and _adoxio_policejurisdictionid_value eq {userAccount._adoxioPolicejurisdictionidValue}";
 
             var result = GetSepSummaries(filter);
 
@@ -1342,8 +1345,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var result = new SpecialEventPoliceMyJobs()
             {
                 InProgress = GetSepSummaries($"_adoxio_policerepresentativeid_value eq {userSettings.ContactId} and adoxio_policeapproval eq 100000001"), // Under review
-                PoliceApproved = GetSepSummaries($"_adoxio_policerepresentativeid_value eq {userSettings.ContactId} and adoxio_policeapproval eq 845280000"),  // Approved
-                Issued = GetSepSummaries($"_adoxio_policerepresentativeid_value eq {userSettings.ContactId} and statuscode eq 845280003") // status is issued
+                PoliceApproved = GetSepSummaries($"statuscode ne {(int?)EventStatus.Draft} and statuscode ne {(int?)EventStatus.Issued} and _adoxio_policerepresentativeid_value eq {userSettings.ContactId} and (adoxio_policeapproval eq {(int?)ApproverStatus.AutoReviewed} or adoxio_policeapproval eq {(int?)ApproverStatus.Approved})"),  // Approved, Auto-Approved
+                Issued = GetSepSummaries($"_adoxio_policerepresentativeid_value eq {userSettings.ContactId} and statuscode eq {(int?)EventStatus.Issued}") // status is issued
             };
 
             return new JsonResult(result);
