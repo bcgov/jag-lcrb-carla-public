@@ -49,7 +49,7 @@ export class SummaryComponent implements OnInit {
     private store: Store<AppState>,
     private paymentDataService: PaymentDataService,
     private sepDataService: SpecialEventsDataService,
-      private contactDataService: ContactDataService) {
+    private contactDataService: ContactDataService) {
     store.select(state => state.currentUserState.currentUser)
       .subscribe(user => {
         contactDataService.getContact(user.contactid)
@@ -58,13 +58,15 @@ export class SummaryComponent implements OnInit {
           });
       });
     route.params.subscribe((params: Params) => {
-      const id = params.id;
-      sepDataService.getSpecialEventForApplicant(id)
-        .subscribe(app => {
-          this.showSubmitButton = false;
-          this.application = app;
-          this.formatEventDatesForDisplay();
-        });
+      const id = params.apiId;
+      if (id) {
+        sepDataService.getSpecialEventForApplicant(id)
+          .subscribe(app => {
+            this.showSubmitButton = false;
+            this.application = app;
+            this.formatEventDatesForDisplay();
+          });
+      }
     });
   }
 
