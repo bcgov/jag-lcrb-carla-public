@@ -55,6 +55,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         Reviewed = 845280000,
         [EnumMember(Value = "Pending Review")]
         PendingReview = 100000001,
+        Approved = 845280000,
         Denied = 845280001,
         Cancelled = 845280002
     }

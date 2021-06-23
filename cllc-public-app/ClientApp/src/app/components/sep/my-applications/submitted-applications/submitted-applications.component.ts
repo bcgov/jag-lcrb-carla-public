@@ -155,6 +155,7 @@ export class SubmittedApplicationsComponent implements OnInit {
         }
       });
     }
+
     const localId = await this.db.saveSepApplication({
       ...clone,
       dateAgreedToTsAndCs: undefined,
@@ -178,6 +179,7 @@ export class SubmittedApplicationsComponent implements OnInit {
   /**
  * Redirect to payment processing page (Express Pay / Bambora service)
  * */
+
   private submitPayment(applicationId: string) {
     return this.paymentDataService.getPaymentURI('specialEventInvoice', applicationId)
       .pipe(map(jsonUrl => {

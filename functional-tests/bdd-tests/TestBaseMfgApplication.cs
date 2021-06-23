@@ -192,6 +192,7 @@ namespace bdd_tests
 
             if (manufacturerType == "winery" || manufacturerType == "winery in Parksville")
             {
+                /*
                 // create winery test data
                 var grapesAcres = "100";
                 var fruitAcres = "5";
@@ -208,6 +209,7 @@ namespace bdd_tests
                 // enter the number of beehives
                 var uiHoney = ngDriver.FindElement(By.CssSelector("input[formcontrolname='mfgAcresOfHoney']"));
                 uiHoney.SendKeys(honeyBeehives);
+                */
 
                 // select the blending checkbox
                 var uiBlending = ngDriver.FindElement(By.CssSelector("#mat-checkbox-15 .mat-checkbox-inner-container"));
@@ -237,6 +239,7 @@ namespace bdd_tests
                 uiPackaging.Click();
             }
 
+            /*
             if (manufacturerType != "co-packer")
             {
                 // select 'yes' for neutral grain spirits            
@@ -245,6 +248,7 @@ namespace bdd_tests
                         By.CssSelector("[formcontrolname='mfgUsesNeutralGrainSpirits'] mat-radio-button[value='Yes']"));
                 uiNeutralGrains.Click();
             }
+            */
 
             if (manufacturerType == "brewery")
             {
