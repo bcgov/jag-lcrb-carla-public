@@ -1,5 +1,6 @@
 ﻿using System;
 using OpenQA.Selenium;
+using Protractor;
 using Xunit.Gherkin.Quick;
 
 namespace bdd_tests
@@ -12,11 +13,23 @@ namespace bdd_tests
             /* 
             Page Title: Structural Alteration Application
             */
-
+         
             var proposedChanges = "Sample proposed changes";
 
-            // enter the proposed changes
-            var uiProposedChanges = ngDriver.FindElement(By.CssSelector("textarea[formcontrolname='description1']"));
+            NgWebElement uiProposedChanges = null;
+            for (var i = 0; i < 10; i++)
+                try
+                {
+                    var names = ngDriver.FindElements(By.CssSelector("textarea[formcontrolname='description1']"));
+                    if (names.Count > 0)
+                    {
+                        uiProposedChanges = names[0];
+                        break;
+                    }
+                }
+                catch (Exception)
+                {
+                }
             uiProposedChanges.SendKeys(proposedChanges);
 
             // select 'Yes' for 'Is the public permitted to walk into the cooler space?'
