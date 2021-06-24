@@ -179,25 +179,22 @@
             <label>Event Starts at:</label> <span>{{sepApplication?.eventStartDate | date: 'dd MMM yyyy'}}</span>
         </div>
         <div class="d-flex">
-            <label>Responsible Beverage Service #:</label> <span>Agassiz</span>
+            <label>Responsible Beverage Service #:</label> <span>{{sepApplication?.responsibleBevServiceNumber}}</span>
         </div>
         <div class="d-flex">
-            <label>Name of The Organization:</label> <span>Agassiz</span>
+            <label>Name of The Organization:</label> <span>{{sepApplication?.hostOrganizationName}}</span>
         </div>
         <div class="d-flex">
-            <label>Address of The Organization:</label> <span>Agassiz</span>
+            <label>Address of The Organization:</label> <span>{{sepApplication?.hostOrganizationAddress}}</span>
         </div>
         <div class="d-flex">
-            <label>Occasion of event:</label> <span>Firstname Lastname</span>
+            <label>Occasion of event:</label> <span>{{sepApplication?.specialEventDescription}}</span>
         </div>
         <div class="d-flex">
-            <label>Licence Already exists in location:</label> <span>Yes</span>
+            <label>Licence Already exists in location:</label> <span>{{sepApplication?.isLocationLicensed}}</span>
         </div>
         <div class="d-flex">
-            <label>Permit Category</label> <span>Private – Family and Invited Friends Only</span>
-        </div>
-        <div class="d-flex">
-            <label>Public Property</label> <span>Yes</span>
+            <label>Public Property</label> <span>{{sepApplication?.isOnPublicProperty ? 'Yes' : 'No'}}</span>
         </div>
     </mat-expansion-panel>
 
@@ -235,19 +232,25 @@
                 <div class="d-flex">
                     <label>Minors Present?</label> <span>{{serviceArea?.minorPresent ? "Yes" : "No"}}</span>
                 </div>
-
+                <div *ngIf="serviceArea.minorPresent" class="d-flex">
+                    <label>Number of Minors</label> <span>{{serviceArea.numberOfMinors}}</span>
+                </div>
             </div>
 
 
-            <h4>Event date</h4>
-            <div *ngFor="let eventDate of location.eventDates"></div>
-            <p>---{{eventDate?.id}}---</p>
-            <div class="d-flex">
-                <label>Event Date</label> <span>{{eventDate?.eventDate | date: 'dd MMM yyyy'}} </span>
-                <label>Event Start-End Time</label> <span>{{eventDate?.eventStart}} - {{eventDate?.eventEnd}} </span>
-                <label>Service Start-End Time</label> <span>{{eventDate?.serviceStart}} - {{eventDate?.serviceEnd}} </span>
-                <!--label>Liquor Service</label> <span>{{eventDate?.serviceStartValue}} - {{eventDate?.serviceStartValue}} </span-->
-            </div>
+            <section *ngFor="let eventDate of location.eventDates; let j = index;">
+                <h4>Event Date {{j+1}}</h4>
+                <div class="d-flex">
+                    <label>Start Date</label> <span>{{eventDate.eventDate | date: 'dd MMM yyyy'}}</span>
+                </div>
+                <div class="d-flex">
+                    <label>Start Time</label> <span>{{eventDate.eventStartValue}} - {{eventDate.eventEndValue}}</span>
+                </div>
+                <div class="d-flex">
+                    <label>Liquor Service</label> <span>{{eventDate.serviceStartValue}} -
+                        {{eventDate.serviceStartValue}}</span>
+                </div>
+            </section>
         </div>
     </mat-expansion-panel>
 
@@ -260,35 +263,41 @@
 
         <div class="d-flex">
             <label>Liquor Quantities</label>
-            <table class="servings">
-                <tr>
-                    <th>Type</th>
-                    <th>Servings</th>
-                </tr>
-                <tr *ngFor="let item of sepApplication.drinksSalesForecasts">
-                    <td>{{item.name}}</td>
-                    <td>{{item.estimatedServings}}</td>
-                </tr>
-            </table>
+            <div class="d-flex">
+                <label>Draught Beer</label> <span class="fee-amount">{{sepApplication?.beer || 0}} %</span>
+            </div>
+            <div class="d-flex">
+                <label>Wine</label> <span class="fee-amount">{{sepApplication?.wine || 0}} %</span>
+            </div>
+            <div class="d-flex">
+                <label>Spirits</label> <span class="fee-amount">{{sepApplication?.spirits || 0}} %</span>
+            </div>
         </div>
 
         <hr>
-        <div class="d-flex">
-            <label>Estimated total liquor sales revenue</label> <span class="fee-amount">[$0.00]</span>
-        </div>
-        <div class="d-flex">
-            <label>Estimated liquor purchase cost</label> <span class="fee-amount">[$0.00]</span>
-        </div>
-        <div class="d-flex">
-            <label>Estimated net proceeds/profit from liquor sales</label> <span class="fee-amount">[$0.00]</span>
-        </div>
-        <div class="d-flex">
-            <label>Total PST Amount Due</label> <span class="fee-amount">[$0.00]</span>
-        </div>
-        <div class="d-flex">
-            <label>Application Fees (Based on 1 event location and capacity)*
-                *0-500 – $25.00</label> <span class="fee-amount">[$0.00]</span>
-        </div>
+
+            <div class="d-flex">
+                <label>Estimated total liquor sales revenue</label> <span class="fee-amount">[$0.00]</span>
+            </div>
+            <div class="d-flex">
+                <label>Estimated liquor purchase cost</label> <span class="fee-amount">[$0.00]</span>
+            </div>
+            <div class="d-flex">
+                <label>Estimated net proceeds/profit from liquor sales</label> <span class="fee-amount">[$0.00]</span>
+            </div>
+            <div class="d-flex">
+                <label>Total PST Amount Due</label> <span class="fee-amount">[$0.00]</span>
+            </div>
+            <div class="d-flex">
+                <label>Application Fees (Based on 1 event location and capacity)*
+                    *0-500 – $25.00</label> <span class="fee-amount">[$0.00]</span>
+            </div>
+
+            <hr>
+
+            <div class="d-flex total-fees-due">
+                <label>Total Fees Due Upon Approval</label> <span class="fee-amount">[$0.00]</span>
+            </div>
 
         <hr>
 
