@@ -21,6 +21,7 @@ export class SepApplication {
     eventStatus: string;
     fundraisingPurpose: string;
     hostOrganizationAddress: string;
+    netEstimatedPST: number;
     hostOrganizationName: string;
     howProceedsWillBeUsedDescription: string;
     id: string; // server side primary key
@@ -57,6 +58,9 @@ export class SepApplication {
 
     eventLocations: SepLocation[] = [];
     drinksSalesForecasts: SepDrinkSalesForecast[] = [];
+    totalRevenue: number;
+    totalProceeds: number;
+    totalPurchaseCost: number;
 
     public get totalMaximumNumberOfGuests(): number {
         let maxGuests = 0;
