@@ -1,48 +1,52 @@
-<div *ngIf="mode === 'readonlySummary'" class="form-wrapper-summary">
-    <h3>Application number: [id]</h3>
-    <p>
-        Here’s a summary of your event. Does everything look right?
-    </p>
+<ng-container *ngIf="mode === 'readonlySummary'">
+    <div class="form-wrapper-summary" [ngClass]="{'form-wrapper': !showSubmitButton}">
+        <h3 *ngIf="application?.specialEventPermitNumber">Application number: {{application?.specialEventPermitNumber}}
+        </h3>
+        <p>
+            Here’s a summary of your event. Does everything look right?
+        </p>
 
-    <p>
-        Review your event details one more time before submitting your application for review.
-    </p>
+        <p>
+            Review your event details one more time before submitting your application for review.
+        </p>
 
-    <p>
-        Scroll down the page to complete the review and submit your application. Please be sure to complete the final
-        declaration and submit your application.
-    </p>
+        <p>
+            Scroll down the page to complete the review and submit your application. Please be sure to complete the
+            final
+            declaration and submit your application.
+        </p>
 
-    <p>
-        To edit, click the pencil icon next to the section you wish to update.
-    </p>
+        <p>
+            To edit, click the pencil icon next to the section you wish to update.
+        </p>
 
-    <div>
-        <h3>IMPORTANT</h3>
-        <span>Changes cannot be made once your application is submitted.</span>
-        <span>
-            If you have any questions before submitting the application please contact the SEP Online Help Line at 1 855
-            999 7656 or email LCRB.Sep@gov.bc.ca
-        </span>
-    </div>
-
-    <hr>
-
-    <h2>Summary</h2>
-
-    <mat-expansion-panel [expanded]="true">
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                GENERAL APPLICATION INFO
-            </mat-panel-title>
-        </mat-expansion-panel-header>
-        <div class="d-flex">
-            <label>Event Name</label> <span>{{application?.eventName}}</span>
+        <div>
+            <h3>IMPORTANT</h3>
+            <span>Changes cannot be made once your application is submitted.</span>
+            <span>
+                If you have any questions before submitting the application please contact the SEP Online Help Line at 1
+                855
+                999 7656 or email LCRB.Sep@gov.bc.ca
+            </span>
         </div>
-        <div class="d-flex">
-            <label>Event Municipality</label> <span>Agassiz</span>
-        </div>
-        <!-- <div class="d-flex">
+
+        <hr>
+
+        <h2>Summary</h2>
+
+        <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    GENERAL APPLICATION INFO
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="d-flex">
+                <label>Event Name</label> <span>{{application?.eventName}}</span>
+            </div>
+            <div class="d-flex">
+                <label>Event Municipality</label> <span>{{application?.sepCity?.name}}</span>
+            </div>
+            <!-- <div class="d-flex">
             <label>Applicant Name</label> <span>{{account?.name}}</span>
         </div>
         <div class="d-flex">
@@ -55,164 +59,160 @@
                 <div>{{account?.contactEmail}}</div>
             </section>
         </div> -->
-    </mat-expansion-panel>
+        </mat-expansion-panel>
 
-    <mat-expansion-panel [expanded]="true">
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                ELIGIBILITY
-            </mat-panel-title>
-        </mat-expansion-panel-header>
-        <div class="d-flex">
-            <label>Event Starts at:</label> <span>{{application?.eventStartDate | date: 'short'}}</span>
-        </div>
-        <div class="d-flex">
-            <label>Responsible Beverage Service #:</label> <span>{{application?.responsibleBevServiceNumber}}</span>
-        </div>
-        <div class="d-flex">
-            <label>Name of The Organization:</label> <span>{{application?.hostOrganizationName}}</span>
-        </div>
-        <div class="d-flex">
-            <label>Address of The Organization:</label> <span>{{application?.hostOrganizationAddress}}</span>
-        </div>
-        <div class="d-flex">
-            <label>Occasion of event:</label> <span>{{application?.specialEventDescription}}</span>
-        </div>
-        <div class="d-flex">
-            <label>Licence Already exists in location:</label> <span>{{application?.isLocationLicensed}}</span>
-        </div>
-        <div class="d-flex">
-            <label>Permit Category</label> <span>[[Permit Category]]</span>
-        </div>
-        <div class="d-flex">
-            <label>Public Property</label> <span>{{application?.isOnPublicProperty}}</span>
-        </div>
-    </mat-expansion-panel>
+        <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    ELIGIBILITY
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="d-flex">
+                <label>Event Starts at:</label> <span>{{application?.eventStartDate | date: 'd MMM yyyy'}}</span>
+            </div>
+            <div class="d-flex">
+                <label>Responsible Beverage Service #:</label> <span>{{application?.responsibleBevServiceNumber}}</span>
+            </div>
+            <div class="d-flex">
+                <label>Name of The Organization:</label> <span>{{application?.hostOrganizationName}}</span>
+            </div>
+            <div class="d-flex">
+                <label>Address of The Organization:</label> <span>{{application?.hostOrganizationAddress}}</span>
+            </div>
+            <div class="d-flex">
+                <label>Occasion of event:</label> <span>{{application?.specialEventDescription}}</span>
+            </div>
+            <div class="d-flex">
+                <label>Licence Already exists in location:</label> <span>{{application?.isLocationLicensed}}</span>
+            </div>
+            <div class="d-flex">
+                <label>Public Property</label> <span>{{application?.isOnPublicProperty ? 'Yes' : 'No'}}</span>
+            </div>
+        </mat-expansion-panel>
 
-    <mat-expansion-panel [expanded]="true" *ngFor="let loc of application?.eventLocations; let i = index;">
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                EVENT LOCATION {{i+1}}
-            </mat-panel-title>
-        </mat-expansion-panel-header>
+        <mat-expansion-panel [expanded]="true" *ngFor="let loc of application?.eventLocations; let i = index;">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    EVENT LOCATION {{i+1}}
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="d-flex">
+                <label>Location Name</label> <span>{{loc.locationName}}</span>
+            </div>
+            <div class="d-flex">
+                <label>Location Description</label> <span>{{loc.locationDescription}}</span>
+            </div>
+            <div class="d-flex">
+                <label>Event Address</label>
+                <section>
+                    <span>{{loc.eventLocationStreet1}}</span> <br>
+                    <span>{{application?.sepCity?.name}}, BC</span> <br>
+                    <span>{{loc.eventLocationPostalCode}}</span> <br>
+                </section>
+            </div>
+
+            <section *ngFor="let area of loc.serviceAreas; let j = index;">
+                <div class="d-flex">
+                    <label>Service Area Description</label> <span>{{area.eventName}}</span>
+                </div>
+                <div class="d-flex">
+                    <label>Maximum # of Guests in Service Areas</label>
+                    <span>{{area.licencedAreaMaxNumberOfGuests}}</span>
+                </div>
+                <div class="d-flex">
+                    <label>Minors Present</label> <span>{{area.minorPresent ? 'Yes': 'No'}}</span>
+                </div>
+                <div *ngIf="area.minorPresent" class="d-flex">
+                    <label>Number of minors</label> <span>{{area.numberOfMinors}}</span>
+                </div>
+            </section>
+
+            <section *ngFor="let eventDate of loc.eventDates; let j = index;">
+                <h4>Event date {{j+1}}</h4>
+                <div class="d-flex">
+                    <label>Start Date</label> <span>{{eventDate.eventDate | date: 'dd MMM yyyy'}}</span>
+                </div>
+                <div class="d-flex">
+                    <label>Start Time</label> <span>{{eventDate.eventStartValue}} - {{eventDate.eventEndValue}}</span>
+                </div>
+                <div class="d-flex">
+                    <label>Liquor Service</label> <span>{{eventDate.serviceStartValue}} -
+                        {{eventDate.serviceStartValue}}</span>
+                </div>
+            </section>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    LIQUOR FEES
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <label>Liquor Quantities</label>
+            <div class="d-flex">
+                <label>Draught Beer</label> <span class="fee-amount">{{application?.beer || 0}} %</span>
+            </div>
+            <div class="d-flex">
+                <label>Wine</label> <span class="fee-amount">{{application?.wine || 0}} %</span>
+            </div>
+            <div class="d-flex">
+                <label>Spirits</label> <span class="fee-amount">{{application?.spirits || 0}} %</span>
+            </div>
+
+
+            <hr>
+
+            <div class="d-flex">
+                <label>Estimated total liquor sales revenue</label> <span class="fee-amount">[$0.00]</span>
+            </div>
+            <div class="d-flex">
+                <label>Estimated liquor purchase cost</label> <span class="fee-amount">[$0.00]</span>
+            </div>
+            <div class="d-flex">
+                <label>Estimated net proceeds/profit from liquor sales</label> <span class="fee-amount">[$0.00]</span>
+            </div>
+            <div class="d-flex">
+                <label>Total PST Amount Due</label> <span class="fee-amount">[$0.00]</span>
+            </div>
+            <div class="d-flex">
+                <label>Application Fees (Based on 1 event location and capacity)*
+                    *0-500 – $25.00</label> <span class="fee-amount">[$0.00]</span>
+            </div>
+
+            <hr>
+
+            <div class="d-flex total-fees-due">
+                <label>Total Fees Due Upon Approval</label> <span class="fee-amount">[$0.00]</span>
+            </div>
+        </mat-expansion-panel>
+
         <div class="d-flex">
-            <label>Location Name</label> <span>{{loc.locationName}}</span>
-        </div>
-        <div class="d-flex">
-            <label>Location Description</label> <span>[[value needed]]</span>
-        </div>
-        <div class="d-flex">
-            <label>Event Address</label>
-            <section>
-                <span>{{loc.eventLocationStreet1}}</span> <br>
-                <span>{{loc.eventLocationCity}}, {{eventLocationProvince}}</span> <br>
-                <span>{{loc.eventLocationPostalCode}}</span> <br>
+            <label>Declaration</label>
+            <section class="declaration-content">
+                <span class="declaration-text">
+                    I, {{contact?.name}}, certify that all of the information is true and complete to the best of my
+                    knowledge. I have read the terms and conditions of the permit, and if the application is approved,
+                    the
+                    permittee listed on the permit will be responsible for liquor service at the event.
+                </span>
+
+                <mat-checkbox class="declaration-checkbox">
+                    By checking this box, I confirm that I have read, agree to and acknowledge the declaration. I also
+                    certify that I am at least 19 years old and that no essential information has been concealed or
+                    misrepresented on this application.
+                </mat-checkbox>
             </section>
         </div>
 
-        <section *ngFor="let area of loc.serviceAreas; let j = index;">
-            <div class="d-flex">
-                <label>Service Area Description</label> <span>{{area.licencedAreaDescription}}</span>
-            </div>
-            <div class="d-flex">
-                <label>Maximum # of Guests in Service Areas</label> <span>{{area.maximumNumberOfGuests}}</span>
-            </div>
-            <div class="d-flex">
-                <label>Minors Present</label> <span>{{area.minorPresent}}</span>
-            </div>
-            <div class="d-flex">
-                <label>Event Held</label> <span>[[value needeed]]</span>
-            </div>
-            <div class="d-flex">
-                <label>Maximum # of Guests at this location</label> <span>{{loc.maximumNumberOfGuests}}</span>
-            </div>
-        </section>
-
-        <section *ngFor="let eventDate of loc.eventDates; let j = index;">
-            <h4>Event date {{j+1}}</h4>
-            <div class="d-flex">
-                <label>Start Date</label> <span>{{eventDate.eventDate | date: 'dd MMM yyyy'}}</span>
-            </div>
-            <div class="d-flex">
-                <label>Start Time</label> <span>{{eventDate.eventStartValue}} - {{eventDate.eventEndValue}}</span>
-            </div>
-            <div class="d-flex">
-                <label>Liquor Service</label> <span>{{eventDate.serviceStartValue}} - {{eventDate.serviceStartValue}}</span>
-            </div>
-        </section>
-    </mat-expansion-panel>
-
-    <mat-expansion-panel [expanded]="true">
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                LIQUOR FEES
-            </mat-panel-title>
-        </mat-expansion-panel-header>
-
-        <div class="d-flex">
-            <label>Liquor Quantities</label>
-            <table class="servigns">
-                <tr>
-                    <th>Type</th>
-                    <th>Servings</th>
-                </tr>
-                <tr *ngFor="let item of [{type: 'draught beer', servings: 113},{type: 'wine', servings: 10}]">
-                    <td>{{item.type}}</td>
-                    <td>{{item.servings}}</td>
-                </tr>
-            </table>
-        </div>
-
         <hr>
 
-        <div class="d-flex">
-            <label>Estimated total liquor sales revenue</label> <span class="fee-amount">[$0.00]</span>
+        <div *ngIf="showSubmitButton" class="d-flex flex-row-reverse">
+            <button mat-raised-button color="primary" (click)="submitApplication()">SUBMIT APPLICATION</button>
+            <button mat-raised-button color="secondary" class="mr-2">BACK</button>
         </div>
-        <div class="d-flex">
-            <label>Estimated liquor purchase cost</label> <span class="fee-amount">[$0.00]</span>
-        </div>
-        <div class="d-flex">
-            <label>Estimated net proceeds/profit from liquor sales</label> <span class="fee-amount">[$0.00]</span>
-        </div>
-        <div class="d-flex">
-            <label>Total PST Amount Due</label> <span class="fee-amount">[$0.00]</span>
-        </div>
-        <div class="d-flex">
-            <label>Application Fees (Based on 1 event location and capacity)*
-                *0-500 – $25.00</label> <span class="fee-amount">[$0.00]</span>
-        </div>
-
-        <hr>
-
-        <div class="d-flex total-fees-due">
-            <label>Total Fees Due Upon Approval</label> <span class="fee-amount">[$0.00]</span>
-        </div>
-    </mat-expansion-panel>
-
-    <div class="d-flex">
-        <label>Declaration</label>
-        <section class="declaration-content">
-            <span class="declaration-text">
-                I, [[[[Firstname Lastname]]], certify that all of the information is true and complete to the best of my
-                knowledge. I have read the terms and conditions of the permit, and if the application is approved, the
-                permittee listed on the permit will be responsible for liquor service at the event.
-            </span>
-
-            <mat-checkbox class="declaration-checkbox">
-                By checking this box, I confirm that I have read, agree to and acknowledge the declaration. I also
-                certify that I am at least 19 years old and that no essential information has been concealed or
-                misrepresented on this application.
-            </mat-checkbox>
-        </section>
     </div>
-
-    <hr>
-
-    <div class="d-flex flex-row-reverse">
-        <button mat-raised-button color="primary" (click)="submitApplication()">SUBMIT APPLICATION</button>
-        <button mat-raised-button color="secondary" class="mr-2">BACK</button>
-    </div>
-</div>
+</ng-container>
 
 <div *ngIf="mode === 'pendingReview'">
     <p>
@@ -221,7 +221,7 @@
     <button mat-raised-button routerLink="/sep/my-applications">Return to My Applications</button>
 </div>
 
-<div  *ngIf="mode === 'payNow'">
+<div *ngIf="mode === 'payNow'">
     <p>
         Your may now pay for your application
     </p>

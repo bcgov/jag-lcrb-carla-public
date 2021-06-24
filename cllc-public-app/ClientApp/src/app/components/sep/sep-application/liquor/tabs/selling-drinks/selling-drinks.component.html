@@ -3,7 +3,9 @@
         Almost there... Give us a few more details
     </p>
 
-    <app-field label="Are you charging for drinks at your event?" [required]="true" [isFullWidth]="true">
+    <app-field label="Are you charging for drinks at your event?" [required]="true" [isFullWidth]="true"
+    errorMessage="Please select a value"
+    [valid]="isValidOrNotTouched('chargingForLiquorReason')"> 
         <select formControlName="chargingForLiquorReason" class="form-control w-100">
             <option value=""></option>
             <option value="RecoverCost">Yes - To recover event operating costs</option>
@@ -16,7 +18,8 @@
 
     <section *ngIf="form.get('chargingForLiquorReason').value === 'RaiseMoney'" class="p-3">
         <app-field label="Enter the name of the non-profit organization receiving charitable proceeds from this event"
-            [required]="true" [isFullWidth]="true">
+            [required]="true" [isFullWidth]="true" errorMessage="Please enter a value"
+            [valid]="isValidOrNotTouched('nonProfitName')">
             <input formControlName="nonProfitName" type="text" class="form-control w-100">
         </app-field>
         <!--app-field label="Select the fund-raising purpose of your event " [required]="true" [isFullWidth]="true">
@@ -46,7 +49,8 @@
     </section>
 
     <app-field   *ngIf="form.get('chargingForLiquorReason').value && form.get('chargingForLiquorReason').value !== 'LiquorIsfree'"
-    label="Are you hosting this event as a GST registered organization?" [required]="true"
+    label="Are you hosting this event as a GST registered organization?" [required]="true"  errorMessage="Please select a value"
+    [valid]="isValidOrNotTouched('isGSTRegisteredOrg')"
         [isFullWidth]="true">
         <mat-radio-group formControlName="isGSTRegisteredOrg">
             <mat-radio-button value="true">Yes</mat-radio-button>
@@ -56,7 +60,8 @@
 
     <app-field
         label="Are any of the liquor products at your event donated or have they been provided under consular privilege?"
-        [required]="true">
+        [required]="true"  errorMessage="Please select a value"
+        [valid]="isValidOrNotTouched('donateOrConsularPrevLiqour')">
         <mat-radio-group formControlName="donateOrConsularPrevLiqour">
             <mat-radio-button value="true">Yes</mat-radio-button>
             <mat-radio-button value="false">No</mat-radio-button>
@@ -64,7 +69,7 @@
     </app-field>
 
     <section class="pt-3">
-        <button mat-raised-button color="secondary" (click)="back.emit(true)">BACK</button>
+        <button mat-raised-button color="secondary" class="mr-3=" (click)="back.emit(true)">BACK</button>
         <button mat-raised-button color="primary" (click)="next()">NEXT</button>
     </section>
 </form>

@@ -96,6 +96,7 @@ import { AllApplicationsComponent } from "@components/police-representative/all-
 import { MyJobsComponent } from "@components/police-representative/my-jobs/my-jobs.component";
 import { PoliceSummaryComponent } from "@components/police-representative/police-summary/police-summary.component";
 import { SepPaymentConfirmationComponent } from "@components/sep/payment-confirmation/payment-confirmation.component";
+import { SummaryComponent } from "@components/sep/sep-application/summary/summary.component";
 
 const routes: Routes = [
   {
@@ -118,6 +119,12 @@ const routes: Routes = [
   {
     path: "sep/application/:id/:step",
     component: SepApplicationComponent,
+    canActivate: [BCeidOrServiceCardAuthGuard, FeatureGuard],
+    data: { feature: "Sep" }
+  },
+  {
+    path: "sep/application-summary/:apiId",
+    component: SummaryComponent,
     canActivate: [BCeidOrServiceCardAuthGuard, FeatureGuard],
     data: { feature: "Sep" }
   },

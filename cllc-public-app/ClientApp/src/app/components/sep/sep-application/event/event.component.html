@@ -3,7 +3,6 @@
 
     <span class="mat-title">{{sepApplication?.eventName}}</span>
 
-    <div class="mat-subheading-1">Application number: {{application?.id}}</div>
     <p>Tell us about your event and venue location.
     </p>
     <span class="error-states">*All fields are required</span>
@@ -60,7 +59,7 @@
         </div>
 
         <!--app-field label="How many people will attend the event?" [required]="true"
-            [valid]="isValidOrNotTouched('maximumNumberOfGuests')" errorMessage="Please enter a value">
+            [valid]="isValidOrNotTouched('maximumNumberOfGuests')" errorMessage="Please select a value">
             <input type="number" class="form-control" formControlName="maximumNumberOfGuests">
         </app-field-->
 
@@ -117,9 +116,12 @@
                             <app-field label="Postal Code" [required]="true"
                                 [valid]="!location.get('eventLocationPostalCode').touched || location.get('eventLocationPostalCode').valid"
                                 errorMessage="Postal code is in the wrong format 'X3X 9Y9'">
-                                <input type="text" formControlName="eventLocationPostalCode" class="form-control">
+                                <input type="text" mask="S0S 0S0" formControlName="eventLocationPostalCode"
+                                    class="form-control">
                             </app-field>
-                            <app-field label="Maximum number of guests at this location (including service areas) at any time" [required]="true"
+                            <app-field
+                                label="Maximum number of guests at this location (including service areas) at any time"
+                                [required]="true"
                                 [valid]="!location.get('maximumNumberOfGuests').touched || location.get('maximumNumberOfGuests').valid"
                                 errorMessage="Maximum number of guests is required">
                                 <input type="number" class="form-control" formControlName="maximumNumberOfGuests">
@@ -151,7 +153,9 @@
                                             <div class="d-flex justify-content-between">
                                                 <section>
                                                     <app-field
-                                                        label="Describe the area(s) where liquor will be served, sold and consumed">
+                                                        label="Describe the area(s) where liquor will be served, sold and consumed"
+                                                        errorMessage="Please enter a value"
+                                                        [valid]="!area.get('eventName').touched || area.get('eventName').valid">
                                                         <p>
                                                             i.e.
                                                             community centrebeverage garden, bar area, courtyard, etc.
@@ -161,12 +165,16 @@
                                                             placeholder="For example: beverage garden, bar area, courtyard, etc.">
                                                     </app-field>
                                                     <app-field
-                                                        label="Maximum number of guests in the service area at any given time">
-                                                        <input type="text"
+                                                        label="Maximum number of guests in the service area at any given time"
+                                                        errorMessage="Please enter a value"
+                                                        [valid]="!area.get('licencedAreaMaxNumberOfGuests').touched || area.get('licencedAreaMaxNumberOfGuests').valid">
+                                                        <input type="number"
                                                             formControlName="licencedAreaMaxNumberOfGuests"
                                                             class="form-control">
                                                     </app-field>
-                                                    <app-field label="Will minors be in the service area?">
+                                                    <app-field label="Will minors be in the service area?"
+                                                        errorMessage="Please enter a value"
+                                                        [valid]="!area.get('minorPresent').touched || area.get('minorPresent').valid">
                                                         <mat-radio-group formControlName="minorPresent">
                                                             <mat-radio-button color="primary" class="mr-3"
                                                                 [value]="true">Yes
@@ -176,20 +184,25 @@
                                                             </mat-radio-button>
                                                         </mat-radio-group>
                                                     </app-field>
-                                                    <app-field
-                                                    label="How many minors will be in the service area?" *ngIf="area.get('minorPresent').value">
-                                                    <input type="text"
-                                                        formControlName="numberOfMinors"
-                                                        class="form-control">
-                                                </app-field>
-                                                    <app-field label="Where is the service area location?">
-                                                    <select class="form-control setting-select" formControlName="setting" >
-                                                        <option value=""></option>
-                                                        <option value="Indoors">Indoors</option>
-                                                        <option value="Outdoors">Outdoors</option>
-                                                        <option value="BothOutdoorsAndIndoors">Both Indoors & Outdoors</option>
-                                                    </select>
-                                                  </app-field>
+                                                    <app-field label="How many minors will be in the service area?"
+                                                        *ngIf="area.get('minorPresent').value"
+                                                        errorMessage="Please select a value"
+                                                        [valid]="!area.get('numberOfMinors').touched || area.get('numberOfMinors').valid">
+                                                        <input type="number" formControlName="numberOfMinors"
+                                                            class="form-control">
+                                                    </app-field>
+                                                    <app-field label="Where is the service area location?"
+                                                        errorMessage="Please select a value"
+                                                        [valid]="!area.get('setting').touched || area.get('setting').valid">
+                                                        <select class="form-control setting-select"
+                                                            formControlName="setting">
+                                                            <option value=""></option>
+                                                            <option value="Indoors">Indoors</option>
+                                                            <option value="Outdoors">Outdoors</option>
+                                                            <option value="BothOutdoorsAndIndoors">Both Indoors &
+                                                                Outdoors</option>
+                                                        </select>
+                                                    </app-field>
 
                                                 </section>
                                                 <div>
@@ -205,8 +218,6 @@
                                         Area</button>
                                 </mat-card>
                             </section>
-
-
 
                             <mat-card formGroupName="eventDates" class="mat-elevation-z0 mt-3">
                                 <h3>Event Date(s)</h3>
@@ -230,8 +241,8 @@
                                     these hours.
                                 </p>
                                 <mat-accordion>
-                                    <mat-expansion-panel [expanded]="true" [formGroupName]="k"
-                                        (opened)="isOpen = true" (closed)="isOpen = false"
+                                    <mat-expansion-panel [expanded]="true" [formGroupName]="k" (opened)="isOpen = true"
+                                        (closed)="isOpen = false"
                                         *ngFor="let item of getEventDates(i).controls; let isOpen = true; let k = index;">
                                         <mat-expansion-panel-header>
                                             <mat-panel-title *ngIf="!isOpen">
@@ -250,7 +261,9 @@
                                         <table class="w-100">
                                             <tr>
                                                 <td>
-                                                    <app-field label="Date of your event">
+                                                    <app-field label="Date of your event"
+                                                        errorMessage="Please select a value"
+                                                        [valid]="!item.get('eventDate').touched || item.get('eventDate').valid">
                                                         <input type="text" formControlName="eventDate"
                                                             style="background-color: #fff; width: 170px;"
                                                             placeholder="yyyy-mm-dd" readonly class="form-control"
@@ -260,24 +273,22 @@
                                                     </app-field>
                                                 </td>
                                                 <td>
-                                                    <app-field label="From">
-                                                        <select class="form-control"
-                                                            formControlName="eventStartValue">
+                                                    <app-field label="From" errorMessage="Please select a value"
+                                                        [valid]="!item.get('eventStartValue').touched || item.get('eventStartValue').valid">
+                                                        <select class="form-control" formControlName="eventStartValue">
                                                             <option value=""></option>
-                                                            <option [value]="item.value"
-                                                                *ngFor="let item of timeSlots">
+                                                            <option [value]="item.value" *ngFor="let item of timeSlots">
                                                                 {{item.name}}
                                                             </option>
                                                         </select>
                                                     </app-field>
                                                 </td>
                                                 <td>
-                                                    <app-field label="To">
-                                                        <select class="form-control"
-                                                            formControlName="eventEndValue">
+                                                    <app-field label="To" errorMessage="Please select a value"
+                                                        [valid]="!item.get('eventEndValue').touched || item.get('eventEndValue').valid">
+                                                        <select class="form-control" formControlName="eventEndValue">
                                                             <option value=""></option>
-                                                            <option [value]="item.value"
-                                                                *ngFor="let item of timeSlots">
+                                                            <option [value]="item.value" *ngFor="let item of timeSlots">
                                                                 {{item.name}}
                                                             </option>
                                                         </select>
@@ -293,30 +304,37 @@
                                                     <label>Liquor will be served:</label>
                                                 </td>
                                                 <td>
-                                                    <app-field label="From">
+                                                    <app-field label="From" errorMessage="Please select a value"
+                                                        [valid]="!item.get('serviceStartValue').touched || item.get('serviceStartValue').valid">
                                                         <select class="form-control"
                                                             formControlName="serviceStartValue">
                                                             <option value=""></option>
-                                                            <option [value]="item.value"
-                                                                *ngFor="let item of timeSlots">
+                                                            <option [value]="item.value" *ngFor="let item of timeSlots">
                                                                 {{item.name}}
                                                             </option>
                                                         </select>
                                                     </app-field>
                                                 </td>
                                                 <td>
-                                                    <app-field label="To">
-                                                        <select class="form-control"
-                                                            formControlName="serviceEndValue">
+                                                    <app-field label="To" errorMessage="Please select a value"
+                                                        [valid]="!item.get('serviceEndValue').touched || item.get('serviceEndValue').valid">
+                                                        <select class="form-control" formControlName="serviceEndValue">
                                                             <option value=""></option>
-                                                            <option [value]="item.value"
-                                                                *ngFor="let item of timeSlots">
+                                                            <option [value]="item.value" *ngFor="let item of timeSlots">
                                                                 {{item.name}}
                                                             </option>
                                                         </select>
                                                     </app-field>
                                                 </td>
                                                 <td></td>
+                                            </tr>
+                                            <tr *ngIf="item?.errors?.range">
+                                                <td></td>
+                                                <td colspan="2">
+                                                    <span class="error-states">
+                                                        {{item?.errors?.range}}
+                                                    </span>
+                                                </td>
                                             </tr>
                                         </table>
                                     </mat-expansion-panel>
@@ -348,6 +366,6 @@
         </p>
     </section>
 
-    <button mat-raised-button color="secondary" matStepperPrevious>BACK</button>
+    <button mat-raised-button color="secondary" class="mr-3" matStepperPrevious>BACK</button>
     <button mat-raised-button color="primary" (click)="next()">NEXT</button>
 </div>
