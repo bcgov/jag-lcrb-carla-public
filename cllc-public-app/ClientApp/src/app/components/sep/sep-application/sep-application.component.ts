@@ -106,12 +106,12 @@ export class SepApplicationComponent implements OnInit {
   }
 
 
-  completeStep(step: string, stepper: any, data: SepApplication) {
+  completeStep(step: string, stepper: any, data: SepApplication, saveToApi: boolean) {
     this.application.lastStepCompleted = step;
     data.lastStepCompleted = step;
     this.saveToDb(data);
     this.cd.detectChanges();
-    if (environment.development) {
+    if (saveToApi) {
       this.saveToAPI().then(_ => { // Save to dynamics on transitions on DEV
         stepper.next();
       });
