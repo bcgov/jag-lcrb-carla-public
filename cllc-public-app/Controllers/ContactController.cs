@@ -50,7 +50,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _fileManagerClient = fileManagerClient;
         }
 
-        public static bool IsPoliceRepresentative(string contactId, IConfiguration config, IDynamicsClient dynamics)
+        public static bool IsSepPoliceRepresentative(string contactId, IConfiguration config, IDynamicsClient dynamics)
         {
             if (string.IsNullOrEmpty(config["FEATURE_SEP"]) || string.IsNullOrEmpty(contactId))
             {

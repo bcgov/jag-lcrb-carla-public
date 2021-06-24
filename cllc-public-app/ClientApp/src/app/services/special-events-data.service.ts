@@ -17,8 +17,14 @@ export class SpecialEventsDataService extends DataService {
     super();
   }
 
-  getSpecialEvent(id: string): Observable<SepApplication> {
-    const apiPath = `api/special-events/${id}`;
+  getSpecialEventPolice(id: string): Observable<SepApplication> {
+    const apiPath = `api/special-events/police/${id}`;
+    return this.http.get<SepApplication>(apiPath, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
+  getSpecialEventForApplicant(id: string): Observable<SepApplication> {
+    const apiPath = `api/special-events/applicant/${id}`;
     return this.http.get<SepApplication>(apiPath, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }

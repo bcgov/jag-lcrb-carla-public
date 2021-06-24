@@ -40,6 +40,7 @@ import {
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { filter, tap, switchMap } from 'rxjs/operators';
 import { FormBase } from '@shared/form-base';
+import { SepSchedule } from '@models/sep-schedule.model';
 
 @Component({
   selector: 'app-police-summary',
@@ -122,9 +123,10 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
       sepCity: ['']
     });
     this.busy =
-    this.specialEventsDataService.getSpecialEvent(this.specialEventId)
+    this.specialEventsDataService.getSpecialEventPolice(this.specialEventId)
       .subscribe(application => {
         this.sepApplication = application;
+        this.formatEventDatesForDisplay();
         if (this.form && application) {
           this.form.patchValue(this.sepApplication);
         }
@@ -147,6 +149,22 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
           this.snackBar.open('No match found', '', { duration: 2500, panelClass: ['green-snackbar'] });
         }
       });
+  }
+
+  
+  formatEventDatesForDisplay() {
+    if (this?.sepApplication?.eventLocations?.length > 0) {
+      this.sepApplication.eventLocations.forEach(loc => {
+        if (loc.eventDates?.length > 0) {
+          const formatterdDates = [];
+          loc.eventDates.forEach(ed => {
+            ed = Object.assign(new SepSchedule(null), ed);
+            formatterdDates.push({ ed, ...ed.toEventFormValue() });
+          });
+          loc.eventDates = formatterdDates;
+        }
+      });
+    }
   }
 
   approve(): void {

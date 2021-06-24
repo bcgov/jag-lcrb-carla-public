@@ -1,9 +1,9 @@
-<div class="position-relative">
+<div class="position-relative drink-planner">
   <div [ngBusy]="[busy]"></div>
   <form [formGroup]="form">
     <div class="padded-section">
-      <fa-icon [icon]="faLightbulb" class="float-right rounded-tooltip-icon" data-html="true"
-        matTooltipClass="multiline-tooltip custom-tooltip" matTooltip="Enter the number of hours and the number of guests you’ll be serving. Next, estimate the percentage of beer, wine and spirits suitable for your event.&#010;
+      <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip.toggle()" class="float-right" data-html="true"
+        *ngIf="!hideGuestsAndHours" matTooltipClass="multiline-tooltip custom-tooltip" matTooltip="Enter the number of hours and the number of guests you’ll be serving. Next, estimate the percentage of beer, wine and spirits suitable for your event.&#010;
         For example, if you choose to serve only beer and wine, enter 50% for beer, 50% for wine and 0% for spirits.&#010;
         Note: These are simply buying guidelines. You may enter your own amounts to better suit your event.">
       </fa-icon>
@@ -29,8 +29,9 @@
 
       <hr>
     </ng-container>
+
     <!-- Section 2 -->
-    <fa-icon [icon]="faLightbulb" class="float-right rounded-tooltip-icon" data-html="true"
+    <fa-icon [icon]="faQuestionCircle" size="lg"  class="float-right" data-html="true"
       matTooltipClass="multiline-tooltip custom-tooltip" matTooltip="Standard Drink Serving Sizes:&#010;
       &bull; 1.5 ounce for spirits
       &bull; 340ml (12 ounce) cans or bottles for beer, cider or coolers
@@ -38,23 +39,24 @@
       &bull; 5 ounces for individual glasses of wine">
     </fa-icon>
     <h3>Enter the &#37; of each drink type appropriate for your event</h3>
-    <div class="row">
-      <div *ngFor="let item of config" class="col-md-3 col-md-offset-1 col-xs-12">
-        <div class="row">
-          <div class="text-center w-100 img-container-120">
-            <img src="{{item.imageUrl}}">
-          </div>
+    <div class="d-flex justify-content-around">
+      <div *ngFor="let item of config" class="">
+
+        <div class="text-center w-100 ">
+          <!-- <img src="{{item.imageUrl}}"> -->
+          <fa-icon size="6x" [icon]="item.faIcon"></fa-icon>
         </div>
 
-        <app-field class="row text-center" [label]="item.description" [required]="false" [isFullWidth]="true">
+        <app-field class="text-center" [label]="item.description" [required]="false" [isFullWidth]="true">
           <input class="form-control text-center m-auto mb-2" type="number" [formControlName]="item.group" min="0"
             max="100">
         </app-field>
 
-        <div class="row">
+        <div class="">
           <h4 class="w-100">
-            <span class="d-inline-block img-container-35">
-              <img src="{{item.servingImageUrl}}">
+            <span class="d-inline-block img-container-35a">
+              <!-- <img src="{{item.servingImageUrl}}"> -->
+              <fa-icon size="2x" [icon]="item.faIcon"></fa-icon>
             </span>
             &nbsp; = &nbsp;
             <small>{{servings(item).toFixed(0) | mask : 'separator' : ','}}</small>
@@ -65,8 +67,9 @@
             </small>
           </h4>
           <h4 class="w-100">
-            <span class="d-inline-block img-container-50">
-              <img src="{{item.storageImageUrl}}">
+            <span class="d-inline-block img-container-50a">
+              <!-- <img src="{{item.storageImageUrl}}"> -->
+              <fa-icon size="2x" [icon]="item.storageFaIcon"></fa-icon>
             </span>
             &nbsp; = &nbsp;
             <small class="storage-unit">{{storageUnits(item).toFixed(0) | mask : 'separator' : ','}}</small>
