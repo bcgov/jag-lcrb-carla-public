@@ -48,8 +48,11 @@
         </div>
 
         <app-field class="text-center" [label]="item.description" [required]="false" [isFullWidth]="true">
-          <input class="form-control text-center m-auto mb-2" type="number" [formControlName]="item.group" min="0"
+          <div class="d-flex">
+            <input class="form-control text-right m-auto mb-2" type="number" [formControlName]="item.group" min="0"
             max="100">
+            <button class="input-suffix">%</button>
+          </div>
         </app-field>
 
         <div class="">
