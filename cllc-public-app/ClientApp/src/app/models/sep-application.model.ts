@@ -19,6 +19,7 @@ export class SepApplication {
     eventName: string;
     eventStartDate: Date;
     eventStatus: string;
+    eventType: string;
     fundraisingPurpose: string;
     hostOrganizationAddress: string;
     hostOrganizationName: string;
