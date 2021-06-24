@@ -17,10 +17,9 @@ Technology Stack
 | Authentication | ADFS, BCeID, BC Services Card |
 | Document Storage    | MS SharePoint 2016 |
 | Container Platform | OpenShift 4 |
-| Zero Trust Security Policy Type | Aporeto |
+| Zero Trust Security Policy Type | Kubernetes |
 | Logging | Splunk, Console, MS Teams and Kibana |
-| CI/CD Pipeline | Jenkins |
-
+| CI/CD Pipeline | Jenkins, Github Actions |
 
 System Architecture
 --------------
@@ -29,7 +28,6 @@ System Architecture
 Repository Map
 --------------
 - **.s2i**: Source to image (s2i) assembly script
-- **agent-protractor**: Automated end to end tests 
 - **cllc-interfaces**: Interface libraries for other systems:
   - BCeID
   - BC Express Pay (BCEP)
@@ -55,7 +53,7 @@ Developer Prerequisites
 -----------------------
 
 **Public Application**
-- .Net Core SDK (3.1, 5.0)
+- .Net Core SDK (5.0)
 - Node.js version 10.21 
 - .NET Core IDE such as Visual Studio or VS Code
 - JAG VPN with access to MS Dynamics
@@ -173,17 +171,6 @@ Features are managed by adding environment variables (or secrets in the case of 
 For a list of features that are active in a given instance access /api/features.
 
 To edit an environment variable, go to the environment tab on the Deployment Config for the API service associated with the given instance.
-
-
-Other
------------
-
-**SonarQube**
-
-SonarQube is a code quality service that helps identify problem areas in code through static analysis.
-
-The development pipeline, called during the OpenShift build process, includes a stage where the code is sent to SonarQube for analysis.
-
 
 Contribution
 ------------
