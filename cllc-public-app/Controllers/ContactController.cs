@@ -50,8 +50,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _fileManagerClient = fileManagerClient;
         }
 
+        /// <summary>
+        /// Determine if a given contact is a police representative.
+        /// </summary>
+        /// <param name="contactId"></param>
+        /// <param name="config"></param>
+        /// <param name="dynamics"></param>
+        /// <returns>True if the contact has an account that has a police jurisdiction</returns>
         public static bool IsSepPoliceRepresentative(string contactId, IConfiguration config, IDynamicsClient dynamics)
         {
+            // return false if SEP is off; there are only police reps in SEP.
             if (string.IsNullOrEmpty(config["FEATURE_SEP"]) || string.IsNullOrEmpty(contactId))
             {
                 return false;
@@ -59,8 +67,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             try
             {
-                MicrosoftDynamicsCRMcontact contact = dynamics.Contacts.GetByKey(contactId);
-                return contact.AdoxioIspolicerepresentative ?? false;
+                MicrosoftDynamicsCRMcontact contact = dynamics.GetContactById(contactId).GetAwaiter().GetResult();
+                bool result = contact?.ParentcustomeridAccount?._adoxioPolicejurisdictionidValue != null;
+                
+                return result;
             }
             catch (HttpOperationException)
             {
