@@ -235,7 +235,10 @@ export class EventComponent extends FormBase implements OnInit {
       eventEndValue: ["10:00 PM", [Validators.required]],
       serviceStartValue: ["9:00 AM", [Validators.required]],
       serviceEndValue: ["10:00 PM", [Validators.required]],
+      liquorServiceHoursExtensionReason: [""],
+      disturbancePreventionMeasuresDetails: [""]
     }, { validators: eventTimesValidator });
+
     eventDate = Object.assign(new SepSchedule(null), eventDate);
     const val = eventDate.toEventFormValue();
 
@@ -360,10 +363,33 @@ export class EventComponent extends FormBase implements OnInit {
 
   showHoursAlert(eventDate: FormGroup, location: FormGroup) {
     const serviceAreas = location.get("serviceAreas").value as SepServiceArea[];
-    const outdoorAreaExists = serviceAreas.find(area => area.setting === "outdoors") !== null;
-    const indoorAreaExists = serviceAreas.find(area => area.setting === "indoors") !== null;
-    debugger;
-    return true;
+    const outdoorAreaExists = !!serviceAreas.find(area => area.setting === "Outdoors" || area.setting === "BothOutdoorsAndIndoors");
+    const indoorAreaExists = !!serviceAreas.find(area => area.setting === "Indoors" || area.setting === "BothOutdoorsAndIndoors");
+
+    const serviceEndTime = eventDate.get("serviceEndValue").value;
+    const serviceEndTimeIndex = TIME_SLOTS.indexOf(TIME_SLOTS.find(slot => slot.value === serviceEndTime));
+
+    let show = false;
+    if (indoorAreaExists) {
+      const indoorLimitIndex = TIME_SLOTS.indexOf(TIME_SLOTS.find(slot => slot.value === "2:00 AM"));
+      show = serviceEndTimeIndex > indoorLimitIndex;
+    } else if (outdoorAreaExists) {
+      const outdoorLimitIndex = TIME_SLOTS.indexOf(TIME_SLOTS.find(slot => slot.value === "10:00 PM"));
+      show = serviceEndTimeIndex > outdoorLimitIndex;
+    }
+    return show;
+  }
+
+  indoorAreaExists(eventDate: FormGroup, location: FormGroup) {
+    const serviceAreas = location.get("serviceAreas").value as SepServiceArea[];
+    const indoorAreaExists = !!serviceAreas.find(area => area.setting === "Indoors" || area.setting === "BothOutdoorsAndIndoors");
+    return indoorAreaExists;
+  }
+
+  outdoorAreaExists(eventDate: FormGroup, location: FormGroup) {
+    const serviceAreas = location.get("serviceAreas").value as SepServiceArea[];
+    const outdoorAreaExists = !!serviceAreas.find(area => area.setting === "Outdoors" || area.setting === "BothOutdoorsAndIndoors");
+    return outdoorAreaExists;
   }
 
   next() {

@@ -339,25 +339,25 @@
                                             <tr *ngIf="showHoursAlert(item, location)">
                                                 <td colspan="4">
                                                     <app-error-alert>
-                                                        <p>
+                                                        <p *ngIf="indoorAreaExists(item, location)">
                                                             Liquor service hours are outside the permitted range for
                                                             indoor events (9:00 AM - 2:00AM). Hours are subject to
                                                             futher limitation by the police or local government.
                                                         </p>
-                                                        <p>
+                                                        <p   *ngIf="outdoorAreaExists(item, location) && !indoorAreaExists(item, location)">
                                                             Liquor service hours are outside the permitted range for
                                                             outdoor events (9:00 AM - 10:00 PM). Hours are subject to
                                                             futher limitation by the police or local government.
                                                         </p>
 
-                                                        <app-field
+                                                        <app-field  [isFullWidth]="true"
                                                             label="Why would you like to extend your liquor service hours?">
-                                                            <textarea class="w-100" rows="5"></textarea>
+                                                            <textarea class="form-control w-100" rows="5"></textarea>
                                                         </app-field>
 
-                                                        <app-field
+                                                        <app-field [isFullWidth]="true"
                                                             label="Please describe what measures you will take to prevent community disturbances.">
-                                                            <textarea class="w-100" rows="5"></textarea>
+                                                            <textarea class="form-control w-100" rows="5"></textarea>
                                                         </app-field>
 
                                                     </app-error-alert>
