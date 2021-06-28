@@ -43,6 +43,7 @@ export class SepApplication {
     lcrbApproval?: string;
     lcrbApprovalBy?: Contact;
     localId?: number;  // indexed db primary key
+    userId: string; // the id of the user who owns the record
     maxServings: number;
     nonProfitName: string;
     permitNumber: string;
