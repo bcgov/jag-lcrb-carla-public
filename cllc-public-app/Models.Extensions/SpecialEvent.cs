@@ -27,6 +27,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                     AdmissionFee = specialEvent.AdoxioAdmissionfee,
                     BeerGarden = specialEvent.AdoxioBeergarden,
                     Capacity = specialEvent.AdoxioCapacity,
+                    NetEstimatedPST = specialEvent.AdoxioNetestimatedpst,
                     ChargingForLiquorReason = (ViewModels.ChargingForLiquorReasons?)specialEvent.AdoxioChargingforliquorreason,
                     DateSubmitted = specialEvent.AdoxioDatesubmitted,
                     DrinksIncluded = specialEvent.AdoxioDrinksincluded,
@@ -74,7 +75,11 @@ namespace Gov.Lclb.Cllb.Public.Models
                     TastingEvent = specialEvent.AdoxioTastingevent,
                     TotalServings = specialEvent.AdoxioTotalservings,
                     SepCity = specialEvent.AdoxioSpecialEventCityDistrictId?.ToViewModel(),
-                    Applicant = specialEvent.AdoxioContactId?.ToViewModel()
+                    Applicant = specialEvent.AdoxioContactId?.ToViewModel(),
+                    Invoice = specialEvent.AdoxioInvoice?.ToViewModel(),
+                    TotalProceeds = 0,
+                    TotalPurchaseCost = 0,
+                    TotalRevenue = 0
                 };
 
                 var locations = specialEvent?.AdoxioSpecialeventSpecialeventlocations;
@@ -100,35 +105,44 @@ namespace Gov.Lclb.Cllb.Public.Models
                                     .Select(drinkType => drinkType.AdoxioSepdrinktypeid)
                                     .FirstOrDefault();
 
-            if (specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent == null)
-            {
-                result.Beer = 0;
-                result.Wine = 0;
-                result.Spirits = 0;
-            }
-            else
-            {
-                result.Beer = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
-                    .Where(forecast => forecast._adoxioTypeValue == beerTypeId)
-                    .Select(forecast => forecast.AdoxioEstimatedservings.GetValueOrDefault() != 0 &&
-                                        specialEvent.AdoxioTotalservings.GetValueOrDefault() != 0 ?
-                        100 * forecast.AdoxioEstimatedservings / specialEvent.AdoxioTotalservings : 0)
-                    .FirstOrDefault();
-
-                result.Wine = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
-                    .Where(forecast => forecast._adoxioTypeValue == wineTypeId)
-                    .Select(forecast => forecast.AdoxioEstimatedservings.GetValueOrDefault() != 0 &&
-                                        specialEvent.AdoxioTotalservings.GetValueOrDefault() != 0 ?
-                        100 * forecast.AdoxioEstimatedservings / specialEvent.AdoxioTotalservings : 0)
-                    .FirstOrDefault();
-
-                result.Spirits = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
-                    .Where(forecast => forecast._adoxioTypeValue == spiritsTypeId)
-                    .Select(forecast => forecast.AdoxioEstimatedservings.GetValueOrDefault() != 0 &&
-                                        specialEvent.AdoxioTotalservings.GetValueOrDefault() != 0 ?
-                        100 * forecast.AdoxioEstimatedservings / specialEvent.AdoxioTotalservings: 0)
-                    .FirstOrDefault();
+                if (specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent == null)
+                {
+                    result.Beer = 0;
+                    result.Wine = 0;
+                    result.Spirits = 0;
                 }
+                else
+                {
+                    result.Beer = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
+                        .Where(forecast => forecast._adoxioTypeValue == beerTypeId)
+                        .Select(forecast => forecast.AdoxioEstimatedservings.GetValueOrDefault() != 0 &&
+                                            specialEvent.AdoxioTotalservings.GetValueOrDefault() != 0 ?
+                            100 * forecast.AdoxioEstimatedservings / specialEvent.AdoxioTotalservings : 0)
+                        .FirstOrDefault();
+
+                    result.Wine = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
+                        .Where(forecast => forecast._adoxioTypeValue == wineTypeId)
+                        .Select(forecast => forecast.AdoxioEstimatedservings.GetValueOrDefault() != 0 &&
+                                            specialEvent.AdoxioTotalservings.GetValueOrDefault() != 0 ?
+                            100 * forecast.AdoxioEstimatedservings / specialEvent.AdoxioTotalservings : 0)
+                        .FirstOrDefault();
+
+                    result.Spirits = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
+                        .Where(forecast => forecast._adoxioTypeValue == spiritsTypeId)
+                        .Select(forecast => forecast.AdoxioEstimatedservings.GetValueOrDefault() != 0 &&
+                                            specialEvent.AdoxioTotalservings.GetValueOrDefault() != 0 ?
+                            100 * forecast.AdoxioEstimatedservings / specialEvent.AdoxioTotalservings : 0)
+                        .FirstOrDefault();
+                }
+
+                result.TotalProceeds = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
+                    .Sum(forecast => forecast.AdoxioEstimatedrevenue - forecast.AdoxioEstimatedcost);
+
+                result.TotalRevenue = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
+                    .Sum(forecast => forecast.AdoxioEstimatedrevenue);
+
+                result.TotalPurchaseCost = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
+                    .Sum(forecast => forecast.AdoxioEstimatedcost);
             }
             return result;
         }
