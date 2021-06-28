@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "DataTool": {
-      "commandName": "Project",
-      "commandLineArgs": "fix-bad-account-data"
-    }
-  }
-}
