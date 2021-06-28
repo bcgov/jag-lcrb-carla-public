@@ -90,7 +90,7 @@
         </tr>
         <tr>
           <td style="text-align:center;"><h2 style="color: #036;">{{sepApplication?.eventStatus}}</h2></td>
-          <td style="text-align:center;"><h2 style="color: #036;">Family</h2></td>
+          <td style="text-align:center;"><h2 style="color: #036;">{{sepApplication?.eventType}}</h2></td>
           <td style="text-align:center;"><h2 style="color: #036;">{{this.getSize(sepApplication?.maximumNumberOfGuests)}}</h2><strong>{{sepApplication?.maximumNumberOfGuests}} Attendees</strong></td>
         </tr>
         <tr>
@@ -276,29 +276,24 @@
 
         <hr>
 
-            <div class="d-flex">
-                <label>Estimated total liquor sales revenue</label> <span class="fee-amount">[$0.00]</span>
-            </div>
-            <div class="d-flex">
-                <label>Estimated liquor purchase cost</label> <span class="fee-amount">[$0.00]</span>
-            </div>
-            <div class="d-flex">
-                <label>Estimated net proceeds/profit from liquor sales</label> <span class="fee-amount">[$0.00]</span>
-            </div>
-            <div class="d-flex">
-                <label>Total PST Amount Due</label> <span class="fee-amount">[$0.00]</span>
-            </div>
-            <div class="d-flex">
-                <label>Application Fees (Based on 1 event location and capacity)*
-                    *0-500 – $25.00</label> <span class="fee-amount">[$0.00]</span>
-            </div>
+        <div class="d-flex">
+            <label>Estimated total liquor sales revenue</label> <span class="fee-amount">{{sepApplication?.totalRevenue | currency}}</span>
+        </div>
+        <div class="d-flex">
+            <label>Estimated liquor purchase cost</label> <span class="fee-amount">{{sepApplication?.totalPurchaseCost | currency}}</span>
+        </div>
+        <div class="d-flex">
+            <label>Estimated net proceeds/profit from liquor sales</label> <span class="fee-amount">{{sepApplication?.totalProceeds | currency}}</span>
+        </div>
+        <div class="d-flex">
+            <label>Total PST Amount Due</label> <span class="fee-amount">{{sepApplication?.netEstimatedPST | currency}}</span>
+        </div>
+        <div class="d-flex">
+            <label>Application Fees (Based on 1 event location and capacity)*
+                *0-500 – $25.00</label> <span class="fee-amount">{{sepApplication?.invoice?.totalamount - sepApplication?.netEstimatedPST | currency}}</span>
+        </div>
 
-            <hr>
-
-            <div class="d-flex total-fees-due">
-                <label>Total Fees Due Upon Approval</label> <span class="fee-amount">[$0.00]</span>
-            </div>
-
+            
         <hr>
 
     </mat-expansion-panel>

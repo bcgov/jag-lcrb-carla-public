@@ -47,7 +47,13 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         Issued = 845280003,
         Denied = 845280000
     }
+/*
+    public enum EventType
+    {
+        Family = 
 
+    }
+*/
     public enum ApproverStatus
     {
         [EnumMember(Value = "Auto-Reviewed")]
@@ -91,6 +97,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public bool? IsAgreeToTnC { get; set; }
 
+        public decimal? TotalRevenue { get; set; }
+        public decimal? TotalPurchaseCost { get; set; }
+        public decimal? TotalProceeds { get; set; }
         public System.DateTimeOffset? DateAgreeToTnC { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
@@ -110,6 +119,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool? ResponsibleBevServiceNumberDoesNotHave { get; set; }
         public string SpecialEventDescription { get; set; }
         public int? Capacity { get; set; }
+        public decimal? NetEstimatedPST { get; set; }
         public bool? IsAgreeTsAndCs { get; set; }
         public bool? IsPrivateResidence { get; set; }
         public bool? IsOnPublicProperty { get; set; }
@@ -171,6 +181,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public SepCity SepCity { get; set; }
 
         public Contact Applicant { get; set; }
+        public Invoice Invoice { get; set; }
 
         public int? Beer { get; set; }
         public int? Wine { get; set; }

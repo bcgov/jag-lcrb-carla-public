@@ -1,5 +1,5 @@
-LCLB Cannabis & Liquor - Licensing and Compliance System
-=================
+BC Liquor and Cannabis Regulation Branch - Liquor and Cannabis Licensing Application
+======================
 
 ## Running in OpenShift
 
@@ -11,7 +11,7 @@ This project uses the scripts found in [openshift-project-tools](https://github.
 
 RedHat requires authentication to the image repository where the Dotnet images are stored.  Follow these steps to enable this:
 
-1)  Sign on with a developer account to https://registry.redhat.io.  Developer accounts are free as of October 2019.
+1) Sign on with a free developer account to https://access.redhat.com/terms-based-registry/.  
 
 2) Go to the Service Accounts section of the website, which as of October 2019 was in the top right of the web page.
 
@@ -34,7 +34,7 @@ Where `<SECRETNAME>` is the name you specified in step 7 when you imported the s
 
 9) You can now import images from the Redhat repository.  For example:
 
-`oc import-image dotnet/dotnet-31-rhel7 --from=registry.redhat.io/dotnet/dotnet-31-rhel7 --confirm` 
+`oc import-image ubi8/dotnet-50 --from=registry.redhat.io/dotnet/ubi8/dotnet-50 --confirm` 
 
 10) Adjust your builds to use this imported image
 
@@ -51,7 +51,7 @@ Differences can include:
 
 To target a different repo and branch, create a `settings.local.sh` file in your project's local `openshift` directory and override the GIT parameters, for example;
 ```
-export GIT_URI="https://github.com/bcgov/ag-lclb-cllc-public.git"
+export GIT_URI="https://github.com/bcgov/jag-lcrb-carla-public.git"
 export GIT_REF="openshift-updates"
 ```
 
@@ -132,34 +132,3 @@ Select **Just the push event**
 Check **Active**
 
 Click **Add webhook**
-
-### UAT ###
-
-UAT is not currently supported by the process above.  To setup the UAT environment, change the console directory to the location of the public-app openshift directory, and execute the following.
-
-`oc project lclb-cllc-tools`
-
-`oc process -f templates/cllc-public/cllc-public.build.json --param-file=cllc-public-build.uat.param`
-
-`oc project lclb-cllc-test`
-
-`oc process -f templates/cllc-public/cllc-public-deploy.json --param-file=cllc-public-deploy.uat.param`
-
-
-Change directory to the directory containing the mssql server template, and execute the following:
-
-`oc process -f sql-server-deploy.json --param-file=sql-server-deploy.uat.param | oc create -f -`
-
-### Nexus ###
-
-A Nexus deployment will improve the speed of builds.
-
-The following commands should be run from the Tools project.
-
-First, import the docker image for nexus:
-
-`oc import-image sonatype/nexus --confirm`
-
-Next, import the nexus deployment configuration:
-
-`oc process -f nexus.deploy.json | oc create -f -`
