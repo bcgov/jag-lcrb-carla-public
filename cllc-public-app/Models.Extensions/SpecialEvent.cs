@@ -34,6 +34,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                     DonatedOrConsular = (ViewModels.DonatedOrConsular?)specialEvent.AdoxioDonatedorconsular,
                     EventEndDate = specialEvent.AdoxioEventenddate,
                     EventName = specialEvent.AdoxioEventname,
+                    //EventType = specialEvent.AdoxioTypeofevent,
                     EventStartDate = specialEvent.AdoxioEventstartdate,
                     FundRaisingPurpose = (ViewModels.FundRaisingPurposes?)specialEvent.AdoxioFundraisingpurpose,
                     HostOrganizationAddress = specialEvent.AdoxioHostorganisationaddress,
@@ -157,6 +158,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                     EventStartDate = specialEvent.AdoxioEventstartdate,
                     EventName = specialEvent.AdoxioEventname,
                     // TypeOfEvent =
+                    EventType = specialEvent.AdoxioTypeofevent,
                     InvoiceId = specialEvent._adoxioInvoiceValue,
                     IsInvoicePaid = specialEvent.AdoxioIsinvoicepaid,
                     EventStatus = (EventStatus?)specialEvent.Statuscode,
