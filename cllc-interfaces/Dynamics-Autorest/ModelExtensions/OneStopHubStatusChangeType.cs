@@ -18,6 +18,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         [Display(Name = "Updated - Cancellation Removed")] CancellationRemoved = 845280008,
         [Display(Name = "Updated - Licence Deemed at Transfer")] LicenceDeemedAtTransfer = 845280009,
         [Display(Name = "Updated - Transfer Complete")] TransferComplete = 845280010,
+        [Display(Name = "Updated - Licensee BN9 Changed")] LicenseeBn9Changed = 845280013,
+        [Display(Name = "Updated - Licensee BN9 Added")] LicenseeBn9Added = 845280014,
+        [Display(Name = "Updated - Licensee BN9 Removed")] LicenseeBn9Removed = 845280015,
         [Display(Name = "Expired")] Expired = 845280011,
         [Display(Name = "Renewed")] Renewed = 845280012,
     }
