@@ -24,13 +24,13 @@
             <mat-step [completed]="isStepCompleted(step)" *ngIf="step === 'event'">
                 <ng-template matStepLabel>Event</ng-template>
                 <app-event [localId]="localId" *ngIf="stepper.selectedIndex === index" class="w-100"
-                    (saveComplete)="completeStep(step, stepper, $event);" #event>
+                    (saveComplete)="completeStep(step, stepper, $event, true);" #event>
                 </app-event>
             </mat-step>
 
             <mat-step [completed]="isStepCompleted(step)" *ngIf="step === 'liquor'">
                 <ng-template matStepLabel>Liquor</ng-template>
-                <app-liquor (saveComplete)="completeStep(step, stepper, $event)" [localId]="localId"
+                <app-liquor (saveComplete)="completeStep(step, stepper, $event, true)" [localId]="localId"
                     *ngIf="stepper.selectedIndex === index" class="w-100" #liquor>
                 </app-liquor>
             </mat-step>
