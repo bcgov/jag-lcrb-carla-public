@@ -1197,7 +1197,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         /// GET a licence as PDF.
+        [AllowAnonymous]
         [HttpGet("{licenceId}/pdf/{filename}")]
+        
         public async Task<IActionResult> GetLicencePDF(string licenceId, string filename)
         {
 
@@ -1218,9 +1220,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw new Exception("Error getting license.");
             }
 
-            if (CurrentUserHasAccessToLicenseOwnedBy(adoxioLicense.AdoxioLicencee.Accountid) ||
-                (adoxioLicense.AdoxioProposedOwner != null && CurrentUserHasAccessToLicenseTransferredTo(adoxioLicense.AdoxioProposedOwner.Accountid)))
-            {
+            //if (CurrentUserHasAccessToLicenseOwnedBy(adoxioLicense.AdoxioLicencee.Accountid) ||
+            //    (adoxioLicense.AdoxioProposedOwner != null && CurrentUserHasAccessToLicenseTransferredTo(adoxioLicense.AdoxioProposedOwner.Accountid)))
+            //{
                 var keyWord = "Liquor";
                 var effectiveDateParam = "";
                 if (adoxioLicense.AdoxioEffectivedate.HasValue)
@@ -1603,9 +1605,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                     return new NotFoundResult();
                 }
-            }
+            //}
 
-            return new UnauthorizedResult();
+            //return new UnauthorizedResult();
         }
 
 
