@@ -157,8 +157,6 @@ namespace Gov.Lclb.Cllb.Public.Models
                     SpecialEventId = specialEvent.AdoxioSpecialeventid,
                     EventStartDate = specialEvent.AdoxioEventstartdate,
                     EventName = specialEvent.AdoxioEventname,
-                    // TypeOfEvent =
-                    // EventType = specialEvent.AdoxioTypeofevent,
                     InvoiceId = specialEvent._adoxioInvoiceValue,
                     IsInvoicePaid = specialEvent.AdoxioIsinvoicepaid,
                     MaximumNumberOfGuests = specialEvent.AdoxioMaxnumofguests,
