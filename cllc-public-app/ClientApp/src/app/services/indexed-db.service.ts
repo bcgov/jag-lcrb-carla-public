@@ -19,9 +19,9 @@ export class IndexedDBService {
 
   constructor(private store: Store<AppState>) {
     store.select(state => state.currentUserState.currentUser)
-    .subscribe(user => {
-      this.userId  = `${user.accountid}${user.contactid}`;
-    });
+      .subscribe(user => {
+        this.userId = `${user.accountid}${user.contactid}`;
+      });
     this.db = new Dexie("SepApplicationDatabase");
     this.db.version(3).stores({
       applications: "++localId, agreeToTnC, applicantInfo, dateAgreedToTnC, dateCreated, eligibilityAtPrivateResidence, eligibilityLocalSignificance, eligibilityMajorSignificance, eligibilityMajorSignificanceRational, eventName, eventStatus, id, invoiceTrigger, isBeerGarden,numMaxGuest lastUpdated, permitNumber,isTastingEvent, stepsCompleted, tempJobNumber, totalServings",
@@ -40,7 +40,6 @@ export class IndexedDBService {
     // Save Application
     let applicationId = data.localId;
     data.userId = this?.userId;
-    debugger;
     if (applicationId) { // update if exists
       await this.applications.update(applicationId, data);
     } else { // create and get new id
@@ -50,7 +49,7 @@ export class IndexedDBService {
   }
 
   public async getSepApplication(localId: number) {
-    let app = await this.applications.where({ localId }).first();
+    const app = await this.applications.where({ localId }).first();
     return app;
   }
 
