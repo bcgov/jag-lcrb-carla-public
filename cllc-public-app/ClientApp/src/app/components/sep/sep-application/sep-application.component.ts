@@ -1,29 +1,29 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { AppState } from '@app/app-state/models/app-state';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import { Store } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
-import { Account } from '@models/account.model';
-import { ActivatedRoute } from '@angular/router';
-import { IndexedDBService } from '@services/indexed-db.service';
-import { SepApplication } from '@models/sep-application.model';
-import { environment } from 'environments/environment';
-import { SpecialEventsDataService } from '@services/special-events-data.service';
-import { de } from 'date-fns/locale';
+import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
+import { AppState } from "@app/app-state/models/app-state";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { Store } from "@ngrx/store";
+import { Observable, of } from "rxjs";
+import { Account } from "@models/account.model";
+import { ActivatedRoute } from "@angular/router";
+import { IndexedDBService } from "@services/indexed-db.service";
+import { SepApplication } from "@models/sep-application.model";
+import { environment } from "environments/environment";
+import { SpecialEventsDataService } from "@services/special-events-data.service";
+import { de } from "date-fns/locale";
 
 export const SEP_APPLICATION_STEPS = ["applicant", "eligibility", "event", "liquor", "summary"];
 
 @Component({
-  selector: 'app-sep-application',
-  templateUrl: './sep-application.component.html',
-  styleUrls: ['./sep-application.component.scss']
+  selector: "app-sep-application",
+  templateUrl: "./sep-application.component.html",
+  styleUrls: ["./sep-application.component.scss"]
 })
 export class SepApplicationComponent implements OnInit {
   faCheck = faCheck;
   securityScreeningEnabled: boolean;
   localId: number;
-  isFree: boolean = false;
-  hasLGApproval: boolean = false;
+  isFree = false;
+  hasLGApproval = false;
   isDevEnv = environment.development;
 
   stepType: "summary";
@@ -37,7 +37,7 @@ export class SepApplicationComponent implements OnInit {
     if (this.step) {
       index = this.steps.indexOf(this.step);
       if (index === -1) {
-        index = 0
+        index = 0;
       }
     }
     return index;
@@ -52,8 +52,8 @@ export class SepApplicationComponent implements OnInit {
       .subscribe(account => this.account = account);
     this.route.paramMap.subscribe(pmap => {
       // if the id is 'new' set it to null ( this will dictate whether the save is a create or an update)
-      this.localId = pmap.get('id') === 'new' ? null : parseInt(pmap.get('id'), 10);
-      this.step = pmap.get('step');
+      this.localId = pmap.get("id") === "new" ? null : parseInt(pmap.get("id"), 10);
+      this.step = pmap.get("step");
     });
   }
 
@@ -75,7 +75,7 @@ export class SepApplicationComponent implements OnInit {
   }
 
   canActivate(): Observable<boolean> {
-    let result: Observable<boolean> = of(true);
+    const result: Observable<boolean> = of(true);
     return result;
   }
 
@@ -86,25 +86,23 @@ export class SepApplicationComponent implements OnInit {
     return completed;
   }
 
-
   async saveToAPI(): Promise<void> {
     const appData = await this.db.getSepApplication(this.localId);
     if (appData.id) { // do an update ( the record exists in dynamics)
       const result = await this.sepDataService.updateSepApplication({ ...appData, invoiceTrigger: true } as SepApplication, appData.id)
         .toPromise();
       if (result.localId) {
-        await this.db.applications.update(result.localId, result);
+        await this.db.saveSepApplication(result);
       }
     } else {
       const result = await this.sepDataService.createSepApplication({ ...appData, invoiceTrigger: true } as SepApplication)
         .toPromise();
       if (result.localId) {
-        await this.db.applications.update(result.localId, result);
+        await this.db.saveSepApplication(result);
         this.localId = result.localId;
       }
     }
   }
-
 
   completeStep(step: string, stepper: any, data: SepApplication, saveToApi: boolean) {
     this.application.lastStepCompleted = step;
@@ -124,14 +122,12 @@ export class SepApplicationComponent implements OnInit {
   }
 
   async saveToDb(data) {
-    let localId: number = null;
-    if (data.localId) {
-      await this.db.applications.update(data.localId, data);
-    } else {
+    data.localId = this.localId;
+    if (!this.localId) {
       data.dateCreated = new Date();
-      this.localId = await this.db.saveSepApplication(data);
     }
+    this.localId = await this.db.saveSepApplication(data);
     await this.getApplication();
-    return localId;
+    return this.localId;
   }
 }
