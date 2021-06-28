@@ -157,11 +157,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                     SpecialEventId = specialEvent.AdoxioSpecialeventid,
                     EventStartDate = specialEvent.AdoxioEventstartdate,
                     EventName = specialEvent.AdoxioEventname,
-                    // TypeOfEvent =
-                    //EventType = specialEvent.AdoxioTypeofevent,
                     InvoiceId = specialEvent._adoxioInvoiceValue,
                     IsInvoicePaid = specialEvent.AdoxioIsinvoicepaid,
-                    EventStatus = (EventStatus?)specialEvent.Statuscode,
                     MaximumNumberOfGuests = specialEvent.AdoxioMaxnumofguests,
                     DateSubmitted = specialEvent.AdoxioDatesubmitted,
                     PoliceAccount = specialEvent.AdoxioPoliceAccountId.ToViewModel(),
@@ -173,6 +170,17 @@ namespace Gov.Lclb.Cllb.Public.Models
                     CancelReason = specialEvent.AdoxioCancellationreason,
                     DateOfPoliceDecision = specialEvent.AdoxioDatepoliceapproved
                 };
+                
+                if (specialEvent.AdoxioTypeofevent != null)
+                {
+                    result.EventType = (EventType) specialEvent.AdoxioTypeofevent;
+                }
+
+                if (specialEvent.Statuscode != null)
+                {
+                    result.EventStatus = (EventStatus) specialEvent.Statuscode;
+                }
+
             }
             return result;
         }

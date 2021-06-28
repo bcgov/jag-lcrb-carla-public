@@ -29,14 +29,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioSuitability class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioSuitability(string _owninguserValue = default(string), string _adoxioContactidValue = default(string), int? adoxioMorethanthreechargesconvicted = default(int?), int? adoxioTimeserved = default(int?), int? statecode = default(int?), string adoxioLcrbdecisionmakertitle = default(string), string adoxioLcrbdecisionsummary = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? adoxioChargestimeframeyears = default(int?), string adoxioName = default(string), string adoxioSuitabilityid = default(string), string _owningteamValue = default(string), int? adoxioChargesoccurredwhen = default(int?), int? timezoneruleversionnumber = default(int?), string _createdbyValue = default(string), int? utcconversiontimezonecode = default(int?), int? adoxioLcrbdecision = default(int?), string versionnumber = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _adoxioLcrbdecisionbyidValue = default(string), int? statuscode = default(int?), string _owneridValue = default(string), string _modifiedonbehalfbyValue = default(string), int? adoxioChargesresultinprison = default(int?), System.DateTimeOffset? adoxioDecisionlettersentdate = default(System.DateTimeOffset?), int? adoxioPatternofrepeatoffenses = default(int?), System.DateTimeOffset? adoxioLcrbdecisiondate = default(System.DateTimeOffset?), string _owningbusinessunitValue = default(string), int? adoxioThreechargesledtopenalty = default(int?), int? importsequencenumber = default(int?), string _createdonbehalfbyValue = default(string), bool? adoxioDecisionlettersent = default(bool?), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioSuitabilityBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprocesssession> adoxioSuitabilityProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioSuitabilityMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioSuitabilityAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioSuitabilityDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioSuitabilityDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsyncerror> adoxioSuitabilitySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioSuitabilityPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMcontact adoxioContactId = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMsystemuser adoxioLCRBDecisionById = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMadoxioSuitability(string _owninguserValue = default(string), string _adoxioContactidValue = default(string), int? adoxioMorethanthreechargesconvicted = default(int?), int? adoxioTimeserved = default(int?), int? statecode = default(int?), string _createdonbehalfbyValue = default(string), string adoxioLcrbdecisionsummary = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? adoxioChargestimeframeyears = default(int?), string adoxioName = default(string), string adoxioSuitabilityid = default(string), string _owningteamValue = default(string), int? adoxioChargesoccurredwhen = default(int?), int? timezoneruleversionnumber = default(int?), string _createdbyValue = default(string), int? utcconversiontimezonecode = default(int?), int? adoxioLcrbdecision = default(int?), string versionnumber = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _adoxioLcrbdecisionbyidValue = default(string), string adoxioLcrbdecisionmakertitle = default(string), string _owneridValue = default(string), string _modifiedonbehalfbyValue = default(string), int? adoxioChargesresultinprison = default(int?), System.DateTimeOffset? adoxioDecisionlettersentdate = default(System.DateTimeOffset?), int? adoxioPatternofrepeatoffenses = default(int?), System.DateTimeOffset? adoxioLcrbdecisiondate = default(System.DateTimeOffset?), int? statuscode = default(int?), string _owningbusinessunitValue = default(string), int? adoxioThreechargesledtopenalty = default(int?), int? importsequencenumber = default(int?), bool? adoxioDecisionlettersent = default(bool?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioSuitabilitySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioSuitabilityDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioSuitabilityDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioSuitabilityAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioSuitabilityMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioSuitabilityProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioSuitabilityBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioSuitabilityPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMcontact adoxioContactId = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMsystemuser adoxioLCRBDecisionById = default(MicrosoftDynamicsCRMsystemuser))
         {
             this._owninguserValue = _owninguserValue;
             this._adoxioContactidValue = _adoxioContactidValue;
             AdoxioMorethanthreechargesconvicted = adoxioMorethanthreechargesconvicted;
             AdoxioTimeserved = adoxioTimeserved;
             Statecode = statecode;
-            AdoxioLcrbdecisionmakertitle = adoxioLcrbdecisionmakertitle;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             AdoxioLcrbdecisionsummary = adoxioLcrbdecisionsummary;
             this._modifiedbyValue = _modifiedbyValue;
             Modifiedon = modifiedon;
@@ -53,33 +53,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Overriddencreatedon = overriddencreatedon;
             Createdon = createdon;
             this._adoxioLcrbdecisionbyidValue = _adoxioLcrbdecisionbyidValue;
-            Statuscode = statuscode;
+            AdoxioLcrbdecisionmakertitle = adoxioLcrbdecisionmakertitle;
             this._owneridValue = _owneridValue;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             AdoxioChargesresultinprison = adoxioChargesresultinprison;
             AdoxioDecisionlettersentdate = adoxioDecisionlettersentdate;
             AdoxioPatternofrepeatoffenses = adoxioPatternofrepeatoffenses;
             AdoxioLcrbdecisiondate = adoxioLcrbdecisiondate;
+            Statuscode = statuscode;
             this._owningbusinessunitValue = _owningbusinessunitValue;
             AdoxioThreechargesledtopenalty = adoxioThreechargesledtopenalty;
             Importsequencenumber = importsequencenumber;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             AdoxioDecisionlettersent = adoxioDecisionlettersent;
-            AdoxioSuitabilityBulkDeleteFailures = adoxioSuitabilityBulkDeleteFailures;
-            AdoxioSuitabilityProcessSession = adoxioSuitabilityProcessSession;
-            AdoxioSuitabilityMailboxTrackingFolders = adoxioSuitabilityMailboxTrackingFolders;
-            AdoxioSuitabilityAsyncOperations = adoxioSuitabilityAsyncOperations;
-            AdoxioSuitabilityDuplicateBaseRecord = adoxioSuitabilityDuplicateBaseRecord;
-            AdoxioSuitabilityDuplicateMatchingRecord = adoxioSuitabilityDuplicateMatchingRecord;
-            AdoxioSuitabilitySyncErrors = adoxioSuitabilitySyncErrors;
-            Owningbusinessunit = owningbusinessunit;
-            Ownerid = ownerid;
-            Owningteam = owningteam;
-            Owninguser = owninguser;
-            Modifiedonbehalfby = modifiedonbehalfby;
-            Modifiedby = modifiedby;
-            Createdonbehalfby = createdonbehalfby;
             Createdby = createdby;
+            Createdonbehalfby = createdonbehalfby;
+            Modifiedby = modifiedby;
+            Modifiedonbehalfby = modifiedonbehalfby;
+            Owninguser = owninguser;
+            Owningteam = owningteam;
+            Ownerid = ownerid;
+            Owningbusinessunit = owningbusinessunit;
+            AdoxioSuitabilitySyncErrors = adoxioSuitabilitySyncErrors;
+            AdoxioSuitabilityDuplicateMatchingRecord = adoxioSuitabilityDuplicateMatchingRecord;
+            AdoxioSuitabilityDuplicateBaseRecord = adoxioSuitabilityDuplicateBaseRecord;
+            AdoxioSuitabilityAsyncOperations = adoxioSuitabilityAsyncOperations;
+            AdoxioSuitabilityMailboxTrackingFolders = adoxioSuitabilityMailboxTrackingFolders;
+            AdoxioSuitabilityProcessSession = adoxioSuitabilityProcessSession;
+            AdoxioSuitabilityBulkDeleteFailures = adoxioSuitabilityBulkDeleteFailures;
             AdoxioSuitabilityPrincipalObjectAttributeAccesses = adoxioSuitabilityPrincipalObjectAttributeAccesses;
             AdoxioContactId = adoxioContactId;
             AdoxioLCRBDecisionById = adoxioLCRBDecisionById;
@@ -118,8 +118,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_lcrbdecisionmakertitle")]
-        public string AdoxioLcrbdecisionmakertitle { get; set; }
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -203,8 +203,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
+        [JsonProperty(PropertyName = "adoxio_lcrbdecisionmakertitle")]
+        public string AdoxioLcrbdecisionmakertitle { get; set; }
 
         /// <summary>
         /// </summary>
@@ -238,6 +238,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
         public string _owningbusinessunitValue { get; set; }
 
@@ -253,78 +258,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_decisionlettersent")]
         public bool? AdoxioDecisionlettersent { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_suitability_BulkDeleteFailures")]
-        public IList<MicrosoftDynamicsCRMbulkdeletefailure> AdoxioSuitabilityBulkDeleteFailures { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_suitability_ProcessSession")]
-        public IList<MicrosoftDynamicsCRMprocesssession> AdoxioSuitabilityProcessSession { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_suitability_MailboxTrackingFolders")]
-        public IList<MicrosoftDynamicsCRMmailboxtrackingfolder> AdoxioSuitabilityMailboxTrackingFolders { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_suitability_AsyncOperations")]
-        public IList<MicrosoftDynamicsCRMasyncoperation> AdoxioSuitabilityAsyncOperations { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_suitability_DuplicateBaseRecord")]
-        public IList<MicrosoftDynamicsCRMduplicaterecord> AdoxioSuitabilityDuplicateBaseRecord { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_suitability_DuplicateMatchingRecord")]
-        public IList<MicrosoftDynamicsCRMduplicaterecord> AdoxioSuitabilityDuplicateMatchingRecord { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_suitability_SyncErrors")]
-        public IList<MicrosoftDynamicsCRMsyncerror> AdoxioSuitabilitySyncErrors { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owningbusinessunit")]
-        public MicrosoftDynamicsCRMbusinessunit Owningbusinessunit { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ownerid")]
-        public MicrosoftDynamicsCRMprincipal Ownerid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owningteam")]
-        public MicrosoftDynamicsCRMteam Owningteam { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owninguser")]
-        public MicrosoftDynamicsCRMsystemuser Owninguser { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedby")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
+        [JsonProperty(PropertyName = "createdby")]
+        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
 
         /// <summary>
         /// </summary>
@@ -333,8 +273,68 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdby")]
-        public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
+        [JsonProperty(PropertyName = "modifiedby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owninguser")]
+        public MicrosoftDynamicsCRMsystemuser Owninguser { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owningteam")]
+        public MicrosoftDynamicsCRMteam Owningteam { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ownerid")]
+        public MicrosoftDynamicsCRMprincipal Ownerid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owningbusinessunit")]
+        public MicrosoftDynamicsCRMbusinessunit Owningbusinessunit { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_suitability_SyncErrors")]
+        public IList<MicrosoftDynamicsCRMsyncerror> AdoxioSuitabilitySyncErrors { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_suitability_DuplicateMatchingRecord")]
+        public IList<MicrosoftDynamicsCRMduplicaterecord> AdoxioSuitabilityDuplicateMatchingRecord { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_suitability_DuplicateBaseRecord")]
+        public IList<MicrosoftDynamicsCRMduplicaterecord> AdoxioSuitabilityDuplicateBaseRecord { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_suitability_AsyncOperations")]
+        public IList<MicrosoftDynamicsCRMasyncoperation> AdoxioSuitabilityAsyncOperations { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_suitability_MailboxTrackingFolders")]
+        public IList<MicrosoftDynamicsCRMmailboxtrackingfolder> AdoxioSuitabilityMailboxTrackingFolders { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_suitability_ProcessSession")]
+        public IList<MicrosoftDynamicsCRMprocesssession> AdoxioSuitabilityProcessSession { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_suitability_BulkDeleteFailures")]
+        public IList<MicrosoftDynamicsCRMbulkdeletefailure> AdoxioSuitabilityBulkDeleteFailures { get; set; }
 
         /// <summary>
         /// </summary>
