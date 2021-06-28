@@ -47,7 +47,13 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         Issued = 845280003,
         Denied = 845280000
     }
+/*
+    public enum EventType
+    {
+        Family = 
 
+    }
+*/
     public enum ApproverStatus
     {
         [EnumMember(Value = "Auto-Reviewed")]
