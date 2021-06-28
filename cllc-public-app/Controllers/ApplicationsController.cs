@@ -61,40 +61,41 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <returns></returns>
         private List<ApplicationSummary> GetApplicationSummariesByApplicant(string applicantId)
         {
+
+            // create a list to collect the application summaries
             var result = new List<ApplicationSummary>();
 
+            // get all the applications the applicant has
             var dynamicsApplicationList = _dynamicsClient.GetApplicationListByApplicant(applicantId);
+            // if we have some
             if (dynamicsApplicationList != null)
+                // loop through them
                 foreach (var dynamicsApplication in dynamicsApplicationList)
                 {
+                    // create a list to collect possible endorsement applications
                     var endorsements = new List<string>();
-                    //get endorsement application types
-                    if (dynamicsApplication.AdoxioLicenceType != null &&
-                        dynamicsApplication?.AdoxioApplicationTypeId?.AdoxioIsdefault == true && // Application for a licence
+                    // if the application is for a licence  or if its a relocation app
+                    // and it's been paid for
+                    if (((dynamicsApplication.AdoxioLicenceType != null &&
+                        dynamicsApplication?.AdoxioApplicationTypeId?.AdoxioIsdefault == true) ||
+                         dynamicsApplication?.AdoxioApplicationTypeId?.AdoxioIsrelocation == true )&& // Application for a licence
                         dynamicsApplication.AdoxioPaymentrecieved == true)
                     {
+                        // do a reverse lookup on the licence type
                         var expand = new List<string> { "adoxio_licencetypes_applicationtypes" };
                         var licenceType =
                             _dynamicsClient.Licencetypes.GetByKey(dynamicsApplication._adoxioLicencetypeValue,
                                 expand: expand);
+                        // to get which endorsement applications link to it
                         if (licenceType?.AdoxioLicencetypesApplicationtypes != null)
                             endorsements = licenceType.AdoxioLicencetypesApplicationtypes
                                 .Where(type => (type.AdoxioIsendorsement == true || type.AdoxioCopylicencetc == true) )
                                 .Select(type => type.AdoxioName)
                                 .ToList();
-                    }
-
-                    // hide terminated applications from view.
-                    if (dynamicsApplication.Statuscode == null || dynamicsApplication.Statuscode !=
-                        (int)AdoxioApplicationStatusCodes.Terminated
-                        && dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.Refused
-                        && dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.Cancelled
-                        && dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.TerminatedAndRefunded)
-                    {
+                    }                    
                         var row = dynamicsApplication.ToSummaryViewModel();
                         row.Endorsements = endorsements;
                         result.Add(row);
-                    }
                 }
 
             return result;
