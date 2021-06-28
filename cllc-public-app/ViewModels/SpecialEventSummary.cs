@@ -11,11 +11,14 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public DateTimeOffset? EventStartDate { get; set; }
         public string EventName { get; set; }
         public string InvoiceId { get; set; }
-        public string EventType {get; set;}
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public EventType EventType {get; set;}
+
         public bool? IsInvoicePaid { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
-        public EventStatus? EventStatus { get; set; }
+        public EventStatus EventStatus { get; set; }
 
 
         [JsonConverter(typeof(StringEnumConverter))]

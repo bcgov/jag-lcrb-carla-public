@@ -38,27 +38,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        public int? Top131 { get; set; }
+        public int? Top133 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        public int? Skip131 { get; set; }
+        public int? Skip133 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        public bool? Count131 { get; set; }
+        public bool? Count133 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        public string Filter131 { get; set; }
+        public string Filter133 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        public string Search131 { get; set; }
+        public string Search133 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client subscription.
@@ -174,6 +174,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IAssignmenthistories.
         /// </summary>
         public virtual IAssignmenthistories Assignmenthistories { get; private set; }
+
+        /// <summary>
+        /// Gets the IAuctionpermits.
+        /// </summary>
+        public virtual IAuctionpermits Auctionpermits { get; private set; }
+
+        /// <summary>
+        /// Gets the IAuctionpermitschedules.
+        /// </summary>
+        public virtual IAuctionpermitschedules Auctionpermitschedules { get; private set; }
 
         /// <summary>
         /// Gets the IAuditlogrequests.
@@ -983,6 +993,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             Applicenseechangebpfv2s = new Applicenseechangebpfv2s(this);
             Areas = new Areas(this);
             Assignmenthistories = new Assignmenthistories(this);
+            Auctionpermits = new Auctionpermits(this);
+            Auctionpermitschedules = new Auctionpermitschedules(this);
             Auditlogrequests = new Auditlogrequests(this);
             Businessaccounts = new Businessaccounts(this);
             Cannabisinventoryreports = new Cannabisinventoryreports(this);

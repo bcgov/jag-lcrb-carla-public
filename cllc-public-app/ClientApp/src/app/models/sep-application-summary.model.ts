@@ -4,7 +4,7 @@ import { SepCity } from "./sep-city.model";
 
 export class SepApplicationSummary {
   localId: string; // local memory primary key
-  lastCompletedStep: string;
+  lastStepCompleted: string;
   specialEventId: string; // server side primary key
   eventStartDate: Date | string;
   eventName: string;

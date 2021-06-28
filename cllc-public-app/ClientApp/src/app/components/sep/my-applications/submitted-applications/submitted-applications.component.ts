@@ -1,15 +1,15 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-import { PoliceTableElement } from '@components/police-representative/police-table-element';
-import { SepApplicationSummary } from '@models/sep-application-summary.model';
-import { SepApplication } from '@models/sep-application.model';
-import { PaymentDataService } from '@services/payment-data.service';
-import { IndexedDBService } from '@services/indexed-db.service';
-import { SpecialEventsDataService } from '@services/special-events-data.service';
-import { map } from 'rxjs/operators';
+import { Component, Input, OnInit, ViewChild } from "@angular/core";
+import { MatPaginator } from "@angular/material/paginator";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatSort } from "@angular/material/sort";
+import { MatTableDataSource } from "@angular/material/table";
+import { PoliceTableElement } from "@components/police-representative/police-table-element";
+import { SepApplicationSummary } from "@models/sep-application-summary.model";
+import { SepApplication } from "@models/sep-application.model";
+import { PaymentDataService } from "@services/payment-data.service";
+import { IndexedDBService } from "@services/indexed-db.service";
+import { SpecialEventsDataService } from "@services/special-events-data.service";
+import { map } from "rxjs/operators";
 import {
   faAward,
   faCopy,
@@ -33,13 +33,13 @@ import {
 import {
   faBan
 } from "@fortawesome/free-solid-svg-icons";
-import { SEP_APPLICATION_STEPS } from '@components/sep/sep-application/sep-application.component';
-import { Router } from '@angular/router';
+import { SEP_APPLICATION_STEPS } from "@components/sep/sep-application/sep-application.component";
+import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-submitted-applications',
-  templateUrl: './submitted-applications.component.html',
-  styleUrls: ['./submitted-applications.component.scss']
+  selector: "app-submitted-applications",
+  templateUrl: "./submitted-applications.component.html",
+  styleUrls: ["./submitted-applications.component.scss"]
 })
 export class SubmittedApplicationsComponent implements OnInit {
   faDownload = faDownload;
@@ -75,7 +75,7 @@ export class SubmittedApplicationsComponent implements OnInit {
 
   // angular material table columns to display
   columnsToDisplay = [
-    'eventStatusLabel', 'eventName', 'eventStartDate', 'dateSubmitted', 'actions'
+    "eventStatusLabel", "eventName", "eventStartDate", "dateSubmitted", "actions"
   ];
 
   constructor(private sepDataService: SpecialEventsDataService,
@@ -91,8 +91,8 @@ export class SubmittedApplicationsComponent implements OnInit {
 
 
   openApplication(app: SepApplicationSummary) {
-    if (app.eventStatus === 'Draft') {
-      this.router.navigateByUrl(`sep/application/${app.localId}/${this.getLastStep(app.lastCompletedStep)}`);
+    if (app.eventStatus === "Draft") {
+      this.router.navigateByUrl(`sep/application/${app.localId}/${this.getLastStep(app.lastStepCompleted)}`);
     } else {
       this.router.navigateByUrl(`sep/application-summary/${app.specialEventId}`);
     }
@@ -112,7 +112,7 @@ export class SubmittedApplicationsComponent implements OnInit {
         .subscribe(res => {
         },
           error => {
-            this.snackBar.open('Error submitting payment', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+            this.snackBar.open("Error submitting payment", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
           }
         );
     }
@@ -181,13 +181,13 @@ export class SubmittedApplicationsComponent implements OnInit {
  * */
 
   private submitPayment(applicationId: string) {
-    return this.paymentDataService.getPaymentURI('specialEventInvoice', applicationId)
+    return this.paymentDataService.getPaymentURI("specialEventInvoice", applicationId)
       .pipe(map(jsonUrl => {
-        window.location.href = jsonUrl['url'];
-        return jsonUrl['url'];
+        window.location.href = jsonUrl["url"];
+        return jsonUrl["url"];
       }, (err: any) => {
-        if (err._body === 'Payment already made') {
-          this.snackBar.open('Application payment has already been made.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        if (err._body === "Payment already made") {
+          this.snackBar.open("Application payment has already been made.", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
         }
       }));
   }
