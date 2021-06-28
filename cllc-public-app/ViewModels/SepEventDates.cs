@@ -15,5 +15,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public System.DateTimeOffset? ServiceEnd { get; set; }
         public int? Statuscode { get; set; }
         public int? Statecode { get; set; }
+        public string LiquorServiceHoursExtensionReason { get; set; }
+        public string DisturbancePreventionMeasuresDetails { get; set; }
     }
 }

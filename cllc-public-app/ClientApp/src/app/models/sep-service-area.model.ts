@@ -7,7 +7,7 @@ export class SepServiceArea {
     maximumNumberOfGuests: number;
     numberOfMinors: number;
     licencedAreaNumberOfMinors: number;
-    setting: number;
+    setting: string;
     statusCode: number;
     stateCode: number;
     eventName: string;
@@ -26,7 +26,7 @@ export class SepServiceArea {
 }
 
 export interface IAreaFormValue {
-  setting: number
+  setting: string;
   licencedAreaDescription: string;
   maximumNumberOfGuests: number;
   numberOfMinors: number;
