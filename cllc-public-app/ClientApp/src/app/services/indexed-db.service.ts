@@ -1,9 +1,12 @@
-import { Injectable } from '@angular/core';
-import { SepApplication } from '@models/sep-application.model';
-import { SepLocation } from '@models/sep-location.model';
-import { SepSchedule } from '@models/sep-schedule.model';
-import { SepServiceArea } from '@models/sep-service-area.model';
-import Dexie, { PromiseExtended, Table } from 'dexie';
+import { Injectable } from "@angular/core";
+import { AppState } from "@app/app-state/models/app-state";
+import { SepApplication } from "@models/sep-application.model";
+import { SepLocation } from "@models/sep-location.model";
+import { SepSchedule } from "@models/sep-schedule.model";
+import { SepServiceArea } from "@models/sep-service-area.model";
+import { User } from "@models/user.model";
+import { Store } from "@ngrx/store";
+import Dexie, { PromiseExtended, Table } from "dexie";
 
 @Injectable()
 export class IndexedDBService {
@@ -12,11 +15,22 @@ export class IndexedDBService {
   locations: Table<SepLocation, number>;
   serviceAreas: Table<SepServiceArea, number>;
   eventDates: Table<SepSchedule, number>;
+  userId: string;
 
-  constructor() {
-    this.db = new Dexie('SepApplicationDatabase');
+  constructor(private store: Store<AppState>) {
+    store.select(state => state.currentUserState.currentUser)
+      .subscribe(user => {
+        this.userId = `${user.accountid}${user.contactid}`;
+      });
+    this.db = new Dexie("SepApplicationDatabase");
     this.db.version(3).stores({
-      applications: '++localId, id, tempJobNumber,dateCreated,lastUpdated,eventName,applicantInfo,agreeToTnC,dateAgreedToTnC,stepsCompleted,eventStatus,totalServings,invoiceTrigger,eligibilityAtPrivateResidence,isMajorSignificance,isMajorSignificanceRational,eligibilityLocalSignificance,permitNumber,isTastingEvent,isBeerGarden,numMaxGuest',
+      applications: "++localId, agreeToTnC, applicantInfo, dateAgreedToTnC, dateCreated, eligibilityAtPrivateResidence, eligibilityLocalSignificance, eligibilityMajorSignificance, eligibilityMajorSignificanceRational, eventName, eventStatus, id, invoiceTrigger, isBeerGarden,numMaxGuest lastUpdated, permitNumber,isTastingEvent, stepsCompleted, tempJobNumber, totalServings",
+    });
+    this.db.version(4).stores({
+      applications: "++localId, agreeToTnC, applicantInfo, dateAgreedToTnC, dateCreated, eligibilityAtPrivateResidence, eligibilityLocalSignificance, eventName, eventStatus, invoiceTrigger, isBeerGarden, isMajorSignificance, isMajorSignificanceRational, isTastingEvent, lastUpdated, numMaxGuest permitNumber, stepsCompleted, tempJobNumber, totalServings",
+    });
+    this.db.version(4).stores({
+      applications: "++localId, userId, agreeToTnC, applicantInfo, dateAgreedToTnC, dateCreated, eligibilityAtPrivateResidence, eligibilityLocalSignificance, eventName, eventStatus, invoiceTrigger, isBeerGarden, isMajorSignificance, isMajorSignificanceRational, isTastingEvent, lastUpdated, numMaxGuest permitNumber, stepsCompleted, tempJobNumber, totalServings",
     });
     this.applications = this.db.table("applications");
 
@@ -25,6 +39,7 @@ export class IndexedDBService {
   public async saveSepApplication(data: SepApplication) {
     // Save Application
     let applicationId = data.localId;
+    data.userId = this?.userId;
     if (applicationId) { // update if exists
       await this.applications.update(applicationId, data);
     } else { // create and get new id
@@ -34,7 +49,7 @@ export class IndexedDBService {
   }
 
   public async getSepApplication(localId: number) {
-    let app = await this.applications.where({ localId }).first();
+    const app = await this.applications.where({ localId }).first();
     return app;
   }
 
@@ -43,6 +58,6 @@ export class IndexedDBService {
   }
 
   public async getSepApplications() {
-    return this.applications.toArray() as PromiseExtended<SepApplication[]>;
+    return this.applications.where({ userId: this?.userId }).toArray() as PromiseExtended<SepApplication[]>;
   }
 }
