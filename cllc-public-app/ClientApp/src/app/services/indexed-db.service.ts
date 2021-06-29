@@ -4,7 +4,6 @@ import { SepApplication } from "@models/sep-application.model";
 import { SepLocation } from "@models/sep-location.model";
 import { SepSchedule } from "@models/sep-schedule.model";
 import { SepServiceArea } from "@models/sep-service-area.model";
-import { User } from "@models/user.model";
 import { Store } from "@ngrx/store";
 import Dexie, { PromiseExtended, Table } from "dexie";
 
@@ -23,14 +22,8 @@ export class IndexedDBService {
         this.userId = `${user.accountid}${user.contactid}`;
       });
     this.db = new Dexie("SepApplicationDatabase");
-    this.db.version(3).stores({
-      applications: "++localId, agreeToTnC, applicantInfo, dateAgreedToTnC, dateCreated, eligibilityAtPrivateResidence, eligibilityLocalSignificance, eligibilityMajorSignificance, eligibilityMajorSignificanceRational, eventName, eventStatus, id, invoiceTrigger, isBeerGarden,numMaxGuest lastUpdated, permitNumber,isTastingEvent, stepsCompleted, tempJobNumber, totalServings",
-    });
-    this.db.version(4).stores({
-      applications: "++localId, agreeToTnC, applicantInfo, dateAgreedToTnC, dateCreated, eligibilityAtPrivateResidence, eligibilityLocalSignificance, eventName, eventStatus, invoiceTrigger, isBeerGarden, isMajorSignificance, isMajorSignificanceRational, isTastingEvent, lastUpdated, numMaxGuest permitNumber, stepsCompleted, tempJobNumber, totalServings",
-    });
-    this.db.version(4).stores({
-      applications: "++localId, userId, agreeToTnC, applicantInfo, dateAgreedToTnC, dateCreated, eligibilityAtPrivateResidence, eligibilityLocalSignificance, eventName, eventStatus, invoiceTrigger, isBeerGarden, isMajorSignificance, isMajorSignificanceRational, isTastingEvent, lastUpdated, numMaxGuest permitNumber, stepsCompleted, tempJobNumber, totalServings",
+    this.db.version(1).stores({
+      applications: "++localId, id, userId",
     });
     this.applications = this.db.table("applications");
 
