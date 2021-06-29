@@ -31,6 +31,38 @@
         </div>
 
         <hr>
+        <div *ngIf="trnId">
+            <!--<mat-icon aria-label="Print Page" style="text-decoration: solid">print</mat-icon>-->
+            <!-- <fa-icon [icon]="faPrint" class="fa-lg"></fa-icon> -->
+            <!-- <a href="javascript: void(0)"> Print Page</a> -->
+            <h2 style="color: green">Payment Approved</h2>
+            <p></p>
+            <div class="table" style="padding: 0px;">
+                <table>
+                    <tr>
+                        <td>Card Type</td>
+                        <td>{{cardType}}</td>
+                    </tr>
+                    <tr>
+                        <td>Date/Time</td>
+                        <td>{{trnDate}}</td>
+                    </tr>
+                    <tr>
+                        <td>Invoice Number</td>
+                        <td>{{invoice}}</td>
+                    </tr>
+                    <tr>
+                        <td>Transaction ID</td>
+                        <td>{{trnId}}</td>
+                    </tr>
+                    <tr>
+                        <td>Amount</td>
+                        <td>{{trnAmount | currency}}</td>
+                    </tr>
+                </table>
+            </div>
+            <hr>
+        </div>
 
         <h2>Summary</h2>
 
@@ -164,30 +196,36 @@
             <hr>
 
             <div class="d-flex">
-                <label>Estimated total liquor sales revenue</label> <span class="fee-amount">{{application?.totalRevenue | currency}}</span>
+                <label>Estimated total liquor sales revenue</label> <span class="fee-amount">{{application?.totalRevenue
+                    | currency}}</span>
             </div>
             <div class="d-flex">
-                <label>Estimated liquor purchase cost</label> <span class="fee-amount">{{application?.totalPurchaseCost | currency}}</span>
+                <label>Estimated liquor purchase cost</label> <span class="fee-amount">{{application?.totalPurchaseCost
+                    | currency}}</span>
             </div>
             <div class="d-flex">
-                <label>Estimated net proceeds/profit from liquor sales</label> <span class="fee-amount">{{application?.totalProceeds | currency}}</span>
+                <label>Estimated net proceeds/profit from liquor sales</label> <span
+                    class="fee-amount">{{application?.totalProceeds | currency}}</span>
             </div>
             <div class="d-flex">
-                <label>Total PST Amount Due</label> <span class="fee-amount">{{application?.netEstimatedPST | currency}}</span>
+                <label>Total PST Amount Due</label> <span class="fee-amount">{{application?.netEstimatedPST |
+                    currency}}</span>
             </div>
             <div class="d-flex">
                 <label>Application Fees (Based on 1 event location and capacity)*
-                    *0-500 – $25.00</label> <span class="fee-amount">{{application?.invoice?.totalamount - application?.netEstimatedPST | currency}}</span>
+                    *0-500 – $25.00</label> <span class="fee-amount">{{application?.invoice?.totalamount -
+                    application?.netEstimatedPST | currency}}</span>
             </div>
 
             <hr>
 
             <div class="d-flex total-fees-due">
-                <label>Total Fees Due Upon Approval</label> <span class="fee-amount">{{application?.invoice?.totalamount | currency}}</span>
+                <label>Total Fees Due Upon Approval</label> <span class="fee-amount">{{application?.invoice?.totalamount
+                    | currency}}</span>
             </div>
         </mat-expansion-panel>
 
-        <div class="d-flex">
+        <div  *ngIf="showSubmitButton" class="d-flex">
             <label>Declaration</label>
             <section class="declaration-content">
                 <span class="declaration-text">
@@ -203,9 +241,9 @@
                     misrepresented on this application.
                 </mat-checkbox>
             </section>
+            <hr>
         </div>
 
-        <hr>
 
         <div *ngIf="showSubmitButton" class="d-flex flex-row-reverse">
             <button mat-raised-button color="primary" (click)="submitApplication()">SUBMIT APPLICATION</button>
