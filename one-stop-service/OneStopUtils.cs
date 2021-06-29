@@ -17,6 +17,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Gov.Jag.Lcrb.OneStopService
 {
+    public enum ChangeNameType
+    {
+        ChangeName = 1,
+        Transfer = 2,
+        ThirdPartyOperator = 3
+    }
     public class OneStopUtils
     {
         public const string ASYNCHRONOUS = "A";
@@ -40,6 +46,7 @@ namespace Gov.Jag.Lcrb.OneStopService
         public const string DOCUMENT_SUBTYPE_CHANGESTATUS = "113";
         public const string DOCUMENT_SUBTYPE_CHANGENAME = "150";
         public const string DOCUMENT_SUBTYPE_CHANGENAME_TRANSFER = "155";
+        public const string DOCUMENT_SUBTYPE_CHANGENAME_THIRDPARTY = "154";
         public const string DOCUMENT_SUBTYPE_CHANGEADDRESS = "107";
 
         public const string SENDER_ID = "LCRB";
@@ -216,16 +223,26 @@ namespace Gov.Jag.Lcrb.OneStopService
             else
             {
                 string targetBusinessNumber = null;
+                
+                ChangeNameType changeNameType = ChangeNameType.ChangeName;
                 if (isTransfer && !string.IsNullOrEmpty(licence._adoxioProposedownerValue))
                 {
+                    changeNameType = ChangeNameType.Transfer;
                     var targetOwner = dynamicsClient.GetAccountById(licence._adoxioProposedownerValue);
                     if (targetOwner != null)
                     {
                         targetBusinessNumber = targetOwner.Accountnumber;
                     }
                 }
-                var innerXml = req.CreateXML(licence, isTransfer, targetBusinessNumber);
+                else
+                {
+                    if (!string.IsNullOrEmpty(licence._adoxioThirdpartyoperatoridValue))
+                    {
+                        changeNameType = ChangeNameType.ThirdPartyOperator;
+                    }
+                }
 
+                var innerXml = req.CreateXML(licence, changeNameType, targetBusinessNumber);
 
                 innerXml = _onestopRestClient.CleanXML(innerXml);
 
@@ -566,6 +583,7 @@ namespace Gov.Jag.Lcrb.OneStopService
                             case OneStopHubStatusChange.ChangeOfName:
                                 await SendChangeNameRest(hangfireContext, licenceId,
                                     queueItem.AdoxioOnestopmessageitemid, false);
+
                                 break;
                             case OneStopHubStatusChange.LicenceDeemedAtTransfer:
                                 await SendChangeNameRest(hangfireContext, licenceId,
