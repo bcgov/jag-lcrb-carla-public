@@ -11,6 +11,28 @@ import { IndexedDBService } from "@services/indexed-db.service";
 import { PaymentDataService } from "@services/payment-data.service";
 import { SpecialEventsDataService } from "@services/special-events-data.service";
 import { map, mergeMap } from "rxjs/operators";
+import {
+  faAward,
+  faBirthdayCake,
+  faBolt,
+  faBusinessTime,
+  faCalendarAlt,
+  faCertificate,
+  faCheck,
+  faDownload,
+  faExchangeAlt,
+  faExclamationTriangle,
+  faFlag,
+  faPencilAlt,
+  faQuestionCircle,
+  faShoppingCart,
+  faStopwatch,
+  faTrashAlt,
+  IconDefinition
+} from "@fortawesome/free-solid-svg-icons";
+import {
+  faBan
+} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: "app-summary",
@@ -23,6 +45,22 @@ export class SummaryComponent implements OnInit {
   mode: "readonlySummary" | "pendingReview" | "payNow" = "readonlySummary";
   _appID: number;
   application: SepApplication;
+  faDownLoad = faDownload;
+  faExclamationTriangle = faExclamationTriangle;
+  faFlag = faFlag;
+  faQuestionCircle = faQuestionCircle;
+  faPencilAlt = faPencilAlt;
+  faStopwatch = faStopwatch;
+  faCertificate = faCertificate;
+  faShoppingCart = faShoppingCart;
+  faTrashAlt = faTrashAlt;
+  faCalendarAlt = faCalendarAlt;
+  faBusinessTime = faBusinessTime;
+  faExchangeAlt = faExchangeAlt;
+  faBirthdayCake = faBirthdayCake;
+  faBolt = faBolt;
+  faCheck = faCheck;
+  faBan = faBan;
   /**
    * Controls whether or not the form show the submit button.
    * The value true by default
@@ -87,6 +125,35 @@ export class SummaryComponent implements OnInit {
         }
       });
     }
+  }
+
+  getStatusIcon(): IconDefinition {
+    switch(this.application?.eventStatus){
+      case ("Pending Review"):
+        return faStopwatch;
+      case ("Approved"):
+      case ("Reviewed"):
+        return faCheck;
+      case ("Issued"):
+        return faAward;
+      case ("Denied"):
+      case ("Cancelled"):
+        return faBan;
+      default:
+        return faStopwatch;
+    }
+  }
+
+  isReviewed(): boolean {
+    return ["Approved"].indexOf(this.application?.eventStatus) >= 0;
+  }
+
+  isDenied(): boolean {
+    return false;
+  }
+
+  isReadOnly(): boolean {
+    return ["Pending Review","Approved","Issued","Denied","Cancelled"].indexOf(this.application?.eventStatus) >= 0;
   }
 
   async submitApplication(): Promise<void> {
