@@ -20,11 +20,10 @@
                 </app-eligibility>
             </mat-step>
 
-
             <mat-step [completed]="isStepCompleted(step)" *ngIf="step === 'event'">
                 <ng-template matStepLabel>Event</ng-template>
                 <app-event [localId]="localId" *ngIf="stepper.selectedIndex === index" class="w-100"
-                    (saveComplete)="completeStep(step, stepper, $event, true);" #event>
+                    (saveComplete)="completeStep(step, stepper, $event);" #event>
                 </app-event>
             </mat-step>
 
@@ -37,11 +36,10 @@
 
             <mat-step [completed]="isStepCompleted(step)" *ngIf="step === 'summary'">
                 <ng-template matStepLabel>Summary</ng-template>
-                <app-summary (saveComplete)="completeStep(step, stepper, $event)" [localId]="localId"
+                <app-summary [localId]="localId"
                     [account]="account" *ngIf="stepper.selectedIndex === index" class="w-100" #summary>
                 </app-summary>
             </mat-step>
-
         </ng-container>
     </mat-horizontal-stepper>
 </div>
