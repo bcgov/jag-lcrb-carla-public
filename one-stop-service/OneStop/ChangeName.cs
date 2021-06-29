@@ -16,7 +16,7 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
          * XML Message sent to the Hub broadcasting the details of the new cannabis licence issued.
          * The purpose is to broadcast licence details to partners subscribed to the Hub
          */
-        public string CreateXML(MicrosoftDynamicsCRMadoxioLicences licence, bool isTransfer, string targetBusinessNumber)
+        public string CreateXML(MicrosoftDynamicsCRMadoxioLicences licence, ChangeNameType changeNameType, string targetBusinessNumber)
         {
             if (licence == null)
             {
@@ -34,10 +34,10 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
                 licence.AdoxioBusinessprogramaccountreferencenumber = "1";
             }
             var sbnChangeStatus = new SBNChangeName();
-            sbnChangeStatus.header = GetHeader(licence, isTransfer);
+            sbnChangeStatus.header = GetHeader(licence, changeNameType);
 
 
-            sbnChangeStatus.body = GetBody(licence, isTransfer, targetBusinessNumber);
+            sbnChangeStatus.body = GetBody(licence, changeNameType, targetBusinessNumber);
 
             var serializer = new XmlSerializer(typeof(SBNChangeName));
             using (StringWriter textWriter = new StringWriter())
@@ -47,22 +47,24 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
             }
         }
 
-        private SBNChangeNameHeader GetHeader(MicrosoftDynamicsCRMadoxioLicences licence, bool isTransfer)
+        private SBNChangeNameHeader GetHeader(MicrosoftDynamicsCRMadoxioLicences licence, ChangeNameType changeNameType)
         {
             var header = new SBNChangeNameHeader();
 
             header.requestMode = OneStopUtils.ASYNCHRONOUS;
-            if (isTransfer)
+            switch (changeNameType)
             {
-                header.documentSubType = OneStopUtils.DOCUMENT_SUBTYPE_CHANGENAME_TRANSFER;
-            }
-            else
-            {
-                header.documentSubType = OneStopUtils.DOCUMENT_SUBTYPE_CHANGENAME;
+                case ChangeNameType.ChangeName:
+                    header.documentSubType = OneStopUtils.DOCUMENT_SUBTYPE_CHANGENAME;
+                    break;
+                case ChangeNameType.ThirdPartyOperator:
+                    header.documentSubType = OneStopUtils.DOCUMENT_SUBTYPE_CHANGENAME_THIRDPARTY;
+                    break;
+                case ChangeNameType.Transfer:
+                    header.documentSubType = OneStopUtils.DOCUMENT_SUBTYPE_CHANGENAME_TRANSFER;
+                    break;
             }
             
-
-
             header.senderID = OneStopUtils.SENDER_ID;
             header.receiverID = OneStopUtils.RECEIVER_ID;
             //any note wanted by LCRB. Currently in liquor is: licence Id, licence number - sequence number
@@ -100,7 +102,7 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
             return userCredentials;
         }
 
-        private SBNChangeNameBody GetBody(MicrosoftDynamicsCRMadoxioLicences licence, bool isTransfer, string targetBusinessNumber)
+        private SBNChangeNameBody GetBody(MicrosoftDynamicsCRMadoxioLicences licence, ChangeNameType changeNameType, string targetBusinessNumber)
         {
             var body = new SBNChangeNameBody();
 
@@ -122,7 +124,7 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
             // partnerInfo1
             body.partnerInfo1 = licence.AdoxioLicencenumber;
 
-            if (isTransfer)
+            if (changeNameType == ChangeNameType.Transfer)
             {
                 body.partnerInfo2 = targetBusinessNumber;
             }
