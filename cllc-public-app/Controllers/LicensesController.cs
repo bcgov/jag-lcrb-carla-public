@@ -1394,8 +1394,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 MicrosoftDynamicsCRMadoxioHoursofserviceCollection hours = _dynamicsClient.Hoursofservices.Get(filter: $"_adoxio_licence_value eq {licenceId} and _adoxio_endorsement_value eq null");
 
-                if (hours.Value.Count > 0)
+                if (hours.Value.Count > 0 && 
+                    adoxioLicense.AdoxioLicenceType.AdoxioName != "Wine Store" &&
+                    adoxioLicense.AdoxioLicenceType.AdoxioName != "Licensee Retail Store" && 
+                    adoxioLicense.AdoxioLicenceType.AdoxioName != "Rural Licensee Retail Store")
                 {
+
+                    
 
                     MicrosoftDynamicsCRMadoxioHoursofservice hoursVal = hours.Value.First();
 
@@ -1433,27 +1438,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             </tr></table>";
                 }
 
+
+                // put together the parameters
                 Dictionary<string, string> parameters = new Dictionary<string, string>();
-                /* if (adoxioLicense.AdoxioLicenceType.AdoxioName == "Cannabis Retail Store")
-                {
-                    parameters = new Dictionary<string, string>
-                    {
-                        { "title", "Cannabis_Licence" },
-                        { "licenceNumber", adoxioLicense.AdoxioLicencenumber },
-                        { "establishmentName", adoxioLicense.AdoxioEstablishment?.AdoxioName },
-                        { "establishmentStreet", adoxioLicense.AdoxioEstablishment?.AdoxioAddressstreet },
-                        { "establishmentCity", adoxioLicense.AdoxioEstablishment?.AdoxioAddresscity + ", B.C." },
-                        { "establishmentPostalCode", adoxioLicense.AdoxioEstablishment?.AdoxioAddresspostalcode },
-                        { "licenceType", adoxioLicense.AdoxioLicenceType?.AdoxioName },
-                        { "licencee", adoxioLicense.AdoxioLicencee?.Name },
-                        { "effectiveDate", effectiveDateParam },
-                        { "expiryDate", expiraryDateParam },
-                        { "restrictionsText", termsAndConditions },
-                        { "endorsementsText", endorsementsText },
-                        { "storeHours", storeHours}
-                    };
-                }
-                else */
+
                 if (adoxioLicense.AdoxioLicenceType.AdoxioName == "Marketing")
                 {
                     parameters = new Dictionary<string, string>
@@ -1503,10 +1491,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 else // handle other types such as catering
                 {
                     String typeLabel = adoxioLicense?.AdoxioLicenceSubCategoryId?.AdoxioName != null ? adoxioLicense.AdoxioLicenceSubCategoryId?.AdoxioName : adoxioLicense.AdoxioLicenceType?.AdoxioName;
-
-                    // adoxioLicense.AdoxioLicenceType?.AdoxioName
-
-                    //adoxioLicense.AdoxioLicenceSubCategoryId?
 
                     parameters = new Dictionary<string, string>
                     {
