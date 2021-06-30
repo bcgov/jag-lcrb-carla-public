@@ -49,6 +49,7 @@ export class SummaryComponent implements OnInit {
   paymentTransactionTitle: string;
   paymentTransactionMessage: string;
   loaded: boolean;
+  savingToAPI: boolean;
 
   @Input() set localId(value: number) {
     this._appID = value;
@@ -202,6 +203,7 @@ export class SummaryComponent implements OnInit {
   }
 
   async submitApplication(): Promise<void> {
+    this.savingToAPI = true;
     const appData = await this.db.getSepApplication(this.localId);
     if (appData.id) { // do an update ( the record exists in dynamics)
       const result = await this.sepDataService.updateSepApplication({ ...appData, eventStatus: "Submitted" } as SepApplication, appData.id)
@@ -216,6 +218,7 @@ export class SummaryComponent implements OnInit {
         this.localId = this.localId; // trigger data refresh
       }
     }
+    this.savingToAPI = false;
   }
 
   payNow() {
