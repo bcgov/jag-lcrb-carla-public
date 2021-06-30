@@ -1,9 +1,58 @@
 <ng-container *ngIf="mode === 'readonlySummary'">
+
+  <div class="form-wrapper-summary" *ngIf="application">
+
+    <div class="row" style="padding-left:50px; padding-right: 30px; max-width:1000px; margin-left:5px;">
+      <div style="width: 70%">
+      <h1 class="mat-heading">{{application?.eventName}}</h1>
+      <h3>Start Date: {{application?.eventStartDate | date: 'dd MMM yyyy'}}</h3>
+      <h3>Application Number: {{application.specialEventPermitNumber}}</h3>
+    </div>
+
+
+  <div style="margin-top: 30px; text-align: center; width: 30%; ">
+    <!-- approve and deny buttons -->
+
+    <mat-card style="background-color: #e0e0e0; min-height: 200px;">
+
+    <section *ngIf="this.isReviewed()">
+      <!--if review-->
+      <h3><fa-icon [icon]="getStatusIcon()" style="margin-right: 10px;"></fa-icon>{{application?.eventStatus}}</h3>
+      <p>This application for liquor service has been reviewed and accepted.</p>
+      <p>
+        Your may now pay for your application
+      </p>
+        <button mat-raised-button (click)="payNow()">Pay Now</button>
+    </section>
+
+    <section *ngIf="application?.eventStatus == 'Pending Review'">
+      <!-- if denied -->
+      <h3><fa-icon [icon]="getStatusIcon()" style="margin-right: 10px;"></fa-icon>Pending Review</h3>
+      <p>Your application is currently under review by the LCRB and police in your local area.</p>
+      <p *ngIf="application.policeDecisionBy">The liquor service for this event is currently under review by {{application.policeDecisionBy?.name}}.</p>
+    </section>
+
+    <section *ngIf="this.isDenied()">
+      <!-- if denied -->
+      <h3><fa-icon [icon]="getStatusIcon()" style="margin-right: 10px;"></fa-icon>{{application?.eventStatus}}</h3>
+      <p>Liquor service for this event has been {{application?.eventStatus}} for the following reason:</p>
+      <p><em>{{application?.denialReason}}</em></p>
+      <p><em>{{application?.cancelReason}}</em></p>
+    </section>
+
+      <br>
+      <a [href]="'api/special-events/applicant/' + application.specialEventId + '/summary/summary.pdf'" target="_blank"><fa-icon [icon]="faDownload" style="margin-right: 10px; color: #41598b;"></fa-icon>Print Summary</a>
+      <br>
+
+  </mat-card>
+  </div>
+  </div>
+
+
     <div class="form-wrapper-summary" [ngClass]="{'form-wrapper': !showSubmitButton}">
-        <h3 *ngIf="application?.specialEventPermitNumber">Application number: {{application?.specialEventPermitNumber}}
-        </h3>
+        <section *ngIf="!isReadOnly()">
         <p>
-            Here’s a summary of your event. Does everything look right?
+            Here’s a summary of your event. Does everything look right? {{application?.eventStatus}}
         </p>
 
         <p>
@@ -15,11 +64,6 @@
             final
             declaration and submit your application.
         </p>
-
-        <p>
-            To edit, click the pencil icon next to the section you wish to update.
-        </p>
-
         <div>
             <h3>IMPORTANT</h3>
             <span>Changes cannot be made once your application is submitted.</span>
@@ -29,6 +73,8 @@
                 999 7656 or email LCRB.Sep@gov.bc.ca
             </span>
         </div>
+
+      </section>
 
         <hr>
 
@@ -93,7 +139,7 @@
         <mat-expansion-panel [expanded]="true" *ngFor="let loc of application?.eventLocations; let i = index;">
             <mat-expansion-panel-header>
                 <mat-panel-title>
-                    EVENT LOCATION {{i+1}}
+                    EVENT LOCATION ({{i+1}} of {{application?.eventLocations.length}})
                 </mat-panel-title>
             </mat-expansion-panel-header>
             <div class="d-flex">
@@ -128,7 +174,7 @@
             </section>
 
             <section *ngFor="let eventDate of loc.eventDates; let j = index;">
-                <h4>Event date {{j+1}}</h4>
+                <h4>EVENT DATE ({{j+1}} of {{loc.eventDates.length}})</h4>
                 <div class="d-flex">
                     <label>Start Date</label> <span>{{eventDate.eventDate | date: 'dd MMM yyyy'}}</span>
                 </div>
@@ -137,7 +183,7 @@
                 </div>
                 <div class="d-flex">
                     <label>Liquor Service</label> <span>{{eventDate.serviceStartValue}} -
-                        {{eventDate.serviceStartValue}}</span>
+                        {{eventDate.serviceEndValue}}</span>
                 </div>
             </section>
         </mat-expansion-panel>
@@ -149,35 +195,35 @@
                 </mat-panel-title>
             </mat-expansion-panel-header>
 
-            <label>Liquor Quantities</label>
+            <h4>LIQUOR QUANTITIES</h4>
             <div class="d-flex">
-                <label>Draught Beer</label> <span class="fee-amount">{{application?.beer || 0}} %</span>
+                <label>Beer:</label> <span class="fee-amount">{{application?.beer || 0}} %</span>
             </div>
             <div class="d-flex">
-                <label>Wine</label> <span class="fee-amount">{{application?.wine || 0}} %</span>
+                <label>Wine:</label> <span class="fee-amount">{{application?.wine || 0}} %</span>
             </div>
             <div class="d-flex">
-                <label>Spirits</label> <span class="fee-amount">{{application?.spirits || 0}} %</span>
+                <label>Spirits:</label><span class="fee-amount">{{application?.spirits || 0}} %</span>
             </div>
 
 
             <hr>
 
             <div class="d-flex">
-                <label>Estimated total liquor sales revenue</label> <span class="fee-amount">{{application?.totalRevenue | currency}}</span>
+                <label>Est. Total Liquor Sales Revenue</label> <span class="fee-amount">{{application?.totalRevenue | currency}}</span>
             </div>
             <div class="d-flex">
-                <label>Estimated liquor purchase cost</label> <span class="fee-amount">{{application?.totalPurchaseCost | currency}}</span>
+                <label>Est. Liquor Purchase Cost</label> <span class="fee-amount">{{application?.totalPurchaseCost | currency}}</span>
             </div>
             <div class="d-flex">
-                <label>Estimated net proceeds/profit from liquor sales</label> <span class="fee-amount">{{application?.totalProceeds | currency}}</span>
+                <label>Est. Net Proceeds/Profit From Liquor Sales</label> <span class="fee-amount">{{application?.totalProceeds | currency}}</span>
             </div>
             <div class="d-flex">
-                <label>Total PST Amount Due</label> <span class="fee-amount">{{application?.netEstimatedPST | currency}}</span>
+                <label>Total PST Due</label> <span class="fee-amount">{{application?.netEstimatedPST | currency}}</span>
             </div>
             <div class="d-flex">
-                <label>Application Fees (Based on 1 event location and capacity)*
-                    *0-500 – $25.00</label> <span class="fee-amount">{{application?.invoice?.totalamount - application?.netEstimatedPST | currency}}</span>
+                <label>Application Fees <br><em>(based on {{application?.eventLocations.length}} event location<span *ngIf="application?.eventLocations.length > 1">s</span> and capacity)</em>
+                    </label> <span class="fee-amount">{{application?.invoice?.totalamount - application?.netEstimatedPST | currency}}</span>
             </div>
 
             <hr>
@@ -187,7 +233,7 @@
             </div>
         </mat-expansion-panel>
 
-        <div class="d-flex">
+        <div class="d-flex" *ngIf="!isReadOnly()">
             <label>Declaration</label>
             <section class="declaration-content">
                 <span class="declaration-text">
@@ -207,11 +253,12 @@
 
         <hr>
 
-        <div *ngIf="showSubmitButton" class="d-flex flex-row-reverse">
+        <div *ngIf="showSubmitButton && !isReadOnly()" class="d-flex flex-row-reverse">
             <button mat-raised-button color="primary" (click)="submitApplication()">SUBMIT APPLICATION</button>
             <button mat-raised-button color="secondary" class="mr-2">BACK</button>
         </div>
     </div>
+  </div>
 </ng-container>
 
 <div *ngIf="mode === 'pendingReview'">
@@ -221,7 +268,7 @@
     <button mat-raised-button routerLink="/sep/my-applications">Return to My Applications</button>
 </div>
 
-<div *ngIf="mode === 'payNow'">
+<div *ngIf="mode === 'payNow' && !isReadOnly()">
     <p>
         Your may now pay for your application
     </p>

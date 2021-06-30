@@ -1,7 +1,7 @@
 
 
 <div class="row mb-3">
-    <div class="col" >
+    <div >
       <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z0 w-100">
         <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
@@ -40,7 +40,7 @@
               <fa-icon [icon]="getStatusIcon(row.eventStatus)" style="margin-right: 10px;"></fa-icon>{{row.eventStatus ? row.eventStatus : "Draft"}}
             </span>
             <span *ngIf="row.eventStatus === 'Approved'" style='font-size: 20px; color: #fcba19; font-weight:600;'>
-              <fa-icon [icon]="getStatusIcon(row.eventStatus)" style="margin-right: 10px;"></fa-icon>{{row.eventStatus ? row.eventStatus : "Draft"}}
+              <fa-icon [icon]="getStatusIcon(row.eventStatus)" style="margin-right: 10px;"></fa-icon>Payment Required
             </span>
             <span *ngIf="row.eventStatus !== 'Issued' && row.eventStatus != 'Approved'" style='font-size: 20px; font-weight:600;'>
               <fa-icon [icon]="getStatusIcon(row.eventStatus)" style="margin-right: 10px;"></fa-icon>{{row.eventStatus ? row.eventStatus : "Draft"}}

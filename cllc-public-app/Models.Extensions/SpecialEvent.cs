@@ -135,14 +135,14 @@ namespace Gov.Lclb.Cllb.Public.Models
                         .FirstOrDefault();
                 }
 
-                result.TotalProceeds = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
-                    .Sum(forecast => forecast.AdoxioEstimatedrevenue - forecast.AdoxioEstimatedcost);
+                result.TotalProceeds = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent == null ? 0 : specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
+                    .Sum(forecast => forecast.AdoxioEstimatedrevenue.GetValueOrDefault() - forecast.AdoxioEstimatedcost.GetValueOrDefault());
 
-                result.TotalRevenue = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
-                    .Sum(forecast => forecast.AdoxioEstimatedrevenue);
+                result.TotalRevenue = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent == null ? 0 : specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
+                    .Sum(forecast => forecast.AdoxioEstimatedrevenue.GetValueOrDefault());
 
-                result.TotalPurchaseCost = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
-                    .Sum(forecast => forecast.AdoxioEstimatedcost);
+                result.TotalPurchaseCost = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent == null ? 0 : specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
+                    .Sum(forecast => forecast.AdoxioEstimatedcost.GetValueOrDefault());
             }
             return result;
         }
