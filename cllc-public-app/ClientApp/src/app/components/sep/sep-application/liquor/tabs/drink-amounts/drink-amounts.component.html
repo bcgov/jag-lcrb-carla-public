@@ -67,5 +67,8 @@
     </div>
 
     <button mat-raised-button color="secondary" class="mr-3" (click)="back.emit(true)">BACK</button>
-    <button mat-raised-button color="primary" (click)="next(planner)">NEXT</button>
+    <button [disabled]="savingToAPI" mat-raised-button color="primary" (click)="next(planner)">
+        <span>NEXT</span>
+        <mat-progress-bar *ngIf="savingToAPI" mode="indeterminate"></mat-progress-bar>
+    </button>
 </form>

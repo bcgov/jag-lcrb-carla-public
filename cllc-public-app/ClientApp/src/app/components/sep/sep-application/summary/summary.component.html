@@ -225,7 +225,7 @@
             </div>
         </mat-expansion-panel>
 
-        <div  *ngIf="showSubmitButton" class="d-flex">
+        <div *ngIf="showSubmitButton" class="d-flex">
             <label>Declaration</label>
             <section class="declaration-content">
                 <span class="declaration-text">
@@ -246,7 +246,10 @@
 
 
         <div *ngIf="showSubmitButton" class="d-flex flex-row-reverse">
-            <button mat-raised-button color="primary" (click)="submitApplication()">SUBMIT APPLICATION</button>
+            <button [disabled]="savingToAPI" mat-raised-button color="primary" (click)="submitApplication()">
+                <span>SUBMIT APPLICATION</span>
+                <mat-progress-bar *ngIf="savingToAPI" mode="indeterminate"></mat-progress-bar>
+            </button>
             <button mat-raised-button color="secondary" class="mr-2">BACK</button>
         </div>
     </div>
