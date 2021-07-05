@@ -17,11 +17,10 @@ import { Store } from "@ngrx/store";
 import { AppState } from "@app/app-state/models/app-state";
 import { SetIndigenousNationModeAction } from "@app/app-state/actions/app-state.action";
 import { PaymentDataService } from "@services/payment-data.service";
-import { CRS_RENEWAL_LICENCE_TYPE_NAME, LIQUOR_RENEWAL_LICENCE_TYPE_NAME } from
-  "@components/licences/licences.component";
+import { CRS_RENEWAL_LICENCE_TYPE_NAME, LIQUOR_RENEWAL_LICENCE_TYPE_NAME } from "@components/licences/licences.component";
 import { faPencilAlt, faPlus, faShoppingCart, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
-import * as moment from 'moment';
 import { UserDataService } from "@services/user-data.service";
+import { differenceInDays, startOfDay, startOfToday } from "date-fns";
 
 
 export const UPLOAD_FILES_MODE = "UploadFilesMode";
@@ -645,15 +644,15 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   }
 
   isAboutToExpire(expiryDate: string) {
-    const now = moment(new Date()).startOf("day");
-    const expiry = moment(expiryDate).startOf("day");
-    const diff = expiry.diff(now, "days") + 1;
+    const now = startOfToday();
+    const expiry = startOfDay(new Date(expiryDate));
+    const diff = differenceInDays(now, expiry) + 1;
     return diff <= 60 || expiry < now;
   }
 
   licenceHasExpired(expiryDate: string) {
-    const now = moment(new Date()).startOf("day");
-    const expiry = moment(expiryDate).startOf("day");
+    const now = startOfToday();
+    const expiry = startOfDay(new Date(expiryDate));
     return expiry < now;
   }
 
