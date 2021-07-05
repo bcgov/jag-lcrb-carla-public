@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { LicenseeChangeLog } from "@models/licensee-change-log.model";
 import { FormBase } from "@shared/form-base";
-import * as moment from "moment";
+import { startOfToday, subDays } from "date-fns";
 
 @Component({
   selector: "app-organization-leadership",
@@ -20,21 +20,22 @@ export class OrganizationLeadershipComponent extends FormBase {
     private dialogRef: MatDialogRef<OrganizationLeadershipComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     super();
-    this.maxDate19 = moment(new Date()).startOf("day").subtract(19, "year").toDate(); // 19 years in the past
+    // max date is 19 years ago
+    this.maxDate19 = subDays(startOfToday(), 19);
     this.parentName = data.parentName;
     this.form = fb.group({
-        id: [""],
-        isDirectorNew: [false],
-        isOfficerNew: [false],
-        isManagerNew: [false],
-        firstNameNew: ["", Validators.required],
-        lastNameNew: ["", Validators.required],
-        emailNew: ["", [Validators.email, Validators.required]],
-        isIndividual: [true],
-        dateofBirthNew: ["", Validators.required],
-        titleNew: [""],
-        dateofappointment: ["", Validators.required]
-      },
+      id: [""],
+      isDirectorNew: [false],
+      isOfficerNew: [false],
+      isManagerNew: [false],
+      firstNameNew: ["", Validators.required],
+      lastNameNew: ["", Validators.required],
+      emailNew: ["", [Validators.email, Validators.required]],
+      isIndividual: [true],
+      dateofBirthNew: ["", Validators.required],
+      titleNew: [""],
+      dateofappointment: ["", Validators.required]
+    },
       { validator: this.dateLessThanToday("dateofappointment") }
     );
 
