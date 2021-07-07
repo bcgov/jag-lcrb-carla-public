@@ -415,13 +415,13 @@ export class LicenceRowComponent extends FormBase implements OnInit {
         // see if there is an existing Marketing renewal application for this licence
         renewalApplicationTypeName = this.ApplicationTypeNames.MarketingRenewal;
         renewalApplication = licence.actionApplications.find(app =>
-          app.applicationTypeName === this.ApplicationTypeNames.MarketingRenewal && app.applicationStatus !== "Active");
+          app.applicationTypeName === this.ApplicationTypeNames.MarketingRenewal && app.applicationStatus !== "Approved");
       } else {
         // if it's a CRS Licence
         // see if there is an existing CRS renewal application for this licence
         renewalApplicationTypeName = this.ApplicationTypeNames.CRSRenewal;
         renewalApplication = licence.actionApplications.find(app =>
-          app.applicationTypeName === this.ApplicationTypeNames.CRSRenewal && app.applicationStatus !== "Active");
+          app.applicationTypeName === this.ApplicationTypeNames.CRSRenewal && app.applicationStatus !== "Approved");
       }
 
     } else {
@@ -432,7 +432,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
 
       // look for a liquor renewal application
       renewalApplication = licence.actionApplications.find(app =>
-        app.applicationTypeName === this.ApplicationTypeNames.LiquorRenewal && app.applicationStatus !== "Active");
+        app.applicationTypeName === this.ApplicationTypeNames.LiquorRenewal && app.applicationStatus !== "Approved");
 
     }
 
@@ -443,6 +443,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
       // otherwise if there's a paid renewal application
     } else if (renewalApplication && renewalApplication.isPaid) {
       // that shouldnt have happened
+      //debugger;
       this.snackBar.open("Renewal application already submitted",
         "Fail",
         { duration: 3500, panelClass: ["red-snackbar"] });
