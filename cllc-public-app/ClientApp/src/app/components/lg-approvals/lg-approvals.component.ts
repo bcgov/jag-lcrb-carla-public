@@ -5,8 +5,8 @@ import { Account } from "@models/account.model";
 import { ApplicationDataService } from "@services/application-data.service";
 import { Application } from "@models/application.model";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import * as moment from "moment";
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
+import { startOfToday, add, differenceInDays } from "date-fns";
 
 @Component({
   selector: "app-lg-approvals",
@@ -38,24 +38,24 @@ export class LgApprovalsComponent implements OnInit {
     // get approval applications
     this.busy = this.applicationDataService.getLGApprovalApplications()
       .subscribe(applications => {
-          this.applications = applications || [];
-          this.applicationsDecisionNotMade =
-            this.applications.filter(app => !app.lGDecisionSubmissionDate &&
-              app.applicationType &&
-              (app.applicationType.isShowLGINApproval ||
-                (app.applicationStatus === "Pending for LG/FN/Police Feedback"
-                 && app?.applicationType?.isShowLGZoningConfirmation !== true
-                )
-              ) 
-              );
-          this.applicationsForZoning =
-            this.applications.filter(app => !app.lGDecisionSubmissionDate &&
-              app.applicationType &&
-              app.applicationType.isShowLGZoningConfirmation);
-          this.applicationsDecisionMadeButNoDocs =
-            this.applications.filter(app => app.lGDecisionSubmissionDate && app.lGApprovalDecision === "Pending");
-          this.dataLoaded = true;
-        },
+        this.applications = applications || [];
+        this.applicationsDecisionNotMade =
+          this.applications.filter(app => !app.lGDecisionSubmissionDate &&
+            app.applicationType &&
+            (app.applicationType.isShowLGINApproval ||
+              (app.applicationStatus === "Pending for LG/FN/Police Feedback"
+                && app?.applicationType?.isShowLGZoningConfirmation !== true
+              )
+            )
+          );
+        this.applicationsForZoning =
+          this.applications.filter(app => !app.lGDecisionSubmissionDate &&
+            app.applicationType &&
+            app.applicationType.isShowLGZoningConfirmation);
+        this.applicationsDecisionMadeButNoDocs =
+          this.applications.filter(app => app.lGDecisionSubmissionDate && app.lGApprovalDecision === "Pending");
+        this.dataLoaded = true;
+      },
         error => {
           this.snackBar.open(`An error occured while getting approval applications`,
             "Fail",
@@ -65,11 +65,8 @@ export class LgApprovalsComponent implements OnInit {
   }
 
   get90dayCount(submissionDate: Date): number {
-    const submission = moment(submissionDate)
-      .startOf("day")
-      .add(90, "day");
-    const current = moment().startOf("day");
-    const count = submission.diff(current, "days");
+    const submission = add(new Date(submissionDate), { days: 90});
+    const count =  differenceInDays(startOfToday(), submission);
     return count;
   }
 
