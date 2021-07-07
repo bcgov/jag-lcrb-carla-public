@@ -420,8 +420,11 @@
 
   <td style="background-color: #E1E8F2; padding: 10px;">
     <div style="font-weight: 600; text-transform: uppercase;">
-      <span *ngIf="!isApprovedByLGAndNotSubmitted(item)">
+      <span *ngIf="!isApprovedByLGAndNotSubmitted(item) && item.applicationStatus !== 'PendingForLicenceFee'">
         {{item.applicationStatus}}
+      </span>
+      <span *ngIf="item.applicationStatus == 'PendingForLicenceFee'">
+        Pending Licence Fee
       </span>
 
       <span *ngIf="isApprovedByLGAndNotSubmitted(item)">
@@ -443,7 +446,7 @@
       This transfer application has not yet been submitted.
     </p>
 
-    <p *ngIf="item.applicationStatus === 'Pending Licence Fee'">
+    <p *ngIf="item.applicationStatus === 'PendingForLicenceFee'">
 
       <a href="javascript:void(0);" (click)="payLicenceFee(item)" class="missing">
         <span>
