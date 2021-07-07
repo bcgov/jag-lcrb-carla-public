@@ -7,7 +7,6 @@ import { ApplicationTypeNames } from "@models/application-type.model";
 import { FormBase } from "@shared/form-base";
 import { takeWhile } from "rxjs/operators";
 import { ApplicationLicenseSummary } from "@models/application-license-summary.model";
-import * as moment from "moment";
 import { PaymentDataService } from "@services/payment-data.service";
 import { EstablishmentDataService } from "@services/establishment-data.service";
 import { FormBuilder, FormGroup } from "@angular/forms";
@@ -33,6 +32,7 @@ import {
 import {
   faBan
 } from "@fortawesome/free-solid-svg-icons";
+import { differenceInDays, isAfter, startOfDay, startOfToday } from "date-fns";
 
 
 export const UPLOAD_FILES_MODE = "UploadFilesMode";
@@ -42,7 +42,7 @@ export const LIQUOR_RENEWAL_LICENCE_TYPE_NAME = "liquor";
 
 const ACTIVE = "Active";
 const RENEWAL_DUE = "Renewal Due";
-const NOW = moment(new Date()).startOf("day");
+const NOW = startOfToday();
 
 @Component({
   selector: "app-licence-row",
@@ -294,13 +294,15 @@ export class LicenceRowComponent extends FormBase implements OnInit {
   }
 
   isExpired(licence: ApplicationLicenseSummary) {
-    return NOW.diff(moment(licence.expiryDate).startOf("day")) > 0 && (licence.status === "Active" || licence.status === "Expired");
+    // if NOW is after licence.expiryDate then expired is true
+    const expired = isAfter(NOW, startOfDay(licence.expiryDate));
+    return expired && (licence.status === "Active" || licence.status === "Expired");
   }
 
   isAboutToExpire(licence: ApplicationLicenseSummary) {
     if (!this.isExpired(licence)) {
-      const expiry = moment(licence.expiryDate).startOf("day");
-      const diff = expiry.diff(NOW, "days");
+      const expiry = startOfDay(licence.expiryDate);
+      const diff = differenceInDays(NOW, expiry);
       return diff <= 60;
     } else {
       return false;
@@ -309,16 +311,16 @@ export class LicenceRowComponent extends FormBase implements OnInit {
 
   isRecentlyExpired(licence: ApplicationLicenseSummary) {
     if (this.isExpired(licence)) {
-      const expiry = moment(licence.expiryDate).startOf("day");
-      const diff = NOW.diff(expiry, "days");
+      const expiry = startOfDay(licence.expiryDate);
+      const diff = differenceInDays(NOW, expiry);
       return diff <= 30;
     }
     return false;
   }
 
   isCancelled(licence: ApplicationLicenseSummary) {
-    const expiry = moment(licence.expiryDate).startOf("day");
-    const diff = expiry.diff(NOW, "days");
+    const expiry = startOfDay(licence.expiryDate);
+    const diff = Math.abs(differenceInDays(expiry, NOW));
     return diff >= 180 || licence.status === "Cancelled";
   }
 

@@ -21,8 +21,8 @@ import { TiedHouseConnectionsDataService } from "@services/tied-house-connection
 import { AppState } from "@app/app-state/models/app-state";
 import { faAddressCard, faChevronRight, faEnvelope, faExclamationTriangle, faPhone, faTrash } from
   "@fortawesome/free-solid-svg-icons";
-import * as moment from 'moment';
 import { UserDataService } from "@services/user-data.service";
+import { endOfToday } from "date-fns";
 
 // See the Moment.js docs for the meaning of these formats:
 // https://momentjs.com/docs/#/displaying/format/
@@ -92,7 +92,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
   busy3: Promise<any>;
   form: FormGroup;
   countryList = COUNTRIES;
-  maxDate = moment().endOf("day").toDate();
+  maxDate = endOfToday();
 
   accountId: string;
   saveFormData: any;

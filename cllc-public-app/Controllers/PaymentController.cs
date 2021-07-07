@@ -1451,7 +1451,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 PaymentType paymentType = PaymentType.SPECIAL_EVENT; // always special event
                 
-                var redirectPath = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/sep/payment-confirmation";
+                var redirectPath = $"{_configuration["BASE_URI"]}{_configuration["BASE_PATH"]}/sep/application-summary/{id}";
                 redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt), paymentType, redirectPath);
 
                 _logger.Debug(">>>>>" + redirectUrl["url"]);

@@ -1,8 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Subscription } from "rxjs";
 import { FormBuilder, Validators } from "@angular/forms";
-import { SpecificLocation, FoodService, Entertainment, EventType, LicenceEvent, EventStatus, EventCategory } from
-  "../../models/licence-event.model";
+import { SpecificLocation, FoodService, Entertainment, EventType, LicenceEvent, EventStatus, EventCategory } from "../../models/licence-event.model";
 import { LicenceEventsService } from "@services/licence-events.service";
 import { takeWhile } from "rxjs/operators";
 import { AppState } from "@app/app-state/models/app-state";
@@ -10,9 +9,6 @@ import { Store } from "@ngrx/store";
 import { User } from "@models/user.model";
 import { FormBase } from "@shared/form-base";
 import { Router, ActivatedRoute } from "@angular/router";
-import { MomentDateAdapter } from "@angular/material-moment-adapter";
-import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from "@angular/material/core";
-import * as moment from "moment";
 
 import { faQuestionCircle, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faSave } from "@fortawesome/free-regular-svg-icons";
@@ -27,31 +23,12 @@ const DEFAULT_END_TIME = {
   minute: 0
 };
 const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-// See the Moment.js docs for the meaning of these formats:
-// https://momentjs.com/docs/#/displaying/format/
-export const MY_FORMATS = {
-  parse: {
-    dateInput: "LL"
-  },
-  display: {
-    dateInput: "YYYY-MM-DD",
-    monthYearLabel: "MMM YYYY",
-    dateA11yLabel: "YYYY-MM-DD",
-    monthYearA11yLabel: "MMMM YYYY",
-  },
-};
+
 
 @Component({
   selector: "app-catering-event-form",
   templateUrl: "./catering-event-form.component.html",
   styleUrls: ["./catering-event-form.component.scss"],
-  providers: [
-    // `MomentDateAdapter` can be automatically provided by importing `MomentDateModule` in your
-    // application's root module. We provide it at the component level here, due to limitations of
-    // our example generation script.
-    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
-    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }
-  ],
 })
 export class CateringEventFormComponent extends FormBase implements OnInit {
   faSave = faSave;
@@ -184,8 +161,8 @@ export class CateringEventFormComponent extends FormBase implements OnInit {
       city: licenceEvent.city,
       province: licenceEvent.province,
       postalCode: licenceEvent.postalCode,
-      startDate: moment.utc(licenceEvent.startDate),
-      endDate: moment.utc(licenceEvent.endDate),
+      startDate: new Date(licenceEvent.startDate),
+      endDate: new Date(licenceEvent.endDate),
       eventCategory: this.getOptionFromLabel(this.eventCategory, "Catering").value,
       agreement: false
     });

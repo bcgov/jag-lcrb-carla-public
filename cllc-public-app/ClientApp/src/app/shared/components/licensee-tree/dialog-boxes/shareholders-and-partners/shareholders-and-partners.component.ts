@@ -3,8 +3,8 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { LicenseeChangeLog } from "@models/licensee-change-log.model";
 import { FormBase } from "@shared/form-base";
-import * as moment from "moment";
 import { Account } from "@models/account.model";
+import { startOfToday, subDays } from "date-fns";
 
 @Component({
   selector: "app-shareholders-and-partners",
@@ -29,7 +29,8 @@ export class ShareholdersAndPartnersComponent extends FormBase implements OnInit
     this.action = data.action;
 
     this.formType = data.rootBusinessType;
-    this.maxDate19 = moment(new Date()).startOf("day").subtract(19, "year").toDate();
+    // max date is 19 years ago
+    this.maxDate19 = subDays(startOfToday(), 19);
 
     if (this.shareholder && this.shareholder.parentLinceseeChangeLog) {
       this.availableParentShares = this.shareholder.parentLinceseeChangeLog.totalSharesNew -

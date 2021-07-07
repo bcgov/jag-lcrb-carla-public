@@ -31,6 +31,7 @@ export class SepApplicationComponent implements OnInit {
   steps = SEP_APPLICATION_STEPS;
   account: Account;
   step: string;
+  savingToAPI: boolean;
 
   get selectedIndex(): number {
     let index = 0;
@@ -87,6 +88,7 @@ export class SepApplicationComponent implements OnInit {
   }
 
   async saveToAPI(): Promise<void> {
+    this.savingToAPI = true;
     const appData = await this.db.getSepApplication(this.localId);
     if (appData.id) { // do an update ( the record exists in dynamics)
       const result = await this.sepDataService.updateSepApplication({ ...appData, invoiceTrigger: true } as SepApplication, appData.id)
@@ -102,6 +104,7 @@ export class SepApplicationComponent implements OnInit {
         this.localId = result.localId;
       }
     }
+    this.savingToAPI = false;
   }
 
   completeStep(step: string, stepper: any, data: SepApplication, saveToApi: boolean) {
