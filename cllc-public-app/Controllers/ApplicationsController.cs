@@ -355,6 +355,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     var filter = $"_adoxio_localgovindigenousnationid_value eq {account._adoxioLginlinkidValue}";
                     filter += $" and adoxio_lgapprovaldecision eq {(int)LGDecision.Approved}";
+                    filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Cancelled}";
+                    filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Refused}";
+                    filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
 
                     var expand = new List<string>
                     {
