@@ -1354,6 +1354,21 @@
                         [enabled]="!isOpenedByLGForApproval && !lGHasApproved()">
     </app-capacity-table>
   </app-field>
+
+  <mat-card class="mat-elevation-z0 mb-3" *ngIf="showHoldsOtherManufactureLicence()">
+    <section style="display: flex; justify-content: space-between; width: 100%;">
+      <div class="question-label">
+        Do you currently hold another manufacturer licence at the same site that is already endorsed for the same area?
+      </div>
+      <div style="flex: 0 0 85px;">
+        <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('holdsOtherManufactureLicence')}"
+          formControlName="holdsOtherManufactureLicence" aria-label="Font Style">
+          <mat-button-toggle [value]="true">Yes</mat-button-toggle>
+          <mat-button-toggle [value]="false">No</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+    </section>
+  </mat-card>
 </section>
 
 <!-- Capacity Area -->
