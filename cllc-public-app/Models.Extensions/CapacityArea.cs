@@ -10,13 +10,14 @@ namespace Gov.Lclb.Cllb.Public.Models
             return new CapacityArea
             {
                 Id = serviceArea.AdoxioServiceareaid,
-                AreaNumber = (int)serviceArea.AdoxioAreanumber,
+                // we can not cast to int when  the value is null. 
+                AreaNumber = serviceArea.AdoxioAreanumber == null ? 0 : (int)serviceArea.AdoxioAreanumber,
                 AreaCategory = serviceArea.AdoxioAreacategory,
                 AreaLocation = serviceArea.AdoxioArealocation,
-                IsIndoor = (bool)serviceArea.AdoxioIsindoor,
-                IsOutdoor = (bool)serviceArea.AdoxioIsoutdoor,
-                IsPatio = (bool)serviceArea.AdoxioIspatio,
-                Capacity = serviceArea.AdoxioCapacity.HasValue ? serviceArea.AdoxioCapacity : 0
+                IsIndoor = serviceArea.AdoxioIsindoor == true,
+                IsOutdoor = serviceArea.AdoxioIsoutdoor == true,
+                IsPatio = serviceArea.AdoxioIspatio == true,
+                Capacity = serviceArea.AdoxioCapacity == null ? 0 : serviceArea.AdoxioCapacity
             };
         }
     }

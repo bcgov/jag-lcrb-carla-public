@@ -1,16 +1,17 @@
-import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
-import { SepDrinkType } from '@models/sep-drink-type.model';
-import { SepApplication } from '@models/sep-application.model';
-import { SpecialEventsDataService } from '@services/special-events-data.service';
+import { Component, EventEmitter, OnInit, Input, Output } from "@angular/core";
+import { FormArray, FormBuilder } from "@angular/forms";
+import { SepDrinkType } from "@models/sep-drink-type.model";
+import { SepApplication } from "@models/sep-application.model";
+import { SpecialEventsDataService } from "@services/special-events-data.service";
 
 @Component({
-  selector: 'app-drink-amounts',
-  templateUrl: './drink-amounts.component.html',
-  styleUrls: ['./drink-amounts.component.scss']
+  selector: "app-drink-amounts",
+  templateUrl: "./drink-amounts.component.html",
+  styleUrls: ["./drink-amounts.component.scss"]
 })
 export class DrinkAmountsComponent implements OnInit {
   _application: SepApplication;
+  @Input() savingToAPI: boolean;
   @Input()
   set application(app: SepApplication) {
     if (app) {
@@ -42,9 +43,9 @@ export class DrinkAmountsComponent implements OnInit {
 
   addDrinkType(value: any = {}) {
     const drinkType = this.fb.group({
-      id: [''],
-      estimatedServings: [''],
-      drinkTypeId: [''],
+      id: [""],
+      estimatedServings: [""],
+      drinkTypeId: [""],
     });
     drinkType.patchValue(value);
     this.form.push(drinkType);

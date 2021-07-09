@@ -16,44 +16,15 @@ import { COUNTRIES } from "./country-list";
 import { FormBase } from "@shared/form-base";
 import { Worker } from "@models/worker.model";
 import { faCopy, faSave } from "@fortawesome/free-regular-svg-icons";
-import { faChevronLeft, faChevronRight, faExclamationTriangle, faQuestion, faTrash } from
-  "@fortawesome/free-solid-svg-icons";
+import { faChevronLeft, faChevronRight, faExclamationTriangle, faQuestion, faTrash } from "@fortawesome/free-solid-svg-icons";
 
-import { MomentDateAdapter } from "@angular/material-moment-adapter";
-import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from "@angular/material/core";
-import * as _moment from "moment";
-// tslint:disable-next-line:no-duplicate-imports
-import { defaultFormat as _rollupMoment } from "moment";
 import { AppState } from "@app/app-state/models/app-state";
 import { WorkerDataService } from "@services/worker-data.service";
-const moment = _rollupMoment || _moment;
-
-// See the Moment.js docs for the meaning of these formats:
-// https://momentjs.com/docs/#/displaying/format/
-export const MY_FORMATS = {
-  parse: {
-    dateInput: "LL",
-  },
-  display: {
-    dateInput: "YYYY-MM-DD",
-    monthYearLabel: "MMM YYYY",
-    dateA11yLabel: "YYYY-MM-DD",
-    monthYearA11yLabel: "MMMM YYYY",
-  },
-};
-
 
 @Component({
   selector: "app-worker-application",
   templateUrl: "./worker-application.component.html",
   styleUrls: ["./worker-application.component.scss"],
-  providers: [
-    // `MomentDateAdapter` can be automatically provided by importing `MomentDateModule` in your
-    // application's root module. We provide it at the component level here, due to limitations of
-    // our example generation script.
-    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
-    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
-  ],
 })
 export class WorkerApplicationComponent extends FormBase implements OnInit {
   faSave = faSave;

@@ -67,6 +67,27 @@ export class SummaryComponent implements OnInit {
    */
   @Input() showSubmitButton = true;
   contact: Contact;
+  transactionId: any;
+  appId: any;
+  retryCount: any;
+  cardType: string;
+  authCode: any;
+  avsMessage: any;
+  avsAddrMatch: any;
+  messageId: any;
+  messageText: any;
+  paymentMethod: any;
+  trnAmount: any;
+  trnApproved: any;
+  trnDate: any;
+  trnId: any;
+  trnOrderNumber: any;
+  invoice: any;
+  isApproved: boolean;
+  paymentTransactionTitle: string;
+  paymentTransactionMessage: string;
+  loaded: boolean;
+  savingToAPI: boolean;
 
   @Input() set localId(value: number) {
     this._appID = value;
@@ -89,15 +110,21 @@ export class SummaryComponent implements OnInit {
     private paymentDataService: PaymentDataService,
     private sepDataService: SpecialEventsDataService,
     private contactDataService: ContactDataService) {
-    store.select(state => state.currentUserState.currentUser)
+    this.store.select(state => state.currentUserState.currentUser)
       .subscribe(user => {
-        contactDataService.getContact(user.contactid)
+        this.contactDataService.getContact(user.contactid)
           .subscribe(contact => {
             this.contact = contact;
           });
       });
-    route.params.subscribe((params: Params) => {
+
+    this.route.queryParams.subscribe(params => {
+      this.transactionId = params["trnId"];
+      this.appId = params["SessionKey"];
+    });
+    this.route.params.subscribe((params: Params) => {
       const id = params.apiId;
+
       if (id) {
         sepDataService.getSpecialEventForApplicant(id)
           .subscribe(app => {
@@ -110,6 +137,92 @@ export class SummaryComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.transactionId) {
+      this.verify_payment();
+    }
+  }
+
+  /**
+ * Payment verification
+ * */
+  verify_payment() {
+    this.retryCount++;
+    this.paymentDataService.verifyPaymentURI("specialEventInvoice", this.appId).subscribe(
+      res => {
+        const verifyPayResponse = res as any;
+        // console.log(verifyPayResponse);
+        switch (verifyPayResponse.cardType) {
+          case "VI":
+            this.cardType = "Visa";
+            break;
+          case "PV":
+            this.cardType = "Visa Debit";
+            break;
+          case "MC":
+            this.cardType = "MasterCard";
+            break;
+          case "AM":
+            this.cardType = "American Express";
+            break;
+          case "MD":
+            this.cardType = "Debit MasterCard";
+            break;
+          default:
+            this.cardType = verifyPayResponse.cardType;
+        }
+        this.authCode = verifyPayResponse.authCode;
+        this.avsMessage = verifyPayResponse.avsMessage;
+        this.avsAddrMatch = verifyPayResponse.avsAddrMatch;
+        this.messageId = verifyPayResponse.messageId;
+        this.messageText = verifyPayResponse.messageText;
+        this.paymentMethod = verifyPayResponse.paymentMethod;
+        this.trnAmount = verifyPayResponse.trnAmount;
+        this.trnApproved = verifyPayResponse.trnApproved;
+        this.trnDate = verifyPayResponse.trnDate;
+        this.trnId = verifyPayResponse.trnId;
+        this.trnOrderNumber = verifyPayResponse.trnOrderNumber;
+        this.invoice = verifyPayResponse.invoice;
+
+        if (this.trnApproved === "1") {
+          this.isApproved = true;
+        } else {
+          this.isApproved = false;
+          if (this.messageId === "559") {
+            this.paymentTransactionTitle = "Cancelled";
+            this.paymentTransactionMessage = `Your payment transaction was cancelled. <br><br>
+                <p>Please note, your application remains listed under Applications In Progress. </p>`;
+          } else if (this.messageId === "7") {
+            this.paymentTransactionTitle = "Declined";
+            this.paymentTransactionMessage = `Your payment transaction was declined. <br><br>
+                <p>Please note, your application remains listed under Applications In Progress. </p>`;
+          } else {
+            this.paymentTransactionTitle = "Declined";
+            this.paymentTransactionMessage =
+              `Your payment transaction was declined. Please contact your bank for more information. <br><br>
+              <p>Please note, your application remains listed under Applications In Progress. </p>`;
+          }
+        }
+
+        this.loaded = true;
+      },
+      err => {
+        if (err === "503") {
+          if (this.retryCount < 30) {
+            this.snackBar.open(`Attempt ${this.retryCount} at payment verification, please wait...`,
+              "Verifying Payment",
+              { duration: 3500, panelClass: ["red - snackbar"] });
+            this.verify_payment();
+          }
+        } else {
+          this.snackBar.open("An unexpected error occured, please contact the branch to check if payment was processed",
+            "Verifying Payment",
+            { duration: 3500, panelClass: ["red - snackbar"] });
+          console.log("Unexpected Error occured:");
+          console.log(err);
+        }
+
+      }
+    );
   }
 
   formatEventDatesForDisplay() {
@@ -157,6 +270,7 @@ export class SummaryComponent implements OnInit {
   }
 
   async submitApplication(): Promise<void> {
+    this.savingToAPI = true;
     const appData = await this.db.getSepApplication(this.localId);
     if (appData.id) { // do an update ( the record exists in dynamics)
       const result = await this.sepDataService.updateSepApplication({ ...appData, eventStatus: "Submitted" } as SepApplication, appData.id)
@@ -171,6 +285,7 @@ export class SummaryComponent implements OnInit {
         this.localId = this.localId; // trigger data refresh
       }
     }
+    this.savingToAPI = false;
   }
 
   payNow() {
