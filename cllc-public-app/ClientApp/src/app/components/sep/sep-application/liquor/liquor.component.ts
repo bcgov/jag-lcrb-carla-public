@@ -1,18 +1,19 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { SepApplication } from '@models/sep-application.model';
-import { IndexedDBService } from '@services/indexed-db.service';
-import { SpecialEventsDataService } from '@services/special-events-data.service';
-import { environment } from 'environments/environment';
-import { env } from 'process';
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { SepApplication } from "@models/sep-application.model";
+import { IndexedDBService } from "@services/indexed-db.service";
+import { SpecialEventsDataService } from "@services/special-events-data.service";
+import { environment } from "environments/environment";
+import { env } from "process";
 
 @Component({
-  selector: 'app-liquor',
-  templateUrl: './liquor.component.html',
-  styleUrls: ['./liquor.component.scss']
+  selector: "app-liquor",
+  templateUrl: "./liquor.component.html",
+  styleUrls: ["./liquor.component.scss"]
 })
 export class LiquorComponent implements OnInit {
   selectedIndex = 0;
   value: any = {};
+  @Input() savingToAPI = false;
   @Output()
   saveComplete = new EventEmitter<SepApplication>();
 
@@ -47,8 +48,8 @@ export class LiquorComponent implements OnInit {
     const data = {
       ...this.sepApplication,
       lastUpdated: new Date(),
-      status: 'unsubmitted',
-      lastStepCompleted: 'event',
+      status: "unsubmitted",
+      lastStepCompleted: "event",
       ...this.value,
     } as SepApplication;
 
@@ -64,8 +65,8 @@ export class LiquorComponent implements OnInit {
     const data = {
       ...this.sepApplication,
       lastUpdated: new Date(),
-      eventStatus: 'Draft',
-      lastStepCompleted: 'liquor',
+      eventStatus: "Draft",
+      lastStepCompleted: "liquor",
       ...this.value,
     } as SepApplication;
     this.saveComplete.emit(data);
