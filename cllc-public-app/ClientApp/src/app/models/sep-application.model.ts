@@ -50,6 +50,7 @@ export class SepApplication {
     policeAccount?: Account;
     policeApproval?: string;
     policeDecisionBy?: Contact;
+    privateOrPublic?: string;
     responsibleBevServiceNumber: string;
     sepCity: SepCity;
     specialEventDescription: string;
