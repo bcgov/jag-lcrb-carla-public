@@ -241,7 +241,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
       tempDateFrom: [''],
       tempDateTo: [''],
       pin: ['', [this.requireOneOfGroupValidator(['pin', 'establishmentParcelId'])]],
-      holdsOtherManufactureLicence: [false]
+      holdsOtherManufactureLicence1: [false],
+      holdsOtherManufactureLicence2: [false]
     });
 
 
@@ -1231,7 +1232,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     let show = (this?.application?.applicationType?.isShowLGINApproval || this?.application?.applicationType?.isShowLGZoningConfirmation)
       && !this.lGHasApproved()
       && !this.lGHasRejected()
-      && this.form.get('holdsOtherManufactureLicence').value !== true
+      && (this.form.get('holdsOtherManufactureLicence1').value == false || this.form.get('holdsOtherManufactureLicence2').value == false)
       && this?.application?.applicationStatus === 'Intake';
     return show;
   }
