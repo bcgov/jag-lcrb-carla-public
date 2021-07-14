@@ -116,16 +116,16 @@ export class EventComponent extends FormBase implements OnInit {
 
     // if we've got any event locations loaded
     if (app?.eventLocations?.length > 0) {
-      console.log("we have locations");
+      //console.log("we have locations");
       app.eventLocations.forEach(loc => {
-        console.log("loading location");
+        //console.log("loading location");
         loc.eventDates = loc.eventDates || [];
         loc.serviceAreas = loc.serviceAreas || [];
         this.addLocation(loc);
       });
     } else {
       // otherwise add a blank one
-      console.log("adding blank location");
+      //console.log("adding blank location");
       this.addLocation();
     }
   }
@@ -141,6 +141,7 @@ export class EventComponent extends FormBase implements OnInit {
 
   getEventDates(locationIndex: number): FormArray {
     let result = this.fb.array([]);
+    //console.log("loading dates")
     if (location) {
       result = this.locations.at(locationIndex)
         .get("eventDates") as FormArray;
@@ -190,9 +191,9 @@ export class EventComponent extends FormBase implements OnInit {
     // if there aren't event dates
     if (!location.eventDates || location.eventDates.length === 0) {
       // create one
-      console.log(!location.eventDates);
-      console.log(location.eventDates.length === 0);
-      console.log("creating blank event date");
+      //console.log(!location.eventDates);
+      //console.log(location.eventDates.length === 0);
+      //console.log("creating blank event date");
       location.eventDates = [{} as SepSchedule];
     }
 
@@ -326,13 +327,14 @@ export class EventComponent extends FormBase implements OnInit {
     const serviceToItem = TIME_SLOTS.find(time => time.value === dateForm.get("serviceEndValue").value);
     const serviceToIndex = TIME_SLOTS.indexOf(serviceToItem);
 
-    if (eventFromIndex > eventToIndex) {
-      error = "The event start time should be ealier that the end time";
+    if (eventFromIndex >= eventToIndex) {
+      error = "The event should end after the start time, not before.";
     } else if (serviceFromIndex > serviceFromIndex) {
-      error = "The event  services start time should be ealier that the end time";
-    } else if (eventFromIndex > serviceFromIndex ||
-      eventToIndex < serviceToIndex) {
-      error = "The service times should be within the specified event times";
+      error = "The liquor service should end after the start time, not before.";
+    } else if (eventToIndex <= serviceToIndex) {
+      error = "Liquor service  must end at least 30 minutes prior to the end of the specified event time";
+    } else if (eventFromIndex > serviceFromIndex) {
+      error = "Liquor service must not start earlier than the event."
     }
     return error;
   }
@@ -396,7 +398,9 @@ export class EventComponent extends FormBase implements OnInit {
     this.showValidationMessages = false;
     if (this.isValid()) {
       this.saveComplete.emit(this.getFormValue());
+      //console.log("saving...")
     } else {
+      //console.log('showing validation messages')
       this.showValidationMessages = true;
     }
   }
