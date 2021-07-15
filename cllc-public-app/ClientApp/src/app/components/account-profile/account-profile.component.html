@@ -23,29 +23,54 @@
   </p>
 </section>
 
-<h3 class="blue-header">{{getBusinessTypeName().toLocaleUpperCase()}} DETAILS</h3>
-<!--
-<h3 *ngIf="getBusinessTypeName() === 'Partnership'" class="blue-header">DETAILS OF THE
-  PARTNERSHIP</h3>
-<h3 *ngIf="getBusinessTypeName() === 'Sole Proprietor'" class="blue-header">DETAILS OF
-  THE SOLE PROPRIETORSHIP</h3>
-<h3 *ngIf="saveFormData?.businessProfile?.businessType === 'Society'" class="blue-header">SOCIETY DETAILS</h3>
-<h3 *ngIf="getBusinessTypeName() === 'Indigenous Nation'" class="blue-header">INDIGENOUS NATION DETAILS</h3>
-<h3 *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1" class="blue-header"> CORPORATION DETAILS
-  <h3 *ngIf="saveFormData?.businessProfile?.businessType === 'University'" class="blue-header">UNIVERSITY DETAILS</h3>
+<h3 class="blue-header" *ngIf="getBusinessTypeName() !== 'Indigenous Nation'">
+  {{getBusinessTypeName().toLocaleUpperCase()}} CONTACT
 </h3>
--->
+<h3 class="blue-header" *ngIf="getBusinessTypeName() === 'Indigenous Nation'">AUTHORIZED PERSON</h3>
+<div formGroupName="contact" class="padded-section content-bottom">
+  <i>
+    The name and contact information of the person LCRB should contact for ongoing communication. The contact
+    must be authorized to represent the applicant and have the authority to bind the applicant.
+  </i><br>
+
+  <app-field label="First Name" [required]="true"
+             [valid]="isValidOrNotTouched('contact.firstname')"
+             errorMessage="Please enter the business contact's first name">
+    <input class="form-control" style="width: 350px;" type="text" formControlName="firstname" readonly>
+  </app-field>
+
+  <app-field label="Last Name" [required]="true"
+             [valid]="isValidOrNotTouched('contact.lastname')"
+             errorMessage="Please enter the business contact's last name">
+    <input class="form-control" style="width: 350px;" type="text" formControlName="lastname" readonly>
+  </app-field>
+
+  <app-field label="Title/Position" [required]="false" [valid]="true">
+    <input class="form-control" style="width: 350px;" type="text" formControlName="jobTitle">
+  </app-field>
+
+  <app-field label="Phone Number" [required]="true"
+             [valid]="isValidOrNotTouched('contact.telephone1')"
+             errorMessage="Please enter the business contact's 10-digit phone number">
+    <input class="form-control" style="width: 250px;" mask="(000) 000-0000"
+           type="text" formControlName="telephone1">
+  </app-field>
+
+  <app-field label="Email" [required]="true"
+             [valid]="isValidOrNotTouched('contact.emailaddress1')"
+             errorMessage="Please enter the business contact's email address">
+    <input class="form-control" style="width: 350px;" type="text" formControlName="emailaddress1"
+           (blur)="trimValue(form.get('contact.emailaddress1'))">
+  </app-field>
+</div>
+
+<h3 class="blue-header">{{getBusinessTypeName().toLocaleUpperCase()}} DETAILS</h3>
+
 <div formGroupName="businessProfile" class="padded-section content-bottom">
   <app-field [label]="legalNameLabel()">
     <input class="form-control" style="max-width: 450px; min-width: 250px;" type="text" disabled
            [value]="account?.name || ''">
   </app-field>
-
-  <!-- We don't currently receive the DBA, so hidden-->
-  <!-- Business As (DBA) Name" *ngIf="getBusinessTypeName() !== 'Indigenous Nation'">
-  <input class="form-control" style="max-width: 450px; min-width: 250px;" type="text" disabled
-         [value]="account?.businessDBAName || ''">
-  </app-field-->
 
   <app-field label="Business Number (9 digit number from the Canada Revenue Agency)" [required]="true"
              [valid]="form.get('businessProfile.businessNumber').valid || !form.get('businessProfile.businessNumber').touched"
@@ -107,7 +132,6 @@
     </div>
   </section>
 </div>
-
 
 <h3 class="blue-header" *ngIf="getBusinessTypeName() !== 'Indigenous Nation'">
   {{getBusinessTypeName().toLocaleUpperCase()}} ADDRESSES
@@ -248,64 +272,11 @@
 
 </div>
 
-<h3 class="blue-header" *ngIf="getBusinessTypeName() !== 'Indigenous Nation'">
-  {{getBusinessTypeName().toLocaleUpperCase()}} CONTACT
-</h3>
-<h3 class="blue-header" *ngIf="getBusinessTypeName() === 'Indigenous Nation'">AUTHORIZED PERSON</h3>
-<div formGroupName="contact" class="padded-section content-bottom">
-  <i>
-    The name and contact information of the person LCRB should contact for ongoing communication. The contact
-    must be authorized to represent the applicant and have the authority to bind the applicant.
-  </i><br>
-
-  <app-field label="First Name" [required]="true"
-             [valid]="isValidOrNotTouched('contact.firstname')"
-             errorMessage="Please enter the business contact's first name">
-    <input class="form-control" style="width: 350px;" type="text" formControlName="firstname" readonly>
-  </app-field>
-
-  <app-field label="Last Name" [required]="true"
-             [valid]="isValidOrNotTouched('contact.lastname')"
-             errorMessage="Please enter the business contact's last name">
-    <input class="form-control" style="width: 350px;" type="text" formControlName="lastname" readonly>
-  </app-field>
-
-  <app-field label="Title/Position" [required]="false" [valid]="true">
-    <input class="form-control" style="width: 350px;" type="text" formControlName="jobTitle">
-  </app-field>
-
-  <app-field label="Phone Number" [required]="true"
-             [valid]="isValidOrNotTouched('contact.telephone1')"
-             errorMessage="Please enter the business contact's 10-digit phone number">
-    <input class="form-control" style="width: 250px;" mask="(000) 000-0000"
-           type="text" formControlName="telephone1">
-  </app-field>
-
-  <!-- <app-field label="Phone Number (alternate)" [required]="false">
-    <input class="form-control" style="width: 250px;" maxlength="10" (keydown)="rejectIfNotDigitOrBackSpace($event)"
-           type="text" formControlName="phoneNumberAlt">
-  </app-field> -->
-
-  <app-field label="Email" [required]="true"
-             [valid]="isValidOrNotTouched('contact.emailaddress1')"
-             errorMessage="Please enter the business contact's email address">
-    <input class="form-control" style="width: 350px;" type="text" formControlName="emailaddress1"
-           (blur)="trimValue(form.get('contact.emailaddress1'))">
-  </app-field>
-</div>
-
-
 <div *ngIf="saveFormData?.businessProfile?.id && ['Police'].indexOf(getBusinessTypeName()) == -1">
   <app-connection-to-producers *ngIf="account?.tiedHouse" [tiedHouse]="account?.tiedHouse"
                                [account]="account" (value)="tiedHouseFormData = $event">
   </app-connection-to-producers>
 </div>
-
-<!-- <h3 class="blue-header">Financial Intergrity</h3>
-<div class="padded-section" *ngIf="saveFormData?.businessProfile?.id">
-  <app-financial-information></app-financial-information>
-</div> -->
-
 
 <div *ngIf="!form.valid && form.touched" class="error-summary mt-3">
   <div *ngIf="!validationMessages?.length">

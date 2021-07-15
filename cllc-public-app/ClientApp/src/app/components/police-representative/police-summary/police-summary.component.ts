@@ -26,13 +26,16 @@ import {
   faDownload,
   faExchangeAlt,
   faExclamationTriangle,
+  faHandshake,
+  faWineBottle,
   faFlag,
   faPencilAlt,
   faQuestionCircle,
   faShoppingCart,
   faStopwatch,
   faTrashAlt,
-  IconDefinition
+  IconDefinition,
+  faBullhorn
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faBan
@@ -61,6 +64,8 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
   faBusinessTime = faBusinessTime;
   faExchangeAlt = faExchangeAlt;
   faBirthdayCake = faBirthdayCake;
+  faHandshake = faHandshake;
+  faWineBottle = faWineBottle;
   faBolt = faBolt;
   faCheck = faCheck;
   faBan = faBan;
@@ -151,7 +156,7 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
       });
   }
 
-  
+
   formatEventDatesForDisplay() {
     if (this?.sepApplication?.eventLocations?.length > 0) {
       this.sepApplication.eventLocations.forEach(loc => {
@@ -228,8 +233,18 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
     }
 
   getTypeIcon(): IconDefinition{
-    let icon = faBirthdayCake;
-    return icon;
+    switch(this.sepApplication?.privateOrPublic){
+      case ("Members"):
+        return faHandshake;
+      case ("Hobbyist"):
+        return faWineBottle;
+      case ("Anyone"):
+        return faBullhorn;
+      case ("Family"):
+      default:
+        return faBirthdayCake;
+
+    }
   }
 
   getStatusIcon(): IconDefinition {
@@ -372,6 +387,6 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
       () => {
         this.snackBar.open('Error setting city', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
         console.error('Error setting city');
-      });    
+      });
   }
 }
