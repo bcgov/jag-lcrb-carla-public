@@ -52,6 +52,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                     ResponsibleBevServiceNumber = specialEvent.AdoxioResponsiblebevservicenumber,
                     ResponsibleBevServiceNumberDoesNotHave = specialEvent.AdoxioResponsiblebevnumberdoesnothave,
                     DateAgreedToTsAndCs = specialEvent.AdoxioDateagreedtotsandcs,
+                    DateIssued = specialEvent.AdoxioDateissued,
                     MajorSignificanceRationale = specialEvent.AdoxioMajorsignificancerationale,
                     NonProfitName = specialEvent.AdoxioNonprofitname,
                     PoliceAccount = specialEvent.AdoxioPoliceAccountId.ToViewModel(),
