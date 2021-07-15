@@ -14,6 +14,7 @@ export class SepApplication {
     dateAgreedToTsAndCs: Date;
     dateCreated: Date;
     dateSubmitted: Date;
+    dateIssued: Date;
     denialReason?: string;
     donateOrConsularPrevLiqour: boolean;
     eventName: string;
