@@ -14,6 +14,7 @@ export class SepApplication {
     dateAgreedToTsAndCs: Date;
     dateCreated: Date;
     dateSubmitted: Date;
+    dateIssued: Date;
     denialReason?: string;
     donateOrConsularPrevLiqour: boolean;
     eventName: string;
@@ -50,6 +51,7 @@ export class SepApplication {
     policeAccount?: Account;
     policeApproval?: string;
     policeDecisionBy?: Contact;
+    privateOrPublic?: string;
     responsibleBevServiceNumber: string;
     sepCity: SepCity;
     specialEventDescription: string;
@@ -82,7 +84,7 @@ export class SepApplication {
                 maxMinors += area.licencedAreaNumberOfMinors || 0;
             }
         }
-        console.log("max adults:", this.totalMaximumNumberOfGuests, maxMinors);
+        //console.log("max adults:", this.totalMaximumNumberOfGuests, maxMinors);
         return this.totalMaximumNumberOfGuests - maxMinors;
     }
 
@@ -90,9 +92,9 @@ export class SepApplication {
         let serviceHours = 0;
         for (const location of this.eventLocations) {
             for (const hours of location.eventDates) {
-                serviceHours += differenceInHours(new Date(hours.serviceEnd), new Date(hours.serviceStart)) || 0;
-                console.log("hours:", hours.serviceEnd, hours.serviceStart,
-                    differenceInHours(new Date(hours.serviceEnd), new Date(hours.serviceStart)));
+                serviceHours += Math.min(differenceInHours(new Date(hours.serviceEnd), new Date(hours.serviceStart)) || 0, 17);
+                //console.log("hours:", hours.serviceEnd, hours.serviceStart,
+                //    differenceInHours(new Date(hours.serviceEnd), new Date(hours.serviceStart)));
             }
         }
         return serviceHours;

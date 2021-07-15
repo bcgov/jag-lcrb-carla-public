@@ -3,6 +3,7 @@
         Use the tool below to declare the appropriate number of drink servings for your event. You can adjust the total
         number at any time before you submit your application.
     </p>
+    <p><strong>The quantity of liquor sold at the event must not exceed the quantity specified on your permit.</strong></p>
 
     <p>
         Hosting a liquor tasting? Use the conversion tool below.
@@ -37,6 +38,13 @@
             <small>You can enter a different number of <br>drinks here.</small>
         </div>
     </div>
+
+    <section style="padding-bottom: 15px;">
+      <app-error-alert *ngIf="(total_servings - max_servings) > max_servings * .25" type="alert">
+        The number you have entered exceeds maximum suggested drink servings by over 25%. Remember, you are responsible for the safety of your guest and are required to prevent over-service and intoxication. Are you sure you want to continue with this amount?
+      </app-error-alert>
+    </section>
+
 
     <p>
         According to the information you provided, the number of drinks served at your event should not exceed

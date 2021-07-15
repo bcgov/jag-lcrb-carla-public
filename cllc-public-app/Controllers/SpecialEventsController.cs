@@ -122,7 +122,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public IActionResult GetSpecialEventPolice(string eventId)
         {
             string[] expand = new[] { "adoxio_PoliceRepresentativeId",
-                "adoxio_PoliceAccountId","adoxio_specialevent_specialeventlocations"
+                "adoxio_PoliceAccountId",
+                "adoxio_Invoice",
+                "adoxio_specialevent_licencedarea",
+                "adoxio_specialevent_schedule",
+                "adoxio_specialevent_specialeventlocations",
+                "adoxio_SpecialEventCityDistrictId",
+                "adoxio_ContactId",
+                "adoxio_specialevent_adoxio_sepdrinksalesforecast_SpecialEvent"
             };
             MicrosoftDynamicsCRMadoxioSpecialevent specialEvent = null;
             if (!string.IsNullOrEmpty(eventId))
