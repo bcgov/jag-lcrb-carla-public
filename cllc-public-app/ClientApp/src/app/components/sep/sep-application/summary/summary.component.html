@@ -39,6 +39,7 @@
     <section *ngIf="application?.eventStatus == 'Issued' || (trnId && application?.eventStatus == 'Approved)">
       <!-- if issued -->
       <h3><fa-icon [icon]="faAward" style="margin-right: 10px;"></fa-icon>Issued</h3>
+      <p *ngIf="application?.dateIssued">Your Special Event Permit was issued on {{application?.dateIssued}}.</p>
       <a [href]="'api/special-events/applicant/' + application.id + '/permit/summary.pdf'" target="_blank" *ngIf="application.id"><fa-icon [icon]="faCertificate" style="margin-right: 10px;"></fa-icon>Print Permit</a>
     </section>
 
