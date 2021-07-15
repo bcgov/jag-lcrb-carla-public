@@ -235,7 +235,7 @@ export class EventComponent extends FormBase implements OnInit {
       eventStartValue: ["9:00 AM", [Validators.required]],
       eventEndValue: ["10:00 PM", [Validators.required]],
       serviceStartValue: ["9:00 AM", [Validators.required]],
-      serviceEndValue: ["10:00 PM", [Validators.required]],
+      serviceEndValue: ["9:30 PM", [Validators.required]],
       liquorServiceHoursExtensionReason: [""],
       disturbancePreventionMeasuresDetails: [""]
     }, { validators: eventTimesValidator });
