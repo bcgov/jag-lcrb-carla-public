@@ -1,8 +1,8 @@
-<ng-container *ngIf="mode === 'readonlySummary'">
+<ng-container *ngIf="mode === 'readonlySummary' || mode === 'pendingReview'">
 
   <div class="form-wrapper-summary" *ngIf="application">
 
-    <div class="row" style="padding-left:50px; padding-right: 30px; max-width:1000px; margin-left:5px;">
+    <div class="row" style="padding-left: 50px; padding-right: 30px; max-width:1000px; margin-left:5px;">
       <div style="width: 70%">
       <h1 class="mat-heading">{{application?.eventName}}</h1>
       <h3>Start Date: {{application?.eventStartDate | date: 'dd MMM yyyy'}}</h3>
@@ -15,14 +15,10 @@
 
     <mat-card style="background-color: #e0e0e0; min-height: 200px;">
 
-    <section *ngIf="this.isReviewed()">
-      <!--if review-->
-      <h3><fa-icon [icon]="getStatusIcon()" style="margin-right: 10px;"></fa-icon>{{application?.eventStatus}}</h3>
-      <p>This application for liquor service has been reviewed and accepted.</p>
-      <p>
-        Your may now pay for your application
-      </p>
-        <button mat-raised-button (click)="payNow()">Pay Now</button>
+    <section *ngIf="application?.eventStatus == 'Draft'">
+      <!-- if denied -->
+      <h3><fa-icon [icon]="getStatusIcon()" style="margin-right: 10px;"></fa-icon>Draft</h3>
+      <p>Your application has not yet been submitted to the branch.</p>
     </section>
 
     <section *ngIf="application?.eventStatus == 'Pending Review'">
@@ -31,6 +27,22 @@
       <p>Your application is currently under review by the LCRB and police in your local area.</p>
       <p *ngIf="application.policeDecisionBy">The liquor service for this event is currently under review by {{application.policeDecisionBy?.name}}.</p>
     </section>
+
+    <section *ngIf="application?.eventStatus == 'Approved' && !trnId">
+      <!-- if denied -->
+      <h3><fa-icon [icon]="getStatusIcon()" style="margin-right: 10px;"></fa-icon>Approved - Pending Payment</h3>
+      <p>Your application has been approved. You can pay your application fee and any PST estimates and will receive your Special Event Permit.</p>
+      <a (click)="payNow()" style="text-decoration: underline; color:#1a5a96; cursor: pointer;"><fa-icon [icon]="faShoppingCart" style="margin-right: 10px;"></fa-icon>Pay Now</a>
+      <!--button mat-raised-button (click)="payNow()">Pay Now</button-->
+    </section>
+
+    <section *ngIf="application?.eventStatus == 'Issued' || (trnId && application?.eventStatus == 'Approved)">
+      <!-- if issued -->
+      <h3><fa-icon [icon]="faAward" style="margin-right: 10px;"></fa-icon>Issued</h3>
+      <a [href]="'api/special-events/applicant/' + application.id + '/permit/summary.pdf'" target="_blank" *ngIf="application.id"><fa-icon [icon]="faCertificate" style="margin-right: 10px;"></fa-icon>Print Permit</a>
+    </section>
+
+
 
     <section *ngIf="this.isDenied()">
       <!-- if denied -->
@@ -41,7 +53,7 @@
     </section>
 
       <br>
-      <a [href]="'api/special-events/applicant/' + application.specialEventId + '/summary/summary.pdf'" target="_blank"><fa-icon [icon]="faDownload" style="margin-right: 10px; color: #41598b;"></fa-icon>Print Summary</a>
+      <a [href]="'api/special-events/applicant/' + application.id + '/summary/summary.pdf'" target="_blank" *ngIf="application.id"><fa-icon [icon]="faDownLoad" style="margin-right: 10px; color: #41598b;"></fa-icon>Print Summary</a>
       <br>
 
   </mat-card>
@@ -287,12 +299,12 @@
         <div class="d-flex" *ngIf="!isReadOnly()">
             <label>Declaration</label>
             <section class="declaration-content">
-                <span class="declaration-text">
-                    I, {{contact?.name}}, certify that all of the information is true and complete to the best of my
+                <section class="declaration-text" style="margin-bottom: 15px; margin-left: 25px;">
+                    I, <strong><u>{{contact?.name}}</u></strong>, certify that all of the information is true and complete to the best of my
                     knowledge. I have read the terms and conditions of the permit, and if the application is approved,
                     the
                     permittee listed on the permit will be responsible for liquor service at the event.
-                </span>
+                </section>
 
                 <mat-checkbox class="declaration-checkbox">
                     By checking this box, I confirm that I have read, agree to and acknowledge the declaration. I also
@@ -312,12 +324,7 @@
   </div>
 </ng-container>
 
-<div *ngIf="mode === 'pendingReview'">
-    <p>
-        Your application requires review
-    </p>
-    <button mat-raised-button routerLink="/sep/my-applications">Return to My Applications</button>
-</div>
+
 
 <div *ngIf="mode === 'payNow' && !isReadOnly()">
     <p>
