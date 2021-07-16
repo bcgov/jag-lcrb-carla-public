@@ -22,7 +22,7 @@
       <th colspan=2>LICENCE</th>
       <th></th>
     </tr> -->
-    <tr *ngIf="!(marketerExists) && CRSElligible()">
+    <tr>
       <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
         <img class="icon" src="assets/Cannabis-store-icon-blue-40px.png" alt="">
       </td>
@@ -44,7 +44,7 @@
         </button>
       </td>
     </tr>
-    <tr *ngIf="!(nonMarketerExists || marketerExists)">
+    <tr>
       <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
 
         <img class="icon" src="assets/Cannabis-marketing-icon-blue-40px.png" alt="">
@@ -65,6 +65,29 @@
                 (click)="startNewMarketerApplication()" id="startMarketing">
           <span>START APPLICATION</span>
           <mat-progress-bar class="mb-1" *ngIf="startMarketingOngoing" mode="indeterminate"></mat-progress-bar>
+        </button>
+      </td>
+    </tr>
+    <tr *ngIf="F2G">
+      <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
+
+        <img class="icon" src="assets/Cannabis-store-icon-blue-40px.png" alt="">
+      </td>
+      <td style="width: 700px;">
+        <h3>Farm to Gate</h3>
+        <p>
+          The Cannabis Farm to Gate Licence allows licensed federal producers of cannabis to sell non-medical cannabis on their production site.
+        </p>
+        <a href="policy-document/cannabis-f2g-licence">
+          Learn
+          more about this licence
+        </a>
+      </td>
+      <td style="text-align: center;">
+        <button mat-raised-button color="secondary" [disabled]="startF2G"
+                (click)="startNewF2GApplication()" id="startF2G">
+          <span>START APPLICATION</span>
+          <mat-progress-bar class="mb-1" *ngIf="startF2GOngoing" mode="indeterminate"></mat-progress-bar>
         </button>
       </td>
     </tr>

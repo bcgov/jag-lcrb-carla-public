@@ -258,7 +258,7 @@ export class SummaryComponent implements OnInit {
   }
 
   isReviewed(): boolean {
-    return ["Approved"].indexOf(this.application?.eventStatus) >= 0;
+    return ["Approved", "Issued"].indexOf(this.application?.eventStatus) >= 0;
   }
 
   isDenied(): boolean {
@@ -271,6 +271,7 @@ export class SummaryComponent implements OnInit {
 
   async submitApplication(): Promise<void> {
     this.savingToAPI = true;
+
     const appData = await this.db.getSepApplication(this.localId);
     if (appData.id) { // do an update ( the record exists in dynamics)
       const result = await this.sepDataService.updateSepApplication({ ...appData, eventStatus: "Submitted" } as SepApplication, appData.id)
@@ -284,6 +285,9 @@ export class SummaryComponent implements OnInit {
         await this.db.applications.update(result.localId, result);
         this.localId = this.localId; // trigger data refresh
       }
+    //} else {
+    //  const result = await this.sepDataService.createSepApplication({})
+
     }
     this.savingToAPI = false;
   }

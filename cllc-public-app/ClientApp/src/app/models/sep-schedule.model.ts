@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import { format, addDays } from "date-fns";
 
 export class SepSchedule {
     id: string; // server side primary key
@@ -22,6 +22,9 @@ export class SepSchedule {
     toEventFormValue(): IEventFormValue {
         const result = { id: this.id } as IEventFormValue;
         result.eventDate = this.eventStart;
+
+
+
         if (this.eventStart) {
             result.eventStartValue = format(new Date(this.eventStart), "h:mm aa");
         }
@@ -32,6 +35,7 @@ export class SepSchedule {
             result.serviceStartValue = format(new Date(this.serviceStart), "h:mm aa");
         }
         if (this.serviceEnd) {
+            //console.log("Service End:", this.serviceEnd, format(new Date(this.serviceEnd), "h:mm aa"));
             result.serviceEndValue = format(new Date(this.serviceEnd), "h:mm aa");
         }
         return result;
@@ -49,12 +53,22 @@ export class SepSchedule {
      * @param time, assumed format "HH:MM [AM,PM]" e.g. '6:30 PM'
      */
     private formatDate(eventDate: Date, time: string): Date {
-        let day = parseInt(format(new Date(eventDate), "dd"), 10);
+
+        let tempDate = new Date(eventDate);
+
+        //let day = parseInt(format(new Date(eventDate), "dd"), 10);
+
+        //console.log("formatting date: ", eventDate, time)
         if (this.isNextDay(time)) {
-            day += 1;
+           // console.log("is next day")
+            tempDate = addDays(tempDate, 1);
+            //day += 1;
         }
-        const dateString = `${day} ${format(new Date(eventDate), "MMM yyyy")} ${time}`;
+        //const dateString = `${day} ${format(tempDate, "d MMM yyyy")} ${time}`;
+        const dateString = `${format(tempDate, "d MMM yyyy")} ${time}`;
+        //console.log("dateString:",dateString);
         const result = new Date(dateString);
+        //console.log("result is: ", result);
         return result;
     }
 

@@ -47,13 +47,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 if (name != null)
                 {
                     name = name.Replace("'", "''");
-                    filter = $"contains(adoxio_name,'{name}')";
+                    filter = $"contains(adoxio_name,'{name}') and statecode eq 0";
                 }
 
                 var localGovernments = _dynamicsClient.Localgovindigenousnations.Get(filter: filter).Value;
                 foreach (var lg in localGovernments)
                 {
-                    var accountFilter = $"_adoxio_lginlinkid_value eq {lg.AdoxioLocalgovindigenousnationid} and websiteurl ne null";
+                    var accountFilter = $"_adoxio_lginlinkid_value eq {lg.AdoxioLocalgovindigenousnationid} and statecode eq 0 and websiteurl ne null";
                     var linkedAccount = _dynamicsClient.Accounts.Get(filter: accountFilter).Value.FirstOrDefault();
                     var item = new LGListItem
                     {

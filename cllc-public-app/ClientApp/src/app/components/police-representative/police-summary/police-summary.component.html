@@ -45,6 +45,7 @@
     <section *ngIf="sepApplication?.eventStatus == 'Pending Review'">
       <!-- if denied -->
       <h3><fa-icon [icon]="getStatusIcon()" style="margin-right: 10px;"></fa-icon>Pending Review</h3>
+      <p *ngIf="!sepApplication.policeDecisionBy"><em>This application is not assigned to anyone. <br> To provide a review, assign the application from the list of <a href="sep/police/all-applications">All Applications</a>.</em></p>
       <p *ngIf="sepApplication.policeDecisionBy">The liquor service for this event is currently under review by {{sepApplication.policeDecisionBy?.name}}.</p>
     </section>
 
@@ -90,7 +91,7 @@
         </tr>
         <tr>
           <td style="text-align:center;"><h2 style="color: #036;">{{sepApplication?.eventStatus}}</h2></td>
-          <td style="text-align:center;"><h2 style="color: #036;">{{sepApplication?.eventType}}</h2></td>
+          <td style="text-align:center;"><h2 style="color: #036;">{{sepApplication?.privateOrPublic}}</h2></td>
           <td style="text-align:center;"><h2 style="color: #036;">{{this.getSize(sepApplication?.maximumNumberOfGuests)}}</h2><strong>{{sepApplication?.maximumNumberOfGuests}} Attendees</strong></td>
         </tr>
         <tr>
@@ -104,6 +105,7 @@
   </div>
     <h2>Summary</h2>
 
+
     <mat-expansion-panel [expanded]="true">
         <mat-expansion-panel-header>
             <mat-panel-title>
@@ -113,11 +115,11 @@
         <div class="d-flex">
           <section [formGroup]="form" style="padding: 16px 32px;">
             <section>
-                <app-field label="Municipality:" [required]="false" [valid]="isValidOrNotTouched('sepCity')"
+                <app-field label="City, District, or Indigenous Nation:" [required]="false" [valid]="isValidOrNotTouched('sepCity')"
                     errorMessage="Please select a value">
                     <input type="text" class="form-control" style="width: 500px;"
                         placeholder="Type to search and then select a value" formControlName="sepCity"
-                        [matAutocomplete]="lgAutoCompleteBox" #lgAutoCompleteTrigger> &nbsp; <button mat-raised-button color="primary" (click)="updateMunicipality()">UPDATE</button>
+                        [matAutocomplete]="lgAutoCompleteBox" #lgAutoCompleteTrigger> &nbsp; <button mat-raised-button color="primary" (click)="updateMunicipality()">CHANGE CITY</button>
                     <mat-autocomplete #lgAutoCompleteBox="matAutocomplete" [displayWith]="autocompleteDisplay">
                         <mat-option *ngFor="let item of cities" [value]="item">
                             {{item.name}}
@@ -126,38 +128,19 @@
                     <br>
                     <mat-progress-bar *ngIf="sepCityRequestInProgress" mode="indeterminate"></mat-progress-bar>
                 </app-field>
+                <em>If the city, district or Indigenous Nation is incorrect, you can change it by searching for the correct one. It will be re-assigned to the respective police jurisdiction.</em>
                 <section>
                     <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
-                    <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
-                        <!--section *ngIf="form.get('sepCity')?.value?.id">
-
-                            <mat-card class="mb-3">
-                                <label for="">Selected City </label>
-                                <div class="ml-2">
-                                    <label for="" class="mr-2">Name:</label>
-                                    <span>{{form.get('sepCity').value.name}}</span>
-                                </div>
-                                <div class="ml-2">
-                                    <label for="" class="mr-2">Police Jurisdiction:</label>
-                                    <span>{{form.get('sepCity').value.policeJurisdictionName}}</span>
-                                </div>
-
-                            </mat-card>
-                        </section-->
-
-                        <section *ngIf="!form.get('sepCity')?.value?.id">
-                            No City selected
-                        </section>
-                    </div>
                 </section>
             </section>
     </section>
         </div>
         <div class="d-flex">
-            <label>Applicant Name</label> <span>{{sepApplication?.applicant?.name}}</span>
+            <label>Applicant Name:</label> <span>{{sepApplication?.applicant?.name}}</span>
         </div>
+        <hr>
         <div class="d-flex">
-            <label>Applicant Info</label>
+            <label>Applicant Info:</label>
             <section>
                 <!--div>{{application?.applicant?.address1_line1}}</div>
                 <div>{{application?.applicant?.address1_city}}</div>
@@ -176,7 +159,7 @@
             </mat-panel-title>
         </mat-expansion-panel-header>
         <div class="d-flex">
-            <label>Event Starts at:</label> <span>{{sepApplication?.eventStartDate | date: 'dd MMM yyyy'}}</span>
+            <label>Event Starts On:</label> <span>{{sepApplication?.eventStartDate | date: 'dd MMM yyyy'}}</span>
         </div>
         <div class="d-flex">
             <label>Responsible Beverage Service #:</label> <span>{{sepApplication?.responsibleBevServiceNumber}}</span>
@@ -198,60 +181,58 @@
         </div>
     </mat-expansion-panel>
 
-    <mat-expansion-panel [expanded]="true">
-        <div *ngFor="let location of sepApplication.eventLocations; index as i">
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    EVENT LOCATION {{i+1}}
-                </mat-panel-title>
-            </mat-expansion-panel-header>
+    <mat-expansion-panel [expanded]="true" *ngFor="let location of sepApplication?.eventLocations; let i = index;">
+      <mat-expansion-panel-header>
+          <mat-panel-title>
+              EVENT LOCATION ({{i+1}} of {{sepApplication?.eventLocations.length}})
+          </mat-panel-title>
+      </mat-expansion-panel-header>
             <div class="d-flex">
-                <label>Location Name</label> <span>{{location.locationName}}</span>
+                <label>Location Name:</label> <span>{{location.locationName}}</span>
             </div>
             <div class="d-flex">
-                <label>Location Description</label> <span>{{location.locationDescription}}</span>
+                <label>Location Description:</label> <span>{{location.locationDescription}}</span>
             </div>
             <div class="d-flex">
-                <label>Event Address</label>
-                <section>
-                    <span>{{location.eventLocationStreet1}}, &nbsp;</span>
-                    <span>{{location.eventLocationStreet2}}</span>
+              <label>Event Address:</label>
+              <section>
+                  <span>{{location.eventLocationStreet1}}</span> <br>
+                  <span>{{sepApplication?.sepCity?.name}}, BC</span> <br>
+                  <span>{{location.eventLocationPostalCode}}</span> <br>
+              </section>
+          </div>
 
-                    <span>&nbsp;{{sepApplication?.sepCity?.name}}, BC</span>
-                    <span>&nbsp;{{location.eventLocationPostalCode}}</span>
-                </section>
-            </div>
-            <p>{{location.serviceAreas.length}} Service Area<span *ngIf="location.serviceAreas.length > 1">s</span>:</p>
-            <div *ngFor="let serviceArea of location.serviceAreas">
+            <div *ngFor="let serviceArea of location.serviceAreas; let k = index;">
+                <h4> SERVICE AREA ({{k+1}} of {{location.serviceAreas.length}})</h4>
                 <div class="d-flex">
                     <label>Description:</label> <span>{{serviceArea?.eventName}}</span>
                 </div>
                 <div class="d-flex">
-                    <label>Max. Guests in Service Area:</label> <span>{{serviceArea?.maximumNumberOfGuests}}</span>
+                    <label>Max. Guests in Service Area:</label> <span>{{serviceArea?.licencedAreaMaxNumberOfGuests}}</span>
                 </div>
                 <div class="d-flex">
                     <label>Minors Present?</label> <span>{{serviceArea?.minorPresent ? "Yes" : "No"}}</span>
                 </div>
                 <div *ngIf="serviceArea.minorPresent" class="d-flex">
-                    <label>Number of Minors</label> <span>{{serviceArea.numberOfMinors}}</span>
+                    <label>Number of Minors:</label> <span>{{serviceArea.numberOfMinors}}</span>
                 </div>
             </div>
 
 
             <section *ngFor="let eventDate of location.eventDates; let j = index;">
-                <h4>Event Date {{j+1}}</h4>
+                <h4>EVENT DATE ({{j+1}} of {{location.eventDates.length}})</h4>
                 <div class="d-flex">
-                    <label>Start Date</label> <span>{{eventDate.eventDate | date: 'dd MMM yyyy'}}</span>
+                    <label>Start Date:</label> <span>{{eventDate.eventDate | date: 'dd MMM yyyy'}}</span>
                 </div>
                 <div class="d-flex">
-                    <label>Start Time</label> <span>{{eventDate.eventStartValue}} - {{eventDate.eventEndValue}}</span>
+                    <label>Start Time:</label> <span>{{eventDate.eventStartValue}} - {{eventDate.eventEndValue}}</span>
                 </div>
                 <div class="d-flex">
-                    <label>Liquor Service</label> <span>{{eventDate.serviceStartValue}} -
+                    <label>Liquor Service:</label> <span>{{eventDate.serviceStartValue}} -
                         {{eventDate.serviceStartValue}}</span>
                 </div>
             </section>
-        </div>
+
     </mat-expansion-panel>
 
     <mat-expansion-panel [expanded]="true">
@@ -261,43 +242,54 @@
             </mat-panel-title>
         </mat-expansion-panel-header>
 
+
+        <h4>LIQUOR QUANTITIES</h4>
+
+
+        <div class="d-flex" style="white-space: nowrap; font-weight:900;">
+          <label>Total Servings:</label> <span class="fee-amount">{{sepApplication?.totalServings || 0}}</span>
+      </div>
+            <div class="d-flex" style="white-space: nowrap; font-weight:900;">
+                <label>Beer</label> <span class="fee-amount">{{sepApplication?.beer || 0}}%</span>
+            </div>
+            <div class="d-flex" style="white-space: nowrap; font-weight:900;">
+                <label>Wine</label> <span class="fee-amount">{{sepApplication?.wine || 0}}%</span>
+            </div>
+            <div class="d-flex" style="white-space: nowrap; font-weight:900;">
+                <label>Spirits</label> <span class="fee-amount">{{sepApplication?.spirits || 0}}%</span>
+            </div>
+        <hr>
         <div class="d-flex">
-            <label>Liquor Quantities</label>
-            <div class="d-flex">
-                <label>Draught Beer</label> <span class="fee-amount">{{sepApplication?.beer || 0}} %</span>
-            </div>
-            <div class="d-flex">
-                <label>Wine</label> <span class="fee-amount">{{sepApplication?.wine || 0}} %</span>
-            </div>
-            <div class="d-flex">
-                <label>Spirits</label> <span class="fee-amount">{{sepApplication?.spirits || 0}} %</span>
-            </div>
+          <label>Est. Total Liquor Sales Revenue</label> <span class="fee-amount">{{sepApplication?.totalRevenue |
+            currency}}</span>
         </div>
+        <div class="d-flex">
+          <label>Est. Liquor Purchase Cost</label> <span class="fee-amount">{{sepApplication?.totalPurchaseCost | currency}}</span>
+        </div>
+        <div class="d-flex">
+          <label>Est. Net Proceeds/Profit From Liquor Sales</label> <span class="fee-amount">{{sepApplication?.totalProceeds |
+            currency}}</span>
+        </div>
+        <div class="d-flex">
+          <label>Total PST Due</label> <span class="fee-amount">{{sepApplication?.netEstimatedPST | currency}}</span>
+        </div>
+        <div class="d-flex">
+          <label>Application Fees <br>
+          </label> <span class="fee-amount">{{sepApplication?.invoice?.totalamount - sepApplication?.netEstimatedPST |
+            currency}}</span><em>&nbsp;(based on {{sepApplication?.eventLocations.length}} event location<span
+              *ngIf="application?.eventLocations.length > 1">s</span> and capacity)</em>
+        </div>
+
 
         <hr>
 
-        <div class="d-flex">
-            <label>Estimated total liquor sales revenue</label> <span class="fee-amount">{{sepApplication?.totalRevenue | currency}}</span>
-        </div>
-        <div class="d-flex">
-            <label>Estimated liquor purchase cost</label> <span class="fee-amount">{{sepApplication?.totalPurchaseCost | currency}}</span>
-        </div>
-        <div class="d-flex">
-            <label>Estimated net proceeds/profit from liquor sales</label> <span class="fee-amount">{{sepApplication?.totalProceeds | currency}}</span>
-        </div>
-        <div class="d-flex">
-            <label>Total PST Amount Due</label> <span class="fee-amount">{{sepApplication?.netEstimatedPST | currency}}</span>
-        </div>
-        <div class="d-flex">
-            <label>Application Fees (Based on 1 event location and capacity)*
-                *0-500 – $25.00</label> <span class="fee-amount">{{sepApplication?.invoice?.totalamount - sepApplication?.netEstimatedPST | currency}}</span>
-        </div>
 
-            
-        <hr>
+        <div class="d-flex total-fees-due">
+          <label>Total Fees Due Upon Approval</label> <span class="fee-amount">{{sepApplication?.invoice?.totalamount
+              | currency}}</span>
+      </div>
 
     </mat-expansion-panel>
 
     <hr>
 </div>
-

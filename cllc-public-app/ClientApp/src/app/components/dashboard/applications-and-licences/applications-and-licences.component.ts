@@ -72,6 +72,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   liquorTwo: boolean;
   liquorThree: boolean;
   RLRS: boolean;
+  F2G: boolean;
   startMarketingOngoing: boolean;
   startCateringOngoing: boolean;
   startFPOngoing: boolean;
@@ -83,7 +84,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   startCRSOngoing: boolean;
   startRLRSOngoing: boolean;
   startAgentOngoing: boolean;
-
+  startF2GOngoing: boolean;
 
   constructor(
     private userDataService: UserDataService,
@@ -118,6 +119,9 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
       .subscribe(x => this.liquorThree = x);
     featureFlagService.featureOn("RLRS")
       .subscribe(x => this.RLRS = x);
+    featureFlagService.featureOn("F2G")
+      .subscribe(x => this.F2G = x);
+
   }
 
   ngOnInit() {
@@ -359,6 +363,31 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
           { duration: 3500, panelClass: ["red-snackbar"] });
         this.startMarketingOngoing = false;
         console.log("Error starting a New Marketer Application");
+      }
+    );
+  }
+
+
+  startNewF2GApplication() {
+    this.startF2GOngoing = true;
+    const newLicenceApplicationData = {
+      licenseType: "Farm to Gate",
+      applicantType: this.account.businessType,
+      applicationType: { name: ApplicationTypeNames.F2G } as ApplicationType,
+      account: this.account,
+    } as Application;
+    // newLicenceApplicationData. = this.account.businessType;
+    this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
+      data => {
+        this.startF2GOngoing = false;
+        this.router.navigateByUrl(`/account-profile/${data.id}`);
+      },
+      () => {
+        this.snackBar.open("Error starting a New Farm to Gate Application",
+          "Fail",
+          { duration: 3500, panelClass: ["red-snackbar"] });
+        this.startF2GOngoing = false;
+        console.log("Error starting a New Farm to Gate Application");
       }
     );
   }
