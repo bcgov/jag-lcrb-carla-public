@@ -26,6 +26,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 ("FEATURE_LIQUOR_ONE", "LiquorOne"),
                 ("FEATURE_LIQUOR_TWO", "LiquorTwo"),
                 ("FEATURE_LIQUOR_THREE", "LiquorThree"),
+                ("FEATURE_F2G", "F2G"),
                 ("FEATURE_COVID_APPLICATION", "CovidApplication"),
                 ("FEATURE_LG_APPROVALS", "LGApprovals"),
                 ("FEATURE_CASS", "CASS"),
