@@ -122,6 +122,8 @@ export class SubmittedApplicationsComponent implements OnInit {
     switch (status) {
       case ("PendingReview"):
         return faStopwatch;
+      case ("Draft"):
+        return faPencilAlt;
       case ("Approved"):
       case ("Reviewed"):
         return faCheck;

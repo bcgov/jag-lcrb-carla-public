@@ -56,6 +56,8 @@ export class TotalServingsComponent implements OnInit {
     this.suggested_servings = app.suggestedServings;
     this.max_servings = app.maxSuggestedServings;
 
+    //console.log("setting servings:", this.total_guests, this.total_minors, this.total_service_hours, this.suggested_servings, this.max_servings)
+
   }
 
 

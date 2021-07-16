@@ -125,6 +125,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool? IsOnPublicProperty { get; set; }
         public bool? IsLocalSignificance { get; set; }
         public DateTimeOffset? DateAgreedToTsAndCs { get; set; }
+        public DateTimeOffset? DateIssued { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
         public ChargingForLiquorReasons? ChargingForLiquorReason { get; set; }

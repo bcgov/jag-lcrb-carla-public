@@ -368,9 +368,12 @@ export class AccountProfileComponent extends FormBase implements OnInit {
   gotoReview() {
     this.validationMessages = [];
 
+    var route = "/dashboard";
+
     if (this.getBusinessTypeName() == 'Police') {
       this.form.get('businessProfile.businessNumber').setValidators([]);
       this.form.get('businessProfile.businessNumber').updateValueAndValidity();
+      route = "/sep/dashboard";
     }
 
     if (this.form.valid && (!this.connectionsToProducers || this.connectionsToProducers.form.valid)) {
@@ -398,7 +401,8 @@ export class AccountProfileComponent extends FormBase implements OnInit {
             this.router.navigate(route);
           }
         } else {
-          this.router.navigate(["/dashboard"]);
+
+          this.router.navigate([route]);
         }
       });
     } else {
