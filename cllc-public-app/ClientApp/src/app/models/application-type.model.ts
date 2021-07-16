@@ -80,6 +80,7 @@ export enum ApplicationTypeNames {
   CannabisRetailStore = "Cannabis Retail Store",
   FP = "Food Primary",
   FPRelo = "Food Primary Relocation",
+  F2G = "Farm to Gate",
   LicenseeChanges = "Licensee Changes",
   LP = "Liquor Primary",
   LPC = "Liquor Primary Club",
