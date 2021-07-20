@@ -295,14 +295,14 @@ export class LicenceRowComponent extends FormBase implements OnInit {
 
   isExpired(licence: ApplicationLicenseSummary) {
     // if NOW is after licence.expiryDate then expired is true
-    const expired = isAfter(NOW, startOfDay(licence.expiryDate));
+    const expired = isAfter(NOW, startOfDay(new Date(licence.expiryDate)));
     return expired && (licence.status === "Active" || licence.status === "Expired");
   }
 
   isAboutToExpire(licence: ApplicationLicenseSummary) {
     if (!this.isExpired(licence)) {
-      const expiry = startOfDay(licence.expiryDate);
-      const diff = differenceInDays(NOW, expiry);
+      const expiry = startOfDay(new Date(licence.expiryDate));
+      const diff = differenceInDays(expiry, NOW);
       return diff <= 60;
     } else {
       return false;
@@ -311,7 +311,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
 
   isRecentlyExpired(licence: ApplicationLicenseSummary) {
     if (this.isExpired(licence)) {
-      const expiry = startOfDay(licence.expiryDate);
+      const expiry = startOfDay( new Date(licence.expiryDate));
       const diff = differenceInDays(NOW, expiry);
       return diff <= 30;
     }
@@ -319,7 +319,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
   }
 
   isCancelled(licence: ApplicationLicenseSummary) {
-    const expiry = startOfDay(licence.expiryDate);
+    const expiry = startOfDay(new Date(licence.expiryDate));
     const diff = Math.abs(differenceInDays(expiry, NOW));
     return diff >= 180 || licence.status === "Cancelled";
   }
@@ -604,7 +604,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
 
   // TO DO: re-write this
   licenceTypeHasEvents(licenceType: string) {
-    return (licenceType.indexOf("Catering") >= 0 ||
+    return licenceType && (licenceType.indexOf("Catering") >= 0 ||
       licenceType.indexOf("Wine Store") >= 0 ||
       licenceType.indexOf("Manufacturer") >= 0 ||
       licenceType.indexOf("Liquor Primary") >= 0 ||
@@ -612,6 +612,6 @@ export class LicenceRowComponent extends FormBase implements OnInit {
   }
 
   licenceTypeHasTerms(licenceType: string) {
-    return licenceType.indexOf("Cannabis") < 0;
+    return licenceType && licenceType.indexOf("Cannabis") < 0;
   }
 }
