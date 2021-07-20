@@ -8,7 +8,6 @@ import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { FormBase } from '@shared/form-base';
 import { distinct, distinctUntilChanged } from 'rxjs/operators';
-import { be } from 'date-fns/locale';
 @Component({
   selector: 'app-eligibility',
   templateUrl: './eligibility.component.html',

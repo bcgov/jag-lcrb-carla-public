@@ -9,7 +9,6 @@ import { IndexedDBService } from "@services/indexed-db.service";
 import { SepApplication } from "@models/sep-application.model";
 import { environment } from "environments/environment";
 import { SpecialEventsDataService } from "@services/special-events-data.service";
-import { de } from "date-fns/locale";
 
 export const SEP_APPLICATION_STEPS = ["applicant", "eligibility", "event", "liquor", "summary"];
 
