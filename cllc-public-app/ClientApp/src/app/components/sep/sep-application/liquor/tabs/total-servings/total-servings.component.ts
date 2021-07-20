@@ -1,15 +1,17 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SepApplication } from '@models/sep-application.model';
-import { SepSchedule } from '@models/sep-schedule.model';
-import { SepServiceArea } from '@models/sep-service-area.model';
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { Form, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { SepApplication } from "@models/sep-application.model";
+import { SepSchedule } from "@models/sep-schedule.model";
+import { SepServiceArea } from "@models/sep-service-area.model";
+import { Options } from "@angular-slider/ngx-slider";
 
 @Component({
-  selector: 'app-total-servings',
-  templateUrl: './total-servings.component.html',
-  styleUrls: ['./total-servings.component.scss']
+  selector: "app-total-servings",
+  templateUrl: "./total-servings.component.html",
+  styleUrls: ["./total-servings.component.scss"]
 })
 export class TotalServingsComponent implements OnInit {
+  options: Options = null;
   _application: SepApplication;
   @Input()
   set application(app: SepApplication) {
@@ -18,7 +20,6 @@ export class TotalServingsComponent implements OnInit {
       delete value.totalMaximumNumberOfGuests;
       this._application = Object.assign(new SepApplication(), value);
       this.setServings(this._application);
-      this.total_servings = this._application?.totalServings || this.suggested_servings;
     }
   }
 
@@ -30,6 +31,7 @@ export class TotalServingsComponent implements OnInit {
   suggested_servings = 0;
   max_servings = 0;
   total_servings = 0;
+  total_servingsSlider = 0;
   total_guests = 0;
   total_minors = 0;
   total_service_hours = 0;
@@ -40,8 +42,6 @@ export class TotalServingsComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-
 
   setServings(app: SepApplication) {
     if (!app) {
@@ -55,9 +55,40 @@ export class TotalServingsComponent implements OnInit {
 
     this.suggested_servings = app.suggestedServings;
     this.max_servings = app.maxSuggestedServings;
+    this.total_servings = app?.totalServings || this.suggested_servings;
+    this.total_servingsSlider = this.total_servings;
 
-    //console.log("setting servings:", this.total_guests, this.total_minors, this.total_service_hours, this.suggested_servings, this.max_servings)
+    this.options = {
+      showTicks: true,
+      floor: 1,
+      ceil: this.max_servings,
+      getLegend: (value) => {
+        let legend = "";
+        if (value === 1) {
+          legend = "Minimum";
+        }
+        if (value === this.suggested_servings) {
+          legend = `Suggested ${value}`;
+        }
+        if (value === this.max_servings) {
+          legend = `Maximum`;
+        }
+        return legend;
+      }
+    };
+    // console.log("setting servings:", this.total_guests, this.total_minors, this.total_service_hours, this.suggested_servings, this.max_servings)
 
+  }
+
+  totalServingsChange(value: number) {
+    this.options.disabled = false;
+    if (value <= this.max_servings && value !== this.total_servingsSlider) {
+      this.total_servingsSlider = value;
+    } else {
+      // disable slider
+      this.options.disabled = true;
+    }
+    this.options = {...this.options};
   }
 
 
@@ -65,7 +96,7 @@ export class TotalServingsComponent implements OnInit {
     return value;
   }
 
-  isValid(): boolean{
+  isValid(): boolean {
     return this.total_servings > 0;
   }
 
