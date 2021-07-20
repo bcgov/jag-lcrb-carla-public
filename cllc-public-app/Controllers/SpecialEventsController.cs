@@ -903,6 +903,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             var newSpecialEvent = new MicrosoftDynamicsCRMadoxioSpecialevent();
             newSpecialEvent.CopyValues(specialEvent);
+            // do not set the invoice trigger on create
+            newSpecialEvent.AdoxioInvoicetrigger = null;
             newSpecialEvent.Statuscode = (int?)EventStatus.Draft;
 
             if (!string.IsNullOrEmpty(userSettings.AccountId) && userSettings.AccountId != "00000000-0000-0000-0000-000000000000")
