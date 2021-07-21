@@ -1,4 +1,4 @@
-<div>
+<div class="t-servings">
     <p>
         Use the tool below to declare the appropriate number of drink servings for your event. You can adjust the total
         number at any time before you submit your application.
@@ -10,23 +10,21 @@
     </p>
     <mat-divider></mat-divider>
 
-    <div class="d-flex"
-        style="margin-bottom: 25px; background-color:#e1e8f2; border-bottom: #ccc; padding-top: 25px; padding-bottom: 25px;">
+    <mat-card class="d-flex"
+        style="margin-bottom: 25px; background-color:#e1e8f2;  border-radius: 5px; padding: 16px;">
 
         <!--div class="slider-box"-->
-        <mat-slider [(ngModel)]="total_servings" class="flex-fill" thumbLabel [displayWith]="formatLabel"
-            tickInterval="auto" step="1" [min]="1" [max]="max_servings" aria-label="units"></mat-slider>
-
-        <div class="slider-labels">
-            <div class="minimum">1<br>Minimum<br>Amount</div>
-            <div class="declared">{{suggested_servings}}<br>Suggested<br>Amount</div>
-            <div class="real-maximum">{{max_servings}}<br>Suggested<br>Maximum</div>
-        </div>
+        <section class="w-100 pl-3 pr-3">
+            <div class="ml-3 mr-3">
+                <ngx-slider *ngIf="options" [value]="total_servingsSlider" (valueChange)="total_servings = $event;" [options]="options"></ngx-slider>
+            </div>
+        </section>
+        
         <!--/div-->
 
         <div class="flex-fill slider-box">
             <input type="number" [ngStyle]="{'border-color': !isValid() ? 'red': '#ccc'}"
-            [max]="max_servings" [min]="1" [(ngModel)]="total_servings" name="totalServings"
+            [max]="max_servings" [min]="1" [(ngModel)]="total_servings" (ngModelChange)="totalServingsChange($event)" name="totalServings"
                 class="form-control bev-slider"
                 style="text-align:center; height:50px; font-size:20px; font-weight: 900;"><br>
             <strong>Declared Maximum Servings</strong><br>
@@ -37,7 +35,7 @@
 
             <small>You can enter a different number of <br>drinks here.</small>
         </div>
-    </div>
+    </mat-card>
 
     <section style="padding-bottom: 15px;">
       <app-error-alert *ngIf="(total_servings - max_servings) > max_servings * .25" type="alert">
