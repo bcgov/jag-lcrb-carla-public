@@ -84,7 +84,6 @@ export class SepApplication {
                 maxMinors += area.licencedAreaNumberOfMinors || 0;
             }
         }
-        //console.log("max adults:", this.totalMaximumNumberOfGuests, maxMinors);
         return this.totalMaximumNumberOfGuests - maxMinors;
     }
 
@@ -93,8 +92,6 @@ export class SepApplication {
         for (const location of this.eventLocations) {
             for (const hours of location.eventDates) {
                 serviceHours += Math.min(differenceInHours(new Date(hours.serviceEnd), new Date(hours.serviceStart)) || 0, 17);
-                //console.log("hours:", hours.serviceEnd, hours.serviceStart,
-                //    differenceInHours(new Date(hours.serviceEnd), new Date(hours.serviceStart)));
             }
         }
         return serviceHours;

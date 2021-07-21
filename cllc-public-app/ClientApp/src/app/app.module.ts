@@ -310,6 +310,7 @@ import { SepPaymentConfirmationComponent } from "@components/sep/payment-confirm
 import { AcceptDialogComponent } from './components/police-representative/police-summary/accept-dialog/accept-dialog.component';
 import { DenyDialogComponent } from './components/police-representative/police-summary/deny-dialog/deny-dialog.component';
 import { CancelDialogComponent } from './components/police-representative/police-summary/cancel-dialog/cancel-dialog.component';
+import { NgxSliderModule } from "@angular-slider/ngx-slider";
 
 
 @NgModule({
@@ -501,6 +502,7 @@ import { CancelDialogComponent } from './components/police-representative/police
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgxSliderModule,
     MatAutocompleteModule,
     MatButtonModule,
     MatButtonToggleModule,

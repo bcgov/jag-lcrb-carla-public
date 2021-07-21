@@ -1,101 +1,35 @@
 .bev-slider {
-    width: 160px;
+  width: 160px;
 }
 
 .tool-container {
-    label {
-        margin-right: 8px;
-    }
+  label {
+    margin-right: 8px;
+  }
 }
 
 ::ng-deep {
-  /*
-  .mat-slider-thumb-label {
-    transform: rotate(45deg) !important;
-    border-radius: 50% 50% 0 !important;
-  }
-  .mat-slider-thumb {
-    transform: scale(0) !important;
-  }
-  .mat-slider-thumb-label-text {
-    opacity: 1 !important;
-  }
-*/
-  .mat-slider.mat-slider-horizontal .mat-slider-wrapper {
-    top: 18px;
-
-  }
-  .mat-slider.mat-slider-horizontal .mat-slider-track-wrapper {
-    height: 12px;
-    border-radius: 10px;
-  }
-  .mat-slider.mat-slider-horizontal .mat-slider-track-background,
-  .mat-slider.mat-slider-horizontal .mat-slider-track-fill {
-    height: 100%;
-  }
-  .mat-slider.mat-slider-horizontal .mat-slider-track-fill {
-    background-color: #fcba19;
-  }
-  .mat-accent .mat-slider-thumb {
-    height: 30px;
-    width: 30px;
-    background-color: white;
-    border: solid 2px gray;
-    bottom: -20px;
-    right: -20px;
-  }
-  .mat-slider-min-value:not(.mat-slider-thumb-label-showing) .mat-slider-thumb {
-    background-color: white;
+  .t-servings .ngx-slider .ngx-slider-bar {
+    background: #ccc;
   }
 
+  .t-servings .ngx-slider .ngx-slider-tick {
+    background: #ccc;
+  }
+
+  .t-servings.ngx-slider-pointer {
+    background-color: #38598A;
+  }
+
+  .t-servings .ngx-slider[disabled] .ngx-slider-pointer {
+    background-color: #d8e0f3;
 }
 
-
-.mat-slider-horizontal {
-  height: 48px;
-  min-width: 128px;
-  width: 505px;
-
+  .ngx-slider-pointer:focus-visible {
+    outline: none !important;
+  }
 }
 
-
-.slider-box {
-  position: relative;
-  //left: 8.33333%;
-  right: auto;
-  //padding-left: 0.9385rem;
-  //padding-right: 0.9375rem;
-  float: left;
-  text-align: center
-
-}
-
-.slider-labels {
-  margin-top: 46px;
-  font-size: 0.8em;
-  text-align: center
-}
-
-
-.real-maximum {
-  position: absolute;
-  left: 61%;
-  text-align:right;
-  margin-right:5px;
-}
-
-.declared {
-  position: absolute;
-  right: 44%;
-}
-
-.minimum {
-  position: absolute;
-  left: 5px;
-  text-align:left;
-  margin-left: 5px;
-}
 small {
-  font-size: .65em;
+  font-size: 0.65em;
 }
-

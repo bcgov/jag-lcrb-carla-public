@@ -23,20 +23,24 @@ export class OrganizationLeadershipComponent extends FormBase {
     // max date is 19 years ago
     this.maxDate19 = subDays(startOfToday(), 19);
     this.parentName = data.parentName;
-    this.form = fb.group({
-      id: [""],
-      isDirectorNew: [false],
-      isOfficerNew: [false],
-      isManagerNew: [false],
-      firstNameNew: ["", Validators.required],
-      lastNameNew: ["", Validators.required],
-      emailNew: ["", [Validators.email, Validators.required]],
-      isIndividual: [true],
-      dateofBirthNew: ["", Validators.required],
-      titleNew: [""],
-      dateofappointment: ["", Validators.required]
-    },
-      { validator: this.dateLessThanToday("dateofappointment") }
+    this.form = fb.group(
+      {
+        id: [""],
+        isDirectorNew: [false],
+        isOfficerNew: [false],
+        isManagerNew: [false],
+        firstNameNew: ["", Validators.required],
+        lastNameNew: ["", Validators.required],
+        emailNew: ["", [Validators.email, Validators.required]],
+        isIndividual: [true],
+        dateofBirthNew: ["", Validators.required],
+        titleNew: [""],
+        dateofappointment: ["", Validators.required]
+      },
+      {
+        validators: this.dateLessThanToday("dateofappointment"),
+        updateOn: "change"
+      }
     );
 
     if (data && data.person) {
