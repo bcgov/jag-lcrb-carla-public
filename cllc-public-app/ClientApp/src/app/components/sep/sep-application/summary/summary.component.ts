@@ -94,8 +94,7 @@ export class SummaryComponent implements OnInit {
     // get the last saved application
     this.db.getSepApplication(value)
       .then(app => {
-        this.application = app;
-        this.formatEventDatesForDisplay();
+        this.setApplication(app.id);
       });
   }
 
@@ -123,17 +122,19 @@ export class SummaryComponent implements OnInit {
       this.appId = params["SessionKey"];
     });
     this.route.params.subscribe((params: Params) => {
-      const id = params.apiId;
-
-      if (id) {
-        sepDataService.getSpecialEventForApplicant(id)
-          .subscribe(app => {
-            this.showSubmitButton = false;
-            this.application = app;
-            this.formatEventDatesForDisplay();
-          });
-      }
+      this.setApplication(params.apiId);
     });
+  }
+
+  setApplication(id: string) {
+    if (id) {
+      this.sepDataService.getSpecialEventForApplicant(id)
+        .subscribe(app => {
+          this.showSubmitButton = false;
+          this.application = app;
+          this.formatEventDatesForDisplay();
+        });
+    }
   }
 
   ngOnInit(): void {
@@ -241,7 +242,7 @@ export class SummaryComponent implements OnInit {
   }
 
   getStatusIcon(): IconDefinition {
-    switch(this.application?.eventStatus){
+    switch (this.application?.eventStatus) {
       case ("Pending Review"):
         return faStopwatch;
       case ("Approved"):
@@ -266,7 +267,7 @@ export class SummaryComponent implements OnInit {
   }
 
   isReadOnly(): boolean {
-    return ["Pending Review","Approved","Issued","Denied","Cancelled"].indexOf(this.application?.eventStatus) >= 0;
+    return ["Pending Review", "Approved", "Issued", "Denied", "Cancelled"].indexOf(this.application?.eventStatus) >= 0;
   }
 
   async submitApplication(): Promise<void> {
@@ -285,8 +286,8 @@ export class SummaryComponent implements OnInit {
         await this.db.applications.update(result.localId, result);
         this.localId = this.localId; // trigger data refresh
       }
-    //} else {
-    //  const result = await this.sepDataService.createSepApplication({})
+      //} else {
+      //  const result = await this.sepDataService.createSepApplication({})
 
     }
     this.savingToAPI = false;
