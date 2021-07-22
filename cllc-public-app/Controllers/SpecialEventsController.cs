@@ -931,6 +931,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw httpOperationException;
             }
 
+            saveTotalServings(specialEvent, newSpecialEvent);
+
             if (specialEvent.EventLocations?.Count > 0)
             {
                 // newSpecialEvent.AdoxioSpecialeventSpecialeventlocations = new List<MicrosoftDynamicsCRMadoxioSpecialeventlocation>();
@@ -1280,9 +1282,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 string drinkTypeName = data.Item1;
                 int estimatedServings = data.Item2;
                 var drinkType = drinkTypes.Where(drinkType => drinkType.AdoxioName == drinkTypeName).FirstOrDefault();
-                var existingForecast = existingEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
-                    .Where(drink => drink._adoxioTypeValue == drinkType.AdoxioSepdrinktypeid)
-                    .FirstOrDefault();
+                MicrosoftDynamicsCRMadoxioSepdrinksalesforecast existingForecast = null;
+                if (existingEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent != null)
+                {
+                    existingForecast = existingEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
+                        .Where(drink => drink._adoxioTypeValue == drinkType.AdoxioSepdrinktypeid)
+                        .FirstOrDefault();
+                }
                 createOrUpdateForecast(specialEvent, existingForecast, drinkType, estimatedServings);
             });
         }
