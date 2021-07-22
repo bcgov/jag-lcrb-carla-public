@@ -277,7 +277,7 @@ export class SummaryComponent implements OnInit {
         .toPromise();
       if (result.eventStatus === "Approved") {
         this.mode = "payNow";
-      } else if (result.eventStatus === "Pending Review" || result.eventStatus === "Submitted") {
+      } else if (result.eventStatus === "Pending Review") {
         this.mode = "pendingReview";
       }
       if (result.localId) {
