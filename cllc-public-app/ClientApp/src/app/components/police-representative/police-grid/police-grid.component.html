@@ -48,7 +48,10 @@
         <!-- Status -->
         <ng-container matColumnDef="eventStatusLabel">
           <th mat-header-cell *matHeaderCellDef mat-sort-header="eventStatus">Status</th>
-          <td mat-cell *matCellDef="let row" class="mat-body-1">{{row.eventStatus}}</td>
+          <td mat-cell *matCellDef="let row" class="mat-body-1"><strong>{{row.eventStatus}}</strong>
+          <p><small><em>Police: {{row.policeApproval}}<br>LCRB:{{row.lcrbApproval}}</em></small></p>
+
+          </td>
         </ng-container>
 
         <!-- Assigned -->
