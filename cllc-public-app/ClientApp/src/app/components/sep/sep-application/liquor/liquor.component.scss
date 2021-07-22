@@ -1,12 +1,11 @@
-::ng-deep {
-    .form-wrapper {
-        max-width: 1000px;
-        mat-divider {
-            margin: 16px 0;
-        }
-    }
-    
-    .mat-tab-body-wrapper {
-        padding-top: 8px;
-    }
+.form-wrapper {
+    max-width: 1000px;
+}
+
+::ng-deep mat-divider {
+    margin: 16px 0;
+}
+
+::ng-deep .mat-tab-body-wrapper {
+    padding-top: 8px;
 }
