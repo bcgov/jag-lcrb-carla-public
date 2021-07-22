@@ -1,4 +1,4 @@
-<ng-container *ngIf="mode === 'readonlySummary' || mode === 'pendingReview'">
+<ng-container *ngIf="mode === 'readonlySummary' || mode === 'pendingReview' || mode === 'payNow'">
 
   <div class="form-wrapper-summary" *ngIf="application">
 
@@ -26,13 +26,15 @@
       <h3><fa-icon [icon]="getStatusIcon()" style="margin-right: 10px;"></fa-icon>Pending Review</h3>
       <p>Your application is currently under review by the LCRB and police in your local area.</p>
       <p *ngIf="application.policeDecisionBy">The liquor service for this event is currently under review by {{application.policeDecisionBy?.name}}.</p>
+
     </section>
 
-    <section *ngIf="application?.eventStatus == 'Approved' && !trnId">
+    <section *ngIf="application?.eventStatus == 'Approved' && !trnId || mode ==='payNow'">
       <!-- if denied -->
       <h3><fa-icon [icon]="getStatusIcon()" style="margin-right: 10px;"></fa-icon>Approved - Pending Payment</h3>
       <p>Your application has been approved. You can pay your application fee and any PST estimates and will receive your Special Event Permit.</p>
       <a (click)="payNow()" style="text-decoration: underline; color:#1a5a96; cursor: pointer;"><fa-icon [icon]="faShoppingCart" style="margin-right: 10px;"></fa-icon>Pay Now</a>
+
       <!--button mat-raised-button (click)="payNow()">Pay Now</button-->
     </section>
 
@@ -41,8 +43,15 @@
       <h3><fa-icon [icon]="faCertificate" style="margin-right: 10px;"></fa-icon>Issued</h3>
       <p *ngIf="application?.dateIssued">Your Special Event Permit was issued on {{application?.dateIssued | date: 'MMM dd yyyy'}}.</p>
       <a [href]="'api/special-events/applicant/' + application.id + '/permit/summary.pdf'" target="_blank" *ngIf="application.id"><fa-icon [icon]="faCertificate" style="margin-right: 10px;"></fa-icon>Print Permit</a>
+
     </section>
 
+
+    <section *ngIf="application?.eventStatus == 'Cancelled'">
+      <h3><fa-icon [icon]="faBan" style="margin-right: 10px;"></fa-icon>Cancelled</h3>
+      <p>This application/permit has been cancelled.</p>
+      <p><em>{{application?.cancelReason}}</em></p>
+    </section>
 
 
     <section *ngIf="this.isDenied()">
@@ -50,12 +59,14 @@
       <h3><fa-icon [icon]="getStatusIcon()" style="margin-right: 10px;"></fa-icon>{{application?.eventStatus}}</h3>
       <p>Liquor service for this event has been {{application?.eventStatus}} for the following reason:</p>
       <p><em>{{application?.denialReason}}</em></p>
-      <p><em>{{application?.cancelReason}}</em></p>
+
     </section>
 
       <br>
       <a [href]="'api/special-events/applicant/' + application.id + '/summary/summary.pdf'" target="_blank" *ngIf="application.id"><fa-icon [icon]="faDownLoad" style="margin-right: 10px; color: #41598b;"></fa-icon>Print Summary</a>
       <br>
+      <hr>
+      <a (click)="cancelApplication()" style="text-decoration: underline; color:#1a5a96; cursor: pointer;"><fa-icon [icon]="faBan" style="margin-right: 10px;"></fa-icon>Cancel Application</a>
 
   </mat-card>
   </div>
@@ -327,9 +338,9 @@
 
 
 
-<div *ngIf="mode === 'payNow' && !isReadOnly()">
+<!--div *ngIf="mode === 'payNow' && !isReadOnly()">
     <p>
         Your may now pay for your application
     </p>
     <button mat-raised-button (click)="payNow()">Pay Now</button>
-</div>
+</div-->
