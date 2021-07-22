@@ -65,7 +65,6 @@ export class SummaryComponent implements OnInit {
    * Controls whether or not the form show the submit button.
    * The value true by default
    */
-  @Input() showSubmitButton = true;
   contact: Contact;
   transactionId: any;
   appId: any;
@@ -130,7 +129,6 @@ export class SummaryComponent implements OnInit {
     if (id) {
       this.sepDataService.getSpecialEventForApplicant(id)
         .subscribe(app => {
-          this.showSubmitButton = false;
           this.application = app;
           this.formatEventDatesForDisplay();
         });
@@ -279,7 +277,7 @@ export class SummaryComponent implements OnInit {
         .toPromise();
       if (result.eventStatus === "Approved") {
         this.mode = "payNow";
-      } else if (result.eventStatus === "Pending Review") {
+      } else if (result.eventStatus === "Pending Review" || result.eventStatus === "Submitted") {
         this.mode = "pendingReview";
       }
       if (result.localId) {
