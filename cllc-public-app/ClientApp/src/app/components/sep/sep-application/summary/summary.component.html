@@ -73,7 +73,7 @@
   </div>
 
 
-    <div class="form-wrapper-summary" [ngClass]="{'form-wrapper': !showSubmitButton}">
+    <div class="form-wrapper-summary" [ngClass]="{'form-wrapper': isReadOnly()}">
         <section *ngIf="!isReadOnly()">
         <p>
             Here’s a summary of your event. Does everything look right? {{application?.eventStatus}}
@@ -328,7 +328,7 @@
         </div>
 
 
-        <div *ngIf="showSubmitButton && !isReadOnly()" class="d-flex flex-row-reverse">
+        <div *ngIf="!isReadOnly()" class="d-flex flex-row-reverse">
             <button mat-raised-button color="primary" (click)="submitApplication()">SUBMIT APPLICATION</button>
             <button mat-raised-button color="secondary" class="mr-2">BACK</button>
         </div>

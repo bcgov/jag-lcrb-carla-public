@@ -65,7 +65,6 @@ export class SummaryComponent implements OnInit {
    * Controls whether or not the form show the submit button.
    * The value true by default
    */
-  @Input() showSubmitButton = true;
   contact: Contact;
   transactionId: any;
   appId: any;
@@ -130,7 +129,6 @@ export class SummaryComponent implements OnInit {
     if (id) {
       this.sepDataService.getSpecialEventForApplicant(id)
         .subscribe(app => {
-          //this.showSubmitButton = false;
           this.application = app;
           this.formatEventDatesForDisplay();
         });
