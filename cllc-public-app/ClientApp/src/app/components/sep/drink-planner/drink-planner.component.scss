@@ -51,6 +51,27 @@ hr {
   top: 10px;
 }
 
+.status {
+border-top: solid #ccc 1px;
+margin-top: 20px;
+padding-top: 20px;
+margin-left: 20px;
+margin: 20px;
+padding: 20px;
+font-weight: 900;
+
+}
+
+.yellow {
+  background-color: yellow;
+}
+.red {
+  background-color: red;
+}
+.green {
+  background-color: green;
+}
+
 img {
   max-width: 100%;
   height: auto;

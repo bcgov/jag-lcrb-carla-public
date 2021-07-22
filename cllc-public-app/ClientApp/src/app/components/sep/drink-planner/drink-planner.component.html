@@ -1,7 +1,9 @@
 <div class="position-relative drink-planner">
   <div [ngBusy]="[busy]"></div>
+
+  <h1 *ngIf="hideGuestsAndHours">{{(totalServings || 0).toFixed(0) | mask : 'separator' : ','}} Total Servings</h1>
   <form [formGroup]="form">
-    <div class="padded-section">
+    <div class="padded-section" *ngIf="!hideGuestsAndHours">
       <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip.toggle()" class="float-right" data-html="true"
         *ngIf="!hideGuestsAndHours" matTooltipClass="multiline-tooltip custom-tooltip" matTooltip="Enter the number of hours and the number of guests you’ll be serving. Next, estimate the percentage of beer, wine and spirits suitable for your event.&#010;
         For example, if you choose to serve only beer and wine, enter 50% for beer, 50% for wine and 0% for spirits.&#010;
@@ -31,60 +33,47 @@
     </ng-container>
 
     <!-- Section 2 -->
-    <fa-icon [icon]="faQuestionCircle" size="lg"  class="float-right" data-html="true"
+    <!--fa-icon [icon]="faQuestionCircle" size="lg"  class="float-right" data-html="true"
       matTooltipClass="multiline-tooltip custom-tooltip" matTooltip="Standard Drink Serving Sizes:&#010;
       &bull; 1.5 ounce for spirits
       &bull; 340ml (12 ounce) cans or bottles for beer, cider or coolers
       &bull; 12 ounces for draught beer, cider or coolers
       &bull; 5 ounces for individual glasses of wine">
-    </fa-icon>
-    <h3>Enter the &#37; of each drink type appropriate for your event</h3>
-    <div class="d-flex justify-content-around">
-      <div *ngFor="let item of config" class="">
+    </fa-icon-->
+    <h3>Enter the &#37; of each drink type appropriate for your event:</h3>
+    <div class="d-flex">
+      <div *ngFor="let item of config" class="" style="border-right: solid #ccc 1px; margin-right: 20px; padding-right: 20px; padding-left:20px; text-align:center;">
 
         <div class="text-center w-100 ">
           <!-- <img src="{{item.imageUrl}}"> -->
-          <fa-icon size="6x" [icon]="item.faIcon"></fa-icon>
+          <fa-icon size="6x" [icon]="item.faIcon" style="color:#38598a;"></fa-icon>
         </div>
 
-        <app-field class="text-center" [label]="item.description" [required]="false" [isFullWidth]="true">
+        <app-field class="text-center" [label]="item.description" [required]="false" [isFullWidth]="true" style="font-size:13pt;">
           <div class="d-flex">
             <input class="form-control text-right m-auto mb-2" type="number" [formControlName]="item.group" min="0"
-            max="100">
+            max="100" style="height:70px; font-size:36px;" tabindex=0>
             <button class="input-suffix">%</button>
           </div>
         </app-field>
 
-        <div class="">
-          <h4 class="w-100">
-            <span class="d-inline-block img-container-35a">
-              <!-- <img src="{{item.servingImageUrl}}"> -->
-              <fa-icon size="2x" [icon]="item.faIcon"></fa-icon>
-            </span>
-            &nbsp; = &nbsp;
-            <small>{{servings(item).toFixed(0) | mask : 'separator' : ','}}</small>
-            <small>
-              servings of {{item.group}}
-              <br>
-              <span class="per-serving">{{item.perServingDescription}}</span>
-            </small>
-          </h4>
-          <h4 class="w-100">
-            <span class="d-inline-block img-container-50a">
-              <!-- <img src="{{item.storageImageUrl}}"> -->
-              <fa-icon size="2x" [icon]="item.storageFaIcon"></fa-icon>
-            </span>
-            &nbsp; = &nbsp;
-            <small class="storage-unit">{{storageUnits(item).toFixed(0) | mask : 'separator' : ','}}</small>
-            <small class="storage-method">{{storageMethodDescription(item)}}</small>
-          </h4>
+        <div class="" style="text-align:center;">
+            <p><strong>{{servings(item).toFixed(0) | mask : 'separator' : ','}}</strong> &nbsp;servings of {{item.group}}</p>
+            <p><strong>{{storageUnits(item).toFixed(0) | mask : 'separator' : ','}}</strong> &nbsp;{{storageMethodDescription(item)}}</p>
         </div>
       </div> <!-- ngFor -->
     </div>
 
     <!-- Drink Totals -->
+
+
     <div class="row">
-      <div class="col-md-8 offset-md-4 col-12">
+      <div style="width:100%;" *ngIf="hideGuestsAndHours">
+        <div class="status yellow" *ngIf="totalPercentage < 100"> <fa-icon [icon]="faExclamationTriange" style="margin-right:10px;" ></fa-icon>Drink Servings Must Add To 100%</div>
+        <div class="status red" *ngIf="totalPercentage > 100"> <fa-icon [icon]="faExclamationTriange" style="margin-right:10px;" ></fa-icon>Drink Servings Must Not Exceed 100%</div>
+        <div class="status green" *ngIf="totalPercentage == 100"> <fa-icon [icon]="faCheckCircle" style="margin-right:10px;" ></fa-icon>Servings Add To 100%</div>
+      </div>
+      <div class="col-md-8 offset-md-4 col-12" *ngIf="!hideGuestsAndHours">
         <hr>
         <div class="row">
           <div class="col-md-4 offset-md-2 col-6">
