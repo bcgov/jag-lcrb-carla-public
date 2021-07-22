@@ -1,16 +1,16 @@
 <form [formGroup]="form">
     <p>
-        In this step tell us the drink quantities, types and prices, if applicable, for your event.
+        Tell us the drink quantities for your event:
     </p>
-    <p>
+    <!--p>
         Check the charge box for drinks you are selling and complete the table below. Not sure how many servings of each
         drink type you need? Use the handy tool below as a guide.
-    </p>
+    </p-->
 
     <mat-card class="mb-3 mat-elevation-z2">
-        <h3 class="blue-header">
+        <!--h3 class="blue-header">
             NEED HELP TO DETERMINE YOUR DRINK TYPES?
-        </h3>
+        </h3-->
         <section class="p-3">
             <app-drink-planner [hideGuestsAndHours]="true" [sepApplication]="application" #planner></app-drink-planner>
         </section>

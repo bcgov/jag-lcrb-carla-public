@@ -18,7 +18,7 @@
   }
 
   .t-servings.ngx-slider-pointer {
-    background-color: #38598A;
+    background-color: #fcba19;
   }
 
   .t-servings .ngx-slider[disabled] .ngx-slider-pointer {
@@ -32,4 +32,8 @@
 
 small {
   font-size: 0.65em;
+}
+
+.red {
+  background-color: red;
 }
