@@ -130,7 +130,7 @@ export class SummaryComponent implements OnInit {
     if (id) {
       this.sepDataService.getSpecialEventForApplicant(id)
         .subscribe(app => {
-          this.showSubmitButton = false;
+          //this.showSubmitButton = false;
           this.application = app;
           this.formatEventDatesForDisplay();
         });
@@ -268,6 +268,24 @@ export class SummaryComponent implements OnInit {
 
   isReadOnly(): boolean {
     return ["Pending Review", "Approved", "Issued", "Denied", "Cancelled"].indexOf(this.application?.eventStatus) >= 0;
+  }
+
+  async cancelApplication(): Promise<void> {
+    this.savingToAPI = true;
+        const appData = await this.db.getSepApplication(this.localId);
+    if (appData.id) { // do an update ( the record exists in dynamics)
+      const result = await this.sepDataService.updateSepApplication({ ...appData, eventStatus: "Cancelled" } as SepApplication, appData.id)
+        .toPromise();
+
+      if (result.localId) {
+        await this.db.applications.update(result.localId, result);
+        this.localId = this.localId; // trigger data refresh
+      }
+      //} else {
+      //  const result = await this.sepDataService.createSepApplication({})
+
+    }
+    this.savingToAPI = false;
   }
 
   async submitApplication(): Promise<void> {
