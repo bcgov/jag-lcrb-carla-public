@@ -49,9 +49,8 @@
 
         <app-field class="text-center" [label]="item.description" [required]="false" [isFullWidth]="true">
           <div class="d-flex">
-            <input class="form-control text-right m-auto mb-2" type="number" [formControlName]="item.group" min="0"
-            max="100">
-            <button class="input-suffix">%</button>
+            <input class="form-control text-right m-auto mb-2" type="number" [formControlName]="item.group" min="0">
+            <!-- <button class="input- suffix">%</button> -->
           </div>
         </app-field>
 
@@ -89,7 +88,7 @@
         <div class="row">
           <div class="col-md-4 offset-md-2 col-6">
             <h3 class="text-right">
-              <span class="total-percent">{{(totalPercentage || 0).toFixed(0)}} %</span>
+              <span class="total-percent">{{(totalPercentage || 0).toFixed(0)}}</span>
             </h3>
           </div>
           <div class="col-6">

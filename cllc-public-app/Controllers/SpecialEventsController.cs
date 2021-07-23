@@ -1271,9 +1271,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // calculate serving amounts from percentages
             int totalServings = specialEvent.TotalServings == null ? 0 : (int)specialEvent.TotalServings;
             var typeData = new List<(string, int)>{
-                ("Beer/Cider/Cooler", (int)((specialEvent.Beer * totalServings / 100) + 0.5)),
-                ("Wine", (int)((specialEvent.Wine * totalServings / 100) + 0.5)),
-                ("Spirits", (int)((specialEvent.Spirits * totalServings / 100) + 0.5)),
+                ("Beer/Cider/Cooler", (int)specialEvent.Beer),
+                ("Wine", (int)specialEvent.Wine),
+                ("Spirits", (int)specialEvent.Spirits),
             };
 
             // Create or Update Drink Sale Forecast with the serving amounts
