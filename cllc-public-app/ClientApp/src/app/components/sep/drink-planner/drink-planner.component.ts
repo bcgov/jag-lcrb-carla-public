@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { faLightbulb } from '@fortawesome/free-regular-svg-icons';
 import configuration, { DrinkConfig, HOURS_OF_LIQUOR_SERVICE, SERVINGS_PER_PERSON } from './config';
 import { SepApplication } from '@models/sep-application.model';
-import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+import { faQuestionCircle, faExclamationTriangle, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-drink-planner',
@@ -16,6 +16,9 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
   // icons
   faLightbulb = faLightbulb;
   faQuestionCircle = faQuestionCircle;
+  faExclamationTriange = faExclamationTriangle;
+  faCheckCircle = faCheckCircle;
+
   totalServings = 0;
   _app: SepApplication;
 
