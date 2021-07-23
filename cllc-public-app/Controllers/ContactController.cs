@@ -68,7 +68,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             try
             {
                 MicrosoftDynamicsCRMcontact contact = dynamics.GetContactById(contactId).GetAwaiter().GetResult();
-                bool result = contact?.ParentcustomeridAccount?._adoxioPolicejurisdictionidValue != null;
+
+                bool result = contact?.ParentcustomeridAccount?.AdoxioBusinesstype == 845280019;
+                //bool result = contact?.ParentcustomeridAccount?._adoxioPolicejurisdictionidValue != null;
                 
                 return result;
             }
