@@ -543,6 +543,19 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public ValueNotChanged? RenewalThirdParty { get; set; }
 
 
+        public bool? IsMonth01 {get; set;}
+        public bool? IsMonth02 {get; set;}
+        public bool? IsMonth03 {get; set;}
+        public bool? IsMonth04 {get; set;}
+        public bool? IsMonth05 {get; set;}
+        public bool? IsMonth06 {get; set;}
+        public bool? IsMonth07 {get; set;}
+        public bool? IsMonth08 {get; set;}
+        public bool? IsMonth09 {get; set;}
+        public bool? IsMonth10 {get; set;}
+        public bool? IsMonth11 {get; set;}
+        public bool? IsMonth12 {get; set;}
+
         public DateTimeOffset? Establishmentopeningdate { get; set; }
         public bool? IsReadyValidInterest { get; set; }
         public bool? IsReadyWorkers { get; set; }
