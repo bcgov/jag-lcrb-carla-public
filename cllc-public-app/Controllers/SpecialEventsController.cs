@@ -55,8 +55,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             string filter = $"(_adoxio_contactid_value eq {userSettings.ContactId}";
-            filter += $" or _adoxio_accountid_value eq {userSettings.AccountId})";
-            filter += $" and statuscode ne {(int)ViewModels.EventStatus.Draft}";
+
+            // accountID will be null if it is a BC Services Card
+            if(userSettings.AccountId != null && userSettings.AccountId != "00000000-0000-0000-0000-000000000000" ) {
+                filter += $" or _adoxio_accountid_value eq {userSettings.AccountId}";
+            }
+            
+            filter += $") and statuscode ne {(int)ViewModels.EventStatus.Draft}";
             filter += $" and statuscode ne {(int)ViewModels.EventStatus.Cancelled}";
 
             var result = GetSepSummaries(filter);

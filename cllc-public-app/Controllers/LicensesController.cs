@@ -289,7 +289,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private IList<MicrosoftDynamicsCRMadoxioOffsitestorage> GetOffsiteLocationsFromLicence(string licenceId)
         {
             var locations = new List<MicrosoftDynamicsCRMadoxioOffsitestorage>();
-            var filter = $"_adoxio_licenceid_value eq {licenceId}";
+            var filter = $"_adoxio_licenceid_value eq {licenceId} and statecode eq 0";
             try
             {
                 locations.AddRange(_dynamicsClient.Offsitestorages.Get(filter: filter).Value);
@@ -957,6 +957,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 string filter =
                       $"_adoxio_applicationtypeid_value eq {applicationType.AdoxioApplicationtypeid}"
                     + $" and _adoxio_assignedlicence_value eq {licenceId}"
+                    + " and statecode eq 0"
                     + $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Processed}"
                     + $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Terminated}"
                     + $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Cancelled}"
@@ -1068,6 +1069,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             var result = false;
             var filter = $"_adoxio_applicant_value eq {userSettings.AccountId}";
+            filter += " and statecode eq 0";
             filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Processed}";
             filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Terminated}";
             filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Cancelled}";
@@ -1335,7 +1337,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         MicrosoftDynamicsCRMadoxioServiceareaCollection allServiceAreas = null;
                         
                     try {
-                         allServiceAreas= _dynamicsClient.Serviceareas.Get(filter: $"_adoxio_licenceid_value eq {licenceId}");
+                         allServiceAreas= _dynamicsClient.Serviceareas.Get(filter: $"_adoxio_licenceid_value eq {licenceId} and statecode eq 0");
                     }
                     catch (Exception e)
                     {
@@ -1392,7 +1394,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 var storeHours = "";
 
-                MicrosoftDynamicsCRMadoxioHoursofserviceCollection hours = _dynamicsClient.Hoursofservices.Get(filter: $"_adoxio_licence_value eq {licenceId} and _adoxio_endorsement_value eq null");
+                MicrosoftDynamicsCRMadoxioHoursofserviceCollection hours = _dynamicsClient.Hoursofservices.Get(filter: $"_adoxio_licence_value eq {licenceId} and _adoxio_endorsement_value eq null and statecode eq 0");
 
                 if (hours.Value.Count > 0 && 
                     adoxioLicense.AdoxioLicenceType.AdoxioName != "Wine Store" &&
