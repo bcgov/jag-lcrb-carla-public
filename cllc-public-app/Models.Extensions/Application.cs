@@ -83,6 +83,22 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioTempdatefrom = from.TempDateFrom;
             to.AdoxioTempdateto = from.TempDateTo;
 
+            to.AdoxioM01 = from.IsMonth01;
+            to.AdoxioM02 = from.IsMonth02;
+            to.AdoxioM03 = from.IsMonth03;
+
+            to.AdoxioM04 = from.IsMonth04;
+            to.AdoxioM05 = from.IsMonth05;
+            to.AdoxioM06 = from.IsMonth06;
+
+            to.AdoxioM07 = from.IsMonth07;
+            to.AdoxioM08 = from.IsMonth08;
+            to.AdoxioM09 = from.IsMonth09;
+
+            to.AdoxioM10 = from.IsMonth10;
+            to.AdoxioM11 = from.IsMonth11;
+            to.AdoxioM12 = from.IsMonth12;
+
             //store opening
             to.AdoxioIsreadyworkers = from.IsReadyWorkers;
             to.AdoxioIsreadynamebranding = from.IsReadyNameBranding;
@@ -423,6 +439,19 @@ namespace Gov.Lclb.Cllb.Public.Models
                 Description2 = dynamicsApplication.AdoxioDescription2,
                 TempDateFrom = dynamicsApplication.AdoxioTempdatefrom,
                 TempDateTo = dynamicsApplication.AdoxioTempdateto,
+
+                IsMonth01 = dynamicsApplication.AdoxioM01,
+                IsMonth02 = dynamicsApplication.AdoxioM02,
+                IsMonth03 = dynamicsApplication.AdoxioM03,
+                IsMonth04 = dynamicsApplication.AdoxioM04,
+                IsMonth05 = dynamicsApplication.AdoxioM05,
+                IsMonth06 = dynamicsApplication.AdoxioM06,
+                IsMonth07 = dynamicsApplication.AdoxioM07,
+                IsMonth08 = dynamicsApplication.AdoxioM08,
+                IsMonth09 = dynamicsApplication.AdoxioM09,
+                IsMonth10 = dynamicsApplication.AdoxioM10,
+                IsMonth11 = dynamicsApplication.AdoxioM11,
+                IsMonth12 = dynamicsApplication.AdoxioM12,
 
                 //get contact details
                 ContactPersonFirstName = dynamicsApplication.AdoxioContactpersonfirstname,
