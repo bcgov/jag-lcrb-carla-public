@@ -158,8 +158,6 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
             this.inProgressApplications.push(application);
           });
 
-        debugger;
-
         licenses.forEach((licence: ApplicationLicenseSummary) => {
           licence.actionApplications = [];
           const relatedApplications = applications.filter(l => l.licenceId === licence.licenseId);
