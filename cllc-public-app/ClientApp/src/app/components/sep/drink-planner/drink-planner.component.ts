@@ -1,18 +1,19 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { FormBase } from '@shared/form-base';
-import { Subscription } from 'rxjs';
-import { faLightbulb } from '@fortawesome/free-regular-svg-icons';
-import configuration, { DrinkConfig, HOURS_OF_LIQUOR_SERVICE, SERVINGS_PER_PERSON } from './config';
-import { SepApplication } from '@models/sep-application.model';
-import { faQuestionCircle, faExclamationTriangle, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from "@angular/core";
+import { FormBuilder } from "@angular/forms";
+import { FormBase } from "@shared/form-base";
+import { Subscription } from "rxjs";
+import { faLightbulb } from "@fortawesome/free-regular-svg-icons";
+import configuration, { DrinkConfig, HOURS_OF_LIQUOR_SERVICE, SERVINGS_PER_PERSON } from "./config";
+import { SepApplication } from "@models/sep-application.model";
+import { faQuestionCircle, faExclamationTriangle, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
-  selector: 'app-drink-planner',
-  templateUrl: './drink-planner.component.html',
-  styleUrls: ['./drink-planner.component.scss'],
+  selector: "app-drink-planner",
+  templateUrl: "./drink-planner.component.html",
+  styleUrls: ["./drink-planner.component.scss"],
 })
 export class DrinkPlannerComponent extends FormBase implements OnInit {
+  @Output() validChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   // icons
   faLightbulb = faLightbulb;
   faQuestionCircle = faQuestionCircle;
@@ -25,8 +26,8 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
   @Input() set sepApplication(value: SepApplication) {
     if (value) {
       this._app = value;
-      this.form.patchValue(this._app);
       this.totalServings = this._app.totalServings;
+      this.form.patchValue(this._app);
     }
   }
 
@@ -63,6 +64,10 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
     super();
   }
 
+  isValid(): boolean {
+    return this.totalPercentage === this.totalServings;
+  }
+
   ngOnInit() {
     const values = {};
     for (const item of this.config) {
@@ -72,18 +77,24 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
 
     // setup the form's percentage fields so they always add-up to 100%
     this.initForm();
+    this.validChange.emit(this.isValid());
   }
 
   private initForm(): void {
 
-    this.form.get('hours').valueChanges
+    this.form.valueChanges
+      .subscribe(_ => {
+        this.validChange.emit(this.isValid());
+      });
+
+    this.form.get("hours").valueChanges
       .subscribe(_ => {
         if (!this.hideGuestsAndHours) {
           this.totalServings = this.getTotalServings();
         }
       });
 
-    this.form.get('totalMaximumNumberOfGuests').valueChanges
+    this.form.get("totalMaximumNumberOfGuests").valueChanges
       .subscribe(_ => {
         if (!this.hideGuestsAndHours) {
           this.totalServings = this.getTotalServings();
@@ -92,8 +103,13 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
   }
 
   servings(config: DrinkConfig): number {
-    const percentage: number = this.form.get(config.group).value;
-    return this.totalServings * percentage / 100;
+    const servings: number = this.form.get(config.group).value;
+    return servings;
+  }
+
+  servingPercent(config: DrinkConfig): string {
+    const servings: number = this.form.get(config.group).value || 0;
+    return (servings / this.totalServings * 100).toFixed(1);
   }
 
   storageUnits(config: DrinkConfig): number {
@@ -103,7 +119,7 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
   }
 
   storageMethodDescription(config: DrinkConfig): string {
-    if (config.storageMethod === 'kegs') {
+    if (config.storageMethod === "kegs") {
       return `${config.storageMethod} of ${config.group}`;
     } else {
       return `${config.storageSizeMl} ml ${config.storageMethod} of ${config.group}`;
