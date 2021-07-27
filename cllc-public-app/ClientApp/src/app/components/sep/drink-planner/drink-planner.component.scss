@@ -52,14 +52,13 @@ hr {
 }
 
 .status {
-border-top: solid #ccc 1px;
-margin-top: 20px;
-padding-top: 20px;
-margin-left: 20px;
-margin: 20px;
-padding: 20px;
-font-weight: 900;
-
+  border-top: solid #ccc 1px;
+  margin-top: 20px;
+  padding-top: 20px;
+  margin-left: 20px;
+  margin: 20px;
+  padding: 20px;
+  font-weight: 900;
 }
 
 .yellow {
@@ -69,7 +68,8 @@ font-weight: 900;
   background-color: red;
 }
 .green {
-  background-color: green;
+  background-color: #00600f;
+  color: #fff;
 }
 
 img {
@@ -97,4 +97,15 @@ img {
   border-left: none;
   cursor: default;
 }
+.planner-item {
+  border-right: solid #ccc 1px;
+  margin-right: 20px;
+  padding-right: 20px;
+  padding-left: 20px;
+  text-align: center;
+  flex: 1;
+}
 
+.last-planner-item {
+  border: none;
+}

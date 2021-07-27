@@ -10,6 +10,7 @@ import { SpecialEventsDataService } from "@services/special-events-data.service"
   styleUrls: ["./drink-amounts.component.scss"]
 })
 export class DrinkAmountsComponent implements OnInit {
+  drinkAmountsValid = false;
   _application: SepApplication;
   @Input() savingToAPI: boolean;
   @Input()
@@ -52,7 +53,9 @@ export class DrinkAmountsComponent implements OnInit {
   }
 
   next(planner) {
-    const plannerValue = planner?.form?.value || {};
-    this.saved.next(<any>{ drinksSalesForecasts: this.form.value, ...plannerValue });
+    if (this.drinkAmountsValid) {
+      const plannerValue = planner?.form?.value || {};
+      this.saved.next(<any>{ drinksSalesForecasts: this.form.value, ...plannerValue });
+    }
   }
 }

@@ -52,13 +52,13 @@ $bootstrap-sass-asset-helper: true;
 }
 
 .app-content {
-  background: #fff;
   display: flex;
   flex: 1 0 auto;
   flex-flow: row nowrap;
 }
 
 .content-wrapper {
+  background: #fff;
   flex-grow: 1;
 }
 
@@ -325,7 +325,6 @@ button:focus {
   .submitted-content {
     background-color: #eee;
     padding: 20px;
-    margin-bottom: 20px;
   }
 
   .user-menu-container {
