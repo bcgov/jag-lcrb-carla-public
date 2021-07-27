@@ -18,7 +18,7 @@ import { AppState } from "@app/app-state/models/app-state";
 import { SetIndigenousNationModeAction } from "@app/app-state/actions/app-state.action";
 import { PaymentDataService } from "@services/payment-data.service";
 import { CRS_RENEWAL_LICENCE_TYPE_NAME, LIQUOR_RENEWAL_LICENCE_TYPE_NAME } from "@components/licences/licences.component";
-import { faPencilAlt, faPlus, faShoppingCart, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { faExchangeAlt, faPencilAlt, faPlus, faShoppingCart, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { UserDataService } from "@services/user-data.service";
 import { differenceInDays, startOfDay, startOfToday } from "date-fns";
 
@@ -43,6 +43,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   faTrashAlt = faTrashAlt;
   faPlus = faPlus;
   faShoppingCart = faShoppingCart;
+  faExchangeAlt = faExchangeAlt;
   inProgressApplications: ApplicationSummary[] = [];
   licensedApplications: ApplicationLicenseSummary[] = [];
 
@@ -156,6 +157,8 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
           .forEach((application: ApplicationSummary) => {
             this.inProgressApplications.push(application);
           });
+
+        debugger;
 
         licenses.forEach((licence: ApplicationLicenseSummary) => {
           licence.actionApplications = [];
