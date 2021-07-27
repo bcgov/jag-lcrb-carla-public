@@ -1,7 +1,7 @@
 <div class="position-relative drink-planner">
   <div [ngBusy]="[busy]"></div>
 
-  <h1 *ngIf="hideGuestsAndHours">{{(totalServings || 0).toFixed(0) | mask : 'separator' : ','}} Total Servings</h1>
+  <h1 *ngIf="hideGuestsAndHours">{{totalPercentage}}/{{(totalServings || 0).toFixed(0) | mask : 'separator' : ','}} Total Servings</h1>
   <form [formGroup]="form">
     <div class="padded-section" *ngIf="!hideGuestsAndHours">
       <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip.toggle()" class="float-right" data-html="true"
@@ -42,7 +42,7 @@
     </fa-icon-->
     <h3>Enter the number of each drink type appropriate for your event:</h3>
     <div class="d-flex">
-      <div *ngFor="let item of config" class="" style="border-right: solid #ccc 1px; margin-right: 20px; padding-right: 20px; padding-left:20px; text-align:center;">
+      <div *ngFor="let item of config; let i = index;" [ngClass]="{'last-planner-item': i+1 === config?.length}" class="planner-item">
 
         <div class="text-center w-100 ">
           <!-- <img src="{{item.imageUrl}}"> -->
@@ -56,7 +56,8 @@
           </div>
         </app-field>
 
-        <div class="" style="text-align:center;">
+        <div class="text-center">
+            <p style="font-size: xx-large;"><strong>{{servingPercent(item)}} %</strong> </p>
             <p><strong>{{servings(item).toFixed(0) | mask : 'separator' : ','}}</strong> &nbsp;servings of {{item.group}}</p>
             <p><strong>{{storageUnits(item).toFixed(0) | mask : 'separator' : ','}}</strong> &nbsp;{{storageMethodDescription(item)}}</p>
         </div>
@@ -68,9 +69,9 @@
 
     <div class="row">
       <div style="width:100%;" *ngIf="hideGuestsAndHours">
-        <div class="status yellow" *ngIf="totalPercentage < 100"> <fa-icon [icon]="faExclamationTriange" style="margin-right:10px;" ></fa-icon>Drink Servings Must Add To 100%</div>
-        <div class="status red" *ngIf="totalPercentage > 100"> <fa-icon [icon]="faExclamationTriange" style="margin-right:10px;" ></fa-icon>Drink Servings Must Not Exceed 100%</div>
-        <div class="status green" *ngIf="totalPercentage == 100"> <fa-icon [icon]="faCheckCircle" style="margin-right:10px;" ></fa-icon>Servings Add To 100%</div>
+        <div class="status yellow" *ngIf="totalPercentage < (totalServings || 0)"> <fa-icon [icon]="faExclamationTriange" style="margin-right:10px;" ></fa-icon>Drink Servings Must Add To 100%</div>
+        <div class="status red" *ngIf="totalPercentage > (totalServings || 0)"> <fa-icon [icon]="faExclamationTriange" style="margin-right:10px;" ></fa-icon>Drink Servings Must Not Exceed 100%</div>
+        <div class="status green" *ngIf="totalPercentage == (totalServings || 0)"> <fa-icon [icon]="faCheckCircle" style="margin-right:10px;" ></fa-icon>Servings Add To 100%</div>
       </div>
       <div class="col-md-8 offset-md-4 col-12" *ngIf="!hideGuestsAndHours">
         <hr>
