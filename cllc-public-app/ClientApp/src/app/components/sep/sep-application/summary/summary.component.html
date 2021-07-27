@@ -7,13 +7,65 @@
       <h1 class="mat-heading">{{application?.eventName}}</h1>
       <h3>Start Date: {{application?.eventStartDate | date: 'dd MMM yyyy'}}</h3>
       <h3>Application Number: {{application.specialEventPermitNumber}}</h3>
+
+
+        <section *ngIf="application?.eventStatus == 'Draft'">
+      <p>Here’s a summary of your event. Does everything look right?</p>
+
+    <p>Review your event details one more time before submitting your application for review.</p>
+
+    <p>Scroll down the page to complete the review and submit your application. Please be sure to complete the final declaration and submit your application.</p>
+
+      </section>
+
+      <section *ngIf="application?.eventStatus == 'Pending Review'">
+        <p><label>Date Submitted:</label>&nbsp;{{application?.dateSubmitted | date: 'dd MMM yyyy'}}</p>
+        <p>Your application requires review from <span *ngIf="application?.lcrbApproval == 'Pending Review'"><strong>LCRB</strong></span> <span *ngIf="application?.lcrbApproval == 'Pending Review' && application?.policeApproval == 'Pending Review'">&nbsp;and&nbsp;</span> <span *ngIf="application?.policeApproval == 'Pending Review'"><strong>Police</strong></span>.</p>
+        </section>
+
+
+      <section *ngIf="application?.eventStatus == 'Approved'">
+        <h3>Congratulations!</h3>
+        <p>Your application is approved</p>
+        <h3>Fees Due: {{application?.invoice?.totalamount
+          | currency}}</h3>
+
+        <section style="border: solid #ccc 1px;
+        padding: 20px;
+        background-color: #fcba19;">
+
+
+          <p><fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>You must pay these fees to get a special event permit. If you do not pay these fees, your application will not be valid and a licence will not be issued for your event.</p>
+          <p>In the event that the information on this application is no longer correct or if you wish to make additional changes, you may contact the LCRB or withdraw your application.</p>
+        </section>
+
+      </section>
+
+      <section *ngIf="application?.eventStatus == 'Issued'">
+      <h3>What’s next</h3>
+      <ul>
+      <li>Purchase liquor product at an approved outlet. Note: Liquor products purchased from and returned to a liquor retailer may be subject to a return policy and restocking fee.</li>
+      <li>Print and sign your Special Event Permit. This permit will only become valid once it has been signed by the Permittee.</li>
+      <li>Post your signed SEP along with the following materials in a visible location at the bar or serving area during your event hours.</li>
+      <li>If you haven’t yet completed Responsible Beverage Service training, take the course and print out a certificate to bring to the event.</li>
+    </ul>
+      <h3>What to post on event day</h3>
+      <ul>
+      <li>Your signed SEP in a visible location at the bar or serving area during your event hours.</li>
+      <li>Any comments from police or liquor inspectors imposing additional terms and conditions.</li>
+      <li>Receipts for the liquor purchased for your event must also be kept on site for inspection by a liquor inspector.</li>
+      <li>Any other document you have been directed to post.</li>
+      <li>If your SEP requires a security plan, you are not required to display it; however, it must be on site and immediately available should police and/or liquor inspectors request to see it.</li>
+      <li>If your event takes place in more than one location, you should also post the name and contact information of an individual who can be in attendance at the event on behalf of the licensee.</li>
+      </ul>
+      </section>
     </div>
 
 
   <div style="margin-top: 30px; text-align: center; width: 30%; ">
     <!-- approve and deny buttons -->
 
-    <mat-card style="background-color: #e0e0e0; min-height: 200px;">
+    <mat-card style="background-color: #e0e0e0; min-height: 200px; margin-top: 20px; margin-left: 20px;">
 
     <section *ngIf="application?.eventStatus == 'Draft'">
       <!-- if denied -->
@@ -31,11 +83,11 @@
 
     <section *ngIf="application?.eventStatus == 'Approved' && !trnId || mode ==='payNow'">
       <!-- if denied -->
-      <h3><fa-icon [icon]="getStatusIcon()" style="margin-right: 10px;"></fa-icon>Approved - Pending Payment</h3>
-      <p>Your application has been approved. You can pay your application fee and any PST estimates and will receive your Special Event Permit.</p>
-      <a (click)="payNow()" style="text-decoration: underline; color:#1a5a96; cursor: pointer;"><fa-icon [icon]="faShoppingCart" style="margin-right: 10px;"></fa-icon>Pay Now</a>
+      <h3><fa-icon [icon]="getStatusIcon()" style="margin-right: 10px;"></fa-icon>Pending Payment</h3>
+      <!--p>Your application has been approved. You can pay your application fee and any PST estimates and will receive your Special Event Permit.</p-->
 
       <!--button mat-raised-button (click)="payNow()">Pay Now</button-->
+      <button mat-raised-button color="primary" (click)="payNow()"><fa-icon [icon]="faShoppingCart" style="margin-right: 10px;"></fa-icon>PAY NOW</button>
     </section>
 
     <section *ngIf="application?.eventStatus == 'Issued' || (trnId && application?.eventStatus == 'Approved')">
@@ -66,8 +118,17 @@
       <a [href]="'api/special-events/applicant/' + application.id + '/summary/summary.pdf'" target="_blank" *ngIf="application.id"><fa-icon [icon]="faDownLoad" style="margin-right: 10px; color: #41598b;"></fa-icon>Print Summary</a>
       <br>
       <hr>
-      <a (click)="cancelApplication()" style="text-decoration: underline; color:#1a5a96; cursor: pointer;"><fa-icon [icon]="faBan" style="margin-right: 10px;"></fa-icon>Cancel Application</a>
+      <a (click)="cancelApplication()" style="text-decoration: underline; color:#1a5a96; cursor: pointer;" *ngIf="application?.eventStatus != 'Issued'"><fa-icon [icon]="faBan" style="margin-right: 10px;"></fa-icon>Withdraw Application</a>
 
+  </mat-card>
+
+  <mat-card style="background-color: #e0e0e0; min-height: 200px; margin-top: 20px; margin-left: 20px;" *ngIf="application?.eventStatus != 'Draft'">
+    <h3>Contact</h3>
+    <p>If you have any questions or concerns contact a liquor inspector before submitting your application.</p>
+    <p>SEP Online Support Line
+      1-855-999-7656</p>
+    <h3>Police Authority</h3>
+    <p></p>
   </mat-card>
   </div>
   </div>
@@ -143,19 +204,27 @@
                     GENERAL APPLICATION INFO
                 </mat-panel-title>
             </mat-expansion-panel-header>
+
+            <div class="d-flex">
+              <label>Event Name:</label> <span>{{application?.eventName}}</span>
+            </div>
+            <hr>
             <div class="d-flex">
                 <label>City, District, or Indigenous Nation:</label> <span>{{application?.sepCity?.name}}</span>
             </div>
-            <hr>
             <div class="d-flex">
 
               <p *ngIf="this.application?.eventStatus == 'Pending Review'"><em>If the city, district or Indigenous Nation has been submitted incorrectly, the police representative will modify it and submit the application to the correct authority.</em></p>
 
             </div>
 
+            <hr>
+
             <div class="d-flex">
               <label>Applicant Name:</label> <span>{{application?.applicant?.name}}</span>
           </div>
+
+          <hr>
 
           <div class="d-flex">
               <label>Applicant Info:</label>
@@ -180,21 +249,37 @@
             <div class="d-flex">
                 <label>Event Starts On:</label> <span>{{application?.eventStartDate | date: 'd MMM yyyy'}}</span>
             </div>
+            <hr>
+            <div class="d-flex">
+              <label>Organization Type:</label> <span>{{application?.hostOrganizationCategory}}</span>
+          </div>
+
+
+            <hr>
             <div class="d-flex">
                 <label>Responsible Beverage Service #:</label> <span>{{application?.responsibleBevServiceNumber}}</span>
             </div>
+            <hr>
             <div class="d-flex">
                 <label>Name of The Organization:</label> <span>{{application?.hostOrganizationName}}</span>
             </div>
+            <hr>
             <div class="d-flex">
                 <label>Address of The Organization:</label> <span>{{application?.hostOrganizationAddress}}</span>
             </div>
+            <hr>
             <div class="d-flex">
                 <label>Occasion of event:</label> <span>{{application?.specialEventDescription}}</span>
             </div>
+            <hr>
             <div class="d-flex">
                 <label>Licence Already exists in location:</label> <span>{{application?.isLocationLicensed}}</span>
             </div>
+            <hr>
+            <div class="d-flex">
+                <label>Permit Category</label> <span>{{application?.privateOrPublic}}</span>
+            </div>
+            <hr>
             <div class="d-flex">
                 <label>Public Property</label> <span>{{application?.isOnPublicProperty ? 'Yes' : 'No'}}</span>
             </div>
@@ -248,7 +333,7 @@
                 </div>
                 <div class="d-flex">
                     <label>Liquor Service:</label> <span>{{eventDate.serviceStartValue}} -
-                        {{eventDate.serviceStartValue}}</span>
+                        {{eventDate.serviceEndValue}}</span>
                 </div>
             </section>
         </mat-expansion-panel>
@@ -303,7 +388,12 @@
             <hr>
 
             <div class="d-flex total-fees-due">
-                <label>Total Fees Due Upon Approval</label> <span class="fee-amount">{{application?.invoice?.totalamount
+
+                <label>
+                  <span *ngIf="application?.eventStatus != 'Issued'">Total Fees Due Upon Approval</span>
+                  <span *ngIf="application?.eventStatus == 'Issued'">Fees Paid</span>
+
+                </label> <span class="fee-amount">{{application?.invoice?.totalamount
                     | currency}}</span>
             </div>
         </mat-expansion-panel>
