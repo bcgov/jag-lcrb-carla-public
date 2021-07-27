@@ -603,11 +603,21 @@
     <section *ngIf="item?.endorsements?.length">
       <!--p>Third Party Operator Application</p-->
       <ul>
+        <li *ngIf="item?.licenceId && item.portallabel == 'Manufacturer Licence'">
+          <a [routerLink]="[ '/tied-house-exemption/' + item?.licenceId]" >
+            Invitation for Tied House Exemption
+          </a>
+        </li>
+
         <li *ngFor="let appType of item.endorsements">
           <a href="javascript:void(0)" (click)="startEndorsementApplication(item, appType)">{{appType}}</a>
         </li>
       </ul>
     </section>
+
+
+
+
   </td>
 </tr>
 </table>
