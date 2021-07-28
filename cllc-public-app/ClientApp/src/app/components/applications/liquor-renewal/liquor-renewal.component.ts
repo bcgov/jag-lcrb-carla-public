@@ -298,6 +298,10 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
       }));
   }
 
+  isMFG(): boolean {
+    return this.licenseType === "Manufacturer";
+  }
+
   updateApplicationInStore() {
     this.applicationDataService.getApplicationById(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
