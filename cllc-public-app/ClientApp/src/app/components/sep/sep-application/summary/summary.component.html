@@ -9,12 +9,22 @@
       <h3>Application Number: {{application.specialEventPermitNumber}}</h3>
 
 
-        <section *ngIf="application?.eventStatus == 'Draft'">
-      <p>Here’s a summary of your event. Does everything look right?</p>
+      <section *ngIf="application?.eventStatus == 'Draft'">
+        <p>Here’s a summary of your event. Does everything look right? Review your event details one more time before
+          submitting your application for review.</p>
 
-    <p>Review your event details one more time before submitting your application for review.</p>
+        <p>Scroll down the page to complete the review and submit your application. Please be sure to complete the final
+          declaration and submit your application.</p>
 
-    <p>Scroll down the page to complete the review and submit your application. Please be sure to complete the final declaration and submit your application.</p>
+
+        <h3>IMPORTANT</h3>
+        <p>Changes cannot be made once your application is submitted.</p>
+        <p>
+          If you have any questions before submitting the application please contact the SEP Online Help Line at 1
+          855
+          999 7656 or email <a href="mailto:LCRB.Sep@gov.bc.ca" target="_blank">LCRB.Sep@gov.bc.ca</a>
+        </p>
+
 
       </section>
 
@@ -126,7 +136,7 @@
     <h3>Contact</h3>
     <p>If you have any questions or concerns contact a liquor inspector before submitting your application.</p>
     <p>SEP Online Support Line
-      1-855-999-7656</p>
+      1-855-999-7656 or <a href="mailto:LCRB.Sep@gov.bc.ca" target="_blank">LCRB.Sep@gov.bc.ca</a></p>
     <h3>Police Authority</h3>
     <p></p>
   </mat-card>
@@ -135,7 +145,7 @@
 
 
     <div class="form-wrapper-summary" [ngClass]="{'form-wrapper': isReadOnly()}">
-        <section *ngIf="!isReadOnly()">
+        <!--section *ngIf="!isReadOnly()">
         <p>
             Here’s a summary of your event. Does everything look right? {{application?.eventStatus}}
         </p>
@@ -149,17 +159,9 @@
             final
             declaration and submit your application.
         </p>
-        <div>
-            <h3>IMPORTANT</h3>
-            <span>Changes cannot be made once your application is submitted.</span>
-            <span>
-                If you have any questions before submitting the application please contact the SEP Online Help Line at 1
-                855
-                999 7656 or email LCRB.Sep@gov.bc.ca
-            </span>
-        </div>
 
-      </section>
+
+      </section-->
 
         <hr>
         <div *ngIf="trnId">
@@ -398,30 +400,57 @@
             </div>
         </mat-expansion-panel>
 
-        <div class="d-flex" *ngIf="!isReadOnly()">
-            <label>Declaration</label>
-            <section class="declaration-content">
-                <section class="declaration-text" style="margin-bottom: 15px; margin-left: 25px;">
-                    I, <strong><u>{{contact?.name}}</u></strong>, certify that all of the information is true and complete to the best of my
-                    knowledge. I have read the terms and conditions of the permit, and if the application is approved,
-                    the
-                    permittee listed on the permit will be responsible for liquor service at the event.
-                </section>
+        <div *ngIf="!isReadOnly()">
 
-                <mat-checkbox class="declaration-checkbox">
-                    By checking this box, I confirm that I have read, agree to and acknowledge the declaration. I also
-                    certify that I am at least 19 years old and that no essential information has been concealed or
-                    misrepresented on this application.
-                </mat-checkbox>
-            </section>
-            <hr>
+          <section class="d-flex">
+
+            <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
+            <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
+              <section>
+                <h2 style="margin-bottom: 24px; text-align: center;">Declaration</h2>
+                <p style="margin-left:24px;"><em>
+                  I, <strong><u>{{contact?.name}}</u></strong>, certify that all of the information is true and complete to the best of my
+                  knowledge. I have read the terms and conditions of the permit, and if the application is approved,
+                  the
+                  permittee listed on the permit will be responsible for liquor service at the event.
+                </em></p>
+
+              <mat-checkbox class="declaration-checkbox" style="white-space: normal;">
+                  <p style="white-space: normal;"><em>By checking this box, I confirm that I have read, agree to and acknowledge the declaration. I also
+                  certify that I am at least 19 years old and that no essential information has been concealed or
+                  misrepresented on this application.</em></p>
+              </mat-checkbox>
+
+
+              </section>
+
+            </div>
+          </section>
         </div>
 
+        <div *ngIf="!isReadOnly()" class="d-flex" style="margin-top: 20px;">
+          <!--button mat-raised-button color="secondary" class="mr-2">BACK</button-->
+          <button mat-raised-button color="primary" (click)="submitApplication()">SUBMIT APPLICATION</button>
 
-        <div *ngIf="!isReadOnly()" class="d-flex flex-row-reverse">
-            <button mat-raised-button color="primary" (click)="submitApplication()">SUBMIT APPLICATION</button>
-            <button mat-raised-button color="secondary" class="mr-2">BACK</button>
         </div>
+        <section *ngIf="application?.eventStatus == 'Approved' && !trnId || mode ==='payNow'">
+
+          <section style="border: solid #ccc 1px;
+          padding: 20px;
+          background-color: #fcba19; padding-bottom: 20px;">
+          <h3>Application Approved!</h3>
+
+
+            <p><fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>You must pay these fees to get a special event permit. If you do not pay these fees, your application will not be valid and a licence will not be issued for your event.</p>
+            <p>In the event that the information on this application is no longer correct or if you wish to make additional changes, you may contact the LCRB or withdraw your application.</p>
+          </section>
+
+          <!--button mat-raised-button (click)="payNow()">Pay Now</button-->
+          <button mat-raised-button color="primary" (click)="payNow()"><fa-icon [icon]="faShoppingCart" style="margin-right: 10px;"></fa-icon>PAY NOW</button>
+        </section>
+
+
+
     </div>
   </div>
 </ng-container>
