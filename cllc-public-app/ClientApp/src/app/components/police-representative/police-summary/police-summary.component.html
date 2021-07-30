@@ -112,6 +112,12 @@
                 GENERAL APPLICATION INFO
             </mat-panel-title>
         </mat-expansion-panel-header>
+
+        <div class="d-flex">
+          <label>Event Name:</label> <span>{{sepApplication?.eventName}}</span>
+        </div>
+        <hr>
+
         <div class="d-flex">
           <section [formGroup]="form" style="padding: 16px 32px;">
             <section>
@@ -135,6 +141,7 @@
             </section>
     </section>
         </div>
+        <hr>
         <div class="d-flex">
             <label>Applicant Name:</label> <span>{{sepApplication?.applicant?.name}}</span>
         </div>
@@ -146,7 +153,7 @@
                 <div>{{application?.applicant?.address1_city}}</div>
                 <div>{{application?.applicant?.address1_stateorprovince}}</div>
                 <div>{{application?.applicant?.address1_postalcode}}</div-->
-                <div>{{sepApplication?.applicant?.telephone1}}</div>
+                <div>{{sepApplication?.applicant?.telephone1 | mask: "(000) 000-0000"}}</div>
                 <div>{{sepApplication?.applicant?.emailaddress1}}</div>
             </section>
         </div>
@@ -161,21 +168,35 @@
         <div class="d-flex">
             <label>Event Starts On:</label> <span>{{sepApplication?.eventStartDate | date: 'dd MMM yyyy'}}</span>
         </div>
+        <hr>
+        <div class="d-flex">
+          <label>Organization Type:</label> <span>{{sepApplication?.hostOrganizationCategory}}</span>
+      </div>
+        <hr>
         <div class="d-flex">
             <label>Responsible Beverage Service #:</label> <span>{{sepApplication?.responsibleBevServiceNumber}}</span>
         </div>
+        <hr>
         <div class="d-flex">
             <label>Name of The Organization:</label> <span>{{sepApplication?.hostOrganizationName}}</span>
         </div>
+        <hr>
         <div class="d-flex">
             <label>Address of The Organization:</label> <span>{{sepApplication?.hostOrganizationAddress}}</span>
         </div>
+        <hr>
         <div class="d-flex">
             <label>Occasion of event:</label> <span>{{sepApplication?.specialEventDescription}}</span>
         </div>
+        <hr>
         <div class="d-flex">
             <label>Licence Already exists in location:</label> <span>{{sepApplication?.isLocationLicensed}}</span>
         </div>
+        <hr>
+        <div class="d-flex">
+            <label>Permit Category</label> <span>{{sepApplication?.privateOrPublic}}</span>
+        </div>
+        <hr>
         <div class="d-flex">
             <label>Public Property</label> <span>{{sepApplication?.isOnPublicProperty ? 'Yes' : 'No'}}</span>
         </div>
@@ -229,7 +250,7 @@
                 </div>
                 <div class="d-flex">
                     <label>Liquor Service:</label> <span>{{eventDate.serviceStartValue}} -
-                        {{eventDate.serviceStartValue}}</span>
+                        {{eventDate.serviceEndValue}}</span>
                 </div>
             </section>
 
@@ -248,16 +269,19 @@
 
         <div class="d-flex" style="white-space: nowrap; font-weight:900;">
           <label>Total Servings:</label> <span class="fee-amount">{{sepApplication?.totalServings || 0}}</span>
-      </div>
-            <div class="d-flex" style="white-space: nowrap; font-weight:900;">
-                <label>Beer</label> <span class="fee-amount">{{sepApplication?.beer || 0}}%</span>
-            </div>
-            <div class="d-flex" style="white-space: nowrap; font-weight:900;">
-                <label>Wine</label> <span class="fee-amount">{{sepApplication?.wine || 0}}%</span>
-            </div>
-            <div class="d-flex" style="white-space: nowrap; font-weight:900;">
-                <label>Spirits</label> <span class="fee-amount">{{sepApplication?.spirits || 0}}%</span>
-            </div>
+
+        </div>
+
+          <div class="d-flex" style="white-space: nowrap; font-weight:900;">
+            <label>Beer</label> <span class="fee-amount">{{sepApplication?.beer || 0}}</span>
+        </div>
+        <div class="d-flex" style="white-space: nowrap; font-weight:900;">
+            <label>Wine</label> <span class="fee-amount">{{sepApplication?.wine || 0}}</span>
+        </div>
+        <div class="d-flex" style="white-space: nowrap; font-weight:900;">
+            <label>Spirits</label> <span class="fee-amount">{{sepApplication?.spirits || 0}}</span>
+        </div>
+
         <hr>
         <div class="d-flex">
           <label>Est. Total Liquor Sales Revenue</label> <span class="fee-amount">{{sepApplication?.totalRevenue |

@@ -73,7 +73,11 @@
           <td mat-cell *matCellDef="let row" class="p-0" style="padding: 10px !important; ">
             <span style="margin-bottom:5px;">
               <!--button mat-raised-button (click)="payNow(row.specialEventId)" *ngIf="row.eventStatus ==='Approved' && row.invoiceId && !row.isInvoicePaid"><fa-icon [icon]="faShoppingCart" style="margin-right: 10px;"></fa-icon>Pay Now</button-->
-            <a (click)="payNow(row.specialEventId)" *ngIf="row.eventStatus ==='Approved' && row.invoiceId && !row.isInvoicePaid" style="text-decoration: underline; color:#1a5a96; cursor: pointer;"><fa-icon [icon]="faShoppingCart" style="margin-right: 10px;"></fa-icon>Pay Now</a>
+
+            <!-- instead of having them pay from the summary, we should have them open the app to pay it there.-->
+            <a (click)="openApplication(row)" *ngIf="row.eventStatus ==='Approved' && row.invoiceId && !row.isInvoicePaid" style="text-decoration: underline; color:#1a5a96; cursor: pointer;"><fa-icon [icon]="faShoppingCart" style="margin-right: 10px;"></fa-icon>Pay Now</a>
+
+            <!--button mat-button color="primary" (click)="openApplication(row)">{{row.eventName ? row.eventName : "Unnamed Event"}}</button-->
             <br>
             </span>
             <span *ngIf="row.specialEventId && row.eventStatus === 'Issued'" style="margin-bottom:5px;">

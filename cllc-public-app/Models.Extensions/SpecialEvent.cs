@@ -116,23 +116,17 @@ namespace Gov.Lclb.Cllb.Public.Models
                 {
                     result.Beer = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
                         .Where(forecast => forecast._adoxioTypeValue == beerTypeId)
-                        .Select(forecast => forecast.AdoxioEstimatedservings.GetValueOrDefault() != 0 &&
-                                            specialEvent.AdoxioTotalservings.GetValueOrDefault() != 0 ?
-                            100 * forecast.AdoxioEstimatedservings / specialEvent.AdoxioTotalservings : 0)
+                        .Select(forecast => forecast.AdoxioEstimatedservings)
                         .FirstOrDefault();
 
                     result.Wine = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
                         .Where(forecast => forecast._adoxioTypeValue == wineTypeId)
-                        .Select(forecast => forecast.AdoxioEstimatedservings.GetValueOrDefault() != 0 &&
-                                            specialEvent.AdoxioTotalservings.GetValueOrDefault() != 0 ?
-                            100 * forecast.AdoxioEstimatedservings / specialEvent.AdoxioTotalservings : 0)
+                        .Select(forecast => forecast.AdoxioEstimatedservings)
                         .FirstOrDefault();
 
                     result.Spirits = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
                         .Where(forecast => forecast._adoxioTypeValue == spiritsTypeId)
-                        .Select(forecast => forecast.AdoxioEstimatedservings.GetValueOrDefault() != 0 &&
-                                            specialEvent.AdoxioTotalservings.GetValueOrDefault() != 0 ?
-                            100 * forecast.AdoxioEstimatedservings / specialEvent.AdoxioTotalservings : 0)
+                        .Select(forecast => forecast.AdoxioEstimatedservings)
                         .FirstOrDefault();
                 }
 

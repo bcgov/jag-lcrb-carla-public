@@ -55,8 +55,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             string filter = $"(_adoxio_contactid_value eq {userSettings.ContactId}";
-            filter += $" or _adoxio_accountid_value eq {userSettings.AccountId})";
-            filter += $" and statuscode ne {(int)ViewModels.EventStatus.Draft}";
+
+            // accountID will be null if it is a BC Services Card
+            if(userSettings.AccountId != null && userSettings.AccountId != "00000000-0000-0000-0000-000000000000" ) {
+                filter += $" or _adoxio_accountid_value eq {userSettings.AccountId}";
+            }
+            
+            filter += $") and statuscode ne {(int)ViewModels.EventStatus.Draft}";
             filter += $" and statuscode ne {(int)ViewModels.EventStatus.Cancelled}";
 
             var result = GetSepSummaries(filter);
@@ -931,6 +936,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw httpOperationException;
             }
 
+            saveTotalServings(specialEvent, newSpecialEvent);
+
             if (specialEvent.EventLocations?.Count > 0)
             {
                 // newSpecialEvent.AdoxioSpecialeventSpecialeventlocations = new List<MicrosoftDynamicsCRMadoxioSpecialeventlocation>();
@@ -1269,9 +1276,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // calculate serving amounts from percentages
             int totalServings = specialEvent.TotalServings == null ? 0 : (int)specialEvent.TotalServings;
             var typeData = new List<(string, int)>{
-                ("Beer/Cider/Cooler", (int)((specialEvent.Beer * totalServings / 100) + 0.5)),
-                ("Wine", (int)((specialEvent.Wine * totalServings / 100) + 0.5)),
-                ("Spirits", (int)((specialEvent.Spirits * totalServings / 100) + 0.5)),
+                ("Beer/Cider/Cooler", (int)specialEvent.Beer),
+                ("Wine", (int)specialEvent.Wine),
+                ("Spirits", (int)specialEvent.Spirits),
             };
 
             // Create or Update Drink Sale Forecast with the serving amounts
@@ -1280,9 +1287,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 string drinkTypeName = data.Item1;
                 int estimatedServings = data.Item2;
                 var drinkType = drinkTypes.Where(drinkType => drinkType.AdoxioName == drinkTypeName).FirstOrDefault();
-                var existingForecast = existingEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
-                    .Where(drink => drink._adoxioTypeValue == drinkType.AdoxioSepdrinktypeid)
-                    .FirstOrDefault();
+                MicrosoftDynamicsCRMadoxioSepdrinksalesforecast existingForecast = null;
+                if (existingEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent != null)
+                {
+                    existingForecast = existingEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
+                        .Where(drink => drink._adoxioTypeValue == drinkType.AdoxioSepdrinktypeid)
+                        .FirstOrDefault();
+                }
                 createOrUpdateForecast(specialEvent, existingForecast, drinkType, estimatedServings);
             });
         }
