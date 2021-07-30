@@ -72,6 +72,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // loop through them
                 foreach (var dynamicsApplication in dynamicsApplicationList)
                 {
+                    // if the application is not a renewal and it's for an expired licence, then we don't allow them to continue it
+                    // they must renew their licence first.
+                    if(dynamicsApplication.AdoxioApplicationTypeId?.AdoxioIsrenewal != true  &&
+                        dynamicsApplication.AdoxioAssignedLicence?.Statuscode == 845280000){
+                        continue;
+                    }
                     // create a list to collect possible endorsement applications
                     var endorsements = new List<string>();
                     // if the application is for a licence  or if its a relocation app
