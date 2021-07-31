@@ -1,50 +1,47 @@
-::ng-deep {
-    .form-wrapper-summary {
-        max-width: 1000px;
-        mat-divider {
-            margin: 16px 0;
-        }
+.form-wrapper-summary {
+    max-width: 1000px;
+    mat-divider {
+        margin: 16px 0;
+    }
 
-        div.d-flex > label{
-                width: 240px;
-                margin-right: 8px;
-                text-align: right;
-        }
+    div.d-flex > label {
+        width: 240px;
+        margin-right: 8px;
+        text-align: right;
+    }
 
-        .declaration-content {
+    .declaration-content {
+        min-width: 0;
+        mat-checkbox.declaration-checkbox {
             min-width: 0;
-            mat-checkbox.declaration-checkbox {
-                min-width: 0;
-            }
-
-            .mat-checkbox-label {
-                // NEW
-                white-space: initial; // NEW
-            }
         }
 
-        .mat-expansion-panel {
-          margin-bottom: 16px;
-          .mat-expansion-panel-header {
-              background-color: #41598b;
-              border-bottom-left-radius: 0;
-              border-bottom-right-radius: 0;
-              height: 40px;
-              .mat-expansion-panel-header-title {
-                  color: #fff;
-                  font-size: 16px;
-                  font-weight: 600;
-              }
-          }
-          .mat-expansion-panel-content {
-              background-color: #fff;
-              padding-top: 8px;
-          }
-      }
+        .mat-checkbox-label {
+            // NEW
+            white-space: initial; // NEW
+        }
     }
-    h4{
-      border-bottom: solid #e0e0e0 1px;
 
+    .mat-expansion-panel {
+        margin-bottom: 16px;
+        .mat-expansion-panel-header {
+            background-color: #41598b;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            height: 40px;
+            .mat-expansion-panel-header-title {
+                color: #fff;
+                font-size: 16px;
+                font-weight: 600;
+            }
+        }
+        .mat-expansion-panel-content {
+            background-color: #fff;
+            padding-top: 8px;
+        }
     }
+}
+h4 {
+    border-bottom: solid #e0e0e0 1px;
 }
 
