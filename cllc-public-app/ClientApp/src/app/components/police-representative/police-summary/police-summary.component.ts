@@ -1,19 +1,19 @@
-import { ChangeDetectorRef, Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
-import { User } from '@models/user.model';
-import { Store } from '@ngrx/store';
-import { Account } from '@models/account.model';
-import { AppState } from '@app/app-state/models/app-state';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Router } from '@angular/router';
-import { SepApplication } from '@models/sep-application.model';
-import { AutoCompleteItem, SpecialEventsDataService } from '@services/special-events-data.service';
-import { Subscription } from 'rxjs';
-import { MatDialog } from '@angular/material/dialog';
-import { ContactDataService } from '@services/contact-data.service';
-import { Contact } from '@models/contact.model';
-import { AcceptDialogComponent } from '@components/police-representative/police-summary/accept-dialog/accept-dialog.component';
-import { DenyDialogComponent } from './deny-dialog/deny-dialog.component';
-import { CancelDialogComponent } from '@components/police-representative/police-summary/cancel-dialog/cancel-dialog.component';
+import { ChangeDetectorRef, Component, EventEmitter, Inject, Input, OnInit, Output } from "@angular/core";
+import { User } from "@models/user.model";
+import { Store } from "@ngrx/store";
+import { Account } from "@models/account.model";
+import { AppState } from "@app/app-state/models/app-state";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { ActivatedRoute, Router } from "@angular/router";
+import { SepApplication, SepTermAndCondtion } from "@models/sep-application.model";
+import { AutoCompleteItem, SpecialEventsDataService } from "@services/special-events-data.service";
+import { Subscription } from "rxjs";
+import { MatDialog } from "@angular/material/dialog";
+import { ContactDataService } from "@services/contact-data.service";
+import { Contact } from "@models/contact.model";
+import { AcceptDialogComponent } from "@components/police-representative/police-summary/accept-dialog/accept-dialog.component";
+import { DenyDialogComponent } from "./deny-dialog/deny-dialog.component";
+import { CancelDialogComponent } from "@components/police-representative/police-summary/cancel-dialog/cancel-dialog.component";
 
 import {
   faAward,
@@ -40,15 +40,15 @@ import {
 import {
   faBan
 } from "@fortawesome/free-solid-svg-icons";
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { filter, tap, switchMap } from 'rxjs/operators';
-import { FormBase } from '@shared/form-base';
-import { SepSchedule } from '@models/sep-schedule.model';
+import { FormArray, FormBuilder, FormGroup } from "@angular/forms";
+import { filter, tap, switchMap } from "rxjs/operators";
+import { FormBase } from "@shared/form-base";
+import { SepSchedule } from "@models/sep-schedule.model";
 
 @Component({
-  selector: 'app-police-summary',
-  templateUrl: './police-summary.component.html',
-  styleUrls: ['./police-summary.component.scss']
+  selector: "app-police-summary",
+  templateUrl: "./police-summary.component.html",
+  styleUrls: ["./police-summary.component.scss"]
 })
 export class PoliceSummaryComponent extends FormBase implements OnInit {
   faDownLoad = faDownload;
@@ -73,11 +73,17 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
   specialEventId: string;
   contact: Contact;
   sepApplication: SepApplication;
-  form: FormGroup;
+  form: FormGroup = this.fb.group({
+    sepCity: [""],
+    termsAndConditions: this.fb.array([
+    ])
+  });
   sepCityRequestInProgress: boolean;
   previewCities: AutoCompleteItem[] = [];
   autocompleteCities: AutoCompleteItem[] = [];
   validationMessages: string[];
+  newTnCControl = this.fb.control("");
+  originator: string;
 
   constructor(private fb: FormBuilder,
     private cd: ChangeDetectorRef,
@@ -88,56 +94,54 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
     public dialog: MatDialog,
-    ) {
+  ) {
+    super();
+    this.route.paramMap.subscribe(params => {
+      this.specialEventId = params.get("specialEventId");
+    });
 
-      super();
-      this.route.paramMap.subscribe(params => {
-        this.specialEventId = params.get("specialEventId");
-      });
-
-      store.select(state => state.currentUserState.currentUser)
+    store.select(state => state.currentUserState.currentUser)
       .subscribe(user => {
+        this.originator = user.name;
         contactDataService.getContact(user.contactid)
           .subscribe(contact => {
             this.contact = contact;
           });
       });
 
-      specialEventsDataService.getSepCityAutocompleteData(null, true)
+    specialEventsDataService.getSepCityAutocompleteData(null, true)
       .subscribe(results => {
         this.previewCities = results;
       });
   }
-/*
-  constructor(private fb: FormBuilder,
-    store: Store<AppState>,
-    contactDataService: ContactDataService,
-    private db: IndexedDBService) {
-    store.select(state => state.currentUserState.currentUser)
-      .subscribe(user => {
-        contactDataService.getContact(user.contactid)
-          .subscribe(contact => {
-            this.contact = contact;
-          });
-      });
+
+  get TnConditions(): FormArray {
+    return this.form.get("termsAndConditions") as FormArray;
   }
-*/
 
   ngOnInit(): void {
-    this.form = this.fb.group({
-      sepCity: ['']
-    });
     this.busy =
-    this.specialEventsDataService.getSpecialEventPolice(this.specialEventId)
-      .subscribe(application => {
-        this.sepApplication = application;
-        this.formatEventDatesForDisplay();
-        if (this.form && application) {
-          this.form.patchValue(this.sepApplication);
-        }
-      });
+      this.specialEventsDataService.getSpecialEventPolice(this.specialEventId)
+        .subscribe(application => {
+          this.sepApplication = application;
+          this.formatEventDatesForDisplay();
+          if (this.form && application) {
+            this.form.patchValue(this.sepApplication);
 
-      this.form.get('sepCity').valueChanges
+            if(application?.termsAndConditions?.length > 0){
+              application.termsAndConditions.forEach(tnc => {
+                this.TnConditions.push(this.fb.group({
+                  content: [tnc.content],
+                  originator: [tnc.originator],
+                  id: [tnc.id],
+                  edit: [false],
+                }));
+              });
+            }
+          }
+        });
+
+    this.form.get("sepCity").valueChanges
       .pipe(filter(value => value && value.length >= 3),
         tap(_ => {
           this.autocompleteCities = [];
@@ -151,9 +155,45 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
 
         this.cd.detectChanges();
         if (data && data.length === 0) {
-          this.snackBar.open('No match found', '', { duration: 2500, panelClass: ['green-snackbar'] });
+          this.snackBar.open("No match found", "", { duration: 2500, panelClass: ["green-snackbar"] });
         }
       });
+  }
+
+  addTAndC() {
+    this.TnConditions.push(this.fb.group({
+      content: [this.newTnCControl.value],
+      originator: [this.originator],
+      id: [""],
+      edit: [false],
+    }));
+    this.newTnCControl.reset();
+  }
+
+  editTnC(form: FormGroup, index: number) {
+    if (this.originator === form.value.originator) {
+      form["defaultValue"] = form.value; // cache the current value to use when editing is cancelled
+      form.get("edit").setValue(true);
+    }
+  }
+
+  removeTnCAt(index: number) {
+    this.TnConditions.removeAt(index);
+  }
+
+  saveTermsAndConditions(){
+    this.specialEventsDataService.updateSepTermsAndConditions(this.form.value.termsAndConditions, this.specialEventId)
+    .subscribe((data: SepTermAndCondtion[]) => { 
+      this.TnConditions.clear();
+      data.forEach(tnc => {
+        this.TnConditions.push(this.fb.group({
+          content: [tnc.content],
+          originator: [tnc.originator],
+          id: [tnc.id],
+          edit: [false],
+        }));
+      });
+    })
   }
 
 
@@ -176,31 +216,31 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
 
     // open dialog, get reference and process returned data from dialog
     const dialogConfig = {
-        disableClose: true,
-        autoFocus: true,
-        width: '500px',
-        height: '300px',
-        data: {
-          showStartApp: false
-        }
-      };
+      disableClose: true,
+      autoFocus: true,
+      width: "500px",
+      height: "300px",
+      data: {
+        showStartApp: false
+      }
+    };
 
     const dialogRef = this.dialog.open(AcceptDialogComponent, dialogConfig);
     dialogRef.afterClosed()
-      //.pipe(takeWhile(() => this.componentActive))
+      // .pipe(takeWhile(() => this.componentActive))
       .subscribe(acceptApplication => {
         if (acceptApplication) {
           // delete the application.
           this.busy = this.specialEventsDataService.policeApproveSepApplication(this.specialEventId)
             .subscribe(() => {
               this.snackBar.open("Reviewed application.",
-              "Success",
-              { duration: 3500, panelClass: ["green-snackbar"] })
-              this.router.navigate(['/sep/police/my-jobs']);
+                "Success",
+                { duration: 3500, panelClass: ["green-snackbar"] });
+              this.router.navigate(["/sep/police/my-jobs"]);
             },
               () => {
-                this.snackBar.open('Error reviewing the application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-                console.error('Error reviewing the application');
+                this.snackBar.open("Error reviewing the application", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
+                console.error("Error reviewing the application");
               });
         }
       });
@@ -208,32 +248,32 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
   }
 
   isReviewed(): boolean {
-    return this.sepApplication?.eventStatus == 'Approved' || this.sepApplication?.eventStatus == 'Issued';
+    return this.sepApplication?.eventStatus === "Approved" || this.sepApplication?.eventStatus === "Issued";
   }
 
   isDenied(): boolean {
-    return this.sepApplication?.eventStatus == 'Denied' || this.sepApplication?.eventStatus == 'Cancelled';
+    return this.sepApplication?.eventStatus === "Denied" || this.sepApplication?.eventStatus === "Cancelled";
   }
 
   isCurrentUser(): boolean {
-    return this.contact?.name == this.sepApplication.policeDecisionBy?.name;
+    return this.contact?.name === this.sepApplication.policeDecisionBy?.name;
   }
 
-  getSize(guests: number): string{
+  getSize(guests: number): string {
 
-    if(guests < 101){
+    if (guests < 101) {
       return "Small";
     } else {
-      if(guests < 500){
+      if (guests < 500) {
         return "Medium";
       } else {
-          return "Large";
-        }
+        return "Large";
       }
     }
+  }
 
-  getTypeIcon(): IconDefinition{
-    switch(this.sepApplication?.privateOrPublic){
+  getTypeIcon(): IconDefinition {
+    switch (this.sepApplication?.privateOrPublic) {
       case ("Members"):
         return faHandshake;
       case ("Hobbyist"):
@@ -248,7 +288,7 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
   }
 
   getStatusIcon(): IconDefinition {
-    switch(this.sepApplication?.eventStatus){
+    switch (this.sepApplication?.eventStatus) {
       case ("PendingReview"):
         return faStopwatch;
       case ("Approved"):
@@ -266,7 +306,7 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
 
   getNumberOfLocations(): number {
     let num = 0;
-    for (var location of this.sepApplication.eventLocations) {
+    for (const location of this.sepApplication.eventLocations) {
       num++;
     }
     return num;
@@ -274,36 +314,36 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
 
   deny(): void {
 
-        // open dialog, get reference and process returned data from dialog
-        const dialogConfig = {
-          disableClose: true,
-          autoFocus: true,
-          width: '500px',
-          height: '500px',
-          data: {
-            showStartApp: false
-          }
-        };
+    // open dialog, get reference and process returned data from dialog
+    const dialogConfig = {
+      disableClose: true,
+      autoFocus: true,
+      width: "500px",
+      height: "500px",
+      data: {
+        showStartApp: false
+      }
+    };
 
-      const dialogRef = this.dialog.open(DenyDialogComponent, dialogConfig);
-      dialogRef.afterClosed()
-        //.pipe(takeWhile(() => this.componentActive))
-        .subscribe(cancelApplication => {
-          if (cancelApplication) {
+    const dialogRef = this.dialog.open(DenyDialogComponent, dialogConfig);
+    dialogRef.afterClosed()
+      // .pipe(takeWhile(() => this.componentActive))
+      .subscribe(cancelApplication => {
+        if (cancelApplication) {
 
-            this.busy = this.specialEventsDataService.policeDenySepApplication(this.specialEventId)
-              .subscribe(() => {
-                this.snackBar.open("Denied application.",
+          this.busy = this.specialEventsDataService.policeDenySepApplication(this.specialEventId)
+            .subscribe(() => {
+              this.snackBar.open("Denied application.",
                 "Success",
-                { duration: 3500, panelClass: ["green-snackbar"] })
-                this.router.navigate(['/sep/police/my-jobs']);
-              },
-                () => {
-                  this.snackBar.open('Error denying the application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-                  console.error('Error denying the application');
-                });
-          }
-        });
+                { duration: 3500, panelClass: ["green-snackbar"] });
+              this.router.navigate(["/sep/police/my-jobs"]);
+            },
+              () => {
+                this.snackBar.open("Error denying the application", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
+                console.error("Error denying the application");
+              });
+        }
+      });
 
   }
 
@@ -313,38 +353,38 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
     const dialogConfig = {
       disableClose: true,
       autoFocus: true,
-      width: '500px',
-      height: '500px',
+      width: "500px",
+      height: "500px",
       data: {
         showStartApp: false
       }
     };
 
-  const dialogRef = this.dialog.open(CancelDialogComponent, dialogConfig);
-  dialogRef.afterClosed()
-    //.pipe(takeWhile(() => this.componentActive))
-    .subscribe(cancelApplication => {
-      if (cancelApplication) {
+    const dialogRef = this.dialog.open(CancelDialogComponent, dialogConfig);
+    dialogRef.afterClosed()
+      // .pipe(takeWhile(() => this.componentActive))
+      .subscribe(cancelApplication => {
+        if (cancelApplication) {
 
-        this.busy = this.specialEventsDataService.policeCancelSepApplication(this.specialEventId)
-          .subscribe(() => {
-            this.snackBar.open("Cancelled application.",
-            "Success",
-            { duration: 3500, panelClass: ["green-snackbar"] })
-            this.router.navigate(['/sep/police/my-jobs']);
-          },
-            () => {
-              this.snackBar.open('Error cancelling the application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-              console.error('Error cancelling the application');
-            });
-      }
-    });
+          this.busy = this.specialEventsDataService.policeCancelSepApplication(this.specialEventId)
+            .subscribe(() => {
+              this.snackBar.open("Cancelled application.",
+                "Success",
+                { duration: 3500, panelClass: ["green-snackbar"] });
+              this.router.navigate(["/sep/police/my-jobs"]);
+            },
+              () => {
+                this.snackBar.open("Error cancelling the application", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
+                console.error("Error cancelling the application");
+              });
+        }
+      });
 
-}
+  }
 
 
   getFormValue(): SepApplication {
-    let formData = {
+    const formData = {
       ...this.sepApplication,
       ...this.form.value
     };
@@ -378,15 +418,15 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
 
   // update the municipality with the value chosen.
   updateMunicipality(): void {
-    this.busy = this.specialEventsDataService.policeSetMunicipality(this.specialEventId, this.form.get('sepCity')?.value?.id)
-    .subscribe(() => {
-      this.snackBar.open("Set City.",
-      "Success",
-      { duration: 3500, panelClass: ["green-snackbar"] });
-    },
-      () => {
-        this.snackBar.open('Error setting city', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-        console.error('Error setting city');
-      });
+    this.busy = this.specialEventsDataService.policeSetMunicipality(this.specialEventId, this.form.get("sepCity")?.value?.id)
+      .subscribe(() => {
+        this.snackBar.open("Set City.",
+          "Success",
+          { duration: 3500, panelClass: ["green-snackbar"] });
+      },
+        () => {
+          this.snackBar.open("Error setting city", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
+          console.error("Error setting city");
+        });
   }
 }
