@@ -48,7 +48,7 @@
 
   <p
     *ngIf="isShowLGINApproval || application?.applicationType?.isShowLGZoningConfirmation">
-    <strong>
+    <strong *ngIf="this.account.businessType !== 'LocalGovernment'">
 
       Prior to payment, your application will be submitted to your local government/Indigenous Nation for their
       <span *ngIf="isShowLGINApproval">comment and assessment</span>
@@ -66,6 +66,11 @@
         </a>)
       </span>
       to ensure your successful submission.
+    </strong>
+    <strong *ngIf="this.account.businessType === 'LocalGovernment'">
+      If an LG/IN is the applicant, the Branch will gather community input and consider the regulatory criteria; the LG/IN
+      is not permitted to conduct public input or provide comments on their own application. This is to prevent conflicts
+      of interest. The applicant must pay any costs incurred to obtain the views of residents.
     </strong>
   </p>
 

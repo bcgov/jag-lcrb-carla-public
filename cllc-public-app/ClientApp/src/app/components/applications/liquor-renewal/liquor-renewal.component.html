@@ -182,7 +182,9 @@
 <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;">
   <section class="d-flex justify-content-between w-100">
     <div class="question-label align-self-center">
-      4. Have you redistributed any shares within the past 12 months without notifying LCRB?
+      4.
+      <span *ngIf="this.account.businessType === 'Society'">Have you changed any of your Officers or Directors the past 12 months without notifying LCRB?</span>
+      <span *ngIf="this.account.businessType !== 'Society'">Have you redistributed any shares within the past 12 months without notifying LCRB?</span>
     </div>
     <div style="flex: 0 0 85px;">
       <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalShareholders')}"
@@ -254,9 +256,10 @@
 <mat-card class="mat-elevation-z1" style="margin-bottom: 10px;" *ngIf="!isAgent()">
   <section class="d-flex justify-content-between w-100">
     <div class="question-label align-self-center">
-      7. Have you acquired a new interest or expanded an existing interest financial or otherwise
+      7. <span *ngIf="!isMFG()">Have you acquired a new interest or expanded an existing interest financial or otherwise
       in a winery, brewery, distillery, liquor agent and/or a UBrew/UVin within the past 12 months
-      without notifying LCRB?
+      without notifying LCRB?</span>
+      <span *ngIf="isMFG()">Have you acquired a new interest or expanded an existing interest - financial or otherwise - in a food-primary or liquor primary establishment (a restaurant or bar, for example), licensee retail store, wine store, Catering Licence and/or a UBrew/UVin within the past 12 months?</span>
     </div>
     <div style="flex: 0 0 85px;">
       <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalTiedhouse')}"

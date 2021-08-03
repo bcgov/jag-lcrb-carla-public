@@ -158,6 +158,9 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
             this.inProgressApplications.push(application);
           });
 
+        /*
+        // TG July 28, 2021
+        // licensedApplications is never used..
         licenses.forEach((licence: ApplicationLicenseSummary) => {
           licence.actionApplications = [];
           const relatedApplications = applications.filter(l => l.licenceId === licence.licenseId);
@@ -171,7 +174,9 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
             });
           });
           this.licensedApplications.push(licence);
+
         });
+          */
 
         this.marketerExists = applications.filter(item => item.applicationTypeName === ApplicationTypeNames.Marketer)
           .map(item => item as any)
