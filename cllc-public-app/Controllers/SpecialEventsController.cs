@@ -764,7 +764,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     locationDetails += $"<tr><th class='heading'>Service Times:</td><td class='field'>{serviceTimeParam}</td></tr>";
                     locationDetails += "</table>";
                 }
+
+                // show the Ts and Cs if they're there.
+                if( specialEvent.AdoxioSpecialeventSpecialeventtsacs?.Count > 0 ) {
+
+                    locationDetails += "<h3 class='info'>Permit Terms and Conditions</h3><ul>";
+                        foreach (var tc in specialEvent.AdoxioSpecialeventSpecialeventtsacs)
+                        {
+                            locationDetails += $"<li>{tc.AdoxioTermsandcondition}</li>";
+                        }
+                    locationDetails += "</ul>";
+                }
+
                 locationDetails += "<p>The terms and conditions to which this Special Event Permit is subject include the terms and conditions contained in the Special Event Permit Terms and Conditions Handbook, which is available on the Liquor and Cannabis Regulation Branch website.</p>";
+
+
                 locationDetails += "<p>&nbsp;</p><p>Signed: ________________________________</p>";
                 locationDetails += "<p><em>The information on this form is collected by the Liquor and Cannabis Regulation Branch under Section 26(a) and (c) of the Freedom of Information and Protection of Privacy Act and will be used for the purpose of liquor licensing and compliance and";
                 locationDetails += "enforcement matters in accordance with the Liquor Control and Licensing Act. Should you have any questions about the collection, uses, or disclosure of personal information, please contact the Freedom of Information Officer at PO Box 9292 STN";
@@ -855,7 +869,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 "adoxio_SpecialEventCityDistrictId",
                 "adoxio_ContactId",
                 "adoxio_AccountId",
-                "adoxio_specialevent_adoxio_sepdrinksalesforecast_SpecialEvent"
+                "adoxio_specialevent_adoxio_sepdrinksalesforecast_SpecialEvent",
+                "adoxio_specialevent_specialeventtsacs"
             };
             MicrosoftDynamicsCRMadoxioSpecialevent specialEvent = null;
             if (!string.IsNullOrEmpty(eventId))

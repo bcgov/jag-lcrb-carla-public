@@ -398,6 +398,20 @@
                 </label> <span class="fee-amount">{{application?.invoice?.totalamount
                     | currency}}</span>
             </div>
+        </mat-expansion-panel >
+
+        <mat-expansion-panel [expanded]="true" *ngIf="application?.termsAndConditions?.length > 0">
+
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+                TERMS & CONDITIONS
+            </mat-panel-title>
+
+            <ul>
+              <li *ngFor="let tc of application?.termsAndConditions; let i = index;">{{tc.content}}</li>
+            </ul>
+        </mat-expansion-panel-header>
+
         </mat-expansion-panel>
 
         <div *ngIf="!isReadOnly()">
@@ -428,9 +442,15 @@
           </section>
         </div>
 
-        <div *ngIf="!isReadOnly()" class="d-flex" style="margin-top: 20px;">
+        <div *ngIf="!isReadOnly() && !this.isEventPast()" class="d-flex" style="margin-top: 20px;">
           <!--button mat-raised-button color="secondary" class="mr-2">BACK</button-->
           <button mat-raised-button color="primary" (click)="submitApplication()">SUBMIT APPLICATION</button>
+
+        </div>
+
+        <div *ngIf="!isReadOnly() && this.isEventPast()" class="d-flex" style="margin-top: 20px;">
+
+          <p><fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>You cannot submit an application for an event in the past.</p>
 
         </div>
         <section *ngIf="application?.eventStatus == 'Approved' && !trnId || mode ==='payNow'">
