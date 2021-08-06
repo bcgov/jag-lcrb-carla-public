@@ -265,6 +265,12 @@ export class SummaryComponent implements OnInit {
     return false;
   }
 
+  isSubmitted(): boolean {
+    // if the Dynamics workflow fails, the application will be stuck in a submitted state. We should indicate that we're working on it.
+    return ["Submitted"].indexOf(this.application?.eventStatus) >= 0;
+
+  }
+
   isReadOnly(): boolean {
     return ["Pending Review", "Approved", "Issued", "Denied", "Cancelled"].indexOf(this.application?.eventStatus) >= 0;
   }
