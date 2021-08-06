@@ -138,6 +138,20 @@ namespace Gov.Lclb.Cllb.Public.Models
 
                 result.TotalPurchaseCost = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent == null ? 0 : specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
                     .Sum(forecast => forecast.AdoxioEstimatedcost.GetValueOrDefault());
+
+                if (specialEvent.AdoxioSpecialeventSpecialeventtsacs != null)
+                {
+                    result.TermsAndConditions = new List<SepTermAndCondition>();
+                    specialEvent.AdoxioSpecialeventSpecialeventtsacs.ToList()
+                    .ForEach(term =>
+                    {
+                        result.TermsAndConditions.Add(new SepTermAndCondition {
+                            Id = term.AdoxioSpecialeventtandcid,
+                            Content = term.AdoxioTermsandcondition,
+                            Originator = term.AdoxioOriginator
+                         });
+                    });
+                }
             }
             return result;
         }
@@ -165,15 +179,29 @@ namespace Gov.Lclb.Cllb.Public.Models
                     CancelReason = specialEvent.AdoxioCancellationreason,
                     DateOfPoliceDecision = specialEvent.AdoxioDatepoliceapproved
                 };
-                
+
                 if (specialEvent.AdoxioTypeofevent != null)
                 {
-                    result.EventType = (EventType) specialEvent.AdoxioTypeofevent;
+                    result.EventType = (EventType)specialEvent.AdoxioTypeofevent;
                 }
 
                 if (specialEvent.Statuscode != null)
                 {
-                    result.EventStatus = (EventStatus) specialEvent.Statuscode;
+                    result.EventStatus = (EventStatus)specialEvent.Statuscode;
+                }
+
+                if (specialEvent.AdoxioSpecialeventSpecialeventtsacs != null)
+                {
+                    result.TermsAndConditions = new List<SepTermAndCondition>();
+                    specialEvent.AdoxioSpecialeventSpecialeventtsacs.ToList()
+                    .ForEach(term =>
+                    {
+                        result.TermsAndConditions.Add(new SepTermAndCondition {
+                            Id = term.AdoxioSpecialeventtandcid,
+                            Content = term.AdoxioTermsandcondition,
+                            Originator = term.AdoxioOriginator
+                         });
+                    });
                 }
 
             }

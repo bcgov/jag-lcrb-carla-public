@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations;
 namespace Gov.Lclb.Cllb.Interfaces.Models
 {
 
-
     public partial class MicrosoftDynamicsCRMadoxioSpecialevent
     {
        [JsonProperty(PropertyName = "adoxio_AccountId@odata.bind")]

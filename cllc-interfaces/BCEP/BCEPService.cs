@@ -28,6 +28,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         private string bcep_hashkey;
         private string bcep_alt_hashkey;
         private string bcep_sep_hashkey;
+        private string bcep_sep_hashtype;
         private string bcep_conf_url;
        
 
@@ -72,6 +73,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             this.bcep_hashkey = configuration["BCEP_HASH_KEY"];
             this.bcep_alt_hashkey = configuration["BCEP_ALTERNATE_HASH_KEY"];
             this.bcep_sep_hashkey = configuration["BCEP_SEP_HASH_KEY"];
+            this.bcep_sep_hashtype = configuration["BCEP_SEP_HASH_TYPE"];
 
             this.bcep_conf_url = configuration["BASE_URI"] + configuration["BASE_PATH"] + configuration["BCEP_CONF_PATH"];
         }
@@ -121,6 +123,18 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             return hashKey;
         }
+
+        private string GetHashType(PaymentType paymentType)
+        {
+            string hashType = null;
+            switch (paymentType)
+            {
+                case PaymentType.SPECIAL_EVENT:
+                    hashType = bcep_sep_hashtype;
+                    break;
+            }
+            return hashType;
+        }
         /// <summary>
         /// GET a payment re-direct url for an Application
         /// </summary>
@@ -156,6 +170,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             paramString = paramString.Replace(" ", "%20");
 
             string hashkey = GetHashKey(paymentType);
+            string hashType = GetHashType(paymentType);
 
             // add hash key at the end of params
             string paramStringWithHash = paramString + hashkey;
@@ -168,7 +183,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             // Add the result to the hosted service url. 
             // Note: Hash is calculated on the params ONLY.. Does NOT include the hosted payment page url.
             // See http://support.beanstream.com/#docs/about-hash-validation.htm?Highlight=hash for more info. 
-            string hashed = getHash(paramStringWithHash);
+            string hashed = getHash(paramStringWithHash, hashType);
 
             // Add hash and expiry to the redirect
             paramString = paramString + "&" + BCEP_P_HASH_VALUE + "=" + hashed;
@@ -285,15 +300,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         // @param keyString
         // @return
         // @throws BeanstreamException
-        private string getHash(string message)
+        private string getHash(string message, string type="MD5")
         {
             byte[] bytemessage = Encoding.UTF8.GetBytes(message);
             byte[] byteHashedMessage;
 
-            using (MD5 md5 = MD5.Create())
-            {
-                byteHashedMessage = md5.ComputeHash(bytemessage);
+            // TG: SEP uses SHA-1 hashing.
+            switch(type) {
+                case "SHA-1":
+                    using (SHA1 sha1 = SHA1.Create())
+                    {
+                        byteHashedMessage = sha1.ComputeHash(bytemessage);
+                    }
+                    break;
+                default:
+                    using (MD5 md5 = MD5.Create())
+                    {
+                        byteHashedMessage = md5.ComputeHash(bytemessage);
+                    }
+                    break;
             }
+                
             string digest = BitConverter.ToString(byteHashedMessage).Replace("-", "");
 
             return digest.ToUpper();
