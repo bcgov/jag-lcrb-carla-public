@@ -62,6 +62,7 @@ export class SepApplication {
 
     eventLocations: SepLocation[] = [];
     drinksSalesForecasts: SepDrinkSalesForecast[] = [];
+    termsAndConditions: SepTermAndCondtion[] = [];
     totalRevenue: number;
     totalProceeds: number;
     totalPurchaseCost: number;
@@ -104,5 +105,11 @@ export class SepApplication {
     public get maxSuggestedServings(): number {
         return Math.floor(((this.serviceHours / 3) * (this.maximumNumberOfAdults) * 5));
     }
+}
+
+export class SepTermAndCondtion {
+    id: string;
+    content: string;
+    originator: string;
 }
 
