@@ -14,6 +14,7 @@ import { Contact } from "@models/contact.model";
 import { AcceptDialogComponent } from "@components/police-representative/police-summary/accept-dialog/accept-dialog.component";
 import { DenyDialogComponent } from "./deny-dialog/deny-dialog.component";
 import { CancelDialogComponent } from "@components/police-representative/police-summary/cancel-dialog/cancel-dialog.component";
+import { isBefore } from "date-fns";
 
 import {
   faAward,
@@ -44,6 +45,7 @@ import { FormArray, FormBuilder, FormGroup } from "@angular/forms";
 import { filter, tap, switchMap } from "rxjs/operators";
 import { FormBase } from "@shared/form-base";
 import { SepSchedule } from "@models/sep-schedule.model";
+import { isToday } from "date-fns";
 
 @Component({
   selector: "app-police-summary",
@@ -183,7 +185,7 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
 
   saveTermsAndConditions(){
     this.specialEventsDataService.updateSepTermsAndConditions(this.form.value.termsAndConditions, this.specialEventId)
-    .subscribe((data: SepTermAndCondtion[]) => { 
+    .subscribe((data: SepTermAndCondtion[]) => {
       this.TnConditions.clear();
       data.forEach(tnc => {
         this.TnConditions.push(this.fb.group({
@@ -270,6 +272,10 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
         return "Large";
       }
     }
+  }
+
+  isEventPast(): boolean {
+    return isBefore(new Date(this.sepApplication?.eventStartDate), new Date() );
   }
 
   getTypeIcon(): IconDefinition {

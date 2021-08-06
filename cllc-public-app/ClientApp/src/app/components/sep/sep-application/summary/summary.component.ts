@@ -11,6 +11,7 @@ import { IndexedDBService } from "@services/indexed-db.service";
 import { PaymentDataService } from "@services/payment-data.service";
 import { SpecialEventsDataService } from "@services/special-events-data.service";
 import { map, mergeMap } from "rxjs/operators";
+import { isBefore } from "date-fns";
 import {
   faAward,
   faBirthdayCake,
@@ -264,8 +265,18 @@ export class SummaryComponent implements OnInit {
     return false;
   }
 
+  isSubmitted(): boolean {
+    // if the Dynamics workflow fails, the application will be stuck in a submitted state. We should indicate that we're working on it.
+    return ["Submitted"].indexOf(this.application?.eventStatus) >= 0;
+
+  }
+
   isReadOnly(): boolean {
     return ["Pending Review", "Approved", "Issued", "Denied", "Cancelled"].indexOf(this.application?.eventStatus) >= 0;
+  }
+
+  isEventPast(): boolean {
+    return isBefore(new Date(this.application?.eventStartDate), new Date() );
   }
 
   async cancelApplication(): Promise<void> {

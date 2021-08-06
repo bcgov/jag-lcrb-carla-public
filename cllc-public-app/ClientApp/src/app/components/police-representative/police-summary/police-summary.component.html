@@ -51,9 +51,13 @@
 
               <section *ngIf="sepApplication?.eventStatus == 'Pending Review'">
                 <!-- if denied -->
-                <h3>
+                <h3 *ngIf="!this.isEventPast()">
                   <fa-icon [icon]="getStatusIcon()" style="margin-right: 10px;"></fa-icon>Pending Review
                 </h3>
+                <h3 *ngIf="this.isEventPast()">
+                  <fa-icon [icon]="getStatusIcon()" style="margin-right: 10px;"></fa-icon>Not Approved
+                </h3>
+
                 <p *ngIf="!sepApplication.policeDecisionBy"><em>This application is not assigned to anyone. <br> To
                     provide
                     a review, assign the application from the list of <a href="sep/police/all-applications">All
@@ -77,6 +81,8 @@
               <section *ngIf="this.isCurrentUser()">
                 <!-- if opened by assignee and event date has not passed -->
 
+                <section *ngIf="!this.isEventPast()">
+
                 <button
                   *ngIf="!this.isReviewed() && !this.isDenied() && sepApplication?.policeApproval == 'Pending Review'"
                   class="btn btn-primary" (click)=approve() style="width:230px;">
@@ -98,6 +104,9 @@
                   style="width: 230px;">
                   REVOKE LIQUOR SERVICE&nbsp;
                 </button>
+                </section>
+
+                <section *ngIf="this.isEventPast()">This event has already past.</section>
 
               </section>
 
@@ -114,7 +123,8 @@
               </tr>
               <tr>
                 <td style="text-align:center;">
-                  <h2 style="color: #036;">{{sepApplication?.eventStatus}}</h2>
+                  <h2 style="color: #036;" *ngIf="this.isEventPast() && sepApplication?.eventStatus == 'Pending Review'">Not Approved</h2>
+                  <h2 style="color: #036;" *ngIf="!(this.isEventPast() && sepApplication?.eventStatus == 'Pending Review')">{{sepApplication?.eventStatus}}</h2>
                 </td>
                 <td style="text-align:center;">
                   <h2 style="color: #036;">{{sepApplication?.privateOrPublic}}</h2>
@@ -364,6 +374,21 @@
         </mat-expansion-panel>
 
         <hr>
+
+        <mat-expansion-panel [expanded]="true" *ngIf="sepApplication?.termsAndConditions?.length > 0">
+
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+                TERMS & CONDITIONS
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="d-flex">
+            <ul style="margin-top: 20px;">
+              <li *ngFor="let tc of sepApplication?.termsAndConditions; let i = index;"><strong>{{tc.content}}</strong></li>
+            </ul>
+          </div>
+
+        </mat-expansion-panel>
 
       </div>
     </mat-tab>
