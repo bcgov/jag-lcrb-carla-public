@@ -10,6 +10,7 @@ import { PaymentDataService } from "@services/payment-data.service";
 import { IndexedDBService } from "@services/indexed-db.service";
 import { SpecialEventsDataService } from "@services/special-events-data.service";
 import { map } from "rxjs/operators";
+import { isBefore } from "date-fns";
 import {
   faAward,
   faCopy,
@@ -87,6 +88,8 @@ export class SubmittedApplicationsComponent implements OnInit {
   ngOnInit(): void {
     this.sepDataService.getSubmittedApplications()
       .subscribe(data => this.dataSource.data = data);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
 
@@ -97,6 +100,8 @@ export class SubmittedApplicationsComponent implements OnInit {
       this.router.navigateByUrl(`sep/application-summary/${app.specialEventId}`);
     }
   }
+
+
 
   getLastStep(stepCompleted: string): string {
     const lastIndex = SEP_APPLICATION_STEPS.indexOf(stepCompleted);
@@ -118,22 +123,46 @@ export class SubmittedApplicationsComponent implements OnInit {
     }
   }
 
+  isEventPast(eventStartDate: string) {
+    return isBefore(new Date(eventStartDate), new Date() );
+  }
+
+  getStatus(app: SepApplication): string {
+    // when an application happens in the past, sometimes we need to change the status in the front end.
+      switch(app.eventStatus) {
+        case ("Pending Review"):
+          if(this.isEventPast(String(app.eventStartDate))){
+            return "Review Expired"
+          } else {
+            return app.eventStatus;
+          }
+        case ("Approved"):
+          if(this.isEventPast(String(app.eventStartDate))){
+            return "Approval Expired"
+          } else {
+            return "Payment Required";
+          }
+        default:
+          return app.eventStatus;
+      }
+  }
+
   getStatusIcon(status: string): IconDefinition {
     switch (status) {
-      case ("PendingReview"):
+      case ("Pending Review"):
         return faStopwatch;
       case ("Draft"):
         return faPencilAlt;
       case ("Approved"):
+      case ("Payment Required"):
       case ("Reviewed"):
         return faCheck;
       case ("Issued"):
         return faAward;
       case ("Denied"):
       case ("Cancelled"):
-        return faBan;
       default:
-        return faStopwatch;
+        return faBan;
     }
   }
 

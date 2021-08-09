@@ -36,15 +36,25 @@
         <ng-container matColumnDef="eventStatusLabel">
           <th mat-header-cell *matHeaderCellDef mat-sort-header style="min-width:150px;">Status</th>
           <td mat-cell *matCellDef="let row" class="mat-body-1">
-            <span *ngIf="row.eventStatus === 'Issued'" style="color: green; font-size:14px; font-weight:600;">
+            <fa-icon [icon]="getStatusIcon(getStatus(row))" style="margin-right: 10px;"></fa-icon><strong>{{row.eventStatus ? getStatus(row) : "Draft"}}</strong>
+            <!--span *ngIf="row.eventStatus === 'Issued'" style="color: green; font-size:14px; font-weight:600;">
               <fa-icon [icon]="getStatusIcon(row.eventStatus)" style="margin-right: 10px;"></fa-icon>{{row.eventStatus ? row.eventStatus : "Draft"}}
             </span>
-            <span *ngIf="row.eventStatus === 'Approved'" style='font-size: 14px; color: #fcba19; font-weight:600;'>
+            <span *ngIf="row.eventStatus === 'Approved' && !isEventPast(row.eventStartDate)" style='font-size: 14px; color: #fcba19; font-weight:600;'>
               <fa-icon [icon]="getStatusIcon(row.eventStatus)" style="margin-right: 10px;"></fa-icon>Payment Required
             </span>
-            <span *ngIf="row.eventStatus !== 'Issued' && row.eventStatus != 'Approved'" style='font-size: 14px; font-weight:600;'>
+            <span *ngIf="row.eventStatus === 'Approved' && isEventPast(row.eventStartDate)" style='font-size: 14px; color: red; font-weight:600;'>
+              <fa-icon [icon]="faBan" style="margin-right: 10px;"></fa-icon>Approval Expired
+            </span>
+            <span *ngIf="row.eventStatus !== 'Issued' && row.eventStatus != 'Approved' && row.eventStatus != 'Pending Review'" style='font-size: 14px; font-weight:600;'>
               <fa-icon [icon]="getStatusIcon(row.eventStatus)" style="margin-right: 10px;"></fa-icon>{{row.eventStatus ? row.eventStatus : "Draft"}}
             </span>
+            <span *ngIf="row.eventStatus != 'Pending Review' && row.eventStatus != 'Approved' && !isEventPast(row.eventStartDate)" style='font-size: 14px; font-weight:600;'>
+              <fa-icon [icon]="getStatusIcon(row.eventStatus)" style="margin-right: 10px;"></fa-icon>{{row.eventStatus ? row.eventStatus : "Draft"}}
+            </span>
+            <span *ngIf="row.eventStatus == 'Pending Review' && isEventPast(row.eventStartDate)" style='font-size: 14px; color: red; font-weight:600;'>
+              <fa-icon [icon]="faBan" style="margin-right: 10px;"></fa-icon>Review Expired
+            </span-->
           </td>
         </ng-container>
 
@@ -75,7 +85,7 @@
               <!--button mat-raised-button (click)="payNow(row.specialEventId)" *ngIf="row.eventStatus ==='Approved' && row.invoiceId && !row.isInvoicePaid"><fa-icon [icon]="faShoppingCart" style="margin-right: 10px;"></fa-icon>Pay Now</button-->
 
             <!-- instead of having them pay from the summary, we should have them open the app to pay it there.-->
-            <a (click)="openApplication(row)" *ngIf="row.eventStatus ==='Approved' && row.invoiceId && !row.isInvoicePaid" style="text-decoration: underline; color:#1a5a96; cursor: pointer;"><fa-icon [icon]="faShoppingCart" style="margin-right: 10px;"></fa-icon>Pay Now</a>
+            <a (click)="openApplication(row)" *ngIf="row.eventStatus ==='Approved' && row.invoiceId && !row.isInvoicePaid && !isEventPast(row.eventStartDate)" style="text-decoration: underline; color:#1a5a96; cursor: pointer;"><fa-icon [icon]="faShoppingCart" style="margin-right: 10px;"></fa-icon>Pay Now</a>
 
             <!--button mat-button color="primary" (click)="openApplication(row)">{{row.eventName ? row.eventName : "Unnamed Event"}}</button-->
             <br>
