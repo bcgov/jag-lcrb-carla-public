@@ -140,6 +140,7 @@ export class SummaryComponent implements OnInit {
     if (this.transactionId) {
       this.verify_payment();
     }
+    window.scrollTo(0, 0);
   }
 
   /**
@@ -239,7 +240,7 @@ export class SummaryComponent implements OnInit {
       });
     }
   }
-
+/*
   getStatusIcon(): IconDefinition {
     switch (this.application?.eventStatus) {
       case ("Pending Review"):
@@ -256,7 +257,7 @@ export class SummaryComponent implements OnInit {
         return faStopwatch;
     }
   }
-
+*/
   isReviewed(): boolean {
     return ["Approved", "Issued"].indexOf(this.application?.eventStatus) >= 0;
   }
@@ -278,6 +279,62 @@ export class SummaryComponent implements OnInit {
   isEventPast(): boolean {
     return isBefore(new Date(this.application?.eventStartDate), new Date() );
   }
+
+
+  getStatus(): string {
+    // when an application happens in the past, sometimes we need to change the status in the front end.
+      switch(this.application?.eventStatus) {
+        case ("Pending Review"):
+          if(this.isEventPast()){
+            return "Review Expired"
+          } else {
+            return this.application?.eventStatus;
+          }
+        case ("Approved"):
+          if(this.isEventPast()){
+            return "Approval Expired"
+          } else {
+             if(this.trnId) { // sometimes we return to the page after payment before the status can be updated on the backend, if we collected payment we're issued
+                return "Issued";
+             } else {
+                return "Payment Required";
+             }
+          }
+        default:
+          return this.application?.eventStatus;
+      }
+  }
+
+  canWithdraw(): boolean {
+    switch(this.getStatus()) {
+      case ("Pending Review"):
+      case ("Approved"):
+        return true;
+      default:
+        return false;
+    }
+  }
+
+  getStatusIcon(): IconDefinition {
+    switch (this.getStatus()) {
+      case ("Pending Review"):
+        return faStopwatch;
+      case ("Draft"):
+        return faPencilAlt;
+      case ("Approved"):
+      case ("Payment Required"):
+      case ("Reviewed"):
+        return faCheck;
+      case ("Issued"):
+        return faAward;
+      case ("Denied"):
+      case ("Cancelled"):
+      default:
+        return faBan;
+    }
+  }
+
+
 
   async cancelApplication(): Promise<void> {
     this.savingToAPI = true;
