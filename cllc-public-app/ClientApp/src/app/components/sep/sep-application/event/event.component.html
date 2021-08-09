@@ -207,7 +207,7 @@
                                                 </section>
                                                 <div>
                                                     <button mat-raised-button color="warn"
-                                                        (click)="removeServiceArea(j, location)">Remove
+                                                        (click)="removeServiceArea(j, location)" *ngIf="j != 0">Remove
                                                         Area</button>
                                                 </div>
                                             </div>
@@ -296,7 +296,7 @@
                                                 </td>
                                                 <td class="text-right">
                                                     <button mat-raised-button color="warn"
-                                                        (click)="removeEventDate(k, location)">Remove</button>
+                                                        (click)="removeEventDate(k, location)" *ngIf="k != 0">Remove</button>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -371,7 +371,7 @@
                             </mat-card>
                         </mat-card>
                         <div>
-                            <button mat-raised-button color="warn" (click)="removeLocation(i)">Remove
+                            <button mat-raised-button color="warn" (click)="removeLocation(i)" *ngIf="i !=0 ">Remove
                                 Location</button>
                         </div>
                     </div>

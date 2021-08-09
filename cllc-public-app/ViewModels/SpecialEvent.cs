@@ -187,6 +187,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public int? Beer { get; set; }
         public int? Wine { get; set; }
         public int? Spirits { get; set; }
+        public List<SepTermAndCondition> TermsAndConditions { get; set; }
 
     }
 

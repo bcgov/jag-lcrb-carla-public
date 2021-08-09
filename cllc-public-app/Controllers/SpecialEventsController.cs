@@ -57,10 +57,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string filter = $"(_adoxio_contactid_value eq {userSettings.ContactId}";
 
             // accountID will be null if it is a BC Services Card
-            if(userSettings.AccountId != null && userSettings.AccountId != "00000000-0000-0000-0000-000000000000" ) {
+            if (userSettings.AccountId != null && userSettings.AccountId != "00000000-0000-0000-0000-000000000000")
+            {
                 filter += $" or _adoxio_accountid_value eq {userSettings.AccountId}";
             }
-            
+
             filter += $") and statuscode ne {(int)ViewModels.EventStatus.Draft}";
             filter += $" and statuscode ne {(int)ViewModels.EventStatus.Cancelled}";
 
@@ -134,7 +135,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 "adoxio_specialevent_specialeventlocations",
                 "adoxio_SpecialEventCityDistrictId",
                 "adoxio_ContactId",
-                "adoxio_specialevent_adoxio_sepdrinksalesforecast_SpecialEvent"
+                "adoxio_specialevent_adoxio_sepdrinksalesforecast_SpecialEvent",
+                "adoxio_specialevent_specialeventtsacs"
             };
             MicrosoftDynamicsCRMadoxioSpecialevent specialEvent = null;
             if (!string.IsNullOrEmpty(eventId))
@@ -762,7 +764,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     locationDetails += $"<tr><th class='heading'>Service Times:</td><td class='field'>{serviceTimeParam}</td></tr>";
                     locationDetails += "</table>";
                 }
+
+                // show the Ts and Cs if they're there.
+                if( specialEvent.AdoxioSpecialeventSpecialeventtsacs?.Count > 0 ) {
+
+                    locationDetails += "<h3 class='info'>Permit Terms and Conditions</h3><ul>";
+                        foreach (var tc in specialEvent.AdoxioSpecialeventSpecialeventtsacs)
+                        {
+                            locationDetails += $"<li>{tc.AdoxioTermsandcondition}</li>";
+                        }
+                    locationDetails += "</ul>";
+                }
+
                 locationDetails += "<p>The terms and conditions to which this Special Event Permit is subject include the terms and conditions contained in the Special Event Permit Terms and Conditions Handbook, which is available on the Liquor and Cannabis Regulation Branch website.</p>";
+
+
                 locationDetails += "<p>&nbsp;</p><p>Signed: ________________________________</p>";
                 locationDetails += "<p><em>The information on this form is collected by the Liquor and Cannabis Regulation Branch under Section 26(a) and (c) of the Freedom of Information and Protection of Privacy Act and will be used for the purpose of liquor licensing and compliance and";
                 locationDetails += "enforcement matters in accordance with the Liquor Control and Licensing Act. Should you have any questions about the collection, uses, or disclosure of personal information, please contact the Freedom of Information Officer at PO Box 9292 STN";
@@ -853,7 +869,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 "adoxio_SpecialEventCityDistrictId",
                 "adoxio_ContactId",
                 "adoxio_AccountId",
-                "adoxio_specialevent_adoxio_sepdrinksalesforecast_SpecialEvent"
+                "adoxio_specialevent_adoxio_sepdrinksalesforecast_SpecialEvent",
+                "adoxio_specialevent_specialeventtsacs"
             };
             MicrosoftDynamicsCRMadoxioSpecialevent specialEvent = null;
             if (!string.IsNullOrEmpty(eventId))
@@ -1027,6 +1044,68 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(specialEvent);
         }
 
+        [HttpPut("terms-and-conditions/{eventId}")]
+        public IActionResult UpdateSpecialEventTermsAndConditions(string eventId, [FromBody] List<ViewModels.SepTermAndCondition> termsAndCondtions)
+        {
+            if (!ModelState.IsValid || String.IsNullOrEmpty(eventId))
+            {
+                return BadRequest();
+            }
+
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+            // get the account details.
+            var userAccount = _dynamicsClient.GetAccountById(userSettings.AccountId);
+            if (string.IsNullOrEmpty(userAccount._adoxioPolicejurisdictionidValue))  // ensure the current account has a police jurisdiction.
+            {
+                return Unauthorized();
+            }
+
+            // get the special event.
+            string[] expand = new[] { "adoxio_specialevent_specialeventtsacs" };
+            var specialEvent = _dynamicsClient.Specialevents.GetByKey(eventId, expand: expand);
+            if (userAccount._adoxioPolicejurisdictionidValue != specialEvent._adoxioPolicejurisdictionidValue)  // ensure the current account has a matching police jurisdiction.
+            {
+                return Unauthorized();
+            }
+
+            var toDelete = specialEvent.AdoxioSpecialeventSpecialeventtsacs.Select(tnc => tnc.AdoxioSpecialeventtandcid)
+                        .Except(termsAndCondtions.Select(tnc => tnc.Id).Distinct())
+                        .ToList();
+
+            toDelete.ForEach(id =>
+            {
+                _dynamicsClient.Specialeventtandcs.Delete(id);
+            });
+
+            termsAndCondtions.ForEach(tnc =>
+            {
+                var patchTnC = new MicrosoftDynamicsCRMadoxioSpecialeventtandc
+                {
+                    AdoxioOriginator = tnc.Originator,
+                    AdoxioTermsandcondition = tnc.Content
+                };
+                if (string.IsNullOrEmpty(tnc.Id)) //create tnc
+                {
+                    patchTnC.SpecialEventODataBind = _dynamicsClient.GetEntityURI("adoxio_specialevents", eventId);
+                    var res = _dynamicsClient.Specialeventtandcs.Create(patchTnC);
+                }
+                else // update tnc
+                {
+                    _dynamicsClient.Specialeventtandcs.Update(tnc.Id, patchTnC);
+                }
+            });
+
+            // get list of terms and conditions
+            var newTermsList = _dynamicsClient.Specialevents.GetByKey(eventId, expand: expand)
+            .AdoxioSpecialeventSpecialeventtsacs.Select(tnc => new SepTermAndCondition
+            {
+                Id = tnc.AdoxioSpecialeventtandcid,
+                Content = tnc.AdoxioTermsandcondition,
+                Originator = tnc.AdoxioOriginator
+            }).ToList();
+
+            return new JsonResult(newTermsList);;
+        }
         [HttpPut("{eventId}")]
         public IActionResult UpdateSpecialEvent(string eventId, [FromBody] ViewModels.SpecialEvent specialEvent)
         {
@@ -1345,7 +1424,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             List<ViewModels.SpecialEventSummary> result = new List<ViewModels.SpecialEventSummary>();
 
-            string[] expand = new[] { "adoxio_PoliceRepresentativeId", "adoxio_PoliceAccountId", "" };
+            string[] expand = new[] { "adoxio_PoliceRepresentativeId", "adoxio_PoliceAccountId", "adoxio_specialevent_specialeventtsacs" };
             IList<MicrosoftDynamicsCRMadoxioSpecialevent> items = null;
             try
             {
