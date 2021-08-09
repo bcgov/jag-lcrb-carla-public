@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { catchError } from "rxjs/operators";
 import { Observable, of } from "rxjs";
 import { DataService } from "./data.service";
-import { SepApplication } from "@models/sep-application.model";
+import { SepApplication, SepTermAndCondtion } from "@models/sep-application.model";
 import { SepApplicationSummary } from "@models/sep-application-summary.model";
 import { SepDrinkType } from "@models/sep-drink-type.model";
 import { SepPoliceMyJobs } from "@models/sep-police-my-jobs";
@@ -56,6 +56,15 @@ export class SpecialEventsDataService extends DataService {
    */
   updateSepApplication(data: SepApplication, id: string) {
     return this.http.put<SepApplication>(`api/special-events/${id}`, data, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
+  /**
+   * update a terms and conditions for a special event application in Dynamics
+   * @param data - special event application termis and conditions
+   */
+  updateSepTermsAndConditions(data: SepTermAndCondtion[], id: string) {
+    return this.http.put<SepTermAndCondtion[]>(`api/special-events/terms-and-conditions/${id}`, data, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
