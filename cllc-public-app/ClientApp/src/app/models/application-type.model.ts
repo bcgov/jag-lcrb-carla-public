@@ -50,6 +50,8 @@ export class ApplicationType {
   isShowLGZoningConfirmation: boolean;
   isFree: boolean;
   isEndorsement: boolean;
+  isStructural: boolean;
+  isDefault: boolean;
   requiresSecurityScreening: boolean;
   letterOfIntent: string;
   dynamicsForm: DynamicsForm;
