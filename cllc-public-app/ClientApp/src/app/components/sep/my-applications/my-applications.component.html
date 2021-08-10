@@ -2,20 +2,25 @@
     <h1 class="col-md-12 mat-heading">{{currentUser.name}}'s applications</h1>
 
     <section class="col-md-8" style="width: 100%;">
-        <p class="mat-body-1">
-            Here is a list of your SEP applications - current and past.
-            To create a new application from a previous one, simply find it and select Copy.
-        </p>
+
 
         <button mat-raised-button color="primary" (click)="startApplication()">START NEW APPLICATION</button>
 
         <mat-divider></mat-divider>
 
         <h2>Submitted Applications</h2>
+        <p class="mat-body-1">
+          Here is a list of your submitted SEP applications.
+          To create a new application from a previous one, simply find it and select Copy.
+        </p>
         <app-submitted-applications></app-submitted-applications>
         <mat-divider></mat-divider>
 
-        <h2>Current Applications</h2>
+        <h2>Draft Applications</h2>
+        <p class="mat-body-1">
+          Here is a list of your draft SEP applications.
+          To create a new application from a previous one, simply find it and select Copy.
+
 
         <app-submitted-applications [dataSourceOverride]="applications"></app-submitted-applications>
 
