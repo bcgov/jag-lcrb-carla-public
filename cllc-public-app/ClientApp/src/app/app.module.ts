@@ -311,6 +311,7 @@ import { AcceptDialogComponent } from './components/police-representative/police
 import { DenyDialogComponent } from './components/police-representative/police-summary/deny-dialog/deny-dialog.component';
 import { CancelDialogComponent } from './components/police-representative/police-summary/cancel-dialog/cancel-dialog.component';
 import { NgxSliderModule } from "@angular-slider/ngx-slider";
+import { SepClaimComponent } from './components/sep/sep-claim/sep-claim.component';
 
 
 @NgModule({
@@ -492,6 +493,7 @@ import { NgxSliderModule } from "@angular-slider/ngx-slider";
     AcceptDialogComponent,
     DenyDialogComponent,
     CancelDialogComponent,
+    SepClaimComponent,
   ],
   imports: [
     AppRoutingModule,
