@@ -97,6 +97,7 @@ import { MyJobsComponent } from "@components/police-representative/my-jobs/my-jo
 import { PoliceSummaryComponent } from "@components/police-representative/police-summary/police-summary.component";
 import { SepPaymentConfirmationComponent } from "@components/sep/payment-confirmation/payment-confirmation.component";
 import { SummaryComponent } from "@components/sep/sep-application/summary/summary.component";
+import { SepClaimComponent } from "@components/sep/sep-claim/sep-claim.component";
 
 const routes: Routes = [
   {
@@ -161,7 +162,8 @@ const routes: Routes = [
     path: "sep/police/:specialEventId",
     component: PoliceSummaryComponent,
     canActivate: [PoliceAuthGuard, FeatureGuard],
-    data: { feature: "Sep" }
+    data: { feature: "Sep" },
+    canDeactivate: [CanDeactivateGuard]
   },
   {
     path: "servicecard-profile",
@@ -172,6 +174,12 @@ const routes: Routes = [
   {
     path: "sep/drink-planner",
     component: DrinkPlannerComponent,
+    canActivate: [BCeidOrServiceCardAuthGuard, FeatureGuard],
+    data: { feature: "Sep" }
+  },
+  {
+    path: "sep/claim/:jobNumber",
+    component: SepClaimComponent,
     canActivate: [BCeidOrServiceCardAuthGuard, FeatureGuard],
     data: { feature: "Sep" }
   },

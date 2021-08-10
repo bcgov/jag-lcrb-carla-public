@@ -1,0 +1,25 @@
+<div class="sep-claim form-wrapper">
+    <h1>SEP {{jobNumber}} Claim</h1>
+
+    <section *ngIf="associatedContactId === user?.contactid">
+        <p>
+            This Special Events Permit is linked to your account. You can access it on your SEP Applications page.
+        </p>
+    </section>
+
+    <section *ngIf="associatedContactId && associatedContactId !== user?.contactid">
+        <p>
+            This Special Events Permit has already been linked to another account. If you feel that this is an error,
+            please contact the SEP Online Help Line at 1 (855) 999-7956 or email LCRB.Sep@gov.bc.caThis Special Events
+            Permit is inked to your account. You can access it on your SEP Applications page.
+        </p>
+    </section>
+
+    <section *ngIf="!associatedContactId">
+        <p>
+            Would you like to link this Special Events Permit to your account?
+        </p>
+
+        <button mat-raised-button (click)="linkToAccount()" color="primary">LINK PERMIT TO ACCOUNT</button>
+    </section>
+</div>
