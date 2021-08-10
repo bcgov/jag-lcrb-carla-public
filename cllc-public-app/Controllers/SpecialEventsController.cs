@@ -766,13 +766,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
 
                 // show the Ts and Cs if they're there.
-                if( specialEvent.AdoxioSpecialeventSpecialeventtsacs?.Count > 0 ) {
+                if (specialEvent.AdoxioSpecialeventSpecialeventtsacs?.Count > 0)
+                {
 
                     locationDetails += "<h3 class='info'>Permit Terms and Conditions</h3><ul>";
-                        foreach (var tc in specialEvent.AdoxioSpecialeventSpecialeventtsacs)
-                        {
-                            locationDetails += $"<li>{tc.AdoxioTermsandcondition}</li>";
-                        }
+                    foreach (var tc in specialEvent.AdoxioSpecialeventSpecialeventtsacs)
+                    {
+                        locationDetails += $"<li>{tc.AdoxioTermsandcondition}</li>";
+                    }
                     locationDetails += "</ul>";
                 }
 
@@ -1104,8 +1105,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 Originator = tnc.AdoxioOriginator
             }).ToList();
 
-            return new JsonResult(newTermsList);;
+            return new JsonResult(newTermsList); ;
         }
+
         [HttpPut("{eventId}")]
         public IActionResult UpdateSpecialEvent(string eventId, [FromBody] ViewModels.SpecialEvent specialEvent)
         {
@@ -1762,5 +1764,52 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             return new JsonResult(results);
         }
+
+        [HttpGet("claim-info/{jobNumber}")]
+        public IActionResult getClaimInfo(string jobNumber)
+        {
+            var filter = $"adoxio_specialeventpermitnumber eq '{jobNumber}'";
+            var claim = _dynamicsClient.Specialevents.Get(filter: filter).Value.ToList()
+            .Select(sepEvent => new SepClaimInfo
+            {
+                JobNumber = sepEvent.AdoxioSpecialeventpermitnumber,
+                AssociatedContactId = sepEvent._adoxioContactidValue
+
+            }).FirstOrDefault();
+            return new JsonResult(claim);
+        }
+
+        [HttpGet("link-claim-to-contact/{jobNumber}")]
+        public IActionResult linkClaimToContact(string jobNumber)
+        {
+
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+
+            if (!string.IsNullOrEmpty(userSettings.ContactId) && userSettings.ContactId != "00000000-0000-0000-0000-000000000000")
+            {
+                var filter = $"adoxio_specialeventpermitnumber eq '{jobNumber}'";
+                var claim = _dynamicsClient.Specialevents.Get(filter: filter).Value.FirstOrDefault();
+                var patchEvent = new MicrosoftDynamicsCRMadoxioSpecialevent();
+                patchEvent.ContactODataBind = _dynamicsClient.GetEntityURI("contacts", userSettings.ContactId);
+                try
+                {
+                    _dynamicsClient.Specialevents.Update(claim.AdoxioSpecialeventid, patchEvent);
+                }
+                catch (HttpOperationException httpOperationException)
+                {
+                    _logger.LogError(httpOperationException, "Error claiming SEP event");
+                    throw httpOperationException;
+                }
+                return Ok();
+            }else{
+                return BadRequest();
+            }
+        }
+    }
+
+    public class SepClaimInfo
+    {
+        public string JobNumber { get; set; }
+        public string AssociatedContactId { get; set; }
     }
 }
