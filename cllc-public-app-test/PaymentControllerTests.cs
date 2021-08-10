@@ -128,7 +128,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             jsonString = await response.Content.ReadAsStringAsync();
             responseViewModel = JsonConvert.DeserializeObject<ViewModels.Application>(jsonString);
-			string invoiceId = responseViewModel.AdoxioInvoiceId;
+			string invoiceId = responseViewModel.InvoiceId;
 			Assert.Equal(ViewModels.GeneralYesNo.Yes, responseViewModel.InvoiceTrigger);
 
 			// delete invoice - note we can't delete an invoice created by Dynamics
@@ -329,7 +329,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             jsonString = await response.Content.ReadAsStringAsync();
             responseViewModel = JsonConvert.DeserializeObject<ViewModels.Application>(jsonString);
-            string invoiceId = responseViewModel.AdoxioInvoiceId;
+            string invoiceId = responseViewModel.InvoiceId;
 
 			// check application status
 			Assert.Equal(ViewModels.GeneralYesNo.No, responseViewModel.InvoiceTrigger);
@@ -367,7 +367,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             jsonString = await response.Content.ReadAsStringAsync();
             responseViewModel = JsonConvert.DeserializeObject<ViewModels.Application>(jsonString);
-            string invoiceId2 = responseViewModel.AdoxioInvoiceId;
+            string invoiceId2 = responseViewModel.InvoiceId;
 			Assert.NotEqual(invoiceId2, invoiceId);
 			Assert.Equal(ViewModels.GeneralYesNo.Yes, responseViewModel.InvoiceTrigger);
 
