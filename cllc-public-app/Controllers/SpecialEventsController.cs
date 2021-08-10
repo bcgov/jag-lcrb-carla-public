@@ -1768,7 +1768,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("claim-info/{jobNumber}")]
         public IActionResult getClaimInfo(string jobNumber)
         {
-            var filter = $"adoxio_specialeventpermitnumber eq '{jobNumber}'";
+            var filter = $"adoxio_specialeventpermitnumber eq '{jobNumber}' and statuscode eq 845280003";
             var claim = _dynamicsClient.Specialevents.Get(filter: filter).Value.ToList()
             .Select(sepEvent => new SepClaimInfo
             {
@@ -1785,12 +1785,22 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
+            // there must be a contact
             if (!string.IsNullOrEmpty(userSettings.ContactId) && userSettings.ContactId != "00000000-0000-0000-0000-000000000000")
             {
-                var filter = $"adoxio_specialeventpermitnumber eq '{jobNumber}'";
+                var filter = $"adoxio_specialeventpermitnumber eq '{jobNumber}' and statuscode eq 845280003";
                 var claim = _dynamicsClient.Specialevents.Get(filter: filter).Value.FirstOrDefault();
                 var patchEvent = new MicrosoftDynamicsCRMadoxioSpecialevent();
+
+
                 patchEvent.ContactODataBind = _dynamicsClient.GetEntityURI("contacts", userSettings.ContactId);
+
+                // it may have an account too
+                if(!string.IsNullOrEmpty(userSettings.AccountId) && userSettings.AccountId != "00000000-0000-0000-0000-000000000000")
+                {
+                    patchEvent.AccountODataBind = _dynamicsClient.GetEntityURI("accounts", userSettings.AccountId);
+                }
+
                 try
                 {
                     _dynamicsClient.Specialevents.Update(claim.AdoxioSpecialeventid, patchEvent);

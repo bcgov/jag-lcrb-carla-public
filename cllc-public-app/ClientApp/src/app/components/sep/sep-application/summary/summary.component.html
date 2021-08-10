@@ -91,7 +91,7 @@
           bottom of this page.</p>
       </section>
       <section *ngIf="getStatus() == 'Pending Review'">
-        <p>Your application is currently under review by the LCRB and police in your local area.</p>
+        <p>Your application is currently under review by the <span *ngIf="application?.lcrbApproval == 'Pending Review'"><strong>LCRB</strong></span> <span *ngIf="application?.lcrbApproval == 'Pending Review' && application?.policeApproval == 'Pending Review'">&nbsp;and&nbsp;</span> <span *ngIf="application?.policeApproval == 'Pending Review'"><strong>Police</strong> in your local area</span>.</p>
         <p *ngIf="application.policeDecisionBy">The liquor service for this event is currently under review by
           {{application.policeDecisionBy?.name}}.</p>
       </section>
