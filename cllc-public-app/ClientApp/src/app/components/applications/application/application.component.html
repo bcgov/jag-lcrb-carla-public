@@ -1227,6 +1227,8 @@
       <div *ngIf="htmlContent.floorPlan">
         <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.floorPlan"></section>
         <img *ngIf="application?.licenseType == 'Food Primary' && application?.applicationType.name != 'Temporary Extension of Licensed Area'" src="assets/Food-Primary-floor-plan-sample.png" style="width: 700px;" alt="Sample Floor Plan">
+        <img *ngIf="this.showMFGImages()" src="assets/MFG-FLOOR.png">
+
       </div>
 
       <!-- otherwise switch to legacy mode-->
@@ -1467,6 +1469,7 @@
   </div>
 
   <img *ngIf="application?.applicationType?.name === 'Temporary Use Area Endorsement'" src="assets/sample-signage.png" style="width: 700px;" alt="Sample Signage">
+  <img *ngIf="this.showMFGImages()" src="assets/MFG-SITE.png" alt="Sample Site Plan">
 
   <section>
     <app-file-uploader *ngIf="applicationId" documentType="Site Plan"
