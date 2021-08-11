@@ -1,9 +1,9 @@
-<div class="sep-claim form-wrapper">
-    <h1>SEP {{jobNumber}} Claim</h1>
+<div class="sep-claim form-wrapper" style="width: 1096px">
+    <h1>Special Event Permits Claim for Application No. {{jobNumber}}</h1>
 
-    <section *ngIf="associatedContactId === user?.contactid">
+    <section *ngIf="associatedContactId === user?.contactid" style="background-color: #F1F4FA; padding: 20px;">
         <p>
-            This Special Events Permit is linked to your account. You can access it on your SEP Applications page.
+            This Permit is linked to your account. You can access it on the <a routerLink="/sep/my-applications">SEP Applications</a> page.
         </p>
     </section>
 
@@ -15,7 +15,7 @@
         </p>
     </section>
 
-    <section *ngIf="!associatedContactId">
+    <section *ngIf="!associatedContactId" style="background-color: #F1F4FA; padding: 20px;">
         <p>
             Would you like to link this Special Events Permit to your account?
         </p>

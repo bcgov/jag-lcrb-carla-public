@@ -921,6 +921,13 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
   }
 
+  showMFGImages(): boolean {
+    const isit = this.application?.licenseType === 'Manufacturer'
+          && (this.application?.applicationType?.isEndorsement || this.application?.applicationType?.isStructural)
+          && !this.application?.applicationType?.isDefault;
+    return isit;
+  }
+
 
   submitForLGINApproval() {
     const saveData = this.form.value;
