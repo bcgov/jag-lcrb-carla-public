@@ -97,6 +97,7 @@
       </section>
       <section *ngIf="getStatus() == 'Review Expired'">
         <p>Your application was not reviewed before the event start date.</p>
+
         <p *ngIf="application.policeDecisionBy">The liquor service for this event is currently under review by
           {{application.policeDecisionBy?.name}}.</p>
       </section>
@@ -435,7 +436,7 @@
                 <mat-checkbox class="declaration-checkbox" style="white-space: normal; margin:0px;">
                 <p style="white-space: normal;"><em>
                   I, <strong><u>{{contact?.name}}</u></strong>, certify that all of the information is true and complete to the best of my
-                  knowledge. I have read the terms and conditions of the permit, and if the application is approved,
+                  knowledge. I have read the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals/guide-sep.pdf" target="_blank">terms and conditions of the permit</a>, and if the application is approved,
                   the
                   permittee listed on the permit will be responsible for liquor service at the event.
                 </em></p>

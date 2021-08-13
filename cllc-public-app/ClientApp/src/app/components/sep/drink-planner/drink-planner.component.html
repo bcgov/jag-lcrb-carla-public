@@ -1,7 +1,7 @@
 <div class="position-relative drink-planner">
   <div [ngBusy]="[busy]"></div>
 
-  <h1 *ngIf="hideGuestsAndHours">{{totalPercentage | mask : 'separator' : ','}}/{{(totalServings || 0).toFixed(0) | mask : 'separator' : ','}} Total Servings</h1>
+  <h1>{{totalPercentage | mask : 'separator' : ','}}/{{(totalServings || 0).toFixed(0) | mask : 'separator' : ','}} Total Servings</h1>
   <form [formGroup]="form">
     <div class="padded-section" *ngIf="!hideGuestsAndHours">
       <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip.toggle()" class="float-right" data-html="true"
@@ -10,6 +10,7 @@
         Note: These are simply buying guidelines. You may enter your own amounts to better suit your event.">
       </fa-icon>
       <p>Use this tool as a guide to plan how many drinks to serve at your event. For an example, view the tooltip.</p>
+
     </div>
 
     <!-- Section 1 -->
@@ -59,7 +60,7 @@
         </app-field>
 
         <div class="text-center">
-            <p style="font-size: xx-large;"><strong>{{servingPercent(item)}} %</strong> </p>
+            <p style="font-size: xx-large;" *ngIf="!hideGuestsAndHours"><strong>{{servingPercent(item)}} %</strong> </p>
             <!--p><strong>{{servings(item).toFixed(0) | mask : 'separator' : ','}}</strong> &nbsp;servings of {{item.group}}</p-->
             <p><strong>{{storageUnits(item).toFixed(0) | mask : 'separator' : ','}}</strong> &nbsp;{{storageMethodDescription(item)}}</p>
         </div>
@@ -84,9 +85,9 @@
             </h3>
           </div>
           <div class="col-6">
-            <h3 class="w-100">
+            <h3 class="w-100" *ngIf="!hideGuestsAndHours">
               &nbsp; = &nbsp;
-              <span class="total-servings">{{(totalServings || 0).toFixed(0) | mask : 'separator' : ','}}</span>
+              <span class="total-servings" >{{(totalServings || 0).toFixed(0) | mask : 'separator' : ','}}</span>
               <small class="ml-2">total servings</small>
             </h3>
           </div>
