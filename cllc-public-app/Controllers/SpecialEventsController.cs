@@ -1127,8 +1127,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var itemsToDelete = GetItemsToDelete(specialEvent, existingEvent);
             DeleteSpecialEventItems(itemsToDelete);
 
+            saveTotalServings(specialEvent, existingEvent);
+
             var patchEvent = new MicrosoftDynamicsCRMadoxioSpecialevent();
             patchEvent.CopyValues(specialEvent);
+
             // Only allow these status to be set by the portal. Any other status change is ignored
             if (specialEvent.EventStatus == EventStatus.Cancelled ||
                 specialEvent.EventStatus == EventStatus.Draft ||
@@ -1153,7 +1156,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw httpOperationException;
             }
 
-            saveTotalServings(specialEvent, existingEvent);
+ 
 
 
 
