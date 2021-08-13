@@ -51,7 +51,7 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
   });
 
   getTotalServings(): number {
-    const { hours, totalMaximumNumberOfGuests } = this.form.value;
+    let { hours, totalMaximumNumberOfGuests } = this.form.value;
     return (hours / HOURS_OF_LIQUOR_SERVICE * totalMaximumNumberOfGuests * SERVINGS_PER_PERSON);
   }
 
@@ -73,6 +73,10 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
     for (const item of this.config) {
       values[item.group] = item.defaultPercentage;
     }
+    if(!this.hideGuestsAndHours){
+      this.totalServings = this.getTotalServings();
+    }
+
     this.form.patchValue(values);
 
     // setup the form's percentage fields so they always add-up to 100%
@@ -100,6 +104,7 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
           this.totalServings = this.getTotalServings();
         }
       });
+
   }
 
   servings(config: DrinkConfig): number {
@@ -109,6 +114,9 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
 
   servingPercent(config: DrinkConfig): string {
     const servings: number = this.form.get(config.group).value || 0;
+    if(servings == 0 || this.totalServings == 0) {
+      return "0";
+    }
     return (servings / this.totalServings * 100).toFixed(1);
   }
 

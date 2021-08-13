@@ -1,13 +1,13 @@
-# SPD Sync #
+# CARLA SPICE Sync #
 ------------
 
-The purpose of the SPD Sync microservice is send and receive communications to the SPD Figaro system.
+The purpose of the CARLA-SPICE Sync microservice is send and receive communications to the SPD SPICE system.
 
-Communication is currently delivered using SMTP.
+Communication is currently delivered using REST.
 
 ## Development ##
 
-SPD Sync is a Dotnet Core 2.1 application written using the Web SDK.  As such you can use an IDE such as Visual Studio or VS Code to edit the files.  
+CARLA-SPICE Sync is a .NET 5 application written using the Web SDK.  As such you can use an IDE such as Visual Studio or VS Code to edit the files.  
 
 ## Installation ##
 
@@ -48,48 +48,7 @@ To interact with a service using curl, specify the following command line:
 
 Where token is a valid JWT token,  obtained through the Authorization endpoint.  Note that if you copy and paste the token from certain applications it may add Unicode characters; if you run into problems, copy from Notepad or another application that uses plaintext. 
 
-### Triggering the export
 
-Using the above JWT Authentication method, here is the request to start the export:
+# Worker Qualification Results Processing
 
-`curl --header "Authorization: Bearer <TOKEN>" -k https://lcrb-spd-sync-test.pathfinder.bcgov/api/spd/send`
-
-### Viewing Progress of the export
-
-Using the OpenShift platform tool "oc", port forward port 8080 from the SPD Sync Microservice to your local machine, and then access /hangfire on that forwarded port.   Note that you will need at least Edit access to the environment in order to do this. 
-
-# Manual Worker Qualification Results Processing
-
-This process was added October 26th, 2018.
-
-## Worker Updater
-
-There is a hangfire job that fires every 3 minutes. This job checks SharePoint for new files. The directory where job looks for files is as follows:
-
-```
-[SharePoint]/spd_worker/SPD WORKER FILES/
-```
-
-Files with the prefix of "processed_" will not be processed.
-
-The fields that will be updated by this process are as follows:
-
-```
-AdoxioWorker:
-    SecurityStatus
-    SecurityCompletedOn
-
-PersonalHistorySummary:
-    SecurityStatus
-    SecurityCompletedOn
-```
-
-### Enum for security status
-
-```
-PASS = 845280000
-FAIL = 845280001
-WITHDRAWN = 845280003
-```
-
-Once the fields are updated, the job will rename the file with the "processed_" prefix.
+Worker qualification result processing was deactivated in June 2021 as a result of changing regulations.

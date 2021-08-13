@@ -7,7 +7,7 @@ import { map } from "rxjs/operators";
 
 @Injectable()
 export class BCeidOrServiceCardAuthGuard implements CanActivate {
-
+  window = window;
   constructor(private userService: UserDataService,
     private router: Router,
     private store: Store<AppState>) {
@@ -20,6 +20,10 @@ export class BCeidOrServiceCardAuthGuard implements CanActivate {
         // 2021-05-05 - added support for Individual, for Basic BCeID logins.
         const allowAccess = (user && (user.userType === "Business" || user.userType === "VerifiedIndividual" || user.userType === "Individual"));
         if (!allowAccess) {
+          debugger;
+          if (route[0] === "sep" && route[1] === "claim") {
+            this.window.location.href = "sep/login";
+          }
           this.router.navigate(["/"]);
         }
         return allowAccess;
