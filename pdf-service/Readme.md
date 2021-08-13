@@ -4,7 +4,7 @@ The purpose of the PDF microservice is to generate PDF documents based on templa
 
 ## Development
 
-This service is a Dotnet Core 3.1 application written using the Web SDK.  As such you can use an IDE such as Visual Studio or VS Code to edit the files.  
+This service is a .NET 5.0 application written using the Web SDK.  As such you can use an IDE such as Visual Studio or VS Code to edit the files.  
 
 ## Testing
 

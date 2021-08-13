@@ -5,7 +5,7 @@
 
     <app-field label="Are you charging for drinks at your event?" [required]="true" [isFullWidth]="true"
     errorMessage="Please select a value"
-    [valid]="isValidOrNotTouched('chargingForLiquorReason')"> 
+    [valid]="isValidOrNotTouched('chargingForLiquorReason')">
         <select formControlName="chargingForLiquorReason" class="form-control w-100">
             <option value=""></option>
             <option value="RecoverCost">Yes - To recover event operating costs</option>
@@ -66,6 +66,11 @@
             <mat-radio-button value="true">Yes</mat-radio-button>
             <mat-radio-button value="false">No</mat-radio-button>
         </mat-radio-group>
+        <app-error-alert *ngIf="form.get('donateOrConsularPrevLiqour').value && form.get('donateOrConsularPrevLiqour').value !== 'No'">
+          <p>The estimated PST does not take into account donated liquor. As a Special Event Permit holder, you are responsible for ensuring the
+            correct amount of PST is remunerated to the Ministry of Finance.
+          </p>
+      </app-error-alert>
     </app-field>
 
     <section class="pt-3">
