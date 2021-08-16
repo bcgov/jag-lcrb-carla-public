@@ -64,6 +64,11 @@
             <!--p><strong>{{servings(item).toFixed(0) | mask : 'separator' : ','}}</strong> &nbsp;servings of {{item.group}}</p-->
             <p><strong>{{storageUnits(item).toFixed(0) | mask : 'separator' : ','}}</strong> &nbsp;{{storageMethodDescription(item)}}</p>
         </div>
+        <div class="text-center">
+          <label for="">Average Price</label>
+          <input class="form-control text-right m-auto mb-2" style="max-width: 100px;" type="number" [formControlName]="getControlName(item.group)" min="0">
+
+        </div>
       </div> <!-- ngFor -->
     </div>
 

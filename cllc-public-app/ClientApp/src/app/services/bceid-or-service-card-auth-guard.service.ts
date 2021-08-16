@@ -20,11 +20,12 @@ export class BCeidOrServiceCardAuthGuard implements CanActivate {
         // 2021-05-05 - added support for Individual, for Basic BCeID logins.
         const allowAccess = (user && (user.userType === "Business" || user.userType === "VerifiedIndividual" || user.userType === "Individual"));
         if (!allowAccess) {
-          debugger;
-          if (route[0] === "sep" && route[1] === "claim") {
-            this.window.location.href = "sep/login";
+          if (route.routeConfig.path === "sep/claim/:jobNumber") {
+            const sourceUrl = state.url;
+            this.router.navigateByUrl(`/sep?source=${sourceUrl}`);
+          } else {
+            this.router.navigate(["/"]);
           }
-          this.router.navigate(["/"]);
         }
         return allowAccess;
       }));

@@ -9,12 +9,12 @@ import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
 import { PolicyDocument } from "@models/policy-document.model";
 import { FeatureFlagDataService } from "@services/feature-flag-data.service";
 import { FeatureFlagService } from "@services/feature-flag.service";
-import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons"
+import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginComponent implements OnInit, AfterViewInit {
@@ -31,13 +31,15 @@ export class LoginComponent implements OnInit, AfterViewInit {
   window = window;
   disableLogin: boolean;
   faExclamationCircle = faExclamationCircle;
+  source = "/sep/dashboard";
 
   constructor(public dialog: MatDialog,
     private sanitizer: DomSanitizer,
     private featureFlagService: FeatureFlagService,
     private policyDocumentDataService: PolicyDocumentDataService,
+    private route: ActivatedRoute,
     private cd: ChangeDetectorRef) {
-      featureFlagService.featureOn("DisableLogin")
+    featureFlagService.featureOn("DisableLogin")
       .subscribe(featureOn => {
         this.disableLogin = featureOn;
       });
@@ -45,6 +47,11 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.getPolicyDocumentHTML();
+    this.route.queryParams
+    .subscribe(params => {
+      this.source = params["source"] || "/sep/dashboard";
+    }
+  );
   }
   getPolicyDocumentHTML() {
     const policySlug = "sep-welcome";
@@ -56,7 +63,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
         this.cd.detectChanges();
       },
         error => {
-          console.error('failed to get body policy documents', error);
+          console.error("failed to get body policy documents", error);
         });
 
     const calloutSlug = "sep-welcome-callout";
@@ -67,12 +74,22 @@ export class LoginComponent implements OnInit, AfterViewInit {
         this.cd.detectChanges();
       },
         error => {
-          console.error('failed to get callout policy document', error);
+          console.error("failed to get callout policy document", error);
         });
   }
 
   ngAfterViewInit(): void {
     this.cd.detectChanges();
+  }
+
+  sepBCeIDLogin() {
+    const returnPath = encodeURIComponent(this.source);
+    window.location.href = `login?source=${returnPath}`;
+  }
+
+  sepBCServiceLogin() {
+    const returnPath = encodeURIComponent(this.source);
+    window.location.href = `bcservice?source=${returnPath}`;
   }
 }
 
