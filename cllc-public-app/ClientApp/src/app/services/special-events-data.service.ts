@@ -69,22 +69,22 @@ export class SpecialEventsDataService extends DataService {
   }
 
   policeAssignSepApplication(id: string, assigneeId: string) {
-    return this.http.post<Contact>(`api/special-events/police/${id}/assign`, JSON.stringify(assigneeId) , { headers: this.headers })
+    return this.http.post<Contact>(`api/special-events/police/${id}/assign`, JSON.stringify(assigneeId), { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
   policeApproveSepApplication(id: string) {
-    return this.http.post<string>(`api/special-events/police/${id}/approve`, {} , { headers: this.headers })
+    return this.http.post<string>(`api/special-events/police/${id}/approve`, {}, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
   policeDenySepApplication(id: string) {
-    return this.http.post<string>(`api/special-events/police/${id}/deny`, {} , { headers: this.headers })
+    return this.http.post<string>(`api/special-events/police/${id}/deny`, {}, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
   policeCancelSepApplication(id: string) {
-    return this.http.post<string>(`api/special-events/police/${id}/cancel`, {} , { headers: this.headers })
+    return this.http.post<string>(`api/special-events/police/${id}/cancel`, {}, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
@@ -93,17 +93,17 @@ export class SpecialEventsDataService extends DataService {
    * @param id - special event id
    * @param cityId - sep city id
    */
-   policeSetMunicipality(id: string, cityId: string) {
+  policeSetMunicipality(id: string, cityId: string) {
     return this.http.post<SepApplication>(`api/special-events/police/${id}/setMunicipality/${cityId}`, {}, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
-  
+
   /**
    * delete a  special event application in Dynamics
    * @param data - special event application data
    */
-   deleteSepApplication(id: string) {
+  deleteSepApplication(id: string) {
     return this.http.post<SepApplication>(`api/special-events/${id}/delete`, {}, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
@@ -129,6 +129,18 @@ export class SpecialEventsDataService extends DataService {
   getPoliceHome(): Observable<SepPoliceHome> {
     const apiPath = `api/special-events/police/home`;
     return this.http.get<SepPoliceHome>(apiPath, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
+  getClaimInfo(jobNumber: string) {
+    const apiPath = `api/special-events/claim-info/${jobNumber}`;
+    return this.http.get<any>(apiPath, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+  
+  linkClaimToContact(jobNumber: string) {
+    const apiPath = `api/special-events/link-claim-to-contact/${jobNumber}`;
+    return this.http.get<any>(apiPath, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 }

@@ -4,12 +4,13 @@
 
     <div class="row" style="padding-left: 50px; padding-right: 30px; max-width:1000px; margin-left:5px;">
       <div style="width: 70%">
-      <h1 class="mat-heading">{{application?.eventName}}</h1>
-      <h3>Start Date: {{application?.eventStartDate | date: 'dd MMM yyyy'}}</h3>
-      <h3>Application Number: {{application.specialEventPermitNumber}}</h3>
+      <h1 class="mat-heading">Application Summary</h1>
+      <h3>{{application?.eventName}}</h3>
+      <p><label>Start Date:</label> {{application?.eventStartDate | date: 'dd MMM yyyy'}}</p>
+      <p><label>Application Number:</label> {{application.specialEventPermitNumber}}</p>
 
 
-      <section *ngIf="application?.eventStatus == 'Draft'">
+      <section *ngIf="getStatus() == 'Draft'">
         <p>Here’s a summary of your event. Does everything look right? Review your event details one more time before
           submitting your application for review.</p>
 
@@ -31,13 +32,13 @@
 
       </section>
 
-      <section *ngIf="application?.eventStatus == 'Pending Review'">
+      <section *ngIf="getStatus() == 'Pending Review'">
         <p><label>Date Submitted:</label>&nbsp;{{application?.dateSubmitted | date: 'dd MMM yyyy'}}</p>
         <p>Your application requires review from <span *ngIf="application?.lcrbApproval == 'Pending Review'"><strong>LCRB</strong></span> <span *ngIf="application?.lcrbApproval == 'Pending Review' && application?.policeApproval == 'Pending Review'">&nbsp;and&nbsp;</span> <span *ngIf="application?.policeApproval == 'Pending Review'"><strong>Police</strong></span>.</p>
         </section>
 
 
-      <section *ngIf="application?.eventStatus == 'Approved'">
+      <section *ngIf="getStatus() == 'Payment Required' && !trnId || mode ==='payNow'">
         <h3>Congratulations!</h3>
         <p>Your application is approved</p>
         <h3>Fees Due: {{application?.invoice?.totalamount
@@ -54,7 +55,7 @@
 
       </section>
 
-      <section *ngIf="application?.eventStatus == 'Issued'">
+      <section *ngIf="(getStatus() == 'Issued' || (trnId && getStatus() == 'Payment Required')) && !isEventPast()">
       <h3>What’s next</h3>
       <ul>
       <li>Purchase liquor product at an approved outlet. Note: Liquor products purchased from and returned to a liquor retailer may be subject to a return policy and restocking fee.</li>
@@ -80,62 +81,67 @@
 
     <mat-card style="background-color: #e0e0e0; min-height: 200px; margin-top: 20px; margin-left: 20px;">
 
-    <section *ngIf="application?.eventStatus == 'Draft'">
-      <!-- if denied -->
-      <h3><fa-icon [icon]="getStatusIcon()" style="margin-right: 10px;"></fa-icon>Draft</h3>
-      <p>Your application has not yet been submitted to the branch.</p>
-    </section>
+    <section>
+      <h3>
+        <fa-icon [icon]="getStatusIcon()" style="margin-right: 10px;"></fa-icon>{{getStatus()}}
+      </h3>
 
-    <section *ngIf="application?.eventStatus == 'Pending Review'">
-      <!-- if denied -->
-      <h3><fa-icon [icon]="getStatusIcon()" style="margin-right: 10px;"></fa-icon>Pending Review</h3>
-      <p>Your application is currently under review by the LCRB and police in your local area.</p>
-      <p *ngIf="application.policeDecisionBy">The liquor service for this event is currently under review by {{application.policeDecisionBy?.name}}.</p>
+      <section *ngIf="getStatus() == 'Draft'">
+        <p>Your application has not yet been submitted to the branch. Confirm everything is correct and click submit at the
+          bottom of this page.</p>
+      </section>
+      <section *ngIf="getStatus() == 'Pending Review'">
+        <p>Your application is currently under review by the <span *ngIf="application?.lcrbApproval == 'Pending Review'"><strong>LCRB</strong></span> <span *ngIf="application?.lcrbApproval == 'Pending Review' && application?.policeApproval == 'Pending Review'">&nbsp;and&nbsp;</span> <span *ngIf="application?.policeApproval == 'Pending Review'"><strong>Police</strong> in your local area</span>.</p>
+        <p *ngIf="application.policeDecisionBy">The liquor service for this event is currently under review by
+          {{application.policeDecisionBy?.name}}.</p>
+      </section>
+      <section *ngIf="getStatus() == 'Review Expired'">
+        <p>Your application was not reviewed before the event start date.</p>
 
-    </section>
+        <p *ngIf="application.policeDecisionBy">The liquor service for this event is currently under review by
+          {{application.policeDecisionBy?.name}}.</p>
+      </section>
 
-    <section *ngIf="application?.eventStatus == 'Approved' && !trnId || mode ==='payNow'">
-      <!-- if denied -->
-      <h3><fa-icon [icon]="getStatusIcon()" style="margin-right: 10px;"></fa-icon>Pending Payment</h3>
-      <!--p>Your application has been approved. You can pay your application fee and any PST estimates and will receive your Special Event Permit.</p-->
+      <section *ngIf="getStatus() == 'Payment Required' && !trnId || mode ==='payNow'">
+        <button mat-raised-button color="primary" (click)="payNow()">
+          <fa-icon [icon]="faShoppingCart" style="margin-right: 10px;"></fa-icon>PAY NOW
+        </button>
+      </section>
 
-      <!--button mat-raised-button (click)="payNow()">Pay Now</button-->
-      <button mat-raised-button color="primary" (click)="payNow()"><fa-icon [icon]="faShoppingCart" style="margin-right: 10px;"></fa-icon>PAY NOW</button>
-    </section>
+      <section *ngIf="getStatus() == 'Approval Expired'">
+        <p>Your application was approved, however you did not pay for it before the event start date. Therefore, the permit
+          was not issued.</p>
+      </section>
 
-    <section *ngIf="application?.eventStatus == 'Issued' || (trnId && application?.eventStatus == 'Approved')">
-      <!-- if issued -->
-      <h3><fa-icon [icon]="faCertificate" style="margin-right: 10px;"></fa-icon>Issued</h3>
-      <p *ngIf="application?.dateIssued">Your Special Event Permit was issued on {{application?.dateIssued | date: 'MMM dd yyyy'}}.</p>
-      <a [href]="'api/special-events/applicant/' + application.id + '/permit/summary.pdf'" target="_blank" *ngIf="application.id"><fa-icon [icon]="faCertificate" style="margin-right: 10px;"></fa-icon>Print Permit</a>
+      <section *ngIf="getStatus() == 'Issued' || (trnId && getStatus() == 'Payment Required')">
+        <p *ngIf="application?.dateIssued">Your Special Event Permit was issued on {{application?.dateIssued | date: 'MMM dd
+          yyyy'}}.</p>
+        <a [href]="'api/special-events/applicant/' + application.id + '/permit/summary.pdf'" target="_blank"
+          *ngIf="application.id">
+          <fa-icon [icon]="faCertificate" style="margin-right: 10px;"></fa-icon>Print Permit
+        </a>
+      </section>
 
-    </section>
+      <section *ngIf="getStatus() == 'Cancelled'">
+        <p>This application/permit has been cancelled.</p>
+        <p><em>{{application?.cancelReason}}</em></p>
+      </section>
 
-
-    <section *ngIf="application?.eventStatus == 'Cancelled'">
-      <h3><fa-icon [icon]="faBan" style="margin-right: 10px;"></fa-icon>Cancelled</h3>
-      <p>This application/permit has been cancelled.</p>
-      <p><em>{{application?.cancelReason}}</em></p>
-    </section>
-
-
-    <section *ngIf="this.isDenied()">
-      <!-- if denied -->
-      <h3><fa-icon [icon]="getStatusIcon()" style="margin-right: 10px;"></fa-icon>{{application?.eventStatus}}</h3>
-      <p>Liquor service for this event has been {{application?.eventStatus}} for the following reason:</p>
-      <p><em>{{application?.denialReason}}</em></p>
-
+      <section *ngIf="this.isDenied()">
+        <p>Liquor service for this event has been {{application?.eventStatus}} for the following reason:</p>
+        <p><em>{{application?.denialReason}}</em></p>
+      </section>
     </section>
 
       <br>
       <a [href]="'api/special-events/applicant/' + application.id + '/summary/summary.pdf'" target="_blank" *ngIf="application.id"><fa-icon [icon]="faDownLoad" style="margin-right: 10px; color: #41598b;"></fa-icon>Print Summary</a>
       <br>
       <hr>
-      <a (click)="cancelApplication()" style="text-decoration: underline; color:#1a5a96; cursor: pointer;" *ngIf="application?.eventStatus != 'Issued'"><fa-icon [icon]="faBan" style="margin-right: 10px;"></fa-icon>Withdraw Application</a>
+      <a (click)="cancelApplication()" style="text-decoration: underline; color:#1a5a96; cursor: pointer;" *ngIf="canWithdraw()"><fa-icon [icon]="faBan" style="margin-right: 10px;"></fa-icon>Withdraw Application</a>
 
   </mat-card>
 
-  <mat-card style="background-color: #e0e0e0; min-height: 200px; margin-top: 20px; margin-left: 20px;" *ngIf="application?.eventStatus != 'Draft'">
+  <mat-card style="background-color: #e0e0e0; min-height: 200px; margin-top: 20px; margin-left: 20px;" *ngIf="getStatus() != 'Draft'">
     <h3>Contact</h3>
     <p>If you have any questions or concerns contact a liquor inspector before submitting your application.</p>
     <p>SEP Online Support Line
@@ -219,7 +225,7 @@
             </div>
             <div class="d-flex">
 
-              <p *ngIf="this.application?.eventStatus == 'Pending Review'"><em>If the city, district or Indigenous Nation has been submitted incorrectly, the police representative will modify it and submit the application to the correct authority.</em></p>
+              <p *ngIf="getStatus() == 'Pending Review'"><em>If the city, district or Indigenous Nation has been submitted incorrectly, the police representative will modify it and submit the application to the correct authority.</em></p>
 
             </div>
 
@@ -398,6 +404,7 @@
                   <span *ngIf="application?.eventStatus != 'Issued'">Total Fees Due Upon Approval</span>
                   <span *ngIf="application?.eventStatus == 'Issued'">Fees Paid</span>
 
+
                 </label> <span class="fee-amount">{{application?.invoice?.totalamount
                     | currency}}</span>
             </div>
@@ -417,7 +424,7 @@
 
         </mat-expansion-panel>
 
-        <div *ngIf="!isReadOnly() && !isSubmitted()">
+        <div *ngIf="!isReadOnly() && !isSubmitted() && !this.isEventPast()">
 
           <section class="d-flex">
 
@@ -429,7 +436,7 @@
                 <mat-checkbox class="declaration-checkbox" style="white-space: normal; margin:0px;">
                 <p style="white-space: normal;"><em>
                   I, <strong><u>{{contact?.name}}</u></strong>, certify that all of the information is true and complete to the best of my
-                  knowledge. I have read the terms and conditions of the permit, and if the application is approved,
+                  knowledge. I have read the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals/guide-sep.pdf" target="_blank">terms and conditions of the permit</a>, and if the application is approved,
                   the
                   permittee listed on the permit will be responsible for liquor service at the event.
                 </em></p>
@@ -440,25 +447,25 @@
                   misrepresented on this application.</em></p>
               </mat-checkbox>
 
+              <div class="d-flex" style="margin-top: 20px;">
+                <!--button mat-raised-button color="secondary" class="mr-2">BACK</button-->
+                <button mat-raised-button color="primary" (click)="submitApplication()">SUBMIT APPLICATION</button>
 
+              </div>
               </section>
 
             </div>
           </section>
         </div>
 
-        <div *ngIf="!isReadOnly() && !this.isEventPast()" class="d-flex" style="margin-top: 20px;">
-          <!--button mat-raised-button color="secondary" class="mr-2">BACK</button-->
-          <button mat-raised-button color="primary" (click)="submitApplication()">SUBMIT APPLICATION</button>
 
-        </div>
 
         <div *ngIf="!isReadOnly() && this.isEventPast()" class="d-flex" style="margin-top: 20px;">
 
           <p><fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>You cannot submit an application for an event in the past.</p>
 
         </div>
-        <section *ngIf="application?.eventStatus == 'Approved' && !trnId || mode ==='payNow'">
+        <section *ngIf="getStatus() == 'Payment Required' && !trnId || mode ==='payNow'">
 
           <section style="border: solid #ccc 1px;
           padding: 20px;

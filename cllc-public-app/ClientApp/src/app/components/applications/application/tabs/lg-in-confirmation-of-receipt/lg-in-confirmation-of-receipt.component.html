@@ -1,5 +1,5 @@
 <h3 class="blue-header">
-  LOCAL GOVERNMENT/INDIGENOUS NATION CONFIRMATION OF RECEIPT OF APPLICATION
+  LOCAL GOVERNMENT/INDIGENOUS NATION <span *ngIf="application?.applicationType?.showLgNoObjection">COMMENTS</span><span *ngIf="!application?.applicationType?.showLgNoObjection">CONFIRMATION OF RECEIPT OF APPLICATION</span>
 </h3>
 <div class="padded-section content-bottom" [formGroup]="form">
   <app-field label="LG/IN">
@@ -25,7 +25,7 @@
 
   <section>
     <section class="ngtest-lg-instructions" [innerHTML]="htmlContent?.LocalGovernmentApproval"></section>
-    <section *ngIf="!htmlContent?.LocalGovernmentApproval">
+    <section *ngIf="!htmlContent?.LocalGovernmentApproval && !application?.applicationType?.showLgNoObjection">
       <label>Provide a Resolution/Comment and any supporting reports with comments on:</label>
       <ul>
         <li>The impact of noise on nearby residents</li>
@@ -47,6 +47,8 @@
       </mat-checkbox>
 
     </section>
+
+    <p *ngIf="application?.applicationType?.showLgNoObjection">Please upload your comments:</p>
 
     <app-file-uploader *ngIf="application?.id" documentType="LGIN Resolution"
                        [disableUploads]="!isOpenedByLGForApproval" [enableFileDeletion]="isOpenedByLGForApproval && !lgHasApproved"
