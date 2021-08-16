@@ -53,16 +53,23 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
-            bool isSep = source != null && source == "sep" ||
-                userSettings?.ContactId != null &&
+            bool isPoliceRep = userSettings?.ContactId != null &&
                 ContactController.IsSepPoliceRepresentative(userSettings?.ContactId, _configuration, _dynamicsClient);
 
             var basePath = string.IsNullOrEmpty(_configuration["BASE_PATH"]) ? "/" : _configuration["BASE_PATH"];
             // we want to redirect to the dashboard.
-            var url = "dashboard";
-            if (isSep) url = "sep/dashboard";
+            var url = "/dashboard";
+            
+            if (isPoliceRep) {
+                url = "/sep/dashboard";
+            }
 
-            return Redirect(basePath + "/" + url);
+            // if source is specified, redirect to source
+            if(!string.IsNullOrEmpty(source)){
+                url = source;
+            }
+
+            return Redirect(basePath + url);
         }
 
 

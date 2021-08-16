@@ -184,6 +184,10 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public Contact Applicant { get; set; }
         public Invoice Invoice { get; set; }
 
+        public decimal? AverageBeerPrice { get; set; }
+        public decimal? AverageWinePrice { get; set; }
+        public decimal? AverageSpiritsPrice { get; set; }
+
         public int? Beer { get; set; }
         public int? Wine { get; set; }
         public int? Spirits { get; set; }

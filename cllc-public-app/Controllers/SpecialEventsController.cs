@@ -1342,27 +1342,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var drinkTypes = _dynamicsClient.Sepdrinktypes.Get().Value
                             .ToList();
 
-            if (specialEvent.Beer == null)
-            {
-                specialEvent.Beer = 0;
-            }
-
-            if (specialEvent.Wine == null)
-            {
-                specialEvent.Wine = 0;
-            }
-
-            if (specialEvent.Spirits == null)
-            {
-                specialEvent.Spirits = 0;
-            }
+            specialEvent.Beer = specialEvent.Beer ?? 0;
+            specialEvent.Wine = specialEvent.Wine ?? 0;
+            specialEvent.Spirits = specialEvent.Spirits ?? 0;
 
             // calculate serving amounts from percentages
             int totalServings = specialEvent.TotalServings == null ? 0 : (int)specialEvent.TotalServings;
-            var typeData = new List<(string, int)>{
-                ("Beer/Cider/Cooler", (int)specialEvent.Beer),
-                ("Wine", (int)specialEvent.Wine),
-                ("Spirits", (int)specialEvent.Spirits),
+            var typeData = new List<(string, int, decimal?)>{
+                ("Beer/Cider/Cooler", (int)specialEvent.Beer, specialEvent.AverageBeerPrice),
+                ("Wine", (int)specialEvent.Wine, specialEvent.AverageWinePrice),
+                ("Spirits", (int)specialEvent.Spirits, specialEvent.AverageSpiritsPrice),
             };
 
             // Create or Update Drink Sale Forecast with the serving amounts
@@ -1378,20 +1367,27 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         .Where(drink => drink._adoxioTypeValue == drinkType.AdoxioSepdrinktypeid)
                         .FirstOrDefault();
                 }
-                createOrUpdateForecast(specialEvent, existingForecast, drinkType, estimatedServings);
+                createOrUpdateForecast(specialEvent, existingForecast, drinkType, estimatedServings, data.Item3);
             });
         }
 
-        private void createOrUpdateForecast(ViewModels.SpecialEvent specialEvent, MicrosoftDynamicsCRMadoxioSepdrinksalesforecast existingBeerForecast, MicrosoftDynamicsCRMadoxioSepdrinktype beerType, int estimatedServings)
+        private void createOrUpdateForecast(
+            ViewModels.SpecialEvent specialEvent, 
+            MicrosoftDynamicsCRMadoxioSepdrinksalesforecast existingBeerForecast, 
+            MicrosoftDynamicsCRMadoxioSepdrinktype beerType, 
+            int estimatedServings,
+            decimal? averagePrice)
         {
             try
             {
                 var newForecast = new MicrosoftDynamicsCRMadoxioSepdrinksalesforecast()
                 {
                     AdoxioIscharging = true,
-                    AdoxioPriceperserving = beerType.AdoxioMaxprice,
+                    AdoxioPriceperserving = averagePrice ?? beerType.AdoxioCostperserving,
                     AdoxioEstimatedservings = estimatedServings,
                 };
+
+
                 if (existingBeerForecast == null)
                 { // create record
                     newForecast.SpecialEventODataBind = _dynamicsClient.GetEntityURI("adoxio_specialevents", specialEvent.Id);
