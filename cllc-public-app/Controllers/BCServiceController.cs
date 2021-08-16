@@ -135,9 +135,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private string GetRedirectPath(IConfiguration configuration, string path, string code, string relativePath)
         {
             string basePath = string.IsNullOrEmpty(configuration["BASE_PATH"]) ? "" : configuration["BASE_PATH"];
-            if (relativePath == "sep")
+            if (!string.IsNullOrEmpty(relativePath))
             {
-                basePath += "/sep/dashboard";
+                basePath += relativePath;
             }
             else if (path != null && path.Equals("cannabis-associate-screening"))
             {
