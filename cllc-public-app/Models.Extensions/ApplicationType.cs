@@ -57,6 +57,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                     ValidInterest = (FormControlState?)applicationType.AdoxioValidinterest,
                     RequiresSecurityScreening = applicationType.AdoxioRequiressecurityscreening,
                     IsEndorsement = applicationType.AdoxioIsendorsement,
+                    IsStructural = applicationType.AdoxioIsstructuralchange,
+                    IsDefault = applicationType.AdoxioIsdefault,
                     ServiceAreas = applicationType.AdoxioServiceareas.HasValue && (bool)applicationType.AdoxioServiceareas,
                     OutsideAreas = applicationType.AdoxioOutsideareas.HasValue && (bool)applicationType.AdoxioOutsideareas,
                     CapacityArea = applicationType.AdoxioCapacityarea.HasValue && (bool)applicationType.AdoxioCapacityarea,

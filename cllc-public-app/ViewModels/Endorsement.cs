@@ -103,7 +103,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                     {
                         cells++;
 
-                        htmlVal += $@"<td class='area'><table style='padding:0px; margin: 0px; width:100%; border: 0px solid white;'><tr><td>{area.AdoxioArealocation}{area.AdoxioAreanumber}</td><td>{area.AdoxioCapacity}</td></tr></table></td>";
+                        htmlVal += $@"<td class='area'><table style='padding:0px; margin: 0px; width:100%; border: 0px solid white;'><tr><td>{area.AdoxioArealocation}</td><td>{area.AdoxioCapacity}</td></tr></table></td>";
 
                         // every 4 cells
                         leftover = cells % 4;

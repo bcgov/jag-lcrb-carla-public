@@ -83,7 +83,7 @@ namespace Gov.Jag.Lcrb.OneStopService
                             MicrosoftDynamicsCRMadoxioOnestopmessageitem update =
                                 new MicrosoftDynamicsCRMadoxioOnestopmessageitem()
                                 {
-                                    AdoxioDateacknowledgementreceived = DateTimeOffset.Now,
+                                    AdoxioDateacknowledgementreceived = DateTimeOffset.Now.Date,
                                     AdoxioAcknowledgementstatus = payload
                                 };
                             try

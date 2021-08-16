@@ -86,6 +86,7 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
   validationMessages: string[];
   newTnCControl = this.fb.control("");
   originator: string;
+  saveData: any;
 
   constructor(private fb: FormBuilder,
     private cd: ChangeDetectorRef,
@@ -130,7 +131,7 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
           if (this.form && application) {
             this.form.patchValue(this.sepApplication);
 
-            if(application?.termsAndConditions?.length > 0){
+            if (application?.termsAndConditions?.length > 0) {
               application.termsAndConditions.forEach(tnc => {
                 this.TnConditions.push(this.fb.group({
                   content: [tnc.content],
@@ -140,6 +141,8 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
                 }));
               });
             }
+
+            this.saveData = this.form.value;
           }
         });
 
@@ -183,19 +186,20 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
     this.TnConditions.removeAt(index);
   }
 
-  saveTermsAndConditions(){
+  saveTermsAndConditions() {
     this.specialEventsDataService.updateSepTermsAndConditions(this.form.value.termsAndConditions, this.specialEventId)
-    .subscribe((data: SepTermAndCondtion[]) => {
-      this.TnConditions.clear();
-      data.forEach(tnc => {
-        this.TnConditions.push(this.fb.group({
-          content: [tnc.content],
-          originator: [tnc.originator],
-          id: [tnc.id],
-          edit: [false],
-        }));
+      .subscribe((data: SepTermAndCondtion[]) => {
+        this.TnConditions.clear();
+        data.forEach(tnc => {
+          this.TnConditions.push(this.fb.group({
+            content: [tnc.content],
+            originator: [tnc.originator],
+            id: [tnc.id],
+            edit: [false],
+          }));
+        });
+        this.saveData = this.form.value;
       });
-    })
   }
 
 
@@ -212,6 +216,25 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
         }
       });
     }
+
+  }
+
+  formChanged(): boolean {
+    const noChanges = JSON.stringify(this.saveData) !== JSON.stringify(this.form.value);
+    return noChanges;
+  }
+
+  canDeactivate() {
+    let canLeave = false;
+    if (this.formChanged()) {
+      const discard = confirm("WARNING: You have unsaved changes. Press Cancel to go back and save these changes, or OK to lose these changes.");
+      if (discard) {
+        canLeave = true;
+      }
+    } else {
+      canLeave = true;
+    }
+    return canLeave;
   }
 
   approve(): void {
@@ -275,7 +298,7 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
   }
 
   isEventPast(): boolean {
-    return isBefore(new Date(this.sepApplication?.eventStartDate), new Date() );
+    return isBefore(new Date(this.sepApplication?.eventStartDate), new Date());
   }
 
   getTypeIcon(): IconDefinition {
@@ -401,11 +424,6 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
     return data;
   }
 
-  setFormValue(app: SepApplication) {
-    if (app) {
-      this.form.patchValue(app);
-    }
-  }
 
   autocompleteDisplay(item: AutoCompleteItem) {
     return item?.name;
