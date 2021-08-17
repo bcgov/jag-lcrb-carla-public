@@ -66,9 +66,9 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
     return beer + wine + spirits;
   }
 
-  getControlName(name: string): string {
+  getAVControlName(groupName: string): string {
     let controlName = "";
-    switch (name) {
+    switch (groupName) {
       case "beer":
         controlName = "averageBeerPrice";
         break;
