@@ -1,7 +1,8 @@
 <div class="position-relative drink-planner">
   <div [ngBusy]="[busy]"></div>
 
-  <h1>{{totalPercentage | mask : 'separator' : ','}}/{{(totalServings || 0).toFixed(0) | mask : 'separator' : ','}} Total Servings</h1>
+  <h1>{{totalPercentage | mask : 'separator' : ','}}/{{(totalServings || 0).toFixed(0) | mask : 'separator' : ','}}
+    Total Servings</h1>
   <form [formGroup]="form">
     <div class="padded-section" *ngIf="!hideGuestsAndHours">
       <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip.toggle()" class="float-right" data-html="true"
@@ -44,26 +45,35 @@
     <hr>
     <h3>Enter the number of each drink type appropriate for your event:</h3>
     <div class="d-flex">
-      <div *ngFor="let item of config; let i = index;" [ngClass]="{'last-planner-item': i+1 === config?.length}" class="planner-item">
+      <div *ngFor="let item of config; let i = index;" [ngClass]="{'last-planner-item': i+1 === config?.length}"
+        class="planner-item">
 
         <div class="text-center w-100 ">
           <!-- <img src="{{item.imageUrl}}"> -->
           <fa-icon size="6x" [icon]="item.faIcon" style="color:#38598a;"></fa-icon>
         </div>
 
-        <app-field class="text-center" [label]="item.description" [required]="false" [isFullWidth]="true" style="font-size:13pt;">
-          <div class="d-flex">
-            <input class="form-control text-right m-auto mb-2" type="number" [formControlName]="item.group" min="0">
-            <label style="padding-left: 5px; font-size: 14px; margin-top: 8px;">servings</label>
-            <!-- <button class="input- suffix">%</button> -->
-          </div>
-        </app-field>
+
+        <mat-form-field appearance="outline" floatLabel="always">
+          <mat-label>Servings</mat-label>
+          <input matInput type="number" [formControlName]="item.group" class="average-price"
+            placeholder="0">
+        </mat-form-field>
 
         <div class="text-center">
-            <p style="font-size: xx-large;" *ngIf="!hideGuestsAndHours"><strong>{{servingPercent(item)}} %</strong> </p>
-            <!--p><strong>{{servings(item).toFixed(0) | mask : 'separator' : ','}}</strong> &nbsp;servings of {{item.group}}</p-->
-            <p><strong>{{storageUnits(item).toFixed(0) | mask : 'separator' : ','}}</strong> &nbsp;{{storageMethodDescription(item)}}</p>
+          <p style="font-size: xx-large;" *ngIf="!hideGuestsAndHours"><strong>{{servingPercent(item)}} %</strong> </p>
+          <!--p><strong>{{servings(item).toFixed(0) | mask : 'separator' : ','}}</strong> &nbsp;servings of {{item.group}}</p-->
+          <p><strong>{{storageUnits(item).toFixed(0) | mask : 'separator' : ','}}</strong>
+            &nbsp;{{storageMethodDescription(item)}}</p>
         </div>
+
+        <mat-form-field appearance="outline" floatLabel="always" *ngIf="sepApplication?.chargingForLiquorReason === 'RaiseMoney'" >
+          <mat-label>Average Price</mat-label>
+          <input matInput type="number" [formControlName]="getAVControlName(item.group)" class="average-price"
+            placeholder="0">
+          <span matPrefix>$&nbsp;</span>
+          <!-- <span matSuffix>.00</span> -->
+        </mat-form-field>
       </div> <!-- ngFor -->
     </div>
 
@@ -72,9 +82,16 @@
 
     <div class="row">
       <div style="width:100%;" *ngIf="hideGuestsAndHours">
-        <div class="status yellow" *ngIf="totalPercentage < (totalServings || 0)"> <fa-icon [icon]="faExclamationTriange" style="margin-right:10px;" ></fa-icon>Drink Servings Must Add To 100%</div>
-        <div class="status red" *ngIf="totalPercentage > (totalServings || 0)"> <fa-icon [icon]="faExclamationTriange" style="margin-right:10px;" ></fa-icon>Drink Servings Must Not Exceed 100%</div>
-        <div class="status green" *ngIf="totalPercentage == (totalServings || 0)"> <fa-icon [icon]="faCheckCircle" style="margin-right:10px;" ></fa-icon>Servings Add To 100%</div>
+        <div class="status yellow" *ngIf="totalPercentage < (totalServings || 0)">
+          <fa-icon [icon]="faExclamationTriange" style="margin-right:10px;"></fa-icon>Drink Servings Must Add To 100%
+        </div>
+        <div class="status red" *ngIf="totalPercentage > (totalServings || 0)">
+          <fa-icon [icon]="faExclamationTriange" style="margin-right:10px;"></fa-icon>Drink Servings Must Not Exceed
+          100%
+        </div>
+        <div class="status green" *ngIf="totalPercentage == (totalServings || 0)">
+          <fa-icon [icon]="faCheckCircle" style="margin-right:10px;"></fa-icon>Servings Add To 100%
+        </div>
       </div>
       <div class="col-md-8 offset-md-4 col-12" *ngIf="!hideGuestsAndHours">
         <hr>
@@ -87,7 +104,7 @@
           <div class="col-6">
             <h3 class="w-100" *ngIf="!hideGuestsAndHours">
               &nbsp; = &nbsp;
-              <span class="total-servings" >{{(totalServings || 0).toFixed(0) | mask : 'separator' : ','}}</span>
+              <span class="total-servings">{{(totalServings || 0).toFixed(0) | mask : 'separator' : ','}}</span>
               <small class="ml-2">total servings</small>
             </h3>
           </div>

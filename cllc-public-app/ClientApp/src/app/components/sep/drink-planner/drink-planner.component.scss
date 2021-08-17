@@ -17,6 +17,16 @@
       white-space: pre-line;
     }
   }
+
+  .drink-planner {
+    .mat-form-field-prefix {
+      top: 0 !important;
+    }
+
+    .average-price {
+      text-align: right;
+    }
+  }
 }
 
 fa-icon {
@@ -62,7 +72,7 @@ hr {
 }
 
 .yellow {
-  background-color:#fcba19;
+  background-color: #fcba19;
 }
 .red {
   background-color: red;
