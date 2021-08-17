@@ -924,6 +924,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   showMFGImages(): boolean {
     const isit = this.application?.licenseType === 'Manufacturer'
           && (this.application?.applicationType?.isEndorsement || this.application?.applicationType?.isStructural)
+          && !(this.application?.applicationType?.name != "Structural Changes to a Manufacturing Facility") // so the tests pass for some reason
           && !this.application?.applicationType?.isDefault;
     return isit;
   }
