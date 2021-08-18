@@ -66,7 +66,7 @@
             <mat-radio-button value="true">Yes</mat-radio-button>
             <mat-radio-button value="false">No</mat-radio-button>
         </mat-radio-group>
-        <app-error-alert *ngIf="form.get('donateOrConsularPrevLiqour').value && form.get('donateOrConsularPrevLiqour').value !== 'No'">
+        <app-error-alert *ngIf="!form.get('donateOrConsularPrevLiqour').value">
           <p>The estimated PST does not take into account donated liquor. As a Special Event Permit holder, you are responsible for ensuring the
             correct amount of PST is remunerated to the Ministry of Finance.
           </p>
