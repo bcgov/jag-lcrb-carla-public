@@ -61,16 +61,16 @@
         </mat-form-field>
 
         <div class="text-center">
-          <p style="font-size: xx-large;" *ngIf="!hideGuestsAndHours"><strong>{{servingPercent(item)}} %</strong> </p>
+          <p style="font-size: xx-large;"><strong>{{servingPercent(item)}} %</strong> </p>
           <!--p><strong>{{servings(item).toFixed(0) | mask : 'separator' : ','}}</strong> &nbsp;servings of {{item.group}}</p-->
           <p><strong>{{storageUnits(item).toFixed(0) | mask : 'separator' : ','}}</strong>
             &nbsp;{{storageMethodDescription(item)}}</p>
         </div>
 
-        <mat-form-field appearance="outline" floatLabel="always" *ngIf="sepApplication?.chargingForLiquorReason === 'RaiseMoney'" >
+        <mat-form-field appearance="outline" floatLabel="always" *ngIf="hideGuestsAndHours">
           <mat-label>Average Price</mat-label>
           <input matInput type="number" [formControlName]="getAVControlName(item.group)" class="average-price"
-            placeholder="0">
+            placeholder="0.00" [readonly]="sepApplication?.chargingForLiquorReason !== 'RaiseMoney'" [min]="">
           <span matPrefix>$&nbsp;</span>
           <!-- <span matSuffix>.00</span> -->
         </mat-form-field>
