@@ -205,13 +205,19 @@ namespace Gov.Jag.Lcrb.OneStopService
 
 
             // check to see if it is simply a problem with an old account number.
-            if (errorNotification.body.validationErrors[0].errorMessageNumber.Equals("11845")) // Transaction not allowed - Duplicate Client event exists )
+            if (errorNotification?.body?.validationErrors != null &&
+                errorNotification.body.validationErrors.Length > 0 &&
+                errorNotification.body.validationErrors[0].errorMessageNumber != null &&
+                errorNotification.body.validationErrors[0].errorMessageNumber.Equals("11845")) // Transaction not allowed - Duplicate Client event exists )
             {
 
                 Log.Logger.Error($"CRA has rejected the message due to an incorrect business number.  The business in question may have had multiple business numbers in the past and the number in the record is no longer valid.  Please correct the business number for record with partnernote of {errorNotification.header.partnerNote}");
 
             }
-            else if (errorNotification.body.validationErrors[0].errorMessageNumber.Equals("11409")) // Old account number.               
+            else if (errorNotification?.body?.validationErrors != null &&
+                     errorNotification.body.validationErrors.Length > 0 &&
+                     errorNotification.body.validationErrors[0].errorMessageNumber != null && 
+                     errorNotification.body.validationErrors[0].errorMessageNumber.Equals("11409")) // Old account number.               
             {
                 Log.Logger.Information("Error is old account number is already associated with another account.  Retrying.");
                 // retry the request with a higher increment.
@@ -250,8 +256,7 @@ namespace Gov.Jag.Lcrb.OneStopService
             }
             else
             {
-                Log.Logger.Error($"Received error notification for record with partner note {errorNotification.header.partnerNote} Error Code is  {errorNotification.body.validationErrors[0].errorMessageNumber}. Error Text is {errorNotification.body.validationErrors[0].errorMessageText} {inputXML}");
-
+                Log.Logger.Error($"Received error notification Error Text is {inputXML}");
             }
 
             return result;
