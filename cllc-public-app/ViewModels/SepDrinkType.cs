@@ -33,6 +33,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string BulkSize { get; set; }
         public int? BulkMultiplier { get; set; }
         public decimal? CostPerServing { get; set; }
+        public decimal? PricePerServing { get; set; }
         public bool? IsHomeMade { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
         public DrinkTypeGroup? Group { get; set; }
