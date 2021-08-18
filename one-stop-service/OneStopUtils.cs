@@ -527,8 +527,17 @@ namespace Gov.Jag.Lcrb.OneStopService
                                         queueItem.AdoxioOnestopmessageitemid);
                                 }
 
+
+                                // determine if it is an Agent licence type.
+                                bool isAgentLicenceType = false;
+                                var agentLicenceType = dynamicsClient.GetAdoxioLicencetypeByName("Agent");
+                                if (agentLicenceType != null && item._adoxioLicencetypeValue == agentLicenceType.AdoxioLicencetypeid)
+                                {
+                                    isAgentLicenceType = true;
+                                }
+
                                 // Do not attempt to send licence records that have no establishment (for example, Marketer Licence records)
-                                if (item.AdoxioEstablishment != null)
+                                if (item.AdoxioEstablishment != null || isAgentLicenceType)
                                 {
 
                                     string programAccountCode = "001";
