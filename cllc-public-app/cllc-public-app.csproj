@@ -119,13 +119,9 @@
     </Compile>
   </ItemGroup>
 
-
-
   <ItemGroup>
     <Folder Include="gRPC Prototypes\" />
   </ItemGroup>
-
-
 
   <ItemGroup>
     <Protobuf Include="..\file-manager-service\Protos\fileManager.proto" GrpcServices="Client">
