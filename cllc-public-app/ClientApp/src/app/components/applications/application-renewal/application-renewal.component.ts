@@ -108,6 +108,31 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
     this.route.paramMap.subscribe(pmap => this.mode = pmap.get("mode"));
   }
 
+
+  holder(): string {
+    if(this.application.assignedLicence.licenseType === 'Section 119 Authorization'){
+      return "authorization holder";
+    } else {
+    return "licensee";
+    }
+  }
+
+  typeOf(): string {
+    if(this.application.assignedLicence.licenseType === 'Section 119 Authorization'){
+      return "authorization";
+    } else {
+    return "licence";
+    }
+
+  }
+
+  titleOf(): string {
+    if(this.application.assignedLicence.licenseType === 'Section 119 Authorization'){
+      return "Section 119 Authorization";
+    } else {
+    return "Cannabis Retail Store Licence";
+    }
+  }
   ngOnInit() {
     this.form = this.fb.group({
       id: [""],
