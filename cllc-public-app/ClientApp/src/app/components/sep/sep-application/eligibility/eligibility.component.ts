@@ -7,6 +7,7 @@ import { IndexedDBService } from '@services/indexed-db.service';
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { FormBase } from '@shared/form-base';
+import { differenceInCalendarDays, differenceInBusinessDays } from 'date-fns';
 import { distinct, distinctUntilChanged } from 'rxjs/operators';
 @Component({
   selector: 'app-eligibility',
@@ -102,6 +103,14 @@ export class EligibilityComponent extends FormBase implements OnInit {
       this.form.patchValue(this.sepApplication);
     }
 
+  }
+
+  isSoon(): boolean {
+    return differenceInCalendarDays(this.form.get('eventStartDate').value, new Date() ) < 15;
+  }
+
+  isTooSoon(): boolean {
+    return differenceInBusinessDays(this.form.get('eventStartDate').value, new Date() ) < 2;
   }
 
   isValid() {

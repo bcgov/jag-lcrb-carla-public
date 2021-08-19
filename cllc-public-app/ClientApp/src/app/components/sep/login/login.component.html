@@ -14,7 +14,7 @@
                   <img src="assets/bceid_default_logo.jpg"  alt="BCeID logo">
                     <div class="d-flex justify-content-around w-100">
                         <button [disabled]="disableLogin" mat-raised-button color="primary"
-                            (click)="window.location.href='login?source=sep'">
+                            (click)="sepBCeIDLogin()">
                             Login with Basic or Business BCeID
                         </button>
                     </div>
@@ -31,7 +31,7 @@
               <img src="assets/bc-logo-white-bg.jpg" height="51" alt="BC logo">
               <div class="d-flex justify-content-around w-100">
                   <button [disabled]="disableLogin" mat-raised-button color="primary"
-                      (click)="window.location.href='bcservice?source=sep'">Login with BC Services
+                      (click)="sepBCServiceLogin()">Login with BC Services
                       Card</button>
               </div>
 
