@@ -58,7 +58,7 @@
         <p>
             Please ensure your legal name is used for the application and the information is correct. If you need to
             update
-            your information, visit <a routerLink="/account-profile">Manage Account</a>.
+            your information, visit <a routerLink="/account-profile" *ngIf="this.account">Manage Account</a><a routerLink="/servicecard-profile" *ngIf="!this.account">Manage Account</a>.
         </p>
 
         <hr>

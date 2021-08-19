@@ -88,8 +88,10 @@ export class SubmittedApplicationsComponent implements OnInit {
   ngOnInit(): void {
     this.sepDataService.getSubmittedApplications()
       .subscribe(data => this.dataSource.data = data);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    if(this.dataSource){
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }
   }
 
 
