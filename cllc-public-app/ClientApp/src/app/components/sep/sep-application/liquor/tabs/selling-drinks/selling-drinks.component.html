@@ -48,7 +48,7 @@
         </app-field-->
     </section>
 
-    <app-field   *ngIf="form.get('chargingForLiquorReason').value && form.get('chargingForLiquorReason').value !== 'LiquorIsfree'"
+    <app-field   *ngIf="form.get('chargingForLiquorReason').value && form.get('chargingForLiquorReason').value === 'RecoverCost'"
     label="Are you hosting this event as a GST registered organization?" [required]="true"  errorMessage="Please select a value"
     [valid]="isValidOrNotTouched('isGSTRegisteredOrg')"
         [isFullWidth]="true">
@@ -58,7 +58,7 @@
         </mat-radio-group>
     </app-field>
 
-    <app-field
+    <app-field *ngIf="form.get('chargingForLiquorReason').value && form.get('chargingForLiquorReason').value === 'RaiseMoney'"
         label="Are any of the liquor products at your event donated or have they been provided under consular privilege?"
         [required]="true"  errorMessage="Please select a value"
         [valid]="isValidOrNotTouched('donateOrConsularPrevLiqour')">
