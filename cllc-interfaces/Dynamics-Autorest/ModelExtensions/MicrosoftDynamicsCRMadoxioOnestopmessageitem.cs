@@ -9,6 +9,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         [JsonConverter(typeof(DateFormatConverter), "yyyy-MM-dd")]
         [JsonProperty(PropertyName = "adoxio_datesent")]
         public System.DateTimeOffset? AdoxioDatesent { get; set; }  // Edm.Date type
+
+        [JsonConverter(typeof(DateFormatConverter), "yyyy-MM-dd")]
+        [JsonProperty(PropertyName = "adoxio_dateacknowledgementreceived")]
+        public System.DateTimeOffset? AdoxioDateacknowledgementreceived { get; set; }  // Edm.Date type
     }
 
     [MetadataType(typeof(MicrosoftDynamicsCRMadoxioOnestopmessageitemMetadata))]

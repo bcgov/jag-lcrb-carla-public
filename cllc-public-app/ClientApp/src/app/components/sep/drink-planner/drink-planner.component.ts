@@ -6,6 +6,8 @@ import { faLightbulb } from "@fortawesome/free-regular-svg-icons";
 import configuration, { DrinkConfig, HOURS_OF_LIQUOR_SERVICE, SERVINGS_PER_PERSON } from "./config";
 import { SepApplication } from "@models/sep-application.model";
 import { faQuestionCircle, faExclamationTriangle, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
+import { SpecialEventsDataService } from "@services/special-events-data.service";
+import { SepDrinkType } from "@models/sep-drink-type.model";
 
 @Component({
   selector: "app-drink-planner",
@@ -22,6 +24,7 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
 
   totalServings = 0;
   _app: SepApplication;
+  drinkTypes: SepDrinkType[];
 
   @Input() set sepApplication(value: SepApplication) {
     if (value) {
@@ -43,15 +46,18 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
 
   // drink planner form
   form = this.fb.group({
-    hours: HOURS_OF_LIQUOR_SERVICE,
-    totalMaximumNumberOfGuests: 400,
-    beer: 0,
-    wine: 0,
-    spirits: 0,
+    hours: [HOURS_OF_LIQUOR_SERVICE],
+    totalMaximumNumberOfGuests: [400],
+    beer: [0],
+    wine: [0],
+    spirits: [0],
+    averageBeerPrice: [null],
+    averageWinePrice: [null],
+    averageSpiritsPrice: [null],
   });
 
   getTotalServings(): number {
-    let { hours, totalMaximumNumberOfGuests } = this.form.value;
+    const { hours, totalMaximumNumberOfGuests } = this.form.value;
     return (hours / HOURS_OF_LIQUOR_SERVICE * totalMaximumNumberOfGuests * SERVINGS_PER_PERSON);
   }
 
@@ -60,8 +66,42 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
     return beer + wine + spirits;
   }
 
-  constructor(private fb: FormBuilder) {
+  getAVControlName(groupName: string): string {
+    let controlName = "";
+    switch (groupName) {
+      case "beer":
+        controlName = "averageBeerPrice";
+        break;
+      case "wine":
+        controlName = "averageWinePrice";
+        break;
+      case "spirits":
+        controlName = "averageSpiritsPrice";
+        break;
+    }
+    return controlName;
+  }
+
+  constructor(private fb: FormBuilder,
+    private sepDataService: SpecialEventsDataService) {
     super();
+    this.sepDataService.getSepDrinkTypes()
+      .subscribe(data => {
+        this.drinkTypes = data;
+        const beerDefaultPrice = data.find(item => item.name === "Beer/Cider/Cooler")?.costPerServing || 0;
+        const wineDefaultPrice = data.find(item => item.name === "Wine")?.costPerServing || 0;
+        const spiritsDefaultPrice = data.find(item => item.name === "Spirits")?.costPerServing || 0;
+
+        if (!this.form.value?.averageBeerPrice) {
+          this.form.get("averageBeerPrice").setValue(beerDefaultPrice);
+        }
+        if (!this.form.value?.averageWinePrice) {
+          this.form.get("averageWinePrice").setValue(wineDefaultPrice);
+        }
+        if (!this.form.value?.averageSpiritsPrice) {
+          this.form.get("averageSpiritsPrice").setValue(spiritsDefaultPrice);
+        }
+      });
   }
 
   isValid(): boolean {
@@ -73,7 +113,7 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
     for (const item of this.config) {
       values[item.group] = item.defaultPercentage;
     }
-    if(!this.hideGuestsAndHours){
+    if (!this.hideGuestsAndHours) {
       this.totalServings = this.getTotalServings();
     }
 
@@ -114,7 +154,7 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
 
   servingPercent(config: DrinkConfig): string {
     const servings: number = this.form.get(config.group).value || 0;
-    if(servings == 0 || this.totalServings == 0) {
+    if (servings == 0 || this.totalServings == 0) {
       return "0";
     }
     return (servings / this.totalServings * 100).toFixed(1);

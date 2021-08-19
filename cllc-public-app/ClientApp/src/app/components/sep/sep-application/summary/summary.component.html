@@ -462,7 +462,7 @@
 
         <div *ngIf="!isReadOnly() && this.isEventPast()" class="d-flex" style="margin-top: 20px;">
 
-          <p><fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>You cannot submit an application for an event in the past.</p>
+          <p><fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>Permits cannot be issued before or on the date that they are submitted.</p>
 
         </div>
         <section *ngIf="getStatus() == 'Payment Required' && !trnId || mode ==='payNow'">

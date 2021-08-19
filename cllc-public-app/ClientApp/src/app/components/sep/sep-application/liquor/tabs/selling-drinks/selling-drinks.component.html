@@ -48,7 +48,7 @@
         </app-field-->
     </section>
 
-    <app-field   *ngIf="form.get('chargingForLiquorReason').value && form.get('chargingForLiquorReason').value !== 'LiquorIsfree'"
+    <app-field   *ngIf="form.get('chargingForLiquorReason').value && form.get('chargingForLiquorReason').value === 'RecoverCost'"
     label="Are you hosting this event as a GST registered organization?" [required]="true"  errorMessage="Please select a value"
     [valid]="isValidOrNotTouched('isGSTRegisteredOrg')"
         [isFullWidth]="true">
@@ -58,7 +58,7 @@
         </mat-radio-group>
     </app-field>
 
-    <app-field
+    <app-field *ngIf="form.get('chargingForLiquorReason').value && form.get('chargingForLiquorReason').value === 'RaiseMoney'"
         label="Are any of the liquor products at your event donated or have they been provided under consular privilege?"
         [required]="true"  errorMessage="Please select a value"
         [valid]="isValidOrNotTouched('donateOrConsularPrevLiqour')">
@@ -66,7 +66,7 @@
             <mat-radio-button value="true">Yes</mat-radio-button>
             <mat-radio-button value="false">No</mat-radio-button>
         </mat-radio-group>
-        <app-error-alert *ngIf="form.get('donateOrConsularPrevLiqour').value && form.get('donateOrConsularPrevLiqour').value !== 'No'">
+        <app-error-alert *ngIf="!form.get('donateOrConsularPrevLiqour').value">
           <p>The estimated PST does not take into account donated liquor. As a Special Event Permit holder, you are responsible for ensuring the
             correct amount of PST is remunerated to the Ministry of Finance.
           </p>

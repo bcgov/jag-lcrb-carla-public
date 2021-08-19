@@ -337,7 +337,13 @@ namespace Gov.Jag.Lcrb.OneStopService
                 {
                     Log.Logger.Information("Creating Hangfire jobs for License issuance check ...");
 
-                    RecurringJob.AddOrUpdate(() => new OneStopUtils(Configuration, cache).CheckForNewLicences(null), Cron.Hourly());
+                    string interval = Cron.Hourly();
+                    if (!string.IsNullOrEmpty(Configuration["QUEUE_CHECK_INTERVAL"]))
+                    {
+                        interval = (Configuration["QUEUE_CHECK_INTERVAL"]);
+                    }
+
+                    RecurringJob.AddOrUpdate(() => new OneStopUtils(Configuration, cache).CheckForNewLicences(null), interval);
 
                     Log.Logger.Information("Hangfire License issuance check jobs setup.");
                 }
