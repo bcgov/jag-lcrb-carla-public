@@ -111,7 +111,7 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
 
   holder(): string {
     if(this.application.assignedLicence.licenseType === 'Section 119 Authorization'){
-      return "authorization holder";
+      return "authorized retailer";
     } else {
     return "licensee";
     }
