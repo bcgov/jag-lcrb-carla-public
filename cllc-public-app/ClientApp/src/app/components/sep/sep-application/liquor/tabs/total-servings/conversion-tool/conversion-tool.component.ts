@@ -38,7 +38,17 @@ export class ConversionToolComponent implements OnInit {
       }
 
       if (pricePerTastingDrink) {
-        this.pricePerStandardDrink = Math.ceil(100 * pricePerTastingDrink * numberOfTastings) / 100;
+        if(this.toolType === 'beer') {
+          this.pricePerStandardDrink = pricePerTastingDrink * (12/tastingSize);
+        }
+        if(this.toolType === 'wine') {
+          this.pricePerStandardDrink = pricePerTastingDrink * (5/tastingSize);
+        }
+        if(this.toolType === 'spirits') {
+          this.pricePerStandardDrink = pricePerTastingDrink * (1.5/tastingSize);
+        }
+
+
       }
     });
   }
