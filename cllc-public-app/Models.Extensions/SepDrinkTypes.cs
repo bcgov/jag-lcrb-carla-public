@@ -25,6 +25,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                     BulkSize = drinkType.AdoxioBulksize,
                     BulkMultiplier = drinkType.AdoxioBulkmultiplier,
                     CostPerServing = drinkType.AdoxioCostperserving,
+                    PricePerServing = drinkType.AdoxioMaxprice,
                     IsHomeMade = drinkType.AdoxioIshomemade,
                     Group = (ViewModels.DrinkTypeGroup?)drinkType.AdoxioGroup,
                     StorageMethod = (ViewModels.StorageMethod?)drinkType.AdoxioStoragemethod,
