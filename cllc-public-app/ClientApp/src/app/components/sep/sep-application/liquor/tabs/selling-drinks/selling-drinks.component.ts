@@ -33,7 +33,7 @@ export class SellingDrinksComponent extends FormBase implements OnInit {
     this.form = this.fb.group({
       chargingForLiquorReason: [this?.sepApplication?.chargingForLiquorReason, [Validators.required]],
       isGSTRegisteredOrg: [this?.sepApplication?.isGSTRegisteredOrg, [Validators.required]],
-      donateOrConsularPrevLiqour: [this?.sepApplication?.donateOrConsularPrevLiqour, [Validators.required]],
+      donateOrConsular: [this?.sepApplication?.donateOrConsular, [Validators.required]],
       nonProfitName: [this?.sepApplication?.nonProfitName],
       // fundraisingPurpose: [this?.application?.fundraisingPurpose],
       // howProceedsWillBeUsedDescription: [this?.application?.howProceedsWillBeUsedDescription],
