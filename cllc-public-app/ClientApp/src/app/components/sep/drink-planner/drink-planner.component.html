@@ -56,8 +56,7 @@
 
         <mat-form-field appearance="outline" floatLabel="always">
           <mat-label>Servings</mat-label>
-          <input matInput type="number" [formControlName]="item.group" class="average-price"
-            placeholder="0">
+          <input matInput type="number" [formControlName]="item.group" class="average-price" placeholder="0">
         </mat-form-field>
 
         <div class="text-center">
@@ -66,34 +65,37 @@
           <p><strong>{{storageUnits(item).toFixed(0) | mask : 'separator' : ','}}</strong>
             &nbsp;{{storageMethodDescription(item)}}</p>
           <span *ngIf="item.group == 'beer'">
-          <p><strong>{{this.form.get(item.group).value | mask : 'separator' : ','}}</strong>
+            <p><strong>{{this.form.get(item.group).value | mask : 'separator' : ','}}</strong>
               &nbsp;Draught Beer/Cider (12oz or 341ml)</p>
-          <p><strong>{{this.form.get(item.group).value | mask : 'separator' : ','}}</strong>
+            <p><strong>{{this.form.get(item.group).value | mask : 'separator' : ','}}</strong>
               &nbsp;Beer/Cider/Cooler (bottle or can to 340ml)</p>
           </span>
           <span *ngIf="item.group == 'wine'">
             <p><strong>{{this.form.get(item.group).value | mask : 'separator' : ','}}</strong>
-                &nbsp;Wine by glass (5oz or 142ml)</p>
+              &nbsp;Wine by glass (5oz or 142ml)</p>
             <p>&nbsp;</p>
-            </span>
-            <span *ngIf="item.group == 'spirits'">
-              <p><strong>{{this.form.get(item.group).value | mask : 'separator' : ','}}</strong>
-                  &nbsp;Spirits (1.5oz or 43ml)</p>
-              <p>&nbsp;</p>
-              </span>
+          </span>
+          <span *ngIf="item.group == 'spirits'">
+            <p><strong>{{this.form.get(item.group).value | mask : 'separator' : ','}}</strong>
+              &nbsp;Spirits (1.5oz or 43ml)</p>
+            <p>&nbsp;</p>
+          </span>
         </div>
 
         <mat-form-field appearance="outline" floatLabel="always" *ngIf="hideGuestsAndHours">
           <mat-label *ngIf="sepApplication?.chargingForLiquorReason === 'RaiseMoney'">Average Price</mat-label>
-          <mat-label *ngIf="sepApplication?.chargingForLiquorReason !== 'RaiseMoney'">Maximum Price<sup>*</sup></mat-label>
+          <mat-label *ngIf="sepApplication?.chargingForLiquorReason !== 'RaiseMoney'">Maximum Price<sup>*</sup>
+          </mat-label>
           <input matInput type="number" [formControlName]="getAVControlName(item.group)" class="average-price"
-            placeholder="0.00" [readonly]="sepApplication?.chargingForLiquorReason !== 'RaiseMoney'" [min]="">
+            placeholder="0.00" [readonly]="sepApplication?.chargingForLiquorReason !== 'RaiseMoney'"
+            [disabled]="sepApplication?.chargingForLiquorReason !== 'RaiseMoney'" #avInput>
           <span matPrefix>$&nbsp;</span>
-          <!-- <span matSuffix>.00</span> -->
+          <mat-error *ngIf="!form.get(getAVControlName(item.group)).valid">{{getErrorMessage(getAVControlName(item.group))}}</mat-error>
         </mat-form-field>
       </div> <!-- ngFor -->
     </div>
-    <p *ngIf="sepApplication?.chargingForLiquorReason !== 'RaiseMoney'" style="text-align: center;"><small>*The maximum sales price for drinks cannot exceed the price set by the Branch for non-charitable events.</small></p>
+    <p *ngIf="sepApplication?.chargingForLiquorReason !== 'RaiseMoney'" style="text-align: center;"><small>*The maximum
+        sales price for drinks cannot exceed the price set by the Branch for non-charitable events.</small></p>
 
     <!-- Drink Totals -->
 
