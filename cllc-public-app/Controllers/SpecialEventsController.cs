@@ -1767,7 +1767,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("claim-info/{jobNumber}")]
         public IActionResult getClaimInfo(string jobNumber)
         {
-            var filter = $"adoxio_specialeventpermitnumber eq '{jobNumber}' and statuscode eq 1";
+            var filter = $"adoxio_specialeventpermitnumber eq '{jobNumber}' and statuscode eq 845280003";
             var claim = _dynamicsClient.Specialevents.Get(filter: filter).Value.ToList()
             .Select(sepEvent => new SepClaimInfo
             {
@@ -1787,7 +1787,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // there must be a contact
             if (!string.IsNullOrEmpty(userSettings.ContactId) && userSettings.ContactId != "00000000-0000-0000-0000-000000000000")
             {
-                var filter = $"adoxio_specialeventpermitnumber eq '{jobNumber}' and statuscode eq 1";
+                var filter = $"adoxio_specialeventpermitnumber eq '{jobNumber}' and statuscode eq 845280003";
                 var claim = _dynamicsClient.Specialevents.Get(filter: filter).Value.FirstOrDefault();
                 var patchEvent = new MicrosoftDynamicsCRMadoxioSpecialevent();
 
