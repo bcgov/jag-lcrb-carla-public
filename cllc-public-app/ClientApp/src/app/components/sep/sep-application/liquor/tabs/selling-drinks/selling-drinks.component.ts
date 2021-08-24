@@ -32,8 +32,8 @@ export class SellingDrinksComponent extends FormBase implements OnInit {
   ngOnInit(): void {
     this.form = this.fb.group({
       chargingForLiquorReason: [this?.sepApplication?.chargingForLiquorReason, [Validators.required]],
-      isGSTRegisteredOrg: [this?.sepApplication?.isGSTRegisteredOrg, [Validators.required]],
-      donateOrConsular: [this?.sepApplication?.donateOrConsular, [Validators.required]],
+      isGSTRegisteredOrg: [this?.sepApplication?.isGSTRegisteredOrg],
+      donateOrConsular: [this?.sepApplication?.donateOrConsular],
       nonProfitName: [this?.sepApplication?.nonProfitName],
       // fundraisingPurpose: [this?.application?.fundraisingPurpose],
       // howProceedsWillBeUsedDescription: [this?.application?.howProceedsWillBeUsedDescription],
@@ -42,12 +42,28 @@ export class SellingDrinksComponent extends FormBase implements OnInit {
 
     this.form.get("chargingForLiquorReason").valueChanges
       .subscribe(reason => {
-        if (reason === "RaiseMoney") {
-          this.form.get("nonProfitName").setValidators(Validators.required);
-        } else {
-          this.form.get("nonProfitName").clearValidators();
-          this.form.get("nonProfitName").updateValueAndValidity();
+        switch(reason) {
+          case "RaiseMoney":
+            this.form.get("nonProfitName").setValidators(Validators.required);
+            this.form.get("donateOrConsular").setValidators(Validators.required);
+            this.form.get("isGSTRegisteredOrg").clearValidators();
+            break;
+          case "RecoverCost":
+            this.form.get("nonProfitName").clearValidators();
+            this.form.get("donateOrConsular").clearValidators();
+            this.form.get("isGSTRegisteredOrg").setValidators(Validators.required);
+            break;
+          default:
+            this.form.get("nonProfitName").clearValidators();
+            this.form.get("donateOrConsular").clearValidators();
+            this.form.get("isGSTRegisteredOrg").clearValidators();
+            break;
+
         }
+        this.form.get("nonProfitName").updateValueAndValidity();
+        this.form.get("donateOrConsular").updateValueAndValidity();
+        this.form.get("isGSTRegisteredOrg").updateValueAndValidity();
+
       });
 
   }

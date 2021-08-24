@@ -88,7 +88,7 @@
           </mat-label>
           <input matInput type="number" [formControlName]="getAVControlName(item.group)" class="average-price"
             placeholder="0.00" [readonly]="sepApplication?.chargingForLiquorReason !== 'RaiseMoney'"
-            [disabled]="sepApplication?.chargingForLiquorReason !== 'RaiseMoney'" #avInput>
+            [disabled]="sepApplication?.chargingForLiquorReason !== 'RaiseMoney'" #avInput mask="0.00">
           <span matPrefix>$&nbsp;</span>
           <mat-error *ngIf="!form.get(getAVControlName(item.group)).valid">{{getErrorMessage(getAVControlName(item.group))}}</mat-error>
         </mat-form-field>
