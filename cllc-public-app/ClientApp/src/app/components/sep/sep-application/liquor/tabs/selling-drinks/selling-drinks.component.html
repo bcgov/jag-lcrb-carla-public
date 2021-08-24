@@ -53,20 +53,20 @@
     [valid]="isValidOrNotTouched('isGSTRegisteredOrg')"
         [isFullWidth]="true">
         <mat-radio-group formControlName="isGSTRegisteredOrg">
-            <mat-radio-button value="true">Yes</mat-radio-button>
-            <mat-radio-button value="false">No</mat-radio-button>
+            <mat-radio-button [value]="true">Yes</mat-radio-button>
+            <mat-radio-button [value]="false">No</mat-radio-button>
         </mat-radio-group>
     </app-field>
 
     <app-field *ngIf="form.get('chargingForLiquorReason').value && form.get('chargingForLiquorReason').value === 'RaiseMoney'"
         label="Are any of the liquor products at your event donated or have they been provided under consular privilege?"
         [required]="true"  errorMessage="Please select a value"
-        [valid]="isValidOrNotTouched('donateOrConsularPrevLiqour')">
-        <mat-radio-group formControlName="donateOrConsularPrevLiqour">
-            <mat-radio-button value="true">Yes</mat-radio-button>
-            <mat-radio-button value="false">No</mat-radio-button>
+        [valid]="isValidOrNotTouched('donateOrConsular')">
+        <mat-radio-group formControlName="donateOrConsular">
+            <mat-radio-button value="Yes">Yes</mat-radio-button>
+            <mat-radio-button value="No">No</mat-radio-button>
         </mat-radio-group>
-        <app-error-alert *ngIf="!form.get('donateOrConsularPrevLiqour').value">
+        <app-error-alert *ngIf="form.get('donateOrConsular').value === 'No'">
           <p>The estimated PST does not take into account donated liquor. As a Special Event Permit holder, you are responsible for ensuring the
             correct amount of PST is remunerated to the Ministry of Finance.
           </p>
