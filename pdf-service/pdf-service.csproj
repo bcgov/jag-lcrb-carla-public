@@ -12,7 +12,7 @@
 
     <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="5.0.1" />
 
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.9" />
     <PackageReference Include="Stubble.Compilation" Version="1.9.3" />
     <PackageReference Include="Stubble.Core" Version="1.9.3" />
     <PackageReference Include="Stubble.Extensions.JsonNet" Version="1.2.3" />
@@ -56,6 +56,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Templates\market_event_authorization.mustache">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\sep.mustache">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
