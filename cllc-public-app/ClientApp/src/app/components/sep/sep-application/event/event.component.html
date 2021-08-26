@@ -28,8 +28,8 @@
                 </app-field>
                 <section>
                     <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
-                    <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
-                        <section *ngIf="form.get('sepCity')?.value?.id">
+                    <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;" *ngIf="form.get('sepCity')?.value?.id">
+                        <section>
 
                             <mat-card class="mb-3">
                                 <label for="">Selected City </label>
@@ -45,11 +45,15 @@
                             </mat-card>
                         </section>
 
-                        <section *ngIf="!form.get('sepCity')?.value?.id">
-                            No City selected
-                        </section>
+
+                    </div>
+                    <div class="" style="background-color: #d8292f; padding: 1px;" *ngIf="!form.get('sepCity')?.value?.id">
+                      <section  style="background-color: #ffe9e9; padding:20px;">
+                        <strong>No city selected. Start typing the name of the city and select it from the drop-down list.</strong>
+                      </section>
                     </div>
                 </section>
+
             </section>
             <div>
                 <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip.toggle()" matTooltip="All locations in the application must be in the same municipality. You may submit more than one application
