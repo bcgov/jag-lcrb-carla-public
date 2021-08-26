@@ -21,16 +21,19 @@ namespace Gov.Lclb.Cllb.Interfaces
         
 
     private string bcep_pay_url;
-        private string bcep_verify_url;
-        private string bcep_merchid;
-        private string bcep_alt_merchid;
-        private string bcep_sep_merchid;
+        private readonly string bcep_verify_url;
+        private readonly string bcep_merchid;
+        private readonly string bcep_alt_merchid;
+        private readonly string bcep_sep_merchid;
         private string bcep_hashkey;
-        private string bcep_alt_hashkey;
-        private string bcep_sep_hashkey;
-        private string bcep_sep_hashtype;
-        private string bcep_conf_url;
-       
+        private readonly string bcep_alt_hashkey;
+        private readonly string bcep_sep_hashkey;
+        private readonly string bcep_sep_hashtype;
+        private readonly string bcep_conf_url;
+
+        private readonly string bcep_sep_pay_url;
+        private readonly string bcep_sep_verify_url;
+
 
         private const string SVC_VERSION = "1.0";
         private const int HASH_EXPIRY_TIME = 30;
@@ -58,24 +61,37 @@ namespace Gov.Lclb.Cllb.Interfaces
         public BCEPService(HttpClient httpClient, IConfiguration configuration)
         {
 
-            this.client = httpClient;
-            this.bcep_pay_url = configuration["BCEP_SERVICE_URL"];
-            this.bcep_verify_url = configuration["BCEP_SERVICE_VERIFY_URL"];
+            client = httpClient;
+            bcep_pay_url = configuration["BCEP_SERVICE_URL"];
+            bcep_verify_url = configuration["BCEP_SERVICE_VERIFY_URL"];
+
+            bcep_sep_pay_url = configuration["BCEP_SEP_SERVICE_URL"];
+            bcep_sep_verify_url = configuration["BCEP_SEP_SERVICE_VERIFY_URL"];
 
             if (string.IsNullOrEmpty(bcep_verify_url))
             {
                 bcep_verify_url = bcep_pay_url;
             }
 
-            this.bcep_merchid = configuration["BCEP_MERCHANT_ID"]; 
-            this.bcep_alt_merchid = configuration["BCEP_ALTERNATE_MERCHANT_ID"];
-            this.bcep_sep_merchid = configuration["BCEP_SEP_MERCHANT_ID"];
-            this.bcep_hashkey = configuration["BCEP_HASH_KEY"];
-            this.bcep_alt_hashkey = configuration["BCEP_ALTERNATE_HASH_KEY"];
-            this.bcep_sep_hashkey = configuration["BCEP_SEP_HASH_KEY"];
-            this.bcep_sep_hashtype = configuration["BCEP_SEP_HASH_TYPE"];
+            if (string.IsNullOrEmpty(bcep_sep_pay_url))
+            {
+                bcep_sep_pay_url = bcep_pay_url;
+            }
 
-            this.bcep_conf_url = configuration["BASE_URI"] + configuration["BASE_PATH"] + configuration["BCEP_CONF_PATH"];
+            if (string.IsNullOrEmpty(bcep_sep_verify_url))
+            {
+                bcep_sep_verify_url = bcep_sep_pay_url;
+            }
+
+            bcep_merchid = configuration["BCEP_MERCHANT_ID"]; 
+            bcep_alt_merchid = configuration["BCEP_ALTERNATE_MERCHANT_ID"];
+            bcep_sep_merchid = configuration["BCEP_SEP_MERCHANT_ID"];
+            bcep_hashkey = configuration["BCEP_HASH_KEY"];
+            bcep_alt_hashkey = configuration["BCEP_ALTERNATE_HASH_KEY"];
+            bcep_sep_hashkey = configuration["BCEP_SEP_HASH_KEY"];
+            bcep_sep_hashtype = configuration["BCEP_SEP_HASH_TYPE"];
+
+            bcep_conf_url = configuration["BASE_URI"] + configuration["BASE_PATH"] + configuration["BCEP_CONF_PATH"];
         }
 
         /// <summary>
@@ -85,7 +101,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// </summary>
         public void setHashKeyForUnitTesting(string ut_hash_key)
         {
-            this.bcep_hashkey = ut_hash_key;
+            bcep_hashkey = ut_hash_key;
         }
 
         private string GetMerchId (PaymentType paymentType)
@@ -189,7 +205,18 @@ namespace Gov.Lclb.Cllb.Interfaces
             paramString = paramString + "&" + BCEP_P_HASH_VALUE + "=" + hashed;
 
             // Build re-direct URL
-            string redirect = this.bcep_pay_url + BCEP_P_SCRIPT + "?" + paramString;
+            string redirect;
+
+            if (paymentType == PaymentType.SPECIAL_EVENT)
+            {
+                redirect = bcep_sep_pay_url;
+            }
+            else
+            {
+                redirect = bcep_pay_url;
+            }
+
+            redirect += BCEP_P_SCRIPT + "?" + paramString;
 
             return redirect;
         }
@@ -289,7 +316,18 @@ namespace Gov.Lclb.Cllb.Interfaces
             paramString = paramString + "&" + BCEP_Q_HASH_VALUE + "=" + hashed;
 
             // Build re-direct URL
-            string query_url = this.bcep_verify_url + BCEP_Q_SCRIPT + "?" + paramString;
+            string query_url;
+
+            if (paymentType == PaymentType.SPECIAL_EVENT)
+            {
+                query_url = bcep_sep_verify_url;
+            }
+            else
+            {
+                query_url = bcep_verify_url;
+            }
+
+            query_url += BCEP_Q_SCRIPT + "?" + paramString;
 
             return query_url;
         }

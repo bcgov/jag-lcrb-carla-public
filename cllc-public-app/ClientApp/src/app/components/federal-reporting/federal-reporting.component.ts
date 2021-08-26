@@ -10,7 +10,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { ModalComponent } from "@shared/components/modal/modal.component";
 import { ClosingInventoryValidator, SalesValidator } from "./federal-reporting-validation";
 import { switchMap } from "rxjs/operators";
-import { faChevronLeft, faExclamationTriangle, faQuestionCircle, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faChevronLeft, faExclamationTriangle, faQuestionCircle, faTrash, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { faSave } from "@fortawesome/free-regular-svg-icons";
 "@fortawesome/free-solid-svg-icons";
 import { InventorySalesReport } from "@models/inventory-sales-report.model";
@@ -31,6 +31,7 @@ export class FederalReportingComponent implements OnInit {
   faQuestionCircle = faQuestionCircle;
   faExclamationTriangle = faExclamationTriangle;
   faTrash = faTrash;
+  faInfoCircle = faInfoCircle;
   monthlyReportStatusEnum = monthlyReportStatus;
   licenses: ApplicationLicenseSummary[] = [];
   monthlyReports: MonthlyReport[] = [];

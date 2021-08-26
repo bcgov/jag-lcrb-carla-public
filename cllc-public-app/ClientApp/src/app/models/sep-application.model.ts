@@ -16,7 +16,7 @@ export class SepApplication {
     dateSubmitted: Date;
     dateIssued: Date;
     denialReason?: string;
-    donateOrConsularPrevLiqour: boolean;
+    donateOrConsular: boolean;
     eventName: string;
     eventStartDate: Date;
     eventStatus: string;
