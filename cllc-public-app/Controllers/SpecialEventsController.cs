@@ -1791,7 +1791,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 var claim = _dynamicsClient.Specialevents.Get(filter: filter).Value.FirstOrDefault();
                 var patchEvent = new MicrosoftDynamicsCRMadoxioSpecialevent();
 
-
                 patchEvent.ContactODataBind = _dynamicsClient.GetEntityURI("contacts", userSettings.ContactId);
 
                 // it may have an account too

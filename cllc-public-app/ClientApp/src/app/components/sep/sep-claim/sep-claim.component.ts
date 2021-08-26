@@ -15,6 +15,8 @@ export class SepClaimComponent implements OnInit {
   jobNumber = "<JOB_NUM>";
   associatedContactId = "<GUID_HERE>";
   user: User;
+  claimInfo: any;
+  dataLoaded: boolean;
   constructor(
     private store: Store<AppState>,
     private router: Router,
@@ -28,7 +30,8 @@ export class SepClaimComponent implements OnInit {
         this.jobNumber = pmap.get("jobNumber");
         this.sepDataService.getClaimInfo(this.jobNumber)
         .subscribe(data => {
-          this.associatedContactId = data?.associatedContactId;
+          this.claimInfo = data;
+          this.dataLoaded = true;
         });
       });
    }
