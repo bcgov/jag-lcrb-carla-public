@@ -187,6 +187,19 @@
                                                                 [value]="false">No
                                                             </mat-radio-button>
                                                         </mat-radio-group>
+                                                        <app-error-alert *ngIf="area.get('minorPresent').value">
+                                                          <p>If liquor service is permitted throughout the whole event site, minors are allowed
+                                                            to enter but must not drink, serve liquor or sell liquor or drink tickets. </p>
+                                                          <p>
+                                                            Anyone under 19 years of age is not allowed in beverage gardens or similar liquor
+                                                            service areas where the service of liquor is the primary focus, except as a
+                                                            professional entertainer. See the “Entertainers” section in the terms and
+                                                            condition manual for more information.
+                                                          </p>
+                                                          <p>
+                                                            Minors are not permitted to attend tasting events except as a professional entertainer.
+                                                          </p>
+                                                        </app-error-alert>
                                                     </app-field>
                                                     <app-field label="How many minors will be in the service area?"
                                                         *ngIf="area.get('minorPresent').value"
