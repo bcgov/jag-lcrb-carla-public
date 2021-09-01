@@ -162,6 +162,12 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
     return storageUnits > 0 && storageUnits < 1 ? 1 : storageUnits;
   }
 
+  editPrice(): boolean {
+    return this.sepApplication?.chargingForLiquorReason !== 'RaiseMoney' ||
+           this.sepApplication?.isLocalSignificance ||
+           this.sepApplication?.isMajorSignificance;
+  }
+
   storageMethodDescription(config: DrinkConfig): string {
     if (config.storageMethod === "kegs") {
       return `${config.storageMethod} of ${config.group}`;
@@ -174,7 +180,7 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
     if (!this.drinkTypes || !this.sepApplication) {
       return;
     }
-    const multiplier = this._app?.isGSTRegisteredOrg ? 1.25 : 1;
+    const multiplier = this._app?.isGSTRegisteredOrg ? 1.05 : 1;
     const beerDefaultPrice = (this.drinkTypes["Beer/Cider/Cooler"]?.pricePerServing || 0) * multiplier;
     const wineDefaultPrice = this.drinkTypes["Wine"]?.pricePerServing * multiplier || 0;
     const spiritsDefaultPrice = this.drinkTypes["Spirits"]?.pricePerServing * multiplier || 0;
