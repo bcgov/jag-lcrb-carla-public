@@ -188,16 +188,17 @@
                     matTooltipClass="custom-tooltip"
                     matTooltip="Private Events:
 
-                    Entry is limited to family, friends, an organization’s members or staff, invited guests and ticket holders. (Tickets must be sold or given away before the start time of the event. Tickets for hobbyist events cannot be sold.)
-
-                    Examples: social, cultural, recreational, religious, sporting or community events as well as family events such as weddings, anniversaries, or birthdays. Hobby brewer/vintner competitions are also private events.
+                    A private special event is an event where attendance is limited to invited guests, members and staff of an organization,
+                    or persons to whom advance tickets have been given or sold (tickets must not be sold at the door).
 
 
                     Public Events:
 
-                    Entry is open to anyone who wishes to participate or buy a ticket (either at the door or in advance of the event).
-
-                    Examples: events that are community or public celebrations, such as community festivals or outdoor concerts."
+                    A public special event is an event where anyone may attend, either by obtaining a ticket at the door or simply by entering
+                    the event location. Events are considered public if they are held in a place open to the public. An event (private) where
+                    advance tickets have been given or sold and the availability of liquor is being advertised (whether directly or indirectly
+                    such as a picture of a wine glass, etc. and/or liquor is in the name of the event) is a public event.
+                    "
                     #tooltip3="matTooltip">
                 </fa-icon>
             </div>
@@ -319,13 +320,11 @@
 
             </app-field>
 
-            <!--div>
-                <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip6.toggle()" matTooltip="Unless exempted, SEPs are not issued if the primary purpose of
-                an event is to gain individual or business profit.
-                    All proceeds from an event must be directed to a charitable purpose once expenses are paid."
-                    #tooltip6="matTooltip">
+            <div>
+                <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip8.toggle()" matTooltip="Liquor samples are smaller than standard serving size, usually provided for tasting-type events."
+                    #tooltip8="matTooltip">
                 </fa-icon>
-            </div-->
+            </div>
         </div>
 
 
@@ -338,12 +337,12 @@
                     <mat-radio-button color="primary" class="mr-3" [value]="true">Yes</mat-radio-button>
                     <mat-radio-button color="primary" class="mr-3" [value]="false">No</mat-radio-button>
                 </mat-radio-group>
-                <app-error-alert *ngIf="form.get('admissionFee').value">
+                <!--app-error-alert *ngIf="form.get('admissionFee').value">
                     <p>
                         If liquor is included in your admission price, please ensure that you declare your estimated
                         liquor costs on step 4.
                     </p>
-                </app-error-alert>
+                </app-error-alert-->
             </app-field>
 
             <div>

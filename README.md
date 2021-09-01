@@ -10,7 +10,7 @@ Technology Stack
 | Presentation | Angular 11 |
 | Business Logic | C Sharp - Dotnet Core 5.0 |
 | Microservices | C Sharp - Dotnet Core 5.0 |
-| Job Scheduling | Hangfire |
+| Job Scheduling | [Hangfire](http://hangfire.io) |
 | Front End Web Server | Nginx |
 | Application Server | Kestrel |
 | Data Storage | MS Dynamics On Premise V9 |
@@ -147,9 +147,16 @@ View the Console Logs.
 
 You will then have to CONFIRM the build by clicking on the related log item for the build that has been started.
 
+##Hangfire
+This system makes use of Hangfire for scheduling.  More information on Hangfire can be found at the website [hangfire.io](https://hangfire.io); the system uses a stock configuration of Hangfire.
+
+To login to a hangfire dashboard, forward traffic from the OpenShift pod for the service you wish to see the dashboard for, and access http://localhost:8080
+
+`oc port-forward <POD NAME> 8080:8080`
+
 ## Builds for supporting microservices
 
-Supporting microservices such as the PDF service, File Manager, Geocoder are built by starting the given Build Config.
+Supporting microservices such as the PDF service, File Manager, Geocoder, OneStop etc are built by starting the related Build Config.
 
 Navigate to Build Configs in the OpenShift web console, click on the given Build Config, and start the build with the Actions menu in the upper right hand side of the page.
 Note that you will need to Tag the given build using the CLI if your intent is to deploy to TEST or PROD.
