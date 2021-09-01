@@ -42,7 +42,7 @@ This service is a Dotnet Core 5.0 application.  As such you can use a C# IDE suc
 
 ## Testing
 
-This section describes concepts and tools necessary for testing the service.
+To test the system, create or update licences in order to populate the OneStop Queue entity in the case management system.  Testing should only be done in the DEV environment, and results may be observed by checking the OneStop queue records in the case management system.  The date sent field will be updated after each transaction, and the status will be updated.
 
 ### Curl
 
