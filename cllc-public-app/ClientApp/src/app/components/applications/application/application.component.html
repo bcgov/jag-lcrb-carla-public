@@ -1345,7 +1345,15 @@
           <mat-button-toggle [value]="false">No</mat-button-toggle>
         </mat-button-toggle-group>
       </div>
+
     </section>
+    <div class="question-label">
+      <app-error-alert *ngIf="isOpenedByLGForApproval && this.form.get('holdsOtherManufactureLicence1')">
+        If this applicant has answered YES to this question please contact LCRB (via email: <a href="mailto:LCRB.SLA@gov.bc.ca">LCRB.SLA@gov.bc.ca</a>)  prior to
+        starting your related processes (i.e. for conducting public input and providing comment) to confirm whether these steps are required for this application.
+        When an applicant proposes to have overlapping service areas it is often not necessary to conduct further public input or provide comment
+      </app-error-alert>
+      </div>
   </mat-card>
 
 </section>
@@ -1376,6 +1384,13 @@
       </div>
     </section>
   </mat-card>
+  <div class="question-label">
+    <app-error-alert *ngIf="isOpenedByLGForApproval && this.form.get('holdsOtherManufactureLicence2')">
+      If this applicant has answered YES to this question please contact LCRB (via email: <a href="mailto:LCRB.SLA@gov.bc.ca">LCRB.SLA@gov.bc.ca</a>)  prior to
+      starting your related processes (i.e. for conducting public input and providing comment) to confirm whether these steps are required for this application.
+      When an applicant proposes to have overlapping service areas it is often not necessary to conduct further public input or provide comment
+    </app-error-alert>
+    </div>
 </section>
 
 <!-- Capacity Area -->
