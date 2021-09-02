@@ -435,15 +435,29 @@
             <hr>
           </div>
         </div>
-        <mat-form-field class="w-100" appearance="outline">
-          <mat-label>Add T&amp;C</mat-label>
-          <textarea class="w-100" matInput [formControl]="newTnCControl" rows="5"></textarea>
-        </mat-form-field>
-        <button mat-raised-button [disabled]="!newTnCControl.value" (click)="addTAndC()" color="primary">Add
-          T&amp;C</button>
-      </section>
-      <section class="d-flex flex-row-reverse">
-        <button (click)="saveTermsAndConditions()" mat-raised-button color="primary">Save T&amp;Cs</button>
+
+        <div *ngIf="canEditTnC()">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Add T&amp;C</mat-label>
+            <textarea class="w-100" matInput [formControl]="newTnCControl" rows="5"></textarea>
+          </mat-form-field>
+          <button mat-raised-button [disabled]="!newTnCControl.value" (click)="addTAndC()" color="primary">Add
+            T&amp;C</button>
+
+          <section class="d-flex flex-row-reverse">
+            <button (click)="saveTermsAndConditions()" mat-raised-button color="primary">Save T&amp;Cs</button>
+          </section>
+        </div>
+        <div *ngIf="!canEditTnC()">
+          <app-error-alert>
+            <p *ngIf="isWithin48()">
+              As this event is scheduled within two business days, please contact the LCRB if you need to add a Term and Condition
+            </p>
+            <p *ngIf="!isWithin48()">
+              This event has past and the Terms and Conditions cannot be edited.
+            </p>
+          </app-error-alert>
+        </div>
       </section>
     </mat-tab>
   </mat-tab-group>
