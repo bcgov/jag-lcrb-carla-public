@@ -59,22 +59,9 @@ export class TotalServingsComponent implements OnInit {
     this.total_servingsSlider = this.total_servings;
 
     this.options = {
-      showTicks: true,
+      showTicks: false,
       floor: 1,
-      ceil: this.max_servings,
-      getLegend: (value) => {
-        let legend = "";
-        if (value === 1) {
-          legend = "Minimum";
-        }
-        if (value === this.suggested_servings) {
-          legend = `Suggested ${value}`;
-        }
-        if (value === this.max_servings) {
-          legend = `Maximum`;
-        }
-        return legend;
-      }
+      ceil: this.max_servings
     };
     // console.log("setting servings:", this.total_guests, this.total_minors, this.total_service_hours, this.suggested_servings, this.max_servings)
 
