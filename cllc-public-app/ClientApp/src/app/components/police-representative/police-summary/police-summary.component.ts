@@ -14,7 +14,7 @@ import { Contact } from "@models/contact.model";
 import { AcceptDialogComponent } from "@components/police-representative/police-summary/accept-dialog/accept-dialog.component";
 import { DenyDialogComponent } from "./deny-dialog/deny-dialog.component";
 import { CancelDialogComponent } from "@components/police-representative/police-summary/cancel-dialog/cancel-dialog.component";
-import { isBefore } from "date-fns";
+import { isBefore, differenceInBusinessDays } from "date-fns";
 
 import {
   faAward,
@@ -185,6 +185,16 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
   removeTnCAt(index: number) {
     this.TnConditions.removeAt(index);
   }
+
+
+  // we will show a message and prevent editing within 48 hours of the event happening.
+  canEditTnC(): boolean {
+    return  !this.isWithin48() && isBefore(this.sepApplication?.eventStartDate, new Date());
+  }
+  isWithin48(): boolean {
+    return differenceInBusinessDays( this.sepApplication?.eventStartDate, new Date() ) < 2
+  }
+
 
   saveTermsAndConditions() {
     this.specialEventsDataService.updateSepTermsAndConditions(this.form.value.termsAndConditions, this.specialEventId)
