@@ -3,44 +3,52 @@
         Use the tool below to declare the appropriate number of drink servings for your event. You can adjust the total
         number at any time before you submit your application.
     </p>
-    <p><strong>The quantity of liquor purchased for the event must not exceed the quantity specified on your permit.</strong></p>
+    <p><strong>The quantity of liquor purchased for the event must not exceed the quantity specified on your
+            permit.</strong></p>
 
     <p>
         Hosting a liquor tasting? Use the conversion tool below.
     </p>
     <mat-divider></mat-divider>
 
-    <mat-card class="d-flex"
-        style="margin-bottom: 25px; background-color:#e1e8f2;  border-radius: 5px; padding: 16px;">
+    <mat-card class="d-flex" style="margin-bottom: 25px; background-color:#e1e8f2;  border-radius: 5px; padding: 16px;">
 
         <!--div class="slider-box"-->
         <section class="w-100 pl-3 pr-3">
             <div class="ml-3 mr-3">
-                <ngx-slider *ngIf="options" [value]="total_servingsSlider" (valueChange)="total_servings = $event;" [options]="options" ng-class='{red : isOver()}'></ngx-slider>
+                <ngx-slider *ngIf="options" [value]="total_servingsSlider" (valueChange)="total_servings = $event;"
+                    [options]="options" ng-class='{red : isOver()}'></ngx-slider>
             </div>
         </section>
 
         <!--/div-->
 
-        <div class="flex-fill slider-box" style="text-align:center; line-height:normal; padding-left: 15px; margin-left: 15px; border-left: solid #ccc 1px;">
-            <input type="number" [ngStyle]="{'border-color': !isValid() ? 'red': '#ccc'}"
-            [max]="max_servings" [min]="1" [(ngModel)]="total_servings" (ngModelChange)="totalServingsChange($event)" name="totalServings"
-                class="form-control bev-slider"
-                style="text-align:center; height:50px; font-size:20px; font-weight: 900;"><br>
-            <strong>Declared Maximum Servings</strong><br>
+        <div class="flex-fill slider-box"
+            style="text-align:center; line-height:normal; padding-left: 15px; margin-left: 15px; border-left: solid #ccc 1px;">
 
+            <mat-form-field appearance="outline" color="primary" floatLabel="always">
+                <mat-label>Declared Maximum Servings</mat-label>
+                <input matInput type="number" name="totalServings" [(ngModel)]="total_servings"
+                    (ngModelChange)="totalServingsChange($event)" [max]="max_servings" [min]="1"
+                    class="bev-slider  text-center" placeholder="0">
+            </mat-form-field>
             <ng-container *ngIf="!isValid()">
                 <span class="error-states">Please enter a number greater than 0</span> <br>
             </ng-container>
-
-            <small>You can enter a different number of <br>drinks here.</small>
+            <section class="d-flex flex-column">
+                <!-- <strong>Declared Maximum Servings</strong><br> -->
+                <small>You can enter a different number of drinks here.</small>
+                <span>Suggested: {{suggested_servings}}</span>
+            </section>
         </div>
     </mat-card>
 
     <section style="padding-bottom: 15px;">
-      <app-error-alert *ngIf="(total_servings - max_servings) > max_servings * .25" type="alert">
-        The number you have entered exceeds maximum suggested drink servings by over 25%. Remember, you are responsible for the safety of your guest and are required to prevent over-service and intoxication. Are you sure you want to continue with this amount?
-      </app-error-alert>
+        <app-error-alert *ngIf="(total_servings - max_servings) > max_servings * .25" type="alert">
+            The number you have entered exceeds maximum suggested drink servings by over 25%. Remember, you are
+            responsible for the safety of your guest and are required to prevent over-service and intoxication. Are you
+            sure you want to continue with this amount?
+        </app-error-alert>
     </section>
 
 
