@@ -358,7 +358,7 @@
 
             <h4>LIQUOR QUANTITIES</h4>
 
-            <div class="d-flex" style="white-space: nowrap; font-weight:900;">
+            <!--div class="d-flex" style="white-space: nowrap; font-weight:900;">
               <label>Total Servings:</label> <span class="fee-amount">{{application?.totalServings || 0}}</span>
           </div>
 
@@ -370,8 +370,13 @@
             </div>
             <div class="d-flex" style="white-space: nowrap; font-weight:900;">
                 <label>Spirits</label> <span class="fee-amount">{{application?.spirits || 0}}</span>
-            </div>
+            </div-->
 
+            <table>
+              <tr><th class="forecast">&nbsp;</th><th class="forecast">No. Servings</th><th class="forecast">Sell Price</th><th class="forecast">Est. Revenue</th><th class="forecast">Est. Cost</th></tr>
+              <tr *ngFor="let f of application?.drinksSalesForecasts;"><td class="forecast"><label>{{f.name.substring(f.name.indexOf("-")+2,f.name.lastIndexOf("-"))}}</label></td><td class="forecast">{{f.estimatedServings}}</td><td class="forecast">{{f.pricePerServing | currency}}</td><td class="forecast">{{f.estimatedRevenue | currency}}</td><td class="forecast">{{f.estimatedCost | currency}}</td></tr>
+
+            </table>
 
 
             <hr>
