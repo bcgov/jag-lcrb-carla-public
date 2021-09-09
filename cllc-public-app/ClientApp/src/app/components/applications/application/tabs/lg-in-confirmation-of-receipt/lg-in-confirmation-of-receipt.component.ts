@@ -33,6 +33,7 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
   showValidationMessages: boolean;
   providingResolution: boolean;
   lgHasApproved = false;
+  resolutionRequired = true;
 
   constructor(private applicationDataService: ApplicationDataService,
     private snackBar: MatSnackBar,
@@ -53,6 +54,7 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
       lgNoObjection: ["", []] // not required
     });
     this.lgHasApproved = this?.application?.lGApprovalDecision  === 'Approved';
+    this.resolutionRequired = !this?.application?.applicationType?.showLgNoObjection
 
     this.form.patchValue(this.application);
     if (this.disableForm || this.lgHasApproved) {
@@ -79,7 +81,7 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
   }
 
   OptOutOfComment() {
-    if (!this.isValid()) {
+    if (!this.isValid(this.resolutionRequired)) {
       return;
     }
 
@@ -115,7 +117,7 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
 
 
   RejectApplication() {
-    if (!this.isValid(true)) {
+    if (!this.isValid(this.resolutionRequired)) {
       return;
     }
 
@@ -156,7 +158,8 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
     if (!this.isValid()) {
       return;
     }
-    const filesUploaded = (this.uploadedResolutionDocuments > 0);
+    const filesUploaded = (this.uploadedResolutionDocuments > 0 || !this.resolutionRequired);
+
     this.showComfirmation("Approve", filesUploaded).subscribe(result => {
       if (result === "OK") {
         this.approvingApplication = true;
@@ -209,9 +212,12 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
 
   ProvideResolution() {
     // Update the status if a resolution file was uploaded and the status is pending
+    debugger;
     if (this.isOpenedByLGForApproval &&
-      this.uploadedResolutionDocuments > 0 &&
-      this.application.lGApprovalDecision == "Pending") {
+      ((this.uploadedResolutionDocuments > 0
+          && this.application.lGApprovalDecision == "Pending")
+          || !this.resolutionRequired)
+      ) {
       const data = {
         ...this.application,
         ...this.form.value,

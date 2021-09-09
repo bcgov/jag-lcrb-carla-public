@@ -91,6 +91,15 @@ namespace Gov.Lclb.Cllb.Public.Models
                         .ToList();
                 }
 
+                var forecast = specialEvent?.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent;
+
+                if (forecast?.Count > 0)
+                {
+                    result.DrinksSalesForecasts = 
+                        forecast.Select(specialEvent => specialEvent.ToViewModel())
+                        .ToList();
+                }
+
                 var drinkTypes = _dynamicsClient.Sepdrinktypes.Get().Value
                             .ToList();
 
