@@ -1577,8 +1577,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         [HttpPost("police/{id}/deny")]
-        public IActionResult PoliceDeny(string id)
+        public IActionResult PoliceDeny(string id, SepPoliceReviewReason reasonText)
         {
+
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             // get the account details.
             var userAccount = _dynamicsClient.GetAccountById(userSettings.AccountId);
@@ -1598,7 +1599,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // update the given special event.
             var patchEvent = new MicrosoftDynamicsCRMadoxioSpecialevent()
             {
-                AdoxioPoliceapproval = 845280001 // Denied  
+                AdoxioPoliceapproval = 845280001, // Denied 
+                AdoxioDenialreason = reasonText.Reason,
+                AdoxioDatepoliceapproved = DateTime.Now
             };
             try
             {
@@ -1615,7 +1618,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         [HttpPost("police/{id}/cancel")]
-        public IActionResult PoliceCancel(string id)
+        public IActionResult PoliceCancel(string id, SepPoliceReviewReason reasonText)
         {
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             // get the account details.
@@ -1635,7 +1638,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // update the given special event.
             var patchEvent = new MicrosoftDynamicsCRMadoxioSpecialevent()
             {
-                AdoxioPoliceapproval = 845280002 // Cancelled
+                AdoxioPoliceapproval = 845280002, // Cancelled
+                AdoxioDenialreason = reasonText.Reason,
+                AdoxioDatepoliceapproved = DateTime.Now
             };
             try
             {
@@ -1819,5 +1824,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     {
         public string JobNumber { get; set; }
         public string AssociatedContactId { get; set; }
+    }
+
+    public class SepPoliceReviewReason
+    {
+        public string Reason {get; set; }
     }
 }
