@@ -100,10 +100,11 @@
                   DENY LIQUOR SERVICE&nbsp;
                 </button>
                 <!-- if it's been reviewed it must be revoked -->
-                <button class="btn btn-secondary" *ngIf="!this.isDenied() && this.isReviewed()" (click)="revoke()"
+                <button class="btn btn-secondary" *ngIf="!this.isDenied() && this.isReviewed() && !isWithin48()" (click)="revoke()"
                   style="width: 230px;">
-                  REVOKE LIQUOR SERVICE&nbsp;
+                  CANCEL LIQUOR SERVICE&nbsp;
                 </button>
+                <p *ngIf="isWithin48()"><em>Please contact LCRB if you wish to recommend cancellation of liquor service for this event.</em></p>
                 </section>
 
                 <section *ngIf="this.isEventPast()">This event has already past.</section>
@@ -328,7 +329,7 @@
 
           </div>
 
-          <div class="d-flex" style="white-space: nowrap; font-weight:900;">
+          <!--div class="d-flex" style="white-space: nowrap; font-weight:900;">
             <label>Beer</label> <span class="fee-amount">{{sepApplication?.beer || 0}}</span>
           </div>
           <div class="d-flex" style="white-space: nowrap; font-weight:900;">
@@ -336,7 +337,14 @@
           </div>
           <div class="d-flex" style="white-space: nowrap; font-weight:900;">
             <label>Spirits</label> <span class="fee-amount">{{sepApplication?.spirits || 0}}</span>
-          </div>
+          </div-->
+
+          <table>
+            <tr><th class="forecast">&nbsp;</th><th class="forecast">No. Servings</th><th class="forecast">Sell Price</th><th class="forecast">Est. Revenue</th><th class="forecast">Est. Cost</th></tr>
+            <tr *ngFor="let f of sepApplication?.drinksSalesForecasts;"><td class="forecast"><label>{{f.name.substring(f.name.indexOf("-")+2,f.name.lastIndexOf("-"))}}</label></td><td class="forecast">{{f.estimatedServings}}</td><td class="forecast">{{f.pricePerServing | currency}}</td><td class="forecast">{{f.estimatedRevenue | currency}}</td><td class="forecast">{{f.estimatedCost | currency}}</td></tr>
+
+          </table>
+
 
           <hr>
           <div class="d-flex">
@@ -435,15 +443,31 @@
             <hr>
           </div>
         </div>
-        <mat-form-field class="w-100" appearance="outline">
-          <mat-label>Add T&amp;C</mat-label>
-          <textarea class="w-100" matInput [formControl]="newTnCControl" rows="5"></textarea>
-        </mat-form-field>
-        <button mat-raised-button [disabled]="!newTnCControl.value" (click)="addTAndC()" color="primary">Add
-          T&amp;C</button>
-      </section>
-      <section class="d-flex flex-row-reverse">
-        <button (click)="saveTermsAndConditions()" mat-raised-button color="primary">Save T&amp;Cs</button>
+
+        <div *ngIf="canEditTnC()">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Add T&amp;C</mat-label>
+            <textarea class="w-100" matInput [formControl]="newTnCControl" rows="5"></textarea>
+          </mat-form-field>
+          <button mat-raised-button [disabled]="!newTnCControl.value" (click)="addTAndC()" color="primary">Add
+            T&amp;C</button>
+
+          <section class="d-flex flex-row-reverse">
+            <button (click)="saveTermsAndConditions()" mat-raised-button color="primary">Save T&amp;Cs
+              <mat-progress-bar class="mt-1" *ngIf="savedTNC" mode="indeterminate"></mat-progress-bar>
+            </button>
+          </section>
+        </div>
+        <div *ngIf="!canEditTnC()">
+          <app-error-alert>
+            <p *ngIf="isWithin48()">
+              As this event is scheduled within two business days, please contact the LCRB if you need to add a Term and Condition
+            </p>
+            <p *ngIf="isEventPast()">
+              This event has past and the Terms and Conditions cannot be edited.
+            </p>
+          </app-error-alert>
+        </div>
       </section>
     </mat-tab>
   </mat-tab-group>

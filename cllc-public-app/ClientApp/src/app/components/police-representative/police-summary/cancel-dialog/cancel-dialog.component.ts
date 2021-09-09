@@ -8,17 +8,19 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class CancelDialogComponent implements OnInit {
 
+  reason: string;
+
   constructor(public dialogRef: MatDialogRef<CancelDialogComponent>) {
   }
   ngOnInit(): void {
   }
 
   close() {
-    this.dialogRef.close(false);
+    this.dialogRef.close([false]);
   }
 
   cancel() {
-    this.dialogRef.close(true);
+    this.dialogRef.close([true, this.reason]);
   }
 
 }

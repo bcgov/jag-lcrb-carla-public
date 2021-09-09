@@ -78,13 +78,13 @@ export class SpecialEventsDataService extends DataService {
       .pipe(catchError(this.handleError));
   }
 
-  policeDenySepApplication(id: string) {
-    return this.http.post<string>(`api/special-events/police/${id}/deny`, {}, { headers: this.headers })
+  policeDenySepApplication(id: string, reason: string) {
+    return this.http.post<string>(`api/special-events/police/${id}/deny`, {reason}, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
-  policeCancelSepApplication(id: string) {
-    return this.http.post<string>(`api/special-events/police/${id}/cancel`, {}, { headers: this.headers })
+  policeCancelSepApplication(id: string, reason: string) {
+    return this.http.post<string>(`api/special-events/police/${id}/cancel`,{reason}, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
@@ -137,7 +137,7 @@ export class SpecialEventsDataService extends DataService {
     return this.http.get<any>(apiPath, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
-  
+
   linkClaimToContact(jobNumber: string) {
     const apiPath = `api/special-events/link-claim-to-contact/${jobNumber}`;
     return this.http.get<any>(apiPath, { headers: this.headers })
