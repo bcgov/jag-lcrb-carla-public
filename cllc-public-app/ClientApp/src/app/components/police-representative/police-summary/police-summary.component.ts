@@ -14,7 +14,7 @@ import { Contact } from "@models/contact.model";
 import { AcceptDialogComponent } from "@components/police-representative/police-summary/accept-dialog/accept-dialog.component";
 import { DenyDialogComponent } from "./deny-dialog/deny-dialog.component";
 import { CancelDialogComponent } from "@components/police-representative/police-summary/cancel-dialog/cancel-dialog.component";
-import { isBefore, differenceInBusinessDays } from "date-fns";
+import { isBefore, differenceInBusinessDays, differenceInCalendarDays } from "date-fns";
 
 import {
   faAward,
@@ -87,6 +87,7 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
   newTnCControl = this.fb.control("");
   originator: string;
   saveData: any;
+  savedTNC: boolean;
 
   constructor(private fb: FormBuilder,
     private cd: ChangeDetectorRef,
@@ -189,14 +190,20 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
 
   // we will show a message and prevent editing within 48 hours of the event happening.
   canEditTnC(): boolean {
-    return  !this.isWithin48() && isBefore(this.sepApplication?.eventStartDate, new Date());
-  }
-  isWithin48(): boolean {
-    return differenceInBusinessDays( this.sepApplication?.eventStartDate, new Date() ) < 2
+    return  !this.isWithin48() && !this.isEventPast();
   }
 
+  isWithin48(): boolean {
+    let diff = differenceInBusinessDays(new Date(this.sepApplication?.eventStartDate), new Date() );
+    return  diff < 2 && diff >= 0;
+  }
+
+  isEventPast(): boolean {
+    return isBefore(new Date(this.sepApplication?.eventStartDate), new Date());
+  }
 
   saveTermsAndConditions() {
+    this.savedTNC = true;
     this.specialEventsDataService.updateSepTermsAndConditions(this.form.value.termsAndConditions, this.specialEventId)
       .subscribe((data: SepTermAndCondtion[]) => {
         this.TnConditions.clear();
@@ -209,6 +216,11 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
           }));
         });
         this.saveData = this.form.value;
+        this.savedTNC = false;
+        this.snackBar.open('T&C Added', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+      }, error => {
+        this.savedTNC = false;
+        this.snackBar.open('Error T&C Not Added', 'Error', { duration: 2500, panelClass: ['red-snackbar'] });
       });
   }
 
@@ -307,9 +319,7 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
     }
   }
 
-  isEventPast(): boolean {
-    return isBefore(new Date(this.sepApplication?.eventStartDate), new Date());
-  }
+
 
   getTypeIcon(): IconDefinition {
     switch (this.sepApplication?.privateOrPublic) {
@@ -367,10 +377,10 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
     const dialogRef = this.dialog.open(DenyDialogComponent, dialogConfig);
     dialogRef.afterClosed()
       // .pipe(takeWhile(() => this.componentActive))
-      .subscribe(cancelApplication => {
+      .subscribe(([cancelApplication, reason]) => {
         if (cancelApplication) {
 
-          this.busy = this.specialEventsDataService.policeDenySepApplication(this.specialEventId)
+          this.busy = this.specialEventsDataService.policeDenySepApplication(this.specialEventId, reason)
             .subscribe(() => {
               this.snackBar.open("Denied application.",
                 "Success",
@@ -402,10 +412,10 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
     const dialogRef = this.dialog.open(CancelDialogComponent, dialogConfig);
     dialogRef.afterClosed()
       // .pipe(takeWhile(() => this.componentActive))
-      .subscribe(cancelApplication => {
+      .subscribe(([cancelApplication, reason]) => {
         if (cancelApplication) {
 
-          this.busy = this.specialEventsDataService.policeCancelSepApplication(this.specialEventId)
+          this.busy = this.specialEventsDataService.policeCancelSepApplication(this.specialEventId, reason)
             .subscribe(() => {
               this.snackBar.open("Cancelled application.",
                 "Success",

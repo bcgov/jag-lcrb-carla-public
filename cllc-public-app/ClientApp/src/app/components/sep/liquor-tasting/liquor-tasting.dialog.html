@@ -1,0 +1,52 @@
+<div class="position-relative">
+  <button mat-button class="btn-close" [mat-dialog-close]="true">
+    <fa-icon [icon]="faTimes">close</fa-icon>
+  </button>
+  <div class="padded-section pt-3">
+    <h3 mat-dialog-title>Liquor Tasting Calculator</h3>
+  </div>
+  <mat-dialog-content style="border: solid #ccc 1px;">
+
+      <section class="tool-container">
+          <h3>How to use this tool?</h3>
+              <h4>Step 1</h4>
+
+                  <p>
+                      Input the size of your tasting drink in ounces. In the case of spirits, the tasting size is
+                      fixed and cannot be adjusted.
+                  </p>
+                  <p>
+                      Note: if the number of standard drinks is showing zero, you may have to increase the number of
+                      tastings until a whole number is calculated by the tool.
+                  </p>
+
+
+
+              <h4>Step 2</h4>
+
+                  <p>
+                      Input the number of tastings you would like to calculate for. The number of standard drinks will
+                      be calculated in the text box automatically.
+                  </p>
+
+
+              <h4>Step 3</h4>
+
+                  <p>
+                      Input the price per tasting drink you would like to calculate. The price per standard sized
+                      drink will be calculated in the next box automatically.
+                  </p>
+
+              <h4>Step 4</h4>
+                  <p>
+                      Press the "Clear" button to reset the entered values if you would like to use the tool again.
+                  </p>
+
+          <app-conversion-tool toolType="beer"></app-conversion-tool>
+
+          <app-conversion-tool toolType="wine"></app-conversion-tool>
+
+          <app-conversion-tool toolType="spirits"></app-conversion-tool>
+      </section>
+  </mat-dialog-content>
+</div>
