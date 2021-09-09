@@ -3,7 +3,7 @@
 <div [ngBusy]="[busy]"></div>
 <div class="row mb-3">
     <div class="col" >
-      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z0 w-100" style="padding:5px;">
+      <table mat-table [dataSource]="dataSource" matSortActive="eventStartDate" matSortDirection="desc" matSort class="mat-elevation-z0 w-100" style="padding:5px;">
         <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
 
