@@ -4,6 +4,7 @@ import { StarterChecklistComponent } from '@components/sep/starter-checklist/sta
 import { faCocktail, faCalculator, faCheck, faQuestion, faShoppingCart, faPencilAlt, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { User } from '@models/user.model';
 import { DrinkPlannerDialog } from '../drink-planner/drink-planner.dialog';
+import { LiquorTastingDialog} from '../liquor-tasting/liquor-tasting.dialog';
 
 @Component({
   selector: 'app-resources',
@@ -56,5 +57,18 @@ export class ResourcesComponent implements OnInit {
     // open dialog, get reference and process returned data from dialog
     const dialogRef = this.dialog.open(DrinkPlannerDialog, dialogConfig);
     dialogRef.afterClosed().subscribe(() => { });
+  }
+
+  openTastingPlanner() {
+    const dialogConfig = {
+      disableClose: false,
+      autoFocus: true,
+      width: '800px',
+      data: {}
+    };
+
+    const dialogRef = this.dialog.open(LiquorTastingDialog, dialogConfig);
+    dialogRef.afterClosed().subscribe(() => { });
+
   }
 }

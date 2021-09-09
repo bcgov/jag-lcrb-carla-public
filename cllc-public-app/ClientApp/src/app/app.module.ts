@@ -285,6 +285,7 @@ import { ServiceCardProfileComponent } from "@components/servicecard-profile/ser
 import { ErrorAlertComponent } from './components/sep/error-alert/error-alert.component';
 import { DrinkPlannerComponent } from "@components/sep/drink-planner/drink-planner.component";
 import { DrinkPlannerDialog } from "@components/sep/drink-planner/drink-planner.dialog";
+import { LiquorTastingDialog} from "@components/sep/liquor-tasting/liquor-tasting.dialog";
 import { UserMenuComponent } from "@components/user-menu/user-menu.component";
 import { ServicecardUserConfirmationComponent } from "@components/sep/servicecard-user-confirmation/servicecard-user-confirmation.component";
 import { ServicecardUserTermsAndConditionsComponent } from "@components/sep/servicecard-user-terms-and-conditions/servicecard-user-terms-and-conditions.component";
@@ -471,6 +472,7 @@ import { SepClaimComponent } from './components/sep/sep-claim/sep-claim.componen
     ErrorAlertComponent,
     DrinkPlannerComponent,
     DrinkPlannerDialog,
+    LiquorTastingDialog,
     UserMenuComponent,
     ServicecardUserConfirmationComponent,
     ServicecardUserTermsAndConditionsComponent,
@@ -664,6 +666,7 @@ import { SepClaimComponent } from './components/sep/sep-claim/sep-claim.componen
     ModalComponent,
     StarterChecklistComponent,
     DrinkPlannerDialog,
+    LiquorTastingDialog,
     PoliceSummaryComponent,
     AcceptDialogComponent,
     DenyDialogComponent,
