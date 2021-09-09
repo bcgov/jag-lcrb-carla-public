@@ -27,18 +27,17 @@
             style="text-align:center; line-height:normal; padding-left: 15px; margin-left: 15px; border-left: solid #ccc 1px;">
 
             <mat-form-field appearance="outline" color="primary" floatLabel="always">
-                <mat-label>Declared Maximum Servings</mat-label>
+                <mat-label><strong>Declared No. Servings:</strong></mat-label>
                 <input matInput type="number" name="totalServings" [(ngModel)]="total_servings"
                     (ngModelChange)="totalServingsChange($event)" [max]="max_servings" [min]="1"
-                    class="bev-slider  text-center" placeholder="0">
+                    class="bev-slider  text-center" placeholder="0" style="font-size: large; font-weight:900;">
             </mat-form-field>
             <ng-container *ngIf="!isValid()">
                 <span class="error-states">Please enter a number greater than 0</span> <br>
             </ng-container>
             <section class="d-flex flex-column">
                 <!-- <strong>Declared Maximum Servings</strong><br> -->
-                <small>You can enter a different number of drinks here.</small>
-                <span>Suggested: {{suggested_servings}}</span>
+                <span><em>Suggested No. Servings: {{suggested_servings}}</em></span>
             </section>
         </div>
     </mat-card>
@@ -59,65 +58,7 @@
         responsible for the safety of your guests and are required to prevent over-service and intoxication.
     </p>
 
-    <mat-expansion-panel>
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                HOSTING A LIQUOR TASTING? USE THIS CONVERSION TOOL TO ESTIMATE YOUR NUMBER OF STANDARD SERVINGS
-            </mat-panel-title>
-        </mat-expansion-panel-header>
-        <section class="tool-container">
-            <h3>HOW TO USE THIS TOOL?</h3>
 
-            <div class="d-flex">
-                <label>Step 1</label>
-                <section>
-                    <p>
-                        Input the size of your tasting drink in ounces. In the case of spirits, the tasting size is
-                        fixed and cannot be adjusted.
-                    </p>
-                    <p>
-                        Note: if the number of standard drinks is showing zero, you may have to increase the number of
-                        tastings until a whole number is calculated by the tool.
-                    </p>
-                </section>
-            </div>
-
-            <div class="d-flex">
-                <label>Step 2</label>
-                <section>
-                    <p>
-                        Input the number of tastings you would like to calculate for. The number of standard drinks will
-                        be calculated in the text box automatically.
-                    </p>
-                </section>
-            </div>
-
-            <div class="d-flex">
-                <label>Step 3</label>
-                <section>
-                    <p>
-                        Input the price per tasting drink you would like to calculate. The price per standard sized
-                        drink will be calculated in the next box automatically.
-                    </p>
-                </section>
-            </div>
-
-            <div class="d-flex">
-                <label>Step 4</label>
-                <section>
-                    <p>
-                        Press the "Clear" button to reset the entered values if you would like to use the tool again.
-                    </p>
-                </section>
-            </div>
-
-            <app-conversion-tool toolType="beer"></app-conversion-tool>
-
-            <app-conversion-tool toolType="wine"></app-conversion-tool>
-
-            <app-conversion-tool toolType="spirits"></app-conversion-tool>
-        </section>
-    </mat-expansion-panel>
 
     <section class="pt-3">
         <button mat-raised-button color="secondary" class="mr-3" matStepperPrevious>BACK</button>
