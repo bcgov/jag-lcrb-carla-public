@@ -85,9 +85,9 @@
         <mat-form-field appearance="outline" floatLabel="always" *ngIf="hideGuestsAndHours">
           <mat-label *ngIf="!editPrice()">Maximum Drink Price</mat-label>
           <mat-label *ngIf="editPrice()">Average Drink Price</mat-label>
-          <input matInput type="number" [formControlName]="getAVControlName(item.group)" class="average-price"
+          <input matInput  [formControlName]="getAVControlName(item.group)" class="average-price"
             placeholder="0.00" [readonly]="!editPrice()"
-            [disabled]="!editPrice()" #avInput step="any">
+            [disabled]="!editPrice()" #avInput step="any" currencyMask [options]="{ prefix: '', thousands: ',', decimal: '.' }" />
           <span matPrefix>$&nbsp;</span>
           <mat-error *ngIf="!form.get(getAVControlName(item.group)).valid">{{getErrorMessage(getAVControlName(item.group))}}</mat-error>
         </mat-form-field>
