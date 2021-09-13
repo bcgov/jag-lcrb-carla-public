@@ -28,7 +28,7 @@ export class MyJobsComponent implements OnInit {
   availableContacts = [];
   dataSourceInProgress = new MatTableDataSource<PoliceTableElement>();
   dataSourcePoliceApproved = new MatTableDataSource<PoliceTableElement>();
-  dataSourceIssued = new MatTableDataSource<PoliceTableElement>();
+  dataSourcePoliceDenied = new MatTableDataSource<PoliceTableElement>();
 
   selectedIndex = 0;
   value: any = {};
@@ -62,7 +62,7 @@ export class MyJobsComponent implements OnInit {
       .subscribe(myApplications => {
         this.dataSourceInProgress.data = myApplications.inProgress;
         this.dataSourcePoliceApproved.data = myApplications.policeApproved;
-        this.dataSourceIssued.data = myApplications.issued;        
+        this.dataSourcePoliceDenied.data = myApplications.policeDenied;        
       });
   }
 

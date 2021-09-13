@@ -3,6 +3,16 @@
   <p>Here is a list of all SEP applications. Click <strong>Assign</strong> to add an application to your My Jobs list. You may sort
     applications by clicking on the column headings below. </p>
   <div [ngBusy]="[busy]"></div>
-  <app-police-grid [currentUser]="currentUser" [dataSource]="dataSource" [availableContacts]="availableContacts"></app-police-grid>
+  <mat-tab-group [selectedIndex]="selectedIndex" mat-align-tabs="start">
+    <mat-tab label="In Progress">
+        <app-police-grid [currentUser]="currentUser" [dataSource]="dataSourceInProgress" [availableContacts]="availableContacts" (saved)="selectedIndex = 1;"></app-police-grid>
+    </mat-tab>
+    <mat-tab label="Approved / Issued">
+      <app-police-grid [currentUser]="currentUser" [dataSource]="dataSourcePoliceApproved" [availableContacts]="availableContacts" (saved)="selectedIndex = 2;"></app-police-grid>
+    </mat-tab>
+    <mat-tab label="Denied / Cancelled">
+      <app-police-grid [currentUser]="currentUser" [dataSource]="dataSourcePoliceDenied" [availableContacts]="availableContacts" (saved)="selectedIndex = 3;"></app-police-grid>
+    </mat-tab>
+  </mat-tab-group>
 
 </div>
