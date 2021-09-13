@@ -6,7 +6,7 @@ import { DataService } from "./data.service";
 import { SepApplication, SepTermAndCondtion } from "@models/sep-application.model";
 import { SepApplicationSummary } from "@models/sep-application-summary.model";
 import { SepDrinkType } from "@models/sep-drink-type.model";
-import { SepPoliceMyJobs } from "@models/sep-police-my-jobs";
+import { SepPoliceJobSummary } from "@models/sep-police-job-summary";
 import { SepPoliceHome } from "@models/sep-police-home";
 import { Contact } from "@models/contact.model";
 
@@ -114,15 +114,15 @@ export class SpecialEventsDataService extends DataService {
       .pipe(catchError(this.handleError));
   }
 
-  getPoliceApprovalSepApplications(): Observable<SepApplicationSummary[]> {
+  getPoliceApprovalSepApplications(): Observable<SepPoliceJobSummary> {
     const apiPath = `api/special-events/police/all`;
-    return this.http.get<SepApplicationSummary[]>(apiPath, { headers: this.headers })
+    return this.http.get<SepPoliceJobSummary>(apiPath, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
-  getPoliceApprovalMySepApplications(): Observable<SepPoliceMyJobs> {
+  getPoliceApprovalMySepApplications(): Observable<SepPoliceJobSummary> {
     const apiPath = `api/special-events/police/my`;
-    return this.http.get<SepPoliceMyJobs>(apiPath, { headers: this.headers })
+    return this.http.get<SepPoliceJobSummary>(apiPath, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 

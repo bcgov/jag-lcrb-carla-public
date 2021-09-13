@@ -1,7 +1,7 @@
 import { SepApplicationSummary } from "./sep-application-summary.model";
 
-export class SepPoliceMyJobs {
+export class SepPoliceJobSummary {
     inProgress: SepApplicationSummary[]; 
     policeApproved : SepApplicationSummary[];
-    issued : SepApplicationSummary[];
+    policeDenied : SepApplicationSummary[];
 }
