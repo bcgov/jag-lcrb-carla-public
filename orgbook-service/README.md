@@ -41,3 +41,11 @@ This is done in a situation such as DEV or TEST when the wallet database is lost
     - Action
       - `Add the orgbook organization link and success status to the account`
 
+## Test procedure
+
+Testing should only be done in the DEV environment.  
+
+Issue a licence in the case management system to create a licence that has not been sent to orgbook.
+
+Then ensure the OrgBook service is started and is running.  When the SyncLicencesToOrgbook job runs it should send the necessary data to the OrgBook.  Results may be observed by checking the container logs and also by inspecting the case management system to observe that the OrgBook link becomes populated.
+
