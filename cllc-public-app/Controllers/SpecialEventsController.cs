@@ -174,7 +174,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
 
 
-
                 // event locations.
 
                 foreach (var location in specialEvent.AdoxioSpecialeventSpecialeventlocations)
@@ -1460,14 +1459,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return Unauthorized();
             }
 
-            // Pending Review, Approved, Issued, Cancelled, Denied
-            string filter = $"(statuscode eq {(int?)EventStatus.PendingReview} or statuscode eq {(int?)EventStatus.Approved}"
-                + $" or statuscode eq {(int?)EventStatus.Issued} or statuscode eq {(int?)EventStatus.Cancelled} or statuscode eq {(int?)EventStatus.Denied})"
-                + $" and _adoxio_policejurisdictionid_value eq {userAccount._adoxioPolicejurisdictionidValue}";
+            var result = new SpecialEventPoliceJobSummary()
+            {
+                // Application Status == Pending Review && Police Decision == Under Review
+                InProgress = GetSepSummaries($"_adoxio_policejurisdictionid_value eq {userAccount._adoxioPolicejurisdictionidValue} and adoxio_policeapproval eq {(int?)ApproverStatus.PendingReview}"),
 
-            var result = GetSepSummaries(filter);
+                // Police Decision == Reviewed
+                PoliceApproved = GetSepSummaries($"_adoxio_policejurisdictionid_value eq {userAccount._adoxioPolicejurisdictionidValue} and statuscode ne {(int?)EventStatus.Draft} and statuscode ne {(int?)EventStatus.Issued} and (adoxio_policeapproval eq { (int?)ApproverStatus.AutoReviewed } or adoxio_policeapproval eq { (int?)ApproverStatus.Approved } or adoxio_policeapproval eq {(int?)ApproverStatus.Reviewed})"),
+
+                // Police Decision == Denied || Cancelled
+                PoliceDenied = GetSepSummaries($"_adoxio_policejurisdictionid_value eq {userAccount._adoxioPolicejurisdictionidValue} and (adoxio_policeapproval eq {(int?)ApproverStatus.Denied} or adoxio_policeapproval eq {(int?)ApproverStatus.Cancelled})")
+            };
 
             return new JsonResult(result);
+
         }
 
         // police get summary list of applications for the current user
@@ -1482,11 +1487,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return Unauthorized();
             }
 
-            var result = new SpecialEventPoliceMyJobs()
+            var result = new SpecialEventPoliceJobSummary()
             {
-                InProgress = GetSepSummaries($"_adoxio_policerepresentativeid_value eq {userSettings.ContactId} and adoxio_policeapproval eq 100000001"), // Under review
-                PoliceApproved = GetSepSummaries($"statuscode ne {(int?)EventStatus.Draft} and statuscode ne {(int?)EventStatus.Issued} and _adoxio_policerepresentativeid_value eq {userSettings.ContactId} and (adoxio_policeapproval eq {(int?)ApproverStatus.AutoReviewed} or adoxio_policeapproval eq {(int?)ApproverStatus.Approved})"),  // Approved, Auto-Approved
-                Issued = GetSepSummaries($"_adoxio_policerepresentativeid_value eq {userSettings.ContactId} and statuscode eq {(int?)EventStatus.Issued}") // status is issued
+                // Application Status == Pending Review && Police Decision == Under Review
+                InProgress = GetSepSummaries($"_adoxio_policerepresentativeid_value eq {userSettings.ContactId} and adoxio_policeapproval eq {(int?)ApproverStatus.PendingReview}"),
+
+                // Police Decision == Reviewed
+                PoliceApproved = GetSepSummaries($"statuscode ne {(int?)EventStatus.Draft} and statuscode ne {(int?)EventStatus.Issued} and _adoxio_policerepresentativeid_value eq {userSettings.ContactId} and (adoxio_policeapproval eq { (int?)ApproverStatus.AutoReviewed } or adoxio_policeapproval eq { (int?)ApproverStatus.Approved } or adoxio_policeapproval eq {(int?)ApproverStatus.Reviewed})"),  
+
+                // Police Decision == Denied || Cancelled
+                PoliceDenied = GetSepSummaries($"_adoxio_policerepresentativeid_value eq {userSettings.ContactId} and (adoxio_policeapproval eq {(int?)ApproverStatus.Denied} or adoxio_policeapproval eq {(int?)ApproverStatus.Cancelled})")
             };
 
             return new JsonResult(result);
