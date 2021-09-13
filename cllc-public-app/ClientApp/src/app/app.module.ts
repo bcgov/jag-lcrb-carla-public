@@ -314,6 +314,7 @@ import { DenyDialogComponent } from './components/police-representative/police-s
 import { CancelDialogComponent } from './components/police-representative/police-summary/cancel-dialog/cancel-dialog.component';
 import { NgxSliderModule } from "@angular-slider/ngx-slider";
 import { SepClaimComponent } from './components/sep/sep-claim/sep-claim.component';
+import { FinalConfirmationComponent } from './components/sep/sep-application/final-confirmation/final-confirmation.component';
 
 
 @NgModule({
@@ -497,6 +498,7 @@ import { SepClaimComponent } from './components/sep/sep-claim/sep-claim.componen
     DenyDialogComponent,
     CancelDialogComponent,
     SepClaimComponent,
+    FinalConfirmationComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -672,7 +674,8 @@ import { SepClaimComponent } from './components/sep/sep-claim/sep-claim.componen
     PoliceSummaryComponent,
     AcceptDialogComponent,
     DenyDialogComponent,
-    CancelDialogComponent
+    CancelDialogComponent,
+    FinalConfirmationComponent
   ],
   bootstrap: [AppComponent]
 })
