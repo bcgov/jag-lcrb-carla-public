@@ -54,6 +54,7 @@ import { DynamicsFormComponent } from "@components/dynamics-form/dynamics-form.c
 import { DynamicsFormDataService } from "@services/dynamics-form-data.service";
 import { FileDataService } from "@services/file-data.service";
 import { AnnualVolumeService } from "@services/annual-volume.service";
+import { CurrencyMaskModule } from "ng2-currency-mask";
 
 import {
   EditShareholdersComponent,
@@ -502,6 +503,7 @@ import { SepClaimComponent } from './components/sep/sep-claim/sep-claim.componen
     BrowserAnimationsModule,
     BrowserModule,
     CdkTableModule,
+    CurrencyMaskModule,
     FontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
