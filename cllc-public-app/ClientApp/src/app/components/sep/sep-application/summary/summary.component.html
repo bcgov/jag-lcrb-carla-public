@@ -358,7 +358,7 @@
 
             <h4>LIQUOR QUANTITIES</h4>
 
-            <div class="d-flex" style="white-space: nowrap; font-weight:900;">
+            <!--div class="d-flex" style="white-space: nowrap; font-weight:900;">
               <label>Total Servings:</label> <span class="fee-amount">{{application?.totalServings || 0}}</span>
           </div>
 
@@ -370,8 +370,13 @@
             </div>
             <div class="d-flex" style="white-space: nowrap; font-weight:900;">
                 <label>Spirits</label> <span class="fee-amount">{{application?.spirits || 0}}</span>
-            </div>
+            </div-->
 
+            <table>
+              <tr><th class="forecast">&nbsp;</th><th class="forecast">No. Servings</th><th class="forecast">Sell Price</th><th class="forecast">Est. Revenue</th><th class="forecast">Est. Cost</th></tr>
+              <tr *ngFor="let f of application?.drinksSalesForecasts;"><td class="forecast"><label>{{f.name.substring(f.name.indexOf("-")+2,f.name.lastIndexOf("-"))}}</label></td><td class="forecast">{{f.estimatedServings}}</td><td class="forecast">{{f.pricePerServing | currency}}</td><td class="forecast">{{f.estimatedRevenue | currency}}</td><td class="forecast">{{f.estimatedCost | currency}}</td></tr>
+
+            </table>
 
 
             <hr>
@@ -474,7 +479,7 @@
 
 
             <p><fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>You must pay these fees to get a special event permit. If you do not pay these fees, your application will not be valid and a licence will not be issued for your event.</p>
-            <p>In the event that the information on this application is no longer correct or if you wish to make additional changes, you may contact the LCRB or withdraw your application.</p>
+            <p>In the event that the information on this application is no longer correct or if you wish to make additional changes, you may contact the LCRB or withdraw your application up to 24 hours before the event begins.</p>
             <button mat-raised-button color="primary" (click)="payNow()"><fa-icon [icon]="faShoppingCart" style="margin-right: 10px;"></fa-icon>PAY NOW</button>
           </section>
 

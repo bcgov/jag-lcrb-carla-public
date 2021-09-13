@@ -86,6 +86,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   startRLRSOngoing: boolean;
   startAgentOngoing: boolean;
   startF2GOngoing: boolean;
+  startEthylOngoing: boolean;
 
   constructor(
     private userDataService: UserDataService,
@@ -572,6 +573,30 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
       }
     );
   }
+  startNewEthylApplication() {
+    this.startEthylOngoing = true;
+    const newLicenceApplicationData = {
+      applicantType: this.account.businessType,
+      applicationType: { name: ApplicationTypeNames.ETHYL } as ApplicationType,
+      account: this.account,
+    } as Application;
+    // newLicenceApplicationData. = this.account.businessType;
+    this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
+      data => {
+        const route: any[] = [`/account-profile/${data.id}`];
+        this.startEthylOngoing = false;
+        this.router.navigate(route);
+      },
+      () => {
+        this.snackBar.open("Error starting a Ethyl Alcohol Permit",
+          "Fail",
+          { duration: 3500, panelClass: ["red-snackbar"] });
+        this.startEthylOngoing = false;
+        console.log("Error starting a Ethyl Alcohol Permit");
+      }
+    );
+  }
+
   startNewRLRSApplication() {
     this.startRLRSOngoing = true;
     const newLicenceApplicationData = {

@@ -49,6 +49,7 @@ export class LiquorApprovalsCalloutComponent implements OnInit {
       applicantType: this.account.businessType,
       applicationType: { name: ApplicationTypeNames.LGINClaim } as ApplicationType,
       account: this.account,
+      isApplicationComplete: "Yes",
     } as Application;
     this.applicationDataService.createApplication(application)
       .subscribe(result => {
