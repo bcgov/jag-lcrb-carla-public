@@ -153,6 +153,27 @@
     </button>
   </td>
 </tr>
+<tr >
+  <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
+    <!--img class="icon" src="assets/food-primary-blue.png" alt=""-->
+  </td>
+  <td style="width: 700px;">
+    <h3>Ethyl Alcohol Permit</h3>
+    <p>
+      Permit for purchasing quantities of ethyl alcohol for manufacturing, scientific, or other purposes.
+    </p>
+  </td>
+  <td style="text-align: center;">
+    <button mat-raised-button color="secondary" [disabled]="startEthylOngoing"
+            (click)="startNewEthylApplication()" id="startEthyl">
+      <span>
+        START
+        APPLICATION
+      </span>
+      <mat-progress-bar class="mb-1" *ngIf="startEthylOngoing" mode="indeterminate"></mat-progress-bar>
+    </button>
+  </td>
+</tr>
 <tr *ngIf="liquorThree">
   <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
     <img class="icon" src="assets/food-primary-blue.png" alt="">

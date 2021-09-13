@@ -74,7 +74,7 @@ export class EventComponent extends FormBase implements OnInit {
   ngOnInit(): void {
     // create a form for the basic details
     this.form = this.fb.group({
-      sepCity: ["", [Validators.required]],
+      sepCity: ["", [Validators.required, Validators.minLength(2)]],
       isAnnualEvent: [""],
       maximumNumberOfGuests: [""],
       eventLocations: this.fb.array([]), // the form array for all of the locations and their data structures
@@ -396,7 +396,7 @@ export class EventComponent extends FormBase implements OnInit {
 
   next() {
     this.showValidationMessages = false;
-    if (this.isValid()) {
+    if (this.isValid() && this.form.get('sepCity')?.value?.id) {
       this.saveComplete.emit(this.getFormValue());
       //console.log("saving...")
     } else {

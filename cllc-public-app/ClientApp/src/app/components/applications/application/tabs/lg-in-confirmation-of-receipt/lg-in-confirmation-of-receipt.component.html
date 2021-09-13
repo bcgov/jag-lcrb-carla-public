@@ -48,9 +48,7 @@
 
     </section>
 
-    <p *ngIf="application?.applicationType?.showLgNoObjection">Please upload your comments:</p>
-
-    <app-file-uploader *ngIf="application?.id" documentType="LGIN Resolution"
+    <app-file-uploader *ngIf="application?.id && !application?.applicationType?.showLgNoObjection" documentType="LGIN Resolution"
                        [disableUploads]="!isOpenedByLGForApproval" [enableFileDeletion]="isOpenedByLGForApproval && !lgHasApproved"
                        (numberOfUploadedFiles)="uploadedResolutionDocuments = $event" [maxNumberOfFiles]="200"
                        fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [entityId]="application?.id"
@@ -90,7 +88,7 @@
 </section>
 
 <section *ngIf="!lgHasApproved" class="position-relative d-flex justify-content-between p-3">
-  <button mat-raised-button color="secondary" [disabled]="optingOutOfComment" (click)="OptOutOfComment()">
+  <button mat-raised-button color="secondary" [disabled]="optingOutOfComment" (click)="OptOutOfComment()" *ngIf="resolutionRequired">
     <span>Opt Out of Comment</span>
     <mat-progress-bar *ngIf="optingOutOfComment" mode="indeterminate"></mat-progress-bar>
   </button>
@@ -100,15 +98,16 @@
     <mat-progress-bar *ngIf="rejectingApp" mode="indeterminate"></mat-progress-bar>
   </button>
 
-  <button mat-raised-button color="primary" *ngIf="application?.lGApprovalDecision  !== 'Pending'"
+  <button mat-raised-button color="primary" *ngIf="application?.lGApprovalDecision  !== 'Pending' && resolutionRequired"
           [disabled]="approvingApplication" (click)="ApproveApplication()">
     <span>Accept Application</span>
     <mat-progress-bar *ngIf="approvingApplication" mode="indeterminate"></mat-progress-bar>
   </button>
 
-  <button mat-raised-button color="primary" *ngIf="application?.lGApprovalDecision  === 'Pending'"
+  <button mat-raised-button color="primary" *ngIf="application?.lGApprovalDecision  === 'Pending' || !resolutionRequired"
           [disabled]="providingResolution" (click)="ProvideResolution()">
-    <span>Provide Resolution</span>
+    <span *ngIf="resolutionRequired">Provide Resolution</span>
+    <span *ngIf="!resolutionRequired">Accept Application</span>
     <mat-progress-bar *ngIf="providingResolution" mode="indeterminate"></mat-progress-bar>
   </button>
 </section>

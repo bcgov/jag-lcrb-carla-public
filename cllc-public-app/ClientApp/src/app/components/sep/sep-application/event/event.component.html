@@ -5,6 +5,7 @@
 
     <p>Tell us about your event and venue location(s).
     </p>
+    <p><strong>Note: All of your event locations must take place in the same city/district/Indigenous Nation.</strong></p>
     <span class="error-states">*All fields are required</span>
 
     <mat-divider></mat-divider>
@@ -28,8 +29,8 @@
                 </app-field>
                 <section>
                     <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
-                    <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
-                        <section *ngIf="form.get('sepCity')?.value?.id">
+                    <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;" *ngIf="form.get('sepCity')?.value?.id">
+                        <section>
 
                             <mat-card class="mb-3">
                                 <label for="">Selected City </label>
@@ -45,11 +46,15 @@
                             </mat-card>
                         </section>
 
-                        <section *ngIf="!form.get('sepCity')?.value?.id">
-                            No City selected
-                        </section>
+
+                    </div>
+                    <div class="" style="background-color: #d8292f; padding: 1px;" *ngIf="!form.get('sepCity')?.value?.id">
+                      <section  style="background-color: #ffe9e9; padding:20px;">
+                        <strong>No city selected. Start typing the name of the city and select it from the drop-down list.</strong>
+                      </section>
                     </div>
                 </section>
+
             </section>
             <div>
                 <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip.toggle()" matTooltip="All locations in the application must be in the same municipality. You may submit more than one application
@@ -183,6 +188,19 @@
                                                                 [value]="false">No
                                                             </mat-radio-button>
                                                         </mat-radio-group>
+                                                        <app-error-alert *ngIf="area.get('minorPresent').value">
+                                                          <p>If liquor service is permitted throughout the whole event site, minors are allowed
+                                                            to enter but must not drink, serve liquor or sell liquor or drink tickets. </p>
+                                                          <p>
+                                                            Anyone under 19 years of age is not allowed in beverage gardens or similar liquor
+                                                            service areas where the service of liquor is the primary focus, except as a
+                                                            professional entertainer. See the “Entertainers” section in the terms and
+                                                            condition manual for more information.
+                                                          </p>
+                                                          <p>
+                                                            Minors are not permitted to attend tasting events except as a professional entertainer.
+                                                          </p>
+                                                        </app-error-alert>
                                                     </app-field>
                                                     <app-field label="How many minors will be in the service area?"
                                                         *ngIf="area.get('minorPresent').value"
