@@ -55,7 +55,6 @@ export class DrinkAmountsComponent implements OnInit {
   next(planner) {
     if (this.drinkAmountsValid) {
       const plannerValue = planner?.form?.value || {};
-      debugger;
       this.saved.next(<any>{ drinksSalesForecasts: this.form.value, ...plannerValue });
     }
   }

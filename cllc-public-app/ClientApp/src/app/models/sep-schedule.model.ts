@@ -8,6 +8,8 @@ export class SepSchedule {
     eventEnd: Date;
     serviceStart: Date;
     serviceEnd: Date;
+    liquorServiceHoursExtensionReason: string;
+    disturbancePreventionMeasuresDetails: string;
 
     constructor(sched: IEventFormValue) {
         if (sched) {
@@ -16,6 +18,8 @@ export class SepSchedule {
             this.eventEnd = this.formatDate(sched.eventDate, sched.eventEndValue);
             this.serviceStart = this.formatDate(sched.eventDate, sched.serviceStartValue);
             this.serviceEnd = this.formatDate(sched.eventDate, sched.serviceEndValue);
+            this.liquorServiceHoursExtensionReason = sched.liquorServiceHoursExtensionReason;
+            this.disturbancePreventionMeasuresDetails = sched.disturbancePreventionMeasuresDetails;
         }
     }
 
@@ -37,6 +41,9 @@ export class SepSchedule {
         if (this.serviceEnd) {
             result.serviceEndValue = format(new Date(this.serviceEnd), "h:mm aa");
         }
+        result.liquorServiceHoursExtensionReason = this.liquorServiceHoursExtensionReason;
+        result.disturbancePreventionMeasuresDetails = this.disturbancePreventionMeasuresDetails;
+        
         return result;
     }
 
