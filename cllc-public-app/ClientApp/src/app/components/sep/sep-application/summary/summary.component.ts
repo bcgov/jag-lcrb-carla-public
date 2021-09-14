@@ -34,6 +34,8 @@ import {
 import {
   faBan
 } from "@fortawesome/free-solid-svg-icons";
+import { MatDialog } from "@angular/material/dialog";
+import { FinalConfirmationComponent } from "../final-confirmation/final-confirmation.component";
 
 @Component({
   selector: "app-summary",
@@ -102,7 +104,9 @@ export class SummaryComponent implements OnInit {
     return this._appID;
   }
 
-  constructor(private db: IndexedDBService,
+  constructor(  
+    private db: IndexedDBService,
+    public dialog: MatDialog,
     private snackBar: MatSnackBar,
     private route: ActivatedRoute,
     private store: Store<AppState>,
@@ -377,34 +381,22 @@ export class SummaryComponent implements OnInit {
     this.savingToAPI = false;
   }
 
-  payNow() {
-    // and payment is required due to an invoice being generated
-    if (this?.application?.id) {
-      // proceed to payment
-      this.submitPayment()
-        .subscribe(res => {
-        },
-          error => {
-            this.snackBar.open("Error submitting payment", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
-          }
-        );
-    }
+  // present a confirmation dialog prior to the payment being processed.
+  payNow()
+  {
+
+    // set dialogConfig settings
+    const dialogConfig = {
+      autoFocus: true,
+      width: "80vw",
+      data: {id: this.application.id}
+    };
+
+    // open dialog, get reference and process returned data from dialog
+    this.dialog.open(FinalConfirmationComponent, dialogConfig);
   }
 
-  /**
- * Redirect to payment processing page (Express Pay / Bambora service)
- * */
-  private submitPayment() {
-    return this.paymentDataService.getPaymentURI("specialEventInvoice", this.application.id)
-      .pipe(map(jsonUrl => {
-        window.location.href = jsonUrl["url"];
-        return jsonUrl["url"];
-      }, (err: any) => {
-        if (err._body === "Payment already made") {
-          this.snackBar.open("Application payment has already been made.", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
-        }
-      }));
-  }
+  
 }
 
 
