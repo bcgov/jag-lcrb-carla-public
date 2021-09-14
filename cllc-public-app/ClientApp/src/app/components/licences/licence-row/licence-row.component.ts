@@ -443,7 +443,6 @@ export class LicenceRowComponent extends FormBase implements OnInit {
       // otherwise if there's a paid renewal application
     } else if (renewalApplication && renewalApplication.isPaid) {
       // that shouldnt have happened
-      //debugger;
       this.snackBar.open("Renewal application already submitted",
         "Fail",
         { duration: 3500, panelClass: ["red-snackbar"] });
