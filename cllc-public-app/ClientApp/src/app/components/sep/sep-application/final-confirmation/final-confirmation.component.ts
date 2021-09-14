@@ -9,9 +9,6 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { AppState } from '@app/app-state/models/app-state';
 import { Store } from '@ngrx/store';
 import { ContactDataService } from '@services/contact-data.service';
-import { set } from 'date-fns';
-import { id } from 'date-fns/locale';
-import { get } from 'http';
 import { Contact } from '@models/contact.model';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
