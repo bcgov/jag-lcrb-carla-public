@@ -226,7 +226,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public IActionResult GetSpecialEventForTheApplicant(string eventId)
         {
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
-            var specialEvent = this.getSpecialEventData(eventId);
+            var specialEvent = this.GetSpecialEventData(eventId);
             if (specialEvent._adoxioContactidValue != userSettings.ContactId && specialEvent._adoxioAccountidValue != userSettings.AccountId)
             {
                 return Unauthorized();
@@ -245,7 +245,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("applicant/{eventId}/summary/{filename}")]
         public async Task<IActionResult> GetSummaryDF(string eventId, string filename)
         {
-            MicrosoftDynamicsCRMadoxioSpecialevent specialEvent = getSpecialEventData(eventId);
+            MicrosoftDynamicsCRMadoxioSpecialevent specialEvent = GetSpecialEventData(eventId);
 
             Dictionary<string, string> parameters = new Dictionary<string, string>();
 
@@ -553,7 +553,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("applicant/{eventId}/permit/{filename}")]
         public async Task<IActionResult> GetPermitPDF(string eventId, string filename)
         {
-            MicrosoftDynamicsCRMadoxioSpecialevent specialEvent = getSpecialEventData(eventId);
+            MicrosoftDynamicsCRMadoxioSpecialevent specialEvent = GetSpecialEventData(eventId);
 
             Dictionary<string, string> parameters = new Dictionary<string, string>();
 
@@ -859,7 +859,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             //return new UnauthorizedResult();
         }
 
-        private MicrosoftDynamicsCRMadoxioSpecialevent getSpecialEventData(string eventId)
+        private MicrosoftDynamicsCRMadoxioSpecialevent GetSpecialEventData(string eventId)
         {
             string[] expand = new[] {
                 "adoxio_Invoice",
@@ -870,7 +870,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 "adoxio_ContactId",
                 "adoxio_AccountId",
                 "adoxio_specialevent_adoxio_sepdrinksalesforecast_SpecialEvent",
-                "adoxio_specialevent_specialeventtsacs"
+                "adoxio_specialevent_specialeventtsacs",
+                "adoxio_PoliceAccountId"
             };
             MicrosoftDynamicsCRMadoxioSpecialevent specialEvent = null;
             if (!string.IsNullOrEmpty(eventId))
@@ -1039,7 +1040,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw httpOperationException;
             }
 
-            var result = this.getSpecialEventData(newSpecialEvent.AdoxioSpecialeventid).ToViewModel(_dynamicsClient);
+            var result = this.GetSpecialEventData(newSpecialEvent.AdoxioSpecialeventid).ToViewModel(_dynamicsClient);
             result.LocalId = specialEvent.LocalId;
             return new JsonResult(specialEvent);
         }
@@ -1116,7 +1117,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
-            var existingEvent = getSpecialEventData(eventId);
+            var existingEvent = GetSpecialEventData(eventId);
             if (existingEvent._adoxioAccountidValue != userSettings.AccountId &&
                existingEvent._adoxioContactidValue != userSettings.ContactId)
             {
@@ -1249,7 +1250,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                 }));
             }
-            var result = this.getSpecialEventData(eventId).ToViewModel(_dynamicsClient);
+            var result = this.GetSpecialEventData(eventId).ToViewModel(_dynamicsClient);
             result.LocalId = specialEvent.LocalId;
             return new JsonResult(result);
         }

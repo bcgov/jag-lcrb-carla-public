@@ -147,7 +147,10 @@
     <p>SEP Online Support Line
       1-855-999-7656 or <a href="mailto:LCRB.Sep@gov.bc.ca" target="_blank">LCRB.Sep@gov.bc.ca</a></p>
     <h3>Police Authority</h3>
-    <p></p>
+    <p>{{application?.policeAccount?.name}}<br>
+      {{application?.policeAccount?.contactPhone | mask: "(000) 000-0000"}}<br>
+      {{application?.policeAccount?.contactEmail}}
+    </p>
   </mat-card>
   </div>
   </div>
