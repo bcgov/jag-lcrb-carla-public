@@ -224,14 +224,14 @@
 
                                                 </section>
                                                 <div>
-                                                    <button mat-raised-button color="warn"
+                                                    <button [disabled]="disableForm" mat-raised-button color="warn"
                                                         (click)="removeServiceArea(j, location)" *ngIf="j != 0">Remove
                                                         Area</button>
                                                 </div>
                                             </div>
                                         </mat-expansion-panel>
                                     </mat-accordion>
-                                    <button mat-raised-button color="secondary" class="mt-3"
+                                    <button  [disabled]="disableForm" mat-raised-button color="secondary" class="mt-3"
                                         (click)="addServiceArea({}, location)">Add Service
                                         Area</button>
                                 </mat-card>
@@ -313,7 +313,7 @@
                                                     </app-field>
                                                 </td>
                                                 <td class="text-right">
-                                                    <button mat-raised-button color="warn"
+                                                    <button  [disabled]="disableForm" mat-raised-button color="warn"
                                                         (click)="removeEventDate(k, location)" *ngIf="k != 0">Remove</button>
                                                 </td>
                                             </tr>
@@ -384,19 +384,19 @@
                                         </table>
                                     </mat-expansion-panel>
                                 </mat-accordion>
-                                <button mat-raised-button color="secondary" class="mt-3"
+                                <button  [disabled]="disableForm" mat-raised-button color="secondary" class="mt-3"
                                     (click)="addEventDate({}, location)">Add Event Date</button>
                             </mat-card>
                         </mat-card>
                         <div>
-                            <button mat-raised-button color="warn" (click)="removeLocation(i)" *ngIf="i !=0 ">Remove
+                            <button  [disabled]="disableForm" mat-raised-button color="warn" (click)="removeLocation(i)" *ngIf="i !=0 ">Remove
                                 Location</button>
                         </div>
                     </div>
                 </mat-expansion-panel>
             </mat-accordion>
 
-            <button mat-raised-button color="secondary" class="mt-3" (click)="addLocation()">Add Location</button>
+            <button  [disabled]="disableForm" mat-raised-button color="secondary" class="mt-3" (click)="addLocation()">Add Location</button>
         </section>
     </section>
     <mat-divider></mat-divider>
@@ -411,6 +411,6 @@
         </p>
     </section>
 
-    <button mat-raised-button color="secondary" class="mr-3" matStepperPrevious>BACK</button>
-    <button mat-raised-button color="primary" (click)="next()">NEXT</button>
+    <button  [disabled]="disableForm" mat-raised-button color="secondary" class="mr-3" matStepperPrevious>BACK</button>
+    <button  [disabled]="disableForm" mat-raised-button color="primary" (click)="next()">NEXT</button>
 </div>
