@@ -104,7 +104,7 @@ export class SummaryComponent implements OnInit {
     return this._appID;
   }
 
-  constructor(  
+  constructor(
     private db: IndexedDBService,
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
@@ -388,7 +388,7 @@ export class SummaryComponent implements OnInit {
     // set dialogConfig settings
     const dialogConfig = {
       autoFocus: true,
-      width: "80vw",
+      width: "500px",
       data: {id: this.application.id}
     };
 
@@ -396,7 +396,7 @@ export class SummaryComponent implements OnInit {
     this.dialog.open(FinalConfirmationComponent, dialogConfig);
   }
 
-  
+
 }
 
 
