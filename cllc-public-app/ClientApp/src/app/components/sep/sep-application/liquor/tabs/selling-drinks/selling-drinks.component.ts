@@ -7,7 +7,7 @@ import { FormBase } from "@shared/form-base";
 @Component({
   selector: "app-selling-drinks",
   templateUrl: "./selling-drinks.component.html",
-  styleUrls: ["./selling-drinks.component.scss"]
+  styleUrls: ["./selling-drinks.component.scss"],
 })
 export class SellingDrinksComponent extends FormBase implements OnInit {
   _application: SepApplication;
@@ -17,11 +17,19 @@ export class SellingDrinksComponent extends FormBase implements OnInit {
     this._application = value;
     if (this.form) {
       this.form.patchValue(value);
+      if (this.disableForm) {
+        this.form.disable();
+      }
     }
   }
   get sepApplication() {
     return this._application;
   }
+
+  get disableForm(): boolean {
+    return this.sepApplication && this.sepApplication.eventStatus !== "Draft";
+  }
+
   @Output() saved: EventEmitter<{ declaredServings: number }> = new EventEmitter<{ declaredServings: number }>();
   form: FormGroup;
   @Output() back: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -48,25 +56,25 @@ export class SellingDrinksComponent extends FormBase implements OnInit {
             this.form.get("donateOrConsular").setValidators(Validators.required);
             this.form.get("isGSTRegisteredOrg").clearValidators();
             break;
-          case "RecoverCost":
-            this.form.get("nonProfitName").clearValidators();
-            this.form.get("donateOrConsular").clearValidators();
-            this.form.get("isGSTRegisteredOrg").setValidators(Validators.required);
-            break;
-          default:
-            this.form.get("nonProfitName").clearValidators();
-            this.form.get("donateOrConsular").clearValidators();
-            this.form.get("isGSTRegisteredOrg").clearValidators();
-            break;
-
-        }
-        this.form.get("nonProfitName").updateValueAndValidity();
-        this.form.get("donateOrConsular").updateValueAndValidity();
-        this.form.get("isGSTRegisteredOrg").updateValueAndValidity();
-
-      });
-
-  }
+            case "RecoverCost":
+              this.form.get("nonProfitName").clearValidators();
+              this.form.get("donateOrConsular").clearValidators();
+              this.form.get("isGSTRegisteredOrg").setValidators(Validators.required);
+              break;
+            default:
+              this.form.get("nonProfitName").clearValidators();
+              this.form.get("donateOrConsular").clearValidators();
+              this.form.get("isGSTRegisteredOrg").clearValidators();
+              break;
+  
+          }
+          this.form.get("nonProfitName").updateValueAndValidity();
+          this.form.get("donateOrConsular").updateValueAndValidity();
+          this.form.get("isGSTRegisteredOrg").updateValueAndValidity();
+  
+        });
+  
+    }
 
   isValid(): boolean {
     this.markControlsAsTouched(this.form);
