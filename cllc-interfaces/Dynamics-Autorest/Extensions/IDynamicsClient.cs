@@ -65,5 +65,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         MicrosoftDynamicsCRMadoxioSpecialevent GetSpecialEventByLicenceNumber(string licenceNumber);
 
+        MicrosoftDynamicsCRMadoxioSpecialevent GetSpecialEventById(string id);
+
     }
 }
