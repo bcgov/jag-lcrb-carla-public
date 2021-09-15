@@ -29,8 +29,16 @@ export class ApplicantComponent extends FormBase implements OnInit {
     this._app = value;
     if (this.form) {
       this.form.patchValue(value);
+      if(this.disableForm){
+        this.form.disable();
+      }
     }
   }
+
+  get disableForm(): boolean {
+    return this.sepApplication && this.sepApplication.eventStatus !== "Draft";
+  }
+  
   get sepApplication() {
     return this._app;
   }
@@ -72,6 +80,10 @@ export class ApplicantComponent extends FormBase implements OnInit {
           this.form.get('dateAgreedToTsAndCs').setValue(new Date());
         }
       });
+
+      if(this.disableForm){
+        this.form.disable();
+      }
 
     this.policyDocs.setSlug(this.policySlug);
   }

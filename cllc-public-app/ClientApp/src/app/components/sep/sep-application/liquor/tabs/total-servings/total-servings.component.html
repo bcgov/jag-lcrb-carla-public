@@ -28,7 +28,7 @@
 
             <mat-form-field appearance="outline" color="primary" floatLabel="always">
                 <mat-label><strong>Declared No. Servings:</strong></mat-label>
-                <input matInput type="number" name="totalServings" [(ngModel)]="total_servings"
+                <input [disabled]="disableForm" matInput type="number" name="totalServings" [(ngModel)]="total_servings"
                     (ngModelChange)="totalServingsChange($event)" [max]="max_servings" [min]="1"
                     class="bev-slider  text-center" placeholder="0" style="font-size: large; font-weight:900;">
             </mat-form-field>
@@ -61,7 +61,7 @@
 
 
     <section class="pt-3">
-        <button mat-raised-button color="secondary" class="mr-3" matStepperPrevious>BACK</button>
-        <button mat-raised-button color="primary" [disabled]="!isValid()" (click)="next()">NEXT</button>
+        <button [disabled]="disableForm" mat-raised-button color="secondary" class="mr-3" matStepperPrevious>BACK</button>
+        <button [disabled]="disableForm" mat-raised-button color="primary" [disabled]="!isValid()" (click)="next()">NEXT</button>
     </section>
 </div>
