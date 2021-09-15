@@ -27,11 +27,12 @@ namespace Gov.Lclb.Cllb.Public.Models
                     EventEnd = eventDates.AdoxioEventend,
                     ServiceStart = eventDates.AdoxioServicestart,
                     ServiceEnd = eventDates.AdoxioServiceend,
+                    LiquorServiceHoursExtensionReason = eventDates.AdoxioLiquorservicehoursextensionreason,
+                    DisturbancePreventionMeasuresDetails = eventDates.AdoxioDisturbancepreventionmeasuresdetails
                 };
             }
             return result;
         }
-
 
         public static void CopyValues(this MicrosoftDynamicsCRMadoxioSpecialeventschedule to, ViewModels.SepEventDates from)
         {
@@ -39,8 +40,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioEventend = from.EventEnd;
             to.AdoxioServicestart = from.ServiceStart;
             to.AdoxioServiceend = from.ServiceEnd;
+            to.AdoxioDisturbancepreventionmeasuresdetails = from.DisturbancePreventionMeasuresDetails;
+            to.AdoxioLiquorservicehoursextensionreason = from.LiquorServiceHoursExtensionReason;
         }
-
-
     }
 }
