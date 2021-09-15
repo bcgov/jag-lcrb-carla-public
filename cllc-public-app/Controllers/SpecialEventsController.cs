@@ -16,6 +16,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Rest;
 using System.Threading.Tasks;
+using Gov.Lclb.Cllb.Public.Extensions;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
@@ -243,7 +244,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="eventId"></param>
         /// <returns></returns>
         [HttpGet("applicant/{eventId}/summary/{filename}")]
-        public async Task<IActionResult> GetSummaryDF(string eventId, string filename)
+        public async Task<IActionResult> GetSummaryPdf(string eventId, string filename)
         {
             MicrosoftDynamicsCRMadoxioSpecialevent specialEvent = GetSpecialEventData(eventId);
 
@@ -522,31 +523,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             byte[] data = await _pdfClient.GetPdf(parameters, templateName);
 
-            // To Do; Save copy of generated sep PDF for auditing/logging purposes
-            /*
-            try
-            {
-                var hash = await _pdfClient.GetPdfHash(parameters, templateName);
-                var entityName = "special event";
-                var entityId = adoxioLicense.AdoxioLicencesid;
-                var folderName = await _dynamicsClient.GetFolderName(entityName, entityId).ConfigureAwait(true);
-                var documentType = "Licence";
-                _fileManagerClient.UploadPdfIfChanged(_logger, entityName, entityId, folderName, documentType, data, hash);
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e, "Error uploading PDF");
-            }
-            */
+            await StoreCopyOfPdf(parameters, templateName, specialEvent.AdoxioSpecialeventid, data, "Summary");
 
-            return File(data, "sep/pdf", $"SEP Summary.pdf");
+            return File(data, "application/pdf", $"SEP Summary.pdf");
 
 
             //return new UnauthorizedResult();
         }
 
         /// <summary>
-        ///     endpoint for a summary pdf
+        ///     endpoint for a permit pdf
         /// </summary>
         /// <param name="eventId"></param>
         /// <returns></returns>
@@ -836,28 +822,29 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             byte[] data = await _pdfClient.GetPdf(parameters, templateName);
 
-            // To Do; Save copy of generated sep PDF for auditing/logging purposes
-            /*
+            await StoreCopyOfPdf(parameters, templateName, specialEvent.AdoxioSpecialeventid, data, "Permit");
+
+            return File(data, "application/pdf", $"Special Event Permit - {specialEvent.AdoxioSpecialeventpermitnumber}.pdf");
+
+
+            //return new UnauthorizedResult();
+        }
+
+        private async Task StoreCopyOfPdf(Dictionary<string, string> parameters, string templateName, string id, byte[] data, string documentType)
+        {
             try
             {
                 var hash = await _pdfClient.GetPdfHash(parameters, templateName);
-                var entityName = "special event";
-                var entityId = adoxioLicense.AdoxioLicencesid;
-                var folderName = await _dynamicsClient.GetFolderName(entityName, entityId).ConfigureAwait(true);
-                var documentType = "Licence";
-                _fileManagerClient.UploadPdfIfChanged(_logger, entityName, entityId, folderName, documentType, data, hash);
+                var entityName = "adoxio_specialevent";
+                var folderName = await _dynamicsClient.GetFolderName("specialevent", id).ConfigureAwait(true);
+                _fileManagerClient.UploadPdfIfChanged(_logger, entityName, id, folderName, documentType, data, hash);
             }
             catch (Exception e)
             {
                 _logger.LogError(e, "Error uploading PDF");
             }
-            */
-
-            return File(data, "sep/pdf", $"Special Event Permit - {specialEvent.AdoxioSpecialeventpermitnumber}.pdf");
-
-
-            //return new UnauthorizedResult();
         }
+
 
         private MicrosoftDynamicsCRMadoxioSpecialevent GetSpecialEventData(string eventId)
         {
