@@ -265,23 +265,25 @@
             </div>
             <hr>
             <div class="d-flex">
-              <label>Organization Type:</label> <span>{{application?.hostOrganizationCategory}}</span>
-          </div>
-
-
-            <hr>
-            <div class="d-flex">
-                <label>Responsible Beverage Service #:</label> <span>{{application?.responsibleBevServiceNumber}}</span>
+              <label>Responsible Beverage Service #:</label> <span>{{application?.responsibleBevServiceNumber}}</span>
             </div>
             <hr>
-            <div class="d-flex">
+
+            <section *ngIf="application?.hostOrganizationName != null">
+              <div class="d-flex">
+                <label>Organization Type:</label> <span>{{application?.hostOrganizationCategory}}</span>
+              </div>
+              <hr>
+              <div class="d-flex">
                 <label>Name of The Organization:</label> <span>{{application?.hostOrganizationName}}</span>
-            </div>
-            <hr>
-            <div class="d-flex">
+              </div>
+              <hr>
+
+              <div class="d-flex">
                 <label>Address of The Organization:</label> <span>{{application?.hostOrganizationAddress}}</span>
-            </div>
-            <hr>
+              </div>
+              <hr>
+            </section>
             <div class="d-flex">
                 <label>Occasion of event:</label> <span>{{application?.specialEventDescription}}</span>
             </div>
@@ -311,6 +313,9 @@
             <div class="d-flex">
                 <label>Location Description:</label> <span>{{loc.locationDescription}}</span>
             </div>
+            <div class="d-flex">
+              <label>Max Attendees at Location:</label> <span>{{loc.maximumNumberOfGuests}}</span>
+          </div>
             <div class="d-flex">
                 <label>Event Address:</label>
                 <section>

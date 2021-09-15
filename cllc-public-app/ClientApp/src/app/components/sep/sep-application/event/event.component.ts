@@ -45,8 +45,11 @@ export class EventComponent extends FormBase implements OnInit {
         this.sepApplication = app;
         if (this.form) {
           this.setFormValue(this.sepApplication);
+        if (this.disableForm) {
+          this.form.disable();
         }
-      });
+      }
+    });
   }
 
   get cities(): AutoCompleteItem[] {
@@ -71,6 +74,10 @@ export class EventComponent extends FormBase implements OnInit {
       });
   }
 
+  get disableForm(): boolean {
+    return this.sepApplication.eventStatus !== "Draft";
+  }
+
   ngOnInit(): void {
     // create a form for the basic details
     this.form = this.fb.group({
@@ -79,27 +86,33 @@ export class EventComponent extends FormBase implements OnInit {
       maximumNumberOfGuests: [""],
       eventLocations: this.fb.array([]), // the form array for all of the locations and their data structures
     });
+
     if (this.sepApplication) {
       this.setFormValue(this.sepApplication);
+
+      // Disable the form if it has been submitted
+      if (this.disableForm) {
+        this.form.disable();
+      }
     }
 
-    this.form.get("sepCity").valueChanges
+   this.form.get("sepCity").valueChanges
       .pipe(filter(value => value && value.length >= 3),
         tap(_ => {
           this.autocompleteCities = [];
           this.sepCityRequestInProgress = true;
         }),
         switchMap(value => this.specialEventsDataService.getSepCityAutocompleteData(value, false))
-      )
-      .subscribe(data => {
-        this.autocompleteCities = data;
-        this.sepCityRequestInProgress = false;
-
-        this.cd.detectChanges();
-        if (data && data.length === 0) {
-          this.snackBar.open("No match found", "", { duration: 2500, panelClass: ["green-snackbar"] });
-        }
-      });
+        )
+        .subscribe(data => {
+          this.autocompleteCities = data;
+          this.sepCityRequestInProgress = false;
+  
+          this.cd.detectChanges();
+          if (data && data.length === 0) {
+            this.snackBar.open("No match found", "", { duration: 2500, panelClass: ["green-snackbar"] });
+          }
+        });
   }
 
   setFormValue(app: SepApplication) {
