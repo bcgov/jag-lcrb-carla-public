@@ -21,9 +21,12 @@ export class AllApplicationsComponent implements OnInit {
   currentUser: User;
   availableContacts = [];
   busy: Subscription;
+  selectedIndex: any;
 
   // table state
-  dataSource = new MatTableDataSource<PoliceTableElement>();
+  dataSourceInProgress = new MatTableDataSource<PoliceTableElement>();
+  dataSourcePoliceApproved = new MatTableDataSource<PoliceTableElement>();
+  dataSourcePoliceDenied = new MatTableDataSource<PoliceTableElement>();
   initialSelection = [];
 
 
@@ -52,7 +55,11 @@ export class AllApplicationsComponent implements OnInit {
    
     // fetch SEP applications waiting for Police Approval
     this.busy = this.loadSepApplications()
-      .subscribe(applications => this.dataSource.data = applications);
+      .subscribe(allApplications => {
+        this.dataSourceInProgress.data = allApplications.inProgress;
+        this.dataSourcePoliceApproved.data = allApplications.policeApproved;
+        this.dataSourcePoliceDenied.data = allApplications.policeDenied;        
+      });
   }
 
   private loadAccountContacts()
@@ -66,15 +73,6 @@ export class AllApplicationsComponent implements OnInit {
   }
   private loadSepApplications() {
     return this.sepDataService.getPoliceApprovalSepApplications()
-      .pipe(map(array => array.map(sepData => {
-        return {
-          ...sepData,
-          // TODO: These are hardcoded for now. Need to add text labels for numeric status values here (from Dynamics enums)
-          eventStatusLabel: 'In Progress',
-          typeOfEventLabel: 'Members',
-          policeDecisionByLabel: 'Vancouver PoliceUser',
-        } as PoliceTableElement;
-      })));
   }
 
 }

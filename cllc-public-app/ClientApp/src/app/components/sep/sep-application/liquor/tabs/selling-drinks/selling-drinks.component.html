@@ -74,7 +74,7 @@
     </app-field>
 
     <section class="pt-3">
-        <button mat-raised-button color="secondary" class="mr-3=" (click)="back.emit(true)">BACK</button>
-        <button mat-raised-button color="primary" (click)="next()">NEXT</button>
+        <button [disabled]="disableForm" mat-raised-button color="secondary" class="mr-3=" (click)="back.emit(true)">BACK</button>
+        <button [disabled]="disableForm" mat-raised-button color="primary" (click)="next()">NEXT</button>
     </section>
 </form>

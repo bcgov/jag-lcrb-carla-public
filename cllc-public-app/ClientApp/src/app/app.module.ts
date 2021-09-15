@@ -54,6 +54,7 @@ import { DynamicsFormComponent } from "@components/dynamics-form/dynamics-form.c
 import { DynamicsFormDataService } from "@services/dynamics-form-data.service";
 import { FileDataService } from "@services/file-data.service";
 import { AnnualVolumeService } from "@services/annual-volume.service";
+import { CurrencyMaskModule } from "ng2-currency-mask";
 
 import {
   EditShareholdersComponent,
@@ -313,6 +314,7 @@ import { DenyDialogComponent } from './components/police-representative/police-s
 import { CancelDialogComponent } from './components/police-representative/police-summary/cancel-dialog/cancel-dialog.component';
 import { NgxSliderModule } from "@angular-slider/ngx-slider";
 import { SepClaimComponent } from './components/sep/sep-claim/sep-claim.component';
+import { FinalConfirmationComponent } from './components/sep/sep-application/final-confirmation/final-confirmation.component';
 
 
 @NgModule({
@@ -496,12 +498,14 @@ import { SepClaimComponent } from './components/sep/sep-claim/sep-claim.componen
     DenyDialogComponent,
     CancelDialogComponent,
     SepClaimComponent,
+    FinalConfirmationComponent,
   ],
   imports: [
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
     CdkTableModule,
+    CurrencyMaskModule,
     FontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
@@ -670,7 +674,8 @@ import { SepClaimComponent } from './components/sep/sep-claim/sep-claim.componen
     PoliceSummaryComponent,
     AcceptDialogComponent,
     DenyDialogComponent,
-    CancelDialogComponent
+    CancelDialogComponent,
+    FinalConfirmationComponent
   ],
   bootstrap: [AppComponent]
 })

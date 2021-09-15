@@ -25,6 +25,11 @@ export class DrinkAmountsComponent implements OnInit {
   get application() {
     return this._application;
   }
+
+  get disableForm(): boolean {
+    return this.application && this.application.eventStatus !== "Draft";
+  }
+
   @Output() saved: EventEmitter<{ declaredServings: number }> = new EventEmitter<{ declaredServings: number }>();
   @Output() back: EventEmitter<boolean> = new EventEmitter<boolean>();
   form: FormArray;
@@ -55,7 +60,6 @@ export class DrinkAmountsComponent implements OnInit {
   next(planner) {
     if (this.drinkAmountsValid) {
       const plannerValue = planner?.form?.value || {};
-      debugger;
       this.saved.next(<any>{ drinksSalesForecasts: this.form.value, ...plannerValue });
     }
   }

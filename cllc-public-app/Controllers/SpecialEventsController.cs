@@ -16,6 +16,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Rest;
 using System.Threading.Tasks;
+using Gov.Lclb.Cllb.Public.Extensions;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
@@ -174,7 +175,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
 
 
-
                 // event locations.
 
                 foreach (var location in specialEvent.AdoxioSpecialeventSpecialeventlocations)
@@ -227,7 +227,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public IActionResult GetSpecialEventForTheApplicant(string eventId)
         {
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
-            var specialEvent = this.getSpecialEventData(eventId);
+            var specialEvent = this.GetSpecialEventData(eventId);
             if (specialEvent._adoxioContactidValue != userSettings.ContactId && specialEvent._adoxioAccountidValue != userSettings.AccountId)
             {
                 return Unauthorized();
@@ -244,9 +244,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="eventId"></param>
         /// <returns></returns>
         [HttpGet("applicant/{eventId}/summary/{filename}")]
-        public async Task<IActionResult> GetSummaryDF(string eventId, string filename)
+        public async Task<IActionResult> GetSummaryPdf(string eventId, string filename)
         {
-            MicrosoftDynamicsCRMadoxioSpecialevent specialEvent = getSpecialEventData(eventId);
+            MicrosoftDynamicsCRMadoxioSpecialevent specialEvent = GetSpecialEventData(eventId);
 
             Dictionary<string, string> parameters = new Dictionary<string, string>();
 
@@ -523,38 +523,23 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             byte[] data = await _pdfClient.GetPdf(parameters, templateName);
 
-            // To Do; Save copy of generated sep PDF for auditing/logging purposes
-            /*
-            try
-            {
-                var hash = await _pdfClient.GetPdfHash(parameters, templateName);
-                var entityName = "special event";
-                var entityId = adoxioLicense.AdoxioLicencesid;
-                var folderName = await _dynamicsClient.GetFolderName(entityName, entityId).ConfigureAwait(true);
-                var documentType = "Licence";
-                _fileManagerClient.UploadPdfIfChanged(_logger, entityName, entityId, folderName, documentType, data, hash);
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e, "Error uploading PDF");
-            }
-            */
+            await StoreCopyOfPdf(parameters, templateName, specialEvent.AdoxioSpecialeventid, data, "Summary");
 
-            return File(data, "sep/pdf", $"SEP Summary.pdf");
+            return File(data, "application/pdf", $"SEP Summary.pdf");
 
 
             //return new UnauthorizedResult();
         }
 
         /// <summary>
-        ///     endpoint for a summary pdf
+        ///     endpoint for a permit pdf
         /// </summary>
         /// <param name="eventId"></param>
         /// <returns></returns>
         [HttpGet("applicant/{eventId}/permit/{filename}")]
         public async Task<IActionResult> GetPermitPDF(string eventId, string filename)
         {
-            MicrosoftDynamicsCRMadoxioSpecialevent specialEvent = getSpecialEventData(eventId);
+            MicrosoftDynamicsCRMadoxioSpecialevent specialEvent = GetSpecialEventData(eventId);
 
             Dictionary<string, string> parameters = new Dictionary<string, string>();
 
@@ -837,30 +822,31 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             byte[] data = await _pdfClient.GetPdf(parameters, templateName);
 
-            // To Do; Save copy of generated sep PDF for auditing/logging purposes
-            /*
-            try
-            {
-                var hash = await _pdfClient.GetPdfHash(parameters, templateName);
-                var entityName = "special event";
-                var entityId = adoxioLicense.AdoxioLicencesid;
-                var folderName = await _dynamicsClient.GetFolderName(entityName, entityId).ConfigureAwait(true);
-                var documentType = "Licence";
-                _fileManagerClient.UploadPdfIfChanged(_logger, entityName, entityId, folderName, documentType, data, hash);
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e, "Error uploading PDF");
-            }
-            */
+            await StoreCopyOfPdf(parameters, templateName, specialEvent.AdoxioSpecialeventid, data, "Permit");
 
-            return File(data, "sep/pdf", $"Special Event Permit - {specialEvent.AdoxioSpecialeventpermitnumber}.pdf");
+            return File(data, "application/pdf", $"Special Event Permit - {specialEvent.AdoxioSpecialeventpermitnumber}.pdf");
 
 
             //return new UnauthorizedResult();
         }
 
-        private MicrosoftDynamicsCRMadoxioSpecialevent getSpecialEventData(string eventId)
+        private async Task StoreCopyOfPdf(Dictionary<string, string> parameters, string templateName, string id, byte[] data, string documentType)
+        {
+            try
+            {
+                var hash = await _pdfClient.GetPdfHash(parameters, templateName);
+                var entityName = "adoxio_specialevent";
+                var folderName = await _dynamicsClient.GetFolderName("specialevent", id).ConfigureAwait(true);
+                _fileManagerClient.UploadPdfIfChanged(_logger, entityName, id, folderName, documentType, data, hash);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error uploading PDF");
+            }
+        }
+
+
+        private MicrosoftDynamicsCRMadoxioSpecialevent GetSpecialEventData(string eventId)
         {
             string[] expand = new[] {
                 "adoxio_Invoice",
@@ -871,7 +857,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 "adoxio_ContactId",
                 "adoxio_AccountId",
                 "adoxio_specialevent_adoxio_sepdrinksalesforecast_SpecialEvent",
-                "adoxio_specialevent_specialeventtsacs"
+                "adoxio_specialevent_specialeventtsacs",
+                "adoxio_PoliceAccountId"
             };
             MicrosoftDynamicsCRMadoxioSpecialevent specialEvent = null;
             if (!string.IsNullOrEmpty(eventId))
@@ -1040,7 +1027,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw httpOperationException;
             }
 
-            var result = this.getSpecialEventData(newSpecialEvent.AdoxioSpecialeventid).ToViewModel(_dynamicsClient);
+            var result = this.GetSpecialEventData(newSpecialEvent.AdoxioSpecialeventid).ToViewModel(_dynamicsClient);
             result.LocalId = specialEvent.LocalId;
             return new JsonResult(specialEvent);
         }
@@ -1117,7 +1104,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
-            var existingEvent = getSpecialEventData(eventId);
+            var existingEvent = GetSpecialEventData(eventId);
             if (existingEvent._adoxioAccountidValue != userSettings.AccountId &&
                existingEvent._adoxioContactidValue != userSettings.ContactId)
             {
@@ -1250,7 +1237,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                 }));
             }
-            var result = this.getSpecialEventData(eventId).ToViewModel(_dynamicsClient);
+            var result = this.GetSpecialEventData(eventId).ToViewModel(_dynamicsClient);
             result.LocalId = specialEvent.LocalId;
             return new JsonResult(result);
         }
@@ -1460,14 +1447,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return Unauthorized();
             }
 
-            // Pending Review, Approved, Issued, Cancelled, Denied
-            string filter = $"(statuscode eq {(int?)EventStatus.PendingReview} or statuscode eq {(int?)EventStatus.Approved}"
-                + $" or statuscode eq {(int?)EventStatus.Issued} or statuscode eq {(int?)EventStatus.Cancelled} or statuscode eq {(int?)EventStatus.Denied})"
-                + $" and _adoxio_policejurisdictionid_value eq {userAccount._adoxioPolicejurisdictionidValue}";
+            var result = new SpecialEventPoliceJobSummary()
+            {
+                // Application Status == Pending Review && Police Decision == Under Review
+                InProgress = GetSepSummaries($"_adoxio_policejurisdictionid_value eq {userAccount._adoxioPolicejurisdictionidValue} and adoxio_policeapproval eq {(int?)ApproverStatus.PendingReview}"),
 
-            var result = GetSepSummaries(filter);
+                // Police Decision == Reviewed
+                PoliceApproved = GetSepSummaries($"_adoxio_policejurisdictionid_value eq {userAccount._adoxioPolicejurisdictionidValue} and statuscode ne {(int?)EventStatus.Draft} and statuscode ne {(int?)EventStatus.Issued} and (adoxio_policeapproval eq { (int?)ApproverStatus.AutoReviewed } or adoxio_policeapproval eq { (int?)ApproverStatus.Approved } or adoxio_policeapproval eq {(int?)ApproverStatus.Reviewed})"),
+
+                // Police Decision == Denied || Cancelled
+                PoliceDenied = GetSepSummaries($"_adoxio_policejurisdictionid_value eq {userAccount._adoxioPolicejurisdictionidValue} and (adoxio_policeapproval eq {(int?)ApproverStatus.Denied} or adoxio_policeapproval eq {(int?)ApproverStatus.Cancelled})")
+            };
 
             return new JsonResult(result);
+
         }
 
         // police get summary list of applications for the current user
@@ -1482,11 +1475,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return Unauthorized();
             }
 
-            var result = new SpecialEventPoliceMyJobs()
+            var result = new SpecialEventPoliceJobSummary()
             {
-                InProgress = GetSepSummaries($"_adoxio_policerepresentativeid_value eq {userSettings.ContactId} and adoxio_policeapproval eq 100000001"), // Under review
-                PoliceApproved = GetSepSummaries($"statuscode ne {(int?)EventStatus.Draft} and statuscode ne {(int?)EventStatus.Issued} and _adoxio_policerepresentativeid_value eq {userSettings.ContactId} and (adoxio_policeapproval eq {(int?)ApproverStatus.AutoReviewed} or adoxio_policeapproval eq {(int?)ApproverStatus.Approved})"),  // Approved, Auto-Approved
-                Issued = GetSepSummaries($"_adoxio_policerepresentativeid_value eq {userSettings.ContactId} and statuscode eq {(int?)EventStatus.Issued}") // status is issued
+                // Application Status == Pending Review && Police Decision == Under Review
+                InProgress = GetSepSummaries($"_adoxio_policerepresentativeid_value eq {userSettings.ContactId} and adoxio_policeapproval eq {(int?)ApproverStatus.PendingReview}"),
+
+                // Police Decision == Reviewed
+                PoliceApproved = GetSepSummaries($"statuscode ne {(int?)EventStatus.Draft} and statuscode ne {(int?)EventStatus.Issued} and _adoxio_policerepresentativeid_value eq {userSettings.ContactId} and (adoxio_policeapproval eq { (int?)ApproverStatus.AutoReviewed } or adoxio_policeapproval eq { (int?)ApproverStatus.Approved } or adoxio_policeapproval eq {(int?)ApproverStatus.Reviewed})"),  
+
+                // Police Decision == Denied || Cancelled
+                PoliceDenied = GetSepSummaries($"_adoxio_policerepresentativeid_value eq {userSettings.ContactId} and (adoxio_policeapproval eq {(int?)ApproverStatus.Denied} or adoxio_policeapproval eq {(int?)ApproverStatus.Cancelled})")
             };
 
             return new JsonResult(result);
