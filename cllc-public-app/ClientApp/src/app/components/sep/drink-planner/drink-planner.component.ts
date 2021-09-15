@@ -222,12 +222,12 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
         this.form.get("averageBeerPrice").setValidators([Validators.min(beerCost)]);
         this.form.get("averageWinePrice").setValidators([Validators.min(wineCost)]);
         this.form.get("averageSpiritsPrice").setValidators([Validators.min(spiritsCost)]);
-      } else {
+      } /* else {
         // otherwise set the maximum values (these will not be used because the form is read-only)
         this.form.get("averageBeerPrice").setValidators([Validators.max(beerDefaultPrice)]);
         this.form.get("averageWinePrice").setValidators([Validators.max(wineDefaultPrice)]);
         this.form.get("averageSpiritsPrice").setValidators([Validators.max(spiritsDefaultPrice)]);
-      }
+      } */
     }
   }
 
