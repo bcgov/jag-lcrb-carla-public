@@ -356,7 +356,7 @@
 
         <mat-divider></mat-divider>
         <div class="d-flex justify-content-between">
-            <app-field label="Is there currently a liquor licence at your event location?" [required]="true"
+            <app-field label="Will your event be held at a licensed establishment at your event location?" [required]="true"
                 [valid]="!form.get('isLocationLicensed').touched || form.get('isLocationLicensed').valid"
                 errorMessage="Licence exists is not included in the list">
                 <mat-radio-group formControlName="isLocationLicensed">
