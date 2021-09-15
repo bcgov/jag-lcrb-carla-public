@@ -384,8 +384,8 @@
 
     <mat-divider></mat-divider>
 
-    <button mat-raised-button color="secondary" class="mr-3" matStepperPrevious>BACK</button>
-    <button mat-raised-button color="primary" (click)="next()">NEXT</button>
+    <button [disabled]="disableForm" mat-raised-button color="secondary" class="mr-3" matStepperPrevious>BACK</button>
+    <button [disabled]="disableForm" mat-raised-button color="primary" (click)="next()">NEXT</button>
 
     <section class="error mt-3" *ngIf="showValidationMessages">
         <p *ngFor="let message of validationMessages">

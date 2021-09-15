@@ -40,9 +40,16 @@ export class EligibilityComponent extends FormBase implements OnInit {
         this.sepApplication = app;
         if (this.form && app) {
           this.form.patchValue(this.sepApplication);
+          if(this.disableForm){
+            this.form.disable();
+          }
         }
       });
   };
+
+  get disableForm(): boolean {
+    return this.sepApplication && this.sepApplication.eventStatus !== "Draft";
+  }
 
   constructor(private fb: FormBuilder,
     private router: Router,
@@ -69,6 +76,10 @@ export class EligibilityComponent extends FormBase implements OnInit {
       hostOrganizationAddress: [''],
       hostOrganizationCategory: [''],
     });
+
+    if(this.disableForm){
+      this.form.disable();
+    }
 
     this.form.get('privateOrPublic').valueChanges
       .pipe(distinctUntilChanged())
