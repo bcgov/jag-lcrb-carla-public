@@ -206,6 +206,10 @@ namespace Gov.Lclb.Cllb.Public.Extensions
                         var licenceEntity = _dynamicsClient.GetLicenceById(Guid.Parse(entityId));
                         folderName = licenceEntity.GetDocumentFolderName();
                         break;
+                    case "specialevent":
+                        var entity = _dynamicsClient.GetSpecialEventById(entityId);
+                        folderName = entity.GetDocumentFolderName();
+                        break;
                 }
 
             return folderName;

@@ -21,6 +21,7 @@ export class AllApplicationsComponent implements OnInit {
   currentUser: User;
   availableContacts = [];
   busy: Subscription;
+  selectedIndex: any;
 
   // table state
   dataSourceInProgress = new MatTableDataSource<PoliceTableElement>();

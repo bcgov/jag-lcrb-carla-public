@@ -645,6 +645,23 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
+        
+        public MicrosoftDynamicsCRMadoxioSpecialevent GetSpecialEventById(string id)
+        {
+            
+            // fetch from Dynamics.
+            MicrosoftDynamicsCRMadoxioSpecialevent result;
+            try
+            {
+                result = Specialevents.GetByKey(id);
+            }
+            catch (HttpOperationException)
+            {
+                result = null;
+            }
+
+            return result;
+        }
 
     }
 }
