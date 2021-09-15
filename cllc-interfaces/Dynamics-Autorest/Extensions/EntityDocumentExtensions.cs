@@ -68,5 +68,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             string folderName = $"{licence.AdoxioName}_{licenceIdCleaned}";
             return folderName;
         }
+
+        public static string GetDocumentFolderName(this MicrosoftDynamicsCRMadoxioSpecialevent specialEvent)
+        {
+            string idCleaned = CleanGuidForSharePoint(specialEvent.AdoxioSpecialeventid);
+            string folderName = $"{specialEvent.AdoxioEventname}_{idCleaned}";
+            return folderName;
+        }
     }
 }
