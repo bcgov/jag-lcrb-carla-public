@@ -187,6 +187,9 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                 case "licence":
                     listTitle = SharePointFileManager.LicenceDocumentUrlTitle;
                     break;
+                default:
+                    listTitle = entityName;
+                    break;
             }
 
             return listTitle;
