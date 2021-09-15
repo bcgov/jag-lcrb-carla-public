@@ -140,6 +140,23 @@
 
         <mat-divider></mat-divider>
         <div class="d-flex justify-content-between">
+
+            <app-field [isFullWidth]="true"
+                label="Is this an event supporting local arts or sports?"
+                [required]="true">
+                <mat-radio-group formControlName="isSupportLocalArtsOrSports">
+                    <mat-radio-button color="primary" class="mr-3" [value]="true">Yes</mat-radio-button>
+                    <mat-radio-button color="primary" class="mr-3" [value]="false">No</mat-radio-button>
+                </mat-radio-group>
+                
+            </app-field>
+           
+        </div>
+
+        
+
+        <mat-divider></mat-divider>
+        <div class="d-flex justify-content-between">
             <app-field label="When does your event start? " [required]="true"
                 [valid]="!form.get('eventStartDate').touched || form.get('eventStartDate').valid"
                 errorMessage="Event start date is required and cannot be in the past">
