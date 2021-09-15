@@ -26,6 +26,11 @@ export class TotalServingsComponent implements OnInit {
   get application() {
     return this._application;
   }
+
+  get disableForm(): boolean {
+    return this.application && this.application.eventStatus !== "Draft";
+  }
+
   @Output() saved: EventEmitter<{ totalServings: number }> = new EventEmitter<{ totalServings: number }>();
 
   suggested_servings = 0;
@@ -61,7 +66,8 @@ export class TotalServingsComponent implements OnInit {
     this.options = {
       showTicks: false,
       floor: 1,
-      ceil: this.max_servings
+      ceil: this.max_servings,
+      disabled: this.disableForm
     };
     // console.log("setting servings:", this.total_guests, this.total_minors, this.total_service_hours, this.suggested_servings, this.max_servings)
 
