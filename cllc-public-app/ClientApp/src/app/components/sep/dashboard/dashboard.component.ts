@@ -53,7 +53,8 @@ export class DashboardComponent implements OnInit {
       .subscribe((startApplication: boolean) => {
         if (startApplication) {
           const data = {
-            dateCreated: new Date()
+            dateCreated: new Date(),
+            eventStatus: "Draft"
           } as SepApplication;
 
           this.db.saveSepApplication(data)

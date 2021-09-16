@@ -98,9 +98,9 @@
               <a [href]="'api/special-events/applicant/' + row.specialEventId + '/summary/summary.pdf'" target="_blank"><fa-icon [icon]="faDownload" style="margin-right: 10px;"></fa-icon>Print Summary</a>
               <br>
             </span>
-            <!--span style="margin-bottom:5px;">
-              <a (click)="cloneApplication(element)" target="_blank" style="text-decoration: underline; color:#1a5a96; cursor: pointer;"><fa-icon [icon]="faCopy" style="margin-right: 10px;"></fa-icon>Create a Copy</a>
-            </span-->
+            <span style="margin-bottom:5px;">
+              <a (click)="cloneApplication(row)" target="_blank" style="text-decoration: underline; color:#1a5a96; cursor: pointer;"><fa-icon [icon]="faCopy" style="margin-right: 10px;"></fa-icon>Create a Copy</a>
+            </span>
 
           </td>
         </ng-container>

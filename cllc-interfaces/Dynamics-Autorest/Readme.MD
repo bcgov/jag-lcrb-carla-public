@@ -44,6 +44,10 @@ It will fetch the latest meta data (assuming your PC has correct secrets for the
 input-file:
   - dynamics-swagger.json
 
+use-extension:
+  "@microsoft.azure/autorest.modeler": "2.3.55"
+  "@microsoft.azure/autorest.csharp": "2.3.82"
+
 csharp:
   output-folder: .
   add-credentials: true
