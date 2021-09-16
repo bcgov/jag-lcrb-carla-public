@@ -35,6 +35,7 @@ export class SepApplication {
     isLocationLicensed: string;
     isMajorSignificance: boolean;
     isMajorSignificanceRational: string;
+    isSupportLocalArtsOrSports: boolean;
     isManufacturingExclusivity: boolean;
     isOnPublicProperty: boolean;
     isPrivateResidence: boolean;
