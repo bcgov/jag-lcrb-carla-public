@@ -313,6 +313,7 @@ export class SummaryComponent implements OnInit {
     switch(this.getStatus()) {
       case ("Pending Review"):
       case ("Approved"):
+      case ("Payment Required"):
         return true;
       default:
         return false;
