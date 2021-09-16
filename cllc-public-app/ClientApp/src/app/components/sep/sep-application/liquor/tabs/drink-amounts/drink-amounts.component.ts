@@ -27,7 +27,10 @@ export class DrinkAmountsComponent implements OnInit {
   }
 
   get disableForm(): boolean {
-    return this.application && this.application.eventStatus !== "Draft";
+    if(this.application){
+      return this.application?.eventStatus && this.application?.eventStatus !== "Draft";
+    }
+    return false;
   }
 
   @Output() saved: EventEmitter<{ declaredServings: number }> = new EventEmitter<{ declaredServings: number }>();
