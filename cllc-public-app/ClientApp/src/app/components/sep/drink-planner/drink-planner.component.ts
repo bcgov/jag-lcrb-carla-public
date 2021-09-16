@@ -205,8 +205,8 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
 
     // calculate the default/max price using the multiplier
     const maxBeerPrice = (this.drinkTypes["Beer/Cider/Cooler"]?.pricePerServing || 0) * multiplier;
-    const maxWinePrice = (this.drinkTypes["Wine"]?.pricePerServing * multiplier || 0) * multiplier;
-    const maxSpiritsPrice = (this.drinkTypes["Spirits"]?.pricePerServing * multiplier || 0) * multiplier;
+    const maxWinePrice = (this.drinkTypes["Wine"]?.pricePerServing || 0) * multiplier;
+    const maxSpiritsPrice = (this.drinkTypes["Spirits"]?.pricePerServing || 0) * multiplier;
 
     const minBeerPrice = 0;
     const minWinePrice = 0;
@@ -219,15 +219,17 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
 
       // if they aren't raising the price, set the maximum
       if(!isRaiseMoney){
-        this.form.get("averageBeerPrice").setValidators([Validators.max(maxBeerPrice)]);
-        this.form.get("averageWinePrice").setValidators([Validators.max(maxWinePrice)]);
-        this.form.get("averageSpiritsPrice").setValidators([Validators.max(maxSpiritsPrice)]);
-      }
+
+        this.form.get("averageBeerPrice").setValidators([Validators.max(maxBeerPrice),Validators.min(0) ]);
+        this.form.get("averageWinePrice").setValidators([Validators.max(maxWinePrice),Validators.min(0)]);
+        this.form.get("averageSpiritsPrice").setValidators([Validators.max(maxSpiritsPrice),Validators.min(0)]);
+      } else {
 
       this.form.get("averageBeerPrice").setValidators([Validators.min(minBeerPrice)]);
       this.form.get("averageWinePrice").setValidators([Validators.min(minWinePrice)]);
       this.form.get("averageSpiritsPrice").setValidators([Validators.min(minSpiritsPrice)]);
 
+    }
       // if we're read only, set to the default price (including multiplier)
     if (!this.form.value?.averageBeerPrice || this.greaterThanMax(this.form.value?.averageBeerPrice, maxBeerPrice)) {
       this.form.get("averageBeerPrice").setValue(maxBeerPrice);
@@ -238,6 +240,10 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
     if (!this.form.value?.averageSpiritsPrice) {
       this.form.get("averageSpiritsPrice").setValue(maxSpiritsPrice);
     }
+
+    this.form.get("averageBeerPrice").updateValueAndValidity();
+    this.form.get("averageWinePrice").updateValueAndValidity();
+    this.form.get("averageSpiritsPrice").updateValueAndValidity();
 
     }
   }

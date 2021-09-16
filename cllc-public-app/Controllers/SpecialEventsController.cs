@@ -486,7 +486,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 totalRevenue += (decimal)forecast.AdoxioEstimatedrevenue;
                 totalPurchaseCost += (decimal)forecast.AdoxioEstimatedcost;
-                totalProceeds += (decimal)forecast.AdoxioEstimatedrevenue - (decimal)forecast.AdoxioEstimatedcost;
+                totalProceeds += (decimal)forecast.AdoxioEstimatedrevenue <= (decimal)forecast.AdoxioEstimatedcost ? (decimal)forecast.AdoxioEstimatedrevenue - (decimal)forecast.AdoxioEstimatedcost : 0;
 
             }
 
@@ -1370,7 +1370,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 var newForecast = new MicrosoftDynamicsCRMadoxioSepdrinksalesforecast()
                 {
                     AdoxioIscharging = true,
-                    AdoxioPriceperserving = averagePrice ?? beerType.AdoxioCostperserving,
+                    AdoxioPriceperserving = averagePrice ?? 0,
                     AdoxioEstimatedservings = estimatedServings,
                 };
 
