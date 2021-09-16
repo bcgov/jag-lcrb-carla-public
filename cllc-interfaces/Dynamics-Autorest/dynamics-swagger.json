@@ -38296,6 +38296,10 @@
         "_adoxio_invoice_value": {
           "type": "string"
         },
+        "adoxio_datefirsttimesenttospd": {
+          "format": "date-time",
+          "type": "string"
+        },
         "adoxio_checklistnoticeofarticles": {
           "format": "int32",
           "type": "integer"
@@ -59945,6 +59949,9 @@
         "adoxio_licencedareadescription": {
           "type": "string"
         },
+        "adoxio_importid": {
+          "type": "string"
+        },
         "adoxio_specialeventlicencedareaid": {
           "type": "string"
         },
@@ -60337,6 +60344,9 @@
         "_createdby_value": {
           "type": "string"
         },
+        "adoxio_importid": {
+          "type": "string"
+        },
         "_createdonbehalfby_value": {
           "type": "string"
         },
@@ -60558,6 +60568,9 @@
         "_adoxio_lcrbrepresentativeid_value": {
           "type": "string"
         },
+        "adoxio_issupportlocalartsorsports": {
+          "type": "boolean"
+        },
         "_adoxio_contactid_value": {
           "type": "string"
         },
@@ -60602,6 +60615,9 @@
         "adoxio_islocalsignificance": {
           "type": "boolean"
         },
+        "adoxio_termsconditionsnotificationsent": {
+          "type": "boolean"
+        },
         "adoxio_securitycompanynameofofficial": {
           "type": "string"
         },
@@ -60619,8 +60635,8 @@
         "adoxio_islcrboverride": {
           "type": "boolean"
         },
-        "adoxio_isdeclarationgiven": {
-          "type": "boolean"
+        "_ownerid_value": {
+          "type": "string"
         },
         "adoxio_securitycompanypostalcode": {
           "type": "string"
@@ -60702,6 +60718,9 @@
           "format": "date-time",
           "type": "string"
         },
+        "adoxio_isdeclarationgiven": {
+          "type": "boolean"
+        },
         "adoxio_securitycompanystreet1": {
           "type": "string"
         },
@@ -60711,6 +60730,10 @@
         "adoxio_policeapproval": {
           "format": "int32",
           "type": "integer"
+        },
+        "adoxio_datetermsconditionsadded": {
+          "format": "date-time",
+          "type": "string"
         },
         "adoxio_responsibleindividualfirstname": {
           "type": "string"
@@ -60732,10 +60755,6 @@
           "format": "date-time",
           "type": "string"
         },
-        "adoxio_datesubmitted": {
-          "format": "date-time",
-          "type": "string"
-        },
         "_modifiedby_value": {
           "type": "string"
         },
@@ -60748,9 +60767,6 @@
           "type": "string"
         },
         "_adoxio_specialeventcitydistrictid_value": {
-          "type": "string"
-        },
-        "adoxio_responsibleindividuallastname": {
           "type": "string"
         },
         "adoxio_hostorganisationname": {
@@ -60800,7 +60816,8 @@
           "format": "decimal",
           "type": "number"
         },
-        "_ownerid_value": {
+        "adoxio_datesubmitted": {
+          "format": "date-time",
           "type": "string"
         },
         "adoxio_stepcompleted": {
@@ -60875,6 +60892,9 @@
           "type": "string"
         },
         "adoxio_hostorganisationbusinessnumber": {
+          "type": "string"
+        },
+        "adoxio_responsibleindividuallastname": {
           "type": "string"
         },
         "adoxio_specialeventstreet1": {
@@ -61167,6 +61187,10 @@
         "adoxio_eventname": {
           "type": "string"
         },
+        "adoxio_eventstart": {
+          "format": "date-time",
+          "type": "string"
+        },
         "modifiedon": {
           "format": "date-time",
           "type": "string"
@@ -61178,8 +61202,7 @@
         "_createdonbehalfby_value": {
           "type": "string"
         },
-        "adoxio_eventstart": {
-          "format": "date-time",
+        "adoxio_importid": {
           "type": "string"
         },
         "_owningteam_value": {
@@ -132515,14 +132538,6 @@
       "name": "$search",
       "description": "Search items by search phrases",
       "type": "string"
-    }
-  },
-  "responses": {
-    "error": {
-      "description": "error",
-      "schema": {
-        "$ref": "#/definitions/odata.error"
-      }
     }
   }
 }

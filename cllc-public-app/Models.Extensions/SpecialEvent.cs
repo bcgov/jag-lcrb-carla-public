@@ -45,6 +45,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                     IsOnPublicProperty = specialEvent.AdoxioIsonpublicproperty,
                     IsMajorSignificance = specialEvent.AdoxioIsmajorsignificance,
                     IsLocalSignificance = specialEvent.AdoxioIslocalsignificance,
+                    IsSupportLocalArtsOrSports = specialEvent.AdoxioIssupportlocalartsorsports,
                     IsGstRegisteredOrg = specialEvent.AdoxioIsgstregisteredorg,
                     IsManufacturingExclusivity = specialEvent.AdoxioIsmanufacturingexclusivity,
                     IsAgreeTsAndCs = specialEvent.AdoxioIsagreetsandcs,
@@ -264,6 +265,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioSpecialeventstreet2 = from.SpecialEventStreet2;
             to.AdoxioTastingevent = from.TastingEvent;
             to.AdoxioTotalservings = from.TotalServings;
+            to.AdoxioIssupportlocalartsorsports = from.IsSupportLocalArtsOrSports;
         }
     }
 }

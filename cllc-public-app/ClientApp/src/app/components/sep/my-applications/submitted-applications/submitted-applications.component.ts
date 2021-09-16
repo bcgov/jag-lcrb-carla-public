@@ -168,34 +168,49 @@ export class SubmittedApplicationsComponent implements OnInit {
     }
   }
 
-  async cloneApplication(app: SepApplication) {
-    const clone = { ...app };
-    // clear dynamics IDs
-    clone.id = undefined;
-    clone.localId = undefined;
-    if (clone?.eventLocations?.length > 0) {
-      clone.eventLocations.forEach(loc => {
-        loc.id = undefined;
-        if (loc?.serviceAreas?.length > 0) {
-          loc.serviceAreas.forEach(area => {
-            area.id = undefined;
-          });
-        }
-        if (loc?.eventDates?.length > 0) {
-          loc.eventDates.forEach(ed => {
-            ed.id = undefined;
-          });
-        }
-      });
-    }
+  async cloneApplication(appSummary: SepApplicationSummary) {
 
-    const localId = await this.db.saveSepApplication({
-      ...clone,
-      dateAgreedToTsAndCs: undefined,
-      isAgreeTsAndCs: false,
-      dateCreated: new Date()
-    } as SepApplication);
-    this.router.navigateByUrl(`/sep/application/${localId}/applicant`);
+    // first get the full application.
+    this.sepDataService.getSpecialEventForApplicant(appSummary.specialEventId)
+      .subscribe(async app => {
+        const clone = { ...app };
+        // clear dynamics IDs
+        clone.id = undefined;
+        clone.localId = undefined;
+        clone.eventStatus= "Draft";
+
+        // ensure the police field are cleared
+        clone.policeDecisionBy = undefined;
+        clone.policeApproval = undefined;
+
+        if (clone?.eventLocations?.length > 0) {
+          clone.eventLocations.forEach(loc => {
+            loc.id = undefined;
+            if (loc?.serviceAreas?.length > 0) {
+              loc.serviceAreas.forEach(area => {
+                area.id = undefined;
+              });
+            }
+            if (loc?.eventDates?.length > 0) {
+              loc.eventDates.forEach(ed => {
+                ed.id = undefined;
+              });
+            }
+          });
+        }
+    
+        const localId = await this.db.saveSepApplication({
+          ...clone,
+          dateAgreedToTsAndCs: undefined,
+          isAgreeTsAndCs: false,
+          dateCreated: new Date()
+        } as SepApplication);
+        this.router.navigateByUrl(`/sep/application/${localId}/applicant`);
+
+
+      });
+
+    
   }
 
   // async getApplications() {
