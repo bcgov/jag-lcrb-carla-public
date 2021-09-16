@@ -177,8 +177,7 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
   editPrice(): boolean {
     return this.sepApplication?.chargingForLiquorReason == 'RaiseMoney' ||
            this.sepApplication?.isLocalSignificance ||
-           this.sepApplication?.isMajorSignificance ||
-           this.sepApplication?.isSupportLocalArtsOrSports;
+           this.sepApplication?.isMajorSignificance;
   }
 
   storageMethodDescription(config: DrinkConfig): string {
