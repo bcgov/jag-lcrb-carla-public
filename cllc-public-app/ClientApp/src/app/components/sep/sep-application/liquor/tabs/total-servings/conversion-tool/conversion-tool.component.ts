@@ -69,15 +69,18 @@ const LiquorTypes = {
   beer: {
     title: 'Beer, Ciders and Coolers',
     standardDrinkSizeOz: 12,
-    maxTastingSize: '4'
+    maxTastingSize: '4',
+    maxPrice: '$5.00'
   },
   wine: {
     title: 'Wine',
     standardDrinkSizeOz: 5,
-    maxTastingSize: '2'
+    maxTastingSize: '2',
+    maxPrice: '$7.00'
   },
   spirits: {
     title: 'Spirits',
-    standardDrinkSizeOz: 1.5
+    standardDrinkSizeOz: 1.5,
+    maxPrice: '$5.00'
   },
 }

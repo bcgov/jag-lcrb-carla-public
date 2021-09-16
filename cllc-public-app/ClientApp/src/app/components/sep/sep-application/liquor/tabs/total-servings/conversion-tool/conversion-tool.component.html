@@ -2,6 +2,7 @@
     <mat-card-header>
         <mat-card-title>{{LiquorTypes[toolType]?.title}}</mat-card-title>
     </mat-card-header>
+    <p><em>Note: Only charitiable or municipally significant events can charge more than {{LiquorTypes[toolType]?.maxPrice}} - the maximum drink price set by LCRB.</em></p>
     <mat-card-content [formGroup]="form">
         <div class="d-flex item-row">
             <ng-container *ngIf="toolType !== 'spirits'">

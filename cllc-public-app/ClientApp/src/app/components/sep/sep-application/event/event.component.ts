@@ -75,7 +75,10 @@ export class EventComponent extends FormBase implements OnInit {
   }
 
   get disableForm(): boolean {
-    return this.sepApplication.eventStatus !== "Draft";
+    if(this.sepApplication){
+      return this.sepApplication?.eventStatus && this.sepApplication?.eventStatus !== "Draft";
+    }
+    return false;
   }
 
   ngOnInit(): void {
@@ -107,7 +110,7 @@ export class EventComponent extends FormBase implements OnInit {
         .subscribe(data => {
           this.autocompleteCities = data;
           this.sepCityRequestInProgress = false;
-  
+
           this.cd.detectChanges();
           if (data && data.length === 0) {
             this.snackBar.open("No match found", "", { duration: 2500, panelClass: ["green-snackbar"] });
