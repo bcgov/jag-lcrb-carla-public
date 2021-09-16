@@ -30,7 +30,7 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
   };
 
 
-  
+
   @Input() set sepApplication(value: SepApplication) {
     if (value) {
       this._app = value;
@@ -175,9 +175,13 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
   }
 
   editPrice(): boolean {
+    return true;
+  }
+
+  canRaisePrice(): boolean {
     return this.sepApplication?.chargingForLiquorReason == 'RaiseMoney' ||
-      this.sepApplication?.isLocalSignificance ||
-      this.sepApplication?.isMajorSignificance;
+    this.sepApplication?.isLocalSignificance ||
+    this.sepApplication?.isMajorSignificance;
   }
 
   storageMethodDescription(config: DrinkConfig): string {
@@ -194,50 +198,53 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
     }
 
     // applicants can change drink prices when operating certain types of charitable/significant events
-    const isRaiseMoney = this.editPrice();
+    const isRaiseMoney = this.canRaisePrice();
 
     // GST Registered Organizations can add 5% to the sell price, to recover operating costs; otherwise the max price is the price set by LCRB
     const multiplier = this._app?.isGSTRegisteredOrg ? 1.05 : 1;
 
-     // calculate the default price using the multiplier
-     const beerDefaultPrice = (this.drinkTypes["Beer/Cider/Cooler"]?.pricePerServing || 0) * multiplier;
-     // the minimum value when editing is the cost set by LCRB
-     const beerCost = (this.drinkTypes["Beer/Cider/Cooler"]?.costPerServing || 0);
- 
-     const wineDefaultPrice = this.drinkTypes["Wine"]?.pricePerServing * multiplier || 0;
-     const wineCost = (this.drinkTypes["Wine"]?.costPerServing || 0);
-     const spiritsDefaultPrice = this.drinkTypes["Spirits"]?.pricePerServing * multiplier || 0;
-     const spiritsCost = (this.drinkTypes["Spirits"]?.costPerServing || 0);
-  
+    // calculate the default/max price using the multiplier
+    const maxBeerPrice = (this.drinkTypes["Beer/Cider/Cooler"]?.pricePerServing || 0) * multiplier;
+    const maxWinePrice = (this.drinkTypes["Wine"]?.pricePerServing * multiplier || 0) * multiplier;
+    const maxSpiritsPrice = (this.drinkTypes["Spirits"]?.pricePerServing * multiplier || 0) * multiplier;
 
-    // if we're read only, set to the default price (including multiplier)
-    if (!this.form.value?.averageBeerPrice || !isRaiseMoney) {
-      this.form.get("averageBeerPrice").setValue(beerDefaultPrice);
-    }
-    if (!this.form.value?.averageWinePrice || !isRaiseMoney) {
-      this.form.get("averageWinePrice").setValue(wineDefaultPrice);
-    }
-    if (!this.form.value?.averageSpiritsPrice || !isRaiseMoney) {
-      this.form.get("averageSpiritsPrice").setValue(spiritsDefaultPrice);
-    }
+    const minBeerPrice = 0;
+    const minWinePrice = 0;
+    const minSpiritsPrice = 0;
 
     if (this.sepApplication && this.drinkTypes) {
       this.form.get("averageBeerPrice").clearValidators();
       this.form.get("averageWinePrice").clearValidators();
       this.form.get("averageSpiritsPrice").clearValidators();
 
-      // set the min values if applicable
-      if (this.editPrice()) {
-        this.form.get("averageBeerPrice").setValidators([Validators.min(beerCost)]);
-        this.form.get("averageWinePrice").setValidators([Validators.min(wineCost)]);
-        this.form.get("averageSpiritsPrice").setValidators([Validators.min(spiritsCost)]);
-      } /* else {
-        // otherwise set the maximum values (these will not be used because the form is read-only)
-        this.form.get("averageBeerPrice").setValidators([Validators.max(beerDefaultPrice)]);
-        this.form.get("averageWinePrice").setValidators([Validators.max(wineDefaultPrice)]);
-        this.form.get("averageSpiritsPrice").setValidators([Validators.max(spiritsDefaultPrice)]);
-      } */
+      // if they aren't raising the price, set the maximum
+      if(!isRaiseMoney){
+        this.form.get("averageBeerPrice").setValidators([Validators.max(maxBeerPrice)]);
+        this.form.get("averageWinePrice").setValidators([Validators.max(maxWinePrice)]);
+        this.form.get("averageSpiritsPrice").setValidators([Validators.max(maxSpiritsPrice)]);
+      }
+
+      this.form.get("averageBeerPrice").setValidators([Validators.min(minBeerPrice)]);
+      this.form.get("averageWinePrice").setValidators([Validators.min(minWinePrice)]);
+      this.form.get("averageSpiritsPrice").setValidators([Validators.min(minSpiritsPrice)]);
+
+      // if we're read only, set to the default price (including multiplier)
+    if (!this.form.value?.averageBeerPrice || this.greaterThanMax(this.form.value?.averageBeerPrice, maxBeerPrice)) {
+      this.form.get("averageBeerPrice").setValue(maxBeerPrice);
     }
+    if (!this.form.value?.averageWinePrice) {
+      this.form.get("averageWinePrice").setValue(maxWinePrice);
+    }
+    if (!this.form.value?.averageSpiritsPrice) {
+      this.form.get("averageSpiritsPrice").setValue(maxSpiritsPrice);
+    }
+
+    }
+  }
+
+  greaterThanMax(field, max): boolean {
+    debugger;
+    return (field > max) && this.canRaisePrice();
   }
 
   getErrorMessage(controlName) {
