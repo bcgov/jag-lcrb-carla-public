@@ -36,9 +36,13 @@ export class ApplicantComponent extends FormBase implements OnInit {
   }
 
   get disableForm(): boolean {
-    return this.sepApplication && this.sepApplication.eventStatus !== "Draft";
+    if(this.sepApplication){
+      return this.sepApplication?.eventStatus && this.sepApplication?.eventStatus !== "Draft";
+    }
+    return false;
   }
-  
+
+
   get sepApplication() {
     return this._app;
   }
