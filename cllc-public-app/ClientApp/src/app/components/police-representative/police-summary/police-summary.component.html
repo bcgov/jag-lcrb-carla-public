@@ -431,7 +431,7 @@
                     color="primary">Done</button>
                 </div>
               </div>
-              <button *ngIf="item.value.originator === originator" mat-button (click)="removeTnCAt(i)">
+              <button *ngIf="item.value.originator === originator && canEditTnC()" mat-button (click)="removeTnCAt(i)">
                 <fa-icon style="color: rgb(228, 85, 85)" [icon]="faTrashAlt"></fa-icon>
               </button>
             </section>
