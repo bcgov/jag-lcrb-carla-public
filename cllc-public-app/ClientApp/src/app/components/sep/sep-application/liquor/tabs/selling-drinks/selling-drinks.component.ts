@@ -27,7 +27,10 @@ export class SellingDrinksComponent extends FormBase implements OnInit {
   }
 
   get disableForm(): boolean {
-    return this.sepApplication && this.sepApplication.eventStatus !== "Draft";
+    if(this.sepApplication){
+      return this.sepApplication?.eventStatus && this.sepApplication?.eventStatus !== "Draft";
+    }
+    return false;
   }
 
   @Output() saved: EventEmitter<{ declaredServings: number }> = new EventEmitter<{ declaredServings: number }>();
@@ -66,14 +69,14 @@ export class SellingDrinksComponent extends FormBase implements OnInit {
               this.form.get("donateOrConsular").clearValidators();
               this.form.get("isGSTRegisteredOrg").clearValidators();
               break;
-  
+
           }
           this.form.get("nonProfitName").updateValueAndValidity();
           this.form.get("donateOrConsular").updateValueAndValidity();
           this.form.get("isGSTRegisteredOrg").updateValueAndValidity();
-  
+
         });
-  
+
     }
 
   isValid(): boolean {

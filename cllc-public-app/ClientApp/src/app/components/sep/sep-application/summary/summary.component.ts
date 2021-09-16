@@ -309,10 +309,15 @@ export class SummaryComponent implements OnInit {
       }
   }
 
+  getProfit(): number {
+    return Math.max(this.application?.totalRevenue - this.application?.totalPurchaseCost, 0);
+  }
+
   canWithdraw(): boolean {
     switch(this.getStatus()) {
       case ("Pending Review"):
       case ("Approved"):
+      case ("Payment Required"):
         return true;
       default:
         return false;
