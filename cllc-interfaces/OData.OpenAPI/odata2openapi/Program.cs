@@ -956,6 +956,8 @@ namespace odata2openapi
                 swaggerDocument.Components.Schemas.Add("Microsoft.Dynamics.CRM.syncerror", new OpenApiSchema() { Properties = props });
 
 
+                swaggerDocument.Components.Responses.Remove("error");
+
                 // swagger = swaggerDocument.SerializeAsJson(OpenApiSpecVersion.OpenApi3_0); // ToJson(SchemaType.Swagger2);
                 swagger = swaggerDocument.SerializeAsJson(OpenApiSpecVersion.OpenApi2_0);
                 

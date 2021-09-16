@@ -124,6 +124,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool? IsPrivateResidence { get; set; }
         public bool? IsOnPublicProperty { get; set; }
         public bool? IsLocalSignificance { get; set; }
+        public bool? IsSupportLocalArtsOrSports { get; set; }
         public DateTimeOffset? DateAgreedToTsAndCs { get; set; }
         public DateTimeOffset? DateIssued { get; set; }
 
