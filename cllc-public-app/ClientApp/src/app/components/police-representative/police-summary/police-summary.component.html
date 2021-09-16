@@ -450,13 +450,14 @@
             <textarea class="w-100" matInput [formControl]="newTnCControl" rows="5"></textarea>
           </mat-form-field>
           <button mat-raised-button [disabled]="!newTnCControl.value" (click)="addTAndC()" color="primary">Add
-            T&amp;C</button>
+            T&amp;C to List</button>
 
           <section class="d-flex flex-row-reverse">
-            <button (click)="saveTermsAndConditions()" mat-raised-button color="primary">Save T&amp;Cs
+            <button (click)="saveTermsAndConditions()" mat-raised-button color="primary" [disabled]="newTnCControl.value">Save List of T&amp;Cs to Permit
               <mat-progress-bar class="mt-1" *ngIf="savedTNC" mode="indeterminate"></mat-progress-bar>
             </button>
           </section>
+          <p><em>Note: you must first add T&Cs to the list above before saving them to the permit</em></p>
         </div>
         <div *ngIf="!canEditTnC()">
           <app-error-alert>
