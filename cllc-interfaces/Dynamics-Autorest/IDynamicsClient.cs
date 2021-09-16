@@ -33,27 +33,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        int? Top133 { get; set; }
+        int? Top { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        int? Skip133 { get; set; }
+        int? Skip { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        bool? Count133 { get; set; }
+        bool? Count { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        string Filter133 { get; set; }
+        string Filter { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        string Search133 { get; set; }
+        string Search { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client
