@@ -1,32 +1,34 @@
-ARG MYAPP_IMAGE=ose-jenkins-agent-base:latest
+ARG MYAPP_IMAGE=registry.redhat.io/openshift4/ose-jenkins-agent-base
 FROM $MYAPP_IMAGE
 
+# Source Image:
+# https://catalog.redhat.com/software/containers/openshift4/ose-jenkins-agent-base
 # registry.redhat.io/openshift4/ose-jenkins-agent-base
 
 # Labels consumed by Red Hat build service
 LABEL com.redhat.component="rh-dotnet31-jenkins-slave-container" \
       name="dotnet/dotnet-31-jenkins-slave-rhel7" \
-      version="3.1" \
+      version="5.0" \
       architecture="x86_64" \
       release="1" \
-      io.k8s.display-name="Jenkins Slave .NET Core 3.1" \
+      io.k8s.display-name="Jenkins Slave .NET Core 5.0" \
       io.k8s.description="The jenkins slave dotnet image has the dotnet tools on top of the jenkins slave base image." \
       io.openshift.tags="openshift,jenkins,slave,dotnet,dotnet31"
 
 # Don't download/extract docs for nuget packages
 # Enable nodejs and dotnet scl
-ENV DOTNET_CORE_VERSION=3.1 \
+ENV DOTNET_CORE_VERSION=5.0 \
     TZ=GMT-7 \
     BASH_ENV=/usr/local/bin/scl_enable \
     ENV=/usr/local/bin/scl_enable \
     PROMPT_COMMAND=". /usr/local/bin/scl_enable" \
-    ENABLED_COLLECTIONS="rh-nodejs10 rh-dotnet31" \
+    ENABLED_COLLECTIONS="rh-nodejs10 rh-dotnet50" \
     NUGET_XMLDOC_MODE=skip
 
 COPY contrib/bin/scl_enable /usr/local/bin/scl_enable
 
 # Install
-RUN INSTALL_PKGS="dotnet-sdk-3.1.x86_64 nodejs.x86_64 nodejs-devel.x86_64 npm.x86_64" && \
+RUN INSTALL_PKGS="dotnet-sdk-5.0.x86_64 nodejs.x86_64 nodejs-devel.x86_64 npm.x86_64" && \
     yum install -y --setopt=tsflags=nodocs --disablerepo=\* \
      --disableplugin=subscription-manager --enablerepo=ubi-8-appstream,ubi-8-baseos,ubi-8-codeready-builder \
       $INSTALL_PKGS && \
