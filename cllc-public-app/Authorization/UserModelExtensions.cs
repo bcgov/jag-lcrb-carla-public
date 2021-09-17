@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         private static List<Claim> GetClaims(this User user, string userType)
         {
             List<Claim> claims = new List<Claim>();
-            if (user == null) //a user is only a new users if they are a BCeID user or BC service card
+            if (user == null) //a user is only a new user if they are a BCeID user or BC service card
             {
                 claims.Add(new Claim(User.PermissionClaim, Permission.NewUserRegistration));
                 claims.Add(new Claim(User.UserTypeClaim, userType));
@@ -69,6 +69,10 @@ namespace Gov.Lclb.Cllb.Public.Models
                 if (!string.IsNullOrEmpty(user.UserType))
                 {
                     claims.Add(new Claim(User.UserTypeClaim, user.UserType));
+                }
+                else
+                {
+                    claims.Add(new Claim(User.UserTypeClaim, userType));
                 }
 
                 var permissions = user.GetActivePermissions().Select(p => new Claim(User.PermissionClaim, p.Code)).ToList();
