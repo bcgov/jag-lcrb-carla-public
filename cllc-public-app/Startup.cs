@@ -133,7 +133,7 @@ namespace Gov.Lclb.Cllb.Public
                 options.AddPolicy("Business-User", policy =>
                                   policy.RequireAssertion(context =>
                                   {
-                                      var res = context.User.HasClaim(c => c.Type == User.UserTypeClaim && (c.Value == "Business" || c.Value == "Police"))
+                                      var res = context.User.HasClaim(c => c.Type == User.UserTypeClaim && c.Value == "Business")
                                       && context.User.HasClaim(c => c.Type == User.PermissionClaim && c.Value == Permission.ExistingUser);
                                       return res;
                                   }));
@@ -141,7 +141,7 @@ namespace Gov.Lclb.Cllb.Public
                 options.AddPolicy("Can-Create-Account", policy =>
                                   policy.RequireAssertion(context =>
                                   {
-                                      var res = context.User.HasClaim(c => c.Type == User.UserTypeClaim && (c.Value == "Business" || c.Value == "Police"))
+                                      var res = context.User.HasClaim(c => c.Type == User.UserTypeClaim && c.Value == "Business")
                                       && (context.User.HasClaim(c => c.Type == User.PermissionClaim && c.Value == Permission.ExistingUser)
                                       || context.User.HasClaim(c => c.Type == User.PermissionClaim && c.Value == Permission.NewUserRegistration));
                                       return res;
