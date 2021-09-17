@@ -62,7 +62,7 @@ node('master') {
 
 
 // ZAP security scan
-
+/*
 podTemplate(label: 'jenkins-agent-zap', name: 'jenkins-agent-zap', serviceAccount: 'jenkins', cloud: 'openshift', containers: [
     containerTemplate(
         name: 'jnlp',
@@ -91,6 +91,7 @@ podTemplate(label: 'jenkins-agent-zap', name: 'jenkins-agent-zap', serviceAccoun
         }
     }
 }
+*/
 
 /*
 podTemplate(label: 'agent-dotnet', name: 'agent-dotnet', serviceAccount: 'jenkins', cloud: 'openshift', containers: [
