@@ -1,3 +1,5 @@
+using Microsoft.Extensions.Configuration;
+
 namespace Gov.Lclb.Cllb.Interfaces
 {
     using Microsoft.Rest;
@@ -66,6 +68,8 @@ namespace Gov.Lclb.Cllb.Interfaces
         MicrosoftDynamicsCRMadoxioSpecialevent GetSpecialEventByLicenceNumber(string licenceNumber);
 
         MicrosoftDynamicsCRMadoxioSpecialevent GetSpecialEventById(string id);
+
+        bool IsAccountSepPoliceRepresentative(string accountId, IConfiguration config);
 
     }
 }

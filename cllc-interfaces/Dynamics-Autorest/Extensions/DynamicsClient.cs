@@ -663,5 +663,28 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
+        public bool IsAccountSepPoliceRepresentative(string accountId, IConfiguration config)
+        {
+            // return false if SEP is off; there are only police reps in SEP.
+            /*
+            if (string.IsNullOrEmpty(config["FEATURE_SEP"]) || string.IsNullOrEmpty(accountId))
+            {
+                return false;
+            }
+            */
+            try
+            {
+                var account = GetAccountById(accountId);
+
+                bool result = account?.AdoxioBusinesstype == 845280019; // Police
+                
+            
+                return result;
+            }
+            catch (HttpOperationException)
+            {
+                return false;
+            }
+        }
     }
 }
