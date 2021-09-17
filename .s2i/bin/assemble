@@ -236,7 +236,7 @@ else
   dotnet restore "$DOTNET_STARTUP_PROJECT" $RESTORE_OPTIONS $RESTORE_SOURCE_OPTIONS $VERBOSITY_OPTION
   echo "---> Publishing application..."
   dotnet publish "$DOTNET_STARTUP_PROJECT" -f "$DOTNET_FRAMEWORK" -c "$DOTNET_CONFIGURATION" $VERBOSITY_OPTION \
-         --self-contained false /p:PublishWithAspNetCoreTargetManifest=false --no-restore -o "$DOTNET_APP_PATH"		 
+         --self-contained false /p:TypeScriptCompileBlocked=True /p:PublishWithAspNetCoreTargetManifest=false --no-restore -o "$DOTNET_APP_PATH"		 
 	# do a npm install if necessary.
 	if [ -f $DOTNET_APP_PATH/package.json ]; then
 		echo "Restoring Node.js packages"
