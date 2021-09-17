@@ -46,14 +46,18 @@
     </div>
     <div class="content-wrapper" *ngIf="!showBceidTermsOfUse()">
       <!-- /NAVBAR -->
+      <app-navbar *ngIf="showNavbar && currentUser==undefined && account==undefined" [currentUser]="currentUser" [account]="account"
+                  [showNoticesBadge]="showNoticesBadge$ | async"
+                  [showMessageCenterBadge]="linkedFederalReports && linkedFederalReports.length"
+                  (messageCenterClick)="showMessageCenterContent = !showMessageCenterContent"></app-navbar>
       <app-navbar *ngIf="showNavbar && currentUser && account==undefined" [currentUser]="currentUser" [account]="account"
-        [showNoticesBadge]="showNoticesBadge$ | async"
-        [showMessageCenterBadge]="linkedFederalReports && linkedFederalReports.length"
-        (messageCenterClick)="showMessageCenterContent = !showMessageCenterContent"></app-navbar>
+                  [showNoticesBadge]="showNoticesBadge$ | async"
+                  [showMessageCenterBadge]="linkedFederalReports && linkedFederalReports.length"
+                  (messageCenterClick)="showMessageCenterContent = !showMessageCenterContent"></app-navbar>
       <app-navbar *ngIf="showNavbar && account && currentUser" [currentUser]="currentUser" [account]="account"
-        [showNoticesBadge]="showNoticesBadge$ | async"
-        [showMessageCenterBadge]="linkedFederalReports && linkedFederalReports.length"
-        (messageCenterClick)="showMessageCenterContent = !showMessageCenterContent"></app-navbar>
+                  [showNoticesBadge]="showNoticesBadge$ | async"
+                  [showMessageCenterBadge]="linkedFederalReports && linkedFederalReports.length"
+                  (messageCenterClick)="showMessageCenterContent = !showMessageCenterContent"></app-navbar>
       <!-- /NAVBAR END -->
       <section *ngIf="showMessageCenterContent" style="background-color: #FFF; padding: 10px;">
         <mat-card *ngFor="let item of linkedFederalReports" style="margin-bottom: 5px;">
@@ -63,7 +67,7 @@
           been submitted. The report
           is due on the 10th of each month.
           <a style="color: #1a5a96;" (click)="showMessageCenterContent = !showMessageCenterContent"
-            [routerLink]="['/federal-reporting/' + item.licenseId + '/' + item.monthlyReportId]">
+             [routerLink]="['/federal-reporting/' + item.licenseId + '/' + item.monthlyReportId]">
             Click to action
           </a>.
         </mat-card>
