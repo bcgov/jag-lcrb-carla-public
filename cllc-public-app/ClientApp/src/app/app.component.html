@@ -46,7 +46,11 @@
     </div>
     <div class="content-wrapper" *ngIf="!showBceidTermsOfUse()">
       <!-- /NAVBAR -->
-      <app-navbar *ngIf="showNavbar" [currentUser]="currentUser" [account]="account"
+      <app-navbar *ngIf="showNavbar && currentUser && account==undefined" [currentUser]="currentUser" [account]="account"
+        [showNoticesBadge]="showNoticesBadge$ | async"
+        [showMessageCenterBadge]="linkedFederalReports && linkedFederalReports.length"
+        (messageCenterClick)="showMessageCenterContent = !showMessageCenterContent"></app-navbar>
+      <app-navbar *ngIf="showNavbar && account && currentUser" [currentUser]="currentUser" [account]="account"
         [showNoticesBadge]="showNoticesBadge$ | async"
         [showMessageCenterBadge]="linkedFederalReports && linkedFederalReports.length"
         (messageCenterClick)="showMessageCenterContent = !showMessageCenterContent"></app-navbar>
