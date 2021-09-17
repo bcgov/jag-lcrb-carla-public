@@ -114,8 +114,7 @@ const routes: Routes = [
   {
     path: "sep/dashboard",  // this route displays either the regular SEP dashboard or the Police dashboard based on user role
     component: SepHomeComponent,
-    canActivate: [BCeidOrServiceCardAuthGuard, FeatureGuard],
-    data: { feature: "Sep" }
+    canActivate: [BCeidOrServiceCardAuthGuard]
   },
   {
     path: "sep/application/:id/:step",
@@ -143,26 +142,22 @@ const routes: Routes = [
   {
     path: "sep/police/approval-settings",
     component: ApprovalSettingsComponent,
-    canActivate: [PoliceAuthGuard, FeatureGuard],
-    data: { feature: "Sep" }
+    canActivate: [PoliceAuthGuard]    
   },
   {
     path: "sep/police/all-applications",
     component: AllApplicationsComponent,
-    canActivate: [PoliceAuthGuard, FeatureGuard],
-    data: { feature: "Sep" }
+    canActivate: [PoliceAuthGuard]    
   },
   {
     path: "sep/police/my-jobs",
     component: MyJobsComponent,
-    canActivate: [PoliceAuthGuard, FeatureGuard],
-    data: { feature: "Sep" }
+    canActivate: [PoliceAuthGuard]    
   },
   {
     path: "sep/police/:specialEventId",
     component: PoliceSummaryComponent,
-    canActivate: [PoliceAuthGuard, FeatureGuard],
-    data: { feature: "Sep" },
+    canActivate: [PoliceAuthGuard],    
     canDeactivate: [CanDeactivateGuard]
   },
   {
