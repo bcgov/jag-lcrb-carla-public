@@ -641,6 +641,19 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 {
                     _logger.Debug("Checking user session");
                     userSettings = UserSettings.ReadUserSettings(context);
+
+                    // fix for cases where AuthenticatedUser contact is empty.
+                    if (userSettings?.AuthenticatedUser?.ContactId != null &&
+                        userSettings?.AuthenticatedUser?.ContactId == Guid.Empty && !string.IsNullOrEmpty(userSettings?.SiteMinderGuid))
+                    {
+                        
+                        var contact = _dynamicsClient.GetActiveContactByExternalId(userSettings.SiteMinderGuid);
+                        if (contact != null)
+                        {
+                            userSettings.AuthenticatedUser.ContactId = Guid.Parse(contact.Contactid);
+                        }
+                    }
+
                     _logger.Debug("UserSettings found: " + userSettings.GetJson());
                 }
                 catch
@@ -655,20 +668,6 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                      !string.IsNullOrEmpty(userSettings.UserId) && userSettings.UserId == userId))
                 {
                     _logger.Debug("User already authenticated with active session: " + userSettings.UserId);
-
-                    // fix for cases where AuthenticatedUser contact is empty.
-                    if (userSettings?.AuthenticatedUser?.ContactId != null &&
-                        userSettings?.AuthenticatedUser?.ContactId == Guid.Empty)
-                    {
-                        string contactExternalId = context.Request.Headers[_options.SiteMinderUserGuidKey];
-
-                        var contact = _dynamicsClient.GetActiveContactByExternalId(contactExternalId);
-                        if (contact != null)
-                        {
-                            userSettings.AuthenticatedUser.ContactId = Guid.Parse(contact.Contactid);
-                        }
-                    }
-
                     principal = userSettings.AuthenticatedUser.ToClaimsPrincipal(_options.Scheme, userSettings.UserType);
                     return AuthenticateResult.Success(new AuthenticationTicket(principal, null, Options.Scheme));
                 }
