@@ -18,7 +18,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Rest;
 using Newtonsoft.Json;
+using Serilog;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
+using ILogger = Microsoft.Extensions.Logging.ILogger;
 using User = Gov.Lclb.Cllb.Public.Models.User;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
@@ -50,36 +52,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _fileManagerClient = fileManagerClient;
         }
 
-        /// <summary>
-        /// Determine if a given contact is a police representative.
-        /// </summary>
-        /// <param name="contactId"></param>
-        /// <param name="config"></param>
-        /// <param name="dynamics"></param>
-        /// <returns>True if the contact has an account that has a police jurisdiction</returns>
-        public static bool IsSepPoliceRepresentative(string contactId, IConfiguration config, IDynamicsClient dynamics)
-        {
-            // return false if SEP is off; there are only police reps in SEP.
-            if (string.IsNullOrEmpty(config["FEATURE_SEP"]) || string.IsNullOrEmpty(contactId))
-            {
-                return false;
-            }
-
-            try
-            {
-                MicrosoftDynamicsCRMcontact contact = dynamics.GetContactById(contactId).GetAwaiter().GetResult();
-
-                bool result = contact?.ParentcustomeridAccount?.AdoxioBusinesstype == 845280019;
-                //bool result = contact?.ParentcustomeridAccount?._adoxioPolicejurisdictionidValue != null;
-                
-                return result;
-            }
-            catch (HttpOperationException)
-            {
-                // if we fail, then all G.
-                return false;
-            }
-        }
+        
 
         /// <summary>
         ///     Get a specific legal entity

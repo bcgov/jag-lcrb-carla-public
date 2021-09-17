@@ -56,7 +56,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                     claims.Add(new Claim(ClaimTypes.Email, user.Email));
                 }
 
-                if (user.ContactId != null)
+                if (user.ContactId != null && user.ContactId != Guid.Empty)
                 {
                     claims.Add(new Claim(User.UseridClaim, user.ContactId.ToString()));
                 }
@@ -78,9 +78,13 @@ namespace Gov.Lclb.Cllb.Public.Models
                 }
 
                 // This is the case for registered accounts
-                if (user.AccountId != null)
+                if (user.AccountId != null && user.ContactId != null && user.ContactId != Guid.Empty && user.AccountId != Guid.Empty)
                 {
                     claims.Add(new Claim(User.PermissionClaim, Permission.ExistingUser));
+                }
+                else
+                {
+                    claims.Add(new Claim(User.PermissionClaim, Permission.NewUserRegistration));
                 }
 
 
