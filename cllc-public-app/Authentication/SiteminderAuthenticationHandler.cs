@@ -644,11 +644,10 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
                     // fix for cases where AuthenticatedUser contact is empty.
                     if (userSettings?.AuthenticatedUser?.ContactId != null &&
-                        userSettings?.AuthenticatedUser?.ContactId == Guid.Empty)
+                        userSettings?.AuthenticatedUser?.ContactId == Guid.Empty && !string.IsNullOrEmpty(userSettings?.SiteMinderGuid))
                     {
-                        string contactExternalId = context.Request.Headers[_options.SiteMinderUserGuidKey];
-
-                        var contact = _dynamicsClient.GetActiveContactByExternalId(contactExternalId);
+                        
+                        var contact = _dynamicsClient.GetActiveContactByExternalId(userSettings.SiteMinderGuid);
                         if (contact != null)
                         {
                             userSettings.AuthenticatedUser.ContactId = Guid.Parse(contact.Contactid);
