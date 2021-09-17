@@ -37,6 +37,7 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
       this.totalServings = this._app.totalServings;
       this.form.patchValue(this._app);
       this.updateFormValidation();
+
     }
   }
 
@@ -201,7 +202,7 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
     const isRaiseMoney = this.canRaisePrice();
 
     // GST Registered Organizations can add 5% to the sell price, to recover operating costs; otherwise the max price is the price set by LCRB
-    const multiplier = this._app?.isGSTRegisteredOrg ? 1.05 : 1;
+    const multiplier = this.sepApplication?.isGSTRegisteredOrg ? 1.05 : 1;
 
     // calculate the default/max price using the multiplier
     const maxBeerPrice = (this.drinkTypes["Beer/Cider/Cooler"]?.pricePerServing || 0) * multiplier;
@@ -230,7 +231,9 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
       this.form.get("averageSpiritsPrice").setValidators([Validators.min(minSpiritsPrice)]);
 
     }
-      // if we're read only, set to the default price (including multiplier)
+
+
+      // if there is no price
     if (!this.form.value?.averageBeerPrice || this.greaterThanMax(this.form.value?.averageBeerPrice, maxBeerPrice)) {
       this.form.get("averageBeerPrice").setValue(maxBeerPrice);
     }
@@ -249,7 +252,7 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
   }
 
   greaterThanMax(field, max): boolean {
-    debugger;
+    //debugger;
     return (field > max) && this.canRaisePrice();
   }
 
