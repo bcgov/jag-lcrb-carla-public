@@ -84,6 +84,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     user.contactid = userSettings.SiteMinderGuid;
                 }
 
+                if (!string.IsNullOrEmpty(user.accountid))
+                {
+                    user.isPoliceRepresentative = _dynamicsClient.IsAccountSepPoliceRepresentative(user.accountid, _configuration);
+                }
                 user.accountid = string.IsNullOrEmpty(siteminderBusinessGuid) ? userSettings.AccountId : siteminderBusinessGuid;
                 user.isEligibilityRequired = true;
             }
