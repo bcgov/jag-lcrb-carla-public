@@ -641,20 +641,6 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 {
                     _logger.Debug("Checking user session");
                     userSettings = UserSettings.ReadUserSettings(context);
-                    _logger.Debug("UserSettings found: " + userSettings.GetJson());
-                }
-                catch
-                {
-                    //do nothing
-                    _logger.Debug("No UserSettings found");
-                }
-
-                // is user authenticated - if so we're done
-                if ((userSettings.UserAuthenticated && string.IsNullOrEmpty(userId)) ||
-                    (userSettings.UserAuthenticated && !string.IsNullOrEmpty(userId) &&
-                     !string.IsNullOrEmpty(userSettings.UserId) && userSettings.UserId == userId))
-                {
-                    _logger.Debug("User already authenticated with active session: " + userSettings.UserId);
 
                     // fix for cases where AuthenticatedUser contact is empty.
                     if (userSettings?.AuthenticatedUser?.ContactId != null &&
@@ -669,6 +655,20 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                         }
                     }
 
+                    _logger.Debug("UserSettings found: " + userSettings.GetJson());
+                }
+                catch
+                {
+                    //do nothing
+                    _logger.Debug("No UserSettings found");
+                }
+
+                // is user authenticated - if so we're done
+                if ((userSettings.UserAuthenticated && string.IsNullOrEmpty(userId)) ||
+                    (userSettings.UserAuthenticated && !string.IsNullOrEmpty(userId) &&
+                     !string.IsNullOrEmpty(userSettings.UserId) && userSettings.UserId == userId))
+                {
+                    _logger.Debug("User already authenticated with active session: " + userSettings.UserId);
                     principal = userSettings.AuthenticatedUser.ToClaimsPrincipal(_options.Scheme, userSettings.UserType);
                     return AuthenticateResult.Success(new AuthenticationTicket(principal, null, Options.Scheme));
                 }
