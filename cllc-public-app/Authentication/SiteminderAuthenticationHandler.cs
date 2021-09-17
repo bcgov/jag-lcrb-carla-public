@@ -482,13 +482,6 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             userSettings.AuthenticatedUser = await _dynamicsClient.LoadUserLegacy(siteMinderGuid, context.Request.Headers, _ms_logger);
             _logger.Information("After getting authenticated user = " + userSettings.GetJson());
 
-            // check that the potential new user is 19.
-            if (userSettings.AuthenticatedUser != null
-                && userSettings.AuthenticatedUser.ContactId == null
-                && UserIsUnderage(context))
-            {
-                return AuthenticateResult.Fail(_options.UnderageError);
-            }
 
             // check that the user is active
             if (userSettings.AuthenticatedUser != null
@@ -566,6 +559,13 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                         userSettings.AuthenticatedUser = null;
                         userSettings.IsNewUserRegistration = true;
                     }
+
+                    // handle cases where Contact was deleted.
+                    if (contact == null)
+                    {
+                        userSettings.IsNewUserRegistration = true;
+                    }
+
                 }
             }
 
