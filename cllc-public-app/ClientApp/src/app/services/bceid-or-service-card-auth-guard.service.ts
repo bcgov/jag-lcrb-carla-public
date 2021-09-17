@@ -14,7 +14,7 @@ export class BCeidOrServiceCardAuthGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    console.log("AuthGuard#canActivate called");
+    console.log("BCeidOrServiceCardAuthGuard#canActivate called");
     return this.store.select((s) => s.currentUserState.currentUser)
       .pipe(map(user => {
         // 2021-05-05 - added support for Individual, for Basic BCeID logins.
