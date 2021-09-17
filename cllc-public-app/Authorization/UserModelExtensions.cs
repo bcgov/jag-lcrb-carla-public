@@ -78,9 +78,13 @@ namespace Gov.Lclb.Cllb.Public.Models
                 }
 
                 // This is the case for registered accounts
-                if (user.AccountId != null)
+                if (user.AccountId != null && user.ContactId != null)
                 {
                     claims.Add(new Claim(User.PermissionClaim, Permission.ExistingUser));
+                }
+                else
+                {
+                    claims.Add(new Claim(User.PermissionClaim, Permission.NewUserRegistration));
                 }
 
 
