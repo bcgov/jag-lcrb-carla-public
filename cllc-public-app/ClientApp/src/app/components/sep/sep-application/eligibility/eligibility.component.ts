@@ -121,11 +121,11 @@ export class EligibilityComponent extends FormBase implements OnInit {
   }
 
   isSoon(): boolean {
-    return differenceInCalendarDays(this.form.get('eventStartDate').value, new Date() ) < 15;
+    return differenceInCalendarDays(new Date(this.form.get('eventStartDate').value), new Date() ) < 15;
   }
 
   isTooSoon(): boolean {
-    return differenceInBusinessDays(this.form.get('eventStartDate').value, new Date() ) < 2;
+    return differenceInBusinessDays(new Date(this.form.get('eventStartDate').value), new Date() ) < 2;
   }
 
   isValid() {
