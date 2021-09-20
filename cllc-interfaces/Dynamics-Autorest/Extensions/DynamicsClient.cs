@@ -267,14 +267,17 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <returns></returns>
         public MicrosoftDynamicsCRMaccount GetAccountById(string id)
         {
-            MicrosoftDynamicsCRMaccount result;
+            MicrosoftDynamicsCRMaccount result = null;
             try
             {
                 string[] expand = { "primarycontactid", "Account_SharepointDocumentLocation" };
                 // fetch from Dynamics.
-                result = Accounts.GetByKey(accountid: id, expand: expand);
+                if (!string.IsNullOrEmpty(id) && Guid.Parse(id) != Guid.Empty)
+                {
+                    result = Accounts.GetByKey(accountid: id, expand: expand);
+                }
             }
-            catch (HttpOperationException)
+            catch (Exception)
             {
                 result = null;
             }
