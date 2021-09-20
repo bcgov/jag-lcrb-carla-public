@@ -145,7 +145,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
-                basePath += "/worker-qualification/dashboard";
+                basePath += "/sep/dashboard";
             }
 
             return basePath;
@@ -164,7 +164,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
-                basePath += "/worker-qualification/dashboard";
+                basePath += "/sep/dashboard";
             }
 
             return basePath;
