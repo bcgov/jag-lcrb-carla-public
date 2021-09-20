@@ -66,14 +66,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             try
             {
                 // if they  have a cannabis application in progress and they have not yet certified, then they will be asked to certify
-                MicrosoftDynamicsCRMaccount account = dynamics.Accounts.GetByKey(accountId);
-                return (account.AdoxioIseligibilitycertified == null || account.AdoxioIseligibilitycertified == false) && cannabisApplicationInProgress;
+                if (!string.IsNullOrEmpty(accountId) && Guid.Parse(accountId) != Guid.Empty)
+                {
+                    MicrosoftDynamicsCRMaccount account = dynamics.Accounts.GetByKey(accountId);
+                    return (account.AdoxioIseligibilitycertified == null || account.AdoxioIseligibilitycertified == false) && cannabisApplicationInProgress;
+                }
+                
             }
             catch (HttpOperationException)
             {
                 // if we fail, then all G. 
-                return false;
             }
+            return false;
         }
 
         /// <summary>
