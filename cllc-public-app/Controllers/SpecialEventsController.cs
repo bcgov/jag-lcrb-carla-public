@@ -243,6 +243,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// </summary>
         /// <param name="eventId"></param>
         /// <returns></returns>
+        [AllowAnonymous]
         [HttpGet("applicant/{eventId}/summary/{filename}")]
         public async Task<IActionResult> GetSummaryPdf(string eventId, string filename)
         {
@@ -486,7 +487,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 totalRevenue += (decimal)forecast.AdoxioEstimatedrevenue;
                 totalPurchaseCost += (decimal)forecast.AdoxioEstimatedcost;
-                totalProceeds += (decimal)forecast.AdoxioEstimatedrevenue <= (decimal)forecast.AdoxioEstimatedcost ? (decimal)forecast.AdoxioEstimatedrevenue - (decimal)forecast.AdoxioEstimatedcost : 0;
+                totalProceeds += (decimal)forecast.AdoxioEstimatedrevenue - (decimal)forecast.AdoxioEstimatedcost;
 
             }
 
@@ -498,7 +499,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             feesInfo += $"<td class='field center fat' >{String.Format("{0:$#,##0.00}", totalPurchaseCost)}</th></tr>";
 
             feesInfo += "<tr style='background-color:#e0e0e0;'><th class='heading fat' colspan=5>Estimated net proceeds/profit from liquor sales</th>";
-            feesInfo += $"<td class='field center fat' >{String.Format("{0:$#,##0.00}", totalProceeds)}</th></tr>";
+            feesInfo += $"<td class='field center fat' >{String.Format("{0:$#,##0.00}", Math.Max(totalProceeds,0))}</th></tr>";
 
             feesInfo += "<tr style='background-color:#e0e0e0;'><th class='heading' colspan=5>Total PST Amount Due</th>";
             feesInfo += $"<td class='field center' >{String.Format("{0:$#,##0.00}", specialEvent.AdoxioNetestimatedpst)}</th></tr>";
@@ -536,6 +537,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// </summary>
         /// <param name="eventId"></param>
         /// <returns></returns>
+        [AllowAnonymous]
         [HttpGet("applicant/{eventId}/permit/{filename}")]
         public async Task<IActionResult> GetPermitPDF(string eventId, string filename)
         {
@@ -844,7 +846,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.LogError(e, "Error uploading PDF");
             }
         }
-
 
         private MicrosoftDynamicsCRMadoxioSpecialevent GetSpecialEventData(string eventId)
         {
