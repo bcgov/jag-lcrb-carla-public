@@ -27,7 +27,8 @@ export class MyApplicationsComponent implements OnInit {
     private db: IndexedDBService,
     private route: ActivatedRoute,
     private router: Router,
-    private dialog: MatDialog) {
+    private dialog: MatDialog,
+    ) {
     store.select(state => state.currentUserState.currentUser)
       .subscribe((user: User) => {
         this.currentUser = user;
