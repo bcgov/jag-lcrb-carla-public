@@ -14,7 +14,7 @@ export class FeatureGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    console.log("BCeidAuthGuard#canActivate called");
+    console.log("FeatureGuard#canActivate called");
     return this.featureFlagService.featureOn(route.data.feature)
       .pipe(map(featureOn => {
         if (!featureOn) {

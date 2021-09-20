@@ -84,6 +84,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     user.contactid = userSettings.SiteMinderGuid;
                 }
 
+                if (!string.IsNullOrEmpty(user.accountid))
+                {
+                    user.isPoliceRepresentative = _dynamicsClient.IsAccountSepPoliceRepresentative(user.accountid, _configuration);
+                }
                 user.accountid = string.IsNullOrEmpty(siteminderBusinessGuid) ? userSettings.AccountId : siteminderBusinessGuid;
                 user.isEligibilityRequired = true;
             }
@@ -94,11 +98,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 user.email = userSettings.AuthenticatedUser.Email;
                 user.isNewUser = false;
                 user.isEligibilityRequired = EligibilityController.IsEligibilityCheckRequired(user.accountid, _configuration, _dynamicsClient);
-                user.isPoliceRepresentative = ContactController.IsSepPoliceRepresentative(user.contactid, _configuration, _dynamicsClient);
-                if (user.isPoliceRepresentative)
-                {
-                    user.UserType = "Police";
-                }
+                user.isPoliceRepresentative = _dynamicsClient.IsAccountSepPoliceRepresentative(user.accountid, _configuration);
             }
 
             return new JsonResult(user);

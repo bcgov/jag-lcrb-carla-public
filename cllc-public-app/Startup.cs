@@ -1,5 +1,6 @@
 // change to a #define to enable MSSQL
 #undef USE_MSSQL
+#undef USE_GEOCODER_CHECK 
 
 using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Public.Authentication;
@@ -187,6 +188,9 @@ namespace Gov.Lclb.Cllb.Public
 
                 // health checks
                 services.AddHealthChecks()
+#if USE_GEOCODER_CHECK
+                    .AddCheck<GeocoderHealthCheck>("Geocoder")
+#endif
                     .AddCheck("cllc_public_app", () => HealthCheckResult.Healthy())
                     // No longer checking SQL Server in health checks as the SQL components are no longer active.
 #if (USE_MSSQL)
@@ -195,7 +199,7 @@ namespace Gov.Lclb.Cllb.Public
                     .AddRedis(config, name: "Redis");
                 /*
                  * .AddCheck<DynamicsHealthCheck>("Dynamics")
-                 * .AddCheck<GeocoderHealthCheck>("Geocoder");
+                 *
                  */
 
 
@@ -204,13 +208,16 @@ namespace Gov.Lclb.Cllb.Public
             {
                 // health checks
                 services.AddHealthChecks()
+#if USE_GEOCODER_CHECK
+                    .AddCheck<GeocoderHealthCheck>("Geocoder")
+#endif
                     .AddCheck("cllc_public_app", () => HealthCheckResult.Healthy());
                 // No longer checking SQL Server in health checks as the SQL components are no longer active.
 #if (USE_MSSQL)
                 .AddSqlServer(DatabaseTools.GetConnectionString(Configuration), name: "Sql server")
 #endif
                 //.AddCheck<DynamicsHealthCheck>("Dynamics")
-                //.AddCheck<GeocoderHealthCheck>("Geocoder");
+
             }
 
             // session will automatically use redis or another distributed cache if it is available.
@@ -253,19 +260,8 @@ namespace Gov.Lclb.Cllb.Public
         private void SetupServices(IServiceCollection services)
         {
 
-            string dynamicsOdataUri = _configuration["DYNAMICS_ODATA_URI"];
-            string aadTenantId = _configuration["DYNAMICS_AAD_TENANT_ID"];
-            string serverAppIdUri = _configuration["DYNAMICS_SERVER_APP_ID_URI"];
-            string clientKey = _configuration["DYNAMICS_CLIENT_KEY"];
-            string clientId = _configuration["DYNAMICS_CLIENT_ID"];
-
-            string ssgUsername = _configuration["SSG_USERNAME"];
-            string ssgPassword = _configuration["SSG_PASSWORD"];
-
             AuthenticationResult authenticationResult = null;
-
-
-
+            
             services.AddCors(options =>
             {
                 options.AddPolicy(MyAllowSpecificOrigins,
@@ -280,31 +276,9 @@ namespace Gov.Lclb.Cllb.Public
                                         "https://justice.gov.bc.ca");
                 });
             });
-            /*
-
-            services.AddHttpClient("Dynamics", c =>
-                {
-
-                    c.BaseAddress = new Uri(dynamicsOdataUri);
-                })
-                .AddPolicyHandler(GetRetryPolicy())
-                .AddPolicyHandler(GetCircuitBreakerPolicy());
-            
-            services.AddTransient(new Func<IServiceProvider, IDynamicsClient>((serviceProvider) =>
-            {
-                var service = serviceProvider.GetRequiredService<System.Net.Http.IHttpClientFactory>();
-                var httpClient = service.CreateClient("Dynamics");
-
-                IDynamicsClient client = new DynamicsClient(httpClient, _configuration);
-
-                return client;
-            }));
-            */
 
             services.AddHttpClient<IDynamicsClient, DynamicsClient>();
-              
-
-
+            
             // add BCeID Web Services
 
             string bceidUrl = _configuration["BCEID_SERVICE_URL"];
@@ -317,7 +291,6 @@ namespace Gov.Lclb.Cllb.Public
             // add BC Express Pay (Bambora) service
             services.AddHttpClient<IBCEPService, BCEPService>()
                 .AddPolicyHandler(GetRetryPolicy());
-
 
             // add the PDF client.
             services.AddHttpClient<IPdfService, PdfService>()
@@ -372,7 +345,6 @@ namespace Gov.Lclb.Cllb.Public
 
                 }
             }
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -489,6 +461,8 @@ namespace Gov.Lclb.Cllb.Public
                 // Exclude all checks and return a 200-Ok.
                 Predicate = _ => false
             });
+
+
 
             app.UseXContentTypeOptions();
             app.UseXfo(xfo => xfo.Deny());

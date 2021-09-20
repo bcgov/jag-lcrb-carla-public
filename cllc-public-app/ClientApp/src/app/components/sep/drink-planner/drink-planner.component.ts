@@ -253,7 +253,6 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
   }
 
   greaterThanMax(field, max): boolean {
-    //debugger;
     return (field > max) && this.canRaisePrice();
   }
 
