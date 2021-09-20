@@ -845,7 +845,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
         }
 
-
         private MicrosoftDynamicsCRMadoxioSpecialevent GetSpecialEventData(string eventId)
         {
             string[] expand = new[] {

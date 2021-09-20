@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { ActivatedRoute, Params } from "@angular/router";
+import { ActivatedRoute, Params, Router } from "@angular/router";
 import { AppState } from "@app/app-state/models/app-state";
 import { Contact } from "@models/contact.model";
 import { SepApplication } from "@models/sep-application.model";
@@ -36,6 +36,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { MatDialog } from "@angular/material/dialog";
 import { FinalConfirmationComponent } from "../final-confirmation/final-confirmation.component";
+import { CancelSepApplicationDialogComponent } from "../cancel-sep-application-dialog/cancel-sep-application-dialog.component";
 
 @Component({
   selector: "app-summary",
@@ -112,7 +113,8 @@ export class SummaryComponent implements OnInit {
     private store: Store<AppState>,
     private paymentDataService: PaymentDataService,
     private sepDataService: SpecialEventsDataService,
-    private contactDataService: ContactDataService) {
+    private contactDataService: ContactDataService,
+    private router: Router) {
     this.store.select(state => state.currentUserState.currentUser)
       .subscribe(user => {
         this.contactDataService.getContact(user.contactid)
@@ -346,21 +348,40 @@ export class SummaryComponent implements OnInit {
 
 
   async cancelApplication(): Promise<void> {
-    this.savingToAPI = true;
-        const appData = await this.db.getSepApplication(this.localId);
-    if (appData.id) { // do an update ( the record exists in dynamics)
-      const result = await this.sepDataService.updateSepApplication({ ...appData, eventStatus: "Cancelled" } as SepApplication, appData.id)
-        .toPromise();
 
-      if (result.localId) {
-        await this.db.applications.update(result.localId, result);
-        this.localId = this.localId; // trigger data refresh
+    // open dialog, get reference and process returned data from dialog
+    const dialogConfig = {
+      disableClose: true,
+      autoFocus: true,
+      width: "600px",
+      height: "500px",
+      data: {
+        showStartApp: false
       }
-      //} else {
-      //  const result = await this.sepDataService.createSepApplication({})
+    };
 
+    const dialogRef = this.dialog.open(CancelSepApplicationDialogComponent, dialogConfig);
+    dialogRef.afterClosed()  
+      .subscribe(async ([cancelApplication, reason]) => {
+      if (cancelApplication) {
+        if (this.application && this.application.id)
+        {
+          this.savingToAPI = true;
+          const result = await this.sepDataService.updateSepApplication({ id: this.application.id, localId: this.localId, denialReason: reason, eventStatus: "Cancelled" } as SepApplication, this.application.id)
+          .toPromise();
+
+          if (result.localId) {
+            await this.db.applications.update(result.localId, result);
+            this.localId = this.localId; // trigger data refresh
+          }
+          this.savingToAPI = false;
+          this.router.navigate(["/sep/dashboard"]);
+        }
     }
-    this.savingToAPI = false;
+  });
+
+
+    
   }
 
   async submitApplication(): Promise<void> {
