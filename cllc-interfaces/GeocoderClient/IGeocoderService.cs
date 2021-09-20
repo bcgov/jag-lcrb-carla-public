@@ -10,5 +10,6 @@ namespace Gov.Lclb.Cllb.Interfaces
     {
         Task GeocodeEstablishment(string establishmentId, ILogger logger);
         Task<bool> TestAuthentication();
+        Task<string> GetToken(string secret);
     }
 }

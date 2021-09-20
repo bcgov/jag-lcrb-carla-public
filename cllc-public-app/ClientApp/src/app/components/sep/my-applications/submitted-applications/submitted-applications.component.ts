@@ -36,6 +36,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { SEP_APPLICATION_STEPS } from "@components/sep/sep-application/sep-application.component";
 import { Router } from "@angular/router";
+import { MatDialog } from "@angular/material/dialog";
+import { CancelSepApplicationDialogComponent } from "@components/sep/sep-application/cancel-sep-application-dialog/cancel-sep-application-dialog.component";
 
 @Component({
   selector: "app-submitted-applications",
@@ -81,6 +83,7 @@ export class SubmittedApplicationsComponent implements OnInit {
 
   constructor(private sepDataService: SpecialEventsDataService,
     private snackBar: MatSnackBar,
+    public dialog: MatDialog,
     private db: IndexedDBService,
     private router: Router,
     private paymentDataService: PaymentDataService) { }
@@ -212,6 +215,41 @@ export class SubmittedApplicationsComponent implements OnInit {
 
     
   }
+
+
+  async cancelApplication(appSummary: SepApplicationSummary): Promise<void> {
+
+    // open dialog, get reference and process returned data from dialog
+    const dialogConfig = {
+      disableClose: true,
+      autoFocus: true,
+      width: "600px",
+      height: "500px",
+      data: {
+        showStartApp: false
+      }
+    };
+
+    const dialogRef = this.dialog.open(CancelSepApplicationDialogComponent, dialogConfig);
+    dialogRef.afterClosed()  
+      .subscribe(async ([cancelApplication, reason]) => {
+      if (cancelApplication) {
+        if (appSummary.specialEventId)
+        {
+          const result = await this.sepDataService.updateSepApplication({ id: appSummary.specialEventId, denialReason: reason, eventStatus: "Cancelled" } as SepApplication, appSummary.specialEventId)
+          .toPromise();
+
+          if (appSummary.localId) {
+            await this.db.applications.update(+appSummary.localId, result);    
+          }
+          this.router.navigateByUrl(`/sep/my-applications`)
+          .then(() => {
+            window.location.reload();
+          });
+        }
+    }
+  });
+}
 
   // async getApplications() {
   //   let applications = await this.db.applications.toArray();

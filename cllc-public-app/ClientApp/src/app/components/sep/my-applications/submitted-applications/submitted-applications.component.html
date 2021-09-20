@@ -99,9 +99,14 @@
               <br>
             </span>
             <span style="margin-bottom:5px;">
-              <a (click)="cloneApplication(row)" target="_blank" style="text-decoration: underline; color:#1a5a96; cursor: pointer;"><fa-icon [icon]="faCopy" style="margin-right: 10px;"></fa-icon>Create a Copy</a>
+              <a (click)="cancelApplication(row)" target="_blank" style="text-decoration: underline; color:#1a5a96; cursor: pointer;"><fa-icon [icon]="faCopy" style="margin-right: 10px;"></fa-icon>Withdraw</a>
+              <br>
             </span>
 
+            <span style="margin-bottom:5px;">
+              <a (click)="cloneApplication(row)" target="_blank" style="text-decoration: underline; color:#1a5a96; cursor: pointer;"><fa-icon [icon]="faCopy" style="margin-right: 10px;"></fa-icon>Create a Copy</a>
+            </span>
+            
           </td>
         </ng-container>
 

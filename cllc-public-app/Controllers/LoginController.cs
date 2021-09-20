@@ -53,8 +53,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
-            bool isPoliceRep = userSettings?.AccountId != null &&
-                               _dynamicsClient.IsAccountSepPoliceRepresentative(userSettings?.AccountId, _configuration);
+            bool isPoliceRep = false;
+            try
+            {
+                if (!string.IsNullOrEmpty(userSettings?.AccountId) && Guid.Parse(userSettings?.AccountId) != Guid.Empty)
+                {
+                    isPoliceRep =
+                        _dynamicsClient.IsAccountSepPoliceRepresentative(userSettings?.AccountId, _configuration);
+                }
+            }
+            catch (Exception)
+            {
+                isPoliceRep = false;
+            }
+        
 
             var basePath = string.IsNullOrEmpty(_configuration["BASE_PATH"]) ? "/" : _configuration["BASE_PATH"];
             // we want to redirect to the dashboard.
