@@ -123,9 +123,9 @@ namespace Gov.Lclb.Cllb.Interfaces
 
 
         /// <summary>
-        /// TestAuthentication
+        /// GetToken
         /// </summary>
-        /// <param name="name"></param>
+        /// <param name="secret"></param>
         /// <returns></returns>
         public async Task<string> GetToken(string secret)
         {
