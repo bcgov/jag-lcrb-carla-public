@@ -4,6 +4,7 @@ using System;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Gov.Lclb.Cllb.Interfaces
 {
@@ -17,20 +18,38 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         public GeocoderService(HttpClient httpClient, IConfiguration configuration)
         {
-
             _configuration = configuration;
             // create the HttpClient that is used for our direct REST calls.
             _client = httpClient;
-
-            if (!string.IsNullOrEmpty(_configuration["GEOCODER_SERVICE_BASE_URI"]) && !string.IsNullOrEmpty(_configuration["GEOCODER_JWT_TOKEN"]))
+            _client.DefaultRequestHeaders.Add("Accept", "application/json");
+            string serviceUri = _configuration["GEOCODER_SERVICE_BASE_URI"];
+            string serviceSecret = _configuration["GEOCODER_JWT_SECRET"];
+            string serviceToken = _configuration["GEOCODER_JWT_TOKEN"];
+            if (!string.IsNullOrEmpty(serviceUri))
             {
-                BaseUri = _configuration["GEOCODER_SERVICE_BASE_URI"];
-                string bearer_token = $"Bearer {_configuration["GEOCODER_JWT_TOKEN"]}";
-
-                _client.DefaultRequestHeaders.Add("Accept", "application/json");
+                BaseUri = serviceUri;
+                if (!string.IsNullOrEmpty(serviceSecret))
+                {
+                    // do a handshake with the REST service to get a token.
+                    string token = GetToken(serviceSecret).GetAwaiter().GetResult();
+                    if (token != null)
+                    {
+                        // remove the expires from the end.
+                        if (token.IndexOf(" Expires") != -1)
+                        {
+                            token = token.Substring(0, token.IndexOf(" Expires"));
+                            token = token.Replace("\"", "");
+                        }
+                        _client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
+                    }
+                }
+            }
+            // legacy method
+            else if (!string.IsNullOrEmpty(serviceToken))
+            {
+                string bearer_token = $"Bearer {serviceToken}";
                 _client.DefaultRequestHeaders.Add("Authorization", bearer_token);
             }
-
         }
 
         /// <summary>
@@ -85,6 +104,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 var response = await _client.SendAsync(endpointRequest);
                 HttpStatusCode _statusCode = response.StatusCode;
 
+                
                 if (_statusCode == HttpStatusCode.OK)
                 {
                     result = true;
@@ -96,6 +116,39 @@ namespace Gov.Lclb.Cllb.Interfaces
                 result = false;
             }
 
+
+            return result;
+
+        }
+
+
+        /// <summary>
+        /// GetToken
+        /// </summary>
+        /// <param name="secret"></param>
+        /// <returns></returns>
+        public async Task<string> GetToken(string secret)
+        {
+            string result = null;
+            HttpRequestMessage endpointRequest =
+                new HttpRequestMessage(HttpMethod.Get, BaseUri + "/api/authentication/token/" + HttpUtility.UrlEncode(secret));
+
+            // make the request.
+            try
+            {
+                var response = await _client.SendAsync(endpointRequest);
+                HttpStatusCode _statusCode = response.StatusCode;
+
+                if (_statusCode == HttpStatusCode.OK)
+                {
+                    result = await response.Content.ReadAsStringAsync();
+                }
+            }
+            catch (Exception)
+            {
+                // ignore the authentication issue.
+                result = null;
+            }
 
             return result;
 

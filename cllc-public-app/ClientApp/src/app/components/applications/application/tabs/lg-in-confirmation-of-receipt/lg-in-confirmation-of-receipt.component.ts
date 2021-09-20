@@ -212,7 +212,6 @@ export class LgInConfirmationOfReceiptComponent extends FormBase implements OnIn
 
   ProvideResolution() {
     // Update the status if a resolution file was uploaded and the status is pending
-    debugger;
     if (this.isOpenedByLGForApproval &&
       ((this.uploadedResolutionDocuments > 0
           && this.application.lGApprovalDecision == "Pending")
