@@ -243,6 +243,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// </summary>
         /// <param name="eventId"></param>
         /// <returns></returns>
+        [AllowAnonymous]
         [HttpGet("applicant/{eventId}/summary/{filename}")]
         public async Task<IActionResult> GetSummaryPdf(string eventId, string filename)
         {
@@ -536,6 +537,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// </summary>
         /// <param name="eventId"></param>
         /// <returns></returns>
+        [AllowAnonymous]
         [HttpGet("applicant/{eventId}/permit/{filename}")]
         public async Task<IActionResult> GetPermitPDF(string eventId, string filename)
         {
