@@ -2,9 +2,12 @@
   <h1>Welcome, {{currentUser?.name}}</h1>
 
   <section *ngIf="hasLinkedPoliceAccount">
+    <div class="row" style="padding-right: 30px; max-width:1200px; margin-left:5px;">
+    <div style="width: 70%">
     <p class="mat-body-2">Where would you like to go from here?</p>
     <h2>My Jobs</h2>
     <hr>
+
     <table>
       <tr>
         <td>{{assignedJobsInProgress}}</td>
@@ -22,9 +25,27 @@
         <td><a routerLink="/sep/police/my-jobs">View</a></td>
       </tr>
     </table>
+  </div>
+  <div style="text-align: center; width: 30%; ">
+    <mat-card style="background-color: #e0e0e0; min-height: 200px; margin-top: 20px; margin-left: 20px;">
+    <section><h2>How to Videos</h2>
+      <hr>
+
+      <h4><a href="https://www.youtube.com/watch?v=obTqXSacJ2Y" target="_blank">How to Review an Special Event Application</a></h4>
+      <p>Learn about the process for police to review an application for a Special Event Permit.</p>
+      <hr>
+      <h4><a href="https://www.youtube.com/watch?v=CXG9No_kXNs" target="_blank">Demonstration of the licensing portal for police</a></h4>
+      <p>This video guides police on how to navigate the licensing portal, to review an application for a special event permit.</p>
+
+    </section>
+
+    </mat-card>
+
+  </div>
+  </div>
   </section>
 
-  
+
   <section *ngIf="!hasLinkedPoliceAccount" class="mat-elevation-z2 submitted-content" style="background-color: #F1F4FA">
     <ng-container *ngIf="!terminatedApplicationExists">
       <div>
