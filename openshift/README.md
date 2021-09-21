@@ -36,6 +36,8 @@ Where `<SECRETNAME>` is the name you specified in step 7 when you imported the s
 
 `oc import-image ubi8/dotnet-50 --from=registry.redhat.io/dotnet/ubi8/dotnet-50 --confirm` 
 
+`oc import-image rhel8/redis-6:1-21 --from=registry.redhat.io/rhel8/redis-6 --confirm`
+
 10) Adjust your builds to use this imported image
 
 
