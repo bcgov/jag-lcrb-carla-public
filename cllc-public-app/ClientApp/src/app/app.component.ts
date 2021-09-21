@@ -54,6 +54,7 @@ export class AppComponent extends FormBase implements OnInit {
   Months = Months; // make available in template
   parseInt = parseInt; // make available in template
   licenseeChangeFeatureOn: boolean;
+  eligibilityFeatureOn: boolean;
   isEligibilityDialogOpen: boolean;
   showNavbar = true;
   testAPIRestul = "";
@@ -80,6 +81,9 @@ export class AppComponent extends FormBase implements OnInit {
 
     featureFlagService.featureOn("LicenseeChanges")
       .subscribe(x => this.licenseeChangeFeatureOn = x);
+
+    featureFlagService.featureOn("Eligibility")
+      .subscribe(x => this.eligibilityFeatureOn = x);
 
     this.isDevMode = isDevMode();
     this.router.events
@@ -186,7 +190,7 @@ export class AppComponent extends FormBase implements OnInit {
             this.currentUser.accountid !== "00000000-0000-0000-0000-000000000000") {
             this.accountDataService.loadCurrentAccountToStore(this.currentUser.accountid)
               .subscribe(() => {
-                if (data.isEligibilityRequired) {
+                if (data.isEligibilityRequired && this.eligibilityFeatureOn) {
                   this.openEligibilityModal();
                 }
               });
