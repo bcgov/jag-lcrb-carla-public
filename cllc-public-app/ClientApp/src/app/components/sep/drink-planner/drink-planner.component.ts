@@ -200,16 +200,23 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
 
     // applicants can change drink prices when operating certain types of charitable/significant events
     const isRaiseMoney = this.canRaisePrice();
+    const notCharging = this.sepApplication?.chargingForLiquorReason == 'LiquorIsFree';
 
     // GST Registered Organizations can add 5% to the sell price, to recover operating costs; otherwise the max price is the price set by LCRB
     const multiplier = this.sepApplication?.isGSTRegisteredOrg ? 1.05 : 1;
 
-    // calculate the default/max price using the multiplier
-    const maxBeerPrice = (this.drinkTypes["Beer/Cider/Cooler"]?.pricePerServing || 0) * multiplier;
-    const maxWinePrice = (this.drinkTypes["Wine"]?.pricePerServing || 0) * multiplier;
-    const maxSpiritsPrice = (this.drinkTypes["Spirits"]?.pricePerServing || 0) * multiplier;
+    let maxBeerPrice = 0;
+    let maxWinePrice = 0;
+    let maxSpiritsPrice = 0;
 
-    const minBeerPrice = 0;
+    // calculate the default/max price using the multiplier
+    if(!notCharging){
+      maxBeerPrice = (this.drinkTypes["Beer/Cider/Cooler"]?.pricePerServing || 0) * multiplier;
+      maxWinePrice = (this.drinkTypes["Wine"]?.pricePerServing || 0) * multiplier;
+      maxSpiritsPrice = (this.drinkTypes["Spirits"]?.pricePerServing || 0) * multiplier;
+    }
+
+    const minBeerPrice =0;
     const minWinePrice = 0;
     const minSpiritsPrice = 0;
 
