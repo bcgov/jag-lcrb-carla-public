@@ -10,7 +10,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 		private static string test_order = "1234567890";
         private static string test_id = "4443-7132-cf6b-4e91-9fe6-fbfc-5594-fc44";
         private static string test_amt = "7500.00";
-		private static string actual_url1 = "https://google.ca/Payment/Payment.asp?merchant_id=123456&trnType=P&trnOrderNumber=1234567890&ref1=http://localhost:5000/cannabislicensing/payment-confirmation&ref3=4443-7132-cf6b-4e91-9fe6-fbfc-5594-fc44&trnAmount=7500.00&hashExpiry=";
+		private static string actual_url1 = "https://google.ca/Payment/Payment.asp?merchant_id=123456&trnType=P&trnOrderNumber=1234567890&ref1=http://localhost:5000/lcrb/payment-confirmation&ref3=4443-7132-cf6b-4e91-9fe6-fbfc-5594-fc44&trnAmount=7500.00&hashExpiry=";
 		private static string actual_url2 = "https://google.ca/process_transaction.asp?requestType=BACKEND&merchantid=123456&trnType=Q&trnOrderNumber=1234567890&hashValue=";
 
         [TestMethod]
