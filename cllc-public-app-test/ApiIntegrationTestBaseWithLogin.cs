@@ -42,7 +42,7 @@ namespace Gov.Lclb.Cllb.Public.Test
         {
             string loginAs = userid + "::" + businessName;
 			_client.DefaultRequestHeaders.Add("DEV-USER", loginAs);
-			var request = new HttpRequestMessage(HttpMethod.Get, "/cannabislicensing/login/token/" + loginAs);
+			var request = new HttpRequestMessage(HttpMethod.Get, "/lcrb/login/token/" + loginAs);
             var response = await _client.SendAsync(request);
             string _discard = await response.Content.ReadAsStringAsync();
             Assert.True(response.StatusCode == HttpStatusCode.Redirect || response.StatusCode == HttpStatusCode.OK);
@@ -53,7 +53,7 @@ namespace Gov.Lclb.Cllb.Public.Test
         {
             string loginAs = userid + "::" + businessName;
             _client.DefaultRequestHeaders.Add("DEV-USER", loginAs);
-            var request = new HttpRequestMessage(HttpMethod.Get, "/cannabislicensing/bcservice/token/" + loginAs);
+            var request = new HttpRequestMessage(HttpMethod.Get, "/lcrb/bcservice/token/" + loginAs);
             var response = await _client.SendAsync(request);
             string _discard = await response.Content.ReadAsStringAsync();
             Assert.True(response.StatusCode == HttpStatusCode.Redirect || response.StatusCode == HttpStatusCode.OK);
