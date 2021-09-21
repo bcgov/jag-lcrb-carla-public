@@ -1,0 +1,20 @@
+<mat-dialog-content>
+    <div>
+      <h1>Are you sure you want to Withdraw this application?</h1>
+      <hr>
+      <p>This operation cannot be undone.</p>
+
+      <p>Upon confirmation, all reviews being performed on your application will be stopped and it will be removed from your list of submitted applications.</p>
+  
+      <p><strong>Reason for Withdrawing Liquor Service:</strong></p>
+      <textarea [(ngModel)]="reason" id="" rows="5" style="width:90%" readonly class="form-control"></textarea>
+  
+    </div>
+  </mat-dialog-content>
+  
+  <mat-dialog-actions>
+    <button class="btn btn-secondary" (click)="close()" id="cancelNo">CLOSE</button> &nbsp; &nbsp;
+    <button class="btn btn-primary" (click)="cancel()" id="cancelYes">Withdraw SERVICE</button>
+    <p>&nbsp;</p>
+  </mat-dialog-actions>
+  
