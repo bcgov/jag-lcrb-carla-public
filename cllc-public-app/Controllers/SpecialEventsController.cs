@@ -267,7 +267,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var eligibilityInfo = "<h2 class='info'>Eligibility</h2>";
 
             var eventStartDateParam = "";
-            DateTime eventStartDate = specialEvent.AdoxioEventstartdate.Value.LocalDateTime;
+            DateTime eventStartDate = specialEvent.AdoxioEventstartdate.Value.DateTime;
             eventStartDateParam = eventStartDate.ToString("MMMM dd, yyyy");
 
             eligibilityInfo += "<table class='info'>";
@@ -416,15 +416,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     var startDateParam = "";
                     if (sched.AdoxioEventstart.HasValue)
                     {
-                        DateTime startDate = sched.AdoxioEventstart.Value.LocalDateTime;
+                        DateTime startDate = sched.AdoxioEventstart.Value.DateTime;
                         startDateParam = startDate.ToString("MMMM dd, yyyy");
                     }
 
                     var eventTimeParam = "";
                     if (sched.AdoxioEventstart.HasValue && sched.AdoxioEventend.HasValue)
                     {
-                        DateTime startTime = sched.AdoxioEventstart.Value.LocalDateTime;
-                        DateTime endTime = sched.AdoxioEventend.Value.LocalDateTime;
+                        DateTime startTime = sched.AdoxioEventstart.Value.DateTime;
+                        DateTime endTime = sched.AdoxioEventend.Value.DateTime;
                         eventTimeParam = startTime.ToString("t", CultureInfo.CreateSpecificCulture("en-US")) + " - " + endTime.ToString("t", CultureInfo.CreateSpecificCulture("en-US"));
                     }
 
@@ -432,8 +432,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                     if (sched.AdoxioServicestart.HasValue && sched.AdoxioServiceend.HasValue)
                     {
-                        DateTime startTime = sched.AdoxioServicestart.Value.LocalDateTime;
-                        DateTime endTime = sched.AdoxioServiceend.Value.LocalDateTime;
+                        DateTime startTime = sched.AdoxioServicestart.Value.DateTime;
+                        DateTime endTime = sched.AdoxioServiceend.Value.DateTime;
                         serviceTimeParam = startTime.ToString("t", CultureInfo.CreateSpecificCulture("en-US")) + " - " + endTime.ToString("t", CultureInfo.CreateSpecificCulture("en-US"));
                     }
 
