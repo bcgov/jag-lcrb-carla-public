@@ -294,7 +294,11 @@ export class SummaryComponent implements OnInit {
           if(this.isEventPast()){
             return "Review Expired"
           } else {
-            return this.application?.eventStatus;
+            if(this.trnApproved === 1) {
+              return "Issued";
+            } else {
+              return this.application?.eventStatus;
+            }
           }
         case ("Approved"):
           if(this.isEventPast()){
