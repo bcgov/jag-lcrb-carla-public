@@ -382,7 +382,7 @@ export class EventComponent extends FormBase implements OnInit {
   showHoursAlert(eventDate: FormGroup, location: FormGroup) {
     const serviceAreas = location.get("serviceAreas").value as SepServiceArea[];
     const outdoorAreaExists = !!serviceAreas.find(area => area.setting === "Outdoors" || area.setting === "BothOutdoorsAndIndoors");
-    const indoorAreaExists = !!serviceAreas.find(area => area.setting === "Indoors" || area.setting === "BothOutdoorsAndIndoors");
+    const indoorAreaExists = !!serviceAreas.find(area => area.setting === "Indoors");
 
     const serviceEndTime = eventDate.get("serviceEndValue").value;
     const serviceEndTimeIndex = TIME_SLOTS.indexOf(TIME_SLOTS.find(slot => slot.value === serviceEndTime));
@@ -400,7 +400,7 @@ export class EventComponent extends FormBase implements OnInit {
 
   indoorAreaExists(eventDate: FormGroup, location: FormGroup) {
     const serviceAreas = location.get("serviceAreas").value as SepServiceArea[];
-    const indoorAreaExists = !!serviceAreas.find(area => area.setting === "Indoors" || area.setting === "BothOutdoorsAndIndoors");
+    const indoorAreaExists = !!serviceAreas.find(area => area.setting === "Indoors");
     return indoorAreaExists;
   }
 
