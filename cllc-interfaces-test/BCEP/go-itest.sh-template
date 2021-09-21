@@ -4,7 +4,7 @@ export BCREG_SERVICE_ACCT=cannabis
 export BCREG_SERVICE_PASSWD={PASSWD}
 
 export BASE_URI=http://localhost:5000
-export BASE_PATH=/cannabislicensing
+export BASE_PATH=/lcrb
 
 export SHAREPOINT_SERVER_APPID_URI=https://server.sharepoint.com/
 export SHAREPOINT_WEBNAME=cannabisdev
