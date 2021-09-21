@@ -102,7 +102,7 @@
           {{application.policeDecisionBy?.name}}.</p>
       </section>
 
-      <section *ngIf="getStatus() == 'Payment Required' && !trnId || mode ==='payNow'">
+      <section *ngIf="getStatus() == 'Payment Required' || trnApproved === 0 || mode ==='payNow'">
         <button mat-raised-button color="primary" (click)="payNow()">
           <fa-icon [icon]="faShoppingCart" style="margin-right: 10px;"></fa-icon>PAY NOW
         </button>
@@ -113,7 +113,7 @@
           was not issued.</p>
       </section>
 
-      <section *ngIf="getStatus() == 'Issued' || (trnId && getStatus() == 'Payment Required')">
+      <section *ngIf="getStatus() == 'Issued'">
         <p *ngIf="application?.dateIssued">Your Special Event Permit was issued on {{application?.dateIssued | date: 'MMM dd
           yyyy'}}.</p>
         <a [href]="'api/special-events/applicant/' + application.id + '/permit/summary.pdf'" target="_blank"

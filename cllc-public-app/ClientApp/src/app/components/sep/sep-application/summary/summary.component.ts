@@ -300,7 +300,7 @@ export class SummaryComponent implements OnInit {
           if(this.isEventPast()){
             return "Approval Expired"
           } else {
-             if(this.trnId) { // sometimes we return to the page after payment before the status can be updated on the backend, if we collected payment we're issued
+             if(this.trnApproved === 1 ) { // sometimes we return to the page after payment before the status can be updated on the backend, if we collected payment we're issued
                 return "Issued";
              } else {
                 return "Payment Required";
@@ -361,7 +361,7 @@ export class SummaryComponent implements OnInit {
     };
 
     const dialogRef = this.dialog.open(CancelSepApplicationDialogComponent, dialogConfig);
-    dialogRef.afterClosed()  
+    dialogRef.afterClosed()
       .subscribe(async ([cancelApplication, reason]) => {
       if (cancelApplication) {
         if (this.application && this.application.id)
@@ -381,7 +381,7 @@ export class SummaryComponent implements OnInit {
   });
 
 
-    
+
   }
 
   async submitApplication(): Promise<void> {
