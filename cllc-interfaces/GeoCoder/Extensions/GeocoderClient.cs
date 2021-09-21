@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Rest;
 using Newtonsoft.Json;
 
