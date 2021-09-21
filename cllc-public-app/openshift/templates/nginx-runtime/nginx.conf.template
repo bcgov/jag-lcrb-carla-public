@@ -84,7 +84,6 @@ http {
 		
         # Remove path prefix when handling files
         rewrite ^\/lcrb\/(.*) /$1 last;
-        rewrite ^\/cannabislicensing\/(.*) /$1 last;
 		
         %EXTRA_CONFIG%
     

@@ -2,7 +2,7 @@ import { browser, by, element } from "protractor";
 
 export class CannabisRetailLicensingPage {
   navigateTo() {
-    return browser.get("/cannabislicensing/policy-document/cannabis-retail-licence");
+    return browser.get("/lcrb/policy-document/cannabis-retail-licence");
   }
 
   getMainHeading() {
