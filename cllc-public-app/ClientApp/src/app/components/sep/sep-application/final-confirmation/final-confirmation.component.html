@@ -10,9 +10,10 @@
 </ul>
 <hr>
 </div>
-
+<div [ngBusy]="busy"></div>
 <div class="d-flex" style="margin-top: 20px;">
     <!--button mat-raised-button color="secondary" class="mr-2">BACK</button-->
 
-    <button mat-raised-button color="primary" (click)="payNow()">PAY NOW</button>
+    <button mat-raised-button color="primary" (click)="payNow()">
+        PAY NOW</button>
 </div>
