@@ -26,7 +26,7 @@
 //     }
 //   },
 //   directConnect: true,
-//   baseUrl: 'http://localhost:5000/cannabislicensing/',
+//   baseUrl: 'http://localhost:5000/lcrb/',
 //   framework: 'jasmine',
 //   jasmineNodeOpts: {
 //     showColors: true,
