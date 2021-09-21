@@ -11,6 +11,7 @@ import { Store } from '@ngrx/store';
 import { ContactDataService } from '@services/contact-data.service';
 import { Contact } from '@models/contact.model';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-final-confirmation',
@@ -18,6 +19,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./final-confirmation.component.scss']
 })
 export class FinalConfirmationComponent implements OnInit {
+  busy: Subscription;
   @Input() account: any; // TODO: change to Account and fix prod error
   @Output() saveComplete = new EventEmitter<boolean>();
   mode: "readonlySummary" | "pendingReview" | "payNow" = "readonlySummary";
@@ -71,7 +73,7 @@ export class FinalConfirmationComponent implements OnInit {
     // and payment is required due to an invoice being generated
     if (this?.application?.id) {
       // proceed to payment
-      this.submitPayment()
+      this.busy = this.submitPayment()
         .subscribe(res => {
         },
           error => {
@@ -96,7 +98,7 @@ export class FinalConfirmationComponent implements OnInit {
  * Redirect to payment processing page (Express Pay / Bambora service)
  * */
   private submitPayment() {
-    return this.paymentDataService.getPaymentURI("specialEventInvoice", this.application.id)
+     return this.paymentDataService.getPaymentURI("specialEventInvoice", this.application.id)
       .pipe(map(jsonUrl => {
         window.location.href = jsonUrl["url"];
         return jsonUrl["url"];
@@ -105,5 +107,6 @@ export class FinalConfirmationComponent implements OnInit {
           this.snackBar.open("Application payment has already been made.", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
         }
       }));
+
   }
 }
