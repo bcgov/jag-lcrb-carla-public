@@ -41,6 +41,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Mime;
+using StackExchange.Redis;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 
 namespace Gov.Lclb.Cllb.Public
@@ -172,7 +173,6 @@ namespace Gov.Lclb.Cllb.Public
             services.AddTransient(_ => (IOrgBookClient)orgBook);
 
 
-
             if (!string.IsNullOrEmpty(_configuration["REDIS_SERVER"]))
             {
                 string config = _configuration["REDIS_SERVER"];
@@ -181,6 +181,13 @@ namespace Gov.Lclb.Cllb.Public
                     string redisPassword = _configuration["REDIS_PASSWORD"];
                     config += $",password={redisPassword}";
                 }
+                // Abort Connect is a setting that controls if Redis will try a connection if it thinks the service is not available.
+                // For cloud installations such as Azure it should be set to false.
+                if (!string.IsNullOrEmpty(_configuration["REDIS_DISABLE_ABORT_CONNECT"]))
+                {
+                    config += ",abortConnect=false";
+                }
+                
                 services.AddDistributedRedisCache(o =>
                 {
                     o.Configuration = config;
@@ -201,7 +208,6 @@ namespace Gov.Lclb.Cllb.Public
                  * .AddCheck<DynamicsHealthCheck>("Dynamics")
                  *
                  */
-
 
             }
             else // checks with no redis.
