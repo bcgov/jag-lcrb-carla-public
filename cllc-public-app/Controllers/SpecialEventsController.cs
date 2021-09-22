@@ -1461,8 +1461,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // Application Status == Pending Review && Police Decision == Under Review
                 InProgress = GetSepSummaries($"_adoxio_policejurisdictionid_value eq {userAccount._adoxioPolicejurisdictionidValue} and adoxio_policeapproval eq {(int?)ApproverStatus.PendingReview}"),
 
-                // Police Decision == Reviewed
-                PoliceApproved = GetSepSummaries($"_adoxio_policejurisdictionid_value eq {userAccount._adoxioPolicejurisdictionidValue} and statuscode ne {(int?)EventStatus.Draft} and statuscode ne {(int?)EventStatus.Issued} and (adoxio_policeapproval eq { (int?)ApproverStatus.AutoReviewed } or adoxio_policeapproval eq { (int?)ApproverStatus.Approved } or adoxio_policeapproval eq {(int?)ApproverStatus.Reviewed})"),
+                // Police Decision == Reviewed 
+                PoliceApproved = GetSepSummaries($"_adoxio_policejurisdictionid_value eq {userAccount._adoxioPolicejurisdictionidValue} and statuscode ne {(int?)EventStatus.Draft} and (adoxio_policeapproval eq { (int?)ApproverStatus.AutoReviewed } or adoxio_policeapproval eq { (int?)ApproverStatus.Approved } or adoxio_policeapproval eq {(int?)ApproverStatus.Reviewed})"),
 
                 // Police Decision == Denied || Cancelled
                 PoliceDenied = GetSepSummaries($"_adoxio_policejurisdictionid_value eq {userAccount._adoxioPolicejurisdictionidValue} and (adoxio_policeapproval eq {(int?)ApproverStatus.Denied} or adoxio_policeapproval eq {(int?)ApproverStatus.Cancelled})")
