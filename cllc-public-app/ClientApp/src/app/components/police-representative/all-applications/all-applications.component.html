@@ -4,13 +4,13 @@
     applications by clicking on the column headings below. </p>
   <div [ngBusy]="[busy]"></div>
   <mat-tab-group [selectedIndex]="selectedIndex" mat-align-tabs="start">
-    <mat-tab label="In Progress">
+    <mat-tab label="Pending Police Review">
         <app-police-grid [currentUser]="currentUser" [dataSource]="dataSourceInProgress" [availableContacts]="availableContacts" (saved)="selectedIndex = 1;"></app-police-grid>
     </mat-tab>
-    <mat-tab label="Approved / Issued">
+    <mat-tab label="Police Approved / Issued">
       <app-police-grid [currentUser]="currentUser" [dataSource]="dataSourcePoliceApproved" [availableContacts]="availableContacts" (saved)="selectedIndex = 2;"></app-police-grid>
     </mat-tab>
-    <mat-tab label="Denied / Cancelled">
+    <mat-tab label="Police Denied / Cancelled">
       <app-police-grid [currentUser]="currentUser" [dataSource]="dataSourcePoliceDenied" [availableContacts]="availableContacts" (saved)="selectedIndex = 3;"></app-police-grid>
     </mat-tab>
   </mat-tab-group>
