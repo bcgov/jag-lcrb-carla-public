@@ -11,7 +11,7 @@ import { User } from '@models/user.model';
 export class UserNavComponent implements OnInit {
   // icons
   faBell = faBell;
-
+  isNavbarCollapsed = false;
   @Input() currentUser: User;
   @Input() account: Account;
   @Input() showNoticesBadge = false;
