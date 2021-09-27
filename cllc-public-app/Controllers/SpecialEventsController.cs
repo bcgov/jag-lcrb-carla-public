@@ -230,14 +230,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             var specialEvent = this.GetSpecialEventData(eventId);
+            if (specialEvent == null)
+            {
+                return BadRequest();
+            }
             if (specialEvent._adoxioContactidValue != userSettings.ContactId && specialEvent._adoxioAccountidValue != userSettings.AccountId)
             {
                 return Unauthorized();
             }
 
             var result = specialEvent.ToViewModel(_dynamicsClient);
-
-            return new JsonResult(specialEvent.ToViewModel(_dynamicsClient));
+            if (result == null)
+            {
+                return BadRequest();
+            }
+            return new JsonResult(result);
         }
 
         /// <summary>
@@ -900,8 +907,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
 
                 }
-                catch (HttpOperationException)
+                catch (HttpOperationException e)
                 {
+                    _logger.LogError(e, "Error getting special event");
                     specialEvent = null;
                 }
             }
