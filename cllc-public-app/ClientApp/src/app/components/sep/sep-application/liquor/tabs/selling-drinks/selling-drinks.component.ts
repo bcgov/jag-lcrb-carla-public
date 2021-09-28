@@ -45,10 +45,10 @@ export class SellingDrinksComponent extends FormBase implements OnInit {
       chargingForLiquorReason: [this?.sepApplication?.chargingForLiquorReason, [Validators.required]],
       isGSTRegisteredOrg: [this?.sepApplication?.isGSTRegisteredOrg],
       donateOrConsular: [this?.sepApplication?.donateOrConsular],
-      nonProfitName: [this?.sepApplication?.nonProfitName],
+      nonProfitName: [this?.sepApplication?.nonProfitName]//,
       // fundraisingPurpose: [this?.application?.fundraisingPurpose],
       // howProceedsWillBeUsedDescription: [this?.application?.howProceedsWillBeUsedDescription],
-      isManufacturingExclusivity: [this?.sepApplication?.isManufacturingExclusivity]
+      //isManufacturingExclusivity: [this?.sepApplication?.isManufacturingExclusivity]
     });
 
     this.form.get("chargingForLiquorReason").valueChanges
@@ -93,6 +93,7 @@ export class SellingDrinksComponent extends FormBase implements OnInit {
   }
 
   next() {
+
     if (this.isValid()) {
       this.saved.next({ ...this.form.value });
     }
