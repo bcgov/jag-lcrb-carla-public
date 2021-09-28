@@ -14,6 +14,11 @@
 <div class="d-flex" style="margin-top: 20px;">
     <!--button mat-raised-button color="secondary" class="mr-2">BACK</button-->
 
-    <button mat-raised-button color="primary" (click)="payNow()">
+    <button mat-raised-button color="primary" (click)="payNow(); payBtn.disabled=true;" *ngIf="!payNowClicked" #payBtn>
         PAY NOW</button>
+    <button mat-raised-button *ngIf="payNowClicked" disabled class="btn btn-secondary mt-3">PAY NOW</button>
+
+
+
+
 </div>
