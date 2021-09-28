@@ -3,7 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { SepApplication } from '@models/sep-application.model';
 import { IndexedDBService } from '@services/indexed-db.service';
 import { PaymentDataService } from '@services/payment-data.service';
-import { map, mergeMap } from "rxjs/operators";
+import { map, mergeMap, takeWhile } from "rxjs/operators";
 import { SpecialEventsDataService } from "@services/special-events-data.service";
 import { ActivatedRoute, Params } from '@angular/router';
 import { AppState } from '@app/app-state/models/app-state';
@@ -69,9 +69,12 @@ export class FinalConfirmationComponent implements OnInit {
     return this._appID;
   }
 
-  payNow() {
+  async payNow() {
     // and payment is required due to an invoice being generated
     if (this?.application?.id) {
+      // ensure the application is updated with the invoice trigger
+      const result = await this.sepDataService.updateSepApplication({ ...this.application, invoiceTrigger: true } as SepApplication, this.application.id)
+        .toPromise();
       // proceed to payment
       this.busy = this.submitPayment()
         .subscribe(res => {
