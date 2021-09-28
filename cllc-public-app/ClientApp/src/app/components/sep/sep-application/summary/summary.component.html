@@ -11,22 +11,32 @@
 
 
       <section *ngIf="getStatus() == 'Draft'">
+        <section *ngIf="!this.isEventPast()">
         <p>Here’s a summary of your event. Does everything look right? Review your event details one more time before
           submitting your application for review.</p>
 
         <p>Scroll down the page to complete the review and submit your application. Please be sure to complete the final
           declaration and submit your application.</p>
+        </section>
 
           <section style="border: solid #ccc 1px;
                     padding: 20px;
                     background-color: #fcba19;">
             <h3>IMPORTANT</h3>
+
+          <div *ngIf="!isReadOnly() && this.isEventPast()" class="d-flex" style="margin-top: 20px;">
+
+            <p><fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>Permits cannot be issued before or on the date that they are submitted.</p>
+
+          </div>
+          <div *ngIf="!this.isEventPast()">
             <p>Changes cannot be made once your application is submitted.</p>
             <p>
               If you have any questions before submitting the application please contact the SEP Online Help Line at 1
               855
               999 7656 or email <a href="mailto:LCRB.Sep@gov.bc.ca" target="_blank">LCRB.Sep@gov.bc.ca</a>
             </p>
+          </div>
           </section>
 
 
