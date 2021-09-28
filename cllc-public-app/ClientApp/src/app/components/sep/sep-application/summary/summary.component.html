@@ -38,7 +38,7 @@
         </section>
 
 
-      <section *ngIf="getStatus() == 'Payment Required' && !trnId || mode ==='payNow'">
+      <section *ngIf="getStatus() == 'Payment Required' || mode ==='payNow'">
         <h3>Congratulations!</h3>
         <p>Your application is approved</p>
         <h3>Fees Due: {{application?.invoice?.totalamount
@@ -55,7 +55,7 @@
 
       </section>
 
-      <section *ngIf="(getStatus() == 'Issued' || (trnId && getStatus() == 'Payment Required')) && !isEventPast()">
+      <section *ngIf="getStatus() == 'Issued' && !isEventPast()">
       <h3>What’s next</h3>
       <ul>
       <li>Purchase liquor product at an approved outlet. Note: Liquor products purchased from and returned to a liquor retailer may be subject to a return policy and restocking fee.</li>
@@ -176,7 +176,7 @@
       </section-->
 
         <hr>
-        <div *ngIf="trnId">
+        <div *ngIf="getStatus() == 'Issued'">
             <!--<mat-icon aria-label="Print Page" style="text-decoration: solid">print</mat-icon>-->
             <!-- <fa-icon [icon]="faPrint" class="fa-lg"></fa-icon> -->
             <!-- <a href="javascript: void(0)"> Print Page</a> -->
