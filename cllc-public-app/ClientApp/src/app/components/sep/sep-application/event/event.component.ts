@@ -13,6 +13,8 @@ import { AutoCompleteItem, SpecialEventsDataService } from "@services/special-ev
 import { filter, tap, switchMap, takeUntil, takeWhile, distinct } from "rxjs/operators";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { timeMasks } from "ngx-mask";
+import { differenceInCalendarDays } from "date-fns";
+import { differenceInCalendarYears } from "date-fns/esm";
 
 @Component({
   selector: "app-event",
@@ -330,7 +332,7 @@ export class EventComponent extends FormBase implements OnInit {
   }
 
   getEventTimeValidationError(dateForm: FormGroup): string {
-    let error: string = null;
+    let error: string = "";
     const eventFromItem = TIME_SLOTS.find(time => time.value === dateForm.get("eventStartValue").value);
     const eventFromIndex = TIME_SLOTS.indexOf(eventFromItem);
 
@@ -343,15 +345,68 @@ export class EventComponent extends FormBase implements OnInit {
     const serviceToItem = TIME_SLOTS.find(time => time.value === dateForm.get("serviceEndValue").value);
     const serviceToIndex = TIME_SLOTS.indexOf(serviceToItem);
 
-    if (eventFromIndex >= eventToIndex) {
-      error = "The event should end after the start time, not before.";
-    } else if (serviceFromIndex > serviceFromIndex) {
-      error = "The liquor service should end after the start time, not before.";
-    } else if (eventToIndex <= serviceToIndex) {
-      error = "Liquor service  must end at least 30 minutes prior to the end of the specified event time";
-    } else if (eventFromIndex > serviceFromIndex) {
-      error = "Liquor service must not start earlier than the event."
+    const globalEventStart = new Date(this.sepApplication.eventStartDate);
+
+    const eventStart = new Date(dateForm.get("eventDate").value);
+    
+    // the maximum date starts off as a year from now.    
+    var maxDate = new Date();
+    maxDate.setFullYear(maxDate.getFullYear() + 1);
+
+    var noMaxDateFound = true;
+
+    // loop through the event locations and determine the earliest starting date.
+
+    this.form.value.eventLocations.forEach(location => {      
+      location?.eventDates.forEach(sched => {
+        var locationStart  = new Date(sched.eventDate);        
+        locationStart.setDate(locationStart.getDate() + 6);
+        var tempStart = new Date(this.sepApplication.eventStartDate);;
+        tempStart.setDate(tempStart.getDate() + 6);
+
+        if (locationStart > globalEventStart && locationStart < maxDate)
+        {          
+          maxDate = locationStart;
+          noMaxDateFound = false;
+        }              
+      });      
+    });
+
+
+    if (eventStart < globalEventStart ) 
+      error += "The location event date cannot start before the special event start date. ";
+
+    if (eventStart > maxDate && noMaxDateFound === true)
+    {
+      error += "You cannot have a location start date that is more than a year from today. "  
     }
+    else if (eventStart > maxDate)
+    {
+      error += "You cannot have a location start date that is more than six days from the earliest start date for the event. " 
+    }
+    
+   
+    if (eventFromIndex >= eventToIndex) {
+      error += "The event should end after the start time, not before. ";
+    } 
+    
+    if (serviceFromIndex > serviceFromIndex) {
+      error += "The liquor service should end after the start time, not before. ";
+    } 
+    
+    if (eventToIndex <= serviceToIndex) {
+      error += "Liquor service  must end at least 30 minutes prior to the end of the specified event time. ";
+    } 
+    
+    if (eventFromIndex > serviceFromIndex) {
+      error += "Liquor service must not start earlier than the event."
+    }
+
+    if (error === "")
+    {
+      error = null;
+    }
+
     return error;
   }
 
