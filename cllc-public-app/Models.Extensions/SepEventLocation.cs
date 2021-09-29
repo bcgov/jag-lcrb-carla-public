@@ -59,7 +59,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 return;
             }
             to.AdoxioEventlocationcity = from.EventLocationCity;
-            to.AdoxioEventlocationpostalcode = from.EventLocationPostalCode;
+            to.AdoxioEventlocationpostalcode = from.EventLocationPostalCode.ToUpper();
             to.AdoxioEventlocationstreet1 = from.EventLocationStreet1;
             to.AdoxioEventlocationstreet2 = from.EventLocationStreet2;
             to.AdoxioLocationdescription = from.LocationDescription;
