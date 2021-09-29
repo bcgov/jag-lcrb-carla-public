@@ -75,7 +75,7 @@ export class FinalConfirmationComponent implements OnInit {
     if (this?.application?.id) {
       this.payNowClicked = true;
       // ensure the application is updated with the invoice trigger
-      const result = await this.sepDataService.updateSepApplication({ ...this.application, invoiceTrigger: true } as SepApplication, this.application.id)
+      const result = await this.sepDataService.generateInvoiceSepApplication(this.application.id)
         .toPromise();
       // proceed to payment
       this.busy = this.submitPayment()
