@@ -733,6 +733,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 // show all event dates
                 locationDetails += "<h3 class='info'>Event Date(s):</h2>";
+
+                // we will need to paginate every 4 days;
+                //var eventNumber = 1;
                 foreach (var sched in location.AdoxioSpecialeventlocationSchedule)
                 {
 
@@ -761,9 +764,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
 
                     locationDetails += "<table class='info'>";
-                    locationDetails += $"<tr><th class='heading'>Date:</td><td class='field'>{startDateParam}</td></tr>";
-                    locationDetails += $"<tr><th class='heading'>Event Times:</td><td class='field'>{eventTimeParam}</td></tr>";
-                    locationDetails += $"<tr><th class='heading'>Service Times:</td><td class='field'>{serviceTimeParam}</td></tr>";
+                    locationDetails += $"<tr><th class='heading'>Date:</td><td class='field'>{startDateParam}</td>";
+                    locationDetails += $"<th class='heading'>Event Times:</td><td class='field'>{eventTimeParam}</td>";
+                    locationDetails += $"<th class='heading'>Service Times:</td><td class='field'>{serviceTimeParam}</td></tr>";
                     locationDetails += "</table>";
                 }
 
@@ -794,8 +797,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var feesInfo = "";
 
             feesInfo += "<h2 class='info'>Quantities and Prices of Drinks</h2>";
-            feesInfo += "<p>Liquor must be purchased from a Government Liquor Store (BC Liquor Store) or other approved source, such as an on-site winery or brewery store";
-            feesInfo += "or a RuralAgency Store.Product returns are subject to the Product Return policy and a restocking fee.</p>";
+            feesInfo += "<p>All liquor for your event must be bought from an approved outlet. For a list of approved ";
+            feesInfo += "outlets please see the <a href='https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals/guide-sep.pdf' target='_blank'>Special Event Permit Terms and Conditions</a>.</p>";
             feesInfo += "<table class='info'>";
             feesInfo += "<tr><th class='heading fat center'>Drink Type</th><th class='heading fat center'>Number of Servings</th><th class='heading fat center'>Price Per Serving</th></tr>";
 
