@@ -27,7 +27,8 @@ export class FinalConfirmationComponent implements OnInit {
   application: SepApplication;
   contact: Contact;
   appId: any;
-  
+  payNowClicked = false;
+
   constructor(
     private snackBar: MatSnackBar,
     private db: IndexedDBService,
@@ -38,8 +39,8 @@ export class FinalConfirmationComponent implements OnInit {
     private contactDataService: ContactDataService,
     @Inject(MAT_DIALOG_DATA) public data: any
     )
-    
-    { 
+
+    {
 
       this.store.select(state => state.currentUserState.currentUser)
       .subscribe(user => {
@@ -51,7 +52,7 @@ export class FinalConfirmationComponent implements OnInit {
 
       if (data) {
         this.setApplication(data.id);
-      } 
+      }
     }
 
   ngOnInit(): void {
@@ -61,7 +62,7 @@ export class FinalConfirmationComponent implements OnInit {
     this._appID = value;
     // get the last saved application
     this.db.getSepApplication(value)
-      .then(app => {        
+      .then(app => {
       });
   }
 
@@ -72,6 +73,7 @@ export class FinalConfirmationComponent implements OnInit {
   async payNow() {
     // and payment is required due to an invoice being generated
     if (this?.application?.id) {
+      this.payNowClicked = true;
       // ensure the application is updated with the invoice trigger
       const result = await this.sepDataService.generateInvoiceSepApplication(this.application.id)
         .toPromise();
@@ -87,7 +89,7 @@ export class FinalConfirmationComponent implements OnInit {
   }
 
   setApplication(id: string) {
-    
+
     if (id) {
       this.sepDataService.getSpecialEventForApplicant(id)
         .subscribe(app => {
