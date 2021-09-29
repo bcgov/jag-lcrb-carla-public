@@ -200,17 +200,17 @@ export class SummaryComponent implements OnInit {
           this.isApproved = false;
           if (this.messageId === "559") {
             this.paymentTransactionTitle = "Cancelled";
-            this.paymentTransactionMessage = `Your payment transaction was cancelled. <br><br>
-                <p>Please note, your application remains listed under Applications In Progress. </p>`;
+            this.paymentTransactionMessage = `Your payment transaction was cancelled.
+            Please note, you must pay your fees to receive your permit.`;
           } else if (this.messageId === "7") {
             this.paymentTransactionTitle = "Declined";
-            this.paymentTransactionMessage = `Your payment transaction was declined. <br><br>
-                <p>Please note, your application remains listed under Applications In Progress. </p>`;
+            this.paymentTransactionMessage = `Your payment transaction was declined.
+            Please note, you must pay your fees to receive your permit.`;
           } else {
             this.paymentTransactionTitle = "Declined";
             this.paymentTransactionMessage =
-              `Your payment transaction was declined. Please contact your bank for more information. <br><br>
-              <p>Please note, your application remains listed under Applications In Progress. </p>`;
+              `Your payment transaction was declined. Please contact your bank for more information.
+              Please note, you must pay your fees to receive your permit.`;
           }
         }
 

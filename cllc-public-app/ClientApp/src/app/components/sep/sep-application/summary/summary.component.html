@@ -186,12 +186,13 @@
       </section-->
 
         <hr>
-        <div *ngIf="getStatus() == 'Issued'">
+        <div *ngIf="getStatus() == 'Issued' || (getStatus() == 'Payment Required' && trnApproved != '1')">
             <!--<mat-icon aria-label="Print Page" style="text-decoration: solid">print</mat-icon>-->
             <!-- <fa-icon [icon]="faPrint" class="fa-lg"></fa-icon> -->
             <!-- <a href="javascript: void(0)"> Print Page</a> -->
-            <h2 style="color: green">Payment Approved</h2>
-            <p></p>
+            <h2 style="color: green" *ngIf="getStatus() == 'Issued'">Payment Approved</h2>
+            <h2 style="color: red" *ngIf="(getStatus() == 'Payment Required' && trnApproved != '1')">{{paymentTransactionTitle}}</h2>
+            <p *ngIf="getStatus() == 'Payment Required' && trnApproved != '1'">{{paymentTransactionMessage}}</p>
             <div class="table" style="padding: 0px;">
                 <table>
                     <tr>
