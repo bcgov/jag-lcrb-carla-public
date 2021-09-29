@@ -1112,6 +1112,41 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(newTermsList); ;
         }
 
+        [HttpPost("generate-invoice/{eventId}")]
+        public IActionResult UpdateSpecialEvent(string eventId)
+        {
+            if (!ModelState.IsValid || String.IsNullOrEmpty(eventId))
+            {
+                return BadRequest();
+            }
+
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+            var existingEvent = GetSpecialEventData(eventId);
+            if (existingEvent._adoxioAccountidValue != userSettings.AccountId &&
+               existingEvent._adoxioContactidValue != userSettings.ContactId)
+            {
+                return Unauthorized();
+            }
+            
+            // just enable the invoice trigger.
+            var patchEvent = new MicrosoftDynamicsCRMadoxioSpecialevent()
+            {
+                AdoxioInvoicetrigger = true
+            };
+            
+            try
+            {
+                _dynamicsClient.Specialevents.Update(eventId, patchEvent);
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Error creating/updating special event");
+                throw httpOperationException;
+            }
+            
+            return Ok();
+        }
+
         [HttpPut("{eventId}")]
         public IActionResult UpdateSpecialEvent(string eventId, [FromBody] ViewModels.SpecialEvent specialEvent)
         {
