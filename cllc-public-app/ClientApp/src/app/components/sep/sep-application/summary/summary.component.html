@@ -11,22 +11,32 @@
 
 
       <section *ngIf="getStatus() == 'Draft'">
+        <section *ngIf="!this.isEventPast()">
         <p>Here’s a summary of your event. Does everything look right? Review your event details one more time before
           submitting your application for review.</p>
 
         <p>Scroll down the page to complete the review and submit your application. Please be sure to complete the final
           declaration and submit your application.</p>
+        </section>
 
           <section style="border: solid #ccc 1px;
                     padding: 20px;
                     background-color: #fcba19;">
             <h3>IMPORTANT</h3>
+
+          <div *ngIf="!isReadOnly() && this.isEventPast()" class="d-flex" style="margin-top: 20px;">
+
+            <p><fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>Permits cannot be issued before or on the date that they are submitted.</p>
+
+          </div>
+          <div *ngIf="!this.isEventPast()">
             <p>Changes cannot be made once your application is submitted.</p>
             <p>
               If you have any questions before submitting the application please contact the SEP Online Help Line at 1
               855
               999 7656 or email <a href="mailto:LCRB.Sep@gov.bc.ca" target="_blank">LCRB.Sep@gov.bc.ca</a>
             </p>
+          </div>
           </section>
 
 
@@ -38,7 +48,7 @@
         </section>
 
 
-      <section *ngIf="getStatus() == 'Payment Required' && !trnId || mode ==='payNow'">
+      <section *ngIf="getStatus() == 'Payment Required' || mode ==='payNow'">
         <h3>Congratulations!</h3>
         <p>Your application is approved</p>
         <h3>Fees Due: {{application?.invoice?.totalamount
@@ -55,7 +65,7 @@
 
       </section>
 
-      <section *ngIf="(getStatus() == 'Issued' || (trnId && getStatus() == 'Payment Required')) && !isEventPast()">
+      <section *ngIf="getStatus() == 'Issued' && !isEventPast()">
       <h3>What’s next</h3>
       <ul>
       <li>Purchase liquor product at an approved outlet. Note: Liquor products purchased from and returned to a liquor retailer may be subject to a return policy and restocking fee.</li>
@@ -176,7 +186,7 @@
       </section-->
 
         <hr>
-        <div *ngIf="trnId">
+        <div *ngIf="getStatus() == 'Issued'">
             <!--<mat-icon aria-label="Print Page" style="text-decoration: solid">print</mat-icon>-->
             <!-- <fa-icon [icon]="faPrint" class="fa-lg"></fa-icon> -->
             <!-- <a href="javascript: void(0)"> Print Page</a> -->

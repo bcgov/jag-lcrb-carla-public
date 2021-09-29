@@ -145,6 +145,7 @@ export class SummaryComponent implements OnInit {
   ngOnInit(): void {
     if (this.transactionId) {
       this.verify_payment();
+
     }
     window.scrollTo(0, 0);
   }
@@ -414,7 +415,7 @@ export class SummaryComponent implements OnInit {
   // present a confirmation dialog prior to the payment being processed.
   payNow()
   {
-
+    this.submitApplication();
     // set dialogConfig settings
     const dialogConfig = {
       autoFocus: true,
