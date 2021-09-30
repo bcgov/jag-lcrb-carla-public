@@ -10,14 +10,14 @@
 
     <mat-divider></mat-divider>
 
-    <mat-tab-group class="serving-slide" [selectedIndex]="selectedIndex" mat-align-tabs="start">
-        <mat-tab label="Total Servings">
+    <mat-tab-group class="serving-slide" [selectedIndex]="selectedIndex" mat-align-tabs="start" >
+        <mat-tab label="Total Servings" [disabled]="true">
             <app-total-servings [application]="sepApplication" (saved)="updateValue($event); selectedIndex = 1;"></app-total-servings>
         </mat-tab>
-        <mat-tab label="Selling Drinks">
+        <mat-tab label="Selling Drinks" [disabled]="true">
             <app-selling-drinks [sepApplication]="sepApplication" (back)="selectedIndex = 0" (saved)="updateValue($event); selectedIndex = 2;"></app-selling-drinks>
         </mat-tab>
-        <mat-tab label="Drink Amounts">
+        <mat-tab label="Drink Amounts" [disabled]="true">
             <app-drink-amounts [savingToAPI]="savingToAPI" [application]="sepApplication" (back)="selectedIndex = 1"  (saved)="updateValue($event); save();"></app-drink-amounts>
         </mat-tab>
     </mat-tab-group>

@@ -60,6 +60,15 @@ export class SpecialEventsDataService extends DataService {
   }
 
   /**
+   * Generate an invoice for a special event
+   * @param id - special event id
+   */
+   generateInvoiceSepApplication(id: string) {
+    return this.http.post<SepApplication>(`api/special-events/generate-invoice/${id}`, {}, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
+  /**
    * update a terms and conditions for a special event application in Dynamics
    * @param data - special event application termis and conditions
    */

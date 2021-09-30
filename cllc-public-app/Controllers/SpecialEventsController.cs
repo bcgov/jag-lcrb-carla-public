@@ -230,14 +230,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             var specialEvent = this.GetSpecialEventData(eventId);
+            if (specialEvent == null)
+            {
+                return BadRequest();
+            }
             if (specialEvent._adoxioContactidValue != userSettings.ContactId && specialEvent._adoxioAccountidValue != userSettings.AccountId)
             {
                 return Unauthorized();
             }
 
             var result = specialEvent.ToViewModel(_dynamicsClient);
-
-            return new JsonResult(specialEvent.ToViewModel(_dynamicsClient));
+            if (result == null)
+            {
+                return BadRequest();
+            }
+            return new JsonResult(result);
         }
 
         /// <summary>
@@ -726,6 +733,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 // show all event dates
                 locationDetails += "<h3 class='info'>Event Date(s):</h2>";
+
+                // we will need to paginate every 4 days;
+                //var eventNumber = 1;
                 foreach (var sched in location.AdoxioSpecialeventlocationSchedule)
                 {
 
@@ -754,9 +764,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
 
                     locationDetails += "<table class='info'>";
-                    locationDetails += $"<tr><th class='heading'>Date:</td><td class='field'>{startDateParam}</td></tr>";
-                    locationDetails += $"<tr><th class='heading'>Event Times:</td><td class='field'>{eventTimeParam}</td></tr>";
-                    locationDetails += $"<tr><th class='heading'>Service Times:</td><td class='field'>{serviceTimeParam}</td></tr>";
+                    locationDetails += $"<tr><th class='heading'>Date:</td><td class='field'>{startDateParam}</td>";
+                    locationDetails += $"<th class='heading'>Event Times:</td><td class='field'>{eventTimeParam}</td>";
+                    locationDetails += $"<th class='heading'>Service Times:</td><td class='field'>{serviceTimeParam}</td></tr>";
                     locationDetails += "</table>";
                 }
 
@@ -775,7 +785,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 locationDetails += "<p>The terms and conditions to which this Special Event Permit is subject include the terms and conditions contained in the Special Event Permit Terms and Conditions Handbook, which is available on the Liquor and Cannabis Regulation Branch website.</p>";
 
 
-                locationDetails += "<p>&nbsp;</p><p>Signed: ________________________________</p>";
+                //locationDetails += "<p>&nbsp;</p><p>Signed: ________________________________</p>";
                 locationDetails += "<p><em>The information on this form is collected by the Liquor and Cannabis Regulation Branch under Section 26(a) and (c) of the Freedom of Information and Protection of Privacy Act and will be used for the purpose of liquor licensing and compliance and";
                 locationDetails += "enforcement matters in accordance with the Liquor Control and Licensing Act. Should you have any questions about the collection, uses, or disclosure of personal information, please contact the Freedom of Information Officer at PO Box 9292 STN";
                 locationDetails += "PROV GVT, Victoria, BC, V8W 9J8 or by phone toll free at 1-866-209-2111.</em></p>";
@@ -787,8 +797,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var feesInfo = "";
 
             feesInfo += "<h2 class='info'>Quantities and Prices of Drinks</h2>";
-            feesInfo += "<p>Liquor must be purchased from a Government Liquor Store (BC Liquor Store) or other approved source, such as an on-site winery or brewery store";
-            feesInfo += "or a RuralAgency Store.Product returns are subject to the Product Return policy and a restocking fee.</p>";
+            feesInfo += "<p>All liquor for your event must be bought from an approved outlet. For a list of approved ";
+            feesInfo += "outlets please see the <a href='https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals/guide-sep.pdf' target='_blank'>Special Event Permit Terms and Conditions</a>.</p>";
             feesInfo += "<table class='info'>";
             feesInfo += "<tr><th class='heading fat center'>Drink Type</th><th class='heading fat center'>Number of Servings</th><th class='heading fat center'>Price Per Serving</th></tr>";
 
@@ -900,8 +910,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
 
                 }
-                catch (HttpOperationException)
+                catch (HttpOperationException e)
                 {
+                    _logger.LogError(e, "Error getting special event");
                     specialEvent = null;
                 }
             }
@@ -1102,6 +1113,41 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }).ToList();
 
             return new JsonResult(newTermsList); ;
+        }
+
+        [HttpPost("generate-invoice/{eventId}")]
+        public IActionResult UpdateSpecialEvent(string eventId)
+        {
+            if (!ModelState.IsValid || String.IsNullOrEmpty(eventId))
+            {
+                return BadRequest();
+            }
+
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+            var existingEvent = GetSpecialEventData(eventId);
+            if (existingEvent._adoxioAccountidValue != userSettings.AccountId &&
+               existingEvent._adoxioContactidValue != userSettings.ContactId)
+            {
+                return Unauthorized();
+            }
+            
+            // just enable the invoice trigger.
+            var patchEvent = new MicrosoftDynamicsCRMadoxioSpecialevent()
+            {
+                AdoxioInvoicetrigger = true
+            };
+            
+            try
+            {
+                _dynamicsClient.Specialevents.Update(eventId, patchEvent);
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Error creating/updating special event");
+                throw httpOperationException;
+            }
+            
+            return Ok();
         }
 
         [HttpPut("{eventId}")]
