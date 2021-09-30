@@ -13,9 +13,9 @@ namespace Gov.Lclb.Cllb.Public.Models
     public static class SpecialEventExtensions
     {
         /// <summary>
-        /// Convert a given voteQuestion to a ViewModel
+        /// Convert a given SpecialEvent to a ViewModel
         /// </summary>
-        public static ViewModels.SpecialEvent ToViewModel(this MicrosoftDynamicsCRMadoxioSpecialevent specialEvent, IDynamicsClient _dynamicsClient)
+        public static ViewModels.SpecialEvent ToViewModel(this MicrosoftDynamicsCRMadoxioSpecialevent specialEvent, IDynamicsClient dynamicsClient)
         {
             ViewModels.SpecialEvent result = null;
             if (specialEvent != null)
@@ -34,7 +34,6 @@ namespace Gov.Lclb.Cllb.Public.Models
                     DonatedOrConsular = (ViewModels.DonatedOrConsular?)specialEvent.AdoxioDonatedorconsular,
                     EventEndDate = specialEvent.AdoxioEventenddate,
                     EventName = specialEvent.AdoxioEventname,
-                    //EventType = specialEvent.AdoxioTypeofevent,
                     EventStartDate = specialEvent.AdoxioEventstartdate,
                     FundRaisingPurpose = (ViewModels.FundRaisingPurposes?)specialEvent.AdoxioFundraisingpurpose,
                     HostOrganizationAddress = specialEvent.AdoxioHostorganisationaddress,
@@ -59,7 +58,6 @@ namespace Gov.Lclb.Cllb.Public.Models
                     PoliceAccount = specialEvent.AdoxioPoliceAccountId.ToViewModel(),
                     PoliceDecisionBy = specialEvent.AdoxioPoliceRepresentativeId.ToViewModel(),
                     PoliceApproval = (ViewModels.ApproverStatus?)specialEvent.AdoxioPoliceapproval,
-                    //LcrbApprovalBy = specialEvent.AdoxioLCRBRepresentativeId.ToViewModel(),
                     IsLocationLicensed = (ViewModels.LicensedSEPLocationValue?)specialEvent.AdoxioIslocationlicensedos,
                     LcrbApproval = (ViewModels.ApproverStatus?)specialEvent.AdoxioLcrbapproval,
                     PrivateOrPublic = (ViewModels.SEPPublicOrPrivate?)specialEvent.AdoxioPrivateorpublic,
@@ -88,7 +86,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 if (locations?.Count > 0)
                 {
                     result.EventLocations =
-                        locations.Select(specialEvent => specialEvent.ToViewModel())
+                        locations.Select(eventLocation => eventLocation.ToViewModel())
                         .ToList();
                 }
 
@@ -97,11 +95,11 @@ namespace Gov.Lclb.Cllb.Public.Models
                 if (forecast?.Count > 0)
                 {
                     result.DrinksSalesForecasts = 
-                        forecast.Select(specialEvent => specialEvent.ToViewModel())
+                        forecast.Select(drinkSalesForecast => drinkSalesForecast.ToViewModel())
                         .ToList();
                 }
 
-                var drinkTypes = _dynamicsClient.Sepdrinktypes.Get().Value
+                var drinkTypes = dynamicsClient.Sepdrinktypes.Get().Value
                             .ToList();
 
                 string beerTypeId = drinkTypes.Where(drinkType => drinkType.AdoxioName == "Beer/Cider/Cooler")
@@ -125,29 +123,29 @@ namespace Gov.Lclb.Cllb.Public.Models
                 else
                 {
                     result.Beer = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
-                        .Where(forecast => forecast._adoxioTypeValue == beerTypeId)
-                        .Select(forecast => forecast.AdoxioEstimatedservings)
+                        .Where(sepDrinkSalesForecast => sepDrinkSalesForecast._adoxioTypeValue == beerTypeId)
+                        .Select(sepDrinkSalesForecast => sepDrinkSalesForecast.AdoxioEstimatedservings)
                         .FirstOrDefault();
 
                     result.Wine = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
-                        .Where(forecast => forecast._adoxioTypeValue == wineTypeId)
-                        .Select(forecast => forecast.AdoxioEstimatedservings)
+                        .Where(sepDrinkSalesForecast => sepDrinkSalesForecast._adoxioTypeValue == wineTypeId)
+                        .Select(sepDrinkSalesForecast => sepDrinkSalesForecast.AdoxioEstimatedservings)
                         .FirstOrDefault();
 
                     result.Spirits = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
-                        .Where(forecast => forecast._adoxioTypeValue == spiritsTypeId)
-                        .Select(forecast => forecast.AdoxioEstimatedservings)
+                        .Where(sepDrinkSalesForecast => sepDrinkSalesForecast._adoxioTypeValue == spiritsTypeId)
+                        .Select(sepDrinkSalesForecast => sepDrinkSalesForecast.AdoxioEstimatedservings)
                         .FirstOrDefault();
                 }
 
                 result.TotalProceeds = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent == null ? 0 : specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
-                    .Sum(forecast => forecast.AdoxioEstimatedrevenue.GetValueOrDefault() - forecast.AdoxioEstimatedcost.GetValueOrDefault());
+                    .Sum(sepDrinkSalesForecast => sepDrinkSalesForecast.AdoxioEstimatedrevenue.GetValueOrDefault() - sepDrinkSalesForecast.AdoxioEstimatedcost.GetValueOrDefault());
 
                 result.TotalRevenue = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent == null ? 0 : specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
-                    .Sum(forecast => forecast.AdoxioEstimatedrevenue.GetValueOrDefault());
+                    .Sum(sepDrinkSalesForecast => sepDrinkSalesForecast.AdoxioEstimatedrevenue.GetValueOrDefault());
 
                 result.TotalPurchaseCost = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent == null ? 0 : specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
-                    .Sum(forecast => forecast.AdoxioEstimatedcost.GetValueOrDefault());
+                    .Sum(sepDrinkSalesForecast => sepDrinkSalesForecast.AdoxioEstimatedcost.GetValueOrDefault());
 
                 if (specialEvent.AdoxioSpecialeventSpecialeventtsacs != null)
                 {

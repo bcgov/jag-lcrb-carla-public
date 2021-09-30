@@ -10,6 +10,7 @@ import { ContactDataService } from "@services/contact-data.service";
 import { IndexedDBService } from "@services/indexed-db.service";
 import { PaymentDataService } from "@services/payment-data.service";
 import { SpecialEventsDataService } from "@services/special-events-data.service";
+import { Subscription } from "rxjs";
 import { map, mergeMap } from "rxjs/operators";
 import { isBefore } from "date-fns";
 import {
@@ -46,6 +47,7 @@ import { CancelSepApplicationDialogComponent } from "../cancel-sep-application-d
 export class SummaryComponent implements OnInit {
   @Input() account: any; // TODO: change to Account and fix prod error
   @Output() saveComplete = new EventEmitter<boolean>();
+  busy: Subscription;
   mode: "readonlySummary" | "pendingReview" | "payNow" = "readonlySummary";
   _appID: number;
   application: SepApplication;
@@ -143,8 +145,10 @@ export class SummaryComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    debugger;
     if (this.transactionId) {
       this.verify_payment();
+
     }
     window.scrollTo(0, 0);
   }
@@ -196,17 +200,17 @@ export class SummaryComponent implements OnInit {
           this.isApproved = false;
           if (this.messageId === "559") {
             this.paymentTransactionTitle = "Cancelled";
-            this.paymentTransactionMessage = `Your payment transaction was cancelled. <br><br>
-                <p>Please note, your application remains listed under Applications In Progress. </p>`;
+            this.paymentTransactionMessage = `Your payment transaction was cancelled.
+            Please note, you must pay your fees to receive your permit.`;
           } else if (this.messageId === "7") {
             this.paymentTransactionTitle = "Declined";
-            this.paymentTransactionMessage = `Your payment transaction was declined. <br><br>
-                <p>Please note, your application remains listed under Applications In Progress. </p>`;
+            this.paymentTransactionMessage = `Your payment transaction was declined.
+            Please note, you must pay your fees to receive your permit.`;
           } else {
             this.paymentTransactionTitle = "Declined";
             this.paymentTransactionMessage =
-              `Your payment transaction was declined. Please contact your bank for more information. <br><br>
-              <p>Please note, your application remains listed under Applications In Progress. </p>`;
+              `Your payment transaction was declined. Please contact your bank for more information.
+              Please note, you must pay your fees to receive your permit.`;
           }
         }
 
@@ -294,7 +298,7 @@ export class SummaryComponent implements OnInit {
           if(this.isEventPast()){
             return "Review Expired"
           } else {
-            if(this.trnApproved === 1) {
+            if(this.trnApproved === "1") {
               return "Issued";
             } else {
               return this.application?.eventStatus;
@@ -304,7 +308,7 @@ export class SummaryComponent implements OnInit {
           if(this.isEventPast()){
             return "Approval Expired"
           } else {
-             if(this.trnApproved === 1 ) { // sometimes we return to the page after payment before the status can be updated on the backend, if we collected payment we're issued
+             if(this.trnApproved === "1" ) { // sometimes we return to the page after payment before the status can be updated on the backend, if we collected payment we're issued
                 return "Issued";
              } else {
                 return "Payment Required";
@@ -414,7 +418,7 @@ export class SummaryComponent implements OnInit {
   // present a confirmation dialog prior to the payment being processed.
   payNow()
   {
-
+    //this.submitApplication();
     // set dialogConfig settings
     const dialogConfig = {
       autoFocus: true,
