@@ -13,7 +13,7 @@
   <a mat-menu-item *ngIf="currentUser?.userType == 'Business'" routerLink="/account-profile">
     Manage account
   </a>
-  <a mat-menu-item appRemoveIfFeatureOff="Sep" *ngIf="currentUser?.userType == 'VerifiedIndividual'"
+  <a mat-menu-item appRemoveIfFeatureOff="Sep" *ngIf="currentUser?.userType == 'VerifiedIndividual' || currentUser?.userType != 'Business'"
     routerLink="/servicecard-profile">
     Manage account
   </a>
