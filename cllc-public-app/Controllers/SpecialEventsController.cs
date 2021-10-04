@@ -1536,9 +1536,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 InProgress = GetSepSummaries($"_adoxio_policerepresentativeid_value eq {userSettings.ContactId} and adoxio_policeapproval eq {(int?)ApproverStatus.PendingReview}"),
 
                 // Police Decision == Reviewed
-                PoliceApproved = GetSepSummaries($"statuscode ne {(int?)EventStatus.Draft} and statuscode ne {(int?)EventStatus.Issued} and _adoxio_policerepresentativeid_value eq {userSettings.ContactId} and (adoxio_policeapproval eq { (int?)ApproverStatus.AutoReviewed } or adoxio_policeapproval eq { (int?)ApproverStatus.Approved } or adoxio_policeapproval eq {(int?)ApproverStatus.Reviewed})"),  
+                PoliceApproved = GetSepSummaries($"_adoxio_policerepresentativeid_value eq {userSettings.ContactId} and statuscode ne {(int?)EventStatus.Draft} and (adoxio_policeapproval eq { (int?)ApproverStatus.AutoReviewed } or adoxio_policeapproval eq { (int?)ApproverStatus.Approved } or adoxio_policeapproval eq {(int?)ApproverStatus.Reviewed})"),
 
-                // Police Decision == Denied || Cancelled
+                // Police Decision == Denied || Cancelled                
                 PoliceDenied = GetSepSummaries($"_adoxio_policerepresentativeid_value eq {userSettings.ContactId} and (adoxio_policeapproval eq {(int?)ApproverStatus.Denied} or adoxio_policeapproval eq {(int?)ApproverStatus.Cancelled})")
             };
 
