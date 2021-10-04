@@ -464,9 +464,13 @@
             <p *ngIf="isWithin48()">
               As this event is scheduled within two business days, please contact the LCRB if you need to add a Term and Condition
             </p>
+            <p *ngIf="this.isReviewed()">
+              This permit is already issued. As the permit holder may have already received a copy of the permit, please contact the LCRB if you need to add a Term and Condition
+            </p>
             <p *ngIf="isEventPast()">
               This event has past and the Terms and Conditions cannot be edited.
             </p>
+
           </app-error-alert>
         </div>
       </section>
