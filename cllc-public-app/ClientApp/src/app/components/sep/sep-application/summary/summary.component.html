@@ -473,7 +473,11 @@
 
               <div class="d-flex" style="margin-top: 20px;">
                 <!--button mat-raised-button color="secondary" class="mr-2">BACK</button-->
-                <button mat-raised-button color="primary" (click)="submitApplication()">SUBMIT APPLICATION</button>
+
+                <button [disabled]="savingToAPI" mat-raised-button color="primary" (click)="submitApplication()">
+                    <span>SUBMIT APPLICATION</span>
+                    <mat-progress-bar *ngIf="savingToAPI" mode="indeterminate"></mat-progress-bar>
+                </button>
 
               </div>
               </section>
