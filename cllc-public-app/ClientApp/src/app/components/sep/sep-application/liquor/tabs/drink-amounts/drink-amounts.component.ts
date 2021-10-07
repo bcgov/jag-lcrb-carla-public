@@ -55,6 +55,7 @@ export class DrinkAmountsComponent implements OnInit {
       id: [""],
       estimatedServings: [""],
       drinkTypeId: [""],
+      pricePerServing: [""]
     });
     drinkType.patchValue(value);
     this.form.push(drinkType);
