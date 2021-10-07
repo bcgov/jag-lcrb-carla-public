@@ -62,8 +62,8 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             services.AddGrpc(options =>
             {
                 options.EnableDetailedErrors = true;
-                options.MaxReceiveMessageSize = 256 * 1024 * 1024; // 256 MB
-                options.MaxSendMessageSize = 256 * 1024 * 1024; // 256 MB
+                options.MaxReceiveMessageSize = null; // disable limit
+                options.MaxSendMessageSize = null; // disable limit
             });
 
             // health checks. 
