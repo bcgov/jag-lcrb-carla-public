@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Gov.Lclb.Cllb.Interfaces.Models;
+using Gov.Lclb.Cllb.Public.Utils;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
@@ -36,7 +37,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         {
             to.AdoxioEstimatedrevenue = from.EstimatedRevenue;
             to.AdoxioIscharging = from.IsCharging;
-            to.AdoxioName = from.Name;
+            to.AdoxioName = StringUtility.Truncate(from.Name, 100); 
             to.AdoxioEstimatedservings = from.EstimatedServings;
             to.AdoxioPriceperserving = from.PricePerServing;
             to.AdoxioEstimatedcost = from.EstimatedCost;

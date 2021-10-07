@@ -23,9 +23,9 @@ Scenario: Worker Application
 
 namespace bdd_tests
 {
-    [FeatureFile("./WorkerApplication.feature")]
+    [FeatureFile("./SepApplication.feature")]
     [Collection("General")]
-    public sealed class WorkerApplication : TestBaseWorker
+    public sealed class SepApplication : TestBaseWorker
     {
         [Given(@"I login with no terms")]
         public void LoginNoTerms()

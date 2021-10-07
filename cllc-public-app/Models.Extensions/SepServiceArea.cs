@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Gov.Lclb.Cllb.Interfaces.Models;
+using Gov.Lclb.Cllb.Public.Utils;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
@@ -45,7 +46,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioSetting = (int?)from.Setting;
             to.Statecode = from.StatusCode;
             to.Statecode = from.StateCode;
-            to.AdoxioEventname = from.EventName;
+            to.AdoxioEventname = StringUtility.Truncate(from.EventName, 255);
             to.AdoxioLicencedareadescription = from.LicencedAreaDescription;
         }
 
