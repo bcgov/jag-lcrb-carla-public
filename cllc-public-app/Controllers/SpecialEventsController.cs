@@ -1692,7 +1692,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var patchEvent = new MicrosoftDynamicsCRMadoxioSpecialevent()
             {
                 AdoxioPoliceapproval = 845280002, // Cancelled
-                AdoxioDenialreason = reasonText.Reason,
+                AdoxioCancellationreason = reasonText.Reason,
                 AdoxioDatepoliceapproved = DateTime.Now
             };
             try
