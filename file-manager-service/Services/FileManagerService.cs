@@ -397,6 +397,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             var result = new TruncatedFilenameReply();
             var logFileName = WordSanitizer.Sanitize(request.FileName);
             var logFolderName = WordSanitizer.Sanitize(request.FolderName);
+            
             try
             {
                 var _sharePointFileManager = new SharePointFileManager(_configuration);
