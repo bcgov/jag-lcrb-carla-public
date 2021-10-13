@@ -610,7 +610,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             eligibilityInfo += $"<tr><th class='heading'>Licence Already Exists At Location?:</th><td class='field'>{(ViewModels.LicensedSEPLocationValue?)specialEvent.AdoxioIslocationlicensedos}</td></tr>";
             eligibilityInfo += $"<tr><th class='heading'>Permit Category:</th><td class='field'>{(ViewModels.SEPPublicOrPrivate?)specialEvent.AdoxioPrivateorpublic}</td></tr>"; // to do
             eligibilityInfo += $"<tr><th class='heading'>Public Property:</th><td class='field'>{specialEvent.AdoxioIsonpublicproperty}</td></tr>";
-
             eligibilityInfo += "</table>";
 
             var pageTop = "<div class='page'><div class='page-container'><table style='width:100%; padding:20px 5px;'><tr><td width='20%'>";
