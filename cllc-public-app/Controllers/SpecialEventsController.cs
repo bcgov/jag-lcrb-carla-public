@@ -696,7 +696,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             pageTop += "/nORlgCAkly6/YNf69EMUBQsKgAAAIBQAQAAACgLrh+oynb8eIBmAIAKYwdAYa65evUqrQAAAACdBNcPAAAAIFQAAAAAECoAAACAUAEAAABAqAAAAABCBQAAAAChAgAAAIBQAQAAAIQKAAAAAEIFAAAAECoAAAAACBUAAAAAhAoAAAAgVAAAAAAQKgAAAIBQAQAAAECoAAAAACBUAAAAAKECAAAAgFABAAAAhAoAAAAAQgUAAAAAoQIAAAAIFQAAAACECgAAACBUAAAAABAqAAAAAAgVAAAAQKgAAAAAIFQAAAAAoQIAAACAUAEAAACECgAAAABCBQAAAAChAgAAAAgVAAAAAIQKAAAAIFQAAA";
             pageTop += "AAECoAAAAACBUAAABAqAAAAAAgVAAAAAChAgAAAIBQAQAAAECoAAAAAEIFAAAAAKECAAAACBUAAAAAhAoAAAAAQgUAAAAQKgAAAAAIFQAAAECoAAAAACBUAAAAABAqAAAAgFABAAAAQKgAAAAAQgUAAAAAoQIAAAAIFQAAAACECgAAAABCBQAAABAqAAAAAAgVAAAAQKgAAAAAIFQAAAAAECoAAACAUAEAAABAqAAAAABCBQAAAAChAgAAAIBQAQAAAIQKAAAAAEIFAAAAECoAAAAACBUAAAAAhAoAAAAgVAAAAAAQKgAAAIBQAQAAAECoAAAAACBUAAAAAKECAAAAgFABAAAAhAoAAAAAQgUA";
             pageTop += "AAAAoQIAAAAIFQAAAACECgAAACBUAAAAABAqAAAAgFABAAAAQKgAAAAAIFQAAAAAoQIAAACAUAEAAACECgAAAABCBQAAACCb/1+AAQAeXUHaMpCpHwAAAABJRU5ErkJggg==' alt='BC Gov Logo'>\n</td><td width='80%'>";
-            pageTop += $"<h1 class='title'>Liquor and Cannabis Regulation Branch</h1>{HttpUtility.HtmlEncode(heading)}</td></tr></table>\n";
+            pageTop += $"<h1 class='title'>Liquor and Cannabis Regulation Branch</h1>{heading}</td></tr></table>\n";
 
             var pageBottom = $"<div class='footer'><div class='footer-box'><p></p></div><div class='issued-box'><p style='text-align:right;'><small>Printed: {DateTime.Today.ToString("MMMM dd, yyyy")}</small></p></div></div></div></div>\n";
 
@@ -722,11 +722,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 foreach (var sched in location.AdoxioSpecialeventlocationLicencedareas)
                 {
                     serviceAttendees += (int)sched.AdoxioLicencedareamaxnumberofguests;
-                    serviceAreaDetails += $"<tr><th class='heading'>Service Area #{serviceAreaCount++}:</td><td class='field'>{HttpUtility.HtmlEncode(sched.AdoxioEventname)} (capacity: {sched.AdoxioLicencedareamaxnumberofguests})</td></tr>";
+                    serviceAreaDetails += $"<tr><th class='heading'>Service Area #{serviceAreaCount++}:</th><td class='field'>{HttpUtility.HtmlEncode(sched.AdoxioEventname)} (capacity: {sched.AdoxioLicencedareamaxnumberofguests})</td></tr>";
                 }
 
                 locationDetails += serviceAreaDetails;
-                locationDetails += $"<tr><th class='heading'>Total Attendees in Service Areas:</td><td class='field'>{serviceAttendees}</td></tr>\n";
+                locationDetails += $"<tr><th class='heading'>Total Attendees in Service Areas:</th><td class='field'>{serviceAttendees}</td></tr>\n";
                 locationDetails += "</table>";
 
                 // show all event dates
