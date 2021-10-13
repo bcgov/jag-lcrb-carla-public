@@ -263,7 +263,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             var title = "LCRB SPECIAL EVENTS PERMIT";
 
-            var heading = "<h1 class='error'>This is not your special event permit</h1>";
+            string heading = "<h1 class='error'>This is not your special event permit</h1>";
 
             var appInfo = "<h2 class='info'>General Application Info</h2>";
 
@@ -379,7 +379,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             pageTop += "AAAAoQIAAAAIFQAAAACECgAAACBUAAAAABAqAAAAgFABAAAAQKgAAAAAIFQAAAAAoQIAAACAUAEAAACECgAAAABCBQAAACCb/1+AAQAeXUHaMpCpHwAAAABJRU5ErkJggg==' alt='BC Gov Logo'></td><td width='80%'>";
             pageTop += $"<h1 class='title'>Liquor and Cannabis Regulation Branch</h1>{heading}</td></tr></table>";
 
-            var pageBottom = $"<div id='footer'><div id='footer-box'><p></p></div><div id='issued-box'><p style='text-align:right;'><small>Printed: {DateTime.Today.ToString("MMMM dd, yyyy")}</small></p></div></div></div></div>";
+            var pageBottom = $"<div class='footer'><div class='footer-box'><p></p></div><div class='issued-box'><p style='text-align:right;'><small>Printed: {DateTime.Today.ToString("MMMM dd, yyyy")}</small></p></div></div></div></div>";
 
             var locationDetails = "";
 
@@ -587,10 +587,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var appInfo = "<h2 class='info'>General Application Info</h2>";
 
             appInfo += "<table class='info'>";
-            appInfo += $"<tr><th class='heading'>Event Name:</td><td class='field'>{HttpUtility.HtmlEncode(specialEvent.AdoxioEventname)}</td></tr>";
-            appInfo += $"<tr><th class='heading'>Event Municipality:</td><td class='field'>{HttpUtility.HtmlEncode(specialEvent.AdoxioSpecialEventCityDistrictId.AdoxioName)}</td></tr>";
-            appInfo += $"<tr><th class='heading'>Applicant Name:</td><td class='field'>{HttpUtility.HtmlEncode(specialEvent.AdoxioContactId.Fullname)}</td></tr>";
-            appInfo += $"<tr><th class='heading'>Applicant Info:</td><td class='field'>{HttpUtility.HtmlEncode(specialEvent.AdoxioContactId.Address1Line1)}<br>{HttpUtility.HtmlEncode(specialEvent.AdoxioContactId.Address1City)},{specialEvent.AdoxioContactId.Address1Stateorprovince}<br>{specialEvent.AdoxioContactId.Address1Postalcode}<br>{specialEvent.AdoxioContactId.Telephone1}<br>{specialEvent.AdoxioContactId.Emailaddress1}</td></tr>";
+            appInfo += $"<tr><th class='heading'>Event Name:</th><td class='field'>{HttpUtility.HtmlEncode(specialEvent.AdoxioEventname)}</td></tr>";
+            appInfo += $"<tr><th class='heading'>Event Municipality:</th><td class='field'>{HttpUtility.HtmlEncode(specialEvent.AdoxioSpecialEventCityDistrictId.AdoxioName)}</td></tr>";
+            appInfo += $"<tr><th class='heading'>Applicant Name:</th><td class='field'>{HttpUtility.HtmlEncode(specialEvent.AdoxioContactId.Fullname)}</td></tr>";
+            appInfo += $"<tr><th class='heading'>Applicant Info:</th><td class='field'>{HttpUtility.HtmlEncode(specialEvent.AdoxioContactId.Address1Line1)}<br>{HttpUtility.HtmlEncode(specialEvent.AdoxioContactId.Address1City)},{specialEvent.AdoxioContactId.Address1Stateorprovince}<br>{specialEvent.AdoxioContactId.Address1Postalcode}<br>{specialEvent.AdoxioContactId.Telephone1}<br>{specialEvent.AdoxioContactId.Emailaddress1}</td></tr>";
             appInfo += "</table>";
 
             var eligibilityInfo = "<h2 class='info'>Eligibility</h2>";
@@ -601,16 +601,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             eventStartDateParam = eventStartDate.ToString("MMMM dd, yyyy");
 
             eligibilityInfo += "<table class='info'>";
-            eligibilityInfo += $"<tr><th class='heading'>Event Start:</td><td class='field'>{eventStartDateParam}</td></tr>";
-            eligibilityInfo += $"<tr><th class='heading'>Organization Type:</td><td class='field'>{(ViewModels.HostOrgCatergory?)specialEvent.AdoxioHostorganisationcategory}</td></tr>";
-            eligibilityInfo += $"<tr><th class='heading'>Responsible Beverage Service #:</td><td class='field'>{specialEvent.AdoxioResponsiblebevservicenumber}</td></tr>";
-            eligibilityInfo += $"<tr><th class='heading'>Organization Name:</td><td class='field'>{HttpUtility.HtmlEncode(specialEvent.AdoxioHostorganisationname)}</td></tr>";
-            eligibilityInfo += $"<tr><th class='heading'>Address:</td><td class='field'>{HttpUtility.HtmlEncode(specialEvent.AdoxioHostorganisationaddress)}</td></tr>";
-            eligibilityInfo += $"<tr><th class='heading'>Occasion of Event:</td><td class='field'>{HttpUtility.HtmlEncode(specialEvent.AdoxioSpecialeventdescripton)}</td></tr>";
-            eligibilityInfo += $"<tr><th class='heading'>Licence Already Exists At Location?:</td><td class='field'>{(ViewModels.LicensedSEPLocationValue?)specialEvent.AdoxioIslocationlicensedos}</td></tr>";
-            eligibilityInfo += $"<tr><th class='heading'>Permit Category:</td><td class='field'>{(ViewModels.SEPPublicOrPrivate?)specialEvent.AdoxioPrivateorpublic}</td></tr>"; // to do
-            eligibilityInfo += $"<tr><th class='heading'>Public Property:</td><td class='field'>{specialEvent.AdoxioIsonpublicproperty}</td></tr>";
-
+            eligibilityInfo += $"<tr><th class='heading'>Event Start:</th><td class='field'>{eventStartDateParam}</td></tr>";
+            eligibilityInfo += $"<tr><th class='heading'>Organization Type:</th><td class='field'>{(ViewModels.HostOrgCatergory?)specialEvent.AdoxioHostorganisationcategory}</td></tr>";
+            eligibilityInfo += $"<tr><th class='heading'>Responsible Beverage Service #:</th><td class='field'>{specialEvent.AdoxioResponsiblebevservicenumber}</td></tr>";
+            eligibilityInfo += $"<tr><th class='heading'>Organization Name:</th><td class='field'>{HttpUtility.HtmlEncode(specialEvent.AdoxioHostorganisationname)}</td></tr>";
+            eligibilityInfo += $"<tr><th class='heading'>Address:</th><td class='field'>{HttpUtility.HtmlEncode(specialEvent.AdoxioHostorganisationaddress)}</td></tr>";
+            eligibilityInfo += $"<tr><th class='heading'>Occasion of Event:</th><td class='field'>{HttpUtility.HtmlEncode(specialEvent.AdoxioSpecialeventdescripton)}</td></tr>";
+            eligibilityInfo += $"<tr><th class='heading'>Licence Already Exists At Location?:</th><td class='field'>{(ViewModels.LicensedSEPLocationValue?)specialEvent.AdoxioIslocationlicensedos}</td></tr>";
+            eligibilityInfo += $"<tr><th class='heading'>Permit Category:</th><td class='field'>{(ViewModels.SEPPublicOrPrivate?)specialEvent.AdoxioPrivateorpublic}</td></tr>"; // to do
+            eligibilityInfo += $"<tr><th class='heading'>Public Property:</th><td class='field'>{specialEvent.AdoxioIsonpublicproperty}</td></tr>";
             eligibilityInfo += "</table>";
 
             var pageTop = "<div class='page'><div class='page-container'><table style='width:100%; padding:20px 5px;'><tr><td width='20%'>";
@@ -696,10 +695,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             pageTop += "p0qcF7eKmAYFqOAKECrQoWS8freytLWykWXdXsetaKQbRnct6a0jVsuokx6fyj4Bps1WXnuuXOdbuB85DwOxGIwdZx1+wPzltN9AfPpbHi9YXIsyL4933L3ffGBKnuideeW0XM+86NYxPHdovN3vdExnZFd9FKxjn2XVsOKvaJXsLCpI022KrSBn6fTegvfttuFXXreNdcpv/d485jq4r7yF3HdgSdAdcPAAAAdBayfgAAAAChAgAAAIBQAQAAAIQKAAAAAEIFAAAAECoAAAAACBUAAAAAhAoAAAAgVAAAAAAQKgAAAIBQAQAAAECoAAAAACBUAAAAAKECAAAAgFABAACAA8J1NAFU4ZnffVsv";
             pageTop += "/nORlgCAkly6/YNf69EMUBQsKgAAAIBQAQAAACgLrh+oynb8eIBmAIAKYwdAYa65evUqrQAAAACdBNcPAAAAIFQAAAAAECoAAACAUAEAAABAqAAAAABCBQAAAAChAgAAAIBQAQAAAIQKAAAAAEIFAAAAECoAAAAACBUAAAAAhAoAAAAgVAAAAAAQKgAAAIBQAQAAAECoAAAAACBUAAAAAKECAAAAgFABAAAAhAoAAAAAQgUAAAAAoQIAAAAIFQAAAACECgAAACBUAAAAABAqAAAAAAgVAAAAQKgAAAAAIFQAAAAAoQIAAACAUAEAAACECgAAAABCBQAAAAChAgAAAAgVAAAAAIQKAAAAIFQAAA";
             pageTop += "AAECoAAAAACBUAAABAqAAAAAAgVAAAAAChAgAAAIBQAQAAAECoAAAAAEIFAAAAAKECAAAACBUAAAAAhAoAAAAAQgUAAAAQKgAAAAAIFQAAAECoAAAAACBUAAAAABAqAAAAgFABAAAAQKgAAAAAQgUAAAAAoQIAAAAIFQAAAACECgAAAABCBQAAABAqAAAAAAgVAAAAQKgAAAAAIFQAAAAAECoAAACAUAEAAABAqAAAAABCBQAAAAChAgAAAIBQAQAAAIQKAAAAAEIFAAAAECoAAAAACBUAAAAAhAoAAAAgVAAAAAAQKgAAAIBQAQAAAECoAAAAACBUAAAAAKECAAAAgFABAAAAhAoAAAAAQgUA";
-            pageTop += "AAAAoQIAAAAIFQAAAACECgAAACBUAAAAABAqAAAAgFABAAAAQKgAAAAAIFQAAAAAoQIAAACAUAEAAACECgAAAABCBQAAACCb/1+AAQAeXUHaMpCpHwAAAABJRU5ErkJggg==' alt='BC Gov Logo'></td><td width='80%'>";
-            pageTop += $"<h1 class='title'>Liquor and Cannabis Regulation Branch</h1>{heading}</td></tr></table>";
+            pageTop += "AAAAoQIAAAAIFQAAAACECgAAACBUAAAAABAqAAAAgFABAAAAQKgAAAAAIFQAAAAAoQIAAACAUAEAAACECgAAAABCBQAAACCb/1+AAQAeXUHaMpCpHwAAAABJRU5ErkJggg==' alt='BC Gov Logo'>\n</td><td width='80%'>";
+            pageTop += $"<h1 class='title'>Liquor and Cannabis Regulation Branch</h1>{heading}</td></tr></table>\n";
 
-            var pageBottom = $"<div id='footer'><div id='footer-box'><p></p></div><div id='issued-box'><p style='text-align:right;'><small>Printed: {DateTime.Today.ToString("MMMM dd, yyyy")}</small></p></div></div></div></div>";
+            var pageBottom = $"<div class='footer'><div class='footer-box'><p></p></div><div class='issued-box'><p style='text-align:right;'><small>Printed: {DateTime.Today.ToString("MMMM dd, yyyy")}</small></p></div></div></div></div>";
 
             var locationDetails = "";
             var locationNumber = 1;
@@ -710,7 +709,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // draw the location
                 locationDetails += $"<h2 class='info'>Event Location: {HttpUtility.HtmlEncode(location.AdoxioLocationname)}</h2>";
                 locationDetails += "<table class='info'>";
-                locationDetails += $"<tr><th class='heading'>Location Permit:</td><td class='field'>{specialEvent.AdoxioSpecialeventpermitnumber}-{locationNumber++}</td></tr>";
+                locationDetails += $"<tr><th class='heading'>Location Permit:</td><td class='field'>{HttpUtility.HtmlEncode(specialEvent.AdoxioSpecialeventpermitnumber)}-{locationNumber++}</td></tr>";
                 locationDetails += $"<tr><th class='heading'>Location Name:</td><td class='field'>{HttpUtility.HtmlEncode(location.AdoxioLocationname)}</td></tr>";
                 locationDetails += $"<tr><th class='heading'>Location Description:</td><td class='field'>{HttpUtility.HtmlEncode(location.AdoxioLocationdescription)}</td></tr>";
                 locationDetails += $"<tr><th class='heading'>Event Address:</td><td class='field'>{HttpUtility.HtmlEncode(location.AdoxioEventlocationstreet2)} {HttpUtility.HtmlEncode(location.AdoxioEventlocationstreet1)}, {specialEvent.AdoxioSpecialEventCityDistrictId.AdoxioName} BC, {location.AdoxioEventlocationpostalcode}</td></tr>";
@@ -772,7 +771,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // show the Ts and Cs if they're there.
                 if (specialEvent.AdoxioSpecialeventSpecialeventtsacs?.Count > 0)
                 {
-
                     locationDetails += "<h3 class='info'>Permit Terms and Conditions</h3><ul>";
                     foreach (var tc in specialEvent.AdoxioSpecialeventSpecialeventtsacs)
                     {
@@ -795,11 +793,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             var feesInfo = "";
 
-            feesInfo += "<h2 class='info'>Quantities and Prices of Drinks</h2>";
+            feesInfo += "<h2 class='info'>Quantities and Prices of Drinks</h2>\n";
             feesInfo += "<p>All liquor for your event must be bought from an approved outlet. For a list of approved ";
-            feesInfo += "outlets please see the <a href='https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals/guide-sep.pdf' target='_blank'>Special Event Permit Terms and Conditions</a>.</p>";
-            feesInfo += "<table class='info'>";
-            feesInfo += "<tr><th class='heading fat center'>Drink Type</th><th class='heading fat center'>Number of Servings</th><th class='heading fat center'>Price Per Serving</th></tr>";
+            feesInfo += "outlets please see the <a href='https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals/guide-sep.pdf' target='_blank'>Special Event Permit Terms and Conditions</a>.</p>\n";
+            feesInfo += "<table class='info'>\n";
+            feesInfo += "<tr><th class='heading fat center'>Drink Type</th><th class='heading fat center'>Number of Servings</th><th class='heading fat center'>Price Per Serving</th></tr>\n";
 
             foreach (var forecast in specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent)
             {
@@ -822,12 +820,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 feesInfo += $"<tr><td class='field center'>{HttpUtility.HtmlEncode(itemName)}</td>";
                 feesInfo += $"<td class='field center'>{forecast.AdoxioEstimatedservings}</td>";
-                feesInfo += $"<td class='field center'>{String.Format("{0:$#,##0.00}", forecast.AdoxioPriceperserving)}</td></tr>";
+                feesInfo += $"<td class='field center'>{String.Format("{0:$#,##0.00}", forecast.AdoxioPriceperserving)}</td></tr>\n";
 
 
             }
 
-            feesInfo += "</table>";
+            feesInfo += "</table>\n";
 
             parameters.Add("title", title);
             parameters.Add("heading", heading);
