@@ -418,7 +418,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 
                 // show all event dates
-                locationDetails += "<h3 class='info'>Event Date(s):</h2>";
+                locationDetails += "<h3 class='info'>Event Date(s):</h3>";
                 foreach (var sched in location.AdoxioSpecialeventlocationSchedule)
                 {
 
@@ -449,10 +449,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
 
                     locationDetails += "<table class='info'>";
-                    locationDetails += $"<tr><th class='heading'>Date:</th><td class='field'>{startDateParam}</td></tr>";
-                    locationDetails += $"<tr><th class='heading'>Event Times:</th><td class='field'>{eventTimeParam}</td></tr>";
-                    locationDetails += $"<tr><th class='heading'>Service Times:</th><td class='field'>{serviceTimeParam}</td></tr>";
-                    locationDetails += "</table>";
+                    locationDetails += $"<tr><th class='heading'>Date:</th><td class='field'>{startDateParam}</td></tr>\n";
+                    locationDetails += $"<tr><th class='heading'>Event Times:</th><td class='field'>{eventTimeParam}</td></tr>\n";
+                    locationDetails += $"<tr><th class='heading'>Service Times:</th><td class='field'>{serviceTimeParam}</td></tr>\n";
+                    locationDetails += "</table>\n";
                 }
                 locationDetails += pageBottom;
 
@@ -462,8 +462,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             feesInfo += "<h2 class='info'>Liquor & Fees</h2>";
             feesInfo += "<table class='info'>";
-            feesInfo += "<tr><th class='heading' rowspan=4>Liquor Quantities</th>";
-            feesInfo += "<th class='heading center'>Type</th><th class='heading center'>Servings</th><th class='heading center'>Price</th><th class='heading center'>Revenue</th><th class='heading center'>Cost</th></tr>";
+            feesInfo += "<tr><th class='heading' rowspan='4'>Liquor Quantities</th>";
+            feesInfo += "<th class='heading center'>Type</th><th class='heading center'>Servings</th><th class='heading center'>Price</th><th class='heading center'>Revenue</th><th class='heading center'>Cost</th></tr>\n";
 
             //MicrosoftDynamicsCRMinvoice invoice = getSpecialEventInvoice(invoiceId);
 
@@ -486,15 +486,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     else
                     {
-                        itemName = "Sprits";
+                        itemName = "Spirits";
                     }
 
                 }
                 feesInfo += $"<tr><td class='field center'>{itemName}</td>";
                 feesInfo += $"<td class='field center'>{forecast.AdoxioEstimatedservings}</td>";
-                feesInfo += $"<td class='field center'>{String.Format("{0:$#,##0.00}", forecast.AdoxioPriceperserving)}</td>";
-                feesInfo += $"<td class='field center'>{String.Format("{0:$#,##0.00}", forecast.AdoxioEstimatedrevenue)}</td>";
-                feesInfo += $"<td class='field center'>{String.Format("{0:$#,##0.00}", forecast.AdoxioEstimatedcost)}</td></tr>";
+                feesInfo += $"<td class='field center'>{HttpUtility.HtmlEncode(String.Format("{0:$#,##0.00}", forecast.AdoxioPriceperserving))}</td>";
+                feesInfo += $"<td class='field center'>{HttpUtility.HtmlEncode(String.Format("{0:$#,##0.00}", forecast.AdoxioEstimatedrevenue))}</td>";
+                feesInfo += $"<td class='field center'>{HttpUtility.HtmlEncode(String.Format("{0:$#,##0.00}", forecast.AdoxioEstimatedcost))}</td></tr>";
 
                 totalRevenue += (decimal)forecast.AdoxioEstimatedrevenue;
                 totalPurchaseCost += (decimal)forecast.AdoxioEstimatedcost;
@@ -504,22 +504,22 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             feesInfo += "<tr style='background-color:#e0e0e0;'>";
             feesInfo += "<th class='heading fat' style='border-top: solid black 1px;' colspan=5>Estimated revenue</th>";
-            feesInfo += $"<td class='field center fat' style='border-top: solid black 1px;'>{String.Format("{0:$#,##0.00}", totalRevenue)}</td</tr>";
+            feesInfo += $"<td class='field center fat' style='border-top: solid black 1px;'>{HttpUtility.HtmlEncode(String.Format("{0:$#,##0.00}", totalRevenue))}</td</tr>";
 
             feesInfo += "<tr style='background-color:#e0e0e0'><th class='heading fat' colspan=5>Estimated liquor purchase cost</th>";
-            feesInfo += $"<td class='field center fat' >{String.Format("{0:$#,##0.00}", totalPurchaseCost)}</th></tr>";
+            feesInfo += $"<td class='field center fat' >{HttpUtility.HtmlEncode(String.Format("{0:$#,##0.00}", totalPurchaseCost))}</th></tr>";
 
             feesInfo += "<tr style='background-color:#e0e0e0;'><th class='heading fat' colspan=5>Estimated net proceeds/profit from liquor sales</th>";
-            feesInfo += $"<td class='field center fat' >{String.Format("{0:$#,##0.00}", Math.Max(totalProceeds,0))}</th></tr>";
+            feesInfo += $"<td class='field center fat' >{HttpUtility.HtmlEncode(String.Format("{0:$#,##0.00}", Math.Max(totalProceeds,0)))}</th></tr>";
 
             feesInfo += "<tr style='background-color:#e0e0e0;'><th class='heading' colspan=5>Total PST Amount Due</th>";
-            feesInfo += $"<td class='field center' >{String.Format("{0:$#,##0.00}", specialEvent.AdoxioNetestimatedpst)}</th></tr>";
+            feesInfo += $"<td class='field center' >{HttpUtility.HtmlEncode(String.Format("{0:$#,##0.00}", specialEvent.AdoxioNetestimatedpst))}</th></tr>";
 
             feesInfo += $"<tr style='background-color:#e0e0e0;'><th class='heading' colspan=5>Application Fees (Based on {specialEvent.AdoxioSpecialeventSpecialeventlocations.Count} event location(s) and capacity)</th>";
-            feesInfo += $"<td class='field center'>{String.Format("{0:$#,##0.00}", specialEvent.AdoxioInvoice.Totalamount - specialEvent.AdoxioNetestimatedpst)}</th></tr>";
+            feesInfo += $"<td class='field center'>{HttpUtility.HtmlEncode(String.Format("{0:$#,##0.00}", specialEvent.AdoxioInvoice.Totalamount - specialEvent.AdoxioNetestimatedpst))}</th></tr>";
 
             feesInfo += "<tr><th class='heading' colspan=5><h1>Total Fees Due Upon Approval</h1></th>";
-            feesInfo += $"<td class='field center'> <h1>{String.Format("{0:$#,##0.00}", specialEvent.AdoxioInvoice.Totalamount)}</h1></th></tr>";
+            feesInfo += $"<td class='field center'> <h1>{HttpUtility.HtmlEncode(String.Format("{0:$#,##0.00}", specialEvent.AdoxioInvoice.Totalamount))}</h1></th></tr>";
 
             feesInfo += "</table>";
 
@@ -696,7 +696,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             pageTop += "/nORlgCAkly6/YNf69EMUBQsKgAAAIBQAQAAACgLrh+oynb8eIBmAIAKYwdAYa65evUqrQAAAACdBNcPAAAAIFQAAAAAECoAAACAUAEAAABAqAAAAABCBQAAAAChAgAAAIBQAQAAAIQKAAAAAEIFAAAAECoAAAAACBUAAAAAhAoAAAAgVAAAAAAQKgAAAIBQAQAAAECoAAAAACBUAAAAAKECAAAAgFABAAAAhAoAAAAAQgUAAAAAoQIAAAAIFQAAAACECgAAACBUAAAAABAqAAAAAAgVAAAAQKgAAAAAIFQAAAAAoQIAAACAUAEAAACECgAAAABCBQAAAAChAgAAAAgVAAAAAIQKAAAAIFQAAA";
             pageTop += "AAECoAAAAACBUAAABAqAAAAAAgVAAAAAChAgAAAIBQAQAAAECoAAAAAEIFAAAAAKECAAAACBUAAAAAhAoAAAAAQgUAAAAQKgAAAAAIFQAAAECoAAAAACBUAAAAABAqAAAAgFABAAAAQKgAAAAAQgUAAAAAoQIAAAAIFQAAAACECgAAAABCBQAAABAqAAAAAAgVAAAAQKgAAAAAIFQAAAAAECoAAACAUAEAAABAqAAAAABCBQAAAAChAgAAAIBQAQAAAIQKAAAAAEIFAAAAECoAAAAACBUAAAAAhAoAAAAgVAAAAAAQKgAAAIBQAQAAAECoAAAAACBUAAAAAKECAAAAgFABAAAAhAoAAAAAQgUA";
             pageTop += "AAAAoQIAAAAIFQAAAACECgAAACBUAAAAABAqAAAAgFABAAAAQKgAAAAAIFQAAAAAoQIAAACAUAEAAACECgAAAABCBQAAACCb/1+AAQAeXUHaMpCpHwAAAABJRU5ErkJggg==' alt='BC Gov Logo'>\n</td><td width='80%'>";
-            pageTop += $"<h1 class='title'>Liquor and Cannabis Regulation Branch</h1>{heading}</td></tr></table>\n";
+            pageTop += $"<h1 class='title'>Liquor and Cannabis Regulation Branch</h1>{HttpUtility.HtmlEncode(heading)}</td></tr></table>\n";
 
             var pageBottom = $"<div class='footer'><div class='footer-box'><p></p></div><div class='issued-box'><p style='text-align:right;'><small>Printed: {DateTime.Today.ToString("MMMM dd, yyyy")}</small></p></div></div></div></div>\n";
 
@@ -730,7 +730,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 locationDetails += "</table>";
 
                 // show all event dates
-                locationDetails += "<h3 class='info'>Event Date(s):</h2>";
+                locationDetails += "<h3 class='info'>Event Date(s):</h3>";
 
                 // we will need to paginate every 4 days;
                 //var eventNumber = 1;
@@ -762,9 +762,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
 
                     locationDetails += "<table class='info'>";
-                    locationDetails += $"<tr><th class='heading'>Date:</td><td class='field'>{startDateParam}</td>";
-                    locationDetails += $"<th class='heading'>Event Times:</td><td class='field'>{eventTimeParam}</td>";
-                    locationDetails += $"<th class='heading'>Service Times:</td><td class='field'>{serviceTimeParam}</td></tr>";
+                    locationDetails += $"<tr><th class='heading'>Date:</th><td class='field'>{startDateParam}</td>\n";
+                    locationDetails += $"<th class='heading'>Event Times:</th><td class='field'>{eventTimeParam}</td>\n";
+                    locationDetails += $"<th class='heading'>Service Times:</th><td class='field'>{serviceTimeParam}</td></tr>\n";
                     locationDetails += "</table>\n";
                 }
 
@@ -814,13 +814,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     else
                     {
-                        itemName = "Sprits";
+                        itemName = "Spirits";
                     }
 
                 }
                 feesInfo += $"<tr><td class='field center'>{HttpUtility.HtmlEncode(itemName)}</td>";
                 feesInfo += $"<td class='field center'>{forecast.AdoxioEstimatedservings}</td>";
-                feesInfo += $"<td class='field center'>{String.Format("{0:$#,##0.00}", forecast.AdoxioPriceperserving)}</td></tr>\n";
+                feesInfo += $"<td class='field center'>{HttpUtility.HtmlEncode(String.Format("{0:$#,##0.00}", forecast.AdoxioPriceperserving))}</td></tr>\n";
 
 
             }
