@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Gov.Lclb.Cllb.Public.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Net.Http.Headers;
 using Newtonsoft.Json;
 using Stubble.Core.Builders;
-using Wkhtmltopdf.NetCore;
-using Wkhtmltopdf.NetCore.Options;
+using WkHtmlToPdfDotNet;
+using WkHtmlToPdfDotNet.Contracts;
 
 namespace Gov.Jag.Lcrb.PdfService.Controllers
 {
@@ -21,11 +25,11 @@ namespace Gov.Jag.Lcrb.PdfService.Controllers
     [Route("api/[controller]")]
     public class PDFController : Controller
     {
-        readonly IGeneratePdf _generatePdf;
+        readonly IConverter _generatePdf;
         private readonly IConfiguration Configuration;
         protected ILogger _logger;
 
-        public PDFController(IConfiguration configuration, ILoggerFactory loggerFactory, IGeneratePdf generatePdf)
+        public PDFController(IConfiguration configuration, ILoggerFactory loggerFactory, IConverter generatePdf)
         {
             _generatePdf = generatePdf;
             Configuration = configuration;
@@ -36,7 +40,7 @@ namespace Gov.Jag.Lcrb.PdfService.Controllers
         [Route("GetPDF/{template}")]
         [Produces("application/pdf")]
         [ProducesResponseType(200, Type = typeof(FileContentResult))]
-        public async Task<IActionResult> GetPDF([FromBody] Dictionary<string, object> rawdata, string template)
+        public IActionResult GetPDF([FromBody] Dictionary<string, object> rawdata, string template)
         {
             // first do a mustache merge.
             var stubble = new StubbleBuilder().Build();
@@ -46,16 +50,26 @@ namespace Gov.Jag.Lcrb.PdfService.Controllers
             {
                 string format = System.IO.File.ReadAllText(filename);
                 var html = stubble.Render(format, rawdata);
-
-                _generatePdf.SetConvertOptions(new ConvertOptions
+                
+                var doc = new HtmlToPdfDocument()
                 {
-                    PageSize = Size.Letter,
-                    PageMargins = new Margins(5, 5, 5, 5)
-                });
+                    GlobalSettings = {
+                        PaperSize = PaperKind.Letter,
+                        Orientation = Orientation.Portrait,
+                        Margins = new MarginSettings(5.0,5.0,5.0,5.0)
+                    },
+                    
+                    Objects = {
+                        new ObjectSettings()
+                        {
+                            HtmlContent = html
+                        }
+                    }
+                };
                 try
                 {
-                    var pdf = await _generatePdf.GetPdfViewInHtml(html);
-                    return pdf;
+                    var pdf = _generatePdf.Convert(doc); 
+                    return File(pdf, "application/pdf");
                 }
                 catch (Exception e)
                 {
@@ -70,7 +84,7 @@ namespace Gov.Jag.Lcrb.PdfService.Controllers
 
         [HttpPost]
         [Route("GetHash/{template}")]
-        public async Task<IActionResult> GetHash([FromBody] Dictionary<string, object> rawdata, string template)
+        public IActionResult GetHash([FromBody] Dictionary<string, object> rawdata, string template)
         {
             // first do a mustache merge.
             var stubble = new StubbleBuilder().Build();
