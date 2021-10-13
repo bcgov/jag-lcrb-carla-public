@@ -698,7 +698,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             pageTop += "AAAAoQIAAAAIFQAAAACECgAAACBUAAAAABAqAAAAgFABAAAAQKgAAAAAIFQAAAAAoQIAAACAUAEAAACECgAAAABCBQAAACCb/1+AAQAeXUHaMpCpHwAAAABJRU5ErkJggg==' alt='BC Gov Logo'>\n</td><td width='80%'>";
             pageTop += $"<h1 class='title'>Liquor and Cannabis Regulation Branch</h1>{heading}</td></tr></table>\n";
 
-            var pageBottom = $"<div class='footer'><div class='footer-box'><p></p></div><div class='issued-box'><p style='text-align:right;'><small>Printed: {DateTime.Today.ToString("MMMM dd, yyyy")}</small></p></div></div></div></div>";
+            var pageBottom = $"<div class='footer'><div class='footer-box'><p></p></div><div class='issued-box'><p style='text-align:right;'><small>Printed: {DateTime.Today.ToString("MMMM dd, yyyy")}</small></p></div></div></div></div>\n";
 
             var locationDetails = "";
             var locationNumber = 1;
@@ -707,13 +707,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 locationDetails += pageTop;
                 // draw the location
-                locationDetails += $"<h2 class='info'>Event Location: {HttpUtility.HtmlEncode(location.AdoxioLocationname)}</h2>";
+                locationDetails += $"<h2 class='info'>Event Location: {HttpUtility.HtmlEncode(location.AdoxioLocationname)}</h2>\n";
                 locationDetails += "<table class='info'>";
-                locationDetails += $"<tr><th class='heading'>Location Permit:</td><td class='field'>{HttpUtility.HtmlEncode(specialEvent.AdoxioSpecialeventpermitnumber)}-{locationNumber++}</td></tr>";
-                locationDetails += $"<tr><th class='heading'>Location Name:</td><td class='field'>{HttpUtility.HtmlEncode(location.AdoxioLocationname)}</td></tr>";
-                locationDetails += $"<tr><th class='heading'>Location Description:</td><td class='field'>{HttpUtility.HtmlEncode(location.AdoxioLocationdescription)}</td></tr>";
-                locationDetails += $"<tr><th class='heading'>Event Address:</td><td class='field'>{HttpUtility.HtmlEncode(location.AdoxioEventlocationstreet2)} {HttpUtility.HtmlEncode(location.AdoxioEventlocationstreet1)}, {specialEvent.AdoxioSpecialEventCityDistrictId.AdoxioName} BC, {location.AdoxioEventlocationpostalcode}</td></tr>";
-                locationDetails += $"<tr><th class='heading'>Total Attendees:</td><td class='field'>{location.AdoxioMaximumnumberofguestslocation}</td></tr>";
+                locationDetails += $"<tr><th class='heading'>Location Permit:</th><td class='field'>{HttpUtility.HtmlEncode(specialEvent.AdoxioSpecialeventpermitnumber)}-{locationNumber++}</td></tr>\n";
+                locationDetails += $"<tr><th class='heading'>Location Name:</th><td class='field'>{HttpUtility.HtmlEncode(location.AdoxioLocationname)}</td></tr>\n";
+                locationDetails += $"<tr><th class='heading'>Location Description:</th><td class='field'>{HttpUtility.HtmlEncode(location.AdoxioLocationdescription)}</td></tr>\n";
+                locationDetails += $"<tr><th class='heading'>Event Address:</th><td class='field'>{HttpUtility.HtmlEncode(location.AdoxioEventlocationstreet2)} {HttpUtility.HtmlEncode(location.AdoxioEventlocationstreet1)}, {HttpUtility.HtmlEncode(specialEvent.AdoxioSpecialEventCityDistrictId.AdoxioName)} BC, {HttpUtility.HtmlEncode(location.AdoxioEventlocationpostalcode)}</td></tr>\n";
+                locationDetails += $"<tr><th class='heading'>Total Attendees:</th><td class='field'>{location.AdoxioMaximumnumberofguestslocation}</td></tr>\n";
 
                 // issued permits only display a minor detail of the service areas
                 var serviceAttendees = 0;
@@ -726,7 +726,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
 
                 locationDetails += serviceAreaDetails;
-                locationDetails += $"<tr><th class='heading'>Total Attendees in Service Areas:</td><td class='field'>{serviceAttendees}</td></tr>";
+                locationDetails += $"<tr><th class='heading'>Total Attendees in Service Areas:</td><td class='field'>{serviceAttendees}</td></tr>\n";
                 locationDetails += "</table>";
 
                 // show all event dates
@@ -765,7 +765,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     locationDetails += $"<tr><th class='heading'>Date:</td><td class='field'>{startDateParam}</td>";
                     locationDetails += $"<th class='heading'>Event Times:</td><td class='field'>{eventTimeParam}</td>";
                     locationDetails += $"<th class='heading'>Service Times:</td><td class='field'>{serviceTimeParam}</td></tr>";
-                    locationDetails += "</table>";
+                    locationDetails += "</table>\n";
                 }
 
                 // show the Ts and Cs if they're there.
