@@ -590,7 +590,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             appInfo += $"<tr><th class='heading'>Event Name:</th><td class='field'>{HttpUtility.HtmlEncode(specialEvent.AdoxioEventname)}</td></tr>";
             appInfo += $"<tr><th class='heading'>Event Municipality:</th><td class='field'>{HttpUtility.HtmlEncode(specialEvent.AdoxioSpecialEventCityDistrictId.AdoxioName)}</td></tr>";
             appInfo += $"<tr><th class='heading'>Applicant Name:</th><td class='field'>{HttpUtility.HtmlEncode(specialEvent.AdoxioContactId.Fullname)}</td></tr>";
-            appInfo += $"<tr><th class='heading'>Applicant Info:</th><td class='field'>{HttpUtility.HtmlEncode(specialEvent.AdoxioContactId.Address1Line1)}<br>{HttpUtility.HtmlEncode(specialEvent.AdoxioContactId.Address1City)},{specialEvent.AdoxioContactId.Address1Stateorprovince}<br>{specialEvent.AdoxioContactId.Address1Postalcode}<br>{specialEvent.AdoxioContactId.Telephone1}<br>{specialEvent.AdoxioContactId.Emailaddress1}</td></tr>";
+            appInfo +=
+                $"<tr><th class='heading'>Applicant Info:</th><td class='field'>{HttpUtility.HtmlEncode(specialEvent.AdoxioContactId.Address1Line1)}<br>";
+            appInfo += $"{HttpUtility.HtmlEncode(specialEvent.AdoxioContactId.Address1City)}, {HttpUtility.HtmlEncode(specialEvent.AdoxioContactId.Address1Stateorprovince)}<br>{HttpUtility.HtmlEncode(specialEvent.AdoxioContactId.Address1Postalcode)}<br>{HttpUtility.HtmlEncode(specialEvent.AdoxioContactId.Telephone1)}<br>{HttpUtility.HtmlEncode(specialEvent.AdoxioContactId.Emailaddress1)}</td></tr>";
             appInfo += "</table>";
 
             var eligibilityInfo = "<h2 class='info'>Eligibility</h2>";
