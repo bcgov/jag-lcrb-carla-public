@@ -61,7 +61,7 @@ namespace Gov.Jag.Lcrb.PdfService.Controllers
                 {
                     _logger.LogError(e,"ERROR rendering PDF");
                     _logger.LogError(template);
-                    _logger.LogError(JsonConvert.SerializeObject(rawdata));
+                    _logger.LogError(html);
                 }
             }
 
