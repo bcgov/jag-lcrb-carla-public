@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Gov.Lclb.Cllb.Public.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using Stubble.Core.Builders;
 using Wkhtmltopdf.NetCore;
 using Wkhtmltopdf.NetCore.Options;
@@ -50,9 +52,17 @@ namespace Gov.Jag.Lcrb.PdfService.Controllers
                     PageSize = Size.Letter,
                     PageMargins = new Margins(5, 5, 5, 5)
                 });
-
-                var pdf = await _generatePdf.GetPdfViewInHtml(html);
-                return pdf;
+                try
+                {
+                    var pdf = await _generatePdf.GetPdfViewInHtml(html);
+                    return pdf;
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError(e,"ERROR rendering PDF");
+                    _logger.LogError(template);
+                    _logger.LogError(JsonConvert.SerializeObject(rawdata));
+                }
             }
 
             return new NotFoundResult();
