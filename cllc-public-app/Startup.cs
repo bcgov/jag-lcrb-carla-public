@@ -328,7 +328,7 @@ namespace Gov.Lclb.Cllb.Public
                 // set default request version to HTTP 2.  Note that Dotnet Core does not currently respect this setting for all requests.
                 httpClient.DefaultRequestVersion = HttpVersion.Version20;
 
-                var initialChannel = GrpcChannel.ForAddress(fileManagerURI, new GrpcChannelOptions { HttpClient = httpClient });
+                var initialChannel = GrpcChannel.ForAddress(fileManagerURI, new GrpcChannelOptions { HttpClient = httpClient, MaxSendMessageSize = null, MaxReceiveMessageSize = null});
 
                 var initialClient = new FileManagerClient(initialChannel);
                 // call the token service to get a token.
