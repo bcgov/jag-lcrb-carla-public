@@ -23,6 +23,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             // configure the HttpClient that is used for our direct REST calls.
             _client = httpClient;
 
+            _client.Timeout = TimeSpan.FromMinutes(5);
+
             _client.DefaultRequestHeaders.Add("Accept", "application/json");
             string serviceUri = configuration["PDF_SERVICE_BASE_URI"];
             string serviceSecret = configuration["PDF_SERVICE_JWT_SECRET"];

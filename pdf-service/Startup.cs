@@ -14,10 +14,12 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using Wkhtmltopdf.NetCore;
+
 using Unchase.Swashbuckle.AspNetCore.Extensions.Extensions;
 using System;
 using HealthChecks.UI.Client;
+using WkHtmlToPdfDotNet;
+using WkHtmlToPdfDotNet.Contracts;
 
 namespace Gov.Jag.Lcrb.PdfService
 {
@@ -119,14 +121,16 @@ namespace Gov.Jag.Lcrb.PdfService
 
             // health checks.
             services.AddHealthChecks();
+
+
             if (!string.IsNullOrEmpty(Configuration["WKHTMLTOPDF_LOCATION"]))
             {
                 string wkhtmltopdfLocation = Configuration["WKHTMLTOPDF_LOCATION"];
-                services.AddWkhtmltopdf(wkhtmltopdfLocation);
+                services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
             }
             else
             {
-                services.AddWkhtmltopdf();
+                services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
             }
         }
 
