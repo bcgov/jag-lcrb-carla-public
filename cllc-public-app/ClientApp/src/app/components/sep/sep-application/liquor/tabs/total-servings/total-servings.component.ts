@@ -72,7 +72,6 @@ export class TotalServingsComponent implements OnInit {
       ceil: this.max_servings,
       disabled: this.disableForm
     };
-    // console.log("setting servings:", this.total_guests, this.total_minors, this.total_service_hours, this.suggested_servings, this.max_servings)
 
   }
 
