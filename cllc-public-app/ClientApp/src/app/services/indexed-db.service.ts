@@ -33,6 +33,16 @@ export class IndexedDBService {
     // Save Application
     let applicationId = data.localId;
     data.userId = this?.userId;
+    if (!applicationId)
+    {
+        const apps = await this.applications.where("id").equals(data.id).toArray();
+        if (apps && apps.length > 0)
+        {
+          applicationId = apps[0].localId;
+          data.localId = applicationId;
+        }
+    }
+
     if (applicationId) { // update if exists
       await this.applications.update(applicationId, data);
     } else { // create and get new id
