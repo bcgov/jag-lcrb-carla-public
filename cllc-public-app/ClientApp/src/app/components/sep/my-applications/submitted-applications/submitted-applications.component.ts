@@ -236,7 +236,7 @@ export class SubmittedApplicationsComponent implements OnInit {
       if (cancelApplication) {
         if (appSummary.specialEventId)
         {
-          const result = await this.sepDataService.updateSepApplication({ id: appSummary.specialEventId, denialReason: reason, eventStatus: "Cancelled" } as SepApplication, appSummary.specialEventId)
+          const result = await this.sepDataService.updateSepApplication({ id: appSummary.specialEventId, cancelReason: reason, eventStatus: "Cancelled" } as SepApplication, appSummary.specialEventId)
           .toPromise();
 
           if (appSummary.localId) {
