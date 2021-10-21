@@ -137,15 +137,16 @@ export class SummaryComponent implements OnInit {
   setApplication(id: string) {
     if (id) {
       this.sepDataService.getSpecialEventForApplicant(id)
-        .subscribe(app => {
+        .subscribe(async app => {
           this.application = app;
           this.formatEventDatesForDisplay();
+          // update local db
+          await this.db.applications.update(this.localId, app);          
         });
     }
   }
 
   ngOnInit(): void {
-    debugger;
     if (this.transactionId) {
       this.verify_payment();
 
@@ -375,7 +376,7 @@ export class SummaryComponent implements OnInit {
         if (this.application && this.application.id)
         {
           this.savingToAPI = true;
-          const result = await this.sepDataService.updateSepApplication({ id: this.application.id, localId: this.localId, denialReason: reason, eventStatus: "Cancelled" } as SepApplication, this.application.id)
+          const result = await this.sepDataService.updateSepApplication({ id: this.application.id, localId: this.localId, cancelReason: reason, eventStatus: "Cancelled" } as SepApplication, this.application.id)
           .toPromise();
 
           if (result.localId) {
@@ -393,8 +394,7 @@ export class SummaryComponent implements OnInit {
   }
 
   async submitApplication(): Promise<void> {
-    this.savingToAPI = true;
-
+    this.savingToAPI = true;    
     const appData = await this.db.getSepApplication(this.localId);
     if (appData.id) { // do an update ( the record exists in dynamics)
       const result = await this.sepDataService.updateSepApplication({ ...appData, eventStatus: "Submitted" } as SepApplication, appData.id)
