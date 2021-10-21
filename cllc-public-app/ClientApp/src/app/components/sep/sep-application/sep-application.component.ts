@@ -108,12 +108,22 @@ export class SepApplicationComponent implements OnInit {
 
   completeStep(step: string, stepper: any, data: SepApplication, saveToApi: boolean) {
     
+    let lastStepCompleted = step;
     if (this.application)
     {
-      this.application.lastStepCompleted = step;
+      const currentLastStepNumber = this.steps.indexOf(this.application.lastStepCompleted);
+      const newLastStepNumber = this.steps.indexOf(step);
+      if (newLastStepNumber > currentLastStepNumber)
+      {
+        this.application.lastStepCompleted = step;
+      } 
+      else
+      {
+        lastStepCompleted = this.application.lastStepCompleted;
+      }     
     }
     
-    data.lastStepCompleted = step;
+    data.lastStepCompleted = lastStepCompleted;
     this.saveToDb(data);
     this.cd.detectChanges();
     if (saveToApi) {
@@ -126,6 +136,7 @@ export class SepApplicationComponent implements OnInit {
   }
 
   selectionChange(event) {
+    this.step = this.steps[event.selectedIndex];
   }
 
   async saveToDb(data) {
