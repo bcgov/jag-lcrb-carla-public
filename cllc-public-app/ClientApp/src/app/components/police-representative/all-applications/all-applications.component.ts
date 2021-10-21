@@ -62,8 +62,7 @@ export class AllApplicationsComponent implements OnInit {
       });
   }
 
-  private loadAccountContacts()
-  {
+  private loadAccountContacts() {
     return this.accountDataService.getCurrentAccountContacts()
     .pipe(map(array => array.map(accountContactData => {
       return {
@@ -71,8 +70,9 @@ export class AllApplicationsComponent implements OnInit {
       } as Contact;
     })));
   }
+
   private loadSepApplications() {
-    return this.sepDataService.getPoliceApprovalSepApplications()
+    return this.sepDataService.getPoliceApprovalSepApplications();
   }
 
 }

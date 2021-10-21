@@ -139,9 +139,7 @@ export class SummaryComponent implements OnInit {
       this.sepDataService.getSpecialEventForApplicant(id)
         .subscribe(async app => {
           this.application = app;
-          this.formatEventDatesForDisplay();
-          // update local db
-          await this.db.applications.update(this.localId, app);          
+          this.formatEventDatesForDisplay();                   
         });
     }
   }

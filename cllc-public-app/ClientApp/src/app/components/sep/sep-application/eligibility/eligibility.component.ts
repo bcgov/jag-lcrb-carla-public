@@ -34,7 +34,7 @@ export class EligibilityComponent extends FormBase implements OnInit {
     if (!value) {
       return;
     }
-    //get the last saved application
+    // get the last saved application
     this.db.getSepApplication(value)
       .then(app => {
         this.sepApplication = app;
@@ -45,7 +45,7 @@ export class EligibilityComponent extends FormBase implements OnInit {
           }
         }
       });
-  };
+  }
 
   get disableForm(): boolean {
     if(this.sepApplication){
