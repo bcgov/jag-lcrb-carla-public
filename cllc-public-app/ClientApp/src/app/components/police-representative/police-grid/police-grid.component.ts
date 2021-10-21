@@ -79,15 +79,13 @@ export class PoliceGridComponent implements OnInit {
   }
 
   assign(row: PoliceTableElement) {
-    var assignee = this.currentValueMap['assignee_' + row.specialEventId];
+    const assignee = this.currentValueMap['assignee_' + row.specialEventId];
 
     this.busy = this.sepDataService.policeAssignSepApplication(row.specialEventId, assignee)
       .subscribe(data => {
-        
         row.policeDecisionBy = data;
         // ensure the grid refreshes.
-        this.cd.detectChanges()
-      
+        this.cd.detectChanges();      
       });
   }
 

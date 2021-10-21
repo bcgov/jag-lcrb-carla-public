@@ -134,16 +134,13 @@ export class EventComponent extends FormBase implements OnInit {
 
     // if we've got any event locations loaded
     if (app?.eventLocations?.length > 0) {
-      //console.log("we have locations");
       app.eventLocations.forEach(loc => {
-        //console.log("loading location");
         loc.eventDates = loc.eventDates || [];
         loc.serviceAreas = loc.serviceAreas || [];
         this.addLocation(loc);
       });
     } else {
       // otherwise add a blank one
-      //console.log("adding blank location");
       this.addLocation();
     }
   }
@@ -378,11 +375,11 @@ export class EventComponent extends FormBase implements OnInit {
 
     if (eventStart > maxDate && noMaxDateFound === true)
     {
-      error += "You cannot have a location start date that is more than a year from today. "  
+      error += "You cannot have a location start date that is more than a year from today. ";
     }
     else if (eventStart > maxDate)
     {
-      error += "You cannot have a location start date that is more than six days from the earliest start date for the event. " 
+      error += "You cannot have a location start date that is more than six days from the earliest start date for the event. "; 
     }
     
    
