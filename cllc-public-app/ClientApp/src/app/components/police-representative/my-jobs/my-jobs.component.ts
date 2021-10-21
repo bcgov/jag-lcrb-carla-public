@@ -56,7 +56,7 @@ export class MyJobsComponent implements OnInit {
     // fetch possible contacts we can assign to.
     this.loadAccountContacts()
       .subscribe(availableContacts => this.availableContacts = availableContacts);
-   
+      
     // fetch SEP applications waiting for Police Approval
     this.busy = this.loadSepApplications()
       .subscribe(myApplications => {
@@ -66,8 +66,7 @@ export class MyJobsComponent implements OnInit {
       });
   }
 
-  private loadAccountContacts()
-  {
+  private loadAccountContacts() {
     return this.accountDataService.getCurrentAccountContacts()
     .pipe(map(array => array.map(accountContactData => {
       return {
@@ -75,6 +74,7 @@ export class MyJobsComponent implements OnInit {
       } as Contact;
     })));
   }
+
   private loadSepApplications() {
     return this.sepDataService.getPoliceApprovalMySepApplications();
   }

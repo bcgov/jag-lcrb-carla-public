@@ -22,6 +22,7 @@ export class ApplicantComponent extends FormBase implements OnInit {
   policyDocs: PolicyDocumentComponent;
   @Input() account: Account;
   _app: SepApplication = {} as SepApplication;
+  _appID: number;
   contact: Contact;
   showValidationMessages: boolean;
   @Input()
@@ -33,6 +34,25 @@ export class ApplicantComponent extends FormBase implements OnInit {
         this.form.disable();
       }
     }
+  }
+
+  @Input()
+  set localId(value: number) {
+    this._appID = value;
+    if (!value) {
+      return;
+    }
+    // get the last saved application
+    this.db.getSepApplication(value)
+      .then(app => {
+        this._app = app;
+        if (this.form && app) {
+          this.form.patchValue(this.sepApplication);
+          if(this.disableForm){
+            this.form.disable();
+          }
+        }
+      });
   }
 
   get disableForm(): boolean {
