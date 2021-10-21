@@ -180,7 +180,7 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
   }
 
   canRaisePrice(): boolean {
-    return this.sepApplication?.chargingForLiquorReason == 'RaiseMoney' ||
+    return this.sepApplication?.chargingForLiquorReason === "RaiseMoney" ||
     this.sepApplication?.isLocalSignificance ||
     this.sepApplication?.isMajorSignificance;
   }
@@ -200,9 +200,10 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
 
     // applicants can change drink prices when operating certain types of charitable/significant events
     const isRaiseMoney = this.canRaisePrice();
-    const notCharging = this.sepApplication?.chargingForLiquorReason == 'LiquorIsFree';
+    const notCharging = this.sepApplication?.chargingForLiquorReason === "LiquorIsFree";
 
-    // GST Registered Organizations can add 5% to the sell price, to recover operating costs; otherwise the max price is the price set by LCRB
+    // GST Registered Organizations can add 5% to the sell price, to recover 
+    // operating costs; otherwise the max price is the price set by LCRB
     const multiplier = this.sepApplication?.isGSTRegisteredOrg ? 1.05 : 1;
 
     let maxBeerPrice = 0;
@@ -242,13 +243,13 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
 
       // if there is no price; or if the price isn't the max, set it to the max
       // if they've entered a different value, they will need to change it back if they're navigating back and forth
-    if (!this.form.value?.averageBeerPrice || this.form.value?.averageBeerPrice != maxBeerPrice) {
+    if (!this.form.value?.averageBeerPrice || this.form.value?.averageBeerPrice !== maxBeerPrice) {
       this.form.get("averageBeerPrice").setValue(maxBeerPrice);
     }
-    if (!this.form.value?.averageWinePrice || this.form.value?.averageWinePrice != maxWinePrice) {
+    if (!this.form.value?.averageWinePrice || this.form.value?.averageWinePrice !== maxWinePrice) {
       this.form.get("averageWinePrice").setValue(maxWinePrice);
     }
-    if (!this.form.value?.averageSpiritsPrice || this.form.value?.averageSpiritsPrice != maxSpiritsPrice) {
+    if (!this.form.value?.averageSpiritsPrice || this.form.value?.averageSpiritsPrice !== maxSpiritsPrice) {
       this.form.get("averageSpiritsPrice").setValue(maxSpiritsPrice);
     }
 
