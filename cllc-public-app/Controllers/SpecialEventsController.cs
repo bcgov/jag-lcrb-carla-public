@@ -960,7 +960,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw httpOperationException;
             }
 
-            saveTotalServings(specialEvent, newSpecialEvent);
+            SaveTotalServings(specialEvent, newSpecialEvent);
 
             if (specialEvent.EventLocations?.Count > 0)
             {
@@ -1168,7 +1168,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var itemsToDelete = GetItemsToDelete(specialEvent, existingEvent);
             DeleteSpecialEventItems(itemsToDelete);
 
-            saveTotalServings(specialEvent, existingEvent);
+            SaveTotalServings(specialEvent, existingEvent);
 
             var patchEvent = new MicrosoftDynamicsCRMadoxioSpecialevent();
             patchEvent.CopyValues(specialEvent);
@@ -1374,7 +1374,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 });
             }
         }
-        private void saveTotalServings(ViewModels.SpecialEvent specialEvent, MicrosoftDynamicsCRMadoxioSpecialevent existingEvent)
+        private void SaveTotalServings(ViewModels.SpecialEvent specialEvent, MicrosoftDynamicsCRMadoxioSpecialevent existingEvent)
         {
             // get drink types
             var filter = "adoxio_name eq 'Beer/Cider/Cooler' or ";
@@ -1408,11 +1408,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         .Where(drink => drink._adoxioTypeValue == drinkType.AdoxioSepdrinktypeid)
                         .FirstOrDefault();
                 }
-                createOrUpdateForecast(specialEvent, existingForecast, drinkType, estimatedServings, data.Item3);
+                CreateOrUpdateForecast(specialEvent, existingForecast, drinkType, estimatedServings, data.Item3);
             });
         }
 
-        private void createOrUpdateForecast(
+        private void CreateOrUpdateForecast(
             ViewModels.SpecialEvent specialEvent, 
             MicrosoftDynamicsCRMadoxioSepdrinksalesforecast existingBeerForecast, 
             MicrosoftDynamicsCRMadoxioSepdrinktype beerType, 
