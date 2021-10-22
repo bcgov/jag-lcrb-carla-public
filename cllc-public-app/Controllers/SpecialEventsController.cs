@@ -1557,7 +1557,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // get the special event.
 
             var specialEvent = _dynamicsClient.Specialevents.GetByKey(id);
-            if (userAccount._adoxioPolicejurisdictionidValue != specialEvent._adoxioPolicejurisdictionidValue)  // ensure the current account has a matching police jurisdiction.
+            if (specialEvent._adoxioPolicejurisdictionidValue != null && userAccount._adoxioPolicejurisdictionidValue != specialEvent._adoxioPolicejurisdictionidValue)  // ensure the current account has a matching police jurisdiction.
             {
                 return Unauthorized();
             }
@@ -1603,7 +1603,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // get the special event.
 
             var specialEvent = _dynamicsClient.Specialevents.GetByKey(id);
-            if (userAccount._adoxioPolicejurisdictionidValue != specialEvent._adoxioPolicejurisdictionidValue)  // ensure the current account has a matching police jurisdiction.
+            if (specialEvent._adoxioPolicejurisdictionidValue != null  && userAccount._adoxioPolicejurisdictionidValue != specialEvent._adoxioPolicejurisdictionidValue)  // ensure the current account has a matching police jurisdiction.
             {
                 return Unauthorized();
             }
@@ -1642,7 +1642,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // get the special event.
 
             var specialEvent = _dynamicsClient.Specialevents.GetByKey(id);
-            if (userAccount._adoxioPolicejurisdictionidValue != specialEvent._adoxioPolicejurisdictionidValue)  // ensure the current account has a matching police jurisdiction.
+            if (specialEvent._adoxioPolicejurisdictionidValue != null && userAccount._adoxioPolicejurisdictionidValue != specialEvent._adoxioPolicejurisdictionidValue)  // ensure the current account has a matching police jurisdiction.
             {
                 return Unauthorized();
             }
@@ -1682,7 +1682,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // get the special event.
 
             var specialEvent = _dynamicsClient.Specialevents.GetByKey(id);
-            if (userAccount._adoxioPolicejurisdictionidValue != specialEvent._adoxioPolicejurisdictionidValue)  // ensure the current account has a matching police jurisdiction.
+            if (specialEvent._adoxioPolicejurisdictionidValue != null && userAccount._adoxioPolicejurisdictionidValue != specialEvent._adoxioPolicejurisdictionidValue)  // ensure the current account has a matching police jurisdiction.
             {
                 return Unauthorized();
             }
@@ -1721,7 +1721,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // get the special event.
 
             var specialEvent = _dynamicsClient.Specialevents.GetByKey(id);
-            if (userAccount._adoxioPolicejurisdictionidValue != specialEvent._adoxioPolicejurisdictionidValue)  // ensure the current account has a matching police jurisdiction.
+            if (specialEvent._adoxioPolicejurisdictionidValue != null && userAccount._adoxioPolicejurisdictionidValue != specialEvent._adoxioPolicejurisdictionidValue)  // ensure the current account has a matching police jurisdiction.
             {
                 return Unauthorized();
             }
