@@ -1149,6 +1149,46 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Handle a submit event (last step on the summary page)
+        /// </summary>
+        /// <param name="eventId"></param>
+        /// <returns></returns>
+        [HttpPost("submit/{eventId}")]
+        public IActionResult Submit(string eventId)
+        {
+            if (!ModelState.IsValid || String.IsNullOrEmpty(eventId))
+            {
+                return BadRequest();
+            }
+
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+            var existingEvent = GetSpecialEventData(eventId);
+            if (existingEvent._adoxioAccountidValue != userSettings.AccountId &&
+                existingEvent._adoxioContactidValue != userSettings.ContactId)
+            {
+                return Unauthorized();
+            }
+
+            // just set the status to submitted.
+            var patchEvent = new MicrosoftDynamicsCRMadoxioSpecialevent()
+            {
+                Statuscode = (int?)EventStatus.Submitted
+            };
+            
+            try
+            {
+                _dynamicsClient.Specialevents.Update(eventId, patchEvent);
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Error creating/updating special event");
+                throw httpOperationException;
+            }
+            
+            return Ok();
+        }
+
         [HttpPut("{eventId}")]
         public IActionResult UpdateSpecialEvent(string eventId, [FromBody] ViewModels.SpecialEvent specialEvent)
         {
