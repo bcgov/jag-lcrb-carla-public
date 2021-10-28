@@ -1115,7 +1115,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         [HttpPost("generate-invoice/{eventId}")]
-        public IActionResult UpdateSpecialEvent(string eventId)
+        public IActionResult GenerateInvoice(string eventId)
         {
             if (!ModelState.IsValid || String.IsNullOrEmpty(eventId))
             {
@@ -1134,6 +1134,46 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var patchEvent = new MicrosoftDynamicsCRMadoxioSpecialevent()
             {
                 AdoxioInvoicetrigger = true
+            };
+            
+            try
+            {
+                _dynamicsClient.Specialevents.Update(eventId, patchEvent);
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Error creating/updating special event");
+                throw httpOperationException;
+            }
+            
+            return Ok();
+        }
+
+        /// <summary>
+        /// Handle a submit event (last step on the summary page)
+        /// </summary>
+        /// <param name="eventId"></param>
+        /// <returns></returns>
+        [HttpPost("submit/{eventId}")]
+        public IActionResult Submit(string eventId)
+        {
+            if (!ModelState.IsValid || String.IsNullOrEmpty(eventId))
+            {
+                return BadRequest();
+            }
+
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+            var existingEvent = GetSpecialEventData(eventId);
+            if (existingEvent._adoxioAccountidValue != userSettings.AccountId &&
+                existingEvent._adoxioContactidValue != userSettings.ContactId)
+            {
+                return Unauthorized();
+            }
+
+            // just set the status to submitted.
+            var patchEvent = new MicrosoftDynamicsCRMadoxioSpecialevent()
+            {
+                Statuscode = (int?)EventStatus.Submitted
             };
             
             try
@@ -1168,7 +1208,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var itemsToDelete = GetItemsToDelete(specialEvent, existingEvent);
             DeleteSpecialEventItems(itemsToDelete);
 
+            // update drink forecast information
             SaveTotalServings(specialEvent, existingEvent);
+
+            // ensure that the special event update does not write to the drink forecasts.
+            if (specialEvent.DrinksSalesForecasts != null)
+            {
+                specialEvent.DrinksSalesForecasts.Clear();
+                specialEvent.DrinksSalesForecasts = null;
+            }
 
             var patchEvent = new MicrosoftDynamicsCRMadoxioSpecialevent();
             patchEvent.CopyValues(specialEvent);
@@ -1186,6 +1234,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 patchEvent.SepCityODataBind = _dynamicsClient.GetEntityURI("adoxio_sepcities", specialEvent.SepCity.Id);
             }
+
             try
             {
                 _dynamicsClient.Specialevents.Update(specialEvent.Id, patchEvent);
@@ -1419,35 +1468,44 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             int estimatedServings,
             decimal? averagePrice)
         {
-            try
+            if (averagePrice == null)
             {
-                var newForecast = new MicrosoftDynamicsCRMadoxioSepdrinksalesforecast()
+                // do not allow a null update
+                _logger.LogError($"Invalid SEP drink forecast encountered - Average Price is null.  SEP ID - {specialEvent.Id}");
+            }
+            else
+            {
+                try
                 {
-                    AdoxioIscharging = true,
-                    AdoxioPriceperserving = averagePrice ?? 0,
-                    AdoxioEstimatedservings = estimatedServings,
-                };
-
-
-                if (existingBeerForecast == null)
-                { // create record
-                    newForecast.SpecialEventODataBind = _dynamicsClient.GetEntityURI("adoxio_specialevents", specialEvent.Id);
-                    if (!string.IsNullOrEmpty(beerType?.AdoxioSepdrinktypeid))
+                    var newForecast = new MicrosoftDynamicsCRMadoxioSepdrinksalesforecast()
                     {
-                        newForecast.DrinkTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_sepdrinktypes", beerType.AdoxioSepdrinktypeid);
+                        AdoxioIscharging = true,
+                        AdoxioPriceperserving = averagePrice,
+                        AdoxioEstimatedservings = estimatedServings,
+                    };
+
+
+                    if (existingBeerForecast == null)
+                    { // create record
+                        newForecast.SpecialEventODataBind = _dynamicsClient.GetEntityURI("adoxio_specialevents", specialEvent.Id);
+                        if (!string.IsNullOrEmpty(beerType?.AdoxioSepdrinktypeid))
+                        {
+                            newForecast.DrinkTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_sepdrinktypes", beerType.AdoxioSepdrinktypeid);
+                        }
+                        _dynamicsClient.Sepdrinksalesforecasts.Create(newForecast);
                     }
-                    _dynamicsClient.Sepdrinksalesforecasts.Create(newForecast);
+                    else
+                    { // update record
+                        _dynamicsClient.Sepdrinksalesforecasts.Update((string)existingBeerForecast.AdoxioSepdrinksalesforecastid, newForecast);
+                    }
                 }
-                else
-                { // update record
-                    _dynamicsClient.Sepdrinksalesforecasts.Update((string)existingBeerForecast.AdoxioSepdrinksalesforecastid, newForecast);
-                }
+                catch (HttpOperationException httpOperationException)
+                {
+                    _logger.LogError(httpOperationException, "Error creating/updating sep drinks sales forecast");
+                    throw httpOperationException;
+                }  
             }
-            catch (HttpOperationException httpOperationException)
-            {
-                _logger.LogError(httpOperationException, "Error creating/updating sep drinks sales forecast");
-                throw httpOperationException;
-            }
+            
         }
 
         [HttpGet("drink-types")]
