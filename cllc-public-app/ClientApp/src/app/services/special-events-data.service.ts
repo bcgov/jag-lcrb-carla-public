@@ -63,6 +63,15 @@ export class SpecialEventsDataService extends DataService {
    * Generate an invoice for a special event
    * @param id - special event id
    */
+   submitSepApplication(id: string) {
+    return this.http.post<SepApplication>(`api/special-events/submit/${id}`, {}, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
+  /**
+   * Generate an invoice for a special event
+   * @param id - special event id
+   */
    generateInvoiceSepApplication(id: string) {
     return this.http.post<SepApplication>(`api/special-events/generate-invoice/${id}`, {}, { headers: this.headers })
       .pipe(catchError(this.handleError));
