@@ -12,7 +12,7 @@ import { PaymentDataService } from "@services/payment-data.service";
 import { SpecialEventsDataService } from "@services/special-events-data.service";
 import { Subscription } from "rxjs";
 import { map, mergeMap } from "rxjs/operators";
-import { isBefore } from "date-fns";
+import { differenceInBusinessDays, isBefore } from "date-fns";
 import {
   faAward,
   faBirthdayCake,
@@ -286,7 +286,10 @@ export class SummaryComponent implements OnInit {
   }
 
   isEventPast(): boolean {
-    return isBefore(new Date(this.application?.eventStartDate), new Date() );
+
+    let diff = differenceInBusinessDays(new Date(this.application?.eventStartDate), new Date() );
+    return  diff > 0;
+    
   }
 
 
