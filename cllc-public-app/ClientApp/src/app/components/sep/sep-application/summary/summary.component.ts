@@ -395,15 +395,19 @@ export class SummaryComponent implements OnInit {
     this.savingToAPI = true;    
     const appData = await this.db.getSepApplication(this.localId);
     if (appData.id) { // do an update ( the record exists in dynamics)
-      const result = await this.sepDataService.updateSepApplication({ ...appData, eventStatus: "Submitted" } as SepApplication, appData.id)
+      const submitResult = await this.sepDataService.submitSepApplication(appData.id)
         .toPromise();
+
+      const result = await this.sepDataService.getSpecialEventForApplicant(appData.id)
+        .toPromise();
+
       if (result.eventStatus === "Approved") {
         this.mode = "payNow";
       } else if (result.eventStatus === "Pending Review") {
         this.mode = "pendingReview";
       }
-      if (result.localId) {
-        await this.db.applications.update(result.localId, result);
+      if (this.localId) {
+        await this.db.applications.update(this.localId, result);
         this.localId = this.localId; // trigger data refresh
       }
       //} else {
