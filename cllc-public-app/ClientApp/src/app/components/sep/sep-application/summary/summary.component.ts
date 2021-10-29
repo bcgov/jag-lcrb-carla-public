@@ -99,7 +99,9 @@ export class SummaryComponent implements OnInit {
     // get the last saved application
     this.db.getSepApplication(value)
       .then(app => {
-        this.setApplication(app.id);
+        if (app && app.id) {
+          this.setApplication(app.id);
+        }
       });
   }
 
