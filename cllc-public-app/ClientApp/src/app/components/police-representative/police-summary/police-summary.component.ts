@@ -189,18 +189,13 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
 
 
   // we will show a message and prevent editing within 48 hours of the event happening.
-
   canEditTnC(): boolean {
-    return  !this.isWithin48() && !this.isEventPast() && !this.isReviewed();
-  }
-
-  isWithin48(): boolean {
-    let diff = differenceInBusinessDays(new Date(this.sepApplication?.eventStartDate), new Date() );
-    return  diff < 2 && diff >= 0;
+    return !this.isEventPast() && !this.isReviewed();
   }
 
   isEventPast(): boolean {
-    return isBefore(new Date(this.sepApplication?.eventStartDate), new Date());
+    let diff = differenceInBusinessDays(new Date(this.sepApplication?.eventStartDate), new Date() );
+    return  diff < 0;
   }
 
   saveTermsAndConditions() {
