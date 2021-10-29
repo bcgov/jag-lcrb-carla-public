@@ -288,7 +288,7 @@ export class SummaryComponent implements OnInit {
   isEventPast(): boolean {
 
     let diff = differenceInBusinessDays(new Date(this.application?.eventStartDate), new Date() );
-    return  diff > 0;
+    return  diff < 0;
     
   }
 
