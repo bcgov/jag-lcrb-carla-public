@@ -100,11 +100,11 @@
                   DENY LIQUOR SERVICE&nbsp;
                 </button>
                 <!-- if it's been reviewed it must be revoked -->
-                <button class="btn btn-secondary" *ngIf="!this.isDenied() && this.isReviewed() && !isWithin48()" (click)="revoke()"
+                <button class="btn btn-secondary" *ngIf="!this.isDenied() && this.isReviewed()" (click)="revoke()"
                   style="width: 230px;">
                   CANCEL LIQUOR SERVICE&nbsp;
                 </button>
-                <p *ngIf="isWithin48()"><em>Please contact LCRB if you wish to recommend cancellation of liquor service for this event.</em></p>
+                <!-- <p *ngIf="isWithin48()"><em>Please contact LCRB if you wish to recommend cancellation of liquor service for this event.</em></p> -->
                 </section>
 
                 <section *ngIf="this.isEventPast()">This event has already past.</section>
@@ -461,9 +461,9 @@
         </div>
         <div *ngIf="!canEditTnC()">
           <app-error-alert>
-            <p *ngIf="isWithin48()">
+            <!--<p *ngIf="isWithin48()">
               As this event is scheduled within two business days, please contact the LCRB if you need to add a Term and Condition
-            </p>
+            </p> -->
             <p *ngIf="this.isReviewed()">
               This permit is already issued. As the permit holder may have already received a copy of the permit, please contact the LCRB if you need to add a Term and Condition
             </p>
