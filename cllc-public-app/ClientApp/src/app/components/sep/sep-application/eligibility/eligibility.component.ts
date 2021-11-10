@@ -168,7 +168,7 @@ export class EligibilityComponent extends FormBase implements OnInit {
       message = 'Please enter the Responsible Beverage Service Number';
       // The responsible beverage service number can be 6, 7 or 22 digits
     } else if (bevNumber && bevNumber.length !== 6 && bevNumber.length !== 7 && bevNumber.length !== 22) {
-      message = 'The Responsible Beverage Service Number can only be 6 or 22 characters long';
+      message = 'The Responsible Beverage Service Number can only be 6, 7 or 22 characters long';
     }
     return message;
   }
