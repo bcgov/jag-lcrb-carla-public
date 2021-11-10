@@ -718,12 +718,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 locationDetails += $"<tr><th class='heading'>Total Attendees:</th><td class='field'>{location.AdoxioMaximumnumberofguestslocation}</td></tr>\n";
 
                 // issued permits only display a minor detail of the service areas
-                var serviceAttendees = 0;
+                int serviceAttendees = 0;
                 var serviceAreaDetails = "";
                 var serviceAreaCount = 1;
                 foreach (var sched in location.AdoxioSpecialeventlocationLicencedareas)
                 {
-                    serviceAttendees += (int)sched.AdoxioLicencedareamaxnumberofguests;
+                    if (sched.AdoxioLicencedareamaxnumberofguests != null)
+                    {
+                        serviceAttendees += (int)sched.AdoxioLicencedareamaxnumberofguests;
+                    }                    
                     serviceAreaDetails += $"<tr><th class='heading'>Service Area #{serviceAreaCount++}:</th><td class='field'>{HttpUtility.HtmlEncode(sched.AdoxioEventname)} (capacity: {sched.AdoxioLicencedareamaxnumberofguests})</td></tr>";
                 }
 
@@ -841,7 +844,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             byte[] data = await _pdfClient.GetPdf(parameters, templateName);
 
-            await StoreCopyOfPdf(parameters, templateName, specialEvent.AdoxioSpecialeventid, data, "Permit");
+            try
+            {
+                await StoreCopyOfPdf(parameters, templateName, specialEvent.AdoxioSpecialeventid, data, "Permit");
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error uploading copy of PDF");
+            }
+            
 
             return File(data, "application/pdf", $"Special Event Permit - {specialEvent.AdoxioSpecialeventpermitnumber}.pdf");
 
