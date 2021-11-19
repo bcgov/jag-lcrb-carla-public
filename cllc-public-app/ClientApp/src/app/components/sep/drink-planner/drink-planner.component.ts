@@ -241,15 +241,15 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
     }
 
 
-      // if there is no price; or if the price isn't the max, set it to the max
+      // if there is no price; or if the price is greater than the max, set it to the max
       // if they've entered a different value, they will need to change it back if they're navigating back and forth
-    if (!this.form.value?.averageBeerPrice || this.form.value?.averageBeerPrice !== maxBeerPrice) {
+    if (!this.form.value?.averageBeerPrice || this.form.value?.averageBeerPrice > maxBeerPrice) {
       this.form.get("averageBeerPrice").setValue(maxBeerPrice);
     }
-    if (!this.form.value?.averageWinePrice || this.form.value?.averageWinePrice !== maxWinePrice) {
+    if (!this.form.value?.averageWinePrice || this.form.value?.averageWinePrice > maxWinePrice) {
       this.form.get("averageWinePrice").setValue(maxWinePrice);
     }
-    if (!this.form.value?.averageSpiritsPrice || this.form.value?.averageSpiritsPrice !== maxSpiritsPrice) {
+    if (!this.form.value?.averageSpiritsPrice || this.form.value?.averageSpiritsPrice > maxSpiritsPrice) {
       this.form.get("averageSpiritsPrice").setValue(maxSpiritsPrice);
     }
 
