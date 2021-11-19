@@ -127,15 +127,31 @@ namespace Gov.Lclb.Cllb.Public.Models
                         .Select(sepDrinkSalesForecast => sepDrinkSalesForecast.AdoxioEstimatedservings)
                         .FirstOrDefault();
 
+                    result.AverageBeerPrice = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
+                        .Where(sepDrinkSalesForecast => sepDrinkSalesForecast._adoxioTypeValue == beerTypeId)
+                        .Select(sepDrinkSalesForecast => sepDrinkSalesForecast.AdoxioPriceperserving)
+                        .FirstOrDefault();
+
                     result.Wine = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
                         .Where(sepDrinkSalesForecast => sepDrinkSalesForecast._adoxioTypeValue == wineTypeId)
                         .Select(sepDrinkSalesForecast => sepDrinkSalesForecast.AdoxioEstimatedservings)
+                        .FirstOrDefault();
+
+                    result.AverageWinePrice = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
+                        .Where(sepDrinkSalesForecast => sepDrinkSalesForecast._adoxioTypeValue == wineTypeId)
+                        .Select(sepDrinkSalesForecast => sepDrinkSalesForecast.AdoxioPriceperserving)
                         .FirstOrDefault();
 
                     result.Spirits = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
                         .Where(sepDrinkSalesForecast => sepDrinkSalesForecast._adoxioTypeValue == spiritsTypeId)
                         .Select(sepDrinkSalesForecast => sepDrinkSalesForecast.AdoxioEstimatedservings)
                         .FirstOrDefault();
+
+                    result.AverageSpiritsPrice = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
+                        .Where(sepDrinkSalesForecast => sepDrinkSalesForecast._adoxioTypeValue == spiritsTypeId)
+                        .Select(sepDrinkSalesForecast => sepDrinkSalesForecast.AdoxioPriceperserving)
+                        .FirstOrDefault();
+                    
                 }
 
                 result.TotalProceeds = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent == null ? 0 : specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
