@@ -671,8 +671,10 @@
 
 <!-- Letter of Intent -->
 <section *ngIf="showFormControl(application?.applicationType?.letterOfIntent)">
-  <h3 class="blue-header" *ngIf="!application?.applicationType?.name.includes('Temporary Expanded')">Letter of Intent</h3>
+  <h3 class="blue-header" *ngIf="application?.applicationType?.name.includes('Sales to Hospitality Licensees')">Authorization Form</h3>
   <h3 class="blue-header" *ngIf="application?.applicationType?.name.includes('Temporary Expanded')">Local Government/Indigenous Nation Comments</h3>
+  <h3 class="blue-header" *ngIf="!application?.applicationType?.name.includes('Temporary Expanded') || !application?.applicationType?.name.includes('Sales to Hospitality Licensees')">Letter of Intent</h3>
+
   <section class="content-bottom">
     <div *ngIf="htmlContent.letterOfIntent && !application?.termConditionId">
       <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.letterOfIntent"></section>
@@ -1500,8 +1502,9 @@
 <div *ngIf="showSitePhotos()">
 
   <hr><br>
-  <label for="">Exterior Photos</label>
-
+ <label for="" *ngIf="application?.applicationType?.name.includes('RLRS Relocation') || application?.applicationType?.name.includes('Rural Licensee Retail Store')">Photos</label>
+ <label for="" *ngIf="!application?.applicationType?.name.includes('RLRS Relocation') || !application?.applicationType?.name.includes('Rural Licensee Retail Store')">Exterior Photos</label>
+ 
   <section *ngIf="htmlContent?.sitePhotos" class="padded-section">
     <div class="ngtest-before-starting-content" [innerHTML]="htmlContent.sitePhotos"></div>
   </section>
