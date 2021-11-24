@@ -1502,9 +1502,8 @@
 <div *ngIf="showSitePhotos()">
 
   <hr><br>
- <label for="" *ngIf="application?.applicationType?.name.includes('RLRS Relocation') || application?.applicationType?.name.includes('Rural Licensee Retail Store')">Photos</label>
- <label for="" *ngIf="!application?.applicationType?.name.includes('RLRS Relocation') || !application?.applicationType?.name.includes('Rural Licensee Retail Store')">Exterior Photos</label>
- 
+  <label for="" *ngIf="application?.applicationType?.name.includes('RLRS Relocation') || application?.applicationType?.name.includes('Rural Licensee Retail Store')">Photos</label>
+  <label for="" *ngIf="!application?.applicationType?.name.includes('RLRS Relocation') || !application?.applicationType?.name.includes('Rural Licensee Retail Store')">Exterior Photos</label>
   <section *ngIf="htmlContent?.sitePhotos" class="padded-section">
     <div class="ngtest-before-starting-content" [innerHTML]="htmlContent.sitePhotos"></div>
   </section>
