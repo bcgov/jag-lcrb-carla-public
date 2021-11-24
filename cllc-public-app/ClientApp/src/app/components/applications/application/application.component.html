@@ -675,7 +675,6 @@
   <h3 class="blue-header" *ngIf="application?.applicationType?.name.includes('Temporary Expanded')">Local Government/Indigenous Nation Comments</h3>
   <h3 class="blue-header" *ngIf="!application?.applicationType?.name.includes('Temporary Expanded') || !application?.applicationType?.name.includes('Sales to Hospitality Licensees')">* Letter of Intent</h3>
 
-  <div *ngIf="currentStatus !== 'open' || currentStatus !== 'reopen'">
   <section class="content-bottom">
     <div *ngIf="htmlContent.letterOfIntent && !application?.termConditionId">
       <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.letterOfIntent"></section>
