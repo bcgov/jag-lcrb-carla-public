@@ -671,11 +671,11 @@
 
 <!-- Letter of Intent -->
 <section *ngIf="showFormControl(application?.applicationType?.letterOfIntent)">
- <div [ngSwitch]="application?.applicationType?.name">
-  <h3 class="blue-header" *ngSwitchCase="Sales to Hospitality Licensees">Authorization Form</h3>
-  <h3 class="blue-header" *ngSwitchCase=Temporary Expanded Service Areas (FP)">Local Government/Indigenous Nation Comments</h3>
+<div [ngSwitch]="application?.applicationType?.name">
+  <h3 class="blue-header" *ngSwitchCase="'Sales to Hospitality Licensees'">Authorization Form</h3>
+  <h3 class="blue-header" *ngSwitchCase="'Temporary Expanded Service Areas (FP)'">Local Government/Indigenous Nation Comments</h3>
   <h3 class="blue-header" *ngSwitchDefault>Letter of Intent</h3>
- </div>
+</div>
   
   <section class="content-bottom">
     <div *ngIf="htmlContent.letterOfIntent && !application?.termConditionId">
