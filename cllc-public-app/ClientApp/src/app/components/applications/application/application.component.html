@@ -671,11 +671,12 @@
 
 <!-- Letter of Intent -->
 <section *ngIf="showFormControl(application?.applicationType?.letterOfIntent)">
-  <h3 class="blue-header" *ngIf="application?.applicationType?.name.includes('Sales to Hospitality Licensees')">Authorization Form</h3>
-  <h3 class="blue-header" *ngIf="application?.applicationType?.name.includes('Temporary Expanded')">Local Government/Indigenous Nation Comments</h3>
-  <h3 class="blue-header" *ngIf="!application?.applicationType?.name.includes('Temporary Expanded') || !application?.applicationType?.name.includes('Sales to Hospitality Licensees')">Letter of Intent</h3>
-
-  <div *ngIf="currentStatus !== 'open' || currentStatus !== 'reopen'">
+<div [ngSwitch]="application?.applicationType?.name">
+  <h3 class="blue-header" *ngSwitchCase="'Sales to Hospitality Licensees'">Authorization Form</h3>
+  <h3 class="blue-header" *ngSwitchCase="'Temporary Expanded Service Areas (FP)'">Local Government/Indigenous Nation Comments</h3>
+  <h3 class="blue-header" *ngSwitchDefault>Letter of Intent</h3>
+</div>
+  
   <section class="content-bottom">
     <div *ngIf="htmlContent.letterOfIntent && !application?.termConditionId">
       <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.letterOfIntent"></section>
@@ -1503,9 +1504,11 @@
 <div *ngIf="showSitePhotos()">
 
   <hr><br>
-  <label for="" *ngIf="application?.applicationType?.name.includes('RLRS Relocation') || application?.applicationType?.name.includes('Rural Licensee Retail Store')">Photos</label>
-  <label for="" *ngIf="!application?.applicationType?.name.includes('RLRS Relocation') || !application?.applicationType?.name.includes('Rural Licensee Retail Store')">Exterior Photos</label>
-  
+<div [ngSwitch]="application?.applicationType?.name">
+  <label for="" *ngSwitchCase="'RLRS Relocation'">Photos</label>
+  <label for="" *ngSwitchCase="'Rural Licensee Retail Store'">Photos</label>
+  <label for="" *ngSwitchDefault>Exterior Photos</label>
+</div>
   <section *ngIf="htmlContent?.sitePhotos" class="padded-section">
     <div class="ngtest-before-starting-content" [innerHTML]="htmlContent.sitePhotos"></div>
   </section>
