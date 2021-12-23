@@ -78,6 +78,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioRenewalfloorplan = (int?)from.RenewalFloorPlan;
             to.AdoxioRenewalsitemap = (int?)from.RenewalSiteMap;
             to.AdoxioRenewaltiedhousefederalinterest = (int?)from.TiedhouseFederalInterest;
+            to.AdoxioDescription1 = from.Description1;
             to.AdoxioDescription2 = from.Description2;
             to.AdoxioDescription3 = from.Description3;
             to.AdoxioTempdatefrom = from.TempDateFrom;
