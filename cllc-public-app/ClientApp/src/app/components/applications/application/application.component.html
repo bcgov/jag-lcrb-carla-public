@@ -950,7 +950,7 @@
             <!-- show text area-->
 
             <div class="padded-section" *ngIf="formField.controltype == 'TextAreaControl'">
-              <app-field [label]="formField.name" [required]="formField.required" [errorMessage]="'This field is required.'" [isFullWidth]="true"
+              <app-field [label]="formField.name" [required]="formField.required || formField.datafieldname == 'adoxio_otherbusinesssamelocationdetails'" [errorMessage]="'This field is required.'" [isFullWidth]="true"
                          [valid]="isValidOrNotTouched(formField.datafieldname)" [showChevrons]="false">
                 <textarea rows="8" style="width: 100%;" maxlength="5000" [formControlName]="formField.datafieldname"
                           [id]="formField.datafieldname"></textarea>
