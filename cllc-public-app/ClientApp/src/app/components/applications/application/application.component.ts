@@ -782,12 +782,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
     const outsideAreas = ('areas' in this.form.get('outsideAreas').value) ? this.form.get('outsideAreas').value['areas'] : this.form.get('outsideAreas').value;
     const capacityArea = [this.form.get('capacityArea').value];
 
-    	if(serviceAreas.length === 0)
-	    {
-	      valid = false;
-	      this.validationMessages.push('At least one service area is required.');
-	    }
-    
     return {
       ...this.form.value,
       description2,
@@ -1124,6 +1118,13 @@ export class ApplicationComponent extends FormBase implements OnInit {
       valid = false;
       this.validationMessages.push('At least one proof of ownership document is required.');
     }
+
+    
+    if(this.application.serviceAreas.length === 0)
+      {
+        valid = false;
+        this.validationMessages.push('At least one service area is required.');
+  	  }
 
     if (this.showSitePlan() &&
       ((this.uploadedSitePlanDocuments || 0) < 1)) {
