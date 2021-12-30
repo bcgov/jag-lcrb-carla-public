@@ -1086,12 +1086,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
       }
     }
     
-   if(this.application.serviceAreas.length === 0)
-	  {
-      valid = false;
-      this.validationMessages.push('At least one service area is required.');
-  	}
-    console.log('Service Areas:', this.application.serviceAreas.length);
+	if (!this.form.get('serviceAreas').value && this.isLp())	{
+	  valid = false;
+	  this.validationMessages.push('At least one service area is required.');
+	}
+    console.log('Service Areas:', this.form.get('serviceAreas').value);
     
     if (this.application.applicationType.showAssociatesFormUpload &&
       ((this.uploadedAssociateDocuments || 0) < 1)) {
