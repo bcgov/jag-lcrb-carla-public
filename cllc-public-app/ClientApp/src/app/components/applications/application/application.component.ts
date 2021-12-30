@@ -1087,7 +1087,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
     
     
-	if (!this.form.get('serviceAreas').value && this.isLP())	{
+	if (this.form.get('serviceAreas').value.length === 0 && this.isLP())	{
 	  valid = false;
 	  this.validationMessages.push('At least one service area is required.');
 	}
