@@ -1119,13 +1119,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.validationMessages.push('At least one proof of ownership document is required.');
     }
 
-    
-    if(this.application.serviceAreas.length === 0)
-      {
-        valid = false;
-        this.validationMessages.push('At least one service area is required.');
-  	  }
-
     if (this.showSitePlan() &&
       ((this.uploadedSitePlanDocuments || 0) < 1)) {
       valid = false;
