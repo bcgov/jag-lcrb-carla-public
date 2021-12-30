@@ -1085,7 +1085,14 @@ export class ApplicationComponent extends FormBase implements OnInit {
         this.validationMessages = this.validationMessages.concat(zoningErrors);
       }
     }
-
+    
+   if(this.application.serviceAreas.length === 0)
+	  {
+      valid = false;
+      this.validationMessages.push('At least one service area is required.');
+  	}
+    console.log('Service Areas:', this.application.serviceAreas.length);
+    
     if (this.application.applicationType.showAssociatesFormUpload &&
       ((this.uploadedAssociateDocuments || 0) < 1)) {
       valid = false;
