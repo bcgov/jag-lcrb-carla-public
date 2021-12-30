@@ -457,12 +457,6 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
       this.validationMessages.push("Financial Integrity form is required.");
     }
 
-    if (this.application.serviceAreas.length === 0)
-    {
-      valid = false;
-      this.validationMessages.push("At least one service area is required.");
-    }
-	
     if (this.application.applicationType.showSupportingDocuments &&
       ((this.uploadedSupportingDocuments || 0) < 1)) {
       valid = false;
