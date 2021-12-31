@@ -782,12 +782,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
     const outsideAreas = ('areas' in this.form.get('outsideAreas').value) ? this.form.get('outsideAreas').value['areas'] : this.form.get('outsideAreas').value;
     const capacityArea = [this.form.get('capacityArea').value];
 
-    	if(serviceAreas.length === 0)
-	    {
-	      valid = false;
-	      this.validationMessages.push('At least one service area is required.');
-	    }
-    
     return {
       ...this.form.value,
       description2,
@@ -1092,16 +1086,13 @@ export class ApplicationComponent extends FormBase implements OnInit {
       }
     }
     
-    
-	if (this.form.get('serviceAreas').value.length === 0 && this.isLP())	{
-	  valid = false;
-	  this.validationMessages.push('At least one service area is required.');
-	}
-  
-    console.log('Is LP & LPC?:', this.isLP());
+    const serviceArea = ('areas' in this.form.get('serviceAreas').value) ? this.form.get('serviceAreas').value['areas'] : this.form.get('serviceAreas').value;
 
-    console.log('ServiceArea Prm:', this.form.get('serviceAreas').value);
-    
+    if (serviceArea === 0 && this.isLP())	{
+      valid = false;
+      this.validationMessages.push('At least one service area is required.');
+    }
+      
     if (this.application.applicationType.showAssociatesFormUpload &&
       ((this.uploadedAssociateDocuments || 0) < 1)) {
       valid = false;
