@@ -1222,10 +1222,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw new Exception("Error getting license.");
             }
 
-            //if (CurrentUserHasAccessToLicenseOwnedBy(adoxioLicense.AdoxioLicencee.Accountid) ||
-            //    (adoxioLicense.AdoxioProposedOwner != null && CurrentUserHasAccessToLicenseTransferredTo(adoxioLicense.AdoxioProposedOwner.Accountid)))
-            //{
-                var keyWord = "Liquor";
                 var effectiveDateParam = "";
                 if (adoxioLicense.AdoxioEffectivedate.HasValue)
                 {
@@ -1392,6 +1388,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 }
 
+                // collect the hours of sale, if there are any
+
                 var storeHours = "";
 
                 MicrosoftDynamicsCRMadoxioHoursofserviceCollection hours = _dynamicsClient.Hoursofservices.Get(filter: $"_adoxio_licence_value eq {licenceId} and _adoxio_endorsement_value eq null and statecode eq 0");
@@ -1402,8 +1400,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     adoxioLicense.AdoxioLicenceType.AdoxioName != "Rural Licensee Retail Store")
                 {
 
-                    
-
+                
                     MicrosoftDynamicsCRMadoxioHoursofservice hoursVal = hours.Value.First();
 
                     storeHours = $@"<h3 style=""text-align: center;"">HOURS OF SALE</h3>
@@ -1418,6 +1415,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                 <th>Saturday</th>
                                 <th>Sunday</th>
                             </tr>
+
                             <tr>
                                 <td class='hours'>Start</td>
                                 <td class='hours'>{StoreHoursUtility.ConvertOpenHoursToString(hoursVal.AdoxioMondayopen)}</td>
@@ -1441,131 +1439,67 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
 
 
-                // put together the parameters
+                // put together the parameters that we will pump into the template
                 Dictionary<string, string> parameters = new Dictionary<string, string>();
 
-                if (adoxioLicense.AdoxioLicenceType.AdoxioName == "Marketing")
-                {
-                    parameters = new Dictionary<string, string>
-                    {
-                        { "title", "Cannabis_Licence" },
-                        { "licenceNumber", adoxioLicense.AdoxioLicencenumber},
-                        { "establishmentName", adoxioLicense.AdoxioLicencee?.Name  },
-                        { "establishmentStreet", adoxioLicense.AdoxioLicencee?.Address1Line1 },
-                        { "establishmentCity", adoxioLicense.AdoxioLicencee?.Address1City + ", B.C." },
-                        { "establishmentPostalCode", adoxioLicense.AdoxioLicencee?.Address1Postalcode },
-                        { "licencee", adoxioLicense.AdoxioLicencee?.Name },
-                        { "thirdPartyText", thirdPartyText},
-                        { "licenceType", adoxioLicense.AdoxioLicenceType?.AdoxioName },
-                        { "effectiveDate", effectiveDateParam },
-                        { "expiryDate", expiraryDateParam },
-                        { "restrictionsText", termsAndConditions },
-                        { "endorsementsText", endorsementsText },
-                        { "storeHours", storeHours },
-                        { "keyWord", keyWord },
-                        { "printDate", DateTime.Today.ToString("MMMM dd, yyyy")} // will be based on the users machine
+                // standard values
+                parameters.Add("licenceNumber", adoxioLicense.AdoxioLicencenumber);
+                parameters.Add("licencee", adoxioLicense.AdoxioLicencee?.Name);
+                parameters.Add("thirdPartyText", thirdPartyText);
+                parameters.Add("serviceAreaText", serviceAreaText);
+                parameters.Add("licenceType", adoxioLicense.AdoxioLicenceType.AdoxioName);
+                parameters.Add("effectiveDate", effectiveDateParam);
+                parameters.Add("expiryDate", expiraryDateParam);
+                parameters.Add("restrictionsText", termsAndConditions);
+                parameters.Add("endorsementsText", endorsementsText );
+                parameters.Add("storeHours", storeHours);
+                parameters.Add("printDate", DateTime.Today.ToString("MMMM dd, yyyy")); // will be based on the users machine
 
-                    };
+                // add the establishment details
+                switch (adoxioLicense.AdoxioLicenceType.AdoxioName) {
+                    case "Marketing":  // marketing and agent do not have an establishment, so we use the licensee
+                    case "Agent":
+                        parameters.Add("establishmentName", "N/A");
+                        parameters.Add("establishmentStreet", adoxioLicense.AdoxioLicencee?.Address1Line1);
+                        parameters.Add("establishmentCity", adoxioLicense.AdoxioLicencee?.Address1City);
+                        parameters.Add("establishmentPostalCode", adoxioLicense.AdoxioLicencee?.Address1Postalcode);
+                        break;
+                    default:                                                                           
+                        parameters.Add("establishmentName", adoxioLicense.AdoxioEstablishment?.AdoxioName);
+                        parameters.Add("licenceName", adoxioLicense.AdoxioEstablishment?.AdoxioName);
+                        parameters.Add("establishmentStreet", adoxioLicense.AdoxioEstablishment?.AdoxioAddressstreet);
+                        parameters.Add("establishmentCity", adoxioLicense.AdoxioEstablishment?.AdoxioAddresscity + ", B.C.");
+                        parameters.Add("establishmentPostalCode", adoxioLicense.AdoxioEstablishment?.AdoxioAddresspostalcode); 
+                        break;
+                
                 }
-                if (adoxioLicense.AdoxioLicenceType.AdoxioName == "Agent")
-                {
-                    parameters = new Dictionary<string, string>
-                    {
-                        { "title", "Liquor_Licence" },
-                        { "licenceNumber", adoxioLicense.AdoxioLicencenumber},
-                        { "establishmentName", "N/A" },
-                        { "establishmentStreet", adoxioLicense.AdoxioLicencee?.Address1Line1 },
-                        { "establishmentCity", adoxioLicense.AdoxioLicencee?.Address1City + ", B.C." },
-                        { "establishmentPostalCode", adoxioLicense.AdoxioLicencee?.Address1Postalcode },
-                        { "licencee", adoxioLicense.AdoxioLicencee?.Name },
-                        { "thirdPartyText", thirdPartyText},
-                        { "licenceType", adoxioLicense.AdoxioLicenceType?.AdoxioName },
-                        { "effectiveDate", effectiveDateParam },
-                        { "expiryDate", expiraryDateParam },
-                        { "restrictionsText", termsAndConditions },
-                        { "endorsementsText", endorsementsText },
-                        { "storeHours", storeHours },
-                        { "keyWord", keyWord },
-                        { "printDate", DateTime.Today.ToString("MMMM dd, yyyy")} // will be based on the users machine
 
-                    };
+                // determine which Act applies
+                switch (adoxioLicense.AdoxioLicenceType.AdoxioName) {
+                    case "Section 119 Authorization":
+                    case "Marketing":
+                    case "Cannabis Retail Store":
+                        parameters.Add("keyWord", "Cannabis");
+                        break;
+                    default:
+                        parameters.Add("keyWord", "Liquor");
+                        break;
                 }
-                else // handle other types such as catering
-                {
-                    String typeLabel = adoxioLicense?.AdoxioLicenceSubCategoryId?.AdoxioName != null ? adoxioLicense.AdoxioLicenceSubCategoryId?.AdoxioName : adoxioLicense.AdoxioLicenceType?.AdoxioName;
 
-                    parameters = new Dictionary<string, string>
-                    {
-                        { "title", "Liquor_License" },
-                        { "licenceNumber", adoxioLicense.AdoxioLicencenumber },
-                        { "establishmentName", adoxioLicense.AdoxioEstablishment?.AdoxioName },
-                        { "licenceName", adoxioLicense.AdoxioEstablishment?.AdoxioName},                        // we may need another field for this...
-                        { "establishmentStreet", adoxioLicense.AdoxioEstablishment?.AdoxioAddressstreet },
-                        { "establishmentCity", adoxioLicense.AdoxioEstablishment?.AdoxioAddresscity + ", B.C." },
-                        { "establishmentPostalCode", adoxioLicense.AdoxioEstablishment?.AdoxioAddresspostalcode },
-                        { "licencee", adoxioLicense.AdoxioLicencee?.Name },
-                        { "thirdPartyText", thirdPartyText},
-                        { "serviceAreaText", serviceAreaText},
-                        { "licenceType", typeLabel},
-                        { "effectiveDate", effectiveDateParam },
-                        { "expiryDate", expiraryDateParam },
-                        { "restrictionsText", termsAndConditions },
-                        { "endorsementsText", endorsementsText },
-                        { "storeHours", storeHours },
-                        { "printDate", DateTime.Today.ToString("MMMM dd, yyyy")} // will be based on the users machine
-                    };
+                // finally if this is a S119 Authorization, remove all mention of licence
+
+                switch (adoxioLicense.AdoxioLicenceType.AdoxioName) {
+                    case "Section 119 Authorization":
+                        parameters.Add("dType", "Authorization");
+                        break;
+                    default:
+                        parameters.Add("dType", "Licence");
+                        break;
                 }
+        
                 try
                 {
-                    var templateName = "cannabis_licence";
-
-                    switch (adoxioLicense.AdoxioLicenceType.AdoxioName)
-                    {/*
-                        case "Marketing":
-                            templateName = "cannabis_marketer_licence";
-                            break;
-                        case "Catering":
-                            templateName = "catering_licence";
-                            break;
-
-                        case "UBrew and UVin":
-                            templateName = "wine_store_licence";
-                            break;
-
-                        case "Licensee Retail Store":
-                            templateName = "wine_store_licence";
-                            break;
-
-                        case "Wine Store":
-                            templateName = "wine_store_licence";
-                            break;
-
-                        case "Manufacturer":
-                            templateName = "manufacturer_licence";
-                            break;
-                        */
-
-                        case "Cannabis Retail Store":
-                        case "Marketing":
-                            keyWord = "Cannabis";
-                            templateName = "liquor_licence";
-                            break;
-                        case "Agent":
-                        case "Catering":
-                        case "UBrew and UVin":
-                        case "Licensee Retail Store":
-                        case "Wine Store":
-                        case "Food Primary":
-                        case "Liquor Primary":
-                        case "Liquor Primary Club":
-                        case "Rural Licensee Retail Store":
-                        case "Manufacturer":
-                            templateName = "liquor_licence";
-                            break;
-                    }
-
-                    //_logger.LogInformation($"Attempting to generate licence: {adoxioLicense.AdoxioLicencenumber}");
-
+                    var templateName = "liquor_licence";
                     byte[] data = await _pdfClient.GetPdf(parameters, templateName);
 
                     // Save copy of generated licence PDF for auditing/logging purposes

@@ -53,13 +53,14 @@
   <br>
   <span>Status: <strong>{{getLicenceStatusText(item.status)}}</strong></span>
   <br>
-  <div *ngIf="!item.isOperated && isActive(item) && actionsVisible(item) && item?.licenceTypeName !== 'Section 119 Authorization'"
+  <div *ngIf="!item.isOperated && isActive(item) && actionsVisible(item)"
        style="min-width: 10px;">
     <a [href]="'api/licenses/' + item?.licenseId + '/pdf/' + item?.licenseNumber + '.pdf'"
        download>
       <span>
         <fa-icon [icon]="faDownLoad" style="margin-right: 10px;"></fa-icon>Download
-        Licence
+        <span *ngIf="item?.licenceType !== 'Section 119 Authorization'">Licence</span>
+        <span *ngIf="item?.licenceType === 'Section 119 Authorization'">Authorization</span>
       </span>
     </a>
   </div>
