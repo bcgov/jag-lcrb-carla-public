@@ -141,7 +141,7 @@ export class SummaryComponent implements OnInit {
       this.sepDataService.getSpecialEventForApplicant(id)
         .subscribe(async app => {
           this.application = app;
-          this.formatEventDatesForDisplay();                   
+          this.formatEventDatesForDisplay();
         });
     }
   }
@@ -251,24 +251,24 @@ export class SummaryComponent implements OnInit {
       });
     }
   }
-/*
-  getStatusIcon(): IconDefinition {
-    switch (this.application?.eventStatus) {
-      case ("Pending Review"):
-        return faStopwatch;
-      case ("Approved"):
-      case ("Reviewed"):
-        return faCheck;
-      case ("Issued"):
-        return faAward;
-      case ("Denied"):
-      case ("Cancelled"):
-        return faBan;
-      default:
-        return faStopwatch;
+  /*
+    getStatusIcon(): IconDefinition {
+      switch (this.application?.eventStatus) {
+        case ("Pending Review"):
+          return faStopwatch;
+        case ("Approved"):
+        case ("Reviewed"):
+          return faCheck;
+        case ("Issued"):
+          return faAward;
+        case ("Denied"):
+        case ("Cancelled"):
+          return faBan;
+        default:
+          return faStopwatch;
+      }
     }
-  }
-*/
+  */
   isReviewed(): boolean {
     return ["Approved", "Issued"].indexOf(this.application?.eventStatus) >= 0;
   }
@@ -289,38 +289,38 @@ export class SummaryComponent implements OnInit {
 
   isEventPast(): boolean {
 
-    let diff = differenceInBusinessDays(new Date(this.application?.eventStartDate), new Date() );
-    return  diff < 0;
-    
+    let diff = differenceInBusinessDays(new Date(this.application?.eventStartDate), new Date());
+    return diff < 0;
+
   }
 
 
   getStatus(): string {
     // when an application happens in the past, sometimes we need to change the status in the front end.
-      switch(this.application?.eventStatus) {
-        case ("Pending Review"):
-          if(this.isEventPast()){
-            return "Review Expired"
+    switch (this.application?.eventStatus) {
+      case ("Pending Review"):
+        if (this.isEventPast()) {
+          return "Review Expired"
+        } else {
+          if (this.trnApproved === "1") {
+            return "Issued";
           } else {
-            if(this.trnApproved === "1") {
-              return "Issued";
-            } else {
-              return this.application?.eventStatus;
-            }
+            return this.application?.eventStatus;
           }
-        case ("Approved"):
-          if(this.isEventPast()){
-            return "Approval Expired"
+        }
+      case ("Approved"):
+        if (this.isEventPast()) {
+          return "Approval Expired"
+        } else {
+          if (this.trnApproved === "1") { // sometimes we return to the page after payment before the status can be updated on the backend, if we collected payment we're issued
+            return "Issued";
           } else {
-             if(this.trnApproved === "1" ) { // sometimes we return to the page after payment before the status can be updated on the backend, if we collected payment we're issued
-                return "Issued";
-             } else {
-                return "Payment Required";
-             }
+            return "Payment Required";
           }
-        default:
-          return this.application?.eventStatus;
-      }
+        }
+      default:
+        return this.application?.eventStatus;
+    }
   }
 
   getProfit(): number {
@@ -328,7 +328,7 @@ export class SummaryComponent implements OnInit {
   }
 
   canWithdraw(): boolean {
-    switch(this.getStatus()) {
+    switch (this.getStatus()) {
       case ("Pending Review"):
       case ("Approved"):
       case ("Payment Required"):
@@ -375,30 +375,30 @@ export class SummaryComponent implements OnInit {
     const dialogRef = this.dialog.open(CancelSepApplicationDialogComponent, dialogConfig);
     dialogRef.afterClosed()
       .subscribe(async ([cancelApplication, reason]) => {
-      if (cancelApplication) {
-        if (this.application && this.application.id)
-        {
-          this.savingToAPI = true;
-          const result = await this.sepDataService.updateSepApplication({ id: this.application.id, localId: this.localId, cancelReason: reason, eventStatus: "Cancelled" } as SepApplication, this.application.id)
-          .toPromise();
+        if (cancelApplication) {
+          if (this.application && this.application.id) {
+            this.savingToAPI = true;
+            const result = await this.sepDataService.updateSepApplication({ id: this.application.id, localId: this.localId, cancelReason: reason, eventStatus: "Cancelled" } as SepApplication, this.application.id)
+              .toPromise();
 
-          if (result.localId) {
-            await this.db.applications.update(result.localId, result);
-            this.localId = this.localId; // trigger data refresh
+            if (result.localId) {
+              await this.db.applications.update(result.localId, result);
+              this.localId = this.localId; // trigger data refresh
+            }
+            this.savingToAPI = false;
+            this.router.navigate(["/sep/dashboard"]);
           }
-          this.savingToAPI = false;
-          this.router.navigate(["/sep/dashboard"]);
         }
-    }
-  });
+      });
 
 
 
   }
 
   async submitApplication(): Promise<void> {
-    this.savingToAPI = true;    
+    this.savingToAPI = true;
     const appData = await this.db.getSepApplication(this.localId);
+    
     if (appData.id) { // do an update ( the record exists in dynamics)
       const submitResult = await this.sepDataService.submitSepApplication(appData.id)
         .toPromise();
@@ -410,6 +410,9 @@ export class SummaryComponent implements OnInit {
         this.mode = "payNow";
       } else if (result.eventStatus === "Pending Review") {
         this.mode = "pendingReview";
+      } else {
+        this.snackBar.open("The application is submitted.", "Success", { duration: 2500, panelClass: ["green-snackbar"] });
+        this.router.navigateByUrl("/sep/my-applications");
       }
       if (this.localId) {
         await this.db.applications.update(this.localId, result);
@@ -423,14 +426,13 @@ export class SummaryComponent implements OnInit {
   }
 
   // present a confirmation dialog prior to the payment being processed.
-  payNow()
-  {
+  payNow() {
     //this.submitApplication();
     // set dialogConfig settings
     const dialogConfig = {
       autoFocus: true,
       width: "500px",
-      data: {id: this.application.id}
+      data: { id: this.application.id }
     };
 
     // open dialog, get reference and process returned data from dialog
