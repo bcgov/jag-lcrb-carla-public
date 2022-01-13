@@ -37,7 +37,7 @@
       </p>
 
       <!--p>Inquires related to your application can be directed to <a
-                                                                      href="mailto:lcrbcannabis@gov.bc.ca">lcrbcannabis@gov.bc.ca</a>.</p-->
+                                                                    href="mailto:lcrbcannabis@gov.bc.ca">lcrbcannabis@gov.bc.ca</a>.</p-->
       <p></p>
 
       <app-applications-and-licences [account]="account">
@@ -62,24 +62,38 @@
       </section>
       <p></p>
       <!-- <section appRemoveIfFeatureOff="LicenseeChanges">
-        <h3 class="blue-header" style="margin-top: 0; margin-bottom: 0">ASSOCIATES</h3>
+      <h3 class="blue-header" style="margin-top: 0; margin-bottom: 0">ASSOCIATES</h3>
 
-        <div class="submitted-content" style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
-          <app-licensee-tree *ngIf="tree" [treeRoot]="tree" [enableEditing]="false"></app-licensee-tree>
-          <br>
-          <br>
-          <a href="javascript: void(0);" (click)="startLicenseeChangeApplication()" style="float: right;">
-            <fa-icon [icon]="faPencilAlt" style="margin-right: 5px; "></fa-icon> Start Licensee Change Application</a>
-          <div style="clear: both;"></div>
-        </div>
-      </section>
-      <p></p> -->
+      <div class="submitted-content" style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
+        <app-licensee-tree *ngIf="tree" [treeRoot]="tree" [enableEditing]="false"></app-licensee-tree>
+        <br>
+        <br>
+        <a href="javascript: void(0);" (click)="startLicenseeChangeApplication()" style="float: right;">
+          <fa-icon [icon]="faPencilAlt" style="margin-right: 5px; "></fa-icon> Start Licensee Change Application</a>
+        <div style="clear: both;"></div>
+      </div>
+    </section>
+    <p></p> -->
       <app-associate-content *ngIf="account?.businessType !== 'LocalGovernment'" appRemoveIfFeatureOn="PermanentChangesToLicensee" [hasLicence]="hasLicence" [account]="account" [isIndigenousNation]="indigenousNationModeActive">
       </app-associate-content>
       <p></p>
 
       <app-legal-entity-type-update-calloutbox *ngIf="hasLicence" appRemoveIfFeatureOff="PermanentChangesToLicensee" [account]="account"></app-legal-entity-type-update-calloutbox>
 
+    </div>
+    <div class="col-lg-4 col-sm-12" style="position: relative">
+      <section class="large-screen-only">
+        <h3 class="blue-header" style="margin-bottom: 0; margin-top: 0;"><fa-icon [icon]="faExclamationTriangle" style="margin-right: 5px;"></fa-icon>Apply to transfer cannabis products between licensees</h3>
+
+        <div class="submitted-content" style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
+
+          <p>Cannabis retail store licensees must complete the <a href="https://www2.gov.bc.ca/assets/download/D47F4DB56C12447E8C9C96FBBD9D42A4">Application for Cannabis Products Transfer Form</a> and email it to <a href="mailto:LCRB.Product.Transfers@gov.bc.ca">LCRB.Product.Transfers@gov.bc.ca</a> if they wish to transfer cannabis products between their retail stores</p>
+
+          <p>Written Approval from the LCRB must be recieved by a licencee before initiaing product transfer.</p>
+
+        </div>
+      </section>
+      <p></p>
     </div>
   </div>
   <section style="margin-top: 20px;">
