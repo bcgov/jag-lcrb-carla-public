@@ -856,9 +856,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
     const outsideAreas = ('areas' in this.form.get('outsideAreas').value) ? this.form.get('outsideAreas').value['areas'] : this.form.get('outsideAreas').value;
     const capacityArea = [this.form.get('capacityArea').value];
 
-    	if(serviceAreas.length === 0)
+    	if(serviceAreas.length == 0)
 	    {
-	      var valid = false;
 	      this.validationMessages.push('At least one service area is required.');
 	    }
     
