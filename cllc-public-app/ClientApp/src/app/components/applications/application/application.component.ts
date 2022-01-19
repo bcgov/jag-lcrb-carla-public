@@ -655,12 +655,17 @@ export class ApplicationComponent extends FormBase implements OnInit {
       );
   }
 
-  private isHoursPopulated(hoursOpen, hoursClose): boolean {
+  private isHoursPopulated(hoursOpen, hoursClose, altHoursOpen): boolean {
     if (hoursOpen != '' && hoursClose != '') {
       var timeTokensOpen = hoursOpen.split(':');
       var timeTokensClose = hoursClose.split(':');
-      let openDate = new Date(1970, 0, 1, timeTokensOpen[0], timeTokensOpen[1]);
-      let closeDate = new Date(1970, 0, 1, timeTokensClose[0], timeTokensClose[1]);
+      var timeTokensAltOpen = altHoursOpen.split(':');
+      let openDate = new Date(1970, 0, 2, timeTokensOpen[0], timeTokensOpen[1]);
+      let closeDate = new Date(1970, 0, 2, timeTokensClose[0], timeTokensClose[1]);
+      if (closeDate.getTime() < openDate.getTime()) {
+        //Open time may be the day before.  ie) Open Saturday at 9am Close Sunday 2am
+        openDate = new Date(1970, 0, 1, timeTokensAltOpen[0], timeTokensAltOpen[1]);
+      }
       let minutes = (closeDate.getTime() - openDate.getTime()) / 60000; // minutes between
       if (minutes <= 0) {
         return false;
@@ -676,50 +681,50 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.application.applicationType.name === ApplicationTypeNames.FPRelo) {
       return true;
     }
-    if (this.form.get('serviceHoursSundayOpen').value != '' && this.form.get('serviceHoursSundayClose').value != '') {
-      if (!this.isHoursPopulated(this.form.get('serviceHoursSundayOpen').value, this.form.get('serviceHoursSundayClose').value)) {
+    if (this.form.get('serviceHoursSundayOpen').value != '' && this.form.get('serviceHoursSundayClose').value != '' && this.form.get('serviceHoursSaturdayOpen').value != '') {
+      if (!this.isHoursPopulated(this.form.get('serviceHoursSundayOpen').value, this.form.get('serviceHoursSundayClose').value, this.form.get('serviceHoursSaturdayOpen').value)) {
         return false;
       }
     } else {
       return false;
     }
-    if (this.form.get('serviceHoursMondayOpen').value != '' && this.form.get('serviceHoursMondayClose').value != '') {
-      if (!this.isHoursPopulated(this.form.get('serviceHoursMondayOpen').value, this.form.get('serviceHoursMondayClose').value)) {
+    if (this.form.get('serviceHoursMondayOpen').value != '' && this.form.get('serviceHoursMondayClose').value != '' && this.form.get('serviceHoursSundayOpen').value != '') {
+      if (!this.isHoursPopulated(this.form.get('serviceHoursMondayOpen').value, this.form.get('serviceHoursMondayClose').value, this.form.get('serviceHoursSundayOpen').value)) {
         return false;
       }
     } else {
       return false;
     }
-    if (this.form.get('serviceHoursTuesdayOpen').value != '' && this.form.get('serviceHoursTuesdayClose').value != '') {
-      if (!this.isHoursPopulated(this.form.get('serviceHoursTuesdayOpen').value, this.form.get('serviceHoursTuesdayClose').value)) {
+    if (this.form.get('serviceHoursTuesdayOpen').value != '' && this.form.get('serviceHoursTuesdayClose').value != '' && this.form.get('serviceHoursMondayOpen').value != '') {
+      if (!this.isHoursPopulated(this.form.get('serviceHoursTuesdayOpen').value, this.form.get('serviceHoursTuesdayClose').value, this.form.get('serviceHoursMondayOpen').value)) {
         return false;
       }
     } else {
       return false;
     }
-    if (this.form.get('serviceHoursWednesdayOpen').value != '' && this.form.get('serviceHoursWednesdayClose').value != '') {
-      if (!this.isHoursPopulated(this.form.get('serviceHoursWednesdayOpen').value, this.form.get('serviceHoursWednesdayClose').value)) {
+    if (this.form.get('serviceHoursWednesdayOpen').value != '' && this.form.get('serviceHoursWednesdayClose').value != '' && this.form.get('serviceHoursTuesdayOpen').value != '') {
+      if (!this.isHoursPopulated(this.form.get('serviceHoursWednesdayOpen').value, this.form.get('serviceHoursWednesdayClose').value, this.form.get('serviceHoursTuesdayOpen').value)) {
         return false;
       }
     } else {
       return false;
     }
-    if (this.form.get('serviceHoursThursdayOpen').value != '' && this.form.get('serviceHoursThursdayClose').value != '') {
-      if (!this.isHoursPopulated(this.form.get('serviceHoursThursdayOpen').value, this.form.get('serviceHoursThursdayClose').value)) {
+    if (this.form.get('serviceHoursThursdayOpen').value != '' && this.form.get('serviceHoursThursdayClose').value != '' && this.form.get('serviceHoursWednesdayOpen').value != '') {
+      if (!this.isHoursPopulated(this.form.get('serviceHoursThursdayOpen').value, this.form.get('serviceHoursThursdayClose').value, this.form.get('serviceHoursWednesdayOpen').value)) {
         return false;
       }
     } else {
       return false;
     }
-    if (this.form.get('serviceHoursFridayOpen').value != '' && this.form.get('serviceHoursFridayClose').value != '') {
-      if (!this.isHoursPopulated(this.form.get('serviceHoursFridayOpen').value, this.form.get('serviceHoursFridayClose').value)) {
+    if (this.form.get('serviceHoursFridayOpen').value != '' && this.form.get('serviceHoursFridayClose').value != '' && this.form.get('serviceHoursThursdayOpen').value != '') {
+      if (!this.isHoursPopulated(this.form.get('serviceHoursFridayOpen').value, this.form.get('serviceHoursFridayClose').value, this.form.get('serviceHoursThursdayOpen').value)) {
         return false;
       }
     } else {
       return false;
     }
-    if (this.form.get('serviceHoursSaturdayOpen').value != '' && this.form.get('serviceHoursSaturdayClose').value != '') {
-      if (!this.isHoursPopulated(this.form.get('serviceHoursSaturdayOpen').value, this.form.get('serviceHoursSaturdayClose').value)) {
+    if (this.form.get('serviceHoursSaturdayOpen').value != '' && this.form.get('serviceHoursSaturdayClose').value != '' && this.form.get('serviceHoursFridayOpen').value != '') {
+      if (!this.isHoursPopulated(this.form.get('serviceHoursSaturdayOpen').value, this.form.get('serviceHoursSaturdayClose').value, this.form.get('serviceHoursFridayOpen').value)) {
         return false;
       }
     }
@@ -1265,6 +1270,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
 
     if (!this.isHoursOfSaleValid() || !this.isHoursOfSalePopulated()) {
+      valid = false;
       this.validationMessages.push('Hours of sale are required');
     }
 
