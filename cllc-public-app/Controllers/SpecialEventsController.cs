@@ -564,7 +564,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // if special event is not issued...
             if (!issued)
             {
-                return null;
+                return NotFound();
             }
 
             var issuedDateParam = "";
@@ -902,23 +902,29 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     foreach (var schedule in schedules)
                     {
                         var parentLocation = locations.Where(loc => loc.AdoxioSpecialeventlocationid == schedule._adoxioSpecialeventlocationidValue).FirstOrDefault();
-                        if (parentLocation.AdoxioSpecialeventlocationSchedule == null)
+                        if (parentLocation != null)
                         {
-                            parentLocation.AdoxioSpecialeventlocationSchedule = new List<MicrosoftDynamicsCRMadoxioSpecialeventschedule>();
+                            if (parentLocation.AdoxioSpecialeventlocationSchedule == null)
+                            {
+                                parentLocation.AdoxioSpecialeventlocationSchedule = new List<MicrosoftDynamicsCRMadoxioSpecialeventschedule>();
+                            }
+                            parentLocation.AdoxioSpecialeventlocationSchedule.Add(schedule);
                         }
-                        parentLocation.AdoxioSpecialeventlocationSchedule.Add(schedule);
+                        
                     }
 
                     foreach (var area in areas)
                     {
                         var parentLocation = locations.Where(loc => loc.AdoxioSpecialeventlocationid == area._adoxioSpecialeventlocationidValue).FirstOrDefault();
-                        if (parentLocation.AdoxioSpecialeventlocationLicencedareas == null)
+                        if (parentLocation != null)
                         {
-                            parentLocation.AdoxioSpecialeventlocationLicencedareas = new List<MicrosoftDynamicsCRMadoxioSpecialeventlicencedarea>();
-                        }
-                        parentLocation.AdoxioSpecialeventlocationLicencedareas.Add(area);
+                            if (parentLocation.AdoxioSpecialeventlocationLicencedareas == null)
+                            {
+                                parentLocation.AdoxioSpecialeventlocationLicencedareas = new List<MicrosoftDynamicsCRMadoxioSpecialeventlicencedarea>();
+                            }
+                            parentLocation.AdoxioSpecialeventlocationLicencedareas.Add(area);
+                        }                        
                     }
-
                 }
                 catch (HttpOperationException e)
                 {
@@ -1355,6 +1361,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             result.LocalId = specialEvent.LocalId;
             return new JsonResult(result);
         }
+
 
         private ItemsToDelete GetItemsToDelete(ViewModels.SpecialEvent updateEvent, MicrosoftDynamicsCRMadoxioSpecialevent existingEvent)
         {
