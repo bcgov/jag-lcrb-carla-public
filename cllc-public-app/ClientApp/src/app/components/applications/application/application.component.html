@@ -1015,9 +1015,10 @@
   <div class="content-bottom">&nbsp;</div>
 </section>
 
-<app-error-alert *ngIf="application?.applicationType?.name === 'Ethyl Alcohol Permit' && form.get('hasSufficientRangeOfProducts').value == 845280000">
+<!-- The label of the field will now be used to communicate the message of the alert -->
+<!-- <app-error-alert *ngIf="application?.applicationType?.name === 'Ethyl Alcohol Permit' && form.get('hasSufficientRangeOfProducts').value == 845280000">
   You can only apply for up to a maximum of 16 litres because this is an application for a “One-Time” permit.
-</app-error-alert>
+</app-error-alert> -->
 
             <section *ngIf="application?.applicationType?.showDescription1">
               <h3 class="blue-header" *ngIf="!this.isLP()">DESCRIPTION OF PROPOSED CHANGE</h3>
