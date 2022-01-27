@@ -1503,16 +1503,19 @@
                        [uploadHeader]="'TO UPLOAD SITE PLAN DOCUMENTS, DRAG FILES HERE OR'">
     </app-file-uploader>
   </section>
+  <section>
+    For Distillers Only: The Office of the Fire Commissioner (OFC) requires that a distillery be constructed and maintained in conformance with the BC Fire Code. The OFC will be provided a copy of the Approval in Principal for your application, if issued.
+  </section>
 </div>
 
 <div *ngIf="showSitePhotos()">
 
   <hr><br>
-<div [ngSwitch]="application?.applicationType?.name">
-  <label for="" *ngSwitchCase="'RLRS Relocation'">Photos</label>
-  <label for="" *ngSwitchCase="'Rural Licensee Retail Store'">Photos</label>
-  <label for="" *ngSwitchDefault>Exterior Photos</label>
-</div>
+  <div [ngSwitch]="application?.applicationType?.name">
+    <label for="" *ngSwitchCase="'RLRS Relocation'">Photos</label>
+    <label for="" *ngSwitchCase="'Rural Licensee Retail Store'">Photos</label>
+    <label for="" *ngSwitchDefault>Exterior Photos</label>
+  </div>
   <section *ngIf="htmlContent?.sitePhotos" class="padded-section">
     <div class="ngtest-before-starting-content" [innerHTML]="htmlContent.sitePhotos"></div>
   </section>
@@ -1526,7 +1529,6 @@
                        [uploadHeader]="'TO UPLOAD SITE PHOTOS DOCUMENTS, DRAG FILES HERE OR'">
     </app-file-uploader>
   </section>
-
 </div>
 
 <!--div *ngIf="application?.licenseType != 'Cannabis Retail Store'">
@@ -2013,6 +2015,9 @@
           </mat-checkbox>
         </div>
       </section>
+    </section>
+    <section>
+      <b>Note:</b> Valid interest must be maintained at the current and proposed site until the relocation is finalized. LCRB may request a copy of valid interest at the current site during the relocation application process.
     </section>
   </div>
 </section>

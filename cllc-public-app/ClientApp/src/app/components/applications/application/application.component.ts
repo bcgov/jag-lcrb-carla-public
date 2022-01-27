@@ -19,7 +19,7 @@ import { ApplicationTypeNames, FormControlState } from '@models/application-type
 import { TiedHouseConnection } from '@models/tied-house-connection.model';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
 import { EstablishmentWatchWordsService } from '@services/establishment-watch-words.service';
-import { KeyValue } from '@angular/common';
+import { formatDate, KeyValue } from '@angular/common';
 import { FeatureFlagService } from '@services/feature-flag.service';
 import { FileUploaderComponent } from '@shared/components/file-uploader/file-uploader.component';
 import { ConnectionToNonMedicalStoresComponent } from '@components/account-profile/tabs/connection-to-non-medical-stores/connection-to-non-medical-stores.component';
@@ -655,6 +655,85 @@ export class ApplicationComponent extends FormBase implements OnInit {
       );
   }
 
+  private isHoursPopulated(hoursOpen, hoursClose, altHoursOpen): boolean {
+    if (hoursOpen != '' && hoursClose != '') {
+      var timeTokensOpen = hoursOpen.split(':');
+      var timeTokensClose = hoursClose.split(':');
+      var timeTokensAltOpen = altHoursOpen.split(':');
+      let openDate = new Date(1970, 0, 2, timeTokensOpen[0], timeTokensOpen[1]);
+      let closeDate = new Date(1970, 0, 2, timeTokensClose[0], timeTokensClose[1]);
+      if (closeDate.getTime() < openDate.getTime()) {
+        //Open time may be the day before.  ie) Open Saturday at 9am Close Sunday 2am
+        openDate = new Date(1970, 0, 1, timeTokensAltOpen[0], timeTokensAltOpen[1]);
+      }
+      let minutes = (closeDate.getTime() - openDate.getTime()) / 60000; // minutes between
+      if (minutes <= 0) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+  }
+
+  private isHoursOfSalePopulated(): boolean {
+    if (!this.application.applicationType.showHoursOfSale ||
+      this.application.applicationType.name === ApplicationTypeNames.FP ||
+      this.application.applicationType.name === ApplicationTypeNames.FPRelo) {
+      return true;
+    }
+    if (this.form.get('serviceHoursSundayOpen').value != '' && this.form.get('serviceHoursSundayClose').value != '' && this.form.get('serviceHoursSaturdayOpen').value != '') {
+      if (!this.isHoursPopulated(this.form.get('serviceHoursSundayOpen').value, this.form.get('serviceHoursSundayClose').value, this.form.get('serviceHoursSaturdayOpen').value)) {
+        return false;
+      }
+    } else {
+      return false;
+    }
+    if (this.form.get('serviceHoursMondayOpen').value != '' && this.form.get('serviceHoursMondayClose').value != '' && this.form.get('serviceHoursSundayOpen').value != '') {
+      if (!this.isHoursPopulated(this.form.get('serviceHoursMondayOpen').value, this.form.get('serviceHoursMondayClose').value, this.form.get('serviceHoursSundayOpen').value)) {
+        return false;
+      }
+    } else {
+      return false;
+    }
+    if (this.form.get('serviceHoursTuesdayOpen').value != '' && this.form.get('serviceHoursTuesdayClose').value != '' && this.form.get('serviceHoursMondayOpen').value != '') {
+      if (!this.isHoursPopulated(this.form.get('serviceHoursTuesdayOpen').value, this.form.get('serviceHoursTuesdayClose').value, this.form.get('serviceHoursMondayOpen').value)) {
+        return false;
+      }
+    } else {
+      return false;
+    }
+    if (this.form.get('serviceHoursWednesdayOpen').value != '' && this.form.get('serviceHoursWednesdayClose').value != '' && this.form.get('serviceHoursTuesdayOpen').value != '') {
+      if (!this.isHoursPopulated(this.form.get('serviceHoursWednesdayOpen').value, this.form.get('serviceHoursWednesdayClose').value, this.form.get('serviceHoursTuesdayOpen').value)) {
+        return false;
+      }
+    } else {
+      return false;
+    }
+    if (this.form.get('serviceHoursThursdayOpen').value != '' && this.form.get('serviceHoursThursdayClose').value != '' && this.form.get('serviceHoursWednesdayOpen').value != '') {
+      if (!this.isHoursPopulated(this.form.get('serviceHoursThursdayOpen').value, this.form.get('serviceHoursThursdayClose').value, this.form.get('serviceHoursWednesdayOpen').value)) {
+        return false;
+      }
+    } else {
+      return false;
+    }
+    if (this.form.get('serviceHoursFridayOpen').value != '' && this.form.get('serviceHoursFridayClose').value != '' && this.form.get('serviceHoursThursdayOpen').value != '') {
+      if (!this.isHoursPopulated(this.form.get('serviceHoursFridayOpen').value, this.form.get('serviceHoursFridayClose').value, this.form.get('serviceHoursThursdayOpen').value)) {
+        return false;
+      }
+    } else {
+      return false;
+    }
+    if (this.form.get('serviceHoursSaturdayOpen').value != '' && this.form.get('serviceHoursSaturdayClose').value != '' && this.form.get('serviceHoursFridayOpen').value != '') {
+      if (!this.isHoursPopulated(this.form.get('serviceHoursSaturdayOpen').value, this.form.get('serviceHoursSaturdayClose').value, this.form.get('serviceHoursFridayOpen').value)) {
+        return false;
+      }
+    }
+    else {
+      return false;
+    }
+    return true;
+  }
+
   lgHasReviewedZoning(): boolean {
     let hasReviewed = false;
     if (this.application && this.application.lGDecisionSubmissionDate && this.application.lgZoning) {
@@ -782,6 +861,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     const outsideAreas = ('areas' in this.form.get('outsideAreas').value) ? this.form.get('outsideAreas').value['areas'] : this.form.get('outsideAreas').value;
     const capacityArea = [this.form.get('capacityArea').value];
 
+    
     return {
       ...this.form.value,
       description2,
@@ -1189,7 +1269,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.validationMessages.push('Only 8 applications can be submitted');
     }
 
-    if (!this.isHoursOfSaleValid()) {
+    if (!this.isHoursOfSaleValid() || !this.isHoursOfSalePopulated()) {
+      valid = false;
       this.validationMessages.push('Hours of sale are required');
     }
 
