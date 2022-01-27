@@ -1,4 +1,3 @@
-
 import { filter, map, catchError, takeWhile } from "rxjs/operators";
 import { Component, OnInit, ViewChild, Input, EventEmitter, Output } from "@angular/core";
 import { User } from "@models/user.model";
@@ -23,6 +22,7 @@ import { faAddressCard, faChevronRight, faEnvelope, faExclamationTriangle, faPho
   "@fortawesome/free-solid-svg-icons";
 import { UserDataService } from "@services/user-data.service";
 import { endOfToday } from "date-fns";
+import { ApplicationDataService } from "@services/application-data.service";
 
 // See the Moment.js docs for the meaning of these formats:
 // https://momentjs.com/docs/#/displaying/format/
@@ -118,13 +118,20 @@ export class AccountProfileComponent extends FormBase implements OnInit {
     private accountDataService: AccountDataService,
     private contactDataService: ContactDataService,
     private userDataService: UserDataService,
+    private applicationDataService: ApplicationDataService,
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
     private tiedHouseService: TiedHouseConnectionsDataService
   ) {
     super();
-    this.route.paramMap.subscribe(params => this.applicationId = params.get("applicationId"));
+    this.route.paramMap.subscribe(params => {
+      this.applicationId = params.get("applicationId");
+      this.applicationDataService.getApplicationById(this.applicationId)
+      .subscribe(res => {
+        this.application = res;
+      });
+    });
     this.route.paramMap.subscribe(params => this.renewalType = params.get("renewalType"));
     this.route.paramMap.subscribe(params => this.applicationMode = params.get("mode"));
   }
@@ -230,7 +237,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
 
   getBusinessTypeName() {
     if (!(this.saveFormData && this.saveFormData.businessProfile)
-      || this.account.isOtherBusinessType()) {
+      || this.account?.isOtherBusinessType()) {
       return "";
     }
     let name = "";

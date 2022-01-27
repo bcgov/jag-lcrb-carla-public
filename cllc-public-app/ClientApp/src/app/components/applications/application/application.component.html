@@ -1015,6 +1015,10 @@
   <div class="content-bottom">&nbsp;</div>
 </section>
 
+<!-- The label of the field will now be used to communicate the message of the alert -->
+<!-- <app-error-alert *ngIf="application?.applicationType?.name === 'Ethyl Alcohol Permit' && form.get('hasSufficientRangeOfProducts').value == 845280000">
+  You can only apply for up to a maximum of 16 litres because this is an application for a “One-Time” permit.
+</app-error-alert> -->
 
             <section *ngIf="application?.applicationType?.showDescription1">
               <h3 class="blue-header" *ngIf="!this.isLP()">DESCRIPTION OF PROPOSED CHANGE</h3>
@@ -1832,6 +1836,23 @@
                        [multipleFiles]="false" entityName="application"
                        (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
                        [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
+    </app-file-uploader>
+  </section>
+</div>
+
+<div class="ngtest-ethyl-documents-upload"
+  *ngIf="application?.applicationType?.name === 'Ethyl Alcohol Permit'">
+  <!-- <hr><br> -->
+  <label for="">Ethyl Alcohol Permit Documents</label>
+  <br>
+  <p>Please upload documents below.</p>
+  <section>
+    <app-file-uploader *ngIf="applicationId" documentType="Ethyl Alcohol Permit Documents"
+                       [enableFileDeletion]="true"
+                       [disableUploads]="false" fileTypes="FILE MUST BE IN PDF FORMAT."
+                       [multipleFiles]="true" entityName="application"
+                       [entityId]="applicationId"
+                       [uploadHeader]="'TO UPLOAD DOCUMENTS, DRAG FILE HERE OR'" #EthyAlcohoPermitDocuments>
     </app-file-uploader>
   </section>
 </div>
