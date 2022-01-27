@@ -357,6 +357,26 @@ export class SummaryComponent implements OnInit {
     }
   }
 
+  getPermitCategoryLabel(value: string): string {
+    let res = "";
+    switch (value) {
+      case "Members":
+        res = "Private – An organization's members or staff, invited guests and ticket holders";
+        break;
+      case "Family":
+        res = "Private – Family and invited friends only";
+        break;
+
+      case "Hobbyist":
+        res = "Private – Hobbyist competition";
+        break;
+      case "Anyone":
+        res = "Public – Open to the general public or anyone who wishes to participate or buy a ticket";
+        break;
+    }
+    return res;
+  }
+
 
 
   async cancelApplication(): Promise<void> {
@@ -398,7 +418,7 @@ export class SummaryComponent implements OnInit {
   async submitApplication(): Promise<void> {
     this.savingToAPI = true;
     const appData = await this.db.getSepApplication(this.localId);
-    
+
     if (appData.id) { // do an update ( the record exists in dynamics)
       const submitResult = await this.sepDataService.submitSepApplication(appData.id)
         .toPromise();
