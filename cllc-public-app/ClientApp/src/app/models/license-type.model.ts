@@ -6,3 +6,8 @@ export class LicenseType {
   name: string;
   allowedActions: ApplicationType[];
 }
+
+export enum LicenceTypeNames {
+  S119 = "S119 CRS Authorization",
+  CRS = "Cannabis Retail Store Licence"
+}
