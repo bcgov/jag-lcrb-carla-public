@@ -59,7 +59,7 @@ export class LicencesComponent extends FormBase implements OnInit {
     "Licensee Retail Store", "Transfer in Progress - Licensee Retail Store", "Operated - Licensee Retail Store",
     "Deemed - Licensee Retail Store",
     "UBrew and UVin", "Transfer in Progress - UBrew and UVin", "Operated - UBrew and UVin", "Deemed - UBrew and UVin",
-    "Section 119 Authorization"
+    "S119 CRS Authorization", "Transfer in Progress - S119 CRS Authorization"
   ];
 
   constructor(

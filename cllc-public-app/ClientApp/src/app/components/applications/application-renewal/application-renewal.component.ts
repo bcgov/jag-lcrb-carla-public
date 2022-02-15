@@ -17,6 +17,7 @@ import { Application } from "@models/application.model";
 import { FormBase, ApplicationHTMLContent } from "@shared/form-base";
 import { Account } from "@models/account.model";
 import { ApplicationTypeNames, FormControlState } from "@models/application-type.model";
+import { LicenceTypeNames} from "@models/license-type.model";
 import { TiedHouseConnection } from "@models/tied-house-connection.model";
 import { TiedHouseConnectionsDataService } from "@services/tied-house-connections-data.service";
 import { EstablishmentWatchWordsService } from "@services/establishment-watch-words.service";
@@ -78,6 +79,7 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
   htmlContent = {} as ApplicationHTMLContent;
   readonly UPLOAD_FILES_MODE = UPLOAD_FILES_MODE;
   ApplicationTypeNames = ApplicationTypeNames;
+  LicenceTypeNames = LicenceTypeNames;
   FormControlState = FormControlState;
   mode: string;
   account: Account;
@@ -110,7 +112,7 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
 
 
   holder(): string {
-    if(this.application.assignedLicence.licenseType === 'Section 119 Authorization'){
+    if(this.application.assignedLicence.licenseType === LicenceTypeNames.S119){
       return "authorized retailer";
     } else {
     return "licensee";
@@ -118,7 +120,7 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
   }
 
   typeOf(): string {
-    if(this.application.assignedLicence.licenseType === 'Section 119 Authorization'){
+    if(this.application.assignedLicence.licenseType === LicenceTypeNames.S119){
       return "authorization";
     } else {
     return "licence";
@@ -127,7 +129,7 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
   }
 
   titleOf(): string {
-    if(this.application.assignedLicence.licenseType === 'Section 119 Authorization'){
+    if(this.application.assignedLicence.licenseType === LicenceTypeNames.S119){
       return "Section 119 Authorization";
     } else {
     return "Cannabis Retail Store Licence";
