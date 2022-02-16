@@ -5,39 +5,53 @@
     </section>
 
     <section class="d-flex justify-content-around m-3">
-        <mat-card style="flex: 1;" class="m-3 mat-elevation-z0">
-            <mat-card-header>
-                <mat-card-title>Option 1: BCeID</mat-card-title>
-            </mat-card-header>
-            <mat-card-content class="d-flex flex-column align-items-center">
+      <mat-card style="flex: 1;" class="m-3 mat-elevation-z0">
+        <mat-card-header>
+          <mat-card-title>Option 1: BCeID</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="d-flex flex-column align-items-center">
 
-                  <img src="assets/bceid_default_logo.jpg"  alt="BCeID logo">
-                    <div class="d-flex justify-content-around w-100">
-                        <button [disabled]="disableLogin" mat-raised-button color="primary"
-                            (click)="sepBCeIDLogin()">
-                            Login with Basic or Business BCeID
-                        </button>
-                    </div>
+          <img src="assets/bceid_default_logo.jpg" alt="BCeID logo">
+          <div class="d-flex justify-content-around w-100">
+            <button [disabled]="disableLogin" mat-raised-button color="primary"
+                    (click)="sepBCeIDLogin()">
+              Login with Basic or Business BCeID
+            </button>
+          </div>
 
 
-                <a href="http://www.bceid.ca" style="margin-top:20px;" target="_blank"><fa-icon [icon]="faExclamationCircle" style="margin-right: 5px;"></fa-icon> Don't have a BCeID account? Find out how to get one.</a>
-            </mat-card-content>
-        </mat-card>
-        <mat-card style="flex: 1;" class="m-3 mat-elevation-z0">
-            <mat-card-header>
-                <mat-card-title>Option 2: BC Services Card</mat-card-title>
-            </mat-card-header>
-            <mat-card-content class="d-flex flex-column align-items-center">
-              <img src="assets/bc-logo-white-bg.jpg" height="51" alt="BC logo">
-              <div class="d-flex justify-content-around w-100">
-                  <button [disabled]="disableLogin" mat-raised-button color="primary"
-                      (click)="sepBCServiceLogin()">Login with BC Services
-                      Card</button>
-              </div>
-
-              <a href="http://www.gov.bc.ca/mobilebcservicescard" style="margin-top:20px;" target="_blank"><fa-icon [icon]="faExclamationCircle" style="margin-right: 5px;"></fa-icon>Don't have a mobile BC Services Card? Get Set up.</a>
-            </mat-card-content>
-        </mat-card>
+          <a href="http://www.bceid.ca" style="margin-top:20px;" target="_blank"><fa-icon [icon]="faExclamationCircle" style="margin-right: 5px;"></fa-icon> Don't have a BCeID account? Find out how to get one.</a>
+        </mat-card-content>
+      </mat-card>
+      <mat-card style="flex: 1;" class="m-3 mat-elevation-z0">
+        <mat-card-header>
+          <mat-card-title>Option 2: BC Services Card</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="d-flex flex-column align-items-center">
+          <img src="assets/bc-logo-white-bg.jpg" height="51" alt="BC logo">
+          <div class="d-flex justify-content-around w-100">
+            <button [disabled]="disableLogin" mat-raised-button color="primary"
+                    (click)="sepBCServiceLogin()">
+              Login with BC Services
+              Card
+            </button>
+          </div>
+          <a href="http://www.gov.bc.ca/mobilebcservicescard" style="margin-top:20px;" target="_blank"><fa-icon [icon]="faExclamationCircle" style="margin-right: 5px;"></fa-icon>Don't have a mobile BC Services Card? Get Set up.</a>
+        </mat-card-content>
+      </mat-card>
+    </section>
+    <section class="d-flex justify-content-around m-3">
+      <div class="text-left" appRemoveIfFeatureOff="DisableLogin">
+        <div class="warning">
+          <div>
+            <fa-icon [icon]="faExclamationCircle"></fa-icon>
+          </div>
+          <div style="color: red;">
+            <p><strong>We are currently conducting work on our Liquor and Cannabis Licensing Portal – please check back again soon.</strong></p>
+            <p><strong>We appreciate your patience while we resolve the issue.</strong></p>
+          </div>
+        </div>
+      </div>
     </section>
 
 </div>
