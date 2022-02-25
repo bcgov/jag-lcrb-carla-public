@@ -1264,6 +1264,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
       valid = false;
       this.validationMessages.push('Establishment name is required.');
     }
+    //If LP the description1 is the Establishment Type which is required
+    if (this.application?.applicationType?.name === ApplicationTypeNames.LP && !this.form.get('description1').value) {
+      valid = false;
+      this.validationMessages.push('Establishment Type is required.');
+    }
     if (applicationTypeName === ApplicationTypeNames.CannabisRetailStore && this.submittedApplications >= 8) {
       valid = false;
       this.validationMessages.push('Only 8 applications can be submitted');
