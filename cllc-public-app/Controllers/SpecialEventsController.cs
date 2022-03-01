@@ -288,7 +288,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             eligibilityInfo += $"<tr><th class='heading'>Address:</th><td class='field'>{HttpUtility.HtmlEncode(specialEvent.AdoxioHostorganisationaddress)}</td></tr>";
             eligibilityInfo += $"<tr><th class='heading'>Occasion of Event:</th><td class='field'>{HttpUtility.HtmlEncode(specialEvent.AdoxioSpecialeventdescripton)}</td></tr>";
             eligibilityInfo += $"<tr><th class='heading'>Licence Already Exists At Location?:</th><td class='field'>{(ViewModels.LicensedSEPLocationValue?)specialEvent.AdoxioIslocationlicensedos}</td></tr>";
-            eligibilityInfo += $"<tr><th class='heading'>Permit Category:</th><td class='field'>{(ViewModels.SEPPublicOrPrivate?)specialEvent.AdoxioPrivateorpublic}</td></tr>"; // to do
+            eligibilityInfo += $"<tr><th class='heading'>Permit Category:</th><td class='field'>{getPermitCategoryLabel((ViewModels.SEPPublicOrPrivate?)specialEvent.AdoxioPrivateorpublic)}</td></tr>"; // to do
             eligibilityInfo += $"<tr><th class='heading'>Public Property:</th><td class='field'>{specialEvent.AdoxioIsonpublicproperty}</td></tr>";
 
             eligibilityInfo += "</table>";
@@ -544,6 +544,27 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             //return new UnauthorizedResult();
         }
 
+        private string getPermitCategoryLabel(ViewModels.SEPPublicOrPrivate? value) {
+            string test = value?.ToString();
+            var res = "";
+            switch (test) {
+                case "Members":
+                    res = "Private – An organization's members or staff, invited guests and ticket holders";
+                    break;
+                case "Family":
+                    res = "Private – Family and invited friends only";
+                    break;
+
+                case "Hobbyist":
+                    res = "Private – Hobbyist competition";
+                    break;
+                case "Anyone":
+                    res = "Public – Open to the general public or anyone who wishes to participate or buy a ticket";
+                    break;
+            }
+            return res;
+        }
+
         /// <summary>
         ///     endpoint for a permit pdf
         /// </summary>
@@ -610,7 +631,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             eligibilityInfo += $"<tr><th class='heading'>Address:</th><td class='field'>{HttpUtility.HtmlEncode(specialEvent.AdoxioHostorganisationaddress)}</td></tr>";
             eligibilityInfo += $"<tr><th class='heading'>Occasion of Event:</th><td class='field'>{HttpUtility.HtmlEncode(specialEvent.AdoxioSpecialeventdescripton)}</td></tr>";
             eligibilityInfo += $"<tr><th class='heading'>Licence Already Exists At Location?:</th><td class='field'>{(ViewModels.LicensedSEPLocationValue?)specialEvent.AdoxioIslocationlicensedos}</td></tr>";
-            eligibilityInfo += $"<tr><th class='heading'>Permit Category:</th><td class='field'>{(ViewModels.SEPPublicOrPrivate?)specialEvent.AdoxioPrivateorpublic}</td></tr>"; // to do
+            eligibilityInfo += $"<tr><th class='heading'>Permit Category:</th><td class='field'>{getPermitCategoryLabel((ViewModels.SEPPublicOrPrivate?)specialEvent.AdoxioPrivateorpublic)}</td></tr>"; // to do
             eligibilityInfo += $"<tr><th class='heading'>Public Property:</th><td class='field'>{specialEvent.AdoxioIsonpublicproperty}</td></tr>";
             eligibilityInfo += "</table>";
 
