@@ -46,6 +46,7 @@ import { filter, tap, switchMap } from "rxjs/operators";
 import { FormBase } from "@shared/form-base";
 import { SepSchedule } from "@models/sep-schedule.model";
 import { isToday } from "date-fns";
+import { SummaryComponent } from "@components/sep/sep-application/summary/summary.component";
 
 @Component({
   selector: "app-police-summary",
@@ -53,6 +54,7 @@ import { isToday } from "date-fns";
   styleUrls: ["./police-summary.component.scss"]
 })
 export class PoliceSummaryComponent extends FormBase implements OnInit {
+  SummaryComponent = SummaryComponent;
   faDownLoad = faDownload;
   faExclamationTriangle = faExclamationTriangle;
   faFlag = faFlag;
@@ -469,4 +471,5 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
           console.error("Error setting city");
         });
   }
+
 }
