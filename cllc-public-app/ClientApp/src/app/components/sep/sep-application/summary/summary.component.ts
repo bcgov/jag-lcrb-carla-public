@@ -50,6 +50,7 @@ export class SummaryComponent implements OnInit {
   busy: Subscription;
   mode: "readonlySummary" | "pendingReview" | "payNow" = "readonlySummary";
   _appID: number;
+  SummaryComponent = SummaryComponent;
   application: SepApplication;
   faDownLoad = faDownload;
   faExclamationTriangle = faExclamationTriangle;
@@ -357,7 +358,7 @@ export class SummaryComponent implements OnInit {
     }
   }
 
-  getPermitCategoryLabel(value: string): string {
+  public static getPermitCategoryLabel(value: string): string {
     let res = "";
     switch (value) {
       case "Members":
