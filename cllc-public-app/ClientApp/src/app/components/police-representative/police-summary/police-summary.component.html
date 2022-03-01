@@ -128,7 +128,7 @@
                   <h2 style="color: #036;" *ngIf="!(this.isEventPast() && sepApplication?.eventStatus == 'Pending Review')">{{sepApplication?.eventStatus}}</h2>
                 </td>
                 <td style="text-align:center;">
-                  <h2 style="color: #036;">{{sepApplication?.privateOrPublic}}</h2>
+                  <h2 style="color: #036;">{{SummaryComponent.getPermitCategoryLabel(sepApplication?.privateOrPublic)}}</h2>
                 </td>
                 <td style="text-align:center;">
                   <h2 style="color: #036;">{{this.getSize(sepApplication?.maximumNumberOfGuests)}}</h2>
@@ -251,7 +251,7 @@
           </div>
           <hr>
           <div class="d-flex">
-            <label>Permit Category</label> <span>{{sepApplication?.privateOrPublic}}</span>
+            <label>Permit Category</label> <span>{{SummaryComponent.getPermitCategoryLabel(sepApplication?.privateOrPublic)}}</span>
           </div>
           <hr>
           <div class="d-flex">
