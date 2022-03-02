@@ -427,6 +427,7 @@
 
     <label *ngIf="application?.applicationType?.establishmentName === FormControlState.ReadOnly" for="">Establishment Name</label>
     <label *ngIf="application?.applicationType?.establishmentName !== FormControlState.ReadOnly" for="">Proposed Establishment Name</label>
+    <label *ngIf="application?.applicationType?.establishmentName !== FormControlState.ReadOnly" class="error-states ng-star-inserted">*</label>
     <br>
 
     <p *ngIf="application?.licenseType == 'Cannabis Retail Store'">
@@ -475,7 +476,7 @@
   <!-- Non Cannabis Establishment Name input-->
   <div *ngIf="application?.licenseType != 'Cannabis Retail Store'">
     <!-- <label for="">Establishment Name</label> -->
-    <app-field *ngIf="showFormControl(application?.applicationType?.establishmentName)" [required]="true">
+    <app-field  *ngIf="showFormControl(application?.applicationType?.establishmentName)" [required]="true">
       <input class="form-control" style="width: 500px;" type="text"
              [readonly]="application?.applicationType?.establishmentName === FormControlState.ReadOnly"
              formControlName="establishmentName" id="establishmentName">
