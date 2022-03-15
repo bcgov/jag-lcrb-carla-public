@@ -429,6 +429,13 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
             this.form.patchValue(noNulls);
 
+            if (this.application && this.application.assignedLicence) {
+              this.form.get('assignedLicence').get('establishmentAddressStreet').setValue(this.application.assignedLicence.establishmentAddressStreet);
+              this.form.get('assignedLicence').get('establishmentAddressCity').setValue(this.application.assignedLicence.establishmentAddressCity);
+              this.form.get('assignedLicence').get('establishmentAddressPostalCode').setValue(this.application.assignedLicence.establishmentAddressPostalCode);
+              this.form.get('assignedLicence').get('establishmentParcelId').setValue(this.application.assignedLicence.establishmentParcelId);
+            }
+
             if (data.indigenousNation) {
               this.form.get('indigenousNationId').patchValue(data.indigenousNation.id);
             }
