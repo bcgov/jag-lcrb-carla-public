@@ -186,37 +186,42 @@
 
         <hr>
         <div *ngIf="getStatus() == 'Issued' || (getStatus() == 'Payment Required' && trnApproved != '1')">
+          <app-error-alert>
+            Please print this page for your records!
+          </app-error-alert>
+          <span class="print-page" (click)="printPage()">
             <!--<mat-icon aria-label="Print Page" style="text-decoration: solid">print</mat-icon>-->
-            <!-- <fa-icon [icon]="faPrint" class="fa-lg"></fa-icon> -->
-            <!-- <a href="javascript: void(0)"> Print Page</a> -->
-            <h2 style="color: green" *ngIf="getStatus() == 'Issued'">Payment Approved</h2>
-            <h2 style="color: red" *ngIf="(getStatus() == 'Payment Required' && trnApproved != '1')">{{paymentTransactionTitle}}</h2>
-            <p *ngIf="getStatus() == 'Payment Required' && trnApproved != '1'">{{paymentTransactionMessage}}</p>
-            <div class="table" style="padding: 0px;">
-                <table>
-                    <tr>
-                        <td>Card Type</td>
-                        <td>{{cardType}}</td>
-                    </tr>
-                    <tr>
-                        <td>Date/Time</td>
-                        <td>{{trnDate}}</td>
-                    </tr>
-                    <tr>
-                        <td>Invoice Number</td>
-                        <td>{{invoice}}</td>
-                    </tr>
-                    <tr>
-                        <td>Transaction ID</td>
-                        <td>{{trnId}}</td>
-                    </tr>
-                    <tr>
-                        <td>Amount</td>
-                        <td>{{trnAmount | currency}}</td>
-                    </tr>
-                </table>
-            </div>
-            <hr>
+            <fa-icon [icon]="faPrint" class="fa-lg"></fa-icon>
+            <a href="javascript: void(0)"> Print Page</a>
+          </span>
+          <h2 style="color: green" *ngIf="getStatus() == 'Issued'">Payment Approved</h2>
+          <h2 style="color: red" *ngIf="(getStatus() == 'Payment Required' && trnApproved != '1')">{{paymentTransactionTitle}}</h2>
+          <p *ngIf="getStatus() == 'Payment Required' && trnApproved != '1'">{{paymentTransactionMessage}}</p>
+          <div class="table" style="padding: 0px;">
+            <table>
+              <tr>
+                <td>Card Type</td>
+                <td>{{cardType}}</td>
+              </tr>
+              <tr>
+                <td>Date/Time</td>
+                <td>{{trnDate}}</td>
+              </tr>
+              <tr>
+                <td>Invoice Number</td>
+                <td>{{invoice}}</td>
+              </tr>
+              <tr>
+                <td>Transaction ID</td>
+                <td>{{trnId}}</td>
+              </tr>
+              <tr>
+                <td>Amount</td>
+                <td>{{trnAmount | currency}}</td>
+              </tr>
+            </table>
+          </div>
+          <hr>
         </div>
 
         <h2>Summary</h2>
