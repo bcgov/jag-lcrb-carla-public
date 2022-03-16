@@ -460,6 +460,13 @@ export class SummaryComponent implements OnInit {
     this.dialog.open(FinalConfirmationComponent, dialogConfig);
   }
 
+  /**
+   * Print current page
+   * */
+  printPage() {
+    window.print();
+  }
+
 
 }
 
