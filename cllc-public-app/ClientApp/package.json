@@ -117,7 +117,8 @@
   "resolutions": {
     "@babel/preset-env": "^7.9.0",
     "@babel/cli": "^7.9.0",
-    "@babel/core": "^7.9.0"
+    "@babel/core": "^7.9.0",
+    "node-fetch": "2.6.7"
   },
   "browserslist": {
     "production": [
