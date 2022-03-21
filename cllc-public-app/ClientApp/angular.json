@@ -31,7 +31,12 @@
             ],
             "scripts": [
               "src/assets/establishmentsMap.js"
-            ]
+            ],
+            "aot": false,
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -52,7 +57,6 @@
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
-              "vendorChunk": true,
 			  "commonChunk": true,
               "buildOptimizer": true,
               "fileReplacements": [
@@ -62,16 +66,13 @@
                 }
               ]
             },
-			"development": {                        
-                        "sourceMap": true,
+			"development": {
                         "namedChunks": false,
 						"showCircularDependencies": false,
                         "aot": true,
-                        "extractLicenses": false,
 						"statsJson": false,
-                        "vendorChunk": true,
 						"commonChunk": false,
-                        "buildOptimizer": false,
+            "sourceMap": true,
                         "budgets": [
                             {
                                 "type": "initial",
@@ -80,7 +81,8 @@
                             }
                         ]
 			}
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
