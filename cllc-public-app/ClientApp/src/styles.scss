@@ -1,10 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+@use '~@angular/material' as mat;
 
 /* Controls Survey styles */
 @import "~material-design-icons/iconfont/material-icons.css";
 @import "./style/custom-theme.scss";
 
-@include angular-material-typography($custom-typography);
+@include mat.all-component-typographies($custom-typography);
 body {
   background: #f2f2f2;
   -webkit-font-smoothing: antialiased;
