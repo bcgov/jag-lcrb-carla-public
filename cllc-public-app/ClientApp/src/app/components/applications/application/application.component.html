@@ -333,7 +333,7 @@
       Sole proprietors and associates of applicants for a non-medical cannabis licence are required to
       submit
       documentation for
-      security screenings and/or financial integrity checks. Cannabis retail store licence applications
+      security screenings and/or financial integrity checks. {{ application?.applicationType?.name === ApplicationTypeNames.Marketer ? 'Cannabis marketing' : 'Cannabis retail store licence' }} applications
       cannot
       be processed until
       all required materials have been received.
@@ -381,7 +381,7 @@
                        (numberOfUploadedFiles)="uploadedCAS = $event" [entityId]="application.id"
                        [uploadHeader]="'TO UPLOAD CANNABIS ASSOCIATES DOCUMENTS, DRAG FILES HERE OR'">
     </app-file-uploader>
-
+    <div *ngIf="application?.applicationType?.name != ApplicationTypeNames.Marketer">
     <h4>Financial Integrity Documents</h4>
     <p>
       Each associate must provide a complete a
@@ -397,6 +397,7 @@
                        [entityId]="application.id"
                        [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY DOCUMENTS, DRAG FILES HERE OR'">
     </app-file-uploader>
+    </div>
   </div>
 </section>
 

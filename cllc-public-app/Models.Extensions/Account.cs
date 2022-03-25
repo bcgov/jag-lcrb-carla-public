@@ -116,74 +116,74 @@ namespace Gov.Lclb.Cllb.Public.Models
 
             if (copyIfNull || (!copyIfNull && fromVM.mailingAddressName != null))
             {
-                toDynamics.Address1Name = fromVM.mailingAddressName;
+                toDynamics.Address2Name = fromVM.mailingAddressName;
             }
             if (copyIfNull || (!copyIfNull && fromVM.mailingAddressStreet != null))
             {
-                toDynamics.Address1Line1 = fromVM.mailingAddressStreet;
+                toDynamics.Address2Line1 = fromVM.mailingAddressStreet;
             }
             if (copyIfNull || (!copyIfNull && fromVM.mailingAddressStreet2 != null))
             {
-                toDynamics.Address1Line2 = fromVM.mailingAddressStreet2;
+                toDynamics.Address2Line2 = fromVM.mailingAddressStreet2;
             }
             if (copyIfNull || (!copyIfNull && fromVM.mailingAddressCity != null))
             {
-                toDynamics.Address1City = fromVM.mailingAddressCity;
+                toDynamics.Address2City = fromVM.mailingAddressCity;
             }
             if (copyIfNull || (!copyIfNull && fromVM.mailingAddressCountry != null))
             {
-                toDynamics.Address1Country = fromVM.mailingAddressCountry;
+                toDynamics.Address2Country = fromVM.mailingAddressCountry;
             }
-            if (copyIfNull || (!copyIfNull && fromVM.mailingAddressCountry != null))
+            if (copyIfNull || (!copyIfNull && fromVM.mailingAddressProvince != null))
             {
-                toDynamics.Address1Stateorprovince = fromVM.mailingAddressProvince;
+                toDynamics.Address2Stateorprovince = fromVM.mailingAddressProvince;
             }
             if (copyIfNull || (!copyIfNull && fromVM.mailingAddressPostalCode != null))
             {
                 if (fromVM.mailingAddressPostalCode != null)
                 {
-                    toDynamics.Address1Postalcode = fromVM.mailingAddressPostalCode.Replace(" ", "");
+                    toDynamics.Address2Postalcode = fromVM.mailingAddressPostalCode.Replace(" ", "");
                 }
                 else
                 {
-                    toDynamics.Address1Postalcode = null;
+                    toDynamics.Address2Postalcode = null;
                 }
 
             }
 
             if (copyIfNull || (!copyIfNull && fromVM.physicalAddressName != null))
             {
-                toDynamics.Address2Name = fromVM.physicalAddressName;
+                toDynamics.Address1Name = fromVM.physicalAddressName;
             }
             if (copyIfNull || (!copyIfNull && fromVM.physicalAddressStreet != null))
             {
-                toDynamics.Address2Line1 = fromVM.physicalAddressStreet;
+                toDynamics.Address1Line1 = fromVM.physicalAddressStreet;
             }
             if (copyIfNull || (!copyIfNull && fromVM.physicalAddressStreet2 != null))
             {
-                toDynamics.Address2Line2 = fromVM.physicalAddressStreet2;
+                toDynamics.Address1Line2 = fromVM.physicalAddressStreet2;
             }
             if (copyIfNull || (!copyIfNull && fromVM.physicalAddressCity != null))
             {
-                toDynamics.Address2City = fromVM.physicalAddressCity;
+                toDynamics.Address1City = fromVM.physicalAddressCity;
             }
             if (copyIfNull || (!copyIfNull && fromVM.physicalAddressCountry != null))
             {
-                toDynamics.Address2Country = fromVM.physicalAddressCountry;
+                toDynamics.Address1Country = fromVM.physicalAddressCountry;
             }
-            if (copyIfNull || (!copyIfNull && fromVM.physicalAddressCountry != null))
+            if (copyIfNull || (!copyIfNull && fromVM.physicalAddressProvince != null))
             {
-                toDynamics.Address2Stateorprovince = fromVM.physicalAddressProvince;
+                toDynamics.Address1Stateorprovince = fromVM.physicalAddressProvince;
             }
             if (copyIfNull || (!copyIfNull && fromVM.physicalAddressPostalCode != null))
             {
                 if (fromVM.physicalAddressPostalCode != null)
                 {
-                    toDynamics.Address2Postalcode = fromVM.physicalAddressPostalCode.Replace(" ", "");
+                    toDynamics.Address1Postalcode = fromVM.physicalAddressPostalCode.Replace(" ", "");
                 }
                 else
                 {
-                    toDynamics.Address2Postalcode = null;
+                    toDynamics.Address1Postalcode = null;
                 }
 
             }
