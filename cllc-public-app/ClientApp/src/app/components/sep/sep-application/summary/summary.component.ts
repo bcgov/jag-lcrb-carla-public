@@ -50,6 +50,7 @@ export class SummaryComponent implements OnInit {
   busy: Subscription;
   mode: "readonlySummary" | "pendingReview" | "payNow" = "readonlySummary";
   _appID: number;
+  SummaryComponent = SummaryComponent;
   application: SepApplication;
   faDownLoad = faDownload;
   faExclamationTriangle = faExclamationTriangle;
@@ -357,6 +358,26 @@ export class SummaryComponent implements OnInit {
     }
   }
 
+  public static getPermitCategoryLabel(value: string): string {
+    let res = "";
+    switch (value) {
+      case "Members":
+        res = "Private – An organization's members or staff, invited guests and ticket holders";
+        break;
+      case "Family":
+        res = "Private – Family and invited friends only";
+        break;
+
+      case "Hobbyist":
+        res = "Private – Hobbyist competition";
+        break;
+      case "Anyone":
+        res = "Public – Open to the general public or anyone who wishes to participate or buy a ticket";
+        break;
+    }
+    return res;
+  }
+
 
 
   async cancelApplication(): Promise<void> {
@@ -398,7 +419,7 @@ export class SummaryComponent implements OnInit {
   async submitApplication(): Promise<void> {
     this.savingToAPI = true;
     const appData = await this.db.getSepApplication(this.localId);
-    
+
     if (appData.id) { // do an update ( the record exists in dynamics)
       const submitResult = await this.sepDataService.submitSepApplication(appData.id)
         .toPromise();
@@ -437,6 +458,13 @@ export class SummaryComponent implements OnInit {
 
     // open dialog, get reference and process returned data from dialog
     this.dialog.open(FinalConfirmationComponent, dialogConfig);
+  }
+
+  /**
+   * Print current page
+   * */
+  printPage() {
+    window.print();
   }
 
 

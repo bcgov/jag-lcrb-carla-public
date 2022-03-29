@@ -4,6 +4,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { LicenseDataService } from "@app/services/license-data.service";
 import { Router } from "@angular/router";
 import { ApplicationTypeNames } from "@models/application-type.model";
+import { LicenceTypeNames } from "@models/license-type.model";
 import { FormBase } from "@shared/form-base";
 import { takeWhile } from "rxjs/operators";
 import { ApplicationLicenseSummary } from "@models/application-license-summary.model";
@@ -221,7 +222,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     const result = this.isActive(item) &&
       !item.transferRequested &&
       this.actionsVisible(item) &&
-      item.licenceTypeName !== "Section 119 Authorization" &&
+      item.licenceTypeName !== LicenceTypeNames.S119 &&
       item.licenceTypeName !== "Marketing";
     return result;
   }

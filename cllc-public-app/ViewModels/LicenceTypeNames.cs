@@ -15,6 +15,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public const string Agent = "Agent";
 
-        public const string Section119 = "Section 119 Authorization";
+        public const string Section119 = "S119 CRS Authorization";
     }
 }
