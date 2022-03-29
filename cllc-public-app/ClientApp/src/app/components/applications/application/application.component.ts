@@ -429,6 +429,13 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
             this.form.patchValue(noNulls);
 
+            if (this.application != null && this.application.assignedLicence != null) {
+              this.form.get('assignedLicence').get('establishmentAddressStreet').setValue(this.application.assignedLicence.establishmentAddressStreet);
+              this.form.get('assignedLicence').get('establishmentAddressCity').setValue(this.application.assignedLicence.establishmentAddressCity);
+              this.form.get('assignedLicence').get('establishmentAddressPostalCode').setValue(this.application.assignedLicence.establishmentAddressPostalCode);
+              this.form.get('assignedLicence').get('establishmentParcelId').setValue(this.application.assignedLicence.establishmentParcelId);
+            }
+
             if (data.indigenousNation) {
               this.form.get('indigenousNationId').patchValue(data.indigenousNation.id);
             }
@@ -635,7 +642,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
 
   private isHoursOfSaleValid(): boolean {
-    return !this.application.applicationType.showHoursOfSale ||
+    return this.form.disabled || !this.application.applicationType.showHoursOfSale ||
         this.application.applicationType.name === ApplicationTypeNames.FP ||
         this.application.applicationType.name === ApplicationTypeNames.FPRelo ||
       (this.form.get('serviceHoursSundayOpen').valid
@@ -1263,6 +1270,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
     if (this.application.applicationType.showPropertyDetails && !this.form.get('establishmentName').value) {
       valid = false;
       this.validationMessages.push('Establishment name is required.');
+    }
+    //If LP the description1 is the Establishment Type which is required
+    if (this.application?.applicationType?.name === ApplicationTypeNames.LP && !this.form.get('description1').value) {
+      valid = false;
+      this.validationMessages.push('Establishment Type is required.');
     }
     if (applicationTypeName === ApplicationTypeNames.CannabisRetailStore && this.submittedApplications >= 8) {
       valid = false;

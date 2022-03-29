@@ -140,6 +140,9 @@
 <div formGroupName="businessProfile" class="padded-section content-bottom">
   <p></p>
   <h3>Physical Address</h3>
+  <p *ngIf="application?.applicationType?.name === 'Ethyl Alcohol Permit'">
+    The physical address must be the address where the ethyl will be stored.
+  </p>
   <div class="row">
     <app-field class="col-md-6 col-xs-12" label="Street Address 1" [required]="true"
                [valid]="form.get('businessProfile.physicalAddressStreet').valid || !form.get('businessProfile.physicalAddressStreet').touched"
@@ -272,7 +275,7 @@
 
 </div>
 
-<div *ngIf="saveFormData?.businessProfile?.id && ['Police'].indexOf(getBusinessTypeName()) == -1">
+<div *ngIf="application?.applicationType?.name !== 'Ethyl Alcohol Permit' && saveFormData?.businessProfile?.id && ['Police'].indexOf(getBusinessTypeName()) == -1">
   <app-connection-to-producers *ngIf="account?.tiedHouse" [tiedHouse]="account?.tiedHouse"
                                [account]="account" (value)="tiedHouseFormData = $event">
   </app-connection-to-producers>

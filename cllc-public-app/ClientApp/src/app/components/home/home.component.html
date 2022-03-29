@@ -55,16 +55,15 @@
               <br>
             </button>
             <span style="padding: 10px;"></span>
-            <p>
-              <strong>
-                The Liquor and Cannabis Licensing portal is closed for maintenance. During this time, you will not be able to log in to the site.
-              </strong>
-            </p>
-            <p>
-              <strong>
-                We apologize for any inconvenience.
-              </strong>
-            </p>
+            <div class="warning">
+              <div>
+                <fa-icon [icon]="faExclamationCircle"></fa-icon>
+              </div>
+              <div style="color: red;">
+                <p><strong>We are currently conducting work on our Liquor and Cannabis Licensing Portal – please check back again soon.</strong></p>
+                <p><strong>We appreciate your patience while we resolve the issue.</strong></p>
+              </div>
+            </div>
           </div>
           <div class="text-left" appRemoveIfFeatureOn="DisableLogin">
             <button style="margin-bottom: 10px;" class="btn btn-primary"
