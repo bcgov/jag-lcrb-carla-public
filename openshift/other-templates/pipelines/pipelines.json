@@ -1,0 +1,720 @@
+{
+    "kind": "Template",
+    "apiVersion": "v1",
+    "metadata":
+    {
+      "annotations":
+      {
+        "description": "Deployment template for Tekton pipelines",
+        "tags": "Tekton"
+      },
+      "name": "tekton-pipelines"
+    },
+    "objects": [    
+        {
+            "apiVersion": "tekton.dev/v1beta1",
+            "kind": "Pipeline",
+            "metadata": {
+                "name": "promote-prod"
+            },
+            "spec": {
+                "tasks": [
+                    {
+                        "name": "backup-images",
+                        "params": [
+                            {
+                                "name": "SCRIPT",
+                                "value": "oc tag cllc-public-api:prod cllc-public-api:prod-backup \u0026\u0026 \\\noc tag cllc-public-frontend:prod cllc-public-frontend:prod-backup\n"
+                            }
+                        ],
+                        "taskRef": {
+                            "kind": "ClusterTask",
+                            "name": "openshift-client"
+                        }
+                    },
+                    {
+                        "name": "tag-images",
+                        "params": [
+                            {
+                                "name": "SCRIPT",
+                                "value": "oc tag cllc-public-api:test cllc-public-api:prod \u0026\u0026 \\\noc tag cllc-public-frontend:test cllc-public-frontend:prod\n"
+                            }
+                        ],
+                        "taskRef": {
+                            "kind": "ClusterTask",
+                            "name": "openshift-client"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "apiVersion": "tekton.dev/v1beta1",
+            "kind": "Pipeline",
+            "metadata": {
+                "name": "uat-build"
+            },
+            "spec": {
+                "tasks": [
+                    {
+                        "name": "build-api",
+                        "params": [
+                            {
+                                "name": "SCRIPT",
+                                "value": "oc start-build cllc-public-api-test -w --follow \n"
+                            }
+                        ],
+                        "taskRef": {
+                            "kind": "ClusterTask",
+                            "name": "openshift-client"
+                        }
+                    },
+                    {
+                        "name": "build-angular",
+                        "params": [
+                            {
+                                "name": "SCRIPT",
+                                "value": "oc start-build cllc-public-angular-test -w --follow\n"
+                            }
+                        ],
+                        "taskRef": {
+                            "kind": "ClusterTask",
+                            "name": "openshift-client"
+                        }
+                    },
+                    {
+                        "name": "build-front-end",
+                        "params": [
+                            {
+                                "name": "SCRIPT",
+                                "value": "sleep 5\noc start-build cllc-public-frontend-test -w --follow \n"
+                            }
+                        ],
+                        "runAfter": [
+                            "build-angular"
+                        ],
+                        "taskRef": {
+                            "kind": "ClusterTask",
+                            "name": "openshift-client"
+                        }
+                    },
+                    {
+                        "name": "tag-images",
+                        "params": [
+                            {
+                                "name": "SCRIPT",
+                                "value": "oc tag cllc-public-api-test:latest cllc-public-api:test \u0026\u0026 \\\noc tag cllc-public-frontend-test:latest cllc-public-frontend:test\n"
+                            }
+                        ],
+                        "runAfter": [
+                            "build-front-end",
+                            "build-api"
+                        ],
+                        "taskRef": {
+                            "kind": "ClusterTask",
+                            "name": "openshift-client"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "apiVersion": "tekton.dev/v1beta1",
+            "kind": "Pipeline",
+            "metadata": {            
+                "name": "dev-build"                
+            },
+            "spec": {
+                "tasks": [
+                    {
+                        "name": "build-api",
+                        "params": [
+                            {
+                                "name": "SCRIPT",
+                                "value": "oc start-build cllc-public-api -w --follow \n"
+                            }
+                        ],
+                        "taskRef": {
+                            "kind": "ClusterTask",
+                            "name": "openshift-client"
+                        }
+                    },
+                    {
+                        "name": "build-angular",
+                        "params": [
+                            {
+                                "name": "SCRIPT",
+                                "value": "oc start-build cllc-public-angular -w  --follow\n"
+                            }
+                        ],
+                        "taskRef": {
+                            "kind": "ClusterTask",
+                            "name": "openshift-client"
+                        }
+                    },
+                    {
+                        "name": "build-front-end",
+                        "params": [
+                            {
+                                "name": "SCRIPT",
+                                "value": "sleep 5\noc start-build cllc-public-frontend -w --follow \n"
+                            }
+                        ],
+                        "runAfter": [
+                            "build-angular"
+                        ],
+                        "taskRef": {
+                            "kind": "ClusterTask",
+                            "name": "openshift-client"
+                        }
+                    },
+                    {
+                        "name": "tag-images",
+                        "params": [
+                            {
+                                "name": "SCRIPT",
+                                "value": "oc tag cllc-public-api:latest cllc-public-api:dev \u0026\u0026 \\\noc tag cllc-public-frontend:latest cllc-public-frontend:dev\n"
+                            }
+                        ],
+                        "runAfter": [
+                            "build-front-end",
+                            "build-api"
+                        ],
+                        "taskRef": {
+                            "kind": "ClusterTask",
+                            "name": "openshift-client"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "apiVersion": "tekton.dev/v1beta1",
+            "kind": "Pipeline",
+            "metadata": {
+                "name": "onestop-build"
+            },
+            "spec": {
+                "tasks": [
+                    {
+                        "name": "build",
+                        "params": [
+                            {
+                                "name": "SCRIPT",
+                                "value": "oc start-build one-stop-service -w --follow \n"
+                            }
+                        ],
+                        "taskRef": {
+                            "kind": "ClusterTask",
+                            "name": "openshift-client"
+                        }
+                    },
+                    {
+                        "name": "tag-images",
+                        "params": [
+                            {
+                                "name": "SCRIPT",
+                                "value": "oc tag one-stop-service:latest one-stop-service:dev\noc tag one-stop-service:latest one-stop-service:test\n"
+                            }
+                        ],
+                        "runAfter": [
+                            "build"
+                        ],
+                        "taskRef": {
+                            "kind": "ClusterTask",
+                            "name": "openshift-client"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "apiVersion": "tekton.dev/v1beta1",
+            "kind": "Pipeline",
+            "metadata": {
+                "name": "onestop-promote-prod"
+            },
+            "spec": {
+                "tasks": [
+                    {
+                        "name": "tag-images",
+                        "params": [
+                            {
+                                "name": "SCRIPT",
+                                "value": "oc tag one-stop-service:test one-stop-service:prod            \n"
+                            }
+                        ],
+                        "taskRef": {
+                            "kind": "ClusterTask",
+                            "name": "openshift-client"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "apiVersion": "tekton.dev/v1beta1",
+            "kind": "Pipeline",
+            "metadata": {
+                "generation": 6,
+                "name": "smoke-test"
+            },
+            "spec": {
+                "tasks": [
+                    {
+                        "name": "clone-repository",
+                        "params": [
+                            {
+                                "name": "url",
+                                "value": "https://github.com/bcgov/jag-lcrb-carla-public"
+                            },
+                            {
+                                "name": "revision",
+                                "value": "develop"
+                            }
+                        ],
+                        "taskRef": {
+                            "kind": "Task",
+                            "name": "git-clone"
+                        },
+                        "workspaces": [
+                            {
+                                "name": "output",
+                                "workspace": "git-workspace"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "smoke-test",
+                        "runAfter": [
+                            "clone-repository"
+                        ],
+                        "taskRef": {
+                            "kind": "Task",
+                            "name": "smoke-test"
+                        },
+                        "workspaces": [
+                            {
+                                "name": "output",
+                                "workspace": "git-workspace"
+                            }
+                        ]
+                    }
+                ],
+                "workspaces": [
+                    {
+                        "name": "git-workspace"
+                    }
+                ]
+            }
+        },
+        {
+            "apiVersion": "tekton.dev/v1beta1",
+            "kind": "Task",
+            "metadata": {
+                "name": "git-clone"
+            },
+            "spec": {
+                "description": "These Tasks are Git tasks to work with repositories used by other tasks in your Pipeline.\nThe git-clone Task will clone a repo from the provided url into the output Workspace. By default the repo will be cloned into the root of your Workspace. You can clone into a subdirectory by setting this Task's subdirectory param. This Task also supports sparse checkouts. To perform a sparse checkout, pass a list of comma separated directory patterns to this Task's sparseCheckoutDirectories param.",
+                "params": [
+                    {
+                        "description": "Repository URL to clone from.",
+                        "name": "url",
+                        "type": "string"
+                    },
+                    {
+                        "default": "",
+                        "description": "Revision to checkout. (branch, tag, sha, ref, etc...)",
+                        "name": "revision",
+                        "type": "string"
+                    },
+                    {
+                        "default": "",
+                        "description": "Refspec to fetch before checking out revision.",
+                        "name": "refspec",
+                        "type": "string"
+                    },
+                    {
+                        "default": "true",
+                        "description": "Initialize and fetch git submodules.",
+                        "name": "submodules",
+                        "type": "string"
+                    },
+                    {
+                        "default": "1",
+                        "description": "Perform a shallow clone, fetching only the most recent N commits.",
+                        "name": "depth",
+                        "type": "string"
+                    },
+                    {
+                        "default": "true",
+                        "description": "Set the `http.sslVerify` global git config. Setting this to `false` is not advised unless you are sure that you trust your git remote.",
+                        "name": "sslVerify",
+                        "type": "string"
+                    },
+                    {
+                        "default": "",
+                        "description": "Subdirectory inside the `output` Workspace to clone the repo into.",
+                        "name": "subdirectory",
+                        "type": "string"
+                    },
+                    {
+                        "default": "",
+                        "description": "Define the directory patterns to match or exclude when performing a sparse checkout.",
+                        "name": "sparseCheckoutDirectories",
+                        "type": "string"
+                    },
+                    {
+                        "default": "true",
+                        "description": "Clean out the contents of the destination directory if it already exists before cloning.",
+                        "name": "deleteExisting",
+                        "type": "string"
+                    },
+                    {
+                        "default": "",
+                        "description": "HTTP proxy server for non-SSL requests.",
+                        "name": "httpProxy",
+                        "type": "string"
+                    },
+                    {
+                        "default": "",
+                        "description": "HTTPS proxy server for SSL requests.",
+                        "name": "httpsProxy",
+                        "type": "string"
+                    },
+                    {
+                        "default": "",
+                        "description": "Opt out of proxying HTTP/HTTPS requests.",
+                        "name": "noProxy",
+                        "type": "string"
+                    },
+                    {
+                        "default": "true",
+                        "description": "Log the commands that are executed during `git-clone`'s operation.",
+                        "name": "verbose",
+                        "type": "string"
+                    },
+                    {
+                        "default": "gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/git-init:v0.21.0",
+                        "description": "The image providing the git-init binary that this Task runs.",
+                        "name": "gitInitImage",
+                        "type": "string"
+                    },
+                    {
+                        "default": "/tekton/home",
+                        "description": "Absolute path to the user's home directory. Set this explicitly if you are running the image as a non-root user or have overridden\nthe gitInitImage param with an image containing custom user configuration.\n",
+                        "name": "userHome",
+                        "type": "string"
+                    }
+                ],
+                "results": [
+                    {
+                        "description": "The precise commit SHA that was fetched by this Task.",
+                        "name": "commit"
+                    },
+                    {
+                        "description": "The precise URL that was fetched by this Task.",
+                        "name": "url"
+                    }
+                ],
+                "steps": [
+                    {
+                        "env": [
+                            {
+                                "name": "HOME",
+                                "value": "$(params.userHome)"
+                            },
+                            {
+                                "name": "PARAM_URL",
+                                "value": "$(params.url)"
+                            },
+                            {
+                                "name": "PARAM_REVISION",
+                                "value": "$(params.revision)"
+                            },
+                            {
+                                "name": "PARAM_REFSPEC",
+                                "value": "$(params.refspec)"
+                            },
+                            {
+                                "name": "PARAM_SUBMODULES",
+                                "value": "$(params.submodules)"
+                            },
+                            {
+                                "name": "PARAM_DEPTH",
+                                "value": "$(params.depth)"
+                            },
+                            {
+                                "name": "PARAM_SSL_VERIFY",
+                                "value": "$(params.sslVerify)"
+                            },
+                            {
+                                "name": "PARAM_SUBDIRECTORY",
+                                "value": "$(params.subdirectory)"
+                            },
+                            {
+                                "name": "PARAM_DELETE_EXISTING",
+                                "value": "$(params.deleteExisting)"
+                            },
+                            {
+                                "name": "PARAM_HTTP_PROXY",
+                                "value": "$(params.httpProxy)"
+                            },
+                            {
+                                "name": "PARAM_HTTPS_PROXY",
+                                "value": "$(params.httpsProxy)"
+                            },
+                            {
+                                "name": "PARAM_NO_PROXY",
+                                "value": "$(params.noProxy)"
+                            },
+                            {
+                                "name": "PARAM_VERBOSE",
+                                "value": "$(params.verbose)"
+                            },
+                            {
+                                "name": "PARAM_SPARSE_CHECKOUT_DIRECTORIES",
+                                "value": "$(params.sparseCheckoutDirectories)"
+                            },
+                            {
+                                "name": "PARAM_USER_HOME",
+                                "value": "$(params.userHome)"
+                            },
+                            {
+                                "name": "WORKSPACE_OUTPUT_PATH",
+                                "value": "$(workspaces.output.path)"
+                            },
+                            {
+                                "name": "WORKSPACE_SSH_DIRECTORY_BOUND",
+                                "value": "$(workspaces.ssh-directory.bound)"
+                            },
+                            {
+                                "name": "WORKSPACE_SSH_DIRECTORY_PATH",
+                                "value": "$(workspaces.ssh-directory.path)"
+                            },
+                            {
+                                "name": "WORKSPACE_BASIC_AUTH_DIRECTORY_BOUND",
+                                "value": "$(workspaces.basic-auth.bound)"
+                            },
+                            {
+                                "name": "WORKSPACE_BASIC_AUTH_DIRECTORY_PATH",
+                                "value": "$(workspaces.basic-auth.path)"
+                            },
+                            {
+                                "name": "WORKSPACE_SSL_CA_DIRECTORY_BOUND",
+                                "value": "$(workspaces.ssl-ca-directory.bound)"
+                            },
+                            {
+                                "name": "WORKSPACE_SSL_CA_DIRECTORY_PATH",
+                                "value": "$(workspaces.ssl-ca-directory.path)"
+                            }
+                        ],
+                        "image": "$(params.gitInitImage)",
+                        "name": "clone",
+                        "resources": {},
+                        "script": "#!/usr/bin/env sh\nset -eu\n\nif [ \"${PARAM_VERBOSE}\" = \"true\" ] ; then\n  set -x\nfi\n\n\nif [ \"${WORKSPACE_BASIC_AUTH_DIRECTORY_BOUND}\" = \"true\" ] ; then\n  cp \"${WORKSPACE_BASIC_AUTH_DIRECTORY_PATH}/.git-credentials\" \"${PARAM_USER_HOME}/.git-credentials\"\n  cp \"${WORKSPACE_BASIC_AUTH_DIRECTORY_PATH}/.gitconfig\" \"${PARAM_USER_HOME}/.gitconfig\"\n  chmod 400 \"${PARAM_USER_HOME}/.git-credentials\"\n  chmod 400 \"${PARAM_USER_HOME}/.gitconfig\"\nfi\n\nif [ \"${WORKSPACE_SSH_DIRECTORY_BOUND}\" = \"true\" ] ; then\n  cp -R \"${WORKSPACE_SSH_DIRECTORY_PATH}\" \"${PARAM_USER_HOME}\"/.ssh\n  chmod 700 \"${PARAM_USER_HOME}\"/.ssh\n  chmod -R 400 \"${PARAM_USER_HOME}\"/.ssh/*\nfi\n\nif [ \"${WORKSPACE_SSL_CA_DIRECTORY_BOUND}\" = \"true\" ] ; then\n   export GIT_SSL_CAPATH=\"${WORKSPACE_SSL_CA_DIRECTORY_PATH}\"\nfi\nCHECKOUT_DIR=\"${WORKSPACE_OUTPUT_PATH}/${PARAM_SUBDIRECTORY}\"\n\ncleandir() {\n  # Delete any existing contents of the repo directory if it exists.\n  #\n  # We don't just \"rm -rf ${CHECKOUT_DIR}\" because ${CHECKOUT_DIR} might be \"/\"\n  # or the root of a mounted volume.\n  if [ -d \"${CHECKOUT_DIR}\" ] ; then\n    # Delete non-hidden files and directories\n    rm -rf \"${CHECKOUT_DIR:?}\"/*\n    # Delete files and directories starting with . but excluding ..\n    rm -rf \"${CHECKOUT_DIR}\"/.[!.]*\n    # Delete files and directories starting with .. plus any other character\n    rm -rf \"${CHECKOUT_DIR}\"/..?*\n  fi\n}\n\nif [ \"${PARAM_DELETE_EXISTING}\" = \"true\" ] ; then\n  cleandir\nfi\n\ntest -z \"${PARAM_HTTP_PROXY}\" || export HTTP_PROXY=\"${PARAM_HTTP_PROXY}\"\ntest -z \"${PARAM_HTTPS_PROXY}\" || export HTTPS_PROXY=\"${PARAM_HTTPS_PROXY}\"\ntest -z \"${PARAM_NO_PROXY}\" || export NO_PROXY=\"${PARAM_NO_PROXY}\"\n\n/ko-app/git-init \\\n  -url=\"${PARAM_URL}\" \\\n  -revision=\"${PARAM_REVISION}\" \\\n  -refspec=\"${PARAM_REFSPEC}\" \\\n  -path=\"${CHECKOUT_DIR}\" \\\n  -sslVerify=\"${PARAM_SSL_VERIFY}\" \\\n  -submodules=\"${PARAM_SUBMODULES}\" \\\n  -depth=\"${PARAM_DEPTH}\" \\\n  -sparseCheckoutDirectories=\"${PARAM_SPARSE_CHECKOUT_DIRECTORIES}\"\ncd \"${CHECKOUT_DIR}\"\nRESULT_SHA=\"$(git rev-parse HEAD)\"\nEXIT_CODE=\"$?\"\nif [ \"${EXIT_CODE}\" != 0 ] ; then\n  exit \"${EXIT_CODE}\"\nfi\nprintf \"%s\" \"${RESULT_SHA}\" \u003e \"$(results.commit.path)\"\nprintf \"%s\" \"${PARAM_URL}\" \u003e \"$(results.url.path)\"\n"
+                    }
+                ],
+                "workspaces": [
+                    {
+                        "description": "The git repo will be cloned onto the volume backing this Workspace.",
+                        "name": "output"
+                    },
+                    {
+                        "description": "A .ssh directory with private key, known_hosts, config, etc. Copied to\nthe user's home before git commands are executed. Used to authenticate\nwith the git remote when performing the clone. Binding a Secret to this\nWorkspace is strongly recommended over other volume types.\n",
+                        "name": "ssh-directory",
+                        "optional": true
+                    },
+                    {
+                        "description": "A Workspace containing a .gitconfig and .git-credentials file. These\nwill be copied to the user's home before any git commands are run. Any\nother files in this Workspace are ignored. It is strongly recommended\nto use ssh-directory over basic-auth whenever possible and to bind a\nSecret to this Workspace over other volume types.\n",
+                        "name": "basic-auth",
+                        "optional": true
+                    },
+                    {
+                        "description": "A workspace containing CA certificates, this will be used by Git to\nverify the peer with when fetching or pushing over HTTPS.\n",
+                        "name": "ssl-ca-directory",
+                        "optional": true
+                    }
+                ]
+            }
+        },
+        {
+            "apiVersion": "tekton.dev/v1beta1",
+            "kind": "Task",
+            "metadata": {
+                "name": "run-test"
+            },
+            "spec": {
+                "steps": [
+                    {
+                        "image": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/agent-dotnet:latest",
+                        "name": "run-tests",
+                        "resources": {},
+                        "script": "#!/usr/bin/env sh \ncd \"${WORKSPACE_TESTFILES_PATH}output/functional-tests/bdd-tests\"\nls -l  \ndotnet test --filter Category=@pipeline --logger junit;LogFilePath=functionalResults.xml \n",
+                        "workingDir": "/workspace/output/functional-tests/bdd-tests"
+                    }
+                ],
+                "workspaces": [
+                    {
+                        "description": "A workspace containing the files to test",
+                        "name": "output"
+                    }
+                ]
+            }
+        },
+        {
+            "apiVersion": "tekton.dev/v1beta1",
+            "kind": "Task",
+            "metadata": {                
+                "name": "smoke-test"
+            },
+            "spec": {
+                "steps": [
+                    {
+                        "image": "image-registry.openshift-image-registry.svc:5000/b7aa30-tools/agent-dotnet:latest",
+                        "name": "run-tests",
+                        "resources": {},
+                        "script": "#!/usr/bin/env sh \n# cd \"${WORKSPACE_TESTFILES_PATH}output/functional-tests/smoke-tests\"\nls -l \nmkdir obj \ndotnet test --logger junit;LogFilePath=functionalResults.xml \n",
+                        "workingDir": "/workspace/output/functional-tests/smoke-tests"
+                    }
+                ],
+                "workspaces": [
+                    {
+                        "description": "A workspace containing the files to test",
+                        "name": "output"
+                    }
+                ]
+            }
+        },
+        {
+            "apiVersion": "tekton.dev/v1beta1",
+            "kind": "Pipeline",
+            "metadata": {
+                "name": "carla-spice-sync-build"
+            },
+            "spec": {
+                "tasks": [
+                    {
+                        "name": "build",
+                        "params": [
+                            {
+                                "name": "SCRIPT",
+                                "value": "oc start-build carla-spice-sync-service -w --follow \n"
+                            }
+                        ],
+                        "taskRef": {
+                            "kind": "ClusterTask",
+                            "name": "openshift-client"
+                        }
+                    },
+                    {
+                        "name": "tag-images",
+                        "params": [
+                            {
+                                "name": "SCRIPT",
+                                "value": "oc tag carla-spice-sync-service:latest carla-spice-sync-service:dev\noc tag carla-spice-sync-service:latest carla-spice-sync-service:test\n"
+                            }
+                        ],
+                        "runAfter": [
+                            "build"
+                        ],
+                        "taskRef": {
+                            "kind": "ClusterTask",
+                            "name": "openshift-client"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "apiVersion": "tekton.dev/v1beta1",
+            "kind": "Pipeline",
+            "metadata": {
+                "name": "geocoder-build"
+            },
+            "spec": {
+                "tasks": [
+                    {
+                        "name": "build",
+                        "params": [
+                            {
+                                "name": "SCRIPT",
+                                "value": "oc start-build geocoder-service -w --follow \n"
+                            }
+                        ],
+                        "taskRef": {
+                            "kind": "ClusterTask",
+                            "name": "openshift-client"
+                        }
+                    },
+                    {
+                        "name": "tag-images",
+                        "params": [
+                            {
+                                "name": "SCRIPT",
+                                "value": "oc tag geocoder-service:latest geocoder-service:dev\noc tag geocoder-service:latest geocoder-service:test\n"
+                            }
+                        ],
+                        "runAfter": [
+                            "build"
+                        ],
+                        "taskRef": {
+                            "kind": "ClusterTask",
+                            "name": "openshift-client"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "apiVersion": "tekton.dev/v1beta1",
+            "kind": "Pipeline",
+            "metadata": {
+                "name": "file-manager-build"
+            },
+            "spec": {
+                "tasks": [
+                    {
+                        "name": "build",
+                        "params": [
+                            {
+                                "name": "SCRIPT",
+                                "value": "oc start-build file-manager-service -w --follow \n"
+                            }
+                        ],
+                        "taskRef": {
+                            "kind": "ClusterTask",
+                            "name": "openshift-client"
+                        }
+                    },
+                    {
+                        "name": "tag-images",
+                        "params": [
+                            {
+                                "name": "SCRIPT",
+                                "value": "oc tag file-manager-service:latest file-manager-service:dev\noc tag file-manager-service:latest file-manager-service:test\n"
+                            }
+                        ],
+                        "runAfter": [
+                            "build"
+                        ],
+                        "taskRef": {
+                            "kind": "ClusterTask",
+                            "name": "openshift-client"
+                        }
+                    }
+                ]
+            }
+        }
+
+    ],
+    "parameters": [
+      {
+        "name": "NAME",
+        "displayName": "Name",
+        "description": "The name assigned to all of the OpenShift resources associated to the nexus instance.",
+        "required": true,
+        "value": "tekton-pipelines"
+      }
+    ]
+  }
