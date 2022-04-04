@@ -281,7 +281,6 @@ export class EventComponent extends FormBase implements OnInit {
   }
 
   getIsOpen(locationIndex: number, eventIndex: number): boolean {
-    console.log(this.isOpen);
     if(this.isOpen[locationIndex] === undefined) {
       return true;
     }
@@ -290,8 +289,6 @@ export class EventComponent extends FormBase implements OnInit {
   }
 
   setIsOpen(locationIndex: number, eventIndex: number, isOpen: boolean) {
-    console.log(this.isOpen);
-    console.log(isOpen);
     if(this.isOpen[locationIndex] === undefined) {
       this.isOpen[locationIndex] = [];
     }
