@@ -242,7 +242,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
       tempDateTo: [''],
       pin: ['', [this.requireOneOfGroupValidator(['pin', 'establishmentParcelId'])]],
       holdsOtherManufactureLicence1: [false],
-      holdsOtherManufactureLicence2: [false]
+      holdsOtherManufactureLicence2: [false],
+      hasReadTeamAndCondition: ['', Validators.requiredTrue],
+      isLocalZoningAllow: ['', Validators.requiredTrue],
+      isLGFNSuport: ['', Validators.requiredTrue],
     });
 
 
@@ -304,14 +307,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
           this.updateDescriptionRequired(checked, 'patioLiquorCarriedDescription');
         });
       }
-
       this.updatePatioRequired(checked);
-
-
     });
-
-
-
 
     this.form.get('indigenousNation').valueChanges
       .pipe(filter(value => value && value.length >= 3),
@@ -1324,6 +1321,18 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.validationMessages.push('Resort community description is required.');
     }
 
+    if (!this.form.get('hasReadTeamAndCondition').value) {
+      valid = false;
+      this.validationMessages.push('Please confirm have read and understand the term and conditions.');
+    } 
+    if (!this.form.get('isLocalZoningAllow').value) {
+      valid = false;
+      this.validationMessages.push('Please confirm local zoning allows for the operation of a picnic area endorsement.');
+    }
+    if (!this.form.get('isLGFNSuport').value) {
+      valid = false;
+      this.validationMessages.push('Please confirm local government/First Nation supports the proposed capacity for the picnic area endorsement.');
+    }
     return valid && (this.form.valid || this.form.disabled);
   }
 
@@ -1472,7 +1481,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
       zoningStatus: 'Please enter a value for zoning status',
       pin: 'Please enter a PIN or PID',
       policeJurisdiction: 'Please select a police jurisdiction for the establishment',
-      indigenousNation: 'Please select a local government or an Indigenous Nation'
+      indigenousNation: 'Please select a local government or an Indigenous Nation',
+      hasReadTeamAndCondition: 'Please confirm have read team and conditions',
+      isLocalZoningAllow: 'Please confirm local zoning allow',
+      isLGFNSuport:'Please confirm LG/FN support'
     };
 
 

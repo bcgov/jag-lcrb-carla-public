@@ -220,4 +220,8 @@ export interface Application {
   storeOpenDate: Date;
   confirmLiquorSalesIsNotPrimaryBusiness: number;
   pin: string;
+
+  hasReadTeamAndCondition: boolean;
+  isLocalZoningAllow: boolean;
+  isLGFNSuport: boolean;
 }

@@ -730,6 +730,11 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public DateTimeOffset? StoreOpenDate { get; set; }
 
         public int? ConfirmLiquorSalesIsNotPrimaryBusiness { get; set; }
-        
+
+        //LCSD-6304 add three fields:
+        public bool  hasReadTeamAndCondition { get; set; }
+        public bool  isLocalZoningAllow { get; set; }
+        public bool isLGFNSuport { get; set; }
+       
     }
 }

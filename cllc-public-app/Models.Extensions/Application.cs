@@ -230,6 +230,10 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioHasadditionalservices = from.HasAdditionalServices;
             to.AdoxioStoreopendate = from.StoreOpenDate;
             to.AdoxioConfirmliquorsalesisnotprimarybusiness = from.ConfirmLiquorSalesIsNotPrimaryBusiness;
+            //TODO: LCSD-6304 add three fields:
+            //from.hasReadTeamAndCondition;
+            //from.isLGFNSuport;
+            //from.isLocalZoningAllow;
     }
 
 
@@ -579,7 +583,11 @@ namespace Gov.Lclb.Cllb.Public.Models
                 HasAdditionalServices = dynamicsApplication.AdoxioHasadditionalservices,
                 StoreOpenDate = dynamicsApplication.AdoxioStoreopendate,
                 ConfirmLiquorSalesIsNotPrimaryBusiness = dynamicsApplication.AdoxioConfirmliquorsalesisnotprimarybusiness,
-                Pin = dynamicsApplication.AdoxioPin
+                Pin = dynamicsApplication.AdoxioPin,
+                //TODO LCSD-6304 add three field:
+                //hasReadTeamAndCondition=dynamicsApplication
+                //isLocalZoningAllow=dynamicsApplication,
+                //isLGFNSuport=dynamicsApplication
             };
 
 
