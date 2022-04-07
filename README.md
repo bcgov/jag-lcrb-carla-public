@@ -122,32 +122,26 @@ Note that for development purposes you should set ASPNETCORE_ENVIRONMENT to Deve
 DevOps Process
 -------------
 
-## Jenkins
+## Pipelines
 
-If any pipeline steps do not start, a common root cause is problems with Jenkins.  Restart the Jenkins service by scaling it down to 0 pods, then back up to 1 pod.
+This project no longer uses Jenkins; pipelines for key operations have been converted to Tekton, which run as native pipelines in OpenShift.
 
 ## DEV builds
 Dev builds are triggered by source code being committed to the repository.  This process triggers a webhook which initiates the DEV build pipeline.
 
-Login to the OpenShift Web Console and navigate to the Tools project for the system, and view the status of the DEV portal pipeline build config to see the status of the build.
+Login to the OpenShift Web Console and navigate to the Tools project for the system, and view the status of the "dev-build" pipeline build to see the status of the build.
 
 ## TEST Builds
 Merge code to the "master" branch from the "develop" branch to trigger a TEST build.
 
 TEST builds are triggered by source code being committed to the master branch of the repository.  This process triggers a webhook which initiates the TEST build pipeline.
 
-Login to the OpenShift Web Console and navigate to the Tools project for the system, and view the status of the TEST portal pipeline build config to see the status of the build. 
+Login to the OpenShift Web Console and navigate to the Tools project for the system, and view the status of the "uat-build" pipeline to see the status of the build. 
 
 ## Promotion to PROD
-Login to the OpenShift Web Console and navigate to the Tools project for the system.  Go to the Build Config for the PROD Pipeline.  Click  Start Build. 
+Login to the OpenShift Web Console and navigate to the Tools project for the system.  Go to the Pipelines section and find the "promote-prod" Pipeline.  Click the Start option to start the pipeline. 
 
-Navigate to the Logs for the build and click the link to go to the Jenkins logs.
-
-View the Console Logs.
-
-You will then have to CONFIRM the build by clicking on the related log item for the build that has been started.
-
-##Hangfire
+## Hangfire
 This system makes use of Hangfire for scheduling.  More information on Hangfire can be found at the website [hangfire.io](https://hangfire.io); the system uses a stock configuration of Hangfire.
 
 To login to a hangfire dashboard, forward traffic from the OpenShift pod for the service you wish to see the dashboard for, and access http://localhost:8080
