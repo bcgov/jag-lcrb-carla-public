@@ -357,6 +357,16 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     start or open a change job from a licence row
   */
   doAction(licence: ApplicationLicenseSummary, actionName: string) {
+    // Hefen.Zhou Note: LCSD-6229 Licensees should be able to submit more than one temporary change job at a time 
+    let tempApplications = [
+      "Temporary Change to Hours of Sale (FP1)",
+      "Temporary Change to Hours of Sale (FP2)",
+      "Temporary Change to Hours of Sale (LP & MFR)",
+      "Temporary Delicensing",
+      "Temporary Patron Participation Entertainment Endorsement",
+      "Temporary Use Area Endorsement"
+    ];
+    let isTemporaryApplication = tempApplications.includes(actionName);
     // search for an existing application type that matches the type specified
     const actionApplication = licence.actionApplications.find(
       app => app.applicationTypeName === actionName
@@ -364,7 +374,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
         && app.applicationStatus !== "Active");
 
     // if we found an action application
-    if (actionApplication) {
+    if (actionApplication && !isTemporaryApplication) {
       // and if it wasn't paid for
       if (actionApplication.isPaid === false) {
         // open it up so we can continue it
