@@ -429,16 +429,20 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
             this.form.patchValue(noNulls);
 
-            //LCSD-5764 get address from parent application if available
-            if (this.application != null && this.application.parentApplicationId != null) {
-              this.applicationDataService.getApplicationById(this.application.parentApplicationId)
-                .pipe(takeWhile(() => this.componentActive))
-                .subscribe((data: Application) => {
-                  this.form.get('assignedLicence').get('establishmentAddressStreet').setValue(data.establishmentAddressStreet);
-                  this.form.get('assignedLicence').get('establishmentAddressCity').setValue(data.establishmentAddressCity);
-                  this.form.get('assignedLicence').get('establishmentAddressPostalCode').setValue(data.establishmentAddressPostalCode);
-                  this.form.get('assignedLicence').get('establishmentParcelId').setValue(data.establishmentParcelId.replace(/-/g, ''));
-                });
+            //LCSD-5764 get address from application if no assigned license
+            if (this.application != null && this.application.assignedLicence == null) {
+              if (this.application.establishmentAddressStreet != null) {
+                this.form.get('assignedLicence').get('establishmentAddressStreet').setValue(this.application.establishmentAddressStreet);
+              }
+              if (this.application.establishmentAddressCity != null) {
+                this.form.get('assignedLicence').get('establishmentAddressCity').setValue(this.application.establishmentAddressCity);
+              }
+              if (this.application.establishmentAddressPostalCode != null) {
+                this.form.get('assignedLicence').get('establishmentAddressPostalCode').setValue(this.application.establishmentAddressPostalCode);
+              }
+              if (this.application.establishmentParcelId != null) {
+                this.form.get('assignedLicence').get('establishmentParcelId').setValue(this.application.establishmentParcelId.replace(/-/g, ''));
+              }
             }
 
             if (data.indigenousNation) {
