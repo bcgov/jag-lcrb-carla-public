@@ -431,10 +431,18 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
             //LCSD-5764 get address from application if no assigned license
             if (this.application != null && this.application.assignedLicence == null) {
-              this.form.get('assignedLicence').get('establishmentAddressStreet').setValue(this.application.establishmentAddressStreet);
-              this.form.get('assignedLicence').get('establishmentAddressCity').setValue(this.application.establishmentAddressCity);
-              this.form.get('assignedLicence').get('establishmentAddressPostalCode').setValue(this.application.establishmentAddressPostalCode);
-              this.form.get('assignedLicence').get('establishmentParcelId').setValue(this.application.establishmentParcelId.replace(/-/g, ''));
+              if (this.application.establishmentAddressStreet != null) {
+                this.form.get('assignedLicence').get('establishmentAddressStreet').setValue(this.application.establishmentAddressStreet);
+              }
+              if (this.application.establishmentAddressCity != null) {
+                this.form.get('assignedLicence').get('establishmentAddressCity').setValue(this.application.establishmentAddressCity);
+              }
+              if (this.application.establishmentAddressPostalCode != null) {
+                this.form.get('assignedLicence').get('establishmentAddressPostalCode').setValue(this.application.establishmentAddressPostalCode);
+              }
+              if (this.application.establishmentParcelId != null) {
+                this.form.get('assignedLicence').get('establishmentParcelId').setValue(this.application.establishmentParcelId.replace(/-/g, ''));
+              }
             }
 
             if (data.indigenousNation) {
