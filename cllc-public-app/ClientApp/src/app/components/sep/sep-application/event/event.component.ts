@@ -35,6 +35,7 @@ export class EventComponent extends FormBase implements OnInit {
   validationMessages: string[];
   previewCities: AutoCompleteItem[] = [];
   autocompleteCities: AutoCompleteItem[] = [];
+  isOpen: boolean[][] = [];
   get minDate() {
     return new Date();
   }
@@ -101,7 +102,7 @@ export class EventComponent extends FormBase implements OnInit {
       }
     }
 
-   this.form.get("sepCity").valueChanges
+    this.form.get("sepCity").valueChanges
       .pipe(filter(value => value && value.length >= 3),
         tap(_ => {
           this.autocompleteCities = [];
@@ -160,6 +161,19 @@ export class EventComponent extends FormBase implements OnInit {
     if (location) {
       result = this.locations.at(locationIndex)
         .get("eventDates") as FormArray;
+      
+      // Initialize isOpen array for this location if not already tracked
+      if(!this.isOpen[locationIndex]) {
+        let isOpen: boolean[] = []
+        for(let i = 0; i < result.controls.length; i++) {
+          if(i == result.controls.length - 1) {
+            isOpen.push(true);
+          } else {
+            isOpen.push(false);
+          }
+        }
+        this.isOpen[locationIndex] = isOpen;
+      }
     }
     return result;
   }
@@ -264,6 +278,22 @@ export class EventComponent extends FormBase implements OnInit {
     }
     datesForm.patchValue(val);
     return datesForm;
+  }
+
+  getIsOpen(locationIndex: number, eventIndex: number): boolean {
+    if(this.isOpen[locationIndex] === undefined) {
+      return true;
+    }
+
+    return this.isOpen[locationIndex][eventIndex];
+  }
+
+  setIsOpen(locationIndex: number, eventIndex: number, isOpen: boolean) {
+    if(this.isOpen[locationIndex] === undefined) {
+      this.isOpen[locationIndex] = [];
+    }
+
+    this.isOpen[locationIndex][eventIndex] = isOpen;
   }
 
   customRequiredCheckboxValidator(): ValidatorFn {
