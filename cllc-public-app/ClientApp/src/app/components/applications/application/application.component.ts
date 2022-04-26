@@ -242,7 +242,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
       tempDateTo: [''],
       pin: ['', [this.requireOneOfGroupValidator(['pin', 'establishmentParcelId'])]],
       holdsOtherManufactureLicence1: [false],
-      holdsOtherManufactureLicence2: [false]
+      holdsOtherManufactureLicence2: [false],
+      relatedLicenceNumber: ['']
     });
 
 
