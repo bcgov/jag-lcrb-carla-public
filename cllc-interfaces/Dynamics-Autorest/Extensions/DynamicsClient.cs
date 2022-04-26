@@ -151,7 +151,8 @@ namespace Gov.Lclb.Cllb.Interfaces
                     "adoxio_localgovindigenousnationid",
                     "adoxio_PoliceJurisdictionId",
                     "adoxio_application_SharePointDocumentLocations",
-                    "adoxio_adoxio_application_adoxio_applicationtermsconditionslimitation_Application"
+                    "adoxio_adoxio_application_adoxio_applicationtermsconditionslimitation_Application",
+                    "adoxio_RelatedLicence"
                 };
 
                 // fetch from Dynamics.
