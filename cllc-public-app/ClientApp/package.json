@@ -118,13 +118,14 @@
   },
   "browserslist": {
     "production": [
-      "last 2 versions",
-      "ie 11",
-      "not IE 10"
+      "defaults",
+      "not IE 11",
+      "maintained node versions"
     ],
     "development": [
-      "last 1 Chrome version",
-      "not IE 10"
+      "defaults",
+      "not IE 11",
+      "maintained node versions"
     ]
   }
 }
