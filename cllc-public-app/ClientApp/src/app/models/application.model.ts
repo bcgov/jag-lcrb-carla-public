@@ -220,4 +220,8 @@ export interface Application {
   storeOpenDate: Date;
   confirmLiquorSalesIsNotPrimaryBusiness: number;
   pin: string;
+  //LCSD-6304
+  picnicReadAndAccept: number;
+  picnicConfirmZoning: number;
+  picnicConfirmLGFNCapacity: number;
 }

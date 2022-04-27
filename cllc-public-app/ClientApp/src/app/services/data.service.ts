@@ -5,7 +5,8 @@ export class DataService {
 
   apiPath = "api/";
   headers = new HttpHeaders({
-    'Content-Type': "application/json"
+    'Content-Type': "application/json",
+    'Accept':'application/json'
   });
 
   handleErrorWith503(error: HttpErrorResponse) {
