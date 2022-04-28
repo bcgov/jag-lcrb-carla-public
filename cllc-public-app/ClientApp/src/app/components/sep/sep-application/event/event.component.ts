@@ -35,6 +35,7 @@ export class EventComponent extends FormBase implements OnInit {
   validationMessages: string[];
   previewCities: AutoCompleteItem[] = [];
   autocompleteCities: AutoCompleteItem[] = [];
+  isPacificTimeZone: boolean;
   get minDate() {
     return new Date();
   }
@@ -84,6 +85,7 @@ export class EventComponent extends FormBase implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isPacificTimeZone = true;
     // create a form for the basic details
     this.form = this.fb.group({
       sepCity: ["", [Validators.required, Validators.minLength(2)]],
@@ -119,7 +121,9 @@ export class EventComponent extends FormBase implements OnInit {
           }
         });
   }
-
+  checkTimeZone() {
+    this.isPacificTimeZone = !this.isPacificTimeZone;
+  }
   setFormValue(app: SepApplication) {
     // if there's an app
     if (app) {
@@ -135,7 +139,7 @@ export class EventComponent extends FormBase implements OnInit {
     // if we've got any event locations loaded
     if (app?.eventLocations?.length > 0) {
       app.eventLocations.forEach(loc => {
-        loc.eventDates = loc.eventDates || [];
+        loc.eventDates = loc.eventDates || [];        
         loc.serviceAreas = loc.serviceAreas || [];
         this.addLocation(loc);
       });
@@ -179,6 +183,7 @@ export class EventComponent extends FormBase implements OnInit {
       eventLocationPostalCode: ["", [Validators.required, Validators.pattern(CanadaPostalRegex)]],
       serviceAreas: this.fb.array([]),    // form array of service areas
       eventDates: this.fb.array([]),      // form array of event dates
+      
     });
 
     // patch the values in
@@ -210,6 +215,7 @@ export class EventComponent extends FormBase implements OnInit {
       //console.log(location.eventDates.length === 0);
       //console.log("creating blank event date");
       location.eventDates = [{} as SepSchedule];
+
     }
 
     // loop through the event dates
@@ -260,7 +266,7 @@ export class EventComponent extends FormBase implements OnInit {
 
     // Set default to event start date
     if (!val.eventDate) {
-      val.eventDate = this?.sepApplication?.eventStartDate;
+      val.eventDate = this?.sepApplication?.eventStartDate;     
     }
     datesForm.patchValue(val);
     return datesForm;
