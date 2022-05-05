@@ -19,11 +19,11 @@ A custom version of Odata-OpenAPI is included with the source code.
 ```
 
 @IF EXIST "%~dp0\node.exe" (
-  "%~dp0\node.exe" "--max-old-space-size=5192" "%~dp0\node_modules\autorest\dist\app.js" %*
+  "%~dp0\node.exe" "--max-old-space-size=30000" "%~dp0\node_modules\autorest\dist\app.js" %*
 ) ELSE (
   @SETLOCAL
   @SET PATHEXT=%PATHEXT:;.JS;=;%
-  node --max-old-space-size=5192 "%~dp0\node_modules\autorest\dist\app.js" %*
+  node --max-old-space-size=30000 "%~dp0\node_modules\autorest\dist\app.js" %*
 )
 ```
 
