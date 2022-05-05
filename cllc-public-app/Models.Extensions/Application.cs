@@ -230,7 +230,11 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioHasadditionalservices = from.HasAdditionalServices;
             to.AdoxioStoreopendate = from.StoreOpenDate;
             to.AdoxioConfirmliquorsalesisnotprimarybusiness = from.ConfirmLiquorSalesIsNotPrimaryBusiness;
-    }
+            //LCSD-6304
+            to.AdoxioPicnicconfirmslgfnsupportscapacity = from.PicnicConfirmLGFNCapacity;
+            to.AdoxioPicnicconfirmszoning = from.PicnicConfirmZoning;
+            to.AdoxioPicnicreadandaccepttermsandconditions = from.PicnicReadAndAccept;
+        }
 
 
         public static void CopyValues(this MicrosoftDynamicsCRMadoxioApplication to, CovidApplication from)
@@ -579,7 +583,11 @@ namespace Gov.Lclb.Cllb.Public.Models
                 HasAdditionalServices = dynamicsApplication.AdoxioHasadditionalservices,
                 StoreOpenDate = dynamicsApplication.AdoxioStoreopendate,
                 ConfirmLiquorSalesIsNotPrimaryBusiness = dynamicsApplication.AdoxioConfirmliquorsalesisnotprimarybusiness,
-                Pin = dynamicsApplication.AdoxioPin
+                Pin = dynamicsApplication.AdoxioPin,
+                //LCSD-6304
+                PicnicConfirmLGFNCapacity = dynamicsApplication.AdoxioPicnicconfirmslgfnsupportscapacity,
+                PicnicConfirmZoning = dynamicsApplication.AdoxioPicnicconfirmszoning,
+                PicnicReadAndAccept = dynamicsApplication.AdoxioPicnicreadandaccepttermsandconditions
             };
 
 
