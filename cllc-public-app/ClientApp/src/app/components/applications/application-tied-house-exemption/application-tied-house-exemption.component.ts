@@ -89,6 +89,8 @@ export class ApplicationTiedHouseExemptionComponent extends FormBase implements 
       consent: ["", [this.customRequiredCheckboxValidator()]],
       authorizedToSubmit: ["", [this.customRequiredCheckboxValidator()]],
       signatureAgreement: ["", [this.customRequiredCheckboxValidator()]],
+      manufacturerProductionAmountforPrevYear  : [""],
+      manufacturerProductionAmountUnit :[""]
     });
 
     // Get licence data
@@ -155,7 +157,7 @@ export class ApplicationTiedHouseExemptionComponent extends FormBase implements 
    * @param showProgress
    */
   save(showProgress: boolean = false): Observable<boolean> {
-    return this.licenseDataService.initiateTiedHouseExcemption(this.form.get("assignedLicence.id").value, this.licence.id)
+    return this.licenseDataService.initiateTiedHouseExcemption(this.form.get("assignedLicence.id").value, this.licence.id, this.form.get("manufacturerProductionAmountforPrevYear").value, this.form.get("manufacturerProductionAmountUnit").value)
       .pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
         this.snackBar.open("Error submitting Tied House Exemption", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
