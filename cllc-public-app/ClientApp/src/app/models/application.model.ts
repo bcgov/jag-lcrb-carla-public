@@ -221,4 +221,8 @@ export interface Application {
   confirmLiquorSalesIsNotPrimaryBusiness: number;
   pin: string;
   relatedLicenceNumber: string;
+  //LCSD-6304
+  picnicReadAndAccept: number;
+  picnicConfirmZoning: number;
+  picnicConfirmLGFNCapacity: number;
 }
