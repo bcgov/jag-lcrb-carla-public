@@ -220,4 +220,5 @@ export interface Application {
   storeOpenDate: Date;
   confirmLiquorSalesIsNotPrimaryBusiness: number;
   pin: string;
+  relatedLicenceNumber: string;
 }

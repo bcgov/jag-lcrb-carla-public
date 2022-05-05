@@ -809,6 +809,11 @@ namespace Gov.Lclb.Cllb.Public.Models
 
             }
 
+            if(dynamicsApplication.AdoxioRelatedLicence != null)
+            {
+                applicationVM.RelatedLicenceNumber = dynamicsApplication.AdoxioRelatedLicence.AdoxioLicencenumber;
+            }
+
             return applicationVM;
         }
 
