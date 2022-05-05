@@ -31,7 +31,6 @@
                     <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
                     <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;" *ngIf="form.get('sepCity')?.value?.id">
                         <section>
-
                             <mat-card class="mb-3">
                                 <label for="">Selected City </label>
                                 <div class="ml-2">
@@ -42,11 +41,8 @@
                                     <label for="" class="mr-2">Police Jurisdiction:</label>
                                     <span>{{form.get('sepCity').value.policeJurisdictionName}}</span>
                                 </div>
-
                             </mat-card>
                         </section>
-
-
                     </div>
                     <div class="" style="background-color: #d8292f; padding: 1px;" *ngIf="!form.get('sepCity')?.value?.id">
                       <section  style="background-color: #ffe9e9; padding:20px;">
@@ -54,7 +50,6 @@
                       </section>
                     </div>
                 </section>
-
             </section>
             <div>
                 <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip.toggle()" matTooltip="All locations in the application must be in the same municipality. You may submit more than one application
@@ -77,7 +72,6 @@
         </app-field>
 
         <section formGroupName="eventLocations">
-
             <mat-accordion multi>
                 <mat-expansion-panel [expanded]="true" [formGroupName]="i" class="location-panel"
                     *ngFor="let location of locations.controls; let i = index;">
@@ -277,110 +271,125 @@
                                         </mat-expansion-panel-header>
 
                                         <table class="w-100">
-                                            <tr>
-                                                <td>
-                                                    <app-field label="Date of your event"
-                                                        errorMessage="Please select a value"
-                                                        [valid]="!item.get('eventDate').touched || item.get('eventDate').valid">
-                                                        <input type="text" formControlName="eventDate"
-                                                            style="background-color: #fff; width: 170px;"
-                                                            placeholder="yyyy-mm-dd" readonly class="form-control"
-                                                            [min]="minDate" [matDatepicker]="picker"
-                                                            (focus)="picker.open()" (click)="picker.open()">
-                                                        <mat-datepicker #picker></mat-datepicker>
-                                                    </app-field>
-                                                </td>
-                                                <td>
-                                                    <app-field label="From" errorMessage="Please select a value"
-                                                        [valid]="!item.get('eventStartValue').touched || item.get('eventStartValue').valid">
-                                                        <select class="form-control" formControlName="eventStartValue">
-                                                            <option value=""></option>
-                                                            <option [value]="item.value" *ngFor="let item of timeSlots">
-                                                                {{item.name}}
-                                                            </option>
-                                                        </select>
-                                                    </app-field>
-                                                </td>
-                                                <td>
-                                                    <app-field label="To" errorMessage="Please select a value"
-                                                        [valid]="!item.get('eventEndValue').touched || item.get('eventEndValue').valid">
-                                                        <select class="form-control" formControlName="eventEndValue">
-                                                            <option value=""></option>
-                                                            <option [value]="item.value" *ngFor="let item of timeSlots">
-                                                                {{item.name}}
-                                                            </option>
-                                                        </select>
-                                                    </app-field>
-                                                </td>
-                                                <td class="text-right">
-                                                    <button  [disabled]="disableForm" mat-raised-button color="warn"
-                                                        (click)="removeEventDate(k, location)" *ngIf="k != 0">Remove</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-right">
-                                                    <label>Liquor will be served:</label>
-                                                </td>
-                                                <td>
-                                                    <app-field label="From" errorMessage="Please select a value"
-                                                        [valid]="!item.get('serviceStartValue').touched || item.get('serviceStartValue').valid">
-                                                        <select class="form-control"
-                                                            formControlName="serviceStartValue">
-                                                            <option value=""></option>
-                                                            <option [value]="item.value" *ngFor="let item of timeSlots">
-                                                                {{item.name}}
-                                                            </option>
-                                                        </select>
-                                                    </app-field>
-                                                </td>
-                                                <td>
-                                                    <app-field label="To" errorMessage="Please select a value"
-                                                        [valid]="!item.get('serviceEndValue').touched || item.get('serviceEndValue').valid">
-                                                        <select class="form-control" formControlName="serviceEndValue">
-                                                            <option value=""></option>
-                                                            <option [value]="item.value" *ngFor="let item of timeSlots">
-                                                                {{item.name}}
-                                                            </option>
-                                                        </select>
-                                                    </app-field>
-                                                </td>
-                                                <td></td>
-                                            </tr>
-                                            <tr *ngIf="item?.errors?.range">
-                                                <td></td>
-                                                <td colspan="2">
-                                                    <span class="error-states">
-                                                        {{item?.errors?.range}}
-                                                    </span>
-                                                </td>
-                                            </tr>
-                                            <tr *ngIf="showHoursAlert(item, location)">
-                                                <td colspan="4">
-                                                    <app-error-alert>
-                                                        <p *ngIf="indoorAreaExists(item, location)">
-                                                            Liquor service hours are outside the permitted range for
-                                                            indoor events (9:00 AM - 2:00AM). Hours are subject to
-                                                            futher limitation by the police or local government.
-                                                        </p>
-                                                        <p   *ngIf="outdoorAreaExists(item, location) && !indoorAreaExists(item, location)">
-                                                            Liquor service hours are outside the permitted range for
-                                                            outdoor events (9:00 AM - 10:00 PM). Hours are subject to
-                                                            futher limitation by the police or local government.
-                                                        </p>
+                                          <tr>
+                                            <td>
+                                              <app-field label="Date of your event"
+                                                         errorMessage="Please select a value"
+                                                         [valid]="!item.get('eventDate').touched || item.get('eventDate').valid">
+                                                <input type="text" formControlName="eventDate"
+                                                       style="background-color: #fff; width: 170px;"
+                                                       placeholder="yyyy-mm-dd" readonly class="form-control"
+                                                       [min]="minDate" [matDatepicker]="picker"
+                                                       (focus)="picker.open()" (click)="picker.open()">
+                                                <mat-datepicker #picker></mat-datepicker>
+                                              </app-field>
+                                            </td>
+                                            <td>
+                                              <app-field label="From" errorMessage="Please select a value"
+                                                         [valid]="!item.get('eventStartValue').touched || item.get('eventStartValue').valid">
+                                                <select class="form-control" formControlName="eventStartValue">
+                                                  <option value=""></option>
+                                                  <option [value]="item.value" *ngFor="let item of timeSlots">
+                                                    {{item.name}}
+                                                  </option>
+                                                </select>
+                                              </app-field>
+                                            </td>
+                                            <td>
+                                              <app-field label="To" errorMessage="Please select a value"
+                                                         [valid]="!item.get('eventEndValue').touched || item.get('eventEndValue').valid">
+                                                <select class="form-control" formControlName="eventEndValue">
+                                                  <option value=""></option>
+                                                  <option [value]="item.value" *ngFor="let item of timeSlots">
+                                                    {{item.name}}
+                                                  </option>
+                                                </select>
+                                              </app-field>
+                                            </td>
+                                            <td class="text-right">
+                                              <button [disabled]="disableForm" mat-raised-button color="warn"
+                                                      (click)="removeEventDate(k, location)" *ngIf="k != 0">
+                                                Remove
+                                              </button>
+                                            </td>
+                                          </tr>
+                                          <tr>
+                                            <td class="text-right">
+                                              <label>Liquor will be served:</label>
+                                            </td>
+                                            <td>
+                                              <app-field label="From" errorMessage="Please select a value"
+                                                         [valid]="!item.get('serviceStartValue').touched || item.get('serviceStartValue').valid">
+                                                <select class="form-control"
+                                                        formControlName="serviceStartValue">
+                                                  <option value=""></option>
+                                                  <option [value]="item.value" *ngFor="let item of timeSlots">
+                                                    {{item.name}}
+                                                  </option>
+                                                </select>
+                                              </app-field>
+                                            </td>
+                                            <td>
+                                              <app-field label="To" errorMessage="Please select a value"
+                                                         [valid]="!item.get('serviceEndValue').touched || item.get('serviceEndValue').valid">
+                                                <select class="form-control" formControlName="serviceEndValue">
+                                                  <option value=""></option>
+                                                  <option [value]="item.value" *ngFor="let item of timeSlots">
+                                                    {{item.name}}
+                                                  </option>
+                                                </select>
+                                              </app-field>
+                                            </td>
+                                            <td>
+                                            </td>
+                                          </tr>
+                                          <tr>
+                                            <td colspan="4">
+                                              <div>
+                                                <button (click)="checkTimeZone()">Is the event located outside of Pacific Standard Time? </button>  
+                                                  <app-error-alert *ngIf="!isPacificTimeZone">
+                                                    <p>
+                                                      If the area you’re applying from or if the event is located outside of PST, please note the time on your permit may not accurately reflect the time your event is scheduled to start. Please contact the LCRB team at <a href="mailto:LCRB.SEP@gov.bc.ca">LCRB.SEP@gov.bc.ca</a>
+                                                    </p>
+                                                  </app-error-alert>                                                
+                                              </div>
+                                            </td>
+                                          </tr>
+                                          <tr *ngIf="item?.errors?.range">
+                                            <td></td>
+                                            <td colspan="2">
+                                              <span class="error-states">
+                                                {{item?.errors?.range}}
+                                              </span>
+                                            </td>
+                                          </tr>
+                                          <tr *ngIf="showHoursAlert(item, location)">
+                                            <td colspan="4">
+                                              <app-error-alert>
+                                                <p *ngIf="indoorAreaExists(item, location)">
+                                                  Liquor service hours are outside the permitted range for
+                                                  indoor events (9:00 AM - 2:00AM). Hours are subject to
+                                                  futher limitation by the police or local government.
+                                                </p>
+                                                <p *ngIf="outdoorAreaExists(item, location) && !indoorAreaExists(item, location)">
+                                                  Liquor service hours are outside the permitted range for
+                                                  outdoor events (9:00 AM - 10:00 PM). Hours are subject to
+                                                  futher limitation by the police or local government.
+                                                </p>
 
-                                                        <app-field  [isFullWidth]="true"
-                                                            label="Why would you like to extend your liquor service hours?">
-                                                            <textarea formControlName="liquorServiceHoursExtensionReason" class="form-control w-100" rows="5"></textarea>
-                                                        </app-field>
+                                                <app-field [isFullWidth]="true"
+                                                           label="Why would you like to extend your liquor service hours?">
+                                                  <textarea formControlName="liquorServiceHoursExtensionReason" class="form-control w-100" rows="5"></textarea>
+                                                </app-field>
 
-                                                        <app-field [isFullWidth]="true"
-                                                            label="Please describe what measures you will take to prevent community disturbances.">
-                                                            <textarea formControlName="disturbancePreventionMeasuresDetails" class="form-control w-100" rows="5"></textarea>
-                                                        </app-field>
+                                                <app-field [isFullWidth]="true"
+                                                           label="Please describe what measures you will take to prevent community disturbances.">
+                                                  <textarea formControlName="disturbancePreventionMeasuresDetails" class="form-control w-100" rows="5"></textarea>
+                                                </app-field>
 
-                                                    </app-error-alert>
-                                                </td>
-                                            </tr>
+                                              </app-error-alert>
+                                            </td>
+                                          </tr>
                                         </table>
                                     </mat-expansion-panel>
                                 </mat-accordion>
