@@ -730,6 +730,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public DateTimeOffset? StoreOpenDate { get; set; }
 
         public int? ConfirmLiquorSalesIsNotPrimaryBusiness { get; set; }
-        
+
+        public string RelatedLicenceNumber { get; set; }
+
     }
 }
