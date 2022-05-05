@@ -61,6 +61,7 @@ export class ApplicationType {
   capacityArea: boolean;
 
   hasALRQuestion: boolean;
+  showZoningDeclarations: boolean;
 }
 
 export enum FormControlState {
