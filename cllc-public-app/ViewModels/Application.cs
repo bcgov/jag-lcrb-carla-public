@@ -732,6 +732,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public int? ConfirmLiquorSalesIsNotPrimaryBusiness { get; set; }
 
         public string RelatedLicenceNumber { get; set; }
+        public int? PicnicReadAndAccept { get; set; }
+        public int? PicnicConfirmZoning { get; set; }
+        public int? PicnicConfirmLGFNCapacity { get; set; }
 
     }
 }

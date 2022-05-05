@@ -35,6 +35,70 @@
     </div>
   </section>
 
+  <!--Picnic Area Declaration-->
+  <section class="ngtest-property-details" *ngIf="application?.applicationType?.name === 'Picnic Area Endorsement' && application?.applicationType.showZoningDeclarations">
+    <h3 class="blue-header">PICNIC AREA DECLARATION</h3>
+    <section class="padded-section content-bottom">
+      <div style="position: relative">
+        <section>
+          <p>
+            A picnic area endorsement is an outdoor area, where patrons may consume products that are purchased from the manufacturer or obtained from the sampling area. The picnic area must be approved by the Branch.
+            Applicants must have zoning confirmation and approval of their proposed capacity by LG/FN.
+            The following applies to the endorsement for a picnic area:
+          </p>
+          <ul>
+            <li>It may be a single area or multiple areas provided the combined area does not exceed 1000 square metres.</li>
+            <li>
+              The picnic area is a consumption area only. No sale or service is permitted. Patrons must carry their own purchases or samples to the picnic area.
+            </li>
+            <li>
+              Hours are 9 a.m. to no later than half an hour after sunset (i.e., dusk) unless otherwise restricted by the Branch.
+            </li>
+            <li>
+              Signage is required that identifies the picnic area, states maximum person capacity, and states that the sale and service of liquor is not permitted.
+            </li>
+          </ul>
+          <p>
+            Licensees are expected to understand all relevant regulatory requirements established throughout the <span style="font-style:italic;">Liquor Control and Liquor Act</span>, Liquor Control and Licensing Regulation, and relevant Terms and Conditions handbook.
+          </p>
+          As part of this application, you are required to confirm:
+          <br />
+        </section>
+        <br />
+        <app-field label="You have read and understand the above term and conditions;"
+                   [isFullWidth]="true"
+                   [valid]="isValidOrNotTouched('PicnicReadAndAccept') || application?.applicationType?.name != 'Picnic Area Endorsement'"
+                   errorMessage="Please confirm have read and understand the term and conditions."
+                   [showChevrons]="false">
+          <mat-radio-group formControlName="picnicReadAndAccept">
+            <mat-radio-button class="mr-5" [value]="1">Yes</mat-radio-button>
+            <mat-radio-button class="mr-5" [value]="0">No</mat-radio-button>
+          </mat-radio-group>
+        </app-field>
+        <app-field label="You confirm local zoning allows for the operation of a picnic area endorsement; and"
+                   [isFullWidth]="true"
+                   [valid]="isValidOrNotTouched('PicnicConfirmZoning') || application?.applicationType?.name != 'Picnic Area Endorsement'"
+                   errorMessage="Please confirm local zoning allows for the operation of a picnic area endorsement."
+                   [showChevrons]="false">
+          <mat-radio-group formControlName="picnicConfirmZoning">
+            <mat-radio-button class="mr-5" [value]="1">Yes</mat-radio-button>
+            <mat-radio-button class="mr-5" [value]="0">No</mat-radio-button>
+          </mat-radio-group>
+        </app-field>
+        <app-field label="You confirm your local government/First Nation supports the proposed capacity for the picnic area endorsement."
+                   [isFullWidth]="true"
+                   [valid]="isValidOrNotTouched('PicnicConfirmLGFNCapacity') || application?.applicationType?.name != 'Picnic Area Endorsement'"
+                   errorMessage="Please confirm local government/First Nation supports the proposed capacity for the picnic area endorsement."
+                   [showChevrons]="false">
+          <mat-radio-group formControlName="picnicConfirmLGFNCapacity">
+            <mat-radio-button class="mr-5" [value]="1">Yes</mat-radio-button>
+            <mat-radio-button class="mr-5" [value]="0">No</mat-radio-button>
+          </mat-radio-group>
+        </app-field>
+      </div>
+    </section>
+  </section>
+
   <!-- Before Starting -->
   <h3 *ngIf="htmlContent?.beforeStarting" class="blue-header">
     BEFORE STARTING
