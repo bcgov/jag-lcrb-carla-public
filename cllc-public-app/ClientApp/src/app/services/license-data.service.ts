@@ -38,9 +38,9 @@ export class LicenseDataService extends DataService {
     return this.http.post<Application>(url, { licenceId, accountId }, { headers: this.headers });
   }
 
-  initiateTiedHouseExcemption(licenceId: string, relatedLicenceId: string,prevYearProductionAmount:string,productionAmountUnit:string) {
+  initiateTiedHouseExcemption(licenceId: string, relatedLicenceId: string, manufacturerProductionAmountforPrevYear: string, manufacturerProductionAmountUnit:string) {
     const url = `${this.apiPath}initiate-tied-house-excemption`;
-    return this.http.post<Application>(url, { licenceId, relatedLicenceId,prevYearProductionAmount,productionAmountUnit}, { headers: this.headers });
+    return this.http.post<Application>(url, { licenceId, relatedLicenceId, manufacturerProductionAmountforPrevYear, manufacturerProductionAmountUnit}, { headers: this.headers });
   }
 
   requestTermChange(licenceId: string, accountId: string, termId: string, reason: string) {
