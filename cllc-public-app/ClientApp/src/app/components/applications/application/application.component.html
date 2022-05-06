@@ -99,6 +99,25 @@
     </section>
   </section>
 
+  <section *ngIf="application?.applicationType?.name=='Tied House Exemption Application'">
+    <h3 class="blue-header">Manufacturer previous year production amount</h3>
+    <section class="padded-section content-bottom">
+      <div class="row">
+        <label class="col-md-6 col-xs-12"><strong>Manufacturer production amount (less spillage) for the prevouis year:</strong></label>
+        <div class="col-md-3 col-xs-12" style="align-content:start;">
+          <input class="form-control" type="number" onkeypress="return event.charCode >= 48 && event.charCode<=57" min="1"
+                 formControlName="manufacturerProductionAmountForPrevYear">
+        </div>
+        <div class="col-md-3 col-xs-12" style="align-content:start;">
+          <select class="form-control" style="height:35px;" formControlName="manufacturerProductionAmountUnit">
+            <option value=845280000>Litres</option>
+            <option value=845280001>Hectolitres</option>
+          </select>
+        </div>
+      </div>
+    </section>
+  </section>
+
   <!-- Before Starting -->
   <h3 *ngIf="htmlContent?.beforeStarting" class="blue-header">
     BEFORE STARTING
