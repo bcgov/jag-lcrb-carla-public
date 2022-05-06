@@ -95,13 +95,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         {
                             Id = licence.AdoxioLicencesid,
                             Name = licence.AdoxioName,
-                            EstablishmentName = licence.AdoxioEstablishment.AdoxioName,
-                            Streetaddress = licence.AdoxioEstablishment.AdoxioAddressstreet,
-                            City = licence.AdoxioEstablishment.AdoxioAddressstreet,
+                            EstablishmentName = licence.AdoxioEstablishment?.AdoxioName,
+                            Streetaddress = licence.AdoxioEstablishment?.AdoxioAddressstreet,
+                            City = licence.AdoxioEstablishment?.AdoxioAddressstreet,
                             Provstate = "BC",
                             Country = "CANADA",
-                            PostalCode = licence.AdoxioEstablishment.AdoxioAddresspostalcode,
-                            Licensee = licence.AdoxioLicencee.Name
+                            PostalCode = licence.AdoxioEstablishment?.AdoxioAddresspostalcode,
+                            Licensee = licence.AdoxioLicencee?.Name
                         };
                         results.Add(relatedLicence);
                     }
@@ -481,8 +481,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return Forbid();
             }
 
+
             // create a new application.
-            var application = CreateApplication(item.LicenceId, ApplicationTypeNames.TiedHouseExemption, item.RelatedLicenceId);
+            var application = CreateApplication(item.LicenceId, ApplicationTypeNames.TiedHouseExemption, item.RelatedLicenceId, item.ManufacturerProductionAmountforPrevYear, item.ManufacturerProductionAmountUnit);
 
             return Ok();
         }
@@ -732,7 +733,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return Ok();
         }
 
-        private MicrosoftDynamicsCRMadoxioApplication CreateApplication(string licenceId, string applicationTypeName, string relatedLicenceId = null)
+        private MicrosoftDynamicsCRMadoxioApplication CreateApplication(string licenceId, string applicationTypeName, string relatedLicenceId = null, int? prodAmount = null, int? prodUnit = null)
         {
             // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
@@ -790,6 +791,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 application.AdoxioLicenceEstablishmentODataBind = _dynamicsClient.GetEntityURI("adoxio_establishments", adoxioLicense.AdoxioEstablishment.AdoxioEstablishmentid);
             }
+
+            application.AdoxioManufacturerproductionamountforprevyear = prodAmount;
+            application.AdoxioManufacturerproductionamountunit = prodUnit;
 
             // check to see if there is a related licence.
             // some applications create a relationship between two licences, in this case we will have a related licence
@@ -1674,6 +1678,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     {
         public string RelatedLicenceId { get; set; }
         public string LicenceId { get; set; }
+
+        public int? ManufacturerProductionAmountforPrevYear { get; set; }
+        public int? ManufacturerProductionAmountUnit { get; set; }
     }
 }
 

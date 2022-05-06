@@ -736,5 +736,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public int? PicnicConfirmZoning { get; set; }
         public int? PicnicConfirmLGFNCapacity { get; set; }
 
+        public int? ManufacturerProductionAmountForPrevYear { get; set; }
+        public int? ManufacturerProductionAmountUnit { get; set; }
+
     }
 }
