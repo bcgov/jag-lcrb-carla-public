@@ -244,9 +244,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
       holdsOtherManufactureLicence1: [false],
       holdsOtherManufactureLicence2: [false],
       relatedLicenceNumber: [''],
-      picnicReadAndAccept: ['', Validators.requiredTrue],
-      picnicConfirmZoning: ['', Validators.requiredTrue],
-      picnicConfirmLGFNCapacity: ['', Validators.requiredTrue],
+      picnicReadAndAccept: [''],
+      picnicConfirmZoning: [''],
+      picnicConfirmLGFNCapacity: [''],
+      manufacturerProductionAmountForPrevYear: [''],
+      manufacturerProductionAmountUnit: ['']
     });
 
 

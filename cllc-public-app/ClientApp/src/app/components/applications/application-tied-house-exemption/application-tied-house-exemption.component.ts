@@ -89,8 +89,8 @@ export class ApplicationTiedHouseExemptionComponent extends FormBase implements 
       consent: ["", [this.customRequiredCheckboxValidator()]],
       authorizedToSubmit: ["", [this.customRequiredCheckboxValidator()]],
       signatureAgreement: ["", [this.customRequiredCheckboxValidator()]],
-      manufacturerProductionAmountforPrevYear  : [""],
-      manufacturerProductionAmountUnit :[""]
+      manufacturerProductionAmountforPrevYear  : [''],
+      manufacturerProductionAmountUnit :['']
     });
 
     // Get licence data
