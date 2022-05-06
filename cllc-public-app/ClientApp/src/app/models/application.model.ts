@@ -225,4 +225,7 @@ export interface Application {
   picnicReadAndAccept: number;
   picnicConfirmZoning: number;
   picnicConfirmLGFNCapacity: number;
+  manufacturerProductionAmountForPrevYear: number;
+  manufacturerProductionAmountUnit: number;
+
 }

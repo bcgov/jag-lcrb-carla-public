@@ -230,6 +230,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioHasadditionalservices = from.HasAdditionalServices;
             to.AdoxioStoreopendate = from.StoreOpenDate;
             to.AdoxioConfirmliquorsalesisnotprimarybusiness = from.ConfirmLiquorSalesIsNotPrimaryBusiness;
+            to.AdoxioManufacturerproductionamountforprevyear = from.ManufacturerProductionAmountForPrevYear;
+            to.AdoxioManufacturerproductionamountunit = from.ManufacturerProductionAmountUnit;
             //LCSD-6304
             to.AdoxioPicnicconfirmslgfnsupportscapacity = from.PicnicConfirmLGFNCapacity;
             to.AdoxioPicnicconfirmszoning = from.PicnicConfirmZoning;
@@ -584,6 +586,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 StoreOpenDate = dynamicsApplication.AdoxioStoreopendate,
                 ConfirmLiquorSalesIsNotPrimaryBusiness = dynamicsApplication.AdoxioConfirmliquorsalesisnotprimarybusiness,
                 Pin = dynamicsApplication.AdoxioPin,
+                ManufacturerProductionAmountForPrevYear = dynamicsApplication.AdoxioManufacturerproductionamountforprevyear,
+                ManufacturerProductionAmountUnit = dynamicsApplication.AdoxioManufacturerproductionamountunit,
                 //LCSD-6304
                 PicnicConfirmLGFNCapacity = dynamicsApplication.AdoxioPicnicconfirmslgfnsupportscapacity,
                 PicnicConfirmZoning = dynamicsApplication.AdoxioPicnicconfirmszoning,
