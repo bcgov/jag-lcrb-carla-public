@@ -744,9 +744,10 @@
       </div>
     </section>
   </section>
-  <h3 class="blue-header">Tied House Manufacturer Licence</h3>
+  
   <section>
     <div *ngIf="application?.applicationType?.name.includes('Tied House Exemption Application')">
+      <h3 class="blue-header">Tied House Manufacturer Licence</h3>
       <app-field [required]="false">
         <input class="form-control" style="width: 500px;" type="text" [readonly]="true"
                formControlName="relatedLicenceNumber">
