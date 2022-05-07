@@ -730,6 +730,14 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public DateTimeOffset? StoreOpenDate { get; set; }
 
         public int? ConfirmLiquorSalesIsNotPrimaryBusiness { get; set; }
-        
+
+        public string RelatedLicenceNumber { get; set; }
+        public int? PicnicReadAndAccept { get; set; }
+        public int? PicnicConfirmZoning { get; set; }
+        public int? PicnicConfirmLGFNCapacity { get; set; }
+
+        public int? ManufacturerProductionAmountForPrevYear { get; set; }
+        public int? ManufacturerProductionAmountUnit { get; set; }
+
     }
 }

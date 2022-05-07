@@ -242,7 +242,13 @@ export class ApplicationComponent extends FormBase implements OnInit {
       tempDateTo: [''],
       pin: ['', [this.requireOneOfGroupValidator(['pin', 'establishmentParcelId'])]],
       holdsOtherManufactureLicence1: [false],
-      holdsOtherManufactureLicence2: [false]
+      holdsOtherManufactureLicence2: [false],
+      relatedLicenceNumber: [''],
+      picnicReadAndAccept: [''],
+      picnicConfirmZoning: [''],
+      picnicConfirmLGFNCapacity: [''],
+      manufacturerProductionAmountForPrevYear: [''],
+      manufacturerProductionAmountUnit: ['']
     });
 
 
@@ -1333,7 +1339,26 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.validationMessages.push('Resort community description is required.');
     }
 
+    if (this.application?.applicationType?.name === 'Picnic Area Endorsement') {
+      if (!this.form.get('picnicReadAndAccept').value || this.form.get('picnicReadAndAccept').value == 0) {
+        valid = false;
+        this.validationMessages.push('Please confirm have picnic area declaration read and understand the term and conditions.');
+      }
+      if (!this.form.get('picnicConfirmZoning').value || this.form.get('picnicConfirmZoning').value == 0) {
+        valid = false;
+        this.validationMessages.push('Please confirm  picnic area declaration local zoning allows for the operation of a picnic area endorsement.');
+      }
+      if (!this.form.get('picnicConfirmLGFNCapacity').value || this.form.get('picnicConfirmLGFNCapacity').value == 0) {
+        valid = false;
+        this.validationMessages.push('Please confirm  picnic area declaration local government/First Nation supports the proposed capacity for the picnic area endorsement.');
+      }
+    }
+
     return valid && (this.form.valid || this.form.disabled);
+  }
+
+  isValidOrNotTouchedRequireTrue(field: string) {
+    return this.form.get(field).value == 1 || !this.form.get(field).touched;
   }
 
   showLEDocumentSection(): boolean {
@@ -1481,7 +1506,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
       zoningStatus: 'Please enter a value for zoning status',
       pin: 'Please enter a PIN or PID',
       policeJurisdiction: 'Please select a police jurisdiction for the establishment',
-      indigenousNation: 'Please select a local government or an Indigenous Nation'
+      indigenousNation: 'Please select a local government or an Indigenous Nation',
+      hasReadTeamAndCondition: 'Please confirm have read team and conditions',
+      isLocalZoningAllow: 'Please confirm local zoning allow',
+      isLGFNSuport: 'Please confirm LG/FN support'
     };
 
 
