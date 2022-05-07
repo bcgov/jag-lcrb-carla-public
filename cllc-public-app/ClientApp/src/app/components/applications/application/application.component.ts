@@ -1339,22 +1339,26 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.validationMessages.push('Resort community description is required.');
     }
 
-    if (this.application.applicationTypeName === "Picnic Area Endorsemen") {
-      if (!this.form.get('PicnicReadAndAccept').value) {
+    if (this.application?.applicationType?.name === 'Picnic Area Endorsement') {
+      if (!this.form.get('picnicReadAndAccept').value || this.form.get('picnicReadAndAccept').value == 0) {
         valid = false;
-        this.validationMessages.push('Please confirm have read and understand the term and conditions.');
+        this.validationMessages.push('Please confirm have picnic area declaration read and understand the term and conditions.');
       }
-      if (!this.form.get('PicnicConfirmZoning').value) {
+      if (!this.form.get('picnicConfirmZoning').value || this.form.get('picnicConfirmZoning').value == 0) {
         valid = false;
-        this.validationMessages.push('Please confirm local zoning allows for the operation of a picnic area endorsement.');
+        this.validationMessages.push('Please confirm  picnic area declaration local zoning allows for the operation of a picnic area endorsement.');
       }
-      if (!this.form.get('PicnicConfirmLGFNCapacity').value) {
+      if (!this.form.get('picnicConfirmLGFNCapacity').value || this.form.get('picnicConfirmLGFNCapacity').value == 0) {
         valid = false;
-        this.validationMessages.push('Please confirm local government/First Nation supports the proposed capacity for the picnic area endorsement.');
+        this.validationMessages.push('Please confirm  picnic area declaration local government/First Nation supports the proposed capacity for the picnic area endorsement.');
       }
     }
 
     return valid && (this.form.valid || this.form.disabled);
+  }
+
+  isValidOrNotTouchedRequireTrue(field: string) {
+    return this.form.get(field).value == 1 || !this.form.get(field).touched;
   }
 
   showLEDocumentSection(): boolean {
