@@ -67,7 +67,7 @@
         <br />
         <app-field label="You have read and understand the above term and conditions;"
                    [isFullWidth]="true"
-                   [valid]="isValidOrNotTouched('PicnicReadAndAccept') || application?.applicationType?.name != 'Picnic Area Endorsement'"
+                   [valid]="isValidOrNotTouchedRequireTrue('picnicReadAndAccept')"
                    errorMessage="Please confirm have read and understand the term and conditions."
                    [showChevrons]="false">
           <mat-radio-group formControlName="picnicReadAndAccept">
@@ -77,7 +77,7 @@
         </app-field>
         <app-field label="You confirm local zoning allows for the operation of a picnic area endorsement; and"
                    [isFullWidth]="true"
-                   [valid]="isValidOrNotTouched('PicnicConfirmZoning') || application?.applicationType?.name != 'Picnic Area Endorsement'"
+                   [valid]="isValidOrNotTouchedRequireTrue('picnicConfirmZoning')"
                    errorMessage="Please confirm local zoning allows for the operation of a picnic area endorsement."
                    [showChevrons]="false">
           <mat-radio-group formControlName="picnicConfirmZoning">
@@ -87,7 +87,7 @@
         </app-field>
         <app-field label="You confirm your local government/First Nation supports the proposed capacity for the picnic area endorsement."
                    [isFullWidth]="true"
-                   [valid]="isValidOrNotTouched('PicnicConfirmLGFNCapacity') || application?.applicationType?.name != 'Picnic Area Endorsement'"
+                   [valid]="isValidOrNotTouchedRequireTrue('picnicConfirmLGFNCapacity')"
                    errorMessage="Please confirm local government/First Nation supports the proposed capacity for the picnic area endorsement."
                    [showChevrons]="false">
           <mat-radio-group formControlName="picnicConfirmLGFNCapacity">
