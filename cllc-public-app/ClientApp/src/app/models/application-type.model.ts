@@ -106,4 +106,5 @@ export enum ApplicationTypeNames {
   SpecialEventAreaEndorsement = "Special Event Area Endorsement",
   LRSStructuralChange = "LRS Structural Change",
   RequestTermChange = "Non-Default T&C Change Application",
+  TiedHouseExemption = "Tied House Exemption"
 }
