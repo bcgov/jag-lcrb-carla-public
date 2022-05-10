@@ -118,18 +118,6 @@
     </section>
   </section>
 
-  <section *ngIf="application?.applicationType?.name=='Tied House Exemption Removal'">
-    <h3 class="blue-header">Identify the licence</h3>
-    <section class="padded-section content-bottom">
-      <app-field label="Search for the licence you wish to remove the tied house exemption from:" [isFullWidth]="true">
-        <select class="form-control" style="width: 550px;" formControlName="description1">
-          <option value=""></option>
-          <option [value]="item.jobNumber" *ngFor="let item of tiedHouseExemptions">{{item.displayName}}</option>
-        </select>
-      </app-field>
-    </section>
-  </section>
-
   <!-- Before Starting -->
   <h3 *ngIf="htmlContent?.beforeStarting" class="blue-header">
     BEFORE STARTING

@@ -122,7 +122,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   uploadedNOA: number = 0;
   uploadedOrganizationDetails: number = 0;
   uploadedCentralSecuritiesRegisterDocuments: number = 0;
-  tiedHouseExemptions: { jobNumber: string, displayName: string }[] = [];
+
 
   get isOpenedByLGForApproval(): boolean {
     let openedByLG = false;
@@ -468,18 +468,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
             // disable the form if the local government has reviewed the application
             if (data.isPaid || this.isOpenedByLGForApproval || this.application.lGDecisionSubmissionDate) {
               this.form.disable();
-            }
-            //LCSD-5784 loading same user's application 
-            if (data && data.applicationType && data.applicationType.name == 'Tied House Exemption Removal') {
-              this.tiedHouseExemptions = [];
-              this.applicationDataService.getApplicationsByType(ApplicationTypeNames.TiedHouseExemption)
-                .subscribe((data: Application[]) => {
-                  data.forEach((item: Application) => {
-                    if (this.tiedHouseExemptions.findIndex(x => x.jobNumber == item.jobNumber) < 0 && item.applicationStatus == "Approved") {
-                      this.tiedHouseExemptions.push({ jobNumber: item.jobNumber, displayName: item.name });
-                    }
-                  })
-                });             
             }
             this.savedFormData = this.form.value;
             this.dataLoaded = true;
@@ -1302,11 +1290,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
     if (this.application?.applicationType?.name === ApplicationTypeNames.LP && !this.form.get('description1').value) {
       valid = false;
       this.validationMessages.push('Establishment Type is required.');
-    }
-    //LCSD-5784 the description1 is the Tied House Exemption Removal Identity Licnece JobNumber which is required.
-    if (this.application?.applicationType?.name === "Tied House Exemption Removal" && !this.form.get('description1').value) {
-      valid = false;
-      this.validationMessages.push('Identify licence job number is required.');
     }
     if (applicationTypeName === ApplicationTypeNames.CannabisRetailStore && this.submittedApplications >= 8) {
       valid = false;
