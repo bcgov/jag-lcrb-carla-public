@@ -33,6 +33,7 @@ import { ProofOfZoningComponent } from './tabs/proof-of-zoning/proof-of-zoning.c
 import { AreaCategory } from '@models/service-area.model';
 import { faExclamationCircle, faTrashAlt, faUniversity } from '@fortawesome/free-solid-svg-icons';
 import { faCreditCard, faIdCard, faSave } from '@fortawesome/free-regular-svg-icons';
+import { RelatedLicence } from "@models/related-licence";
 
 const ServiceHours = [
   '00:00', '00:15', '00:30', '00:45', '01:00', '01:15', '01:30', '01:45', '02:00', '02:15', '02:30', '02:45', '03:00',
@@ -123,6 +124,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   uploadedOrganizationDetails: number = 0;
   uploadedCentralSecuritiesRegisterDocuments: number = 0;
   tiedHouseExemptions: { jobNumber: string, displayName: string }[] = [];
+  licenseToRemove: RelatedLicence;
 
   get isOpenedByLGForApproval(): boolean {
     let openedByLG = false;
@@ -470,7 +472,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
               this.form.disable();
             }
             //LCSD-5784 loading same user's application 
-            if (data && data.applicationType && data.applicationType.name == 'Tied House Exemption Removal') {
+            /*if (data && data.applicationType && data.applicationType.name == 'Tied House Exemption Removal') {
               this.tiedHouseExemptions = [];
               this.applicationDataService.getApplicationsByType(ApplicationTypeNames.TiedHouseExemption)
                 .subscribe((data: Application[]) => {
@@ -480,7 +482,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
                     }
                   })
                 });             
-            }
+            }*/
             this.savedFormData = this.form.value;
             this.dataLoaded = true;
           },
@@ -1705,6 +1707,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
       return this.form.get('isHasPatio').value && formReference && tabs;
     }
     return formReference && tabs;
+  }
+
+  onLicenceSelect(assignedLicence: RelatedLicence) {
+    this.licenseToRemove = assignedLicence;
+    this.form.get("description1").patchValue(this.licenseToRemove.name);
   }
 
 
