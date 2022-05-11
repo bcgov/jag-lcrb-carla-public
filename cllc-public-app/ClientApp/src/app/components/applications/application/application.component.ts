@@ -1356,7 +1356,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.validationMessages.push('Resort community description is required.');
     }
 
-    if (this.application?.applicationType?.name === 'Picnic Area Endorsement') {
+    if (this.application?.applicationType?.name === 'Picnic Area Endorsement' && this.application?.applicationType?.showZoningDeclarations) {
       if (!this.form.get('picnicReadAndAccept').value || this.form.get('picnicReadAndAccept').value == 0) {
         valid = false;
         this.validationMessages.push('Please confirm have picnic area declaration read and understand the term and conditions.');
