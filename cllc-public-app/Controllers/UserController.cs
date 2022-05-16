@@ -44,7 +44,24 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             user.contactid = userSettings.ContactId;
             user.accountid = userSettings.AccountId;
             user.businessname = userSettings.BusinessLegalName;
-            user.name = userSettings.UserDisplayName;
+            //user.name = userSettings.UserDisplayName;
+            //LCSD-6360 contact name incorrect in portal
+            if (userSettings.AuthenticatedUser != null)
+            {
+                // userSettings.UserDisplayName;
+                if (userSettings.UserDisplayName.IndexOf(",") >= 0)
+                {
+                    user.name = userSettings.AuthenticatedUser.Surname + "," + userSettings.AuthenticatedUser.GivenName;
+                }
+                else
+                {
+                    user.name = userSettings.AuthenticatedUser.GivenName + " " + userSettings.AuthenticatedUser.Surname;
+                }
+            }
+            else
+            {
+                user.name = userSettings.UserDisplayName;
+            }
             user.UserType = userSettings.UserType;
 
             // if Authenticated User is null, try and fetch it.
@@ -98,8 +115,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     user.isEligibilityRequired = EligibilityController.IsEligibilityCheckRequired(user.accountid, _configuration, _dynamicsClient);
                     user.isPoliceRepresentative = _dynamicsClient.IsAccountSepPoliceRepresentative(user.accountid, _configuration);
                 }
-            }
-            
+            }            
 
             return new JsonResult(user);
         }
