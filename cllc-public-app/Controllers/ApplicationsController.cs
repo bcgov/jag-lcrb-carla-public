@@ -313,7 +313,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         "adoxio_Invoice"
                     };
 
-                    var applications = _dynamicsClient.Applications.Get(filter: filter, expand: expand).Value.ToList();
+                    var orderby = new List<string> { "createdon" };
+
+                    var applications = _dynamicsClient.Applications.Get(top: 50, filter: filter, orderby: orderby, expand: expand).Value.ToList();
                     foreach (var dynamicsApplication in applications)
                     {
                         var viewModel = dynamicsApplication.ToViewModel(_dynamicsClient, _cache, _logger).GetAwaiter().GetResult();
