@@ -339,9 +339,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         /// GET local government approval applications decision not made in Dynamics for the current user
         [HttpGet("current/lg-approvals-decision-not-made")]
-        public IActionResult getLGApprovalApplicationsDecisionNotMade()
+        public IActionResult getLGApprovalApplicationsDecisionNotMade([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10)
         {
-            var results = new List<Application>();
+            //LCSD-6374 change result from List<Application> to PagingResult<Application>
+            //var results = new List<Application>();
+            var results = new PagingResult<Application>()
+            {
+                Value = new List<Application>()
+            };
             // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
@@ -371,13 +376,34 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         "adoxio_LicenceFeeInvoice",
                         "adoxio_Invoice"
                     };
+                    var customHeaders = new Dictionary<string, List<string>>();
+                    var preferHeader = new List<string>();
+                    preferHeader.Add($"odata.maxpagesize={pageSize}");
 
-                    var applications = _dynamicsClient.Applications.Get(filter: filter, expand: expand).Value.ToList();
+                    customHeaders.Add("Prefer", preferHeader);
+                    var odataVersionHeader = new List<string>();
+                    odataVersionHeader.Add("4.0");
+
+                    customHeaders.Add("OData-Version", odataVersionHeader);
+                    customHeaders.Add("OData-MaxVersion", odataVersionHeader);
+                    var applicationQuery = _dynamicsClient.Applications.GetWithHttpMessagesAsync(filter: filter, expand: expand, customHeaders: customHeaders, count: true).GetAwaiter().GetResult();
+
+                    while (pageIndex > 0)
+                    {
+                        // get the next window.
+                        string odataNextLink = applicationQuery.Body.OdataNextLink;
+                        applicationQuery = _dynamicsClient.Applications.GetNextLink(odataNextLink, customHeaders);
+                        pageIndex--;
+                    }
+
+                    var applications =  applicationQuery.Body.Value;
+                    results.Count = Int32.Parse(applicationQuery.Body.Count);
+
                     foreach (var dynamicsApplication in applications)
                     {
                         var viewModel = dynamicsApplication.ToViewModel(_dynamicsClient, _cache, _logger).GetAwaiter().GetResult();
-                        results.Add(viewModel);
-                    }
+                        results.Value.Add(viewModel);
+                    }             
                 }
             }
             catch (HttpOperationException e)
@@ -398,9 +424,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         /// GET local government approval applications for zoning in Dynamics for the current user
         [HttpGet("current/lg-approvals-for-zoning")]
-        public IActionResult getLGApprovalApplicationsForZoning()
+        public IActionResult getLGApprovalApplicationsForZoning([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10)
         {
-            var results = new List<Application>();
+            //LCSD-6374 change result from List<Application> to PagingResult<Application>
+            //var results = new List<Application>();
+            var results = new PagingResult<Application>()
+            {
+                Value = new List<Application>()
+            };
             // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
@@ -428,12 +459,33 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         "adoxio_LicenceFeeInvoice",
                         "adoxio_Invoice"
                     };
+                    var customHeaders = new Dictionary<string, List<string>>();
+                    var preferHeader = new List<string>();
+                    preferHeader.Add($"odata.maxpagesize={pageSize}");
 
-                    var applications = _dynamicsClient.Applications.Get(filter: filter, expand: expand).Value.ToList();
+                    customHeaders.Add("Prefer", preferHeader);
+                    var odataVersionHeader = new List<string>();
+                    odataVersionHeader.Add("4.0");
+
+                    customHeaders.Add("OData-Version", odataVersionHeader);
+                    customHeaders.Add("OData-MaxVersion", odataVersionHeader);
+                    var applicationQuery = _dynamicsClient.Applications.GetWithHttpMessagesAsync(filter: filter, expand: expand, customHeaders: customHeaders, count: true).GetAwaiter().GetResult();
+
+                    while (pageIndex > 0)
+                    {
+                        // get the next window.
+                        string odataNextLink = applicationQuery.Body.OdataNextLink;
+                        applicationQuery = _dynamicsClient.Applications.GetNextLink(odataNextLink, customHeaders);
+                        pageIndex--;
+                    }
+
+                    var applications = applicationQuery.Body.Value;
+                    results.Count = Int32.Parse(applicationQuery.Body.Count);
+
                     foreach (var dynamicsApplication in applications)
                     {
                         var viewModel = dynamicsApplication.ToViewModel(_dynamicsClient, _cache, _logger).GetAwaiter().GetResult();
-                        results.Add(viewModel);
+                        results.Value.Add(viewModel);
                     }
                 }
             }
@@ -455,9 +507,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         /// GET local government approval applications dicision mad but no docs in Dynamics for the current user
         [HttpGet("current/lg-approvals-dicision-made-but-no-docs")]
-        public IActionResult getLGApprovalApplicationsDicisionMadeButNoDocs()
+        public IActionResult getLGApprovalApplicationsDicisionMadeButNoDocs([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10)
         {
-            var results = new List<Application>();
+            //LCSD-6374 change result from List<Application> to PagingResult<Application>
+            //var results = new List<Application>();
+            var results = new PagingResult<Application>()
+            {
+                Value = new List<Application>()
+            };
             // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
@@ -466,13 +523,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // get user account
                 var accountId = userSettings.AccountId;
                 var account = _dynamicsClient.GetAccountById(accountId);
-
                 if (account._adoxioLginlinkidValue != null)
                 {
                     var filter = $"_adoxio_localgovindigenousnationid_value eq {account._adoxioLginlinkidValue}";
                     filter += $" and adoxio_lgdecisionsubmissiondate not eq null";
                     filter += $" and adoxio_lgapprovaldecision eq {(int)LGDecision.Pending}";
-
 
                     var expand = new List<string>
                     {
@@ -485,12 +540,33 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         "adoxio_LicenceFeeInvoice",
                         "adoxio_Invoice"
                     };
+                    var customHeaders = new Dictionary<string, List<string>>();
+                    var preferHeader = new List<string>();
+                    preferHeader.Add($"odata.maxpagesize={pageSize}");
 
-                    var applications = _dynamicsClient.Applications.Get(filter: filter, expand: expand).Value.ToList();
+                    customHeaders.Add("Prefer", preferHeader);
+                    var odataVersionHeader = new List<string>();
+                    odataVersionHeader.Add("4.0");
+
+                    customHeaders.Add("OData-Version", odataVersionHeader);
+                    customHeaders.Add("OData-MaxVersion", odataVersionHeader);
+                    var applicationQuery = _dynamicsClient.Applications.GetWithHttpMessagesAsync(filter: filter, expand: expand, customHeaders: customHeaders, count: true).GetAwaiter().GetResult();
+
+                    while (pageIndex > 0)
+                    {
+                        // get the next window.
+                        string odataNextLink = applicationQuery.Body.OdataNextLink;
+                        applicationQuery = _dynamicsClient.Applications.GetNextLink(odataNextLink, customHeaders);
+                        pageIndex--;
+                    }
+
+                    var applications = applicationQuery.Body.Value;
+                    results.Count = Int32.Parse(applicationQuery.Body.Count);
+
                     foreach (var dynamicsApplication in applications)
                     {
                         var viewModel = dynamicsApplication.ToViewModel(_dynamicsClient, _cache, _logger).GetAwaiter().GetResult();
-                        results.Add(viewModel);
+                        results.Value.Add(viewModel);
                     }
                 }
             }

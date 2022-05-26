@@ -229,6 +229,11 @@ import { CovidConfirmationComponent } from
 import { TerminateTPORelationshipComponent } from
   "@components/applications/terminate-tpo-relationship/terminate-tpo-relationship.component";
 import { LgApprovalsComponent } from "./components/lg-approvals/lg-approvals.component";
+//LCSD-6374 split LgApprivalsComponent into following three components:
+import { DecisionMadeButNoDocsApplicationsComponent } from "./components/lg-approvals/decision-made-but-no-docs-applications/decision-made-but-no-docs-applications.component";
+import { DecisionNotMadeApplicationsComponent } from "./components/lg-approvals/decision-not-made-applications/decision-not-made-applications.component";
+import { ForZoningApplicationsComponent } from "./components/lg-approvals/for-zoning-applications/for-zoning-applications.component";
+
 import { LiquorApprovalsCalloutComponent } from
   "./components/liquor-approvals-callout/liquor-approvals-callout.component";
 import { LgInConfirmationOfReceiptComponent, LGDecisionDialogComponent } from
@@ -437,6 +442,9 @@ import { CancelSepApplicationDialogComponent } from './components/sep/sep-applic
     ApplicationCovidTemporaryExtensionComponent,
     CovidConfirmationComponent,
     LgApprovalsComponent,
+    DecisionMadeButNoDocsApplicationsComponent,
+    DecisionNotMadeApplicationsComponent,
+    ForZoningApplicationsComponent,
     LiquorApprovalsCalloutComponent,
     LgInConfirmationOfReceiptComponent,
     BusinessPlanComponent,
