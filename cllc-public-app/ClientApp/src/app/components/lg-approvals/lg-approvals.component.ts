@@ -37,68 +37,33 @@ export class LgApprovalsComponent implements OnInit {
 
     // get approval applications split into 3 parts
     // THIS is original one.
-    this.busy = this.applicationDataService.getLGApprovalApplications()
-      .subscribe(applications => {
-        this.applications = applications || [];
-        this.applicationsDecisionNotMade =
-          this.applications.filter(app => !app.lGDecisionSubmissionDate &&
-            app.applicationType &&
-            (app.applicationType.isShowLGINApproval ||
-              (app.applicationStatus === "Pending for LG/FN/Police Feedback"
-                && app?.applicationType?.isShowLGZoningConfirmation !== true
-              )
-            )
-          );
+    //this.busy = this.applicationDataService.getLGApprovalApplications()
+    //  .subscribe(applications => {
+    //    this.applications = applications || [];
+    //    this.applicationsDecisionNotMade =
+    //      this.applications.filter(app => !app.lGDecisionSubmissionDate &&
+    //        app.applicationType &&
+    //        (app.applicationType.isShowLGINApproval ||
+    //          (app.applicationStatus === "Pending for LG/FN/Police Feedback"
+    //            && app?.applicationType?.isShowLGZoningConfirmation !== true
+    //          )
+    //        )
+    //      );
 
-        this.applicationsForZoning =
-          this.applications.filter(app => !app.lGDecisionSubmissionDate &&
-            app.applicationType &&
-            app.applicationType.isShowLGZoningConfirmation);
+    //    this.applicationsForZoning =
+    //      this.applications.filter(app => !app.lGDecisionSubmissionDate &&
+    //        app.applicationType &&
+    //        app.applicationType.isShowLGZoningConfirmation);
 
-        this.applicationsDecisionMadeButNoDocs =
-          this.applications.filter(app => app.lGDecisionSubmissionDate && app.lGApprovalDecision === "Pending");
-        this.dataLoaded = true;
-      },
-        error => {
-          this.snackBar.open(`An error occured while getting approval applications`,
-            "Fail",
-            { duration: 3500, panelClass: ["red-snackbar"] });
-        });
-
-    //SPLIT into 3 part: PART 1: 
-    this.busy = this.applicationDataService.getLGApprovalApplicationsDecisionNotMade()
-      .subscribe(applications => {
-        this.applicationsDecisionNotMade = applications || [];
-        this.dataLoaded = true;
-      },
-      error => {
-        this.snackBar.open(`An error occured while getting approval applications for zoning`,
-          "Fail",
-          { duration: 3500, panelClass: ["red-snackbar"] });
-        });
-      //SPLIT into 3 part: PART 2: 
-    this.busy = this.applicationDataService.getLGApprovalApplicationsForZoning()
-      .subscribe(applications => {
-        this.applicationsForZoning = applications || [];
-        this.dataLoaded = true;
-      },
-        error => {
-          this.snackBar.open(`An error occured while getting approval decision not made applications`,
-            "Fail",
-            { duration: 3500, panelClass: ["red-snackbar"] });
-        });
-
-    //SPLIT into 3 part: PART 3:
-    this.busy = this.applicationDataService.getLGApprovalApplicationsDicisionMadeButNoDocs()
-      .subscribe(applications => {
-        this.applicationsDecisionMadeButNoDocs = applications || [];
-        this.dataLoaded = true;
-      },
-      error => {
-        this.snackBar.open(`An error occured while getting approval decision made but not docs applications`,
-          "Fail",
-          { duration: 3500, panelClass: ["red-snackbar"] });
-      });
+    //    this.applicationsDecisionMadeButNoDocs =
+    //      this.applications.filter(app => app.lGDecisionSubmissionDate && app.lGApprovalDecision === "Pending");
+    //    this.dataLoaded = true;
+    //  },
+    //    error => {
+    //      this.snackBar.open(`An error occured while getting approval applications`,
+    //        "Fail",
+    //        { duration: 3500, panelClass: ["red-snackbar"] });
+    //    });  
   }
 
   get90dayCount(submissionDate: Date): number {

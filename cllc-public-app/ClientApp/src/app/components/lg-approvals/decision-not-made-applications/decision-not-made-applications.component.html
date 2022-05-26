@@ -1,0 +1,68 @@
+<div class="example-container mat-elevation-z0"  *ngIf="resultsLength>0">
+  <div class="example-table-container">
+    <h1>Applications Awaiting Comment</h1>
+    <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
+    <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
+      <p>The following applications have been submitted for your review.</p>
+      <p>
+        Click <strong><fa-icon [icon]="faPencilAlt" style="margin-right: 5px;"></fa-icon>Review Application</strong> to see a
+        copy of the application, including all relevant attachments. At the bottom of the application you will be able to
+        provide your comment and validation, as requested. When comment is required you can <strong>Accept</strong> the application with
+        feedback, <strong>opt-out</strong> of the comment process, or <strong>reject</strong> the application altogether. The applicant will be notified on
+        completion of your review.
+      </p>
+    </div>
+
+    <table mat-table [dataSource]="data" class="example-table"
+           matSort matSortActive="application" matSortDisableClear matSortDirection="desc">
+
+      <!-- Number Column -->
+      <ng-container matColumnDef="number">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let row">{{row.index}}</td>
+      </ng-container>
+
+      <!-- Application Column -->
+      <ng-container matColumnDef="application">
+        <th mat-header-cell *matHeaderCellDef>Application</th>
+        <td mat-cell *matCellDef="let row">
+          <div>
+            <strong>{{row?.establishmentName}}</strong>
+          </div>
+          <div>{{row?.applicationType?.name}}</div>
+          <div>Job Number: {{row?.jobNumber}}</div>
+        </td>
+      </ng-container>
+
+      <!-- Applying Business Column -->
+      <ng-container matColumnDef="applyingBusiness">
+        <th mat-header-cell *matHeaderCellDef>Applying Business</th>
+        <td mat-cell *matCellDef="let row">{{row?.applicant?.name}}</td>
+      </ng-container>
+
+      <!-- Establishment Address Column -->
+      <ng-container matColumnDef="establishmentAddress">
+        <th mat-header-cell *matHeaderCellDef>Establishment Address</th>
+        <td mat-cell *matCellDef="let row">
+          <div>{{row?.establishmentAddressStreet}} </div>
+          <div>{{row?.establishmentAddressCity}} </div>
+          <div>{{row?.establishmentAddressPostalCode}}</div>
+        </td>
+      </ng-container>
+
+      <!-- Action Column -->
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let row">
+          <a routerLink="/application/{{row?.id}}"><fa-icon [icon]="faPencilAlt" style="margin-right: 5px;"></fa-icon>View Application</a>
+        </td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+  <mat-paginator [length]="resultsLength" [pageSize]="10"></mat-paginator>
+</div>
+
