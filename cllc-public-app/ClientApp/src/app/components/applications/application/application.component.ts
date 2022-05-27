@@ -1386,7 +1386,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   showHoldsOtherManufactureLicence(): boolean {
-    const show = ['Special Event Area Endorsement', 'Lounge Area Endorsement', 'MFG New Outdoor Patio', 'Structural Changes to an Approved Lounge or Special Event Area(cap increase)']
+    const show = ['Special Event Area Endorsement', 'Lounge Area Endorsement', 'Manufacturer', 'MFG New Outdoor Patio']
       .indexOf(this?.application?.applicationType?.name) !== -1;
     return show;
   }
