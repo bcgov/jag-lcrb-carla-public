@@ -91,7 +91,11 @@
       <p></p>
 
       <app-legal-entity-type-update-calloutbox *ngIf="hasLicence" appRemoveIfFeatureOff="PermanentChangesToLicensee" [account]="account"></app-legal-entity-type-update-calloutbox>
-</div>
+      <p></p>
+      <app-legal-entity-type-update-applicant-calloutbox *ngIf="!hasLicence" appRemoveIfFeatureOff="PermanentChangesToApplicant" [account]="account"></app-legal-entity-type-update-applicant-calloutbox>
+      <p></p>
+
+    </div>
   </div>
   <section style="margin-top: 20px;">
     <p>
