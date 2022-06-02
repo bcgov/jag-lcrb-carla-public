@@ -17,18 +17,17 @@ import { faIdCard } from "@fortawesome/free-regular-svg-icons";
 import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
-  selector: "app-permanent-change-to-a-licensee",
-  templateUrl: "./permanent-change-to-a-licensee.component.html",
-  styleUrls: ["./permanent-change-to-a-licensee.component.scss"]
+  selector: "app-permanent-change-to-an-applicant",
+  templateUrl: "./permanent-change-to-an-applicant.component.html",
+  styleUrls: ["./permanent-change-to-an-applicant.component.scss"]
 })
-export class PermanentChangeToALicenseeComponent extends FormBase implements OnInit {
+export class PermanentChangeToAnApplicantComponent extends FormBase implements OnInit {
   isAmalgamated = false;
   faQuestionCircle = faQuestionCircle;
   faIdCard = faIdCard;
   value: any; // placeholder prop
   application: Application;
-  liquorLicences: ApplicationLicenseSummary[] = [];
-  cannabisLicences: ApplicationLicenseSummary[] = [];
+
   account: Account;
   businessType: string;
   saveComplete: any;
@@ -59,15 +58,6 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
   uploadedSocietyNameChange = 0;
   uploadedExecutorDocuments = 0;
 
-
-  get hasLiquor(): boolean {
-    return this.liquorLicences.length > 0;
-  }
-
-  get hasCannabis(): boolean {
-    return this.cannabisLicences.length > 0;
-  }
-
   changeList = [];
 
   get selectedChangeList() {
@@ -94,7 +84,7 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
 
     this.route.paramMap
       .subscribe(pmap => {
-        this.invoiceType = pmap.get("invoiceType");
+       // this.invoiceType = pmap.get("invoiceType");
         this.applicationId = pmap.get("applicationId");
       });
   }
@@ -123,22 +113,19 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
   }
 
   private loadData() {
-    const sub = this.applicationDataService.getPermanentChangesToLicenseeData(this.applicationId)
-      .subscribe((data) => {
+    const sub = this.applicationDataService.getPermanentChangesToApplicantData(this.applicationId)
+      .subscribe((data:Application) => {
         this.setFormData(data);
       });
     this.subscriptionList.push(sub);
   }
 
   createApplication() {
-    this.router.navigateByUrl(`/permanent-change-to-a-licensee`);
+    this.router.navigateByUrl(`/permanent-change-to-an-applicant`);
   }
 
-  private setFormData({ application, licences, primary, secondary }) {
-    this.liquorLicences = licences.filter(item => item.licenceTypeCategory === "Liquor" && item.status === "Active");
-    this.cannabisLicences =
-      licences.filter(item => item.licenceTypeCategory === "Cannabis" && item.status === "Active");
-    this.application = application;
+  private setFormData(data:Application) {
+    this.application = data;
     this.applicationContact = {
       contactPersonFirstName: this.application.contactPersonFirstName,
       contactPersonLastName: this.application.contactPersonLastName,
@@ -147,48 +134,24 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
       contactPersonEmail: this.application.contactPersonEmail
     };
 
-    this.primaryInvoice = primary;
-    this.secondaryInvoice = secondary;
+    this.form.patchValue(data);
 
-    const primaryInvoiceInfoMissing = primary && primary.isApproved && !this.application.primaryInvoicePaid;
-    const secondaryInvoiceInfoMissing = secondary && secondary.isApproved && !this.application.secondaryInvoicePaid;
+    this.dataLoaded = true;
 
-    // if all required payments are made, go to the dashboard
-    if ((!this.hasCannabis || this.application.primaryInvoicePaid) &&
-      (!this.hasLiquor || this.application.secondaryInvoicePaid)) {
-      this.canCreateNewApplication = true;
-    }
-
-    if (primaryInvoiceInfoMissing || secondaryInvoiceInfoMissing) {
-      // the asynchonous workflow in dynamics has not yet run. Pause for a second and get data again
-      setTimeout(() => {
-        this.loadData();
-      }, 1000);
-    } else {
-      // if any payment was made, disable the form
-      if (this.application.primaryInvoicePaid || this.application.secondaryInvoicePaid) {
-        this.form.disable();
-        this.appContactDisabled = true;
-      }
-      this.form.patchValue(application);
-      var temp = this.form.get('csInternalTransferOfShares');
-      var temp1 = this.form.get('csNameChangeLicenseeCorporation').value;
-      this.dataLoaded = true;
-    }
   }
 
   /**
  * Save form data
  * @param showProgress
  */
-  save(showProgress: boolean = false, appData: Application = {} as Application): Observable<[boolean, Application]> {
+  save(showProgress: boolean = true): Observable<[boolean, Application]> {
     const saveData = this.form.value;
 
     return this.applicationDataService.updateApplication({
       ...this.application,
       ...this.form.value,
       ...this.appContact.form.value,
-      ...appData
+      //...appData
     })
       .pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
@@ -268,42 +231,18 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
   }
 
   /**
-   * Submit the application for payment
+   * Submit the application change 
    * */
-  submit_application(invoiceType: "primary" | "secondary") {
+  submit_application() {
     // Only save if the data is valid
     if (this.isValid()) {
-      if (invoiceType === "primary") {
-        this.primaryPaymentInProgress = true;
-      } else {
-        this.secondaryPaymentInProgress = true;
-      }
+    
       this.submitApplicationInProgress = true;
-      this
-        .save(!this.application.applicationType.isFree,
-          { invoiceTrigger: 1 } as Application) // trigger invoice generation when saving
+      this.save(true) 
         .pipe(takeWhile(() => this.componentActive))
         .subscribe(([saveSucceeded, app]) => {
-          if (saveSucceeded) {
-            if (app) {
-              this.submitPayment(invoiceType)
-                .subscribe(res => {
-                  this.saveComplete.emit(true);
-                  if (invoiceType === "primary") {
-                    this.primaryPaymentInProgress = false;
-                  } else {
-                    this.secondaryPaymentInProgress = false;
-                  }
-                });
-            }
-          } else if (this.application.applicationType.isFree
-          ) { // show error message the save failed and the application is free
-            this.snackBar.open("Error saving Application", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
-            if (invoiceType === "primary") {
-              this.primaryPaymentInProgress = false;
-            } else {
-              this.secondaryPaymentInProgress = false;
-            }
+          if (!saveSucceeded) {  
+            this.snackBar.open("Error saving Permanent Change Application", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
           }
         });
     } else {
@@ -372,8 +311,8 @@ const masterChangeList = [
     helpTextHeader: 'Use this option to report:',
     helpText: ['When shares or partnership units are redistributed between existing shareholders/partners  but no new shareholders/partners are added to the business structure (if new shareholders are added, see external transfer of shares)',
       'Removal of shareholders/unit holders',
-      'Amalgamations that do not add new shareholders or legal entities to the licensee  corporation',
-      'Holding companies within the licensee corporation and/or third party operators should also complete this section when an internal share transfer or an amalgamation occurs'
+      'Amalgamations that do not add new shareholders or legal entities to the applicant corporation',
+      'Holding companies within the applicant corporation and/or third party operators should also complete this section when an internal share transfer or an amalgamation occurs'
     ],
     ////helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
   },
@@ -407,8 +346,8 @@ const masterChangeList = [
     //helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
   },
   {
-    name: "Name Change, Licensee -- Corporation",
-    otherName: "Name Change, Licensee -- Organization",
+    name: "Name Change, Applicant -- Corporation",
+    otherName: "Name Change, Applicant -- Organization",
     formControlName: "csNameChangeLicenseeCorporation",
     availableTo: ["PrivateCorporation", "PublicCorporation", "SoleProprietorship", "Coop", "MilitaryMess","University"],
     CannabisFee: 220,
@@ -417,13 +356,13 @@ const masterChangeList = [
     RequiresCAS: false,
     helpTextHeader: "Use this option to report:",
     helpText: [
-      "When a corporation with an interest in a licence has legally changed its name, but existing corporate shareholders, directors and officers, and certificate number on the certificate of incorporation have not changed"
+      "When a corporation with an interest in an applicant has legally changed its name, but existing corporate shareholders, directors and officers, and certificate number on the certificate of incorporation have not changed"
     ],
 
     //helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
   },
   {
-    name: "Name Change, Licensee -- Partnership",
+    name: "Name Change, Applicant -- Partnership",
     formControlName: "csNameChangeLicenseePartnership",
     availableTo: ["GeneralPartnership", "Partnership", "LimitedLiabilityPartnership"],
     CannabisFee: 220,
@@ -431,13 +370,13 @@ const masterChangeList = [
     RequiresPHS: false,
     RequiresCAS: false,
     helpTextHeader: 'Use this option to report:',
-    helpText: ['When a person holding an interest in a licence has legally changed their name'
+    helpText: ['When a person holding an interest in an Applicant has legally changed their name'
     ],
     //helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
 
   },
   {
-    name: "Name Change, Licensee -- Society",
+    name: "Name Change, Applicant -- Society",
     formControlName: "csNameChangeLicenseeSociety",
     availableTo: ["Society"],
     CannabisFee: 220,
@@ -464,7 +403,7 @@ const masterChangeList = [
     RequiresCAS: false,
     helpTextHeader: "Use this option to report:",
     helpText: [
-      "when a person holding an interest in a licence has legally changed their name"
+      "when a person holding an interest in an applicant has legally changed their name"
     ],
     //helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
   },
@@ -480,7 +419,7 @@ const masterChangeList = [
     RequiresPHS: false,
     RequiresCAS: false,
     helpTextHeader: 'Use this option to report:',
-    helpText: ['Upon the death, bankruptcy or receivership of a licensee'
+    helpText: ['Upon the death, bankruptcy or receivership of an Applicant'
     ],
     //helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
   }
