@@ -69,6 +69,11 @@ import { CovidConfirmationComponent } from
 import { TerminateTPORelationshipComponent } from
   "@components/applications/terminate-tpo-relationship/terminate-tpo-relationship.component";
 import { LgApprovalsComponent } from "@components/lg-approvals/lg-approvals.component";
+
+import { DecisionMadeButNoDocsApplicationsComponent } from "./components/lg-approvals/decision-made-but-no-docs-applications/decision-made-but-no-docs-applications.component";
+import { DecisionNotMadeApplicationsComponent } from "./components/lg-approvals/decision-not-made-applications/decision-not-made-applications.component";
+import { ForZoningApplicationsComponent } from "./components/lg-approvals/for-zoning-applications/for-zoning-applications.component";
+
 import { LicenceRepresentativeFormComponent } from
   "@components/licence-representative-form/licence-representative-form.component";
 import { MarketEventComponent } from "@components/market-event/market-event.component";
@@ -203,6 +208,7 @@ const routes: Routes = [
     canDeactivate: [CanDeactivateGuard],
     data: { feature: "LGApprovals" }
   },
+
   {
     path: "security-screening/confirmation",
     component: SecurityScreeningConfirmationComponent,

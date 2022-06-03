@@ -7,18 +7,18 @@ import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 import { ApplicationDataService } from '@services/application-data.service';
 import { Application } from '@models/application.model';
 @Component({
-  selector: 'app-resolved-applications',
-  templateUrl: './resolved-applications.component.html',
-  styleUrls: ['./resolved-applications.component.scss']
+  selector: 'app-decision-not-made-applications',
+  templateUrl: './decision-not-made-applications.component.html',
+  styleUrls: ['./decision-not-made-applications.component.scss']
 })
-export class ResolvedApplicationsComponent implements OnInit, AfterViewInit  {
+export class DecisionNotMadeApplicationsComponent implements OnInit, AfterViewInit  {
   displayedColumns: string[] = ['number', 'application', 'applyingBusiness', 'establishmentAddress', 'action'];
 
   faPencilAlt = faPencilAlt;
   resultsLength = 0;
   isLoadingResults = true;
   isRateLimitReached = false;
-  dataLoaded = false;
+  dataLoaded = false; // this is set to true when all page data is loaded
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -37,25 +37,19 @@ export class ResolvedApplicationsComponent implements OnInit, AfterViewInit  {
         startWith({}),
         switchMap(() => {
           this.isLoadingResults = true;
-          return this.applicationDataService.getResolvedLGApplications(this.paginator.pageIndex, this.paginator.pageSize);
-
-          // return this.exampleDatabase!.getRepoIssues(
-          //   this.sort.active, this.sort.direction, this.paginator.pageIndex);
+          return this.applicationDataService.getLGApprovalApplicationsDecisionNotMade(this.paginator.pageIndex, this.paginator.pageSize);
         }),
         map(result => {
           // Flip flag to show that loading has finished.
           this.isLoadingResults = false;
-          this.isRateLimitReached = false;
           this.dataLoaded = true;
-          //this.resultsLength = data.total_count;
+          this.isRateLimitReached = false;        
           this.resultsLength = result.count;
-
           return result.value;
         }),
         catchError(() => {
           this.isLoadingResults = false;
           this.dataLoaded = true;
-          // Catch if the GitHub API has reached its rate limit. Return empty data.
           this.isRateLimitReached = true;
           return of([] as Application[]);
         })

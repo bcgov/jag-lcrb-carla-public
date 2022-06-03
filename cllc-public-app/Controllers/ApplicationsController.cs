@@ -339,6 +339,256 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(results);
         }
 
+        /// GET local government approval applications decision not made in Dynamics for the current user
+        [HttpGet("current/lg-approvals-decision-not-made")]
+        public IActionResult getLGApprovalApplicationsDecisionNotMade([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10)
+        {
+            //LCSD-6374 change result from List<Application> to PagingResult<Application>
+            //var results = new List<Application>();
+            var results = new PagingResult<Application>()
+            {
+                Value = new List<Application>()
+            };
+            // get the current user.
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+
+            try
+            {
+                // get user account
+                var accountId = userSettings.AccountId;
+                var account = _dynamicsClient.GetAccountById(accountId);
+
+                if (account._adoxioLginlinkidValue != null)
+                {
+                    var filter = $"_adoxio_localgovindigenousnationid_value eq {account._adoxioLginlinkidValue}";
+                    filter += $" and adoxio_lgdecisionsubmissiondate eq null";
+                    filter += $" and adoxio_ApplicationTypeId not eq null";
+                    filter += $" and (adoxio_isshowlginapproval eq true";
+                    filter += $" or (statuscode eq {(int)AdoxioApplicationStatusCodes.PendingForLGFNPFeedback}";                       
+                    filter += $"      and adoxio_islgzoningconfirmation eq false ";          
+                    filter += "      ))";
+                    var expand = new List<string>
+                    {
+                        "adoxio_Applicant",
+                        "adoxio_localgovindigenousnationid",
+                        "adoxio_application_SharePointDocumentLocations",
+                        "adoxio_application_adoxio_tiedhouseconnection_Application",
+                        "adoxio_AssignedLicence",
+                        "adoxio_ApplicationTypeId",
+                        "adoxio_LicenceFeeInvoice",
+                        "adoxio_Invoice"
+                    };
+                    var customHeaders = new Dictionary<string, List<string>>();
+                    var preferHeader = new List<string>();
+                    preferHeader.Add($"odata.maxpagesize={pageSize}");
+
+                    customHeaders.Add("Prefer", preferHeader);
+                    var odataVersionHeader = new List<string>();
+                    odataVersionHeader.Add("4.0");
+
+                    customHeaders.Add("OData-Version", odataVersionHeader);
+                    customHeaders.Add("OData-MaxVersion", odataVersionHeader);
+                    var applicationQuery = _dynamicsClient.Applications.GetWithHttpMessagesAsync(filter: filter, expand: expand, customHeaders: customHeaders, count: true).GetAwaiter().GetResult();
+
+                    while (pageIndex > 0)
+                    {
+                        // get the next window.
+                        string odataNextLink = applicationQuery.Body.OdataNextLink;
+                        applicationQuery = _dynamicsClient.Applications.GetNextLink(odataNextLink, customHeaders);
+                        pageIndex--;
+                    }
+
+                    var applications =  applicationQuery.Body.Value;
+                    results.Count = Int32.Parse(applicationQuery.Body.Count);
+
+                    foreach (var dynamicsApplication in applications)
+                    {
+                        var viewModel = dynamicsApplication.ToViewModel(_dynamicsClient, _cache, _logger).GetAwaiter().GetResult();
+                        results.Value.Add(viewModel);
+                    }             
+                }
+            }
+            catch (HttpOperationException e)
+            {
+                var errorText = "Error getting local government approval applications decision not made in Dynamics for the current user";
+                _logger.LogError(e, errorText);
+                return StatusCode(StatusCodes.Status500InternalServerError, errorText);
+            }
+            catch (Exception e)
+            {
+                var errorText = "Unexpected Error getting local government approval applications decision not made in Dynamics for the current user";
+                _logger.LogError(e, errorText);
+                return StatusCode(StatusCodes.Status500InternalServerError, errorText);
+            }
+
+            return new JsonResult(results);
+        }
+
+        /// GET local government approval applications for zoning in Dynamics for the current user
+        [HttpGet("current/lg-approvals-for-zoning")]
+        public IActionResult getLGApprovalApplicationsForZoning([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10)
+        {
+            //LCSD-6374 change result from List<Application> to PagingResult<Application>
+            //var results = new List<Application>();
+            var results = new PagingResult<Application>()
+            {
+                Value = new List<Application>()
+            };
+            // get the current user.
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+
+            try
+            {
+                // get user account
+                var accountId = userSettings.AccountId;
+                var account = _dynamicsClient.GetAccountById(accountId);
+
+                if (account._adoxioLginlinkidValue != null)
+                {
+                    var filter = $"_adoxio_localgovindigenousnationid_value eq {account._adoxioLginlinkidValue}";
+                    filter += $" and adoxio_lgdecisionsubmissiondate eq null";
+                    filter += $" and adoxio_ApplicationTypeId not eq null";
+                    filter += $" and adoxio_islgzoningconfirmation eq true";    
+
+                    var expand = new List<string>
+                    {
+                        "adoxio_Applicant",
+                        "adoxio_localgovindigenousnationid",
+                        "adoxio_application_SharePointDocumentLocations",
+                        "adoxio_application_adoxio_tiedhouseconnection_Application",
+                        "adoxio_AssignedLicence",
+                        "adoxio_ApplicationTypeId",
+                        "adoxio_LicenceFeeInvoice",
+                        "adoxio_Invoice"
+                    };
+                    var customHeaders = new Dictionary<string, List<string>>();
+                    var preferHeader = new List<string>();
+                    preferHeader.Add($"odata.maxpagesize={pageSize}");
+
+                    customHeaders.Add("Prefer", preferHeader);
+                    var odataVersionHeader = new List<string>();
+                    odataVersionHeader.Add("4.0");
+
+                    customHeaders.Add("OData-Version", odataVersionHeader);
+                    customHeaders.Add("OData-MaxVersion", odataVersionHeader);
+                    var applicationQuery = _dynamicsClient.Applications.GetWithHttpMessagesAsync(filter: filter, expand: expand, customHeaders: customHeaders, count: true).GetAwaiter().GetResult();
+
+                    while (pageIndex > 0)
+                    {
+                        // get the next window.
+                        string odataNextLink = applicationQuery.Body.OdataNextLink;
+                        applicationQuery = _dynamicsClient.Applications.GetNextLink(odataNextLink, customHeaders);
+                        pageIndex--;
+                    }
+
+                    var applications = applicationQuery.Body.Value;
+                    results.Count = Int32.Parse(applicationQuery.Body.Count);
+
+                    foreach (var dynamicsApplication in applications)
+                    {
+                        var viewModel = dynamicsApplication.ToViewModel(_dynamicsClient, _cache, _logger).GetAwaiter().GetResult();
+                        results.Value.Add(viewModel);
+                    }
+                }
+            }
+            catch (HttpOperationException e)
+            {
+                var errorText = "Error getting local government approval applications for zoning in Dynamics for the current user";
+                _logger.LogError(e, errorText);
+                return StatusCode(StatusCodes.Status500InternalServerError, errorText);
+            }
+            catch (Exception e)
+            {
+                var errorText = "Unexpected Error getting local government approval applications for-zoning in Dynamics for the current user";
+                _logger.LogError(e, errorText);
+                return StatusCode(StatusCodes.Status500InternalServerError, errorText);
+            }
+
+            return new JsonResult(results);
+        }
+
+        /// GET local government approval applications dicision mad but no docs in Dynamics for the current user
+        [HttpGet("current/lg-approvals-dicision-made-but-no-docs")]
+        public IActionResult getLGApprovalApplicationsDicisionMadeButNoDocs([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10)
+        {
+            //LCSD-6374 change result from List<Application> to PagingResult<Application>
+            //var results = new List<Application>();
+            var results = new PagingResult<Application>()
+            {
+                Value = new List<Application>()
+            };
+            // get the current user.
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+
+            try
+            {
+                // get user account
+                var accountId = userSettings.AccountId;
+                var account = _dynamicsClient.GetAccountById(accountId);
+                if (account._adoxioLginlinkidValue != null)
+                {
+                    var filter = $"_adoxio_localgovindigenousnationid_value eq {account._adoxioLginlinkidValue}";
+                    filter += $" and adoxio_lgdecisionsubmissiondate not eq null";
+                    filter += $" and adoxio_lgapprovaldecision eq {(int)LGDecision.Pending}";
+
+                    var expand = new List<string>
+                    {
+                        "adoxio_Applicant",
+                        "adoxio_localgovindigenousnationid",
+                        "adoxio_application_SharePointDocumentLocations",
+                        "adoxio_application_adoxio_tiedhouseconnection_Application",
+                        "adoxio_AssignedLicence",
+                        "adoxio_ApplicationTypeId",
+                        "adoxio_LicenceFeeInvoice",
+                        "adoxio_Invoice"
+                    };
+                    var customHeaders = new Dictionary<string, List<string>>();
+                    var preferHeader = new List<string>();
+                    preferHeader.Add($"odata.maxpagesize={pageSize}");
+
+                    customHeaders.Add("Prefer", preferHeader);
+                    var odataVersionHeader = new List<string>();
+                    odataVersionHeader.Add("4.0");
+
+                    customHeaders.Add("OData-Version", odataVersionHeader);
+                    customHeaders.Add("OData-MaxVersion", odataVersionHeader);
+                    var applicationQuery = _dynamicsClient.Applications.GetWithHttpMessagesAsync(filter: filter, expand: expand, customHeaders: customHeaders, count: true).GetAwaiter().GetResult();
+
+                    while (pageIndex > 0)
+                    {
+                        // get the next window.
+                        string odataNextLink = applicationQuery.Body.OdataNextLink;
+                        applicationQuery = _dynamicsClient.Applications.GetNextLink(odataNextLink, customHeaders);
+                        pageIndex--;
+                    }
+
+                    var applications = applicationQuery.Body.Value;
+                    results.Count = Int32.Parse(applicationQuery.Body.Count);
+
+                    foreach (var dynamicsApplication in applications)
+                    {
+                        var viewModel = dynamicsApplication.ToViewModel(_dynamicsClient, _cache, _logger).GetAwaiter().GetResult();
+                        results.Value.Add(viewModel);
+                    }
+                }
+            }
+            catch (HttpOperationException e)
+            {
+                var errorText = "Error getting local government approval applications in Dynamics for the current user";
+                _logger.LogError(e, errorText);
+                return StatusCode(StatusCodes.Status500InternalServerError, errorText);
+            }
+            catch (Exception e)
+            {
+                var errorText = "Unexpected Error getting local government approval applications in Dynamics for the current user";
+                _logger.LogError(e, errorText);
+                return StatusCode(StatusCodes.Status500InternalServerError, errorText);
+            }
+
+            return new JsonResult(results);
+        }
+
+
 
         /** GET all local government approval applications in Dynamics for the current user that are resolved
         * pageIndex: 0 based page index
