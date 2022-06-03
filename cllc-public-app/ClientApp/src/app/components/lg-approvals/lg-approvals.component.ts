@@ -63,7 +63,8 @@ export class LgApprovalsComponent implements OnInit {
     //      this.snackBar.open(`An error occured while getting approval applications`,
     //        "Fail",
     //        { duration: 3500, panelClass: ["red-snackbar"] });
-    //    });  
+    //    });
+    this.dataLoaded = true;
   }
 
   get90dayCount(submissionDate: Date): number {

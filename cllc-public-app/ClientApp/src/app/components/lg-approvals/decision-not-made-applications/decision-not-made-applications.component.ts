@@ -18,6 +18,7 @@ export class DecisionNotMadeApplicationsComponent implements OnInit, AfterViewIn
   resultsLength = 0;
   isLoadingResults = true;
   isRateLimitReached = false;
+  dataLoaded = false; // this is set to true when all page data is loaded
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -41,12 +42,14 @@ export class DecisionNotMadeApplicationsComponent implements OnInit, AfterViewIn
         map(result => {
           // Flip flag to show that loading has finished.
           this.isLoadingResults = false;
+          this.dataLoaded = true;
           this.isRateLimitReached = false;        
           this.resultsLength = result.count;
           return result.value;
         }),
         catchError(() => {
-          this.isLoadingResults = false;         
+          this.isLoadingResults = false;
+          this.dataLoaded = true;
           this.isRateLimitReached = true;
           return of([] as Application[]);
         })
