@@ -35,33 +35,36 @@ export class LgApprovalsComponent implements OnInit {
         this.account = account;
       });
 
-    // get approval applications
-    this.busy = this.applicationDataService.getLGApprovalApplications()
-      .subscribe(applications => {
-        this.applications = applications || [];
-        this.applicationsDecisionNotMade =
-          this.applications.filter(app => !app.lGDecisionSubmissionDate &&
-            app.applicationType &&
-            (app.applicationType.isShowLGINApproval ||
-              (app.applicationStatus === "Pending for LG/FN/Police Feedback"
-                && app?.applicationType?.isShowLGZoningConfirmation !== true
-              )
-            )
-          );
-        this.applicationsForZoning =
-          this.applications.filter(app => !app.lGDecisionSubmissionDate &&
-            app.applicationType &&
-            app.applicationType.isShowLGZoningConfirmation);
-        this.applicationsDecisionMadeButNoDocs =
-          this.applications.filter(app => app.lGDecisionSubmissionDate && app.lGApprovalDecision === "Pending");
-        this.dataLoaded = true;
-      },
-        error => {
-          this.snackBar.open(`An error occured while getting approval applications`,
-            "Fail",
-            { duration: 3500, panelClass: ["red-snackbar"] });
-        });
+    // get approval applications split into 3 parts
+    // THIS is original one.
+    //this.busy = this.applicationDataService.getLGApprovalApplications()
+    //  .subscribe(applications => {
+    //    this.applications = applications || [];
+    //    this.applicationsDecisionNotMade =
+    //      this.applications.filter(app => !app.lGDecisionSubmissionDate &&
+    //        app.applicationType &&
+    //        (app.applicationType.isShowLGINApproval ||
+    //          (app.applicationStatus === "Pending for LG/FN/Police Feedback"
+    //            && app?.applicationType?.isShowLGZoningConfirmation !== true
+    //          )
+    //        )
+    //      );
 
+    //    this.applicationsForZoning =
+    //      this.applications.filter(app => !app.lGDecisionSubmissionDate &&
+    //        app.applicationType &&
+    //        app.applicationType.isShowLGZoningConfirmation);
+
+    //    this.applicationsDecisionMadeButNoDocs =
+    //      this.applications.filter(app => app.lGDecisionSubmissionDate && app.lGApprovalDecision === "Pending");
+    //    this.dataLoaded = true;
+    //  },
+    //    error => {
+    //      this.snackBar.open(`An error occured while getting approval applications`,
+    //        "Fail",
+    //        { duration: 3500, panelClass: ["red-snackbar"] });
+    //    });
+    this.dataLoaded = true;
   }
 
   get90dayCount(submissionDate: Date): number {

@@ -1,164 +1,41 @@
 <div class="form-wrapper position-relative">
-  <mat-progress-bar class="mt-1" *ngIf="!(dataLoaded && account)" mode="indeterminate"></mat-progress-bar>
+  
 
-  <ng-container *ngIf="account && dataLoaded">
-    <ng-container *ngIf="applicationsDecisionNotMade && applicationsDecisionNotMade.length > 0">
-      <h1>Applications Awaiting Comment</h1>
-      <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
-      <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
-        <p>The following applications have been submitted for your review.</p>
-        <p>
-          Click <strong><fa-icon [icon]="faPencilAlt" style="margin-right: 5px;"></fa-icon>Review Application</strong> to see a
-          copy of the application, including all relevant attachments. At the bottom of the application you will be able to
-          provide your comment and validation, as requested. When comment is required you can <strong>Accept</strong> the application with
-          feedback, <strong>opt-out</strong> of the comment process, or <strong>reject</strong> the application altogether. The applicant will be notified on
-          completion of your review.
-        </p>
-      </div>
+  <div>
+    <h1>Applications Awaiting Comment</h1>
+    <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
+    <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
+      <p>The following applications have been submitted for your review.</p>
+      <p>
+        Click <strong><fa-icon [icon]="faPencilAlt" style="margin-right: 5px;"></fa-icon>Review Application</strong> to see a
+        copy of the application, including all relevant attachments. At the bottom of the application you will be able to
+        provide your comment and validation, as requested. When comment is required you can <strong>Accept</strong> the application with
+        feedback, <strong>opt-out</strong> of the comment process, or <strong>reject</strong> the application altogether. The applicant will be notified on
+        completion of your review.
+      </p>
+    </div>
+    <app-decision-not-made-applications></app-decision-not-made-applications>
+  </div>
 
-      <table>
-        <tr>
-          <th></th>
-          <th style="width: 250px;">Application</th>
-          <th style="width: 250px;">Applying Business</th>
-          <th style="width: 250px;">Establishment Address</th>
-          <th style="width: 300px;">&nbsp;</th>
-        </tr>
+  <div>
+    <h1>Applications Awaiting Zoning Confirmation</h1>
+    <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
+    <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
+      <p>The following applications have been submitted for your review.</p>
+    </div>
+    <app-for-zoning-applications></app-for-zoning-applications>
+  </div>
 
-        <tr *ngFor="let item of applicationsDecisionNotMade; let i = index;" style="border: 1px solid #ccc;">
-          <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
-            <span>{{i+1}}</span>
-          </td>
-          <td style="padding: 10px;">
-            <div>
-              <strong>{{item?.establishmentName}}</strong>
-            </div>
-            <div>{{item?.applicationType?.name}}</div>
-            <div>Job Number: {{item?.jobNumber}}</div>
-            <!--div>Sent for Review: {{item?.modifiedOn}}</div-->
-          </td>
-          <td style="padding: 10px;">
-            <div>{{item?.applicant?.name}} </div>
-            <!--div>{{item?.applicant?.businessType}} </div-->
-            <!-- <div>{{item?.}} </div> -->
-          </td>
-          <td>
-            <div>{{item?.establishmentAddressStreet}} </div>
-            <div>{{item?.establishmentAddressCity}} </div>
-            <div>{{item?.establishmentAddressPostalCode}}</div>
-          </td>
-          <td align="center">
-            <a routerLink="/application/{{item?.id}}"><fa-icon [icon]="faPencilAlt" style="margin-right: 5px;"></fa-icon>Review Application</a>
-            <br>
-            <div *ngIf="item.dateApplicantSentToLG">
-              <strong>Date Sent</strong>: {{item.dateApplicantSentToLG | date : 'dd MMM yyyy'}}
-            </div>
-          </td>
-        </tr>
-      </table>
-    </ng-container>
+  <div>
+    <h1>Applications Awaiting Resolution</h1>
 
-    <ng-container *ngIf="applicationsForZoning && applicationsForZoning.length > 0">
-      <h1>Applications Awaiting Zoning Confirmation</h1>
-      <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
-      <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
-        <p>The following applications have been submitted for your review.</p>
-      </div>
-
-      <table>
-        <tr>
-          <th></th>
-          <th style="width: 250px;">Application</th>
-          <th style="width: 250px;">Applying Business</th>
-          <th style="width: 250px;">Establishment Address</th>
-          <th style="width: 300px;">&nbsp;</th>
-        </tr>
-
-        <tr *ngFor="let item of applicationsForZoning; let i = index;" style="border: 1px solid #ccc;">
-          <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
-            <span>{{i+1}}</span>
-          </td>
-          <td style="padding: 10px;">
-            <div>
-              <strong>{{item?.establishmentName}}</strong>
-            </div>
-            <div>{{item?.applicationType?.name}}</div>
-            <div>Job Number: {{item?.jobNumber}}</div>
-            <!--div>Sent for Review: {{item?.modifiedOn}}</div-->
-          </td>
-          <td style="padding: 10px;">
-            <div>{{item?.applicant?.name}} </div>
-            <!--div>{{item?.applicant?.businessType}} </div-->
-            <!-- <div>{{item?.}} </div> -->
-          </td>
-          <td>
-            <div>{{item?.establishmentAddressStreet}} </div>
-            <div>{{item?.establishmentAddressCity}} </div>
-            <div>{{item?.establishmentAddressPostalCode}}</div>
-          </td>
-          <td align="center">
-            <a routerLink="/application/{{item?.id}}"><fa-icon [icon]="faPencilAlt" style="margin-right: 5px;"></fa-icon>Review Application</a>
-          </td>
-        </tr>
-      </table>
-    </ng-container>
-
-    <ng-container *ngIf="applicationsDecisionMadeButNoDocs && applicationsDecisionMadeButNoDocs.length > 0">
-      <h1>Applications Awaiting Resolution</h1>
-
-      <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
-      <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
-        <p>You have indicated your intent to accept the below application(s). LCRB requires documentation of the resolution assessment within 90 days.</p>
-        <p>If you are ready to provide this information, click <strong><fa-icon [icon]="faPencilAlt" style="margin-right: 5px;"></fa-icon>Provide Resolution Documentation</strong></p>
-      </div>
-
-      <table>
-        <tr>
-          <th></th>
-          <th style="width: 250px;">Application</th>
-          <th style="width: 250px;">Applying Business</th>
-          <th style="width: 250px;">Address</th>
-          <th style="width: 300px;">Provide Resolution</th>
-          <th style="width: 300px;">90 Day Counter</th>
-        </tr>
-
-        <tr *ngFor="let item of applicationsDecisionMadeButNoDocs; let i = index;"
-            style="border: 1px solid #ccc;">
-          <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
-            <span>{{i+1}}</span>
-          </td>
-          <td style="padding: 10px;">
-            <div>
-              <strong>{{item?.establishmentName}}</strong>
-            </div>
-            <div>{{item?.applicationType?.name}}</div>
-            <div>Job Number: {{item?.jobNumber}}</div>
-          </td>
-          <td style="padding: 10px;">
-            <div>{{item?.applicant?.name}} </div>
-            <!--div>{{item?.applicant?.businessType}} </div-->
-            <!-- <div>{{item?.}} </div> -->
-          </td>
-          <td>
-            <div>{{item?.establishmentAddressStreet}} </div>
-            <div>{{item?.establishmentAddressCity}} </div>
-            <div>{{item?.establishmentAddressPostalCode}}</div>
-          </td>
-          <td align="center">
-            <a routerLink="/application/{{item?.id}}"><fa-icon [icon]="faPencilAlt" style="margin-right: 5px;"></fa-icon>Provide Resolution Documentation</a>
-          </td>
-          <td align="center">
-            <span> {{get90dayCount(item?.lGDecisionSubmissionDate)}} days left</span>
-          </td>
-        </tr>
-      </table>
-    </ng-container>
-
-    <section *ngIf="applicationsDecisionNotMade?.length === 0 && applicationsDecisionMadeButNoDocs?.length === 0 && applicationsForZoning?.length === 0">
-      <h1>No applications awaiting review</h1>
-      <p>There are currently no applications awaiting your review.</p>
-    </section>
-  </ng-container>  
+    <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
+    <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
+      <p>You have indicated your intent to accept the below application(s). LCRB requires documentation of the resolution assessment within 90 days.</p>
+      <p>If you are ready to provide this information, click <strong><fa-icon [icon]="faPencilAlt" style="margin-right: 5px;"></fa-icon>Provide Resolution Documentation</strong></p>
+    </div>
+    <app-decision-made-but-no-docs-applications></app-decision-made-but-no-docs-applications>
+  </div>
 
     <div>
       <h1>Resolved Applications</h1>
