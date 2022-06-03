@@ -1,12 +1,7 @@
-<div class="example-container mat-elevation-z0" *ngIf="resultsLength>0">
+<mat-progress-bar class="mt-1" *ngIf="!(dataLoaded)" mode="indeterminate"></mat-progress-bar>
+<div class="example-container mat-elevation-z0">
   <div class="example-table-container">
-    <h1>Applications Awaiting Resolution</h1>
-
-    <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
-    <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
-      <p>You have indicated your intent to accept the below application(s). LCRB requires documentation of the resolution assessment within 90 days.</p>
-      <p>If you are ready to provide this information, click <strong><fa-icon [icon]="faPencilAlt" style="margin-right: 5px;"></fa-icon>Provide Resolution Documentation</strong></p>
-    </div>
+    
     <table mat-table [dataSource]="data" class="example-table"
            matSort matSortActive="application" matSortDisableClear matSortDirection="desc">
 

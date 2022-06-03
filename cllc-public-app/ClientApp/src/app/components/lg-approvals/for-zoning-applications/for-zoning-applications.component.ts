@@ -18,6 +18,7 @@ export class ForZoningApplicationsComponent implements OnInit, AfterViewInit  {
   resultsLength = 0;
   isLoadingResults = true;
   isRateLimitReached = false;
+  dataLoaded = false; // this is set to true when all page data is loaded
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -39,6 +40,7 @@ export class ForZoningApplicationsComponent implements OnInit, AfterViewInit  {
         map(result => {
           // Flip flag to show that loading has finished.
           this.isLoadingResults = false;
+          this.dataLoaded = true;
           this.isRateLimitReached = false;
           //this.resultsLength = data.total_count;
           this.resultsLength = result.count;
@@ -47,6 +49,7 @@ export class ForZoningApplicationsComponent implements OnInit, AfterViewInit  {
         }),
         catchError(() => {
           this.isLoadingResults = false;
+          this.dataLoaded = true;
           this.isRateLimitReached = true;
           return of([] as Application[]);
         })
