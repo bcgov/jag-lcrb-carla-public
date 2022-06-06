@@ -1,0 +1,22 @@
+<ng-container *ngIf="account">
+  <h3 class="blue-header mb-0">Have the details of your {{account.getBusinessTypeName()}} changed?</h3>
+  <section class="padded submitted-content" style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
+    <ng-container *ngIf="!terminatedApplicationExists">
+      <p>
+        Applicant must notify the Branch of any changes to their structure within 10 days. These changes include:
+      </p>
+
+      <ul>
+        <li>Internal or external share transfers (including amalgamations)</li>
+        <li>Name changes of associated businesses</li>
+        <li>Name changes of individuals associated with your {{account.getBusinessTypeName()}}</li>
+        <li>Entering Receivership</li>
+        <li>Specifying an Executor</li>
+      </ul>
+
+      <div class="d-flex flex-row-reverse">
+        <button routerLink="/permanent-change-to-an-applicant" mat-raised-button color="primary">SUBMIT A CHANGE</button>
+      </div>
+    </ng-container>
+  </section>
+</ng-container>
