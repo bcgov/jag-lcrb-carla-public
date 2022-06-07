@@ -229,6 +229,11 @@ import { CovidConfirmationComponent } from
 import { TerminateTPORelationshipComponent } from
   "@components/applications/terminate-tpo-relationship/terminate-tpo-relationship.component";
 import { LgApprovalsComponent } from "./components/lg-approvals/lg-approvals.component";
+//LCSD-6374 split LgApprivalsComponent into following three components:
+import { DecisionMadeButNoDocsApplicationsComponent } from "./components/lg-approvals/decision-made-but-no-docs-applications/decision-made-but-no-docs-applications.component";
+import { DecisionNotMadeApplicationsComponent } from "./components/lg-approvals/decision-not-made-applications/decision-not-made-applications.component";
+import { ForZoningApplicationsComponent } from "./components/lg-approvals/for-zoning-applications/for-zoning-applications.component";
+
 import { LiquorApprovalsCalloutComponent } from
   "./components/liquor-approvals-callout/liquor-approvals-callout.component";
 import { LgInConfirmationOfReceiptComponent, LGDecisionDialogComponent } from
@@ -250,8 +255,12 @@ import { ProductionStagesComponent } from
 import { PhsConfirmationComponent } from "@components/phs-confirmation/phs-confirmation.component";
 import { PermanentChangeToALicenseeComponent } from
   "./components/applications/permanent-change-to-a-licensee/permanent-change-to-a-licensee.component";
+import { PermanentChangeToAnApplicantComponent } from
+  "./components/applications/permanent-change-to-an-applicant/permanent-change-to-an-applicant.component";
 import { LegalEntityTypeUpdateCalloutboxComponent } from
   "./components/dashboard/legal-entity-type-update-calloutbox/legal-entity-type-update-calloutbox.component";
+import { LegalEntityTypeUpdateApplicantCalloutboxComponent } from
+  "./components/dashboard/legal-entity-type-update-applicant-calloutbox/legal-entity-type-update-applicant-calloutbox.component";
 import { OffsiteStorageComponent } from "@components/offsite-storage/offsite-storage.component";
 import { OffsiteTableComponent } from "@components/tables/offsite-table/offsite-table.component";
 import { ContactComponent } from "./shared/components/contact/contact.component";
@@ -437,6 +446,9 @@ import { CancelSepApplicationDialogComponent } from './components/sep/sep-applic
     ApplicationCovidTemporaryExtensionComponent,
     CovidConfirmationComponent,
     LgApprovalsComponent,
+    DecisionMadeButNoDocsApplicationsComponent,
+    DecisionNotMadeApplicationsComponent,
+    ForZoningApplicationsComponent,
     LiquorApprovalsCalloutComponent,
     LgInConfirmationOfReceiptComponent,
     BusinessPlanComponent,
@@ -446,7 +458,9 @@ import { CancelSepApplicationDialogComponent } from './components/sep/sep-applic
     ProductionStagesComponent,
     PhsConfirmationComponent,
     PermanentChangeToALicenseeComponent,
+    PermanentChangeToAnApplicantComponent,
     LegalEntityTypeUpdateCalloutboxComponent,
+    LegalEntityTypeUpdateApplicantCalloutboxComponent,
     OffsiteStorageComponent,
     OffsiteTableComponent,
     ContactComponent,

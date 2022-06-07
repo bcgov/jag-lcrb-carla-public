@@ -1,0 +1,57 @@
+.form-wrapper {
+    max-width: 1000px;
+}
+
+.infoCell {
+    background-color: #e0e0e0;
+    border: solid #ccc 1px;
+    padding: 5px;
+    margin-left: 25px;
+    margin-right: 25px;
+    font-style: italic;
+}
+
+h4 {
+    font-weight: 900;
+}
+
+.licenceTable {
+    border-right: solid black 1px;
+    padding: 5px;
+    margin: 5px;
+    font-weight: 300;
+    width: 300px;
+}
+
+th.licenceTable {
+  text-align:center;
+}
+
+.paymentSummary {
+  padding: 5px;
+  margin: 5px;
+
+}
+
+th.paymentSummary {
+  border: solid #E1E8F2 1px;
+  padding: 5px;
+  text-align: center;
+  background-color: #E1E8F2;
+}
+
+td.paymentSummary1{
+  font-weight: 900;
+
+  font-style: italic;
+  border: solid #E1E8F2 1px;
+  width: 70%;
+  padding: 10px;
+}
+  td.paymentSummary2{
+    font-weight: 500;
+    width: 15%;
+
+    text-align: center;
+    border: solid #E1E8F2 1px;
+  }
