@@ -59,17 +59,20 @@ export class ApplicationDataService extends DataService {
   }
   //LCSD-6357 part 1: 
   getLGApprovalApplicationsDecisionNotMade(pageIndex: number = 0, pageSize: number = 10): Observable<PagingResult<Application>> {
-    return this.http.get<PagingResult<Application>>(this.apiPath + "current/lg-approvals-decision-not-made", { headers: this.headers })
+    const url = `${this.apiPath}current/lg-approvals-decision-not-made?pageIndex=${pageIndex}&pageSize=${pageSize}`;
+    return this.http.get<PagingResult<Application>>(url, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
   //LCSD-6357 part 2:
   getLGApprovalApplicationsForZoning(pageIndex: number = 0, pageSize: number = 10): Observable<PagingResult<Application>> {
-    return this.http.get<PagingResult<Application>>(this.apiPath + "current/lg-approvals-for-zoning", { headers: this.headers })
+    const url = `${this.apiPath}current/lg-approvals-for-zoning?pageIndex=${pageIndex}&pageSize=${pageSize}`;
+    return this.http.get<PagingResult<Application>>(url, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
   //LCSD-6357 part 3:
   getLGApprovalApplicationsDicisionMadeButNoDocs(pageIndex: number = 0, pageSize: number = 10): Observable<PagingResult<Application>> {
-    return this.http.get<PagingResult<Application>>(this.apiPath + "current/lg-approvals-dicision-made-but-no-docs", { headers: this.headers })
+    const url = `${this.apiPath}current/lg-approvals-dicision-made-but-no-docs?pageIndex=${pageIndex}&pageSize=${pageSize}`;
+    return this.http.get<PagingResult<Application>>(url, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
