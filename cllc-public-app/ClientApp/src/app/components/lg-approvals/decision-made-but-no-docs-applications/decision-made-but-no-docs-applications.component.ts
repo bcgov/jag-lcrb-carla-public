@@ -32,14 +32,15 @@ export class DecisionMadeButNoDocsApplicationsComponent implements OnInit, After
 
   ngOnInit(): void {}
   ngAfterViewInit() {
-    this.dataLoaded = false;
+    
     // If the user changes the sort order, reset back to the first page.
-    this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
-    merge(this.sort.sortChange, this.paginator.page)
+    //this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+    merge(this.paginator.page)
       .pipe(
         startWith({}),
         switchMap(() => {
           this.isLoadingResults = true;
+          this.dataLoaded = false;
           return this.applicationDataService.getLGApprovalApplicationsDicisionMadeButNoDocs(this.paginator.pageIndex, this.paginator.pageSize);
         }),
         map(result => {

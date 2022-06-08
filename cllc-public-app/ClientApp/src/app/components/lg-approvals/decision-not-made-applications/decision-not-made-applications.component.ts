@@ -6,6 +6,7 @@ import { startWith, switchMap, map, catchError } from 'rxjs/operators';
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 import { ApplicationDataService } from '@services/application-data.service';
 import { Application } from '@models/application.model';
+import { Console } from 'console';
 @Component({
   selector: 'app-decision-not-made-applications',
   templateUrl: './decision-not-made-applications.component.html',
@@ -29,15 +30,18 @@ export class DecisionNotMadeApplicationsComponent implements OnInit, AfterViewIn
   ngOnInit(): void {
   }
   ngAfterViewInit() {
-    this.dataLoaded = false;
+    
     // If the user changes the sort order, reset back to the first page.
-    this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+    //this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
-    merge(this.sort.sortChange, this.paginator.page)
+    merge(this.paginator.page)
       .pipe(
         startWith({}),
         switchMap(() => {
           this.isLoadingResults = true;
+          this.dataLoaded = false;
+          console.log("page index " + this.paginator.pageIndex);
+          console.log("page size " + this.paginator.pageSize);
           return this.applicationDataService.getLGApprovalApplicationsDecisionNotMade(this.paginator.pageIndex, this.paginator.pageSize);
         }),
         map(result => {
