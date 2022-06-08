@@ -39,8 +39,6 @@ export class DecisionNotMadeApplicationsComponent implements OnInit, AfterViewIn
         switchMap(() => {
           this.isLoadingResults = true;
           this.dataLoaded = false;
-          console.log("page index " + this.paginator.pageIndex);
-          console.log("page size " + this.paginator.pageSize);
           return this.applicationDataService.getLGApprovalApplicationsDecisionNotMade(this.paginator.pageIndex, this.paginator.pageSize);
         }),
         map(result => {
