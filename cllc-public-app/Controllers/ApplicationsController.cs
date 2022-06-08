@@ -360,18 +360,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 if (account._adoxioLginlinkidValue != null)
                 {
-                    var filter1 = $"adoxioIsshowlginapproval eq true and adoxioIslgzoningconfirmation eq false"; 
+                    var filter1 = $"adoxio_isshowlginapproval eq true"; 
 
-                    var applicationTypes = _dynamicsClient.Applicationtypes.Get(filter: filter1).Value.ToList();
+                    var isshowlginapprovalTrue = _dynamicsClient.Applicationtypes.Get(filter: filter1).Value.ToList();
+
+                    var filter2 = $"adoxio_islgzoningconfirmation eq true";
+
+                    var islgzoningconfirmationFalse = _dynamicsClient.Applicationtypes.Get(filter: filter2).Value.ToList();
 
                     var filter = $"_adoxio_localgovindigenousnationid_value eq {account._adoxioLginlinkidValue}";
-                    filter += $" and adoxioLgdecisionsubmissiondate eq null";
-                    filter += $" and _adoxioApplicationtypeidValue not eq null";
-                    filter += $" and statuscode eq {(int)AdoxioApplicationStatusCodes.PendingForLGFNPFeedback}";
+                    filter += $" and adoxio_lgdecisionsubmissiondate eq null";
 
-                    filter += $" and (";
+                    filter += $" and ((";
                     var i = 0;
-                    foreach (var item in applicationTypes)
+                    foreach (var item in isshowlginapprovalTrue)
                     {
                         if (i == 0)
                         {
@@ -383,7 +385,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         }
                         i++;
                     }
-                    filter += $" )";
+                    filter += $" ) or (";
+                    var j = 0;
+                    foreach (var item in islgzoningconfirmationFalse)
+                    {
+                        if (j == 0)
+                        {
+                            filter += $" adoxio_ApplicationTypeId/adoxio_applicationtypeid ne {item.AdoxioApplicationtypeid}";
+                        }
+                        else
+                        {
+                            filter += $" and adoxio_ApplicationTypeId/adoxio_applicationtypeid ne {item.AdoxioApplicationtypeid}";
+                        }
+                        j++;
+                    }
+                    filter += $" ) and statuscode eq {(int)AdoxioApplicationStatusCodes.PendingForLGFNPFeedback} )";
                     // this.applicationsDecisionNotMade =
                     //      this.applications.filter(app => !app.lGDecisionSubmissionDate &&
                     //        app.applicationType &&
