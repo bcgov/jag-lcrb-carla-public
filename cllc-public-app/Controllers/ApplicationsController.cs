@@ -343,6 +343,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("current/lg-approvals-decision-not-made")]
         public IActionResult getLGApprovalApplicationsDecisionNotMade([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10)
         {
+            _logger.LogInformation("getLGApprovalApplicationsDecisionNotMade pageIndex: " + pageIndex);
+            _logger.LogInformation("getLGApprovalApplicationsDecisionNotMade pageSize: " + pageSize);
+
+
             //LCSD-6374 change result from List<Application> to PagingResult<Application>
             //var results = new List<Application>();
             var results = new PagingResult<Application>()
@@ -369,6 +373,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     var islgzoningconfirmationFalse = _dynamicsClient.Applicationtypes.Get(filter: filter2).Value.ToList();
 
                     var filter = $"_adoxio_localgovindigenousnationid_value eq {account._adoxioLginlinkidValue}";
+                    filter += $" and (statuscode eq {(int)AdoxioApplicationStatusCodes.PendingForLGFNPFeedback}";
+                    filter += $"         or adoxio_lgapprovaldecision eq {(int)LGDecision.Pending}";
+                    filter += "      )";
                     filter += $" and adoxio_lgdecisionsubmissiondate eq null";
 
                     filter += $" and ((";
@@ -431,9 +438,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     customHeaders.Add("OData-Version", odataVersionHeader);
                     customHeaders.Add("OData-MaxVersion", odataVersionHeader);
                     var applicationQuery = _dynamicsClient.Applications.GetWithHttpMessagesAsync(filter: filter, expand: expand, customHeaders: customHeaders, count: true).GetAwaiter().GetResult();
-
+                    _logger.LogInformation("getLGApprovalApplicationsDecisionNotMade number of results: " + applicationQuery.Body.Count);
+                    
                     while (pageIndex > 0)
                     {
+                        _logger.LogInformation("getLGApprovalApplicationsDecisionNotMade OdataNextLink: " + applicationQuery.Body.OdataNextLink);
+                        _logger.LogInformation("getLGApprovalApplicationsDecisionNotMade customHeaders: " + customHeaders);
                         // get the next window.
                         string odataNextLink = applicationQuery.Body.OdataNextLink;
                         applicationQuery = _dynamicsClient.Applications.GetNextLink(odataNextLink, customHeaders);
@@ -445,7 +455,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                     foreach (var dynamicsApplication in applications)
                     {
+                        
                         var viewModel = dynamicsApplication.ToViewModel(_dynamicsClient, _cache, _logger).GetAwaiter().GetResult();
+                        _logger.LogInformation("getLGApprovalApplicationsDecisionNotMade application establishment name: " + viewModel.EstablishmentName);
                         results.Value.Add(viewModel);
                     }             
                 }
@@ -491,8 +503,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                     var applicationTypes = _dynamicsClient.Applicationtypes.Get(filter: filter1).Value.ToList();
 
-                  
+
                     var filter = $"_adoxio_localgovindigenousnationid_value eq {account._adoxioLginlinkidValue}";
+                    filter += $" and (statuscode eq {(int)AdoxioApplicationStatusCodes.PendingForLGFNPFeedback}";
+                    filter += $"         or adoxio_lgapprovaldecision eq {(int)LGDecision.Pending}";
+                    filter += "      )";
                     filter += $" and adoxio_lgdecisionsubmissiondate eq null";
                     //Application.applicationType.isZoning = true
                     filter += $" and (";
@@ -594,6 +609,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 if (account._adoxioLginlinkidValue != null)
                 {
                     var filter = $"_adoxio_localgovindigenousnationid_value eq {account._adoxioLginlinkidValue}";
+                    filter += $" and (statuscode eq {(int)AdoxioApplicationStatusCodes.PendingForLGFNPFeedback}";
+                    filter += $"         or adoxio_lgapprovaldecision eq {(int)LGDecision.Pending}";
+                    filter += "      )";
                     filter += $" and adoxio_lgdecisionsubmissiondate ne null";
                     filter += $" and adoxio_lgapprovaldecision eq {(int)LGDecision.Pending}";
                     //    this.applicationsDecisionMadeButNoDocs =
