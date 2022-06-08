@@ -51,6 +51,6 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
     </div>
-
+    <mat-progress-bar class="mt-1" *ngIf="!(dataLoaded)" mode="indeterminate"></mat-progress-bar>
     <mat-paginator [length]="resultsLength" [pageSize]="10"></mat-paginator>
   </div>
