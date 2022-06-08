@@ -29,13 +29,14 @@ export class ForZoningApplicationsComponent implements OnInit, AfterViewInit  {
   ngOnInit(): void {   
   }
   ngAfterViewInit() {
-    this.dataLoaded = false;
-    this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
-    merge(this.sort.sortChange, this.paginator.page)
+    
+    //this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+    merge(this.paginator.page)
       .pipe(
         startWith({}),
         switchMap(() => {
           this.isLoadingResults = true;
+          this.dataLoaded = false;
           return this.applicationDataService.getLGApprovalApplicationsForZoning(this.paginator.pageIndex, this.paginator.pageSize);
         }),
         map(result => {
