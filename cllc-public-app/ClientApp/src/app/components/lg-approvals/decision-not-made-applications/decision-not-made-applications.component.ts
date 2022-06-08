@@ -6,7 +6,6 @@ import { startWith, switchMap, map, catchError } from 'rxjs/operators';
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 import { ApplicationDataService } from '@services/application-data.service';
 import { Application } from '@models/application.model';
-import { Console } from 'console';
 @Component({
   selector: 'app-decision-not-made-applications',
   templateUrl: './decision-not-made-applications.component.html',
