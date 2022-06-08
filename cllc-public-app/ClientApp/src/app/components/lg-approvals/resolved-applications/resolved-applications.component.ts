@@ -29,6 +29,7 @@ export class ResolvedApplicationsComponent implements OnInit, AfterViewInit  {
   ngOnInit(): void {
   }
   ngAfterViewInit() {
+    this.dataLoaded = false;
     // If the user changes the sort order, reset back to the first page.
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 

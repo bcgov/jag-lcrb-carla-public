@@ -371,7 +371,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     var filter = $"_adoxio_localgovindigenousnationid_value eq {account._adoxioLginlinkidValue}";
                     filter += $" and adoxio_lgdecisionsubmissiondate eq null";
 
-                    filter += $" and (";
+                    filter += $" and ((";
                     var i = 0;
                     foreach (var item in isshowlginapprovalTrue)
                     {
@@ -385,7 +385,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         }
                         i++;
                     }
-                    filter += $" ) or ((";
+                    filter += $" ) or (";
                     var j = 0;
                     foreach (var item in islgzoningconfirmationFalse)
                     {
@@ -395,7 +395,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         }
                         else
                         {
-                            filter += $" or adoxio_ApplicationTypeId/adoxio_applicationtypeid ne {item.AdoxioApplicationtypeid}";
+                            filter += $" and adoxio_ApplicationTypeId/adoxio_applicationtypeid ne {item.AdoxioApplicationtypeid}";
                         }
                         j++;
                     }
