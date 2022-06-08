@@ -360,13 +360,39 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 if (account._adoxioLginlinkidValue != null)
                 {
+                    var filter1 = $"adoxioIsshowlginapproval eq true and adoxioIslgzoningconfirmation eq false"; 
+
+                    var applicationTypes = _dynamicsClient.Applicationtypes.Get(filter: filter1).Value.ToList();
+
                     var filter = $"_adoxio_localgovindigenousnationid_value eq {account._adoxioLginlinkidValue}";
-                    filter += $" and adoxio_lgdecisionsubmissiondate eq null";
-                    filter += $" and adoxio_ApplicationTypeId not eq null";
-                    filter += $" and (adoxio_isshowlginapproval eq true";
-                    filter += $" or (statuscode eq {(int)AdoxioApplicationStatusCodes.PendingForLGFNPFeedback}";                       
-                    filter += $"      and adoxio_islgzoningconfirmation eq false ";          
-                    filter += "      ))";
+                    filter += $" and adoxioLgdecisionsubmissiondate eq null";
+                    filter += $" and _adoxioApplicationtypeidValue not eq null";
+                    filter += $" and statuscode eq {(int)AdoxioApplicationStatusCodes.PendingForLGFNPFeedback}";
+
+                    filter += $" and (";
+                    var i = 0;
+                    foreach (var item in applicationTypes)
+                    {
+                        if (i == 0)
+                        {
+                            filter += $" adoxio_ApplicationTypeId/adoxio_applicationtypeid eq {item.AdoxioApplicationtypeid}";
+                        }
+                        else
+                        {
+                            filter += $" or adoxio_ApplicationTypeId/adoxio_applicationtypeid eq {item.AdoxioApplicationtypeid}";
+                        }
+                        i++;
+                    }
+                    filter += $" )";
+                    // this.applicationsDecisionNotMade =
+                    //      this.applications.filter(app => !app.lGDecisionSubmissionDate &&
+                    //        app.applicationType &&
+                    //        (app.applicationType.isShowLGINApproval ||
+                    //          (app.applicationStatus === "Pending for LG/FN/Police Feedback"
+                    //            && app?.applicationType?.isShowLGZoningConfirmation !== true
+                    //          )
+                    //        )
+                    //      );
                     var expand = new List<string>
                     {
                         "adoxio_Applicant",
@@ -442,15 +468,38 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // get user account
                 var accountId = userSettings.AccountId;
                 var account = _dynamicsClient.GetAccountById(accountId);
-
                 if (account._adoxioLginlinkidValue != null)
                 {
+
+                    var filter1 = $"adoxio_islgzoningconfirmation eq true";
+
+                    var applicationTypes = _dynamicsClient.Applicationtypes.Get(filter: filter1).Value.ToList();
+
+                  
                     var filter = $"_adoxio_localgovindigenousnationid_value eq {account._adoxioLginlinkidValue}";
                     filter += $" and adoxio_lgdecisionsubmissiondate eq null";
-                    filter += $" and adoxio_ApplicationTypeId not eq null";
-                    filter += $" and adoxio_islgzoningconfirmation eq true";    
-
-                    var expand = new List<string>
+                    //Application.applicationType.isZoning = true
+                    filter += $" and (";
+                    var i = 0;
+                    foreach (var item in applicationTypes)
+                    {
+                        if (i == 0) 
+                        {
+                            filter += $" adoxio_ApplicationTypeId/adoxio_applicationtypeid eq {item.AdoxioApplicationtypeid}";
+                        }
+                        else
+                        {
+                            filter += $" or adoxio_ApplicationTypeId/adoxio_applicationtypeid eq {item.AdoxioApplicationtypeid}";
+                        }
+                        i++;
+                    }
+                    filter += $" )";
+                   
+                //    this.applicationsForZoning =
+                //      this.applications.filter(app => !app.lGDecisionSubmissionDate &&
+                //        app.applicationType &&
+                //        app.applicationType.isShowLGZoningConfirmation);
+                var expand = new List<string>
                     {
                         "adoxio_Applicant",
                         "adoxio_localgovindigenousnationid",
@@ -461,6 +510,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         "adoxio_LicenceFeeInvoice",
                         "adoxio_Invoice"
                     };
+                    //
                     var customHeaders = new Dictionary<string, List<string>>();
                     var preferHeader = new List<string>();
                     preferHeader.Add($"odata.maxpagesize={pageSize}");
@@ -528,9 +578,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 if (account._adoxioLginlinkidValue != null)
                 {
                     var filter = $"_adoxio_localgovindigenousnationid_value eq {account._adoxioLginlinkidValue}";
-                    filter += $" and adoxio_lgdecisionsubmissiondate not eq null";
+                    filter += $" and adoxio_lgdecisionsubmissiondate ne null";
                     filter += $" and adoxio_lgapprovaldecision eq {(int)LGDecision.Pending}";
-
+                    //    this.applicationsDecisionMadeButNoDocs =
+                    //      this.applications.filter(app => app.lGDecisionSubmissionDate && app.lGApprovalDecision === "Pending");
                     var expand = new List<string>
                     {
                         "adoxio_Applicant",
