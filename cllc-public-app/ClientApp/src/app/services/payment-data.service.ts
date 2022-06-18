@@ -79,7 +79,11 @@ export class PaymentDataService extends DataService {
     return this.http.get(this.apiPath + invoiceFeePath + id, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
-
+  payOutstandingPriorBalanceInvoicePaymentSubmissionUrl(id: string) {
+    const additionalFeePath = "submit/outstanding-prior-balance-invoice/";
+    return this.http.get(this.apiPath + additionalFeePath + id, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
   getWorkerPaymentSubmissionUrl(workerId: string) {
     return this.http.get(`${this.apiPath}${this.submitPath}worker/${workerId}`, { headers: this.headers })
       .pipe(catchError(this.handleError));
