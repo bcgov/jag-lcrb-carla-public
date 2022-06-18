@@ -6,6 +6,7 @@ import { Observable } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { DataService } from "./data.service";
 import { License } from "@models/license.model";
+import { OutstandingPriorBalanceInvoice } from "../models/outstanding-prior-balance-invoce.model";
 
 @Injectable({
   providedIn: "root"
@@ -67,6 +68,14 @@ export class LicenseDataService extends DataService {
 
   getAllCurrentLicenses(): Observable<ApplicationLicenseSummary[]> {
     return this.http.get<ApplicationLicenseSummary[]>(this.apiPath + "current",
+      {
+        headers: this.headers
+      })
+      .pipe(catchError(this.handleError));
+  }
+
+  getOutstandingBalancePriorInvoices(): Observable<OutstandingPriorBalanceInvoice[]> {
+    return this.http.get<OutstandingPriorBalanceInvoice[]>(this.apiPath + "outstanding-prior-balance-invoice",
       {
         headers: this.headers
       })

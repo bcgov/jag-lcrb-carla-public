@@ -1066,6 +1066,55 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             return adoxioLicences;
         }
+
+        [HttpGet("outstanding-prior-balance-invoice")]
+        public JsonResult GetCurrentUserOutstandingPriorBalanceInvoices()
+        {
+            // get the current user.
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+            var adoxioApplications = GetCurrentUserOutstandingPriorBalanceInvoiceApplication(userSettings.AccountId);
+            return new JsonResult(adoxioApplications);
+        }
+        private List<OutstandingParioBalanceInvoice> GetCurrentUserOutstandingPriorBalanceInvoiceApplication(string applicantId)
+        {
+            var results = new List<OutstandingParioBalanceInvoice>();
+
+            var filter = $"_adoxio_applicant_value eq {applicantId}";
+            var appType = _dynamicsClient.GetApplicationTypeByName("Outstanding Prior Balance Invoice - LIQ");
+            if (appType == null) return results;
+
+            filter += $" and _adoxio_applicationtypeid_value eq {appType.AdoxioApplicationtypeid} ";
+            var expand = new List<string>
+                    {
+                        "adoxio_Invoice"
+                    };
+            try
+            {
+                var applications = _dynamicsClient.Applications.Get(filter: filter, expand: expand).Value.ToList();
+                if (applications != null)
+                {
+                    foreach (var dynamicsApplication in applications)
+                    {
+                        if (dynamicsApplication.AdoxioInvoice.Name == "Outstanding Balance Invoice")
+                        {              
+                            var temp = new OutstandingParioBalanceInvoice();
+                            temp.invoice = dynamicsApplication.AdoxioInvoice.ToViewModel();
+                            temp.applicationId = dynamicsApplication.AdoxioApplicationid;
+                            results.Add(temp);
+                        }
+                    }
+                }
+            }
+            catch (HttpOperationException e)
+            {
+                _logger.LogError(e, "Error getting licensee application");
+                throw;
+            }
+
+            return results;
+        }
+
+
         private bool isConclusivelyDeemed(ApplicationLicenseSummary lic)
         {
             // get the current user.
