@@ -68,6 +68,38 @@ li {
     display: block;
 }
 
+.outstanding-table {
+  table {
+    table-layout: auto;
+    width: 100%;
+    border: 2px solid white;
+  }
+
+  th {
+    font-weight: bold;
+    text-align: center;
+    border: 2px solid white;
+    background-color: #D6EEEE;    
+  }
+
+  td {
+    border: 2px solid white;
+    border-collapse: collapse;
+    text-align: left;
+    padding: 10px;
+    font-size: 10px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #F1F4FA;
+  }
+
+  tr:nth-child(odd) {
+    background-color:#E1E8F2 ;
+  }
+}
+
+
 @media (max-width: 575.98px) {
     .dashboard-spacing {
         padding-left: 10px;
