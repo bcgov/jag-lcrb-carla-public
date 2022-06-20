@@ -1,4 +1,6 @@
-﻿namespace Gov.Lclb.Cllb.Public.ViewModels
+﻿using System;
+
+namespace Gov.Lclb.Cllb.Public.ViewModels
 {
     public class Invoice
     {
@@ -12,5 +14,7 @@
         public string returnedTransactionId { get; set; }
         public int? statecode { get; set; }
         public int? statuscode { get; set; }
+        public string description { get; set; }
+        public DateTime? duedate { get; set; }
     }
 }

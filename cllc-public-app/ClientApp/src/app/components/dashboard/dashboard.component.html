@@ -40,12 +40,43 @@
                                                                     href="mailto:lcrbcannabis@gov.bc.ca">lcrbcannabis@gov.bc.ca</a>.</p-->
       <p></p>
 
-      <app-applications-and-licences [account]="account">
-      </app-applications-and-licences>
+      <app-applications-and-licences  [account]="account"></app-applications-and-licences>
 
     </div>
+
     <div class="col-lg-4 col-sm-12" style="position: relative">
       <app-liquor-approvals-callout appRemoveIfFeatureOff="LGApprovals" [account]="account"></app-liquor-approvals-callout>
+      <section class="large-screen-only" *ngIf="outstandingBalancePriorInvoiceData.length>0">
+        <h3 class="blue-header" style="margin-bottom: 0; margin-top: 0; background: #f44336;"><fa-icon [icon]="faExclamationTriangle" style="margin-right: 5px;"></fa-icon>Outstanding Prior Balance</h3>
+
+        <div class="submitted-content" style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
+          <p>You have outstanding prior balance invoice(s)</p>
+          <table class="outstanding-table">
+            <thead>
+              <tr style="height:50px;">
+                <th>INVOICE</th>
+                <th>DESCRIPTION</th>
+                <th style="padding-left:5px;padding-right:5px;">TOTAL AMOUNT</th>
+                <th>DUE</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tr *ngFor="let item of outstandingBalancePriorInvoiceData">
+              <td>{{item.invoice.invoicenumber}}</td>
+              <td>{{item.invoice.description}} </td>
+              <td style="text-align:right;">{{item.invoice.totalamount|currency}}CAD</td>
+              <td>{{item.invoice.duedate|date:'dd/MM/yy'}}</td>
+              <td>
+                <a href="javascript:void(0);" (click)="payOutstandingPriorBalanceInvoice(item.applicationId)" class="missing">
+                  <span>                   
+                    Make Payment
+                  </span>
+                </a>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </section>
 
       <section class="large-screen-only">
         <h3 class="blue-header" style="margin-bottom: 0; margin-top: 0;"><fa-icon [icon]="faExclamationTriangle" style="margin-right: 5px;"></fa-icon>RENEW A LIQUOR OR CANNABIS LICENCE</h3>
