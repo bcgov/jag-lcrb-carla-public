@@ -1078,12 +1078,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private List<OutstandingParioBalanceInvoice> GetCurrentUserOutstandingPriorBalanceInvoiceApplication(string applicantId)
         {
             var results = new List<OutstandingParioBalanceInvoice>();
-
+            //
             var filter = $"_adoxio_applicant_value eq {applicantId}";
             var appType = _dynamicsClient.GetApplicationTypeByName("Outstanding Prior Balance Invoice - LIQ");
             if (appType == null) return results;
-
             filter += $" and _adoxio_applicationtypeid_value eq {appType.AdoxioApplicationtypeid} ";
+            filter += $" and statuscode eq {(int)AdoxioApplicationStatusCodes.PendingForLicenceFee}";
             var expand = new List<string>
                     {
                         "adoxio_Invoice"
@@ -1095,13 +1095,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     foreach (var dynamicsApplication in applications)
                     {
-                        if (dynamicsApplication.AdoxioInvoice.Name == "Outstanding Balance Invoice")
-                        {              
+                                     
                             var temp = new OutstandingParioBalanceInvoice();
                             temp.invoice = dynamicsApplication.AdoxioInvoice.ToViewModel();
                             temp.applicationId = dynamicsApplication.AdoxioApplicationid;
                             results.Add(temp);
-                        }
                     }
                 }
             }
