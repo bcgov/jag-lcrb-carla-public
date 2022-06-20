@@ -1095,11 +1095,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     foreach (var dynamicsApplication in applications)
                     {
-                                     
+                        if (dynamicsApplication.AdoxioInvoice.Statuscode != 100001) { // not equal complete statuscode
                             var temp = new OutstandingParioBalanceInvoice();
                             temp.invoice = dynamicsApplication.AdoxioInvoice.ToViewModel();
                             temp.applicationId = dynamicsApplication.AdoxioApplicationid;
                             results.Add(temp);
+                        }
                     }
                 }
             }
