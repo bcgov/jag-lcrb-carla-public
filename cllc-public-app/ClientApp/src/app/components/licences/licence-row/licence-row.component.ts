@@ -34,7 +34,7 @@ import {
   faBan
 } from "@fortawesome/free-solid-svg-icons";
 import { differenceInDays, isAfter, startOfDay, startOfToday } from "date-fns";
-
+import { OutstandingPriorBalanceInvoice } from "@models/outstanding-prior-balance-invoce.model";
 
 export const UPLOAD_FILES_MODE = "UploadFilesMode";
 export const CRS_RENEWAL_LICENCE_TYPE_NAME = "crs";
@@ -76,6 +76,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
   licenceType: string;
   @Input()
   licences: ApplicationLicenseSummary[];
+  isOutstandingPriorBalanceInvoiceDue: boolean;
 
   constructor(
     private licenceDataService: LicenseDataService,
@@ -104,6 +105,16 @@ export class LicenceRowComponent extends FormBase implements OnInit {
           }
         });
     });
+    this.licenceDataService.getOutstandingBalancePriorInvoices()
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe((data) => {
+        data.forEach((item: OutstandingPriorBalanceInvoice) => {         
+          if (!this.isOutstandingPriorBalanceInvoiceDue && item.invoice.duedate != null) {
+            const today = new Date().toISOString();
+            this.isOutstandingPriorBalanceInvoiceDue = item.invoice.duedate.toString() < today;
+          }
+        });
+      });
   }
 
   updateEmail(licenceId: string, establishmentId: string, event: any) {
