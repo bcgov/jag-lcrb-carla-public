@@ -109,9 +109,10 @@ export class LicenceRowComponent extends FormBase implements OnInit {
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((data) => {
         data.forEach((item: OutstandingPriorBalanceInvoice) => {         
-          if (!this.isOutstandingPriorBalanceInvoiceDue && item.invoice.duedate != null) {
-            const today = new Date().toISOString();
-            this.isOutstandingPriorBalanceInvoiceDue = item.invoice.duedate.toString() < today;
+          if (!this.isOutstandingPriorBalanceInvoiceDue && item.invoice.duedate != null) {           
+            const toDay = new Date(new Date().toISOString().split("T")[0]);           
+            let tmpDueDate = new Date(item.invoice.duedate.toString().split("T")[0]);
+            this.isOutstandingPriorBalanceInvoiceDue =  tmpDueDate < toDay;
           }
         });
       });

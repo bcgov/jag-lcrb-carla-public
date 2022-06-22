@@ -66,7 +66,7 @@
   </div>
   <div *ngIf="!item.isOperated && (isExpired(item) || (isActive(item) && isAboutToExpire(item)))">
     <span *ngIf="isOutstandingPriorBalanceInvoiceDue">
-      <button [distable]="true" class="missing"
+      <button [disabled]="true" class="missing"
               [title]="'You have outstanding prior balance invoice(s), please check that first!'">
         <span>
           <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>
@@ -329,7 +329,7 @@
                                   <div *ngIf="isExpired(item) && isRecentlyExpired(item) && item.autoRenewal"
                                        class="licence-expired" style="text-align: center;">
                                     <span *ngIf="isOutstandingPriorBalanceInvoiceDue">
-                                      <button [distable]="true" class="missing"
+                                      <button [disabled]="true" class="missing"
                                               [title]="'You have outstanding prior balance invoice(s), please check that first!'">
                                         <span>
                                           <strong>Attention</strong>: This Licence has Expired<br>Please Renew.
@@ -345,7 +345,7 @@
                                   <div *ngIf="isExpired(item) && !isRecentlyExpired(item) && item.autoRenewal"
                                        class="licence-expired" style="text-align: center;">
                                     <span *ngIf="isOutstandingPriorBalanceInvoiceDue">
-                                      <button [distable]="true" class="missing"
+                                      <button [disabled]="true" class="missing"
                                               [title]="'You have outstanding prior balance invoice(s), please check that first!'">
                                         <span>
                                           <strong>Attention</strong>: This Licence has Expired<br>Please Reinstate.
