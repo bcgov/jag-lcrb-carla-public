@@ -21,7 +21,7 @@ import { CRS_RENEWAL_LICENCE_TYPE_NAME, LIQUOR_RENEWAL_LICENCE_TYPE_NAME } from 
 import { faExchangeAlt, faPencilAlt, faPlus, faShoppingCart, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { UserDataService } from "@services/user-data.service";
 import { differenceInDays, startOfDay, startOfToday } from "date-fns";
-import { OutstandingPriorBalanceInvoice } from "@models/outstanding-prior-balance-invoce.model";
+
 
 
 export const UPLOAD_FILES_MODE = "UploadFilesMode";
@@ -76,7 +76,6 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   RLRS: boolean;
   F2G: boolean;
   startMarketingOngoing: boolean;
-  isOutstandingPriorBalanceInvoiceDue: boolean;
   startCateringOngoing: boolean;
   startFPOngoing: boolean;
   startLPOngoing: boolean;
@@ -197,17 +196,6 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
 
       });
     this.subscriptionList.push(sub);
-
-    this.licenceDataService.getOutstandingBalancePriorInvoices()
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe((data) => {
-        data.forEach((item: OutstandingPriorBalanceInvoice) => {         
-          if (!this.isOutstandingPriorBalanceInvoiceDue && item.invoice.duedate != null) {
-            const today = new Date().toISOString();
-            this.isOutstandingPriorBalanceInvoiceDue = item.invoice.duedate.toString() < today;
-          }
-        });
-      });
   }
 
   uploadMoreFiles(application: Application) {
