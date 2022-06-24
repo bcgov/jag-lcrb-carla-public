@@ -88,9 +88,8 @@ export class DashboardComponent extends FormBase implements OnInit {
             .subscribe((data) => {
               data.forEach((item: OutstandingPriorBalanceInvoice) => {
                 this.outstandingBalancePriorInvoiceData.push(item);
-                if (!this.isOutstandingBalancePriorInvoiceDue && item.invoice.duedate != null) {
-                  const today = new Date().toISOString();
-                  this.isOutstandingBalancePriorInvoiceDue = item.invoice.duedate.toString() < today;                 
+                if (!this.isOutstandingBalancePriorInvoiceDue && item.overdue) {
+                   this.isOutstandingBalancePriorInvoiceDue = true;
                 }
               });             
             });          
