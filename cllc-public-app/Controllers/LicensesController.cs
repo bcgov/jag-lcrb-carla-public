@@ -1093,11 +1093,24 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 var applications = _dynamicsClient.Applications.Get(filter: filter, expand: expand).Value.ToList();
                 if (applications != null)
                 {
+                    DateTime today = DateTime.Now;
                     foreach (var dynamicsApplication in applications)
                     {
                         if (dynamicsApplication.AdoxioInvoice.Statuscode != 100001) { // not equal complete statuscode
                             var temp = new OutstandingParioBalanceInvoice();
                             temp.invoice = dynamicsApplication.AdoxioInvoice.ToViewModel();
+                            if (dynamicsApplication.AdoxioInvoice.Duedate != null)
+                            {
+                                if (today.IsDaylightSavingTime())
+                                {
+                                    temp.invoice.duedate = DateTime.Parse(dynamicsApplication.AdoxioInvoice.Duedate.Value.Year + "-" + dynamicsApplication.AdoxioInvoice.Duedate.Value.Month + "- " + dynamicsApplication.AdoxioInvoice.Duedate.Value.Day + "T00:00:00.0000000-08:00");
+                                }
+                                else
+                                {
+                                    temp.invoice.duedate = DateTime.Parse(dynamicsApplication.AdoxioInvoice.Duedate.Value.Year + "-" + dynamicsApplication.AdoxioInvoice.Duedate.Value.Month + "- " + dynamicsApplication.AdoxioInvoice.Duedate.Value.Day + "T00:00:00.0000000-07:00");
+                                }
+                                temp.overdue = temp.invoice.duedate <= today;
+                            }
                             temp.applicationId = dynamicsApplication.AdoxioApplicationid;
                             results.Add(temp);
                         }

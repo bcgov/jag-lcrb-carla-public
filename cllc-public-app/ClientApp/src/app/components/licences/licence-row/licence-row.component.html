@@ -66,14 +66,11 @@
   </div>
   <div *ngIf="!item.isOperated && (isExpired(item) || (isActive(item) && isAboutToExpire(item)))">
     <span *ngIf="isOutstandingPriorBalanceInvoiceDue">
-      <button [disabled]="true" class="missing"
-              [title]="'You have outstanding prior balance invoice(s), please check that first!'">
-        <span>
-          <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>
-          {{(isAboutToExpire(item) || isRecentlyExpired(item)) ? 'Renew' : 'Reinstate'}}
-          Licence
-        </span>
-      </button>
+      You have outstanding prior balance invoice(s), please check that first!
+      <a routerLink="/dashboard">
+        <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>
+        Return to Dashboard
+      </a>
     </span>
     <span *ngIf="!isOutstandingPriorBalanceInvoiceDue">
       <a *ngIf="item.autoRenewal" href="javascript: void(0);" (click)="startRenewal(item)" class="missing">
@@ -329,12 +326,11 @@
                                   <div *ngIf="isExpired(item) && isRecentlyExpired(item) && item.autoRenewal"
                                        class="licence-expired" style="text-align: center;">
                                     <span *ngIf="isOutstandingPriorBalanceInvoiceDue">
-                                      <button [disabled]="true" class="missing"
-                                              [title]="'You have outstanding prior balance invoice(s), please check that first!'">
-                                        <span>
-                                          <strong>Attention</strong>: This Licence has Expired<br>Please Renew.
-                                        </span>
-                                      </button>
+                                      You have outstanding prior balance invoice(s), please check that first!
+                                      <a routerLink="/dashboard">
+                                        <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>
+                                        Return to Dashboard
+                                      </a>
                                     </span>
                                     <span *ngIf="!isOutstandingPriorBalanceInvoiceDue">
                                       <a href="javascript: void(0);" (click)="startRenewal(item)" class="missing">
