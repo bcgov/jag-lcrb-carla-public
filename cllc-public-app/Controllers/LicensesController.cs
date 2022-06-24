@@ -1066,6 +1066,67 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             return adoxioLicences;
         }
+
+        [HttpGet("outstanding-prior-balance-invoice")]
+        public JsonResult GetCurrentUserOutstandingPriorBalanceInvoices()
+        {
+            // get the current user.
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+            var adoxioApplications = GetCurrentUserOutstandingPriorBalanceInvoiceApplication(userSettings.AccountId);
+            return new JsonResult(adoxioApplications);
+        }
+        private List<OutstandingParioBalanceInvoice> GetCurrentUserOutstandingPriorBalanceInvoiceApplication(string applicantId)
+        {
+            var results = new List<OutstandingParioBalanceInvoice>();
+            //
+            var filter = $"_adoxio_applicant_value eq {applicantId}";
+            var appType = _dynamicsClient.GetApplicationTypeByName("Outstanding Prior Balance Invoice - LIQ");
+            if (appType == null) return results;
+            filter += $" and _adoxio_applicationtypeid_value eq {appType.AdoxioApplicationtypeid} ";
+            filter += $" and statuscode eq {(int)AdoxioApplicationStatusCodes.PendingForLicenceFee}";
+            var expand = new List<string>
+                    {
+                        "adoxio_Invoice"
+                    };
+            try
+            {
+                var applications = _dynamicsClient.Applications.Get(filter: filter, expand: expand).Value.ToList();
+                if (applications != null)
+                {
+                    DateTime today = DateTime.Now;
+                    foreach (var dynamicsApplication in applications)
+                    {
+                        if (dynamicsApplication.AdoxioInvoice.Statuscode != 100001) { // not equal complete statuscode
+                            var temp = new OutstandingParioBalanceInvoice();
+                            temp.invoice = dynamicsApplication.AdoxioInvoice.ToViewModel();
+                            if (dynamicsApplication.AdoxioInvoice.Duedate != null)
+                            {
+                                if (today.IsDaylightSavingTime())
+                                {
+                                    temp.invoice.duedate = DateTime.Parse(dynamicsApplication.AdoxioInvoice.Duedate.Value.Year + "-" + dynamicsApplication.AdoxioInvoice.Duedate.Value.Month + "- " + dynamicsApplication.AdoxioInvoice.Duedate.Value.Day + "T00:00:00.0000000-08:00");
+                                }
+                                else
+                                {
+                                    temp.invoice.duedate = DateTime.Parse(dynamicsApplication.AdoxioInvoice.Duedate.Value.Year + "-" + dynamicsApplication.AdoxioInvoice.Duedate.Value.Month + "- " + dynamicsApplication.AdoxioInvoice.Duedate.Value.Day + "T00:00:00.0000000-07:00");
+                                }
+                                temp.overdue = temp.invoice.duedate <= today;
+                            }
+                            temp.applicationId = dynamicsApplication.AdoxioApplicationid;
+                            results.Add(temp);
+                        }
+                    }
+                }
+            }
+            catch (HttpOperationException e)
+            {
+                _logger.LogError(e, "Error getting licensee application");
+                throw;
+            }
+
+            return results;
+        }
+
+
         private bool isConclusivelyDeemed(ApplicationLicenseSummary lic)
         {
             // get the current user.

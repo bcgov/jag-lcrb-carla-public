@@ -1,19 +1,25 @@
 import { Component, OnInit } from "@angular/core";
 import { AppState } from "@app/app-state/models/app-state";
 import { Store } from "@ngrx/store";
+import { forkJoin, Subscription } from "rxjs";
 import { takeWhile } from "rxjs/operators";
 import { FormBase } from "@shared/form-base";
 import { Account } from "@models/account.model";
 import { Application } from "@models/application.model";
+import { OutstandingPriorBalanceInvoice } from "@models/outstanding-prior-balance-invoce.model";
+
 import { ApplicationType, ApplicationTypeNames } from "@models/application-type.model";
 import { ApplicationDataService } from "@services/application-data.service";
+import { PaymentDataService } from "@services/payment-data.service";
+
 import { Router } from "@angular/router";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { LicenseeChangeLog } from "@models/licensee-change-log.model";
 import { LegalEntity } from "@models/legal-entity.model";
 import { LegalEntityDataService } from "@services/legal-entity-data.service";
 import { LicenseDataService } from "@services/license-data.service";
-import { faPencilAlt, faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
+import { faPencilAlt, faExclamationTriangle, faExclamation } from "@fortawesome/free-solid-svg-icons";
+import { Output } from "@angular/core";
 
 @Component({
   selector: "app-dashboard",
@@ -28,27 +34,35 @@ export class DashboardComponent extends FormBase implements OnInit {
   currentLegalEntities: LegalEntity;
   tree: LicenseeChangeLog;
   hasLicence: boolean;
+  busy: Subscription;
+  outstandingBalancePriorInvoiceData: OutstandingPriorBalanceInvoice[]=[];
+  isOutstandingBalancePriorInvoiceDue: boolean; 
 
   constructor(private store: Store<AppState>,
     private router: Router,
     private snackBar: MatSnackBar,
     private legalEntityDataService: LegalEntityDataService,
     private licenseDataService: LicenseDataService,
-    private applicationDataService: ApplicationDataService) {
+    private applicationDataService: ApplicationDataService,
+    private paymentService: PaymentDataService  
+  ) {
     super();
   }
 
   ngOnInit(): void {
+    this.outstandingBalancePriorInvoiceData = [];
+
     this.store.select((state) => state.currentAccountState.currentAccount)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((account) => {
         this.account = account;
-
+      
         if (this.account && this.account.id) {
           let sub = this.licenseDataService.getAllCurrentLicenses()
             .subscribe(licences => {
               this.hasLicence = licences.length > 0;
             });
+
           this.subscriptionList.push(sub);
 
           this.store.select((state) => state.indigenousNationState.indigenousNationModeActive)
@@ -68,14 +82,19 @@ export class DashboardComponent extends FormBase implements OnInit {
               }
             );
           this.subscriptionList.push(sub);
-
-
+          
+          this.licenseDataService.getOutstandingBalancePriorInvoices()
+            .pipe(takeWhile(() => this.componentActive))
+            .subscribe((data) => {
+              data.forEach((item: OutstandingPriorBalanceInvoice) => {
+                this.outstandingBalancePriorInvoiceData.push(item);
+                if (!this.isOutstandingBalancePriorInvoiceDue && item.overdue) {
+                   this.isOutstandingBalancePriorInvoiceDue = true;
+                }
+              });             
+            });          
         }
-
-
-      });
-
-
+     });
   }
 
   startLicenseeChangeApplication() {
@@ -99,4 +118,22 @@ export class DashboardComponent extends FormBase implements OnInit {
     );
   }
 
+  payOutstandingPriorBalanceInvoice(applicationId:string) {
+    if (applicationId) {
+      this.busy = this.paymentService.payOutstandingPriorBalanceInvoicePaymentSubmissionUrl(applicationId)
+        .pipe(takeWhile(() => this.componentActive))
+        .subscribe(res => {
+          const data = res as any;
+          window.location.href = data.url;
+        },
+        err => {
+          if (err._body === "Payment already made") {
+            this.snackBar.open("Outstanding Prior Balance Payment has already been made.",
+              "Fail",
+              { duration: 3500, panelClass: ["red-snackbar"] });
+          }
+        });
+    }
+  }
 }
+

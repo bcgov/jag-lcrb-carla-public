@@ -1,5 +1,6 @@
 ﻿using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.ViewModels;
+using System;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
@@ -61,7 +62,14 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 result.returnedTransactionId = dynamicsInvoice.AdoxioReturnedtransactionid;
             }
-
+            if (dynamicsInvoice.Description != null)
+            {
+                result.description = dynamicsInvoice.Description;
+            }
+            if (dynamicsInvoice.Duedate.HasValue)
+            {
+                result.duedate =  DateTime.SpecifyKind(dynamicsInvoice.Duedate.Value.DateTime, DateTimeKind.Local); ;
+            }
             return result;
         }
 

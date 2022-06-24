@@ -23,6 +23,7 @@ import { UserDataService } from "@services/user-data.service";
 import { differenceInDays, startOfDay, startOfToday } from "date-fns";
 
 
+
 export const UPLOAD_FILES_MODE = "UploadFilesMode";
 export const INCOMPLETE = "Incomplete";
 // export const TRANSFER_LICENCE_MODE = 'TransferLicenceMode';
@@ -129,7 +130,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
 
   ngOnInit() {
     this.displayApplications();
-
+    this.startMarketingOngoing = false;
     this.applicationDataService.getSubmittedApplicationCount()
       .subscribe(value => this.submittedApplications = value);
   }

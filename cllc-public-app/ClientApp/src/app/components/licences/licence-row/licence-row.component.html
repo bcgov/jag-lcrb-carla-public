@@ -64,16 +64,23 @@
       </span>
     </a>
   </div>
-  <div
-    *ngIf="!item.isOperated && (isExpired(item) || (isActive(item) && isAboutToExpire(item)))">
-    <a *ngIf="item.autoRenewal"
-       href="javascript: void(0);" (click)="startRenewal(item)" class="missing">
-      <span>
+  <div *ngIf="!item.isOperated && (isExpired(item) || (isActive(item) && isAboutToExpire(item)))">
+    <span *ngIf="isOutstandingPriorBalanceInvoiceDue">
+      You have outstanding prior balance invoice(s), please check that first!
+      <a routerLink="/dashboard">
         <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>
-        {{(isAboutToExpire(item) || isRecentlyExpired(item)) ? 'Renew' : 'Reinstate'}}
-        Licence
-      </span>
-    </a>
+        Return to Dashboard
+      </a>
+    </span>
+    <span *ngIf="!isOutstandingPriorBalanceInvoiceDue">
+      <a *ngIf="item.autoRenewal" href="javascript: void(0);" (click)="startRenewal(item)" class="missing">
+        <span>
+          <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>
+          {{(isAboutToExpire(item) || isRecentlyExpired(item)) ? 'Renew' : 'Reinstate'}}
+          Licence
+        </span>
+      </a>
+    </span>
   </div>
   <div class="flags" class="missing">
     <p *ngIf="item.dormant">
@@ -316,18 +323,37 @@
 
                                             Renew.</a>
                                     </div-->
-                                    <div *ngIf="isExpired(item) && isRecentlyExpired(item) && item.autoRenewal"
-                                        class="licence-expired" style="text-align: center;">
-                                        <a href="javascript: void(0);" (click)="startRenewal(item)" class="missing">
-                                            <strong>Attention</strong>: This Licence has Expired<br>Please Renew.
-                                        </a>
-                                    </div>
-                                    <div *ngIf="isExpired(item) && !isRecentlyExpired(item) && item.autoRenewal"
-                                        class="licence-expired" style="text-align: center;">
-                                        <a href="javascript: void(0);" (click)="startRenewal(item)" class="missing">
-                                            <strong>Attention</strong>: This Licence has Expired<br>Please Reinstate.
-                                        </a>
-                                    </div>
+                                  <div *ngIf="isExpired(item) && isRecentlyExpired(item) && item.autoRenewal"
+                                       class="licence-expired" style="text-align: center;">
+                                    <span *ngIf="isOutstandingPriorBalanceInvoiceDue">
+                                      You have outstanding prior balance invoice(s), please check that first!
+                                      <a routerLink="/dashboard">
+                                        <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>
+                                        Return to Dashboard
+                                      </a>
+                                    </span>
+                                    <span *ngIf="!isOutstandingPriorBalanceInvoiceDue">
+                                      <a href="javascript: void(0);" (click)="startRenewal(item)" class="missing">
+                                        <strong>Attention</strong>: This Licence has Expired<br>Please Renew.
+                                      </a>
+                                    </span>
+                                  </div>
+                                  <div *ngIf="isExpired(item) && !isRecentlyExpired(item) && item.autoRenewal"
+                                       class="licence-expired" style="text-align: center;">
+                                    <span *ngIf="isOutstandingPriorBalanceInvoiceDue">
+                                      <button [disabled]="true" class="missing"
+                                              [title]="'You have outstanding prior balance invoice(s), please check that first!'">
+                                        <span>
+                                          <strong>Attention</strong>: This Licence has Expired<br>Please Reinstate.
+                                        </span>
+                                      </button>
+                                    </span>
+                                    <span *ngIf="!isOutstandingPriorBalanceInvoiceDue">
+                                      <a href="javascript: void(0);" (click)="startRenewal(item)" class="missing">
+                                        <strong>Attention</strong>: This Licence has Expired<br>Please Reinstate.
+                                      </a>
+                                    </span>
+                                  </div>
 
 
                                 </div>
