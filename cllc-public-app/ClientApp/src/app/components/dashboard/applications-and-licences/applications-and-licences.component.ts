@@ -158,7 +158,9 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
           .filter(
             app => ["Approved", "Renewal Due", "Payment Required", "Active"].indexOf(app.applicationStatus) === -1)
           .forEach((application: ApplicationSummary) => {
-            this.inProgressApplications.push(application);
+            if (application.applicationTypeName != "Outstanding Prior Balance Invoice - LIQ") {
+              this.inProgressApplications.push(application);
+            }
           });
 
         /*

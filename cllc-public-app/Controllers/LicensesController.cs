@@ -1096,7 +1096,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     DateTime today = DateTime.Now;
                     foreach (var dynamicsApplication in applications)
                     {
-                        if (dynamicsApplication.AdoxioInvoice.Statuscode != 100001) { // not equal complete statuscode
+                        if (dynamicsApplication.AdoxioInvoice != null && dynamicsApplication.AdoxioInvoice.Statuscode != 100001) { // not equal complete statuscode
                             var temp = new OutstandingParioBalanceInvoice();
                             temp.invoice = dynamicsApplication.AdoxioInvoice.ToViewModel();
                             if (dynamicsApplication.AdoxioInvoice.Duedate != null)
