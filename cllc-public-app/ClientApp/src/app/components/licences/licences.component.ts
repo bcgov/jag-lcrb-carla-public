@@ -48,7 +48,7 @@ export class LicencesComponent extends FormBase implements OnInit {
   licenceMappings = {};
   liquorThree: boolean;
   RLRS: boolean;
-
+  PRS: boolean;
   // note, in order for a licence type to show on the dashboard, they must be configured here:
   supportedLicenceTypes = [
     "Catering", "Operated - Catering", "Deemed - Catering", "Transfer in Progress - Catering",
@@ -76,6 +76,8 @@ export class LicencesComponent extends FormBase implements OnInit {
       .subscribe(x => this.liquorThree = x);
     featureFlagService.featureOn("RLRS")
       .subscribe(x => this.RLRS = x);
+    featureFlagService.featureOn("PrsEnabled")
+      .subscribe(x => this.PRS = x);
   }
 
   ngOnInit() {
@@ -93,7 +95,11 @@ export class LicencesComponent extends FormBase implements OnInit {
       var RLRS = ["Rural Licensee Retail Store"];
       this.supportedLicenceTypes = this.supportedLicenceTypes.concat(RLRS);
     }
-
+    if (this.PRS) {
+      // control the availability of the PRS using the feature flag.
+      var PRS = ["Production Retail Store"];
+      this.supportedLicenceTypes = this.supportedLicenceTypes.concat(PRS);
+    }
     this.displayApplications();
   }
 
@@ -196,7 +202,8 @@ export class LicencesComponent extends FormBase implements OnInit {
       licenceType.indexOf("Manufacturer") >= 0 ||
       licenceType.indexOf("Liquor Primary") >= 0 ||
       licenceType.indexOf("Agent") >= 0 ||
-      licenceType.indexOf("Food Primary") >= 0;
+      licenceType.indexOf("Food Primary") >= 0 ||
+      licenceType.indexOf("Production Retail Store") >= 0;
   }
 
   getNumberOfLicences() {
