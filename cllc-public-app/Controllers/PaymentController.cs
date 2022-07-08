@@ -823,6 +823,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.Debug("Invoice status is not New, skipping updates ...");
             }
 
+            response.Add("description", invoice.Description);
+
             return new JsonResult(response);
         }
 
