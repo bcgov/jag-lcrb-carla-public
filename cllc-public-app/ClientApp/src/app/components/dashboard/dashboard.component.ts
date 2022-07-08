@@ -131,6 +131,10 @@ export class DashboardComponent extends FormBase implements OnInit {
             this.snackBar.open("Outstanding Prior Balance Payment has already been made.",
               "Fail",
               { duration: 3500, panelClass: ["red-snackbar"] });
+          } else {
+            this.snackBar.open("Outstanding Prior Balance Payment fail, please try later.",
+              "Fail",
+              { duration: 3500, panelClass: ["red-snackbar"] });
           }
         });
     }

@@ -539,6 +539,25 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // load the invoice for this application
             string invoiceId = application._adoxioInvoiceValue;
+
+            //LCSD-6409 handle invoiceID is null issue:
+            int retries = 0;
+            while (retries < 10 && string.IsNullOrEmpty(invoiceId))
+            {
+                // should happen immediately, but ...
+                // pause and try again - in case Dynamics is slow ...
+                retries++;
+                _logger.Error($"No application {id} invoice found, retry = " + retries);
+                System.Threading.Thread.Sleep(1000);
+                application = await GetDynamicsApplication(id);
+                invoiceId = application._adoxioInvoiceValue;              
+            }
+            if (invoiceId == null) 
+            {
+                _logger.Error($"No application {id} invoice found after 10 times retries. ");
+                return NotFound(); 
+            }
+
             Guid invoiceGuid = Guid.Parse(invoiceId);
             _logger.Debug("Found invoice for application = " + invoiceId);
             MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(invoiceGuid);
@@ -822,6 +841,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // that can happen if we are re-validating a completed invoice (paid or cancelled)
                 _logger.Debug("Invoice status is not New, skipping updates ...");
             }
+
+            response.Add("description", invoice.Description);
 
             return new JsonResult(response);
         }
