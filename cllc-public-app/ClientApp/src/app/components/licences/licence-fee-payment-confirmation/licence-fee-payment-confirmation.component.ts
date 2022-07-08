@@ -30,6 +30,7 @@ export class LicenceFeePaymentConfirmationComponent implements OnInit {
   trnId: string;
   trnOrderNumber: string;
   invoice: string;
+  description: string;
   isApproved = false;
   retryCount = 0;
 
@@ -98,6 +99,7 @@ export class LicenceFeePaymentConfirmationComponent implements OnInit {
         this.trnId = verifyPayResponse.trnId;
         this.trnOrderNumber = verifyPayResponse.trnOrderNumber;
         this.invoice = verifyPayResponse.invoice;
+        this.description = verifyPayResponse.description;
 
         if (this.trnApproved === "1") {
           this.isApproved = true;
