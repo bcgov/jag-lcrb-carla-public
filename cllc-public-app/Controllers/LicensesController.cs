@@ -1086,7 +1086,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             filter += $" and statuscode eq {(int)AdoxioApplicationStatusCodes.PendingForLicenceFee}";
             var expand = new List<string>
                     {
-                        "adoxio_Invoice"
+                        "adoxio_Invoice",
+                        "adoxio_AssignedLicence"
                     };
             try
             {
@@ -1112,6 +1113,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                 temp.overdue = temp.invoice.duedate <= today;
                             }
                             temp.applicationId = dynamicsApplication.AdoxioApplicationid;
+                            if (dynamicsApplication.AdoxioAssignedLicence != null)
+                            {
+                                temp.licenceNumber = dynamicsApplication.AdoxioAssignedLicence.AdoxioLicencenumber;
+                            }
                             results.Add(temp);
                         }
                     }
