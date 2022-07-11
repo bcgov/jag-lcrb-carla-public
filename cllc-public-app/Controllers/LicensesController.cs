@@ -95,13 +95,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         {
                             Id = licence.AdoxioLicencesid,
                             Name = licence.AdoxioName,
-                            EstablishmentName = licence.AdoxioEstablishment.AdoxioName,
-                            Streetaddress = licence.AdoxioEstablishment.AdoxioAddressstreet,
-                            City = licence.AdoxioEstablishment.AdoxioAddressstreet,
+                            EstablishmentName = licence.AdoxioEstablishment?.AdoxioName,
+                            Streetaddress = licence.AdoxioEstablishment?.AdoxioAddressstreet,
+                            City = licence.AdoxioEstablishment?.AdoxioAddressstreet,
                             Provstate = "BC",
                             Country = "CANADA",
-                            PostalCode = licence.AdoxioEstablishment.AdoxioAddresspostalcode,
-                            Licensee = licence.AdoxioLicencee.Name
+                            PostalCode = licence.AdoxioEstablishment?.AdoxioAddresspostalcode,
+                            Licensee = licence.AdoxioLicencee?.Name
                         };
                         results.Add(relatedLicence);
                     }
@@ -481,8 +481,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return Forbid();
             }
 
+
             // create a new application.
-            var application = CreateApplication(item.LicenceId, ApplicationTypeNames.TiedHouseExemption, item.RelatedLicenceId);
+            var application = CreateApplication(item.LicenceId, ApplicationTypeNames.TiedHouseExemption, item.RelatedLicenceId, item.ManufacturerProductionAmountforPrevYear, item.ManufacturerProductionAmountUnit);
 
             return Ok();
         }
@@ -732,7 +733,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return Ok();
         }
 
-        private MicrosoftDynamicsCRMadoxioApplication CreateApplication(string licenceId, string applicationTypeName, string relatedLicenceId = null)
+        private MicrosoftDynamicsCRMadoxioApplication CreateApplication(string licenceId, string applicationTypeName, string relatedLicenceId = null, int? prodAmount = null, int? prodUnit = null)
         {
             // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
@@ -790,6 +791,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 application.AdoxioLicenceEstablishmentODataBind = _dynamicsClient.GetEntityURI("adoxio_establishments", adoxioLicense.AdoxioEstablishment.AdoxioEstablishmentid);
             }
+
+            application.AdoxioManufacturerproductionamountforprevyear = prodAmount;
+            application.AdoxioManufacturerproductionamountunit = prodUnit;
 
             // check to see if there is a related licence.
             // some applications create a relationship between two licences, in this case we will have a related licence
@@ -1062,6 +1066,72 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             return adoxioLicences;
         }
+
+        [HttpGet("outstanding-prior-balance-invoice")]
+        public JsonResult GetCurrentUserOutstandingPriorBalanceInvoices()
+        {
+            // get the current user.
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+            var adoxioApplications = GetCurrentUserOutstandingPriorBalanceInvoiceApplication(userSettings.AccountId);
+            return new JsonResult(adoxioApplications);
+        }
+        private List<OutstandingParioBalanceInvoice> GetCurrentUserOutstandingPriorBalanceInvoiceApplication(string applicantId)
+        {
+            var results = new List<OutstandingParioBalanceInvoice>();
+            //
+            var filter = $"_adoxio_applicant_value eq {applicantId}";
+            var appType = _dynamicsClient.GetApplicationTypeByName("Outstanding Prior Balance Invoice - LIQ");
+            if (appType == null) return results;
+            filter += $" and _adoxio_applicationtypeid_value eq {appType.AdoxioApplicationtypeid} ";
+            filter += $" and statuscode eq {(int)AdoxioApplicationStatusCodes.PendingForLicenceFee}";
+            var expand = new List<string>
+                    {
+                        "adoxio_Invoice",
+                        "adoxio_AssignedLicence"
+                    };
+            try
+            {
+                var applications = _dynamicsClient.Applications.Get(filter: filter, expand: expand).Value.ToList();
+                if (applications != null)
+                {
+                    DateTime today = DateTime.Now;
+                    foreach (var dynamicsApplication in applications)
+                    {
+                        if (dynamicsApplication.AdoxioInvoice != null && dynamicsApplication.AdoxioInvoice.Statuscode != 100001) { // not equal complete statuscode
+                            var temp = new OutstandingParioBalanceInvoice();
+                            temp.invoice = dynamicsApplication.AdoxioInvoice.ToViewModel();
+                            if (dynamicsApplication.AdoxioInvoice.Duedate != null)
+                            {
+                                if (today.IsDaylightSavingTime())
+                                {
+                                    temp.invoice.duedate = DateTime.Parse(dynamicsApplication.AdoxioInvoice.Duedate.Value.Year + "-" + dynamicsApplication.AdoxioInvoice.Duedate.Value.Month + "- " + dynamicsApplication.AdoxioInvoice.Duedate.Value.Day + "T00:00:00.0000000-08:00");
+                                }
+                                else
+                                {
+                                    temp.invoice.duedate = DateTime.Parse(dynamicsApplication.AdoxioInvoice.Duedate.Value.Year + "-" + dynamicsApplication.AdoxioInvoice.Duedate.Value.Month + "- " + dynamicsApplication.AdoxioInvoice.Duedate.Value.Day + "T00:00:00.0000000-07:00");
+                                }
+                                temp.overdue = temp.invoice.duedate <= today;
+                            }
+                            temp.applicationId = dynamicsApplication.AdoxioApplicationid;
+                            if (dynamicsApplication.AdoxioAssignedLicence != null)
+                            {
+                                temp.licenceNumber = dynamicsApplication.AdoxioAssignedLicence.AdoxioLicencenumber;
+                            }
+                            results.Add(temp);
+                        }
+                    }
+                }
+            }
+            catch (HttpOperationException e)
+            {
+                _logger.LogError(e, "Error getting licensee application");
+                throw;
+            }
+
+            return results;
+        }
+
+
         private bool isConclusivelyDeemed(ApplicationLicenseSummary lic)
         {
             // get the current user.
@@ -1674,6 +1744,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     {
         public string RelatedLicenceId { get; set; }
         public string LicenceId { get; set; }
+
+        public int? ManufacturerProductionAmountforPrevYear { get; set; }
+        public int? ManufacturerProductionAmountUnit { get; set; }
     }
 }
 

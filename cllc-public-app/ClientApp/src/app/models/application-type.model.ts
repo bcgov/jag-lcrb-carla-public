@@ -61,6 +61,7 @@ export class ApplicationType {
   capacityArea: boolean;
 
   hasALRQuestion: boolean;
+  showZoningDeclarations: boolean;
 }
 
 export enum FormControlState {
@@ -80,6 +81,7 @@ export enum ApplicationTypeNames {
   CRSStructuralChange = "CRS Structural Change",
   CRSTransferofOwnership = "CRS Transfer of Ownership",
   CannabisRetailStore = "Cannabis Retail Store",
+  ProductionRetailStore = "Production Retail Store",
   ETHYL = "Ethyl Alcohol Permit",
   FP = "Food Primary",
   FPRelo = "Food Primary Relocation",
@@ -96,6 +98,7 @@ export enum ApplicationTypeNames {
   LiquorRenewal = "Liquor Licence Renewal",
   LiquorLicenceTransfer = "Liquor Licence Transfer",
   PermanentChangeToALicensee = "Permanent Change to a Licensee",
+  PermanentChangeToAnApplicant = "Permanent Change to an Applicant",
   WineStore = "Wine Store",
   RAS = "Rural Agency Store",
   RLRS = "Rural Licensee Retail Store",
@@ -105,4 +108,6 @@ export enum ApplicationTypeNames {
   SpecialEventAreaEndorsement = "Special Event Area Endorsement",
   LRSStructuralChange = "LRS Structural Change",
   RequestTermChange = "Non-Default T&C Change Application",
+  TiedHouseExemption = "Tied House Exemption",
+  OutstandingPriorBalanceInvoice="Outstanding Prior Balance Invoice - LIQ"
 }

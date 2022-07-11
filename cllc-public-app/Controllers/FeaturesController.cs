@@ -32,6 +32,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 ("FEATURE_CASS", "CASS"),
                 ("FEATURE_MARKET_EVENTS", "MarketEvents"),
                 ("FEATURE_PERMANENT_CHANGES_TO_LICENSEE", "PermanentChangesToLicensee"),
+                ("FEATURE_PERMANENT_CHANGES_TO_APPLICANT", "PermanentChangesToApplicant"),
                 ("FEATURE_NOTICES", "Notices"),
                 ("FEATURE_LE_CONNECTIONS", "LEConnections"),
                 ("FEATURE_TUA_EVENTS", "TemporaryUseAreaEvents"),
@@ -41,7 +42,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 ("FEATURE_SEP", "Sep"), // Controls Special Event Permits content
                 ("FEATURE_DISABLE_WORKER_QUALIFICATION", "DisableWorkerQualification"),  // Removes worker qualification from the portal
                 ("FEATURE_TAKE_HOME_EVENTS", "TakeHomeEvents"), // Take Home Public Sampling events - covers samples handed out in public for home consumption
-                ("FEATURE_BRIDGE_LOGIN", "BridgeLogin") // Login using bridge entity
+                ("FEATURE_BRIDGE_LOGIN", "BridgeLogin"), // Login using bridge entity
+                ("FEATURE_PRS_ENABLED", "PrsEnabled")
                 // CONFIG SETTINGS - MONTHLY_REPORTS_MAX_MONTHS - number of months that will be used on the monthly reports.
             };
 

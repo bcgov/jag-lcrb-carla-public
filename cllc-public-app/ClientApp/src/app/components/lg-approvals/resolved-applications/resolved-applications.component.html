@@ -1,3 +1,4 @@
+<mat-progress-bar class="mt-1" *ngIf="!(dataLoaded)" mode="indeterminate"></mat-progress-bar>
 <div class="example-container mat-elevation-z0">
     <div class="example-table-container">
       <table mat-table [dataSource]="data" class="example-table"
@@ -50,6 +51,6 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
     </div>
-
+    <mat-progress-bar class="mt-1" *ngIf="!(dataLoaded)" mode="indeterminate"></mat-progress-bar>
     <mat-paginator [length]="resultsLength" [pageSize]="10"></mat-paginator>
   </div>

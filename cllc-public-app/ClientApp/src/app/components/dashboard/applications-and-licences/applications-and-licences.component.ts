@@ -23,6 +23,7 @@ import { UserDataService } from "@services/user-data.service";
 import { differenceInDays, startOfDay, startOfToday } from "date-fns";
 
 
+
 export const UPLOAD_FILES_MODE = "UploadFilesMode";
 export const INCOMPLETE = "Incomplete";
 // export const TRANSFER_LICENCE_MODE = 'TransferLicenceMode';
@@ -83,6 +84,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   startUBVOngoing: boolean;
   startRASOngoing: boolean;
   startCRSOngoing: boolean;
+  startPRSOngoing: boolean;
   startRLRSOngoing: boolean;
   startAgentOngoing: boolean;
   startF2GOngoing: boolean;
@@ -128,7 +130,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
 
   ngOnInit() {
     this.displayApplications();
-
+    this.startMarketingOngoing = false;
     this.applicationDataService.getSubmittedApplicationCount()
       .subscribe(value => this.submittedApplications = value);
   }
@@ -156,7 +158,9 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
           .filter(
             app => ["Approved", "Renewal Due", "Payment Required", "Active"].indexOf(app.applicationStatus) === -1)
           .forEach((application: ApplicationSummary) => {
-            this.inProgressApplications.push(application);
+            if (application.applicationTypeName != "Outstanding Prior Balance Invoice - LIQ") {
+              this.inProgressApplications.push(application);
+            }
           });
 
         /*
@@ -345,6 +349,36 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
           "Fail",
           { duration: 3500, panelClass: ["red-snackbar"] });
         this.startCRSOngoing = false;
+        console.log("Error starting a New Licence Application");
+      }
+    );
+  }
+
+  startNewPRSLicenceApplication() {
+    this.startPRSOngoing = true;
+    const newLicenceApplicationData = {
+      licenseType: "Production Retail Store",
+      applicantType: this.account.businessType,
+      applicationType: { name: ApplicationTypeNames.ProductionRetailStore } as ApplicationType,
+      account: this.account,
+    } as Application;
+    // newLicenceApplicationData. = this.account.businessType;
+    this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
+      data => {
+        // reload the user to cause the eligibility disclosure to show if needed
+        //this.userDataService.loadUserToStore().then(() => { });
+        //if (this.licenseeChangeFeatureOn) {
+        //  this.router.navigateByUrl(`/multi-step-application/${data.id}`);
+        //} else {
+        this.router.navigateByUrl(`/account-profile/${data.id}`);
+        //}
+        this.startPRSOngoing = false;
+      },
+      () => {
+        this.snackBar.open("Error starting a New Licence Application",
+          "Fail",
+          { duration: 3500, panelClass: ["red-snackbar"] });
+        this.startPRSOngoing = false;
         console.log("Error starting a New Licence Application");
       }
     );

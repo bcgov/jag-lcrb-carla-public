@@ -171,7 +171,8 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
         this.appContactDisabled = true;
       }
       this.form.patchValue(application);
-
+      var temp = this.form.get('csInternalTransferOfShares');
+      var temp1 = this.form.get('csNameChangeLicenseeCorporation').value;
       this.dataLoaded = true;
     }
   }

@@ -230,7 +230,13 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioHasadditionalservices = from.HasAdditionalServices;
             to.AdoxioStoreopendate = from.StoreOpenDate;
             to.AdoxioConfirmliquorsalesisnotprimarybusiness = from.ConfirmLiquorSalesIsNotPrimaryBusiness;
-    }
+            to.AdoxioManufacturerproductionamountforprevyear = from.ManufacturerProductionAmountForPrevYear;
+            to.AdoxioManufacturerproductionamountunit = from.ManufacturerProductionAmountUnit;
+            //LCSD-6304
+            to.AdoxioPicnicconfirmslgfnsupportscapacity = from.PicnicConfirmLGFNCapacity;
+            to.AdoxioPicnicconfirmszoning = from.PicnicConfirmZoning;
+            to.AdoxioPicnicreadandaccepttermsandconditions = from.PicnicReadAndAccept;
+        }
 
 
         public static void CopyValues(this MicrosoftDynamicsCRMadoxioApplication to, CovidApplication from)
@@ -579,7 +585,13 @@ namespace Gov.Lclb.Cllb.Public.Models
                 HasAdditionalServices = dynamicsApplication.AdoxioHasadditionalservices,
                 StoreOpenDate = dynamicsApplication.AdoxioStoreopendate,
                 ConfirmLiquorSalesIsNotPrimaryBusiness = dynamicsApplication.AdoxioConfirmliquorsalesisnotprimarybusiness,
-                Pin = dynamicsApplication.AdoxioPin
+                Pin = dynamicsApplication.AdoxioPin,
+                ManufacturerProductionAmountForPrevYear = dynamicsApplication.AdoxioManufacturerproductionamountforprevyear,
+                ManufacturerProductionAmountUnit = dynamicsApplication.AdoxioManufacturerproductionamountunit,
+                //LCSD-6304
+                PicnicConfirmLGFNCapacity = dynamicsApplication.AdoxioPicnicconfirmslgfnsupportscapacity,
+                PicnicConfirmZoning = dynamicsApplication.AdoxioPicnicconfirmszoning,
+                PicnicReadAndAccept = dynamicsApplication.AdoxioPicnicreadandaccepttermsandconditions
             };
 
 
@@ -807,6 +819,11 @@ namespace Gov.Lclb.Cllb.Public.Models
                 applicationVM.TermConditionId = term.AdoxioApplicationtermsconditionslimitationid;
                 applicationVM.TermConditionOriginalText = term.AdoxioTermsandconditions;
 
+            }
+
+            if(dynamicsApplication.AdoxioRelatedLicence != null)
+            {
+                applicationVM.RelatedLicenceNumber = dynamicsApplication.AdoxioRelatedLicence.AdoxioLicencenumber;
             }
 
             return applicationVM;

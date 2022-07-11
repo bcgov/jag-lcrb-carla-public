@@ -18,6 +18,7 @@ export class ResolvedApplicationsComponent implements OnInit, AfterViewInit  {
   resultsLength = 0;
   isLoadingResults = true;
   isRateLimitReached = false;
+  dataLoaded = false;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -28,6 +29,7 @@ export class ResolvedApplicationsComponent implements OnInit, AfterViewInit  {
   ngOnInit(): void {
   }
   ngAfterViewInit() {
+    this.dataLoaded = false;
     // If the user changes the sort order, reset back to the first page.
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
@@ -45,6 +47,7 @@ export class ResolvedApplicationsComponent implements OnInit, AfterViewInit  {
           // Flip flag to show that loading has finished.
           this.isLoadingResults = false;
           this.isRateLimitReached = false;
+          this.dataLoaded = true;
           //this.resultsLength = data.total_count;
           this.resultsLength = result.count;
 
@@ -52,6 +55,7 @@ export class ResolvedApplicationsComponent implements OnInit, AfterViewInit  {
         }),
         catchError(() => {
           this.isLoadingResults = false;
+          this.dataLoaded = true;
           // Catch if the GitHub API has reached its rate limit. Return empty data.
           this.isRateLimitReached = true;
           return of([] as Application[]);

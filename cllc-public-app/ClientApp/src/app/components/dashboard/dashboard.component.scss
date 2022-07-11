@@ -68,6 +68,42 @@ li {
     display: block;
 }
 
+.outstanding-table {
+  width: 100%;
+  table {
+    table-layout: auto;
+    border: 2px solid white;
+  }
+
+  th {
+    font-weight: bold;
+    text-align: center;
+    border: 2px solid white;
+    background-color: #B1C3DD;
+  }
+
+  td {
+    border: 2px solid white;
+    border-collapse: collapse;
+    text-align: left;
+    padding: 10px;
+    font-size: 10px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #E1E8F2;
+  }
+
+  tr:nth-child(odd) {
+    background-color: #F1F4FA;
+  }
+}
+
+.make-red {
+  color: #f44336;
+}
+
+
 @media (max-width: 575.98px) {
     .dashboard-spacing {
         padding-left: 10px;

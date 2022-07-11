@@ -69,11 +69,18 @@ import { CovidConfirmationComponent } from
 import { TerminateTPORelationshipComponent } from
   "@components/applications/terminate-tpo-relationship/terminate-tpo-relationship.component";
 import { LgApprovalsComponent } from "@components/lg-approvals/lg-approvals.component";
+
+import { DecisionMadeButNoDocsApplicationsComponent } from "./components/lg-approvals/decision-made-but-no-docs-applications/decision-made-but-no-docs-applications.component";
+import { DecisionNotMadeApplicationsComponent } from "./components/lg-approvals/decision-not-made-applications/decision-not-made-applications.component";
+import { ForZoningApplicationsComponent } from "./components/lg-approvals/for-zoning-applications/for-zoning-applications.component";
+
 import { LicenceRepresentativeFormComponent } from
   "@components/licence-representative-form/licence-representative-form.component";
 import { MarketEventComponent } from "@components/market-event/market-event.component";
 import { PermanentChangeToALicenseeComponent } from
   "@components/applications/permanent-change-to-a-licensee/permanent-change-to-a-licensee.component";
+import { PermanentChangeToAnApplicantComponent } from
+  "@components/applications/permanent-change-to-an-applicant/permanent-change-to-an-applicant.component";
 import { OffsiteStorageComponent } from "@components/offsite-storage/offsite-storage.component";
 import { NoticesComponent } from "@components/notices/notices.component";
 import { LicenseeRetailStoresComponent } from "./components/licensee-retail-stores/licensee-retail-stores.component";
@@ -197,12 +204,19 @@ const routes: Routes = [
     data: { feature: "PermanentChangesToLicensee" }
   },
   {
+    path: "org-structure",              
+    component: PermanentChangeToAnApplicantComponent,
+    canActivate: [BCeidAuthGuard, FeatureGuard],
+    data: { feature: "PermanentChangesToApplicant" }
+  },
+  {
     path: "lg-approvals",
     component: LgApprovalsComponent,
     canActivate: [BCeidAuthGuard, FeatureGuard],
     canDeactivate: [CanDeactivateGuard],
     data: { feature: "LGApprovals" }
   },
+
   {
     path: "security-screening/confirmation",
     component: SecurityScreeningConfirmationComponent,
@@ -346,10 +360,16 @@ const routes: Routes = [
     data: { feature: "PermanentChangesToLicensee" }
   },
   {
-    path: "permanent-change-to-a-licensee/:applicationId/:invoiceType",
-    component: PermanentChangeToALicenseeComponent,
+    path: "permanent-change-to-an-applicant",
+    component: PermanentChangeToAnApplicantComponent,
     canActivate: [BCeidAuthGuard, FeatureGuard],
-    data: { feature: "PermanentChangesToLicensee" }
+    data: { feature: "PermanentChangesToApplicant" }
+  },
+  {
+    path: "permanent-change-to-an-applicant/:applicationId",
+    component: PermanentChangeToAnApplicantComponent,
+    canActivate: [BCeidAuthGuard, FeatureGuard],
+    data: { feature: "PermanentChangesToApplicant" }
   },
   {
     path: "permanent-change-to-a-licensee/:applicationId",

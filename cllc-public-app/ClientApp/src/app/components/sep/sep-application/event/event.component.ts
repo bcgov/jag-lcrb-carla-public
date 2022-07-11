@@ -272,8 +272,7 @@ export class EventComponent extends FormBase implements OnInit {
       serviceStartValue: ["9:00 AM", [Validators.required]],
       serviceEndValue: ["9:30 PM", [Validators.required]],
       liquorServiceHoursExtensionReason: [""],
-      disturbancePreventionMeasuresDetails: [""],
-      isPacificTZ:["",[Validators.required]]
+      disturbancePreventionMeasuresDetails: [""]
     }, { validators: eventTimesValidator });
 
     eventDate = Object.assign(new SepSchedule(null), eventDate);

@@ -71,6 +71,7 @@
     "@angular/localize": "^13.3.1",
     "@babel/cli": "^7.14.8",
     "@babel/core": "^7.14.8",
+    "@babel/helper-plugin-utils": "^7.14.5",
     "@babel/plugin-transform-runtime": "^7.14.5",
     "@babel/preset-env": "^7.14.8",
     "@fortawesome/free-brands-svg-icons": "^5.15.3",
@@ -114,7 +115,10 @@
     "xmlhttprequest": "^1.8.0"
   },
   "resolutions": {
-    "node-fetch": "2.6.7"
+    "node-fetch": "2.6.7",
+    "@babel/preset-env": "^7.14.8",
+    "@babel/cli": "^7.14.8",
+    "@babel/core": "^7.14.8"
   },
   "browserslist": {
     "production": [

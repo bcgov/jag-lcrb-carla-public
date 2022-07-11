@@ -33,6 +33,7 @@ import { ProofOfZoningComponent } from './tabs/proof-of-zoning/proof-of-zoning.c
 import { AreaCategory } from '@models/service-area.model';
 import { faExclamationCircle, faTrashAlt, faUniversity } from '@fortawesome/free-solid-svg-icons';
 import { faCreditCard, faIdCard, faSave } from '@fortawesome/free-regular-svg-icons';
+import { RelatedLicence } from "@models/related-licence";
 
 const ServiceHours = [
   '00:00', '00:15', '00:30', '00:45', '01:00', '01:15', '01:30', '01:45', '02:00', '02:15', '02:30', '02:45', '03:00',
@@ -122,7 +123,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
   uploadedNOA: number = 0;
   uploadedOrganizationDetails: number = 0;
   uploadedCentralSecuritiesRegisterDocuments: number = 0;
-
+  tiedHouseExemptions: { jobNumber: string, displayName: string }[] = [];
+  licenseToRemove: RelatedLicence;
 
   get isOpenedByLGForApproval(): boolean {
     let openedByLG = false;
@@ -242,7 +244,13 @@ export class ApplicationComponent extends FormBase implements OnInit {
       tempDateTo: [''],
       pin: ['', [this.requireOneOfGroupValidator(['pin', 'establishmentParcelId'])]],
       holdsOtherManufactureLicence1: [false],
-      holdsOtherManufactureLicence2: [false]
+      holdsOtherManufactureLicence2: [false],
+      relatedLicenceNumber: [''],
+      picnicReadAndAccept: [''],
+      picnicConfirmZoning: [''],
+      picnicConfirmLGFNCapacity: [''],
+      manufacturerProductionAmountForPrevYear: [''],
+      manufacturerProductionAmountUnit: ['']
     });
 
 
@@ -463,6 +471,18 @@ export class ApplicationComponent extends FormBase implements OnInit {
             if (data.isPaid || this.isOpenedByLGForApproval || this.application.lGDecisionSubmissionDate) {
               this.form.disable();
             }
+            //LCSD-5784 loading same user's application 
+            /*if (data && data.applicationType && data.applicationType.name == 'Tied House Exemption Removal') {
+              this.tiedHouseExemptions = [];
+              this.applicationDataService.getApplicationsByType(ApplicationTypeNames.TiedHouseExemption)
+                .subscribe((data: Application[]) => {
+                  data.forEach((item: Application) => {
+                    if (this.tiedHouseExemptions.findIndex(x => x.jobNumber == item.jobNumber) < 0 && item.applicationStatus == "Approved") {
+                      this.tiedHouseExemptions.push({ jobNumber: item.jobNumber, displayName: item.name });
+                    }
+                  })
+                });             
+            }*/
             this.savedFormData = this.form.value;
             this.dataLoaded = true;
           },
@@ -1285,6 +1305,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
       valid = false;
       this.validationMessages.push('Establishment Type is required.');
     }
+    //LCSD-5784 the description1 is the Tied House Exemption Removal Identity Licnece JobNumber which is required.
+    if (this.application?.applicationType?.name === "Tied House Exemption Removal" && !this.form.get('description1').value) {
+      valid = false;
+      this.validationMessages.push('Identify licence job number is required.');
+    }
     if (applicationTypeName === ApplicationTypeNames.CannabisRetailStore && this.submittedApplications >= 8) {
       valid = false;
       this.validationMessages.push('Only 8 applications can be submitted');
@@ -1333,7 +1358,26 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.validationMessages.push('Resort community description is required.');
     }
 
+    if (this.application?.applicationType?.name === 'Picnic Area Endorsement' && this.application?.applicationType?.showZoningDeclarations) {
+      if (!this.form.get('picnicReadAndAccept').value || this.form.get('picnicReadAndAccept').value == 0) {
+        valid = false;
+        this.validationMessages.push('Please confirm have picnic area declaration read and understand the term and conditions.');
+      }
+      if (!this.form.get('picnicConfirmZoning').value || this.form.get('picnicConfirmZoning').value == 0) {
+        valid = false;
+        this.validationMessages.push('Please confirm  picnic area declaration local zoning allows for the operation of a picnic area endorsement.');
+      }
+      if (!this.form.get('picnicConfirmLGFNCapacity').value || this.form.get('picnicConfirmLGFNCapacity').value == 0) {
+        valid = false;
+        this.validationMessages.push('Please confirm  picnic area declaration local government/First Nation supports the proposed capacity for the picnic area endorsement.');
+      }
+    }
+
     return valid && (this.form.valid || this.form.disabled);
+  }
+
+  isValidOrNotTouchedRequireTrue(field: string) {
+    return this.form.get(field).value == 1 || !this.form.get(field).touched;
   }
 
   showLEDocumentSection(): boolean {
@@ -1342,7 +1386,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   showHoldsOtherManufactureLicence(): boolean {
-    const show = ['Special Event Area Endorsement', 'Lounge Area Endorsement', 'Manufacturer', 'MFG New Outdoor Patio']
+    const show = ['Special Event Area Endorsement', 'Lounge Area Endorsement', 'MFG New Outdoor Patio', 'Structural Changes to an Approved Lounge or Special Event Area(cap increase)']
       .indexOf(this?.application?.applicationType?.name) !== -1;
     return show;
   }
@@ -1481,7 +1525,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
       zoningStatus: 'Please enter a value for zoning status',
       pin: 'Please enter a PIN or PID',
       policeJurisdiction: 'Please select a police jurisdiction for the establishment',
-      indigenousNation: 'Please select a local government or an Indigenous Nation'
+      indigenousNation: 'Please select a local government or an Indigenous Nation',
+      hasReadTeamAndCondition: 'Please confirm have read team and conditions',
+      isLocalZoningAllow: 'Please confirm local zoning allow',
+      isLGFNSuport: 'Please confirm LG/FN support'
     };
 
 
@@ -1660,6 +1707,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
       return this.form.get('isHasPatio').value && formReference && tabs;
     }
     return formReference && tabs;
+  }
+
+  onLicenceSelect(assignedLicence: RelatedLicence) {
+    this.licenseToRemove = assignedLicence;
+    this.form.get("description1").patchValue(this.licenseToRemove.name);
   }
 
 
