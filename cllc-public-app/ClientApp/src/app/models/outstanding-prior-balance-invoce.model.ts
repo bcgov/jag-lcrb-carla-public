@@ -2,6 +2,7 @@ import { Account } from "./account.model";
 
 export class OutstandingPriorBalanceInvoice {
   applicationId: string;
+  licenceNumber: string;
   invoice: {
     id: string;
     name: string;
