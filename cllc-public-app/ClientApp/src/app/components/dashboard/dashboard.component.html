@@ -54,7 +54,7 @@
           <table class="outstanding-table">
             <thead>
               <tr style="height:50px;">
-                <th>INVOICE</th>
+                <th>LICENCE</th>
                 <th>DESCRIPTION</th>
                 <th style="padding-left:5px;padding-right:5px;">TOTAL AMOUNT</th>
                 <th>DUE</th>
@@ -62,7 +62,7 @@
               </tr>
             </thead>
             <tr *ngFor="let item of outstandingBalancePriorInvoiceData" [ngClass]="{'make-red': item.overdue }">
-              <td>{{item.invoice.invoicenumber}}</td>
+              <td>{{item.licenceNumber}}</td>
               <td>{{item.invoice.description}} </td>
               <td style="text-align:right;">{{item.invoice.totalamount|currency}}CAD</td>
               <td><div title="Past Due Invoice!" *ngIf="item.overdue"><fa-icon [icon]="faExclamationTriangle" style="margin-right: 5px;"></fa-icon></div> {{item.invoice.duedate|date:'dd/MM/yy'}}</td>
