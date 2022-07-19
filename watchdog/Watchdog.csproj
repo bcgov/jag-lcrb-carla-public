@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <UserSecretsId>bdd46a87-5213-4335-a2c8-00b8333a6099</UserSecretsId>
     <StartupObject>Watchdog.Program</StartupObject>
   </PropertyGroup>
