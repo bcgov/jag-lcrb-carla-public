@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <StartupObject>Gov.Jag.Lcrb.OneStopService.Program</StartupObject>
     <UserSecretsId>a8fa37fc-67d7-43f2-b3fe-d44dfeed50ee</UserSecretsId>
     <RootNamespace>Gov.Jag.Lcrb.OneStopService</RootNamespace>
