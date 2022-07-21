@@ -236,6 +236,12 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioPicnicconfirmslgfnsupportscapacity = from.PicnicConfirmLGFNCapacity;
             to.AdoxioPicnicconfirmszoning = from.PicnicConfirmZoning;
             to.AdoxioPicnicreadandaccepttermsandconditions = from.PicnicReadAndAccept;
+            //LCSD-6406
+            to.AdoxioFederallicencenumber = from.FederalLicenceNumber;
+            to.AdoxioFpaddresscity = from.FPAddressCity;
+            to.AdoxioFpaddresspostalcode = from.FPAddressPostalCode;
+            to.AdoxioFpaddressstreet = from.FPAddressStreet;
+            
         }
 
 
@@ -591,8 +597,14 @@ namespace Gov.Lclb.Cllb.Public.Models
                 //LCSD-6304
                 PicnicConfirmLGFNCapacity = dynamicsApplication.AdoxioPicnicconfirmslgfnsupportscapacity,
                 PicnicConfirmZoning = dynamicsApplication.AdoxioPicnicconfirmszoning,
-                PicnicReadAndAccept = dynamicsApplication.AdoxioPicnicreadandaccepttermsandconditions
-            };
+                PicnicReadAndAccept = dynamicsApplication.AdoxioPicnicreadandaccepttermsandconditions,
+                //LCSD-6406
+                FederalLicenceNumber=dynamicsApplication.AdoxioFederallicencenumber, 
+                FPAddressCity=dynamicsApplication.AdoxioFpaddresscity,     
+                FPAddressPostalCode=dynamicsApplication.AdoxioFpaddresspostalcode,
+                FPAddressStreet=dynamicsApplication.AdoxioFpaddressstreet     
+                
+        };
 
 
             // mfg fields
