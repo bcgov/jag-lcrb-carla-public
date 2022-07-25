@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>Gov.Lclb.Cllb.Interfaces</RootNamespace>
 	<ProjectGuid>{9B63A69E-E3C6-44BD-A24B-C6EC3A499E64}</ProjectGuid>
   </PropertyGroup>
