@@ -511,7 +511,7 @@
     </p>
    
     <p *ngIf="item.applicationStatus === 'PendingForLicenceFee'">     
-        <a href="javascript:void(0);" class="missing">
+        <a href="javascript:void(0);" (click)="payLicenceFee(item)" class="missing">
           <span>
             <fa-icon [icon]="faShoppingCart" style="margin-right: 10px;"></fa-icon>
             Pay First Year Fee
