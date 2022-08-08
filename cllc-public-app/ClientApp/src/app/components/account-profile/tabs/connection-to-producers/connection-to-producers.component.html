@@ -1,7 +1,8 @@
 <div [ngBusy]="busy"></div>
 
 <section *ngIf="!account.isOtherBusinessType()">
-  <h3 class="blue-header">CONNECTIONS TO FEDERAL PRODUCERS OF CANNABIS</h3>
+  <h3 *ngIf="!changeWording(applicationTypeName)" class="blue-header">CONNECTIONS TO FEDERAL PRODUCERS OF CANNABIS</h3>
+  <h3 *ngIf="changeWording(applicationTypeName)" class="blue-header">CONNECTIONS TO OTHER FEDERAL PRODUCERS</h3>
   <div class="padded-section content-bottom"[formGroup]="form">
   <span *ngIf="federalProducerText === 'federal producer'">
     A "

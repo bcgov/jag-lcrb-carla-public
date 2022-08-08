@@ -4,6 +4,7 @@ import { FormBuilder } from "@angular/forms";
 import { TiedHouseConnection } from "@models/tied-house-connection.model";
 import { Subscription } from "rxjs";
 import { Account } from "@models/account.model";
+import { ApplicationType } from "@models/application-type.model";
 
 @Component({
   selector: "app-connection-to-producers",
@@ -19,6 +20,8 @@ export class ConnectionToProducersComponent implements OnInit, OnDestroy {
   licensedProducerText = "federally licensed producer";
   @Input()
   federalProducerText = "federal producer";
+  @Input()
+  applicationTypeName: String;
 
   @Input("tiedHouse")
   set tiedHouse(value: TiedHouseConnection) {
@@ -82,5 +85,13 @@ export class ConnectionToProducersComponent implements OnInit, OnDestroy {
       hasChanged = true;
     }
     return hasChanged;
+  }
+
+  changeWording(name: String): boolean {
+    if(name === "Production Retail Store" || name === "S119 CRS Authorization") {
+      return true;
+    }
+
+    return false;
   }
 }
