@@ -277,7 +277,7 @@
 
 <div *ngIf="application?.applicationType?.name !== 'Ethyl Alcohol Permit' && saveFormData?.businessProfile?.id && ['Police'].indexOf(getBusinessTypeName()) == -1">
   <app-connection-to-producers *ngIf="account?.tiedHouse" [tiedHouse]="account?.tiedHouse"
-                               [account]="account" (value)="tiedHouseFormData = $event">
+                               [account]="account" [applicationTypeName]="application?.applicationType?.name" (value)="tiedHouseFormData = $event">
   </app-connection-to-producers>
 </div>
 
