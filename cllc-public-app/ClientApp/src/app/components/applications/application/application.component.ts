@@ -669,7 +669,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.form.get('capacityArea.capacity').disable();
     }
 
-    if (this.application.applicationType.name !=="Production Retail Store") {
+    if (this.application.applicationType.name !=="Producer Retail Store") {
       this.form.get('fpAddressStreet').disable();
       this.form.get('fpAddressCity').disable();
       this.form.get('fpAddressPostalCode').disable();
