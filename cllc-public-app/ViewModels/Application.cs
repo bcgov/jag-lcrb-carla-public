@@ -739,5 +739,11 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public int? ManufacturerProductionAmountForPrevYear { get; set; }
         public int? ManufacturerProductionAmountUnit { get; set; }
 
+        //LCSD-6406
+        public string FederalLicenceNumber {get;set;}
+        public string FPAddressCity {get;set;}
+        public string FPAddressPostalCode {get;set;}
+        public string FPAddressStreet {get;set;}   
+
     }
 }
