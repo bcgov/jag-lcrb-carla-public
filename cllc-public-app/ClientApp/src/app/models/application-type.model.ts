@@ -81,7 +81,7 @@ export enum ApplicationTypeNames {
   CRSStructuralChange = "CRS Structural Change",
   CRSTransferofOwnership = "CRS Transfer of Ownership",
   CannabisRetailStore = "Cannabis Retail Store",
-  ProductionRetailStore = "Production Retail Store",
+  ProductionRetailStore = "Producer Retail Store",
   ETHYL = "Ethyl Alcohol Permit",
   FP = "Food Primary",
   FPRelo = "Food Primary Relocation",
