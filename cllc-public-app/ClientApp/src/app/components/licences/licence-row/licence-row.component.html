@@ -243,7 +243,7 @@
                                   </a>
                                 </div>
                                 <div
-                                    *ngIf="item?.licenceTypeName === ApplicationTypeNames.CannabisRetailStore && isActive(item) && actionsVisible(item)">
+                                    *ngIf="isFederalReportLicenceType(item) && isActive(item) && actionsVisible(item)">
                                     <a [routerLink]="[ '/federal-reporting/' + item.licenseId + '/default']">
                                         <span><fa-icon [icon]="faBusinessTime" style="margin-right: 10px;"></fa-icon>Review
                                             Federal Reports</span>
