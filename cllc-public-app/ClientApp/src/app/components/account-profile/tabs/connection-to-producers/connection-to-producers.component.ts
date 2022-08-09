@@ -88,7 +88,7 @@ export class ConnectionToProducersComponent implements OnInit, OnDestroy {
   }
 
   requiresWordingChange(name: String): boolean {
-    if(name === "Production Retail Store" || name === "S119 CRS Authorization") {
+    if(name === "Producer Retail Store" || name === "S119 CRS Authorization") {
       return true;
     }
 
