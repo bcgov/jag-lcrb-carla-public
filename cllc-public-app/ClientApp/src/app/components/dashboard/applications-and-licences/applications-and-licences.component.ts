@@ -357,7 +357,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   startNewPRSLicenceApplication() {
     this.startPRSOngoing = true;
     const newLicenceApplicationData = {
-      licenseType: "Production Retail Store",
+      licenseType: "Producer Retail Store",
       applicantType: this.account.businessType,
       applicationType: { name: ApplicationTypeNames.ProductionRetailStore } as ApplicationType,
       account: this.account,
