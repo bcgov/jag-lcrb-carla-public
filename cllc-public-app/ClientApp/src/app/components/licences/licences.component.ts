@@ -97,7 +97,7 @@ export class LicencesComponent extends FormBase implements OnInit {
     }
     if (this.PRS) {
       // control the availability of the PRS using the feature flag.
-      var PRS = ["Production Retail Store"];
+      var PRS = ["Producer Retail Store"];
       this.supportedLicenceTypes = this.supportedLicenceTypes.concat(PRS);
     }
     this.displayApplications();
@@ -203,7 +203,7 @@ export class LicencesComponent extends FormBase implements OnInit {
       licenceType.indexOf("Liquor Primary") >= 0 ||
       licenceType.indexOf("Agent") >= 0 ||
       licenceType.indexOf("Food Primary") >= 0 ||
-      licenceType.indexOf("Production Retail Store") >= 0;
+      licenceType.indexOf("Producer Retail Store") >= 0;
   }
 
   getNumberOfLicences() {

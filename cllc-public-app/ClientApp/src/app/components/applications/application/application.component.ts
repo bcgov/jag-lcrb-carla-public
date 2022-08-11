@@ -164,7 +164,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   ngOnInit() {
 
-
     this.form = this.fb.group({
       id: [''],
       assignedLicence: this.fb.group({
@@ -250,10 +249,12 @@ export class ApplicationComponent extends FormBase implements OnInit {
       picnicConfirmZoning: [''],
       picnicConfirmLGFNCapacity: [''],
       manufacturerProductionAmountForPrevYear: [''],
-      manufacturerProductionAmountUnit: ['']
+      manufacturerProductionAmountUnit: [''],
+      federalLicenceNumber: ['', Validators.required],
+      fpAddressStreet: ['', Validators.required],
+      fpAddressCity: ['', Validators.required],
+      fpAddressPostalCode: ['', [Validators.required, Validators.pattern(CanadaPostalRegex)]]
     });
-
-
 
     this.form.get('pin').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
       this.form.get('establishmentParcelId').updateValueAndValidity();
@@ -317,8 +318,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
 
     });
-
-
 
 
     this.form.get('indigenousNation').valueChanges
@@ -406,26 +405,28 @@ export class ApplicationComponent extends FormBase implements OnInit {
             this.addDynamicContent();
 
             if (data.applicationType.formReference) {
-              console.log("Getting form layout");
+              //console.log("Getting form layout");
               // get the application form
               this.dynamicsForm = data.applicationType.dynamicsForm;
-              this.dynamicsForm.tabs.forEach(function (tab) {
-                tab.sections.forEach(function (section) {
-                  if (section.fields) {
-                    section.fields.forEach(function (field) {
-                      // add the field to the form.
-                      if (field.required) {
-                        this.form.addControl(field.datafieldname, new FormControl('', Validators.required));
-                      }
-                      else {
-                        this.form.addControl(field.datafieldname, new FormControl(''));
-                      }
-                    }, this);
-                  }
+              if (this.dynamicsForm != null) {
+                this.dynamicsForm.tabs.forEach(function (tab) {
+                  tab.sections.forEach(function (section) {
+                    if (section.fields) {
+                      section.fields.forEach(function (field) {
+                        // add the field to the form.
+                        if (field.required) {
+                          this.form.addControl(field.datafieldname, new FormControl('', Validators.required));
+                        }
+                        else {
+                          this.form.addControl(field.datafieldname, new FormControl(''));
+                        }
+                      }, this);
+                    }
 
+                  }, this);
                 }, this);
-              }, this);
-              this.updateDynamicValidation();
+                this.updateDynamicValidation();
+              }
             }
 
             const noNulls = Object.keys(data)
@@ -667,6 +668,13 @@ export class ApplicationComponent extends FormBase implements OnInit {
     if (!this.application.applicationType.capacityArea) {
       this.form.get('capacityArea.capacity').disable();
     }
+
+    if (this.application.applicationType.name !=="Producer Retail Store") {
+      this.form.get('fpAddressStreet').disable();
+      this.form.get('fpAddressCity').disable();
+      this.form.get('fpAddressPostalCode').disable();
+      this.form.get('federalLicenceNumber').disable();
+    }
   }
 
 
@@ -819,7 +827,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
     return show;
   }
 
-
   showZoning(): boolean {
     let show = this.application
       && this.application.applicationType
@@ -872,7 +879,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
   onAccountSelect(proposedAccount: TransferAccount) {
     this.form.get('proposedTPO').patchValue(proposedAccount);
   }
-
 
   isRAS(): boolean {
     return this.application.licenseType === 'Rural Agency Store';
