@@ -89,11 +89,20 @@
 
 <mat-card class="mat-elevation-z1">
   <section style="display: flex; justify-content: space-between; width: 100%;">
-    <div class="question-label">
+    <div class="question-label" *ngIf="!showAlternateQuestions()">
       4. Have you, any partner, shareholder, director, officer, or an immediate family member of any of the
       aforementioned associates acquired a new interest or expanded an existing interest - financial or otherwise
       - in
       a federal producer of cannabis within the past 12 months?
+      <fa-icon style="color: #38598a; margin-left: 10px;" [icon]="faQuestionCircle"
+               matTooltip="Tied house relationships with federal producers must be reported to the LCRB to determine if there is a risk of the producer’s products being favoured by the licensee.">
+      </fa-icon>
+    </div>
+    <div class="question-label" *ngIf="showAlternateQuestions()">
+      4. Have you, any partner, shareholder, director, officer, or an immediate family member of any of the 
+      aforementioned associates, acquired a new or expanded interest - financial or otherwise 
+      - in 
+      a federal producer (other than your own) within the past 12 months?
       <fa-icon style="color: #38598a; margin-left: 10px;" [icon]="faQuestionCircle"
                matTooltip="Tied house relationships with federal producers must be reported to the LCRB to determine if there is a risk of the producer’s products being favoured by the licensee.">
       </fa-icon>
@@ -370,6 +379,49 @@
     <div *ngIf="form.get('renewalFloorPlan').value === 'Yes'" class="field-changed">
       <fa-icon [icon]="faExclamationCircle" style="margin-right: 10px;"></fa-icon> You can still renew your {{typeOf()}}.
       After submitting your renewal, please start a Structural Change Request application from the Dashboard.
+    </div>
+  </section>
+</mat-card>
+
+<mat-card class="mat-elevation-z1" style="margin-bottom: 10px;" *ngIf="showAlternateQuestions()">
+  <section style="display: flex; justify-content: space-between; width: 100%;">
+    <div class="question-label">
+      16. Has Health Canada changed the status of your federal licence within the past 12 months that you have not reported to the LCRB? 
+    </div>
+    <div style="flex: 0 0 85px;">
+      <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalFederalLicence')}"
+                               formControlName="renewalFederalLicence" aria-label="Font Style">
+        <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+        <mat-button-toggle value="No">No</mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+  </section>
+  <section style="padding-right: 95px;">
+    <div *ngIf="form.get('renewalFederalLicence').value === 'Yes'" class="field-changed">
+      <fa-icon [icon]="faExclamationCircle" style="margin-right: 10px;"></fa-icon> A LCRB licensing staff member may 
+      contact you as part of this renewal process
+    </div>
+  </section>
+</mat-card>
+
+<mat-card class="mat-elevation-z1" style="margin-bottom: 10px;" *ngIf="showAlternateQuestions()">
+  <section style="display: flex; justify-content: space-between; width: 100%;">
+    <div class="question-label">
+      17. Has Health Canada changed its security clearance for you, or any associate, partner, shareholder, director or officer of this licensee, 
+      within the past 12 months that you have not reported to the LCRB? 
+    </div>
+    <div style="flex: 0 0 85px;">
+      <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalFederalSecurity')}"
+                               formControlName="renewalFederalSecurity" aria-label="Font Style">
+        <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+        <mat-button-toggle value="No">No</mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+  </section>
+  <section style="padding-right: 95px;">
+    <div *ngIf="form.get('renewalFederalSecurity').value === 'Yes'" class="field-changed">
+      <fa-icon [icon]="faExclamationCircle" style="margin-right: 10px;"></fa-icon> A LCRB licensing staff member may 
+      contact you as part of this renewal process
     </div>
   </section>
 </mat-card>
