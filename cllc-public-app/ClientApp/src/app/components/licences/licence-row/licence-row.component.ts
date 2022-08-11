@@ -230,6 +230,16 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     return result;
   }
 
+  isFederalReportLicenceType(item: ApplicationLicenseSummary) {
+    const licenceType = item?.licenceTypeName;
+
+    if(licenceType && (licenceType === ApplicationTypeNames.CannabisRetailStore || licenceType === ApplicationTypeNames.ProductionRetailStore)) {
+      return true;
+    } 
+    
+    return false;
+  }
+
   showLicenceTransferAction(item: ApplicationLicenseSummary) {
     const result = this.isActive(item) &&
       !item.transferRequested &&

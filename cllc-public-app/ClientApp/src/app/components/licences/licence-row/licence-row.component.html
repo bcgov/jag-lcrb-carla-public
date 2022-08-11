@@ -66,9 +66,8 @@
   </div>
   <div *ngIf="!item.isOperated && (isExpired(item) || (isActive(item) && isAboutToExpire(item)))">
     <span *ngIf="isOutstandingPriorBalanceInvoiceDue">
-      You have outstanding prior balance invoice(s), please check that first!
-      <a routerLink="/dashboard">
-        <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>
+      <div style="color: #f44336;"><fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon> Attention: you have an outstanding prior balance invoice(s); please return to the Dashboard for details and to make payment</div>
+       <a routerLink="/dashboard">
         Return to Dashboard
       </a>
     </span>
@@ -244,7 +243,7 @@
                                   </a>
                                 </div>
                                 <div
-                                    *ngIf="item?.licenceTypeName === ApplicationTypeNames.CannabisRetailStore && isActive(item) && actionsVisible(item)">
+                                    *ngIf="isFederalReportLicenceType(item) && isActive(item) && actionsVisible(item)">
                                     <a [routerLink]="[ '/federal-reporting/' + item.licenseId + '/default']">
                                         <span><fa-icon [icon]="faBusinessTime" style="margin-right: 10px;"></fa-icon>Review
                                             Federal Reports</span>
@@ -326,9 +325,8 @@
                                   <div *ngIf="isExpired(item) && isRecentlyExpired(item) && item.autoRenewal"
                                        class="licence-expired" style="text-align: center;">
                                     <span *ngIf="isOutstandingPriorBalanceInvoiceDue">
-                                      You have outstanding prior balance invoice(s), please check that first!
+                                      <div style="color: #f44336;"><fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon> Attention: you have an outstanding prior balance invoice(s); please return to the Dashboard for details and to make payment</div>
                                       <a routerLink="/dashboard">
-                                        <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>
                                         Return to Dashboard
                                       </a>
                                     </span>
@@ -342,7 +340,7 @@
                                        class="licence-expired" style="text-align: center;">
                                     <span *ngIf="isOutstandingPriorBalanceInvoiceDue">
                                       <button [disabled]="true" class="missing"
-                                              [title]="'You have outstanding prior balance invoice(s), please check that first!'">
+                                              [title]="'Attention: you have an outstanding prior balance invoice(s); please return to the Dashboard for details and to make payment'">
                                         <span>
                                           <strong>Attention</strong>: This Licence has Expired<br>Please Reinstate.
                                         </span>
