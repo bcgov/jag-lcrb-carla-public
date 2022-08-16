@@ -669,7 +669,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.form.get('capacityArea.capacity').disable();
     }
 
-    if (this.application.applicationType.name !=="Producer Retail Store") {
+    if (!this.requiresFederalProductionInfo()) {
       this.form.get('fpAddressStreet').disable();
       this.form.get('fpAddressCity').disable();
       this.form.get('fpAddressPostalCode').disable();
@@ -677,6 +677,14 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
   }
 
+  requiresFederalProductionInfo(): boolean {
+    const applicationTypeName = this.application.applicationType.name;
+    if(applicationTypeName === "Producer Retail Store" || applicationTypeName === "CRS Location Change" || applicationTypeName === "PRS Transfer of Ownership") {
+      return true;
+    }
+
+    return false;
+  }
 
   private isHoursOfSaleValid(): boolean {
     return this.form.disabled || !this.application.applicationType.showHoursOfSale ||
@@ -1534,7 +1542,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
       indigenousNation: 'Please select a local government or an Indigenous Nation',
       hasReadTeamAndCondition: 'Please confirm have read team and conditions',
       isLocalZoningAllow: 'Please confirm local zoning allow',
-      isLGFNSuport: 'Please confirm LG/FN support'
+      isLGFNSuport: 'Please confirm LG/FN support',
+      federalLicenceNumber: 'Please enter the Federal licence number',
+      fpAddressStreet: 'Please enter the Federal production street address',
+      fpAddressCity: 'Please enter the Federal production city',
+      fpAddressPostalCode: 'Please enter the Federal production postal code'
     };
 
 
