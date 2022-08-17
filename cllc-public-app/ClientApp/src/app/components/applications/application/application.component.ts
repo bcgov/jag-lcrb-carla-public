@@ -251,6 +251,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       manufacturerProductionAmountForPrevYear: [''],
       manufacturerProductionAmountUnit: [''],
       federalLicenceNumber: ['', Validators.required],
+      federalLicenceName: ['', Validators.required],
       fpAddressStreet: ['', Validators.required],
       fpAddressCity: ['', Validators.required],
       fpAddressPostalCode: ['', [Validators.required, Validators.pattern(CanadaPostalRegex)]]
@@ -674,6 +675,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.form.get('fpAddressCity').disable();
       this.form.get('fpAddressPostalCode').disable();
       this.form.get('federalLicenceNumber').disable();
+      this.form.get('federalLicenceName').disable();
     }
   }
 
@@ -1544,6 +1546,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       isLocalZoningAllow: 'Please confirm local zoning allow',
       isLGFNSuport: 'Please confirm LG/FN support',
       federalLicenceNumber: 'Please enter the Federal licence number',
+      federalLicenceName: 'Please enter the Federal licence name',
       fpAddressStreet: 'Please enter the Federal production street address',
       fpAddressCity: 'Please enter the Federal production city',
       fpAddressPostalCode: 'Please enter the Federal production postal code'
