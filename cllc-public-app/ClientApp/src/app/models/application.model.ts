@@ -99,6 +99,9 @@ export interface Application {
   renewalDUI: string;
   renewalThirdParty: string;
 
+  renewalFederalLicence: string;
+  renewalFederalSecurity: string;
+
   description1: string;
   description2: string;
   description3: string;
@@ -229,6 +232,7 @@ export interface Application {
   manufacturerProductionAmountUnit: number;
 
   federalLicenceNumber: string;
+  federalLicenceName: string;
   fpAddressStreet: string;
   fpAddressCity: string;
   fpAddressPostalCode: string;

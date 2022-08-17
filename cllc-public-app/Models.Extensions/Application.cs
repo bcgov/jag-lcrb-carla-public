@@ -78,6 +78,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioRenewalfloorplan = (int?)from.RenewalFloorPlan;
             to.AdoxioRenewalsitemap = (int?)from.RenewalSiteMap;
             to.AdoxioRenewaltiedhousefederalinterest = (int?)from.TiedhouseFederalInterest;
+            to.AdoxioRenewalfedlic = (int?)from.RenewalFederalLicence;
+            to.AdoxioRenewalfedsec = (int?)from.RenewalFederalSecurity;
             to.AdoxioDescription1 = from.Description1;
             to.AdoxioDescription2 = from.Description2;
             to.AdoxioDescription3 = from.Description3;
@@ -238,6 +240,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioPicnicreadandaccepttermsandconditions = from.PicnicReadAndAccept;
             //LCSD-6406
             to.AdoxioFederallicencenumber = from.FederalLicenceNumber;
+            to.AdoxioFederallicencename = from.FederalLicenceName;
             to.AdoxioFpaddresscity = from.FPAddressCity;
             to.AdoxioFpaddresspostalcode = from.FPAddressPostalCode;
             to.AdoxioFpaddressstreet = from.FPAddressStreet;
@@ -427,6 +430,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 TiedhouseFederalInterest = (ValueNotChanged?)dynamicsApplication.AdoxioRenewaltiedhousefederalinterest,
                 RenewalDUI = (ValueNotChanged?)dynamicsApplication.AdoxioRenewaldui,
                 RenewalThirdParty = (ValueNotChanged?)dynamicsApplication.AdoxioRenewalthirdparty,
+                RenewalFederalLicence = (ValueNotChanged?)dynamicsApplication.AdoxioRenewalfedlic,
+                RenewalFederalSecurity = (ValueNotChanged?)dynamicsApplication.AdoxioRenewalfedsec,
 
                 AuthorizedToSubmit = dynamicsApplication.AdoxioAuthorizedtosubmit,
                 SignatureAgreement = dynamicsApplication.AdoxioSignatureagreement,
@@ -599,8 +604,9 @@ namespace Gov.Lclb.Cllb.Public.Models
                 PicnicConfirmZoning = dynamicsApplication.AdoxioPicnicconfirmszoning,
                 PicnicReadAndAccept = dynamicsApplication.AdoxioPicnicreadandaccepttermsandconditions,
                 //LCSD-6406
-                FederalLicenceNumber=dynamicsApplication.AdoxioFederallicencenumber, 
-                FPAddressCity=dynamicsApplication.AdoxioFpaddresscity,     
+                FederalLicenceNumber=dynamicsApplication.AdoxioFederallicencenumber,
+                FederalLicenceName = dynamicsApplication.AdoxioFederallicencename,
+                FPAddressCity =dynamicsApplication.AdoxioFpaddresscity,     
                 FPAddressPostalCode=dynamicsApplication.AdoxioFpaddresspostalcode,
                 FPAddressStreet=dynamicsApplication.AdoxioFpaddressstreet     
                 
