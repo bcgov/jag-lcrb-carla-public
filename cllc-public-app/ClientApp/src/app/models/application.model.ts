@@ -228,4 +228,9 @@ export interface Application {
   manufacturerProductionAmountForPrevYear: number;
   manufacturerProductionAmountUnit: number;
 
+  federalLicenceNumber: string;
+  fpAddressStreet: string;
+  fpAddressCity: string;
+  fpAddressPostalCode: string;
+
 }
