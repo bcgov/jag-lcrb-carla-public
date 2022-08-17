@@ -3,7 +3,7 @@
 
 import { filter, takeWhile, catchError, mergeMap } from "rxjs/operators";
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup, ValidatorFn, Validators } from "@angular/forms";
 import { Store } from "@ngrx/store";
 import { AppState } from "@app/app-state/models/app-state";
 import { Subject, Observable, forkJoin, of } from "rxjs";
@@ -44,6 +44,8 @@ const ValidationErrorMap = {
   renewalValidInterest: "Please answer question 13",
   renewalZoning: "Please answer question 14",
   renewalFloorPlan: "Please answer question 15",
+  renewalFederalLicence: "Please answer question 16",
+  renewalFederalSecurity: "Please answer question 17",
   contactPersonFirstName: "Please enter the business contact's first name",
   contactPersonLastName: "Please enter the business contact's last name",
   contactPersonEmail: "Please enter the business contact's email address",
@@ -131,62 +133,21 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
   titleOf(): string {
     if(this.application.assignedLicence.licenseType === LicenceTypeNames.S119){
       return "Section 119 Authorization";
-    } else {
-    return "Cannabis Retail Store Licence";
+    } else if(this.application.assignedLicence.licenseType === LicenceTypeNames.PRS) {
+      return "Production Retail Store License";
     }
+    return "Cannabis Retail Store Licence";
   }
+
+  requiredAlternateQuestionValidator(): ValidatorFn {
+    if(this.showAlternateQuestions()) {
+      return Validators.required;
+    } 
+
+    return Validators.nullValidator;
+  }
+
   ngOnInit() {
-    this.form = this.fb.group({
-      id: [""],
-
-      // #1
-      renewalCriminalOffenceCheck: ["", Validators.required],
-      // #2
-      renewalUnreportedSaleOfBusiness: ["", Validators.required],
-      // #3
-      renewalBusinessType: ["", Validators.required],
-      // #4
-      renewalTiedhouse: ["", Validators.required],
-      // #5
-      tiedhouseFederalInterest: ["", Validators.required],
-      // #6
-      renewalOrgLeadership: ["", Validators.required],
-      // #7
-      renewalkeypersonnel: ["", Validators.required],
-      // #8
-      renewalShareholders: ["", Validators.required],
-      // #9
-      renewalOutstandingFines: ["", Validators.required],
-      // # 10
-      renewalBranding: ["", Validators.required],
-      // #11
-      renewalSignage: ["", Validators.required],
-      // #12
-      renewalEstablishmentAddress: ["", Validators.required],
-      // #13
-      renewalValidInterest: ["", Validators.required],
-      // #14
-      renewalZoning: ["", Validators.required],
-      // #15
-      renewalFloorPlan: ["", Validators.required],
-
-      contactPersonFirstName: ["", Validators.required],
-      contactPersonLastName: ["", Validators.required],
-      contactPersonRole: [""],
-      contactPersonEmail: ["", Validators.required],
-      contactPersonPhone: ["", Validators.required],
-
-      authorizedToSubmit: ["", [this.customRequiredCheckboxValidator()]],
-      signatureAgreement: ["", [this.customRequiredCheckboxValidator()]],
-
-      assignedLicence: this.fb.group({
-        id: [""],
-        establishmentAddressStreet: [""],
-        establishmentAddressCity: [""],
-        establishmentAddressPostalCode: [""],
-        establishmentParcelId: [""]
-      }),
-    });
 
     let sub = this.applicationDataService.getSubmittedApplicationCount()
       .pipe(takeWhile(() => this.componentActive))
@@ -223,6 +184,62 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
             return o;
           },
             {});
+
+        this.form = this.fb.group({
+          id: [""],
+    
+          // #1
+          renewalCriminalOffenceCheck: ["", Validators.required],
+          // #2
+          renewalUnreportedSaleOfBusiness: ["", Validators.required],
+          // #3
+          renewalBusinessType: ["", Validators.required],
+          // #4
+          renewalTiedhouse: ["", Validators.required],
+          // #5
+          tiedhouseFederalInterest: ["", Validators.required],
+          // #6
+          renewalOrgLeadership: ["", Validators.required],
+          // #7
+          renewalkeypersonnel: ["", Validators.required],
+          // #8
+          renewalShareholders: ["", Validators.required],
+          // #9
+          renewalOutstandingFines: ["", Validators.required],
+          // # 10
+          renewalBranding: ["", Validators.required],
+          // #11
+          renewalSignage: ["", Validators.required],
+          // #12
+          renewalEstablishmentAddress: ["", Validators.required],
+          // #13
+          renewalValidInterest: ["", Validators.required],
+          // #14
+          renewalZoning: ["", Validators.required],
+          // #15
+          renewalFloorPlan: ["", Validators.required],
+          // #16
+          renewalFederalLicence: ["", [this.requiredAlternateQuestionValidator()]],
+          // #17
+          renewalFederalSecurity: ["", [this.requiredAlternateQuestionValidator()]],
+    
+          contactPersonFirstName: ["", Validators.required],
+          contactPersonLastName: ["", Validators.required],
+          contactPersonRole: [""],
+          contactPersonEmail: ["", Validators.required],
+          contactPersonPhone: ["", Validators.required],
+    
+          authorizedToSubmit: ["", [this.customRequiredCheckboxValidator()]],
+          signatureAgreement: ["", [this.customRequiredCheckboxValidator()]],
+    
+          assignedLicence: this.fb.group({
+            id: [""],
+            establishmentAddressStreet: [""],
+            establishmentAddressCity: [""],
+            establishmentAddressPostalCode: [""],
+            establishmentParcelId: [""]
+          }),
+        });
 
         this.form.patchValue(noNulls);
         if (data.isPaid) {
@@ -264,6 +281,15 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
 
   isMarketing(): boolean {
     return this.application.applicationType.name === ApplicationTypeNames.MarketingRenewal;
+  }
+
+  showAlternateQuestions = (): boolean => {
+    const licenceType = this.application.assignedLicence.licenseType;
+    if(licenceType === LicenceTypeNames.S119 || licenceType === LicenceTypeNames.PRS) {
+      return true;
+    }
+    
+    return false;
   }
 
   isTouchedAndInvalid(fieldName: string): boolean {
