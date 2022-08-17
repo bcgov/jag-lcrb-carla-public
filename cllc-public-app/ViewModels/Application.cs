@@ -529,6 +529,10 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public ValueNotChanged? RenewalFloorPlan { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
         public ValueNotChanged? RenewalSiteMap { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ValueNotChanged? RenewalFederalLicence { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ValueNotChanged? RenewalFederalSecurity { get; set; }
 
         public string IndigenousNationId { get; set; }
         public string PoliceJurisdictionId { get; set; }
@@ -741,6 +745,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         //LCSD-6406
         public string FederalLicenceNumber {get;set;}
+        public string FederalLicenceName { get; set; }
         public string FPAddressCity {get;set;}
         public string FPAddressPostalCode {get;set;}
         public string FPAddressStreet {get;set;}   
