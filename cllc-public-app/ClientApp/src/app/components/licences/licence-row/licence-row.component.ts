@@ -77,6 +77,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
   @Input()
   licences: ApplicationLicenseSummary[];
   isOutstandingPriorBalanceInvoiceDue: boolean;
+  hasOutstandingPriorBalance: boolean;
 
   constructor(
     private licenceDataService: LicenseDataService,
@@ -108,7 +109,10 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     this.licenceDataService.getOutstandingBalancePriorInvoices()
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((data) => {
-        data.forEach((item: OutstandingPriorBalanceInvoice) => {         
+        data.forEach((item: OutstandingPriorBalanceInvoice) => {
+          if (!this.hasOutstandingPriorBalance) {
+            this.hasOutstandingPriorBalance = true;
+          }
           if (!this.isOutstandingPriorBalanceInvoiceDue && item.invoice.duedate != null) {           
             const toDay = new Date(new Date().toISOString().split("T")[0]);           
             let tmpDueDate = new Date(item.invoice.duedate.toString().split("T")[0]);
