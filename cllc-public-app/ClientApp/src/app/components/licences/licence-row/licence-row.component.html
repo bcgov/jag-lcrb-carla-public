@@ -55,7 +55,7 @@
   <br>
   <div *ngIf="!item.isOperated && isActive(item) && actionsVisible(item)"
        style="min-width: 10px;">
-    <div *ngIf="hasOutstandingPriorBalance" style="color: #f44336;"><fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon> Warning: you have an outstanding prior balance invoice(s)</div>
+    <div *ngIf="hasOutstandingPriorBalance" style="color: #f44336;"><fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>Warning: you have an outstanding balance invoice(s) that can be accessed from the Dashboard page.</div>
     <a [href]="'api/licenses/' + item?.licenseId + '/pdf/' + item?.licenseNumber + '.pdf'"
        download>
       <span>
@@ -67,13 +67,13 @@
   </div>
   <div *ngIf="!item.isOperated && (isExpired(item) || (isActive(item) && isAboutToExpire(item)))">
     <span *ngIf="isOutstandingPriorBalanceInvoiceDue">
-      <div style="color: #f44336;"><fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon> Attention: you have an outstanding prior balance invoice(s) due; please return to the Dashboard for details and to make payment</div>
+      <div style="color: #f44336;"><fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon> Attention: you have an outstanding prior balance invoice(s) due; please return to the Dashboard for details and to make payment.</div>
        <a routerLink="/dashboard">
         Return to Dashboard
       </a>
     </span>
     <span *ngIf="!isOutstandingPriorBalanceInvoiceDue">
-      <div *ngIf="hasOutstandingPriorBalance" style="color: #f44336;"><fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon> Warning: you have an outstanding prior balance invoice(s)</div>
+      <div *ngIf="hasOutstandingPriorBalance" style="color: #f44336;"><fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>Warning: you have an outstanding balance invoice(s) that can be accessed from the Dashboard page.</div>
       <a *ngIf="item.autoRenewal" href="javascript: void(0);" (click)="startRenewal(item)" class="missing">
         <span>
           <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>
