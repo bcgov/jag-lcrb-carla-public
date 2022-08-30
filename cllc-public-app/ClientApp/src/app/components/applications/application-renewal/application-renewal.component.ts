@@ -134,7 +134,7 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
     if(this.application.assignedLicence.licenseType === LicenceTypeNames.S119){
       return "Section 119 Authorization";
     } else if(this.application.assignedLicence.licenseType === LicenceTypeNames.PRS) {
-      return "Production Retail Store License";
+      return "Producer Retail Store License";
     }
     return "Cannabis Retail Store Licence";
   }
