@@ -681,7 +681,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   requiresFederalProductionInfo(): boolean {
     const applicationTypeName = this.application.applicationType.name;
-    if(applicationTypeName === "Producer Retail Store" || applicationTypeName === "CRS Location Change" || applicationTypeName === "PRS Transfer of Ownership") {
+    if(applicationTypeName === "Producer Retail Store" || applicationTypeName === "PRS Relocation" || applicationTypeName === "PRS Transfer of Ownership") {
       return true;
     }
 
