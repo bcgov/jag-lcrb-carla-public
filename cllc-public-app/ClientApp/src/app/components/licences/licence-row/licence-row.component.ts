@@ -77,6 +77,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
   @Input()
   licences: ApplicationLicenseSummary[];
   isOutstandingPriorBalanceInvoiceDue: boolean;
+  hasOutstandingPriorBalance: boolean;
 
   constructor(
     private licenceDataService: LicenseDataService,
@@ -108,7 +109,10 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     this.licenceDataService.getOutstandingBalancePriorInvoices()
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((data) => {
-        data.forEach((item: OutstandingPriorBalanceInvoice) => {         
+        data.forEach((item: OutstandingPriorBalanceInvoice) => {
+          if (!this.hasOutstandingPriorBalance) {
+            this.hasOutstandingPriorBalance = true;
+          }
           if (!this.isOutstandingPriorBalanceInvoiceDue && item.invoice.duedate != null) {           
             const toDay = new Date(new Date().toISOString().split("T")[0]);           
             let tmpDueDate = new Date(item.invoice.duedate.toString().split("T")[0]);
@@ -435,7 +439,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     let renewalType: "crs" | "liquor";
     // used to find an existing renewal application of that type, or create a new one
     let renewalApplication;
-    // used to specify the type of renewal application too create
+    // used to specify the type of renewal application to create
     let renewalApplicationTypeName: ApplicationTypeNames.MarketingRenewal |
       ApplicationTypeNames.CRSRenewal |
       ApplicationTypeNames.LiquorRenewal;
@@ -475,14 +479,14 @@ export class LicenceRowComponent extends FormBase implements OnInit {
       this.router.navigateByUrl(`/account-profile/renewal/${renewalType}/${renewalApplication.applicationId}`);
       // otherwise if there's a paid renewal application
     } else if (renewalApplication && renewalApplication.isPaid) {
-      // that shouldnt have happened
+      // that shouldn't have happened
       this.snackBar.open("Renewal application already submitted",
         "Fail",
         { duration: 3500, panelClass: ["red-snackbar"] });
       // otherwise
     } else {
 
-      // create an renewal application of the specified type
+      // create a renewal application of the specified type
       this.busy = this.licenceDataService.createApplicationForActionType(licence.licenseId, renewalApplicationTypeName)
         .pipe(takeWhile(() => this.componentActive))
         .subscribe(data => {

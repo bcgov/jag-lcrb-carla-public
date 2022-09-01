@@ -777,15 +777,20 @@
   </section>
 
   <!-- Federal Production Information -->
-  <section class="ngtest-property-details" *ngIf="application?.applicationType?.name=='Producer Retail Store'">
+  <section class="ngtest-property-details" *ngIf="requiresFederalProductionInfo()">
     <h3 class="blue-header">FEDERAL PRODUCTION INFORMATION</h3>
     <section class="padded-section content-bottom">
       <div style="position: relative">  
         <div>
-          <app-field [required]="true" label="Federal Licence Number"  [isFullWidth]="true"
+          <app-field [required]="true" label="Federal Licence Number" [isFullWidth]="true"
                      [valid]="isValidOrNotTouched('federalLicenceNumber')"
                      errorMessage="Please enter the Federal licence number">
             <input class="form-control" type="text" formControlName="federalLicenceNumber" id="federalLicenceNumber">
+          </app-field>
+          <app-field [required]="true" label="Federal Licence Name" [isFullWidth]="true"
+                     [valid]="isValidOrNotTouched('federalLicenceName')"
+                     errorMessage="Please enter the Federal licence name">
+            <input class="form-control" type="text" formControlName="federalLicenceName" id="federalLicenceName">
           </app-field>
         </div>
       </div>  
