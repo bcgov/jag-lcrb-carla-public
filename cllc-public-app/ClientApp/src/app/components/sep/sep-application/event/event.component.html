@@ -253,17 +253,17 @@
                                     these hours.
                                 </p>
                                 <mat-accordion>
-                                    <mat-expansion-panel [expanded]="true" [formGroupName]="k" (opened)="isOpen = true"
-                                    (closed)="isOpen = false"
-                                        *ngFor="let item of getEventDates(i).controls; let isOpen = true; let k = index;">
+                                    <mat-expansion-panel expanded [formGroupName]="k" (opened)="setIsOpen(i, k, true)"
+                                    (closed)="setIsOpen(i, k, false)"
+                                        *ngFor="let item of getEventDates(i).controls; let k = index;">
                                         <mat-expansion-panel-header>
-                                            <mat-panel-title *ngIf="!isOpen">
+                                            <mat-panel-title *ngIf="getIsOpen(i, k) === false">
                                                 Event Date: {{ item.get('eventDate')?.value | date}}
                                                 <br>
                                                 Event Times: {{ item.get('eventStartValue').value}} - {{
                                                 item.get('eventEndValue').value}}
                                             </mat-panel-title>
-                                            <mat-panel-title *ngIf="!isOpen">
+                                            <mat-panel-title *ngIf="getIsOpen(i, k) === false">
                                                 Liquor will be served: {{
                                                 item.get('serviceStartValue').value}} - {{
                                                 item.get('serviceEndValue').value}}

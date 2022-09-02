@@ -53,7 +53,7 @@
                         {{monthlyReportStatusEnum[shownMonthlyReports[tabIndex].statusCode] | uppercase}}
                       </span>
                       <fa-icon data-html="true" style="color: #38598a; margin-left: 10px;" [icon]="faQuestionCircle" matTooltipClass="multiline-tooltip" matTooltip="DRAFT: The monthly report has not be completed&#13;SUBMITTED: The monthly report has been completed and is ready to be sent to CTLS&#13;CLOSED: The monthly report has been sent to CTLS"></fa-icon>
-                    </h3><a [routerLink]="" (click)="save(false)" *ngIf="reportIsSubmitted">Reopen Monthly Report</a>
+                    </h3><a [routerLink]="[]" (click)="save(false)" *ngIf="reportIsSubmitted">Reopen Monthly Report</a>
                   </div>
                 </div>
                 <div class="employee-reporting">

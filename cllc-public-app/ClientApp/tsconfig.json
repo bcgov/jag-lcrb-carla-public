@@ -9,7 +9,6 @@
     "module": "es2020",
     "moduleResolution": "node",
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
     "importHelpers": true,
     "target": "es2015",
 	  "incremental": true,
@@ -29,6 +28,5 @@
     }
   },
   "angularCompilerOptions": {
-    "enableIvy": false
   }
 }
