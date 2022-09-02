@@ -20,9 +20,8 @@ export const INSERT_TYPES = {
 
 // based on http://blog.rangle.io/dynamically-creating-components-with-angular-2/
 @Component({
-  selector: "app-insert",
-  entryComponents: [StaticComponent, SurveySidebarComponent],
-  template: `<div #container></div>`,
+    selector: "app-insert",
+    template: `<div #container></div>`
 })
 export class InsertComponent implements OnInit {
   @ViewChild("container", { read: ViewContainerRef, static: true })

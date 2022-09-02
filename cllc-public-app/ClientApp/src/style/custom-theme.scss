@@ -1,4 +1,5 @@
-@import '~@angular/material/theming';
+@use '@angular/material' as mat;
+@import '@angular/material/theming';
 @import "~mygovbc-bootstrap-theme/dist/mygovbc-bootstrap-theme.min.css";
 
 $app-primary: (
@@ -34,7 +35,7 @@ $app-primary: (
     )
 );
 
-$app-accent:  mat-palette($mat-indigo, 700);
+$app-accent:  mat.define-palette(mat.$indigo-palette, 700);
 
 $app-warn: (
     50 : #f5e9e8,
@@ -70,14 +71,14 @@ $app-warn: (
 );
 
 
-@include mat-core();
-$primary: mat-palette($app-primary);
-$accent: mat-palette($app-accent);
-$warn: mat-palette($app-warn);
-$theme: mat-light-theme($primary, $accent, $warn);
-@include angular-material-theme($theme);
-$custom-typography: mat-typography-config(
+@include mat.core();
+$primary: mat.define-palette($app-primary);
+$accent: mat.define-palette($app-accent);
+$warn: mat.define-palette($app-warn);
+$theme: mat.define-light-theme($primary, $accent, $warn);
+@include mat.all-component-themes($theme);
+$custom-typography: mat.define-typography-config(
   $font-family: 'MyriadWebPro, Calibri, Arial, "sans serif"'
 );
 
-@include angular-material-typography($custom-typography);
+@include mat.all-component-typographies($custom-typography);
