@@ -51,7 +51,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             }
             if (adoxioEstablishmentId != null)
             {
-                var establishment = dynamicsClient.Establishments.GetByKey(adoxioEstablishmentId.ToString());
+                var select = new List<string>() { "adoxio_establishmentid", "adoxio_name", "adoxio_addresscity", "adoxio_addresspostalcode" };
+                var establishment = dynamicsClient.Establishments.GetByKey(adoxioEstablishmentId.ToString(), select: select);
                 monthlyReportVM.establishmentName = establishment.AdoxioName;
                 monthlyReportVM.establishmentAddressCity = establishment.AdoxioAddresscity;
                 monthlyReportVM.establishmentAddressPostalCode = establishment.AdoxioAddresspostalcode;
@@ -61,7 +62,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 IEnumerable<MicrosoftDynamicsCRMadoxioCannabisinventoryreport> inventoryReports = dynamicsClient.GetInventoryReportsForMonthlyReport(dynamicsMonthlyReport.AdoxioCannabismonthlyreportid);
                 foreach (var inventoryReport in inventoryReports)
                 {
-                    MicrosoftDynamicsCRMadoxioCannabisproductadmin product = dynamicsClient.Cannabisproductadmins.GetByKey(inventoryReport._adoxioProductidValue);
+                    var select = new List<string>() { "adoxio_cannabisproductadminid", "adoxio_name", "adoxio_description", "adoxio_displayorder" };
+                    MicrosoftDynamicsCRMadoxioCannabisproductadmin product = dynamicsClient.Cannabisproductadmins.GetByKey(inventoryReport._adoxioProductidValue, select: select);
                     InventorySalesReport inv = new InventorySalesReport
                     {
                         product = product.AdoxioName,
