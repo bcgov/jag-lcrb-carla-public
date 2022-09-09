@@ -832,7 +832,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             else
             {
-                var select = new List<string>() { "adoxio_cannabisinventoryreportid", "adoxio_openinginventory", "adoxio_qtyreceiveddomestic", "adoxio_qtyreceivedreturns", "adoxio_qtyreceivedother", "adoxio_qtyshippeddomestic", "adoxio_qtyshippedreturned", "adoxio_qtydestroyed", "adoxio_qtyloststolen", "adoxio_otherreductions", "adoxio_closinginventory", "adoxio_valueofclosinginventory", "adoxio_packagedunitsnumber", "adoxio_totalvalue", "adoxio_packagedunitsnumberretailer", "adoxio_totalvalueretailer", "adoxio_otherdescription", "adoxio_weightofclosinginventory", "adoxio_totalnumberseeds" };
+                var select = new List<string>() { "adoxio_cannabisinventoryreportid", "adoxio_openinginventory", "adoxio_qtyreceiveddomestic", "adoxio_qtyreceivedreturns", "adoxio_qtyreceivedother", "adoxio_qtyshippeddomestic", "adoxio_qtyshippedreturned", "adoxio_qtydestroyed", "adoxio_qtyloststolen", "adoxio_otherreductions", "adoxio_closinginventory", "adoxio_valueofclosinginventory", "adoxio_packagedunitsnumber", "adoxio_totalvalue", "adoxio_packagedunitsnumberretailer", "adoxio_totalvalueretailer", "adoxio_otherdescription", "adoxio_weightofclosinginventory", "adoxio_totalnumberseeds", "_adoxio_productid_value" };
                 var filter = $"_adoxio_monthlyreportid_value eq {monthlyReportId}";
 
                 try
