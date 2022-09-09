@@ -57,7 +57,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             try
             {
-                var select = new List<string>() { "_adoxio_licenceid_value", "adoxio_licencenumber", "adoxio_reportingperiodmonth", "adoxio_reportingperiodyear", "statuscode", "adoxio_employeesmanagement", "adoxio_employeesadministrative", "adoxio_employeessales", "adoxio_employeesproduction", "adoxio_employeesother", "adoxio_cannabismonthlyreportid", "_adoxioEstablishmentidValue" };
+                var select = new List<string>() { "_adoxio_licenceid_value", "adoxio_licencenumber", "adoxio_reportingperiodmonth", "adoxio_reportingperiodyear", "statuscode", "adoxio_employeesmanagement", "adoxio_employeesadministrative", "adoxio_employeessales", "adoxio_employeesproduction", "adoxio_employeesother", "adoxio_cannabismonthlyreportid", "_adoxio_establishmentid_value" };
                 // filter the data to only show data for the given licensee and only since the start date.
                 var filter = $"_adoxio_licenseeid_value eq {licenceeId} and createdon ge {GetStartDateForMonthlyReports()}";
 
