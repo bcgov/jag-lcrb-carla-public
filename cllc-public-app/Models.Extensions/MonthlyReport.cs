@@ -44,7 +44,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             monthlyReportVM.monthlyReportId = dynamicsMonthlyReport.AdoxioCannabismonthlyreportid;
 
             // fetch the establishment and get name and address
-            Guid? adoxioEstablishmentId = null;
+            /*Guid? adoxioEstablishmentId = null;
             if (!string.IsNullOrEmpty(dynamicsMonthlyReport._adoxioEstablishmentidValue))
             {
                 adoxioEstablishmentId = Guid.Parse(dynamicsMonthlyReport._adoxioEstablishmentidValue);
@@ -56,19 +56,26 @@ namespace Gov.Lclb.Cllb.Public.Models
                 monthlyReportVM.establishmentName = establishment.AdoxioName;
                 monthlyReportVM.establishmentAddressCity = establishment.AdoxioAddresscity;
                 monthlyReportVM.establishmentAddressPostalCode = establishment.AdoxioAddresspostalcode;
+            }*/
+            if(dynamicsMonthlyReport.AdoxioEstablishmentId != null)
+            {
+                monthlyReportVM.establishmentName = dynamicsMonthlyReport.AdoxioEstablishmentId.AdoxioName;
+                monthlyReportVM.establishmentAddressCity = dynamicsMonthlyReport.AdoxioEstablishmentId.AdoxioAddresscity;
+                monthlyReportVM.establishmentAddressPostalCode = dynamicsMonthlyReport.AdoxioEstablishmentId.AdoxioAddresspostalcode;
             }
             if (expandInventoryReports)
             {
                 IEnumerable<MicrosoftDynamicsCRMadoxioCannabisinventoryreport> inventoryReports = dynamicsClient.GetInventoryReportsForMonthlyReport(dynamicsMonthlyReport.AdoxioCannabismonthlyreportid);
                 foreach (var inventoryReport in inventoryReports)
                 {
-                    var select = new List<string>() { "adoxio_cannabisproductadminid", "adoxio_name", "adoxio_description", "adoxio_displayorder" };
+                    /*var select = new List<string>() { "adoxio_cannabisproductadminid", "adoxio_name", "adoxio_description", "adoxio_displayorder" };
                     MicrosoftDynamicsCRMadoxioCannabisproductadmin product = dynamicsClient.Cannabisproductadmins.GetByKey(inventoryReport._adoxioProductidValue, select: select);
+                    */
                     InventorySalesReport inv = new InventorySalesReport
                     {
-                        product = product.AdoxioName,
-                        ProductDescription = product.AdoxioDescription,
-                        ProductDisplayOrder = product.AdoxioDisplayorder,
+                        product = inventoryReport.AdoxioProductId.AdoxioName,
+                        ProductDescription = inventoryReport.AdoxioProductId.AdoxioDescription,
+                        ProductDisplayOrder = inventoryReport.AdoxioProductId.AdoxioDisplayorder,
                         inventoryReportId = inventoryReport.AdoxioCannabisinventoryreportid,
                         openingInventory = inventoryReport.AdoxioOpeninginventory,
                         domesticAdditions = inventoryReport.AdoxioQtyreceiveddomestic,
@@ -87,11 +94,11 @@ namespace Gov.Lclb.Cllb.Public.Models
                         totalSalesToRetailerValue = (inventoryReport.AdoxioTotalvalueretailer != null) ? inventoryReport.AdoxioTotalvalueretailer.Value : 0,
                         otherDescription = inventoryReport.AdoxioOtherdescription
                     };
-                    if (product.AdoxioName != "Seeds" && product.AdoxioName != "Vegetative Cannabis")
+                    if (inventoryReport.AdoxioProductId.AdoxioName != "Seeds" && inventoryReport.AdoxioProductId.AdoxioName != "Vegetative Cannabis")
                     {
                         inv.closingWeight = (inventoryReport.AdoxioWeightofclosinginventory != null) ? inventoryReport.AdoxioWeightofclosinginventory.Value : 0;
                     }
-                    if (product.AdoxioName == "Seeds")
+                    if (inventoryReport.AdoxioProductId.AdoxioName == "Seeds")
                     {
                         inv.totalSeeds = inventoryReport.AdoxioTotalnumberseeds;
                     }
