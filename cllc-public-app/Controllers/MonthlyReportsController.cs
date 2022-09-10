@@ -57,12 +57,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             try
             {
-                var select = new List<string>() { "_adoxio_licenceid_value", "adoxio_licencenumber", "adoxio_reportingperiodmonth", "adoxio_reportingperiodyear", "statuscode", "adoxio_employeesmanagement", "adoxio_employeesadministrative", "adoxio_employeessales", "adoxio_employeesproduction", "adoxio_employeesother", "adoxio_cannabismonthlyreportid", "_adoxio_establishmentid_value" };
+                var select = new List<string>() { "_adoxio_licenceid_value", "adoxio_licencenumber", "adoxio_reportingperiodmonth", "adoxio_reportingperiodyear", "statuscode", "adoxio_employeesmanagement", "adoxio_employeesadministrative", "adoxio_employeessales", "adoxio_employeesproduction", "adoxio_employeesother", "adoxio_cannabismonthlyreportid" };
+                var expand = new List<string>() { "adoxio_EstablishmentId($select=adoxio_establishmentid, adoxio_name, adoxio_addresscity, adoxio_addresspostalcode)" };
                 // filter the data to only show data for the given licensee and only since the start date.
                 var filter = $"_adoxio_licenseeid_value eq {licenceeId} and createdon ge {GetStartDateForMonthlyReports()}";
 
                 // Sort monthly reports so that they display in the proper order (Jan -> Feb, Feb -> Mar etc)
-                monthlyReports = _dynamicsClient.Cannabismonthlyreports.Get(filter: filter, select: select, @orderby: new List<string> { "adoxio_reportingperiodyear asc", "adoxio_reportingperiodmonth asc" }).Value;
+                monthlyReports = _dynamicsClient.Cannabismonthlyreports.Get(filter: filter, select: select, expand: expand, @orderby: new List<string> { "adoxio_reportingperiodyear asc", "adoxio_reportingperiodmonth asc" }).Value;
             }
             catch (HttpOperationException)
             {

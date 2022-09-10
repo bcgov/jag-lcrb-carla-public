@@ -832,12 +832,14 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             else
             {
-                var select = new List<string>() { "adoxio_cannabisinventoryreportid", "adoxio_openinginventory", "adoxio_qtyreceiveddomestic", "adoxio_qtyreceivedreturns", "adoxio_qtyreceivedother", "adoxio_qtyshippeddomestic", "adoxio_qtyshippedreturned", "adoxio_qtydestroyed", "adoxio_qtyloststolen", "adoxio_otherreductions", "adoxio_closinginventory", "adoxio_valueofclosinginventory", "adoxio_packagedunitsnumber", "adoxio_totalvalue", "adoxio_packagedunitsnumberretailer", "adoxio_totalvalueretailer", "adoxio_otherdescription", "adoxio_weightofclosinginventory", "adoxio_totalnumberseeds", "_adoxio_productid_value" };
+                var select = new List<string>() { "adoxio_cannabisinventoryreportid", "adoxio_openinginventory", "adoxio_qtyreceiveddomestic", "adoxio_qtyreceivedreturns", "adoxio_qtyreceivedother", "adoxio_qtyshippeddomestic", "adoxio_qtyshippedreturned", "adoxio_qtydestroyed", "adoxio_qtyloststolen", "adoxio_otherreductions", "adoxio_closinginventory", "adoxio_valueofclosinginventory", "adoxio_packagedunitsnumber", "adoxio_totalvalue", "adoxio_packagedunitsnumberretailer", "adoxio_totalvalueretailer", "adoxio_otherdescription", "adoxio_weightofclosinginventory", "adoxio_totalnumberseeds" };
+                var expand = new List<string>() { "adoxio_ProductId($select=adoxio_cannabisproductadminid, adoxio_name, adoxio_description, adoxio_displayorder)" };
+                //adoxioProductId
                 var filter = $"_adoxio_monthlyreportid_value eq {monthlyReportId}";
 
                 try
                 {
-                    inventoryReportsList = _dynamicsClient.Cannabisinventoryreports.Get(filter: filter, select: select, orderby: new List<string> { "modifiedon desc" }).Value;
+                    inventoryReportsList = _dynamicsClient.Cannabisinventoryreports.Get(filter: filter, select: select, expand: expand, orderby: new List<string> { "modifiedon desc" }).Value;
                 }
                 catch (HttpOperationException)
                 {
