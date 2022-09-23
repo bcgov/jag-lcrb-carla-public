@@ -138,6 +138,24 @@ export class SpecialEventsDataService extends DataService {
       .pipe(catchError(this.handleError));
   }
 
+  getPolicePendingReviewSepApplications(): Observable<SepApplicationSummary> {
+    const apiPath = `api/special-events/police/pending-review`;
+    return this.http.get<SepApplicationSummary>(apiPath, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
+  getPoliceApprovedSepApplications(): Observable<SepApplicationSummary> {
+    const apiPath = `api/special-events/police/approved`;
+    return this.http.get<SepApplicationSummary>(apiPath, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
+  getPoliceDeniedSepApplications(): Observable<SepApplicationSummary> {
+    const apiPath = `api/special-events/police/denied`;
+    return this.http.get<SepApplicationSummary>(apiPath, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
   getPoliceApprovalMySepApplications(): Observable<SepPoliceJobSummary> {
     const apiPath = `api/special-events/police/my`;
     return this.http.get<SepPoliceJobSummary>(apiPath, { headers: this.headers })
