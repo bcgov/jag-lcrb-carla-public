@@ -72,7 +72,24 @@ export class AllApplicationsComponent implements OnInit {
   }
 
   private loadSepApplications() {
-    return this.sepDataService.getPoliceApprovalSepApplications();
+    let pendingReviewApplications = this.sepDataService.getPolicePendingReviewSepApplications();
+    pendingReviewApplications.subscribe(data => {
+      console.log(data);
+    });
+
+    let approvedApplications = this.sepDataService.getPoliceApprovedSepApplications();
+    approvedApplications.subscribe(data => {
+      console.log(data);
+    });
+
+    let deniedApplications = this.sepDataService.getPoliceDeniedSepApplications();
+    deniedApplications.subscribe(data => {
+      console.log(data);
+    });
+    
+    let allApplications = this.sepDataService.getPoliceApprovalSepApplications();
+
+    return allApplications;
   }
 
 }

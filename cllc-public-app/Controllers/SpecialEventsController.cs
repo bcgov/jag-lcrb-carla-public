@@ -1585,6 +1585,56 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             return result;
         }
+        
+        private PagingResult<ViewModels.SpecialEventSummary> GetPagedSepSummaries(string filter, int pageIndex, int pageSize)
+        {
+            PagingResult<ViewModels.SpecialEventSummary> result = new PagingResult<ViewModels.SpecialEventSummary>()
+            {
+                Value = new List<SpecialEventSummary>()
+            };
+
+            string[] expand = new[] { "adoxio_PoliceRepresentativeId", "adoxio_PoliceAccountId", "adoxio_specialevent_specialeventtsacs" };
+            try
+            {
+                var customHeaders = new Dictionary<string, List<string>>();
+                var preferHeader = new List<string>();
+                var odataVersionHeader = new List<string>();
+
+                preferHeader.Add($"odata.maxpagesize={pageSize}");
+                customHeaders.Add("Prefer", preferHeader);
+                odataVersionHeader.Add("4.0");
+                customHeaders.Add("OData-Version", odataVersionHeader);
+                customHeaders.Add("OData-MaxVersion", odataVersionHeader);
+
+                var sepSummaryQuery = _dynamicsClient.Specialevents.GetWithHttpMessagesAsync(filter: filter, expand: expand, customHeaders: customHeaders, count: true).GetAwaiter().GetResult();
+                
+                while(pageIndex > 0)
+                {
+                    string odataNextLink = sepSummaryQuery.Body.OdataNextLink;
+                    sepSummaryQuery = _dynamicsClient.Specialevents.GetNextLink(odataNextLink, customHeaders);
+                    pageIndex--;
+                }
+
+                var sepSummaries = sepSummaryQuery.Body.Value;
+                result.Count = Int32.Parse(sepSummaryQuery.Body.Count);
+
+                foreach(var sepSummary in sepSummaries)
+                {
+                    var viewModel = sepSummary.ToSummaryViewModel();//.GetAwaiter().GetResult();
+                    result.Value.Add(viewModel);
+                }
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Error getting special events");
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(exception, "Unexpected Error getting special events");
+            }
+
+            return result;
+        }
 
         // police get summary list of applications waiting approval
         [HttpGet("police/all")]
@@ -1609,6 +1659,60 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // Police Decision == Denied || Cancelled
                 PoliceDenied = GetSepSummaries($"_adoxio_policejurisdictionid_value eq {userAccount._adoxioPolicejurisdictionidValue} and (adoxio_policeapproval eq {(int?)ApproverStatus.Denied} or adoxio_policeapproval eq {(int?)ApproverStatus.Cancelled})")
             };
+
+            return new JsonResult(result);
+
+        }
+
+        [HttpGet("police/pending-review")]
+        public IActionResult GetPolicePendingReview([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10)
+        {
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+            // get the account details.
+            var userAccount = _dynamicsClient.GetAccountById(userSettings.AccountId);
+            if (string.IsNullOrEmpty(userAccount._adoxioPolicejurisdictionidValue))  // ensure the current account has a police jurisdiction.
+            {
+                return Unauthorized();
+            }
+
+            // Application Status == Pending Review && Police Decision == Under Review
+            var result = GetPagedSepSummaries($"_adoxio_policejurisdictionid_value eq {userAccount._adoxioPolicejurisdictionidValue} and adoxio_policeapproval eq {(int?)ApproverStatus.PendingReview}", pageIndex, pageSize);
+
+            return new JsonResult(result);
+
+        }
+
+        [HttpGet("police/approved")]
+        public IActionResult GetPoliceApproved([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10)
+        {
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+            // get the account details.
+            var userAccount = _dynamicsClient.GetAccountById(userSettings.AccountId);
+            if (string.IsNullOrEmpty(userAccount._adoxioPolicejurisdictionidValue))  // ensure the current account has a police jurisdiction.
+            {
+                return Unauthorized();
+            }
+
+            // Police Decision == Reviewed
+            var result = GetPagedSepSummaries($"_adoxio_policerepresentativeid_value eq {userSettings.ContactId} and statuscode ne {(int?)EventStatus.Draft} and (adoxio_policeapproval eq {(int?)ApproverStatus.AutoReviewed} or adoxio_policeapproval eq {(int?)ApproverStatus.Approved} or adoxio_policeapproval eq {(int?)ApproverStatus.Reviewed})", pageIndex, pageSize);
+
+            return new JsonResult(result);
+
+        }
+
+        [HttpGet("police/denied")]
+        public IActionResult GetPoliceDenied([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10)
+        {
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+            // get the account details.
+            var userAccount = _dynamicsClient.GetAccountById(userSettings.AccountId);
+            if (string.IsNullOrEmpty(userAccount._adoxioPolicejurisdictionidValue))  // ensure the current account has a police jurisdiction.
+            {
+                return Unauthorized();
+            }
+
+            // Police Decision == Denied || Cancelled 
+            var result = GetPagedSepSummaries($"_adoxio_policerepresentativeid_value eq {userSettings.ContactId} and (adoxio_policeapproval eq {(int?)ApproverStatus.Denied} or adoxio_policeapproval eq {(int?)ApproverStatus.Cancelled})", pageIndex, pageSize);
 
             return new JsonResult(result);
 
