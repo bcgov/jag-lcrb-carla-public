@@ -9,7 +9,7 @@ import { SpecialEventsDataService } from '@services/special-events-data.service'
 import { AccountDataService } from '@services/account-data.service';
 import { Contact } from '@models/contact.model';
 import { PoliceTableElement } from '../police-table-element';
-import { Subscription } from 'rxjs';
+import { forkJoin, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-sep-all-applications',
@@ -28,6 +28,9 @@ export class AllApplicationsComponent implements OnInit {
   dataSourcePoliceApproved = new MatTableDataSource<PoliceTableElement>();
   dataSourcePoliceDenied = new MatTableDataSource<PoliceTableElement>();
   initialSelection = [];
+  inProgressCount: number;
+  policeApprovedCount: number;
+  policeDeniedCount: number;
 
 
   constructor(
@@ -53,13 +56,17 @@ export class AllApplicationsComponent implements OnInit {
     this.loadAccountContacts()
       .subscribe(availableContacts => this.availableContacts = availableContacts);
    
-    // fetch SEP applications waiting for Police Approval
+    // fetch SEP applications
     this.busy = this.loadSepApplications()
       .subscribe(allApplications => {
-        this.dataSourceInProgress.data = allApplications.inProgress;
-        this.dataSourcePoliceApproved.data = allApplications.policeApproved;
-        this.dataSourcePoliceDenied.data = allApplications.policeDenied;        
+        this.dataSourceInProgress.data = allApplications[0].value;
+        this.inProgressCount = allApplications[0].count
+        this.dataSourcePoliceApproved.data = allApplications[1].value;
+        this.policeApprovedCount = allApplications[1].count
+        this.dataSourcePoliceDenied.data = allApplications[2].value;        
+        this.policeDeniedCount = allApplications[2].count;
       });
+
   }
 
   private loadAccountContacts() {
@@ -72,24 +79,43 @@ export class AllApplicationsComponent implements OnInit {
   }
 
   private loadSepApplications() {
-    let pendingReviewApplications = this.sepDataService.getPolicePendingReviewSepApplications();
-    pendingReviewApplications.subscribe(data => {
-      console.log(data);
-    });
+    let pendingReviewApplications = this.sepDataService.getPolicePendingReviewSepApplications(0, 5);
 
-    let approvedApplications = this.sepDataService.getPoliceApprovedSepApplications();
-    approvedApplications.subscribe(data => {
-      console.log(data);
-    });
+    let approvedApplications = this.sepDataService.getPoliceApprovedSepApplications(0, 5);
 
-    let deniedApplications = this.sepDataService.getPoliceDeniedSepApplications();
-    deniedApplications.subscribe(data => {
-      console.log(data);
-    });
-    
-    let allApplications = this.sepDataService.getPoliceApprovalSepApplications();
+    let deniedApplications = this.sepDataService.getPoliceDeniedSepApplications(0, 5);
 
-    return allApplications;
+    return forkJoin([pendingReviewApplications,
+      approvedApplications,
+      deniedApplications]);
+  }
+
+  private loadPendingReviewSepApplications(pageIndex: number = 0, pageSize: number = 10) {
+    this.sepDataService.getPolicePendingReviewSepApplications(pageIndex, pageSize)
+      .subscribe(data => {
+        console.log(data);
+        console.log(this.dataSourceInProgress);
+        this.dataSourceInProgress = new MatTableDataSource<PoliceTableElement>()
+        this.dataSourceInProgress.data = data.value;
+        this.inProgressCount = data.count;
+        console.log(this.dataSourceInProgress);
+      });
+  }
+
+  private loadPoliceApprovedSepApplications(pageIndex: number = 0, pageSize: number = 10) {
+    this.sepDataService.getPoliceApprovedSepApplications(pageIndex, pageSize)
+      .subscribe(data => {
+        this.dataSourcePoliceApproved.data = data.value;
+        this.policeApprovedCount = data.count;
+      })
+  }
+
+  private loadPoliceDeniedSepApplications(pageIndex: number = 0, pageSize: number = 10) {
+    this.sepDataService.getPoliceDeniedSepApplications(pageIndex, pageSize)
+      .subscribe(data => {
+        this.dataSourcePoliceDenied.data = data.value;
+        this.policeDeniedCount = data.count;
+      })
   }
 
 }
