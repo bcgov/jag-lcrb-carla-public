@@ -21,6 +21,7 @@ export class PoliceGridComponent implements OnInit {
   _dataSource: MatTableDataSource<PoliceTableElement>;
   _availableContacts: Contact[];
   _currentUser: User;
+  _resultsLength: number;
   currentValueMap = {};
   currentNameMap = {};
 
@@ -63,6 +64,17 @@ export class PoliceGridComponent implements OnInit {
     return this._currentUser;
   }
 
+  @Input()
+  set resultsLength(value: number) {
+    this._resultsLength = value;
+  };
+  get resultsLength() {
+    return this._resultsLength;
+  }
+
+  @Input()
+  getData: (pageIndex: number, pageSize: number) => void;
+
   constructor(    private sepDataService: SpecialEventsDataService,
     private cd: ChangeDetectorRef,
     private router: Router) { }
@@ -71,7 +83,6 @@ export class PoliceGridComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
-
 
   isAssigned(sepData: PoliceTableElement): boolean {
     // TODO: Implement logic to show appropriate button text when application has been assigned
@@ -123,6 +134,11 @@ export class PoliceGridComponent implements OnInit {
    */
   openApplication(id: string) {
     this.router.navigateByUrl(`sep/police/${id}`);
+  }
+
+  handlePage(e: any) {
+    console.log(e);  
+    this.getData(e.pageIndex, e.pageSize);
   }
 
 }
