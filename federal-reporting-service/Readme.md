@@ -5,7 +5,7 @@ The purpose of the federal reporting microservice is to coordinate scheduled pro
 
 ## Development ##
 
-Federal Reporting is a .NET Core 3.1 application.  As such you can use an IDE such as Visual Studio or VS Code to edit the files.  
+Federal Reporting is a .NET 6 application.  As such you can use an IDE such as Visual Studio or VS Code to edit the files.  
 
 ## Installation ##
 
