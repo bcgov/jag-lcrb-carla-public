@@ -5,13 +5,13 @@
   <div [ngBusy]="[busy]"></div>
   <mat-tab-group [selectedIndex]="selectedIndex" mat-align-tabs="start">
     <mat-tab label="Pending Police Review">
-        <app-police-grid [currentUser]="currentUser" [dataSource]="dataSourceInProgress" [resultsLength]="inProgressCount" [getData]="loadPendingReviewSepApplications" [availableContacts]="availableContacts" (saved)="selectedIndex = 1;"></app-police-grid>
+      <app-police-grid-inprogress [currentUser]="currentUser" [availableContacts]="availableContacts" (saved)="selectedIndex = 1;"></app-police-grid-inprogress>
     </mat-tab>
     <mat-tab label="Police Approved / Issued">
-      <app-police-grid [currentUser]="currentUser" [dataSource]="dataSourcePoliceApproved" [resultsLength]="policeApprovedCount" [availableContacts]="availableContacts" (saved)="selectedIndex = 2;"></app-police-grid>
+      <app-police-grid-approved [currentUser]="currentUser" [availableContacts]="availableContacts" (saved)="selectedIndex = 2;"></app-police-grid-approved>
     </mat-tab>
     <mat-tab label="Police Denied / Cancelled">
-      <app-police-grid [currentUser]="currentUser" [dataSource]="dataSourcePoliceDenied" [resultsLength]="policeDeniedCount" [availableContacts]="availableContacts" (saved)="selectedIndex = 3;"></app-police-grid>
+      <app-police-grid-denied [currentUser]="currentUser" [availableContacts]="availableContacts" (saved)="selectedIndex = 3;"></app-police-grid-denied>
     </mat-tab>
   </mat-tab-group>
 
