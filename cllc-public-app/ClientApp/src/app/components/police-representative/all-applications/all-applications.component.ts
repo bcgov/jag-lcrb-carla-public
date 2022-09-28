@@ -5,11 +5,10 @@ import { Store } from '@ngrx/store';
 import { filter, map } from 'rxjs/operators';
 import { AppState } from '@app/app-state/models/app-state';
 import { User } from '@models/user.model';
-import { SpecialEventsDataService } from '@services/special-events-data.service';
 import { AccountDataService } from '@services/account-data.service';
 import { Contact } from '@models/contact.model';
 import { PoliceTableElement } from '../police-table-element';
-import { Subscription } from 'rxjs';
+import { forkJoin, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-sep-all-applications',
@@ -24,15 +23,11 @@ export class AllApplicationsComponent implements OnInit {
   selectedIndex: any;
 
   // table state
-  dataSourceInProgress = new MatTableDataSource<PoliceTableElement>();
-  dataSourcePoliceApproved = new MatTableDataSource<PoliceTableElement>();
-  dataSourcePoliceDenied = new MatTableDataSource<PoliceTableElement>();
   initialSelection = [];
 
 
   constructor(
     private store: Store<AppState>,
-    private sepDataService: SpecialEventsDataService,
     private accountDataService: AccountDataService,
     private router: Router
   ) {
@@ -52,14 +47,7 @@ export class AllApplicationsComponent implements OnInit {
     // fetch possible contacts we can assign to.
     this.loadAccountContacts()
       .subscribe(availableContacts => this.availableContacts = availableContacts);
-   
-    // fetch SEP applications waiting for Police Approval
-    this.busy = this.loadSepApplications()
-      .subscribe(allApplications => {
-        this.dataSourceInProgress.data = allApplications.inProgress;
-        this.dataSourcePoliceApproved.data = allApplications.policeApproved;
-        this.dataSourcePoliceDenied.data = allApplications.policeDenied;        
-      });
+
   }
 
   private loadAccountContacts() {
@@ -71,8 +59,6 @@ export class AllApplicationsComponent implements OnInit {
     })));
   }
 
-  private loadSepApplications() {
-    return this.sepDataService.getPoliceApprovalSepApplications();
-  }
+ 
 
 }

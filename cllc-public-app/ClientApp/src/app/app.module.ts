@@ -316,6 +316,9 @@ import { AllApplicationsComponent } from "@components/police-representative/all-
 import { MyJobsComponent } from './components/police-representative/my-jobs/my-jobs.component';
 import { PoliceSummaryComponent } from './components/police-representative/police-summary/police-summary.component';
 import { PoliceGridComponent } from './components/police-representative/police-grid/police-grid.component';
+import { PoliceGridInProgressComponent } from './components/police-representative/police-grid-inprogress/police-grid-inprogress.component';
+import { PoliceGridApprovedComponent } from './components/police-representative/police-grid-approved/police-grid-approved.component';
+import { PoliceGridDeniedComponent } from './components/police-representative/police-grid-denied/police-grid-denied.component';
 import { SubmittedApplicationsComponent } from './components/sep/my-applications/submitted-applications/submitted-applications.component';
 import { SepPaymentConfirmationComponent } from "@components/sep/payment-confirmation/payment-confirmation.component";
 import { AcceptDialogComponent } from './components/police-representative/police-summary/accept-dialog/accept-dialog.component';
@@ -508,6 +511,9 @@ import { CancelSepApplicationDialogComponent } from './components/sep/sep-applic
     MyJobsComponent,
     PoliceSummaryComponent,
     PoliceGridComponent,
+    PoliceGridInProgressComponent,
+    PoliceGridApprovedComponent,
+    PoliceGridDeniedComponent,
     SubmittedApplicationsComponent,
     AcceptDialogComponent,
     DenyDialogComponent,
