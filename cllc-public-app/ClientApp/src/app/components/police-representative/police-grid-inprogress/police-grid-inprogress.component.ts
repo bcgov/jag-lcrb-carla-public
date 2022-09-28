@@ -74,16 +74,19 @@ export class PoliceGridInProgressComponent implements OnInit {
 
   ngOnInit(): void { }
   ngAfterViewInit() {
-
+    this.dataSource.sort = this.sort;
     // If the user changes the sort order, reset back to the first page.
-    //this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+    this.dataSource.sort.sortChange.subscribe(() => {
+      this.paginator.pageIndex = 0;
+      this.paginator._changePageSize(this.paginator.pageSize); 
+    });
     merge(this.paginator.page)
       .pipe(
         startWith({}),
         switchMap(() => {
           this.isLoadingResults = true;
           this.dataLoaded = false;
-          return this.sepDataService.getPolicePendingReviewSepApplications(this.paginator.pageIndex, this.paginator.pageSize);
+          return this.sepDataService.getPolicePendingReviewSepApplications(this.paginator.pageIndex, this.paginator.pageSize, this.dataSource.sort.active, this.dataSource.sort.direction);
         }),
         map(result => {
           // Flip flag to show that loading has finished.
@@ -100,7 +103,7 @@ export class PoliceGridInProgressComponent implements OnInit {
           this.isRateLimitReached = true;
           return of([] as SepApplicationSummary[]);
         })
-      ).subscribe((data) => this.data = data.map((el, i) => {
+      ).subscribe((data) => this.dataSource.data = data.map((el, i) => {
         return {
           ...el,
           index: 1 + i + this.paginator.pageIndex * this.paginator.pageSize

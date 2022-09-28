@@ -1586,13 +1586,23 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return result;
         }
         
-        private PagingResult<ViewModels.SpecialEventSummary> GetPagedSepSummaries(string filter, int pageIndex, int pageSize)
+        private PagingResult<ViewModels.SpecialEventSummary> GetPagedSepSummaries(string filter, int pageIndex, int pageSize, string sort, string sortdir)
         {
             PagingResult<ViewModels.SpecialEventSummary> result = new PagingResult<ViewModels.SpecialEventSummary>()
             {
                 Value = new List<SpecialEventSummary>()
             };
 
+            var orderby = new List<string> {};
+            if(sort != null && sort.Length > 0)
+            {
+                string tmp = transformColumnNametoSchemaName(sort);
+                if(sortdir != null && sortdir.Length > 0)
+                {
+                    tmp = tmp + " " + sortdir;
+                }
+                orderby.Add(tmp);
+            }
             string[] expand = new[] { "adoxio_PoliceRepresentativeId", "adoxio_PoliceAccountId", "adoxio_specialevent_specialeventtsacs" };
             try
             {
@@ -1606,7 +1616,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 customHeaders.Add("OData-Version", odataVersionHeader);
                 customHeaders.Add("OData-MaxVersion", odataVersionHeader);
 
-                var sepSummaryQuery = _dynamicsClient.Specialevents.GetWithHttpMessagesAsync(filter: filter, expand: expand, customHeaders: customHeaders, count: true).GetAwaiter().GetResult();
+                var sepSummaryQuery = _dynamicsClient.Specialevents.GetWithHttpMessagesAsync(filter: filter, expand: expand, orderby: orderby, customHeaders: customHeaders, count: true).GetAwaiter().GetResult();
                 
                 while(pageIndex > 0)
                 {
@@ -1634,6 +1644,47 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             return result;
+        }
+
+        private String transformColumnNametoSchemaName(String colName)
+        {
+            if(colName != null && colName.Length > 0)
+            {
+                if(colName == "eventStartDate")
+                {
+                    return "adoxio_eventstartdate";
+                }else if(colName == "dateSubmitted")
+                {
+                    return "adoxio_datesubmitted";
+                }
+                else if (colName == "eventName")
+                {
+                    return "adoxio_eventname";
+                }
+                else if (colName == "eventStatus")
+                {
+                    return "statuscode";
+                }
+                else if (colName == "policeDecisionBy")
+                {
+                    return "_adoxio_policerepresentativeid_value";
+                }
+                else if (colName == "maximumNumberOfGuests")
+                {
+                    return "adoxio_maxnumofguests";
+                }
+                else if (colName == "typeOfEventLabel")
+                {
+                    return "adoxio_typeofevent";
+                }
+                else
+                {
+                    return "";
+                }
+
+            }
+
+            return null;
         }
 
         // police get summary list of applications waiting approval
@@ -1665,7 +1716,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         [HttpGet("police/pending-review")]
-        public IActionResult GetPolicePendingReview([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10)
+        public IActionResult GetPolicePendingReview([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10, [FromQuery] string sort = "", [FromQuery] string sortdir = "" )
         {
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             // get the account details.
@@ -1676,14 +1727,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             // Application Status == Pending Review && Police Decision == Under Review
-            var result = GetPagedSepSummaries($"_adoxio_policejurisdictionid_value eq {userAccount._adoxioPolicejurisdictionidValue} and adoxio_policeapproval eq {(int?)ApproverStatus.PendingReview}", pageIndex, pageSize);
+            var result = GetPagedSepSummaries($"_adoxio_policejurisdictionid_value eq {userAccount._adoxioPolicejurisdictionidValue} and adoxio_policeapproval eq {(int?)ApproverStatus.PendingReview}", pageIndex, pageSize, sort, sortdir);
 
             return new JsonResult(result);
 
         }
 
         [HttpGet("police/approved")]
-        public IActionResult GetPoliceApproved([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10)
+        public IActionResult GetPoliceApproved([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10, [FromQuery] string sort = "", [FromQuery] string sortdir = "")
         {
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             // get the account details.
@@ -1694,14 +1745,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             // Police Decision == Reviewed
-            var result = GetPagedSepSummaries($"_adoxio_policerepresentativeid_value eq {userSettings.ContactId} and statuscode ne {(int?)EventStatus.Draft} and (adoxio_policeapproval eq {(int?)ApproverStatus.AutoReviewed} or adoxio_policeapproval eq {(int?)ApproverStatus.Approved} or adoxio_policeapproval eq {(int?)ApproverStatus.Reviewed})", pageIndex, pageSize);
+            var result = GetPagedSepSummaries($"_adoxio_policerepresentativeid_value eq {userSettings.ContactId} and statuscode ne {(int?)EventStatus.Draft} and (adoxio_policeapproval eq {(int?)ApproverStatus.AutoReviewed} or adoxio_policeapproval eq {(int?)ApproverStatus.Approved} or adoxio_policeapproval eq {(int?)ApproverStatus.Reviewed})", pageIndex, pageSize, sort, sortdir);
 
             return new JsonResult(result);
 
         }
 
         [HttpGet("police/denied")]
-        public IActionResult GetPoliceDenied([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10)
+        public IActionResult GetPoliceDenied([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10, [FromQuery] string sort = "", [FromQuery] string sortdir = "")
         {
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             // get the account details.
@@ -1712,7 +1763,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             // Police Decision == Denied || Cancelled 
-            var result = GetPagedSepSummaries($"_adoxio_policerepresentativeid_value eq {userSettings.ContactId} and (adoxio_policeapproval eq {(int?)ApproverStatus.Denied} or adoxio_policeapproval eq {(int?)ApproverStatus.Cancelled})", pageIndex, pageSize);
+            var result = GetPagedSepSummaries($"_adoxio_policerepresentativeid_value eq {userSettings.ContactId} and (adoxio_policeapproval eq {(int?)ApproverStatus.Denied} or adoxio_policeapproval eq {(int?)ApproverStatus.Cancelled})", pageIndex, pageSize, sort, sortdir);
 
             return new JsonResult(result);
 
