@@ -10,20 +10,34 @@ import { MatPaginator } from '@angular/material/paginator';
 import { Contact } from '@models/contact.model';
 import { User } from '@models/user.model';
 import { Router } from '@angular/router';
+import { merge, of } from 'rxjs';
+import { startWith, switchMap, map, catchError } from 'rxjs/operators';
+import { SepApplicationSummary } from '../../../models/sep-application-summary.model';
 
 @Component({
-  selector: 'app-police-grid',
-  templateUrl: './police-grid.component.html',
-  styleUrls: ['./police-grid.component.scss']
+  selector: 'app-police-grid-inprogress',
+  templateUrl: './police-grid-inprogress.component.html',
+  styleUrls: ['./police-grid-inprogress.component.scss']
 })
-export class PoliceGridComponent implements OnInit {
+export class PoliceGridInProgressComponent implements OnInit {
+  resultsLength = 0;
+  isLoadingResults = true;
+  isRateLimitReached = false;
+  dataLoaded = false; // this is set to true when all page data is loaded
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
+  data: TableElement[];
   busy: Subscription;
-  _dataSource: MatTableDataSource<PoliceTableElement>;
   _availableContacts: Contact[];
   _currentUser: User;
-  _resultsLength: number;
   currentValueMap = {};
   currentNameMap = {};
+  selectedIndex: any;
+
+  // table state
+  dataSource = new MatTableDataSource<PoliceTableElement>();
 
   // angular material table columns to display
   columnsToDisplay = [
@@ -35,18 +49,6 @@ export class PoliceGridComponent implements OnInit {
   initialSelection = [];
   allowMultiSelect = true;
   selection = new SelectionModel<PoliceTableElement>(this.allowMultiSelect, this.initialSelection);
-
-
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-
-  @Input()
-  set dataSource(value: MatTableDataSource<PoliceTableElement>) {
-    this._dataSource = value;
-  }
-  get dataSource() {
-    return this._dataSource;
-  }
 
   @Input()
   set availableContacts(value: Contact[]) {
@@ -64,24 +66,49 @@ export class PoliceGridComponent implements OnInit {
     return this._currentUser;
   }
 
-  @Input()
-  set resultsLength(value: number) {
-    this._resultsLength = value;
-  };
-  get resultsLength() {
-    return this._resultsLength;
-  }
-
-  @Input()
-  getData: (pageIndex: number, pageSize: number) => void;
 
   constructor(    private sepDataService: SpecialEventsDataService,
     private cd: ChangeDetectorRef,
     private router: Router) { }
 
-  ngOnInit(): void {
-    this.dataSource.paginator = this.paginator;
+
+  ngOnInit(): void { }
+  ngAfterViewInit() {
     this.dataSource.sort = this.sort;
+    // If the user changes the sort order, reset back to the first page.
+    this.dataSource.sort.sortChange.subscribe(() => {
+      this.paginator.pageIndex = 0;
+      this.paginator._changePageSize(this.paginator.pageSize); 
+    });
+    merge(this.paginator.page)
+      .pipe(
+        startWith({}),
+        switchMap(() => {
+          this.isLoadingResults = true;
+          this.dataLoaded = false;
+          return this.sepDataService.getPolicePendingReviewSepApplications(this.paginator.pageIndex, this.paginator.pageSize, this.dataSource.sort.active, this.dataSource.sort.direction);
+        }),
+        map(result => {
+          // Flip flag to show that loading has finished.
+          this.isLoadingResults = false;
+          this.dataLoaded = true;
+          this.isRateLimitReached = false;
+          this.resultsLength = result.count;
+
+          return result.value;
+        }),
+        catchError(() => {
+          this.isLoadingResults = false;
+          this.dataLoaded = true;
+          this.isRateLimitReached = true;
+          return of([] as SepApplicationSummary[]);
+        })
+      ).subscribe((data) => this.dataSource.data = data.map((el, i) => {
+        return {
+          ...el,
+          index: 1 + i + this.paginator.pageIndex * this.paginator.pageSize
+        };
+      }));
   }
 
   isAssigned(sepData: PoliceTableElement): boolean {
@@ -102,6 +129,7 @@ export class PoliceGridComponent implements OnInit {
 
   batchAssign() {
     // TODO: Call backend endpoint for batch updates/assignments
+    //Seems to be unused at this time
     const selected = this.selection.selected;
     console.log(`Call API to batch assign SEP applications:`);
     selected.forEach(x => console.log(`${x.specialEventId}`));
@@ -136,9 +164,14 @@ export class PoliceGridComponent implements OnInit {
     this.router.navigateByUrl(`sep/police/${id}`);
   }
 
-  handlePage(e: any) {
+  /*handlePage(e: any) {
     console.log(e);  
     this.getData(e.pageIndex, e.pageSize);
-  }
+  }*/
 
+
+}
+
+interface TableElement extends SepApplicationSummary {
+  index: number;
 }
