@@ -139,20 +139,20 @@ export class SpecialEventsDataService extends DataService {
       .pipe(catchError(this.handleError));
   }
 
-  getPolicePendingReviewSepApplications(pageIndex: number = 0, pageSize: number = 10): Observable<PagingResult<SepApplicationSummary>> {
-    const apiPath = `api/special-events/police/pending-review?pageIndex=${pageIndex}&pageSize=${pageSize}`;
+  getPolicePendingReviewSepApplications(pageIndex: number = 0, pageSize: number = 10, sort: string, sortdir: string): Observable<PagingResult<SepApplicationSummary>> {
+    const apiPath = `api/special-events/police/pending-review?pageIndex=${pageIndex}&pageSize=${pageSize}&sort=${sort}&sortdir=${sortdir}`;
     return this.http.get<PagingResult<SepApplicationSummary>>(apiPath, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
-  getPoliceApprovedSepApplications(pageIndex: number = 0, pageSize: number = 10): Observable<PagingResult<SepApplicationSummary>> {
-    const apiPath = `api/special-events/police/approved?pageIndex=${pageIndex}&pageSize=${pageSize}`;
+  getPoliceApprovedSepApplications(pageIndex: number = 0, pageSize: number = 10, sort: string, sortdir: string): Observable<PagingResult<SepApplicationSummary>> {
+    const apiPath = `api/special-events/police/approved?pageIndex=${pageIndex}&pageSize=${pageSize}&sort=${sort}&sortdir=${sortdir}`;
     return this.http.get<PagingResult<SepApplicationSummary>>(apiPath, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
-  getPoliceDeniedSepApplications(pageIndex: number = 0, pageSize: number = 10): Observable<PagingResult<SepApplicationSummary>> {
-    const apiPath = `api/special-events/police/denied?pageIndex=${pageIndex}&pageSize=${pageSize}`;
+  getPoliceDeniedSepApplications(pageIndex: number = 0, pageSize: number = 10, sort: string, sortdir: string): Observable<PagingResult<SepApplicationSummary>> {
+    const apiPath = `api/special-events/police/denied?pageIndex=${pageIndex}&pageSize=${pageSize}&sort=${sort}&sortdir=${sortdir}`;
     return this.http.get<PagingResult<SepApplicationSummary>>(apiPath, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
