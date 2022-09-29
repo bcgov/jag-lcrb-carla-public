@@ -74,6 +74,13 @@ export class PoliceGridApprovedComponent implements OnInit {
   ngOnInit(): void { }
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
+    this.dataSource.sortingDataAccessor = (data: any, sortHeaderId: string): string => {
+      if (typeof data[sortHeaderId] === 'string') {
+        return data[sortHeaderId].toLocaleLowerCase();
+      }
+
+      return data[sortHeaderId];
+    };
     // If the user changes the sort order, reset back to the first page.
     this.dataSource.sort.sortChange.subscribe(() => {
       this.paginator.pageIndex = 0;
