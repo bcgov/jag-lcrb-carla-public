@@ -1594,14 +1594,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             };
 
             var orderby = new List<string> {};
-            if(sort != null && sort.Length > 0)
+            if(sort != null && sort.Length > 0 && sortdir != null && sortdir.Length > 0)
             {
                 string tmp = transformColumnNametoSchemaName(sort);
-                if(sortdir != null && sortdir.Length > 0)
-                {
-                    tmp = tmp + " " + sortdir;
-                }
+                tmp = tmp + " " + sortdir;
                 orderby.Add(tmp);
+                
             }
             string[] expand = new[] { "adoxio_PoliceRepresentativeId", "adoxio_PoliceAccountId", "adoxio_specialevent_specialeventtsacs" };
             try
@@ -1615,8 +1613,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 odataVersionHeader.Add("4.0");
                 customHeaders.Add("OData-Version", odataVersionHeader);
                 customHeaders.Add("OData-MaxVersion", odataVersionHeader);
-
-                var sepSummaryQuery = _dynamicsClient.Specialevents.GetWithHttpMessagesAsync(filter: filter, expand: expand, orderby: orderby, customHeaders: customHeaders, count: true).GetAwaiter().GetResult();
+                //HttpOperationResponse<MicrosoftDynamicsCRMadoxioSpecialeventCollection>();
+                var sepSummaryQuery = new HttpOperationResponse<MicrosoftDynamicsCRMadoxioSpecialeventCollection>();
+                if(orderby.Count > 0)
+                {
+                    sepSummaryQuery = _dynamicsClient.Specialevents.GetWithHttpMessagesAsync(filter: filter, expand: expand, orderby: orderby, customHeaders: customHeaders, count: true).GetAwaiter().GetResult();
+                }
+                else
+                {
+                    sepSummaryQuery = _dynamicsClient.Specialevents.GetWithHttpMessagesAsync(filter: filter, expand: expand, customHeaders: customHeaders, count: true).GetAwaiter().GetResult();
+                }
+               
                 
                 while(pageIndex > 0)
                 {
