@@ -89,7 +89,7 @@
     "babel-plugin-import": "^1.13.3",
     "babel-plugin-module-resolver": "^4.1.0",
     "bootstrap": "^4.6.0",
-    "browserlist": "^1.0.1",
+    "browserslist": "^1.0.1",
     "codelyzer": "^6.0.2",
     "eslint": "^7.31.0",
     "eslint-plugin-import": "^2.23.4",
