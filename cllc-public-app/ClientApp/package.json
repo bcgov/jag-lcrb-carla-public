@@ -123,13 +123,11 @@
   "browserslist": {
     "production": [
       "last 2 versions",
-      "not IE 11",
-      "not IE 10"
+      "not IE 11"
     ],
     "development": [
       "last 1 Chrome version",
-      "not IE 11",
-      "not IE 10"
+      "not IE 11"
     ]
   }
 }
