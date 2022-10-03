@@ -106,9 +106,9 @@ namespace Gov.Lclb.Cllb.FederalReportingService
                         filename = illegalInFileName.Replace(filename, "-");
                         using (var mem = new MemoryStream())
                         using (var writer = new StreamWriter(mem))
-                        using (var csv = new CsvWriter(writer))
+                        using (var csv = new CsvWriter(writer, System.Globalization.CultureInfo.InvariantCulture))
                         {
-                            csv.Configuration.RegisterClassMap<FederalReportingMonthlyExportMap>();
+                            csv.Context.RegisterClassMap<FederalReportingMonthlyExportMap>();
                             csv.WriteRecords(monthlyReports);
 
                             writer.Flush();
