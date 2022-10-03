@@ -11,9 +11,16 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-			"sourceMap": true,		  
-   		    "optimization": false,
-			"outputHashing": "none",
+			      "sourceMap": true,
+   		      "optimization": {
+              "scripts": true,
+              "styles": {
+                "minify": false,
+                "inlineCritical": true
+              },
+              "fonts": true
+            },
+			      "outputHashing": "none",
             "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
