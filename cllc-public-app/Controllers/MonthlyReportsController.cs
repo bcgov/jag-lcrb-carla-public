@@ -113,7 +113,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             try
             {
                 var filter = $"_adoxio_licenceid_value eq {licenceId} and _adoxio_licenseeid_value eq {userSettings.AccountId} and createdon ge {GetStartDateForMonthlyReports()}";
-                monthlyReports = _dynamicsClient.Cannabismonthlyreports.Get(filter: filter, orderby: new List<string> { "modifiedon desc" }).Value;
+                var expand = new List<string>() { "adoxio_EstablishmentId($select=adoxio_establishmentid, adoxio_name, adoxio_addresscity, adoxio_addresspostalcode)" };
+                monthlyReports = _dynamicsClient.Cannabismonthlyreports.Get(filter: filter, expand: expand, orderby: new List<string> { "modifiedon desc" }).Value;
             }
             catch (Exception ex)
             {
@@ -164,7 +165,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             try
             {
                 var filter = $"adoxio_cannabismonthlyreportid eq {reportId}";
-                MicrosoftDynamicsCRMadoxioCannabismonthlyreport monthlyReport = _dynamicsClient.Cannabismonthlyreports.Get(filter: filter).Value.FirstOrDefault();
+                var expand = new List<string>() { "adoxio_EstablishmentId($select=adoxio_establishmentid, adoxio_name, adoxio_addresscity, adoxio_addresspostalcode)" };
+                MicrosoftDynamicsCRMadoxioCannabismonthlyreport monthlyReport = _dynamicsClient.Cannabismonthlyreports.Get(filter: filter, expand: expand).Value.FirstOrDefault();
                 if (monthlyReport != null && CurrentUserHasAccessToMonthlyReportOwnedBy(monthlyReport._adoxioLicenseeidValue))
                 {
                     return new JsonResult(monthlyReport.ToViewModel(_dynamicsClient, true));
