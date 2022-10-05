@@ -11,9 +11,16 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-			"sourceMap": true,		  
-   		    "optimization": false,
-			"outputHashing": "none",
+			      "sourceMap": true,
+   		      "optimization": {
+              "scripts": true,
+              "styles": {
+                "minify": false,
+                "inlineCritical": true
+              },
+              "fonts": true
+            },
+			      "outputHashing": "none",
             "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -31,7 +38,12 @@
             ],
             "scripts": [
               "src/assets/establishmentsMap.js"
-            ]
+            ],
+            "aot": false,
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -52,7 +64,6 @@
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
-              "vendorChunk": true,
 			  "commonChunk": true,
               "buildOptimizer": true,
               "fileReplacements": [
@@ -62,16 +73,13 @@
                 }
               ]
             },
-			"development": {                        
-                        "sourceMap": true,
+			"development": {
                         "namedChunks": false,
 						"showCircularDependencies": false,
                         "aot": true,
-                        "extractLicenses": false,
 						"statsJson": false,
-                        "vendorChunk": true,
 						"commonChunk": false,
-                        "buildOptimizer": false,
+            "sourceMap": true,
                         "budgets": [
                             {
                                 "type": "initial",
@@ -80,7 +88,8 @@
                             }
                         ]
 			}
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -118,18 +127,6 @@
               "src/assets"
             ]
           }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "src/tsconfig.app.json",
-              "src/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
         }
       }
     },
@@ -146,17 +143,6 @@
           "options": {
             "protractorConfig": "./protractor.conf.js",
             "devServerTarget": "lclb-public-app:serve"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "e2e/tsconfig.e2e.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
           }
         }
       }
