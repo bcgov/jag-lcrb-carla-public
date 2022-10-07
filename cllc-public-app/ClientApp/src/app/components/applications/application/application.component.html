@@ -187,8 +187,8 @@
     </p>
 
     <p>
-      <i class="fas fa-info" style="margin-right: 10px;"></i>If you have any questions about this application, call the
-      Liquor and Cannabis Regulation Branch (LCRB) toll-free at: 1 866 209 2111.
+      <i class="fas fa-info" style="margin-right: 10px;"></i>If you have any questions about this application, contact the
+      Liquor and Cannabis Regulation Branch (LCRB) at     <a href="javascript: void(0);">LCRBCannabis@gov.bc.ca</a>
     </p>
 
   </section>
@@ -439,27 +439,25 @@
       <div class="content-bottom">
         <p>
           Sole proprietors and associates of applicants for a non-medical cannabis licence are required to
-          submit
-          documentation for
-          security screenings and/or financial integrity checks. {{ application?.applicationType?.name === ApplicationTypeNames.Marketer ? 'Cannabis marketing' : 'Cannabis retail store licence' }} applications
+          submit forms for
+          security screenings and financial integrity checks. {{ application?.applicationType?.name === ApplicationTypeNames.Marketer ? 'Cannabis Marketing' : 'Cannabis Retail Store licence' }} applications
           cannot
           be processed until
           all required materials have been received.
         </p>
 
-        <p>
+        <!--<p>
           Please note, the security screening for sole proprietors and associates differs from the security
           verification for people
-          seeking work in non-medical cannabis retail stores. The screening for associates considers the
+          seeking work in non-medical Cannabis Retail Stores. The screening for associates considers the
           associate
           within the context
           of a larger organizational structure. The security verification for workers considers the worker as
           an
           individual apart
-          from an organization. If a sole proprietor or associate seeks to work in a non-medical cannabis
-          retail
-          store, they must pass both.
-        </p>
+          from an organization. If a sole proprietor or associate seeks to work in a non-medical Cannabis
+          Retail Store, they must pass both.
+        </p>-->
 
         <p>
           Cannabis Associate Security Screening documents are not required if you submit liquor related
@@ -472,11 +470,12 @@
         </p>
 
         <p>
-          Please provide the documents as outlined on
+          Please provide the 
           <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/non-medical-cannabis-licenses/cannabis-resources-information/associate-forms"
              target="_blank">
-            this page
-          </a>.
+            documents
+          </a>
+          as outlined on the website.
         </p>
 
         <h4>
@@ -909,7 +908,12 @@
     <h3 class="blue-header">Local Government/Indigenous Nation and Police Jurisdiction </h3>
     <div class="content-bottom">
       <p>
-        Enter the local government (or Indigenous Nation) and police jurisdiction where the establishment
+        Enter the
+        <a href="https://www2.gov.bc.ca/gov/content?id=B5744089A70F428FA189E5FF5CAE4E4A"
+           target="_blank">
+          Local Government or Indigenous Nation
+        </a>        
+        and police jurisdiction where the establishment
         will be located. Suggestions will be provided after you type the first three characters of the name.
       </p>
 
@@ -1467,7 +1471,7 @@
                 any adjoining doors and other fixtures
               </li>
               <li *ngIf="isRAS()">clearly identify any adjoining areas</li>
-              <li *ngIf="!isRAS()">Provide room size dimensions </li>
+              <li *ngIf="!isRAS()">Provide room dimensions </li>
               <li *ngIf="!isRAS()">
                 Detail entrance, exit, washrooms, storage area, cash register area, coolers, any adjoining
                 doors
@@ -2244,11 +2248,11 @@
             be
             in the
             name of the third party operator.
-          </li>
-          <p>&nbsp;</p>
+          </li>          
         </ul>
+        <p>&nbsp;</p>
       </div>
-      <p *ngIf="!isRAS()">
+      <p *ngIf="!isRAS() && application?.licenseType !== 'Cannabis Retail Store' &&  application?.licenseType !== 'Producer Retail Store'">
         <strong>Note:</strong> Valid interest must be maintained at the current and proposed site until the
         relocation is finalized. LCRB may request a copy of valid interest at the current site during the
         relocation application process.
@@ -2433,7 +2437,7 @@
         fails to disclose a material fact”.
       </p>
       <p *ngIf="application?.licenseType != 'Cannabis Retail Store' && application?.licenseType != 'Marketer'">
-        Section 20 (1) of the Liquor Control and Licensing Act states: "The general manager may refuse to issue,
+        Section 22 (2) of the Liquor Control and Licensing Act states: "The general manager may refuse to issue,
         renew, transfer or amend a licence if the applicant fails to disclose a material fact required by the
         application or makes a false or misleading statement in the application."
       </p>
@@ -2554,13 +2558,13 @@
 
         <br>
 
-        <div *ngIf="application?.licenseType === 'Cannabis Retail Store'">
+        <div *ngIf="application?.licenseType === 'Cannabis Retail Store' || application?.licenseType === 'Producer Retail Store'">
           For questions on the LCRB application process, please contact:
           <a href="javascript: void(0);">
-            lcrbcannabis@gov.bc.ca
+            LCRBCannabis@gov.bc.ca
           </a>
         </div>
-        <div *ngIf="application?.licenseType !== 'Cannabis Retail Store'">
+        <div *ngIf="application?.licenseType !== 'Cannabis Retail Store' && application?.licenseType !== 'Producer Retail Store'">
           For questions on the LCRB application process, please contact:
           <a href="javascript: void(0);">
             LCRBLiquor@gov.bc.ca
