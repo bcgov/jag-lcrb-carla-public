@@ -228,14 +228,23 @@
           applicant corporation must submit completed <span *ngIf="this.isLiquor()">Personal History Summary</span>
           <span *ngIf="!this.isLiquor()">
             Cannabis Associate Security Screening
-          </span> forms below.
+          </span>
+          <a href="https://www2.gov.bc.ca/gov/content?id=B8E6EBE15A594CB7832B490C0A2815B2"
+             target="_blank">
+            forms
+          </a>
+          below.
         </strong>
       </p>
 
       <hr>
       <p>
         If one of the new shareholders is a private corporation, a public corporation, a society or a partnership,
-        documentation to support the applicable business type must be submitted, even if the shareholder holds less than
+        <a href="https://www2.gov.bc.ca/gov/content?id=B8E6EBE15A594CB7832B490C0A2815B2"
+           target="_blank">
+          forms
+        </a>
+        to support the applicable business type must be submitted, even if the shareholder holds less than
         10%
         interest in the applicant corporation:
       </p>
@@ -299,7 +308,10 @@
           <ul>
             <li>
               This includes entities incorporated through Federal or Provincial legislation. Examples: Local
-              Government, First Nations, colleges, universities, etc. Contact the branch to discuss documentation
+              Government, First Nations, colleges, universities, etc. Contact the branch to discuss
+              <a href="https://www2.gov.bc.ca/gov/content?id=B8E6EBE15A594CB7832B490C0A2815B2" target="_blank">
+                forms
+              </a>
               requirements.
             </li>
 
@@ -307,8 +319,14 @@
         </li>
       </ul>
 
-      <h4>Supporting Business Documentation</h4>
-      <p>Provide supporting business documentation if one or more of the shareholders is a company:</p>
+      <h4>Supporting Business Forms</h4>
+      <p>
+        Provide supporting business
+        <a href="https://www2.gov.bc.ca/gov/content?id=B8E6EBE15A594CB7832B490C0A2815B2" target="_blank">
+          forms
+        </a>
+        if one or more of the shareholders is a company:
+      </p>
       <app-file-uploader *ngIf="true || applicationId" documentType="SupportingDocuments"
                          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application" [extensions]="['pdf']"
                          (numberOfUploadedFiles)="uploadedSupportingDocuments = $event" [entityId]="applicationId"
@@ -342,7 +360,10 @@
         <span *ngIf="this.isLiquor()">
           Personal History
           Summary
-        </span><span *ngIf="!this.isLiquor()">Cannabis Associate Security Screening</span> forms below.
+        </span><span *ngIf="!this.isLiquor()">Cannabis Associate Security Screening</span>
+        <a href="https://www2.gov.bc.ca/gov/content?id=B8E6EBE15A594CB7832B490C0A2815B2" target="_blank">
+          forms
+        </a> below.
       </p>
     </section>
 
@@ -368,10 +389,18 @@
     <section *ngIf="account.isOtherBusinessType()">
       <h4>Organizational Leadership</h4>
 
-      <p>Please upload official documentation that describes your organization's ownership and leadership structure.</p>
+      <p>
+        Please upload official <a href="https://www2.gov.bc.ca/gov/content?id=B8E6EBE15A594CB7832B490C0A2815B2" target="_blank">
+          forms
+        </a> that describes your organization's ownership and leadership structure.
+      </p>
       <p>
         <fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>
-        <span>Organizational leadership must provide completed Personal History Summary forms</span>
+        <span>
+          Organizational leadership must provide completed Personal History Summary <a href="https://www2.gov.bc.ca/gov/content?id=B8E6EBE15A594CB7832B490C0A2815B2" target="_blank">
+            forms
+          </a>
+        </span>
       </p>
       <app-file-uploader *ngIf="true || applicationId" documentType="OrganizationDetails"
                          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
@@ -386,11 +415,13 @@
   && !this.businessTypeIsSoleProp()
   && !this.businessTypeIsSociety()
   && !account.isOtherBusinessType()">
-      <h4>Legal Entity Documentation</h4>
+      <h4>Legal Entity Forms</h4>
       <p>
         Entities incorporated under federal or provincial legislation; example: local governments, First Nation,
         colleges, universities, etc. may have unique requirements. Please contact the Licensing Help Desk at
-        1-866-209-2111 to discuss further documentation requirements
+        1-866-209-2111 to discuss further <a href="https://www2.gov.bc.ca/gov/content?id=B8E6EBE15A594CB7832B490C0A2815B2" target="_blank">
+          forms
+        </a> requirements
       </p>
       <app-file-uploader *ngIf="true || applicationId" documentType="OtherTypes" fileTypes="FILE MUST BE IN PDF FORMAT."
                          [multipleFiles]="false" entityName="application" [extensions]="['pdf']"
@@ -439,34 +470,29 @@
       <div class="content-bottom">
         <p>
           Sole proprietors and associates of applicants for a non-medical cannabis licence are required to
-          submit forms for
-          security screenings and financial integrity checks. {{ application?.applicationType?.name === ApplicationTypeNames.Marketer ? 'Cannabis Marketing' : 'Cannabis Retail Store licence' }} applications
-          cannot
-          be processed until
-          all required materials have been received.
+          submit <a href="https://www2.gov.bc.ca/gov/content?id=B8E6EBE15A594CB7832B490C0A2815B2" target="_blank">
+            forms
+          </a> for security screenings and financial integrity checks. {{ application?.applicationType?.name === ApplicationTypeNames.Marketer ? 'Cannabis Marketing' : 'retail store licence' }} applications
+          cannot be processed until all required materials have been received.
         </p>
 
-        <!--<p>
-          Please note, the security screening for sole proprietors and associates differs from the security
-          verification for people
-          seeking work in non-medical Cannabis Retail Stores. The screening for associates considers the
-          associate
-          within the context
-          of a larger organizational structure. The security verification for workers considers the worker as
-          an
-          individual apart
-          from an organization. If a sole proprietor or associate seeks to work in a non-medical Cannabis
-          Retail Store, they must pass both.
-        </p>-->
-
         <p>
-          Cannabis Associate Security Screening documents are not required if you submit liquor related
-          applications. If you do not provide
+          Please note, the security screening for sole proprietors and associates differs from the security
+          verification for people seeking work in retail stores. The screening for associates considers the
+          associate within the context of a larger organizational structure. The security verification for
+          workers considers the worker as an individual apart from an organization. If a sole proprietor or
+          associate seeks to work in a retail store, they must pass both.
+        </p>
+
+        <p *ngIf="this.isLiquor()">
+          Cannabis Associate Security Screening forms are not required if you submit liquor related applications.
+          Missing forms or documents will be requested once your application is received.
+          <!--If you do not provide
           Cannabis Associate Security Screening documents prior to your application submission, they will be
           requested via secure channels
           once your application has been received. Please note that the time to collect these documents
           directly
-          impacts the time to process your application.
+          impacts the time to process your application.-->
         </p>
 
         <p>
@@ -911,10 +937,10 @@
         Enter the
         <a href="https://www2.gov.bc.ca/gov/content?id=B5744089A70F428FA189E5FF5CAE4E4A"
            target="_blank">
-          Local Government or Indigenous Nation
+          local government or Indigenous Nation
         </a>        
-        and police jurisdiction where the establishment
-        will be located. Suggestions will be provided after you type the first three characters of the name.
+        and police jurisdiction where the establishment will be located. Suggestions will be provided
+        after you type the first three characters of the name.
       </p>
 
       <app-field label="Local Government/Indigenous Nation" [required]="false"
@@ -1679,7 +1705,7 @@
                          [uploadHeader]="'TO UPLOAD SITE PLAN DOCUMENTS, DRAG FILES HERE OR'">
       </app-file-uploader>
     </section>
-    <section>
+    <section *ngIf="application?.licenseType === 'Manufacturer'">
       For Distillers Only: The Office of the Fire Commissioner (OFC) requires that a distillery be constructed and maintained in conformance with the BC Fire Code. The OFC will be provided a copy of the Approval in Principal for your application, if issued.
     </section>
   </div>
@@ -2192,7 +2218,7 @@
           </div>
         </section>
       </section>
-      <section>
+      <section *ngIf="isRelocation()">
         <b>Note:</b> Valid interest must be maintained at the current and proposed site until the relocation is finalized. LCRB may request a copy of valid interest at the current site during the relocation application process.
       </section>
     </div>
@@ -2252,7 +2278,7 @@
         </ul>
         <p>&nbsp;</p>
       </div>
-      <p *ngIf="!isRAS() && application?.licenseType !== 'Cannabis Retail Store' &&  application?.licenseType !== 'Producer Retail Store'">
+      <p *ngIf="!isRAS() && IsRelocation()">
         <strong>Note:</strong> Valid interest must be maintained at the current and proposed site until the
         relocation is finalized. LCRB may request a copy of valid interest at the current site during the
         relocation application process.
@@ -2430,14 +2456,11 @@
       </app-field>
       <p *ngIf="application?.licenseType == 'Cannabis Retail Store' || application?.licenseType == 'Marketer'">
         Section 22(2) of the Cannabis Control and Licensing Act states: “A person must not submit to the general
-        manager
-        an application, or
-        information or a record included as part of the application, that contains false or misleading
-        information, or
-        fails to disclose a material fact”.
+        manager an application, or information or a record included as part of the application, that contains false or misleading
+        information, or fails to disclose a material fact”.
       </p>
       <p *ngIf="application?.licenseType != 'Cannabis Retail Store' && application?.licenseType != 'Marketer'">
-        Section 22 (2) of the Liquor Control and Licensing Act states: "The general manager may refuse to issue,
+        Section 20 (1) of the Liquor Control and Licensing Act states: "The general manager may refuse to issue,
         renew, transfer or amend a licence if the applicant fails to disclose a material fact required by the
         application or makes a false or misleading statement in the application."
       </p>
@@ -2478,13 +2501,16 @@
         </mat-checkbox>
       </app-field>
       <p>
-        <strong>
-          Section 20(1) of the Liquor Control and Licensing Act states: “The general manager may refuse to
-          issue,
-          renew, transfer or amend a licence if the applicant fails to disclose a material fact required by
-          the
-          application or makes a false or misleading statement in the application.”
-        </strong>
+      <strong *ngIf="application?.licenseType == 'Cannabis Retail Store' || application?.licenseType == 'Marketer'">
+        Section 22(2) of the Cannabis Control and Licensing Act states: “A person must not submit to the general
+        manager an application, or information or a record included as part of the application, that contains false or misleading
+        information, or fails to disclose a material fact”.
+      </strong>
+      <strong *ngIf="application?.licenseType == 'Cannabis Retail Store' || application?.licenseType == 'Marketer'">
+        Section 20(1) of the Liquor Control and Licensing Act states: “The general manager may refuse to
+        issue, renew, transfer or amend a licence if the applicant fails to disclose a material fact required by
+        the application or makes a false or misleading statement in the application.”
+      </strong>
       </p>
       <app-field [valid]="!showValidationMessages || form.get('signatureAgreement').valid"
                  errorMessage="Please affirm that all of the information provided for this application is true and complete."
