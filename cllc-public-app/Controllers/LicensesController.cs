@@ -1547,6 +1547,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // determine which Act applies
                 switch (adoxioLicense.AdoxioLicenceType.AdoxioName) {
                     case "Section 119 Authorization":
+                    case "S119 CRS Authorization":
                     case "Marketing":
                     case "Cannabis Retail Store":
                         parameters.Add("keyWord", "Cannabis");
