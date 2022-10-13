@@ -1562,6 +1562,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     case "Section 119 Authorization":
                         parameters.Add("dType", "Authorization");
                         break;
+                    case "S119 CRS Authorization":
+                        parameters.Add("dType", "Authorization");
+                        break;
                     default:
                         parameters.Add("dType", "Licence");
                         break;
