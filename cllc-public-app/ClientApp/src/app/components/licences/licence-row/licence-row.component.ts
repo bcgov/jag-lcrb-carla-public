@@ -518,6 +518,8 @@ export class LicenceRowComponent extends FormBase implements OnInit {
       case "Cannabis Retail Store":
       case "Section 119 Authorization":
         return `${pdfRoot}/cannabis-retail-store-licence-handbook.pdf`;
+      case "S119 CRS Authorization":
+        return `${pdfRoot}/cannabis-retail-store-licence-handbook.pdf`;
       case "Marketing":
         return `${pdfRoot}/marketing-handbook.pdf`;
       case "Operated - Catering":
