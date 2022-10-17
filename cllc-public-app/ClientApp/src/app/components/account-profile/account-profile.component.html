@@ -29,7 +29,7 @@
 <h3 class="blue-header" *ngIf="getBusinessTypeName() === 'Indigenous Nation'">AUTHORIZED PERSON</h3>
 <div formGroupName="contact" class="padded-section content-bottom">
   <i>
-    The name and contact information of the person LCRB should contact for ongoing communication. The contact
+    The name and contact information of the person the LCRB should contact for ongoing communication. The contact
     must be authorized to represent the applicant and have the authority to bind the applicant.
   </i><br>
 
@@ -84,7 +84,7 @@
              errorMessage="Please select a business type from the dropdown list">
     <select class="form-control" disabled readonly style="width: 250px;" [value]="account?.businessType" formControlName="businessType">
       <option *ngFor="let item of businessTypes" [value]="item.value">{{item.name}}</option>
-    </select>
+    </select> 
   </app-field>
 
   <!-- Incorporation/ BC Registration Number Box-->
