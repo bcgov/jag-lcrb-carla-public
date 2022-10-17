@@ -89,7 +89,7 @@ export class ConnectionToProducersComponent implements OnInit, OnDestroy {
 
   requiresWordingChange(name: String): boolean {
     if (name === "Producer Retail Store" ||
-      name == "PRS Relocation" || name == "PRS Transfer of Ownership" || name == "S119 CRS Authorization" || name == "Section 119 Authorization(PRS)" || name == "CRS Renewal") {
+      name == "PRS Relocation" || name == "PRS Transfer of Ownership" || name == "Section 119 Authorization(PRS)" || name == "CRS Renewal") {
       return true;
     }
 

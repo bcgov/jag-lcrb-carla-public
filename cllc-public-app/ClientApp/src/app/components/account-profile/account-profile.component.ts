@@ -174,7 +174,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
         emailaddress1: ["", [Validators.required, Validators.email]],
       }),
     });
-    //console.log(this.businessTypes);
+
     // Watch for changes to the current user and account
     this.subscribeForData();
 
@@ -210,7 +210,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
       .subscribe(() => {
         this.copyPhysicalToMailingAddress();
       });
-    
+
 
     this.form.get("businessProfile.physicalAddressCountry").valueChanges.pipe(
       filter(() => this.form.get("businessProfile._mailingSameAsPhysicalAddress").value))
@@ -295,7 +295,6 @@ export class AccountProfileComponent extends FormBase implements OnInit {
 
   private loadAccount(account: Account) {
     this.account = account;
-    console.log(account);
     // Make a copy of the account object stored in Ngrx (which is read-only)
     // See https://stackoverflow.com/questions/57591012/ngrx-cannot-assign-to-read-only-property-property-of-object-object
     const businessProfile: Partial<Account> = { ...account };
