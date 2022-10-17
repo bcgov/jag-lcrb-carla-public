@@ -103,7 +103,7 @@ export class FederalReportingComponent implements OnInit {
       this.monthlyReportDataService.getAllCurrentMonthlyReports(true)
     ])
       .subscribe(results => {
-        this.licenses = results[0].filter(l => l.licenceTypeName === "Cannabis Retail Store" || l.licenceTypeName === "S119 CRS Authorization" || l.licenceTypeName === "Producer Retail Store");
+        this.licenses = results[0].filter(l => l.licenceTypeName === "Cannabis Retail Store" || l.licenceTypeName === "Section 119 Authorization" || l.licenceTypeName === "Producer Retail Store");
         this.monthlyReports = results[1];
 
         this.routeParams.subscribe(params => {

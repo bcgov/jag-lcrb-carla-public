@@ -360,7 +360,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
 
                 string licenceTypeId = GetLicenceTypeId("Cannabis Retail Store");
-                string alternateLicenceTypeId = GetLicenceTypeId("S119 CRS Authorization");
+                string alternateLicenceTypeId = GetLicenceTypeId("Section 119 Authorization");
                 if (licenceTypeId == null)
                 {
                     Log.Logger.Error("ERROR - Unable to get licence type ID for Cannabis Retail Store");
