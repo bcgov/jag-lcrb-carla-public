@@ -7,6 +7,7 @@
   <th class="p-0">
     <img *ngIf="licenceType === 'Cannabis Retail Store'" class="icon"
          src="assets/Cannabis-store-icon-blue-40px.png" alt="">
+
     <img *ngIf="licenceType === 'Section 119 Authorization' || licenceType === 'S119 CRS Authorization'" class="icon"
          src="assets/Cannabis-store-icon-blue-40px.png" alt="">
     <img *ngIf="licenceType === 'Marketing'" class="icon"
@@ -465,6 +466,7 @@
 </form>
 
 <ng-container *ngIf="getHandbookLink(licenceType) !== '404'">
+
   <p *ngIf="!licenceType.includes('Operated') && licenceType !== 'Section 119 Authorization' && licenceType !== 'S119 CRS Authorization'"
      style="font-style: italic; text-align: center;">
     All
@@ -476,7 +478,9 @@
       {{licenceType}} Terms and Conditions Handbook
     </a>
   </p>
+
   <p *ngIf="!licenceType.includes('Operated') && (licenceType === 'Section 119 Authorization' || licenceType === 'S119 CRS Authorization')"
+
      style="font-style: italic; text-align: center;">
     All
     {{licenceType}} holders must follow the terms
