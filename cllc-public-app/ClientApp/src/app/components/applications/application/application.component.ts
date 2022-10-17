@@ -394,6 +394,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
             }
 
             this.application = data;
+            //console.log(data); //post application data to console for debug
             this.isShowLGINApproval = (
               this?.application?.applicationType?.isShowLGINApproval ||
               (this?.application?.applicationStatus === "Pending for LG/FN/Police Feedback"
