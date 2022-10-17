@@ -7,7 +7,7 @@
   <th class="p-0">
     <img *ngIf="licenceType === 'Cannabis Retail Store'" class="icon"
          src="assets/Cannabis-store-icon-blue-40px.png" alt="">
-    <img *ngIf="licenceType === 'S119 CRS Authorization'" class="icon"
+    <img *ngIf="licenceType === 'Section 119 Authorization'" class="icon"
          src="assets/Cannabis-store-icon-blue-40px.png" alt="">
     <img *ngIf="licenceType === 'Marketing'" class="icon"
          src="assets/Cannabis-marketing-icon-blue-40px.png" alt="">
@@ -42,7 +42,7 @@
                             <strong *ngIf="item?.licenceTypeName === 'Marketing'" style="color: #1a5a96;">
                                 Marketing Licence</strong>
                             <span *ngIf="item?.licenceTypeName !== 'Marketing' && isActive(item)"><span
-                                    *ngIf="item?.licenceTypeName !== 'S119 CRS Authorization'">Licence</span>
+                                    *ngIf="item?.licenceTypeName !== 'Section 119 Authorization'">Licence</span>
                                 Number:<i>{{item.licenseNumber}}</i></span>
 
   <br>
@@ -60,8 +60,8 @@
        download>
       <span>
         <fa-icon [icon]="faDownLoad" style="margin-right: 10px;"></fa-icon>Download
-        <span *ngIf="item?.licenceType !== 'S119 CRS Authorization'">Licence</span>
-        <span *ngIf="item?.licenceType === 'S119 CRS Authorization'">Authorization</span>
+        <span *ngIf="item?.licenceType !== 'Section 119 Authorization'">Licence</span>
+        <span *ngIf="item?.licenceType === 'Section 119 Authorization'">Authorization</span>
       </span>
     </a>
   </div>
@@ -465,7 +465,7 @@
 </form>
 
 <ng-container *ngIf="getHandbookLink(licenceType) !== '404'">
-  <p *ngIf="!licenceType.includes('Operated') && licenceType !== 'S119 CRS Authorization'"
+  <p *ngIf="!licenceType.includes('Operated') && licenceType !== 'Section 119 Authorization'"
      style="font-style: italic; text-align: center;">
     All
     {{licenceType}} licence holders must follow the terms
@@ -476,7 +476,7 @@
       {{licenceType}} Terms and Conditions Handbook
     </a>
   </p>
-  <p *ngIf="!licenceType.includes('Operated') && licenceType === 'S119 CRS Authorization'"
+  <p *ngIf="!licenceType.includes('Operated') && licenceType === 'Section 119 Authorization'"
      style="font-style: italic; text-align: center;">
     All
     {{licenceType}} holders must follow the terms
