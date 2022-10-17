@@ -394,6 +394,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
             }
 
             this.application = data;
+            //console.log(data); //post application data to console for debug
             this.isShowLGINApproval = (
               this?.application?.applicationType?.isShowLGINApproval ||
               (this?.application?.applicationStatus === "Pending for LG/FN/Police Feedback"
@@ -897,7 +898,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
   isLiquor(): boolean {
     return this.application.applicationType.category == "Liquor";
   }
-
+  isRelocation(): boolean {
+    return this.application.applicationType.name.toLowerCase().indexOf("relocation")>=0 || this.application.applicationType.name.toLowerCase().indexOf("location change") >= 0;
+  }
   normalizeFormData() {
     let description2 = this.form.get('description2').value;
     if (this.isRAS()) {
