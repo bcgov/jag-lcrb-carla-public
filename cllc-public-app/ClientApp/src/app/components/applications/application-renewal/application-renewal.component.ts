@@ -131,12 +131,13 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
   }
 
   titleOf(): string {
-    if(this.application.assignedLicence.licenseType === LicenceTypeNames.S119){
-      return "S119 CRS Authorization";
-    } else if(this.application.assignedLicence.licenseType === LicenceTypeNames.PRS) {
+    if (this.application.assignedLicence.licenseType === LicenceTypeNames.S119 || this.application.assignedLicence.licenseType === LicenceTypeNames.S119CRS) {
+      return "Section 119 Authorization";
+    } else if (this.application.assignedLicence.licenseType === LicenceTypeNames.PRS) {
       return "Producer Retail Store License";
+    } else {
+      return "Cannabis Retail Store Licence";
     }
-    return "Cannabis Retail Store Licence";
   }
 
   requiredAlternateQuestionValidator(): ValidatorFn {
