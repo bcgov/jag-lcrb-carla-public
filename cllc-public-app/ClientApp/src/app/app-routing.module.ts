@@ -360,6 +360,12 @@ const routes: Routes = [
     data: { feature: "PermanentChangesToLicensee" }
   },
   {
+    path: "permanent-change-to-a-licensee/:applicationId/:invoiceType",
+    component: PermanentChangeToALicenseeComponent,
+    canActivate: [BCeidAuthGuard, FeatureGuard],
+    data: { feature: "PermanentChangesToLicensee" }
+  },
+  {
     path: "permanent-change-to-an-applicant",
     component: PermanentChangeToAnApplicantComponent,
     canActivate: [BCeidAuthGuard, FeatureGuard],
