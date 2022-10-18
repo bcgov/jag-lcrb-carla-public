@@ -174,7 +174,6 @@ export class AccountProfileComponent extends FormBase implements OnInit {
         emailaddress1: ["", [Validators.required, Validators.email]],
       }),
     });
-
     // Watch for changes to the current user and account
     this.subscribeForData();
 
@@ -210,7 +209,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
       .subscribe(() => {
         this.copyPhysicalToMailingAddress();
       });
-
+    
 
     this.form.get("businessProfile.physicalAddressCountry").valueChanges.pipe(
       filter(() => this.form.get("businessProfile._mailingSameAsPhysicalAddress").value))

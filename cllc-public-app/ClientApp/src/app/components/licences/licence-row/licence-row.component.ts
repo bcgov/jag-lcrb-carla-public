@@ -516,7 +516,9 @@ export class LicenceRowComponent extends FormBase implements OnInit {
       "https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals";
     switch (licenceType) {
       case "Cannabis Retail Store":
-      case "Section 119 Authorization":
+      case "S119 CRS Authorization":
+        return `${pdfRoot}/cannabis-retail-store-licence-handbook.pdf`;
+      case "S119 CRS Authorization":
         return `${pdfRoot}/cannabis-retail-store-licence-handbook.pdf`;
       case "Marketing":
         return `${pdfRoot}/marketing-handbook.pdf`;

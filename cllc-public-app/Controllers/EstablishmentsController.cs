@@ -358,9 +358,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             List<EstablishmentMapData> establishmentMapData;
             if (!_env.IsProduction() || !_cache.TryGetValue("S_" + cacheKey, out establishmentMapData))
             {
-
                 string licenceTypeId = GetLicenceTypeId("Cannabis Retail Store");
-                string alternateLicenceTypeId = GetLicenceTypeId("Section 119 Authorization");
+                string alternateLicenceTypeId = GetLicenceTypeId("S119 CRS Authorization");
+                if (string.IsNullOrEmpty(alternateLicenceTypeId))
+                {
+                    alternateLicenceTypeId=GetLicenceTypeId("Section 119 Authorization");
+                }
                 if (licenceTypeId == null)
                 {
                     Log.Logger.Error("ERROR - Unable to get licence type ID for Cannabis Retail Store");
