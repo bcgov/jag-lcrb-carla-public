@@ -1752,7 +1752,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             // Police Decision == Reviewed
-            var result = GetPagedSepSummaries($"_adoxio_policerepresentativeid_value eq {userSettings.ContactId} and statuscode ne {(int?)EventStatus.Draft} and (adoxio_policeapproval eq {(int?)ApproverStatus.AutoReviewed} or adoxio_policeapproval eq {(int?)ApproverStatus.Approved} or adoxio_policeapproval eq {(int?)ApproverStatus.Reviewed})", pageIndex, pageSize, sort, sortdir);
+            var result = GetPagedSepSummaries($"_adoxio_policejurisdictionid_value eq {userAccount._adoxioPolicejurisdictionidValue} and statuscode ne {(int?)EventStatus.Draft} and (adoxio_policeapproval eq {(int?)ApproverStatus.AutoReviewed} or adoxio_policeapproval eq {(int?)ApproverStatus.Approved} or adoxio_policeapproval eq {(int?)ApproverStatus.Reviewed})", pageIndex, pageSize, sort, sortdir);
 
             return new JsonResult(result);
 
@@ -1770,7 +1770,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             // Police Decision == Denied || Cancelled 
-            var result = GetPagedSepSummaries($"_adoxio_policerepresentativeid_value eq {userSettings.ContactId} and (adoxio_policeapproval eq {(int?)ApproverStatus.Denied} or adoxio_policeapproval eq {(int?)ApproverStatus.Cancelled})", pageIndex, pageSize, sort, sortdir);
+            var result = GetPagedSepSummaries($"_adoxio_policejurisdictionid_value eq {userAccount._adoxioPolicejurisdictionidValue} and (adoxio_policeapproval eq {(int?)ApproverStatus.Denied} or adoxio_policeapproval eq {(int?)ApproverStatus.Cancelled})", pageIndex, pageSize, sort, sortdir);
 
             return new JsonResult(result);
 
