@@ -102,5 +102,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool HasALRQuestion { get; set; }
 
         public bool? ShowZoningDeclarations { get; set; }
+        public bool? IsRelocation { get; set; }
     }
 }
