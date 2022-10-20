@@ -57,6 +57,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                     ValidInterest = (FormControlState?)applicationType.AdoxioValidinterest,
                     RequiresSecurityScreening = applicationType.AdoxioRequiressecurityscreening,
                     IsEndorsement = applicationType.AdoxioIsendorsement,
+                    IsRelocation = applicationType.AdoxioIsrelocation,
                     IsStructural = applicationType.AdoxioIsstructuralchange,
                     IsDefault = applicationType.AdoxioIsdefault,
                     ServiceAreas = applicationType.AdoxioServiceareas.HasValue && (bool)applicationType.AdoxioServiceareas,
@@ -64,6 +65,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                     CapacityArea = applicationType.AdoxioCapacityarea.HasValue && (bool)applicationType.AdoxioCapacityarea,
                     HasALRQuestion = applicationType.AdoxioHasalrquestion.HasValue && (bool)applicationType.AdoxioHasalrquestion,
                     ShowZoningDeclarations = applicationType.AdoxioShowzoningdeclarations.HasValue && (bool)applicationType.AdoxioShowzoningdeclarations
+
                 };
 
                 if (applicationType.AdoxioApplicationtypeAdoxioApplicationtypecontentApplicationType != null)
