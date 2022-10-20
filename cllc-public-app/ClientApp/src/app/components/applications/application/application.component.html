@@ -186,11 +186,17 @@
       </strong>
     </p>
 
-    <p>
+    <p *ngIf="!this.isLiquor()">
       <i class="fas fa-info" style="margin-right: 10px;"></i>If you have any questions about this application, contact the
-      Liquor and Cannabis Regulation Branch (LCRB) at     <a href="javascript: void(0);">LCRBCannabis@gov.bc.ca</a>
-    </p>
+      Liquor and Cannabis Regulation Branch (LCRB) at     <a href="mailto:LCRBCannabis@gov.bc.ca">LCRBCannabis@gov.bc.ca</a>
 
+    </p>
+    <p *ngIf="this.isLiquor()">
+      <i class="fas fa-info" style="margin-right: 10px;"></i>If you have any questions about this application, contact the
+      Liquor and Cannabis Regulation Branch (LCRB) at     <a href="mailto:LCRBLiquor@gov.bc.ca">LCRBLiquor@gov.bc.ca</a>
+
+    </p>
+    
   </section>
 
   <!-- Local Government advise -->
@@ -469,19 +475,11 @@
       <h3 class="blue-header"><fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>Cannabis Associate Security Screening Forms</h3>
       <div class="content-bottom">
         <p>
-          Sole proprietors and associates of applicants for a non-medical cannabis licence are required to
+          Sole proprietors and associates of applicants for a retail licence are required to
           submit <a href="https://www2.gov.bc.ca/gov/content?id=B8E6EBE15A594CB7832B490C0A2815B2" target="_blank">
             forms
-          </a> for security screenings and financial integrity checks. {{ application?.applicationType?.name === ApplicationTypeNames.Marketer ? 'Cannabis Marketing' : 'retail store licence' }} applications
+          </a> for security screenings and financial integrity checks. {{ application?.applicationType?.name === ApplicationTypeNames.Marketer ? 'Cannabis Marketing' : 'Retail store licence' }} applications
           cannot be processed until all required materials have been received.
-        </p>
-
-        <p>
-          Please note, the security screening for sole proprietors and associates differs from the security
-          verification for people seeking work in retail stores. The screening for associates considers the
-          associate within the context of a larger organizational structure. The security verification for
-          workers considers the worker as an individual apart from an organization. If a sole proprietor or
-          associate seeks to work in a retail store, they must pass both.
         </p>
 
         <p *ngIf="this.isLiquor()">
@@ -1488,7 +1486,7 @@
           <div *ngIf="application?.licenseType != 'Cannabis Retail Store'">
             <p>The floor plans of the proposed establishment, which must meet the following requirements: </p>
             <ul>
-              <li>Must be scaled, clear, legible and include room size dimensions (8.5" x 11") </li>
+              <li>Must be scaled, clear, legible and include room dimensions (8.5" x 11") </li>
               <li *ngIf="isRAS()">
                 detail the entire premises in which the business is located, including the
                 area
@@ -1497,7 +1495,6 @@
                 any adjoining doors and other fixtures
               </li>
               <li *ngIf="isRAS()">clearly identify any adjoining areas</li>
-              <li *ngIf="!isRAS()">Provide room dimensions </li>
               <li *ngIf="!isRAS()">
                 Detail entrance, exit, washrooms, storage area, cash register area, coolers, any adjoining
                 doors
@@ -2024,11 +2021,11 @@
     <label for="">Business Financial Integrity Form</label>
     <br>
     <i>
-      Please download
+      Please download and complete the 
       <a href="https://www2.gov.bc.ca/assets/download/E840994D9D304AFE8D56A50666281B9D"
          download target="_blank" rel="noopener noreferrer">
-        and complete
-      </a> the financial integrity form.
+        financial integrity form
+      </a>.
     </i>
     <p>Upload the completed form below.</p>
     <section>
@@ -2278,7 +2275,7 @@
         </ul>
         <p>&nbsp;</p>
       </div>
-      <p *ngIf="!isRAS() && IsRelocation()">
+      <p *ngIf="!isRAS() && isRelocation()">
         <strong>Note:</strong> Valid interest must be maintained at the current and proposed site until the
         relocation is finalized. LCRB may request a copy of valid interest at the current site during the
         relocation application process.
