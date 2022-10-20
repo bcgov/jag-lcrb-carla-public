@@ -95,4 +95,8 @@ export class ConnectionToProducersComponent implements OnInit, OnDestroy {
 
     return false;
   }
+
+  isPRS(): boolean {
+    return this.applicationTypeName == "Producer Retail Store";
+  }
 }

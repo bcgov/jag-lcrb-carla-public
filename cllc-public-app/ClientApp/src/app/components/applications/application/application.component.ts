@@ -898,7 +898,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     return this.application.applicationType.category == "Liquor";
   }
   isRelocation(): boolean {
-    return this.application.applicationType.name.toLowerCase().indexOf("relocation")>=0 || this.application.applicationType.name.toLowerCase().indexOf("location change") >= 0;
+    return this.application.applicationType.isRelocation; 
   }
   normalizeFormData() {
     let description2 = this.form.get('description2').value;

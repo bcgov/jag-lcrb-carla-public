@@ -62,6 +62,7 @@ export class ApplicationType {
 
   hasALRQuestion: boolean;
   showZoningDeclarations: boolean;
+  isRelocation: boolean;
 }
 
 export enum FormControlState {
