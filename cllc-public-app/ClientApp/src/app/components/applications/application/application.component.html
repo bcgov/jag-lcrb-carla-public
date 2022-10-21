@@ -2451,12 +2451,12 @@
           </span>
         </mat-checkbox>
       </app-field>
-      <p *ngIf="application?.licenseType == 'Cannabis Retail Store' || application?.licenseType == 'Marketer'">
+      <p *ngIf="application?.licenseType == 'Cannabis Retail Store' || application?.licenseType == 'Marketer' || application?.licenseType == 'Producer Retail Store'">
         Section 22(2) of the Cannabis Control and Licensing Act states: “A person must not submit to the general
         manager an application, or information or a record included as part of the application, that contains false or misleading
         information, or fails to disclose a material fact”.
       </p>
-      <p *ngIf="application?.licenseType != 'Cannabis Retail Store' && application?.licenseType != 'Marketer'">
+      <p *ngIf="application?.licenseType != 'Cannabis Retail Store' && application?.licenseType != 'Marketer' && application?.licenseType != 'Producer Retail Store'">
         Section 20 (1) of the Liquor Control and Licensing Act states: "The general manager may refuse to issue,
         renew, transfer or amend a licence if the applicant fails to disclose a material fact required by the
         application or makes a false or misleading statement in the application."
