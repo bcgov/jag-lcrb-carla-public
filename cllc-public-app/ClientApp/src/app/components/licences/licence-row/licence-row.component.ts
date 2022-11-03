@@ -35,6 +35,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { differenceInDays, isAfter, startOfDay, startOfToday } from "date-fns";
 import { OutstandingPriorBalanceInvoice } from "@models/outstanding-prior-balance-invoce.model";
+import addYears from "date-fns/addYears/index";
 
 export const UPLOAD_FILES_MODE = "UploadFilesMode";
 export const CRS_RENEWAL_LICENCE_TYPE_NAME = "crs";
@@ -77,8 +78,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
   @Input()
   licences: ApplicationLicenseSummary[];
   isOutstandingPriorBalanceInvoiceDue: boolean;
-  hasOutstandingPriorBalance: boolean;
-
+  hasOutstandingPriorBalance: boolean; 
   constructor(
     private licenceDataService: LicenseDataService,
     private router: Router,
@@ -93,7 +93,23 @@ export class LicenceRowComponent extends FormBase implements OnInit {
   }
 
   ngOnInit() {
+
+
+
     this.licences.forEach((licence) => {
+      
+      if (licence.licenseNumber == '326681') {
+        let temp = new Date(licence.expiryDate);
+        let temp1 = startOfDay(temp);
+        let temp2 = addYears(temp1, -2);
+        licence.expiryDate = temp2;
+      }
+      if (licence.licenseNumber == '326682') {
+        let temp = new Date(licence.expiryDate);
+        let temp1 = startOfDay(temp);
+        let temp2 = addYears(temp1, -1);
+        licence.expiryDate = temp2;
+      }
       this.licenceForms[licence.licenseId] = this.fb.group({
         phone: [licence.establishmentPhoneNumber],
         email: [licence.establishmentEmail]
@@ -106,6 +122,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
           }
         });
     });
+
     this.licenceDataService.getOutstandingBalancePriorInvoices()
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((data) => {
@@ -323,6 +340,14 @@ export class LicenceRowComponent extends FormBase implements OnInit {
   isExpired(licence: ApplicationLicenseSummary) {
     // if NOW is after licence.expiryDate then expired is true
     const expired = isAfter(NOW, startOfDay(new Date(licence.expiryDate)));
+    return expired && (licence.status === "Active" || licence.status === "Expired");
+  }
+
+  isExpiredOverOneYear(licence: ApplicationLicenseSummary) {
+    // LCSD-6479 if NOW is after one year of licence.expiryDate 
+    let licenceExpredDate = startOfDay(new Date(licence.expiryDate));
+    const oneYearOfStartDay = addYears(licenceExpredDate, 1);
+    const expired = isAfter(NOW, oneYearOfStartDay);
     return expired && (licence.status === "Active" || licence.status === "Expired");
   }
 
