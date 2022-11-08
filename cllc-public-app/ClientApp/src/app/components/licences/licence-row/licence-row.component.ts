@@ -96,20 +96,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
 
 
 
-    this.licences.forEach((licence) => {
-      
-      if (licence.licenseNumber == '326681') {
-        let temp = new Date(licence.expiryDate);
-        let temp1 = startOfDay(temp);
-        let temp2 = addYears(temp1, -2);
-        licence.expiryDate = temp2;
-      }
-      if (licence.licenseNumber == '326682') {
-        let temp = new Date(licence.expiryDate);
-        let temp1 = startOfDay(temp);
-        let temp2 = addYears(temp1, -1);
-        licence.expiryDate = temp2;
-      }
+    this.licences.forEach((licence) => { 
       this.licenceForms[licence.licenseId] = this.fb.group({
         phone: [licence.establishmentPhoneNumber],
         email: [licence.establishmentEmail]
