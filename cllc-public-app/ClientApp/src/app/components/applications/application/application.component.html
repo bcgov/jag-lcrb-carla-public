@@ -668,8 +668,7 @@
       <div class="ngtest-new-address content-bottom"
            *ngIf="showFormControl(application?.applicationType?.newEstablishmentAddress)">
         <p *ngIf="application?.licenseType !== 'Rural Agency Store'">
-          The proposed location of the licensed
-          establishment:
+          The proposed location of the licensed establishment:
         </p>
         <p *ngIf="application?.licenseType === 'Rural Agency Store'">
           Include any information necessary for finding
@@ -803,7 +802,7 @@
   <section class="ngtest-property-details" *ngIf="requiresFederalProductionInfo()">
     <h3 class="blue-header">FEDERAL PRODUCTION INFORMATION</h3>
     <section class="padded-section content-bottom">
-      <div style="position: relative">  
+      <div style="position: relative">
         <div>
           <app-field [required]="true" label="Federal Licence Number" [isFullWidth]="true"
                      [valid]="isValidOrNotTouched('federalLicenceNumber')"
@@ -816,12 +815,14 @@
             <input class="form-control" type="text" formControlName="federalLicenceName" id="federalLicenceName">
           </app-field>
         </div>
-      </div>  
-
+      </div>
       <h3 class="blue-header">
         ADDRESS
       </h3>
       <div class="ngtest-new-address content-bottom">
+        <p>
+          The proposed location of the federal production site:
+        </p>
         <address class="row">
           <app-field class="col-md-12 col-xs-12" label="Address" [required]="true" [isFullWidth]="true"
                      [valid]="isValidOrNotTouched('fpAddressStreet')"
@@ -2017,11 +2018,10 @@
 
   <div class="ngtest-financial-integrity-upload"
        *ngIf="application?.applicationType?.showFinancialIntegrityFormUpload">
-    <hr><br>
     <label for="">Business Financial Integrity Form</label>
     <br>
     <i>
-      Please download and complete the 
+      Please download and complete the
       <a href="https://www2.gov.bc.ca/assets/download/E840994D9D304AFE8D56A50666281B9D"
          download target="_blank" rel="noopener noreferrer">
         financial integrity form
@@ -2037,6 +2037,7 @@
                          [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
       </app-file-uploader>
     </section>
+  <hr><br>
   </div>
 
   <div class="ngtest-ethyl-documents-upload"
@@ -2223,8 +2224,7 @@
 
   <section class="ngtest-valid-interest" *ngIf="showFormControl(application?.applicationType?.validInterest) || showValidInterestforTransfer()">
     <label for="" *ngIf="application?.licenseType == 'Cannabis Retail Store'">
-      Offer or Proof of Ownership, Lease or
-      Sub-Lease
+      Offer or Proof of Ownership, Lease or Sub-Lease
     </label>
     <label for="" *ngIf="application?.licenseType != 'Cannabis Retail Store'">Proof of Valid Interest</label>
     <br>
@@ -2251,14 +2251,19 @@
         </p>
 
       </div>
-      <div *ngIf="application?.licenseType != 'Cannabis Retail Store'">
+      <div *ngIf="application?.licenseType != 'Cannabis Retail Store'">    
         <p>Any one of the following documents can be used to show valid interest in the property:</p>
         <ul>
-          <li>Certificate of Title in the licensee's name (as stated on the liquor licence).</li>
+          <li>
+            Certificate of Title in the licensee's name (as stated on the
+            <span *ngIf="isLiquor()">liquor</span>
+            <span *ngIf="!isLiquor()">cannabis</span>
+            licence).
+          </li>
           <li>
             A fully executed lease, an assignment or an offer of lease, which does not expire for at least 12
-            months. The tenant on the lease document must be the licensee (name the liquor licence is issued
-            to).
+            months. The tenant on the lease document must be the licensee (name the <span *ngIf="isLiquor()">liquor</span>
+            <span *ngIf="!isLiquor()">cannabis</span> licence is issued to).
             The lease or offer to lease must show rent paid, have a term and an expiry date, and be signed by
             the
             licensee and the landlord or property owner.
@@ -2268,9 +2273,7 @@
             LCRB
             ). An offer or option must show price paid, have a term and expiry date and be signed by
             both the licensee and property owner. If an operated store is relocating, the valid interest must
-            be
-            in the
-            name of the third party operator.
+            be in the name of the third party operator.
           </li>          
         </ul>
         <p>&nbsp;</p>

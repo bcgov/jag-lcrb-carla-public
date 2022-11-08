@@ -37,6 +37,7 @@ export class PaymentConfirmationComponent extends FormBase implements OnInit {
   invoice: string;
   isApproved = false;
   applicationType: string;
+  isLiquor: boolean;
   retryCount = 0;
 
   paymentTransactionTitle: string;
@@ -144,11 +145,10 @@ export class PaymentConfirmationComponent extends FormBase implements OnInit {
     this.applicationDataService.getApplicationById(this.applicationId).subscribe(
       (data: Application) => {
         this.applicationType = data.applicationType.name;
+        this.isLiquor = data.applicationType.category == "Liquor";
         this.application = data;
         this.addDynamicContent();
       });
-
-
   }
 
   ngAfterViewInit() {
