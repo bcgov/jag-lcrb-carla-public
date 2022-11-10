@@ -85,7 +85,7 @@
     </span>
     <span *ngIf="!isOutstandingPriorBalanceInvoiceDue  && isExpiredOverOneYear(item)"  class="missing"> 
           <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>
-          This Licence has Expired over one year. Unable Reinstate.      
+          Unable to Reinstate.      
     </span>
   </div>
   <div class="flags" class="missing">
@@ -344,7 +344,7 @@
                                     </span>
                                     <span *ngIf="!isOutstandingPriorBalanceInvoiceDue && isExpiredOverOneYear(item)">
                                       <a href="javascript: void(0);" class="missing" disabled style="pointer-events:none;">
-                                        <strong>Attention</strong>: This Licence has Expired over one year. Unable Renew.
+                                        <strong>Attention</strong>: Unable to Renew.
                                       </a>
                                     </span>
                                   </div>
@@ -364,7 +364,7 @@
                                       </a>
                                     </span>
                                     <span *ngIf="!isOutstandingPriorBalanceInvoiceDue && isExpiredOverOneYear(item)"  class="missing">                                  
-                                        <strong>Attention</strong>: This Licence has Expired over one year. Unable Reinstate.                                     
+                                        <strong>Attention</strong>: Unable to Reinstate.                                     
                                     </span>
                                   </div>
 
