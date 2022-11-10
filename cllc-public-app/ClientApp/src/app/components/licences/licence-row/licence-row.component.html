@@ -69,11 +69,11 @@
   <div *ngIf="!item.isOperated && (isExpired(item) || (isActive(item) && isAboutToExpire(item)))">
     <span *ngIf="isOutstandingPriorBalanceInvoiceDue">
       <div style="color: #f44336;"><fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon> Attention: you have an outstanding prior balance invoice(s) due; please return to the Dashboard for details and to make payment.</div>
-       <a routerLink="/dashboard">
+      <a routerLink="/dashboard">
         Return to Dashboard
       </a>
     </span>
-    <span *ngIf="!isOutstandingPriorBalanceInvoiceDue">
+    <span *ngIf="!isOutstandingPriorBalanceInvoiceDue  && !isExpiredOverOneYear(item)">
       <div *ngIf="hasOutstandingPriorBalance" style="color: #f44336;"><fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>Warning: you have an outstanding balance invoice(s) that can be accessed from the Dashboard page.</div>
       <a *ngIf="item.autoRenewal" href="javascript: void(0);" (click)="startRenewal(item)" class="missing">
         <span>
@@ -82,6 +82,10 @@
           Licence
         </span>
       </a>
+    </span>
+    <span *ngIf="!isOutstandingPriorBalanceInvoiceDue  && isExpiredOverOneYear(item)"  class="missing"> 
+          <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>
+          Unable to Reinstate.      
     </span>
   </div>
   <div class="flags" class="missing">
@@ -333,9 +337,14 @@
                                         Return to Dashboard
                                       </a>
                                     </span>
-                                    <span *ngIf="!isOutstandingPriorBalanceInvoiceDue">
+                                    <span *ngIf="!isOutstandingPriorBalanceInvoiceDue && !isExpiredOverOneYear(item)">
                                       <a href="javascript: void(0);" (click)="startRenewal(item)" class="missing">
                                         <strong>Attention</strong>: This Licence has Expired<br>Please Renew.
+                                      </a>
+                                    </span>
+                                    <span *ngIf="!isOutstandingPriorBalanceInvoiceDue && isExpiredOverOneYear(item)">
+                                      <a href="javascript: void(0);" class="missing" disabled style="pointer-events:none;">
+                                        <strong>Attention</strong>: Unable to Renew.
                                       </a>
                                     </span>
                                   </div>
@@ -349,10 +358,13 @@
                                         </span>
                                       </button>
                                     </span>
-                                    <span *ngIf="!isOutstandingPriorBalanceInvoiceDue">
+                                    <span *ngIf="!isOutstandingPriorBalanceInvoiceDue && !isExpiredOverOneYear(item)">
                                       <a href="javascript: void(0);" (click)="startRenewal(item)" class="missing">
                                         <strong>Attention</strong>: This Licence has Expired<br>Please Reinstate.
                                       </a>
+                                    </span>
+                                    <span *ngIf="!isOutstandingPriorBalanceInvoiceDue && isExpiredOverOneYear(item)"  class="missing">                                  
+                                        <strong>Attention</strong>: Unable to Reinstate.                                     
                                     </span>
                                   </div>
 
