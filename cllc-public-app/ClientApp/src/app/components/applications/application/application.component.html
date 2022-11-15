@@ -821,7 +821,7 @@
       </h3>
       <div class="ngtest-new-address content-bottom">
         <p>
-          The proposed location of the federal production site:
+          The location of the federal production site:
         </p>
         <address class="row">
           <app-field class="col-md-12 col-xs-12" label="Address" [required]="true" [isFullWidth]="true"
@@ -1442,7 +1442,7 @@
 
         <!-- otherwise switch to legacy mode-->
         <div *ngIf="!htmlContent.floorPlan">
-          <div *ngIf="application?.licenseType == 'Cannabis Retail Store'">
+          <div *ngIf="application?.licenseType == 'Cannabis Retail Store' || application?.licenseType == 'Producer Retail Store'">
             <span>
               A floor plan is a document, showing a view from above, of the dimensions and relationships
               between
@@ -1476,7 +1476,7 @@
                 </p>
                 <mat-checkbox formControlName="IsReadyProductNotVisibleOutside">
                   No cannabis products, accessories, packages or labelling will be visible from outside the
-                  cannabis retail store
+                  retail store
                 </mat-checkbox>
               </section>
               <img src="assets/floor-plan-example.png" width="300" alt="Floor plan"
@@ -1484,7 +1484,7 @@
             </div>
 
           </div>
-          <div *ngIf="application?.licenseType != 'Cannabis Retail Store'">
+          <div *ngIf="application?.licenseType != 'Cannabis Retail Store'  && application?.licenseType != 'Producer Retail Store'">
             <p>The floor plans of the proposed establishment, which must meet the following requirements: </p>
             <ul>
               <li>Must be scaled, clear, legible and include room dimensions (8.5" x 11") </li>
