@@ -2018,8 +2018,8 @@
 
   <div class="ngtest-financial-integrity-upload"
        *ngIf="application?.applicationType?.showFinancialIntegrityFormUpload">
+    <hr><br>
     <label for="">Business Financial Integrity Form</label>
-    <br>
     <i>
       Please download and complete the
       <a href="https://www2.gov.bc.ca/assets/download/E840994D9D304AFE8D56A50666281B9D"
@@ -2037,7 +2037,6 @@
                          [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
       </app-file-uploader>
     </section>
-  <hr><br>
   </div>
 
   <div class="ngtest-ethyl-documents-upload"
@@ -2223,13 +2222,13 @@
   </section>
 
   <section class="ngtest-valid-interest" *ngIf="showFormControl(application?.applicationType?.validInterest) || showValidInterestforTransfer()">
+    <hr><br>
     <label for="" *ngIf="application?.licenseType == 'Cannabis Retail Store'">
       Offer or Proof of Ownership, Lease or Sub-Lease
     </label>
     <label for="" *ngIf="application?.licenseType != 'Cannabis Retail Store'">Proof of Valid Interest</label>
-    <br>
     <section>
-      <div *ngIf="application?.licenseType == 'Cannabis Retail Store'">
+      <div *ngIf="application?.licenseType == 'Cannabis Retail Store' || application?.licenseType == 'Producer Retail Store'">
         <p>
           If the applicant currently owns or leases the proposed store location, submit <b>Option 1</b>. If
           the
@@ -2251,7 +2250,7 @@
         </p>
 
       </div>
-      <div *ngIf="application?.licenseType != 'Cannabis Retail Store'">    
+      <div *ngIf="application?.licenseType != 'Cannabis Retail Store' && application?.licenseType != 'Producer Retail Store'">
         <p>Any one of the following documents can be used to show valid interest in the property:</p>
         <ul>
           <li>
@@ -2274,7 +2273,7 @@
             ). An offer or option must show price paid, have a term and expiry date and be signed by
             both the licensee and property owner. If an operated store is relocating, the valid interest must
             be in the name of the third party operator.
-          </li>          
+          </li>
         </ul>
         <p>&nbsp;</p>
       </div>
