@@ -253,7 +253,10 @@ export class LicenceRowComponent extends FormBase implements OnInit {
       !item.transferRequested &&
       this.actionsVisible(item) &&
       item.licenceTypeName !== LicenceTypeNames.S119 &&
-      item.licenceTypeName !== "Marketing";
+      item.licenceTypeName !== "Marketing" &&
+      item.licenceTypeName !== LicenceTypeNames.S119CRS &&
+      item.licenceTypeName !== LicenceTypeNames.S119PRS &&
+      item.licenceTypeName !== LicenceTypeNames.PRS;
     return result;
   }
 
