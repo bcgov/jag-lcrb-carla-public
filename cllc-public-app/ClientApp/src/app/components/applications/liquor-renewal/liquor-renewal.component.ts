@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { KeyValue } from "@angular/common";
 import { Application } from "@models/application.model";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { Observable, Subject, forkJoin, of } from "rxjs";
+import { Subscription,Observable, Subject, forkJoin, of } from "rxjs";
 import { TiedHouseConnection } from "@models/tied-house-connection.model";
 import { UPLOAD_FILES_MODE } from "@components/licences/licences.component";
 import { ApplicationTypeNames, FormControlState } from "@models/application-type.model";
@@ -100,6 +100,7 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
   saveForLaterInProgress: boolean;
   submitReqInProgress: boolean;
   cancelReqInprogress: boolean;
+  busy: Subscription;
 
   constructor(private store: Store<AppState>,
     private paymentDataService: PaymentDataService,
@@ -314,14 +315,14 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
   /**
    * Submit the application for payment
    * */
-  submitApplication() {
+  submitApplication(event) {
     if (!this.isValid()) {
       this.showValidationMessages = true;
     } else if (JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value)) {
       this.submitPayment();
     } else {
       this.submitReqInProgress = true;
-      this.save(true)
+      this.busy=this.save(true)
         .pipe(takeWhile(() => this.componentActive))
         .subscribe((result: boolean) => {
           if (result) {
@@ -338,7 +339,7 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
    * Redirect to payment processing page (Express Pay / Bambora service)
    * */
   private submitPayment() {
-    this.paymentDataService.getPaymentSubmissionUrl(this.applicationId)
+    this.busy=this.paymentDataService.getPaymentSubmissionUrl(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(res => {
         this.submitReqInProgress = false;
@@ -348,7 +349,7 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
       },
         err => {
           if (err._body === "Payment already made") {
-            this.snackBar.open("Application payment has already been made.",
+            this.snackBar.open("Application payment has already been made, please refresh the page.",
               "Fail",
               { duration: 3500, panelClass: ["red-snackbar"] });
           }

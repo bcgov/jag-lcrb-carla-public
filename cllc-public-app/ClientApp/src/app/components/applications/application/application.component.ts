@@ -1193,7 +1193,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
         return jsonUrl['url'];
       }, (err: any) => {
         if (err._body === 'Payment already made') {
-          this.snackBar.open('Application payment has already been made.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+          this.snackBar.open('Application payment has already been made, please refresh the page.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
         }
       }));
   }

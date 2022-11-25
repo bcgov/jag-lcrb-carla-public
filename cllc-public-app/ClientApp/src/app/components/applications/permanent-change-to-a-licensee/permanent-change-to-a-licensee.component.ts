@@ -328,7 +328,7 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
       },
         (err: any) => {
           if (err._body === "Payment already made") {
-            this.snackBar.open("Application payment has already been made.",
+            this.snackBar.open("Application payment has already been made, please refresh the page.",
               "Fail",
               { duration: 3500, panelClass: ["red-snackbar"] });
           }
