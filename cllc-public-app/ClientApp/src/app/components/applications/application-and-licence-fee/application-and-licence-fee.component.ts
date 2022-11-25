@@ -142,7 +142,7 @@ export class ApplicationAndLicenceFeeComponent extends FormBase implements OnIni
         },
         err => {
           if (err._body === "Payment already made") {
-            this.snackBar.open("Licence Fee payment has already been made.",
+            this.snackBar.open("Licence Fee payment has already been made, please refresh the page.",
               "Fail",
               { duration: 3500, panelClass: ["red-snackbar"] });
           }
