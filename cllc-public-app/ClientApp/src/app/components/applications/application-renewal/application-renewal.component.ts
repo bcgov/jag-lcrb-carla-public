@@ -6,7 +6,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from "@angular/forms";
 import { Store } from "@ngrx/store";
 import { AppState } from "@app/app-state/models/app-state";
-import { Subscription,Subject, Observable, forkJoin, of } from "rxjs";
+import { Subject, Observable, forkJoin, of } from "rxjs";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import * as currentApplicationActions from "@app/app-state/actions/current-application.action";
@@ -94,7 +94,6 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
   submitReqInProgress: boolean;
   cancelReqInProgress: boolean;
   saveForLateInProgress: boolean;
-  busy: Subscription;
 
   constructor(private store: Store<AppState>,
     private paymentDataService: PaymentDataService,
@@ -373,7 +372,7 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
       this.submitPayment();
     } else {
       this.submitReqInProgress = true;
-      this.busy =this.save(true)
+      this.save(true)
         .pipe(takeWhile(() => this.componentActive))
         .subscribe((result: boolean) => {
           if (result) {
@@ -390,7 +389,7 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
    * Redirect to payment processing page (Express Pay / Bambora service)
    * */
   private submitPayment() {
-    this.busy=this.paymentDataService.getPaymentSubmissionUrl(this.applicationId)
+    this.paymentDataService.getPaymentSubmissionUrl(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(res => {
         this.submitReqInProgress = false;
