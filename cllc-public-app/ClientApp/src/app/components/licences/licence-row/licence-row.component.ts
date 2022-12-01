@@ -70,6 +70,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
   licenceForms = {};
   eventStatus = EventStatus;
   eventCategory = EventCategory;
+  renewalStarted = false;
 
   @Input()
   available: boolean;
@@ -449,7 +450,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     // CRS Renewals
     // Cannabis Marketing Renewals
     // Liquor Renewals
-
+    this.renewalStarted = true;
     // use a renewal type to direct to the right renewal application form (crs or liquor)
     let renewalType: "crs" | "liquor";
     // used to find an existing renewal application of that type, or create a new one
@@ -491,10 +492,12 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     // if we found a renewal application that hasn't been paid for
     if (renewalApplication && !renewalApplication.isPaid) {
       // let's go there
+      this.renewalStarted = false;
       this.router.navigateByUrl(`/account-profile/renewal/${renewalType}/${renewalApplication.applicationId}`);
       // otherwise if there's a paid renewal application
     } else if (renewalApplication && renewalApplication.isPaid) {
-      // that shouldn't have happened
+      // that shouldn't have happened]
+      this.renewalStarted = false;
       this.snackBar.open("Renewal application already submitted",
         "Fail",
         { duration: 3500, panelClass: ["red-snackbar"] });
@@ -505,9 +508,11 @@ export class LicenceRowComponent extends FormBase implements OnInit {
       this.busy = this.licenceDataService.createApplicationForActionType(licence.licenseId, renewalApplicationTypeName)
         .pipe(takeWhile(() => this.componentActive))
         .subscribe(data => {
+          this.renewalStarted = false;
           this.router.navigateByUrl(`/account-profile/renewal/${renewalType}/${data.id}`);
         },
           () => {
+            this.renewalStarted = false;
             this.snackBar.open(`Error running licence action for ${renewalType}`,
               "Fail",
               { duration: 3500, panelClass: ["red-snackbar"] });
@@ -515,6 +520,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
           }
         );
     }
+    
   }
 
   hasEndorsement(licence: License, endorsementId: string) {

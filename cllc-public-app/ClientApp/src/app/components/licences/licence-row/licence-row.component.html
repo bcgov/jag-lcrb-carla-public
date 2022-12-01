@@ -75,13 +75,15 @@
     </span>
     <span *ngIf="!isOutstandingPriorBalanceInvoiceDue  && !isExpiredOverOneYear(item)">
       <div *ngIf="hasOutstandingPriorBalance" style="color: #f44336;"><fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>Warning: you have an outstanding balance invoice(s) that can be accessed from the Dashboard page.</div>
-      <a *ngIf="item.autoRenewal" href="javascript: void(0);" (click)="startRenewal(item)" class="missing">
+      <button mat-raised-button *ngIf="item.autoRenewal" color="secondary" style="margin-right: 10px;"
+              (click)="startRenewal(item)" [disabled]="renewalStarted">
         <span>
           <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>
           {{(isAboutToExpire(item) || isRecentlyExpired(item)) ? 'Renew' : 'Reinstate'}}
           Licence
         </span>
-      </a>
+        <mat-progress-bar *ngIf="renewalStarted" mode="indeterminate"></mat-progress-bar>
+      </button>
     </span>
     <span *ngIf="!isOutstandingPriorBalanceInvoiceDue  && isExpiredOverOneYear(item)"  class="missing"> 
           <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>
@@ -338,9 +340,14 @@
                                       </a>
                                     </span>
                                     <span *ngIf="!isOutstandingPriorBalanceInvoiceDue && !isExpiredOverOneYear(item)">
-                                      <a href="javascript: void(0);" (click)="startRenewal(item)" class="missing">
-                                        <strong>Attention</strong>: This Licence has Expired<br>Please Renew.
-                                      </a>
+                                      <strong>Attention</strong>: This Licence has Expired<br>
+                                      <button mat-raised-button color="secondary" style="margin-right: 10px;"
+                                              (click)="startRenewal(item)" [disabled]="renewalStarted">
+                                        <span>
+                                          Please Renew
+                                        </span>
+                                        <mat-progress-bar *ngIf="renewalStarted" mode="indeterminate"></mat-progress-bar>
+                                      </button>
                                     </span>
                                     <span *ngIf="!isOutstandingPriorBalanceInvoiceDue && isExpiredOverOneYear(item)">
                                       <a href="javascript: void(0);" class="missing" disabled style="pointer-events:none;">
@@ -359,9 +366,14 @@
                                       </button>
                                     </span>
                                     <span *ngIf="!isOutstandingPriorBalanceInvoiceDue && !isExpiredOverOneYear(item)">
-                                      <a href="javascript: void(0);" (click)="startRenewal(item)" class="missing">
-                                        <strong>Attention</strong>: This Licence has Expired<br>Please Reinstate.
-                                      </a>
+                                      <strong>Attention</strong>: This Licence has Expired<br>
+                                      <button mat-raised-button color="secondary" style="margin-right: 10px;"
+                                              (click)="startRenewal(item)" [disabled]="renewalStarted">
+                                        <span>
+                                          Please Reinstate
+                                        </span>
+                                        <mat-progress-bar *ngIf="renewalStarted" mode="indeterminate"></mat-progress-bar>
+                                      </button>
                                     </span>
                                     <span *ngIf="!isOutstandingPriorBalanceInvoiceDue && isExpiredOverOneYear(item)"  class="missing">                                  
                                         <strong>Attention</strong>: Unable to Reinstate.                                     
