@@ -2042,18 +2042,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return NotFound("Payment already made");
             }
-            else
-            {
-                if (application._adoxioInvoiceValue != null)
-                {
-                    //TODO Reverify Payment Status with BCEP
-                    bool invoicePaid = await ReVerifySepPaymentStatus(id);
-                    if (invoicePaid)
-                    {
-                        return NotFound("Payment already made");
-                    }
-                }
-            }
 
 
             if (!string.IsNullOrEmpty(application._adoxioInvoiceValue))
