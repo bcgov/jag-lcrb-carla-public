@@ -1027,7 +1027,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
                   this.submitApplicationInProgress = false;
                 },
                   error => {
-                    this.snackBar.open('Error submitting payment', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+                    if (error._body === "Payment already made") {
+                      this.snackBar.open("Payment has already been made, Please return to the dashboard.", "Fail",{ duration: 3500, panelClass: ["red-snackbar"] });
+                    } else {
+                      this.snackBar.open('Error submitting payment', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+                    }
                     this.submitApplicationInProgress = false;
                   }
                 );
