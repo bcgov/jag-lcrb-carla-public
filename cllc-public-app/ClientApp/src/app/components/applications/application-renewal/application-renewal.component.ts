@@ -399,7 +399,7 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
       },
         err => {
           if (err._body === "Payment already made") {
-            this.snackBar.open("Application payment has already been made, please refresh the page.",
+            this.snackBar.open("Application payment has already been made, please return to the dashboard.",
               "Fail",
               { duration: 3500, panelClass: ["red-snackbar"] });
           }
