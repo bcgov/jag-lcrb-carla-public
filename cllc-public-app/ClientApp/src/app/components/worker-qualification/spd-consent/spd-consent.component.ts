@@ -169,7 +169,7 @@ export class SpdConsentComponent implements OnInit {
         },
         err => {
           this.submitting = false;
-          if (err._body === "Payment already made") {
+          if (err === "Payment already made") {
             this.snackBar.open("Application payment has already been made.",
               "Fail",
               { duration: 3500, panelClass: ["red-snackbar"] });

@@ -24,6 +24,10 @@ export class DataService {
         "503");
     }
     // return an observable with a user-facing error message
+    if (error.error == "Payment already made") {
+      return throwError(
+        "Payment already made");
+   }
     return throwError(
       "Something bad happened; please try again later.");
   }
@@ -38,6 +42,10 @@ export class DataService {
       console.error(
         `Backend returned code ${error.status}, ` +
         `body was: ${error.error}`);
+    }
+    if (error.error == "Payment already made") {
+      return throwError(
+        "Payment already made");
     }
     // return an observable with a user-facing error message
     return throwError(
