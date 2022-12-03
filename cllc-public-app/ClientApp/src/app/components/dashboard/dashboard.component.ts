@@ -126,8 +126,8 @@ export class DashboardComponent extends FormBase implements OnInit {
           const data = res as any;
           window.location.href = data.url;
         },
-        err => {
-          if (err._body === "Payment already made") {
+          err => {
+            if (err === "Payment already made") {
             this.snackBar.open("Outstanding Prior Balance Payment has already been made, please refresh the page",
               "Fail",
               { duration: 3500, panelClass: ["red-snackbar"] });
