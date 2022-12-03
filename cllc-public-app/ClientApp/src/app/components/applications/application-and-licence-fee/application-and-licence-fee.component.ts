@@ -141,7 +141,7 @@ export class ApplicationAndLicenceFeeComponent extends FormBase implements OnIni
           window.location.href = data.url;
         },
         err => {
-          if (err._body === "Payment already made") {
+          if (err === "Payment already made") {
             this.snackBar.open("Licence Fee payment has already been made, please refresh the page.",
               "Fail",
               { duration: 3500, panelClass: ["red-snackbar"] });

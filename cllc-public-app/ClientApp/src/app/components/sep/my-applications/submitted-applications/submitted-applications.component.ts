@@ -272,7 +272,7 @@ export class SubmittedApplicationsComponent implements OnInit {
         window.location.href = jsonUrl["url"];
         return jsonUrl["url"];
       }, (err: any) => {
-        if (err._body === "Payment already made") {
+        if (err === "Payment already made") {
           this.snackBar.open("Application payment has already been made, please refresh the page.", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
         }
       }));

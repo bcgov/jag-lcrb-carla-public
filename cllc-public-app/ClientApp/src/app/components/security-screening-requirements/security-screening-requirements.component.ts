@@ -149,7 +149,7 @@ export class SecurityScreeningRequirementsComponent implements OnInit {
             return jsonUrl["url"];
           },
           err => {
-            if (err._body === "Payment already made") {
+            if (err === "Payment already made") {
               this.snackBar.open("Application payment has already been made, please refresh the page.",
                 "Fail",
                 { duration: 3500, panelClass: ["red-snackbar"] });
