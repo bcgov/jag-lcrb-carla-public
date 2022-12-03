@@ -751,7 +751,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.Error($"PAYMENT RE-VERIFICATION ERROR - {response["message"]} for application {id}");
                 return toReturn; 
             }
-
+            //Check if the payment processor has any record of this transaction
+            var messageId = response["messageId"];
+            var messageText = response["messageText"];
+            if (messageId == "559")
+            {
+                if (messageText == "No Transaction Found")
+                {
+                    //Payment Processor has no record of this transaction do nothing
+                    return false;
+                }
+            }
+            //If the payment processor has a record proceed and verify if it was successful or not and update the record on our end. 
             response["invoice"] = invoice.Invoicenumber;
 
             foreach (var key in response.Keys)
@@ -1048,7 +1059,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.Error($"PAYMENT Re-VERIFICATION ERROR - {response["message"]} for application {id}");
                 return false; // client will retry.
             }
-
+            //Check if the payment processor has any record of this transaction
+            var messageId = response["messageId"];
+            var messageText = response["messageText"];
+            if (messageId == "559")
+            {
+                if (messageText == "No Transaction Found")
+                {
+                    //Payment Processor has no record of this transaction do nothing
+                    return false;
+                }
+            }
+            //If the payment processor has a record proceed and verify if it was successful or not and update the record on our end. 
             response["invoice"] = invoice.Invoicenumber;
 
             foreach (var key in response.Keys)
@@ -1880,7 +1902,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.Error($"PAYMENT VERIFICATION ERROR - {response["message"]} for worker {workerId}");
                 return toReturn; // client will retry.
             }
-
+            //Check if the payment processor has any record of this transaction
+            var messageId = response["messageId"];
+            var messageText = response["messageText"];
+            if (messageId == "559")
+            {
+                if (messageText == "No Transaction Found")
+                {
+                    //Payment Processor has no record of this transaction do nothing
+                    return false;
+                }
+            }
+            //If the payment processor has a record proceed and verify if it was successful or not and update the record on our end. 
             response["invoice"] = invoice.Invoicenumber;
 
             foreach (var key in response.Keys)
@@ -2042,7 +2075,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return NotFound("Payment already made");
             }
-
+            else
+            {
+                if (application._adoxioInvoiceValue != null)
+                {
+                    //TODO Reverify Payment Status with BCEP
+                    bool invoicePaid = await ReVerifySepPaymentStatus(id);
+                    if (invoicePaid)
+                    {
+                        return NotFound("Payment already made");
+                    }
+                }
+            }
 
             if (!string.IsNullOrEmpty(application._adoxioInvoiceValue))
             {
@@ -2248,7 +2292,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.Error($"PAYMENT VERIFICATION ERROR - {response["message"]} for SEP application {id}");
                 return toReturn; // client will retry.
             }
-
+            //Check if the payment processor has any record of this transaction
+            var messageId = response["messageId"];
+            var messageText = response["messageText"];
+            if (messageId == "559")
+            {
+                if (messageText == "No Transaction Found")
+                {
+                    //Payment Processor has no record of this transaction do nothing
+                    return false;
+                }
+            }
+            //If the payment processor has a record proceed and verify if it was successful or not and update the record on our end. 
             response["invoice"] = invoice.Invoicenumber;
 
             foreach (var key in response.Keys)
