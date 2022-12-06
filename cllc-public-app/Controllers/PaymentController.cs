@@ -72,10 +72,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             } else
             {
                 //TODO Reverify Payment Status with BCEP
-                bool invoicePaid = await ReVerifyPaymentStatus(id);
-                if (invoicePaid)
+                if (application._adoxioInvoiceValue != null)
                 {
-                    return NotFound("Payment already made");
+                    bool invoicePaid = await ReVerifyPaymentStatus(id);
+                    if (invoicePaid)
+                    {
+                        return NotFound("Payment already made");
+                    }
                 }
             }
 
@@ -335,10 +338,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }else
             {
                 //TODO Reverify Payment Status with BCEP
-                bool invoicePaid = await ReVerifyLicenceFeePaymentStatus(id);
-                if (invoicePaid)
+                if (application._adoxioLicencefeeinvoiceValue != null)
                 {
-                    return NotFound("Payment already made");
+                    bool invoicePaid = await ReVerifyLicenceFeePaymentStatus(id);
+                    if (invoicePaid)
+                    {
+                        return NotFound("Payment already made");
+                    }
                 }
             }
 
@@ -381,7 +387,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.Debug("No invoice found, retry = " + retries);
                 System.Threading.Thread.Sleep(1000);
                 application = await GetDynamicsApplication(id);
-                invoiceId = application._adoxioInvoiceValue;
+                invoiceId = application._adoxioLicencefeeinvoiceValue;
             }
 
             if (!string.IsNullOrEmpty(invoiceId))
@@ -467,10 +473,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             } else
             {
                 //TODO Reverify Payment Status with BCEP
-                bool invoicePaid = await ReVerifyLicenceFeePaymentStatus(id);
-                if (invoicePaid)
-                {
-                    return NotFound("Payment already made");
+                if (application._adoxioLicencefeeinvoiceValue != null) 
+                { 
+                    bool invoicePaid = await ReVerifyLicenceFeePaymentStatus(id);
+                    if (invoicePaid)
+                    {
+                        return NotFound("Payment already made");
+                    }
                 }
             }
 
@@ -511,7 +520,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.Debug("No invoice found, retry = " + retries);
                 System.Threading.Thread.Sleep(1000);
                 application = await GetDynamicsApplication(id);
-                invoiceId = application._adoxioInvoiceValue;
+                invoiceId = application._adoxioLicencefeeinvoiceValue;
             }
 
             if (!string.IsNullOrEmpty(invoiceId))
