@@ -2087,8 +2087,54 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                 }
             }
+            bool generateInvoice = false;
+            if (string.IsNullOrEmpty(application._adoxioInvoiceValue))
+            {
+                generateInvoice = true;
+            }
+            else
+            {
+                MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(Guid.Parse(application._adoxioInvoiceValue));
+                if (invoice != null && invoice.Statecode == (int)Adoxio_invoicestates.Cancelled)
+                {
+                    generateInvoice=true;
+                }
+            }
+            if (generateInvoice)
+            {
+                var patchEvent = new MicrosoftDynamicsCRMadoxioSpecialevent()
+                {
+                    AdoxioInvoicetrigger = true
+                };
 
-            if (!string.IsNullOrEmpty(application._adoxioInvoiceValue))
+                try
+                {
+                    _dynamicsClient.Specialevents.Update(id, patchEvent);
+                }
+                catch (HttpOperationException httpOperationException)
+                {
+                    _logger.Error(httpOperationException, "Error creating/updating special event");
+                    throw httpOperationException;
+                }
+                application = GetSpecialEventData(id);
+            }
+            string invoiceId = application._adoxioInvoiceValue;
+
+
+
+            int retries = 0;
+            while (retries < 10 && string.IsNullOrEmpty(invoiceId))
+            {
+                // should happen immediately, but ...
+                // pause and try again - in case Dynamics is slow ...
+                retries++;
+                _logger.Debug("No invoice found, retry = " + retries);
+                System.Threading.Thread.Sleep(1000);
+                application = GetSpecialEventData(id);
+                invoiceId = application._adoxioInvoiceValue;
+            }
+
+            if (!string.IsNullOrEmpty(invoiceId))
             {
 
 

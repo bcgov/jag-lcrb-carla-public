@@ -75,14 +75,18 @@ export class FinalConfirmationComponent implements OnInit {
     if (this?.application?.id) {
       this.payNowClicked = true;
       // ensure the application is updated with the invoice trigger
-      const result = await this.sepDataService.generateInvoiceSepApplication(this.application.id)
-        .toPromise();
+      //const result = await this.sepDataService.generateInvoiceSepApplication(this.application.id)
+      //  .toPromise();
       // proceed to payment
       this.busy = this.submitPayment()
         .subscribe(res => {
         },
           error => {
-            this.snackBar.open("Error submitting payment", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
+            if (error === "Payment already made") {
+              this.snackBar.open("Application payment has already been made, please refresh the page.", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
+            } else {
+              this.snackBar.open("Error submitting payment", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
+            }
           }
         );
     }
@@ -108,8 +112,10 @@ export class FinalConfirmationComponent implements OnInit {
         window.location.href = jsonUrl["url"];
         return jsonUrl["url"];
       }, (err: any) => {
-        if (err._body === "Payment already made") {
+        if (err === "Payment already made") {
           this.snackBar.open("Application payment has already been made, please refresh the page.", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
+        } else {
+          this.snackBar.open("Error submitting payment", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
         }
       }));
 
