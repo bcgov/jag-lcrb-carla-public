@@ -1,6 +1,9 @@
 # Use the offical nginx (based on debian)
 FROM nginx:1.23.2
 
+RUN apt-get update && apt-get remove -y libcurl4 &&\
+    apt-get update && apt-get remove -y libtiff5
+
 ENV STI_SCRIPTS_PATH=/usr/libexec/s2i
 
 # Required for HTTP Basic feature
@@ -33,10 +36,8 @@ RUN chmod g+rw /var/cache/nginx \
 
 RUN mkdir -p /tmp/app/dist/ \
     && chmod a+rw /tmp
-
 			   
 # =================================================================================
-
 
 # Work-around for issues with S2I builds on Windows
 WORKDIR /tmp
