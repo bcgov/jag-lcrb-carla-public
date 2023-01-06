@@ -25,7 +25,7 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.1.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.1.1" />
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUi" Version="6.1.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUi" Version="6.4.0" />
     <PackageReference Include="Unchase.Swashbuckle.AspNetCore.Extensions" Version="2.6.0" />
   </ItemGroup>
 
