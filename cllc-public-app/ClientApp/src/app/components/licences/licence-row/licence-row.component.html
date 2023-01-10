@@ -287,7 +287,7 @@
                                                 (click)="startRequest(5001)" [disabled]="requestStarted && requestID==5001">
                                           <span>
                                             <fa-icon [icon]="faExchangeAlt" style="margin-right: 10px;"></fa-icon>
-                                            Transfer Licence [Apply]
+                                            Transfer Licence
                                           </span>
                                           <mat-progress-bar *ngIf="requestStarted && requestID==5001" mode="indeterminate"></mat-progress-bar>
                                         </button>
@@ -302,7 +302,7 @@
                                                 (click)="startRequest(5011)" [disabled]="requestStarted && requestID==5011">
                                           <span>
                                             <fa-icon [icon]="faExchangeAlt" style="margin-right: 10px;"></fa-icon>Add or
-                                            Change a Third Party Operator [Apply]
+                                            Change a Third Party Operator
                                           </span>
                                           <mat-progress-bar *ngIf="requestStarted && requestID==5011" mode="indeterminate"></mat-progress-bar>
                                         </button>                                    
@@ -318,7 +318,7 @@
                                               (click)="startRequest(5021)" [disabled]="requestStarted && requestID==5021">
                                         <span>
                                           <fa-icon [icon]="faExchangeAlt" style="margin-right: 10px;"></fa-icon>
-                                          Invitation for Tied House Exemption [Apply]
+                                          Invitation for Tied House Exemption
                                         </span>
                                         <mat-progress-bar *ngIf="requestStarted && requestID==5021" mode="indeterminate"></mat-progress-bar>
                                       </button>
@@ -333,7 +333,7 @@
                                                     (click)="startRequest(requestActionID)" [disabled]="requestStarted && requestID==requestActionID">
                                               <span>
                                                 <fa-icon [icon]="faBolt" style="margin-right: 10px;"></fa-icon>
-                                                {{action?.actionText}} <span>[Apply]</span>
+                                                {{action?.actionText}}
                                               </span>
                                               <mat-progress-bar *ngIf="requestStarted && requestID==requestActionID" mode="indeterminate"></mat-progress-bar>
                                             </button>
