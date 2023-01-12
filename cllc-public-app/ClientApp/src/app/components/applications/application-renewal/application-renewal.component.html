@@ -542,7 +542,7 @@
     </span>
     <mat-progress-bar class="mt-1" *ngIf="saveForLateInProgress" mode="indeterminate"></mat-progress-bar>
   </button>
-  <button mat-raised-button color="primary" (click)="submitApplication()">
+  <button mat-raised-button color="primary" (click)="submitApplication()" [disabled]="submitReqInProgress">
     <span>SUBMIT &amp; PAY</span>
     <mat-progress-bar class="mt-1" *ngIf="submitReqInProgress" mode="indeterminate"></mat-progress-bar>
   </button>
