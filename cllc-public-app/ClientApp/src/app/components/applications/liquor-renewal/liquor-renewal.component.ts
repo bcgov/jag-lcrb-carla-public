@@ -315,12 +315,13 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
    * Submit the application for payment
    * */
   submitApplication() {
+    this.submitReqInProgress = true;
     if (!this.isValid()) {
       this.showValidationMessages = true;
+      this.submitReqInProgress = false;
     } else if (JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value)) {
       this.submitPayment();
     } else {
-      this.submitReqInProgress = true;
       this.save(true)
         .pipe(takeWhile(() => this.componentActive))
         .subscribe((result: boolean) => {
