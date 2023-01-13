@@ -6,6 +6,7 @@ export const SERVINGS_PER_PERSON = 4;
 export type DrinkConfig = {
   id: number;
   group: string;
+  group_free: string;
   description: string;
   servingMethod: string;
   storageMethod: string;
@@ -24,6 +25,7 @@ const configuration: Array<DrinkConfig> = [
   {
     id: 1,
     group: 'beer',
+    group_free: 'beer_free',
     description: 'Beer, Ciders & Coolers',
     servingMethod: 'bottles/cans/glasses',
     storageMethod: 'kegs',
@@ -40,6 +42,7 @@ const configuration: Array<DrinkConfig> = [
   {
     id: 2,
     group: 'wine',
+    group_free: 'wine_free',
     description: 'Wine',
     servingMethod: 'glasses',
     storageMethod: 'bottles',
@@ -56,6 +59,7 @@ const configuration: Array<DrinkConfig> = [
   {
     id: 3,
     group: 'spirits',
+    group_free: 'spirits_free',
     description: 'Spirits',
     servingMethod: 'shots',
     storageMethod: 'bottles',
