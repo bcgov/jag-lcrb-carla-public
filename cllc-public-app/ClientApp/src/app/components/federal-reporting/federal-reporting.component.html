@@ -27,7 +27,7 @@
         </select>
       </div>
 
-      <div class="row" *ngIf="shownMonthlyReports?.length > 0" [class.hidden]="loadingMonthlyReports">
+      <div class="row" *ngIf="selectedMonthlyReport !=null" [class.hidden]="loadingMonthlyReports">
         <h4 class="bold">Select Monthly Report:</h4>
         <div class="row" style="padding:20px;">
           <p>
@@ -65,7 +65,7 @@
                     Status:
                     <span style="font-weight: bold; margin-left: 10px;">
                       <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;" *ngIf="selectedMonthlyReport?.statusCode === monthlyReportStatusEnum.Draft"></fa-icon>
-                      {{monthlyReportStatusEnum[shownMonthlyReports[selectedMonthlyReportIndex].statusCode] | uppercase}}
+                      {{monthlyReportStatusEnum[selectedMonthlyReport?.statusCode] | uppercase}}
                     </span>
                     <fa-icon data-html="true" style="color: #38598a; margin-left: 10px;" [icon]="faQuestionCircle" matTooltipClass="multiline-tooltip" matTooltip="DRAFT: The monthly report has not be completed&#13;SUBMITTED: The monthly report has been completed and is ready to be sent to CTLS&#13;CLOSED: The monthly report has been sent to CTLS"></fa-icon>
                   </h3><a [routerLink]="[]" (click)="save(false)" *ngIf="reportIsSubmitted">Reopen Monthly Report</a>
@@ -75,7 +75,7 @@
                 <div class="row mx-0">
                   <h3 class="blue-header col-xs-12">Part 1 - Employee Reporting</h3>
                 </div>
-                <p>Enter the number of employees who worked at your store in {{getName(report)}} for each position listed below.</p>
+                <p>Enter the number of employees who worked at your store in {{getName(selectedMonthlyReport)}} for each position listed below.</p>
                 <div *ngIf="reportForm.invalid && (reportForm.dirty || reportForm.touched)">
                   <div class="alert alert-danger">Number of employees must be a whole number less than 10000.</div>
                 </div>
