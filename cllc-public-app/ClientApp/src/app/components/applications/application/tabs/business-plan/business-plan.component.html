@@ -1,200 +1,199 @@
 <h3 class="blue-header">Manufacturer Supporting Information</h3>
 <div class="content-bottom" [formGroup]="form">
 
-<p>Please select the type of application you are submitting:</p>
-<app-field [showChevrons]="false" [valid]="!licenceSubCatControl.touched || licenceSubCatControl.valid"
-  errorMessage="Please select a licence type" [isFullWidth]="true">
-  <mat-radio-group formControlName="licenceSubCategory">
-    <mat-radio-button class="mr-5" [value]="'Winery'">Winery</mat-radio-button>
-    <mat-radio-button class="mr-5" [value]="'Distillery'">Distillery</mat-radio-button>
-    <mat-radio-button class="mr-5" [value]="'Brewery'">Brewery</mat-radio-button>
-    <mat-radio-button class="mr-5" [value]="'Co-packer'">Co-packer</mat-radio-button>
-  </mat-radio-group>
-</app-field>
-
-<!--div *ngIf="!hasType()">
-  <p>In order to complete your business plan, you must select a type of manufacturer licence.</p>
-</div-->
-
-<div *ngIf="hasType()">
-  <p *ngIf="isCopacker()">Your application must include a business plan that describes your proposed operations including:</p>
-  <ul>
-    <li *ngIf="isCopacker()">Which of the following manufacturing activities will take place at your manufacturing site on behalf of a BC licenced winery, brewery, or distillery: packaging, bottling, blending and/or flavouring of liquor. </li>
-    <li *ngIf="isCopacker()">
-      A list of all manufacturing equipment -- to be eligible for a licence, you
-      must
-      demonstrate that you own or lease the equipment
-      necessary to manufacture on-site, and you must continue to maintain that equipment to renew your
-      licence.
-    </li>
-
-
-  <p *ngIf="isDistillery()">
-    The Office of the Fire Commissioner (OFC) requires that a distillery
-    owner/applicant
-    construct and maintain their distillery in conformance with the BC Fire Code
-    requirements for fire prevention/protection. A copy of the Approval in Principal letter will be provided
-    to OFC.
-  </p>
-<div *ngIf="isCopacker()">
-  <hr>
-  <h4>Business Plan</h4>
-  <p>Upload your business plan: </p>
-  <section>
-    <app-file-uploader *ngIf="application?.id" documentType="Business Plan"
-                       [disableUploads]="isOpenedByLGForApproval" fileTypes="FILE MUST BE IN PDF FORMAT."
-                       [multipleFiles]="true" entityName="application" [enableFileDeletion]="!isOpenedByLGForApproval"
-                       [useDocumentTypeForName]="true" [entityId]="application?.id"
-                       [uploadHeader]="'TO UPLOAD BUSINESS PLAN, DRAG FILES HERE OR'">
-    </app-file-uploader>
-  </section>
-</div>
-  <!--section *ngIf="!isCopacker() && !isBrewery()">
-    <hr>
-    <h4>Production and Sales Forecasts</h4>
-    <p>
-      Upload financial statements outlining production (in litres) and sales forecasts for a three year
-      period:
-    </p>
-    <section>
-      <app-file-uploader *ngIf="application?.id" documentType="Business Plan - Production & Sales Forecasts"
-                         [disableUploads]="isOpenedByLGForApproval" fileTypes="FILE MUST BE IN PDF FORMAT."
-                         [multipleFiles]="true" entityName="application" [enableFileDeletion]="!isOpenedByLGForApproval"
-                         [useDocumentTypeForName]="true" [entityId]="application?.id"
-                         [uploadHeader]="'TO UPLOAD PRODUCTION AND FORECASTS, DRAG FILES HERE OR'">
-      </app-file-uploader>
-    </section>
-  </section-->
-  <!--section *ngIf="isWinery()">
-    <hr>
-    <h4>Proposed Agricultural Sources</h4>
-    <section class="content-bottom" style="border-top: solid #aaa 1px; margin-top: 0px;" *ngIf="isWinery()">
-      <p>
-        Indicate the amount of grapes, fruit and honey that will be farmed at the winery site and used for
-        the production
-        of wine:
-      </p>
-      <div>
-        <table>
-          <tr>
-            <td style="width: 150px;">
-              <app-field label="Grapes: # of acres" errorMessage="Please enter the number of acress of production">
-                <input type="text" class="form-control" formControlName="mfgAcresOfGrapes" style="width: 125px;">
-              </app-field>
-            </td>
-            <td style="width: 150px;">
-              <app-field label="Fruit: # of acres"
-                         errorMessage="Please enter the number of acress of production">
-                <input type="text" class="form-control" formControlName="mfgAcresOfFruit" style="width: 125px;">
-              </app-field>
-            </td>
-            <td style="width: 150px;">
-              <app-field label="Honey: # of beehives"
-                         errorMessage="Please enter the number of beehives">
-                <input type="text" class="form-control" formControlName="mfgAcresOfHoney" style="width: 125px;">
-              </app-field>
-            </td>
-          </tr>
-        </table>
-      </div>
-
-    </section>
-  </section-->
-  <section *ngIf="isWinery()">
-    <hr>
-    <h4>Stages of Manufacturing Taking Place Onsite</h4>
-    <p>
-      Onsite production means fermenting and at least one
-      of the
-      following winemaking
-      steps: blending, crushing, filtering, aging for at least 3 months, secondary fermentation or
-      carbonation, and
-      packaging.
-    </p>
-    <section>
-      <app-production-stages [application]="application" [form]="form"></app-production-stages>
-    </section>
-  </section>
-  <!--section *ngIf="!isCopacker() && !isBrewery()">
-    <hr>
-    <app-field label="Will you be using neutral grain spirits?" [valid]="isValidOrNotTouched('neutralGrain')" [showChevrons]="false"
-               errorMessage="Specify whether you will be useing neutral grain spirits" [isFullWidth]="true">
-      <mat-radio-group formControlName="mfgUsesNeutralGrainSpirits">
-        <mat-radio-button class="mr-5" value="Yes">Yes</mat-radio-button>
-        <mat-radio-button class="mr-5" value="No">No</mat-radio-button>
-      </mat-radio-group>
-    </app-field>
-  </section>
-</div-->
-
-
-<div *ngIf="isBrewery()">
-  <hr>
-  <!-- Brewery Question-->
-
-  <app-field label="Will your brewery operate in conjunction with a liquor primary (brewpub) at the same site?"
-             [valid]="isValidOrNotTouched('mfgBrewPubOnSite')" [showChevrons]="false"
-             errorMessage="Specify whether you will be operating in conjunction with a brewpub" [isFullWidth]="true">
-    <mat-radio-group formControlName="mfgBrewPubOnSite">
-      <mat-radio-button class="mr-5" value="Yes">Yes</mat-radio-button>
-      <mat-radio-button class="mr-5" value="No">No</mat-radio-button>
+  <p>Please select the type of application you are submitting:</p>
+  <app-field [showChevrons]="false" [valid]="!licenceSubCatControl.touched || licenceSubCatControl.valid"
+             errorMessage="Please select a licence type" [isFullWidth]="true">
+    <mat-radio-group formControlName="licenceSubCategory">
+      <mat-radio-button class="mr-5" [value]="'Winery'">Winery</mat-radio-button>
+      <mat-radio-button class="mr-5" [value]="'Distillery'">Distillery</mat-radio-button>
+      <mat-radio-button class="mr-5" [value]="'Brewery'">Brewery</mat-radio-button>
+      <mat-radio-button class="mr-5" [value]="'Co-packer'">Co-packer</mat-radio-button>
     </mat-radio-group>
   </app-field>
 
+  <!--div *ngIf="!hasType()">
+    <p>In order to complete your business plan, you must select a type of manufacturer licence.</p>
+  </div-->
 
-  <section *ngIf="isBrewPub()">
+  <div *ngIf="hasType()">
+    <!--<p *ngIf="isCopacker()">Your application must include a business plan that describes your proposed operations including:</p>
+    <ul>
+      <li *ngIf="isCopacker()">Which of the following manufacturing activities will take place at your manufacturing site on behalf of a BC licenced winery, brewery, or distillery: packaging, bottling, blending and/or flavouring of liquor. </li>
+      <li *ngIf="isCopacker()">
+        A list of all manufacturing equipment -- to be eligible for a licence, you
+        must
+        demonstrate that you own or lease the equipment
+        necessary to manufacture on-site, and you must continue to maintain that equipment to renew your
+        licence.
+      </li>-->
 
-    <app-field label="Will product be piped in from the brewery to serve on tap?"
-               [valid]="isValidOrNotTouched('mfgPipedInProduct')" [showChevrons]="false"
-               errorMessage="Specify whether you will be using piped in products" [isFullWidth]="true">
-      <mat-radio-group formControlName="mfgPipedInProduct">
-        <mat-radio-button class="mr-5" value="Yes">Yes</mat-radio-button>
-        <mat-radio-button class="mr-5" value="No">No</mat-radio-button>
-      </mat-radio-group>
-    </app-field>
 
-    <!--p>
-      Upload a sample of the brew sheets you intend to use in your
-      production:
+    <p *ngIf="isDistillery()">
+      The Office of the Fire Commissioner (OFC) requires that a distillery
+      owner/applicant
+      construct and maintain their distillery in conformance with the BC Fire Code
+      requirements for fire prevention/protection. A copy of the Approval in Principal letter will be provided
+      to OFC.
     </p>
-    <section>
-      <app-file-uploader *ngIf="application?.id" documentType="Business Plan - Sample Brew Sheet"
-                         [disableUploads]="isOpenedByLGForApproval" [enableFileDeletion]="!isOpenedByLGForApproval"
-                         fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
-                         [useDocumentTypeForName]="true" [entityId]="application?.id"
-                         [uploadHeader]="'TO UPLOAD SAMPLE BREW SHEET, DRAG FILES HERE OR'">
-      </app-file-uploader>
+    <!--<div *ngIf="isCopacker()">
+      <hr>
+      <h4>Business Plan</h4>
+      <p>Upload your business plan: </p>
+      <section>
+        <app-file-uploader *ngIf="application?.id" documentType="Business Plan"
+                           [disableUploads]="isOpenedByLGForApproval" fileTypes="FILE MUST BE IN PDF FORMAT."
+                           [multipleFiles]="true" entityName="application" [enableFileDeletion]="!isOpenedByLGForApproval"
+                           [useDocumentTypeForName]="true" [entityId]="application?.id"
+                           [uploadHeader]="'TO UPLOAD BUSINESS PLAN, DRAG FILES HERE OR'">
+        </app-file-uploader>
+      </section>
+    </div>-->
+    <!--section *ngIf="!isCopacker() && !isBrewery()">
+      <hr>
+      <h4>Production and Sales Forecasts</h4>
+      <p>
+        Upload financial statements outlining production (in litres) and sales forecasts for a three year
+        period:
+      </p>
+      <section>
+        <app-file-uploader *ngIf="application?.id" documentType="Business Plan - Production & Sales Forecasts"
+                           [disableUploads]="isOpenedByLGForApproval" fileTypes="FILE MUST BE IN PDF FORMAT."
+                           [multipleFiles]="true" entityName="application" [enableFileDeletion]="!isOpenedByLGForApproval"
+                           [useDocumentTypeForName]="true" [entityId]="application?.id"
+                           [uploadHeader]="'TO UPLOAD PRODUCTION AND FORECASTS, DRAG FILES HERE OR'">
+        </app-file-uploader>
+      </section>
+    </section-->
+    <!--section *ngIf="isWinery()">
+      <hr>
+      <h4>Proposed Agricultural Sources</h4>
+      <section class="content-bottom" style="border-top: solid #aaa 1px; margin-top: 0px;" *ngIf="isWinery()">
+        <p>
+          Indicate the amount of grapes, fruit and honey that will be farmed at the winery site and used for
+          the production
+          of wine:
+        </p>
+        <div>
+          <table>
+            <tr>
+              <td style="width: 150px;">
+                <app-field label="Grapes: # of acres" errorMessage="Please enter the number of acress of production">
+                  <input type="text" class="form-control" formControlName="mfgAcresOfGrapes" style="width: 125px;">
+                </app-field>
+              </td>
+              <td style="width: 150px;">
+                <app-field label="Fruit: # of acres"
+                           errorMessage="Please enter the number of acress of production">
+                  <input type="text" class="form-control" formControlName="mfgAcresOfFruit" style="width: 125px;">
+                </app-field>
+              </td>
+              <td style="width: 150px;">
+                <app-field label="Honey: # of beehives"
+                           errorMessage="Please enter the number of beehives">
+                  <input type="text" class="form-control" formControlName="mfgAcresOfHoney" style="width: 125px;">
+                </app-field>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+      </section>
+    </section-->
+    <section *ngIf="isWinery()">
+      <hr>
+      <h4>Stages of Manufacturing Taking Place Onsite</h4>
+      <p>
+        Onsite production means fermenting and at least one
+        of the
+        following winemaking
+        steps: blending, crushing, filtering, aging for at least 3 months, secondary fermentation or
+        carbonation, and
+        packaging.
+      </p>
+      <section>
+        <app-production-stages [application]="application" [form]="form"></app-production-stages>
+      </section>
     </section>
-  </section-->
+    <!--section *ngIf="!isCopacker() && !isBrewery()">
+        <hr>
+        <app-field label="Will you be using neutral grain spirits?" [valid]="isValidOrNotTouched('neutralGrain')" [showChevrons]="false"
+                   errorMessage="Specify whether you will be useing neutral grain spirits" [isFullWidth]="true">
+          <mat-radio-group formControlName="mfgUsesNeutralGrainSpirits">
+            <mat-radio-button class="mr-5" value="Yes">Yes</mat-radio-button>
+            <mat-radio-button class="mr-5" value="No">No</mat-radio-button>
+          </mat-radio-group>
+        </app-field>
+      </section>
+    </div-->
 
-  <div *ngIf="isDistillery()">
-    <hr>
-    <h4>Distribution Plan</h4>
-    <p>Upload a description of how you plan to distribute your packaged product:</p>
-    <section>
-      <app-file-uploader *ngIf="application?.id" documentType="Business Plan - Distribution Plan"
-                         [disableUploads]="isOpenedByLGForApproval" [enableFileDeletion]="!isOpenedByLGForApproval"
-                         fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
-                         [useDocumentTypeForName]="true" [entityId]="application?.id"
-                         [uploadHeader]="'TO UPLOAD DISTRIBUTION PLAN, DRAG FILES HERE OR'">
-      </app-file-uploader>
-    </section>
-  </div>
 
-  <div *ngIf="isWinery()">
-    <hr>
-    <h4>Business Insurance</h4>
-    <p>Upload your business insurance certificate:</p>
-    <section>
-      <app-file-uploader *ngIf="application?.id" documentType="Business Plan - Business Insurance Certificate"
-                         [disableUploads]="isOpenedByLGForApproval" [enableFileDeletion]="!isOpenedByLGForApproval"
-                         fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
-                         [useDocumentTypeForName]="true" [entityId]="application?.id"
-                         [uploadHeader]="'TO UPLOAD BUSINESS INSURANCE CERTIFICATE, DRAG FILES HERE OR'">
-      </app-file-uploader>
-    </section>
-  </div>
+    <div *ngIf="isBrewery()">
+      <hr>
+      <!-- Brewery Question-->
 
-  <!-- TO DO wineries questions-->
+      <app-field label="Will your brewery operate in conjunction with a liquor primary (brewpub) at the same site?"
+                 [valid]="isValidOrNotTouched('mfgBrewPubOnSite')" [showChevrons]="false"
+                 errorMessage="Specify whether you will be operating in conjunction with a brewpub" [isFullWidth]="true">
+        <mat-radio-group formControlName="mfgBrewPubOnSite">
+          <mat-radio-button class="mr-5" value="Yes">Yes</mat-radio-button>
+          <mat-radio-button class="mr-5" value="No">No</mat-radio-button>
+        </mat-radio-group>
+      </app-field>
 
-<!--/div-->
+
+      <section *ngIf="isBrewPub()">
+
+        <app-field label="Will product be piped in from the brewery to serve on tap?"
+                   [valid]="isValidOrNotTouched('mfgPipedInProduct')" [showChevrons]="false"
+                   errorMessage="Specify whether you will be using piped in products" [isFullWidth]="true">
+          <mat-radio-group formControlName="mfgPipedInProduct">
+            <mat-radio-button class="mr-5" value="Yes">Yes</mat-radio-button>
+            <mat-radio-button class="mr-5" value="No">No</mat-radio-button>
+          </mat-radio-group>
+        </app-field>
+
+        <!--p>
+            Upload a sample of the brew sheets you intend to use in your
+            production:
+          </p>
+          <section>
+            <app-file-uploader *ngIf="application?.id" documentType="Business Plan - Sample Brew Sheet"
+                               [disableUploads]="isOpenedByLGForApproval" [enableFileDeletion]="!isOpenedByLGForApproval"
+                               fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+                               [useDocumentTypeForName]="true" [entityId]="application?.id"
+                               [uploadHeader]="'TO UPLOAD SAMPLE BREW SHEET, DRAG FILES HERE OR'">
+            </app-file-uploader>
+          </section>
+        </section-->
+
+        <div *ngIf="isDistillery()">
+          <hr>
+          <h4>Distribution Plan</h4>
+          <p>Upload a description of how you plan to distribute your packaged product:</p>
+          <section>
+            <app-file-uploader *ngIf="application?.id" documentType="Business Plan - Distribution Plan"
+                               [disableUploads]="isOpenedByLGForApproval" [enableFileDeletion]="!isOpenedByLGForApproval"
+                               fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+                               [useDocumentTypeForName]="true" [entityId]="application?.id"
+                               [uploadHeader]="'TO UPLOAD DISTRIBUTION PLAN, DRAG FILES HERE OR'">
+            </app-file-uploader>
+          </section>
+        </div>
+
+        <div *ngIf="isWinery()">
+          <hr>
+          <h4>Business Insurance</h4>
+          <p>Upload your business insurance certificate:</p>
+          <section>
+            <app-file-uploader *ngIf="application?.id" documentType="Business Plan - Business Insurance Certificate"
+                               [disableUploads]="isOpenedByLGForApproval" [enableFileDeletion]="!isOpenedByLGForApproval"
+                               fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+                               [useDocumentTypeForName]="true" [entityId]="application?.id"
+                               [uploadHeader]="'TO UPLOAD BUSINESS INSURANCE CERTIFICATE, DRAG FILES HERE OR'">
+            </app-file-uploader>
+          </section>
+        </div>
+
+        <!-- TO DO wineries questions-->
+        <!--/div-->
