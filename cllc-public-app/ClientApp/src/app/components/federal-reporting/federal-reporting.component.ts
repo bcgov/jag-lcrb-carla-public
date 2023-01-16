@@ -120,17 +120,39 @@ export class FederalReportingComponent implements OnInit {
           || l.licenceTypeName === "Section 119 Authorization"
           || l.licenceTypeName === "S119 CRS Authorization"
           || l.licenceTypeName === "Producer Retail Store");
+        
         this.monthlyReports = results[1];
-        if (this.monthlyReports.length > 0) {
+        if (this.licenses?.length > 0 && this.monthlyReports.length > 0) {
           this.setYearMonthDropDownListDataSource(this.monthlyReports[0].reportingPeriodYear);
-        }
-        if (this.licenses?.length > 0) {
           this.selectedLicense = this.licenses[0];
-          this.getMonthlyReports(this.licenses[0].licenseId,this.selectedYear,this.selectedMonth);         
+          this.selectedMonthlyReport = this.monthlyReports[0];
+          //this.getMonthlyReport(this.licenses[0].licenseId, this.selectedYear, this.selectedMonth);
+          this.renderMonthlyReport();
         }       
       });
   }
   
+
+  getMonthlyReport(licenceId, year = null, month = null) {
+    this.loadingMonthlyReports = true;
+    return forkJoin([
+      this.monthlyReportDataService.getMonthlyReportByLicenceYearMonth(licenceId, year, month)
+    ])
+      .subscribe(([monthlyReport]) => {       
+        this.selectedMonthlyReport = monthlyReport;       
+        this.loadingMonthlyReports = false;
+      });
+  }
+  getMonthlyReports(licenceId) {
+    this.loadingMonthlyReports = true;
+    return forkJoin([
+      this.monthlyReportDataService.getMonthlyReportsByLicence(licenceId)
+    ])
+      .subscribe(([monthlyReports]) => {
+        this.monthlyReports = monthlyReports;
+        this.loadingMonthlyReports = true;
+      });
+  }
 
   private setYearMonthDropDownListDataSource(year:string) {
     this.selectedYear = year;
@@ -140,8 +162,7 @@ export class FederalReportingComponent implements OnInit {
       }
     }
 
-    if (this.reportYears.length > 0) {
-     
+    if (this.reportYears.length > 0) {     
       this.reportMonths = [];
       for (let i = 0; i < this.monthlyReports.length; i++) {
         if (this.monthlyReports[i].reportingPeriodYear == this.selectedYear &&
@@ -149,53 +170,40 @@ export class FederalReportingComponent implements OnInit {
             this.reportMonths.push(this.monthlyReports[i].reportingPeriodMonth);
           }
       }
-      this.selectedMonth = this.reportMonths.length > 0 ? this.reportMonths[0] : "";
-     
+      this.selectedMonth = this.reportMonths.length > 0 ? this.reportMonths[0] : "";     
     }
-  }
-
-  
+  }  
   
   handleMonthlyReportSelectedYearChanged(year: string) {
     if (this.selectedYear != year) {      
       this.setYearMonthDropDownListDataSource(year);
-      this.selectedMonthlyReportIndex =
-        this.shownMonthlyReports.findIndex(r => r.reportingPeriodYear == year && r.reportingPeriodMonth == this.selectedMonth);
+      this.getMonthlyReport(this.selectedLicense?.licenseId, this.selectedYear, this.selectedMonth);
       this.renderMonthlyReport();
     }
   }
 
   handleMonthlyReportSelectedMonthChanged(month:string) {
     this.selectedMonth = month;
-    this.selectedMonthlyReportIndex =
-    this.shownMonthlyReports.findIndex(r => r.reportingPeriodYear == this.selectedYear && r.reportingPeriodMonth == this.selectedMonth);
+    this.getMonthlyReport(this.selectedLicense?.licenseId, this.selectedYear, this.selectedMonth);
     this.renderMonthlyReport();
   }
 
-  handleLicenceSelectedChanged() {  
+  handleLicenceSelectedChanged() {
+    this.monthlyReports = [];
+    this.selectedMonth = "";
+    this.selectedYear = "";
     this.getMonthlyReports(this.selectedLicense?.licenseId);
+
+    if (this.monthlyReports.length > 0) {
+      this.setYearMonthDropDownListDataSource(this.monthlyReports[0].reportingPeriodYear);
+    }
+    if (this.selectedMonth !="" && this.selectedYear !="") {
+      this.getMonthlyReport(this.selectedLicense?.licenseId, this.selectedYear, this.selectedMonth);
+      this.renderMonthlyReport();
+    } 
   }
 
-  getMonthlyReports(licenceId, year=null,month=null) {
-    this.loadingMonthlyReports = true;
-    return forkJoin([
-      this.monthlyReportDataService.getMonthlyReportsByLicence(licenceId)
-    ])
-      .subscribe(([monthlyReports]) => {
-        this.monthlyReports = monthlyReports;       
-        this.shownMonthlyReports = this.monthlyReports.filter((rep) => rep.licenseId === licenceId);
-        if (year != null && year !="" && month !=null && month !="") {
-          this.selectedMonthlyReportIndex =
-            this.shownMonthlyReports.findIndex(r => r.reportingPeriodYear ==year && r.reportingPeriodMonth==month);
-        } else if (this.monthlyReports.length > 0) {
-          this.selectedMonthlyReportIndex = 0;
-        }
-        
-        this.renderMonthlyReport();
-        this.loadingMonthlyReports = false;
-      });
-  }
-
+ 
   save(submit = false) {
     // main report fields
     const statusCode = submit ? this.monthlyReportStatusEnum.Submitted : this.monthlyReportStatusEnum.Draft;
@@ -219,7 +227,8 @@ export class FederalReportingComponent implements OnInit {
       .subscribe(([report]) => {
         const fullListIndex = this.monthlyReports.findIndex(rep => rep.monthlyReportId === report.monthlyReportId);
         this.monthlyReports[fullListIndex] = report;
-        this.shownMonthlyReports[this.selectedMonthlyReportIndex] = report;
+        //this.shownMonthlyReports[this.selectedMonthlyReportIndex] = report;
+        this.selectedMonthlyReport = report;
         this.renderMonthlyReport();
         this.loadingMonthlyReports = false;
       });
@@ -227,12 +236,10 @@ export class FederalReportingComponent implements OnInit {
     
   renderMonthlyReport() {
     this.loadingMonthlyReports = true;
-    if (this.shownMonthlyReports.length < 1) {
+    if (this.selectedMonthlyReport==null) {
       this.loadingMonthlyReports = false;
       return;
-    }
-    this.selectedMonthlyReport = this.shownMonthlyReports[this.selectedMonthlyReportIndex];
-
+    }   
     // Update product forms
     this.productForms = this.selectedMonthlyReport.inventorySalesReports.map(
       (report) => {
@@ -294,7 +301,7 @@ export class FederalReportingComponent implements OnInit {
    
     // Update monthly report form
     this.reportForm.patchValue({
-      ...this.shownMonthlyReports[this.selectedMonthlyReportIndex]
+      ...this.selectedMonthlyReport
     });
     this.loadingMonthlyReports = false;
   }
@@ -352,7 +359,7 @@ export class FederalReportingComponent implements OnInit {
   }
 
   get isProductInventorySelected() {
-    return this.productForms.some(report => report?.value?.selected);
+    return this.productForms?.some(report => report?.value?.selected);
   }
 
   hasInvalidProductForm() {
@@ -410,6 +417,7 @@ export class FederalReportingComponent implements OnInit {
     ];
     return monthNames[Number(monthNumber) - 1]; //+"  "+temp.reportingPeriodYear;
   }
+
   createProductForm(report: InventorySalesReport, selected = false) {
     const closingWeightValidators =
       [Validators.min(0), Validators.max(1000), Validators.pattern("^[0-9]+(\.[0-9]{1,3})?$")];
