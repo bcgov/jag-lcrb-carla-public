@@ -469,8 +469,9 @@
     SAVE FOR LATER
     <mat-progress-bar class="mt-1" *ngIf="saveForLaterInProgress" mode="indeterminate"></mat-progress-bar>
   </button>
-  <button mat-raised-button color="primary" (click)="submitApplication()">
+  <button mat-raised-button color="primary" (click)="submitApplication()" [disabled]="submitReqInProgress" >
     SUBMIT &amp; PAY
+    <mat-progress-bar class="mt-1" *ngIf="submitReqInProgress" mode="indeterminate"></mat-progress-bar>
   </button>
   <span style="color: #1a5a96; float: right; padding-top: 10px;">
     <span (click)="cancelApplication()">
