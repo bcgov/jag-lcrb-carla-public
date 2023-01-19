@@ -34,6 +34,7 @@ import { AreaCategory } from '@models/service-area.model';
 import { faExclamationCircle, faTrashAlt, faUniversity } from '@fortawesome/free-solid-svg-icons';
 import { faCreditCard, faIdCard, faSave } from '@fortawesome/free-regular-svg-icons';
 import { RelatedLicence } from "@models/related-licence";
+import { ApplicationTypes } from '../../../shared/ApplicationTypes';
 
 const ServiceHours = [
   '00:00', '00:15', '00:30', '00:45', '01:00', '01:15', '01:30', '01:45', '02:00', '02:15', '02:30', '02:45', '03:00',
@@ -125,7 +126,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   uploadedCentralSecuritiesRegisterDocuments: number = 0;
   tiedHouseExemptions: { jobNumber: string, displayName: string }[] = [];
   licenseToRemove: RelatedLicence;
-
+  isUploadDeclarations = false;
   get isOpenedByLGForApproval(): boolean {
     let openedByLG = false;
     if (this.account && this.application && this.application.applicant &&
@@ -1394,7 +1395,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
         this.validationMessages.push('Please confirm  picnic area declaration local government/First Nation supports the proposed capacity for the picnic area endorsement.');
       }
     }
-
+    if (this.isUploadDeclarations != true && (this.application?.applicationType.name == ApplicationTypes.LoungeAreaEndorsement || this.application?.applicationType.name == ApplicationTypes.SpecialEventAreaEndorsement)) {
+      this.validationMessages.push('Upload Declarations is required.');
+    }
     return valid && (this.form.valid || this.form.disabled);
   }
 
