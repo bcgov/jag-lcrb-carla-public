@@ -5,7 +5,7 @@
 
   <section *ngIf="showQuestion()">
     <div>
-      <mat-checkbox formControlName="isPermittedInZoning">
+      <mat-checkbox formControlName="isPermittedInZoning" (change)="isPermittedInZoningChanged()" >
         <section *ngIf="application?.applicationType?.name === 'Manufacturer Location Change' ">
           <span>
             By checking this box, I confirm that current zoning at the proposed location permits a Manufacturer.
