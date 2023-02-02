@@ -106,14 +106,14 @@
           errorMessage="Please enter the maximum attendance (must be a number)" [isFullWidth]="true">
           <input class="form-control" type="number" formControlName="maxAttendance">
         </app-field>
-        <app-field class="col-md-4 col-xs-12" label="Minors Attending" [required]="true"
-          [valid]="isValidOrNotTouched('minorsAttending')" errorMessage="Please indicate if minors are attending"
-          [isFullWidth]="true">
+        <!--<app-field class="col-md-4 col-xs-12" label="Minors Attending" [enabled]="false" [disabled]="true" [required]="true"
+                   [valid]="isValidOrNotTouched('minorsAttending')" errorMessage="Please indicate if minors are attending"
+                   [isFullWidth]="true">
           <select class="form-control" formControlName="minorsAttending">
             <option value="true">Yes</option>
             <option value="false">No</option>
           </select>
-        </app-field>
+        </app-field>-->
       </div>
       <div class="row">
         <app-field class="col-md-4 col-xs-12" label="Event Type" [required]="true"
