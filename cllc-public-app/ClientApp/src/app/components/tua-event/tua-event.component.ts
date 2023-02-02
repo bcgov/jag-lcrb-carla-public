@@ -13,6 +13,7 @@ import { faSave } from '@fortawesome/free-regular-svg-icons';
 import { faQuestionCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { LicenceEventSchedule } from '@models/licence-event-schedule';
 import { License } from '@models/license.model';
+import { HoursOfService } from '../../models/endorsement.model';
 
 @Component({
   selector: 'app-tua-event',
@@ -114,6 +115,7 @@ export class TuaEventComponent extends FormBase implements OnInit {
   }
 
   ngOnInit() {
+   
   }
 
   get status(): string {
@@ -413,6 +415,86 @@ export class TuaEventComponent extends FormBase implements OnInit {
     if (this.timeForms.controls.length < 1) {
       this.validationMessages.push('No event dates selected');
     }
+    // Validate Capacity
+    var locationAttendance = 0;
+    for (var i = 0; i < this.form.value.eventLocations.length; i++) {
+      locationAttendance += Number(this.form.value.eventLocations[i].attendance);
+    }
+    if (locationAttendance > this.licence.endorsements[0].areaCapacity) {
+      this.validationMessages.push('Capacity cannot exceed the current licence limits');
+    }
+    //Validate Timing 
+    if (this.timeForms.length > 0) {
+      var hoursOfServiceList = this.licence.endorsements[0].hoursOfServiceList;
+      if (this.timeForms.length > 1) {
+        for (var i = 0; i < this.timeForms.length; i++) {
+          var startDate = this.timeForms.value[i].date;
+          var dayOfWeek = startDate.getDay();
+          var hoursOfService = hoursOfServiceList.filter(k => k.dayOfWeek == dayOfWeek)[0];
+          if (hoursOfService == null || hoursOfService == undefined) {
+            this.validationMessages.push('Service hours should be with license service hours');
+            break;
+          } else {
+            var liquorStartTimeHour = this.timeForms.value[i].startTime.hour;
+            var liquorStartTimeMinute = this.timeForms.value[i].startTime.minute;
+            var liquorEndTimeHour = this.timeForms.value[i].endTime.hour;
+            var liquorEndTimeMinute = this.timeForms.value[i].endTime.minute;
+            if (hoursOfService.endTimeHour < 5 && liquorEndTimeHour > 12) {
+              hoursOfService.endTimeHour += 24;
+            }
+            if (liquorStartTimeHour < hoursOfService.startTimeHour ||
+              (liquorStartTimeHour == hoursOfService.startTimeHour
+                && liquorStartTimeMinute < hoursOfService.startTimeMinute)) {
+              this.validationMessages.push('Service hours should be with license service hours');
+              break;
+            }
+            if (liquorEndTimeHour > hoursOfService.endTimeHour ||
+              (liquorEndTimeHour == hoursOfService.endTimeHour
+                && liquorEndTimeMinute > hoursOfService.endTimeMinute)) {
+              this.validationMessages.push('Service hours should be with license service hours');
+              break;
+            }
+
+          }
+
+        }
+
+      }
+      else {
+        var startDate = this.form.value.startDate;
+        var dayOfWeek = startDate.getDay();
+        var existedHoursOfService = hoursOfServiceList.filter(k => k.dayOfWeek == dayOfWeek)[0];
+        var hoursOfService = new HoursOfService();
+        hoursOfService.dayOfWeek = existedHoursOfService.dayOfWeek;
+        hoursOfService.startTimeHour = existedHoursOfService.startTimeHour;
+        hoursOfService.startTimeMinute = existedHoursOfService.startTimeMinute;
+        hoursOfService.endTimeHour = existedHoursOfService.endTimeHour;
+        hoursOfService.endTimeMinute = existedHoursOfService.endTimeMinute;
+
+        var liquorStartTimeHour = this.timeForms.value[0].startTime.hour;
+        var liquorStartTimeMinute = this.timeForms.value[0].startTime.minute;
+        var liquorEndTimeHour = this.timeForms.value[0].endTime.hour;
+        var liquorEndTimeMinute = this.timeForms.value[0].endTime.minute;
+        if (hoursOfService.endTimeHour < 5 && liquorEndTimeHour > 12) {
+          hoursOfService.endTimeHour += 24;
+        }
+        if (liquorStartTimeHour < hoursOfService.startTimeHour ||
+          (liquorStartTimeHour == hoursOfService.startTimeHour
+            && liquorStartTimeMinute < hoursOfService.startTimeMinute)) {
+          this.validationMessages.push('Service hours should be with license service hours');
+        }
+        if (liquorEndTimeHour > hoursOfService.endTimeHour ||
+          (liquorEndTimeHour == hoursOfService.endTimeHour
+            && liquorEndTimeMinute > hoursOfService.endTimeMinute)) {
+          this.validationMessages.push('Service hours should be with license service hours');
+        }
+      }
+    }
+  
+
+
+
+
 
     this.markControlsAsTouched(this.form);
 
