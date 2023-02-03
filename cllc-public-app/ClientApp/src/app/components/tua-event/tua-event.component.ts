@@ -64,7 +64,7 @@ export class TuaEventComponent extends FormBase implements OnInit {
     endDate: ['', [Validators.required]],
 
     maxAttendance: ['', [Validators.required, Validators.max(100000)]],
-    minorsAttending: ['', [Validators.required]],
+    //minorsAttending: ['', [Validators.required]],
     tuaEventType: ['', [Validators.required]],
     eventTypeDescription: ['', [Validators.required]],
 
@@ -388,7 +388,7 @@ export class TuaEventComponent extends FormBase implements OnInit {
       startDate: 'Please enter the start date',
       endDate: 'Please enter the end date',
       maxAttendance: 'Please enter the maximum attendance (must be a number)',
-      minorsAttending: 'Please indicate if minors are attending',
+      //minorsAttending: 'Please indicate if minors are attending',
       tuaEventType: 'Please indicate the type of event',
       eventTypeDescription: 'Please enter a description of the event',
       isClosedToPublic: 'Please indicate if licensed establishment will be closed',
