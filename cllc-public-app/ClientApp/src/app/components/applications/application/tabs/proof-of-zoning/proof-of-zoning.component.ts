@@ -32,7 +32,9 @@ export class ProofOfZoningComponent extends FormBase implements OnInit {
     // });
     //this.form.patchValue(this.application);
   }
-
+  isPermittedInZoningChanged() {
+    this.application.isPermittedInZoning = !this.application.isPermittedInZoning;
+  }
   showQuestion() {
 
     const licenceTypes = [
