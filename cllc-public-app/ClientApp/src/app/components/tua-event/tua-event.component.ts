@@ -426,6 +426,7 @@ export class TuaEventComponent extends FormBase implements OnInit {
     //Validate Timing 
     if (this.timeForms.length > 0) {
       var hoursOfServiceList = this.licence.endorsements[0].hoursOfServiceList;
+      //Check if different timings
       if (this.timeForms.length > 1) {
         for (var i = 0; i < this.timeForms.length; i++) {
           var startDate = this.timeForms.value[i].date;
@@ -439,8 +440,11 @@ export class TuaEventComponent extends FormBase implements OnInit {
             var liquorStartTimeMinute = this.timeForms.value[i].startTime.minute;
             var liquorEndTimeHour = this.timeForms.value[i].endTime.hour;
             var liquorEndTimeMinute = this.timeForms.value[i].endTime.minute;
-            if (hoursOfService.endTimeHour < 5 && liquorEndTimeHour > 12) {
+            if (hoursOfService.endTimeHour < hoursOfService.startTimeHour) {
               hoursOfService.endTimeHour += 24;
+            }
+            if (liquorEndTimeHour < liquorStartTimeHour) {
+              liquorEndTimeHour += 24;
             }
             if (liquorStartTimeHour < hoursOfService.startTimeHour ||
               (liquorStartTimeHour == hoursOfService.startTimeHour
@@ -461,6 +465,7 @@ export class TuaEventComponent extends FormBase implements OnInit {
 
       }
       else {
+        //Every day at the same time
         var startDate = this.form.value.startDate;
         var dayOfWeek = startDate.getDay();
         var existedHoursOfService = hoursOfServiceList.filter(k => k.dayOfWeek == dayOfWeek)[0];
@@ -475,9 +480,13 @@ export class TuaEventComponent extends FormBase implements OnInit {
         var liquorStartTimeMinute = this.timeForms.value[0].startTime.minute;
         var liquorEndTimeHour = this.timeForms.value[0].endTime.hour;
         var liquorEndTimeMinute = this.timeForms.value[0].endTime.minute;
-        if (hoursOfService.endTimeHour < 5 && liquorEndTimeHour > 12) {
+        if (hoursOfService.endTimeHour < hoursOfService.startTimeHour) {
           hoursOfService.endTimeHour += 24;
         }
+        if (liquorEndTimeHour < liquorStartTimeHour) {
+          liquorEndTimeHour += 24;
+        }
+      
         if (liquorStartTimeHour < hoursOfService.startTimeHour ||
           (liquorStartTimeHour == hoursOfService.startTimeHour
             && liquorStartTimeMinute < hoursOfService.startTimeMinute)) {
