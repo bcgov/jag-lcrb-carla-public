@@ -1709,6 +1709,18 @@
     </section>
   </div>
 
+    <div *ngIf="application?.applicationType.name == 'Manufacturer'">
+          <hr><br>
+
+              <app-field label="Please list and describe products other than beer, wine, or distiller spirits, you intend to produce once licensed. (e.g. Alcoholic kombucha, Soju, hard seltzers or other alcohol based Ready to Drink (RTD) products)" required>
+                <textarea required style="width: 800px;" class="form-control"
+                          formControlName="productslistanddescription"></textarea>
+              </app-field>
+          <!--<textarea required style="width: 800px;" class="form-control"
+                    formControlName="productslistanddescription"></textarea>-->
+
+        </div>
+
   <div *ngIf="showSitePhotos()">
 
     <hr><br>
