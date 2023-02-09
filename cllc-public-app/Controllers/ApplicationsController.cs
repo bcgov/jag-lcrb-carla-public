@@ -1433,6 +1433,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     if (!string.IsNullOrEmpty(item?.ParentApplicationId))
                         adoxioApplication.AdoxioParentApplicationIDODataBind =
                             _dynamicsClient.GetEntityURI("adoxio_applications", item.ParentApplicationId);
+
+                    //LCSD-6495: set endorsement application is free if not licence assigned with it.
+                    if (item?.AssignedLicence ==null)
+                    {
+                        applicationType.AdoxioIsfree = 845280000;
+                    }
                 }
 
                 adoxioApplication.AdoxioApplicationTypeIdODataBind =
