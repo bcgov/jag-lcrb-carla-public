@@ -1368,10 +1368,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (count >= 8 && item.ApplicationType.Name == "Cannabis Retail Store")
                 return BadRequest("8 applications have already been submitted. Can not create more");
             var adoxioApplication = new MicrosoftDynamicsCRMadoxioApplication();
+            //LCSD-6495 set applicationType is free of if this applicationType IsEndorsement and Non licence assigned to this application.
+            if (item.ApplicationType.IsEndorsement.HasValue && item.ApplicationType.IsEndorsement.Value && item.AssignedLicence == null) {
+                item.ApplicationType.IsFree = true;
+            }
             // copy received values to Dynamics Application
             adoxioApplication.CopyValues(item);
             adoxioApplication.AdoxioApplicanttype = (int?)item.ApplicantType;
-
+            
             // fix for an invalid licence sub category
             if (adoxioApplication._adoxioLicencesubcategoryidValue != null && adoxioApplication._adoxioLicencesubcategoryidValue == "0")  adoxioApplication.AdoxioLicenceSubCategoryId = null;
 
@@ -1435,10 +1439,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             _dynamicsClient.GetEntityURI("adoxio_applications", item.ParentApplicationId);
 
                     //LCSD-6495: set endorsement application is free if not licence assigned with it.
-                    if (item?.AssignedLicence ==null)
-                    {
-                        applicationType.AdoxioIsfree = 845280000;
-                    }
+                    //if (item?.AssignedLicence ==null)
+                    //{
+                    //    applicationType.AdoxioIsfree = 845280000;
+                    //}
                 }
 
                 adoxioApplication.AdoxioApplicationTypeIdODataBind =
