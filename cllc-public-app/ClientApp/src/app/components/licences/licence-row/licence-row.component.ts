@@ -71,6 +71,8 @@ export class LicenceRowComponent extends FormBase implements OnInit {
   eventStatus = EventStatus;
   eventCategory = EventCategory;
   renewalStarted = false;
+  requestStarted = false;
+  requestID: number=-1;
 
   @Input()
   available: boolean;
@@ -96,7 +98,8 @@ export class LicenceRowComponent extends FormBase implements OnInit {
   ngOnInit() {
 
 
-
+    this.requestStarted = false;
+    this.requestID = -1;
     this.licences.forEach((licence) => { 
       this.licenceForms[licence.licenseId] = this.fb.group({
         phone: [licence.establishmentPhoneNumber],
@@ -423,6 +426,8 @@ export class LicenceRowComponent extends FormBase implements OnInit {
         this.router.navigateByUrl(`/account-profile/${actionApplication.applicationId}`);
         // otherwise if it was paid for
       } else if (actionApplication.isPaid === true) {
+        this.requestStarted = false;
+        this.requestID = -1;
         // prevent a re-submission until the application status is no longer active
         this.snackBar.open(`${actionName} has already been submitted and is under review`,
           "Warning",
@@ -434,9 +439,13 @@ export class LicenceRowComponent extends FormBase implements OnInit {
       this.busy = this.licenceDataService.createApplicationForActionType(licence.licenseId, actionName)
         .pipe(takeWhile(() => this.componentActive))
         .subscribe(data => {
+          this.requestStarted = false;
+          this.requestID = -1;
           this.router.navigateByUrl(`/account-profile/${data.id}`);
         },
           () => {
+            this.requestStarted = false;
+            this.requestID = -1;
             this.snackBar.open(`Error running licence action for ${actionName}`,
               "Fail",
               { duration: 3500, panelClass: ["red-snackbar"] });
@@ -521,6 +530,11 @@ export class LicenceRowComponent extends FormBase implements OnInit {
         );
     }
     
+  }
+
+  startRequest(index:number) {
+    this.requestStarted = true;
+    this.requestID = index;
   }
 
   hasEndorsement(licence: License, endorsementId: string) {
