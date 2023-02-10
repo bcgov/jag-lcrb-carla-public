@@ -260,25 +260,21 @@
                                 </div>
                             </div>
 
-  <!-- Indicate third party operator relationship established-->
-  <ng-container *ngIf="item.thirdPartyOperatorAccountName">
-    <br>
-    <span>Operated By: </span>
-    <strong
-      style="color: #1a5a96;">
-      {{item.thirdPartyOperatorAccountName}}
-    </strong>    <a *ngIf="item.operated && !item.isOperated"
-    [routerLink]="[ '/terminate-third-party-operator/' + item.licenseId]" alt="Terminate Third-Party Operator Relationship">
-     <fa-icon [icon]="faTrashAlt" style="margin-right: 10px;"></fa-icon></a>
+                          <!-- Indicate third party operator relationship established-->
+                          <ng-container *ngIf="item.thirdPartyOperatorAccountName">
+                            <br>
+                            <span>Operated By: </span>
+                            <strong
+                              style="color: #1a5a96;">
+                              {{item.thirdPartyOperatorAccountName}}
+                            </strong>    <a *ngIf="item.operated && !item.isOperated"
+                            [routerLink]="[ '/terminate-third-party-operator/' + item.licenseId]" alt="Terminate Third-Party Operator Relationship">
+                             <fa-icon [icon]="faTrashAlt" style="margin-right: 10px;"></fa-icon></a>
+                             <br>
+                            <span>Licenced To: </span><strong style="color: #1a5a96;">{{item.currentOwner}}</strong>
+                          </ng-container>
 
-     <br>
-
-    <span>Licenced To: </span><strong style="color: #1a5a96;">{{item.currentOwner}}</strong>
-
-
-  </ng-container>
-
-</td>
+                      </td>
 
                         <!-- REQUEST CHANGES column -->
                         <td style="background-color: #E1E8F2; padding: 10px;">
@@ -286,40 +282,62 @@
                             <div *ngIf="!item.isOperated">
                                 <div *ngIf="showLicenceTransferAction(item)">
                                     <p>
-                                        <a [routerLink]="[ '/ownership-transfer/' + item.licenseId]">
-                                            <span><fa-icon [icon]="faExchangeAlt" style="margin-right: 10px;"></fa-icon>
-                                                Transfer Licence
-                                            </span>
-                                        </a>
+                                      <a [routerLink]="[ '/ownership-transfer/' + item.licenseId]">
+                                        <button mat-raised-button color="secondary" style="margin-right: 10px;"
+                                                (click)="startRequest(5001)" [disabled]="requestStarted && requestID==5001">
+                                          <span>
+                                            <fa-icon [icon]="faExchangeAlt" style="margin-right: 10px;"></fa-icon>
+                                            Transfer Licence
+                                          </span>
+                                          <mat-progress-bar *ngIf="requestStarted && requestID==5001" mode="indeterminate"></mat-progress-bar>
+                                        </button>
+                                      </a>
                                     </p>
                                 </div>
                                 <!-- if there is a third party application in progress, we don't show the ability to submit a new application-->
                                 <div *ngIf="showAddOrChangeThirdPartyOperator(item)">
                                     <p>
-                                        <a [routerLink]="[ '/third-party-operator/' + item.licenseId]">
-                                            <span><fa-icon [icon]="faExchangeAlt" style="margin-right: 10px;"></fa-icon>Add or
-                                                Change a Third Party Operator</span>
-                                        </a>
+                                      <a [routerLink]="[ '/third-party-operator/' + item.licenseId]">
+                                        <button mat-raised-button color="secondary" style="margin-right: 10px;"
+                                                (click)="startRequest(5011)" [disabled]="requestStarted && requestID==5011">
+                                          <span>
+                                            <fa-icon [icon]="faExchangeAlt" style="margin-right: 10px;"></fa-icon>Add or
+                                            Change a Third Party Operator
+                                          </span>
+                                          <mat-progress-bar *ngIf="requestStarted && requestID==5011" mode="indeterminate"></mat-progress-bar>
+                                        </button>                                    
+                                      </a>
                                     </p>
                                 </div>
 
                                 <div *ngIf="showTiedHouseExemption(item)">
                                   <p>
-                                      <a [routerLink]="[ '/tied-house-exemption/' + item.licenseId]">
-                                          <span><fa-icon [icon]="faExchangeAlt" style="margin-right: 10px;"></fa-icon>
-                                              Invitation for Tied House Exemption
-                                          </span>
-                                      </a>
+                                    <a [routerLink]="[ '/tied-house-exemption/' + item.licenseId]">
+                                  
+                                      <button mat-raised-button color="secondary" style="margin-right: 10px;"
+                                              (click)="startRequest(5021)" [disabled]="requestStarted && requestID==5021">
+                                        <span>
+                                          <fa-icon [icon]="faExchangeAlt" style="margin-right: 10px;"></fa-icon>
+                                          Invitation for Tied House Exemption
+                                        </span>
+                                        <mat-progress-bar *ngIf="requestStarted && requestID==5021" mode="indeterminate"></mat-progress-bar>
+                                      </button>
+                                    </a>
                                   </p>
                               </div>
                                 <ng-container *ngIf="isActive(item) && actionsVisible(item)">
-                                    <p *ngFor="let action of item.allowedActions">
+                                    <p *ngFor="let action of item.allowedActions; let requestActionID = index;">
                                         <ng-container *ngIf="actionVisible(item, action.id)">
-                                            <a href="javascript:void(0);" (click)="doAction(item,action.name)">
-                                                <span><fa-icon [icon]="faBolt" style="margin-right: 10px;"></fa-icon>
-                                                    {{action?.actionText}}
-                                                </span>
-                                            </a>
+                                          <a href="javascript:void(0);" (click)="doAction(item,action.name)">                                        
+                                            <button mat-raised-button color="secondary" style="margin-right: 10px;"
+                                                    (click)="startRequest(requestActionID)" [disabled]="requestStarted && requestID==requestActionID">
+                                              <span>
+                                                <fa-icon [icon]="faBolt" style="margin-right: 10px;"></fa-icon>
+                                                {{action?.actionText}}
+                                              </span>
+                                              <mat-progress-bar *ngIf="requestStarted && requestID==requestActionID" mode="indeterminate"></mat-progress-bar>
+                                            </button>
+                                          </a>
                                         </ng-container>
                                     </p>
                                 </ng-container>
@@ -391,15 +409,15 @@
       </a>
     </section> -->
   </div>
-  <section *ngIf="item.isOperated">
-    <i>
-      3rd-Party Operators cannot request changes to the
-      licence. All
-      change requests
-      for the licence must be requested by the Licensee.
-    </i>
-  </section>
-</td>
+                          <section *ngIf="item.isOperated">
+                            <i>
+                              3rd-Party Operators cannot request changes to the
+                              licence. All
+                              change requests
+                              for the licence must be requested by the Licensee.
+                            </i>
+                          </section>
+                        </td>
 </tr>
 
 <tr *ngIf="item?.events !== undefined && item?.events.length > 0">
