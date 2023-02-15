@@ -90,7 +90,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         result = result || allowLGAccess && !isDelete;
                         folderName = application.GetDocumentFolderName();
                     }
-                    
+
                     break;
                 case "contact":
                     var contact = await _dynamicsClient.GetContactById(id).ConfigureAwait(true);
@@ -99,7 +99,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         result = CurrentUserHasAccessToContactOwnedBy(contact.Contactid);
                         folderName = contact.GetDocumentFolderName();
                     }
-                    
+
                     break;
                 case "worker":
                     var worker = await _dynamicsClient.GetWorkerById(id).ConfigureAwait(true);
@@ -116,18 +116,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         result = CurrentUserHasAccessToAccount(eventEntity._adoxioAccountValue);
                         folderName = eventEntity.GetDocumentFolderName();
                     }
-                    
+
                     break;
             }
 
-            if (folderName != null && result  && relativeUrl != null) // do a case insensitive comparison of the first part.
+            if (folderName != null && result && relativeUrl != null) // do a case insensitive comparison of the first part.
             {
                 int slashPos = relativeUrl.IndexOf("/");
-                if (slashPos != -1  && slashPos < relativeUrl.Length)
+                if (slashPos != -1 && slashPos < relativeUrl.Length)
                 {
                     slashPos = relativeUrl.IndexOf("/", slashPos + 1);
                 }
-                result = relativeUrl.ToUpper().Substring(slashPos + 1).StartsWith(folderName.ToUpper());
+                if (entityName.ToLower() != "account")
+                {
+                    result = relativeUrl.ToUpper().Substring(slashPos + 1).StartsWith(folderName.ToUpper());
+                }
             }
 
             return result;
@@ -144,7 +147,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private async Task<bool> CanAccessEntityFile(string entityName, string entityId, string documentType, string serverRelativeUrl, bool isDelete = false)
         {
             var logUrl = WordSanitizer.Sanitize(serverRelativeUrl);
-            
+
             var result = await CanAccessEntity(entityName, entityId, serverRelativeUrl, isDelete).ConfigureAwait(true);
             //get list of files for entity
             var hasFile = false;
@@ -694,7 +697,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var data = ms.ToArray();
 
             // Check for a bad file type.
-            
+
             var mimeTypes = new MimeTypes();
 
             var mimeType = mimeTypes.GetMimeType(data);
@@ -748,7 +751,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
             }
 
-            
+
 
             return new JsonResult(result);
         }
