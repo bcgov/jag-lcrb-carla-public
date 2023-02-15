@@ -603,16 +603,17 @@
               </div>
             </section>
 
-            <!--<app-field [valid]="!showValidationMessages || form.get('authorizedToSubmit').valid"
-       errorMessage="Please affirm that you are authorized to submit the application." [showChevrons]="false">-->
-            <mat-checkbox [(ngModel)]="isUploadDeclarations">
+            <mat-checkbox formControlName="uploadDeclarations">
+              I have read and understand the above terms and conditions.
+            </mat-checkbox>
+            <!--<mat-checkbox [(ngModel)]="isUploadDeclarations">
               <span class="error-states">*</span>
 
               <span class="ml-2">
                 I have read and understand the above terms and conditions.
               </span>
-            </mat-checkbox>
-            <!--</app-field>-->
+            </mat-checkbox>-->
+            
 
           </ng-container>
 

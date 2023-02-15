@@ -125,7 +125,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
   uploadedCentralSecuritiesRegisterDocuments: number = 0;
   tiedHouseExemptions: { jobNumber: string, displayName: string }[] = [];
   licenseToRemove: RelatedLicence;
-  isUploadDeclarations = false;
   listAndDescribeProducts: string | undefined;
   get isOpenedByLGForApproval(): boolean {
     let openedByLG = false;
@@ -255,7 +254,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
       federalLicenceName: ['', Validators.required],
       fpAddressStreet: ['', Validators.required],
       fpAddressCity: ['', Validators.required],
-      fpAddressPostalCode: ['', [Validators.required, Validators.pattern(CanadaPostalRegex)]]
+      fpAddressPostalCode: ['', [Validators.required, Validators.pattern(CanadaPostalRegex)]],
+      uploadDeclarations: ['', []],
     });
 
     this.form.get('pin').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
@@ -1400,7 +1400,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
         this.validationMessages.push('Please confirm  picnic area declaration local government/First Nation supports the proposed capacity for the picnic area endorsement.');
       }
     }
-    if (this.isUploadDeclarations != true && (this.application?.applicationType.name == ApplicationTypeNames.LoungeAreaEndorsment || this.application?.applicationType.name == ApplicationTypeNames.SpecialEventAreaEndorsement)) {
+    if (this.form.get('uploadDeclarations').value != true && (this.application?.applicationType.name == ApplicationTypeNames.LoungeAreaEndorsment || this.application?.applicationType.name == ApplicationTypeNames.SpecialEventAreaEndorsement)) {
       valid = false;
       this.validationMessages.push('Upload Declarations is required.');
     }
