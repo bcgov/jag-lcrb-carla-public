@@ -844,7 +844,13 @@ export class ApplicationComponent extends FormBase implements OnInit {
     return show;
 
   }
+  showServiceArea(): boolean {
+    let show = this.application
+      && this.application.applicationType
+      && this.application.applicationType.serviceAreas;
+    return show;
 
+  }
   showExteriorChangeQuestion(): boolean {
     let show = this.application &&
       (this.application.applicationType.name === ApplicationTypeNames.CRSEstablishmentNameChange
@@ -1223,15 +1229,14 @@ export class ApplicationComponent extends FormBase implements OnInit {
         this.validationMessages = this.validationMessages.concat(zoningErrors);
       }
     }
-    
+
     const serviceArea = ('areas' in this.form.get('serviceAreas').value) ? this.form.get('serviceAreas').value['areas'] : this.form.get('serviceAreas').value;
 
-    if (serviceArea.length === 0 && this.isLP())	{
+    //if (this.showServiceArea() && serviceArea.length === 0 && (this.isLP() || ApplicationTypeNames.SpecialEventAreaEndorsement || ApplicationTypeNames.LoungeAreaEndorsment) )	{
+    if (this.showServiceArea() && serviceArea.length === 0 ) {
       valid = false;
       this.validationMessages.push('At least one service area is required.');
     }
-    console.log('Is LP?:', this.isLP());
-    console.log('ServiceArea?:', serviceArea.length );
  
     if (this.application.applicationType.showAssociatesFormUpload &&
       ((this.uploadedAssociateDocuments || 0) < 1)) {
@@ -1393,6 +1398,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
         valid = false;
         this.validationMessages.push('Please confirm  picnic area declaration local government/First Nation supports the proposed capacity for the picnic area endorsement.');
       }
+    }
+
+    if (this.showZoning() && this.application.isPermittedInZoning != true) {
+        this.validationMessages.push('Zoning Declaration is required.');
     }
 
     return valid && (this.form.valid || this.form.disabled);
