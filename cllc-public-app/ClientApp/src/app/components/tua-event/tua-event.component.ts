@@ -115,7 +115,6 @@ export class TuaEventComponent extends FormBase implements OnInit {
   }
 
   ngOnInit() {
-   
   }
 
   get status(): string {
