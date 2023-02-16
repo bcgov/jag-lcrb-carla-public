@@ -236,8 +236,7 @@ export interface Application {
   fpAddressStreet: string;
   fpAddressCity: string;
   fpAddressPostalCode: string;
-  //LCSD-6366
-  productslistanddescription: string;
 
+  productslistanddescription: string;
   uploadDeclarations: boolean;
 }
