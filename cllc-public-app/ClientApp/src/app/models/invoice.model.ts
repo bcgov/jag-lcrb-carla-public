@@ -7,4 +7,6 @@ export class Invoice {
   totaltax: number;
   totalamount: number;
   customer: Account;
+  statecode: number;
+  statuscode: number;
 }
