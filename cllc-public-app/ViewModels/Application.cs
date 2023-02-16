@@ -748,7 +748,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string FederalLicenceName { get; set; }
         public string FPAddressCity {get;set;}
         public string FPAddressPostalCode {get;set;}
-        public string FPAddressStreet {get;set;}   
+        public string FPAddressStreet {get;set;}
 
+        public bool? UploadDeclarations { get; set; }
     }
 }
