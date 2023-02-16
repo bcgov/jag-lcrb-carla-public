@@ -256,7 +256,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
       fpAddressCity: ['', Validators.required],
       fpAddressPostalCode: ['', [Validators.required, Validators.pattern(CanadaPostalRegex)]],
       productsListAndDescription: ['', []],
-      fpAddressPostalCode: ['', [Validators.required, Validators.pattern(CanadaPostalRegex)]],
       uploadDeclarations: ['', []],
     });
 
