@@ -238,4 +238,6 @@ export interface Application {
   fpAddressPostalCode: string;
   //LCSD-6366
   productslistanddescription: string;
+
+  uploadDeclarations: boolean;
 }
