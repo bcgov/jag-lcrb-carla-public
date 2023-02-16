@@ -255,6 +255,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       fpAddressStreet: ['', Validators.required],
       fpAddressCity: ['', Validators.required],
       fpAddressPostalCode: ['', [Validators.required, Validators.pattern(CanadaPostalRegex)]],
+      productsListAndDescription: ['', []],
       uploadDeclarations: ['', []],
     });
 
@@ -1411,6 +1412,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
     if (this.showZoning() && this.application.isPermittedInZoning != true) {
       this.validationMessages.push('Zoning Declaration is required.');
+    }
+
+    if (!this.form.get('productsListAndDescription').value && this.application.applicationType.name === ApplicationTypeNames.MFG) {
+      valid = false;
+      this.validationMessages.push('Please add products list and description.');
     }
 
     return valid && (this.form.valid || this.form.disabled);

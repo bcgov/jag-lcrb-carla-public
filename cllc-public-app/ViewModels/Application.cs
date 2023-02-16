@@ -750,6 +750,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string FPAddressPostalCode {get;set;}
         public string FPAddressStreet {get;set;}
 
+        public string ProductsListAndDescription { get; set; }
+
         public bool? UploadDeclarations { get; set; }
     }
 }
