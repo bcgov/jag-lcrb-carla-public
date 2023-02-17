@@ -460,9 +460,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             var termsAndConditions = "";
-            foreach (var item in licence.AdoxioAdoxioLicencesAdoxioApplicationtermsconditionslimitationLicence)
+            //LCSD6247 - Market and Catering Event authorizations use event limitation preset
+            if (licenceEventVM.EventCategory == EventCategory.Catering || licenceEventVM.EventCategory == EventCategory.Market)
             {
-                termsAndConditions += $"<li>{item.AdoxioTermsandconditions}</li>";
+                foreach (var item in licenceEvent.AdoxioAdoxioEventAdoxioTermsconditionslimitationspresetLicenseeEventType)
+                {
+                    termsAndConditions += $"<li>{item.AdoxioContents}</li>";
+                }
+            }
+            else
+            {
+                foreach (var item in licence.AdoxioAdoxioLicencesAdoxioApplicationtermsconditionslimitationLicence)
+                {
+                    termsAndConditions += $"<li>{item.AdoxioTermsandconditions}</li>";
+                }
             }
 
             var parameters = new Dictionary<string, string>
