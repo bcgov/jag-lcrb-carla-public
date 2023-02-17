@@ -7690,6 +7690,246 @@
         }
       }
     },
+    "/adoxio_complianceinvestigation_related_partyset": {
+      "get": {
+        "tags": [
+          "complianceinvestigation_related_partyset"
+        ],
+        "summary": "Get entities from adoxio_complianceinvestigation_related_partyset",
+        "operationId": "complianceinvestigationrelatedpartyset_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complianceinvestigation_related_partyCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "adoxio_complianceinvestigation_related_partyset.adoxio_complianceinvestigation_related_party"
+        ],
+        "summary": "Add new entity to adoxio_complianceinvestigation_related_partyset",
+        "operationId": "complianceinvestigationrelatedpartyset_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Prefer",
+            "description": "Required in order for the service to return a JSON representation of the object.",
+            "type": "string",
+            "default": "return=representation"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "New entity",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complianceinvestigation_related_party"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complianceinvestigation_related_party"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_complianceinvestigation_related_partyset({adoxio_complianceinvestigation_related_partyid})": {
+      "get": {
+        "tags": [
+          "complianceinvestigation_related_partyset"
+        ],
+        "summary": "Get entity from adoxio_complianceinvestigation_related_partyset by key",
+        "operationId": "complianceinvestigationrelatedpartyset_GetByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_complianceinvestigation_related_partyid",
+            "description": "key: adoxio_complianceinvestigation_related_partyid of adoxio_complianceinvestigation_related_party",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complianceinvestigation_related_party"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "adoxio_complianceinvestigation_related_partyset.adoxio_complianceinvestigation_related_party"
+        ],
+        "summary": "Update entity in adoxio_complianceinvestigation_related_partyset",
+        "operationId": "complianceinvestigationrelatedpartyset_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_complianceinvestigation_related_partyid",
+            "description": "key: adoxio_complianceinvestigation_related_partyid of adoxio_complianceinvestigation_related_party",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "New property values",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complianceinvestigation_related_party"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "adoxio_complianceinvestigation_related_partyset.adoxio_complianceinvestigation_related_party"
+        ],
+        "summary": "Delete entity from adoxio_complianceinvestigation_related_partyset",
+        "operationId": "complianceinvestigationrelatedpartyset_Delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_complianceinvestigation_related_partyid",
+            "description": "key: adoxio_complianceinvestigation_related_partyid of adoxio_complianceinvestigation_related_party",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "If-Match",
+            "description": "ETag",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/adoxio_complianceinvestigations": {
       "get": {
         "tags": [
@@ -43996,6 +44236,25 @@
         }
       }
     },
+    "Microsoft.Dynamics.CRM.adoxio_complianceinvestigation_related_party": {
+      "description": "Microsoft.Dynamics.CRM.adoxio_complianceinvestigation_related_party",
+      "type": "object",
+      "properties": {
+        "adoxio_complianceinvestigation_related_partyid": {
+          "type": "string"
+        },
+        "adoxio_complianceinvestigationid": {
+          "type": "string"
+        },
+        "adoxio_relatedpartyid": {
+          "type": "string"
+        },
+        "versionnumber": {
+          "format": "int64",
+          "type": "string"
+        }
+      }
+    },
     "Microsoft.Dynamics.CRM.adoxio_complianceinvestigation": {
       "description": "Microsoft.Dynamics.CRM.adoxio_complianceinvestigation",
       "type": "object",
@@ -44429,6 +44688,18 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_contravention"
+          }
+        },
+        "adoxio_complianceinvestigation_relatedparty": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_relatedparty"
+          }
+        },
+        "adoxio_complianceinvestigation_related_party": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_relatedparty"
           }
         }
       }
@@ -59302,6 +59573,9 @@
           "format": "int32",
           "type": "integer"
         },
+        "_adoxio_investigationenforcementid_value": {
+          "type": "string"
+        },
         "createdon": {
           "format": "date-time",
           "type": "string"
@@ -59451,6 +59725,15 @@
         },
         "adoxio_InspectionId": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.incident"
+        },
+        "adoxio_investigationenforcementid": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complianceinvestigation"
+        },
+        "adoxio_complianceinvestigation_related_party": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complianceinvestigation"
+          }
         }
       }
     },
@@ -133562,6 +133845,19 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complaint"
+          }
+        }
+      }
+    },
+    "Microsoft.Dynamics.CRM.adoxio_complianceinvestigation_related_partyCollection": {
+      "title": "Collection of adoxio_complianceinvestigation_related_party",
+      "description": "Microsoft.Dynamics.CRM.adoxio_complianceinvestigation_related_partyCollection",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complianceinvestigation_related_party"
           }
         }
       }
