@@ -278,9 +278,19 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
         this.secondaryPaymentInProgress = true;
       }
       this.submitApplicationInProgress = true;
+      var trigInv = 0;
+      if (this.application.licenceFeeInvoice == null) {
+        trigInv = 1;
+      }
+      else {
+        if (this.application.licenceFeeInvoice.statuscode == 3) //cancelled
+        {
+          trigInv = 1;
+        }
+      }
       this
         .save(!this.application.applicationType.isFree,
-          { invoiceTrigger: 1 } as Application) // trigger invoice generation when saving
+          { invoiceTrigger: trigInv } as Application) // trigger invoice generation when saving LCSD6564 Only if not present or cancelled.
         .pipe(takeWhile(() => this.componentActive))
         .subscribe(([saveSucceeded, app]) => {
           if (saveSucceeded) {
