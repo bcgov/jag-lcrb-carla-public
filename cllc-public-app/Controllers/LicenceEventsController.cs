@@ -386,7 +386,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             try
             {
-                licenceEvent = _dynamicsClient.Events.GetByKey(eventId, expand: new List<string> { "adoxio_adoxio_event_adoxio_termsconditionslimitationspreset_LicenseeEventType" });
+                licenceEvent = _dynamicsClient.Events.GetByKey(eventId, expand: new List<string> { "adoxio_adoxio_event_adoxio_applicationtermscondi" });
                 licenceEventVM = licenceEvent.ToViewModel(_dynamicsClient);
                 licence = _dynamicsClient.Licenceses.GetByKey(
                     licenceEventVM.LicenceId,
@@ -463,11 +463,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             //LCSD6247 - Market and Catering Event authorizations use event limitation preset
             if (licenceEventVM.EventCategory == EventCategory.Catering || licenceEventVM.EventCategory == EventCategory.Market)
             {
-                if (licenceEvent.AdoxioAdoxioEventAdoxioTermsconditionslimitationspresetLicenseeEventType != null)
+                if (licenceEvent.AdoxioAdoxioEventAdoxioApplicationtermscondi != null)
                 {
-                    foreach (var item in licenceEvent.AdoxioAdoxioEventAdoxioTermsconditionslimitationspresetLicenseeEventType)
+                    foreach (var item in licenceEvent.AdoxioAdoxioEventAdoxioApplicationtermscondi)
                     {
-                        termsAndConditions += $"<li>{item.AdoxioContents}</li>";
+                        termsAndConditions += $"<li>{item.AdoxioTermsConditionsPreset.AdoxioContents}</li>";
                     }
                 }
             }
