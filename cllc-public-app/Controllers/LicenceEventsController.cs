@@ -386,7 +386,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             try
             {
-                licenceEvent = _dynamicsClient.Events.GetByKey(eventId, expand: new List<string> { "adoxio_adoxio_event_adoxio_applicationtermscondi($expand=adoxio_TermsConditionsPreset)" });
+                licenceEvent = _dynamicsClient.Events.GetByKey(eventId, expand: new List<string> { "adoxio_adoxio_event_adoxio_applicationtermscondi" });
                 licenceEventVM = licenceEvent.ToViewModel(_dynamicsClient);
                 licence = _dynamicsClient.Licenceses.GetByKey(
                     licenceEventVM.LicenceId,
@@ -467,7 +467,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     foreach (var item in licenceEvent.AdoxioAdoxioEventAdoxioApplicationtermscondi)
                     {
-                        termsAndConditions += $"<li>{item.AdoxioTermsConditionsPreset.AdoxioContents}</li>";
+                        //Get the preset id value and fetch preset from Dynamics
+                        //Dynamics does not allow multi layer expand so needs to be an extra call.
+                        if(item._adoxioTermsconditionspresetValue != null)
+                        {
+                            MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset tcpreset = _dynamicsClient.Termsconditionslimitationspresets.GetByKey(item._adoxioTermsconditionspresetValue);
+                            if(tcpreset != null)
+                            {
+                                termsAndConditions += $"<li>{tcpreset.AdoxioContents}</li>";
+                            } 
+                        }
                     }
                 }
             }
