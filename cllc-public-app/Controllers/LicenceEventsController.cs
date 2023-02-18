@@ -386,7 +386,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             try
             {
-                licenceEvent = _dynamicsClient.Events.GetByKey(eventId, expand: new List<string> { "adoxio_adoxio_event_adoxio_applicationtermscondi" });
+                licenceEvent = _dynamicsClient.Events.GetByKey(eventId, expand: new List<string> { "adoxio_adoxio_event_adoxio_applicationtermscondi($expand=adoxio_TermsConditionsPreset)" });
                 licenceEventVM = licenceEvent.ToViewModel(_dynamicsClient);
                 licence = _dynamicsClient.Licenceses.GetByKey(
                     licenceEventVM.LicenceId,
