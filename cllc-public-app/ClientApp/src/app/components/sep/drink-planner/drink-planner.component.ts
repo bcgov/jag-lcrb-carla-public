@@ -110,6 +110,16 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
   }
 
   isValid(): boolean {
+    const isRaiseMoney = this.canRaisePrice();
+    const notCharging = this.sepApplication?.chargingForLiquorReason === "LiquorIsFree";
+    if (isRaiseMoney != true && notCharging != true) {
+      if ((this.form.value.averageBeerPrice && this.drinkTypes && this.drinkTypes["Beer/Cider/Cooler"].pricePerServing < this.form.value.averageBeerPrice) ||
+        (this.form.value.averageWinePrice && this.drinkTypes && this.drinkTypes["Wine"].pricePerServing < this.form.value.averageWinePrice)||
+        (this.form.value.averageSpiritsPrice && this.drinkTypes && this.drinkTypes["Spirits"].pricePerServing < this.form.value.averageSpiritsPrice))
+      {
+        return false;
+      }
+    }
     return this.totalPercentage === this.totalServings;
   }
 

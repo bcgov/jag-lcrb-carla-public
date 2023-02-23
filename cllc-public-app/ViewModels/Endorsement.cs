@@ -22,6 +22,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string EndorsementName { get; set; }
         public string ApplicationTypeId { get; set; }
         public string ApplicationTypeName { get; set; }
+        public List<HoursOfService> HoursOfServiceList { get; set; }
+        public int AreaCapacity { get; set; }
 
         public string SimpleHeader()
         {
