@@ -37398,6 +37398,10 @@
           "format": "date-time",
           "type": "string"
         },
+        "adoxio_servicehourssaturdayopen": {
+          "format": "int32",
+          "type": "integer"
+        },
         "adoxio_servicehourssundayclose": {
           "format": "int32",
           "type": "integer"
@@ -37420,6 +37424,9 @@
         },
         "adoxio_fpaddresspostalcode": {
           "type": "string"
+        },
+        "adoxio_mfrsupinfointendproduce": {
+          "type": "boolean"
         },
         "adoxio_jobnumber": {
           "type": "string"
@@ -37495,6 +37502,9 @@
         "adoxio_mfgchangestosecurestorage": {
           "type": "string"
         },
+        "adoxio_mfrsupinfoproductionequipment": {
+          "type": "boolean"
+        },
         "adoxio_servicehourssundayopen": {
           "format": "int32",
           "type": "integer"
@@ -37512,9 +37522,8 @@
         "adoxio_businessstructureinstructionfield": {
           "type": "string"
         },
-        "adoxio_servicehourssaturdayopen": {
-          "format": "int32",
-          "type": "integer"
+        "adoxio_mfrsupinfoownrent": {
+          "type": "boolean"
         },
         "adoxio_checklistmarketcapacity": {
           "format": "int32",
@@ -38294,6 +38303,9 @@
         "adoxio_checklistfinintegrityreceived": {
           "format": "int32",
           "type": "integer"
+        },
+        "adoxio_mfrsupinforeadunderstand": {
+          "type": "boolean"
         },
         "adoxio_checklistbusinessplanintake": {
           "format": "int32",
@@ -44413,22 +44425,10 @@
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_enforcementaction"
           }
         },
-        "adoxio_investigation_enforce_compliancemeeting": {
+        "adoxio_investigation_compliancemeeting": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_compliancemeeting"
-          }
-        },
-        "adoxio_investigation_enforce_compliancemeetting_": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_compliancemeeting"
-          }
-        },
-        "adoxio_investigation_enforcement_contravention": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_contravention"
           }
         }
       }
@@ -44442,10 +44442,6 @@
           "type": "string"
         },
         "adoxio_importid": {
-          "type": "string"
-        },
-        "modifiedon": {
-          "format": "date-time",
           "type": "string"
         },
         "_adoxio_contraventionid_value": {
@@ -44469,7 +44465,7 @@
           "format": "date-time",
           "type": "string"
         },
-        "_adoxio_investigationid_value": {
+        "_adoxio_inspectionid_value": {
           "type": "string"
         },
         "adoxio_compliancemeetingid": {
@@ -44496,10 +44492,6 @@
         "adoxio_contraventionnumber": {
           "type": "string"
         },
-        "statuscode": {
-          "format": "int32",
-          "type": "integer"
-        },
         "adoxio_details": {
           "type": "string"
         },
@@ -44516,12 +44508,13 @@
         "_createdonbehalfby_value": {
           "type": "string"
         },
-        "statecode": {
+        "statuscode": {
           "format": "int32",
           "type": "integer"
         },
-        "_adoxio_investigationenforcementid_value": {
-          "type": "string"
+        "statecode": {
+          "format": "int32",
+          "type": "integer"
         },
         "_adoxio_licenceid_value": {
           "type": "string"
@@ -44540,10 +44533,11 @@
           "format": "int32",
           "type": "integer"
         },
-        "_adoxio_investigationienforcementd_value": {
+        "_adoxio_investigationid_value": {
           "type": "string"
         },
-        "_adoxio_inspectionid_value": {
+        "modifiedon": {
+          "format": "date-time",
           "type": "string"
         },
         "createdbyname": {
@@ -44639,13 +44633,7 @@
         "adoxio_ContraventionId": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_contravention"
         },
-        "adoxio_investigationId": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_investigation"
-        },
-        "adoxio_investigationIenforcementd": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complianceinvestigation"
-        },
-        "adoxio_investigationenforcementid": {
+        "adoxio_investigationid": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complianceinvestigation"
         }
       }
@@ -45015,7 +45003,7 @@
         "adoxio_isunderreconsideration": {
           "type": "boolean"
         },
-        "_modifiedby_value": {
+        "_transactioncurrencyid_value": {
           "type": "string"
         },
         "adoxio_petitionreceiveddate": {
@@ -45054,7 +45042,7 @@
           "format": "date-time",
           "type": "string"
         },
-        "_adoxio_investigationenforcementid_value": {
+        "_modifiedby_value": {
           "type": "string"
         },
         "exchangerate": {
@@ -45307,9 +45295,6 @@
         "adoxio_isfinancenotified": {
           "type": "boolean"
         },
-        "_transactioncurrencyid_value": {
-          "type": "string"
-        },
         "adoxio_courthearinglocation": {
           "type": "string"
         },
@@ -45551,9 +45536,6 @@
         },
         "adoxio_ContactId": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.contact"
-        },
-        "adoxio_investigationenforcementid": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complianceinvestigation"
         }
       }
     },
@@ -53669,12 +53651,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_enforcementaction"
-          }
-        },
-        "adoxio_investigation_compliancemeeting": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_compliancemeeting"
           }
         }
       }
