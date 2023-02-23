@@ -248,10 +248,10 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioUploaddeclarations = from.UploadDeclarations;
             to.AdoxioProductslistanddescription = from.ProductsListAndDescription;
 
-            //to.AdoxioMfrSupInfoReadUnderstand = from.MfrSupInfoReadUnderstand;
-            //to.AdoxioMfrSupInfoIntendProduce = from.MfrSupInfoIntendProduce;
-            //to.AdoxioMfrSupInfoOwnRent = from.MfrSupInfoOwnRent;
-            //to.AdoxioMfrSupInfoProductionEquipment = from.MfrSupInfoProductionEquipment;
+            to.AdoxioMfrsupinforeadunderstand = from.MfrSupInfoReadUnderstand;
+            to.AdoxioMfrsupinfointendproduce = from.MfrSupInfoIntendProduce;
+            to.AdoxioMfrsupinfoownrent = from.MfrSupInfoOwnRent;
+            to.AdoxioMfrsupinfoproductionequipment = from.MfrSupInfoProductionEquipment;
 
         }
 
@@ -620,14 +620,11 @@ namespace Gov.Lclb.Cllb.Public.Models
 
                 UploadDeclarations=dynamicsApplication.AdoxioUploaddeclarations,
                 ProductsListAndDescription = dynamicsApplication.AdoxioProductslistanddescription,
-                //MfrSupInfoReadUnderstand = dynamicsApplication.AdoxioMfrSupInfoReadUnderstand,
-                //MfrSupInfoIntendProduce = dynamicsApplication.AdoxioMfrSupInfoIntendProduce,
-                //MfrSupInfoOwnRent = dynamicsApplication.AdoxioMfrSupInfoOwnRent,
-                //MfrSupInfoProductionEquipment = dynamicsApplication.AdoxioMfrSupInfoProductionEquipment,
-                MfrSupInfoReadUnderstand = true,
-                MfrSupInfoIntendProduce = true,
-                MfrSupInfoOwnRent = true,
-                MfrSupInfoProductionEquipment = true
+                MfrSupInfoReadUnderstand = dynamicsApplication.AdoxioMfrsupinforeadunderstand,
+                MfrSupInfoIntendProduce = dynamicsApplication.AdoxioMfrsupinfointendproduce,
+                MfrSupInfoOwnRent = dynamicsApplication.AdoxioMfrsupinfoownrent,
+                MfrSupInfoProductionEquipment = dynamicsApplication.AdoxioMfrsupinfoproductionequipment,
+                
             };
 
 

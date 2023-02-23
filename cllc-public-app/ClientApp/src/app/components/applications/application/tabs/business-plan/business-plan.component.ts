@@ -84,7 +84,7 @@ export class BusinessPlanComponent extends FormBase implements OnInit {
   }
 
   isCopacker(): boolean {
-    return this.form.get("licenceSubCategory").value === "Co-packer";
+    return this.form.get("licenceSubCategory").value === "Co-Packer";
   }
 
   isDistillery(): boolean {
