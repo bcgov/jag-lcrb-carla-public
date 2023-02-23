@@ -247,6 +247,12 @@ namespace Gov.Lclb.Cllb.Public.Models
 
             to.AdoxioUploaddeclarations = from.UploadDeclarations;
             to.AdoxioProductslistanddescription = from.ProductsListAndDescription;
+
+            //to.AdoxioMfrSupInfoReadUnderstand = from.MfrSupInfoReadUnderstand;
+            //to.AdoxioMfrSupInfoIntendProduce = from.MfrSupInfoIntendProduce;
+            //to.AdoxioMfrSupInfoOwnRent = from.MfrSupInfoOwnRent;
+            //to.AdoxioMfrSupInfoProductionEquipment = from.MfrSupInfoProductionEquipment;
+
         }
 
 
@@ -613,8 +619,16 @@ namespace Gov.Lclb.Cllb.Public.Models
                 FPAddressStreet=dynamicsApplication.AdoxioFpaddressstreet ,
 
                 UploadDeclarations=dynamicsApplication.AdoxioUploaddeclarations,
-                ProductsListAndDescription = dynamicsApplication.AdoxioProductslistanddescription
-        };
+                ProductsListAndDescription = dynamicsApplication.AdoxioProductslistanddescription,
+                //MfrSupInfoReadUnderstand = dynamicsApplication.AdoxioMfrSupInfoReadUnderstand,
+                //MfrSupInfoIntendProduce = dynamicsApplication.AdoxioMfrSupInfoIntendProduce,
+                //MfrSupInfoOwnRent = dynamicsApplication.AdoxioMfrSupInfoOwnRent,
+                //MfrSupInfoProductionEquipment = dynamicsApplication.AdoxioMfrSupInfoProductionEquipment,
+                MfrSupInfoReadUnderstand = true,
+                MfrSupInfoIntendProduce = true,
+                MfrSupInfoOwnRent = true,
+                MfrSupInfoProductionEquipment = true
+            };
 
 
             // mfg fields
