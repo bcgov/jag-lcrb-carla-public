@@ -125,7 +125,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
   uploadedCentralSecuritiesRegisterDocuments: number = 0;
   tiedHouseExemptions: { jobNumber: string, displayName: string }[] = [];
   licenseToRemove: RelatedLicence;
-  listAndDescribeProducts: string | undefined;
   get isOpenedByLGForApproval(): boolean {
     let openedByLG = false;
     if (this.account && this.application && this.application.applicant &&
@@ -1404,10 +1403,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
     if (this.form.get('uploadDeclarations').value != true && (this.application?.applicationType.name == ApplicationTypeNames.LoungeAreaEndorsment || this.application?.applicationType.name == ApplicationTypeNames.SpecialEventAreaEndorsement)) {
       valid = false;
       this.validationMessages.push('Upload Declarations is required.');
-    }
-    if (this.application?.applicationType.name == ApplicationTypeNames.MFG && this.listAndDescribeProducts == undefined) {
-      valid = false;
-      this.validationMessages.push('List and Describtion of products is required.');
     }
 
     if (this.showZoning() && this.application.isPermittedInZoning != true) {
