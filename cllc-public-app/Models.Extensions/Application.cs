@@ -1,4 +1,4 @@
-﻿using Gov.Lclb.Cllb.Interfaces;
+using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Utils;
 using Gov.Lclb.Cllb.Public.ViewModels;
@@ -247,6 +247,12 @@ namespace Gov.Lclb.Cllb.Public.Models
 
             to.AdoxioUploaddeclarations = from.UploadDeclarations;
             to.AdoxioProductslistanddescription = from.ProductsListAndDescription;
+
+            to.AdoxioMfrsupinforeadunderstand = from.MfrSupInfoReadUnderstand;
+            to.AdoxioMfrsupinfointendproduce = from.MfrSupInfoIntendProduce;
+            to.AdoxioMfrsupinfoownrent = from.MfrSupInfoOwnRent;
+            to.AdoxioMfrsupinfoproductionequipment = from.MfrSupInfoProductionEquipment;
+
         }
 
 
@@ -613,8 +619,13 @@ namespace Gov.Lclb.Cllb.Public.Models
                 FPAddressStreet=dynamicsApplication.AdoxioFpaddressstreet ,
 
                 UploadDeclarations=dynamicsApplication.AdoxioUploaddeclarations,
-                ProductsListAndDescription = dynamicsApplication.AdoxioProductslistanddescription
-        };
+                ProductsListAndDescription = dynamicsApplication.AdoxioProductslistanddescription,
+                MfrSupInfoReadUnderstand = dynamicsApplication.AdoxioMfrsupinforeadunderstand,
+                MfrSupInfoIntendProduce = dynamicsApplication.AdoxioMfrsupinfointendproduce,
+                MfrSupInfoOwnRent = dynamicsApplication.AdoxioMfrsupinfoownrent,
+                MfrSupInfoProductionEquipment = dynamicsApplication.AdoxioMfrsupinfoproductionequipment,
+                
+            };
 
 
             // mfg fields
