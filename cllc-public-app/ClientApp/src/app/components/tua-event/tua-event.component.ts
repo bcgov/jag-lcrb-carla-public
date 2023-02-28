@@ -425,9 +425,6 @@ export class TuaEventComponent extends FormBase implements OnInit {
     //Validate Timing 
     if (this.timeForms.length > 0) {
       var hoursOfServiceList = this.licence.endorsements[0].hoursOfServiceList;
-      if (hoursOfServiceList == null || hoursOfServiceList == undefined || hoursOfServiceList.length==0){
-        this.validationMessages.push('Temporary Use Area Endorsement does not contains hours of service');
-      }
       //Check if different timings
       if (this.timeForms.length > 1) {
         for (var i = 0; i < this.timeForms.length; i++) {
