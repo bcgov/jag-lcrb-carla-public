@@ -461,7 +461,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             var termsAndConditions = "";
             //LCSD6247 - Market and Catering Event authorizations use event limitation preset
-            if (licenceEventVM.EventCategory == EventCategory.Catering || licenceEventVM.EventCategory == EventCategory.Market)
+            //TODO Uncomment when 6247 is reenabled. 
+            /*if (licenceEventVM.EventCategory == EventCategory.Catering || licenceEventVM.EventCategory == EventCategory.Market)
             {
                 if (licenceEvent.AdoxioAdoxioEventAdoxioApplicationtermscondi != null)
                 {
@@ -486,6 +487,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     termsAndConditions += $"<li>{item.AdoxioTermsandconditions}</li>";
                 }
+            }*/
+            //TODO Remove for loop when 6247 re-enabled
+            foreach (var item in licence.AdoxioAdoxioLicencesAdoxioApplicationtermsconditionslimitationLicence)
+            {
+                termsAndConditions += $"<li>{item.AdoxioTermsandconditions}</li>";
             }
 
             var parameters = new Dictionary<string, string>
