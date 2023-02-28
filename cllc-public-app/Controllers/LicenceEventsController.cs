@@ -386,7 +386,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             try
             {
-                licenceEvent = _dynamicsClient.Events.GetByKey(eventId);
+                licenceEvent = _dynamicsClient.Events.GetByKey(eventId, expand: new List<string> { "adoxio_adoxio_event_adoxio_applicationtermscondi" });
                 licenceEventVM = licenceEvent.ToViewModel(_dynamicsClient);
                 licence = _dynamicsClient.Licenceses.GetByKey(
                     licenceEventVM.LicenceId,
@@ -460,9 +460,32 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             var termsAndConditions = "";
-            foreach (var item in licence.AdoxioAdoxioLicencesAdoxioApplicationtermsconditionslimitationLicence)
+            //LCSD6247 - Market and Catering Event authorizations use event limitation preset
+            if (licenceEventVM.EventCategory == EventCategory.Catering || licenceEventVM.EventCategory == EventCategory.Market)
             {
-                termsAndConditions += $"<li>{item.AdoxioTermsandconditions}</li>";
+                if (licenceEvent.AdoxioAdoxioEventAdoxioApplicationtermscondi != null)
+                {
+                    foreach (var item in licenceEvent.AdoxioAdoxioEventAdoxioApplicationtermscondi)
+                    {
+                        //Get the preset id value and fetch preset from Dynamics
+                        //Dynamics does not allow multi layer expand so needs to be an extra call.
+                        if(item._adoxioTermsconditionspresetValue != null)
+                        {
+                            MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset tcpreset = _dynamicsClient.Termsconditionslimitationspresets.GetByKey(item._adoxioTermsconditionspresetValue);
+                            if(tcpreset != null)
+                            {
+                                termsAndConditions += $"<li>{tcpreset.AdoxioContents}</li>";
+                            } 
+                        }
+                    }
+                }
+            }
+            else
+            {
+                foreach (var item in licence.AdoxioAdoxioLicencesAdoxioApplicationtermsconditionslimitationLicence)
+                {
+                    termsAndConditions += $"<li>{item.AdoxioTermsandconditions}</li>";
+                }
             }
 
             var parameters = new Dictionary<string, string>
