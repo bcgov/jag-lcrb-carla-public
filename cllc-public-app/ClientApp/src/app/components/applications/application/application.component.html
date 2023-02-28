@@ -1780,7 +1780,17 @@
           </section>
         </div>
        
-       
+        <div *ngIf="application?.applicationType.name == 'Manufacturer'">
+          <hr><br>
+          <!--<p>
+    Please list and describe products other than beer, wine, or distiller spirits, you intend to produce once licensed. (e.g. Alcoholic kombucha, Soju, hard seltzers or other alcohol based Ready to Drink (RTD) products).
+  </p>-->
+          <app-field label="Please list and describe products other than beer, wine, or distiller spirits, you intend to produce once licensed. (e.g. Alcoholic kombucha, Soju, hard seltzers or other alcohol based Ready to Drink (RTD) products)">
+            <textarea style="width: 800px;" class="form-control"
+                      formControlName="productsListAndDescription"></textarea>
+          </app-field>
+
+        </div>
 
         <div *ngIf="showSitePhotos()">
 
@@ -2289,15 +2299,7 @@ store?
                     </ul>
                   </mat-checkbox>
                 </div>
-
               </section>
-              <div *ngIf="application?.applicationType.name == 'Manufacturer'">
-                <hr><br>
-                <app-field label="Please list and describe products other than beer, wine, or distiller spirits, you intend to produce once licensed. (e.g. Alcoholic kombucha, Soju, hard seltzers or other alcohol based Ready to Drink (RTD) products)">
-                  <textarea style="width: 800px;" class="form-control"
-                            formControlName="productsListAndDescription"></textarea>
-                </app-field>
-              </div>
             </section>
             <section *ngIf="isRelocation()">
               <b>Note:</b> Valid interest must be maintained at the current and proposed site until the relocation is finalized. LCRB may request a copy of valid interest at the current site during the relocation application process.
