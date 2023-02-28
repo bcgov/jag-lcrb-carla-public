@@ -239,8 +239,4 @@ export interface Application {
 
   productslistanddescription: string;
   uploadDeclarations: boolean;
-  mfrSupInfoReadUnderstand: boolean;
-  mfrSupInfoIntendProduce: boolean;
-  mfrSupInfoOwnRent: boolean;
-  mfrSupInfoProductionEquipment: boolean;
 }
