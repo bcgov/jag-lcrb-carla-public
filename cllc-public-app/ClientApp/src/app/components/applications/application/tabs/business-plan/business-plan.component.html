@@ -154,57 +154,46 @@
         </app-field>
 
         <!--p>
-          Upload a sample of the brew sheets you intend to use in your
-          production:
-        </p>
-        <section>
-          <app-file-uploader *ngIf="application?.id" documentType="Business Plan - Sample Brew Sheet"
-                             [disableUploads]="isOpenedByLGForApproval" [enableFileDeletion]="!isOpenedByLGForApproval"
-                             fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
-                             [useDocumentTypeForName]="true" [entityId]="application?.id"
-                             [uploadHeader]="'TO UPLOAD SAMPLE BREW SHEET, DRAG FILES HERE OR'">
-          </app-file-uploader>
-        </section>-->
-      </section>
-    </div>
-    <div *ngIf="isDistillery()">
-      <hr>
-      <h4>Distribution Plan</h4>
-      <p>Upload a description of how you plan to distribute your packaged product:</p>
-      <section>
-        <app-file-uploader *ngIf="application?.id" documentType="Business Plan - Distribution Plan"
-                           [disableUploads]="isOpenedByLGForApproval" [enableFileDeletion]="!isOpenedByLGForApproval"
-                           fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
-                           [useDocumentTypeForName]="true" [entityId]="application?.id"
-                           [uploadHeader]="'TO UPLOAD DISTRIBUTION PLAN, DRAG FILES HERE OR'">
-        </app-file-uploader>
-      </section>
-    </div>
+            Upload a sample of the brew sheets you intend to use in your
+            production:
+          </p>
+          <section>
+            <app-file-uploader *ngIf="application?.id" documentType="Business Plan - Sample Brew Sheet"
+                               [disableUploads]="isOpenedByLGForApproval" [enableFileDeletion]="!isOpenedByLGForApproval"
+                               fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+                               [useDocumentTypeForName]="true" [entityId]="application?.id"
+                               [uploadHeader]="'TO UPLOAD SAMPLE BREW SHEET, DRAG FILES HERE OR'">
+            </app-file-uploader>
+          </section>
+        </section-->
 
-    <div *ngIf="isWinery()">
-      <hr>
-      <h4>Business Insurance</h4>
-      <p>Upload your business insurance certificate:</p>
-      <section>
-        <app-file-uploader *ngIf="application?.id" documentType="Business Plan - Business Insurance Certificate"
-                           [disableUploads]="isOpenedByLGForApproval" [enableFileDeletion]="!isOpenedByLGForApproval"
-                           fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
-                           [useDocumentTypeForName]="true" [entityId]="application?.id"
-                           [uploadHeader]="'TO UPLOAD BUSINESS INSURANCE CERTIFICATE, DRAG FILES HERE OR'">
-        </app-file-uploader>
+        <div *ngIf="isDistillery()">
+          <hr>
+          <h4>Distribution Plan</h4>
+          <p>Upload a description of how you plan to distribute your packaged product:</p>
+          <section>
+            <app-file-uploader *ngIf="application?.id" documentType="Business Plan - Distribution Plan"
+                               [disableUploads]="isOpenedByLGForApproval" [enableFileDeletion]="!isOpenedByLGForApproval"
+                               fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+                               [useDocumentTypeForName]="true" [entityId]="application?.id"
+                               [uploadHeader]="'TO UPLOAD DISTRIBUTION PLAN, DRAG FILES HERE OR'">
+            </app-file-uploader>
+          </section>
+        </div>
 
-      </section>
+        <div *ngIf="isWinery()">
+          <hr>
+          <h4>Business Insurance</h4>
+          <p>Upload your business insurance certificate:</p>
+          <section>
+            <app-file-uploader *ngIf="application?.id" documentType="Business Plan - Business Insurance Certificate"
+                               [disableUploads]="isOpenedByLGForApproval" [enableFileDeletion]="!isOpenedByLGForApproval"
+                               fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+                               [useDocumentTypeForName]="true" [entityId]="application?.id"
+                               [uploadHeader]="'TO UPLOAD BUSINESS INSURANCE CERTIFICATE, DRAG FILES HERE OR'">
+            </app-file-uploader>
+          </section>
+        </div>
 
-
-    </div>
-  </div>
-  <div *ngIf="application?.applicationType.name == 'Manufacturer'">
-    <hr><br>
-    <app-field label="Please list and describe products other than beer, wine, or distiller spirits, you intend to produce once licensed. (e.g. Alcoholic kombucha, Soju, hard seltzers or other alcohol based Ready to Drink (RTD) products)">
-      <textarea style="width: 800px;" class="form-control"
-                formControlName="productsListAndDescription"></textarea>
-    </app-field>
-  </div>
-</div>
-<!-- TO DO wineries questions-->
-<!--/div-->
+        <!-- TO DO wineries questions-->
+        <!--/div-->
