@@ -549,7 +549,7 @@
         </section>
         <!-- LCSD-6355 Upload Declarations section -->
         <h3 class="blue-header ngtest-declarations" *ngIf="application?.applicationType.name == 'Lounge Area Endorsement' || application?.applicationType.name == 'Special Event Area Endorsement'">
-          Upload DECLARATIONS
+          Requirements For Operating A Lounge Area Endorsement
         </h3>
         <div class="padded-section content-bottom">
           <ng-container>
@@ -939,7 +939,7 @@
         </section>
 
         <!-- Letter of Intent -->
-        <section *ngIf="showFormControl(application?.applicationType?.letterOfIntent)">
+        <section *ngIf="showFormControl(application?.applicationType?.letterOfIntent) && application?.applicationType.name != 'Lounge Area Endorsement' && application?.applicationType.name != 'Special Event Area Endorsement'">
           <div [ngSwitch]="application?.applicationType?.name">
             <h3 class="blue-header" *ngSwitchCase="'Sales to Hospitality Licensees'">Authorization Form</h3>
             <h3 class="blue-header" *ngSwitchCase="'Temporary Expanded Service Areas (FP)'">Local Government/Indigenous Nation Comments</h3>
