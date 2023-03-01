@@ -1,4 +1,4 @@
-using Gov.Lclb.Cllb.Interfaces;
+﻿using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Utils;
 using Gov.Lclb.Cllb.Public.ViewModels;
@@ -244,9 +244,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioFpaddresscity = from.FPAddressCity;
             to.AdoxioFpaddresspostalcode = from.FPAddressPostalCode;
             to.AdoxioFpaddressstreet = from.FPAddressStreet;
-
-            to.AdoxioUploaddeclarations = from.UploadDeclarations;
-            to.AdoxioProductslistanddescription = from.ProductsListAndDescription;
+            
         }
 
 
@@ -610,10 +608,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 FederalLicenceName = dynamicsApplication.AdoxioFederallicencename,
                 FPAddressCity =dynamicsApplication.AdoxioFpaddresscity,     
                 FPAddressPostalCode=dynamicsApplication.AdoxioFpaddresspostalcode,
-                FPAddressStreet=dynamicsApplication.AdoxioFpaddressstreet ,
-
-                UploadDeclarations=dynamicsApplication.AdoxioUploaddeclarations,
-                ProductsListAndDescription = dynamicsApplication.AdoxioProductslistanddescription
+                FPAddressStreet=dynamicsApplication.AdoxioFpaddressstreet     
+                
         };
 
 
