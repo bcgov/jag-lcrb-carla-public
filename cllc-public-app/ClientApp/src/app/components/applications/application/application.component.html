@@ -196,7 +196,7 @@
       Liquor and Cannabis Regulation Branch (LCRB) at     <a href="mailto:LCRBLiquor@gov.bc.ca">LCRBLiquor@gov.bc.ca</a>
 
     </p>
-    
+
   </section>
 
   <!-- Local Government advise -->
@@ -494,7 +494,7 @@
         </p>
 
         <p>
-          Please provide the 
+          Please provide the
           <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/non-medical-cannabis-licenses/cannabis-resources-information/associate-forms"
              target="_blank">
             documents
@@ -937,7 +937,7 @@
         <a href="https://www2.gov.bc.ca/gov/content?id=B5744089A70F428FA189E5FF5CAE4E4A"
            target="_blank">
           local government or Indigenous Nation
-        </a>        
+        </a>
         and police jurisdiction where the establishment will be located. Suggestions will be provided
         after you type the first three characters of the name.
       </p>
@@ -2501,16 +2501,16 @@
         </mat-checkbox>
       </app-field>
       <p>
-      <strong *ngIf="application?.licenseType == 'Cannabis Retail Store' || application?.licenseType == 'Marketer'">
-        Section 22(2) of the Cannabis Control and Licensing Act states: “A person must not submit to the general
-        manager an application, or information or a record included as part of the application, that contains false or misleading
-        information, or fails to disclose a material fact”.
-      </strong>
-      <strong *ngIf="application?.licenseType == 'Cannabis Retail Store' || application?.licenseType == 'Marketer'">
-        Section 20(1) of the Liquor Control and Licensing Act states: “The general manager may refuse to
-        issue, renew, transfer or amend a licence if the applicant fails to disclose a material fact required by
-        the application or makes a false or misleading statement in the application.”
-      </strong>
+        <strong *ngIf="application?.licenseType == 'Cannabis Retail Store' || application?.licenseType == 'Marketer'">
+          Section 22(2) of the Cannabis Control and Licensing Act states: “A person must not submit to the general
+          manager an application, or information or a record included as part of the application, that contains false or misleading
+          information, or fails to disclose a material fact”.
+        </strong>
+        <strong *ngIf="application?.licenseType == 'Cannabis Retail Store' || application?.licenseType == 'Marketer'">
+          Section 20(1) of the Liquor Control and Licensing Act states: “The general manager may refuse to
+          issue, renew, transfer or amend a licence if the applicant fails to disclose a material fact required by
+          the application or makes a false or misleading statement in the application.”
+        </strong>
       </p>
       <app-field [valid]="!showValidationMessages || form.get('signatureAgreement').valid"
                  errorMessage="Please affirm that all of the information provided for this application is true and complete."
@@ -2546,12 +2546,12 @@
     <div class="ngtest-before-starting-content" [innerHTML]="htmlContent.nextSteps"></div>
   </section>
 
-  <!-- Proceed to Pay-->
+  <!--  Proceed to Pay -->
 
   <section class="d-flex" style="margin-top: 15px;"
            *ngIf="!isOpenedByLGForApproval
          && !isRAS()
-         && !isFreeEndorsement() && !application?.applicationType?.isFree && !skipPayment
+         && !application?.applicationType?.isFree && !skipPayment
          && ((!isShowLGINApproval && !application?.applicationType?.isShowLGZoningConfirmation)
               ||!showSubmitToLG()) ">
 
@@ -2722,7 +2722,7 @@
 
       <button mat-raised-button *ngIf="!application?.applicationType?.requiresSecurityScreening" color="primary"
               (click)="submit_application()" [disabled]="submitApplicationInProgress">
-        SUBMIT&nbsp;<span *ngIf="!isFreeEndorsement() && !application?.applicationType?.isFree &&  !skipPayment && !isRAS()">&amp; PAY</span>
+        SUBMIT&nbsp;<span *ngIf="!application?.applicationType?.isFree &&  !skipPayment && !isRAS()">&amp; PAY</span>
         <mat-progress-bar *ngIf="submitApplicationInProgress" mode="indeterminate"></mat-progress-bar>
       </button>
 
