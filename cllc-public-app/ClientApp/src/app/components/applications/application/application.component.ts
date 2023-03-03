@@ -125,7 +125,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   uploadedCentralSecuritiesRegisterDocuments: number = 0;
   tiedHouseExemptions: { jobNumber: string, displayName: string }[] = [];
   licenseToRemove: RelatedLicence;
-  listAndDescribeProducts: string | undefined;
+
   get isOpenedByLGForApproval(): boolean {
     let openedByLG = false;
     if (this.account && this.application && this.application.applicant &&
@@ -254,9 +254,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       federalLicenceName: ['', Validators.required],
       fpAddressStreet: ['', Validators.required],
       fpAddressCity: ['', Validators.required],
-      fpAddressPostalCode: ['', [Validators.required, Validators.pattern(CanadaPostalRegex)]],
-      productsListAndDescription: ['', []],
-      uploadDeclarations: ['', []],
+      fpAddressPostalCode: ['', [Validators.required, Validators.pattern(CanadaPostalRegex)]]
     });
 
     this.form.get('pin').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
@@ -683,7 +681,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   requiresFederalProductionInfo(): boolean {
     const applicationTypeName = this.application.applicationType.name;
-    if (applicationTypeName === "Producer Retail Store" || applicationTypeName === "PRS Relocation" || applicationTypeName === "PRS Transfer of Ownership") {
+    if(applicationTypeName === "Producer Retail Store" || applicationTypeName === "PRS Relocation" || applicationTypeName === "PRS Transfer of Ownership") {
       return true;
     }
 
@@ -692,8 +690,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   private isHoursOfSaleValid(): boolean {
     return this.form.disabled || !this.application.applicationType.showHoursOfSale ||
-      this.application.applicationType.name === ApplicationTypeNames.FP ||
-      this.application.applicationType.name === ApplicationTypeNames.FPRelo ||
+        this.application.applicationType.name === ApplicationTypeNames.FP ||
+        this.application.applicationType.name === ApplicationTypeNames.FPRelo ||
       (this.form.get('serviceHoursSundayOpen').valid
         && this.form.get('serviceHoursMondayOpen').valid
         && this.form.get('serviceHoursTuesdayOpen').valid
@@ -906,7 +904,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     return this.application.applicationType.category == "Liquor";
   }
   isRelocation(): boolean {
-    return this.application.applicationType.isRelocation;
+    return this.application.applicationType.isRelocation; 
   }
   normalizeFormData() {
     let description2 = this.form.get('description2').value;
@@ -923,7 +921,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     const outsideAreas = ('areas' in this.form.get('outsideAreas').value) ? this.form.get('outsideAreas').value['areas'] : this.form.get('outsideAreas').value;
     const capacityArea = [this.form.get('capacityArea').value];
 
-
+    
     return {
       ...this.form.value,
       description2,
@@ -1006,10 +1004,12 @@ export class ApplicationComponent extends FormBase implements OnInit {
       );
   }
 
-  isFreeEndorsement(): boolean {
-    let freeEndorsement = this.application.applicationType.isEndorsement && (this?.application?.assignedLicence == null);
-    return freeEndorsement;
-  }
+  //LCSD-6495 NOTE: this logic is no necessary. If an application.applicationType is free, then the endorsement is free.
+  //                so we only need checked the applicationType.isFree no matter the 
+  //isFreeEndorsement(): boolean {
+  //  let freeEndorsement = this.application.applicationType.isFree && (this?.application?.assignedLicence == null);
+  //  return freeEndorsement;
+  //}
 
   /**
    * Submit the application for payment
@@ -1021,7 +1021,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.submitApplicationInProgress = true;
       // save and try to generate an invoice.
       // if it's not free, nor a free endorsement, show the progress
-      this.busy = this.save((!this.application.applicationType.isFree && !this.isFreeEndorsement()), <Application>{ invoiceTrigger: 1 }) // trigger invoice generation when saving
+      //LCSD-6495 if an application is not free, then it should not be a free endorsement.
+      this.busy = this.save((!this.application.applicationType.isFree), <Application>{ invoiceTrigger: 1 }) // trigger invoice generation when saving
         .pipe(takeWhile(() => this.componentActive))
         .subscribe(([saveSucceeded, app]) => {
           // if we saved successfully...
@@ -1036,7 +1037,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
                 },
                   error => {
                     if (error === "Payment already made") {
-                      this.snackBar.open("Payment has already been made, Please return to the dashboard.", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
+                      this.snackBar.open("Payment has already been made, Please return to the dashboard.", "Fail",{ duration: 3500, panelClass: ["red-snackbar"] });
                     } else {
                       this.snackBar.open('Error submitting payment', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
                     }
@@ -1046,12 +1047,12 @@ export class ApplicationComponent extends FormBase implements OnInit {
               // otherwise if there was no invoice generated, dynamics understood it to be a free application
             } else if (app) {
               // mark application as complete so dynamics handles the status change correctly
-              this.save(this.application.applicationType.isFree || this.isFreeEndorsement(), <Application>{ isApplicationComplete: 'Yes' })
+              this.save(this.application.applicationType.isFree, <Application>{ isApplicationComplete: 'Yes' })
                 .subscribe(res => {
                   this.saveComplete.emit(true);
                   // saving for later will redirect to the dashboard on its own
                   // if this was a free app, we will need to redirect to the dashboard
-                  if (this.application.applicationType.isFree || this.isFreeEndorsement()) {
+                  if (this.application.applicationType.isFree) {
                     this.snackBar.open('Application submitted', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
                     this.router.navigateByUrl('/dashboard');
                   }
@@ -1069,9 +1070,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   showMFGImages(): boolean {
     const isit = this.application?.licenseType === 'Manufacturer'
-      && (this.application?.applicationType?.isEndorsement || this.application?.applicationType?.isStructural)
-      && !(this.application?.applicationType?.name != "Structural Changes to a Manufacturing Facility") // so the tests pass for some reason
-      && !this.application?.applicationType?.isDefault;
+          && (this.application?.applicationType?.isEndorsement || this.application?.applicationType?.isStructural)
+          && !(this.application?.applicationType?.name != "Structural Changes to a Manufacturing Facility") // so the tests pass for some reason
+          && !this.application?.applicationType?.isDefault;
     return isit;
   }
 
@@ -1115,28 +1116,28 @@ export class ApplicationComponent extends FormBase implements OnInit {
     this.disableIncomplete = true;
     // Only save if the data is valid
 
-    this.busy = forkJoin(
-      this.applicationDataService.updateApplication({
-        ...this.application,
-        ...this.normalizeFormData(),
-        applicationStatus: 'UnderReview'
-      }),
-      this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
-    ).pipe(takeWhile(() => this.componentActive))
-      .pipe(catchError(() => {
-        this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-        return of(false);
-      }))
-      .pipe(mergeMap(() => {
-        this.savedFormData = saveData;
-        this.updateApplicationInStore();
-        this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
-        return of(true);
-      })).subscribe(res => {
-        this.saveComplete.emit(true);
-        this.snackBar.open('Application Submitted to the Branch for Review', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
-        this.router.navigateByUrl('/dashboard');
-      });
+      this.busy = forkJoin(
+        this.applicationDataService.updateApplication({
+          ...this.application,
+          ...this.normalizeFormData(),
+          applicationStatus: 'UnderReview'
+        }),
+        this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
+      ).pipe(takeWhile(() => this.componentActive))
+        .pipe(catchError(() => {
+          this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+          return of(false);
+        }))
+        .pipe(mergeMap(() => {
+          this.savedFormData = saveData;
+          this.updateApplicationInStore();
+          this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+          return of(true);
+        })).subscribe(res => {
+          this.saveComplete.emit(true);
+          this.snackBar.open('Application Submitted to the Branch for Review', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+          this.router.navigateByUrl('/dashboard');
+        });
 
   }
 
@@ -1235,11 +1236,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
     const serviceArea = ('areas' in this.form.get('serviceAreas').value) ? this.form.get('serviceAreas').value['areas'] : this.form.get('serviceAreas').value;
 
     //if (this.showServiceArea() && serviceArea.length === 0 && (this.isLP() || ApplicationTypeNames.SpecialEventAreaEndorsement || ApplicationTypeNames.LoungeAreaEndorsment) )	{
-    if (this.showServiceArea() && serviceArea.length === 0) {
+    if (this.showServiceArea() && serviceArea.length === 0 ) {
       valid = false;
       this.validationMessages.push('At least one service area is required.');
     }
-
+ 
     if (this.application.applicationType.showAssociatesFormUpload &&
       ((this.uploadedAssociateDocuments || 0) < 1)) {
       valid = false;
@@ -1411,12 +1412,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
 
     if (this.showZoning() && this.application.isPermittedInZoning != true) {
-      this.validationMessages.push('Zoning Declaration is required.');
-    }
-
-    if (!this.form.get('productsListAndDescription').value && this.application.applicationType.name === ApplicationTypeNames.MFG) {
-      valid = false;
-      this.validationMessages.push('Please add products list and description.');
+        this.validationMessages.push('Zoning Declaration is required.');
     }
 
     return valid && (this.form.valid || this.form.disabled);
