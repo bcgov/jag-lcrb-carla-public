@@ -244,7 +244,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioFpaddresscity = from.FPAddressCity;
             to.AdoxioFpaddresspostalcode = from.FPAddressPostalCode;
             to.AdoxioFpaddressstreet = from.FPAddressStreet;
-            
+            to.AdoxioUploaddeclarations = from.UploadDeclarations;
         }
 
 
@@ -608,9 +608,11 @@ namespace Gov.Lclb.Cllb.Public.Models
                 FederalLicenceName = dynamicsApplication.AdoxioFederallicencename,
                 FPAddressCity =dynamicsApplication.AdoxioFpaddresscity,     
                 FPAddressPostalCode=dynamicsApplication.AdoxioFpaddresspostalcode,
-                FPAddressStreet=dynamicsApplication.AdoxioFpaddressstreet     
-                
-        };
+                FPAddressStreet=dynamicsApplication.AdoxioFpaddressstreet,
+
+                UploadDeclarations= dynamicsApplication.AdoxioUploaddeclarations
+
+            };
 
 
             // mfg fields
