@@ -238,4 +238,5 @@ export interface Application {
   fpAddressPostalCode: string;
 
   uploadDeclarations: boolean;
+  productslistanddescription: string;
 }

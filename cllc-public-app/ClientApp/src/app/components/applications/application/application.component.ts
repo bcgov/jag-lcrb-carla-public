@@ -255,7 +255,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
       fpAddressStreet: ['', Validators.required],
       fpAddressCity: ['', Validators.required],
       fpAddressPostalCode: ['', [Validators.required, Validators.pattern(CanadaPostalRegex)]],
-      uploadDeclarations: ['', []]
+      uploadDeclarations: ['', []],
+      productsListAndDescription: ['', []]
     });
 
     this.form.get('pin').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
@@ -1407,10 +1408,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
       valid = false;
       this.validationMessages.push('Requirements For Operating A Lounge Area Endorsement is required.');
     }
-    //if (this.application?.applicationType.name == ApplicationTypeNames.MFG && this.listAndDescribeProducts == undefined) {
-    //  valid = false;
-    //  this.validationMessages.push('List and Describtion of products is required.');
-    //}
+
+    if (!this.form.get('productsListAndDescription').value && this.application.applicationType.name === ApplicationTypeNames.MFG) {
+      valid = false;
+      this.validationMessages.push('Please add products list and description.');
+    }
 
     if (this.showZoning() && this.application.isPermittedInZoning != true) {
         this.validationMessages.push('Zoning Declaration is required.');

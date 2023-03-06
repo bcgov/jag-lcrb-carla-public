@@ -1163,6 +1163,7 @@
         <section *ngIf="application && form && application?.applicationType?.name === 'Manufacturer'">
           <app-business-plan *ngIf="application" [application]="application" [form]="form">
           </app-business-plan>
+         
         </section>
 
         <div *ngIf="!isFormControlDisabled('isHasPatio') || application?.applicationType?.showPatio">
@@ -2279,6 +2280,7 @@
                   </mat-checkbox>
                 </div>
               </section>
+             
             </section>
             <section *ngIf="isRelocation()">
               <b>Note:</b> Valid interest must be maintained at the current and proposed site until the relocation is finalized. LCRB may request a copy of valid interest at the current site during the relocation application process.
