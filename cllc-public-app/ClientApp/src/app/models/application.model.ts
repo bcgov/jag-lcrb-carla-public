@@ -237,5 +237,6 @@ export interface Application {
   fpAddressCity: string;
   fpAddressPostalCode: string;
 
+  uploadDeclarations: boolean;
   productslistanddescription: string;
 }
