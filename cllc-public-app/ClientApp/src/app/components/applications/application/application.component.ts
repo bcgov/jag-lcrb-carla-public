@@ -254,7 +254,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
       federalLicenceName: ['', Validators.required],
       fpAddressStreet: ['', Validators.required],
       fpAddressCity: ['', Validators.required],
-      fpAddressPostalCode: ['', [Validators.required, Validators.pattern(CanadaPostalRegex)]]
+      fpAddressPostalCode: ['', [Validators.required, Validators.pattern(CanadaPostalRegex)]],
+      uploadDeclarations: ['', []]
     });
 
     this.form.get('pin').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
@@ -1402,6 +1403,14 @@ export class ApplicationComponent extends FormBase implements OnInit {
         this.validationMessages.push('Please confirm  picnic area declaration local government/First Nation supports the proposed capacity for the picnic area endorsement.');
       }
     }
+    if (this.form.get('uploadDeclarations').value != true && (this.application?.applicationType.name == ApplicationTypeNames.LoungeAreaEndorsment || this.application?.applicationType.name == ApplicationTypeNames.SpecialEventAreaEndorsement)) {
+      valid = false;
+      this.validationMessages.push('Requirements For Operating A Lounge Area Endorsement is required.');
+    }
+    //if (this.application?.applicationType.name == ApplicationTypeNames.MFG && this.listAndDescribeProducts == undefined) {
+    //  valid = false;
+    //  this.validationMessages.push('List and Describtion of products is required.');
+    //}
 
     if (this.showZoning() && this.application.isPermittedInZoning != true) {
         this.validationMessages.push('Zoning Declaration is required.');
