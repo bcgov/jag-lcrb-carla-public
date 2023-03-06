@@ -612,13 +612,10 @@ namespace Gov.Lclb.Cllb.Public.Models
                 FPAddressCity =dynamicsApplication.AdoxioFpaddresscity,     
                 FPAddressPostalCode=dynamicsApplication.AdoxioFpaddresspostalcode,
                 FPAddressStreet=dynamicsApplication.AdoxioFpaddressstreet,
-
-                UploadDeclarations= dynamicsApplication.AdoxioUploaddeclarations
-
-            };
-                FPAddressStreet=dynamicsApplication.AdoxioFpaddressstreet,
-
+                
+                UploadDeclarations = dynamicsApplication.AdoxioUploaddeclarations,
                 ProductsListAndDescription = dynamicsApplication.AdoxioProductslistanddescription
+
             };
 
 
