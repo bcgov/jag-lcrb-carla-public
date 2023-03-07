@@ -1418,6 +1418,36 @@ export class ApplicationComponent extends FormBase implements OnInit {
         this.validationMessages.push('Zoning Declaration is required.');
     }
 
+    if (this.application?.applicationType.name == ApplicationTypeNames.MFG) {
+      if (this.form.get("licenceSubCategory").value === "Brewery" &&
+        (this.form.get('mfrSupInfoReadUnderstand').value != true || this.form.get('mfrSupInfoOwnRent').value != true ||
+          this.form.get('mfrSupInfoProductionEquipment').value != true)) {
+        valid = false;
+        this.validationMessages.push('Manufacture supporting Information is required.');
+      }
+
+      if (this.form.get("licenceSubCategory").value === "Winery" &&
+        (this.form.get('mfrSupInfoReadUnderstand').value != true || this.form.get('mfrSupInfoOwnRent').value != true ||
+          this.form.get('mfrSupInfoIntendProduce').value != true || this.form.get('mfrSupInfoProductionEquipment').value != true)) {
+        valid = false;
+        this.validationMessages.push('Manufacture supporting Information is required.');
+      }
+
+      if (this.form.get("licenceSubCategory").value === "Co-Packer" &&
+        this.form.get('mfrSupInfoReadUnderstand').value != true) {
+        valid = false;
+        this.validationMessages.push('Manufacture supporting Information is required.');
+      }
+
+      if (this.form.get("licenceSubCategory").value === "Distillery" &&
+        (this.form.get('mfrSupInfoReadUnderstand').value != true || this.form.get('mfrSupInfoOwnRent').value != true ||
+          this.form.get('mfrSupInfoProductionEquipment').value != true)) {
+        valid = false;
+        this.validationMessages.push('Manufacture supporting Information is required.');
+      }
+
+    }
+
     return valid && (this.form.valid || this.form.disabled);
   }
 

@@ -614,8 +614,11 @@ namespace Gov.Lclb.Cllb.Public.Models
                 FPAddressStreet=dynamicsApplication.AdoxioFpaddressstreet,
                 
                 UploadDeclarations = dynamicsApplication.AdoxioUploaddeclarations,
-                ProductsListAndDescription = dynamicsApplication.AdoxioProductslistanddescription
-
+                ProductsListAndDescription = dynamicsApplication.AdoxioProductslistanddescription,
+                MfrSupInfoReadUnderstand = dynamicsApplication.AdoxioMfrsupinforeadunderstand,
+                MfrSupInfoIntendProduce = dynamicsApplication.AdoxioMfrsupinfointendproduce,
+                MfrSupInfoOwnRent = dynamicsApplication.AdoxioMfrsupinfoownrent,
+                MfrSupInfoProductionEquipment = dynamicsApplication.AdoxioMfrsupinfoproductionequipment,
             };
 
 
