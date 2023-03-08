@@ -1324,7 +1324,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 else
                 {
                     _logger.Debug("Transaction NOT approved");
-
+                    var messageId = response["messageId"];
+                    // If transaction is not Cancelled
+                    if (messageId != "559")
+                    {
                     // set invoice status to Cancelled
                     MicrosoftDynamicsCRMinvoice invoice2 = new MicrosoftDynamicsCRMinvoice
                     {
