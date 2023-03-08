@@ -1047,44 +1047,47 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 else
                 {
                     _logger.Debug("Transaction NOT approved");
+                    var messageId = response["messageId"];
+                    // If transaction is not Cancelled
+                    if (messageId != "559")
+                    {
+                        MicrosoftDynamicsCRMinvoice patchInvoice = new MicrosoftDynamicsCRMinvoice
+                        {
+                            // set invoice status to Cancelled
+                            Statecode = (int?)Adoxio_invoicestates.Cancelled,
+                            Statuscode = (int?)Adoxio_invoicestatuses.Cancelled
+                        };
+                        try
+                        {
+                            _dynamicsClient.Invoices.Update(invoice.Invoiceid, patchInvoice);
+                        }
+                        catch (HttpOperationException httpOperationException)
+                        {
+                            _logger.Error(httpOperationException, "Error updating invoice");
 
-                    MicrosoftDynamicsCRMinvoice patchInvoice = new MicrosoftDynamicsCRMinvoice
-                    {
-                        // set invoice status to Cancelled
-                        Statecode = (int?)Adoxio_invoicestates.Cancelled,
-                        Statuscode = (int?)Adoxio_invoicestatuses.Cancelled
-                    };
-                    try
-                    {
-                        _dynamicsClient.Invoices.Update(invoice.Invoiceid, patchInvoice);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.Error(httpOperationException, "Error updating invoice");
-
-                        // fail 
-                        throw (httpOperationException);
-                    }
+                            // fail 
+                            throw (httpOperationException);
+                        }
 
 
-                    // set the Application invoice status back to No
-                    MicrosoftDynamicsCRMadoxioApplication patchApplication = new MicrosoftDynamicsCRMadoxioApplication
-                    {
-                        AdoxioLicencefeeinvoicetrigger = (int?)ViewModels.GeneralYesNo.No
-                    };
-                    try
-                    {
-                        _dynamicsClient.Applications.Update(id, patchApplication);
+                        // set the Application invoice status back to No
+                        MicrosoftDynamicsCRMadoxioApplication patchApplication = new MicrosoftDynamicsCRMadoxioApplication
+                        {
+                            AdoxioLicencefeeinvoicetrigger = (int?)ViewModels.GeneralYesNo.No
+                        };
+                        try
+                        {
+                            _dynamicsClient.Applications.Update(id, patchApplication);
+                        }
+                        catch (HttpOperationException httpOperationException)
+                        {
+                            _logger.Error(httpOperationException, "Error updating application");
+                            // fail 
+                            throw (httpOperationException);
+                        }
+                        _logger.Information($"Licence Fee Transaction NOT approved.  Application ID: {id} Invoice: {invoice.Invoicenumber} Liquor: {paymentType}");
                     }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.Error(httpOperationException, "Error updating application");
-                        // fail 
-                        throw (httpOperationException);
-                    }
-                    _logger.Information($"Licence Fee Transaction NOT approved.  Application ID: {id} Invoice: {invoice.Invoicenumber} Liquor: {paymentType}");
                 }
-
 
 
             }
@@ -1580,41 +1583,44 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 else
                 {
                     Log.Debug("Transaction NOT approved");
+                    var messageId = response["messageId"];
+                    // If transaction is not Cancelled
+                    if (messageId != "559")
+                    {
+                        // set invoice status to Cancelled
+                        MicrosoftDynamicsCRMinvoice invoice2 = new MicrosoftDynamicsCRMinvoice
+                        {
+                            Statecode = (int?)Adoxio_invoicestates.Cancelled,
+                            Statuscode = (int?)Adoxio_invoicestatuses.Cancelled
+                        };
+                        try
+                        {
+                            dynamicsClient.Invoices.Update(invoice.Invoiceid, invoice2);
+                        }
+                        catch (HttpOperationException httpOperationException)
+                        {
+                            Log.Error(httpOperationException, "Error updating invoice");
+                            // fail 
+                            throw (httpOperationException);
+                        }
+                        // set the Application invoice status back to No
+                        MicrosoftDynamicsCRMadoxioApplication adoxioApplication2 = new MicrosoftDynamicsCRMadoxioApplication
+                        {
+                            AdoxioInvoicetrigger = (int?)ViewModels.GeneralYesNo.No
+                        };
+                        try
+                        {
+                            dynamicsClient.Applications.Update(application.AdoxioApplicationid, adoxioApplication2);
+                        }
+                        catch (HttpOperationException httpOperationException)
+                        {
+                            Log.Error(httpOperationException, "Error updating application");
+                            // fail 
+                            throw (httpOperationException);
+                        }
 
-                    // set invoice status to Cancelled
-                    MicrosoftDynamicsCRMinvoice invoice2 = new MicrosoftDynamicsCRMinvoice
-                    {
-                        Statecode = (int?)Adoxio_invoicestates.Cancelled,
-                        Statuscode = (int?)Adoxio_invoicestatuses.Cancelled
-                    };
-                    try
-                    {
-                        dynamicsClient.Invoices.Update(invoice.Invoiceid, invoice2);
+                        Log.Information($"Payment not approved.  Application ID: {application.AdoxioApplicationid} Invoice: {invoice.Invoicenumber} Liquor: {isAlternateAccount}");
                     }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        Log.Error(httpOperationException, "Error updating invoice");
-                        // fail 
-                        throw (httpOperationException);
-                    }
-                    // set the Application invoice status back to No
-                    MicrosoftDynamicsCRMadoxioApplication adoxioApplication2 = new MicrosoftDynamicsCRMadoxioApplication
-                    {
-                        AdoxioInvoicetrigger = (int?)ViewModels.GeneralYesNo.No
-                    };
-                    try
-                    {
-                        dynamicsClient.Applications.Update(application.AdoxioApplicationid, adoxioApplication2);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        Log.Error(httpOperationException, "Error updating application");
-                        // fail 
-                        throw (httpOperationException);
-                    }
-
-                    Log.Information($"Payment not approved.  Application ID: {application.AdoxioApplicationid} Invoice: {invoice.Invoicenumber} Liquor: {isAlternateAccount}");
-
                 }
             }
             else
