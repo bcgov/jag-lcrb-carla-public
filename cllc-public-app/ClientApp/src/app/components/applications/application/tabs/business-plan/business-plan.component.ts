@@ -42,6 +42,7 @@ export class BusinessPlanComponent extends FormBase implements OnInit {
     this.form.addControl("mfgAcresOfFruit", new FormControl(this.application.mfgAcresOfHoney));
     this.form.addControl("mfgAcresOfHoney", new FormControl(this.application.mfgAcresOfHoney));
     this.form.addControl("mfgUsesNeutralGrainSpirits", new FormControl(this.application.mfgUsesNeutralGrainSpirits));
+    this.form.addControl("productsListAndDescription", new FormControl(this.application.productslistanddescription, Validators.required));
 
     this.licenceSubCatControl = this.form.get("licenceSubCategory");
 
@@ -73,7 +74,7 @@ export class BusinessPlanComponent extends FormBase implements OnInit {
   }
 
   isCopacker(): boolean {
-    return this.form.get("licenceSubCategory").value === "Co-packer";
+    return this.form.get("licenceSubCategory").value === "Co-Packer";
   }
 
   isDistillery(): boolean {
