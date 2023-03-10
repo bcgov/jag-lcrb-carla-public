@@ -549,7 +549,7 @@
         </section>
         <!-- LCSD-6355 Upload Declarations section -->
         <h3 class="blue-header ngtest-declarations" *ngIf="application?.applicationType.name == 'Lounge Area Endorsement' || application?.applicationType.name == 'Special Event Area Endorsement'">
-          Upload DECLARATIONS
+          Requirements For Operating A Lounge Area Endorsement
         </h3>
         <div class="padded-section content-bottom">
           <ng-container>
@@ -606,14 +606,6 @@
             <mat-checkbox formControlName="uploadDeclarations">
               I have read and understand the above terms and conditions.
             </mat-checkbox>
-            <!--<mat-checkbox [(ngModel)]="isUploadDeclarations">
-              <span class="error-states">*</span>
-
-              <span class="ml-2">
-                I have read and understand the above terms and conditions.
-              </span>
-            </mat-checkbox>-->
-            
 
           </ng-container>
 
@@ -939,7 +931,7 @@
         </section>
 
         <!-- Letter of Intent -->
-        <section *ngIf="showFormControl(application?.applicationType?.letterOfIntent)">
+        <section *ngIf="showFormControl(application?.applicationType?.letterOfIntent) && application?.applicationType.name != 'Lounge Area Endorsement' && application?.applicationType.name != 'Special Event Area Endorsement'">
           <div [ngSwitch]="application?.applicationType?.name">
             <h3 class="blue-header" *ngSwitchCase="'Sales to Hospitality Licensees'">Authorization Form</h3>
             <h3 class="blue-header" *ngSwitchCase="'Temporary Expanded Service Areas (FP)'">Local Government/Indigenous Nation Comments</h3>
@@ -1171,6 +1163,7 @@
         <section *ngIf="application && form && application?.applicationType?.name === 'Manufacturer'">
           <app-business-plan *ngIf="application" [application]="application" [form]="form">
           </app-business-plan>
+         
         </section>
 
         <div *ngIf="!isFormControlDisabled('isHasPatio') || application?.applicationType?.showPatio">
@@ -1779,8 +1772,6 @@
             For Distillers Only: The Office of the Fire Commissioner (OFC) requires that a distillery be constructed and maintained in conformance with the BC Fire Code. The OFC will be provided a copy of the Approval in Principal for your application, if issued.
           </section>
         </div>
-       
-       
 
         <div *ngIf="showSitePhotos()">
 
@@ -1829,10 +1820,9 @@
         and an eligible grocery store?
         </div-->
               be
+              cl
               <div class="question-label" *ngIf="!htmlContent.grocery">
-                Is the proposed location inside a grocery
-store?
-                di
+                Is the proposed location inside a grocery store?
               </div>
               <div class="question-label" *ngIf="htmlContent.grocery" [innerHTML]="htmlContent.grocery"></div>
 
@@ -2289,15 +2279,8 @@ store?
                     </ul>
                   </mat-checkbox>
                 </div>
-
               </section>
-              <div *ngIf="application?.applicationType.name == 'Manufacturer'">
-                <hr><br>
-                <app-field label="Please list and describe products other than beer, wine, or distiller spirits, you intend to produce once licensed. (e.g. Alcoholic kombucha, Soju, hard seltzers or other alcohol based Ready to Drink (RTD) products)">
-                  <textarea style="width: 800px;" class="form-control"
-                            formControlName="productsListAndDescription"></textarea>
-                </app-field>
-              </div>
+             
             </section>
             <section *ngIf="isRelocation()">
               <b>Note:</b> Valid interest must be maintained at the current and proposed site until the relocation is finalized. LCRB may request a copy of valid interest at the current site during the relocation application process.
@@ -2629,12 +2612,12 @@ store?
           <div class="ngtest-before-starting-content" [innerHTML]="htmlContent.nextSteps"></div>
         </section>
 
-        <!-- Proceed to Pay-->
+        <!--  Proceed to Pay -->
 
         <section class="d-flex" style="margin-top: 15px;"
                  *ngIf="!isOpenedByLGForApproval
          && !isRAS()
-         && !isFreeEndorsement() && !application?.applicationType?.isFree && !skipPayment
+         && !application?.applicationType?.isFree && !skipPayment
          && ((!isShowLGINApproval && !application?.applicationType?.isShowLGZoningConfirmation)
               ||!showSubmitToLG()) ">
 
@@ -2805,7 +2788,7 @@ store?
 
             <button mat-raised-button *ngIf="!application?.applicationType?.requiresSecurityScreening" color="primary"
                     (click)="submit_application()" [disabled]="submitApplicationInProgress">
-              SUBMIT&nbsp;<span *ngIf="!isFreeEndorsement() && !application?.applicationType?.isFree &&  !skipPayment && !isRAS()">&amp; PAY</span>
+              SUBMIT&nbsp;<span *ngIf="!application?.applicationType?.isFree &&  !skipPayment && !isRAS()">&amp; PAY</span>
               <mat-progress-bar *ngIf="submitApplicationInProgress" mode="indeterminate"></mat-progress-bar>
             </button>
 

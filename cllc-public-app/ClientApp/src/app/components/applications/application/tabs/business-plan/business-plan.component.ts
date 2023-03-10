@@ -42,14 +42,10 @@ export class BusinessPlanComponent extends FormBase implements OnInit {
     this.form.addControl("mfgAcresOfFruit", new FormControl(this.application.mfgAcresOfHoney));
     this.form.addControl("mfgAcresOfHoney", new FormControl(this.application.mfgAcresOfHoney));
     this.form.addControl("mfgUsesNeutralGrainSpirits", new FormControl(this.application.mfgUsesNeutralGrainSpirits));
+    this.form.addControl("productsListAndDescription", new FormControl(this.application.productslistanddescription, Validators.required));
 
     this.licenceSubCatControl = this.form.get("licenceSubCategory");
 
-    
-    this.form.addControl("mfrSupInfoReadUnderstand", new FormControl(this.application.mfrSupInfoReadUnderstand));
-    this.form.addControl("mfrSupInfoOwnRent", new FormControl(this.application.mfrSupInfoOwnRent));
-    this.form.addControl("mfrSupInfoIntendProduce", new FormControl(this.application.mfrSupInfoIntendProduce));
-    this.form.addControl("mfrSupInfoProductionEquipment", new FormControl(this.application.mfrSupInfoProductionEquipment));
 
     // to do patch in a value to description2 with subscription to productionStages.selectedobjects
     // each option should be separated with a \n so that it shows as separate lines on the field in dynamics
@@ -61,13 +57,7 @@ export class BusinessPlanComponent extends FormBase implements OnInit {
   There are a lot of conditional requirements depending on what is selected.
   Most are self explanatory
 */
-  categoryChange() {
-    this.form.controls['mfrSupInfoReadUnderstand'].setValue(false);
-    this.form.controls['mfrSupInfoOwnRent'].setValue(false);
-    this.form.controls['mfrSupInfoIntendProduce'].setValue(false);
-    this.form.controls['mfrSupInfoProductionEquipment'].setValue(false);
 
-  }
   hasType(): boolean {
     // to do, set validation requirements
     return this.form.get("licenceSubCategory").value;

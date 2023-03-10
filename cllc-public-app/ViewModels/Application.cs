@@ -750,11 +750,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string FPAddressPostalCode {get;set;}
         public string FPAddressStreet {get;set;}
 
-        public string ProductsListAndDescription { get; set; }
         public bool? UploadDeclarations { get; set; }
-        public bool? MfrSupInfoReadUnderstand { get; set; }
-        public bool? MfrSupInfoIntendProduce { get; set; }
-        public bool? MfrSupInfoOwnRent { get; set; }
-        public bool? MfrSupInfoProductionEquipment { get; set; }
+        public string ProductsListAndDescription { get; set; }
     }
 }

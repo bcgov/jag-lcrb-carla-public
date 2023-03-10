@@ -1,4 +1,4 @@
-using Gov.Lclb.Cllb.Interfaces;
+﻿using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Utils;
 using Gov.Lclb.Cllb.Public.ViewModels;
@@ -245,14 +245,9 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioFpaddresspostalcode = from.FPAddressPostalCode;
             to.AdoxioFpaddressstreet = from.FPAddressStreet;
 
-            to.AdoxioUploaddeclarations = from.UploadDeclarations;
             to.AdoxioProductslistanddescription = from.ProductsListAndDescription;
 
-            to.AdoxioMfrsupinforeadunderstand = from.MfrSupInfoReadUnderstand;
-            to.AdoxioMfrsupinfointendproduce = from.MfrSupInfoIntendProduce;
-            to.AdoxioMfrsupinfoownrent = from.MfrSupInfoOwnRent;
-            to.AdoxioMfrsupinfoproductionequipment = from.MfrSupInfoProductionEquipment;
-
+            to.AdoxioUploaddeclarations = from.UploadDeclarations;
         }
 
 
@@ -616,15 +611,11 @@ namespace Gov.Lclb.Cllb.Public.Models
                 FederalLicenceName = dynamicsApplication.AdoxioFederallicencename,
                 FPAddressCity =dynamicsApplication.AdoxioFpaddresscity,     
                 FPAddressPostalCode=dynamicsApplication.AdoxioFpaddresspostalcode,
-                FPAddressStreet=dynamicsApplication.AdoxioFpaddressstreet ,
-
-                UploadDeclarations=dynamicsApplication.AdoxioUploaddeclarations,
-                ProductsListAndDescription = dynamicsApplication.AdoxioProductslistanddescription,
-                MfrSupInfoReadUnderstand = dynamicsApplication.AdoxioMfrsupinforeadunderstand,
-                MfrSupInfoIntendProduce = dynamicsApplication.AdoxioMfrsupinfointendproduce,
-                MfrSupInfoOwnRent = dynamicsApplication.AdoxioMfrsupinfoownrent,
-                MfrSupInfoProductionEquipment = dynamicsApplication.AdoxioMfrsupinfoproductionequipment,
+                FPAddressStreet=dynamicsApplication.AdoxioFpaddressstreet,
                 
+                UploadDeclarations = dynamicsApplication.AdoxioUploaddeclarations,
+                ProductsListAndDescription = dynamicsApplication.AdoxioProductslistanddescription
+
             };
 
 
