@@ -1405,7 +1405,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
     if (this.form.get('uploadDeclarations').value != true && (this.application?.applicationType.name == ApplicationTypeNames.LoungeAreaEndorsment || this.application?.applicationType.name == ApplicationTypeNames.SpecialEventAreaEndorsement)) {
       valid = false;
-      this.validationMessages.push('Requirements For Operating A Lounge Area Endorsement is required.');
+      this.validationMessages.push('Requirements For Operating is required.');
     }
     //if (this.application?.applicationType.name == ApplicationTypeNames.MFG && this.listAndDescribeProducts == undefined) {
     //  valid = false;
