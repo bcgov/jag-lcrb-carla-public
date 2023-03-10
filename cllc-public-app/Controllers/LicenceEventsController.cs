@@ -474,7 +474,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset tcpreset = _dynamicsClient.Termsconditionslimitationspresets.GetByKey(item._adoxioTermsconditionspresetValue);
                             if(tcpreset != null)
                             {
-                                termsAndConditions += $"<li>{tcpreset.AdoxioContents}</li>";
+                                termsAndConditions += $"<li>{tcpreset.AdoxioContents.Replace("\n","<br/>")}</li>";
                             } 
                         }
                     }

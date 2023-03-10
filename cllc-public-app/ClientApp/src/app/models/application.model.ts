@@ -237,10 +237,6 @@ export interface Application {
   fpAddressCity: string;
   fpAddressPostalCode: string;
 
-  productslistanddescription: string;
   uploadDeclarations: boolean;
-  mfrSupInfoReadUnderstand: boolean;
-  mfrSupInfoIntendProduce: boolean;
-  mfrSupInfoOwnRent: boolean;
-  mfrSupInfoProductionEquipment: boolean;
+  productslistanddescription: string;
 }
