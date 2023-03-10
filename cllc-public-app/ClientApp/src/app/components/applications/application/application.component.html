@@ -1169,10 +1169,11 @@
           </section>
           <!-- Business Plan for Manufacturers-->
 
-          <section *ngIf="application && form && application?.applicationType?.name === 'Manufacturer'">
-            <app-business-plan *ngIf="application" [application]="application" [form]="form">
-            </app-business-plan>
-          </section>
+        <section *ngIf="application && form && application?.applicationType?.name === 'Manufacturer'">
+          <app-business-plan *ngIf="application" [application]="application" [form]="form">
+          </app-business-plan>
+         
+        </section>
 
           <div *ngIf="!isFormControlDisabled('isHasPatio') || application?.applicationType?.showPatio">
             <app-field label="Will the establishment have a patio?"
@@ -2253,47 +2254,48 @@
                          formControlName="description1" mask="0009">
                 </app-field>
 
-                <section>
-                  <div>
-                    <mat-checkbox formControlName="isOwnerBusiness">
-                      The applicant is the owner of the business in respect of which the licence is to be issued or will become the owner before the licence is issued.
-                    </mat-checkbox>
-                  </div>
-                  <div>
-                    <mat-checkbox formControlName="hasValidInterest">
-                      At the time of this submission, the applicant is:
-                      <ul>
-                        <li>
-                          The owner of or has an agreement to purchase the place or premises that will form the
-                          proposed
-                          establishment, or
-                        </li>
-                        <li>
-                          The lessee or has a binding offer to lease the place or premises that will form the proposed
-                          establishment
-                        </li>
-                      </ul>
-                    </mat-checkbox>
-                  </div>
-                  <div>
-                    <mat-checkbox formControlName="willHaveValidInterest">
-                      At the time the licence is issued, the applicant will be:
-                      <ul>
-                        <li>The owner of the place or premises that forms the establishment, or</li>
-                        <li>
-                          The lessee of the place or premises that forms the establishment (term no less than 12
-                          months).
-                        </li>
-                      </ul>
-                    </mat-checkbox>
-                  </div>
-                </section>
+              <section>
+                <div>
+                  <mat-checkbox formControlName="isOwnerBusiness">
+                    The applicant is the owner of the business in respect of which the licence is to be issued or will become the owner before the licence is issued.
+                  </mat-checkbox>
+                </div>
+                <div>
+                  <mat-checkbox formControlName="hasValidInterest">
+                    At the time of this submission, the applicant is:
+                    <ul>
+                      <li>
+                        The owner of or has an agreement to purchase the place or premises that will form the
+                        proposed
+                        establishment, or
+                      </li>
+                      <li>
+                        The lessee or has a binding offer to lease the place or premises that will form the proposed
+                        establishment
+                      </li>
+                    </ul>
+                  </mat-checkbox>
+                </div>
+                <div>
+                  <mat-checkbox formControlName="willHaveValidInterest">
+                    At the time the licence is issued, the applicant will be:
+                    <ul>
+                      <li>The owner of the place or premises that forms the establishment, or</li>
+                      <li>
+                        The lessee of the place or premises that forms the establishment (term no less than 12
+                        months).
+                      </li>
+                    </ul>
+                  </mat-checkbox>
+                </div>
               </section>
-              <section *ngIf="isRelocation()">
-                <b>Note:</b> Valid interest must be maintained at the current and proposed site until the relocation is finalized. LCRB may request a copy of valid interest at the current site during the relocation application process.
-              </section>
-            </div>
-          </section>
+             
+            </section>
+            <section *ngIf="isRelocation()">
+              <b>Note:</b> Valid interest must be maintained at the current and proposed site until the relocation is finalized. LCRB may request a copy of valid interest at the current site during the relocation application process.
+            </section>
+          </div>
+        </section>
 
           <section class="ngtest-valid-interest" *ngIf="showFormControl(application?.applicationType?.validInterest) || showValidInterestforTransfer()">
             <hr><br>

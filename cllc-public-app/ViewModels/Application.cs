@@ -751,6 +751,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string FPAddressStreet {get;set;}
 
         public bool? UploadDeclarations { get; set; }
-
+        public string ProductsListAndDescription { get; set; }
     }
 }
