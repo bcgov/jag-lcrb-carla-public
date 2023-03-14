@@ -198,7 +198,7 @@
 
     </div>
   </div>
-  <div *ngIf="application?.applicationType.name == 'Manufacturer'">
+  <div *ngIf="application?.applicationType.name == 'Manufacturer' && !isCopacker()">
     <hr><br>
     <app-field label="Please list and describe products other than beer, wine, or distiller spirits, you intend to produce once licensed. (e.g. Alcoholic kombucha, Soju, hard seltzers or other alcohol based Ready to Drink (RTD) products)">
       <textarea style="width: 800px;" class="form-control"
