@@ -1481,6 +1481,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 ("Beer/Cider/Cooler", (int)specialEvent.Beer, specialEvent.AverageBeerPrice),
                 ("Wine", (int)specialEvent.Wine, specialEvent.AverageWinePrice),
                 ("Spirits", (int)specialEvent.Spirits, specialEvent.AverageSpiritsPrice),
+                // TODO - possible only add if combination. 
+                // Q: do we want to calc avg beer price using only the ones that are selling or use them all? 
+                //("Beer/Cider/Cooler", (int)specialEvent.Beer, specialEvent.AverageBeerPrice),
+                //("Wine", (int)specialEvent.Wine, specialEvent.AverageWinePrice),
+                //("Spirits", (int)specialEvent.Spirits, specialEvent.AverageSpiritsPrice)
             };
 
             // Create or Update Drink Sale Forecast with the serving amounts
