@@ -1372,14 +1372,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // copy received values to Dynamics Application
             adoxioApplication.CopyValues(item);
 
-            //TODO Disabled for Deployment to be reenabled after.
             //LCSD-6495 set applicationType is free of if this applicationType IsEndorsement and Non licence assigned to this application.    
-            /*if (item.ApplicationType.IsEndorsement.HasValue && item.ApplicationType.IsEndorsement.Value && item.AssignedLicence == null
+            if (item.ApplicationType.IsEndorsement.HasValue && item.ApplicationType.IsEndorsement.Value && item.AssignedLicence == null
                 && !(item.ApplicationType.IsFree.HasValue && item.ApplicationType.IsFree.Value) ) 
             {
                 string itemApplicationName = item.ApplicationType.Name + " - Free";
                 adoxioApplication.AdoxioApplicationTypeId =_dynamicsClient.GetApplicationTypeByName(itemApplicationName);
-            } */  
+            }   
 
             adoxioApplication.AdoxioApplicanttype = (int?)item.ApplicantType;
             
