@@ -59,10 +59,18 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
     beer: [0],
     wine: [0],
     spirits: [0],
+    beer_free: [0],
+    wine_free: [0],
+    spirits_free: [0],
     averageBeerPrice: [null],
     averageWinePrice: [null],
     averageSpiritsPrice: [null],
   });
+
+  // Some of the drinks are provided free
+  get someFree(): boolean {
+    return this.sepApplication?.chargingForLiquorReason === "Combination";
+  }
 
   getTotalServings(): number {
     const { hours, totalMaximumNumberOfGuests } = this.form.value;
@@ -70,8 +78,13 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
   }
 
   get totalPercentage(): number {
-    const { beer, wine, spirits } = this.form.value as { beer: number; wine: number; spirits: number };
-    return beer + wine + spirits;
+    if (!this.someFree) {
+      const { beer, wine, spirits } = this.form.value as { beer: number; wine: number; spirits: number };
+      return beer + wine + spirits;
+    } else {
+      const { beer, beer_free, wine, wine_free, spirits, spirits_free } = this.form.value as { beer: number; beer_free: number, wine: number, wine_free: number, spirits: number, spirits_free: number };
+      return beer + beer_free + wine + wine_free + spirits + spirits_free;
+    }
   }
 
   getAVControlName(groupName: string): string {
@@ -173,6 +186,14 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
 
   servingPercent(config: DrinkConfig): string {
     const servings: number = this.form.get(config.group).value || 0;
+    if (servings === 0 || this.totalServings === 0) {
+      return "0";
+    }
+    return (servings / this.totalServings * 100).toFixed(1);
+  }
+
+  servingPercentFree(config: DrinkConfig): string {
+    const servings: number = (this.form.get(config.group).value + this.form.get(config.group_free).value) || 0;
     if (servings === 0 || this.totalServings === 0) {
       return "0";
     }
