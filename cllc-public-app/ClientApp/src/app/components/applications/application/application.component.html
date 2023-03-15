@@ -2626,7 +2626,7 @@
           <section class="d-flex" style="margin-top: 15px;"
                    *ngIf="!isOpenedByLGForApproval
          && !isRAS()
-         && !application?.applicationType?.isFree && !skipPayment
+         && !isFreeEndorsement() && !application?.applicationType?.isFree && !skipPayment
          && ((!isShowLGINApproval && !application?.applicationType?.isShowLGZoningConfirmation)
               ||!showSubmitToLG()) ">
 
@@ -2797,7 +2797,7 @@
 
               <button mat-raised-button *ngIf="!application?.applicationType?.requiresSecurityScreening" color="primary"
                       (click)="submit_application()" [disabled]="submitApplicationInProgress">
-                SUBMIT&nbsp;<span *ngIf="!application?.applicationType?.isFree &&  !skipPayment && !isRAS()">&amp; PAY</span>
+                SUBMIT&nbsp;<span *ngIf="!isFreeEndorsement() && !application?.applicationType?.isFree &&  !skipPayment && !isRAS()">&amp; PAY</span>
                 <mat-progress-bar *ngIf="submitApplicationInProgress" mode="indeterminate"></mat-progress-bar>
               </button>
 
