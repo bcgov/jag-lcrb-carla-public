@@ -228,7 +228,7 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
     if (!this.drinkTypes || !this.sepApplication) {
       return;
     }
-
+   
     // applicants can change drink prices when operating certain types of charitable/significant events
     const isRaiseMoney = this.canRaisePrice();
     const notCharging = this.sepApplication?.chargingForLiquorReason === "LiquorIsFree";
@@ -246,6 +246,20 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
       maxBeerPrice = (this.drinkTypes["Beer/Cider/Cooler"]?.pricePerServing || 0) * multiplier;
       maxWinePrice = (this.drinkTypes["Wine"]?.pricePerServing || 0) * multiplier;
       maxSpiritsPrice = (this.drinkTypes["Spirits"]?.pricePerServing || 0) * multiplier;
+    }
+
+    if (this.someFree) {
+      const values = {};
+      for (const item of this.sepApplication.drinksSalesForecasts.filter(k => k.isCharging == false)) {
+        if (item.name.indexOf("Wine") > -1) {
+          values["wine_free"] = item.estimatedServings;
+        } else if (item.name.indexOf("Spirits") > -1) {
+          values["spirits_free"] = item.estimatedServings;
+        } else if (item.name.indexOf("Beer/Cider/Cooler") > -1) {
+          values["beer_free"] = item.estimatedServings;
+        }
+      }
+      this.form.patchValue(values);
     }
 
     const minBeerPrice =0;
