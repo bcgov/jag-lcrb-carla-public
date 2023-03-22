@@ -44425,10 +44425,16 @@
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_enforcementaction"
           }
         },
-        "adoxio_investigation_compliancemeeting": {
+        "adoxio_compliancemeeting_investigation": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_compliancemeeting"
+          }
+        },
+        "adoxio_compliance_relatedparties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_relatedparty"
           }
         }
       }
@@ -44437,6 +44443,9 @@
       "description": "Microsoft.Dynamics.CRM.adoxio_compliancemeeting",
       "type": "object",
       "properties": {
+        "_adoxio_establishmentid_value": {
+          "type": "string"
+        },
         "overriddencreatedon": {
           "format": "date-time",
           "type": "string"
@@ -44461,8 +44470,10 @@
           "format": "date-time",
           "type": "string"
         },
-        "adoxio_datetime": {
-          "format": "date-time",
+        "_adoxio_investigationenforcementid_value": {
+          "type": "string"
+        },
+        "_adoxio_licenceid_value": {
           "type": "string"
         },
         "_adoxio_inspectionid_value": {
@@ -44480,7 +44491,8 @@
         "_ownerid_value": {
           "type": "string"
         },
-        "_adoxio_establishmentid_value": {
+        "adoxio_datetime": {
+          "format": "date-time",
           "type": "string"
         },
         "adoxio_licenseecomments": {
@@ -44491,6 +44503,10 @@
         },
         "adoxio_contraventionnumber": {
           "type": "string"
+        },
+        "statuscode": {
+          "format": "int32",
+          "type": "integer"
         },
         "adoxio_details": {
           "type": "string"
@@ -44508,16 +44524,9 @@
         "_createdonbehalfby_value": {
           "type": "string"
         },
-        "statuscode": {
-          "format": "int32",
-          "type": "integer"
-        },
         "statecode": {
           "format": "int32",
           "type": "integer"
-        },
-        "_adoxio_licenceid_value": {
-          "type": "string"
         },
         "_owningteam_value": {
           "type": "string"
@@ -44532,9 +44541,6 @@
         "importsequencenumber": {
           "format": "int32",
           "type": "integer"
-        },
-        "_adoxio_investigationid_value": {
-          "type": "string"
         },
         "modifiedon": {
           "format": "date-time",
@@ -44633,7 +44639,7 @@
         "adoxio_ContraventionId": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_contravention"
         },
-        "adoxio_investigationid": {
+        "adoxio_investigationenforcementid": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complianceinvestigation"
         }
       }
@@ -44924,6 +44930,9 @@
         "_adoxio_regionalmanagerid_value": {
           "type": "string"
         },
+        "_adoxio_investigationid_value": {
+          "type": "string"
+        },
         "adoxio_rmsummary": {
           "type": "string"
         },
@@ -45171,7 +45180,7 @@
           "format": "date-time",
           "type": "string"
         },
-        "adoxio_contraventionid": {
+        "adoxio_badgenumber": {
           "type": "string"
         },
         "adoxio_importid": {
@@ -45193,8 +45202,9 @@
           "format": "decimal",
           "type": "number"
         },
-        "_adoxio_investigationid_value": {
-          "type": "string"
+        "adoxio_adminlettersent": {
+          "format": "int32",
+          "type": "integer"
         },
         "adoxio_minperiod": {
           "format": "int32",
@@ -45222,7 +45232,8 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_badgenumber": {
+        "adoxio_dateofcontravention": {
+          "format": "date-time",
           "type": "string"
         },
         "_adoxio_compliantid_value": {
@@ -45385,6 +45396,9 @@
           "type": "string"
         },
         "_createdby_value": {
+          "type": "string"
+        },
+        "adoxio_contraventionid": {
           "type": "string"
         },
         "adoxio_policynamereference": {
@@ -59285,6 +59299,10 @@
         "adoxio_phone": {
           "type": "string"
         },
+        "overriddencreatedon": {
+          "format": "date-time",
+          "type": "string"
+        },
         "_modifiedby_value": {
           "type": "string"
         },
@@ -59298,8 +59316,7 @@
         "adoxio_name": {
           "type": "string"
         },
-        "overriddencreatedon": {
-          "format": "date-time",
+        "_adoxio_investigationenforcementid_value": {
           "type": "string"
         },
         "adoxio_type": {
@@ -59330,9 +59347,6 @@
         "_owninguser_value": {
           "type": "string"
         },
-        "adoxio_iswitness": {
-          "type": "boolean"
-        },
         "modifiedon": {
           "format": "date-time",
           "type": "string"
@@ -59342,6 +59356,9 @@
         },
         "adoxio_othertype": {
           "type": "string"
+        },
+        "adoxio_iswitness": {
+          "type": "boolean"
         },
         "timezoneruleversionnumber": {
           "format": "int32",
@@ -59427,6 +59444,9 @@
         },
         "adoxio_InspectionId": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.incident"
+        },
+        "adoxio_investigationenforcementid": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complianceinvestigation"
         }
       }
     },
@@ -89180,9 +89200,8 @@
           "format": "int64",
           "type": "string"
         },
-        "discountpercentage": {
-          "format": "decimal",
-          "type": "number"
+        "adoxio_paymentcancelled": {
+          "type": "boolean"
         },
         "shipto_stateorprovince": {
           "type": "string"
@@ -89455,6 +89474,10 @@
         "entityimage_timestamp": {
           "format": "int64",
           "type": "integer"
+        },
+        "discountpercentage": {
+          "format": "decimal",
+          "type": "number"
         },
         "shipto_telephone": {
           "type": "string"
