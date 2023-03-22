@@ -54,7 +54,7 @@
     <div *ngIf="isWinery()">
       <hr>
       <p>
-        Winery applicants are required to show intent to produce at least 4,500 litres of their own wine on-site at their establishment each year. Production for this purpose is defined as ‘fermentation’, and at least one of the following winemaking steps, must take place at the establishment:
+        Winery applicants are required to show intent to produce at least 4,500 litres of their own wine on-site at their establishment each year. Production for this purpose is defined as â€˜fermentationâ€™, and at least one of the following winemaking steps, must take place at the establishment:
       </p>
       <ul>
         <li>Blending of ingredients. </li>
@@ -120,7 +120,7 @@
       </section>
     </div>
 
-    <div *ngIf="application?.applicationType.name == 'Manufacturer'">
+    <div *ngIf="application?.applicationType.name == 'Manufacturer' && !isCopacker()">
       <hr><br>
       <app-field label="Please list and describe products other than beer, wine, or distiller spirits, you intend to produce once licensed. (e.g. Alcoholic kombucha, Soju, hard seltzers or other alcohol based Ready to Drink (RTD) products)">
         <textarea style="width: 800px;" class="form-control"

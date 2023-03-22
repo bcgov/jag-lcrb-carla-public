@@ -1409,7 +1409,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.validationMessages.push('Requirements For Operating is required.');
     }
 
-    if (!this.form.get('productsListAndDescription').value && this.application.applicationType.name === ApplicationTypeNames.MFG) {
+    if (!this.form.get('productsListAndDescription').value && this.application.applicationType.name === ApplicationTypeNames.MFG && this.form.get("licenceSubCategory").value != "Co-Packer") {
       valid = false;
       this.validationMessages.push('Please add products list and description.');
     }
