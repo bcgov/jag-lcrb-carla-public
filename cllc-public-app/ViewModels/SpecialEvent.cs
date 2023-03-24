@@ -196,7 +196,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public int? Wine { get; set; }
         public int? Spirits { get; set; }
         public List<SepTermAndCondition> TermsAndConditions { get; set; }
-
+        public int? Beer_free { get; set; }
+        public int? Wine_free { get; set; }
+        public int? Spirits_free { get; set; }
     }
 
     public class ItemsToDelete
