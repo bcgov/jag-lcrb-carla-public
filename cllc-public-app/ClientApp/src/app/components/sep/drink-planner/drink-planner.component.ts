@@ -59,10 +59,18 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
     beer: [0],
     wine: [0],
     spirits: [0],
+    beer_free: [0],
+    wine_free: [0],
+    spirits_free: [0],
     averageBeerPrice: [null],
     averageWinePrice: [null],
     averageSpiritsPrice: [null],
   });
+
+  // Some of the drinks are provided free
+  get someFree(): boolean {
+    return this.sepApplication?.chargingForLiquorReason === "Combination";
+  }
 
   getTotalServings(): number {
     const { hours, totalMaximumNumberOfGuests } = this.form.value;
@@ -70,8 +78,13 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
   }
 
   get totalPercentage(): number {
-    const { beer, wine, spirits } = this.form.value as { beer: number; wine: number; spirits: number };
-    return beer + wine + spirits;
+    if (!this.someFree) {
+      const { beer, wine, spirits } = this.form.value as { beer: number; wine: number; spirits: number };
+      return beer + wine + spirits;
+    } else {
+      const { beer, beer_free, wine, wine_free, spirits, spirits_free } = this.form.value as { beer: number; beer_free: number, wine: number, wine_free: number, spirits: number, spirits_free: number };
+      return beer + beer_free + wine + wine_free + spirits + spirits_free;
+    }
   }
 
   getAVControlName(groupName: string): string {
@@ -179,6 +192,14 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
     return (servings / this.totalServings * 100).toFixed(1);
   }
 
+  servingPercentFree(config: DrinkConfig): string {
+    const servings: number = (this.form.get(config.group).value + this.form.get(config.group_free).value) || 0;
+    if (servings === 0 || this.totalServings === 0) {
+      return "0";
+    }
+    return (servings / this.totalServings * 100).toFixed(1);
+  }
+
   storageUnits(config: DrinkConfig): number {
     const servings = this.servings(config);
     const storageUnits = servings * config.servingSizeMl / config.storageSizeMl;
@@ -207,7 +228,7 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
     if (!this.drinkTypes || !this.sepApplication) {
       return;
     }
-
+   
     // applicants can change drink prices when operating certain types of charitable/significant events
     const isRaiseMoney = this.canRaisePrice();
     const notCharging = this.sepApplication?.chargingForLiquorReason === "LiquorIsFree";
@@ -225,6 +246,20 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
       maxBeerPrice = (this.drinkTypes["Beer/Cider/Cooler"]?.pricePerServing || 0) * multiplier;
       maxWinePrice = (this.drinkTypes["Wine"]?.pricePerServing || 0) * multiplier;
       maxSpiritsPrice = (this.drinkTypes["Spirits"]?.pricePerServing || 0) * multiplier;
+    }
+
+    if (this.someFree) {
+      const values = {};
+      for (const item of this.sepApplication.drinksSalesForecasts.filter(k => k.isCharging == false)) {
+        if (item.name.indexOf("Wine") > -1) {
+          values["wine_free"] = item.estimatedServings;
+        } else if (item.name.indexOf("Spirits") > -1) {
+          values["spirits_free"] = item.estimatedServings;
+        } else if (item.name.indexOf("Beer/Cider/Cooler") > -1) {
+          values["beer_free"] = item.estimatedServings;
+        }
+      }
+      this.form.patchValue(values);
     }
 
     const minBeerPrice =0;
