@@ -1,1 +1,0 @@
-*/30 * * * * default cd /data-pipeline/scripts && ./run-step.sh von_pipeline/von_data_pipeline.py
