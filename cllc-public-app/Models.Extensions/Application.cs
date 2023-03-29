@@ -248,6 +248,12 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioProductslistanddescription = from.ProductsListAndDescription;
 
             to.AdoxioUploaddeclarations = from.UploadDeclarations;
+
+            to.AdoxioMfrsupinforeadunderstand = from.MfrSupInfoReadUnderstand;
+            to.AdoxioMfrsupinfointendproduce = from.MfrSupInfoIntendProduce;
+            to.AdoxioMfrsupinfoownrent = from.MfrSupInfoOwnRent;
+            to.AdoxioMfrsupinfoproductionequipment = from.MfrSupInfoProductionEquipment;
+       
         }
 
 
