@@ -12,9 +12,11 @@
           <!-- For all corporations -->
           <section
             *ngIf="this.account?.businessType === 'PrivateCorporation' || this.account?.businessType === 'PublicCorporation'">
-            <p>All licensees and applicants must maintain a complete and current list of leadership and
+            <p>
+              All licensees, authorization holders and applicants must maintain a complete and current list of leadership and
               businesses
-              associated with their organization.</p>
+              associated with their organization.
+            </p>
             <p>You are required to notify the LCRB of any changes to your legal entity structure within ten
               business
               days of the change being made. These changes include:</p>
@@ -25,10 +27,13 @@
               <li *ngIf="this.account?.businessType === 'PrivateCorporation'">Internal transfer of shares</li>
               <li *ngIf="this.account?.businessType === 'PrivateCorporation'">External transfer of shares</li>
             </ul>
-            <p><b>Please note:</b> Licence transfers to a different legal entity may be requested through
+            <p>
+              <b>Please note:</b> License or authorization transfers to a different legal entity may be requested through
               the
-              <a href="/licences/">Licences
-                dashboard</a>.
+              <a href="/licences/">
+                Licences & Authorization
+                dashboard
+              </a>.
             </p>
           </section>
 
@@ -46,10 +51,12 @@
               <li>Internal transfer of shares for partner businesses</li>
               <li>External transfer of shares for partner businesses</li>
             </ul>
-            <p><b>Please note:</b> Licence transfers to a different legal entity may be requested through
+            <p>
+              <b>Please note:</b> License or authorization transfers to a different legal entity may be requested through
               the
               Licences
-              dashboard.</p>
+              dashboard.
+            </p>
           </section>
 
           <!-- For Sole Proprietors -->
@@ -59,10 +66,12 @@
               being
               made.
             </p>
-            <p><b>Please note:</b> Licence transfers to a different legal entity may be requested through
+            <p>
+              <b>Please note:</b> License or authorization transfers to a different legal entity may be requested through
               the
               Licences
-              dashboard.</p>
+              dashboard.
+            </p>
           </section>
 
           <!-- For Societies, Universities and Churches-->
@@ -75,10 +84,12 @@
               being
               made.
             </p>
-            <p><b>Please note:</b> Licence transfers to a different legal entity may be requested through
+            <p>
+              <b>Please note:</b> License or authorization transfers to a different legal entity may be requested through
               the
               Licences
-              dashboard.</p>
+              dashboard.
+            </p>
           </section>
 
           <!-- For Indigenous Nations -->
@@ -153,38 +164,57 @@
           </section>
 
           <section *ngIf="this.account?.businessType !=='IndigenousNation'">
-            <p>Fees are calculated based on the type of change reported and the number of licences impacted.
+            <p>
+              Fees are calculated based on the type of change reported and the number of licenses and/or authorizations impacted.
               If
-              no changes are made, or no licences are held, you will not be charged a fee for submitting
+              no changes are made, or no licenses or authorizations are held, you will not be charged a fee for submitting
               this
-              information.</p>
+              information.
+            </p>
+            <!-- Section 119 Agreement Holders -->
+            <section class="large-screen-only">
+              <h3 class="blue-header" style="margin-bottom: 0; margin-top: 0;">
+                <fa-icon [icon]="faExclamationTriangle" style="margin-right: 5px;"></fa-icon>Section 119 Agreement Holders
+              </h3>
+
+              <div class="submitted-content" style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
+                <p>
+                  The details of a licensee or authorization holder’s application were the basis for granting them the licence or authorization. Licensees and authorization holders must inform the Branch of any changes that alter the original information they provided, or of a change in circumstance related to their licence or authorization. This requirement is in addition to any obligations in the applicable section 119 agreement to notify B.C.'s designated official of certain changes related to the licensee or authorization holder’s business. Please refer to the relevant section 119 agreement.
+                </p>
+
+              </div>
+            </section>
 
             <!-- Licensee Details -->
-            <section
-              *ngIf="(cannabisLicences && cannabisLicences.length > 0) || (liquorLicences && liquorLicences.length > 0)">
-              <h3>Licensee Details</h3>
-              <p>You have the following licences:</p>
+            <section *ngIf="(cannabisLicences && cannabisLicences.length > 0) || (liquorLicences && liquorLicences.length > 0)">
+              <h3>Licensee or Authorization Holder Details</h3>
+              <p>You have the following licenses or authorization:</p>
               <table style="border: solid black 1px;">
                 <tbody>
                   <tr>
                     <th class="licenceTable" style="background-color: #38598a; color: white;">
-                      Cannabis
-                      Licences:</th>
+                      Cannabis Licenses and/or Authorizations :
+                    </th>
                     <th class="licenceTable" style="background-color: #38598a; color: white;">
                       Liquor
-                      Licences:</th>
+                      Licenses:
+                    </th>
                   </tr>
                   <tr>
                     <td class="licenceTable">
                       <ul>
-                        <li *ngFor="let item of cannabisLicences">{{item.licenseNumber}} -
-                          {{item.establishmentName}}</li>
+                        <li *ngFor="let item of cannabisLicences">
+                          {{item.licenseNumber}} -
+                          {{item.establishmentName}}
+                        </li>
                       </ul>
                     </td>
                     <td class="licenceTable">
                       <ul>
-                        <li *ngFor="let item of liquorLicences">{{item.licenseNumber}} -
-                          {{item.establishmentName}}</li>
+                        <li *ngFor="let item of liquorLicences">
+                          {{item.licenseNumber}} -
+                          {{item.establishmentName}}
+                        </li>
                       </ul>
                     </td>
                   </tr>
@@ -193,12 +223,14 @@
 
               <p>&nbsp;</p>
               <ul>
-                <li>Applicable fees for cannabis licensees are listed in <a
-                    href="http://www.bclaws.ca/civix/document/id/complete/statreg/202_2018#Schedule1"
-                    target="_blank">Schedule 1</a> of the Cannabis Licensing Regulation.</li>
-                <li>Applicable fees for liquor licensees are listed in <a
-                    href="http://www.bclaws.ca/civix/document/id/complete/statreg/241_2016#Schedule1"
-                    target="_blank">Schedule 1</a> of the Liquor Control and Licensing Regulation.</li>
+                <li>
+                  Applicable fees for cannabis licensees and authorizations are listed in <a href="http://www.bclaws.ca/civix/document/id/complete/statreg/202_2018#Schedule1"
+                                                                                             target="_blank">Schedule 1</a> of the Cannabis Licensing Regulation.
+                </li>
+                <li>
+                  Applicable fees for liquor licensees are listed in <a href="http://www.bclaws.ca/civix/document/id/complete/statreg/241_2016#Schedule1"
+                                                                        target="_blank">Schedule 1</a> of the Liquor Control and Licensing Regulation.
+                </li>
               </ul>
             </section>
           </section>
@@ -782,10 +814,10 @@
       </h3>
       <div class="content-bottom">
         <p>
-          Newly added associates for a non-medical cannabis licence are required to
+          Newly added associates for a cannabis license or authorization are required to
           submit
           documentation for
-          security screenings and/or financial integrity checks. Cannabis retail store licence applications
+          security screenings and/or financial integrity checks. Cannabis retail store license or authorization applications
           cannot
           be processed until
           all required materials have been received.
@@ -795,12 +827,7 @@
           The screening for associates considers the
           associate
           within the context
-          of a larger organizational structure. The security verification for workers considers the worker as
-          an
-          individual apart
-          from an organization. If a sole proprietor or associate seeks to work in a non-medical cannabis
-          retail
-          store, they must pass both.
+          of a larger organizational structure.
         </p>
 
         <p>Please provide the documents as outlined on <a

@@ -43,7 +43,7 @@
                             <strong *ngIf="item?.licenceTypeName === 'Marketing'" style="color: #1a5a96;">
                                 Marketing Licence</strong>
                             <span *ngIf="item?.licenceTypeName !== 'Marketing' && isActive(item)"><span
-                                  *ngIf="item?.licenceTypeName !== 'Section 119 Authorization' && item?.licenceTypeName !== 'S119 CRS Authorization'">Licence</span>
+                                  *ngIf="item?.licenceTypeName !== 'Section 119 Authorization' && item?.licenceTypeName !== 'S119 CRS Authorization'">License</span>
                                 Number:<i>{{item.licenseNumber}}</i></span>
 
   <br>
@@ -61,7 +61,7 @@
        download>
       <span>
         <fa-icon [icon]="faDownLoad" style="margin-right: 10px;"></fa-icon>Download
-        <span *ngIf="item?.licenceType !== 'Section 119 Authorization' && item?.licenceType !== 'S119 CRS Authorization'">Licence</span>
+        <span *ngIf="item?.licenceType !== 'Section 119 Authorization' && item?.licenceType !== 'S119 CRS Authorization'">License</span>
         <span *ngIf="item?.licenceType === 'Section 119 Authorization' || item?.licenceType === 'S119 CRS Authorization'">Authorization</span>
       </span>
     </a>
@@ -80,7 +80,7 @@
         <span>
           <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>
           {{(isAboutToExpire(item) || isRecentlyExpired(item)) ? 'Renew' : 'Reinstate'}}
-          Licence
+          License
         </span>
         <mat-progress-bar *ngIf="renewalStarted" mode="indeterminate"></mat-progress-bar>
       </button>
@@ -92,7 +92,7 @@
   </div>
   <div class="flags" class="missing">
     <p *ngIf="item.dormant">
-      <fa-icon [icon]="faFlag" style="margin-right: 10px;"></fa-icon>Licence
+      <fa-icon [icon]="faFlag" style="margin-right: 10px;"></fa-icon>License
       Dormant
       <fa-icon [icon]="faQuestionCircle" data-html="true" style="margin-left: 10px;"
                matTooltipClass="multiline-tooltip"
@@ -100,7 +100,7 @@
       </fa-icon>
     </p>
     <p *ngIf="item.suspended">
-      <fa-icon [icon]="faFlag" style="margin-right: 10px;"></fa-icon>Licence
+      <fa-icon [icon]="faFlag" style="margin-right: 10px;"></fa-icon>License
       Suspended
       <fa-icon [icon]="faQuestionCircle" data-html="true" style="margin-left: 10px;"
                matTooltipClass="multiline-tooltip"
@@ -115,7 +115,7 @@
     <p *ngIf="item.operated && !item.isOperated">
       <fa-icon [icon]="faFlag"
                style="margin-right: 10px;">
-      </fa-icon>Licence Operated
+      </fa-icon>License Operated
     </p>
   </div>
   <br>
@@ -287,7 +287,7 @@
                                                 (click)="startRequest(5001)" [disabled]="requestStarted && requestID==5001">
                                           <span>
                                             <fa-icon [icon]="faExchangeAlt" style="margin-right: 10px;"></fa-icon>
-                                            Transfer Licence
+                                            Transfer License <span *ngIf="licenceType === 'Cannabis Retail Store'||licenceType === 'Producer Retail Store'"> or Authorization  </span>
                                           </span>
                                           <mat-progress-bar *ngIf="requestStarted && requestID==5001" mode="indeterminate"></mat-progress-bar>
                                         </button>
@@ -379,12 +379,12 @@
                                       <button [disabled]="true" class="missing"
                                               [title]="'Attention: you have an outstanding prior balance invoice(s); please return to the Dashboard for details and to make payment'">
                                         <span>
-                                          <strong>Attention</strong>: This Licence has Expired<br>Please Reinstate.
+                                          <strong>Attention</strong>: This License has Expired<br>Please Reinstate.
                                         </span>
                                       </button>
                                     </span>
                                     <span *ngIf="!isOutstandingPriorBalanceInvoiceDue && !isExpiredOverOneYear(item)">
-                                      <strong>Attention</strong>: This Licence has Expired<br>
+                                      <strong>Attention</strong>: This License has Expired<br>
                                       <button mat-raised-button color="secondary" style="margin-right: 10px;"
                                               (click)="startRenewal(item)" [disabled]="renewalStarted">
                                         <span>
@@ -412,9 +412,9 @@
                           <section *ngIf="item.isOperated">
                             <i>
                               3rd-Party Operators cannot request changes to the
-                              licence. All
+                              license. All
                               change requests
-                              for the licence must be requested by the Licensee.
+                              for the license must be requested by the Licensee.
                             </i>
                           </section>
                         </td>
@@ -512,9 +512,9 @@
   <p *ngIf="!licenceType.includes('Operated') && licenceType !== 'Section 119 Authorization' && licenceType !== 'S119 CRS Authorization'"
      style="font-style: italic; text-align: center;">
     All
-    {{licenceType}} licence holders must follow the terms
+    {{licenceType}} license holders must follow the terms
     and
-    conditions of their licence as set out in the
+    conditions of their license as set out in the
     <a href="{{getHandbookLink(licenceType)}}"
        target="_blank">
       {{licenceType}} Terms and Conditions Handbook
@@ -550,7 +550,7 @@
 </div>
 
 <div *ngIf="!available">
-  <h3>{{licenceType}} Licences - <i>Coming Soon</i></h3>
+  <h3>{{licenceType}} Licenses - <i>Coming Soon</i></h3>
   <ul>
     <ng-container *ngFor="let item of licences; let i = index;">
       <li style="font-size: 16px;">{{item.licenseNumber}} - {{item.establishmentName}}</li>
