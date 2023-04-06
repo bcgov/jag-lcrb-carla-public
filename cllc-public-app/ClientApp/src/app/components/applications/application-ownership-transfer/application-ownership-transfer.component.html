@@ -4,24 +4,23 @@
 <div *ngIf="dataLoaded">
 <div [formGroup]="form" style="padding-left: 45px; position: relative">
   <!-- Title -->
-  <h1 class="ngtest-page-title">Transfer Your {{licence?.licenseType}} Licence</h1>
+  <h1 class="ngtest-page-title">Transfer Your {{licence?.licenseType}} Licence or Authorization</h1>
 </div>
 
 <div [formGroup]="form" class="application-wrapper">
 <!-- Preamble -->
 <section class="ngtest-preamble-content" *ngIf="licence?.licenseType === 'Cannabis Retail Store'">
   <p>
-    By submitting this application, the current cannabis retail store licence holder acknowledges that they
+    By submitting this application, the current cannabis retail store licence holder or authorization holder acknowledges that they
     <strong>must continue to hold valid interest</strong> (lease or land title) until the Transfer of Ownership
     application is approved by the Liquor and Cannabis Regulation Branch.
   </p>
   <p>
-    The current licensee must continue to operate and be responsible for the retail store in compliance with the
-    Cannabis Act, Regulation and Terms and Conditions of the licence until successful completion of the licence
-    transfer.
+    The current licensee or authorization holder must continue to operate and be responsible for the retail store in compliance with the
+    Cannabis Control and Licensing Act, Regulation and Terms and Conditions of the licence or authorization until successful completion of the transfer.
   </p>
   <p>
-    If the current licensee does not want to operate the store during the transfer process, the store must remain
+    If the current licensee or authorization holder does not want to operate the store during the transfer process, the store must remain
     closed until the transfer application has been approved.
   </p>
 </section>
@@ -39,25 +38,25 @@
 <section class="padded-section content-bottom">
   <div class="ngtest-before-starting-content">
     <p>
-      Please ensure that the proposed licensee has logged into the
+      Please ensure that the proposed licensee or authorization holder has logged into the
       portal (this website) at least once. If you cannot find their business when searching below, they have not
       yet logged in and created an account record.
     </p>
     <p>
-      Once you have submitted the transfer application, the proposed licensee will be notified to continue their
+      Once you have submitted the transfer application, the proposed licensee or authorization holder will be notified to continue their
       application process. They will need to pay a $330 application fee at the time of submission.
     </p>
     <p>
-      The proposed licensee will act as the contact for this application and will receive information throughout
-      the application process. All future correspondence will be directed to the new licensee after the licence
+      The proposed licensee or authorization holder will act as the contact for this application and will receive information throughout
+      the application process. All future correspondence will be directed to the new licensee or authorization holder after the licence or authorization
       has been successfully transferred.
     </p>
   </div>
 </section>
 
-<h3 class="blue-header">LICENCE TO BE TRANSFERRED</h3>
+<h3 class="blue-header">LICENCE OR AUTHORIZATION TO BE TRANSFERRED</h3>
 <section class="padded-section content-bottom">
-  <app-field label="Licence" [required]="false">
+  <app-field label="Licence or Authorization" [required]="false">
     <input class="form-control" style="width: 500px;" type="text" [readonly]="true"
            formControlName="licenseNumber">
   </app-field>
@@ -127,7 +126,7 @@
 
 <h3 class="blue-header">IDENTIFY THE PROPOSED TRANSFEREE</h3>
 <section class="padded-section content-bottom">
-  <app-field label="Search for the business name you intend to transfer your {{licence?.licenseType}} licence to:"
+  <app-field label="Search for the business name you intend to transfer your {{licence?.licenseType}} licence or authorization to:"
              errorMessage="Please select a value" [required]="true"
              [valid]="isValidOrNotTouched('proposedOwner.accountId')">
     <app-account-picker (valueSelected)="onAccountSelect($event)"></app-account-picker>
@@ -146,7 +145,7 @@
       <!-- for cannabis retail stores -->
       <span class="ml-2" *ngIf="licence?.licenseType === 'Cannabis Retail Store'">
         I agree to
-        transfer my {{licence?.licenseType}} licence to the proposed transferee
+        transfer my {{licence?.licenseType}} licence or authorization to the proposed transferee
         identified above.
       </span>
       <!-- for liquor licences -->
