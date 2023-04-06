@@ -475,10 +475,10 @@
             <h3 class="blue-header"><fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>Cannabis Associate Security Screening Forms</h3>
             <div class="content-bottom">
               <p>
-                Sole proprietors and associates of applicants for a retail licence are required to
+                Sole proprietors and associates of applicants for a retail licence or authorization are required to
                 submit <a href="https://www2.gov.bc.ca/gov/content?id=B8E6EBE15A594CB7832B490C0A2815B2" target="_blank">
                   forms
-                </a> for security screenings and financial integrity checks. {{ application?.applicationType?.name === ApplicationTypeNames.Marketer ? 'Cannabis Marketing' : 'Retail store licence' }} applications
+                </a> for security screenings and financial integrity checks. {{ application?.applicationType?.name === ApplicationTypeNames.Marketer ? 'Cannabis Marketing' : 'Retail store licence or authorization' }} applications
                 cannot be processed until all required materials have been received.
               </p>
 
@@ -639,9 +639,9 @@
                   <br>
 
                   <p *ngIf="application?.licenseType == 'Cannabis Retail Store'">
-                    A name cannot mislead the public about what kind of business the licensee operates. The name cannot
+                    A name cannot mislead the public about what kind of business the licensee or authorization holder operates. The name cannot
                     imply a
-                    licensee is selling medical cannabis, and cannot include words in any form or combination or manner
+                    licensee or authorization holder is selling medical cannabis, and cannot include words in any form or combination or manner
                     the
                     words "apothecary", "pharmacy", "medicines", "drugs", "drug store", "drug department", "dispensary"
                     or any other words of similar meaning that imply licensing under the Pharmacy Operations and Drug
@@ -658,11 +658,10 @@
                     information,
                     please see the
                     <a routerLink="/policy-document/store-name">
-                      Non-Medical Cannabis Retail Store Name Approval
-                      Process
-                    </a>. A list of all currently licensed Cannabis Retail Stores in British
-                    Columbia can be found
-                    <a href="map" target="_blank">here</a>.
+                      Cannabis Retail Store Name Approval Process.
+                    </a>
+                    &nbsp; <a href="https://www2.gov.bc.ca/gov/content?id=3BA008CC60AE436FBD25309AB6C1C9F0" target="_blank">Check the LCRB’s website</a> for a list of all currently licensed Cannabis Retail Stores in British
+                    Columbia.
                   </p>
                 </section>
                 <div *ngIf="application?.licenseType == 'Cannabis Retail Store'">
@@ -701,7 +700,7 @@
                    *ngIf="showFormControl(application?.applicationType?.currentEstablishmentAddress)">
                 <h3 class="blue-header">{{application?.licenseType}} LOCATION ADDRESS</h3>
                 <div class="content-bottom">
-                  <p>The licensed establishment is currently located at the following address:</p>
+                  <p>The establishment is currently located at the following address:</p>
                   <address class="row">
                     <app-field class="col-md-12 col-xs-12" label="Address" [isFullWidth]="true">
                       <input class="form-control" type="text" readonly formControlName="establishmentAddressStreet"
@@ -745,7 +744,7 @@
               <div class="ngtest-new-address content-bottom"
                    *ngIf="showFormControl(application?.applicationType?.newEstablishmentAddress)">
                 <p *ngIf="application?.licenseType !== 'Rural Agency Store'">
-                  The proposed location of the licensed establishment:
+                  The proposed location of the establishment:
                 </p>
                 <p *ngIf="application?.licenseType === 'Rural Agency Store'">
                   Include any information necessary for finding
@@ -1535,8 +1534,8 @@
                     </span>
                     <div style="display: flex; margin-top: 10px;">
                       <section>
-                        The floor plan must be submitted at the time of application and it
-                        must identify the proposed non-medical cannabis retail area(s) plus
+                        The floor plan must be submitted at the time of application and
+                        must identify the proposed cannabis retail area(s) plus
                         the following interior features of the establishment:
                         <ul>
                           <li>Each room or area labeled with its intended use and dimensions.</li>
@@ -2316,9 +2315,9 @@
                   applicant doesn't currently own or lease the proposed store location, submit <b>Option 2</b>.
                 </p>
                 <p>
-                  Leases or other arrangements must not expire for at least 12 months from the date the licence is
+                  Leases or other arrangements must not expire for at least 12 months from the date the licence or authorization is
                   issued.
-                  Option 1 will be required before the licence is issued.
+                  Option 1 will be required before the licence or authorization is issued.
                 </p>
                 <p>
                   <b>Option 1</b>: Submit a copy of the lease, sub-lease, or proof of ownership of the proposed store
@@ -2651,7 +2650,7 @@
 
               <div>
                 <p *ngIf="application?.licenseType === 'Cannabis Retail Store'">
-                  The Province does not know how many applications for a cannabis retail store licence will be received.
+                  The Province does not know how many applications for a cannabis retail store licence or authorization will be received.
                   Therefore, it is difficult to predict how long applications will take to process. To minimize delays in
                   processing, applicants must make sure the application is complete before submitting it.
                 </p>

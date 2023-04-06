@@ -136,7 +136,7 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
     } else if (this.application.assignedLicence.licenseType === LicenceTypeNames.PRS) {
       return "Producer Retail Store License";
     } else {
-      return "Cannabis Retail Store Licence";
+      return "Cannabis/Authorization Retail Store Licence";
     }
   }
 
