@@ -419,7 +419,7 @@ export class TuaEventComponent extends FormBase implements OnInit {
     for (var i = 0; i < this.form.value.eventLocations.length; i++) {
       locationAttendance += Number(this.form.value.eventLocations[i].attendance);
     }
-    var endorsements = this.licence.endorsements.filter(k => k.endorsementName = 'Temporary Use Area Endorsemen');
+    var endorsements = this.licence.endorsements.filter(k => k.endorsementName = 'Temporary Use Area Endorsement');
     if (endorsements != null && endorsements != undefined && endorsements.length > 0) {
       var lastEndorsement = endorsements[endorsements.length-1];
 
