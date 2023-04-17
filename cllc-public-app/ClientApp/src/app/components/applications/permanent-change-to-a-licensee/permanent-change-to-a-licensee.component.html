@@ -1,5 +1,5 @@
 <div [formGroup]="form" class="form-wrapper">
-  <h1>Permanent Change to a Licensee
+  <h1>Permanent Change to a Licensee or Authorization Holder
   </h1>
   <mat-progress-bar class="mt-1" *ngIf="!dataLoaded" mode="indeterminate"></mat-progress-bar>
 
@@ -28,10 +28,10 @@
               <li *ngIf="this.account?.businessType === 'PrivateCorporation'">External transfer of shares</li>
             </ul>
             <p>
-              <b>Please note:</b> licence or authorization transfers to a different legal entity may be requested through
+              <b>Please note:</b> Licence or authorization transfers to a different legal entity may be requested through
               the
               <a href="/licences/">
-                Licences & Authorization
+                Licences & Authorizations
                 dashboard
               </a>.
             </p>
@@ -192,7 +192,7 @@
                     </th>
                     <th class="licenceTable" style="background-color: #38598a; color: white;">
                       Liquor
-                      Licenses:
+                      Licences:
                     </th>
                   </tr>
                   <tr>
@@ -219,12 +219,12 @@
               <p>&nbsp;</p>
               <ul>
                 <li>
-                  Applicable fees for cannabis licensees and authorizations are listed in <a href="http://www.bclaws.ca/civix/document/id/complete/statreg/202_2018#Schedule1"
-                                                                                             target="_blank">Schedule 1</a> of the Cannabis Licensing Regulation.
+                  Applicable fees for cannabis licences and authorizations are listed in <a href="http://www.bclaws.ca/civix/document/id/complete/statreg/202_2018#Schedule1"
+                                                                                            target="_blank">Schedule 1</a> of the Cannabis Licensing Regulation.
                 </li>
                 <li>
-                  Applicable fees for liquor licensees are listed in <a href="http://www.bclaws.ca/civix/document/id/complete/statreg/241_2016#Schedule1"
-                                                                        target="_blank">Schedule 1</a> of the Liquor Control and Licensing Regulation.
+                  Applicable fees for liquor licences are listed in <a href="http://www.bclaws.ca/civix/document/id/complete/statreg/241_2016#Schedule1"
+                                                                       target="_blank">Schedule 1</a> of the Liquor Control and Licensing Regulation.
                 </li>
               </ul>
             </section>
@@ -841,7 +841,7 @@
         <p>
           Each associate must provide a complete a
           <a
-            href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/cannabis-forms/form-cannabis-retail-store-fin-integrity--associate.pdf">
+            href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/cannabis-forms/form-cannabis-retail-store-fin-integrity--associate.pdf">
             Financial
             Integrity Form
           </a>.
@@ -985,7 +985,7 @@
         <table class="w-100" *ngIf="hasCannabis" class="paymentSummary">
           <tr>
             <th colspan=3>
-              <h4>Fees for Cannabis Licences</h4>
+              <h4>Fees for Cannabis Licences/Authorizations</h4>
             </th>
           </tr>
           <tr>
