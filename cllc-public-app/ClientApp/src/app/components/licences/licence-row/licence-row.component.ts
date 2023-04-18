@@ -552,9 +552,9 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     switch (licenceType) {
       case "Cannabis Retail Store":
       case "Section 119 Authorization":
-        return `${pdfRoot}/cannabis-retail-store-licence-handbook.pdf`;
+        return `https://www2.gov.bc.ca/gov/content?id=FFBF300FC24C4B4C92F13DBB73040523`;
       case "S119 CRS Authorization":
-        return `${pdfRoot}/cannabis-retail-store-licence-handbook.pdf`;
+        return `https://www2.gov.bc.ca/gov/content?id=FFBF300FC24C4B4C92F13DBB73040523`;
       case "Marketing":
         return `${pdfRoot}/marketing-handbook.pdf`;
       case "Operated - Catering":
