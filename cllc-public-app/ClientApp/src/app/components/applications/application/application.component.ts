@@ -640,7 +640,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
 
     // TG validation question for cannabis licences to confirm that product is not visible from outside
-    if (this.application.applicationType.floorPlan === FormControlState.Show && this.application.licenseType === 'Cannabis Retail Store') {
+    if (this.application.applicationType.floorPlan === FormControlState.Show && (this.application.licenseType === 'Cannabis Retail Store' || this.application.licenseType === 'S119 CRS Authorization')) {
       this.form.get('IsReadyProductNotVisibleOutside').setValidators([Validators.required]);
     }
 
@@ -856,7 +856,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   showExteriorChangeQuestion(): boolean {
     let show = this.application &&
       (this.application.applicationType.name === ApplicationTypeNames.CRSEstablishmentNameChange
-        && this.application.licenseType === 'Cannabis Retail Store');
+      &&( this.application.licenseType === 'Cannabis Retail Store' || this.application.licenseType === 'S119 CRS Authorization'));
 
     if (show) {
       this.form.get('proposedChange').setValidators([Validators.required]);
