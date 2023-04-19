@@ -175,10 +175,10 @@
     The ‘save for later’ feature allows applicants to re-access an application in progress.
     For questions on the LCRB application process, please contact:
   </p>
-  <div *ngIf="application?.licenseType === 'Cannabis Retail Store'">
+  <div *ngIf="application?.licenseType === 'Cannabis Retail Store'|| application?.licenseType === 'S119 CRS Authorization'">
     <a href="javascript: void(0);">lcrbcannabis@gov.bc.ca</a>
   </div>
-  <div *ngIf="application?.licenseType !== 'Cannabis Retail Store'">
+  <div *ngIf="application?.licenseType !== 'Cannabis Retail Store'&&application?.licenseType !== 'S119 CRS Authorization'">
     <a href="javascript: void(0);">LCRBLiquor@gov.bc.ca</a>
   </div>
 </div>
