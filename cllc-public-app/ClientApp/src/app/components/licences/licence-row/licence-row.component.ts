@@ -4,7 +4,6 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { LicenseDataService } from "@app/services/license-data.service";
 import { Router } from "@angular/router";
 import { ApplicationTypeNames } from "@models/application-type.model";
-import { LicenceTypeNames } from "@models/license-type.model";
 import { FormBase } from "@shared/form-base";
 import { takeWhile } from "rxjs/operators";
 import { ApplicationLicenseSummary } from "@models/application-license-summary.model";
@@ -36,6 +35,7 @@ import {
 import { differenceInDays, isAfter, startOfDay, startOfToday } from "date-fns";
 import { OutstandingPriorBalanceInvoice } from "@models/outstanding-prior-balance-invoce.model";
 import addYears from "date-fns/addYears/index";
+import { LicenceTypeNames } from "../../../models/license-type.model";
 
 export const UPLOAD_FILES_MODE = "UploadFilesMode";
 export const CRS_RENEWAL_LICENCE_TYPE_NAME = "crs";

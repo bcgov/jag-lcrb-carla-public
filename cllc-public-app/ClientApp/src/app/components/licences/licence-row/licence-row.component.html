@@ -287,7 +287,7 @@
                                                 (click)="startRequest(5001)" [disabled]="requestStarted && requestID==5001">
                                           <span>
                                             <fa-icon [icon]="faExchangeAlt" style="margin-right: 10px;"></fa-icon>
-                                            Transfer licence <span *ngIf="licenceType === 'Cannabis Retail Store'||licenceType === 'Producer Retail Store'"> or Authorization  </span>
+                                            Transfer licence <span *ngIf="licenceType === 'Cannabis Retail Store'||licenceType === 'S119 CRS Authorization'||licenceType === 'Producer Retail Store'"> or Authorization  </span>
                                           </span>
                                           <mat-progress-bar *ngIf="requestStarted && requestID==5001" mode="indeterminate"></mat-progress-bar>
                                         </button>
