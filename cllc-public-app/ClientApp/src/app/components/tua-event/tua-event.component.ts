@@ -484,11 +484,6 @@ export class TuaEventComponent extends FormBase implements OnInit {
             var existedHoursOfService = hoursOfServiceList.filter(k => k.dayOfWeek == dayOfWeek)[0];
             var hoursOfService = new HoursOfService();
 
-            var outDoor = false;
-            if (this.licence != undefined && this.licence.serviceAreas != undefined && this.licence.serviceAreas.length > 0) {
-              outDoor = this.licence.serviceAreas[this.licence.serviceAreas.length - 1].isOutdoor;
-            }
-
             hoursOfService.dayOfWeek = existedHoursOfService.dayOfWeek;
             hoursOfService.startTimeHour = existedHoursOfService.startTimeHour;
             hoursOfService.startTimeMinute = existedHoursOfService.startTimeMinute;
