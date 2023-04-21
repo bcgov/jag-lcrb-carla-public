@@ -410,7 +410,10 @@ export class TuaEventComponent extends FormBase implements OnInit {
     this.validationMessages = [...new Set(this.listControlsWithErrors(this.form, this.validationErrorMap))];
 
     // ... TODO: add more validation rules here - e.g. date range validation
-
+    var outDoor = false;
+    if (this.licence != undefined && this.licence.serviceAreas != undefined && this.licence.serviceAreas.length > 0) {
+      outDoor = this.licence.serviceAreas[this.licence.serviceAreas.length - 1].isOutdoor;
+    }
     if (this.timeForms.controls.length < 1) {
       this.validationMessages.push('No event dates selected');
     }
@@ -451,6 +454,11 @@ export class TuaEventComponent extends FormBase implements OnInit {
                 if (liquorEndTimeHour < liquorStartTimeHour) {
                   liquorEndTimeHour += 24;
                 }
+                //If event is outdoor, Maximum closing hours is 10 PM
+                if (outDoor) {
+                  hoursOfService.endTimeHour = 22;
+                  hoursOfService.endTimeMinute = 0;
+                }
                 if (liquorStartTimeHour < hoursOfService.startTimeHour ||
                   (liquorStartTimeHour == hoursOfService.startTimeHour
                     && liquorStartTimeMinute < hoursOfService.startTimeMinute)) {
@@ -475,6 +483,12 @@ export class TuaEventComponent extends FormBase implements OnInit {
             var dayOfWeek = startDate.getDay();
             var existedHoursOfService = hoursOfServiceList.filter(k => k.dayOfWeek == dayOfWeek)[0];
             var hoursOfService = new HoursOfService();
+
+            var outDoor = false;
+            if (this.licence != undefined && this.licence.serviceAreas != undefined && this.licence.serviceAreas.length > 0) {
+              outDoor = this.licence.serviceAreas[this.licence.serviceAreas.length - 1].isOutdoor;
+            }
+
             hoursOfService.dayOfWeek = existedHoursOfService.dayOfWeek;
             hoursOfService.startTimeHour = existedHoursOfService.startTimeHour;
             hoursOfService.startTimeMinute = existedHoursOfService.startTimeMinute;
@@ -491,7 +505,11 @@ export class TuaEventComponent extends FormBase implements OnInit {
             if (liquorEndTimeHour < liquorStartTimeHour) {
               liquorEndTimeHour += 24;
             }
-
+            //If event is outdoor, Maximum closing hours is 10 PM
+            if (outDoor) {
+              hoursOfService.endTimeHour = 22;
+              hoursOfService.endTimeMinute = 0;
+            }
             if (liquorStartTimeHour < hoursOfService.startTimeHour ||
               (liquorStartTimeHour == hoursOfService.startTimeHour
                 && liquorStartTimeMinute < hoursOfService.startTimeMinute)) {
