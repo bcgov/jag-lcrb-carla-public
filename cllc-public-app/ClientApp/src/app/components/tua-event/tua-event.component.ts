@@ -424,7 +424,7 @@ export class TuaEventComponent extends FormBase implements OnInit {
     }
     var endorsements = this.licence.endorsements.filter(k => k.endorsementName = 'Temporary Use Area Endorsemen');
     if (endorsements != null && endorsements != undefined && endorsements.length > 0) {
-      var lastEndorsement = endorsements[endorsements.length-1];
+      var lastEndorsement = endorsements[endorsements.length - 1];
 
       if (locationAttendance > lastEndorsement.areaCapacity) {
         this.validationMessages.push('Capacity cannot exceed the current licence limits');
@@ -456,8 +456,11 @@ export class TuaEventComponent extends FormBase implements OnInit {
                 }
                 //If event is outdoor, Maximum closing hours is 10 PM
                 if (outDoor) {
-                  hoursOfService.endTimeHour = 22;
-                  hoursOfService.endTimeMinute = 0;
+                  //Check if the approved closing hours is before 10 PM
+                  if (hoursOfService.endTimeHour > 22 || (hoursOfService.endTimeHour == 22 && hoursOfService.endTimeMinute > 0)) {
+                    hoursOfService.endTimeHour = 22;
+                    hoursOfService.endTimeMinute = 0;
+                  }
                 }
                 if (liquorStartTimeHour < hoursOfService.startTimeHour ||
                   (liquorStartTimeHour == hoursOfService.startTimeHour
@@ -502,8 +505,11 @@ export class TuaEventComponent extends FormBase implements OnInit {
             }
             //If event is outdoor, Maximum closing hours is 10 PM
             if (outDoor) {
-              hoursOfService.endTimeHour = 22;
-              hoursOfService.endTimeMinute = 0;
+              //Check if the approved closing hours is before 10 PM
+              if (hoursOfService.endTimeHour > 22 || (hoursOfService.endTimeHour == 22 && hoursOfService.endTimeMinute > 0)) {
+                hoursOfService.endTimeHour = 22;
+                hoursOfService.endTimeMinute = 0;
+              }
             }
             if (liquorStartTimeHour < hoursOfService.startTimeHour ||
               (liquorStartTimeHour == hoursOfService.startTimeHour
