@@ -181,12 +181,19 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
             if (data.licenseType === "Manufacturer" &&
               (data.licenseSubCategory === "Winery" || data.licenseSubCategory === "Brewery")) {
               this.form.addControl("volumeProduced", this.fb.control("", [Validators.required]));
+              if (this.application.annualVolume ) {
+                this.form.get('volumeProduced').setValue(this.application.annualVolume.volumeProduced);
+              }
             }
             if (data.licenseType === "Manufacturer" && data.licenseSubCategory === "Winery") {
               this.form.addControl("volumeDestroyed", this.fb.control("", [Validators.required]));
+              if (this.application.annualVolume) {
+                this.form.get('volumeDestroyed').setValue(this.application.annualVolume.volumeDestroyed);
+              }
             }
             this.dataLoaded = true;
           },
+
             error => this.dataLoaded = true);
         if (data.establishmentParcelId) {
           data.establishmentParcelId = data.establishmentParcelId.replace(/-/g, "");
@@ -261,7 +268,7 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
   save(showProgress: boolean = false): Observable<boolean> {
     const saveData = this.form.value;
     const reqs = [];
-
+    var saved = true;
     if (this.form.get("ldbOrderTotals")) {
       reqs.push(this.licenceDataService.updateLicenceLDBOrders(this.application.assignedLicence.id,
         this.form.get("ldbOrderTotals").value));
@@ -284,15 +291,19 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
       .pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
         this.snackBar.open("Error saving Application", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
+        saved = false;
         return of(false);
       }))
       .pipe(mergeMap(() => {
         this.savedFormData = saveData;
         this.updateApplicationInStore();
-        if (showProgress === true) {
+        if (showProgress === true && saved === true) {
           this.snackBar.open("Application has been saved",
             "Success",
             { duration: 2500, panelClass: ["green-snackbar"] });
+        }
+        if (saved !== true) {
+          return of(false);
         }
         return of(true);
       }));
