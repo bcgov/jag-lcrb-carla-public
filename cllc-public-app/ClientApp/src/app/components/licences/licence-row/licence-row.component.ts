@@ -4,7 +4,6 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { LicenseDataService } from "@app/services/license-data.service";
 import { Router } from "@angular/router";
 import { ApplicationTypeNames } from "@models/application-type.model";
-import { LicenceTypeNames } from "@models/license-type.model";
 import { FormBase } from "@shared/form-base";
 import { takeWhile } from "rxjs/operators";
 import { ApplicationLicenseSummary } from "@models/application-license-summary.model";
@@ -36,6 +35,7 @@ import {
 import { differenceInDays, isAfter, startOfDay, startOfToday } from "date-fns";
 import { OutstandingPriorBalanceInvoice } from "@models/outstanding-prior-balance-invoce.model";
 import addYears from "date-fns/addYears/index";
+import { LicenceTypeNames } from "../../../models/license-type.model";
 
 export const UPLOAD_FILES_MODE = "UploadFilesMode";
 export const CRS_RENEWAL_LICENCE_TYPE_NAME = "crs";
@@ -552,9 +552,9 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     switch (licenceType) {
       case "Cannabis Retail Store":
       case "Section 119 Authorization":
-        return `${pdfRoot}/cannabis-retail-store-licence-handbook.pdf`;
+        return `https://www2.gov.bc.ca/gov/content?id=FFBF300FC24C4B4C92F13DBB73040523`;
       case "S119 CRS Authorization":
-        return `${pdfRoot}/cannabis-retail-store-licence-handbook.pdf`;
+        return `https://www2.gov.bc.ca/gov/content?id=FFBF300FC24C4B4C92F13DBB73040523`;
       case "Marketing":
         return `${pdfRoot}/marketing-handbook.pdf`;
       case "Operated - Catering":
