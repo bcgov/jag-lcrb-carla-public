@@ -1321,31 +1321,31 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 && !allowLgAccess)
                 return new NotFoundResult();
             result = await dynamicsApplication.ToViewModel(_dynamicsClient, _cache, _logger);
-            if (result.LicenseType == "Manufacturer")
-            {
-                string filter = $"_adoxio_application_value eq {id}";
-                try
-                {
-                    IList<MicrosoftDynamicsCRMadoxioAnnualvolume> annualVolumes = _dynamicsClient.Annualvolumes.Get(filter: filter).Value;
-                    if (annualVolumes != null&& annualVolumes.Count>0)
-                    {
-                        var existingAnnualVolume= annualVolumes.FirstOrDefault();
-                        result.AnnualVolume = new AnnualVolume
-                        {
-                            ApplicationId = id,
-                            Id= existingAnnualVolume.AdoxioAnnualvolumeid,
-                            VolumeDestroyed = existingAnnualVolume.AdoxioVolumedestroyed,
-                            VolumeProduced = existingAnnualVolume.AdoxioVolumeproduced,
-                            CalendarYear = existingAnnualVolume.AdoxioCalendaryear
-                        };
+            //if (result.LicenseType == "Manufacturer")
+            //{
+            //    string filter = $"_adoxio_application_value eq {id}";
+            //    try
+            //    {
+            //        IList<MicrosoftDynamicsCRMadoxioAnnualvolume> annualVolumes = _dynamicsClient.Annualvolumes.Get(filter: filter).Value;
+            //        if (annualVolumes != null&& annualVolumes.Count>0)
+            //        {
+            //            var existingAnnualVolume= annualVolumes.FirstOrDefault();
+            //            result.AnnualVolume = new AnnualVolume
+            //            {
+            //                ApplicationId = id,
+            //                Id= existingAnnualVolume.AdoxioAnnualvolumeid,
+            //                VolumeDestroyed = existingAnnualVolume.AdoxioVolumedestroyed,
+            //                VolumeProduced = existingAnnualVolume.AdoxioVolumeproduced,
+            //                CalendarYear = existingAnnualVolume.AdoxioCalendaryear
+            //            };
                             
-                    }
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogError(ex, "Unexpected error getting annual volumes");
-                }
-            }
+            //        }
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        _logger.LogError(ex, "Unexpected error getting annual volumes");
+            //    }
+            //}
 
             if (dynamicsApplication.AdoxioApplicationSharePointDocumentLocations.Count == 0)
                 await InitializeSharepoint(dynamicsApplication);
