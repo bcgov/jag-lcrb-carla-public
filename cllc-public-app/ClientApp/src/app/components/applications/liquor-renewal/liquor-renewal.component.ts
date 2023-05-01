@@ -177,16 +177,22 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
                     Validators.required, Validators.min(0), Validators.max(10000000), Validators.pattern("^[0-9]*$")
                   ]));
               this.form.addControl("ldbOrderTotalsConfirm", this.fb.control("", [Validators.required]));
+              this.form.get('ldbOrderTotals').setValue(this.application.ldbOrderTotals);
+              this.form.get('ldbOrderTotalsConfirm').setValue(this.application.ldbOrderTotals);
+
             }
             if (data.licenseType === "Manufacturer" &&
               (data.licenseSubCategory === "Winery" || data.licenseSubCategory === "Brewery")) {
               this.form.addControl("volumeProduced", this.fb.control("", [Validators.required]));
+              this.form.get('volumeProduced').setValue(this.application.volumeProduced);
             }
             if (data.licenseType === "Manufacturer" && data.licenseSubCategory === "Winery") {
               this.form.addControl("volumeDestroyed", this.fb.control("", [Validators.required]));
+              this.form.get('volumeDestroyed').setValue(this.application.volumeDestroyed);
             }
             this.dataLoaded = true;
           },
+
             error => this.dataLoaded = true);
         if (data.establishmentParcelId) {
           data.establishmentParcelId = data.establishmentParcelId.replace(/-/g, "");
@@ -260,22 +266,17 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
    */
   save(showProgress: boolean = false): Observable<boolean> {
     const saveData = this.form.value;
+    var saved = true;
     const reqs = [];
-
+    //LCSD-6608&LCSD-6610 Refactoring volumeProduced,volumeDestroyed and ldbOrderTotals to be saved in the application entity
     if (this.form.get("ldbOrderTotals")) {
-      reqs.push(this.licenceDataService.updateLicenceLDBOrders(this.application.assignedLicence.id,
-        this.form.get("ldbOrderTotals").value));
+      this.application.ldbOrderTotals = Number(this.form.value.ldbOrderTotals != null && this.form.value.ldbOrderTotals != undefined ? this.form.value.ldbOrderTotals : 0);
     }
     if (this.licenseSubCategory === "Winery" || this.licenseSubCategory === "Brewery") {
-      const data = {
-        applicationId: this.applicationId,
-        volumeProduced: this.form.get("volumeProduced") ? this.form.get("volumeProduced").value : null,
-        volumeDestroyed: this.form.get("volumeDestroyed") ? this.form.get("volumeDestroyed").value : null,
-        calendarYear: this.previousYear
-      };
-      reqs.push(this.annualVolumeService.updateAnnualVolumeForApplication(data, this.applicationId));
-
+      this.application.volumeProduced = this.form.get("volumeProduced") ? this.form.get("volumeProduced").value : 0;
+      this.application.volumeDestroyed = this.form.get("volumeDestroyed") ? this.form.get("volumeDestroyed").value : 0;
     }
+
     return forkJoin([
       ...reqs,
       this.applicationDataService.updateApplication({ ...this.application, ...this.form.value })
@@ -284,15 +285,19 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
       .pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
         this.snackBar.open("Error saving Application", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
+        saved = false;
         return of(false);
       }))
       .pipe(mergeMap(() => {
         this.savedFormData = saveData;
         this.updateApplicationInStore();
-        if (showProgress === true) {
+        if (showProgress === true && saved === true) {
           this.snackBar.open("Application has been saved",
             "Success",
             { duration: 2500, panelClass: ["green-snackbar"] });
+        }
+        if (saved !== true) {
+          return of(false);
         }
         return of(true);
       }));
@@ -325,7 +330,7 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
       this.save(true)
         .pipe(takeWhile(() => this.componentActive))
         .subscribe((result: boolean) => {
-          if (result) {
+          if (result==true) {
             this.submitPayment();
           } else {
             this.submitReqInProgress = false;
