@@ -757,6 +757,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool? MfrSupInfoOwnRent { get; set; }
         public bool? MfrSupInfoProductionEquipment { get; set; }
 
-        public AnnualVolume AnnualVolume { get; set; }
+        public int VolumeDestroyed { get; set; }
+        public int VolumeProduced { get; set; }
+        public decimal LdbOrderTotals { get; set; }
+
     }
 }

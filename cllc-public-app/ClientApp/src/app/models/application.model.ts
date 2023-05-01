@@ -246,5 +246,8 @@ export interface Application {
   mfrSupInfoOwnRent: boolean;
   mfrSupInfoProductionEquipment: boolean;
 
-  annualVolume: AnnualVolume;
+  volumeProduced: number;
+  volumeDestroyed: number;
+  ldbOrderTotals: number;
+
 }
