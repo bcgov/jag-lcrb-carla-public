@@ -253,7 +253,12 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioMfrsupinfointendproduce = from.MfrSupInfoIntendProduce;
             to.AdoxioMfrsupinfoownrent = from.MfrSupInfoOwnRent;
             to.AdoxioMfrsupinfoproductionequipment = from.MfrSupInfoProductionEquipment;
-       
+
+            to.AdoxioVolumeproduced = from.VolumeProduced;
+            to.AdoxioVolumedestroyed = from.VolumeDestroyed;
+            to.AdoxioLdbordertotals = from.LdbOrderTotals;
+
+
         }
 
 
@@ -625,6 +630,11 @@ namespace Gov.Lclb.Cllb.Public.Models
                 MfrSupInfoIntendProduce = dynamicsApplication.AdoxioMfrsupinfointendproduce,
                 MfrSupInfoOwnRent = dynamicsApplication.AdoxioMfrsupinfoownrent,
                 MfrSupInfoProductionEquipment = dynamicsApplication.AdoxioMfrsupinfoproductionequipment,
+
+                VolumeProduced = dynamicsApplication.AdoxioVolumeproduced.HasValue? dynamicsApplication.AdoxioVolumeproduced.Value:0,
+                VolumeDestroyed = dynamicsApplication.AdoxioVolumedestroyed.HasValue ? dynamicsApplication.AdoxioVolumedestroyed.Value:0,
+                LdbOrderTotals = dynamicsApplication.AdoxioLdbordertotals.HasValue ? dynamicsApplication.AdoxioLdbordertotals.Value:0,
+
             };
 
 
