@@ -968,7 +968,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     // set the Application payment status
                     MicrosoftDynamicsCRMadoxioApplication patchApplication = new MicrosoftDynamicsCRMadoxioApplication
                     {
-                        AdoxioLicencefeeinvoicepaid = true
+                        AdoxioLicencefeeinvoicepaid = true,
+                        AdoxioPaymentrecieved = true,
+                        AdoxioPaymentmethod = (int?)Adoxio_paymentmethods.CC,
+                        AdoxioAppchecklistpaymentreceived = (int?)ViewModels.GeneralYesNo.Yes
                     };
                     try
                     {
