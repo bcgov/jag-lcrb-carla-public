@@ -100,7 +100,7 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
   saveForLaterInProgress: boolean;
   submitReqInProgress: boolean;
   cancelReqInprogress: boolean;
-
+  applicationNotLoaded = false;
   constructor(private store: Store<AppState>,
     private paymentDataService: PaymentDataService,
     public snackBar: MatSnackBar,
@@ -193,7 +193,11 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
             this.dataLoaded = true;
           },
 
-            error => this.dataLoaded = true);
+            error => {
+              this.dataLoaded = true;
+              this.applicationNotLoaded = true;
+            }
+            );
         if (data.establishmentParcelId) {
           data.establishmentParcelId = data.establishmentParcelId.replace(/-/g, "");
         }
@@ -221,7 +225,11 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
         this.savedFormData = this.form.value;
       },
         () => {
+          this.snackBar.open("Failed to load the application, Please try again",
+            "Fail",
+            { duration: 180000, panelClass: ["red-snackbar"] });
           console.log("Error occured");
+          this.applicationNotLoaded = true;
           this.dataLoaded = true;
         }
       );
@@ -398,6 +406,10 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
         this.validationMessages.push(
           "You have indicated that you have produced less than the required minimum production. Please upload a discretion letter.");
       }
+    }
+
+    if (this.applicationNotLoaded) {
+      this.validationMessages.push("Failed to load the application, Please try again");
     }
 
     return this.validationMessages.length === 0;
