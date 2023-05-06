@@ -256,7 +256,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
             to.AdoxioVolumeproduced = from.VolumeProduced;
             to.AdoxioVolumedestroyed = from.VolumeDestroyed;
-            to.AdoxioLdbordertotals = from.LdbOrderTotals;
+            to.AdoxioLdbordertotals = from.LdbOrderTotals==0? default(decimal?): from.LdbOrderTotals;
 
 
         }
