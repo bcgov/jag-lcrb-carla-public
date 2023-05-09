@@ -432,7 +432,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 string liquorEndTime = pstLiquorEnd.HasValue ? pstLiquorEnd.Value.ToString("h:mm tt") : "";
                 eventTimings += $@"<tr class='hide-border'>
                         <td style='width: 50%; text-align: left;'>{eventDate} - Event Hours: {startTime} to {endTime}</td>
-                        <td style='width: 50%; text-align: left;'>Service Hours: {liquorStartTime} to {liquorEndTime}</td>
                     </tr>";
             }
 
