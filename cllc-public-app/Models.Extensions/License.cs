@@ -79,7 +79,10 @@ namespace Gov.Lclb.Cllb.Public.Models
             var allServiceAreas = dynamicsClient.Serviceareas.Get(filter: $"_adoxio_endorsement_value eq {endorsementId}");
             if (allServiceAreas.Value.Count > 0)
             {
-                capacity = allServiceAreas.Value.FirstOrDefault().AdoxioCapacity.HasValue ? allServiceAreas.Value.FirstOrDefault().AdoxioCapacity.Value : 0;
+                foreach (var serviceArea in allServiceAreas.Value)
+                {
+                    capacity += serviceArea.AdoxioCapacity.HasValue ? serviceArea.AdoxioCapacity.Value : 0;
+                }
             }
             return capacity;
         }
