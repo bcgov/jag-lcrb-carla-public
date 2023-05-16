@@ -432,7 +432,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 string liquorEndTime = pstLiquorEnd.HasValue ? pstLiquorEnd.Value.ToString("h:mm tt") : "";
                 eventTimings += $@"<tr class='hide-border'>
                         <td style='width: 50%; text-align: left;'>{eventDate} - Event Hours: {startTime} to {endTime}</td>
-                        <td style='width: 50%; text-align: left;'>Service Hours: {liquorStartTime} to {liquorEndTime}</td>
                     </tr>";
             }
 
@@ -501,9 +500,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 { "hostname", licenceEventVM.ClientHostname },
                 { "startDate", licenceEventVM.StartDate?.ToString("MMMM dd, yyyy") },
                 { "endDate", licenceEventVM.EndDate?.ToString("MMMM dd, yyyy") },
+                { "eventName", licenceEventVM.EventName },
                 { "eventTimings", eventTimings },
                 { "eventNumber", licenceEventVM.EventNumber },
-                { "eventType", licenceEventVM.EventType.HasValue ? EnumExtensions.GetEnumMemberValue(licenceEventVM.EventType) : ""},
+                { "eventType", licenceEvent.AdoxioTuaeventtype.HasValue ? EnumExtensions.GetEnumMemberValue((TuaEventType?)licenceEvent.AdoxioTuaeventtype) : ""},
                 { "eventDescription", licenceEventVM.EventTypeDescription },
                 { "foodService", licenceEventVM.FoodService.HasValue ? EnumExtensions.GetEnumMemberValue(licenceEventVM.FoodService) : "" },
                 { "entertainment", licenceEventVM.Entertainment.HasValue ? EnumExtensions.GetEnumMemberValue(licenceEventVM.Entertainment) : "" },
@@ -527,7 +527,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 { "isNetworkingParty", licenceEventVM.IsNetworkingParty ?? false ? "1" : null},
                 { "isConcert", licenceEventVM.IsConcert ?? false ? "1" : null},
                 { "isNoneOfTheAbove", licenceEventVM.IsNoneOfTheAbove ?? false ? "1" : null},
-                { "isBanquet", licenceEventVM.IsBanquet ?? false ? "1" : ""},
+                { "isBanquet", licenceEventVM.IsBanquet ?? false ? "1" : null},
                 { "isAmplifiedSound", licenceEventVM.IsAmplifiedSound ?? false ? "1" : null},
                 { "isDancing", licenceEventVM.IsDancing ?? false ? "1" : null},
                 { "isReception", licenceEventVM.IsReception ?? false ? "1" : null},

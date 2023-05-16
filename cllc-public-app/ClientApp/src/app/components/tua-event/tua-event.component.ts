@@ -13,6 +13,7 @@ import { faSave } from '@fortawesome/free-regular-svg-icons';
 import { faQuestionCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { LicenceEventSchedule } from '@models/licence-event-schedule';
 import { License } from '@models/license.model';
+import { HoursOfService } from '../../models/endorsement.model';
 
 @Component({
   selector: 'app-tua-event',
@@ -63,7 +64,7 @@ export class TuaEventComponent extends FormBase implements OnInit {
     endDate: ['', [Validators.required]],
 
     maxAttendance: ['', [Validators.required, Validators.max(100000)]],
-    minorsAttending: ['', [Validators.required]],
+    //minorsAttending: ['', [Validators.required]],
     tuaEventType: ['', [Validators.required]],
     eventTypeDescription: ['', [Validators.required]],
 
@@ -386,7 +387,7 @@ export class TuaEventComponent extends FormBase implements OnInit {
       startDate: 'Please enter the start date',
       endDate: 'Please enter the end date',
       maxAttendance: 'Please enter the maximum attendance (must be a number)',
-      minorsAttending: 'Please indicate if minors are attending',
+      //minorsAttending: 'Please indicate if minors are attending',
       tuaEventType: 'Please indicate the type of event',
       eventTypeDescription: 'Please enter a description of the event',
       isClosedToPublic: 'Please indicate if licensed establishment will be closed',
@@ -409,11 +410,122 @@ export class TuaEventComponent extends FormBase implements OnInit {
     this.validationMessages = [...new Set(this.listControlsWithErrors(this.form, this.validationErrorMap))];
 
     // ... TODO: add more validation rules here - e.g. date range validation
-
+    var outDoor = false;
+    if (this.licence != undefined && this.licence.serviceAreas != undefined && this.licence.serviceAreas.length > 0) {
+      outDoor = this.licence.serviceAreas[this.licence.serviceAreas.length - 1].isOutdoor;
+    }
     if (this.timeForms.controls.length < 1) {
       this.validationMessages.push('No event dates selected');
     }
+    // Validate Capacity
+    var locationAttendance = 0;
+    for (var i = 0; i < this.form.value.eventLocations.length; i++) {
+      locationAttendance += Number(this.form.value.eventLocations[i].attendance);
+    }
+    var endorsements = this.licence.endorsements.filter(k => k.endorsementName = 'Temporary Use Area Endorsement');
+    if (endorsements != null && endorsements != undefined && endorsements.length > 0) {
+      var lastEndorsement = endorsements[endorsements.length - 1];
 
+      if (locationAttendance > lastEndorsement.areaCapacity) {
+        this.validationMessages.push('Capacity cannot exceed the current licence limits');
+      }
+      //Validate Timing 
+      if (this.timeForms.length > 0) {
+        var hoursOfServiceList = lastEndorsement.hoursOfServiceList;
+        if (hoursOfServiceList != null && hoursOfServiceList != undefined && hoursOfServiceList.length > 0) {
+
+          //Check if different timings
+          if (this.timeForms.length > 1) {
+            for (var i = 0; i < this.timeForms.length; i++) {
+              var startDate = this.timeForms.value[i].date;
+              var dayOfWeek = startDate.getDay();
+              var hoursOfService = hoursOfServiceList.filter(k => k.dayOfWeek == dayOfWeek)[0];
+              if (hoursOfService == null || hoursOfService == undefined) {
+                this.validationMessages.push('Service hours should be within endorsement service hours');
+                break;
+              } else {
+                var liquorStartTimeHour = this.timeForms.value[i].startTime.hour;
+                var liquorStartTimeMinute = this.timeForms.value[i].startTime.minute;
+                var liquorEndTimeHour = this.timeForms.value[i].endTime.hour;
+                var liquorEndTimeMinute = this.timeForms.value[i].endTime.minute;
+                if (hoursOfService.endTimeHour < hoursOfService.startTimeHour) {
+                  hoursOfService.endTimeHour += 24;
+                }
+                if (liquorEndTimeHour < liquorStartTimeHour) {
+                  liquorEndTimeHour += 24;
+                }
+                //If event is outdoor, Maximum closing hours is 10 PM
+                if (outDoor) {
+                  //Check if the approved closing hours is before 10 PM
+                  if (hoursOfService.endTimeHour > 22 || (hoursOfService.endTimeHour == 22 && hoursOfService.endTimeMinute > 0)) {
+                    hoursOfService.endTimeHour = 22;
+                    hoursOfService.endTimeMinute = 0;
+                  }
+                }
+                if (liquorStartTimeHour < hoursOfService.startTimeHour ||
+                  (liquorStartTimeHour == hoursOfService.startTimeHour
+                    && liquorStartTimeMinute < hoursOfService.startTimeMinute)) {
+                  this.validationMessages.push('Service hours should be within endorsement service hours');
+                  break;
+                }
+                if (liquorEndTimeHour > hoursOfService.endTimeHour ||
+                  (liquorEndTimeHour == hoursOfService.endTimeHour
+                    && liquorEndTimeMinute > hoursOfService.endTimeMinute)) {
+                  this.validationMessages.push('Service hours should be within endorsement service hours');
+                  break;
+                }
+
+              }
+
+            }
+
+          }
+          else {
+            //Every day at the same time
+            var startDate = this.form.value.startDate;
+            var dayOfWeek = startDate.getDay();
+            var existedHoursOfService = hoursOfServiceList.filter(k => k.dayOfWeek == dayOfWeek)[0];
+            var hoursOfService = new HoursOfService();
+
+            hoursOfService.dayOfWeek = existedHoursOfService.dayOfWeek;
+            hoursOfService.startTimeHour = existedHoursOfService.startTimeHour;
+            hoursOfService.startTimeMinute = existedHoursOfService.startTimeMinute;
+            hoursOfService.endTimeHour = existedHoursOfService.endTimeHour;
+            hoursOfService.endTimeMinute = existedHoursOfService.endTimeMinute;
+
+            var liquorStartTimeHour = this.timeForms.value[0].startTime.hour;
+            var liquorStartTimeMinute = this.timeForms.value[0].startTime.minute;
+            var liquorEndTimeHour = this.timeForms.value[0].endTime.hour;
+            var liquorEndTimeMinute = this.timeForms.value[0].endTime.minute;
+            if (hoursOfService.endTimeHour < hoursOfService.startTimeHour) {
+              hoursOfService.endTimeHour += 24;
+            }
+            if (liquorEndTimeHour < liquorStartTimeHour) {
+              liquorEndTimeHour += 24;
+            }
+            //If event is outdoor, Maximum closing hours is 10 PM
+            if (outDoor) {
+              //Check if the approved closing hours is before 10 PM
+              if (hoursOfService.endTimeHour > 22 || (hoursOfService.endTimeHour == 22 && hoursOfService.endTimeMinute > 0)) {
+                hoursOfService.endTimeHour = 22;
+                hoursOfService.endTimeMinute = 0;
+              }
+            }
+            if (liquorStartTimeHour < hoursOfService.startTimeHour ||
+              (liquorStartTimeHour == hoursOfService.startTimeHour
+                && liquorStartTimeMinute < hoursOfService.startTimeMinute)) {
+              this.validationMessages.push('Service hours should be within endorsement service hours');
+            }
+            if (liquorEndTimeHour > hoursOfService.endTimeHour ||
+              (liquorEndTimeHour == hoursOfService.endTimeHour
+                && liquorEndTimeMinute > hoursOfService.endTimeMinute)) {
+              this.validationMessages.push('Service hours should be within endorsement service hours');
+            }
+          }
+        }
+      }
+
+    }
     this.markControlsAsTouched(this.form);
 
     if (this.validationMessages.length > 0) {
