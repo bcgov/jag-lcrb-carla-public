@@ -156,7 +156,14 @@ export class FederalReportingComponent implements OnInit {
        this.reportYears.push(temp.toString());
     }
     this.reportMonths = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
-    this.selectedMonth = this.reportMonths[0];
+    var tmpMonth = new Date().getMonth() + 1;
+    if (tmpMonth < 10) {
+      this.selectedMonth = "0" + tmpMonth.toString();
+
+    } else {
+      this.selectedMonth = tmpMonth.toString();
+    }
+    
   }  
   
 

@@ -147,7 +147,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 var select = new List<string>() { "_adoxio_licenceid_value", "adoxio_licencenumber", "adoxio_reportingperiodmonth", "adoxio_reportingperiodyear", "statuscode", "adoxio_employeesmanagement", "adoxio_employeesadministrative", "adoxio_employeessales", "adoxio_employeesproduction", "adoxio_employeesother", "adoxio_cannabismonthlyreportid" };
                 var expand = new List<string>() { "adoxio_EstablishmentId($select=adoxio_establishmentid, adoxio_name, adoxio_addresscity, adoxio_addresspostalcode)" };
-                var filter = $"_adoxio_licenceid_value eq {licenceId} and adoxio_reportingperiodyear eq {year} and adoxio_reportingperiodmonth eq {month}";
+                var filter = $"_adoxio_licenceid_value eq {licenceId} and adoxio_reportingperiodyear eq '{year}' and adoxio_reportingperiodmonth eq '{month}'";
                 monthlyReports = _dynamicsClient.Cannabismonthlyreports.Get(filter: filter, select: select, expand: expand, @orderby: new List<string> { "adoxio_reportingperiodyear asc", "adoxio_reportingperiodmonth asc" }).Value;
             }
             catch (Exception ex)
@@ -156,7 +156,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 monthlyReports = null;
             }
 
-            if (monthlyReports != null)
+            if (monthlyReports != null && monthlyReports.Count() > 0)
             {               
                 return new JsonResult(monthlyReports.ToArray()[0].ToViewModel(_dynamicsClient, true));  
             }
