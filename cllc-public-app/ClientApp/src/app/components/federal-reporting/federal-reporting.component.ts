@@ -131,6 +131,7 @@ export class FederalReportingComponent implements OnInit {
   }
 
   viewReport() {
+    this.selectedMonthlyReport = null;
     this.getMonthlyReport(this.selectedLicense?.licenseId, this.selectedYear, this.selectedMonth);
     this.renderMonthlyReport();
   }
