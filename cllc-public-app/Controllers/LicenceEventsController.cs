@@ -534,6 +534,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 { "isLiveEntertainment", licenceEventVM.IsLiveEntertainment ?? false ? "1" : null},
                 { "isGambling", licenceEventVM.IsGambling ?? false ? "1" : null},
                 { "eventLocations", eventLocations },
+                { "permanentLicenceClosed", licenceEventVM.IsClosedToPublic ?? false ? "Yes" : "No" }
             };
 
             byte[] data;
