@@ -131,12 +131,11 @@ export class FederalReportingComponent implements OnInit {
   }
 
   viewReport() {
-    this.selectedMonthlyReport = null;
     this.getMonthlyReport(this.selectedLicense?.licenseId, this.selectedYear, this.selectedMonth);
-    this.renderMonthlyReport();
   }
 
   getMonthlyReport(licenceId, year = null, month = null) {
+    this.selectedMonthlyReport = null;
     this.loadingMonthlyReports = true;   
     return forkJoin([
       this.monthlyReportDataService.getMonthlyReportByLicenceYearMonth(licenceId, year, month)
@@ -144,6 +143,7 @@ export class FederalReportingComponent implements OnInit {
       .subscribe(([monthlyReport]) => {       
         this.selectedMonthlyReport = monthlyReport;       
         this.loadingMonthlyReports = false;
+        this.renderMonthlyReport();
       });
   }
 
