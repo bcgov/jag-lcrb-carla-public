@@ -533,7 +533,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 { "isReception", licenceEventVM.IsReception ?? false ? "1" : null},
                 { "isLiveEntertainment", licenceEventVM.IsLiveEntertainment ?? false ? "1" : null},
                 { "isGambling", licenceEventVM.IsGambling ?? false ? "1" : null},
-                { "eventLocations", eventLocations }
+                { "eventLocations", eventLocations },
             };
 
             byte[] data;
