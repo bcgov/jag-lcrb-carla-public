@@ -640,7 +640,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
 
     // TG validation question for cannabis licences to confirm that product is not visible from outside
-    if (this.application.applicationType.floorPlan === FormControlState.Show && this.application.licenseType === 'Cannabis Retail Store') {
+    if (this.application.applicationType.floorPlan === FormControlState.Show && (this.application.licenseType === 'Cannabis Retail Store' || this.application.licenseType === 'S119 CRS Authorization')) {
       this.form.get('IsReadyProductNotVisibleOutside').setValidators([Validators.required]);
     }
 
@@ -856,7 +856,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   showExteriorChangeQuestion(): boolean {
     let show = this.application &&
       (this.application.applicationType.name === ApplicationTypeNames.CRSEstablishmentNameChange
-        && this.application.licenseType === 'Cannabis Retail Store');
+      &&( this.application.licenseType === 'Cannabis Retail Store' || this.application.licenseType === 'S119 CRS Authorization'));
 
     if (show) {
       this.form.get('proposedChange').setValidators([Validators.required]);
@@ -1409,13 +1409,43 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.validationMessages.push('Requirements For Operating is required.');
     }
 
-    if (!this.form.get('productsListAndDescription').value && this.application.applicationType.name === ApplicationTypeNames.MFG) {
+    if (!this.form.get('productsListAndDescription').value && this.application.applicationType.name === ApplicationTypeNames.MFG && this.form.get("licenceSubCategory").value != "Co-Packer") {
       valid = false;
       this.validationMessages.push('Please add products list and description.');
     }
 
     if (this.showZoning() && this.application.isPermittedInZoning != true) {
         this.validationMessages.push('Zoning Declaration is required.');
+    }
+
+    if (this.application?.applicationType.name == ApplicationTypeNames.MFG) {
+      if (this.form.get("licenceSubCategory").value === "Brewery" &&
+        (this.form.get('mfrSupInfoReadUnderstand').value != true || this.form.get('mfrSupInfoOwnRent').value != true ||
+          this.form.get('mfrSupInfoProductionEquipment').value != true)) {
+        valid = false;
+        this.validationMessages.push('Manufacture supporting Information is required.');
+      }
+
+      if (this.form.get("licenceSubCategory").value === "Winery" &&
+        (this.form.get('mfrSupInfoReadUnderstand').value != true || this.form.get('mfrSupInfoOwnRent').value != true ||
+          this.form.get('mfrSupInfoIntendProduce').value != true || this.form.get('mfrSupInfoProductionEquipment').value != true)) {
+        valid = false;
+        this.validationMessages.push('Manufacture supporting Information is required.');
+      }
+
+      if (this.form.get("licenceSubCategory").value === "Co-Packer" &&
+        this.form.get('mfrSupInfoReadUnderstand').value != true) {
+        valid = false;
+        this.validationMessages.push('Manufacture supporting Information is required.');
+      }
+
+      if (this.form.get("licenceSubCategory").value === "Distillery" &&
+        (this.form.get('mfrSupInfoReadUnderstand').value != true || this.form.get('mfrSupInfoOwnRent').value != true ||
+          this.form.get('mfrSupInfoProductionEquipment').value != true)) {
+        valid = false;
+        this.validationMessages.push('Manufacture supporting Information is required.');
+      }
+
     }
 
     return valid && (this.form.valid || this.form.disabled);

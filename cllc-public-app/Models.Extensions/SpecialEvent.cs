@@ -151,7 +151,23 @@ namespace Gov.Lclb.Cllb.Public.Models
                         .Where(sepDrinkSalesForecast => sepDrinkSalesForecast._adoxioTypeValue == spiritsTypeId)
                         .Select(sepDrinkSalesForecast => sepDrinkSalesForecast.AdoxioPriceperserving)
                         .FirstOrDefault();
-                    
+
+                    result.Beer_free = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
+                       .Where(sepDrinkSalesForecast => sepDrinkSalesForecast._adoxioTypeValue == beerTypeId &&
+                       sepDrinkSalesForecast.AdoxioIscharging==false)
+                       .Select(sepDrinkSalesForecast => sepDrinkSalesForecast.AdoxioEstimatedservings)
+                       .FirstOrDefault();
+                    result.Wine_free = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
+                       .Where(sepDrinkSalesForecast => sepDrinkSalesForecast._adoxioTypeValue == wineTypeId &&
+                       sepDrinkSalesForecast.AdoxioIscharging == false)
+                       .Select(sepDrinkSalesForecast => sepDrinkSalesForecast.AdoxioEstimatedservings)
+                       .FirstOrDefault();
+                    result.Spirits_free = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
+                       .Where(sepDrinkSalesForecast => sepDrinkSalesForecast._adoxioTypeValue == spiritsTypeId &&
+                       sepDrinkSalesForecast.AdoxioIscharging == false)
+                       .Select(sepDrinkSalesForecast => sepDrinkSalesForecast.AdoxioEstimatedservings)
+                       .FirstOrDefault();
+
                 }
 
                 result.TotalProceeds = specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent == null ? 0 : specialEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent

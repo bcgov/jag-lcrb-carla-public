@@ -287,7 +287,7 @@
                                                 (click)="startRequest(5001)" [disabled]="requestStarted && requestID==5001">
                                           <span>
                                             <fa-icon [icon]="faExchangeAlt" style="margin-right: 10px;"></fa-icon>
-                                            Transfer Licence
+                                            Transfer licence <span *ngIf="licenceType === 'Cannabis Retail Store'||licenceType === 'S119 CRS Authorization'||licenceType === 'Producer Retail Store'"> or Authorization  </span>
                                           </span>
                                           <mat-progress-bar *ngIf="requestStarted && requestID==5001" mode="indeterminate"></mat-progress-bar>
                                         </button>
@@ -379,12 +379,12 @@
                                       <button [disabled]="true" class="missing"
                                               [title]="'Attention: you have an outstanding prior balance invoice(s); please return to the Dashboard for details and to make payment'">
                                         <span>
-                                          <strong>Attention</strong>: This Licence has Expired<br>Please Reinstate.
+                                          <strong>Attention</strong>: This licence has Expired<br>Please Reinstate.
                                         </span>
                                       </button>
                                     </span>
                                     <span *ngIf="!isOutstandingPriorBalanceInvoiceDue && !isExpiredOverOneYear(item)">
-                                      <strong>Attention</strong>: This Licence has Expired<br>
+                                      <strong>Attention</strong>: This licence has Expired<br>
                                       <button mat-raised-button color="secondary" style="margin-right: 10px;"
                                               (click)="startRenewal(item)" [disabled]="renewalStarted">
                                         <span>
@@ -522,17 +522,11 @@
   </p>
 
   <p *ngIf="!licenceType.includes('Operated') && (licenceType === 'Section 119 Authorization' || licenceType === 'S119 CRS Authorization')"
-
      style="font-style: italic; text-align: center;">
-    All
-    {{licenceType}} holders must follow the terms
-    and
-    conditions set out in the
-    <a href="{{getHandbookLink(licenceType)}}" target="_blank">
-      Cannabis Retail
-      Store Licence Terms and Conditions Handbook
-    </a> for anything not explicitly covered by their
-    authorization agreement.
+    All Cannabis Retail Store licence and authorization holders under a Section 119 agreement must follow the terms and conditions of their licence or authorization as set out in the
+    <a href="https://www2.gov.bc.ca/gov/content?id=FFBF300FC24C4B4C92F13DBB73040523" target="_blank">
+      handbook for Section 119 authorization holders
+    </a> 
   </p>
   <p *ngIf="licenceType.includes('Operated')" style="font-style: italic; text-align: center;">
     All Third Party

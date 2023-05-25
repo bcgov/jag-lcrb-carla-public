@@ -114,25 +114,34 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
 
 
   holder(): string {
-    if(this.application.assignedLicence.licenseType === LicenceTypeNames.S119){
-      return "authorized retailer";
+    if (this.application.assignedLicence.licenseType === LicenceTypeNames.S119 || this.application.assignedLicence.licenseType === LicenceTypeNames.CRS){
+      return "licensee or authorized retailer";
     } else {
     return "licensee";
     }
   }
 
   typeOf(): string {
-    if(this.application.assignedLicence.licenseType === LicenceTypeNames.S119){
-      return "authorization";
+    if (this.application.assignedLicence.licenseType === LicenceTypeNames.S119 || this.application.assignedLicence.licenseType === LicenceTypeNames.CRS){
+      return "licence or authorization";
     } else {
     return "licence";
     }
 
   }
+  typeOfWithSlash(): string {
+    if (this.application.assignedLicence.licenseType === LicenceTypeNames.S119 || this.application.assignedLicence.licenseType === LicenceTypeNames.CRS) {
+      return "licence/authorization";
+    } else {
+      return "licence";
+    }
+
+  }
 
   titleOf(): string {
-    if (this.application.assignedLicence.licenseType === LicenceTypeNames.S119 || this.application.assignedLicence.licenseType === LicenceTypeNames.S119CRS) {
-      return "Section 119 Authorization";
+    if (this.application.assignedLicence.licenseType === LicenceTypeNames.S119 || this.application.assignedLicence.licenseType === LicenceTypeNames.S119CRS
+      || this.application.assignedLicence.licenseType === LicenceTypeNames.CRS) {
+      return "Cannabis Retail Store Licence/Authorization.";
     } else if (this.application.assignedLicence.licenseType === LicenceTypeNames.PRS) {
       return "Producer Retail Store License";
     } else {

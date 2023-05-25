@@ -55,7 +55,7 @@
   <section style="padding-right: 95px;">
     <div *ngIf="form.get('renewalUnreportedSaleOfBusiness').value === 'Yes'" class="field-changed">
       <fa-icon [icon]="faExclamationCircle" style="margin-right: 10px;"></fa-icon>You can still renew your {{typeOf()}}. Please
-      contact us as soon as possible to transfer this {{typeOf()}} to its new owner.
+      contact us as soon as possible to transfer this {{typeOfWithSlash()}} to its new owner.
     </div>
   </section>
 </mat-card>
@@ -147,8 +147,8 @@
     <div *ngIf="form.get('tiedhouseFederalInterest').value === 'Yes'" class="field-changed">
       <fa-icon [icon]="faExclamationCircle" style="margin-right: 10px;"></fa-icon>
       You can still renew your {{typeOf()}}. After submitting your renewal, you can update your federal producer
-      information on the Account Profile page on the Dashboard. A member of LCRB may contact you to
-      determine any additional next steps.
+      information on the Account Profile page on the Dashboard. A member of LCRB may contact you to determine any
+      additional next steps.
     </div>
   </section>
 </mat-card>
@@ -172,7 +172,7 @@
 
     <div *ngIf="form.get('renewalOrgLeadership').value === 'Yes'" class="field-changed">
       <fa-icon [icon]="faExclamationCircle" style="margin-right: 10px;"></fa-icon>
-      You can still renew your {{typeOf()}}. Please contact us to update your information.
+      You can still renew your {{typeOf()}}. Please contact us to update this information.
     </div>
   </section>
 </mat-card>
@@ -195,7 +195,7 @@
 
     <div *ngIf="form.get('renewalkeypersonnel').value === 'Yes'" class="field-changed">
       <fa-icon [icon]="faExclamationCircle" style="margin-right: 10px;"></fa-icon>
-      You can still renew your {{typeOf()}}. Please contact us to update your information.
+      You can still renew your {{typeOf()}}. Please contact us to update this information.
     </div>
   </section>
 </mat-card>

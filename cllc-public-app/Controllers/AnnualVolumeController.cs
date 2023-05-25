@@ -41,7 +41,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if(!CurrentUserHasAccessToApplicationOwnedBy(dynamicsApplication._adoxioApplicantValue))
             {
-                return NotFound();
+                //return NotFound();
+                throw new Exception("User doesn't have an access the application");
             }
 
             // Remove other annual volumes that are attached to application

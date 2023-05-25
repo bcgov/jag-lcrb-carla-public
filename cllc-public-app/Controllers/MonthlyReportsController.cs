@@ -134,6 +134,35 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
 
+        /// GET all monthly reports in Dynamics by Licence filtered by the current user's licencee
+        [HttpGet("licenceYearMonth")]
+        public IActionResult GetMonthlyReportByLicenceYearMonth([FromQuery] string licenceId, [FromQuery] string year="", [FromQuery] string month="")
+        {
+            // get the current user.
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+            MonthlyReport monthlyReport = new MonthlyReport();
+            List<MonthlyReport> monthlyReportsList = new List<MonthlyReport>();
+            IEnumerable<MicrosoftDynamicsCRMadoxioCannabismonthlyreport> monthlyReports;
+            try
+            {
+                var select = new List<string>() { "_adoxio_licenceid_value", "adoxio_licencenumber", "adoxio_reportingperiodmonth", "adoxio_reportingperiodyear", "statuscode", "adoxio_employeesmanagement", "adoxio_employeesadministrative", "adoxio_employeessales", "adoxio_employeesproduction", "adoxio_employeesother", "adoxio_cannabismonthlyreportid" };
+                var expand = new List<string>() { "adoxio_EstablishmentId($select=adoxio_establishmentid, adoxio_name, adoxio_addresscity, adoxio_addresspostalcode)" };
+                var filter = $"_adoxio_licenceid_value eq {licenceId} and adoxio_reportingperiodyear eq '{year}' and adoxio_reportingperiodmonth eq '{month}'";
+                monthlyReports = _dynamicsClient.Cannabismonthlyreports.Get(filter: filter, select: select, expand: expand, @orderby: new List<string> { "adoxio_reportingperiodyear asc", "adoxio_reportingperiodmonth asc" }).Value;
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, "Error querying monthly reports");
+                monthlyReports = null;
+            }
+
+            if (monthlyReports != null && monthlyReports.Count() > 0)
+            {               
+                return new JsonResult(monthlyReports.ToArray()[0].ToViewModel(_dynamicsClient, true));  
+            }
+            throw new HttpOperationException("Error: no monthly report exist for this "+year+" and "+month);    
+        }
+
         /// GET all monthly reports in Dynamics by Licencee using the account Id assigned to the user logged in
         [HttpGet("current")]
         public IActionResult GetCurrentUserMonthlyReports([FromQuery] bool expandInventoryReports)

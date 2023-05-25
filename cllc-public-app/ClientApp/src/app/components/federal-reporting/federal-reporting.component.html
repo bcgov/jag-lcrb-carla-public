@@ -3,171 +3,351 @@
 
   <div class="row">
     <h1>Federal Reporting</h1>
-
-
   </div>
-
   <div class="row" style="padding: 20px; background-color:#e0e0e0;">
     <p><fa-icon [icon]="faInfoCircle" style="margin-right: 10px;"></fa-icon>Visit the <a href="https://www2.gov.bc.ca/gov/content?id=48CD2A74BEF2400F842D0210BA865AC5" _target="blank">LCRB website</a> for helpful information about completing your federal report.</p>
   </div>
+  <div class="row" *ngIf="monthlyReports?.length < 1 && !busy">
+    <h3>There is not yet any monthly reports to report on. Please check back later.</h3>
+  </div>
 
-  <div class="row">
-    <h4 class="bold">Select Licence:</h4>
-  </div>
-  <div class="row">
-    <mat-tab-group
-      style="width: 100%;"
-      [selectedIndex]="licenses?.length > 0 ? selectedLicenceIndex : 0"
-      (selectedTabChange)="handleLicenceTabChanged($event)">
-      <mat-tab *ngFor="let licence of licenses;">
-        <ng-template mat-tab-label>
-          {{ licence.licenseNumber }} - {{ licence.establishmentName }}
-        </ng-template>
-        <h3 *ngIf="shownMonthlyReports.length < 1; else elseBlock" [class.hidden]="loadingMonthlyReports">There is not yet any monthly reports to report on. Please check back later.</h3>
-        <ng-template #elseBlock>
-          <h4 class="bold">Select Monthly Report:</h4>
-          <p>You must fill out your inventory reports in monthly sequence (e.g., January, February, March, etc.). Your reports
-            may contain errors if you do not complete them in the correct order.</p>
-        </ng-template>
-        <mat-tab-group
-          [selectedIndex]="selectedMonthlyReportIndex"
-          (selectedTabChange)="handleMonthlyReportTabChanged($event);"
-          *ngIf="shownMonthlyReports.length > 0"
-          [class.hidden]="loadingMonthlyReports">
-          <mat-tab *ngFor="let report of shownMonthlyReports; index as tabIndex;">
-            <ng-template mat-tab-label>
-              <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;" *ngIf="report.statusCode === monthlyReportStatusEnum.Draft"></fa-icon>
-              {{getMonthName(report.reportingPeriodMonth)}} {{report.reportingPeriodYear}}
-            </ng-template>
-            <ng-template matTabContent>
-              <form [formGroup]="reportForm">
-                <div class="report-details">
-                  <div class="row mx-0">
-                    <h2>{{getMonthName(report.reportingPeriodMonth)}} {{report.reportingPeriodYear}} monthly report for {{licence.establishmentName}}</h2>
-                  </div>
-                  <div class="row mx-0 d-flex align-items-baseline">
-                    <h3>
-                      Status:
-                      <span style="font-weight: bold; margin-left: 10px;">
-                        <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;" *ngIf="report.statusCode === monthlyReportStatusEnum.Draft"></fa-icon>
-                        {{monthlyReportStatusEnum[shownMonthlyReports[tabIndex].statusCode] | uppercase}}
-                      </span>
-                      <fa-icon data-html="true" style="color: #38598a; margin-left: 10px;" [icon]="faQuestionCircle" matTooltipClass="multiline-tooltip" matTooltip="DRAFT: The monthly report has not be completed&#13;SUBMITTED: The monthly report has been completed and is ready to be sent to CTLS&#13;CLOSED: The monthly report has been sent to CTLS"></fa-icon>
-                    </h3><a [routerLink]="[]" (click)="save(false)" *ngIf="reportIsSubmitted">Reopen Monthly Report</a>
-                  </div>
-                </div>
-                <div class="employee-reporting">
-                  <div class="row mx-0">
-                    <h3 class="blue-header col-xs-12">Part 1 - Employee Reporting</h3>
-                  </div>
-                  <p>Enter the number of employees who worked at your store in {{getMonthName(report.reportingPeriodMonth)}} {{report.reportingPeriodYear}} for each position listed below.</p>
-                  <div *ngIf="reportForm.invalid && (reportForm.dirty || reportForm.touched)">
-                    <div class="alert alert-danger">Number of employees must be a whole number less than 10000.</div>
-                  </div>
-                  <div class="form-group row mx-0">
-                    <label class="col-xl-1 col-xs-3 col-form-label">Management:</label>
-                    <div class="col-xs-2 col-lg-1">
-                      <div style="align-items: center; display: flex;">
-                        <input class="form-control" type="text" formControlName="employeesManagement">
-                        <div *ngIf="isFieldInvalid('employeesManagement') && !reportIsDisabled" style="flex: 0 0 25px;">
-                          <fa-icon [icon]="faChevronLeft" class=" error-states" style="margin-left: 3px"></fa-icon>
-                          <fa-icon [icon]="faChevronLeft" class=" error-states" style="margin-left: -3px"></fa-icon>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group row mx-0">
-                    <label class="col-xl-1 col-xs-3 col-form-label">Administrative:</label>
-                    <div class="col-xs-2 col-lg-1">
-                      <div style="align-items: center; display: flex;">
-                        <input class="form-control" type="text" formControlName="employeesAdministrative">
-                        <div *ngIf="isFieldInvalid('employeesAdministrative') && !reportIsDisabled" style="flex: 0 0 25px;">
-                          <fa-icon [icon]="faChevronLeft" class=" error-states" style="margin-left: 3px"></fa-icon>
-                          <fa-icon [icon]="faChevronLeft" class=" error-states" style="margin-left: -3px"></fa-icon>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group row mx-0">
-                    <label class="col-xl-1 col-xs-3 col-form-label">Sales:</label>
-                    <div class="col-xs-2 col-lg-1">
-                      <div style="align-items: center; display: flex;">
-                        <input class="form-control" type="text" formControlName="employeesSales">
-                        <div *ngIf="isFieldInvalid('employeesSales') && !reportIsDisabled" style="flex: 0 0 25px;">
-                          <fa-icon [icon]="faChevronLeft" class=" error-states" style="margin-left: 3px"></fa-icon>
-                          <fa-icon [icon]="faChevronLeft" class=" error-states" style="margin-left: -3px"></fa-icon>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group row mx-0">
-                    <label class="col-xl-1 col-xs-3 col-form-label">Production:</label>
-                    <div class="col-xs-2 col-lg-1">
-                      <div style="align-items: center; display: flex;">
-                        <input class="form-control" type="text" formControlName="employeesProduction">
-                        <div *ngIf="isFieldInvalid('employeesProduction') && !reportIsDisabled" style="flex: 0 0 25px;">
-                          <fa-icon [icon]="faChevronLeft" class=" error-states" style="margin-left: 3px"></fa-icon>
-                          <fa-icon [icon]="faChevronLeft" class=" error-states" style="margin-left: -3px"></fa-icon>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group row mx-0">
-                    <label class="col-xl-1 col-xs-3 col-form-label">Other:</label>
-                    <div class="col-xs-2 col-lg-1">
-                      <div style="align-items: center; display: flex;">
-                        <input class="form-control" type="text" formControlName="employeesOther">
-                        <div *ngIf="isFieldInvalid('employeesOther') && !reportIsDisabled" style="flex: 0 0 25px;">
-                          <fa-icon [icon]="faChevronLeft" class=" error-states" style="margin-left: 3px"></fa-icon>
-                          <fa-icon [icon]="faChevronLeft" class=" error-states" style="margin-left: -3px"></fa-icon>
-                        </div>
-                      </div>
+  <!--LCSD-6499 Federal Report Dropdownlist module:-->
+
+  <section>
+    <!--Show licenses-->
+    <div *ngIf="licenses?.length > 0">
+      <div class="row" style="margin-top:10px;">
+        <h4 class="bold">Select Licence:</h4>
+      </div>
+      <div class="row"></div>
+      <div class="row" style="width:50%; margin-left:20px;">
+        <select class="form-control" [(ngModel)]="selectedLicense" (change)="handleLicenceSelectedChanged()">
+          <option>--</option>
+          <option *ngFor="let license of licenses" [ngValue]="license"> {{ license.licenseNumber }} - {{ license.establishmentName }}</option>
+        </select>
+      </div>
+      <h4 class="bold">Select Monthly Report:</h4>
+      <div class="row" style="padding:20px;">
+        <p>
+          You must fill out your inventory reports in monthly sequence (e.g., January, February, March, etc.). Your reports
+          may contain errors if you do not complete them in the correct order.
+        </p>
+      </div>
+      <div class="row">
+        <div style="width:20%;  margin-left:20px;">
+          <label>Select Report Year</label>
+          <select class="form-control" [(ngModel)]="selectedYear">
+            <option *ngFor="let item of reportYears" [value]="item">
+              {{item}}
+            </option>
+          </select>
+        </div>
+        <div style="width:20%; margin-left:20px;">
+          <label>Select Report Month</label>
+          <select class="form-control" [(ngModel)]="selectedMonth">
+            <option *ngFor="let item of reportMonths" [value]="item">
+              {{getMonthName(item)}}
+            </option>
+          </select>
+        </div>
+        <div style="width:10%; margin-left:20px;">
+          <label>&nbsp;   </label>
+          <button class="form-control" mat-raised-button color="primary" (click)="viewReport()">View Report</button>
+        </div>
+      </div>
+
+    </div>
+    <!--Show SelectedMonthlyReport-->
+    <div class="row" *ngIf="selectedMonthlyReport !=null" [class.hidden]="loadingMonthlyReports">
+      <form [formGroup]="reportForm">
+        <section>
+          <h3 class="blue-header">
+            {{getName(selectedMonthlyReport)}} {{selectedMonthlyReport.reportingPeriodYear}}  monthly report for {{selectedLicense.establishmentName}}
+          </h3>
+          <section class="padded-section content-bottom">
+            <div class="report-details">
+              <div class="row mx-0 d-flex align-items-baseline">
+                <h3>
+                  Status:
+                  <span style="font-weight: bold; margin-left: 10px;">
+                    <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;" *ngIf="selectedMonthlyReport?.statusCode === monthlyReportStatusEnum.Draft"></fa-icon>
+                    {{monthlyReportStatusEnum[selectedMonthlyReport?.statusCode] | uppercase}}
+                  </span>
+                  <fa-icon data-html="true" style="color: #38598a; margin-left: 10px;" [icon]="faQuestionCircle" matTooltipClass="multiline-tooltip" matTooltip="DRAFT: The monthly report has not be completed&#13;SUBMITTED: The monthly report has been completed and is ready to be sent to CTLS&#13;CLOSED: The monthly report has been sent to CTLS"></fa-icon>
+                </h3><a [routerLink]="[]" (click)="save(false)" *ngIf="reportIsSubmitted">Reopen Monthly Report</a>
+              </div>
+            </div>
+            <div class="employee-reporting">
+              <div class="row mx-0">
+                <h3 class="blue-header col-xs-12">Part 1 - Employee Reporting</h3>
+              </div>
+              <p>Enter the number of employees who worked at your store in {{getName(selectedMonthlyReport)}} for each position listed below.</p>
+              <div *ngIf="reportForm.invalid && (reportForm.dirty || reportForm.touched)">
+                <div class="alert alert-danger">Number of employees must be a whole number less than 10000.</div>
+              </div>
+              <div class="form-group row mx-0">
+                <label class="col-xl-1 col-xs-3 col-form-label">Management:</label>
+                <div class="col-xs-2 col-lg-1">
+                  <div style="align-items: center; display: flex;">
+                    <input class="form-control" type="text" formControlName="employeesManagement">
+                    <div *ngIf="isFieldInvalid('employeesManagement') && !reportIsDisabled" style="flex: 0 0 25px;">
+                      <fa-icon [icon]="faChevronLeft" class=" error-states" style="margin-left: 3px"></fa-icon>
+                      <fa-icon [icon]="faChevronLeft" class=" error-states" style="margin-left: -3px"></fa-icon>
                     </div>
                   </div>
                 </div>
-                <div class="product-selection">
-                  <div class="row mx-0">
-                    <h3 class="blue-header col-xs-12">Part 2 - Cannabis Product Inventory</h3>
-                  </div>
-                  <p>Identify the cannabis products you have ordered, sold, returned or have managed the inventory of in the previous month.</p>
-                  <p>The Liquor and Cannabis Regulation Branch submits all inventory reports to Health Canada. Reports must be <strong>accurate</strong> and submitted <strong>on time</strong>.</p>
-                  <div class="form-check callout" *ngFor="let productForm of productForms">
-                    <mat-checkbox [checked]="productForm?.value?.selected" (change)="toggleProductVisibility(productForm)"
-                      [disabled]="reportIsDisabled">
-                      <strong>{{productForm.value.product}}</strong>
-                    </mat-checkbox>
-                    <div class="callout__details">
-                      <p>{{productForm.value.productDescription}}</p>
+              </div>
+              <div class="form-group row mx-0">
+                <label class="col-xl-1 col-xs-3 col-form-label">Administrative:</label>
+                <div class="col-xs-2 col-lg-1">
+                  <div style="align-items: center; display: flex;">
+                    <input class="form-control" type="text" formControlName="employeesAdministrative">
+                    <div *ngIf="isFieldInvalid('employeesAdministrative') && !reportIsDisabled" style="flex: 0 0 25px;">
+                      <fa-icon [icon]="faChevronLeft" class=" error-states" style="margin-left: 3px"></fa-icon>
+                      <fa-icon [icon]="faChevronLeft" class=" error-states" style="margin-left: -3px"></fa-icon>
                     </div>
                   </div>
                 </div>
-                <div class="product-reporting">
-                  <div class="row mx-0">
-                    <h3 class="blue-header col-xs-12">Part 3 - Cannabis Product Inventory Details</h3>
+              </div>
+              <div class="form-group row mx-0">
+                <label class="col-xl-1 col-xs-3 col-form-label">Sales:</label>
+                <div class="col-xs-2 col-lg-1">
+                  <div style="align-items: center; display: flex;">
+                    <input class="form-control" type="text" formControlName="employeesSales">
+                    <div *ngIf="isFieldInvalid('employeesSales') && !reportIsDisabled" style="flex: 0 0 25px;">
+                      <fa-icon [icon]="faChevronLeft" class=" error-states" style="margin-left: 3px"></fa-icon>
+                      <fa-icon [icon]="faChevronLeft" class=" error-states" style="margin-left: -3px"></fa-icon>
+                    </div>
                   </div>
-                  <p *ngIf="isProductInventorySelected">Enter the details of the cannabis product inventory you identified above.</p>
-                  <p *ngIf="!isProductInventorySelected">You have not identified any cannabis product inventory to report.</p>
-                  <app-product-inventory-sales-report [productForm]="productForm" [visible]="productForm?.value?.selected" *ngFor="let productForm of productForms">
-                  </app-product-inventory-sales-report>
                 </div>
-                <div class="row mx-0 mt-5 button-row" *ngIf="!reportIsDisabled">
-                  <button class="btn btn-secondary" (click)="save(false)">
-                    <span>
-                      <fa-icon [icon]="faSave"></fa-icon>SAVE FOR LATER
-                    </span>
-                  </button>
-                  <button class="btn btn-primary" (click)="submitApplication()" [disabled]="!checkIfReportValid()">
-                    SUBMIT
-                  </button>
-                  <button class="btn btn-link btn-cancel" routerLink="/dashboard">
-                    <fa-icon [icon]="faTrash"></fa-icon>CANCEL
-                  </button>
+              </div>
+              <div class="form-group row mx-0">
+                <label class="col-xl-1 col-xs-3 col-form-label">Production:</label>
+                <div class="col-xs-2 col-lg-1">
+                  <div style="align-items: center; display: flex;">
+                    <input class="form-control" type="text" formControlName="employeesProduction">
+                    <div *ngIf="isFieldInvalid('employeesProduction') && !reportIsDisabled" style="flex: 0 0 25px;">
+                      <fa-icon [icon]="faChevronLeft" class=" error-states" style="margin-left: 3px"></fa-icon>
+                      <fa-icon [icon]="faChevronLeft" class=" error-states" style="margin-left: -3px"></fa-icon>
+                    </div>
+                  </div>
                 </div>
-              </form>
-            </ng-template>
-          </mat-tab>
-        </mat-tab-group>
-      </mat-tab>
-    </mat-tab-group>
-  </div>
+              </div>
+              <div class="form-group row mx-0">
+                <label class="col-xl-1 col-xs-3 col-form-label">Other:</label>
+                <div class="col-xs-2 col-lg-1">
+                  <div style="align-items: center; display: flex;">
+                    <input class="form-control" type="text" formControlName="employeesOther">
+                    <div *ngIf="isFieldInvalid('employeesOther') && !reportIsDisabled" style="flex: 0 0 25px;">
+                      <fa-icon [icon]="faChevronLeft" class=" error-states" style="margin-left: 3px"></fa-icon>
+                      <fa-icon [icon]="faChevronLeft" class=" error-states" style="margin-left: -3px"></fa-icon>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="product-selection">
+              <div class="row mx-0">
+                <h3 class="blue-header col-xs-12">Part 2 - Cannabis Product Inventory</h3>
+              </div>
+              <p>Identify the cannabis products you have ordered, sold, returned or have managed the inventory of in the previous month.</p>
+              <p>The Liquor and Cannabis Regulation Branch submits all inventory reports to Health Canada. Reports must be <strong>accurate</strong> and submitted <strong>on time</strong>.</p>
+              <div class="form-check callout" *ngFor="let productForm of productForms">
+                <mat-checkbox [checked]="productForm?.value?.selected" (change)="toggleProductVisibility(productForm)"
+                              [disabled]="reportIsDisabled">
+                  <strong>{{productForm.value.product}}</strong>
+                </mat-checkbox>
+                <div class="callout__details">
+                  <p>{{productForm.value.productDescription}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="product-reporting">
+              <div class="row mx-0">
+                <h3 class="blue-header col-xs-12">Part 3 - Cannabis Product Inventory Details</h3>
+              </div>
+              <p *ngIf="isProductInventorySelected">Enter the details of the cannabis product inventory you identified above.</p>
+              <p *ngIf="!isProductInventorySelected">You have not identified any cannabis product inventory to report.</p>
+              <app-product-inventory-sales-report [productForm]="productForm" [visible]="productForm?.value?.selected" *ngFor="let productForm of productForms">
+              </app-product-inventory-sales-report>
+            </div>
+            <div class="row mx-0 mt-5 button-row" *ngIf="!reportIsDisabled">
+              <button class="btn btn-secondary" (click)="save(false)">
+                <span>
+                  <fa-icon [icon]="faSave"></fa-icon>SAVE FOR LATER
+                </span>
+              </button>
+              <button class="btn btn-primary" (click)="submitApplication()" [disabled]="!checkIfReportValid()">
+                SUBMIT
+              </button>
+              <button class="btn btn-link btn-cancel" routerLink="/dashboard">
+                <fa-icon [icon]="faTrash"></fa-icon>CANCEL
+              </button>
+            </div>
+          </section>
+        </section>
+      </form>
+    </div>
+    <div class="row" *ngIf="selectedMonthlyReport ==null">
+      <h3>No Monthly Report Found For The Selected Period</h3>
+    </div>
+  </section>
 </div>
+
+<!--Before LCSD-6499 Federal Report Tab module:-->
+<!--<div class="row">
+  <mat-tab-group style="width: 100%;"
+                 [selectedIndex]="licenses?.length > 0 ? selectedLicenceIndex : 0"
+                 (selectedTabChange)="handleLicenceTabChanged($event)">
+    <mat-tab *ngFor="let licence of licenses;">
+      <ng-template mat-tab-label>
+        {{ licence.licenseNumber }} - {{ licence.establishmentName }}
+      </ng-template>
+      <h3 *ngIf="shownMonthlyReports.length < 1; else elseBlock" [class.hidden]="loadingMonthlyReports">There is not yet any monthly reports to report on. Please check back later.</h3>
+      <ng-template #elseBlock>
+        <h4 class="bold">Select Monthly Report:</h4>
+        <p>
+          You must fill out your inventory reports in monthly sequence (e.g., January, February, March, etc.). Your reports
+          may contain errors if you do not complete them in the correct order.
+        </p>
+      </ng-template>
+      <mat-tab-group [selectedIndex]="selectedMonthlyReportIndex"
+                     (selectedTabChange)="handleMonthlyReportTabChanged($event);"
+                     *ngIf="shownMonthlyReports.length > 0"
+                     [class.hidden]="loadingMonthlyReports">
+        <mat-tab *ngFor="let report of shownMonthlyReports; index as tabIndex;">
+          <ng-template mat-tab-label>
+            <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;" *ngIf="report.statusCode === monthlyReportStatusEnum.Draft"></fa-icon>
+            {{getMonthName(report.reportingPeriodMonth)}} {{report.reportingPeriodYear}}
+          </ng-template>
+          <ng-template matTabContent>
+            <form [formGroup]="reportForm">
+              <div class="report-details">
+                <div class="row mx-0">
+                  <h2>{{getMonthName(report.reportingPeriodMonth)}} {{report.reportingPeriodYear}} monthly report for {{licence.establishmentName}}</h2>
+                </div>
+                <div class="row mx-0 d-flex align-items-baseline">
+                  <h3>
+                    Status:
+                    <span style="font-weight: bold; margin-left: 10px;">
+                      <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;" *ngIf="report.statusCode === monthlyReportStatusEnum.Draft"></fa-icon>
+                      {{monthlyReportStatusEnum[shownMonthlyReports[tabIndex].statusCode] | uppercase}}
+                    </span>
+                    <fa-icon data-html="true" style="color: #38598a; margin-left: 10px;" [icon]="faQuestionCircle" matTooltipClass="multiline-tooltip" matTooltip="DRAFT: The monthly report has not be completed&#13;SUBMITTED: The monthly report has been completed and is ready to be sent to CTLS&#13;CLOSED: The monthly report has been sent to CTLS"></fa-icon>
+                  </h3><a [routerLink]="[]" (click)="save(false)" *ngIf="reportIsSubmitted">Reopen Monthly Report</a>
+                </div>
+              </div>
+              <div class="employee-reporting">
+                <div class="row mx-0">
+                  <h3 class="blue-header col-xs-12">Part 1 - Employee Reporting</h3>
+                </div>
+                <p>Enter the number of employees who worked at your store in {{getMonthName(report.reportingPeriodMonth)}} {{report.reportingPeriodYear}} for each position listed below.</p>
+                <div *ngIf="reportForm.invalid && (reportForm.dirty || reportForm.touched)">
+                  <div class="alert alert-danger">Number of employees must be a whole number less than 10000.</div>
+                </div>
+                <div class="form-group row mx-0">
+                  <label class="col-xl-1 col-xs-3 col-form-label">Management:</label>
+                  <div class="col-xs-2 col-lg-1">
+                    <div style="align-items: center; display: flex;">
+                      <input class="form-control" type="text" formControlName="employeesManagement">
+                      <div *ngIf="isFieldInvalid('employeesManagement') && !reportIsDisabled" style="flex: 0 0 25px;">
+                        <fa-icon [icon]="faChevronLeft" class=" error-states" style="margin-left: 3px"></fa-icon>
+                        <fa-icon [icon]="faChevronLeft" class=" error-states" style="margin-left: -3px"></fa-icon>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row mx-0">
+                  <label class="col-xl-1 col-xs-3 col-form-label">Administrative:</label>
+                  <div class="col-xs-2 col-lg-1">
+                    <div style="align-items: center; display: flex;">
+                      <input class="form-control" type="text" formControlName="employeesAdministrative">
+                      <div *ngIf="isFieldInvalid('employeesAdministrative') && !reportIsDisabled" style="flex: 0 0 25px;">
+                        <fa-icon [icon]="faChevronLeft" class=" error-states" style="margin-left: 3px"></fa-icon>
+                        <fa-icon [icon]="faChevronLeft" class=" error-states" style="margin-left: -3px"></fa-icon>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row mx-0">
+                  <label class="col-xl-1 col-xs-3 col-form-label">Sales:</label>
+                  <div class="col-xs-2 col-lg-1">
+                    <div style="align-items: center; display: flex;">
+                      <input class="form-control" type="text" formControlName="employeesSales">
+                      <div *ngIf="isFieldInvalid('employeesSales') && !reportIsDisabled" style="flex: 0 0 25px;">
+                        <fa-icon [icon]="faChevronLeft" class=" error-states" style="margin-left: 3px"></fa-icon>
+                        <fa-icon [icon]="faChevronLeft" class=" error-states" style="margin-left: -3px"></fa-icon>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row mx-0">
+                  <label class="col-xl-1 col-xs-3 col-form-label">Production:</label>
+                  <div class="col-xs-2 col-lg-1">
+                    <div style="align-items: center; display: flex;">
+                      <input class="form-control" type="text" formControlName="employeesProduction">
+                      <div *ngIf="isFieldInvalid('employeesProduction') && !reportIsDisabled" style="flex: 0 0 25px;">
+                        <fa-icon [icon]="faChevronLeft" class=" error-states" style="margin-left: 3px"></fa-icon>
+                        <fa-icon [icon]="faChevronLeft" class=" error-states" style="margin-left: -3px"></fa-icon>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row mx-0">
+                  <label class="col-xl-1 col-xs-3 col-form-label">Other:</label>
+                  <div class="col-xs-2 col-lg-1">
+                    <div style="align-items: center; display: flex;">
+                      <input class="form-control" type="text" formControlName="employeesOther">
+                      <div *ngIf="isFieldInvalid('employeesOther') && !reportIsDisabled" style="flex: 0 0 25px;">
+                        <fa-icon [icon]="faChevronLeft" class=" error-states" style="margin-left: 3px"></fa-icon>
+                        <fa-icon [icon]="faChevronLeft" class=" error-states" style="margin-left: -3px"></fa-icon>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="product-selection">
+                <div class="row mx-0">
+                  <h3 class="blue-header col-xs-12">Part 2 - Cannabis Product Inventory</h3>
+                </div>
+                <p>Identify the cannabis products you have ordered, sold, returned or have managed the inventory of in the previous month.</p>
+                <p>The Liquor and Cannabis Regulation Branch submits all inventory reports to Health Canada. Reports must be <strong>accurate</strong> and submitted <strong>on time</strong>.</p>
+                <div class="form-check callout" *ngFor="let productForm of productForms">
+                  <mat-checkbox [checked]="productForm?.value?.selected" (change)="toggleProductVisibility(productForm)"
+                                [disabled]="reportIsDisabled">
+                    <strong>{{productForm.value.product}}</strong>
+                  </mat-checkbox>
+                  <div class="callout__details">
+                    <p>{{productForm.value.productDescription}}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="product-reporting">
+                <div class="row mx-0">
+                  <h3 class="blue-header col-xs-12">Part 3 - Cannabis Product Inventory Details</h3>
+                </div>
+                <p *ngIf="isProductInventorySelected">Enter the details of the cannabis product inventory you identified above.</p>
+                <p *ngIf="!isProductInventorySelected">You have not identified any cannabis product inventory to report.</p>
+                <app-product-inventory-sales-report [productForm]="productForm" [visible]="productForm?.value?.selected" *ngFor="let productForm of productForms">
+                </app-product-inventory-sales-report>
+              </div>
+              <div class="row mx-0 mt-5 button-row" *ngIf="!reportIsDisabled">
+                <button class="btn btn-secondary" (click)="save(false)">
+                  <span>
+                    <fa-icon [icon]="faSave"></fa-icon>SAVE FOR LATER
+                  </span>
+                </button>
+                <button class="btn btn-primary" (click)="submitApplication()" [disabled]="!checkIfReportValid()">
+                  SUBMIT
+                </button>
+                <button class="btn btn-link btn-cancel" routerLink="/dashboard">
+                  <fa-icon [icon]="faTrash"></fa-icon>CANCEL
+                </button>
+              </div>
+            </form>
+          </ng-template>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-tab>
+  </mat-tab-group>
+</div>-->

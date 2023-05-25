@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Google.Protobuf.WellKnownTypes;
 using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
@@ -74,8 +75,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     // if the application is not a renewal and it's for an expired licence, then we don't allow them to continue it
                     // they must renew their licence first.
-                    if(dynamicsApplication.AdoxioApplicationTypeId?.AdoxioIsrenewal != true  &&
-                        dynamicsApplication.AdoxioAssignedLicence?.Statuscode == 845280000){
+                    if (dynamicsApplication.AdoxioApplicationTypeId?.AdoxioIsrenewal != true &&
+                        dynamicsApplication.AdoxioAssignedLicence?.Statuscode == 845280000)
+                    {
                         continue;
                     }
                     // create a list to collect possible endorsement applications
@@ -84,7 +86,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     // and it's been paid for
                     if (((dynamicsApplication.AdoxioLicenceType != null &&
                         dynamicsApplication?.AdoxioApplicationTypeId?.AdoxioIsdefault == true) ||
-                         dynamicsApplication?.AdoxioApplicationTypeId?.AdoxioIsrelocation == true )&& // Application for a licence
+                         dynamicsApplication?.AdoxioApplicationTypeId?.AdoxioIsrelocation == true) && // Application for a licence
                         dynamicsApplication.AdoxioPaymentrecieved == true)
                     {
                         // do a reverse lookup on the licence type
@@ -95,13 +97,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         // to get which endorsement applications link to it
                         if (licenceType?.AdoxioLicencetypesApplicationtypes != null)
                             endorsements = licenceType.AdoxioLicencetypesApplicationtypes
-                                .Where(type => (type.AdoxioIsendorsement == true || type.AdoxioCopylicencetc == true) )
+                                .Where(type => (type.AdoxioIsendorsement == true || type.AdoxioCopylicencetc == true))
                                 .Select(type => type.AdoxioName)
                                 .ToList();
-                    }                    
-                        var row = dynamicsApplication.ToSummaryViewModel();
-                        row.Endorsements = endorsements;
-                        result.Add(row);
+                    }
+                    var row = dynamicsApplication.ToSummaryViewModel();
+                    row.Endorsements = endorsements;
+                    result.Add(row);
                 }
 
             return result;
@@ -321,13 +323,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         var viewModel = dynamicsApplication.ToViewModel(_dynamicsClient, _cache, _logger).GetAwaiter().GetResult();
                         results.Add(viewModel);
                     }
-                }                
+                }
             }
             catch (HttpOperationException e)
             {
                 var errorText = "Error getting local government approval applications in Dynamics for the current user";
                 _logger.LogError(e, errorText);
-                return  StatusCode(StatusCodes.Status500InternalServerError, errorText);
+                return StatusCode(StatusCodes.Status500InternalServerError, errorText);
             }
             catch (Exception e)
             {
@@ -364,7 +366,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 if (account._adoxioLginlinkidValue != null)
                 {
-                    var filter1 = $"adoxio_isshowlginapproval eq true"; 
+                    var filter1 = $"adoxio_isshowlginapproval eq true";
 
                     var isshowlginapprovalTrue = _dynamicsClient.Applicationtypes.Get(filter: filter1).Value.ToList();
 
@@ -439,7 +441,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     customHeaders.Add("OData-MaxVersion", odataVersionHeader);
                     var applicationQuery = _dynamicsClient.Applications.GetWithHttpMessagesAsync(filter: filter, expand: expand, customHeaders: customHeaders, count: true).GetAwaiter().GetResult();
                     _logger.LogInformation("getLGApprovalApplicationsDecisionNotMade number of results: " + applicationQuery.Body.Count);
-                    
+
                     while (pageIndex > 0)
                     {
                         _logger.LogInformation("getLGApprovalApplicationsDecisionNotMade OdataNextLink: " + applicationQuery.Body.OdataNextLink);
@@ -450,16 +452,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         pageIndex--;
                     }
 
-                    var applications =  applicationQuery.Body.Value;
+                    var applications = applicationQuery.Body.Value;
                     results.Count = Int32.Parse(applicationQuery.Body.Count);
 
                     foreach (var dynamicsApplication in applications)
                     {
-                        
+
                         var viewModel = dynamicsApplication.ToViewModel(_dynamicsClient, _cache, _logger).GetAwaiter().GetResult();
                         _logger.LogInformation("getLGApprovalApplicationsDecisionNotMade application establishment name: " + viewModel.EstablishmentName);
                         results.Value.Add(viewModel);
-                    }             
+                    }
                 }
             }
             catch (HttpOperationException e)
@@ -514,7 +516,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     var i = 0;
                     foreach (var item in applicationTypes)
                     {
-                        if (i == 0) 
+                        if (i == 0)
                         {
                             filter += $" adoxio_ApplicationTypeId/adoxio_applicationtypeid eq {item.AdoxioApplicationtypeid}";
                         }
@@ -525,12 +527,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         i++;
                     }
                     filter += $" )";
-                   
-                //    this.applicationsForZoning =
-                //      this.applications.filter(app => !app.lGDecisionSubmissionDate &&
-                //        app.applicationType &&
-                //        app.applicationType.isShowLGZoningConfirmation);
-                var expand = new List<string>
+
+                    //    this.applicationsForZoning =
+                    //      this.applications.filter(app => !app.lGDecisionSubmissionDate &&
+                    //        app.applicationType &&
+                    //        app.applicationType.isShowLGZoningConfirmation);
+                    var expand = new List<string>
                     {
                         "adoxio_Applicant",
                         "adoxio_localgovindigenousnationid",
@@ -682,7 +684,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("current/resolved-lg-applications")]
         public IActionResult GetResolvedLGApplications([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10)
         {
-            var results = new PagingResult<Application>(){
+            var results = new PagingResult<Application>()
+            {
                 Value = new List<Application>()
             };
 
@@ -722,7 +725,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     var odataVersionHeader = new List<string>();
                     odataVersionHeader.Add("4.0");
 
-                    customHeaders.Add("OData-Version",  odataVersionHeader);
+                    customHeaders.Add("OData-Version", odataVersionHeader);
                     customHeaders.Add("OData-MaxVersion", odataVersionHeader);
                     var applicationQuery = _dynamicsClient.Applications.GetWithHttpMessagesAsync(filter: filter, expand: expand, customHeaders: customHeaders, count: true).GetAwaiter().GetResult();
 
@@ -748,7 +751,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 var errorText = "Error getting local government approval applications in Dynamics for the current user";
                 _logger.LogError(e, errorText);
-                return  StatusCode(StatusCodes.Status500InternalServerError, errorText);
+                return StatusCode(StatusCodes.Status500InternalServerError, errorText);
             }
             catch (Exception e)
             {
@@ -1145,9 +1148,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 secondaryInvoiceResult = await PaymentController.GetPaymentStatus(app, "secondary", _dynamicsClient, _bcep).ConfigureAwait(true);
             }
-            data.Primary =  primaryInvoiceResult?.TrnId == "0" ? null : primaryInvoiceResult;
+            data.Primary = primaryInvoiceResult?.TrnId == "0" ? null : primaryInvoiceResult;
             data.Secondary = secondaryInvoiceResult?.TrnId == "0" ? null : secondaryInvoiceResult;
-;
+            ;
             if (
                 (data.Primary != null && string.IsNullOrEmpty(app._adoxioInvoiceValue)) ||
                 (data.Secondary != null && string.IsNullOrEmpty(app._adoxioSecondaryapplicationinvoiceValue))
@@ -1162,8 +1165,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private MicrosoftDynamicsCRMadoxioApplication GetPermanentChangeApplicant(UserSettings userSettings, string applicationId)
         {
             MicrosoftDynamicsCRMadoxioApplication result = null;
-           
-            var applicationType = _dynamicsClient.GetApplicationTypeByName("Permanent Change to an Applicant");         
+
+            var applicationType = _dynamicsClient.GetApplicationTypeByName("Permanent Change to an Applicant");
 
             string[] expand =
             {
@@ -1177,8 +1180,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     "adoxio_application_SharePointDocumentLocations"
                 };
 
-           var filter =
-                $"_adoxio_applicant_value eq {userSettings.AccountId} and statuscode ne {(int)AdoxioApplicationStatusCodes.Processed} and statuscode ne {(int)AdoxioApplicationStatusCodes.Terminated}";
+            var filter =
+                 $"_adoxio_applicant_value eq {userSettings.AccountId} and statuscode ne {(int)AdoxioApplicationStatusCodes.Processed} and statuscode ne {(int)AdoxioApplicationStatusCodes.Terminated}";
             // filter += $" and adoxio_isapplicationcomplete ne 1";
             filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Cancelled}";
             filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Approved}";
@@ -1251,9 +1254,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             Application data = new Application();
 
             // set application type relationship 
-            var app = GetPermanentChangeApplicant(userSettings, applicationId);           
-     
-            data= await app.ToViewModel(_dynamicsClient, _cache, _logger);
+            var app = GetPermanentChangeApplicant(userSettings, applicationId);
+
+            data = await app.ToViewModel(_dynamicsClient, _cache, _logger);
             return new JsonResult(data);
         }
 
@@ -1318,7 +1321,31 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 && !allowLgAccess)
                 return new NotFoundResult();
             result = await dynamicsApplication.ToViewModel(_dynamicsClient, _cache, _logger);
-
+            //if (result.LicenseType == "Manufacturer")
+            //{
+            //    string filter = $"_adoxio_application_value eq {id}";
+            //    try
+            //    {
+            //        IList<MicrosoftDynamicsCRMadoxioAnnualvolume> annualVolumes = _dynamicsClient.Annualvolumes.Get(filter: filter).Value;
+            //        if (annualVolumes != null&& annualVolumes.Count>0)
+            //        {
+            //            var existingAnnualVolume= annualVolumes.FirstOrDefault();
+            //            result.AnnualVolume = new AnnualVolume
+            //            {
+            //                ApplicationId = id,
+            //                Id= existingAnnualVolume.AdoxioAnnualvolumeid,
+            //                VolumeDestroyed = existingAnnualVolume.AdoxioVolumedestroyed,
+            //                VolumeProduced = existingAnnualVolume.AdoxioVolumeproduced,
+            //                CalendarYear = existingAnnualVolume.AdoxioCalendaryear
+            //            };
+                            
+            //        }
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        _logger.LogError(ex, "Unexpected error getting annual volumes");
+            //    }
+            //}
 
             if (dynamicsApplication.AdoxioApplicationSharePointDocumentLocations.Count == 0)
                 await InitializeSharepoint(dynamicsApplication);
@@ -1379,12 +1406,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 string itemApplicationName = item.ApplicationType.Name + " - Free";
                 adoxioApplication.AdoxioApplicationTypeId =_dynamicsClient.GetApplicationTypeByName(itemApplicationName);
-            } */  
+            } */
 
             adoxioApplication.AdoxioApplicanttype = (int?)item.ApplicantType;
-            
+
             // fix for an invalid licence sub category
-            if (adoxioApplication._adoxioLicencesubcategoryidValue != null && adoxioApplication._adoxioLicencesubcategoryidValue == "0")  adoxioApplication.AdoxioLicenceSubCategoryId = null;
+            if (adoxioApplication._adoxioLicencesubcategoryidValue != null && adoxioApplication._adoxioLicencesubcategoryidValue == "0") adoxioApplication.AdoxioLicenceSubCategoryId = null;
 
             try
             {
@@ -1532,7 +1559,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             string applicationTypeName = "Temporary Extension of Licensed Area";
-            
+
             // set application type relationship 
             var applicationType = _dynamicsClient.GetApplicationTypeByName(applicationTypeName);
 
@@ -1540,7 +1567,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 _logger.LogError($"Unable to find the COVID Application Type for {applicationTypeName}");
             }
-            else 
+            else
             {
                 adoxioApplication.AdoxioApplicationTypeIdODataBind = _dynamicsClient.GetEntityURI("adoxio_applicationtypes",
                     applicationType.AdoxioApplicationtypeid);
@@ -1601,7 +1628,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             var allowLgAccess = await CurrentUserIsLgForApplication(application);
             if (!CurrentUserHasAccessToApplicationOwnedBy(application._adoxioApplicantValue) && !allowLgAccess)
-                return new NotFoundResult();
+                throw new Exception("User doesn't have an access the application");
+
+            //return new NotFoundResult();
 
             application = new MicrosoftDynamicsCRMadoxioApplication();
 
@@ -1616,9 +1645,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         subLicencetype.AdoxioLicencesubcategoryid);
             }
 
-            if (item.ApplicationStatus == AdoxioApplicationStatusCodes.PendingForLGFNPFeedback 
-                || item.ApplicationStatus == AdoxioApplicationStatusCodes.UnderReview) {
-    
+            if (item.ApplicationStatus == AdoxioApplicationStatusCodes.PendingForLGFNPFeedback
+                || item.ApplicationStatus == AdoxioApplicationStatusCodes.UnderReview)
+            {
+
                 application.Statuscode = (int?)item.ApplicationStatus;
             }
 

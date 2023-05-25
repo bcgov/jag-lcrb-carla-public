@@ -35,10 +35,14 @@ namespace Gov.Lclb.Cllb.Public.Models
                                 ApplicationTypeId = item.AdoxioApplicationType.AdoxioApplicationtypeid,
                                 ApplicationTypeName = item.AdoxioApplicationType.AdoxioName,
                                 EndorsementId = item.AdoxioEndorsementid,
-                                EndorsementName = item.AdoxioName
+                                EndorsementName = item.AdoxioName,
+                                HoursOfServiceList = GetHoursOfServiceList(item.AdoxioEndorsementAdoxioHoursofserviceEndorsement, item.AdoxioEndorsementid, dynamicsClient),
+                                AreaCapacity = GetAreaCapacity(item.AdoxioEndorsementid, dynamicsClient)
+
                             };
                             endorsementsList.Add(endorsement);
                         }
+
                     }
                 }
             }
@@ -50,6 +54,54 @@ namespace Gov.Lclb.Cllb.Public.Models
             return endorsementsList;
         }
 
+        private static List<HoursOfService> GetHoursOfServiceList(IList<MicrosoftDynamicsCRMadoxioHoursofservice> adoxioEndorsementAdoxioHoursofserviceEndorsement,
+            string endorsementId, IDynamicsClient dynamicsClient)
+        {
+            var hoursOfServiceList = new List<HoursOfService>();
+            var hours = dynamicsClient.Hoursofservices.Get(filter: $"_adoxio_endorsement_value eq {endorsementId}");
+            if (hours.Value.Count > 0)
+            {
+                var hoursVal = hours.Value.FirstOrDefault();
+                hoursOfServiceList.Add(GetHourService(0, hoursVal.AdoxioSundayopen, hoursVal.AdoxioSundayclose));
+                hoursOfServiceList.Add(GetHourService(1, hoursVal.AdoxioMondayopen, hoursVal.AdoxioMondayclose));
+                hoursOfServiceList.Add(GetHourService(2, hoursVal.AdoxioTuesdayopen, hoursVal.AdoxioTuesdayclose));
+                hoursOfServiceList.Add(GetHourService(3, hoursVal.AdoxioWednesdayopen, hoursVal.AdoxioWednesdayclose));
+                hoursOfServiceList.Add(GetHourService(4, hoursVal.AdoxioThursdayopen, hoursVal.AdoxioThursdayclose));
+                hoursOfServiceList.Add(GetHourService(5, hoursVal.AdoxioFridayopen, hoursVal.AdoxioFridayclose));
+                hoursOfServiceList.Add(GetHourService(6, hoursVal.AdoxioSaturdayopen, hoursVal.AdoxioSaturdayclose));
+
+            }
+            return hoursOfServiceList;
+        }
+        private static int GetAreaCapacity(string endorsementId, IDynamicsClient dynamicsClient)
+        {
+            var capacity = 0;
+            var allServiceAreas = dynamicsClient.Serviceareas.Get(filter: $"_adoxio_endorsement_value eq {endorsementId}");
+            if (allServiceAreas.Value.Count > 0)
+            {
+                foreach (var serviceArea in allServiceAreas.Value)
+                {
+                    capacity += serviceArea.AdoxioCapacity.HasValue ? serviceArea.AdoxioCapacity.Value : 0;
+                }
+            }
+            return capacity;
+        }
+        private static HoursOfService GetHourService(int dayOfWeek, int? open, int? close)
+        {
+            var opening = StoreHoursUtility.ConvertOpenHoursToString(open);
+            var openingList = opening.Split(':');
+            var closing = StoreHoursUtility.ConvertOpenHoursToString(close);
+            var closingList = closing.Split(':');
+            return new HoursOfService
+            {
+                DayOfWeek = dayOfWeek,
+                StartTimeHour = int.Parse(openingList[0]),
+                StartTimeMinute = int.Parse(openingList[1]),
+                EndTimeHour = int.Parse(closingList[0]),
+                EndTimeMinute = int.Parse(closingList[1]),
+
+            };
+        }
         public static List<OffsiteStorage> GetOffsiteStorage(string licenceId, IDynamicsClient dynamicsClient)
         {
             string filter = $"_adoxio_licenceid_value eq {licenceId}";
@@ -242,7 +294,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                     licenseSummary.ApplicationTypeCategory = (ApplicationTypeCategory?)mainApplication.AdoxioApplicationTypeId.AdoxioCategory;
                 }
             }
-           
+
             if (licence.AdoxioLicenceType != null)
             {
                 licenseSummary.LicenceTypeName = licence.AdoxioLicenceType.AdoxioName;

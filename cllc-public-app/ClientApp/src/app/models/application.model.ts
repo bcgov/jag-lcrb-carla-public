@@ -4,6 +4,7 @@ import { Invoice } from "./invoice.model";
 import { ApplicationType } from "./application-type.model";
 import { TiedHouseConnection } from "./tied-house-connection.model";
 import { ServiceArea } from "./service-area.model";
+import { AnnualVolume } from "./annual-volume.model";
 
 export interface Application {
 
@@ -239,4 +240,14 @@ export interface Application {
 
   uploadDeclarations: boolean;
   productslistanddescription: string;
+
+  mfrSupInfoReadUnderstand: boolean;
+  mfrSupInfoIntendProduce: boolean;
+  mfrSupInfoOwnRent: boolean;
+  mfrSupInfoProductionEquipment: boolean;
+
+  volumeProduced: number;
+  volumeDestroyed: number;
+  ldbOrderTotals: number;
+
 }
