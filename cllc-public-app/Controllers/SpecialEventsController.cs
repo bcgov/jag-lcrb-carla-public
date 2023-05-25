@@ -1474,38 +1474,64 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             specialEvent.Beer = specialEvent.Beer ?? 0;
             specialEvent.Wine = specialEvent.Wine ?? 0;
             specialEvent.Spirits = specialEvent.Spirits ?? 0;
-
+            
             // calculate serving amounts from percentages
             int totalServings = specialEvent.TotalServings == null ? 0 : (int)specialEvent.TotalServings;
-            var typeData = new List<(string, int, decimal?)>{
-                ("Beer/Cider/Cooler", (int)specialEvent.Beer, specialEvent.AverageBeerPrice),
-                ("Wine", (int)specialEvent.Wine, specialEvent.AverageWinePrice),
-                ("Spirits", (int)specialEvent.Spirits, specialEvent.AverageSpiritsPrice),
+            var typeData = new List<(string, int, bool, decimal?)>{
+                ("Beer/Cider/Cooler", (int)specialEvent.Beer,true, specialEvent.AverageBeerPrice),
+                ("Wine", (int)specialEvent.Wine,true, specialEvent.AverageWinePrice),
+                ("Spirits", (int)specialEvent.Spirits,true, specialEvent.AverageSpiritsPrice)
             };
-
-            // Create or Update Drink Sale Forecast with the serving amounts
-            typeData.ForEach(data =>
+            // if ChargingForLiquorReason is Combination, Adding 3 records with 0 price
+            if (specialEvent.ChargingForLiquorReason == ChargingForLiquorReasons.Combination)
             {
-                string drinkTypeName = data.Item1;
-                int estimatedServings = data.Item2;
+                typeData.AddRange(new List<(string, int, bool, decimal?)>{
+                ("Beer/Cider/Cooler", (int)specialEvent.Beer_free, false, 0),
+                ("Wine", (int)specialEvent.Wine_free, false, 0),
+                ("Spirits", (int)specialEvent.Spirits_free, false, 0)
+                }
+            );
+            }
+
+            foreach (var type in typeData)
+            {
+                string drinkTypeName = type.Item1;
+                int estimatedServings = type.Item2;
+                bool ischarging = type.Item3;
                 var drinkType = drinkTypes.Where(drinkType => drinkType.AdoxioName == drinkTypeName).FirstOrDefault();
                 MicrosoftDynamicsCRMadoxioSepdrinksalesforecast existingForecast = null;
                 if (existingEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent != null)
                 {
                     existingForecast = existingEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
-                        .Where(drink => drink._adoxioTypeValue == drinkType.AdoxioSepdrinktypeid)
-                        .FirstOrDefault();
+                        .Where(drink => drink._adoxioTypeValue == drinkType.AdoxioSepdrinktypeid
+                        && drink.AdoxioIscharging == ischarging).FirstOrDefault();
                 }
-                CreateOrUpdateForecast(specialEvent, existingForecast, drinkType, estimatedServings, data.Item3);
-            });
+                CreateOrUpdateForecast(specialEvent, existingForecast, drinkType, estimatedServings, type.Item4, ischarging);
+
+            }
+            // Create or Update Drink Sale Forecast with the serving amounts
+            //typeData.ForEach(data =>
+            //{
+            //    string drinkTypeName = data.Item1;
+            //    int estimatedServings = data.Item2;
+            //    var drinkType = drinkTypes.Where(drinkType => drinkType.AdoxioName == drinkTypeName).FirstOrDefault();
+            //    MicrosoftDynamicsCRMadoxioSepdrinksalesforecast existingForecast = null;
+            //    if (existingEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent != null)
+            //    {
+            //        existingForecast = existingEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
+            //            .Where(drink => drink._adoxioTypeValue == drinkType.AdoxioSepdrinktypeid)
+            //            .FirstOrDefault();
+            //    }
+            //    CreateOrUpdateForecast(specialEvent, existingForecast, drinkType, estimatedServings, data.Item4);
+            //});
         }
 
         private void CreateOrUpdateForecast(
             ViewModels.SpecialEvent specialEvent, 
-            MicrosoftDynamicsCRMadoxioSepdrinksalesforecast existingBeerForecast, 
+            MicrosoftDynamicsCRMadoxioSepdrinksalesforecast existingDrinkForecast, 
             MicrosoftDynamicsCRMadoxioSepdrinktype beerType, 
             int estimatedServings,
-            decimal? averagePrice)
+            decimal? averagePrice,bool ischarging)
         {
             if (averagePrice == null)
             {
@@ -1515,16 +1541,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             else
             {
                 try
+
                 {
                     var newForecast = new MicrosoftDynamicsCRMadoxioSepdrinksalesforecast()
                     {
-                        AdoxioIscharging = true,
+                        AdoxioIscharging = ischarging,
                         AdoxioPriceperserving = averagePrice,
                         AdoxioEstimatedservings = estimatedServings,
                     };
 
 
-                    if (existingBeerForecast == null)
+                    if (existingDrinkForecast == null)
                     { // create record
                         newForecast.SpecialEventODataBind = _dynamicsClient.GetEntityURI("adoxio_specialevents", specialEvent.Id);
                         if (!string.IsNullOrEmpty(beerType?.AdoxioSepdrinktypeid))
@@ -1535,7 +1562,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     else
                     { // update record
-                        _dynamicsClient.Sepdrinksalesforecasts.Update((string)existingBeerForecast.AdoxioSepdrinksalesforecastid, newForecast);
+                        _dynamicsClient.Sepdrinksalesforecasts.Update((string)existingDrinkForecast.AdoxioSepdrinksalesforecastid, newForecast);
                     }
                 }
                 catch (HttpOperationException httpOperationException)

@@ -248,6 +248,17 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioProductslistanddescription = from.ProductsListAndDescription;
 
             to.AdoxioUploaddeclarations = from.UploadDeclarations;
+
+            to.AdoxioMfrsupinforeadunderstand = from.MfrSupInfoReadUnderstand;
+            to.AdoxioMfrsupinfointendproduce = from.MfrSupInfoIntendProduce;
+            to.AdoxioMfrsupinfoownrent = from.MfrSupInfoOwnRent;
+            to.AdoxioMfrsupinfoproductionequipment = from.MfrSupInfoProductionEquipment;
+
+            to.AdoxioVolumeproduced = from.VolumeProduced;
+            to.AdoxioVolumedestroyed = from.VolumeDestroyed;
+            to.AdoxioLdbordertotals = from.LdbOrderTotals==0? default(decimal?): from.LdbOrderTotals;
+
+
         }
 
 
@@ -614,7 +625,15 @@ namespace Gov.Lclb.Cllb.Public.Models
                 FPAddressStreet=dynamicsApplication.AdoxioFpaddressstreet,
                 
                 UploadDeclarations = dynamicsApplication.AdoxioUploaddeclarations,
-                ProductsListAndDescription = dynamicsApplication.AdoxioProductslistanddescription
+                ProductsListAndDescription = dynamicsApplication.AdoxioProductslistanddescription,
+                MfrSupInfoReadUnderstand = dynamicsApplication.AdoxioMfrsupinforeadunderstand,
+                MfrSupInfoIntendProduce = dynamicsApplication.AdoxioMfrsupinfointendproduce,
+                MfrSupInfoOwnRent = dynamicsApplication.AdoxioMfrsupinfoownrent,
+                MfrSupInfoProductionEquipment = dynamicsApplication.AdoxioMfrsupinfoproductionequipment,
+
+                VolumeProduced = dynamicsApplication.AdoxioVolumeproduced.HasValue? dynamicsApplication.AdoxioVolumeproduced.Value:0,
+                VolumeDestroyed = dynamicsApplication.AdoxioVolumedestroyed.HasValue ? dynamicsApplication.AdoxioVolumedestroyed.Value:0,
+                LdbOrderTotals = dynamicsApplication.AdoxioLdbordertotals.HasValue ? dynamicsApplication.AdoxioLdbordertotals.Value:0,
 
             };
 

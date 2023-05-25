@@ -475,10 +475,10 @@
             <h3 class="blue-header"><fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>Cannabis Associate Security Screening Forms</h3>
             <div class="content-bottom">
               <p>
-                Sole proprietors and associates of applicants for a retail licence are required to
+                Sole proprietors and associates of applicants for a retail licence or authorization are required to
                 submit <a href="https://www2.gov.bc.ca/gov/content?id=B8E6EBE15A594CB7832B490C0A2815B2" target="_blank">
                   forms
-                </a> for security screenings and financial integrity checks. {{ application?.applicationType?.name === ApplicationTypeNames.Marketer ? 'Cannabis Marketing' : 'Retail store licence' }} applications
+                </a> for security screenings and financial integrity checks. {{ application?.applicationType?.name === ApplicationTypeNames.Marketer ? 'Cannabis Marketing' : 'Retail store licence or authorization' }} applications
                 cannot be processed until all required materials have been received.
               </p>
 
@@ -516,7 +516,7 @@
                   <h4>Financial Integrity Documents</h4>
                   <p>
                     Each associate must provide a complete a
-                    <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/cannabis-forms/form-cannabis-retail-store-fin-integrity--associate.pdf">
+                    <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/cannabis-forms/form-cannabis-retail-store-fin-integrity--associate.pdf">
                       Financial
                       Integrity Form
                     </a>.
@@ -578,6 +578,11 @@
                   </p>
                 </div>
               </section>
+
+              <mat-checkbox formControlName="uploadDeclarations">
+                I have read and understand the above terms and conditions.
+              </mat-checkbox>
+
             </ng-container>
           </div>
         </div>
@@ -633,43 +638,42 @@
                   <label *ngIf="application?.applicationType?.establishmentName !== FormControlState.ReadOnly" class="error-states ng-star-inserted">*</label>
                   <br>
 
-                  <p *ngIf="application?.licenseType == 'Cannabis Retail Store'">
-                    A name cannot mislead the public about what kind of business the licensee operates. The name cannot
+                  <p *ngIf="application?.licenseType == 'Cannabis Retail Store'||application?.licenseType == 'S119 CRS Authorization'" >
+                    A name cannot mislead the public about what kind of business the licensee or authorization holder operates. The name cannot
                     imply a
-                    licensee is selling medical cannabis, and cannot include words in any form or combination or manner
+                    licensee or authorization holder is selling medical cannabis, and cannot include words in any form or combination or manner
                     the
                     words "apothecary", "pharmacy", "medicines", "drugs", "drug store", "drug department", "dispensary"
                     or any other words of similar meaning that imply licensing under the Pharmacy Operations and Drug
                     Scheduling Act. Store names cannot also use language that encourages intoxication.
                   </p>
 
-                  <p *ngIf="application?.licenseType == 'Cannabis Retail Store'">
+                  <p *ngIf="application?.licenseType == 'Cannabis Retail Store'||application?.licenseType == 'S119 CRS Authorization'">
                     Additionally, a name cannot imply an association with another business. This applies to signs,
                     trademarks and any type of branding.
                   </p>
 
-                  <p *ngIf="application?.licenseType == 'Cannabis Retail Store'">
+                  <p *ngIf="application?.licenseType == 'Cannabis Retail Store'||application?.licenseType == 'S119 CRS Authorization'">
                     Establishment names will be reviewed for approval during the application process. For more
                     information,
                     please see the
-                    <a routerLink="/policy-document/store-name">
-                      Non-Medical Cannabis Retail Store Name Approval
-                      Process
-                    </a>. A list of all currently licensed Cannabis Retail Stores in British
-                    Columbia can be found
-                    <a href="map" target="_blank">here</a>.
+                    <a  href="https://www2.gov.bc.ca/gov/content?id=D9D4E17753654DE790C0AE104E3B11A6" target="_blank">
+                      Cannabis Store Name Approval Process.
+                    </a>
+                    &nbsp; <a href="https://www2.gov.bc.ca/gov/content?id=3BA008CC60AE436FBD25309AB6C1C9F0" target="_blank">Check the LCRB’s website</a> for a list of all currently licensed cannabis stores in British
+                    Columbia.
                   </p>
                 </section>
-                <div *ngIf="application?.licenseType == 'Cannabis Retail Store'">
+                <div *ngIf="application?.licenseType == 'Cannabis Retail Store'||application?.licenseType == 'S119 CRS Authorization'">
                   <app-field *ngIf="showFormControl(application?.applicationType?.establishmentName)"
                              [label]="getEstablishmentLabel(application?.applicationType)" [required]="true"
                              [valid]="isValidOrNotTouched('establishmentName')"
                              errorMessage="{{form.get('establishmentName').errors && form.get('establishmentName').errors['forbiddenName'] ? 'The store name contains at least one word that doesn’t comply with naming requirements. The application can’t be submitted until the prohibited word(s) are removed.' : 'Establishment Name is a required field'}}">
                     <input class="form-control" style="width: 500px;" type="text"
-                           [readonly]="application?.applicationType?.establishmentName === FormControlState.ReadOnly"
                            (change)="checkPossibleProblematicWords()" formControlName="establishmentName"
                            id="establishmentName">
                   </app-field>
+                  <!--[readonly]="application?.applicationType?.establishmentName === FormControlState.ReadOnly"-->
                   <div *ngIf="possibleProblematicNameWarning" class="warning-state">
                     Caution: The store name might contain at least one word that doesn’t comply with the naming
                     requirements.
@@ -677,7 +681,7 @@
                   </div>
                 </div>
                 <!-- Non Cannabis Establishment Name input-->
-                <div *ngIf="application?.licenseType != 'Cannabis Retail Store'">
+                <div *ngIf="application?.licenseType != 'Cannabis Retail Store' && application?.licenseType != 'S119 CRS Authorization'">
                   <!-- <label for="">Establishment Name</label> -->
                   <app-field *ngIf="showFormControl(application?.applicationType?.establishmentName)" [required]="true">
                     <input class="form-control" style="width: 500px;" type="text"
@@ -696,7 +700,7 @@
                    *ngIf="showFormControl(application?.applicationType?.currentEstablishmentAddress)">
                 <h3 class="blue-header">{{application?.licenseType}} LOCATION ADDRESS</h3>
                 <div class="content-bottom">
-                  <p>The licensed establishment is currently located at the following address:</p>
+                  <p>The establishment is currently located at the following address:</p>
                   <address class="row">
                     <app-field class="col-md-12 col-xs-12" label="Address" [isFullWidth]="true">
                       <input class="form-control" type="text" readonly formControlName="establishmentAddressStreet"
@@ -740,7 +744,7 @@
               <div class="ngtest-new-address content-bottom"
                    *ngIf="showFormControl(application?.applicationType?.newEstablishmentAddress)">
                 <p *ngIf="application?.licenseType !== 'Rural Agency Store'">
-                  The proposed location of the licensed establishment:
+                  The proposed location of the establishment:
                 </p>
                 <p *ngIf="application?.licenseType === 'Rural Agency Store'">
                   Include any information necessary for finding
@@ -1438,14 +1442,14 @@
                 </section>
 
 
-                <p *ngIf="application?.licenseType == 'Cannabis Retail Store'">
+                <p *ngIf="application?.licenseType == 'Cannabis Retail Store'||application?.licenseType == 'S119 CRS Authorization'">
                   Signage must not contain any pictures, images or symbols that imply the sale of medical cannabis
                   (e.g. a
                   green cross). It must not imply an association with another business (other than another non-medical
                   cannabis
                   retail store).
                 </p>
-                <p *ngIf="application?.licenseType == 'Cannabis Retail Store'">
+                <p *ngIf="application?.licenseType == 'Cannabis Retail Store'||application?.licenseType == 'S119 CRS Authorization'">
                   <b>Note:</b> If submitting renderings, renderings may be either printed or hand-drawn (as long as
                   they are
                   legible)
@@ -1515,7 +1519,7 @@
 
                 <!-- otherwise switch to legacy mode-->
                 <div *ngIf="!htmlContent.floorPlan">
-                  <div *ngIf="application?.licenseType == 'Cannabis Retail Store' || application?.licenseType == 'Producer Retail Store'">
+                  <div *ngIf="application?.licenseType == 'Cannabis Retail Store' || application?.licenseType == 'S119 CRS Authorization' || application?.licenseType == 'Producer Retail Store'">
                     <span>
                       A floor plan is a document, showing a view from above, of the dimensions and relationships
                       between
@@ -1530,8 +1534,8 @@
                     </span>
                     <div style="display: flex; margin-top: 10px;">
                       <section>
-                        The floor plan must be submitted at the time of application and it
-                        must identify the proposed non-medical cannabis retail area(s) plus
+                        The floor plan must be submitted at the time of application and
+                        must identify the proposed cannabis retail area(s) plus
                         the following interior features of the establishment:
                         <ul>
                           <li>Each room or area labeled with its intended use and dimensions.</li>
@@ -1557,7 +1561,7 @@
                     </div>
 
                   </div>
-                  <div *ngIf="application?.licenseType != 'Cannabis Retail Store'  && application?.licenseType != 'Producer Retail Store'">
+                  <div *ngIf="application?.licenseType != 'Cannabis Retail Store' && application?.licenseType != 'S119 CRS Authorization'  && application?.licenseType != 'Producer Retail Store'">
                     <p>The floor plans of the proposed establishment, which must meet the following requirements: </p>
                     <ul>
                       <li>Must be scaled, clear, legible and include room dimensions (8.5" x 11") </li>
@@ -1729,7 +1733,7 @@
             </section>
 
             <!-- Cannabis Retail Store has an additional image-->
-            <div *ngIf="application?.licenseType == 'Cannabis Retail Store'">
+            <div *ngIf="application?.licenseType == 'Cannabis Retail Store'||application?.licenseType == 'S119 CRS Authorization'">
               <img src="assets/site-plan-example.png" width="350" alt="Site plan"
                    style="display: block; margin: auto;">
               <p>
@@ -1752,14 +1756,13 @@
                 </li>
               </ul>
               <p>
-                Full height walls are required for separation and no connecting doors between the cannabis retail
-                store and the neighbouring business are permitted.
+                Full height walls are required for separation and no connecting doors between the cannabis store and the neighbouring business are permitted.
               </p>
               <p>
-                The cannabis retail store may share a vestibule with another type of business (e.g. a liquor store
-                or grocery store) provided each business has its own controlled entrance within the vestibule. The
+                The cannabis store may share a vestibule with another type of business (e.g. a liquor store
+                or grocery store) provided each business has its own controlled entrance within the vestibule. The 
                 cannabis
-                retail store cannot share a vestibule with a business that would be contrary to public interest (i.e.
+                store cannot share a vestibule with a business that would be contrary to public interest (i.e.
                 business
                 aimed at minors or a liquor consumption business).
               </p>
@@ -2299,21 +2302,21 @@
 
           <section class="ngtest-valid-interest" *ngIf="showFormControl(application?.applicationType?.validInterest) || showValidInterestforTransfer()">
             <hr><br>
-            <label for="" *ngIf="application?.licenseType == 'Cannabis Retail Store'">
+            <label for="" *ngIf="application?.licenseType == 'Cannabis Retail Store'||application?.licenseType == 'S119 CRS Authorization'">
               Offer or Proof of Ownership, Lease or Sub-Lease
             </label>
-            <label for="" *ngIf="application?.licenseType != 'Cannabis Retail Store'">Proof of Valid Interest</label>
+            <label for="" *ngIf="application?.licenseType != 'Cannabis Retail Store' && application?.licenseType != 'S119 CRS Authorization'">Proof of Valid Interest</label>
             <section>
-              <div *ngIf="application?.licenseType == 'Cannabis Retail Store' || application?.licenseType == 'Producer Retail Store'">
+              <div *ngIf="application?.licenseType == 'Cannabis Retail Store'||application?.licenseType == 'S119 CRS Authorization' || application?.licenseType == 'Producer Retail Store'">
                 <p>
                   If the applicant currently owns or leases the proposed store location, submit <b>Option 1</b>. If
                   the
                   applicant doesn't currently own or lease the proposed store location, submit <b>Option 2</b>.
                 </p>
                 <p>
-                  Leases or other arrangements must not expire for at least 12 months from the date the licence is
+                  Leases or other arrangements must not expire for at least 12 months from the date the licence or authorization is
                   issued.
-                  Option 1 will be required before the licence is issued.
+                  Option 1 will be required before the licence or authorization is issued.
                 </p>
                 <p>
                   <b>Option 1</b>: Submit a copy of the lease, sub-lease, or proof of ownership of the proposed store
@@ -2326,7 +2329,7 @@
                 </p>
 
               </div>
-              <div *ngIf="application?.licenseType != 'Cannabis Retail Store' && application?.licenseType != 'Producer Retail Store'">
+              <div *ngIf="application?.licenseType != 'Cannabis Retail Store' && application?.licenseType != 'S119 CRS Authorization'&& application?.licenseType != 'Producer Retail Store'">
                 <p>Any one of the following documents can be used to show valid interest in the property:</p>
                 <ul>
                   <li>
@@ -2529,12 +2532,12 @@
                   </span>
                 </mat-checkbox>
               </app-field>
-              <p *ngIf="application?.licenseType == 'Cannabis Retail Store' || application?.licenseType == 'Marketer' || application?.licenseType == 'Producer Retail Store'">
+              <p *ngIf="application?.licenseType == 'Cannabis Retail Store'||application?.licenseType == 'S119 CRS Authorization' || application?.licenseType == 'Marketer' || application?.licenseType == 'Producer Retail Store'">
                 Section 22(2) of the Cannabis Control and Licensing Act states: “A person must not submit to the general
                 manager an application, or information or a record included as part of the application, that contains false or misleading
                 information, or fails to disclose a material fact”.
               </p>
-              <p *ngIf="application?.licenseType != 'Cannabis Retail Store' && application?.licenseType != 'Marketer' && application?.licenseType != 'Producer Retail Store'">
+              <p *ngIf="application?.licenseType != 'Cannabis Retail Store' && application?.licenseType != 'S119 CRS Authorization' && application?.licenseType != 'Marketer' && application?.licenseType != 'Producer Retail Store'">
                 Section 20 (1) of the Liquor Control and Licensing Act states: "The general manager may refuse to issue,
                 renew, transfer or amend a licence if the applicant fails to disclose a material fact required by the
                 application or makes a false or misleading statement in the application."
@@ -2576,12 +2579,12 @@
                 </mat-checkbox>
               </app-field>
               <p>
-                <strong *ngIf="application?.licenseType == 'Cannabis Retail Store' || application?.licenseType == 'Marketer'">
+                <strong *ngIf="application?.licenseType == 'Cannabis Retail Store' ||application?.licenseType == 'S119 CRS Authorization' || application?.licenseType == 'Marketer'">
                   Section 22(2) of the Cannabis Control and Licensing Act states: “A person must not submit to the general
                   manager an application, or information or a record included as part of the application, that contains false or misleading
                   information, or fails to disclose a material fact”.
                 </strong>
-                <strong *ngIf="application?.licenseType == 'Cannabis Retail Store' || application?.licenseType == 'Marketer'">
+                <strong *ngIf="application?.licenseType == 'Cannabis Retail Store' ||application?.licenseType == 'S119 CRS Authorization' || application?.licenseType == 'Marketer'">
                   Section 20(1) of the Liquor Control and Licensing Act states: “The general manager may refuse to
                   issue, renew, transfer or amend a licence if the applicant fails to disclose a material fact required by
                   the application or makes a false or misleading statement in the application.”
@@ -2645,8 +2648,8 @@
               </p>
 
               <div>
-                <p *ngIf="application?.licenseType === 'Cannabis Retail Store'">
-                  The Province does not know how many applications for a cannabis retail store licence will be received.
+                <p *ngIf="application?.licenseType === 'Cannabis Retail Store'|| application?.licenseType == 'S119 CRS Authorization'">
+                  The Province does not know how many applications for a cannabis retail store licence or authorization will be received.
                   Therefore, it is difficult to predict how long applications will take to process. To minimize delays in
                   processing, applicants must make sure the application is complete before submitting it.
                 </p>
@@ -2659,13 +2662,13 @@
 
                 <br>
 
-                <div *ngIf="application?.licenseType === 'Cannabis Retail Store' || application?.licenseType === 'Producer Retail Store'">
+                <div *ngIf="application?.licenseType === 'Cannabis Retail Store' || application?.licenseType == 'S119 CRS Authorization'|| application?.licenseType === 'Producer Retail Store'">
                   For questions on the LCRB application process, please contact:
                   <a href="javascript: void(0);">
                     LCRBCannabis@gov.bc.ca
                   </a>
                 </div>
-                <div *ngIf="application?.licenseType !== 'Cannabis Retail Store' && application?.licenseType !== 'Producer Retail Store'">
+                <div *ngIf="application?.licenseType !== 'Cannabis Retail Store' && application?.licenseType != 'S119 CRS Authorization' && application?.licenseType !== 'Producer Retail Store'">
                   For questions on the LCRB application process, please contact:
                   <a href="javascript: void(0);">
                     LCRBLiquor@gov.bc.ca

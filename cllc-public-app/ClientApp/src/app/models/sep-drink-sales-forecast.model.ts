@@ -6,5 +6,5 @@ export class SepDrinkSalesForecast {
     estimatedServings: number;
     pricePerServing: number;
     estimatedCost: number;
-    drinkTypeId: string;
+  drinkTypeId: string;
 }
