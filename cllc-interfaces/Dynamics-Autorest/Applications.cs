@@ -782,7 +782,8 @@ namespace Gov.Lclb.Cllb.Interfaces
                 ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            _httpResponse = await Client.HttpClient.SendAsync(_httpRequest, cancellationToken);
+            //.ConfigureAwait(false);
             if (_shouldTrace)
             {
                 ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
@@ -790,28 +791,28 @@ namespace Gov.Lclb.Cllb.Interfaces
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
-            if ((int)_statusCode != 204)
-            {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                }
-                else {
-                    _responseContent = string.Empty;
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Error(_invocationId, ex);
-                }
-                _httpRequest.Dispose();
-                if (_httpResponse != null)
-                {
-                    _httpResponse.Dispose();
-                }
-                throw ex;
-            }
+            //if ((int)_statusCode != 204)
+            //{
+            //    var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+            //    if (_httpResponse.Content != null) {
+            //        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            //    }
+            //    else {
+            //        _responseContent = string.Empty;
+            //    }
+            //    ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+            //    ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+            //    if (_shouldTrace)
+            //    {
+            //        ServiceClientTracing.Error(_invocationId, ex);
+            //    }
+            //    _httpRequest.Dispose();
+            //    if (_httpResponse != null)
+            //    {
+            //        _httpResponse.Dispose();
+            //    }
+            //    throw ex;
+            //}
             // Create Result
             var _result = new HttpOperationResponse();
             _result.Request = _httpRequest;

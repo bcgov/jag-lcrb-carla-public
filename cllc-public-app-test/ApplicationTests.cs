@@ -1,10 +1,13 @@
 ﻿using Gov.Lclb.Cllb.Public.ViewModels;
+using Microsoft.Data.SqlClient.Server;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Reflection;
 using System.Text;
 using Xunit;
 
@@ -231,14 +234,18 @@ namespace Gov.Lclb.Cllb.Public.Test
             string filename = randomString + ".txt";
 
             MultipartFormDataContent multiPartContent = new MultipartFormDataContent("----TestBoundary");
-            var fileContent = new MultipartContent { new ByteArrayContent(bytes) };
-            fileContent.Headers.ContentType = new MediaTypeHeaderValue("text/plain");
-            fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data");
-            fileContent.Headers.ContentDisposition.Name = "File";
-            fileContent.Headers.ContentDisposition.FileName = filename;
-            multiPartContent.Add(fileContent);
-            multiPartContent.Add(new StringContent(documentType), "documentType");   // form input
+            string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"TestingFiles\Test.pdf");
+            var fileContent = new ByteArrayContent(File.ReadAllBytes(path));
+            fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
+            {
+                Name = "file",
+                FileName = $"{randomString}.pdf"
+            };
+            fileContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
 
+            multiPartContent.Add(fileContent);
+           // multiPartContent.Add(new StringContent(documentType), "documentType");   // form input
+            multiPartContent.Add(new StringContent(documentType, Encoding.UTF8, "application/json"), "documentType");
             string accountId = user.accountid;
 
             // create a new request object for the upload, as we will be using multipart form submission.
@@ -442,7 +449,8 @@ namespace Gov.Lclb.Cllb.Public.Test
             using (var formData = new MultipartFormDataContent())
             {
                 // Upload
-                var fileContent = new ByteArrayContent(new byte[100]);
+                string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"TestingFiles\Test.pdf");
+                var fileContent = new ByteArrayContent(File.ReadAllBytes(path));
                 fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
                 {
                     Name = "file",
@@ -544,7 +552,8 @@ namespace Gov.Lclb.Cllb.Public.Test
             using (var formData = new MultipartFormDataContent())
             {
                 // Upload
-                var fileContent = new ByteArrayContent(new byte[25 * 1024 * 1024]);
+                string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"TestingFiles\Test.pdf");
+                var fileContent = new ByteArrayContent(File.ReadAllBytes(path));
                 fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
                 {
                     Name = "file",
