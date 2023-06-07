@@ -1,5 +1,8 @@
 <mat-card class="mat-elevation-z0">
   <mat-progress-bar class="mt-1 mb-1" *ngIf="!loaded" mode="indeterminate"></mat-progress-bar>
+  <div *ngIf="!loaded">
+    <h1 style="text-align:center"> Please wait. Receipt is loading...</h1>
+  </div>
   <div class="container" style="margin-left: 0px;">
     <!-- <div [ngBusy]="busy" ></div> -->
     <div *ngIf="isApproved">
