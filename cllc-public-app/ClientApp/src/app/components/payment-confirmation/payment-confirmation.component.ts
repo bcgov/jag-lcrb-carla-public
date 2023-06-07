@@ -235,7 +235,7 @@ export class PaymentConfirmationComponent extends FormBase implements OnInit {
           console.log("Unexpected Error occured:");
           console.log(err);
         }
-
+        this.loaded = true;
       }
     );
   }
