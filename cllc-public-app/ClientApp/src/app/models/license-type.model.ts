@@ -12,5 +12,6 @@ export enum LicenceTypeNames {
   S119CRS = "S119 CRS Authorization",
   S119PRS = "S119 PRS Authorization",
   CRS = "Cannabis Retail Store Licence",
-  PRS = "Producer Retail Store"
+  PRS = "Producer Retail Store",
+  Marketing = "Marketing"
 }
