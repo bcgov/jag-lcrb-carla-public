@@ -556,52 +556,54 @@
     </div>
   </td>
   <td style="background-color: #E1E8F2; padding: 10px;">
-
+    {{item.applicationStatus}}
     <!-- If the application has been sent to LG/IN, the applicant cannot access it, unless they have approved it -->
     <div *ngIf="item.applicationStatus === 'Pending External Review'">
-      <ng-container *ngIf="item.lgHasApproved"> 
-          <a appRemoveIfFeatureOff="LicenseeChanges"
-             *ngIf="item.applicationTypeName !== ApplicationTypeNames.CRSRenewal && item.applicationTypeName !== ApplicationTypeNames.Catering && item.applicationTypeName !== ApplicationTypeNames.LiquorRenewal"
-             routerLink="/account-profile/{{item.id}}" id="completeApp{{item.id}}">
-            <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px;"></fa-icon>
-            <span>Complete Application</span>
-          </a>            
-      </ng-container>
-    </div>
-
-    <div *ngIf="item.applicationStatus === 'Not Submitted'"> 
-        <a *ngIf="item.applicationTypeName !== ApplicationTypeNames.CRSRenewal
-                      && item.applicationTypeName !== ApplicationTypeNames.LiquorRenewal"
-           [routerLink]="getApplicationLink(item)" id="completeApp{{item.id}}">
+      <ng-container *ngIf="item.lgHasApproved">
+        <a appRemoveIfFeatureOff="LicenseeChanges"
+           *ngIf="item.applicationTypeName !== ApplicationTypeNames.CRSRenewal && item.applicationTypeName !== ApplicationTypeNames.Catering && item.applicationTypeName !== ApplicationTypeNames.LiquorRenewal"
+           routerLink="/account-profile/{{item.id}}" id="completeApp{{item.id}}">
           <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px;"></fa-icon>
           <span>Complete Application</span>
         </a>
-        <a *ngIf="item.applicationTypeName === ApplicationTypeNames.CRSRenewal || item.applicationTypeName === ApplicationTypeNames.LiquorRenewal || item.applicationTypeName === ApplicationTypeNames.MarketingRenewal"
-           routerLink="/renew-licence/{{getRenewalType(item.applicationTypeName)}}/{{item.id}}">
-          <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px;"></fa-icon>
-          <span>Complete Renewal</span>
-        </a>
+      </ng-container>
+    </div>
+
+    <div *ngIf="item.applicationStatus === 'Not Submitted'">
+      {{item.applicationTypeName}}
+      <a *ngIf="item.applicationTypeName !== ApplicationTypeNames.CRSRenewal
+                      && item.applicationTypeName !== ApplicationTypeNames.LiquorRenewal
+                      && item.applicationTypeName !== ApplicationTypeNames.MarketingRenewal"
+         [routerLink]="getApplicationLink(item)" id="completeApp{{item.id}}">
+        <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px;"></fa-icon>
+        <span>Complete Application</span>
+      </a>
+      <a *ngIf="item.applicationTypeName === ApplicationTypeNames.CRSRenewal || item.applicationTypeName === ApplicationTypeNames.LiquorRenewal || item.applicationTypeName === ApplicationTypeNames.MarketingRenewal"
+         routerLink="/renew-licence/{{getRenewalType(item.applicationTypeName)}}/{{item.id}}">
+        <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px;"></fa-icon>
+        <span>Complete Renewal</span>
+      </a>
     </div>
 
     <div *ngIf="item.applicationStatus === 'Relocation Initiated'">
-        <a [routerLink]="['/account-profile/' + item.id, { mode: CHANGE_OF_LOCATION_MODE }]">
-          <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px;"></fa-icon>
-          <span>Complete Relocation</span>
-        </a>     
+      <a [routerLink]="['/account-profile/' + item.id, { mode: CHANGE_OF_LOCATION_MODE }]">
+        <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px;"></fa-icon>
+        <span>Complete Relocation</span>
+      </a>
     </div>
 
     <div *ngIf="item.applicationStatus === 'Transfer Initiated'">
-        <a routerLink="/account-profile/{{item.id}}">
-          <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px;"></fa-icon>
-          <span>Complete Transfer</span>
-        </a>
+      <a routerLink="/account-profile/{{item.id}}">
+        <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px;"></fa-icon>
+        <span>Complete Transfer</span>
+      </a>
     </div>
 
     <div *ngIf="item.applicationStatus === 'Licensee Change Initiated'">
-        <a [routerLink]="['/licensee-changes/' + item.id]">
-          <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px;"></fa-icon>
-          <span>Complete Licensee Change</span>
-        </a>
+      <a [routerLink]="['/licensee-changes/' + item.id]">
+        <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px;"></fa-icon>
+        <span>Complete Licensee Change</span>
+      </a>
     </div>
 
     <div *ngIf="item.applicationStatus === 'Not Submitted'" style="margin-top: 5px;"
@@ -637,17 +639,17 @@
     </div>
 
     <div *ngIf="['Relocation Application Under Review','Transfer Application Under Review', 'Under Review', 'Processed'].indexOf(item.applicationStatus) !== -1">
-        <a style="margin-top: 5px;" href="javascript:void(0);" (click)="uploadMoreFiles(item)">
-          <fa-icon [icon]="faPlus" style="color: #1a5a96; margin-right: 10px;"></fa-icon>
-          <span>Add Supporting Documents</span>
-        </a>
+      <a style="margin-top: 5px;" href="javascript:void(0);" (click)="uploadMoreFiles(item)">
+        <fa-icon [icon]="faPlus" style="color: #1a5a96; margin-right: 10px;"></fa-icon>
+        <span>Add Supporting Documents</span>
+      </a>
     </div>
 
     <div *ngIf="['Incomplete'].indexOf(item.applicationStatus) !== -1">
-        <a style="margin-top: 5px;" href="javascript:void(0);" (click)="resolveIncompleteness(item)">
-          <fa-icon [icon]="faPlus" style="color: #1a5a96; margin-right: 10px;"></fa-icon>
-          <span>Resolve Incompleteness</span>
-        </a>   
+      <a style="margin-top: 5px;" href="javascript:void(0);" (click)="resolveIncompleteness(item)">
+        <fa-icon [icon]="faPlus" style="color: #1a5a96; margin-right: 10px;"></fa-icon>
+        <span>Resolve Incompleteness</span>
+      </a>
     </div>
   </td>
   <td>
