@@ -970,8 +970,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         AdoxioLicencefeeinvoicepaid = true,
                         AdoxioPaymentrecieved = true,
-                        AdoxioPaymentmethod = (int?)Adoxio_paymentmethods.CC,
-                        AdoxioAppchecklistpaymentreceived = (int?)ViewModels.GeneralYesNo.Yes
+                        AdoxioPaymentmethod = (int?)Adoxio_paymentmethods.CC
                     };
                     try
                     {
