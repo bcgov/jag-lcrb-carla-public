@@ -752,7 +752,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
 
   getRenewalType(applicationType: string): string {
     let licenceType = "";
-    if (applicationType === ApplicationTypeNames.CRSRenewal) {
+    if (applicationType === ApplicationTypeNames.CRSRenewal || applicationType === ApplicationTypeNames.MarketingRenewal) {
       licenceType = CRS_RENEWAL_LICENCE_TYPE_NAME;
     } else if (applicationType === ApplicationTypeNames.LiquorRenewal) {
       licenceType = LIQUOR_RENEWAL_LICENCE_TYPE_NAME;

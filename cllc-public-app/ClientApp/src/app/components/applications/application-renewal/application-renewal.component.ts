@@ -144,6 +144,8 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
       return "Cannabis Retail Store Licence/Authorization.";
     } else if (this.application.assignedLicence.licenseType === LicenceTypeNames.PRS) {
       return "Producer Retail Store License";
+    } else if (this.application.assignedLicence.licenseType === LicenceTypeNames.Marketing) {
+      return "Marketing Licence";
     } else {
       return "Cannabis Retail Store Licence";
     }
@@ -183,7 +185,6 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
 
         this.application = data;
 
-        this.hideFormControlByType();
 
         this.addDynamicContent();
 
@@ -250,6 +251,7 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
             establishmentParcelId: [""]
           }),
         });
+        this.hideFormControlByType();
 
         this.form.patchValue(noNulls);
         if (data.isPaid) {
