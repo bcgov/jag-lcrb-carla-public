@@ -16,13 +16,16 @@ namespace Gov.Lclb.Cllb.OrgbookService
         readonly string _schemaVersion;
         readonly string AGENT_URL;
         readonly string ISSUE_URL = "issue-credential";
-        public VonAgentClient(HttpClient client, ILogger logger, string schema, string schemaVersion, string agentURL)
+        readonly string _apiKey ;
+
+        public VonAgentClient(HttpClient client, ILogger logger, string schema, string schemaVersion, string agentURL, string apiKey)
         {
             Client = client;
             _logger = logger;
             _schema = schema;
             _schemaVersion = schemaVersion;
             AGENT_URL = agentURL;
+            _apiKey = apiKey;
         }
 
         public async Task<bool> CreateLicenceCredential(MicrosoftDynamicsCRMadoxioLicences licence, string registrationId)
@@ -67,12 +70,14 @@ namespace Gov.Lclb.Cllb.OrgbookService
                 // can't use PostAsJson in dotnet core
 
                 HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, AGENT_URL + ISSUE_URL);
-
+                request.Headers.Add("x-api-key", _apiKey);  
                 string json = JsonConvert.SerializeObject(new List<Credential>() { credential });
 
                 request.Content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
 
                 HttpClient http = new HttpClient();
+                http.DefaultRequestHeaders.Add("x-api-key", _apiKey);
+
                 HttpResponseMessage response = await http.SendAsync(request);                
 
                 if (!response.IsSuccessStatusCode)
