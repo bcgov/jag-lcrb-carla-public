@@ -53,7 +53,7 @@ namespace Gov.Lclb.Cllb.OrgbookService
             {
                 string licenceGuid = Utils.ParseGuid(message.LicenceId);
                 var licence = _dynamics.GetLicenceByIdWithChildren(licenceGuid);
-                VonAgentClient _vonAgentClient = new VonAgentClient(new HttpClient(), _logger, schema, schemaVersion, Configuration["AGENT_URL"]);
+                VonAgentClient _vonAgentClient = new VonAgentClient(new HttpClient(), _logger, schema, schemaVersion, Configuration["AGENT_URL"], Configuration["X_API_KEY"]);
                 bool issueSuccess = await _vonAgentClient.CreateLicenceCredential(licence, message.RegistrationId);
 
                 if(issueSuccess)
