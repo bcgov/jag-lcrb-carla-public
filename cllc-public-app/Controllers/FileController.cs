@@ -721,17 +721,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 var folderName = await _dynamicsClient.GetFolderName(entityName, entityId).ConfigureAwait(true);
 
-                _dynamicsClient.CreateEntitySharePointDocumentLocation(entityName, entityId, folderName, folderName);
+                _dynamicsClient.CreateEntitySharePointDocumentLocation(entityName, entityId, folderName, fileName);
 
                 // call the web service
-                var uploadRequest = new UploadFileRequest
+                try
                 {
-                    ContentType = file.ContentType,
-                    Data = ByteString.CopyFrom(data),
-                    EntityName = entityName,
-                    FileName = fileName,
-                    FolderName = folderName
-                };
+                    var uploadRequest = new UploadFileRequest
+                    {
+                        ContentType = file.ContentType,
+                        Data = ByteString.CopyFrom(data),
+                        EntityName = entityName,
+                        FileName = fileName,
+                        FolderName = folderName
+                    };
+               
 
                 var uploadResult = _fileManagerClient.UploadFile(uploadRequest);
 
@@ -749,8 +752,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     _logger.LogError($"ERROR in uploading file {logFileName} to folder {logFolderName}");
                     throw new Exception($"ERROR in uploading file {logFileName} to folder {logFolderName}");
                 }
-            }
+                }
+                catch (Exception ex)
+                {
 
+
+                }
+            }
+           
 
 
             return new JsonResult(result);
