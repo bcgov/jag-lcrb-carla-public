@@ -107,7 +107,8 @@ namespace Gov.Jag.Lcrb.OneStopService
                     {
                         AdoxioDatetimesent = DateTime.Now,
                         AdoxioPayload = payload,
-                        AdoxioMessagestatus = response
+                        AdoxioMessagestatus = response,
+                        //adoxio_messagesendstatus=MessageSendStatusType.Sent
                     };
                 try
                 {
@@ -598,6 +599,31 @@ namespace Gov.Jag.Lcrb.OneStopService
                                 await SendChangeNameRest(hangfireContext, licenceId,
                                     queueItem.AdoxioOnestopmessageitemid, true);
                                 break;
+                            default:
+                                if (!string.IsNullOrEmpty(queueItem.AdoxioOnestopmessageitemid))
+                                {
+                                    Log.Logger.Information( $"Failed updating OneStop queue item {queueItem.AdoxioOnestopmessageitemid}, OneStopHubStatusChange is {queueItem.AdoxioStatuschangedescription} ");
+
+                                    MicrosoftDynamicsCRMadoxioOnestopmessageitem patchRecord =
+                                        new MicrosoftDynamicsCRMadoxioOnestopmessageitem()
+                                        {
+                                            //adoxio_messagestatusreason=$"OneStop message {queueItem.AdoxioOnestopmessageitemid}, Status is {queueItem.AdoxioStatuschangedescription} ",
+                                            //adoxio_messagesendstatus=MessageSendStatusType.Failed
+                                        };
+                                    try
+                                    {
+                                        dynamicsClient.Onestopmessageitems.Update(queueItem.AdoxioOnestopmessageitemid, patchRecord);
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        Log.Logger.Error(e, $"Error while updating OneStop queue item {queueItem.AdoxioOnestopmessageitemid} {e.Message}");
+                                        if (hangfireContext != null)
+                                        {
+                                            hangfireContext.WriteLine($"Error while updating OneStop queue item {queueItem.AdoxioOnestopmessageitemid} {e.Message}");
+                                        }
+                                    }
+                                }
+                                break;
                         }
 
                         currentItem++;
@@ -615,7 +641,7 @@ namespace Gov.Jag.Lcrb.OneStopService
                 }
 
             }
-
+           
             hangfireContext.WriteLine("End of check for new OneStop queue items");
         }
 
