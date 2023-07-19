@@ -50640,6 +50640,9 @@
       "description": "Microsoft.Dynamics.CRM.adoxio_externalcontact",
       "type": "object",
       "properties": {
+        "adoxio_phone": {
+          "type": "string"
+        },
         "adoxio_name": {
           "type": "string"
         },
@@ -50680,6 +50683,10 @@
           "format": "int32",
           "type": "integer"
         },
+        "adoxio_engagementstatus": {
+          "format": "int32",
+          "type": "integer"
+        },
         "traversedpath": {
           "type": "string"
         },
@@ -50695,10 +50702,17 @@
         "adoxio_addresscity": {
           "type": "string"
         },
+        "adoxio_tags": {
+          "type": "string"
+        },
         "processid": {
           "type": "string"
         },
         "createdon": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "overriddencreatedon": {
           "format": "date-time",
           "type": "string"
         },
@@ -50711,9 +50725,8 @@
         "_owningbusinessunit_value": {
           "type": "string"
         },
-        "overriddencreatedon": {
-          "format": "date-time",
-          "type": "string"
+        "adoxio_primarycontact": {
+          "type": "boolean"
         },
         "versionnumber": {
           "format": "int64",
@@ -50727,9 +50740,6 @@
           "type": "string"
         },
         "_createdonbehalfby_value": {
-          "type": "string"
-        },
-        "adoxio_phone": {
           "type": "string"
         },
         "timezoneruleversionnumber": {
@@ -50967,9 +50977,6 @@
         "adoxio_primaryinterest": {
           "type": "string"
         },
-        "adoxio_phonenumber": {
-          "type": "string"
-        },
         "adoxio_addresspostalcode": {
           "type": "string"
         },
@@ -50987,15 +50994,10 @@
           "format": "date-time",
           "type": "string"
         },
-        "adoxio_engagementtype": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_branch": {
-          "format": "int32",
-          "type": "integer"
-        },
         "adoxio_addresscity": {
+          "type": "string"
+        },
+        "_modifiedonbehalfby_value": {
           "type": "string"
         },
         "adoxio_name": {
@@ -51011,7 +51013,7 @@
         "_owninguser_value": {
           "type": "string"
         },
-        "adoxio_category": {
+        "adoxio_branch": {
           "format": "int32",
           "type": "integer"
         },
@@ -51042,15 +51044,12 @@
         "_adoxio_primarycontact_value": {
           "type": "string"
         },
-        "_modifiedonbehalfby_value": {
+        "adoxio_phone": {
           "type": "string"
         },
         "adoxio_stakeholderlevel": {
           "format": "int32",
           "type": "integer"
-        },
-        "adoxio_tags": {
-          "type": "string"
         },
         "lastonholdtime": {
           "format": "date-time",
@@ -51060,9 +51059,6 @@
           "type": "string"
         },
         "_owningteam_value": {
-          "type": "string"
-        },
-        "adoxio_engagementstatus": {
           "type": "string"
         },
         "statuscode": {
@@ -51078,6 +51074,9 @@
         },
         "createdon": {
           "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_category": {
           "type": "string"
         },
         "_slainvokedid_value": {
@@ -58591,6 +58590,10 @@
           "format": "date-time",
           "type": "string"
         },
+        "statuscode": {
+          "format": "int32",
+          "type": "integer"
+        },
         "_modifiedonbehalfby_value": {
           "type": "string"
         },
@@ -58621,6 +58624,9 @@
         "adoxio_errordescription": {
           "type": "string"
         },
+        "adoxio_messagestatusreason": {
+          "type": "string"
+        },
         "statecode": {
           "format": "int32",
           "type": "integer"
@@ -58628,7 +58634,7 @@
         "adoxio_name": {
           "type": "string"
         },
-        "statuscode": {
+        "adoxio_messagesendstatus": {
           "format": "int32",
           "type": "integer"
         },
