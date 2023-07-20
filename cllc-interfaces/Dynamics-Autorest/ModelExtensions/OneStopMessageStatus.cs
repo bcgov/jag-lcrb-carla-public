@@ -8,6 +8,5 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         [Display(Name = "Failed")] Failed = 845280001,
         [Display(Name = "Ready To Send")] ReadyToSend = 845280002,
         [Display(Name = "Donot Send")] DonotSend = 845280003,
-      
     }
 }
