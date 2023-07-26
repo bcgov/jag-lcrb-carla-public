@@ -629,9 +629,15 @@ namespace Gov.Jag.Lcrb.OneStopService
                     }
 
                 }
-
+                else
+                {
+                    var msg = $"Failed updating OneStop queue item {queueItem.AdoxioOnestopmessageitemid}, queueItem._adoxioLicenceValue is null, there's no licence associated";
+                    UpdateOneStopMessageStatus(hangfireContext, dynamicsClient, queueItem.AdoxioOnestopmessageitemid, msg);
+                }
             }
-           
+            
+
+
             hangfireContext.WriteLine("End of check for new OneStop queue items");
         }
 
