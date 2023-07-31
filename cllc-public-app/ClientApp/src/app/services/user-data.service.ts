@@ -41,7 +41,7 @@ export class UserDataService extends DataService {
       .toPromise().then(user => {
         this.currentUser = user;
         this.store.dispatch(new SetCurrentUserAction(user));
-      }).catch(e => {});
+      }).catch(e => {
+      });
   }
-
 }

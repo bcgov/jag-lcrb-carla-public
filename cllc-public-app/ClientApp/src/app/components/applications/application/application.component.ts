@@ -256,7 +256,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
       fpAddressCity: ['', Validators.required],
       fpAddressPostalCode: ['', [Validators.required, Validators.pattern(CanadaPostalRegex)]],
       uploadDeclarations: ['', []],
-      productsListAndDescription: ['', []]
+      productsListAndDescription: ['', []],
+      willHaveTiedHouseExemption: ['', []],
     });
 
     this.form.get('pin').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
@@ -316,10 +317,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
           this.updateDescriptionRequired(checked, 'patioLiquorCarriedDescription');
         });
       }
-
       this.updatePatioRequired(checked);
-
-
     });
 
 
@@ -1117,6 +1115,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     const saveData = this.form.value;
     this.disableIncomplete = true;
     // Only save if the data is valid
+
 
       this.busy = forkJoin(
         this.applicationDataService.updateApplication({
