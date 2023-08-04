@@ -52,7 +52,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             {
                 VenueDescription = venue
             };
-            
+
             string jsonString = JsonConvert.SerializeObject(viewmodel_adoxio_event);
 
             request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");

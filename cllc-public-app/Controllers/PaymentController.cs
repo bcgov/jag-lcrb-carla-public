@@ -639,7 +639,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 // if payment was successful:
                 var pay_status = response["trnApproved"];
-                var messageId = response["messageId"];
+                var messageId = string.Empty;
+                if (response.ContainsKey("messageId"))
+                {
+                    messageId = response["messageId"];
+                }
                 if (pay_status == "1")
                 {
                     _logger.Debug("Transaction approved");

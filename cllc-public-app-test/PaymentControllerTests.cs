@@ -141,9 +141,10 @@ namespace Gov.Lclb.Cllb.Public.Test
 			request = new HttpRequestMessage(HttpMethod.Post, "/api/Applications/" + id + "/delete");
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
-            
-			// should get a 404 if we try a get now.
-			request = new HttpRequestMessage(HttpMethod.Get, "/api/Applications/" + id);
+            Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
+
+            // should get a 404 if we try a get now.
+            request = new HttpRequestMessage(HttpMethod.Get, "/api/Applications/" + id);
             response = await _client.SendAsync(request);
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 
@@ -380,7 +381,8 @@ namespace Gov.Lclb.Cllb.Public.Test
             // delete application
             request = new HttpRequestMessage(HttpMethod.Post, "/api/Applications/" + id + "/delete");
             response = await _client.SendAsync(request);
-            response.EnsureSuccessStatusCode();
+            //response.EnsureSuccessStatusCode();
+            Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
 
             // should get a 404 if we try a get now.
             request = new HttpRequestMessage(HttpMethod.Get, "/api/Applications/" + id);
