@@ -152,6 +152,7 @@ export interface Application {
   mfgBrewPubOnSite: string;
   mfgPipedInProduct: string;
 
+
   // these are just optional int - not picklist references.
   mfgAcresOfFruit: number;
   mfgAcresOfGrapes: number;
@@ -249,5 +250,6 @@ export interface Application {
   volumeProduced: number;
   volumeDestroyed: number;
   ldbOrderTotals: number;
-
+  //LCSD-5779 
+  willTiedHouseExemption: boolean;
 }
