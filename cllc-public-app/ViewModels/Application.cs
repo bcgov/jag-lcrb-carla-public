@@ -760,6 +760,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public int VolumeDestroyed { get; set; }
         public int VolumeProduced { get; set; }
         public decimal LdbOrderTotals { get; set; }
-
+        //LCSD-5779 parent application id is not null & empty, and application type ='manufacter'
+        public bool? willHaveTiedHouseExemption { get; set; }
     }
 }
