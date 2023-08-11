@@ -19,7 +19,7 @@ jobs:
 
       - name: Build image
        
-        run: docker build . --tag ${{ secrets.OCP4_REGISTRY }}/${{ secrets.OCP4_NAMESPACE }}/orgbook-service
+        run: docker build . --tag ${{ secrets.OCP4_REGISTRY }}/${{ secrets.OCP4_NAMESPACE }}/orgbook-service:dev
 
       - name: Push image
-        run: docker push ${{ secrets.OCP4_REGISTRY }}/${{ secrets.OCP4_NAMESPACE }}/orgbook-service
+        run: docker push ${{ secrets.OCP4_REGISTRY }}/${{ secrets.OCP4_NAMESPACE }}/orgbook-service:dev
