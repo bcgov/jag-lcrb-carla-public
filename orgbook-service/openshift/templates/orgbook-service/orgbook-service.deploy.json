@@ -99,6 +99,10 @@
                     {
                       "name": "DOTNET_SSL_DIRS",
                       "value": "/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt"
+                    },
+                    {
+                      "name": "X_API_KEY",
+                      "value": "${X_API_KEY}"
                     }
                   ],
                   "volumeMounts": [

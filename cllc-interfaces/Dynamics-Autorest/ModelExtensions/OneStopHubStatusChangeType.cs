@@ -23,5 +23,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         [Display(Name = "Updated - Licensee BN9 Removed")] LicenseeBn9Removed = 845280015,
         [Display(Name = "Expired")] Expired = 845280011,
         [Display(Name = "Renewed")] Renewed = 845280012,
+        [Display(Name = "Updated - Endorsement Approved")] EndorsementApproved = 845280016,
     }
 }

@@ -1,0 +1,25 @@
+name: orgbook-service-build-and-push
+on:
+  push:
+    branches:
+      - develop      
+    paths:
+      - "/cllc-interfaces/Dynamics-Autorest/**"
+      - "/orgbook-service/**"
+      - ".github/workflows/cd-orgbook-service.yml"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Log into registry
+        run: echo "${{ secrets.OCP4_PASSWORD  }}" | docker login ${{ secrets.OCP4_REGISTRY }}/${{ secrets.OCP4_NAMESPACE }} -u ${{ secrets.OCP4_USERNAME }} --password-stdin        
+
+      - name: Build image
+       
+        run: docker build . --tag ${{ secrets.OCP4_REGISTRY }}/${{ secrets.OCP4_NAMESPACE }}/orgbook-service:dev
+
+      - name: Push image
+        run: docker push ${{ secrets.OCP4_REGISTRY }}/${{ secrets.OCP4_NAMESPACE }}/orgbook-service:dev
