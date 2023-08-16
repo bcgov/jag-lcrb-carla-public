@@ -522,6 +522,9 @@ namespace Gov.Jag.Lcrb.OneStopService
                         {
                             case OneStopHubStatusChange.Issued:
                             case OneStopHubStatusChange.TransferComplete:
+                            case OneStopHubStatusChange.LicenseeBn9Changed:
+                            case OneStopHubStatusChange.LicenseeBn9Added:
+                            case OneStopHubStatusChange.LicenseeBn9Removed:
                                 if ((OneStopHubStatusChange) queueItem.AdoxioStatuschangedescription ==
                                     OneStopHubStatusChange.TransferComplete)
                                 {
