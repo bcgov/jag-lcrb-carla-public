@@ -64,6 +64,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     _logger.LogError(ex, "Error creating event");
                     return BadRequest();
                 }
+               
                 item.EventClass = item.DetermineEventClass(alwaysAuthorization);
                 if (item.EventClass != EventClass.Authorization || item.EventCategory == EventCategory.Market)
                 {
@@ -88,6 +89,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             try
             {
+                var str = JsonConvert.SerializeObject(dynamicsEvent);
                 dynamicsEvent = _dynamicsClient.Events.Create(dynamicsEvent);
             }
             catch (HttpOperationException ex)
