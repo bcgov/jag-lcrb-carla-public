@@ -1641,7 +1641,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             //Prepare application for update
             var applicationId = new Guid(id);
             var application = await _dynamicsClient.GetApplicationById(applicationId);
-
+            var str=JsonConvert.SerializeObject(application);
             var allowLgAccess = await CurrentUserIsLgForApplication(application);
             if (!CurrentUserHasAccessToApplicationOwnedBy(application._adoxioApplicantValue) && !allowLgAccess)
                 throw new Exception("User doesn't have an access the application");

@@ -259,7 +259,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioLdbordertotals = from.LdbOrderTotals==0? default(decimal?): from.LdbOrderTotals;
             //LCSD-5779
             to.AdoxioTiedhouseexemption = from.willHaveTiedHouseExemption;
-
+            to.AdoxioTempSuspensionOrPatronParticipationStart = from.AdoxioTempSuspensionOrPatronParticipationStart;
+            to.AdoxioTempSuspensionOrPatronParticipationEnd = from.AdoxioTempSuspensionOrPatronParticipationEnd;
         }
 
 
@@ -637,6 +638,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 LdbOrderTotals = dynamicsApplication.AdoxioLdbordertotals.HasValue ? dynamicsApplication.AdoxioLdbordertotals.Value:0,
                 //LCSD-5779
                 willHaveTiedHouseExemption=dynamicsApplication.AdoxioTiedhouseexemption,
+                AdoxioTempSuspensionOrPatronParticipationStart = dynamicsApplication.AdoxioTempSuspensionOrPatronParticipationStart,
+                AdoxioTempSuspensionOrPatronParticipationEnd = dynamicsApplication.AdoxioTempSuspensionOrPatronParticipationEnd,
             };
 
 
