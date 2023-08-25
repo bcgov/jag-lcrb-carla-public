@@ -187,6 +187,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
       establishmentAddressCity: ['', Validators.required],
       establishmentAddressPostalCode: ['', [Validators.required, Validators.pattern(CanadaPostalRegex)]],
       establishmentEmail: ['', Validators.email],
+      adoxioTempSuspensionOrPatronParticipationStart: [''],
+      adoxioTempSuspensionOrPatronParticipationEnd: [''],
       establishmentPhone: [''],
       serviceHoursSundayOpen: [''],
       serviceHoursMondayOpen: [''],
@@ -1446,7 +1448,15 @@ export class ApplicationComponent extends FormBase implements OnInit {
       }
 
     }
-
+    if (this.application?.applicationType.name == "Temporary Delicensing" || this.application?.applicationType.name == "Temporary Patron Participation Entertainment Endorsement") {
+      valid = false;
+      if (!this.form.get('adoxioTempSuspensionOrPatronParticipationStart').value) {
+        this.validationMessages.push('Start date is required.');
+      }
+      if (!this.form.get('adoxioTempSuspensionOrPatronParticipationEnd').value) {
+        this.validationMessages.push('End date is required.');
+      }
+    }
     return valid && (this.form.valid || this.form.disabled);
   }
 
