@@ -38320,6 +38320,10 @@
         "adoxio_m01": {
           "type": "boolean"
         },
+        "adoxio_tempsuspensionorpatronparticipationend": {
+          "format": "date-time",
+          "type": "string"
+        },
         "adoxio_manufacturerproductionamountunit": {
           "format": "int32",
           "type": "integer"
@@ -38709,6 +38713,10 @@
         },
         "adoxio_isoutdoorserviceareaenabled": {
           "type": "boolean"
+        },
+        "adoxio_tempsuspensionorpatronparticipationstart": {
+          "format": "date-time",
+          "type": "string"
         },
         "adoxio_m11": {
           "type": "boolean"
@@ -50702,9 +50710,6 @@
         "adoxio_addresscity": {
           "type": "string"
         },
-        "adoxio_tags": {
-          "type": "string"
-        },
         "processid": {
           "type": "string"
         },
@@ -50728,8 +50733,7 @@
         "adoxio_primarycontact": {
           "type": "boolean"
         },
-        "versionnumber": {
-          "format": "int64",
+        "adoxio_listname": {
           "type": "string"
         },
         "statecode": {
@@ -50765,6 +50769,10 @@
         "statuscode": {
           "format": "int32",
           "type": "integer"
+        },
+        "versionnumber": {
+          "format": "int64",
+          "type": "string"
         },
         "modifiedon": {
           "format": "date-time",
@@ -50977,7 +50985,7 @@
         "adoxio_primaryinterest": {
           "type": "string"
         },
-        "adoxio_addresspostalcode": {
+        "adoxio_sector": {
           "type": "string"
         },
         "utcconversiontimezonecode": {
@@ -50987,14 +50995,15 @@
         "_owningbusinessunit_value": {
           "type": "string"
         },
-        "adoxio_keycontactlastname": {
-          "type": "string"
-        },
         "modifiedon": {
           "format": "date-time",
           "type": "string"
         },
-        "adoxio_addresscity": {
+        "adoxio_branch": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_ownerid_value": {
           "type": "string"
         },
         "_modifiedonbehalfby_value": {
@@ -51012,10 +51021,6 @@
         },
         "_owninguser_value": {
           "type": "string"
-        },
-        "adoxio_branch": {
-          "format": "int32",
-          "type": "integer"
         },
         "adoxio_keycontactfirstname": {
           "type": "string"
@@ -51076,7 +51081,7 @@
           "format": "date-time",
           "type": "string"
         },
-        "adoxio_category": {
+        "adoxio_keycontactlastname": {
           "type": "string"
         },
         "_slainvokedid_value": {
@@ -51086,19 +51091,10 @@
           "format": "int64",
           "type": "string"
         },
-        "adoxio_relationshiptolcrbconfidential": {
-          "type": "string"
-        },
-        "_ownerid_value": {
-          "type": "string"
-        },
         "adoxio_issuesfuturetrends": {
           "type": "string"
         },
         "_createdonbehalfby_value": {
-          "type": "string"
-        },
-        "adoxio_addressstreet": {
           "type": "string"
         },
         "createdby": {
@@ -82782,6 +82778,9 @@
         "opencount": {
           "format": "int32",
           "type": "integer"
+        },
+        "adoxio_recipientemailaddress": {
+          "type": "string"
         },
         "torecipients": {
           "type": "string"
