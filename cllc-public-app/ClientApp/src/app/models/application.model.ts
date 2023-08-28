@@ -252,4 +252,7 @@ export interface Application {
   ldbOrderTotals: number;
   //LCSD-5779 
   willTiedHouseExemption: boolean;
+  tempSuspensionOrPatronParticipationStart: Date;
+  tempSuspensionOrPatronParticipationEnd: Date;
+
 }
