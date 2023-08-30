@@ -556,7 +556,6 @@
     </div>
   </td>
   <td style="background-color: #E1E8F2; padding: 10px;">
-    {{item.applicationStatus}}
     <!-- If the application has been sent to LG/IN, the applicant cannot access it, unless they have approved it -->
     <div *ngIf="item.applicationStatus === 'Pending External Review'">
       <ng-container *ngIf="item.lgHasApproved">
@@ -570,10 +569,10 @@
     </div>
 
     <div *ngIf="item.applicationStatus === 'Not Submitted'">
-      {{item.applicationTypeName}}
       <a *ngIf="item.applicationTypeName !== ApplicationTypeNames.CRSRenewal
                       && item.applicationTypeName !== ApplicationTypeNames.LiquorRenewal
                       && item.applicationTypeName !== ApplicationTypeNames.MarketingRenewal"
+
          [routerLink]="getApplicationLink(item)" id="completeApp{{item.id}}">
         <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px;"></fa-icon>
         <span>Complete Application</span>
@@ -657,14 +656,15 @@
       <!--p>Third Party Operator Application</p-->
       <ul>
         <li *ngIf="item?.licenceId && item.portallabel == 'Manufacturer Licence'">
-            <a [routerLink]="[ '/tied-house-exemption/' + item?.licenceId]">
-              Invitation for Tied House Exemption
-            </a>  
+          <a [routerLink]="[ '/tied-house-exemption/' + item?.licenceId]">
+            Invitation for Tied House Exemption
+          </a>
         </li>
-
-        <li *ngFor="let appType of item.endorsements">
+        <ng-container  *ngFor="let appType of item.endorsements">
+          <li *ngIf="!(item?.applicationStatus == 'Not Submitted'&& item?.applicationTypeName == ApplicationTypeNames.MFG && appType == ApplicationTypeNames.TiedHouseExemptionRemoval)">
             <a href="javascript:void(0)" (click)="startEndorsementApplication(item, appType)">{{appType}}</a>
-        </li>
+          </li>
+        </ng-container>
       </ul>
     </section>
   </td>
