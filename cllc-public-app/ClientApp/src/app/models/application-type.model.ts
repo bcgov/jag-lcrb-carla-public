@@ -110,5 +110,6 @@ export enum ApplicationTypeNames {
   LRSStructuralChange = "LRS Structural Change",
   RequestTermChange = "Non-Default T&C Change Application",
   TiedHouseExemption = "Tied House Exemption",
-  OutstandingPriorBalanceInvoice="Outstanding Prior Balance Invoice - LIQ"
+  OutstandingPriorBalanceInvoice = "Outstanding Prior Balance Invoice - LIQ",
+  TiedHouseExemptionRemoval = "Tied House Exemption Removal",
 }
