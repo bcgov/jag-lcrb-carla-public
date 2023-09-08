@@ -660,8 +660,8 @@
             Invitation for Tied House Exemption
           </a>
         </li>
-        <ng-container  *ngFor="let appType of item.endorsements">
-          <li *ngIf="!(item?.applicationStatus == 'Not Submitted'&& item?.applicationTypeName == ApplicationTypeNames.MFG && appType == ApplicationTypeNames.TiedHouseExemptionRemoval)">
+        <ng-container *ngFor="let appType of item.endorsements">
+          <li *ngIf="!((item?.applicationStatus == 'Not Submitted'||item?.applicationStatus == 'Under Review'||item?.applicationStatus == 'Application Incomplete')&& item?.applicationTypeName == ApplicationTypeNames.MFG && appType == ApplicationTypeNames.TiedHouseExemptionRemoval)">
             <a href="javascript:void(0)" (click)="startEndorsementApplication(item, appType)">{{appType}}</a>
           </li>
         </ng-container>
