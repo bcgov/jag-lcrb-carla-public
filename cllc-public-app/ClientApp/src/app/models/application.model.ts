@@ -251,8 +251,8 @@ export interface Application {
   volumeDestroyed: number;
   ldbOrderTotals: number;
   //LCSD-5779 
-  willTiedHouseExemption: boolean;
+  willHaveTiedHouseExemption: boolean;
   tempSuspensionOrPatronParticipationStart: Date;
   tempSuspensionOrPatronParticipationEnd: Date;
-
+  assignedLicenceId: string;
 }
