@@ -655,8 +655,8 @@
     <section *ngIf="item?.endorsements?.length">
       <!--p>Third Party Operator Application</p-->
       <ul>
-        <li *ngIf="item?.licenceId && item.portallabel == 'Manufacturer Licence'">
-          <a [routerLink]="[ '/tied-house-exemption/' + item?.licenceId]">
+        <li *ngIf="(item?.applicationStatus == 'Not Submitted'||item?.applicationStatus == 'Under Review'||item?.applicationStatus == 'Application Incomplete')&& item.portallabel == 'Manufacturer Licence'">
+          <a [routerLink]="[ '/tied-house-exemption/true/'+item.id]">
             Invitation for Tied House Exemption
           </a>
         </li>

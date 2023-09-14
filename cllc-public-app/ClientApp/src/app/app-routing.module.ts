@@ -460,6 +460,12 @@ const routes: Routes = [
     canActivate: [BCeidAuthGuard]
   },
   {
+    
+    path: "tied-house-exemption/:isAppId/:applicationId",
+    component: ApplicationTiedHouseExemptionComponent,
+    canActivate: [BCeidAuthGuard]
+  },
+  {
     path: "third-party-operator/:licenceId",
     component: ApplicationThirdPartyOperatorComponent,
     canActivate: [BCeidAuthGuard]
