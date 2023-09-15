@@ -175,7 +175,7 @@ export class ApplicationAndLicenceFeeComponent extends FormBase implements OnIni
     } as Establishment;
 
     return forkJoin(
-        this.applicationDataService.updateApplication({ ...this.application, ...this.form.value }),
+        this.applicationDataService.createApplication({ ...this.application, ...this.form.value }),
         this.establishmentDataService.upEstablishment(establishment)
       ).pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {

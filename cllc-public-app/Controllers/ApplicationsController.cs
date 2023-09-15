@@ -1495,10 +1495,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             }
                         };
 
-                // create application
-                adoxioApplication = _dynamicsClient.Applications.Create(adoxioApplication);
+               
                 //LCSD-5779 create TiedHouseExemption 
-                if (item.willHaveTiedHouseExemption.HasValue && item.willHaveTiedHouseExemption.Value)
+                if (item.WillHaveTiedHouseExemption.HasValue && item.WillHaveTiedHouseExemption.Value)
                 {
                     var adoxioTiedHouseExemption = new MicrosoftDynamicsCRMadoxioApplication();
                     // set application type relationship
@@ -1507,8 +1506,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     adoxioApplication.AdoxioParentApplicationIDODataBind = adoxioApplication.AdoxioApplicationTypeIdODataBind;
                     adoxioTiedHouseExemption.AdoxioTiedhouseexemption = true;
                     adoxioTiedHouseExemption.AdoxioManufacturerproductionamountforprevyear = 0;
-                    adoxioTiedHouseExemption.AdoxioManufacturerproductionamountunit = 0;
+                    adoxioTiedHouseExemption.AdoxioRelatedLicenceODataBind = _dynamicsClient.GetEntityURI("adoxio_licenceses", item.AssignedLicenceId);
+                    adoxioTiedHouseExemption.AdoxioParentApplicationIDODataBind = _dynamicsClient.GetEntityURI("adoxio_applications", item.ParentApplicationId);
                     _dynamicsClient.Applications.Create(adoxioTiedHouseExemption);
+                }else
+                {
+                    // create application
+                    adoxioApplication = _dynamicsClient.Applications.Create(adoxioApplication);
                 }
 
 
@@ -1747,7 +1751,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
 
                 //LCSD-5779 create TiedHouseExemption 
-                if (item.willHaveTiedHouseExemption.HasValue && item.willHaveTiedHouseExemption.Value && item.TiedHouse ==null)
+                if (item.WillHaveTiedHouseExemption.HasValue && item.WillHaveTiedHouseExemption.Value && item.TiedHouse ==null)
                 {
                     var adoxioTiedHouseExemption = new MicrosoftDynamicsCRMadoxioApplication();
                     // set application type relationship
@@ -1756,7 +1760,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     application.AdoxioParentApplicationIDODataBind = application.AdoxioApplicationTypeIdODataBind;
                     adoxioTiedHouseExemption.AdoxioTiedhouseexemption = true;
                     adoxioTiedHouseExemption.AdoxioManufacturerproductionamountforprevyear = 0;
-                    adoxioTiedHouseExemption.AdoxioManufacturerproductionamountunit = 0;
                     _dynamicsClient.Applications.Create(adoxioTiedHouseExemption);
                 }
 
