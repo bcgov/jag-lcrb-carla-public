@@ -965,8 +965,6 @@
                 <textarea readonly style="width: 800px;" class="form-control"
                           formControlName="termConditionOriginalText"></textarea>
               </app-field>
-
-
               <app-field label="Describe reason for change" errorMessage="Please enter the reason for the change">
                 <textarea style="width: 800px;" class="form-control" formControlName="description2"></textarea>
               </app-field>
@@ -1231,7 +1229,8 @@
                     <div class="padded-section" *ngIf="formField.controltype == 'TextAreaControl'">
                       <app-field [label]="formField.name" [required]="formField.required || formField.datafieldname == 'otherBusinessesDetails'" [errorMessage]="'This field is required.'" [isFullWidth]="true"
                                  [valid]="isValidOrNotTouched(formField.datafieldname)" [showChevrons]="false">
-                        <textarea rows="8" style="width: 100%;" maxlength="5000" [formControlName]="formField.datafieldname"
+                        <textarea [readonly]="(application?.applicationType?.name === 'Temporary Delicensing'||application?.applicationType?.name === 'Temporary Patron Participation Entertainment Endorsement')&&(isOpenedByLGForApproval || lGHasApproved())"
+                                  rows="8" style="width: 100%;" maxlength="5000" [formControlName]="formField.datafieldname"
                                   [id]="formField.datafieldname"></textarea>
                       </app-field>
                     </div>
@@ -1297,7 +1296,7 @@
                        errorMessage="Please enter the start date">
               <input type="text" style="background-color: #fff; width: 200px; margin-left: 15px;"
                      formControlName="tempSuspensionOrPatronParticipationStart" id="tempSuspensionOrPatronParticipationStart" placeholder="yyyy-mm-dd"
-                     readonly class="form-control" [matDatepicker]="picker1" (focus)="picker1.open()" (click)="picker1.open()">
+                     [disabled]="isOpenedByLGForApproval || lGHasApproved()"  class="form-control" [matDatepicker]="picker1" (focus)="picker1.open()" (click)="picker1.open()">
             </app-field>
             <mat-datepicker #picker1></mat-datepicker>
 
@@ -1305,7 +1304,7 @@
                        errorMessage="Please enter the end date">
               <input type="text" style="background-color: #fff; width: 200px; margin-left: 15px;"
                      formControlName="tempSuspensionOrPatronParticipationEnd" id="tempSuspensionOrPatronParticipationEnd" placeholder="yyyy-mm-dd"
-                     readonly class="form-control" [matDatepicker]="picker2" (focus)="picker2.open()" (click)="picker2.open()">
+                     [disabled]="isOpenedByLGForApproval || lGHasApproved()" class="form-control" [matDatepicker]="picker2" (focus)="picker2.open()" (click)="picker2.open()">
             </app-field>
             <mat-datepicker #picker2></mat-datepicker>
 
