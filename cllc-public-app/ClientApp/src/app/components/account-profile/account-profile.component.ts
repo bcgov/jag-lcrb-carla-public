@@ -23,6 +23,7 @@ import { faAddressCard, faChevronRight, faEnvelope, faExclamationTriangle, faPho
 import { UserDataService } from "@services/user-data.service";
 import { endOfToday } from "date-fns";
 import { ApplicationDataService } from "@services/application-data.service";
+import { ApplicationTypeNames } from "../../models/application-type.model";
 
 // See the Moment.js docs for the meaning of these formats:
 // https://momentjs.com/docs/#/displaying/format/
@@ -387,6 +388,11 @@ export class AccountProfileComponent extends FormBase implements OnInit {
         if (this.useInStepperMode) {
           this.saveComplete.emit(true);
         } else if (this.applicationId) {
+          if (this.application?.applicationType?.name === ApplicationTypeNames.TiedHouseExemptionApplication) {
+            const route: any[] = [`/tied-house-exemption/${this.applicationId}`];
+            this.router.navigate(route);
+          }
+
           if (this.renewalType) {
             const route: any[] = [`/renew-licence/${this.renewalType}/${this.applicationId}`];
             if (this.applicationMode) {
