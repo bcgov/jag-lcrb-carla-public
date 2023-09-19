@@ -123,6 +123,8 @@ export class ApplicationTiedHouseExemptionComponent extends FormBase implements 
                 this.form.get("licenseeContact.name").setValue(data.applicant.name);
                 this.form.get("licenseeContact.phone").setValue(data.applicant.contactPhone);
                 this.form.get("licenseeContact.email").setValue(data.applicant.contactEmail);
+                this.form.get("authorizedToSubmit").setValue(false);
+                this.form.get("signatureAgreement").setValue(false);
               });
           });
       }
@@ -197,7 +199,8 @@ export class ApplicationTiedHouseExemptionComponent extends FormBase implements 
       this.application.parentApplicationId = this.applicationId;
       const applicationType = this.applicationType;
       const willHaveTiedHouseExemption = true;
-
+      this.application.manufacturerProductionAmountForPrevYear = this.form.get("manufacturerProductionAmountforPrevYear").value;
+      this.application.manufacturerProductionAmountUnit = this.form.get("manufacturerProductionAmountUnit").value;
       const assignedLicenceId = this.form.get("assignedLicence.id").value;
       this.busy = forkJoin(
 

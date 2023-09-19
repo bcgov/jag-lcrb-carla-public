@@ -1329,7 +1329,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.validationMessages.push('At least one floor plan document is required.');
     }
 
-    if (this.application.applicationType.showPropertyDetails && !this.form.get('establishmentName').value) {
+    if (this.application.applicationType.showPropertyDetails && !this.form.get('establishmentName').value && this.application?.applicationType?.name != ApplicationTypeNames.TiedHouseExemptionApplication) {
       valid = false;
       this.validationMessages.push('Establishment name is required.');
     }
