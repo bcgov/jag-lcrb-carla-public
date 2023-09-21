@@ -1326,6 +1326,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             return new JsonResult(tiedHouse.ToViewModel());
         }
+        [HttpGet]
+        [AllowAnonymous]
+        public string ConvertFilePDF1()
+        {
 
+            return "new JsonResult(base64PDF)";
+        }
     }
 }
