@@ -1326,5 +1326,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             return new JsonResult(tiedHouse.ToViewModel());
         }
+
     }
 }
