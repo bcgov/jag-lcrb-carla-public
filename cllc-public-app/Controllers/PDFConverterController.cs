@@ -1,15 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.IO;
-using System.Threading.Tasks;
-using Aspose.Words;
-using Gov.Lclb.Cllb.Interfaces;
+﻿using Gov.Lclb.Cllb.Interfaces;
+using Gov.Lclb.Cllb.Public.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Spire.Doc;
+using System;
+using System.IO;
+using System.Reflection;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
-using Microsoft.AspNetCore.Authorization;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -48,20 +49,45 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [AllowAnonymous]
         public IActionResult ConvertFilePDF([FromBody] string base64File)
         {
-            var base64PDF=string.Empty;
-            var originalFileBytes=Convert.FromBase64String(base64File);
-            using (var originalStream=new MemoryStream(originalFileBytes))
+            _logger.LogDebug(LoggingEvents.HttpPost, "Begin method " + GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
+
+            var guid = Guid.NewGuid();
+            var folderName ="ConvertFiles";
+            var docFilName= $@"{folderName}\{guid}.docx";
+            var pdfFilName= $@"{folderName}\{guid}-pdf.pdf";
+            try
             {
-                var doc = new Document(originalStream);
-                using (var pdfStream = new MemoryStream())
-                {
-                    doc.Save(pdfStream,SaveFormat.Pdf);
-                    var pdfBytes=pdfStream.ToArray();
-                    base64PDF=Convert.ToBase64String(pdfBytes);
-                }
+
+                if (!Directory.Exists(folderName))
+                    Directory.CreateDirectory(folderName);
+
+                byte[] newBytes = Convert.FromBase64String(base64File);
+                System.IO.File.WriteAllBytes(docFilName, newBytes);
+                Spire.Doc.Document document = new Spire.Doc.Document();
+                document.LoadFromFile(docFilName);
+                document.SaveToFile(pdfFilName, FileFormat.PDF);
+                var pdfBytes = System.IO.File.ReadAllBytes(pdfFilName);
+                DeleteFile(docFilName);
+                DeleteFile(pdfFilName);
+                return new JsonResult(Convert.ToBase64String(pdfBytes));
             }
-            return new JsonResult(base64PDF);
+            catch (Exception ex)
+            {
+                DeleteFile(docFilName);
+                DeleteFile(pdfFilName);
+                _logger.LogError(ex, $"Error while converting word file from PDF, Guid : {guid}");
+
+                throw;
+            }
         }
-       
+
+        private  void DeleteFile(string fileName)
+        {
+            if (System.IO.File.Exists(fileName))
+            {
+                System.IO.File.Delete(fileName);
+            }
+        }
+
     }
-}
+    }
