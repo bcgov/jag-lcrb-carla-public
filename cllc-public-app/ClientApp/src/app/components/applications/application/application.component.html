@@ -1291,23 +1291,23 @@
             </div>
           </div>
           <div class="content-bottom">
-            <div *ngIf="application?.applicationType?.name === 'Temporary Delicensing'||application?.applicationType?.name === 'Temporary Patron Participation Entertainment Endorsement'"></div>
-            <app-field label="Start date" [required]="true"
-                       errorMessage="Please enter the start date">
-              <input type="text" style="background-color: #fff; width: 200px; margin-left: 15px;"
-                     formControlName="tempSuspensionOrPatronParticipationStart" id="tempSuspensionOrPatronParticipationStart" placeholder="yyyy-mm-dd"
-                     [disabled]="isOpenedByLGForApproval || lGHasApproved()"  class="form-control" [matDatepicker]="picker1" (focus)="picker1.open()" (click)="picker1.open()">
-            </app-field>
-            <mat-datepicker #picker1></mat-datepicker>
+            <div *ngIf="application?.applicationType?.name === 'Temporary Delicensing'||application?.applicationType?.name === 'Temporary Patron Participation Entertainment Endorsement'">
+              <app-field label="Start date" [required]="true"
+                         errorMessage="Please enter the start date">
+                <input type="text" style="background-color: #fff; width: 200px; margin-left: 15px;"
+                       formControlName="tempSuspensionOrPatronParticipationStart" id="tempSuspensionOrPatronParticipationStart" placeholder="yyyy-mm-dd"
+                       [disabled]="isOpenedByLGForApproval || lGHasApproved()" class="form-control" [matDatepicker]="picker1" (focus)="picker1.open()" (click)="picker1.open()">
+              </app-field>
+              <mat-datepicker #picker1></mat-datepicker>
 
-            <app-field label="End date" [required]="true"
-                       errorMessage="Please enter the end date">
-              <input type="text" style="background-color: #fff; width: 200px; margin-left: 15px;"
-                     formControlName="tempSuspensionOrPatronParticipationEnd" id="tempSuspensionOrPatronParticipationEnd" placeholder="yyyy-mm-dd"
-                     [disabled]="isOpenedByLGForApproval || lGHasApproved()" class="form-control" [matDatepicker]="picker2" (focus)="picker2.open()" (click)="picker2.open()">
-            </app-field>
-            <mat-datepicker #picker2></mat-datepicker>
-
+              <app-field label="End date" [required]="true"
+                         errorMessage="Please enter the end date">
+                <input type="text" style="background-color: #fff; width: 200px; margin-left: 15px;"
+                       formControlName="tempSuspensionOrPatronParticipationEnd" id="tempSuspensionOrPatronParticipationEnd" placeholder="yyyy-mm-dd"
+                       [disabled]="isOpenedByLGForApproval || lGHasApproved()" class="form-control" [matDatepicker]="picker2" (focus)="picker2.open()" (click)="picker2.open()">
+              </app-field>
+              <mat-datepicker #picker2></mat-datepicker>
+            </div>
           </div>
 
         </section>

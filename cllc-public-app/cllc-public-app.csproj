@@ -44,6 +44,7 @@
     <PackageReference Include="Serilog.Exceptions" Version="6.1.0" />
     <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
     <PackageReference Include="Serilog.Sinks.Splunk" Version="3.6.0" />
+    <PackageReference Include="Spire.Doc" Version="11.9.19" />
     <PackageReference Include="Winista.MimeDetect" Version="1.0.1" />
   </ItemGroup>
 
