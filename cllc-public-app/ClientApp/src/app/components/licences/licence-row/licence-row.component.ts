@@ -281,6 +281,9 @@ export class LicenceRowComponent extends FormBase implements OnInit {
   }
 
   actionVisible(licence: License, actionId: string) {
+    if (actionId == "66165113-c85e-eb11-b823-00505683fbf4") {
+      return true;
+    }
     return !this.hasEndorsement(licence, actionId);
   }
 
