@@ -635,7 +635,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
 
     if (this.application.applicationType.showDeclarations) {
-      this.form.get('authorizedToSubmit').setValidators([this.customRequiredCheckboxValidator()]);
+      if (this.application?.applicationType?.name != ApplicationTypeNames.TemporaryExtensionOfLicensedAreaLP) {
+        this.form.get('authorizedToSubmit').setValidators([this.customRequiredCheckboxValidator()]);
+      } 
       this.form.get('signatureAgreement').setValidators([this.customRequiredCheckboxValidator()]);
     }
 
@@ -668,7 +670,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     if (!this.application.applicationType.outsideAreas) {
       this.form.get('outsideAreas').disable();
     }
-    if (!this.application.applicationType.capacityArea) {
+    if (!this.application.applicationType.capacityArea || this.application?.applicationType?.name === ApplicationTypeNames.TemporaryExtensionOfLicensedAreaLP) {
       this.form.get('capacityArea.capacity').disable();
     }
 
@@ -1460,6 +1462,12 @@ export class ApplicationComponent extends FormBase implements OnInit {
       if (this.form.get('tempSuspensionOrPatronParticipationEnd').value < this.form.get('tempSuspensionOrPatronParticipationStart').value) {
         valid = false;
         this.validationMessages.push('Start date should be before the end date.');
+      }
+    }
+    if (this.application?.applicationType?.name != ApplicationTypeNames.TemporaryExtensionOfLicensedAreaLP) {
+      if (!this.form.get('authorizedToSubmit').value) {
+        valid = false;
+        this.validationMessages.push('Please affirm that you are authorized to submit the application.');
       }
     }
     return valid && (this.form.valid || this.form.disabled);
