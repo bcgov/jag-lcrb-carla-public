@@ -30,7 +30,7 @@ import { DynamicsForm } from '../../../models/dynamics-form.model';
 import { PoliceJurisdictionDataService } from '@services/police-jurisdiction-data.service';
 import { LocalGovernmentDataService } from '@services/local-government-data.service';
 import { ProofOfZoningComponent } from './tabs/proof-of-zoning/proof-of-zoning.component';
-import { AreaCategory } from '@models/service-area.model';
+import { AreaCategory, ServiceArea } from '@models/service-area.model';
 import { faExclamationCircle, faTrashAlt, faUniversity } from '@fortawesome/free-solid-svg-icons';
 import { faCreditCard, faIdCard, faSave } from '@fortawesome/free-regular-svg-icons';
 import { RelatedLicence } from "@models/related-licence";
@@ -924,8 +924,20 @@ export class ApplicationComponent extends FormBase implements OnInit {
     const serviceAreas = ('areas' in this.form.get('serviceAreas').value) ? this.form.get('serviceAreas').value['areas'] : this.form.get('serviceAreas').value;
     const outsideAreas = ('areas' in this.form.get('outsideAreas').value) ? this.form.get('outsideAreas').value['areas'] : this.form.get('outsideAreas').value;
     const capacityArea = [this.form.get('capacityArea').value];
-
-    
+    if (capacityArea) {
+      if (this.application.applicationType.name == ApplicationTypeNames.TemporaryExtensionOfLicensedAreaLP) {
+        capacityArea.forEach((area: ServiceArea) => {
+          area.isTemporaryExtensionArea = true;
+        })   
+      } 
+    }
+    if (serviceAreas) {
+      if (this.application.applicationType.name == ApplicationTypeNames.TemporaryExtensionOfLicensedAreaLP) {
+        serviceAreas.forEach((area: ServiceArea) => {
+          area.isTemporaryExtensionArea = true;
+        })
+      }
+    }
     return {
       ...this.form.value,
       description2,
