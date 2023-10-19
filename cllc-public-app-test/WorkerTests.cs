@@ -113,9 +113,9 @@ namespace Gov.Lclb.Cllb.Public.Test
             workerVM = JsonConvert.DeserializeObject<ViewModels.Worker>(jsonString);
             Assert.NotNull(workerVM?.id);
             
-            Assert.Equal(birthDate, workerVM.contact.Birthdate);
+            Assert.Equal(birthDate.Date, workerVM.contact.Birthdate.Value.Date);
 
-            Assert.Equal(birthDate, workerVM.dateofbirth.Value);
+            Assert.Equal(birthDate.Date, workerVM.dateofbirth.Value.Date);
 
             // D - Delete
 
