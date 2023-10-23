@@ -131,7 +131,10 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         [EnumMember(Value = "Ticketed")]
         TemporaryOffSiteSale = 845280002,
     }
-
+    public enum LicenceType
+    {
+        Manufacturer
+    }
     public class LicenceEvent
     {
         // string form of the guid.
