@@ -1513,12 +1513,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // put together the parameters that we will pump into the template
                 Dictionary<string, string> parameters = new Dictionary<string, string>();
 
+            var licenceType = adoxioLicense.AdoxioLicenceType.AdoxioName;
+            if (licenceType == LicenceType.Manufacturer.ToString()&& !string.IsNullOrEmpty(licenceVM.LicenseSubCategory))
+            {
+                licenceType = licenceVM.LicenseSubCategory;
+            }
                 // standard values
                 parameters.Add("licenceNumber", adoxioLicense.AdoxioLicencenumber);
                 parameters.Add("licencee", adoxioLicense.AdoxioLicencee?.Name);
                 parameters.Add("thirdPartyText", thirdPartyText);
                 parameters.Add("serviceAreaText", serviceAreaText);
-                parameters.Add("licenceType", adoxioLicense.AdoxioLicenceType.AdoxioName);
+                parameters.Add("licenceType", licenceType);
                 parameters.Add("effectiveDate", effectiveDateParam);
                 parameters.Add("expiryDate", expiraryDateParam);
                 parameters.Add("restrictionsText", termsAndConditions);
