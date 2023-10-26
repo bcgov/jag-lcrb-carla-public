@@ -2010,8 +2010,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     AdoxioIsoutdoor = area.IsOutdoor,
                     AdoxioIspatio = area.IsPatio,
                     AdoxioDateadded = DateTimeOffset.Now,
-                    AdoxioDateupdated = DateTimeOffset.Now,
-                    AdoxioTemporaryextensionarea= area.IsTemporaryExtensionArea,
+                    AdoxioDateupdated = DateTimeOffset.Now
                 };
                 _dynamicsClient.Serviceareas.Create(serviceArea);
             }

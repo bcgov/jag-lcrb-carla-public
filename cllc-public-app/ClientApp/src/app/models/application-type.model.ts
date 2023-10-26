@@ -113,5 +113,4 @@ export enum ApplicationTypeNames {
   OutstandingPriorBalanceInvoice = "Outstanding Prior Balance Invoice - LIQ",
   TiedHouseExemptionRemoval = "Tied House Exemption Removal",
   TiedHouseExemptionApplication = "Tied House Exemption Application",
-  TemporaryExtensionOfLicensedAreaLP = "Temporary Extension of Licensed Area (LP)",
 }
