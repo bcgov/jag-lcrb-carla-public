@@ -7,7 +7,6 @@ on:
       - "/cllc-interfaces/Dynamics-Autorest/**"
       - "/orgbook-service/**"
       - ".github/workflows/cd-orgbook-service.yml"
-  workflow_dispatch:
 
 jobs:
   build:

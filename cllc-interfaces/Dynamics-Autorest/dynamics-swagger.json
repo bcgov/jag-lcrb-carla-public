@@ -9130,246 +9130,6 @@
         }
       }
     },
-    "/adoxio_courthouselocations": {
-      "get": {
-        "tags": [
-          "courthouselocations"
-        ],
-        "summary": "Get entities from adoxio_courthouselocations",
-        "operationId": "courthouselocations_Get",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "$top",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "$skip",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "$search",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$filter",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$count",
-            "type": "boolean"
-          },
-          {
-            "in": "query",
-            "name": "$orderby",
-            "description": "Order items by property values",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "csv"
-          },
-          {
-            "in": "query",
-            "name": "$select",
-            "description": "Select properties to be returned",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "csv"
-          },
-          {
-            "in": "query",
-            "name": "$expand",
-            "description": "Expand related entities",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "csv"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Retrieved entities",
-            "schema": {
-              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_courthouselocationCollection"
-            }
-          },
-          "default": {
-            "description": "OData Error"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "adoxio_courthouselocations.adoxio_courthouselocation"
-        ],
-        "summary": "Add new entity to adoxio_courthouselocations",
-        "operationId": "courthouselocations_Create",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "header",
-            "name": "Prefer",
-            "description": "Required in order for the service to return a JSON representation of the object.",
-            "type": "string",
-            "default": "return=representation"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "New entity",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_courthouselocation"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created entity",
-            "schema": {
-              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_courthouselocation"
-            }
-          },
-          "default": {
-            "description": "OData Error"
-          }
-        }
-      }
-    },
-    "/adoxio_courthouselocations({adoxio_courthouselocationid})": {
-      "get": {
-        "tags": [
-          "courthouselocations"
-        ],
-        "summary": "Get entity from adoxio_courthouselocations by key",
-        "operationId": "courthouselocations_GetByKey",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "adoxio_courthouselocationid",
-            "description": "key: adoxio_courthouselocationid of adoxio_courthouselocation",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$select",
-            "description": "Select properties to be returned",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "csv"
-          },
-          {
-            "in": "query",
-            "name": "$expand",
-            "description": "Expand related entities",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "csv"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Retrieved entity",
-            "schema": {
-              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_courthouselocation"
-            }
-          },
-          "default": {
-            "description": "OData Error"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "adoxio_courthouselocations.adoxio_courthouselocation"
-        ],
-        "summary": "Update entity in adoxio_courthouselocations",
-        "operationId": "courthouselocations_Update",
-        "consumes": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "adoxio_courthouselocationid",
-            "description": "key: adoxio_courthouselocationid of adoxio_courthouselocation",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "New property values",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_courthouselocation"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Success"
-          },
-          "default": {
-            "description": "OData Error"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "adoxio_courthouselocations.adoxio_courthouselocation"
-        ],
-        "summary": "Delete entity from adoxio_courthouselocations",
-        "operationId": "courthouselocations_Delete",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "adoxio_courthouselocationid",
-            "description": "key: adoxio_courthouselocationid of adoxio_courthouselocation",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "header",
-            "name": "If-Match",
-            "description": "ETag",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Success"
-          },
-          "default": {
-            "description": "OData Error"
-          }
-        }
-      }
-    },
     "/adoxio_customautonumberdefinitions": {
       "get": {
         "tags": [
@@ -12950,246 +12710,6 @@
             "in": "path",
             "name": "adoxio_exhibitid",
             "description": "key: adoxio_exhibitid of adoxio_exhibit",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "header",
-            "name": "If-Match",
-            "description": "ETag",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Success"
-          },
-          "default": {
-            "description": "OData Error"
-          }
-        }
-      }
-    },
-    "/adoxio_externalcontact_adoxio_externalprofileset": {
-      "get": {
-        "tags": [
-          "externalcontact_externalprofileset"
-        ],
-        "summary": "Get entities from adoxio_externalcontact_adoxio_externalprofileset",
-        "operationId": "externalcontactadoxioexternalprofileset_Get",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "$top",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "$skip",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "$search",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$filter",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$count",
-            "type": "boolean"
-          },
-          {
-            "in": "query",
-            "name": "$orderby",
-            "description": "Order items by property values",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "csv"
-          },
-          {
-            "in": "query",
-            "name": "$select",
-            "description": "Select properties to be returned",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "csv"
-          },
-          {
-            "in": "query",
-            "name": "$expand",
-            "description": "Expand related entities",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "csv"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Retrieved entities",
-            "schema": {
-              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_externalcontact_adoxio_externalprofileCollection"
-            }
-          },
-          "default": {
-            "description": "OData Error"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "adoxio_externalcontact_adoxio_externalprofileset.adoxio_externalcontact_adoxio_externalprofile"
-        ],
-        "summary": "Add new entity to adoxio_externalcontact_adoxio_externalprofileset",
-        "operationId": "externalcontactadoxioexternalprofileset_Create",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "header",
-            "name": "Prefer",
-            "description": "Required in order for the service to return a JSON representation of the object.",
-            "type": "string",
-            "default": "return=representation"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "New entity",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_externalcontact_adoxio_externalprofile"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created entity",
-            "schema": {
-              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_externalcontact_adoxio_externalprofile"
-            }
-          },
-          "default": {
-            "description": "OData Error"
-          }
-        }
-      }
-    },
-    "/adoxio_externalcontact_adoxio_externalprofileset({adoxio_externalcontact_adoxio_externalprofileid})": {
-      "get": {
-        "tags": [
-          "externalcontact_externalprofileset"
-        ],
-        "summary": "Get entity from adoxio_externalcontact_adoxio_externalprofileset by key",
-        "operationId": "externalcontactadoxioexternalprofileset_GetByKey",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "adoxio_externalcontact_adoxio_externalprofileid",
-            "description": "key: adoxio_externalcontact_adoxio_externalprofileid of adoxio_externalcontact_adoxio_externalprofile",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$select",
-            "description": "Select properties to be returned",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "csv"
-          },
-          {
-            "in": "query",
-            "name": "$expand",
-            "description": "Expand related entities",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "csv"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Retrieved entity",
-            "schema": {
-              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_externalcontact_adoxio_externalprofile"
-            }
-          },
-          "default": {
-            "description": "OData Error"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "adoxio_externalcontact_adoxio_externalprofileset.adoxio_externalcontact_adoxio_externalprofile"
-        ],
-        "summary": "Update entity in adoxio_externalcontact_adoxio_externalprofileset",
-        "operationId": "externalcontactadoxioexternalprofileset_Update",
-        "consumes": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "adoxio_externalcontact_adoxio_externalprofileid",
-            "description": "key: adoxio_externalcontact_adoxio_externalprofileid of adoxio_externalcontact_adoxio_externalprofile",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "New property values",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_externalcontact_adoxio_externalprofile"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Success"
-          },
-          "default": {
-            "description": "OData Error"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "adoxio_externalcontact_adoxio_externalprofileset.adoxio_externalcontact_adoxio_externalprofile"
-        ],
-        "summary": "Delete entity from adoxio_externalcontact_adoxio_externalprofileset",
-        "operationId": "externalcontactadoxioexternalprofileset_Delete",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "adoxio_externalcontact_adoxio_externalprofileid",
-            "description": "key: adoxio_externalcontact_adoxio_externalprofileid of adoxio_externalcontact_adoxio_externalprofile",
             "required": true,
             "type": "string"
           },
@@ -20630,246 +20150,6 @@
             "in": "path",
             "name": "adoxio_licenseechangelogid",
             "description": "key: adoxio_licenseechangelogid of adoxio_licenseechangelog",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "header",
-            "name": "If-Match",
-            "description": "ETag",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Success"
-          },
-          "default": {
-            "description": "OData Error"
-          }
-        }
-      }
-    },
-    "/adoxio_list_adoxio_externalcontactset": {
-      "get": {
-        "tags": [
-          "list_externalcontactset"
-        ],
-        "summary": "Get entities from adoxio_list_adoxio_externalcontactset",
-        "operationId": "listadoxioexternalcontactset_Get",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "$top",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "$skip",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "$search",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$filter",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$count",
-            "type": "boolean"
-          },
-          {
-            "in": "query",
-            "name": "$orderby",
-            "description": "Order items by property values",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "csv"
-          },
-          {
-            "in": "query",
-            "name": "$select",
-            "description": "Select properties to be returned",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "csv"
-          },
-          {
-            "in": "query",
-            "name": "$expand",
-            "description": "Expand related entities",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "csv"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Retrieved entities",
-            "schema": {
-              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_list_adoxio_externalcontactCollection"
-            }
-          },
-          "default": {
-            "description": "OData Error"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "adoxio_list_adoxio_externalcontactset.adoxio_list_adoxio_externalcontact"
-        ],
-        "summary": "Add new entity to adoxio_list_adoxio_externalcontactset",
-        "operationId": "listadoxioexternalcontactset_Create",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "header",
-            "name": "Prefer",
-            "description": "Required in order for the service to return a JSON representation of the object.",
-            "type": "string",
-            "default": "return=representation"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "New entity",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_list_adoxio_externalcontact"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created entity",
-            "schema": {
-              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_list_adoxio_externalcontact"
-            }
-          },
-          "default": {
-            "description": "OData Error"
-          }
-        }
-      }
-    },
-    "/adoxio_list_adoxio_externalcontactset({adoxio_list_adoxio_externalcontactid})": {
-      "get": {
-        "tags": [
-          "list_externalcontactset"
-        ],
-        "summary": "Get entity from adoxio_list_adoxio_externalcontactset by key",
-        "operationId": "listadoxioexternalcontactset_GetByKey",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "adoxio_list_adoxio_externalcontactid",
-            "description": "key: adoxio_list_adoxio_externalcontactid of adoxio_list_adoxio_externalcontact",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$select",
-            "description": "Select properties to be returned",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "csv"
-          },
-          {
-            "in": "query",
-            "name": "$expand",
-            "description": "Expand related entities",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "csv"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Retrieved entity",
-            "schema": {
-              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_list_adoxio_externalcontact"
-            }
-          },
-          "default": {
-            "description": "OData Error"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "adoxio_list_adoxio_externalcontactset.adoxio_list_adoxio_externalcontact"
-        ],
-        "summary": "Update entity in adoxio_list_adoxio_externalcontactset",
-        "operationId": "listadoxioexternalcontactset_Update",
-        "consumes": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "adoxio_list_adoxio_externalcontactid",
-            "description": "key: adoxio_list_adoxio_externalcontactid of adoxio_list_adoxio_externalcontact",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "New property values",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_list_adoxio_externalcontact"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Success"
-          },
-          "default": {
-            "description": "OData Error"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "adoxio_list_adoxio_externalcontactset.adoxio_list_adoxio_externalcontact"
-        ],
-        "summary": "Delete entity from adoxio_list_adoxio_externalcontactset",
-        "operationId": "listadoxioexternalcontactset_Delete",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "adoxio_list_adoxio_externalcontactid",
-            "description": "key: adoxio_list_adoxio_externalcontactid of adoxio_list_adoxio_externalcontact",
             "required": true,
             "type": "string"
           },
@@ -30250,246 +29530,6 @@
         }
       }
     },
-    "/adoxio_violationtickets": {
-      "get": {
-        "tags": [
-          "violationtickets"
-        ],
-        "summary": "Get entities from adoxio_violationtickets",
-        "operationId": "violationtickets_Get",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "$top",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "$skip",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "$search",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$filter",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$count",
-            "type": "boolean"
-          },
-          {
-            "in": "query",
-            "name": "$orderby",
-            "description": "Order items by property values",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "csv"
-          },
-          {
-            "in": "query",
-            "name": "$select",
-            "description": "Select properties to be returned",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "csv"
-          },
-          {
-            "in": "query",
-            "name": "$expand",
-            "description": "Expand related entities",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "csv"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Retrieved entities",
-            "schema": {
-              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_violationticketCollection"
-            }
-          },
-          "default": {
-            "description": "OData Error"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "adoxio_violationtickets.adoxio_violationticket"
-        ],
-        "summary": "Add new entity to adoxio_violationtickets",
-        "operationId": "violationtickets_Create",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "header",
-            "name": "Prefer",
-            "description": "Required in order for the service to return a JSON representation of the object.",
-            "type": "string",
-            "default": "return=representation"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "New entity",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_violationticket"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created entity",
-            "schema": {
-              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_violationticket"
-            }
-          },
-          "default": {
-            "description": "OData Error"
-          }
-        }
-      }
-    },
-    "/adoxio_violationtickets({adoxio_violationticketid})": {
-      "get": {
-        "tags": [
-          "violationtickets"
-        ],
-        "summary": "Get entity from adoxio_violationtickets by key",
-        "operationId": "violationtickets_GetByKey",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "adoxio_violationticketid",
-            "description": "key: adoxio_violationticketid of adoxio_violationticket",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$select",
-            "description": "Select properties to be returned",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "csv"
-          },
-          {
-            "in": "query",
-            "name": "$expand",
-            "description": "Expand related entities",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "csv"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Retrieved entity",
-            "schema": {
-              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_violationticket"
-            }
-          },
-          "default": {
-            "description": "OData Error"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "adoxio_violationtickets.adoxio_violationticket"
-        ],
-        "summary": "Update entity in adoxio_violationtickets",
-        "operationId": "violationtickets_Update",
-        "consumes": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "adoxio_violationticketid",
-            "description": "key: adoxio_violationticketid of adoxio_violationticket",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "New property values",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_violationticket"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Success"
-          },
-          "default": {
-            "description": "OData Error"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "adoxio_violationtickets.adoxio_violationticket"
-        ],
-        "summary": "Delete entity from adoxio_violationtickets",
-        "operationId": "violationtickets_Delete",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "adoxio_violationticketid",
-            "description": "key: adoxio_violationticketid of adoxio_violationticket",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "header",
-            "name": "If-Match",
-            "description": "ETag",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Success"
-          },
-          "default": {
-            "description": "OData Error"
-          }
-        }
-      }
-    },
     "/adoxio_witnesses": {
       "get": {
         "tags": [
@@ -34634,9 +33674,6 @@
         },
         "regardingobjectid_adoxio_externalcontact_abs_scheduledprocessexecution": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_externalcontact"
-        },
-        "regardingobjectid_adoxio_violationticket_abs_scheduledprocessexecution": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_violationticket"
         }
       }
     },
@@ -36993,9 +36030,6 @@
         "regardingobjectid_adoxio_externalcontact": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_externalcontact"
         },
-        "regardingobjectid_adoxio_violationticket": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_violationticket"
-        },
         "regardingobjectid_account": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.account"
         },
@@ -39286,6 +38320,10 @@
         "adoxio_m01": {
           "type": "boolean"
         },
+        "adoxio_tempsuspensionorpatronparticipationend": {
+          "format": "date-time",
+          "type": "string"
+        },
         "adoxio_manufacturerproductionamountunit": {
           "format": "int32",
           "type": "integer"
@@ -39570,10 +38608,6 @@
           "format": "date-time",
           "type": "string"
         },
-        "adoxio_tempsuspensionorpatronparticipationstart": {
-          "format": "date-time",
-          "type": "string"
-        },
         "adoxio_securityscreeningcompletenesstrigger": {
           "format": "int32",
           "type": "integer"
@@ -39679,6 +38713,10 @@
         },
         "adoxio_isoutdoorserviceareaenabled": {
           "type": "boolean"
+        },
+        "adoxio_tempsuspensionorpatronparticipationstart": {
+          "format": "date-time",
+          "type": "string"
         },
         "adoxio_m11": {
           "type": "boolean"
@@ -40374,9 +39412,6 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_isreadysurveillancenotice": {
-          "type": "boolean"
-        },
         "adoxio_liquorindustryconnectionsdetails": {
           "type": "string"
         },
@@ -40569,9 +39604,8 @@
         "_adoxio_relatedlicence_value": {
           "type": "string"
         },
-        "adoxio_tempsuspensionorpatronparticipationend": {
-          "format": "date-time",
-          "type": "string"
+        "adoxio_isreadysurveillancenotice": {
+          "type": "boolean"
         },
         "adoxio_mfgstepblending": {
           "type": "boolean"
@@ -47393,162 +46427,6 @@
         }
       }
     },
-    "Microsoft.Dynamics.CRM.adoxio_courthouselocation": {
-      "description": "Microsoft.Dynamics.CRM.adoxio_courthouselocation",
-      "type": "object",
-      "properties": {
-        "_owninguser_value": {
-          "type": "string"
-        },
-        "adoxio_name": {
-          "type": "string"
-        },
-        "timezoneruleversionnumber": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "versionnumber": {
-          "format": "int64",
-          "type": "string"
-        },
-        "statuscode": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_owningbusinessunit_value": {
-          "type": "string"
-        },
-        "modifiedon": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "importsequencenumber": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_courthouselocation_province": {
-          "type": "string"
-        },
-        "adoxio_courthouselocationid": {
-          "type": "string"
-        },
-        "_createdonbehalfby_value": {
-          "type": "string"
-        },
-        "adoxio_courthouselocation_postalcode": {
-          "type": "string"
-        },
-        "_ownerid_value": {
-          "type": "string"
-        },
-        "utcconversiontimezonecode": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_courthouselocation_street1": {
-          "type": "string"
-        },
-        "statecode": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_courthouselocation_city": {
-          "type": "string"
-        },
-        "_createdby_value": {
-          "type": "string"
-        },
-        "_modifiedby_value": {
-          "type": "string"
-        },
-        "_modifiedonbehalfby_value": {
-          "type": "string"
-        },
-        "createdon": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "_owningteam_value": {
-          "type": "string"
-        },
-        "overriddencreatedon": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "createdby": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
-        },
-        "createdonbehalfby": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
-        },
-        "modifiedby": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
-        },
-        "modifiedonbehalfby": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
-        },
-        "owninguser": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
-        },
-        "owningteam": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.team"
-        },
-        "ownerid": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.principal"
-        },
-        "owningbusinessunit": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.businessunit"
-        },
-        "adoxio_courthouselocation_SyncErrors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.syncerror"
-          }
-        },
-        "adoxio_courthouselocation_DuplicateMatchingRecord": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
-          }
-        },
-        "adoxio_courthouselocation_DuplicateBaseRecord": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
-          }
-        },
-        "adoxio_courthouselocation_AsyncOperations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.asyncoperation"
-          }
-        },
-        "adoxio_courthouselocation_MailboxTrackingFolders": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.mailboxtrackingfolder"
-          }
-        },
-        "adoxio_courthouselocation_ProcessSession": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.processsession"
-          }
-        },
-        "adoxio_courthouselocation_BulkDeleteFailures": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.bulkdeletefailure"
-          }
-        },
-        "adoxio_courthouselocation_PrincipalObjectAttributeAccesses": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.principalobjectattributeaccess"
-          }
-        }
-      }
-    },
     "Microsoft.Dynamics.CRM.adoxio_customautonumberdefinition": {
       "description": "Microsoft.Dynamics.CRM.adoxio_customautonumberdefinition",
       "type": "object",
@@ -51766,25 +50644,6 @@
         }
       }
     },
-    "Microsoft.Dynamics.CRM.adoxio_externalcontact_adoxio_externalprofile": {
-      "description": "Microsoft.Dynamics.CRM.adoxio_externalcontact_adoxio_externalprofile",
-      "type": "object",
-      "properties": {
-        "adoxio_externalcontact_adoxio_externalprofileid": {
-          "type": "string"
-        },
-        "adoxio_externalcontactid": {
-          "type": "string"
-        },
-        "adoxio_externalprofileid": {
-          "type": "string"
-        },
-        "versionnumber": {
-          "format": "int64",
-          "type": "string"
-        }
-      }
-    },
     "Microsoft.Dynamics.CRM.adoxio_externalcontact": {
       "description": "Microsoft.Dynamics.CRM.adoxio_externalcontact",
       "type": "object",
@@ -51814,7 +50673,7 @@
         "emailaddress": {
           "type": "string"
         },
-        "adoxio_addresscity": {
+        "_owningteam_value": {
           "type": "string"
         },
         "lastonholdtime": {
@@ -51848,7 +50707,7 @@
         "adoxio_firstname": {
           "type": "string"
         },
-        "adoxio_organization": {
+        "adoxio_addresscity": {
           "type": "string"
         },
         "processid": {
@@ -51874,8 +50733,7 @@
         "adoxio_primarycontact": {
           "type": "boolean"
         },
-        "versionnumber": {
-          "format": "int64",
+        "adoxio_listname": {
           "type": "string"
         },
         "statecode": {
@@ -51892,7 +50750,7 @@
           "format": "int32",
           "type": "integer"
         },
-        "_owningteam_value": {
+        "_adoxio_primarycontactid_value": {
           "type": "string"
         },
         "_slaid_value": {
@@ -51911,6 +50769,10 @@
         "statuscode": {
           "format": "int32",
           "type": "integer"
+        },
+        "versionnumber": {
+          "format": "int64",
+          "type": "string"
         },
         "modifiedon": {
           "format": "date-time",
@@ -52105,13 +50967,10 @@
         "stageid": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.processstage"
         },
-        "adoxio_list_adoxio_externalcontact": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.list"
-          }
+        "adoxio_PrimaryContactId": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_externalprofile"
         },
-        "adoxio_externalcontact_adoxio_externalprofile": {
+        "adoxio_externalcontact_externalprofile": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_externalprofile"
@@ -52133,7 +50992,7 @@
           "format": "int32",
           "type": "integer"
         },
-        "_modifiedby_value": {
+        "_owningbusinessunit_value": {
           "type": "string"
         },
         "modifiedon": {
@@ -52145,6 +51004,9 @@
           "type": "integer"
         },
         "_ownerid_value": {
+          "type": "string"
+        },
+        "_modifiedonbehalfby_value": {
           "type": "string"
         },
         "adoxio_name": {
@@ -52184,6 +51046,9 @@
           "format": "int32",
           "type": "integer"
         },
+        "_adoxio_primarycontact_value": {
+          "type": "string"
+        },
         "adoxio_phone": {
           "type": "string"
         },
@@ -52195,7 +51060,7 @@
           "format": "date-time",
           "type": "string"
         },
-        "_modifiedonbehalfby_value": {
+        "_modifiedby_value": {
           "type": "string"
         },
         "_owningteam_value": {
@@ -52204,9 +51069,6 @@
         "statuscode": {
           "format": "int32",
           "type": "integer"
-        },
-        "_owningbusinessunit_value": {
-          "type": "string"
         },
         "statecode": {
           "format": "int32",
@@ -52421,11 +51283,14 @@
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.serviceappointment"
           }
         },
-        "adoxio_externalcontact_adoxio_externalprofile": {
+        "adoxio_externalprofile_externalcontact": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_externalcontact"
           }
+        },
+        "adoxio_PrimaryContact": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_externalcontact"
         }
       }
     },
@@ -58804,25 +57669,6 @@
         }
       }
     },
-    "Microsoft.Dynamics.CRM.adoxio_list_adoxio_externalcontact": {
-      "description": "Microsoft.Dynamics.CRM.adoxio_list_adoxio_externalcontact",
-      "type": "object",
-      "properties": {
-        "adoxio_externalcontactid": {
-          "type": "string"
-        },
-        "adoxio_list_adoxio_externalcontactid": {
-          "type": "string"
-        },
-        "listid": {
-          "type": "string"
-        },
-        "versionnumber": {
-          "format": "int64",
-          "type": "string"
-        }
-      }
-    },
     "Microsoft.Dynamics.CRM.adoxio_loan": {
       "description": "Microsoft.Dynamics.CRM.adoxio_loan",
       "type": "object",
@@ -62701,6 +61547,9 @@
           "format": "date-time",
           "type": "string"
         },
+        "adoxio_isoutdoor": {
+          "type": "boolean"
+        },
         "utcconversiontimezonecode": {
           "format": "int32",
           "type": "integer"
@@ -62767,9 +61616,6 @@
         "_owninguser_value": {
           "type": "string"
         },
-        "adoxio_isoutdoor": {
-          "type": "boolean"
-        },
         "adoxio_description": {
           "type": "string"
         },
@@ -62805,9 +61651,6 @@
         "createdon": {
           "format": "date-time",
           "type": "string"
-        },
-        "adoxio_temporaryextensionarea": {
-          "type": "boolean"
         },
         "adoxio_areanumber": {
           "format": "int32",
@@ -66736,281 +65579,6 @@
         }
       }
     },
-    "Microsoft.Dynamics.CRM.adoxio_violationticket": {
-      "description": "Microsoft.Dynamics.CRM.adoxio_violationticket",
-      "type": "object",
-      "properties": {
-        "_modifiedonbehalfby_value": {
-          "type": "string"
-        },
-        "utcconversiontimezonecode": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_violationtype": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "overriddencreatedon": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "_ownerid_value": {
-          "type": "string"
-        },
-        "importsequencenumber": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_owningbusinessunit_value": {
-          "type": "string"
-        },
-        "_owningteam_value": {
-          "type": "string"
-        },
-        "timezoneruleversionnumber": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "versionnumber": {
-          "format": "int64",
-          "type": "string"
-        },
-        "statecode": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_inspector": {
-          "type": "string"
-        },
-        "adoxio_violationticketstatuses": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_rm": {
-          "type": "string"
-        },
-        "adoxio_dateofoffence": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_vtcourthouselocation": {
-          "type": "string"
-        },
-        "adoxio_region": {
-          "type": "string"
-        },
-        "modifiedon": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_datevtsenttoicbc": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_fineamount": {
-          "type": "string"
-        },
-        "adoxio_violationticketid": {
-          "type": "string"
-        },
-        "createdon": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "_owninguser_value": {
-          "type": "string"
-        },
-        "adoxio_establishment": {
-          "type": "string"
-        },
-        "adoxio_dateofservice": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_individualticketed": {
-          "type": "string"
-        },
-        "_createdby_value": {
-          "type": "string"
-        },
-        "adoxio_provenunproven": {
-          "type": "boolean"
-        },
-        "adoxio_postalcode": {
-          "type": "string"
-        },
-        "statuscode": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_modifiedby_value": {
-          "type": "string"
-        },
-        "adoxio_area": {
-          "type": "string"
-        },
-        "_createdonbehalfby_value": {
-          "type": "string"
-        },
-        "createdby": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
-        },
-        "createdonbehalfby": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
-        },
-        "modifiedby": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
-        },
-        "modifiedonbehalfby": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
-        },
-        "owninguser": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
-        },
-        "owningteam": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.team"
-        },
-        "ownerid": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.principal"
-        },
-        "owningbusinessunit": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.businessunit"
-        },
-        "adoxio_violationticket_ActivityPointers": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.activitypointer"
-          }
-        },
-        "adoxio_violationticket_abs_scheduledprocessexecutions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
-          }
-        },
-        "adoxio_violationticket_SyncErrors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.syncerror"
-          }
-        },
-        "adoxio_violationticket_DuplicateMatchingRecord": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
-          }
-        },
-        "adoxio_violationticket_DuplicateBaseRecord": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
-          }
-        },
-        "adoxio_violationticket_SharePointDocumentLocations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.sharepointdocumentlocation"
-          }
-        },
-        "adoxio_violationticket_AsyncOperations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.asyncoperation"
-          }
-        },
-        "adoxio_violationticket_MailboxTrackingFolders": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.mailboxtrackingfolder"
-          }
-        },
-        "adoxio_violationticket_ProcessSession": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.processsession"
-          }
-        },
-        "adoxio_violationticket_BulkDeleteFailures": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.bulkdeletefailure"
-          }
-        },
-        "adoxio_violationticket_PrincipalObjectAttributeAccesses": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.principalobjectattributeaccess"
-          }
-        },
-        "adoxio_violationticket_Appointments": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.appointment"
-          }
-        },
-        "adoxio_violationticket_Emails": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.email"
-          }
-        },
-        "adoxio_violationticket_Faxes": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.fax"
-          }
-        },
-        "adoxio_violationticket_Letters": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.letter"
-          }
-        },
-        "adoxio_violationticket_PhoneCalls": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.phonecall"
-          }
-        },
-        "adoxio_violationticket_Tasks": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.task"
-          }
-        },
-        "adoxio_violationticket_RecurringAppointmentMasters": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.recurringappointmentmaster"
-          }
-        },
-        "adoxio_violationticket_SocialActivities": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.socialactivity"
-          }
-        },
-        "adoxio_violationticket_QueueItems": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.queueitem"
-          }
-        },
-        "adoxio_violationticket_Annotations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.annotation"
-          }
-        },
-        "adoxio_violationticket_ServiceAppointments": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.serviceappointment"
-          }
-        }
-      }
-    },
     "Microsoft.Dynamics.CRM.adoxio_witness": {
       "description": "Microsoft.Dynamics.CRM.adoxio_witness",
       "type": "object",
@@ -68164,9 +66732,6 @@
         "objectid_adoxio_externalcontact": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_externalcontact"
         },
-        "objectid_adoxio_violationticket": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_violationticket"
-        },
         "objectid_account": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.account"
         },
@@ -69096,9 +67661,6 @@
         "regardingobjectid_adoxio_externalcontact_appointment": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_externalcontact"
         },
-        "regardingobjectid_adoxio_violationticket_appointment": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_violationticket"
-        },
         "Appointment_QueueItem": {
           "type": "array",
           "items": {
@@ -69992,12 +68554,6 @@
         },
         "regardingobjectid_adoxio_externalcontact": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_externalcontact"
-        },
-        "regardingobjectid_adoxio_violationticket": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_violationticket"
-        },
-        "regardingobjectid_adoxio_courthouselocation": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_courthouselocation"
         },
         "regardingobjectid_productpricelevel": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.productpricelevel"
@@ -72817,12 +71373,6 @@
         "regardingobjectid_adoxio_externalcontact": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_externalcontact"
         },
-        "regardingobjectid_adoxio_violationticket": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_violationticket"
-        },
-        "regardingobjectid_adoxio_courthouselocation": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_courthouselocation"
-        },
         "regardingobjectid_customeraddress": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.customeraddress"
         },
@@ -74751,18 +73301,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_externalcontact"
-          }
-        },
-        "business_unit_adoxio_violationticket": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_violationticket"
-          }
-        },
-        "business_unit_adoxio_courthouselocation": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_courthouselocation"
           }
         },
         "BusinessUnit_SyncErrors": {
@@ -83019,18 +81557,6 @@
         "baserecordid_adoxio_externalcontact": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_externalcontact"
         },
-        "duplicaterecordid_adoxio_violationticket": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_violationticket"
-        },
-        "baserecordid_adoxio_violationticket": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_violationticket"
-        },
-        "duplicaterecordid_adoxio_courthouselocation": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_courthouselocation"
-        },
-        "baserecordid_adoxio_courthouselocation": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_courthouselocation"
-        },
         "baserecordid_goalrollupquery": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.goalrollupquery"
         },
@@ -84373,9 +82899,6 @@
         },
         "regardingobjectid_adoxio_externalcontact_email": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_externalcontact"
-        },
-        "regardingobjectid_adoxio_violationticket_email": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_violationticket"
         },
         "regardingobjectid_bulkoperation_email": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.bulkoperation"
@@ -86659,9 +85182,6 @@
         },
         "regardingobjectid_adoxio_externalcontact_fax": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_externalcontact"
-        },
-        "regardingobjectid_adoxio_violationticket_fax": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_violationticket"
         },
         "Fax_BulkDeleteFailures": {
           "type": "array",
@@ -95546,9 +94066,6 @@
         "regardingobjectid_adoxio_externalcontact_letter": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_externalcontact"
         },
-        "regardingobjectid_adoxio_violationticket_letter": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_violationticket"
-        },
         "letter_actioncard": {
           "type": "array",
           "items": {
@@ -96005,12 +94522,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.mailboxtrackingfolder"
-          }
-        },
-        "adoxio_list_adoxio_externalcontact": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_externalcontact"
           }
         },
         "stageid_processstage": {
@@ -97379,12 +95890,6 @@
         },
         "regardingobjectid_adoxio_externalcontact": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_externalcontact"
-        },
-        "regardingobjectid_adoxio_violationticket": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_violationticket"
-        },
-        "regardingobjectid_adoxio_courthouselocation": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_courthouselocation"
         },
         "regardingobjectid_incident": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.incident"
@@ -104453,18 +102958,6 @@
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_externalcontact"
           }
         },
-        "owner_adoxio_violationticket": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_violationticket"
-          }
-        },
-        "owner_adoxio_courthouselocation": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_courthouselocation"
-          }
-        },
         "owner_personaldocumenttemplates": {
           "type": "array",
           "items": {
@@ -104930,9 +103423,6 @@
         },
         "regardingobjectid_adoxio_externalcontact_phonecall": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_externalcontact"
-        },
-        "regardingobjectid_adoxio_violationticket_phonecall": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_violationticket"
         },
         "regardingobjectid_lead_phonecall": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.lead"
@@ -107265,12 +105755,6 @@
         "objectid_adoxio_externalcontact": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_externalcontact"
         },
-        "objectid_adoxio_violationticket": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_violationticket"
-        },
-        "objectid_adoxio_courthouselocation": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_courthouselocation"
-        },
         "objectid_campaign": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.campaign"
         },
@@ -108094,12 +106578,6 @@
         },
         "regardingobjectid_adoxio_externalcontact": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_externalcontact"
-        },
-        "regardingobjectid_adoxio_violationticket": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_violationticket"
-        },
-        "regardingobjectid_adoxio_courthouselocation": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_courthouselocation"
         },
         "regardingobjectid_invoicedetail": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.invoicedetail"
@@ -110606,9 +109084,6 @@
         "objectid_adoxio_externalcontact": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_externalcontact"
         },
-        "objectid_adoxio_violationticket": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_violationticket"
-        },
         "QueueItem_ProcessSessions": {
           "type": "array",
           "items": {
@@ -112890,9 +111365,6 @@
         },
         "regardingobjectid_adoxio_externalcontact_recurringappointmentmaster": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_externalcontact"
-        },
-        "regardingobjectid_adoxio_violationticket_recurringappointmentmaster": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_violationticket"
         },
         "RecurringAppointmentMaster_BulkDeleteFailures": {
           "type": "array",
@@ -116495,9 +114967,6 @@
         "regardingobjectid_adoxio_externalcontact_serviceappointment": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_externalcontact"
         },
-        "regardingobjectid_adoxio_violationticket_serviceappointment": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_violationticket"
-        },
         "regardingobjectid_account_serviceappointment": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.account"
         },
@@ -117336,9 +115805,6 @@
         },
         "regardingobjectid_adoxio_externalcontact": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_externalcontact"
-        },
-        "regardingobjectid_adoxio_violationticket": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_violationticket"
         },
         "regardingobjectid_account": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.account"
@@ -119172,9 +117638,6 @@
         },
         "regardingobjectid_adoxio_externalcontact_socialactivity": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_externalcontact"
-        },
-        "regardingobjectid_adoxio_violationticket_socialactivity": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_violationticket"
         },
         "socialactivity_connections2": {
           "type": "array",
@@ -125474,66 +123937,6 @@
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_externalcontact"
           }
         },
-        "lk_adoxio_violationticket_createdby": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_violationticket"
-          }
-        },
-        "lk_adoxio_violationticket_createdonbehalfby": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_violationticket"
-          }
-        },
-        "lk_adoxio_violationticket_modifiedby": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_violationticket"
-          }
-        },
-        "lk_adoxio_violationticket_modifiedonbehalfby": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_violationticket"
-          }
-        },
-        "user_adoxio_violationticket": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_violationticket"
-          }
-        },
-        "lk_adoxio_courthouselocation_createdby": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_courthouselocation"
-          }
-        },
-        "lk_adoxio_courthouselocation_createdonbehalfby": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_courthouselocation"
-          }
-        },
-        "lk_adoxio_courthouselocation_modifiedby": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_courthouselocation"
-          }
-        },
-        "lk_adoxio_courthouselocation_modifiedonbehalfby": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_courthouselocation"
-          }
-        },
-        "user_adoxio_courthouselocation": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_courthouselocation"
-          }
-        },
         "lk_slakpiinstancebase_createdonbehalfby": {
           "type": "array",
           "items": {
@@ -130370,9 +128773,6 @@
         "regardingobjectid_adoxio_externalcontact_task": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_externalcontact"
         },
-        "regardingobjectid_adoxio_violationticket_task": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_violationticket"
-        },
         "task_connections2": {
           "type": "array",
           "items": {
@@ -131758,18 +130158,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_externalcontact"
-          }
-        },
-        "team_adoxio_violationticket": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_violationticket"
-          }
-        },
-        "team_adoxio_courthouselocation": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_courthouselocation"
           }
         },
         "team_DuplicateRules": {
@@ -136769,19 +135157,6 @@
         }
       }
     },
-    "Microsoft.Dynamics.CRM.adoxio_courthouselocationCollection": {
-      "title": "Collection of adoxio_courthouselocation",
-      "description": "Microsoft.Dynamics.CRM.adoxio_courthouselocationCollection",
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_courthouselocation"
-          }
-        }
-      }
-    },
     "Microsoft.Dynamics.CRM.adoxio_customautonumberdefinitionCollection": {
       "title": "Collection of adoxio_customautonumberdefinition",
       "description": "Microsoft.Dynamics.CRM.adoxio_customautonumberdefinitionCollection",
@@ -136973,19 +135348,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_exhibit"
-          }
-        }
-      }
-    },
-    "Microsoft.Dynamics.CRM.adoxio_externalcontact_adoxio_externalprofileCollection": {
-      "title": "Collection of adoxio_externalcontact_adoxio_externalprofile",
-      "description": "Microsoft.Dynamics.CRM.adoxio_externalcontact_adoxio_externalprofileCollection",
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_externalcontact_adoxio_externalprofile"
           }
         }
       }
@@ -137389,19 +135751,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licenseechangelog"
-          }
-        }
-      }
-    },
-    "Microsoft.Dynamics.CRM.adoxio_list_adoxio_externalcontactCollection": {
-      "title": "Collection of adoxio_list_adoxio_externalcontact",
-      "description": "Microsoft.Dynamics.CRM.adoxio_list_adoxio_externalcontactCollection",
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_list_adoxio_externalcontact"
           }
         }
       }
@@ -137909,19 +136258,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_tiedhouseconnection"
-          }
-        }
-      }
-    },
-    "Microsoft.Dynamics.CRM.adoxio_violationticketCollection": {
-      "title": "Collection of adoxio_violationticket",
-      "description": "Microsoft.Dynamics.CRM.adoxio_violationticketCollection",
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_violationticket"
           }
         }
       }
