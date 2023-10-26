@@ -670,7 +670,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
     if (!this.application.applicationType.outsideAreas) {
       this.form.get('outsideAreas').disable();
     }
-    if (!this.application.applicationType.capacityArea || this.application?.applicationType?.name === ApplicationTypeNames.TemporaryExtensionOfLicensedAreaLP) {
+    if (!this.application.applicationType.capacityArea || this.application?.applicationType?.name === ApplicationTypeNames.TemporaryExtensionOfLicensedAreaLP ||
+      this.application?.applicationType?.name === ApplicationTypeNames.TemporaryChangeToALiquorLicenceOther) {
       this.form.get('capacityArea.capacity').disable();
     }
 
