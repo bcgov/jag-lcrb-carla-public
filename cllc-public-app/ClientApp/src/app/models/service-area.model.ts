@@ -14,5 +14,4 @@ export class ServiceArea {
   isOutdoor: boolean;
   isPatio: boolean;
   capacity: string;
-  isTemporaryExtensionArea: boolean;
 }

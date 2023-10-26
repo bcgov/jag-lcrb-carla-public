@@ -486,11 +486,11 @@
                 Cannabis Associate Security Screening forms are not required if you submit liquor related applications.
                 Missing forms or documents will be requested once your application is received.
                 <!--If you do not provide
-          Cannabis Associate Security Screening documents prior to your application submission, they will be
-          requested via secure channels
-          once your application has been received. Please note that the time to collect these documents
-          directly
-          impacts the time to process your application.-->
+                Cannabis Associate Security Screening documents prior to your application submission, they will be
+                requested via secure channels
+                once your application has been received. Please note that the time to collect these documents
+                directly
+                impacts the time to process your application.-->
               </p>
 
               <p>
@@ -1203,7 +1203,7 @@
               <div *ngIf="formSection.visible" class="padded-section">
                 <!-- show it on the page-->
                 <!--section class="padded-section">
-          <!-- display the section name as a label-->
+                <!-- display the section name as a label-->
                 <label for="" *ngIf="formSection.name">{{formSection.name}}</label>
                 <!-- for each field on the section-->
                 <div *ngFor="let formField of formSection.fields">
@@ -1314,8 +1314,8 @@
 
         <!-- The label of the field will now be used to communicate the message of the alert -->
         <!-- <app-error-alert *ngIf="application?.applicationType?.name === 'Ethyl Alcohol Permit' && form.get('hasSufficientRangeOfProducts').value == 845280000">
-    You can only apply for up to a maximum of 16 litres because this is an application for a “One-Time” permit.
-  </app-error-alert> -->
+          You can only apply for up to a maximum of 16 litres because this is an application for a “One-Time” permit.
+        </app-error-alert> -->
 
         <section *ngIf="application?.applicationType?.showDescription1">
           <h3 class="blue-header" *ngIf="!this.isLP()">DESCRIPTION OF PROPOSED CHANGE</h3>
@@ -1697,8 +1697,8 @@
         </section>
 
         <!-- Capacity Area -->
-        <h3 class="blue-header" *ngIf="application.applicationType.capacityArea && application?.applicationType?.name != ApplicationTypeNames.TemporaryExtensionOfLicensedAreaLP">CAPACITY AREA</h3>
-        <section *ngIf="application.applicationType.capacityArea&& application?.applicationType?.name != ApplicationTypeNames.TemporaryExtensionOfLicensedAreaLP" class="padded-section content-bottom" formGroupName="capacityArea">
+        <h3 class="blue-header" *ngIf="application.applicationType.capacityArea">CAPACITY AREA</h3>
+        <section *ngIf="application.applicationType.capacityArea" class="padded-section content-bottom" formGroupName="capacityArea">
           <div *ngIf="htmlContent?.capacityArea" [innerHTML]="htmlContent.capacityArea"></div>
           <app-field label="Capacity" [required]="true" [valid]="!showValidationMessages || form.get('capacityArea.capacity').valid"
                      errorMessage="Capacity is required." [showChevrons]="false" [isFullWidth]="false">
@@ -1827,17 +1827,17 @@
         </div>
 
         <!--div *ngIf="application?.licenseType != 'Cannabis Retail Store'">
-  <p>
-    <u>
-      Provide a minimum four (4) colour photographs of the proposed site, one facing each side of the
-      building/property
-    </u>
-  </p>
-  <p>
-    These photos need to be current (taken by the licensee or representative within the past 90 days).
-    Pictures from internet sites will not be accepted.
-  </p>
-  </div-->
+        <p>
+          <u>
+            Provide a minimum four (4) colour photographs of the proposed site, one facing each side of the
+            building/property
+          </u>
+        </p>
+        <p>
+          These photos need to be current (taken by the licensee or representative within the past 90 days).
+          Pictures from internet sites will not be accepted.
+        </p>
+        </div-->
 
         <h3 class="blue-header" *ngIf="showGroceryQuestion()">Grocery Declaration</h3>
         <div class="ngtest-grocery-store" *ngIf="showGroceryQuestion()" class="content-bottom">
@@ -1845,10 +1845,10 @@
           <mat-card class="mat-elevation-z0" style="margin-bottom: 10px;">
             <section style="display: flex; justify-content: space-between; width: 100%;">
               <!--div class="question-label" *ngIf="!htmlContent.Grocery">
-        Will the proposed structural alteration involve removing a wall between the
-        {{application?.licenseType}}
-        and an eligible grocery store?
-        </div-->
+              Will the proposed structural alteration involve removing a wall between the
+              {{application?.licenseType}}
+              and an eligible grocery store?
+              </div-->
               be
               cl
               <div class="question-label" *ngIf="!htmlContent.grocery">
@@ -2235,8 +2235,8 @@
               Please upload the society’s Statement of Directors and Registered Office.
             </p>
             <!-- <p *ngIf="account?.businessType === 'PublicCorporation'">
-        Please upload the society’s Statement of Directors and Registered Office.
-      </p> -->
+              Please upload the society’s Statement of Directors and Registered Office.
+            </p> -->
             <p *ngIf="businessTypeIsPartnership()">
               Please upload the Partnership Agreement.
             </p>
@@ -2811,16 +2811,16 @@
           </button>
 
           <!-- NEXT STEP BUTTONS
-    LG Approval Required -- > Submit to LG For Approval
+          LG Approval Required -- > Submit to LG For Approval
 
-    No LG Approvals Required
-    No Security Screening Required -- > Submit & Pay
-    Security Screening Required    -- > Proceed to Security Screening
-    LG Approved
-    No Security Screening Required -- > Submit & Pay
-    Security Screening Required    -- > Proceed to Security Screening
+          No LG Approvals Required
+          No Security Screening Required -- > Submit & Pay
+          Security Screening Required    -- > Proceed to Security Screening
+          LG Approved
+          No Security Screening Required -- > Submit & Pay
+          Security Screening Required    -- > Proceed to Security Screening
 
-    -->
+          -->
           <!-- LG Approval Required -->
           <button mat-raised-button class="ng-test-submit-for-lg-review" color="primary"
                   *ngIf="showSubmitToLG()"
