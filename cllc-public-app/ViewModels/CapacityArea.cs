@@ -23,5 +23,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool IsOutdoor { get; set; }
         public bool IsPatio { get; set; }
         public int? Capacity { get; set; }
+        public bool IsTemporaryExtensionArea { get; set; }
     }
 }

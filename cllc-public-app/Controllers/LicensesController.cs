@@ -1427,7 +1427,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             foreach (CapacityArea area in licenceVM.ServiceAreas)
                             {
                                 // sometimes we have bad data and should not try to spend our life fixing other people's problems
-                                if (area.AreaLocation == null || area.Capacity == null || area.AreaCategory != 845280000)
+                                if (area.AreaLocation == null || area.Capacity == null ||
+                                    area.AreaCategory != 845280000 || area.IsTemporaryExtensionArea == true)
                                 {
                                     continue;
                                 }
