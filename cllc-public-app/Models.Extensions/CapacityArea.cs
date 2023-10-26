@@ -17,8 +17,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 IsIndoor = serviceArea.AdoxioIsindoor == true,
                 IsOutdoor = serviceArea.AdoxioIsoutdoor == true,
                 IsPatio = serviceArea.AdoxioIspatio == true,
-                Capacity = serviceArea.AdoxioCapacity == null ? 0 : serviceArea.AdoxioCapacity,
-                IsTemporaryExtensionArea= serviceArea.AdoxioTemporaryextensionarea.HasValue? serviceArea.AdoxioTemporaryextensionarea.Value:false,
+                Capacity = serviceArea.AdoxioCapacity == null ? 0 : serviceArea.AdoxioCapacity
             };
         }
     }

@@ -30,7 +30,7 @@ import { DynamicsForm } from '../../../models/dynamics-form.model';
 import { PoliceJurisdictionDataService } from '@services/police-jurisdiction-data.service';
 import { LocalGovernmentDataService } from '@services/local-government-data.service';
 import { ProofOfZoningComponent } from './tabs/proof-of-zoning/proof-of-zoning.component';
-import { AreaCategory, ServiceArea } from '@models/service-area.model';
+import { AreaCategory } from '@models/service-area.model';
 import { faExclamationCircle, faTrashAlt, faUniversity } from '@fortawesome/free-solid-svg-icons';
 import { faCreditCard, faIdCard, faSave } from '@fortawesome/free-regular-svg-icons';
 import { RelatedLicence } from "@models/related-licence";
@@ -635,9 +635,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
 
     if (this.application.applicationType.showDeclarations) {
-      if (this.application?.applicationType?.name != ApplicationTypeNames.TemporaryExtensionOfLicensedAreaLP) {
-        this.form.get('authorizedToSubmit').setValidators([this.customRequiredCheckboxValidator()]);
-      } 
+      this.form.get('authorizedToSubmit').setValidators([this.customRequiredCheckboxValidator()]);
       this.form.get('signatureAgreement').setValidators([this.customRequiredCheckboxValidator()]);
     }
 
@@ -670,7 +668,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     if (!this.application.applicationType.outsideAreas) {
       this.form.get('outsideAreas').disable();
     }
-    if (!this.application.applicationType.capacityArea || this.application?.applicationType?.name === ApplicationTypeNames.TemporaryExtensionOfLicensedAreaLP) {
+    if (!this.application.applicationType.capacityArea) {
       this.form.get('capacityArea.capacity').disable();
     }
 
@@ -924,20 +922,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
     const serviceAreas = ('areas' in this.form.get('serviceAreas').value) ? this.form.get('serviceAreas').value['areas'] : this.form.get('serviceAreas').value;
     const outsideAreas = ('areas' in this.form.get('outsideAreas').value) ? this.form.get('outsideAreas').value['areas'] : this.form.get('outsideAreas').value;
     const capacityArea = [this.form.get('capacityArea').value];
-    if (capacityArea) {
-      if (this.application.applicationType.name == ApplicationTypeNames.TemporaryExtensionOfLicensedAreaLP) {
-        capacityArea.forEach((area: ServiceArea) => {
-          area.isTemporaryExtensionArea = true;
-        })   
-      } 
-    }
-    if (serviceAreas) {
-      if (this.application.applicationType.name == ApplicationTypeNames.TemporaryExtensionOfLicensedAreaLP) {
-        serviceAreas.forEach((area: ServiceArea) => {
-          area.isTemporaryExtensionArea = true;
-        })
-      }
-    }
+
+    
     return {
       ...this.form.value,
       description2,
@@ -1474,12 +1460,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
       if (this.form.get('tempSuspensionOrPatronParticipationEnd').value < this.form.get('tempSuspensionOrPatronParticipationStart').value) {
         valid = false;
         this.validationMessages.push('Start date should be before the end date.');
-      }
-    }
-    if (this.application?.applicationType?.name != ApplicationTypeNames.TemporaryExtensionOfLicensedAreaLP) {
-      if (!this.form.get('authorizedToSubmit').value) {
-        valid = false;
-        this.validationMessages.push('Please affirm that you are authorized to submit the application.');
       }
     }
     return valid && (this.form.valid || this.form.disabled);

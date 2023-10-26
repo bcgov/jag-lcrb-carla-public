@@ -100,7 +100,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
 
     this.requestStarted = false;
     this.requestID = -1;
-    this.licences.forEach((licence) => {
+    this.licences.forEach((licence) => { 
       this.licenceForms[licence.licenseId] = this.fb.group({
         phone: [licence.establishmentPhoneNumber],
         email: [licence.establishmentEmail]
