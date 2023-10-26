@@ -153,13 +153,15 @@ namespace Gov.Jag.Lcrb.OneStopService
             {
                 if (hangfireContext != null)
                 {
-                    hangfireContext.WriteLine($"Unable to get licence {licenceGuid}.");
+                    hangfireContext.WriteLine($"Unable to get licence,SendChangeAddressRest,hangfireContext {licenceGuid}.");
                 }
 
                 if (Log.Logger != null)
                 {
-                    Log.Logger.Error($"Unable to get licence {licenceGuid}.");
+                    Log.Logger.Error($"Unable to get licence,SendChangeAddressRest {licenceGuid}.");
                 }
+                var msg = $"Failed updating OneStop queue item {queueItemId}, licence is null ";
+                UpdateOneStopMessageStatus(hangfireContext, dynamicsClient, queueItemId, msg);
             }
             else
             {
@@ -215,13 +217,15 @@ namespace Gov.Jag.Lcrb.OneStopService
             {
                 if (hangfireContext != null)
                 {
-                    hangfireContext.WriteLine($"Unable to get licence {licenceGuid}.");
+                    hangfireContext.WriteLine($"Unable to get licence,SendChangeNameRest,hangfireContext {licenceGuid}.");
                 }
 
                 if (Log.Logger != null)
                 {
-                    Log.Logger.Error($"Unable to get licence {licenceGuid}.");
+                    Log.Logger.Error($"Unable to get licence,SendChangeNameRest {licenceGuid}.");
                 }
+                var msg = $"Failed updating OneStop queue item {queueItemId}, licence is null ";
+                UpdateOneStopMessageStatus(hangfireContext, dynamicsClient, queueItemId, msg);
             }
             else
             {
@@ -298,12 +302,12 @@ namespace Gov.Jag.Lcrb.OneStopService
             {
                 if (hangfireContext != null)
                 {
-                    hangfireContext.WriteLine($"Unable to get licence {licenceGuid}.");
+                    hangfireContext.WriteLine($"Unable to get licence,SendChangeStatusRest,hangfireContext {licenceGuid}.");
                 }
 
                 if (Log.Logger != null)
                 {
-                    Log.Logger.Error($"Unable to get licence {licenceGuid}.");
+                    Log.Logger.Error($"Unable to get licence,SendChangeStatusRest {licenceGuid}.");
                 }
                 var msg = $"Failed updating OneStop queue item {queueItemId}, licence is null ";
                 UpdateOneStopMessageStatus(hangfireContext, dynamicsClient, queueItemId, msg);
@@ -434,12 +438,12 @@ namespace Gov.Jag.Lcrb.OneStopService
             {
                 if (hangfireContext != null)
                 {
-                    hangfireContext.WriteLine($"Unable to get licence {licenceGuid}.");
+                    hangfireContext.WriteLine($"Unable to get licence,SendProgramAccountDetails,hangfireContext {licenceGuid}.");
                 }
 
                 if (Log.Logger != null)
                 {
-                    Log.Logger.Error($"Unable to get licence {licenceGuid}.");
+                    Log.Logger.Error($"Unable to get licence,SendProgramAccountDetails {licenceGuid}.");
                 }
             }
             else
