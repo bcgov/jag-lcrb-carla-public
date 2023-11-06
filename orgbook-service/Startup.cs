@@ -210,12 +210,9 @@ namespace Gov.Lclb.Cllb.OrgbookService
                     GenericRequest id = new GenericRequest() {
                         Id = Guid.NewGuid().ToString()
                     };
-                    RecurringJob.AddOrUpdate(() => new OrgBookController(Configuration, _loggerFactory).SyncLicencesToOrgbook(id, null), Cron.MinuteInterval(5));
-                    RecurringJob.AddOrUpdate(() => new OrgBookController(Configuration, _loggerFactory).SyncOrgbookToLicences(id, null), Cron.MinuteInterval(5));
-                    RecurringJob.AddOrUpdate(() => new OrgBookController(Configuration, _loggerFactory).SyncOrgbookToAccounts(id, null), Cron.MinuteInterval(10));
-                    //RecurringJob.AddOrUpdate(() => new OrgBookController(Configuration, _loggerFactory).SyncLicencesToOrgbook(id, null), Cron.Hourly());
-                    //RecurringJob.AddOrUpdate(() => new OrgBookController(Configuration, _loggerFactory).SyncOrgbookToLicences(id, null), Cron.Hourly());
-                    //RecurringJob.AddOrUpdate(() => new OrgBookController(Configuration, _loggerFactory).SyncOrgbookToAccounts(id, null), Cron.Daily());
+                    RecurringJob.AddOrUpdate(() => new OrgBookController(Configuration, _loggerFactory).SyncLicencesToOrgbook(id, null), Cron.Hourly());
+                    RecurringJob.AddOrUpdate(() => new OrgBookController(Configuration, _loggerFactory).SyncOrgbookToLicences(id, null), Cron.Hourly());
+                    RecurringJob.AddOrUpdate(() => new OrgBookController(Configuration, _loggerFactory).SyncOrgbookToAccounts(id, null), Cron.Daily());
                 }
             }
             catch (Exception e)
