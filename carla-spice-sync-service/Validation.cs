@@ -41,14 +41,14 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 {
                     var id = entity.Contact.ContactId;
                     var contact = dynamicsClient.Contacts.Get(filter: "contactid eq " + id).Value[0];
-                    if (contact.AdoxioConsentvalidated == null)
+                    if (1 == contact.Statuscode && contact.AdoxioConsentvalidated == null)
                     {
                         Log.Logger.Error($"Consent not validated for associate: {contact.Contactid}");
                         consentValidated = false;
                         continue;
                     }
 
-                    if (contact.AdoxioConsentvalidated.HasValue && (ConsentValidated)contact.AdoxioConsentvalidated != ConsentValidated.YES)
+                    if (1 == contact.Statuscode && contact.AdoxioConsentvalidated.HasValue && (ConsentValidated)contact.AdoxioConsentvalidated != ConsentValidated.YES)
                     {
                         Log.Logger.Error($"Consent not validated for associate: {contact.Contactid}");
                         consentValidated = false;
