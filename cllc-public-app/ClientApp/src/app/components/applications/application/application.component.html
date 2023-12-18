@@ -1203,7 +1203,7 @@
               <div *ngIf="formSection.visible" class="padded-section">
                 <!-- show it on the page-->
                 <!--section class="padded-section">
-          <!-- display the section name as a label-->
+        <!-- display the section name as a label-->
                 <label for="" *ngIf="formSection.name">{{formSection.name}}</label>
                 <!-- for each field on the section-->
                 <div *ngFor="let formField of formSection.fields">
@@ -1309,7 +1309,27 @@
               <mat-datepicker #picker2></mat-datepicker>
             </div>
           </div>
+          <div *ngIf="application?.applicationType?.name === ApplicationTypeNames.TemporaryChangetoaLiquorLicence_Other && application?.applicationType?.discretionRequest==true">
+            Test
+            <div class="discretion-request">
+              <hr><br>
+              <label for="">Discretion Request</label>
+              <p>
+                If your request requires an exercise of discretion:
+                upload a written submission detailing why a request for discretion should be approved and any supporting documentation. All information to support your request for discretion must be submitted together in one package; the branch will not consider additional materials submitted after a completed application is received. Requests for discretion should be submitted at least two months prior to the proposed event.
+              </p>
+              <section>
+                <app-file-uploader *ngIf="applicationId" documentType="Exterior Renderings"
+                                   fileTypes="FILE MUST BE IN PDF FORMAT." [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
+                                   [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()" [multipleFiles]="true"
+                                   entityName="application" [useDocumentTypeForName]="true"
+                                   (numberOfUploadedFiles)="uploadedPhotosOrRenderingsDocuments = $event" [entityId]="applicationId"
+                                   [uploadHeader]="'TO UPLOAD DISCRETION REQUEST'">
+                </app-file-uploader>
+              </section>
+            </div>
 
+          </div>
         </section>
 
         <!-- The label of the field will now be used to communicate the message of the alert -->
