@@ -1828,6 +1828,5 @@ export class ApplicationComponent extends FormBase implements OnInit {
     this.form.get("description1").patchValue(this.licenseToRemove.name);
   }
 
-
-
+ 
 }

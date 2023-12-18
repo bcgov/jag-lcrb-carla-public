@@ -60,5 +60,11 @@ export class ProofOfZoningComponent extends FormBase implements OnInit {
     }
     return res;
   }
+  relocateOnSiteStoreChanged() {
+    this.application.relocateOnSiteStore = !this.application.relocateOnSiteStore;
+  }
+  relocatePicnicAreaEndorsementChanged() {
+    this.application.relocatePicnicAreaEndorsement = !this.application.relocatePicnicAreaEndorsement;
 
+  }
 }
