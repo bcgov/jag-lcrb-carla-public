@@ -64,8 +64,9 @@ namespace Gov.Lclb.Cllb.Public.Models
                     OutsideAreas = applicationType.AdoxioOutsideareas.HasValue && (bool)applicationType.AdoxioOutsideareas,
                     CapacityArea = applicationType.AdoxioCapacityarea.HasValue && (bool)applicationType.AdoxioCapacityarea,
                     HasALRQuestion = applicationType.AdoxioHasalrquestion.HasValue && (bool)applicationType.AdoxioHasalrquestion,
-                    ShowZoningDeclarations = applicationType.AdoxioShowzoningdeclarations.HasValue && (bool)applicationType.AdoxioShowzoningdeclarations
-
+                    ShowZoningDeclarations = applicationType.AdoxioShowzoningdeclarations.HasValue && (bool)applicationType.AdoxioShowzoningdeclarations,
+                    DiscretionRequest = applicationType.AdoxioDiscretionrequest.HasValue? 
+                    applicationType.AdoxioDiscretionrequest.Value== 1?true:false : false
                 };
 
                 if (applicationType.AdoxioApplicationtypeAdoxioApplicationtypecontentApplicationType != null)
