@@ -65,6 +65,13 @@ export class ProofOfZoningComponent extends FormBase implements OnInit {
   }
   relocatePicnicAreaEndorsementChanged() {
     this.application.relocatePicnicAreaEndorsement = !this.application.relocatePicnicAreaEndorsement;
-
   }
+  confirmPermitsRetailSalesChanged() {
+    this.application.confirmPermitsRetailSales = !this.application.confirmPermitsRetailSales;
+  }
+  confirmrelocatePicnicAreaEndorsementChanged() {
+    this.application.confirmrelocatePicnicAreaEndorsement = !this.application.confirmrelocatePicnicAreaEndorsement;
+  }
+
+
 }

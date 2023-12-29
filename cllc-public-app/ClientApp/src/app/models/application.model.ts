@@ -154,6 +154,10 @@ export interface Application {
   relocatePicnicAreaEndorsement: boolean;
   confirmrelocatePicnicAreaEndorsement: boolean;
 
+  relocateWinaryLicence: boolean;
+  confirmRelocateWinaryLicence: boolean;
+
+
   mfgBrewPubOnSite: string;
   mfgPipedInProduct: string;
 

@@ -114,4 +114,5 @@ export enum ApplicationTypeNames {
   TiedHouseExemptionRemoval = "Tied House Exemption Removal",
   TiedHouseExemptionApplication = "Tied House Exemption Application",
   TemporaryExtensionOfLicensedAreaLP = "Temporary Extension of Licensed Area (LP)",
+  ManufacturerLocationChange = "Manufacturer Location Change",
 }
