@@ -1483,7 +1483,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       }
     }
     if (this.application?.applicationType?.name != ApplicationTypeNames.TemporaryExtensionOfLicensedAreaLP) {
-      if (!this.form.get('authorizedToSubmit').value) {
+      if (!this.form.get('authorizedToSubmit').value && this.form.get('authorizedToSubmit').invalid) {
         valid = false;
         this.validationMessages.push('Please affirm that you are authorized to submit the application.');
       }

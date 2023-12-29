@@ -38,6 +38,7 @@ export class PaymentConfirmationComponent extends FormBase implements OnInit {
   isApproved = false;
   applicationType: string;
   isLiquor: boolean;
+  isCannabis: boolean;
   retryCount = 0;
 
   paymentTransactionTitle: string;
@@ -146,6 +147,8 @@ export class PaymentConfirmationComponent extends FormBase implements OnInit {
       (data: Application) => {
         this.applicationType = data.applicationType.name;
         this.isLiquor = data.applicationType.category == "Liquor";
+        this.isCannabis = data.applicationType.category === "Cannabis";
+  
         this.application = data;
         this.addDynamicContent();
       });
