@@ -765,5 +765,11 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public DateTimeOffset? TempSuspensionOrPatronParticipationEnd { get; set; }
         public DateTimeOffset? TempSuspensionOrPatronParticipationStart { get; set; }
         public string AssignedLicenceId { get; set; }
+        public bool RelocateOnSiteStore { get; set; }
+        public bool ConfirmPermitsRetailSales { get; set; }
+        public bool RelocatePicnicAreaEndorsement { get; set; }
+        public bool ConfirmrelocatePicnicAreaEndorsement { get; set; }
+        public bool RelocateWinaryLicence { get; set; }
+        public bool ConfirmRelocateWinaryLicence { get; set; }
     }
 }

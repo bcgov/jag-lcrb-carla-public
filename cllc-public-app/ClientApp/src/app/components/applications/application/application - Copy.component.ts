@@ -260,12 +260,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
       uploadDeclarations: ['', []],
       productsListAndDescription: ['', []],
       willHaveTiedHouseExemption: ['', []],
-      relocateOnSiteStore: ['', []],
-      confirmPermitsRetailSales: ['', []],
-      relocatePicnicAreaEndorsement: ['', []],
-      confirmrelocatePicnicAreaEndorsement: ['', []],
-      relocateWinaryLicence: ['', []],
-      confirmRelocateWinaryLicence: ['', []],
     });
 
     this.form.get('pin').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
@@ -1511,11 +1505,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   relocateWinaryLicenceChanged() {
-    if (this.application.relocateWinaryLicence == undefined || this.application.relocateWinaryLicence == false) {
-      this.application.relocateWinaryLicence = true;
-    } else {
-      this.application.relocateWinaryLicence = false;
-    }
+    var xx = this.form.get('relocateWinaryLicence').value;
+    this.application.relocateWinaryLicence = !this.application.relocateWinaryLicence;
   }
   confirmRelocateWinaryLicenceChanged() {
     this.application.confirmRelocateWinaryLicence = !this.application.confirmRelocateWinaryLicence;

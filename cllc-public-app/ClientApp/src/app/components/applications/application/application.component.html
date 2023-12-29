@@ -2412,13 +2412,46 @@
 
           </section>
         </section>
-
-        <!-- Contact Details -->
-        <h3 class="blue-header" *ngIf="application?.applicationType?.name === 'Manufacturer Location Change' ">MANUFACTURER SUPPORTING INFORMATION</h3>
-        <div class="content-bottom">
-         
-        </div>
-
+        <section *ngIf="application?.applicationType?.name === 'Manufacturer Location Change'">
+          <!-- Contact Details -->
+          <h3 class="blue-header">MANUFACTURER SUPPORTING INFORMATION</h3>
+          <div class="content-bottom">
+            <mat-checkbox  formControlName="relocateWinaryLicence" (change)="relocateWinaryLicenceChanged()" >
+              <section>
+                <span>
+                  Is the purpose of this manufacturer location change application to relocate a winery licence?
+                </span>
+              </section>
+            </mat-checkbox>
+            <mat-checkbox *ngIf="application.relocateWinaryLicence==true" formControlName="confirmRelocateWinaryLicence"  (change)="confirmRelocateWinaryLicenceChanged()" >
+              <section>
+                <span>
+                  By checking this box, I confirm my understanding of the following requirements for a winery licence:
+                </span>
+                <ul>
+                  <li>
+                    <span>
+                      Produce a minimum of 4500 litres of their own wine on-site each year (at the licensed winery establishment) and they must meet this on-site production requirement in order to renew their annual licence;
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      Produce a minimum of 4500 litres of their own wine on-site each year (at the licensed winery establishment) and they must meet this on-site production requirement in order to renew their annual licence;
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      Produce a minimum of 4500 litres of their own wine on-site each year (at the licensed winery establishment) and they must meet this on-site production requirement in order to renew their annual licence;
+                    </span>
+                  </li>
+                </ul>
+                  Production for this purpose is defined as “fermentation and at least one other significant winemaking step from the following list: blending, crushing, filtering, aging the wine for at least three months, secondary fermentation or carbonation (sparkling), packaging.”
+                  Licensee must own or lease the equipment used to produce the wine on-site
+                
+              </section>
+            </mat-checkbox>
+          </div>
+        </section>
           <!-- Contact Details -->
           <h3 class="blue-header" *ngIf="!isRAS()">APPLICATION CONTACT DETAILS</h3>
           <h3 class="blue-header" *ngIf="isRAS()"> CONTACT DETAILS</h3>
