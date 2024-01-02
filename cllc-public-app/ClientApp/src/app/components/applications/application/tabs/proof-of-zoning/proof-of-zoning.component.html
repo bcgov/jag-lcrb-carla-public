@@ -5,7 +5,7 @@
 
   <section *ngIf="showQuestion()">
     <div>
-      <mat-checkbox formControlName="isPermittedInZoning" (change)="isPermittedInZoningChanged()" >
+      <mat-checkbox formControlName="isPermittedInZoning" (change)="isPermittedInZoningChanged()">
         <section *ngIf="application?.applicationType?.name === 'Manufacturer Location Change' ">
           <span>
             By checking this box, I confirm that current zoning at the proposed location permits a Manufacturer.
@@ -17,6 +17,36 @@
           </span>
         </section>
       </mat-checkbox>
+      <div *ngIf="application?.applicationType?.name === 'Manufacturer Location Change' ">
+        <mat-checkbox formControlName="relocateOnSiteStore" (change)="relocateOnSiteStoreChanged()">
+          <section>
+            <span>
+              As part of this relocation, do you intend to relocate your on-site store?
+            </span>
+          </section>
+        </mat-checkbox>
+        <mat-checkbox *ngIf="application.relocateOnSiteStore==true" formControlName="confirmPermitsRetailSales"  (change)="confirmPermitsRetailSalesChanged()">
+          <section>
+            <span>
+              By checking this box, I confirm that zoning at the proposed location permits retail sales for off-site consumption.
+            </span>
+          </section>
+        </mat-checkbox>
+        <mat-checkbox formControlName="relocatePicnicAreaEndorsement" (change)="relocatePicnicAreaEndorsementChanged()">
+          <section>
+            <span>
+              As part of this relocation, do you intend to relocate your picnic area endorsement?
+            </span>
+          </section>
+        </mat-checkbox>
+        <mat-checkbox *ngIf="application.relocatePicnicAreaEndorsement==true" formControlName="confirmrelocatePicnicAreaEndorsement"  (change)="confirmrelocatePicnicAreaEndorsementChanged()">
+          <section>
+            <span>
+              By checking this box, I confirm that zoning at the proposed location permits the operation of picnic area endorsement, and that the Local Government/Indigenous Nation supports the proposed capacity for the picnic area endorsement.
+            </span>
+          </section>
+        </mat-checkbox>
+      </div>
     </div>
   </section>
 

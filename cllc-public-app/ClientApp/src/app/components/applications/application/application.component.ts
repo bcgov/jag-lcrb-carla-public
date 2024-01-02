@@ -260,6 +260,12 @@ export class ApplicationComponent extends FormBase implements OnInit {
       uploadDeclarations: ['', []],
       productsListAndDescription: ['', []],
       willHaveTiedHouseExemption: ['', []],
+      relocateOnSiteStore: ['', []],
+      confirmPermitsRetailSales: ['', []],
+      relocatePicnicAreaEndorsement: ['', []],
+      confirmrelocatePicnicAreaEndorsement: ['', []],
+      relocateWinaryLicence: ['', []],
+      confirmRelocateWinaryLicence: ['', []],
     });
 
     this.form.get('pin').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
@@ -1038,7 +1044,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       // save and try to generate an invoice.
       // if it's not free, nor a free endorsement, show the progress
       //LCSD-6495 if an application is not free, then it should not be a free endorsement.
-      this.busy = this.save((!this.application.applicationType.isFree && !this.isFreeEndorsement()), <Application>{ invoiceTrigger: 1 }) // trigger invoice generation when saving
+      this.busy = this.save((this.application.applicationType != undefined && !this.application.applicationType.isFree && !this.isFreeEndorsement()), <Application>{ invoiceTrigger: 1 }) // trigger invoice generation when saving
         .pipe(takeWhile(() => this.componentActive))
         .subscribe(([saveSucceeded, app]) => {
           // if we saved successfully...
@@ -1253,11 +1259,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
     const serviceArea = ('areas' in this.form.get('serviceAreas').value) ? this.form.get('serviceAreas').value['areas'] : this.form.get('serviceAreas').value;
 
     //if (this.showServiceArea() && serviceArea.length === 0 && (this.isLP() || ApplicationTypeNames.SpecialEventAreaEndorsement || ApplicationTypeNames.LoungeAreaEndorsment) )	{
-    if (this.showServiceArea() && serviceArea.length === 0 ) {
+    if (this.showServiceArea() && serviceArea.length === 0) {
       valid = false;
       this.validationMessages.push('At least one service area is required.');
     }
- 
+
     if (this.application.applicationType.showAssociatesFormUpload &&
       ((this.uploadedAssociateDocuments || 0) < 1)) {
       valid = false;
@@ -1430,7 +1436,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
 
     if (this.showZoning() && this.application.isPermittedInZoning != true) {
-        this.validationMessages.push('Zoning Declaration is required.');
+      this.validationMessages.push('Zoning Declaration is required.');
     }
 
     if (this.application?.applicationType.name == ApplicationTypeNames.MFG) {
@@ -1477,11 +1483,26 @@ export class ApplicationComponent extends FormBase implements OnInit {
       }
     }
     if (this.application?.applicationType?.name != ApplicationTypeNames.TemporaryExtensionOfLicensedAreaLP) {
-      if (!this.form.get('authorizedToSubmit').value) {
+      if (!this.form.get('authorizedToSubmit').value && this.form.get('authorizedToSubmit').invalid) {
         valid = false;
         this.validationMessages.push('Please affirm that you are authorized to submit the application.');
       }
     }
+    if (this.application?.applicationType?.name == ApplicationTypeNames.ManufacturerLocationChange) {
+      if (this.application.relocateOnSiteStore == true && this.application.confirmPermitsRetailSales != true) {
+        valid = false;
+        this.validationMessages.push('Please confirm that zoning at the proposed location permits retail sales for off-site consumption.');
+      }
+      if (this.application.relocatePicnicAreaEndorsement == true && this.application.confirmrelocatePicnicAreaEndorsement != true) {
+        valid = false;
+        this.validationMessages.push('Please confirm that zoning at the proposed location permits the operation of picnic area endorsement.');
+      }
+      if (this.application.relocateWinaryLicence == true && this.application.confirmRelocateWinaryLicence != true) {
+        valid = false;
+        this.validationMessages.push('Please confirm that you are understanding of the following requirements for a winery licence.');
+      }
+    }
+
     return valid && (this.form.valid || this.form.disabled);
   }
 
@@ -1489,6 +1510,16 @@ export class ApplicationComponent extends FormBase implements OnInit {
     return this.form.get(field).value == 1 || !this.form.get(field).touched;
   }
 
+  relocateWinaryLicenceChanged() {
+    if (this.application.relocateWinaryLicence == undefined || this.application.relocateWinaryLicence == false) {
+      this.application.relocateWinaryLicence = true;
+    } else {
+      this.application.relocateWinaryLicence = false;
+    }
+  }
+  confirmRelocateWinaryLicenceChanged() {
+    this.application.confirmRelocateWinaryLicence = !this.application.confirmRelocateWinaryLicence;
+  }
   showLEDocumentSection(): boolean {
     const show = this?.application?.applicationType?.hasLESection && !this.isOpenedByLGForApproval;
     return show;
@@ -1828,6 +1859,5 @@ export class ApplicationComponent extends FormBase implements OnInit {
     this.form.get("description1").patchValue(this.licenseToRemove.name);
   }
 
-
-
+ 
 }

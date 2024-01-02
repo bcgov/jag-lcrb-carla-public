@@ -103,5 +103,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public bool? ShowZoningDeclarations { get; set; }
         public bool? IsRelocation { get; set; }
+        public bool DiscretionRequest { get; set; }
+
     }
 }
