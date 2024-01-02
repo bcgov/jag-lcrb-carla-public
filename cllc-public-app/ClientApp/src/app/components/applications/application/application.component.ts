@@ -1038,7 +1038,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       // save and try to generate an invoice.
       // if it's not free, nor a free endorsement, show the progress
       //LCSD-6495 if an application is not free, then it should not be a free endorsement.
-      this.busy = this.save((!this.application.applicationType.isFree && !this.isFreeEndorsement()), <Application>{ invoiceTrigger: 1 }) // trigger invoice generation when saving
+      this.busy = this.save((this.application.applicationType != undefined && !this.application.applicationType.isFree && !this.isFreeEndorsement()), <Application>{ invoiceTrigger: 1 }) // trigger invoice generation when saving
         .pipe(takeWhile(() => this.componentActive))
         .subscribe(([saveSucceeded, app]) => {
           // if we saved successfully...
