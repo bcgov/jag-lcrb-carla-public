@@ -486,11 +486,11 @@
                 Cannabis Associate Security Screening forms are not required if you submit liquor related applications.
                 Missing forms or documents will be requested once your application is received.
                 <!--If you do not provide
-          Cannabis Associate Security Screening documents prior to your application submission, they will be
-          requested via secure channels
-          once your application has been received. Please note that the time to collect these documents
-          directly
-          impacts the time to process your application.-->
+                Cannabis Associate Security Screening documents prior to your application submission, they will be
+                requested via secure channels
+                once your application has been received. Please note that the time to collect these documents
+                directly
+                impacts the time to process your application.-->
               </p>
 
               <p>
@@ -1203,7 +1203,7 @@
               <div *ngIf="formSection.visible" class="padded-section">
                 <!-- show it on the page-->
                 <!--section class="padded-section">
-          <!-- display the section name as a label-->
+                <!-- display the section name as a label-->
                 <label for="" *ngIf="formSection.name">{{formSection.name}}</label>
                 <!-- for each field on the section-->
                 <div *ngFor="let formField of formSection.fields">
@@ -1309,13 +1309,39 @@
               <mat-datepicker #picker2></mat-datepicker>
             </div>
           </div>
+          <div *ngIf="application?.applicationType?.name === ApplicationTypeNames.TemporaryChangetoaLiquorLicence_Other && application?.applicationType?.discretionRequest==true">
+            <section>
+              <div class="discretion-request">
+              
+                <h3 class="blue-header">Discretion Request</h3>
+                <div class="content-bottom">
 
+                  <p>
+                    If your request requires an exercise of discretion:
+                    upload a written submission detailing why a request for discretion should be approved and any supporting documentation.
+                    All information to support your request for discretion must be submitted together in one package;
+                    the branch will not consider additional materials submitted after a completed application is received.
+                    Requests for discretion should be submitted at least two months prior to the proposed event.
+                  </p>
+
+                  <app-file-uploader *ngIf="applicationId" documentType="Exterior Renderings"
+                                     fileTypes="FILE MUST BE IN PDF FORMAT." [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
+                                     [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()" [multipleFiles]="true"
+                                     entityName="application" [useDocumentTypeForName]="true"
+                                     (numberOfUploadedFiles)="uploadedPhotosOrRenderingsDocuments = $event" [entityId]="applicationId"
+                                     [uploadHeader]="'TO UPLOAD DISCRETION REQUEST'">
+                  </app-file-uploader>
+
+                </div>
+              </div>
+            </section>
+          </div>
         </section>
 
         <!-- The label of the field will now be used to communicate the message of the alert -->
         <!-- <app-error-alert *ngIf="application?.applicationType?.name === 'Ethyl Alcohol Permit' && form.get('hasSufficientRangeOfProducts').value == 845280000">
-    You can only apply for up to a maximum of 16 litres because this is an application for a “One-Time” permit.
-  </app-error-alert> -->
+          You can only apply for up to a maximum of 16 litres because this is an application for a “One-Time” permit.
+        </app-error-alert> -->
 
         <section *ngIf="application?.applicationType?.showDescription1">
           <h3 class="blue-header" *ngIf="!this.isLP()">DESCRIPTION OF PROPOSED CHANGE</h3>
@@ -1827,17 +1853,17 @@
         </div>
 
         <!--div *ngIf="application?.licenseType != 'Cannabis Retail Store'">
-  <p>
-    <u>
-      Provide a minimum four (4) colour photographs of the proposed site, one facing each side of the
-      building/property
-    </u>
-  </p>
-  <p>
-    These photos need to be current (taken by the licensee or representative within the past 90 days).
-    Pictures from internet sites will not be accepted.
-  </p>
-  </div-->
+        <p>
+          <u>
+            Provide a minimum four (4) colour photographs of the proposed site, one facing each side of the
+            building/property
+          </u>
+        </p>
+        <p>
+          These photos need to be current (taken by the licensee or representative within the past 90 days).
+          Pictures from internet sites will not be accepted.
+        </p>
+        </div-->
 
         <h3 class="blue-header" *ngIf="showGroceryQuestion()">Grocery Declaration</h3>
         <div class="ngtest-grocery-store" *ngIf="showGroceryQuestion()" class="content-bottom">
@@ -1845,10 +1871,10 @@
           <mat-card class="mat-elevation-z0" style="margin-bottom: 10px;">
             <section style="display: flex; justify-content: space-between; width: 100%;">
               <!--div class="question-label" *ngIf="!htmlContent.Grocery">
-        Will the proposed structural alteration involve removing a wall between the
-        {{application?.licenseType}}
-        and an eligible grocery store?
-        </div-->
+              Will the proposed structural alteration involve removing a wall between the
+              {{application?.licenseType}}
+              and an eligible grocery store?
+              </div-->
               be
               cl
               <div class="question-label" *ngIf="!htmlContent.grocery">
@@ -2235,8 +2261,8 @@
               Please upload the society’s Statement of Directors and Registered Office.
             </p>
             <!-- <p *ngIf="account?.businessType === 'PublicCorporation'">
-        Please upload the society’s Statement of Directors and Registered Office.
-      </p> -->
+              Please upload the society’s Statement of Directors and Registered Office.
+            </p> -->
             <p *ngIf="businessTypeIsPartnership()">
               Please upload the Partnership Agreement.
             </p>
@@ -2412,415 +2438,453 @@
 
           </section>
         </section>
-
-
-        <!-- Contact Details -->
-        <h3 class="blue-header" *ngIf="!isRAS()">APPLICATION CONTACT DETAILS</h3>
-        <h3 class="blue-header" *ngIf="isRAS()"> CONTACT DETAILS</h3>
-        <div class="content-bottom">
-          <p *ngIf="!isRAS()">
-            <i>
-              Please provide contact information for the contact that the LCRB should communicate with regarding this
-              application.
-              <span *ngIf="!this.isLiquor">
-                This contact must be authorized to represent the applicant and have the authority to bind the
-                applicant.
-              </span>
-            </i>
-          </p>
-          <p *ngIf="isRAS()">
-            Please provide contact information for the contact that the LCRB should communicate with regarding the
-            information submission.
-          </p>
-          <address class="padded-section">
-
-            <app-field label="First Name" [required]="true" [valid]="isValidOrNotTouched('contactPersonFirstName')"
-                       errorMessage="Please enter the business contact's first name">
-              <input class="form-control" style="width: 350px;" type="text" autocomplete="given-name"
-                     formControlName="contactPersonFirstName" id="contactPersonFirstName">
-            </app-field>
-
-            <app-field label="Last Name" [required]="true" [valid]="isValidOrNotTouched('contactPersonLastName')"
-                       errorMessage="Please enter the business contact's last name">
-              <input class="form-control" style="width: 350px;" type="text" autocomplete="family-name"
-                     formControlName="contactPersonLastName" id="contactPersonLastName">
-            </app-field>
-
-            <app-field label="Title/Position" [required]="false" [valid]="true">
-              <input class="form-control" style="width: 350px;" type="text" formControlName="contactPersonRole">
-            </app-field>
-
-            <app-field label="Phone Number (main)" [required]="true" [valid]="isValidOrNotTouched('contactPersonPhone')"
-                       errorMessage="Please enter the business contact's 10-digit phone number">
-              <input class="form-control" style="width: 250px;" maxlength="10" autocomplete="tel"
-                     (keydown)="rejectIfNotDigitOrBackSpace($event)" type="text" formControlName="contactPersonPhone">
-            </app-field>
-
-            <app-field label="Email" [required]="true" [valid]="isValidOrNotTouched('contactPersonEmail')"
-                       errorMessage="Please enter the business contact's email address"
-                       afterLabelText="By submitting the email address, you agree that the Liquor and Cannabis Regulation Branch can use it to communicate with you about this application.">
-              <input class="form-control" style="width: 350px;" type="text" autocomplete="email"
-                     formControlName="contactPersonEmail" id="contactPersonEmail"
-                     (blur)="trimValue(form.get('contactPersonEmail'))">
-            </app-field>
-          </address>
-        </div>
-
-        <!-- Declarations section -->
-        <h3 class="blue-header ngtest-declarations" *ngIf="application?.applicationType?.showDeclarations">
-          DECLARATIONS
-        </h3>
-        <div class="padded-section content-bottom" *ngIf="application?.applicationType?.showDeclarations">
-          <ng-container *ngIf="!application?.applicationType?.showLiquorDeclarations">
-            <section>
-              <div *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer && !isRAS()">
-                The application must only be submitted by an individual with the authority to bind the applicant. The
-                branch
-                relies on the applicant to ensure that the individual who submits this application is authorized to do
-                so.
-                Typically, an appropriate individual in a corporation will be a duly authorized signatory who will
-                usually
-                be
-                an officer or, in some cases, a director
-              </div>
-              <div *ngIf="isRAS()">
-                <p>
-                  The Rural Agency Store Information Submission must only be submitted by an individual with the
-                  authority to bind the Rural Agency Store. The branch relies on the Rural Agency Store Owner to ensure
-                  that the individual who submits this information is authorized to do so. Typically, an appropriate
-                  individual in a corporation will be a duly authorized signatory who will usually be an officer, or, in
-                  some cases, a director. Note: A lawyer or consultant may NOT submit information on behalf of the Rural
-                  Agency Store.
-                </p>
-              </div>
-              <div *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
-                <p *ngIf="account?.businessType === 'SoleProprietorship'">
-                  This application should be submitted the sole proprietor.
-                </p>
-                <p *ngIf="account?.businessType === 'Society'">
-                  This application must only be submitted by an individual with the authority to bind the applicant. The
-                  branch relies on the applicant to ensure that the individual who submits this application is
-                  authorized to
-                  do so. Typically, an appropriate individual for a society will be a director or a senior manager (as
-                  defined in the Societies Act).
-                </p>
-                <p *ngIf="account?.businessType === 'PublicCorporation'">
-                  This application must only be submitted by an individual with the authority to bind the applicant. The
-                  branch relies on the applicant to ensure that the individual who submits this application is
-                  authorized to
-                  do so. Typically, an appropriate individual in a corporation will be a duly authorized signatory who
-                  will
-                  usually be an officer or, in some cases, a director.
-                </p>
-                <div *ngIf="businessTypeIsPartnership()">
-                  <p>
-                    This application must only be submitted by an individual with the authority to bind the applicant.
-                    The
-                    branch relies on the applicant to ensure that the individual who submits this application is
-                    authorized
-                    to do so. Typically, an appropriate individual will be as follows:
-                  </p>
-                  <ul>
-                    <li>If the applicant is a general partnership, one of the general partners</li>
-                    <li>If the applicant is a limited partnership, the general partner of the partnership</li>
-                  </ul>
-                </div>
-                <p *ngIf="businessTypeIsPrivateCorporation()">
-                  The application must only be submitted by an individual with the authority to bind the applicant. The
-                  branch relies on the applicant to ensure that the individual who submits this application is
-                  authorized to
-                  do so. Typically, an appropriate individual in a corporation will be a duly authorized signatory who
-                  will
-                  usually be an officer or, in some cases, a director.
-                </p>
-
-              </div>
-
-            </section>
-            <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer && !isRAS()">
-              Note: A lawyer or
-              consultant,
-              may NOT submit this application on behalf of
-              the applicant.
+        <section *ngIf="application?.applicationType?.name === 'Manufacturer Location Change'">
+          <!-- Contact Details -->
+          <h3 class="blue-header">MANUFACTURER SUPPORTING INFORMATION</h3>
+          <div class="content-bottom">
+            <mat-checkbox  formControlName="relocateWinaryLicence" (change)="relocateWinaryLicenceChanged()" >
+              <section>
+                <span>
+                  Is the purpose of this manufacturer location change application to relocate a winery licence?
+                </span>
+              </section>
+            </mat-checkbox>
+            <mat-checkbox *ngIf="application.relocateWinaryLicence==true" formControlName="confirmRelocateWinaryLicence"  (change)="confirmRelocateWinaryLicenceChanged()" >
+              <section>
+                <span>
+                  By checking this box, I confirm my understanding of the following requirements for a winery licence:
+                </span>
+                <ul>
+                  <li>
+                    <span>
+                      Produce a minimum of 4500 litres of their own wine on-site each year (at the licensed winery establishment) and they must meet this on-site production requirement in order to renew their annual licence;
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      Produce a minimum of 4500 litres of their own wine on-site each year (at the licensed winery establishment) and they must meet this on-site production requirement in order to renew their annual licence;
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      Produce a minimum of 4500 litres of their own wine on-site each year (at the licensed winery establishment) and they must meet this on-site production requirement in order to renew their annual licence;
+                    </span>
+                  </li>
+                </ul>
+                  Production for this purpose is defined as “fermentation and at least one other significant winemaking step from the following list: blending, crushing, filtering, aging the wine for at least three months, secondary fermentation or carbonation (sparkling), packaging.”
+                  Licensee must own or lease the equipment used to produce the wine on-site
+                
+              </section>
+            </mat-checkbox>
+          </div>
+        </section>
+          <!-- Contact Details -->
+          <h3 class="blue-header" *ngIf="!isRAS()">APPLICATION CONTACT DETAILS</h3>
+          <h3 class="blue-header" *ngIf="isRAS()"> CONTACT DETAILS</h3>
+          <div class="content-bottom">
+            <p *ngIf="!isRAS()">
+              <i>
+                Please provide contact information for the contact that the LCRB should communicate with regarding this
+                application.
+                <span *ngIf="!this.isLiquor">
+                  This contact must be authorized to represent the applicant and have the authority to bind the
+                  applicant.
+                </span>
+              </i>
             </p>
-            <section *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
-              <p *ngIf="businessTypeIsPrivateCorporation()">
-                Note: A lawyer or consultant, may NOT submit this application on behalf of the applicant.
-              </p>
-              <p *ngIf="!businessTypeIsPrivateCorporation()">
-                Note: A lawyer, licensee representative or third party operator may NOT submit this application on
-                behalf of
+            <p *ngIf="isRAS()">
+              Please provide contact information for the contact that the LCRB should communicate with regarding the
+              information submission.
+            </p>
+            <address class="padded-section">
+
+              <app-field label="First Name" [required]="true" [valid]="isValidOrNotTouched('contactPersonFirstName')"
+                         errorMessage="Please enter the business contact's first name">
+                <input class="form-control" style="width: 350px;" type="text" autocomplete="given-name"
+                       formControlName="contactPersonFirstName" id="contactPersonFirstName">
+              </app-field>
+
+              <app-field label="Last Name" [required]="true" [valid]="isValidOrNotTouched('contactPersonLastName')"
+                         errorMessage="Please enter the business contact's last name">
+                <input class="form-control" style="width: 350px;" type="text" autocomplete="family-name"
+                       formControlName="contactPersonLastName" id="contactPersonLastName">
+              </app-field>
+
+              <app-field label="Title/Position" [required]="false" [valid]="true">
+                <input class="form-control" style="width: 350px;" type="text" formControlName="contactPersonRole">
+              </app-field>
+
+              <app-field label="Phone Number (main)" [required]="true" [valid]="isValidOrNotTouched('contactPersonPhone')"
+                         errorMessage="Please enter the business contact's 10-digit phone number">
+                <input class="form-control" style="width: 250px;" maxlength="10" autocomplete="tel"
+                       (keydown)="rejectIfNotDigitOrBackSpace($event)" type="text" formControlName="contactPersonPhone">
+              </app-field>
+
+              <app-field label="Email" [required]="true" [valid]="isValidOrNotTouched('contactPersonEmail')"
+                         errorMessage="Please enter the business contact's email address"
+                         afterLabelText="By submitting the email address, you agree that the Liquor and Cannabis Regulation Branch can use it to communicate with you about this application.">
+                <input class="form-control" style="width: 350px;" type="text" autocomplete="email"
+                       formControlName="contactPersonEmail" id="contactPersonEmail"
+                       (blur)="trimValue(form.get('contactPersonEmail'))">
+              </app-field>
+            </address>
+          </div>
+
+          <!-- Declarations section -->
+          <h3 class="blue-header ngtest-declarations" *ngIf="application?.applicationType?.showDeclarations">
+            DECLARATIONS
+          </h3>
+          <div class="padded-section content-bottom" *ngIf="application?.applicationType?.showDeclarations">
+            <ng-container *ngIf="!application?.applicationType?.showLiquorDeclarations">
+              <section>
+                <div *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer && !isRAS()">
+                  The application must only be submitted by an individual with the authority to bind the applicant. The
+                  branch
+                  relies on the applicant to ensure that the individual who submits this application is authorized to do
+                  so.
+                  Typically, an appropriate individual in a corporation will be a duly authorized signatory who will
+                  usually
+                  be
+                  an officer or, in some cases, a director
+                </div>
+                <div *ngIf="isRAS()">
+                  <p>
+                    The Rural Agency Store Information Submission must only be submitted by an individual with the
+                    authority to bind the Rural Agency Store. The branch relies on the Rural Agency Store Owner to ensure
+                    that the individual who submits this information is authorized to do so. Typically, an appropriate
+                    individual in a corporation will be a duly authorized signatory who will usually be an officer, or, in
+                    some cases, a director. Note: A lawyer or consultant may NOT submit information on behalf of the Rural
+                    Agency Store.
+                  </p>
+                </div>
+                <div *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
+                  <p *ngIf="account?.businessType === 'SoleProprietorship'">
+                    This application should be submitted the sole proprietor.
+                  </p>
+                  <p *ngIf="account?.businessType === 'Society'">
+                    This application must only be submitted by an individual with the authority to bind the applicant. The
+                    branch relies on the applicant to ensure that the individual who submits this application is
+                    authorized to
+                    do so. Typically, an appropriate individual for a society will be a director or a senior manager (as
+                    defined in the Societies Act).
+                  </p>
+                  <p *ngIf="account?.businessType === 'PublicCorporation'">
+                    This application must only be submitted by an individual with the authority to bind the applicant. The
+                    branch relies on the applicant to ensure that the individual who submits this application is
+                    authorized to
+                    do so. Typically, an appropriate individual in a corporation will be a duly authorized signatory who
+                    will
+                    usually be an officer or, in some cases, a director.
+                  </p>
+                  <div *ngIf="businessTypeIsPartnership()">
+                    <p>
+                      This application must only be submitted by an individual with the authority to bind the applicant.
+                      The
+                      branch relies on the applicant to ensure that the individual who submits this application is
+                      authorized
+                      to do so. Typically, an appropriate individual will be as follows:
+                    </p>
+                    <ul>
+                      <li>If the applicant is a general partnership, one of the general partners</li>
+                      <li>If the applicant is a limited partnership, the general partner of the partnership</li>
+                    </ul>
+                  </div>
+                  <p *ngIf="businessTypeIsPrivateCorporation()">
+                    The application must only be submitted by an individual with the authority to bind the applicant. The
+                    branch relies on the applicant to ensure that the individual who submits this application is
+                    authorized to
+                    do so. Typically, an appropriate individual in a corporation will be a duly authorized signatory who
+                    will
+                    usually be an officer or, in some cases, a director.
+                  </p>
+
+                </div>
+
+              </section>
+              <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer && !isRAS()">
+                Note: A lawyer or
+                consultant,
+                may NOT submit this application on behalf of
                 the applicant.
               </p>
-            </section>
+              <section *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
+                <p *ngIf="businessTypeIsPrivateCorporation()">
+                  Note: A lawyer or consultant, may NOT submit this application on behalf of the applicant.
+                </p>
+                <p *ngIf="!businessTypeIsPrivateCorporation()">
+                  Note: A lawyer, licensee representative or third party operator may NOT submit this application on
+                  behalf of
+                  the applicant.
+                </p>
+              </section>
 
-            <app-field [valid]="!showValidationMessages || form.get('authorizedToSubmit').valid"
-                       errorMessage="Please affirm that you are authorized to submit the application." [showChevrons]="false">
-              <mat-checkbox formControlName="authorizedToSubmit" id="authorizedToSubmit">
-                <span class="error-states">*</span>
-                <span class="ml-2" *ngIf="!isRAS()">
-                  I understand and affirm that I am authorized to submit the application
-                </span>
-                <span class="ml-2" *ngIf="isRAS()">
-                  I understand and affirm that I am authorized to submit this information.
-                </span>
-              </mat-checkbox>
-            </app-field>
-            <p *ngIf="application?.licenseType == 'Cannabis Retail Store'||application?.licenseType == 'S119 CRS Authorization' || application?.licenseType == 'Marketer' || application?.licenseType == 'Producer Retail Store'">
-              Section 22(2) of the Cannabis Control and Licensing Act states: “A person must not submit to the general
-              manager an application, or information or a record included as part of the application, that contains false or misleading
-              information, or fails to disclose a material fact”.
-            </p>
-            <p *ngIf="application?.licenseType != 'Cannabis Retail Store' && application?.licenseType != 'S119 CRS Authorization' && application?.licenseType != 'Marketer' && application?.licenseType != 'Producer Retail Store'">
-              Section 20 (1) of the Liquor Control and Licensing Act states: "The general manager may refuse to issue,
-              renew, transfer or amend a licence if the applicant fails to disclose a material fact required by the
-              application or makes a false or misleading statement in the application."
-            </p>
-
-            <app-field [valid]="!showValidationMessages || form.get('signatureAgreement').valid"
-                       errorMessage="Please affirm that all of the information provided for this application is true and complete."
-                       [showChevrons]="false">
-              <mat-checkbox formControlName="signatureAgreement" id="signatureAgreement">
-                <span class="error-states">*</span>
-                <span class="ml-2" *ngIf="!isRAS()">
-                  I understand and affirm that all of the information provided for this
-                  application is true and complete
-                </span>
-                <span class="ml-2" *ngIf="isRAS()">
-                  I understand and affirm that all of the information provided is true and complete
-                </span>
-              </mat-checkbox>
-            </app-field>
-          </ng-container>
-          <ng-container *ngIf="application?.applicationType?.showLiquorDeclarations">
-            <p>
-              <strong>
-                The application must only be submitted by an individual with the authority to bind the applicant.
-                The branch relies on the applicant to ensure that the individual who submits this application is
-                authorized to do so. Typically, an appropriate individual in a corporation will be a duly authorized
-                signatory who will usually be an officer or, in some cases, a director. Note: A lawyer or
-                consultant, may NOT submit this application on behalf of the applicant.
-              </strong>
-            </p>
-            <app-field [valid]="!showValidationMessages || form.get('authorizedToSubmit').valid"
-                       errorMessage="Please affirm that you are authorized to submit the application." [showChevrons]="false">
-              <mat-checkbox formControlName="authorizedToSubmit">
-                <span class="error-states">*</span>
-                <span class="ml-2">
-                  I understand and affirm that I am authorized to submit the
-                  application
-                </span>
-              </mat-checkbox>
-            </app-field>
-            <p>
-              <strong *ngIf="application?.licenseType == 'Cannabis Retail Store' ||application?.licenseType == 'S119 CRS Authorization' || application?.licenseType == 'Marketer'">
+              <app-field [valid]="!showValidationMessages || form.get('authorizedToSubmit').valid"
+                         errorMessage="Please affirm that you are authorized to submit the application." [showChevrons]="false">
+                <mat-checkbox formControlName="authorizedToSubmit" id="authorizedToSubmit">
+                  <span class="error-states">*</span>
+                  <span class="ml-2" *ngIf="!isRAS()">
+                    I understand and affirm that I am authorized to submit the application
+                  </span>
+                  <span class="ml-2" *ngIf="isRAS()">
+                    I understand and affirm that I am authorized to submit this information.
+                  </span>
+                </mat-checkbox>
+              </app-field>
+              <p *ngIf="application?.licenseType == 'Cannabis Retail Store'||application?.licenseType == 'S119 CRS Authorization' || application?.licenseType == 'Marketer' || application?.licenseType == 'Producer Retail Store'">
                 Section 22(2) of the Cannabis Control and Licensing Act states: “A person must not submit to the general
                 manager an application, or information or a record included as part of the application, that contains false or misleading
                 information, or fails to disclose a material fact”.
-              </strong>
-              <strong *ngIf="application?.licenseType == 'Cannabis Retail Store' ||application?.licenseType == 'S119 CRS Authorization' || application?.licenseType == 'Marketer'">
-                Section 20(1) of the Liquor Control and Licensing Act states: “The general manager may refuse to
-                issue, renew, transfer or amend a licence if the applicant fails to disclose a material fact required by
-                the application or makes a false or misleading statement in the application.”
-              </strong>
+              </p>
+              <p *ngIf="application?.licenseType != 'Cannabis Retail Store' && application?.licenseType != 'S119 CRS Authorization' && application?.licenseType != 'Marketer' && application?.licenseType != 'Producer Retail Store'">
+                Section 20 (1) of the Liquor Control and Licensing Act states: "The general manager may refuse to issue,
+                renew, transfer or amend a licence if the applicant fails to disclose a material fact required by the
+                application or makes a false or misleading statement in the application."
+              </p>
+
+              <app-field [valid]="!showValidationMessages || form.get('signatureAgreement').valid"
+                         errorMessage="Please affirm that all of the information provided for this application is true and complete."
+                         [showChevrons]="false">
+                <mat-checkbox formControlName="signatureAgreement" id="signatureAgreement">
+                  <span class="error-states">*</span>
+                  <span class="ml-2" *ngIf="!isRAS()">
+                    I understand and affirm that all of the information provided for this
+                    application is true and complete
+                  </span>
+                  <span class="ml-2" *ngIf="isRAS()">
+                    I understand and affirm that all of the information provided is true and complete
+                  </span>
+                </mat-checkbox>
+              </app-field>
+            </ng-container>
+            <ng-container *ngIf="application?.applicationType?.showLiquorDeclarations">
+              <p>
+                <strong>
+                  The application must only be submitted by an individual with the authority to bind the applicant.
+                  The branch relies on the applicant to ensure that the individual who submits this application is
+                  authorized to do so. Typically, an appropriate individual in a corporation will be a duly authorized
+                  signatory who will usually be an officer or, in some cases, a director. Note: A lawyer or
+                  consultant, may NOT submit this application on behalf of the applicant.
+                </strong>
+              </p>
+              <app-field [valid]="!showValidationMessages || form.get('authorizedToSubmit').valid"
+                         errorMessage="Please affirm that you are authorized to submit the application." [showChevrons]="false">
+                <mat-checkbox formControlName="authorizedToSubmit">
+                  <span class="error-states">*</span>
+                  <span class="ml-2">
+                    I understand and affirm that I am authorized to submit the
+                    application
+                  </span>
+                </mat-checkbox>
+              </app-field>
+              <p>
+                <strong *ngIf="application?.licenseType == 'Cannabis Retail Store' ||application?.licenseType == 'S119 CRS Authorization' || application?.licenseType == 'Marketer'">
+                  Section 22(2) of the Cannabis Control and Licensing Act states: “A person must not submit to the general
+                  manager an application, or information or a record included as part of the application, that contains false or misleading
+                  information, or fails to disclose a material fact”.
+                </strong>
+                <strong *ngIf="application?.licenseType == 'Cannabis Retail Store' ||application?.licenseType == 'S119 CRS Authorization' || application?.licenseType == 'Marketer'">
+                  Section 20(1) of the Liquor Control and Licensing Act states: “The general manager may refuse to
+                  issue, renew, transfer or amend a licence if the applicant fails to disclose a material fact required by
+                  the application or makes a false or misleading statement in the application.”
+                </strong>
+              </p>
+              <app-field [valid]="!showValidationMessages || form.get('signatureAgreement').valid"
+                         errorMessage="Please affirm that all of the information provided for this application is true and complete."
+                         [showChevrons]="false">
+                <mat-checkbox formControlName="signatureAgreement">
+                  <span class="error-states">*</span>
+                  <div style="padding-left: 10px;">
+                    I understand and affirm that all of the information provided
+                    for this application is true and complete
+                  </div>
+                </mat-checkbox>
+              </app-field>
+            </ng-container>
+          </div>
+
+
+          <section class="error mt-3" *ngIf="showValidationMessages">
+            <p *ngFor="let message of validationMessages">
+              <span class="app-cancel">
+                <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
+                {{message}}
+              </span>
             </p>
-            <app-field [valid]="!showValidationMessages || form.get('signatureAgreement').valid"
-                       errorMessage="Please affirm that all of the information provided for this application is true and complete."
-                       [showChevrons]="false">
-              <mat-checkbox formControlName="signatureAgreement">
-                <span class="error-states">*</span>
-                <div style="padding-left: 10px;">
-                  I understand and affirm that all of the information provided
-                  for this application is true and complete
-                </div>
-              </mat-checkbox>
-            </app-field>
-          </ng-container>
-        </div>
+          </section>
+
+          <!-- Next Steps -->
 
 
-        <section class="error mt-3" *ngIf="showValidationMessages">
-          <p *ngFor="let message of validationMessages">
-            <span class="app-cancel">
-              <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
-              {{message}}
-            </span>
-          </p>
-        </section>
+          <h3 *ngIf="htmlContent?.nextSteps" class="blue-header">
+            What happens next?
+          </h3>
+          <section *ngIf="htmlContent?.nextSteps" class="padded-section content-bottom">
+            <div class="ngtest-before-starting-content" [innerHTML]="htmlContent.nextSteps"></div>
+          </section>
 
-        <!-- Next Steps -->
+          <!--  Proceed to Pay -->
 
-
-        <h3 *ngIf="htmlContent?.nextSteps" class="blue-header">
-          What happens next?
-        </h3>
-        <section *ngIf="htmlContent?.nextSteps" class="padded-section content-bottom">
-          <div class="ngtest-before-starting-content" [innerHTML]="htmlContent.nextSteps"></div>
-        </section>
-
-        <!--  Proceed to Pay -->
-
-        <section class="d-flex" style="margin-top: 15px;"
-                 *ngIf="!isOpenedByLGForApproval
+          <section class="d-flex" style="margin-top: 15px;"
+                   *ngIf="!isOpenedByLGForApproval
          && !isRAS()
          && !isFreeEndorsement() && !application?.applicationType?.isFree && !skipPayment
          && ((!isShowLGINApproval && !application?.applicationType?.isShowLGZoningConfirmation)
               ||!showSubmitToLG()) ">
 
-          <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
-          <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
+            <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
+            <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
 
-            <p>Proceed to pay online using a credit card through the secure web portal.</p>
+              <p>Proceed to pay online using a credit card through the secure web portal.</p>
 
-            <p>
-              <i>
-                <b>Please note:</b> Applications which are submitted without all required information or documents will
-                not be
-                processed. Applicants will be contacted and provided the opportunity to submit missing information. Once
-                applicants provide all required documents to the LCRB, the application will be processed.
-              </i>
-            </p>
-
-            <div>
-              <p *ngIf="application?.licenseType === 'Cannabis Retail Store'|| application?.licenseType == 'S119 CRS Authorization'">
-                The Province does not know how many applications for a cannabis retail store licence or authorization will be received.
-                Therefore, it is difficult to predict how long applications will take to process. To minimize delays in
-                processing, applicants must make sure the application is complete before submitting it.
-              </p>
-              <p *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
-                The Province does not know how many applications for a cannabis marketing licence will be received.
-                Therefore,
-                it is difficult to predict how long applications will take to process. To minimize delays in processing,
-                applicants must make sure the application is complete before submitting it.
+              <p>
+                <i>
+                  <b>Please note:</b> Applications which are submitted without all required information or documents will
+                  not be
+                  processed. Applicants will be contacted and provided the opportunity to submit missing information. Once
+                  applicants provide all required documents to the LCRB, the application will be processed.
+                </i>
               </p>
 
-              <br>
+              <div>
+                <p *ngIf="application?.licenseType === 'Cannabis Retail Store'|| application?.licenseType == 'S119 CRS Authorization'">
+                  The Province does not know how many applications for a cannabis retail store licence or authorization will be received.
+                  Therefore, it is difficult to predict how long applications will take to process. To minimize delays in
+                  processing, applicants must make sure the application is complete before submitting it.
+                </p>
+                <p *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
+                  The Province does not know how many applications for a cannabis marketing licence will be received.
+                  Therefore,
+                  it is difficult to predict how long applications will take to process. To minimize delays in processing,
+                  applicants must make sure the application is complete before submitting it.
+                </p>
 
-              <div *ngIf="application?.licenseType === 'Cannabis Retail Store' || application?.licenseType == 'S119 CRS Authorization'|| application?.licenseType === 'Producer Retail Store'">
-                For questions on the LCRB application process, please contact:
-                <a href="javascript: void(0);">
-                  LCRBCannabis@gov.bc.ca
-                </a>
-              </div>
-              <div *ngIf="application?.licenseType !== 'Cannabis Retail Store' && application?.licenseType != 'S119 CRS Authorization' && application?.licenseType !== 'Producer Retail Store'">
-                For questions on the LCRB application process, please contact:
-                <a href="javascript: void(0);">
-                  LCRBLiquor@gov.bc.ca
-                </a>
-              </div>
+                <br>
 
+                <div *ngIf="application?.licenseType === 'Cannabis Retail Store' || application?.licenseType == 'S119 CRS Authorization'|| application?.licenseType === 'Producer Retail Store'">
+                  For questions on the LCRB application process, please contact:
+                  <a href="javascript: void(0);">
+                    LCRBCannabis@gov.bc.ca
+                  </a>
+                </div>
+                <div *ngIf="application?.licenseType !== 'Cannabis Retail Store' && application?.licenseType != 'S119 CRS Authorization' && application?.licenseType !== 'Producer Retail Store'">
+                  For questions on the LCRB application process, please contact:
+                  <a href="javascript: void(0);">
+                    LCRBLiquor@gov.bc.ca
+                  </a>
+                </div>
+
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <section appRemoveIfFeatureOff="LGApprovals" class="ngtest-opened-by-lg"
-                 *ngIf="isOpenedByLGForApproval">
-          <app-lg-in-confirmation-of-receipt *ngIf="application && isShowLGINApproval  || lgApprovalDecisionMade()"
-                                             [application]="application" [isOpenedByLGForApproval]="isOpenedByLGForApproval" [htmlContent]="htmlContent" [disableForm]="lgApprovalDecisionMade()">
-          </app-lg-in-confirmation-of-receipt>
-          <app-lg-zoning-confirmation *ngIf="application?.applicationType?.isShowLGZoningConfirmation || lgHasReviewedZoning()"
-                                      [disableForm]="lgHasReviewedZoning()" [application]="application" [isOpenedByLGForApproval]="isOpenedByLGForApproval">
-          </app-lg-zoning-confirmation>
-        </section>
+          <section appRemoveIfFeatureOff="LGApprovals" class="ngtest-opened-by-lg"
+                   *ngIf="isOpenedByLGForApproval">
+            <app-lg-in-confirmation-of-receipt *ngIf="application && isShowLGINApproval  || lgApprovalDecisionMade()"
+                                               [application]="application" [isOpenedByLGForApproval]="isOpenedByLGForApproval" [htmlContent]="htmlContent" [disableForm]="lgApprovalDecisionMade()">
+            </app-lg-in-confirmation-of-receipt>
+            <app-lg-zoning-confirmation *ngIf="application?.applicationType?.isShowLGZoningConfirmation || lgHasReviewedZoning()"
+                                        [disableForm]="lgHasReviewedZoning()" [application]="application" [isOpenedByLGForApproval]="isOpenedByLGForApproval">
+            </app-lg-zoning-confirmation>
+          </section>
 
 
-        <section *ngIf="(application?.applicationType?.isShowLGINApproval || application?.applicationType?.isShowLGZoningConfirmation)
+          <section *ngIf="(application?.applicationType?.isShowLGINApproval || application?.applicationType?.isShowLGZoningConfirmation)
                 && (application?.applicationStatus === 'Intake' || application?.lGApprovalDecision === 'Rejected')
                 && !lgApprovalDecisionMade()
                 && !lgHasReviewedZoning()
                 && !lGHasApproved()
                 && showSubmitToLG()">
-          <br>
-          <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
-          <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
-            <section class="ngtest-preamble-content">
-              <h3>Submit for LG/IN Review</h3>
-              Your application will now be submitted to your local government/Indigenous Nation for their
-              <span *ngIf="application?.applicationType?.isShowLGINApproval">comment and assessment</span>
-              <span *ngIf="application?.applicationType.isShowLGZoningConfirmation">confirmation of zoning</span>.
-              Please
-              ensure
-              you have reviewed
-              their policy
-              <span *ngIf="form.get('indigenousNation').value.websiteUrl">
-                (
-                <a [href]="form.get('indigenousNation').value.websiteUrl"
-                   target="_blank">
-                  {{this.form.get('indigenousNation').value.websiteUrl}}
-                </a>)
+            <br>
+            <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
+            <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
+              <section class="ngtest-preamble-content">
+                <h3>Submit for LG/IN Review</h3>
+                Your application will now be submitted to your local government/Indigenous Nation for their
+                <span *ngIf="application?.applicationType?.isShowLGINApproval">comment and assessment</span>
+                <span *ngIf="application?.applicationType.isShowLGZoningConfirmation">confirmation of zoning</span>.
+                Please
+                ensure
+                you have reviewed
+                their policy
+                <span *ngIf="form.get('indigenousNation').value.websiteUrl">
+                  (
+                  <a [href]="form.get('indigenousNation').value.websiteUrl"
+                     target="_blank">
+                    {{this.form.get('indigenousNation').value.websiteUrl}}
+                  </a>)
+                </span>
+                to ensure your successful submission.
+              </section>
+              <br>
+              <p>
+                <fa-icon [icon]="faSave" style="margin-right: 10px;"></fa-icon>If you leave this page, the information you input
+                will be saved. You can continue later from the dashboard.
+              </p>
+            </div>
+          </section>
+
+          <section *ngIf="lGHasApproved() && !isOpenedByLGForApproval">
+            <br>
+            <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
+            <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
+              <section class="ngtest-preamble-content">
+                <h3>LG/IN Review Complete</h3>
+                Your application has been reviewed by your local government/Indigenous Nation and they have
+                <span *ngIf="isShowLGINApproval">
+                  <span *ngIf="this.application.lGApprovalDecision !== 'OptOut'">accepted it for submission.</span>
+                  <span *ngIf="this.application.lGApprovalDecision === 'OptOut'">decided to Opt-Out of the community assessment process. In their place, LCRB will complete the site community assessment.</span>
+                </span>
+                <span *ngIf="application?.applicationType.isShowLGZoningConfirmation">provided confirmation of zoning as required.</span>
+                You may now submit your application.
+              </section>
+              <br>
+              <p>
+                <fa-icon [icon]="faSave" style="margin-right: 10px;"></fa-icon>If you leave this page, the information you input
+                will be saved. You can continue later from the dashboard.
+              </p>
+            </div>
+          </section>
+
+          <section *ngIf="lgApprovalDecisionMade() && !lGHasApproved()">
+            <br>
+            <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
+            <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
+              <section class="ngtest-preamble-content">
+                <h3>LG/IN Review Complete </h3>
+                Your application has been reviewed by your local government/Indigenous Nation and they have
+                <span *ngIf="isShowLGINApproval"><strong>rejected</strong> it.</span>
+                <span *ngIf="application?.applicationType.isShowLGZoningConfirmation">specified that zoning <strong>does not</strong> permit a {{application?.applicationType?.name}}.</span>
+                You may contact the individual listed above for more information. If you intend to revise your application, you must submit a new one.
+              </section>
+              <br>
+            </div>
+          </section>
+
+
+          <!-- button section when  LGApprovals is enabled  when it's the applicant opening the application -->
+
+          <section appRemoveIfFeatureOff="LGApprovals" *ngIf="!isOpenedByLGForApproval && !lGHasRejected()"
+                   style="margin-top: 20px; position: relative;">
+            <button mat-raised-button *ngIf="account?.businessType !== 'LocalGovernment '" color="secondary" style="margin-right: 10px;"
+                    (click)="saveForLater()" [disabled]="saveForLaterInProgress">
+              <span>
+                <fa-icon [icon]="faSave"></fa-icon>
+                SAVE FOR LATER
               </span>
-              to ensure your successful submission.
-            </section>
-            <br>
-            <p>
-              <fa-icon [icon]="faSave" style="margin-right: 10px;"></fa-icon>If you leave this page, the information you input
-              will be saved. You can continue later from the dashboard.
-            </p>
-          </div>
-        </section>
-
-        <section *ngIf="lGHasApproved() && !isOpenedByLGForApproval">
-          <br>
-          <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
-          <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
-            <section class="ngtest-preamble-content">
-              <h3>LG/IN Review Complete</h3>
-              Your application has been reviewed by your local government/Indigenous Nation and they have
-              <span *ngIf="isShowLGINApproval">
-                <span *ngIf="this.application.lGApprovalDecision !== 'OptOut'">accepted it for submission.</span>
-                <span *ngIf="this.application.lGApprovalDecision === 'OptOut'">decided to Opt-Out of the community assessment process. In their place, LCRB will complete the site community assessment.</span>
-              </span>
-              <span *ngIf="application?.applicationType.isShowLGZoningConfirmation">provided confirmation of zoning as required.</span>
-              You may now submit your application.
-            </section>
-            <br>
-            <p>
-              <fa-icon [icon]="faSave" style="margin-right: 10px;"></fa-icon>If you leave this page, the information you input
-              will be saved. You can continue later from the dashboard.
-            </p>
-          </div>
-        </section>
-
-        <section *ngIf="lgApprovalDecisionMade() && !lGHasApproved()">
-          <br>
-          <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
-          <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
-            <section class="ngtest-preamble-content">
-              <h3>LG/IN Review Complete </h3>
-              Your application has been reviewed by your local government/Indigenous Nation and they have
-              <span *ngIf="isShowLGINApproval"><strong>rejected</strong> it.</span>
-              <span *ngIf="application?.applicationType.isShowLGZoningConfirmation">specified that zoning <strong>does not</strong> permit a {{application?.applicationType?.name}}.</span>
-              You may contact the individual listed above for more information. If you intend to revise your application, you must submit a new one.
-            </section>
-            <br>
-          </div>
-        </section>
-
-
-        <!-- button section when  LGApprovals is enabled  when it's the applicant opening the application -->
-
-        <section appRemoveIfFeatureOff="LGApprovals" *ngIf="!isOpenedByLGForApproval && !lGHasRejected()"
-                 style="margin-top: 20px; position: relative;">
-          <button mat-raised-button *ngIf="account?.businessType !== 'LocalGovernment '" color="secondary" style="margin-right: 10px;"
-                  (click)="saveForLater()" [disabled]="saveForLaterInProgress">
-            <span>
-              <fa-icon [icon]="faSave"></fa-icon>
-              SAVE FOR LATER
-            </span>
-            <mat-progress-bar *ngIf="saveForLaterInProgress" mode="indeterminate"></mat-progress-bar>
-          </button>
+              <mat-progress-bar *ngIf="saveForLaterInProgress" mode="indeterminate"></mat-progress-bar>
+            </button>
 
           <!-- NEXT STEP BUTTONS
-    LG Approval Required -- > Submit to LG For Approval
+          LG Approval Required -- > Submit to LG For Approval
 
-    No LG Approvals Required
-    No Security Screening Required -- > Submit & Pay
-    Security Screening Required    -- > Proceed to Security Screening
-    LG Approved
-    No Security Screening Required -- > Submit & Pay
-    Security Screening Required    -- > Proceed to Security Screening
+          No LG Approvals Required
+          No Security Screening Required -- > Submit & Pay
+          Security Screening Required    -- > Proceed to Security Screening
+          LG Approved
+          No Security Screening Required -- > Submit & Pay
+          Security Screening Required    -- > Proceed to Security Screening
 
-    -->
+          -->
           <!-- LG Approval Required -->
           <button mat-raised-button class="ng-test-submit-for-lg-review" color="primary"
                   *ngIf="showSubmitToLG()"
@@ -2829,66 +2893,66 @@
             <mat-progress-bar *ngIf="disableSubmitForLGINApproval" mode="indeterminate"></mat-progress-bar>
           </button>
 
-          <!-- LG Approved OR NO LG Approvals Required -->
-          <ng-container *ngIf="lGHasApproved() || ((!application?.applicationType?.isShowLGINApproval && !application?.applicationType?.isShowLGZoningConfirmation) || !showSubmitToLG())">
+            <!-- LG Approved OR NO LG Approvals Required -->
+            <ng-container *ngIf="lGHasApproved() || ((!application?.applicationType?.isShowLGINApproval && !application?.applicationType?.isShowLGZoningConfirmation) || !showSubmitToLG())">
 
-            <button mat-raised-button *ngIf="!application?.applicationType?.requiresSecurityScreening" color="primary"
-                    (click)="submit_application()" [disabled]="submitApplicationInProgress">
-              SUBMIT&nbsp;<span *ngIf="!isFreeEndorsement() && !application?.applicationType?.isFree &&  !skipPayment && !isRAS()">&amp; PAY</span>
+              <button mat-raised-button *ngIf="!application?.applicationType?.requiresSecurityScreening" color="primary"
+                      (click)="submit_application()" [disabled]="submitApplicationInProgress">
+                SUBMIT&nbsp;<span *ngIf="!isFreeEndorsement() && !application?.applicationType?.isFree &&  !skipPayment && !isRAS()">&amp; PAY</span>
+                <mat-progress-bar *ngIf="submitApplicationInProgress" mode="indeterminate"></mat-progress-bar>
+              </button>
+
+              <button mat-raised-button *ngIf="application?.applicationType?.requiresSecurityScreening" color="primary"
+                      (click)="proceedToSecurityScreening()" [disabled]="proceedToSecurityScreeningInProgress">
+                <span>
+                  <fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>PROCEED TO SECURITY SCREENING
+                </span>
+                <mat-progress-bar *ngIf="proceedToSecurityScreeningInProgress" mode="indeterminate"></mat-progress-bar>
+              </button>
+            </ng-container>
+
+            <span style="color: #1a5a96; float: right; padding-top: 10px;">
+              <span (click)="cancelApplication()">
+                <fa-icon [icon]="faTrashAlt" style="color: #1a5a96;"></fa-icon>
+                <a href="javascript: void(0)" id="cancelApp">
+                  CANCEL APPLICATION
+                </a>
+              </span>
+            </span>
+
+            <!-- <div [ngBusy]="busy"></div> -->
+          </section>
+
+          <!-- button section when  LGApprovals is disabled -->
+          <section appRemoveIfFeatureOn="LGApprovals" style="margin-top: 20px; position: relative;">
+            <button mat-raised-button color="secondary" style="margin-right: 10px;" (click)="saveForLater()">
+              <span>
+                <fa-icon [icon]="faSave"></fa-icon>
+                SAVE FOR LATER
+              </span>
+              <mat-progress-bar *ngIf="saveForLaterInProgress" mode="indeterminate"></mat-progress-bar>
+            </button>
+            <button mat-raised-button color="primary" (click)="submit_application()">
+              <span>
+                <fa-icon [icon]="faCreditCard" *ngIf="!skipPayment"></fa-icon>SUBMIT&nbsp;<span *ngIf="!skipPayment && !isRAS()">&amp; PAY</span>
+              </span>
               <mat-progress-bar *ngIf="submitApplicationInProgress" mode="indeterminate"></mat-progress-bar>
             </button>
 
-            <button mat-raised-button *ngIf="application?.applicationType?.requiresSecurityScreening" color="primary"
-                    (click)="proceedToSecurityScreening()" [disabled]="proceedToSecurityScreeningInProgress">
-              <span>
-                <fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>PROCEED TO SECURITY SCREENING
+            <span style="color: #1a5a96; float: right; padding-top: 10px;">
+              <span (click)="cancelApplication()">
+                <fa-icon [icon]="faTrashAlt" style="color: #1a5a96;"></fa-icon>
+                <a href="javascript: void(0)" id="cancelApp">
+                  CANCEL <span *ngIf="!isRAS()">APPLICATION</span>
+                </a>
               </span>
-              <mat-progress-bar *ngIf="proceedToSecurityScreeningInProgress" mode="indeterminate"></mat-progress-bar>
-            </button>
-          </ng-container>
-
-          <span style="color: #1a5a96; float: right; padding-top: 10px;">
-            <span (click)="cancelApplication()">
-              <fa-icon [icon]="faTrashAlt" style="color: #1a5a96;"></fa-icon>
-              <a href="javascript: void(0)" id="cancelApp">
-                CANCEL APPLICATION
-              </a>
             </span>
-          </span>
 
-          <!-- <div [ngBusy]="busy"></div> -->
-        </section>
+            <!-- <div [ngBusy]="busy"></div> -->
+          </section>
 
-        <!-- button section when  LGApprovals is disabled -->
-        <section appRemoveIfFeatureOn="LGApprovals" style="margin-top: 20px; position: relative;">
-          <button mat-raised-button color="secondary" style="margin-right: 10px;" (click)="saveForLater()">
-            <span>
-              <fa-icon [icon]="faSave"></fa-icon>
-              SAVE FOR LATER
-            </span>
-            <mat-progress-bar *ngIf="saveForLaterInProgress" mode="indeterminate"></mat-progress-bar>
-          </button>
-          <button mat-raised-button color="primary" (click)="submit_application()">
-            <span>
-              <fa-icon [icon]="faCreditCard" *ngIf="!skipPayment"></fa-icon>SUBMIT&nbsp;<span *ngIf="!skipPayment && !isRAS()">&amp; PAY</span>
-            </span>
-            <mat-progress-bar *ngIf="submitApplicationInProgress" mode="indeterminate"></mat-progress-bar>
-          </button>
-
-          <span style="color: #1a5a96; float: right; padding-top: 10px;">
-            <span (click)="cancelApplication()">
-              <fa-icon [icon]="faTrashAlt" style="color: #1a5a96;"></fa-icon>
-              <a href="javascript: void(0)" id="cancelApp">
-                CANCEL <span *ngIf="!isRAS()">APPLICATION</span>
-              </a>
-            </span>
-          </span>
-
-          <!-- <div [ngBusy]="busy"></div> -->
-        </section>
-
+        </div>
       </div>
-    </div>
 
     <div [ngClass]="{'normal-mode': mode !== UPLOAD_FILES_MODE}">
       <div [formGroup]="form" style="padding-left: 45px; position: relative">

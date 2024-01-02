@@ -63,6 +63,7 @@ export class ApplicationType {
   hasALRQuestion: boolean;
   showZoningDeclarations: boolean;
   isRelocation: boolean;
+  discretionRequest: boolean;
 }
 
 export enum FormControlState {
@@ -114,4 +115,7 @@ export enum ApplicationTypeNames {
   TiedHouseExemptionRemoval = "Tied House Exemption Removal",
   TiedHouseExemptionApplication = "Tied House Exemption Application",
   TemporaryExtensionOfLicensedAreaLP = "Temporary Extension of Licensed Area (LP)",
+  ManufacturerLocationChange = "Manufacturer Location Change",
+  TemporaryChangetoaLiquorLicence_Other = "Temporary Change to a Liquor Licence - Other",
+
 }

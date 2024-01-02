@@ -55,13 +55,16 @@
           associates can be found on the application dashboard.
         </p>
         <p>
+          {{isLiquor}}
           The applicant may be notified by the Liquor and Cannabis Regulation Branch if any information is missing, or
           if
           more information is required. If the applicant wishes to make any changes to the application, please contact
           the
           LCRB at
           <span *ngIf="isLiquor"><a href="mailto:lcrbliquor@gov.bc.ca">LCRBLiquor@gov.bc.ca</a>.</span>
-          <span *ngIf="!isLiquor"><a href="mailto:lcrbcannabis@gov.bc.ca">LCRBCannabis@gov.bc.ca</a>.</span>
+          <span *ngIf="isCannabis"><a href="mailto:lcrbcannabis@gov.bc.ca">LCRBCannabis@gov.bc.ca</a>.</span>
+          <span *ngIf="!isCannabis&&!isLiquor"><a href="mailto:lcrbliquor@gov.bc.ca">LCRBLiquor@gov.bc.ca</a>.</span>
+
         </p>
         <br>
         <div [innerHTML]="htmlContent.nextSteps"></div>
