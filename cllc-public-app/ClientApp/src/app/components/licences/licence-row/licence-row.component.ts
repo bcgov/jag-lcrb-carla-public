@@ -4,6 +4,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { LicenseDataService } from "@app/services/license-data.service";
 import { Router } from "@angular/router";
 import { ApplicationTypeNames } from "@models/application-type.model";
+import { ApplicationStatuses } from "@models/application-type.model";
 import { FormBase } from "@shared/form-base";
 import { takeWhile } from "rxjs/operators";
 import { ApplicationLicenseSummary } from "@models/application-license-summary.model";
@@ -411,46 +412,57 @@ export class LicenceRowComponent extends FormBase implements OnInit {
       "Temporary Patron Participation Entertainment Endorsement",
       "Temporary Use Area Endorsement"
     ];
-    let isTemporaryApplication = tempApplications.includes(actionName);
-    // search for an existing application type that matches the type specified
-    const actionApplication = licence.actionApplications.find(
-      app => app.applicationTypeName === actionName
-        && !app.isStructuralChange                        // we allow multiple structurals
-        && app.applicationStatus !== "Active");
 
-    // if we found an action application
-    if (actionApplication && !isTemporaryApplication) {
-      // and if it wasn't paid for
-      if (actionApplication.isPaid === false) {
-        // open it up so we can continue it
-        this.router.navigateByUrl(`/account-profile/${actionApplication.applicationId}`);
-        // otherwise if it was paid for
-      } else if (actionApplication.isPaid === true) {
-        this.requestStarted = false;
-        this.requestID = -1;
-        // prevent a re-submission until the application status is no longer active
-        this.snackBar.open(`${actionName} has already been submitted and is under review`,
-          "Warning",
-          { duration: 3500, panelClass: ["red-snackbar"] });
-      }
-      // if we didn't find an action application
-    } else {
-      // create one
-      this.busy = this.licenceDataService.createApplicationForActionType(licence.licenseId, actionName)
-        .pipe(takeWhile(() => this.componentActive))
-        .subscribe(data => {
+    try {
+      let isTemporaryApplication = tempApplications.includes(actionName);
+      // search for an existing application type that matches the type specified
+
+      // 2024-01-12 LCSD-6459 waynezen: use new ApplicationStatuses instead of hard-coding
+      // filter out Approved Applications - which forces creation of a new Application
+      const actionApplication = licence.actionApplications.find(
+        app => app.applicationTypeName === actionName
+          && !app.isStructuralChange                        // we allow multiple structurals
+          && app.applicationStatus !== ApplicationStatuses.Active
+          && app.applicationStatus !== ApplicationStatuses.Approved);
+
+      // if we found an action application
+      if (typeof (actionApplication) !== "undefined" && !isTemporaryApplication) {
+        // and if it wasn't paid for
+        if (actionApplication.isPaid === false) {
+          // open it up so we can continue it
+          this.router.navigateByUrl(`/account-profile/${actionApplication.applicationId}`);
+          // otherwise if it was paid for
+        } else if (actionApplication.isPaid === true) {
           this.requestStarted = false;
           this.requestID = -1;
-          this.router.navigateByUrl(`/account-profile/${data.id}`);
-        },
-          () => {
+          // prevent a re-submission until the application status is no longer active
+          this.snackBar.open(`${actionName} has already been submitted and is under review`,
+            "Warning",
+            { duration: 3500, panelClass: ["red-snackbar"] });
+        }
+        // if we didn't find an action application
+      } else {
+        // create one
+        this.busy = this.licenceDataService.createApplicationForActionType(licence.licenseId, actionName)
+          .pipe(takeWhile(() => this.componentActive))
+          .subscribe(data => {
             this.requestStarted = false;
             this.requestID = -1;
-            this.snackBar.open(`Error running licence action for ${actionName}`,
-              "Fail",
-              { duration: 3500, panelClass: ["red-snackbar"] });
-          }
-        );
+            this.router.navigateByUrl(`/account-profile/${data.id}`);
+          },
+            () => {
+              this.requestStarted = false;
+              this.requestID = -1;
+              this.snackBar.open(`Error running licence action for ${actionName}`,
+                "Fail",
+                { duration: 3500, panelClass: ["red-snackbar"] });
+            }
+          );
+      }
+    }
+    catch (err) {
+      console.error(err);
+
     }
   }
 
