@@ -159,8 +159,8 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
             app => ["Approved", "Renewal Due", "Payment Required", "Active"].indexOf(app.applicationStatus) === -1)
           .forEach((application: ApplicationSummary) => {
             if (application.applicationTypeName != "Outstanding Prior Balance Invoice - LIQ") {
-              //LCSD-5811 LP Club licence application is under review and In Progress applications in the applicant Dashboard, they do not have any tied house exemptions to remove
-              if (application.applicationTypeName == "Liquor Primary Club" && application.applicationStatus.indexOf("Under Review") > -1 && application.endorsements.length > 0)
+              //LCSD-5811 LP or LP Club licence application is under review and In Progress applications in the applicant Dashboard, they do not have any tied house exemptions to remove
+              if ((application.applicationTypeName == "Liquor Primary" || application.applicationTypeName == "Liquor Primary Club") && application.applicationStatus.indexOf("Under Review") > -1 && application.endorsements.length > 0)
               {
                 let index = application.endorsements.indexOf("Change to Hours of Liquor Service Hours (outside Service Hours)");
                 if (index > -1) {
