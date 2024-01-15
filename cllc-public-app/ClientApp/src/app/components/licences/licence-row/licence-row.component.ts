@@ -418,12 +418,16 @@ export class LicenceRowComponent extends FormBase implements OnInit {
       // search for an existing application type that matches the type specified
 
       // 2024-01-12 LCSD-6459 waynezen: use new ApplicationStatuses instead of hard-coding
-      // filter out Approved Applications - which forces creation of a new Application
+      // filter out Approved/Terminated.. Applications - which forces creation of a new Application
       const actionApplication = licence.actionApplications.find(
         app => app.applicationTypeName === actionName
           && !app.isStructuralChange                        // we allow multiple structurals
           && app.applicationStatus !== ApplicationStatuses.Active
-          && app.applicationStatus !== ApplicationStatuses.Approved);
+          && app.applicationStatus !== ApplicationStatuses.Approved
+          && app.applicationStatus !== ApplicationStatuses.Terminated
+          && app.applicationStatus !== ApplicationStatuses.TerminatedRefunded
+          && app.applicationStatus !== ApplicationStatuses.Refused
+          );
 
       // if we found an action application
       if (typeof (actionApplication) !== "undefined" && !isTemporaryApplication) {
