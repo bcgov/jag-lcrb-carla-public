@@ -159,6 +159,14 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
             app => ["Approved", "Renewal Due", "Payment Required", "Active"].indexOf(app.applicationStatus) === -1)
           .forEach((application: ApplicationSummary) => {
             if (application.applicationTypeName != "Outstanding Prior Balance Invoice - LIQ") {
+              //LCSD-6514 a new LP in progress: 'Change to Hours of Liquor Service Hours (outside Service Hours) needs to be removed
+              if (application.applicationTypeName == "Liquor Primary" && application.applicationStatus == "Under Review" && application.endorsements.length>0)
+              {
+                let index = application.endorsements.indexOf("Change to Hours of Liquor Service Hours (outside Service Hours)");
+                if (index > -1) {
+                  application.endorsements=application.endorsements.splice(index, 1);
+                }
+              }
               this.inProgressApplications.push(application);
             }
           });
