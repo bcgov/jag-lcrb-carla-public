@@ -423,11 +423,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
         app => app.applicationTypeName === actionName
           && !app.isStructuralChange                        // we allow multiple structurals
           && app.applicationStatus !== ApplicationStatuses.Active
-          && app.applicationStatus !== ApplicationStatuses.Approved
-          && app.applicationStatus !== ApplicationStatuses.Terminated
-          && app.applicationStatus !== ApplicationStatuses.TerminatedRefunded
-          && app.applicationStatus !== ApplicationStatuses.Refused
-          );
+          && app.applicationStatus !== ApplicationStatuses.Approved);
 
       // if we found an action application
       if (typeof (actionApplication) !== "undefined" && !isTemporaryApplication) {
