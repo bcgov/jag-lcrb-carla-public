@@ -149,6 +149,15 @@ export interface Application {
   isPackaging: boolean;
   isPermittedInZoning: boolean;
 
+  relocateOnSiteStore: boolean;
+  confirmPermitsRetailSales: boolean;
+  relocatePicnicAreaEndorsement: boolean;
+  confirmrelocatePicnicAreaEndorsement: boolean;
+
+  relocateWinaryLicence: boolean;
+  confirmRelocateWinaryLicence: boolean;
+
+
   mfgBrewPubOnSite: string;
   mfgPipedInProduct: string;
 

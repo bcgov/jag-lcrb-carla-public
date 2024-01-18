@@ -39192,6 +39192,10 @@
           "format": "int32",
           "type": "integer"
         },
+        "adoxio_relocatepicnicareaendorsement": {
+          "format": "int32",
+          "type": "integer"
+        },
         "_adoxio_parentapplicationid_value": {
           "type": "string"
         },
@@ -39791,6 +39795,10 @@
         "_slainvokedid_value": {
           "type": "string"
         },
+        "adoxio_datefirstyearpaymentreceived": {
+          "format": "date-time",
+          "type": "string"
+        },
         "adoxio_securityscreeningcompletenesstrigger": {
           "format": "int32",
           "type": "integer"
@@ -39817,9 +39825,6 @@
         },
         "adoxio_finalcapassessmentdate": {
           "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_addressprovince": {
           "type": "string"
         },
         "adoxio_dateintakecomplete": {
@@ -39897,10 +39902,6 @@
           "type": "boolean"
         },
         "adoxio_picnicreadandaccepttermsandconditions": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistcsuinitialcheck": {
           "format": "int32",
           "type": "integer"
         },
@@ -40071,6 +40072,10 @@
         },
         "adoxio_mfgstepcrushing": {
           "type": "boolean"
+        },
+        "adoxio_confirmunderstandingwinerylicence": {
+          "format": "int32",
+          "type": "integer"
         },
         "_adoxio_investigatorid_value": {
           "type": "string"
@@ -40265,6 +40270,10 @@
         "adoxio_dateaiplongdatestring": {
           "type": "string"
         },
+        "adoxio_confirmpermitsretailsales": {
+          "format": "int32",
+          "type": "integer"
+        },
         "adoxio_mfrsupinfointendproduce": {
           "type": "boolean"
         },
@@ -40435,6 +40444,10 @@
         "adoxio_investigationstatuscomment": {
           "type": "string"
         },
+        "adoxio_checklistcsuinitialcheck": {
+          "format": "int32",
+          "type": "integer"
+        },
         "adoxio_datereceivedlgin": {
           "format": "date-time",
           "type": "string"
@@ -40475,6 +40488,10 @@
         "adoxio_contactpersonfax": {
           "type": "string"
         },
+        "adoxio_relocateonsitestore": {
+          "format": "int32",
+          "type": "integer"
+        },
         "adoxio_checklistcriminalrecordscomplete": {
           "format": "int32",
           "type": "integer"
@@ -40491,6 +40508,9 @@
           "type": "string"
         },
         "adoxio_initialcapassessment": {
+          "type": "string"
+        },
+        "adoxio_addressprovince": {
           "type": "string"
         },
         "adoxio_checklistotherapplicationschecked": {
@@ -40608,6 +40628,10 @@
           "format": "int32",
           "type": "integer"
         },
+        "adoxio_confirmrelocatepicnicareaendorsement": {
+          "format": "int32",
+          "type": "integer"
+        },
         "adoxio_checklistletterofintentassessment": {
           "format": "int32",
           "type": "integer"
@@ -40626,6 +40650,10 @@
           "type": "string"
         },
         "adoxio_checklisthoursreviewed": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_relocatewinerylicence": {
           "format": "int32",
           "type": "integer"
         },
@@ -40917,10 +40945,6 @@
         "adoxio_isoninland": {
           "format": "int32",
           "type": "integer"
-        },
-        "adoxio_datefirstyearpaymentreceived": {
-          "format": "date-time",
-          "type": "string"
         },
         "adoxio_renewalvalidinterest": {
           "format": "int32",
