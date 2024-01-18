@@ -260,8 +260,14 @@ namespace Gov.Lclb.Cllb.Public.Models
             //LCSD-5779
             to.AdoxioTiedhouseexemption = from.WillHaveTiedHouseExemption;
             to.AdoxioTempsuspensionorpatronparticipationstart = from.TempSuspensionOrPatronParticipationStart;
-            to.AdoxioTempsuspensionorpatronparticipationend = from.TempSuspensionOrPatronParticipationEnd;
-        }
+            
+            to.AdoxioRelocateonsitestore = from.RelocateOnSiteStore ? 1:0;
+            to.AdoxioConfirmpermitsretailsales = from.ConfirmPermitsRetailSales ? 1:0;
+            to.AdoxioRelocatepicnicareaendorsement = from.RelocatePicnicAreaEndorsement ? 1:0;
+            to.AdoxioConfirmrelocatepicnicareaendorsement = from.ConfirmrelocatePicnicAreaEndorsement ? 1:0;
+            to.AdoxioRelocatewinerylicence = from.RelocateWinaryLicence ? 1:0;
+            to.AdoxioConfirmunderstandingwinerylicence= from.ConfirmRelocateWinaryLicence?1:0;
+    }
 
 
         public static void CopyValues(this MicrosoftDynamicsCRMadoxioApplication to, CovidApplication from)
@@ -640,6 +646,14 @@ namespace Gov.Lclb.Cllb.Public.Models
                 WillHaveTiedHouseExemption=dynamicsApplication.AdoxioTiedhouseexemption,
                 TempSuspensionOrPatronParticipationStart = dynamicsApplication.AdoxioTempsuspensionorpatronparticipationstart,
                 TempSuspensionOrPatronParticipationEnd = dynamicsApplication.AdoxioTempsuspensionorpatronparticipationend,
+                
+                ConfirmrelocatePicnicAreaEndorsement = dynamicsApplication.AdoxioConfirmrelocatepicnicareaendorsement.HasValue ? dynamicsApplication.AdoxioConfirmrelocatepicnicareaendorsement.Value == 1 ? true : false : false,
+                RelocatePicnicAreaEndorsement = dynamicsApplication.AdoxioRelocatepicnicareaendorsement.HasValue ? dynamicsApplication.AdoxioRelocatepicnicareaendorsement.Value == 1 ? true : false : false,
+                ConfirmPermitsRetailSales = dynamicsApplication.AdoxioConfirmpermitsretailsales.HasValue ? dynamicsApplication.AdoxioConfirmpermitsretailsales.Value == 1 ? true : false : false,
+                RelocateOnSiteStore = dynamicsApplication.AdoxioRelocateonsitestore.HasValue? dynamicsApplication.AdoxioRelocateonsitestore.Value==1? true:false : false,
+                RelocateWinaryLicence = dynamicsApplication.AdoxioRelocatewinerylicence.HasValue ? dynamicsApplication.AdoxioRelocatewinerylicence.Value == 1 ? true : false : false,
+                ConfirmRelocateWinaryLicence = dynamicsApplication.AdoxioConfirmunderstandingwinerylicence.HasValue ? dynamicsApplication.AdoxioConfirmunderstandingwinerylicence.Value == 1 ? true : false : false,
+
             };
 
 

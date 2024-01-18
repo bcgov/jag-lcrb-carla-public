@@ -27,7 +27,7 @@
                 Dashboard
               </a>
               <a appRemoveIfFeatureOff="LGApprovals"
-                *ngIf="account?.businessType === 'LocalGovernment' && account?.localGovernmentId"
+                *ngIf="(account?.businessType === 'LocalGovernment' && account?.localGovernmentId) || (account?.businessType === 'IndigenousNation')"
                 (click)="toggleButtonLoggedIn.click()" class="nav-link" routerLink="/lg-approvals">
                 Applications for Review
               </a>
