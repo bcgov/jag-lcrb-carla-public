@@ -1324,7 +1324,7 @@
                     Requests for discretion should be submitted at least two months prior to the proposed event.
                   </p>
 
-                  <app-file-uploader *ngIf="applicationId" documentType="Exterior Renderings"
+                  <app-file-uploader *ngIf="applicationId" documentType="Discretion Request"
                                      fileTypes="FILE MUST BE IN PDF FORMAT." [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
                                      [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()" [multipleFiles]="true"
                                      entityName="application" [useDocumentTypeForName]="true"
