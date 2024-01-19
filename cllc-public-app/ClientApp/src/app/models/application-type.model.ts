@@ -119,24 +119,3 @@ export enum ApplicationTypeNames {
   TemporaryChangetoaLiquorLicence_Other = "Temporary Change to a Liquor Licence - Other",
 
 }
-
-// 2024-01-11 LCSD-6459 waynezen: instead of hard-coding Application Status, use these
-export enum ApplicationStatuses {
-  Active = "Active",
-  Intake = "Intake",
-  Submitted = "Submitted",
-  InProgress = "(Do Not Use) In Progress",
-  Incomplete = "Incomplete/info req",
-  PendingApproval = "Pending LG/IN Approval",
-  Review = "Under Review",
-  Assessment = "Application Assessment",
-  Issued = "AIP Issued",
-  Refused = "Refused",
-  PendingFinalInspection = "Pending Final Inspection",
-  ReviewingResults = "Reviewing Inspection Results",
-  PendingLicenseFee = "Pending Licence Fee",
-  Terminated = "Terminated",
-  TerminatedRefunded = "Terminated and Refunded",
-  Processed = "(Do not Use) Processed",
-  Approved = "Approved"
-}
