@@ -149,7 +149,7 @@ namespace Gov.Lclb.Cllb.Public.Utils
 
             if (shownStatus == "InProgress" 
                            || shownStatus == "Processed"        // legacy support
-                           || shownStatus == "Submitted"
+                           //|| shownStatus == "Submitted"
                            || shownStatus == "Under Review" || shownStatus == "UnderReview"
                            || shownStatus == "Application Assessment" || shownStatus == "ApplicationAssessment"
                            || shownStatus == "Pending Final Inspection" || shownStatus == "PendingFinalInspection"
