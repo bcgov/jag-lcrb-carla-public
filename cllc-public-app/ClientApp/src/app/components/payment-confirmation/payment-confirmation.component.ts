@@ -41,6 +41,10 @@ export class PaymentConfirmationComponent extends FormBase implements OnInit {
   isCannabis: boolean;
   retryCount = 0;
 
+// LCSD-6224 2024-01-24 waynezen
+  licType: string;
+  licNumber: string;
+
   paymentTransactionTitle: string;
   paymentTransactionMessage: string;
   loaded = false;
@@ -81,6 +85,12 @@ export class PaymentConfirmationComponent extends FormBase implements OnInit {
     const trnId = verifyPayResponse.trnId;
     const trnOrderNumber = verifyPayResponse.trnOrderNumber;
     const invoice = verifyPayResponse.invoice;
+
+    // LCSD-6224 2024-01-24 waynezen: data returned for new license renew message
+    const licType = verifyPayResponse.paymentType;
+    const licNumber = verifyPayResponse.renewLicenseNumber;
+
+
     let isApproved = false;
     let paymentTransactionTitle = "";
     let paymentTransactionMessage = "";
@@ -121,6 +131,9 @@ export class PaymentConfirmationComponent extends FormBase implements OnInit {
       isApproved,
       paymentTransactionTitle,
       paymentTransactionMessage,
+      // LCSD-6224
+      licType,
+      licNumber
     };
   }
 
@@ -201,6 +214,8 @@ export class PaymentConfirmationComponent extends FormBase implements OnInit {
         this.trnId = verifyPayResponse.trnId;
         this.trnOrderNumber = verifyPayResponse.trnOrderNumber;
         this.invoice = verifyPayResponse.invoice;
+        this.licType = verifyPayResponse.paymentType;
+        this.licNumber = verifyPayResponse.renewLicenseNumber;
 
         if (this.trnApproved === "1") {
           this.isApproved = true;
