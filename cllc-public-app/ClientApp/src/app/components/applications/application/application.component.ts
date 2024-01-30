@@ -16,6 +16,7 @@ import { FormBase, CanadaPostalRegex, ApplicationHTMLContent } from '@shared/for
 import { DynamicsDataService } from '@services/dynamics-data.service';
 import { Account, TransferAccount } from '@models/account.model';
 import { ApplicationTypeNames, FormControlState } from '@models/application-type.model';
+import { ApplicationStatuses } from "@models/application-type.model";     // LCSD-6243 2024-01-26 waynezen
 import { TiedHouseConnection } from '@models/tied-house-connection.model';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
 import { EstablishmentWatchWordsService } from '@services/establishment-watch-words.service';
@@ -604,6 +605,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.form.get('establishmentPhone').disable();
     }
 
+
     if (!this.application.applicationType.showHoursOfSale || this.application.applicationType.name === ApplicationTypeNames.FP || this.application.applicationType.name === ApplicationTypeNames.FPRelo) {
       // Opening hours
       this.form.get('serviceHoursSundayOpen').disable();
@@ -687,6 +689,42 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.form.get('federalLicenceNumber').disable();
       this.form.get('federalLicenceName').disable();
     }
+
+    // LCSD-6243 2024-01-30 waynezen: if user deep-links to page, make it readonly
+    if (!this.isEditForm()) {
+      this.application.applicationType.newEstablishmentAddress = FormControlState.ReadOnly;
+      this.application.applicationType.establishmentName = FormControlState.ReadOnly;
+      this.application.applicationType.storeContactInfo = FormControlState.ReadOnly;
+
+      this.form.get('contactPersonFirstName').disable();
+      this.form.get('contactPersonLastName').disable();
+      this.form.get('contactPersonPhone').disable();
+      this.form.get('contactPersonEmail').disable();
+      this.form.get('contactPersonRole').disable();
+
+
+      this.form.get('authorizedToSubmit').disable();
+      this.form.get('signatureAgreement').disable();
+
+      this.form.get('serviceHoursSundayOpen').disable();
+      this.form.get('serviceHoursMondayOpen').disable();
+      this.form.get('serviceHoursTuesdayOpen').disable();
+      this.form.get('serviceHoursWednesdayOpen').disable();
+      this.form.get('serviceHoursThursdayOpen').disable();
+      this.form.get('serviceHoursFridayOpen').disable();
+      this.form.get('serviceHoursSaturdayOpen').disable();
+
+      this.form.get('serviceHoursSundayClose').disable();
+      this.form.get('serviceHoursMondayClose').disable();
+      this.form.get('serviceHoursTuesdayClose').disable();
+      this.form.get('serviceHoursWednesdayClose').disable();
+      this.form.get('serviceHoursThursdayClose').disable();
+      this.form.get('serviceHoursFridayClose').disable();
+      this.form.get('serviceHoursSaturdayClose').disable();
+
+      this.form.get('isOnINLand').disable();
+    }
+
   }
 
   requiresFederalProductionInfo(): boolean {
@@ -1215,6 +1253,18 @@ export class ApplicationComponent extends FormBase implements OnInit {
         && this?.application?.assignedLicence?.establishmentName != this.form.get('establishmentName').value // the name is different
       );
     return isChanging;
+  }
+
+  /**
+   * LCSD-6243: 2024-01-29 waynezen: prevent deep-linking by hiding Cmd buttons
+   */
+  private isEditForm(): boolean {
+    const btnsEnabled: boolean = (
+      this?.application?.applicationStatus === ApplicationStatuses.Intake ||
+      this?.application?.applicationStatus === ApplicationStatuses.Incomplete ||
+      this?.application?.applicationStatus === ApplicationStatuses.InProgress ||
+      (this?.application?.applicationStatus === ApplicationStatuses.PendingApproval && this.lGHasApproved()))
+    return btnsEnabled;
   }
 
 
