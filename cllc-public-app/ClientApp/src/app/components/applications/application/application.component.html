@@ -2501,13 +2501,13 @@
               <app-field label="First Name" [required]="true" [valid]="isValidOrNotTouched('contactPersonFirstName')"
                          errorMessage="Please enter the business contact's first name">
                 <input class="form-control" style="width: 350px;" type="text" autocomplete="given-name"
-                       formControlName="contactPersonFirstName" id="contactPersonFirstName">
+                      formControlName="contactPersonFirstName" id="contactPersonFirstName">
               </app-field>
 
               <app-field label="Last Name" [required]="true" [valid]="isValidOrNotTouched('contactPersonLastName')"
                          errorMessage="Please enter the business contact's last name">
                 <input class="form-control" style="width: 350px;" type="text" autocomplete="family-name"
-                       formControlName="contactPersonLastName" id="contactPersonLastName">
+                      formControlName="contactPersonLastName" id="contactPersonLastName">
               </app-field>
 
               <app-field label="Title/Position" [required]="false" [valid]="true">
@@ -2517,15 +2517,15 @@
               <app-field label="Phone Number (main)" [required]="true" [valid]="isValidOrNotTouched('contactPersonPhone')"
                          errorMessage="Please enter the business contact's 10-digit phone number">
                 <input class="form-control" style="width: 250px;" maxlength="10" autocomplete="tel"
-                       (keydown)="rejectIfNotDigitOrBackSpace($event)" type="text" formControlName="contactPersonPhone">
+                      (keydown)="rejectIfNotDigitOrBackSpace($event)" type="text" formControlName="contactPersonPhone">
               </app-field>
 
               <app-field label="Email" [required]="true" [valid]="isValidOrNotTouched('contactPersonEmail')"
                          errorMessage="Please enter the business contact's email address"
                          afterLabelText="By submitting the email address, you agree that the Liquor and Cannabis Regulation Branch can use it to communicate with you about this application.">
                 <input class="form-control" style="width: 350px;" type="text" autocomplete="email"
-                       formControlName="contactPersonEmail" id="contactPersonEmail"
-                       (blur)="trimValue(form.get('contactPersonEmail'))">
+                      formControlName="contactPersonEmail" id="contactPersonEmail"
+                      (blur)="trimValue(form.get('contactPersonEmail'))">
               </app-field>
             </address>
           </div>
@@ -2860,97 +2860,105 @@
             </div>
           </section>
 
-
-          <!-- button section when  LGApprovals is enabled  when it's the applicant opening the application -->
-
-          <section appRemoveIfFeatureOff="LGApprovals" *ngIf="!isOpenedByLGForApproval && !lGHasRejected()"
-                   style="margin-top: 20px; position: relative;">
-            <button mat-raised-button *ngIf="account?.businessType !== 'LocalGovernment '" color="secondary" style="margin-right: 10px;"
-                    (click)="saveForLater()" [disabled]="saveForLaterInProgress">
-              <span>
-                <fa-icon [icon]="faSave"></fa-icon>
-                SAVE FOR LATER
+          <!-- LCSD-6243 2024-01-26 waynezen: prevent deep-linking by hiding Cmd buttons -->
+          <div *ngIf="isEditForm()">
+          
+          
+            <!-- button section when  LGApprovals is enabled  when it's the applicant opening the application -->
+          
+            <section appRemoveIfFeatureOff="LGApprovals" *ngIf="!isOpenedByLGForApproval && !lGHasRejected()"
+              style="margin-top: 20px; position: relative;">
+              <button mat-raised-button *ngIf="account?.businessType !== 'LocalGovernment'" color="secondary"
+                style="margin-right: 10px;" (click)="saveForLater()" [disabled]="saveForLaterInProgress">
+                <span>
+                  <fa-icon [icon]="faSave"></fa-icon>
+                  SAVE FOR LATER
+                </span>
+                <mat-progress-bar *ngIf="saveForLaterInProgress" mode="indeterminate"></mat-progress-bar>
+              </button>
+          
+              <!-- NEXT STEP BUTTONS
+                    LG Approval Required -- > Submit to LG For Approval
+          
+                    No LG Approvals Required
+                    No Security Screening Required -- > Submit & Pay
+                    Security Screening Required    -- > Proceed to Security Screening
+                    LG Approved
+                    No Security Screening Required -- > Submit & Pay
+                    Security Screening Required    -- > Proceed to Security Screening
+          
+                    -->
+              <!-- LG Approval Required -->
+          
+              <button mat-raised-button class="ng-test-submit-for-lg-review" color="primary"
+                *ngIf="showSubmitToLG()" [disabled]="disableSubmitForLGINApproval"
+                (click)="submitForLGINApproval();">
+                <span><fa-icon [icon]="faUniversity" class="mr-1"></fa-icon>SUBMIT FOR LG/IN REVIEW OR COMMENT</span>
+                <mat-progress-bar *ngIf="disableSubmitForLGINApproval" mode="indeterminate"></mat-progress-bar>
+              </button>
+          
+              <!-- LG Approved OR NO LG Approvals Required -->
+              <ng-container
+                *ngIf="(lGHasApproved() || ((!application?.applicationType?.isShowLGINApproval && !application?.applicationType?.isShowLGZoningConfirmation) || !showSubmitToLG()))">
+          
+                <button mat-raised-button *ngIf="!application?.applicationType?.requiresSecurityScreening" color="primary"
+                  (click)="submit_application()" [disabled]="submitApplicationInProgress">
+                  SUBMIT&nbsp;<span
+                    *ngIf="!isFreeEndorsement() && !application?.applicationType?.isFree &&  !skipPayment && !isRAS()">&amp;
+                    PAY</span>
+                  <mat-progress-bar *ngIf="submitApplicationInProgress" mode="indeterminate"></mat-progress-bar>
+                </button>
+          
+                <button mat-raised-button *ngIf="application?.applicationType?.requiresSecurityScreening" color="primary"
+                  (click)="proceedToSecurityScreening()" [disabled]="proceedToSecurityScreeningInProgress">
+                  <span>
+                    <fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>PROCEED TO SECURITY SCREENING
+                  </span>
+                  <mat-progress-bar *ngIf="proceedToSecurityScreeningInProgress" mode="indeterminate"></mat-progress-bar>
+                </button>
+              </ng-container>
+          
+              <span style="color: #1a5a96; float: right; padding-top: 10px;">
+                <span (click)="cancelApplication()">
+                  <fa-icon [icon]="faTrashAlt" style="color: #1a5a96;"></fa-icon>
+                  <a href="javascript: void(0)" id="cancelApp">
+                    CANCEL APPLICATION
+                  </a>
+                </span>
               </span>
-              <mat-progress-bar *ngIf="saveForLaterInProgress" mode="indeterminate"></mat-progress-bar>
-            </button>
-
-          <!-- NEXT STEP BUTTONS
-          LG Approval Required -- > Submit to LG For Approval
-
-          No LG Approvals Required
-          No Security Screening Required -- > Submit & Pay
-          Security Screening Required    -- > Proceed to Security Screening
-          LG Approved
-          No Security Screening Required -- > Submit & Pay
-          Security Screening Required    -- > Proceed to Security Screening
-
-          -->
-          <!-- LG Approval Required -->
-          <button mat-raised-button class="ng-test-submit-for-lg-review" color="primary"
-                  *ngIf="showSubmitToLG()"
-                  [disabled]="disableSubmitForLGINApproval" (click)="submitForLGINApproval();">
-            <span><fa-icon [icon]="faUniversity" class="mr-1"></fa-icon>SUBMIT FOR LG/IN REVIEW OR COMMENT</span>
-            <mat-progress-bar *ngIf="disableSubmitForLGINApproval" mode="indeterminate"></mat-progress-bar>
-          </button>
-
-            <!-- LG Approved OR NO LG Approvals Required -->
-            <ng-container *ngIf="lGHasApproved() || ((!application?.applicationType?.isShowLGINApproval && !application?.applicationType?.isShowLGZoningConfirmation) || !showSubmitToLG())">
-
-              <button mat-raised-button *ngIf="!application?.applicationType?.requiresSecurityScreening" color="primary"
-                      (click)="submit_application()" [disabled]="submitApplicationInProgress">
-                SUBMIT&nbsp;<span *ngIf="!isFreeEndorsement() && !application?.applicationType?.isFree &&  !skipPayment && !isRAS()">&amp; PAY</span>
+          
+              <!-- <div [ngBusy]="busy"></div> -->
+            </section>
+          
+            <!-- button section when  LGApprovals is disabled -->
+            <section appRemoveIfFeatureOn="LGApprovals" style="margin-top: 20px; position: relative;">
+              <button mat-raised-button color="secondary" style="margin-right: 10px;" (click)="saveForLater()">
+                <span>
+                  <fa-icon [icon]="faSave"></fa-icon>
+                  SAVE FOR LATER
+                </span>
+                <mat-progress-bar *ngIf="saveForLaterInProgress" mode="indeterminate"></mat-progress-bar>
+              </button>
+              <button mat-raised-button color="primary" (click)="submit_application()">
+                <span>
+                  <fa-icon [icon]="faCreditCard" *ngIf="!skipPayment"></fa-icon>SUBMIT&nbsp;<span
+                    *ngIf="!skipPayment && !isRAS()">&amp; PAY</span>
+                </span>
                 <mat-progress-bar *ngIf="submitApplicationInProgress" mode="indeterminate"></mat-progress-bar>
               </button>
-
-              <button mat-raised-button *ngIf="application?.applicationType?.requiresSecurityScreening" color="primary"
-                      (click)="proceedToSecurityScreening()" [disabled]="proceedToSecurityScreeningInProgress">
-                <span>
-                  <fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>PROCEED TO SECURITY SCREENING
+          
+              <span style="color: #1a5a96; float: right; padding-top: 10px;">
+                <span (click)="cancelApplication()">
+                  <fa-icon [icon]="faTrashAlt" style="color: #1a5a96;"></fa-icon>
+                  <a href="javascript: void(0)" id="cancelApp">
+                    CANCEL <span *ngIf="!isRAS()">APPLICATION</span>
+                  </a>
                 </span>
-                <mat-progress-bar *ngIf="proceedToSecurityScreeningInProgress" mode="indeterminate"></mat-progress-bar>
-              </button>
-            </ng-container>
-
-            <span style="color: #1a5a96; float: right; padding-top: 10px;">
-              <span (click)="cancelApplication()">
-                <fa-icon [icon]="faTrashAlt" style="color: #1a5a96;"></fa-icon>
-                <a href="javascript: void(0)" id="cancelApp">
-                  CANCEL APPLICATION
-                </a>
               </span>
-            </span>
-
-            <!-- <div [ngBusy]="busy"></div> -->
-          </section>
-
-          <!-- button section when  LGApprovals is disabled -->
-          <section appRemoveIfFeatureOn="LGApprovals" style="margin-top: 20px; position: relative;">
-            <button mat-raised-button color="secondary" style="margin-right: 10px;" (click)="saveForLater()">
-              <span>
-                <fa-icon [icon]="faSave"></fa-icon>
-                SAVE FOR LATER
-              </span>
-              <mat-progress-bar *ngIf="saveForLaterInProgress" mode="indeterminate"></mat-progress-bar>
-            </button>
-            <button mat-raised-button color="primary" (click)="submit_application()">
-              <span>
-                <fa-icon [icon]="faCreditCard" *ngIf="!skipPayment"></fa-icon>SUBMIT&nbsp;<span *ngIf="!skipPayment && !isRAS()">&amp; PAY</span>
-              </span>
-              <mat-progress-bar *ngIf="submitApplicationInProgress" mode="indeterminate"></mat-progress-bar>
-            </button>
-
-            <span style="color: #1a5a96; float: right; padding-top: 10px;">
-              <span (click)="cancelApplication()">
-                <fa-icon [icon]="faTrashAlt" style="color: #1a5a96;"></fa-icon>
-                <a href="javascript: void(0)" id="cancelApp">
-                  CANCEL <span *ngIf="!isRAS()">APPLICATION</span>
-                </a>
-              </span>
-            </span>
-
-            <!-- <div [ngBusy]="busy"></div> -->
-          </section>
-
+          
+              <!-- <div [ngBusy]="busy"></div> -->
+            </section>
+          </div>
         </div>
       </div>
 
