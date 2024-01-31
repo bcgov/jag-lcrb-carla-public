@@ -50,15 +50,19 @@
     
       <hr>
       <!-- LCSD-6224 waynezen; only display license renewal msg if payment was for a renewal -->
-      <div *ngIf="licNumber">
-        <div class="alert alert-danger">
-          <p>
-            Thank you for renewing License {{licNumber}}-{{licType}}. Please proceed to the Licences & Authorizations tab to
-            download a copy of your licence
-          </p>
+      <ng-container [formGroup]="form" *ngIf="licNumber">
+        <h3 class="blue-header">Remember to download your license</h3>
+        <div class="content-bottom">
+          <section class="padded-section">
+            <p>
+              Thank you for renewing License {{licNumber}}-{{licType}}. Please proceed to the Licences & Authorizations tab to
+              download a copy of your licence
+            </p>
+          </section>
         </div>
-      </div>
-    
+      </ng-container>
+      <br>
+      
       <div>
         <p>
           Applications cannot be processed until all required documentation is received. A list of applicable
