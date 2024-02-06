@@ -1,6 +1,6 @@
 import { filter, takeWhile, catchError, mergeMap, delay, tap, switchMap, distinctUntilChanged } from 'rxjs/operators';
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
 import { Subscription, Subject, Observable, forkJoin, of } from 'rxjs';
@@ -1553,6 +1553,24 @@ export class ApplicationComponent extends FormBase implements OnInit {
       }
     }
 
+    // 2024-02-06 LCSD-6170 waynezen: Add form-level Validation errors for Patio fields
+    if (this.form.get('isHasPatio') && this.form.get('isHasPatio')?.value === true) {
+
+      if (!this.isValidYesNoFieldRequireTrue('isBoundingSufficientForControl')) {
+        valid = false;
+        this.validationMessages.push('Patio service bounding - For you to monitor and control patron entry and exit? Field is required.');
+      }
+      if (!this.isValidYesNoFieldRequireTrue('isBoundingSufficientToDefine')) {
+        valid = false;
+        this.validationMessages.push('Patio service bounding - To visually and physically define the service area? Field is required.');
+      }
+      if (!this.isValidYesNoFieldRequireTrue('isAdequateCare')) {
+        valid = false;
+        this.validationMessages.push('Patio area - You will take appropriate measures to maintain care and control? Field is required.');
+      }
+
+    }
+
     return valid && (this.form.valid || this.form.disabled);
   }
 
@@ -1560,6 +1578,20 @@ export class ApplicationComponent extends FormBase implements OnInit {
     return this.form.get(field).value == 1 || !this.form.get(field).touched;
   }
 
+  // 2024-02-06 LCSD-6170 waynezen: Validation function for Dyn 365 Field defined as 2-option and drop-down values=Yes / No and Required
+  isValidYesNoFieldRequireTrue(field: string): boolean {
+    let chkboxValidator = this.form.get(field).hasValidator(Validators.required);
+    let chkboxVal = this.form.get(field)?.value;
+
+    if (chkboxValidator && chkboxVal !== true) {
+      // field is required but value isn't true - return fail.
+      return false;
+    }
+    else {
+      return true;
+    }
+  }
+  
   relocateWinaryLicenceChanged() {
     if (this.application.relocateWinaryLicence == undefined || this.application.relocateWinaryLicence == false) {
       this.application.relocateWinaryLicence = true;

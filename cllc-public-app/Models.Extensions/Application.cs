@@ -8,6 +8,7 @@ using Microsoft.Rest;
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
@@ -267,7 +268,14 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioConfirmrelocatepicnicareaendorsement = from.ConfirmrelocatePicnicAreaEndorsement ? 1:0;
             to.AdoxioRelocatewinerylicence = from.RelocateWinaryLicence ? 1:0;
             to.AdoxioConfirmunderstandingwinerylicence= from.ConfirmRelocateWinaryLicence?1:0;
-    }
+
+            // LCSD-6170: 2024-02-02 waynezen
+            to.AdoxioIspatioboundingsufficientforcontrol = from.isBoundingSufficientForControl;
+            to.AdoxioIspatioboundingsufficienttodefinearea = from.isBoundingSufficientToDefine;
+            to.AdoxioIsadequatecareandcontroloverthepatio = from.isAdequateCare;
+            to.AdoxioIspatioincompliance = from.isInCompliance;
+
+        }
 
 
         public static void CopyValues(this MicrosoftDynamicsCRMadoxioApplication to, CovidApplication from)
@@ -654,7 +662,17 @@ namespace Gov.Lclb.Cllb.Public.Models
                 RelocateWinaryLicence = dynamicsApplication.AdoxioRelocatewinerylicence.HasValue ? dynamicsApplication.AdoxioRelocatewinerylicence.Value == 1 ? true : false : false,
                 ConfirmRelocateWinaryLicence = dynamicsApplication.AdoxioConfirmunderstandingwinerylicence.HasValue ? dynamicsApplication.AdoxioConfirmunderstandingwinerylicence.Value == 1 ? true : false : false,
 
+                // LCSD-6170: 2024-02-02 waynezen
+                isBoundingSufficientForControl = dynamicsApplication.AdoxioIspatioboundingsufficientforcontrol,
+                isBoundingSufficientToDefine = dynamicsApplication.AdoxioIspatioboundingsufficienttodefinearea,
+                isAdequateCare = dynamicsApplication.AdoxioIsadequatecareandcontroloverthepatio,
+                isInCompliance = dynamicsApplication.AdoxioIspatioincompliance,
+
             };
+
+
+            // TODO: waynezen remove debugging
+            Debug.WriteLine($"debug applicationVM: {applicationVM.IsHasPatio}");
 
 
             // mfg fields

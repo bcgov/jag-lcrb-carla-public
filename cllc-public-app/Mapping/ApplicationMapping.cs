@@ -123,10 +123,12 @@ namespace Gov.Lclb.Cllb.Public.Mapping
                 
                 {"adoxio_confirmliquorsalesisnotprimarybusiness", new FieldMapping("confirmLiquorSalesIsNotPrimaryBusiness", true)},
                 // patio application fields
+                // LCSD-6170: 2024-02-02 waynezen
                 {"adoxio_ispatioboundingsufficientforcontrol", new FieldMapping("isBoundingSufficientForControl", true)},
                 {"adoxio_ispatioboundingsufficienttodefinearea", new FieldMapping("isBoundingSufficientToDefine", true)},
                 {"adoxio_isadequatecareandcontroloverthepatio", new FieldMapping("isAdequateCare", true)},
-                {"adoxio_ispatioincompliancewithbylaws", new FieldMapping("isInCompliance", true)},                
+                {"adoxio_ispatioincompliancewithbylaws", new FieldMapping("isInCompliance", false)},                
+
                 {"adoxio_storeopendate", new FieldMapping("storeOpenDate", false)},
                 {"adoxio_statusofconstruction", new FieldMapping("statusOfConstruction", true)},
                 {"adoxio_ispatiotesa", new FieldMapping("isTESA", false)},
@@ -141,7 +143,8 @@ namespace Gov.Lclb.Cllb.Public.Mapping
                 {"adoxio_m09", new FieldMapping("isMonth09", false)},
                 {"adoxio_m10", new FieldMapping("isMonth10", false)},
                 {"adoxio_m11", new FieldMapping("isMonth11", false)},
-                {"adoxio_m12", new FieldMapping("isMonth12", false)}
+                {"adoxio_m12", new FieldMapping("isMonth12", false)},
+
         };
         }
     }
