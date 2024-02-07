@@ -27,3 +27,4 @@ namespace Gov.Lclb.Cllb.Interfaces
         public string addressCountry { get; set; }*/
     }
 }
+
