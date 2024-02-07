@@ -520,8 +520,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 else
                 {
-                    userContact.Firstname = userSettings.UserDisplayName.GetFirstName();
-                    userContact.Lastname = userSettings.UserDisplayName.GetLastName();
+                    //LCSD-6488: Change to BCEID Web Query
+                    Gov.Lclb.Cllb.Interfaces.BCeIDBasic bceidBasic = await _bceid.ProcessBasicQuery(userSettings.SiteMinderGuid);
+                    _logger.LogDebug(LoggingEvents.Get, $"basic Info from bceid: {JsonConvert.SerializeObject(bceidBasic)}");
+                    if(bceidBasic != null)
+                    {
+                        userContact.Firstname = bceidBasic.individualFirstname;
+                        userContact.Lastname = bceidBasic.individualSurname;
+                    }
                 }
                 userContact.Statuscode = 1;
             }
