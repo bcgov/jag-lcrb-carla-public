@@ -29,46 +29,46 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMmonthlyfiscalcalendar class.
         /// </summary>
-        public MicrosoftDynamicsCRMmonthlyfiscalcalendar(decimal? month8 = default(decimal?), decimal? month12Base = default(decimal?), decimal? month10Base = default(decimal?), decimal? exchangerate = default(decimal?), string _createdonbehalfbyValue = default(string), decimal? month6Base = default(decimal?), decimal? month9 = default(decimal?), decimal? month9Base = default(decimal?), int? fiscalperiodtype = default(int?), decimal? month4Base = default(decimal?), string _createdbyValue = default(string), decimal? month12 = default(decimal?), string userfiscalcalendarid = default(string), string _businessunitidValue = default(string), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), decimal? month11Base = default(decimal?), decimal? month2 = default(decimal?), string _modifiedbyValue = default(string), int? timezoneruleversionnumber = default(int?), decimal? month7 = default(decimal?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), decimal? month11 = default(decimal?), System.DateTimeOffset? effectiveon = default(System.DateTimeOffset?), decimal? month3Base = default(decimal?), decimal? month6 = default(decimal?), decimal? month8Base = default(decimal?), decimal? month7Base = default(decimal?), decimal? month10 = default(decimal?), decimal? month1 = default(decimal?), decimal? month2Base = default(decimal?), decimal? month5 = default(decimal?), decimal? month1Base = default(decimal?), decimal? month3 = default(decimal?), decimal? month5Base = default(decimal?), string _modifiedonbehalfbyValue = default(string), string _transactioncurrencyidValue = default(string), string _salespersonidValue = default(string), decimal? month4 = default(decimal?), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser salespersonid = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> monthlyFiscalCalendarAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> monthlyFiscalCalendarBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMmonthlyfiscalcalendar(decimal? month8 = default(decimal?), decimal? month12Base = default(decimal?), string _modifiedonbehalfbyValue = default(string), decimal? month10Base = default(decimal?), decimal? exchangerate = default(decimal?), string _createdonbehalfbyValue = default(string), decimal? month6Base = default(decimal?), decimal? month9 = default(decimal?), decimal? month9Base = default(decimal?), string _salespersonidValue = default(string), int? fiscalperiodtype = default(int?), decimal? month4Base = default(decimal?), string _transactioncurrencyidValue = default(string), string _createdbyValue = default(string), decimal? month3Base = default(decimal?), decimal? month12 = default(decimal?), string userfiscalcalendarid = default(string), decimal? month1 = default(decimal?), string _businessunitidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), decimal? month11Base = default(decimal?), decimal? month2 = default(decimal?), string _modifiedbyValue = default(string), decimal? month5 = default(decimal?), decimal? month7 = default(decimal?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), decimal? month11 = default(decimal?), System.DateTimeOffset? effectiveon = default(System.DateTimeOffset?), decimal? month6 = default(decimal?), decimal? month8Base = default(decimal?), decimal? month7Base = default(decimal?), decimal? month10 = default(decimal?), decimal? month5Base = default(decimal?), decimal? month2Base = default(decimal?), int? timezoneruleversionnumber = default(int?), decimal? month1Base = default(decimal?), decimal? month3 = default(decimal?), int? utcconversiontimezonecode = default(int?), decimal? month4 = default(decimal?), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser salespersonid = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> monthlyFiscalCalendarAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> monthlyFiscalCalendarBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Month8 = month8;
             Month12Base = month12Base;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Month10Base = month10Base;
             Exchangerate = exchangerate;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Month6Base = month6Base;
             Month9 = month9;
             Month9Base = month9Base;
+            this._salespersonidValue = _salespersonidValue;
             Fiscalperiodtype = fiscalperiodtype;
             Month4Base = month4Base;
+            this._transactioncurrencyidValue = _transactioncurrencyidValue;
             this._createdbyValue = _createdbyValue;
+            Month3Base = month3Base;
             Month12 = month12;
             Userfiscalcalendarid = userfiscalcalendarid;
+            Month1 = month1;
             this._businessunitidValue = _businessunitidValue;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
             Createdon = createdon;
             Month11Base = month11Base;
             Month2 = month2;
             this._modifiedbyValue = _modifiedbyValue;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
+            Month5 = month5;
             Month7 = month7;
             Modifiedon = modifiedon;
             Month11 = month11;
             Effectiveon = effectiveon;
-            Month3Base = month3Base;
             Month6 = month6;
             Month8Base = month8Base;
             Month7Base = month7Base;
             Month10 = month10;
-            Month1 = month1;
+            Month5Base = month5Base;
             Month2Base = month2Base;
-            Month5 = month5;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
             Month1Base = month1Base;
             Month3 = month3;
-            Month5Base = month5Base;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._transactioncurrencyidValue = _transactioncurrencyidValue;
-            this._salespersonidValue = _salespersonidValue;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
             Month4 = month4;
             Modifiedby = modifiedby;
             Modifiedonbehalfby = modifiedonbehalfby;
@@ -95,6 +95,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "month12_base")]
         public decimal? Month12Base { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -128,6 +133,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_salespersonid_value")]
+        public string _salespersonidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "fiscalperiodtype")]
         public int? Fiscalperiodtype { get; set; }
 
@@ -138,8 +148,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
+        public string _transactioncurrencyidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "month3_base")]
+        public decimal? Month3Base { get; set; }
 
         /// <summary>
         /// </summary>
@@ -153,13 +173,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_businessunitid_value")]
-        public string _businessunitidValue { get; set; }
+        [JsonProperty(PropertyName = "month1")]
+        public decimal? Month1 { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
+        [JsonProperty(PropertyName = "_businessunitid_value")]
+        public string _businessunitidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -183,8 +203,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
+        [JsonProperty(PropertyName = "month5")]
+        public decimal? Month5 { get; set; }
 
         /// <summary>
         /// </summary>
@@ -208,11 +228,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "month3_base")]
-        public decimal? Month3Base { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "month6")]
         public decimal? Month6 { get; set; }
 
@@ -233,8 +248,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "month1")]
-        public decimal? Month1 { get; set; }
+        [JsonProperty(PropertyName = "month5_base")]
+        public decimal? Month5Base { get; set; }
 
         /// <summary>
         /// </summary>
@@ -243,8 +258,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "month5")]
-        public decimal? Month5 { get; set; }
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -258,23 +273,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "month5_base")]
-        public decimal? Month5Base { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_salespersonid_value")]
-        public string _salespersonidValue { get; set; }
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
         /// </summary>

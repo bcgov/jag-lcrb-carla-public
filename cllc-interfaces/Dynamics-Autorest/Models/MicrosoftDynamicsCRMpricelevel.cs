@@ -29,25 +29,25 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMpricelevel
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMpricelevel(int? shippingmethodcode = default(int?), decimal? exchangerate = default(decimal?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? begindate = default(System.DateTimeOffset?), int? statecode = default(int?), int? importsequencenumber = default(int?), string _organizationidValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _transactioncurrencyidValue = default(string), System.DateTimeOffset? enddate = default(System.DateTimeOffset?), string _createdbyValue = default(string), int? paymentmethodcode = default(int?), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), string versionnumber = default(string), int? freighttermscode = default(int?), string name = default(string), int? statuscode = default(int?), string description = default(string), string _modifiedonbehalfbyValue = default(string), string pricelevelid = default(string), IList<MicrosoftDynamicsCRMteam> pricelevelTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> pricelevelMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMconnection> pricelevelConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMproduct> priceLevelProducts = default(IList<MicrosoftDynamicsCRMproduct>), IList<MicrosoftDynamicsCRMquote> priceLevelQuotes = default(IList<MicrosoftDynamicsCRMquote>), IList<MicrosoftDynamicsCRMproductpricelevel> priceLevelProductPriceLevels = default(IList<MicrosoftDynamicsCRMproductpricelevel>), IList<MicrosoftDynamicsCRMsalesorder> priceLevelOrders = default(IList<MicrosoftDynamicsCRMsalesorder>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMsyncerror> priceLevelSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> pricelevelPrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMopportunity> priceLevelOpportunties = default(IList<MicrosoftDynamicsCRMopportunity>), IList<MicrosoftDynamicsCRMinvoice> priceLevelInvoices = default(IList<MicrosoftDynamicsCRMinvoice>), IList<MicrosoftDynamicsCRMbulkdeletefailure> priceLevelBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMaccount> priceLevelAccounts = default(IList<MicrosoftDynamicsCRMaccount>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMcampaign> priceListCampaigns = default(IList<MicrosoftDynamicsCRMcampaign>), IList<MicrosoftDynamicsCRMcontact> priceLevelContacts = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMprocesssession> priceLevelProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMasyncoperation> priceLevelAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMconnection> pricelevelConnections1 = default(IList<MicrosoftDynamicsCRMconnection>))
+        public MicrosoftDynamicsCRMpricelevel(int? statecode = default(int?), int? shippingmethodcode = default(int?), decimal? exchangerate = default(decimal?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? begindate = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), string _organizationidValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _transactioncurrencyidValue = default(string), System.DateTimeOffset? enddate = default(System.DateTimeOffset?), string _createdbyValue = default(string), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), int? paymentmethodcode = default(int?), string versionnumber = default(string), int? freighttermscode = default(int?), string name = default(string), int? statuscode = default(int?), string description = default(string), string _modifiedonbehalfbyValue = default(string), string pricelevelid = default(string), IList<MicrosoftDynamicsCRMcampaign> priceListCampaigns = default(IList<MicrosoftDynamicsCRMcampaign>), IList<MicrosoftDynamicsCRMteam> pricelevelTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> pricelevelMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMconnection> pricelevelConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMproduct> priceLevelProducts = default(IList<MicrosoftDynamicsCRMproduct>), IList<MicrosoftDynamicsCRMproductpricelevel> priceLevelProductPriceLevels = default(IList<MicrosoftDynamicsCRMproductpricelevel>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMsyncerror> priceLevelSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> pricelevelPrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMbulkdeletefailure> priceLevelBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMaccount> priceLevelAccounts = default(IList<MicrosoftDynamicsCRMaccount>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMcontact> priceLevelContacts = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMprocesssession> priceLevelProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMasyncoperation> priceLevelAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMconnection> pricelevelConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMquote> priceLevelQuotes = default(IList<MicrosoftDynamicsCRMquote>), IList<MicrosoftDynamicsCRMsalesorder> priceLevelOrders = default(IList<MicrosoftDynamicsCRMsalesorder>), IList<MicrosoftDynamicsCRMopportunity> priceLevelOpportunties = default(IList<MicrosoftDynamicsCRMopportunity>), IList<MicrosoftDynamicsCRMinvoice> priceLevelInvoices = default(IList<MicrosoftDynamicsCRMinvoice>))
         {
+            Statecode = statecode;
             Shippingmethodcode = shippingmethodcode;
             Exchangerate = exchangerate;
             Modifiedon = modifiedon;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             Begindate = begindate;
-            Statecode = statecode;
             Importsequencenumber = importsequencenumber;
             this._organizationidValue = _organizationidValue;
             Overriddencreatedon = overriddencreatedon;
             this._transactioncurrencyidValue = _transactioncurrencyidValue;
             Enddate = enddate;
             this._createdbyValue = _createdbyValue;
-            Paymentmethodcode = paymentmethodcode;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             Createdon = createdon;
             this._modifiedbyValue = _modifiedbyValue;
+            Paymentmethodcode = paymentmethodcode;
             Versionnumber = versionnumber;
             Freighttermscode = freighttermscode;
             Name = name;
@@ -55,30 +55,30 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Description = description;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Pricelevelid = pricelevelid;
+            PriceListCampaigns = priceListCampaigns;
             PricelevelTeams = pricelevelTeams;
             PricelevelMailboxTrackingFolders = pricelevelMailboxTrackingFolders;
             Modifiedonbehalfby = modifiedonbehalfby;
             Createdonbehalfby = createdonbehalfby;
             PricelevelConnections2 = pricelevelConnections2;
             PriceLevelProducts = priceLevelProducts;
-            PriceLevelQuotes = priceLevelQuotes;
             PriceLevelProductPriceLevels = priceLevelProductPriceLevels;
-            PriceLevelOrders = priceLevelOrders;
             Createdby = createdby;
             Modifiedby = modifiedby;
             Transactioncurrencyid = transactioncurrencyid;
             PriceLevelSyncErrors = priceLevelSyncErrors;
             PricelevelPrincipalobjectattributeaccess = pricelevelPrincipalobjectattributeaccess;
-            PriceLevelOpportunties = priceLevelOpportunties;
-            PriceLevelInvoices = priceLevelInvoices;
             PriceLevelBulkDeleteFailures = priceLevelBulkDeleteFailures;
             PriceLevelAccounts = priceLevelAccounts;
             Organizationid = organizationid;
-            PriceListCampaigns = priceListCampaigns;
             PriceLevelContacts = priceLevelContacts;
             PriceLevelProcessSessions = priceLevelProcessSessions;
             PriceLevelAsyncOperations = priceLevelAsyncOperations;
             PricelevelConnections1 = pricelevelConnections1;
+            PriceLevelQuotes = priceLevelQuotes;
+            PriceLevelOrders = priceLevelOrders;
+            PriceLevelOpportunties = priceLevelOpportunties;
+            PriceLevelInvoices = priceLevelInvoices;
             CustomInit();
         }
 
@@ -86,6 +86,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -119,11 +124,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
@@ -154,11 +154,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "paymentmethodcode")]
-        public int? Paymentmethodcode { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "utcconversiontimezonecode")]
         public int? Utcconversiontimezonecode { get; set; }
 
@@ -171,6 +166,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "paymentmethodcode")]
+        public int? Paymentmethodcode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -209,6 +209,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "PriceList_Campaigns")]
+        public IList<MicrosoftDynamicsCRMcampaign> PriceListCampaigns { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "pricelevel_Teams")]
         public IList<MicrosoftDynamicsCRMteam> PricelevelTeams { get; set; }
 
@@ -239,18 +244,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "price_level_quotes")]
-        public IList<MicrosoftDynamicsCRMquote> PriceLevelQuotes { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "price_level_product_price_levels")]
         public IList<MicrosoftDynamicsCRMproductpricelevel> PriceLevelProductPriceLevels { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "price_level_orders")]
-        public IList<MicrosoftDynamicsCRMsalesorder> PriceLevelOrders { get; set; }
 
         /// <summary>
         /// </summary>
@@ -279,16 +274,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "price_level_opportunties")]
-        public IList<MicrosoftDynamicsCRMopportunity> PriceLevelOpportunties { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "price_level_invoices")]
-        public IList<MicrosoftDynamicsCRMinvoice> PriceLevelInvoices { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "PriceLevel_BulkDeleteFailures")]
         public IList<MicrosoftDynamicsCRMbulkdeletefailure> PriceLevelBulkDeleteFailures { get; set; }
 
@@ -301,11 +286,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "organizationid")]
         public MicrosoftDynamicsCRMorganization Organizationid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "PriceList_Campaigns")]
-        public IList<MicrosoftDynamicsCRMcampaign> PriceListCampaigns { get; set; }
 
         /// <summary>
         /// </summary>
@@ -326,6 +306,26 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "pricelevel_connections1")]
         public IList<MicrosoftDynamicsCRMconnection> PricelevelConnections1 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "price_level_quotes")]
+        public IList<MicrosoftDynamicsCRMquote> PriceLevelQuotes { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "price_level_orders")]
+        public IList<MicrosoftDynamicsCRMsalesorder> PriceLevelOrders { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "price_level_opportunties")]
+        public IList<MicrosoftDynamicsCRMopportunity> PriceLevelOpportunties { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "price_level_invoices")]
+        public IList<MicrosoftDynamicsCRMinvoice> PriceLevelInvoices { get; set; }
 
     }
 }

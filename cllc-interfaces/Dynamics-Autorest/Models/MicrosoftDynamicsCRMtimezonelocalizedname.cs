@@ -27,17 +27,17 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMtimezonelocalizedname class.
         /// </summary>
-        public MicrosoftDynamicsCRMtimezonelocalizedname(string _timezonedefinitionidValue = default(string), string daylightname = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string timezonelocalizednameid = default(string), string standardname = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string userinterfacename = default(string), string _modifiedonbehalfbyValue = default(string), int? cultureid = default(int?), string _createdonbehalfbyValue = default(string), string versionnumber = default(string), string _organizationidValue = default(string), string _createdbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtimezonedefinition timezonedefinitionid = default(MicrosoftDynamicsCRMtimezonedefinition), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMtimezonelocalizedname(string daylightname = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string timezonelocalizednameid = default(string), string standardname = default(string), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string userinterfacename = default(string), string _timezonedefinitionidValue = default(string), int? cultureid = default(int?), string _createdonbehalfbyValue = default(string), string versionnumber = default(string), string _organizationidValue = default(string), string _createdbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtimezonedefinition timezonedefinitionid = default(MicrosoftDynamicsCRMtimezonedefinition), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
         {
-            this._timezonedefinitionidValue = _timezonedefinitionidValue;
             Daylightname = daylightname;
             this._modifiedbyValue = _modifiedbyValue;
             Modifiedon = modifiedon;
             Timezonelocalizednameid = timezonelocalizednameid;
             Standardname = standardname;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Createdon = createdon;
             Userinterfacename = userinterfacename;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            this._timezonedefinitionidValue = _timezonedefinitionidValue;
             Cultureid = cultureid;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Versionnumber = versionnumber;
@@ -55,11 +55,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_timezonedefinitionid_value")]
-        public string _timezonedefinitionidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -88,6 +83,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
@@ -98,8 +98,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "_timezonedefinitionid_value")]
+        public string _timezonedefinitionidValue { get; set; }
 
         /// <summary>
         /// </summary>

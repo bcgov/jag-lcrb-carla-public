@@ -29,16 +29,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMentitlementtemplateproducts class.
         /// </summary>
-        public MicrosoftDynamicsCRMentitlementtemplateproducts(int? utcconversiontimezonecode = default(int?), string entitlementtemplateproductid = default(string), int? importsequencenumber = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string name = default(string), string entitlementtemplateid = default(string), string versionnumber = default(string), int? timezoneruleversionnumber = default(int?), string productid = default(string), IList<MicrosoftDynamicsCRMteam> entitlementtemplateproductsTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMasyncoperation> entitlementtemplateproductsAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> entitlementtemplateproductsMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> entitlementtemplateproductsBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> entitlementtemplateproductsPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>))
+        public MicrosoftDynamicsCRMentitlementtemplateproducts(int? utcconversiontimezonecode = default(int?), string entitlementtemplateproductid = default(string), int? importsequencenumber = default(int?), string name = default(string), string entitlementtemplateid = default(string), string versionnumber = default(string), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string productid = default(string), IList<MicrosoftDynamicsCRMteam> entitlementtemplateproductsTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMasyncoperation> entitlementtemplateproductsAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> entitlementtemplateproductsMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> entitlementtemplateproductsBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> entitlementtemplateproductsPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>))
         {
             Utcconversiontimezonecode = utcconversiontimezonecode;
             Entitlementtemplateproductid = entitlementtemplateproductid;
             Importsequencenumber = importsequencenumber;
-            Overriddencreatedon = overriddencreatedon;
             Name = name;
             Entitlementtemplateid = entitlementtemplateid;
             Versionnumber = versionnumber;
             Timezoneruleversionnumber = timezoneruleversionnumber;
+            Overriddencreatedon = overriddencreatedon;
             Productid = productid;
             EntitlementtemplateproductsTeams = entitlementtemplateproductsTeams;
             EntitlementtemplateproductsAsyncOperations = entitlementtemplateproductsAsyncOperations;
@@ -70,11 +70,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
@@ -92,6 +87,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "timezoneruleversionnumber")]
         public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>

@@ -29,25 +29,25 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMcampaignresponse class.
         /// </summary>
-        public MicrosoftDynamicsCRMcampaignresponse(System.DateTimeOffset? receivedon = default(System.DateTimeOffset?), string yomifirstname = default(string), string _originatingactivityidValue = default(string), int? responsecode = default(int?), string yomilastname = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string firstname = default(string), string companyname = default(string), string yomicompanyname = default(string), string promotioncodename = default(string), string category = default(string), string telephone = default(string), int? channeltypecode = default(int?), string fax = default(string), string lastname = default(string), string emailaddress = default(string), int? importsequencenumber = default(int?), string subcategory = default(string), MicrosoftDynamicsCRMabsScheduledprocessexecution originatingactivityidAbsScheduledprocessexecutionCampaignresponse = default(MicrosoftDynamicsCRMabsScheduledprocessexecution), MicrosoftDynamicsCRMbulkoperation originatingactivityidBulkoperationCampaignresponse = default(MicrosoftDynamicsCRMbulkoperation), MicrosoftDynamicsCRMcampaignactivity originatingactivityidCampaignactivityCampaignresponse = default(MicrosoftDynamicsCRMcampaignactivity), MicrosoftDynamicsCRMinteractionforemail regardingobjectidNewInteractionforemailCampaignresponse = default(MicrosoftDynamicsCRMinteractionforemail), MicrosoftDynamicsCRMbookableresourcebooking regardingobjectidBookableresourcebookingCampaignresponse = default(MicrosoftDynamicsCRMbookableresourcebooking), MicrosoftDynamicsCRMbookableresourcebookingheader regardingobjectidBookableresourcebookingheaderCampaignresponse = default(MicrosoftDynamicsCRMbookableresourcebookingheader), MicrosoftDynamicsCRMknowledgebaserecord regardingobjectidKnowledgebaserecordCampaignresponse = default(MicrosoftDynamicsCRMknowledgebaserecord), MicrosoftDynamicsCRMaccount regardingobjectidAccountCampaignresponse = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMcontact regardingobjectidContactCampaignresponse = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMmailbox sendermailboxidCampaignresponse = default(MicrosoftDynamicsCRMmailbox), MicrosoftDynamicsCRMprincipal owneridCampaignresponse = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsla slaActivitypointerSlaCampaignresponse = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticleCampaignresponse = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMlead regardingobjectidLeadCampaignresponse = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMcampaignactivity regardingobjectidCampaignactivityCampaignresponse = default(MicrosoftDynamicsCRMcampaignactivity), MicrosoftDynamicsCRMsla slainvokedidActivitypointerSlaCampaignresponse = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMteam> campaignresponseTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> campaignresponseMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), MicrosoftDynamicsCRMincidentresolution originatingactivityidIncidentresolutionCampaignresponse = default(MicrosoftDynamicsCRMincidentresolution), MicrosoftDynamicsCRMserviceappointment originatingactivityidServiceappointmentCampaignresponse = default(MicrosoftDynamicsCRMserviceappointment), MicrosoftDynamicsCRMopportunityclose originatingactivityidOpportunitycloseCampaignresponse = default(MicrosoftDynamicsCRMopportunityclose), MicrosoftDynamicsCRMorderclose originatingactivityidOrdercloseCampaignresponse = default(MicrosoftDynamicsCRMorderclose), MicrosoftDynamicsCRMquoteclose originatingactivityidQuotecloseCampaignresponse = default(MicrosoftDynamicsCRMquoteclose), MicrosoftDynamicsCRMfax originatingactivityidFax = default(MicrosoftDynamicsCRMfax), IList<MicrosoftDynamicsCRMannotation> campaignResponseAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMletter originatingactivityidLetter = default(MicrosoftDynamicsCRMletter), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), MicrosoftDynamicsCRMphonecall originatingactivityidPhonecall = default(MicrosoftDynamicsCRMphonecall), MicrosoftDynamicsCRMcampaign regardingobjectidCampaignCampaignresponse = default(MicrosoftDynamicsCRMcampaign), IList<MicrosoftDynamicsCRMbulkdeletefailure> campaignResponseBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMbulkoperation regardingobjectidBulkoperationCampaignresponse = default(MicrosoftDynamicsCRMbulkoperation), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyCampaignresponse = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMactivitypointer activityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), IList<MicrosoftDynamicsCRMactivityparty> campaignresponseActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMteam owningteamCampaignresponse = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> campaignresponsePrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMsystemuser owninguserCampaignresponse = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMqueueitem> campaignResponseQueueItem = default(IList<MicrosoftDynamicsCRMqueueitem>), MicrosoftDynamicsCRMrecurringappointmentmaster originatingactivityidRecurringappointmentmaster = default(MicrosoftDynamicsCRMrecurringappointmentmaster), MicrosoftDynamicsCRMactivitypointer originatingactivityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), IList<MicrosoftDynamicsCRMlead> campaignResponseLead = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMduplicaterecord> campaignResponseDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMbusinessunit owningbusinessunitCampaignresponse = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser createdbyCampaignresponse = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyidCampaignresponse = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMasyncoperation> campaignResponseAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMemail originatingactivityidEmail = default(MicrosoftDynamicsCRMemail), IList<MicrosoftDynamicsCRMduplicaterecord> campaignResponseDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsyncerror> campaignResponseSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMprocesssession> campaignResponseProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), MicrosoftDynamicsCRMsystemuser createdonbehalfbyCampaignresponse = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMappointment originatingactivityidAppointment = default(MicrosoftDynamicsCRMappointment), MicrosoftDynamicsCRMsystemuser modifiedbyCampaignresponse = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMcampaignresponse(System.DateTimeOffset? receivedon = default(System.DateTimeOffset?), string yomifirstname = default(string), int? responsecode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string firstname = default(string), string yomilastname = default(string), string companyname = default(string), string _originatingactivityidValue = default(string), string yomicompanyname = default(string), string promotioncodename = default(string), string category = default(string), string telephone = default(string), int? channeltypecode = default(int?), string fax = default(string), int? importsequencenumber = default(int?), string lastname = default(string), string emailaddress = default(string), string subcategory = default(string), MicrosoftDynamicsCRMabsScheduledprocessexecution originatingactivityidAbsScheduledprocessexecutionCampaignresponse = default(MicrosoftDynamicsCRMabsScheduledprocessexecution), MicrosoftDynamicsCRMbulkoperation originatingactivityidBulkoperationCampaignresponse = default(MicrosoftDynamicsCRMbulkoperation), MicrosoftDynamicsCRMcampaignactivity originatingactivityidCampaignactivityCampaignresponse = default(MicrosoftDynamicsCRMcampaignactivity), MicrosoftDynamicsCRMinteractionforemail regardingobjectidNewInteractionforemailCampaignresponse = default(MicrosoftDynamicsCRMinteractionforemail), MicrosoftDynamicsCRMbookableresourcebooking regardingobjectidBookableresourcebookingCampaignresponse = default(MicrosoftDynamicsCRMbookableresourcebooking), MicrosoftDynamicsCRMbookableresourcebookingheader regardingobjectidBookableresourcebookingheaderCampaignresponse = default(MicrosoftDynamicsCRMbookableresourcebookingheader), MicrosoftDynamicsCRMknowledgebaserecord regardingobjectidKnowledgebaserecordCampaignresponse = default(MicrosoftDynamicsCRMknowledgebaserecord), MicrosoftDynamicsCRMmailbox sendermailboxidCampaignresponse = default(MicrosoftDynamicsCRMmailbox), MicrosoftDynamicsCRMprincipal owneridCampaignresponse = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsla slaActivitypointerSlaCampaignresponse = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticleCampaignresponse = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMlead regardingobjectidLeadCampaignresponse = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMcampaignactivity regardingobjectidCampaignactivityCampaignresponse = default(MicrosoftDynamicsCRMcampaignactivity), MicrosoftDynamicsCRMsla slainvokedidActivitypointerSlaCampaignresponse = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMteam> campaignresponseTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> campaignresponseMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), MicrosoftDynamicsCRMfax originatingactivityidFax = default(MicrosoftDynamicsCRMfax), IList<MicrosoftDynamicsCRMannotation> campaignResponseAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMletter originatingactivityidLetter = default(MicrosoftDynamicsCRMletter), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), MicrosoftDynamicsCRMphonecall originatingactivityidPhonecall = default(MicrosoftDynamicsCRMphonecall), MicrosoftDynamicsCRMcampaign regardingobjectidCampaignCampaignresponse = default(MicrosoftDynamicsCRMcampaign), IList<MicrosoftDynamicsCRMbulkdeletefailure> campaignResponseBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyCampaignresponse = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMactivitypointer activityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), IList<MicrosoftDynamicsCRMactivityparty> campaignresponseActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMteam owningteamCampaignresponse = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> campaignresponsePrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMsystemuser owninguserCampaignresponse = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMqueueitem> campaignResponseQueueItem = default(IList<MicrosoftDynamicsCRMqueueitem>), MicrosoftDynamicsCRMrecurringappointmentmaster originatingactivityidRecurringappointmentmaster = default(MicrosoftDynamicsCRMrecurringappointmentmaster), MicrosoftDynamicsCRMactivitypointer originatingactivityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), IList<MicrosoftDynamicsCRMlead> campaignResponseLead = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMduplicaterecord> campaignResponseDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMbusinessunit owningbusinessunitCampaignresponse = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser createdbyCampaignresponse = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyidCampaignresponse = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMasyncoperation> campaignResponseAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMemail originatingactivityidEmail = default(MicrosoftDynamicsCRMemail), IList<MicrosoftDynamicsCRMduplicaterecord> campaignResponseDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsyncerror> campaignResponseSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMprocesssession> campaignResponseProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), MicrosoftDynamicsCRMsystemuser createdonbehalfbyCampaignresponse = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMappointment originatingactivityidAppointment = default(MicrosoftDynamicsCRMappointment), MicrosoftDynamicsCRMsystemuser modifiedbyCampaignresponse = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMincidentresolution originatingactivityidIncidentresolutionCampaignresponse = default(MicrosoftDynamicsCRMincidentresolution), MicrosoftDynamicsCRMserviceappointment originatingactivityidServiceappointmentCampaignresponse = default(MicrosoftDynamicsCRMserviceappointment), MicrosoftDynamicsCRMopportunityclose originatingactivityidOpportunitycloseCampaignresponse = default(MicrosoftDynamicsCRMopportunityclose), MicrosoftDynamicsCRMorderclose originatingactivityidOrdercloseCampaignresponse = default(MicrosoftDynamicsCRMorderclose), MicrosoftDynamicsCRMquoteclose originatingactivityidQuotecloseCampaignresponse = default(MicrosoftDynamicsCRMquoteclose), MicrosoftDynamicsCRMaccount regardingobjectidAccountCampaignresponse = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMcontact regardingobjectidContactCampaignresponse = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMbulkoperation regardingobjectidBulkoperationCampaignresponse = default(MicrosoftDynamicsCRMbulkoperation))
         {
             Receivedon = receivedon;
             Yomifirstname = yomifirstname;
-            this._originatingactivityidValue = _originatingactivityidValue;
             Responsecode = responsecode;
-            Yomilastname = yomilastname;
             Overriddencreatedon = overriddencreatedon;
             Firstname = firstname;
+            Yomilastname = yomilastname;
             Companyname = companyname;
+            this._originatingactivityidValue = _originatingactivityidValue;
             Yomicompanyname = yomicompanyname;
             Promotioncodename = promotioncodename;
             Category = category;
             Telephone = telephone;
             Channeltypecode = channeltypecode;
             Fax = fax;
+            Importsequencenumber = importsequencenumber;
             Lastname = lastname;
             Emailaddress = emailaddress;
-            Importsequencenumber = importsequencenumber;
             Subcategory = subcategory;
             OriginatingactivityidAbsScheduledprocessexecutionCampaignresponse = originatingactivityidAbsScheduledprocessexecutionCampaignresponse;
             OriginatingactivityidBulkoperationCampaignresponse = originatingactivityidBulkoperationCampaignresponse;
@@ -56,8 +56,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             RegardingobjectidBookableresourcebookingCampaignresponse = regardingobjectidBookableresourcebookingCampaignresponse;
             RegardingobjectidBookableresourcebookingheaderCampaignresponse = regardingobjectidBookableresourcebookingheaderCampaignresponse;
             RegardingobjectidKnowledgebaserecordCampaignresponse = regardingobjectidKnowledgebaserecordCampaignresponse;
-            RegardingobjectidAccountCampaignresponse = regardingobjectidAccountCampaignresponse;
-            RegardingobjectidContactCampaignresponse = regardingobjectidContactCampaignresponse;
             SendermailboxidCampaignresponse = sendermailboxidCampaignresponse;
             OwneridCampaignresponse = owneridCampaignresponse;
             SlaActivitypointerSlaCampaignresponse = slaActivitypointerSlaCampaignresponse;
@@ -67,11 +65,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             SlainvokedidActivitypointerSlaCampaignresponse = slainvokedidActivitypointerSlaCampaignresponse;
             CampaignresponseTeams = campaignresponseTeams;
             CampaignresponseMailboxTrackingFolders = campaignresponseMailboxTrackingFolders;
-            OriginatingactivityidIncidentresolutionCampaignresponse = originatingactivityidIncidentresolutionCampaignresponse;
-            OriginatingactivityidServiceappointmentCampaignresponse = originatingactivityidServiceappointmentCampaignresponse;
-            OriginatingactivityidOpportunitycloseCampaignresponse = originatingactivityidOpportunitycloseCampaignresponse;
-            OriginatingactivityidOrdercloseCampaignresponse = originatingactivityidOrdercloseCampaignresponse;
-            OriginatingactivityidQuotecloseCampaignresponse = originatingactivityidQuotecloseCampaignresponse;
             OriginatingactivityidFax = originatingactivityidFax;
             CampaignResponseAnnotation = campaignResponseAnnotation;
             OriginatingactivityidLetter = originatingactivityidLetter;
@@ -79,7 +72,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             OriginatingactivityidPhonecall = originatingactivityidPhonecall;
             RegardingobjectidCampaignCampaignresponse = regardingobjectidCampaignCampaignresponse;
             CampaignResponseBulkDeleteFailures = campaignResponseBulkDeleteFailures;
-            RegardingobjectidBulkoperationCampaignresponse = regardingobjectidBulkoperationCampaignresponse;
             ModifiedonbehalfbyCampaignresponse = modifiedonbehalfbyCampaignresponse;
             ActivityidActivitypointer = activityidActivitypointer;
             CampaignresponseActivityParties = campaignresponseActivityParties;
@@ -102,6 +94,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             CreatedonbehalfbyCampaignresponse = createdonbehalfbyCampaignresponse;
             OriginatingactivityidAppointment = originatingactivityidAppointment;
             ModifiedbyCampaignresponse = modifiedbyCampaignresponse;
+            OriginatingactivityidIncidentresolutionCampaignresponse = originatingactivityidIncidentresolutionCampaignresponse;
+            OriginatingactivityidServiceappointmentCampaignresponse = originatingactivityidServiceappointmentCampaignresponse;
+            OriginatingactivityidOpportunitycloseCampaignresponse = originatingactivityidOpportunitycloseCampaignresponse;
+            OriginatingactivityidOrdercloseCampaignresponse = originatingactivityidOrdercloseCampaignresponse;
+            OriginatingactivityidQuotecloseCampaignresponse = originatingactivityidQuotecloseCampaignresponse;
+            RegardingobjectidAccountCampaignresponse = regardingobjectidAccountCampaignresponse;
+            RegardingobjectidContactCampaignresponse = regardingobjectidContactCampaignresponse;
+            RegardingobjectidBulkoperationCampaignresponse = regardingobjectidBulkoperationCampaignresponse;
             CustomInit();
         }
 
@@ -122,18 +122,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_originatingactivityid_value")]
-        public string _originatingactivityidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "responsecode")]
         public int? Responsecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "yomilastname")]
-        public string Yomilastname { get; set; }
 
         /// <summary>
         /// </summary>
@@ -147,8 +137,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "yomilastname")]
+        public string Yomilastname { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "companyname")]
         public string Companyname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_originatingactivityid_value")]
+        public string _originatingactivityidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -182,6 +182,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "lastname")]
         public string Lastname { get; set; }
 
@@ -189,11 +194,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "emailaddress")]
         public string Emailaddress { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -234,16 +234,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "regardingobjectid_knowledgebaserecord_campaignresponse")]
         public MicrosoftDynamicsCRMknowledgebaserecord RegardingobjectidKnowledgebaserecordCampaignresponse { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_account_campaignresponse")]
-        public MicrosoftDynamicsCRMaccount RegardingobjectidAccountCampaignresponse { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_contact_campaignresponse")]
-        public MicrosoftDynamicsCRMcontact RegardingobjectidContactCampaignresponse { get; set; }
 
         /// <summary>
         /// </summary>
@@ -292,31 +282,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "originatingactivityid_incidentresolution_campaignresponse")]
-        public MicrosoftDynamicsCRMincidentresolution OriginatingactivityidIncidentresolutionCampaignresponse { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "originatingactivityid_serviceappointment_campaignresponse")]
-        public MicrosoftDynamicsCRMserviceappointment OriginatingactivityidServiceappointmentCampaignresponse { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "originatingactivityid_opportunityclose_campaignresponse")]
-        public MicrosoftDynamicsCRMopportunityclose OriginatingactivityidOpportunitycloseCampaignresponse { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "originatingactivityid_orderclose_campaignresponse")]
-        public MicrosoftDynamicsCRMorderclose OriginatingactivityidOrdercloseCampaignresponse { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "originatingactivityid_quoteclose_campaignresponse")]
-        public MicrosoftDynamicsCRMquoteclose OriginatingactivityidQuotecloseCampaignresponse { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "originatingactivityid_fax")]
         public MicrosoftDynamicsCRMfax OriginatingactivityidFax { get; set; }
 
@@ -349,11 +314,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "CampaignResponse_BulkDeleteFailures")]
         public IList<MicrosoftDynamicsCRMbulkdeletefailure> CampaignResponseBulkDeleteFailures { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_bulkoperation_campaignresponse")]
-        public MicrosoftDynamicsCRMbulkoperation RegardingobjectidBulkoperationCampaignresponse { get; set; }
 
         /// <summary>
         /// </summary>
@@ -464,6 +424,46 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "modifiedby_campaignresponse")]
         public MicrosoftDynamicsCRMsystemuser ModifiedbyCampaignresponse { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "originatingactivityid_incidentresolution_campaignresponse")]
+        public MicrosoftDynamicsCRMincidentresolution OriginatingactivityidIncidentresolutionCampaignresponse { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "originatingactivityid_serviceappointment_campaignresponse")]
+        public MicrosoftDynamicsCRMserviceappointment OriginatingactivityidServiceappointmentCampaignresponse { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "originatingactivityid_opportunityclose_campaignresponse")]
+        public MicrosoftDynamicsCRMopportunityclose OriginatingactivityidOpportunitycloseCampaignresponse { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "originatingactivityid_orderclose_campaignresponse")]
+        public MicrosoftDynamicsCRMorderclose OriginatingactivityidOrdercloseCampaignresponse { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "originatingactivityid_quoteclose_campaignresponse")]
+        public MicrosoftDynamicsCRMquoteclose OriginatingactivityidQuotecloseCampaignresponse { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_account_campaignresponse")]
+        public MicrosoftDynamicsCRMaccount RegardingobjectidAccountCampaignresponse { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_contact_campaignresponse")]
+        public MicrosoftDynamicsCRMcontact RegardingobjectidContactCampaignresponse { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_bulkoperation_campaignresponse")]
+        public MicrosoftDynamicsCRMbulkoperation RegardingobjectidBulkoperationCampaignresponse { get; set; }
 
     }
 }

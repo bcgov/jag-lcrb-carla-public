@@ -27,16 +27,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMpicklistmapping class.
         /// </summary>
-        public MicrosoftDynamicsCRMpicklistmapping(System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string picklistmappingid = default(string), int? statuscode = default(int?), string sourcevalue = default(string), string _createdonbehalfbyValue = default(string), string _modifiedonbehalfbyValue = default(string), int? componentstate = default(int?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), int? targetvalue = default(int?), string _columnmappingidValue = default(string), string _modifiedbyValue = default(string), string solutionid = default(string), string picklistmappingidunique = default(string), int? processcode = default(int?), bool? ismanaged = default(bool?), string introducedversion = default(string), string _createdbyValue = default(string), int? statecode = default(int?), MicrosoftDynamicsCRMcolumnmapping columnmappingid = default(MicrosoftDynamicsCRMcolumnmapping), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMpicklistmapping(System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? componentstate = default(int?), string picklistmappingid = default(string), int? statuscode = default(int?), string sourcevalue = default(string), string _createdonbehalfbyValue = default(string), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), int? targetvalue = default(int?), string _columnmappingidValue = default(string), string _modifiedbyValue = default(string), string solutionid = default(string), string picklistmappingidunique = default(string), int? processcode = default(int?), string introducedversion = default(string), string _createdbyValue = default(string), int? statecode = default(int?), bool? ismanaged = default(bool?), MicrosoftDynamicsCRMcolumnmapping columnmappingid = default(MicrosoftDynamicsCRMcolumnmapping), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Modifiedon = modifiedon;
             Createdon = createdon;
+            Componentstate = componentstate;
             Picklistmappingid = picklistmappingid;
             Statuscode = statuscode;
             Sourcevalue = sourcevalue;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            Componentstate = componentstate;
             Overwritetime = overwritetime;
             Targetvalue = targetvalue;
             this._columnmappingidValue = _columnmappingidValue;
@@ -44,10 +44,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Solutionid = solutionid;
             Picklistmappingidunique = picklistmappingidunique;
             Processcode = processcode;
-            Ismanaged = ismanaged;
             Introducedversion = introducedversion;
             this._createdbyValue = _createdbyValue;
             Statecode = statecode;
+            Ismanaged = ismanaged;
             Columnmappingid = columnmappingid;
             Modifiedby = modifiedby;
             Createdonbehalfby = createdonbehalfby;
@@ -73,6 +73,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "componentstate")]
+        public int? Componentstate { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "picklistmappingid")]
         public string Picklistmappingid { get; set; }
 
@@ -95,11 +100,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "componentstate")]
-        public int? Componentstate { get; set; }
 
         /// <summary>
         /// </summary>
@@ -138,11 +138,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ismanaged")]
-        public bool? Ismanaged { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "introducedversion")]
         public string Introducedversion { get; set; }
 
@@ -155,6 +150,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "statecode")]
         public int? Statecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ismanaged")]
+        public bool? Ismanaged { get; set; }
 
         /// <summary>
         /// </summary>

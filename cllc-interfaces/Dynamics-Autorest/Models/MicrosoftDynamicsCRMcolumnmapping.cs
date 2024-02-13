@@ -29,9 +29,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMcolumnmapping
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMcolumnmapping(int? processcode = default(int?), string _modifiedbyValue = default(string), int? statuscode = default(int?), string sourceattributename = default(string), string solutionid = default(string), string introducedversion = default(string), int? componentstate = default(int?), string _createdbyValue = default(string), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), int? statecode = default(int?), bool? ismanaged = default(bool?), string columnmappingidunique = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string columnmappingid = default(string), string _importmapidValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string targetattributename = default(string), string _createdonbehalfbyValue = default(string), string sourceentityname = default(string), string targetentityname = default(string), IList<MicrosoftDynamicsCRMpicklistmapping> pickListMappingColumnMapping = default(IList<MicrosoftDynamicsCRMpicklistmapping>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMimportmap importmapid = default(MicrosoftDynamicsCRMimportmap), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMlookupmapping> lookUpMappingColumnMapping = default(IList<MicrosoftDynamicsCRMlookupmapping>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMcolumnmapping(string _modifiedbyValue = default(string), int? statuscode = default(int?), string sourceattributename = default(string), string solutionid = default(string), string introducedversion = default(string), int? componentstate = default(int?), string _createdbyValue = default(string), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), int? statecode = default(int?), bool? ismanaged = default(bool?), string columnmappingidunique = default(string), int? processcode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string columnmappingid = default(string), string _importmapidValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string targetattributename = default(string), string _createdonbehalfbyValue = default(string), string sourceentityname = default(string), string targetentityname = default(string), IList<MicrosoftDynamicsCRMpicklistmapping> pickListMappingColumnMapping = default(IList<MicrosoftDynamicsCRMpicklistmapping>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMimportmap importmapid = default(MicrosoftDynamicsCRMimportmap), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMlookupmapping> lookUpMappingColumnMapping = default(IList<MicrosoftDynamicsCRMlookupmapping>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
-            Processcode = processcode;
             this._modifiedbyValue = _modifiedbyValue;
             Statuscode = statuscode;
             Sourceattributename = sourceattributename;
@@ -44,6 +43,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Statecode = statecode;
             Ismanaged = ismanaged;
             Columnmappingidunique = columnmappingidunique;
+            Processcode = processcode;
             Createdon = createdon;
             Columnmappingid = columnmappingid;
             this._importmapidValue = _importmapidValue;
@@ -66,11 +66,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "processcode")]
-        public int? Processcode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -131,6 +126,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "columnmappingidunique")]
         public string Columnmappingidunique { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "processcode")]
+        public int? Processcode { get; set; }
 
         /// <summary>
         /// </summary>

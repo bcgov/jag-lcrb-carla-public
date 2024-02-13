@@ -39298,6 +39298,10 @@
           "format": "int32",
           "type": "integer"
         },
+        "adoxio_datelicencecapassessed": {
+          "format": "date-time",
+          "type": "string"
+        },
         "adoxio_checklistdecisionlettersentaip": {
           "format": "int32",
           "type": "integer"
@@ -39323,15 +39327,15 @@
         "_adoxio_pmuarea_value": {
           "type": "string"
         },
-        "new_lastdayestablishmentwasopenforbusiness": {
-          "format": "date-time",
-          "type": "string"
-        },
         "statuscode": {
           "format": "int32",
           "type": "integer"
         },
         "adoxio_addresspostalcode": {
+          "type": "string"
+        },
+        "adoxio_dormancyenddate": {
+          "format": "date-time",
           "type": "string"
         },
         "adoxio_investigationstatuscomment": {
@@ -39477,10 +39481,6 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_dormancyenddate": {
-          "format": "date-time",
-          "type": "string"
-        },
         "adoxio_m05": {
           "type": "boolean"
         },
@@ -39514,9 +39514,6 @@
           "format": "int32",
           "type": "integer"
         },
-        "_adoxio_sla_value": {
-          "type": "string"
-        },
         "exchangerate": {
           "format": "decimal",
           "type": "number"
@@ -39532,8 +39529,7 @@
           "format": "date-time",
           "type": "string"
         },
-        "adoxio_datelicencecapassessed": {
-          "format": "date-time",
+        "_adoxio_sla_value": {
           "type": "string"
         },
         "adoxio_isreadyretailarea": {
@@ -39735,8 +39731,9 @@
           "format": "int32",
           "type": "integer"
         },
-        "new_establishmentnametext": {
-          "type": "string"
+        "adoxio_checklistvalidestablishmentaddress": {
+          "format": "int32",
+          "type": "integer"
         },
         "timezoneruleversionnumber": {
           "format": "int32",
@@ -39837,10 +39834,6 @@
           "type": "string"
         },
         "adoxio_datesecurityscreeningcompletenessassessed": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_dormancystartdate": {
           "format": "date-time",
           "type": "string"
         },
@@ -40590,6 +40583,10 @@
         "adoxio_adhocreportprogramming": {
           "type": "boolean"
         },
+        "adoxio_dormancystartdate": {
+          "format": "date-time",
+          "type": "string"
+        },
         "adoxio_csnamechangelicenseepartnership": {
           "type": "boolean"
         },
@@ -40629,10 +40626,6 @@
         "adoxio_licencefeeinvoicepaid": {
           "type": "boolean"
         },
-        "new_adoxio_dormancystartdate": {
-          "format": "date-time",
-          "type": "string"
-        },
         "adoxio_securityscreeningcompletenessusingleconne": {
           "type": "string"
         },
@@ -40661,10 +40654,6 @@
           "type": "integer"
         },
         "adoxio_servicehoursfridayclose": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistvalidestablishmentaddress": {
           "format": "int32",
           "type": "integer"
         },

@@ -29,11 +29,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMleadcompetitors class.
         /// </summary>
-        public MicrosoftDynamicsCRMleadcompetitors(int? importsequencenumber = default(int?), int? timezoneruleversionnumber = default(int?), string versionnumber = default(string), string name = default(string), int? utcconversiontimezonecode = default(int?), string competitorid = default(string), string leadid = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string leadcompetitorid = default(string), IList<MicrosoftDynamicsCRMteam> leadcompetitorsTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMasyncoperation> leadcompetitorsAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> leadcompetitorsMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> leadcompetitorsBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> leadcompetitorsPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>))
+        public MicrosoftDynamicsCRMleadcompetitors(int? importsequencenumber = default(int?), string versionnumber = default(string), int? timezoneruleversionnumber = default(int?), string name = default(string), int? utcconversiontimezonecode = default(int?), string competitorid = default(string), string leadid = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string leadcompetitorid = default(string), IList<MicrosoftDynamicsCRMteam> leadcompetitorsTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMasyncoperation> leadcompetitorsAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> leadcompetitorsMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> leadcompetitorsBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> leadcompetitorsPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>))
         {
             Importsequencenumber = importsequencenumber;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
             Versionnumber = versionnumber;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
             Name = name;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             Competitorid = competitorid;
@@ -60,13 +60,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
         /// </summary>

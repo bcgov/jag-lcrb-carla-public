@@ -29,54 +29,54 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMproductassociation class.
         /// </summary>
-        public MicrosoftDynamicsCRMproductassociation(int? statecode = default(int?), string productassociationid = default(string), string _modifiedonbehalfbyValue = default(string), decimal? exchangerate = default(decimal?), string versionnumber = default(string), int? importsequencenumber = default(int?), decimal? quantity = default(decimal?), int? dmtimportstate = default(int?), string _associatedproductValue = default(string), int? productisrequired = default(int?), string _transactioncurrencyidValue = default(string), string _productidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _uomidValue = default(string), int? propertycustomizationstatus = default(int?), string _modifiedbyValue = default(string), string _createdbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? statuscode = default(int?), string _createdonbehalfbyValue = default(string), int? utcconversiontimezonecode = default(int?), string _organizationidValue = default(string), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMproduct associatedproduct = default(MicrosoftDynamicsCRMproduct), IList<MicrosoftDynamicsCRMteam> productassociationTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> productassociationMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> productassociationBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMinvoicedetail> productAssociationInvoiceDetails = default(IList<MicrosoftDynamicsCRMinvoicedetail>), IList<MicrosoftDynamicsCRMsyncerror> productAssociationSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMdynamicpropertyassociation> productAssociationDynamicPropertyAssociation = default(IList<MicrosoftDynamicsCRMdynamicpropertyassociation>), MicrosoftDynamicsCRMproduct productid = default(MicrosoftDynamicsCRMproduct), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMdynamicproperty> productAssociationDynamicProperty = default(IList<MicrosoftDynamicsCRMdynamicproperty>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsalesorderdetail> productAssociationSalesorderDetails = default(IList<MicrosoftDynamicsCRMsalesorderdetail>), IList<MicrosoftDynamicsCRMasyncoperation> productAssociationAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMuom uomid = default(MicrosoftDynamicsCRMuom), IList<MicrosoftDynamicsCRMquotedetail> productAssociationQuoteDetails = default(IList<MicrosoftDynamicsCRMquotedetail>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMopportunityproduct> productAssociationOpportunityProduct = default(IList<MicrosoftDynamicsCRMopportunityproduct>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> productAssociationPrincipalObjectAttributeAccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMprocesssession> productAssociationProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>))
+        public MicrosoftDynamicsCRMproductassociation(string productassociationid = default(string), int? statecode = default(int?), string _modifiedonbehalfbyValue = default(string), string versionnumber = default(string), int? importsequencenumber = default(int?), decimal? quantity = default(decimal?), decimal? exchangerate = default(decimal?), int? productisrequired = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _transactioncurrencyidValue = default(string), string _productidValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _uomidValue = default(string), int? propertycustomizationstatus = default(int?), string _associatedproductValue = default(string), string _modifiedbyValue = default(string), string _createdbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), int? statuscode = default(int?), string _createdonbehalfbyValue = default(string), int? utcconversiontimezonecode = default(int?), string _organizationidValue = default(string), int? dmtimportstate = default(int?), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMproduct associatedproduct = default(MicrosoftDynamicsCRMproduct), IList<MicrosoftDynamicsCRMteam> productassociationTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> productassociationMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> productassociationBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMsyncerror> productAssociationSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMdynamicpropertyassociation> productAssociationDynamicPropertyAssociation = default(IList<MicrosoftDynamicsCRMdynamicpropertyassociation>), MicrosoftDynamicsCRMproduct productid = default(MicrosoftDynamicsCRMproduct), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMdynamicproperty> productAssociationDynamicProperty = default(IList<MicrosoftDynamicsCRMdynamicproperty>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> productAssociationAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMuom uomid = default(MicrosoftDynamicsCRMuom), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> productAssociationPrincipalObjectAttributeAccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMprocesssession> productAssociationProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMinvoicedetail> productAssociationInvoiceDetails = default(IList<MicrosoftDynamicsCRMinvoicedetail>), IList<MicrosoftDynamicsCRMsalesorderdetail> productAssociationSalesorderDetails = default(IList<MicrosoftDynamicsCRMsalesorderdetail>), IList<MicrosoftDynamicsCRMquotedetail> productAssociationQuoteDetails = default(IList<MicrosoftDynamicsCRMquotedetail>), IList<MicrosoftDynamicsCRMopportunityproduct> productAssociationOpportunityProduct = default(IList<MicrosoftDynamicsCRMopportunityproduct>))
         {
-            Statecode = statecode;
             Productassociationid = productassociationid;
+            Statecode = statecode;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            Exchangerate = exchangerate;
             Versionnumber = versionnumber;
             Importsequencenumber = importsequencenumber;
             Quantity = quantity;
-            Dmtimportstate = dmtimportstate;
-            this._associatedproductValue = _associatedproductValue;
+            Exchangerate = exchangerate;
             Productisrequired = productisrequired;
+            Createdon = createdon;
             this._transactioncurrencyidValue = _transactioncurrencyidValue;
             this._productidValue = _productidValue;
-            Createdon = createdon;
+            Modifiedon = modifiedon;
             this._uomidValue = _uomidValue;
             Propertycustomizationstatus = propertycustomizationstatus;
+            this._associatedproductValue = _associatedproductValue;
             this._modifiedbyValue = _modifiedbyValue;
             this._createdbyValue = _createdbyValue;
             Overriddencreatedon = overriddencreatedon;
             Timezoneruleversionnumber = timezoneruleversionnumber;
-            Modifiedon = modifiedon;
             Statuscode = statuscode;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             this._organizationidValue = _organizationidValue;
+            Dmtimportstate = dmtimportstate;
             Organizationid = organizationid;
             Associatedproduct = associatedproduct;
             ProductassociationTeams = productassociationTeams;
             ProductassociationMailboxTrackingFolders = productassociationMailboxTrackingFolders;
             ProductassociationBulkDeleteFailures = productassociationBulkDeleteFailures;
-            ProductAssociationInvoiceDetails = productAssociationInvoiceDetails;
             ProductAssociationSyncErrors = productAssociationSyncErrors;
             ProductAssociationDynamicPropertyAssociation = productAssociationDynamicPropertyAssociation;
             Productid = productid;
             Transactioncurrencyid = transactioncurrencyid;
             ProductAssociationDynamicProperty = productAssociationDynamicProperty;
             Modifiedonbehalfby = modifiedonbehalfby;
-            ProductAssociationSalesorderDetails = productAssociationSalesorderDetails;
             ProductAssociationAsyncOperations = productAssociationAsyncOperations;
             Uomid = uomid;
-            ProductAssociationQuoteDetails = productAssociationQuoteDetails;
             Createdby = createdby;
-            ProductAssociationOpportunityProduct = productAssociationOpportunityProduct;
             ProductAssociationPrincipalObjectAttributeAccess = productAssociationPrincipalObjectAttributeAccess;
             Modifiedby = modifiedby;
             Createdonbehalfby = createdonbehalfby;
             ProductAssociationProcessSessions = productAssociationProcessSessions;
+            ProductAssociationInvoiceDetails = productAssociationInvoiceDetails;
+            ProductAssociationSalesorderDetails = productAssociationSalesorderDetails;
+            ProductAssociationQuoteDetails = productAssociationQuoteDetails;
+            ProductAssociationOpportunityProduct = productAssociationOpportunityProduct;
             CustomInit();
         }
 
@@ -87,23 +87,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "productassociationid")]
         public string Productassociationid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "exchangerate")]
-        public decimal? Exchangerate { get; set; }
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -122,18 +117,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "dmtimportstate")]
-        public int? Dmtimportstate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_associatedproduct_value")]
-        public string _associatedproductValue { get; set; }
+        [JsonProperty(PropertyName = "exchangerate")]
+        public decimal? Exchangerate { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "productisrequired")]
         public int? Productisrequired { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -147,8 +142,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -159,6 +154,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "propertycustomizationstatus")]
         public int? Propertycustomizationstatus { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_associatedproduct_value")]
+        public string _associatedproductValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -182,11 +182,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
 
@@ -204,6 +199,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
         public string _organizationidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "dmtimportstate")]
+        public int? Dmtimportstate { get; set; }
 
         /// <summary>
         /// </summary>
@@ -229,11 +229,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "productassociation_BulkDeleteFailures")]
         public IList<MicrosoftDynamicsCRMbulkdeletefailure> ProductassociationBulkDeleteFailures { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "productAssociation_invoice_details")]
-        public IList<MicrosoftDynamicsCRMinvoicedetail> ProductAssociationInvoiceDetails { get; set; }
 
         /// <summary>
         /// </summary>
@@ -267,11 +262,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "productAssociation_salesorder_details")]
-        public IList<MicrosoftDynamicsCRMsalesorderdetail> ProductAssociationSalesorderDetails { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "ProductAssociation_AsyncOperations")]
         public IList<MicrosoftDynamicsCRMasyncoperation> ProductAssociationAsyncOperations { get; set; }
 
@@ -282,18 +272,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "productAssociation_quote_details")]
-        public IList<MicrosoftDynamicsCRMquotedetail> ProductAssociationQuoteDetails { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "createdby")]
         public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "productAssociation_opportunity_product")]
-        public IList<MicrosoftDynamicsCRMopportunityproduct> ProductAssociationOpportunityProduct { get; set; }
 
         /// <summary>
         /// </summary>
@@ -314,6 +294,26 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "ProductAssociation_ProcessSessions")]
         public IList<MicrosoftDynamicsCRMprocesssession> ProductAssociationProcessSessions { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "productAssociation_invoice_details")]
+        public IList<MicrosoftDynamicsCRMinvoicedetail> ProductAssociationInvoiceDetails { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "productAssociation_salesorder_details")]
+        public IList<MicrosoftDynamicsCRMsalesorderdetail> ProductAssociationSalesorderDetails { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "productAssociation_quote_details")]
+        public IList<MicrosoftDynamicsCRMquotedetail> ProductAssociationQuoteDetails { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "productAssociation_opportunity_product")]
+        public IList<MicrosoftDynamicsCRMopportunityproduct> ProductAssociationOpportunityProduct { get; set; }
 
     }
 }

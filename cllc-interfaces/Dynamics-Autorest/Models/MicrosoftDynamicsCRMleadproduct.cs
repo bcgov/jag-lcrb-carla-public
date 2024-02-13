@@ -29,17 +29,17 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMleadproduct
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMleadproduct(string name = default(string), string leadproductid = default(string), string leadid = default(string), string productid = default(string), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), int? utcconversiontimezonecode = default(int?), string versionnumber = default(string), IList<MicrosoftDynamicsCRMteam> leadproductTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMasyncoperation> leadproductAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> leadproductMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> leadproductBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> leadproductPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>))
+        public MicrosoftDynamicsCRMleadproduct(string leadproductid = default(string), string leadid = default(string), string versionnumber = default(string), string productid = default(string), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), int? utcconversiontimezonecode = default(int?), string name = default(string), IList<MicrosoftDynamicsCRMteam> leadproductTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMasyncoperation> leadproductAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> leadproductMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> leadproductBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> leadproductPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>))
         {
-            Name = name;
             Leadproductid = leadproductid;
             Leadid = leadid;
+            Versionnumber = versionnumber;
             Productid = productid;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             Overriddencreatedon = overriddencreatedon;
             Importsequencenumber = importsequencenumber;
             Utcconversiontimezonecode = utcconversiontimezonecode;
-            Versionnumber = versionnumber;
+            Name = name;
             LeadproductTeams = leadproductTeams;
             LeadproductAsyncOperations = leadproductAsyncOperations;
             LeadproductMailboxTrackingFolders = leadproductMailboxTrackingFolders;
@@ -55,11 +55,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "leadproductid")]
         public string Leadproductid { get; set; }
 
@@ -67,6 +62,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "leadid")]
         public string Leadid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -95,8 +95,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
 
         /// <summary>
         /// </summary>
