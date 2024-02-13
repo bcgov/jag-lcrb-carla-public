@@ -776,5 +776,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string DormancyNotes { get; set; }
         public int? DormancyReasons { get; set; }
         public int? EstablishmentStatus { get; set; }
+        public int? DormancyIntentionForReopening { get; set; }
     }
 }

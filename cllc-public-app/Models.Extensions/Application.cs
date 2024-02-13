@@ -272,6 +272,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioDormancynotes = from.DormancyNotes ;
             to.AdoxioDormancyreasons = from.DormancyReasons;
             to.AdoxioEstablishmentstatus = from.EstablishmentStatus;
+            to.AdoxioDormancyintentionforreopening = from.DormancyIntentionForReopening;
     }
 
 
@@ -663,6 +664,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 DormancyNotes = dynamicsApplication.AdoxioDormancynotes,
                 DormancyReasons = dynamicsApplication.AdoxioDormancyreasons,
                 EstablishmentStatus = dynamicsApplication.AdoxioEstablishmentstatus,
+                DormancyIntentionForReopening = dynamicsApplication.AdoxioDormancyintentionforreopening,
             };
 
 
