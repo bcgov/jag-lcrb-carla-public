@@ -29,23 +29,24 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMcampaignactivity class.
         /// </summary>
-        public MicrosoftDynamicsCRMcampaignactivity(decimal? actualcostBase = default(decimal?), int? typecode = default(int?), int? importsequencenumber = default(int?), decimal? budgetedcostBase = default(decimal?), bool? ignoreinactivelistmembers = default(bool?), bool? donotsendonoptout = default(bool?), string subcategory = default(string), decimal? actualcost = default(decimal?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), decimal? budgetedcost = default(decimal?), int? excludeifcontactedinxdays = default(int?), string category = default(string), int? channeltypecode = default(int?), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> campaignactivityAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMlist> campaignactivitylistAssociation = default(IList<MicrosoftDynamicsCRMlist>), MicrosoftDynamicsCRMbookableresourcebooking regardingobjectidBookableresourcebookingCampaignactivity = default(MicrosoftDynamicsCRMbookableresourcebooking), MicrosoftDynamicsCRMbookableresourcebookingheader regardingobjectidBookableresourcebookingheaderCampaignactivity = default(MicrosoftDynamicsCRMbookableresourcebookingheader), MicrosoftDynamicsCRMmailbox sendermailboxidCampaignactivity = default(MicrosoftDynamicsCRMmailbox), MicrosoftDynamicsCRMprincipal owneridCampaignactivity = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsla slaActivitypointerSlaCampaignactivity = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMsla slainvokedidActivitypointerSlaCampaignactivity = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMcampaignresponse> campaignResponseCampaignActivities = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMteam> campaignactivityTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMcampaignresponse> campaignactivityCampaignResponses = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMactivityparty> campaignactivityActivityparties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMcampaign regardingobjectidCampaignCampaignactivity = default(MicrosoftDynamicsCRMcampaign), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> campaignactivityPrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyidCampaignactivity = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMannotation> campaignActivityAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMqueueitem> campaignActivityQueueItem = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMprocesssession> campaignActivityProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMconnection> campaignactivityConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnection> campaignactivityConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMsystemuser createdbyCampaignactivity = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMactivityparty> campaignactivityActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMsyncerror> campaignActivitySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyCampaignactivity = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMletter> campaignActivityLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMbulkoperation> campaignActivityBulkOperations = default(IList<MicrosoftDynamicsCRMbulkoperation>), IList<MicrosoftDynamicsCRMfax> campaignActivityFaxes = default(IList<MicrosoftDynamicsCRMfax>), MicrosoftDynamicsCRMsystemuser createdonbehalfbyCampaignactivity = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguserCampaignactivity = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMactivitypointer activityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> campaignActivityMailboxTrackingFolder = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMemail> campaignActivityEmails = default(IList<MicrosoftDynamicsCRMemail>), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMtask> campaignActivityTasks = default(IList<MicrosoftDynamicsCRMtask>), MicrosoftDynamicsCRMteam owningteamCampaignactivity = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMbulkdeletefailure> campaignActivityBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMappointment> campaignActivityAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMphonecall> campaignActivityPhonecalls = default(IList<MicrosoftDynamicsCRMphonecall>), MicrosoftDynamicsCRMsystemuser modifiedbyCampaignactivity = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> campaignActivityAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMbusinessunit owningbusinessunitCampaignactivity = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> campaignActivityRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMsalesliterature> campaignactivitysalesliteratureAssociation = default(IList<MicrosoftDynamicsCRMsalesliterature>), IList<MicrosoftDynamicsCRMincidentresolution> campaignactivityIncidentResolutions = default(IList<MicrosoftDynamicsCRMincidentresolution>), IList<MicrosoftDynamicsCRMserviceappointment> campaignactivityServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMopportunityclose> campaignactivityOpportunityCloses = default(IList<MicrosoftDynamicsCRMopportunityclose>), IList<MicrosoftDynamicsCRMorderclose> campaignactivityOrderCloses = default(IList<MicrosoftDynamicsCRMorderclose>), IList<MicrosoftDynamicsCRMquoteclose> campaignactivityQuoteCloses = default(IList<MicrosoftDynamicsCRMquoteclose>), IList<MicrosoftDynamicsCRMactivitypointer> campaignActivityActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMaccount> campaignActivityAccounts = default(IList<MicrosoftDynamicsCRMaccount>), IList<MicrosoftDynamicsCRMcontact> campaignActivityContacts = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMlead> campaignActivityLeads = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMbulkoperationlog> campaignActivityLogs = default(IList<MicrosoftDynamicsCRMbulkoperationlog>))
+        public MicrosoftDynamicsCRMcampaignactivity(decimal? actualcostBase = default(decimal?), bool? donotsendonoptout = default(bool?), int? typecode = default(int?), int? importsequencenumber = default(int?), decimal? budgetedcostBase = default(decimal?), bool? ignoreinactivelistmembers = default(bool?), string subcategory = default(string), decimal? actualcost = default(decimal?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string category = default(string), decimal? budgetedcost = default(decimal?), int? excludeifcontactedinxdays = default(int?), int? channeltypecode = default(int?), IList<MicrosoftDynamicsCRMlist> campaignactivitylistAssociation = default(IList<MicrosoftDynamicsCRMlist>), IList<MicrosoftDynamicsCRMsalesliterature> campaignactivitysalesliteratureAssociation = default(IList<MicrosoftDynamicsCRMsalesliterature>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> campaignactivityAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), MicrosoftDynamicsCRMbookableresourcebooking regardingobjectidBookableresourcebookingCampaignactivity = default(MicrosoftDynamicsCRMbookableresourcebooking), MicrosoftDynamicsCRMbookableresourcebookingheader regardingobjectidBookableresourcebookingheaderCampaignactivity = default(MicrosoftDynamicsCRMbookableresourcebookingheader), MicrosoftDynamicsCRMmailbox sendermailboxidCampaignactivity = default(MicrosoftDynamicsCRMmailbox), MicrosoftDynamicsCRMprincipal owneridCampaignactivity = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsla slaActivitypointerSlaCampaignactivity = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMsla slainvokedidActivitypointerSlaCampaignactivity = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMcampaignresponse> campaignResponseCampaignActivities = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMteam> campaignactivityTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMcampaignresponse> campaignactivityCampaignResponses = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMincidentresolution> campaignactivityIncidentResolutions = default(IList<MicrosoftDynamicsCRMincidentresolution>), IList<MicrosoftDynamicsCRMserviceappointment> campaignactivityServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMopportunityclose> campaignactivityOpportunityCloses = default(IList<MicrosoftDynamicsCRMopportunityclose>), IList<MicrosoftDynamicsCRMorderclose> campaignactivityOrderCloses = default(IList<MicrosoftDynamicsCRMorderclose>), IList<MicrosoftDynamicsCRMquoteclose> campaignactivityQuoteCloses = default(IList<MicrosoftDynamicsCRMquoteclose>), IList<MicrosoftDynamicsCRMactivityparty> campaignactivityActivityparties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMcampaign regardingobjectidCampaignCampaignactivity = default(MicrosoftDynamicsCRMcampaign), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> campaignactivityPrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyidCampaignactivity = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMannotation> campaignActivityAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMqueueitem> campaignActivityQueueItem = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMprocesssession> campaignActivityProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMconnection> campaignactivityConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnection> campaignactivityConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMsystemuser createdbyCampaignactivity = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMactivityparty> campaignactivityActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMsyncerror> campaignActivitySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyCampaignactivity = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMletter> campaignActivityLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMbulkoperation> campaignActivityBulkOperations = default(IList<MicrosoftDynamicsCRMbulkoperation>), IList<MicrosoftDynamicsCRMfax> campaignActivityFaxes = default(IList<MicrosoftDynamicsCRMfax>), MicrosoftDynamicsCRMsystemuser createdonbehalfbyCampaignactivity = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguserCampaignactivity = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMactivitypointer activityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> campaignActivityMailboxTrackingFolder = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMemail> campaignActivityEmails = default(IList<MicrosoftDynamicsCRMemail>), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMtask> campaignActivityTasks = default(IList<MicrosoftDynamicsCRMtask>), MicrosoftDynamicsCRMteam owningteamCampaignactivity = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMbulkdeletefailure> campaignActivityBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMappointment> campaignActivityAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMphonecall> campaignActivityPhonecalls = default(IList<MicrosoftDynamicsCRMphonecall>), MicrosoftDynamicsCRMsystemuser modifiedbyCampaignactivity = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMactivitypointer> campaignActivityActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMasyncoperation> campaignActivityAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMbusinessunit owningbusinessunitCampaignactivity = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> campaignActivityRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>))
         {
             ActualcostBase = actualcostBase;
+            Donotsendonoptout = donotsendonoptout;
             Typecode = typecode;
             Importsequencenumber = importsequencenumber;
             BudgetedcostBase = budgetedcostBase;
             Ignoreinactivelistmembers = ignoreinactivelistmembers;
-            Donotsendonoptout = donotsendonoptout;
             Subcategory = subcategory;
             Actualcost = actualcost;
             Overriddencreatedon = overriddencreatedon;
+            Category = category;
             Budgetedcost = budgetedcost;
             Excludeifcontactedinxdays = excludeifcontactedinxdays;
-            Category = category;
             Channeltypecode = channeltypecode;
-            CampaignactivityAbsScheduledprocessexecutions = campaignactivityAbsScheduledprocessexecutions;
             CampaignactivitylistAssociation = campaignactivitylistAssociation;
+            CampaignactivitysalesliteratureAssociation = campaignactivitysalesliteratureAssociation;
+            CampaignactivityAbsScheduledprocessexecutions = campaignactivityAbsScheduledprocessexecutions;
             RegardingobjectidBookableresourcebookingCampaignactivity = regardingobjectidBookableresourcebookingCampaignactivity;
             RegardingobjectidBookableresourcebookingheaderCampaignactivity = regardingobjectidBookableresourcebookingheaderCampaignactivity;
             SendermailboxidCampaignactivity = sendermailboxidCampaignactivity;
@@ -55,6 +56,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             CampaignResponseCampaignActivities = campaignResponseCampaignActivities;
             CampaignactivityTeams = campaignactivityTeams;
             CampaignactivityCampaignResponses = campaignactivityCampaignResponses;
+            CampaignactivityIncidentResolutions = campaignactivityIncidentResolutions;
+            CampaignactivityServiceAppointments = campaignactivityServiceAppointments;
+            CampaignactivityOpportunityCloses = campaignactivityOpportunityCloses;
+            CampaignactivityOrderCloses = campaignactivityOrderCloses;
+            CampaignactivityQuoteCloses = campaignactivityQuoteCloses;
             CampaignactivityActivityparties = campaignactivityActivityparties;
             RegardingobjectidCampaignCampaignactivity = regardingobjectidCampaignCampaignactivity;
             CampaignactivityPrincipalobjectattributeaccess = campaignactivityPrincipalobjectattributeaccess;
@@ -83,20 +89,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             CampaignActivityAppointments = campaignActivityAppointments;
             CampaignActivityPhonecalls = campaignActivityPhonecalls;
             ModifiedbyCampaignactivity = modifiedbyCampaignactivity;
+            CampaignActivityActivityPointers = campaignActivityActivityPointers;
             CampaignActivityAsyncOperations = campaignActivityAsyncOperations;
             OwningbusinessunitCampaignactivity = owningbusinessunitCampaignactivity;
             CampaignActivityRecurringAppointmentMasters = campaignActivityRecurringAppointmentMasters;
-            CampaignactivitysalesliteratureAssociation = campaignactivitysalesliteratureAssociation;
-            CampaignactivityIncidentResolutions = campaignactivityIncidentResolutions;
-            CampaignactivityServiceAppointments = campaignactivityServiceAppointments;
-            CampaignactivityOpportunityCloses = campaignactivityOpportunityCloses;
-            CampaignactivityOrderCloses = campaignactivityOrderCloses;
-            CampaignactivityQuoteCloses = campaignactivityQuoteCloses;
-            CampaignActivityActivityPointers = campaignActivityActivityPointers;
-            CampaignActivityAccounts = campaignActivityAccounts;
-            CampaignActivityContacts = campaignActivityContacts;
-            CampaignActivityLeads = campaignActivityLeads;
-            CampaignActivityLogs = campaignActivityLogs;
             CustomInit();
         }
 
@@ -109,6 +105,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "actualcost_base")]
         public decimal? ActualcostBase { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "donotsendonoptout")]
+        public bool? Donotsendonoptout { get; set; }
 
         /// <summary>
         /// </summary>
@@ -132,11 +133,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "donotsendonoptout")]
-        public bool? Donotsendonoptout { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "subcategory")]
         public string Subcategory { get; set; }
 
@@ -152,6 +148,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "category")]
+        public string Category { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "budgetedcost")]
         public decimal? Budgetedcost { get; set; }
 
@@ -162,23 +163,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "category")]
-        public string Category { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "channeltypecode")]
         public int? Channeltypecode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "campaignactivity_abs_scheduledprocessexecutions")]
-        public IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> CampaignactivityAbsScheduledprocessexecutions { get; set; }
+        [JsonProperty(PropertyName = "campaignactivitylist_association")]
+        public IList<MicrosoftDynamicsCRMlist> CampaignactivitylistAssociation { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "campaignactivitylist_association")]
-        public IList<MicrosoftDynamicsCRMlist> CampaignactivitylistAssociation { get; set; }
+        [JsonProperty(PropertyName = "campaignactivitysalesliterature_association")]
+        public IList<MicrosoftDynamicsCRMsalesliterature> CampaignactivitysalesliteratureAssociation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "campaignactivity_abs_scheduledprocessexecutions")]
+        public IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> CampaignactivityAbsScheduledprocessexecutions { get; set; }
 
         /// <summary>
         /// </summary>
@@ -224,6 +225,31 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "campaignactivity_CampaignResponses")]
         public IList<MicrosoftDynamicsCRMcampaignresponse> CampaignactivityCampaignResponses { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "campaignactivity_IncidentResolutions")]
+        public IList<MicrosoftDynamicsCRMincidentresolution> CampaignactivityIncidentResolutions { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "campaignactivity_ServiceAppointments")]
+        public IList<MicrosoftDynamicsCRMserviceappointment> CampaignactivityServiceAppointments { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "campaignactivity_OpportunityCloses")]
+        public IList<MicrosoftDynamicsCRMopportunityclose> CampaignactivityOpportunityCloses { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "campaignactivity_OrderCloses")]
+        public IList<MicrosoftDynamicsCRMorderclose> CampaignactivityOrderCloses { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "campaignactivity_QuoteCloses")]
+        public IList<MicrosoftDynamicsCRMquoteclose> CampaignactivityQuoteCloses { get; set; }
 
         /// <summary>
         /// </summary>
@@ -367,6 +393,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "CampaignActivity_ActivityPointers")]
+        public IList<MicrosoftDynamicsCRMactivitypointer> CampaignActivityActivityPointers { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "CampaignActivity_AsyncOperations")]
         public IList<MicrosoftDynamicsCRMasyncoperation> CampaignActivityAsyncOperations { get; set; }
 
@@ -379,61 +410,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "CampaignActivity_RecurringAppointmentMasters")]
         public IList<MicrosoftDynamicsCRMrecurringappointmentmaster> CampaignActivityRecurringAppointmentMasters { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "campaignactivitysalesliterature_association")]
-        public IList<MicrosoftDynamicsCRMsalesliterature> CampaignactivitysalesliteratureAssociation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "campaignactivity_IncidentResolutions")]
-        public IList<MicrosoftDynamicsCRMincidentresolution> CampaignactivityIncidentResolutions { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "campaignactivity_ServiceAppointments")]
-        public IList<MicrosoftDynamicsCRMserviceappointment> CampaignactivityServiceAppointments { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "campaignactivity_OpportunityCloses")]
-        public IList<MicrosoftDynamicsCRMopportunityclose> CampaignactivityOpportunityCloses { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "campaignactivity_OrderCloses")]
-        public IList<MicrosoftDynamicsCRMorderclose> CampaignactivityOrderCloses { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "campaignactivity_QuoteCloses")]
-        public IList<MicrosoftDynamicsCRMquoteclose> CampaignactivityQuoteCloses { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "CampaignActivity_ActivityPointers")]
-        public IList<MicrosoftDynamicsCRMactivitypointer> CampaignActivityActivityPointers { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "CampaignActivity_Accounts")]
-        public IList<MicrosoftDynamicsCRMaccount> CampaignActivityAccounts { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "CampaignActivity_Contacts")]
-        public IList<MicrosoftDynamicsCRMcontact> CampaignActivityContacts { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "CampaignActivity_Leads")]
-        public IList<MicrosoftDynamicsCRMlead> CampaignActivityLeads { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "CampaignActivity_logs")]
-        public IList<MicrosoftDynamicsCRMbulkoperationlog> CampaignActivityLogs { get; set; }
 
     }
 }

@@ -31,16 +31,15 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMattachment
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMattachment(string mimetype = default(string), string prefix = default(string), string filename = default(string), string attachmentid = default(string), string body = default(string), byte[] bodyBinary = default(byte[]), int? filesize = default(int?), string subject = default(string), string versionnumber = default(string), IList<MicrosoftDynamicsCRMsyncerror> attachmentSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMactivitymimeattachment> attachmentActivityMimeAttachments = default(IList<MicrosoftDynamicsCRMactivitymimeattachment>))
+        public MicrosoftDynamicsCRMattachment(string attachmentid = default(string), string mimetype = default(string), string body = default(string), byte[] bodyBinary = default(byte[]), string subject = default(string), string filename = default(string), int? filesize = default(int?), string versionnumber = default(string), IList<MicrosoftDynamicsCRMsyncerror> attachmentSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMactivitymimeattachment> attachmentActivityMimeAttachments = default(IList<MicrosoftDynamicsCRMactivitymimeattachment>))
         {
-            Mimetype = mimetype;
-            Prefix = prefix;
-            Filename = filename;
             Attachmentid = attachmentid;
+            Mimetype = mimetype;
             Body = body;
             BodyBinary = bodyBinary;
-            Filesize = filesize;
             Subject = subject;
+            Filename = filename;
+            Filesize = filesize;
             Versionnumber = versionnumber;
             AttachmentSyncErrors = attachmentSyncErrors;
             AttachmentActivityMimeAttachments = attachmentActivityMimeAttachments;
@@ -54,23 +53,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "mimetype")]
-        public string Mimetype { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "prefix")]
-        public string Prefix { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "filename")]
-        public string Filename { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "attachmentid")]
         public string Attachmentid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "mimetype")]
+        public string Mimetype { get; set; }
 
         /// <summary>
         /// </summary>
@@ -85,13 +74,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "filesize")]
-        public int? Filesize { get; set; }
+        [JsonProperty(PropertyName = "subject")]
+        public string Subject { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "subject")]
-        public string Subject { get; set; }
+        [JsonProperty(PropertyName = "filename")]
+        public string Filename { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "filesize")]
+        public int? Filesize { get; set; }
 
         /// <summary>
         /// </summary>

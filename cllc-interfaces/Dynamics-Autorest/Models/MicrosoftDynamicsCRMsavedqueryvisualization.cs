@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMsavedqueryvisualization class.
         /// </summary>
-        public MicrosoftDynamicsCRMsavedqueryvisualization(string presentationdescription = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string canbedeleted = default(string), string _createdbyValue = default(string), int? type = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), string savedqueryvisualizationidunique = default(string), string description = default(string), string introducedversion = default(string), int? charttype = default(int?), int? componentstate = default(int?), string datadescription = default(string), string primaryentitytypecode = default(string), bool? ismanaged = default(bool?), string _organizationidValue = default(string), string _modifiedonbehalfbyValue = default(string), string versionnumber = default(string), string savedqueryvisualizationid = default(string), string _webresourceidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string name = default(string), bool? isdefault = default(bool?), string iscustomizable = default(string), string _createdonbehalfbyValue = default(string), string solutionid = default(string), IList<MicrosoftDynamicsCRMsyncerror> savedQueryVisualizationSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMwebresource webresourceid = default(MicrosoftDynamicsCRMwebresource), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMsavedqueryvisualization(string presentationdescription = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string canbedeleted = default(string), string _createdbyValue = default(string), int? type = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), string primaryentitytypecode = default(string), string description = default(string), string introducedversion = default(string), int? componentstate = default(int?), string datadescription = default(string), int? charttype = default(int?), bool? ismanaged = default(bool?), string _organizationidValue = default(string), string _modifiedonbehalfbyValue = default(string), string versionnumber = default(string), string savedqueryvisualizationid = default(string), string _webresourceidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string name = default(string), bool? isdefault = default(bool?), string iscustomizable = default(string), string _createdonbehalfbyValue = default(string), string savedqueryvisualizationidunique = default(string), string solutionid = default(string), IList<MicrosoftDynamicsCRMsyncerror> savedQueryVisualizationSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMwebresource webresourceid = default(MicrosoftDynamicsCRMwebresource), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Presentationdescription = presentationdescription;
             Overwritetime = overwritetime;
@@ -38,13 +38,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Type = type;
             Modifiedon = modifiedon;
             this._modifiedbyValue = _modifiedbyValue;
-            Savedqueryvisualizationidunique = savedqueryvisualizationidunique;
+            Primaryentitytypecode = primaryentitytypecode;
             Description = description;
             Introducedversion = introducedversion;
-            Charttype = charttype;
             Componentstate = componentstate;
             Datadescription = datadescription;
-            Primaryentitytypecode = primaryentitytypecode;
+            Charttype = charttype;
             Ismanaged = ismanaged;
             this._organizationidValue = _organizationidValue;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
@@ -56,6 +55,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Isdefault = isdefault;
             Iscustomizable = iscustomizable;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Savedqueryvisualizationidunique = savedqueryvisualizationidunique;
             Solutionid = solutionid;
             SavedQueryVisualizationSyncErrors = savedQueryVisualizationSyncErrors;
             Createdonbehalfby = createdonbehalfby;
@@ -109,8 +109,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "savedqueryvisualizationidunique")]
-        public string Savedqueryvisualizationidunique { get; set; }
+        [JsonProperty(PropertyName = "primaryentitytypecode")]
+        public string Primaryentitytypecode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -124,11 +124,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "charttype")]
-        public int? Charttype { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "componentstate")]
         public int? Componentstate { get; set; }
 
@@ -139,8 +134,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "primaryentitytypecode")]
-        public string Primaryentitytypecode { get; set; }
+        [JsonProperty(PropertyName = "charttype")]
+        public int? Charttype { get; set; }
 
         /// <summary>
         /// </summary>
@@ -196,6 +191,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "savedqueryvisualizationidunique")]
+        public string Savedqueryvisualizationidunique { get; set; }
 
         /// <summary>
         /// </summary>

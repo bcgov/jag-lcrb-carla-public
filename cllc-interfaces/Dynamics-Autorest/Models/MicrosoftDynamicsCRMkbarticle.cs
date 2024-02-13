@@ -31,14 +31,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMkbarticle
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMkbarticle(string articlexml = default(string), string _createdbyValue = default(string), int? languagecode = default(int?), string versionnumber = default(string), string content = default(string), string _createdonbehalfbyValue = default(string), string kbarticleid = default(string), byte[] entityimage = default(byte[]), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? statuscode = default(int?), string title = default(string), string _modifiedonbehalfbyValue = default(string), decimal? exchangerate = default(decimal?), string _modifiedbyValue = default(string), int? importsequencenumber = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string keywords = default(string), string _organizationidValue = default(string), long? entityimageTimestamp = default(long?), string entityimageid = default(string), string number = default(string), string _subjectidValue = default(string), int? statecode = default(int?), string _transactioncurrencyidValue = default(string), string description = default(string), string _kbarticletemplateidValue = default(string), string comments = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string entityimageUrl = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMannotation> kbArticleAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> kbArticleBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMasyncoperation> kbArticleAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMprocesssession> kbArticleProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMduplicaterecord> kbArticleDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMkbarticletemplate kbarticletemplateid = default(MicrosoftDynamicsCRMkbarticletemplate), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> kbarticlePrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMduplicaterecord> kbArticleDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> kbArticleSharepointDocumentLocation = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMkbarticlecomment> kbarticleComments = default(IList<MicrosoftDynamicsCRMkbarticlecomment>), IList<MicrosoftDynamicsCRMsyncerror> kbArticleSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsubject subjectid = default(MicrosoftDynamicsCRMsubject), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMincident> kbarticleIncidents = default(IList<MicrosoftDynamicsCRMincident>))
+        public MicrosoftDynamicsCRMkbarticle(string articlexml = default(string), string _createdbyValue = default(string), int? statecode = default(int?), string versionnumber = default(string), string content = default(string), string _transactioncurrencyidValue = default(string), string kbarticleid = default(string), byte[] entityimage = default(byte[]), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? statuscode = default(int?), string title = default(string), string _modifiedonbehalfbyValue = default(string), decimal? exchangerate = default(decimal?), string _subjectidValue = default(string), string _modifiedbyValue = default(string), string comments = default(string), int? importsequencenumber = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string keywords = default(string), string _organizationidValue = default(string), long? entityimageTimestamp = default(long?), string entityimageid = default(string), string number = default(string), int? languagecode = default(int?), string _createdonbehalfbyValue = default(string), string description = default(string), string _kbarticletemplateidValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string entityimageUrl = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMannotation> kbArticleAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> kbArticleBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMasyncoperation> kbArticleAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMprocesssession> kbArticleProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMduplicaterecord> kbArticleDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMkbarticletemplate kbarticletemplateid = default(MicrosoftDynamicsCRMkbarticletemplate), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> kbarticlePrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMduplicaterecord> kbArticleDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> kbArticleSharepointDocumentLocation = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMkbarticlecomment> kbarticleComments = default(IList<MicrosoftDynamicsCRMkbarticlecomment>), IList<MicrosoftDynamicsCRMsyncerror> kbArticleSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsubject subjectid = default(MicrosoftDynamicsCRMsubject), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMincident> kbarticleIncidents = default(IList<MicrosoftDynamicsCRMincident>))
         {
             Articlexml = articlexml;
             this._createdbyValue = _createdbyValue;
-            Languagecode = languagecode;
+            Statecode = statecode;
             Versionnumber = versionnumber;
             Content = content;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            this._transactioncurrencyidValue = _transactioncurrencyidValue;
             Kbarticleid = kbarticleid;
             Entityimage = entityimage;
             Createdon = createdon;
@@ -46,7 +46,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Title = title;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Exchangerate = exchangerate;
+            this._subjectidValue = _subjectidValue;
             this._modifiedbyValue = _modifiedbyValue;
+            Comments = comments;
             Importsequencenumber = importsequencenumber;
             Overriddencreatedon = overriddencreatedon;
             Keywords = keywords;
@@ -54,12 +56,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             EntityimageTimestamp = entityimageTimestamp;
             Entityimageid = entityimageid;
             Number = number;
-            this._subjectidValue = _subjectidValue;
-            Statecode = statecode;
-            this._transactioncurrencyidValue = _transactioncurrencyidValue;
+            Languagecode = languagecode;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Description = description;
             this._kbarticletemplateidValue = _kbarticletemplateidValue;
-            Comments = comments;
             Modifiedon = modifiedon;
             EntityimageUrl = entityimageUrl;
             Createdonbehalfby = createdonbehalfby;
@@ -101,8 +101,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "languagecode")]
-        public int? Languagecode { get; set; }
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -116,8 +116,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
+        public string _transactioncurrencyidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -157,8 +157,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_subjectid_value")]
+        public string _subjectidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "comments")]
+        public string Comments { get; set; }
 
         /// <summary>
         /// </summary>
@@ -197,18 +207,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_subjectid_value")]
-        public string _subjectidValue { get; set; }
+        [JsonProperty(PropertyName = "languagecode")]
+        public int? Languagecode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -219,11 +224,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_kbarticletemplateid_value")]
         public string _kbarticletemplateidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "comments")]
-        public string Comments { get; set; }
 
         /// <summary>
         /// </summary>
