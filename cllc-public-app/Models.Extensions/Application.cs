@@ -267,6 +267,11 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioConfirmrelocatepicnicareaendorsement = from.ConfirmrelocatePicnicAreaEndorsement ? 1:0;
             to.AdoxioRelocatewinerylicence = from.RelocateWinaryLicence ? 1:0;
             to.AdoxioConfirmunderstandingwinerylicence= from.ConfirmRelocateWinaryLicence?1:0;
+            to.AdoxioDormancystartdate = from.DormancyStartDate;
+            to.AdoxioDormancyenddate = from.DormancyEndDate;
+            to.AdoxioDormancynotes = from.DormancyNotes ;
+            to.AdoxioDormancyreasons = from.DormancyReasons;
+            to.AdoxioEstablishmentstatus = from.EstablishmentStatus;
     }
 
 
@@ -626,12 +631,12 @@ namespace Gov.Lclb.Cllb.Public.Models
                 PicnicConfirmZoning = dynamicsApplication.AdoxioPicnicconfirmszoning,
                 PicnicReadAndAccept = dynamicsApplication.AdoxioPicnicreadandaccepttermsandconditions,
                 //LCSD-6406
-                FederalLicenceNumber=dynamicsApplication.AdoxioFederallicencenumber,
+                FederalLicenceNumber = dynamicsApplication.AdoxioFederallicencenumber,
                 FederalLicenceName = dynamicsApplication.AdoxioFederallicencename,
-                FPAddressCity =dynamicsApplication.AdoxioFpaddresscity,     
-                FPAddressPostalCode=dynamicsApplication.AdoxioFpaddresspostalcode,
-                FPAddressStreet=dynamicsApplication.AdoxioFpaddressstreet,
-                
+                FPAddressCity = dynamicsApplication.AdoxioFpaddresscity,
+                FPAddressPostalCode = dynamicsApplication.AdoxioFpaddresspostalcode,
+                FPAddressStreet = dynamicsApplication.AdoxioFpaddressstreet,
+
                 UploadDeclarations = dynamicsApplication.AdoxioUploaddeclarations,
                 ProductsListAndDescription = dynamicsApplication.AdoxioProductslistanddescription,
                 MfrSupInfoReadUnderstand = dynamicsApplication.AdoxioMfrsupinforeadunderstand,
@@ -639,21 +644,25 @@ namespace Gov.Lclb.Cllb.Public.Models
                 MfrSupInfoOwnRent = dynamicsApplication.AdoxioMfrsupinfoownrent,
                 MfrSupInfoProductionEquipment = dynamicsApplication.AdoxioMfrsupinfoproductionequipment,
 
-                VolumeProduced = dynamicsApplication.AdoxioVolumeproduced.HasValue? dynamicsApplication.AdoxioVolumeproduced.Value:0,
-                VolumeDestroyed = dynamicsApplication.AdoxioVolumedestroyed.HasValue ? dynamicsApplication.AdoxioVolumedestroyed.Value:0,
-                LdbOrderTotals = dynamicsApplication.AdoxioLdbordertotals.HasValue ? dynamicsApplication.AdoxioLdbordertotals.Value:0,
+                VolumeProduced = dynamicsApplication.AdoxioVolumeproduced.HasValue ? dynamicsApplication.AdoxioVolumeproduced.Value : 0,
+                VolumeDestroyed = dynamicsApplication.AdoxioVolumedestroyed.HasValue ? dynamicsApplication.AdoxioVolumedestroyed.Value : 0,
+                LdbOrderTotals = dynamicsApplication.AdoxioLdbordertotals.HasValue ? dynamicsApplication.AdoxioLdbordertotals.Value : 0,
                 //LCSD-5779
-                WillHaveTiedHouseExemption=dynamicsApplication.AdoxioTiedhouseexemption,
+                WillHaveTiedHouseExemption = dynamicsApplication.AdoxioTiedhouseexemption,
                 TempSuspensionOrPatronParticipationStart = dynamicsApplication.AdoxioTempsuspensionorpatronparticipationstart,
                 TempSuspensionOrPatronParticipationEnd = dynamicsApplication.AdoxioTempsuspensionorpatronparticipationend,
-                
+
                 ConfirmrelocatePicnicAreaEndorsement = dynamicsApplication.AdoxioConfirmrelocatepicnicareaendorsement.HasValue ? dynamicsApplication.AdoxioConfirmrelocatepicnicareaendorsement.Value == 1 ? true : false : false,
                 RelocatePicnicAreaEndorsement = dynamicsApplication.AdoxioRelocatepicnicareaendorsement.HasValue ? dynamicsApplication.AdoxioRelocatepicnicareaendorsement.Value == 1 ? true : false : false,
                 ConfirmPermitsRetailSales = dynamicsApplication.AdoxioConfirmpermitsretailsales.HasValue ? dynamicsApplication.AdoxioConfirmpermitsretailsales.Value == 1 ? true : false : false,
-                RelocateOnSiteStore = dynamicsApplication.AdoxioRelocateonsitestore.HasValue? dynamicsApplication.AdoxioRelocateonsitestore.Value==1? true:false : false,
+                RelocateOnSiteStore = dynamicsApplication.AdoxioRelocateonsitestore.HasValue ? dynamicsApplication.AdoxioRelocateonsitestore.Value == 1 ? true : false : false,
                 RelocateWinaryLicence = dynamicsApplication.AdoxioRelocatewinerylicence.HasValue ? dynamicsApplication.AdoxioRelocatewinerylicence.Value == 1 ? true : false : false,
                 ConfirmRelocateWinaryLicence = dynamicsApplication.AdoxioConfirmunderstandingwinerylicence.HasValue ? dynamicsApplication.AdoxioConfirmunderstandingwinerylicence.Value == 1 ? true : false : false,
-
+                DormancyStartDate = dynamicsApplication.AdoxioDormancystartdate,
+                DormancyEndDate = dynamicsApplication.AdoxioDormancyenddate,
+                DormancyNotes = dynamicsApplication.AdoxioDormancynotes,
+                DormancyReasons = dynamicsApplication.AdoxioDormancyreasons,
+                EstablishmentStatus = dynamicsApplication.AdoxioEstablishmentstatus,
             };
 
 
