@@ -49,13 +49,27 @@
       </div>
 
       <hr>
+      <!-- LCSD-6224 waynezen; only display license renewal msg if payment was for a renewal -->
+      <ng-container [formGroup]="form" *ngIf="licNumber">
+        <h3 class="blue-header">Remember to download your licence</h3>
+        <div class="content-bottom">
+          <section class="padded-section">
+            <p>
+              Thank you for renewing Licence {{licNumber}}. Please proceed to the <a routerLink="/licences">Licences & Authorizations</a> tab to
+              download and print a copy of your licence. The licence must be posted in the service area of your establishment.
+            </p>
+          </section>
+        </div>
+      </ng-container>
+      <br>
+
+
       <div>
         <p>
           Applications cannot be processed until all required documentation is received. A list of applicable
           associates can be found on the application dashboard.
         </p>
         <p>
-          {{isLiquor}}
           The applicant may be notified by the Liquor and Cannabis Regulation Branch if any information is missing, or
           if
           more information is required. If the applicant wishes to make any changes to the application, please contact
