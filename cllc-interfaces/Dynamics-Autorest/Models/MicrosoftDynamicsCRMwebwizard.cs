@@ -27,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMwebwizard
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMwebwizard(string name = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), int? componentstate = default(int?), string webwizardidunique = default(string), string _organizationidValue = default(string), int? wizardpageheight = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string versionnumber = default(string), bool? isstaticpagesequence = default(bool?), bool? ismanaged = default(bool?), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string accessprivileges = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), int? wizardpagewidth = default(int?), string titleresourcestring = default(string), string webwizardid = default(string), string _createdbyValue = default(string), string introducedversion = default(string), int? startpagesequencenumber = default(int?), string solutionid = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMwebwizard(string name = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), int? componentstate = default(int?), string webwizardidunique = default(string), string _organizationidValue = default(string), int? wizardpageheight = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string versionnumber = default(string), bool? isstaticpagesequence = default(bool?), bool? ismanaged = default(bool?), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string accessprivileges = default(string), string titleresourcestring = default(string), int? wizardpagewidth = default(int?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string webwizardid = default(string), string introducedversion = default(string), string _createdbyValue = default(string), int? startpagesequencenumber = default(int?), string solutionid = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Name = name;
             Createdon = createdon;
@@ -43,12 +43,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             this._modifiedbyValue = _modifiedbyValue;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Accessprivileges = accessprivileges;
-            Overwritetime = overwritetime;
-            Wizardpagewidth = wizardpagewidth;
             Titleresourcestring = titleresourcestring;
+            Wizardpagewidth = wizardpagewidth;
+            Overwritetime = overwritetime;
             Webwizardid = webwizardid;
-            this._createdbyValue = _createdbyValue;
             Introducedversion = introducedversion;
+            this._createdbyValue = _createdbyValue;
             Startpagesequencenumber = startpagesequencenumber;
             Solutionid = solutionid;
             Createdonbehalfby = createdonbehalfby;
@@ -136,8 +136,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "overwritetime")]
-        public System.DateTimeOffset? Overwritetime { get; set; }
+        [JsonProperty(PropertyName = "titleresourcestring")]
+        public string Titleresourcestring { get; set; }
 
         /// <summary>
         /// </summary>
@@ -146,8 +146,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "titleresourcestring")]
-        public string Titleresourcestring { get; set; }
+        [JsonProperty(PropertyName = "overwritetime")]
+        public System.DateTimeOffset? Overwritetime { get; set; }
 
         /// <summary>
         /// </summary>
@@ -156,13 +156,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        [JsonProperty(PropertyName = "introducedversion")]
+        public string Introducedversion { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "introducedversion")]
-        public string Introducedversion { get; set; }
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>

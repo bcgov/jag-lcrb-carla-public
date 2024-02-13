@@ -27,10 +27,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMplugintracelog class.
         /// </summary>
-        public MicrosoftDynamicsCRMplugintracelog(string secureconfiguration = default(string), string organizationid = default(string), int? performanceexecutionduration = default(int?), string plugintracelogid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string primaryentity = default(string), System.DateTimeOffset? performanceconstructorstarttime = default(System.DateTimeOffset?), string persistencekey = default(string), string _createdonbehalfbyValue = default(string), string pluginstepid = default(string), int? mode = default(int?), int? operationtype = default(int?), string messagename = default(string), string _createdbyValue = default(string), System.DateTimeOffset? performanceexecutionstarttime = default(System.DateTimeOffset?), string configuration = default(string), string profile = default(string), int? performanceconstructorduration = default(int?), string typename = default(string), bool? issystemcreated = default(bool?), int? depth = default(int?), string correlationid = default(string), string requestid = default(string), string exceptiondetails = default(string), string messageblock = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMplugintracelog(string secureconfiguration = default(string), string organizationid = default(string), string _createdbyValue = default(string), int? performanceexecutionduration = default(int?), string plugintracelogid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string primaryentity = default(string), System.DateTimeOffset? performanceconstructorstarttime = default(System.DateTimeOffset?), string persistencekey = default(string), string _createdonbehalfbyValue = default(string), string pluginstepid = default(string), int? mode = default(int?), int? operationtype = default(int?), string messagename = default(string), int? performanceconstructorduration = default(int?), System.DateTimeOffset? performanceexecutionstarttime = default(System.DateTimeOffset?), string configuration = default(string), string profile = default(string), int? depth = default(int?), string typename = default(string), bool? issystemcreated = default(bool?), string correlationid = default(string), string requestid = default(string), string exceptiondetails = default(string), string messageblock = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Secureconfiguration = secureconfiguration;
             Organizationid = organizationid;
+            this._createdbyValue = _createdbyValue;
             Performanceexecutionduration = performanceexecutionduration;
             Plugintracelogid = plugintracelogid;
             Createdon = createdon;
@@ -42,14 +43,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Mode = mode;
             Operationtype = operationtype;
             Messagename = messagename;
-            this._createdbyValue = _createdbyValue;
+            Performanceconstructorduration = performanceconstructorduration;
             Performanceexecutionstarttime = performanceexecutionstarttime;
             Configuration = configuration;
             Profile = profile;
-            Performanceconstructorduration = performanceconstructorduration;
+            Depth = depth;
             Typename = typename;
             Issystemcreated = issystemcreated;
-            Depth = depth;
             Correlationid = correlationid;
             Requestid = requestid;
             Exceptiondetails = exceptiondetails;
@@ -73,6 +73,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "organizationid")]
         public string Organizationid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -131,8 +136,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        [JsonProperty(PropertyName = "performanceconstructorduration")]
+        public int? Performanceconstructorduration { get; set; }
 
         /// <summary>
         /// </summary>
@@ -151,8 +156,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "performanceconstructorduration")]
-        public int? Performanceconstructorduration { get; set; }
+        [JsonProperty(PropertyName = "depth")]
+        public int? Depth { get; set; }
 
         /// <summary>
         /// </summary>
@@ -163,11 +168,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "issystemcreated")]
         public bool? Issystemcreated { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "depth")]
-        public int? Depth { get; set; }
 
         /// <summary>
         /// </summary>

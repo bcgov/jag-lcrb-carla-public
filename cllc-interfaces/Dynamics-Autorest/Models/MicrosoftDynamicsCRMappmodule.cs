@@ -29,41 +29,46 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMappmodule
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMappmodule(string versionnumber = default(string), string solutionid = default(string), string appmoduleversion = default(string), string description = default(string), string _organizationidValue = default(string), string _publisheridValue = default(string), string _modifiedonbehalfbyValue = default(string), int? componentstate = default(int?), string configxml = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string appmoduleid = default(string), string _createdbyValue = default(string), string appmoduleidunique = default(string), int? importsequencenumber = default(int?), string descriptor = default(string), string url = default(string), string appmodulexmlmanaged = default(string), bool? isdefault = default(bool?), int? formfactor = default(int?), System.DateTimeOffset? publishedon = default(System.DateTimeOffset?), string webresourceid = default(string), string name = default(string), string uniquename = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), bool? ismanaged = default(bool?), string introducedversion = default(string), string welcomepageid = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), bool? isfeatured = default(bool?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? clienttype = default(int?), IList<MicrosoftDynamicsCRMrole> appmodulerolesAssociation = default(IList<MicrosoftDynamicsCRMrole>), MicrosoftDynamicsCRMsystemuser appmoduleModifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMappconfig> appmoduleAppconfig = default(IList<MicrosoftDynamicsCRMappconfig>), MicrosoftDynamicsCRMsystemuser appmoduleCreatedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMpublisher publisherAppmoduleAppmodule = default(MicrosoftDynamicsCRMpublisher), IList<MicrosoftDynamicsCRMappmodulecomponent> appmoduleAppmodulecomponent = default(IList<MicrosoftDynamicsCRMappmodulecomponent>), MicrosoftDynamicsCRMsystemuser appmoduleModifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser appmoduleCreatedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationAppmoduleAppmodule = default(MicrosoftDynamicsCRMorganization))
+        public MicrosoftDynamicsCRMappmodule(string appmodulexmlmanaged = default(string), string webresourceid = default(string), string uniquename = default(string), int? componentstate = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? publishedon = default(System.DateTimeOffset?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string url = default(string), string appmoduleversion = default(string), string appmoduleidunique = default(string), int? clienttype = default(int?), string _modifiedonbehalfbyValue = default(string), bool? isdefault = default(bool?), int? navigationtype = default(int?), string versionnumber = default(string), bool? ismanaged = default(bool?), int? formfactor = default(int?), string _modifiedbyValue = default(string), int? statuscode = default(int?), string introducedversion = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string welcomepageid = default(string), int? statecode = default(int?), string name = default(string), string _createdonbehalfbyValue = default(string), string appmoduleid = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string solutionid = default(string), bool? isfeatured = default(bool?), string description = default(string), string configxml = default(string), string eventhandlers = default(string), string _publisheridValue = default(string), string optimizedfor = default(string), string _createdbyValue = default(string), string _organizationidValue = default(string), int? importsequencenumber = default(int?), string descriptor = default(string), IList<MicrosoftDynamicsCRMrole> appmodulerolesAssociation = default(IList<MicrosoftDynamicsCRMrole>), MicrosoftDynamicsCRMsystemuser appmoduleModifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMappconfig> appmoduleAppconfig = default(IList<MicrosoftDynamicsCRMappconfig>), MicrosoftDynamicsCRMsystemuser appmoduleCreatedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMpublisher publisherAppmoduleAppmodule = default(MicrosoftDynamicsCRMpublisher), IList<MicrosoftDynamicsCRMappmodulecomponent> appmoduleAppmodulecomponent = default(IList<MicrosoftDynamicsCRMappmodulecomponent>), MicrosoftDynamicsCRMsystemuser appmoduleModifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser appmoduleCreatedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationAppmoduleAppmodule = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMserviceplan> serviceplanAppmoduleAssociation = default(IList<MicrosoftDynamicsCRMserviceplan>))
         {
-            Versionnumber = versionnumber;
-            Solutionid = solutionid;
-            Appmoduleversion = appmoduleversion;
-            Description = description;
-            this._organizationidValue = _organizationidValue;
-            this._publisheridValue = _publisheridValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Appmodulexmlmanaged = appmodulexmlmanaged;
+            Webresourceid = webresourceid;
+            Uniquename = uniquename;
             Componentstate = componentstate;
-            Configxml = configxml;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            Modifiedon = modifiedon;
-            Appmoduleid = appmoduleid;
-            this._createdbyValue = _createdbyValue;
+            Createdon = createdon;
+            Publishedon = publishedon;
+            Overwritetime = overwritetime;
+            Url = url;
+            Appmoduleversion = appmoduleversion;
             Appmoduleidunique = appmoduleidunique;
+            Clienttype = clienttype;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Isdefault = isdefault;
+            Navigationtype = navigationtype;
+            Versionnumber = versionnumber;
+            Ismanaged = ismanaged;
+            Formfactor = formfactor;
+            this._modifiedbyValue = _modifiedbyValue;
+            Statuscode = statuscode;
+            Introducedversion = introducedversion;
+            Modifiedon = modifiedon;
+            Welcomepageid = welcomepageid;
+            Statecode = statecode;
+            Name = name;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Appmoduleid = appmoduleid;
+            Overriddencreatedon = overriddencreatedon;
+            Solutionid = solutionid;
+            Isfeatured = isfeatured;
+            Description = description;
+            Configxml = configxml;
+            Eventhandlers = eventhandlers;
+            this._publisheridValue = _publisheridValue;
+            Optimizedfor = optimizedfor;
+            this._createdbyValue = _createdbyValue;
+            this._organizationidValue = _organizationidValue;
             Importsequencenumber = importsequencenumber;
             Descriptor = descriptor;
-            Url = url;
-            Appmodulexmlmanaged = appmodulexmlmanaged;
-            Isdefault = isdefault;
-            Formfactor = formfactor;
-            Publishedon = publishedon;
-            Webresourceid = webresourceid;
-            Name = name;
-            Uniquename = uniquename;
-            this._modifiedbyValue = _modifiedbyValue;
-            Overriddencreatedon = overriddencreatedon;
-            Ismanaged = ismanaged;
-            Introducedversion = introducedversion;
-            Welcomepageid = welcomepageid;
-            Overwritetime = overwritetime;
-            Isfeatured = isfeatured;
-            Createdon = createdon;
-            Clienttype = clienttype;
             AppmodulerolesAssociation = appmodulerolesAssociation;
             AppmoduleModifiedonbehalfby = appmoduleModifiedonbehalfby;
             AppmoduleAppconfig = appmoduleAppconfig;
@@ -73,6 +78,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AppmoduleModifiedby = appmoduleModifiedby;
             AppmoduleCreatedonbehalfby = appmoduleCreatedonbehalfby;
             OrganizationAppmoduleAppmodule = organizationAppmoduleAppmodule;
+            ServiceplanAppmoduleAssociation = serviceplanAppmoduleAssociation;
             CustomInit();
         }
 
@@ -83,38 +89,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "appmodulexmlmanaged")]
+        public string Appmodulexmlmanaged { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "solutionid")]
-        public string Solutionid { get; set; }
+        [JsonProperty(PropertyName = "webresourceid")]
+        public string Webresourceid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "appmoduleversion")]
-        public string Appmoduleversion { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "description")]
-        public string Description { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_publisherid_value")]
-        public string _publisheridValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "uniquename")]
+        public string Uniquename { get; set; }
 
         /// <summary>
         /// </summary>
@@ -123,13 +109,83 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "configxml")]
-        public string Configxml { get; set; }
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "publishedon")]
+        public System.DateTimeOffset? Publishedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overwritetime")]
+        public System.DateTimeOffset? Overwritetime { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "url")]
+        public string Url { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "appmoduleversion")]
+        public string Appmoduleversion { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "appmoduleidunique")]
+        public string Appmoduleidunique { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "clienttype")]
+        public int? Clienttype { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "isdefault")]
+        public bool? Isdefault { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "navigationtype")]
+        public int? Navigationtype { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ismanaged")]
+        public bool? Ismanaged { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "formfactor")]
+        public int? Formfactor { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "introducedversion")]
+        public string Introducedversion { get; set; }
 
         /// <summary>
         /// </summary>
@@ -138,8 +194,68 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "welcomepageid")]
+        public string Welcomepageid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "appmoduleid")]
         public string Appmoduleid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "solutionid")]
+        public string Solutionid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "isfeatured")]
+        public bool? Isfeatured { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "description")]
+        public string Description { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "configxml")]
+        public string Configxml { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "eventhandlers")]
+        public string Eventhandlers { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_publisherid_value")]
+        public string _publisheridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "optimizedfor")]
+        public string Optimizedfor { get; set; }
 
         /// <summary>
         /// </summary>
@@ -148,8 +264,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "appmoduleidunique")]
-        public string Appmoduleidunique { get; set; }
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -160,91 +276,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "descriptor")]
         public string Descriptor { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "url")]
-        public string Url { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "appmodulexmlmanaged")]
-        public string Appmodulexmlmanaged { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "isdefault")]
-        public bool? Isdefault { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "formfactor")]
-        public int? Formfactor { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "publishedon")]
-        public System.DateTimeOffset? Publishedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "webresourceid")]
-        public string Webresourceid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "uniquename")]
-        public string Uniquename { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ismanaged")]
-        public bool? Ismanaged { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "introducedversion")]
-        public string Introducedversion { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "welcomepageid")]
-        public string Welcomepageid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "overwritetime")]
-        public System.DateTimeOffset? Overwritetime { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "isfeatured")]
-        public bool? Isfeatured { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "clienttype")]
-        public int? Clienttype { get; set; }
 
         /// <summary>
         /// </summary>
@@ -290,6 +321,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "organization_appmodule_appmodule")]
         public MicrosoftDynamicsCRMorganization OrganizationAppmoduleAppmodule { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "serviceplan_appmodule_association")]
+        public IList<MicrosoftDynamicsCRMserviceplan> ServiceplanAppmoduleAssociation { get; set; }
 
     }
 }

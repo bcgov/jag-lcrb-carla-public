@@ -29,17 +29,17 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMproductsubstitute class.
         /// </summary>
-        public MicrosoftDynamicsCRMproductsubstitute(System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? statuscode = default(int?), int? utcconversiontimezonecode = default(int?), string versionnumber = default(string), string _createdonbehalfbyValue = default(string), int? statecode = default(int?), int? timezoneruleversionnumber = default(int?), int? importsequencenumber = default(int?), int? salesrelationshiptype = default(int?), int? direction = default(int?), string productsubstituteid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _productidValue = default(string), string _substitutedproductidValue = default(string), string _modifiedbyValue = default(string), decimal? exchangerate = default(decimal?), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _transactioncurrencyidValue = default(string), string _createdbyValue = default(string), string name = default(string), string _organizationidValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> productSubstituteAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMprocesssession> productSubstituteProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> productSubstituteBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> productSubstitutePrincipalObjectAttributeAccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMproduct productid = default(MicrosoftDynamicsCRMproduct), MicrosoftDynamicsCRMproduct substitutedproductid = default(MicrosoftDynamicsCRMproduct), IList<MicrosoftDynamicsCRMteam> productsubstituteTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> productsubstituteMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMsyncerror> productSubstituteSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>))
+        public MicrosoftDynamicsCRMproductsubstitute(System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), string versionnumber = default(string), int? salesrelationshiptype = default(int?), string _createdonbehalfbyValue = default(string), int? statecode = default(int?), int? timezoneruleversionnumber = default(int?), int? importsequencenumber = default(int?), int? statuscode = default(int?), int? direction = default(int?), string productsubstituteid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _productidValue = default(string), string _substitutedproductidValue = default(string), string _modifiedbyValue = default(string), decimal? exchangerate = default(decimal?), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _transactioncurrencyidValue = default(string), string _createdbyValue = default(string), string name = default(string), string _organizationidValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> productSubstituteAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMprocesssession> productSubstituteProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> productSubstituteBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> productSubstitutePrincipalObjectAttributeAccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMproduct productid = default(MicrosoftDynamicsCRMproduct), MicrosoftDynamicsCRMproduct substitutedproductid = default(MicrosoftDynamicsCRMproduct), IList<MicrosoftDynamicsCRMteam> productsubstituteTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> productsubstituteMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMsyncerror> productSubstituteSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>))
         {
             Overriddencreatedon = overriddencreatedon;
-            Statuscode = statuscode;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             Versionnumber = versionnumber;
+            Salesrelationshiptype = salesrelationshiptype;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Statecode = statecode;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             Importsequencenumber = importsequencenumber;
-            Salesrelationshiptype = salesrelationshiptype;
+            Statuscode = statuscode;
             Direction = direction;
             Productsubstituteid = productsubstituteid;
             Modifiedon = modifiedon;
@@ -83,11 +83,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "utcconversiontimezonecode")]
         public int? Utcconversiontimezonecode { get; set; }
 
@@ -95,6 +90,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
         public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "salesrelationshiptype")]
+        public int? Salesrelationshiptype { get; set; }
 
         /// <summary>
         /// </summary>
@@ -118,8 +118,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "salesrelationshiptype")]
-        public int? Salesrelationshiptype { get; set; }
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
 
         /// <summary>
         /// </summary>

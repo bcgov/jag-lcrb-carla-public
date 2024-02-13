@@ -29,14 +29,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioLicencesubcategory class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioLicencesubcategory(int? adoxioFinalinspectiontimeunit = default(int?), int? adoxioProratedbydaymonth = default(int?), int? adoxioRoutineinspectionoccurrence = default(int?), string adoxioLicencesubcategoryid = default(string), string _adoxioLicencefeeproductValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? adoxioFinalinspectiontime = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), int? utcconversiontimezonecode = default(int?), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), bool? adoxioIslicencefeeprorated = default(bool?), int? statuscode = default(int?), string _owningteamValue = default(string), string _owninguserValue = default(string), int? adoxioProratedendingmonth = default(int?), string adoxioName = default(string), string _createdbyValue = default(string), int? statecode = default(int?), int? importsequencenumber = default(int?), int? adoxioProratedendingday = default(int?), int? timezoneruleversionnumber = default(int?), string _adoxioLicencetypeValue = default(string), string _owneridValue = default(string), string versionnumber = default(string), string _owningbusinessunitValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioLicencesubcategorySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioLicencesubcategoryAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioLicencesubcategoryMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioLicencesubcategoryProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioLicencesubcategoryBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioLicencesubcategoryPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMadoxioLicencetype adoxioLicenceType = default(MicrosoftDynamicsCRMadoxioLicencetype), IList<MicrosoftDynamicsCRMadoxioLicences> adoxioLicencesubcategoryAdoxioLicencesLicenceSubCategoryId = default(IList<MicrosoftDynamicsCRMadoxioLicences>), IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset> adoxioLicencesubcategoryAdoxioTermsconditionslimitationspresetLicenceSubCategory = default(IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioLicencesubcategoryAdoxioApplicationLicenceSubCategoryId = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMincident> adoxioLicencesubcategoryIncidentLicenceSubCategoryId = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation> adoxioLicencesubcategoryAdoxioApplicationtermsconditionslimitationLicenceSubCategoryId = default(IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation>), MicrosoftDynamicsCRMproduct adoxioLicenceFeeProduct = default(MicrosoftDynamicsCRMproduct), IList<MicrosoftDynamicsCRMadoxioProratedlicencefeeschedule> adoxioLicencesubcategoryAdoxioProratedlicencefeescheduleLicenceSubCategory = default(IList<MicrosoftDynamicsCRMadoxioProratedlicencefeeschedule>))
+        public MicrosoftDynamicsCRMadoxioLicencesubcategory(int? adoxioFinalinspectiontimeunit = default(int?), int? adoxioProratedbydaymonth = default(int?), int? adoxioRoutineinspectionoccurrence = default(int?), string _adoxioLicencefeeproductValue = default(string), string _owneridValue = default(string), int? adoxioFinalinspectiontime = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), int? utcconversiontimezonecode = default(int?), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), bool? adoxioIslicencefeeprorated = default(bool?), int? statuscode = default(int?), string adoxioLicencesubcategoryid = default(string), string _owninguserValue = default(string), int? adoxioProratedendingmonth = default(int?), string adoxioName = default(string), string _createdbyValue = default(string), int? statecode = default(int?), int? importsequencenumber = default(int?), int? adoxioProratedendingday = default(int?), int? timezoneruleversionnumber = default(int?), string _adoxioLicencetypeValue = default(string), string versionnumber = default(string), string _owningteamValue = default(string), string _owningbusinessunitValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioLicencesubcategorySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioLicencesubcategoryAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioLicencesubcategoryMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioLicencesubcategoryProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioLicencesubcategoryBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioLicencesubcategoryPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMadoxioLicencetype adoxioLicenceType = default(MicrosoftDynamicsCRMadoxioLicencetype), IList<MicrosoftDynamicsCRMadoxioLicences> adoxioLicencesubcategoryAdoxioLicencesLicenceSubCategoryId = default(IList<MicrosoftDynamicsCRMadoxioLicences>), IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset> adoxioLicencesubcategoryAdoxioTermsconditionslimitationspresetLicenceSubCategory = default(IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioLicencesubcategoryAdoxioApplicationLicenceSubCategoryId = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMincident> adoxioLicencesubcategoryIncidentLicenceSubCategoryId = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation> adoxioLicencesubcategoryAdoxioApplicationtermsconditionslimitationLicenceSubCategoryId = default(IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation>), MicrosoftDynamicsCRMproduct adoxioLicenceFeeProduct = default(MicrosoftDynamicsCRMproduct), IList<MicrosoftDynamicsCRMadoxioProratedlicencefeeschedule> adoxioLicencesubcategoryAdoxioProratedlicencefeescheduleLicenceSubCategory = default(IList<MicrosoftDynamicsCRMadoxioProratedlicencefeeschedule>))
         {
             AdoxioFinalinspectiontimeunit = adoxioFinalinspectiontimeunit;
             AdoxioProratedbydaymonth = adoxioProratedbydaymonth;
             AdoxioRoutineinspectionoccurrence = adoxioRoutineinspectionoccurrence;
-            AdoxioLicencesubcategoryid = adoxioLicencesubcategoryid;
             this._adoxioLicencefeeproductValue = _adoxioLicencefeeproductValue;
-            Modifiedon = modifiedon;
+            this._owneridValue = _owneridValue;
             AdoxioFinalinspectiontime = adoxioFinalinspectiontime;
             Createdon = createdon;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
@@ -46,7 +45,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Overriddencreatedon = overriddencreatedon;
             AdoxioIslicencefeeprorated = adoxioIslicencefeeprorated;
             Statuscode = statuscode;
-            this._owningteamValue = _owningteamValue;
+            AdoxioLicencesubcategoryid = adoxioLicencesubcategoryid;
             this._owninguserValue = _owninguserValue;
             AdoxioProratedendingmonth = adoxioProratedendingmonth;
             AdoxioName = adoxioName;
@@ -56,9 +55,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioProratedendingday = adoxioProratedendingday;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             this._adoxioLicencetypeValue = _adoxioLicencetypeValue;
-            this._owneridValue = _owneridValue;
             Versionnumber = versionnumber;
+            this._owningteamValue = _owningteamValue;
             this._owningbusinessunitValue = _owningbusinessunitValue;
+            Modifiedon = modifiedon;
             Createdby = createdby;
             Createdonbehalfby = createdonbehalfby;
             Modifiedby = modifiedby;
@@ -106,18 +106,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_licencesubcategoryid")]
-        public string AdoxioLicencesubcategoryid { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_adoxio_licencefeeproduct_value")]
         public string _adoxioLicencefeeproductValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -166,8 +161,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_licencesubcategoryid")]
+        public string AdoxioLicencesubcategoryid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -216,18 +211,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
         public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
         public string _owningbusinessunitValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>

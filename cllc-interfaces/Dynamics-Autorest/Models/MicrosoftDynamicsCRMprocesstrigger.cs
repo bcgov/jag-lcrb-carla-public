@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMprocesstrigger class.
         /// </summary>
-        public MicrosoftDynamicsCRMprocesstrigger(string processtriggerid = default(string), string _formidValue = default(string), string methodid = default(string), string _owneridValue = default(string), int? scope = default(int?), int? componentstate = default(int?), string owninguser = default(string), int? pipelinestage = default(int?), string processtriggeridunique = default(string), string _processidValue = default(string), string _modifiedbyValue = default(string), string primaryentitytypecode = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string iscustomizable = default(string), string controlname = default(string), string owningbusinessunit = default(string), int? controltype = default(int?), string _modifiedonbehalfbyValue = default(string), string versionnumber = default(string), string eventProperty = default(string), bool? ismanaged = default(bool?), string solutionid = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> processTriggerSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemform formid = default(MicrosoftDynamicsCRMsystemform), MicrosoftDynamicsCRMworkflow processid = default(MicrosoftDynamicsCRMworkflow), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMprocesstrigger(string processtriggerid = default(string), string _formidValue = default(string), string methodid = default(string), string _owneridValue = default(string), int? scope = default(int?), int? componentstate = default(int?), string _modifiedonbehalfbyValue = default(string), string owninguser = default(string), int? pipelinestage = default(int?), string controlname = default(string), string processtriggeridunique = default(string), string _processidValue = default(string), string _modifiedbyValue = default(string), string primaryentitytypecode = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string iscustomizable = default(string), bool? ismanaged = default(bool?), string owningbusinessunit = default(string), int? controltype = default(int?), string versionnumber = default(string), string eventProperty = default(string), string solutionid = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> processTriggerSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemform formid = default(MicrosoftDynamicsCRMsystemform), MicrosoftDynamicsCRMworkflow processid = default(MicrosoftDynamicsCRMworkflow), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Processtriggerid = processtriggerid;
             this._formidValue = _formidValue;
@@ -37,8 +37,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             this._owneridValue = _owneridValue;
             Scope = scope;
             Componentstate = componentstate;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Owninguser = owninguser;
             Pipelinestage = pipelinestage;
+            Controlname = controlname;
             Processtriggeridunique = processtriggeridunique;
             this._processidValue = _processidValue;
             this._modifiedbyValue = _modifiedbyValue;
@@ -46,13 +48,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Modifiedon = modifiedon;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Iscustomizable = iscustomizable;
-            Controlname = controlname;
+            Ismanaged = ismanaged;
             Owningbusinessunit = owningbusinessunit;
             Controltype = controltype;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Versionnumber = versionnumber;
             EventProperty = eventProperty;
-            Ismanaged = ismanaged;
             Solutionid = solutionid;
             Overwritetime = overwritetime;
             Createdon = createdon;
@@ -104,6 +104,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "owninguser")]
         public string Owninguser { get; set; }
 
@@ -111,6 +116,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "pipelinestage")]
         public int? Pipelinestage { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "controlname")]
+        public string Controlname { get; set; }
 
         /// <summary>
         /// </summary>
@@ -149,8 +159,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "controlname")]
-        public string Controlname { get; set; }
+        [JsonProperty(PropertyName = "ismanaged")]
+        public bool? Ismanaged { get; set; }
 
         /// <summary>
         /// </summary>
@@ -164,11 +174,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
         public string Versionnumber { get; set; }
 
@@ -176,11 +181,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "event")]
         public string EventProperty { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ismanaged")]
-        public bool? Ismanaged { get; set; }
 
         /// <summary>
         /// </summary>

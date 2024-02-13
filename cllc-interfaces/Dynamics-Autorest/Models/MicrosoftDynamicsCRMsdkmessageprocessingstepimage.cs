@@ -27,11 +27,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMsdkmessageprocessingstepimage class.
         /// </summary>
-        public MicrosoftDynamicsCRMsdkmessageprocessingstepimage(int? componentstate = default(int?), string _createdonbehalfbyValue = default(string), string entityalias = default(string), string introducedversion = default(string), string attributes = default(string), bool? ismanaged = default(bool?), string _modifiedonbehalfbyValue = default(string), string sdkmessageprocessingstepimageidunique = default(string), string name = default(string), string _modifiedbyValue = default(string), string description = default(string), string iscustomizable = default(string), string _organizationidValue = default(string), string versionnumber = default(string), string messagepropertyname = default(string), string sdkmessageprocessingstepimageid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _sdkmessageprocessingstepidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string solutionid = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), int? imagetype = default(int?), int? customizationlevel = default(int?), string relatedattributename = default(string), string _createdbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsdkmessageprocessingstep sdkmessageprocessingstepid = default(MicrosoftDynamicsCRMsdkmessageprocessingstep))
+        public MicrosoftDynamicsCRMsdkmessageprocessingstepimage(int? componentstate = default(int?), string _createdonbehalfbyValue = default(string), string entityalias = default(string), string description = default(string), string introducedversion = default(string), string attributes = default(string), bool? ismanaged = default(bool?), string _modifiedonbehalfbyValue = default(string), string sdkmessageprocessingstepimageidunique = default(string), string name = default(string), string _modifiedbyValue = default(string), string iscustomizable = default(string), string _organizationidValue = default(string), string versionnumber = default(string), string messagepropertyname = default(string), string sdkmessageprocessingstepimageid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _sdkmessageprocessingstepidValue = default(string), string solutionid = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? imagetype = default(int?), int? customizationlevel = default(int?), string relatedattributename = default(string), string _createdbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsdkmessageprocessingstep sdkmessageprocessingstepid = default(MicrosoftDynamicsCRMsdkmessageprocessingstep))
         {
             Componentstate = componentstate;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Entityalias = entityalias;
+            Description = description;
             Introducedversion = introducedversion;
             Attributes = attributes;
             Ismanaged = ismanaged;
@@ -39,7 +40,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Sdkmessageprocessingstepimageidunique = sdkmessageprocessingstepimageidunique;
             Name = name;
             this._modifiedbyValue = _modifiedbyValue;
-            Description = description;
             Iscustomizable = iscustomizable;
             this._organizationidValue = _organizationidValue;
             Versionnumber = versionnumber;
@@ -47,9 +47,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Sdkmessageprocessingstepimageid = sdkmessageprocessingstepimageid;
             Modifiedon = modifiedon;
             this._sdkmessageprocessingstepidValue = _sdkmessageprocessingstepidValue;
-            Createdon = createdon;
             Solutionid = solutionid;
             Overwritetime = overwritetime;
+            Createdon = createdon;
             Imagetype = imagetype;
             Customizationlevel = customizationlevel;
             Relatedattributename = relatedattributename;
@@ -82,6 +82,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "entityalias")]
         public string Entityalias { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "description")]
+        public string Description { get; set; }
 
         /// <summary>
         /// </summary>
@@ -120,11 +125,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "description")]
-        public string Description { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "iscustomizable")]
         public string Iscustomizable { get; set; }
 
@@ -160,11 +160,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "solutionid")]
         public string Solutionid { get; set; }
 
@@ -172,6 +167,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "overwritetime")]
         public System.DateTimeOffset? Overwritetime { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>

@@ -27,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// Initializes a new instance of the MicrosoftDynamicsCRMtheme class.
         /// </summary>
-        public MicrosoftDynamicsCRMtheme(string headercolor = default(string), string name = default(string), string controlborder = default(string), string globallinkcolor = default(string), string navbarbackgroundcolor = default(string), string _modifiedbyValue = default(string), string backgroundcolor = default(string), string _logoidValue = default(string), string _organizationidValue = default(string), bool? isdefaulttheme = default(bool?), decimal? exchangerate = default(decimal?), int? importsequencenumber = default(int?), string pageheaderbackgroundcolor = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string processcontrolcolor = default(string), string panelheaderbackgroundcolor = default(string), string _transactioncurrencyidValue = default(string), int? statuscode = default(int?), bool? type = default(bool?), string hoverlinkeffect = default(string), int? utcconversiontimezonecode = default(int?), string accentcolor = default(string), string logotooltip = default(string), int? timezoneruleversionnumber = default(int?), string _createdonbehalfbyValue = default(string), string themeid = default(string), string defaultcustomentitycolor = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string defaultentitycolor = default(string), string selectedlinkeffect = default(string), string navbarshelfcolor = default(string), int? statecode = default(int?), string maincolor = default(string), string versionnumber = default(string), string _createdbyValue = default(string), string controlshade = default(string), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMasyncoperation> themeAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMprocesssession> themeProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> themeBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMwebresource logoimage = default(MicrosoftDynamicsCRMwebresource))
+        public MicrosoftDynamicsCRMtheme(string headercolor = default(string), string name = default(string), string controlborder = default(string), string globallinkcolor = default(string), string navbarbackgroundcolor = default(string), string _modifiedbyValue = default(string), string backgroundcolor = default(string), string _logoidValue = default(string), string _organizationidValue = default(string), bool? isdefaulttheme = default(bool?), decimal? exchangerate = default(decimal?), int? importsequencenumber = default(int?), string pageheaderbackgroundcolor = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string processcontrolcolor = default(string), string panelheaderbackgroundcolor = default(string), string _transactioncurrencyidValue = default(string), int? statuscode = default(int?), bool? type = default(bool?), string hoverlinkeffect = default(string), int? utcconversiontimezonecode = default(int?), string accentcolor = default(string), int? timezoneruleversionnumber = default(int?), string _createdonbehalfbyValue = default(string), string themeid = default(string), string defaultcustomentitycolor = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string defaultentitycolor = default(string), string versionnumber = default(string), string selectedlinkeffect = default(string), string navbarshelfcolor = default(string), int? statecode = default(int?), string maincolor = default(string), string logotooltip = default(string), string _createdbyValue = default(string), string controlshade = default(string), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMasyncoperation> themeAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMprocesssession> themeProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> themeBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMwebresource logoimage = default(MicrosoftDynamicsCRMwebresource))
         {
             Headercolor = headercolor;
             Name = name;
@@ -51,18 +51,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Hoverlinkeffect = hoverlinkeffect;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             Accentcolor = accentcolor;
-            Logotooltip = logotooltip;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Themeid = themeid;
             Defaultcustomentitycolor = defaultcustomentitycolor;
             Createdon = createdon;
             Defaultentitycolor = defaultentitycolor;
+            Versionnumber = versionnumber;
             Selectedlinkeffect = selectedlinkeffect;
             Navbarshelfcolor = navbarshelfcolor;
             Statecode = statecode;
             Maincolor = maincolor;
-            Versionnumber = versionnumber;
+            Logotooltip = logotooltip;
             this._createdbyValue = _createdbyValue;
             Controlshade = controlshade;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
@@ -197,11 +197,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "logotooltip")]
-        public string Logotooltip { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "timezoneruleversionnumber")]
         public int? Timezoneruleversionnumber { get; set; }
 
@@ -232,6 +227,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "selectedlinkeffect")]
         public string Selectedlinkeffect { get; set; }
 
@@ -252,8 +252,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "logotooltip")]
+        public string Logotooltip { get; set; }
 
         /// <summary>
         /// </summary>

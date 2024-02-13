@@ -29,12 +29,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMfieldpermission class.
         /// </summary>
-        public MicrosoftDynamicsCRMfieldpermission(bool? ismanaged = default(bool?), int? componentstate = default(int?), int? canupdate = default(int?), string fieldpermissionid = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string solutionid = default(string), string entityname = default(string), int? canread = default(int?), string _organizationidValue = default(string), int? cancreate = default(int?), string _fieldsecurityprofileidValue = default(string), string versionnumber = default(string), string fieldpermissionidunique = default(string), string attributelogicalname = default(string), IList<MicrosoftDynamicsCRMsyncerror> fieldPermissionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMfieldsecurityprofile fieldsecurityprofileid = default(MicrosoftDynamicsCRMfieldsecurityprofile))
+        public MicrosoftDynamicsCRMfieldpermission(string fieldpermissionid = default(string), bool? ismanaged = default(bool?), int? componentstate = default(int?), int? canupdate = default(int?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string solutionid = default(string), string entityname = default(string), int? canread = default(int?), string _organizationidValue = default(string), int? cancreate = default(int?), string _fieldsecurityprofileidValue = default(string), string versionnumber = default(string), string fieldpermissionidunique = default(string), string attributelogicalname = default(string), IList<MicrosoftDynamicsCRMsyncerror> fieldPermissionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMfieldsecurityprofile fieldsecurityprofileid = default(MicrosoftDynamicsCRMfieldsecurityprofile), MicrosoftDynamicsCRMsolution solutionFieldpermission = default(MicrosoftDynamicsCRMsolution))
         {
+            Fieldpermissionid = fieldpermissionid;
             Ismanaged = ismanaged;
             Componentstate = componentstate;
             Canupdate = canupdate;
-            Fieldpermissionid = fieldpermissionid;
             Overwritetime = overwritetime;
             Solutionid = solutionid;
             Entityname = entityname;
@@ -47,6 +47,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Attributelogicalname = attributelogicalname;
             FieldPermissionSyncErrors = fieldPermissionSyncErrors;
             Fieldsecurityprofileid = fieldsecurityprofileid;
+            SolutionFieldpermission = solutionFieldpermission;
             CustomInit();
         }
 
@@ -54,6 +55,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "fieldpermissionid")]
+        public string Fieldpermissionid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -69,11 +75,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "canupdate")]
         public int? Canupdate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "fieldpermissionid")]
-        public string Fieldpermissionid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -134,6 +135,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "fieldsecurityprofileid")]
         public MicrosoftDynamicsCRMfieldsecurityprofile Fieldsecurityprofileid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "solution_fieldpermission")]
+        public MicrosoftDynamicsCRMsolution SolutionFieldpermission { get; set; }
 
     }
 }

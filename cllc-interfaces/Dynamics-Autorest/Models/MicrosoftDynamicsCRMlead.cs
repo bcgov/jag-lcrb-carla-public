@@ -29,22 +29,22 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// Initializes a new instance of the MicrosoftDynamicsCRMlead class.
         /// </summary>
-        public MicrosoftDynamicsCRMlead(decimal? address1Latitude = default(decimal?), System.DateTimeOffset? lastusedincampaign = default(System.DateTimeOffset?), string description = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string address1Fax = default(string), string sic = default(string), int? salesstage = default(int?), int? address1Shippingmethodcode = default(int?), decimal? address2Latitude = default(decimal?), bool? merged = default(bool?), string firstname = default(string), string _createdonbehalfbyValue = default(string), string timespentbymeonemailandmeetings = default(string), decimal? revenue = default(decimal?), int? salesstagecode = default(int?), System.DateTimeOffset? schedulefollowupQualify = default(System.DateTimeOffset?), string address1Upszone = default(string), string address2Addressid = default(string), string _slainvokedidValue = default(string), string address1Telephone2 = default(string), bool? evaluatefit = default(bool?), string address2Country = default(string), string address1Telephone1 = default(string), int? budgetstatus = default(int?), string address2Name = default(string), string _accountidValue = default(string), System.DateTimeOffset? lastonholdtime = default(System.DateTimeOffset?), string address2Telephone1 = default(string), int? address2Utcoffset = default(int?), int? address1Utcoffset = default(int?), int? onholdtime = default(int?), string _owneridValue = default(string), string address2City = default(string), string _owningbusinessunitValue = default(string), string _slaidValue = default(string), string jobtitle = default(string), string emailaddress2 = default(string), string _masteridValue = default(string), int? prioritycode = default(int?), string _parentcontactidValue = default(string), bool? participatesinworkflow = default(bool?), decimal? estimatedamount = default(decimal?), string address1Stateorprovince = default(string), string address2Upszone = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? schedulefollowupProspect = default(System.DateTimeOffset?), string address2County = default(string), string address2Stateorprovince = default(string), int? address2Addresstypecode = default(int?), string lastname = default(string), string address1County = default(string), string _parentaccountidValue = default(string), string _transactioncurrencyidValue = default(string), int? utcconversiontimezonecode = default(int?), bool? donotemail = default(bool?), string telephone3 = default(string), string address1City = default(string), bool? followemail = default(bool?), decimal? budgetamountBase = default(decimal?), int? numberofemployees = default(int?), bool? donotfax = default(bool?), int? statecode = default(int?), string _originatingcaseidValue = default(string), string address1Addressid = default(string), bool? donotphone = default(bool?), int? purchaseprocess = default(int?), string _createdbyValue = default(string), string _owningteamValue = default(string), string address2Line3 = default(string), string emailaddress3 = default(string), string companyname = default(string), int? address1Addresstypecode = default(int?), string _relatedobjectidValue = default(string), bool? decisionmaker = default(bool?), string pager = default(string), string entityimageUrl = default(string), string address1Line2 = default(string), string yomifullname = default(string), string address2Composite = default(string), string mobilephone = default(string), string address1Postofficebox = default(string), string address1Line1 = default(string), int? initialcommunication = default(int?), string processid = default(string), string address1Postalcode = default(string), string qualificationcomments = default(string), string _campaignidValue = default(string), string address1Name = default(string), int? statuscode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), bool? confirminterest = default(bool?), decimal? revenueBase = default(decimal?), string middlename = default(string), int? leadsourcecode = default(int?), string address2Telephone3 = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), byte[] entityimage = default(byte[]), bool? donotbulkemail = default(bool?), string address1Line3 = default(string), string yomicompanyname = default(string), decimal? exchangerate = default(decimal?), string address1Country = default(string), string _owninguserValue = default(string), int? leadqualitycode = default(int?), int? importsequencenumber = default(int?), bool? donotsendmm = default(bool?), decimal? address1Longitude = default(decimal?), string entityimageid = default(string), string websiteurl = default(string), string leadid = default(string), int? industrycode = default(int?), string address2Postofficebox = default(string), int? address2Shippingmethodcode = default(int?), string address2Line1 = default(string), string traversedpath = default(string), string _qualifyingopportunityidValue = default(string), decimal? address2Longitude = default(decimal?), int? purchasetimeframe = default(int?), string _modifiedonbehalfbyValue = default(string), string address2Telephone2 = default(string), string fax = default(string), string yomimiddlename = default(string), bool? msdynGdproptout = default(bool?), int? timezoneruleversionnumber = default(int?), string address2Fax = default(string), System.DateTimeOffset? estimatedclosedate = default(System.DateTimeOffset?), string address2Line2 = default(string), string salutation = default(string), string versionnumber = default(string), string fullname = default(string), string subject = default(string), string _customeridValue = default(string), string yomilastname = default(string), string yomifirstname = default(string), int? preferredcontactmethodcode = default(int?), decimal? estimatedamountBase = default(decimal?), string _contactidValue = default(string), string address1Composite = default(string), string address1Telephone3 = default(string), decimal? estimatedvalue = default(decimal?), string stageid = default(string), decimal? budgetamount = default(decimal?), bool? donotpostalmail = default(bool?), string emailaddress1 = default(string), string address2Postalcode = default(string), string telephone1 = default(string), long? entityimageTimestamp = default(long?), string telephone2 = default(string), int? need = default(int?), IList<MicrosoftDynamicsCRMcompetitor> leadcompetitorsAssociation = default(IList<MicrosoftDynamicsCRMcompetitor>), IList<MicrosoftDynamicsCRMaccount> accountleadsAssociation = default(IList<MicrosoftDynamicsCRMaccount>), IList<MicrosoftDynamicsCRMlist> listleadAssociation = default(IList<MicrosoftDynamicsCRMlist>), IList<MicrosoftDynamicsCRMproduct> leadproductAssociation = default(IList<MicrosoftDynamicsCRMproduct>), IList<MicrosoftDynamicsCRMcontact> contactleadsAssociation = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> leadAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMteam> leadTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMbulkoperation> leadBulkOperations = default(IList<MicrosoftDynamicsCRMbulkoperation>), IList<MicrosoftDynamicsCRMcampaignresponse> leadCampaignResponses = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMincidentresolution> leadIncidentResolutions = default(IList<MicrosoftDynamicsCRMincidentresolution>), IList<MicrosoftDynamicsCRMopportunityclose> leadOpportunityCloses = default(IList<MicrosoftDynamicsCRMopportunityclose>), IList<MicrosoftDynamicsCRMorderclose> leadOrderCloses = default(IList<MicrosoftDynamicsCRMorderclose>), IList<MicrosoftDynamicsCRMquoteclose> leadQuoteCloses = default(IList<MicrosoftDynamicsCRMquoteclose>), IList<MicrosoftDynamicsCRMconnection> leadConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMincident originatingcaseid = default(MicrosoftDynamicsCRMincident), IList<MicrosoftDynamicsCRMphonecall> leadPhonecalls = default(IList<MicrosoftDynamicsCRMphonecall>), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMduplicaterecord> leadDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMaccount customeridAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMopportunity> opportunityOriginatingLead = default(IList<MicrosoftDynamicsCRMopportunity>), IList<MicrosoftDynamicsCRMprocesssession> leadProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMpostfollow> leadPostFollows = default(IList<MicrosoftDynamicsCRMpostfollow>), IList<MicrosoftDynamicsCRMpostregarding> leadPostRegardings = default(IList<MicrosoftDynamicsCRMpostregarding>), IList<MicrosoftDynamicsCRMemail> leadEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess> leadLeadtoopportunitysalesprocess = default(IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess>), IList<MicrosoftDynamicsCRMemail> leadEmailEmailSender = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMtask> leadTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMactioncard> leadActioncard = default(IList<MicrosoftDynamicsCRMactioncard>), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMlead masterid = default(MicrosoftDynamicsCRMlead), IList<MicrosoftDynamicsCRMlead> leadMasterLead = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMasyncoperation> leadAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> leadSharepointDocumentLocation = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> leadBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMcontact customeridContact = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMfax> leadFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMcontact> contactOriginatingLead = default(IList<MicrosoftDynamicsCRMcontact>), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> leadMailboxTrackingFolder = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMactivitypointer> leadActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMleadaddress> leadAddresses = default(IList<MicrosoftDynamicsCRMleadaddress>), IList<MicrosoftDynamicsCRMaccount> accountOriginatingLead = default(IList<MicrosoftDynamicsCRMaccount>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> leadRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), MicrosoftDynamicsCRMsla slaLeadSla = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMsyncerror> leadSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMbulkoperationlog> createdLeadBulkOperationLogs = default(IList<MicrosoftDynamicsCRMbulkoperationlog>), IList<MicrosoftDynamicsCRMsocialactivity> leadSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMappointment> leadAppointments = default(IList<MicrosoftDynamicsCRMappointment>), MicrosoftDynamicsCRMcampaignresponse relatedobjectid = default(MicrosoftDynamicsCRMcampaignresponse), IList<MicrosoftDynamicsCRMactivityparty> leadActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> leadPrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMannotation> leadAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMcontact parentcontactid = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), MicrosoftDynamicsCRMopportunity qualifyingopportunityid = default(MicrosoftDynamicsCRMopportunity), IList<MicrosoftDynamicsCRMduplicaterecord> leadDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), IList<MicrosoftDynamicsCRMslakpiinstance> slakpiinstanceLead = default(IList<MicrosoftDynamicsCRMslakpiinstance>), IList<MicrosoftDynamicsCRMconnection> leadConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMcampaign campaignid = default(MicrosoftDynamicsCRMcampaign), MicrosoftDynamicsCRMaccount parentaccountid = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMsla slainvokedidLeadSla = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMletter> leadLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMserviceappointment> leadServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMbulkoperationlog> sourceLeadBulkOperationLogs = default(IList<MicrosoftDynamicsCRMbulkoperationlog>))
+        public MicrosoftDynamicsCRMlead(decimal? address1Latitude = default(decimal?), System.DateTimeOffset? lastusedincampaign = default(System.DateTimeOffset?), string description = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _masteridValue = default(string), decimal? estimatedamountBase = default(decimal?), int? salesstage = default(int?), int? address1Shippingmethodcode = default(int?), decimal? address2Latitude = default(decimal?), bool? merged = default(bool?), string firstname = default(string), string lastname = default(string), decimal? revenue = default(decimal?), bool? donotsendmm = default(bool?), int? salesstagecode = default(int?), System.DateTimeOffset? schedulefollowupQualify = default(System.DateTimeOffset?), string address1Upszone = default(string), string address2Addressid = default(string), string _slainvokedidValue = default(string), string address1Telephone2 = default(string), bool? evaluatefit = default(bool?), string address2Country = default(string), string address1Telephone1 = default(string), int? budgetstatus = default(int?), string address2Name = default(string), string _accountidValue = default(string), System.DateTimeOffset? lastonholdtime = default(System.DateTimeOffset?), string address2Telephone1 = default(string), string address1Postofficebox = default(string), int? address2Utcoffset = default(int?), int? address1Utcoffset = default(int?), int? onholdtime = default(int?), string _owneridValue = default(string), string address2City = default(string), string _createdbyValue = default(string), string businesscard = default(string), string _owningbusinessunitValue = default(string), string companyname = default(string), string jobtitle = default(string), string emailaddress2 = default(string), int? prioritycode = default(int?), string _parentcontactidValue = default(string), string businesscardattributes = default(string), bool? participatesinworkflow = default(bool?), int? timezoneruleversionnumber = default(int?), string salutation = default(string), string address1Stateorprovince = default(string), string address2Upszone = default(string), int? teamsfollowed = default(int?), System.DateTimeOffset? schedulefollowupProspect = default(System.DateTimeOffset?), string address2County = default(string), string address2Stateorprovince = default(string), int? address2Addresstypecode = default(int?), string address1County = default(string), string _parentaccountidValue = default(string), string _transactioncurrencyidValue = default(string), bool? donotemail = default(bool?), string telephone3 = default(string), string address1City = default(string), bool? followemail = default(bool?), decimal? budgetamountBase = default(decimal?), int? numberofemployees = default(int?), bool? donotfax = default(bool?), int? statecode = default(int?), string _originatingcaseidValue = default(string), string address1Addressid = default(string), bool? donotphone = default(bool?), int? purchaseprocess = default(int?), string qualificationcomments = default(string), string _owningteamValue = default(string), string address1Fax = default(string), string address2Line3 = default(string), string emailaddress3 = default(string), int? address1Addresstypecode = default(int?), string _relatedobjectidValue = default(string), bool? decisionmaker = default(bool?), string pager = default(string), string versionnumber = default(string), string entityimageUrl = default(string), string address1Line2 = default(string), string yomifullname = default(string), string address2Composite = default(string), string mobilephone = default(string), string address1Line1 = default(string), int? initialcommunication = default(int?), string processid = default(string), string address1Postalcode = default(string), bool? confirminterest = default(bool?), string timespentbymeonemailandmeetings = default(string), int? statuscode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), decimal? revenueBase = default(decimal?), string _modifiedbyValue = default(string), string middlename = default(string), int? leadsourcecode = default(int?), string address2Telephone3 = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), byte[] entityimage = default(byte[]), bool? donotbulkemail = default(bool?), string address1Line3 = default(string), string yomicompanyname = default(string), decimal? exchangerate = default(decimal?), string address1Country = default(string), decimal? estimatedamount = default(decimal?), int? utcconversiontimezonecode = default(int?), string _owninguserValue = default(string), int? leadqualitycode = default(int?), int? importsequencenumber = default(int?), string _slaidValue = default(string), decimal? address1Longitude = default(decimal?), string entityimageid = default(string), string websiteurl = default(string), string leadid = default(string), string address1Composite = default(string), string address2Postofficebox = default(string), string _createdonbehalfbyValue = default(string), int? address2Shippingmethodcode = default(int?), string address2Line1 = default(string), string traversedpath = default(string), string _qualifyingopportunityidValue = default(string), decimal? address2Longitude = default(decimal?), int? purchasetimeframe = default(int?), string _modifiedonbehalfbyValue = default(string), string _campaignidValue = default(string), string address2Telephone2 = default(string), bool? msdynGdproptout = default(bool?), string fax = default(string), string yomimiddlename = default(string), string address2Fax = default(string), System.DateTimeOffset? estimatedclosedate = default(System.DateTimeOffset?), string address2Line2 = default(string), string address1Name = default(string), string fullname = default(string), string subject = default(string), string _customeridValue = default(string), string yomilastname = default(string), string yomifirstname = default(string), int? preferredcontactmethodcode = default(int?), string _contactidValue = default(string), string sic = default(string), string address1Telephone3 = default(string), decimal? estimatedvalue = default(decimal?), string stageid = default(string), decimal? budgetamount = default(decimal?), bool? donotpostalmail = default(bool?), string emailaddress1 = default(string), string address2Postalcode = default(string), string telephone1 = default(string), long? entityimageTimestamp = default(long?), string telephone2 = default(string), int? industrycode = default(int?), int? need = default(int?), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> leadAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMbulkoperation> leadBulkOperations = default(IList<MicrosoftDynamicsCRMbulkoperation>), IList<MicrosoftDynamicsCRMcampaignresponse> leadCampaignResponses = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMbulkoperationlog> createdLeadBulkOperationLogs = default(IList<MicrosoftDynamicsCRMbulkoperationlog>), MicrosoftDynamicsCRMcampaignresponse relatedobjectid = default(MicrosoftDynamicsCRMcampaignresponse), MicrosoftDynamicsCRMcampaign campaignid = default(MicrosoftDynamicsCRMcampaign), IList<MicrosoftDynamicsCRMincidentresolution> leadIncidentResolutions = default(IList<MicrosoftDynamicsCRMincidentresolution>), MicrosoftDynamicsCRMincident originatingcaseid = default(MicrosoftDynamicsCRMincident), IList<MicrosoftDynamicsCRMserviceappointment> leadServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMproduct> leadproductAssociation = default(IList<MicrosoftDynamicsCRMproduct>), IList<MicrosoftDynamicsCRMopportunityclose> leadOpportunityCloses = default(IList<MicrosoftDynamicsCRMopportunityclose>), IList<MicrosoftDynamicsCRMorderclose> leadOrderCloses = default(IList<MicrosoftDynamicsCRMorderclose>), IList<MicrosoftDynamicsCRMquoteclose> leadQuoteCloses = default(IList<MicrosoftDynamicsCRMquoteclose>), IList<MicrosoftDynamicsCRMopportunity> opportunityOriginatingLead = default(IList<MicrosoftDynamicsCRMopportunity>), IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess> leadLeadtoopportunitysalesprocess = default(IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess>), MicrosoftDynamicsCRMopportunity qualifyingopportunityid = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMcontact parentcontactid = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMaccount parentaccountid = default(MicrosoftDynamicsCRMaccount), IList<MicrosoftDynamicsCRMaccount> accountleadsAssociation = default(IList<MicrosoftDynamicsCRMaccount>), IList<MicrosoftDynamicsCRMcontact> contactleadsAssociation = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMteam> leadTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMconnection> leadConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMphonecall> leadPhonecalls = default(IList<MicrosoftDynamicsCRMphonecall>), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMduplicaterecord> leadDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMaccount customeridAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMprocesssession> leadProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMpostfollow> leadPostFollows = default(IList<MicrosoftDynamicsCRMpostfollow>), IList<MicrosoftDynamicsCRMpostregarding> leadPostRegardings = default(IList<MicrosoftDynamicsCRMpostregarding>), IList<MicrosoftDynamicsCRMemail> leadEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMemail> leadEmailEmailSender = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMtask> leadTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMactioncard> leadActioncard = default(IList<MicrosoftDynamicsCRMactioncard>), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMlead masterid = default(MicrosoftDynamicsCRMlead), IList<MicrosoftDynamicsCRMlead> leadMasterLead = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMasyncoperation> leadAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> leadSharepointDocumentLocation = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> leadBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMcontact customeridContact = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMfax> leadFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMcontact> contactOriginatingLead = default(IList<MicrosoftDynamicsCRMcontact>), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> leadMailboxTrackingFolder = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMactivitypointer> leadActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMleadaddress> leadAddresses = default(IList<MicrosoftDynamicsCRMleadaddress>), IList<MicrosoftDynamicsCRMaccount> accountOriginatingLead = default(IList<MicrosoftDynamicsCRMaccount>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> leadRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), MicrosoftDynamicsCRMsla slaLeadSla = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMsyncerror> leadSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMsocialactivity> leadSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMappointment> leadAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMactivityparty> leadActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> leadPrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMannotation> leadAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMduplicaterecord> leadDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), IList<MicrosoftDynamicsCRMslakpiinstance> slakpiinstanceLead = default(IList<MicrosoftDynamicsCRMslakpiinstance>), IList<MicrosoftDynamicsCRMconnection> leadConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMsla slainvokedidLeadSla = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMletter> leadLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMbulkoperationlog> sourceLeadBulkOperationLogs = default(IList<MicrosoftDynamicsCRMbulkoperationlog>), IList<MicrosoftDynamicsCRMlist> listleadAssociation = default(IList<MicrosoftDynamicsCRMlist>), IList<MicrosoftDynamicsCRMbulkoperation> bulkOperationLogsLeads = default(IList<MicrosoftDynamicsCRMbulkoperation>), IList<MicrosoftDynamicsCRMcampaignactivity> campaignActivityLogsLeads = default(IList<MicrosoftDynamicsCRMcampaignactivity>), IList<MicrosoftDynamicsCRMcompetitor> leadcompetitorsAssociation = default(IList<MicrosoftDynamicsCRMcompetitor>), IList<MicrosoftDynamicsCRMmsdynPlaybookinstance> msdynPlaybookinstanceLead = default(IList<MicrosoftDynamicsCRMmsdynPlaybookinstance>))
         {
             Address1Latitude = address1Latitude;
             Lastusedincampaign = lastusedincampaign;
             Description = description;
             Createdon = createdon;
-            Address1Fax = address1Fax;
-            Sic = sic;
+            this._masteridValue = _masteridValue;
+            EstimatedamountBase = estimatedamountBase;
             Salesstage = salesstage;
             Address1Shippingmethodcode = address1Shippingmethodcode;
             Address2Latitude = address2Latitude;
             Merged = merged;
             Firstname = firstname;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            Timespentbymeonemailandmeetings = timespentbymeonemailandmeetings;
+            Lastname = lastname;
             Revenue = revenue;
+            Donotsendmm = donotsendmm;
             Salesstagecode = salesstagecode;
             SchedulefollowupQualify = schedulefollowupQualify;
             Address1Upszone = address1Upszone;
@@ -59,32 +59,34 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             this._accountidValue = _accountidValue;
             Lastonholdtime = lastonholdtime;
             Address2Telephone1 = address2Telephone1;
+            Address1Postofficebox = address1Postofficebox;
             Address2Utcoffset = address2Utcoffset;
             Address1Utcoffset = address1Utcoffset;
             Onholdtime = onholdtime;
             this._owneridValue = _owneridValue;
             Address2City = address2City;
+            this._createdbyValue = _createdbyValue;
+            Businesscard = businesscard;
             this._owningbusinessunitValue = _owningbusinessunitValue;
-            this._slaidValue = _slaidValue;
+            Companyname = companyname;
             Jobtitle = jobtitle;
             Emailaddress2 = emailaddress2;
-            this._masteridValue = _masteridValue;
             Prioritycode = prioritycode;
             this._parentcontactidValue = _parentcontactidValue;
+            Businesscardattributes = businesscardattributes;
             Participatesinworkflow = participatesinworkflow;
-            Estimatedamount = estimatedamount;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            Salutation = salutation;
             Address1Stateorprovince = address1Stateorprovince;
             Address2Upszone = address2Upszone;
-            this._modifiedbyValue = _modifiedbyValue;
+            Teamsfollowed = teamsfollowed;
             SchedulefollowupProspect = schedulefollowupProspect;
             Address2County = address2County;
             Address2Stateorprovince = address2Stateorprovince;
             Address2Addresstypecode = address2Addresstypecode;
-            Lastname = lastname;
             Address1County = address1County;
             this._parentaccountidValue = _parentaccountidValue;
             this._transactioncurrencyidValue = _transactioncurrencyidValue;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
             Donotemail = donotemail;
             Telephone3 = telephone3;
             Address1City = address1City;
@@ -97,32 +99,31 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Address1Addressid = address1Addressid;
             Donotphone = donotphone;
             Purchaseprocess = purchaseprocess;
-            this._createdbyValue = _createdbyValue;
+            Qualificationcomments = qualificationcomments;
             this._owningteamValue = _owningteamValue;
+            Address1Fax = address1Fax;
             Address2Line3 = address2Line3;
             Emailaddress3 = emailaddress3;
-            Companyname = companyname;
             Address1Addresstypecode = address1Addresstypecode;
             this._relatedobjectidValue = _relatedobjectidValue;
             Decisionmaker = decisionmaker;
             Pager = pager;
+            Versionnumber = versionnumber;
             EntityimageUrl = entityimageUrl;
             Address1Line2 = address1Line2;
             Yomifullname = yomifullname;
             Address2Composite = address2Composite;
             Mobilephone = mobilephone;
-            Address1Postofficebox = address1Postofficebox;
             Address1Line1 = address1Line1;
             Initialcommunication = initialcommunication;
             Processid = processid;
             Address1Postalcode = address1Postalcode;
-            Qualificationcomments = qualificationcomments;
-            this._campaignidValue = _campaignidValue;
-            Address1Name = address1Name;
+            Confirminterest = confirminterest;
+            Timespentbymeonemailandmeetings = timespentbymeonemailandmeetings;
             Statuscode = statuscode;
             Overriddencreatedon = overriddencreatedon;
-            Confirminterest = confirminterest;
             RevenueBase = revenueBase;
+            this._modifiedbyValue = _modifiedbyValue;
             Middlename = middlename;
             Leadsourcecode = leadsourcecode;
             Address2Telephone3 = address2Telephone3;
@@ -133,16 +134,19 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Yomicompanyname = yomicompanyname;
             Exchangerate = exchangerate;
             Address1Country = address1Country;
+            Estimatedamount = estimatedamount;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
             this._owninguserValue = _owninguserValue;
             Leadqualitycode = leadqualitycode;
             Importsequencenumber = importsequencenumber;
-            Donotsendmm = donotsendmm;
+            this._slaidValue = _slaidValue;
             Address1Longitude = address1Longitude;
             Entityimageid = entityimageid;
             Websiteurl = websiteurl;
             Leadid = leadid;
-            Industrycode = industrycode;
+            Address1Composite = address1Composite;
             Address2Postofficebox = address2Postofficebox;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Address2Shippingmethodcode = address2Shippingmethodcode;
             Address2Line1 = address2Line1;
             Traversedpath = traversedpath;
@@ -150,25 +154,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Address2Longitude = address2Longitude;
             Purchasetimeframe = purchasetimeframe;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            this._campaignidValue = _campaignidValue;
             Address2Telephone2 = address2Telephone2;
+            MsdynGdproptout = msdynGdproptout;
             Fax = fax;
             Yomimiddlename = yomimiddlename;
-            MsdynGdproptout = msdynGdproptout;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
             Address2Fax = address2Fax;
             Estimatedclosedate = estimatedclosedate;
             Address2Line2 = address2Line2;
-            Salutation = salutation;
-            Versionnumber = versionnumber;
+            Address1Name = address1Name;
             Fullname = fullname;
             Subject = subject;
             this._customeridValue = _customeridValue;
             Yomilastname = yomilastname;
             Yomifirstname = yomifirstname;
             Preferredcontactmethodcode = preferredcontactmethodcode;
-            EstimatedamountBase = estimatedamountBase;
             this._contactidValue = _contactidValue;
-            Address1Composite = address1Composite;
+            Sic = sic;
             Address1Telephone3 = address1Telephone3;
             Estimatedvalue = estimatedvalue;
             Stageid = stageid;
@@ -179,33 +181,40 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Telephone1 = telephone1;
             EntityimageTimestamp = entityimageTimestamp;
             Telephone2 = telephone2;
+            Industrycode = industrycode;
             Need = need;
-            LeadcompetitorsAssociation = leadcompetitorsAssociation;
-            AccountleadsAssociation = accountleadsAssociation;
-            ListleadAssociation = listleadAssociation;
-            LeadproductAssociation = leadproductAssociation;
-            ContactleadsAssociation = contactleadsAssociation;
+            Transactioncurrencyid = transactioncurrencyid;
             LeadAbsScheduledprocessexecutions = leadAbsScheduledprocessexecutions;
-            LeadTeams = leadTeams;
             LeadBulkOperations = leadBulkOperations;
             LeadCampaignResponses = leadCampaignResponses;
+            CreatedLeadBulkOperationLogs = createdLeadBulkOperationLogs;
+            Relatedobjectid = relatedobjectid;
+            Campaignid = campaignid;
             LeadIncidentResolutions = leadIncidentResolutions;
+            Originatingcaseid = originatingcaseid;
+            LeadServiceAppointments = leadServiceAppointments;
+            LeadproductAssociation = leadproductAssociation;
             LeadOpportunityCloses = leadOpportunityCloses;
             LeadOrderCloses = leadOrderCloses;
             LeadQuoteCloses = leadQuoteCloses;
+            OpportunityOriginatingLead = opportunityOriginatingLead;
+            LeadLeadtoopportunitysalesprocess = leadLeadtoopportunitysalesprocess;
+            Qualifyingopportunityid = qualifyingopportunityid;
+            Parentcontactid = parentcontactid;
+            Parentaccountid = parentaccountid;
+            AccountleadsAssociation = accountleadsAssociation;
+            ContactleadsAssociation = contactleadsAssociation;
+            LeadTeams = leadTeams;
             LeadConnections2 = leadConnections2;
-            Originatingcaseid = originatingcaseid;
             LeadPhonecalls = leadPhonecalls;
             Owningbusinessunit = owningbusinessunit;
             LeadDuplicateBaseRecord = leadDuplicateBaseRecord;
             CustomeridAccount = customeridAccount;
             Modifiedonbehalfby = modifiedonbehalfby;
-            OpportunityOriginatingLead = opportunityOriginatingLead;
             LeadProcessSessions = leadProcessSessions;
             LeadPostFollows = leadPostFollows;
             LeadPostRegardings = leadPostRegardings;
             LeadEmails = leadEmails;
-            LeadLeadtoopportunitysalesprocess = leadLeadtoopportunitysalesprocess;
             LeadEmailEmailSender = leadEmailEmailSender;
             LeadTasks = leadTasks;
             LeadActioncard = leadActioncard;
@@ -228,28 +237,25 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             LeadRecurringAppointmentMasters = leadRecurringAppointmentMasters;
             SlaLeadSla = slaLeadSla;
             LeadSyncErrors = leadSyncErrors;
-            CreatedLeadBulkOperationLogs = createdLeadBulkOperationLogs;
             LeadSocialActivities = leadSocialActivities;
             Createdby = createdby;
             LeadAppointments = leadAppointments;
-            Relatedobjectid = relatedobjectid;
             LeadActivityParties = leadActivityParties;
             LeadPrincipalobjectattributeaccess = leadPrincipalobjectattributeaccess;
             LeadAnnotation = leadAnnotation;
-            Parentcontactid = parentcontactid;
-            Transactioncurrencyid = transactioncurrencyid;
             StageidProcessstage = stageidProcessstage;
-            Qualifyingopportunityid = qualifyingopportunityid;
             LeadDuplicateMatchingRecord = leadDuplicateMatchingRecord;
             Ownerid = ownerid;
             SlakpiinstanceLead = slakpiinstanceLead;
             LeadConnections1 = leadConnections1;
-            Campaignid = campaignid;
-            Parentaccountid = parentaccountid;
             SlainvokedidLeadSla = slainvokedidLeadSla;
             LeadLetters = leadLetters;
-            LeadServiceAppointments = leadServiceAppointments;
             SourceLeadBulkOperationLogs = sourceLeadBulkOperationLogs;
+            ListleadAssociation = listleadAssociation;
+            BulkOperationLogsLeads = bulkOperationLogsLeads;
+            CampaignActivityLogsLeads = campaignActivityLogsLeads;
+            LeadcompetitorsAssociation = leadcompetitorsAssociation;
+            MsdynPlaybookinstanceLead = msdynPlaybookinstanceLead;
             CustomInit();
         }
 
@@ -280,13 +286,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address1_fax")]
-        public string Address1Fax { get; set; }
+        [JsonProperty(PropertyName = "_masterid_value")]
+        public string _masteridValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "sic")]
-        public string Sic { get; set; }
+        [JsonProperty(PropertyName = "estimatedamount_base")]
+        public decimal? EstimatedamountBase { get; set; }
 
         /// <summary>
         /// </summary>
@@ -315,18 +321,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "timespentbymeonemailandmeetings")]
-        public string Timespentbymeonemailandmeetings { get; set; }
+        [JsonProperty(PropertyName = "lastname")]
+        public string Lastname { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "revenue")]
         public decimal? Revenue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "donotsendmm")]
+        public bool? Donotsendmm { get; set; }
 
         /// <summary>
         /// </summary>
@@ -400,6 +406,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "address1_postofficebox")]
+        public string Address1Postofficebox { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "address2_utcoffset")]
         public int? Address2Utcoffset { get; set; }
 
@@ -425,13 +436,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "businesscard")]
+        public string Businesscard { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
         public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_slaid_value")]
-        public string _slaidValue { get; set; }
+        [JsonProperty(PropertyName = "companyname")]
+        public string Companyname { get; set; }
 
         /// <summary>
         /// </summary>
@@ -445,11 +466,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_masterid_value")]
-        public string _masteridValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "prioritycode")]
         public int? Prioritycode { get; set; }
 
@@ -460,13 +476,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "businesscardattributes")]
+        public string Businesscardattributes { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "participatesinworkflow")]
         public bool? Participatesinworkflow { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "estimatedamount")]
-        public decimal? Estimatedamount { get; set; }
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "salutation")]
+        public string Salutation { get; set; }
 
         /// <summary>
         /// </summary>
@@ -480,8 +506,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        [JsonProperty(PropertyName = "teamsfollowed")]
+        public int? Teamsfollowed { get; set; }
 
         /// <summary>
         /// </summary>
@@ -505,11 +531,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lastname")]
-        public string Lastname { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "address1_county")]
         public string Address1County { get; set; }
 
@@ -522,11 +543,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
         public string _transactioncurrencyidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -590,13 +606,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        [JsonProperty(PropertyName = "qualificationcomments")]
+        public string Qualificationcomments { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
         public string _owningteamValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_fax")]
+        public string Address1Fax { get; set; }
 
         /// <summary>
         /// </summary>
@@ -607,11 +628,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "emailaddress3")]
         public string Emailaddress3 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "companyname")]
-        public string Companyname { get; set; }
 
         /// <summary>
         /// </summary>
@@ -632,6 +648,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "pager")]
         public string Pager { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -660,11 +681,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address1_postofficebox")]
-        public string Address1Postofficebox { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "address1_line1")]
         public string Address1Line1 { get; set; }
 
@@ -685,18 +701,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "qualificationcomments")]
-        public string Qualificationcomments { get; set; }
+        [JsonProperty(PropertyName = "confirminterest")]
+        public bool? Confirminterest { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_campaignid_value")]
-        public string _campaignidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_name")]
-        public string Address1Name { get; set; }
+        [JsonProperty(PropertyName = "timespentbymeonemailandmeetings")]
+        public string Timespentbymeonemailandmeetings { get; set; }
 
         /// <summary>
         /// </summary>
@@ -710,13 +721,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "confirminterest")]
-        public bool? Confirminterest { get; set; }
+        [JsonProperty(PropertyName = "revenue_base")]
+        public decimal? RevenueBase { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "revenue_base")]
-        public decimal? RevenueBase { get; set; }
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -771,6 +782,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "estimatedamount")]
+        public decimal? Estimatedamount { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
         public string _owninguserValue { get; set; }
 
@@ -786,8 +807,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "donotsendmm")]
-        public bool? Donotsendmm { get; set; }
+        [JsonProperty(PropertyName = "_slaid_value")]
+        public string _slaidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -811,13 +832,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "industrycode")]
-        public int? Industrycode { get; set; }
+        [JsonProperty(PropertyName = "address1_composite")]
+        public string Address1Composite { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "address2_postofficebox")]
         public string Address2Postofficebox { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -856,8 +882,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_campaignid_value")]
+        public string _campaignidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "address2_telephone2")]
         public string Address2Telephone2 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "msdyn_gdproptout")]
+        public bool? MsdynGdproptout { get; set; }
 
         /// <summary>
         /// </summary>
@@ -868,16 +904,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "yomimiddlename")]
         public string Yomimiddlename { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "msdyn_gdproptout")]
-        public bool? MsdynGdproptout { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -896,13 +922,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "salutation")]
-        public string Salutation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "address1_name")]
+        public string Address1Name { get; set; }
 
         /// <summary>
         /// </summary>
@@ -936,18 +957,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "estimatedamount_base")]
-        public decimal? EstimatedamountBase { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_contactid_value")]
         public string _contactidValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address1_composite")]
-        public string Address1Composite { get; set; }
+        [JsonProperty(PropertyName = "sic")]
+        public string Sic { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1001,43 +1017,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "industrycode")]
+        public int? Industrycode { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "need")]
         public int? Need { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "leadcompetitors_association")]
-        public IList<MicrosoftDynamicsCRMcompetitor> LeadcompetitorsAssociation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "accountleads_association")]
-        public IList<MicrosoftDynamicsCRMaccount> AccountleadsAssociation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "listlead_association")]
-        public IList<MicrosoftDynamicsCRMlist> ListleadAssociation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "leadproduct_association")]
-        public IList<MicrosoftDynamicsCRMproduct> LeadproductAssociation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "contactleads_association")]
-        public IList<MicrosoftDynamicsCRMcontact> ContactleadsAssociation { get; set; }
+        [JsonProperty(PropertyName = "transactioncurrencyid")]
+        public MicrosoftDynamicsCRMtransactioncurrency Transactioncurrencyid { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "lead_abs_scheduledprocessexecutions")]
         public IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> LeadAbsScheduledprocessexecutions { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lead_Teams")]
-        public IList<MicrosoftDynamicsCRMteam> LeadTeams { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1051,8 +1047,38 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "CreatedLead_BulkOperationLogs")]
+        public IList<MicrosoftDynamicsCRMbulkoperationlog> CreatedLeadBulkOperationLogs { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "relatedobjectid")]
+        public MicrosoftDynamicsCRMcampaignresponse Relatedobjectid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "campaignid")]
+        public MicrosoftDynamicsCRMcampaign Campaignid { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "lead_IncidentResolutions")]
         public IList<MicrosoftDynamicsCRMincidentresolution> LeadIncidentResolutions { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "originatingcaseid")]
+        public MicrosoftDynamicsCRMincident Originatingcaseid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "Lead_ServiceAppointments")]
+        public IList<MicrosoftDynamicsCRMserviceappointment> LeadServiceAppointments { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "leadproduct_association")]
+        public IList<MicrosoftDynamicsCRMproduct> LeadproductAssociation { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1071,13 +1097,48 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lead_connections2")]
-        public IList<MicrosoftDynamicsCRMconnection> LeadConnections2 { get; set; }
+        [JsonProperty(PropertyName = "opportunity_originating_lead")]
+        public IList<MicrosoftDynamicsCRMopportunity> OpportunityOriginatingLead { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "originatingcaseid")]
-        public MicrosoftDynamicsCRMincident Originatingcaseid { get; set; }
+        [JsonProperty(PropertyName = "lead_leadtoopportunitysalesprocess")]
+        public IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess> LeadLeadtoopportunitysalesprocess { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "qualifyingopportunityid")]
+        public MicrosoftDynamicsCRMopportunity Qualifyingopportunityid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "parentcontactid")]
+        public MicrosoftDynamicsCRMcontact Parentcontactid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "parentaccountid")]
+        public MicrosoftDynamicsCRMaccount Parentaccountid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "accountleads_association")]
+        public IList<MicrosoftDynamicsCRMaccount> AccountleadsAssociation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "contactleads_association")]
+        public IList<MicrosoftDynamicsCRMcontact> ContactleadsAssociation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lead_Teams")]
+        public IList<MicrosoftDynamicsCRMteam> LeadTeams { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lead_connections2")]
+        public IList<MicrosoftDynamicsCRMconnection> LeadConnections2 { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1106,11 +1167,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "opportunity_originating_lead")]
-        public IList<MicrosoftDynamicsCRMopportunity> OpportunityOriginatingLead { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "Lead_ProcessSessions")]
         public IList<MicrosoftDynamicsCRMprocesssession> LeadProcessSessions { get; set; }
 
@@ -1128,11 +1184,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "Lead_Emails")]
         public IList<MicrosoftDynamicsCRMemail> LeadEmails { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lead_leadtoopportunitysalesprocess")]
-        public IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess> LeadLeadtoopportunitysalesprocess { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1246,11 +1297,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "CreatedLead_BulkOperationLogs")]
-        public IList<MicrosoftDynamicsCRMbulkoperationlog> CreatedLeadBulkOperationLogs { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "Lead_SocialActivities")]
         public IList<MicrosoftDynamicsCRMsocialactivity> LeadSocialActivities { get; set; }
 
@@ -1263,11 +1309,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "Lead_Appointments")]
         public IList<MicrosoftDynamicsCRMappointment> LeadAppointments { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "relatedobjectid")]
-        public MicrosoftDynamicsCRMcampaignresponse Relatedobjectid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1286,23 +1327,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "parentcontactid")]
-        public MicrosoftDynamicsCRMcontact Parentcontactid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "transactioncurrencyid")]
-        public MicrosoftDynamicsCRMtransactioncurrency Transactioncurrencyid { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "stageid_processstage")]
         public MicrosoftDynamicsCRMprocessstage StageidProcessstage { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "qualifyingopportunityid")]
-        public MicrosoftDynamicsCRMopportunity Qualifyingopportunityid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1326,16 +1352,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "campaignid")]
-        public MicrosoftDynamicsCRMcampaign Campaignid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "parentaccountid")]
-        public MicrosoftDynamicsCRMaccount Parentaccountid { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "slainvokedid_lead_sla")]
         public MicrosoftDynamicsCRMsla SlainvokedidLeadSla { get; set; }
 
@@ -1346,13 +1362,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "Lead_ServiceAppointments")]
-        public IList<MicrosoftDynamicsCRMserviceappointment> LeadServiceAppointments { get; set; }
+        [JsonProperty(PropertyName = "SourceLead_BulkOperationLogs")]
+        public IList<MicrosoftDynamicsCRMbulkoperationlog> SourceLeadBulkOperationLogs { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "SourceLead_BulkOperationLogs")]
-        public IList<MicrosoftDynamicsCRMbulkoperationlog> SourceLeadBulkOperationLogs { get; set; }
+        [JsonProperty(PropertyName = "listlead_association")]
+        public IList<MicrosoftDynamicsCRMlist> ListleadAssociation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "BulkOperation_Logs_Leads")]
+        public IList<MicrosoftDynamicsCRMbulkoperation> BulkOperationLogsLeads { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "CampaignActivity_Logs_Leads")]
+        public IList<MicrosoftDynamicsCRMcampaignactivity> CampaignActivityLogsLeads { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "leadcompetitors_association")]
+        public IList<MicrosoftDynamicsCRMcompetitor> LeadcompetitorsAssociation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "msdyn_playbookinstance_lead")]
+        public IList<MicrosoftDynamicsCRMmsdynPlaybookinstance> MsdynPlaybookinstanceLead { get; set; }
 
     }
 }

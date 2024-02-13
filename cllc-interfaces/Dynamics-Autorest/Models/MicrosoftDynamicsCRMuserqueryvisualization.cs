@@ -29,26 +29,26 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMuserqueryvisualization class.
         /// </summary>
-        public MicrosoftDynamicsCRMuserqueryvisualization(string _owninguserValue = default(string), string _webresourceidValue = default(string), string _owningbusinessunitValue = default(string), string userqueryvisualizationid = default(string), string versionnumber = default(string), bool? isdefault = default(bool?), string _owneridValue = default(string), string primaryentitytypecode = default(string), string _createdbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string presentationdescription = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string name = default(string), string _modifiedbyValue = default(string), string _owningteamValue = default(string), int? charttype = default(int?), string description = default(string), string datadescription = default(string), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> userQueryVisualizationSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMwebresource webresourceid = default(MicrosoftDynamicsCRMwebresource), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMuserqueryvisualization(string _owninguserValue = default(string), string _webresourceidValue = default(string), string _owningbusinessunitValue = default(string), string userqueryvisualizationid = default(string), string versionnumber = default(string), string presentationdescription = default(string), bool? isdefault = default(bool?), string _owneridValue = default(string), string primaryentitytypecode = default(string), int? charttype = default(int?), string _modifiedbyValue = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string name = default(string), string _modifiedonbehalfbyValue = default(string), string _owningteamValue = default(string), string description = default(string), string datadescription = default(string), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> userQueryVisualizationSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMwebresource webresourceid = default(MicrosoftDynamicsCRMwebresource), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
         {
             this._owninguserValue = _owninguserValue;
             this._webresourceidValue = _webresourceidValue;
             this._owningbusinessunitValue = _owningbusinessunitValue;
             Userqueryvisualizationid = userqueryvisualizationid;
             Versionnumber = versionnumber;
+            Presentationdescription = presentationdescription;
             Isdefault = isdefault;
             this._owneridValue = _owneridValue;
             Primaryentitytypecode = primaryentitytypecode;
-            this._createdbyValue = _createdbyValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Charttype = charttype;
+            this._modifiedbyValue = _modifiedbyValue;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Createdon = createdon;
-            Presentationdescription = presentationdescription;
             Modifiedon = modifiedon;
+            this._createdbyValue = _createdbyValue;
             Name = name;
-            this._modifiedbyValue = _modifiedbyValue;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             this._owningteamValue = _owningteamValue;
-            Charttype = charttype;
             Description = description;
             Datadescription = datadescription;
             Modifiedonbehalfby = modifiedonbehalfby;
@@ -96,6 +96,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "presentationdescription")]
+        public string Presentationdescription { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "isdefault")]
         public bool? Isdefault { get; set; }
 
@@ -111,13 +116,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        [JsonProperty(PropertyName = "charttype")]
+        public int? Charttype { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -131,13 +136,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "presentationdescription")]
-        public string Presentationdescription { get; set; }
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -146,18 +151,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
         public string _owningteamValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "charttype")]
-        public int? Charttype { get; set; }
 
         /// <summary>
         /// </summary>

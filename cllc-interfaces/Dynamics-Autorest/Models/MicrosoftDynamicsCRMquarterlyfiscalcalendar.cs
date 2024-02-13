@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMquarterlyfiscalcalendar class.
         /// </summary>
-        public MicrosoftDynamicsCRMquarterlyfiscalcalendar(string _createdbyValue = default(string), decimal? quarter4Base = default(decimal?), string _transactioncurrencyidValue = default(string), string userfiscalcalendarid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), string _businessunitidValue = default(string), int? fiscalperiodtype = default(int?), string _modifiedbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _salespersonidValue = default(string), decimal? quarter3 = default(decimal?), decimal? quarter3Base = default(decimal?), decimal? exchangerate = default(decimal?), decimal? quarter1Base = default(decimal?), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? effectiveon = default(System.DateTimeOffset?), decimal? quarter2 = default(decimal?), decimal? quarter1 = default(decimal?), string _modifiedonbehalfbyValue = default(string), int? utcconversiontimezonecode = default(int?), decimal? quarter4 = default(decimal?), decimal? quarter2Base = default(decimal?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMasyncoperation> quarterlyFiscalCalendarAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> quarterlyFiscalCalendarBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser salespersonid = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMquarterlyfiscalcalendar(string _createdbyValue = default(string), decimal? quarter4Base = default(decimal?), string _transactioncurrencyidValue = default(string), string userfiscalcalendarid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), string _businessunitidValue = default(string), int? fiscalperiodtype = default(int?), string _modifiedbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), decimal? quarter3 = default(decimal?), decimal? quarter3Base = default(decimal?), decimal? exchangerate = default(decimal?), decimal? quarter1Base = default(decimal?), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? effectiveon = default(System.DateTimeOffset?), decimal? quarter2 = default(decimal?), decimal? quarter1 = default(decimal?), string _modifiedonbehalfbyValue = default(string), decimal? quarter4 = default(decimal?), decimal? quarter2Base = default(decimal?), string _salespersonidValue = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMasyncoperation> quarterlyFiscalCalendarAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> quarterlyFiscalCalendarBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser salespersonid = default(MicrosoftDynamicsCRMsystemuser))
         {
             this._createdbyValue = _createdbyValue;
             Quarter4Base = quarter4Base;
@@ -41,7 +41,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Fiscalperiodtype = fiscalperiodtype;
             this._modifiedbyValue = _modifiedbyValue;
             Createdon = createdon;
-            this._salespersonidValue = _salespersonidValue;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
             Quarter3 = quarter3;
             Quarter3Base = quarter3Base;
             Exchangerate = exchangerate;
@@ -51,9 +51,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Quarter2 = quarter2;
             Quarter1 = quarter1;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
             Quarter4 = quarter4;
             Quarter2Base = quarter2Base;
+            this._salespersonidValue = _salespersonidValue;
             Createdonbehalfby = createdonbehalfby;
             Modifiedby = modifiedby;
             Transactioncurrencyid = transactioncurrencyid;
@@ -122,8 +122,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_salespersonid_value")]
-        public string _salespersonidValue { get; set; }
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -172,11 +172,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "quarter4")]
         public decimal? Quarter4 { get; set; }
 
@@ -184,6 +179,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "quarter2_base")]
         public decimal? Quarter2Base { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_salespersonid_value")]
+        public string _salespersonidValue { get; set; }
 
         /// <summary>
         /// </summary>
