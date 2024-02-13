@@ -29,9 +29,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMduplicaterulecondition class.
         /// </summary>
-        public MicrosoftDynamicsCRMduplicaterulecondition(int? operatorcode = default(int?), string _modifiedbyValue = default(string), string duplicateruleconditionid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string owningbusinessunit = default(string), string _createdonbehalfbyValue = default(string), string owninguser = default(string), bool? ignoreblankvalues = default(bool?), string baseattributename = default(string), string _owneridValue = default(string), int? operatorparam = default(int?), string _createdbyValue = default(string), string _regardingobjectidValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string matchingattributename = default(string), IList<MicrosoftDynamicsCRMsyncerror> duplicateRuleConditionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMduplicaterule regardingobjectid = default(MicrosoftDynamicsCRMduplicaterule), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMduplicaterulecondition(string _modifiedbyValue = default(string), string duplicateruleconditionid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string owningbusinessunit = default(string), string _createdonbehalfbyValue = default(string), string owninguser = default(string), bool? ignoreblankvalues = default(bool?), string baseattributename = default(string), string _owneridValue = default(string), int? operatorcode = default(int?), int? operatorparam = default(int?), string _createdbyValue = default(string), string _regardingobjectidValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string matchingattributename = default(string), IList<MicrosoftDynamicsCRMsyncerror> duplicateRuleConditionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMduplicaterule regardingobjectid = default(MicrosoftDynamicsCRMduplicaterule), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
         {
-            Operatorcode = operatorcode;
             this._modifiedbyValue = _modifiedbyValue;
             Duplicateruleconditionid = duplicateruleconditionid;
             Createdon = createdon;
@@ -42,6 +41,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Ignoreblankvalues = ignoreblankvalues;
             Baseattributename = baseattributename;
             this._owneridValue = _owneridValue;
+            Operatorcode = operatorcode;
             Operatorparam = operatorparam;
             this._createdbyValue = _createdbyValue;
             this._regardingobjectidValue = _regardingobjectidValue;
@@ -60,11 +60,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "operatorcode")]
-        public int? Operatorcode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -115,6 +110,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
         public string _owneridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "operatorcode")]
+        public int? Operatorcode { get; set; }
 
         /// <summary>
         /// </summary>

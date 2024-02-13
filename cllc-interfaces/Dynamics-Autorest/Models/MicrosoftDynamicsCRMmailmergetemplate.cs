@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMmailmergetemplate class.
         /// </summary>
-        public MicrosoftDynamicsCRMmailmergetemplate(int? timezoneruleversionnumber = default(int?), int? componentstate = default(int?), int? languagecode = default(int?), string _modifiedonbehalfbyValue = default(string), string name = default(string), string _owningbusinessunitValue = default(string), string introducedversion = default(string), string _transactioncurrencyidValue = default(string), bool? ismanaged = default(bool?), int? filesize = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string mailmergetemplateidunique = default(string), string _owningteamValue = default(string), int? statuscode = default(int?), string versionnumber = default(string), string mimetype = default(string), string solutionid = default(string), string parameterxml = default(string), int? mailmergetype = default(int?), string _owninguserValue = default(string), string _modifiedbyValue = default(string), string _createdonbehalfbyValue = default(string), string body = default(string), string filename = default(string), int? documentformat = default(int?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), int? statecode = default(int?), decimal? exchangerate = default(decimal?), string mailmergetemplateid = default(string), bool? ispersonal = default(bool?), string description = default(string), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string defaultfilter = default(string), string _owneridValue = default(string), string _createdbyValue = default(string), string templatetypecode = default(string), string iscustomizable = default(string), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> mailmergetemplatePrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMasyncoperation> mailMergeTemplateAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMprocesssession> mailMergeTemplateProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> mailMergeTemplateSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMmailmergetemplate(int? timezoneruleversionnumber = default(int?), int? componentstate = default(int?), int? languagecode = default(int?), string _modifiedonbehalfbyValue = default(string), string name = default(string), string _owningbusinessunitValue = default(string), string _transactioncurrencyidValue = default(string), bool? ismanaged = default(bool?), int? filesize = default(int?), string mailmergetemplateidunique = default(string), string _owningteamValue = default(string), string introducedversion = default(string), string versionnumber = default(string), string mimetype = default(string), string solutionid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? mailmergetype = default(int?), string iscustomizable = default(string), string _owninguserValue = default(string), string _modifiedbyValue = default(string), string _createdonbehalfbyValue = default(string), string body = default(string), string filename = default(string), int? statuscode = default(int?), int? documentformat = default(int?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), int? statecode = default(int?), decimal? exchangerate = default(decimal?), string mailmergetemplateid = default(string), bool? ispersonal = default(bool?), string description = default(string), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string defaultfilter = default(string), string _owneridValue = default(string), string _createdbyValue = default(string), string templatetypecode = default(string), string parameterxml = default(string), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> mailmergetemplatePrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMasyncoperation> mailMergeTemplateAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMprocesssession> mailMergeTemplateProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> mailMergeTemplateSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Timezoneruleversionnumber = timezoneruleversionnumber;
             Componentstate = componentstate;
@@ -37,24 +37,24 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Name = name;
             this._owningbusinessunitValue = _owningbusinessunitValue;
-            Introducedversion = introducedversion;
             this._transactioncurrencyidValue = _transactioncurrencyidValue;
             Ismanaged = ismanaged;
             Filesize = filesize;
-            Modifiedon = modifiedon;
             Mailmergetemplateidunique = mailmergetemplateidunique;
             this._owningteamValue = _owningteamValue;
-            Statuscode = statuscode;
+            Introducedversion = introducedversion;
             Versionnumber = versionnumber;
             Mimetype = mimetype;
             Solutionid = solutionid;
-            Parameterxml = parameterxml;
+            Modifiedon = modifiedon;
             Mailmergetype = mailmergetype;
+            Iscustomizable = iscustomizable;
             this._owninguserValue = _owninguserValue;
             this._modifiedbyValue = _modifiedbyValue;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Body = body;
             Filename = filename;
+            Statuscode = statuscode;
             Documentformat = documentformat;
             Overwritetime = overwritetime;
             Statecode = statecode;
@@ -68,7 +68,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             this._owneridValue = _owneridValue;
             this._createdbyValue = _createdbyValue;
             Templatetypecode = templatetypecode;
-            Iscustomizable = iscustomizable;
+            Parameterxml = parameterxml;
             Transactioncurrencyid = transactioncurrencyid;
             Ownerid = ownerid;
             MailmergetemplatePrincipalobjectattributeaccess = mailmergetemplatePrincipalobjectattributeaccess;
@@ -120,11 +120,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "introducedversion")]
-        public string Introducedversion { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
         public string _transactioncurrencyidValue { get; set; }
 
@@ -140,11 +135,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "mailmergetemplateidunique")]
         public string Mailmergetemplateidunique { get; set; }
 
@@ -155,8 +145,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
+        [JsonProperty(PropertyName = "introducedversion")]
+        public string Introducedversion { get; set; }
 
         /// <summary>
         /// </summary>
@@ -175,13 +165,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "parameterxml")]
-        public string Parameterxml { get; set; }
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "mailmergetype")]
         public int? Mailmergetype { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "iscustomizable")]
+        public string Iscustomizable { get; set; }
 
         /// <summary>
         /// </summary>
@@ -207,6 +202,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "filename")]
         public string Filename { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -275,8 +275,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "iscustomizable")]
-        public string Iscustomizable { get; set; }
+        [JsonProperty(PropertyName = "parameterxml")]
+        public string Parameterxml { get; set; }
 
         /// <summary>
         /// </summary>

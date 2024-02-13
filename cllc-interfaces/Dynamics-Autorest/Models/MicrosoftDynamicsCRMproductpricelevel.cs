@@ -29,30 +29,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMproductpricelevel class.
         /// </summary>
-        public MicrosoftDynamicsCRMproductpricelevel(decimal? amount = default(decimal?), int? roundingoptioncode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), int? utcconversiontimezonecode = default(int?), decimal? exchangerate = default(decimal?), decimal? roundingoptionamount = default(decimal?), string _modifiedbyValue = default(string), string _uomidValue = default(string), string _modifiedonbehalfbyValue = default(string), string processid = default(string), string stageid = default(string), string productnumber = default(string), string _pricelevelidValue = default(string), int? quantitysellingcode = default(int?), string productpricelevelid = default(string), int? pricingmethodcode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _discounttypeidValue = default(string), string _transactioncurrencyidValue = default(string), string organizationid = default(string), decimal? roundingoptionamountBase = default(decimal?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string _productidValue = default(string), decimal? percentage = default(decimal?), string versionnumber = default(string), string _uomscheduleidValue = default(string), int? roundingpolicycode = default(int?), string _createdonbehalfbyValue = default(string), decimal? amountBase = default(decimal?), int? importsequencenumber = default(int?), string traversedpath = default(string), IList<MicrosoftDynamicsCRMteam> productpricelevelTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> productpricelevelMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> productpricelevelPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMuom uomid = default(MicrosoftDynamicsCRMuom), IList<MicrosoftDynamicsCRMasyncoperation> productPriceLevelAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMsyncerror> productPriceLevelSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), MicrosoftDynamicsCRMpricelevel pricelevelid = default(MicrosoftDynamicsCRMpricelevel), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMprocesssession> productPriceLevelProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> productPriceLevelBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMproduct productid = default(MicrosoftDynamicsCRMproduct), MicrosoftDynamicsCRMuomschedule uomscheduleid = default(MicrosoftDynamicsCRMuomschedule), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMdiscounttype discounttypeid = default(MicrosoftDynamicsCRMdiscounttype), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMproductpricelevel(decimal? amount = default(decimal?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), string processid = default(string), int? timezoneruleversionnumber = default(int?), decimal? exchangerate = default(decimal?), decimal? roundingoptionamount = default(decimal?), string _uomidValue = default(string), string _modifiedonbehalfbyValue = default(string), string stageid = default(string), string productnumber = default(string), string _pricelevelidValue = default(string), string organizationid = default(string), int? quantitysellingcode = default(int?), string productpricelevelid = default(string), int? pricingmethodcode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _discounttypeidValue = default(string), string _transactioncurrencyidValue = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string _productidValue = default(string), decimal? percentage = default(decimal?), string versionnumber = default(string), string _uomscheduleidValue = default(string), int? roundingpolicycode = default(int?), int? roundingoptioncode = default(int?), string _createdonbehalfbyValue = default(string), decimal? amountBase = default(decimal?), int? importsequencenumber = default(int?), decimal? roundingoptionamountBase = default(decimal?), string traversedpath = default(string), IList<MicrosoftDynamicsCRMteam> productpricelevelTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> productpricelevelMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> productpricelevelPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMuom uomid = default(MicrosoftDynamicsCRMuom), IList<MicrosoftDynamicsCRMasyncoperation> productPriceLevelAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMsyncerror> productPriceLevelSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), MicrosoftDynamicsCRMpricelevel pricelevelid = default(MicrosoftDynamicsCRMpricelevel), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMprocesssession> productPriceLevelProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> productPriceLevelBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMproduct productid = default(MicrosoftDynamicsCRMproduct), MicrosoftDynamicsCRMdiscounttype discounttypeid = default(MicrosoftDynamicsCRMdiscounttype), MicrosoftDynamicsCRMuomschedule uomscheduleid = default(MicrosoftDynamicsCRMuomschedule), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Amount = amount;
-            Roundingoptioncode = roundingoptioncode;
             Overriddencreatedon = overriddencreatedon;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
             Utcconversiontimezonecode = utcconversiontimezonecode;
+            Processid = processid;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
             Exchangerate = exchangerate;
             Roundingoptionamount = roundingoptionamount;
-            this._modifiedbyValue = _modifiedbyValue;
             this._uomidValue = _uomidValue;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            Processid = processid;
             Stageid = stageid;
             Productnumber = productnumber;
             this._pricelevelidValue = _pricelevelidValue;
+            Organizationid = organizationid;
             Quantitysellingcode = quantitysellingcode;
             Productpricelevelid = productpricelevelid;
             Pricingmethodcode = pricingmethodcode;
             Modifiedon = modifiedon;
             this._discounttypeidValue = _discounttypeidValue;
             this._transactioncurrencyidValue = _transactioncurrencyidValue;
-            Organizationid = organizationid;
-            RoundingoptionamountBase = roundingoptionamountBase;
+            this._modifiedbyValue = _modifiedbyValue;
             Createdon = createdon;
             this._createdbyValue = _createdbyValue;
             this._productidValue = _productidValue;
@@ -60,9 +58,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Versionnumber = versionnumber;
             this._uomscheduleidValue = _uomscheduleidValue;
             Roundingpolicycode = roundingpolicycode;
+            Roundingoptioncode = roundingoptioncode;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             AmountBase = amountBase;
             Importsequencenumber = importsequencenumber;
+            RoundingoptionamountBase = roundingoptionamountBase;
             Traversedpath = traversedpath;
             ProductpricelevelTeams = productpricelevelTeams;
             ProductpricelevelMailboxTrackingFolders = productpricelevelMailboxTrackingFolders;
@@ -77,10 +77,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Modifiedonbehalfby = modifiedonbehalfby;
             ProductPriceLevelProcessSessions = productPriceLevelProcessSessions;
             ProductPriceLevelBulkDeleteFailures = productPriceLevelBulkDeleteFailures;
-            Productid = productid;
-            Uomscheduleid = uomscheduleid;
             Modifiedby = modifiedby;
+            Productid = productid;
             Discounttypeid = discounttypeid;
+            Uomscheduleid = uomscheduleid;
             Createdby = createdby;
             CustomInit();
         }
@@ -97,23 +97,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "roundingoptioncode")]
-        public int? Roundingoptioncode { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
+        [JsonProperty(PropertyName = "processid")]
+        public string Processid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -127,11 +127,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_uomid_value")]
         public string _uomidValue { get; set; }
 
@@ -139,11 +134,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "processid")]
-        public string Processid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -159,6 +149,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_pricelevelid_value")]
         public string _pricelevelidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "organizationid")]
+        public string Organizationid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -192,13 +187,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "organizationid")]
-        public string Organizationid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "roundingoptionamount_base")]
-        public decimal? RoundingoptionamountBase { get; set; }
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -237,6 +227,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "roundingoptioncode")]
+        public int? Roundingoptioncode { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
 
@@ -249,6 +244,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "roundingoptionamount_base")]
+        public decimal? RoundingoptionamountBase { get; set; }
 
         /// <summary>
         /// </summary>
@@ -322,23 +322,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "productid")]
-        public MicrosoftDynamicsCRMproduct Productid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "uomscheduleid")]
-        public MicrosoftDynamicsCRMuomschedule Uomscheduleid { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "modifiedby")]
         public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "productid")]
+        public MicrosoftDynamicsCRMproduct Productid { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "discounttypeid")]
         public MicrosoftDynamicsCRMdiscounttype Discounttypeid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "uomscheduleid")]
+        public MicrosoftDynamicsCRMuomschedule Uomscheduleid { get; set; }
 
         /// <summary>
         /// </summary>

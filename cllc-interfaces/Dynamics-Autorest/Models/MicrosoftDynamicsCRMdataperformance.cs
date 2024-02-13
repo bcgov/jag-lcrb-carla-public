@@ -27,22 +27,22 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMdataperformance class.
         /// </summary>
-        public MicrosoftDynamicsCRMdataperformance(string _organizationidValue = default(string), int? count = default(int?), decimal? optimizationstorage = default(decimal?), bool? anyoptimizationavailable = default(bool?), string dataperformanceid = default(string), string lastactionresult = default(string), string component = default(string), decimal? weight = default(decimal?), decimal? mediantime = default(decimal?), string entity = default(string), decimal? estimatedoptimizationimpact = default(decimal?), string solution = default(string), string executionperiod = default(string), string optimizationstatus = default(string), decimal? maxtime = default(decimal?), bool? anyoptimizationapplied = default(bool?), string realizedoptimizationimpact = default(string), System.DateTimeOffset? lastoptimizationdate = default(System.DateTimeOffset?), decimal? mintime = default(decimal?), string operation = default(string), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
+        public MicrosoftDynamicsCRMdataperformance(string _organizationidValue = default(string), decimal? estimatedoptimizationimpact = default(decimal?), decimal? optimizationstorage = default(decimal?), string optimizationstatus = default(string), string dataperformanceid = default(string), string lastactionresult = default(string), string component = default(string), decimal? weight = default(decimal?), decimal? mediantime = default(decimal?), string entity = default(string), bool? anyoptimizationavailable = default(bool?), string solution = default(string), string executionperiod = default(string), int? count = default(int?), decimal? maxtime = default(decimal?), bool? anyoptimizationapplied = default(bool?), string realizedoptimizationimpact = default(string), System.DateTimeOffset? lastoptimizationdate = default(System.DateTimeOffset?), decimal? mintime = default(decimal?), string operation = default(string), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
         {
             this._organizationidValue = _organizationidValue;
-            Count = count;
+            Estimatedoptimizationimpact = estimatedoptimizationimpact;
             Optimizationstorage = optimizationstorage;
-            Anyoptimizationavailable = anyoptimizationavailable;
+            Optimizationstatus = optimizationstatus;
             Dataperformanceid = dataperformanceid;
             Lastactionresult = lastactionresult;
             Component = component;
             Weight = weight;
             Mediantime = mediantime;
             Entity = entity;
-            Estimatedoptimizationimpact = estimatedoptimizationimpact;
+            Anyoptimizationavailable = anyoptimizationavailable;
             Solution = solution;
             Executionperiod = executionperiod;
-            Optimizationstatus = optimizationstatus;
+            Count = count;
             Maxtime = maxtime;
             Anyoptimizationapplied = anyoptimizationapplied;
             Realizedoptimizationimpact = realizedoptimizationimpact;
@@ -65,8 +65,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "count")]
-        public int? Count { get; set; }
+        [JsonProperty(PropertyName = "estimatedoptimizationimpact")]
+        public decimal? Estimatedoptimizationimpact { get; set; }
 
         /// <summary>
         /// </summary>
@@ -75,8 +75,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "anyoptimizationavailable")]
-        public bool? Anyoptimizationavailable { get; set; }
+        [JsonProperty(PropertyName = "optimizationstatus")]
+        public string Optimizationstatus { get; set; }
 
         /// <summary>
         /// </summary>
@@ -110,8 +110,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "estimatedoptimizationimpact")]
-        public decimal? Estimatedoptimizationimpact { get; set; }
+        [JsonProperty(PropertyName = "anyoptimizationavailable")]
+        public bool? Anyoptimizationavailable { get; set; }
 
         /// <summary>
         /// </summary>
@@ -125,8 +125,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "optimizationstatus")]
-        public string Optimizationstatus { get; set; }
+        [JsonProperty(PropertyName = "count")]
+        public int? Count { get; set; }
 
         /// <summary>
         /// </summary>

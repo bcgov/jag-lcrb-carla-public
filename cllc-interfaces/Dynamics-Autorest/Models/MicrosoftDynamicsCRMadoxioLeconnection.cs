@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioLeconnection class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioLeconnection(System.DateTimeOffset? adoxioDateended = default(System.DateTimeOffset?), string adoxioLeconnectionid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), bool? adoxioDeemed = default(bool?), string _adoxioApplicationValue = default(string), string versionnumber = default(string), string _owneridValue = default(string), int? statecode = default(int?), string _modifiedonbehalfbyValue = default(string), string _createdbyValue = default(string), int? statuscode = default(int?), string _adoxioParentaccountValue = default(string), string _createdonbehalfbyValue = default(string), int? timezoneruleversionnumber = default(int?), bool? adoxioIsindividual = default(bool?), string _adoxioChildprofilenameValue = default(string), string adoxioName = default(string), decimal? adoxioVotingshares = default(decimal?), int? adoxioConnectiontype = default(int?), int? adoxioParentletype = default(int?), string adoxioJobtitle = default(string), string _owninguserValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), decimal? adoxioPercentinterest = default(decimal?), int? adoxioDecisionby = default(int?), bool? adoxioSecurityscreeningrequired = default(bool?), string _adoxioLicenceValue = default(string), string _owningbusinessunitValue = default(string), int? importsequencenumber = default(int?), string adoxioExternalid = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), System.DateTimeOffset? adoxioDateadded = default(System.DateTimeOffset?), string _owningteamValue = default(string), decimal? adoxioNonvotingshares = default(decimal?), int? utcconversiontimezonecode = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioLeconnectionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioLeconnectionDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioLeconnectionDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioLeconnectionAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioLeconnectionMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioLeconnectionProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioLeconnectionBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioLeconnectionPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMaccount adoxioParentAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMaccount adoxioChildProfileNameAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMcontact adoxioChildProfileNameContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMadoxioLicences adoxioLicence = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioApplication adoxioApplication = default(MicrosoftDynamicsCRMadoxioApplication))
+        public MicrosoftDynamicsCRMadoxioLeconnection(System.DateTimeOffset? adoxioDateended = default(System.DateTimeOffset?), string adoxioLeconnectionid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), bool? adoxioDeemed = default(bool?), string _adoxioApplicationValue = default(string), string versionnumber = default(string), string _owneridValue = default(string), string _modifiedonbehalfbyValue = default(string), string _adoxioChildprofilenameValue = default(string), string _createdbyValue = default(string), int? statuscode = default(int?), string _adoxioParentaccountValue = default(string), string _createdonbehalfbyValue = default(string), int? timezoneruleversionnumber = default(int?), bool? adoxioIsindividual = default(bool?), string adoxioName = default(string), decimal? adoxioVotingshares = default(decimal?), int? statecode = default(int?), int? adoxioConnectiontype = default(int?), int? adoxioParentletype = default(int?), string adoxioJobtitle = default(string), string _owninguserValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), decimal? adoxioPercentinterest = default(decimal?), int? adoxioDecisionby = default(int?), bool? adoxioSecurityscreeningrequired = default(bool?), string _adoxioLicenceValue = default(string), string _owningbusinessunitValue = default(string), int? importsequencenumber = default(int?), string adoxioExternalid = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), System.DateTimeOffset? adoxioDateadded = default(System.DateTimeOffset?), string _owningteamValue = default(string), decimal? adoxioNonvotingshares = default(decimal?), int? utcconversiontimezonecode = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioLeconnectionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioLeconnectionDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioLeconnectionDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioLeconnectionAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioLeconnectionMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioLeconnectionProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioLeconnectionBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioLeconnectionPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMaccount adoxioParentAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMaccount adoxioChildProfileNameAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMcontact adoxioChildProfileNameContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMadoxioLicences adoxioLicence = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioApplication adoxioApplication = default(MicrosoftDynamicsCRMadoxioApplication))
         {
             AdoxioDateended = adoxioDateended;
             AdoxioLeconnectionid = adoxioLeconnectionid;
@@ -38,17 +38,17 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             this._adoxioApplicationValue = _adoxioApplicationValue;
             Versionnumber = versionnumber;
             this._owneridValue = _owneridValue;
-            Statecode = statecode;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            this._adoxioChildprofilenameValue = _adoxioChildprofilenameValue;
             this._createdbyValue = _createdbyValue;
             Statuscode = statuscode;
             this._adoxioParentaccountValue = _adoxioParentaccountValue;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             AdoxioIsindividual = adoxioIsindividual;
-            this._adoxioChildprofilenameValue = _adoxioChildprofilenameValue;
             AdoxioName = adoxioName;
             AdoxioVotingshares = adoxioVotingshares;
+            Statecode = statecode;
             AdoxioConnectiontype = adoxioConnectiontype;
             AdoxioParentletype = adoxioParentletype;
             AdoxioJobtitle = adoxioJobtitle;
@@ -133,13 +133,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "_adoxio_childprofilename_value")]
+        public string _adoxioChildprofilenameValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -173,11 +173,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_childprofilename_value")]
-        public string _adoxioChildprofilenameValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_name")]
         public string AdoxioName { get; set; }
 
@@ -185,6 +180,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_votingshares")]
         public decimal? AdoxioVotingshares { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
 
         /// <summary>
         /// </summary>

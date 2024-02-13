@@ -29,16 +29,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMcompetitorsalesliterature class.
         /// </summary>
-        public MicrosoftDynamicsCRMcompetitorsalesliterature(string competitorsalesliteratureid = default(string), string name = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string competitorid = default(string), string versionnumber = default(string), int? importsequencenumber = default(int?), int? utcconversiontimezonecode = default(int?), int? timezoneruleversionnumber = default(int?), string salesliteratureid = default(string), IList<MicrosoftDynamicsCRMteam> competitorsalesliteratureTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMasyncoperation> competitorsalesliteratureAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> competitorsalesliteratureMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> competitorsalesliteratureBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> competitorsalesliteraturePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>))
+        public MicrosoftDynamicsCRMcompetitorsalesliterature(int? timezoneruleversionnumber = default(int?), string competitorsalesliteratureid = default(string), string name = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string competitorid = default(string), int? importsequencenumber = default(int?), int? utcconversiontimezonecode = default(int?), string versionnumber = default(string), string salesliteratureid = default(string), IList<MicrosoftDynamicsCRMteam> competitorsalesliteratureTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMasyncoperation> competitorsalesliteratureAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> competitorsalesliteratureMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> competitorsalesliteratureBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> competitorsalesliteraturePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>))
         {
+            Timezoneruleversionnumber = timezoneruleversionnumber;
             Competitorsalesliteratureid = competitorsalesliteratureid;
             Name = name;
             Overriddencreatedon = overriddencreatedon;
             Competitorid = competitorid;
-            Versionnumber = versionnumber;
             Importsequencenumber = importsequencenumber;
             Utcconversiontimezonecode = utcconversiontimezonecode;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
+            Versionnumber = versionnumber;
             Salesliteratureid = salesliteratureid;
             CompetitorsalesliteratureTeams = competitorsalesliteratureTeams;
             CompetitorsalesliteratureAsyncOperations = competitorsalesliteratureAsyncOperations;
@@ -52,6 +52,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -75,11 +80,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
@@ -90,8 +90,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>

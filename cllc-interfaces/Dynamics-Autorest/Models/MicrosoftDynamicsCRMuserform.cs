@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMuserform
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMuserform(string _owneridValue = default(string), string description = default(string), string userformid = default(string), string name = default(string), string formjson = default(string), string _owningbusinessunitValue = default(string), string _createdbyValue = default(string), string _modifiedbyValue = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string formxml = default(string), string objecttypecode = default(string), string _modifiedonbehalfbyValue = default(string), int? type = default(int?), string versionnumber = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _owningteamValue = default(string), string _owninguserValue = default(string), bool? istabletenabled = default(bool?), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMasyncoperation> userFormAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), IList<MicrosoftDynamicsCRMbulkdeletefailure> userFormBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit))
+        public MicrosoftDynamicsCRMuserform(string _owneridValue = default(string), string description = default(string), string userformid = default(string), string name = default(string), string formjson = default(string), string _owningbusinessunitValue = default(string), string _createdbyValue = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string formxml = default(string), string objecttypecode = default(string), string _modifiedonbehalfbyValue = default(string), int? type = default(int?), string versionnumber = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string _owningteamValue = default(string), string _owninguserValue = default(string), bool? istabletenabled = default(bool?), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMasyncoperation> userFormAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), IList<MicrosoftDynamicsCRMbulkdeletefailure> userFormBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit))
         {
             this._owneridValue = _owneridValue;
             Description = description;
@@ -39,7 +39,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             this._owningbusinessunitValue = _owningbusinessunitValue;
             this._createdbyValue = _createdbyValue;
             this._modifiedbyValue = _modifiedbyValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Modifiedon = modifiedon;
             Formxml = formxml;
             Objecttypecode = objecttypecode;
@@ -47,6 +46,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Type = type;
             Versionnumber = versionnumber;
             Createdon = createdon;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             this._owningteamValue = _owningteamValue;
             this._owninguserValue = _owninguserValue;
             Istabletenabled = istabletenabled;
@@ -110,11 +110,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
@@ -147,6 +142,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>

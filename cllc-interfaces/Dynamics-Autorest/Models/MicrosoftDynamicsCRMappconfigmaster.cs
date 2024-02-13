@@ -29,10 +29,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMappconfigmaster class.
         /// </summary>
-        public MicrosoftDynamicsCRMappconfigmaster(string _modifiedbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string configtype = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string defaultvalue = default(string), int? isnavigationsetting = default(int?), string versionnumber = default(string), string name = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), string validator = default(string), string _organizationidValue = default(string), string parentappconfigmasterid = default(string), string appconfigmasterid = default(string), string _createdbyValue = default(string), IList<MicrosoftDynamicsCRMappconfiginstance> appconfigmasterAppconfiginstance = default(IList<MicrosoftDynamicsCRMappconfiginstance>), MicrosoftDynamicsCRMsystemuser appconfigmasterCreatedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser appconfigmasterCreatedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationAppconfigmasterAppconfigmaster = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser appconfigmasterModifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser appconfigmasterModifiedby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMappconfigmaster(System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), string configtype = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string defaultvalue = default(string), int? isnavigationsetting = default(int?), string versionnumber = default(string), string name = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), string validator = default(string), string _organizationidValue = default(string), string parentappconfigmasterid = default(string), string appconfigmasterid = default(string), string _createdbyValue = default(string), IList<MicrosoftDynamicsCRMappconfiginstance> appconfigmasterAppconfiginstance = default(IList<MicrosoftDynamicsCRMappconfiginstance>), MicrosoftDynamicsCRMsystemuser appconfigmasterCreatedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser appconfigmasterCreatedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationAppconfigmasterAppconfigmaster = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser appconfigmasterModifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser appconfigmasterModifiedby = default(MicrosoftDynamicsCRMsystemuser))
         {
-            this._modifiedbyValue = _modifiedbyValue;
             Overriddencreatedon = overriddencreatedon;
+            this._modifiedbyValue = _modifiedbyValue;
             Configtype = configtype;
             Createdon = createdon;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
@@ -64,13 +64,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>

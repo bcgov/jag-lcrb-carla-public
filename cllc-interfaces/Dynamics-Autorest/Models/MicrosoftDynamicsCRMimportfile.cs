@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMimportfile
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMimportfile(string _createdbyValue = default(string), string _importmapidValue = default(string), int? partialfailurecount = default(int?), bool? usesystemmap = default(bool?), int? successcount = default(int?), string _owneridValue = default(string), string _owningbusinessunitValue = default(string), string headerrow = default(string), string name = default(string), string targetentityname = default(string), string importfileid = default(string), string _recordsowneridValue = default(string), string _owningteamValue = default(string), string relatedentitycolumns = default(string), string additionalheaderrow = default(string), int? parsedtablecolumnsnumber = default(int?), int? upsertmodecode = default(int?), string entitykeyid = default(string), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? failurecount = default(int?), string _modifiedbyValue = default(string), int? timezoneruleversionnumber = default(int?), string parsedtablename = default(string), bool? isfirstrowheader = default(bool?), int? datadelimitercode = default(int?), int? processcode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? fielddelimitercode = default(int?), string content = default(string), int? progresscounter = default(int?), int? statecode = default(int?), string _createdonbehalfbyValue = default(string), int? totalcount = default(int?), int? statuscode = default(int?), string sourceentityname = default(string), string parsedtablecolumnprefix = default(string), bool? enableduplicatedetection = default(bool?), System.DateTimeOffset? completedon = default(System.DateTimeOffset?), int? processingstatus = default(int?), int? filetypecode = default(int?), string _importidValue = default(string), string _owninguserValue = default(string), int? utcconversiontimezonecode = default(int?), string source = default(string), string size = default(string), IList<MicrosoftDynamicsCRMasyncoperation> importFileAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> importFileBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMteam recordsowneridTeam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMimportdata> importFileImportData = default(IList<MicrosoftDynamicsCRMimportdata>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMimport importid = default(MicrosoftDynamicsCRMimport), MicrosoftDynamicsCRMsystemuser recordsowneridSystemuser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMimportlog> importLogImportFile = default(IList<MicrosoftDynamicsCRMimportlog>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMimportmap importmapid = default(MicrosoftDynamicsCRMimportmap))
+        public MicrosoftDynamicsCRMimportfile(string _createdbyValue = default(string), string _importmapidValue = default(string), int? partialfailurecount = default(int?), bool? usesystemmap = default(bool?), int? successcount = default(int?), string _owneridValue = default(string), string _owningbusinessunitValue = default(string), string headerrow = default(string), string name = default(string), string targetentityname = default(string), string importfileid = default(string), string _recordsowneridValue = default(string), string _owningteamValue = default(string), string relatedentitycolumns = default(string), string additionalheaderrow = default(string), int? parsedtablecolumnsnumber = default(int?), int? upsertmodecode = default(int?), string entitykeyid = default(string), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? failurecount = default(int?), string _modifiedbyValue = default(string), int? timezoneruleversionnumber = default(int?), string parsedtablename = default(string), bool? isfirstrowheader = default(bool?), int? datadelimitercode = default(int?), int? processcode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? fielddelimitercode = default(int?), string content = default(string), int? progresscounter = default(int?), string _importidValue = default(string), int? statecode = default(int?), string _createdonbehalfbyValue = default(string), int? totalcount = default(int?), int? statuscode = default(int?), string sourceentityname = default(string), string parsedtablecolumnprefix = default(string), bool? enableduplicatedetection = default(bool?), System.DateTimeOffset? completedon = default(System.DateTimeOffset?), int? processingstatus = default(int?), int? filetypecode = default(int?), string _owninguserValue = default(string), int? utcconversiontimezonecode = default(int?), string source = default(string), string size = default(string), IList<MicrosoftDynamicsCRMasyncoperation> importFileAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> importFileBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMteam recordsowneridTeam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMimportdata> importFileImportData = default(IList<MicrosoftDynamicsCRMimportdata>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMimport importid = default(MicrosoftDynamicsCRMimport), MicrosoftDynamicsCRMsystemuser recordsowneridSystemuser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMimportlog> importLogImportFile = default(IList<MicrosoftDynamicsCRMimportlog>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMimportmap importmapid = default(MicrosoftDynamicsCRMimportmap))
         {
             this._createdbyValue = _createdbyValue;
             this._importmapidValue = _importmapidValue;
@@ -62,6 +62,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Fielddelimitercode = fielddelimitercode;
             Content = content;
             Progresscounter = progresscounter;
+            this._importidValue = _importidValue;
             Statecode = statecode;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Totalcount = totalcount;
@@ -72,7 +73,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Completedon = completedon;
             Processingstatus = processingstatus;
             Filetypecode = filetypecode;
-            this._importidValue = _importidValue;
             this._owninguserValue = _owninguserValue;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             Source = source;
@@ -258,6 +258,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_importid_value")]
+        public string _importidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "statecode")]
         public int? Statecode { get; set; }
 
@@ -305,11 +310,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "filetypecode")]
         public int? Filetypecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_importid_value")]
-        public string _importidValue { get; set; }
 
         /// <summary>
         /// </summary>

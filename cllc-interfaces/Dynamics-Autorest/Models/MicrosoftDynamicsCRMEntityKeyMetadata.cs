@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMEntityKeyMetadata class.
         /// </summary>
-        public MicrosoftDynamicsCRMEntityKeyMetadata(string displayName = default(string), string logicalName = default(string), string schemaName = default(string), string entityLogicalName = default(string), IList<string> keyAttributes = default(IList<string>), string isCustomizable = default(string), bool? isManaged = default(bool?), string introducedVersion = default(string), string entityKeyIndexStatus = default(string), string asyncJob = default(string), bool? isSynchronous = default(bool?), bool? isExportKey = default(bool?))
+        public MicrosoftDynamicsCRMEntityKeyMetadata(string displayName = default(string), string logicalName = default(string), string schemaName = default(string), string entityLogicalName = default(string), IList<string> keyAttributes = default(IList<string>), string isCustomizable = default(string), bool? isManaged = default(bool?), string introducedVersion = default(string), string entityKeyIndexStatus = default(string), string asyncJob = default(string))
         {
             DisplayName = displayName;
             LogicalName = logicalName;
@@ -41,8 +41,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             IntroducedVersion = introducedVersion;
             EntityKeyIndexStatus = entityKeyIndexStatus;
             AsyncJob = asyncJob;
-            IsSynchronous = isSynchronous;
-            IsExportKey = isExportKey;
             CustomInit();
         }
 
@@ -100,16 +98,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "AsyncJob")]
         public string AsyncJob { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "IsSynchronous")]
-        public bool? IsSynchronous { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "IsExportKey")]
-        public bool? IsExportKey { get; set; }
 
     }
 }

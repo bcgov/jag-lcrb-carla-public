@@ -27,10 +27,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioLicencetypesApplicationtypes class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioLicencetypesApplicationtypes(string adoxioLicencetypesApplicationtypesid = default(string), string adoxioLicencetypeid = default(string), string adoxioApplicationtypeid = default(string), string versionnumber = default(string))
+        public MicrosoftDynamicsCRMadoxioLicencetypesApplicationtypes(string adoxioLicencetypeid = default(string), string adoxioLicencetypesApplicationtypesid = default(string), string adoxioApplicationtypeid = default(string), string versionnumber = default(string))
         {
-            AdoxioLicencetypesApplicationtypesid = adoxioLicencetypesApplicationtypesid;
             AdoxioLicencetypeid = adoxioLicencetypeid;
+            AdoxioLicencetypesApplicationtypesid = adoxioLicencetypesApplicationtypesid;
             AdoxioApplicationtypeid = adoxioApplicationtypeid;
             Versionnumber = versionnumber;
             CustomInit();
@@ -43,13 +43,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_licencetypes_applicationtypesid")]
-        public string AdoxioLicencetypesApplicationtypesid { get; set; }
+        [JsonProperty(PropertyName = "adoxio_licencetypeid")]
+        public string AdoxioLicencetypeid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_licencetypeid")]
-        public string AdoxioLicencetypeid { get; set; }
+        [JsonProperty(PropertyName = "adoxio_licencetypes_applicationtypesid")]
+        public string AdoxioLicencetypesApplicationtypesid { get; set; }
 
         /// <summary>
         /// </summary>

@@ -29,9 +29,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMdynamicpropertyoptionsetitem class.
         /// </summary>
-        public MicrosoftDynamicsCRMdynamicpropertyoptionsetitem(string dynamicpropertyoptionname = default(string), string _modifiedonbehalfbyValue = default(string), int? utcconversiontimezonecode = default(int?), string dynamicpropertyoptionsetvalueid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? dynamicpropertyoptionvalue = default(int?), decimal? exchangerate = default(decimal?), string versionnumber = default(string), string dynamicpropertyoptiondescription = default(string), string _organizationidValue = default(string), int? dynamicpropertyoptionsetvaluesequencenumber = default(int?), string _createdbyValue = default(string), string _transactioncurrencyidValue = default(string), string _dynamicpropertyidValue = default(string), string _createdonbehalfbyValue = default(string), int? dmtimportstate = default(int?), int? timezoneruleversionnumber = default(int?), int? importsequencenumber = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), IList<MicrosoftDynamicsCRMsyncerror> dynamicpropertyoptionsetitemSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMteam> dynamicpropertyoptionsetitemTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMasyncoperation> dynamicpropertyoptionsetitemAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> dynamicpropertyoptionsetitemMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> dynamicpropertyoptionsetitemBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> dynamicpropertyoptionsetitemPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMdynamicproperty dynamicpropertyid = default(MicrosoftDynamicsCRMdynamicproperty), IList<MicrosoftDynamicsCRMdynamicproperty> defaultValueOptionSetDynamicProperty = default(IList<MicrosoftDynamicsCRMdynamicproperty>))
+        public MicrosoftDynamicsCRMdynamicpropertyoptionsetitem(string _modifiedonbehalfbyValue = default(string), int? utcconversiontimezonecode = default(int?), string dynamicpropertyoptionsetvalueid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? dynamicpropertyoptionvalue = default(int?), decimal? exchangerate = default(decimal?), string versionnumber = default(string), string dynamicpropertyoptiondescription = default(string), string _organizationidValue = default(string), int? dynamicpropertyoptionsetvaluesequencenumber = default(int?), string _createdbyValue = default(string), string _transactioncurrencyidValue = default(string), string dynamicpropertyoptionname = default(string), string _createdonbehalfbyValue = default(string), int? dmtimportstate = default(int?), int? timezoneruleversionnumber = default(int?), string _dynamicpropertyidValue = default(string), int? importsequencenumber = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), IList<MicrosoftDynamicsCRMsyncerror> dynamicpropertyoptionsetitemSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMteam> dynamicpropertyoptionsetitemTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMasyncoperation> dynamicpropertyoptionsetitemAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> dynamicpropertyoptionsetitemMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> dynamicpropertyoptionsetitemBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> dynamicpropertyoptionsetitemPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMdynamicproperty dynamicpropertyid = default(MicrosoftDynamicsCRMdynamicproperty), IList<MicrosoftDynamicsCRMdynamicproperty> defaultValueOptionSetDynamicProperty = default(IList<MicrosoftDynamicsCRMdynamicproperty>))
         {
-            Dynamicpropertyoptionname = dynamicpropertyoptionname;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             Dynamicpropertyoptionsetvalueid = dynamicpropertyoptionsetvalueid;
@@ -44,10 +43,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Dynamicpropertyoptionsetvaluesequencenumber = dynamicpropertyoptionsetvaluesequencenumber;
             this._createdbyValue = _createdbyValue;
             this._transactioncurrencyidValue = _transactioncurrencyidValue;
-            this._dynamicpropertyidValue = _dynamicpropertyidValue;
+            Dynamicpropertyoptionname = dynamicpropertyoptionname;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Dmtimportstate = dmtimportstate;
             Timezoneruleversionnumber = timezoneruleversionnumber;
+            this._dynamicpropertyidValue = _dynamicpropertyidValue;
             Importsequencenumber = importsequencenumber;
             Createdon = createdon;
             Overriddencreatedon = overriddencreatedon;
@@ -73,11 +73,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "dynamicpropertyoptionname")]
-        public string Dynamicpropertyoptionname { get; set; }
 
         /// <summary>
         /// </summary>
@@ -141,8 +136,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_dynamicpropertyid_value")]
-        public string _dynamicpropertyidValue { get; set; }
+        [JsonProperty(PropertyName = "dynamicpropertyoptionname")]
+        public string Dynamicpropertyoptionname { get; set; }
 
         /// <summary>
         /// </summary>
@@ -158,6 +153,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "timezoneruleversionnumber")]
         public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_dynamicpropertyid_value")]
+        public string _dynamicpropertyidValue { get; set; }
 
         /// <summary>
         /// </summary>

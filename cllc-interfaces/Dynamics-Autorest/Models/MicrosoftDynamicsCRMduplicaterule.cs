@@ -29,25 +29,24 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMduplicaterule
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMduplicaterule(int? statuscode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string matchingentitymatchcodetable = default(string), int? matchingentitytypecode = default(int?), string _owninguserValue = default(string), int? statecode = default(int?), int? timezoneruleversionnumber = default(int?), int? baseentitytypecode = default(int?), bool? excludeinactiverecords = default(bool?), string _owningbusinessunitValue = default(string), string _modifiedonbehalfbyValue = default(string), string matchingentityname = default(string), string baseentitymatchcodetable = default(string), string _modifiedbyValue = default(string), string duplicateruleid = default(string), string _owningteamValue = default(string), string _owneridValue = default(string), bool? iscasesensitive = default(bool?), string description = default(string), int? utcconversiontimezonecode = default(int?), string baseentityname = default(string), string name = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> duplicateRuleSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMduplicaterulecondition> duplicateRuleDuplicateRuleConditions = default(IList<MicrosoftDynamicsCRMduplicaterulecondition>), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMannotation> duplicateRuleAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMduplicaterecord> duplicateRuleDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMduplicaterule(string _owningteamValue = default(string), string matchingentitymatchcodetable = default(string), int? matchingentitytypecode = default(int?), string _owninguserValue = default(string), string _createdbyValue = default(string), int? statecode = default(int?), int? timezoneruleversionnumber = default(int?), int? baseentitytypecode = default(int?), bool? excludeinactiverecords = default(bool?), int? statuscode = default(int?), string _owningbusinessunitValue = default(string), string matchingentityname = default(string), string baseentitymatchcodetable = default(string), string _modifiedbyValue = default(string), string duplicateruleid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _owneridValue = default(string), bool? iscasesensitive = default(bool?), string description = default(string), int? utcconversiontimezonecode = default(int?), string baseentityname = default(string), string name = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string _createdonbehalfbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> duplicateRuleSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMduplicaterulecondition> duplicateRuleDuplicateRuleConditions = default(IList<MicrosoftDynamicsCRMduplicaterulecondition>), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMannotation> duplicateRuleAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMduplicaterecord> duplicateRuleDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
         {
-            Statuscode = statuscode;
-            Modifiedon = modifiedon;
-            this._createdbyValue = _createdbyValue;
+            this._owningteamValue = _owningteamValue;
             Matchingentitymatchcodetable = matchingentitymatchcodetable;
             Matchingentitytypecode = matchingentitytypecode;
             this._owninguserValue = _owninguserValue;
+            this._createdbyValue = _createdbyValue;
             Statecode = statecode;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             Baseentitytypecode = baseentitytypecode;
             Excludeinactiverecords = excludeinactiverecords;
+            Statuscode = statuscode;
             this._owningbusinessunitValue = _owningbusinessunitValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Matchingentityname = matchingentityname;
             Baseentitymatchcodetable = baseentitymatchcodetable;
             this._modifiedbyValue = _modifiedbyValue;
             Duplicateruleid = duplicateruleid;
-            this._owningteamValue = _owningteamValue;
+            Modifiedon = modifiedon;
             this._owneridValue = _owneridValue;
             Iscasesensitive = iscasesensitive;
             Description = description;
@@ -55,6 +54,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Baseentityname = baseentityname;
             Name = name;
             Createdon = createdon;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Createdonbehalfby = createdonbehalfby;
             Owningteam = owningteam;
@@ -78,18 +78,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -105,6 +95,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
         public string _owninguserValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -128,13 +123,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -158,8 +153,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -195,6 +190,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>

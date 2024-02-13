@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMsdkmessage
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMsdkmessage(string _organizationidValue = default(string), bool? isprivate = default(bool?), string _modifiedbyValue = default(string), string introducedversion = default(string), bool? workflowsdkstepenabled = default(bool?), bool? expand = default(bool?), int? availability = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), bool? template = default(bool?), bool? isvalidforexecuteasync = default(bool?), string categoryname = default(string), bool? autotransact = default(bool?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), bool? isactive = default(bool?), string _createdbyValue = default(string), string name = default(string), string _modifiedonbehalfbyValue = default(string), bool? ismanaged = default(bool?), int? customizationlevel = default(int?), string sdkmessageid = default(string), string sdkmessageidunique = default(string), string throttlesettings = default(string), string _createdonbehalfbyValue = default(string), string solutionid = default(string), int? componentstate = default(int?), string executeprivilegename = default(string), string versionnumber = default(string), bool? isreadonly = default(bool?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> sdkmessageidSdkmessageprocessingstep = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsdkmessagefilter> sdkmessageidSdkmessagefilter = default(IList<MicrosoftDynamicsCRMsdkmessagefilter>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMcustomapi> customAPIId = default(IList<MicrosoftDynamicsCRMcustomapi>))
+        public MicrosoftDynamicsCRMsdkmessage(string _organizationidValue = default(string), bool? isprivate = default(bool?), string _modifiedbyValue = default(string), string introducedversion = default(string), bool? workflowsdkstepenabled = default(bool?), bool? expand = default(bool?), int? availability = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), bool? template = default(bool?), bool? isvalidforexecuteasync = default(bool?), string categoryname = default(string), bool? autotransact = default(bool?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), bool? isactive = default(bool?), string _createdbyValue = default(string), string name = default(string), string _modifiedonbehalfbyValue = default(string), bool? ismanaged = default(bool?), int? customizationlevel = default(int?), string sdkmessageid = default(string), string sdkmessageidunique = default(string), string throttlesettings = default(string), string _createdonbehalfbyValue = default(string), string solutionid = default(string), int? componentstate = default(int?), string versionnumber = default(string), bool? isreadonly = default(bool?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> sdkmessageidSdkmessageprocessingstep = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsdkmessagefilter> sdkmessageidSdkmessagefilter = default(IList<MicrosoftDynamicsCRMsdkmessagefilter>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
             this._organizationidValue = _organizationidValue;
             Isprivate = isprivate;
@@ -57,7 +57,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Solutionid = solutionid;
             Componentstate = componentstate;
-            Executeprivilegename = executeprivilegename;
             Versionnumber = versionnumber;
             Isreadonly = isreadonly;
             Createdby = createdby;
@@ -67,7 +66,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             SdkmessageidSdkmessagefilter = sdkmessageidSdkmessagefilter;
             Modifiedby = modifiedby;
             Modifiedonbehalfby = modifiedonbehalfby;
-            CustomAPIId = customAPIId;
             CustomInit();
         }
 
@@ -208,11 +206,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "executeprivilegename")]
-        public string Executeprivilegename { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
         public string Versionnumber { get; set; }
 
@@ -255,11 +248,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "modifiedonbehalfby")]
         public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "CustomAPIId")]
-        public IList<MicrosoftDynamicsCRMcustomapi> CustomAPIId { get; set; }
 
     }
 }
