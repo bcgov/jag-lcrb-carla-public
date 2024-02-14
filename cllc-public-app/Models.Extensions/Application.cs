@@ -273,8 +273,6 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioDormancyreasons = from.DormancyReasons;
             to.AdoxioEstablishmentstatus = from.EstablishmentStatus;
             to.AdoxioDormancyintentionforreopening = from.DormancyIntentionForReopening;
-    }
-
             // LCSD-6170: 2024-02-02 waynezen
             to.AdoxioIspatioboundingsufficientforcontrol = from.isBoundingSufficientForControl;
             to.AdoxioIspatioboundingsufficienttodefinearea = from.isBoundingSufficientToDefine;

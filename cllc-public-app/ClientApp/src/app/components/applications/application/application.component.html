@@ -2347,7 +2347,7 @@
         </section>
 
         <!-- Tied House Exemption -->
-        <section *ngIf="application?.licenseType === 'Manufacturer'">
+        <section *ngIf="application?.licenseType === 'Manufacturer' && application?.applicationType?.name != ApplicationTypeNames.Dormancy">
           <h3 class="blue-header">{{this.application?.licenseType}} Tied House Exemption</h3>
           <div class="content-bottom">
             <section>
