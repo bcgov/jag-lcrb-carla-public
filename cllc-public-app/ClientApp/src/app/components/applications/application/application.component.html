@@ -2347,7 +2347,7 @@
         </section>
 
         <!-- Tied House Exemption -->
-        <section *ngIf="application?.licenseType === 'Manufacturer'">
+        <section *ngIf="application?.licenseType === 'Manufacturer' && application?.applicationType?.name != ApplicationTypeNames.Dormancy">
           <h3 class="blue-header">{{this.application?.licenseType}} Tied House Exemption</h3>
           <div class="content-bottom">
             <section>
@@ -3219,11 +3219,11 @@
   <div class="dashboard-spacing" style="position: relative" appRemoveIfFeatureOff="IndigenousNation">
     <!-- <div [ngBusy]="busy"></div> -->
     <div class="row">
-      <div class="col-md-7 col-sm-12">
+      <div class="col-md-8 col-sm-12">
         <ng-container *ngTemplateOutlet="applicationContent"></ng-container>
       </div>
 
-      <div class="col-md-4 col-sm-12">
+      <div class="col-md-3 col-sm-12">
         <h1>&nbsp;</h1>
 
         <ng-container *ngIf="application?.applicationType?.name === ApplicationTypeNames.CannabisRetailStore">
