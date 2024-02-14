@@ -39298,6 +39298,10 @@
           "format": "int32",
           "type": "integer"
         },
+        "adoxio_datelicencecapassessed": {
+          "format": "date-time",
+          "type": "string"
+        },
         "adoxio_checklistdecisionlettersentaip": {
           "format": "int32",
           "type": "integer"
@@ -39323,15 +39327,15 @@
         "_adoxio_pmuarea_value": {
           "type": "string"
         },
-        "new_lastdayestablishmentwasopenforbusiness": {
-          "format": "date-time",
-          "type": "string"
-        },
         "statuscode": {
           "format": "int32",
           "type": "integer"
         },
         "adoxio_addresspostalcode": {
+          "type": "string"
+        },
+        "adoxio_dormancyenddate": {
+          "format": "date-time",
           "type": "string"
         },
         "adoxio_investigationstatuscomment": {
@@ -39477,10 +39481,6 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_dormancyenddate": {
-          "format": "date-time",
-          "type": "string"
-        },
         "adoxio_m05": {
           "type": "boolean"
         },
@@ -39514,9 +39514,6 @@
           "format": "int32",
           "type": "integer"
         },
-        "_adoxio_sla_value": {
-          "type": "string"
-        },
         "exchangerate": {
           "format": "decimal",
           "type": "number"
@@ -39532,8 +39529,7 @@
           "format": "date-time",
           "type": "string"
         },
-        "adoxio_datelicencecapassessed": {
-          "format": "date-time",
+        "_adoxio_sla_value": {
           "type": "string"
         },
         "adoxio_isreadyretailarea": {
@@ -39735,8 +39731,9 @@
           "format": "int32",
           "type": "integer"
         },
-        "new_establishmentnametext": {
-          "type": "string"
+        "adoxio_checklistvalidestablishmentaddress": {
+          "format": "int32",
+          "type": "integer"
         },
         "timezoneruleversionnumber": {
           "format": "int32",
@@ -39837,10 +39834,6 @@
           "type": "string"
         },
         "adoxio_datesecurityscreeningcompletenessassessed": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_dormancystartdate": {
           "format": "date-time",
           "type": "string"
         },
@@ -40590,6 +40583,10 @@
         "adoxio_adhocreportprogramming": {
           "type": "boolean"
         },
+        "adoxio_dormancystartdate": {
+          "format": "date-time",
+          "type": "string"
+        },
         "adoxio_csnamechangelicenseepartnership": {
           "type": "boolean"
         },
@@ -40629,10 +40626,6 @@
         "adoxio_licencefeeinvoicepaid": {
           "type": "boolean"
         },
-        "new_adoxio_dormancystartdate": {
-          "format": "date-time",
-          "type": "string"
-        },
         "adoxio_securityscreeningcompletenessusingleconne": {
           "type": "string"
         },
@@ -40661,10 +40654,6 @@
           "type": "integer"
         },
         "adoxio_servicehoursfridayclose": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "adoxio_checklistvalidestablishmentaddress": {
           "format": "int32",
           "type": "integer"
         },
@@ -41503,12 +41492,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_importedoutstandinginvoices"
-          }
-        },
-        "bpf_adoxio_application_new_bpf_6dfbfc8bd13c474fa23c25bc86d8635c": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.new_bpf_6dfbfc8bd13c474fa23c25bc86d8635c"
           }
         }
       }
@@ -71029,9 +71012,6 @@
         },
         "regardingobjectid_msdyn_teamscollaboration": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.msdyn_teamscollaboration"
-        },
-        "regardingobjectid_new_bpf_6dfbfc8bd13c474fa23c25bc86d8635c": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.new_bpf_6dfbfc8bd13c474fa23c25bc86d8635c"
         }
       }
     },
@@ -74557,9 +74537,6 @@
         },
         "regardingobjectid_msdyn_teamscollaboration": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.msdyn_teamscollaboration"
-        },
-        "regardingobjectid_new_bpf_6dfbfc8bd13c474fa23c25bc86d8635c": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.new_bpf_6dfbfc8bd13c474fa23c25bc86d8635c"
         }
       }
     },
@@ -104358,9 +104335,6 @@
         },
         "regardingobjectid_msdyn_teamscollaboration": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.msdyn_teamscollaboration"
-        },
-        "regardingobjectid_new_bpf_6dfbfc8bd13c474fa23c25bc86d8635c": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.new_bpf_6dfbfc8bd13c474fa23c25bc86d8635c"
         }
       }
     },
@@ -115074,159 +115048,6 @@
         }
       }
     },
-    "Microsoft.Dynamics.CRM.new_bpf_6dfbfc8bd13c474fa23c25bc86d8635c": {
-      "description": "Microsoft.Dynamics.CRM.new_bpf_6dfbfc8bd13c474fa23c25bc86d8635c",
-      "type": "object",
-      "properties": {
-        "bpf_duration": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_activestageid_value": {
-          "type": "string"
-        },
-        "completedon": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "modifiedon": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "overriddencreatedon": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "activestagestartedon": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "_processid_value": {
-          "type": "string"
-        },
-        "_organizationid_value": {
-          "type": "string"
-        },
-        "traversedpath": {
-          "type": "string"
-        },
-        "statuscode": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_bpf_adoxio_applicationid_value": {
-          "type": "string"
-        },
-        "timezoneruleversionnumber": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "createdon": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "_modifiedby_value": {
-          "type": "string"
-        },
-        "_createdby_value": {
-          "type": "string"
-        },
-        "utcconversiontimezonecode": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_createdonbehalfby_value": {
-          "type": "string"
-        },
-        "importsequencenumber": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "bpf_name": {
-          "type": "string"
-        },
-        "versionnumber": {
-          "format": "int64",
-          "type": "string"
-        },
-        "businessprocessflowinstanceid": {
-          "type": "string"
-        },
-        "statecode": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "_modifiedonbehalfby_value": {
-          "type": "string"
-        },
-        "createdby": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
-        },
-        "createdonbehalfby": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
-        },
-        "modifiedby": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
-        },
-        "modifiedonbehalfby": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
-        },
-        "organizationid": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.organization"
-        },
-        "activestageid": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.processstage"
-        },
-        "processid": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.workflow"
-        },
-        "new_bpf_6dfbfc8bd13c474fa23c25bc86d8635c_SyncErrors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.syncerror"
-          }
-        },
-        "new_bpf_6dfbfc8bd13c474fa23c25bc86d8635c_AsyncOperations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.asyncoperation"
-          }
-        },
-        "new_bpf_6dfbfc8bd13c474fa23c25bc86d8635c_WorkflowLogs": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.workflowlog"
-          }
-        },
-        "new_bpf_6dfbfc8bd13c474fa23c25bc86d8635c_MailboxTrackingFolders": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.mailboxtrackingfolder"
-          }
-        },
-        "new_bpf_6dfbfc8bd13c474fa23c25bc86d8635c_ProcessSession": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.processsession"
-          }
-        },
-        "new_bpf_6dfbfc8bd13c474fa23c25bc86d8635c_BulkDeleteFailures": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.bulkdeletefailure"
-          }
-        },
-        "new_bpf_6dfbfc8bd13c474fa23c25bc86d8635c_PrincipalObjectAttributeAccesses": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.principalobjectattributeaccess"
-          }
-        },
-        "bpf_adoxio_applicationid": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_application"
-        }
-      }
-    },
     "Microsoft.Dynamics.CRM.newprocess": {
       "description": "Microsoft.Dynamics.CRM.newprocess",
       "type": "object",
@@ -119058,12 +118879,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.msdyn_sikeyvalueconfig"
-          }
-        },
-        "organization_new_bpf_6dfbfc8bd13c474fa23c25bc86d8635c": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.new_bpf_6dfbfc8bd13c474fa23c25bc86d8635c"
           }
         }
       }
@@ -123832,9 +123647,6 @@
         },
         "objectid_msdyn_teamscollaboration": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.msdyn_teamscollaboration"
-        },
-        "objectid_new_bpf_6dfbfc8bd13c474fa23c25bc86d8635c": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.new_bpf_6dfbfc8bd13c474fa23c25bc86d8635c"
         }
       }
     },
@@ -125085,9 +124897,6 @@
         },
         "regardingobjectid_msdyn_teamscollaboration": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.msdyn_teamscollaboration"
-        },
-        "regardingobjectid_new_bpf_6dfbfc8bd13c474fa23c25bc86d8635c": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.new_bpf_6dfbfc8bd13c474fa23c25bc86d8635c"
         }
       }
     },
@@ -125577,12 +125386,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.processstageparameter"
-          }
-        },
-        "lk_new_bpf_6dfbfc8bd13c474fa23c25bc86d8635c_activestageid": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.new_bpf_6dfbfc8bd13c474fa23c25bc86d8635c"
           }
         }
       }
@@ -150592,30 +150395,6 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.msdyn_teamscollaboration"
           }
-        },
-        "lk_new_bpf_6dfbfc8bd13c474fa23c25bc86d8635c_createdby": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.new_bpf_6dfbfc8bd13c474fa23c25bc86d8635c"
-          }
-        },
-        "lk_new_bpf_6dfbfc8bd13c474fa23c25bc86d8635c_createdonbehalfby": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.new_bpf_6dfbfc8bd13c474fa23c25bc86d8635c"
-          }
-        },
-        "lk_new_bpf_6dfbfc8bd13c474fa23c25bc86d8635c_modifiedby": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.new_bpf_6dfbfc8bd13c474fa23c25bc86d8635c"
-          }
-        },
-        "lk_new_bpf_6dfbfc8bd13c474fa23c25bc86d8635c_modifiedonbehalfby": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.new_bpf_6dfbfc8bd13c474fa23c25bc86d8635c"
-          }
         }
       }
     },
@@ -156082,9 +155861,6 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.fileattachment"
           }
-        },
-        "asyncoperationid_new_bpf_6dfbfc8bd13c474fa23c25bc86d8635c": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.new_bpf_6dfbfc8bd13c474fa23c25bc86d8635c"
         }
       }
     },
@@ -156536,12 +156312,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.msdyn_aimodel"
-          }
-        },
-        "lk_new_bpf_6dfbfc8bd13c474fa23c25bc86d8635c_processid": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.new_bpf_6dfbfc8bd13c474fa23c25bc86d8635c"
           }
         }
       }

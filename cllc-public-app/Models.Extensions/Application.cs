@@ -275,6 +275,17 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioDormancyintentionforreopening = from.DormancyIntentionForReopening;
     }
 
+            // LCSD-6170: 2024-02-02 waynezen
+            to.AdoxioIspatioboundingsufficientforcontrol = from.isBoundingSufficientForControl;
+            to.AdoxioIspatioboundingsufficienttodefinearea = from.isBoundingSufficientToDefine;
+            to.AdoxioIsadequatecareandcontroloverthepatio = from.isAdequateCare;
+            to.AdoxioIspatioincompliance = from.isInCompliance;
+
+            // LCSD-6959: 2024-02-12 waynezen
+            to.AdoxioStatusofconstruction = from.statusOfConstruction;
+
+        }
+
 
         public static void CopyValues(this MicrosoftDynamicsCRMadoxioApplication to, CovidApplication from)
         {
@@ -665,6 +676,17 @@ namespace Gov.Lclb.Cllb.Public.Models
                 DormancyReasons = dynamicsApplication.AdoxioDormancyreasons,
                 EstablishmentStatus = dynamicsApplication.AdoxioEstablishmentstatus,
                 DormancyIntentionForReopening = dynamicsApplication.AdoxioDormancyintentionforreopening,
+
+                // LCSD-6170: 2024-02-02 waynezen
+                isBoundingSufficientForControl = dynamicsApplication.AdoxioIspatioboundingsufficientforcontrol,
+                isBoundingSufficientToDefine = dynamicsApplication.AdoxioIspatioboundingsufficienttodefinearea,
+                isAdequateCare = dynamicsApplication.AdoxioIsadequatecareandcontroloverthepatio,
+                isInCompliance = dynamicsApplication.AdoxioIspatioincompliance,
+
+                // LCSD-6959: 2024-02-12 waynezen
+                statusOfConstruction = dynamicsApplication.AdoxioStatusofconstruction,
+
+
             };
 
 
