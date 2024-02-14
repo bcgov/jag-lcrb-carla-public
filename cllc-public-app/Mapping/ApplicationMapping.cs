@@ -149,6 +149,9 @@ namespace Gov.Lclb.Cllb.Public.Mapping
                 {"adoxio_dormancyintentionforreopening", new FieldMapping("dormancyIntentionForReopening", true)},
                 {"adoxio_dormancynotes", new FieldMapping("dormancyNotes", true)},
                 {"adoxio_establishmentstatus", new FieldMapping("establishmentStatus", true)},
+                {"adoxio_validinterestestablishmentlocation", new FieldMapping("validInterestEstablishmentLocation", true)},
+                {"adoxio_validinterestdormancyperiod", new FieldMapping("validInterestDormancyPeriod", true)},
+                {"adoxio_affirminformationproividedtrueandcomplete", new FieldMapping("affirmInformationProividedTrueAndComplete", true)},
         };
         }
     }
