@@ -621,6 +621,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             response["invoice"] = invoice.Invoicenumber;
+            response["paymentType"] = paymentType.ToString();
+
+            // LCSD-6224 2024-01-24 waynezen: if Application is for Renewal, send renewLicenseNumber to front-end
+            if (application.AdoxioApplicationTypeId?.AdoxioIsrenewal == true && application.AdoxioAssignedLicence != null)
+            {
+                var applicationVM = new ViewModels.Application();
+                applicationVM.AssignedLicence = application.AdoxioAssignedLicence.ToViewModel(_dynamicsClient);
+
+                response["renewLicenseNumber"] = applicationVM.AssignedLicence.LicenseNumber;
+            }
+            else
+                // blank renewalLicenseNumber key/val lets front end know not to display message
+                response["renewLicenseNumber"] = "";
 
             foreach (var key in response.Keys)
             {
