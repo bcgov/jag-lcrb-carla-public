@@ -260,7 +260,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             //LCSD-5779
             to.AdoxioTiedhouseexemption = from.WillHaveTiedHouseExemption;
             to.AdoxioTempsuspensionorpatronparticipationstart = from.TempSuspensionOrPatronParticipationStart;
-            
+
             to.AdoxioRelocateonsitestore = from.RelocateOnSiteStore ? 1:0;
             to.AdoxioConfirmpermitsretailsales = from.ConfirmPermitsRetailSales ? 1:0;
             to.AdoxioRelocatepicnicareaendorsement = from.RelocatePicnicAreaEndorsement ? 1:0;
@@ -269,7 +269,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioConfirmunderstandingwinerylicence= from.ConfirmRelocateWinaryLicence?1:0;
             to.AdoxioDormancystartdate = from.DormancyStartDate;
             to.AdoxioDormancyenddate = from.DormancyEndDate;
-            to.AdoxioDormancynotes = from.DormancyNotes ;
+            to.AdoxioDormancynotes = from.DormancyNotes;
             to.AdoxioDormancyreasons = from.DormancyReasons;
             to.AdoxioEstablishmentstatus = from.EstablishmentStatus;
             to.AdoxioDormancyintentionforreopening = from.DormancyIntentionForReopening;
@@ -282,6 +282,9 @@ namespace Gov.Lclb.Cllb.Public.Models
             // LCSD-6959: 2024-02-12 waynezen
             to.AdoxioStatusofconstruction = from.statusOfConstruction;
 
+            to.AdoxioValidinterestdormancyperiod = from.validInterestDormancyPeriod ? 1 : 0; ;
+            to.AdoxioAffirminformationproividedtrueandcomplete = from.affirmInformationProividedTrueAndComplete ? 1 : 0; ;
+            to.AdoxioValidinterestestablishmentlocation = from.validInterestEstablishmentLocation? 1 : 0; ;
         }
 
 
@@ -318,7 +321,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
             // catering fields
             to.AdoxioIsapplicationcomplete = (int?)from.IsApplicationComplete;
-            
+
         }
 
         public static void CopyValuesForCovidApplication(this MicrosoftDynamicsCRMadoxioApplication to, CovidApplication from)
@@ -684,6 +687,9 @@ namespace Gov.Lclb.Cllb.Public.Models
                 // LCSD-6959: 2024-02-12 waynezen
                 statusOfConstruction = dynamicsApplication.AdoxioStatusofconstruction,
 
+                validInterestDormancyPeriod = dynamicsApplication.AdoxioValidinterestdormancyperiod.HasValue ? dynamicsApplication.AdoxioValidinterestdormancyperiod.Value == 1 ? true : false : false,
+                affirmInformationProividedTrueAndComplete = dynamicsApplication.AdoxioAffirminformationproividedtrueandcomplete.HasValue ? dynamicsApplication.AdoxioAffirminformationproividedtrueandcomplete.Value == 1 ? true : false : false,
+                validInterestEstablishmentLocation = dynamicsApplication.AdoxioValidinterestestablishmentlocation.HasValue ? dynamicsApplication.AdoxioValidinterestestablishmentlocation.Value == 1 ? true : false : false,
 
             };
 
