@@ -31,6 +31,7 @@ export class ApplicationType {
   showDescription1: boolean;
   hasLESection: boolean;
   showPatio: boolean;
+  HasPatio: boolean;    // 2024-02-06 LCSD-6170 waynezen
 
   storeContactInfo: FormControlState;
   establishmentName: FormControlState;
