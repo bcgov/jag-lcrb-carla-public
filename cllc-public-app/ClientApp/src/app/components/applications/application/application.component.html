@@ -1177,7 +1177,8 @@
 
         </section>
 
-        <div *ngIf="!isFormControlDisabled('isHasPatio') || application?.applicationType?.showPatio">
+        <!--2024-02-21 LCSD-6975 waynezen: new logic to display isHasPatio-->
+        <div *ngIf="!isPatioActive(application?.applicationType) && application?.applicationType?.showPatio">
           <app-field label="Will the establishment have a patio?"
                      [valid]="isValidOrNotTouched('isHasPatio')" [showChevrons]="false" errorMessage="Specify if application will have a patio"
                      [isFullWidth]="true">
@@ -1187,6 +1188,11 @@
             </mat-radio-group>
           </app-field>
         </div>
+
+        <div *ngIf="isPatioActive(application?.applicationType)">
+          <input type="hidden" formControlName="isHasPatio" [value]="true"/>
+        </div>
+
 
         <div *ngIf="htmlContent.patio && showDynamicForm(application?.applicationType?.formReference, dynamicsForm?.tabs)">
           <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.patio"></section>
