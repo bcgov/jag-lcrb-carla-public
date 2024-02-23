@@ -786,5 +786,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public int? DormancyReasons { get; set; }
         public int? EstablishmentStatus { get; set; }
         public int? DormancyIntentionForReopening { get; set; }
+        public bool validInterestDormancyPeriod { get; set; }
+        public bool affirmInformationProividedTrueAndComplete { get; set; }
+        public bool validInterestEstablishmentLocation { get; set; }
     }
 }
