@@ -260,14 +260,19 @@ namespace Gov.Lclb.Cllb.Public.Models
             //LCSD-5779
             to.AdoxioTiedhouseexemption = from.WillHaveTiedHouseExemption;
             to.AdoxioTempsuspensionorpatronparticipationstart = from.TempSuspensionOrPatronParticipationStart;
-            
+
             to.AdoxioRelocateonsitestore = from.RelocateOnSiteStore ? 1:0;
             to.AdoxioConfirmpermitsretailsales = from.ConfirmPermitsRetailSales ? 1:0;
             to.AdoxioRelocatepicnicareaendorsement = from.RelocatePicnicAreaEndorsement ? 1:0;
             to.AdoxioConfirmrelocatepicnicareaendorsement = from.ConfirmrelocatePicnicAreaEndorsement ? 1:0;
             to.AdoxioRelocatewinerylicence = from.RelocateWinaryLicence ? 1:0;
             to.AdoxioConfirmunderstandingwinerylicence= from.ConfirmRelocateWinaryLicence?1:0;
-
+            to.AdoxioDormancystartdate = from.DormancyStartDate;
+            to.AdoxioDormancyenddate = from.DormancyEndDate;
+            to.AdoxioDormancynotes = from.DormancyNotes;
+            to.AdoxioDormancyreasons = from.DormancyReasons;
+            to.AdoxioEstablishmentstatus = from.EstablishmentStatus;
+            to.AdoxioDormancyintentionforreopening = from.DormancyIntentionForReopening;
             // LCSD-6170: 2024-02-02 waynezen
             to.AdoxioIspatioboundingsufficientforcontrol = from.isBoundingSufficientForControl;
             to.AdoxioIspatioboundingsufficienttodefinearea = from.isBoundingSufficientToDefine;
@@ -277,6 +282,9 @@ namespace Gov.Lclb.Cllb.Public.Models
             // LCSD-6959: 2024-02-12 waynezen
             to.AdoxioStatusofconstruction = from.statusOfConstruction;
 
+            to.AdoxioValidinterestdormancyperiod = from.validInterestDormancyPeriod ? 1 : 0; ;
+            to.AdoxioAffirminformationproividedtrueandcomplete = from.affirmInformationProividedTrueAndComplete ? 1 : 0; ;
+            to.AdoxioValidinterestestablishmentlocation = from.validInterestEstablishmentLocation? 1 : 0; ;
         }
 
 
@@ -313,7 +321,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
             // catering fields
             to.AdoxioIsapplicationcomplete = (int?)from.IsApplicationComplete;
-            
+
         }
 
         public static void CopyValuesForCovidApplication(this MicrosoftDynamicsCRMadoxioApplication to, CovidApplication from)
@@ -663,6 +671,12 @@ namespace Gov.Lclb.Cllb.Public.Models
                 RelocateOnSiteStore = dynamicsApplication.AdoxioRelocateonsitestore.HasValue ? dynamicsApplication.AdoxioRelocateonsitestore.Value == 1 ? true : false : false,
                 RelocateWinaryLicence = dynamicsApplication.AdoxioRelocatewinerylicence.HasValue ? dynamicsApplication.AdoxioRelocatewinerylicence.Value == 1 ? true : false : false,
                 ConfirmRelocateWinaryLicence = dynamicsApplication.AdoxioConfirmunderstandingwinerylicence.HasValue ? dynamicsApplication.AdoxioConfirmunderstandingwinerylicence.Value == 1 ? true : false : false,
+                DormancyStartDate = dynamicsApplication.AdoxioDormancystartdate,
+                DormancyEndDate = dynamicsApplication.AdoxioDormancyenddate,
+                DormancyNotes = dynamicsApplication.AdoxioDormancynotes,
+                DormancyReasons = dynamicsApplication.AdoxioDormancyreasons,
+                EstablishmentStatus = dynamicsApplication.AdoxioEstablishmentstatus,
+                DormancyIntentionForReopening = dynamicsApplication.AdoxioDormancyintentionforreopening,
 
                 // LCSD-6170: 2024-02-02 waynezen
                 isBoundingSufficientForControl = dynamicsApplication.AdoxioIspatioboundingsufficientforcontrol,
@@ -673,6 +687,9 @@ namespace Gov.Lclb.Cllb.Public.Models
                 // LCSD-6959: 2024-02-12 waynezen
                 statusOfConstruction = dynamicsApplication.AdoxioStatusofconstruction,
 
+                validInterestDormancyPeriod = dynamicsApplication.AdoxioValidinterestdormancyperiod.HasValue ? dynamicsApplication.AdoxioValidinterestdormancyperiod.Value == 1 ? true : false : false,
+                affirmInformationProividedTrueAndComplete = dynamicsApplication.AdoxioAffirminformationproividedtrueandcomplete.HasValue ? dynamicsApplication.AdoxioAffirminformationproividedtrueandcomplete.Value == 1 ? true : false : false,
+                validInterestEstablishmentLocation = dynamicsApplication.AdoxioValidinterestestablishmentlocation.HasValue ? dynamicsApplication.AdoxioValidinterestestablishmentlocation.Value == 1 ? true : false : false,
 
             };
 
