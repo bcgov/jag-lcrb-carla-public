@@ -780,5 +780,14 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool ConfirmrelocatePicnicAreaEndorsement { get; set; }
         public bool RelocateWinaryLicence { get; set; }
         public bool ConfirmRelocateWinaryLicence { get; set; }
+        public DateTimeOffset? DormancyStartDate { get; set; }
+        public DateTimeOffset? DormancyEndDate { get; set; }
+        public string DormancyNotes { get; set; }
+        public int? DormancyReasons { get; set; }
+        public int? EstablishmentStatus { get; set; }
+        public int? DormancyIntentionForReopening { get; set; }
+        public bool validInterestDormancyPeriod { get; set; }
+        public bool affirmInformationProividedTrueAndComplete { get; set; }
+        public bool validInterestEstablishmentLocation { get; set; }
     }
 }
