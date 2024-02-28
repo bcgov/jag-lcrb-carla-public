@@ -369,6 +369,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioPhsfinancialinterestdetails = from.phsFinancialIntDetails;
             to.AdoxioPhsprofitagreement = (int?)from.phsProfitAgreement;
             to.AdoxioPhsprofitagreementdetails = from.phsProfitAgreementDetails;
+            to.AdoxioPhsconnectionsdetails = from.PhsConnectionsDetails;
         }
 
         public static MicrosoftDynamicsCRMcontact ToModel(this Contact contact)
