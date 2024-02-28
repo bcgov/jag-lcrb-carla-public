@@ -658,7 +658,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.form.get('IsReadyProductNotVisibleOutside').setValidators([Validators.required]);
     }
 
-    if (this.application?.applicationType?.name != ApplicationTypeNames.Dormancy) {
+    if (this.application?.applicationType?.name == ApplicationTypeNames.Dormancy) {
       this.form.get('validInterestEstablishmentLocation').setValidators([this.customRequiredCheckboxValidator()]);
       this.form.get('validInterestDormancyPeriod').setValidators([this.customRequiredCheckboxValidator()]);
       this.form.get('affirmInformationProividedTrueAndComplete').setValidators([this.customRequiredCheckboxValidator()]);

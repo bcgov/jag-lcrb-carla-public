@@ -1259,14 +1259,22 @@
                           <section style="width: 100%;">
 
                             <div>
-                              <mat-button-toggle-group aria-label="Font Style" [formControlName]="formField.datafieldname"
-                                                       [id]="formField.datafieldname">
-                                <mat-button-toggle *ngFor="let option of formField.options" [value]="option.value">
-                                  {{option.label}}
-                                </mat-button-toggle>
-                              </mat-button-toggle-group>
+                              <mat-button-toggle-group *ngIf="formField.options.length<=3" aria-label="Font Style" [formControlName]="formField.datafieldname"
+                           [id]="formField.datafieldname">
+                              <mat-button-toggle *ngFor="let option of formField.options" [value]="option.value">
+                                {{option.label}}
+                              </mat-button-toggle>
+                            </mat-button-toggle-group>
+
+                              <div class="auto-width" *ngIf="formField.options.length>3">
+                                <mat-form-field>
+                                  <mat-select [formControlName]="formField.datafieldname" [id]="formField.datafieldname">
+                                    <mat-option *ngFor="let option of formField.options" [value]="option.value">{{option.label}}</mat-option>
+                                  </mat-select>
+                                </mat-form-field>
+                              </div>
                             </div>
-                          </section>
+                        </section>
                         </mat-card>
                       </app-field>
                     </div>
@@ -1297,11 +1305,11 @@
             </div>
           </div>
           <!-- Dormancy Declarations-->
-          <div class="content">
-            <h3 class="blue-header ngtest-declarations" *ngIf="application?.applicationType?.showDeclarations">
+          <div class="content" *ngIf="application?.applicationType?.showDeclarations && application?.applicationType?.name == ApplicationTypeNames.Dormancy">
+            <h3 class="blue-header ngtest-declarations" >
               DORMANCY DECLARATIONS
             </h3>
-            <div class="padded-section content-bottom" *ngIf=" application?.applicationType?.name == ApplicationTypeNames.Dormancy">
+            <div class="padded-section content-bottom">
               <ng-container >
                 <section>
                   <div *ngIf=" application?.licenseType != 'Cannabis Retail Store' && application?.licenseType != 'S119 CRS Authorization'&& application?.applicationType?.name !== ApplicationTypeNames.Marketer && !isRAS()">
