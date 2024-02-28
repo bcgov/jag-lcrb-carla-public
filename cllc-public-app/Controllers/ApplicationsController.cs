@@ -395,21 +395,26 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         }
                         i++;
                     }
-                    filter += $" ) or ((";
-                    var j = 0;
-                    foreach (var item in islgzoningconfirmationFalse)
+                    filter += $" )";
+                    if (islgzoningconfirmationFalse != null && islgzoningconfirmationFalse.Count > 0)
                     {
-                        if (j == 0)
+                        filter+= $" or ((";
+                        var j = 0;
+                        foreach (var item in islgzoningconfirmationFalse)
                         {
-                            filter += $" adoxio_ApplicationTypeId/adoxio_applicationtypeid ne {item.AdoxioApplicationtypeid}";
+                            if (j == 0)
+                            {
+                                filter += $" adoxio_ApplicationTypeId/adoxio_applicationtypeid ne {item.AdoxioApplicationtypeid}";
+                            }
+                            else
+                            {
+                                filter += $" and adoxio_ApplicationTypeId/adoxio_applicationtypeid ne {item.AdoxioApplicationtypeid}";
+                            }
+                            j++;
                         }
-                        else
-                        {
-                            filter += $" and adoxio_ApplicationTypeId/adoxio_applicationtypeid ne {item.AdoxioApplicationtypeid}";
-                        }
-                        j++;
+                        filter += $" ) and statuscode eq {(int)AdoxioApplicationStatusCodes.PendingForLGFNPFeedback} )";
                     }
-                    filter += $" ) and statuscode eq {(int)AdoxioApplicationStatusCodes.PendingForLGFNPFeedback} ))";
+                    filter += $")";
                     // this.applicationsDecisionNotMade =
                     //      this.applications.filter(app => !app.lGDecisionSubmissionDate &&
                     //        app.applicationType &&
@@ -513,21 +518,24 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     filter += "      )";
                     filter += $" and adoxio_lgdecisionsubmissiondate eq null";
                     //Application.applicationType.isZoning = true
-                    filter += $" and (";
-                    var i = 0;
-                    foreach (var item in applicationTypes)
+                    if (applicationTypes != null && applicationTypes.Count > 0)
                     {
-                        if (i == 0)
+                        filter += $" and (";
+                        var i = 0;
+                        foreach (var item in applicationTypes)
                         {
-                            filter += $" adoxio_ApplicationTypeId/adoxio_applicationtypeid eq {item.AdoxioApplicationtypeid}";
+                            if (i == 0)
+                            {
+                                filter += $" adoxio_ApplicationTypeId/adoxio_applicationtypeid eq {item.AdoxioApplicationtypeid}";
+                            }
+                            else
+                            {
+                                filter += $" or adoxio_ApplicationTypeId/adoxio_applicationtypeid eq {item.AdoxioApplicationtypeid}";
+                            }
+                            i++;
                         }
-                        else
-                        {
-                            filter += $" or adoxio_ApplicationTypeId/adoxio_applicationtypeid eq {item.AdoxioApplicationtypeid}";
-                        }
-                        i++;
+                        filter += $" )";
                     }
-                    filter += $" )";
 
                     //    this.applicationsForZoning =
                     //      this.applications.filter(app => !app.lGDecisionSubmissionDate &&
