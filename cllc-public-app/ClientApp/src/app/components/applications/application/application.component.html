@@ -1291,11 +1291,11 @@
             </div>
           </div>
           <!-- Dormancy Declarations-->
-          <div class="content" *ngIf="application?.applicationType?.showDeclarations && application?.applicationType?.name == ApplicationTypeNames.Dormancy">
-            <h3 class="blue-header ngtest-declarations" >
+          <div class="content">
+            <h3 class="blue-header ngtest-declarations" *ngIf="application?.applicationType?.showDeclarations">
               DORMANCY DECLARATIONS
             </h3>
-            <div class="padded-section content-bottom">
+            <div class="padded-section content-bottom" *ngIf=" application?.applicationType?.name == ApplicationTypeNames.Dormancy">
               <ng-container >
                 <section>
                   <div *ngIf=" application?.licenseType != 'Cannabis Retail Store' && application?.licenseType != 'S119 CRS Authorization'&& application?.applicationType?.name !== ApplicationTypeNames.Marketer && !isRAS()">
