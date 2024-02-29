@@ -264,8 +264,4 @@ export interface Application {
   tempSuspensionOrPatronParticipationStart: Date;
   tempSuspensionOrPatronParticipationEnd: Date;
   assignedLicenceId: string;
-  validInterestDormancyPeriod: boolean;
-  validInterestEstablishmentLocation: boolean;
-  affirmInformationProividedTrueAndComplete: boolean;
-
 }

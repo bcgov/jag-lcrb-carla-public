@@ -266,9 +266,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
       confirmrelocatePicnicAreaEndorsement: ['', []],
       relocateWinaryLicence: ['', []],
       confirmRelocateWinaryLicence: ['', []],
-      validInterestDormancyPeriod: ['', []],
-      affirmInformationProividedTrueAndComplete: ['', []],
-      validInterestEstablishmentLocation: ['', []],
     });
 
     this.form.get('pin').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
@@ -646,8 +643,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
     if (this.application.applicationType.showDeclarations) {
       if (this.application?.applicationType?.name != ApplicationTypeNames.TemporaryExtensionOfLicensedAreaLP) {
         this.form.get('authorizedToSubmit').setValidators([this.customRequiredCheckboxValidator()]);
-      }
-        this.form.get('signatureAgreement').setValidators([this.customRequiredCheckboxValidator()]);
+      } 
+      this.form.get('signatureAgreement').setValidators([this.customRequiredCheckboxValidator()]);
     }
 
     // TG validation question for cannabis licences to confirm that product is not visible from outside
@@ -655,11 +652,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.form.get('IsReadyProductNotVisibleOutside').setValidators([Validators.required]);
     }
 
-    if (this.application?.applicationType?.name != ApplicationTypeNames.Dormancy) {
-      this.form.get('validInterestEstablishmentLocation').setValidators([this.customRequiredCheckboxValidator()]);
-      this.form.get('validInterestDormancyPeriod').setValidators([this.customRequiredCheckboxValidator()]);
-      this.form.get('affirmInformationProividedTrueAndComplete').setValidators([this.customRequiredCheckboxValidator()]);
-    } 
 
     if (this.application.applicationType.lGandPoliceSelectors === "Yes" && this.LGApprovalsFeatureIsOn) {
       this.form.get('indigenousNation').setValidators([this.requiredAutoCompleteId]);
@@ -1510,22 +1502,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
         this.validationMessages.push('Please confirm that you are understanding of the following requirements for a winery licence.');
       }
     }
-    //Dormancy
-    if (this.application?.applicationType?.name == ApplicationTypeNames.Dormancy) {
-      if (this.form.get('affirmInformationProividedTrueAndComplete').value != true) {
-        valid = false;
-        this.validationMessages.push('Please Affirm Information Proivided True And Complete.');
-      }
-      if (this.form.get('validInterestEstablishmentLocation').value != true){
-        valid = false;
-        this.validationMessages.push('Please Affirm it is Valid Interest Establishment Location.');
-      }
-      if (this.form.get('validInterestDormancyPeriod').value != true){
-        valid = false;
-        this.validationMessages.push('Please Affirm it is Valid Interest Dormancy Period.');
-      }
 
-    }
     // 2024-02-06 LCSD-6170 waynezen: Add form-level Validation errors for Patio fields
     if (this.form.get('isHasPatio') && this.form.get('isHasPatio')?.value === true) {
 

@@ -117,7 +117,6 @@ export enum ApplicationTypeNames {
   TemporaryExtensionOfLicensedAreaLP = "Temporary Extension of Licensed Area (LP)",
   ManufacturerLocationChange = "Manufacturer Location Change",
   TemporaryChangetoaLiquorLicence_Other = "Temporary Change to a Liquor Licence - Other",
-  Dormancy = "Dormancy",
 
 }
 
