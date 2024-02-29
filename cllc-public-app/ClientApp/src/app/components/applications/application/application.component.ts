@@ -17,6 +17,7 @@ import { DynamicsDataService } from '@services/dynamics-data.service';
 import { Account, TransferAccount } from '@models/account.model';
 import { ApplicationType, ApplicationTypeNames, FormControlState } from '@models/application-type.model';
 import { TiedHouseConnection } from '@models/tied-house-connection.model';
+import { ApplicationStatuses } from "@models/application-type.model";     // LCSD-6243 2024-02-28 waynezen
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
 import { EstablishmentWatchWordsService } from '@services/establishment-watch-words.service';
 import { formatDate, KeyValue } from '@angular/common';
@@ -34,6 +35,7 @@ import { AreaCategory, ServiceArea } from '@models/service-area.model';
 import { faExclamationCircle, faTrashAlt, faUniversity } from '@fortawesome/free-solid-svg-icons';
 import { faCreditCard, faIdCard, faSave } from '@fortawesome/free-regular-svg-icons';
 import { RelatedLicence } from "@models/related-licence";
+
 
 const ServiceHours = [
   '00:00', '00:15', '00:30', '00:45', '01:00', '01:15', '01:30', '01:45', '02:00', '02:15', '02:30', '02:45', '03:00',
@@ -1226,6 +1228,18 @@ export class ApplicationComponent extends FormBase implements OnInit {
         && this?.application?.assignedLicence?.establishmentName != this.form.get('establishmentName').value // the name is different
       );
     return isChanging;
+  }
+
+ /**
+  * LCSD-6243: 2024-02-28 waynezen: prevent deep-linking by hiding Cmd buttons
+  */
+  private canVisitApplicationForm(): boolean {
+    const isAllowed: boolean = (
+      (this?.account.businessType === "LocalGovernment") ||
+      this?.application?.applicationStatus === ApplicationStatuses.Intake ||
+      this?.application?.applicationStatus === ApplicationStatuses.InProgress)
+
+    return isAllowed;
   }
 
 
