@@ -141,17 +141,7 @@ namespace Gov.Lclb.Cllb.Public.Mapping
                 {"adoxio_m09", new FieldMapping("isMonth09", false)},
                 {"adoxio_m10", new FieldMapping("isMonth10", false)},
                 {"adoxio_m11", new FieldMapping("isMonth11", false)},
-                {"adoxio_m12", new FieldMapping("isMonth12", false)},
-                {"adoxio_dormancyreasons", new FieldMapping("dormancyReasons", true)},
-                {"adoxio_dormancystartdate", new FieldMapping("dormancyStartDate", true)},
-                {"adoxio_dormancyenddate", new FieldMapping("dormancyEndDate", true)},
-                {"adoxio_dormancyreporteddate", new FieldMapping("dormancyReportedDate", true)},
-                {"adoxio_dormancyintentionforreopening", new FieldMapping("dormancyIntentionForReopening", true)},
-                {"adoxio_dormancynotes", new FieldMapping("dormancyNotes", true)},
-                {"adoxio_establishmentstatus", new FieldMapping("establishmentStatus", true)},
-                {"adoxio_validinterestestablishmentlocation", new FieldMapping("validInterestEstablishmentLocation", true)},
-                {"adoxio_validinterestdormancyperiod", new FieldMapping("validInterestDormancyPeriod", true)},
-                {"adoxio_affirminformationproividedtrueandcomplete", new FieldMapping("affirmInformationProividedTrueAndComplete", true)},
+                {"adoxio_m12", new FieldMapping("isMonth12", false)}
         };
         }
     }
