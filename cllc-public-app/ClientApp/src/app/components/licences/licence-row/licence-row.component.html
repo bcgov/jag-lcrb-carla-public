@@ -32,22 +32,19 @@
 </td>
 
                         <!-- DETAILS column -->
-<td style="padding: 10px;">
-  <div>
-    <strong *ngIf="item?.licenceTypeName !== 'Marketing'" style="color: #1a5a96;">
-      {{item.establishmentName}}
-    </strong>
-    <div *ngIf="item?.licenseSubCategory">
-      <p>{{getSubCategory(item.licenseSubCategory)}}</p>
-    </div>
-  </div>
-  <strong *ngIf="item?.licenceTypeName === 'Marketing'" style="color: #1a5a96;">
-    Marketing Licence
-  </strong>
-  <span *ngIf="item?.licenceTypeName !== 'Marketing' && isActive(item)">
-    <span *ngIf="item?.licenceTypeName !== 'Section 119 Authorization' && item?.licenceTypeName !== 'S119 CRS Authorization'">Licence</span>
-    Number:<i>{{item.licenseNumber}}</i>
-  </span>
+                        <td style="padding: 10px;">
+                            <div>
+                                <strong *ngIf="item?.licenceTypeName !== 'Marketing'" style="color: #1a5a96;">
+                                    {{item.establishmentName}}</strong>
+                                <div *ngIf="item?.licenseSubCategory">
+                                    <p>{{getSubCategory(item.licenseSubCategory)}}</p>
+                                </div>
+                            </div>
+                            <strong *ngIf="item?.licenceTypeName === 'Marketing'" style="color: #1a5a96;">
+                                Marketing Licence</strong>
+                            <span *ngIf="item?.licenceTypeName !== 'Marketing' && isActive(item)"><span
+                                  *ngIf="item?.licenceTypeName !== 'Section 119 Authorization' && item?.licenceTypeName !== 'S119 CRS Authorization'">Licence</span>
+                                Number:<i>{{item.licenseNumber}}</i></span>
 
   <br>
   <span *ngIf="isActive(item)">
@@ -88,9 +85,9 @@
         <mat-progress-bar *ngIf="renewalStarted" mode="indeterminate"></mat-progress-bar>
       </button>
     </span>
-    <span *ngIf="!isOutstandingPriorBalanceInvoiceDue  && isExpiredOverOneYear(item)" class="missing">
-      <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>
-      Unable to Reinstate.
+    <span *ngIf="!isOutstandingPriorBalanceInvoiceDue  && isExpiredOverOneYear(item)"  class="missing"> 
+          <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>
+          Unable to Reinstate.      
     </span>
   </div>
   <div class="flags" class="missing">
@@ -122,7 +119,8 @@
     </p>
   </div>
   <br>
-  <div *ngIf="item.licenceTypeCategory === 'Liquor' && isActive(item) && actionsVisible(item) && !item.isOperated">
+  <div
+    *ngIf="item.licenceTypeCategory === 'Liquor' && isActive(item) && actionsVisible(item) && !item.isOperated">
     <a [routerLink]="[ '/licence/' + item.licenseId + '/representative']">
       <span *ngIf="!item.representativeFullName">Add Licensee Representative</span>
       <span *ngIf="item.representativeFullName">
@@ -135,17 +133,6 @@
     <a [routerLink]="[ '/licence/' + item.licenseId + '/offsite-storage']">
       Manage Off-Site
       Storage
-    </a>
-  </div>
-  <div *ngIf="item.dormant==false">
-    <!--<a [routerLink]="[ '/licence/' + item.licenseId + '/dormancy']">
-      Dormancy Request
-    </a>-->
-    <a href="javascript:void(0);" (click)="doAction(item,'Dormancy')">
-        <span>
-          Dormancy Request
-        </span>
-        <mat-progress-bar *ngIf="requestStarted " mode="indeterminate"></mat-progress-bar>
     </a>
   </div>
 </td>
@@ -340,7 +327,7 @@
                               </div>
                                 <ng-container *ngIf="isActive(item) && actionsVisible(item)">
                                     <p *ngFor="let action of item.allowedActions; let requestActionID = index;">
-                                        <ng-container *ngIf="actionVisible(item, action.id) && action?.actionText!=ApplicationTypeNames.Dormancy">
+                                        <ng-container *ngIf="actionVisible(item, action.id)">
                                           <a href="javascript:void(0);" (click)="doAction(item,action.name)">                                        
                                             <button mat-raised-button color="secondary" style="margin-right: 10px;"
                                                     (click)="startRequest(requestActionID)" [disabled]="requestStarted && requestID==requestActionID">
