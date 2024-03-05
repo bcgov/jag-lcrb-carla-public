@@ -31,21 +31,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMcompetitor
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMcompetitor(string address2City = default(string), string _transactioncurrencyidValue = default(string), int? address2Shippingmethodcode = default(int?), int? reportingyear = default(int?), string address1Telephone2 = default(string), string weaknesses = default(string), string yominame = default(string), string _modifiedbyValue = default(string), string entityimageUrl = default(string), string name = default(string), string address1Postalcode = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string address1Postofficebox = default(string), int? address2Utcoffset = default(int?), int? reportingquarter = default(int?), string _createdonbehalfbyValue = default(string), string _createdbyValue = default(string), string address1Composite = default(string), string address2Upszone = default(string), decimal? exchangerate = default(decimal?), string _modifiedonbehalfbyValue = default(string), long? entityimageTimestamp = default(long?), string address2Line3 = default(string), string threats = default(string), string address1Telephone3 = default(string), string address2Postalcode = default(string), string keyproduct = default(string), string competitorid = default(string), string address2Name = default(string), decimal? address2Latitude = default(decimal?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), decimal? address2Longitude = default(decimal?), int? address1Utcoffset = default(int?), string address1City = default(string), string _organizationidValue = default(string), string address2Addressid = default(string), decimal? reportedrevenueBase = default(decimal?), string address1Stateorprovince = default(string), string stockexchange = default(string), int? address1Addresstypecode = default(int?), string address1Upszone = default(string), decimal? winpercentage = default(decimal?), string address2Stateorprovince = default(string), string versionnumber = default(string), string address2Postofficebox = default(string), string opportunities = default(string), byte[] entityimage = default(byte[]), string address1Telephone1 = default(string), string address1County = default(string), string tickersymbol = default(string), string address1Line2 = default(string), string address2Telephone1 = default(string), string address2Composite = default(string), string address1Name = default(string), string address2Telephone3 = default(string), string entityimageid = default(string), string strengths = default(string), string address1Line3 = default(string), string address2Fax = default(string), decimal? reportedrevenue = default(decimal?), int? utcconversiontimezonecode = default(int?), string stageid = default(string), string websiteurl = default(string), string address1Fax = default(string), string overview = default(string), int? importsequencenumber = default(int?), string address1Country = default(string), decimal? address1Latitude = default(decimal?), string address1Addressid = default(string), int? address2Addresstypecode = default(int?), decimal? address1Longitude = default(decimal?), int? timezoneruleversionnumber = default(int?), string traversedpath = default(string), string address2Telephone2 = default(string), string address2County = default(string), string address2Country = default(string), string address2Line1 = default(string), string referenceinfourl = default(string), string address2Line2 = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? address1Shippingmethodcode = default(int?), string address1Line1 = default(string), string processid = default(string), IList<MicrosoftDynamicsCRMlead> leadcompetitorsAssociation = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMsalesliterature> competitorsalesliteratureAssociation = default(IList<MicrosoftDynamicsCRMsalesliterature>), IList<MicrosoftDynamicsCRMproduct> competitorproductAssociation = default(IList<MicrosoftDynamicsCRMproduct>), IList<MicrosoftDynamicsCRMopportunity> opportunitycompetitorsAssociation = default(IList<MicrosoftDynamicsCRMopportunity>), IList<MicrosoftDynamicsCRMpostregarding> competitorPostRegardings = default(IList<MicrosoftDynamicsCRMpostregarding>), IList<MicrosoftDynamicsCRMpostfollow> competitorPostFollows = default(IList<MicrosoftDynamicsCRMpostfollow>), IList<MicrosoftDynamicsCRMteam> competitorTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> competitorMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMsyncerror> competitorSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMduplicaterecord> competitorDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMconnection> competitorConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> competitorPrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMannotation> competitorAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMconnection> competitorConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMcompetitoraddress> competitorAddresses = default(IList<MicrosoftDynamicsCRMcompetitoraddress>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMasyncoperation> competitorAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMopportunityclose> competitorOpportunityActivities = default(IList<MicrosoftDynamicsCRMopportunityclose>), IList<MicrosoftDynamicsCRMduplicaterecord> competitorDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMbulkdeletefailure> competitorBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprocesssession> competitorProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMcompetitor(string address2City = default(string), string _transactioncurrencyidValue = default(string), int? address2Shippingmethodcode = default(int?), int? reportingyear = default(int?), string address1Telephone2 = default(string), string address2County = default(string), string weaknesses = default(string), string processid = default(string), string yominame = default(string), string _modifiedbyValue = default(string), string entityimageUrl = default(string), string stageid = default(string), string name = default(string), string address1Postalcode = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? address2Utcoffset = default(int?), int? reportingquarter = default(int?), string _createdonbehalfbyValue = default(string), string _createdbyValue = default(string), string address1Composite = default(string), string address2Upszone = default(string), decimal? exchangerate = default(decimal?), long? entityimageTimestamp = default(long?), string address2Line3 = default(string), string threats = default(string), string address1Telephone3 = default(string), string address2Postalcode = default(string), string keyproduct = default(string), string competitorid = default(string), string address2Name = default(string), decimal? address2Latitude = default(decimal?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), decimal? address2Longitude = default(decimal?), int? address1Utcoffset = default(int?), string address1City = default(string), string _organizationidValue = default(string), decimal? reportedrevenueBase = default(decimal?), string address1Stateorprovince = default(string), string stockexchange = default(string), int? address1Addresstypecode = default(int?), string address1Upszone = default(string), decimal? winpercentage = default(decimal?), string address2Stateorprovince = default(string), string versionnumber = default(string), string address2Postofficebox = default(string), string opportunities = default(string), byte[] entityimage = default(byte[]), string address1Telephone1 = default(string), string address1County = default(string), string tickersymbol = default(string), string address1Line2 = default(string), string address2Telephone1 = default(string), string address2Composite = default(string), string address1Name = default(string), string address2Telephone3 = default(string), string entityimageid = default(string), string strengths = default(string), string address1Line3 = default(string), string address2Fax = default(string), decimal? reportedrevenue = default(decimal?), int? utcconversiontimezonecode = default(int?), string overview = default(string), string websiteurl = default(string), string address1Fax = default(string), string address1Postofficebox = default(string), int? importsequencenumber = default(int?), string address1Country = default(string), decimal? address1Latitude = default(decimal?), string address1Addressid = default(string), int? address2Addresstypecode = default(int?), decimal? address1Longitude = default(decimal?), int? timezoneruleversionnumber = default(int?), string traversedpath = default(string), string address2Telephone2 = default(string), string address2Addressid = default(string), string address2Country = default(string), string _modifiedonbehalfbyValue = default(string), string referenceinfourl = default(string), string address2Line2 = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? address1Shippingmethodcode = default(int?), string address1Line1 = default(string), string address2Line1 = default(string), IList<MicrosoftDynamicsCRMpostregarding> competitorPostRegardings = default(IList<MicrosoftDynamicsCRMpostregarding>), IList<MicrosoftDynamicsCRMpostfollow> competitorPostFollows = default(IList<MicrosoftDynamicsCRMpostfollow>), IList<MicrosoftDynamicsCRMsalesliterature> competitorsalesliteratureAssociation = default(IList<MicrosoftDynamicsCRMsalesliterature>), IList<MicrosoftDynamicsCRMproduct> competitorproductAssociation = default(IList<MicrosoftDynamicsCRMproduct>), IList<MicrosoftDynamicsCRMopportunity> opportunitycompetitorsAssociation = default(IList<MicrosoftDynamicsCRMopportunity>), IList<MicrosoftDynamicsCRMteam> competitorTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> competitorMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMsyncerror> competitorSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMduplicaterecord> competitorDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMconnection> competitorConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> competitorPrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMannotation> competitorAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMconnection> competitorConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMcompetitoraddress> competitorAddresses = default(IList<MicrosoftDynamicsCRMcompetitoraddress>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMasyncoperation> competitorAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMopportunityclose> competitorOpportunityActivities = default(IList<MicrosoftDynamicsCRMopportunityclose>), IList<MicrosoftDynamicsCRMduplicaterecord> competitorDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMbulkdeletefailure> competitorBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprocesssession> competitorProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMlead> leadcompetitorsAssociation = default(IList<MicrosoftDynamicsCRMlead>))
         {
             Address2City = address2City;
             this._transactioncurrencyidValue = _transactioncurrencyidValue;
             Address2Shippingmethodcode = address2Shippingmethodcode;
             Reportingyear = reportingyear;
             Address1Telephone2 = address1Telephone2;
+            Address2County = address2County;
             Weaknesses = weaknesses;
+            Processid = processid;
             Yominame = yominame;
             this._modifiedbyValue = _modifiedbyValue;
             EntityimageUrl = entityimageUrl;
+            Stageid = stageid;
             Name = name;
             Address1Postalcode = address1Postalcode;
             Overriddencreatedon = overriddencreatedon;
-            Address1Postofficebox = address1Postofficebox;
             Address2Utcoffset = address2Utcoffset;
             Reportingquarter = reportingquarter;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
@@ -53,7 +55,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Address1Composite = address1Composite;
             Address2Upszone = address2Upszone;
             Exchangerate = exchangerate;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             EntityimageTimestamp = entityimageTimestamp;
             Address2Line3 = address2Line3;
             Threats = threats;
@@ -68,7 +69,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Address1Utcoffset = address1Utcoffset;
             Address1City = address1City;
             this._organizationidValue = _organizationidValue;
-            Address2Addressid = address2Addressid;
             ReportedrevenueBase = reportedrevenueBase;
             Address1Stateorprovince = address1Stateorprovince;
             Stockexchange = stockexchange;
@@ -94,10 +94,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Address2Fax = address2Fax;
             Reportedrevenue = reportedrevenue;
             Utcconversiontimezonecode = utcconversiontimezonecode;
-            Stageid = stageid;
+            Overview = overview;
             Websiteurl = websiteurl;
             Address1Fax = address1Fax;
-            Overview = overview;
+            Address1Postofficebox = address1Postofficebox;
             Importsequencenumber = importsequencenumber;
             Address1Country = address1Country;
             Address1Latitude = address1Latitude;
@@ -107,21 +107,20 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Timezoneruleversionnumber = timezoneruleversionnumber;
             Traversedpath = traversedpath;
             Address2Telephone2 = address2Telephone2;
-            Address2County = address2County;
+            Address2Addressid = address2Addressid;
             Address2Country = address2Country;
-            Address2Line1 = address2Line1;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Referenceinfourl = referenceinfourl;
             Address2Line2 = address2Line2;
             Createdon = createdon;
             Address1Shippingmethodcode = address1Shippingmethodcode;
             Address1Line1 = address1Line1;
-            Processid = processid;
-            LeadcompetitorsAssociation = leadcompetitorsAssociation;
+            Address2Line1 = address2Line1;
+            CompetitorPostRegardings = competitorPostRegardings;
+            CompetitorPostFollows = competitorPostFollows;
             CompetitorsalesliteratureAssociation = competitorsalesliteratureAssociation;
             CompetitorproductAssociation = competitorproductAssociation;
             OpportunitycompetitorsAssociation = opportunitycompetitorsAssociation;
-            CompetitorPostRegardings = competitorPostRegardings;
-            CompetitorPostFollows = competitorPostFollows;
             CompetitorTeams = competitorTeams;
             CompetitorMailboxTrackingFolders = competitorMailboxTrackingFolders;
             CompetitorSyncErrors = competitorSyncErrors;
@@ -143,6 +142,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             CompetitorBulkDeleteFailures = competitorBulkDeleteFailures;
             CompetitorProcessSessions = competitorProcessSessions;
             Createdonbehalfby = createdonbehalfby;
+            LeadcompetitorsAssociation = leadcompetitorsAssociation;
             CustomInit();
         }
 
@@ -178,8 +178,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "address2_county")]
+        public string Address2County { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "weaknesses")]
         public string Weaknesses { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "processid")]
+        public string Processid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -198,6 +208,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "stageid")]
+        public string Stageid { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
@@ -210,11 +225,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_postofficebox")]
-        public string Address1Postofficebox { get; set; }
 
         /// <summary>
         /// </summary>
@@ -250,11 +260,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "exchangerate")]
         public decimal? Exchangerate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -325,11 +330,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
         public string _organizationidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_addressid")]
-        public string Address2Addressid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -459,8 +459,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "stageid")]
-        public string Stageid { get; set; }
+        [JsonProperty(PropertyName = "overview")]
+        public string Overview { get; set; }
 
         /// <summary>
         /// </summary>
@@ -474,8 +474,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "overview")]
-        public string Overview { get; set; }
+        [JsonProperty(PropertyName = "address1_postofficebox")]
+        public string Address1Postofficebox { get; set; }
 
         /// <summary>
         /// </summary>
@@ -524,8 +524,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address2_county")]
-        public string Address2County { get; set; }
+        [JsonProperty(PropertyName = "address2_addressid")]
+        public string Address2Addressid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -534,8 +534,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address2_line1")]
-        public string Address2Line1 { get; set; }
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -564,13 +564,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "processid")]
-        public string Processid { get; set; }
+        [JsonProperty(PropertyName = "address2_line1")]
+        public string Address2Line1 { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "leadcompetitors_association")]
-        public IList<MicrosoftDynamicsCRMlead> LeadcompetitorsAssociation { get; set; }
+        [JsonProperty(PropertyName = "competitor_PostRegardings")]
+        public IList<MicrosoftDynamicsCRMpostregarding> CompetitorPostRegardings { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "competitor_PostFollows")]
+        public IList<MicrosoftDynamicsCRMpostfollow> CompetitorPostFollows { get; set; }
 
         /// <summary>
         /// </summary>
@@ -586,16 +591,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "opportunitycompetitors_association")]
         public IList<MicrosoftDynamicsCRMopportunity> OpportunitycompetitorsAssociation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "competitor_PostRegardings")]
-        public IList<MicrosoftDynamicsCRMpostregarding> CompetitorPostRegardings { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "competitor_PostFollows")]
-        public IList<MicrosoftDynamicsCRMpostfollow> CompetitorPostFollows { get; set; }
 
         /// <summary>
         /// </summary>
@@ -701,6 +696,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "createdonbehalfby")]
         public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "leadcompetitors_association")]
+        public IList<MicrosoftDynamicsCRMlead> LeadcompetitorsAssociation { get; set; }
 
     }
 }

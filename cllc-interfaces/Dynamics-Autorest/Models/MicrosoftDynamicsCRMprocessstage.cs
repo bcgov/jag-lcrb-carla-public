@@ -29,18 +29,38 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMprocessstage
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMprocessstage(string versionnumber = default(string), string processstageid = default(string), string stagename = default(string), string _processidValue = default(string), string owningbusinessunit = default(string), int? stagecategory = default(int?), string primaryentitytypecode = default(string), string _owneridValue = default(string), string clientdata = default(string), IList<MicrosoftDynamicsCRMknowledgearticle> processstageKnowledgearticle = default(IList<MicrosoftDynamicsCRMknowledgearticle>), IList<MicrosoftDynamicsCRMadoxioApplication> processstageAdoxioApplication = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioComplaint> processstageAdoxioComplaint = default(IList<MicrosoftDynamicsCRMadoxioComplaint>), IList<MicrosoftDynamicsCRMadoxioApplicationbpfv3> lkAdoxioApplicationbpfv3Activestageid = default(IList<MicrosoftDynamicsCRMadoxioApplicationbpfv3>), IList<MicrosoftDynamicsCRMadoxioApplicationlicenseechangesv10> lkAdoxioApplicationlicenseechangesv10Activestageid = default(IList<MicrosoftDynamicsCRMadoxioApplicationlicenseechangesv10>), IList<MicrosoftDynamicsCRMadoxioApplicationrelocationv1> lkAdoxioApplicationrelocationv1Activestageid = default(IList<MicrosoftDynamicsCRMadoxioApplicationrelocationv1>), IList<MicrosoftDynamicsCRMadoxioApplicationstructurechangev1> lkAdoxioApplicationstructurechangev1Activestageid = default(IList<MicrosoftDynamicsCRMadoxioApplicationstructurechangev1>), IList<MicrosoftDynamicsCRMadoxioApplicationtransferownershipv1> lkAdoxioApplicationtransferownershipv1Activestageid = default(IList<MicrosoftDynamicsCRMadoxioApplicationtransferownershipv1>), IList<MicrosoftDynamicsCRMadoxioApplicationliquorbpfv2> lkAdoxioApplicationliquorbpfv2Activestageid = default(IList<MicrosoftDynamicsCRMadoxioApplicationliquorbpfv2>), IList<MicrosoftDynamicsCRMadoxioEnforcementaction> processstageAdoxioEnforcementaction = default(IList<MicrosoftDynamicsCRMadoxioEnforcementaction>), IList<MicrosoftDynamicsCRMadoxioEnforcementactionbpf> lkAdoxioEnforcementactionbpfActivestageid = default(IList<MicrosoftDynamicsCRMadoxioEnforcementactionbpf>), IList<MicrosoftDynamicsCRMadoxioApplicationcrsbpfv4> lkAdoxioApplicationcrsbpfv4Activestageid = default(IList<MicrosoftDynamicsCRMadoxioApplicationcrsbpfv4>), IList<MicrosoftDynamicsCRMadoxioLqrlicencetransferbpf> lkAdoxioLqrlicencetransferbpfActivestageid = default(IList<MicrosoftDynamicsCRMadoxioLqrlicencetransferbpf>), IList<MicrosoftDynamicsCRMadoxioApplicenseechangebpfv2> lkAdoxioApplicenseechangebpfv2Activestageid = default(IList<MicrosoftDynamicsCRMadoxioApplicenseechangebpfv2>), IList<MicrosoftDynamicsCRMsalesorder> processstageSalesorders = default(IList<MicrosoftDynamicsCRMsalesorder>), IList<MicrosoftDynamicsCRMcontact> processstageContact = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMlist> processstageLists = default(IList<MicrosoftDynamicsCRMlist>), IList<MicrosoftDynamicsCRMfax> processstageFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMteam> processstageTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMsyncerror> processStageSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMletter> processstageLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMinvoice> processstageInvoices = default(IList<MicrosoftDynamicsCRMinvoice>), IList<MicrosoftDynamicsCRMcampaignresponse> processstageCampaignresponses = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMappointment> processstageAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMcompetitor> processstageCompetitors = default(IList<MicrosoftDynamicsCRMcompetitor>), IList<MicrosoftDynamicsCRMproductpricelevel> processstageProductpricelevels = default(IList<MicrosoftDynamicsCRMproductpricelevel>), IList<MicrosoftDynamicsCRMsalesliterature> processstageSalesliteratures = default(IList<MicrosoftDynamicsCRMsalesliterature>), IList<MicrosoftDynamicsCRMopportunitysalesprocess> processstageOpportunitysalesprocess = default(IList<MicrosoftDynamicsCRMopportunitysalesprocess>), IList<MicrosoftDynamicsCRMexpiredprocess> processstageExpiredprocess = default(IList<MicrosoftDynamicsCRMexpiredprocess>), IList<MicrosoftDynamicsCRMquote> processstageQuotes = default(IList<MicrosoftDynamicsCRMquote>), IList<MicrosoftDynamicsCRMtask> processstageTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMnewprocess> processstageNewprocess = default(IList<MicrosoftDynamicsCRMnewprocess>), IList<MicrosoftDynamicsCRMincident> processstageIncident = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMopportunity> processstageOpportunity = default(IList<MicrosoftDynamicsCRMopportunity>), IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess> processstageLeadtoopportunitysalesprocess = default(IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess>), IList<MicrosoftDynamicsCRMphonecall> processstagePhonecalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMphonetocaseprocess> processstagePhonetocaseprocess = default(IList<MicrosoftDynamicsCRMphonetocaseprocess>), IList<MicrosoftDynamicsCRMproduct> processstageProducts = default(IList<MicrosoftDynamicsCRMproduct>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> processstageRecurringappointmentmasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMsystemuser> processstageSystemusers = default(IList<MicrosoftDynamicsCRMsystemuser>), MicrosoftDynamicsCRMworkflow processid = default(MicrosoftDynamicsCRMworkflow), IList<MicrosoftDynamicsCRMcampaign> processstageCampaigns = default(IList<MicrosoftDynamicsCRMcampaign>), IList<MicrosoftDynamicsCRMlead> processstageLead = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMcampaignactivity> processstageCampaignactivities = default(IList<MicrosoftDynamicsCRMcampaignactivity>), IList<MicrosoftDynamicsCRMemail> processstageEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMtranslationprocess> processstageTranslationprocess = default(IList<MicrosoftDynamicsCRMtranslationprocess>), IList<MicrosoftDynamicsCRMaccount> processstageAccount = default(IList<MicrosoftDynamicsCRMaccount>))
+        public MicrosoftDynamicsCRMprocessstage(string connector = default(string), string clientdata = default(string), string primaryentitytypecode = default(string), int? operationtype = default(int?), string owningbusinessunit = default(string), string operationid = default(string), bool? istrigger = default(bool?), string _processidValue = default(string), string stagename = default(string), string _owneridValue = default(string), string versionnumber = default(string), int? stagecategory = default(int?), int? operationkind = default(int?), string processstageid = default(string), IList<MicrosoftDynamicsCRMknowledgearticle> processstageKnowledgearticle = default(IList<MicrosoftDynamicsCRMknowledgearticle>), IList<MicrosoftDynamicsCRMcontact> processstageContact = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMfax> processstageFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMteam> processstageTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMsyncerror> processStageSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMletter> processstageLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMappointment> processstageAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMexpiredprocess> processstageExpiredprocess = default(IList<MicrosoftDynamicsCRMexpiredprocess>), IList<MicrosoftDynamicsCRMtask> processstageTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMphonecall> processstagePhonecalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> processstageRecurringappointmentmasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMsystemuser> processstageSystemusers = default(IList<MicrosoftDynamicsCRMsystemuser>), MicrosoftDynamicsCRMworkflow processid = default(MicrosoftDynamicsCRMworkflow), IList<MicrosoftDynamicsCRMemail> processstageEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMtranslationprocess> processstageTranslationprocess = default(IList<MicrosoftDynamicsCRMtranslationprocess>), IList<MicrosoftDynamicsCRMaccount> processstageAccount = default(IList<MicrosoftDynamicsCRMaccount>), IList<MicrosoftDynamicsCRMadoxioApplication> processstageAdoxioApplication = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioComplaint> processstageAdoxioComplaint = default(IList<MicrosoftDynamicsCRMadoxioComplaint>), IList<MicrosoftDynamicsCRMadoxioApplicationbpfv3> lkAdoxioApplicationbpfv3Activestageid = default(IList<MicrosoftDynamicsCRMadoxioApplicationbpfv3>), IList<MicrosoftDynamicsCRMadoxioApplicationlicenseechangesv10> lkAdoxioApplicationlicenseechangesv10Activestageid = default(IList<MicrosoftDynamicsCRMadoxioApplicationlicenseechangesv10>), IList<MicrosoftDynamicsCRMadoxioApplicationrelocationv1> lkAdoxioApplicationrelocationv1Activestageid = default(IList<MicrosoftDynamicsCRMadoxioApplicationrelocationv1>), IList<MicrosoftDynamicsCRMadoxioApplicationstructurechangev1> lkAdoxioApplicationstructurechangev1Activestageid = default(IList<MicrosoftDynamicsCRMadoxioApplicationstructurechangev1>), IList<MicrosoftDynamicsCRMadoxioApplicationtransferownershipv1> lkAdoxioApplicationtransferownershipv1Activestageid = default(IList<MicrosoftDynamicsCRMadoxioApplicationtransferownershipv1>), IList<MicrosoftDynamicsCRMadoxioApplicationliquorbpfv2> lkAdoxioApplicationliquorbpfv2Activestageid = default(IList<MicrosoftDynamicsCRMadoxioApplicationliquorbpfv2>), IList<MicrosoftDynamicsCRMadoxioEnforcementaction> processstageAdoxioEnforcementaction = default(IList<MicrosoftDynamicsCRMadoxioEnforcementaction>), IList<MicrosoftDynamicsCRMadoxioEnforcementactionbpf> lkAdoxioEnforcementactionbpfActivestageid = default(IList<MicrosoftDynamicsCRMadoxioEnforcementactionbpf>), IList<MicrosoftDynamicsCRMadoxioApplicationcrsbpfv4> lkAdoxioApplicationcrsbpfv4Activestageid = default(IList<MicrosoftDynamicsCRMadoxioApplicationcrsbpfv4>), IList<MicrosoftDynamicsCRMadoxioLqrlicencetransferbpf> lkAdoxioLqrlicencetransferbpfActivestageid = default(IList<MicrosoftDynamicsCRMadoxioLqrlicencetransferbpf>), IList<MicrosoftDynamicsCRMadoxioApplicenseechangebpfv2> lkAdoxioApplicenseechangebpfv2Activestageid = default(IList<MicrosoftDynamicsCRMadoxioApplicenseechangebpfv2>), IList<MicrosoftDynamicsCRMadoxioContravention> processstageAdoxioContravention = default(IList<MicrosoftDynamicsCRMadoxioContravention>), IList<MicrosoftDynamicsCRMadoxioExternalcontact> processstageAdoxioExternalcontact = default(IList<MicrosoftDynamicsCRMadoxioExternalcontact>), IList<MicrosoftDynamicsCRMlist> processstageLists = default(IList<MicrosoftDynamicsCRMlist>), IList<MicrosoftDynamicsCRMcampaignresponse> processstageCampaignresponses = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMcampaign> processstageCampaigns = default(IList<MicrosoftDynamicsCRMcampaign>), IList<MicrosoftDynamicsCRMcampaignactivity> processstageCampaignactivities = default(IList<MicrosoftDynamicsCRMcampaignactivity>), IList<MicrosoftDynamicsCRMproductpricelevel> processstageProductpricelevels = default(IList<MicrosoftDynamicsCRMproductpricelevel>), IList<MicrosoftDynamicsCRMnewprocess> processstageNewprocess = default(IList<MicrosoftDynamicsCRMnewprocess>), IList<MicrosoftDynamicsCRMproduct> processstageProducts = default(IList<MicrosoftDynamicsCRMproduct>), IList<MicrosoftDynamicsCRMincident> processstageIncident = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMphonetocaseprocess> processstagePhonetocaseprocess = default(IList<MicrosoftDynamicsCRMphonetocaseprocess>), IList<MicrosoftDynamicsCRMsalesorder> processstageSalesorders = default(IList<MicrosoftDynamicsCRMsalesorder>), IList<MicrosoftDynamicsCRMinvoice> processstageInvoices = default(IList<MicrosoftDynamicsCRMinvoice>), IList<MicrosoftDynamicsCRMcompetitor> processstageCompetitors = default(IList<MicrosoftDynamicsCRMcompetitor>), IList<MicrosoftDynamicsCRMsalesliterature> processstageSalesliteratures = default(IList<MicrosoftDynamicsCRMsalesliterature>), IList<MicrosoftDynamicsCRMopportunitysalesprocess> processstageOpportunitysalesprocess = default(IList<MicrosoftDynamicsCRMopportunitysalesprocess>), IList<MicrosoftDynamicsCRMquote> processstageQuotes = default(IList<MicrosoftDynamicsCRMquote>), IList<MicrosoftDynamicsCRMopportunity> processstageOpportunity = default(IList<MicrosoftDynamicsCRMopportunity>), IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess> processstageLeadtoopportunitysalesprocess = default(IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess>), IList<MicrosoftDynamicsCRMlead> processstageLead = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMprocessstageparameter> processstageProcessstageparameter = default(IList<MicrosoftDynamicsCRMprocessstageparameter>), IList<MicrosoftDynamicsCRMadoxioApplicationbpfDormancy> lkAdoxioApplicationbpfDormancyActivestageid = default(IList<MicrosoftDynamicsCRMadoxioApplicationbpfDormancy>), IList<MicrosoftDynamicsCRMadoxioLicences> processstageAdoxioLicences = default(IList<MicrosoftDynamicsCRMadoxioLicences>))
         {
-            Versionnumber = versionnumber;
-            Processstageid = processstageid;
-            Stagename = stagename;
-            this._processidValue = _processidValue;
-            Owningbusinessunit = owningbusinessunit;
-            Stagecategory = stagecategory;
-            Primaryentitytypecode = primaryentitytypecode;
-            this._owneridValue = _owneridValue;
+            Connector = connector;
             Clientdata = clientdata;
+            Primaryentitytypecode = primaryentitytypecode;
+            Operationtype = operationtype;
+            Owningbusinessunit = owningbusinessunit;
+            Operationid = operationid;
+            Istrigger = istrigger;
+            this._processidValue = _processidValue;
+            Stagename = stagename;
+            this._owneridValue = _owneridValue;
+            Versionnumber = versionnumber;
+            Stagecategory = stagecategory;
+            Operationkind = operationkind;
+            Processstageid = processstageid;
             ProcessstageKnowledgearticle = processstageKnowledgearticle;
+            ProcessstageContact = processstageContact;
+            ProcessstageFaxes = processstageFaxes;
+            ProcessstageTeams = processstageTeams;
+            ProcessStageSyncErrors = processStageSyncErrors;
+            ProcessstageLetters = processstageLetters;
+            ProcessstageAppointments = processstageAppointments;
+            ProcessstageExpiredprocess = processstageExpiredprocess;
+            ProcessstageTasks = processstageTasks;
+            ProcessstagePhonecalls = processstagePhonecalls;
+            ProcessstageRecurringappointmentmasters = processstageRecurringappointmentmasters;
+            ProcessstageSystemusers = processstageSystemusers;
+            Processid = processid;
+            ProcessstageEmails = processstageEmails;
+            ProcessstageTranslationprocess = processstageTranslationprocess;
+            ProcessstageAccount = processstageAccount;
             ProcessstageAdoxioApplication = processstageAdoxioApplication;
             ProcessstageAdoxioComplaint = processstageAdoxioComplaint;
             LkAdoxioApplicationbpfv3Activestageid = lkAdoxioApplicationbpfv3Activestageid;
@@ -54,39 +74,29 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             LkAdoxioApplicationcrsbpfv4Activestageid = lkAdoxioApplicationcrsbpfv4Activestageid;
             LkAdoxioLqrlicencetransferbpfActivestageid = lkAdoxioLqrlicencetransferbpfActivestageid;
             LkAdoxioApplicenseechangebpfv2Activestageid = lkAdoxioApplicenseechangebpfv2Activestageid;
-            ProcessstageSalesorders = processstageSalesorders;
-            ProcessstageContact = processstageContact;
+            ProcessstageAdoxioContravention = processstageAdoxioContravention;
+            ProcessstageAdoxioExternalcontact = processstageAdoxioExternalcontact;
             ProcessstageLists = processstageLists;
-            ProcessstageFaxes = processstageFaxes;
-            ProcessstageTeams = processstageTeams;
-            ProcessStageSyncErrors = processStageSyncErrors;
-            ProcessstageLetters = processstageLetters;
-            ProcessstageInvoices = processstageInvoices;
             ProcessstageCampaignresponses = processstageCampaignresponses;
-            ProcessstageAppointments = processstageAppointments;
-            ProcessstageCompetitors = processstageCompetitors;
+            ProcessstageCampaigns = processstageCampaigns;
+            ProcessstageCampaignactivities = processstageCampaignactivities;
             ProcessstageProductpricelevels = processstageProductpricelevels;
+            ProcessstageNewprocess = processstageNewprocess;
+            ProcessstageProducts = processstageProducts;
+            ProcessstageIncident = processstageIncident;
+            ProcessstagePhonetocaseprocess = processstagePhonetocaseprocess;
+            ProcessstageSalesorders = processstageSalesorders;
+            ProcessstageInvoices = processstageInvoices;
+            ProcessstageCompetitors = processstageCompetitors;
             ProcessstageSalesliteratures = processstageSalesliteratures;
             ProcessstageOpportunitysalesprocess = processstageOpportunitysalesprocess;
-            ProcessstageExpiredprocess = processstageExpiredprocess;
             ProcessstageQuotes = processstageQuotes;
-            ProcessstageTasks = processstageTasks;
-            ProcessstageNewprocess = processstageNewprocess;
-            ProcessstageIncident = processstageIncident;
             ProcessstageOpportunity = processstageOpportunity;
             ProcessstageLeadtoopportunitysalesprocess = processstageLeadtoopportunitysalesprocess;
-            ProcessstagePhonecalls = processstagePhonecalls;
-            ProcessstagePhonetocaseprocess = processstagePhonetocaseprocess;
-            ProcessstageProducts = processstageProducts;
-            ProcessstageRecurringappointmentmasters = processstageRecurringappointmentmasters;
-            ProcessstageSystemusers = processstageSystemusers;
-            Processid = processid;
-            ProcessstageCampaigns = processstageCampaigns;
             ProcessstageLead = processstageLead;
-            ProcessstageCampaignactivities = processstageCampaignactivities;
-            ProcessstageEmails = processstageEmails;
-            ProcessstageTranslationprocess = processstageTranslationprocess;
-            ProcessstageAccount = processstageAccount;
+            ProcessstageProcessstageparameter = processstageProcessstageparameter;
+            LkAdoxioApplicationbpfDormancyActivestageid = lkAdoxioApplicationbpfDormancyActivestageid;
+            ProcessstageAdoxioLicences = processstageAdoxioLicences;
             CustomInit();
         }
 
@@ -97,43 +107,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "processstageid")]
-        public string Processstageid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "stagename")]
-        public string Stagename { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_processid_value")]
-        public string _processidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owningbusinessunit")]
-        public string Owningbusinessunit { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "stagecategory")]
-        public int? Stagecategory { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "primaryentitytypecode")]
-        public string Primaryentitytypecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
+        [JsonProperty(PropertyName = "connector")]
+        public string Connector { get; set; }
 
         /// <summary>
         /// </summary>
@@ -142,8 +117,143 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "primaryentitytypecode")]
+        public string Primaryentitytypecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "operationtype")]
+        public int? Operationtype { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owningbusinessunit")]
+        public string Owningbusinessunit { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "operationid")]
+        public string Operationid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "istrigger")]
+        public bool? Istrigger { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_processid_value")]
+        public string _processidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "stagename")]
+        public string Stagename { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "stagecategory")]
+        public int? Stagecategory { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "operationkind")]
+        public int? Operationkind { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "processstageid")]
+        public string Processstageid { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "processstage_knowledgearticle")]
         public IList<MicrosoftDynamicsCRMknowledgearticle> ProcessstageKnowledgearticle { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "processstage_contact")]
+        public IList<MicrosoftDynamicsCRMcontact> ProcessstageContact { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "processstage_faxes")]
+        public IList<MicrosoftDynamicsCRMfax> ProcessstageFaxes { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "processstage_teams")]
+        public IList<MicrosoftDynamicsCRMteam> ProcessstageTeams { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ProcessStage_SyncErrors")]
+        public IList<MicrosoftDynamicsCRMsyncerror> ProcessStageSyncErrors { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "processstage_letters")]
+        public IList<MicrosoftDynamicsCRMletter> ProcessstageLetters { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "processstage_appointments")]
+        public IList<MicrosoftDynamicsCRMappointment> ProcessstageAppointments { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "processstage_expiredprocess")]
+        public IList<MicrosoftDynamicsCRMexpiredprocess> ProcessstageExpiredprocess { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "processstage_tasks")]
+        public IList<MicrosoftDynamicsCRMtask> ProcessstageTasks { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "processstage_phonecalls")]
+        public IList<MicrosoftDynamicsCRMphonecall> ProcessstagePhonecalls { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "processstage_recurringappointmentmasters")]
+        public IList<MicrosoftDynamicsCRMrecurringappointmentmaster> ProcessstageRecurringappointmentmasters { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "processstage_systemusers")]
+        public IList<MicrosoftDynamicsCRMsystemuser> ProcessstageSystemusers { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "processid")]
+        public MicrosoftDynamicsCRMworkflow Processid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "processstage_emails")]
+        public IList<MicrosoftDynamicsCRMemail> ProcessstageEmails { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "processstage_translationprocess")]
+        public IList<MicrosoftDynamicsCRMtranslationprocess> ProcessstageTranslationprocess { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "processstage_account")]
+        public IList<MicrosoftDynamicsCRMaccount> ProcessstageAccount { get; set; }
 
         /// <summary>
         /// </summary>
@@ -212,13 +322,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "processstage_salesorders")]
-        public IList<MicrosoftDynamicsCRMsalesorder> ProcessstageSalesorders { get; set; }
+        [JsonProperty(PropertyName = "processstage_adoxio_contravention")]
+        public IList<MicrosoftDynamicsCRMadoxioContravention> ProcessstageAdoxioContravention { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "processstage_contact")]
-        public IList<MicrosoftDynamicsCRMcontact> ProcessstageContact { get; set; }
+        [JsonProperty(PropertyName = "processstage_adoxio_externalcontact")]
+        public IList<MicrosoftDynamicsCRMadoxioExternalcontact> ProcessstageAdoxioExternalcontact { get; set; }
 
         /// <summary>
         /// </summary>
@@ -227,23 +337,48 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "processstage_faxes")]
-        public IList<MicrosoftDynamicsCRMfax> ProcessstageFaxes { get; set; }
+        [JsonProperty(PropertyName = "processstage_campaignresponses")]
+        public IList<MicrosoftDynamicsCRMcampaignresponse> ProcessstageCampaignresponses { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "processstage_teams")]
-        public IList<MicrosoftDynamicsCRMteam> ProcessstageTeams { get; set; }
+        [JsonProperty(PropertyName = "processstage_campaigns")]
+        public IList<MicrosoftDynamicsCRMcampaign> ProcessstageCampaigns { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ProcessStage_SyncErrors")]
-        public IList<MicrosoftDynamicsCRMsyncerror> ProcessStageSyncErrors { get; set; }
+        [JsonProperty(PropertyName = "processstage_campaignactivities")]
+        public IList<MicrosoftDynamicsCRMcampaignactivity> ProcessstageCampaignactivities { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "processstage_letters")]
-        public IList<MicrosoftDynamicsCRMletter> ProcessstageLetters { get; set; }
+        [JsonProperty(PropertyName = "processstage_productpricelevels")]
+        public IList<MicrosoftDynamicsCRMproductpricelevel> ProcessstageProductpricelevels { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "processstage_newprocess")]
+        public IList<MicrosoftDynamicsCRMnewprocess> ProcessstageNewprocess { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "processstage_products")]
+        public IList<MicrosoftDynamicsCRMproduct> ProcessstageProducts { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "processstage_incident")]
+        public IList<MicrosoftDynamicsCRMincident> ProcessstageIncident { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "processstage_phonetocaseprocess")]
+        public IList<MicrosoftDynamicsCRMphonetocaseprocess> ProcessstagePhonetocaseprocess { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "processstage_salesorders")]
+        public IList<MicrosoftDynamicsCRMsalesorder> ProcessstageSalesorders { get; set; }
 
         /// <summary>
         /// </summary>
@@ -252,23 +387,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "processstage_campaignresponses")]
-        public IList<MicrosoftDynamicsCRMcampaignresponse> ProcessstageCampaignresponses { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "processstage_appointments")]
-        public IList<MicrosoftDynamicsCRMappointment> ProcessstageAppointments { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "processstage_competitors")]
         public IList<MicrosoftDynamicsCRMcompetitor> ProcessstageCompetitors { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "processstage_productpricelevels")]
-        public IList<MicrosoftDynamicsCRMproductpricelevel> ProcessstageProductpricelevels { get; set; }
 
         /// <summary>
         /// </summary>
@@ -282,28 +402,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "processstage_expiredprocess")]
-        public IList<MicrosoftDynamicsCRMexpiredprocess> ProcessstageExpiredprocess { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "processstage_quotes")]
         public IList<MicrosoftDynamicsCRMquote> ProcessstageQuotes { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "processstage_tasks")]
-        public IList<MicrosoftDynamicsCRMtask> ProcessstageTasks { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "processstage_newprocess")]
-        public IList<MicrosoftDynamicsCRMnewprocess> ProcessstageNewprocess { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "processstage_incident")]
-        public IList<MicrosoftDynamicsCRMincident> ProcessstageIncident { get; set; }
 
         /// <summary>
         /// </summary>
@@ -317,63 +417,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "processstage_phonecalls")]
-        public IList<MicrosoftDynamicsCRMphonecall> ProcessstagePhonecalls { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "processstage_phonetocaseprocess")]
-        public IList<MicrosoftDynamicsCRMphonetocaseprocess> ProcessstagePhonetocaseprocess { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "processstage_products")]
-        public IList<MicrosoftDynamicsCRMproduct> ProcessstageProducts { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "processstage_recurringappointmentmasters")]
-        public IList<MicrosoftDynamicsCRMrecurringappointmentmaster> ProcessstageRecurringappointmentmasters { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "processstage_systemusers")]
-        public IList<MicrosoftDynamicsCRMsystemuser> ProcessstageSystemusers { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "processid")]
-        public MicrosoftDynamicsCRMworkflow Processid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "processstage_campaigns")]
-        public IList<MicrosoftDynamicsCRMcampaign> ProcessstageCampaigns { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "processstage_lead")]
         public IList<MicrosoftDynamicsCRMlead> ProcessstageLead { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "processstage_campaignactivities")]
-        public IList<MicrosoftDynamicsCRMcampaignactivity> ProcessstageCampaignactivities { get; set; }
+        [JsonProperty(PropertyName = "processstage_processstageparameter")]
+        public IList<MicrosoftDynamicsCRMprocessstageparameter> ProcessstageProcessstageparameter { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "processstage_emails")]
-        public IList<MicrosoftDynamicsCRMemail> ProcessstageEmails { get; set; }
+        [JsonProperty(PropertyName = "lk_adoxio_applicationbpf_dormancy_activestageid")]
+        public IList<MicrosoftDynamicsCRMadoxioApplicationbpfDormancy> LkAdoxioApplicationbpfDormancyActivestageid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "processstage_translationprocess")]
-        public IList<MicrosoftDynamicsCRMtranslationprocess> ProcessstageTranslationprocess { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "processstage_account")]
-        public IList<MicrosoftDynamicsCRMaccount> ProcessstageAccount { get; set; }
+        [JsonProperty(PropertyName = "processstage_adoxio_licences")]
+        public IList<MicrosoftDynamicsCRMadoxioLicences> ProcessstageAdoxioLicences { get; set; }
 
     }
 }

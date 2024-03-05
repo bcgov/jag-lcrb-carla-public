@@ -27,21 +27,22 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMappmodulecomponent class.
         /// </summary>
-        public MicrosoftDynamicsCRMappmodulecomponent(System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string appmodulecomponentidunique = default(string), int? rootcomponentbehavior = default(int?), string introducedversion = default(string), string rootappmodulecomponentid = default(string), string _modifiedonbehalfbyValue = default(string), int? timezoneruleversionnumber = default(int?), bool? isdefault = default(bool?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string versionnumber = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), decimal? exchangerate = default(decimal?), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string objectid = default(string), int? componenttype = default(int?), string _createdbyValue = default(string), string appmodulecomponentid = default(string), string _appmoduleiduniqueValue = default(string), bool? ismetadata = default(bool?), MicrosoftDynamicsCRMsystemuser appmodulecomponentModifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser appmodulecomponentCreatedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMappmodule appmoduleid = default(MicrosoftDynamicsCRMappmodule))
+        public MicrosoftDynamicsCRMappmodulecomponent(System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), bool? ismetadata = default(bool?), string appmodulecomponentidunique = default(string), int? rootcomponentbehavior = default(int?), string introducedversion = default(string), string rootappmodulecomponentid = default(string), string _modifiedonbehalfbyValue = default(string), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string versionnumber = default(string), decimal? exchangerate = default(decimal?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), bool? isdefault = default(bool?), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string objectid = default(string), int? componenttype = default(int?), string _createdbyValue = default(string), string appmodulecomponentid = default(string), string _appmoduleiduniqueValue = default(string), MicrosoftDynamicsCRMsystemuser appmodulecomponentModifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser appmodulecomponentCreatedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMappmodule appmoduleid = default(MicrosoftDynamicsCRMappmodule))
         {
             Overwritetime = overwritetime;
+            Ismetadata = ismetadata;
             Appmodulecomponentidunique = appmodulecomponentidunique;
             Rootcomponentbehavior = rootcomponentbehavior;
             Introducedversion = introducedversion;
             Rootappmodulecomponentid = rootappmodulecomponentid;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Timezoneruleversionnumber = timezoneruleversionnumber;
-            Isdefault = isdefault;
             Createdon = createdon;
             Versionnumber = versionnumber;
+            Exchangerate = exchangerate;
             Modifiedon = modifiedon;
             Utcconversiontimezonecode = utcconversiontimezonecode;
-            Exchangerate = exchangerate;
+            Isdefault = isdefault;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             this._modifiedbyValue = _modifiedbyValue;
             Objectid = objectid;
@@ -49,7 +50,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             this._createdbyValue = _createdbyValue;
             Appmodulecomponentid = appmodulecomponentid;
             this._appmoduleiduniqueValue = _appmoduleiduniqueValue;
-            Ismetadata = ismetadata;
             AppmodulecomponentModifiedby = appmodulecomponentModifiedby;
             Modifiedonbehalfby = modifiedonbehalfby;
             Createdonbehalfby = createdonbehalfby;
@@ -67,6 +67,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "overwritetime")]
         public System.DateTimeOffset? Overwritetime { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ismetadata")]
+        public bool? Ismetadata { get; set; }
 
         /// <summary>
         /// </summary>
@@ -100,11 +105,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "isdefault")]
-        public bool? Isdefault { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
@@ -112,6 +112,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
         public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "exchangerate")]
+        public decimal? Exchangerate { get; set; }
 
         /// <summary>
         /// </summary>
@@ -125,8 +130,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "exchangerate")]
-        public decimal? Exchangerate { get; set; }
+        [JsonProperty(PropertyName = "isdefault")]
+        public bool? Isdefault { get; set; }
 
         /// <summary>
         /// </summary>
@@ -162,11 +167,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_appmoduleidunique_value")]
         public string _appmoduleiduniqueValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ismetadata")]
-        public bool? Ismetadata { get; set; }
 
         /// <summary>
         /// </summary>
