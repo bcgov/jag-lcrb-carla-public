@@ -25,10 +25,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// Initializes a new instance of the MicrosoftDynamicsCRMaudit class.
         /// </summary>
-        public MicrosoftDynamicsCRMaudit(int? operation = default(int?), string _regardingobjectidValue = default(string), int? action = default(int?), string useradditionalinfo = default(string), string attributemask = default(string), string _useridValue = default(string), string _callinguseridValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _objectidValue = default(string), string transactionid = default(string), string auditid = default(string), MicrosoftDynamicsCRMsystemuser callinguserid = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser userid = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMaudit(string objecttypecode = default(string), int? operation = default(int?), string _regardingobjectidValue = default(string), string auditid = default(string), int? action = default(int?), string useradditionalinfo = default(string), string attributemask = default(string), string _useridValue = default(string), string _callinguseridValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _objectidValue = default(string), string transactionid = default(string), MicrosoftDynamicsCRMsystemuser callinguserid = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser userid = default(MicrosoftDynamicsCRMsystemuser))
         {
+            Objecttypecode = objecttypecode;
             Operation = operation;
             this._regardingobjectidValue = _regardingobjectidValue;
+            Auditid = auditid;
             Action = action;
             Useradditionalinfo = useradditionalinfo;
             Attributemask = attributemask;
@@ -37,7 +39,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Createdon = createdon;
             this._objectidValue = _objectidValue;
             Transactionid = transactionid;
-            Auditid = auditid;
             Callinguserid = callinguserid;
             Userid = userid;
             CustomInit();
@@ -50,6 +51,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "objecttypecode")]
+        public string Objecttypecode { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "operation")]
         public int? Operation { get; set; }
 
@@ -57,6 +63,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_regardingobjectid_value")]
         public string _regardingobjectidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "auditid")]
+        public string Auditid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -97,11 +108,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "transactionid")]
         public string Transactionid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "auditid")]
-        public string Auditid { get; set; }
 
         /// <summary>
         /// </summary>

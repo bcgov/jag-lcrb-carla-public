@@ -29,24 +29,27 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMbulkoperationlog class.
         /// </summary>
-        public MicrosoftDynamicsCRMbulkoperationlog(string additionalinfo = default(string), string _owningteamValue = default(string), string owningbusinessunit = default(string), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string bulkoperationlogid = default(string), int? errornumber = default(int?), string owninguser = default(string), string _createdobjectidValue = default(string), string _regardingobjectidValue = default(string), string _bulkoperationidValue = default(string), int? importsequencenumber = default(int?), string versionnumber = default(string), string _owneridValue = default(string), string name = default(string), int? timezoneruleversionnumber = default(int?), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMsyncerror> bulkoperationlogSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMteam> bulkoperationlogTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> bulkoperationlogMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> bulkoperationlogPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMactivitypointer createdobjectidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMcontact createdobjectidContact = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMbulkdeletefailure> bulkOperationLogBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMbulkoperation bulkoperationid = default(MicrosoftDynamicsCRMbulkoperation), MicrosoftDynamicsCRMaccount createdobjectidAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMaccount regardingobjectidAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMactivitypointer bulkoperationidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMlead createdobjectidLead = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMopportunity createdobjectidOpportunity = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMcontact regardingobjectidContact = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMasyncoperation> bulkOperationLogAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMlead regardingobjectidLead = default(MicrosoftDynamicsCRMlead))
+        public MicrosoftDynamicsCRMbulkoperationlog(string owningbusinessunit = default(string), string _owneridValue = default(string), string _owningteamValue = default(string), string name = default(string), string _campaignactivityidValue = default(string), int? importsequencenumber = default(int?), int? utcconversiontimezonecode = default(int?), string additionalinfo = default(string), string errornumberformatted = default(string), string _regardingobjectidValue = default(string), int? errornumber = default(int?), int? timezoneruleversionnumber = default(int?), string versionnumber = default(string), string _createdobjectidValue = default(string), string _bulkoperationidValue = default(string), string bulkoperationlogid = default(string), string errordescriptionformatted = default(string), string owninguser = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMsyncerror> bulkoperationlogSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMteam> bulkoperationlogTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> bulkoperationlogMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> bulkoperationlogPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMactivitypointer createdobjectidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMcontact createdobjectidContact = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMbulkdeletefailure> bulkOperationLogBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMaccount createdobjectidAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMactivitypointer bulkoperationidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMlead createdobjectidLead = default(MicrosoftDynamicsCRMlead), IList<MicrosoftDynamicsCRMasyncoperation> bulkOperationLogAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMopportunity createdobjectidOpportunity = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMaccount regardingobjectidAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMbulkoperation bulkoperationid = default(MicrosoftDynamicsCRMbulkoperation), MicrosoftDynamicsCRMcontact regardingobjectidContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMlead regardingobjectidLead = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMcampaignactivity campaignActivityIdLogs = default(MicrosoftDynamicsCRMcampaignactivity))
         {
-            Additionalinfo = additionalinfo;
-            this._owningteamValue = _owningteamValue;
             Owningbusinessunit = owningbusinessunit;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
-            Overriddencreatedon = overriddencreatedon;
-            Bulkoperationlogid = bulkoperationlogid;
-            Errornumber = errornumber;
-            Owninguser = owninguser;
-            this._createdobjectidValue = _createdobjectidValue;
-            this._regardingobjectidValue = _regardingobjectidValue;
-            this._bulkoperationidValue = _bulkoperationidValue;
-            Importsequencenumber = importsequencenumber;
-            Versionnumber = versionnumber;
             this._owneridValue = _owneridValue;
+            this._owningteamValue = _owningteamValue;
             Name = name;
+            this._campaignactivityidValue = _campaignactivityidValue;
+            Importsequencenumber = importsequencenumber;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            Additionalinfo = additionalinfo;
+            Errornumberformatted = errornumberformatted;
+            this._regardingobjectidValue = _regardingobjectidValue;
+            Errornumber = errornumber;
             Timezoneruleversionnumber = timezoneruleversionnumber;
+            Versionnumber = versionnumber;
+            this._createdobjectidValue = _createdobjectidValue;
+            this._bulkoperationidValue = _bulkoperationidValue;
+            Bulkoperationlogid = bulkoperationlogid;
+            Errordescriptionformatted = errordescriptionformatted;
+            Owninguser = owninguser;
+            Overriddencreatedon = overriddencreatedon;
             Owningteam = owningteam;
             BulkoperationlogSyncErrors = bulkoperationlogSyncErrors;
             BulkoperationlogTeams = bulkoperationlogTeams;
@@ -55,15 +58,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             CreatedobjectidActivitypointer = createdobjectidActivitypointer;
             CreatedobjectidContact = createdobjectidContact;
             BulkOperationLogBulkDeleteFailures = bulkOperationLogBulkDeleteFailures;
-            Bulkoperationid = bulkoperationid;
             CreatedobjectidAccount = createdobjectidAccount;
-            RegardingobjectidAccount = regardingobjectidAccount;
             BulkoperationidActivitypointer = bulkoperationidActivitypointer;
             CreatedobjectidLead = createdobjectidLead;
-            CreatedobjectidOpportunity = createdobjectidOpportunity;
-            RegardingobjectidContact = regardingobjectidContact;
             BulkOperationLogAsyncOperations = bulkOperationLogAsyncOperations;
+            CreatedobjectidOpportunity = createdobjectidOpportunity;
+            RegardingobjectidAccount = regardingobjectidAccount;
+            Bulkoperationid = bulkoperationid;
+            RegardingobjectidContact = regardingobjectidContact;
             RegardingobjectidLead = regardingobjectidLead;
+            CampaignActivityIdLogs = campaignActivityIdLogs;
             CustomInit();
         }
 
@@ -74,68 +78,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "additionalinfo")]
-        public string Additionalinfo { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "owningbusinessunit")]
         public string Owningbusinessunit { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "bulkoperationlogid")]
-        public string Bulkoperationlogid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "errornumber")]
-        public int? Errornumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owninguser")]
-        public string Owninguser { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdobjectid_value")]
-        public string _createdobjectidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_regardingobjectid_value")]
-        public string _regardingobjectidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_bulkoperationid_value")]
-        public string _bulkoperationidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -144,13 +88,88 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_campaignactivityid_value")]
+        public string _campaignactivityidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "additionalinfo")]
+        public string Additionalinfo { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "errornumberformatted")]
+        public string Errornumberformatted { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_regardingobjectid_value")]
+        public string _regardingobjectidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "errornumber")]
+        public int? Errornumber { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "timezoneruleversionnumber")]
         public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdobjectid_value")]
+        public string _createdobjectidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_bulkoperationid_value")]
+        public string _bulkoperationidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "bulkoperationlogid")]
+        public string Bulkoperationlogid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "errordescriptionformatted")]
+        public string Errordescriptionformatted { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "owninguser")]
+        public string Owninguser { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -194,18 +213,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "bulkoperationid")]
-        public MicrosoftDynamicsCRMbulkoperation Bulkoperationid { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "createdobjectid_account")]
         public MicrosoftDynamicsCRMaccount CreatedobjectidAccount { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_account")]
-        public MicrosoftDynamicsCRMaccount RegardingobjectidAccount { get; set; }
 
         /// <summary>
         /// </summary>
@@ -219,8 +228,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "BulkOperationLog_AsyncOperations")]
+        public IList<MicrosoftDynamicsCRMasyncoperation> BulkOperationLogAsyncOperations { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "createdobjectid_opportunity")]
         public MicrosoftDynamicsCRMopportunity CreatedobjectidOpportunity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_account")]
+        public MicrosoftDynamicsCRMaccount RegardingobjectidAccount { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "bulkoperationid")]
+        public MicrosoftDynamicsCRMbulkoperation Bulkoperationid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -229,13 +253,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "BulkOperationLog_AsyncOperations")]
-        public IList<MicrosoftDynamicsCRMasyncoperation> BulkOperationLogAsyncOperations { get; set; }
+        [JsonProperty(PropertyName = "regardingobjectid_lead")]
+        public MicrosoftDynamicsCRMlead RegardingobjectidLead { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_lead")]
-        public MicrosoftDynamicsCRMlead RegardingobjectidLead { get; set; }
+        [JsonProperty(PropertyName = "CampaignActivityId_Logs")]
+        public MicrosoftDynamicsCRMcampaignactivity CampaignActivityIdLogs { get; set; }
 
     }
 }

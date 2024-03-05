@@ -29,24 +29,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioEndorsement class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioEndorsement(int? utcconversiontimezonecode = default(int?), int? adoxioLicensedserviceareacountState = default(int?), System.DateTimeOffset? adoxioLicensedhoursofservicecountDate = default(System.DateTimeOffset?), int? adoxioLicensedhoursofservicecountState = default(int?), int? adoxioLicensedserviceareacount = default(int?), string _modifiedbyValue = default(string), int? timezoneruleversionnumber = default(int?), string _adoxioLicenceValue = default(string), int? adoxioLicensedhoursofservicecount = default(int?), string adoxioCancelledsuspendedreason = default(string), System.DateTimeOffset? adoxioDatecancelledsuspended = default(System.DateTimeOffset?), string adoxioEndorsementid = default(string), string _owningbusinessunitValue = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string _adoxioLicencewhencancelledValue = default(string), int? importsequencenumber = default(int?), int? statecode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _adoxioApplicationtypeValue = default(string), int? statuscode = default(int?), string _owningteamValue = default(string), string _createdbyValue = default(string), string _adoxioApplicationValue = default(string), string _owneridValue = default(string), System.DateTimeOffset? adoxioDateissuedreinstated = default(System.DateTimeOffset?), string _owninguserValue = default(string), string adoxioExternalid = default(string), string versionnumber = default(string), System.DateTimeOffset? adoxioLicensedserviceareacountDate = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string adoxioName = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioEndorsementSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioEndorsementDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioEndorsementDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> adoxioEndorsementSharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioEndorsementAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioEndorsementMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioEndorsementProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioEndorsementBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioEndorsementPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMadoxioApplication adoxioApplication = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioLicences adoxioLicence = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioApplicationtype adoxioApplicationType = default(MicrosoftDynamicsCRMadoxioApplicationtype), IList<MicrosoftDynamicsCRMadoxioHoursofservice> adoxioEndorsementAdoxioHoursofserviceEndorsement = default(IList<MicrosoftDynamicsCRMadoxioHoursofservice>), IList<MicrosoftDynamicsCRMadoxioServicearea> adoxioEndorsementAdoxioServiceareaEndorsement = default(IList<MicrosoftDynamicsCRMadoxioServicearea>), IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation> adoxioEndorsementAdoxioApplicationtermsconditionslimitationEndorsement = default(IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation>), MicrosoftDynamicsCRMadoxioLicences adoxioLicenceWhenCancelled = default(MicrosoftDynamicsCRMadoxioLicences))
+        public MicrosoftDynamicsCRMadoxioEndorsement(int? utcconversiontimezonecode = default(int?), int? adoxioLicensedserviceareacountState = default(int?), string _modifiedonbehalfbyValue = default(string), int? adoxioLicensedhoursofservicecountState = default(int?), int? adoxioLicensedserviceareacount = default(int?), string _modifiedbyValue = default(string), string _adoxioLicenceValue = default(string), int? adoxioLicensedhoursofservicecount = default(int?), string adoxioCancelledsuspendedreason = default(string), int? timezoneruleversionnumber = default(int?), string adoxioEndorsementid = default(string), string _owningbusinessunitValue = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? adoxioLicensedhoursofservicecountDate = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _adoxioLicencewhencancelledValue = default(string), int? importsequencenumber = default(int?), int? statecode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _adoxioApplicationtypeValue = default(string), int? statuscode = default(int?), string _owningteamValue = default(string), string _createdbyValue = default(string), string _adoxioApplicationValue = default(string), string _owneridValue = default(string), System.DateTimeOffset? adoxioDateissuedreinstated = default(System.DateTimeOffset?), string _owninguserValue = default(string), string adoxioExternalid = default(string), string versionnumber = default(string), System.DateTimeOffset? adoxioDatecancelledsuspended = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioLicensedserviceareacountDate = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string adoxioName = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioEndorsementSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioEndorsementDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioEndorsementDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> adoxioEndorsementSharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioEndorsementAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioEndorsementMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioEndorsementProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioEndorsementBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioEndorsementPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMadoxioApplication adoxioApplication = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioLicences adoxioLicence = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioApplicationtype adoxioApplicationType = default(MicrosoftDynamicsCRMadoxioApplicationtype), IList<MicrosoftDynamicsCRMadoxioHoursofservice> adoxioEndorsementAdoxioHoursofserviceEndorsement = default(IList<MicrosoftDynamicsCRMadoxioHoursofservice>), IList<MicrosoftDynamicsCRMadoxioServicearea> adoxioEndorsementAdoxioServiceareaEndorsement = default(IList<MicrosoftDynamicsCRMadoxioServicearea>), IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation> adoxioEndorsementAdoxioApplicationtermsconditionslimitationEndorsement = default(IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation>), MicrosoftDynamicsCRMadoxioLicences adoxioLicenceWhenCancelled = default(MicrosoftDynamicsCRMadoxioLicences))
         {
             Utcconversiontimezonecode = utcconversiontimezonecode;
             AdoxioLicensedserviceareacountState = adoxioLicensedserviceareacountState;
-            AdoxioLicensedhoursofservicecountDate = adoxioLicensedhoursofservicecountDate;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             AdoxioLicensedhoursofservicecountState = adoxioLicensedhoursofservicecountState;
             AdoxioLicensedserviceareacount = adoxioLicensedserviceareacount;
             this._modifiedbyValue = _modifiedbyValue;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
             this._adoxioLicenceValue = _adoxioLicenceValue;
             AdoxioLicensedhoursofservicecount = adoxioLicensedhoursofservicecount;
             AdoxioCancelledsuspendedreason = adoxioCancelledsuspendedreason;
-            AdoxioDatecancelledsuspended = adoxioDatecancelledsuspended;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
             AdoxioEndorsementid = adoxioEndorsementid;
             this._owningbusinessunitValue = _owningbusinessunitValue;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            AdoxioLicensedhoursofservicecountDate = adoxioLicensedhoursofservicecountDate;
             Modifiedon = modifiedon;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             this._adoxioLicencewhencancelledValue = _adoxioLicencewhencancelledValue;
             Importsequencenumber = importsequencenumber;
             Statecode = statecode;
@@ -61,6 +60,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             this._owninguserValue = _owninguserValue;
             AdoxioExternalid = adoxioExternalid;
             Versionnumber = versionnumber;
+            AdoxioDatecancelledsuspended = adoxioDatecancelledsuspended;
             AdoxioLicensedserviceareacountDate = adoxioLicensedserviceareacountDate;
             Createdon = createdon;
             AdoxioName = adoxioName;
@@ -108,8 +108,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_licensedhoursofservicecount_date")]
-        public System.DateTimeOffset? AdoxioLicensedhoursofservicecountDate { get; set; }
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -128,11 +128,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_adoxio_licence_value")]
         public string _adoxioLicenceValue { get; set; }
 
@@ -148,8 +143,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_datecancelledsuspended")]
-        public System.DateTimeOffset? AdoxioDatecancelledsuspended { get; set; }
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -168,13 +163,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
+        [JsonProperty(PropertyName = "adoxio_licensedhoursofservicecount_date")]
+        public System.DateTimeOffset? AdoxioLicensedhoursofservicecountDate { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -245,6 +240,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
         public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_datecancelledsuspended")]
+        public System.DateTimeOffset? AdoxioDatecancelledsuspended { get; set; }
 
         /// <summary>
         /// </summary>

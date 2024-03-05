@@ -93,6 +93,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IAnnualvolumes Annualvolumes { get; }
 
         /// <summary>
+        /// Gets the IApplicationbpfdormancies.
+        /// </summary>
+        IApplicationbpfdormancies Applicationbpfdormancies { get; }
+
+        /// <summary>
         /// Gets the IApplicationbpfv3s.
         /// </summary>
         IApplicationbpfv3s Applicationbpfv3s { get; }
@@ -208,6 +213,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         ICannabisproductadmins Cannabisproductadmins { get; }
 
         /// <summary>
+        /// Gets the ICeprojects.
+        /// </summary>
+        ICeprojects Ceprojects { get; }
+
+        /// <summary>
         /// Gets the ICitydistricts.
         /// </summary>
         ICitydistricts Citydistricts { get; }
@@ -246,6 +256,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ICorporateroles.
         /// </summary>
         ICorporateroles Corporateroles { get; }
+
+        /// <summary>
+        /// Gets the ICourthouselocations.
+        /// </summary>
+        ICourthouselocations Courthouselocations { get; }
 
         /// <summary>
         /// Gets the ICustomautonumberdefinitions.
@@ -323,6 +338,21 @@ namespace Gov.Lclb.Cllb.Interfaces
         IExhibits Exhibits { get; }
 
         /// <summary>
+        /// Gets the IExternalcontactadoxioexternalprofileset.
+        /// </summary>
+        IExternalcontactadoxioexternalprofileset Externalcontactadoxioexternalprofileset { get; }
+
+        /// <summary>
+        /// Gets the IExternalcontacts.
+        /// </summary>
+        IExternalcontacts Externalcontacts { get; }
+
+        /// <summary>
+        /// Gets the IExternalprofiles.
+        /// </summary>
+        IExternalprofiles Externalprofiles { get; }
+
+        /// <summary>
         /// Gets the IFederalreportexports.
         /// </summary>
         IFederalreportexports Federalreportexports { get; }
@@ -351,6 +381,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IHoursofservicesdefaults.
         /// </summary>
         IHoursofservicesdefaults Hoursofservicesdefaults { get; }
+
+        /// <summary>
+        /// Gets the IImportedoutstandinginvoiceses.
+        /// </summary>
+        IImportedoutstandinginvoiceses Importedoutstandinginvoiceses { get; }
 
         /// <summary>
         /// Gets the IIncidentadoxiolicencetypeset.
@@ -461,6 +496,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILicenseechangelogs.
         /// </summary>
         ILicenseechangelogs Licenseechangelogs { get; }
+
+        /// <summary>
+        /// Gets the IListadoxioexternalcontactset.
+        /// </summary>
+        IListadoxioexternalcontactset Listadoxioexternalcontactset { get; }
 
         /// <summary>
         /// Gets the ILoans.
@@ -643,6 +683,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         ITerritories Territories { get; }
 
         /// <summary>
+        /// Gets the ITestentities.
+        /// </summary>
+        ITestentities Testentities { get; }
+
+        /// <summary>
         /// Gets the ITiedhouseassociations.
         /// </summary>
         ITiedhouseassociations Tiedhouseassociations { get; }
@@ -651,6 +696,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ITiedhouseconnections.
         /// </summary>
         ITiedhouseconnections Tiedhouseconnections { get; }
+
+        /// <summary>
+        /// Gets the IViolationtickets.
+        /// </summary>
+        IViolationtickets Violationtickets { get; }
 
         /// <summary>
         /// Gets the IWitnesses.
