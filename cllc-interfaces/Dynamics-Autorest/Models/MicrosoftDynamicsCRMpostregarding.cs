@@ -29,32 +29,32 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMpostregarding
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMpostregarding(string postregardingid = default(string), System.DateTimeOffset? latestmanualpostmodifiedon = default(System.DateTimeOffset?), string _regardingobjectowningbusinessunitValue = default(string), string _regardingobjectidValue = default(string), string _regardingobjectowneridValue = default(string), System.DateTimeOffset? latestautopostmodifiedon = default(System.DateTimeOffset?), string regardingobjecttypecodeforsharing = default(string), MicrosoftDynamicsCRMtask regardingobjectidTask = default(MicrosoftDynamicsCRMtask), MicrosoftDynamicsCRMappointment regardingobjectidAppointment = default(MicrosoftDynamicsCRMappointment), MicrosoftDynamicsCRMphonecall regardingobjectidPhonecall = default(MicrosoftDynamicsCRMphonecall), MicrosoftDynamicsCRMrecurringappointmentmaster regardingobjectidRecurringappointmentmaster = default(MicrosoftDynamicsCRMrecurringappointmentmaster), IList<MicrosoftDynamicsCRMpost> postPostRegardings = default(IList<MicrosoftDynamicsCRMpost>), MicrosoftDynamicsCRMaccount regardingobjectidAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMsystemuser regardingobjectidSystemuser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit regardingobjectowningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMcontact regardingobjectidContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMteam regardingobjectidTeam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticle = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMqueue regardingobjectidQueue = default(MicrosoftDynamicsCRMqueue), MicrosoftDynamicsCRMprocesssession regardingobjectidProcesssession = default(MicrosoftDynamicsCRMprocesssession), MicrosoftDynamicsCRMcompetitor regardingobjectidCompetitor = default(MicrosoftDynamicsCRMcompetitor), MicrosoftDynamicsCRMincident regardingobjectidIncident = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunity = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMlead regardingobjectidLead = default(MicrosoftDynamicsCRMlead))
+        public MicrosoftDynamicsCRMpostregarding(string postregardingid = default(string), System.DateTimeOffset? latestmanualpostmodifiedon = default(System.DateTimeOffset?), string regardingobjecttypecodeforsharing = default(string), string _regardingobjectidValue = default(string), string _regardingobjectowneridValue = default(string), System.DateTimeOffset? latestautopostmodifiedon = default(System.DateTimeOffset?), string _regardingobjectowningbusinessunitValue = default(string), MicrosoftDynamicsCRMtask regardingobjectidTask = default(MicrosoftDynamicsCRMtask), MicrosoftDynamicsCRMappointment regardingobjectidAppointment = default(MicrosoftDynamicsCRMappointment), MicrosoftDynamicsCRMphonecall regardingobjectidPhonecall = default(MicrosoftDynamicsCRMphonecall), MicrosoftDynamicsCRMincident regardingobjectidIncident = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMrecurringappointmentmaster regardingobjectidRecurringappointmentmaster = default(MicrosoftDynamicsCRMrecurringappointmentmaster), MicrosoftDynamicsCRMcompetitor regardingobjectidCompetitor = default(MicrosoftDynamicsCRMcompetitor), IList<MicrosoftDynamicsCRMpost> postPostRegardings = default(IList<MicrosoftDynamicsCRMpost>), MicrosoftDynamicsCRMaccount regardingobjectidAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMsystemuser regardingobjectidSystemuser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit regardingobjectowningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMcontact regardingobjectidContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunity = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMlead regardingobjectidLead = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMteam regardingobjectidTeam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticle = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMqueue regardingobjectidQueue = default(MicrosoftDynamicsCRMqueue), MicrosoftDynamicsCRMprocesssession regardingobjectidProcesssession = default(MicrosoftDynamicsCRMprocesssession))
         {
             Postregardingid = postregardingid;
             Latestmanualpostmodifiedon = latestmanualpostmodifiedon;
-            this._regardingobjectowningbusinessunitValue = _regardingobjectowningbusinessunitValue;
+            Regardingobjecttypecodeforsharing = regardingobjecttypecodeforsharing;
             this._regardingobjectidValue = _regardingobjectidValue;
             this._regardingobjectowneridValue = _regardingobjectowneridValue;
             Latestautopostmodifiedon = latestautopostmodifiedon;
-            Regardingobjecttypecodeforsharing = regardingobjecttypecodeforsharing;
+            this._regardingobjectowningbusinessunitValue = _regardingobjectowningbusinessunitValue;
             RegardingobjectidTask = regardingobjectidTask;
             RegardingobjectidAppointment = regardingobjectidAppointment;
             RegardingobjectidPhonecall = regardingobjectidPhonecall;
+            RegardingobjectidIncident = regardingobjectidIncident;
             RegardingobjectidRecurringappointmentmaster = regardingobjectidRecurringappointmentmaster;
+            RegardingobjectidCompetitor = regardingobjectidCompetitor;
             PostPostRegardings = postPostRegardings;
             RegardingobjectidAccount = regardingobjectidAccount;
             RegardingobjectidSystemuser = regardingobjectidSystemuser;
             Regardingobjectowningbusinessunit = regardingobjectowningbusinessunit;
             RegardingobjectidContact = regardingobjectidContact;
+            RegardingobjectidOpportunity = regardingobjectidOpportunity;
+            RegardingobjectidLead = regardingobjectidLead;
             RegardingobjectidTeam = regardingobjectidTeam;
             RegardingobjectidKnowledgearticle = regardingobjectidKnowledgearticle;
             RegardingobjectidQueue = regardingobjectidQueue;
             RegardingobjectidProcesssession = regardingobjectidProcesssession;
-            RegardingobjectidCompetitor = regardingobjectidCompetitor;
-            RegardingobjectidIncident = regardingobjectidIncident;
-            RegardingobjectidOpportunity = regardingobjectidOpportunity;
-            RegardingobjectidLead = regardingobjectidLead;
             CustomInit();
         }
 
@@ -75,8 +75,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_regardingobjectowningbusinessunit_value")]
-        public string _regardingobjectowningbusinessunitValue { get; set; }
+        [JsonProperty(PropertyName = "regardingobjecttypecodeforsharing")]
+        public string Regardingobjecttypecodeforsharing { get; set; }
 
         /// <summary>
         /// </summary>
@@ -95,8 +95,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "regardingobjecttypecodeforsharing")]
-        public string Regardingobjecttypecodeforsharing { get; set; }
+        [JsonProperty(PropertyName = "_regardingobjectowningbusinessunit_value")]
+        public string _regardingobjectowningbusinessunitValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -115,8 +115,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_incident")]
+        public MicrosoftDynamicsCRMincident RegardingobjectidIncident { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "regardingobjectid_recurringappointmentmaster")]
         public MicrosoftDynamicsCRMrecurringappointmentmaster RegardingobjectidRecurringappointmentmaster { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_competitor")]
+        public MicrosoftDynamicsCRMcompetitor RegardingobjectidCompetitor { get; set; }
 
         /// <summary>
         /// </summary>
@@ -145,6 +155,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_opportunity")]
+        public MicrosoftDynamicsCRMopportunity RegardingobjectidOpportunity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_lead")]
+        public MicrosoftDynamicsCRMlead RegardingobjectidLead { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "regardingobjectid_team")]
         public MicrosoftDynamicsCRMteam RegardingobjectidTeam { get; set; }
 
@@ -162,26 +182,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "regardingobjectid_processsession")]
         public MicrosoftDynamicsCRMprocesssession RegardingobjectidProcesssession { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_competitor")]
-        public MicrosoftDynamicsCRMcompetitor RegardingobjectidCompetitor { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_incident")]
-        public MicrosoftDynamicsCRMincident RegardingobjectidIncident { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_opportunity")]
-        public MicrosoftDynamicsCRMopportunity RegardingobjectidOpportunity { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_lead")]
-        public MicrosoftDynamicsCRMlead RegardingobjectidLead { get; set; }
 
     }
 }

@@ -27,9 +27,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMofficegraphdocument class.
         /// </summary>
-        public MicrosoftDynamicsCRMofficegraphdocument(string _modifiedonbehalfbyValue = default(string), string modifiedby = default(string), string fileextension = default(string), string createdby = default(string), string readurl = default(string), int? viewcount = default(int?), string sitetitle = default(string), string documentid = default(string), string authornames = default(string), string _transactioncurrencyidValue = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? createdtime = default(System.DateTimeOffset?), string documentpreviewmetadata = default(string), System.DateTimeOffset? documentlastmodifiedon = default(System.DateTimeOffset?), string previewimageurl = default(string), int? rank = default(int?), string title = default(string), System.DateTimeOffset? modifiedtime = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), string versionnumber = default(string), string _organizationidValue = default(string), string secondaryfileextension = default(string), int? querytype = default(int?), string weblocationurl = default(string), string filetype = default(string), int? timezoneruleversionnumber = default(int?), string siteurl = default(string), string officegraphdocumentid = default(string), decimal? exchangerate = default(decimal?), string documentlastmodifiedby = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency))
+        public MicrosoftDynamicsCRMofficegraphdocument(string _modifiedonbehalfbyValue = default(string), int? utcconversiontimezonecode = default(int?), string modifiedby = default(string), string fileextension = default(string), string createdby = default(string), string readurl = default(string), int? viewcount = default(int?), string sitetitle = default(string), string documentid = default(string), string authornames = default(string), string _transactioncurrencyidValue = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? createdtime = default(System.DateTimeOffset?), string documentpreviewmetadata = default(string), System.DateTimeOffset? documentlastmodifiedon = default(System.DateTimeOffset?), string previewimageurl = default(string), int? rank = default(int?), string title = default(string), System.DateTimeOffset? modifiedtime = default(System.DateTimeOffset?), string versionnumber = default(string), string _organizationidValue = default(string), string secondaryfileextension = default(string), int? querytype = default(int?), string weblocationurl = default(string), string filetype = default(string), int? timezoneruleversionnumber = default(int?), string siteurl = default(string), string officegraphdocumentid = default(string), decimal? exchangerate = default(decimal?), string documentlastmodifiedby = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency))
         {
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
             Modifiedby = modifiedby;
             Fileextension = fileextension;
             Createdby = createdby;
@@ -47,7 +48,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Rank = rank;
             Title = title;
             Modifiedtime = modifiedtime;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
             Versionnumber = versionnumber;
             this._organizationidValue = _organizationidValue;
             Secondaryfileextension = secondaryfileextension;
@@ -75,6 +75,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -160,11 +165,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "modifiedtime")]
         public System.DateTimeOffset? Modifiedtime { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
         /// </summary>

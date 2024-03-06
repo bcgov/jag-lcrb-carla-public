@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMdynamicpropertyinstance class.
         /// </summary>
-        public MicrosoftDynamicsCRMdynamicpropertyinstance(string dynamicpropertyinstanceid = default(string), int? timezoneruleversionnumber = default(int?), decimal? valuedecimal = default(decimal?), string _transactioncurrencyidValue = default(string), string name = default(string), string _createdbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), bool? validationstatus = default(bool?), string _owneridValue = default(string), string _createdonbehalfbyValue = default(string), int? dmtimportstate = default(int?), string valuestring = default(string), int? utcconversiontimezonecode = default(int?), decimal? valuedouble = default(decimal?), string versionnumber = default(string), int? valueinteger = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _owningbusinessunitValue = default(string), string _modifiedbyValue = default(string), string _regardingobjectidValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _dynamicpropertyidValue = default(string), string _owningteamValue = default(string), int? importsequencenumber = default(int?), string _modifiedonbehalfbyValue = default(string), string _owninguserValue = default(string), decimal? exchangerate = default(decimal?), IList<MicrosoftDynamicsCRMsyncerror> dynamicpropertyinstanceSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMteam> dynamicpropertyinstanceTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMasyncoperation> dynamicpropertyinstanceAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> dynamicpropertyinstanceMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> dynamicpropertyinstanceBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> dynamicpropertyinstancePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMdynamicproperty dynamicpropertyid = default(MicrosoftDynamicsCRMdynamicproperty), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMquotedetail regardingobjectidQuotedetail = default(MicrosoftDynamicsCRMquotedetail), MicrosoftDynamicsCRMinvoicedetail regardingobjectidInvoicedetail = default(MicrosoftDynamicsCRMinvoicedetail), MicrosoftDynamicsCRMopportunityproduct regardingobjectidOpportunityproduct = default(MicrosoftDynamicsCRMopportunityproduct), MicrosoftDynamicsCRMsalesorderdetail regardingobjectidSalesorderdetail = default(MicrosoftDynamicsCRMsalesorderdetail))
+        public MicrosoftDynamicsCRMdynamicpropertyinstance(string dynamicpropertyinstanceid = default(string), int? timezoneruleversionnumber = default(int?), decimal? valuedecimal = default(decimal?), string _transactioncurrencyidValue = default(string), string name = default(string), string _createdbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), bool? validationstatus = default(bool?), string _owneridValue = default(string), int? dmtimportstate = default(int?), string _createdonbehalfbyValue = default(string), string valuestring = default(string), int? utcconversiontimezonecode = default(int?), decimal? valuedouble = default(decimal?), string versionnumber = default(string), int? valueinteger = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _owningbusinessunitValue = default(string), string _modifiedbyValue = default(string), string _regardingobjectidValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _dynamicpropertyidValue = default(string), string _owningteamValue = default(string), int? importsequencenumber = default(int?), string _modifiedonbehalfbyValue = default(string), string _owninguserValue = default(string), decimal? exchangerate = default(decimal?), IList<MicrosoftDynamicsCRMsyncerror> dynamicpropertyinstanceSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMteam> dynamicpropertyinstanceTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMasyncoperation> dynamicpropertyinstanceAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> dynamicpropertyinstanceMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> dynamicpropertyinstanceBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> dynamicpropertyinstancePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMdynamicproperty dynamicpropertyid = default(MicrosoftDynamicsCRMdynamicproperty), MicrosoftDynamicsCRMquotedetail regardingobjectidQuotedetail = default(MicrosoftDynamicsCRMquotedetail), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMinvoicedetail regardingobjectidInvoicedetail = default(MicrosoftDynamicsCRMinvoicedetail), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMopportunityproduct regardingobjectidOpportunityproduct = default(MicrosoftDynamicsCRMopportunityproduct), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsalesorderdetail regardingobjectidSalesorderdetail = default(MicrosoftDynamicsCRMsalesorderdetail), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Dynamicpropertyinstanceid = dynamicpropertyinstanceid;
             Timezoneruleversionnumber = timezoneruleversionnumber;
@@ -40,8 +40,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Createdon = createdon;
             Validationstatus = validationstatus;
             this._owneridValue = _owneridValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Dmtimportstate = dmtimportstate;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Valuestring = valuestring;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             Valuedouble = valuedouble;
@@ -66,18 +66,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             DynamicpropertyinstancePrincipalObjectAttributeAccesses = dynamicpropertyinstancePrincipalObjectAttributeAccesses;
             Createdby = createdby;
             Dynamicpropertyid = dynamicpropertyid;
+            RegardingobjectidQuotedetail = regardingobjectidQuotedetail;
             Modifiedby = modifiedby;
             Owningbusinessunit = owningbusinessunit;
+            RegardingobjectidInvoicedetail = regardingobjectidInvoicedetail;
             Ownerid = ownerid;
             Owningteam = owningteam;
+            RegardingobjectidOpportunityproduct = regardingobjectidOpportunityproduct;
             Createdonbehalfby = createdonbehalfby;
+            RegardingobjectidSalesorderdetail = regardingobjectidSalesorderdetail;
             Owninguser = owninguser;
             Transactioncurrencyid = transactioncurrencyid;
             Modifiedonbehalfby = modifiedonbehalfby;
-            RegardingobjectidQuotedetail = regardingobjectidQuotedetail;
-            RegardingobjectidInvoicedetail = regardingobjectidInvoicedetail;
-            RegardingobjectidOpportunityproduct = regardingobjectidOpportunityproduct;
-            RegardingobjectidSalesorderdetail = regardingobjectidSalesorderdetail;
             CustomInit();
         }
 
@@ -133,13 +133,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "dmtimportstate")]
+        public int? Dmtimportstate { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "dmtimportstate")]
-        public int? Dmtimportstate { get; set; }
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -263,6 +263,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_quotedetail")]
+        public MicrosoftDynamicsCRMquotedetail RegardingobjectidQuotedetail { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "modifiedby")]
         public MicrosoftDynamicsCRMsystemuser Modifiedby { get; set; }
 
@@ -270,6 +275,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "owningbusinessunit")]
         public MicrosoftDynamicsCRMbusinessunit Owningbusinessunit { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_invoicedetail")]
+        public MicrosoftDynamicsCRMinvoicedetail RegardingobjectidInvoicedetail { get; set; }
 
         /// <summary>
         /// </summary>
@@ -283,8 +293,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_opportunityproduct")]
+        public MicrosoftDynamicsCRMopportunityproduct RegardingobjectidOpportunityproduct { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "createdonbehalfby")]
         public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_salesorderdetail")]
+        public MicrosoftDynamicsCRMsalesorderdetail RegardingobjectidSalesorderdetail { get; set; }
 
         /// <summary>
         /// </summary>
@@ -300,26 +320,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "modifiedonbehalfby")]
         public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_quotedetail")]
-        public MicrosoftDynamicsCRMquotedetail RegardingobjectidQuotedetail { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_invoicedetail")]
-        public MicrosoftDynamicsCRMinvoicedetail RegardingobjectidInvoicedetail { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_opportunityproduct")]
-        public MicrosoftDynamicsCRMopportunityproduct RegardingobjectidOpportunityproduct { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_salesorderdetail")]
-        public MicrosoftDynamicsCRMsalesorderdetail RegardingobjectidSalesorderdetail { get; set; }
 
     }
 }

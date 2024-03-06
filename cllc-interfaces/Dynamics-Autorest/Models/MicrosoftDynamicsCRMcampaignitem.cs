@@ -29,16 +29,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMcampaignitem
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMcampaignitem(string owninguser = default(string), string versionnumber = default(string), string _campaignidValue = default(string), string owningbusinessunit = default(string), int? importsequencenumber = default(int?), int? timezoneruleversionnumber = default(int?), string name = default(string), string entityid = default(string), string _owneridValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string entitytype = default(string), int? utcconversiontimezonecode = default(int?), string campaignitemid = default(string), IList<MicrosoftDynamicsCRMteam> campaignitemTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMasyncoperation> campaignitemAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> campaignitemMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> campaignitemBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> campaignitemPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>))
+        public MicrosoftDynamicsCRMcampaignitem(string owninguser = default(string), string versionnumber = default(string), string entityid = default(string), string owningbusinessunit = default(string), int? importsequencenumber = default(int?), int? timezoneruleversionnumber = default(int?), string name = default(string), string _campaignidValue = default(string), string _owneridValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string entitytype = default(string), int? utcconversiontimezonecode = default(int?), string campaignitemid = default(string), IList<MicrosoftDynamicsCRMteam> campaignitemTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMasyncoperation> campaignitemAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> campaignitemMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> campaignitemBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> campaignitemPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>))
         {
             Owninguser = owninguser;
             Versionnumber = versionnumber;
-            this._campaignidValue = _campaignidValue;
+            Entityid = entityid;
             Owningbusinessunit = owningbusinessunit;
             Importsequencenumber = importsequencenumber;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             Name = name;
-            Entityid = entityid;
+            this._campaignidValue = _campaignidValue;
             this._owneridValue = _owneridValue;
             Overriddencreatedon = overriddencreatedon;
             Entitytype = entitytype;
@@ -69,8 +69,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_campaignid_value")]
-        public string _campaignidValue { get; set; }
+        [JsonProperty(PropertyName = "entityid")]
+        public string Entityid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -94,8 +94,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "entityid")]
-        public string Entityid { get; set; }
+        [JsonProperty(PropertyName = "_campaignid_value")]
+        public string _campaignidValue { get; set; }
 
         /// <summary>
         /// </summary>

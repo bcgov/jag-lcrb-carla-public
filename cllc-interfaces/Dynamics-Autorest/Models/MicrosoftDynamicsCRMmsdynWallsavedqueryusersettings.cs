@@ -29,13 +29,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMmsdynWallsavedqueryusersettings class.
         /// </summary>
-        public MicrosoftDynamicsCRMmsdynWallsavedqueryusersettings(string _createdbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), string _owningbusinessunitValue = default(string), string _createdonbehalfbyValue = default(string), int? statuscode = default(int?), int? msdynSortorder = default(int?), int? importsequencenumber = default(int?), int? timezoneruleversionnumber = default(int?), string _owneridValue = default(string), string msdynEntitydisplayname = default(string), int? utcconversiontimezonecode = default(int?), bool? msdynIsfollowing = default(bool?), int? msdynDefault = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string msdynData = default(string), bool? msdynIsvisible = default(bool?), string _msdynUseridValue = default(string), int? statecode = default(int?), int? msdynType = default(int?), string msdynWallsavedqueryusersettingsid = default(string), int? msdynOtc = default(int?), string _modifiedonbehalfbyValue = default(string), string versionnumber = default(string), int? msdynIsvisiblebit = default(int?), string msdynSavedqueryname = default(string), string _owningteamValue = default(string), bool? msdynIsvirtual = default(bool?), bool? msdynIncludewallinresponse = default(bool?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string msdynEntityname = default(string), string _msdynWallsavedqueryidValue = default(string), string _owninguserValue = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> msdynWallsavedqueryusersettingsSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> msdynWallsavedqueryusersettingsAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> msdynWallsavedqueryusersettingsMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> msdynWallsavedqueryusersettingsProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> msdynWallsavedqueryusersettingsBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> msdynWallsavedqueryusersettingsPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMsystemuser msdynUserid = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMmsdynWallsavedquery msdynWallsavedqueryid = default(MicrosoftDynamicsCRMmsdynWallsavedquery))
+        public MicrosoftDynamicsCRMmsdynWallsavedqueryusersettings(string _createdbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), int? statuscode = default(int?), int? msdynSortorder = default(int?), int? importsequencenumber = default(int?), int? timezoneruleversionnumber = default(int?), string _owneridValue = default(string), string msdynEntitydisplayname = default(string), int? utcconversiontimezonecode = default(int?), string msdynEntityname = default(string), string _createdonbehalfbyValue = default(string), int? msdynDefault = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _owningteamValue = default(string), string msdynData = default(string), bool? msdynIsfollowing = default(bool?), string _msdynUseridValue = default(string), int? statecode = default(int?), int? msdynType = default(int?), string msdynWallsavedqueryusersettingsid = default(string), int? msdynOtc = default(int?), bool? msdynIsvisible = default(bool?), string versionnumber = default(string), int? msdynIsvisiblebit = default(int?), string msdynSavedqueryname = default(string), string _owningbusinessunitValue = default(string), bool? msdynIsvirtual = default(bool?), bool? msdynIncludewallinresponse = default(bool?), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _msdynWallsavedqueryidValue = default(string), string _owninguserValue = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> msdynWallsavedqueryusersettingsSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> msdynWallsavedqueryusersettingsAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> msdynWallsavedqueryusersettingsMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> msdynWallsavedqueryusersettingsProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> msdynWallsavedqueryusersettingsBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> msdynWallsavedqueryusersettingsPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMsystemuser msdynUserid = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMmsdynWallsavedquery msdynWallsavedqueryid = default(MicrosoftDynamicsCRMmsdynWallsavedquery))
         {
             this._createdbyValue = _createdbyValue;
             Createdon = createdon;
             this._modifiedbyValue = _modifiedbyValue;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Statuscode = statuscode;
             MsdynSortorder = msdynSortorder;
             Importsequencenumber = importsequencenumber;
@@ -43,25 +41,27 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             this._owneridValue = _owneridValue;
             MsdynEntitydisplayname = msdynEntitydisplayname;
             Utcconversiontimezonecode = utcconversiontimezonecode;
-            MsdynIsfollowing = msdynIsfollowing;
+            MsdynEntityname = msdynEntityname;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             MsdynDefault = msdynDefault;
             Modifiedon = modifiedon;
+            this._owningteamValue = _owningteamValue;
             MsdynData = msdynData;
-            MsdynIsvisible = msdynIsvisible;
+            MsdynIsfollowing = msdynIsfollowing;
             this._msdynUseridValue = _msdynUseridValue;
             Statecode = statecode;
             MsdynType = msdynType;
             MsdynWallsavedqueryusersettingsid = msdynWallsavedqueryusersettingsid;
             MsdynOtc = msdynOtc;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            MsdynIsvisible = msdynIsvisible;
             Versionnumber = versionnumber;
             MsdynIsvisiblebit = msdynIsvisiblebit;
             MsdynSavedqueryname = msdynSavedqueryname;
-            this._owningteamValue = _owningteamValue;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
             MsdynIsvirtual = msdynIsvirtual;
             MsdynIncludewallinresponse = msdynIncludewallinresponse;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Overriddencreatedon = overriddencreatedon;
-            MsdynEntityname = msdynEntityname;
             this._msdynWallsavedqueryidValue = _msdynWallsavedqueryidValue;
             this._owninguserValue = _owninguserValue;
             Createdbyname = createdbyname;
@@ -105,16 +105,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
 
@@ -150,8 +140,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_isfollowing")]
-        public bool? MsdynIsfollowing { get; set; }
+        [JsonProperty(PropertyName = "msdyn_entityname")]
+        public string MsdynEntityname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -165,13 +160,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "msdyn_data")]
         public string MsdynData { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_isvisible")]
-        public bool? MsdynIsvisible { get; set; }
+        [JsonProperty(PropertyName = "msdyn_isfollowing")]
+        public bool? MsdynIsfollowing { get; set; }
 
         /// <summary>
         /// </summary>
@@ -200,8 +200,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "msdyn_isvisible")]
+        public bool? MsdynIsvisible { get; set; }
 
         /// <summary>
         /// </summary>
@@ -220,8 +220,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -235,13 +235,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_entityname")]
-        public string MsdynEntityname { get; set; }
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>

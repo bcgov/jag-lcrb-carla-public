@@ -29,16 +29,17 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioComplaint class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioComplaint(string _adoxioInspectorValue = default(string), int? adoxioChecklistinspectionscompleted = default(int?), string _adoxioRegionalmanagerValue = default(string), int? adoxioInvestigationstatus = default(int?), string _owninguserValue = default(string), string _owningteamValue = default(string), string _owningbusinessunitValue = default(string), int? adoxioChecklistcompliancemeetingrequired = default(int?), string _createdonbehalfbyValue = default(string), string adoxioDelegategmcomments = default(string), string _adoxioLicenceeidValue = default(string), string adoxioJobnumber = default(string), int? adoxioReasonfordismissal = default(int?), int? adoxioDelegategmdecision = default(int?), string versionnumber = default(string), int? adoxioChecklistassignedtoinspector = default(int?), int? adoxioChecklistfinalreportapproved = default(int?), string adoxioOtherbasisdescription = default(string), bool? adoxioDisturbancepersonsvicinity = default(bool?), string _adoxioEstablishmentidValue = default(string), string adoxioStreet2 = default(string), string adoxioImportid = default(string), bool? adoxioOnsiteconsumption = default(bool?), string adoxioCaseadmincomments = default(string), int? adoxioChecklistinvestigationactivitiesdone = default(int?), int? statuscode = default(int?), bool? adoxioDisorderlyunlawfulconduct = default(bool?), string adoxioPhone = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _adoxioComplainantValue = default(string), string _createdbyValue = default(string), int? utcconversiontimezonecode = default(int?), int? adoxioPreferredmethodofcontact = default(int?), string adoxioLicencenumber = default(string), string adoxioIncidentdescription = default(string), int? adoxioChecklistlicencelinked = default(int?), string adoxioWeaponsreporting = default(string), string _adoxioCityidValue = default(string), System.DateTimeOffset? adoxioIncidentdate = default(System.DateTimeOffset?), string _adoxioStorecityidValue = default(string), string adoxioCreatedonshortdatestring = default(string), int? adoxioChecklistcomplainantnotified = default(int?), string adoxioStreet = default(string), int? adoxioRmdecision = default(int?), int? adoxioIsdelegategmapproved = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string adoxioStorename = default(string), int? importsequencenumber = default(int?), string adoxioContraventionnumberaggregate = default(string), int? adoxioChecklistreviewedbyadmin = default(int?), int? adoxioComplaintcategory = default(int?), string _adoxioSpecialeventidValue = default(string), string processid = default(string), bool? adoxioOtherbasis = default(bool?), string adoxioInspectordecisionreason = default(string), string _stageidValue = default(string), string adoxioRmdecisionreason = default(string), bool? adoxioAlteringaddingsubstances = default(bool?), string adoxioProvince = default(string), string adoxioLpcnumber = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? adoxioChecklistcnissued = default(int?), bool? adoxioAdvertisingbranding = default(bool?), bool? adoxioUnlawfulpossessionsalesupply = default(bool?), string traversedpath = default(string), int? adoxioIswaiversigned = default(int?), string adoxioStorestreet = default(string), string adoxioStorepostalcode = default(string), bool? adoxioTiedhouseinducements = default(bool?), bool? adoxioIntoxicatedpatrons = default(bool?), int? adoxioChecklistinspectionscheduled = default(int?), string _modifiedonbehalfbyValue = default(string), int? adoxioChecklistresultssent = default(int?), string adoxioComplaintid = default(string), System.DateTimeOffset? adoxioHearingdatetime = default(System.DateTimeOffset?), int? adoxioChecklistestablishmentlinked = default(int?), System.DateTimeOffset? adoxioDateassigned = default(System.DateTimeOffset?), int? adoxioChecklistinvestigationcompleted = default(int?), string adoxioStorecitytext = default(string), bool? adoxioIsanonymous = default(bool?), string _modifiedbyValue = default(string), string _adoxioAreaidValue = default(string), int? timezoneruleversionnumber = default(int?), int? adoxioChecklistallegedcontraventionsadded = default(int?), int? adoxioChecklistassignedtorm = default(int?), System.DateTimeOffset? adoxioFirstresponseduedate = default(System.DateTimeOffset?), string _owneridValue = default(string), string _adoxioRegionidValue = default(string), int? adoxioInspectordecision = default(int?), string adoxioLastname = default(string), int? adoxioChecklistreviewedbyrm = default(int?), int? adoxioComplaintsource = default(int?), string adoxioFirstname = default(string), bool? adoxioWeapons = default(bool?), string adoxioComplaintbasisaggregate = default(string), string adoxioCreatedonlongdatestring = default(string), string _adoxioLicenceidValue = default(string), string adoxioEmail = default(string), int? adoxioOveralloutcome = default(int?), string adoxioName = default(string), string adoxioMinorsreporting = default(string), int? statecode = default(int?), int? adoxioInvestigationoutcome = default(int?), string adoxioPostalcode = default(string), string adoxioCity = default(string), bool? adoxioMinors = default(bool?), int? adoxioChecklistfinalreportdone = default(int?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMactivitypointer> adoxioComplaintActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMappointment> adoxioComplaintAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMemail> adoxioComplaintEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> adoxioComplaintFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMletter> adoxioComplaintLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMphonecall> adoxioComplaintPhoneCalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMserviceappointment> adoxioComplaintServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMtask> adoxioComplaintTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> adoxioComplaintRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMsocialactivity> adoxioComplaintSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> adoxioComplaintAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMsyncerror> adoxioComplaintSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioComplaintDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioComplaintDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> adoxioComplaintSharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMannotation> adoxioComplaintAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioComplaintAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioComplaintMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioComplaintProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioComplaintBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioComplaintPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMprocessstage stageid = default(MicrosoftDynamicsCRMprocessstage), MicrosoftDynamicsCRMaccount adoxioComplainantAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMcontact adoxioComplainantContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMsystemuser adoxioInspector = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser adoxioRegionalManager = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMadoxioContravention> adoxioComplaintContraventions = default(IList<MicrosoftDynamicsCRMadoxioContravention>), MicrosoftDynamicsCRMadoxioEstablishment adoxioEstablishmentId = default(MicrosoftDynamicsCRMadoxioEstablishment), MicrosoftDynamicsCRMadoxioLicences adoxioLicenceId = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioArea adoxioAreaId = default(MicrosoftDynamicsCRMadoxioArea), IList<MicrosoftDynamicsCRMincident> adoxioComplaintInspections = default(IList<MicrosoftDynamicsCRMincident>), MicrosoftDynamicsCRMaccount adoxioLicenceeId = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMadoxioCitydistrict adoxioCityId = default(MicrosoftDynamicsCRMadoxioCitydistrict), IList<MicrosoftDynamicsCRMqueueitem> adoxioComplaintQueueItems = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMadoxioComplianceinvestigation> adoxioComplaintInvestigations = default(IList<MicrosoftDynamicsCRMadoxioComplianceinvestigation>), MicrosoftDynamicsCRMadoxioCitydistrict adoxioStoreCityId = default(MicrosoftDynamicsCRMadoxioCitydistrict), IList<MicrosoftDynamicsCRMadoxioInvestigationactivity> adoxioComplaintInvestigationactivities = default(IList<MicrosoftDynamicsCRMadoxioInvestigationactivity>), MicrosoftDynamicsCRMadoxioRegion adoxioRegionId = default(MicrosoftDynamicsCRMadoxioRegion), IList<MicrosoftDynamicsCRMadoxioInvestigationrequest> adoxioComplaintInvestigationrequests = default(IList<MicrosoftDynamicsCRMadoxioInvestigationrequest>), IList<MicrosoftDynamicsCRMadoxioInvestigation> adoxioComplaintInvestigationsunit = default(IList<MicrosoftDynamicsCRMadoxioInvestigation>), MicrosoftDynamicsCRMadoxioSpecialevent adoxioSpecialeventid = default(MicrosoftDynamicsCRMadoxioSpecialevent))
+        public MicrosoftDynamicsCRMadoxioComplaint(string _adoxioInspectorValue = default(string), int? adoxioChecklistinspectionscompleted = default(int?), string _adoxioRegionalmanagerValue = default(string), int? adoxioInvestigationstatus = default(int?), int? adoxioChecklistinvestigationactivitiesdone = default(int?), string _owninguserValue = default(string), string _owningteamValue = default(string), string _owningbusinessunitValue = default(string), bool? adoxioUnlawfulpossessionsalesupply = default(bool?), string _createdonbehalfbyValue = default(string), string adoxioDelegategmcomments = default(string), string _adoxioLicenceeidValue = default(string), string adoxioJobnumber = default(string), int? adoxioReasonfordismissal = default(int?), int? adoxioDelegategmdecision = default(int?), string versionnumber = default(string), string adoxioComplaintbasisaggregate = default(string), int? adoxioChecklistassignedtoinspector = default(int?), int? adoxioChecklistfinalreportapproved = default(int?), string adoxioOtherbasisdescription = default(string), bool? adoxioDisturbancepersonsvicinity = default(bool?), string adoxioStreet2 = default(string), string adoxioImportid = default(string), bool? adoxioOnsiteconsumption = default(bool?), string _adoxioEstablishmentidValue = default(string), int? statuscode = default(int?), string _createdbyValue = default(string), string adoxioPhone = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _adoxioComplainantValue = default(string), int? utcconversiontimezonecode = default(int?), int? adoxioPreferredmethodofcontact = default(int?), string adoxioLicencenumber = default(string), string adoxioIncidentdescription = default(string), bool? adoxioDisorderlyunlawfulconduct = default(bool?), int? adoxioChecklistlicencelinked = default(int?), string adoxioWeaponsreporting = default(string), string _adoxioCityidValue = default(string), System.DateTimeOffset? adoxioIncidentdate = default(System.DateTimeOffset?), string _adoxioStorecityidValue = default(string), string adoxioCreatedonshortdatestring = default(string), int? adoxioChecklistcomplainantnotified = default(int?), string adoxioStreet = default(string), int? adoxioRmdecision = default(int?), int? adoxioIsdelegategmapproved = default(int?), string adoxioComplaintid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string adoxioStorename = default(string), int? importsequencenumber = default(int?), bool? adoxioMinors = default(bool?), string adoxioContraventionnumberaggregate = default(string), int? adoxioChecklistreviewedbyadmin = default(int?), string processid = default(string), bool? adoxioOtherbasis = default(bool?), string adoxioInspectordecisionreason = default(string), string _stageidValue = default(string), string adoxioRmdecisionreason = default(string), bool? adoxioAlteringaddingsubstances = default(bool?), string adoxioProvince = default(string), string adoxioLpcnumber = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? adoxioChecklistcnissued = default(int?), bool? adoxioAdvertisingbranding = default(bool?), bool? adoxioTiedhouseinducements = default(bool?), string traversedpath = default(string), int? adoxioIswaiversigned = default(int?), string adoxioStorestreet = default(string), string adoxioStorepostalcode = default(string), bool? adoxioIntoxicatedpatrons = default(bool?), int? adoxioChecklistinspectionscheduled = default(int?), string _modifiedonbehalfbyValue = default(string), int? adoxioChecklistresultssent = default(int?), int? adoxioChecklistreviewedbyrm = default(int?), int? adoxioChecklistcompliancemeetingrequired = default(int?), System.DateTimeOffset? adoxioHearingdatetime = default(System.DateTimeOffset?), int? adoxioChecklistestablishmentlinked = default(int?), System.DateTimeOffset? adoxioDateassigned = default(System.DateTimeOffset?), int? adoxioChecklistinvestigationcompleted = default(int?), string adoxioStorecitytext = default(string), bool? adoxioIsanonymous = default(bool?), string _modifiedbyValue = default(string), string _adoxioAreaidValue = default(string), int? timezoneruleversionnumber = default(int?), int? adoxioChecklistallegedcontraventionsadded = default(int?), int? adoxioInvestigationoutcome = default(int?), int? adoxioChecklistassignedtorm = default(int?), System.DateTimeOffset? adoxioFirstresponseduedate = default(System.DateTimeOffset?), string _owneridValue = default(string), string _adoxioRegionidValue = default(string), int? adoxioInspectordecision = default(int?), string adoxioLastname = default(string), int? adoxioComplaintsource = default(int?), string adoxioFirstname = default(string), bool? adoxioWeapons = default(bool?), string adoxioCreatedonlongdatestring = default(string), string _adoxioLicenceidValue = default(string), string adoxioEmail = default(string), int? adoxioOveralloutcome = default(int?), string adoxioName = default(string), string adoxioMinorsreporting = default(string), int? statecode = default(int?), int? adoxioComplaintcategory = default(int?), string adoxioPostalcode = default(string), string adoxioCaseadmincomments = default(string), string adoxioCity = default(string), int? adoxioChecklistfinalreportdone = default(int?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMactivitypointer> adoxioComplaintActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMappointment> adoxioComplaintAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMemail> adoxioComplaintEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> adoxioComplaintFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMletter> adoxioComplaintLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMphonecall> adoxioComplaintPhoneCalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMserviceappointment> adoxioComplaintServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMtask> adoxioComplaintTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> adoxioComplaintRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMsocialactivity> adoxioComplaintSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> adoxioComplaintAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMsyncerror> adoxioComplaintSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioComplaintDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioComplaintDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> adoxioComplaintSharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMannotation> adoxioComplaintAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioComplaintAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioComplaintMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioComplaintProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioComplaintBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioComplaintPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMprocessstage stageid = default(MicrosoftDynamicsCRMprocessstage), MicrosoftDynamicsCRMaccount adoxioComplainantAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMcontact adoxioComplainantContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMsystemuser adoxioInspector = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser adoxioRegionalManager = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMadoxioContravention> adoxioComplaintContraventions = default(IList<MicrosoftDynamicsCRMadoxioContravention>), MicrosoftDynamicsCRMadoxioEstablishment adoxioEstablishmentId = default(MicrosoftDynamicsCRMadoxioEstablishment), MicrosoftDynamicsCRMadoxioLicences adoxioLicenceId = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioArea adoxioAreaId = default(MicrosoftDynamicsCRMadoxioArea), IList<MicrosoftDynamicsCRMincident> adoxioComplaintInspections = default(IList<MicrosoftDynamicsCRMincident>), MicrosoftDynamicsCRMaccount adoxioLicenceeId = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMadoxioCitydistrict adoxioCityId = default(MicrosoftDynamicsCRMadoxioCitydistrict), IList<MicrosoftDynamicsCRMqueueitem> adoxioComplaintQueueItems = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMadoxioComplianceinvestigation> adoxioComplaintInvestigations = default(IList<MicrosoftDynamicsCRMadoxioComplianceinvestigation>), MicrosoftDynamicsCRMadoxioCitydistrict adoxioStoreCityId = default(MicrosoftDynamicsCRMadoxioCitydistrict), IList<MicrosoftDynamicsCRMadoxioInvestigationactivity> adoxioComplaintInvestigationactivities = default(IList<MicrosoftDynamicsCRMadoxioInvestigationactivity>), MicrosoftDynamicsCRMadoxioRegion adoxioRegionId = default(MicrosoftDynamicsCRMadoxioRegion), IList<MicrosoftDynamicsCRMadoxioInvestigationrequest> adoxioComplaintInvestigationrequests = default(IList<MicrosoftDynamicsCRMadoxioInvestigationrequest>), IList<MicrosoftDynamicsCRMadoxioInvestigation> adoxioComplaintInvestigationsunit = default(IList<MicrosoftDynamicsCRMadoxioInvestigation>))
         {
             this._adoxioInspectorValue = _adoxioInspectorValue;
             AdoxioChecklistinspectionscompleted = adoxioChecklistinspectionscompleted;
             this._adoxioRegionalmanagerValue = _adoxioRegionalmanagerValue;
             AdoxioInvestigationstatus = adoxioInvestigationstatus;
+            AdoxioChecklistinvestigationactivitiesdone = adoxioChecklistinvestigationactivitiesdone;
             this._owninguserValue = _owninguserValue;
             this._owningteamValue = _owningteamValue;
             this._owningbusinessunitValue = _owningbusinessunitValue;
-            AdoxioChecklistcompliancemeetingrequired = adoxioChecklistcompliancemeetingrequired;
+            AdoxioUnlawfulpossessionsalesupply = adoxioUnlawfulpossessionsalesupply;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             AdoxioDelegategmcomments = adoxioDelegategmcomments;
             this._adoxioLicenceeidValue = _adoxioLicenceeidValue;
@@ -46,26 +47,25 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioReasonfordismissal = adoxioReasonfordismissal;
             AdoxioDelegategmdecision = adoxioDelegategmdecision;
             Versionnumber = versionnumber;
+            AdoxioComplaintbasisaggregate = adoxioComplaintbasisaggregate;
             AdoxioChecklistassignedtoinspector = adoxioChecklistassignedtoinspector;
             AdoxioChecklistfinalreportapproved = adoxioChecklistfinalreportapproved;
             AdoxioOtherbasisdescription = adoxioOtherbasisdescription;
             AdoxioDisturbancepersonsvicinity = adoxioDisturbancepersonsvicinity;
-            this._adoxioEstablishmentidValue = _adoxioEstablishmentidValue;
             AdoxioStreet2 = adoxioStreet2;
             AdoxioImportid = adoxioImportid;
             AdoxioOnsiteconsumption = adoxioOnsiteconsumption;
-            AdoxioCaseadmincomments = adoxioCaseadmincomments;
-            AdoxioChecklistinvestigationactivitiesdone = adoxioChecklistinvestigationactivitiesdone;
+            this._adoxioEstablishmentidValue = _adoxioEstablishmentidValue;
             Statuscode = statuscode;
-            AdoxioDisorderlyunlawfulconduct = adoxioDisorderlyunlawfulconduct;
+            this._createdbyValue = _createdbyValue;
             AdoxioPhone = adoxioPhone;
             Modifiedon = modifiedon;
             this._adoxioComplainantValue = _adoxioComplainantValue;
-            this._createdbyValue = _createdbyValue;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             AdoxioPreferredmethodofcontact = adoxioPreferredmethodofcontact;
             AdoxioLicencenumber = adoxioLicencenumber;
             AdoxioIncidentdescription = adoxioIncidentdescription;
+            AdoxioDisorderlyunlawfulconduct = adoxioDisorderlyunlawfulconduct;
             AdoxioChecklistlicencelinked = adoxioChecklistlicencelinked;
             AdoxioWeaponsreporting = adoxioWeaponsreporting;
             this._adoxioCityidValue = _adoxioCityidValue;
@@ -76,13 +76,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioStreet = adoxioStreet;
             AdoxioRmdecision = adoxioRmdecision;
             AdoxioIsdelegategmapproved = adoxioIsdelegategmapproved;
+            AdoxioComplaintid = adoxioComplaintid;
             Createdon = createdon;
             AdoxioStorename = adoxioStorename;
             Importsequencenumber = importsequencenumber;
+            AdoxioMinors = adoxioMinors;
             AdoxioContraventionnumberaggregate = adoxioContraventionnumberaggregate;
             AdoxioChecklistreviewedbyadmin = adoxioChecklistreviewedbyadmin;
-            AdoxioComplaintcategory = adoxioComplaintcategory;
-            this._adoxioSpecialeventidValue = _adoxioSpecialeventidValue;
             Processid = processid;
             AdoxioOtherbasis = adoxioOtherbasis;
             AdoxioInspectordecisionreason = adoxioInspectordecisionreason;
@@ -94,17 +94,17 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Overriddencreatedon = overriddencreatedon;
             AdoxioChecklistcnissued = adoxioChecklistcnissued;
             AdoxioAdvertisingbranding = adoxioAdvertisingbranding;
-            AdoxioUnlawfulpossessionsalesupply = adoxioUnlawfulpossessionsalesupply;
+            AdoxioTiedhouseinducements = adoxioTiedhouseinducements;
             Traversedpath = traversedpath;
             AdoxioIswaiversigned = adoxioIswaiversigned;
             AdoxioStorestreet = adoxioStorestreet;
             AdoxioStorepostalcode = adoxioStorepostalcode;
-            AdoxioTiedhouseinducements = adoxioTiedhouseinducements;
             AdoxioIntoxicatedpatrons = adoxioIntoxicatedpatrons;
             AdoxioChecklistinspectionscheduled = adoxioChecklistinspectionscheduled;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             AdoxioChecklistresultssent = adoxioChecklistresultssent;
-            AdoxioComplaintid = adoxioComplaintid;
+            AdoxioChecklistreviewedbyrm = adoxioChecklistreviewedbyrm;
+            AdoxioChecklistcompliancemeetingrequired = adoxioChecklistcompliancemeetingrequired;
             AdoxioHearingdatetime = adoxioHearingdatetime;
             AdoxioChecklistestablishmentlinked = adoxioChecklistestablishmentlinked;
             AdoxioDateassigned = adoxioDateassigned;
@@ -115,17 +115,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             this._adoxioAreaidValue = _adoxioAreaidValue;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             AdoxioChecklistallegedcontraventionsadded = adoxioChecklistallegedcontraventionsadded;
+            AdoxioInvestigationoutcome = adoxioInvestigationoutcome;
             AdoxioChecklistassignedtorm = adoxioChecklistassignedtorm;
             AdoxioFirstresponseduedate = adoxioFirstresponseduedate;
             this._owneridValue = _owneridValue;
             this._adoxioRegionidValue = _adoxioRegionidValue;
             AdoxioInspectordecision = adoxioInspectordecision;
             AdoxioLastname = adoxioLastname;
-            AdoxioChecklistreviewedbyrm = adoxioChecklistreviewedbyrm;
             AdoxioComplaintsource = adoxioComplaintsource;
             AdoxioFirstname = adoxioFirstname;
             AdoxioWeapons = adoxioWeapons;
-            AdoxioComplaintbasisaggregate = adoxioComplaintbasisaggregate;
             AdoxioCreatedonlongdatestring = adoxioCreatedonlongdatestring;
             this._adoxioLicenceidValue = _adoxioLicenceidValue;
             AdoxioEmail = adoxioEmail;
@@ -133,10 +132,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioName = adoxioName;
             AdoxioMinorsreporting = adoxioMinorsreporting;
             Statecode = statecode;
-            AdoxioInvestigationoutcome = adoxioInvestigationoutcome;
+            AdoxioComplaintcategory = adoxioComplaintcategory;
             AdoxioPostalcode = adoxioPostalcode;
+            AdoxioCaseadmincomments = adoxioCaseadmincomments;
             AdoxioCity = adoxioCity;
-            AdoxioMinors = adoxioMinors;
             AdoxioChecklistfinalreportdone = adoxioChecklistfinalreportdone;
             Createdbyname = createdbyname;
             Createdonbehalfbyname = createdonbehalfbyname;
@@ -186,7 +185,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioRegionId = adoxioRegionId;
             AdoxioComplaintInvestigationrequests = adoxioComplaintInvestigationrequests;
             AdoxioComplaintInvestigationsunit = adoxioComplaintInvestigationsunit;
-            AdoxioSpecialeventid = adoxioSpecialeventid;
             CustomInit();
         }
 
@@ -217,6 +215,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistinvestigationactivitiesdone")]
+        public int? AdoxioChecklistinvestigationactivitiesdone { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
         public string _owninguserValue { get; set; }
 
@@ -232,8 +235,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistcompliancemeetingrequired")]
-        public int? AdoxioChecklistcompliancemeetingrequired { get; set; }
+        [JsonProperty(PropertyName = "adoxio_unlawfulpossessionsalesupply")]
+        public bool? AdoxioUnlawfulpossessionsalesupply { get; set; }
 
         /// <summary>
         /// </summary>
@@ -272,6 +275,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_complaintbasisaggregate")]
+        public string AdoxioComplaintbasisaggregate { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_checklistassignedtoinspector")]
         public int? AdoxioChecklistassignedtoinspector { get; set; }
 
@@ -292,11 +300,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_establishmentid_value")]
-        public string _adoxioEstablishmentidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_street2")]
         public string AdoxioStreet2 { get; set; }
 
@@ -312,13 +315,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_caseadmincomments")]
-        public string AdoxioCaseadmincomments { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistinvestigationactivitiesdone")]
-        public int? AdoxioChecklistinvestigationactivitiesdone { get; set; }
+        [JsonProperty(PropertyName = "_adoxio_establishmentid_value")]
+        public string _adoxioEstablishmentidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -327,8 +325,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_disorderlyunlawfulconduct")]
-        public bool? AdoxioDisorderlyunlawfulconduct { get; set; }
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -344,11 +342,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_adoxio_complainant_value")]
         public string _adoxioComplainantValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -369,6 +362,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_incidentdescription")]
         public string AdoxioIncidentdescription { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_disorderlyunlawfulconduct")]
+        public bool? AdoxioDisorderlyunlawfulconduct { get; set; }
 
         /// <summary>
         /// </summary>
@@ -422,6 +420,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_complaintid")]
+        public string AdoxioComplaintid { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
@@ -437,6 +440,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_minors")]
+        public bool? AdoxioMinors { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_contraventionnumberaggregate")]
         public string AdoxioContraventionnumberaggregate { get; set; }
 
@@ -444,16 +452,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_checklistreviewedbyadmin")]
         public int? AdoxioChecklistreviewedbyadmin { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_complaintcategory")]
-        public int? AdoxioComplaintcategory { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_specialeventid_value")]
-        public string _adoxioSpecialeventidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -512,8 +510,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_unlawfulpossessionsalesupply")]
-        public bool? AdoxioUnlawfulpossessionsalesupply { get; set; }
+        [JsonProperty(PropertyName = "adoxio_tiedhouseinducements")]
+        public bool? AdoxioTiedhouseinducements { get; set; }
 
         /// <summary>
         /// </summary>
@@ -537,11 +535,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_tiedhouseinducements")]
-        public bool? AdoxioTiedhouseinducements { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_intoxicatedpatrons")]
         public bool? AdoxioIntoxicatedpatrons { get; set; }
 
@@ -562,8 +555,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_complaintid")]
-        public string AdoxioComplaintid { get; set; }
+        [JsonProperty(PropertyName = "adoxio_checklistreviewedbyrm")]
+        public int? AdoxioChecklistreviewedbyrm { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistcompliancemeetingrequired")]
+        public int? AdoxioChecklistcompliancemeetingrequired { get; set; }
 
         /// <summary>
         /// </summary>
@@ -617,6 +615,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_investigationoutcome")]
+        public int? AdoxioInvestigationoutcome { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_checklistassignedtorm")]
         public int? AdoxioChecklistassignedtorm { get; set; }
 
@@ -647,11 +650,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistreviewedbyrm")]
-        public int? AdoxioChecklistreviewedbyrm { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_complaintsource")]
         public int? AdoxioComplaintsource { get; set; }
 
@@ -664,11 +662,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_weapons")]
         public bool? AdoxioWeapons { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_complaintbasisaggregate")]
-        public string AdoxioComplaintbasisaggregate { get; set; }
 
         /// <summary>
         /// </summary>
@@ -707,8 +700,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_investigationoutcome")]
-        public int? AdoxioInvestigationoutcome { get; set; }
+        [JsonProperty(PropertyName = "adoxio_complaintcategory")]
+        public int? AdoxioComplaintcategory { get; set; }
 
         /// <summary>
         /// </summary>
@@ -717,13 +710,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_city")]
-        public string AdoxioCity { get; set; }
+        [JsonProperty(PropertyName = "adoxio_caseadmincomments")]
+        public string AdoxioCaseadmincomments { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_minors")]
-        public bool? AdoxioMinors { get; set; }
+        [JsonProperty(PropertyName = "adoxio_city")]
+        public string AdoxioCity { get; set; }
 
         /// <summary>
         /// </summary>
@@ -969,11 +962,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_complaint_investigationsunit")]
         public IList<MicrosoftDynamicsCRMadoxioInvestigation> AdoxioComplaintInvestigationsunit { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_specialeventid")]
-        public MicrosoftDynamicsCRMadoxioSpecialevent AdoxioSpecialeventid { get; set; }
 
     }
 }

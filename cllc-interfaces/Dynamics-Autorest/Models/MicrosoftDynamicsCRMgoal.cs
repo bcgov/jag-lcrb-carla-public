@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// Initializes a new instance of the MicrosoftDynamicsCRMgoal class.
         /// </summary>
-        public MicrosoftDynamicsCRMgoal(decimal? computedtargetasoftodaypercentageachieved = default(decimal?), string stretchtargetstring = default(string), int? amountdatatype = default(int?), string _owningbusinessunitValue = default(string), string _rollupquerycustomintegeridValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _rollupqueryinprogressintegeridValue = default(string), string _createdbyValue = default(string), int? inprogressinteger = default(int?), string entityimageUrl = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _rollupqueryactualintegeridValue = default(string), int? fiscalperiod = default(int?), string _modifiedbyValue = default(string), bool? isoverridden = default(bool?), string title = default(string), System.DateTimeOffset? goalenddate = default(System.DateTimeOffset?), string _owningteamValue = default(string), string _rollupqueryactualdecimalidValue = default(string), string _rollupqueryactualmoneyidValue = default(string), decimal? exchangerate = default(decimal?), decimal? inprogressdecimal = default(decimal?), bool? consideronlygoalownersrecords = default(bool?), int? computedtargetasoftodayinteger = default(int?), string goalid = default(string), string entityimageid = default(string), decimal? targetdecimal = default(decimal?), decimal? computedtargetasoftodaymoney = default(decimal?), bool? isamount = default(bool?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), byte[] entityimage = default(byte[]), int? actualinteger = default(int?), decimal? customrollupfieldmoney = default(decimal?), string versionnumber = default(string), long? entityimageTimestamp = default(long?), string _owneridValue = default(string), decimal? percentage = default(decimal?), string actualstring = default(string), decimal? customrollupfieldmoneyBase = default(decimal?), int? stretchtargetinteger = default(int?), System.DateTimeOffset? lastrolledupdate = default(System.DateTimeOffset?), int? statuscode = default(int?), decimal? computedtargetasoftodaymoneyBase = default(decimal?), string _modifiedonbehalfbyValue = default(string), int? targetinteger = default(int?), decimal? actualmoney = default(decimal?), string inprogressstring = default(string), System.DateTimeOffset? goalstartdate = default(System.DateTimeOffset?), decimal? inprogressmoneyBase = default(decimal?), string targetstring = default(string), int? timezoneruleversionnumber = default(int?), bool? isoverride = default(bool?), string _goalowneridValue = default(string), string _rollupquerycustommoneyidValue = default(string), string _owninguserValue = default(string), decimal? targetmoney = default(decimal?), string _transactioncurrencyidValue = default(string), string _rollupqueryinprogressdecimalidValue = default(string), int? statecode = default(int?), decimal? stretchtargetmoney = default(decimal?), int? importsequencenumber = default(int?), string treeid = default(string), string _goalwitherroridValue = default(string), decimal? actualmoneyBase = default(decimal?), bool? rolluponlyfromchildgoals = default(bool?), bool? isfiscalperiodgoal = default(bool?), decimal? actualdecimal = default(decimal?), string customrollupfieldstring = default(string), string _rollupqueryinprogressmoneyidValue = default(string), string _rollupquerycustomdecimalidValue = default(string), int? utcconversiontimezonecode = default(int?), decimal? stretchtargetmoneyBase = default(decimal?), string _metricidValue = default(string), decimal? computedtargetasoftodaydecimal = default(decimal?), string _createdonbehalfbyValue = default(string), decimal? customrollupfielddecimal = default(decimal?), int? fiscalyear = default(int?), decimal? stretchtargetdecimal = default(decimal?), decimal? targetmoneyBase = default(decimal?), decimal? inprogressmoney = default(decimal?), int? depth = default(int?), int? rolluperrorcode = default(int?), string _parentgoalidValue = default(string), int? customrollupfieldinteger = default(int?), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMgoalrollupquery rollupqueryactualintegerid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupqueryactualmoneyid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupqueryactualdecimalid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupquerycustomintegerid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupquerycustommoneyid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupquerycustomdecimalid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupqueryinprogressintegerid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupqueryinprogressmoneyid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupqueryinprogressdecimalid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser goalowneridSystemuser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMgoal parentgoalid = default(MicrosoftDynamicsCRMgoal), IList<MicrosoftDynamicsCRMgoal> goalParentGoal = default(IList<MicrosoftDynamicsCRMgoal>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMmetric metricid = default(MicrosoftDynamicsCRMmetric), IList<MicrosoftDynamicsCRMduplicaterecord> goalDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMgoal goalwitherrorid = default(MicrosoftDynamicsCRMgoal), IList<MicrosoftDynamicsCRMgoal> goalRollupErrorGoal = default(IList<MicrosoftDynamicsCRMgoal>), IList<MicrosoftDynamicsCRMconnection> goalConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMsyncerror> goalSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMannotation> goalAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMconnection> goalConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMasyncoperation> goalAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMduplicaterecord> goalDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMprocesssession> goalProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> goalPrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMteam goalowneridTeam = default(MicrosoftDynamicsCRMteam))
+        public MicrosoftDynamicsCRMgoal(decimal? computedtargetasoftodaypercentageachieved = default(decimal?), string stretchtargetstring = default(string), int? amountdatatype = default(int?), string _owningbusinessunitValue = default(string), string _rollupquerycustomintegeridValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdbyValue = default(string), int? inprogressinteger = default(int?), bool? rolluponlyfromchildgoals = default(bool?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), decimal? targetmoneyBase = default(decimal?), string _rollupqueryactualintegeridValue = default(string), int? utcconversiontimezonecode = default(int?), string _modifiedbyValue = default(string), string title = default(string), System.DateTimeOffset? goalenddate = default(System.DateTimeOffset?), string _rollupqueryactualdecimalidValue = default(string), string _owningteamValue = default(string), string _rollupqueryactualmoneyidValue = default(string), decimal? exchangerate = default(decimal?), decimal? inprogressdecimal = default(decimal?), bool? consideronlygoalownersrecords = default(bool?), decimal? actualdecimal = default(decimal?), string entityimageid = default(string), decimal? targetdecimal = default(decimal?), decimal? computedtargetasoftodaymoney = default(decimal?), bool? isamount = default(bool?), int? computedtargetasoftodayinteger = default(int?), int? actualinteger = default(int?), decimal? customrollupfieldmoney = default(decimal?), byte[] entityimage = default(byte[]), decimal? actualmoney = default(decimal?), string versionnumber = default(string), long? entityimageTimestamp = default(long?), string _owneridValue = default(string), decimal? percentage = default(decimal?), string actualstring = default(string), decimal? customrollupfieldmoneyBase = default(decimal?), int? stretchtargetinteger = default(int?), System.DateTimeOffset? lastrolledupdate = default(System.DateTimeOffset?), decimal? computedtargetasoftodaymoneyBase = default(decimal?), string _modifiedonbehalfbyValue = default(string), int? targetinteger = default(int?), string inprogressstring = default(string), System.DateTimeOffset? goalstartdate = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), decimal? inprogressmoneyBase = default(decimal?), string targetstring = default(string), int? fiscalperiod = default(int?), int? statuscode = default(int?), bool? isoverride = default(bool?), string goalid = default(string), string _goalowneridValue = default(string), string _rollupquerycustommoneyidValue = default(string), string _owninguserValue = default(string), string _transactioncurrencyidValue = default(string), string _rollupqueryinprogressdecimalidValue = default(string), int? statecode = default(int?), decimal? stretchtargetmoney = default(decimal?), int? importsequencenumber = default(int?), string _rollupqueryinprogressintegeridValue = default(string), decimal? targetmoney = default(decimal?), string treeid = default(string), string _goalwitherroridValue = default(string), decimal? actualmoneyBase = default(decimal?), string entityimageUrl = default(string), bool? isfiscalperiodgoal = default(bool?), string customrollupfieldstring = default(string), string _rollupqueryinprogressmoneyidValue = default(string), string _rollupquerycustomdecimalidValue = default(string), bool? isoverridden = default(bool?), decimal? stretchtargetmoneyBase = default(decimal?), string _metricidValue = default(string), decimal? computedtargetasoftodaydecimal = default(decimal?), string _createdonbehalfbyValue = default(string), decimal? customrollupfielddecimal = default(decimal?), int? fiscalyear = default(int?), decimal? stretchtargetdecimal = default(decimal?), decimal? inprogressmoney = default(decimal?), int? depth = default(int?), int? rolluperrorcode = default(int?), string _parentgoalidValue = default(string), int? customrollupfieldinteger = default(int?), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMgoalrollupquery rollupqueryactualintegerid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupqueryactualmoneyid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupqueryactualdecimalid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupquerycustomintegerid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupquerycustommoneyid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupquerycustomdecimalid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupqueryinprogressintegerid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupqueryinprogressmoneyid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupqueryinprogressdecimalid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser goalowneridSystemuser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMgoal parentgoalid = default(MicrosoftDynamicsCRMgoal), IList<MicrosoftDynamicsCRMgoal> goalParentGoal = default(IList<MicrosoftDynamicsCRMgoal>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMmetric metricid = default(MicrosoftDynamicsCRMmetric), IList<MicrosoftDynamicsCRMduplicaterecord> goalDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMgoal goalwitherrorid = default(MicrosoftDynamicsCRMgoal), IList<MicrosoftDynamicsCRMgoal> goalRollupErrorGoal = default(IList<MicrosoftDynamicsCRMgoal>), IList<MicrosoftDynamicsCRMconnection> goalConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMsyncerror> goalSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMannotation> goalAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMconnection> goalConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMasyncoperation> goalAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMduplicaterecord> goalDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMprocesssession> goalProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> goalPrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMteam goalowneridTeam = default(MicrosoftDynamicsCRMteam))
         {
             Computedtargetasoftodaypercentageachieved = computedtargetasoftodaypercentageachieved;
             Stretchtargetstring = stretchtargetstring;
@@ -37,33 +37,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             this._owningbusinessunitValue = _owningbusinessunitValue;
             this._rollupquerycustomintegeridValue = _rollupquerycustomintegeridValue;
             Createdon = createdon;
-            this._rollupqueryinprogressintegeridValue = _rollupqueryinprogressintegeridValue;
             this._createdbyValue = _createdbyValue;
             Inprogressinteger = inprogressinteger;
-            EntityimageUrl = entityimageUrl;
+            Rolluponlyfromchildgoals = rolluponlyfromchildgoals;
             Overriddencreatedon = overriddencreatedon;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            TargetmoneyBase = targetmoneyBase;
             this._rollupqueryactualintegeridValue = _rollupqueryactualintegeridValue;
-            Fiscalperiod = fiscalperiod;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
             this._modifiedbyValue = _modifiedbyValue;
-            Isoverridden = isoverridden;
             Title = title;
             Goalenddate = goalenddate;
-            this._owningteamValue = _owningteamValue;
             this._rollupqueryactualdecimalidValue = _rollupqueryactualdecimalidValue;
+            this._owningteamValue = _owningteamValue;
             this._rollupqueryactualmoneyidValue = _rollupqueryactualmoneyidValue;
             Exchangerate = exchangerate;
             Inprogressdecimal = inprogressdecimal;
             Consideronlygoalownersrecords = consideronlygoalownersrecords;
-            Computedtargetasoftodayinteger = computedtargetasoftodayinteger;
-            Goalid = goalid;
+            Actualdecimal = actualdecimal;
             Entityimageid = entityimageid;
             Targetdecimal = targetdecimal;
             Computedtargetasoftodaymoney = computedtargetasoftodaymoney;
             Isamount = isamount;
-            Modifiedon = modifiedon;
-            Entityimage = entityimage;
+            Computedtargetasoftodayinteger = computedtargetasoftodayinteger;
             Actualinteger = actualinteger;
             Customrollupfieldmoney = customrollupfieldmoney;
+            Entityimage = entityimage;
+            Actualmoney = actualmoney;
             Versionnumber = versionnumber;
             EntityimageTimestamp = entityimageTimestamp;
             this._owneridValue = _owneridValue;
@@ -72,36 +72,37 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             CustomrollupfieldmoneyBase = customrollupfieldmoneyBase;
             Stretchtargetinteger = stretchtargetinteger;
             Lastrolledupdate = lastrolledupdate;
-            Statuscode = statuscode;
             ComputedtargetasoftodaymoneyBase = computedtargetasoftodaymoneyBase;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Targetinteger = targetinteger;
-            Actualmoney = actualmoney;
             Inprogressstring = inprogressstring;
             Goalstartdate = goalstartdate;
+            Modifiedon = modifiedon;
             InprogressmoneyBase = inprogressmoneyBase;
             Targetstring = targetstring;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
+            Fiscalperiod = fiscalperiod;
+            Statuscode = statuscode;
             Isoverride = isoverride;
+            Goalid = goalid;
             this._goalowneridValue = _goalowneridValue;
             this._rollupquerycustommoneyidValue = _rollupquerycustommoneyidValue;
             this._owninguserValue = _owninguserValue;
-            Targetmoney = targetmoney;
             this._transactioncurrencyidValue = _transactioncurrencyidValue;
             this._rollupqueryinprogressdecimalidValue = _rollupqueryinprogressdecimalidValue;
             Statecode = statecode;
             Stretchtargetmoney = stretchtargetmoney;
             Importsequencenumber = importsequencenumber;
+            this._rollupqueryinprogressintegeridValue = _rollupqueryinprogressintegeridValue;
+            Targetmoney = targetmoney;
             Treeid = treeid;
             this._goalwitherroridValue = _goalwitherroridValue;
             ActualmoneyBase = actualmoneyBase;
-            Rolluponlyfromchildgoals = rolluponlyfromchildgoals;
+            EntityimageUrl = entityimageUrl;
             Isfiscalperiodgoal = isfiscalperiodgoal;
-            Actualdecimal = actualdecimal;
             Customrollupfieldstring = customrollupfieldstring;
             this._rollupqueryinprogressmoneyidValue = _rollupqueryinprogressmoneyidValue;
             this._rollupquerycustomdecimalidValue = _rollupquerycustomdecimalidValue;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
+            Isoverridden = isoverridden;
             StretchtargetmoneyBase = stretchtargetmoneyBase;
             this._metricidValue = _metricidValue;
             Computedtargetasoftodaydecimal = computedtargetasoftodaydecimal;
@@ -109,7 +110,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Customrollupfielddecimal = customrollupfielddecimal;
             Fiscalyear = fiscalyear;
             Stretchtargetdecimal = stretchtargetdecimal;
-            TargetmoneyBase = targetmoneyBase;
             Inprogressmoney = inprogressmoney;
             Depth = depth;
             Rolluperrorcode = rolluperrorcode;
@@ -189,11 +189,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_rollupqueryinprogressintegerid_value")]
-        public string _rollupqueryinprogressintegeridValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
 
@@ -204,8 +199,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "entityimage_url")]
-        public string EntityimageUrl { get; set; }
+        [JsonProperty(PropertyName = "rolluponlyfromchildgoals")]
+        public bool? Rolluponlyfromchildgoals { get; set; }
 
         /// <summary>
         /// </summary>
@@ -214,23 +209,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "targetmoney_base")]
+        public decimal? TargetmoneyBase { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_rollupqueryactualintegerid_value")]
         public string _rollupqueryactualintegeridValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "fiscalperiod")]
-        public int? Fiscalperiod { get; set; }
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "isoverridden")]
-        public bool? Isoverridden { get; set; }
 
         /// <summary>
         /// </summary>
@@ -244,13 +244,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
+        [JsonProperty(PropertyName = "_rollupqueryactualdecimalid_value")]
+        public string _rollupqueryactualdecimalidValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_rollupqueryactualdecimalid_value")]
-        public string _rollupqueryactualdecimalidValue { get; set; }
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -274,13 +274,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "computedtargetasoftodayinteger")]
-        public int? Computedtargetasoftodayinteger { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "goalid")]
-        public string Goalid { get; set; }
+        [JsonProperty(PropertyName = "actualdecimal")]
+        public decimal? Actualdecimal { get; set; }
 
         /// <summary>
         /// </summary>
@@ -304,14 +299,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonConverter(typeof(Base64UrlJsonConverter))]
-        [JsonProperty(PropertyName = "entityimage")]
-        public byte[] Entityimage { get; set; }
+        [JsonProperty(PropertyName = "computedtargetasoftodayinteger")]
+        public int? Computedtargetasoftodayinteger { get; set; }
 
         /// <summary>
         /// </summary>
@@ -322,6 +311,17 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "customrollupfieldmoney")]
         public decimal? Customrollupfieldmoney { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonConverter(typeof(Base64UrlJsonConverter))]
+        [JsonProperty(PropertyName = "entityimage")]
+        public byte[] Entityimage { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "actualmoney")]
+        public decimal? Actualmoney { get; set; }
 
         /// <summary>
         /// </summary>
@@ -365,11 +365,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "computedtargetasoftodaymoney_base")]
         public decimal? ComputedtargetasoftodaymoneyBase { get; set; }
 
@@ -385,11 +380,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "actualmoney")]
-        public decimal? Actualmoney { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "inprogressstring")]
         public string Inprogressstring { get; set; }
 
@@ -397,6 +387,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "goalstartdate")]
         public System.DateTimeOffset? Goalstartdate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -410,13 +405,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
+        [JsonProperty(PropertyName = "fiscalperiod")]
+        public int? Fiscalperiod { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "isoverride")]
         public bool? Isoverride { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "goalid")]
+        public string Goalid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -432,11 +437,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
         public string _owninguserValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "targetmoney")]
-        public decimal? Targetmoney { get; set; }
 
         /// <summary>
         /// </summary>
@@ -465,6 +465,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_rollupqueryinprogressintegerid_value")]
+        public string _rollupqueryinprogressintegeridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "targetmoney")]
+        public decimal? Targetmoney { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "treeid")]
         public string Treeid { get; set; }
 
@@ -480,18 +490,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "rolluponlyfromchildgoals")]
-        public bool? Rolluponlyfromchildgoals { get; set; }
+        [JsonProperty(PropertyName = "entityimage_url")]
+        public string EntityimageUrl { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "isfiscalperiodgoal")]
         public bool? Isfiscalperiodgoal { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "actualdecimal")]
-        public decimal? Actualdecimal { get; set; }
 
         /// <summary>
         /// </summary>
@@ -510,8 +515,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
+        [JsonProperty(PropertyName = "isoverridden")]
+        public bool? Isoverridden { get; set; }
 
         /// <summary>
         /// </summary>
@@ -547,11 +552,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "stretchtargetdecimal")]
         public decimal? Stretchtargetdecimal { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "targetmoney_base")]
-        public decimal? TargetmoneyBase { get; set; }
 
         /// <summary>
         /// </summary>
