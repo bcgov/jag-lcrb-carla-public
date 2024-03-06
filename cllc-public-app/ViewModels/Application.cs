@@ -663,6 +663,13 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string PatioLiquorCarriedDescription { get; set; }
         public string PatioAccessControlDescription { get; set; }
 
+        // LCSD-6170: 2024-02-02 waynezen - the patio fields that time forgot
+        public bool? isBoundingSufficientForControl { get; set; }
+        public bool? isBoundingSufficientToDefine { get; set; }
+        public bool? isAdequateCare { get; set; }
+        public bool? isInCompliance { get; set; }
+
+
         public int? LocatedAboveDescription { get; set; }
         public int? PatioServiceBar { get; set; }
 

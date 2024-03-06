@@ -1272,8 +1272,9 @@
                     </app-field>
 
                     <!-- Radio Control -->
+                    <!--2024-02-06 LCSD-6170 waynezen-->
                     <app-field *ngIf="formField.controltype == 'RadioControl'"
-                               [valid]="!showValidationMessages || form.get(formField.datafieldname).valid" [required]="formField.required" [errorMessage]="'This field is required.'"
+                               [valid]="!showValidationMessages || isValidYesNoFieldRequireTrue(formField.datafieldname)" [required]="formField.required" [errorMessage]="'This field is required.'"
                                [showChevrons]="false">
                       <mat-checkbox [formControlName]="formField.datafieldname" [id]="formField.datafieldname">
                         <span class="error-states" *ngIf="formField.required">*</span>

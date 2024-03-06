@@ -267,7 +267,15 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioConfirmrelocatepicnicareaendorsement = from.ConfirmrelocatePicnicAreaEndorsement ? 1:0;
             to.AdoxioRelocatewinerylicence = from.RelocateWinaryLicence ? 1:0;
             to.AdoxioConfirmunderstandingwinerylicence= from.ConfirmRelocateWinaryLicence?1:0;
-    }
+
+
+            // LCSD-6170: 2024-02-02 waynezen
+            to.AdoxioIspatioboundingsufficientforcontrol = from.isBoundingSufficientForControl;
+            to.AdoxioIspatioboundingsufficienttodefinearea = from.isBoundingSufficientToDefine;
+            to.AdoxioIsadequatecareandcontroloverthepatio = from.isAdequateCare;
+            to.AdoxioIspatioincompliance = from.isInCompliance;
+
+        }
 
 
         public static void CopyValues(this MicrosoftDynamicsCRMadoxioApplication to, CovidApplication from)
@@ -653,6 +661,13 @@ namespace Gov.Lclb.Cllb.Public.Models
                 RelocateOnSiteStore = dynamicsApplication.AdoxioRelocateonsitestore.HasValue? dynamicsApplication.AdoxioRelocateonsitestore.Value==1? true:false : false,
                 RelocateWinaryLicence = dynamicsApplication.AdoxioRelocatewinerylicence.HasValue ? dynamicsApplication.AdoxioRelocatewinerylicence.Value == 1 ? true : false : false,
                 ConfirmRelocateWinaryLicence = dynamicsApplication.AdoxioConfirmunderstandingwinerylicence.HasValue ? dynamicsApplication.AdoxioConfirmunderstandingwinerylicence.Value == 1 ? true : false : false,
+
+
+                // LCSD-6170: 2024-02-02 waynezen
+                isBoundingSufficientForControl = dynamicsApplication.AdoxioIspatioboundingsufficientforcontrol,
+                isBoundingSufficientToDefine = dynamicsApplication.AdoxioIspatioboundingsufficienttodefinearea,
+                isAdequateCare = dynamicsApplication.AdoxioIsadequatecareandcontroloverthepatio,
+                isInCompliance = dynamicsApplication.AdoxioIspatioincompliance,
 
             };
 
