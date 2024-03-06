@@ -96,8 +96,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool CapacityArea { get; set; }
 
         public bool? ShowPatio {get; set;}
-        public bool? HasPatio { get; set; }       // 2024-02-06 LCSD-6170 waynezen
-
 
         [JsonConverter(typeof(StringEnumConverter))]
         public FormControlState? LetterOfIntent { get; set; }

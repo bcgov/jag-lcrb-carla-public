@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Inject, Output, EventEmitter } from "@angular/core";
-import { forkJoin, from, Observable, of, Subscription } from "rxjs";
+import { forkJoin, Subscription } from "rxjs";
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { ApplicationDataService } from "@app/services/application-data.service";
@@ -11,7 +11,7 @@ import { ApplicationType, ApplicationTypeNames } from "@models/application-type.
 import { Account } from "@models/account.model";
 import { FeatureFlagService } from "@services/feature-flag.service";
 import { FormBase } from "@shared/form-base";
-import { delay, startWith, takeWhile } from "rxjs/operators";
+import { takeWhile } from "rxjs/operators";
 import { ApplicationLicenseSummary } from "@models/application-license-summary.model";
 import { Store } from "@ngrx/store";
 import { AppState } from "@app/app-state/models/app-state";
@@ -153,7 +153,6 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(([applications, licenses]) => {
         this.checkIndigenousNationState(applications);
-
         // filter out approved applications
         applications
           .filter(
@@ -182,11 +181,12 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
           this.licensedApplications.push(licence);
 
         });
-        */
+          */
 
-        // LCSD-6843: 2024-03-01 waynezen; executes asynchronously on long-running thread
-        this.marketerExists = this.marketerExistsFunc(applications, licenses);
-
+        this.marketerExists = applications.filter(item => item.applicationTypeName === ApplicationTypeNames.Marketer)
+          .map(item => item as any)
+          .concat(licenses.filter(item => item.licenceTypeName === ApplicationTypeNames.Marketer)).length >
+          0;
 
         this.nonMarketerExists = applications
           .filter(item => item.applicationTypeName === ApplicationTypeNames.CannabisRetailStore)
@@ -197,24 +197,8 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
         this.dataLoaded = true;
 
       });
-
-    // LCSD-6843: 2024-03-01 waynezen; executes immediately; set marketerExists flag here first which hides the Cannabis tiles initially
-    this.marketerExists = true;
-
     this.subscriptionList.push(sub);
   }
-
-  private marketerExistsFunc(applications: ApplicationSummary[], licenses: ApplicationLicenseSummary[]): boolean {
-
-    const isMarketerExist = applications.filter(item => item.applicationTypeName === ApplicationTypeNames.Marketer)
-      .map(item => item as any)
-      .concat(licenses.filter(item => item.licenceTypeName === ApplicationTypeNames.Marketer)).length > 0;
-
-    return (isMarketerExist);
-
-  }
-
-
 
   uploadMoreFiles(application: Application) {
     this.router.navigate([`/application/${application.id}`, { mode: UPLOAD_FILES_MODE }]);
