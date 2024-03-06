@@ -29,14 +29,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMabsScheduledprocess class.
         /// </summary>
-        public MicrosoftDynamicsCRMabsScheduledprocess(bool? absThursday = default(bool?), bool? absOctober = default(bool?), bool? absJuly = default(bool?), int? importsequencenumber = default(int?), string _modifiedbyValue = default(string), bool? absTuesday = default(bool?), string absName = default(string), bool? absWednesday = default(bool?), int? absHour = default(int?), int? utcconversiontimezonecode = default(int?), string _modifiedonbehalfbyValue = default(string), bool? absAmpm = default(bool?), string _owningbusinessunitValue = default(string), bool? absMarch = default(bool?), bool? absDecember = default(bool?), string _owneridValue = default(string), bool? absFebruary = default(bool?), int? absMinute = default(int?), string _createdbyValue = default(string), bool? absApril = default(bool?), bool? absJanuary = default(bool?), bool? absSuspendonfailure = default(bool?), string absFetchxmlquery = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), bool? absSunday = default(bool?), string _owningteamValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), bool? absSaturday = default(bool?), bool? absAugust = default(bool?), string absScheduledprocessid = default(string), bool? absSeptember = default(bool?), int? absDayofmonth = default(int?), string _createdonbehalfbyValue = default(string), bool? absJune = default(bool?), bool? absMonday = default(bool?), string _absProcessidValue = default(string), System.DateTimeOffset? absNextactivation = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), int? absInterval = default(int?), bool? absMay = default(bool?), int? absRecurrencepattern = default(int?), int? statuscode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _owninguserValue = default(string), bool? absNovember = default(bool?), string versionnumber = default(string), bool? absFriday = default(bool?), int? statecode = default(int?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMactivitypointer> absScheduledprocessActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMappointment> absScheduledprocessAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMemail> absScheduledprocessEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> absScheduledprocessFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMletter> absScheduledprocessLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMphonecall> absScheduledprocessPhoneCalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMserviceappointment> absScheduledprocessServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMtask> absScheduledprocessTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> absScheduledprocessRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMsocialactivity> absScheduledprocessSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMsyncerror> absScheduledprocessSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> absScheduledprocessAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> absScheduledprocessMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> absScheduledprocessProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> absScheduledprocessBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> absScheduledprocessPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> absScheduledprocessAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), MicrosoftDynamicsCRMworkflow absProcessId = default(MicrosoftDynamicsCRMworkflow))
+        public MicrosoftDynamicsCRMabsScheduledprocess(bool? absThursday = default(bool?), bool? absOctober = default(bool?), bool? absJuly = default(bool?), int? importsequencenumber = default(int?), string _modifiedbyValue = default(string), string absName = default(string), bool? absWednesday = default(bool?), int? absHour = default(int?), int? utcconversiontimezonecode = default(int?), string _modifiedonbehalfbyValue = default(string), bool? absAmpm = default(bool?), string _owningbusinessunitValue = default(string), string _owningteamValue = default(string), bool? absMarch = default(bool?), string _owneridValue = default(string), bool? absFebruary = default(bool?), int? absMinute = default(int?), string _createdbyValue = default(string), bool? absApril = default(bool?), bool? absJanuary = default(bool?), bool? absSuspendonfailure = default(bool?), string absFetchxmlquery = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), bool? absDecember = default(bool?), bool? absSunday = default(bool?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), bool? absSaturday = default(bool?), bool? absAugust = default(bool?), string absScheduledprocessid = default(string), bool? absSeptember = default(bool?), int? absDayofmonth = default(int?), string _createdonbehalfbyValue = default(string), bool? absJune = default(bool?), bool? absMonday = default(bool?), bool? absTuesday = default(bool?), int? statuscode = default(int?), System.DateTimeOffset? absNextactivation = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), int? absInterval = default(int?), bool? absMay = default(bool?), int? absRecurrencepattern = default(int?), string _absProcessidValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _owninguserValue = default(string), bool? absNovember = default(bool?), string versionnumber = default(string), bool? absFriday = default(bool?), int? statecode = default(int?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMactivitypointer> absScheduledprocessActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMappointment> absScheduledprocessAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMemail> absScheduledprocessEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> absScheduledprocessFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMletter> absScheduledprocessLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMphonecall> absScheduledprocessPhoneCalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMserviceappointment> absScheduledprocessServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMtask> absScheduledprocessTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> absScheduledprocessRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMsocialactivity> absScheduledprocessSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMsyncerror> absScheduledprocessSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> absScheduledprocessAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> absScheduledprocessMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> absScheduledprocessProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> absScheduledprocessBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> absScheduledprocessPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> absScheduledprocessAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), MicrosoftDynamicsCRMworkflow absProcessId = default(MicrosoftDynamicsCRMworkflow))
         {
             AbsThursday = absThursday;
             AbsOctober = absOctober;
             AbsJuly = absJuly;
             Importsequencenumber = importsequencenumber;
             this._modifiedbyValue = _modifiedbyValue;
-            AbsTuesday = absTuesday;
             AbsName = absName;
             AbsWednesday = absWednesday;
             AbsHour = absHour;
@@ -44,8 +43,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             AbsAmpm = absAmpm;
             this._owningbusinessunitValue = _owningbusinessunitValue;
+            this._owningteamValue = _owningteamValue;
             AbsMarch = absMarch;
-            AbsDecember = absDecember;
             this._owneridValue = _owneridValue;
             AbsFebruary = absFebruary;
             AbsMinute = absMinute;
@@ -55,8 +54,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AbsSuspendonfailure = absSuspendonfailure;
             AbsFetchxmlquery = absFetchxmlquery;
             Createdon = createdon;
+            AbsDecember = absDecember;
             AbsSunday = absSunday;
-            this._owningteamValue = _owningteamValue;
             Modifiedon = modifiedon;
             AbsSaturday = absSaturday;
             AbsAugust = absAugust;
@@ -66,13 +65,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             AbsJune = absJune;
             AbsMonday = absMonday;
-            this._absProcessidValue = _absProcessidValue;
+            AbsTuesday = absTuesday;
+            Statuscode = statuscode;
             AbsNextactivation = absNextactivation;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             AbsInterval = absInterval;
             AbsMay = absMay;
             AbsRecurrencepattern = absRecurrencepattern;
-            Statuscode = statuscode;
+            this._absProcessidValue = _absProcessidValue;
             Overriddencreatedon = overriddencreatedon;
             this._owninguserValue = _owninguserValue;
             AbsNovember = absNovember;
@@ -140,11 +140,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "abs_tuesday")]
-        public bool? AbsTuesday { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "abs_name")]
         public string AbsName { get; set; }
 
@@ -180,13 +175,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "abs_march")]
-        public bool? AbsMarch { get; set; }
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "abs_december")]
-        public bool? AbsDecember { get; set; }
+        [JsonProperty(PropertyName = "abs_march")]
+        public bool? AbsMarch { get; set; }
 
         /// <summary>
         /// </summary>
@@ -235,13 +230,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "abs_sunday")]
-        public bool? AbsSunday { get; set; }
+        [JsonProperty(PropertyName = "abs_december")]
+        public bool? AbsDecember { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
+        [JsonProperty(PropertyName = "abs_sunday")]
+        public bool? AbsSunday { get; set; }
 
         /// <summary>
         /// </summary>
@@ -290,8 +285,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_abs_processid_value")]
-        public string _absProcessidValue { get; set; }
+        [JsonProperty(PropertyName = "abs_tuesday")]
+        public bool? AbsTuesday { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -320,8 +320,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
+        [JsonProperty(PropertyName = "_abs_processid_value")]
+        public string _absProcessidValue { get; set; }
 
         /// <summary>
         /// </summary>

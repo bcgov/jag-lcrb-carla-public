@@ -29,19 +29,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioImportedoutstandinginvoices class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioImportedoutstandinginvoices(string versionnumber = default(string), string _createdonbehalfbyValue = default(string), string _adoxioInvoicegeneratedValue = default(string), string _owneridValue = default(string), string adoxioDescription = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _transactioncurrencyidValue = default(string), int? adoxioImportstatus = default(int?), int? utcconversiontimezonecode = default(int?), decimal? exchangerate = default(decimal?), string _modifiedonbehalfbyValue = default(string), string _adoxioJobnumberValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string adoxioStatusdescription = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _adoxioGeneratedapplicationlinkValue = default(string), bool? adoxioIspaid = default(bool?), decimal? adoxioAmount = default(decimal?), string adoxioName = default(string), int? importsequencenumber = default(int?), string _owningteamValue = default(string), decimal? adoxioAmountBase = default(decimal?), int? timezoneruleversionnumber = default(int?), string _adoxioPayeeValue = default(string), string _modifiedbyValue = default(string), string _adoxioLicenceValue = default(string), string adoxioImportedoutstandinginvoicesid = default(string), string _owningbusinessunitValue = default(string), int? statuscode = default(int?), string _createdbyValue = default(string), string _owninguserValue = default(string), int? statecode = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioImportedoutstandinginvoicesSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioImportedoutstandinginvoicesDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioImportedoutstandinginvoicesDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioImportedoutstandinginvoicesAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioImportedoutstandinginvoicesMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioImportedoutstandinginvoicesProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioImportedoutstandinginvoicesBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioImportedoutstandinginvoicesPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMinvoice adoxioInvoiceGenerated = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMadoxioApplication adoxioJobNumber = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioLicences adoxioLicence = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMaccount adoxioPayeeAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMcontact adoxioPayeeContact = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioAdoxioImportedoutstandinginvoicesAdoxioApplicationImportedOutstanding = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMinvoice> adoxioAdoxioImportedoutstandinginvoicesInvoiceIOIAssociated = default(IList<MicrosoftDynamicsCRMinvoice>), MicrosoftDynamicsCRMadoxioApplication adoxioGeneratedApplicationLink = default(MicrosoftDynamicsCRMadoxioApplication))
+        public MicrosoftDynamicsCRMadoxioImportedoutstandinginvoices(string versionnumber = default(string), string _owneridValue = default(string), string adoxioDescription = default(string), int? statuscode = default(int?), string _transactioncurrencyidValue = default(string), int? adoxioImportstatus = default(int?), int? utcconversiontimezonecode = default(int?), decimal? exchangerate = default(decimal?), string _owningteamValue = default(string), string _adoxioInvoicegeneratedValue = default(string), string _adoxioJobnumberValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string adoxioStatusdescription = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _adoxioGeneratedapplicationlinkValue = default(string), bool? adoxioIspaid = default(bool?), decimal? adoxioAmount = default(decimal?), int? importsequencenumber = default(int?), string _createdonbehalfbyValue = default(string), decimal? adoxioAmountBase = default(decimal?), int? timezoneruleversionnumber = default(int?), string _adoxioPayeeValue = default(string), string _modifiedbyValue = default(string), string _adoxioLicenceValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string adoxioImportedoutstandinginvoicesid = default(string), string _modifiedonbehalfbyValue = default(string), string _owningbusinessunitValue = default(string), string adoxioName = default(string), string _createdbyValue = default(string), string _owninguserValue = default(string), int? statecode = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioImportedoutstandinginvoicesSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioImportedoutstandinginvoicesDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioImportedoutstandinginvoicesDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioImportedoutstandinginvoicesAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioImportedoutstandinginvoicesMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioImportedoutstandinginvoicesProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioImportedoutstandinginvoicesBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioImportedoutstandinginvoicesPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMinvoice adoxioInvoiceGenerated = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMadoxioApplication adoxioJobNumber = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioLicences adoxioLicence = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMaccount adoxioPayeeAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMcontact adoxioPayeeContact = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioAdoxioImportedoutstandinginvoicesAdoxioApplicationImportedOutstanding = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMinvoice> adoxioAdoxioImportedoutstandinginvoicesInvoiceIOIAssociated = default(IList<MicrosoftDynamicsCRMinvoice>), MicrosoftDynamicsCRMadoxioApplication adoxioGeneratedApplicationLink = default(MicrosoftDynamicsCRMadoxioApplication))
         {
             Versionnumber = versionnumber;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._adoxioInvoicegeneratedValue = _adoxioInvoicegeneratedValue;
             this._owneridValue = _owneridValue;
             AdoxioDescription = adoxioDescription;
-            Createdon = createdon;
+            Statuscode = statuscode;
             this._transactioncurrencyidValue = _transactioncurrencyidValue;
             AdoxioImportstatus = adoxioImportstatus;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             Exchangerate = exchangerate;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            this._owningteamValue = _owningteamValue;
+            this._adoxioInvoicegeneratedValue = _adoxioInvoicegeneratedValue;
             this._adoxioJobnumberValue = _adoxioJobnumberValue;
             Modifiedon = modifiedon;
             AdoxioStatusdescription = adoxioStatusdescription;
@@ -49,17 +48,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             this._adoxioGeneratedapplicationlinkValue = _adoxioGeneratedapplicationlinkValue;
             AdoxioIspaid = adoxioIspaid;
             AdoxioAmount = adoxioAmount;
-            AdoxioName = adoxioName;
             Importsequencenumber = importsequencenumber;
-            this._owningteamValue = _owningteamValue;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             AdoxioAmountBase = adoxioAmountBase;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             this._adoxioPayeeValue = _adoxioPayeeValue;
             this._modifiedbyValue = _modifiedbyValue;
             this._adoxioLicenceValue = _adoxioLicenceValue;
+            Createdon = createdon;
             AdoxioImportedoutstandinginvoicesid = adoxioImportedoutstandinginvoicesid;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             this._owningbusinessunitValue = _owningbusinessunitValue;
-            Statuscode = statuscode;
+            AdoxioName = adoxioName;
             this._createdbyValue = _createdbyValue;
             this._owninguserValue = _owninguserValue;
             Statecode = statecode;
@@ -103,16 +103,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_invoicegenerated_value")]
-        public string _adoxioInvoicegeneratedValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
         public string _owneridValue { get; set; }
 
@@ -123,8 +113,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -148,8 +138,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_invoicegenerated_value")]
+        public string _adoxioInvoicegeneratedValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -188,18 +183,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_name")]
-        public string AdoxioName { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -228,8 +218,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_importedoutstandinginvoicesid")]
         public string AdoxioImportedoutstandinginvoicesid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -238,8 +238,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
+        [JsonProperty(PropertyName = "adoxio_name")]
+        public string AdoxioName { get; set; }
 
         /// <summary>
         /// </summary>

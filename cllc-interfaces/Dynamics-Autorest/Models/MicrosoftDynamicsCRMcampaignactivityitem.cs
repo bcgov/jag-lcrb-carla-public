@@ -29,12 +29,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMcampaignactivityitem class.
         /// </summary>
-        public MicrosoftDynamicsCRMcampaignactivityitem(int? utcconversiontimezonecode = default(int?), string itemid = default(string), string _campaignactivityidValue = default(string), int? importsequencenumber = default(int?), string itemobjecttypecode = default(string), string name = default(string), int? timezoneruleversionnumber = default(int?), string _owneridValue = default(string), string campaignactivityitemid = default(string), string versionnumber = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string owninguser = default(string), string owningbusinessunit = default(string), IList<MicrosoftDynamicsCRMteam> campaignactivityitemTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMasyncoperation> campaignactivityitemAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> campaignactivityitemMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> campaignactivityitemBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> campaignactivityitemPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMactivitypointer campaignactivityid = default(MicrosoftDynamicsCRMactivitypointer))
+        public MicrosoftDynamicsCRMcampaignactivityitem(int? utcconversiontimezonecode = default(int?), string itemid = default(string), string _campaignactivityidValue = default(string), int? importsequencenumber = default(int?), string owninguser = default(string), string itemobjecttypecode = default(string), string name = default(string), int? timezoneruleversionnumber = default(int?), string _owneridValue = default(string), string campaignactivityitemid = default(string), string versionnumber = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string owningbusinessunit = default(string), IList<MicrosoftDynamicsCRMteam> campaignactivityitemTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMasyncoperation> campaignactivityitemAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> campaignactivityitemMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> campaignactivityitemBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> campaignactivityitemPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMactivitypointer campaignactivityid = default(MicrosoftDynamicsCRMactivitypointer))
         {
             Utcconversiontimezonecode = utcconversiontimezonecode;
             Itemid = itemid;
             this._campaignactivityidValue = _campaignactivityidValue;
             Importsequencenumber = importsequencenumber;
+            Owninguser = owninguser;
             Itemobjecttypecode = itemobjecttypecode;
             Name = name;
             Timezoneruleversionnumber = timezoneruleversionnumber;
@@ -42,7 +43,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Campaignactivityitemid = campaignactivityitemid;
             Versionnumber = versionnumber;
             Overriddencreatedon = overriddencreatedon;
-            Owninguser = owninguser;
             Owningbusinessunit = owningbusinessunit;
             CampaignactivityitemTeams = campaignactivityitemTeams;
             CampaignactivityitemAsyncOperations = campaignactivityitemAsyncOperations;
@@ -80,6 +80,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "owninguser")]
+        public string Owninguser { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "itemobjecttypecode")]
         public string Itemobjecttypecode { get; set; }
 
@@ -112,11 +117,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owninguser")]
-        public string Owninguser { get; set; }
 
         /// <summary>
         /// </summary>

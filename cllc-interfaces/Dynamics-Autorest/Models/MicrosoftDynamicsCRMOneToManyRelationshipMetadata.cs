@@ -7,8 +7,6 @@
 namespace Gov.Lclb.Cllb.Interfaces.Models
 {
     using Newtonsoft.Json;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
@@ -29,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMOneToManyRelationshipMetadata class.
         /// </summary>
-        public MicrosoftDynamicsCRMOneToManyRelationshipMetadata(string associatedMenuConfiguration = default(string), string cascadeConfiguration = default(string), string referencedAttribute = default(string), string referencedEntity = default(string), string referencingAttribute = default(string), string referencingEntity = default(string), bool? isHierarchical = default(bool?), string entityKey = default(string), IList<object> relationshipAttributes = default(IList<object>), string referencedEntityNavigationPropertyName = default(string), string referencingEntityNavigationPropertyName = default(string), int? relationshipBehavior = default(int?), MicrosoftDynamicsCRMLookupAttributeMetadata lookup = default(MicrosoftDynamicsCRMLookupAttributeMetadata))
+        public MicrosoftDynamicsCRMOneToManyRelationshipMetadata(string associatedMenuConfiguration = default(string), string cascadeConfiguration = default(string), string referencedAttribute = default(string), string referencedEntity = default(string), string referencingAttribute = default(string), string referencingEntity = default(string), bool? isHierarchical = default(bool?), string referencedEntityNavigationPropertyName = default(string), string referencingEntityNavigationPropertyName = default(string), MicrosoftDynamicsCRMLookupAttributeMetadata lookup = default(MicrosoftDynamicsCRMLookupAttributeMetadata))
         {
             AssociatedMenuConfiguration = associatedMenuConfiguration;
             CascadeConfiguration = cascadeConfiguration;
@@ -38,11 +36,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             ReferencingAttribute = referencingAttribute;
             ReferencingEntity = referencingEntity;
             IsHierarchical = isHierarchical;
-            EntityKey = entityKey;
-            RelationshipAttributes = relationshipAttributes;
             ReferencedEntityNavigationPropertyName = referencedEntityNavigationPropertyName;
             ReferencingEntityNavigationPropertyName = referencingEntityNavigationPropertyName;
-            RelationshipBehavior = relationshipBehavior;
             Lookup = lookup;
             CustomInit();
         }
@@ -89,16 +84,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "EntityKey")]
-        public string EntityKey { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "RelationshipAttributes")]
-        public IList<object> RelationshipAttributes { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "ReferencedEntityNavigationPropertyName")]
         public string ReferencedEntityNavigationPropertyName { get; set; }
 
@@ -106,11 +91,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "ReferencingEntityNavigationPropertyName")]
         public string ReferencingEntityNavigationPropertyName { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "RelationshipBehavior")]
-        public int? RelationshipBehavior { get; set; }
 
         /// <summary>
         /// </summary>

@@ -29,37 +29,35 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMadoxioEvent
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioEvent(string adoxioPoliceofficersummary = default(string), string adoxioEventinspectoremail = default(string), bool? adoxioCreateinspection = default(bool?), string _createdbyValue = default(string), bool? adoxioSafetysecuritychangesrequired = default(bool?), int? adoxioFoodservice = default(int?), bool? adoxioRequestsafetysecurityplan = default(bool?), bool? adoxioIsagreement1 = default(bool?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _owneridValue = default(string), bool? adoxioIsallstaffservingitright = default(bool?), string _adoxioInspectorValue = default(string), bool? adoxioIssignsintoxicatedpersons = default(bool?), int? adoxioTuaeventtype = default(int?), string adoxioStreet2 = default(string), int? timezoneruleversionnumber = default(int?), string _owninguserValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), bool? adoxioAttendanceminors = default(bool?), bool? adoxioIsclosedtopublic = default(bool?), bool? adoxioMunicipalsignificance = default(bool?), string adoxioContactname = default(string), string _adoxioPmuareaidValue = default(string), bool? adoxioIssalesareaavailanddefined = default(bool?), int? adoxioEntertainment = default(int?), string adoxioSecuritycompanypostal = default(string), string _owningbusinessunitValue = default(string), int? adoxioSecuritypersonnelnumberhired = default(int?), bool? adoxioIssignstwodrinkmax = default(bool?), string versionnumber = default(string), string adoxioSepcontactname = default(string), bool? adoxioIsliveentertainment = default(bool?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string adoxioSecuritycompanystreet = default(string), string adoxioMarketdurationother = default(string), int? adoxioMaxstaffattendance = default(int?), bool? adoxioCommunityapproval = default(bool?), bool? adoxioSafetysecurityplanchangessubmitted = default(bool?), string adoxioEntertainmentdescription = default(string), bool? adoxioIsservicearealoadavailable = default(bool?), string adoxioProvince = default(string), string adoxioEventliquorcontainment = default(string), string adoxioEventliquorlayout = default(string), bool? adoxioIsdifferenteventtimesdates = default(bool?), bool? adoxioIsnopreventingsaleofliquor = default(bool?), bool? adoxioPublicproper = default(bool?), string adoxioName = default(string), string adoxioStreet1 = default(string), string adoxioEventinspectorname = default(string), string adoxioRegistrationnumber = default(string), string _owningteamValue = default(string), string adoxioContactphone = default(string), string adoxioEventstaffingbartenders = default(string), string adoxioAdditionallocationinformation = default(string), bool? adoxioIsnetworkingparty = default(bool?), bool? adoxioIsmarketmanagedorcarried = default(bool?), bool? adoxioIseventloadavailable = default(bool?), bool? adoxioIsdancing = default(bool?), bool? adoxioIsbanquet = default(bool?), string adoxioFoodservicedescription = default(string), string adoxioOsSessionPk = default(string), bool? adoxioIsnoimportedgoods = default(bool?), string adoxioLiquorareacontrolleddetails = default(string), string adoxioSecuritycompanyprovince = default(string), string adoxioEntertainmentdetails = default(string), string adoxioEventid = default(string), bool? adoxioIsminorsattending = default(bool?), string adoxioIsotherconsumptionsafetydetails = default(string), string adoxioSepcontactphonenumber = default(string), int? utcconversiontimezonecode = default(int?), string adoxioBusinessnumber = default(string), string adoxioAdditionlocationinfo = default(string), System.DateTimeOffset? adoxioLiquorservicestartdate = default(System.DateTimeOffset?), string adoxioSecuritycompanycontactfax = default(string), System.DateTimeOffset? adoxioDateoutcomed = default(System.DateTimeOffset?), bool? adoxioPublicproperty = default(bool?), bool? adoxioIswedding = default(bool?), int? adoxioEventoccupantloadservicesarea = default(int?), string adoxioCity = default(string), bool? adoxioIssignsadvisingminors = default(bool?), int? adoxioEventoccupantload = default(int?), string adoxioMktorganizercontactphone = default(string), string adoxioVenuenamedescription = default(string), string adoxioSeplicensee = default(string), string adoxioEventstaffingservers = default(string), string adoxioAdditionallocationinfo = default(string), string adoxioClienthostname = default(string), string adoxioSeplicencenumber = default(string), int? adoxioMarketeventtype = default(int?), int? statecode = default(int?), bool? adoxioIsconcert = default(bool?), string adoxioEventnumber = default(string), string adoxioEventname = default(string), System.DateTimeOffset? adoxioEventenddate = default(System.DateTimeOffset?), string adoxioEventdescription = default(string), string adoxioSecuritycompanysummary = default(string), bool? adoxioIsdeclarationaccurate = default(bool?), bool? adoxioIsotherminorssafety = default(bool?), bool? adoxioIsamplifiedsound = default(bool?), string adoxioSecuritycompanyname = default(string), System.DateTimeOffset? adoxioEnddate = default(System.DateTimeOffset?), string adoxioSecuritycompanycity = default(string), string _modifiedonbehalfbyValue = default(string), string adoxioPostalcode = default(string), bool? adoxioPrivate = default(bool?), bool? adoxioIsotherconsumptionsafety = default(bool?), string adoxioExternalid = default(string), bool? adoxioNotifyeventinspector = default(bool?), string adoxioContactemail = default(string), int? adoxioEventcategory = default(int?), string adoxioSecuritycompanycontactphone = default(string), string adoxioSecuritycompanycontactname = default(string), bool? adoxioIsdisturbanceappendix2 = default(bool?), bool? adoxioIstwopiecesidrequired = default(bool?), string adoxioMktorganizercontactname = default(string), System.DateTimeOffset? adoxioStartdate = default(System.DateTimeOffset?), string adoxioAddress = default(string), string _modifiedbyValue = default(string), bool? adoxioEventsignificance = default(bool?), string _createdonbehalfbyValue = default(string), string _adoxioAccountValue = default(string), string adoxioSecuritycompanycontactemail = default(string), int? adoxioNumberdailyminorattendees = default(int?), string adoxioPublicorprivate = default(string), System.DateTimeOffset? adoxioLiquorserviceenddate = default(System.DateTimeOffset?), string adoxioContactphonenumber = default(string), bool? adoxioIsmarkethostssixvendors = default(bool?), string adoxioEventinspectorphone = default(string), int? adoxioEventtype = default(int?), string adoxioAdditionalsafetydetails = default(string), bool? adoxioIsotherdisturbance = default(bool?), bool? adoxioIsagreement2 = default(bool?), string adoxioMarketwebsite = default(string), string adoxioSafetysecuritychangesrequireddetails = default(string), System.DateTimeOffset? adoxioEventstartdate = default(System.DateTimeOffset?), bool? adoxioIsmarketmaxamountorduration = default(bool?), string adoxioVenuedescription = default(string), string adoxioServiceareaentrancesupervisiondetails = default(string), int? adoxioMarketduration = default(int?), string _adoxioLicenceValue = default(string), string adoxioIsotherminorssafetydetails = default(string), string _adoxioRegionidValue = default(string), int? statuscode = default(int?), string adoxioEventtypedescription = default(string), string _adoxioAreaidValue = default(string), string adoxioIsotherdisturbancedetails = default(string), int? adoxioSpecificlocation = default(int?), string adoxioSirorses = default(string), bool? adoxioIsgambling = default(bool?), bool? adoxioIsnoneoftheabove = default(bool?), bool? adoxioIsliquorareacontrolled = default(bool?), string adoxioMarketname = default(string), string adoxioEventoccupantloadservicearea = default(string), string adoxioEventstaffingmanagers = default(string), bool? adoxioIsmarketonlyvendors = default(bool?), int? adoxioNumberdailyeventattendees = default(int?), int? adoxioMaxattendance = default(int?), int? importsequencenumber = default(int?), bool? adoxioIssamplesizecompliant = default(bool?), int? adoxioClass = default(int?), bool? adoxioIsreception = default(bool?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioEventSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioEventDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioEventDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioEventAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioEventMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioEventProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioEventBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioEventPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMaccount adoxioAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMadoxioLicences adoxioLicence = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMsystemuser adoxioInspector = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMadoxioEventschedule> adoxioEventSchedules = default(IList<MicrosoftDynamicsCRMadoxioEventschedule>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> adoxioEventSharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMannotation> adoxioEventAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMadoxioArea adoxioAreaId = default(MicrosoftDynamicsCRMadoxioArea), IList<MicrosoftDynamicsCRMincident> adoxioEventInspections = default(IList<MicrosoftDynamicsCRMincident>), MicrosoftDynamicsCRMadoxioRegion adoxioRegionId = default(MicrosoftDynamicsCRMadoxioRegion), IList<MicrosoftDynamicsCRMactivitypointer> adoxioEventActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> adoxioEventAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMappointment> adoxioEventAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMemail> adoxioEventEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> adoxioEventFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMletter> adoxioEventLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMphonecall> adoxioEventPhoneCalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMtask> adoxioEventTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> adoxioEventRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMsocialactivity> adoxioEventSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMserviceappointment> adoxioEventServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMactivityparty> adoxioEventActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMadoxioPmuarea adoxioPMUAreaId = default(MicrosoftDynamicsCRMadoxioPmuarea), IList<MicrosoftDynamicsCRMadoxioEventlocation> adoxioEventEventlocations = default(IList<MicrosoftDynamicsCRMadoxioEventlocation>), IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation> adoxioAdoxioEventAdoxioApplicationtermscondi = default(IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation>), IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset> adoxioAdoxioEventAdoxioTermsconditionslimitationspresetLicenseeEventType = default(IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset>))
+        public MicrosoftDynamicsCRMadoxioEvent(string adoxioPoliceofficersummary = default(string), string adoxioEventinspectoremail = default(string), bool? adoxioCreateinspection = default(bool?), System.DateTimeOffset? adoxioDateoutcomed = default(System.DateTimeOffset?), string _createdbyValue = default(string), bool? adoxioSafetysecuritychangesrequired = default(bool?), string adoxioMarketname = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _owneridValue = default(string), bool? adoxioCommunityapproval = default(bool?), string _adoxioPmuareaidValue = default(string), bool? adoxioIsallstaffservingitright = default(bool?), bool? adoxioIssignsintoxicatedpersons = default(bool?), string adoxioStreet2 = default(string), string _owninguserValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), bool? adoxioAttendanceminors = default(bool?), string adoxioCity = default(string), bool? adoxioIsclosedtopublic = default(bool?), bool? adoxioMunicipalsignificance = default(bool?), string adoxioContactname = default(string), bool? adoxioIssalesareaavailanddefined = default(bool?), string adoxioSeplicensee = default(string), int? adoxioEntertainment = default(int?), string adoxioSecuritycompanypostal = default(string), string _owningbusinessunitValue = default(string), int? adoxioSecuritypersonnelnumberhired = default(int?), string versionnumber = default(string), string adoxioSepcontactname = default(string), bool? adoxioIsliveentertainment = default(bool?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string adoxioSecuritycompanystreet = default(string), string adoxioMarketdurationother = default(string), int? adoxioMaxstaffattendance = default(int?), string adoxioPublicorprivate = default(string), int? adoxioTuaeventtype = default(int?), bool? adoxioSafetysecurityplanchangessubmitted = default(bool?), string adoxioEntertainmentdescription = default(string), bool? adoxioIsservicearealoadavailable = default(bool?), string adoxioProvince = default(string), string adoxioEventliquorcontainment = default(string), string adoxioEventliquorlayout = default(string), string adoxioStreet1 = default(string), bool? adoxioIsnopreventingsaleofliquor = default(bool?), bool? adoxioPublicproper = default(bool?), string adoxioName = default(string), string adoxioRegistrationnumber = default(string), System.DateTimeOffset? adoxioStartdate = default(System.DateTimeOffset?), string _owningteamValue = default(string), bool? adoxioIswedding = default(bool?), string adoxioEventstaffingbartenders = default(string), string adoxioAdditionallocationinformation = default(string), bool? adoxioIsnetworkingparty = default(bool?), bool? adoxioIsmarketmanagedorcarried = default(bool?), bool? adoxioIsdifferenteventtimesdates = default(bool?), string adoxioVenuedescription = default(string), bool? adoxioPrivate = default(bool?), bool? adoxioIseventloadavailable = default(bool?), bool? adoxioIsdancing = default(bool?), bool? adoxioIsbanquet = default(bool?), bool? adoxioIsagreement1 = default(bool?), string adoxioFoodservicedescription = default(string), string adoxioOsSessionPk = default(string), bool? adoxioIsnoimportedgoods = default(bool?), string adoxioLiquorareacontrolleddetails = default(string), string adoxioSecuritycompanyprovince = default(string), string adoxioEntertainmentdetails = default(string), string adoxioEventid = default(string), bool? adoxioIsminorsattending = default(bool?), string adoxioIsotherconsumptionsafetydetails = default(string), string adoxioSepcontactphonenumber = default(string), int? utcconversiontimezonecode = default(int?), string adoxioBusinessnumber = default(string), string adoxioAdditionlocationinfo = default(string), System.DateTimeOffset? adoxioLiquorservicestartdate = default(System.DateTimeOffset?), string adoxioSecuritycompanycontactfax = default(string), string adoxioSecuritycompanycontactname = default(string), bool? adoxioPublicproperty = default(bool?), int? adoxioEventoccupantloadservicesarea = default(int?), string _modifiedonbehalfbyValue = default(string), bool? adoxioIssignsadvisingminors = default(bool?), int? adoxioEventoccupantload = default(int?), string adoxioMktorganizercontactphone = default(string), string adoxioVenuenamedescription = default(string), int? adoxioFoodservice = default(int?), string adoxioEventstaffingservers = default(string), int? adoxioMarketduration = default(int?), string adoxioAdditionallocationinfo = default(string), bool? adoxioRequestsafetysecurityplan = default(bool?), string adoxioClienthostname = default(string), string adoxioSeplicencenumber = default(string), int? adoxioMarketeventtype = default(int?), int? timezoneruleversionnumber = default(int?), string adoxioEventnumber = default(string), string adoxioEventname = default(string), System.DateTimeOffset? adoxioEventenddate = default(System.DateTimeOffset?), string adoxioEventdescription = default(string), string adoxioSecuritycompanysummary = default(string), bool? adoxioIsdeclarationaccurate = default(bool?), bool? adoxioIsotherminorssafety = default(bool?), string adoxioSecuritycompanyname = default(string), System.DateTimeOffset? adoxioEnddate = default(System.DateTimeOffset?), string adoxioSecuritycompanycity = default(string), string adoxioPostalcode = default(string), bool? adoxioIsotherconsumptionsafety = default(bool?), string adoxioEventinspectorname = default(string), string adoxioExternalid = default(string), bool? adoxioNotifyeventinspector = default(bool?), string adoxioContactemail = default(string), int? adoxioEventcategory = default(int?), string adoxioSecuritycompanycontactphone = default(string), bool? adoxioIsdisturbanceappendix2 = default(bool?), bool? adoxioIstwopiecesidrequired = default(bool?), int? statecode = default(int?), string adoxioMktorganizercontactname = default(string), string adoxioAddress = default(string), int? adoxioSpecificlocation = default(int?), string _modifiedbyValue = default(string), bool? adoxioEventsignificance = default(bool?), string _createdonbehalfbyValue = default(string), string _adoxioAccountValue = default(string), string adoxioSecuritycompanycontactemail = default(string), int? adoxioNumberdailyminorattendees = default(int?), string adoxioMarketwebsite = default(string), System.DateTimeOffset? adoxioLiquorserviceenddate = default(System.DateTimeOffset?), string adoxioContactphonenumber = default(string), bool? adoxioIsmarkethostssixvendors = default(bool?), string adoxioEventinspectorphone = default(string), int? adoxioEventtype = default(int?), string adoxioAdditionalsafetydetails = default(string), bool? adoxioIsotherdisturbance = default(bool?), bool? adoxioIsagreement2 = default(bool?), string _adoxioInspectorValue = default(string), string adoxioSafetysecuritychangesrequireddetails = default(string), System.DateTimeOffset? adoxioEventstartdate = default(System.DateTimeOffset?), bool? adoxioIsmarketmaxamountorduration = default(bool?), string adoxioServiceareaentrancesupervisiondetails = default(string), bool? adoxioIsamplifiedsound = default(bool?), string _adoxioLicenceValue = default(string), string adoxioIsotherminorssafetydetails = default(string), string _adoxioRegionidValue = default(string), int? statuscode = default(int?), string adoxioEventtypedescription = default(string), string adoxioContactphone = default(string), string _adoxioAreaidValue = default(string), string adoxioIsotherdisturbancedetails = default(string), bool? adoxioIsconcert = default(bool?), string adoxioSirorses = default(string), bool? adoxioIsgambling = default(bool?), bool? adoxioIsnoneoftheabove = default(bool?), bool? adoxioIsliquorareacontrolled = default(bool?), string adoxioEventoccupantloadservicearea = default(string), string adoxioEventstaffingmanagers = default(string), bool? adoxioIsmarketonlyvendors = default(bool?), bool? adoxioIssignstwodrinkmax = default(bool?), int? adoxioNumberdailyeventattendees = default(int?), int? adoxioMaxattendance = default(int?), int? importsequencenumber = default(int?), bool? adoxioIssamplesizecompliant = default(bool?), int? adoxioClass = default(int?), bool? adoxioIsreception = default(bool?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioEventSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioEventDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioEventDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioEventAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioEventMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioEventProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioEventBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioEventPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMaccount adoxioAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMadoxioLicences adoxioLicence = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMsystemuser adoxioInspector = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMadoxioEventschedule> adoxioEventSchedules = default(IList<MicrosoftDynamicsCRMadoxioEventschedule>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> adoxioEventSharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMannotation> adoxioEventAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMadoxioArea adoxioAreaId = default(MicrosoftDynamicsCRMadoxioArea), IList<MicrosoftDynamicsCRMincident> adoxioEventInspections = default(IList<MicrosoftDynamicsCRMincident>), MicrosoftDynamicsCRMadoxioRegion adoxioRegionId = default(MicrosoftDynamicsCRMadoxioRegion), IList<MicrosoftDynamicsCRMactivitypointer> adoxioEventActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> adoxioEventAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMappointment> adoxioEventAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMemail> adoxioEventEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> adoxioEventFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMletter> adoxioEventLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMphonecall> adoxioEventPhoneCalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMtask> adoxioEventTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> adoxioEventRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMsocialactivity> adoxioEventSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMserviceappointment> adoxioEventServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMactivityparty> adoxioEventActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMadoxioPmuarea adoxioPMUAreaId = default(MicrosoftDynamicsCRMadoxioPmuarea), IList<MicrosoftDynamicsCRMadoxioEventlocation> adoxioEventEventlocations = default(IList<MicrosoftDynamicsCRMadoxioEventlocation>), IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation> adoxioAdoxioEventAdoxioApplicationtermscondi = default(IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation>), IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset> adoxioAdoxioEventAdoxioTermsconditionslimitationspresetLicenseeEventType = default(IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset>))
         {
             AdoxioPoliceofficersummary = adoxioPoliceofficersummary;
             AdoxioEventinspectoremail = adoxioEventinspectoremail;
             AdoxioCreateinspection = adoxioCreateinspection;
+            AdoxioDateoutcomed = adoxioDateoutcomed;
             this._createdbyValue = _createdbyValue;
             AdoxioSafetysecuritychangesrequired = adoxioSafetysecuritychangesrequired;
-            AdoxioFoodservice = adoxioFoodservice;
-            AdoxioRequestsafetysecurityplan = adoxioRequestsafetysecurityplan;
-            AdoxioIsagreement1 = adoxioIsagreement1;
+            AdoxioMarketname = adoxioMarketname;
             Overriddencreatedon = overriddencreatedon;
             this._owneridValue = _owneridValue;
+            AdoxioCommunityapproval = adoxioCommunityapproval;
+            this._adoxioPmuareaidValue = _adoxioPmuareaidValue;
             AdoxioIsallstaffservingitright = adoxioIsallstaffservingitright;
-            this._adoxioInspectorValue = _adoxioInspectorValue;
             AdoxioIssignsintoxicatedpersons = adoxioIssignsintoxicatedpersons;
-            AdoxioTuaeventtype = adoxioTuaeventtype;
             AdoxioStreet2 = adoxioStreet2;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
             this._owninguserValue = _owninguserValue;
             Createdon = createdon;
             AdoxioAttendanceminors = adoxioAttendanceminors;
+            AdoxioCity = adoxioCity;
             AdoxioIsclosedtopublic = adoxioIsclosedtopublic;
             AdoxioMunicipalsignificance = adoxioMunicipalsignificance;
             AdoxioContactname = adoxioContactname;
-            this._adoxioPmuareaidValue = _adoxioPmuareaidValue;
             AdoxioIssalesareaavailanddefined = adoxioIssalesareaavailanddefined;
+            AdoxioSeplicensee = adoxioSeplicensee;
             AdoxioEntertainment = adoxioEntertainment;
             AdoxioSecuritycompanypostal = adoxioSecuritycompanypostal;
             this._owningbusinessunitValue = _owningbusinessunitValue;
             AdoxioSecuritypersonnelnumberhired = adoxioSecuritypersonnelnumberhired;
-            AdoxioIssignstwodrinkmax = adoxioIssignstwodrinkmax;
             Versionnumber = versionnumber;
             AdoxioSepcontactname = adoxioSepcontactname;
             AdoxioIsliveentertainment = adoxioIsliveentertainment;
@@ -67,29 +65,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioSecuritycompanystreet = adoxioSecuritycompanystreet;
             AdoxioMarketdurationother = adoxioMarketdurationother;
             AdoxioMaxstaffattendance = adoxioMaxstaffattendance;
-            AdoxioCommunityapproval = adoxioCommunityapproval;
+            AdoxioPublicorprivate = adoxioPublicorprivate;
+            AdoxioTuaeventtype = adoxioTuaeventtype;
             AdoxioSafetysecurityplanchangessubmitted = adoxioSafetysecurityplanchangessubmitted;
             AdoxioEntertainmentdescription = adoxioEntertainmentdescription;
             AdoxioIsservicearealoadavailable = adoxioIsservicearealoadavailable;
             AdoxioProvince = adoxioProvince;
             AdoxioEventliquorcontainment = adoxioEventliquorcontainment;
             AdoxioEventliquorlayout = adoxioEventliquorlayout;
-            AdoxioIsdifferenteventtimesdates = adoxioIsdifferenteventtimesdates;
+            AdoxioStreet1 = adoxioStreet1;
             AdoxioIsnopreventingsaleofliquor = adoxioIsnopreventingsaleofliquor;
             AdoxioPublicproper = adoxioPublicproper;
             AdoxioName = adoxioName;
-            AdoxioStreet1 = adoxioStreet1;
-            AdoxioEventinspectorname = adoxioEventinspectorname;
             AdoxioRegistrationnumber = adoxioRegistrationnumber;
+            AdoxioStartdate = adoxioStartdate;
             this._owningteamValue = _owningteamValue;
-            AdoxioContactphone = adoxioContactphone;
+            AdoxioIswedding = adoxioIswedding;
             AdoxioEventstaffingbartenders = adoxioEventstaffingbartenders;
             AdoxioAdditionallocationinformation = adoxioAdditionallocationinformation;
             AdoxioIsnetworkingparty = adoxioIsnetworkingparty;
             AdoxioIsmarketmanagedorcarried = adoxioIsmarketmanagedorcarried;
+            AdoxioIsdifferenteventtimesdates = adoxioIsdifferenteventtimesdates;
+            AdoxioVenuedescription = adoxioVenuedescription;
+            AdoxioPrivate = adoxioPrivate;
             AdoxioIseventloadavailable = adoxioIseventloadavailable;
             AdoxioIsdancing = adoxioIsdancing;
             AdoxioIsbanquet = adoxioIsbanquet;
+            AdoxioIsagreement1 = adoxioIsagreement1;
             AdoxioFoodservicedescription = adoxioFoodservicedescription;
             AdoxioOsSessionPk = adoxioOsSessionPk;
             AdoxioIsnoimportedgoods = adoxioIsnoimportedgoods;
@@ -105,23 +107,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioAdditionlocationinfo = adoxioAdditionlocationinfo;
             AdoxioLiquorservicestartdate = adoxioLiquorservicestartdate;
             AdoxioSecuritycompanycontactfax = adoxioSecuritycompanycontactfax;
-            AdoxioDateoutcomed = adoxioDateoutcomed;
+            AdoxioSecuritycompanycontactname = adoxioSecuritycompanycontactname;
             AdoxioPublicproperty = adoxioPublicproperty;
-            AdoxioIswedding = adoxioIswedding;
             AdoxioEventoccupantloadservicesarea = adoxioEventoccupantloadservicesarea;
-            AdoxioCity = adoxioCity;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             AdoxioIssignsadvisingminors = adoxioIssignsadvisingminors;
             AdoxioEventoccupantload = adoxioEventoccupantload;
             AdoxioMktorganizercontactphone = adoxioMktorganizercontactphone;
             AdoxioVenuenamedescription = adoxioVenuenamedescription;
-            AdoxioSeplicensee = adoxioSeplicensee;
+            AdoxioFoodservice = adoxioFoodservice;
             AdoxioEventstaffingservers = adoxioEventstaffingservers;
+            AdoxioMarketduration = adoxioMarketduration;
             AdoxioAdditionallocationinfo = adoxioAdditionallocationinfo;
+            AdoxioRequestsafetysecurityplan = adoxioRequestsafetysecurityplan;
             AdoxioClienthostname = adoxioClienthostname;
             AdoxioSeplicencenumber = adoxioSeplicencenumber;
             AdoxioMarketeventtype = adoxioMarketeventtype;
-            Statecode = statecode;
-            AdoxioIsconcert = adoxioIsconcert;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
             AdoxioEventnumber = adoxioEventnumber;
             AdoxioEventname = adoxioEventname;
             AdoxioEventenddate = adoxioEventenddate;
@@ -129,32 +131,30 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioSecuritycompanysummary = adoxioSecuritycompanysummary;
             AdoxioIsdeclarationaccurate = adoxioIsdeclarationaccurate;
             AdoxioIsotherminorssafety = adoxioIsotherminorssafety;
-            AdoxioIsamplifiedsound = adoxioIsamplifiedsound;
             AdoxioSecuritycompanyname = adoxioSecuritycompanyname;
             AdoxioEnddate = adoxioEnddate;
             AdoxioSecuritycompanycity = adoxioSecuritycompanycity;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             AdoxioPostalcode = adoxioPostalcode;
-            AdoxioPrivate = adoxioPrivate;
             AdoxioIsotherconsumptionsafety = adoxioIsotherconsumptionsafety;
+            AdoxioEventinspectorname = adoxioEventinspectorname;
             AdoxioExternalid = adoxioExternalid;
             AdoxioNotifyeventinspector = adoxioNotifyeventinspector;
             AdoxioContactemail = adoxioContactemail;
             AdoxioEventcategory = adoxioEventcategory;
             AdoxioSecuritycompanycontactphone = adoxioSecuritycompanycontactphone;
-            AdoxioSecuritycompanycontactname = adoxioSecuritycompanycontactname;
             AdoxioIsdisturbanceappendix2 = adoxioIsdisturbanceappendix2;
             AdoxioIstwopiecesidrequired = adoxioIstwopiecesidrequired;
+            Statecode = statecode;
             AdoxioMktorganizercontactname = adoxioMktorganizercontactname;
-            AdoxioStartdate = adoxioStartdate;
             AdoxioAddress = adoxioAddress;
+            AdoxioSpecificlocation = adoxioSpecificlocation;
             this._modifiedbyValue = _modifiedbyValue;
             AdoxioEventsignificance = adoxioEventsignificance;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             this._adoxioAccountValue = _adoxioAccountValue;
             AdoxioSecuritycompanycontactemail = adoxioSecuritycompanycontactemail;
             AdoxioNumberdailyminorattendees = adoxioNumberdailyminorattendees;
-            AdoxioPublicorprivate = adoxioPublicorprivate;
+            AdoxioMarketwebsite = adoxioMarketwebsite;
             AdoxioLiquorserviceenddate = adoxioLiquorserviceenddate;
             AdoxioContactphonenumber = adoxioContactphonenumber;
             AdoxioIsmarkethostssixvendors = adoxioIsmarkethostssixvendors;
@@ -163,29 +163,29 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioAdditionalsafetydetails = adoxioAdditionalsafetydetails;
             AdoxioIsotherdisturbance = adoxioIsotherdisturbance;
             AdoxioIsagreement2 = adoxioIsagreement2;
-            AdoxioMarketwebsite = adoxioMarketwebsite;
+            this._adoxioInspectorValue = _adoxioInspectorValue;
             AdoxioSafetysecuritychangesrequireddetails = adoxioSafetysecuritychangesrequireddetails;
             AdoxioEventstartdate = adoxioEventstartdate;
             AdoxioIsmarketmaxamountorduration = adoxioIsmarketmaxamountorduration;
-            AdoxioVenuedescription = adoxioVenuedescription;
             AdoxioServiceareaentrancesupervisiondetails = adoxioServiceareaentrancesupervisiondetails;
-            AdoxioMarketduration = adoxioMarketduration;
+            AdoxioIsamplifiedsound = adoxioIsamplifiedsound;
             this._adoxioLicenceValue = _adoxioLicenceValue;
             AdoxioIsotherminorssafetydetails = adoxioIsotherminorssafetydetails;
             this._adoxioRegionidValue = _adoxioRegionidValue;
             Statuscode = statuscode;
             AdoxioEventtypedescription = adoxioEventtypedescription;
+            AdoxioContactphone = adoxioContactphone;
             this._adoxioAreaidValue = _adoxioAreaidValue;
             AdoxioIsotherdisturbancedetails = adoxioIsotherdisturbancedetails;
-            AdoxioSpecificlocation = adoxioSpecificlocation;
+            AdoxioIsconcert = adoxioIsconcert;
             AdoxioSirorses = adoxioSirorses;
             AdoxioIsgambling = adoxioIsgambling;
             AdoxioIsnoneoftheabove = adoxioIsnoneoftheabove;
             AdoxioIsliquorareacontrolled = adoxioIsliquorareacontrolled;
-            AdoxioMarketname = adoxioMarketname;
             AdoxioEventoccupantloadservicearea = adoxioEventoccupantloadservicearea;
             AdoxioEventstaffingmanagers = adoxioEventstaffingmanagers;
             AdoxioIsmarketonlyvendors = adoxioIsmarketonlyvendors;
+            AdoxioIssignstwodrinkmax = adoxioIssignstwodrinkmax;
             AdoxioNumberdailyeventattendees = adoxioNumberdailyeventattendees;
             AdoxioMaxattendance = adoxioMaxattendance;
             Importsequencenumber = importsequencenumber;
@@ -258,6 +258,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_dateoutcomed")]
+        public System.DateTimeOffset? AdoxioDateoutcomed { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
 
@@ -268,18 +273,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_foodservice")]
-        public int? AdoxioFoodservice { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_requestsafetysecurityplan")]
-        public bool? AdoxioRequestsafetysecurityplan { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_isagreement1")]
-        public bool? AdoxioIsagreement1 { get; set; }
+        [JsonProperty(PropertyName = "adoxio_marketname")]
+        public string AdoxioMarketname { get; set; }
 
         /// <summary>
         /// </summary>
@@ -293,13 +288,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_isallstaffservingitright")]
-        public bool? AdoxioIsallstaffservingitright { get; set; }
+        [JsonProperty(PropertyName = "adoxio_communityapproval")]
+        public bool? AdoxioCommunityapproval { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_inspector_value")]
-        public string _adoxioInspectorValue { get; set; }
+        [JsonProperty(PropertyName = "_adoxio_pmuareaid_value")]
+        public string _adoxioPmuareaidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_isallstaffservingitright")]
+        public bool? AdoxioIsallstaffservingitright { get; set; }
 
         /// <summary>
         /// </summary>
@@ -308,18 +308,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_tuaeventtype")]
-        public int? AdoxioTuaeventtype { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_street2")]
         public string AdoxioStreet2 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -338,6 +328,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_city")]
+        public string AdoxioCity { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_isclosedtopublic")]
         public bool? AdoxioIsclosedtopublic { get; set; }
 
@@ -353,13 +348,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_pmuareaid_value")]
-        public string _adoxioPmuareaidValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_issalesareaavailanddefined")]
+        public bool? AdoxioIssalesareaavailanddefined { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_issalesareaavailanddefined")]
-        public bool? AdoxioIssalesareaavailanddefined { get; set; }
+        [JsonProperty(PropertyName = "adoxio_seplicensee")]
+        public string AdoxioSeplicensee { get; set; }
 
         /// <summary>
         /// </summary>
@@ -380,11 +375,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_securitypersonnelnumberhired")]
         public int? AdoxioSecuritypersonnelnumberhired { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_issignstwodrinkmax")]
-        public bool? AdoxioIssignstwodrinkmax { get; set; }
 
         /// <summary>
         /// </summary>
@@ -423,8 +413,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_communityapproval")]
-        public bool? AdoxioCommunityapproval { get; set; }
+        [JsonProperty(PropertyName = "adoxio_publicorprivate")]
+        public string AdoxioPublicorprivate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_tuaeventtype")]
+        public int? AdoxioTuaeventtype { get; set; }
 
         /// <summary>
         /// </summary>
@@ -458,8 +453,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_isdifferenteventtimesdates")]
-        public bool? AdoxioIsdifferenteventtimesdates { get; set; }
+        [JsonProperty(PropertyName = "adoxio_street1")]
+        public string AdoxioStreet1 { get; set; }
 
         /// <summary>
         /// </summary>
@@ -478,18 +473,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_street1")]
-        public string AdoxioStreet1 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_eventinspectorname")]
-        public string AdoxioEventinspectorname { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_registrationnumber")]
         public string AdoxioRegistrationnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_startdate")]
+        public System.DateTimeOffset? AdoxioStartdate { get; set; }
 
         /// <summary>
         /// </summary>
@@ -498,8 +488,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_contactphone")]
-        public string AdoxioContactphone { get; set; }
+        [JsonProperty(PropertyName = "adoxio_iswedding")]
+        public bool? AdoxioIswedding { get; set; }
 
         /// <summary>
         /// </summary>
@@ -523,6 +513,21 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_isdifferenteventtimesdates")]
+        public bool? AdoxioIsdifferenteventtimesdates { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_venuedescription")]
+        public string AdoxioVenuedescription { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_private")]
+        public bool? AdoxioPrivate { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_iseventloadavailable")]
         public bool? AdoxioIseventloadavailable { get; set; }
 
@@ -535,6 +540,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_isbanquet")]
         public bool? AdoxioIsbanquet { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_isagreement1")]
+        public bool? AdoxioIsagreement1 { get; set; }
 
         /// <summary>
         /// </summary>
@@ -613,8 +623,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_dateoutcomed")]
-        public System.DateTimeOffset? AdoxioDateoutcomed { get; set; }
+        [JsonProperty(PropertyName = "adoxio_securitycompanycontactname")]
+        public string AdoxioSecuritycompanycontactname { get; set; }
 
         /// <summary>
         /// </summary>
@@ -623,18 +633,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_iswedding")]
-        public bool? AdoxioIswedding { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_eventoccupantloadservicesarea")]
         public int? AdoxioEventoccupantloadservicesarea { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_city")]
-        public string AdoxioCity { get; set; }
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -658,8 +663,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_seplicensee")]
-        public string AdoxioSeplicensee { get; set; }
+        [JsonProperty(PropertyName = "adoxio_foodservice")]
+        public int? AdoxioFoodservice { get; set; }
 
         /// <summary>
         /// </summary>
@@ -668,8 +673,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_marketduration")]
+        public int? AdoxioMarketduration { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_additionallocationinfo")]
         public string AdoxioAdditionallocationinfo { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_requestsafetysecurityplan")]
+        public bool? AdoxioRequestsafetysecurityplan { get; set; }
 
         /// <summary>
         /// </summary>
@@ -688,13 +703,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_isconcert")]
-        public bool? AdoxioIsconcert { get; set; }
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -733,11 +743,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_isamplifiedsound")]
-        public bool? AdoxioIsamplifiedsound { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_securitycompanyname")]
         public string AdoxioSecuritycompanyname { get; set; }
 
@@ -753,23 +758,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_postalcode")]
         public string AdoxioPostalcode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_private")]
-        public bool? AdoxioPrivate { get; set; }
+        [JsonProperty(PropertyName = "adoxio_isotherconsumptionsafety")]
+        public bool? AdoxioIsotherconsumptionsafety { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_isotherconsumptionsafety")]
-        public bool? AdoxioIsotherconsumptionsafety { get; set; }
+        [JsonProperty(PropertyName = "adoxio_eventinspectorname")]
+        public string AdoxioEventinspectorname { get; set; }
 
         /// <summary>
         /// </summary>
@@ -798,11 +798,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_securitycompanycontactname")]
-        public string AdoxioSecuritycompanycontactname { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_isdisturbanceappendix2")]
         public bool? AdoxioIsdisturbanceappendix2 { get; set; }
 
@@ -813,18 +808,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_mktorganizercontactname")]
         public string AdoxioMktorganizercontactname { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_startdate")]
-        public System.DateTimeOffset? AdoxioStartdate { get; set; }
+        [JsonProperty(PropertyName = "adoxio_address")]
+        public string AdoxioAddress { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_address")]
-        public string AdoxioAddress { get; set; }
+        [JsonProperty(PropertyName = "adoxio_specificlocation")]
+        public int? AdoxioSpecificlocation { get; set; }
 
         /// <summary>
         /// </summary>
@@ -858,8 +858,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_publicorprivate")]
-        public string AdoxioPublicorprivate { get; set; }
+        [JsonProperty(PropertyName = "adoxio_marketwebsite")]
+        public string AdoxioMarketwebsite { get; set; }
 
         /// <summary>
         /// </summary>
@@ -903,8 +903,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_marketwebsite")]
-        public string AdoxioMarketwebsite { get; set; }
+        [JsonProperty(PropertyName = "_adoxio_inspector_value")]
+        public string _adoxioInspectorValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -923,18 +923,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_venuedescription")]
-        public string AdoxioVenuedescription { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_serviceareaentrancesupervisiondetails")]
         public string AdoxioServiceareaentrancesupervisiondetails { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_marketduration")]
-        public int? AdoxioMarketduration { get; set; }
+        [JsonProperty(PropertyName = "adoxio_isamplifiedsound")]
+        public bool? AdoxioIsamplifiedsound { get; set; }
 
         /// <summary>
         /// </summary>
@@ -963,6 +958,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_contactphone")]
+        public string AdoxioContactphone { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_adoxio_areaid_value")]
         public string _adoxioAreaidValue { get; set; }
 
@@ -973,8 +973,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_specificlocation")]
-        public int? AdoxioSpecificlocation { get; set; }
+        [JsonProperty(PropertyName = "adoxio_isconcert")]
+        public bool? AdoxioIsconcert { get; set; }
 
         /// <summary>
         /// </summary>
@@ -998,11 +998,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_marketname")]
-        public string AdoxioMarketname { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_eventoccupantloadservicearea")]
         public string AdoxioEventoccupantloadservicearea { get; set; }
 
@@ -1015,6 +1010,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_ismarketonlyvendors")]
         public bool? AdoxioIsmarketonlyvendors { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_issignstwodrinkmax")]
+        public bool? AdoxioIssignstwodrinkmax { get; set; }
 
         /// <summary>
         /// </summary>

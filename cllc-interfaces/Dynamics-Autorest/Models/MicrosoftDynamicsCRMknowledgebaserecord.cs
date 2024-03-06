@@ -29,20 +29,20 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMknowledgebaserecord class.
         /// </summary>
-        public MicrosoftDynamicsCRMknowledgebaserecord(string _createdbyValue = default(string), string title = default(string), decimal? exchangerate = default(decimal?), int? timezoneruleversionnumber = default(int?), string publicurl = default(string), string knowledgebaserecordid = default(string), string _organizationidValue = default(string), string privateurl = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string _createdonbehalfbyValue = default(string), string versionnumber = default(string), string uniqueid = default(string), string _transactioncurrencyidValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMactivitypointer> knowledgeBaseRecordActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMappointment> knowledgeBaseRecordAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMemail> knowledgeBaseRecordEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> knowledgeBaseRecordFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMletter> knowledgeBaseRecordLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMphonecall> knowledgeBaseRecordPhoneCalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMtask> knowledgeBaseRecordTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> knowledgeBaseRecordRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMsocialactivity> knowledgeBaseRecordSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMconnection> knowledgeBaseRecordConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnection> knowledgeBaseRecordConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMduplicaterecord> knowledgeBaseRecordDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> knowledgeBaseRecordDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMannotation> knowledgeBaseRecordAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMasyncoperation> knowledgeBaseRecordAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMprocesssession> knowledgeBaseRecordProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> knowledgeBaseRecordBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> knowledgeBaseRecordPrincipalObjectAttributeAccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMsyncerror> knowledgeBaseRecordSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> knowledgebaserecordAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioApplicationKnowledgebaserecord = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioLicencetype> adoxioLicencetypeKnowledgebaserecord = default(IList<MicrosoftDynamicsCRMadoxioLicencetype>), IList<MicrosoftDynamicsCRMadoxioExternalprofile> adoxioExternalprofileKnowledgebaserecord = default(IList<MicrosoftDynamicsCRMadoxioExternalprofile>), IList<MicrosoftDynamicsCRMadoxioExternalcontact> adoxioExternalcontactKnowledgebaserecord = default(IList<MicrosoftDynamicsCRMadoxioExternalcontact>), IList<MicrosoftDynamicsCRMbulkoperation> knowledgebaserecordBulkOperations = default(IList<MicrosoftDynamicsCRMbulkoperation>), IList<MicrosoftDynamicsCRMcampaignresponse> knowledgebaserecordCampaignResponses = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMserviceappointment> knowledgeBaseRecordServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMincidentresolution> knowledgebaserecordIncidentResolutions = default(IList<MicrosoftDynamicsCRMincidentresolution>), IList<MicrosoftDynamicsCRMopportunityclose> knowledgebaserecordOpportunityCloses = default(IList<MicrosoftDynamicsCRMopportunityclose>), IList<MicrosoftDynamicsCRMorderclose> knowledgebaserecordOrderCloses = default(IList<MicrosoftDynamicsCRMorderclose>), IList<MicrosoftDynamicsCRMquoteclose> knowledgebaserecordQuoteCloses = default(IList<MicrosoftDynamicsCRMquoteclose>), IList<MicrosoftDynamicsCRMincident> knowledgeBaseRecordIncident = default(IList<MicrosoftDynamicsCRMincident>))
+        public MicrosoftDynamicsCRMknowledgebaserecord(string _createdbyValue = default(string), string title = default(string), decimal? exchangerate = default(decimal?), int? timezoneruleversionnumber = default(int?), string publicurl = default(string), string _modifiedbyValue = default(string), string _organizationidValue = default(string), string privateurl = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string knowledgebaserecordid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string _createdonbehalfbyValue = default(string), string versionnumber = default(string), string uniqueid = default(string), string _transactioncurrencyidValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMactivitypointer> knowledgeBaseRecordActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMappointment> knowledgeBaseRecordAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMemail> knowledgeBaseRecordEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> knowledgeBaseRecordFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMletter> knowledgeBaseRecordLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMphonecall> knowledgeBaseRecordPhoneCalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMserviceappointment> knowledgeBaseRecordServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMtask> knowledgeBaseRecordTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> knowledgeBaseRecordRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMsocialactivity> knowledgeBaseRecordSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMconnection> knowledgeBaseRecordConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnection> knowledgeBaseRecordConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMduplicaterecord> knowledgeBaseRecordDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> knowledgeBaseRecordDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMannotation> knowledgeBaseRecordAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMasyncoperation> knowledgeBaseRecordAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMprocesssession> knowledgeBaseRecordProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> knowledgeBaseRecordBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> knowledgeBaseRecordPrincipalObjectAttributeAccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> knowledgebaserecordAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioApplicationKnowledgebaserecord = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioLicencetype> adoxioLicencetypeKnowledgebaserecord = default(IList<MicrosoftDynamicsCRMadoxioLicencetype>), IList<MicrosoftDynamicsCRMbulkoperation> knowledgebaserecordBulkOperations = default(IList<MicrosoftDynamicsCRMbulkoperation>), IList<MicrosoftDynamicsCRMcampaignresponse> knowledgebaserecordCampaignResponses = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMincidentresolution> knowledgebaserecordIncidentResolutions = default(IList<MicrosoftDynamicsCRMincidentresolution>), IList<MicrosoftDynamicsCRMopportunityclose> knowledgebaserecordOpportunityCloses = default(IList<MicrosoftDynamicsCRMopportunityclose>), IList<MicrosoftDynamicsCRMorderclose> knowledgebaserecordOrderCloses = default(IList<MicrosoftDynamicsCRMorderclose>), IList<MicrosoftDynamicsCRMquoteclose> knowledgebaserecordQuoteCloses = default(IList<MicrosoftDynamicsCRMquoteclose>), IList<MicrosoftDynamicsCRMsyncerror> knowledgeBaseRecordSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMincident> knowledgeBaseRecordIncident = default(IList<MicrosoftDynamicsCRMincident>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency))
         {
             this._createdbyValue = _createdbyValue;
             Title = title;
             Exchangerate = exchangerate;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             Publicurl = publicurl;
-            Knowledgebaserecordid = knowledgebaserecordid;
+            this._modifiedbyValue = _modifiedbyValue;
             this._organizationidValue = _organizationidValue;
             Privateurl = privateurl;
             Modifiedon = modifiedon;
+            Knowledgebaserecordid = knowledgebaserecordid;
             Createdon = createdon;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._modifiedbyValue = _modifiedbyValue;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Versionnumber = versionnumber;
             Uniqueid = uniqueid;
@@ -58,6 +58,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             KnowledgeBaseRecordFaxes = knowledgeBaseRecordFaxes;
             KnowledgeBaseRecordLetters = knowledgeBaseRecordLetters;
             KnowledgeBaseRecordPhoneCalls = knowledgeBaseRecordPhoneCalls;
+            KnowledgeBaseRecordServiceAppointments = knowledgeBaseRecordServiceAppointments;
             KnowledgeBaseRecordTasks = knowledgeBaseRecordTasks;
             KnowledgeBaseRecordRecurringAppointmentMasters = knowledgeBaseRecordRecurringAppointmentMasters;
             KnowledgeBaseRecordSocialActivities = knowledgeBaseRecordSocialActivities;
@@ -70,21 +71,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             KnowledgeBaseRecordProcessSession = knowledgeBaseRecordProcessSession;
             KnowledgeBaseRecordBulkDeleteFailures = knowledgeBaseRecordBulkDeleteFailures;
             KnowledgeBaseRecordPrincipalObjectAttributeAccess = knowledgeBaseRecordPrincipalObjectAttributeAccess;
-            KnowledgeBaseRecordSyncErrors = knowledgeBaseRecordSyncErrors;
-            Transactioncurrencyid = transactioncurrencyid;
             KnowledgebaserecordAbsScheduledprocessexecutions = knowledgebaserecordAbsScheduledprocessexecutions;
             AdoxioApplicationKnowledgebaserecord = adoxioApplicationKnowledgebaserecord;
             AdoxioLicencetypeKnowledgebaserecord = adoxioLicencetypeKnowledgebaserecord;
-            AdoxioExternalprofileKnowledgebaserecord = adoxioExternalprofileKnowledgebaserecord;
-            AdoxioExternalcontactKnowledgebaserecord = adoxioExternalcontactKnowledgebaserecord;
             KnowledgebaserecordBulkOperations = knowledgebaserecordBulkOperations;
             KnowledgebaserecordCampaignResponses = knowledgebaserecordCampaignResponses;
-            KnowledgeBaseRecordServiceAppointments = knowledgeBaseRecordServiceAppointments;
             KnowledgebaserecordIncidentResolutions = knowledgebaserecordIncidentResolutions;
             KnowledgebaserecordOpportunityCloses = knowledgebaserecordOpportunityCloses;
             KnowledgebaserecordOrderCloses = knowledgebaserecordOrderCloses;
             KnowledgebaserecordQuoteCloses = knowledgebaserecordQuoteCloses;
+            KnowledgeBaseRecordSyncErrors = knowledgeBaseRecordSyncErrors;
             KnowledgeBaseRecordIncident = knowledgeBaseRecordIncident;
+            Transactioncurrencyid = transactioncurrencyid;
             CustomInit();
         }
 
@@ -120,8 +118,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "knowledgebaserecordid")]
-        public string Knowledgebaserecordid { get; set; }
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -140,6 +138,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "knowledgebaserecordid")]
+        public string Knowledgebaserecordid { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
@@ -147,11 +150,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -230,6 +228,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "KnowledgeBaseRecord_ServiceAppointments")]
+        public IList<MicrosoftDynamicsCRMserviceappointment> KnowledgeBaseRecordServiceAppointments { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "KnowledgeBaseRecord_Tasks")]
         public IList<MicrosoftDynamicsCRMtask> KnowledgeBaseRecordTasks { get; set; }
 
@@ -290,16 +293,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "KnowledgeBaseRecord_SyncErrors")]
-        public IList<MicrosoftDynamicsCRMsyncerror> KnowledgeBaseRecordSyncErrors { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "transactioncurrencyid")]
-        public MicrosoftDynamicsCRMtransactioncurrency Transactioncurrencyid { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "knowledgebaserecord_abs_scheduledprocessexecutions")]
         public IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> KnowledgebaserecordAbsScheduledprocessexecutions { get; set; }
 
@@ -315,16 +308,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_externalprofile_knowledgebaserecord")]
-        public IList<MicrosoftDynamicsCRMadoxioExternalprofile> AdoxioExternalprofileKnowledgebaserecord { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_externalcontact_knowledgebaserecord")]
-        public IList<MicrosoftDynamicsCRMadoxioExternalcontact> AdoxioExternalcontactKnowledgebaserecord { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "knowledgebaserecord_BulkOperations")]
         public IList<MicrosoftDynamicsCRMbulkoperation> KnowledgebaserecordBulkOperations { get; set; }
 
@@ -332,11 +315,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "knowledgebaserecord_CampaignResponses")]
         public IList<MicrosoftDynamicsCRMcampaignresponse> KnowledgebaserecordCampaignResponses { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "KnowledgeBaseRecord_ServiceAppointments")]
-        public IList<MicrosoftDynamicsCRMserviceappointment> KnowledgeBaseRecordServiceAppointments { get; set; }
 
         /// <summary>
         /// </summary>
@@ -360,8 +338,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "KnowledgeBaseRecord_SyncErrors")]
+        public IList<MicrosoftDynamicsCRMsyncerror> KnowledgeBaseRecordSyncErrors { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "KnowledgeBaseRecord_Incident")]
         public IList<MicrosoftDynamicsCRMincident> KnowledgeBaseRecordIncident { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "transactioncurrencyid")]
+        public MicrosoftDynamicsCRMtransactioncurrency Transactioncurrencyid { get; set; }
 
     }
 }

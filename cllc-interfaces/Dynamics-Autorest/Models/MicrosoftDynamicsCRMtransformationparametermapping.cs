@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMtransformationparametermapping class.
         /// </summary>
-        public MicrosoftDynamicsCRMtransformationparametermapping(string _transformationmappingidValue = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), int? parametersequence = default(int?), int? parameterarrayindex = default(int?), string _modifiedbyValue = default(string), string introducedversion = default(string), int? componentstate = default(int?), string data = default(string), bool? ismanaged = default(bool?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? datatypecode = default(int?), string transformationparametermappingidunique = default(string), string _createdonbehalfbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _createdbyValue = default(string), string solutionid = default(string), int? parametertypecode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string transformationparametermappingid = default(string), MicrosoftDynamicsCRMtransformationmapping transformationmappingid = default(MicrosoftDynamicsCRMtransformationmapping), IList<MicrosoftDynamicsCRMlookupmapping> lookUpMappingTransformationParameterMapping = default(IList<MicrosoftDynamicsCRMlookupmapping>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMtransformationparametermapping(string _transformationmappingidValue = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), int? parametersequence = default(int?), int? parameterarrayindex = default(int?), string _modifiedbyValue = default(string), string introducedversion = default(string), int? componentstate = default(int?), string data = default(string), bool? ismanaged = default(bool?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? datatypecode = default(int?), string transformationparametermappingidunique = default(string), string _modifiedonbehalfbyValue = default(string), string _createdbyValue = default(string), string solutionid = default(string), int? parametertypecode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string transformationparametermappingid = default(string), string _createdonbehalfbyValue = default(string), MicrosoftDynamicsCRMtransformationmapping transformationmappingid = default(MicrosoftDynamicsCRMtransformationmapping), IList<MicrosoftDynamicsCRMlookupmapping> lookUpMappingTransformationParameterMapping = default(IList<MicrosoftDynamicsCRMlookupmapping>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
         {
             this._transformationmappingidValue = _transformationmappingidValue;
             Overwritetime = overwritetime;
@@ -43,13 +43,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Modifiedon = modifiedon;
             Datatypecode = datatypecode;
             Transformationparametermappingidunique = transformationparametermappingidunique;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             this._createdbyValue = _createdbyValue;
             Solutionid = solutionid;
             Parametertypecode = parametertypecode;
             Createdon = createdon;
             Transformationparametermappingid = transformationparametermappingid;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Transformationmappingid = transformationmappingid;
             LookUpMappingTransformationParameterMapping = lookUpMappingTransformationParameterMapping;
             Modifiedonbehalfby = modifiedonbehalfby;
@@ -126,11 +126,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
 
@@ -158,6 +153,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "transformationparametermappingid")]
         public string Transformationparametermappingid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
