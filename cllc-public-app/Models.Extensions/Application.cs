@@ -282,9 +282,10 @@ namespace Gov.Lclb.Cllb.Public.Models
             // LCSD-6959: 2024-02-12 waynezen
             to.AdoxioStatusofconstruction = from.statusOfConstruction;
 
-            to.AdoxioValidinterestdormancyperiod = from.validInterestDormancyPeriod ? 1 : 0; ;
-            to.AdoxioAffirminformationproividedtrueandcomplete = from.affirmInformationProividedTrueAndComplete ? 1 : 0; ;
-            to.AdoxioValidinterestestablishmentlocation = from.validInterestEstablishmentLocation? 1 : 0; ;
+            to.AdoxioValidinterestdormancyperiod = from.validInterestDormancyPeriod ? 1 : 0; 
+            to.AdoxioAffirminformationproividedtrueandcomplete = from.affirmInformationProividedTrueAndComplete ? 1 : 0; 
+            to.AdoxioValidinterestestablishmentlocation = from.validInterestEstablishmentLocation? 1 : 0;
+            to.AdoxioEstablishmentreopeningdate = from.EstablishmentReopeningDate;
         }
 
 
@@ -690,7 +691,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 validInterestDormancyPeriod = dynamicsApplication.AdoxioValidinterestdormancyperiod.HasValue ? dynamicsApplication.AdoxioValidinterestdormancyperiod.Value == 1 ? true : false : false,
                 affirmInformationProividedTrueAndComplete = dynamicsApplication.AdoxioAffirminformationproividedtrueandcomplete.HasValue ? dynamicsApplication.AdoxioAffirminformationproividedtrueandcomplete.Value == 1 ? true : false : false,
                 validInterestEstablishmentLocation = dynamicsApplication.AdoxioValidinterestestablishmentlocation.HasValue ? dynamicsApplication.AdoxioValidinterestestablishmentlocation.Value == 1 ? true : false : false,
-
+                EstablishmentReopeningDate = dynamicsApplication.AdoxioEstablishmentreopeningdate,
             };
 
 

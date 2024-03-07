@@ -789,5 +789,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool validInterestDormancyPeriod { get; set; }
         public bool affirmInformationProividedTrueAndComplete { get; set; }
         public bool validInterestEstablishmentLocation { get; set; }
+        public DateTimeOffset? EstablishmentReopeningDate { get; set; }
+
     }
 }
