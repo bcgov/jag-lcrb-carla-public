@@ -15,7 +15,7 @@ import { Application } from '@models/application.model';
 import { FormBase, CanadaPostalRegex, ApplicationHTMLContent } from '@shared/form-base';
 import { DynamicsDataService } from '@services/dynamics-data.service';
 import { Account, TransferAccount } from '@models/account.model';
-import { ApplicationTypeNames, FormControlState } from '@models/application-type.model';
+import { ApplicationType, ApplicationTypeNames, FormControlState } from '@models/application-type.model';
 import { TiedHouseConnection } from '@models/tied-house-connection.model';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
 import { EstablishmentWatchWordsService } from '@services/establishment-watch-words.service';
@@ -530,7 +530,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
     this.updateRequiredValidator(val, 'patioAccessControlDescription');
     this.updateRequiredValidator(val, 'patioAccessDescription');
     this.updateRequiredValidator(val, 'patioCompDescription');
-    this.updateRequiredValidator(val, 'patioIsLiquorCarried');
+    // 2024-02-16 LCSD-6975 waynezen: patioIsLiquorCarried is NOT a required field
+    //this.updateRequiredValidator(val, 'patioIsLiquorCarried');
 
     if (this.form.get('patioIsLiquorCarried').value) {
       this.updateRequiredValidator(val, 'patioLiquorCarriedDescription');
@@ -572,9 +573,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.form.get('hasCoolerAccess').disable();
     }
 
-    if ((this.application.applicationType.name !== ApplicationTypeNames.SpecialEventAreaEndorsement
-      && this.application.applicationType.name !== ApplicationTypeNames.LoungeAreaEndorsment) &&
-      !this.application.applicationType.showPatio) {
+    // 2024-02-21 LCSD-6975 waynezen: no longer hard-code ApplicationTypes to disable Has Patio? control
+    //if ((this.application.applicationType.name !== ApplicationTypeNames.SpecialEventAreaEndorsement
+    //  && this.application.applicationType.name !== ApplicationTypeNames.LoungeAreaEndorsment) &&
+    if (!this.isPatioActive(this.application.applicationType) && !this.application.applicationType.showPatio) {
       this.form.get('isHasPatio').disable();
     }
 
@@ -1526,6 +1528,16 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   isValidOrNotTouchedRequireTrue(field: string) {
     return this.form.get(field).value == 1 || !this.form.get(field).touched;
+  }
+
+  // 2024-02-16 LCSD-6975 waynezen:
+  private isPatioActive(appType: ApplicationType): boolean {
+    let hasPatio = false;
+
+    if (appType && appType.HasPatio) {
+      hasPatio = true;
+    }
+    return hasPatio;
   }
 
   // 2024-02-06 LCSD-6170 waynezen: Validation function for Dyn 365 Field defined as 2-option and drop-down values=Yes / No and Required
