@@ -1262,7 +1262,7 @@
 
                               <div class="auto-width" *ngIf="formField.options.length>3">
                                 <mat-form-field>
-                                  <mat-select [formControlName]="formField.datafieldname" [id]="formField.datafieldname">
+                                  <mat-select [(value)]="selected" placeholder="-- Select --" [formControlName]="formField.datafieldname" [id]="formField.datafieldname">
                                     <mat-option *ngFor="let option of formField.options" [value]="option.value">{{option.label}}</mat-option>
                                   </mat-select>
                                 </mat-form-field>
@@ -1323,7 +1323,7 @@
                     (b) fails to disclose a material fact.
                   </div>
                 </section>
-                <app-field [valid]="!showValidationMessages || form.get('affirmInformationProividedTrueAndComplete').valid" [showChevrons]="false">
+                <app-field [valid]="!showValidationMessages " [showChevrons]="false">
                   <mat-checkbox formControlName="affirmInformationProividedTrueAndComplete">
                     <span class="error-states">*</span>
                     <span class="ml-2">
@@ -1331,7 +1331,7 @@
                     </span>
                   </mat-checkbox>
                 </app-field>
-                <app-field [valid]="!showValidationMessages || form.get('validInterestDormancyPeriod').valid" [showChevrons]="false">
+                <app-field [valid]="!showValidationMessages" [showChevrons]="false">
                   <mat-checkbox formControlName="validInterestDormancyPeriod">
                     <span class="error-states">*</span>
                     <span class="ml-2">
@@ -1339,7 +1339,7 @@
                     </span>
                   </mat-checkbox>
                 </app-field>
-                <app-field [valid]="!showValidationMessages || form.get('validInterestEstablishmentLocation').valid" [showChevrons]="false">
+                <app-field [valid]="!showValidationMessages" [showChevrons]="false">
                   <mat-checkbox formControlName="validInterestEstablishmentLocation">
                     <span class="error-states">*</span>
                     <span class="ml-2">
