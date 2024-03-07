@@ -275,6 +275,9 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioIsadequatecareandcontroloverthepatio = from.isAdequateCare;
             to.AdoxioIspatioincompliance = from.isInCompliance;
 
+            // LCSD-6959: 2024-02-12 waynezen
+            to.AdoxioStatusofconstruction = from.statusOfConstruction;
+
         }
 
 
@@ -668,6 +671,9 @@ namespace Gov.Lclb.Cllb.Public.Models
                 isBoundingSufficientToDefine = dynamicsApplication.AdoxioIspatioboundingsufficienttodefinearea,
                 isAdequateCare = dynamicsApplication.AdoxioIsadequatecareandcontroloverthepatio,
                 isInCompliance = dynamicsApplication.AdoxioIspatioincompliance,
+
+                // LCSD-6959: 2024-02-12 waynezen
+                statusOfConstruction = dynamicsApplication.AdoxioStatusofconstruction,
 
             };
 

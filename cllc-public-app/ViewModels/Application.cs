@@ -669,6 +669,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool? isAdequateCare { get; set; }
         public bool? isInCompliance { get; set; }
 
+        // LCSD-6959: 2024-02-12 waynezen
+        public int? statusOfConstruction { get; set; }
+
 
         public int? LocatedAboveDescription { get; set; }
         public int? PatioServiceBar { get; set; }
