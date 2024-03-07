@@ -183,21 +183,33 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
         });
           */
 
-        this.marketerExists = applications.filter(item => item.applicationTypeName === ApplicationTypeNames.Marketer)
-          .map(item => item as any)
-          .concat(licenses.filter(item => item.licenceTypeName === ApplicationTypeNames.Marketer)).length >
-          0;
+        // LCSD-6843: 2024-03-01 waynezen; executes asynchronously on long-running thread
+        this.marketerExists = this.marketerExistsFunc(applications, licenses);
 
         this.nonMarketerExists = applications
           .filter(item => item.applicationTypeName === ApplicationTypeNames.CannabisRetailStore)
           .map(item => item as any)
-          .concat(licenses.filter(item => item.licenceTypeName !== ApplicationTypeNames.Marketer)).length >
-          0;
+          .concat(licenses.filter(item => item.licenceTypeName !== ApplicationTypeNames.Marketer)).length > 0;
 
         this.dataLoaded = true;
 
       });
+
+    // LCSD-6843: 2024-03-01 waynezen; executes immediately; set marketerExists flag here first which hides the Cannabis tiles initially
+    this.marketerExists = true;
+
     this.subscriptionList.push(sub);
+  }
+
+  // LCSD-6843: 2024-03-01 waynezen
+  private marketerExistsFunc(applications: ApplicationSummary[], licenses: ApplicationLicenseSummary[]): boolean {
+
+    const isMarketerExist = applications.filter(item => item.applicationTypeName === ApplicationTypeNames.Marketer)
+      .map(item => item as any)
+      .concat(licenses.filter(item => item.licenceTypeName === ApplicationTypeNames.Marketer)).length > 0;
+
+    return (isMarketerExist);
+
   }
 
   uploadMoreFiles(application: Application) {
