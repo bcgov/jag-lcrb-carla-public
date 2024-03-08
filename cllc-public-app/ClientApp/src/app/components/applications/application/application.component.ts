@@ -15,7 +15,7 @@ import { Application } from '@models/application.model';
 import { FormBase, CanadaPostalRegex, ApplicationHTMLContent } from '@shared/form-base';
 import { DynamicsDataService } from '@services/dynamics-data.service';
 import { Account, TransferAccount } from '@models/account.model';
-import { ApplicationTypeNames, FormControlState } from '@models/application-type.model';
+import { ApplicationStatuses, ApplicationTypeNames, FormControlState } from '@models/application-type.model';
 import { TiedHouseConnection } from '@models/tied-house-connection.model';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
 import { EstablishmentWatchWordsService } from '@services/establishment-watch-words.service';
@@ -656,12 +656,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.form.get('IsReadyProductNotVisibleOutside').setValidators([Validators.required]);
     }
 
-    if (this.application?.applicationType?.name == ApplicationTypeNames.Dormancy) {
-      this.form.get('validInterestEstablishmentLocation').setValidators([this.customRequiredCheckboxValidator()]);
-      this.form.get('validInterestDormancyPeriod').setValidators([this.customRequiredCheckboxValidator()]);
-      this.form.get('affirmInformationProividedTrueAndComplete').setValidators([this.customRequiredCheckboxValidator()]);
-    } 
-
     if (this.application.applicationType.lGandPoliceSelectors === "Yes" && this.LGApprovalsFeatureIsOn) {
       this.form.get('indigenousNation').setValidators([this.requiredAutoCompleteId]);
       this.form.get('policeJurisdiction').setValidators([this.requiredAutoCompleteId]);
@@ -1224,6 +1218,18 @@ export class ApplicationComponent extends FormBase implements OnInit {
         && this?.application?.assignedLicence?.establishmentName != this.form.get('establishmentName').value // the name is different
       );
     return isChanging;
+  }
+
+  /**
+   * LCSD-6243: 2024-02-28 waynezen: prevent deep-linking by hiding Cmd buttons
+   */
+  private canVisitApplicationForm(): boolean {
+    const isAllowed: boolean = (
+      (this?.account.businessType === "LocalGovernment") ||
+      this?.application?.applicationStatus === ApplicationStatuses.Intake ||
+      this?.application?.applicationStatus === ApplicationStatuses.InProgress)
+
+    return isAllowed;
   }
 
 
