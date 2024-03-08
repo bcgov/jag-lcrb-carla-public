@@ -1409,7 +1409,7 @@
                                      fileTypes="FILE MUST BE IN PDF FORMAT." [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
                                      [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()" [multipleFiles]="true"
                                      entityName="application" [useDocumentTypeForName]="true"
-                                     (numberOfUploadedFiles)="uploadedPhotosOrRenderingsDocuments = $event" [entityId]="applicationId"
+                                     (numberOfUploadedFiles)="proofofValidInterestDocuments = $event" [entityId]="applicationId"
                                      [uploadHeader]="'TO UPLOAD SUPPORTING DOCUMENTS'">
                   </app-file-uploader>
 
