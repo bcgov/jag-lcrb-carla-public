@@ -380,7 +380,8 @@ mat-checkbox.text-wrap {
 }
 
 
-  .mat-form-field-infix {
-    width: auto !important;
-  }
+.mat-form-field-infix {
+  min-width: 50% !important;
+  width: auto !important;
+}
 

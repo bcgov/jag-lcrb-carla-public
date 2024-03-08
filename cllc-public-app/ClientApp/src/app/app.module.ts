@@ -330,6 +330,12 @@ import { FinalConfirmationComponent } from './components/sep/sep-application/fin
 import { CancelSepApplicationDialogComponent } from './components/sep/sep-application/cancel-sep-application-dialog/cancel-sep-application-dialog.component';
 import { ApplicationTypeDataService } from "./services/application-type-data.service";
 
+// LCSD - 6243: 2024-02-28 waynezen
+import { ForbiddenModalComponent } from '@shared/components/forbidden-modal/forbidden-modal.component';
+
+
+
+
 
 @NgModule({
   declarations: [
@@ -522,6 +528,7 @@ import { ApplicationTypeDataService } from "./services/application-type-data.ser
     SepClaimComponent,
     FinalConfirmationComponent,
     CancelSepApplicationDialogComponent,
+    ForbiddenModalComponent,
   ],
   imports: [
     AppRoutingModule,
