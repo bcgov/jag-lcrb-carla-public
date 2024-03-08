@@ -107,6 +107,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   uploadedPartnershipAgreement: 0;
   uploadedOtherDocuments: 0;
   uploadedIndividualsWithLessThan10: 0;
+  proofofValidInterestDocuments: 0;
   dynamicsForm: DynamicsForm;
   autocompleteLocalGovernmemts: any[];
   autocompletePoliceDurisdictions: any[];
@@ -1396,7 +1397,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
       }
 
     }
-
+    if (this.application?.applicationType?.name === ApplicationTypeNames.DormancyReinstatement && (this.proofofValidInterestDocuments || 0) < 1) {
+      valid = false;
+      this.validationMessages.push('At least one proof of valid interest document is required.');
+    }
     // special validation for RLRS
 
     if (this.form.get('isRlrsLocatedInRuralCommunityAlone')
@@ -1488,12 +1492,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
       if (this.form.get('tempSuspensionOrPatronParticipationEnd').value < this.form.get('tempSuspensionOrPatronParticipationStart').value) {
         valid = false;
         this.validationMessages.push('Start date should be before the end date.');
-      }
-    }
-    if (this.application?.applicationType?.name != ApplicationTypeNames.TemporaryExtensionOfLicensedAreaLP) {
-      if (!this.form.get('authorizedToSubmit').value && this.form.get('authorizedToSubmit').invalid) {
-        valid = false;
-        this.validationMessages.push('Please affirm that you are authorized to submit the application.');
       }
     }
     if (this.application?.applicationType?.name == ApplicationTypeNames.ManufacturerLocationChange) {
