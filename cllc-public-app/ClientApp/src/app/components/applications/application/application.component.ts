@@ -15,7 +15,7 @@ import { Application } from '@models/application.model';
 import { FormBase, CanadaPostalRegex, ApplicationHTMLContent } from '@shared/form-base';
 import { DynamicsDataService } from '@services/dynamics-data.service';
 import { Account, TransferAccount } from '@models/account.model';
-import { ApplicationTypeNames, FormControlState } from '@models/application-type.model';
+import { ApplicationStatuses, ApplicationTypeNames, FormControlState } from '@models/application-type.model';
 import { TiedHouseConnection } from '@models/tied-house-connection.model';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
 import { EstablishmentWatchWordsService } from '@services/establishment-watch-words.service';
@@ -107,6 +107,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   uploadedPartnershipAgreement: 0;
   uploadedOtherDocuments: 0;
   uploadedIndividualsWithLessThan10: 0;
+  proofofValidInterestDocuments: 0;
   dynamicsForm: DynamicsForm;
   autocompleteLocalGovernmemts: any[];
   autocompletePoliceDurisdictions: any[];
@@ -654,12 +655,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
     if (this.application.applicationType.floorPlan === FormControlState.Show && (this.application.licenseType === 'Cannabis Retail Store' || this.application.licenseType === 'S119 CRS Authorization')) {
       this.form.get('IsReadyProductNotVisibleOutside').setValidators([Validators.required]);
     }
-
-    if (this.application?.applicationType?.name == ApplicationTypeNames.Dormancy) {
-      this.form.get('validInterestEstablishmentLocation').setValidators([this.customRequiredCheckboxValidator()]);
-      this.form.get('validInterestDormancyPeriod').setValidators([this.customRequiredCheckboxValidator()]);
-      this.form.get('affirmInformationProividedTrueAndComplete').setValidators([this.customRequiredCheckboxValidator()]);
-    } 
 
     if (this.application.applicationType.lGandPoliceSelectors === "Yes" && this.LGApprovalsFeatureIsOn) {
       this.form.get('indigenousNation').setValidators([this.requiredAutoCompleteId]);
@@ -1225,6 +1220,18 @@ export class ApplicationComponent extends FormBase implements OnInit {
     return isChanging;
   }
 
+  /**
+   * LCSD-6243: 2024-02-28 waynezen: prevent deep-linking by hiding Cmd buttons
+   */
+  private canVisitApplicationForm(): boolean {
+    const isAllowed: boolean = (
+      (this?.account.businessType === "LocalGovernment") ||
+      this?.application?.applicationStatus === ApplicationStatuses.Intake ||
+      this?.application?.applicationStatus === ApplicationStatuses.InProgress)
+
+    return isAllowed;
+  }
+
 
   /**
    * Redirect to payment processing page (Express Pay / Bambora service)
@@ -1396,7 +1403,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
       }
 
     }
-
+    if (this.application?.applicationType?.name === ApplicationTypeNames.DormancyReinstatement && (this.proofofValidInterestDocuments || 0) < 1) {
+      valid = false;
+      this.validationMessages.push('At least one proof of valid interest document is required.');
+    }
     // special validation for RLRS
 
     if (this.form.get('isRlrsLocatedInRuralCommunityAlone')
@@ -1488,12 +1498,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
       if (this.form.get('tempSuspensionOrPatronParticipationEnd').value < this.form.get('tempSuspensionOrPatronParticipationStart').value) {
         valid = false;
         this.validationMessages.push('Start date should be before the end date.');
-      }
-    }
-    if (this.application?.applicationType?.name != ApplicationTypeNames.TemporaryExtensionOfLicensedAreaLP) {
-      if (!this.form.get('authorizedToSubmit').value && this.form.get('authorizedToSubmit').invalid) {
-        valid = false;
-        this.validationMessages.push('Please affirm that you are authorized to submit the application.');
       }
     }
     if (this.application?.applicationType?.name == ApplicationTypeNames.ManufacturerLocationChange) {
