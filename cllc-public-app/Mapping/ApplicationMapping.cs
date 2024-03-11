@@ -152,6 +152,7 @@ namespace Gov.Lclb.Cllb.Public.Mapping
                 {"adoxio_validinterestestablishmentlocation", new FieldMapping("validInterestEstablishmentLocation", true)},
                 {"adoxio_validinterestdormancyperiod", new FieldMapping("validInterestDormancyPeriod", true)},
                 {"adoxio_affirminformationproividedtrueandcomplete", new FieldMapping("affirmInformationProividedTrueAndComplete", true)},
+                {"adoxio_establishmentreopeningdate", new FieldMapping("establishmentReopeningDate", true)}
         };
         }
     }

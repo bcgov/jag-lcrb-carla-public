@@ -118,6 +118,7 @@ export enum ApplicationTypeNames {
   ManufacturerLocationChange = "Manufacturer Location Change",
   TemporaryChangetoaLiquorLicence_Other = "Temporary Change to a Liquor Licence - Other",
   Dormancy = "Dormancy",
+  DormancyReinstatement = "Dormancy Reinstatement",
 
 }
 
