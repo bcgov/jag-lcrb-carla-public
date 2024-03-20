@@ -15,6 +15,10 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Serilog;
 using Contact = Gov.Lclb.Cllb.Interfaces.Contact;
+using System.Data;
+using System.Xml.Linq;
+using Microsoft.Rest.Serialization;
+using Newtonsoft.Json;
 
 namespace Gov.Lclb.Cllb.CarlaSpiceSync
 {
@@ -463,6 +467,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         {
             try
             {
+                Log.Logger.Information("Creating Application Screen Request");
 
                 var screeningRequest = new IncompleteApplicationScreening()
                 {
@@ -498,7 +503,6 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                         LastName = application.Owninguser?.Lastname
                     }
                 };
-
                 if (application.AdoxioApplyingPerson != null)
                 {
                     string companyName = null;
@@ -578,6 +582,22 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                     i++;
                 }
                 screeningRequest.Associates = finalAssociates;
+                Log.Logger.Information("Screening Request Body");
+                var SerializationSettings = new JsonSerializerSettings
+                {
+                    Formatting = Newtonsoft.Json.Formatting.Indented,
+                    DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat,
+                    DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc,
+                    NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
+                    ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
+                    ContractResolver = new ReadOnlyJsonContractResolver(),
+                    Converters = new List<JsonConverter>
+                    {
+                        new Iso8601TimeSpanConverter()
+                    }
+                };
+                var requestBody = SafeJsonConvert.SerializeObject(screeningRequest, SerializationSettings);
+                Log.Logger.Information(requestBody);
                 return screeningRequest;
             }
             catch (HttpOperationException odee)
