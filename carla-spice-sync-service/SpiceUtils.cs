@@ -582,6 +582,10 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                     i++;
                 }
                 screeningRequest.Associates = finalAssociates;
+                List<IncompleteApplicationScreening> payload = new List<IncompleteApplicationScreening>
+                {
+                    screeningRequest
+                };
                 Log.Logger.Information("Screening Request Body");
                 var SerializationSettings = new JsonSerializerSettings
                 {
@@ -596,7 +600,8 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                         new Iso8601TimeSpanConverter()
                     }
                 };
-                var requestBody = SafeJsonConvert.SerializeObject(screeningRequest, SerializationSettings);
+
+                var requestBody = SafeJsonConvert.SerializeObject(payload, SerializationSettings);
                 Log.Logger.Information(requestBody);
                 return screeningRequest;
             }
