@@ -26,6 +26,7 @@ using Microsoft.OpenApi.Models;
 using System.Net.Http;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using HealthChecks.UI.Client;
+using System.Text.Json.Serialization;
 
 [assembly: ApiController]
 namespace Gov.Lclb.Cllb.CarlaSpiceSync
@@ -52,7 +53,10 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                                  .Build();
                     config.Filters.Add(new AuthorizeFilter(policy));
                 }
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            }).AddJsonOptions(o =>
+            {
+                o.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            });
 
             // Other ConfigureServices() code...
 
