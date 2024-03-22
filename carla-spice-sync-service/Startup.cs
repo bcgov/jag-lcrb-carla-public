@@ -160,10 +160,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
 
             app.UseAuthentication();
             app.UseMvc();
-            app.UseSwagger(c =>
-            {
-                c.SerializeAsV2 = true;
-            });
+            app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "JAG LCRB SPD Transfer Service");
