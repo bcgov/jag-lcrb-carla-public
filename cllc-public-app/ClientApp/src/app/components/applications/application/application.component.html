@@ -43,28 +43,103 @@
               </p>
             </div>
           </section>
-
           <!--Picnic Area Declaration-->
-          <section class="ngtest-property-details" *ngIf="application?.applicationType?.name === 'Picnic Area Endorsement' && application?.applicationType.showZoningDeclarations">
+          <section class="ngtest-property-details" *ngIf="application?.applicationType?.name == ApplicationTypeNames.PicnicAreaEndorsement ||
+                   application?.applicationType?.name == ApplicationTypeNames.ChangetoApprovedPicnicArea">
             <h3 class="blue-header">PICNIC AREA DECLARATION</h3>
-            <section class="padded-section content-bottom">
+            <section class="padded-section content-bottom" *ngIf="application?.applicationType?.name == ApplicationTypeNames.PicnicAreaEndorsement">
               <div style="position: relative">
                 <section>
                   <p>
-                    A picnic area endorsement is an outdoor area, where patrons may consume products that are purchased from the manufacturer or obtained from the sampling area. The picnic area must be approved by the Branch.
-                    Applicants must have zoning confirmation and approval of their proposed capacity by LG/FN.
-                    The following applies to the endorsement for a picnic area:
+                    A picnic area endorsement is an outdoor area where patrons may consume products that are purchased or obtained from the manufacturer. The picnic area must be approved by the Branch. Applicants must have zoning confirmation and approval of their proposed capacity by local government/Indigenous Nation.
+                  </p>
+                  <p>
+                    The following applies to an endorsement for a picnic area:
                   </p>
                   <ul>
-                    <li>It may be a single area or multiple areas provided the combined area does not exceed 1000 square metres.</li>
                     <li>
-                      The picnic area is a consumption area only. No sale or service is permitted. Patrons must carry their own purchases or samples to the picnic area.
+                      The picnic endorsement area may comprise of a single sale area and one or more consumption-only areas. The sale area may not exceed 300 square meters. The total combined area of the sale area and any consumption-only area(s) must not exceed 1000 square metres.
                     </li>
                     <li>
-                      Hours are 9 a.m. to no later than half an hour after sunset (i.e., dusk) unless otherwise restricted by the Branch.
+                      Hours of a sale area are from 9 a.m. to 6 p.m. Hours of a consumption-only area are from 9 a.m. to no later than half an hour after sunset (i.e. dusk) unless otherwise restricted by the Branch.
                     </li>
                     <li>
-                      Signage is required that identifies the picnic area, states maximum person capacity, and states that the sale and service of liquor is not permitted.
+                      No more than 30 persons are permitted in the sale area. Person capacity for the consumption-only area must be approved by the Branch. Signage indicating the capacity of each area must be posted.
+                    </li>
+                    <li>
+                      The sale area and any consumption-only area(s) must each have a clearly defined boundary (e.g. using fencing, trees, planters, barrels, natural flora, etc.).
+                    </li>
+                    <li>
+                      A sale area located within the Agricultural Land Reserve must not have ground cover (e.g. paving, gravel pad, concrete, etc.) unless otherwise approved by the Agricultural Land Commission.
+                    </li>
+                  </ul>
+                  <p>
+                    Licensees are expected to understand all relevant regulatory requirements established throughout the <span style="font-style:italic;">Liquor Control and Liquor Act</span>, Liquor Control and Licensing Regulation, and relevant Terms and Conditions handbook.
+                  </p>
+                  As part of this application, you are required to confirm:
+                  <br />
+                </section>
+                <br />
+                <app-field label="I have read and understand the above terms and conditions"
+                           [isFullWidth]="true"
+                           [valid]="isValidOrNotTouchedRequireTrue('picnicReadAndAccept')"
+                           errorMessage="Please confirm have read and understand the term and conditions."
+                           [showChevrons]="false">
+                  <mat-radio-group formControlName="picnicReadAndAccept">
+                    <mat-radio-button class="mr-5" [value]="1">Yes</mat-radio-button>
+                    <mat-radio-button class="mr-5" [value]="0">No</mat-radio-button>
+                  </mat-radio-group>
+                </app-field>
+                <app-field label="I confirm local zoning allows for the operation of a picnic area endorsement, including a sale area if applicable."
+                           [isFullWidth]="true"
+                           [valid]="isValidOrNotTouchedRequireTrue('picnicConfirmZoning')"
+                           errorMessage="Please confirm local zoning allows for the operation of a picnic area endorsement."
+                           [showChevrons]="false">
+                  <mat-radio-group formControlName="picnicConfirmZoning">
+                    <mat-radio-button class="mr-5" [value]="1">Yes</mat-radio-button>
+                    <mat-radio-button class="mr-5" [value]="0">No</mat-radio-button>
+                  </mat-radio-group>
+                </app-field>
+                <app-field label="I confirm my local government/Indigenous Nation supports the proposed capacity for the picnic area endorsement."
+                           [isFullWidth]="true"
+                           [valid]="isValidOrNotTouchedRequireTrue('picnicConfirmLGFNCapacity')"
+                           errorMessage="Please confirm local government/First Nation supports the proposed capacity for the picnic area endorsement."
+                           [showChevrons]="false">
+                  <mat-radio-group formControlName="picnicConfirmLGFNCapacity">
+                    <mat-radio-button class="mr-5" [value]="1">Yes</mat-radio-button>
+                    <mat-radio-button class="mr-5" [value]="0">No</mat-radio-button>
+                  </mat-radio-group>
+                </app-field>
+              </div>
+            </section>
+
+            <section class="padded-section content-bottom" *ngIf="application?.applicationType?.name == ApplicationTypeNames.ChangetoApprovedPicnicArea">
+              <div style="position: relative">
+                <section>
+                  <p>
+                    A picnic area endorsement permits outdoor areas where patrons may consume products that are purchased or obtained from the manufacturer.
+                  </p>
+                  <p>
+                    This endorsement must be approved by the Branch, and applicants must have zoning confirmation and approval of their proposed capacity by local government/Indigenous Nation.
+                  </p>
+                  <p>
+                    The following applies to a picnic area endorsement:
+                  </p>
+                  <ul>
+                    <li>
+                      The picnic endorsement area may comprise of a single sale area and one or more consumption-only areas. The sale area must not exceed 300 square meters. The total combined area of the sale area and any consumption-only areas must not exceed 1000 square metres.
+                    </li>
+                    <li>
+                      Hours of a sale area are from 9 a.m. to 6 p.m. or half an hour after sunset (whichever is earlier). Once sales have ended the sale area can be used as a consumption-only area. Hours of consumption-only areas are from 9 a.m. to no later than half an hour after sunset (i.e. dusk) unless otherwise restricted by the Branch.
+                    </li>
+                    <li>
+                      No more than 30 persons are permitted in the sale area. Person capacity for the consumption-only area must be approved by the Branch. Signage indicating the capacity of each area must be posted.
+                    </li>
+                    <li>
+                      The sale area and any consumption-only area(s) must each have a clearly defined boundary.
+                    </li>
+                    <li>
+                      A sale area located within the Agricultural Land Reserve must not have ground cover (e.g. paving, gravel pad, concrete, etc.) unless otherwise approved by the Agricultural Land Commission
                     </li>
                   </ul>
                   <p>
@@ -84,7 +159,7 @@
                     <mat-radio-button class="mr-5" [value]="0">No</mat-radio-button>
                   </mat-radio-group>
                 </app-field>
-                <app-field label="You confirm local zoning allows for the operation of a picnic area endorsement; and"
+                <app-field label="I confirm local zoning allows for the operation of a picnic area endorsement, including a dedicated outdoor sale area."
                            [isFullWidth]="true"
                            [valid]="isValidOrNotTouchedRequireTrue('picnicConfirmZoning')"
                            errorMessage="Please confirm local zoning allows for the operation of a picnic area endorsement."
@@ -495,11 +570,11 @@
                   Cannabis Associate Security Screening forms are not required if you submit liquor related applications.
                   Missing forms or documents will be requested once your application is received.
                   <!--If you do not provide
-                  Cannabis Associate Security Screening documents prior to your application submission, they will be
-                  requested via secure channels
-                  once your application has been received. Please note that the time to collect these documents
-                  directly
-                  impacts the time to process your application.-->
+          Cannabis Associate Security Screening documents prior to your application submission, they will be
+          requested via secure channels
+          once your application has been received. Please note that the time to collect these documents
+          directly
+          impacts the time to process your application.-->
                 </p>
 
                 <p>
@@ -1212,7 +1287,7 @@
                 <div *ngIf="formSection.visible" class="padded-section">
                   <!-- show it on the page-->
                   <!--section class="padded-section">
-                  <!-- display the section name as a label-->
+          <!-- display the section name as a label-->
                   <label for="" *ngIf="formSection.name">{{formSection.name}}</label>
                   <!-- for each field on the section-->
                   <div *ngFor="let formField of formSection.fields">
@@ -1414,13 +1489,13 @@
                       Proof of valid interest (lease or land title) is required - attach a copy when submitting the form.
                     </p>
 
-                  <app-file-uploader *ngIf="applicationId" documentType="Supporting Document"
-                                     fileTypes="FILE MUST BE IN PDF FORMAT." [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
-                                     [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()" [multipleFiles]="true"
-                                     entityName="application" [useDocumentTypeForName]="true"
-                                     (numberOfUploadedFiles)="proofofValidInterestDocuments = $event" [entityId]="applicationId"
-                                     [uploadHeader]="'TO UPLOAD SUPPORTING DOCUMENTS'">
-                  </app-file-uploader>
+                    <app-file-uploader *ngIf="applicationId" documentType="Supporting Document"
+                                       fileTypes="FILE MUST BE IN PDF FORMAT." [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
+                                       [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()" [multipleFiles]="true"
+                                       entityName="application" [useDocumentTypeForName]="true"
+                                       (numberOfUploadedFiles)="proofofValidInterestDocuments = $event" [entityId]="applicationId"
+                                       [uploadHeader]="'TO UPLOAD SUPPORTING DOCUMENTS'">
+                    </app-file-uploader>
 
                   </div>
                 </div>
@@ -1430,8 +1505,8 @@
 
           <!-- The label of the field will now be used to communicate the message of the alert -->
           <!-- <app-error-alert *ngIf="application?.applicationType?.name === 'Ethyl Alcohol Permit' && form.get('hasSufficientRangeOfProducts').value == 845280000">
-            You can only apply for up to a maximum of 16 litres because this is an application for a “One-Time” permit.
-          </app-error-alert> -->
+    You can only apply for up to a maximum of 16 litres because this is an application for a “One-Time” permit.
+  </app-error-alert> -->
 
           <section *ngIf="application?.applicationType?.showDescription1">
             <h3 class="blue-header" *ngIf="!this.isLP()">DESCRIPTION OF PROPOSED CHANGE</h3>
@@ -1813,8 +1888,13 @@
           </section>
 
           <!-- Capacity Area -->
-          <h3 class="blue-header" *ngIf="application.applicationType.capacityArea && application?.applicationType?.name != ApplicationTypeNames.TemporaryExtensionOfLicensedAreaLP">CAPACITY AREA</h3>
-          <section *ngIf="application.applicationType.capacityArea&& application?.applicationType?.name != ApplicationTypeNames.TemporaryExtensionOfLicensedAreaLP" class="padded-section content-bottom" formGroupName="capacityArea">
+          <h3 class="blue-header" *ngIf="application.applicationType.capacityArea
+             && application?.applicationType?.name != ApplicationTypeNames.TemporaryExtensionOfLicensedAreaLP
+              && application?.applicationType?.name != ApplicationTypeNames.ChangetoApprovedPicnicArea">
+            CAPACITY AREA
+          </h3>
+          <section *ngIf="application.applicationType.capacityArea && application?.applicationType?.name != ApplicationTypeNames.TemporaryExtensionOfLicensedAreaLP
+                   && application?.applicationType?.name != ApplicationTypeNames.ChangetoApprovedPicnicArea" class="padded-section content-bottom" formGroupName="capacityArea">
             <div *ngIf="htmlContent?.capacityArea" [innerHTML]="htmlContent.capacityArea"></div>
             <app-field label="Capacity" [required]="true" [valid]="!showValidationMessages || form.get('capacityArea.capacity').valid"
                        errorMessage="Capacity is required." [showChevrons]="false" [isFullWidth]="false">
@@ -1943,17 +2023,17 @@
           </div>
 
           <!--div *ngIf="application?.licenseType != 'Cannabis Retail Store'">
-          <p>
-            <u>
-              Provide a minimum four (4) colour photographs of the proposed site, one facing each side of the
-              building/property
-            </u>
-          </p>
-          <p>
-            These photos need to be current (taken by the licensee or representative within the past 90 days).
-            Pictures from internet sites will not be accepted.
-          </p>
-          </div-->
+  <p>
+    <u>
+      Provide a minimum four (4) colour photographs of the proposed site, one facing each side of the
+      building/property
+    </u>
+  </p>
+  <p>
+    These photos need to be current (taken by the licensee or representative within the past 90 days).
+    Pictures from internet sites will not be accepted.
+  </p>
+  </div-->
 
           <h3 class="blue-header" *ngIf="showGroceryQuestion()">Grocery Declaration</h3>
           <div class="ngtest-grocery-store" *ngIf="showGroceryQuestion()" class="content-bottom">
@@ -1961,10 +2041,10 @@
             <mat-card class="mat-elevation-z0" style="margin-bottom: 10px;">
               <section style="display: flex; justify-content: space-between; width: 100%;">
                 <!--div class="question-label" *ngIf="!htmlContent.Grocery">
-                Will the proposed structural alteration involve removing a wall between the
-                {{application?.licenseType}}
-                and an eligible grocery store?
-                </div-->
+        Will the proposed structural alteration involve removing a wall between the
+        {{application?.licenseType}}
+        and an eligible grocery store?
+        </div-->
                 be
                 cl
                 <div class="question-label" *ngIf="!htmlContent.grocery">
@@ -2351,8 +2431,8 @@
                 Please upload the society’s Statement of Directors and Registered Office.
               </p>
               <!-- <p *ngIf="account?.businessType === 'PublicCorporation'">
-                Please upload the society’s Statement of Directors and Registered Office.
-              </p> -->
+        Please upload the society’s Statement of Directors and Registered Office.
+      </p> -->
               <p *ngIf="businessTypeIsPartnership()">
                 Please upload the Partnership Agreement.
               </p>
@@ -2964,16 +3044,16 @@
             </button>
 
             <!-- NEXT STEP BUTTONS
-            LG Approval Required -- > Submit to LG For Approval
+    LG Approval Required -- > Submit to LG For Approval
 
-            No LG Approvals Required
-            No Security Screening Required -- > Submit & Pay
-            Security Screening Required    -- > Proceed to Security Screening
-            LG Approved
-            No Security Screening Required -- > Submit & Pay
-            Security Screening Required    -- > Proceed to Security Screening
+    No LG Approvals Required
+    No Security Screening Required -- > Submit & Pay
+    Security Screening Required    -- > Proceed to Security Screening
+    LG Approved
+    No Security Screening Required -- > Submit & Pay
+    Security Screening Required    -- > Proceed to Security Screening
 
-            -->
+    -->
             <!-- LG Approval Required -->
             <button mat-raised-button class="ng-test-submit-for-lg-review" color="primary"
                     *ngIf="showSubmitToLG()"
