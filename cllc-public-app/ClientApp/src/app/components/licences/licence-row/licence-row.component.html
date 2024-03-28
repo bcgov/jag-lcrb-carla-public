@@ -137,7 +137,7 @@
       Storage
     </a>
   </div>
-  <div *ngIf="item.dormant==false">
+  <div *ngIf="item.dormant==false && item.status!='Expired'">
     <a href="javascript:void(0);" (click)="doAction(item,'Dormancy')">
       <span>
         Dormancy Request
@@ -145,7 +145,7 @@
       <mat-progress-bar *ngIf="requestStarted " mode="indeterminate"></mat-progress-bar>
     </a>
   </div>
-  <div *ngIf="item.dormant==true">
+  <div *ngIf="item.dormant==true && item.status!='Expired' ">
     <a href="javascript:void(0);" (click)="doAction(item,'Dormancy Reinstatement')">
       <span>
         Dormancy Reinstatement
