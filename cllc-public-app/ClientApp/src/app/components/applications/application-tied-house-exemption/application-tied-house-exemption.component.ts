@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild, AfterViewInit } from "@angular/core";
 import { FormBase, ApplicationHTMLContent } from "@shared/form-base";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Subscription, Subject, Observable, forkJoin, of, pipe } from 'rxjs';
@@ -22,6 +22,8 @@ import { ApplicationDataService } from "../../../services/application-data.servi
 import { Application } from "../../../models/application.model";
 import { TiedHouseConnection } from "../../../models/tied-house-connection.model";
 import { ApplicationTypeDataService } from "../../../services/application-type-data.service";
+import { RelatedLicencePickerComponent } from "@shared/components/related-licence-picker/related-licence-picker.component";
+import { RelatedJobnumberPickerComponent } from "@shared/components/related-jobnumber-picker/related-jobnumber-picker.component";
 
 const ValidationErrorMap = {
   "proposedOwner.accountId": "Please select the proposed transferee",
@@ -56,6 +58,11 @@ export class ApplicationTiedHouseExemptionComponent extends FormBase implements 
   applicationType: ApplicationType;
   applicationId: string;
   isAppId: string;
+
+  @ViewChild(RelatedLicencePickerComponent) autocompletelicencecomponent;
+  @ViewChild(RelatedJobnumberPickerComponent) autocompletejobcomponent;
+
+
   constructor(private store: Store<AppState>,
     public snackBar: MatSnackBar,
     public router: Router,
@@ -72,7 +79,9 @@ export class ApplicationTiedHouseExemptionComponent extends FormBase implements 
     this.route.paramMap.subscribe(pmap => this.licenceId = pmap.get("licenceId"));
     this.route.paramMap.subscribe(pmap => this.applicationId = pmap.get("applicationId"));
     this.route.paramMap.subscribe(pmap => this.isAppId = pmap.get("isAppId"));
+
   }
+
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -103,6 +112,7 @@ export class ApplicationTiedHouseExemptionComponent extends FormBase implements 
       manufacturerProductionAmountforPrevYear: [''],
       manufacturerProductionAmountUnit: ['']
     });
+
     if (!this.licenceId) {
       this.applicationTypeDataService.getApplicationTypeByName('Tied House Exemption Application')
         .pipe(takeWhile(() => this.componentActive))
@@ -179,6 +189,21 @@ export class ApplicationTiedHouseExemptionComponent extends FormBase implements 
 
   }
 
+
+  public autoCompFldEventHandler($event: any) {
+
+    switch ($event.toString()) {
+      case "autocompleteInput":
+        // cursor entered autocomplete search by Licence fld - clear autocomplete search by JobNumber fld
+        this.autocompletejobcomponent.autoCompFldClear();
+        break;
+      case "autocompleteJobNumber":
+        // cursor entered autocomplete search by JobNumber fld - clear autocomplete search by Licence fld
+        this.autocompletelicencecomponent.autoCompFldClear();
+        break;
+    }
+
+  }
 
   private licenceHasRepresentativeContact(): boolean {
     let hasContact = false;

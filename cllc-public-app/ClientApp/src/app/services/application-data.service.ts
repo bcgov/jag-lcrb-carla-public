@@ -9,6 +9,7 @@ import { DataService } from "./data.service";
 import { CovidApplication } from "@models/covid-application.model";
 import { OngoingLicenseeData } from "../models/ongoing-licensee-data";
 import { PagingResult } from "@models/paging-result.model";
+import { RelatedLicence } from "../models/related-licence";
 
 @Injectable()
 export class ApplicationDataService extends DataService {
@@ -193,6 +194,13 @@ export class ApplicationDataService extends DataService {
     return this.http.get(attachmentURL, { headers: headers, responseType: "blob" })
       .pipe(catchError(this.handleError));
 
+  }
+
+  // 20245-03-20 LCSD-6368 waynezen
+  getAutocomplete(search: string): Observable<any[]> {
+
+    return this.http.get<any[]>(this.apiPath + `autocomplete?name=${search}`, { headers: this.headers })
+      .pipe(catchError(this.handleError));
   }
 
 

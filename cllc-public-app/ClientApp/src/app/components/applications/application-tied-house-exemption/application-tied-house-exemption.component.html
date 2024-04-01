@@ -122,11 +122,15 @@
         </address>
       </div>
 
+        <!--TODO: waynezen Debug Remove-->
+        <button class="btn btn-primary" (click)="foodoo('bar')">Foo Do it</button>
+
       <h3 class="blue-header">IDENTIFY THE LICENCE TO RECEIVE THE EXEMPTION INVITATION</h3>
       <section class="padded-section">
         <app-field label="Search for the licence you wish to invite to apply for a tied house exemption:"
           errorMessage="Please select a value" [required]="true" [valid]="isValidOrNotTouched('assignedLicence')">
-          <app-related-licence-picker (valueSelected)="onLicenceSelect($event)"></app-related-licence-picker>
+          <app-related-licence-picker (valueSelected)="onLicenceSelect($event)" (autoCompFldFocusEvent)="autoCompFldEventHandler($event)" ></app-related-licence-picker>
+          <app-related-jobnumber-picker (valueSelected)="onLicenceSelect($event)" (autoCompFldFocusEvent)="autoCompFldEventHandler($event)" ></app-related-jobnumber-picker>
         </app-field>
 
         <table>

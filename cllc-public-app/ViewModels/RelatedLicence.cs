@@ -11,5 +11,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string Country { get; set; }
         public string PostalCode { get; set; }        
         public string Licensee { get; set; }
+
+        // 2024-03-25 LCSD-6368 waynezen
+        public string JobNumber { get; set; }
+        public string LicenseNumber { get; set; }
     }
 }
