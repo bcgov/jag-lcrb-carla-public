@@ -14,8 +14,8 @@ import { RelatedLicence } from "@models/related-licence";
 export class RelatedLicencePickerComponent implements OnInit {
   @ViewChild("autocomplete", { read: MatAutocompleteTrigger, static: true })
   inputAutoComplete: MatAutocompleteTrigger;
-  @Output()
-  valueSelected = new EventEmitter<string>();
+  @Output() valueSelected = new EventEmitter<string>();
+  @Output() autoCompFldFocusEvent = new EventEmitter<string>();
   form: FormGroup;
   autocompleteLicences: any[];
   licenceRequestInProgress: boolean;
@@ -44,6 +44,18 @@ export class RelatedLicencePickerComponent implements OnInit {
       });
   }
 
+  
+  autoCompFldFocus() {
+    // when the cursor enters the autoCompleteJobNumber field, let parent know name of field
+    this.autoCompFldFocusEvent.emit("autocompleteInput");
+  }
+
+  autoCompFldClear() {
+    // clear field
+    this.form.get("autocompleteInput").setValue('');
+    this.autocompleteLicences = null;
+  }
+
   autocompleteDisplay(item: RelatedLicence) {
     return item.name;
   }
@@ -51,5 +63,7 @@ export class RelatedLicencePickerComponent implements OnInit {
   onOptionSelect(event) {
     this.valueSelected.emit(event.option.value);
   }
+
+
 
 }

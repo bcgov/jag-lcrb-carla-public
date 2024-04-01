@@ -97,7 +97,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             Name = licence.AdoxioName,
                             EstablishmentName = licence.AdoxioEstablishment?.AdoxioName,
                             Streetaddress = licence.AdoxioEstablishment?.AdoxioAddressstreet,
-                            City = licence.AdoxioEstablishment?.AdoxioAddressstreet,
+                            // 2024-03-27 LCSD-6368 waynezen; correct someone else's mistake: City assigned value for Street address
+                            //City = licence.AdoxioEstablishment?.AdoxioAddressstreet,
+                            City = licence.AdoxioEstablishment?.AdoxioAddresscity,
                             Provstate = "BC",
                             Country = "CANADA",
                             PostalCode = licence.AdoxioEstablishment?.AdoxioAddresspostalcode,
