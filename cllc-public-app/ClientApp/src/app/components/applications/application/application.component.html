@@ -1889,12 +1889,10 @@
 
           <!-- Capacity Area -->
           <h3 class="blue-header" *ngIf="application.applicationType.capacityArea
-             && application?.applicationType?.name != ApplicationTypeNames.TemporaryExtensionOfLicensedAreaLP
-              && application?.applicationType?.name != ApplicationTypeNames.ChangetoApprovedPicnicArea">
+             && application?.applicationType?.name != ApplicationTypeNames.TemporaryExtensionOfLicensedAreaLP">
             CAPACITY AREA
           </h3>
-          <section *ngIf="application.applicationType.capacityArea && application?.applicationType?.name != ApplicationTypeNames.TemporaryExtensionOfLicensedAreaLP
-                   && application?.applicationType?.name != ApplicationTypeNames.ChangetoApprovedPicnicArea" class="padded-section content-bottom" formGroupName="capacityArea">
+          <section *ngIf="application.applicationType.capacityArea && application?.applicationType?.name != ApplicationTypeNames.TemporaryExtensionOfLicensedAreaLP" class="padded-section content-bottom" formGroupName="capacityArea">
             <div *ngIf="htmlContent?.capacityArea" [innerHTML]="htmlContent.capacityArea"></div>
             <app-field label="Capacity" [required]="true" [valid]="!showValidationMessages || form.get('capacityArea.capacity').valid"
                        errorMessage="Capacity is required." [showChevrons]="false" [isFullWidth]="false">
