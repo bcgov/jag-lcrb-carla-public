@@ -73,9 +73,7 @@
                       A sale area located within the Agricultural Land Reserve must not have ground cover (e.g. paving, gravel pad, concrete, etc.) unless otherwise approved by the Agricultural Land Commission.
                     </li>
                   </ul>
-                  <p>
-                    Licensees are expected to understand all relevant regulatory requirements established throughout the <span style="font-style:italic;">Liquor Control and Liquor Act</span>, Liquor Control and Licensing Regulation, and relevant Terms and Conditions handbook.
-                  </p>
+                 
                   As part of this application, you are required to confirm:
                   <br />
                 </section>
@@ -142,39 +140,16 @@
                       A sale area located within the Agricultural Land Reserve must not have ground cover (e.g. paving, gravel pad, concrete, etc.) unless otherwise approved by the Agricultural Land Commission
                     </li>
                   </ul>
-                  <p>
-                    Licensees are expected to understand all relevant regulatory requirements established throughout the <span style="font-style:italic;">Liquor Control and Liquor Act</span>, Liquor Control and Licensing Regulation, and relevant Terms and Conditions handbook.
-                  </p>
                   As part of this application, you are required to confirm:
                   <br />
                 </section>
                 <br />
-                <app-field label="You have read and understand the above term and conditions;"
-                           [isFullWidth]="true"
-                           [valid]="isValidOrNotTouchedRequireTrue('picnicReadAndAccept')"
-                           errorMessage="Please confirm have read and understand the term and conditions."
-                           [showChevrons]="false">
-                  <mat-radio-group formControlName="picnicReadAndAccept">
-                    <mat-radio-button class="mr-5" [value]="1">Yes</mat-radio-button>
-                    <mat-radio-button class="mr-5" [value]="0">No</mat-radio-button>
-                  </mat-radio-group>
-                </app-field>
                 <app-field label="I confirm local zoning allows for the operation of a picnic area endorsement, including a dedicated outdoor sale area."
                            [isFullWidth]="true"
                            [valid]="isValidOrNotTouchedRequireTrue('picnicConfirmZoning')"
                            errorMessage="Please confirm local zoning allows for the operation of a picnic area endorsement."
                            [showChevrons]="false">
                   <mat-radio-group formControlName="picnicConfirmZoning">
-                    <mat-radio-button class="mr-5" [value]="1">Yes</mat-radio-button>
-                    <mat-radio-button class="mr-5" [value]="0">No</mat-radio-button>
-                  </mat-radio-group>
-                </app-field>
-                <app-field label="You confirm your local government/First Nation supports the proposed capacity for the picnic area endorsement."
-                           [isFullWidth]="true"
-                           [valid]="isValidOrNotTouchedRequireTrue('picnicConfirmLGFNCapacity')"
-                           errorMessage="Please confirm local government/First Nation supports the proposed capacity for the picnic area endorsement."
-                           [showChevrons]="false">
-                  <mat-radio-group formControlName="picnicConfirmLGFNCapacity">
                     <mat-radio-button class="mr-5" [value]="1">Yes</mat-radio-button>
                     <mat-radio-button class="mr-5" [value]="0">No</mat-radio-button>
                   </mat-radio-group>
