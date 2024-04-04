@@ -129,10 +129,6 @@ namespace Gov.Lclb.Cllb.Public.Mapping
                 {"adoxio_ispatioincompliancewithbylaws", new FieldMapping("isInCompliance", true)},                
                 {"adoxio_storeopendate", new FieldMapping("storeOpenDate", false)},
                 {"adoxio_statusofconstruction", new FieldMapping("statusOfConstruction", true)},
-
-                // 2024-04-03 LCSD-6975 waynezen
-                {"adoxio_ishaspatio", new FieldMapping("isHasPatio", false)},
-
                 {"adoxio_ispatiotesa", new FieldMapping("isTESA", false)},
                 {"adoxio_m01", new FieldMapping("isMonth01", false)},
                 {"adoxio_m02", new FieldMapping("isMonth02", false)},
