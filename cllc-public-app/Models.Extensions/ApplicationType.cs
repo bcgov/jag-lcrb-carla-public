@@ -47,7 +47,6 @@ namespace Gov.Lclb.Cllb.Public.Models
                     ShowLgNoObjection = applicationType.AdoxioShowlgnoobjection,
                     ShowLiquorSitePlan = (FormControlState?)applicationType.AdoxioLiquorsiteplan,
                     ShowPatio = applicationType.AdoxioShowpatiosection,
-                    HasPatio = applicationType.AdoxioIshaspatio,        // 2024-04-03 LCSD-6975 waynezen
                     ShowPropertyDetails = applicationType.AdoxioIsshowpropertydetails,
                     ShowSupportingDocuments = applicationType.AdoxioIsshowsupportingdocuments,
                     Signage = (FormControlState?)applicationType.AdoxioSignage,
