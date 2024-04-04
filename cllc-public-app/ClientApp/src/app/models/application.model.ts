@@ -190,8 +190,6 @@ export interface Application {
   patioLiquorCarriedDescription: string;
   patioAccessControlDescription: string;
 
-  isHasPatio: boolean;    // 2024-04-03 LCSD-6975 waynezen
-
   locatedAboveDescription: number;
   patioServiceBar: number;
 
