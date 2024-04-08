@@ -15,7 +15,7 @@ import { Application } from '@models/application.model';
 import { FormBase, CanadaPostalRegex, ApplicationHTMLContent } from '@shared/form-base';
 import { DynamicsDataService } from '@services/dynamics-data.service';
 import { Account, TransferAccount } from '@models/account.model';
-import { ApplicationStatuses, ApplicationTypeNames, FormControlState } from '@models/application-type.model';
+import { ApplicationStatuses, ApplicationType, ApplicationTypeNames, FormControlState } from '@models/application-type.model';
 import { TiedHouseConnection } from '@models/tied-house-connection.model';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
 import { EstablishmentWatchWordsService } from '@services/establishment-watch-words.service';
@@ -126,6 +126,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
   uploadedCentralSecuritiesRegisterDocuments: number = 0;
   tiedHouseExemptions: { jobNumber: string, displayName: string }[] = [];
   licenseToRemove: RelatedLicence;
+
+
+  isHasPatioBackingFld: boolean = true;
 
   get isOpenedByLGForApproval(): boolean {
     let openedByLG = false;
@@ -322,17 +325,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.updateRequiredValidator(val, 'serviceHoursSaturdayOpen');
     });
 
-    // special logic for Patio
-    this.form.get('isHasPatio').valueChanges.pipe(distinctUntilChanged()).subscribe(checked => {
-      if (this.form.get('patioIsLiquorCarried')) {
-        this.form.get('patioIsLiquorCarried').valueChanges.pipe(distinctUntilChanged()).subscribe(checked => {
-          this.updateDescriptionRequired(checked, 'patioLiquorCarriedDescription');
-        });
-      }
-      this.updatePatioRequired(checked);
-    });
-
-
     this.form.get('indigenousNation').valueChanges
       .pipe(filter(value => value && value.length >= 3),
         tap(_ => {
@@ -442,6 +434,32 @@ export class ApplicationComponent extends FormBase implements OnInit {
               }
             }
 
+            // special logic for Patio
+            if (this.isPatioActive(this?.application?.applicationType)) {
+
+              if (this.form.get('patioIsLiquorCarried')) {
+                this.form.get('patioIsLiquorCarried').valueChanges.pipe(distinctUntilChanged()).subscribe(checked => {
+                  this.updateDescriptionRequired(checked, 'patioLiquorCarriedDescription');
+                });
+
+                this.updatePatioRequired(true);
+                this.application.isHasPatio = true;
+              }
+            }
+            else {
+
+              this.form.get('isHasPatio').valueChanges.pipe(distinctUntilChanged()).subscribe(checked => {
+                if (this.form.get('patioIsLiquorCarried')) {
+                  this.form.get('patioIsLiquorCarried').valueChanges.pipe(distinctUntilChanged()).subscribe(checked => {
+                    this.updateDescriptionRequired(checked, 'patioLiquorCarriedDescription');
+                  });
+                }
+
+                this.updatePatioRequired(checked);
+
+              });
+            }
+
             const noNulls = Object.keys(data)
               .filter(e => data[e] !== null)
               .reduce((o, e) => {
@@ -531,10 +549,12 @@ export class ApplicationComponent extends FormBase implements OnInit {
     else {
       val = '';
     }
+
     this.updateRequiredValidator(val, 'patioAccessControlDescription');
     this.updateRequiredValidator(val, 'patioAccessDescription');
     this.updateRequiredValidator(val, 'patioCompDescription');
-    this.updateRequiredValidator(val, 'patioIsLiquorCarried');
+    // 2024-02-16 LCSD-6975 waynezen: patioIsLiquorCarried is NOT a required field
+    //this.updateRequiredValidator(val, 'patioIsLiquorCarried');
 
     if (this.form.get('patioIsLiquorCarried').value) {
       this.updateRequiredValidator(val, 'patioLiquorCarriedDescription');
@@ -576,11 +596,14 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.form.get('hasCoolerAccess').disable();
     }
 
-    if ((this.application.applicationType.name !== ApplicationTypeNames.SpecialEventAreaEndorsement
-      && this.application.applicationType.name !== ApplicationTypeNames.LoungeAreaEndorsment) &&
-      !this.application.applicationType.showPatio) {
+
+    // 2024-02-21 LCSD-6975 waynezen: no longer hard-code ApplicationTypes to disable Has Patio? control
+    //if ((this.application.applicationType.name !== ApplicationTypeNames.SpecialEventAreaEndorsement
+    //  && this.application.applicationType.name !== ApplicationTypeNames.LoungeAreaEndorsment) &&
+    if (!this.isPatioActive(this.application.applicationType) && !this.application.applicationType.showPatio) {
       this.form.get('isHasPatio').disable();
     }
+
 
     if (!this.application.applicationType.showPropertyDetails) {
       this.form.get('establishmentAddressStreet').disable();
@@ -1531,7 +1554,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
     }
     // 2024-02-06 LCSD-6170 waynezen: Add form-level Validation errors for Patio fields
-    if (this.form.get('isHasPatio') && this.form.get('isHasPatio')?.value === true) {
+    if (this.form.get('isHasPatio') && this.getHasPatio() === true) {
 
       if (!this.isValidYesNoFieldRequireTrue('isBoundingSufficientForControl')) {
         valid = false;
@@ -1555,6 +1578,30 @@ export class ApplicationComponent extends FormBase implements OnInit {
   isValidOrNotTouchedRequireTrue(field: string) {
     return this.form.get(field).value == 1 || !this.form.get(field).touched;
   }
+
+  // 2024-02-16 LCSD-6975 waynezen:
+  private isPatioActive(appType: ApplicationType): boolean {
+    let hasPatio = false;
+
+    if (appType && appType.hasPatio) {
+      hasPatio = true;
+    }
+    return hasPatio;
+  }
+
+  private getHasPatio(): boolean {
+
+    let appType = this?.application?.applicationType;
+
+    if (this.isPatioActive(appType)) {
+      return true;
+    }
+    else {
+      let hasPatio: boolean = this.form.get('isHasPatio').value;
+      return hasPatio;
+    }
+  }
+
 
   // 2024-02-06 LCSD-6170 waynezen: Validation function for Dyn 365 Field defined as 2-option and drop-down values=Yes / No and Required
   isValidYesNoFieldRequireTrue(field: string): boolean {
@@ -1877,7 +1924,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
     // special case for Lounge Area and Special Event Area Endorsement.
     // If the patio checkbox is false then do not include the dynamic fields in validation.
-    if (this.form.get('isHasPatio') && this.form.get('isHasPatio').enabled && !this.form.get('isHasPatio').value) {
+    if (this.form.get('isHasPatio') && this.form.get('isHasPatio').enabled && !this.getHasPatio()) {
       useDynamicValidation = false;
     } else {
       // loop through the dynamic form, updating validators.
@@ -1907,9 +1954,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   showDynamicForm(formReference, tabs) {
+
     if (this.form.get('isHasPatio').enabled) {
       this.updateDynamicValidation();
-      return this.form.get('isHasPatio').value && formReference && tabs;
+
+      return this.getHasPatio();
     }
     return formReference && tabs;
   }
