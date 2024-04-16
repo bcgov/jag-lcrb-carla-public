@@ -269,5 +269,6 @@ export interface Application {
   validInterestDormancyPeriod: boolean;
   validInterestEstablishmentLocation: boolean;
   affirmInformationProividedTrueAndComplete: boolean;
+  cancellicence: boolean;
 
 }
