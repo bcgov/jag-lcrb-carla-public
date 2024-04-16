@@ -7,7 +7,7 @@ namespace Gov.Lclb.Cllb.Public.Mapping
 {
     public class ApplicationMapping : FieldMap
     {
-        
+
         public ApplicationMapping()
         {
             fieldMap = new Dictionary<string, FieldMapping>
@@ -75,7 +75,7 @@ namespace Gov.Lclb.Cllb.Public.Mapping
                 {"adoxio_isreadystorage", new FieldMapping("isReadyStorage", true)},
                 {"adoxio_isreadyentranceexit", new FieldMapping("isReadyExtranceExit", true)},
                 {"adoxio_isreadysurveillancenotice", new FieldMapping("isReadySurveillanceNotice", true)},
-                {"adoxio_isreadyproductnotvisibleoutside", new FieldMapping("isReadyProductNotVisibleOutside", true)},                
+                {"adoxio_isreadyproductnotvisibleoutside", new FieldMapping("isReadyProductNotVisibleOutside", true)},
                 {"adoxio_isreadyvalidinterest", new FieldMapping("isReadyValidInterest", true)},
 
                 {"adoxio_applicanttype", new FieldMapping("applicantType", true)},
@@ -120,13 +120,13 @@ namespace Gov.Lclb.Cllb.Public.Mapping
                 {"adoxio_hassufficientrangeofproducts", new FieldMapping("hasSufficientRangeOfProducts", true)},
                 {"adoxio_hasotherproducts", new FieldMapping("hasOtherProducts", true)},
                 {"adoxio_hasadditionalservices", new FieldMapping("hasAdditionalServices", true)},
-                
+
                 {"adoxio_confirmliquorsalesisnotprimarybusiness", new FieldMapping("confirmLiquorSalesIsNotPrimaryBusiness", true)},
                 // patio application fields
                 {"adoxio_ispatioboundingsufficientforcontrol", new FieldMapping("isBoundingSufficientForControl", true)},
                 {"adoxio_ispatioboundingsufficienttodefinearea", new FieldMapping("isBoundingSufficientToDefine", true)},
                 {"adoxio_isadequatecareandcontroloverthepatio", new FieldMapping("isAdequateCare", true)},
-                {"adoxio_ispatioincompliancewithbylaws", new FieldMapping("isInCompliance", true)},                
+                {"adoxio_ispatioincompliancewithbylaws", new FieldMapping("isInCompliance", true)},
                 {"adoxio_storeopendate", new FieldMapping("storeOpenDate", false)},
                 {"adoxio_statusofconstruction", new FieldMapping("statusOfConstruction", true)},
 
@@ -156,7 +156,9 @@ namespace Gov.Lclb.Cllb.Public.Mapping
                 {"adoxio_validinterestestablishmentlocation", new FieldMapping("validInterestEstablishmentLocation", true)},
                 {"adoxio_validinterestdormancyperiod", new FieldMapping("validInterestDormancyPeriod", true)},
                 {"adoxio_affirminformationproividedtrueandcomplete", new FieldMapping("affirmInformationProividedTrueAndComplete", true)},
-                {"adoxio_establishmentreopeningdate", new FieldMapping("establishmentReopeningDate", true)}
+                {"adoxio_establishmentreopeningdate", new FieldMapping("establishmentReopeningDate", true)},
+                {"adoxio_effectivedateofcancellation", new FieldMapping("effectiveDateofCancellation", true)},
+                {"adoxio_licencenumber", new FieldMapping("licenceNumber", true)},
         };
         }
     }
