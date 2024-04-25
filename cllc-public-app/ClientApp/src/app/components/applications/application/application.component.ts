@@ -1250,7 +1250,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
     const isAllowed: boolean = (
       (this?.account.businessType === "LocalGovernment") ||
       this?.application?.applicationStatus === ApplicationStatuses.Intake ||
-      this?.application?.applicationStatus === ApplicationStatuses.InProgress)
+      this?.application?.applicationStatus === ApplicationStatuses.InProgress ||
+      // 2024-04-24 waynezen: added
+      this?.application?.applicationStatus === ApplicationStatuses.Incomplete)
 
     return isAllowed;
   }
