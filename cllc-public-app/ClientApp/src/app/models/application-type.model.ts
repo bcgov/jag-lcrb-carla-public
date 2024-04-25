@@ -130,7 +130,7 @@ export enum ApplicationStatuses {
   Intake = "Intake",
   Submitted = "Submitted",
   InProgress = "(Do Not Use) In Progress",
-  Incomplete = "Incomplete", //LCSD-6243: 2024-04-24 waynezen
+  Incomplete = "Incomplete/info req",
   PendingApproval = "Pending LG/IN Approval",
   Review = "Under Review",
   Assessment = "Application Assessment",
