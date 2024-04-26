@@ -5,6 +5,7 @@ import { filter, tap, switchMap } from "rxjs/operators";
 import { ApplicationDataService } from "@services/application-data.service";
 import { LicenseDataService } from "@services/license-data.service";
 import { RelatedLicence } from "@models/related-licence";
+import { exit } from "process";
 
 
 @Component({
@@ -23,7 +24,7 @@ export class RelatedJobnumberPickerComponent implements OnInit {
 
 
   constructor(private applicationDataService: ApplicationDataService,
-    private licenceDataService: LicenseDataService,
+    private licenseDataService: LicenseDataService,
     private fb: FormBuilder) { }
 
   // 2024-03-27 LCSD - 6368 waynezen; Tied House form autocomplete component search by JobNumber
@@ -33,7 +34,7 @@ export class RelatedJobnumberPickerComponent implements OnInit {
     });
 
     this.form.get("autocompleteJobNumber").valueChanges
-      .pipe(filter(value => value && value.length >= 3),
+      .pipe(filter(value => value && value.length >= 6),
         tap(_ => {
           this.autocompleteJobnumbers = [];
           this.jobnumberRequestInProgress = true;
@@ -70,18 +71,31 @@ export class RelatedJobnumberPickerComponent implements OnInit {
 
     let selectedLicence = $event.option.value as RelatedLicence;
 
-    if (selectedLicence != null) {
+    if (selectedLicence && selectedLicence.valid) {
+
       // use the licence # autocomplete function to get missing Licensee name
-      this.licenceDataService.getAutocomplete(selectedLicence.licenseNumber)
+      this.licenseDataService.getAutocomplete(selectedLicence.licenceNumber)
         .subscribe((data) => {
           if (data && data.length > 0) {
             let lookupLicence = data[0] as RelatedLicence;
 
+            /*
+             * NOTE: ApplicationsController.GetAutoComplete sets RelatedLicence.Id = <jobnumber>
+             * because it doesn't have the necessary Licence Id.
+             * When the user selects the item they want, we "fix" RelatedLicence.Id
+             * to the Licence Id, so the Save() function on application-tied-house-exemption will work.
+            */
+
             $event.option.value.licensee = lookupLicence.licensee;
+            $event.option.value.id = lookupLicence.id;
 
             this.valueSelected.emit($event.option.value);
           }
         });
+
+      this.valueSelected.emit($event.option.value);
     }
   }
+
+
 }

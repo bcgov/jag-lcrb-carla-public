@@ -1945,11 +1945,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// Get Autocomplete data for a JobNumber search
         /// 2024-03-25 LCSD-6368 waynezen; Tied House form autocomplete for Application JobNumber
         /// </summary>
-        /// <param name="name">The name to filter by using startswith</param>
+        /// <param name="jobnumber">The name to filter by using startswith</param>
         /// <returns>Dictionary of key value pairs with accountid and name as the pairs</returns>
         [HttpGet("autocomplete")]
         [Authorize(Policy = "Business-User")]
-        public List<RelatedLicence> GetAutocomplete(string name)
+        public List<RelatedLicence> GetAutocomplete(string jobnumber)
         {
             var results = new List<RelatedLicence>();
 
@@ -1957,37 +1957,40 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
-                var expand = new List<string> { "adoxio_LicenceFeeInvoice", "adoxio_AssignedLicence", "adoxio_LicenceType", "adoxio_ApplicationTypeId" };
+                var expand = new List<string> { "adoxio_LicenceFeeInvoice", "adoxio_AssignedLicence", "adoxio_LicenceType", "adoxio_ApplicationTypeId", "adoxio_Applicant" };
                 //var filter = $"_adoxio_applicant_value eq {userSettings.AccountId} and statuscode ne {(int)AdoxioApplicationStatusCodes.Terminated}";
                 var filter = $"statuscode ne {(int)AdoxioApplicationStatusCodes.Terminated}";
                 filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Cancelled}";
                 filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Refused}";
                 filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
-                filter += $" and contains(adoxio_jobnumber,'{name}')";
-                filter += $" and adoxio_licenceexpiry ne null and adoxio_licenceexpiry ge " + DateTime.Now.ToString("yyyy-MM-dd");
+                filter += $" and contains(adoxio_jobnumber,'{jobnumber}')";
 
-                var applications = _dynamicsClient.Applications.Get(filter: filter, expand: expand, orderby: new List<string> { "adoxio_jobnumber asc" })
-                    .Value
-                    .Where(a => a?.AdoxioAssignedLicence != null && a?.AdoxioAssignedLicence.AdoxioLicencenumber != null)
-                    .Distinct(new JobNumberLicenceComparer());
+                //filter += $" and adoxio_licencenumber ne null";
+                //filter += $" and adoxio_licenceexpiry ne null and adoxio_licenceexpiry ge " + DateTime.Now.ToString("yyyy-MM-dd");
+
+                var applications = _dynamicsClient.Applications.Get(filter: filter, expand: expand, orderby: new List<string> { "adoxio_jobnumber asc" }).Value;
 
                 foreach (var app in applications) 
                 {
-                    if (app.AdoxioJobnumber.Contains(name))
+                    if (app.AdoxioJobnumber.Contains(jobnumber))
                     {
                         var relatedLicence = new RelatedLicence
                         {
-                            Id = app.AdoxioAssignedLicence?.AdoxioLicencenumber,
-                            Name = app.AdoxioAssignedLicence?.AdoxioName,
+                            Id = app?.AdoxioJobnumber,
+                            Name = app.AdoxioApplicant?.Name,
                             EstablishmentName = app?.AdoxioEstablishmentpropsedname,
                             Streetaddress = app?.AdoxioEstablishmentaddressstreet,
                             City = app?.AdoxioEstablishmentaddresscity,
                             Provstate = "BC",
                             Country = "CANADA",
                             PostalCode = app?.AdoxioEstablishmentaddresspostalcode,
-                            Licensee = app.AdoxioAssignedLicence?.AdoxioLicencee?.Name,
+                            Licensee = "",
                             JobNumber = app.AdoxioJobnumber,
-                            LicenseNumber = app?.AdoxioAssignedLicence.AdoxioLicencenumber,
+                            LicenceNumber = app?.AdoxioAssignedLicence?.AdoxioLicencenumber,
+                            Valid = (app?.AdoxioAssignedLicence?.AdoxioLicencenumber != null && 
+                                (bool)app?.AdoxioAssignedLicence?.AdoxioExpirydate.HasValue &&
+                                app?.AdoxioAssignedLicence?.AdoxioExpirydate.Value >= DateTime.Now) ? true : false
+                                
                         };
                         results.Add(relatedLicence);
                     }
@@ -2097,25 +2100,5 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
         }
 
-        // 2024-03-25 LCSD-6368 waynezen; custom comparer class to remove duplicates
-        private class JobNumberLicenceComparer : IEqualityComparer<MicrosoftDynamicsCRMadoxioApplication>
-        {
-            public bool Equals(MicrosoftDynamicsCRMadoxioApplication x, MicrosoftDynamicsCRMadoxioApplication y)
-            {
-                if ((x?.AdoxioAssignedLicence?.AdoxioLicencenumber == y?.AdoxioAssignedLicence?.AdoxioLicencenumber) ||
-                    (x?.AdoxioJobnumber == y?.AdoxioJobnumber))
-                    return true;
-                else
-                    return false;
-            }
-
-            public int GetHashCode([DisallowNull] MicrosoftDynamicsCRMadoxioApplication obj)
-            {
-                if (obj?.AdoxioAssignedLicence == null || obj?.AdoxioAssignedLicence?.AdoxioLicencenumber == null) 
-                    return 0;
-                else
-                    return (obj.AdoxioAssignedLicence.AdoxioLicencenumber.GetHashCode());
-            }
-        }
     }
 }

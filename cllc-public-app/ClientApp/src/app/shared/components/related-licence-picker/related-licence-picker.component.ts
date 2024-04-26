@@ -60,8 +60,11 @@ export class RelatedLicencePickerComponent implements OnInit {
     return item.name;
   }
 
-  onOptionSelect(event) {
-    this.valueSelected.emit(event.option.value);
+  onOptionSelect($event) {
+
+    let selectedLicence = $event.option.value as RelatedLicence;
+
+    this.valueSelected.emit($event.option.value);
   }
 
 
