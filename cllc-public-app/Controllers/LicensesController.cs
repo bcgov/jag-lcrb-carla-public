@@ -103,7 +103,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             Provstate = "BC",
                             Country = "CANADA",
                             PostalCode = licence.AdoxioEstablishment?.AdoxioAddresspostalcode,
-                            Licensee = licence.AdoxioLicencee?.Name
+                            Licensee = licence.AdoxioLicencee?.Name,
+                            LicenceNumber = licence.AdoxioLicencenumber,
+                            Valid = true
                         };
                         results.Add(relatedLicence);
                     }

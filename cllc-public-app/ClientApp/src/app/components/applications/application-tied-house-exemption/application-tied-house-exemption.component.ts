@@ -80,6 +80,7 @@ export class ApplicationTiedHouseExemptionComponent extends FormBase implements 
     this.route.paramMap.subscribe(pmap => this.applicationId = pmap.get("applicationId"));
     this.route.paramMap.subscribe(pmap => this.isAppId = pmap.get("isAppId"));
 
+
   }
 
 
@@ -100,6 +101,9 @@ export class ApplicationTiedHouseExemptionComponent extends FormBase implements 
         streetaddress: [{ value: "", disabled: true }],
         postalCode: [{ value: "", disabled: true }],
         licensee: [{ value: "", disabled: true }],
+        // 2024-04-19 LCSD-6368 waynezen
+        jobNumber: [{ value: "", disabled: true }],
+        licenceNumber: [{ value: "", disabled: true }],
       }),
       licenseeContact: this.fb.group({
         name: [{ value: "", disabled: true }],
@@ -190,12 +194,15 @@ export class ApplicationTiedHouseExemptionComponent extends FormBase implements 
   }
 
 
+  // 2024-04-10 LCSD-6368 waynezen
   public autoCompFldEventHandler($event: any) {
 
     switch ($event.toString()) {
       case "autocompleteInput":
         // cursor entered autocomplete search by Licence fld - clear autocomplete search by JobNumber fld
         this.autocompletejobcomponent.autoCompFldClear();
+       
+
         break;
       case "autocompleteJobNumber":
         // cursor entered autocomplete search by JobNumber fld - clear autocomplete search by Licence fld
@@ -220,13 +227,21 @@ export class ApplicationTiedHouseExemptionComponent extends FormBase implements 
    */
   save(showProgress: boolean = false, appData: Application = <Application>{}): Observable<boolean> {
     this.application = appData;
+    const assignedLicenceId = this.form.get("assignedLicence.id").value;
+    const assignedLicenceNumber = this.form.get("assignedLicence.licenceNumber").value;
+    const assignedJobNumber = this.form.get("assignedLicence.jobNumber").value;
+
+
+    console.log("Tied House Exemption===> Save: licenceId: " + this.licenceId + ", assignedLicenceId: " + assignedLicenceId + ", assignedLicenceNumber: " + assignedLicenceNumber + ", assignedJobNumber: " + assignedJobNumber);
+
+
     if (!this.licenceId) {
       this.application.parentApplicationId = this.applicationId;
       const applicationType = this.applicationType;
       const willHaveTiedHouseExemption = true;
       this.application.manufacturerProductionAmountForPrevYear = this.form.get("manufacturerProductionAmountforPrevYear").value;
       this.application.manufacturerProductionAmountUnit = this.form.get("manufacturerProductionAmountUnit").value;
-      const assignedLicenceId = this.form.get("assignedLicence.id").value;
+
       this.busy = forkJoin(
 
         this.applicationDataService.createApplication({
@@ -248,28 +263,38 @@ export class ApplicationTiedHouseExemptionComponent extends FormBase implements 
           this.router.navigateByUrl('/dashboard');
         });
 
-
       // this.busy = 
       return of(true);
     }
     else {
-      return this.licenseDataService.initiateTiedHouseExcemption(this.form.get("assignedLicence.id").value, this.licence.id, this.form.get("manufacturerProductionAmountforPrevYear").value, this.form.get("manufacturerProductionAmountUnit").value)
-        .pipe(takeWhile(() => this.componentActive))
-        .pipe(catchError(() => {
-          this.snackBar.open("Error submitting Tied House Exemption", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
-          return of(false);
-        }))
-        .pipe(mergeMap(() => {
-          if (showProgress === true) {
-            this.snackBar.open("Tied House Exemption Invitation has been sent",
-              "Success",
-              { duration: 2500, panelClass: ["green-snackbar"] });
-          }
-          return of(true);
-        }));
+
+      if (assignedLicenceId) {
+        //2024-04-25 LCSD-6368 waynezen; Has related Licence #; user has searched by Licence # or JobNumber
+
+        return this.licenseDataService.initiateTiedHouseExcemption(assignedLicenceId,
+            this.licenceId,
+            this.form.get("manufacturerProductionAmountforPrevYear").value,
+            this.form.get("manufacturerProductionAmountUnit").value)
+
+          .pipe(takeWhile(() => this.componentActive))
+          .pipe(catchError(() => {
+            this.snackBar.open("Error submitting Tied House Exemption", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
+            return of(false);
+          }))
+          .pipe(mergeMap(() => {
+            if (showProgress === true) {
+              this.snackBar.open("Tied House Exemption Invitation has been sent",
+                "Success",
+                { duration: 2500, panelClass: ["green-snackbar"] });
+            }
+            return of(true);
+          }));
+      }
+      return of(true);
     }
   }
-  prepareTiedHouseSaveRequest(_tiedHouseData) {
+
+    prepareTiedHouseSaveRequest(_tiedHouseData) {
     if (!this.application.tiedHouse) {
       return of(null);
     }
@@ -348,8 +373,27 @@ export class ApplicationTiedHouseExemptionComponent extends FormBase implements 
       -1;
   }
 
-  onLicenceSelect(assignedLicence: RelatedLicence) {
-    this.form.get("assignedLicence").patchValue(assignedLicence);
+  onLicenceSelect(assignedLicenceIn: RelatedLicence) {
+
+    if (assignedLicenceIn.valid) {
+      this.form.get("assignedLicence.licenceNumber").setValue("");
+      this.form.get("assignedLicence.jobNumber").setValue("");
+
+      this.form.get("assignedLicence").patchValue(assignedLicenceIn);
+
+      // 2024-04-22 LCSD-6368 waynezen; change DOM dynamically, depending if user searched using Licence Num or Job Num
+      if (assignedLicenceIn.jobNumber === null) {
+        document.getElementById("lblapplicantname").innerHTML = "Licence Name:";
+        document.getElementById("lblassiglicensee").innerHTML = "Assigned Licensee:";
+        document.getElementById("fldassiglicensee").innerHTML = assignedLicenceIn.licensee;
+      }
+      else {
+        document.getElementById("lblapplicantname").innerHTML = "Applicant Name:";
+        document.getElementById("lblassiglicensee").innerHTML = "Job Number:";
+        document.getElementById("fldassiglicensee").innerHTML = assignedLicenceIn.jobNumber;
+      }
+    }
+
   }
 
 }

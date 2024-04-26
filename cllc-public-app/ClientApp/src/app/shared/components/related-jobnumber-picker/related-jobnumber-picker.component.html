@@ -4,14 +4,22 @@
   <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onOptionSelect($event)" [displayWith]="autocompleteDisplay">
     <div class="row" style="border-bottom: solid thin">
       <div class="col-3">JobNumber</div>
-      <div class="col-4">Licence</div>
+      <div class="col-4">Applicant</div>
+      <!--<div class="col-2">Valid?</div>-->
     </div>
 
     <mat-option *ngFor="let item of autocompleteJobnumbers" [value]="item">
-      <div class="row">
+      <div class="row" *ngIf="item.valid">
         <div class="col-3" style="border-right: solid thin">{{item.jobNumber}}</div>
-        <div class="col-4">{{item.name}}</div>
+        <div class="col-4">{{item.name | slice:0:25 }}</div>
+        <!--<div class="col-2">{{item.valid}}</div>-->
       </div>
+      <div class="row disabled" *ngIf="!item.valid" style="background-color: pink;">
+        <div class="col-3" style="border-right: solid thin">{{item.jobNumber}}</div>
+        <div class="col-4">{{item.name | slice:0:25}}</div>
+        <!--<div class="col-2">{{item.valid}}</div>-->
+      </div>
+
     </mat-option>
   </mat-autocomplete>
   <br>

@@ -14,6 +14,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         // 2024-03-25 LCSD-6368 waynezen
         public string JobNumber { get; set; }
-        public string LicenseNumber { get; set; }
+        public string LicenceNumber { get; set; }
+        public bool Valid { get; set; }
     }
 }
