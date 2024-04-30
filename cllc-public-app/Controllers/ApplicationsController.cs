@@ -1965,34 +1965,36 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
                 filter += $" and contains(adoxio_jobnumber,'{jobnumber}')";
 
-                //filter += $" and adoxio_licencenumber ne null";
-                //filter += $" and adoxio_licenceexpiry ne null and adoxio_licenceexpiry ge " + DateTime.Now.ToString("yyyy-MM-dd");
-
                 var applications = _dynamicsClient.Applications.Get(filter: filter, expand: expand, orderby: new List<string> { "adoxio_jobnumber asc" }).Value;
 
                 foreach (var app in applications) 
                 {
                     if (app.AdoxioJobnumber.Contains(jobnumber))
                     {
-                        var relatedLicence = new RelatedLicence
+                        // 2024-04-29 LCSD-6368 waynezen; further filtering to make sure record(s) have a valid Licence #
+                        if (!String.IsNullOrEmpty(app?.AdoxioAssignedLicence?.AdoxioLicencenumber) &&
+                            app?.AdoxioAssignedLicence?.AdoxioExpirydate > DateTime.Now) 
                         {
-                            Id = app?.AdoxioJobnumber,
-                            Name = app.AdoxioApplicant?.Name,
-                            EstablishmentName = app?.AdoxioEstablishmentpropsedname,
-                            Streetaddress = app?.AdoxioEstablishmentaddressstreet,
-                            City = app?.AdoxioEstablishmentaddresscity,
-                            Provstate = "BC",
-                            Country = "CANADA",
-                            PostalCode = app?.AdoxioEstablishmentaddresspostalcode,
-                            Licensee = "",
-                            JobNumber = app.AdoxioJobnumber,
-                            LicenceNumber = app?.AdoxioAssignedLicence?.AdoxioLicencenumber,
-                            Valid = (app?.AdoxioAssignedLicence?.AdoxioLicencenumber != null && 
-                                (bool)app?.AdoxioAssignedLicence?.AdoxioExpirydate.HasValue &&
-                                app?.AdoxioAssignedLicence?.AdoxioExpirydate.Value >= DateTime.Now) ? true : false
-                                
-                        };
-                        results.Add(relatedLicence);
+                            var relatedLicence = new RelatedLicence
+                            {
+                                Id = app?.AdoxioJobnumber,
+                                Name = app.AdoxioApplicant?.Name,
+                                EstablishmentName = app?.AdoxioEstablishmentpropsedname,
+                                Streetaddress = app?.AdoxioEstablishmentaddressstreet,
+                                City = app?.AdoxioEstablishmentaddresscity,
+                                Provstate = "BC",
+                                Country = "CANADA",
+                                PostalCode = app?.AdoxioEstablishmentaddresspostalcode,
+                                Licensee = "",
+                                JobNumber = app.AdoxioJobnumber,
+                                LicenceNumber = app?.AdoxioAssignedLicence?.AdoxioLicencenumber,
+                                Valid = (app?.AdoxioAssignedLicence?.AdoxioLicencenumber != null &&
+                                    (bool)app?.AdoxioAssignedLicence?.AdoxioExpirydate.HasValue &&
+                                    app?.AdoxioAssignedLicence?.AdoxioExpirydate.Value >= DateTime.Now) ? true : false
+
+                            };
+                            results.Add(relatedLicence);
+                        }
                     }
                 }
 

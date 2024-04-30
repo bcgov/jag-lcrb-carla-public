@@ -136,6 +136,9 @@
           <app-related-licence-picker (valueSelected)="onLicenceSelect($event)" (autoCompFldFocusEvent)="autoCompFldEventHandler($event)"></app-related-licence-picker>
           <!--2004-04-10 LCSD-6368 waynezen; added new jobnumber search control -->
           <app-related-jobnumber-picker (valueSelected)="onLicenceSelect($event)" (autoCompFldFocusEvent)="autoCompFldEventHandler($event)"></app-related-jobnumber-picker>
+
+          <p style="border:solid; color: darkorange; width: 500px;"><em>&nbsp;Search by job number will only provide results if the application in progress has reached the ‘approval-in-principle’ (AIP) stage. Note that the pending licence number associated to an AIP job does not mean a licence has been issued</em></p>
+
         </app-field>
 
 
