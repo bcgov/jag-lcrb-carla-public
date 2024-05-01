@@ -332,6 +332,7 @@ import { ApplicationTypeDataService } from "./services/application-type-data.ser
 
 // LCSD - 6243: 2024-02-28 waynezen
 import { ForbiddenModalComponent } from '@shared/components/forbidden-modal/forbidden-modal.component';
+import { RelatedJobnumberPickerComponent } from './shared/components/related-jobnumber-picker/related-jobnumber-picker.component';
 
 
 
@@ -529,6 +530,7 @@ import { ForbiddenModalComponent } from '@shared/components/forbidden-modal/forb
     FinalConfirmationComponent,
     CancelSepApplicationDialogComponent,
     ForbiddenModalComponent,
+    RelatedJobnumberPickerComponent,
   ],
   imports: [
     AppRoutingModule,
