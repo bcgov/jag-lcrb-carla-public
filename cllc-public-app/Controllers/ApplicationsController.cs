@@ -1,7 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using System.Web;
 using Google.Protobuf.WellKnownTypes;
 using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
@@ -1936,6 +1941,78 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return NoContent(); // 204
         }
 
+        /// <summary>
+        /// Get Autocomplete data for a JobNumber search
+        /// 2024-03-25 LCSD-6368 waynezen; Tied House form autocomplete for Application JobNumber
+        /// </summary>
+        /// <param name="jobnumber">The name to filter by using startswith</param>
+        /// <returns>Dictionary of key value pairs with accountid and name as the pairs</returns>
+        [HttpGet("autocomplete")]
+        [Authorize(Policy = "Business-User")]
+        public List<RelatedLicence> GetAutocomplete(string jobnumber)
+        {
+            var results = new List<RelatedLicence>();
+
+            try
+            {
+                UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+
+                var expand = new List<string> { "adoxio_LicenceFeeInvoice", "adoxio_AssignedLicence", "adoxio_LicenceType", "adoxio_ApplicationTypeId", "adoxio_Applicant" };
+                //var filter = $"_adoxio_applicant_value eq {userSettings.AccountId} and statuscode ne {(int)AdoxioApplicationStatusCodes.Terminated}";
+                var filter = $"statuscode ne {(int)AdoxioApplicationStatusCodes.Terminated}";
+                filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Cancelled}";
+                filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Refused}";
+                filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
+                filter += $" and contains(adoxio_jobnumber,'{jobnumber}')";
+
+                var applications = _dynamicsClient.Applications.Get(filter: filter, expand: expand, orderby: new List<string> { "adoxio_jobnumber asc" }).Value;
+
+                foreach (var app in applications) 
+                {
+                    if (app.AdoxioJobnumber.Contains(jobnumber))
+                    {
+                        // 2024-04-29 LCSD-6368 waynezen; further filtering to make sure record(s) have a valid Licence #
+                        if (!String.IsNullOrEmpty(app?.AdoxioAssignedLicence?.AdoxioLicencenumber) &&
+                            app?.AdoxioAssignedLicence?.AdoxioExpirydate > DateTime.Now) 
+                        {
+                            var relatedLicence = new RelatedLicence
+                            {
+                                Id = app?.AdoxioJobnumber,
+                                Name = app.AdoxioApplicant?.Name,
+                                EstablishmentName = app?.AdoxioEstablishmentpropsedname,
+                                Streetaddress = app?.AdoxioEstablishmentaddressstreet,
+                                City = app?.AdoxioEstablishmentaddresscity,
+                                Provstate = "BC",
+                                Country = "CANADA",
+                                PostalCode = app?.AdoxioEstablishmentaddresspostalcode,
+                                Licensee = "",
+                                JobNumber = app.AdoxioJobnumber,
+                                LicenceNumber = app?.AdoxioAssignedLicence?.AdoxioLicencenumber,
+                                Valid = (app?.AdoxioAssignedLicence?.AdoxioLicencenumber != null &&
+                                    (bool)app?.AdoxioAssignedLicence?.AdoxioExpirydate.HasValue &&
+                                    app?.AdoxioAssignedLicence?.AdoxioExpirydate.Value >= DateTime.Now) ? true : false
+
+                            };
+                            results.Add(relatedLicence);
+                        }
+                    }
+                }
+
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Error while getting autocomplete data.");
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error while getting autocomplete data.");
+            }
+
+            return results;
+        }
+
+
+
         [HttpPost("{id}/covidDelete")]
         [AllowAnonymous]
         public async Task<IActionResult> DeleteCovidApplication(string id)
@@ -2024,5 +2101,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _dynamicsClient.Serviceareas.Create(serviceArea);
             }
         }
+
     }
 }

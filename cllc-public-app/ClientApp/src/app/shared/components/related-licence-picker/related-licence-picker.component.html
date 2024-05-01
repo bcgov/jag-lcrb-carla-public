@@ -1,6 +1,6 @@
 <div [formGroup]="form">
-    <input type="text" class="form-control" style="width: 500px;" placeholder="" formControlName="autocompleteInput" [matAutocomplete]="auto"
-           #autocomplete>
+    <input type="text" class="form-control" style="width: 500px;" placeholder="Enter Licence #" formControlName="autocompleteInput" [matAutocomplete]="auto"
+           #autocomplete (focus)="autoCompFldFocus()">
     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onOptionSelect($event)" [displayWith]="autocompleteDisplay">
       <mat-option *ngFor="let item of autocompleteLicences" [value]="item">
         {{item.name}}
