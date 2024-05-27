@@ -790,6 +790,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool affirmInformationProividedTrueAndComplete { get; set; }
         public bool validInterestEstablishmentLocation { get; set; }
         public DateTimeOffset? EstablishmentReopeningDate { get; set; }
+        public bool cancelLicence { get; set; }
+        public DateTimeOffset? Effectivedateofcancellation { get; set; }
+        public string LicenceNumber { get; set; }
 
     }
 }
