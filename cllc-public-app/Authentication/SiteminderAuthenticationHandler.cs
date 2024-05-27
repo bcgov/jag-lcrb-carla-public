@@ -804,8 +804,27 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             IDynamicsClient _dynamicsClient = (IDynamicsClient)context.RequestServices.GetService(typeof(IDynamicsClient));
             FileManagerClient _fileManagerClient = (FileManagerClient)context.RequestServices.GetService(typeof(FileManagerClient));
 
+            BCeIDBusinessQuery _bceid = (BCeIDBusinessQuery)context.RequestServices.GetService(typeof (BCeIDBusinessQuery));
+
             ViewModels.Contact contact = new ViewModels.Contact();
             contact.CopyHeaderValues(context.Request.Headers);
+            //LCSD-6488 - Change to Alway get First & Lastname from BCEID Web Query
+            //These fields (FIRSTNAME & LASTNAME) are READONLY on our form and managed in BCEID.
+            Gov.Lclb.Cllb.Interfaces.BCeIDBusiness bceidBusiness = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
+            if(bceidBusiness != null) 
+            {
+                contact.firstname = bceidBusiness.individualFirstname;
+                contact.lastname = bceidBusiness.individualSurname;
+            }
+            else
+            {
+                Gov.Lclb.Cllb.Interfaces.BCeIDBasic bceidBasic = await _bceid.ProcessBasicQuery(userSettings.SiteMinderGuid);
+                if(bceidBasic != null)
+                {
+                    contact.firstname = bceidBasic.individualFirstname;
+                    contact.lastname = bceidBasic.individualSurname;
+                }
+            }
 
             MicrosoftDynamicsCRMcontact savedContact = _dynamicsClient.Contacts.GetByKey(userSettings.ContactId);
             if (savedContact.Address1Line1 != null && savedContact.Address1Line1 != contact.address1_line1)

@@ -7,6 +7,10 @@ using Newtonsoft.Json;
 using System.Security.Claims;
 using Gov.Lclb.Cllb.Public.Models;
 using System;
+using Gov.Lclb.Cllb.Public.Utils;
+using System.Threading.Tasks;
+using System.Drawing.Drawing2D;
+using Gov.Lclb.Cllb.Public.ViewModels;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -17,13 +21,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IConfiguration _configuration;
         private readonly IDynamicsClient _dynamicsClient;
+        private readonly BCeIDBusinessQuery _bceid;
 
 
-        public UserController(IHttpContextAccessor httpContextAccessor, IConfiguration configuration, IDynamicsClient dynamics)
+        public UserController(IHttpContextAccessor httpContextAccessor, IConfiguration configuration, IDynamicsClient dynamics, BCeIDBusinessQuery bceid)
         {
             _httpContextAccessor = httpContextAccessor;
             _configuration = configuration;
             _dynamicsClient = dynamics;
+            _bceid = bceid;
         }
 
         protected ClaimsPrincipal CurrentUser => _httpContextAccessor.HttpContext.User;
@@ -32,7 +38,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         //[RequiresPermission(Permission.Login, Permission.NewUserRegistration)]
 
 
-        public virtual IActionResult UsersCurrentGet()
+        public async virtual Task<IActionResult> UsersCurrentGet()
         {
             SiteMinderAuthOptions siteMinderAuthOptions = new SiteMinderAuthOptions();
             ViewModels.User user = new ViewModels.User();
@@ -76,6 +82,23 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 string siteminderBusinessGuid = _httpContextAccessor.HttpContext.Request.Headers[siteMinderAuthOptions.SiteMinderBusinessGuidKey];
                 string siteminderUserGuid = _httpContextAccessor.HttpContext.Request.Headers[siteMinderAuthOptions.SiteMinderUserGuidKey];
+
+                //LCSD-6488: Change to BCEID Web Query
+                Gov.Lclb.Cllb.Interfaces.BCeIDBusiness bceidBusiness = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
+                if (bceidBusiness != null)
+                {
+                    user.firstname = bceidBusiness.individualFirstname;
+                    user.lastname = bceidBusiness.individualSurname;
+                }
+                else
+                {
+                    Gov.Lclb.Cllb.Interfaces.BCeIDBasic bceidBasic = await _bceid.ProcessBasicQuery(userSettings.SiteMinderGuid);
+                    if(bceidBasic != null)
+                    {
+                        user.firstname = bceidBasic.individualFirstname;
+                        user.lastname = bceidBasic.individualSurname;
+                    }
+                }
 
                 user.contactid = string.IsNullOrEmpty(siteminderUserGuid) ? userSettings.ContactId : siteminderUserGuid;
                 // handle Basic BCeID
