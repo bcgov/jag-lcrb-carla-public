@@ -286,6 +286,9 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioAffirminformationproividedtrueandcomplete = from.affirmInformationProividedTrueAndComplete ? 1 : 0; 
             to.AdoxioValidinterestestablishmentlocation = from.validInterestEstablishmentLocation? 1 : 0;
             to.AdoxioEstablishmentreopeningdate = from.EstablishmentReopeningDate;
+            to.AdoxioCancellicence = from.cancelLicence;
+            to.AdoxioEffectivedateofcancellation = from.Effectivedateofcancellation;
+            to.AdoxioLicencenumber = from.LicenceNumber;
         }
 
 
@@ -494,7 +497,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 SecondaryInvoiceId = dynamicsApplication._adoxioSecondaryapplicationinvoiceValue,
 
                 PaymentReceivedDate = dynamicsApplication.AdoxioPaymentreceiveddate,
-                Description1 = dynamicsApplication.AdoxioDescription1,
+                Description1 = string.IsNullOrEmpty(dynamicsApplication.AdoxioReasonforcancellation)? dynamicsApplication.AdoxioDescription1: dynamicsApplication.AdoxioReasonforcancellation,
                 Description2 = dynamicsApplication.AdoxioDescription2,
                 TempDateFrom = dynamicsApplication.AdoxioTempdatefrom,
                 TempDateTo = dynamicsApplication.AdoxioTempdateto,
@@ -692,7 +695,10 @@ namespace Gov.Lclb.Cllb.Public.Models
                 affirmInformationProividedTrueAndComplete = dynamicsApplication.AdoxioAffirminformationproividedtrueandcomplete.HasValue ? dynamicsApplication.AdoxioAffirminformationproividedtrueandcomplete.Value == 1 ? true : false : false,
                 validInterestEstablishmentLocation = dynamicsApplication.AdoxioValidinterestestablishmentlocation.HasValue ? dynamicsApplication.AdoxioValidinterestestablishmentlocation.Value == 1 ? true : false : false,
                 EstablishmentReopeningDate = dynamicsApplication.AdoxioEstablishmentreopeningdate,
-            };
+                cancelLicence= dynamicsApplication.AdoxioCancellicence.HasValue? dynamicsApplication.AdoxioCancellicence.Value:false,
+                Effectivedateofcancellation= dynamicsApplication.AdoxioEffectivedateofcancellation,
+                LicenceNumber = dynamicsApplication.AdoxioLicencenumber,
+        };
 
 
             // mfg fields
