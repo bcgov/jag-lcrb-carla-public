@@ -18,24 +18,30 @@
       <section class="padded-section content-bottom">
         <div class="ngtest-before-starting-content">
 
-          <p>A licensed establishment which has an off-site tied house (TH) association with a small volume manufacturer, may apply
+          <p>
+            A licensed establishment which has an off-site tied house (TH) association with a small volume manufacturer, may apply
             for exemption to the TH restrictions, provided the manufacturer consents. A small volume manufacturer may have up to 3
-            exemptions with off-site TH licensed establishment(s) where the manufacturer's liquor may be sold.</p>
-            <p>To be eligible, the
+            exemptions with off-site TH licensed establishment(s) where the manufacturer's liquor may be sold.
+          </p>
+          <p>
+            To be eligible, the
             licensed manufacturer's annual production volume for the 12 months prior to submitting the exemption application must
-            not exceed:</p>
-            <ul>
-              <li>100 000 litres of spirits,</li>
-              <li>750 000 litres of wine,</li>
-              <li>300 000 hectolitres of beer.</li>
+            not exceed:
+          </p>
+          <ul>
+            <li>100 000 litres of spirits,</li>
+            <li>750 000 litres of wine,</li>
+            <li>300 000 hectolitres of beer.</li>
 
-            </ul>
-            <p>If the
+          </ul>
+          <p>
+            If the
             manufacturer has not been in operation for 12 months, an estimate of the manufacturer's production volume for the 12
             months after submitting the exemption application may be accepted. Where a TH exemption(s) is being removed, terms and
             conditions will be added to the licences of the off-site establishment and associated manufacturer to prevent the sale
-            of the manufacturer's liquor in the associated off-site establishment.</p>
-            <p>For more information about, see your Terms and Conditions Handbook. </p>
+            of the manufacturer's liquor in the associated off-site establishment.
+          </p>
+          <p>For more information about, see your Terms and Conditions Handbook. </p>
         </div>
       </section>
 
@@ -43,12 +49,12 @@
       <section class="padded-section content-bottom">
         <app-field label="Licence" [required]="false">
           <input class="form-control" style="width: 500px;" type="text" [readonly]="true"
-            formControlName="licenseNumber">
+                 formControlName="licenseNumber">
         </app-field>
 
         <app-field label="Establishment Name" [required]="false">
           <input class="form-control" style="width: 500px;" type="text" [readonly]="true"
-            formControlName="establishmentName">
+                 formControlName="establishmentName">
         </app-field>
 
         <div>
@@ -78,7 +84,7 @@
             <div style="flex: 0 0 210px;">
               <app-field label="Parcel Identifier (PID)">
                 <input type="text" readonly class="form-control" (keydown)="rejectIfNotDigitOrBackSpace($event)"
-                  style="width: 200px;" formControlName="establishmentParcelId">
+                       style="width: 200px;" formControlName="establishmentParcelId">
               </app-field>
             </div>
           </div>
@@ -91,48 +97,56 @@
           <div class="col-md-3 col-xs-12" style="align-content:start;">
             <input class="form-control" type="number" onkeypress="return event.charCode >= 48 && event.charCode<=57" min="1" formControlName="manufacturerProductionAmountforPrevYear" [readonly]="isAppId != 'true'">
           </div>
-          <div class="col-md-3 col-xs-12" style="align-content:start;">           
-            <select class="form-control" style="height:35px;" formControlName="manufacturerProductionAmountUnit" >
+          <div class="col-md-3 col-xs-12" style="align-content:start;">
+            <select class="form-control" style="height:35px;" formControlName="manufacturerProductionAmountUnit">
               <option value=845280000 style="height:35px;">Litres</option>
               <option value=845280001 style="height:35px;">Hectolitres</option>
             </select>
-          </div>        
-        </div>       
+          </div>
+        </div>
       </section>
       <!-- Contact Details -->
       <h3 class="blue-header">APPLICATION CONTACT DETAILS</h3>
       <div class="content-bottom">
         <address class="padded-section" formGroupName="licenseeContact">
           <app-field label="Name" [valid]="isValidOrNotTouched('licenseeContact.name')"
-            errorMessage="Please enter the contact's first name">
+                     errorMessage="Please enter the contact's first name">
             <input class="form-control" style="width: 350px;" type="text" formControlName="name" id="name">
           </app-field>
 
           <app-field label="Phone Number (main)" [valid]="isValidOrNotTouched('licenseeContact.phone')"
-            errorMessage="Please enter the contact's 10-digit phone number">
+                     errorMessage="Please enter the contact's 10-digit phone number">
             <input class="form-control" style="width: 250px;" maxlength="10" autocomplete="tel"
-              (keydown)="rejectIfNotDigitOrBackSpace($event)" type="text" formControlName="phone">
+                   (keydown)="rejectIfNotDigitOrBackSpace($event)" type="text" formControlName="phone">
           </app-field>
 
           <app-field label="Email" [valid]="isValidOrNotTouched('licenseeContact.email')"
-            errorMessage="Please enter the contact's email address">
+                     errorMessage="Please enter the contact's email address">
             <input class="form-control" style="width: 350px;" type="text" formControlName="email" id="email"
-              (blur)="trimValue(form.get('licenseeContact.email'))">
+                   (blur)="trimValue(form.get('licenseeContact.email'))">
           </app-field>
         </address>
       </div>
 
       <h3 class="blue-header">IDENTIFY THE LICENCE TO RECEIVE THE EXEMPTION INVITATION</h3>
       <section class="padded-section">
+
         <app-field label="Search for the licence you wish to invite to apply for a tied house exemption:"
-          errorMessage="Please select a value" [required]="true" [valid]="isValidOrNotTouched('assignedLicence')">
-          <app-related-licence-picker (valueSelected)="onLicenceSelect($event)"></app-related-licence-picker>
+                   errorMessage="Please select a value" [required]="true" [valid]="isValidOrNotTouched('assignedLicence')">
+          <app-related-licence-picker (valueSelected)="onLicenceSelect($event)" (autoCompFldFocusEvent)="autoCompFldEventHandler($event)"></app-related-licence-picker>
+          <!--2004-04-10 LCSD-6368 waynezen; added new jobnumber search control -->
+          <app-related-jobnumber-picker (valueSelected)="onLicenceSelect($event)" (autoCompFldFocusEvent)="autoCompFldEventHandler($event)"></app-related-jobnumber-picker>
+
+          <p style="border:solid; color: darkorange; width: 500px;"><em>&nbsp;Search by job number will only provide results if the application in progress has reached the ‘approval-in-principle’ (AIP) stage. Note that the pending licence number associated to an AIP job does not mean a licence has been issued</em></p>
+
         </app-field>
+
 
         <table>
           <tr>
-            <td><label>Licence Name: </label></td>
-            <td><span> {{form.get('assignedLicence.name')?.value}}</span></td>
+            <!--2004-04-22 LCSD-6368 waynezen; added ids so DOM content can be changed from Angular code -->
+            <td><label id="lblapplicantname">Licence Name:</label></td>
+            <td><span>{{form.get('assignedLicence.name')?.value}}</span></td>
           </tr>
           <tr>
             <td valign="top"><label>Establishment Address: </label></td>
@@ -146,8 +160,9 @@
             </td>
           </tr>
           <tr>
-            <td><label>Assigned Licensee: </label></td>
-            <td><span> {{form.get('assignedLicence.licensee')?.value}}</span></td>
+            <!--2004-04-22 LCSD-6368 waynezen; added ids so DOM content can be changed from Angular code -->
+            <td><label id="lblassiglicensee">Assigned Licensee: </label></td>
+            <td><span id="fldassiglicensee">{{form.get('assignedLicence.licensee')?.value}}</span></td>
           </tr>
         </table>
 
@@ -156,7 +171,7 @@
       <h3 class="blue-header">CONSENT TO SEND INVITATION</h3>
       <section class="padded-section content-bottom">
         <app-field [required]="true" [valid]="isValidOrNotTouched('consent')"
-          errorMessage="Please consent to the transfer" [showChevrons]="false">
+                   errorMessage="Please consent to the transfer" [showChevrons]="false">
           <mat-checkbox formControlName="consent">
             I agree to invite the above licence holder to apply for a Tied House Exemption for the products produced by
             <strong>{{form.get('licenseNumber')?.value}} - {{form.get('establishmentName')?.value}}</strong>
@@ -188,7 +203,7 @@
         </p>
 
         <app-field [valid]="!showValidationMessages || form.get('authorizedToSubmit').valid"
-          errorMessage="Please affirm that you are authorized to submit the application." [showChevrons]="false">
+                   errorMessage="Please affirm that you are authorized to submit the application." [showChevrons]="false">
           <mat-checkbox formControlName="authorizedToSubmit">
             <span class="error-states">*</span>
             <span class="ml-2">
@@ -210,8 +225,8 @@
           makes a false or misleading statement in the application.”
         </p>
         <app-field [valid]="!showValidationMessages || form.get('signatureAgreement').valid"
-          errorMessage="Please affirm that all of the information provided for this application is true and complete."
-          [showChevrons]="false">
+                   errorMessage="Please affirm that all of the information provided for this application is true and complete."
+                   [showChevrons]="false">
           <mat-checkbox formControlName="signatureAgreement">
             <span class="error-states">*</span>
             <span class="ml-2">

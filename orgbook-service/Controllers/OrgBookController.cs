@@ -184,7 +184,7 @@ namespace Gov.Lclb.Cllb.OrgbookService
                         _logger.LogInformation($"Credential ID for {licenceNumber} not found in the orgbook.");
                         continue;
                     }
-                    string credentialLink = _orgbookClient.ORGBOOK_BASE_URL + "/en/organization/" + registrationId + "/cred/" + credentialId.ToString();
+                    string credentialLink = _orgbookClient.ORGBOOK_BASE_URL + "/entity/" + registrationId + "/credential/" + credentialId.ToString();
 
                     _dynamics.Licenceses.Update(licenceId, new MicrosoftDynamicsCRMadoxioLicences()
                     {
@@ -236,7 +236,7 @@ namespace Gov.Lclb.Cllb.OrgbookService
 
                 if (orgbookTopicId != null)
                 {
-                    string orgbookLink = _orgbookClient.ORGBOOK_BASE_URL + "/en/organization/registration.registries.ca/" + item.AdoxioBcincorporationnumber;
+                    string orgbookLink = _orgbookClient.ORGBOOK_BASE_URL + "/entity/" + item.AdoxioBcincorporationnumber;
                     _dynamics.Accounts.Update(accountId, new MicrosoftDynamicsCRMaccount()
                     {
                         AdoxioOrgbookorganizationlink = orgbookLink,
