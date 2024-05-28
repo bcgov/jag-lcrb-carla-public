@@ -1065,9 +1065,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
   submit_application() {
     // Only save if the data is valid
     if (this.isValid()) {
-      if (this.application.applicationType.name === ApplicationTypeNames.LicenceCancellationandSuspension) {
-        this.application.cancellicence = true;
-      }
       // show status
       this.submitApplicationInProgress = true;
       // save and try to generate an invoice.
