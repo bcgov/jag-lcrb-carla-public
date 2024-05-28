@@ -8,4 +8,8 @@ export class RelatedLicence {
   country: string;
   postalCode: string;
   licensee: string;
+  // 2024-04-22 LCSD-6368 waynezen
+  jobNumber: string;
+  licenceNumber: string;
+  valid: boolean;
 }
