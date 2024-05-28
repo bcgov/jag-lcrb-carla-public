@@ -9,8 +9,20 @@
         <mat-card-header>
           <mat-card-title>Option 1: BCeID</mat-card-title>
         </mat-card-header>
+        <mat-card-content class="d-flex flex-column">
+          <p>There are two types of BCeID:</p>
+            <ul>
+              <li>A <a href="https://www2.gov.bc.ca/gov/content/governments/services-for-government/information-management-technology/id-services/bceid-basic" target="_blank">Basic BCeID account</a> is used to log in to services online. You must use a username and password. You just need to have an email address.</li>
+              <li>A <a href="https://www2.gov.bc.ca/gov/content/governments/services-for-government/information-management-technology/id-services/bceid-business" target="_blank">Business BCeID account</a> is used to log in to services online when representing a business or organization. You must have: 
+                <ul>
+                  <li>Documentation to prove the business or organization's identity</li>
+                  <li>An email address</li>
+                </ul>
+              </li>
+            </ul>
+          <p>Learn more about <a href="https://www.bceid.ca/" target="_blank">BCeID.</a></p>
+        </mat-card-content>
         <mat-card-content class="d-flex flex-column align-items-center">
-
           <img src="assets/bceid_default_logo.jpg" alt="BCeID logo">
           <div class="d-flex justify-content-around w-100">
             <button [disabled]="disableLogin" mat-raised-button color="primary"
@@ -18,15 +30,32 @@
               Login with Basic or Business BCeID
             </button>
           </div>
-
-
-          <a href="http://www.bceid.ca" style="margin-top:20px;" target="_blank"><fa-icon [icon]="faExclamationCircle" style="margin-right: 5px;"></fa-icon> Don't have a BCeID account? Find out how to get one.</a>
         </mat-card-content>
       </mat-card>
+
       <mat-card style="flex: 1;" class="m-3 mat-elevation-z0">
         <mat-card-header>
           <mat-card-title>Option 2: BC Services Card</mat-card-title>
         </mat-card-header>
+        <mat-card-content class="d-flex flex-column">
+          <p>A BC Services Card Login is used to log in to services online. You must either:</p>
+          <ul>
+            <li>Have a BC Services Card</li>
+          </ul>
+          or
+          <ul>
+            <li>Live in Canada and have <a href="https://www2.gov.bc.ca/gov/content/governments/government-id/bcservicescardapp/id" target="_blank">ID issued within Canada</a></li>
+          </ul>
+          <p>You can use either:</p>
+          <ul>
+            <li>The <a href="https://id.gov.bc.ca/account/setup-instruction.html" target="_blank">BC Services Card app</a> on your mobile device</li>
+          </ul>
+          or
+          <ul>
+            <li><a href="https://id.gov.bc.ca/account/token-setup-instruction" target="_blank">A username, password and BC Token</a></li>
+          </ul>
+          <p>Learn more about <a href="https://www2.gov.bc.ca/gov/content/governments/services-for-government/information-management-technology/id-services/bcsc-login" target="_blank">BC Services Card.</a></p>
+        </mat-card-content> 
         <mat-card-content class="d-flex flex-column align-items-center">
           <img src="assets/bc-logo-white-bg.jpg" height="51" alt="BC logo">
           <div class="d-flex justify-content-around w-100">
@@ -36,7 +65,6 @@
               Card
             </button>
           </div>
-          <a href="http://www.gov.bc.ca/mobilebcservicescard" style="margin-top:20px;" target="_blank"><fa-icon [icon]="faExclamationCircle" style="margin-right: 5px;"></fa-icon>Don't have a mobile BC Services Card? Get Set up.</a>
         </mat-card-content>
       </mat-card>
     </section>
@@ -63,8 +91,8 @@
         <table>
           <tr>
             <td>
-              <h2 style="margin: 0px; margin-bottom: 10px;">{{calloutTitle}}</h2>
-              <section [innerHtml]="callout" style="color: white;"></section>
+              <h2 style="margin: 10px; margin-bottom: 10px;">{{calloutTitle}}</h2>
+              <section [innerHtml]="callout" style="color: black;"></section>
             </td>
           </tr>
         </table>
