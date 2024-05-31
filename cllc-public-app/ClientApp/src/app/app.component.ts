@@ -238,4 +238,15 @@ export class AppComponent extends FormBase implements OnInit {
     return result;
   }
 
+  openChat(lang, destinationId) {
+    console.log("Button clicked");
+    // [alternative] var baseSite = "https://bclcbr.icescape.com/iceMessaging/";
+    var baseSite = "https://16012.icescape.com/iceMessaging/";
+    var imHref = baseSite + "Login.html?dId=" + encodeURIComponent(destinationId) + "&lang=" + encodeURIComponent(lang);
+    var imWindow = window.open("", "iceIM", "width=490, height=760, resizable=yes, scrollbars=yes");
+    if (imWindow && imWindow.location.href === "about:blank") {
+      imWindow.location.href = imHref;
+    }
+    imWindow.focus();
+  }
 }
