@@ -31,78 +31,81 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMemailserverprofile class.
         /// </summary>
-        public MicrosoftDynamicsCRMemailserverprofile(string exchangeonlinetenantid = default(string), string outgoingserverlocation = default(string), bool? timeoutmailboxconnection = default(bool?), string _incomingpartnerapplicationValue = default(string), int? timeoutmailboxconnectionafteramount = default(int?), string name = default(string), bool? incominguseimpersonation = default(bool?), string _createdonbehalfbyValue = default(string), bool? usedefaulttenantid = default(bool?), string credentialinfo = default(string), string incomingpassword = default(string), int? statuscode = default(int?), string outgoingusername = default(string), bool? moveundeliveredemails = default(bool?), bool? isdataencryptionkeyset = default(bool?), int? utcconversiontimezonecode = default(int?), int? maxconcurrentconnections = default(int?), string outgoingpassword = default(string), int? incomingportnumber = default(int?), string encodingcodepage = default(string), bool? sendemailalert = default(bool?), string entityimageUrl = default(string), System.DateTimeOffset? processemailsreceivedafter = default(System.DateTimeOffset?), int? lastauthorizationstatus = default(int?), byte[] entityimage = default(byte[]), string _owneridValue = default(string), long? lasttesttotalexecutiontime = default(long?), bool? useautodiscover = default(bool?), string _outgoingpartnerapplicationValue = default(string), int? outgoingauthenticationprotocol = default(int?), bool? incomingusessl = default(bool?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), bool? outgoingautograntdelegateaccess = default(bool?), int? incomingcredentialretrieval = default(int?), string _owningteamValue = default(string), int? incomingauthenticationprotocol = default(int?), string owneremailaddress = default(string), int? outgoingportnumber = default(int?), bool? outgoingusessl = default(bool?), bool? isincomingpasswordset = default(bool?), string _modifiedbyValue = default(string), int? outgoingcredentialretrieval = default(int?), string lasttestrequest = default(string), string lasttestresponse = default(string), string versionnumber = default(string), string lastcrmmessage = default(string), int? exchangeversion = default(int?), string emailserverprofileid = default(string), string _owningbusinessunitValue = default(string), int? minpollingintervalinminutes = default(int?), long? entityimageTimestamp = default(long?), int? timezoneruleversionnumber = default(int?), string incomingusername = default(string), string description = default(string), string _organizationidValue = default(string), bool? isoutgoingpasswordset = default(bool?), string incomingserverlocation = default(string), int? lasttestvalidationstatus = default(int?), int? lasttestexecutionstatus = default(int?), string entityimageid = default(string), string defaultserverlocation = default(string), string emailservertypename = default(string), bool? usesamesettingsforoutgoingconnections = default(bool?), bool? outgoinguseimpersonation = default(bool?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string dataencryptionkey = default(string), int? statecode = default(int?), string _owninguserValue = default(string), System.DateTimeOffset? lastteststarttime = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string _createdbyValue = default(string), int? servertype = default(int?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMmailbox> emailserverprofileMailbox = default(IList<MicrosoftDynamicsCRMmailbox>), IList<MicrosoftDynamicsCRMasyncoperation> emailserverprofileAsyncoperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), IList<MicrosoftDynamicsCRMbulkdeletefailure> emailserverprofileBulkdeletefailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMorganization> emailServerProfileOrganization = default(IList<MicrosoftDynamicsCRMorganization>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMtracelog> tracelogEmailServerProfile = default(IList<MicrosoftDynamicsCRMtracelog>), IList<MicrosoftDynamicsCRMannotation> emailServerProfileAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMduplicaterecord> emailserverprofileDuplicatematchingrecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsyncerror> emailServerProfileSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> emailserverprofileDuplicatebaserecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>))
+        public MicrosoftDynamicsCRMemailserverprofile(string exchangeonlinetenantid = default(string), string oauthclientsecret = default(string), int? statuscode = default(int?), string _incomingpartnerapplicationValue = default(string), int? timeoutmailboxconnectionafteramount = default(int?), string name = default(string), bool? isoauthclientsecretset = default(bool?), string _createdonbehalfbyValue = default(string), bool? usedefaulttenantid = default(bool?), bool? isincomingpasswordset = default(bool?), string incomingpassword = default(string), string lasttestresponse = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string outgoingserverlocation = default(string), bool? isdataencryptionkeyset = default(bool?), int? utcconversiontimezonecode = default(int?), string outgoingpassword = default(string), int? incomingportnumber = default(int?), string encodingcodepage = default(string), bool? sendemailalert = default(bool?), System.DateTimeOffset? lastteststarttime = default(System.DateTimeOffset?), string entityimageUrl = default(string), System.DateTimeOffset? processemailsreceivedafter = default(System.DateTimeOffset?), byte[] entityimage = default(byte[]), string _owneridValue = default(string), long? lasttesttotalexecutiontime = default(long?), bool? outgoingautograntdelegateaccess = default(bool?), string _outgoingpartnerapplicationValue = default(string), bool? usesamesettingsforoutgoingconnections = default(bool?), string _owningbusinessunitValue = default(string), int? incomingcredentialretrieval = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? incomingauthenticationprotocol = default(int?), bool? incominguseimpersonation = default(bool?), int? lastauthorizationstatus = default(int?), int? maxconcurrentconnections = default(int?), string owneremailaddress = default(string), int? outgoingportnumber = default(int?), bool? outgoingusessl = default(bool?), bool? incomingusessl = default(bool?), string _modifiedbyValue = default(string), int? outgoingcredentialretrieval = default(int?), string _owningteamValue = default(string), string oauthclientid = default(string), string lasttestrequest = default(string), string versionnumber = default(string), long? entityimageTimestamp = default(long?), bool? useautodiscover = default(bool?), int? exchangeversion = default(int?), string description = default(string), string emailserverprofileid = default(string), string _organizationidValue = default(string), int? minpollingintervalinminutes = default(int?), string _modifiedonbehalfbyValue = default(string), int? timezoneruleversionnumber = default(int?), string incomingusername = default(string), string credentialinfo = default(string), string dataencryptionkey = default(string), string lastcrmmessage = default(string), bool? isoutgoingpasswordset = default(bool?), string incomingserverlocation = default(string), int? lasttestvalidationstatus = default(int?), int? lasttestexecutionstatus = default(int?), string entityimageid = default(string), bool? moveundeliveredemails = default(bool?), string defaultserverlocation = default(string), string emailservertypename = default(string), bool? outgoinguseimpersonation = default(bool?), int? outgoingauthenticationprotocol = default(int?), int? statecode = default(int?), string outgoingusername = default(string), string _owninguserValue = default(string), bool? timeoutmailboxconnection = default(bool?), string _createdbyValue = default(string), int? servertype = default(int?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMmailbox> emailserverprofileMailbox = default(IList<MicrosoftDynamicsCRMmailbox>), IList<MicrosoftDynamicsCRMasyncoperation> emailserverprofileAsyncoperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), IList<MicrosoftDynamicsCRMbulkdeletefailure> emailserverprofileBulkdeletefailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMorganization> emailServerProfileOrganization = default(IList<MicrosoftDynamicsCRMorganization>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMtracelog> tracelogEmailServerProfile = default(IList<MicrosoftDynamicsCRMtracelog>), IList<MicrosoftDynamicsCRMannotation> emailServerProfileAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMduplicaterecord> emailserverprofileDuplicatematchingrecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsyncerror> emailServerProfileSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> emailserverprofileDuplicatebaserecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>))
         {
             Exchangeonlinetenantid = exchangeonlinetenantid;
-            Outgoingserverlocation = outgoingserverlocation;
-            Timeoutmailboxconnection = timeoutmailboxconnection;
+            Oauthclientsecret = oauthclientsecret;
+            Statuscode = statuscode;
             this._incomingpartnerapplicationValue = _incomingpartnerapplicationValue;
             Timeoutmailboxconnectionafteramount = timeoutmailboxconnectionafteramount;
             Name = name;
-            Incominguseimpersonation = incominguseimpersonation;
+            Isoauthclientsecretset = isoauthclientsecretset;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Usedefaulttenantid = usedefaulttenantid;
-            Credentialinfo = credentialinfo;
+            Isincomingpasswordset = isincomingpasswordset;
             Incomingpassword = incomingpassword;
-            Statuscode = statuscode;
-            Outgoingusername = outgoingusername;
-            Moveundeliveredemails = moveundeliveredemails;
+            Lasttestresponse = lasttestresponse;
+            Modifiedon = modifiedon;
+            Outgoingserverlocation = outgoingserverlocation;
             Isdataencryptionkeyset = isdataencryptionkeyset;
             Utcconversiontimezonecode = utcconversiontimezonecode;
-            Maxconcurrentconnections = maxconcurrentconnections;
             Outgoingpassword = outgoingpassword;
             Incomingportnumber = incomingportnumber;
             Encodingcodepage = encodingcodepage;
             Sendemailalert = sendemailalert;
+            Lastteststarttime = lastteststarttime;
             EntityimageUrl = entityimageUrl;
             Processemailsreceivedafter = processemailsreceivedafter;
-            Lastauthorizationstatus = lastauthorizationstatus;
             Entityimage = entityimage;
             this._owneridValue = _owneridValue;
             Lasttesttotalexecutiontime = lasttesttotalexecutiontime;
-            Useautodiscover = useautodiscover;
-            this._outgoingpartnerapplicationValue = _outgoingpartnerapplicationValue;
-            Outgoingauthenticationprotocol = outgoingauthenticationprotocol;
-            Incomingusessl = incomingusessl;
-            Createdon = createdon;
             Outgoingautograntdelegateaccess = outgoingautograntdelegateaccess;
+            this._outgoingpartnerapplicationValue = _outgoingpartnerapplicationValue;
+            Usesamesettingsforoutgoingconnections = usesamesettingsforoutgoingconnections;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
             Incomingcredentialretrieval = incomingcredentialretrieval;
-            this._owningteamValue = _owningteamValue;
+            Createdon = createdon;
             Incomingauthenticationprotocol = incomingauthenticationprotocol;
+            Incominguseimpersonation = incominguseimpersonation;
+            Lastauthorizationstatus = lastauthorizationstatus;
+            Maxconcurrentconnections = maxconcurrentconnections;
             Owneremailaddress = owneremailaddress;
             Outgoingportnumber = outgoingportnumber;
             Outgoingusessl = outgoingusessl;
-            Isincomingpasswordset = isincomingpasswordset;
+            Incomingusessl = incomingusessl;
             this._modifiedbyValue = _modifiedbyValue;
             Outgoingcredentialretrieval = outgoingcredentialretrieval;
+            this._owningteamValue = _owningteamValue;
+            Oauthclientid = oauthclientid;
             Lasttestrequest = lasttestrequest;
-            Lasttestresponse = lasttestresponse;
             Versionnumber = versionnumber;
-            Lastcrmmessage = lastcrmmessage;
-            Exchangeversion = exchangeversion;
-            Emailserverprofileid = emailserverprofileid;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
-            Minpollingintervalinminutes = minpollingintervalinminutes;
             EntityimageTimestamp = entityimageTimestamp;
+            Useautodiscover = useautodiscover;
+            Exchangeversion = exchangeversion;
+            Description = description;
+            Emailserverprofileid = emailserverprofileid;
+            this._organizationidValue = _organizationidValue;
+            Minpollingintervalinminutes = minpollingintervalinminutes;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             Incomingusername = incomingusername;
-            Description = description;
-            this._organizationidValue = _organizationidValue;
+            Credentialinfo = credentialinfo;
+            Dataencryptionkey = dataencryptionkey;
+            Lastcrmmessage = lastcrmmessage;
             Isoutgoingpasswordset = isoutgoingpasswordset;
             Incomingserverlocation = incomingserverlocation;
             Lasttestvalidationstatus = lasttestvalidationstatus;
             Lasttestexecutionstatus = lasttestexecutionstatus;
             Entityimageid = entityimageid;
+            Moveundeliveredemails = moveundeliveredemails;
             Defaultserverlocation = defaultserverlocation;
             Emailservertypename = emailservertypename;
-            Usesamesettingsforoutgoingconnections = usesamesettingsforoutgoingconnections;
             Outgoinguseimpersonation = outgoinguseimpersonation;
-            Modifiedon = modifiedon;
-            Dataencryptionkey = dataencryptionkey;
+            Outgoingauthenticationprotocol = outgoingauthenticationprotocol;
             Statecode = statecode;
+            Outgoingusername = outgoingusername;
             this._owninguserValue = _owninguserValue;
-            Lastteststarttime = lastteststarttime;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Timeoutmailboxconnection = timeoutmailboxconnection;
             this._createdbyValue = _createdbyValue;
             Servertype = servertype;
             Createdonbehalfby = createdonbehalfby;
@@ -137,13 +140,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "outgoingserverlocation")]
-        public string Outgoingserverlocation { get; set; }
+        [JsonProperty(PropertyName = "oauthclientsecret")]
+        public string Oauthclientsecret { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "timeoutmailboxconnection")]
-        public bool? Timeoutmailboxconnection { get; set; }
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -162,8 +165,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "incominguseimpersonation")]
-        public bool? Incominguseimpersonation { get; set; }
+        [JsonProperty(PropertyName = "isoauthclientsecretset")]
+        public bool? Isoauthclientsecretset { get; set; }
 
         /// <summary>
         /// </summary>
@@ -177,8 +180,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "credentialinfo")]
-        public string Credentialinfo { get; set; }
+        [JsonProperty(PropertyName = "isincomingpasswordset")]
+        public bool? Isincomingpasswordset { get; set; }
 
         /// <summary>
         /// </summary>
@@ -187,18 +190,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
+        [JsonProperty(PropertyName = "lasttestresponse")]
+        public string Lasttestresponse { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "outgoingusername")]
-        public string Outgoingusername { get; set; }
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "moveundeliveredemails")]
-        public bool? Moveundeliveredemails { get; set; }
+        [JsonProperty(PropertyName = "outgoingserverlocation")]
+        public string Outgoingserverlocation { get; set; }
 
         /// <summary>
         /// </summary>
@@ -209,11 +212,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "utcconversiontimezonecode")]
         public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "maxconcurrentconnections")]
-        public int? Maxconcurrentconnections { get; set; }
 
         /// <summary>
         /// </summary>
@@ -237,6 +235,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "lastteststarttime")]
+        public System.DateTimeOffset? Lastteststarttime { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "entityimage_url")]
         public string EntityimageUrl { get; set; }
 
@@ -244,11 +247,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "processemailsreceivedafter")]
         public System.DateTimeOffset? Processemailsreceivedafter { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lastauthorizationstatus")]
-        public int? Lastauthorizationstatus { get; set; }
 
         /// <summary>
         /// </summary>
@@ -268,8 +266,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "useautodiscover")]
-        public bool? Useautodiscover { get; set; }
+        [JsonProperty(PropertyName = "outgoingautograntdelegateaccess")]
+        public bool? Outgoingautograntdelegateaccess { get; set; }
 
         /// <summary>
         /// </summary>
@@ -278,23 +276,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "outgoingauthenticationprotocol")]
-        public int? Outgoingauthenticationprotocol { get; set; }
+        [JsonProperty(PropertyName = "usesamesettingsforoutgoingconnections")]
+        public bool? Usesamesettingsforoutgoingconnections { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "incomingusessl")]
-        public bool? Incomingusessl { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "outgoingautograntdelegateaccess")]
-        public bool? Outgoingautograntdelegateaccess { get; set; }
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -303,13 +291,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "incomingauthenticationprotocol")]
         public int? Incomingauthenticationprotocol { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "incominguseimpersonation")]
+        public bool? Incominguseimpersonation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lastauthorizationstatus")]
+        public int? Lastauthorizationstatus { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "maxconcurrentconnections")]
+        public int? Maxconcurrentconnections { get; set; }
 
         /// <summary>
         /// </summary>
@@ -328,8 +331,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "isincomingpasswordset")]
-        public bool? Isincomingpasswordset { get; set; }
+        [JsonProperty(PropertyName = "incomingusessl")]
+        public bool? Incomingusessl { get; set; }
 
         /// <summary>
         /// </summary>
@@ -343,13 +346,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lasttestrequest")]
-        public string Lasttestrequest { get; set; }
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lasttestresponse")]
-        public string Lasttestresponse { get; set; }
+        [JsonProperty(PropertyName = "oauthclientid")]
+        public string Oauthclientid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lasttestrequest")]
+        public string Lasttestrequest { get; set; }
 
         /// <summary>
         /// </summary>
@@ -358,8 +366,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lastcrmmessage")]
-        public string Lastcrmmessage { get; set; }
+        [JsonProperty(PropertyName = "entityimage_timestamp")]
+        public long? EntityimageTimestamp { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "useautodiscover")]
+        public bool? Useautodiscover { get; set; }
 
         /// <summary>
         /// </summary>
@@ -368,13 +381,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "description")]
+        public string Description { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "emailserverprofileid")]
         public string Emailserverprofileid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -383,8 +401,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "entityimage_timestamp")]
-        public long? EntityimageTimestamp { get; set; }
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -398,13 +416,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "description")]
-        public string Description { get; set; }
+        [JsonProperty(PropertyName = "credentialinfo")]
+        public string Credentialinfo { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
+        [JsonProperty(PropertyName = "dataencryptionkey")]
+        public string Dataencryptionkey { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lastcrmmessage")]
+        public string Lastcrmmessage { get; set; }
 
         /// <summary>
         /// </summary>
@@ -433,6 +456,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "moveundeliveredemails")]
+        public bool? Moveundeliveredemails { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "defaultserverlocation")]
         public string Defaultserverlocation { get; set; }
 
@@ -443,23 +471,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "usesamesettingsforoutgoingconnections")]
-        public bool? Usesamesettingsforoutgoingconnections { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "outgoinguseimpersonation")]
         public bool? Outgoinguseimpersonation { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "dataencryptionkey")]
-        public string Dataencryptionkey { get; set; }
+        [JsonProperty(PropertyName = "outgoingauthenticationprotocol")]
+        public int? Outgoingauthenticationprotocol { get; set; }
 
         /// <summary>
         /// </summary>
@@ -468,18 +486,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "outgoingusername")]
+        public string Outgoingusername { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
         public string _owninguserValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lastteststarttime")]
-        public System.DateTimeOffset? Lastteststarttime { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "timeoutmailboxconnection")]
+        public bool? Timeoutmailboxconnection { get; set; }
 
         /// <summary>
         /// </summary>

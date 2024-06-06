@@ -27,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMAttributeMetadata class.
         /// </summary>
-        public MicrosoftDynamicsCRMAttributeMetadata(string attributeOf = default(string), string attributeType = default(string), string attributeTypeName = default(string), int? columnNumber = default(int?), string description = default(string), string displayName = default(string), string deprecatedVersion = default(string), string introducedVersion = default(string), string entityLogicalName = default(string), string isAuditEnabled = default(string), bool? isCustomAttribute = default(bool?), bool? isPrimaryId = default(bool?), bool? isPrimaryName = default(bool?), bool? isValidForCreate = default(bool?), bool? isValidForRead = default(bool?), bool? isValidForUpdate = default(bool?), bool? canBeSecuredForRead = default(bool?), bool? canBeSecuredForCreate = default(bool?), bool? canBeSecuredForUpdate = default(bool?), bool? isSecured = default(bool?), bool? isRetrievable = default(bool?), bool? isFilterable = default(bool?), bool? isSearchable = default(bool?), bool? isManaged = default(bool?), string isGlobalFilterEnabled = default(string), string isSortableEnabled = default(string), string linkedAttributeId = default(string), string logicalName = default(string), string isCustomizable = default(string), string isRenameable = default(string), string isValidForAdvancedFind = default(string), bool? isValidForForm = default(bool?), bool? isRequiredForForm = default(bool?), bool? isValidForGrid = default(bool?), string requiredLevel = default(string), string canModifyAdditionalSettings = default(string), string schemaName = default(string), string externalName = default(string), bool? isLogical = default(bool?), bool? isDataSourceSecret = default(bool?), string inheritsFrom = default(string), int? sourceType = default(int?), string autoNumberFormat = default(string))
+        public MicrosoftDynamicsCRMAttributeMetadata(string attributeOf = default(string), string attributeType = default(string), string attributeTypeName = default(string), int? columnNumber = default(int?), string description = default(string), string displayName = default(string), string deprecatedVersion = default(string), string introducedVersion = default(string), string entityLogicalName = default(string), string isAuditEnabled = default(string), bool? isCustomAttribute = default(bool?), bool? isPrimaryId = default(bool?), bool? isValidODataAttribute = default(bool?), bool? isPrimaryName = default(bool?), bool? isValidForCreate = default(bool?), bool? isValidForRead = default(bool?), bool? isValidForUpdate = default(bool?), bool? canBeSecuredForRead = default(bool?), bool? canBeSecuredForCreate = default(bool?), bool? canBeSecuredForUpdate = default(bool?), bool? isSecured = default(bool?), bool? isRetrievable = default(bool?), bool? isFilterable = default(bool?), bool? isSearchable = default(bool?), bool? isManaged = default(bool?), string isGlobalFilterEnabled = default(string), string isSortableEnabled = default(string), string linkedAttributeId = default(string), string logicalName = default(string), string isCustomizable = default(string), string isRenameable = default(string), string isValidForAdvancedFind = default(string), bool? isValidForForm = default(bool?), bool? isRequiredForForm = default(bool?), bool? isValidForGrid = default(bool?), string requiredLevel = default(string), string canModifyAdditionalSettings = default(string), string schemaName = default(string), string externalName = default(string), bool? isLogical = default(bool?), bool? isDataSourceSecret = default(bool?), string inheritsFrom = default(string), System.DateTimeOffset? createdOn = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedOn = default(System.DateTimeOffset?), int? sourceType = default(int?), string autoNumberFormat = default(string))
         {
             AttributeOf = attributeOf;
             AttributeType = attributeType;
@@ -41,6 +41,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             IsAuditEnabled = isAuditEnabled;
             IsCustomAttribute = isCustomAttribute;
             IsPrimaryId = isPrimaryId;
+            IsValidODataAttribute = isValidODataAttribute;
             IsPrimaryName = isPrimaryName;
             IsValidForCreate = isValidForCreate;
             IsValidForRead = isValidForRead;
@@ -70,6 +71,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             IsLogical = isLogical;
             IsDataSourceSecret = isDataSourceSecret;
             InheritsFrom = inheritsFrom;
+            CreatedOn = createdOn;
+            ModifiedOn = modifiedOn;
             SourceType = sourceType;
             AutoNumberFormat = autoNumberFormat;
             CustomInit();
@@ -139,6 +142,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "IsPrimaryId")]
         public bool? IsPrimaryId { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "IsValidODataAttribute")]
+        public bool? IsValidODataAttribute { get; set; }
 
         /// <summary>
         /// </summary>
@@ -284,6 +292,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "InheritsFrom")]
         public string InheritsFrom { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "CreatedOn")]
+        public System.DateTimeOffset? CreatedOn { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ModifiedOn")]
+        public System.DateTimeOffset? ModifiedOn { get; set; }
 
         /// <summary>
         /// </summary>

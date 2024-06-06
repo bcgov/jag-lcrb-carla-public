@@ -29,29 +29,29 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMbulkdeleteoperation class.
         /// </summary>
-        public MicrosoftDynamicsCRMbulkdeleteoperation(string _createdbyValue = default(string), System.DateTimeOffset? nextrun = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _asyncoperationidValue = default(string), string bulkdeleteoperationid = default(string), int? successcount = default(int?), string _owninguserValue = default(string), string _modifiedbyValue = default(string), int? failurecount = default(int?), int? processingqeindex = default(int?), int? utcconversiontimezonecode = default(int?), int? timezoneruleversionnumber = default(int?), string name = default(string), string _owningbusinessunitValue = default(string), int? statecode = default(int?), string _owneridValue = default(string), bool? isrecurring = default(bool?), int? statuscode = default(int?), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string orderedquerysetxml = default(string), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMasyncoperation asyncoperationid = default(MicrosoftDynamicsCRMasyncoperation), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> bulkDeleteOperationBulkDeleteFailure = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMbulkdeleteoperation(string _modifiedbyValue = default(string), string _createdbyValue = default(string), System.DateTimeOffset? nextrun = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _asyncoperationidValue = default(string), string bulkdeleteoperationid = default(string), int? timezoneruleversionnumber = default(int?), string _owninguserValue = default(string), int? failurecount = default(int?), int? utcconversiontimezonecode = default(int?), string _owneridValue = default(string), string name = default(string), int? successcount = default(int?), string _owningbusinessunitValue = default(string), int? statecode = default(int?), int? processingqeindex = default(int?), bool? isrecurring = default(bool?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? statuscode = default(int?), string _createdonbehalfbyValue = default(string), string orderedquerysetxml = default(string), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMasyncoperation asyncoperationid = default(MicrosoftDynamicsCRMasyncoperation), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> bulkDeleteOperationBulkDeleteFailure = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
+            this._modifiedbyValue = _modifiedbyValue;
             this._createdbyValue = _createdbyValue;
             Nextrun = nextrun;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Createdon = createdon;
             this._asyncoperationidValue = _asyncoperationidValue;
             Bulkdeleteoperationid = bulkdeleteoperationid;
-            Successcount = successcount;
-            this._owninguserValue = _owninguserValue;
-            this._modifiedbyValue = _modifiedbyValue;
-            Failurecount = failurecount;
-            Processingqeindex = processingqeindex;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
             Timezoneruleversionnumber = timezoneruleversionnumber;
+            this._owninguserValue = _owninguserValue;
+            Failurecount = failurecount;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            this._owneridValue = _owneridValue;
             Name = name;
+            Successcount = successcount;
             this._owningbusinessunitValue = _owningbusinessunitValue;
             Statecode = statecode;
-            this._owneridValue = _owneridValue;
+            Processingqeindex = processingqeindex;
             Isrecurring = isrecurring;
+            Modifiedon = modifiedon;
             Statuscode = statuscode;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            Modifiedon = modifiedon;
             Orderedquerysetxml = orderedquerysetxml;
             Owningbusinessunit = owningbusinessunit;
             Asyncoperationid = asyncoperationid;
@@ -67,6 +67,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -100,8 +105,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "successcount")]
-        public int? Successcount { get; set; }
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -110,18 +115,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "failurecount")]
         public int? Failurecount { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "processingqeindex")]
-        public int? Processingqeindex { get; set; }
 
         /// <summary>
         /// </summary>
@@ -130,13 +125,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "successcount")]
+        public int? Successcount { get; set; }
 
         /// <summary>
         /// </summary>
@@ -150,13 +150,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
+        [JsonProperty(PropertyName = "processingqeindex")]
+        public int? Processingqeindex { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "isrecurring")]
         public bool? Isrecurring { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -167,11 +172,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>

@@ -31,73 +31,73 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMpublisher
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMpublisher(string friendlyname = default(string), string publisherid = default(string), int? address2Utcoffset = default(int?), string address1Telephone2 = default(string), string address2County = default(string), int? address1Shippingmethodcode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), bool? isreadonly = default(bool?), string address1Telephone3 = default(string), long? entityimageTimestamp = default(long?), string address1Country = default(string), string pinpointpublisherdefaultlocale = default(string), string address2Name = default(string), string address1Telephone1 = default(string), string description = default(string), string address1Addressid = default(string), string address2Stateorprovince = default(string), int? address1Addresstypecode = default(int?), string address2Addressid = default(string), string address2City = default(string), string address1Line3 = default(string), string address2Line1 = default(string), string address1Upszone = default(string), string versionnumber = default(string), long? pinpointpublisherid = default(long?), string address1Name = default(string), string _createdbyValue = default(string), string customizationprefix = default(string), string address2Line3 = default(string), decimal? address2Longitude = default(decimal?), string address1Fax = default(string), string entityimageUrl = default(string), string address2Fax = default(string), string address1Line1 = default(string), int? address2Shippingmethodcode = default(int?), string address2Line2 = default(string), string address1Postalcode = default(string), string address2Postalcode = default(string), string address1County = default(string), string address1Postofficebox = default(string), decimal? address2Latitude = default(decimal?), int? customizationoptionvalueprefix = default(int?), string address2Upszone = default(string), string address2Country = default(string), string _modifiedonbehalfbyValue = default(string), string entityimageid = default(string), string address2Telephone1 = default(string), decimal? address1Longitude = default(decimal?), int? address1Utcoffset = default(int?), string address2Telephone2 = default(string), string address1Line2 = default(string), int? address2Addresstypecode = default(int?), string _modifiedbyValue = default(string), decimal? address1Latitude = default(decimal?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string address2Telephone3 = default(string), string _createdonbehalfbyValue = default(string), string address1Stateorprovince = default(string), string uniquename = default(string), string address1City = default(string), string _organizationidValue = default(string), string emailaddress = default(string), byte[] entityimage = default(byte[]), string address2Postofficebox = default(string), string supportingwebsiteurl = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMduplicaterecord> publisherDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsyncerror> publisherSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMduplicaterecord> publisherDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsolution> publisherSolution = default(IList<MicrosoftDynamicsCRMsolution>), IList<MicrosoftDynamicsCRMappmodule> publisherAppmodule = default(IList<MicrosoftDynamicsCRMappmodule>), IList<MicrosoftDynamicsCRMpublisheraddress> publisherPublisherAddress = default(IList<MicrosoftDynamicsCRMpublisheraddress>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMpublisher(string address1County = default(string), string publisherid = default(string), string address2Upszone = default(string), string address1Upszone = default(string), string address2County = default(string), string friendlyname = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string address1Telephone3 = default(string), long? entityimageTimestamp = default(long?), decimal? address1Longitude = default(decimal?), string address1Country = default(string), string address2Name = default(string), string address1Telephone1 = default(string), string address2Addressid = default(string), string description = default(string), int? address1Shippingmethodcode = default(int?), string customizationprefix = default(string), string address2Stateorprovince = default(string), int? address1Addresstypecode = default(int?), int? address1Utcoffset = default(int?), string address2City = default(string), string address1Telephone2 = default(string), string address1Line3 = default(string), string address2Line1 = default(string), string address2Telephone3 = default(string), string versionnumber = default(string), int? address2Shippingmethodcode = default(int?), long? pinpointpublisherid = default(long?), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), string address2Line3 = default(string), decimal? address2Longitude = default(decimal?), string pinpointpublisherdefaultlocale = default(string), string entityimageUrl = default(string), string address2Fax = default(string), string address1Line1 = default(string), bool? isreadonly = default(bool?), string address2Postalcode = default(string), string _modifiedbyValue = default(string), string address1Postofficebox = default(string), decimal? address2Latitude = default(decimal?), int? customizationoptionvalueprefix = default(int?), string address1Addressid = default(string), string address2Line2 = default(string), string address2Country = default(string), string _modifiedonbehalfbyValue = default(string), string entityimageid = default(string), string address2Telephone1 = default(string), string supportingwebsiteurl = default(string), string address1Stateorprovince = default(string), string address1Name = default(string), int? address2Utcoffset = default(int?), string address1Line2 = default(string), int? address2Addresstypecode = default(int?), decimal? address1Latitude = default(decimal?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string address1Postalcode = default(string), string address1Fax = default(string), string address2Telephone2 = default(string), string uniquename = default(string), string address1City = default(string), string _organizationidValue = default(string), string emailaddress = default(string), byte[] entityimage = default(byte[]), string address2Postofficebox = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMduplicaterecord> publisherDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsyncerror> publisherSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMduplicaterecord> publisherDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsolution> publisherSolution = default(IList<MicrosoftDynamicsCRMsolution>), IList<MicrosoftDynamicsCRMappmodule> publisherAppmodule = default(IList<MicrosoftDynamicsCRMappmodule>), IList<MicrosoftDynamicsCRMpublisheraddress> publisherPublisherAddress = default(IList<MicrosoftDynamicsCRMpublisheraddress>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
-            Friendlyname = friendlyname;
+            Address1County = address1County;
             Publisherid = publisherid;
-            Address2Utcoffset = address2Utcoffset;
-            Address1Telephone2 = address1Telephone2;
+            Address2Upszone = address2Upszone;
+            Address1Upszone = address1Upszone;
             Address2County = address2County;
-            Address1Shippingmethodcode = address1Shippingmethodcode;
+            Friendlyname = friendlyname;
             Modifiedon = modifiedon;
-            Isreadonly = isreadonly;
             Address1Telephone3 = address1Telephone3;
             EntityimageTimestamp = entityimageTimestamp;
+            Address1Longitude = address1Longitude;
             Address1Country = address1Country;
-            Pinpointpublisherdefaultlocale = pinpointpublisherdefaultlocale;
             Address2Name = address2Name;
             Address1Telephone1 = address1Telephone1;
+            Address2Addressid = address2Addressid;
             Description = description;
-            Address1Addressid = address1Addressid;
+            Address1Shippingmethodcode = address1Shippingmethodcode;
+            Customizationprefix = customizationprefix;
             Address2Stateorprovince = address2Stateorprovince;
             Address1Addresstypecode = address1Addresstypecode;
-            Address2Addressid = address2Addressid;
+            Address1Utcoffset = address1Utcoffset;
             Address2City = address2City;
+            Address1Telephone2 = address1Telephone2;
             Address1Line3 = address1Line3;
             Address2Line1 = address2Line1;
-            Address1Upszone = address1Upszone;
+            Address2Telephone3 = address2Telephone3;
             Versionnumber = versionnumber;
+            Address2Shippingmethodcode = address2Shippingmethodcode;
             Pinpointpublisherid = pinpointpublisherid;
-            Address1Name = address1Name;
             this._createdbyValue = _createdbyValue;
-            Customizationprefix = customizationprefix;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Address2Line3 = address2Line3;
             Address2Longitude = address2Longitude;
-            Address1Fax = address1Fax;
+            Pinpointpublisherdefaultlocale = pinpointpublisherdefaultlocale;
             EntityimageUrl = entityimageUrl;
             Address2Fax = address2Fax;
             Address1Line1 = address1Line1;
-            Address2Shippingmethodcode = address2Shippingmethodcode;
-            Address2Line2 = address2Line2;
-            Address1Postalcode = address1Postalcode;
+            Isreadonly = isreadonly;
             Address2Postalcode = address2Postalcode;
-            Address1County = address1County;
+            this._modifiedbyValue = _modifiedbyValue;
             Address1Postofficebox = address1Postofficebox;
             Address2Latitude = address2Latitude;
             Customizationoptionvalueprefix = customizationoptionvalueprefix;
-            Address2Upszone = address2Upszone;
+            Address1Addressid = address1Addressid;
+            Address2Line2 = address2Line2;
             Address2Country = address2Country;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Entityimageid = entityimageid;
             Address2Telephone1 = address2Telephone1;
-            Address1Longitude = address1Longitude;
-            Address1Utcoffset = address1Utcoffset;
-            Address2Telephone2 = address2Telephone2;
+            Supportingwebsiteurl = supportingwebsiteurl;
+            Address1Stateorprovince = address1Stateorprovince;
+            Address1Name = address1Name;
+            Address2Utcoffset = address2Utcoffset;
             Address1Line2 = address1Line2;
             Address2Addresstypecode = address2Addresstypecode;
-            this._modifiedbyValue = _modifiedbyValue;
             Address1Latitude = address1Latitude;
             Createdon = createdon;
-            Address2Telephone3 = address2Telephone3;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            Address1Stateorprovince = address1Stateorprovince;
+            Address1Postalcode = address1Postalcode;
+            Address1Fax = address1Fax;
+            Address2Telephone2 = address2Telephone2;
             Uniquename = uniquename;
             Address1City = address1City;
             this._organizationidValue = _organizationidValue;
             Emailaddress = emailaddress;
             Entityimage = entityimage;
             Address2Postofficebox = address2Postofficebox;
-            Supportingwebsiteurl = supportingwebsiteurl;
             Createdby = createdby;
             Modifiedby = modifiedby;
             PublisherDuplicateMatchingRecord = publisherDuplicateMatchingRecord;
@@ -119,8 +119,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "friendlyname")]
-        public string Friendlyname { get; set; }
+        [JsonProperty(PropertyName = "address1_county")]
+        public string Address1County { get; set; }
 
         /// <summary>
         /// </summary>
@@ -129,13 +129,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address2_utcoffset")]
-        public int? Address2Utcoffset { get; set; }
+        [JsonProperty(PropertyName = "address2_upszone")]
+        public string Address2Upszone { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address1_telephone2")]
-        public string Address1Telephone2 { get; set; }
+        [JsonProperty(PropertyName = "address1_upszone")]
+        public string Address1Upszone { get; set; }
 
         /// <summary>
         /// </summary>
@@ -144,18 +144,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address1_shippingmethodcode")]
-        public int? Address1Shippingmethodcode { get; set; }
+        [JsonProperty(PropertyName = "friendlyname")]
+        public string Friendlyname { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "isreadonly")]
-        public bool? Isreadonly { get; set; }
 
         /// <summary>
         /// </summary>
@@ -169,13 +164,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address1_country")]
-        public string Address1Country { get; set; }
+        [JsonProperty(PropertyName = "address1_longitude")]
+        public decimal? Address1Longitude { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "pinpointpublisherdefaultlocale")]
-        public string Pinpointpublisherdefaultlocale { get; set; }
+        [JsonProperty(PropertyName = "address1_country")]
+        public string Address1Country { get; set; }
 
         /// <summary>
         /// </summary>
@@ -189,13 +184,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "address2_addressid")]
+        public string Address2Addressid { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address1_addressid")]
-        public string Address1Addressid { get; set; }
+        [JsonProperty(PropertyName = "address1_shippingmethodcode")]
+        public int? Address1Shippingmethodcode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "customizationprefix")]
+        public string Customizationprefix { get; set; }
 
         /// <summary>
         /// </summary>
@@ -209,13 +214,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address2_addressid")]
-        public string Address2Addressid { get; set; }
+        [JsonProperty(PropertyName = "address1_utcoffset")]
+        public int? Address1Utcoffset { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "address2_city")]
         public string Address2City { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_telephone2")]
+        public string Address1Telephone2 { get; set; }
 
         /// <summary>
         /// </summary>
@@ -229,8 +239,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address1_upszone")]
-        public string Address1Upszone { get; set; }
+        [JsonProperty(PropertyName = "address2_telephone3")]
+        public string Address2Telephone3 { get; set; }
 
         /// <summary>
         /// </summary>
@@ -239,13 +249,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "pinpointpublisherid")]
-        public long? Pinpointpublisherid { get; set; }
+        [JsonProperty(PropertyName = "address2_shippingmethodcode")]
+        public int? Address2Shippingmethodcode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address1_name")]
-        public string Address1Name { get; set; }
+        [JsonProperty(PropertyName = "pinpointpublisherid")]
+        public long? Pinpointpublisherid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -254,8 +264,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "customizationprefix")]
-        public string Customizationprefix { get; set; }
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -269,8 +279,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address1_fax")]
-        public string Address1Fax { get; set; }
+        [JsonProperty(PropertyName = "pinpointpublisherdefaultlocale")]
+        public string Pinpointpublisherdefaultlocale { get; set; }
 
         /// <summary>
         /// </summary>
@@ -289,18 +299,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address2_shippingmethodcode")]
-        public int? Address2Shippingmethodcode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_line2")]
-        public string Address2Line2 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "address1_postalcode")]
-        public string Address1Postalcode { get; set; }
+        [JsonProperty(PropertyName = "isreadonly")]
+        public bool? Isreadonly { get; set; }
 
         /// <summary>
         /// </summary>
@@ -309,8 +309,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address1_county")]
-        public string Address1County { get; set; }
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -329,8 +329,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address2_upszone")]
-        public string Address2Upszone { get; set; }
+        [JsonProperty(PropertyName = "address1_addressid")]
+        public string Address1Addressid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_line2")]
+        public string Address2Line2 { get; set; }
 
         /// <summary>
         /// </summary>
@@ -354,18 +359,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address1_longitude")]
-        public decimal? Address1Longitude { get; set; }
+        [JsonProperty(PropertyName = "supportingwebsiteurl")]
+        public string Supportingwebsiteurl { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address1_utcoffset")]
-        public int? Address1Utcoffset { get; set; }
+        [JsonProperty(PropertyName = "address1_stateorprovince")]
+        public string Address1Stateorprovince { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address2_telephone2")]
-        public string Address2Telephone2 { get; set; }
+        [JsonProperty(PropertyName = "address1_name")]
+        public string Address1Name { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_utcoffset")]
+        public int? Address2Utcoffset { get; set; }
 
         /// <summary>
         /// </summary>
@@ -379,11 +389,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "address1_latitude")]
         public decimal? Address1Latitude { get; set; }
 
@@ -394,18 +399,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address2_telephone3")]
-        public string Address2Telephone3 { get; set; }
+        [JsonProperty(PropertyName = "address1_postalcode")]
+        public string Address1Postalcode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "address1_fax")]
+        public string Address1Fax { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address1_stateorprovince")]
-        public string Address1Stateorprovince { get; set; }
+        [JsonProperty(PropertyName = "address2_telephone2")]
+        public string Address2Telephone2 { get; set; }
 
         /// <summary>
         /// </summary>
@@ -437,11 +442,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "address2_postofficebox")]
         public string Address2Postofficebox { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "supportingwebsiteurl")]
-        public string Supportingwebsiteurl { get; set; }
 
         /// <summary>
         /// </summary>

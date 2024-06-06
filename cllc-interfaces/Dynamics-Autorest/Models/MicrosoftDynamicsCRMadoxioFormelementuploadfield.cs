@@ -29,36 +29,36 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioFormelementuploadfield class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioFormelementuploadfield(string versionnumber = default(string), string _owninguserValue = default(string), int? adoxioMaxfilesize = default(int?), string _modifiedonbehalfbyValue = default(string), bool? adoxioIsrequired = default(bool?), string adoxioName = default(string), string _adoxioApplicationtypeidValue = default(string), string adoxioInstructions = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string adoxioRouterlink = default(string), string adoxioFileprefix = default(string), string _modifiedbyValue = default(string), int? importsequencenumber = default(int?), string adoxioFormelementuploadfieldid = default(string), string _owneridValue = default(string), bool? adoxioIsreadonly = default(bool?), string _createdonbehalfbyValue = default(string), string adoxioFormguid = default(string), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? statecode = default(int?), int? timezoneruleversionnumber = default(int?), bool? adoxioIsallowdownload = default(bool?), string _owningteamValue = default(string), string _createdbyValue = default(string), int? adoxioAllowedfileextensions = default(int?), int? statuscode = default(int?), string _owningbusinessunitValue = default(string), int? adoxioMaxfiles = default(int?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioFormelementuploadfieldSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioFormelementuploadfieldDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioFormelementuploadfieldDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioFormelementuploadfieldAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioFormelementuploadfieldMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioFormelementuploadfieldProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioFormelementuploadfieldBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioFormelementuploadfieldPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMadoxioApplicationtype adoxioApplicationTypeId = default(MicrosoftDynamicsCRMadoxioApplicationtype))
+        public MicrosoftDynamicsCRMadoxioFormelementuploadfield(string versionnumber = default(string), int? importsequencenumber = default(int?), int? adoxioMaxfilesize = default(int?), int? adoxioAllowedfileextensions = default(int?), string adoxioName = default(string), string _adoxioApplicationtypeidValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string adoxioRouterlink = default(string), string adoxioFileprefix = default(string), string _owneridValue = default(string), string _modifiedonbehalfbyValue = default(string), string adoxioFormelementuploadfieldid = default(string), string _createdonbehalfbyValue = default(string), string adoxioFormguid = default(string), bool? adoxioIsreadonly = default(bool?), int? statuscode = default(int?), string adoxioInstructions = default(string), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? statecode = default(int?), string _modifiedbyValue = default(string), int? timezoneruleversionnumber = default(int?), bool? adoxioIsrequired = default(bool?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), bool? adoxioIsallowdownload = default(bool?), string _owninguserValue = default(string), string _createdbyValue = default(string), string _owningteamValue = default(string), string _owningbusinessunitValue = default(string), int? adoxioMaxfiles = default(int?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioFormelementuploadfieldSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioFormelementuploadfieldDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioFormelementuploadfieldDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioFormelementuploadfieldAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioFormelementuploadfieldMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioFormelementuploadfieldProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioFormelementuploadfieldBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioFormelementuploadfieldPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMadoxioApplicationtype adoxioApplicationTypeId = default(MicrosoftDynamicsCRMadoxioApplicationtype))
         {
             Versionnumber = versionnumber;
-            this._owninguserValue = _owninguserValue;
+            Importsequencenumber = importsequencenumber;
             AdoxioMaxfilesize = adoxioMaxfilesize;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            AdoxioIsrequired = adoxioIsrequired;
+            AdoxioAllowedfileextensions = adoxioAllowedfileextensions;
             AdoxioName = adoxioName;
             this._adoxioApplicationtypeidValue = _adoxioApplicationtypeidValue;
-            AdoxioInstructions = adoxioInstructions;
             Modifiedon = modifiedon;
             AdoxioRouterlink = adoxioRouterlink;
             AdoxioFileprefix = adoxioFileprefix;
-            this._modifiedbyValue = _modifiedbyValue;
-            Importsequencenumber = importsequencenumber;
-            AdoxioFormelementuploadfieldid = adoxioFormelementuploadfieldid;
             this._owneridValue = _owneridValue;
-            AdoxioIsreadonly = adoxioIsreadonly;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            AdoxioFormelementuploadfieldid = adoxioFormelementuploadfieldid;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             AdoxioFormguid = adoxioFormguid;
+            AdoxioIsreadonly = adoxioIsreadonly;
+            Statuscode = statuscode;
+            AdoxioInstructions = adoxioInstructions;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             Overriddencreatedon = overriddencreatedon;
-            Createdon = createdon;
             Statecode = statecode;
+            this._modifiedbyValue = _modifiedbyValue;
             Timezoneruleversionnumber = timezoneruleversionnumber;
+            AdoxioIsrequired = adoxioIsrequired;
+            Createdon = createdon;
             AdoxioIsallowdownload = adoxioIsallowdownload;
-            this._owningteamValue = _owningteamValue;
+            this._owninguserValue = _owninguserValue;
             this._createdbyValue = _createdbyValue;
-            AdoxioAllowedfileextensions = adoxioAllowedfileextensions;
-            Statuscode = statuscode;
+            this._owningteamValue = _owningteamValue;
             this._owningbusinessunitValue = _owningbusinessunitValue;
             AdoxioMaxfiles = adoxioMaxfiles;
             Createdbyname = createdbyname;
@@ -93,8 +93,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -103,13 +103,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_isrequired")]
-        public bool? AdoxioIsrequired { get; set; }
+        [JsonProperty(PropertyName = "adoxio_allowedfileextensions")]
+        public int? AdoxioAllowedfileextensions { get; set; }
 
         /// <summary>
         /// </summary>
@@ -120,11 +115,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_adoxio_applicationtypeid_value")]
         public string _adoxioApplicationtypeidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_instructions")]
-        public string AdoxioInstructions { get; set; }
 
         /// <summary>
         /// </summary>
@@ -143,28 +133,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_formelementuploadfieldid")]
-        public string AdoxioFormelementuploadfieldid { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
         public string _owneridValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_isreadonly")]
-        public bool? AdoxioIsreadonly { get; set; }
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_formelementuploadfieldid")]
+        public string AdoxioFormelementuploadfieldid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -178,6 +158,21 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_isreadonly")]
+        public bool? AdoxioIsreadonly { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_instructions")]
+        public string AdoxioInstructions { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "utcconversiontimezonecode")]
         public int? Utcconversiontimezonecode { get; set; }
 
@@ -188,13 +183,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -203,13 +198,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_isrequired")]
+        public bool? AdoxioIsrequired { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_isallowdownload")]
         public bool? AdoxioIsallowdownload { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
+        [JsonProperty(PropertyName = "_owninguser_value")]
+        public string _owninguserValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -218,13 +223,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_allowedfileextensions")]
-        public int? AdoxioAllowedfileextensions { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
 
         /// <summary>
         /// </summary>

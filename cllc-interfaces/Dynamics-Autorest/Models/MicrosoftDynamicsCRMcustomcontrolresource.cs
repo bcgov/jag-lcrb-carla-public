@@ -27,15 +27,15 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMcustomcontrolresource class.
         /// </summary>
-        public MicrosoftDynamicsCRMcustomcontrolresource(string _organizationidValue = default(string), string version = default(string), string webresourceid = default(string), int? componentstate = default(int?), string versionnumber = default(string), string customcontrolresourceid = default(string), string versionrequirement = default(string), string _modifiedonbehalfbyValue = default(string), string solutionid = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string introducedversion = default(string), string customcontrolresourceidunique = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string name = default(string), bool? ismanaged = default(bool?), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string customcontrolid = default(string), MicrosoftDynamicsCRMcustomcontrol customcontrolidCustomcontrol = default(MicrosoftDynamicsCRMcustomcontrol), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
+        public MicrosoftDynamicsCRMcustomcontrolresource(string versionrequirement = default(string), string _organizationidValue = default(string), string version = default(string), string webresourceid = default(string), int? componentstate = default(int?), string customcontrolresourceid = default(string), string versionnumber = default(string), string _modifiedonbehalfbyValue = default(string), string solutionid = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string introducedversion = default(string), string customcontrolresourceidunique = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string name = default(string), bool? ismanaged = default(bool?), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string customcontrolid = default(string), MicrosoftDynamicsCRMcustomcontrol customcontrolidCustomcontrol = default(MicrosoftDynamicsCRMcustomcontrol), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
         {
+            Versionrequirement = versionrequirement;
             this._organizationidValue = _organizationidValue;
             Version = version;
             Webresourceid = webresourceid;
             Componentstate = componentstate;
-            Versionnumber = versionnumber;
             Customcontrolresourceid = customcontrolresourceid;
-            Versionrequirement = versionrequirement;
+            Versionnumber = versionnumber;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Solutionid = solutionid;
             Overwritetime = overwritetime;
@@ -65,6 +65,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "versionrequirement")]
+        public string Versionrequirement { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
         public string _organizationidValue { get; set; }
 
@@ -85,18 +90,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "customcontrolresourceid")]
         public string Customcontrolresourceid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionrequirement")]
-        public string Versionrequirement { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>

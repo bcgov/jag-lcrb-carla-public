@@ -29,36 +29,36 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMsimilarityrule class.
         /// </summary>
-        public MicrosoftDynamicsCRMsimilarityrule(int? statuscode = default(int?), string similarityruleid = default(string), string similarityruleidunique = default(string), int? ngramsize = default(int?), int? baseentitytypecode = default(int?), int? statecode = default(int?), string _modifiedonbehalfbyValue = default(string), bool? excludeinactiverecords = default(bool?), string ruleconditionxml = default(string), int? maxkeywords = default(int?), string activerulefetchxml = default(string), decimal? exchangerate = default(decimal?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string name = default(string), int? componentstate = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string baseentityname = default(string), string solutionid = default(string), string introducedversion = default(string), int? utcconversiontimezonecode = default(int?), int? importsequencenumber = default(int?), string fetchxmllist = default(string), string _transactioncurrencyidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string description = default(string), string versionnumber = default(string), string _organizationidValue = default(string), string _createdonbehalfbyValue = default(string), bool? ismanaged = default(bool?), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string matchingentityname = default(string), int? matchingentitytypecode = default(int?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> similarityruleAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency))
+        public MicrosoftDynamicsCRMsimilarityrule(int? utcconversiontimezonecode = default(int?), int? statuscode = default(int?), string similarityruleidunique = default(string), int? ngramsize = default(int?), int? baseentitytypecode = default(int?), int? componentstate = default(int?), int? statecode = default(int?), string _modifiedonbehalfbyValue = default(string), string solutionid = default(string), string description = default(string), bool? excludeinactiverecords = default(bool?), string ruleconditionxml = default(string), string activerulefetchxml = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string similarityruleid = default(string), string baseentityname = default(string), decimal? exchangerate = default(decimal?), string introducedversion = default(string), int? importsequencenumber = default(int?), string fetchxmllist = default(string), string _transactioncurrencyidValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string name = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? maxkeywords = default(int?), string versionnumber = default(string), string _organizationidValue = default(string), bool? ismanaged = default(bool?), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string matchingentityname = default(string), int? matchingentitytypecode = default(int?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> similarityruleAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency))
         {
+            Utcconversiontimezonecode = utcconversiontimezonecode;
             Statuscode = statuscode;
-            Similarityruleid = similarityruleid;
             Similarityruleidunique = similarityruleidunique;
             Ngramsize = ngramsize;
             Baseentitytypecode = baseentitytypecode;
+            Componentstate = componentstate;
             Statecode = statecode;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Solutionid = solutionid;
+            Description = description;
             Excludeinactiverecords = excludeinactiverecords;
             Ruleconditionxml = ruleconditionxml;
-            Maxkeywords = maxkeywords;
             Activerulefetchxml = activerulefetchxml;
-            Exchangerate = exchangerate;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Overwritetime = overwritetime;
-            Name = name;
-            Componentstate = componentstate;
-            Overriddencreatedon = overriddencreatedon;
+            Similarityruleid = similarityruleid;
             Baseentityname = baseentityname;
-            Solutionid = solutionid;
+            Exchangerate = exchangerate;
             Introducedversion = introducedversion;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
             Importsequencenumber = importsequencenumber;
             Fetchxmllist = fetchxmllist;
             this._transactioncurrencyidValue = _transactioncurrencyidValue;
+            Overriddencreatedon = overriddencreatedon;
+            Name = name;
             Createdon = createdon;
-            Description = description;
+            Maxkeywords = maxkeywords;
             Versionnumber = versionnumber;
             this._organizationidValue = _organizationidValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Ismanaged = ismanaged;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             Modifiedon = modifiedon;
@@ -79,13 +79,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "similarityruleid")]
-        public string Similarityruleid { get; set; }
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -104,6 +104,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "componentstate")]
+        public int? Componentstate { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "statecode")]
         public int? Statecode { get; set; }
 
@@ -111,6 +116,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "solutionid")]
+        public string Solutionid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "description")]
+        public string Description { get; set; }
 
         /// <summary>
         /// </summary>
@@ -124,18 +139,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "maxkeywords")]
-        public int? Maxkeywords { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "activerulefetchxml")]
         public string Activerulefetchxml { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "exchangerate")]
-        public decimal? Exchangerate { get; set; }
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -144,18 +154,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "componentstate")]
-        public int? Componentstate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+        [JsonProperty(PropertyName = "similarityruleid")]
+        public string Similarityruleid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -164,18 +164,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "solutionid")]
-        public string Solutionid { get; set; }
+        [JsonProperty(PropertyName = "exchangerate")]
+        public decimal? Exchangerate { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "introducedversion")]
         public string Introducedversion { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -194,13 +189,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "description")]
-        public string Description { get; set; }
+        [JsonProperty(PropertyName = "maxkeywords")]
+        public int? Maxkeywords { get; set; }
 
         /// <summary>
         /// </summary>
@@ -211,11 +216,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
         public string _organizationidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>

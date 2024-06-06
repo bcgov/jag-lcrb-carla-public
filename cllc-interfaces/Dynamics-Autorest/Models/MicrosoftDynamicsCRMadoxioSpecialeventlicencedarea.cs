@@ -29,28 +29,27 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioSpecialeventlicencedarea class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioSpecialeventlicencedarea(int? adoxioSetting = default(int?), string _adoxioSpecialeventidValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string _owningbusinessunitValue = default(string), int? utcconversiontimezonecode = default(int?), int? adoxioLicencedareanumberofminors = default(int?), string _adoxioSpecialeventlocationidValue = default(string), string adoxioLicencedareadescription = default(string), string adoxioImportid = default(string), string adoxioSpecialeventlicencedareaid = default(string), string _owninguserValue = default(string), string _createdbyValue = default(string), string _owningteamValue = default(string), bool? adoxioMinorpresent = default(bool?), string _modifiedonbehalfbyValue = default(string), int? adoxioLicencedareamaxnumberofguests = default(int?), int? timezoneruleversionnumber = default(int?), int? statecode = default(int?), int? statuscode = default(int?), int? importsequencenumber = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string adoxioEventname = default(string), string versionnumber = default(string), string _owneridValue = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioSpecialeventlicencedareaSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioSpecialeventlicencedareaAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioSpecialeventlicencedareaMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioSpecialeventlicencedareaProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioSpecialeventlicencedareaBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioSpecialeventlicencedareaPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMadoxioSpecialevent adoxioSpecialEventId = default(MicrosoftDynamicsCRMadoxioSpecialevent), MicrosoftDynamicsCRMadoxioSpecialeventlocation adoxioSpecialEventLocationId = default(MicrosoftDynamicsCRMadoxioSpecialeventlocation), IList<MicrosoftDynamicsCRMadoxioSpecialeventschedule> adoxioSpecialeventareaEventschedules = default(IList<MicrosoftDynamicsCRMadoxioSpecialeventschedule>))
+        public MicrosoftDynamicsCRMadoxioSpecialeventlicencedarea(int? adoxioSetting = default(int?), string _createdbyValue = default(string), int? utcconversiontimezonecode = default(int?), string _createdonbehalfbyValue = default(string), string _owningbusinessunitValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? adoxioLicencedareanumberofminors = default(int?), string _adoxioSpecialeventlocationidValue = default(string), string adoxioLicencedareadescription = default(string), string adoxioSpecialeventlicencedareaid = default(string), string _owningteamValue = default(string), int? statuscode = default(int?), string _owninguserValue = default(string), string _modifiedonbehalfbyValue = default(string), bool? adoxioMinorpresent = default(bool?), int? adoxioLicencedareamaxnumberofguests = default(int?), int? timezoneruleversionnumber = default(int?), int? statecode = default(int?), string _adoxioSpecialeventidValue = default(string), int? importsequencenumber = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string adoxioEventname = default(string), string versionnumber = default(string), string _owneridValue = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string adoxioImportid = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioSpecialeventlicencedareaSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioSpecialeventlicencedareaAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioSpecialeventlicencedareaMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioSpecialeventlicencedareaProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioSpecialeventlicencedareaBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioSpecialeventlicencedareaPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMadoxioSpecialevent adoxioSpecialEventId = default(MicrosoftDynamicsCRMadoxioSpecialevent), MicrosoftDynamicsCRMadoxioSpecialeventlocation adoxioSpecialEventLocationId = default(MicrosoftDynamicsCRMadoxioSpecialeventlocation), IList<MicrosoftDynamicsCRMadoxioSpecialeventschedule> adoxioSpecialeventareaEventschedules = default(IList<MicrosoftDynamicsCRMadoxioSpecialeventschedule>))
         {
             AdoxioSetting = adoxioSetting;
-            this._adoxioSpecialeventidValue = _adoxioSpecialeventidValue;
-            Overriddencreatedon = overriddencreatedon;
+            this._createdbyValue = _createdbyValue;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             this._owningbusinessunitValue = _owningbusinessunitValue;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
+            Overriddencreatedon = overriddencreatedon;
             AdoxioLicencedareanumberofminors = adoxioLicencedareanumberofminors;
             this._adoxioSpecialeventlocationidValue = _adoxioSpecialeventlocationidValue;
             AdoxioLicencedareadescription = adoxioLicencedareadescription;
-            AdoxioImportid = adoxioImportid;
             AdoxioSpecialeventlicencedareaid = adoxioSpecialeventlicencedareaid;
-            this._owninguserValue = _owninguserValue;
-            this._createdbyValue = _createdbyValue;
             this._owningteamValue = _owningteamValue;
-            AdoxioMinorpresent = adoxioMinorpresent;
+            Statuscode = statuscode;
+            this._owninguserValue = _owninguserValue;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            AdoxioMinorpresent = adoxioMinorpresent;
             AdoxioLicencedareamaxnumberofguests = adoxioLicencedareamaxnumberofguests;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             Statecode = statecode;
-            Statuscode = statuscode;
+            this._adoxioSpecialeventidValue = _adoxioSpecialeventidValue;
             Importsequencenumber = importsequencenumber;
             Modifiedon = modifiedon;
             AdoxioEventname = adoxioEventname;
@@ -58,6 +57,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             this._owneridValue = _owneridValue;
             this._modifiedbyValue = _modifiedbyValue;
             Createdon = createdon;
+            AdoxioImportid = adoxioImportid;
             Createdby = createdby;
             Createdonbehalfby = createdonbehalfby;
             Modifiedby = modifiedby;
@@ -90,13 +90,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_specialeventid_value")]
-        public string _adoxioSpecialeventidValue { get; set; }
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -110,8 +110,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -130,23 +130,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_importid")]
-        public string AdoxioImportid { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_specialeventlicencedareaid")]
         public string AdoxioSpecialeventlicencedareaid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -155,13 +140,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_minorpresent")]
-        public bool? AdoxioMinorpresent { get; set; }
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owninguser_value")]
+        public string _owninguserValue { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_minorpresent")]
+        public bool? AdoxioMinorpresent { get; set; }
 
         /// <summary>
         /// </summary>
@@ -180,8 +175,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
+        [JsonProperty(PropertyName = "_adoxio_specialeventid_value")]
+        public string _adoxioSpecialeventidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -217,6 +212,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_importid")]
+        public string AdoxioImportid { get; set; }
 
         /// <summary>
         /// </summary>

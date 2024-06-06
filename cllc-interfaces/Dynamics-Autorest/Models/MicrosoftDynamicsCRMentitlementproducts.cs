@@ -29,17 +29,17 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMentitlementproducts class.
         /// </summary>
-        public MicrosoftDynamicsCRMentitlementproducts(int? importsequencenumber = default(int?), int? timezoneruleversionnumber = default(int?), string entitlementproductid = default(string), string name = default(string), string versionnumber = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string productid = default(string), int? utcconversiontimezonecode = default(int?), string entitlementid = default(string), IList<MicrosoftDynamicsCRMteam> entitlementproductsTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMasyncoperation> entitlementproductsAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> entitlementproductsMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> entitlementproductsBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> entitlementproductsPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>))
+        public MicrosoftDynamicsCRMentitlementproducts(string versionnumber = default(string), int? timezoneruleversionnumber = default(int?), int? utcconversiontimezonecode = default(int?), int? importsequencenumber = default(int?), string entitlementid = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string entitlementproductid = default(string), string productid = default(string), string name = default(string), IList<MicrosoftDynamicsCRMteam> entitlementproductsTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMasyncoperation> entitlementproductsAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> entitlementproductsMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> entitlementproductsBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> entitlementproductsPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>))
         {
-            Importsequencenumber = importsequencenumber;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
-            Entitlementproductid = entitlementproductid;
-            Name = name;
             Versionnumber = versionnumber;
-            Overriddencreatedon = overriddencreatedon;
-            Productid = productid;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
             Utcconversiontimezonecode = utcconversiontimezonecode;
+            Importsequencenumber = importsequencenumber;
             Entitlementid = entitlementid;
+            Overriddencreatedon = overriddencreatedon;
+            Entitlementproductid = entitlementproductid;
+            Productid = productid;
+            Name = name;
             EntitlementproductsTeams = entitlementproductsTeams;
             EntitlementproductsAsyncOperations = entitlementproductsAsyncOperations;
             EntitlementproductsMailboxTrackingFolders = entitlementproductsMailboxTrackingFolders;
@@ -55,8 +55,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -65,18 +65,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "entitlementproductid")]
-        public string Entitlementproductid { get; set; }
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "entitlementid")]
+        public string Entitlementid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -85,18 +85,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "entitlementproductid")]
+        public string Entitlementproductid { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "productid")]
         public string Productid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "entitlementid")]
-        public string Entitlementid { get; set; }
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
 
         /// <summary>
         /// </summary>
