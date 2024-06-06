@@ -34,11 +34,16 @@ mat-raised-button{
   max-width: 400px;
   margin: 40px 0px 40px -15px;
   padding: 45px;
-  background-color: rgba(56, 89, 138, 1);
+  background-color: #EFF3FC;
+  border: 3px solid #38598a;
   border-bottom: 3px solid #fcba19 !important;
   h2,
   p,li {
-      color: white;
+      color: black;
+  }
+
+  li,a {
+    color: #1A5A96;
   }
 
   h2 {
