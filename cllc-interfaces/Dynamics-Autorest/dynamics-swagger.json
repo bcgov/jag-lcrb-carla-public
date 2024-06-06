@@ -35423,6 +35423,9 @@
         "address1_addressid": {
           "type": "string"
         },
+        "adoxio_accounturls": {
+          "type": "string"
+        },
         "adoxio_legalinterestfinancialcapital": {
           "format": "int32",
           "type": "integer"
@@ -40000,9 +40003,6 @@
         "adoxio_jobnumber": {
           "type": "string"
         },
-        "adoxio_reasonforcancellation": {
-          "type": "string"
-        },
         "adoxio_email": {
           "type": "string"
         },
@@ -40169,6 +40169,9 @@
         "adoxio_datefileuploadfromportalnotified": {
           "format": "date-time",
           "type": "string"
+        },
+        "adoxio_cancellicence": {
+          "type": "boolean"
         },
         "adoxio_renewalfloorplan": {
           "format": "int32",
@@ -40349,6 +40352,9 @@
           "format": "int32",
           "type": "integer"
         },
+        "adoxio_suspendlicence": {
+          "type": "boolean"
+        },
         "adoxio_occupationcapacity": {
           "format": "int32",
           "type": "integer"
@@ -40400,6 +40406,9 @@
           "type": "string"
         },
         "adoxio_pin": {
+          "type": "string"
+        },
+        "adoxio_licencenumber": {
           "type": "string"
         },
         "adoxio_checklistfinintegrityreceived": {
@@ -41375,9 +41384,6 @@
         },
         "adoxio_dateappealed": {
           "format": "date-time",
-          "type": "string"
-        },
-        "adoxio_licencenumber": {
           "type": "string"
         },
         "adoxio_finaldecision": {
@@ -58029,9 +58035,9 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_autorenewalchangeconfirmation": {
-          "format": "int32",
-          "type": "integer"
+        "adoxio_suspendeddate": {
+          "format": "date-time",
+          "type": "string"
         },
         "adoxio_canattendeducationsessions": {
           "type": "boolean"
@@ -58109,6 +58115,10 @@
         },
         "adoxio_effectivemonthname": {
           "type": "string"
+        },
+        "adoxio_autorenewalchangeconfirmation": {
+          "format": "int32",
+          "type": "integer"
         },
         "adoxio_suspended": {
           "format": "int32",
@@ -58198,6 +58208,10 @@
         "adoxio_establishmentcontactname": {
           "type": "string"
         },
+        "adoxio_tporequestinprogress": {
+          "format": "int32",
+          "type": "integer"
+        },
         "statuscode": {
           "format": "int32",
           "type": "integer"
@@ -58245,9 +58259,9 @@
         "adoxio_licencesid": {
           "type": "string"
         },
-        "adoxio_tporequestinprogress": {
-          "format": "int32",
-          "type": "integer"
+        "adoxio_licencecanceldate": {
+          "format": "date-time",
+          "type": "string"
         },
         "adoxio_businessprogramaccountreferencenumber": {
           "type": "string"
