@@ -71,7 +71,12 @@
     <input class="form-control" style="max-width: 450px; min-width: 250px;" type="text" disabled
            [value]="account?.name || ''">
   </app-field>
-
+  <app-field label="Account URL(s)" [required]="false"
+             [valid]="form.get('businessProfile.accountUrls').valid || !form.get('businessProfile.accountUrls').touched"
+             errorMessage="Please enter valid Account URL(s) separated by commas without spaces (i.e. www.gov.bc.ca,justice.gov.bc.ca)">
+    <input class="form-control" style="width: 350px;" type="text"
+           formControlName="accountUrls">
+  </app-field>
   <app-field label="Business Number (9 digit number from the Canada Revenue Agency)" [required]="true"
              [valid]="form.get('businessProfile.businessNumber').valid || !form.get('businessProfile.businessNumber').touched"
              errorMessage="Please enter the business number (9 digits)" *ngIf="['Police'].indexOf(getBusinessTypeName()) == -1">
