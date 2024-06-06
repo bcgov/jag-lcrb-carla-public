@@ -27,29 +27,29 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMappconfiginstance class.
         /// </summary>
-        public MicrosoftDynamicsCRMappconfiginstance(string _createdbyValue = default(string), string _organizationidValue = default(string), string appconfiginstanceidunique = default(string), int? importsequencenumber = default(int?), string versionnumber = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string appconfiginstanceid = default(string), string _modifiedbyValue = default(string), string solutionid = default(string), string componenttype = default(string), string _appconfigmasteridValue = default(string), bool? ismanaged = default(bool?), int? componentstate = default(int?), string objectid = default(string), string appconfigidunique = default(string), string introducedversion = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string _appconfigidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string value = default(string), string _createdonbehalfbyValue = default(string), string _modifiedonbehalfbyValue = default(string), MicrosoftDynamicsCRMappconfigmaster appconfiginstanceAppconfigmaster = default(MicrosoftDynamicsCRMappconfigmaster), MicrosoftDynamicsCRMorganization organizationAppconfiginstanceAppconfiginstance = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser appconfiginstanceCreatedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMappconfig appconfiginstanceAppconfig = default(MicrosoftDynamicsCRMappconfig), MicrosoftDynamicsCRMsystemuser appconfiginstanceModifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser appconfiginstanceModifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser appconfiginstanceCreatedby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMappconfiginstance(string _createdbyValue = default(string), string introducedversion = default(string), string _organizationidValue = default(string), int? componentstate = default(int?), int? importsequencenumber = default(int?), string versionnumber = default(string), string appconfiginstanceid = default(string), string _modifiedbyValue = default(string), string solutionid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string componenttype = default(string), string _appconfigmasteridValue = default(string), bool? ismanaged = default(bool?), string objectid = default(string), string appconfigidunique = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string _appconfigidValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string value = default(string), string appconfiginstanceidunique = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string _modifiedonbehalfbyValue = default(string), MicrosoftDynamicsCRMappconfigmaster appconfiginstanceAppconfigmaster = default(MicrosoftDynamicsCRMappconfigmaster), MicrosoftDynamicsCRMorganization organizationAppconfiginstanceAppconfiginstance = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser appconfiginstanceCreatedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMappconfig appconfiginstanceAppconfig = default(MicrosoftDynamicsCRMappconfig), MicrosoftDynamicsCRMsystemuser appconfiginstanceModifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser appconfiginstanceModifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser appconfiginstanceCreatedby = default(MicrosoftDynamicsCRMsystemuser))
         {
             this._createdbyValue = _createdbyValue;
+            Introducedversion = introducedversion;
             this._organizationidValue = _organizationidValue;
-            Appconfiginstanceidunique = appconfiginstanceidunique;
+            Componentstate = componentstate;
             Importsequencenumber = importsequencenumber;
             Versionnumber = versionnumber;
-            Modifiedon = modifiedon;
             Appconfiginstanceid = appconfiginstanceid;
             this._modifiedbyValue = _modifiedbyValue;
             Solutionid = solutionid;
+            Createdon = createdon;
             Componenttype = componenttype;
             this._appconfigmasteridValue = _appconfigmasteridValue;
             Ismanaged = ismanaged;
-            Componentstate = componentstate;
             Objectid = objectid;
             Appconfigidunique = appconfigidunique;
-            Introducedversion = introducedversion;
             Overwritetime = overwritetime;
             this._appconfigidValue = _appconfigidValue;
-            Createdon = createdon;
             Overriddencreatedon = overriddencreatedon;
             Value = value;
+            Appconfiginstanceidunique = appconfiginstanceidunique;
+            Modifiedon = modifiedon;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             AppconfiginstanceAppconfigmaster = appconfiginstanceAppconfigmaster;
@@ -74,13 +74,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "introducedversion")]
+        public string Introducedversion { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
         public string _organizationidValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "appconfiginstanceidunique")]
-        public string Appconfiginstanceidunique { get; set; }
+        [JsonProperty(PropertyName = "componentstate")]
+        public int? Componentstate { get; set; }
 
         /// <summary>
         /// </summary>
@@ -91,11 +96,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
         public string Versionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -114,6 +114,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "componenttype")]
         public string Componenttype { get; set; }
 
@@ -129,11 +134,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "componentstate")]
-        public int? Componentstate { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "objectid")]
         public string Objectid { get; set; }
 
@@ -141,11 +141,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "appconfigidunique")]
         public string Appconfigidunique { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "introducedversion")]
-        public string Introducedversion { get; set; }
 
         /// <summary>
         /// </summary>
@@ -159,11 +154,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
@@ -171,6 +161,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "value")]
         public string Value { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "appconfiginstanceidunique")]
+        public string Appconfiginstanceidunique { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>

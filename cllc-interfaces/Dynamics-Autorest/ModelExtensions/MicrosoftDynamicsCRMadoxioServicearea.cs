@@ -1,4 +1,4 @@
-﻿namespace Gov.Lclb.Cllb.Interfaces.Models
+namespace Gov.Lclb.Cllb.Interfaces.Models
 {
     using Newtonsoft.Json;
 

@@ -96,6 +96,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IAnnualvolumes Annualvolumes { get; private set; }
 
         /// <summary>
+        /// Gets the IApplicationbpfdormancies.
+        /// </summary>
+        public virtual IApplicationbpfdormancies Applicationbpfdormancies { get; private set; }
+
+        /// <summary>
         /// Gets the IApplicationbpfv3s.
         /// </summary>
         public virtual IApplicationbpfv3s Applicationbpfv3s { get; private set; }
@@ -211,6 +216,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ICannabisproductadmins Cannabisproductadmins { get; private set; }
 
         /// <summary>
+        /// Gets the ICeprojects.
+        /// </summary>
+        public virtual ICeprojects Ceprojects { get; private set; }
+
+        /// <summary>
         /// Gets the ICitydistricts.
         /// </summary>
         public virtual ICitydistricts Citydistricts { get; private set; }
@@ -249,6 +259,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ICorporateroles.
         /// </summary>
         public virtual ICorporateroles Corporateroles { get; private set; }
+
+        /// <summary>
+        /// Gets the ICourthouselocations.
+        /// </summary>
+        public virtual ICourthouselocations Courthouselocations { get; private set; }
 
         /// <summary>
         /// Gets the ICustomautonumberdefinitions.
@@ -326,6 +341,21 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IExhibits Exhibits { get; private set; }
 
         /// <summary>
+        /// Gets the IExternalcontactadoxioexternalprofileset.
+        /// </summary>
+        public virtual IExternalcontactadoxioexternalprofileset Externalcontactadoxioexternalprofileset { get; private set; }
+
+        /// <summary>
+        /// Gets the IExternalcontacts.
+        /// </summary>
+        public virtual IExternalcontacts Externalcontacts { get; private set; }
+
+        /// <summary>
+        /// Gets the IExternalprofiles.
+        /// </summary>
+        public virtual IExternalprofiles Externalprofiles { get; private set; }
+
+        /// <summary>
         /// Gets the IFederalreportexports.
         /// </summary>
         public virtual IFederalreportexports Federalreportexports { get; private set; }
@@ -354,6 +384,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IHoursofservicesdefaults.
         /// </summary>
         public virtual IHoursofservicesdefaults Hoursofservicesdefaults { get; private set; }
+
+        /// <summary>
+        /// Gets the IImportedoutstandinginvoiceses.
+        /// </summary>
+        public virtual IImportedoutstandinginvoiceses Importedoutstandinginvoiceses { get; private set; }
 
         /// <summary>
         /// Gets the IIncidentadoxiolicencetypeset.
@@ -464,6 +499,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILicenseechangelogs.
         /// </summary>
         public virtual ILicenseechangelogs Licenseechangelogs { get; private set; }
+
+        /// <summary>
+        /// Gets the IListadoxioexternalcontactset.
+        /// </summary>
+        public virtual IListadoxioexternalcontactset Listadoxioexternalcontactset { get; private set; }
 
         /// <summary>
         /// Gets the ILoans.
@@ -646,6 +686,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ITerritories Territories { get; private set; }
 
         /// <summary>
+        /// Gets the ITestentities.
+        /// </summary>
+        public virtual ITestentities Testentities { get; private set; }
+
+        /// <summary>
         /// Gets the ITiedhouseassociations.
         /// </summary>
         public virtual ITiedhouseassociations Tiedhouseassociations { get; private set; }
@@ -654,6 +699,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ITiedhouseconnections.
         /// </summary>
         public virtual ITiedhouseconnections Tiedhouseconnections { get; private set; }
+
+        /// <summary>
+        /// Gets the IViolationtickets.
+        /// </summary>
+        public virtual IViolationtickets Violationtickets { get; private set; }
 
         /// <summary>
         /// Gets the IWitnesses.
@@ -977,6 +1027,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Adoxiolicencetypeadoxioinvestigationset = new Adoxiolicencetypeadoxioinvestigationset(this);
             Aliases = new Aliases(this);
             Annualvolumes = new Annualvolumes(this);
+            Applicationbpfdormancies = new Applicationbpfdormancies(this);
             Applicationbpfv3s = new Applicationbpfv3s(this);
             Applicationcrsbpfv4s = new Applicationcrsbpfv4s(this);
             Applicationinvoicehistories = new Applicationinvoicehistories(this);
@@ -1000,6 +1051,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Cannabisinventoryreports = new Cannabisinventoryreports(this);
             Cannabismonthlyreports = new Cannabismonthlyreports(this);
             Cannabisproductadmins = new Cannabisproductadmins(this);
+            Ceprojects = new Ceprojects(this);
             Citydistricts = new Citydistricts(this);
             Complaints = new Complaints(this);
             Complianceinvestigations = new Complianceinvestigations(this);
@@ -1008,6 +1060,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Contraventions = new Contraventions(this);
             Corporatehistorysummaries = new Corporatehistorysummaries(this);
             Corporateroles = new Corporateroles(this);
+            Courthouselocations = new Courthouselocations(this);
             Customautonumberdefinitions = new Customautonumberdefinitions(this);
             Customautonumberrequests = new Customautonumberrequests(this);
             Documentadmins = new Documentadmins(this);
@@ -1023,12 +1076,16 @@ namespace Gov.Lclb.Cllb.Interfaces
             Events = new Events(this);
             Eventschedules = new Eventschedules(this);
             Exhibits = new Exhibits(this);
+            Externalcontactadoxioexternalprofileset = new Externalcontactadoxioexternalprofileset(this);
+            Externalcontacts = new Externalcontacts(this);
+            Externalprofiles = new Externalprofiles(this);
             Federalreportexports = new Federalreportexports(this);
             Fiainvestigationlogs = new Fiainvestigationlogs(this);
             Formelementuploadfields = new Formelementuploadfields(this);
             Fundingsources = new Fundingsources(this);
             Hoursofservices = new Hoursofservices(this);
             Hoursofservicesdefaults = new Hoursofservicesdefaults(this);
+            Importedoutstandinginvoiceses = new Importedoutstandinginvoiceses(this);
             Incidentadoxiolicencetypeset = new Incidentadoxiolicencetypeset(this);
             Inspectioninspectorsset = new Inspectioninspectorsset(this);
             Inspectionformconfigurations = new Inspectionformconfigurations(this);
@@ -1051,6 +1108,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Licencetypes = new Licencetypes(this);
             Licencetypesapplicationtypesset = new Licencetypesapplicationtypesset(this);
             Licenseechangelogs = new Licenseechangelogs(this);
+            Listadoxioexternalcontactset = new Listadoxioexternalcontactset(this);
             Loans = new Loans(this);
             Localgovindigenousnations = new Localgovindigenousnations(this);
             Logins = new Logins(this);
@@ -1087,8 +1145,10 @@ namespace Gov.Lclb.Cllb.Interfaces
             Taxandaccountings = new Taxandaccountings(this);
             Termsconditionslimitationspresets = new Termsconditionslimitationspresets(this);
             Territories = new Territories(this);
+            Testentities = new Testentities(this);
             Tiedhouseassociations = new Tiedhouseassociations(this);
             Tiedhouseconnections = new Tiedhouseconnections(this);
+            Violationtickets = new Violationtickets(this);
             Witnesses = new Witnesses(this);
             Workerinvoicehistories = new Workerinvoicehistories(this);
             Workers = new Workers(this);

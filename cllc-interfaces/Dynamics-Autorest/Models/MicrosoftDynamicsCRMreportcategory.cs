@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMreportcategory class.
         /// </summary>
-        public MicrosoftDynamicsCRMreportcategory(System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), string versionnumber = default(string), string iscustomizable = default(string), bool? ismanaged = default(bool?), string reportcategoryid = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), string _createdonbehalfbyValue = default(string), string reportcategoryidunique = default(string), int? importsequencenumber = default(int?), string _owneridValue = default(string), decimal? exchangerate = default(decimal?), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string _reportidValue = default(string), int? componentstate = default(int?), string _transactioncurrencyidValue = default(string), int? timezoneruleversionnumber = default(int?), string owningbusinessunit = default(string), string solutionid = default(string), string owninguser = default(string), int? categorycode = default(int?), MicrosoftDynamicsCRMreport reportid = default(MicrosoftDynamicsCRMreport), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> reportcategoryPrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> reportCategorySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency))
+        public MicrosoftDynamicsCRMreportcategory(System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), string versionnumber = default(string), string iscustomizable = default(string), bool? ismanaged = default(bool?), string reportcategoryid = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string owninguser = default(string), string _modifiedbyValue = default(string), string _createdonbehalfbyValue = default(string), string reportcategoryidunique = default(string), int? importsequencenumber = default(int?), string _owneridValue = default(string), decimal? exchangerate = default(decimal?), int? categorycode = default(int?), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string _reportidValue = default(string), int? componentstate = default(int?), string _transactioncurrencyidValue = default(string), int? timezoneruleversionnumber = default(int?), string owningbusinessunit = default(string), string solutionid = default(string), MicrosoftDynamicsCRMreport reportid = default(MicrosoftDynamicsCRMreport), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> reportcategoryPrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> reportCategorySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency))
         {
             Modifiedon = modifiedon;
             Utcconversiontimezonecode = utcconversiontimezonecode;
@@ -38,12 +38,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Ismanaged = ismanaged;
             Reportcategoryid = reportcategoryid;
             Overwritetime = overwritetime;
+            Owninguser = owninguser;
             this._modifiedbyValue = _modifiedbyValue;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Reportcategoryidunique = reportcategoryidunique;
             Importsequencenumber = importsequencenumber;
             this._owneridValue = _owneridValue;
             Exchangerate = exchangerate;
+            Categorycode = categorycode;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Createdon = createdon;
             this._createdbyValue = _createdbyValue;
@@ -53,8 +55,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Timezoneruleversionnumber = timezoneruleversionnumber;
             Owningbusinessunit = owningbusinessunit;
             Solutionid = solutionid;
-            Owninguser = owninguser;
-            Categorycode = categorycode;
             Reportid = reportid;
             ReportcategoryPrincipalobjectattributeaccess = reportcategoryPrincipalobjectattributeaccess;
             Modifiedonbehalfby = modifiedonbehalfby;
@@ -108,6 +108,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "owninguser")]
+        public string Owninguser { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
 
@@ -135,6 +140,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "exchangerate")]
         public decimal? Exchangerate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "categorycode")]
+        public int? Categorycode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -180,16 +190,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "solutionid")]
         public string Solutionid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "owninguser")]
-        public string Owninguser { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "categorycode")]
-        public int? Categorycode { get; set; }
 
         /// <summary>
         /// </summary>

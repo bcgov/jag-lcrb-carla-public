@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMfieldsecurityprofile class.
         /// </summary>
-        public MicrosoftDynamicsCRMfieldsecurityprofile(string _modifiedbyValue = default(string), string versionnumber = default(string), string name = default(string), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? componentstate = default(int?), string description = default(string), string _organizationidValue = default(string), bool? ismanaged = default(bool?), string solutionid = default(string), string fieldsecurityprofileidunique = default(string), string fieldsecurityprofileid = default(string), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> fieldSecurityProfileSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsystemuser> systemuserprofilesAssociation = default(IList<MicrosoftDynamicsCRMsystemuser>), IList<MicrosoftDynamicsCRMfieldpermission> lkFieldpermissionFieldsecurityprofileid = default(IList<MicrosoftDynamicsCRMfieldpermission>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMteam> teamprofilesAssociation = default(IList<MicrosoftDynamicsCRMteam>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMfieldsecurityprofile(string _modifiedbyValue = default(string), string versionnumber = default(string), string name = default(string), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? componentstate = default(int?), string description = default(string), string _organizationidValue = default(string), bool? ismanaged = default(bool?), string solutionid = default(string), string fieldsecurityprofileidunique = default(string), string fieldsecurityprofileid = default(string), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> fieldSecurityProfileSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsystemuser> systemuserprofilesAssociation = default(IList<MicrosoftDynamicsCRMsystemuser>), IList<MicrosoftDynamicsCRMfieldpermission> lkFieldpermissionFieldsecurityprofileid = default(IList<MicrosoftDynamicsCRMfieldpermission>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMteam> teamprofilesAssociation = default(IList<MicrosoftDynamicsCRMteam>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsolution solutionFieldsecurityprofile = default(MicrosoftDynamicsCRMsolution))
         {
             this._modifiedbyValue = _modifiedbyValue;
             Versionnumber = versionnumber;
@@ -56,6 +56,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             TeamprofilesAssociation = teamprofilesAssociation;
             Modifiedby = modifiedby;
             Createdby = createdby;
+            SolutionFieldsecurityprofile = solutionFieldsecurityprofile;
             CustomInit();
         }
 
@@ -188,6 +189,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "createdby")]
         public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "solution_fieldsecurityprofile")]
+        public MicrosoftDynamicsCRMsolution SolutionFieldsecurityprofile { get; set; }
 
     }
 }

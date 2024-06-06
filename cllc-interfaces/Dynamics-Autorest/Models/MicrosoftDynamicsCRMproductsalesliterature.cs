@@ -29,17 +29,17 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMproductsalesliterature class.
         /// </summary>
-        public MicrosoftDynamicsCRMproductsalesliterature(int? utcconversiontimezonecode = default(int?), int? importsequencenumber = default(int?), string productsalesliteratureid = default(string), string productid = default(string), int? timezoneruleversionnumber = default(int?), string name = default(string), string versionnumber = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string salesliteratureid = default(string), IList<MicrosoftDynamicsCRMteam> productsalesliteratureTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMasyncoperation> productsalesliteratureAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> productsalesliteratureMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> productsalesliteratureBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> productsalesliteraturePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>))
+        public MicrosoftDynamicsCRMproductsalesliterature(int? importsequencenumber = default(int?), string versionnumber = default(string), string productid = default(string), int? timezoneruleversionnumber = default(int?), string name = default(string), string productsalesliteratureid = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string salesliteratureid = default(string), int? utcconversiontimezonecode = default(int?), IList<MicrosoftDynamicsCRMteam> productsalesliteratureTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMasyncoperation> productsalesliteratureAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> productsalesliteratureMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> productsalesliteratureBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> productsalesliteraturePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>))
         {
-            Utcconversiontimezonecode = utcconversiontimezonecode;
             Importsequencenumber = importsequencenumber;
-            Productsalesliteratureid = productsalesliteratureid;
+            Versionnumber = versionnumber;
             Productid = productid;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             Name = name;
-            Versionnumber = versionnumber;
+            Productsalesliteratureid = productsalesliteratureid;
             Overriddencreatedon = overriddencreatedon;
             Salesliteratureid = salesliteratureid;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
             ProductsalesliteratureTeams = productsalesliteratureTeams;
             ProductsalesliteratureAsyncOperations = productsalesliteratureAsyncOperations;
             ProductsalesliteratureMailboxTrackingFolders = productsalesliteratureMailboxTrackingFolders;
@@ -55,18 +55,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "productsalesliteratureid")]
-        public string Productsalesliteratureid { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -85,8 +80,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "productsalesliteratureid")]
+        public string Productsalesliteratureid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -97,6 +92,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "salesliteratureid")]
         public string Salesliteratureid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
         /// </summary>

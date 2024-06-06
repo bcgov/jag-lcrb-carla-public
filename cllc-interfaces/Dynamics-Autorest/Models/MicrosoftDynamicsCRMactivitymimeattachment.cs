@@ -31,32 +31,32 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMactivitymimeattachment class.
         /// </summary>
-        public MicrosoftDynamicsCRMactivitymimeattachment(int? componentstate = default(int?), string versionnumber = default(string), string _owneridValue = default(string), string subject = default(string), int? filesize = default(int?), bool? isfollowed = default(bool?), bool? ismanaged = default(bool?), string activitymimeattachmentid = default(string), string _owninguserValue = default(string), string attachmentcontentid = default(string), string _attachmentidValue = default(string), string objecttypecode = default(string), string _owningbusinessunitValue = default(string), string _objectidValue = default(string), string activitymimeattachmentidunique = default(string), string mimetype = default(string), string activitysubject = default(string), string solutionid = default(string), int? attachmentnumber = default(int?), string anonymouslink = default(string), string filename = default(string), string body = default(string), byte[] bodyBinary = default(byte[]), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), IList<MicrosoftDynamicsCRMsyncerror> activityMimeAttachmentSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMemail objectidEmail = default(MicrosoftDynamicsCRMemail), MicrosoftDynamicsCRMactivitypointer objectidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMtemplate objectidTemplate = default(MicrosoftDynamicsCRMtemplate), MicrosoftDynamicsCRMattachment attachmentid = default(MicrosoftDynamicsCRMattachment), MicrosoftDynamicsCRMappointment objectidAppointment = default(MicrosoftDynamicsCRMappointment), IList<MicrosoftDynamicsCRMasyncoperation> activityMimeAttachmentAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> activityMimeAttachmentBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>))
+        public MicrosoftDynamicsCRMactivitymimeattachment(int? componentstate = default(int?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string subject = default(string), string filename = default(string), string _owneridValue = default(string), string activitymimeattachmentidunique = default(string), string _owninguserValue = default(string), string versionnumber = default(string), int? filesize = default(int?), bool? ismanaged = default(bool?), string activitymimeattachmentid = default(string), string attachmentcontentid = default(string), string _attachmentidValue = default(string), string objecttypecode = default(string), string _owningbusinessunitValue = default(string), string _objectidValue = default(string), string mimetype = default(string), string solutionid = default(string), string activitysubject = default(string), int? attachmentnumber = default(int?), string anonymouslink = default(string), bool? isfollowed = default(bool?), string body = default(string), byte[] bodyBinary = default(byte[]), IList<MicrosoftDynamicsCRMsyncerror> activityMimeAttachmentSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMemail objectidEmail = default(MicrosoftDynamicsCRMemail), MicrosoftDynamicsCRMactivitypointer objectidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMtemplate objectidTemplate = default(MicrosoftDynamicsCRMtemplate), MicrosoftDynamicsCRMattachment attachmentid = default(MicrosoftDynamicsCRMattachment), MicrosoftDynamicsCRMappointment objectidAppointment = default(MicrosoftDynamicsCRMappointment), IList<MicrosoftDynamicsCRMasyncoperation> activityMimeAttachmentAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> activityMimeAttachmentBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>))
         {
             Componentstate = componentstate;
-            Versionnumber = versionnumber;
-            this._owneridValue = _owneridValue;
+            Overwritetime = overwritetime;
             Subject = subject;
+            Filename = filename;
+            this._owneridValue = _owneridValue;
+            Activitymimeattachmentidunique = activitymimeattachmentidunique;
+            this._owninguserValue = _owninguserValue;
+            Versionnumber = versionnumber;
             Filesize = filesize;
-            Isfollowed = isfollowed;
             Ismanaged = ismanaged;
             Activitymimeattachmentid = activitymimeattachmentid;
-            this._owninguserValue = _owninguserValue;
             Attachmentcontentid = attachmentcontentid;
             this._attachmentidValue = _attachmentidValue;
             Objecttypecode = objecttypecode;
             this._owningbusinessunitValue = _owningbusinessunitValue;
             this._objectidValue = _objectidValue;
-            Activitymimeattachmentidunique = activitymimeattachmentidunique;
             Mimetype = mimetype;
-            Activitysubject = activitysubject;
             Solutionid = solutionid;
+            Activitysubject = activitysubject;
             Attachmentnumber = attachmentnumber;
             Anonymouslink = anonymouslink;
-            Filename = filename;
+            Isfollowed = isfollowed;
             Body = body;
             BodyBinary = bodyBinary;
-            Overwritetime = overwritetime;
             ActivityMimeAttachmentSyncErrors = activityMimeAttachmentSyncErrors;
             ObjectidEmail = objectidEmail;
             ObjectidActivitypointer = objectidActivitypointer;
@@ -80,13 +80,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
+        [JsonProperty(PropertyName = "overwritetime")]
+        public System.DateTimeOffset? Overwritetime { get; set; }
 
         /// <summary>
         /// </summary>
@@ -95,13 +90,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "filesize")]
-        public int? Filesize { get; set; }
+        [JsonProperty(PropertyName = "filename")]
+        public string Filename { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "isfollowed")]
-        public bool? Isfollowed { get; set; }
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "activitymimeattachmentidunique")]
+        public string Activitymimeattachmentidunique { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owninguser_value")]
+        public string _owninguserValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "filesize")]
+        public int? Filesize { get; set; }
 
         /// <summary>
         /// </summary>
@@ -112,11 +127,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "activitymimeattachmentid")]
         public string Activitymimeattachmentid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -145,23 +155,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "activitymimeattachmentidunique")]
-        public string Activitymimeattachmentidunique { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "mimetype")]
         public string Mimetype { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "activitysubject")]
-        public string Activitysubject { get; set; }
+        [JsonProperty(PropertyName = "solutionid")]
+        public string Solutionid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "solutionid")]
-        public string Solutionid { get; set; }
+        [JsonProperty(PropertyName = "activitysubject")]
+        public string Activitysubject { get; set; }
 
         /// <summary>
         /// </summary>
@@ -175,8 +180,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "filename")]
-        public string Filename { get; set; }
+        [JsonProperty(PropertyName = "isfollowed")]
+        public bool? Isfollowed { get; set; }
 
         /// <summary>
         /// </summary>
@@ -188,11 +193,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         [JsonConverter(typeof(Base64UrlJsonConverter))]
         [JsonProperty(PropertyName = "body_binary")]
         public byte[] BodyBinary { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "overwritetime")]
-        public System.DateTimeOffset? Overwritetime { get; set; }
 
         /// <summary>
         /// </summary>

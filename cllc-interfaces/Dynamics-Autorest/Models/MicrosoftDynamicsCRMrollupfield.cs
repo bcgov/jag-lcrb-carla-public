@@ -29,27 +29,27 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMrollupfield
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMrollupfield(string goalattribute = default(string), string _metricidValue = default(string), string rollupfieldid = default(string), string sourceattribute = default(string), bool? isstateparententityattribute = default(bool?), string _createdbyValue = default(string), int? sourcestatus = default(int?), string dateattribute = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), string versionnumber = default(string), int? importsequencenumber = default(int?), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string sourceentity = default(string), int? timezoneruleversionnumber = default(int?), string entityfordateattribute = default(string), string _modifiedonbehalfbyValue = default(string), int? sourcestate = default(int?), string _organizationidValue = default(string), string _modifiedbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMmetric metricid = default(MicrosoftDynamicsCRMmetric), IList<MicrosoftDynamicsCRMprocesssession> rollupfieldProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMasyncoperation> rollupfieldAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMsyncerror> rollupFieldSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>))
+        public MicrosoftDynamicsCRMrollupfield(string goalattribute = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string rollupfieldid = default(string), string sourceattribute = default(string), string _createdbyValue = default(string), int? sourcestatus = default(int?), bool? isstateparententityattribute = default(bool?), int? utcconversiontimezonecode = default(int?), int? sourcestate = default(int?), string versionnumber = default(string), string dateattribute = default(string), int? importsequencenumber = default(int?), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _metricidValue = default(string), int? timezoneruleversionnumber = default(int?), string entityfordateattribute = default(string), string _modifiedonbehalfbyValue = default(string), string sourceentity = default(string), string _organizationidValue = default(string), string _modifiedbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMmetric metricid = default(MicrosoftDynamicsCRMmetric), IList<MicrosoftDynamicsCRMprocesssession> rollupfieldProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMasyncoperation> rollupfieldAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMsyncerror> rollupFieldSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>))
         {
             Goalattribute = goalattribute;
-            this._metricidValue = _metricidValue;
+            Createdon = createdon;
             Rollupfieldid = rollupfieldid;
             Sourceattribute = sourceattribute;
-            Isstateparententityattribute = isstateparententityattribute;
             this._createdbyValue = _createdbyValue;
             Sourcestatus = sourcestatus;
-            Dateattribute = dateattribute;
-            Createdon = createdon;
+            Isstateparententityattribute = isstateparententityattribute;
             Utcconversiontimezonecode = utcconversiontimezonecode;
+            Sourcestate = sourcestate;
             Versionnumber = versionnumber;
+            Dateattribute = dateattribute;
             Importsequencenumber = importsequencenumber;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Modifiedon = modifiedon;
-            Sourceentity = sourceentity;
+            this._metricidValue = _metricidValue;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             Entityfordateattribute = entityfordateattribute;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            Sourcestate = sourcestate;
+            Sourceentity = sourceentity;
             this._organizationidValue = _organizationidValue;
             this._modifiedbyValue = _modifiedbyValue;
             Createdby = createdby;
@@ -75,8 +75,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_metricid_value")]
-        public string _metricidValue { get; set; }
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -90,11 +90,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "isstateparententityattribute")]
-        public bool? Isstateparententityattribute { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
 
@@ -105,13 +100,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "dateattribute")]
-        public string Dateattribute { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
+        [JsonProperty(PropertyName = "isstateparententityattribute")]
+        public bool? Isstateparententityattribute { get; set; }
 
         /// <summary>
         /// </summary>
@@ -120,8 +110,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "sourcestate")]
+        public int? Sourcestate { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
         public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "dateattribute")]
+        public string Dateattribute { get; set; }
 
         /// <summary>
         /// </summary>
@@ -140,8 +140,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "sourceentity")]
-        public string Sourceentity { get; set; }
+        [JsonProperty(PropertyName = "_metricid_value")]
+        public string _metricidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -160,8 +160,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "sourcestate")]
-        public int? Sourcestate { get; set; }
+        [JsonProperty(PropertyName = "sourceentity")]
+        public string Sourceentity { get; set; }
 
         /// <summary>
         /// </summary>
