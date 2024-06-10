@@ -27,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMaciviewmapper
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMaciviewmapper(string _modifiedonbehalfbyValue = default(string), string versionnumber = default(string), string _modifiedbyValue = default(string), string _createdbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? statecode = default(int?), int? statuscode = default(int?), string _createdonbehalfbyValue = default(string), string viewname = default(string), string webapplicationendpoint = default(string), string _organizationidValue = default(string), string aciviewmapperid = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMaciviewmapper(string _modifiedonbehalfbyValue = default(string), string versionnumber = default(string), string _modifiedbyValue = default(string), string _createdbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? statecode = default(int?), string _organizationidValue = default(string), int? statuscode = default(int?), string _createdonbehalfbyValue = default(string), string viewname = default(string), string webapplicationendpoint = default(string), string aciviewmapperid = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
         {
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Versionnumber = versionnumber;
@@ -37,11 +37,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Utcconversiontimezonecode = utcconversiontimezonecode;
             Createdon = createdon;
             Statecode = statecode;
+            this._organizationidValue = _organizationidValue;
             Statuscode = statuscode;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Viewname = viewname;
             Webapplicationendpoint = webapplicationendpoint;
-            this._organizationidValue = _organizationidValue;
             Aciviewmapperid = aciviewmapperid;
             Createdby = createdby;
             Createdonbehalfby = createdonbehalfby;
@@ -98,6 +98,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
 
@@ -115,11 +120,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "webapplicationendpoint")]
         public string Webapplicationendpoint { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// </summary>

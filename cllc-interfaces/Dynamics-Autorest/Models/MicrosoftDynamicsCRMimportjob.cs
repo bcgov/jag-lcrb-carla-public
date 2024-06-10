@@ -27,27 +27,27 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMimportjob
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMimportjob(string importjobid = default(string), string _createdbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string name = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string importcontext = default(string), System.DateTimeOffset? completedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), decimal? progress = default(decimal?), string operationcontext = default(string), int? utcconversiontimezonecode = default(int?), string _organizationidValue = default(string), int? timezoneruleversionnumber = default(int?), string data = default(string), string solutionid = default(string), string solutionname = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? startedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMimportjob(System.DateTimeOffset? startedon = default(System.DateTimeOffset?), System.DateTimeOffset? completedon = default(System.DateTimeOffset?), string importjobid = default(string), string _modifiedonbehalfbyValue = default(string), string name = default(string), int? utcconversiontimezonecode = default(int?), int? timezoneruleversionnumber = default(int?), string importcontext = default(string), string _organizationidValue = default(string), string _modifiedbyValue = default(string), decimal? progress = default(decimal?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string operationcontext = default(string), string data = default(string), string solutionid = default(string), string solutionname = default(string), string _createdbyValue = default(string), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
         {
+            Startedon = startedon;
+            Completedon = completedon;
             Importjobid = importjobid;
-            this._createdbyValue = _createdbyValue;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Name = name;
-            Modifiedon = modifiedon;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
             Importcontext = importcontext;
-            Completedon = completedon;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            this._organizationidValue = _organizationidValue;
             this._modifiedbyValue = _modifiedbyValue;
             Progress = progress;
+            Createdon = createdon;
+            Modifiedon = modifiedon;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Operationcontext = operationcontext;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
-            this._organizationidValue = _organizationidValue;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
             Data = data;
             Solutionid = solutionid;
             Solutionname = solutionname;
-            Createdon = createdon;
-            Startedon = startedon;
+            this._createdbyValue = _createdbyValue;
             Organizationid = organizationid;
             Createdonbehalfby = createdonbehalfby;
             Modifiedonbehalfby = modifiedonbehalfby;
@@ -63,13 +63,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "importjobid")]
-        public string Importjobid { get; set; }
+        [JsonProperty(PropertyName = "startedon")]
+        public System.DateTimeOffset? Startedon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        [JsonProperty(PropertyName = "completedon")]
+        public System.DateTimeOffset? Completedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "importjobid")]
+        public string Importjobid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -83,8 +88,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -93,13 +103,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "completedon")]
-        public System.DateTimeOffset? Completedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -113,23 +118,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "operationcontext")]
         public string Operationcontext { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -148,13 +153,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "startedon")]
-        public System.DateTimeOffset? Startedon { get; set; }
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>

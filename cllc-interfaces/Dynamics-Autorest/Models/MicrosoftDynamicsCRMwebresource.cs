@@ -31,38 +31,38 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMwebresource
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMwebresource(System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string versionnumber = default(string), bool? isenabledformobileclient = default(bool?), int? componentstate = default(int?), string _modifiedonbehalfbyValue = default(string), string _modifiedbyValue = default(string), int? webresourcetype = default(int?), string ishidden = default(string), string description = default(string), string canbedeleted = default(string), string introducedversion = default(string), string content = default(string), byte[] contentBinary = default(byte[]), string _createdonbehalfbyValue = default(string), int? languagecode = default(int?), string contentjson = default(string), string _createdbyValue = default(string), string webresourceidunique = default(string), string webresourceid = default(string), string _organizationidValue = default(string), string iscustomizable = default(string), string dependencyxml = default(string), string solutionid = default(string), string silverlightversion = default(string), bool? ismanaged = default(bool?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), bool? isavailableformobileoffline = default(bool?), string displayname = default(string), string name = default(string), IList<MicrosoftDynamicsCRMsolution> solutionConfigurationWebresource = default(IList<MicrosoftDynamicsCRMsolution>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMuserqueryvisualization> webresourceUserqueryvisualizations = default(IList<MicrosoftDynamicsCRMuserqueryvisualization>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsavedqueryvisualization> webresourceSavedqueryvisualizations = default(IList<MicrosoftDynamicsCRMsavedqueryvisualization>), IList<MicrosoftDynamicsCRMtheme> lkThemeLogoid = default(IList<MicrosoftDynamicsCRMtheme>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMwebresource(System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string content = default(string), byte[] contentBinary = default(byte[]), string introducedversion = default(string), bool? isenabledformobileclient = default(bool?), string description = default(string), string webresourceidunique = default(string), string _modifiedonbehalfbyValue = default(string), int? webresourcetype = default(int?), string ishidden = default(string), string canbedeleted = default(string), int? componentstate = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? languagecode = default(int?), string contentjson = default(string), string name = default(string), bool? ismanaged = default(bool?), string _modifiedbyValue = default(string), string webresourceid = default(string), string _organizationidValue = default(string), string iscustomizable = default(string), string dependencyxml = default(string), string solutionid = default(string), string silverlightversion = default(string), string versionnumber = default(string), bool? isavailableformobileoffline = default(bool?), string displayname = default(string), string _createdbyValue = default(string), IList<MicrosoftDynamicsCRMsolution> solutionConfigurationWebresource = default(IList<MicrosoftDynamicsCRMsolution>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMuserqueryvisualization> webresourceUserqueryvisualizations = default(IList<MicrosoftDynamicsCRMuserqueryvisualization>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsavedqueryvisualization> webresourceSavedqueryvisualizations = default(IList<MicrosoftDynamicsCRMsavedqueryvisualization>), IList<MicrosoftDynamicsCRMtheme> lkThemeLogoid = default(IList<MicrosoftDynamicsCRMtheme>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Overwritetime = overwritetime;
-            Modifiedon = modifiedon;
-            Versionnumber = versionnumber;
-            Isenabledformobileclient = isenabledformobileclient;
-            Componentstate = componentstate;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._modifiedbyValue = _modifiedbyValue;
-            Webresourcetype = webresourcetype;
-            Ishidden = ishidden;
-            Description = description;
-            Canbedeleted = canbedeleted;
-            Introducedversion = introducedversion;
             Content = content;
             ContentBinary = contentBinary;
+            Introducedversion = introducedversion;
+            Isenabledformobileclient = isenabledformobileclient;
+            Description = description;
+            Webresourceidunique = webresourceidunique;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Webresourcetype = webresourcetype;
+            Ishidden = ishidden;
+            Canbedeleted = canbedeleted;
+            Componentstate = componentstate;
+            Createdon = createdon;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Modifiedon = modifiedon;
             Languagecode = languagecode;
             Contentjson = contentjson;
-            this._createdbyValue = _createdbyValue;
-            Webresourceidunique = webresourceidunique;
+            Name = name;
+            Ismanaged = ismanaged;
+            this._modifiedbyValue = _modifiedbyValue;
             Webresourceid = webresourceid;
             this._organizationidValue = _organizationidValue;
             Iscustomizable = iscustomizable;
             Dependencyxml = dependencyxml;
             Solutionid = solutionid;
             Silverlightversion = silverlightversion;
-            Ismanaged = ismanaged;
-            Createdon = createdon;
+            Versionnumber = versionnumber;
             Isavailableformobileoffline = isavailableformobileoffline;
             Displayname = displayname;
-            Name = name;
+            this._createdbyValue = _createdbyValue;
             SolutionConfigurationWebresource = solutionConfigurationWebresource;
             Organizationid = organizationid;
             Modifiedby = modifiedby;
@@ -87,13 +87,19 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
+        [JsonProperty(PropertyName = "content")]
+        public string Content { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        [JsonConverter(typeof(Base64UrlJsonConverter))]
+        [JsonProperty(PropertyName = "content_binary")]
+        public byte[] ContentBinary { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "introducedversion")]
+        public string Introducedversion { get; set; }
 
         /// <summary>
         /// </summary>
@@ -102,18 +108,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "componentstate")]
-        public int? Componentstate { get; set; }
+        [JsonProperty(PropertyName = "description")]
+        public string Description { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "webresourceidunique")]
+        public string Webresourceidunique { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -127,34 +133,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "description")]
-        public string Description { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "canbedeleted")]
         public string Canbedeleted { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "introducedversion")]
-        public string Introducedversion { get; set; }
+        [JsonProperty(PropertyName = "componentstate")]
+        public int? Componentstate { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "content")]
-        public string Content { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonConverter(typeof(Base64UrlJsonConverter))]
-        [JsonProperty(PropertyName = "content_binary")]
-        public byte[] ContentBinary { get; set; }
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -168,13 +168,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "webresourceidunique")]
-        public string Webresourceidunique { get; set; }
+        [JsonProperty(PropertyName = "ismanaged")]
+        public bool? Ismanaged { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -208,13 +213,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ismanaged")]
-        public bool? Ismanaged { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -228,8 +228,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>

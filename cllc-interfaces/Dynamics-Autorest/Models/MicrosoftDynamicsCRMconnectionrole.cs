@@ -29,29 +29,29 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMconnectionrole class.
         /// </summary>
-        public MicrosoftDynamicsCRMconnectionrole(string _organizationidValue = default(string), string versionnumber = default(string), int? statuscode = default(int?), int? componentstate = default(int?), int? importsequencenumber = default(int?), string description = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string name = default(string), string solutionid = default(string), string _modifiedonbehalfbyValue = default(string), int? category = default(int?), string _modifiedbyValue = default(string), int? statecode = default(int?), string iscustomizable = default(string), string connectionroleid = default(string), string connectionroleidunique = default(string), bool? ismanaged = default(bool?), string _createdonbehalfbyValue = default(string), string introducedversion = default(string), string _createdbyValue = default(string), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMprocesssession> connectionRoleProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> connectionRoleAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMconnection> connectionRoleConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMsyncerror> connectionRoleSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMconnection> connectionRoleConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnectionrole> connectionroleassociationAssociation = default(IList<MicrosoftDynamicsCRMconnectionrole>), IList<MicrosoftDynamicsCRMconnectionrole> connectionroleassociationAssociationReferenced = default(IList<MicrosoftDynamicsCRMconnectionrole>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
+        public MicrosoftDynamicsCRMconnectionrole(string _organizationidValue = default(string), string _modifiedonbehalfbyValue = default(string), int? importsequencenumber = default(int?), string description = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string iscustomizable = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string solutionid = default(string), string name = default(string), int? statuscode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), int? statecode = default(int?), string versionnumber = default(string), string connectionroleid = default(string), string connectionroleidunique = default(string), bool? ismanaged = default(bool?), string introducedversion = default(string), string _createdonbehalfbyValue = default(string), int? category = default(int?), int? componentstate = default(int?), string _createdbyValue = default(string), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMprocesssession> connectionRoleProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> connectionRoleAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMconnection> connectionRoleConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMsyncerror> connectionRoleSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMconnection> connectionRoleConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnectionrole> connectionroleassociationAssociation = default(IList<MicrosoftDynamicsCRMconnectionrole>), IList<MicrosoftDynamicsCRMconnectionrole> connectionroleassociationAssociationReferenced = default(IList<MicrosoftDynamicsCRMconnectionrole>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
         {
             this._organizationidValue = _organizationidValue;
-            Versionnumber = versionnumber;
-            Statuscode = statuscode;
-            Componentstate = componentstate;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Importsequencenumber = importsequencenumber;
             Description = description;
             Overwritetime = overwritetime;
-            Createdon = createdon;
+            Iscustomizable = iscustomizable;
             Modifiedon = modifiedon;
-            Name = name;
             Solutionid = solutionid;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            Category = category;
+            Name = name;
+            Statuscode = statuscode;
+            Createdon = createdon;
             this._modifiedbyValue = _modifiedbyValue;
             Statecode = statecode;
-            Iscustomizable = iscustomizable;
+            Versionnumber = versionnumber;
             Connectionroleid = connectionroleid;
             Connectionroleidunique = connectionroleidunique;
             Ismanaged = ismanaged;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Introducedversion = introducedversion;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Category = category;
+            Componentstate = componentstate;
             this._createdbyValue = _createdbyValue;
             Modifiedby = modifiedby;
             Createdby = createdby;
@@ -80,18 +80,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "componentstate")]
-        public int? Componentstate { get; set; }
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -110,8 +100,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
+        [JsonProperty(PropertyName = "iscustomizable")]
+        public string Iscustomizable { get; set; }
 
         /// <summary>
         /// </summary>
@@ -120,23 +110,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "solutionid")]
         public string Solutionid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "category")]
-        public int? Category { get; set; }
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -150,8 +140,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "iscustomizable")]
-        public string Iscustomizable { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -170,13 +160,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "introducedversion")]
+        public string Introducedversion { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "introducedversion")]
-        public string Introducedversion { get; set; }
+        [JsonProperty(PropertyName = "category")]
+        public int? Category { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "componentstate")]
+        public int? Componentstate { get; set; }
 
         /// <summary>
         /// </summary>

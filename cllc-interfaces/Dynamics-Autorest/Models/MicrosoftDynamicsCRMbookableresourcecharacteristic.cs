@@ -29,35 +29,35 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMbookableresourcecharacteristic class.
         /// </summary>
-        public MicrosoftDynamicsCRMbookableresourcecharacteristic(System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _owningbusinessunitValue = default(string), decimal? exchangerate = default(decimal?), string _createdbyValue = default(string), int? statecode = default(int?), int? timezoneruleversionnumber = default(int?), string _createdonbehalfbyValue = default(string), string processid = default(string), int? importsequencenumber = default(int?), string _owninguserValue = default(string), string _characteristicValue = default(string), string _modifiedbyValue = default(string), string stageid = default(string), string name = default(string), string _transactioncurrencyidValue = default(string), string bookableresourcecharacteristicid = default(string), int? statuscode = default(int?), string _owneridValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), string _ratingvalueValue = default(string), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _owningteamValue = default(string), string traversedpath = default(string), string versionnumber = default(string), string _resourceValue = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMduplicaterecord> bookableresourcecharacteristicDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> bookableresourcecharacteristicDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMannotation> bookableresourcecharacteristicAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMasyncoperation> bookableresourcecharacteristicAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMprocesssession> bookableresourcecharacteristicProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> bookableresourcecharacteristicBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> bookableresourcecharacteristicPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMbookableresource resource = default(MicrosoftDynamicsCRMbookableresource), MicrosoftDynamicsCRMcharacteristic characteristic = default(MicrosoftDynamicsCRMcharacteristic), MicrosoftDynamicsCRMratingvalue ratingValue = default(MicrosoftDynamicsCRMratingvalue), IList<MicrosoftDynamicsCRMteam> bookableresourcecharacteristicTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> bookableresourcecharacteristicMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMsyncerror> bookableResourceCharacteristicSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>))
+        public MicrosoftDynamicsCRMbookableresourcecharacteristic(System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), decimal? exchangerate = default(decimal?), string versionnumber = default(string), string _createdbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string _owningteamValue = default(string), string _owninguserValue = default(string), string _characteristicValue = default(string), string stageid = default(string), string traversedpath = default(string), string processid = default(string), int? importsequencenumber = default(int?), string name = default(string), string _transactioncurrencyidValue = default(string), string _resourceValue = default(string), string bookableresourcecharacteristicid = default(string), string _owningbusinessunitValue = default(string), int? timezoneruleversionnumber = default(int?), string _owneridValue = default(string), int? utcconversiontimezonecode = default(int?), string _ratingvalueValue = default(string), int? statuscode = default(int?), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? statecode = default(int?), string _modifiedbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMduplicaterecord> bookableresourcecharacteristicDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> bookableresourcecharacteristicDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMannotation> bookableresourcecharacteristicAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMasyncoperation> bookableresourcecharacteristicAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMprocesssession> bookableresourcecharacteristicProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> bookableresourcecharacteristicBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> bookableresourcecharacteristicPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMbookableresource resource = default(MicrosoftDynamicsCRMbookableresource), MicrosoftDynamicsCRMcharacteristic characteristic = default(MicrosoftDynamicsCRMcharacteristic), MicrosoftDynamicsCRMratingvalue ratingValue = default(MicrosoftDynamicsCRMratingvalue), IList<MicrosoftDynamicsCRMteam> bookableresourcecharacteristicTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> bookableresourcecharacteristicMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMsyncerror> bookableResourceCharacteristicSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>))
         {
             Modifiedon = modifiedon;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
             Exchangerate = exchangerate;
+            Versionnumber = versionnumber;
             this._createdbyValue = _createdbyValue;
-            Statecode = statecode;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
+            Overriddencreatedon = overriddencreatedon;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            Processid = processid;
-            Importsequencenumber = importsequencenumber;
+            this._owningteamValue = _owningteamValue;
             this._owninguserValue = _owninguserValue;
             this._characteristicValue = _characteristicValue;
-            this._modifiedbyValue = _modifiedbyValue;
             Stageid = stageid;
+            Traversedpath = traversedpath;
+            Processid = processid;
+            Importsequencenumber = importsequencenumber;
             Name = name;
             this._transactioncurrencyidValue = _transactioncurrencyidValue;
+            this._resourceValue = _resourceValue;
             Bookableresourcecharacteristicid = bookableresourcecharacteristicid;
-            Statuscode = statuscode;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
             this._owneridValue = _owneridValue;
-            Overriddencreatedon = overriddencreatedon;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             this._ratingvalueValue = _ratingvalueValue;
+            Statuscode = statuscode;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Createdon = createdon;
-            this._owningteamValue = _owningteamValue;
-            Traversedpath = traversedpath;
-            Versionnumber = versionnumber;
-            this._resourceValue = _resourceValue;
+            Statecode = statecode;
+            this._modifiedbyValue = _modifiedbyValue;
             Createdbyname = createdbyname;
             Createdonbehalfbyname = createdonbehalfbyname;
             Modifiedbyname = modifiedbyname;
@@ -95,13 +95,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
+        [JsonProperty(PropertyName = "exchangerate")]
+        public decimal? Exchangerate { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "exchangerate")]
-        public decimal? Exchangerate { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -110,13 +110,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -125,13 +120,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "processid")]
-        public string Processid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -145,13 +135,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        [JsonProperty(PropertyName = "stageid")]
+        public string Stageid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "stageid")]
-        public string Stageid { get; set; }
+        [JsonProperty(PropertyName = "traversedpath")]
+        public string Traversedpath { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "processid")]
+        public string Processid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -165,23 +165,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_resource_value")]
+        public string _resourceValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "bookableresourcecharacteristicid")]
         public string Bookableresourcecharacteristicid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
         public string _owneridValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -195,6 +200,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
 
@@ -205,23 +215,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "traversedpath")]
-        public string Traversedpath { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_resource_value")]
-        public string _resourceValue { get; set; }
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>

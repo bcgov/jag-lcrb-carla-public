@@ -29,34 +29,34 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioAnnualvolume class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioAnnualvolume(int? statecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? adoxioVolumedestroyed = default(int?), string versionnumber = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? adoxioDatesubmitted = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), string _owningteamValue = default(string), int? timezoneruleversionnumber = default(int?), string _modifiedbyValue = default(string), string _createdbyValue = default(string), string _owningbusinessunitValue = default(string), string _owneridValue = default(string), int? adoxioVolumeproduced = default(int?), string _modifiedonbehalfbyValue = default(string), string adoxioName = default(string), string _owninguserValue = default(string), string _adoxioLicenceValue = default(string), string adoxioCalendaryear = default(string), string adoxioAnnualvolumeid = default(string), int? importsequencenumber = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? adoxioCalendaryearint = default(int?), int? statuscode = default(int?), string _adoxioApplicationValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioAnnualvolumeSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioAnnualvolumeDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioAnnualvolumeDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioAnnualvolumeAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioAnnualvolumeMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioAnnualvolumeProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioAnnualvolumeBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioAnnualvolumePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMadoxioApplication adoxioApplication = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioLicences adoxioLicence = default(MicrosoftDynamicsCRMadoxioLicences))
+        public MicrosoftDynamicsCRMadoxioAnnualvolume(int? statecode = default(int?), int? adoxioVolumedestroyed = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? adoxioDatesubmitted = default(System.DateTimeOffset?), string _owneridValue = default(string), int? utcconversiontimezonecode = default(int?), string _owningteamValue = default(string), int? timezoneruleversionnumber = default(int?), string _modifiedbyValue = default(string), string _createdbyValue = default(string), string _modifiedonbehalfbyValue = default(string), int? adoxioVolumeproduced = default(int?), string _adoxioApplicationValue = default(string), string versionnumber = default(string), string adoxioName = default(string), string _owninguserValue = default(string), string _adoxioLicenceValue = default(string), int? importsequencenumber = default(int?), string adoxioAnnualvolumeid = default(string), string adoxioCalendaryear = default(string), int? adoxioCalendaryearint = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? statuscode = default(int?), string _owningbusinessunitValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioAnnualvolumeSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioAnnualvolumeDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioAnnualvolumeDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioAnnualvolumeAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioAnnualvolumeMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioAnnualvolumeProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioAnnualvolumeBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioAnnualvolumePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMadoxioApplication adoxioApplication = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioLicences adoxioLicence = default(MicrosoftDynamicsCRMadoxioLicences))
         {
             Statecode = statecode;
-            Modifiedon = modifiedon;
             AdoxioVolumedestroyed = adoxioVolumedestroyed;
-            Versionnumber = versionnumber;
+            Modifiedon = modifiedon;
+            Overriddencreatedon = overriddencreatedon;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             AdoxioDatesubmitted = adoxioDatesubmitted;
-            Createdon = createdon;
+            this._owneridValue = _owneridValue;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             this._owningteamValue = _owningteamValue;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             this._modifiedbyValue = _modifiedbyValue;
             this._createdbyValue = _createdbyValue;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
-            this._owneridValue = _owneridValue;
-            AdoxioVolumeproduced = adoxioVolumeproduced;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            AdoxioVolumeproduced = adoxioVolumeproduced;
+            this._adoxioApplicationValue = _adoxioApplicationValue;
+            Versionnumber = versionnumber;
             AdoxioName = adoxioName;
             this._owninguserValue = _owninguserValue;
             this._adoxioLicenceValue = _adoxioLicenceValue;
-            AdoxioCalendaryear = adoxioCalendaryear;
-            AdoxioAnnualvolumeid = adoxioAnnualvolumeid;
             Importsequencenumber = importsequencenumber;
-            Overriddencreatedon = overriddencreatedon;
+            AdoxioAnnualvolumeid = adoxioAnnualvolumeid;
+            AdoxioCalendaryear = adoxioCalendaryear;
             AdoxioCalendaryearint = adoxioCalendaryearint;
+            Createdon = createdon;
             Statuscode = statuscode;
-            this._adoxioApplicationValue = _adoxioApplicationValue;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
             Createdby = createdby;
             Createdonbehalfby = createdonbehalfby;
             Modifiedby = modifiedby;
@@ -90,18 +90,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_volumedestroyed")]
         public int? AdoxioVolumedestroyed { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -115,8 +115,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -145,13 +145,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -160,8 +155,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "_adoxio_application_value")]
+        public string _adoxioApplicationValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -180,8 +180,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_calendaryear")]
-        public string AdoxioCalendaryear { get; set; }
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -190,13 +190,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+        [JsonProperty(PropertyName = "adoxio_calendaryear")]
+        public string AdoxioCalendaryear { get; set; }
 
         /// <summary>
         /// </summary>
@@ -205,13 +200,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_application_value")]
-        public string _adoxioApplicationValue { get; set; }
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
         /// </summary>

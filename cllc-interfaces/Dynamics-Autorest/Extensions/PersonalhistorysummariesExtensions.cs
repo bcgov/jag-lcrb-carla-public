@@ -1,4 +1,4 @@
-﻿using Gov.Lclb.Cllb.Interfaces.Models;
+using Gov.Lclb.Cllb.Interfaces.Models;
 using Microsoft.Rest;
 using System.Collections.Generic;
 using System.Linq;

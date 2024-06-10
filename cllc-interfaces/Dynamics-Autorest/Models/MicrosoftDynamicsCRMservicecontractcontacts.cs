@@ -29,17 +29,17 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMservicecontractcontacts class.
         /// </summary>
-        public MicrosoftDynamicsCRMservicecontractcontacts(int? importsequencenumber = default(int?), int? timezoneruleversionnumber = default(int?), string versionnumber = default(string), int? utcconversiontimezonecode = default(int?), string name = default(string), string contactid = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string contractid = default(string), int? servicelevel = default(int?), string servicecontractcontactid = default(string), IList<MicrosoftDynamicsCRMteam> servicecontractcontactsTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMasyncoperation> servicecontractcontactsAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> servicecontractcontactsMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> servicecontractcontactsBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> servicecontractcontactsPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>))
+        public MicrosoftDynamicsCRMservicecontractcontacts(string versionnumber = default(string), int? importsequencenumber = default(int?), int? timezoneruleversionnumber = default(int?), int? servicelevel = default(int?), int? utcconversiontimezonecode = default(int?), string name = default(string), string contactid = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string contractid = default(string), string servicecontractcontactid = default(string), IList<MicrosoftDynamicsCRMteam> servicecontractcontactsTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMasyncoperation> servicecontractcontactsAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> servicecontractcontactsMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> servicecontractcontactsBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> servicecontractcontactsPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>))
         {
+            Versionnumber = versionnumber;
             Importsequencenumber = importsequencenumber;
             Timezoneruleversionnumber = timezoneruleversionnumber;
-            Versionnumber = versionnumber;
+            Servicelevel = servicelevel;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             Name = name;
             Contactid = contactid;
             Overriddencreatedon = overriddencreatedon;
             Contractid = contractid;
-            Servicelevel = servicelevel;
             Servicecontractcontactid = servicecontractcontactid;
             ServicecontractcontactsTeams = servicecontractcontactsTeams;
             ServicecontractcontactsAsyncOperations = servicecontractcontactsAsyncOperations;
@@ -56,6 +56,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
@@ -66,8 +71,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "servicelevel")]
+        public int? Servicelevel { get; set; }
 
         /// <summary>
         /// </summary>
@@ -93,11 +98,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "contractid")]
         public string Contractid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "servicelevel")]
-        public int? Servicelevel { get; set; }
 
         /// <summary>
         /// </summary>

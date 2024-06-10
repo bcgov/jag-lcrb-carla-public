@@ -25,17 +25,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// Initializes a new instance of the MicrosoftDynamicsCRMaudit class.
         /// </summary>
-        public MicrosoftDynamicsCRMaudit(int? operation = default(int?), string _regardingobjectidValue = default(string), int? action = default(int?), string useradditionalinfo = default(string), string attributemask = default(string), string _useridValue = default(string), string _callinguseridValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _objectidValue = default(string), string transactionid = default(string), string auditid = default(string), MicrosoftDynamicsCRMsystemuser callinguserid = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser userid = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMaudit(int? operation = default(int?), string attributemask = default(string), int? action = default(int?), string useradditionalinfo = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string objecttypecode = default(string), string _callinguseridValue = default(string), string _regardingobjectidValue = default(string), string _objectidValue = default(string), string _useridValue = default(string), string transactionid = default(string), string auditid = default(string), MicrosoftDynamicsCRMsystemuser callinguserid = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser userid = default(MicrosoftDynamicsCRMsystemuser))
         {
             Operation = operation;
-            this._regardingobjectidValue = _regardingobjectidValue;
+            Attributemask = attributemask;
             Action = action;
             Useradditionalinfo = useradditionalinfo;
-            Attributemask = attributemask;
-            this._useridValue = _useridValue;
-            this._callinguseridValue = _callinguseridValue;
             Createdon = createdon;
+            Objecttypecode = objecttypecode;
+            this._callinguseridValue = _callinguseridValue;
+            this._regardingobjectidValue = _regardingobjectidValue;
             this._objectidValue = _objectidValue;
+            this._useridValue = _useridValue;
             Transactionid = transactionid;
             Auditid = auditid;
             Callinguserid = callinguserid;
@@ -55,8 +56,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_regardingobjectid_value")]
-        public string _regardingobjectidValue { get; set; }
+        [JsonProperty(PropertyName = "attributemask")]
+        public string Attributemask { get; set; }
 
         /// <summary>
         /// </summary>
@@ -70,13 +71,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "attributemask")]
-        public string Attributemask { get; set; }
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_userid_value")]
-        public string _useridValue { get; set; }
+        [JsonProperty(PropertyName = "objecttypecode")]
+        public string Objecttypecode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -85,13 +86,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
+        [JsonProperty(PropertyName = "_regardingobjectid_value")]
+        public string _regardingobjectidValue { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_objectid_value")]
         public string _objectidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_userid_value")]
+        public string _useridValue { get; set; }
 
         /// <summary>
         /// </summary>
