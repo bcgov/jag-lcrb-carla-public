@@ -27,72 +27,72 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// Initializes a new instance of the MicrosoftDynamicsCRMsite class.
         /// </summary>
-        public MicrosoftDynamicsCRMsite(string address1Telephone2 = default(string), int? address2Utcoffset = default(int?), string address2Line2 = default(string), string address1Fax = default(string), string address1Country = default(string), int? address2Addresstypecode = default(int?), int? timezonecode = default(int?), string _modifiedbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string address2Name = default(string), string address2Stateorprovince = default(string), string address1Telephone3 = default(string), string address1County = default(string), string address1Postalcode = default(string), string address2Postofficebox = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string address1City = default(string), int? address1Utcoffset = default(int?), string address2City = default(string), string _createdbyValue = default(string), int? address1Addresstypecode = default(int?), int? utcconversiontimezonecode = default(int?), string address1Line1 = default(string), string address2Telephone3 = default(string), string address2Telephone2 = default(string), string name = default(string), string address1Line2 = default(string), decimal? address1Latitude = default(decimal?), string address2Upszone = default(string), string address1Line3 = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string organizationid = default(string), string siteid = default(string), int? address2Shippingmethodcode = default(int?), string address2Postalcode = default(string), string address2Line3 = default(string), string address1Stateorprovince = default(string), string address2Addressid = default(string), string versionnumber = default(string), string address1Upszone = default(string), string address2County = default(string), int? address1Shippingmethodcode = default(int?), decimal? address2Latitude = default(decimal?), string address2Country = default(string), string address2Telephone1 = default(string), string _createdonbehalfbyValue = default(string), string address1Telephone1 = default(string), string address1Name = default(string), decimal? address1Longitude = default(decimal?), string address1Addressid = default(string), string _modifiedonbehalfbyValue = default(string), int? timezoneruleversionnumber = default(int?), int? importsequencenumber = default(int?), string address2Fax = default(string), string emailaddress = default(string), string address2Line1 = default(string), decimal? address2Longitude = default(decimal?), string address1Postofficebox = default(string), MicrosoftDynamicsCRMorganization organizationidOrganization = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMteam> siteTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> siteMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> sitePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMactivitypointer> siteActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> siteAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMappointment> siteAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMemail> siteEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> siteFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMletter> siteLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMphonecall> sitePhoneCalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMtask> siteTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> siteRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMsocialactivity> siteSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMserviceappointment> siteServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMopportunityclose> siteOpportunityCloses = default(IList<MicrosoftDynamicsCRMopportunityclose>), IList<MicrosoftDynamicsCRMorderclose> siteOrderCloses = default(IList<MicrosoftDynamicsCRMorderclose>), IList<MicrosoftDynamicsCRMquoteclose> siteQuoteCloses = default(IList<MicrosoftDynamicsCRMquoteclose>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMprocesssession> siteProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMasyncoperation> siteAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> siteBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMequipment> siteEquipment = default(IList<MicrosoftDynamicsCRMequipment>), IList<MicrosoftDynamicsCRMsystemuser> siteSystemUsers = default(IList<MicrosoftDynamicsCRMsystemuser>), IList<MicrosoftDynamicsCRMsyncerror> siteSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMserviceappointment> siteServiceAppointments1 = default(IList<MicrosoftDynamicsCRMserviceappointment>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMresource> siteResources = default(IList<MicrosoftDynamicsCRMresource>))
+        public MicrosoftDynamicsCRMsite(string address1Telephone2 = default(string), string address1Postofficebox = default(string), string address1Fax = default(string), string address1Country = default(string), int? address2Addresstypecode = default(int?), int? timezonecode = default(int?), string address1Postalcode = default(string), string address2Line3 = default(string), string address2Line1 = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string address2Name = default(string), string address1Telephone3 = default(string), string emailaddress = default(string), string organizationid = default(string), int? address1Addresstypecode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string address1City = default(string), string address1Telephone1 = default(string), int? address1Utcoffset = default(int?), string address2City = default(string), string _createdbyValue = default(string), string address1Line1 = default(string), string address2Line2 = default(string), string address2Telephone3 = default(string), string address2Telephone2 = default(string), string address1Line2 = default(string), int? utcconversiontimezonecode = default(int?), string address2Upszone = default(string), string address1Line3 = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string address2Stateorprovince = default(string), decimal? address2Latitude = default(decimal?), string siteid = default(string), int? importsequencenumber = default(int?), string address2Postalcode = default(string), decimal? address1Latitude = default(decimal?), string address1Stateorprovince = default(string), string address2Addressid = default(string), string versionnumber = default(string), string address1Upszone = default(string), string address2County = default(string), int? address1Shippingmethodcode = default(int?), string address2Postofficebox = default(string), string address2Country = default(string), string address2Telephone1 = default(string), int? address2Shippingmethodcode = default(int?), string _createdonbehalfbyValue = default(string), string address1County = default(string), string name = default(string), string address1Name = default(string), decimal? address1Longitude = default(decimal?), string address1Addressid = default(string), string _modifiedonbehalfbyValue = default(string), int? timezoneruleversionnumber = default(int?), string _modifiedbyValue = default(string), string address2Fax = default(string), int? address2Utcoffset = default(int?), decimal? address2Longitude = default(decimal?), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> siteAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), MicrosoftDynamicsCRMorganization organizationidOrganization = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMteam> siteTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> siteMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> sitePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMactivitypointer> siteActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMappointment> siteAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMemail> siteEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> siteFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMletter> siteLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMphonecall> sitePhoneCalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMtask> siteTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> siteRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMsocialactivity> siteSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMserviceappointment> siteServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMprocesssession> siteProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMasyncoperation> siteAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> siteBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMequipment> siteEquipment = default(IList<MicrosoftDynamicsCRMequipment>), IList<MicrosoftDynamicsCRMsystemuser> siteSystemUsers = default(IList<MicrosoftDynamicsCRMsystemuser>), IList<MicrosoftDynamicsCRMsyncerror> siteSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMserviceappointment> siteServiceAppointments1 = default(IList<MicrosoftDynamicsCRMserviceappointment>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMresource> siteResources = default(IList<MicrosoftDynamicsCRMresource>), IList<MicrosoftDynamicsCRMopportunityclose> siteOpportunityCloses = default(IList<MicrosoftDynamicsCRMopportunityclose>), IList<MicrosoftDynamicsCRMorderclose> siteOrderCloses = default(IList<MicrosoftDynamicsCRMorderclose>), IList<MicrosoftDynamicsCRMquoteclose> siteQuoteCloses = default(IList<MicrosoftDynamicsCRMquoteclose>))
         {
             Address1Telephone2 = address1Telephone2;
-            Address2Utcoffset = address2Utcoffset;
-            Address2Line2 = address2Line2;
+            Address1Postofficebox = address1Postofficebox;
             Address1Fax = address1Fax;
             Address1Country = address1Country;
             Address2Addresstypecode = address2Addresstypecode;
             Timezonecode = timezonecode;
-            this._modifiedbyValue = _modifiedbyValue;
+            Address1Postalcode = address1Postalcode;
+            Address2Line3 = address2Line3;
+            Address2Line1 = address2Line1;
             Createdon = createdon;
             Address2Name = address2Name;
-            Address2Stateorprovince = address2Stateorprovince;
             Address1Telephone3 = address1Telephone3;
-            Address1County = address1County;
-            Address1Postalcode = address1Postalcode;
-            Address2Postofficebox = address2Postofficebox;
+            Emailaddress = emailaddress;
+            Organizationid = organizationid;
+            Address1Addresstypecode = address1Addresstypecode;
             Overriddencreatedon = overriddencreatedon;
             Address1City = address1City;
+            Address1Telephone1 = address1Telephone1;
             Address1Utcoffset = address1Utcoffset;
             Address2City = address2City;
             this._createdbyValue = _createdbyValue;
-            Address1Addresstypecode = address1Addresstypecode;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
             Address1Line1 = address1Line1;
+            Address2Line2 = address2Line2;
             Address2Telephone3 = address2Telephone3;
             Address2Telephone2 = address2Telephone2;
-            Name = name;
             Address1Line2 = address1Line2;
-            Address1Latitude = address1Latitude;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
             Address2Upszone = address2Upszone;
             Address1Line3 = address1Line3;
             Modifiedon = modifiedon;
-            Organizationid = organizationid;
+            Address2Stateorprovince = address2Stateorprovince;
+            Address2Latitude = address2Latitude;
             Siteid = siteid;
-            Address2Shippingmethodcode = address2Shippingmethodcode;
+            Importsequencenumber = importsequencenumber;
             Address2Postalcode = address2Postalcode;
-            Address2Line3 = address2Line3;
+            Address1Latitude = address1Latitude;
             Address1Stateorprovince = address1Stateorprovince;
             Address2Addressid = address2Addressid;
             Versionnumber = versionnumber;
             Address1Upszone = address1Upszone;
             Address2County = address2County;
             Address1Shippingmethodcode = address1Shippingmethodcode;
-            Address2Latitude = address2Latitude;
+            Address2Postofficebox = address2Postofficebox;
             Address2Country = address2Country;
             Address2Telephone1 = address2Telephone1;
+            Address2Shippingmethodcode = address2Shippingmethodcode;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            Address1Telephone1 = address1Telephone1;
+            Address1County = address1County;
+            Name = name;
             Address1Name = address1Name;
             Address1Longitude = address1Longitude;
             Address1Addressid = address1Addressid;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Timezoneruleversionnumber = timezoneruleversionnumber;
-            Importsequencenumber = importsequencenumber;
+            this._modifiedbyValue = _modifiedbyValue;
             Address2Fax = address2Fax;
-            Emailaddress = emailaddress;
-            Address2Line1 = address2Line1;
+            Address2Utcoffset = address2Utcoffset;
             Address2Longitude = address2Longitude;
-            Address1Postofficebox = address1Postofficebox;
+            SiteAbsScheduledprocessexecutions = siteAbsScheduledprocessexecutions;
             OrganizationidOrganization = organizationidOrganization;
             SiteTeams = siteTeams;
             SiteMailboxTrackingFolders = siteMailboxTrackingFolders;
             SitePrincipalObjectAttributeAccesses = sitePrincipalObjectAttributeAccesses;
             SiteActivityPointers = siteActivityPointers;
-            SiteAbsScheduledprocessexecutions = siteAbsScheduledprocessexecutions;
             SiteAppointments = siteAppointments;
             SiteEmails = siteEmails;
             SiteFaxes = siteFaxes;
@@ -102,9 +102,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             SiteRecurringAppointmentMasters = siteRecurringAppointmentMasters;
             SiteSocialActivities = siteSocialActivities;
             SiteServiceAppointments = siteServiceAppointments;
-            SiteOpportunityCloses = siteOpportunityCloses;
-            SiteOrderCloses = siteOrderCloses;
-            SiteQuoteCloses = siteQuoteCloses;
             Createdby = createdby;
             Createdonbehalfby = createdonbehalfby;
             Modifiedby = modifiedby;
@@ -117,6 +114,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             SiteServiceAppointments1 = siteServiceAppointments1;
             Modifiedonbehalfby = modifiedonbehalfby;
             SiteResources = siteResources;
+            SiteOpportunityCloses = siteOpportunityCloses;
+            SiteOrderCloses = siteOrderCloses;
+            SiteQuoteCloses = siteQuoteCloses;
             CustomInit();
         }
 
@@ -132,13 +132,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address2_utcoffset")]
-        public int? Address2Utcoffset { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_line2")]
-        public string Address2Line2 { get; set; }
+        [JsonProperty(PropertyName = "address1_postofficebox")]
+        public string Address1Postofficebox { get; set; }
 
         /// <summary>
         /// </summary>
@@ -162,8 +157,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        [JsonProperty(PropertyName = "address1_postalcode")]
+        public string Address1Postalcode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_line3")]
+        public string Address2Line3 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_line1")]
+        public string Address2Line1 { get; set; }
 
         /// <summary>
         /// </summary>
@@ -177,28 +182,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address2_stateorprovince")]
-        public string Address2Stateorprovince { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "address1_telephone3")]
         public string Address1Telephone3 { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address1_county")]
-        public string Address1County { get; set; }
+        [JsonProperty(PropertyName = "emailaddress")]
+        public string Emailaddress { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address1_postalcode")]
-        public string Address1Postalcode { get; set; }
+        [JsonProperty(PropertyName = "organizationid")]
+        public string Organizationid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address2_postofficebox")]
-        public string Address2Postofficebox { get; set; }
+        [JsonProperty(PropertyName = "address1_addresstypecode")]
+        public int? Address1Addresstypecode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -209,6 +209,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "address1_city")]
         public string Address1City { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address1_telephone1")]
+        public string Address1Telephone1 { get; set; }
 
         /// <summary>
         /// </summary>
@@ -227,18 +232,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address1_addresstypecode")]
-        public int? Address1Addresstypecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "address1_line1")]
         public string Address1Line1 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_line2")]
+        public string Address2Line2 { get; set; }
 
         /// <summary>
         /// </summary>
@@ -252,18 +252,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "address1_line2")]
         public string Address1Line2 { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address1_latitude")]
-        public decimal? Address1Latitude { get; set; }
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -282,8 +277,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "organizationid")]
-        public string Organizationid { get; set; }
+        [JsonProperty(PropertyName = "address2_stateorprovince")]
+        public string Address2Stateorprovince { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "address2_latitude")]
+        public decimal? Address2Latitude { get; set; }
 
         /// <summary>
         /// </summary>
@@ -292,8 +292,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address2_shippingmethodcode")]
-        public int? Address2Shippingmethodcode { get; set; }
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -302,8 +302,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address2_line3")]
-        public string Address2Line3 { get; set; }
+        [JsonProperty(PropertyName = "address1_latitude")]
+        public decimal? Address1Latitude { get; set; }
 
         /// <summary>
         /// </summary>
@@ -337,8 +337,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address2_latitude")]
-        public decimal? Address2Latitude { get; set; }
+        [JsonProperty(PropertyName = "address2_postofficebox")]
+        public string Address2Postofficebox { get; set; }
 
         /// <summary>
         /// </summary>
@@ -352,13 +352,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "address2_shippingmethodcode")]
+        public int? Address2Shippingmethodcode { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address1_telephone1")]
-        public string Address1Telephone1 { get; set; }
+        [JsonProperty(PropertyName = "address1_county")]
+        public string Address1County { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
 
         /// <summary>
         /// </summary>
@@ -387,8 +397,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -397,13 +407,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "emailaddress")]
-        public string Emailaddress { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "address2_line1")]
-        public string Address2Line1 { get; set; }
+        [JsonProperty(PropertyName = "address2_utcoffset")]
+        public int? Address2Utcoffset { get; set; }
 
         /// <summary>
         /// </summary>
@@ -412,8 +417,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address1_postofficebox")]
-        public string Address1Postofficebox { get; set; }
+        [JsonProperty(PropertyName = "site_abs_scheduledprocessexecutions")]
+        public IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> SiteAbsScheduledprocessexecutions { get; set; }
 
         /// <summary>
         /// </summary>
@@ -439,11 +444,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "site_ActivityPointers")]
         public IList<MicrosoftDynamicsCRMactivitypointer> SiteActivityPointers { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "site_abs_scheduledprocessexecutions")]
-        public IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> SiteAbsScheduledprocessexecutions { get; set; }
 
         /// <summary>
         /// </summary>
@@ -489,21 +489,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "site_ServiceAppointments")]
         public IList<MicrosoftDynamicsCRMserviceappointment> SiteServiceAppointments { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "site_OpportunityCloses")]
-        public IList<MicrosoftDynamicsCRMopportunityclose> SiteOpportunityCloses { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "site_OrderCloses")]
-        public IList<MicrosoftDynamicsCRMorderclose> SiteOrderCloses { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "site_QuoteCloses")]
-        public IList<MicrosoftDynamicsCRMquoteclose> SiteQuoteCloses { get; set; }
 
         /// <summary>
         /// </summary>
@@ -564,6 +549,21 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "site_resources")]
         public IList<MicrosoftDynamicsCRMresource> SiteResources { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "site_OpportunityCloses")]
+        public IList<MicrosoftDynamicsCRMopportunityclose> SiteOpportunityCloses { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "site_OrderCloses")]
+        public IList<MicrosoftDynamicsCRMorderclose> SiteOrderCloses { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "site_QuoteCloses")]
+        public IList<MicrosoftDynamicsCRMquoteclose> SiteQuoteCloses { get; set; }
 
     }
 }

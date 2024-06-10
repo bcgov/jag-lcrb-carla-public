@@ -29,23 +29,21 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMleadaddress
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMleadaddress(string _createdbyValue = default(string), decimal? exchangerate = default(decimal?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string line1 = default(string), string stateorprovince = default(string), int? utcconversiontimezonecode = default(int?), string upszone = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), int? timezoneruleversionnumber = default(int?), string name = default(string), int? utcoffset = default(int?), int? addressnumber = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _parentidValue = default(string), string postofficebox = default(string), string telephone2 = default(string), string line2 = default(string), string _createdonbehalfbyValue = default(string), string telephone3 = default(string), string telephone1 = default(string), string fax = default(string), string composite = default(string), string leadaddressid = default(string), string line3 = default(string), int? addresstypecode = default(int?), int? shippingmethodcode = default(int?), string county = default(string), string versionnumber = default(string), string _transactioncurrencyidValue = default(string), string _modifiedonbehalfbyValue = default(string), decimal? longitude = default(decimal?), string city = default(string), int? importsequencenumber = default(int?), string postalcode = default(string), decimal? latitude = default(decimal?), string country = default(string), IList<MicrosoftDynamicsCRMteam> leadaddressTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMasyncoperation> leadaddressAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> leadaddressMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> leadaddressBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> leadaddressPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMsyncerror> leadAddressSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMlead parentid = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency))
+        public MicrosoftDynamicsCRMleadaddress(string _createdbyValue = default(string), decimal? exchangerate = default(decimal?), string line1 = default(string), string stateorprovince = default(string), int? utcconversiontimezonecode = default(int?), string upszone = default(string), string county = default(string), int? timezoneruleversionnumber = default(int?), string name = default(string), int? utcoffset = default(int?), int? addressnumber = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string postofficebox = default(string), string telephone2 = default(string), string line2 = default(string), string _createdonbehalfbyValue = default(string), string telephone3 = default(string), string telephone1 = default(string), string fax = default(string), string leadaddressid = default(string), string postalcode = default(string), string composite = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? addresstypecode = default(int?), int? shippingmethodcode = default(int?), string versionnumber = default(string), string _transactioncurrencyidValue = default(string), string _modifiedbyValue = default(string), decimal? longitude = default(decimal?), string city = default(string), int? importsequencenumber = default(int?), string line3 = default(string), decimal? latitude = default(decimal?), string _parentidValue = default(string), string country = default(string), IList<MicrosoftDynamicsCRMteam> leadaddressTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMasyncoperation> leadaddressAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> leadaddressMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> leadaddressBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> leadaddressPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMsyncerror> leadAddressSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMlead parentid = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency))
         {
             this._createdbyValue = _createdbyValue;
             Exchangerate = exchangerate;
-            Createdon = createdon;
             Line1 = line1;
             Stateorprovince = stateorprovince;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             Upszone = upszone;
-            Overriddencreatedon = overriddencreatedon;
-            this._modifiedbyValue = _modifiedbyValue;
+            County = county;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             Name = name;
             Utcoffset = utcoffset;
             Addressnumber = addressnumber;
             Modifiedon = modifiedon;
-            this._parentidValue = _parentidValue;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Postofficebox = postofficebox;
             Telephone2 = telephone2;
             Line2 = line2;
@@ -53,20 +51,22 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Telephone3 = telephone3;
             Telephone1 = telephone1;
             Fax = fax;
-            Composite = composite;
             Leadaddressid = leadaddressid;
-            Line3 = line3;
+            Postalcode = postalcode;
+            Composite = composite;
+            Overriddencreatedon = overriddencreatedon;
+            Createdon = createdon;
             Addresstypecode = addresstypecode;
             Shippingmethodcode = shippingmethodcode;
-            County = county;
             Versionnumber = versionnumber;
             this._transactioncurrencyidValue = _transactioncurrencyidValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            this._modifiedbyValue = _modifiedbyValue;
             Longitude = longitude;
             City = city;
             Importsequencenumber = importsequencenumber;
-            Postalcode = postalcode;
+            Line3 = line3;
             Latitude = latitude;
+            this._parentidValue = _parentidValue;
             Country = country;
             LeadaddressTeams = leadaddressTeams;
             LeadaddressAsyncOperations = leadaddressAsyncOperations;
@@ -100,11 +100,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "line1")]
         public string Line1 { get; set; }
 
@@ -125,13 +120,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        [JsonProperty(PropertyName = "county")]
+        public string County { get; set; }
 
         /// <summary>
         /// </summary>
@@ -160,8 +150,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_parentid_value")]
-        public string _parentidValue { get; set; }
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -200,18 +190,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "composite")]
-        public string Composite { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "leadaddressid")]
         public string Leadaddressid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "line3")]
-        public string Line3 { get; set; }
+        [JsonProperty(PropertyName = "postalcode")]
+        public string Postalcode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "composite")]
+        public string Composite { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -225,11 +225,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "county")]
-        public string County { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
         public string Versionnumber { get; set; }
 
@@ -240,8 +235,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -260,13 +255,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "postalcode")]
-        public string Postalcode { get; set; }
+        [JsonProperty(PropertyName = "line3")]
+        public string Line3 { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "latitude")]
         public decimal? Latitude { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_parentid_value")]
+        public string _parentidValue { get; set; }
 
         /// <summary>
         /// </summary>

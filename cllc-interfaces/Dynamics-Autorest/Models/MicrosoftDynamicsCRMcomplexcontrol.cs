@@ -27,20 +27,20 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMcomplexcontrol class.
         /// </summary>
-        public MicrosoftDynamicsCRMcomplexcontrol(string versionnumber = default(string), string _organizationidValue = default(string), string complexcontrolid = default(string), bool? ismanaged = default(bool?), int? version = default(int?), string name = default(string), int? componentstate = default(int?), int? type = default(int?), string complexcontrolxml = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string introducedversion = default(string), string complexcontrolidunique = default(string), string solutionid = default(string), string description = default(string), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
+        public MicrosoftDynamicsCRMcomplexcontrol(int? componentstate = default(int?), string versionnumber = default(string), string name = default(string), string complexcontrolid = default(string), bool? ismanaged = default(bool?), int? version = default(int?), string complexcontrolidunique = default(string), int? type = default(int?), string _organizationidValue = default(string), string complexcontrolxml = default(string), string introducedversion = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string solutionid = default(string), string description = default(string), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
         {
+            Componentstate = componentstate;
             Versionnumber = versionnumber;
-            this._organizationidValue = _organizationidValue;
+            Name = name;
             Complexcontrolid = complexcontrolid;
             Ismanaged = ismanaged;
             Version = version;
-            Name = name;
-            Componentstate = componentstate;
-            Type = type;
-            Complexcontrolxml = complexcontrolxml;
-            Overwritetime = overwritetime;
-            Introducedversion = introducedversion;
             Complexcontrolidunique = complexcontrolidunique;
+            Type = type;
+            this._organizationidValue = _organizationidValue;
+            Complexcontrolxml = complexcontrolxml;
+            Introducedversion = introducedversion;
+            Overwritetime = overwritetime;
             Solutionid = solutionid;
             Description = description;
             Organizationid = organizationid;
@@ -54,13 +54,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "componentstate")]
+        public int? Componentstate { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
         public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
 
         /// <summary>
         /// </summary>
@@ -79,13 +84,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "componentstate")]
-        public int? Componentstate { get; set; }
+        [JsonProperty(PropertyName = "complexcontrolidunique")]
+        public string Complexcontrolidunique { get; set; }
 
         /// <summary>
         /// </summary>
@@ -94,13 +94,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "complexcontrolxml")]
-        public string Complexcontrolxml { get; set; }
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "overwritetime")]
-        public System.DateTimeOffset? Overwritetime { get; set; }
+        [JsonProperty(PropertyName = "complexcontrolxml")]
+        public string Complexcontrolxml { get; set; }
 
         /// <summary>
         /// </summary>
@@ -109,8 +109,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "complexcontrolidunique")]
-        public string Complexcontrolidunique { get; set; }
+        [JsonProperty(PropertyName = "overwritetime")]
+        public System.DateTimeOffset? Overwritetime { get; set; }
 
         /// <summary>
         /// </summary>

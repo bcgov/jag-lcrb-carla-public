@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMqueueitem
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMqueueitem(string _transactioncurrencyidValue = default(string), string _workeridValue = default(string), string _createdbyValue = default(string), string _modifiedbyValue = default(string), string _owningbusinessunitValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), string _modifiedonbehalfbyValue = default(string), string versionnumber = default(string), string _queueidValue = default(string), int? statecode = default(int?), System.DateTimeOffset? enteredon = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _owneridValue = default(string), System.DateTimeOffset? adoxioPaymentreceiveddate = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), string queueitemid = default(string), int? statuscode = default(int?), string _objectidValue = default(string), System.DateTimeOffset? workeridmodifiedon = default(System.DateTimeOffset?), string _owninguserValue = default(string), decimal? exchangerate = default(decimal?), int? timezoneruleversionnumber = default(int?), string _createdonbehalfbyValue = default(string), string title = default(string), int? objecttypecode = default(int?), string _organizationidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMknowledgearticle objectidKnowledgearticle = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMabsScheduledprocessexecution objectidAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMabsScheduledprocessexecution), MicrosoftDynamicsCRMadoxioApplication objectidAdoxioApplication = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioInvestigation objectidAdoxioInvestigation = default(MicrosoftDynamicsCRMadoxioInvestigation), MicrosoftDynamicsCRMadoxioWorker objectidAdoxioWorker = default(MicrosoftDynamicsCRMadoxioWorker), MicrosoftDynamicsCRMadoxioComplaint objectidAdoxioComplaint = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioAuctionpermit objectidAdoxioAuctionpermit = default(MicrosoftDynamicsCRMadoxioAuctionpermit), IList<MicrosoftDynamicsCRMprocesssession> queueItemProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMappointment objectidAppointment = default(MicrosoftDynamicsCRMappointment), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcampaignactivity objectidCampaignactivity = default(MicrosoftDynamicsCRMcampaignactivity), MicrosoftDynamicsCRMsystemuser workeridSystemuser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMactivitypointer objectidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMqueue queueid = default(MicrosoftDynamicsCRMqueue), MicrosoftDynamicsCRMincident objectidIncident = default(MicrosoftDynamicsCRMincident), IList<MicrosoftDynamicsCRMasyncoperation> queueItemAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMteam workeridTeam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMfax objectidFax = default(MicrosoftDynamicsCRMfax), MicrosoftDynamicsCRMrecurringappointmentmaster objectidRecurringappointmentmaster = default(MicrosoftDynamicsCRMrecurringappointmentmaster), IList<MicrosoftDynamicsCRMsyncerror> queueItemSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcampaignresponse objectidCampaignresponse = default(MicrosoftDynamicsCRMcampaignresponse), MicrosoftDynamicsCRMserviceappointment objectidServiceappointment = default(MicrosoftDynamicsCRMserviceappointment), MicrosoftDynamicsCRMletter objectidLetter = default(MicrosoftDynamicsCRMletter), MicrosoftDynamicsCRMsocialactivity objectidSocialactivity = default(MicrosoftDynamicsCRMsocialactivity), MicrosoftDynamicsCRMphonecall objectidPhonecall = default(MicrosoftDynamicsCRMphonecall), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMtask objectidTask = default(MicrosoftDynamicsCRMtask), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> queueitemPrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMbulkdeletefailure> queueItemBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMemail objectidEmail = default(MicrosoftDynamicsCRMemail), MicrosoftDynamicsCRMbulkoperation objectidBulkoperation = default(MicrosoftDynamicsCRMbulkoperation), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMqueueitem(string _transactioncurrencyidValue = default(string), string _workeridValue = default(string), string _createdbyValue = default(string), string _modifiedbyValue = default(string), string _owningbusinessunitValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? workeridmodifiedon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string versionnumber = default(string), int? utcconversiontimezonecode = default(int?), string _queueidValue = default(string), int? statecode = default(int?), System.DateTimeOffset? enteredon = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _owneridValue = default(string), int? importsequencenumber = default(int?), string queueitemid = default(string), int? statuscode = default(int?), string _objectidValue = default(string), string _owninguserValue = default(string), decimal? exchangerate = default(decimal?), int? timezoneruleversionnumber = default(int?), string _createdonbehalfbyValue = default(string), string title = default(string), System.DateTimeOffset? adoxioPaymentreceiveddate = default(System.DateTimeOffset?), int? objecttypecode = default(int?), string _organizationidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMknowledgearticle objectidKnowledgearticle = default(MicrosoftDynamicsCRMknowledgearticle), IList<MicrosoftDynamicsCRMprocesssession> queueItemProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMappointment objectidAppointment = default(MicrosoftDynamicsCRMappointment), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser workeridSystemuser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMactivitypointer objectidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMqueue queueid = default(MicrosoftDynamicsCRMqueue), IList<MicrosoftDynamicsCRMasyncoperation> queueItemAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMteam workeridTeam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMfax objectidFax = default(MicrosoftDynamicsCRMfax), MicrosoftDynamicsCRMrecurringappointmentmaster objectidRecurringappointmentmaster = default(MicrosoftDynamicsCRMrecurringappointmentmaster), IList<MicrosoftDynamicsCRMsyncerror> queueItemSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMletter objectidLetter = default(MicrosoftDynamicsCRMletter), MicrosoftDynamicsCRMsocialactivity objectidSocialactivity = default(MicrosoftDynamicsCRMsocialactivity), MicrosoftDynamicsCRMphonecall objectidPhonecall = default(MicrosoftDynamicsCRMphonecall), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMtask objectidTask = default(MicrosoftDynamicsCRMtask), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> queueitemPrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMbulkdeletefailure> queueItemBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMemail objectidEmail = default(MicrosoftDynamicsCRMemail), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMabsScheduledprocessexecution objectidAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMabsScheduledprocessexecution), MicrosoftDynamicsCRMadoxioApplication objectidAdoxioApplication = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioInvestigation objectidAdoxioInvestigation = default(MicrosoftDynamicsCRMadoxioInvestigation), MicrosoftDynamicsCRMadoxioWorker objectidAdoxioWorker = default(MicrosoftDynamicsCRMadoxioWorker), MicrosoftDynamicsCRMadoxioComplaint objectidAdoxioComplaint = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioAuctionpermit objectidAdoxioAuctionpermit = default(MicrosoftDynamicsCRMadoxioAuctionpermit), MicrosoftDynamicsCRMadoxioExternalprofile objectidAdoxioExternalprofile = default(MicrosoftDynamicsCRMadoxioExternalprofile), MicrosoftDynamicsCRMadoxioExternalcontact objectidAdoxioExternalcontact = default(MicrosoftDynamicsCRMadoxioExternalcontact), MicrosoftDynamicsCRMadoxioViolationticket objectidAdoxioViolationticket = default(MicrosoftDynamicsCRMadoxioViolationticket), MicrosoftDynamicsCRMcampaignactivity objectidCampaignactivity = default(MicrosoftDynamicsCRMcampaignactivity), MicrosoftDynamicsCRMcampaignresponse objectidCampaignresponse = default(MicrosoftDynamicsCRMcampaignresponse), MicrosoftDynamicsCRMbulkoperation objectidBulkoperation = default(MicrosoftDynamicsCRMbulkoperation), MicrosoftDynamicsCRMincident objectidIncident = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMserviceappointment objectidServiceappointment = default(MicrosoftDynamicsCRMserviceappointment), MicrosoftDynamicsCRMmsdynKnowledgearticletemplate objectidMsdynKnowledgearticletemplate = default(MicrosoftDynamicsCRMmsdynKnowledgearticletemplate), MicrosoftDynamicsCRMadoxioLicences objectidAdoxioLicences = default(MicrosoftDynamicsCRMadoxioLicences))
         {
             this._transactioncurrencyidValue = _transactioncurrencyidValue;
             this._workeridValue = _workeridValue;
@@ -37,44 +37,36 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             this._modifiedbyValue = _modifiedbyValue;
             this._owningbusinessunitValue = _owningbusinessunitValue;
             Modifiedon = modifiedon;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
+            Workeridmodifiedon = workeridmodifiedon;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Versionnumber = versionnumber;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
             this._queueidValue = _queueidValue;
             Statecode = statecode;
             Enteredon = enteredon;
             Overriddencreatedon = overriddencreatedon;
             this._owneridValue = _owneridValue;
-            AdoxioPaymentreceiveddate = adoxioPaymentreceiveddate;
             Importsequencenumber = importsequencenumber;
             Queueitemid = queueitemid;
             Statuscode = statuscode;
             this._objectidValue = _objectidValue;
-            Workeridmodifiedon = workeridmodifiedon;
             this._owninguserValue = _owninguserValue;
             Exchangerate = exchangerate;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Title = title;
+            AdoxioPaymentreceiveddate = adoxioPaymentreceiveddate;
             Objecttypecode = objecttypecode;
             this._organizationidValue = _organizationidValue;
             Createdon = createdon;
             ObjectidKnowledgearticle = objectidKnowledgearticle;
-            ObjectidAbsScheduledprocessexecution = objectidAbsScheduledprocessexecution;
-            ObjectidAdoxioApplication = objectidAdoxioApplication;
-            ObjectidAdoxioInvestigation = objectidAdoxioInvestigation;
-            ObjectidAdoxioWorker = objectidAdoxioWorker;
-            ObjectidAdoxioComplaint = objectidAdoxioComplaint;
-            ObjectidAdoxioAuctionpermit = objectidAdoxioAuctionpermit;
             QueueItemProcessSessions = queueItemProcessSessions;
             Createdby = createdby;
             ObjectidAppointment = objectidAppointment;
             Modifiedby = modifiedby;
-            ObjectidCampaignactivity = objectidCampaignactivity;
             WorkeridSystemuser = workeridSystemuser;
             ObjectidActivitypointer = objectidActivitypointer;
             Queueid = queueid;
-            ObjectidIncident = objectidIncident;
             QueueItemAsyncOperations = queueItemAsyncOperations;
             WorkeridTeam = workeridTeam;
             ObjectidFax = objectidFax;
@@ -82,8 +74,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             QueueItemSyncErrors = queueItemSyncErrors;
             Organizationid = organizationid;
             Modifiedonbehalfby = modifiedonbehalfby;
-            ObjectidCampaignresponse = objectidCampaignresponse;
-            ObjectidServiceappointment = objectidServiceappointment;
             ObjectidLetter = objectidLetter;
             ObjectidSocialactivity = objectidSocialactivity;
             ObjectidPhonecall = objectidPhonecall;
@@ -92,8 +82,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             QueueitemPrincipalobjectattributeaccess = queueitemPrincipalobjectattributeaccess;
             QueueItemBulkDeleteFailures = queueItemBulkDeleteFailures;
             ObjectidEmail = objectidEmail;
-            ObjectidBulkoperation = objectidBulkoperation;
             Createdonbehalfby = createdonbehalfby;
+            ObjectidAbsScheduledprocessexecution = objectidAbsScheduledprocessexecution;
+            ObjectidAdoxioApplication = objectidAdoxioApplication;
+            ObjectidAdoxioInvestigation = objectidAdoxioInvestigation;
+            ObjectidAdoxioWorker = objectidAdoxioWorker;
+            ObjectidAdoxioComplaint = objectidAdoxioComplaint;
+            ObjectidAdoxioAuctionpermit = objectidAdoxioAuctionpermit;
+            ObjectidAdoxioExternalprofile = objectidAdoxioExternalprofile;
+            ObjectidAdoxioExternalcontact = objectidAdoxioExternalcontact;
+            ObjectidAdoxioViolationticket = objectidAdoxioViolationticket;
+            ObjectidCampaignactivity = objectidCampaignactivity;
+            ObjectidCampaignresponse = objectidCampaignresponse;
+            ObjectidBulkoperation = objectidBulkoperation;
+            ObjectidIncident = objectidIncident;
+            ObjectidServiceappointment = objectidServiceappointment;
+            ObjectidMsdynKnowledgearticletemplate = objectidMsdynKnowledgearticletemplate;
+            ObjectidAdoxioLicences = objectidAdoxioLicences;
             CustomInit();
         }
 
@@ -134,8 +139,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
+        [JsonProperty(PropertyName = "workeridmodifiedon")]
+        public System.DateTimeOffset? Workeridmodifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -146,6 +151,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
         public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -174,11 +184,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_paymentreceiveddate")]
-        public System.DateTimeOffset? AdoxioPaymentreceiveddate { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
@@ -196,11 +201,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_objectid_value")]
         public string _objectidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "workeridmodifiedon")]
-        public System.DateTimeOffset? Workeridmodifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -229,6 +229,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_paymentreceiveddate")]
+        public System.DateTimeOffset? AdoxioPaymentreceiveddate { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "objecttypecode")]
         public int? Objecttypecode { get; set; }
 
@@ -246,36 +251,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "objectid_knowledgearticle")]
         public MicrosoftDynamicsCRMknowledgearticle ObjectidKnowledgearticle { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "objectid_abs_scheduledprocessexecution")]
-        public MicrosoftDynamicsCRMabsScheduledprocessexecution ObjectidAbsScheduledprocessexecution { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "objectid_adoxio_application")]
-        public MicrosoftDynamicsCRMadoxioApplication ObjectidAdoxioApplication { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "objectid_adoxio_investigation")]
-        public MicrosoftDynamicsCRMadoxioInvestigation ObjectidAdoxioInvestigation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "objectid_adoxio_worker")]
-        public MicrosoftDynamicsCRMadoxioWorker ObjectidAdoxioWorker { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "objectid_adoxio_complaint")]
-        public MicrosoftDynamicsCRMadoxioComplaint ObjectidAdoxioComplaint { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "objectid_adoxio_auctionpermit")]
-        public MicrosoftDynamicsCRMadoxioAuctionpermit ObjectidAdoxioAuctionpermit { get; set; }
 
         /// <summary>
         /// </summary>
@@ -299,11 +274,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "objectid_campaignactivity")]
-        public MicrosoftDynamicsCRMcampaignactivity ObjectidCampaignactivity { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "workerid_systemuser")]
         public MicrosoftDynamicsCRMsystemuser WorkeridSystemuser { get; set; }
 
@@ -316,11 +286,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "queueid")]
         public MicrosoftDynamicsCRMqueue Queueid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "objectid_incident")]
-        public MicrosoftDynamicsCRMincident ObjectidIncident { get; set; }
 
         /// <summary>
         /// </summary>
@@ -356,16 +321,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "modifiedonbehalfby")]
         public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfby { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "objectid_campaignresponse")]
-        public MicrosoftDynamicsCRMcampaignresponse ObjectidCampaignresponse { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "objectid_serviceappointment")]
-        public MicrosoftDynamicsCRMserviceappointment ObjectidServiceappointment { get; set; }
 
         /// <summary>
         /// </summary>
@@ -409,13 +364,88 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "createdonbehalfby")]
+        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "objectid_abs_scheduledprocessexecution")]
+        public MicrosoftDynamicsCRMabsScheduledprocessexecution ObjectidAbsScheduledprocessexecution { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "objectid_adoxio_application")]
+        public MicrosoftDynamicsCRMadoxioApplication ObjectidAdoxioApplication { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "objectid_adoxio_investigation")]
+        public MicrosoftDynamicsCRMadoxioInvestigation ObjectidAdoxioInvestigation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "objectid_adoxio_worker")]
+        public MicrosoftDynamicsCRMadoxioWorker ObjectidAdoxioWorker { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "objectid_adoxio_complaint")]
+        public MicrosoftDynamicsCRMadoxioComplaint ObjectidAdoxioComplaint { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "objectid_adoxio_auctionpermit")]
+        public MicrosoftDynamicsCRMadoxioAuctionpermit ObjectidAdoxioAuctionpermit { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "objectid_adoxio_externalprofile")]
+        public MicrosoftDynamicsCRMadoxioExternalprofile ObjectidAdoxioExternalprofile { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "objectid_adoxio_externalcontact")]
+        public MicrosoftDynamicsCRMadoxioExternalcontact ObjectidAdoxioExternalcontact { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "objectid_adoxio_violationticket")]
+        public MicrosoftDynamicsCRMadoxioViolationticket ObjectidAdoxioViolationticket { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "objectid_campaignactivity")]
+        public MicrosoftDynamicsCRMcampaignactivity ObjectidCampaignactivity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "objectid_campaignresponse")]
+        public MicrosoftDynamicsCRMcampaignresponse ObjectidCampaignresponse { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "objectid_bulkoperation")]
         public MicrosoftDynamicsCRMbulkoperation ObjectidBulkoperation { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdonbehalfby")]
-        public MicrosoftDynamicsCRMsystemuser Createdonbehalfby { get; set; }
+        [JsonProperty(PropertyName = "objectid_incident")]
+        public MicrosoftDynamicsCRMincident ObjectidIncident { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "objectid_serviceappointment")]
+        public MicrosoftDynamicsCRMserviceappointment ObjectidServiceappointment { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "objectid_msdyn_knowledgearticletemplate")]
+        public MicrosoftDynamicsCRMmsdynKnowledgearticletemplate ObjectidMsdynKnowledgearticletemplate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "objectid_adoxio_licences")]
+        public MicrosoftDynamicsCRMadoxioLicences ObjectidAdoxioLicences { get; set; }
 
     }
 }

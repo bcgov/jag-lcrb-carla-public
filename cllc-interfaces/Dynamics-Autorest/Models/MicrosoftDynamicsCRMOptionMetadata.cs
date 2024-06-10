@@ -7,6 +7,8 @@
 namespace Gov.Lclb.Cllb.Interfaces.Models
 {
     using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
@@ -30,7 +32,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMOptionMetadata class.
         /// </summary>
-        public MicrosoftDynamicsCRMOptionMetadata(int? value = default(int?), string label = default(string), string description = default(string), string color = default(string), bool? isManaged = default(bool?), string externalValue = default(string), string metadataId = default(string), bool? hasChanged = default(bool?))
+        public MicrosoftDynamicsCRMOptionMetadata(int? value = default(int?), string label = default(string), string description = default(string), string color = default(string), bool? isManaged = default(bool?), string externalValue = default(string), IList<int?> parentValues = default(IList<int?>), string metadataId = default(string), bool? hasChanged = default(bool?))
         {
             Value = value;
             Label = label;
@@ -38,6 +40,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Color = color;
             IsManaged = isManaged;
             ExternalValue = externalValue;
+            ParentValues = parentValues;
             MetadataId = metadataId;
             HasChanged = hasChanged;
             CustomInit();
@@ -77,6 +80,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "ExternalValue")]
         public string ExternalValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ParentValues")]
+        public IList<int?> ParentValues { get; set; }
 
         /// <summary>
         /// </summary>

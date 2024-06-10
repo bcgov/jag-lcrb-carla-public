@@ -27,38 +27,38 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMrecommendeddocument class.
         /// </summary>
-        public MicrosoftDynamicsCRMrecommendeddocument(System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), string filetype = default(string), string editurl = default(string), string versionnumber = default(string), string title = default(string), string _modifiedbyValue = default(string), string source = default(string), string externaldocumentid = default(string), int? timezoneruleversionnumber = default(int?), string _transactioncurrencyidValue = default(string), string iconclassname = default(string), string externalmodifiedby = default(string), string _organizationidValue = default(string), string readurl = default(string), string location = default(string), decimal? exchangerate = default(decimal?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string version = default(string), string fullname = default(string), string author = default(string), string _createdbyValue = default(string), int? filesize = default(int?), string absoluteurl = default(string), string contenttype = default(string), string _createdonbehalfbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string recommendeddocumentid = default(string), string _regardingobjectidValue = default(string), string associatedrecordname = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyidname = default(MicrosoftDynamicsCRMtransactioncurrency))
+        public MicrosoftDynamicsCRMrecommendeddocument(System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string editurl = default(string), string versionnumber = default(string), string _modifiedbyValue = default(string), int? utcconversiontimezonecode = default(int?), string externaldocumentid = default(string), string readurl = default(string), string fullname = default(string), string _transactioncurrencyidValue = default(string), string iconclassname = default(string), string externalmodifiedby = default(string), string _organizationidValue = default(string), string _createdbyValue = default(string), int? timezoneruleversionnumber = default(int?), decimal? exchangerate = default(decimal?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string version = default(string), string author = default(string), string _regardingobjectidValue = default(string), string recommendeddocumentid = default(string), string filetype = default(string), int? filesize = default(int?), string source = default(string), string contenttype = default(string), string title = default(string), string _modifiedonbehalfbyValue = default(string), string location = default(string), string associatedrecordname = default(string), string absoluteurl = default(string), string _createdonbehalfbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyidname = default(MicrosoftDynamicsCRMtransactioncurrency))
         {
             Createdon = createdon;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
-            Filetype = filetype;
             Editurl = editurl;
             Versionnumber = versionnumber;
-            Title = title;
             this._modifiedbyValue = _modifiedbyValue;
-            Source = source;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
             Externaldocumentid = externaldocumentid;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
+            Readurl = readurl;
+            Fullname = fullname;
             this._transactioncurrencyidValue = _transactioncurrencyidValue;
             Iconclassname = iconclassname;
             Externalmodifiedby = externalmodifiedby;
             this._organizationidValue = _organizationidValue;
-            Readurl = readurl;
-            Location = location;
+            this._createdbyValue = _createdbyValue;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
             Exchangerate = exchangerate;
             Modifiedon = modifiedon;
             Version = version;
-            Fullname = fullname;
             Author = author;
-            this._createdbyValue = _createdbyValue;
-            Filesize = filesize;
-            Absoluteurl = absoluteurl;
-            Contenttype = contenttype;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            Recommendeddocumentid = recommendeddocumentid;
             this._regardingobjectidValue = _regardingobjectidValue;
+            Recommendeddocumentid = recommendeddocumentid;
+            Filetype = filetype;
+            Filesize = filesize;
+            Source = source;
+            Contenttype = contenttype;
+            Title = title;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Location = location;
             Associatedrecordname = associatedrecordname;
+            Absoluteurl = absoluteurl;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Createdbyname = createdbyname;
             Createdonbehalfbyname = createdonbehalfbyname;
             Modifiedbyname = modifiedbyname;
@@ -80,16 +80,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "filetype")]
-        public string Filetype { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "editurl")]
         public string Editurl { get; set; }
 
@@ -100,18 +90,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "title")]
-        public string Title { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "source")]
-        public string Source { get; set; }
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -120,8 +105,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
+        [JsonProperty(PropertyName = "readurl")]
+        public string Readurl { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "fullname")]
+        public string Fullname { get; set; }
 
         /// <summary>
         /// </summary>
@@ -145,13 +135,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "readurl")]
-        public string Readurl { get; set; }
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "location")]
-        public string Location { get; set; }
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -170,48 +160,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "fullname")]
-        public string Fullname { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "author")]
         public string Author { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "filesize")]
-        public int? Filesize { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "absoluteurl")]
-        public string Absoluteurl { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "contenttype")]
-        public string Contenttype { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "recommendeddocumentid")]
-        public string Recommendeddocumentid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -220,8 +170,58 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "recommendeddocumentid")]
+        public string Recommendeddocumentid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "filetype")]
+        public string Filetype { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "filesize")]
+        public int? Filesize { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "source")]
+        public string Source { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "contenttype")]
+        public string Contenttype { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "title")]
+        public string Title { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "location")]
+        public string Location { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "associatedrecordname")]
         public string Associatedrecordname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "absoluteurl")]
+        public string Absoluteurl { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
