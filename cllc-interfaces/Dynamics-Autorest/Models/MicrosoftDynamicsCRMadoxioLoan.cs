@@ -29,37 +29,37 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMadoxioLoan
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioLoan(string _createdbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), string adoxioAmountorasset = default(string), string versionnumber = default(string), string adoxioAddresscity = default(string), int? statuscode = default(int?), int? adoxioAddressstateprovince = default(int?), int? utcconversiontimezonecode = default(int?), string _owninguserValue = default(string), string adoxioAddresspostalcode = default(string), string adoxioName = default(string), string _owneridValue = default(string), string _modifiedbyValue = default(string), int? statecode = default(int?), string _owningteamValue = default(string), string adoxioAddressstreet = default(string), string adoxioReasonforloan = default(string), int? importsequencenumber = default(int?), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioDateofloan = default(System.DateTimeOffset?), string adoxioLoanid = default(string), string _owningbusinessunitValue = default(string), string _createdonbehalfbyValue = default(string), string _adoxioAccountidValue = default(string), int? adoxioLoantype = default(int?), string adoxioTerms = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioLoanSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioLoanDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioLoanDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioLoanAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioLoanMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioLoanProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioLoanBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioLoanPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMaccount adoxioAccountId = default(MicrosoftDynamicsCRMaccount))
+        public MicrosoftDynamicsCRMadoxioLoan(string _createdbyValue = default(string), string versionnumber = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _adoxioAccountidValue = default(string), int? timezoneruleversionnumber = default(int?), string adoxioAmountorasset = default(string), string adoxioAddresscity = default(string), int? adoxioAddressstateprovince = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _owninguserValue = default(string), string adoxioTerms = default(string), string adoxioAddresspostalcode = default(string), string adoxioName = default(string), string _owneridValue = default(string), string adoxioReasonforloan = default(string), int? statecode = default(int?), string adoxioAddressstreet = default(string), int? statuscode = default(int?), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioDateofloan = default(System.DateTimeOffset?), string adoxioLoanid = default(string), int? utcconversiontimezonecode = default(int?), string _owningbusinessunitValue = default(string), string _createdonbehalfbyValue = default(string), int? adoxioLoantype = default(int?), int? importsequencenumber = default(int?), string _owningteamValue = default(string), string _modifiedbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioLoanSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioLoanDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioLoanDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioLoanAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioLoanMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioLoanProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioLoanBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioLoanPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMaccount adoxioAccountId = default(MicrosoftDynamicsCRMaccount))
         {
             this._createdbyValue = _createdbyValue;
+            Versionnumber = versionnumber;
             Createdon = createdon;
-            Modifiedon = modifiedon;
+            this._adoxioAccountidValue = _adoxioAccountidValue;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             AdoxioAmountorasset = adoxioAmountorasset;
-            Versionnumber = versionnumber;
             AdoxioAddresscity = adoxioAddresscity;
-            Statuscode = statuscode;
             AdoxioAddressstateprovince = adoxioAddressstateprovince;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
+            Modifiedon = modifiedon;
             this._owninguserValue = _owninguserValue;
+            AdoxioTerms = adoxioTerms;
             AdoxioAddresspostalcode = adoxioAddresspostalcode;
             AdoxioName = adoxioName;
             this._owneridValue = _owneridValue;
-            this._modifiedbyValue = _modifiedbyValue;
-            Statecode = statecode;
-            this._owningteamValue = _owningteamValue;
-            AdoxioAddressstreet = adoxioAddressstreet;
             AdoxioReasonforloan = adoxioReasonforloan;
-            Importsequencenumber = importsequencenumber;
+            Statecode = statecode;
+            AdoxioAddressstreet = adoxioAddressstreet;
+            Statuscode = statuscode;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Overriddencreatedon = overriddencreatedon;
             AdoxioDateofloan = adoxioDateofloan;
             AdoxioLoanid = adoxioLoanid;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
             this._owningbusinessunitValue = _owningbusinessunitValue;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._adoxioAccountidValue = _adoxioAccountidValue;
             AdoxioLoantype = adoxioLoantype;
-            AdoxioTerms = adoxioTerms;
+            Importsequencenumber = importsequencenumber;
+            this._owningteamValue = _owningteamValue;
+            this._modifiedbyValue = _modifiedbyValue;
             Createdbyname = createdbyname;
             Createdonbehalfbyname = createdonbehalfbyname;
             Modifiedbyname = modifiedbyname;
@@ -92,13 +92,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
+        [JsonProperty(PropertyName = "_adoxio_accountid_value")]
+        public string _adoxioAccountidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -112,18 +117,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_addresscity")]
         public string AdoxioAddresscity { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -132,13 +127,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
         public string _owninguserValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_terms")]
+        public string AdoxioTerms { get; set; }
 
         /// <summary>
         /// </summary>
@@ -157,8 +157,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_reasonforloan")]
+        public string AdoxioReasonforloan { get; set; }
 
         /// <summary>
         /// </summary>
@@ -167,23 +167,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_addressstreet")]
         public string AdoxioAddressstreet { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_reasonforloan")]
-        public string AdoxioReasonforloan { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -207,6 +197,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
         public string _owningbusinessunitValue { get; set; }
 
@@ -217,18 +212,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_accountid_value")]
-        public string _adoxioAccountidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_loantype")]
         public int? AdoxioLoantype { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_terms")]
-        public string AdoxioTerms { get; set; }
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>

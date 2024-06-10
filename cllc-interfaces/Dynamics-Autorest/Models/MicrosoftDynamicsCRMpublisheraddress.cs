@@ -27,43 +27,43 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMpublisheraddress class.
         /// </summary>
-        public MicrosoftDynamicsCRMpublisheraddress(string postofficebox = default(string), string line3 = default(string), string publisheraddressid = default(string), string telephone1 = default(string), int? importsequencenumber = default(int?), decimal? latitude = default(decimal?), string line1 = default(string), decimal? longitude = default(decimal?), string primarycontactname = default(string), string versionnumber = default(string), int? shippingmethodcode = default(int?), int? utcconversiontimezonecode = default(int?), string country = default(string), int? addresstypecode = default(int?), string _createdonbehalfbyValue = default(string), int? utcoffset = default(int?), string telephone3 = default(string), string name = default(string), string county = default(string), string line2 = default(string), string postalcode = default(string), string _parentidValue = default(string), string stateorprovince = default(string), string _modifiedonbehalfbyValue = default(string), int? freighttermscode = default(int?), int? timezoneruleversionnumber = default(int?), string fax = default(string), string _modifiedbyValue = default(string), string city = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string telephone2 = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string upszone = default(string), int? addressnumber = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMpublisher parentid = default(MicrosoftDynamicsCRMpublisher), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMpublisheraddress(string postofficebox = default(string), string line3 = default(string), string city = default(string), string upszone = default(string), string telephone1 = default(string), int? importsequencenumber = default(int?), int? addressnumber = default(int?), string fax = default(string), string line1 = default(string), string postalcode = default(string), string versionnumber = default(string), int? shippingmethodcode = default(int?), decimal? longitude = default(decimal?), string country = default(string), int? addresstypecode = default(int?), string _createdonbehalfbyValue = default(string), int? utcoffset = default(int?), string telephone3 = default(string), string name = default(string), string _modifiedbyValue = default(string), string line2 = default(string), string _parentidValue = default(string), string stateorprovince = default(string), string _modifiedonbehalfbyValue = default(string), int? freighttermscode = default(int?), int? timezoneruleversionnumber = default(int?), int? utcconversiontimezonecode = default(int?), string publisheraddressid = default(string), string primarycontactname = default(string), string telephone2 = default(string), decimal? latitude = default(decimal?), string county = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMpublisher parentid = default(MicrosoftDynamicsCRMpublisher), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Postofficebox = postofficebox;
             Line3 = line3;
-            Publisheraddressid = publisheraddressid;
+            City = city;
+            Upszone = upszone;
             Telephone1 = telephone1;
             Importsequencenumber = importsequencenumber;
-            Latitude = latitude;
+            Addressnumber = addressnumber;
+            Fax = fax;
             Line1 = line1;
-            Longitude = longitude;
-            Primarycontactname = primarycontactname;
+            Postalcode = postalcode;
             Versionnumber = versionnumber;
             Shippingmethodcode = shippingmethodcode;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
+            Longitude = longitude;
             Country = country;
             Addresstypecode = addresstypecode;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Utcoffset = utcoffset;
             Telephone3 = telephone3;
             Name = name;
-            County = county;
+            this._modifiedbyValue = _modifiedbyValue;
             Line2 = line2;
-            Postalcode = postalcode;
             this._parentidValue = _parentidValue;
             Stateorprovince = stateorprovince;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Freighttermscode = freighttermscode;
             Timezoneruleversionnumber = timezoneruleversionnumber;
-            Fax = fax;
-            this._modifiedbyValue = _modifiedbyValue;
-            City = city;
-            Createdon = createdon;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            Publisheraddressid = publisheraddressid;
+            Primarycontactname = primarycontactname;
             Telephone2 = telephone2;
+            Latitude = latitude;
+            County = county;
             Modifiedon = modifiedon;
             this._createdbyValue = _createdbyValue;
-            Upszone = upszone;
-            Addressnumber = addressnumber;
+            Createdon = createdon;
             Createdby = createdby;
             Modifiedonbehalfby = modifiedonbehalfby;
             Parentid = parentid;
@@ -89,8 +89,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "publisheraddressid")]
-        public string Publisheraddressid { get; set; }
+        [JsonProperty(PropertyName = "city")]
+        public string City { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "upszone")]
+        public string Upszone { get; set; }
 
         /// <summary>
         /// </summary>
@@ -104,8 +109,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "latitude")]
-        public decimal? Latitude { get; set; }
+        [JsonProperty(PropertyName = "addressnumber")]
+        public int? Addressnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "fax")]
+        public string Fax { get; set; }
 
         /// <summary>
         /// </summary>
@@ -114,13 +124,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "longitude")]
-        public decimal? Longitude { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "primarycontactname")]
-        public string Primarycontactname { get; set; }
+        [JsonProperty(PropertyName = "postalcode")]
+        public string Postalcode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -134,8 +139,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
+        [JsonProperty(PropertyName = "longitude")]
+        public decimal? Longitude { get; set; }
 
         /// <summary>
         /// </summary>
@@ -169,18 +174,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "county")]
-        public string County { get; set; }
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "line2")]
         public string Line2 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "postalcode")]
-        public string Postalcode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -209,28 +209,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "fax")]
-        public string Fax { get; set; }
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        [JsonProperty(PropertyName = "publisheraddressid")]
+        public string Publisheraddressid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "city")]
-        public string City { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
+        [JsonProperty(PropertyName = "primarycontactname")]
+        public string Primarycontactname { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "telephone2")]
         public string Telephone2 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "latitude")]
+        public decimal? Latitude { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "county")]
+        public string County { get; set; }
 
         /// <summary>
         /// </summary>
@@ -244,13 +249,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "upszone")]
-        public string Upszone { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "addressnumber")]
-        public int? Addressnumber { get; set; }
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>

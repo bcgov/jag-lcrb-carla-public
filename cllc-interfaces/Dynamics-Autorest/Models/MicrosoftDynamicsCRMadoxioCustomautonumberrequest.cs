@@ -29,28 +29,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioCustomautonumberrequest class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioCustomautonumberrequest(int? utcconversiontimezonecode = default(int?), string adoxioNumber = default(string), int? statecode = default(int?), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string versionnumber = default(string), int? adoxioIntegernumber = default(int?), string adoxioName = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _organizationidValue = default(string), string _modifiedonbehalfbyValue = default(string), string adoxioFormattednumber = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), string _modifiedbyValue = default(string), int? statuscode = default(int?), string adoxioCustomautonumberrequestid = default(string), int? timezoneruleversionnumber = default(int?), string adoxioLockvalue = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> adoxioCustomautonumberrequestSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioCustomautonumberrequestAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioCustomautonumberrequestMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioCustomautonumberrequestProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioCustomautonumberrequestBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioCustomautonumberrequestPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>))
+        public MicrosoftDynamicsCRMadoxioCustomautonumberrequest(int? utcconversiontimezonecode = default(int?), string adoxioNumber = default(string), int? statecode = default(int?), string _createdbyValue = default(string), string versionnumber = default(string), int? adoxioIntegernumber = default(int?), string adoxioLockvalue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _organizationidValue = default(string), int? importsequencenumber = default(int?), string adoxioName = default(string), string adoxioFormattednumber = default(string), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string adoxioCustomautonumberrequestid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), int? statuscode = default(int?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> adoxioCustomautonumberrequestSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioCustomautonumberrequestAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioCustomautonumberrequestMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioCustomautonumberrequestProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioCustomautonumberrequestBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioCustomautonumberrequestPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>))
         {
             Utcconversiontimezonecode = utcconversiontimezonecode;
             AdoxioNumber = adoxioNumber;
             Statecode = statecode;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            Overriddencreatedon = overriddencreatedon;
             this._createdbyValue = _createdbyValue;
             Versionnumber = versionnumber;
             AdoxioIntegernumber = adoxioIntegernumber;
-            AdoxioName = adoxioName;
+            AdoxioLockvalue = adoxioLockvalue;
             Modifiedon = modifiedon;
             this._organizationidValue = _organizationidValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            AdoxioFormattednumber = adoxioFormattednumber;
-            Createdon = createdon;
             Importsequencenumber = importsequencenumber;
+            AdoxioName = adoxioName;
+            AdoxioFormattednumber = adoxioFormattednumber;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             this._modifiedbyValue = _modifiedbyValue;
-            Statuscode = statuscode;
             AdoxioCustomautonumberrequestid = adoxioCustomautonumberrequestid;
+            Createdon = createdon;
             Timezoneruleversionnumber = timezoneruleversionnumber;
-            AdoxioLockvalue = adoxioLockvalue;
+            Overriddencreatedon = overriddencreatedon;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Statuscode = statuscode;
             Createdbyname = createdbyname;
             Createdonbehalfbyname = createdonbehalfbyname;
             Modifiedbyname = modifiedbyname;
@@ -87,16 +87,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
 
@@ -112,8 +102,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_name")]
-        public string AdoxioName { get; set; }
+        [JsonProperty(PropertyName = "adoxio_lockvalue")]
+        public string AdoxioLockvalue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -127,8 +117,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_name")]
+        public string AdoxioName { get; set; }
 
         /// <summary>
         /// </summary>
@@ -137,13 +132,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -152,13 +142,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
+        [JsonProperty(PropertyName = "adoxio_customautonumberrequestid")]
+        public string AdoxioCustomautonumberrequestid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_customautonumberrequestid")]
-        public string AdoxioCustomautonumberrequestid { get; set; }
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -167,8 +157,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_lockvalue")]
-        public string AdoxioLockvalue { get; set; }
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
 
         /// <summary>
         /// </summary>

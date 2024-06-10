@@ -29,22 +29,22 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMopportunitysalesprocess class.
         /// </summary>
-        public MicrosoftDynamicsCRMopportunitysalesprocess(int? statecode = default(int?), string versionnumber = default(string), string _modifiedbyValue = default(string), string businessprocessflowinstanceid = default(string), string name = default(string), System.DateTimeOffset? completedon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), string _organizationidValue = default(string), string _quoteidValue = default(string), string _modifiedonbehalfbyValue = default(string), string _salesorderidValue = default(string), int? duration = default(int?), string _processidValue = default(string), decimal? exchangerate = default(decimal?), string _createdonbehalfbyValue = default(string), string _opportunityidValue = default(string), string traversedpath = default(string), int? timezoneruleversionnumber = default(int?), string _transactioncurrencyidValue = default(string), int? statuscode = default(int?), string _activestageidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? activestagestartedon = default(System.DateTimeOffset?), IList<MicrosoftDynamicsCRMteam> opportunitysalesprocessTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMasyncoperation> opportunitysalesprocessAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> opportunitysalesprocessMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> opportunitysalesprocessProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> opportunitysalesprocessBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> opportunitysalesprocessPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMopportunity opportunityid = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMquote quoteid = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMsalesorder salesorderid = default(MicrosoftDynamicsCRMsalesorder), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> opportunitySalesProcessSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMworkflow processid = default(MicrosoftDynamicsCRMworkflow), MicrosoftDynamicsCRMprocessstage activestageid = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMworkflowlog> workflowlogsOpportunitysalesprocess = default(IList<MicrosoftDynamicsCRMworkflowlog>), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMopportunitysalesprocess(string _organizationidValue = default(string), string versionnumber = default(string), string businessprocessflowinstanceid = default(string), string name = default(string), System.DateTimeOffset? completedon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), string _quoteidValue = default(string), decimal? exchangerate = default(decimal?), int? statecode = default(int?), string _modifiedonbehalfbyValue = default(string), string _salesorderidValue = default(string), int? duration = default(int?), string _processidValue = default(string), int? importsequencenumber = default(int?), string _createdonbehalfbyValue = default(string), string _opportunityidValue = default(string), string traversedpath = default(string), int? timezoneruleversionnumber = default(int?), string _transactioncurrencyidValue = default(string), int? statuscode = default(int?), string _activestageidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? activestagestartedon = default(System.DateTimeOffset?), IList<MicrosoftDynamicsCRMteam> opportunitysalesprocessTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMasyncoperation> opportunitysalesprocessAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> opportunitysalesprocessMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> opportunitysalesprocessProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> opportunitysalesprocessBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> opportunitysalesprocessPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMopportunity opportunityid = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMquote quoteid = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMsalesorder salesorderid = default(MicrosoftDynamicsCRMsalesorder), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> opportunitySalesProcessSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMworkflow processid = default(MicrosoftDynamicsCRMworkflow), MicrosoftDynamicsCRMprocessstage activestageid = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMworkflowlog> workflowlogsOpportunitysalesprocess = default(IList<MicrosoftDynamicsCRMworkflowlog>), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser))
         {
-            Statecode = statecode;
+            this._organizationidValue = _organizationidValue;
             Versionnumber = versionnumber;
-            this._modifiedbyValue = _modifiedbyValue;
             Businessprocessflowinstanceid = businessprocessflowinstanceid;
             Name = name;
             Completedon = completedon;
             Utcconversiontimezonecode = utcconversiontimezonecode;
-            this._organizationidValue = _organizationidValue;
             this._quoteidValue = _quoteidValue;
+            Exchangerate = exchangerate;
+            Statecode = statecode;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             this._salesorderidValue = _salesorderidValue;
             Duration = duration;
             this._processidValue = _processidValue;
-            Exchangerate = exchangerate;
+            Importsequencenumber = importsequencenumber;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             this._opportunityidValue = _opportunityidValue;
             Traversedpath = traversedpath;
@@ -55,7 +55,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Createdon = createdon;
             this._createdbyValue = _createdbyValue;
             Overriddencreatedon = overriddencreatedon;
-            Importsequencenumber = importsequencenumber;
+            this._modifiedbyValue = _modifiedbyValue;
             Modifiedon = modifiedon;
             Activestagestartedon = activestagestartedon;
             OpportunitysalesprocessTeams = opportunitysalesprocessTeams;
@@ -87,18 +87,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
         public string Versionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -122,13 +117,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
+        [JsonProperty(PropertyName = "_quoteid_value")]
+        public string _quoteidValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_quoteid_value")]
-        public string _quoteidValue { get; set; }
+        [JsonProperty(PropertyName = "exchangerate")]
+        public decimal? Exchangerate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -152,8 +152,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "exchangerate")]
-        public decimal? Exchangerate { get; set; }
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -207,8 +207,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>

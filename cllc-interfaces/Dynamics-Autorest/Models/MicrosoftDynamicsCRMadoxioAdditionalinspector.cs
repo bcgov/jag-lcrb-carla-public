@@ -29,17 +29,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioAdditionalinspector class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioAdditionalinspector(int? statuscode = default(int?), string _adoxioInspectoridValue = default(string), int? importsequencenumber = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string adoxioEmail = default(string), string _adoxioInspectionidValue = default(string), string _owningbusinessunitValue = default(string), string _createdbyValue = default(string), string adoxioAdditionalinspectorid = default(string), string adoxioMobilephone = default(string), string _modifiedonbehalfbyValue = default(string), string adoxioMainphone = default(string), string _owneridValue = default(string), string _adoxioRegionidValue = default(string), string adoxioName = default(string), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _owninguserValue = default(string), string _modifiedbyValue = default(string), int? statecode = default(int?), string _createdonbehalfbyValue = default(string), string versionnumber = default(string), int? utcconversiontimezonecode = default(int?), string _owningteamValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioAdditionalinspectorSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioAdditionalinspectorAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioAdditionalinspectorMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioAdditionalinspectorProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioAdditionalinspectorBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioAdditionalinspectorPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMincident adoxioInspectionId = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMsystemuser adoxioInspectorId = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMadoxioRegion adoxioRegionId = default(MicrosoftDynamicsCRMadoxioRegion))
+        public MicrosoftDynamicsCRMadoxioAdditionalinspector(int? statuscode = default(int?), string _adoxioInspectoridValue = default(string), string _createdbyValue = default(string), int? importsequencenumber = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string adoxioEmail = default(string), string _adoxioInspectionidValue = default(string), string adoxioAdditionalinspectorid = default(string), string adoxioMobilephone = default(string), string _modifiedonbehalfbyValue = default(string), string adoxioMainphone = default(string), string _owneridValue = default(string), string _adoxioRegionidValue = default(string), string adoxioName = default(string), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _owninguserValue = default(string), string _modifiedbyValue = default(string), string _owningbusinessunitValue = default(string), int? statecode = default(int?), string _createdonbehalfbyValue = default(string), string versionnumber = default(string), int? utcconversiontimezonecode = default(int?), string _owningteamValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioAdditionalinspectorSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioAdditionalinspectorAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioAdditionalinspectorMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioAdditionalinspectorProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioAdditionalinspectorBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioAdditionalinspectorPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMincident adoxioInspectionId = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMsystemuser adoxioInspectorId = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMadoxioRegion adoxioRegionId = default(MicrosoftDynamicsCRMadoxioRegion))
         {
             Statuscode = statuscode;
             this._adoxioInspectoridValue = _adoxioInspectoridValue;
+            this._createdbyValue = _createdbyValue;
             Importsequencenumber = importsequencenumber;
             Createdon = createdon;
             Overriddencreatedon = overriddencreatedon;
             AdoxioEmail = adoxioEmail;
             this._adoxioInspectionidValue = _adoxioInspectionidValue;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
-            this._createdbyValue = _createdbyValue;
             AdoxioAdditionalinspectorid = adoxioAdditionalinspectorid;
             AdoxioMobilephone = adoxioMobilephone;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
@@ -51,6 +50,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Modifiedon = modifiedon;
             this._owninguserValue = _owninguserValue;
             this._modifiedbyValue = _modifiedbyValue;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
             Statecode = statecode;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Versionnumber = versionnumber;
@@ -93,6 +93,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
@@ -115,16 +120,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_adoxio_inspectionid_value")]
         public string _adoxioInspectionidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -180,6 +175,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
         /// </summary>

@@ -29,21 +29,21 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMuserform
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMuserform(string _owneridValue = default(string), string description = default(string), string userformid = default(string), string name = default(string), string formjson = default(string), string _owningbusinessunitValue = default(string), string _createdbyValue = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string formxml = default(string), string objecttypecode = default(string), string _modifiedonbehalfbyValue = default(string), int? type = default(int?), string versionnumber = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string _owningteamValue = default(string), string _owninguserValue = default(string), bool? istabletenabled = default(bool?), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMasyncoperation> userFormAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), IList<MicrosoftDynamicsCRMbulkdeletefailure> userFormBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit))
+        public MicrosoftDynamicsCRMuserform(string _owneridValue = default(string), string description = default(string), string userformid = default(string), string formjson = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _owningbusinessunitValue = default(string), string _createdbyValue = default(string), string name = default(string), string formxml = default(string), string objecttypecode = default(string), int? type = default(int?), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string versionnumber = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string _owningteamValue = default(string), string _owninguserValue = default(string), bool? istabletenabled = default(bool?), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMasyncoperation> userFormAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), IList<MicrosoftDynamicsCRMbulkdeletefailure> userFormBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit))
         {
             this._owneridValue = _owneridValue;
             Description = description;
             Userformid = userformid;
-            Name = name;
             Formjson = formjson;
+            Modifiedon = modifiedon;
             this._owningbusinessunitValue = _owningbusinessunitValue;
             this._createdbyValue = _createdbyValue;
-            this._modifiedbyValue = _modifiedbyValue;
-            Modifiedon = modifiedon;
+            Name = name;
             Formxml = formxml;
             Objecttypecode = objecttypecode;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Type = type;
+            this._modifiedbyValue = _modifiedbyValue;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Versionnumber = versionnumber;
             Createdon = createdon;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
@@ -85,13 +85,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
+        [JsonProperty(PropertyName = "formjson")]
+        public string Formjson { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "formjson")]
-        public string Formjson { get; set; }
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -105,13 +105,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
 
         /// <summary>
         /// </summary>
@@ -125,13 +120,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "type")]
+        public int? Type { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "type")]
-        public int? Type { get; set; }
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>

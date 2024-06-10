@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMcalendar
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMcalendar(string name = default(string), string _modifiedonbehalfbyValue = default(string), int? type = default(int?), string primaryuserid = default(string), string _createdonbehalfbyValue = default(string), string _businessunitidValue = default(string), string description = default(string), string versionnumber = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _holidayschedulecalendaridValue = default(string), string calendarid = default(string), string _createdbyValue = default(string), bool? isshared = default(bool?), string _organizationidValue = default(string), string _modifiedbyValue = default(string), IList<MicrosoftDynamicsCRMcalendarrule> calendarCalendarRules = default(IList<MicrosoftDynamicsCRMcalendarrule>), IList<MicrosoftDynamicsCRMequipment> calendarEquipment = default(IList<MicrosoftDynamicsCRMequipment>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> calendarBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMsla> slabaseBusinesshoursid = default(IList<MicrosoftDynamicsCRMsla>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMorganization> calendarOrganization = default(IList<MicrosoftDynamicsCRMorganization>), MicrosoftDynamicsCRMbusinessunit businessunitid = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMbusinessunit> businessUnitCalendar = default(IList<MicrosoftDynamicsCRMbusinessunit>), IList<MicrosoftDynamicsCRMannotation> calendarAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMcalendar holidayschedulecalendarid = default(MicrosoftDynamicsCRMcalendar), IList<MicrosoftDynamicsCRMcalendar> calendarCustomercalendarHolidaycalendar = default(IList<MicrosoftDynamicsCRMcalendar>), IList<MicrosoftDynamicsCRMbookableresource> calendarBookableresources = default(IList<MicrosoftDynamicsCRMbookableresource>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsystemuser> calendarSystemUsers = default(IList<MicrosoftDynamicsCRMsystemuser>), IList<MicrosoftDynamicsCRMservice> calendarServices = default(IList<MicrosoftDynamicsCRMservice>), IList<MicrosoftDynamicsCRMasyncoperation> calendarAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMcalendarrule> innerCalendarCalendarRules = default(IList<MicrosoftDynamicsCRMcalendarrule>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
+        public MicrosoftDynamicsCRMcalendar(string name = default(string), string _modifiedonbehalfbyValue = default(string), int? type = default(int?), string primaryuserid = default(string), string _createdonbehalfbyValue = default(string), string _businessunitidValue = default(string), string description = default(string), string versionnumber = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _holidayschedulecalendaridValue = default(string), string _createdbyValue = default(string), bool? isshared = default(bool?), string calendarid = default(string), string _organizationidValue = default(string), string _modifiedbyValue = default(string), IList<MicrosoftDynamicsCRMcalendarrule> calendarCalendarRules = default(IList<MicrosoftDynamicsCRMcalendarrule>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> calendarBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMsla> slabaseBusinesshoursid = default(IList<MicrosoftDynamicsCRMsla>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMorganization> calendarOrganization = default(IList<MicrosoftDynamicsCRMorganization>), MicrosoftDynamicsCRMbusinessunit businessunitid = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMbusinessunit> businessUnitCalendar = default(IList<MicrosoftDynamicsCRMbusinessunit>), IList<MicrosoftDynamicsCRMannotation> calendarAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMcalendar holidayschedulecalendarid = default(MicrosoftDynamicsCRMcalendar), IList<MicrosoftDynamicsCRMcalendar> calendarCustomercalendarHolidaycalendar = default(IList<MicrosoftDynamicsCRMcalendar>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsystemuser> calendarSystemUsers = default(IList<MicrosoftDynamicsCRMsystemuser>), IList<MicrosoftDynamicsCRMasyncoperation> calendarAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMcalendarrule> innerCalendarCalendarRules = default(IList<MicrosoftDynamicsCRMcalendarrule>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMequipment> calendarEquipment = default(IList<MicrosoftDynamicsCRMequipment>), IList<MicrosoftDynamicsCRMservice> calendarServices = default(IList<MicrosoftDynamicsCRMservice>), IList<MicrosoftDynamicsCRMbookableresource> calendarBookableresources = default(IList<MicrosoftDynamicsCRMbookableresource>), IList<MicrosoftDynamicsCRMslaitem> calendarSlaitem = default(IList<MicrosoftDynamicsCRMslaitem>))
         {
             Name = name;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
@@ -42,13 +42,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Createdon = createdon;
             Modifiedon = modifiedon;
             this._holidayschedulecalendaridValue = _holidayschedulecalendaridValue;
-            Calendarid = calendarid;
             this._createdbyValue = _createdbyValue;
             Isshared = isshared;
+            Calendarid = calendarid;
             this._organizationidValue = _organizationidValue;
             this._modifiedbyValue = _modifiedbyValue;
             CalendarCalendarRules = calendarCalendarRules;
-            CalendarEquipment = calendarEquipment;
             Createdonbehalfby = createdonbehalfby;
             CalendarBulkDeleteFailures = calendarBulkDeleteFailures;
             SlabaseBusinesshoursid = slabaseBusinesshoursid;
@@ -59,14 +58,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             CalendarAnnotation = calendarAnnotation;
             Holidayschedulecalendarid = holidayschedulecalendarid;
             CalendarCustomercalendarHolidaycalendar = calendarCustomercalendarHolidaycalendar;
-            CalendarBookableresources = calendarBookableresources;
             Createdby = createdby;
             CalendarSystemUsers = calendarSystemUsers;
-            CalendarServices = calendarServices;
             CalendarAsyncOperations = calendarAsyncOperations;
             Modifiedonbehalfby = modifiedonbehalfby;
             InnerCalendarCalendarRules = innerCalendarCalendarRules;
             Organizationid = organizationid;
+            CalendarEquipment = calendarEquipment;
+            CalendarServices = calendarServices;
+            CalendarBookableresources = calendarBookableresources;
+            CalendarSlaitem = calendarSlaitem;
             CustomInit();
         }
 
@@ -132,11 +133,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "calendarid")]
-        public string Calendarid { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
 
@@ -144,6 +140,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "isshared")]
         public bool? Isshared { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "calendarid")]
+        public string Calendarid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -159,11 +160,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "calendar_calendar_rules")]
         public IList<MicrosoftDynamicsCRMcalendarrule> CalendarCalendarRules { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "calendar_equipment")]
-        public IList<MicrosoftDynamicsCRMequipment> CalendarEquipment { get; set; }
 
         /// <summary>
         /// </summary>
@@ -217,11 +213,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "calendar_bookableresources")]
-        public IList<MicrosoftDynamicsCRMbookableresource> CalendarBookableresources { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "createdby")]
         public MicrosoftDynamicsCRMsystemuser Createdby { get; set; }
 
@@ -229,11 +220,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "calendar_system_users")]
         public IList<MicrosoftDynamicsCRMsystemuser> CalendarSystemUsers { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "calendar_services")]
-        public IList<MicrosoftDynamicsCRMservice> CalendarServices { get; set; }
 
         /// <summary>
         /// </summary>
@@ -254,6 +240,26 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "organizationid")]
         public MicrosoftDynamicsCRMorganization Organizationid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "calendar_equipment")]
+        public IList<MicrosoftDynamicsCRMequipment> CalendarEquipment { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "calendar_services")]
+        public IList<MicrosoftDynamicsCRMservice> CalendarServices { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "calendar_bookableresources")]
+        public IList<MicrosoftDynamicsCRMbookableresource> CalendarBookableresources { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "calendar_slaitem")]
+        public IList<MicrosoftDynamicsCRMslaitem> CalendarSlaitem { get; set; }
 
     }
 }

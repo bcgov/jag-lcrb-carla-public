@@ -29,31 +29,31 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMmsdynWallsavedquery class.
         /// </summary>
-        public MicrosoftDynamicsCRMmsdynWallsavedquery(string msdynEntitydisplayname = default(string), bool? msdynIsvirtual = default(bool?), int? msdynIsvisiblebit = default(int?), int? statuscode = default(int?), string _modifiedonbehalfbyValue = default(string), string _organizationidValue = default(string), int? importsequencenumber = default(int?), string msdynSavedqueryid = default(string), string msdynSavedqueryname = default(string), string _modifiedbyValue = default(string), string msdynEntityname = default(string), string _msdynPostconfigurationidValue = default(string), bool? msdynIsvisible = default(bool?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string versionnumber = default(string), int? utcconversiontimezonecode = default(int?), string _createdbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), string msdynWallsavedqueryid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? msdynOtc = default(int?), int? statecode = default(int?), string _createdonbehalfbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> msdynWallsavedquerySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> msdynWallsavedqueryAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> msdynWallsavedqueryMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> msdynWallsavedqueryProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> msdynWallsavedqueryBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> msdynWallsavedqueryPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMmsdynPostconfig msdynPostconfigurationid = default(MicrosoftDynamicsCRMmsdynPostconfig), IList<MicrosoftDynamicsCRMmsdynWallsavedqueryusersettings> msdynWallsavedqueryWallsavedqueryusersettings = default(IList<MicrosoftDynamicsCRMmsdynWallsavedqueryusersettings>))
+        public MicrosoftDynamicsCRMmsdynWallsavedquery(int? msdynOtc = default(int?), bool? msdynIsvirtual = default(bool?), int? msdynIsvisiblebit = default(int?), string msdynWallsavedqueryid = default(string), string _modifiedonbehalfbyValue = default(string), string _organizationidValue = default(string), string msdynSavedqueryname = default(string), string msdynSavedqueryid = default(string), string _modifiedbyValue = default(string), string msdynEntityname = default(string), bool? msdynIsvisible = default(bool?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string versionnumber = default(string), int? utcconversiontimezonecode = default(int?), string _createdbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string msdynEntitydisplayname = default(string), int? timezoneruleversionnumber = default(int?), int? importsequencenumber = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? statecode = default(int?), string _msdynPostconfigurationidValue = default(string), int? statuscode = default(int?), string _createdonbehalfbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> msdynWallsavedquerySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> msdynWallsavedqueryAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> msdynWallsavedqueryMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> msdynWallsavedqueryProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> msdynWallsavedqueryBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> msdynWallsavedqueryPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMmsdynPostconfig msdynPostconfigurationid = default(MicrosoftDynamicsCRMmsdynPostconfig), IList<MicrosoftDynamicsCRMmsdynWallsavedqueryusersettings> msdynWallsavedqueryWallsavedqueryusersettings = default(IList<MicrosoftDynamicsCRMmsdynWallsavedqueryusersettings>))
         {
-            MsdynEntitydisplayname = msdynEntitydisplayname;
+            MsdynOtc = msdynOtc;
             MsdynIsvirtual = msdynIsvirtual;
             MsdynIsvisiblebit = msdynIsvisiblebit;
-            Statuscode = statuscode;
+            MsdynWallsavedqueryid = msdynWallsavedqueryid;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             this._organizationidValue = _organizationidValue;
-            Importsequencenumber = importsequencenumber;
-            MsdynSavedqueryid = msdynSavedqueryid;
             MsdynSavedqueryname = msdynSavedqueryname;
+            MsdynSavedqueryid = msdynSavedqueryid;
             this._modifiedbyValue = _modifiedbyValue;
             MsdynEntityname = msdynEntityname;
-            this._msdynPostconfigurationidValue = _msdynPostconfigurationidValue;
             MsdynIsvisible = msdynIsvisible;
             Overriddencreatedon = overriddencreatedon;
             Versionnumber = versionnumber;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             this._createdbyValue = _createdbyValue;
             Modifiedon = modifiedon;
+            MsdynEntitydisplayname = msdynEntitydisplayname;
             Timezoneruleversionnumber = timezoneruleversionnumber;
-            MsdynWallsavedqueryid = msdynWallsavedqueryid;
+            Importsequencenumber = importsequencenumber;
             Createdon = createdon;
-            MsdynOtc = msdynOtc;
             Statecode = statecode;
+            this._msdynPostconfigurationidValue = _msdynPostconfigurationidValue;
+            Statuscode = statuscode;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Createdbyname = createdbyname;
             Createdonbehalfbyname = createdonbehalfbyname;
@@ -78,8 +78,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_entitydisplayname")]
-        public string MsdynEntitydisplayname { get; set; }
+        [JsonProperty(PropertyName = "msdyn_otc")]
+        public int? MsdynOtc { get; set; }
 
         /// <summary>
         /// </summary>
@@ -93,8 +93,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
+        [JsonProperty(PropertyName = "msdyn_wallsavedqueryid")]
+        public string MsdynWallsavedqueryid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -108,18 +108,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
+        [JsonProperty(PropertyName = "msdyn_savedqueryname")]
+        public string MsdynSavedqueryname { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "msdyn_savedqueryid")]
         public string MsdynSavedqueryid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "msdyn_savedqueryname")]
-        public string MsdynSavedqueryname { get; set; }
 
         /// <summary>
         /// </summary>
@@ -130,11 +125,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "msdyn_entityname")]
         public string MsdynEntityname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_msdyn_postconfigurationid_value")]
-        public string _msdynPostconfigurationidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -168,13 +158,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "msdyn_entitydisplayname")]
+        public string MsdynEntitydisplayname { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "timezoneruleversionnumber")]
         public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_wallsavedqueryid")]
-        public string MsdynWallsavedqueryid { get; set; }
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -183,13 +178,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_otc")]
-        public int? MsdynOtc { get; set; }
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
+        [JsonProperty(PropertyName = "_msdyn_postconfigurationid_value")]
+        public string _msdynPostconfigurationidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
 
         /// <summary>
         /// </summary>

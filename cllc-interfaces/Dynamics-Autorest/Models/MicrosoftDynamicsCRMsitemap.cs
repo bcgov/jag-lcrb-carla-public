@@ -27,25 +27,25 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMsitemap
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMsitemap(System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string sitemapxml = default(string), string sitemapnameunique = default(string), string _createdbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string versionnumber = default(string), string _createdonbehalfbyValue = default(string), string sitemapidunique = default(string), string _modifiedbyValue = default(string), int? componentstate = default(int?), bool? isappaware = default(bool?), string sitemapname = default(string), string _organizationidValue = default(string), string solutionid = default(string), string sitemapid = default(string), bool? ismanaged = default(bool?), MicrosoftDynamicsCRMsystemuser siteMapModifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser siteMapModifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser siteMapCreatedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser siteMapCreatedby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMsitemap(System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string versionnumber = default(string), string sitemapnameunique = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string _organizationidValue = default(string), string sitemapidunique = default(string), int? componentstate = default(int?), string _createdbyValue = default(string), string sitemapname = default(string), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string solutionid = default(string), string sitemapid = default(string), string sitemapxml = default(string), bool? isappaware = default(bool?), bool? ismanaged = default(bool?), MicrosoftDynamicsCRMsystemuser siteMapModifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser siteMapModifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser siteMapCreatedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser siteMapCreatedby = default(MicrosoftDynamicsCRMsystemuser))
         {
-            Overwritetime = overwritetime;
             Modifiedon = modifiedon;
-            Sitemapxml = sitemapxml;
+            Overwritetime = overwritetime;
+            Versionnumber = versionnumber;
             Sitemapnameunique = sitemapnameunique;
-            this._createdbyValue = _createdbyValue;
             Createdon = createdon;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            Versionnumber = versionnumber;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            Sitemapidunique = sitemapidunique;
-            this._modifiedbyValue = _modifiedbyValue;
-            Componentstate = componentstate;
-            Isappaware = isappaware;
-            Sitemapname = sitemapname;
             this._organizationidValue = _organizationidValue;
+            Sitemapidunique = sitemapidunique;
+            Componentstate = componentstate;
+            this._createdbyValue = _createdbyValue;
+            Sitemapname = sitemapname;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            this._modifiedbyValue = _modifiedbyValue;
             Solutionid = solutionid;
             Sitemapid = sitemapid;
+            Sitemapxml = sitemapxml;
+            Isappaware = isappaware;
             Ismanaged = ismanaged;
             SiteMapModifiedonbehalfby = siteMapModifiedonbehalfby;
             SiteMapModifiedby = siteMapModifiedby;
@@ -62,28 +62,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "overwritetime")]
-        public System.DateTimeOffset? Overwritetime { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "sitemapxml")]
-        public string Sitemapxml { get; set; }
+        [JsonProperty(PropertyName = "overwritetime")]
+        public System.DateTimeOffset? Overwritetime { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "sitemapnameunique")]
         public string Sitemapnameunique { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -97,13 +92,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -112,18 +102,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "componentstate")]
         public int? Componentstate { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "isappaware")]
-        public bool? Isappaware { get; set; }
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -132,8 +117,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -144,6 +134,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "sitemapid")]
         public string Sitemapid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "sitemapxml")]
+        public string Sitemapxml { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "isappaware")]
+        public bool? Isappaware { get; set; }
 
         /// <summary>
         /// </summary>

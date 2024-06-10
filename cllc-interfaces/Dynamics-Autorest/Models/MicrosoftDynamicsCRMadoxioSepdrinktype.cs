@@ -29,38 +29,38 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioSepdrinktype class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioSepdrinktype(decimal? adoxioCostperserving = default(decimal?), string _owneridValue = default(string), int? adoxioGroup = default(int?), int? adoxioStoragemethod = default(int?), int? importsequencenumber = default(int?), int? utcconversiontimezonecode = default(int?), int? adoxioServingmethod = default(int?), string adoxioSepdrinktypeid = default(string), int? statecode = default(int?), string _owningteamValue = default(string), bool? adoxioIshomemade = default(bool?), string adoxioUnitsize = default(string), int? adoxioBulkmultiplier = default(int?), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), decimal? adoxioServingsizeml = default(decimal?), string _owninguserValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string versionnumber = default(string), int? statuscode = default(int?), string _createdbyValue = default(string), int? timezoneruleversionnumber = default(int?), string _modifiedbyValue = default(string), string adoxioName = default(string), string _owningbusinessunitValue = default(string), decimal? adoxioStoragesizeml = default(decimal?), decimal? adoxioMaxprice = default(decimal?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string adoxioBulksize = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioSepdrinktypeSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioSepdrinktypeDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioSepdrinktypeDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioSepdrinktypeAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioSepdrinktypeMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioSepdrinktypeProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioSepdrinktypeBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioSepdrinktypePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMadoxioSepdrinksalesforecast> adoxioSepdrinktypeAdoxioSepdrinksalesforecastType = default(IList<MicrosoftDynamicsCRMadoxioSepdrinksalesforecast>))
+        public MicrosoftDynamicsCRMadoxioSepdrinktype(string _owningbusinessunitValue = default(string), string _owneridValue = default(string), int? adoxioGroup = default(int?), string _owningteamValue = default(string), int? adoxioServingmethod = default(int?), string adoxioSepdrinktypeid = default(string), int? statecode = default(int?), bool? adoxioIshomemade = default(bool?), string adoxioUnitsize = default(string), string _modifiedbyValue = default(string), decimal? adoxioServingsizeml = default(decimal?), int? adoxioBulkmultiplier = default(int?), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), int? utcconversiontimezonecode = default(int?), int? statuscode = default(int?), string versionnumber = default(string), int? importsequencenumber = default(int?), string _createdbyValue = default(string), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string adoxioName = default(string), decimal? adoxioCostperserving = default(decimal?), decimal? adoxioStoragesizeml = default(decimal?), decimal? adoxioMaxprice = default(decimal?), int? adoxioStoragemethod = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string adoxioBulksize = default(string), string _owninguserValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioSepdrinktypeSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioSepdrinktypeDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioSepdrinktypeDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioSepdrinktypeAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioSepdrinktypeMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioSepdrinktypeProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioSepdrinktypeBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioSepdrinktypePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMadoxioSepdrinksalesforecast> adoxioSepdrinktypeAdoxioSepdrinksalesforecastType = default(IList<MicrosoftDynamicsCRMadoxioSepdrinksalesforecast>))
         {
-            AdoxioCostperserving = adoxioCostperserving;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
             this._owneridValue = _owneridValue;
             AdoxioGroup = adoxioGroup;
-            AdoxioStoragemethod = adoxioStoragemethod;
-            Importsequencenumber = importsequencenumber;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
+            this._owningteamValue = _owningteamValue;
             AdoxioServingmethod = adoxioServingmethod;
             AdoxioSepdrinktypeid = adoxioSepdrinktypeid;
             Statecode = statecode;
-            this._owningteamValue = _owningteamValue;
             AdoxioIshomemade = adoxioIshomemade;
             AdoxioUnitsize = adoxioUnitsize;
+            this._modifiedbyValue = _modifiedbyValue;
+            AdoxioServingsizeml = adoxioServingsizeml;
             AdoxioBulkmultiplier = adoxioBulkmultiplier;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Overriddencreatedon = overriddencreatedon;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            AdoxioServingsizeml = adoxioServingsizeml;
-            this._owninguserValue = _owninguserValue;
-            Modifiedon = modifiedon;
-            Versionnumber = versionnumber;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
             Statuscode = statuscode;
+            Versionnumber = versionnumber;
+            Importsequencenumber = importsequencenumber;
             this._createdbyValue = _createdbyValue;
             Timezoneruleversionnumber = timezoneruleversionnumber;
-            this._modifiedbyValue = _modifiedbyValue;
+            Modifiedon = modifiedon;
             AdoxioName = adoxioName;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
+            AdoxioCostperserving = adoxioCostperserving;
             AdoxioStoragesizeml = adoxioStoragesizeml;
             AdoxioMaxprice = adoxioMaxprice;
+            AdoxioStoragemethod = adoxioStoragemethod;
             Createdon = createdon;
             AdoxioBulksize = adoxioBulksize;
+            this._owninguserValue = _owninguserValue;
             Createdby = createdby;
             Createdonbehalfby = createdonbehalfby;
             Modifiedby = modifiedby;
@@ -88,8 +88,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_costperserving")]
-        public decimal? AdoxioCostperserving { get; set; }
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -103,18 +103,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_storagemethod")]
-        public int? AdoxioStoragemethod { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -133,11 +123,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_ishomemade")]
         public bool? AdoxioIshomemade { get; set; }
 
@@ -145,6 +130,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_unitsize")]
         public string AdoxioUnitsize { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_servingsizeml")]
+        public decimal? AdoxioServingsizeml { get; set; }
 
         /// <summary>
         /// </summary>
@@ -168,18 +163,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_servingsizeml")]
-        public decimal? AdoxioServingsizeml { get; set; }
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -188,8 +178,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -203,8 +193,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -213,8 +203,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_costperserving")]
+        public decimal? AdoxioCostperserving { get; set; }
 
         /// <summary>
         /// </summary>
@@ -228,6 +218,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_storagemethod")]
+        public int? AdoxioStoragemethod { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
@@ -235,6 +230,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_bulksize")]
         public string AdoxioBulksize { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owninguser_value")]
+        public string _owninguserValue { get; set; }
 
         /// <summary>
         /// </summary>

@@ -29,14 +29,15 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMmsdynRelationshipinsightsunifiedconfig class.
         /// </summary>
-        public MicrosoftDynamicsCRMmsdynRelationshipinsightsunifiedconfig(string _owningteamValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _owninguserValue = default(string), string versionnumber = default(string), string _createdbyValue = default(string), string _owningbusinessunitValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), bool? msdynUsenewconfigexperience = default(bool?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), int? timezoneruleversionnumber = default(int?), string newName = default(string), int? importsequencenumber = default(int?), string _modifiedonbehalfbyValue = default(string), int? utcconversiontimezonecode = default(int?), string msdynRelationshipinsightsunifiedconfigid = default(string), int? statuscode = default(int?), string _owneridValue = default(string), string _createdonbehalfbyValue = default(string), int? statecode = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> msdynRelationshipinsightsunifiedconfigSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> msdynRelationshipinsightsunifiedconfigDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> msdynRelationshipinsightsunifiedconfigDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> msdynRelationshipinsightsunifiedconfigAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> msdynRelationshipinsightsunifiedconfigMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> msdynRelationshipinsightsunifiedconfigProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> msdynRelationshipinsightsunifiedconfigBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> msdynRelationshipinsightsunifiedconfigPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>))
+        public MicrosoftDynamicsCRMmsdynRelationshipinsightsunifiedconfig(int? utcconversiontimezonecode = default(int?), string _owningteamValue = default(string), string _owninguserValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string versionnumber = default(string), string _createdbyValue = default(string), string _owneridValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), bool? msdynUsenewconfigexperience = default(bool?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), int? timezoneruleversionnumber = default(int?), string newName = default(string), int? importsequencenumber = default(int?), string _modifiedonbehalfbyValue = default(string), string _createdonbehalfbyValue = default(string), string msdynRelationshipinsightsunifiedconfigid = default(string), int? statuscode = default(int?), string _owningbusinessunitValue = default(string), int? statecode = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> msdynRelationshipinsightsunifiedconfigSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> msdynRelationshipinsightsunifiedconfigDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> msdynRelationshipinsightsunifiedconfigDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> msdynRelationshipinsightsunifiedconfigAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> msdynRelationshipinsightsunifiedconfigMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> msdynRelationshipinsightsunifiedconfigProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> msdynRelationshipinsightsunifiedconfigBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> msdynRelationshipinsightsunifiedconfigPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>))
         {
+            Utcconversiontimezonecode = utcconversiontimezonecode;
             this._owningteamValue = _owningteamValue;
-            Modifiedon = modifiedon;
             this._owninguserValue = _owninguserValue;
+            Modifiedon = modifiedon;
             Versionnumber = versionnumber;
             this._createdbyValue = _createdbyValue;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
+            this._owneridValue = _owneridValue;
             Overriddencreatedon = overriddencreatedon;
             MsdynUsenewconfigexperience = msdynUsenewconfigexperience;
             Createdon = createdon;
@@ -45,11 +46,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             NewName = newName;
             Importsequencenumber = importsequencenumber;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             MsdynRelationshipinsightsunifiedconfigid = msdynRelationshipinsightsunifiedconfigid;
             Statuscode = statuscode;
-            this._owneridValue = _owneridValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
             Statecode = statecode;
             Createdby = createdby;
             Createdonbehalfby = createdonbehalfby;
@@ -77,18 +77,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
         public string _owningteamValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
+        [JsonProperty(PropertyName = "_owninguser_value")]
+        public string _owninguserValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -102,8 +107,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -147,8 +152,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -162,13 +167,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
         /// </summary>

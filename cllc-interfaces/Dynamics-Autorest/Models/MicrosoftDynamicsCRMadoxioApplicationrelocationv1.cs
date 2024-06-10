@@ -29,31 +29,31 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioApplicationrelocationv1 class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioApplicationrelocationv1(System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string businessprocessflowinstanceid = default(string), string bpfName = default(string), string _activestageidValue = default(string), int? timezoneruleversionnumber = default(int?), string _processidValue = default(string), string _createdbyValue = default(string), int? importsequencenumber = default(int?), string versionnumber = default(string), string _modifiedbyValue = default(string), int? statecode = default(int?), System.DateTimeOffset? completedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string traversedpath = default(string), string _modifiedonbehalfbyValue = default(string), string _bpfAdoxioApplicationidValue = default(string), string _organizationidValue = default(string), int? statuscode = default(int?), int? bpfDuration = default(int?), System.DateTimeOffset? activestagestartedon = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMprocessstage activestageidname = default(MicrosoftDynamicsCRMprocessstage), MicrosoftDynamicsCRMworkflow processidname = default(MicrosoftDynamicsCRMworkflow), IList<MicrosoftDynamicsCRMsyncerror> adoxioApplicationrelocationv1SyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioApplicationrelocationv1AsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMworkflowlog> adoxioApplicationrelocationv1WorkflowLogs = default(IList<MicrosoftDynamicsCRMworkflowlog>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioApplicationrelocationv1MailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioApplicationrelocationv1ProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioApplicationrelocationv1BulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioApplicationrelocationv1PrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMadoxioApplication bpfAdoxioApplicationid = default(MicrosoftDynamicsCRMadoxioApplication))
+        public MicrosoftDynamicsCRMadoxioApplicationrelocationv1(string _bpfAdoxioApplicationidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _activestageidValue = default(string), System.DateTimeOffset? completedon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string _modifiedbyValue = default(string), string _organizationidValue = default(string), System.DateTimeOffset? activestagestartedon = default(System.DateTimeOffset?), string _processidValue = default(string), int? statecode = default(int?), int? utcconversiontimezonecode = default(int?), string businessprocessflowinstanceid = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string traversedpath = default(string), int? importsequencenumber = default(int?), string bpfName = default(string), string _modifiedonbehalfbyValue = default(string), string versionnumber = default(string), int? statuscode = default(int?), int? bpfDuration = default(int?), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMprocessstage activestageidname = default(MicrosoftDynamicsCRMprocessstage), MicrosoftDynamicsCRMworkflow processidname = default(MicrosoftDynamicsCRMworkflow), IList<MicrosoftDynamicsCRMsyncerror> adoxioApplicationrelocationv1SyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioApplicationrelocationv1AsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMworkflowlog> adoxioApplicationrelocationv1WorkflowLogs = default(IList<MicrosoftDynamicsCRMworkflowlog>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioApplicationrelocationv1MailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioApplicationrelocationv1ProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioApplicationrelocationv1BulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioApplicationrelocationv1PrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMadoxioApplication bpfAdoxioApplicationid = default(MicrosoftDynamicsCRMadoxioApplication))
         {
+            this._bpfAdoxioApplicationidValue = _bpfAdoxioApplicationidValue;
             Createdon = createdon;
-            Businessprocessflowinstanceid = businessprocessflowinstanceid;
-            BpfName = bpfName;
             this._activestageidValue = _activestageidValue;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
-            this._processidValue = _processidValue;
-            this._createdbyValue = _createdbyValue;
-            Importsequencenumber = importsequencenumber;
-            Versionnumber = versionnumber;
-            this._modifiedbyValue = _modifiedbyValue;
-            Statecode = statecode;
             Completedon = completedon;
+            this._createdbyValue = _createdbyValue;
+            this._modifiedbyValue = _modifiedbyValue;
+            this._organizationidValue = _organizationidValue;
+            Activestagestartedon = activestagestartedon;
+            this._processidValue = _processidValue;
+            Statecode = statecode;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            Businessprocessflowinstanceid = businessprocessflowinstanceid;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Modifiedon = modifiedon;
             Traversedpath = traversedpath;
+            Importsequencenumber = importsequencenumber;
+            BpfName = bpfName;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._bpfAdoxioApplicationidValue = _bpfAdoxioApplicationidValue;
-            this._organizationidValue = _organizationidValue;
+            Versionnumber = versionnumber;
             Statuscode = statuscode;
             BpfDuration = bpfDuration;
-            Activestagestartedon = activestagestartedon;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
             Overriddencreatedon = overriddencreatedon;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
             Createdbyname = createdbyname;
             Createdonbehalfbyname = createdonbehalfbyname;
             Modifiedbyname = modifiedbyname;
@@ -79,18 +79,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_bpf_adoxio_applicationid_value")]
+        public string _bpfAdoxioApplicationidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "businessprocessflowinstanceid")]
-        public string Businessprocessflowinstanceid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "bpf_name")]
-        public string BpfName { get; set; }
 
         /// <summary>
         /// </summary>
@@ -99,13 +94,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_processid_value")]
-        public string _processidValue { get; set; }
+        [JsonProperty(PropertyName = "completedon")]
+        public System.DateTimeOffset? Completedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -114,18 +104,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "activestagestartedon")]
+        public System.DateTimeOffset? Activestagestartedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_processid_value")]
+        public string _processidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -134,8 +129,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "completedon")]
-        public System.DateTimeOffset? Completedon { get; set; }
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "businessprocessflowinstanceid")]
+        public string Businessprocessflowinstanceid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -154,18 +154,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "bpf_name")]
+        public string BpfName { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_bpf_adoxio_applicationid_value")]
-        public string _bpfAdoxioApplicationidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -179,18 +184,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "activestagestartedon")]
-        public System.DateTimeOffset? Activestagestartedon { get; set; }
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
         /// </summary>

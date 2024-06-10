@@ -29,34 +29,34 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMsavedqueryvisualization class.
         /// </summary>
-        public MicrosoftDynamicsCRMsavedqueryvisualization(string presentationdescription = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string canbedeleted = default(string), string _createdbyValue = default(string), int? type = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), string primaryentitytypecode = default(string), string description = default(string), string introducedversion = default(string), int? componentstate = default(int?), string datadescription = default(string), int? charttype = default(int?), bool? ismanaged = default(bool?), string _organizationidValue = default(string), string _modifiedonbehalfbyValue = default(string), string versionnumber = default(string), string savedqueryvisualizationid = default(string), string _webresourceidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string name = default(string), bool? isdefault = default(bool?), string iscustomizable = default(string), string _createdonbehalfbyValue = default(string), string savedqueryvisualizationidunique = default(string), string solutionid = default(string), IList<MicrosoftDynamicsCRMsyncerror> savedQueryVisualizationSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMwebresource webresourceid = default(MicrosoftDynamicsCRMwebresource), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMsavedqueryvisualization(string presentationdescription = default(string), string canbedeleted = default(string), string _createdbyValue = default(string), bool? isdefault = default(bool?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), bool? ismanaged = default(bool?), string description = default(string), string _createdonbehalfbyValue = default(string), int? charttype = default(int?), int? componentstate = default(int?), int? type = default(int?), string datadescription = default(string), string primaryentitytypecode = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string solutionid = default(string), string _modifiedonbehalfbyValue = default(string), string versionnumber = default(string), string savedqueryvisualizationid = default(string), string _organizationidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string name = default(string), string iscustomizable = default(string), string introducedversion = default(string), string savedqueryvisualizationidunique = default(string), string _webresourceidValue = default(string), IList<MicrosoftDynamicsCRMsyncerror> savedQueryVisualizationSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMwebresource webresourceid = default(MicrosoftDynamicsCRMwebresource), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Presentationdescription = presentationdescription;
-            Overwritetime = overwritetime;
             Canbedeleted = canbedeleted;
             this._createdbyValue = _createdbyValue;
-            Type = type;
+            Isdefault = isdefault;
             Modifiedon = modifiedon;
             this._modifiedbyValue = _modifiedbyValue;
-            Primaryentitytypecode = primaryentitytypecode;
-            Description = description;
-            Introducedversion = introducedversion;
-            Componentstate = componentstate;
-            Datadescription = datadescription;
-            Charttype = charttype;
             Ismanaged = ismanaged;
-            this._organizationidValue = _organizationidValue;
+            Description = description;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Charttype = charttype;
+            Componentstate = componentstate;
+            Type = type;
+            Datadescription = datadescription;
+            Primaryentitytypecode = primaryentitytypecode;
+            Overwritetime = overwritetime;
+            Solutionid = solutionid;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Versionnumber = versionnumber;
             Savedqueryvisualizationid = savedqueryvisualizationid;
-            this._webresourceidValue = _webresourceidValue;
+            this._organizationidValue = _organizationidValue;
             Createdon = createdon;
             Name = name;
-            Isdefault = isdefault;
             Iscustomizable = iscustomizable;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Introducedversion = introducedversion;
             Savedqueryvisualizationidunique = savedqueryvisualizationidunique;
-            Solutionid = solutionid;
+            this._webresourceidValue = _webresourceidValue;
             SavedQueryVisualizationSyncErrors = savedQueryVisualizationSyncErrors;
             Createdonbehalfby = createdonbehalfby;
             Organizationid = organizationid;
@@ -79,11 +79,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "overwritetime")]
-        public System.DateTimeOffset? Overwritetime { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "canbedeleted")]
         public string Canbedeleted { get; set; }
 
@@ -94,8 +89,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "type")]
-        public int? Type { get; set; }
+        [JsonProperty(PropertyName = "isdefault")]
+        public bool? Isdefault { get; set; }
 
         /// <summary>
         /// </summary>
@@ -109,8 +104,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "primaryentitytypecode")]
-        public string Primaryentitytypecode { get; set; }
+        [JsonProperty(PropertyName = "ismanaged")]
+        public bool? Ismanaged { get; set; }
 
         /// <summary>
         /// </summary>
@@ -119,18 +114,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "introducedversion")]
-        public string Introducedversion { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "componentstate")]
-        public int? Componentstate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "datadescription")]
-        public string Datadescription { get; set; }
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -139,13 +124,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ismanaged")]
-        public bool? Ismanaged { get; set; }
+        [JsonProperty(PropertyName = "componentstate")]
+        public int? Componentstate { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
+        [JsonProperty(PropertyName = "type")]
+        public int? Type { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "datadescription")]
+        public string Datadescription { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "primaryentitytypecode")]
+        public string Primaryentitytypecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overwritetime")]
+        public System.DateTimeOffset? Overwritetime { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "solutionid")]
+        public string Solutionid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -164,8 +169,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_webresourceid_value")]
-        public string _webresourceidValue { get; set; }
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -179,18 +184,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "isdefault")]
-        public bool? Isdefault { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "iscustomizable")]
         public string Iscustomizable { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "introducedversion")]
+        public string Introducedversion { get; set; }
 
         /// <summary>
         /// </summary>
@@ -199,8 +199,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "solutionid")]
-        public string Solutionid { get; set; }
+        [JsonProperty(PropertyName = "_webresourceid_value")]
+        public string _webresourceidValue { get; set; }
 
         /// <summary>
         /// </summary>

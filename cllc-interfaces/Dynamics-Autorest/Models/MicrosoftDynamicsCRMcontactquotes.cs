@@ -29,14 +29,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMcontactquotes
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMcontactquotes(System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string quoteid = default(string), string contactquoteid = default(string), int? utcconversiontimezonecode = default(int?), string versionnumber = default(string), int? importsequencenumber = default(int?), string name = default(string), int? timezoneruleversionnumber = default(int?), string contactid = default(string), IList<MicrosoftDynamicsCRMteam> contactquotesTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMasyncoperation> contactquotesAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> contactquotesMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> contactquotesBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> contactquotesPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>))
+        public MicrosoftDynamicsCRMcontactquotes(System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string quoteid = default(string), int? utcconversiontimezonecode = default(int?), int? importsequencenumber = default(int?), string versionnumber = default(string), string contactquoteid = default(string), string name = default(string), int? timezoneruleversionnumber = default(int?), string contactid = default(string), IList<MicrosoftDynamicsCRMteam> contactquotesTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMasyncoperation> contactquotesAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> contactquotesMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> contactquotesBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> contactquotesPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>))
         {
             Overriddencreatedon = overriddencreatedon;
             Quoteid = quoteid;
-            Contactquoteid = contactquoteid;
             Utcconversiontimezonecode = utcconversiontimezonecode;
-            Versionnumber = versionnumber;
             Importsequencenumber = importsequencenumber;
+            Versionnumber = versionnumber;
+            Contactquoteid = contactquoteid;
             Name = name;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             Contactid = contactid;
@@ -65,13 +65,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "contactquoteid")]
-        public string Contactquoteid { get; set; }
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -80,8 +80,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
+        [JsonProperty(PropertyName = "contactquoteid")]
+        public string Contactquoteid { get; set; }
 
         /// <summary>
         /// </summary>

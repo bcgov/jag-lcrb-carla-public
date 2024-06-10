@@ -29,8 +29,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMtransformationmapping class.
         /// </summary>
-        public MicrosoftDynamicsCRMtransformationmapping(int? componentstate = default(int?), string transformationmappingidunique = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string solutionid = default(string), string targetentityname = default(string), string _createdonbehalfbyValue = default(string), bool? ismanaged = default(bool?), string _modifiedbyValue = default(string), string transformationtypename = default(string), string _importmapidValue = default(string), string transformationmappingid = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string introducedversion = default(string), string sourceentityname = default(string), int? statuscode = default(int?), int? statecode = default(int?), int? processcode = default(int?), IList<MicrosoftDynamicsCRMtransformationparametermapping> transformationParameterMappingTransformationMapping = default(IList<MicrosoftDynamicsCRMtransformationparametermapping>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMimportmap importmapid = default(MicrosoftDynamicsCRMimportmap))
+        public MicrosoftDynamicsCRMtransformationmapping(string introducedversion = default(string), int? componentstate = default(int?), string transformationmappingidunique = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string solutionid = default(string), string targetentityname = default(string), string _createdonbehalfbyValue = default(string), bool? ismanaged = default(bool?), string transformationtypename = default(string), string _importmapidValue = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), string transformationmappingid = default(string), string _modifiedonbehalfbyValue = default(string), string sourceentityname = default(string), int? statuscode = default(int?), int? statecode = default(int?), int? processcode = default(int?), IList<MicrosoftDynamicsCRMtransformationparametermapping> transformationParameterMappingTransformationMapping = default(IList<MicrosoftDynamicsCRMtransformationparametermapping>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMimportmap importmapid = default(MicrosoftDynamicsCRMimportmap))
         {
+            Introducedversion = introducedversion;
             Componentstate = componentstate;
             Transformationmappingidunique = transformationmappingidunique;
             Modifiedon = modifiedon;
@@ -39,14 +40,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Targetentityname = targetentityname;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Ismanaged = ismanaged;
-            this._modifiedbyValue = _modifiedbyValue;
             Transformationtypename = transformationtypename;
             this._importmapidValue = _importmapidValue;
-            Transformationmappingid = transformationmappingid;
             Overwritetime = overwritetime;
             Createdon = createdon;
+            this._modifiedbyValue = _modifiedbyValue;
+            Transformationmappingid = transformationmappingid;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            Introducedversion = introducedversion;
             Sourceentityname = sourceentityname;
             Statuscode = statuscode;
             Statecode = statecode;
@@ -64,6 +64,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "introducedversion")]
+        public string Introducedversion { get; set; }
 
         /// <summary>
         /// </summary>
@@ -107,11 +112,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "transformationtypename")]
         public string Transformationtypename { get; set; }
 
@@ -119,11 +119,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_importmapid_value")]
         public string _importmapidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "transformationmappingid")]
-        public string Transformationmappingid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -137,13 +132,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "introducedversion")]
-        public string Introducedversion { get; set; }
+        [JsonProperty(PropertyName = "transformationmappingid")]
+        public string Transformationmappingid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>

@@ -29,70 +29,47 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMsocialactivity class.
         /// </summary>
-        public MicrosoftDynamicsCRMsocialactivity(bool? directioncode = default(bool?), string posturl = default(string), System.DateTimeOffset? postedon = default(System.DateTimeOffset?), string _postfromprofileidValue = default(string), string postid = default(string), decimal? sentimentvalue = default(decimal?), string posttoprofileid = default(string), string _postauthoraccountValue = default(string), int? postmessagetype = default(int?), string threadid = default(string), string _postauthorValue = default(string), string inresponseto = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), string socialadditionalparams = default(string), MicrosoftDynamicsCRMbookableresourcebooking regardingobjectidBookableresourcebookingSocialactivity = default(MicrosoftDynamicsCRMbookableresourcebooking), MicrosoftDynamicsCRMbookableresourcebookingheader regardingobjectidBookableresourcebookingheaderSocialactivity = default(MicrosoftDynamicsCRMbookableresourcebookingheader), MicrosoftDynamicsCRMknowledgebaserecord regardingobjectidKnowledgebaserecordSocialactivity = default(MicrosoftDynamicsCRMknowledgebaserecord), MicrosoftDynamicsCRMmsdynPostalbum regardingobjectidMsdynPostalbumSocialactivity = default(MicrosoftDynamicsCRMmsdynPostalbum), MicrosoftDynamicsCRMabsScheduledprocess regardingobjectidAbsScheduledprocessSocialactivity = default(MicrosoftDynamicsCRMabsScheduledprocess), MicrosoftDynamicsCRMadoxioApplication regardingobjectidAdoxioApplicationSocialactivity = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioComplaint regardingobjectidAdoxioComplaintSocialactivity = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioInvestigation regardingobjectidAdoxioInvestigationSocialactivity = default(MicrosoftDynamicsCRMadoxioInvestigation), MicrosoftDynamicsCRMadoxioLicences regardingobjectidAdoxioLicencesSocialactivity = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioWorker regardingobjectidAdoxioWorkerSocialactivity = default(MicrosoftDynamicsCRMadoxioWorker), MicrosoftDynamicsCRMadoxioComplianceinvestigation regardingobjectidAdoxioComplianceinvestigationSocialactivity = default(MicrosoftDynamicsCRMadoxioComplianceinvestigation), MicrosoftDynamicsCRMsite regardingobjectidSiteSocialactivity = default(MicrosoftDynamicsCRMsite), MicrosoftDynamicsCRMadoxioEvent regardingobjectidAdoxioEventSocialactivity = default(MicrosoftDynamicsCRMadoxioEvent), MicrosoftDynamicsCRMadoxioEnforcementaction regardingobjectidAdoxioEnforcementactionSocialactivity = default(MicrosoftDynamicsCRMadoxioEnforcementaction), MicrosoftDynamicsCRMadoxioSpecialevent regardingobjectidAdoxioSpecialeventSocialactivity = default(MicrosoftDynamicsCRMadoxioSpecialevent), IList<MicrosoftDynamicsCRMconnection> socialactivityConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMentitlement regardingobjectidEntitlementSocialactivity = default(MicrosoftDynamicsCRMentitlement), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbySocialactivity = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMincident regardingobjectidIncidentSocialactivity = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMcontact regardingobjectidContactSocialactivity = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMasyncoperation regardingobjectidAsyncoperation = default(MicrosoftDynamicsCRMasyncoperation), MicrosoftDynamicsCRMcontact postauthorContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMbulkoperation regardingobjectidBulkoperationSocialactivity = default(MicrosoftDynamicsCRMbulkoperation), MicrosoftDynamicsCRMactivitypointer activityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMsystemuser createdonbehalfbySocialactivity = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyidSocialactivity = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMprocesssession> socialActivityProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), MicrosoftDynamicsCRMsalesorder regardingobjectidSalesorderSocialactivity = default(MicrosoftDynamicsCRMsalesorder), IList<MicrosoftDynamicsCRMasyncoperation> socialActivityAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticleSocialactivity = default(MicrosoftDynamicsCRMknowledgearticle), IList<MicrosoftDynamicsCRMactivityparty> socialactivityActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMquote regardingobjectidQuoteSocialactivity = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMteam owningteamSocialactivity = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMsyncerror> socialActivitySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMaccount regardingobjectidAccountSocialactivity = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMaccount postauthoraccountAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMservice serviceidSocialactivity = default(MicrosoftDynamicsCRMservice), IList<MicrosoftDynamicsCRMslakpiinstance> slakpiinstanceSocialactivity = default(IList<MicrosoftDynamicsCRMslakpiinstance>), MicrosoftDynamicsCRMentitlementtemplate regardingobjectidEntitlementtemplateSocialactivity = default(MicrosoftDynamicsCRMentitlementtemplate), MicrosoftDynamicsCRMcontact postauthoraccountContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMsystemuser createdbySocialactivity = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsla slaSocialactivitySla = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMbulkdeletefailure> socialActivityBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsocialprofile postfromprofileid = default(MicrosoftDynamicsCRMsocialprofile), MicrosoftDynamicsCRMaccount postauthorAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMlead regardingobjectidLeadSocialactivity = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMcontract regardingobjectidContractSocialactivity = default(MicrosoftDynamicsCRMcontract), MicrosoftDynamicsCRMsystemuser modifiedbySocialactivity = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMconnection> socialactivityConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMannotation> socialActivityAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMsla slainvokedidSocialactivitySla = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMduplicaterecord> socialActivityDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMsystemuser owninguserSocialactivity = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMduplicaterecord> socialActivityDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMqueueitem> socialActivityQueueItem = default(IList<MicrosoftDynamicsCRMqueueitem>), MicrosoftDynamicsCRMinvoice regardingobjectidInvoiceSocialactivity = default(MicrosoftDynamicsCRMinvoice), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> socialactivityPrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMbusinessunit owningbusinessunitSocialactivity = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunitySocialactivity = default(MicrosoftDynamicsCRMopportunity))
+        public MicrosoftDynamicsCRMsocialactivity(bool? directioncode = default(bool?), int? postmessagetype = default(int?), string _postfromprofileidValue = default(string), int? importsequencenumber = default(int?), string postid = default(string), decimal? sentimentvalue = default(decimal?), System.DateTimeOffset? postedon = default(System.DateTimeOffset?), string posttoprofileid = default(string), string inresponseto = default(string), string _postauthoraccountValue = default(string), string posturl = default(string), string threadid = default(string), string _postauthorValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string socialadditionalparams = default(string), MicrosoftDynamicsCRMknowledgebaserecord regardingobjectidKnowledgebaserecordSocialactivity = default(MicrosoftDynamicsCRMknowledgebaserecord), IList<MicrosoftDynamicsCRMconnection> socialactivityConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbySocialactivity = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcontact regardingobjectidContactSocialactivity = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMasyncoperation regardingobjectidAsyncoperation = default(MicrosoftDynamicsCRMasyncoperation), MicrosoftDynamicsCRMcontact postauthorContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMactivitypointer activityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMsystemuser createdonbehalfbySocialactivity = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyidSocialactivity = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMprocesssession> socialActivityProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMasyncoperation> socialActivityAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticleSocialactivity = default(MicrosoftDynamicsCRMknowledgearticle), IList<MicrosoftDynamicsCRMactivityparty> socialactivityActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMteam owningteamSocialactivity = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMsyncerror> socialActivitySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMaccount regardingobjectidAccountSocialactivity = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMaccount postauthoraccountAccount = default(MicrosoftDynamicsCRMaccount), IList<MicrosoftDynamicsCRMslakpiinstance> slakpiinstanceSocialactivity = default(IList<MicrosoftDynamicsCRMslakpiinstance>), MicrosoftDynamicsCRMcontact postauthoraccountContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMsystemuser createdbySocialactivity = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsla slaSocialactivitySla = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMbulkdeletefailure> socialActivityBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsocialprofile postfromprofileid = default(MicrosoftDynamicsCRMsocialprofile), MicrosoftDynamicsCRMaccount postauthorAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMsystemuser modifiedbySocialactivity = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMconnection> socialactivityConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMannotation> socialActivityAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMsla slainvokedidSocialactivitySla = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMduplicaterecord> socialActivityDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMsystemuser owninguserSocialactivity = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMduplicaterecord> socialActivityDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMqueueitem> socialActivityQueueItem = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> socialactivityPrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMbusinessunit owningbusinessunitSocialactivity = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMmsdynPostalbum regardingobjectidMsdynPostalbumSocialactivity = default(MicrosoftDynamicsCRMmsdynPostalbum), MicrosoftDynamicsCRMabsScheduledprocess regardingobjectidAbsScheduledprocessSocialactivity = default(MicrosoftDynamicsCRMabsScheduledprocess), MicrosoftDynamicsCRMadoxioApplication regardingobjectidAdoxioApplicationSocialactivity = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioComplaint regardingobjectidAdoxioComplaintSocialactivity = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioInvestigation regardingobjectidAdoxioInvestigationSocialactivity = default(MicrosoftDynamicsCRMadoxioInvestigation), MicrosoftDynamicsCRMadoxioLicences regardingobjectidAdoxioLicencesSocialactivity = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioWorker regardingobjectidAdoxioWorkerSocialactivity = default(MicrosoftDynamicsCRMadoxioWorker), MicrosoftDynamicsCRMadoxioComplianceinvestigation regardingobjectidAdoxioComplianceinvestigationSocialactivity = default(MicrosoftDynamicsCRMadoxioComplianceinvestigation), MicrosoftDynamicsCRMadoxioEvent regardingobjectidAdoxioEventSocialactivity = default(MicrosoftDynamicsCRMadoxioEvent), MicrosoftDynamicsCRMadoxioEnforcementaction regardingobjectidAdoxioEnforcementactionSocialactivity = default(MicrosoftDynamicsCRMadoxioEnforcementaction), MicrosoftDynamicsCRMadoxioSpecialevent regardingobjectidAdoxioSpecialeventSocialactivity = default(MicrosoftDynamicsCRMadoxioSpecialevent), MicrosoftDynamicsCRMafkWorkflowelementoption regardingobjectidAfkWorkflowelementoptionSocialactivity = default(MicrosoftDynamicsCRMafkWorkflowelementoption), MicrosoftDynamicsCRMadoxioExternalprofile regardingobjectidAdoxioExternalprofileSocialactivity = default(MicrosoftDynamicsCRMadoxioExternalprofile), MicrosoftDynamicsCRMadoxioExternalcontact regardingobjectidAdoxioExternalcontactSocialactivity = default(MicrosoftDynamicsCRMadoxioExternalcontact), MicrosoftDynamicsCRMadoxioViolationticket regardingobjectidAdoxioViolationticketSocialactivity = default(MicrosoftDynamicsCRMadoxioViolationticket), MicrosoftDynamicsCRMbulkoperation regardingobjectidBulkoperationSocialactivity = default(MicrosoftDynamicsCRMbulkoperation), MicrosoftDynamicsCRMsite regardingobjectidSiteSocialactivity = default(MicrosoftDynamicsCRMsite), MicrosoftDynamicsCRMentitlement regardingobjectidEntitlementSocialactivity = default(MicrosoftDynamicsCRMentitlement), MicrosoftDynamicsCRMincident regardingobjectidIncidentSocialactivity = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMservice serviceidSocialactivity = default(MicrosoftDynamicsCRMservice), MicrosoftDynamicsCRMentitlementtemplate regardingobjectidEntitlementtemplateSocialactivity = default(MicrosoftDynamicsCRMentitlementtemplate), MicrosoftDynamicsCRMcontract regardingobjectidContractSocialactivity = default(MicrosoftDynamicsCRMcontract), MicrosoftDynamicsCRMsalesorder regardingobjectidSalesorderSocialactivity = default(MicrosoftDynamicsCRMsalesorder), MicrosoftDynamicsCRMquote regardingobjectidQuoteSocialactivity = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMinvoice regardingobjectidInvoiceSocialactivity = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunitySocialactivity = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMbookableresourcebooking regardingobjectidBookableresourcebookingSocialactivity = default(MicrosoftDynamicsCRMbookableresourcebooking), MicrosoftDynamicsCRMbookableresourcebookingheader regardingobjectidBookableresourcebookingheaderSocialactivity = default(MicrosoftDynamicsCRMbookableresourcebookingheader), MicrosoftDynamicsCRMlead regardingobjectidLeadSocialactivity = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMprincipal owneridSocialactivity = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMmsdynPlaybookinstance regardingobjectidMsdynPlaybookinstanceSocialactivity = default(MicrosoftDynamicsCRMmsdynPlaybookinstance), MicrosoftDynamicsCRMptmAutomergeworkingitems regardingobjectidPtmAutomergeworkingitemsSocialactivity = default(MicrosoftDynamicsCRMptmAutomergeworkingitems))
         {
             Directioncode = directioncode;
-            Posturl = posturl;
-            Postedon = postedon;
+            Postmessagetype = postmessagetype;
             this._postfromprofileidValue = _postfromprofileidValue;
+            Importsequencenumber = importsequencenumber;
             Postid = postid;
             Sentimentvalue = sentimentvalue;
+            Postedon = postedon;
             Posttoprofileid = posttoprofileid;
+            Inresponseto = inresponseto;
             this._postauthoraccountValue = _postauthoraccountValue;
-            Postmessagetype = postmessagetype;
+            Posturl = posturl;
             Threadid = threadid;
             this._postauthorValue = _postauthorValue;
-            Inresponseto = inresponseto;
             Overriddencreatedon = overriddencreatedon;
-            Importsequencenumber = importsequencenumber;
             Socialadditionalparams = socialadditionalparams;
-            RegardingobjectidBookableresourcebookingSocialactivity = regardingobjectidBookableresourcebookingSocialactivity;
-            RegardingobjectidBookableresourcebookingheaderSocialactivity = regardingobjectidBookableresourcebookingheaderSocialactivity;
             RegardingobjectidKnowledgebaserecordSocialactivity = regardingobjectidKnowledgebaserecordSocialactivity;
-            RegardingobjectidMsdynPostalbumSocialactivity = regardingobjectidMsdynPostalbumSocialactivity;
-            RegardingobjectidAbsScheduledprocessSocialactivity = regardingobjectidAbsScheduledprocessSocialactivity;
-            RegardingobjectidAdoxioApplicationSocialactivity = regardingobjectidAdoxioApplicationSocialactivity;
-            RegardingobjectidAdoxioComplaintSocialactivity = regardingobjectidAdoxioComplaintSocialactivity;
-            RegardingobjectidAdoxioInvestigationSocialactivity = regardingobjectidAdoxioInvestigationSocialactivity;
-            RegardingobjectidAdoxioLicencesSocialactivity = regardingobjectidAdoxioLicencesSocialactivity;
-            RegardingobjectidAdoxioWorkerSocialactivity = regardingobjectidAdoxioWorkerSocialactivity;
-            RegardingobjectidAdoxioComplianceinvestigationSocialactivity = regardingobjectidAdoxioComplianceinvestigationSocialactivity;
-            RegardingobjectidSiteSocialactivity = regardingobjectidSiteSocialactivity;
-            RegardingobjectidAdoxioEventSocialactivity = regardingobjectidAdoxioEventSocialactivity;
-            RegardingobjectidAdoxioEnforcementactionSocialactivity = regardingobjectidAdoxioEnforcementactionSocialactivity;
-            RegardingobjectidAdoxioSpecialeventSocialactivity = regardingobjectidAdoxioSpecialeventSocialactivity;
             SocialactivityConnections2 = socialactivityConnections2;
-            RegardingobjectidEntitlementSocialactivity = regardingobjectidEntitlementSocialactivity;
             ModifiedonbehalfbySocialactivity = modifiedonbehalfbySocialactivity;
-            RegardingobjectidIncidentSocialactivity = regardingobjectidIncidentSocialactivity;
             RegardingobjectidContactSocialactivity = regardingobjectidContactSocialactivity;
             RegardingobjectidAsyncoperation = regardingobjectidAsyncoperation;
             PostauthorContact = postauthorContact;
-            RegardingobjectidBulkoperationSocialactivity = regardingobjectidBulkoperationSocialactivity;
             ActivityidActivitypointer = activityidActivitypointer;
             CreatedonbehalfbySocialactivity = createdonbehalfbySocialactivity;
             TransactioncurrencyidSocialactivity = transactioncurrencyidSocialactivity;
             SocialActivityProcessSessions = socialActivityProcessSessions;
-            RegardingobjectidSalesorderSocialactivity = regardingobjectidSalesorderSocialactivity;
             SocialActivityAsyncOperations = socialActivityAsyncOperations;
             RegardingobjectidKnowledgearticleSocialactivity = regardingobjectidKnowledgearticleSocialactivity;
             SocialactivityActivityParties = socialactivityActivityParties;
-            RegardingobjectidQuoteSocialactivity = regardingobjectidQuoteSocialactivity;
             OwningteamSocialactivity = owningteamSocialactivity;
             SocialActivitySyncErrors = socialActivitySyncErrors;
             RegardingobjectidAccountSocialactivity = regardingobjectidAccountSocialactivity;
             PostauthoraccountAccount = postauthoraccountAccount;
-            ServiceidSocialactivity = serviceidSocialactivity;
             SlakpiinstanceSocialactivity = slakpiinstanceSocialactivity;
-            RegardingobjectidEntitlementtemplateSocialactivity = regardingobjectidEntitlementtemplateSocialactivity;
             PostauthoraccountContact = postauthoraccountContact;
             CreatedbySocialactivity = createdbySocialactivity;
             SlaSocialactivitySla = slaSocialactivitySla;
             SocialActivityBulkDeleteFailures = socialActivityBulkDeleteFailures;
             Postfromprofileid = postfromprofileid;
             PostauthorAccount = postauthorAccount;
-            RegardingobjectidLeadSocialactivity = regardingobjectidLeadSocialactivity;
-            RegardingobjectidContractSocialactivity = regardingobjectidContractSocialactivity;
             ModifiedbySocialactivity = modifiedbySocialactivity;
             SocialactivityConnections1 = socialactivityConnections1;
             SocialActivityAnnotation = socialActivityAnnotation;
@@ -101,10 +78,40 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             OwninguserSocialactivity = owninguserSocialactivity;
             SocialActivityDuplicateMatchingRecord = socialActivityDuplicateMatchingRecord;
             SocialActivityQueueItem = socialActivityQueueItem;
-            RegardingobjectidInvoiceSocialactivity = regardingobjectidInvoiceSocialactivity;
             SocialactivityPrincipalobjectattributeaccess = socialactivityPrincipalobjectattributeaccess;
             OwningbusinessunitSocialactivity = owningbusinessunitSocialactivity;
+            RegardingobjectidMsdynPostalbumSocialactivity = regardingobjectidMsdynPostalbumSocialactivity;
+            RegardingobjectidAbsScheduledprocessSocialactivity = regardingobjectidAbsScheduledprocessSocialactivity;
+            RegardingobjectidAdoxioApplicationSocialactivity = regardingobjectidAdoxioApplicationSocialactivity;
+            RegardingobjectidAdoxioComplaintSocialactivity = regardingobjectidAdoxioComplaintSocialactivity;
+            RegardingobjectidAdoxioInvestigationSocialactivity = regardingobjectidAdoxioInvestigationSocialactivity;
+            RegardingobjectidAdoxioLicencesSocialactivity = regardingobjectidAdoxioLicencesSocialactivity;
+            RegardingobjectidAdoxioWorkerSocialactivity = regardingobjectidAdoxioWorkerSocialactivity;
+            RegardingobjectidAdoxioComplianceinvestigationSocialactivity = regardingobjectidAdoxioComplianceinvestigationSocialactivity;
+            RegardingobjectidAdoxioEventSocialactivity = regardingobjectidAdoxioEventSocialactivity;
+            RegardingobjectidAdoxioEnforcementactionSocialactivity = regardingobjectidAdoxioEnforcementactionSocialactivity;
+            RegardingobjectidAdoxioSpecialeventSocialactivity = regardingobjectidAdoxioSpecialeventSocialactivity;
+            RegardingobjectidAfkWorkflowelementoptionSocialactivity = regardingobjectidAfkWorkflowelementoptionSocialactivity;
+            RegardingobjectidAdoxioExternalprofileSocialactivity = regardingobjectidAdoxioExternalprofileSocialactivity;
+            RegardingobjectidAdoxioExternalcontactSocialactivity = regardingobjectidAdoxioExternalcontactSocialactivity;
+            RegardingobjectidAdoxioViolationticketSocialactivity = regardingobjectidAdoxioViolationticketSocialactivity;
+            RegardingobjectidBulkoperationSocialactivity = regardingobjectidBulkoperationSocialactivity;
+            RegardingobjectidSiteSocialactivity = regardingobjectidSiteSocialactivity;
+            RegardingobjectidEntitlementSocialactivity = regardingobjectidEntitlementSocialactivity;
+            RegardingobjectidIncidentSocialactivity = regardingobjectidIncidentSocialactivity;
+            ServiceidSocialactivity = serviceidSocialactivity;
+            RegardingobjectidEntitlementtemplateSocialactivity = regardingobjectidEntitlementtemplateSocialactivity;
+            RegardingobjectidContractSocialactivity = regardingobjectidContractSocialactivity;
+            RegardingobjectidSalesorderSocialactivity = regardingobjectidSalesorderSocialactivity;
+            RegardingobjectidQuoteSocialactivity = regardingobjectidQuoteSocialactivity;
+            RegardingobjectidInvoiceSocialactivity = regardingobjectidInvoiceSocialactivity;
             RegardingobjectidOpportunitySocialactivity = regardingobjectidOpportunitySocialactivity;
+            RegardingobjectidBookableresourcebookingSocialactivity = regardingobjectidBookableresourcebookingSocialactivity;
+            RegardingobjectidBookableresourcebookingheaderSocialactivity = regardingobjectidBookableresourcebookingheaderSocialactivity;
+            RegardingobjectidLeadSocialactivity = regardingobjectidLeadSocialactivity;
+            OwneridSocialactivity = owneridSocialactivity;
+            RegardingobjectidMsdynPlaybookinstanceSocialactivity = regardingobjectidMsdynPlaybookinstanceSocialactivity;
+            RegardingobjectidPtmAutomergeworkingitemsSocialactivity = regardingobjectidPtmAutomergeworkingitemsSocialactivity;
             CustomInit();
         }
 
@@ -120,18 +127,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "posturl")]
-        public string Posturl { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "postedon")]
-        public System.DateTimeOffset? Postedon { get; set; }
+        [JsonProperty(PropertyName = "postmessagetype")]
+        public int? Postmessagetype { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_postfromprofileid_value")]
         public string _postfromprofileidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -145,8 +152,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "postedon")]
+        public System.DateTimeOffset? Postedon { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "posttoprofileid")]
         public string Posttoprofileid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "inresponseto")]
+        public string Inresponseto { get; set; }
 
         /// <summary>
         /// </summary>
@@ -155,8 +172,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "postmessagetype")]
-        public int? Postmessagetype { get; set; }
+        [JsonProperty(PropertyName = "posturl")]
+        public string Posturl { get; set; }
 
         /// <summary>
         /// </summary>
@@ -170,18 +187,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "inresponseto")]
-        public string Inresponseto { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -190,78 +197,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_bookableresourcebooking_socialactivity")]
-        public MicrosoftDynamicsCRMbookableresourcebooking RegardingobjectidBookableresourcebookingSocialactivity { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_bookableresourcebookingheader_socialactivity")]
-        public MicrosoftDynamicsCRMbookableresourcebookingheader RegardingobjectidBookableresourcebookingheaderSocialactivity { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "regardingobjectid_knowledgebaserecord_socialactivity")]
         public MicrosoftDynamicsCRMknowledgebaserecord RegardingobjectidKnowledgebaserecordSocialactivity { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_msdyn_postalbum_socialactivity")]
-        public MicrosoftDynamicsCRMmsdynPostalbum RegardingobjectidMsdynPostalbumSocialactivity { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_abs_scheduledprocess_socialactivity")]
-        public MicrosoftDynamicsCRMabsScheduledprocess RegardingobjectidAbsScheduledprocessSocialactivity { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_adoxio_application_socialactivity")]
-        public MicrosoftDynamicsCRMadoxioApplication RegardingobjectidAdoxioApplicationSocialactivity { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_adoxio_complaint_socialactivity")]
-        public MicrosoftDynamicsCRMadoxioComplaint RegardingobjectidAdoxioComplaintSocialactivity { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_adoxio_investigation_socialactivity")]
-        public MicrosoftDynamicsCRMadoxioInvestigation RegardingobjectidAdoxioInvestigationSocialactivity { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_adoxio_licences_socialactivity")]
-        public MicrosoftDynamicsCRMadoxioLicences RegardingobjectidAdoxioLicencesSocialactivity { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_adoxio_worker_socialactivity")]
-        public MicrosoftDynamicsCRMadoxioWorker RegardingobjectidAdoxioWorkerSocialactivity { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_adoxio_complianceinvestigation_socialactivity")]
-        public MicrosoftDynamicsCRMadoxioComplianceinvestigation RegardingobjectidAdoxioComplianceinvestigationSocialactivity { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_site_socialactivity")]
-        public MicrosoftDynamicsCRMsite RegardingobjectidSiteSocialactivity { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_adoxio_event_socialactivity")]
-        public MicrosoftDynamicsCRMadoxioEvent RegardingobjectidAdoxioEventSocialactivity { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_adoxio_enforcementaction_socialactivity")]
-        public MicrosoftDynamicsCRMadoxioEnforcementaction RegardingobjectidAdoxioEnforcementactionSocialactivity { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_adoxio_specialevent_socialactivity")]
-        public MicrosoftDynamicsCRMadoxioSpecialevent RegardingobjectidAdoxioSpecialeventSocialactivity { get; set; }
 
         /// <summary>
         /// </summary>
@@ -270,18 +207,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_entitlement_socialactivity")]
-        public MicrosoftDynamicsCRMentitlement RegardingobjectidEntitlementSocialactivity { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "modifiedonbehalfby_socialactivity")]
         public MicrosoftDynamicsCRMsystemuser ModifiedonbehalfbySocialactivity { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_incident_socialactivity")]
-        public MicrosoftDynamicsCRMincident RegardingobjectidIncidentSocialactivity { get; set; }
 
         /// <summary>
         /// </summary>
@@ -297,11 +224,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "postauthor_contact")]
         public MicrosoftDynamicsCRMcontact PostauthorContact { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_bulkoperation_socialactivity")]
-        public MicrosoftDynamicsCRMbulkoperation RegardingobjectidBulkoperationSocialactivity { get; set; }
 
         /// <summary>
         /// </summary>
@@ -325,11 +247,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_salesorder_socialactivity")]
-        public MicrosoftDynamicsCRMsalesorder RegardingobjectidSalesorderSocialactivity { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "SocialActivity_AsyncOperations")]
         public IList<MicrosoftDynamicsCRMasyncoperation> SocialActivityAsyncOperations { get; set; }
 
@@ -342,11 +259,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "socialactivity_activity_parties")]
         public IList<MicrosoftDynamicsCRMactivityparty> SocialactivityActivityParties { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_quote_socialactivity")]
-        public MicrosoftDynamicsCRMquote RegardingobjectidQuoteSocialactivity { get; set; }
 
         /// <summary>
         /// </summary>
@@ -370,18 +282,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "serviceid_socialactivity")]
-        public MicrosoftDynamicsCRMservice ServiceidSocialactivity { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "slakpiinstance_socialactivity")]
         public IList<MicrosoftDynamicsCRMslakpiinstance> SlakpiinstanceSocialactivity { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_entitlementtemplate_socialactivity")]
-        public MicrosoftDynamicsCRMentitlementtemplate RegardingobjectidEntitlementtemplateSocialactivity { get; set; }
 
         /// <summary>
         /// </summary>
@@ -412,16 +314,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "postauthor_account")]
         public MicrosoftDynamicsCRMaccount PostauthorAccount { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_lead_socialactivity")]
-        public MicrosoftDynamicsCRMlead RegardingobjectidLeadSocialactivity { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_contract_socialactivity")]
-        public MicrosoftDynamicsCRMcontract RegardingobjectidContractSocialactivity { get; set; }
 
         /// <summary>
         /// </summary>
@@ -465,11 +357,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_invoice_socialactivity")]
-        public MicrosoftDynamicsCRMinvoice RegardingobjectidInvoiceSocialactivity { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "socialactivity_principalobjectattributeaccess")]
         public IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> SocialactivityPrincipalobjectattributeaccess { get; set; }
 
@@ -480,8 +367,163 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_msdyn_postalbum_socialactivity")]
+        public MicrosoftDynamicsCRMmsdynPostalbum RegardingobjectidMsdynPostalbumSocialactivity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_abs_scheduledprocess_socialactivity")]
+        public MicrosoftDynamicsCRMabsScheduledprocess RegardingobjectidAbsScheduledprocessSocialactivity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_adoxio_application_socialactivity")]
+        public MicrosoftDynamicsCRMadoxioApplication RegardingobjectidAdoxioApplicationSocialactivity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_adoxio_complaint_socialactivity")]
+        public MicrosoftDynamicsCRMadoxioComplaint RegardingobjectidAdoxioComplaintSocialactivity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_adoxio_investigation_socialactivity")]
+        public MicrosoftDynamicsCRMadoxioInvestigation RegardingobjectidAdoxioInvestigationSocialactivity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_adoxio_licences_socialactivity")]
+        public MicrosoftDynamicsCRMadoxioLicences RegardingobjectidAdoxioLicencesSocialactivity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_adoxio_worker_socialactivity")]
+        public MicrosoftDynamicsCRMadoxioWorker RegardingobjectidAdoxioWorkerSocialactivity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_adoxio_complianceinvestigation_socialactivity")]
+        public MicrosoftDynamicsCRMadoxioComplianceinvestigation RegardingobjectidAdoxioComplianceinvestigationSocialactivity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_adoxio_event_socialactivity")]
+        public MicrosoftDynamicsCRMadoxioEvent RegardingobjectidAdoxioEventSocialactivity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_adoxio_enforcementaction_socialactivity")]
+        public MicrosoftDynamicsCRMadoxioEnforcementaction RegardingobjectidAdoxioEnforcementactionSocialactivity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_adoxio_specialevent_socialactivity")]
+        public MicrosoftDynamicsCRMadoxioSpecialevent RegardingobjectidAdoxioSpecialeventSocialactivity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_afk_workflowelementoption_socialactivity")]
+        public MicrosoftDynamicsCRMafkWorkflowelementoption RegardingobjectidAfkWorkflowelementoptionSocialactivity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_adoxio_externalprofile_socialactivity")]
+        public MicrosoftDynamicsCRMadoxioExternalprofile RegardingobjectidAdoxioExternalprofileSocialactivity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_adoxio_externalcontact_socialactivity")]
+        public MicrosoftDynamicsCRMadoxioExternalcontact RegardingobjectidAdoxioExternalcontactSocialactivity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_adoxio_violationticket_socialactivity")]
+        public MicrosoftDynamicsCRMadoxioViolationticket RegardingobjectidAdoxioViolationticketSocialactivity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_bulkoperation_socialactivity")]
+        public MicrosoftDynamicsCRMbulkoperation RegardingobjectidBulkoperationSocialactivity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_site_socialactivity")]
+        public MicrosoftDynamicsCRMsite RegardingobjectidSiteSocialactivity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_entitlement_socialactivity")]
+        public MicrosoftDynamicsCRMentitlement RegardingobjectidEntitlementSocialactivity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_incident_socialactivity")]
+        public MicrosoftDynamicsCRMincident RegardingobjectidIncidentSocialactivity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "serviceid_socialactivity")]
+        public MicrosoftDynamicsCRMservice ServiceidSocialactivity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_entitlementtemplate_socialactivity")]
+        public MicrosoftDynamicsCRMentitlementtemplate RegardingobjectidEntitlementtemplateSocialactivity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_contract_socialactivity")]
+        public MicrosoftDynamicsCRMcontract RegardingobjectidContractSocialactivity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_salesorder_socialactivity")]
+        public MicrosoftDynamicsCRMsalesorder RegardingobjectidSalesorderSocialactivity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_quote_socialactivity")]
+        public MicrosoftDynamicsCRMquote RegardingobjectidQuoteSocialactivity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_invoice_socialactivity")]
+        public MicrosoftDynamicsCRMinvoice RegardingobjectidInvoiceSocialactivity { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "regardingobjectid_opportunity_socialactivity")]
         public MicrosoftDynamicsCRMopportunity RegardingobjectidOpportunitySocialactivity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_bookableresourcebooking_socialactivity")]
+        public MicrosoftDynamicsCRMbookableresourcebooking RegardingobjectidBookableresourcebookingSocialactivity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_bookableresourcebookingheader_socialactivity")]
+        public MicrosoftDynamicsCRMbookableresourcebookingheader RegardingobjectidBookableresourcebookingheaderSocialactivity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_lead_socialactivity")]
+        public MicrosoftDynamicsCRMlead RegardingobjectidLeadSocialactivity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ownerid_socialactivity")]
+        public MicrosoftDynamicsCRMprincipal OwneridSocialactivity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_msdyn_playbookinstance_socialactivity")]
+        public MicrosoftDynamicsCRMmsdynPlaybookinstance RegardingobjectidMsdynPlaybookinstanceSocialactivity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_ptm_automergeworkingitems_socialactivity")]
+        public MicrosoftDynamicsCRMptmAutomergeworkingitems RegardingobjectidPtmAutomergeworkingitemsSocialactivity { get; set; }
 
     }
 }
