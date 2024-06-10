@@ -29,38 +29,37 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMplugintype
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMplugintype(string versionnumber = default(string), string plugintypeid = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), bool? isworkflowactivity = default(bool?), string _createdonbehalfbyValue = default(string), string workflowactivitygroupname = default(string), string _organizationidValue = default(string), int? minor = default(int?), string _createdbyValue = default(string), string culture = default(string), string version = default(string), bool? ismanaged = default(bool?), string description = default(string), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string friendlyname = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? customizationlevel = default(int?), string solutionid = default(string), string plugintypeidunique = default(string), string name = default(string), string publickeytoken = default(string), int? componentstate = default(int?), string assemblyname = default(string), string customworkflowactivityinfo = default(string), string _pluginassemblyidValue = default(string), string typename = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? major = default(int?), IList<MicrosoftDynamicsCRMservice> pluginTypeService = default(IList<MicrosoftDynamicsCRMservice>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMpluginassembly pluginassemblyid = default(MicrosoftDynamicsCRMpluginassembly), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> plugintypeidSdkmessageprocessingstep = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> plugintypeSdkmessageprocessingstep = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMplugintypestatistic> plugintypePlugintypestatistic = default(IList<MicrosoftDynamicsCRMplugintypestatistic>))
+        public MicrosoftDynamicsCRMplugintype(bool? ismanaged = default(bool?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string plugintypeidunique = default(string), string workflowactivitygroupname = default(string), string _organizationidValue = default(string), int? minor = default(int?), string solutionid = default(string), string _modifiedonbehalfbyValue = default(string), string culture = default(string), string version = default(string), string customworkflowactivityinfo = default(string), string _createdbyValue = default(string), string plugintypeid = default(string), string description = default(string), string _modifiedbyValue = default(string), string _createdonbehalfbyValue = default(string), string friendlyname = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string versionnumber = default(string), int? customizationlevel = default(int?), int? componentstate = default(int?), string name = default(string), string publickeytoken = default(string), bool? isworkflowactivity = default(bool?), string assemblyname = default(string), string _pluginassemblyidValue = default(string), string typename = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? major = default(int?), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMpluginassembly pluginassemblyid = default(MicrosoftDynamicsCRMpluginassembly), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> plugintypeidSdkmessageprocessingstep = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> plugintypeSdkmessageprocessingstep = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMplugintypestatistic> plugintypePlugintypestatistic = default(IList<MicrosoftDynamicsCRMplugintypestatistic>), IList<MicrosoftDynamicsCRMservice> pluginTypeService = default(IList<MicrosoftDynamicsCRMservice>), IList<MicrosoftDynamicsCRMcustomapi> customAPIId = default(IList<MicrosoftDynamicsCRMcustomapi>))
         {
-            Versionnumber = versionnumber;
-            Plugintypeid = plugintypeid;
+            Ismanaged = ismanaged;
             Overwritetime = overwritetime;
-            Isworkflowactivity = isworkflowactivity;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Plugintypeidunique = plugintypeidunique;
             Workflowactivitygroupname = workflowactivitygroupname;
             this._organizationidValue = _organizationidValue;
             Minor = minor;
-            this._createdbyValue = _createdbyValue;
+            Solutionid = solutionid;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Culture = culture;
             Version = version;
-            Ismanaged = ismanaged;
+            Customworkflowactivityinfo = customworkflowactivityinfo;
+            this._createdbyValue = _createdbyValue;
+            Plugintypeid = plugintypeid;
             Description = description;
             this._modifiedbyValue = _modifiedbyValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Friendlyname = friendlyname;
             Createdon = createdon;
+            Versionnumber = versionnumber;
             Customizationlevel = customizationlevel;
-            Solutionid = solutionid;
-            Plugintypeidunique = plugintypeidunique;
+            Componentstate = componentstate;
             Name = name;
             Publickeytoken = publickeytoken;
-            Componentstate = componentstate;
+            Isworkflowactivity = isworkflowactivity;
             Assemblyname = assemblyname;
-            Customworkflowactivityinfo = customworkflowactivityinfo;
             this._pluginassemblyidValue = _pluginassemblyidValue;
             Typename = typename;
             Modifiedon = modifiedon;
             Major = major;
-            PluginTypeService = pluginTypeService;
             Modifiedby = modifiedby;
             Pluginassemblyid = pluginassemblyid;
             Createdonbehalfby = createdonbehalfby;
@@ -70,6 +69,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             PlugintypeSdkmessageprocessingstep = plugintypeSdkmessageprocessingstep;
             Modifiedonbehalfby = modifiedonbehalfby;
             PlugintypePlugintypestatistic = plugintypePlugintypestatistic;
+            PluginTypeService = pluginTypeService;
+            CustomAPIId = customAPIId;
             CustomInit();
         }
 
@@ -80,13 +81,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "plugintypeid")]
-        public string Plugintypeid { get; set; }
+        [JsonProperty(PropertyName = "ismanaged")]
+        public bool? Ismanaged { get; set; }
 
         /// <summary>
         /// </summary>
@@ -95,13 +91,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "isworkflowactivity")]
-        public bool? Isworkflowactivity { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "plugintypeidunique")]
+        public string Plugintypeidunique { get; set; }
 
         /// <summary>
         /// </summary>
@@ -120,8 +111,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        [JsonProperty(PropertyName = "solutionid")]
+        public string Solutionid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -135,8 +131,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ismanaged")]
-        public bool? Ismanaged { get; set; }
+        [JsonProperty(PropertyName = "customworkflowactivityinfo")]
+        public string Customworkflowactivityinfo { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "plugintypeid")]
+        public string Plugintypeid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -150,8 +156,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -165,18 +171,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "customizationlevel")]
         public int? Customizationlevel { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "solutionid")]
-        public string Solutionid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "plugintypeidunique")]
-        public string Plugintypeidunique { get; set; }
+        [JsonProperty(PropertyName = "componentstate")]
+        public int? Componentstate { get; set; }
 
         /// <summary>
         /// </summary>
@@ -190,18 +196,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "componentstate")]
-        public int? Componentstate { get; set; }
+        [JsonProperty(PropertyName = "isworkflowactivity")]
+        public bool? Isworkflowactivity { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "assemblyname")]
         public string Assemblyname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "customworkflowactivityinfo")]
-        public string Customworkflowactivityinfo { get; set; }
 
         /// <summary>
         /// </summary>
@@ -222,11 +223,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "major")]
         public int? Major { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "plugin_type_service")]
-        public IList<MicrosoftDynamicsCRMservice> PluginTypeService { get; set; }
 
         /// <summary>
         /// </summary>
@@ -272,6 +268,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "plugintype_plugintypestatistic")]
         public IList<MicrosoftDynamicsCRMplugintypestatistic> PlugintypePlugintypestatistic { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "plugin_type_service")]
+        public IList<MicrosoftDynamicsCRMservice> PluginTypeService { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "CustomAPIId")]
+        public IList<MicrosoftDynamicsCRMcustomapi> CustomAPIId { get; set; }
 
     }
 }

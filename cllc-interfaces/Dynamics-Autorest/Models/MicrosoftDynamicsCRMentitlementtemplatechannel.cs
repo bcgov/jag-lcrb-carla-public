@@ -29,13 +29,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMentitlementtemplatechannel class.
         /// </summary>
-        public MicrosoftDynamicsCRMentitlementtemplatechannel(string _modifiedonbehalfbyValue = default(string), string name = default(string), string _organizationidValue = default(string), int? importsequencenumber = default(int?), string entitlementtemplatechannelid = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string versionnumber = default(string), int? timezoneruleversionnumber = default(int?), string _modifiedbyValue = default(string), decimal? exchangerate = default(decimal?), int? channel = default(int?), string _entitlementtemplateidValue = default(string), string _transactioncurrencyidValue = default(string), string _createdbyValue = default(string), decimal? totalterms = default(decimal?), int? utcconversiontimezonecode = default(int?), IList<MicrosoftDynamicsCRMsyncerror> entitlementtemplatechannelSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMteam> entitlementtemplatechannelTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMasyncoperation> entitlementtemplatechannelAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> entitlementtemplatechannelMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> entitlementtemplatechannelBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> entitlementtemplatechannelPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMconnection> entitlementtemplatechannelConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnection> entitlementtemplatechannelConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMentitlementtemplate entitlementtemplateid = default(MicrosoftDynamicsCRMentitlementtemplate), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMentitlementtemplatechannel(string _modifiedonbehalfbyValue = default(string), string name = default(string), string _organizationidValue = default(string), int? importsequencenumber = default(int?), string _transactioncurrencyidValue = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string versionnumber = default(string), int? timezoneruleversionnumber = default(int?), string _modifiedbyValue = default(string), decimal? exchangerate = default(decimal?), int? channel = default(int?), string _entitlementtemplateidValue = default(string), string _createdbyValue = default(string), decimal? totalterms = default(decimal?), string entitlementtemplatechannelid = default(string), int? utcconversiontimezonecode = default(int?), IList<MicrosoftDynamicsCRMsyncerror> entitlementtemplatechannelSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMteam> entitlementtemplatechannelTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMasyncoperation> entitlementtemplatechannelAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> entitlementtemplatechannelMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> entitlementtemplatechannelBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> entitlementtemplatechannelPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMconnection> entitlementtemplatechannelConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnection> entitlementtemplatechannelConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMentitlementtemplate entitlementtemplateid = default(MicrosoftDynamicsCRMentitlementtemplate), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Name = name;
             this._organizationidValue = _organizationidValue;
             Importsequencenumber = importsequencenumber;
-            Entitlementtemplatechannelid = entitlementtemplatechannelid;
+            this._transactioncurrencyidValue = _transactioncurrencyidValue;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Createdon = createdon;
             Modifiedon = modifiedon;
@@ -46,9 +46,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Exchangerate = exchangerate;
             Channel = channel;
             this._entitlementtemplateidValue = _entitlementtemplateidValue;
-            this._transactioncurrencyidValue = _transactioncurrencyidValue;
             this._createdbyValue = _createdbyValue;
             Totalterms = totalterms;
+            Entitlementtemplatechannelid = entitlementtemplatechannelid;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             EntitlementtemplatechannelSyncErrors = entitlementtemplatechannelSyncErrors;
             EntitlementtemplatechannelTeams = entitlementtemplatechannelTeams;
@@ -95,8 +95,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "entitlementtemplatechannelid")]
-        public string Entitlementtemplatechannelid { get; set; }
+        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
+        public string _transactioncurrencyidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -150,11 +150,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
 
@@ -162,6 +157,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "totalterms")]
         public decimal? Totalterms { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "entitlementtemplatechannelid")]
+        public string Entitlementtemplatechannelid { get; set; }
 
         /// <summary>
         /// </summary>

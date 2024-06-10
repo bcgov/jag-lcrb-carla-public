@@ -27,19 +27,19 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// Initializes a new instance of the MicrosoftDynamicsCRMpost class.
         /// </summary>
-        public MicrosoftDynamicsCRMpost(string _regardingobjectidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? type = default(int?), string text = default(string), string _organizationidValue = default(string), int? source = default(int?), string _createdbyValue = default(string), int? timezoneruleversionnumber = default(int?), string _regardingobjectowningbusinessunitValue = default(string), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _regardingobjectowneridValue = default(string), string _createdonbehalfbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string postid = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> postAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> postBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMpostregarding postregardingid = default(MicrosoftDynamicsCRMpostregarding), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMpostcomment> postComments = default(IList<MicrosoftDynamicsCRMpostcomment>), IList<MicrosoftDynamicsCRMpostlike> postLikes = default(IList<MicrosoftDynamicsCRMpostlike>))
+        public MicrosoftDynamicsCRMpost(string _regardingobjectidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? type = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _organizationidValue = default(string), int? source = default(int?), string _createdbyValue = default(string), int? timezoneruleversionnumber = default(int?), string _regardingobjectowningbusinessunitValue = default(string), int? utcconversiontimezonecode = default(int?), string text = default(string), string _regardingobjectowneridValue = default(string), string _createdonbehalfbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string postid = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> postAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> postBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMpostregarding postregardingid = default(MicrosoftDynamicsCRMpostregarding), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMpostcomment> postComments = default(IList<MicrosoftDynamicsCRMpostcomment>), IList<MicrosoftDynamicsCRMpostlike> postLikes = default(IList<MicrosoftDynamicsCRMpostlike>))
         {
             this._regardingobjectidValue = _regardingobjectidValue;
             Createdon = createdon;
             Type = type;
-            Text = text;
+            Modifiedon = modifiedon;
             this._organizationidValue = _organizationidValue;
             Source = source;
             this._createdbyValue = _createdbyValue;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             this._regardingobjectowningbusinessunitValue = _regardingobjectowningbusinessunitValue;
             Utcconversiontimezonecode = utcconversiontimezonecode;
-            Modifiedon = modifiedon;
+            Text = text;
             this._regardingobjectowneridValue = _regardingobjectowneridValue;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
@@ -80,8 +80,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "text")]
-        public string Text { get; set; }
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -115,8 +115,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
+        [JsonProperty(PropertyName = "text")]
+        public string Text { get; set; }
 
         /// <summary>
         /// </summary>

@@ -1,4 +1,4 @@
-﻿using Gov.Lclb.Cllb.Interfaces;
+using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Microsoft.Rest;
 using Newtonsoft.Json;

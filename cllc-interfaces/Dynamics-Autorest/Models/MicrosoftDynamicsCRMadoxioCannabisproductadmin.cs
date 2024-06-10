@@ -29,18 +29,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioCannabisproductadmin class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioCannabisproductadmin(System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string adoxioName = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _owneridValue = default(string), int? importsequencenumber = default(int?), string _owningteamValue = default(string), int? utcconversiontimezonecode = default(int?), int? adoxioDisplayorder = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string adoxioDescription = default(string), string _owninguserValue = default(string), string _modifiedbyValue = default(string), int? statuscode = default(int?), string _owningbusinessunitValue = default(string), string _createdonbehalfbyValue = default(string), int? timezoneruleversionnumber = default(int?), string versionnumber = default(string), int? statecode = default(int?), string adoxioCannabisproductadminid = default(string), string _modifiedonbehalfbyValue = default(string), string _createdbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioCannabisproductadminSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioCannabisproductadminDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioCannabisproductadminDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioCannabisproductadminAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioCannabisproductadminMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioCannabisproductadminProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioCannabisproductadminBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioCannabisproductadminPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMadoxioCannabisinventoryreport> adoxioCannabisproductadminInventoryreports = default(IList<MicrosoftDynamicsCRMadoxioCannabisinventoryreport>))
+        public MicrosoftDynamicsCRMadoxioCannabisproductadmin(System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string adoxioName = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _owningteamValue = default(string), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string adoxioDescription = default(string), string adoxioCannabisproductadminid = default(string), string _owninguserValue = default(string), string _modifiedbyValue = default(string), int? statuscode = default(int?), string _owningbusinessunitValue = default(string), string _createdonbehalfbyValue = default(string), int? timezoneruleversionnumber = default(int?), string versionnumber = default(string), int? statecode = default(int?), string _owneridValue = default(string), int? adoxioDisplayorder = default(int?), int? importsequencenumber = default(int?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioCannabisproductadminSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioCannabisproductadminDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioCannabisproductadminDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioCannabisproductadminAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioCannabisproductadminMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioCannabisproductadminProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioCannabisproductadminBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioCannabisproductadminPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMadoxioCannabisinventoryreport> adoxioCannabisproductadminInventoryreports = default(IList<MicrosoftDynamicsCRMadoxioCannabisinventoryreport>))
         {
             Createdon = createdon;
             AdoxioName = adoxioName;
             Overriddencreatedon = overriddencreatedon;
-            this._owneridValue = _owneridValue;
-            Importsequencenumber = importsequencenumber;
+            this._createdbyValue = _createdbyValue;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             this._owningteamValue = _owningteamValue;
             Utcconversiontimezonecode = utcconversiontimezonecode;
-            AdoxioDisplayorder = adoxioDisplayorder;
             Modifiedon = modifiedon;
             AdoxioDescription = adoxioDescription;
+            AdoxioCannabisproductadminid = adoxioCannabisproductadminid;
             this._owninguserValue = _owninguserValue;
             this._modifiedbyValue = _modifiedbyValue;
             Statuscode = statuscode;
@@ -49,9 +49,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Timezoneruleversionnumber = timezoneruleversionnumber;
             Versionnumber = versionnumber;
             Statecode = statecode;
-            AdoxioCannabisproductadminid = adoxioCannabisproductadminid;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._createdbyValue = _createdbyValue;
+            this._owneridValue = _owneridValue;
+            AdoxioDisplayorder = adoxioDisplayorder;
+            Importsequencenumber = importsequencenumber;
             Createdbyname = createdbyname;
             Createdonbehalfbyname = createdonbehalfbyname;
             Modifiedbyname = modifiedbyname;
@@ -94,13 +94,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -114,11 +114,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_displayorder")]
-        public int? AdoxioDisplayorder { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
@@ -126,6 +121,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_description")]
         public string AdoxioDescription { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_cannabisproductadminid")]
+        public string AdoxioCannabisproductadminid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -169,18 +169,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_cannabisproductadminid")]
-        public string AdoxioCannabisproductadminid { get; set; }
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_displayorder")]
+        public int? AdoxioDisplayorder { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
 
         /// <summary>
         /// </summary>

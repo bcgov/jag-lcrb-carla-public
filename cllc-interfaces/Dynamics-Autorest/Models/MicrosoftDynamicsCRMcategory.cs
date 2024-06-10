@@ -29,25 +29,25 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMcategory
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMcategory(string _parentcategoryidValue = default(string), string _modifiedbyValue = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string title = default(string), string description = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _owneridValue = default(string), string categorynumber = default(string), string _modifiedonbehalfbyValue = default(string), string _owningteamValue = default(string), int? sequencenumber = default(int?), string _createdbyValue = default(string), string _transactioncurrencyidValue = default(string), decimal? exchangerate = default(decimal?), string _owningbusinessunitValue = default(string), string versionnumber = default(string), int? importsequencenumber = default(int?), string _owninguserValue = default(string), string categoryid = default(string), MicrosoftDynamicsCRMcategory parentcategoryid = default(MicrosoftDynamicsCRMcategory), IList<MicrosoftDynamicsCRMcategory> categoryParentCategory = default(IList<MicrosoftDynamicsCRMcategory>), IList<MicrosoftDynamicsCRMsyncerror> categorySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser lkCategoryModifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsystemuser lkCategoryCreatedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser lkCategoryModifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMknowledgearticle> knowledgearticleCategory = default(IList<MicrosoftDynamicsCRMknowledgearticle>), MicrosoftDynamicsCRMsystemuser lkCategoryCreatedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit))
+        public MicrosoftDynamicsCRMcategory(System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), string _createdonbehalfbyValue = default(string), string _owningteamValue = default(string), string _transactioncurrencyidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string title = default(string), string _parentcategoryidValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string categorynumber = default(string), string _modifiedonbehalfbyValue = default(string), string _createdbyValue = default(string), string description = default(string), string _owningbusinessunitValue = default(string), string _owneridValue = default(string), int? sequencenumber = default(int?), decimal? exchangerate = default(decimal?), string versionnumber = default(string), int? importsequencenumber = default(int?), string _owninguserValue = default(string), string categoryid = default(string), MicrosoftDynamicsCRMcategory parentcategoryid = default(MicrosoftDynamicsCRMcategory), IList<MicrosoftDynamicsCRMcategory> categoryParentCategory = default(IList<MicrosoftDynamicsCRMcategory>), IList<MicrosoftDynamicsCRMsyncerror> categorySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser lkCategoryModifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsystemuser lkCategoryCreatedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser lkCategoryModifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMknowledgearticle> knowledgearticleCategory = default(IList<MicrosoftDynamicsCRMknowledgearticle>), MicrosoftDynamicsCRMsystemuser lkCategoryCreatedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit))
         {
-            this._parentcategoryidValue = _parentcategoryidValue;
+            Modifiedon = modifiedon;
             this._modifiedbyValue = _modifiedbyValue;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            Modifiedon = modifiedon;
+            this._owningteamValue = _owningteamValue;
+            this._transactioncurrencyidValue = _transactioncurrencyidValue;
             Createdon = createdon;
             Title = title;
-            Description = description;
+            this._parentcategoryidValue = _parentcategoryidValue;
             Overriddencreatedon = overriddencreatedon;
-            this._owneridValue = _owneridValue;
             Categorynumber = categorynumber;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._owningteamValue = _owningteamValue;
-            Sequencenumber = sequencenumber;
             this._createdbyValue = _createdbyValue;
-            this._transactioncurrencyidValue = _transactioncurrencyidValue;
-            Exchangerate = exchangerate;
+            Description = description;
             this._owningbusinessunitValue = _owningbusinessunitValue;
+            this._owneridValue = _owneridValue;
+            Sequencenumber = sequencenumber;
+            Exchangerate = exchangerate;
             Versionnumber = versionnumber;
             Importsequencenumber = importsequencenumber;
             this._owninguserValue = _owninguserValue;
@@ -73,8 +73,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_parentcategoryid_value")]
-        public string _parentcategoryidValue { get; set; }
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -88,8 +88,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
+        public string _transactioncurrencyidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -103,18 +108,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "description")]
-        public string Description { get; set; }
+        [JsonProperty(PropertyName = "_parentcategoryid_value")]
+        public string _parentcategoryidValue { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -128,8 +128,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "description")]
+        public string Description { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -138,23 +153,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "exchangerate")]
         public decimal? Exchangerate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
         /// </summary>

@@ -27,29 +27,29 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMlookupmapping
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMlookupmapping(System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string solutionid = default(string), bool? ismanaged = default(bool?), int? processcode = default(int?), string _columnmappingidValue = default(string), int? statecode = default(int?), int? statuscode = default(int?), string lookupmappingid = default(string), string _createdbyValue = default(string), string lookupattributename = default(string), string _transformationparametermappingidValue = default(string), string lookupentityname = default(string), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), int? lookupsourcecode = default(int?), string introducedversion = default(string), int? componentstate = default(int?), string lookupmappingidunique = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransformationparametermapping transformationparametermappingid = default(MicrosoftDynamicsCRMtransformationparametermapping), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcolumnmapping columnmappingid = default(MicrosoftDynamicsCRMcolumnmapping))
+        public MicrosoftDynamicsCRMlookupmapping(int? componentstate = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string lookupmappingidunique = default(string), string _columnmappingidValue = default(string), string solutionid = default(string), bool? ismanaged = default(bool?), string _transformationparametermappingidValue = default(string), int? statecode = default(int?), int? statuscode = default(int?), string introducedversion = default(string), string lookupmappingid = default(string), string _createdbyValue = default(string), string lookupattributename = default(string), string lookupentityname = default(string), string _modifiedonbehalfbyValue = default(string), int? processcode = default(int?), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), int? lookupsourcecode = default(int?), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransformationparametermapping transformationparametermappingid = default(MicrosoftDynamicsCRMtransformationparametermapping), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcolumnmapping columnmappingid = default(MicrosoftDynamicsCRMcolumnmapping))
         {
+            Componentstate = componentstate;
             Createdon = createdon;
             Modifiedon = modifiedon;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Lookupmappingidunique = lookupmappingidunique;
+            this._columnmappingidValue = _columnmappingidValue;
             Solutionid = solutionid;
             Ismanaged = ismanaged;
-            Processcode = processcode;
-            this._columnmappingidValue = _columnmappingidValue;
+            this._transformationparametermappingidValue = _transformationparametermappingidValue;
             Statecode = statecode;
             Statuscode = statuscode;
+            Introducedversion = introducedversion;
             Lookupmappingid = lookupmappingid;
             this._createdbyValue = _createdbyValue;
             Lookupattributename = lookupattributename;
-            this._transformationparametermappingidValue = _transformationparametermappingidValue;
             Lookupentityname = lookupentityname;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Processcode = processcode;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             this._modifiedbyValue = _modifiedbyValue;
-            Lookupsourcecode = lookupsourcecode;
-            Introducedversion = introducedversion;
-            Componentstate = componentstate;
-            Lookupmappingidunique = lookupmappingidunique;
             Overwritetime = overwritetime;
+            Lookupsourcecode = lookupsourcecode;
             Modifiedby = modifiedby;
             Transformationparametermappingid = transformationparametermappingid;
             Createdby = createdby;
@@ -66,6 +66,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "componentstate")]
+        public int? Componentstate { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
@@ -76,8 +81,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "lookupmappingidunique")]
+        public string Lookupmappingidunique { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_columnmappingid_value")]
+        public string _columnmappingidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -91,13 +101,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "processcode")]
-        public int? Processcode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_columnmappingid_value")]
-        public string _columnmappingidValue { get; set; }
+        [JsonProperty(PropertyName = "_transformationparametermappingid_value")]
+        public string _transformationparametermappingidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -108,6 +113,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "introducedversion")]
+        public string Introducedversion { get; set; }
 
         /// <summary>
         /// </summary>
@@ -126,13 +136,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_transformationparametermappingid_value")]
-        public string _transformationparametermappingidValue { get; set; }
+        [JsonProperty(PropertyName = "lookupentityname")]
+        public string Lookupentityname { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lookupentityname")]
-        public string Lookupentityname { get; set; }
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "processcode")]
+        public int? Processcode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -146,28 +161,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lookupsourcecode")]
-        public int? Lookupsourcecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "introducedversion")]
-        public string Introducedversion { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "componentstate")]
-        public int? Componentstate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lookupmappingidunique")]
-        public string Lookupmappingidunique { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "overwritetime")]
         public System.DateTimeOffset? Overwritetime { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lookupsourcecode")]
+        public int? Lookupsourcecode { get; set; }
 
         /// <summary>
         /// </summary>

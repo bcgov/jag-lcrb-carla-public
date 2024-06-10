@@ -29,14 +29,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMnewprocess
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMnewprocess(int? statuscode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string _createdbyValue = default(string), string _organizationidValue = default(string), System.DateTimeOffset? completedon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), string _transactioncurrencyidValue = default(string), System.DateTimeOffset? activestagestartedon = default(System.DateTimeOffset?), string name = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), int? duration = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), decimal? exchangerate = default(decimal?), int? importsequencenumber = default(int?), int? statecode = default(int?), string traversedpath = default(string), string versionnumber = default(string), string _knowledgearticleidValue = default(string), string _processidValue = default(string), string _activestageidValue = default(string), string businessprocessflowinstanceid = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMknowledgearticle knowledgearticleid = default(MicrosoftDynamicsCRMknowledgearticle), IList<MicrosoftDynamicsCRMprocesssession> newProcessProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), MicrosoftDynamicsCRMprocessstage activestageid = default(MicrosoftDynamicsCRMprocessstage), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMworkflowlog> workflowlogsNewprocess = default(IList<MicrosoftDynamicsCRMworkflowlog>), MicrosoftDynamicsCRMworkflow processid = default(MicrosoftDynamicsCRMworkflow), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> newProcessSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>))
+        public MicrosoftDynamicsCRMnewprocess(System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string _organizationidValue = default(string), string _activestageidValue = default(string), string _knowledgearticleidValue = default(string), string _modifiedbyValue = default(string), string _transactioncurrencyidValue = default(string), System.DateTimeOffset? activestagestartedon = default(System.DateTimeOffset?), string name = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), int? duration = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), decimal? exchangerate = default(decimal?), string _createdbyValue = default(string), int? statecode = default(int?), int? statuscode = default(int?), string businessprocessflowinstanceid = default(string), string versionnumber = default(string), string traversedpath = default(string), string _processidValue = default(string), System.DateTimeOffset? completedon = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), IList<MicrosoftDynamicsCRMprocesssession> newProcessProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMworkflowlog> workflowlogsNewprocess = default(IList<MicrosoftDynamicsCRMworkflowlog>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> newProcessSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMknowledgearticle knowledgearticleid = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMprocessstage activestageid = default(MicrosoftDynamicsCRMprocessstage), MicrosoftDynamicsCRMworkflow processid = default(MicrosoftDynamicsCRMworkflow), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
         {
-            Statuscode = statuscode;
             Createdon = createdon;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._createdbyValue = _createdbyValue;
             this._organizationidValue = _organizationidValue;
-            Completedon = completedon;
+            this._activestageidValue = _activestageidValue;
+            this._knowledgearticleidValue = _knowledgearticleidValue;
             this._modifiedbyValue = _modifiedbyValue;
             this._transactioncurrencyidValue = _transactioncurrencyidValue;
             Activestagestartedon = activestagestartedon;
@@ -46,26 +45,27 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Duration = duration;
             Overriddencreatedon = overriddencreatedon;
             Exchangerate = exchangerate;
-            Importsequencenumber = importsequencenumber;
+            this._createdbyValue = _createdbyValue;
             Statecode = statecode;
-            Traversedpath = traversedpath;
-            Versionnumber = versionnumber;
-            this._knowledgearticleidValue = _knowledgearticleidValue;
-            this._processidValue = _processidValue;
-            this._activestageidValue = _activestageidValue;
+            Statuscode = statuscode;
             Businessprocessflowinstanceid = businessprocessflowinstanceid;
+            Versionnumber = versionnumber;
+            Traversedpath = traversedpath;
+            this._processidValue = _processidValue;
+            Completedon = completedon;
+            Importsequencenumber = importsequencenumber;
+            NewProcessProcessSessions = newProcessProcessSessions;
+            Createdonbehalfbyname = createdonbehalfbyname;
+            WorkflowlogsNewprocess = workflowlogsNewprocess;
+            Transactioncurrencyid = transactioncurrencyid;
+            Modifiedonbehalfbyname = modifiedonbehalfbyname;
+            NewProcessSyncErrors = newProcessSyncErrors;
             Createdbyname = createdbyname;
             Modifiedbyname = modifiedbyname;
             Knowledgearticleid = knowledgearticleid;
-            NewProcessProcessSessions = newProcessProcessSessions;
             Activestageid = activestageid;
-            Createdonbehalfbyname = createdonbehalfbyname;
-            WorkflowlogsNewprocess = workflowlogsNewprocess;
             Processid = processid;
-            Transactioncurrencyid = transactioncurrencyid;
             Organizationid = organizationid;
-            Modifiedonbehalfbyname = modifiedonbehalfbyname;
-            NewProcessSyncErrors = newProcessSyncErrors;
             CustomInit();
         }
 
@@ -73,11 +73,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -91,18 +86,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
         public string _organizationidValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "completedon")]
-        public System.DateTimeOffset? Completedon { get; set; }
+        [JsonProperty(PropertyName = "_activestageid_value")]
+        public string _activestageidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_knowledgearticleid_value")]
+        public string _knowledgearticleidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -151,8 +146,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -161,8 +156,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "traversedpath")]
-        public string Traversedpath { get; set; }
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "businessprocessflowinstanceid")]
+        public string Businessprocessflowinstanceid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -171,8 +171,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_knowledgearticleid_value")]
-        public string _knowledgearticleidValue { get; set; }
+        [JsonProperty(PropertyName = "traversedpath")]
+        public string Traversedpath { get; set; }
 
         /// <summary>
         /// </summary>
@@ -181,13 +181,43 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_activestageid_value")]
-        public string _activestageidValue { get; set; }
+        [JsonProperty(PropertyName = "completedon")]
+        public System.DateTimeOffset? Completedon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "businessprocessflowinstanceid")]
-        public string Businessprocessflowinstanceid { get; set; }
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "NewProcess_ProcessSessions")]
+        public IList<MicrosoftDynamicsCRMprocesssession> NewProcessProcessSessions { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdonbehalfbyname")]
+        public MicrosoftDynamicsCRMsystemuser Createdonbehalfbyname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "workflowlogs_newprocess")]
+        public IList<MicrosoftDynamicsCRMworkflowlog> WorkflowlogsNewprocess { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "transactioncurrencyid")]
+        public MicrosoftDynamicsCRMtransactioncurrency Transactioncurrencyid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedonbehalfbyname")]
+        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfbyname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "NewProcess_SyncErrors")]
+        public IList<MicrosoftDynamicsCRMsyncerror> NewProcessSyncErrors { get; set; }
 
         /// <summary>
         /// </summary>
@@ -206,23 +236,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "NewProcess_ProcessSessions")]
-        public IList<MicrosoftDynamicsCRMprocesssession> NewProcessProcessSessions { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "activestageid")]
         public MicrosoftDynamicsCRMprocessstage Activestageid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdonbehalfbyname")]
-        public MicrosoftDynamicsCRMsystemuser Createdonbehalfbyname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "workflowlogs_newprocess")]
-        public IList<MicrosoftDynamicsCRMworkflowlog> WorkflowlogsNewprocess { get; set; }
 
         /// <summary>
         /// </summary>
@@ -231,23 +246,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "transactioncurrencyid")]
-        public MicrosoftDynamicsCRMtransactioncurrency Transactioncurrencyid { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "organizationid")]
         public MicrosoftDynamicsCRMorganization Organizationid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedonbehalfbyname")]
-        public MicrosoftDynamicsCRMsystemuser Modifiedonbehalfbyname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "NewProcess_SyncErrors")]
-        public IList<MicrosoftDynamicsCRMsyncerror> NewProcessSyncErrors { get; set; }
 
     }
 }

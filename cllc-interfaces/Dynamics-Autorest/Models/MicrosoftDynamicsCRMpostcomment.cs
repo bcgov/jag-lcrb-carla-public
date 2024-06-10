@@ -27,13 +27,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMpostcomment
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMpostcomment(string text = default(string), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _organizationidValue = default(string), int? utcconversiontimezonecode = default(int?), string _createdbyValue = default(string), string _postidValue = default(string), string postcommentid = default(string), string _createdonbehalfbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMpost postid = default(MicrosoftDynamicsCRMpost))
+        public MicrosoftDynamicsCRMpostcomment(int? utcconversiontimezonecode = default(int?), string text = default(string), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _organizationidValue = default(string), string _createdbyValue = default(string), string _postidValue = default(string), string postcommentid = default(string), string _createdonbehalfbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMpost postid = default(MicrosoftDynamicsCRMpost))
         {
+            Utcconversiontimezonecode = utcconversiontimezonecode;
             Text = text;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             Createdon = createdon;
             this._organizationidValue = _organizationidValue;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
             this._createdbyValue = _createdbyValue;
             this._postidValue = _postidValue;
             Postcommentid = postcommentid;
@@ -49,6 +49,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -69,11 +74,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
         public string _organizationidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
         /// </summary>

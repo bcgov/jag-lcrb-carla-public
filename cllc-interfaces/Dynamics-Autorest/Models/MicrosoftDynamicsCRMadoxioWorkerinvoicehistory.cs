@@ -29,27 +29,27 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioWorkerinvoicehistory class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioWorkerinvoicehistory(int? statecode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _owningbusinessunitValue = default(string), string versionnumber = default(string), int? utcconversiontimezonecode = default(int?), string _owninguserValue = default(string), int? statuscode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string _adoxioWorkerValue = default(string), string adoxioWorkerinvoicehistoryid = default(string), string _modifiedonbehalfbyValue = default(string), string adoxioName = default(string), string _modifiedbyValue = default(string), int? importsequencenumber = default(int?), int? timezoneruleversionnumber = default(int?), string _owneridValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string _adoxioInvoiceValue = default(string), string _owningteamValue = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioWorkerinvoicehistorySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioWorkerinvoicehistoryAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioWorkerinvoicehistoryMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioWorkerinvoicehistoryProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioWorkerinvoicehistoryBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioWorkerinvoicehistoryPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMinvoice adoxioInvoice = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMadoxioWorker adoxioWorker = default(MicrosoftDynamicsCRMadoxioWorker))
+        public MicrosoftDynamicsCRMadoxioWorkerinvoicehistory(int? statecode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? statuscode = default(int?), int? utcconversiontimezonecode = default(int?), string _owninguserValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string versionnumber = default(string), string _modifiedonbehalfbyValue = default(string), string _owningbusinessunitValue = default(string), int? importsequencenumber = default(int?), string adoxioName = default(string), string _modifiedbyValue = default(string), string adoxioWorkerinvoicehistoryid = default(string), int? timezoneruleversionnumber = default(int?), string _owneridValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string _adoxioWorkerValue = default(string), string _adoxioInvoiceValue = default(string), string _owningteamValue = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioWorkerinvoicehistorySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioWorkerinvoicehistoryAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioWorkerinvoicehistoryMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioWorkerinvoicehistoryProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioWorkerinvoicehistoryBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioWorkerinvoicehistoryPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMinvoice adoxioInvoice = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMadoxioWorker adoxioWorker = default(MicrosoftDynamicsCRMadoxioWorker))
         {
             Statecode = statecode;
             Createdon = createdon;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
-            Versionnumber = versionnumber;
+            Statuscode = statuscode;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             this._owninguserValue = _owninguserValue;
-            Statuscode = statuscode;
             Modifiedon = modifiedon;
             this._createdbyValue = _createdbyValue;
-            this._adoxioWorkerValue = _adoxioWorkerValue;
-            AdoxioWorkerinvoicehistoryid = adoxioWorkerinvoicehistoryid;
+            Versionnumber = versionnumber;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
+            Importsequencenumber = importsequencenumber;
             AdoxioName = adoxioName;
             this._modifiedbyValue = _modifiedbyValue;
-            Importsequencenumber = importsequencenumber;
+            AdoxioWorkerinvoicehistoryid = adoxioWorkerinvoicehistoryid;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             this._owneridValue = _owneridValue;
             Overriddencreatedon = overriddencreatedon;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            this._adoxioWorkerValue = _adoxioWorkerValue;
             this._adoxioInvoiceValue = _adoxioInvoiceValue;
             this._owningteamValue = _owningteamValue;
             Createdbyname = createdbyname;
@@ -88,13 +88,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -108,11 +103,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
@@ -123,18 +113,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_worker_value")]
-        public string _adoxioWorkerValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_workerinvoicehistoryid")]
-        public string AdoxioWorkerinvoicehistoryid { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -148,8 +143,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
+        [JsonProperty(PropertyName = "adoxio_workerinvoicehistoryid")]
+        public string AdoxioWorkerinvoicehistoryid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -170,6 +165,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_worker_value")]
+        public string _adoxioWorkerValue { get; set; }
 
         /// <summary>
         /// </summary>

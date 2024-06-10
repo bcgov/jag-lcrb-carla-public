@@ -29,33 +29,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioOffsitestorage class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioOffsitestorage(string _owneridValue = default(string), string _createdonbehalfbyValue = default(string), string adoxioCity = default(string), int? utcconversiontimezonecode = default(int?), string _adoxioLicenceidValue = default(string), string adoxioStreet1 = default(string), int? timezoneruleversionnumber = default(int?), string _modifiedonbehalfbyValue = default(string), string versionnumber = default(string), int? statecode = default(int?), string _modifiedbyValue = default(string), System.DateTimeOffset? adoxioDateadded = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _createdbyValue = default(string), System.DateTimeOffset? adoxioDateremoved = default(System.DateTimeOffset?), string _owningbusinessunitValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _owninguserValue = default(string), string adoxioName = default(string), string _owningteamValue = default(string), string adoxioOffsitestorageid = default(string), string adoxioPostalcode = default(string), int? importsequencenumber = default(int?), int? statuscode = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioOffsitestorageSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioOffsitestorageDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioOffsitestorageDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioOffsitestorageAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioOffsitestorageMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioOffsitestorageProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioOffsitestorageBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioOffsitestoragePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMadoxioLicences adoxioLicenceId = default(MicrosoftDynamicsCRMadoxioLicences))
+        public MicrosoftDynamicsCRMadoxioOffsitestorage(string _createdonbehalfbyValue = default(string), string _adoxioLicenceidValue = default(string), string adoxioCity = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string adoxioStreet1 = default(string), int? timezoneruleversionnumber = default(int?), string _modifiedonbehalfbyValue = default(string), string versionnumber = default(string), int? statecode = default(int?), int? statuscode = default(int?), string _modifiedbyValue = default(string), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioDateadded = default(System.DateTimeOffset?), string _owneridValue = default(string), System.DateTimeOffset? adoxioDateremoved = default(System.DateTimeOffset?), string adoxioPostalcode = default(string), string _owningbusinessunitValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string _owninguserValue = default(string), string adoxioName = default(string), string _owningteamValue = default(string), string adoxioOffsitestorageid = default(string), int? importsequencenumber = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioOffsitestorageSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioOffsitestorageDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioOffsitestorageDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioOffsitestorageAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioOffsitestorageMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioOffsitestorageProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioOffsitestorageBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioOffsitestoragePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMadoxioLicences adoxioLicenceId = default(MicrosoftDynamicsCRMadoxioLicences))
         {
-            this._owneridValue = _owneridValue;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            AdoxioCity = adoxioCity;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
             this._adoxioLicenceidValue = _adoxioLicenceidValue;
+            AdoxioCity = adoxioCity;
+            Overriddencreatedon = overriddencreatedon;
             AdoxioStreet1 = adoxioStreet1;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Versionnumber = versionnumber;
             Statecode = statecode;
+            Statuscode = statuscode;
             this._modifiedbyValue = _modifiedbyValue;
-            AdoxioDateadded = adoxioDateadded;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
             Modifiedon = modifiedon;
-            Overriddencreatedon = overriddencreatedon;
-            this._createdbyValue = _createdbyValue;
+            AdoxioDateadded = adoxioDateadded;
+            this._owneridValue = _owneridValue;
             AdoxioDateremoved = adoxioDateremoved;
+            AdoxioPostalcode = adoxioPostalcode;
             this._owningbusinessunitValue = _owningbusinessunitValue;
             Createdon = createdon;
+            this._createdbyValue = _createdbyValue;
             this._owninguserValue = _owninguserValue;
             AdoxioName = adoxioName;
             this._owningteamValue = _owningteamValue;
             AdoxioOffsitestorageid = adoxioOffsitestorageid;
-            AdoxioPostalcode = adoxioPostalcode;
             Importsequencenumber = importsequencenumber;
-            Statuscode = statuscode;
             Createdby = createdby;
             Createdonbehalfby = createdonbehalfby;
             Modifiedby = modifiedby;
@@ -83,13 +83,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "_adoxio_licenceid_value")]
+        public string _adoxioLicenceidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -98,13 +98,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_licenceid_value")]
-        public string _adoxioLicenceidValue { get; set; }
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -133,13 +128,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_dateadded")]
-        public System.DateTimeOffset? AdoxioDateadded { get; set; }
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -148,18 +148,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+        [JsonProperty(PropertyName = "adoxio_dateadded")]
+        public System.DateTimeOffset? AdoxioDateadded { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_dateremoved")]
         public System.DateTimeOffset? AdoxioDateremoved { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_postalcode")]
+        public string AdoxioPostalcode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -170,6 +175,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -193,18 +203,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_postalcode")]
-        public string AdoxioPostalcode { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
 
         /// <summary>
         /// </summary>
