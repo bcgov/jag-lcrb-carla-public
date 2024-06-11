@@ -88,6 +88,18 @@ namespace Gov.Lclb.Cllb.Public.Models
         }
         private static HoursOfService GetHourService(int dayOfWeek, int? open, int? close)
         {
+            const dayClosedValue = 845280096;
+            if (open == null || close == null || open == dayClosedValue || close == dayClosedValue)
+            {
+                return new HoursOfService
+                {
+                    DayOfWeek = dayOfWeek,
+                    StartTimeHour = null,
+                    StartTimeMinute = null,
+                    EndTimeHour = null,
+                    EndTimeMinute = null
+                };
+            }
             var opening = StoreHoursUtility.ConvertOpenHoursToString(open);
             var openingList = opening.Split(':');
             var closing = StoreHoursUtility.ConvertOpenHoursToString(close);
