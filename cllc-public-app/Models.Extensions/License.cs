@@ -88,10 +88,8 @@ namespace Gov.Lclb.Cllb.Public.Models
         }
         private static HoursOfService GetHourService(int dayOfWeek, int? open, int? close)
         {
-            // Occasionally, the function will receive null for open and close, or will recieve the value 845280096. 
-            // This means the business is closed that day.
-            // We need to handle this as to not throw exceptions.
-            if (open == null || close == null || open == 845280096 || close == 845280096)
+            const dayClosedValue = 845280096;
+            if (open == null || close == null || open == dayClosedValue || close == dayClosedValue)
             {
                 return new HoursOfService
                 {
