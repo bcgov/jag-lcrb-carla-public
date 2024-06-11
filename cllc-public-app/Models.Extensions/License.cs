@@ -88,6 +88,20 @@ namespace Gov.Lclb.Cllb.Public.Models
         }
         private static HoursOfService GetHourService(int dayOfWeek, int? open, int? close)
         {
+            // Occasionally, the function will receive null for open and close, or will recieve the value 845280096. 
+            // This means the business is closed that day.
+            // We need to handle this as to not throw exceptions.
+            if (open == null || close == null || open == 845280096 || close == 845280096)
+            {
+                return new HoursOfService
+                {
+                    DayOfWeek = dayOfWeek,
+                    StartTimeHour = null,
+                    StartTimeMinute = null,
+                    EndTimeHour = null,
+                    EndTimeMinute = null
+                };
+            }
             var opening = StoreHoursUtility.ConvertOpenHoursToString(open);
             var openingList = opening.Split(':');
             var closing = StoreHoursUtility.ConvertOpenHoursToString(close);
