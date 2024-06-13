@@ -187,12 +187,12 @@ namespace Gov.Lclb.Cllb.Public.Models
                 }
 
             }
-            if (copyIfNull || (!copyIfNull && fromVM.accountUrls != null))
-            {
-                toDynamics.AdoxioAccounturls = fromVM.accountUrls;
-            }
+            // if (copyIfNull || (!copyIfNull && fromVM.accountUrls != null)) TODO: Re-implement this
+            // {
+            //     toDynamics.AdoxioAccounturls = fromVM.accountUrls;
+            // }
 
-            toDynamics.Websiteurl = fromVM.websiteUrl;
+            // toDynamics.Websiteurl = fromVM.websiteUrl;
 
             // business type must be set only during creation, not in update (removed from copyValues() )
             //	toDynamics.AdoxioBusinesstype = (int)Enum.Parse(typeof(ViewModels.Adoxio_applicanttypecodes), fromVM.businessType, true);
@@ -279,7 +279,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 accountVM.LocalGovernmentId = account._adoxioLginlinkidValue;
 
                 accountVM.websiteUrl = account.Websiteurl;
-                accountVM.accountUrls = account.AdoxioAccounturls;
+                // accountVM.accountUrls = account.AdoxioAccounturls; TODO: Re-implement this
                 
                 // SEP Police Review Limits
                 accountVM.isLateHoursApproval = account.AdoxioIslatehoursapproval;

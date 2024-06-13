@@ -88,7 +88,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         }
         private static HoursOfService GetHourService(int dayOfWeek, int? open, int? close)
         {
-            const dayClosedValue = 845280096;
+            const int dayClosedValue = 845280096;
             if (open == null || close == null || open == dayClosedValue || close == dayClosedValue)
             {
                 return new HoursOfService
