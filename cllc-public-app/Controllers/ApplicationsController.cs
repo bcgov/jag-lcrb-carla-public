@@ -1463,7 +1463,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 var applicationType = _dynamicsClient.GetApplicationTypeByName(item.ApplicationType.Name);
 
                 // copy more data for endorsements
-                if (applicationType.AdoxioIsendorsement == true)
+                // LCSD-5744 - Also copy more data for Change to Hours of Liquor Service (After Midnight) application
+                if (applicationType.AdoxioIsendorsement == true || 
+                        (applicationType.AdoxioName != null && applicationType.AdoxioName == "Change to Hours of Liquor Service (After Midnight)"))
                 {
                     adoxioApplication.AdoxioEstablishmentaddress = item.EstablishmentAddress;
                     adoxioApplication.AdoxioEstablishmentaddresscity = item.EstablishmentAddressCity;
