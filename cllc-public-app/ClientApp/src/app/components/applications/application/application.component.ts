@@ -1257,6 +1257,15 @@ export class ApplicationComponent extends FormBase implements OnInit {
     return isAllowed;
   }
 
+  /**
+   * LCSD-7008: 2024-05-01 waynezen: prevent check if Dynamics 365 Invoice generation workflow has already run
+   */
+  private hasInvoiceTriggerRun(): boolean {
+    const hasRun: boolean = (
+      this?.application?.invoiceTrigger === 1)
+
+    return hasRun;
+  }
 
   /**
    * Redirect to payment processing page (Express Pay / Bambora service)

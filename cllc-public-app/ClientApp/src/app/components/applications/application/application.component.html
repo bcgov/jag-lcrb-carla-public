@@ -3039,16 +3039,16 @@
             </button>
 
             <!-- NEXT STEP BUTTONS
-    LG Approval Required -- > Submit to LG For Approval
+  LG Approval Required -- > Submit to LG For Approval
 
-    No LG Approvals Required
-    No Security Screening Required -- > Submit & Pay
-    Security Screening Required    -- > Proceed to Security Screening
-    LG Approved
-    No Security Screening Required -- > Submit & Pay
-    Security Screening Required    -- > Proceed to Security Screening
+  No LG Approvals Required
+  No Security Screening Required -- > Submit & Pay
+  Security Screening Required    -- > Proceed to Security Screening
+  LG Approved
+  No Security Screening Required -- > Submit & Pay
+  Security Screening Required    -- > Proceed to Security Screening
 
-    -->
+  -->
             <!-- LG Approval Required -->
             <button mat-raised-button class="ng-test-submit-for-lg-review" color="primary"
                     *ngIf="showSubmitToLG()"
@@ -3060,7 +3060,8 @@
             <!-- LG Approved OR NO LG Approvals Required -->
             <ng-container *ngIf="lGHasApproved() || ((!application?.applicationType?.isShowLGINApproval && !application?.applicationType?.isShowLGZoningConfirmation) || !showSubmitToLG())">
 
-              <button mat-raised-button *ngIf="!application?.applicationType?.requiresSecurityScreening" color="primary"
+              <!--LCSD-7008: 2024-05-01 waynezen dont show Submit & Pay if Invoice Trigger has already run -->
+              <button mat-raised-button *ngIf="!application?.applicationType?.requiresSecurityScreening && !hasInvoiceTriggerRun()" color="primary"
                       (click)="submit_application()" [disabled]="submitApplicationInProgress">
                 SUBMIT&nbsp;<span *ngIf="!isFreeEndorsement() && !application?.applicationType?.isFree &&  !skipPayment && !isRAS()">&amp; PAY</span>
                 <mat-progress-bar *ngIf="submitApplicationInProgress" mode="indeterminate"></mat-progress-bar>

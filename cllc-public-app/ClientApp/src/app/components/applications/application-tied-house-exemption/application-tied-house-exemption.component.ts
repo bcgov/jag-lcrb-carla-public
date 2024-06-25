@@ -232,9 +232,6 @@ export class ApplicationTiedHouseExemptionComponent extends FormBase implements 
     const assignedJobNumber = this.form.get("assignedLicence.jobNumber").value;
 
 
-    console.log("Tied House Exemption===> Save: licenceId: " + this.licenceId + ", assignedLicenceId: " + assignedLicenceId + ", assignedLicenceNumber: " + assignedLicenceNumber + ", assignedJobNumber: " + assignedJobNumber);
-
-
     if (!this.licenceId) {
       this.application.parentApplicationId = this.applicationId;
       const applicationType = this.applicationType;
