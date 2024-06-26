@@ -405,7 +405,6 @@ export class EventComponent extends FormBase implements OnInit {
       });      
     });
 
-
     if (eventStart < globalEventStart ) 
       error += "The location event date cannot start before the special event start date. ";
 
@@ -415,10 +414,9 @@ export class EventComponent extends FormBase implements OnInit {
     }
     else if (eventStart > maxDate)
     {
-      error += "You cannot have a location start date that is more than six days from the earliest start date for the event. "; 
+      error += "You cannot have a event start date that is more than six days from the earliest start date for the event. "; 
     }
     
-   
     if (eventFromIndex >= eventToIndex) {
       error += "The event should end after the start time, not before. ";
     } 
