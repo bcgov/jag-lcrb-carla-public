@@ -1,4 +1,5 @@
 import { format, addDays } from "date-fns";
+import * as moment from 'moment-timezone';
 
 export class SepSchedule {
     id: string; // server side primary key
@@ -10,80 +11,103 @@ export class SepSchedule {
     serviceEnd: Date;
     liquorServiceHoursExtensionReason: string;
     disturbancePreventionMeasuresDetails: string;
+    readonly vancouverTimeZone: string = "America/Vancouver";
+    readonly edmontonTimeZone: string = "America/Edmonton";
 
-    constructor(sched: IEventFormValue) {
+
+    constructor(sched: IEventFormValue, isPacificTimeZone: boolean) {
+        const timeZone = isPacificTimeZone ? this.vancouverTimeZone : this.edmontonTimeZone;
         if (sched) {
             this.id = sched.id;
-            this.eventStart = this.formatDate(sched.eventDate, sched.eventStartValue);
-            this.eventEnd = this.formatDate(sched.eventDate, sched.eventEndValue);
-            this.serviceStart = this.formatDate(sched.eventDate, sched.serviceStartValue);
-            this.serviceEnd = this.formatDate(sched.eventDate, sched.serviceEndValue);
+            this.eventStart = this.formatDate(sched.eventDate, sched.eventStartValue, isPacificTimeZone);
+            this.eventEnd = this.formatDate(sched.eventDate, sched.eventEndValue, isPacificTimeZone);
+            this.serviceStart = this.formatDate(sched.eventDate, sched.serviceStartValue, isPacificTimeZone);
+            this.serviceEnd = this.formatDate(sched.eventDate, sched.serviceEndValue, isPacificTimeZone);
             this.liquorServiceHoursExtensionReason = sched.liquorServiceHoursExtensionReason;
             this.disturbancePreventionMeasuresDetails = sched.disturbancePreventionMeasuresDetails;
         }
     }
 
+    // Convert the SepSchedule object to an IEventFormValue object
     toEventFormValue(): IEventFormValue {
         const result = { id: this.id } as IEventFormValue;
         result.eventDate = this.eventStart;
 
-
-
         if (this.eventStart) {
             result.eventStartValue = format(new Date(this.eventStart), "h:mm aa");
         }
+
         if (this.eventEnd) {
             result.eventEndValue = format(new Date(this.eventEnd), "h:mm aa");
         }
+
         if (this.serviceStart) {
             result.serviceStartValue = format(new Date(this.serviceStart), "h:mm aa");
         }
+
         if (this.serviceEnd) {
             result.serviceEndValue = format(new Date(this.serviceEnd), "h:mm aa");
         }
+
         result.liquorServiceHoursExtensionReason = this.liquorServiceHoursExtensionReason;
         result.disturbancePreventionMeasuresDetails = this.disturbancePreventionMeasuresDetails;
         
         return result;
     }
 
+    // Get the number of service hours
     getServiceHours(): number {
         const serviceHours = parseInt(format(new Date(this.serviceEnd), "H")) - parseInt(format(new Date(this.serviceStart), "H"));
         return serviceHours;
     }
 
-
-    /**
-     *
-     * @param eventDate
-     * @param time, assumed format "HH:MM [AM,PM]" e.g. '6:30 PM'
-     */
-    private formatDate(eventDate: Date, time: string): Date {
-
-        let tempDate = new Date(eventDate);
-
-        // let day = parseInt(format(new Date(eventDate), "dd"), 10);
-
-        // console.log("formatting date: ", eventDate, time)
-        if (this.isNextDay(time)) {
-           // console.log("is next day")
-            tempDate = addDays(tempDate, 1);
-            // day += 1;
-        }
-        // const dateString = `${day} ${format(tempDate, "d MMM yyyy")} ${time}`;
-        const dateString = `${format(tempDate, "d MMM yyyy")} ${time}`;
-        // console.log("dateString:",dateString);
-        const result = new Date(dateString);
-        // console.log("result is: ", result);
-        return result;
-    }
-
+    // Check if the time is after 12:00 AM
     private isNextDay(time: string): boolean {
         const dayBreakIndex = TIME_SLOTS.indexOf(TIME_SLOTS.find(slot => slot.dayBreak === true));
         const timeIndex = TIME_SLOTS.indexOf(TIME_SLOTS.find(slot => slot.value === time));
         return timeIndex >= dayBreakIndex;
     }
 
+    // Convert the time to 24-hour format and convert the date to Pacific Time
+    private formatDate(eventDate: Date, time: string, isPacificTimeZone: boolean): Date {
+        let tempDate = new Date(eventDate);
+        
+        if (this.isNextDay(time)) {
+            tempDate = addDays(tempDate, 1);
+        }
+        
+        // Convert time to 24-hour format
+        const time24 = convertTo24Hour(time);
+        
+        // Create a date string in the format "yyyy-MM-ddTHH:mm:ss"
+        const dateString = `${format(tempDate, "yyyy-MM-dd")}T${time24}`;
+        
+        // Convert the date string to Pacific Time
+        let dateInPacific = moment.tz(dateString, "America/Los_Angeles");
+        
+        // Convert to UTC, subtract an hour if isPacificTimeZone is false
+        if (!isPacificTimeZone) {
+            dateInPacific = dateInPacific.clone().tz("UTC").add(-1, 'hours');
+        } else {
+            dateInPacific = dateInPacific.clone().tz("UTC");
+        }
+        
+        return dateInPacific.toDate();
+    }
+}
+
+// Convert the time to 24-hour format
+function convertTo24Hour(time) {
+    const [main, period] = time.split(' ');
+    let [hours, minutes] = main.split(':');
+
+    if (period === 'PM' && hours !== '12') {
+        hours = (Number(hours) + 12).toString();
+    } else if (period === 'AM' && hours === '12') {
+        hours = '00';
+    }
+
+    return `${hours.padStart(2, '0')}:${minutes}`;
 }
 
 
