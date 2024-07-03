@@ -283,7 +283,6 @@ export class EventComponent extends FormBase implements OnInit {
     }
     datesForm.patchValue(val);
 
-    // Subscribe to valueChanges of isPacificTimeZone form control
     datesForm.get('isPacificTimeZone').valueChanges.subscribe(value => {
       this.isPacificTimeZone = value;
     });
