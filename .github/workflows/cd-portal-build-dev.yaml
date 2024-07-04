@@ -1,0 +1,85 @@
+name: Portal & API - Development build
+on:
+  workflow_dispatch:
+defaults:
+  run:
+    working-directory: "."
+
+jobs:
+
+  openshift-compile-client-app:
+    name: Compile Client App
+    # needs: []
+    runs-on: ubuntu-latest
+    steps:
+      - name: OpenShift Build
+        env:
+          BUILD_NAME: cllc-public-angular
+          NAMESPACE: ${{ secrets.OpenShiftBuildNamespace }}
+        uses: redhat-developer/openshift-actions@v1.1
+        with:
+          version: "latest"
+          openshift_server_url: ${{ secrets.OpenShiftServerURL }}
+          parameters: '{"apitoken": "${{ secrets.OpenShiftToken }}", "acceptUntrustedCerts": "true"}'
+          cmd: |
+            'version'
+            'project ${NAMESPACE}'
+            'start-build ${BUILD_NAME} -n ${NAMESPACE} -w --follow'
+
+  openshift-build-client-image:
+    name: Build Client Nginx Image
+    needs: openshift-compile-client-app
+    runs-on: ubuntu-latest
+    steps:
+      - name: OpenShift Build
+        env:
+          BUILD_NAME: cllc-public-frontend
+          NAMESPACE: ${{ secrets.OpenShiftBuildNamespace }}
+        uses: redhat-developer/openshift-actions@v1.1
+        with:
+          version: "latest"
+          openshift_server_url: ${{ secrets.OpenShiftServerURL }}
+          parameters: '{"apitoken": "${{ secrets.OpenShiftToken }}", "acceptUntrustedCerts": "true"}'
+          cmd: |
+            'version'
+            'project ${NAMESPACE}'
+            'start-build ${BUILD_NAME} -n ${NAMESPACE} -w --follow'
+
+  openshift-build-client-api:
+    name: Build Client API
+    # needs: []
+    runs-on: ubuntu-latest
+    steps:
+      - name: OpenShift Build
+        env:
+          BUILD_NAME: cllc-public-api
+          NAMESPACE: ${{ secrets.OpenShiftBuildNamespace }}
+        uses: redhat-developer/openshift-actions@v1.1
+        with:
+          version: "latest"
+          openshift_server_url: ${{ secrets.OpenShiftServerURL }}
+          parameters: '{"apitoken": "${{ secrets.OpenShiftToken }}", "acceptUntrustedCerts": "true"}'
+          cmd: |
+            'version'
+            'project ${NAMESPACE}'
+            'start-build ${BUILD_NAME} -n ${NAMESPACE} -w --follow'
+
+  openshift-tag-images:
+    name: Tag Images
+    needs: [openshift-build-client-image, openshift-build-client-api]
+    runs-on: ubuntu-latest
+    steps:
+      - name: OpenShift Tag
+        env:
+          BUILD_NAME: cllc-public-api
+          NAMESPACE: ${{ secrets.OpenShiftBuildNamespace }}
+        uses: redhat-developer/openshift-actions@v1.1
+        with:
+          version: "latest"
+          openshift_server_url: ${{ secrets.OpenShiftServerURL }}
+          parameters: '{"apitoken": "${{ secrets.OpenShiftToken }}", "acceptUntrustedCerts": "true"}'
+          cmd: |
+            'version'
+            'project ${NAMESPACE}'
+             'tag -n ${NAMESPACE} cllc-public-api:latest cllc-public-api:dev'
+             'tag -n ${NAMESPACE} cllc-public-frontend:latest cllc-public-frontend:dev'
