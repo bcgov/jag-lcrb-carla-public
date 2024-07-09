@@ -244,7 +244,7 @@ export class SummaryComponent implements OnInit {
         if (loc.eventDates?.length > 0) {
           const formatterdDates = [];
           loc.eventDates.forEach(ed => {
-            ed = Object.assign(new SepSchedule(null), ed);
+            ed = Object.assign(new SepSchedule(null, null), ed);
             formatterdDates.push({ ed, ...ed.toEventFormValue() });
           });
           loc.eventDates = formatterdDates;
