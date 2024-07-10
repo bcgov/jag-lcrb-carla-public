@@ -319,13 +319,13 @@
                                                 <div class="form-check">
                                                   <input class="form-check-input" type="radio" formControlName="isPacificTimeZone" [value]="true" id="pacific">
                                                   <label class="form-check-label" for="pacific">
-                                                    &nbsp;America / Vancouver
+                                                    &nbsp;Pacific Time
                                                   </label>
                                                 </div>
                                                 <div class="form-check">
                                                   <input class="form-check-input" type="radio" formControlName="isPacificTimeZone" [value]="false" id="mountain">
                                                   <label class="form-check-label" for="mountain">
-                                                    &nbsp;America / Edmonton
+                                                    &nbsp;Mountain Time
                                                   </label>
                                                 </div>
                                               </app-field>
@@ -364,9 +364,9 @@
                                               <div>
                                                   <app-error-notice *ngIf="!item.get('isPacificTimeZone').value">
                                                     <p>
-                                                      Please note that the time on the license you receive will be in America / Vancouver time zone.  For more information please contact the LCRB team at <a href="mailto:LCRB.SEP@gov.bc.ca">LCRB.SEP@gov.bc.ca</a>
+                                                      Please note:  The time on the license you receive will be shown in Pacific Time, adjusted for your Time Zone selection above.  For more information please contact the LCRB team at <a href="mailto:LCRB.SEP@gov.bc.ca">LCRB.SEP@gov.bc.ca</a>
                                                     </p>
-                                                  </app-error-notice>                                                
+                                                  </app-error-notice>
                                               </div>
                                             </td>
                                           </tr>
