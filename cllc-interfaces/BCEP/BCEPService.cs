@@ -254,7 +254,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             try
             {
                 // this is a status request to Bambora, and can be repeated multiple times
-                var request = new HttpRequestMessage(HttpMethod.Post, query_url);
+                var request = new HttpRequestMessage(HttpMethod.Get, query_url);
                 var response = await client.SendAsync(request);
                 if (response.IsSuccessStatusCode)
                 {
