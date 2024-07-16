@@ -19,9 +19,9 @@ namespace Gov.Lclb.Cllb.Interfaces
     public class BCEPService: IBCEPService
     {
         
-        private bool pcir_enabled;
-        private string bcep_pay_url;
-        private string bcep_pcir_pay_url;
+        private readonly bool pcir_enabled;
+        private readonly string bcep_pay_url;
+        private readonly string bcep_pcir_pay_url;
         private readonly string bcep_verify_url;
         private readonly string bcep_pcir_verify_url;
         private readonly string bcep_merchid;
