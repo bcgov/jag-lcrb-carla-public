@@ -45,11 +45,6 @@ namespace bdd_tests
                 ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isMarketOnlyVendors']"));
             uiIsMarketOnlyVendors.Click();
 
-            // select imported goods checkbox
-            var uiIsNoImportedGoods =
-                ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isNoImportedGoods']"));
-            uiIsNoImportedGoods.Click();
-
             // select six vendors checkbox
             var uiIsMarketHostsSixVendors =
                 ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isMarketHostsSixVendors']"));
@@ -396,11 +391,6 @@ namespace bdd_tests
             var uiIsMarketOnlyVendors =
                 ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isMarketOnlyVendors']"));
             Assert.Contains("mat-checkbox-checked", uiIsMarketOnlyVendors.GetAttribute("class"));
-
-            // confirm imported goods checkbox is selected
-            var uiIsNoImportedGoods =
-                ngDriver.FindElement(By.CssSelector("mat-checkbox[formcontrolname='isNoImportedGoods']"));
-            Assert.Contains("mat-checkbox-checked", uiIsNoImportedGoods.GetAttribute("class"));
 
             // confirm six vendors checkbox is selected
             var uiIsMarketHostsSixVendors =
