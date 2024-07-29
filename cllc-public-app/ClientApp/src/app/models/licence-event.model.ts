@@ -102,7 +102,6 @@ export class LicenceEvent {
   isNoPreventingSaleofLiquor: boolean;
   isMarketManagedorCarried: boolean;
   isMarketOnlyVendors: boolean;
-  isNoImportedGoods: boolean;
   isMarketHostsSixVendors: boolean;
   isMarketMaxAmountorDuration: boolean;
   mktOrganizerContactName: string;
