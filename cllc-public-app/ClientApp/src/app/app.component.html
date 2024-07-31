@@ -38,17 +38,6 @@
       </div>
     </header>
 
-    <section>
-      <div style="background: red; color: #ffffff; padding-left: 25px; padding-right: 25px; font-weight: bold; text-align: center;">
-				<br>
-        There will be a scheduled system update on July 31, 2024 between 6 and 7 am PT. The liquor and cannabis licensing portal will not be available during that time.
-        <br>
-        We apologize for any inconvenience.
-				<br>
-				<br>
-			</div>
-		</section>
-
     <div *ngIf="showBceidTermsOfUse()">
       <main class="app-content">
         <app-bceid-confirmation (reloadUser)="reloadUser()" [currentUser]="currentUser"></app-bceid-confirmation>
