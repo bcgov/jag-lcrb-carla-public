@@ -20,8 +20,11 @@ namespace Gov.Lclb.Cllb.Interfaces
     {
         
 
-    private string bcep_pay_url;
+        private readonly bool pcir_enabled;
+        private readonly string bcep_pay_url;
+        private readonly string bcep_pcir_pay_url;
         private readonly string bcep_verify_url;
+        private readonly string bcep_pcir_verify_url;
         private readonly string bcep_merchid;
         private readonly string bcep_alt_merchid;
         private readonly string bcep_sep_merchid;
@@ -62,8 +65,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
 
             client = httpClient;
+            pcir_enabled = bool.Parse(configuration["PCIR_ENABLED"]);
             bcep_pay_url = configuration["BCEP_SERVICE_URL"];
+            bcep_pcir_pay_url = configuration["BCEP_PCIR_SERVICE_URL"];
             bcep_verify_url = configuration["BCEP_SERVICE_VERIFY_URL"];
+            bcep_pcir_verify_url = configuration["BCEP_PCIR_SERVICE_VERIFY_URL"];
 
             bcep_sep_pay_url = configuration["BCEP_SEP_SERVICE_URL"];
             bcep_sep_verify_url = configuration["BCEP_SEP_SERVICE_VERIFY_URL"];
@@ -71,6 +77,11 @@ namespace Gov.Lclb.Cllb.Interfaces
             if (string.IsNullOrEmpty(bcep_verify_url))
             {
                 bcep_verify_url = bcep_pay_url;
+            }
+
+            if (string.IsNullOrEmpty(bcep_pcir_verify_url))
+            {
+                bcep_pcir_verify_url = bcep_pcir_pay_url;
             }
 
             if (string.IsNullOrEmpty(bcep_sep_pay_url))
@@ -213,7 +224,14 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             else
             {
-                redirect = bcep_pay_url;
+                if (pcir_enabled)
+                {
+                    redirect = bcep_pcir_pay_url;
+                }
+                else
+                {
+                    redirect = bcep_pay_url;
+                }
             }
 
             redirect += BCEP_P_SCRIPT + "?" + paramString;
@@ -255,6 +273,13 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 // this is a status request to Bambora, and can be repeated multiple times
                 var request = new HttpRequestMessage(HttpMethod.Get, query_url);
+
+                // PCIR service requires a POST request
+                if (pcir_enabled) 
+                {
+                    request = new HttpRequestMessage(HttpMethod.Post, query_url);
+                } 
+                
                 var response = await client.SendAsync(request);
                 if (response.IsSuccessStatusCode)
                 {
@@ -324,7 +349,14 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             else
             {
-                query_url = bcep_verify_url;
+                 if (pcir_enabled)
+                {
+                    query_url = bcep_pcir_verify_url;
+                }
+                else
+                {
+                    query_url = bcep_verify_url;
+                }
             }
 
             query_url += BCEP_Q_SCRIPT + "?" + paramString;
