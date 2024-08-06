@@ -314,6 +314,22 @@
                                             </td>
                                           </tr>
                                           <tr>
+                                            <td>
+                                              <app-field label="Time Zone" errorMessage="Please select a value" [valid]="!item.get('isPacificTimeZone').touched || item.get('isPacificTimeZone').valid">
+                                                <div class="form-check">
+                                                  <input class="form-check-input" type="radio" formControlName="isPacificTimeZone" [value]="true" id="pacific">
+                                                  <label class="form-check-label" for="pacific">
+                                                    &nbsp;America / Vancouver
+                                                  </label>
+                                                </div>
+                                                <div class="form-check">
+                                                  <input class="form-check-input" type="radio" formControlName="isPacificTimeZone" [value]="false" id="mountain">
+                                                  <label class="form-check-label" for="mountain">
+                                                    &nbsp;America / Edmonton
+                                                  </label>
+                                                </div>
+                                              </app-field>
+                                            </td>
                                             <td class="text-right">
                                               <label>Liquor will be served:</label>
                                             </td>
@@ -323,8 +339,8 @@
                                                 <select class="form-control"
                                                         formControlName="serviceStartValue">
                                                   <option value=""></option>
-                                                  <option [value]="item.value" *ngFor="let item of timeSlots">
-                                                    {{item.name}}
+                                                  <option [value]="timeSlot.value" *ngFor="let timeSlot of timeSlots">
+                                                    {{timeSlot.name}}
                                                   </option>
                                                 </select>
                                               </app-field>
@@ -334,8 +350,8 @@
                                                          [valid]="!item.get('serviceEndValue').touched || item.get('serviceEndValue').valid">
                                                 <select class="form-control" formControlName="serviceEndValue">
                                                   <option value=""></option>
-                                                  <option [value]="item.value" *ngFor="let item of timeSlots">
-                                                    {{item.name}}
+                                                  <option [value]="timeSlot.value" *ngFor="let timeSlot of timeSlots">
+                                                    {{timeSlot.name}}
                                                   </option>
                                                 </select>
                                               </app-field>
@@ -346,12 +362,11 @@
                                           <tr>
                                             <td colspan="4">
                                               <div>
-                                                <button (click)="checkTimeZone()">Is the event located outside of Pacific Standard Time? </button>  
-                                                  <app-error-alert *ngIf="!isPacificTimeZone">
+                                                  <app-error-notice *ngIf="!item.get('isPacificTimeZone').value">
                                                     <p>
-                                                      If the area you’re applying from or if the event is located outside of PST, please note the time on your permit may not accurately reflect the time your event is scheduled to start. Please contact the LCRB team at <a href="mailto:LCRB.SEP@gov.bc.ca">LCRB.SEP@gov.bc.ca</a>
+                                                      Please note that the time on the license you receive will be in America / Vancouver time zone.  For more information please contact the LCRB team at <a href="mailto:LCRB.SEP@gov.bc.ca">LCRB.SEP@gov.bc.ca</a>
                                                     </p>
-                                                  </app-error-alert>                                                
+                                                  </app-error-notice>                                                
                                               </div>
                                             </td>
                                           </tr>
