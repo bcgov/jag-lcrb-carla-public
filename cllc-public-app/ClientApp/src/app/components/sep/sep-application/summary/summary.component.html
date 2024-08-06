@@ -360,14 +360,25 @@
             <section *ngFor="let eventDate of loc.eventDates; let j = index;">
                 <h4>EVENT DATE ({{j+1}} of {{loc.eventDates.length}})</h4>
                 <div class="d-flex">
-                    <label>Start Date:</label> <span>{{eventDate.eventDate | date: 'dd MMM yyyy'}}</span>
+                  <label>Start Date:</label> <span>{{eventDate.eventDate | date: 'dd MMM yyyy'}}</span>
                 </div>
                 <div class="d-flex">
-                    <label>Start Time:</label> <span>{{eventDate.eventStartValue}} - {{eventDate.eventEndValue}}</span>
+                  <label>
+                    <ng-container *ngIf="isPacificTimeZone !== false; else mountainTime">
+                      Start Time (Pacific):
+                    </ng-container>
+                    <ng-template #mountainTime>Start Time (Mountain):</ng-template>
+                  </label>
+                  <span>{{eventDate.eventStartValue}} - {{eventDate.eventEndValue}}</span>
                 </div>
                 <div class="d-flex">
-                    <label>Liquor Service:</label> <span>{{eventDate.serviceStartValue}} -
-                        {{eventDate.serviceEndValue}}</span>
+                  <label>
+                    <ng-container *ngIf="isPacificTimeZone !== false; else mountainTime">
+                      Liquor Service (Pacific):
+                    </ng-container>
+                    <ng-template #mountainTime>Start Time (Mountain):</ng-template>
+                  </label>
+                  <span> {{eventDate.serviceStartValue}} - {{eventDate.serviceEndValue}}</span>
                 </div>
             </section>
         </mat-expansion-panel>
