@@ -81,7 +81,7 @@
   <app-field label="Business Number (9 digit number from the Canada Revenue Agency)" [required]="true"
              [valid]="form.get('businessProfile.businessNumber').valid || !form.get('businessProfile.businessNumber').touched"
              errorMessage="Please enter the business number (9 digits)" *ngIf="['Police'].indexOf(getBusinessTypeName()) == -1">
-    <input class="form-control" style="width: 150px;" maxlength="9" type="text"
+    <input class="form-control" disabled readonly style="width: 150px;" maxlength="9" type="text"
            formControlName="businessNumber" (keydown)="rejectIfNotDigitOrBackSpace($event)">
   </app-field>
 
@@ -106,7 +106,7 @@
         Incorporation Number
       </label>
       <br/>
-      <input class="form-control" style="width: 250px;" type="text" id="bcIncorporationNumber"
+      <input class="form-control" disabled readonly style="width: 250px;" type="text" id="bcIncorporationNumber"
              formControlName="bcIncorporationNumber">
       <div
         *ngIf="!form.get('businessProfile.bcIncorporationNumber').valid && form.get('businessProfile.bcIncorporationNumber').touched"
