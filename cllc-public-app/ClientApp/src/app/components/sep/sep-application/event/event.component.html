@@ -1,425 +1,477 @@
 <div class="event-form">
-    <h1 class="mat-heading">Event Location Details</h1>
+  <h1 class="mat-heading">Event Location Details</h1>
 
-    <span class="mat-title">{{sepApplication?.eventName}}</span>
+  <span class="mat-title">{{sepApplication?.eventName}}</span>
 
-    <p>Tell us about your event and venue location(s).
-    </p>
-    <p><strong>Note: All of your event locations must take place in the same city/district/Indigenous Nation.</strong></p>
-    <span class="error-states">*All fields are required</span>
+  <p>Tell us about your event and venue location(s).
+  </p>
+  <p><strong>Note: All of your event locations must take place in the same city/district/Indigenous Nation.</strong></p>
+  <span class="error-states">*All fields are required</span>
 
-    <mat-divider></mat-divider>
+  <mat-divider></mat-divider>
 
-    <h3>Event Information</h3>
-    <section [formGroup]="form" style="padding: 16px 32px;">
-        <div class="d-flex justify-content-between">
-            <section>
-                <app-field label="Special event city" [required]="false" [valid]="isValidOrNotTouched('sepCity')"
-                    errorMessage="Please select a value">
-                    <input type="text" class="form-control" style="width: 500px;"
-                        placeholder="Type to search and then select a value" formControlName="sepCity"
-                        [matAutocomplete]="lgAutoCompleteBox" #lgAutoCompleteTrigger>
-                    <mat-autocomplete #lgAutoCompleteBox="matAutocomplete" [displayWith]="autocompleteDisplay">
-                        <mat-option *ngFor="let item of cities" [value]="item">
-                            {{item.name}}
-                        </mat-option>
-                    </mat-autocomplete>
-                    <br>
-                    <mat-progress-bar *ngIf="sepCityRequestInProgress" mode="indeterminate"></mat-progress-bar>
-                </app-field>
-                <section>
-                    <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
-                    <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;" *ngIf="form.get('sepCity')?.value?.id">
-                        <section>
-                            <mat-card class="mb-3">
-                                <label for="">Selected City </label>
-                                <div class="ml-2">
-                                    <label for="" class="mr-2">Name:</label>
-                                    <span>{{form.get('sepCity').value.name}}</span>
-                                </div>
-                                <div class="ml-2">
-                                    <label for="" class="mr-2">Police Jurisdiction:</label>
-                                    <span>{{form.get('sepCity').value.policeJurisdictionName}}</span>
-                                </div>
-                            </mat-card>
-                        </section>
-                    </div>
-                    <div class="" style="background-color: #d8292f; padding: 1px;" *ngIf="!form.get('sepCity')?.value?.id">
-                      <section  style="background-color: #ffe9e9; padding:20px;">
-                        <strong>No city selected. Start typing the name of the city and select it from the drop-down list.</strong>
+  <h3>Event Information</h3>
+  <section [formGroup]="form" style="padding: 16px 32px;">
+      <div class="d-flex justify-content-between">
+          <section>
+              <app-field label="Special event city" [required]="false" [valid]="isValidOrNotTouched('sepCity')"
+                  errorMessage="Please select a value">
+                  <input type="text" class="form-control" style="width: 500px;"
+                      placeholder="Type to search and then select a value" formControlName="sepCity"
+                      [matAutocomplete]="lgAutoCompleteBox" #lgAutoCompleteTrigger>
+                  <mat-autocomplete #lgAutoCompleteBox="matAutocomplete" [displayWith]="autocompleteDisplay">
+                      <mat-option *ngFor="let item of cities" [value]="item">
+                          {{item.name}}
+                      </mat-option>
+                  </mat-autocomplete>
+                  <br>
+                  <mat-progress-bar *ngIf="sepCityRequestInProgress" mode="indeterminate"></mat-progress-bar>
+              </app-field>
+              <section>
+                  <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
+                  <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;" *ngIf="form.get('sepCity')?.value?.id">
+                      <section>
+                          <mat-card class="mb-3">
+                              <label for="">Selected City </label>
+                              <div class="ml-2">
+                                  <label for="" class="mr-2">Name:</label>
+                                  <span>{{form.get('sepCity').value.name}}</span>
+                              </div>
+                              <div class="ml-2">
+                                  <label for="" class="mr-2">Police Jurisdiction:</label>
+                                  <span>{{form.get('sepCity').value.policeJurisdictionName}}</span>
+                              </div>
+                          </mat-card>
                       </section>
-                    </div>
-                </section>
-            </section>
-            <div>
-                <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip.toggle()" matTooltip="All locations in the application must be in the same municipality. You may submit more than one application
-                    if your event is in multiple municipalities." #tooltip="matTooltip">
-                </fa-icon>
-            </div>
-        </div>
+                  </div>
+                  <div class="" style="background-color: #d8292f; padding: 1px;" *ngIf="!form.get('sepCity')?.value?.id">
+                    <section  style="background-color: #ffe9e9; padding:20px;">
+                      <strong>No city selected. Start typing the name of the city and select it from the drop-down list.</strong>
+                    </section>
+                  </div>
+              </section>
+          </section>
+          <div>
+              <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip.toggle()" matTooltip="All locations in the application must be in the same municipality. You may submit more than one application
+                  if your event is in multiple municipalities." #tooltip="matTooltip">
+              </fa-icon>
+          </div>
+      </div>
 
-        <!--app-field label="How many people will attend the event?" [required]="true"
-            [valid]="isValidOrNotTouched('maximumNumberOfGuests')" errorMessage="Please select a value">
-            <input type="number" class="form-control" formControlName="maximumNumberOfGuests">
-        </app-field-->
+      <!--app-field label="How many people will attend the event?" [required]="true"
+          [valid]="isValidOrNotTouched('maximumNumberOfGuests')" errorMessage="Please select a value">
+          <input type="number" class="form-control" formControlName="maximumNumberOfGuests">
+      </app-field-->
 
-        <app-field label="Is this an annual event?" [required]="true" [valid]="isValidOrNotTouched('isAnnualEvent')"
-            errorMessage="Please choose a value">
-            <mat-radio-group formControlName="isAnnualEvent">
-                <mat-radio-button color="primary" class="mr-3" [value]="true">Yes</mat-radio-button>
-                <mat-radio-button color="primary" class="mr-3" [value]="false">No</mat-radio-button>
-            </mat-radio-group>
-        </app-field>
+      <app-field label="Is this an annual event?" [required]="true" [valid]="isValidOrNotTouched('isAnnualEvent')"
+          errorMessage="Please choose a value">
+          <mat-radio-group formControlName="isAnnualEvent">
+              <mat-radio-button color="primary" class="mr-3" [value]="true">Yes</mat-radio-button>
+              <mat-radio-button color="primary" class="mr-3" [value]="false">No</mat-radio-button>
+          </mat-radio-group>
+      </app-field>
 
-        <section formGroupName="eventLocations">
-            <mat-accordion multi>
-                <mat-expansion-panel [expanded]="true" [formGroupName]="i" class="location-panel"
-                    *ngFor="let location of locations.controls; let i = index;">
-                    <!-- <mat-expansion-panel-header> -->
-                    <h3>
-                        <fa-icon [icon]="faMapMarkerAlt" mat-card-avatar></fa-icon>
-                        Location {{i + 1}}
-                    </h3>
-                    <!-- </mat-expansion-panel-header> -->
-                    <div class="d-flex justify-content-between">
-                        <mat-card class="mat-elevation-z0 location-panel">
-                            <div class="d-flex justify-content-between">
-                                <section class="flex-fill">
-                                    <app-field label="Event Location Name" [required]="true" [isFullWidth]="true"
-                                        [valid]="!location.get('locationName').touched || location.get('locationName').valid"
-                                        errorMessage="Name can't be blank">
-                                        <input type="text" formControlName="locationName" class="form-control">
-                                    </app-field>
-                                </section>
-                                <div>
-                                    <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip.toggle()"
-                                        matTooltip="For example: community centre, sports field, wedding hall, etc."
-                                        #tooltip="matTooltip">
-                                    </fa-icon>
-                                </div>
-                            </div>
-                            <app-field label="Venue Type" [required]="true" [isFullWidth]="true"
-                                [valid]="!location.get('locationDescription').touched || location.get('locationDescription').valid"
-                                errorMessage="Please enter a value">
-                                <input type="text" formControlName="locationDescription" class="form-control"
-                                    placeholder="For example: community centre, convention centre, banquet hall, etc.">
-                            </app-field>
-                            <app-field label="Address Line 1" [required]="true" [isFullWidth]="true"
-                                [valid]="!location.get('eventLocationStreet1').touched || location.get('eventLocationStreet1').valid"
-                                errorMessage="Address line 1 can't be blank">
-                                <input type="text" formControlName="eventLocationStreet1" class="form-control">
-                            </app-field>
-                            <app-field label="Address Line 2" [isFullWidth]="true">
-                                <input type="text" formControlName="eventLocationStreet2" class="form-control">
-                            </app-field>
-                            <app-field label="Postal Code" [required]="true"
-                                [valid]="!location.get('eventLocationPostalCode').touched || location.get('eventLocationPostalCode').valid"
-                                errorMessage="Postal code is in the wrong format 'X3X 9Y9'">
-                                <input type="text" mask="S0S 0S0" formControlName="eventLocationPostalCode"
-                                    class="form-control">
-                            </app-field>
-                            <app-field
-                                label="Maximum number of guests at this location (including service areas) at any time"
-                                [required]="true"
-                                [valid]="!location.get('maximumNumberOfGuests').touched || location.get('maximumNumberOfGuests').valid"
-                                errorMessage="Maximum number of guests is required">
-                                <input type="number" class="form-control" formControlName="maximumNumberOfGuests">
-                            </app-field>
-                            <!--app-field label="Number of minors (people under the age of 19) at this location at any time" [required]="true"
-                            [valid]="!location.get('numberOfMinors').touched || location.get('numberOfMinors').valid"
-                            errorMessage="Maximum number of minors is required">
-                            <input type="number" class="form-control" formControlName="numberOfMinors">
-                            </app-field-->
+      <section formGroupName="eventLocations">
+          <mat-accordion multi>
+              <mat-expansion-panel [expanded]="true" [formGroupName]="i" class="location-panel"
+                  *ngFor="let location of locations.controls; let i = index;">
+                  <!-- <mat-expansion-panel-header> -->
+                  <h3>
+                      <fa-icon [icon]="faMapMarkerAlt" mat-card-avatar></fa-icon>
+                      Location {{i + 1}}
+                  </h3>
+                  <!-- </mat-expansion-panel-header> -->
+                  <div class="d-flex justify-content-between">
+                      <mat-card class="mat-elevation-z0 location-panel">
+                          <div class="d-flex justify-content-between">
+                              <section class="flex-fill">
+                                  <app-field label="Event Location Name" [required]="true" [isFullWidth]="true"
+                                      [valid]="!location.get('locationName').touched || location.get('locationName').valid"
+                                      errorMessage="Name can't be blank">
+                                      <input type="text" formControlName="locationName" class="form-control">
+                                  </app-field>
+                              </section>
+                              <div>
+                                  <fa-icon [icon]="faQuestionCircle" size="lg" (click)="tooltip.toggle()"
+                                      matTooltip="For example: community centre, sports field, wedding hall, etc."
+                                      #tooltip="matTooltip">
+                                  </fa-icon>
+                              </div>
+                          </div>
+                          <app-field label="Venue Type" [required]="true" [isFullWidth]="true"
+                              [valid]="!location.get('locationDescription').touched || location.get('locationDescription').valid"
+                              errorMessage="Please enter a value">
+                              <input type="text" formControlName="locationDescription" class="form-control"
+                                  placeholder="For example: community centre, convention centre, banquet hall, etc.">
+                          </app-field>
+                          <app-field label="Address Line 1" [required]="true" [isFullWidth]="true"
+                              [valid]="!location.get('eventLocationStreet1').touched || location.get('eventLocationStreet1').valid"
+                              errorMessage="Address line 1 can't be blank">
+                              <input type="text" formControlName="eventLocationStreet1" class="form-control">
+                          </app-field>
+                          <app-field label="Address Line 2" [isFullWidth]="true">
+                              <input type="text" formControlName="eventLocationStreet2" class="form-control">
+                          </app-field>
+                          <app-field label="Postal Code" [required]="true"
+                              [valid]="!location.get('eventLocationPostalCode').touched || location.get('eventLocationPostalCode').valid"
+                              errorMessage="Postal code is in the wrong format 'X3X 9Y9'">
+                              <input type="text" mask="S0S 0S0" formControlName="eventLocationPostalCode"
+                                  class="form-control">
+                          </app-field>
+                          <app-field
+                              label="Maximum number of guests at this location (including service areas) at any time"
+                              [required]="true"
+                              [valid]="!location.get('maximumNumberOfGuests').touched || location.get('maximumNumberOfGuests').valid"
+                              errorMessage="Maximum number of guests is required">
+                              <input type="number" class="form-control" formControlName="maximumNumberOfGuests">
+                          </app-field>
+                          <!--app-field label="Number of minors (people under the age of 19) at this location at any time" [required]="true"
+                          [valid]="!location.get('numberOfMinors').touched || location.get('numberOfMinors').valid"
+                          errorMessage="Maximum number of minors is required">
+                          <input type="number" class="form-control" formControlName="numberOfMinors">
+                          </app-field-->
 
-                            <section formGroupName="serviceAreas">
-                                <mat-card class="mat-elevation-z0">
-                                    <h3>Service Areas</h3>
-                                    <mat-accordion multi>
-                                        <mat-expansion-panel [expanded]="true" [formGroupName]="j"
-                                            *ngFor="let area of getServiceAreas(i).controls; let j = index;">
-                                            <!-- <mat-expansion-panel-header>
-                                                <mat-panel-title>
-                                                    {{ area.get('description').value }}
-                                                </mat-panel-title>
-                                                <mat-panel-title>
-                                                    Guests : {{area.get('numAreaMaxGuests').value }}
-                                                </mat-panel-title>
-                                                <mat-panel-title>
-                                                    Minors present
-                                                </mat-panel-title>
-                                            </mat-expansion-panel-header> -->
-                                            <br>
-                                            <div class="d-flex justify-content-between">
-                                                <section>
-                                                    <app-field
-                                                        label="Describe the area(s) where liquor will be served, sold and consumed"
-                                                        errorMessage="Please enter a value"
-                                                        [valid]="!area.get('eventName').touched || area.get('eventName').valid">
+                          <section formGroupName="serviceAreas">
+                              <mat-card class="mat-elevation-z0">
+                                  <h3>Service Areas</h3>
+                                  <mat-accordion multi>
+                                      <mat-expansion-panel [expanded]="true" [formGroupName]="j"
+                                          *ngFor="let area of getServiceAreas(i).controls; let j = index;">
+                                          <!-- <mat-expansion-panel-header>
+                                              <mat-panel-title>
+                                                  {{ area.get('description').value }}
+                                              </mat-panel-title>
+                                              <mat-panel-title>
+                                                  Guests : {{area.get('numAreaMaxGuests').value }}
+                                              </mat-panel-title>
+                                              <mat-panel-title>
+                                                  Minors present
+                                              </mat-panel-title>
+                                          </mat-expansion-panel-header> -->
+                                          <br>
+                                          <div class="d-flex justify-content-between">
+                                              <section>
+                                                  <app-field
+                                                      label="Describe the area(s) where liquor will be served, sold and consumed"
+                                                      errorMessage="Please enter a value"
+                                                      [valid]="!area.get('eventName').touched || area.get('eventName').valid">
+                                                      <p>
+                                                          i.e.
+                                                          community centre, beverage garden, bar area, courtyard, etc.
+                                                      </p>
+                                                      <input type="text" formControlName="eventName"
+                                                          class="form-control"
+                                                          placeholder="For example: beverage garden, bar area, courtyard, etc.">
+                                                  </app-field>
+                                                  <app-field
+                                                      label="Maximum number of guests in the service area at any given time"
+                                                      errorMessage="Please enter a value"
+                                                      [valid]="!area.get('licencedAreaMaxNumberOfGuests').touched || area.get('licencedAreaMaxNumberOfGuests').valid">
+                                                      <input type="number"
+                                                          formControlName="licencedAreaMaxNumberOfGuests"
+                                                          class="form-control">
+                                                  </app-field>
+                                                  <app-field label="Will minors be in the service area?"
+                                                      errorMessage="Please enter a value"
+                                                      [valid]="!area.get('minorPresent').touched || area.get('minorPresent').valid">
+                                                      <mat-radio-group formControlName="minorPresent">
+                                                          <mat-radio-button color="primary" class="mr-3"
+                                                              [value]="true">Yes
+                                                          </mat-radio-button>
+                                                          <mat-radio-button color="primary" class="mr-3"
+                                                              [value]="false">No
+                                                          </mat-radio-button>
+                                                      </mat-radio-group>
+                                                      <app-error-alert *ngIf="area.get('minorPresent').value">
+                                                        <p>If liquor service is permitted throughout the whole event site, minors are allowed
+                                                          to enter but must not drink, serve liquor or sell liquor or drink tickets. </p>
                                                         <p>
-                                                            i.e.
-                                                            community centre, beverage garden, bar area, courtyard, etc.
+                                                          Anyone under 19 years of age is not allowed in beverage gardens or similar liquor
+                                                          service areas where the service of liquor is the primary focus, except as a
+                                                          professional entertainer. See the “Entertainers” section in the terms and
+                                                          condition manual for more information.
                                                         </p>
-                                                        <input type="text" formControlName="eventName"
-                                                            class="form-control"
-                                                            placeholder="For example: beverage garden, bar area, courtyard, etc.">
-                                                    </app-field>
-                                                    <app-field
-                                                        label="Maximum number of guests in the service area at any given time"
-                                                        errorMessage="Please enter a value"
-                                                        [valid]="!area.get('licencedAreaMaxNumberOfGuests').touched || area.get('licencedAreaMaxNumberOfGuests').valid">
-                                                        <input type="number"
-                                                            formControlName="licencedAreaMaxNumberOfGuests"
-                                                            class="form-control">
-                                                    </app-field>
-                                                    <app-field label="Will minors be in the service area?"
-                                                        errorMessage="Please enter a value"
-                                                        [valid]="!area.get('minorPresent').touched || area.get('minorPresent').valid">
-                                                        <mat-radio-group formControlName="minorPresent">
-                                                            <mat-radio-button color="primary" class="mr-3"
-                                                                [value]="true">Yes
-                                                            </mat-radio-button>
-                                                            <mat-radio-button color="primary" class="mr-3"
-                                                                [value]="false">No
-                                                            </mat-radio-button>
-                                                        </mat-radio-group>
-                                                        <app-error-alert *ngIf="area.get('minorPresent').value">
-                                                          <p>If liquor service is permitted throughout the whole event site, minors are allowed
-                                                            to enter but must not drink, serve liquor or sell liquor or drink tickets. </p>
-                                                          <p>
-                                                            Anyone under 19 years of age is not allowed in beverage gardens or similar liquor
-                                                            service areas where the service of liquor is the primary focus, except as a
-                                                            professional entertainer. See the “Entertainers” section in the terms and
-                                                            condition manual for more information.
-                                                          </p>
-                                                          <p>
-                                                            Minors are not permitted to attend tasting events except as a professional entertainer.
-                                                          </p>
-                                                        </app-error-alert>
-                                                    </app-field>
-                                                    <app-field label="How many minors will be in the service area?"
-                                                        *ngIf="area.get('minorPresent').value"
+                                                        <p>
+                                                          Minors are not permitted to attend tasting events except as a professional entertainer.
+                                                        </p>
+                                                      </app-error-alert>
+                                                  </app-field>
+                                                  <app-field label="How many minors will be in the service area?"
+                                                      *ngIf="area.get('minorPresent').value"
+                                                      errorMessage="Please select a value"
+                                                      [valid]="!area.get('numberOfMinors').touched || area.get('numberOfMinors').valid">
+                                                      <input type="number" formControlName="numberOfMinors"
+                                                          class="form-control">
+                                                  </app-field>
+                                                  <app-field label="Where is the service area location?"
+                                                      errorMessage="Please select a value"
+                                                      [valid]="!area.get('setting').touched || area.get('setting').valid">
+                                                      <select class="form-control setting-select"
+                                                          formControlName="setting">
+                                                          <option value=""></option>
+                                                          <option value="Indoors">Indoors</option>
+                                                          <option value="Outdoors">Outdoors</option>
+                                                          <option value="BothOutdoorsAndIndoors">Both Indoors &
+                                                              Outdoors</option>
+                                                      </select>
+                                                  </app-field>
+
+                                              </section>
+                                              <div>
+                                                  <button [disabled]="disableForm" mat-raised-button color="warn"
+                                                      (click)="removeServiceArea(j, location)" *ngIf="j != 0">Remove
+                                                      Area</button>
+                                              </div>
+                                          </div>
+                                      </mat-expansion-panel>
+                                  </mat-accordion>
+                                  <button  [disabled]="disableForm" mat-raised-button color="secondary" class="mt-3"
+                                      (click)="addServiceArea({}, location)">Add Service
+                                      Area</button>
+                              </mat-card>
+                          </section>
+
+                          <mat-card formGroupName="eventDates" class="mat-elevation-z0 mt-3">
+                              <h3>Event Date(s)</h3>
+                              <p>
+                                  The start time of an event is the time when guests are first
+                                  admitted to the event
+                                  venue; e.g., when the doors to the theatre open before the
+                                  performance or the
+                                  stadium opens before the game to allow time for the audience to be
+                                  admitted and
+                                  seated.
+                              </p>
+                              <p>
+                                  Permitted event times are: Indoor events: 9:00 a.m. - 2:00 a.m. the
+                                  following day.
+                                  Outdoor events: 9:00 a.m. - 10:00 p.m. the same day. Under very
+                                  limited
+                                  circumstances,
+                                  you may receive permission from the Liquor and Cannabis Regulation
+                                  Branch to extend
+                                  these hours.
+                              </p>
+                              <mat-accordion>
+                                  <mat-expansion-panel expanded [formGroupName]="k" (opened)="setIsOpen(i, k, true)"
+                                  (closed)="setIsOpen(i, k, false)"
+                                      *ngFor="let item of getEventDates(i).controls; let k = index;">
+                                      <mat-expansion-panel-header>
+                                          <mat-panel-title *ngIf="getIsOpen(i, k) === false">
+                                              Event Date: {{ item.get('eventDate')?.value | date}}
+                                              <br>
+                                              Event Times (Pacific): {{ item.get('isPacificTimeZone').value 
+                                                  ? item.get('eventStartValue').value        
+                                                  : 'Pacific: ' + item.get('mountainAdjustedPacificEventStartValue')?.value }} 
+                                                - {{ item.get('isPacificTimeZone').value 
+                                                  ? item.get('eventEndValue').value        
+                                                  : item.get('mountainAdjustedPacificEventEndValue')?.value }} 
+                                          </mat-panel-title>
+                                          <mat-panel-title *ngIf="getIsOpen(i, k) === false">
+                                              Liquor will be served (Pacific): {{ item.get('isPacificTimeZone').value 
+                                                  ? item.get('serviceStartValue').value        
+                                                  : 'Pacific: ' + item.get('mountainAdjustedPacificServiceStartValue')?.value }} 
+                                                - {{ item.get('isPacificTimeZone').value 
+                                                  ? item.get('serviceEndValue').value        
+                                                  : item.get('mountainAdjustedPacificServiceEndValue')?.value }}
+                                          </mat-panel-title>
+                                      </mat-expansion-panel-header>
+
+                                      <table class="w-100">
+                                        <tr>
+                                          <td>
+                                            <app-field label="Date of your event"
+                                                      errorMessage="Please select a value"
+                                                      [valid]="!item.get('eventDate').touched || item.get('eventDate').valid">
+                                              <input type="text" formControlName="eventDate"
+                                                    style="background-color: #fff; width: 170px;"
+                                                    placeholder="yyyy-mm-dd" readonly class="form-control"
+                                                    [min]="minDate" [matDatepicker]="picker"
+                                                    (focus)="picker.open()" (click)="picker.open()">
+                                              <mat-datepicker #picker></mat-datepicker>
+                                            </app-field>
+                                          </td>
+                                          <td>
+                                            <div class="d-flex align-items-start">
+                                              <app-field [label]="!item.get('isPacificTimeZone').value ? 'From (Mountain):' : 'From (Pacific):'" 
                                                         errorMessage="Please select a value"
-                                                        [valid]="!area.get('numberOfMinors').touched || area.get('numberOfMinors').valid">
-                                                        <input type="number" formControlName="numberOfMinors"
-                                                            class="form-control">
-                                                    </app-field>
-                                                    <app-field label="Where is the service area location?"
-                                                        errorMessage="Please select a value"
-                                                        [valid]="!area.get('setting').touched || area.get('setting').valid">
-                                                        <select class="form-control setting-select"
-                                                            formControlName="setting">
-                                                            <option value=""></option>
-                                                            <option value="Indoors">Indoors</option>
-                                                            <option value="Outdoors">Outdoors</option>
-                                                            <option value="BothOutdoorsAndIndoors">Both Indoors &
-                                                                Outdoors</option>
-                                                        </select>
-                                                    </app-field>
-
-                                                </section>
-                                                <div>
-                                                    <button [disabled]="disableForm" mat-raised-button color="warn"
-                                                        (click)="removeServiceArea(j, location)" *ngIf="j != 0">Remove
-                                                        Area</button>
-                                                </div>
-                                            </div>
-                                        </mat-expansion-panel>
-                                    </mat-accordion>
-                                    <button  [disabled]="disableForm" mat-raised-button color="secondary" class="mt-3"
-                                        (click)="addServiceArea({}, location)">Add Service
-                                        Area</button>
-                                </mat-card>
-                            </section>
-
-                            <mat-card formGroupName="eventDates" class="mat-elevation-z0 mt-3">
-                                <h3>Event Date(s)</h3>
-                                <p>
-                                    The start time of an event is the time when guests are first
-                                    admitted to the event
-                                    venue; e.g., when the doors to the theatre open before the
-                                    performance or the
-                                    stadium opens before the game to allow time for the audience to be
-                                    admitted and
-                                    seated.
-                                </p>
-                                <p>
-                                    Permitted event times are: Indoor events: 9:00 a.m. - 2:00 a.m. the
-                                    following day.
-                                    Outdoor events: 9:00 a.m. - 10:00 p.m. the same day. Under very
-                                    limited
-                                    circumstances,
-                                    you may receive permission from the Liquor and Cannabis Regulation
-                                    Branch to extend
-                                    these hours.
-                                </p>
-                                <mat-accordion>
-                                    <mat-expansion-panel expanded [formGroupName]="k" (opened)="setIsOpen(i, k, true)"
-                                    (closed)="setIsOpen(i, k, false)"
-                                        *ngFor="let item of getEventDates(i).controls; let k = index;">
-                                        <mat-expansion-panel-header>
-                                            <mat-panel-title *ngIf="getIsOpen(i, k) === false">
-                                                Event Date: {{ item.get('eventDate')?.value | date}}
-                                                <br>
-                                                Event Times: {{ item.get('eventStartValue').value}} - {{
-                                                item.get('eventEndValue').value}}
-                                            </mat-panel-title>
-                                            <mat-panel-title *ngIf="getIsOpen(i, k) === false">
-                                                Liquor will be served: {{
-                                                item.get('serviceStartValue').value}} - {{
-                                                item.get('serviceEndValue').value}}
-                                            </mat-panel-title>
-                                        </mat-expansion-panel-header>
-
-                                        <table class="w-100">
-                                          <tr>
-                                            <td>
-                                              <app-field label="Date of your event"
-                                                         errorMessage="Please select a value"
-                                                         [valid]="!item.get('eventDate').touched || item.get('eventDate').valid">
-                                                <input type="text" formControlName="eventDate"
-                                                       style="background-color: #fff; width: 170px;"
-                                                       placeholder="yyyy-mm-dd" readonly class="form-control"
-                                                       [min]="minDate" [matDatepicker]="picker"
-                                                       (focus)="picker.open()" (click)="picker.open()">
-                                                <mat-datepicker #picker></mat-datepicker>
-                                              </app-field>
-                                            </td>
-                                            <td>
-                                              <app-field label="From" errorMessage="Please select a value"
-                                                         [valid]="!item.get('eventStartValue').touched || item.get('eventStartValue').valid">
+                                                        [valid]="!item.get('eventStartValue').touched || item.get('eventStartValue').valid">
                                                 <select class="form-control" formControlName="eventStartValue">
                                                   <option value=""></option>
                                                   <option [value]="item.value" *ngFor="let item of timeSlots">
                                                     {{item.name}}
                                                   </option>
                                                 </select>
+                                                <div *ngIf="!item.get('isPacificTimeZone').value">
+                                                  <div class="form-group ml-3">
+                                                    <p class="form-control-static">Pacific: {{ item.get('mountainAdjustedPacificEventStartValue')?.value }}</p>
+                                                  </div>
+                                                </div>
                                               </app-field>
-                                            </td>
-                                            <td>
-                                              <app-field label="To" errorMessage="Please select a value"
-                                                         [valid]="!item.get('eventEndValue').touched || item.get('eventEndValue').valid">
+                                            </div>
+                                          </td>
+                                          <td>
+                                            <div class="d-flex align-items-start">
+                                              <app-field [label]="!item.get('isPacificTimeZone').value ? 'To (Mountain):' : 'To (Pacific):'" 
+                                                        errorMessage="Please select a value"
+                                                        [valid]="!item.get('eventEndValue').touched || item.get('eventEndValue').valid">
                                                 <select class="form-control" formControlName="eventEndValue">
                                                   <option value=""></option>
                                                   <option [value]="item.value" *ngFor="let item of timeSlots">
                                                     {{item.name}}
                                                   </option>
                                                 </select>
+                                                <div *ngIf="!item.get('isPacificTimeZone').value">
+                                                  <div class="form-group ml-3">
+                                                    <p class="form-control-static">Pacific: {{ item.get('mountainAdjustedPacificEventEndValue')?.value }}</p>
+                                                  </div>
+                                                </div>
                                               </app-field>
-                                            </td>
-                                            <td class="text-right">
-                                              <button [disabled]="disableForm" mat-raised-button color="warn"
-                                                      (click)="removeEventDate(k, location)" *ngIf="k != 0">
-                                                Remove
-                                              </button>
-                                            </td>
-                                          </tr>
-                                          <tr>
-                                            <td class="text-right">
-                                              <label>Liquor will be served:</label>
-                                            </td>
-                                            <td>
-                                              <app-field label="From" errorMessage="Please select a value"
-                                                         [valid]="!item.get('serviceStartValue').touched || item.get('serviceStartValue').valid">
+                                            </div>
+                                          </td>
+                                          <td class="text-right">
+                                            <button [disabled]="disableForm" mat-raised-button color="warn"
+                                                    (click)="removeEventDate(k, location)" *ngIf="k != 0">
+                                              Remove
+                                            </button>
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td>
+                                            <app-field label="Time Zone" errorMessage="Please select a value" [valid]="!item.get('isPacificTimeZone').touched || item.get('isPacificTimeZone').valid">
+                                              <div class="form-check">
+                                                <input class="form-check-input" type="radio" formControlName="isPacificTimeZone" [value]="true" [id]="'pacific-' + k">
+                                                <label class="form-check-label" for="'pacific-' + k">
+                                                  &nbsp;Pacific Time
+                                                </label>
+                                              </div>
+                                              <div class="form-check">
+                                                <input class="form-check-input" type="radio" formControlName="isPacificTimeZone" [value]="false" [id]="'mountain-' + k">
+                                                <label class="form-check-label" for="'mountain-' + k">
+                                                  &nbsp;Mountain Time
+                                                </label>
+                                              </div>
+                                            </app-field>
+                                          </td>
+                                          <td class="text-right">
+                                            <label>Liquor will be served:</label>
+                                          </td>
+                                          <td>
+                                            <div class="d-flex align-items-start">
+                                              <app-field [label]="!item.get('isPacificTimeZone').value ? 'From (Mountain):' : 'From (Pacific):'" 
+                                                        errorMessage="Please select a value"
+                                                        [valid]="!item.get('serviceStartValue').touched || item.get('serviceStartValue').valid">
                                                 <select class="form-control"
                                                         formControlName="serviceStartValue">
                                                   <option value=""></option>
-                                                  <option [value]="item.value" *ngFor="let item of timeSlots">
-                                                    {{item.name}}
+                                                  <option [value]="timeSlot.value" *ngFor="let timeSlot of timeSlots">
+                                                    {{timeSlot.name}}
                                                   </option>
                                                 </select>
+                                                <div *ngIf="!item.get('isPacificTimeZone').value">
+                                                  <div class="form-group ml-3">
+                                                    <p class="form-control-static">Pacific: {{ item.get('mountainAdjustedPacificServiceStartValue')?.value }}</p>
+                                                  </div>
+                                                </div>
                                               </app-field>
-                                            </td>
-                                            <td>
-                                              <app-field label="To" errorMessage="Please select a value"
-                                                         [valid]="!item.get('serviceEndValue').touched || item.get('serviceEndValue').valid">
+                                            </div>
+                                          </td>
+                                          <td>
+                                            <div class="d-flex align-items-start">
+                                              <app-field [label]="!item.get('isPacificTimeZone').value ? 'To (Mountain):' : 'To (Pacific):'" 
+                                                        errorMessage="Please select a value"
+                                                        [valid]="!item.get('serviceEndValue').touched || item.get('serviceEndValue').valid">
                                                 <select class="form-control" formControlName="serviceEndValue">
                                                   <option value=""></option>
-                                                  <option [value]="item.value" *ngFor="let item of timeSlots">
-                                                    {{item.name}}
+                                                  <option [value]="timeSlot.value" *ngFor="let timeSlot of timeSlots">
+                                                    {{timeSlot.name}}
                                                   </option>
                                                 </select>
+                                                <div *ngIf="!item.get('isPacificTimeZone').value">
+                                                  <div class="form-group ml-3">
+                                                    <p class="form-control-static">Pacific: {{ item.get('mountainAdjustedPacificServiceEndValue')?.value }}</p>
+                                                  </div>
+                                                </div>
                                               </app-field>
-                                            </td>
-                                            <td>
-                                            </td>
-                                          </tr>
-                                          <tr>
-                                            <td colspan="4">
-                                              <div>
-                                                <button (click)="checkTimeZone()">Is the event located outside of Pacific Standard Time? </button>  
-                                                  <app-error-alert *ngIf="!isPacificTimeZone">
-                                                    <p>
-                                                      If the area you’re applying from or if the event is located outside of PST, please note the time on your permit may not accurately reflect the time your event is scheduled to start. Please contact the LCRB team at <a href="mailto:LCRB.SEP@gov.bc.ca">LCRB.SEP@gov.bc.ca</a>
-                                                    </p>
-                                                  </app-error-alert>                                                
-                                              </div>
-                                            </td>
-                                          </tr>
-                                          <tr *ngIf="item?.errors?.range">
-                                            <td></td>
-                                            <td colspan="2">
-                                              <span class="error-states">
-                                                {{item?.errors?.range}}
-                                              </span>
-                                            </td>
-                                          </tr>
-                                          <tr *ngIf="showHoursAlert(item, location)">
-                                            <td colspan="4">
-                                              <app-error-alert>
-                                                <p *ngIf="indoorAreaExists(item, location)">
-                                                  Liquor service hours are outside the permitted range for
-                                                  indoor events (9:00 AM - 2:00AM). Hours are subject to
-                                                  futher limitation by the police or local government.
-                                                </p>
-                                                <p *ngIf="outdoorAreaExists(item, location) && !indoorAreaExists(item, location)">
-                                                  Liquor service hours are outside the permitted range for
-                                                  outdoor events (9:00 AM - 10:00 PM). Hours are subject to
-                                                  futher limitation by the police or local government.
-                                                </p>
+                                            </div>
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td colspan="4">
+                                            <div>
+                                                <app-error-notice *ngIf="!item.get('isPacificTimeZone').value">
+                                                  <p>
+                                                    Please note:  The time on the license you receive will be shown in Pacific Time, adjusted for your Time Zone selection above.  For more information please contact the LCRB team at <a href="mailto:LCRB.SEP@gov.bc.ca">LCRB.SEP@gov.bc.ca</a>
+                                                  </p>
+                                                </app-error-notice>
+                                            </div>
+                                          </td>
+                                        </tr>
+                                        <tr *ngIf="item?.errors?.range">
+                                          <td></td>
+                                          <td colspan="2">
+                                            <span class="error-states">
+                                              {{item?.errors?.range}}
+                                            </span>
+                                          </td>
+                                        </tr>
+                                        <tr *ngIf="showHoursAlert(item, location)">
+                                          <td colspan="4">
+                                            <app-error-alert>
+                                              <p *ngIf="indoorAreaExists(item, location)">
+                                                Liquor service hours are outside the permitted range for
+                                                indoor events (9:00 AM - 2:00AM). Hours are subject to
+                                                futher limitation by the police or local government.
+                                              </p>
+                                              <p *ngIf="outdoorAreaExists(item, location) && !indoorAreaExists(item, location)">
+                                                Liquor service hours are outside the permitted range for
+                                                outdoor events (9:00 AM - 10:00 PM). Hours are subject to
+                                                futher limitation by the police or local government.
+                                              </p>
 
-                                                <app-field [isFullWidth]="true"
-                                                           label="Why would you like to extend your liquor service hours?">
-                                                  <textarea formControlName="liquorServiceHoursExtensionReason" class="form-control w-100" rows="5"></textarea>
-                                                </app-field>
+                                              <app-field [isFullWidth]="true"
+                                                        label="Why would you like to extend your liquor service hours?">
+                                                <textarea formControlName="liquorServiceHoursExtensionReason" class="form-control w-100" rows="5"></textarea>
+                                              </app-field>
 
-                                                <app-field [isFullWidth]="true"
-                                                           label="Please describe what measures you will take to prevent community disturbances.">
-                                                  <textarea formControlName="disturbancePreventionMeasuresDetails" class="form-control w-100" rows="5"></textarea>
-                                                </app-field>
+                                              <app-field [isFullWidth]="true"
+                                                        label="Please describe what measures you will take to prevent community disturbances.">
+                                                <textarea formControlName="disturbancePreventionMeasuresDetails" class="form-control w-100" rows="5"></textarea>
+                                              </app-field>
 
-                                              </app-error-alert>
-                                            </td>
-                                          </tr>
-                                        </table>
-                                    </mat-expansion-panel>
-                                </mat-accordion>
-                                <button  [disabled]="disableForm" mat-raised-button color="secondary" class="mt-3"
-                                    (click)="addEventDate({}, location)">Add Event Date</button>
-                            </mat-card>
-                        </mat-card>
-                        <div>
-                            <button  [disabled]="disableForm" mat-raised-button color="warn" (click)="removeLocation(i)" *ngIf="i !=0 ">Remove
-                                Location</button>
-                        </div>
-                    </div>
-                </mat-expansion-panel>
-            </mat-accordion>
+                                            </app-error-alert>
+                                          </td>
+                                        </tr>
+                                      </table>
+                                  </mat-expansion-panel>
+                              </mat-accordion>
+                              <button  [disabled]="disableForm" mat-raised-button color="secondary" class="mt-3"
+                                  (click)="addEventDate({}, location)">Add Event Date</button>
+                          </mat-card>
+                      </mat-card>
+                      <div>
+                          <button  [disabled]="disableForm" mat-raised-button color="warn" (click)="removeLocation(i)" *ngIf="i !=0 ">Remove
+                              Location</button>
+                      </div>
+                  </div>
+              </mat-expansion-panel>
+          </mat-accordion>
 
-            <button  [disabled]="disableForm" mat-raised-button color="secondary" class="mt-3" (click)="addLocation()">Add Location</button>
-        </section>
-    </section>
-    <mat-divider></mat-divider>
+          <button  [disabled]="disableForm" mat-raised-button color="secondary" class="mt-3" (click)="addLocation()">Add Location</button>
+      </section>
+  </section>
+  <mat-divider></mat-divider>
 
 
-    <section class="error mt-3" *ngIf="showValidationMessages">
-        <p *ngFor="let message of validationMessages">
-            <span class="app-cancel">
-                <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
-                {{message}}
-            </span>
-        </p>
+  <section class="error mt-3" *ngIf="showValidationMessages">
+      <p *ngFor="let message of validationMessages">
+          <span class="app-cancel">
+              <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
+              {{message}}
+          </span>
+      </p>
     </section>
 
     <button  [disabled]="disableForm" mat-raised-button color="secondary" class="mr-3" matStepperPrevious>BACK</button>
     <button  [disabled]="disableForm" mat-raised-button color="primary" (click)="next()">NEXT</button>
-</div>
+  </div>
