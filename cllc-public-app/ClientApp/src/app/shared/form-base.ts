@@ -88,7 +88,6 @@ export class FormBase implements OnDestroy {
         body = contents[0].body;
       }
     }
-    // console.log("body: ", body);
     return body;
   }
 

@@ -986,7 +986,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
    */
   save(showProgress: boolean = false, appData: Application = <Application>{}): Observable<[boolean, Application]> {
     const saveData = this.form.value;
-    console.log("form data: ", this.form.value)
     // do not save if the form is in file upload mode
     if (this.mode === UPLOAD_FILES_MODE || this.mode === INCOMPLETE) {
       // a delay is need by the deactivate guard
@@ -1062,7 +1061,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
    * Submit the application for payment
    * */
   submit_application() {
-    console.log("application: ", this.application)
     // Only save if the data is valid
     if (this.isValid()) {
       // show status

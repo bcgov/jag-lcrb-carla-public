@@ -56,7 +56,6 @@ export class RelocationTypeComponent extends FormBase implements OnInit {
         this.form = this.fb.group({
             relocationType: ["", Validators.required]
         });
-        this.form.valueChanges.subscribe(value => console.log("Form value changed: ", value));
     }
 
     processApplication() {
