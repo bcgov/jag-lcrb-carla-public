@@ -21,6 +21,7 @@ export class RelocationTypeComponent extends FormBase implements OnInit {
     licence: ApplicationLicenseSummary;
     form: FormGroup;
     busy: Subscription;
+    requestStarted: boolean = false;
     temporaryRelocation = this.ApplicationTypeNames.LRSTemporaryRelocation;
     permanentRelocation = this.ApplicationTypeNames.LRSTransferofLocation;
 
@@ -64,6 +65,14 @@ export class RelocationTypeComponent extends FormBase implements OnInit {
     }
 
     processApplication() {
+        if (this.form.value.relocationType === "") {
+            this.snackBar.open("Please select a relocation type", "Warning", { duration: 3500, panelClass: ["red-snackbar"] });
+            return;
+        }
+        if (!this.licence) {
+            this.snackBar.open("An error occurred. Please return to Licences & Authorizations and try again.", "Warning", { duration: 3500, panelClass: ["red-snackbar"] });
+        }
+        this.requestStarted = true;
         const actionName = this.form.value.relocationType 
         const isTemporaryApplication = this.form.value.relocationType === this.ApplicationTypeNames.LRSTemporaryRelocation;
         // We need to figure out what the action name for temp relocations is
@@ -80,6 +89,7 @@ export class RelocationTypeComponent extends FormBase implements OnInit {
                 if (actionApplication.isPaid === false) {
                     this.router.navigateByUrl(`/account-profile/${actionApplication.applicationId}`);
                 } else {
+                    this.requestStarted = false;
                     // prevent a re-submission until the application status is no longer active
                     this.snackBar.open(`${actionName} has already been submitted and is under review`,
                         "Warning",
@@ -93,6 +103,7 @@ export class RelocationTypeComponent extends FormBase implements OnInit {
                         this.router.navigateByUrl(`/account-profile/${data.id}`);
                     },
                         () => {
+                            this.requestStarted = false;
                             this.snackBar.open(`Error running licence action for ${actionName}`,
                                 "Fail",
                                 { duration: 3500, panelClass: ["red-snackbar"] });
@@ -101,6 +112,7 @@ export class RelocationTypeComponent extends FormBase implements OnInit {
             }
         }
         catch (err) {
+            this.requestStarted = false;
             console.error(err);
         }
     }
