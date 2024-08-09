@@ -1,4 +1,3 @@
-
 import { LicenseType } from "./license-type.model";
 import { ApplicationContentType } from "./application-content-type.model";
 import { DynamicsForm } from "./dynamics-form.model";
@@ -98,6 +97,7 @@ export enum ApplicationTypeNames {
   LGINClaim = "LG/IN Claim",
   PoliceClaim = "Police Claim",
   LRSTransferofLocation = "LRS Transfer of Location",
+  LRSTemporaryRelocation = "LRS - Temporary Relocation",
   LiquorRenewal = "Liquor Licence Renewal",
   LiquorLicenceTransfer = "Liquor Licence Transfer",
   PermanentChangeToALicensee = "Permanent Change to a Licensee",
