@@ -44,7 +44,6 @@ export class FormBase implements OnDestroy {
   subscriptionList: Subscription[] = [];
 
   addDynamicContent() {
-    console.log('addDynamicContent: ', this.application);
     if (this.application.applicationType) {
       this.htmlContent = {
         title: this.application.applicationType.title,

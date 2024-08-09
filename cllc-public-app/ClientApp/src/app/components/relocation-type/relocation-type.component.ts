@@ -53,11 +53,6 @@ export class RelocationTypeComponent extends FormBase implements OnInit {
     }
 
     ngOnInit() {
-        if (!this.licence) {
-            console.log("No licence found.")
-        } else {
-            console.log("Licence found: ", this.licence);
-        }
         this.form = this.fb.group({
             relocationType: ["", Validators.required]
         });

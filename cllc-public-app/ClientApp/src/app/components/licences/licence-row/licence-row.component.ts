@@ -404,7 +404,6 @@ export class LicenceRowComponent extends FormBase implements OnInit {
   */
   doAction(licence: ApplicationLicenseSummary, actionName: string) {
     if (actionName === ApplicationTypeNames.LRSTransferofLocation) {
-      console.log("Sending licence: ", licence);
       this.router.navigateByUrl(`/relocation-type/${licence.licenseId}`, { state: { licence: JSON.stringify(licence) } });
       return;
     }
@@ -550,7 +549,6 @@ export class LicenceRowComponent extends FormBase implements OnInit {
   }
 
   startRequest(index: number) {
-    console.log("startRequest() index:", index);
     this.requestStarted = true;
     this.requestID = index;
   }
