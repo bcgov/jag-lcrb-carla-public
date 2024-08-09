@@ -704,6 +704,41 @@
 
             </div>
           </div>
+          <section class="ngtest-temporary-relocation" *ngIf="application?.applicationType?.name === 'LRS - Temporary Relocation'">
+            <h3 class="blue-header">TEMPORARY RELOCATION CRITERIA</h3>
+            <section class="padded-section content-bottom">
+              <div style="position: relative">
+                <section>
+                  <p>Select the criteria your establishment meets to apply for temporary relocation.</p>
+                  <mat-radio-group formControlName="temporaryRelocationCriteria">
+                    <mat-radio-button class="mr-5" value="temp1"><span class="wrap-mat-radio-label">Repairs due to fire, flood, or other event beyond the licensee's control.</span></mat-radio-button>
+                    <mat-radio-button class="mr-5" value="temp2"><span class="wrap-mat-radio-label">Significant alterations to, or renovations of the store being carried out by a person other than the liccensee.</span></mat-radio-button>
+                    <mat-radio-button class="mr-5" value="temp3"><span class="wrap-mat-radio-label">Significant alterations to, or renovations of the store being carried out by the licensee under reasonable grounds that it would be impractical to continue to operate for the duration of the alterations or renovations.</span></mat-radio-button>
+                  </mat-radio-group>
+                </section>
+                <br/>
+                <p>Please upload document that demonstrates how you meet this criteria.</p>
+                <p>Accepted documentation includes:</p>
+                <ul>
+                  <li>Photos of damage to the establishment</li>
+                  <li>Media coverage of damage event or upcoming renovation</li>
+                  <li>Contractor agreement or work order</li>
+                  <li>Letter from a third party (i.e. landlord) attesting to the planned alterations or renovations</li>
+                  <li>Other documents or media</li>
+                </ul>
+                <br/>
+                <section>
+                  <app-file-uploader *ngIf="applicationId" documentType="Temporary Relocation Permit Documents"
+                                    [enableFileDeletion]="true"
+                                    [disableUploads]="false" fileTypes="FILE MUST BE IN PDF FORMAT."
+                                    [multipleFiles]="true" entityName="application"
+                                    [entityId]="applicationId"
+                                    [uploadHeader]="'TO UPLOAD DOCUMENTS, DRAG FILE HERE OR'">
+                  </app-file-uploader>
+                </section>
+              </div>
+            </section>
+          </section>
           <!-- Establishment Name -->
           <section class="ngtest-property-details" *ngIf="application?.applicationType?.showPropertyDetails">
             <h3 class="blue-header">ESTABLISHMENT DETAILS</h3>
@@ -777,7 +812,8 @@
               </div>
               <div formGroupName="assignedLicence"
                    *ngIf="showFormControl(application?.applicationType?.currentEstablishmentAddress)">
-                <h3 class="blue-header">{{application?.licenseType}} LOCATION ADDRESS</h3>
+                <h3 class="blue-header" *ngIf="application?.applicationType?.name === 'LRS - Temporary Relocation'">{{application?.licenseType}} CURRENT LOCATION ADDRESS</h3>
+                <h3 class="blue-header" *ngIf="application?.applicationType?.name !== 'LRS - Temporary Relocation'">{{application?.licenseType}} LOCATION ADDRESS</h3>
                 <div class="content-bottom">
                   <p>The establishment is currently located at the following address:</p>
                   <address class="row">
@@ -816,8 +852,11 @@
                 </div>
               </div>
 
-              <h3 class="blue-header" *ngIf="showFormControl(application?.applicationType?.newEstablishmentAddress)">
+              <h3 class="blue-header" *ngIf="showFormControl(application?.applicationType?.newEstablishmentAddress) && !application?.applicationType?.name === 'LRS - Temporary Relocation'">
                 ADDRESS
+              </h3>
+              <h3 class="blue-header" *ngIf="showFormControl(application?.applicationType?.newEstablishmentAddress) && application?.applicationType?.name === 'LRS - Temporary Relocation'">
+                TEMPORARY ADDRESS
               </h3>
 
               <div class="ngtest-new-address content-bottom"
@@ -2530,7 +2569,8 @@
             <label for="" *ngIf="application?.licenseType == 'Cannabis Retail Store'||application?.licenseType == 'S119 CRS Authorization'">
               Offer or Proof of Ownership, Lease or Sub-Lease
             </label>
-            <label for="" *ngIf="application?.licenseType != 'Cannabis Retail Store' && application?.licenseType != 'S119 CRS Authorization'">Proof of Valid Interest</label>
+            <label for="" *ngIf="application?.licenseType != 'Cannabis Retail Store' && application?.licenseType != 'S119 CRS Authorization' && application?.applicationType?.name !== 'LRS - Temporary Relocation'">Proof of Valid Interest</label>
+            <label for="" *ngIf="application?.licenseType != 'Cannabis Retail Store' && application?.licenseType != 'S119 CRS Authorization' && application?.applicationType?.name === 'LRS - Temporary Relocation'">Temporary Location Proof of Valid Interest</label>
             <section>
               <div *ngIf="application?.licenseType == 'Cannabis Retail Store'||application?.licenseType == 'S119 CRS Authorization' || application?.licenseType == 'Producer Retail Store'">
                 <p>

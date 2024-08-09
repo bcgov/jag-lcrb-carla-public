@@ -167,7 +167,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   ngOnInit() {
-
     this.form = this.fb.group({
       id: [''],
       assignedLicence: this.fb.group({
@@ -1063,6 +1062,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
    * Submit the application for payment
    * */
   submit_application() {
+    console.log("htmlcontent: ", this.htmlContent);
     // Only save if the data is valid
     if (this.isValid()) {
       // show status
