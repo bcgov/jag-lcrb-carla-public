@@ -77,20 +77,14 @@ export class FormBase implements OnDestroy {
   }
 
   getApplicationContent(contentCartegory: string) {
-    console.log("Getting application content for category: ", contentCartegory);
     let body = '';
     if (this.application.applicationType.contentTypes) {
-      // console.log("Application content types: ", this.application.applicationType.contentTypes);
-      // console.log("Applicant type: ", this.application.applicantType);
-      // console.log("Business type: ", this.account && this.account.businessType);
-      // console.log("account: ", this.account);
       const contents =
         this.application.applicationType.contentTypes
           .filter(t => t.category === contentCartegory
             && (t.businessTypes.indexOf(this.application.applicantType) !== -1
               || t.businessTypes.indexOf(this.account && this.account.businessType) !== -1)
           );
-          console.log("Contents: ", contents);
       if (contents.length > 0) {
         body = contents[0].body;
       }
