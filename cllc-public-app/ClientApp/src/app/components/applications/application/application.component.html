@@ -704,16 +704,17 @@
 
             </div>
           </div>
-          <section class="ngtest-temporary-relocation" *ngIf="application?.applicationType?.name === 'LRS - Temporary Relocation'">
+          <section class="ngtest-temporary-relocation" *ngIf="isTemporaryRelocation()">
             <h3 class="blue-header">TEMPORARY RELOCATION CRITERIA</h3>
             <section class="padded-section content-bottom">
               <div style="position: relative">
                 <section>
-                  <p>Select the criteria your establishment meets to apply for temporary relocation.</p>
+                  <p>If you have any questions about this application, contact the Liquor and Cannabis Regulation Branch (LCRB) at <a href="mailto:LCRBLiquor@gov.bc.ca">LCRBLiquor@gov.bc.ca</a></p>
+                  <p>Select the primary criteria your establishment meets for a temporary relocation.</p>
                   <mat-radio-group formControlName="temporaryRelocationCriteria">
-                    <mat-radio-button class="mr-5" value="temp1"><span class="wrap-mat-radio-label">Repairs due to fire, flood, or other event beyond the licensee's control.</span></mat-radio-button>
-                    <mat-radio-button class="mr-5" value="temp2"><span class="wrap-mat-radio-label">Significant alterations to, or renovations of the store being carried out by a person other than the liccensee.</span></mat-radio-button>
-                    <mat-radio-button class="mr-5" value="temp3"><span class="wrap-mat-radio-label">Significant alterations to, or renovations of the store being carried out by the licensee under reasonable grounds that it would be impractical to continue to operate for the duration of the alterations or renovations.</span></mat-radio-button>
+                    <mat-radio-button class="mr-5" value="repairs"><span class="wrap-mat-radio-label">Repairs due to fire, flood, or other event beyond the licensee's control</span></mat-radio-button>
+                    <mat-radio-button class="mr-5" value="renovationsNotByLicensee"><span class="wrap-mat-radio-label">Significant alterations to, or renovations of the store by someone other than the liccensee</span></mat-radio-button>
+                    <mat-radio-button class="mr-5" value="renovationsByLicensee"><span class="wrap-mat-radio-label">Significant alterations to, or renovations of the store by the licensee under reasonable grounds the store cannot continue operating during the alterations or renovations</span></mat-radio-button>
                   </mat-radio-group>
                 </section>
                 <br/>
@@ -812,8 +813,8 @@
               </div>
               <div formGroupName="assignedLicence"
                    *ngIf="showFormControl(application?.applicationType?.currentEstablishmentAddress)">
-                <h3 class="blue-header" *ngIf="application?.applicationType?.name === 'LRS - Temporary Relocation'">{{application?.licenseType}} CURRENT LOCATION ADDRESS</h3>
-                <h3 class="blue-header" *ngIf="application?.applicationType?.name !== 'LRS - Temporary Relocation'">{{application?.licenseType}} LOCATION ADDRESS</h3>
+                <h3 class="blue-header" *ngIf="isTemporaryRelocation()">{{application?.licenseType}} CURRENT LOCATION ADDRESS</h3>
+                <h3 class="blue-header" *ngIf="!isTemporaryRelocation()">{{application?.licenseType}} LOCATION ADDRESS</h3>
                 <div class="content-bottom">
                   <p>The establishment is currently located at the following address:</p>
                   <address class="row">
@@ -852,10 +853,10 @@
                 </div>
               </div>
 
-              <h3 class="blue-header" *ngIf="showFormControl(application?.applicationType?.newEstablishmentAddress) && !application?.applicationType?.name === 'LRS - Temporary Relocation'">
+              <h3 class="blue-header" *ngIf="showFormControl(application?.applicationType?.newEstablishmentAddress) && !isTemporaryRelocation()">
                 ADDRESS
               </h3>
-              <h3 class="blue-header" *ngIf="showFormControl(application?.applicationType?.newEstablishmentAddress) && application?.applicationType?.name === 'LRS - Temporary Relocation'">
+              <h3 class="blue-header" *ngIf="showFormControl(application?.applicationType?.newEstablishmentAddress) && isTemporaryRelocation()">
                 TEMPORARY ADDRESS
               </h3>
 
@@ -1169,7 +1170,7 @@
                     </mat-card>
 
 
-                    <p *ngIf="form.get('indigenousNation').value.websiteUrl">
+                    <p *ngIf="form.get('indigenousNation').value.websiteUrl && !isTemporaryRelocation()">
                       <strong>
                         Please review the information at
                         <a target="blank"
@@ -2072,62 +2073,44 @@
           <div class="ngtest-grocery-store" *ngIf="showGroceryQuestion()" class="content-bottom">
 
             <mat-card class="mat-elevation-z0" style="margin-bottom: 10px;">
-              <section style="display: flex; justify-content: space-between; width: 100%;">
-                <!--div class="question-label" *ngIf="!htmlContent.Grocery">
-        Will the proposed structural alteration involve removing a wall between the
-        {{application?.licenseType}}
-        and an eligible grocery store?
-        </div-->
-                be
-                cl
+              <section>
                 <div class="question-label" *ngIf="!htmlContent.grocery">
                   Is the proposed location inside a grocery store?
                 </div>
                 <div class="question-label" *ngIf="htmlContent.grocery" [innerHTML]="htmlContent.grocery"></div>
-
-
-                <div style="flex: 0 0 85px;">
-                  <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('isLocatedInGroceryStore')}"
-                                           formControlName="isLocatedInGroceryStore" aria-label="Font Style">
-                    <mat-button-toggle [value]="true">Yes</mat-button-toggle>
-                    <mat-button-toggle [value]="false">No</mat-button-toggle>
-                  </mat-button-toggle-group>
-                </div>
+                  <mat-radio-group [ngClass]="{'invalid': isTouchedAndInvalid('isLocatedInGroceryStore')}" formControlName="isLocatedInGroceryStore">
+                    <mat-radio-button class="mr-5" [value]="true"><span class="wrap-mat-radio-label">Yes</span></mat-radio-button>
+                    <mat-radio-button class="mr-5" [value]="false"><span class="wrap-mat-radio-label">No</span></mat-radio-button>
+                  </mat-radio-group>
               </section>
             </mat-card>
             <div *ngIf="showGroceryStore()">
               <section>
                 <p>
-                  Please download and print the
+                  If you selected yes, have the owner of an eligible grocery store complete the 
                   <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/lcrb090_grocery_store_declaration.pdf">
-                    f"
-                    Gro
-                    cery
-                    Store Declaration
-                  </a> and have it be completed by
-                  the owner of an eligible grocery store.
+                    Grocery Store Declaration
+                  </a> 
+                  . Upload the completed document.
                 </p>
-                <p>An eligible grocery store is defined as:</p>
+                <p>An eligible grocery store must:</p>
                 <ul>
                   <li>
-                    primarily engaged in retailing a general line of foods, including canned, dry and frozen food,
-                    fresh
-                    fruits and vegetables, fresh and prepared meats, fish and poultry, dairy products, baked products
-                    and
-                    snack foods, and non-liquor beverages, intended for human consumption, and
+                    Be primarily engaged in retailing the following types of foods and non-alcoholic beverages: canned, dry and frozen food; fresh fruits and vegetables; fresh and prepared meats, fish and poultry; dairy products; baked products; snack foods; and non-alcoholic beverages; and 
                   </li>
-                  <li>having an area of at least 10,000 square feet, including storage.</li>
+                  <li>
+                    Have an area of at least 929 square metres (10,000 square feet), including storage.
+                  </li>
                 </ul>
                 <p>
-                  To maintain eligibility, the conditions above must continue to be met, and the sales revenue from
-                  food
-                  and non-liquor liquor beverages must:
+                  To maintain eligibility, the grocery store must continue to meet the conditions above, and the sales revenue derived from the sale of food and non-liquor beverages at the grocery store must: 
                 </p>
                 <ul>
-                  <li>total at least 70% of the total sales revenue of non-liquor products, and </li>
                   <li>
-                    total more than 50% of the total sales revenue of liquor and non-liquor products in the grocery
-                    store.
+                    total at least 70% of the total sales revenue of non-liquor products at the grocery store, and
+                  </li>
+                  <li>
+                    total more than 50% of the total sales revenue of liquor and non-liquor products at the grocery store. 
                   </li>
                 </ul>
 
@@ -2569,8 +2552,8 @@
             <label for="" *ngIf="application?.licenseType == 'Cannabis Retail Store'||application?.licenseType == 'S119 CRS Authorization'">
               Offer or Proof of Ownership, Lease or Sub-Lease
             </label>
-            <label for="" *ngIf="application?.licenseType != 'Cannabis Retail Store' && application?.licenseType != 'S119 CRS Authorization' && application?.applicationType?.name !== 'LRS - Temporary Relocation'">Proof of Valid Interest</label>
-            <label for="" *ngIf="application?.licenseType != 'Cannabis Retail Store' && application?.licenseType != 'S119 CRS Authorization' && application?.applicationType?.name === 'LRS - Temporary Relocation'">Temporary Location Proof of Valid Interest</label>
+            <label for="" *ngIf="application?.licenseType != 'Cannabis Retail Store' && application?.licenseType != 'S119 CRS Authorization' && !isTemporaryRelocation()">Proof of Valid Interest</label>
+            <label for="" *ngIf="application?.licenseType != 'Cannabis Retail Store' && application?.licenseType != 'S119 CRS Authorization' && isTemporaryRelocation()">Temporary Location Proof of Valid Interest</label>
             <section>
               <div *ngIf="application?.licenseType == 'Cannabis Retail Store'||application?.licenseType == 'S119 CRS Authorization' || application?.licenseType == 'Producer Retail Store'">
                 <p>
@@ -2621,10 +2604,13 @@
                 </ul>
                 <p>&nbsp;</p>
               </div>
-              <p *ngIf="!isRAS() && isRelocation()">
+              <p *ngIf="!isRAS() && isRelocation() && !isTemporaryRelocation()">
                 <strong>Note:</strong> Valid interest must be maintained at the current and proposed site until the
                 relocation is finalized. LCRB may request a copy of valid interest at the current site during the
                 relocation application process.
+              </p>
+              <p *ngIf="!isRAS() && isRelocation() && isTemporaryRelocation()">
+                <strong>Note:</strong> You must have valid interest in the proposed location. Valid interest means you own or have sufficient control over the establishment. Valid interest must be maintained at both the temporary LRS location and the LRS hold location (i.e., the location under renovation that the LRS licensee will return to)
               </p>
 
               <p *ngIf="application?.applicationType?.validInterest === FormControlState.ReadOnly">

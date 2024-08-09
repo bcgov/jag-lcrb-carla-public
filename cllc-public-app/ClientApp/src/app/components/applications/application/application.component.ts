@@ -272,6 +272,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       validInterestDormancyPeriod: ['', []],
       affirmInformationProividedTrueAndComplete: ['', []],
       validInterestEstablishmentLocation: ['', []],
+      temporaryRelocationCriteria: ['', []],
     });
 
     this.form.get('pin').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
@@ -1919,6 +1920,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   isLP(): boolean {
     return this.application?.applicationType?.name === ApplicationTypeNames.LP || this.application?.applicationType?.name === ApplicationTypeNames.LPR || this.application?.applicationType?.name === ApplicationTypeNames.LPC;
+  }
+
+  isTemporaryRelocation(): boolean {
+    return this.application?.applicationType?.name === ApplicationTypeNames.LRSTemporaryRelocation;
   }
 
   updateDynamicValidation() {
