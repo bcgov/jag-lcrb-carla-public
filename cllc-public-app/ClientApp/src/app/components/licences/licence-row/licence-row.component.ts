@@ -73,7 +73,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
   eventCategory = EventCategory;
   renewalStarted = false;
   requestStarted = false;
-  requestID: number=-1;
+  requestID: number = -1;
 
   @Input()
   available: boolean;
@@ -82,7 +82,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
   @Input()
   licences: ApplicationLicenseSummary[];
   isOutstandingPriorBalanceInvoiceDue: boolean;
-  hasOutstandingPriorBalance: boolean; 
+  hasOutstandingPriorBalance: boolean;
   constructor(
     private licenceDataService: LicenseDataService,
     private router: Router,
@@ -122,10 +122,10 @@ export class LicenceRowComponent extends FormBase implements OnInit {
           if (!this.hasOutstandingPriorBalance) {
             this.hasOutstandingPriorBalance = true;
           }
-          if (!this.isOutstandingPriorBalanceInvoiceDue && item.invoice.duedate != null) {           
-            const toDay = new Date(new Date().toISOString().split("T")[0]);           
+          if (!this.isOutstandingPriorBalanceInvoiceDue && item.invoice.duedate != null) {
+            const toDay = new Date(new Date().toISOString().split("T")[0]);
             let tmpDueDate = new Date(item.invoice.duedate.toString().split("T")[0]);
-            this.isOutstandingPriorBalanceInvoiceDue =  tmpDueDate < toDay;
+            this.isOutstandingPriorBalanceInvoiceDue = tmpDueDate < toDay;
           }
         });
       });
@@ -246,10 +246,10 @@ export class LicenceRowComponent extends FormBase implements OnInit {
   isFederalReportLicenceType(item: ApplicationLicenseSummary) {
     const licenceType = item?.licenceTypeName;
 
-    if(licenceType && (licenceType === ApplicationTypeNames.CannabisRetailStore || licenceType === ApplicationTypeNames.ProductionRetailStore)) {
+    if (licenceType && (licenceType === ApplicationTypeNames.CannabisRetailStore || licenceType === ApplicationTypeNames.ProductionRetailStore)) {
       return true;
-    } 
-    
+    }
+
     return false;
   }
 
@@ -358,7 +358,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
 
   isRecentlyExpired(licence: ApplicationLicenseSummary) {
     if (this.isExpired(licence)) {
-      const expiry = startOfDay( new Date(licence.expiryDate));
+      const expiry = startOfDay(new Date(licence.expiryDate));
       const diff = differenceInDays(NOW, expiry);
       return diff <= 30;
     }
@@ -403,6 +403,12 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     start or open a change job from a licence row
   */
   doAction(licence: ApplicationLicenseSummary, actionName: string) {
+    if (actionName === ApplicationTypeNames.LRSTransferofLocation) {
+      console.log("Sending licence: ", licence);
+      this.router.navigateByUrl(`/relocation-type/${licence.licenseId}`, { state: { licence: JSON.stringify(licence) } });
+      return;
+    }
+
     // Hefen.Zhou Note: LCSD-6229 Licensees should be able to submit more than one temporary change job at a time 
     let tempApplications = [
       "Temporary Change to Hours of Sale (FP1)",
@@ -416,7 +422,6 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     try {
       let isTemporaryApplication = tempApplications.includes(actionName);
       // search for an existing application type that matches the type specified
-
       // 2024-01-12 LCSD-6459 waynezen: use new ApplicationStatuses instead of hard-coding
       // filter out Approved/Terminated.. Applications - which forces creation of a new Application
       const actionApplication = licence.actionApplications.find(
@@ -541,10 +546,11 @@ export class LicenceRowComponent extends FormBase implements OnInit {
           }
         );
     }
-    
+
   }
 
-  startRequest(index:number) {
+  startRequest(index: number) {
+    console.log("startRequest() index:", index);
     this.requestStarted = true;
     this.requestID = index;
   }
