@@ -790,6 +790,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool affirmInformationProividedTrueAndComplete { get; set; }
         public bool validInterestEstablishmentLocation { get; set; }
         public DateTimeOffset? EstablishmentReopeningDate { get; set; }
-
+        public int? temporaryRelocationCriteria { get; set; }
     }
 }
