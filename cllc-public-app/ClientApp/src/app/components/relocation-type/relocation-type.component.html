@@ -1,0 +1,48 @@
+<div class="form-wrapper" style="position: relative">
+  <div class="row">
+    <div class="col-lg-8 col-sm-12">
+      <h1>Type of Relocation</h1>
+      <p>LOREM IMPSUM (ADD INFORMATION ABOUT RELOCATION TYPE)</p>
+      <h3 class="blue-header">TYPE OF APPLICATION</h3>
+      <div class="padded-section content-bottom" [formGroup]="form">
+        <section class="my-8">
+          Please select the relocation application that corresponds best to your
+          needs
+          <br />
+          <input
+            type="radio"
+            [value]="permanentRelocation"
+            formControlName="relocationType"
+            id="permanentRelocation"
+          />
+          Permanent Relocation
+          <br />
+          <input
+            type="radio"
+            [value]="temporaryRelocation"
+            formControlName="relocationType"
+            id="temporaryRelocation"
+          />
+          Temporary Relocation
+        </section>
+      </div>
+      <br />
+      <div class="row button-row">
+        <div class="col-lg-8 d-flex justify-content-start">
+          <button class="btn btn-link mr-4">
+            <fa-icon [icon]="faArrowLeft"></fa-icon>Go back to account details
+          </button>
+          <button color="primary" mat-raised-button class="save-cont" (click)="processApplication()">
+            CONTINUE TO APPLICATION
+            <fa-icon [icon]="faChevronRight" class="mr-0 ml-2"></fa-icon>
+          </button>
+        </div>
+        <div class="col-lg-4 d-flex justify-content-end">
+          <button class="btn btn-link btn-cancel" routerLink="/dashboard">
+            <fa-icon [icon]="faTrash"></fa-icon>CANCEL
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

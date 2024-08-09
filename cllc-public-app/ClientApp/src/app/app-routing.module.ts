@@ -105,6 +105,7 @@ import { PoliceSummaryComponent } from "@components/police-representative/police
 import { SepPaymentConfirmationComponent } from "@components/sep/payment-confirmation/payment-confirmation.component";
 import { SummaryComponent } from "@components/sep/sep-application/summary/summary.component";
 import { SepClaimComponent } from "@components/sep/sep-claim/sep-claim.component";
+import { RelocationTypeComponent } from "@components/relocation-type/relocation-type.component";
 
 const routes: Routes = [
   {
@@ -149,22 +150,22 @@ const routes: Routes = [
   {
     path: "sep/police/approval-settings",
     component: ApprovalSettingsComponent,
-    canActivate: [PoliceAuthGuard]    
+    canActivate: [PoliceAuthGuard]
   },
   {
     path: "sep/police/all-applications",
     component: AllApplicationsComponent,
-    canActivate: [PoliceAuthGuard]    
+    canActivate: [PoliceAuthGuard]
   },
   {
     path: "sep/police/my-jobs",
     component: MyJobsComponent,
-    canActivate: [PoliceAuthGuard]    
+    canActivate: [PoliceAuthGuard]
   },
   {
     path: "sep/police/:specialEventId",
     component: PoliceSummaryComponent,
-    canActivate: [PoliceAuthGuard],    
+    canActivate: [PoliceAuthGuard],
     canDeactivate: [CanDeactivateGuard]
   },
   {
@@ -204,7 +205,7 @@ const routes: Routes = [
     data: { feature: "PermanentChangesToLicensee" }
   },
   {
-    path: "org-structure",              
+    path: "org-structure",
     component: PermanentChangeToAnApplicantComponent,
     canActivate: [BCeidAuthGuard, FeatureGuard],
     data: { feature: "PermanentChangesToApplicant" }
@@ -354,6 +355,11 @@ const routes: Routes = [
     canActivate: [BCeidAuthGuard]
   },
   {
+    path: "relocation-type/:applicationId",
+    component: RelocationTypeComponent,
+    canActivate: [BCeidAuthGuard],
+  },
+  {
     path: "permanent-change-to-a-licensee",
     component: PermanentChangeToALicenseeComponent,
     canActivate: [BCeidAuthGuard, FeatureGuard],
@@ -460,7 +466,7 @@ const routes: Routes = [
     canActivate: [BCeidAuthGuard]
   },
   {
-    
+
     path: "tied-house-exemption/:isAppId/:applicationId",
     component: ApplicationTiedHouseExemptionComponent,
     canActivate: [BCeidAuthGuard]
