@@ -272,7 +272,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       validInterestDormancyPeriod: ['', []],
       affirmInformationProividedTrueAndComplete: ['', []],
       validInterestEstablishmentLocation: ['', []],
-      temporaryRelocationCriteria: ['', []],
+      temporaryRelocationCriteria: ['', this.isTemporaryRelocation() ? Validators.required : null],
     });
 
     this.form.get('pin').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
@@ -889,7 +889,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   showExteriorChangeQuestion(): boolean {
     let show = this.application &&
       (this.application.applicationType.name === ApplicationTypeNames.CRSEstablishmentNameChange
-      && (this.application.licenseType === 'Cannabis Retail Store' || this.application.licenseType === 'S119 CRS Authorization'));
+        && (this.application.licenseType === 'Cannabis Retail Store' || this.application.licenseType === 'S119 CRS Authorization'));
 
     if (show) {
       this.form.get('proposedChange').setValidators([Validators.required]);
@@ -1480,6 +1480,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
     if (this.showZoning() && this.application.isPermittedInZoning != true) {
       this.validationMessages.push('Zoning Declaration is required.');
+    }
+
+    if (this.isTemporaryRelocation() && !this.form.get('temporaryRelocationCriteria').value) {
+      valid = false;
+      this.validationMessages.push('Temporary relocation criteria is required.');
     }
 
     if (this.application?.applicationType.name == ApplicationTypeNames.MFG) {
