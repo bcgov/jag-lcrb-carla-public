@@ -468,7 +468,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
               }, {});
 
             this.form.patchValue(noNulls);
-
             //LCSD-5764 get address from application if no assigned license
             if (this.application != null && this.application.assignedLicence == null) {
               if (this.application.establishmentAddressStreet != null) {
@@ -671,7 +670,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       if (this.application?.applicationType?.name != ApplicationTypeNames.TemporaryExtensionOfLicensedAreaLP) {
         this.form.get('authorizedToSubmit').setValidators([this.customRequiredCheckboxValidator()]);
       }
-        this.form.get('signatureAgreement').setValidators([this.customRequiredCheckboxValidator()]);
+      this.form.get('signatureAgreement').setValidators([this.customRequiredCheckboxValidator()]);
     }
 
     // TG validation question for cannabis licences to confirm that product is not visible from outside
@@ -717,7 +716,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   requiresFederalProductionInfo(): boolean {
     const applicationTypeName = this.application.applicationType.name;
-    if(applicationTypeName === "Producer Retail Store" || applicationTypeName === "PRS Relocation" || applicationTypeName === "PRS Transfer of Ownership") {
+    if (applicationTypeName === "Producer Retail Store" || applicationTypeName === "PRS Relocation" || applicationTypeName === "PRS Transfer of Ownership") {
       return true;
     }
 
@@ -726,8 +725,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   private isHoursOfSaleValid(): boolean {
     return this.form.disabled || !this.application.applicationType.showHoursOfSale ||
-        this.application.applicationType.name === ApplicationTypeNames.FP ||
-        this.application.applicationType.name === ApplicationTypeNames.FPRelo ||
+      this.application.applicationType.name === ApplicationTypeNames.FP ||
+      this.application.applicationType.name === ApplicationTypeNames.FPRelo ||
       (this.form.get('serviceHoursSundayOpen').valid
         && this.form.get('serviceHoursMondayOpen').valid
         && this.form.get('serviceHoursTuesdayOpen').valid
@@ -890,7 +889,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   showExteriorChangeQuestion(): boolean {
     let show = this.application &&
       (this.application.applicationType.name === ApplicationTypeNames.CRSEstablishmentNameChange
-      &&( this.application.licenseType === 'Cannabis Retail Store' || this.application.licenseType === 'S119 CRS Authorization'));
+      && (this.application.licenseType === 'Cannabis Retail Store' || this.application.licenseType === 'S119 CRS Authorization'));
 
     if (show) {
       this.form.get('proposedChange').setValidators([Validators.required]);
@@ -940,7 +939,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     return this.application.applicationType.category == "Liquor";
   }
   isRelocation(): boolean {
-    return this.application.applicationType.isRelocation; 
+    return this.application.applicationType.isRelocation;
   }
   normalizeFormData() {
     let description2 = this.form.get('description2').value;
@@ -960,8 +959,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
       if (this.application.applicationType.name == ApplicationTypeNames.TemporaryExtensionOfLicensedAreaLP) {
         capacityArea.forEach((area: ServiceArea) => {
           area.isTemporaryExtensionArea = true;
-        })   
-      } 
+        })
+      }
     }
     if (serviceAreas) {
       if (this.application.applicationType.name == ApplicationTypeNames.TemporaryExtensionOfLicensedAreaLP) {
@@ -987,7 +986,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
    */
   save(showProgress: boolean = false, appData: Application = <Application>{}): Observable<[boolean, Application]> {
     const saveData = this.form.value;
-
+    console.log("form data: ", this.form.value)
     // do not save if the form is in file upload mode
     if (this.mode === UPLOAD_FILES_MODE || this.mode === INCOMPLETE) {
       // a delay is need by the deactivate guard
@@ -1086,7 +1085,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
                 },
                   error => {
                     if (error === "Payment already made") {
-                      this.snackBar.open("Payment has already been made, Please return to the dashboard.", "Fail",{ duration: 3500, panelClass: ["red-snackbar"] });
+                      this.snackBar.open("Payment has already been made, Please return to the dashboard.", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
                     } else {
                       this.snackBar.open('Error submitting payment', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
                     }
@@ -1119,9 +1118,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   showMFGImages(): boolean {
     const isit = this.application?.licenseType === 'Manufacturer'
-          && (this.application?.applicationType?.isEndorsement || this.application?.applicationType?.isStructural)
-          && !(this.application?.applicationType?.name != "Structural Changes to a Manufacturing Facility") // so the tests pass for some reason
-          && !this.application?.applicationType?.isDefault;
+      && (this.application?.applicationType?.isEndorsement || this.application?.applicationType?.isStructural)
+      && !(this.application?.applicationType?.name != "Structural Changes to a Manufacturing Facility") // so the tests pass for some reason
+      && !this.application?.applicationType?.isDefault;
     return isit;
   }
 
@@ -1166,28 +1165,28 @@ export class ApplicationComponent extends FormBase implements OnInit {
     // Only save if the data is valid
 
 
-      this.busy = forkJoin(
-        this.applicationDataService.updateApplication({
-          ...this.application,
-          ...this.normalizeFormData(),
-          applicationStatus: 'UnderReview'
-        }),
-        this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
-      ).pipe(takeWhile(() => this.componentActive))
-        .pipe(catchError(() => {
-          this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-          return of(false);
-        }))
-        .pipe(mergeMap(() => {
-          this.savedFormData = saveData;
-          this.updateApplicationInStore();
-          this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
-          return of(true);
-        })).subscribe(res => {
-          this.saveComplete.emit(true);
-          this.snackBar.open('Application Submitted to the Branch for Review', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
-          this.router.navigateByUrl('/dashboard');
-        });
+    this.busy = forkJoin(
+      this.applicationDataService.updateApplication({
+        ...this.application,
+        ...this.normalizeFormData(),
+        applicationStatus: 'UnderReview'
+      }),
+      this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
+    ).pipe(takeWhile(() => this.componentActive))
+      .pipe(catchError(() => {
+        this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        return of(false);
+      }))
+      .pipe(mergeMap(() => {
+        this.savedFormData = saveData;
+        this.updateApplicationInStore();
+        this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+        return of(true);
+      })).subscribe(res => {
+        this.saveComplete.emit(true);
+        this.snackBar.open('Application Submitted to the Branch for Review', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+        this.router.navigateByUrl('/dashboard');
+      });
 
   }
 
@@ -1546,11 +1545,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
         valid = false;
         this.validationMessages.push('Please Affirm Information Proivided True And Complete.');
       }
-      if (this.form.get('validInterestEstablishmentLocation').value != true){
+      if (this.form.get('validInterestEstablishmentLocation').value != true) {
         valid = false;
         this.validationMessages.push('Please Affirm it is Valid Interest Establishment Location.');
       }
-      if (this.form.get('validInterestDormancyPeriod').value != true){
+      if (this.form.get('validInterestDormancyPeriod').value != true) {
         valid = false;
         this.validationMessages.push('Please Affirm it is Valid Interest Dormancy Period.');
       }
@@ -1974,6 +1973,4 @@ export class ApplicationComponent extends FormBase implements OnInit {
     this.licenseToRemove = assignedLicence;
     this.form.get("description1").patchValue(this.licenseToRemove.name);
   }
-
- 
 }
