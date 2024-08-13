@@ -270,4 +270,7 @@ export interface Application {
   validInterestEstablishmentLocation: boolean;
   affirmInformationProividedTrueAndComplete: boolean;
 
+  // Temporary Relocations
+  temporaryRelocationCriteria: number;
+
 }
