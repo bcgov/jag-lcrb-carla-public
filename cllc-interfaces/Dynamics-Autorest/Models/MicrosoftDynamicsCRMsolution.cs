@@ -29,36 +29,36 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMsolution
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMsolution(string solutionid = default(string), string pinpointsolutiondefaultlocale = default(string), string _publisheridValue = default(string), string _organizationidValue = default(string), string pinpointassetid = default(string), string uniquename = default(string), string _configurationpageidValue = default(string), string _parentsolutionidValue = default(string), bool? isapimanaged = default(bool?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string thumbprint = default(string), bool? isvisible = default(bool?), bool? ismanaged = default(bool?), string _createdbyValue = default(string), string solutionpackageversion = default(string), string _modifiedbyValue = default(string), string versionnumber = default(string), string templatesuffix = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? installedon = default(System.DateTimeOffset?), string version = default(string), long? pinpointsolutionid = default(long?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string description = default(string), string upgradeinfo = default(string), System.DateTimeOffset? updatedon = default(System.DateTimeOffset?), long? pinpointpublisherid = default(long?), string friendlyname = default(string), int? solutiontype = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMwebresource configurationpageid = default(MicrosoftDynamicsCRMwebresource), IList<MicrosoftDynamicsCRMsolutioncomponent> solutionSolutioncomponent = default(IList<MicrosoftDynamicsCRMsolutioncomponent>), MicrosoftDynamicsCRMpublisher publisherid = default(MicrosoftDynamicsCRMpublisher), IList<MicrosoftDynamicsCRMsyncerror> solutionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsolution parentsolutionid = default(MicrosoftDynamicsCRMsolution), IList<MicrosoftDynamicsCRMsolution> solutionParentSolution = default(IList<MicrosoftDynamicsCRMsolution>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMfileattachment> regardingobjectidFileattachmentSolution = default(IList<MicrosoftDynamicsCRMfileattachment>), IList<MicrosoftDynamicsCRMcanvasapp> fKCanvasAppSolution = default(IList<MicrosoftDynamicsCRMcanvasapp>), IList<MicrosoftDynamicsCRMfieldpermission> solutionFieldpermission = default(IList<MicrosoftDynamicsCRMfieldpermission>), IList<MicrosoftDynamicsCRMfieldsecurityprofile> solutionFieldsecurityprofile = default(IList<MicrosoftDynamicsCRMfieldsecurityprofile>), IList<MicrosoftDynamicsCRMprivilege> solutionPrivilege = default(IList<MicrosoftDynamicsCRMprivilege>), IList<MicrosoftDynamicsCRMrole> solutionRole = default(IList<MicrosoftDynamicsCRMrole>), MicrosoftDynamicsCRMfileattachment fileid = default(MicrosoftDynamicsCRMfileattachment), IList<MicrosoftDynamicsCRMpackage> packageSolution = default(IList<MicrosoftDynamicsCRMpackage>))
+        public MicrosoftDynamicsCRMsolution(string solutionid = default(string), long? pinpointsolutionid = default(long?), string _publisheridValue = default(string), string _organizationidValue = default(string), string pinpointassetid = default(string), bool? isvisible = default(bool?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? installedon = default(System.DateTimeOffset?), string uniquename = default(string), string solutionpackageversion = default(string), string upgradeinfo = default(string), string _configurationpageidValue = default(string), string _parentsolutionidValue = default(string), System.DateTimeOffset? updatedon = default(System.DateTimeOffset?), bool? ismanaged = default(bool?), string _modifiedonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string versionnumber = default(string), string templatesuffix = default(string), string _createdonbehalfbyValue = default(string), string _createdbyValue = default(string), long? pinpointpublisherid = default(long?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string thumbprint = default(string), string pinpointsolutiondefaultlocale = default(string), string description = default(string), bool? isapimanaged = default(bool?), string version = default(string), string friendlyname = default(string), int? solutiontype = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMwebresource configurationpageid = default(MicrosoftDynamicsCRMwebresource), IList<MicrosoftDynamicsCRMsolutioncomponent> solutionSolutioncomponent = default(IList<MicrosoftDynamicsCRMsolutioncomponent>), MicrosoftDynamicsCRMpublisher publisherid = default(MicrosoftDynamicsCRMpublisher), IList<MicrosoftDynamicsCRMsyncerror> solutionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsolution parentsolutionid = default(MicrosoftDynamicsCRMsolution), IList<MicrosoftDynamicsCRMsolution> solutionParentSolution = default(IList<MicrosoftDynamicsCRMsolution>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMfileattachment> regardingobjectidFileattachmentSolution = default(IList<MicrosoftDynamicsCRMfileattachment>), IList<MicrosoftDynamicsCRMcanvasapp> fKCanvasAppSolution = default(IList<MicrosoftDynamicsCRMcanvasapp>), IList<MicrosoftDynamicsCRMfieldpermission> solutionFieldpermission = default(IList<MicrosoftDynamicsCRMfieldpermission>), IList<MicrosoftDynamicsCRMfieldsecurityprofile> solutionFieldsecurityprofile = default(IList<MicrosoftDynamicsCRMfieldsecurityprofile>), IList<MicrosoftDynamicsCRMprivilege> solutionPrivilege = default(IList<MicrosoftDynamicsCRMprivilege>), IList<MicrosoftDynamicsCRMrole> solutionRole = default(IList<MicrosoftDynamicsCRMrole>), MicrosoftDynamicsCRMfileattachment fileid = default(MicrosoftDynamicsCRMfileattachment), IList<MicrosoftDynamicsCRMpackage> packageSolution = default(IList<MicrosoftDynamicsCRMpackage>))
         {
             Solutionid = solutionid;
-            Pinpointsolutiondefaultlocale = pinpointsolutiondefaultlocale;
+            Pinpointsolutionid = pinpointsolutionid;
             this._publisheridValue = _publisheridValue;
             this._organizationidValue = _organizationidValue;
             Pinpointassetid = pinpointassetid;
+            Isvisible = isvisible;
+            Modifiedon = modifiedon;
+            Installedon = installedon;
             Uniquename = uniquename;
+            Solutionpackageversion = solutionpackageversion;
+            Upgradeinfo = upgradeinfo;
             this._configurationpageidValue = _configurationpageidValue;
             this._parentsolutionidValue = _parentsolutionidValue;
-            Isapimanaged = isapimanaged;
-            Createdon = createdon;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            Thumbprint = thumbprint;
-            Isvisible = isvisible;
+            Updatedon = updatedon;
             Ismanaged = ismanaged;
-            this._createdbyValue = _createdbyValue;
-            Solutionpackageversion = solutionpackageversion;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             this._modifiedbyValue = _modifiedbyValue;
             Versionnumber = versionnumber;
             Templatesuffix = templatesuffix;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            Installedon = installedon;
-            Version = version;
-            Pinpointsolutionid = pinpointsolutionid;
-            Modifiedon = modifiedon;
-            Description = description;
-            Upgradeinfo = upgradeinfo;
-            Updatedon = updatedon;
+            this._createdbyValue = _createdbyValue;
             Pinpointpublisherid = pinpointpublisherid;
+            Createdon = createdon;
+            Thumbprint = thumbprint;
+            Pinpointsolutiondefaultlocale = pinpointsolutiondefaultlocale;
+            Description = description;
+            Isapimanaged = isapimanaged;
+            Version = version;
             Friendlyname = friendlyname;
             Solutiontype = solutiontype;
             Createdby = createdby;
@@ -95,8 +95,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "pinpointsolutiondefaultlocale")]
-        public string Pinpointsolutiondefaultlocale { get; set; }
+        [JsonProperty(PropertyName = "pinpointsolutionid")]
+        public long? Pinpointsolutionid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -115,8 +115,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "isvisible")]
+        public bool? Isvisible { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "installedon")]
+        public System.DateTimeOffset? Installedon { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "uniquename")]
         public string Uniquename { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "solutionpackageversion")]
+        public string Solutionpackageversion { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "upgradeinfo")]
+        public string Upgradeinfo { get; set; }
 
         /// <summary>
         /// </summary>
@@ -130,28 +155,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "isapimanaged")]
-        public bool? Isapimanaged { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "thumbprint")]
-        public string Thumbprint { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "isvisible")]
-        public bool? Isvisible { get; set; }
+        [JsonProperty(PropertyName = "updatedon")]
+        public System.DateTimeOffset? Updatedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -160,13 +165,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "solutionpackageversion")]
-        public string Solutionpackageversion { get; set; }
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -190,23 +190,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "installedon")]
-        public System.DateTimeOffset? Installedon { get; set; }
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "version")]
-        public string Version { get; set; }
+        [JsonProperty(PropertyName = "pinpointpublisherid")]
+        public long? Pinpointpublisherid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "pinpointsolutionid")]
-        public long? Pinpointsolutionid { get; set; }
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
+        [JsonProperty(PropertyName = "thumbprint")]
+        public string Thumbprint { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "pinpointsolutiondefaultlocale")]
+        public string Pinpointsolutiondefaultlocale { get; set; }
 
         /// <summary>
         /// </summary>
@@ -215,18 +220,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "upgradeinfo")]
-        public string Upgradeinfo { get; set; }
+        [JsonProperty(PropertyName = "isapimanaged")]
+        public bool? Isapimanaged { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "updatedon")]
-        public System.DateTimeOffset? Updatedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "pinpointpublisherid")]
-        public long? Pinpointpublisherid { get; set; }
+        [JsonProperty(PropertyName = "version")]
+        public string Version { get; set; }
 
         /// <summary>
         /// </summary>

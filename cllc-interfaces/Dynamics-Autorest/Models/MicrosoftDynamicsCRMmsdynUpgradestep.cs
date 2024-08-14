@@ -29,31 +29,31 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMmsdynUpgradestep class.
         /// </summary>
-        public MicrosoftDynamicsCRMmsdynUpgradestep(int? msdynDbversion = default(int?), string msdynDetails = default(string), string _msdynUpgradeversionValue = default(string), int? statecode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string msdynErrors = default(string), string _organizationidValue = default(string), string msdynStepid = default(string), int? statuscode = default(int?), string _modifiedonbehalfbyValue = default(string), string _createdbyValue = default(string), int? timezoneruleversionnumber = default(int?), int? importsequencenumber = default(int?), string _modifiedbyValue = default(string), string msdynUpgradestepid = default(string), System.DateTimeOffset? msdynFinished = default(System.DateTimeOffset?), int? msdynStatus = default(int?), string versionnumber = default(string), int? utcconversiontimezonecode = default(int?), string msdynName = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> msdynUpgradestepSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> msdynUpgradestepAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> msdynUpgradestepMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> msdynUpgradestepProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> msdynUpgradestepBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> msdynUpgradestepPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMmsdynUpgradeversion msdynUpgradeVersion = default(MicrosoftDynamicsCRMmsdynUpgradeversion))
+        public MicrosoftDynamicsCRMmsdynUpgradestep(string _organizationidValue = default(string), string msdynDetails = default(string), string _createdbyValue = default(string), string _msdynUpgradeversionValue = default(string), string msdynErrors = default(string), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), int? statecode = default(int?), string msdynStepid = default(string), int? statuscode = default(int?), string _modifiedonbehalfbyValue = default(string), string versionnumber = default(string), int? importsequencenumber = default(int?), string _modifiedbyValue = default(string), string msdynUpgradestepid = default(string), System.DateTimeOffset? msdynFinished = default(System.DateTimeOffset?), string msdynName = default(string), int? msdynStatus = default(int?), int? msdynDbversion = default(int?), int? utcconversiontimezonecode = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> msdynUpgradestepSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> msdynUpgradestepAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> msdynUpgradestepMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> msdynUpgradestepProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> msdynUpgradestepBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> msdynUpgradestepPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMmsdynUpgradeversion msdynUpgradeVersion = default(MicrosoftDynamicsCRMmsdynUpgradeversion))
         {
-            MsdynDbversion = msdynDbversion;
+            this._organizationidValue = _organizationidValue;
             MsdynDetails = msdynDetails;
+            this._createdbyValue = _createdbyValue;
             this._msdynUpgradeversionValue = _msdynUpgradeversionValue;
-            Statecode = statecode;
+            MsdynErrors = msdynErrors;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
             Overriddencreatedon = overriddencreatedon;
             Modifiedon = modifiedon;
             Createdon = createdon;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            MsdynErrors = msdynErrors;
-            this._organizationidValue = _organizationidValue;
+            Statecode = statecode;
             MsdynStepid = msdynStepid;
             Statuscode = statuscode;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._createdbyValue = _createdbyValue;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
+            Versionnumber = versionnumber;
             Importsequencenumber = importsequencenumber;
             this._modifiedbyValue = _modifiedbyValue;
             MsdynUpgradestepid = msdynUpgradestepid;
             MsdynFinished = msdynFinished;
-            MsdynStatus = msdynStatus;
-            Versionnumber = versionnumber;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
             MsdynName = msdynName;
+            MsdynStatus = msdynStatus;
+            MsdynDbversion = msdynDbversion;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
             Createdby = createdby;
             Createdonbehalfby = createdonbehalfby;
             Modifiedby = modifiedby;
@@ -76,8 +76,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_dbversion")]
-        public int? MsdynDbversion { get; set; }
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -86,13 +86,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_msdyn_upgradeversion_value")]
         public string _msdynUpgradeversionValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
+        [JsonProperty(PropertyName = "msdyn_errors")]
+        public string MsdynErrors { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -116,13 +126,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_errors")]
-        public string MsdynErrors { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -141,13 +146,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -171,23 +171,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "msdyn_name")]
+        public string MsdynName { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "msdyn_status")]
         public int? MsdynStatus { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "msdyn_dbversion")]
+        public int? MsdynDbversion { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "utcconversiontimezonecode")]
         public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "msdyn_name")]
-        public string MsdynName { get; set; }
 
         /// <summary>
         /// </summary>

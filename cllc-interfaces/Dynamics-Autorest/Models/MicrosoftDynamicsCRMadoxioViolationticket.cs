@@ -29,58 +29,58 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioViolationticket class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioViolationticket(System.DateTimeOffset? newCourtdate = default(System.DateTimeOffset?), decimal? adoxioFinalfineamountBase = default(decimal?), string _owninguserValue = default(string), decimal? adoxioVtfineamount = default(decimal?), string _adoxioVtinspectorValue = default(string), System.DateTimeOffset? adoxioCourtdate = default(System.DateTimeOffset?), string _owningbusinessunitValue = default(string), string adoxioRegion = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string adoxioFineamount = default(string), bool? adoxioProvenunproven = default(bool?), string adoxioInspector = default(string), string adoxioPostalcode = default(string), decimal? adoxioVtfineamountBase = default(decimal?), int? timezoneruleversionnumber = default(int?), string _transactioncurrencyidValue = default(string), string adoxioViolationticketnumber = default(string), int? adoxioViolationtype = default(int?), string _createdbyValue = default(string), string _owneridValue = default(string), string _adoxioCourthouselocationValue = default(string), string adoxioViolationticketid = default(string), int? statuscode = default(int?), string adoxioRm = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string versionnumber = default(string), int? adoxioViolationticketstatuses = default(int?), int? statecode = default(int?), string adoxioIndividualticketed = default(string), string _createdonbehalfbyValue = default(string), string adoxioArea = default(string), string newFinalfineamount = default(string), int? utcconversiontimezonecode = default(int?), int? newViolationticketnumber = default(int?), System.DateTimeOffset? adoxioDatevtsenttoicbc = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string adoxioEstablishment = default(string), System.DateTimeOffset? adoxioDateofservice = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), string adoxioVtcourthouselocation = default(string), string _modifiedbyValue = default(string), decimal? adoxioFinalfineamount = default(decimal?), string _adoxioRegionalmanagerValue = default(string), string _adoxioLocationValue = default(string), System.DateTimeOffset? adoxioDateofoffence = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _adoxioSpecialeventValue = default(string), string _owningteamValue = default(string), int? newInspectors = default(int?), decimal? exchangerate = default(decimal?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMactivitypointer> adoxioViolationticketActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> adoxioViolationticketAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMsyncerror> adoxioViolationticketSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioViolationticketDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioViolationticketDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> adoxioViolationticketSharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioViolationticketAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioViolationticketMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioViolationticketProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioViolationticketBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioViolationticketPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMappointment> adoxioViolationticketAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMemail> adoxioViolationticketEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> adoxioViolationticketFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMletter> adoxioViolationticketLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMphonecall> adoxioViolationticketPhoneCalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMtask> adoxioViolationticketTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> adoxioViolationticketRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMsocialactivity> adoxioViolationticketSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMqueueitem> adoxioViolationticketQueueItems = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMannotation> adoxioViolationticketAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMserviceappointment> adoxioViolationticketServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), MicrosoftDynamicsCRMadoxioSpecialevent adoxioSpecialEvent = default(MicrosoftDynamicsCRMadoxioSpecialevent), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser adoxioVTInspector = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMadoxioCourthouselocation adoxioCourtHouselocation = default(MicrosoftDynamicsCRMadoxioCourthouselocation), MicrosoftDynamicsCRMsystemuser adoxioRegionalManager = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMadoxioSpecialeventlocation adoxioLocation = default(MicrosoftDynamicsCRMadoxioSpecialeventlocation))
+        public MicrosoftDynamicsCRMadoxioViolationticket(string adoxioViolationticketnumber = default(string), System.DateTimeOffset? newCourtdate = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioCourtdate = default(System.DateTimeOffset?), string _owninguserValue = default(string), string _adoxioVtinspectorValue = default(string), string adoxioInspector = default(string), string adoxioRegion = default(string), string adoxioArea = default(string), decimal? adoxioVtfineamountBase = default(decimal?), string adoxioPostalcode = default(string), decimal? adoxioFinalfineamountBase = default(decimal?), string _createdbyValue = default(string), string _modifiedbyValue = default(string), int? timezoneruleversionnumber = default(int?), string _transactioncurrencyidValue = default(string), bool? adoxioProvenunproven = default(bool?), int? adoxioViolationtype = default(int?), string _owneridValue = default(string), string _adoxioCourthouselocationValue = default(string), decimal? adoxioVtfineamount = default(decimal?), string adoxioFineamount = default(string), string adoxioViolationticketid = default(string), string _owningteamValue = default(string), int? statuscode = default(int?), string adoxioRm = default(string), string _owningbusinessunitValue = default(string), string versionnumber = default(string), int? adoxioViolationticketstatuses = default(int?), int? statecode = default(int?), string adoxioIndividualticketed = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), int? newViolationticketnumber = default(int?), System.DateTimeOffset? adoxioDatevtsenttoicbc = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string adoxioEstablishment = default(string), string newFinalfineamount = default(string), System.DateTimeOffset? adoxioDateofservice = default(System.DateTimeOffset?), decimal? exchangerate = default(decimal?), string adoxioVtcourthouselocation = default(string), int? importsequencenumber = default(int?), decimal? adoxioFinalfineamount = default(decimal?), string _adoxioRegionalmanagerValue = default(string), string _adoxioLocationValue = default(string), System.DateTimeOffset? adoxioDateofoffence = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _adoxioSpecialeventValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? newInspectors = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMactivitypointer> adoxioViolationticketActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> adoxioViolationticketAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMsyncerror> adoxioViolationticketSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioViolationticketDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioViolationticketDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> adoxioViolationticketSharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioViolationticketAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioViolationticketMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioViolationticketProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioViolationticketBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioViolationticketPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMappointment> adoxioViolationticketAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMemail> adoxioViolationticketEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> adoxioViolationticketFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMletter> adoxioViolationticketLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMphonecall> adoxioViolationticketPhoneCalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMtask> adoxioViolationticketTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> adoxioViolationticketRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMsocialactivity> adoxioViolationticketSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMqueueitem> adoxioViolationticketQueueItems = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMannotation> adoxioViolationticketAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMserviceappointment> adoxioViolationticketServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), MicrosoftDynamicsCRMadoxioSpecialevent adoxioSpecialEvent = default(MicrosoftDynamicsCRMadoxioSpecialevent), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser adoxioVTInspector = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMadoxioCourthouselocation adoxioCourtHouselocation = default(MicrosoftDynamicsCRMadoxioCourthouselocation), MicrosoftDynamicsCRMsystemuser adoxioRegionalManager = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMadoxioSpecialeventlocation adoxioLocation = default(MicrosoftDynamicsCRMadoxioSpecialeventlocation))
         {
+            AdoxioViolationticketnumber = adoxioViolationticketnumber;
             NewCourtdate = newCourtdate;
-            AdoxioFinalfineamountBase = adoxioFinalfineamountBase;
-            this._owninguserValue = _owninguserValue;
-            AdoxioVtfineamount = adoxioVtfineamount;
-            this._adoxioVtinspectorValue = _adoxioVtinspectorValue;
             AdoxioCourtdate = adoxioCourtdate;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
-            AdoxioRegion = adoxioRegion;
-            Modifiedon = modifiedon;
-            AdoxioFineamount = adoxioFineamount;
-            AdoxioProvenunproven = adoxioProvenunproven;
+            this._owninguserValue = _owninguserValue;
+            this._adoxioVtinspectorValue = _adoxioVtinspectorValue;
             AdoxioInspector = adoxioInspector;
-            AdoxioPostalcode = adoxioPostalcode;
+            AdoxioRegion = adoxioRegion;
+            AdoxioArea = adoxioArea;
             AdoxioVtfineamountBase = adoxioVtfineamountBase;
+            AdoxioPostalcode = adoxioPostalcode;
+            AdoxioFinalfineamountBase = adoxioFinalfineamountBase;
+            this._createdbyValue = _createdbyValue;
+            this._modifiedbyValue = _modifiedbyValue;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             this._transactioncurrencyidValue = _transactioncurrencyidValue;
-            AdoxioViolationticketnumber = adoxioViolationticketnumber;
+            AdoxioProvenunproven = adoxioProvenunproven;
             AdoxioViolationtype = adoxioViolationtype;
-            this._createdbyValue = _createdbyValue;
             this._owneridValue = _owneridValue;
             this._adoxioCourthouselocationValue = _adoxioCourthouselocationValue;
+            AdoxioVtfineamount = adoxioVtfineamount;
+            AdoxioFineamount = adoxioFineamount;
             AdoxioViolationticketid = adoxioViolationticketid;
+            this._owningteamValue = _owningteamValue;
             Statuscode = statuscode;
             AdoxioRm = adoxioRm;
-            Createdon = createdon;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
             Versionnumber = versionnumber;
             AdoxioViolationticketstatuses = adoxioViolationticketstatuses;
             Statecode = statecode;
             AdoxioIndividualticketed = adoxioIndividualticketed;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            AdoxioArea = adoxioArea;
-            NewFinalfineamount = newFinalfineamount;
+            Modifiedon = modifiedon;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             NewViolationticketnumber = newViolationticketnumber;
             AdoxioDatevtsenttoicbc = adoxioDatevtsenttoicbc;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             AdoxioEstablishment = adoxioEstablishment;
+            NewFinalfineamount = newFinalfineamount;
             AdoxioDateofservice = adoxioDateofservice;
-            Importsequencenumber = importsequencenumber;
+            Exchangerate = exchangerate;
             AdoxioVtcourthouselocation = adoxioVtcourthouselocation;
-            this._modifiedbyValue = _modifiedbyValue;
+            Importsequencenumber = importsequencenumber;
             AdoxioFinalfineamount = adoxioFinalfineamount;
             this._adoxioRegionalmanagerValue = _adoxioRegionalmanagerValue;
             this._adoxioLocationValue = _adoxioLocationValue;
             AdoxioDateofoffence = adoxioDateofoffence;
             Overriddencreatedon = overriddencreatedon;
             this._adoxioSpecialeventValue = _adoxioSpecialeventValue;
-            this._owningteamValue = _owningteamValue;
+            Createdon = createdon;
             NewInspectors = newInspectors;
-            Exchangerate = exchangerate;
             Createdby = createdby;
             Createdonbehalfby = createdonbehalfby;
             Modifiedby = modifiedby;
@@ -127,28 +127,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_violationticketnumber")]
+        public string AdoxioViolationticketnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "new_courtdate")]
         public System.DateTimeOffset? NewCourtdate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_finalfineamount_base")]
-        public decimal? AdoxioFinalfineamountBase { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_vtfineamount")]
-        public decimal? AdoxioVtfineamount { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_vtinspector_value")]
-        public string _adoxioVtinspectorValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -157,28 +142,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
+        [JsonProperty(PropertyName = "_owninguser_value")]
+        public string _owninguserValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_region")]
-        public string AdoxioRegion { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_fineamount")]
-        public string AdoxioFineamount { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_provenunproven")]
-        public bool? AdoxioProvenunproven { get; set; }
+        [JsonProperty(PropertyName = "_adoxio_vtinspector_value")]
+        public string _adoxioVtinspectorValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -187,13 +157,38 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_postalcode")]
-        public string AdoxioPostalcode { get; set; }
+        [JsonProperty(PropertyName = "adoxio_region")]
+        public string AdoxioRegion { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_area")]
+        public string AdoxioArea { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_vtfineamount_base")]
         public decimal? AdoxioVtfineamountBase { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_postalcode")]
+        public string AdoxioPostalcode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_finalfineamount_base")]
+        public decimal? AdoxioFinalfineamountBase { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -207,18 +202,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_violationticketnumber")]
-        public string AdoxioViolationticketnumber { get; set; }
+        [JsonProperty(PropertyName = "adoxio_provenunproven")]
+        public bool? AdoxioProvenunproven { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_violationtype")]
         public int? AdoxioViolationtype { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -232,8 +222,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_vtfineamount")]
+        public decimal? AdoxioVtfineamount { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_fineamount")]
+        public string AdoxioFineamount { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_violationticketid")]
         public string AdoxioViolationticketid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -247,8 +252,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -277,13 +282,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_area")]
-        public string AdoxioArea { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "new_finalfineamount")]
-        public string NewFinalfineamount { get; set; }
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -312,13 +312,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "new_finalfineamount")]
+        public string NewFinalfineamount { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_dateofservice")]
         public System.DateTimeOffset? AdoxioDateofservice { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
+        [JsonProperty(PropertyName = "exchangerate")]
+        public decimal? Exchangerate { get; set; }
 
         /// <summary>
         /// </summary>
@@ -327,8 +332,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -362,18 +367,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "new_inspectors")]
         public int? NewInspectors { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "exchangerate")]
-        public decimal? Exchangerate { get; set; }
 
         /// <summary>
         /// </summary>

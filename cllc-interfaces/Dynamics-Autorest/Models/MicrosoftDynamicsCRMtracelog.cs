@@ -29,20 +29,22 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMtracelog
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMtracelog(int? collationlevel = default(int?), string traceparameterxml = default(string), bool? canbedeleted = default(bool?), int? traceparameterhash = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string text = default(string), int? timezoneruleversionnumber = default(int?), string errortypedisplay = default(string), string machinename = default(string), string _createdonbehalfbyValue = default(string), string _organizationidValue = default(string), int? level = default(int?), int? tracecode = default(int?), string _createdbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string tracedetailxml = default(string), string _modifiedbyValue = default(string), string errordetails = default(string), string tracelogid = default(string), string traceactionxml = default(string), bool? isunique = default(bool?), string _modifiedonbehalfbyValue = default(string), int? utcconversiontimezonecode = default(int?), string _regardingobjectidValue = default(string), string _regardingobjectowneridValue = default(string), bool? tracestatus = default(bool?), string _parenttracelogidValue = default(string), string _regardingobjectowningbusinessunitValue = default(string), MicrosoftDynamicsCRMmailbox regardingobjectidMailbox = default(MicrosoftDynamicsCRMmailbox), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtracelog parenttracelogid = default(MicrosoftDynamicsCRMtracelog), IList<MicrosoftDynamicsCRMtracelog> tracelogParentTracelog = default(IList<MicrosoftDynamicsCRMtracelog>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMemailserverprofile regardingobjectidEmailserverprofile = default(MicrosoftDynamicsCRMemailserverprofile))
+        public MicrosoftDynamicsCRMtracelog(bool? canbedeleted = default(bool?), int? collationlevel = default(int?), string traceparameterxml = default(string), int? timezoneruleversionnumber = default(int?), int? traceparameterhash = default(int?), string errortypedisplay = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string text = default(string), string _regardingobjectowningbusinessunitValue = default(string), int? level = default(int?), int? utcconversiontimezonecode = default(int?), string machinename = default(string), string _createdonbehalfbyValue = default(string), string _organizationidValue = default(string), int? tracecode = default(int?), string _createdbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string tracedetailxml = default(string), string _modifiedbyValue = default(string), string errordetails = default(string), string tracelogid = default(string), string traceactionxml = default(string), bool? isunique = default(bool?), string _modifiedonbehalfbyValue = default(string), string _regardingobjectidValue = default(string), string _regardingobjectowneridValue = default(string), bool? tracestatus = default(bool?), string _parenttracelogidValue = default(string), MicrosoftDynamicsCRMmailbox regardingobjectidMailbox = default(MicrosoftDynamicsCRMmailbox), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtracelog parenttracelogid = default(MicrosoftDynamicsCRMtracelog), IList<MicrosoftDynamicsCRMtracelog> tracelogParentTracelog = default(IList<MicrosoftDynamicsCRMtracelog>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMemailserverprofile regardingobjectidEmailserverprofile = default(MicrosoftDynamicsCRMemailserverprofile))
         {
+            Canbedeleted = canbedeleted;
             Collationlevel = collationlevel;
             Traceparameterxml = traceparameterxml;
-            Canbedeleted = canbedeleted;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
             Traceparameterhash = traceparameterhash;
+            Errortypedisplay = errortypedisplay;
             Createdon = createdon;
             Text = text;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
-            Errortypedisplay = errortypedisplay;
+            this._regardingobjectowningbusinessunitValue = _regardingobjectowningbusinessunitValue;
+            Level = level;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
             Machinename = machinename;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             this._organizationidValue = _organizationidValue;
-            Level = level;
             Tracecode = tracecode;
             this._createdbyValue = _createdbyValue;
             Modifiedon = modifiedon;
@@ -53,12 +55,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Traceactionxml = traceactionxml;
             Isunique = isunique;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
             this._regardingobjectidValue = _regardingobjectidValue;
             this._regardingobjectowneridValue = _regardingobjectowneridValue;
             Tracestatus = tracestatus;
             this._parenttracelogidValue = _parenttracelogidValue;
-            this._regardingobjectowningbusinessunitValue = _regardingobjectowningbusinessunitValue;
             RegardingobjectidMailbox = regardingobjectidMailbox;
             Createdby = createdby;
             Modifiedby = modifiedby;
@@ -78,6 +78,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "canbedeleted")]
+        public bool? Canbedeleted { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "collationlevel")]
         public int? Collationlevel { get; set; }
 
@@ -88,13 +93,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "canbedeleted")]
-        public bool? Canbedeleted { get; set; }
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "traceparameterhash")]
         public int? Traceparameterhash { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "errortypedisplay")]
+        public string Errortypedisplay { get; set; }
 
         /// <summary>
         /// </summary>
@@ -108,13 +118,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
+        [JsonProperty(PropertyName = "_regardingobjectowningbusinessunit_value")]
+        public string _regardingobjectowningbusinessunitValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "errortypedisplay")]
-        public string Errortypedisplay { get; set; }
+        [JsonProperty(PropertyName = "level")]
+        public int? Level { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -130,11 +145,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
         public string _organizationidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "level")]
-        public int? Level { get; set; }
 
         /// <summary>
         /// </summary>
@@ -188,11 +198,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_regardingobjectid_value")]
         public string _regardingobjectidValue { get; set; }
 
@@ -210,11 +215,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_parenttracelogid_value")]
         public string _parenttracelogidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_regardingobjectowningbusinessunit_value")]
-        public string _regardingobjectowningbusinessunitValue { get; set; }
 
         /// <summary>
         /// </summary>

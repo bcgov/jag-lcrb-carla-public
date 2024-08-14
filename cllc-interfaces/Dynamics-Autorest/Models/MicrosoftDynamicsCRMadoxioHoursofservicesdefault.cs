@@ -29,37 +29,37 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioHoursofservicesdefault class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioHoursofservicesdefault(string _createdbyValue = default(string), string _owningbusinessunitValue = default(string), string _owningteamValue = default(string), int? statecode = default(int?), int? adoxioSaturdayopen = default(int?), string _createdonbehalfbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string versionnumber = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _owneridValue = default(string), int? statuscode = default(int?), int? adoxioWednesdayclose = default(int?), int? timezoneruleversionnumber = default(int?), string adoxioName = default(string), int? adoxioTuesdayopen = default(int?), int? adoxioSundayopen = default(int?), int? utcconversiontimezonecode = default(int?), int? adoxioSundayclose = default(int?), int? adoxioWednesdayopen = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? adoxioMondayclose = default(int?), string adoxioHoursofservicesdefaultid = default(string), int? adoxioFridayopen = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? adoxioFridayclose = default(int?), int? importsequencenumber = default(int?), int? adoxioMondayopen = default(int?), string _owninguserValue = default(string), int? adoxioThursdayopen = default(int?), string _modifiedbyValue = default(string), string _adoxioApplicationtypeValue = default(string), int? adoxioThursdayclose = default(int?), int? adoxioSaturdayclose = default(int?), int? adoxioTuesdayclose = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioHoursofservicesdefaultSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioHoursofservicesdefaultAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioHoursofservicesdefaultMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioHoursofservicesdefaultProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioHoursofservicesdefaultBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioHoursofservicesdefaultPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMadoxioApplicationtype adoxioApplicationType = default(MicrosoftDynamicsCRMadoxioApplicationtype))
+        public MicrosoftDynamicsCRMadoxioHoursofservicesdefault(string _createdbyValue = default(string), string _owningbusinessunitValue = default(string), string _owningteamValue = default(string), int? statecode = default(int?), int? adoxioSundayclose = default(int?), string _createdonbehalfbyValue = default(string), string _modifiedonbehalfbyValue = default(string), int? adoxioFridayclose = default(int?), int? adoxioWednesdayopen = default(int?), string _owneridValue = default(string), int? adoxioWednesdayclose = default(int?), int? timezoneruleversionnumber = default(int?), string adoxioName = default(string), int? adoxioThursdayopen = default(int?), int? adoxioSundayopen = default(int?), int? utcconversiontimezonecode = default(int?), int? adoxioSaturdayopen = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? adoxioMondayclose = default(int?), int? statuscode = default(int?), string versionnumber = default(string), int? adoxioFridayopen = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), int? adoxioTuesdayopen = default(int?), int? adoxioMondayopen = default(int?), string _owninguserValue = default(string), string adoxioHoursofservicesdefaultid = default(string), string _modifiedbyValue = default(string), string _adoxioApplicationtypeValue = default(string), int? adoxioThursdayclose = default(int?), int? adoxioSaturdayclose = default(int?), int? adoxioTuesdayclose = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioHoursofservicesdefaultSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioHoursofservicesdefaultAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioHoursofservicesdefaultMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioHoursofservicesdefaultProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioHoursofservicesdefaultBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioHoursofservicesdefaultPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMadoxioApplicationtype adoxioApplicationType = default(MicrosoftDynamicsCRMadoxioApplicationtype))
         {
             this._createdbyValue = _createdbyValue;
             this._owningbusinessunitValue = _owningbusinessunitValue;
             this._owningteamValue = _owningteamValue;
             Statecode = statecode;
-            AdoxioSaturdayopen = adoxioSaturdayopen;
+            AdoxioSundayclose = adoxioSundayclose;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            Versionnumber = versionnumber;
-            Createdon = createdon;
+            AdoxioFridayclose = adoxioFridayclose;
+            AdoxioWednesdayopen = adoxioWednesdayopen;
             this._owneridValue = _owneridValue;
-            Statuscode = statuscode;
             AdoxioWednesdayclose = adoxioWednesdayclose;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             AdoxioName = adoxioName;
-            AdoxioTuesdayopen = adoxioTuesdayopen;
+            AdoxioThursdayopen = adoxioThursdayopen;
             AdoxioSundayopen = adoxioSundayopen;
             Utcconversiontimezonecode = utcconversiontimezonecode;
-            AdoxioSundayclose = adoxioSundayclose;
-            AdoxioWednesdayopen = adoxioWednesdayopen;
+            AdoxioSaturdayopen = adoxioSaturdayopen;
             Modifiedon = modifiedon;
             AdoxioMondayclose = adoxioMondayclose;
-            AdoxioHoursofservicesdefaultid = adoxioHoursofservicesdefaultid;
+            Statuscode = statuscode;
+            Versionnumber = versionnumber;
             AdoxioFridayopen = adoxioFridayopen;
             Overriddencreatedon = overriddencreatedon;
-            AdoxioFridayclose = adoxioFridayclose;
+            Createdon = createdon;
             Importsequencenumber = importsequencenumber;
+            AdoxioTuesdayopen = adoxioTuesdayopen;
             AdoxioMondayopen = adoxioMondayopen;
             this._owninguserValue = _owninguserValue;
-            AdoxioThursdayopen = adoxioThursdayopen;
+            AdoxioHoursofservicesdefaultid = adoxioHoursofservicesdefaultid;
             this._modifiedbyValue = _modifiedbyValue;
             this._adoxioApplicationtypeValue = _adoxioApplicationtypeValue;
             AdoxioThursdayclose = adoxioThursdayclose;
@@ -110,8 +110,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_saturdayopen")]
-        public int? AdoxioSaturdayopen { get; set; }
+        [JsonProperty(PropertyName = "adoxio_sundayclose")]
+        public int? AdoxioSundayclose { get; set; }
 
         /// <summary>
         /// </summary>
@@ -125,23 +125,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "adoxio_fridayclose")]
+        public int? AdoxioFridayclose { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
+        [JsonProperty(PropertyName = "adoxio_wednesdayopen")]
+        public int? AdoxioWednesdayopen { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
         public string _owneridValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -160,8 +155,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_tuesdayopen")]
-        public int? AdoxioTuesdayopen { get; set; }
+        [JsonProperty(PropertyName = "adoxio_thursdayopen")]
+        public int? AdoxioThursdayopen { get; set; }
 
         /// <summary>
         /// </summary>
@@ -175,13 +170,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_sundayclose")]
-        public int? AdoxioSundayclose { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_wednesdayopen")]
-        public int? AdoxioWednesdayopen { get; set; }
+        [JsonProperty(PropertyName = "adoxio_saturdayopen")]
+        public int? AdoxioSaturdayopen { get; set; }
 
         /// <summary>
         /// </summary>
@@ -195,8 +185,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_hoursofservicesdefaultid")]
-        public string AdoxioHoursofservicesdefaultid { get; set; }
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -210,13 +205,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_fridayclose")]
-        public int? AdoxioFridayclose { get; set; }
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_tuesdayopen")]
+        public int? AdoxioTuesdayopen { get; set; }
 
         /// <summary>
         /// </summary>
@@ -230,8 +230,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_thursdayopen")]
-        public int? AdoxioThursdayopen { get; set; }
+        [JsonProperty(PropertyName = "adoxio_hoursofservicesdefaultid")]
+        public string AdoxioHoursofservicesdefaultid { get; set; }
 
         /// <summary>
         /// </summary>

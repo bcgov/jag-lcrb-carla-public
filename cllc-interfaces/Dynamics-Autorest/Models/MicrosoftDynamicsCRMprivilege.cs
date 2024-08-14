@@ -29,14 +29,15 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMprivilege
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMprivilege(string privilegerowid = default(string), int? accessright = default(int?), bool? canbebasic = default(bool?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), int? componentstate = default(int?), string privilegeid = default(string), bool? canbeentityreference = default(bool?), bool? canbeglobal = default(bool?), bool? canbedeep = default(bool?), string name = default(string), bool? canbeparententityreference = default(bool?), bool? ismanaged = default(bool?), string versionnumber = default(string), string introducedversion = default(string), string solutionid = default(string), bool? canbelocal = default(bool?), IList<MicrosoftDynamicsCRMroletemplate> roletemplateprivilegesAssociation = default(IList<MicrosoftDynamicsCRMroletemplate>), IList<MicrosoftDynamicsCRMrole> roleprivilegesAssociation = default(IList<MicrosoftDynamicsCRMrole>), IList<MicrosoftDynamicsCRMasyncoperation> privilegeAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> privilegeBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsolution solutionPrivilege = default(MicrosoftDynamicsCRMsolution))
+        public MicrosoftDynamicsCRMprivilege(string privilegerowid = default(string), bool? canbebasic = default(bool?), int? accessright = default(int?), string privilegeid = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), int? componentstate = default(int?), string solutionid = default(string), bool? canbeentityreference = default(bool?), bool? canbeglobal = default(bool?), bool? canbedeep = default(bool?), string name = default(string), bool? canbeparententityreference = default(bool?), bool? ismanaged = default(bool?), string versionnumber = default(string), string introducedversion = default(string), bool? canbelocal = default(bool?), IList<MicrosoftDynamicsCRMroletemplate> roletemplateprivilegesAssociation = default(IList<MicrosoftDynamicsCRMroletemplate>), IList<MicrosoftDynamicsCRMrole> roleprivilegesAssociation = default(IList<MicrosoftDynamicsCRMrole>), IList<MicrosoftDynamicsCRMasyncoperation> privilegeAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> privilegeBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsolution solutionPrivilege = default(MicrosoftDynamicsCRMsolution))
         {
             Privilegerowid = privilegerowid;
-            Accessright = accessright;
             Canbebasic = canbebasic;
+            Accessright = accessright;
+            Privilegeid = privilegeid;
             Overwritetime = overwritetime;
             Componentstate = componentstate;
-            Privilegeid = privilegeid;
+            Solutionid = solutionid;
             Canbeentityreference = canbeentityreference;
             Canbeglobal = canbeglobal;
             Canbedeep = canbedeep;
@@ -45,7 +46,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Ismanaged = ismanaged;
             Versionnumber = versionnumber;
             Introducedversion = introducedversion;
-            Solutionid = solutionid;
             Canbelocal = canbelocal;
             RoletemplateprivilegesAssociation = roletemplateprivilegesAssociation;
             RoleprivilegesAssociation = roleprivilegesAssociation;
@@ -67,13 +67,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "canbebasic")]
+        public bool? Canbebasic { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "accessright")]
         public int? Accessright { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "canbebasic")]
-        public bool? Canbebasic { get; set; }
+        [JsonProperty(PropertyName = "privilegeid")]
+        public string Privilegeid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -87,8 +92,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "privilegeid")]
-        public string Privilegeid { get; set; }
+        [JsonProperty(PropertyName = "solutionid")]
+        public string Solutionid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -129,11 +134,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "introducedversion")]
         public string Introducedversion { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "solutionid")]
-        public string Solutionid { get; set; }
 
         /// <summary>
         /// </summary>

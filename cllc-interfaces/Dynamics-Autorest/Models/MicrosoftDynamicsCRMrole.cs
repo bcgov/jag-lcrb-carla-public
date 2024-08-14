@@ -27,30 +27,30 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// Initializes a new instance of the MicrosoftDynamicsCRMrole class.
         /// </summary>
-        public MicrosoftDynamicsCRMrole(int? importsequencenumber = default(int?), string solutionid = default(string), string _roletemplateidValue = default(string), string organizationid = default(string), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), string _createdonbehalfbyValue = default(string), string _createdbyValue = default(string), string _businessunitidValue = default(string), string roleid = default(string), bool? ismanaged = default(bool?), int? componentstate = default(int?), string iscustomizable = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string canbedeleted = default(string), string _parentrootroleidValue = default(string), string roleidunique = default(string), string name = default(string), int? isinherited = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _parentroleidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string versionnumber = default(string), IList<MicrosoftDynamicsCRMsystemuser> systemuserrolesAssociation = default(IList<MicrosoftDynamicsCRMsystemuser>), IList<MicrosoftDynamicsCRMprivilege> roleprivilegesAssociation = default(IList<MicrosoftDynamicsCRMprivilege>), IList<MicrosoftDynamicsCRMappmodule> appmodulerolesAssociation = default(IList<MicrosoftDynamicsCRMappmodule>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMrole parentroleid = default(MicrosoftDynamicsCRMrole), IList<MicrosoftDynamicsCRMrole> roleParentRole = default(IList<MicrosoftDynamicsCRMrole>), MicrosoftDynamicsCRMbusinessunit businessunitid = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMroletemplate roletemplateid = default(MicrosoftDynamicsCRMroletemplate), IList<MicrosoftDynamicsCRMasyncoperation> roleAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> roleBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMorganization organizationidOrganization = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMteam> teamrolesAssociation = default(IList<MicrosoftDynamicsCRMteam>), MicrosoftDynamicsCRMrole parentrootroleid = default(MicrosoftDynamicsCRMrole), IList<MicrosoftDynamicsCRMrole> roleParentRootRole = default(IList<MicrosoftDynamicsCRMrole>), IList<MicrosoftDynamicsCRMsyncerror> roleSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsolution solutionRole = default(MicrosoftDynamicsCRMsolution), IList<MicrosoftDynamicsCRMmsdynActioncardrolesetting> msdynRoleMsdynActioncardrolesetting = default(IList<MicrosoftDynamicsCRMmsdynActioncardrolesetting>))
+        public MicrosoftDynamicsCRMrole(int? importsequencenumber = default(int?), string solutionid = default(string), string _roletemplateidValue = default(string), string _parentroleidValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string organizationid = default(string), string name = default(string), string canbedeleted = default(string), string _createdonbehalfbyValue = default(string), string _createdbyValue = default(string), string _businessunitidValue = default(string), string roleid = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), bool? ismanaged = default(bool?), int? componentstate = default(int?), string iscustomizable = default(string), string _parentrootroleidValue = default(string), string roleidunique = default(string), int? isinherited = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string versionnumber = default(string), IList<MicrosoftDynamicsCRMsystemuser> systemuserrolesAssociation = default(IList<MicrosoftDynamicsCRMsystemuser>), IList<MicrosoftDynamicsCRMprivilege> roleprivilegesAssociation = default(IList<MicrosoftDynamicsCRMprivilege>), IList<MicrosoftDynamicsCRMappmodule> appmodulerolesAssociation = default(IList<MicrosoftDynamicsCRMappmodule>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMrole parentroleid = default(MicrosoftDynamicsCRMrole), IList<MicrosoftDynamicsCRMrole> roleParentRole = default(IList<MicrosoftDynamicsCRMrole>), MicrosoftDynamicsCRMbusinessunit businessunitid = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMroletemplate roletemplateid = default(MicrosoftDynamicsCRMroletemplate), IList<MicrosoftDynamicsCRMasyncoperation> roleAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> roleBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMorganization organizationidOrganization = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMteam> teamrolesAssociation = default(IList<MicrosoftDynamicsCRMteam>), MicrosoftDynamicsCRMrole parentrootroleid = default(MicrosoftDynamicsCRMrole), IList<MicrosoftDynamicsCRMrole> roleParentRootRole = default(IList<MicrosoftDynamicsCRMrole>), IList<MicrosoftDynamicsCRMsyncerror> roleSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsolution solutionRole = default(MicrosoftDynamicsCRMsolution), IList<MicrosoftDynamicsCRMmsdynActioncardrolesetting> msdynRoleMsdynActioncardrolesetting = default(IList<MicrosoftDynamicsCRMmsdynActioncardrolesetting>))
         {
             Importsequencenumber = importsequencenumber;
             Solutionid = solutionid;
             this._roletemplateidValue = _roletemplateidValue;
-            Organizationid = organizationid;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            this._parentroleidValue = _parentroleidValue;
             Modifiedon = modifiedon;
             this._modifiedbyValue = _modifiedbyValue;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Organizationid = organizationid;
+            Name = name;
+            Canbedeleted = canbedeleted;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             this._createdbyValue = _createdbyValue;
             this._businessunitidValue = _businessunitidValue;
             Roleid = roleid;
+            Overwritetime = overwritetime;
             Ismanaged = ismanaged;
             Componentstate = componentstate;
             Iscustomizable = iscustomizable;
-            Overwritetime = overwritetime;
-            Canbedeleted = canbedeleted;
             this._parentrootroleidValue = _parentrootroleidValue;
             Roleidunique = roleidunique;
-            Name = name;
             Isinherited = isinherited;
             Overriddencreatedon = overriddencreatedon;
-            this._parentroleidValue = _parentroleidValue;
             Createdon = createdon;
             Versionnumber = versionnumber;
             SystemuserrolesAssociation = systemuserrolesAssociation;
@@ -98,13 +98,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "organizationid")]
-        public string Organizationid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "_parentroleid_value")]
+        public string _parentroleidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -115,6 +110,26 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "organizationid")]
+        public string Organizationid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "canbedeleted")]
+        public string Canbedeleted { get; set; }
 
         /// <summary>
         /// </summary>
@@ -138,6 +153,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "overwritetime")]
+        public System.DateTimeOffset? Overwritetime { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "ismanaged")]
         public bool? Ismanaged { get; set; }
 
@@ -153,16 +173,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "overwritetime")]
-        public System.DateTimeOffset? Overwritetime { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "canbedeleted")]
-        public string Canbedeleted { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_parentrootroleid_value")]
         public string _parentrootroleidValue { get; set; }
 
@@ -173,11 +183,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "isinherited")]
         public int? Isinherited { get; set; }
 
@@ -185,11 +190,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_parentroleid_value")]
-        public string _parentroleidValue { get; set; }
 
         /// <summary>
         /// </summary>

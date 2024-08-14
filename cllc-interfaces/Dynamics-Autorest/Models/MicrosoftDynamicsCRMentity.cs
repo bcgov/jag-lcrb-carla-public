@@ -27,28 +27,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// Initializes a new instance of the MicrosoftDynamicsCRMentity class.
         /// </summary>
-        public MicrosoftDynamicsCRMentity(string logicalcollectionname = default(string), string parentcontrollingattributename = default(string), string externalcollectionname = default(string), string entitysetname = default(string), string originallocalizedname = default(string), string extensiontablename = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string name = default(string), string physicalname = default(string), string versionnumber = default(string), string basetablename = default(string), string originallocalizedcollectionname = default(string), string collectionname = default(string), string logicalname = default(string), string externalname = default(string), string reportviewname = default(string), string addresstablename = default(string), int? componentstate = default(int?), string entityid = default(string), string solutionid = default(string), IList<MicrosoftDynamicsCRMsolutioncomponentconfiguration> entitySolutioncomponentconfiguration = default(IList<MicrosoftDynamicsCRMsolutioncomponentconfiguration>), IList<MicrosoftDynamicsCRMentityanalyticsconfig> entityEntityanalyticsconfig = default(IList<MicrosoftDynamicsCRMentityanalyticsconfig>), IList<MicrosoftDynamicsCRMcatalogassignment> catalogAssignments = default(IList<MicrosoftDynamicsCRMcatalogassignment>))
+        public MicrosoftDynamicsCRMentity(string logicalcollectionname = default(string), string parentcontrollingattributename = default(string), string externalcollectionname = default(string), string extensiontablename = default(string), string basetablename = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string name = default(string), string physicalname = default(string), string entitysetname = default(string), string versionnumber = default(string), string originallocalizedcollectionname = default(string), string collectionname = default(string), string logicalname = default(string), string externalname = default(string), string reportviewname = default(string), string addresstablename = default(string), string solutionid = default(string), int? componentstate = default(int?), string entityid = default(string), string originallocalizedname = default(string), IList<MicrosoftDynamicsCRMsolutioncomponentconfiguration> entitySolutioncomponentconfiguration = default(IList<MicrosoftDynamicsCRMsolutioncomponentconfiguration>), IList<MicrosoftDynamicsCRMentityanalyticsconfig> entityEntityanalyticsconfig = default(IList<MicrosoftDynamicsCRMentityanalyticsconfig>), IList<MicrosoftDynamicsCRMcatalogassignment> catalogAssignments = default(IList<MicrosoftDynamicsCRMcatalogassignment>))
         {
             Logicalcollectionname = logicalcollectionname;
             Parentcontrollingattributename = parentcontrollingattributename;
             Externalcollectionname = externalcollectionname;
-            Entitysetname = entitysetname;
-            Originallocalizedname = originallocalizedname;
             Extensiontablename = extensiontablename;
+            Basetablename = basetablename;
             Overwritetime = overwritetime;
             Name = name;
             Physicalname = physicalname;
+            Entitysetname = entitysetname;
             Versionnumber = versionnumber;
-            Basetablename = basetablename;
             Originallocalizedcollectionname = originallocalizedcollectionname;
             Collectionname = collectionname;
             Logicalname = logicalname;
             Externalname = externalname;
             Reportviewname = reportviewname;
             Addresstablename = addresstablename;
+            Solutionid = solutionid;
             Componentstate = componentstate;
             Entityid = entityid;
-            Solutionid = solutionid;
+            Originallocalizedname = originallocalizedname;
             EntitySolutioncomponentconfiguration = entitySolutioncomponentconfiguration;
             EntityEntityanalyticsconfig = entityEntityanalyticsconfig;
             CatalogAssignments = catalogAssignments;
@@ -77,18 +77,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "entitysetname")]
-        public string Entitysetname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "originallocalizedname")]
-        public string Originallocalizedname { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "extensiontablename")]
         public string Extensiontablename { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "basetablename")]
+        public string Basetablename { get; set; }
 
         /// <summary>
         /// </summary>
@@ -107,13 +102,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "entitysetname")]
+        public string Entitysetname { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "basetablename")]
-        public string Basetablename { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -147,6 +142,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "solutionid")]
+        public string Solutionid { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "componentstate")]
         public int? Componentstate { get; set; }
 
@@ -157,8 +157,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "solutionid")]
-        public string Solutionid { get; set; }
+        [JsonProperty(PropertyName = "originallocalizedname")]
+        public string Originallocalizedname { get; set; }
 
         /// <summary>
         /// </summary>

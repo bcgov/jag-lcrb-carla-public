@@ -29,39 +29,39 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMdatalakeworkspace class.
         /// </summary>
-        public MicrosoftDynamicsCRMdatalakeworkspace(string whitelistedappid = default(string), int? statecode = default(int?), string _createdonbehalfbyValue = default(string), int? timezoneruleversionnumber = default(int?), string _organizationidValue = default(string), bool? isdeepcopyenabled = default(bool?), int? statuscode = default(int?), string datalakeworkspaceid = default(string), string solutionid = default(string), int? importsequencenumber = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? componentstate = default(int?), string owningappid = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), bool? isprivate = default(bool?), string iscustomizable = default(string), string _createdbyValue = default(string), string containerendpoint = default(string), string name = default(string), string componentidunique = default(string), string versionnumber = default(string), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string tenantid = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), bool? ismanaged = default(bool?), string path = default(string), string _modifiedonbehalfbyValue = default(string), bool? iscustomercapacity = default(bool?), string datalakeworkspaceUniquename = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> datalakeworkspaceSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> datalakeworkspaceDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> datalakeworkspaceDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> datalakeworkspaceAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> datalakeworkspaceMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> datalakeworkspaceProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> datalakeworkspaceBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> datalakeworkspacePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMdatalakeworkspacepermission> datalakeworkspaceWorkspacepermission = default(IList<MicrosoftDynamicsCRMdatalakeworkspacepermission>))
+        public MicrosoftDynamicsCRMdatalakeworkspace(string datalakeworkspaceUniquename = default(string), int? statecode = default(int?), int? timezoneruleversionnumber = default(int?), bool? isdeepcopyenabled = default(bool?), string _organizationidValue = default(string), int? statuscode = default(int?), string datalakeworkspaceid = default(string), int? importsequencenumber = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? componentstate = default(int?), string _modifiedbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), bool? isprivate = default(bool?), bool? iscustomercapacity = default(bool?), string iscustomizable = default(string), string _createdbyValue = default(string), string containerendpoint = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string path = default(string), string name = default(string), string componentidunique = default(string), string whitelistedappid = default(string), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string tenantid = default(string), string versionnumber = default(string), bool? ismanaged = default(bool?), string _createdonbehalfbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string solutionid = default(string), string owningappid = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> datalakeworkspaceSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> datalakeworkspaceDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> datalakeworkspaceDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> datalakeworkspaceAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> datalakeworkspaceMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> datalakeworkspaceProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> datalakeworkspaceBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> datalakeworkspacePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMdatalakeworkspacepermission> datalakeworkspaceWorkspacepermission = default(IList<MicrosoftDynamicsCRMdatalakeworkspacepermission>))
         {
-            Whitelistedappid = whitelistedappid;
+            DatalakeworkspaceUniquename = datalakeworkspaceUniquename;
             Statecode = statecode;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Timezoneruleversionnumber = timezoneruleversionnumber;
-            this._organizationidValue = _organizationidValue;
             Isdeepcopyenabled = isdeepcopyenabled;
+            this._organizationidValue = _organizationidValue;
             Statuscode = statuscode;
             Datalakeworkspaceid = datalakeworkspaceid;
-            Solutionid = solutionid;
             Importsequencenumber = importsequencenumber;
             Modifiedon = modifiedon;
             Componentstate = componentstate;
-            Owningappid = owningappid;
             this._modifiedbyValue = _modifiedbyValue;
             Overriddencreatedon = overriddencreatedon;
             Isprivate = isprivate;
+            Iscustomercapacity = iscustomercapacity;
             Iscustomizable = iscustomizable;
             this._createdbyValue = _createdbyValue;
             Containerendpoint = containerendpoint;
+            Overwritetime = overwritetime;
+            Path = path;
             Name = name;
             Componentidunique = componentidunique;
-            Versionnumber = versionnumber;
+            Whitelistedappid = whitelistedappid;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             Createdon = createdon;
             Tenantid = tenantid;
-            Overwritetime = overwritetime;
+            Versionnumber = versionnumber;
             Ismanaged = ismanaged;
-            Path = path;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            Iscustomercapacity = iscustomercapacity;
-            DatalakeworkspaceUniquename = datalakeworkspaceUniquename;
+            Solutionid = solutionid;
+            Owningappid = owningappid;
             Createdby = createdby;
             Createdonbehalfby = createdonbehalfby;
             Modifiedby = modifiedby;
@@ -86,8 +86,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "whitelistedappid")]
-        public string Whitelistedappid { get; set; }
+        [JsonProperty(PropertyName = "datalakeworkspace_uniquename")]
+        public string DatalakeworkspaceUniquename { get; set; }
 
         /// <summary>
         /// </summary>
@@ -96,23 +96,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "timezoneruleversionnumber")]
         public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
+        [JsonProperty(PropertyName = "isdeepcopyenabled")]
+        public bool? Isdeepcopyenabled { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "isdeepcopyenabled")]
-        public bool? Isdeepcopyenabled { get; set; }
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -123,11 +118,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "datalakeworkspaceid")]
         public string Datalakeworkspaceid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "solutionid")]
-        public string Solutionid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -146,11 +136,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "owningappid")]
-        public string Owningappid { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
 
@@ -163,6 +148,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "isprivate")]
         public bool? Isprivate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "iscustomercapacity")]
+        public bool? Iscustomercapacity { get; set; }
 
         /// <summary>
         /// </summary>
@@ -181,6 +171,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "overwritetime")]
+        public System.DateTimeOffset? Overwritetime { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "path")]
+        public string Path { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
@@ -191,8 +191,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "whitelistedappid")]
+        public string Whitelistedappid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -211,8 +211,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "overwritetime")]
-        public System.DateTimeOffset? Overwritetime { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -221,8 +221,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "path")]
-        public string Path { get; set; }
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -231,13 +231,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "iscustomercapacity")]
-        public bool? Iscustomercapacity { get; set; }
+        [JsonProperty(PropertyName = "solutionid")]
+        public string Solutionid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "datalakeworkspace_uniquename")]
-        public string DatalakeworkspaceUniquename { get; set; }
+        [JsonProperty(PropertyName = "owningappid")]
+        public string Owningappid { get; set; }
 
         /// <summary>
         /// </summary>

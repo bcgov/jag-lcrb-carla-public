@@ -29,34 +29,34 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMsystemform
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMsystemform(System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), int? version = default(int?), string formjson = default(string), int? formactivationstate = default(int?), string canbedeleted = default(string), string _ancestorformidValue = default(string), int? componentstate = default(int?), string solutionid = default(string), string description = default(string), bool? istabletenabled = default(bool?), string uniquename = default(string), string _organizationidValue = default(string), bool? isdefault = default(bool?), string objecttypecode = default(string), bool? ismanaged = default(bool?), string versionnumber = default(string), string introducedversion = default(string), string formidunique = default(string), int? formpresentation = default(int?), string formid = default(string), string name = default(string), int? type = default(int?), string formxml = default(string), bool? isdesktopenabled = default(bool?), string iscustomizable = default(string), System.DateTimeOffset? publishedon = default(System.DateTimeOffset?), bool? isairmerged = default(bool?), IList<MicrosoftDynamicsCRMasyncoperation> systemFormAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMprocesstrigger> processtriggerSystemform = default(IList<MicrosoftDynamicsCRMprocesstrigger>), IList<MicrosoftDynamicsCRMbulkdeletefailure> systemFormBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemform ancestorformid = default(MicrosoftDynamicsCRMsystemform), IList<MicrosoftDynamicsCRMsystemform> formAncestorForm = default(IList<MicrosoftDynamicsCRMsystemform>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
+        public MicrosoftDynamicsCRMsystemform(string formjson = default(string), int? formactivationstate = default(int?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string canbedeleted = default(string), int? componentstate = default(int?), string _organizationidValue = default(string), int? version = default(int?), string description = default(string), bool? istabletenabled = default(bool?), bool? isdefault = default(bool?), string introducedversion = default(string), string objecttypecode = default(string), bool? ismanaged = default(bool?), string versionnumber = default(string), int? type = default(int?), string formidunique = default(string), int? formpresentation = default(int?), string formid = default(string), string solutionid = default(string), string name = default(string), string uniquename = default(string), string formxml = default(string), bool? isdesktopenabled = default(bool?), string iscustomizable = default(string), System.DateTimeOffset? publishedon = default(System.DateTimeOffset?), string _ancestorformidValue = default(string), bool? isairmerged = default(bool?), IList<MicrosoftDynamicsCRMasyncoperation> systemFormAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMprocesstrigger> processtriggerSystemform = default(IList<MicrosoftDynamicsCRMprocesstrigger>), IList<MicrosoftDynamicsCRMbulkdeletefailure> systemFormBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemform ancestorformid = default(MicrosoftDynamicsCRMsystemform), IList<MicrosoftDynamicsCRMsystemform> formAncestorForm = default(IList<MicrosoftDynamicsCRMsystemform>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
         {
-            Overwritetime = overwritetime;
-            Version = version;
             Formjson = formjson;
             Formactivationstate = formactivationstate;
+            Overwritetime = overwritetime;
             Canbedeleted = canbedeleted;
-            this._ancestorformidValue = _ancestorformidValue;
             Componentstate = componentstate;
-            Solutionid = solutionid;
+            this._organizationidValue = _organizationidValue;
+            Version = version;
             Description = description;
             Istabletenabled = istabletenabled;
-            Uniquename = uniquename;
-            this._organizationidValue = _organizationidValue;
             Isdefault = isdefault;
+            Introducedversion = introducedversion;
             Objecttypecode = objecttypecode;
             Ismanaged = ismanaged;
             Versionnumber = versionnumber;
-            Introducedversion = introducedversion;
+            Type = type;
             Formidunique = formidunique;
             Formpresentation = formpresentation;
             Formid = formid;
+            Solutionid = solutionid;
             Name = name;
-            Type = type;
+            Uniquename = uniquename;
             Formxml = formxml;
             Isdesktopenabled = isdesktopenabled;
             Iscustomizable = iscustomizable;
             Publishedon = publishedon;
+            this._ancestorformidValue = _ancestorformidValue;
             Isairmerged = isairmerged;
             SystemFormAsyncOperations = systemFormAsyncOperations;
             ProcesstriggerSystemform = processtriggerSystemform;
@@ -74,16 +74,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "overwritetime")]
-        public System.DateTimeOffset? Overwritetime { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "version")]
-        public int? Version { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "formjson")]
         public string Formjson { get; set; }
 
@@ -94,13 +84,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "canbedeleted")]
-        public string Canbedeleted { get; set; }
+        [JsonProperty(PropertyName = "overwritetime")]
+        public System.DateTimeOffset? Overwritetime { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_ancestorformid_value")]
-        public string _ancestorformidValue { get; set; }
+        [JsonProperty(PropertyName = "canbedeleted")]
+        public string Canbedeleted { get; set; }
 
         /// <summary>
         /// </summary>
@@ -109,8 +99,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "solutionid")]
-        public string Solutionid { get; set; }
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "version")]
+        public int? Version { get; set; }
 
         /// <summary>
         /// </summary>
@@ -124,18 +119,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "uniquename")]
-        public string Uniquename { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "isdefault")]
         public bool? Isdefault { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "introducedversion")]
+        public string Introducedversion { get; set; }
 
         /// <summary>
         /// </summary>
@@ -154,8 +144,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "introducedversion")]
-        public string Introducedversion { get; set; }
+        [JsonProperty(PropertyName = "type")]
+        public int? Type { get; set; }
 
         /// <summary>
         /// </summary>
@@ -174,13 +164,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "solutionid")]
+        public string Solutionid { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "type")]
-        public int? Type { get; set; }
+        [JsonProperty(PropertyName = "uniquename")]
+        public string Uniquename { get; set; }
 
         /// <summary>
         /// </summary>
@@ -201,6 +196,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "publishedon")]
         public System.DateTimeOffset? Publishedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_ancestorformid_value")]
+        public string _ancestorformidValue { get; set; }
 
         /// <summary>
         /// </summary>

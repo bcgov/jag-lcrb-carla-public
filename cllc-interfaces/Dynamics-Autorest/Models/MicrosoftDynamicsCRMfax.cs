@@ -27,21 +27,21 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// Initializes a new instance of the MicrosoftDynamicsCRMfax class.
         /// </summary>
-        public MicrosoftDynamicsCRMfax(string billingcode = default(string), string coverpagename = default(string), int? importsequencenumber = default(int?), string subcategory = default(string), string subscriptionid = default(string), string ptmFileexplorerdocumentlink2011 = default(string), string faxnumber = default(string), bool? directioncode = default(bool?), string ptmSharepointdocumentlink2011 = default(string), string category = default(string), string tsid = default(string), int? numberofpages = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMknowledgebaserecord regardingobjectidKnowledgebaserecordFax = default(MicrosoftDynamicsCRMknowledgebaserecord), IList<MicrosoftDynamicsCRMbulkdeletefailure> faxBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), MicrosoftDynamicsCRMbusinessunit owningbusinessunitFax = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMaccount regardingobjectidAccountFax = default(MicrosoftDynamicsCRMaccount), IList<MicrosoftDynamicsCRMannotation> faxAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMactioncard> faxActioncard = default(IList<MicrosoftDynamicsCRMactioncard>), MicrosoftDynamicsCRMsystemuser createdbyFax = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyFax = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyidFax = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMteam owningteamFax = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMduplicaterecord> faxDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticleFax = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMsystemuser owninguserFax = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsla slaFaxSla = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMqueueitem> faxQueueItem = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMactivityparty> faxActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> faxPrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMsystemuser modifiedbyFax = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyFax = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMactivitypointer activityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), IList<MicrosoftDynamicsCRMconnection> faxConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMsla slainvokedidFaxSla = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMprocesssession> faxProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), MicrosoftDynamicsCRMcontact regardingobjectidContactFax = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMslakpiinstance> slakpiinstanceFax = default(IList<MicrosoftDynamicsCRMslakpiinstance>), IList<MicrosoftDynamicsCRMconnection> faxConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMsyncerror> faxSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> faxDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> faxAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMmsdynPostalbum regardingobjectidMsdynPostalbumFax = default(MicrosoftDynamicsCRMmsdynPostalbum), MicrosoftDynamicsCRMabsScheduledprocess regardingobjectidAbsScheduledprocessFax = default(MicrosoftDynamicsCRMabsScheduledprocess), MicrosoftDynamicsCRMadoxioApplication regardingobjectidAdoxioApplicationFax = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioComplaint regardingobjectidAdoxioComplaintFax = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioInvestigation regardingobjectidAdoxioInvestigationFax = default(MicrosoftDynamicsCRMadoxioInvestigation), MicrosoftDynamicsCRMadoxioLicences regardingobjectidAdoxioLicencesFax = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioWorker regardingobjectidAdoxioWorkerFax = default(MicrosoftDynamicsCRMadoxioWorker), MicrosoftDynamicsCRMadoxioComplianceinvestigation regardingobjectidAdoxioComplianceinvestigationFax = default(MicrosoftDynamicsCRMadoxioComplianceinvestigation), MicrosoftDynamicsCRMadoxioEvent regardingobjectidAdoxioEventFax = default(MicrosoftDynamicsCRMadoxioEvent), MicrosoftDynamicsCRMadoxioEnforcementaction regardingobjectidAdoxioEnforcementactionFax = default(MicrosoftDynamicsCRMadoxioEnforcementaction), MicrosoftDynamicsCRMadoxioSpecialevent regardingobjectidAdoxioSpecialeventFax = default(MicrosoftDynamicsCRMadoxioSpecialevent), MicrosoftDynamicsCRMafkWorkflowelementoption regardingobjectidAfkWorkflowelementoptionFax = default(MicrosoftDynamicsCRMafkWorkflowelementoption), MicrosoftDynamicsCRMadoxioExternalprofile regardingobjectidAdoxioExternalprofileFax = default(MicrosoftDynamicsCRMadoxioExternalprofile), MicrosoftDynamicsCRMadoxioExternalcontact regardingobjectidAdoxioExternalcontactFax = default(MicrosoftDynamicsCRMadoxioExternalcontact), MicrosoftDynamicsCRMadoxioViolationticket regardingobjectidAdoxioViolationticketFax = default(MicrosoftDynamicsCRMadoxioViolationticket), IList<MicrosoftDynamicsCRMcampaignresponse> faxCampaignresponse = default(IList<MicrosoftDynamicsCRMcampaignresponse>), MicrosoftDynamicsCRMcampaignactivity regardingobjectidCampaignactivityFax = default(MicrosoftDynamicsCRMcampaignactivity), MicrosoftDynamicsCRMbulkoperation regardingobjectidBulkoperationFax = default(MicrosoftDynamicsCRMbulkoperation), MicrosoftDynamicsCRMcampaign regardingobjectidCampaignFax = default(MicrosoftDynamicsCRMcampaign), MicrosoftDynamicsCRMentitlement regardingobjectidEntitlementFax = default(MicrosoftDynamicsCRMentitlement), MicrosoftDynamicsCRMentitlementtemplate regardingobjectidEntitlementtemplateFax = default(MicrosoftDynamicsCRMentitlementtemplate), MicrosoftDynamicsCRMsite regardingobjectidSiteFax = default(MicrosoftDynamicsCRMsite), MicrosoftDynamicsCRMservice serviceidFax = default(MicrosoftDynamicsCRMservice), MicrosoftDynamicsCRMcontract regardingobjectidContractFax = default(MicrosoftDynamicsCRMcontract), MicrosoftDynamicsCRMincident regardingobjectidIncidentFax = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunityFax = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMinvoice regardingobjectidInvoiceFax = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMquote regardingobjectidQuoteFax = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMsalesorder regardingobjectidSalesorderFax = default(MicrosoftDynamicsCRMsalesorder), MicrosoftDynamicsCRMbookableresourcebooking regardingobjectidBookableresourcebookingFax = default(MicrosoftDynamicsCRMbookableresourcebooking), MicrosoftDynamicsCRMbookableresourcebookingheader regardingobjectidBookableresourcebookingheaderFax = default(MicrosoftDynamicsCRMbookableresourcebookingheader), MicrosoftDynamicsCRMlead regardingobjectidLeadFax = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMprincipal owneridFax = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMmsdynPlaybookinstance regardingobjectidMsdynPlaybookinstanceFax = default(MicrosoftDynamicsCRMmsdynPlaybookinstance), MicrosoftDynamicsCRMptmAutomergeworkingitems regardingobjectidPtmAutomergeworkingitemsFax = default(MicrosoftDynamicsCRMptmAutomergeworkingitems))
+        public MicrosoftDynamicsCRMfax(string tsid = default(string), int? numberofpages = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string subcategory = default(string), string subscriptionid = default(string), int? importsequencenumber = default(int?), string ptmSharepointdocumentlink2011 = default(string), bool? directioncode = default(bool?), string faxnumber = default(string), string coverpagename = default(string), string billingcode = default(string), string category = default(string), string ptmFileexplorerdocumentlink2011 = default(string), MicrosoftDynamicsCRMknowledgebaserecord regardingobjectidKnowledgebaserecordFax = default(MicrosoftDynamicsCRMknowledgebaserecord), IList<MicrosoftDynamicsCRMbulkdeletefailure> faxBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), MicrosoftDynamicsCRMbusinessunit owningbusinessunitFax = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMaccount regardingobjectidAccountFax = default(MicrosoftDynamicsCRMaccount), IList<MicrosoftDynamicsCRMannotation> faxAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMactioncard> faxActioncard = default(IList<MicrosoftDynamicsCRMactioncard>), MicrosoftDynamicsCRMsystemuser createdbyFax = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyFax = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyidFax = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMteam owningteamFax = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMduplicaterecord> faxDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticleFax = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMsystemuser owninguserFax = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsla slaFaxSla = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMqueueitem> faxQueueItem = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMactivityparty> faxActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> faxPrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMsystemuser modifiedbyFax = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyFax = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMactivitypointer activityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), IList<MicrosoftDynamicsCRMconnection> faxConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMsla slainvokedidFaxSla = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMprocesssession> faxProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), MicrosoftDynamicsCRMcontact regardingobjectidContactFax = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMslakpiinstance> slakpiinstanceFax = default(IList<MicrosoftDynamicsCRMslakpiinstance>), IList<MicrosoftDynamicsCRMconnection> faxConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMsyncerror> faxSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> faxDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> faxAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMmsdynPostalbum regardingobjectidMsdynPostalbumFax = default(MicrosoftDynamicsCRMmsdynPostalbum), MicrosoftDynamicsCRMabsScheduledprocess regardingobjectidAbsScheduledprocessFax = default(MicrosoftDynamicsCRMabsScheduledprocess), MicrosoftDynamicsCRMadoxioApplication regardingobjectidAdoxioApplicationFax = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioComplaint regardingobjectidAdoxioComplaintFax = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioInvestigation regardingobjectidAdoxioInvestigationFax = default(MicrosoftDynamicsCRMadoxioInvestigation), MicrosoftDynamicsCRMadoxioLicences regardingobjectidAdoxioLicencesFax = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioWorker regardingobjectidAdoxioWorkerFax = default(MicrosoftDynamicsCRMadoxioWorker), MicrosoftDynamicsCRMadoxioComplianceinvestigation regardingobjectidAdoxioComplianceinvestigationFax = default(MicrosoftDynamicsCRMadoxioComplianceinvestigation), MicrosoftDynamicsCRMadoxioEvent regardingobjectidAdoxioEventFax = default(MicrosoftDynamicsCRMadoxioEvent), MicrosoftDynamicsCRMadoxioEnforcementaction regardingobjectidAdoxioEnforcementactionFax = default(MicrosoftDynamicsCRMadoxioEnforcementaction), MicrosoftDynamicsCRMadoxioSpecialevent regardingobjectidAdoxioSpecialeventFax = default(MicrosoftDynamicsCRMadoxioSpecialevent), MicrosoftDynamicsCRMafkWorkflowelementoption regardingobjectidAfkWorkflowelementoptionFax = default(MicrosoftDynamicsCRMafkWorkflowelementoption), MicrosoftDynamicsCRMadoxioExternalprofile regardingobjectidAdoxioExternalprofileFax = default(MicrosoftDynamicsCRMadoxioExternalprofile), MicrosoftDynamicsCRMadoxioExternalcontact regardingobjectidAdoxioExternalcontactFax = default(MicrosoftDynamicsCRMadoxioExternalcontact), MicrosoftDynamicsCRMadoxioViolationticket regardingobjectidAdoxioViolationticketFax = default(MicrosoftDynamicsCRMadoxioViolationticket), IList<MicrosoftDynamicsCRMcampaignresponse> faxCampaignresponse = default(IList<MicrosoftDynamicsCRMcampaignresponse>), MicrosoftDynamicsCRMcampaignactivity regardingobjectidCampaignactivityFax = default(MicrosoftDynamicsCRMcampaignactivity), MicrosoftDynamicsCRMbulkoperation regardingobjectidBulkoperationFax = default(MicrosoftDynamicsCRMbulkoperation), MicrosoftDynamicsCRMcampaign regardingobjectidCampaignFax = default(MicrosoftDynamicsCRMcampaign), MicrosoftDynamicsCRMentitlement regardingobjectidEntitlementFax = default(MicrosoftDynamicsCRMentitlement), MicrosoftDynamicsCRMentitlementtemplate regardingobjectidEntitlementtemplateFax = default(MicrosoftDynamicsCRMentitlementtemplate), MicrosoftDynamicsCRMsite regardingobjectidSiteFax = default(MicrosoftDynamicsCRMsite), MicrosoftDynamicsCRMservice serviceidFax = default(MicrosoftDynamicsCRMservice), MicrosoftDynamicsCRMcontract regardingobjectidContractFax = default(MicrosoftDynamicsCRMcontract), MicrosoftDynamicsCRMincident regardingobjectidIncidentFax = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunityFax = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMinvoice regardingobjectidInvoiceFax = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMquote regardingobjectidQuoteFax = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMsalesorder regardingobjectidSalesorderFax = default(MicrosoftDynamicsCRMsalesorder), MicrosoftDynamicsCRMbookableresourcebooking regardingobjectidBookableresourcebookingFax = default(MicrosoftDynamicsCRMbookableresourcebooking), MicrosoftDynamicsCRMbookableresourcebookingheader regardingobjectidBookableresourcebookingheaderFax = default(MicrosoftDynamicsCRMbookableresourcebookingheader), MicrosoftDynamicsCRMlead regardingobjectidLeadFax = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMprincipal owneridFax = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMmsdynPlaybookinstance regardingobjectidMsdynPlaybookinstanceFax = default(MicrosoftDynamicsCRMmsdynPlaybookinstance), MicrosoftDynamicsCRMptmAutomergeworkingitems regardingobjectidPtmAutomergeworkingitemsFax = default(MicrosoftDynamicsCRMptmAutomergeworkingitems))
         {
-            Billingcode = billingcode;
-            Coverpagename = coverpagename;
-            Importsequencenumber = importsequencenumber;
-            Subcategory = subcategory;
-            Subscriptionid = subscriptionid;
-            PtmFileexplorerdocumentlink2011 = ptmFileexplorerdocumentlink2011;
-            Faxnumber = faxnumber;
-            Directioncode = directioncode;
-            PtmSharepointdocumentlink2011 = ptmSharepointdocumentlink2011;
-            Category = category;
             Tsid = tsid;
             Numberofpages = numberofpages;
             Overriddencreatedon = overriddencreatedon;
+            Subcategory = subcategory;
+            Subscriptionid = subscriptionid;
+            Importsequencenumber = importsequencenumber;
+            PtmSharepointdocumentlink2011 = ptmSharepointdocumentlink2011;
+            Directioncode = directioncode;
+            Faxnumber = faxnumber;
+            Coverpagename = coverpagename;
+            Billingcode = billingcode;
+            Category = category;
+            PtmFileexplorerdocumentlink2011 = ptmFileexplorerdocumentlink2011;
             RegardingobjectidKnowledgebaserecordFax = regardingobjectidKnowledgebaserecordFax;
             FaxBulkDeleteFailures = faxBulkDeleteFailures;
             StageidProcessstage = stageidProcessstage;
@@ -117,18 +117,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "billingcode")]
-        public string Billingcode { get; set; }
+        [JsonProperty(PropertyName = "tsid")]
+        public string Tsid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "coverpagename")]
-        public string Coverpagename { get; set; }
+        [JsonProperty(PropertyName = "numberofpages")]
+        public int? Numberofpages { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -142,18 +142,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ptm_fileexplorerdocumentlink2011")]
-        public string PtmFileexplorerdocumentlink2011 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "faxnumber")]
-        public string Faxnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "directioncode")]
-        public bool? Directioncode { get; set; }
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -162,23 +152,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "directioncode")]
+        public bool? Directioncode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "faxnumber")]
+        public string Faxnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "coverpagename")]
+        public string Coverpagename { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "billingcode")]
+        public string Billingcode { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "category")]
         public string Category { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "tsid")]
-        public string Tsid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "numberofpages")]
-        public int? Numberofpages { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+        [JsonProperty(PropertyName = "ptm_fileexplorerdocumentlink2011")]
+        public string PtmFileexplorerdocumentlink2011 { get; set; }
 
         /// <summary>
         /// </summary>

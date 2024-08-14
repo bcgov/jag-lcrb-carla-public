@@ -29,20 +29,20 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMteamtemplate
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMteamtemplate(string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? objecttypecode = default(int?), int? defaultaccessrightsmask = default(int?), string _createdonbehalfbyValue = default(string), string _createdbyValue = default(string), string versionnumber = default(string), string teamtemplateid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), string description = default(string), bool? issystem = default(bool?), string teamtemplatename = default(string), IList<MicrosoftDynamicsCRMteam> teamtemplateTeams = default(IList<MicrosoftDynamicsCRMteam>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> teamTemplateSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>))
+        public MicrosoftDynamicsCRMteamtemplate(string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), int? objecttypecode = default(int?), int? defaultaccessrightsmask = default(int?), string _createdbyValue = default(string), string versionnumber = default(string), string teamtemplateid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string description = default(string), bool? issystem = default(bool?), string _modifiedbyValue = default(string), string teamtemplatename = default(string), IList<MicrosoftDynamicsCRMteam> teamtemplateTeams = default(IList<MicrosoftDynamicsCRMteam>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> teamTemplateSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>))
         {
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Modifiedon = modifiedon;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Objecttypecode = objecttypecode;
             Defaultaccessrightsmask = defaultaccessrightsmask;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             this._createdbyValue = _createdbyValue;
             Versionnumber = versionnumber;
             Teamtemplateid = teamtemplateid;
             Createdon = createdon;
-            this._modifiedbyValue = _modifiedbyValue;
             Description = description;
             Issystem = issystem;
+            this._modifiedbyValue = _modifiedbyValue;
             Teamtemplatename = teamtemplatename;
             TeamtemplateTeams = teamtemplateTeams;
             Createdby = createdby;
@@ -70,6 +70,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "objecttypecode")]
         public int? Objecttypecode { get; set; }
 
@@ -77,11 +82,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "defaultaccessrightsmask")]
         public int? Defaultaccessrightsmask { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -105,11 +105,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
 
@@ -117,6 +112,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "issystem")]
         public bool? Issystem { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>

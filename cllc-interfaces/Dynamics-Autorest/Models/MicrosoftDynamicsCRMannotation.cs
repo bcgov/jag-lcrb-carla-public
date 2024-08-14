@@ -31,35 +31,35 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMannotation
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMannotation(string _modifiedonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string _owningbusinessunitValue = default(string), string notetext = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _objectidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string stepid = default(string), int? filesize = default(int?), string annotationid = default(string), string mimetype = default(string), string objecttypecode = default(string), string prefix = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _owneridValue = default(string), string langid = default(string), string documentbody = default(string), byte[] documentbodyBinary = default(byte[]), string _createdonbehalfbyValue = default(string), string subject = default(string), bool? isdocument = default(bool?), string versionnumber = default(string), string _owninguserValue = default(string), string _owningteamValue = default(string), int? importsequencenumber = default(int?), string filename = default(string), string _createdbyValue = default(string), MicrosoftDynamicsCRMknowledgearticle objectidKnowledgearticle = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMknowledgebaserecord objectidKnowledgebaserecord = default(MicrosoftDynamicsCRMknowledgebaserecord), MicrosoftDynamicsCRMaccount objectidAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMkbarticle objectidKbarticle = default(MicrosoftDynamicsCRMkbarticle), MicrosoftDynamicsCRMappointment objectidAppointment = default(MicrosoftDynamicsCRMappointment), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMbulkdeletefailure> annotationBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsla objectidSla = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMcalendar objectidCalendar = default(MicrosoftDynamicsCRMcalendar), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMfax objectidFax = default(MicrosoftDynamicsCRMfax), MicrosoftDynamicsCRMcontact objectidContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMletter objectidLetter = default(MicrosoftDynamicsCRMletter), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMgoal objectidGoal = default(MicrosoftDynamicsCRMgoal), MicrosoftDynamicsCRMtask objectidTask = default(MicrosoftDynamicsCRMtask), MicrosoftDynamicsCRMemail objectidEmail = default(MicrosoftDynamicsCRMemail), MicrosoftDynamicsCRMworkflow objectidWorkflow = default(MicrosoftDynamicsCRMworkflow), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> annotationAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMprocesssession> annotationProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), MicrosoftDynamicsCRMmailbox objectidMailbox = default(MicrosoftDynamicsCRMmailbox), MicrosoftDynamicsCRMsocialactivity objectidSocialactivity = default(MicrosoftDynamicsCRMsocialactivity), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMduplicaterule objectidDuplicaterule = default(MicrosoftDynamicsCRMduplicaterule), IList<MicrosoftDynamicsCRMsyncerror> annotationSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMphonecall objectidPhonecall = default(MicrosoftDynamicsCRMphonecall), MicrosoftDynamicsCRMemailserverprofile objectidEmailserverprofile = default(MicrosoftDynamicsCRMemailserverprofile), MicrosoftDynamicsCRMrecurringappointmentmaster objectidRecurringappointmentmaster = default(MicrosoftDynamicsCRMrecurringappointmentmaster), MicrosoftDynamicsCRMmsdynPostalbum objectidMsdynPostalbum = default(MicrosoftDynamicsCRMmsdynPostalbum), MicrosoftDynamicsCRMabsScheduledprocessexecution objectidAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMabsScheduledprocessexecution), MicrosoftDynamicsCRMadoxioApplication objectidAdoxioApplication = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioComplaint objectidAdoxioComplaint = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioInvestigation objectidAdoxioInvestigation = default(MicrosoftDynamicsCRMadoxioInvestigation), MicrosoftDynamicsCRMadoxioLicences objectidAdoxioLicences = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioLocalgovindigenousnation objectidAdoxioLocalgovindigenousnation = default(MicrosoftDynamicsCRMadoxioLocalgovindigenousnation), MicrosoftDynamicsCRMadoxioWorker objectidAdoxioWorker = default(MicrosoftDynamicsCRMadoxioWorker), MicrosoftDynamicsCRMadoxioComplianceinvestigation objectidAdoxioComplianceinvestigation = default(MicrosoftDynamicsCRMadoxioComplianceinvestigation), MicrosoftDynamicsCRMmsdynSolutioncomponentdatasource objectidMsdynSolutioncomponentdatasource = default(MicrosoftDynamicsCRMmsdynSolutioncomponentdatasource), MicrosoftDynamicsCRMadoxioEvent objectidAdoxioEvent = default(MicrosoftDynamicsCRMadoxioEvent), MicrosoftDynamicsCRMadoxioEstablishment objectidAdoxioEstablishment = default(MicrosoftDynamicsCRMadoxioEstablishment), MicrosoftDynamicsCRMadoxioContravention objectidAdoxioContravention = default(MicrosoftDynamicsCRMadoxioContravention), MicrosoftDynamicsCRMadoxioEnforcementaction objectidAdoxioEnforcementaction = default(MicrosoftDynamicsCRMadoxioEnforcementaction), MicrosoftDynamicsCRMadoxioSpecialevent objectidAdoxioSpecialevent = default(MicrosoftDynamicsCRMadoxioSpecialevent), MicrosoftDynamicsCRMafkWorkflowelementoption objectidAfkWorkflowelementoption = default(MicrosoftDynamicsCRMafkWorkflowelementoption), MicrosoftDynamicsCRMadoxioExternalprofile objectidAdoxioExternalprofile = default(MicrosoftDynamicsCRMadoxioExternalprofile), MicrosoftDynamicsCRMadoxioExternalcontact objectidAdoxioExternalcontact = default(MicrosoftDynamicsCRMadoxioExternalcontact), MicrosoftDynamicsCRMadoxioViolationticket objectidAdoxioViolationticket = default(MicrosoftDynamicsCRMadoxioViolationticket), MicrosoftDynamicsCRMbulkoperation objectidBulkoperation = default(MicrosoftDynamicsCRMbulkoperation), MicrosoftDynamicsCRMlist objectidList = default(MicrosoftDynamicsCRMlist), MicrosoftDynamicsCRMcampaignresponse objectidCampaignresponse = default(MicrosoftDynamicsCRMcampaignresponse), MicrosoftDynamicsCRMcampaignactivity objectidCampaignactivity = default(MicrosoftDynamicsCRMcampaignactivity), MicrosoftDynamicsCRMcampaign objectidCampaign = default(MicrosoftDynamicsCRMcampaign), MicrosoftDynamicsCRMentitlement objectidEntitlement = default(MicrosoftDynamicsCRMentitlement), MicrosoftDynamicsCRMentitlementchannel objectidEntitlementchannel = default(MicrosoftDynamicsCRMentitlementchannel), MicrosoftDynamicsCRMentitlementtemplate objectidEntitlementtemplate = default(MicrosoftDynamicsCRMentitlementtemplate), MicrosoftDynamicsCRMincidentresolution objectidIncidentresolution = default(MicrosoftDynamicsCRMincidentresolution), MicrosoftDynamicsCRMservice objectidService = default(MicrosoftDynamicsCRMservice), MicrosoftDynamicsCRMcontract objectidContract = default(MicrosoftDynamicsCRMcontract), MicrosoftDynamicsCRMincident objectidIncident = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMequipment objectidEquipment = default(MicrosoftDynamicsCRMequipment), MicrosoftDynamicsCRMcontractdetail objectidContractdetail = default(MicrosoftDynamicsCRMcontractdetail), MicrosoftDynamicsCRMresourcespec objectidResourcespec = default(MicrosoftDynamicsCRMresourcespec), MicrosoftDynamicsCRMserviceappointment objectidServiceappointment = default(MicrosoftDynamicsCRMserviceappointment), MicrosoftDynamicsCRMproduct objectidProduct = default(MicrosoftDynamicsCRMproduct), MicrosoftDynamicsCRMsalesorder objectidSalesorder = default(MicrosoftDynamicsCRMsalesorder), MicrosoftDynamicsCRMquoteclose objectidQuoteclose = default(MicrosoftDynamicsCRMquoteclose), MicrosoftDynamicsCRMcompetitor objectidCompetitor = default(MicrosoftDynamicsCRMcompetitor), MicrosoftDynamicsCRMorderclose objectidOrderclose = default(MicrosoftDynamicsCRMorderclose), MicrosoftDynamicsCRMquote objectidQuote = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMinvoice objectidInvoice = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMopportunityclose objectidOpportunityclose = default(MicrosoftDynamicsCRMopportunityclose), MicrosoftDynamicsCRMopportunity objectidOpportunity = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMbookableresource objectidBookableresource = default(MicrosoftDynamicsCRMbookableresource), MicrosoftDynamicsCRMbookableresourcebooking objectidBookableresourcebooking = default(MicrosoftDynamicsCRMbookableresourcebooking), MicrosoftDynamicsCRMbookableresourcebookingheader objectidBookableresourcebookingheader = default(MicrosoftDynamicsCRMbookableresourcebookingheader), MicrosoftDynamicsCRMbookableresourcecategoryassn objectidBookableresourcecategoryassn = default(MicrosoftDynamicsCRMbookableresourcecategoryassn), MicrosoftDynamicsCRMbookableresourcecharacteristic objectidBookableresourcecharacteristic = default(MicrosoftDynamicsCRMbookableresourcecharacteristic), MicrosoftDynamicsCRMbookableresourcegroup objectidBookableresourcegroup = default(MicrosoftDynamicsCRMbookableresourcegroup), MicrosoftDynamicsCRMlead objectidLead = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMmsdynAimodel objectidMsdynAimodel = default(MicrosoftDynamicsCRMmsdynAimodel), MicrosoftDynamicsCRMmsdynAifptrainingdocument objectidMsdynAifptrainingdocument = default(MicrosoftDynamicsCRMmsdynAifptrainingdocument), MicrosoftDynamicsCRMmsdynAiodimage objectidMsdynAiodimage = default(MicrosoftDynamicsCRMmsdynAiodimage), MicrosoftDynamicsCRMmsdynPlaybookinstance objectidMsdynPlaybookinstance = default(MicrosoftDynamicsCRMmsdynPlaybookinstance), MicrosoftDynamicsCRMmsdynPlaybooktemplate objectidMsdynPlaybooktemplate = default(MicrosoftDynamicsCRMmsdynPlaybooktemplate), MicrosoftDynamicsCRMptmMscrmaddonsKey objectidPtmMscrmaddonsKey = default(MicrosoftDynamicsCRMptmMscrmaddonsKey), MicrosoftDynamicsCRMptmMscrmaddonsScheduler objectidPtmMscrmaddonsScheduler = default(MicrosoftDynamicsCRMptmMscrmaddonsScheduler), MicrosoftDynamicsCRMptmMscrmaddonsSettings objectidPtmMscrmaddonsSettings = default(MicrosoftDynamicsCRMptmMscrmaddonsSettings), MicrosoftDynamicsCRMptmMscrmaddonstemp objectidPtmMscrmaddonstemp = default(MicrosoftDynamicsCRMptmMscrmaddonstemp), MicrosoftDynamicsCRMptmMscrmaddonsDcptemplates objectidPtmMscrmaddonsDcptemplates = default(MicrosoftDynamicsCRMptmMscrmaddonsDcptemplates), MicrosoftDynamicsCRMptmAutomergeworkingitems objectidPtmAutomergeworkingitems = default(MicrosoftDynamicsCRMptmAutomergeworkingitems))
+        public MicrosoftDynamicsCRMannotation(int? importsequencenumber = default(int?), string _modifiedbyValue = default(string), string _owningbusinessunitValue = default(string), string notetext = default(string), string _objectidValue = default(string), string objecttypecode = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? filesize = default(int?), string annotationid = default(string), string mimetype = default(string), string _createdonbehalfbyValue = default(string), string _createdbyValue = default(string), string prefix = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _owneridValue = default(string), string _modifiedonbehalfbyValue = default(string), string langid = default(string), string documentbody = default(string), byte[] documentbodyBinary = default(byte[]), bool? isdocument = default(bool?), string _owningteamValue = default(string), string versionnumber = default(string), string _owninguserValue = default(string), string stepid = default(string), string filename = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string subject = default(string), MicrosoftDynamicsCRMknowledgearticle objectidKnowledgearticle = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMknowledgebaserecord objectidKnowledgebaserecord = default(MicrosoftDynamicsCRMknowledgebaserecord), MicrosoftDynamicsCRMaccount objectidAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMkbarticle objectidKbarticle = default(MicrosoftDynamicsCRMkbarticle), MicrosoftDynamicsCRMappointment objectidAppointment = default(MicrosoftDynamicsCRMappointment), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMbulkdeletefailure> annotationBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsla objectidSla = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMcalendar objectidCalendar = default(MicrosoftDynamicsCRMcalendar), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMfax objectidFax = default(MicrosoftDynamicsCRMfax), MicrosoftDynamicsCRMcontact objectidContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMletter objectidLetter = default(MicrosoftDynamicsCRMletter), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMgoal objectidGoal = default(MicrosoftDynamicsCRMgoal), MicrosoftDynamicsCRMtask objectidTask = default(MicrosoftDynamicsCRMtask), MicrosoftDynamicsCRMemail objectidEmail = default(MicrosoftDynamicsCRMemail), MicrosoftDynamicsCRMworkflow objectidWorkflow = default(MicrosoftDynamicsCRMworkflow), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> annotationAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMprocesssession> annotationProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), MicrosoftDynamicsCRMmailbox objectidMailbox = default(MicrosoftDynamicsCRMmailbox), MicrosoftDynamicsCRMsocialactivity objectidSocialactivity = default(MicrosoftDynamicsCRMsocialactivity), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMduplicaterule objectidDuplicaterule = default(MicrosoftDynamicsCRMduplicaterule), IList<MicrosoftDynamicsCRMsyncerror> annotationSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMphonecall objectidPhonecall = default(MicrosoftDynamicsCRMphonecall), MicrosoftDynamicsCRMemailserverprofile objectidEmailserverprofile = default(MicrosoftDynamicsCRMemailserverprofile), MicrosoftDynamicsCRMrecurringappointmentmaster objectidRecurringappointmentmaster = default(MicrosoftDynamicsCRMrecurringappointmentmaster), MicrosoftDynamicsCRMmsdynPostalbum objectidMsdynPostalbum = default(MicrosoftDynamicsCRMmsdynPostalbum), MicrosoftDynamicsCRMabsScheduledprocessexecution objectidAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMabsScheduledprocessexecution), MicrosoftDynamicsCRMadoxioApplication objectidAdoxioApplication = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioComplaint objectidAdoxioComplaint = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioInvestigation objectidAdoxioInvestigation = default(MicrosoftDynamicsCRMadoxioInvestigation), MicrosoftDynamicsCRMadoxioLicences objectidAdoxioLicences = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioLocalgovindigenousnation objectidAdoxioLocalgovindigenousnation = default(MicrosoftDynamicsCRMadoxioLocalgovindigenousnation), MicrosoftDynamicsCRMadoxioWorker objectidAdoxioWorker = default(MicrosoftDynamicsCRMadoxioWorker), MicrosoftDynamicsCRMadoxioComplianceinvestigation objectidAdoxioComplianceinvestigation = default(MicrosoftDynamicsCRMadoxioComplianceinvestigation), MicrosoftDynamicsCRMmsdynSolutioncomponentdatasource objectidMsdynSolutioncomponentdatasource = default(MicrosoftDynamicsCRMmsdynSolutioncomponentdatasource), MicrosoftDynamicsCRMadoxioEvent objectidAdoxioEvent = default(MicrosoftDynamicsCRMadoxioEvent), MicrosoftDynamicsCRMadoxioEstablishment objectidAdoxioEstablishment = default(MicrosoftDynamicsCRMadoxioEstablishment), MicrosoftDynamicsCRMadoxioContravention objectidAdoxioContravention = default(MicrosoftDynamicsCRMadoxioContravention), MicrosoftDynamicsCRMadoxioEnforcementaction objectidAdoxioEnforcementaction = default(MicrosoftDynamicsCRMadoxioEnforcementaction), MicrosoftDynamicsCRMadoxioSpecialevent objectidAdoxioSpecialevent = default(MicrosoftDynamicsCRMadoxioSpecialevent), MicrosoftDynamicsCRMafkWorkflowelementoption objectidAfkWorkflowelementoption = default(MicrosoftDynamicsCRMafkWorkflowelementoption), MicrosoftDynamicsCRMadoxioExternalprofile objectidAdoxioExternalprofile = default(MicrosoftDynamicsCRMadoxioExternalprofile), MicrosoftDynamicsCRMadoxioExternalcontact objectidAdoxioExternalcontact = default(MicrosoftDynamicsCRMadoxioExternalcontact), MicrosoftDynamicsCRMadoxioViolationticket objectidAdoxioViolationticket = default(MicrosoftDynamicsCRMadoxioViolationticket), MicrosoftDynamicsCRMbulkoperation objectidBulkoperation = default(MicrosoftDynamicsCRMbulkoperation), MicrosoftDynamicsCRMlist objectidList = default(MicrosoftDynamicsCRMlist), MicrosoftDynamicsCRMcampaignresponse objectidCampaignresponse = default(MicrosoftDynamicsCRMcampaignresponse), MicrosoftDynamicsCRMcampaignactivity objectidCampaignactivity = default(MicrosoftDynamicsCRMcampaignactivity), MicrosoftDynamicsCRMcampaign objectidCampaign = default(MicrosoftDynamicsCRMcampaign), MicrosoftDynamicsCRMentitlement objectidEntitlement = default(MicrosoftDynamicsCRMentitlement), MicrosoftDynamicsCRMentitlementchannel objectidEntitlementchannel = default(MicrosoftDynamicsCRMentitlementchannel), MicrosoftDynamicsCRMentitlementtemplate objectidEntitlementtemplate = default(MicrosoftDynamicsCRMentitlementtemplate), MicrosoftDynamicsCRMincidentresolution objectidIncidentresolution = default(MicrosoftDynamicsCRMincidentresolution), MicrosoftDynamicsCRMservice objectidService = default(MicrosoftDynamicsCRMservice), MicrosoftDynamicsCRMcontract objectidContract = default(MicrosoftDynamicsCRMcontract), MicrosoftDynamicsCRMincident objectidIncident = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMequipment objectidEquipment = default(MicrosoftDynamicsCRMequipment), MicrosoftDynamicsCRMcontractdetail objectidContractdetail = default(MicrosoftDynamicsCRMcontractdetail), MicrosoftDynamicsCRMresourcespec objectidResourcespec = default(MicrosoftDynamicsCRMresourcespec), MicrosoftDynamicsCRMserviceappointment objectidServiceappointment = default(MicrosoftDynamicsCRMserviceappointment), MicrosoftDynamicsCRMproduct objectidProduct = default(MicrosoftDynamicsCRMproduct), MicrosoftDynamicsCRMsalesorder objectidSalesorder = default(MicrosoftDynamicsCRMsalesorder), MicrosoftDynamicsCRMquoteclose objectidQuoteclose = default(MicrosoftDynamicsCRMquoteclose), MicrosoftDynamicsCRMcompetitor objectidCompetitor = default(MicrosoftDynamicsCRMcompetitor), MicrosoftDynamicsCRMorderclose objectidOrderclose = default(MicrosoftDynamicsCRMorderclose), MicrosoftDynamicsCRMquote objectidQuote = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMinvoice objectidInvoice = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMopportunityclose objectidOpportunityclose = default(MicrosoftDynamicsCRMopportunityclose), MicrosoftDynamicsCRMopportunity objectidOpportunity = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMbookableresource objectidBookableresource = default(MicrosoftDynamicsCRMbookableresource), MicrosoftDynamicsCRMbookableresourcebooking objectidBookableresourcebooking = default(MicrosoftDynamicsCRMbookableresourcebooking), MicrosoftDynamicsCRMbookableresourcebookingheader objectidBookableresourcebookingheader = default(MicrosoftDynamicsCRMbookableresourcebookingheader), MicrosoftDynamicsCRMbookableresourcecategoryassn objectidBookableresourcecategoryassn = default(MicrosoftDynamicsCRMbookableresourcecategoryassn), MicrosoftDynamicsCRMbookableresourcecharacteristic objectidBookableresourcecharacteristic = default(MicrosoftDynamicsCRMbookableresourcecharacteristic), MicrosoftDynamicsCRMbookableresourcegroup objectidBookableresourcegroup = default(MicrosoftDynamicsCRMbookableresourcegroup), MicrosoftDynamicsCRMlead objectidLead = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMmsdynAimodel objectidMsdynAimodel = default(MicrosoftDynamicsCRMmsdynAimodel), MicrosoftDynamicsCRMmsdynAifptrainingdocument objectidMsdynAifptrainingdocument = default(MicrosoftDynamicsCRMmsdynAifptrainingdocument), MicrosoftDynamicsCRMmsdynAiodimage objectidMsdynAiodimage = default(MicrosoftDynamicsCRMmsdynAiodimage), MicrosoftDynamicsCRMmsdynPlaybookinstance objectidMsdynPlaybookinstance = default(MicrosoftDynamicsCRMmsdynPlaybookinstance), MicrosoftDynamicsCRMmsdynPlaybooktemplate objectidMsdynPlaybooktemplate = default(MicrosoftDynamicsCRMmsdynPlaybooktemplate), MicrosoftDynamicsCRMptmMscrmaddonsKey objectidPtmMscrmaddonsKey = default(MicrosoftDynamicsCRMptmMscrmaddonsKey), MicrosoftDynamicsCRMptmMscrmaddonsScheduler objectidPtmMscrmaddonsScheduler = default(MicrosoftDynamicsCRMptmMscrmaddonsScheduler), MicrosoftDynamicsCRMptmMscrmaddonsSettings objectidPtmMscrmaddonsSettings = default(MicrosoftDynamicsCRMptmMscrmaddonsSettings), MicrosoftDynamicsCRMptmMscrmaddonstemp objectidPtmMscrmaddonstemp = default(MicrosoftDynamicsCRMptmMscrmaddonstemp), MicrosoftDynamicsCRMptmMscrmaddonsDcptemplates objectidPtmMscrmaddonsDcptemplates = default(MicrosoftDynamicsCRMptmMscrmaddonsDcptemplates), MicrosoftDynamicsCRMptmAutomergeworkingitems objectidPtmAutomergeworkingitems = default(MicrosoftDynamicsCRMptmAutomergeworkingitems))
         {
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Importsequencenumber = importsequencenumber;
             this._modifiedbyValue = _modifiedbyValue;
             this._owningbusinessunitValue = _owningbusinessunitValue;
             Notetext = notetext;
-            Overriddencreatedon = overriddencreatedon;
             this._objectidValue = _objectidValue;
+            Objecttypecode = objecttypecode;
             Createdon = createdon;
-            Stepid = stepid;
             Filesize = filesize;
             Annotationid = annotationid;
             Mimetype = mimetype;
-            Objecttypecode = objecttypecode;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            this._createdbyValue = _createdbyValue;
             Prefix = prefix;
             Modifiedon = modifiedon;
             this._owneridValue = _owneridValue;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Langid = langid;
             Documentbody = documentbody;
             DocumentbodyBinary = documentbodyBinary;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            Subject = subject;
             Isdocument = isdocument;
+            this._owningteamValue = _owningteamValue;
             Versionnumber = versionnumber;
             this._owninguserValue = _owninguserValue;
-            this._owningteamValue = _owningteamValue;
-            Importsequencenumber = importsequencenumber;
+            Stepid = stepid;
             Filename = filename;
-            this._createdbyValue = _createdbyValue;
+            Overriddencreatedon = overriddencreatedon;
+            Subject = subject;
             ObjectidKnowledgearticle = objectidKnowledgearticle;
             ObjectidKnowledgebaserecord = objectidKnowledgebaserecord;
             ObjectidAccount = objectidAccount;
@@ -164,8 +164,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -184,23 +184,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_objectid_value")]
         public string _objectidValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
+        [JsonProperty(PropertyName = "objecttypecode")]
+        public string Objecttypecode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "stepid")]
-        public string Stepid { get; set; }
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -219,8 +214,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "objecttypecode")]
-        public string Objecttypecode { get; set; }
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -236,6 +236,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
         public string _owneridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -255,18 +260,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "subject")]
-        public string Subject { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "isdocument")]
         public bool? Isdocument { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -280,13 +280,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
+        [JsonProperty(PropertyName = "stepid")]
+        public string Stepid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -295,8 +290,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "subject")]
+        public string Subject { get; set; }
 
         /// <summary>
         /// </summary>

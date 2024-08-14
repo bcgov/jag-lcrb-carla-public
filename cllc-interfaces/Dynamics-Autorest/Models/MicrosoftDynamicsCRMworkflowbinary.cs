@@ -31,7 +31,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMworkflowbinary class.
         /// </summary>
-        public MicrosoftDynamicsCRMworkflowbinary(int? timezoneruleversionnumber = default(int?), int? statuscode = default(int?), string versionnumber = default(string), string mimetype = default(string), string metadata = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _owningteamValue = default(string), string dataName = default(string), string _owninguserValue = default(string), string _processValue = default(string), int? importsequencenumber = default(int?), string workflowbinaryid = default(string), int? statecode = default(int?), int? utcconversiontimezonecode = default(int?), string type = default(string), string _owneridValue = default(string), string _modifiedonbehalfbyValue = default(string), string _owningbusinessunitValue = default(string), string referencename = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string _flowsessionidValue = default(string), byte[] data = default(byte[]), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string name = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> workflowbinarySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> workflowbinaryAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> workflowbinaryMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> workflowbinaryProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> workflowbinaryBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> workflowbinaryPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMfileattachment> workflowbinaryFileAttachments = default(IList<MicrosoftDynamicsCRMfileattachment>), MicrosoftDynamicsCRMflowsession flowSessionId = default(MicrosoftDynamicsCRMflowsession), MicrosoftDynamicsCRMworkflow process = default(MicrosoftDynamicsCRMworkflow))
+        public MicrosoftDynamicsCRMworkflowbinary(int? timezoneruleversionnumber = default(int?), int? statuscode = default(int?), string versionnumber = default(string), string mimetype = default(string), string metadata = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _owningteamValue = default(string), string dataName = default(string), string _owninguserValue = default(string), string _processValue = default(string), string type = default(string), string workflowbinaryid = default(string), int? statecode = default(int?), int? utcconversiontimezonecode = default(int?), string _createdonbehalfbyValue = default(string), string _owneridValue = default(string), string _modifiedonbehalfbyValue = default(string), string _owningbusinessunitValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), string _createdbyValue = default(string), string _flowsessionidValue = default(string), byte[] data = default(byte[]), string referencename = default(string), string _modifiedbyValue = default(string), string name = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> workflowbinarySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> workflowbinaryAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> workflowbinaryMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> workflowbinaryProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> workflowbinaryBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> workflowbinaryPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMfileattachment> workflowbinaryFileAttachments = default(IList<MicrosoftDynamicsCRMfileattachment>), MicrosoftDynamicsCRMflowsession flowSessionId = default(MicrosoftDynamicsCRMflowsession), MicrosoftDynamicsCRMworkflow process = default(MicrosoftDynamicsCRMworkflow))
         {
             Timezoneruleversionnumber = timezoneruleversionnumber;
             Statuscode = statuscode;
@@ -43,20 +43,20 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             DataName = dataName;
             this._owninguserValue = _owninguserValue;
             this._processValue = _processValue;
-            Importsequencenumber = importsequencenumber;
+            Type = type;
             Workflowbinaryid = workflowbinaryid;
             Statecode = statecode;
             Utcconversiontimezonecode = utcconversiontimezonecode;
-            Type = type;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             this._owneridValue = _owneridValue;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             this._owningbusinessunitValue = _owningbusinessunitValue;
-            Referencename = referencename;
             Createdon = createdon;
+            Importsequencenumber = importsequencenumber;
             this._createdbyValue = _createdbyValue;
             this._flowsessionidValue = _flowsessionidValue;
             Data = data;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Referencename = referencename;
             this._modifiedbyValue = _modifiedbyValue;
             Name = name;
             Modifiedon = modifiedon;
@@ -137,8 +137,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
+        [JsonProperty(PropertyName = "type")]
+        public string Type { get; set; }
 
         /// <summary>
         /// </summary>
@@ -157,8 +157,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "type")]
-        public string Type { get; set; }
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -177,13 +177,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "referencename")]
-        public string Referencename { get; set; }
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -203,8 +203,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "referencename")]
+        public string Referencename { get; set; }
 
         /// <summary>
         /// </summary>

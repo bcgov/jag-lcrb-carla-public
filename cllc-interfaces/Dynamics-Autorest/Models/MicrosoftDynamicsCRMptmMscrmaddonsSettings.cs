@@ -29,26 +29,26 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMptmMscrmaddonsSettings class.
         /// </summary>
-        public MicrosoftDynamicsCRMptmMscrmaddonsSettings(int? timezoneruleversionnumber = default(int?), string ptmProducttype = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string ptmMscrmaddonsSettingsid = default(string), int? statuscode = default(int?), string versionnumber = default(string), int? utcconversiontimezonecode = default(int?), int? ptmSubscriptionnumber = default(int?), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string _organizationidValue = default(string), int? statecode = default(int?), string _createdonbehalfbyValue = default(string), string ptmRecordurl = default(string), string ptmName = default(string), string _modifiedbyValue = default(string), int? importsequencenumber = default(int?), string _ptmSchedulerValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> ptmMscrmaddonsSettingsSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> ptmMscrmaddonsSettingsAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> ptmMscrmaddonsSettingsMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> ptmMscrmaddonsSettingsProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> ptmMscrmaddonsSettingsBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> ptmMscrmaddonsSettingsPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMannotation> ptmMscrmaddonsSettingsAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMptmMscrmaddonsScheduler ptmScheduler = default(MicrosoftDynamicsCRMptmMscrmaddonsScheduler), IList<MicrosoftDynamicsCRMptmMscrmaddonsKey> ptmPtmMscrmaddonsSettingsKeys = default(IList<MicrosoftDynamicsCRMptmMscrmaddonsKey>))
+        public MicrosoftDynamicsCRMptmMscrmaddonsSettings(string _createdonbehalfbyValue = default(string), string ptmProducttype = default(string), int? statecode = default(int?), int? ptmSubscriptionnumber = default(int?), int? statuscode = default(int?), string versionnumber = default(string), string _createdbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string ptmMscrmaddonsSettingsid = default(string), string _modifiedbyValue = default(string), string _organizationidValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), string ptmRecordurl = default(string), string ptmName = default(string), int? utcconversiontimezonecode = default(int?), string _modifiedonbehalfbyValue = default(string), int? importsequencenumber = default(int?), string _ptmSchedulerValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> ptmMscrmaddonsSettingsSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> ptmMscrmaddonsSettingsAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> ptmMscrmaddonsSettingsMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> ptmMscrmaddonsSettingsProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> ptmMscrmaddonsSettingsBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> ptmMscrmaddonsSettingsPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMannotation> ptmMscrmaddonsSettingsAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMptmMscrmaddonsScheduler ptmScheduler = default(MicrosoftDynamicsCRMptmMscrmaddonsScheduler), IList<MicrosoftDynamicsCRMptmMscrmaddonsKey> ptmPtmMscrmaddonsSettingsKeys = default(IList<MicrosoftDynamicsCRMptmMscrmaddonsKey>))
         {
-            Timezoneruleversionnumber = timezoneruleversionnumber;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             PtmProducttype = ptmProducttype;
-            Overriddencreatedon = overriddencreatedon;
-            Createdon = createdon;
-            PtmMscrmaddonsSettingsid = ptmMscrmaddonsSettingsid;
+            Statecode = statecode;
+            PtmSubscriptionnumber = ptmSubscriptionnumber;
             Statuscode = statuscode;
             Versionnumber = versionnumber;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
-            PtmSubscriptionnumber = ptmSubscriptionnumber;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            Modifiedon = modifiedon;
             this._createdbyValue = _createdbyValue;
+            Overriddencreatedon = overriddencreatedon;
+            PtmMscrmaddonsSettingsid = ptmMscrmaddonsSettingsid;
+            this._modifiedbyValue = _modifiedbyValue;
             this._organizationidValue = _organizationidValue;
-            Statecode = statecode;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Modifiedon = modifiedon;
+            Createdon = createdon;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
             PtmRecordurl = ptmRecordurl;
             PtmName = ptmName;
-            this._modifiedbyValue = _modifiedbyValue;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Importsequencenumber = importsequencenumber;
             this._ptmSchedulerValue = _ptmSchedulerValue;
             Createdby = createdby;
@@ -75,8 +75,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -85,18 +85,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ptm_mscrmaddons_settingsid")]
-        public string PtmMscrmaddonsSettingsid { get; set; }
+        [JsonProperty(PropertyName = "ptm_subscriptionnumber")]
+        public int? PtmSubscriptionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -110,28 +105,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ptm_subscriptionnumber")]
-        public int? PtmSubscriptionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ptm_mscrmaddons_settingsid")]
+        public string PtmMscrmaddonsSettingsid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -140,13 +130,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -160,8 +155,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
