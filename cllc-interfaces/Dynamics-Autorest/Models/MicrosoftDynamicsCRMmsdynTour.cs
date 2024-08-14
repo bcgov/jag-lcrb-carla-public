@@ -29,33 +29,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMmsdynTour
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMmsdynTour(int? importsequencenumber = default(int?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string msdynDisplayname = default(string), string componentidunique = default(string), string _createdbyValue = default(string), string iscustomizable = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), string _organizationidValue = default(string), int? timezoneruleversionnumber = default(int?), string _modifiedonbehalfbyValue = default(string), int? statuscode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string msdynTourid = default(string), int? statecode = default(int?), int? utcconversiontimezonecode = default(int?), string msdynPath = default(string), bool? ismanaged = default(bool?), string versionnumber = default(string), int? componentstate = default(int?), string msdynLabelsresource = default(string), string msdynTourdefinition = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string solutionid = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> msdynTourSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> msdynTourAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> msdynTourMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> msdynTourProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> msdynTourBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> msdynTourPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>))
+        public MicrosoftDynamicsCRMmsdynTour(int? importsequencenumber = default(int?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string msdynLabelsresource = default(string), string componentidunique = default(string), string _createdbyValue = default(string), string iscustomizable = default(string), string _organizationidValue = default(string), string _createdonbehalfbyValue = default(string), string msdynDisplayname = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), int? statecode = default(int?), int? timezoneruleversionnumber = default(int?), string msdynTourdefinition = default(string), string versionnumber = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string msdynTourid = default(string), int? utcconversiontimezonecode = default(int?), bool? ismanaged = default(bool?), int? componentstate = default(int?), string msdynPath = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string solutionid = default(string), int? statuscode = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> msdynTourSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> msdynTourAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> msdynTourMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> msdynTourProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> msdynTourBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> msdynTourPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>))
         {
             Importsequencenumber = importsequencenumber;
             Overwritetime = overwritetime;
-            MsdynDisplayname = msdynDisplayname;
+            MsdynLabelsresource = msdynLabelsresource;
             Componentidunique = componentidunique;
             this._createdbyValue = _createdbyValue;
             Iscustomizable = iscustomizable;
+            this._organizationidValue = _organizationidValue;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            MsdynDisplayname = msdynDisplayname;
             Modifiedon = modifiedon;
             this._modifiedbyValue = _modifiedbyValue;
-            this._organizationidValue = _organizationidValue;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            Statuscode = statuscode;
-            Createdon = createdon;
-            MsdynTourid = msdynTourid;
             Statecode = statecode;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
-            MsdynPath = msdynPath;
-            Ismanaged = ismanaged;
-            Versionnumber = versionnumber;
-            Componentstate = componentstate;
-            MsdynLabelsresource = msdynLabelsresource;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
             MsdynTourdefinition = msdynTourdefinition;
+            Versionnumber = versionnumber;
+            Createdon = createdon;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            MsdynTourid = msdynTourid;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            Ismanaged = ismanaged;
+            Componentstate = componentstate;
+            MsdynPath = msdynPath;
             Overriddencreatedon = overriddencreatedon;
             Solutionid = solutionid;
+            Statuscode = statuscode;
             Createdby = createdby;
             Createdonbehalfby = createdonbehalfby;
             Modifiedby = modifiedby;
@@ -87,8 +87,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_displayname")]
-        public string MsdynDisplayname { get; set; }
+        [JsonProperty(PropertyName = "msdyn_labelsresource")]
+        public string MsdynLabelsresource { get; set; }
 
         /// <summary>
         /// </summary>
@@ -107,8 +107,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "msdyn_displayname")]
+        public string MsdynDisplayname { get; set; }
 
         /// <summary>
         /// </summary>
@@ -122,8 +132,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -132,43 +142,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "msdyn_tourid")]
-        public string MsdynTourid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "msdyn_path")]
-        public string MsdynPath { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ismanaged")]
-        public bool? Ismanaged { get; set; }
+        [JsonProperty(PropertyName = "msdyn_tourdefinition")]
+        public string MsdynTourdefinition { get; set; }
 
         /// <summary>
         /// </summary>
@@ -177,18 +152,38 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "msdyn_tourid")]
+        public string MsdynTourid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ismanaged")]
+        public bool? Ismanaged { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "componentstate")]
         public int? Componentstate { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_labelsresource")]
-        public string MsdynLabelsresource { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "msdyn_tourdefinition")]
-        public string MsdynTourdefinition { get; set; }
+        [JsonProperty(PropertyName = "msdyn_path")]
+        public string MsdynPath { get; set; }
 
         /// <summary>
         /// </summary>
@@ -199,6 +194,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "solutionid")]
         public string Solutionid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
 
         /// <summary>
         /// </summary>

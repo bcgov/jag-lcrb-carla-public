@@ -29,29 +29,29 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMmsdynAibdataset class.
         /// </summary>
-        public MicrosoftDynamicsCRMmsdynAibdataset(System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _owningbusinessunitValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string _createdonbehalfbyValue = default(string), string msdynAibdatasetid = default(string), string _owninguserValue = default(string), string _createdbyValue = default(string), int? timezoneruleversionnumber = default(int?), int? statecode = default(int?), int? importsequencenumber = default(int?), int? statuscode = default(int?), string versionnumber = default(string), int? utcconversiontimezonecode = default(int?), string msdynName = default(string), string _owneridValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _owningteamValue = default(string), string _modifiedbyValue = default(string), string msdynMetadata = default(string), string _msdynAibdatasetscontaineridValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> msdynAibdatasetSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> msdynAibdatasetDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> msdynAibdatasetDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> msdynAibdatasetAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> msdynAibdatasetMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> msdynAibdatasetProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> msdynAibdatasetBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> msdynAibdatasetPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMmsdynAibdatasetscontainer msdynAIBDatasetsContainerId = default(MicrosoftDynamicsCRMmsdynAibdatasetscontainer), IList<MicrosoftDynamicsCRMmsdynAibdatasetfile> msdynAIBDatasetFileMsdynAIBDatas = default(IList<MicrosoftDynamicsCRMmsdynAibdatasetfile>), IList<MicrosoftDynamicsCRMmsdynAibdatasetrecord> msdynAIBDatasetRecordMsdynAIBDataset = default(IList<MicrosoftDynamicsCRMmsdynAibdatasetrecord>))
+        public MicrosoftDynamicsCRMmsdynAibdataset(System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _owningbusinessunitValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string msdynAibdatasetid = default(string), string _modifiedonbehalfbyValue = default(string), string _owninguserValue = default(string), string _createdbyValue = default(string), int? timezoneruleversionnumber = default(int?), int? statecode = default(int?), int? importsequencenumber = default(int?), int? statuscode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), string msdynName = default(string), string _owneridValue = default(string), string msdynMetadata = default(string), string _createdonbehalfbyValue = default(string), string versionnumber = default(string), string _modifiedbyValue = default(string), string _msdynAibdatasetscontaineridValue = default(string), string _owningteamValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> msdynAibdatasetSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> msdynAibdatasetDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> msdynAibdatasetDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> msdynAibdatasetAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> msdynAibdatasetMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> msdynAibdatasetProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> msdynAibdatasetBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> msdynAibdatasetPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMmsdynAibdatasetscontainer msdynAIBDatasetsContainerId = default(MicrosoftDynamicsCRMmsdynAibdatasetscontainer), IList<MicrosoftDynamicsCRMmsdynAibdatasetfile> msdynAIBDatasetFileMsdynAIBDatas = default(IList<MicrosoftDynamicsCRMmsdynAibdatasetfile>), IList<MicrosoftDynamicsCRMmsdynAibdatasetrecord> msdynAIBDatasetRecordMsdynAIBDataset = default(IList<MicrosoftDynamicsCRMmsdynAibdatasetrecord>))
         {
             Overriddencreatedon = overriddencreatedon;
             this._owningbusinessunitValue = _owningbusinessunitValue;
             Modifiedon = modifiedon;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             MsdynAibdatasetid = msdynAibdatasetid;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             this._owninguserValue = _owninguserValue;
             this._createdbyValue = _createdbyValue;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             Statecode = statecode;
             Importsequencenumber = importsequencenumber;
             Statuscode = statuscode;
-            Versionnumber = versionnumber;
+            Createdon = createdon;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             MsdynName = msdynName;
             this._owneridValue = _owneridValue;
-            Createdon = createdon;
-            this._owningteamValue = _owningteamValue;
-            this._modifiedbyValue = _modifiedbyValue;
             MsdynMetadata = msdynMetadata;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Versionnumber = versionnumber;
+            this._modifiedbyValue = _modifiedbyValue;
             this._msdynAibdatasetscontaineridValue = _msdynAibdatasetscontaineridValue;
+            this._owningteamValue = _owningteamValue;
             Createdby = createdby;
             Createdonbehalfby = createdonbehalfby;
             Modifiedby = modifiedby;
@@ -96,18 +96,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "msdyn_aibdatasetid")]
         public string MsdynAibdatasetid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -141,8 +136,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -161,13 +156,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
+        [JsonProperty(PropertyName = "msdyn_metadata")]
+        public string MsdynMetadata { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -176,13 +176,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_metadata")]
-        public string MsdynMetadata { get; set; }
+        [JsonProperty(PropertyName = "_msdyn_aibdatasetscontainerid_value")]
+        public string _msdynAibdatasetscontaineridValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_msdyn_aibdatasetscontainerid_value")]
-        public string _msdynAibdatasetscontaineridValue { get; set; }
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
 
         /// <summary>
         /// </summary>

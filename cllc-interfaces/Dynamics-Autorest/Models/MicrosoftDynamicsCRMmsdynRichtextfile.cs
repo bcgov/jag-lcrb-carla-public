@@ -31,35 +31,35 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMmsdynRichtextfile class.
         /// </summary>
-        public MicrosoftDynamicsCRMmsdynRichtextfile(string msdynImageblobUrl = default(string), string _modifiedbyValue = default(string), byte[] msdynFileblob = default(byte[]), byte[] msdynImageblob = default(byte[]), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string msdynParententityFieldname = default(string), int? statuscode = default(int?), int? utcconversiontimezonecode = default(int?), long? msdynImageblobTimestamp = default(long?), int? statecode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string msdynName = default(string), string _owneridValue = default(string), int? timezoneruleversionnumber = default(int?), string _modifiedonbehalfbyValue = default(string), string msdynParententityname = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string versionnumber = default(string), int? importsequencenumber = default(int?), string _owningbusinessunitValue = default(string), string msdynImageblobid = default(string), string _createdonbehalfbyValue = default(string), string _owningteamValue = default(string), string msdynRichtextfileid = default(string), string msdynParentid = default(string), string msdynFileblobName = default(string), string _owninguserValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> msdynRichtextfileSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> msdynRichtextfileAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> msdynRichtextfileMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> msdynRichtextfileProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> msdynRichtextfileBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> msdynRichtextfilePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMfileattachment> msdynRichtextfileFileAttachments = default(IList<MicrosoftDynamicsCRMfileattachment>))
+        public MicrosoftDynamicsCRMmsdynRichtextfile(System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), string msdynParententityname = default(string), byte[] msdynFileblob = default(byte[]), byte[] msdynImageblob = default(byte[]), string _owningbusinessunitValue = default(string), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? statuscode = default(int?), int? utcconversiontimezonecode = default(int?), long? msdynImageblobTimestamp = default(long?), int? statecode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), string _createdbyValue = default(string), string _owneridValue = default(string), string msdynName = default(string), string _createdonbehalfbyValue = default(string), string msdynParententityFieldname = default(string), string _modifiedonbehalfbyValue = default(string), string msdynRichtextfileid = default(string), string msdynFileblobName = default(string), string versionnumber = default(string), string msdynImageblobUrl = default(string), string msdynImageblobid = default(string), string _owningteamValue = default(string), string msdynParentid = default(string), string _owninguserValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> msdynRichtextfileSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> msdynRichtextfileAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> msdynRichtextfileMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> msdynRichtextfileProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> msdynRichtextfileBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> msdynRichtextfilePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMfileattachment> msdynRichtextfileFileAttachments = default(IList<MicrosoftDynamicsCRMfileattachment>))
         {
-            MsdynImageblobUrl = msdynImageblobUrl;
+            Modifiedon = modifiedon;
             this._modifiedbyValue = _modifiedbyValue;
+            MsdynParententityname = msdynParententityname;
             MsdynFileblob = msdynFileblob;
             MsdynImageblob = msdynImageblob;
-            Modifiedon = modifiedon;
-            MsdynParententityFieldname = msdynParententityFieldname;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            Overriddencreatedon = overriddencreatedon;
             Statuscode = statuscode;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             MsdynImageblobTimestamp = msdynImageblobTimestamp;
             Statecode = statecode;
             Createdon = createdon;
-            this._createdbyValue = _createdbyValue;
-            MsdynName = msdynName;
-            this._owneridValue = _owneridValue;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            MsdynParententityname = msdynParententityname;
-            Overriddencreatedon = overriddencreatedon;
-            Versionnumber = versionnumber;
             Importsequencenumber = importsequencenumber;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
-            MsdynImageblobid = msdynImageblobid;
+            this._createdbyValue = _createdbyValue;
+            this._owneridValue = _owneridValue;
+            MsdynName = msdynName;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._owningteamValue = _owningteamValue;
+            MsdynParententityFieldname = msdynParententityFieldname;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             MsdynRichtextfileid = msdynRichtextfileid;
-            MsdynParentid = msdynParentid;
             MsdynFileblobName = msdynFileblobName;
+            Versionnumber = versionnumber;
+            MsdynImageblobUrl = msdynImageblobUrl;
+            MsdynImageblobid = msdynImageblobid;
+            this._owningteamValue = _owningteamValue;
+            MsdynParentid = msdynParentid;
             this._owninguserValue = _owninguserValue;
             Createdby = createdby;
             Createdonbehalfby = createdonbehalfby;
@@ -86,13 +86,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_imageblob_url")]
-        public string MsdynImageblobUrl { get; set; }
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "msdyn_parententityname")]
+        public string MsdynParententityname { get; set; }
 
         /// <summary>
         /// </summary>
@@ -108,13 +113,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_parententity_fieldname")]
-        public string MsdynParententityFieldname { get; set; }
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -143,13 +153,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_name")]
-        public string MsdynName { get; set; }
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -158,43 +168,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "msdyn_parententityname")]
-        public string MsdynParententityname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "msdyn_imageblobid")]
-        public string MsdynImageblobid { get; set; }
+        [JsonProperty(PropertyName = "msdyn_name")]
+        public string MsdynName { get; set; }
 
         /// <summary>
         /// </summary>
@@ -203,8 +178,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
+        [JsonProperty(PropertyName = "msdyn_parententity_fieldname")]
+        public string MsdynParententityFieldname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -213,13 +193,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_parentid")]
-        public string MsdynParentid { get; set; }
+        [JsonProperty(PropertyName = "msdyn_fileblob_name")]
+        public string MsdynFileblobName { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_fileblob_name")]
-        public string MsdynFileblobName { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "msdyn_imageblob_url")]
+        public string MsdynImageblobUrl { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "msdyn_imageblobid")]
+        public string MsdynImageblobid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "msdyn_parentid")]
+        public string MsdynParentid { get; set; }
 
         /// <summary>
         /// </summary>

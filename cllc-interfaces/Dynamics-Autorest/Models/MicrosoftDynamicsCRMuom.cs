@@ -27,23 +27,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// Initializes a new instance of the MicrosoftDynamicsCRMuom class.
         /// </summary>
-        public MicrosoftDynamicsCRMuom(bool? isschedulebaseuom = default(bool?), string organizationid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), decimal? quantity = default(decimal?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdbyexternalpartyValue = default(string), string _modifiedbyValue = default(string), string _uomscheduleidValue = default(string), string _createdonbehalfbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string versionnumber = default(string), int? utcconversiontimezonecode = default(int?), int? timezoneruleversionnumber = default(int?), string _baseuomValue = default(string), string name = default(string), int? importsequencenumber = default(int?), string uomid = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _modifiedbyexternalpartyValue = default(string), string _createdbyValue = default(string), IList<MicrosoftDynamicsCRMteam> uomTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> uomMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> uomPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMproductpricelevel> unitOfMeasurementProductPriceLevels = default(IList<MicrosoftDynamicsCRMproductpricelevel>), MicrosoftDynamicsCRMuomschedule uomscheduleid = default(MicrosoftDynamicsCRMuomschedule), IList<MicrosoftDynamicsCRMproduct> unitOfMeasurementProducts = default(IList<MicrosoftDynamicsCRMproduct>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMuom baseuom = default(MicrosoftDynamicsCRMuom), IList<MicrosoftDynamicsCRMuom> unitOfMeasurementBaseUnit = default(IList<MicrosoftDynamicsCRMuom>), IList<MicrosoftDynamicsCRMproductassociation> unitOfMeasurementProductassociation = default(IList<MicrosoftDynamicsCRMproductassociation>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> uoMBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMsyncerror> uoMSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> uoMAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMcontractdetail> unitOfMeasurementContractLineItems = default(IList<MicrosoftDynamicsCRMcontractdetail>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMinvoicedetail> unitOfMeasurementInvoiceDetails = default(IList<MicrosoftDynamicsCRMinvoicedetail>), IList<MicrosoftDynamicsCRMquotedetail> unitOfMeasurementQuoteDetails = default(IList<MicrosoftDynamicsCRMquotedetail>), IList<MicrosoftDynamicsCRMsalesorderdetail> unitOfMeasurementOrderDetails = default(IList<MicrosoftDynamicsCRMsalesorderdetail>), IList<MicrosoftDynamicsCRMopportunityproduct> unitOfMeasurementOpportunityProducts = default(IList<MicrosoftDynamicsCRMopportunityproduct>))
+        public MicrosoftDynamicsCRMuom(bool? isschedulebaseuom = default(bool?), string organizationid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), decimal? quantity = default(decimal?), string _createdbyexternalpartyValue = default(string), string _uomscheduleidValue = default(string), string _createdonbehalfbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string _baseuomValue = default(string), int? utcconversiontimezonecode = default(int?), int? timezoneruleversionnumber = default(int?), string versionnumber = default(string), string name = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), string uomid = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _modifiedbyexternalpartyValue = default(string), string _createdbyValue = default(string), IList<MicrosoftDynamicsCRMteam> uomTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> uomMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> uomPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMproductpricelevel> unitOfMeasurementProductPriceLevels = default(IList<MicrosoftDynamicsCRMproductpricelevel>), MicrosoftDynamicsCRMuomschedule uomscheduleid = default(MicrosoftDynamicsCRMuomschedule), IList<MicrosoftDynamicsCRMproduct> unitOfMeasurementProducts = default(IList<MicrosoftDynamicsCRMproduct>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMuom baseuom = default(MicrosoftDynamicsCRMuom), IList<MicrosoftDynamicsCRMuom> unitOfMeasurementBaseUnit = default(IList<MicrosoftDynamicsCRMuom>), IList<MicrosoftDynamicsCRMproductassociation> unitOfMeasurementProductassociation = default(IList<MicrosoftDynamicsCRMproductassociation>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> uoMBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMsyncerror> uoMSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> uoMAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMcontractdetail> unitOfMeasurementContractLineItems = default(IList<MicrosoftDynamicsCRMcontractdetail>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMinvoicedetail> unitOfMeasurementInvoiceDetails = default(IList<MicrosoftDynamicsCRMinvoicedetail>), IList<MicrosoftDynamicsCRMquotedetail> unitOfMeasurementQuoteDetails = default(IList<MicrosoftDynamicsCRMquotedetail>), IList<MicrosoftDynamicsCRMsalesorderdetail> unitOfMeasurementOrderDetails = default(IList<MicrosoftDynamicsCRMsalesorderdetail>), IList<MicrosoftDynamicsCRMopportunityproduct> unitOfMeasurementOpportunityProducts = default(IList<MicrosoftDynamicsCRMopportunityproduct>))
         {
             Isschedulebaseuom = isschedulebaseuom;
             Organizationid = organizationid;
             Createdon = createdon;
             Quantity = quantity;
-            Modifiedon = modifiedon;
             this._createdbyexternalpartyValue = _createdbyexternalpartyValue;
-            this._modifiedbyValue = _modifiedbyValue;
             this._uomscheduleidValue = _uomscheduleidValue;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            Versionnumber = versionnumber;
+            this._modifiedbyValue = _modifiedbyValue;
+            this._baseuomValue = _baseuomValue;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             Timezoneruleversionnumber = timezoneruleversionnumber;
-            this._baseuomValue = _baseuomValue;
+            Versionnumber = versionnumber;
             Name = name;
+            Modifiedon = modifiedon;
             Importsequencenumber = importsequencenumber;
             Uomid = uomid;
             Overriddencreatedon = overriddencreatedon;
@@ -100,18 +100,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_createdbyexternalparty_value")]
         public string _createdbyexternalpartyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -130,8 +120,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_baseuom_value")]
+        public string _baseuomValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -145,13 +140,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_baseuom_value")]
-        public string _baseuomValue { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>

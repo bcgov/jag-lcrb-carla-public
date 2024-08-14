@@ -27,21 +27,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMusersettings
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMusersettings(string numberseparator = default(string), bool? isemailconversationviewenabled = default(bool?), int? timezonedaylightbias = default(int?), string homepagelayout = default(string), string _modifiedonbehalfbyValue = default(string), string homepagearea = default(string), int? defaultsearchexperience = default(int?), int? outlooksyncinterval = default(int?), int? longdateformatcode = default(int?), int? calendartype = default(int?), int? timezonecode = default(int?), bool? usecrmformforcontact = default(bool?), int? timezonedaylighthour = default(int?), string versionnumber = default(string), bool? getstartedpanecontentenabled = default(bool?), string dateseparator = default(string), int? uilanguageid = default(int?), bool? usecrmformfortask = default(bool?), int? autocreatecontactonpromote = default(int?), string amdesignator = default(string), int? timezonestandarddayofweek = default(int?), int? timezonebias = default(int?), int? defaultcalendarview = default(int?), int? advancedfindstartupmode = default(int?), int? visualizationpanelayout = default(int?), string defaultcountrycode = default(string), int? negativeformatcode = default(int?), bool? isresourcebookingexchangesyncenabled = default(bool?), int? negativecurrencyformatcode = default(int?), int? timezonedaylightday = default(int?), int? autocaptureuserstatus = default(int?), string numbergroupformat = default(string), string _modifiedbyValue = default(string), string userprofile = default(string), bool? splitviewstate = default(bool?), string homepagesubarea = default(string), int? helplanguageid = default(int?), int? addressbooksyncinterval = default(int?), string selectedglobalfilterid = default(string), string _createdonbehalfbyValue = default(string), string personalizationsettings = default(string), string dateformatstring = default(string), int? trackingtokenid = default(int?), bool? issendasallowed = default(bool?), bool? isdefaultcountrycodecheckenabled = default(bool?), int? timezonedaylightdayofweek = default(int?), int? fullnameconventioncode = default(int?), System.DateTimeOffset? lastalertsviewedtime = default(System.DateTimeOffset?), bool? usecrmformforappointment = default(bool?), int? timezonedaylightsecond = default(int?), int? dateformatcode = default(int?), int? timezonestandardhour = default(int?), int? timezonestandardmonth = default(int?), int? timezonestandardsecond = default(int?), int? timezonestandardbias = default(int?), bool? isduplicatedetectionenabledwhengoingonline = default(bool?), string businessunitid = default(string), int? paginglimit = default(int?), int? reportscripterrors = default(int?), int? timezonestandardday = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? offlinesyncinterval = default(int?), string systemuserid = default(string), int? timezonestandardminute = default(int?), int? timezonedaylightminute = default(int?), string _createdbyValue = default(string), int? localeid = default(int?), string currencysymbol = default(string), bool? isguidedhelpenabled = default(bool?), int? currencyformatcode = default(int?), int? nexttrackingnumber = default(int?), bool? synccontactcompany = default(bool?), int? entityformmode = default(int?), int? datavalidationmodeforexporttoexcel = default(int?), string decimalsymbol = default(string), long? resourcebookingexchangesyncversion = default(long?), bool? showweeknumber = default(bool?), int? timezonestandardyear = default(int?), string timeformatstring = default(string), string pmdesignator = default(string), bool? ignoreunsolicitedemail = default(bool?), int? timezonedaylightmonth = default(int?), int? timeformatcode = default(int?), string timeseparator = default(string), string workdaystarttime = default(string), string _transactioncurrencyidValue = default(string), string defaultdashboardid = default(string), bool? isappsforcrmalertdismissed = default(bool?), string workdaystoptime = default(string), int? timezonedaylightyear = default(int?), int? incomingemailfilteringmethod = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), bool? isautodatacaptureenabled = default(bool?), bool? usecrmformforemail = default(bool?), bool? useimagestrips = default(bool?), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser systemuseridSystemuser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit businessunitidBusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMusersettings(int? timezonedaylightsecond = default(int?), string numberseparator = default(string), bool? isemailconversationviewenabled = default(bool?), int? timezonedaylightbias = default(int?), string homepagelayout = default(string), string _modifiedonbehalfbyValue = default(string), int? negativecurrencyformatcode = default(int?), int? defaultsearchexperience = default(int?), int? timezonestandardday = default(int?), int? longdateformatcode = default(int?), int? calendartype = default(int?), int? timezonecode = default(int?), bool? usecrmformforcontact = default(bool?), int? timezonedaylighthour = default(int?), int? addressbooksyncinterval = default(int?), string versionnumber = default(string), bool? getstartedpanecontentenabled = default(bool?), string dateseparator = default(string), int? uilanguageid = default(int?), bool? usecrmformfortask = default(bool?), int? autocreatecontactonpromote = default(int?), string amdesignator = default(string), int? timezonestandarddayofweek = default(int?), int? timezonebias = default(int?), int? defaultcalendarview = default(int?), int? advancedfindstartupmode = default(int?), int? visualizationpanelayout = default(int?), string defaultcountrycode = default(string), int? negativeformatcode = default(int?), bool? isresourcebookingexchangesyncenabled = default(bool?), int? localeid = default(int?), int? autocaptureuserstatus = default(int?), string numbergroupformat = default(string), string _modifiedbyValue = default(string), string userprofile = default(string), bool? splitviewstate = default(bool?), string homepagesubarea = default(string), int? helplanguageid = default(int?), string homepagearea = default(string), string selectedglobalfilterid = default(string), string _createdonbehalfbyValue = default(string), string personalizationsettings = default(string), string dateformatstring = default(string), int? trackingtokenid = default(int?), bool? issendasallowed = default(bool?), bool? isdefaultcountrycodecheckenabled = default(bool?), int? timezonedaylightdayofweek = default(int?), int? fullnameconventioncode = default(int?), System.DateTimeOffset? lastalertsviewedtime = default(System.DateTimeOffset?), bool? usecrmformforappointment = default(bool?), int? dateformatcode = default(int?), int? timezonestandardhour = default(int?), int? timezonestandardmonth = default(int?), int? timezonestandardsecond = default(int?), int? timezonestandardbias = default(int?), bool? isduplicatedetectionenabledwhengoingonline = default(bool?), string businessunitid = default(string), int? paginglimit = default(int?), int? reportscripterrors = default(int?), int? outlooksyncinterval = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? offlinesyncinterval = default(int?), string systemuserid = default(string), int? timezonestandardminute = default(int?), int? timezonedaylightminute = default(int?), string _createdbyValue = default(string), string currencysymbol = default(string), bool? isguidedhelpenabled = default(bool?), int? currencyformatcode = default(int?), int? timezonedaylightday = default(int?), int? nexttrackingnumber = default(int?), bool? synccontactcompany = default(bool?), int? entityformmode = default(int?), int? datavalidationmodeforexporttoexcel = default(int?), string decimalsymbol = default(string), long? resourcebookingexchangesyncversion = default(long?), bool? showweeknumber = default(bool?), int? timezonestandardyear = default(int?), string timeformatstring = default(string), string pmdesignator = default(string), bool? ignoreunsolicitedemail = default(bool?), int? timezonedaylightmonth = default(int?), int? timeformatcode = default(int?), string timeseparator = default(string), string workdaystarttime = default(string), string _transactioncurrencyidValue = default(string), string defaultdashboardid = default(string), bool? isappsforcrmalertdismissed = default(bool?), string workdaystoptime = default(string), int? timezonedaylightyear = default(int?), int? incomingemailfilteringmethod = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), bool? isautodatacaptureenabled = default(bool?), bool? usecrmformforemail = default(bool?), bool? useimagestrips = default(bool?), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser systemuseridSystemuser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit businessunitidBusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
         {
+            Timezonedaylightsecond = timezonedaylightsecond;
             Numberseparator = numberseparator;
             Isemailconversationviewenabled = isemailconversationviewenabled;
             Timezonedaylightbias = timezonedaylightbias;
             Homepagelayout = homepagelayout;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            Homepagearea = homepagearea;
+            Negativecurrencyformatcode = negativecurrencyformatcode;
             Defaultsearchexperience = defaultsearchexperience;
-            Outlooksyncinterval = outlooksyncinterval;
+            Timezonestandardday = timezonestandardday;
             Longdateformatcode = longdateformatcode;
             Calendartype = calendartype;
             Timezonecode = timezonecode;
             Usecrmformforcontact = usecrmformforcontact;
             Timezonedaylighthour = timezonedaylighthour;
+            Addressbooksyncinterval = addressbooksyncinterval;
             Versionnumber = versionnumber;
             Getstartedpanecontentenabled = getstartedpanecontentenabled;
             Dateseparator = dateseparator;
@@ -57,8 +59,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Defaultcountrycode = defaultcountrycode;
             Negativeformatcode = negativeformatcode;
             Isresourcebookingexchangesyncenabled = isresourcebookingexchangesyncenabled;
-            Negativecurrencyformatcode = negativecurrencyformatcode;
-            Timezonedaylightday = timezonedaylightday;
+            Localeid = localeid;
             Autocaptureuserstatus = autocaptureuserstatus;
             Numbergroupformat = numbergroupformat;
             this._modifiedbyValue = _modifiedbyValue;
@@ -66,7 +67,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Splitviewstate = splitviewstate;
             Homepagesubarea = homepagesubarea;
             Helplanguageid = helplanguageid;
-            Addressbooksyncinterval = addressbooksyncinterval;
+            Homepagearea = homepagearea;
             Selectedglobalfilterid = selectedglobalfilterid;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Personalizationsettings = personalizationsettings;
@@ -78,7 +79,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Fullnameconventioncode = fullnameconventioncode;
             Lastalertsviewedtime = lastalertsviewedtime;
             Usecrmformforappointment = usecrmformforappointment;
-            Timezonedaylightsecond = timezonedaylightsecond;
             Dateformatcode = dateformatcode;
             Timezonestandardhour = timezonestandardhour;
             Timezonestandardmonth = timezonestandardmonth;
@@ -88,17 +88,17 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Businessunitid = businessunitid;
             Paginglimit = paginglimit;
             Reportscripterrors = reportscripterrors;
-            Timezonestandardday = timezonestandardday;
+            Outlooksyncinterval = outlooksyncinterval;
             Createdon = createdon;
             Offlinesyncinterval = offlinesyncinterval;
             Systemuserid = systemuserid;
             Timezonestandardminute = timezonestandardminute;
             Timezonedaylightminute = timezonedaylightminute;
             this._createdbyValue = _createdbyValue;
-            Localeid = localeid;
             Currencysymbol = currencysymbol;
             Isguidedhelpenabled = isguidedhelpenabled;
             Currencyformatcode = currencyformatcode;
+            Timezonedaylightday = timezonedaylightday;
             Nexttrackingnumber = nexttrackingnumber;
             Synccontactcompany = synccontactcompany;
             Entityformmode = entityformmode;
@@ -141,6 +141,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "timezonedaylightsecond")]
+        public int? Timezonedaylightsecond { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "numberseparator")]
         public string Numberseparator { get; set; }
 
@@ -166,8 +171,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "homepagearea")]
-        public string Homepagearea { get; set; }
+        [JsonProperty(PropertyName = "negativecurrencyformatcode")]
+        public int? Negativecurrencyformatcode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -176,8 +181,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "outlooksyncinterval")]
-        public int? Outlooksyncinterval { get; set; }
+        [JsonProperty(PropertyName = "timezonestandardday")]
+        public int? Timezonestandardday { get; set; }
 
         /// <summary>
         /// </summary>
@@ -203,6 +208,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "timezonedaylighthour")]
         public int? Timezonedaylighthour { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "addressbooksyncinterval")]
+        public int? Addressbooksyncinterval { get; set; }
 
         /// <summary>
         /// </summary>
@@ -281,13 +291,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "negativecurrencyformatcode")]
-        public int? Negativecurrencyformatcode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "timezonedaylightday")]
-        public int? Timezonedaylightday { get; set; }
+        [JsonProperty(PropertyName = "localeid")]
+        public int? Localeid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -326,8 +331,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "addressbooksyncinterval")]
-        public int? Addressbooksyncinterval { get; set; }
+        [JsonProperty(PropertyName = "homepagearea")]
+        public string Homepagearea { get; set; }
 
         /// <summary>
         /// </summary>
@@ -386,11 +391,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "timezonedaylightsecond")]
-        public int? Timezonedaylightsecond { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "dateformatcode")]
         public int? Dateformatcode { get; set; }
 
@@ -436,8 +436,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "timezonestandardday")]
-        public int? Timezonestandardday { get; set; }
+        [JsonProperty(PropertyName = "outlooksyncinterval")]
+        public int? Outlooksyncinterval { get; set; }
 
         /// <summary>
         /// </summary>
@@ -471,11 +471,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "localeid")]
-        public int? Localeid { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "currencysymbol")]
         public string Currencysymbol { get; set; }
 
@@ -488,6 +483,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "currencyformatcode")]
         public int? Currencyformatcode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezonedaylightday")]
+        public int? Timezonedaylightday { get; set; }
 
         /// <summary>
         /// </summary>

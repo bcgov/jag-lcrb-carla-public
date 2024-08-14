@@ -31,38 +31,38 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMflowsession
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMflowsession(byte[] outputs = default(byte[]), string _owningbusinessunitValue = default(string), string processversion = default(string), string versionnumber = default(string), string _modifiedbyValue = default(string), string correlationid = default(string), string flowsessionid = default(string), string _createdonbehalfbyValue = default(string), string outputsName = default(string), string _modifiedonbehalfbyValue = default(string), string _owneridValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string context = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _owningteamValue = default(string), int? statecode = default(int?), int? timezoneruleversionnumber = default(int?), string errormessage = default(string), System.DateTimeOffset? completedon = default(System.DateTimeOffset?), byte[] additionalcontext = default(byte[]), int? statuscode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), string _owninguserValue = default(string), string _regardingobjectidValue = default(string), int? importsequencenumber = default(int?), string _createdbyValue = default(string), string gateway = default(string), System.DateTimeOffset? startedon = default(System.DateTimeOffset?), string additionalcontextName = default(string), string errorcode = default(string), string name = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> flowsessionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> flowsessionAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> flowsessionMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> flowsessionBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> flowsessionPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMfileattachment> flowsessionFileAttachments = default(IList<MicrosoftDynamicsCRMfileattachment>), IList<MicrosoftDynamicsCRMworkflowbinary> flowsessionWorkflowbinaryFlowSessionId = default(IList<MicrosoftDynamicsCRMworkflowbinary>), MicrosoftDynamicsCRMworkflow regardingobjectidProcess = default(MicrosoftDynamicsCRMworkflow))
+        public MicrosoftDynamicsCRMflowsession(string _owningbusinessunitValue = default(string), string processversion = default(string), string versionnumber = default(string), string _modifiedbyValue = default(string), string flowsessionid = default(string), string outputsName = default(string), string _createdonbehalfbyValue = default(string), string _modifiedonbehalfbyValue = default(string), byte[] outputs = default(byte[]), System.DateTimeOffset? startedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string context = default(string), string correlationid = default(string), string _owningteamValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _owneridValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), string errormessage = default(string), int? statecode = default(int?), byte[] additionalcontext = default(byte[]), int? statuscode = default(int?), string additionalcontextName = default(string), string gateway = default(string), int? utcconversiontimezonecode = default(int?), string _owninguserValue = default(string), string _regardingobjectidValue = default(string), int? importsequencenumber = default(int?), System.DateTimeOffset? completedon = default(System.DateTimeOffset?), string errorcode = default(string), string name = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> flowsessionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> flowsessionAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> flowsessionMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> flowsessionBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> flowsessionPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMfileattachment> flowsessionFileAttachments = default(IList<MicrosoftDynamicsCRMfileattachment>), IList<MicrosoftDynamicsCRMworkflowbinary> flowsessionWorkflowbinaryFlowSessionId = default(IList<MicrosoftDynamicsCRMworkflowbinary>), MicrosoftDynamicsCRMworkflow regardingobjectidProcess = default(MicrosoftDynamicsCRMworkflow))
         {
-            Outputs = outputs;
             this._owningbusinessunitValue = _owningbusinessunitValue;
             Processversion = processversion;
             Versionnumber = versionnumber;
             this._modifiedbyValue = _modifiedbyValue;
-            Correlationid = correlationid;
             Flowsessionid = flowsessionid;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             OutputsName = outputsName;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._owneridValue = _owneridValue;
-            Modifiedon = modifiedon;
-            Context = context;
+            Outputs = outputs;
+            Startedon = startedon;
             Createdon = createdon;
+            this._createdbyValue = _createdbyValue;
+            Context = context;
+            Correlationid = correlationid;
             this._owningteamValue = _owningteamValue;
-            Statecode = statecode;
+            Modifiedon = modifiedon;
+            this._owneridValue = _owneridValue;
+            Overriddencreatedon = overriddencreatedon;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             Errormessage = errormessage;
-            Completedon = completedon;
+            Statecode = statecode;
             Additionalcontext = additionalcontext;
             Statuscode = statuscode;
-            Overriddencreatedon = overriddencreatedon;
+            AdditionalcontextName = additionalcontextName;
+            Gateway = gateway;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             this._owninguserValue = _owninguserValue;
             this._regardingobjectidValue = _regardingobjectidValue;
             Importsequencenumber = importsequencenumber;
-            this._createdbyValue = _createdbyValue;
-            Gateway = gateway;
-            Startedon = startedon;
-            AdditionalcontextName = additionalcontextName;
+            Completedon = completedon;
             Errorcode = errorcode;
             Name = name;
             Createdby = createdby;
@@ -91,12 +91,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonConverter(typeof(Base64UrlJsonConverter))]
-        [JsonProperty(PropertyName = "outputs")]
-        public byte[] Outputs { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
         public string _owningbusinessunitValue { get; set; }
 
@@ -117,18 +111,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "correlationid")]
-        public string Correlationid { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "flowsessionid")]
         public string Flowsessionid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -137,23 +121,24 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
+        [JsonConverter(typeof(Base64UrlJsonConverter))]
+        [JsonProperty(PropertyName = "outputs")]
+        public byte[] Outputs { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "context")]
-        public string Context { get; set; }
+        [JsonProperty(PropertyName = "startedon")]
+        public System.DateTimeOffset? Startedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -162,13 +147,38 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "context")]
+        public string Context { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "correlationid")]
+        public string Correlationid { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
         public string _owningteamValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -182,8 +192,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "completedon")]
-        public System.DateTimeOffset? Completedon { get; set; }
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -198,8 +208,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+        [JsonProperty(PropertyName = "additionalcontext_name")]
+        public string AdditionalcontextName { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "gateway")]
+        public string Gateway { get; set; }
 
         /// <summary>
         /// </summary>
@@ -223,23 +238,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "gateway")]
-        public string Gateway { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "startedon")]
-        public System.DateTimeOffset? Startedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "additionalcontext_name")]
-        public string AdditionalcontextName { get; set; }
+        [JsonProperty(PropertyName = "completedon")]
+        public System.DateTimeOffset? Completedon { get; set; }
 
         /// <summary>
         /// </summary>

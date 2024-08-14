@@ -29,35 +29,35 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMmsdynFlowcardtype class.
         /// </summary>
-        public MicrosoftDynamicsCRMmsdynFlowcardtype(string _createdonbehalfbyValue = default(string), string _owningbusinessunitValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string msdynFlowcardtypeid = default(string), int? importsequencenumber = default(int?), bool? msdynIsdeleted = default(bool?), string msdynSampletitle = default(string), string msdynCardname = default(string), int? timezoneruleversionnumber = default(int?), int? utcconversiontimezonecode = default(int?), string msdynActionname = default(string), string msdynSamplebody = default(string), bool? msdynIscdsflow = default(bool?), string _owningteamValue = default(string), string versionnumber = default(string), string msdynDescription = default(string), int? statecode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? statuscode = default(int?), string _modifiedbyValue = default(string), string _owninguserValue = default(string), string _createdbyValue = default(string), string msdynActioncommand = default(string), string msdynFlowname = default(string), string _owneridValue = default(string), string msdynName = default(string), string _msdynCardtypeidValue = default(string), string msdynWorkflowid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> msdynFlowcardtypeSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> msdynFlowcardtypeDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> msdynFlowcardtypeDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> msdynFlowcardtypeAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> msdynFlowcardtypeMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> msdynFlowcardtypeProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> msdynFlowcardtypeBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> msdynFlowcardtypePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>))
+        public MicrosoftDynamicsCRMmsdynFlowcardtype(string _createdonbehalfbyValue = default(string), int? importsequencenumber = default(int?), string _owningbusinessunitValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), string msdynFlowcardtypeid = default(string), string _createdbyValue = default(string), string msdynSampletitle = default(string), bool? msdynIsdeleted = default(bool?), string versionnumber = default(string), int? timezoneruleversionnumber = default(int?), string msdynActionname = default(string), string msdynSamplebody = default(string), string _owningteamValue = default(string), string msdynCardname = default(string), string msdynDescription = default(string), int? statecode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? statuscode = default(int?), string _modifiedbyValue = default(string), string _owninguserValue = default(string), string msdynFlowname = default(string), string msdynActioncommand = default(string), bool? msdynIscdsflow = default(bool?), string msdynName = default(string), string _msdynCardtypeidValue = default(string), string _owneridValue = default(string), string msdynWorkflowid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> msdynFlowcardtypeSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> msdynFlowcardtypeDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> msdynFlowcardtypeDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> msdynFlowcardtypeAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> msdynFlowcardtypeMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> msdynFlowcardtypeProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> msdynFlowcardtypeBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> msdynFlowcardtypePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>))
         {
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Importsequencenumber = importsequencenumber;
             this._owningbusinessunitValue = _owningbusinessunitValue;
             Overriddencreatedon = overriddencreatedon;
-            MsdynFlowcardtypeid = msdynFlowcardtypeid;
-            Importsequencenumber = importsequencenumber;
-            MsdynIsdeleted = msdynIsdeleted;
-            MsdynSampletitle = msdynSampletitle;
-            MsdynCardname = msdynCardname;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
             Utcconversiontimezonecode = utcconversiontimezonecode;
+            MsdynFlowcardtypeid = msdynFlowcardtypeid;
+            this._createdbyValue = _createdbyValue;
+            MsdynSampletitle = msdynSampletitle;
+            MsdynIsdeleted = msdynIsdeleted;
+            Versionnumber = versionnumber;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
             MsdynActionname = msdynActionname;
             MsdynSamplebody = msdynSamplebody;
-            MsdynIscdsflow = msdynIscdsflow;
             this._owningteamValue = _owningteamValue;
-            Versionnumber = versionnumber;
+            MsdynCardname = msdynCardname;
             MsdynDescription = msdynDescription;
             Statecode = statecode;
             Createdon = createdon;
             Statuscode = statuscode;
             this._modifiedbyValue = _modifiedbyValue;
             this._owninguserValue = _owninguserValue;
-            this._createdbyValue = _createdbyValue;
-            MsdynActioncommand = msdynActioncommand;
             MsdynFlowname = msdynFlowname;
-            this._owneridValue = _owneridValue;
+            MsdynActioncommand = msdynActioncommand;
+            MsdynIscdsflow = msdynIscdsflow;
             MsdynName = msdynName;
             this._msdynCardtypeidValue = _msdynCardtypeidValue;
+            this._owneridValue = _owneridValue;
             MsdynWorkflowid = msdynWorkflowid;
             Modifiedon = modifiedon;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
@@ -92,6 +92,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
         public string _owningbusinessunitValue { get; set; }
 
@@ -102,18 +107,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "msdyn_flowcardtypeid")]
         public string MsdynFlowcardtypeid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "msdyn_isdeleted")]
-        public bool? MsdynIsdeleted { get; set; }
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -122,18 +127,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_cardname")]
-        public string MsdynCardname { get; set; }
+        [JsonProperty(PropertyName = "msdyn_isdeleted")]
+        public bool? MsdynIsdeleted { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "timezoneruleversionnumber")]
         public int? Timezoneruleversionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -147,18 +152,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_iscdsflow")]
-        public bool? MsdynIscdsflow { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
         public string _owningteamValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "msdyn_cardname")]
+        public string MsdynCardname { get; set; }
 
         /// <summary>
         /// </summary>
@@ -192,8 +192,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        [JsonProperty(PropertyName = "msdyn_flowname")]
+        public string MsdynFlowname { get; set; }
 
         /// <summary>
         /// </summary>
@@ -202,13 +202,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_flowname")]
-        public string MsdynFlowname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
+        [JsonProperty(PropertyName = "msdyn_iscdsflow")]
+        public bool? MsdynIscdsflow { get; set; }
 
         /// <summary>
         /// </summary>
@@ -219,6 +214,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_msdyn_cardtypeid_value")]
         public string _msdynCardtypeidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// </summary>

@@ -29,34 +29,34 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMactivitymonitor class.
         /// </summary>
-        public MicrosoftDynamicsCRMactivitymonitor(int? reason = default(int?), string _owningbusinessunitValue = default(string), string _owneridValue = default(string), bool? contactcreatedbyrule = default(bool?), string activitymonitorid = default(string), string _createdbyValue = default(string), string name = default(string), string _monitoredactivityitemidValue = default(string), string versionnumber = default(string), string _createdonbehalfbyValue = default(string), string _conditionidValue = default(string), string _owningteamValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? statecode = default(int?), int? utcconversiontimezonecode = default(int?), string advancedsettings = default(string), int? currentstate = default(int?), string _ruleidValue = default(string), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), int? statuscode = default(int?), string _modifiedbyValue = default(string), bool? entitlementcheck = default(bool?), string _owninguserValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> activitymonitorSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> activitymonitorDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> activitymonitorDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> activitymonitorAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> activitymonitorMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> activitymonitorProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> activitymonitorBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> activitymonitorPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMemail monitoredactivityitemidEmail = default(MicrosoftDynamicsCRMemail), MicrosoftDynamicsCRMtask monitoredactivityitemidTask = default(MicrosoftDynamicsCRMtask))
+        public MicrosoftDynamicsCRMactivitymonitor(int? reason = default(int?), string _owningbusinessunitValue = default(string), string _owneridValue = default(string), string activitymonitorid = default(string), string name = default(string), string _owningteamValue = default(string), string _monitoredactivityitemidValue = default(string), string _createdonbehalfbyValue = default(string), bool? entitlementcheck = default(bool?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string versionnumber = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? currentstate = default(int?), int? importsequencenumber = default(int?), int? statecode = default(int?), int? statuscode = default(int?), int? timezoneruleversionnumber = default(int?), int? utcconversiontimezonecode = default(int?), string advancedsettings = default(string), bool? contactcreatedbyrule = default(bool?), string _ruleidValue = default(string), string _conditionidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string _createdbyValue = default(string), string _owninguserValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> activitymonitorSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> activitymonitorDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> activitymonitorDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> activitymonitorAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> activitymonitorMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> activitymonitorProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> activitymonitorBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> activitymonitorPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMemail monitoredactivityitemidEmail = default(MicrosoftDynamicsCRMemail), MicrosoftDynamicsCRMtask monitoredactivityitemidTask = default(MicrosoftDynamicsCRMtask))
         {
             Reason = reason;
             this._owningbusinessunitValue = _owningbusinessunitValue;
             this._owneridValue = _owneridValue;
-            Contactcreatedbyrule = contactcreatedbyrule;
             Activitymonitorid = activitymonitorid;
-            this._createdbyValue = _createdbyValue;
             Name = name;
-            this._monitoredactivityitemidValue = _monitoredactivityitemidValue;
-            Versionnumber = versionnumber;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._conditionidValue = _conditionidValue;
             this._owningteamValue = _owningteamValue;
+            this._monitoredactivityitemidValue = _monitoredactivityitemidValue;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Entitlementcheck = entitlementcheck;
             Overriddencreatedon = overriddencreatedon;
-            Importsequencenumber = importsequencenumber;
+            Versionnumber = versionnumber;
             Modifiedon = modifiedon;
+            Currentstate = currentstate;
+            Importsequencenumber = importsequencenumber;
             Statecode = statecode;
+            Statuscode = statuscode;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             Advancedsettings = advancedsettings;
-            Currentstate = currentstate;
+            Contactcreatedbyrule = contactcreatedbyrule;
             this._ruleidValue = _ruleidValue;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
+            this._conditionidValue = _conditionidValue;
             Createdon = createdon;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            Statuscode = statuscode;
             this._modifiedbyValue = _modifiedbyValue;
-            Entitlementcheck = entitlementcheck;
+            this._createdbyValue = _createdbyValue;
             this._owninguserValue = _owninguserValue;
             Createdby = createdby;
             Createdonbehalfby = createdonbehalfby;
@@ -101,18 +101,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "contactcreatedbyrule")]
-        public bool? Contactcreatedbyrule { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "activitymonitorid")]
         public string Activitymonitorid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -121,13 +111,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_monitoredactivityitemid_value")]
-        public string _monitoredactivityitemidValue { get; set; }
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "_monitoredactivityitemid_value")]
+        public string _monitoredactivityitemidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -136,13 +126,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_conditionid_value")]
-        public string _conditionidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
+        [JsonProperty(PropertyName = "entitlementcheck")]
+        public bool? Entitlementcheck { get; set; }
 
         /// <summary>
         /// </summary>
@@ -151,8 +136,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -161,8 +146,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "currentstate")]
+        public int? Currentstate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "statecode")]
         public int? Statecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -176,8 +181,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "currentstate")]
-        public int? Currentstate { get; set; }
+        [JsonProperty(PropertyName = "contactcreatedbyrule")]
+        public bool? Contactcreatedbyrule { get; set; }
 
         /// <summary>
         /// </summary>
@@ -186,8 +191,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
+        [JsonProperty(PropertyName = "_conditionid_value")]
+        public string _conditionidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -201,18 +206,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "entitlementcheck")]
-        public bool? Entitlementcheck { get; set; }
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>

@@ -29,37 +29,37 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMmsdynTeamscollaboration class.
         /// </summary>
-        public MicrosoftDynamicsCRMmsdynTeamscollaboration(int? importsequencenumber = default(int?), int? statuscode = default(int?), string regardingobjectid = default(string), string regardingobjecttypename = default(string), string msdynChannelid = default(string), string _modifiedbyValue = default(string), string msdynTeamscollaborationid = default(string), string msdynContenturl = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string versionnumber = default(string), string _organizationidValue = default(string), int? timezoneruleversionnumber = default(int?), string msdynTeamsiteurl = default(string), string msdynChannelname = default(string), string msdynTeamname = default(string), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), string msdynTeamid = default(string), string msdynChanneltype = default(string), string _createdonbehalfbyValue = default(string), int? statecode = default(int?), string msdynTenantid = default(string), string msdynWeburl = default(string), string _createdbyValue = default(string), int? regardingobjecttypecode = default(int?), string msdynPipedentityid = default(string), string msdynAppid = default(string), string msdynGroupid = default(string), string msdynChannelfolderrelativeurl = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> msdynTeamscollaborationSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> msdynTeamscollaborationAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> msdynTeamscollaborationMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> msdynTeamscollaborationProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> msdynTeamscollaborationBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> msdynTeamscollaborationPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>))
+        public MicrosoftDynamicsCRMmsdynTeamscollaboration(string _createdbyValue = default(string), string msdynTenantid = default(string), string regardingobjecttypename = default(string), string msdynChannelid = default(string), string msdynTeamscollaborationid = default(string), string msdynContenturl = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string msdynTeamid = default(string), int? statuscode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string versionnumber = default(string), string msdynChanneltype = default(string), string regardingobjectid = default(string), string _organizationidValue = default(string), string msdynChannelname = default(string), string msdynTeamname = default(string), string _createdonbehalfbyValue = default(string), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), int? timezoneruleversionnumber = default(int?), string msdynTeamsiteurl = default(string), int? statecode = default(int?), string msdynAppid = default(string), string msdynWeburl = default(string), string _modifiedbyValue = default(string), int? regardingobjecttypecode = default(int?), int? importsequencenumber = default(int?), string msdynPipedentityid = default(string), string msdynGroupid = default(string), string msdynChannelfolderrelativeurl = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> msdynTeamscollaborationSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> msdynTeamscollaborationAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> msdynTeamscollaborationMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> msdynTeamscollaborationProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> msdynTeamscollaborationBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> msdynTeamscollaborationPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>))
         {
-            Importsequencenumber = importsequencenumber;
-            Statuscode = statuscode;
-            Regardingobjectid = regardingobjectid;
+            this._createdbyValue = _createdbyValue;
+            MsdynTenantid = msdynTenantid;
             Regardingobjecttypename = regardingobjecttypename;
             MsdynChannelid = msdynChannelid;
-            this._modifiedbyValue = _modifiedbyValue;
             MsdynTeamscollaborationid = msdynTeamscollaborationid;
             MsdynContenturl = msdynContenturl;
             Modifiedon = modifiedon;
+            MsdynTeamid = msdynTeamid;
+            Statuscode = statuscode;
             Overriddencreatedon = overriddencreatedon;
             Versionnumber = versionnumber;
+            MsdynChanneltype = msdynChanneltype;
+            Regardingobjectid = regardingobjectid;
             this._organizationidValue = _organizationidValue;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
-            MsdynTeamsiteurl = msdynTeamsiteurl;
             MsdynChannelname = msdynChannelname;
             MsdynTeamname = msdynTeamname;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Createdon = createdon;
             Utcconversiontimezonecode = utcconversiontimezonecode;
-            MsdynTeamid = msdynTeamid;
-            MsdynChanneltype = msdynChanneltype;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            MsdynTeamsiteurl = msdynTeamsiteurl;
             Statecode = statecode;
-            MsdynTenantid = msdynTenantid;
-            MsdynWeburl = msdynWeburl;
-            this._createdbyValue = _createdbyValue;
-            Regardingobjecttypecode = regardingobjecttypecode;
-            MsdynPipedentityid = msdynPipedentityid;
             MsdynAppid = msdynAppid;
+            MsdynWeburl = msdynWeburl;
+            this._modifiedbyValue = _modifiedbyValue;
+            Regardingobjecttypecode = regardingobjecttypecode;
+            Importsequencenumber = importsequencenumber;
+            MsdynPipedentityid = msdynPipedentityid;
             MsdynGroupid = msdynGroupid;
             MsdynChannelfolderrelativeurl = msdynChannelfolderrelativeurl;
             Createdby = createdby;
@@ -82,18 +82,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid")]
-        public string Regardingobjectid { get; set; }
+        [JsonProperty(PropertyName = "msdyn_tenantid")]
+        public string MsdynTenantid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -104,11 +99,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "msdyn_channelid")]
         public string MsdynChannelid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -127,6 +117,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "msdyn_teamid")]
+        public string MsdynTeamid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
@@ -137,18 +137,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "msdyn_channeltype")]
+        public string MsdynChanneltype { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid")]
+        public string Regardingobjectid { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
         public string _organizationidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "msdyn_teamsiteurl")]
-        public string MsdynTeamsiteurl { get; set; }
 
         /// <summary>
         /// </summary>
@@ -159,6 +159,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "msdyn_teamname")]
         public string MsdynTeamname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -177,18 +182,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_teamid")]
-        public string MsdynTeamid { get; set; }
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_channeltype")]
-        public string MsdynChanneltype { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "msdyn_teamsiteurl")]
+        public string MsdynTeamsiteurl { get; set; }
 
         /// <summary>
         /// </summary>
@@ -197,8 +197,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_tenantid")]
-        public string MsdynTenantid { get; set; }
+        [JsonProperty(PropertyName = "msdyn_appid")]
+        public string MsdynAppid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -207,8 +207,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -217,13 +217,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_pipedentityid")]
-        public string MsdynPipedentityid { get; set; }
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_appid")]
-        public string MsdynAppid { get; set; }
+        [JsonProperty(PropertyName = "msdyn_pipedentityid")]
+        public string MsdynPipedentityid { get; set; }
 
         /// <summary>
         /// </summary>

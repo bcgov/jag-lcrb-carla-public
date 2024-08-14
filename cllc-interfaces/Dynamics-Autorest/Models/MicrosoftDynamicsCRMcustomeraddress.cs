@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMcustomeraddress class.
         /// </summary>
-        public MicrosoftDynamicsCRMcustomeraddress(string _modifiedbyValue = default(string), int? addresstypecode = default(int?), string _owneridValue = default(string), string customeraddressid = default(string), string _createdonbehalfbyValue = default(string), string line2 = default(string), int? utcconversiontimezonecode = default(int?), int? addressnumber = default(int?), string telephone1 = default(string), string _transactioncurrencyidValue = default(string), string _owningbusinessunitValue = default(string), int? utcoffset = default(int?), string line3 = default(string), int? shippingmethodcode = default(int?), int? importsequencenumber = default(int?), string line1 = default(string), string versionnumber = default(string), string _parentidValue = default(string), string postalcode = default(string), int? freighttermscode = default(int?), decimal? exchangerate = default(decimal?), string country = default(string), string county = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), decimal? longitude = default(decimal?), string stateorprovince = default(string), string _createdbyValue = default(string), string primarycontactname = default(string), string city = default(string), string _owninguserValue = default(string), string fax = default(string), string _modifiedonbehalfbyValue = default(string), string objecttypecode = default(string), string telephone2 = default(string), string upszone = default(string), string composite = default(string), int? timezoneruleversionnumber = default(int?), string telephone3 = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string postofficebox = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), decimal? latitude = default(decimal?), string name = default(string), IList<MicrosoftDynamicsCRMbulkdeletefailure> customerAddressBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMprocesssession> customerAddressProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), MicrosoftDynamicsCRMaccount parentidAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMcontact parentidContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> customerAddressSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> customeraddressPrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMasyncoperation> customerAddressAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMcontract> customerAddressContractsAsServiceAddress = default(IList<MicrosoftDynamicsCRMcontract>), IList<MicrosoftDynamicsCRMcontractdetail> customerAddressContractLineItems = default(IList<MicrosoftDynamicsCRMcontractdetail>), IList<MicrosoftDynamicsCRMcontract> customerAddressContractsAsBillingAddress = default(IList<MicrosoftDynamicsCRMcontract>))
+        public MicrosoftDynamicsCRMcustomeraddress(string _modifiedbyValue = default(string), int? addresstypecode = default(int?), string _owneridValue = default(string), string customeraddressid = default(string), string _createdonbehalfbyValue = default(string), string line2 = default(string), int? utcconversiontimezonecode = default(int?), int? addressnumber = default(int?), string postofficebox = default(string), string telephone1 = default(string), string _transactioncurrencyidValue = default(string), string _owningbusinessunitValue = default(string), int? utcoffset = default(int?), string line3 = default(string), int? shippingmethodcode = default(int?), int? importsequencenumber = default(int?), string line1 = default(string), string versionnumber = default(string), string _parentidValue = default(string), string postalcode = default(string), int? freighttermscode = default(int?), decimal? exchangerate = default(decimal?), string country = default(string), string county = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), decimal? longitude = default(decimal?), string stateorprovince = default(string), string _createdbyValue = default(string), string primarycontactname = default(string), int? timezoneruleversionnumber = default(int?), string city = default(string), string _owninguserValue = default(string), string fax = default(string), string _modifiedonbehalfbyValue = default(string), string objecttypecode = default(string), string telephone2 = default(string), string upszone = default(string), string composite = default(string), string telephone3 = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), decimal? latitude = default(decimal?), string name = default(string), IList<MicrosoftDynamicsCRMbulkdeletefailure> customerAddressBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMprocesssession> customerAddressProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), MicrosoftDynamicsCRMaccount parentidAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMcontact parentidContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> customerAddressSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> customeraddressPrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMasyncoperation> customerAddressAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMcontract> customerAddressContractsAsServiceAddress = default(IList<MicrosoftDynamicsCRMcontract>), IList<MicrosoftDynamicsCRMcontractdetail> customerAddressContractLineItems = default(IList<MicrosoftDynamicsCRMcontractdetail>), IList<MicrosoftDynamicsCRMcontract> customerAddressContractsAsBillingAddress = default(IList<MicrosoftDynamicsCRMcontract>))
         {
             this._modifiedbyValue = _modifiedbyValue;
             Addresstypecode = addresstypecode;
@@ -39,6 +39,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Line2 = line2;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             Addressnumber = addressnumber;
+            Postofficebox = postofficebox;
             Telephone1 = telephone1;
             this._transactioncurrencyidValue = _transactioncurrencyidValue;
             this._owningbusinessunitValue = _owningbusinessunitValue;
@@ -59,6 +60,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Stateorprovince = stateorprovince;
             this._createdbyValue = _createdbyValue;
             Primarycontactname = primarycontactname;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
             City = city;
             this._owninguserValue = _owninguserValue;
             Fax = fax;
@@ -67,10 +69,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Telephone2 = telephone2;
             Upszone = upszone;
             Composite = composite;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
             Telephone3 = telephone3;
             Modifiedon = modifiedon;
-            Postofficebox = postofficebox;
             Overriddencreatedon = overriddencreatedon;
             Latitude = latitude;
             Name = name;
@@ -136,6 +136,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "addressnumber")]
         public int? Addressnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "postofficebox")]
+        public string Postofficebox { get; set; }
 
         /// <summary>
         /// </summary>
@@ -239,6 +244,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "city")]
         public string City { get; set; }
 
@@ -279,11 +289,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "telephone3")]
         public string Telephone3 { get; set; }
 
@@ -291,11 +296,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "postofficebox")]
-        public string Postofficebox { get; set; }
 
         /// <summary>
         /// </summary>

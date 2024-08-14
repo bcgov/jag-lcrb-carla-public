@@ -31,17 +31,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMorganization
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMorganization(int? maxverboseloggingsynccycles = default(int?), int? recurrenceexpansionjobbatchsize = default(int?), string privilegeusergroupid = default(string), string entityimageid = default(string), int? minaddressbooksyncinterval = default(int?), bool? showkbarticledeprecationnotification = default(bool?), bool? globalhelpurlenabled = default(bool?), string widgetproperties = default(string), int? maxappointmentdurationdays = default(int?), bool? iscontextualhelpenabled = default(bool?), bool? isquickcreateenabledforopportunityclose = default(bool?), int? recurrenceexpansionsynchcreatemax = default(int?), bool? generatealertsforinformation = default(bool?), bool? enablesmartmatching = default(bool?), string orderprefix = default(string), string currencysymbol = default(string), bool? allowwebexcelexport = default(bool?), string highcontrastthemedata = default(string), string caseprefix = default(string), int? pastexpansionwindow = default(int?), bool? usepositionhierarchy = default(bool?), int? trackingtokenidbase = default(int?), string defaultemailsettings = default(string), string hashfilterkeywords = default(string), bool? generatealertsforwarnings = default(bool?), int? maximumentitieswithactivesla = default(int?), string privreportinggroupid = default(string), string invoiceprefix = default(string), string campaignprefix = default(string), int? mailboxintermittentissueminrange = default(int?), bool? isassignedtaskssyncenabled = default(bool?), bool? issopintegrationenabled = default(bool?), bool? allowautounsubscribeacknowledgement = default(bool?), bool? ismsteamssettingchangedbyuser = default(bool?), bool? isgeospatialazuremapsintegrationenabled = default(bool?), bool? servestaticresourcesfromazurecdn = default(bool?), bool? isautodatacaptureenabled = default(bool?), int? currentparsedtablenumber = default(int?), bool? isemailserverprofilecontentfilteringenabled = default(bool?), bool? isluisenabledford365bot = default(bool?), string usergroupid = default(string), bool? useinbuiltrulefordefaultpricelistselection = default(bool?), bool? bounddashboarddefaultcardexpanded = default(bool?), bool? isconflictdetectionenabledformobileclient = default(bool?), string businesscardoptions = default(string), int? goalrollupfrequency = default(int?), string parsedtableprefix = default(string), bool? isreadauditenabled = default(bool?), bool? requireapprovalforuseremail = default(bool?), int? maxconditionsformobileofflinefilters = default(int?), int? minoutlooksyncinterval = default(int?), bool? requireapprovalforqueueemail = default(bool?), bool? isrichtextnotesenabled = default(bool?), bool? ismsteamscollaborationenabled = default(bool?), int? hashdeltasubjectcount = default(int?), int? recurrenceexpansionjobbatchinterval = default(int?), string fiscalperiodformat = default(string), string officegraphdelveurl = default(string), int? maxrecordsforlookupfilters = default(int?), int? sharepointdeploymenttype = default(int?), bool? isrelationshipinsightsenabled = default(bool?), int? emailsendpollingperiod = default(int?), string postmessagewhitelistdomains = default(string), int? localeid = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? longdateformatcode = default(int?), bool? isduplicatedetectionenabledforonlinecreateupdate = default(bool?), string _defaultemailserverprofileidValue = default(string), bool? isresourcebookingexchangesyncenabled = default(bool?), bool? displaynavigationtour = default(bool?), bool? isautosaveenabled = default(bool?), int? fiscalyearformatyear = default(int?), int? currencydisplayoption = default(int?), string tokenkey = default(string), int? pinpointlanguagecode = default(int?), bool? isactionsupportfeatureenabled = default(bool?), bool? enablelpauthoring = default(bool?), int? mobileofflineminlicensetrial = default(int?), int? auditretentionperiod = default(int?), bool? officeappsautodeploymentenabled = default(bool?), bool? autoapplydefaultoncasecreate = default(bool?), bool? isnotesanalysisenabled = default(bool?), bool? iscontactmailingaddresssyncenabled = default(bool?), bool? ismailboxforcedunlockingenabled = default(bool?), bool? isexternalfilestorageenabled = default(bool?), int? mobileofflinesyncinterval = default(int?), int? tagmaxaggressivecycles = default(int?), int? schedulingengine = default(int?), string _createdbyValue = default(string), string _modifiedbyValue = default(string), bool? rendersecureiframeforemail = default(bool?), bool? ispresenceenabled = default(bool?), bool? allowoutlookscheduledsyncs = default(bool?), int? maximumdynamicpropertiesallowed = default(int?), string numbergroupformat = default(string), string blockedattachments = default(string), bool? inactivitytimeoutenabled = default(bool?), bool? unresolveemailaddressifmultiplematch = default(bool?), int? calendartype = default(int?), int? defaultrecurrenceendrangetype = default(int?), bool? sessiontimeoutenabled = default(bool?), string bulkoperationprefix = default(string), bool? oobpricecalculationenabled = default(bool?), int? futureexpansionwindow = default(int?), bool? isexternalsearchindexenabled = default(bool?), int? maximumslakpiperentitywithactivesla = default(int?), int? yammerpostmethod = default(int?), string picture = default(string), bool? isdelveactionhubintegrationenabled = default(bool?), string azureschedulerjobcollectionname = default(string), bool? isofficegraphenabled = default(bool?), string orgdborgsettings = default(string), int? trackingtokeniddigits = default(int?), int? discountcalculationmethod = default(int?), bool? ismanualsalesforecastingenabled = default(bool?), int? mobileofflineminlicenseprod = default(int?), int? fiscalyeardisplaycode = default(int?), int? tracelogmaximumageindays = default(int?), int? goalrollupexpirytime = default(int?), bool? enforcereadonlyplugins = default(bool?), bool? ismsteamsusersyncenabled = default(bool?), bool? createproductswithoutparentinactivestate = default(bool?), byte[] entityimage = default(byte[]), bool? textanalyticsenabled = default(bool?), int? expirechangetrackingindays = default(int?), bool? usereadform = default(bool?), bool? ismobileclientondemandsyncenabled = default(bool?), string basecurrencysymbol = default(string), string fiscalyearperiodconnect = default(string), int? maxsupportedinternetexplorerversion = default(int?), int? fiscalperiodformatperiod = default(int?), string bingmapsapikey = default(string), bool? ismobileofflineenabled = default(bool?), bool? restrictstatusupdate = default(bool?), bool? isonedriveenabled = default(bool?), string externalpartycorrelationkeys = default(string), bool? getstartedpanecontentenabled = default(bool?), int? expiresubscriptionsindays = default(int?), bool? istextwrapenabled = default(bool?), bool? ispricelistmandatory = default(bool?), string timeseparator = default(string), int? nexttrackingnumber = default(int?), string v3calloutconfighash = default(string), int? plugintracelogsetting = default(int?), int? yearstartweekcode = default(int?), int? syncoptinselectionstatus = default(int?), int? syncbulkoperationmaxlimit = default(int?), bool? allowofflinescheduledsyncs = default(bool?), int? basecurrencyprecision = default(int?), string delegatedadminuserid = default(string), string socialinsightsinstance = default(string), bool? ishierarchicalsecuritymodelenabled = default(bool?), bool? iswriteinproductsallowed = default(bool?), int? currentimportsequencenumber = default(int?), bool? isuseraccessauditenabled = default(bool?), int? fiscalyearformatprefix = default(int?), bool? enablebingmapsintegration = default(bool?), int? maxuploadfilesize = default(int?), int? syncbulkoperationbatchsize = default(int?), int? timezoneruleversionnumber = default(int?), int? tagpollingperiod = default(int?), bool? suppresssla = default(bool?), int? maxslaitemspersla = default(int?), string reportinggroupname = default(string), string versionnumber = default(string), bool? isemailmonitoringallowed = default(bool?), int? utcconversiontimezonecode = default(int?), string schemanameprefix = default(string), bool? paipreviewscenarioenabled = default(bool?), bool? quickfindrecordlimitenabled = default(bool?), bool? isfiscalperiodmonthbased = default(bool?), int? incomingemailexchangeemailretrievalbatchsize = default(int?), bool? ismailboxinactivebackoffenabled = default(bool?), string globalhelpurl = default(string), string supportuserid = default(string), bool? isappmode = default(bool?), bool? iscustomcontrolsincanvasappsenabled = default(bool?), string contractprefix = default(string), bool? allowautounsubscribe = default(bool?), string quoteprefix = default(string), string pmdesignator = default(string), int? auditretentionperiodv2 = default(int?), bool? ispreviewforautocaptureenabled = default(bool?), int? minofflinesyncinterval = default(int?), string numberformat = default(string), string systemuserid = default(string), bool? orginsightsenabled = default(bool?), int? maxactionstepsinbpf = default(int?), bool? autoapplysla = default(bool?), bool? socialinsightstermsaccepted = default(bool?), bool? isdisabled = default(bool?), bool? isplaybookenabled = default(bool?), string sqlaccessgroupname = default(string), bool? autoapplydefaultoncaseupdate = default(bool?), int? negativecurrencyformatcode = default(int?), bool? cascadestatusupdate = default(bool?), string _createdonbehalfbyValue = default(string), bool? powerbifeatureenabled = default(bool?), System.DateTimeOffset? fiscalcalendarstart = default(System.DateTimeOffset?), int? fullnameconventioncode = default(int?), bool? allowaddressbooksyncs = default(bool?), bool? notifymailboxownerofemailserverlevelalerts = default(bool?), bool? usequickfindviewforgridsearch = default(bool?), string organizationid = default(string), int? mailboxpermanentissueminrange = default(int?), bool? allowentityonlyaudit = default(bool?), string kmsettings = default(string), bool? isfulltextsearchenabled = default(bool?), int? hashminaddresscount = default(int?), string clientfeatureset = default(string), int? weekstartdaycode = default(int?), string integrationuserid = default(string), string numberseparator = default(string), bool? enableunifiedinterfaceshellrefresh = default(bool?), bool? productrecommendationsenabled = default(bool?), int? recurrencedefaultnumberofoccurrences = default(int?), bool? grantaccesstonetworkservice = default(bool?), int? tokenexpiry = default(int?), int? organizationstate = default(int?), string externalbaseurl = default(string), string dateseparator = default(string), bool? issalesassistantenabled = default(bool?), string amdesignator = default(string), bool? enableimmersiveskypeintegration = default(bool?), string kbprefix = default(string), bool? isduplicatedetectionenabled = default(bool?), int? hashmaxcount = default(int?), bool? isdelegateaccessenabled = default(bool?), string featureset = default(string), int? sessiontimeoutreminderinmins = default(int?), int? reportscripterrors = default(int?), string _modifiedonbehalfbyValue = default(string), int? fiscalyearformatsuffix = default(int?), bool? yammeroauthaccesstokenexpired = default(bool?), bool? allowusersseeappdownloadmessage = default(bool?), string defaultcountrycode = default(string), bool? isactivityanalysisenabled = default(bool?), bool? iscontentsecuritypolicyenabled = default(bool?), bool? isduplicatedetectionenabledforimport = default(bool?), bool? ismodeldrivenappsinmsteamsenabled = default(bool?), int? negativeformatcode = default(int?), bool? allowclientmessagebarad = default(bool?), bool? taskbasedflowenabled = default(bool?), string contentsecuritypolicyconfiguration = default(string), int? languagecode = default(int?), bool? appdesignerexperienceenabled = default(bool?), string categoryprefix = default(string), bool? ispreviewenabledforactioncard = default(bool?), string microsoftflowenvironment = default(string), bool? ispaienabled = default(bool?), string entityimageUrl = default(string), int? sessiontimeoutinmins = default(int?), bool? cortanaproactiveexperienceenabled = default(bool?), bool? enablelivepersonacarduci = default(bool?), int? timeformatcode = default(int?), int? dayssincerecordlastmodifiedmaxvalue = default(int?), string _acknowledgementtemplateidValue = default(string), int? maxdepthforhierarchicalsecuritymodel = default(int?), bool? useskypeprotocol = default(bool?), bool? isfolderbasedtrackingenabled = default(bool?), bool? isdefaultcountrycodecheckenabled = default(bool?), bool? generatealertsforerrors = default(bool?), long? entityimageTimestamp = default(long?), string privreportinggroupname = default(string), bool? uselegacyrendering = default(bool?), int? maximumtrackingnumber = default(int?), bool? allowautoresponsecreation = default(bool?), bool? allowlegacyclientexperience = default(bool?), bool? ismsteamsenabled = default(bool?), bool? enablemicrosoftflowintegration = default(bool?), string yammernetworkpermalink = default(string), bool? allowlegacydialogsembedding = default(bool?), bool? enablepricingoncreate = default(bool?), string initialversion = default(string), int? maximumactivebusinessprocessflowsallowedperentity = default(int?), int? pricingdecimalprecision = default(int?), int? fiscalperiodtype = default(int?), int? inactivitytimeoutreminderinmins = default(int?), string disabledreason = default(string), string ispdfgenerationenabled = default(string), bool? isduplicatedetectionenabledforofflinesync = default(bool?), int? maxrecordsforexporttoexcel = default(int?), int? useraccessauditinginterval = default(int?), string kaprefix = default(string), bool? allowmarketingemailexecution = default(bool?), string aciwebendpointurl = default(string), string timeformatstring = default(string), bool? iscontextualemailenabled = default(bool?), int? dateformatcode = default(int?), string webresourcehash = default(string), bool? syncoptinselection = default(bool?), int? sortid = default(int?), string trackingprefix = default(string), bool? isallmoneydecimal = default(bool?), bool? isauditenabled = default(bool?), string fiscalyearformat = default(string), bool? ignoreinternalemail = default(bool?), string _basecurrencyidValue = default(string), int? rierrorstatus = default(int?), string defaultcrmcustomname = default(string), bool? emailcorrelationenabled = default(bool?), int? currencyformatcode = default(int?), bool? isbpfentitycustomizationfeatureenabled = default(bool?), string privacystatementurl = default(string), string businessclosurecalendarid = default(string), bool? showweeknumber = default(bool?), int? uniquespecifierlength = default(int?), bool? sendbulkemailinuci = default(bool?), bool? appointmentricheditorexperience = default(bool?), bool? isenabledforallroles = default(bool?), string _defaultmobileofflineprofileidValue = default(string), bool? isappointmentattachmentsyncenabled = default(bool?), bool? isnewaddproductexperienceenabled = default(bool?), int? maxverboseloggingmailbox = default(int?), string slapausestates = default(string), bool? enablelivepersoncardintegrationinoffice = default(bool?), string sampledataimportid = default(string), string name = default(string), int? emailconnectionchannel = default(int?), bool? ispreviewforemailmonitoringallowed = default(bool?), bool? allowunresolvedpartiesonemailsend = default(bool?), bool? isautodatacapturev2enabled = default(bool?), string externalpartyentitysettings = default(string), bool? globalappendurlparametersenabled = default(bool?), int? inactivitytimeoutinmins = default(int?), bool? sqmenabled = default(bool?), string parsedtablecolumnprefix = default(string), bool? socialinsightsenabled = default(bool?), string decimalsymbol = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string signupoutlookdownloadfwlink = default(string), bool? disablesocialcare = default(bool?), bool? resolvesimilarunresolvedemailaddress = default(bool?), int? maxproductsinbundle = default(int?), bool? sharetopreviousowneronassign = default(bool?), bool? isactioncardenabled = default(bool?), string reportinggroupid = default(string), string qualifyleadadditionaloptions = default(string), bool? isfolderautocreatedonsp = default(bool?), int? maxfolderbasedtrackingmappings = default(int?), string sqlaccessgroupid = default(string), int? currencydecimalprecision = default(int?), int? yammergroupid = default(int?), string dateformatstring = default(string), string defaultthemedata = default(string), bool? allowuserformmodepreference = default(bool?), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> lkPrincipalobjectattributeaccessOrganizationid = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMtheme> organizationTheme = default(IList<MicrosoftDynamicsCRMtheme>), IList<MicrosoftDynamicsCRMusermapping> organizationUserMapping = default(IList<MicrosoftDynamicsCRMusermapping>), IList<MicrosoftDynamicsCRMmetric> organizationMetric = default(IList<MicrosoftDynamicsCRMmetric>), IList<MicrosoftDynamicsCRMposition> organizationPosition = default(IList<MicrosoftDynamicsCRMposition>), IList<MicrosoftDynamicsCRMofficegraphdocument> organizationOfficegraphdocument = default(IList<MicrosoftDynamicsCRMofficegraphdocument>), IList<MicrosoftDynamicsCRMrecommendeddocument> organizationRecommendeddocument = default(IList<MicrosoftDynamicsCRMrecommendeddocument>), IList<MicrosoftDynamicsCRMknowledgebaserecord> organizationKnowledgeBaseRecord = default(IList<MicrosoftDynamicsCRMknowledgebaserecord>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsdkmessagefilter> organizationSdkmessagefilter = default(IList<MicrosoftDynamicsCRMsdkmessagefilter>), IList<MicrosoftDynamicsCRMwebresource> webresourceOrganization = default(IList<MicrosoftDynamicsCRMwebresource>), IList<MicrosoftDynamicsCRMpost> organizationPost = default(IList<MicrosoftDynamicsCRMpost>), IList<MicrosoftDynamicsCRMpostcomment> organizationPostComment = default(IList<MicrosoftDynamicsCRMpostcomment>), IList<MicrosoftDynamicsCRMpostlike> organizationPostlike = default(IList<MicrosoftDynamicsCRMpostlike>), IList<MicrosoftDynamicsCRMimportjob> organizationImportjob = default(IList<MicrosoftDynamicsCRMimportjob>), IList<MicrosoftDynamicsCRMqueue> organizationQueues = default(IList<MicrosoftDynamicsCRMqueue>), MicrosoftDynamicsCRMcalendar businessclosurecalendaridCalendar = default(MicrosoftDynamicsCRMcalendar), IList<MicrosoftDynamicsCRMpluginassembly> organizationPluginassembly = default(IList<MicrosoftDynamicsCRMpluginassembly>), IList<MicrosoftDynamicsCRMfieldsecurityprofile> lkFieldsecurityprofileOrganizationid = default(IList<MicrosoftDynamicsCRMfieldsecurityprofile>), IList<MicrosoftDynamicsCRMsimilarityrule> organizationSimilarityrule = default(IList<MicrosoftDynamicsCRMsimilarityrule>), IList<MicrosoftDynamicsCRMappconfiginstance> organizationAppconfiginstance = default(IList<MicrosoftDynamicsCRMappconfiginstance>), IList<MicrosoftDynamicsCRMsavedqueryvisualization> organizationSavedQueryVisualizations = default(IList<MicrosoftDynamicsCRMsavedqueryvisualization>), IList<MicrosoftDynamicsCRMsystemuser> organizationSystemUsers = default(IList<MicrosoftDynamicsCRMsystemuser>), IList<MicrosoftDynamicsCRMpublisher> organizationPublisher = default(IList<MicrosoftDynamicsCRMpublisher>), IList<MicrosoftDynamicsCRMplugintype> organizationPlugintype = default(IList<MicrosoftDynamicsCRMplugintype>), IList<MicrosoftDynamicsCRMsyncerror> organizationSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMdataperformance> lkDataperformanceOrganizationid = default(IList<MicrosoftDynamicsCRMdataperformance>), IList<MicrosoftDynamicsCRMserviceendpoint> organizationServiceendpoint = default(IList<MicrosoftDynamicsCRMserviceendpoint>), IList<MicrosoftDynamicsCRMdisplaystring> organizationCustomDisplaystrings = default(IList<MicrosoftDynamicsCRMdisplaystring>), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> organizationSdkmessageprocessingstep = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), IList<MicrosoftDynamicsCRMplugintypestatistic> organizationPlugintypestatistic = default(IList<MicrosoftDynamicsCRMplugintypestatistic>), MicrosoftDynamicsCRMtransactioncurrency basecurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMasyncoperation> organizationAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMemailserverprofile> organizationEmailserverprofile = default(IList<MicrosoftDynamicsCRMemailserverprofile>), IList<MicrosoftDynamicsCRMsavedquery> organizationSavedQueries = default(IList<MicrosoftDynamicsCRMsavedquery>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsitemap> organizationSitemap = default(IList<MicrosoftDynamicsCRMsitemap>), IList<MicrosoftDynamicsCRMteam> organizationTeams = default(IList<MicrosoftDynamicsCRMteam>), MicrosoftDynamicsCRMmobileofflineprofile defaultmobileofflineprofileid = default(MicrosoftDynamicsCRMmobileofflineprofile), IList<MicrosoftDynamicsCRMdocumenttemplate> lkDocumenttemplatebaseOrganization = default(IList<MicrosoftDynamicsCRMdocumenttemplate>), IList<MicrosoftDynamicsCRMqueueitem> organizationQueueitems = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMcomplexcontrol> organizationComplexcontrols = default(IList<MicrosoftDynamicsCRMcomplexcontrol>), IList<MicrosoftDynamicsCRMsolution> organizationSolution = default(IList<MicrosoftDynamicsCRMsolution>), IList<MicrosoftDynamicsCRMbusinessunit> organizationBusinessUnits = default(IList<MicrosoftDynamicsCRMbusinessunit>), IList<MicrosoftDynamicsCRMmobileofflineprofile> mobileOfflineProfileOrganization = default(IList<MicrosoftDynamicsCRMmobileofflineprofile>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsdkmessageprocessingstepimage> organizationSdkmessageprocessingstepimage = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstepimage>), IList<MicrosoftDynamicsCRMcustomcontrol> customcontrolOrganization = default(IList<MicrosoftDynamicsCRMcustomcontrol>), IList<MicrosoftDynamicsCRMsdkmessageprocessingstepsecureconfig> organizationSdkmessageprocessingstepsecureconfig = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstepsecureconfig>), IList<MicrosoftDynamicsCRMrole> organizationRoles = default(IList<MicrosoftDynamicsCRMrole>), IList<MicrosoftDynamicsCRMappconfigmaster> organizationAppconfigmaster = default(IList<MicrosoftDynamicsCRMappconfigmaster>), IList<MicrosoftDynamicsCRMmobileofflineprofileitemassociation> mobileOfflineProfileItemAssociationOrganization = default(IList<MicrosoftDynamicsCRMmobileofflineprofileitemassociation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> organizationMailboxTrackingFolder = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> organizationBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMtracelog> organizationTracelog = default(IList<MicrosoftDynamicsCRMtracelog>), IList<MicrosoftDynamicsCRMsystemform> organizationSystemforms = default(IList<MicrosoftDynamicsCRMsystemform>), IList<MicrosoftDynamicsCRMbusinessunitnewsarticle> organizationBusinessUnitNewsArticles = default(IList<MicrosoftDynamicsCRMbusinessunitnewsarticle>), IList<MicrosoftDynamicsCRMkbarticle> organizationKbArticles = default(IList<MicrosoftDynamicsCRMkbarticle>), IList<MicrosoftDynamicsCRMsdkmessage> organizationSdkmessage = default(IList<MicrosoftDynamicsCRMsdkmessage>), IList<MicrosoftDynamicsCRMmobileofflineprofileitem> mobileOfflineProfileItemOrganization = default(IList<MicrosoftDynamicsCRMmobileofflineprofileitem>), MicrosoftDynamicsCRMemailserverprofile defaultemailserverprofileid = default(MicrosoftDynamicsCRMemailserverprofile), IList<MicrosoftDynamicsCRMkbarticletemplate> organizationKbArticleTemplates = default(IList<MicrosoftDynamicsCRMkbarticletemplate>), IList<MicrosoftDynamicsCRMcustomcontrolresource> customcontrolresourceOrganization = default(IList<MicrosoftDynamicsCRMcustomcontrolresource>), IList<MicrosoftDynamicsCRMmailbox> organizationMailbox = default(IList<MicrosoftDynamicsCRMmailbox>), IList<MicrosoftDynamicsCRMcalendar> organizationCalendars = default(IList<MicrosoftDynamicsCRMcalendar>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMwebwizard> organizationWebwizard = default(IList<MicrosoftDynamicsCRMwebwizard>), IList<MicrosoftDynamicsCRMconnectionrole> organizationConnectionRoles = default(IList<MicrosoftDynamicsCRMconnectionrole>), IList<MicrosoftDynamicsCRMcustomcontroldefaultconfig> customcontroldefaultconfigOrganization = default(IList<MicrosoftDynamicsCRMcustomcontroldefaultconfig>), IList<MicrosoftDynamicsCRMtransactioncurrency> organizationTransactioncurrencies = default(IList<MicrosoftDynamicsCRMtransactioncurrency>), MicrosoftDynamicsCRMtemplate acknowledgementtemplateid = default(MicrosoftDynamicsCRMtemplate), IList<MicrosoftDynamicsCRMaciviewmapper> organizationAciviewmapper = default(IList<MicrosoftDynamicsCRMaciviewmapper>), IList<MicrosoftDynamicsCRMlanguagelocale> languagelocaleOrganization = default(IList<MicrosoftDynamicsCRMlanguagelocale>), IList<MicrosoftDynamicsCRMappconfig> organizationAppconfig = default(IList<MicrosoftDynamicsCRMappconfig>), IList<MicrosoftDynamicsCRMappmodule> organizationAppmodule = default(IList<MicrosoftDynamicsCRMappmodule>), IList<MicrosoftDynamicsCRMnavigationsetting> organizationNavigationsetting = default(IList<MicrosoftDynamicsCRMnavigationsetting>), IList<MicrosoftDynamicsCRMmbsPluginprofile> organizationMbsPluginprofile = default(IList<MicrosoftDynamicsCRMmbsPluginprofile>), IList<MicrosoftDynamicsCRMmsdynPostconfig> organizationMsdynPostconfig = default(IList<MicrosoftDynamicsCRMmsdynPostconfig>), IList<MicrosoftDynamicsCRMmsdynPostruleconfig> organizationMsdynPostruleconfig = default(IList<MicrosoftDynamicsCRMmsdynPostruleconfig>), IList<MicrosoftDynamicsCRMmsdynWallsavedquery> organizationMsdynWallsavedquery = default(IList<MicrosoftDynamicsCRMmsdynWallsavedquery>), IList<MicrosoftDynamicsCRMadoxioCustomautonumberdefinition> organizationAdoxioCustomautonumberdefinition = default(IList<MicrosoftDynamicsCRMadoxioCustomautonumberdefinition>), IList<MicrosoftDynamicsCRMadoxioCustomautonumberrequest> organizationAdoxioCustomautonumberrequest = default(IList<MicrosoftDynamicsCRMadoxioCustomautonumberrequest>), IList<MicrosoftDynamicsCRMadoxioLocalgovindigenousnation> organizationAdoxioLocalgovindigenousnation = default(IList<MicrosoftDynamicsCRMadoxioLocalgovindigenousnation>), IList<MicrosoftDynamicsCRMadoxioPolicejurisdiction> organizationAdoxioPolicejurisdiction = default(IList<MicrosoftDynamicsCRMadoxioPolicejurisdiction>), IList<MicrosoftDynamicsCRMadoxioEstablishmentwatchword> organizationAdoxioEstablishmentwatchword = default(IList<MicrosoftDynamicsCRMadoxioEstablishmentwatchword>), IList<MicrosoftDynamicsCRMadoxioApplicationbpfv3> organizationAdoxioApplicationbpfv3 = default(IList<MicrosoftDynamicsCRMadoxioApplicationbpfv3>), IList<MicrosoftDynamicsCRMadoxioApplicationlicenseechangesv10> organizationAdoxioApplicationlicenseechangesv10 = default(IList<MicrosoftDynamicsCRMadoxioApplicationlicenseechangesv10>), IList<MicrosoftDynamicsCRMadoxioApplicationrelocationv1> organizationAdoxioApplicationrelocationv1 = default(IList<MicrosoftDynamicsCRMadoxioApplicationrelocationv1>), IList<MicrosoftDynamicsCRMadoxioApplicationstructurechangev1> organizationAdoxioApplicationstructurechangev1 = default(IList<MicrosoftDynamicsCRMadoxioApplicationstructurechangev1>), IList<MicrosoftDynamicsCRMadoxioApplicationtransferownershipv1> organizationAdoxioApplicationtransferownershipv1 = default(IList<MicrosoftDynamicsCRMadoxioApplicationtransferownershipv1>), IList<MicrosoftDynamicsCRMadoxioApplicationliquorbpfv2> organizationAdoxioApplicationliquorbpfv2 = default(IList<MicrosoftDynamicsCRMadoxioApplicationliquorbpfv2>), IList<MicrosoftDynamicsCRMadoxioEnforcementactionbpf> organizationAdoxioEnforcementactionbpf = default(IList<MicrosoftDynamicsCRMadoxioEnforcementactionbpf>), IList<MicrosoftDynamicsCRMadoxioApplicationcrsbpfv4> organizationAdoxioApplicationcrsbpfv4 = default(IList<MicrosoftDynamicsCRMadoxioApplicationcrsbpfv4>), IList<MicrosoftDynamicsCRMadoxioLqrlicencetransferbpf> organizationAdoxioLqrlicencetransferbpf = default(IList<MicrosoftDynamicsCRMadoxioLqrlicencetransferbpf>), IList<MicrosoftDynamicsCRMadoxioApplicenseechangebpfv2> organizationAdoxioApplicenseechangebpfv2 = default(IList<MicrosoftDynamicsCRMadoxioApplicenseechangebpfv2>), IList<MicrosoftDynamicsCRMproductassociation> organizationProductAssociation = default(IList<MicrosoftDynamicsCRMproductassociation>), IList<MicrosoftDynamicsCRMproductsubstitute> organizationProductSubstitute = default(IList<MicrosoftDynamicsCRMproductsubstitute>), IList<MicrosoftDynamicsCRMexpiredprocess> organizationExpiredprocess = default(IList<MicrosoftDynamicsCRMexpiredprocess>), IList<MicrosoftDynamicsCRMdynamicpropertyassociation> dynamicPropertyAssociationOrganization = default(IList<MicrosoftDynamicsCRMdynamicpropertyassociation>), IList<MicrosoftDynamicsCRMtranslationprocess> organizationTranslationprocess = default(IList<MicrosoftDynamicsCRMtranslationprocess>), IList<MicrosoftDynamicsCRMdynamicpropertyoptionsetitem> dynamicPropertyOptionSetItemOrganization = default(IList<MicrosoftDynamicsCRMdynamicpropertyoptionsetitem>), IList<MicrosoftDynamicsCRMdynamicproperty> dynamicpropertyOrganization = default(IList<MicrosoftDynamicsCRMdynamicproperty>), IList<MicrosoftDynamicsCRMuomschedule> organizationUofSchedules = default(IList<MicrosoftDynamicsCRMuomschedule>), IList<MicrosoftDynamicsCRMpricelevel> organizationPriceLevels = default(IList<MicrosoftDynamicsCRMpricelevel>), IList<MicrosoftDynamicsCRMnewprocess> organizationNewprocess = default(IList<MicrosoftDynamicsCRMnewprocess>), IList<MicrosoftDynamicsCRMproduct> organizationProducts = default(IList<MicrosoftDynamicsCRMproduct>), IList<MicrosoftDynamicsCRMsite> organizationSites = default(IList<MicrosoftDynamicsCRMsite>), IList<MicrosoftDynamicsCRMphonetocaseprocess> organizationPhonetocaseprocess = default(IList<MicrosoftDynamicsCRMphonetocaseprocess>), IList<MicrosoftDynamicsCRMresourcegroup> organizationResourceGroups = default(IList<MicrosoftDynamicsCRMresourcegroup>), IList<MicrosoftDynamicsCRMresourcespec> organizationResourceSpecs = default(IList<MicrosoftDynamicsCRMresourcespec>), IList<MicrosoftDynamicsCRMservice> organizationServices = default(IList<MicrosoftDynamicsCRMservice>), IList<MicrosoftDynamicsCRMentitlementtemplatechannel> entitlementtemplatechannelOrganization = default(IList<MicrosoftDynamicsCRMentitlementtemplatechannel>), IList<MicrosoftDynamicsCRMcontracttemplate> organizationContractTemplates = default(IList<MicrosoftDynamicsCRMcontracttemplate>), IList<MicrosoftDynamicsCRMentitlementtemplate> entitlementtemplateOrganization = default(IList<MicrosoftDynamicsCRMentitlementtemplate>), IList<MicrosoftDynamicsCRMresource> organizationResources = default(IList<MicrosoftDynamicsCRMresource>), IList<MicrosoftDynamicsCRMequipment> organizationEquipment = default(IList<MicrosoftDynamicsCRMequipment>), IList<MicrosoftDynamicsCRMentitlementchannel> entitlementchannelOrganization = default(IList<MicrosoftDynamicsCRMentitlementchannel>), IList<MicrosoftDynamicsCRMconstraintbasedgroup> organizationConstraintBasedGroups = default(IList<MicrosoftDynamicsCRMconstraintbasedgroup>), IList<MicrosoftDynamicsCRMsubject> organizationSubjects = default(IList<MicrosoftDynamicsCRMsubject>), IList<MicrosoftDynamicsCRMterritory> organizationTerritories = default(IList<MicrosoftDynamicsCRMterritory>), IList<MicrosoftDynamicsCRMopportunitysalesprocess> organizationOpportunitysalesprocess = default(IList<MicrosoftDynamicsCRMopportunitysalesprocess>), IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess> organizationLeadtoopportunitysalesprocess = default(IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess>), IList<MicrosoftDynamicsCRMdiscounttype> organizationDiscountTypes = default(IList<MicrosoftDynamicsCRMdiscounttype>), IList<MicrosoftDynamicsCRMsalesliterature> organizationSalesLiterature = default(IList<MicrosoftDynamicsCRMsalesliterature>), IList<MicrosoftDynamicsCRMcompetitor> organizationCompetitors = default(IList<MicrosoftDynamicsCRMcompetitor>), IList<MicrosoftDynamicsCRMsolutioncomponentattributeconfiguration> organizationSolutioncomponentattributeconfiguration = default(IList<MicrosoftDynamicsCRMsolutioncomponentattributeconfiguration>), IList<MicrosoftDynamicsCRMsolutioncomponentconfiguration> organizationSolutioncomponentconfiguration = default(IList<MicrosoftDynamicsCRMsolutioncomponentconfiguration>), IList<MicrosoftDynamicsCRMsolutioncomponentrelationshipconfiguration> organizationSolutioncomponentrelationshipconfiguration = default(IList<MicrosoftDynamicsCRMsolutioncomponentrelationshipconfiguration>), IList<MicrosoftDynamicsCRMpackage> organizationPackage = default(IList<MicrosoftDynamicsCRMpackage>), IList<MicrosoftDynamicsCRMentityanalyticsconfig> organizationEntityanalyticsconfig = default(IList<MicrosoftDynamicsCRMentityanalyticsconfig>), IList<MicrosoftDynamicsCRMdatalakeworkspace> organizationDatalakeworkspace = default(IList<MicrosoftDynamicsCRMdatalakeworkspace>), IList<MicrosoftDynamicsCRMdatalakeworkspacepermission> organizationDatalakeworkspacepermission = default(IList<MicrosoftDynamicsCRMdatalakeworkspacepermission>), IList<MicrosoftDynamicsCRMmsdynHelppage> organizationMsdynHelppage = default(IList<MicrosoftDynamicsCRMmsdynHelppage>), IList<MicrosoftDynamicsCRMmsdynTour> organizationMsdynTour = default(IList<MicrosoftDynamicsCRMmsdynTour>), IList<MicrosoftDynamicsCRMmsdynFederatedarticleincident> organizationMsdynFederatedarticleincident = default(IList<MicrosoftDynamicsCRMmsdynFederatedarticleincident>), IList<MicrosoftDynamicsCRMcatalog> organizationCatalog = default(IList<MicrosoftDynamicsCRMcatalog>), IList<MicrosoftDynamicsCRMcatalogassignment> organizationCatalogassignment = default(IList<MicrosoftDynamicsCRMcatalogassignment>), IList<MicrosoftDynamicsCRMmarketingformdisplayattributes> organizationMarketingformdisplayattributes = default(IList<MicrosoftDynamicsCRMmarketingformdisplayattributes>), IList<MicrosoftDynamicsCRMmsdynDatabaseversion> organizationMsdynDatabaseversion = default(IList<MicrosoftDynamicsCRMmsdynDatabaseversion>), IList<MicrosoftDynamicsCRMmsdynUpgraderun> organizationMsdynUpgraderun = default(IList<MicrosoftDynamicsCRMmsdynUpgraderun>), IList<MicrosoftDynamicsCRMmsdynUpgradestep> organizationMsdynUpgradestep = default(IList<MicrosoftDynamicsCRMmsdynUpgradestep>), IList<MicrosoftDynamicsCRMmsdynUpgradeversion> organizationMsdynUpgradeversion = default(IList<MicrosoftDynamicsCRMmsdynUpgradeversion>), IList<MicrosoftDynamicsCRMmsdynSikeyvalueconfig> organizationMsdynSikeyvalueconfig = default(IList<MicrosoftDynamicsCRMmsdynSikeyvalueconfig>), IList<MicrosoftDynamicsCRMadoxioApplicationbpfDormancy> organizationAdoxioApplicationbpfDormancy = default(IList<MicrosoftDynamicsCRMadoxioApplicationbpfDormancy>), IList<MicrosoftDynamicsCRMptmMscrmaddonsKey> organizationPtmMscrmaddonsKey = default(IList<MicrosoftDynamicsCRMptmMscrmaddonsKey>), IList<MicrosoftDynamicsCRMptmMscrmaddonsSettings> organizationPtmMscrmaddonsSettings = default(IList<MicrosoftDynamicsCRMptmMscrmaddonsSettings>), IList<MicrosoftDynamicsCRMptmMscrmaddonscomDebug> organizationPtmMscrmaddonscomDebug = default(IList<MicrosoftDynamicsCRMptmMscrmaddonscomDebug>), IList<MicrosoftDynamicsCRMptmMscrmaddonscommetadata> organizationPtmMscrmaddonscommetadata = default(IList<MicrosoftDynamicsCRMptmMscrmaddonscommetadata>), IList<MicrosoftDynamicsCRMptmMscrmaddonstemp> organizationPtmMscrmaddonstemp = default(IList<MicrosoftDynamicsCRMptmMscrmaddonstemp>), IList<MicrosoftDynamicsCRMptmMscrmaddonscomamtrigger> organizationPtmMscrmaddonscomamtrigger = default(IList<MicrosoftDynamicsCRMptmMscrmaddonscomamtrigger>))
+        public MicrosoftDynamicsCRMorganization(bool? autoapplydefaultoncasecreate = default(bool?), int? maxverboseloggingsynccycles = default(int?), int? recurrenceexpansionjobbatchsize = default(int?), string privilegeusergroupid = default(string), int? expiresubscriptionsindays = default(int?), bool? globalhelpurlenabled = default(bool?), string widgetproperties = default(string), bool? taskbasedflowenabled = default(bool?), bool? iscontextualhelpenabled = default(bool?), bool? isquickcreateenabledforopportunityclose = default(bool?), int? recurrenceexpansionsynchcreatemax = default(int?), bool? generatealertsforinformation = default(bool?), bool? enablesmartmatching = default(bool?), string orderprefix = default(string), string currencysymbol = default(string), int? sessiontimeoutreminderinmins = default(int?), int? mailboxpermanentissueminrange = default(int?), bool? allowwebexcelexport = default(bool?), string highcontrastthemedata = default(string), string caseprefix = default(string), int? longdateformatcode = default(int?), bool? usepositionhierarchy = default(bool?), int? trackingtokenidbase = default(int?), bool? allowentityonlyaudit = default(bool?), bool? globalappendurlparametersenabled = default(bool?), bool? generatealertsforwarnings = default(bool?), int? maximumentitieswithactivesla = default(int?), string privreportinggroupid = default(string), string invoiceprefix = default(string), string quoteprefix = default(string), int? mailboxintermittentissueminrange = default(int?), bool? isassignedtaskssyncenabled = default(bool?), bool? issopintegrationenabled = default(bool?), bool? ismobileclientondemandsyncenabled = default(bool?), bool? enableimmersiveskypeintegration = default(bool?), bool? isgeospatialazuremapsintegrationenabled = default(bool?), bool? servestaticresourcesfromazurecdn = default(bool?), bool? isautodatacaptureenabled = default(bool?), int? currentparsedtablenumber = default(int?), bool? isemailserverprofilecontentfilteringenabled = default(bool?), bool? isluisenabledford365bot = default(bool?), string blockedattachments = default(string), bool? isconflictdetectionenabledformobileclient = default(bool?), string businesscardoptions = default(string), int? goalrollupfrequency = default(int?), string parsedtableprefix = default(string), bool? isreadauditenabled = default(bool?), bool? requireapprovalforuseremail = default(bool?), int? emailsendpollingperiod = default(int?), bool? useinbuiltrulefordefaultpricelistselection = default(bool?), bool? isrichtextnotesenabled = default(bool?), int? hashdeltasubjectcount = default(int?), int? recurrenceexpansionjobbatchinterval = default(int?), string fiscalperiodformat = default(string), string officegraphdelveurl = default(string), int? maxrecordsforlookupfilters = default(int?), int? sharepointdeploymenttype = default(int?), bool? isrelationshipinsightsenabled = default(bool?), bool? requireapprovalforqueueemail = default(bool?), int? tokenexpiry = default(int?), string postmessagewhitelistdomains = default(string), int? localeid = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), bool? isduplicatedetectionenabledforonlinecreateupdate = default(bool?), string contentsecuritypolicyconfiguration = default(string), bool? inactivitytimeoutenabled = default(bool?), bool? isresourcebookingexchangesyncenabled = default(bool?), bool? displaynavigationtour = default(bool?), bool? isautosaveenabled = default(bool?), string supportuserid = default(string), int? currencydisplayoption = default(int?), string tokenkey = default(string), int? pinpointlanguagecode = default(int?), bool? isappointmentattachmentsyncenabled = default(bool?), bool? isenabledforallroles = default(bool?), bool? enablelpauthoring = default(bool?), int? mobileofflineminlicensetrial = default(int?), int? calendartype = default(int?), bool? officeappsautodeploymentenabled = default(bool?), string hashfilterkeywords = default(string), bool? ismsteamsusersyncenabled = default(bool?), bool? ismailboxforcedunlockingenabled = default(bool?), bool? isexternalfilestorageenabled = default(bool?), int? mobileofflinesyncinterval = default(int?), int? tagmaxaggressivecycles = default(int?), int? utcconversiontimezonecode = default(int?), int? schedulingengine = default(int?), bool? grantaccesstonetworkservice = default(bool?), bool? isdelveactionhubintegrationenabled = default(bool?), bool? allowoutlookscheduledsyncs = default(bool?), int? maximumdynamicpropertiesallowed = default(int?), string entityimageid = default(string), int? trackingtokeniddigits = default(int?), int? defaultrecurrenceendrangetype = default(int?), string yammernetworkpermalink = default(string), string bulkoperationprefix = default(string), bool? oobpricecalculationenabled = default(bool?), int? futureexpansionwindow = default(int?), bool? ispresenceenabled = default(bool?), int? pastexpansionwindow = default(int?), int? maximumslakpiperentitywithactivesla = default(int?), bool? ismsteamssettingchangedbyuser = default(bool?), string picture = default(string), string azureschedulerjobcollectionname = default(string), string numbergroupformat = default(string), string orgdborgsettings = default(string), int? rierrorstatus = default(int?), bool? allowlegacydialogsembedding = default(bool?), int? mobileofflineminlicenseprod = default(int?), int? maxappointmentdurationdays = default(int?), int? minaddressbooksyncinterval = default(int?), int? tracelogmaximumageindays = default(int?), bool? isduplicatedetectionenabledforimport = default(bool?), bool? iscustomcontrolsincanvasappsenabled = default(bool?), bool? enforcereadonlyplugins = default(bool?), bool? createproductswithoutparentinactivestate = default(bool?), bool? enableunifiedinterfaceshellrefresh = default(bool?), bool? textanalyticsenabled = default(bool?), int? expirechangetrackingindays = default(int?), bool? usereadform = default(bool?), string basecurrencysymbol = default(string), string fiscalyearperiodconnect = default(string), int? maxsupportedinternetexplorerversion = default(int?), int? fiscalperiodformatperiod = default(int?), string bingmapsapikey = default(string), bool? isactionsupportfeatureenabled = default(bool?), bool? restrictstatusupdate = default(bool?), string defaultthemedata = default(string), bool? isonedriveenabled = default(bool?), int? minoutlooksyncinterval = default(int?), bool? getstartedpanecontentenabled = default(bool?), int? auditretentionperiodv2 = default(int?), int? negativeformatcode = default(int?), bool? ispricelistmandatory = default(bool?), string timeseparator = default(string), int? maxproductsinbundle = default(int?), string slapausestates = default(string), string v3calloutconfighash = default(string), int? plugintracelogsetting = default(int?), int? syncoptinselectionstatus = default(int?), int? syncbulkoperationmaxlimit = default(int?), bool? allowofflinescheduledsyncs = default(bool?), int? basecurrencyprecision = default(int?), string socialinsightsinstance = default(string), bool? ishierarchicalsecuritymodelenabled = default(bool?), string privacystatementurl = default(string), bool? iswriteinproductsallowed = default(bool?), int? currentimportsequencenumber = default(int?), bool? isuseraccessauditenabled = default(bool?), int? fiscalyearformatprefix = default(int?), bool? enablebingmapsintegration = default(bool?), int? maxuploadfilesize = default(int?), int? syncbulkoperationbatchsize = default(int?), int? tagpollingperiod = default(int?), bool? suppresssla = default(bool?), int? maxslaitemspersla = default(int?), string clientfeatureset = default(string), string versionnumber = default(string), int? maxverboseloggingmailbox = default(int?), bool? ismanualsalesforecastingenabled = default(bool?), bool? isduplicatedetectionenabled = default(bool?), string schemanameprefix = default(string), bool? paipreviewscenarioenabled = default(bool?), bool? autoapplysla = default(bool?), bool? ismsteamscollaborationenabled = default(bool?), int? incomingemailexchangeemailretrievalbatchsize = default(int?), bool? ismailboxinactivebackoffenabled = default(bool?), bool? cortanaproactiveexperienceenabled = default(bool?), int? goalrollupexpirytime = default(int?), bool? showkbarticledeprecationnotification = default(bool?), bool? isappmode = default(bool?), string _modifiedbyValue = default(string), string contractprefix = default(string), bool? allowautounsubscribe = default(bool?), bool? ignoreinternalemail = default(bool?), bool? ispreviewforautocaptureenabled = default(bool?), int? minofflinesyncinterval = default(int?), string numberformat = default(string), string systemuserid = default(string), bool? orginsightsenabled = default(bool?), int? maxactionstepsinbpf = default(int?), bool? socialinsightstermsaccepted = default(bool?), string defaultemailsettings = default(string), bool? generatealertsforerrors = default(bool?), bool? isplaybookenabled = default(bool?), string sqlaccessgroupname = default(string), bool? autoapplydefaultoncaseupdate = default(bool?), int? negativecurrencyformatcode = default(int?), bool? cascadestatusupdate = default(bool?), string _createdonbehalfbyValue = default(string), bool? powerbifeatureenabled = default(bool?), int? fullnameconventioncode = default(int?), bool? allowaddressbooksyncs = default(bool?), bool? notifymailboxownerofemailserverlevelalerts = default(bool?), bool? usequickfindviewforgridsearch = default(bool?), int? discountcalculationmethod = default(int?), string organizationid = default(string), int? maximumactivebusinessprocessflowsallowedperentity = default(int?), string kmsettings = default(string), bool? isfulltextsearchenabled = default(bool?), string externalpartycorrelationkeys = default(string), int? hashminaddresscount = default(int?), string dateseparator = default(string), int? weekstartdaycode = default(int?), bool? allowuserformmodepreference = default(bool?), string numberseparator = default(string), string campaignprefix = default(string), bool? productrecommendationsenabled = default(bool?), int? recurrencedefaultnumberofoccurrences = default(int?), bool? quickfindrecordlimitenabled = default(bool?), int? organizationstate = default(int?), bool? rendersecureiframeforemail = default(bool?), int? inactivitytimeoutinmins = default(int?), bool? sessiontimeoutenabled = default(bool?), bool? iscontactmailingaddresssyncenabled = default(bool?), string externalbaseurl = default(string), bool? isemailmonitoringallowed = default(bool?), bool? issalesassistantenabled = default(bool?), string _defaultmobileofflineprofileidValue = default(string), string amdesignator = default(string), int? pricingdecimalprecision = default(int?), string kbprefix = default(string), bool? bounddashboarddefaultcardexpanded = default(bool?), int? hashmaxcount = default(int?), string reportinggroupname = default(string), bool? isdelegateaccessenabled = default(bool?), string aciwebendpointurl = default(string), string featureset = default(string), int? reportscripterrors = default(int?), string _modifiedonbehalfbyValue = default(string), int? fiscalyeardisplaycode = default(int?), bool? yammeroauthaccesstokenexpired = default(bool?), string externalpartyentitysettings = default(string), string defaultcountrycode = default(string), bool? isactivityanalysisenabled = default(bool?), bool? iscontentsecuritypolicyenabled = default(bool?), string _basecurrencyidValue = default(string), bool? ismodeldrivenappsinmsteamsenabled = default(bool?), bool? istextwrapenabled = default(bool?), bool? isnotesanalysisenabled = default(bool?), bool? allowclientmessagebarad = default(bool?), string usergroupid = default(string), bool? isdisabled = default(bool?), bool? isduplicatedetectionenabledforofflinesync = default(bool?), int? languagecode = default(int?), bool? appdesignerexperienceenabled = default(bool?), string categoryprefix = default(string), bool? ispreviewenabledforactioncard = default(bool?), bool? ismobileofflineenabled = default(bool?), string microsoftflowenvironment = default(string), bool? isexternalsearchindexenabled = default(bool?), bool? enablelivepersonacarduci = default(bool?), int? timeformatcode = default(int?), int? dayssincerecordlastmodifiedmaxvalue = default(int?), string _acknowledgementtemplateidValue = default(string), int? maxdepthforhierarchicalsecuritymodel = default(int?), bool? useskypeprotocol = default(bool?), bool? isfolderbasedtrackingenabled = default(bool?), bool? isdefaultcountrycodecheckenabled = default(bool?), int? auditretentionperiod = default(int?), byte[] entityimage = default(byte[]), int? fiscalyearformatyear = default(int?), long? entityimageTimestamp = default(long?), string privreportinggroupname = default(string), int? yearstartweekcode = default(int?), bool? uselegacyrendering = default(bool?), int? maximumtrackingnumber = default(int?), bool? isofficegraphenabled = default(bool?), bool? allowautoresponsecreation = default(bool?), bool? allowlegacyclientexperience = default(bool?), bool? ismsteamsenabled = default(bool?), bool? enablemicrosoftflowintegration = default(bool?), bool? emailcorrelationenabled = default(bool?), bool? socialinsightsenabled = default(bool?), string _createdbyValue = default(string), string initialversion = default(string), string delegatedadminuserid = default(string), bool? isfiscalperiodmonthbased = default(bool?), int? fiscalperiodtype = default(int?), int? inactivitytimeoutreminderinmins = default(int?), string disabledreason = default(string), int? uniquespecifierlength = default(int?), string ispdfgenerationenabled = default(string), bool? enablelivepersoncardintegrationinoffice = default(bool?), int? maxrecordsforexporttoexcel = default(int?), int? useraccessauditinginterval = default(int?), string kaprefix = default(string), bool? allowmarketingemailexecution = default(bool?), bool? sqmenabled = default(bool?), string timeformatstring = default(string), bool? iscontextualemailenabled = default(bool?), int? dateformatcode = default(int?), string webresourcehash = default(string), bool? syncoptinselection = default(bool?), int? sortid = default(int?), string globalhelpurl = default(string), bool? isallmoneydecimal = default(bool?), int? fiscalyearformatsuffix = default(int?), bool? isauditenabled = default(bool?), string fiscalyearformat = default(string), bool? sendbulkemailinuci = default(bool?), string defaultcrmcustomname = default(string), int? currencyformatcode = default(int?), bool? isbpfentitycustomizationfeatureenabled = default(bool?), int? maxconditionsformobileofflinefilters = default(int?), string businessclosurecalendarid = default(string), bool? showweeknumber = default(bool?), System.DateTimeOffset? fiscalcalendarstart = default(System.DateTimeOffset?), int? sessiontimeoutinmins = default(int?), bool? appointmentricheditorexperience = default(bool?), string _defaultemailserverprofileidValue = default(string), string integrationuserid = default(string), string entityimageUrl = default(string), bool? isnewaddproductexperienceenabled = default(bool?), string pmdesignator = default(string), string sampledataimportid = default(string), string name = default(string), int? currencydecimalprecision = default(int?), int? emailconnectionchannel = default(int?), bool? ispreviewforemailmonitoringallowed = default(bool?), bool? allowunresolvedpartiesonemailsend = default(bool?), bool? ispaienabled = default(bool?), bool? isautodatacapturev2enabled = default(bool?), bool? allowautounsubscribeacknowledgement = default(bool?), int? nexttrackingnumber = default(int?), bool? enablepricingoncreate = default(bool?), string parsedtablecolumnprefix = default(string), bool? allowusersseeappdownloadmessage = default(bool?), string decimalsymbol = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string signupoutlookdownloadfwlink = default(string), bool? disablesocialcare = default(bool?), bool? resolvesimilarunresolvedemailaddress = default(bool?), bool? unresolveemailaddressifmultiplematch = default(bool?), bool? sharetopreviousowneronassign = default(bool?), bool? isactioncardenabled = default(bool?), string reportinggroupid = default(string), string qualifyleadadditionaloptions = default(string), bool? isfolderautocreatedonsp = default(bool?), int? maxfolderbasedtrackingmappings = default(int?), string sqlaccessgroupid = default(string), string trackingprefix = default(string), int? yammergroupid = default(int?), string dateformatstring = default(string), int? yammerpostmethod = default(int?), int? timezoneruleversionnumber = default(int?), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> lkPrincipalobjectattributeaccessOrganizationid = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMtheme> organizationTheme = default(IList<MicrosoftDynamicsCRMtheme>), IList<MicrosoftDynamicsCRMusermapping> organizationUserMapping = default(IList<MicrosoftDynamicsCRMusermapping>), IList<MicrosoftDynamicsCRMmetric> organizationMetric = default(IList<MicrosoftDynamicsCRMmetric>), IList<MicrosoftDynamicsCRMposition> organizationPosition = default(IList<MicrosoftDynamicsCRMposition>), IList<MicrosoftDynamicsCRMofficegraphdocument> organizationOfficegraphdocument = default(IList<MicrosoftDynamicsCRMofficegraphdocument>), IList<MicrosoftDynamicsCRMrecommendeddocument> organizationRecommendeddocument = default(IList<MicrosoftDynamicsCRMrecommendeddocument>), IList<MicrosoftDynamicsCRMknowledgebaserecord> organizationKnowledgeBaseRecord = default(IList<MicrosoftDynamicsCRMknowledgebaserecord>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsdkmessagefilter> organizationSdkmessagefilter = default(IList<MicrosoftDynamicsCRMsdkmessagefilter>), IList<MicrosoftDynamicsCRMwebresource> webresourceOrganization = default(IList<MicrosoftDynamicsCRMwebresource>), IList<MicrosoftDynamicsCRMpost> organizationPost = default(IList<MicrosoftDynamicsCRMpost>), IList<MicrosoftDynamicsCRMpostcomment> organizationPostComment = default(IList<MicrosoftDynamicsCRMpostcomment>), IList<MicrosoftDynamicsCRMpostlike> organizationPostlike = default(IList<MicrosoftDynamicsCRMpostlike>), IList<MicrosoftDynamicsCRMimportjob> organizationImportjob = default(IList<MicrosoftDynamicsCRMimportjob>), IList<MicrosoftDynamicsCRMqueue> organizationQueues = default(IList<MicrosoftDynamicsCRMqueue>), MicrosoftDynamicsCRMcalendar businessclosurecalendaridCalendar = default(MicrosoftDynamicsCRMcalendar), IList<MicrosoftDynamicsCRMpluginassembly> organizationPluginassembly = default(IList<MicrosoftDynamicsCRMpluginassembly>), IList<MicrosoftDynamicsCRMfieldsecurityprofile> lkFieldsecurityprofileOrganizationid = default(IList<MicrosoftDynamicsCRMfieldsecurityprofile>), IList<MicrosoftDynamicsCRMsimilarityrule> organizationSimilarityrule = default(IList<MicrosoftDynamicsCRMsimilarityrule>), IList<MicrosoftDynamicsCRMappconfiginstance> organizationAppconfiginstance = default(IList<MicrosoftDynamicsCRMappconfiginstance>), IList<MicrosoftDynamicsCRMsavedqueryvisualization> organizationSavedQueryVisualizations = default(IList<MicrosoftDynamicsCRMsavedqueryvisualization>), IList<MicrosoftDynamicsCRMsystemuser> organizationSystemUsers = default(IList<MicrosoftDynamicsCRMsystemuser>), IList<MicrosoftDynamicsCRMpublisher> organizationPublisher = default(IList<MicrosoftDynamicsCRMpublisher>), IList<MicrosoftDynamicsCRMplugintype> organizationPlugintype = default(IList<MicrosoftDynamicsCRMplugintype>), IList<MicrosoftDynamicsCRMsyncerror> organizationSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMdataperformance> lkDataperformanceOrganizationid = default(IList<MicrosoftDynamicsCRMdataperformance>), IList<MicrosoftDynamicsCRMserviceendpoint> organizationServiceendpoint = default(IList<MicrosoftDynamicsCRMserviceendpoint>), IList<MicrosoftDynamicsCRMdisplaystring> organizationCustomDisplaystrings = default(IList<MicrosoftDynamicsCRMdisplaystring>), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> organizationSdkmessageprocessingstep = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), IList<MicrosoftDynamicsCRMplugintypestatistic> organizationPlugintypestatistic = default(IList<MicrosoftDynamicsCRMplugintypestatistic>), MicrosoftDynamicsCRMtransactioncurrency basecurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMasyncoperation> organizationAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMemailserverprofile> organizationEmailserverprofile = default(IList<MicrosoftDynamicsCRMemailserverprofile>), IList<MicrosoftDynamicsCRMsavedquery> organizationSavedQueries = default(IList<MicrosoftDynamicsCRMsavedquery>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsitemap> organizationSitemap = default(IList<MicrosoftDynamicsCRMsitemap>), IList<MicrosoftDynamicsCRMteam> organizationTeams = default(IList<MicrosoftDynamicsCRMteam>), MicrosoftDynamicsCRMmobileofflineprofile defaultmobileofflineprofileid = default(MicrosoftDynamicsCRMmobileofflineprofile), IList<MicrosoftDynamicsCRMdocumenttemplate> lkDocumenttemplatebaseOrganization = default(IList<MicrosoftDynamicsCRMdocumenttemplate>), IList<MicrosoftDynamicsCRMqueueitem> organizationQueueitems = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMcomplexcontrol> organizationComplexcontrols = default(IList<MicrosoftDynamicsCRMcomplexcontrol>), IList<MicrosoftDynamicsCRMsolution> organizationSolution = default(IList<MicrosoftDynamicsCRMsolution>), IList<MicrosoftDynamicsCRMbusinessunit> organizationBusinessUnits = default(IList<MicrosoftDynamicsCRMbusinessunit>), IList<MicrosoftDynamicsCRMmobileofflineprofile> mobileOfflineProfileOrganization = default(IList<MicrosoftDynamicsCRMmobileofflineprofile>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsdkmessageprocessingstepimage> organizationSdkmessageprocessingstepimage = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstepimage>), IList<MicrosoftDynamicsCRMcustomcontrol> customcontrolOrganization = default(IList<MicrosoftDynamicsCRMcustomcontrol>), IList<MicrosoftDynamicsCRMsdkmessageprocessingstepsecureconfig> organizationSdkmessageprocessingstepsecureconfig = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstepsecureconfig>), IList<MicrosoftDynamicsCRMrole> organizationRoles = default(IList<MicrosoftDynamicsCRMrole>), IList<MicrosoftDynamicsCRMappconfigmaster> organizationAppconfigmaster = default(IList<MicrosoftDynamicsCRMappconfigmaster>), IList<MicrosoftDynamicsCRMmobileofflineprofileitemassociation> mobileOfflineProfileItemAssociationOrganization = default(IList<MicrosoftDynamicsCRMmobileofflineprofileitemassociation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> organizationMailboxTrackingFolder = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> organizationBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMtracelog> organizationTracelog = default(IList<MicrosoftDynamicsCRMtracelog>), IList<MicrosoftDynamicsCRMsystemform> organizationSystemforms = default(IList<MicrosoftDynamicsCRMsystemform>), IList<MicrosoftDynamicsCRMbusinessunitnewsarticle> organizationBusinessUnitNewsArticles = default(IList<MicrosoftDynamicsCRMbusinessunitnewsarticle>), IList<MicrosoftDynamicsCRMkbarticle> organizationKbArticles = default(IList<MicrosoftDynamicsCRMkbarticle>), IList<MicrosoftDynamicsCRMsdkmessage> organizationSdkmessage = default(IList<MicrosoftDynamicsCRMsdkmessage>), IList<MicrosoftDynamicsCRMmobileofflineprofileitem> mobileOfflineProfileItemOrganization = default(IList<MicrosoftDynamicsCRMmobileofflineprofileitem>), MicrosoftDynamicsCRMemailserverprofile defaultemailserverprofileid = default(MicrosoftDynamicsCRMemailserverprofile), IList<MicrosoftDynamicsCRMkbarticletemplate> organizationKbArticleTemplates = default(IList<MicrosoftDynamicsCRMkbarticletemplate>), IList<MicrosoftDynamicsCRMcustomcontrolresource> customcontrolresourceOrganization = default(IList<MicrosoftDynamicsCRMcustomcontrolresource>), IList<MicrosoftDynamicsCRMmailbox> organizationMailbox = default(IList<MicrosoftDynamicsCRMmailbox>), IList<MicrosoftDynamicsCRMcalendar> organizationCalendars = default(IList<MicrosoftDynamicsCRMcalendar>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMwebwizard> organizationWebwizard = default(IList<MicrosoftDynamicsCRMwebwizard>), IList<MicrosoftDynamicsCRMconnectionrole> organizationConnectionRoles = default(IList<MicrosoftDynamicsCRMconnectionrole>), IList<MicrosoftDynamicsCRMcustomcontroldefaultconfig> customcontroldefaultconfigOrganization = default(IList<MicrosoftDynamicsCRMcustomcontroldefaultconfig>), IList<MicrosoftDynamicsCRMtransactioncurrency> organizationTransactioncurrencies = default(IList<MicrosoftDynamicsCRMtransactioncurrency>), MicrosoftDynamicsCRMtemplate acknowledgementtemplateid = default(MicrosoftDynamicsCRMtemplate), IList<MicrosoftDynamicsCRMaciviewmapper> organizationAciviewmapper = default(IList<MicrosoftDynamicsCRMaciviewmapper>), IList<MicrosoftDynamicsCRMlanguagelocale> languagelocaleOrganization = default(IList<MicrosoftDynamicsCRMlanguagelocale>), IList<MicrosoftDynamicsCRMappconfig> organizationAppconfig = default(IList<MicrosoftDynamicsCRMappconfig>), IList<MicrosoftDynamicsCRMappmodule> organizationAppmodule = default(IList<MicrosoftDynamicsCRMappmodule>), IList<MicrosoftDynamicsCRMnavigationsetting> organizationNavigationsetting = default(IList<MicrosoftDynamicsCRMnavigationsetting>), IList<MicrosoftDynamicsCRMmbsPluginprofile> organizationMbsPluginprofile = default(IList<MicrosoftDynamicsCRMmbsPluginprofile>), IList<MicrosoftDynamicsCRMmsdynPostconfig> organizationMsdynPostconfig = default(IList<MicrosoftDynamicsCRMmsdynPostconfig>), IList<MicrosoftDynamicsCRMmsdynPostruleconfig> organizationMsdynPostruleconfig = default(IList<MicrosoftDynamicsCRMmsdynPostruleconfig>), IList<MicrosoftDynamicsCRMmsdynWallsavedquery> organizationMsdynWallsavedquery = default(IList<MicrosoftDynamicsCRMmsdynWallsavedquery>), IList<MicrosoftDynamicsCRMadoxioCustomautonumberdefinition> organizationAdoxioCustomautonumberdefinition = default(IList<MicrosoftDynamicsCRMadoxioCustomautonumberdefinition>), IList<MicrosoftDynamicsCRMadoxioCustomautonumberrequest> organizationAdoxioCustomautonumberrequest = default(IList<MicrosoftDynamicsCRMadoxioCustomautonumberrequest>), IList<MicrosoftDynamicsCRMadoxioLocalgovindigenousnation> organizationAdoxioLocalgovindigenousnation = default(IList<MicrosoftDynamicsCRMadoxioLocalgovindigenousnation>), IList<MicrosoftDynamicsCRMadoxioPolicejurisdiction> organizationAdoxioPolicejurisdiction = default(IList<MicrosoftDynamicsCRMadoxioPolicejurisdiction>), IList<MicrosoftDynamicsCRMadoxioEstablishmentwatchword> organizationAdoxioEstablishmentwatchword = default(IList<MicrosoftDynamicsCRMadoxioEstablishmentwatchword>), IList<MicrosoftDynamicsCRMadoxioApplicationbpfv3> organizationAdoxioApplicationbpfv3 = default(IList<MicrosoftDynamicsCRMadoxioApplicationbpfv3>), IList<MicrosoftDynamicsCRMadoxioApplicationlicenseechangesv10> organizationAdoxioApplicationlicenseechangesv10 = default(IList<MicrosoftDynamicsCRMadoxioApplicationlicenseechangesv10>), IList<MicrosoftDynamicsCRMadoxioApplicationrelocationv1> organizationAdoxioApplicationrelocationv1 = default(IList<MicrosoftDynamicsCRMadoxioApplicationrelocationv1>), IList<MicrosoftDynamicsCRMadoxioApplicationstructurechangev1> organizationAdoxioApplicationstructurechangev1 = default(IList<MicrosoftDynamicsCRMadoxioApplicationstructurechangev1>), IList<MicrosoftDynamicsCRMadoxioApplicationtransferownershipv1> organizationAdoxioApplicationtransferownershipv1 = default(IList<MicrosoftDynamicsCRMadoxioApplicationtransferownershipv1>), IList<MicrosoftDynamicsCRMadoxioApplicationliquorbpfv2> organizationAdoxioApplicationliquorbpfv2 = default(IList<MicrosoftDynamicsCRMadoxioApplicationliquorbpfv2>), IList<MicrosoftDynamicsCRMadoxioEnforcementactionbpf> organizationAdoxioEnforcementactionbpf = default(IList<MicrosoftDynamicsCRMadoxioEnforcementactionbpf>), IList<MicrosoftDynamicsCRMadoxioApplicationcrsbpfv4> organizationAdoxioApplicationcrsbpfv4 = default(IList<MicrosoftDynamicsCRMadoxioApplicationcrsbpfv4>), IList<MicrosoftDynamicsCRMadoxioLqrlicencetransferbpf> organizationAdoxioLqrlicencetransferbpf = default(IList<MicrosoftDynamicsCRMadoxioLqrlicencetransferbpf>), IList<MicrosoftDynamicsCRMadoxioApplicenseechangebpfv2> organizationAdoxioApplicenseechangebpfv2 = default(IList<MicrosoftDynamicsCRMadoxioApplicenseechangebpfv2>), IList<MicrosoftDynamicsCRMproductassociation> organizationProductAssociation = default(IList<MicrosoftDynamicsCRMproductassociation>), IList<MicrosoftDynamicsCRMproductsubstitute> organizationProductSubstitute = default(IList<MicrosoftDynamicsCRMproductsubstitute>), IList<MicrosoftDynamicsCRMexpiredprocess> organizationExpiredprocess = default(IList<MicrosoftDynamicsCRMexpiredprocess>), IList<MicrosoftDynamicsCRMdynamicpropertyassociation> dynamicPropertyAssociationOrganization = default(IList<MicrosoftDynamicsCRMdynamicpropertyassociation>), IList<MicrosoftDynamicsCRMtranslationprocess> organizationTranslationprocess = default(IList<MicrosoftDynamicsCRMtranslationprocess>), IList<MicrosoftDynamicsCRMdynamicpropertyoptionsetitem> dynamicPropertyOptionSetItemOrganization = default(IList<MicrosoftDynamicsCRMdynamicpropertyoptionsetitem>), IList<MicrosoftDynamicsCRMdynamicproperty> dynamicpropertyOrganization = default(IList<MicrosoftDynamicsCRMdynamicproperty>), IList<MicrosoftDynamicsCRMuomschedule> organizationUofSchedules = default(IList<MicrosoftDynamicsCRMuomschedule>), IList<MicrosoftDynamicsCRMpricelevel> organizationPriceLevels = default(IList<MicrosoftDynamicsCRMpricelevel>), IList<MicrosoftDynamicsCRMnewprocess> organizationNewprocess = default(IList<MicrosoftDynamicsCRMnewprocess>), IList<MicrosoftDynamicsCRMproduct> organizationProducts = default(IList<MicrosoftDynamicsCRMproduct>), IList<MicrosoftDynamicsCRMsite> organizationSites = default(IList<MicrosoftDynamicsCRMsite>), IList<MicrosoftDynamicsCRMphonetocaseprocess> organizationPhonetocaseprocess = default(IList<MicrosoftDynamicsCRMphonetocaseprocess>), IList<MicrosoftDynamicsCRMresourcegroup> organizationResourceGroups = default(IList<MicrosoftDynamicsCRMresourcegroup>), IList<MicrosoftDynamicsCRMresourcespec> organizationResourceSpecs = default(IList<MicrosoftDynamicsCRMresourcespec>), IList<MicrosoftDynamicsCRMservice> organizationServices = default(IList<MicrosoftDynamicsCRMservice>), IList<MicrosoftDynamicsCRMentitlementtemplatechannel> entitlementtemplatechannelOrganization = default(IList<MicrosoftDynamicsCRMentitlementtemplatechannel>), IList<MicrosoftDynamicsCRMcontracttemplate> organizationContractTemplates = default(IList<MicrosoftDynamicsCRMcontracttemplate>), IList<MicrosoftDynamicsCRMentitlementtemplate> entitlementtemplateOrganization = default(IList<MicrosoftDynamicsCRMentitlementtemplate>), IList<MicrosoftDynamicsCRMresource> organizationResources = default(IList<MicrosoftDynamicsCRMresource>), IList<MicrosoftDynamicsCRMequipment> organizationEquipment = default(IList<MicrosoftDynamicsCRMequipment>), IList<MicrosoftDynamicsCRMentitlementchannel> entitlementchannelOrganization = default(IList<MicrosoftDynamicsCRMentitlementchannel>), IList<MicrosoftDynamicsCRMconstraintbasedgroup> organizationConstraintBasedGroups = default(IList<MicrosoftDynamicsCRMconstraintbasedgroup>), IList<MicrosoftDynamicsCRMsubject> organizationSubjects = default(IList<MicrosoftDynamicsCRMsubject>), IList<MicrosoftDynamicsCRMterritory> organizationTerritories = default(IList<MicrosoftDynamicsCRMterritory>), IList<MicrosoftDynamicsCRMopportunitysalesprocess> organizationOpportunitysalesprocess = default(IList<MicrosoftDynamicsCRMopportunitysalesprocess>), IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess> organizationLeadtoopportunitysalesprocess = default(IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess>), IList<MicrosoftDynamicsCRMdiscounttype> organizationDiscountTypes = default(IList<MicrosoftDynamicsCRMdiscounttype>), IList<MicrosoftDynamicsCRMsalesliterature> organizationSalesLiterature = default(IList<MicrosoftDynamicsCRMsalesliterature>), IList<MicrosoftDynamicsCRMcompetitor> organizationCompetitors = default(IList<MicrosoftDynamicsCRMcompetitor>), IList<MicrosoftDynamicsCRMsolutioncomponentattributeconfiguration> organizationSolutioncomponentattributeconfiguration = default(IList<MicrosoftDynamicsCRMsolutioncomponentattributeconfiguration>), IList<MicrosoftDynamicsCRMsolutioncomponentconfiguration> organizationSolutioncomponentconfiguration = default(IList<MicrosoftDynamicsCRMsolutioncomponentconfiguration>), IList<MicrosoftDynamicsCRMsolutioncomponentrelationshipconfiguration> organizationSolutioncomponentrelationshipconfiguration = default(IList<MicrosoftDynamicsCRMsolutioncomponentrelationshipconfiguration>), IList<MicrosoftDynamicsCRMpackage> organizationPackage = default(IList<MicrosoftDynamicsCRMpackage>), IList<MicrosoftDynamicsCRMentityanalyticsconfig> organizationEntityanalyticsconfig = default(IList<MicrosoftDynamicsCRMentityanalyticsconfig>), IList<MicrosoftDynamicsCRMdatalakeworkspace> organizationDatalakeworkspace = default(IList<MicrosoftDynamicsCRMdatalakeworkspace>), IList<MicrosoftDynamicsCRMdatalakeworkspacepermission> organizationDatalakeworkspacepermission = default(IList<MicrosoftDynamicsCRMdatalakeworkspacepermission>), IList<MicrosoftDynamicsCRMmsdynHelppage> organizationMsdynHelppage = default(IList<MicrosoftDynamicsCRMmsdynHelppage>), IList<MicrosoftDynamicsCRMmsdynTour> organizationMsdynTour = default(IList<MicrosoftDynamicsCRMmsdynTour>), IList<MicrosoftDynamicsCRMmsdynFederatedarticleincident> organizationMsdynFederatedarticleincident = default(IList<MicrosoftDynamicsCRMmsdynFederatedarticleincident>), IList<MicrosoftDynamicsCRMcatalog> organizationCatalog = default(IList<MicrosoftDynamicsCRMcatalog>), IList<MicrosoftDynamicsCRMcatalogassignment> organizationCatalogassignment = default(IList<MicrosoftDynamicsCRMcatalogassignment>), IList<MicrosoftDynamicsCRMmarketingformdisplayattributes> organizationMarketingformdisplayattributes = default(IList<MicrosoftDynamicsCRMmarketingformdisplayattributes>), IList<MicrosoftDynamicsCRMmsdynDatabaseversion> organizationMsdynDatabaseversion = default(IList<MicrosoftDynamicsCRMmsdynDatabaseversion>), IList<MicrosoftDynamicsCRMmsdynUpgraderun> organizationMsdynUpgraderun = default(IList<MicrosoftDynamicsCRMmsdynUpgraderun>), IList<MicrosoftDynamicsCRMmsdynUpgradestep> organizationMsdynUpgradestep = default(IList<MicrosoftDynamicsCRMmsdynUpgradestep>), IList<MicrosoftDynamicsCRMmsdynUpgradeversion> organizationMsdynUpgradeversion = default(IList<MicrosoftDynamicsCRMmsdynUpgradeversion>), IList<MicrosoftDynamicsCRMmsdynSikeyvalueconfig> organizationMsdynSikeyvalueconfig = default(IList<MicrosoftDynamicsCRMmsdynSikeyvalueconfig>), IList<MicrosoftDynamicsCRMadoxioApplicationbpfDormancy> organizationAdoxioApplicationbpfDormancy = default(IList<MicrosoftDynamicsCRMadoxioApplicationbpfDormancy>), IList<MicrosoftDynamicsCRMptmMscrmaddonsKey> organizationPtmMscrmaddonsKey = default(IList<MicrosoftDynamicsCRMptmMscrmaddonsKey>), IList<MicrosoftDynamicsCRMptmMscrmaddonsSettings> organizationPtmMscrmaddonsSettings = default(IList<MicrosoftDynamicsCRMptmMscrmaddonsSettings>), IList<MicrosoftDynamicsCRMptmMscrmaddonscomDebug> organizationPtmMscrmaddonscomDebug = default(IList<MicrosoftDynamicsCRMptmMscrmaddonscomDebug>), IList<MicrosoftDynamicsCRMptmMscrmaddonscommetadata> organizationPtmMscrmaddonscommetadata = default(IList<MicrosoftDynamicsCRMptmMscrmaddonscommetadata>), IList<MicrosoftDynamicsCRMptmMscrmaddonstemp> organizationPtmMscrmaddonstemp = default(IList<MicrosoftDynamicsCRMptmMscrmaddonstemp>), IList<MicrosoftDynamicsCRMptmMscrmaddonscomamtrigger> organizationPtmMscrmaddonscomamtrigger = default(IList<MicrosoftDynamicsCRMptmMscrmaddonscomamtrigger>))
         {
+            Autoapplydefaultoncasecreate = autoapplydefaultoncasecreate;
             Maxverboseloggingsynccycles = maxverboseloggingsynccycles;
             Recurrenceexpansionjobbatchsize = recurrenceexpansionjobbatchsize;
             Privilegeusergroupid = privilegeusergroupid;
-            Entityimageid = entityimageid;
-            Minaddressbooksyncinterval = minaddressbooksyncinterval;
-            Showkbarticledeprecationnotification = showkbarticledeprecationnotification;
+            Expiresubscriptionsindays = expiresubscriptionsindays;
             Globalhelpurlenabled = globalhelpurlenabled;
             Widgetproperties = widgetproperties;
-            Maxappointmentdurationdays = maxappointmentdurationdays;
+            Taskbasedflowenabled = taskbasedflowenabled;
             Iscontextualhelpenabled = iscontextualhelpenabled;
             Isquickcreateenabledforopportunityclose = isquickcreateenabledforopportunityclose;
             Recurrenceexpansionsynchcreatemax = recurrenceexpansionsynchcreatemax;
@@ -49,44 +48,42 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Enablesmartmatching = enablesmartmatching;
             Orderprefix = orderprefix;
             Currencysymbol = currencysymbol;
+            Sessiontimeoutreminderinmins = sessiontimeoutreminderinmins;
+            Mailboxpermanentissueminrange = mailboxpermanentissueminrange;
             Allowwebexcelexport = allowwebexcelexport;
             Highcontrastthemedata = highcontrastthemedata;
             Caseprefix = caseprefix;
-            Pastexpansionwindow = pastexpansionwindow;
+            Longdateformatcode = longdateformatcode;
             Usepositionhierarchy = usepositionhierarchy;
             Trackingtokenidbase = trackingtokenidbase;
-            Defaultemailsettings = defaultemailsettings;
-            Hashfilterkeywords = hashfilterkeywords;
+            Allowentityonlyaudit = allowentityonlyaudit;
+            Globalappendurlparametersenabled = globalappendurlparametersenabled;
             Generatealertsforwarnings = generatealertsforwarnings;
             Maximumentitieswithactivesla = maximumentitieswithactivesla;
             Privreportinggroupid = privreportinggroupid;
             Invoiceprefix = invoiceprefix;
-            Campaignprefix = campaignprefix;
+            Quoteprefix = quoteprefix;
             Mailboxintermittentissueminrange = mailboxintermittentissueminrange;
             Isassignedtaskssyncenabled = isassignedtaskssyncenabled;
             Issopintegrationenabled = issopintegrationenabled;
-            Allowautounsubscribeacknowledgement = allowautounsubscribeacknowledgement;
-            Ismsteamssettingchangedbyuser = ismsteamssettingchangedbyuser;
+            Ismobileclientondemandsyncenabled = ismobileclientondemandsyncenabled;
+            Enableimmersiveskypeintegration = enableimmersiveskypeintegration;
             Isgeospatialazuremapsintegrationenabled = isgeospatialazuremapsintegrationenabled;
             Servestaticresourcesfromazurecdn = servestaticresourcesfromazurecdn;
             Isautodatacaptureenabled = isautodatacaptureenabled;
             Currentparsedtablenumber = currentparsedtablenumber;
             Isemailserverprofilecontentfilteringenabled = isemailserverprofilecontentfilteringenabled;
             Isluisenabledford365bot = isluisenabledford365bot;
-            Usergroupid = usergroupid;
-            Useinbuiltrulefordefaultpricelistselection = useinbuiltrulefordefaultpricelistselection;
-            Bounddashboarddefaultcardexpanded = bounddashboarddefaultcardexpanded;
+            Blockedattachments = blockedattachments;
             Isconflictdetectionenabledformobileclient = isconflictdetectionenabledformobileclient;
             Businesscardoptions = businesscardoptions;
             Goalrollupfrequency = goalrollupfrequency;
             Parsedtableprefix = parsedtableprefix;
             Isreadauditenabled = isreadauditenabled;
             Requireapprovalforuseremail = requireapprovalforuseremail;
-            Maxconditionsformobileofflinefilters = maxconditionsformobileofflinefilters;
-            Minoutlooksyncinterval = minoutlooksyncinterval;
-            Requireapprovalforqueueemail = requireapprovalforqueueemail;
+            Emailsendpollingperiod = emailsendpollingperiod;
+            Useinbuiltrulefordefaultpricelistselection = useinbuiltrulefordefaultpricelistselection;
             Isrichtextnotesenabled = isrichtextnotesenabled;
-            Ismsteamscollaborationenabled = ismsteamscollaborationenabled;
             Hashdeltasubjectcount = hashdeltasubjectcount;
             Recurrenceexpansionjobbatchinterval = recurrenceexpansionjobbatchinterval;
             Fiscalperiodformat = fiscalperiodformat;
@@ -94,97 +91,94 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Maxrecordsforlookupfilters = maxrecordsforlookupfilters;
             Sharepointdeploymenttype = sharepointdeploymenttype;
             Isrelationshipinsightsenabled = isrelationshipinsightsenabled;
-            Emailsendpollingperiod = emailsendpollingperiod;
+            Requireapprovalforqueueemail = requireapprovalforqueueemail;
+            Tokenexpiry = tokenexpiry;
             Postmessagewhitelistdomains = postmessagewhitelistdomains;
             Localeid = localeid;
             Createdon = createdon;
-            Longdateformatcode = longdateformatcode;
             Isduplicatedetectionenabledforonlinecreateupdate = isduplicatedetectionenabledforonlinecreateupdate;
-            this._defaultemailserverprofileidValue = _defaultemailserverprofileidValue;
+            Contentsecuritypolicyconfiguration = contentsecuritypolicyconfiguration;
+            Inactivitytimeoutenabled = inactivitytimeoutenabled;
             Isresourcebookingexchangesyncenabled = isresourcebookingexchangesyncenabled;
             Displaynavigationtour = displaynavigationtour;
             Isautosaveenabled = isautosaveenabled;
-            Fiscalyearformatyear = fiscalyearformatyear;
+            Supportuserid = supportuserid;
             Currencydisplayoption = currencydisplayoption;
             Tokenkey = tokenkey;
             Pinpointlanguagecode = pinpointlanguagecode;
-            Isactionsupportfeatureenabled = isactionsupportfeatureenabled;
+            Isappointmentattachmentsyncenabled = isappointmentattachmentsyncenabled;
+            Isenabledforallroles = isenabledforallroles;
             Enablelpauthoring = enablelpauthoring;
             Mobileofflineminlicensetrial = mobileofflineminlicensetrial;
-            Auditretentionperiod = auditretentionperiod;
+            Calendartype = calendartype;
             Officeappsautodeploymentenabled = officeappsautodeploymentenabled;
-            Autoapplydefaultoncasecreate = autoapplydefaultoncasecreate;
-            Isnotesanalysisenabled = isnotesanalysisenabled;
-            Iscontactmailingaddresssyncenabled = iscontactmailingaddresssyncenabled;
+            Hashfilterkeywords = hashfilterkeywords;
+            Ismsteamsusersyncenabled = ismsteamsusersyncenabled;
             Ismailboxforcedunlockingenabled = ismailboxforcedunlockingenabled;
             Isexternalfilestorageenabled = isexternalfilestorageenabled;
             Mobileofflinesyncinterval = mobileofflinesyncinterval;
             Tagmaxaggressivecycles = tagmaxaggressivecycles;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
             Schedulingengine = schedulingengine;
-            this._createdbyValue = _createdbyValue;
-            this._modifiedbyValue = _modifiedbyValue;
-            Rendersecureiframeforemail = rendersecureiframeforemail;
-            Ispresenceenabled = ispresenceenabled;
+            Grantaccesstonetworkservice = grantaccesstonetworkservice;
+            Isdelveactionhubintegrationenabled = isdelveactionhubintegrationenabled;
             Allowoutlookscheduledsyncs = allowoutlookscheduledsyncs;
             Maximumdynamicpropertiesallowed = maximumdynamicpropertiesallowed;
-            Numbergroupformat = numbergroupformat;
-            Blockedattachments = blockedattachments;
-            Inactivitytimeoutenabled = inactivitytimeoutenabled;
-            Unresolveemailaddressifmultiplematch = unresolveemailaddressifmultiplematch;
-            Calendartype = calendartype;
+            Entityimageid = entityimageid;
+            Trackingtokeniddigits = trackingtokeniddigits;
             Defaultrecurrenceendrangetype = defaultrecurrenceendrangetype;
-            Sessiontimeoutenabled = sessiontimeoutenabled;
+            Yammernetworkpermalink = yammernetworkpermalink;
             Bulkoperationprefix = bulkoperationprefix;
             Oobpricecalculationenabled = oobpricecalculationenabled;
             Futureexpansionwindow = futureexpansionwindow;
-            Isexternalsearchindexenabled = isexternalsearchindexenabled;
+            Ispresenceenabled = ispresenceenabled;
+            Pastexpansionwindow = pastexpansionwindow;
             Maximumslakpiperentitywithactivesla = maximumslakpiperentitywithactivesla;
-            Yammerpostmethod = yammerpostmethod;
+            Ismsteamssettingchangedbyuser = ismsteamssettingchangedbyuser;
             Picture = picture;
-            Isdelveactionhubintegrationenabled = isdelveactionhubintegrationenabled;
             Azureschedulerjobcollectionname = azureschedulerjobcollectionname;
-            Isofficegraphenabled = isofficegraphenabled;
+            Numbergroupformat = numbergroupformat;
             Orgdborgsettings = orgdborgsettings;
-            Trackingtokeniddigits = trackingtokeniddigits;
-            Discountcalculationmethod = discountcalculationmethod;
-            Ismanualsalesforecastingenabled = ismanualsalesforecastingenabled;
+            Rierrorstatus = rierrorstatus;
+            Allowlegacydialogsembedding = allowlegacydialogsembedding;
             Mobileofflineminlicenseprod = mobileofflineminlicenseprod;
-            Fiscalyeardisplaycode = fiscalyeardisplaycode;
+            Maxappointmentdurationdays = maxappointmentdurationdays;
+            Minaddressbooksyncinterval = minaddressbooksyncinterval;
             Tracelogmaximumageindays = tracelogmaximumageindays;
-            Goalrollupexpirytime = goalrollupexpirytime;
+            Isduplicatedetectionenabledforimport = isduplicatedetectionenabledforimport;
+            Iscustomcontrolsincanvasappsenabled = iscustomcontrolsincanvasappsenabled;
             Enforcereadonlyplugins = enforcereadonlyplugins;
-            Ismsteamsusersyncenabled = ismsteamsusersyncenabled;
             Createproductswithoutparentinactivestate = createproductswithoutparentinactivestate;
-            Entityimage = entityimage;
+            Enableunifiedinterfaceshellrefresh = enableunifiedinterfaceshellrefresh;
             Textanalyticsenabled = textanalyticsenabled;
             Expirechangetrackingindays = expirechangetrackingindays;
             Usereadform = usereadform;
-            Ismobileclientondemandsyncenabled = ismobileclientondemandsyncenabled;
             Basecurrencysymbol = basecurrencysymbol;
             Fiscalyearperiodconnect = fiscalyearperiodconnect;
             Maxsupportedinternetexplorerversion = maxsupportedinternetexplorerversion;
             Fiscalperiodformatperiod = fiscalperiodformatperiod;
             Bingmapsapikey = bingmapsapikey;
-            Ismobileofflineenabled = ismobileofflineenabled;
+            Isactionsupportfeatureenabled = isactionsupportfeatureenabled;
             Restrictstatusupdate = restrictstatusupdate;
+            Defaultthemedata = defaultthemedata;
             Isonedriveenabled = isonedriveenabled;
-            Externalpartycorrelationkeys = externalpartycorrelationkeys;
+            Minoutlooksyncinterval = minoutlooksyncinterval;
             Getstartedpanecontentenabled = getstartedpanecontentenabled;
-            Expiresubscriptionsindays = expiresubscriptionsindays;
-            Istextwrapenabled = istextwrapenabled;
+            Auditretentionperiodv2 = auditretentionperiodv2;
+            Negativeformatcode = negativeformatcode;
             Ispricelistmandatory = ispricelistmandatory;
             Timeseparator = timeseparator;
-            Nexttrackingnumber = nexttrackingnumber;
+            Maxproductsinbundle = maxproductsinbundle;
+            Slapausestates = slapausestates;
             V3calloutconfighash = v3calloutconfighash;
             Plugintracelogsetting = plugintracelogsetting;
-            Yearstartweekcode = yearstartweekcode;
             Syncoptinselectionstatus = syncoptinselectionstatus;
             Syncbulkoperationmaxlimit = syncbulkoperationmaxlimit;
             Allowofflinescheduledsyncs = allowofflinescheduledsyncs;
             Basecurrencyprecision = basecurrencyprecision;
-            Delegatedadminuserid = delegatedadminuserid;
             Socialinsightsinstance = socialinsightsinstance;
             Ishierarchicalsecuritymodelenabled = ishierarchicalsecuritymodelenabled;
+            Privacystatementurl = privacystatementurl;
             Iswriteinproductsallowed = iswriteinproductsallowed;
             Currentimportsequencenumber = currentimportsequencenumber;
             Isuseraccessauditenabled = isuseraccessauditenabled;
@@ -192,38 +186,37 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Enablebingmapsintegration = enablebingmapsintegration;
             Maxuploadfilesize = maxuploadfilesize;
             Syncbulkoperationbatchsize = syncbulkoperationbatchsize;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
             Tagpollingperiod = tagpollingperiod;
             Suppresssla = suppresssla;
             Maxslaitemspersla = maxslaitemspersla;
-            Reportinggroupname = reportinggroupname;
+            Clientfeatureset = clientfeatureset;
             Versionnumber = versionnumber;
-            Isemailmonitoringallowed = isemailmonitoringallowed;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
+            Maxverboseloggingmailbox = maxverboseloggingmailbox;
+            Ismanualsalesforecastingenabled = ismanualsalesforecastingenabled;
+            Isduplicatedetectionenabled = isduplicatedetectionenabled;
             Schemanameprefix = schemanameprefix;
             Paipreviewscenarioenabled = paipreviewscenarioenabled;
-            Quickfindrecordlimitenabled = quickfindrecordlimitenabled;
-            Isfiscalperiodmonthbased = isfiscalperiodmonthbased;
+            Autoapplysla = autoapplysla;
+            Ismsteamscollaborationenabled = ismsteamscollaborationenabled;
             Incomingemailexchangeemailretrievalbatchsize = incomingemailexchangeemailretrievalbatchsize;
             Ismailboxinactivebackoffenabled = ismailboxinactivebackoffenabled;
-            Globalhelpurl = globalhelpurl;
-            Supportuserid = supportuserid;
+            Cortanaproactiveexperienceenabled = cortanaproactiveexperienceenabled;
+            Goalrollupexpirytime = goalrollupexpirytime;
+            Showkbarticledeprecationnotification = showkbarticledeprecationnotification;
             Isappmode = isappmode;
-            Iscustomcontrolsincanvasappsenabled = iscustomcontrolsincanvasappsenabled;
+            this._modifiedbyValue = _modifiedbyValue;
             Contractprefix = contractprefix;
             Allowautounsubscribe = allowautounsubscribe;
-            Quoteprefix = quoteprefix;
-            Pmdesignator = pmdesignator;
-            Auditretentionperiodv2 = auditretentionperiodv2;
+            Ignoreinternalemail = ignoreinternalemail;
             Ispreviewforautocaptureenabled = ispreviewforautocaptureenabled;
             Minofflinesyncinterval = minofflinesyncinterval;
             Numberformat = numberformat;
             Systemuserid = systemuserid;
             Orginsightsenabled = orginsightsenabled;
             Maxactionstepsinbpf = maxactionstepsinbpf;
-            Autoapplysla = autoapplysla;
             Socialinsightstermsaccepted = socialinsightstermsaccepted;
-            Isdisabled = isdisabled;
+            Defaultemailsettings = defaultemailsettings;
+            Generatealertsforerrors = generatealertsforerrors;
             Isplaybookenabled = isplaybookenabled;
             Sqlaccessgroupname = sqlaccessgroupname;
             Autoapplydefaultoncaseupdate = autoapplydefaultoncaseupdate;
@@ -231,61 +224,66 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Cascadestatusupdate = cascadestatusupdate;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Powerbifeatureenabled = powerbifeatureenabled;
-            Fiscalcalendarstart = fiscalcalendarstart;
             Fullnameconventioncode = fullnameconventioncode;
             Allowaddressbooksyncs = allowaddressbooksyncs;
             Notifymailboxownerofemailserverlevelalerts = notifymailboxownerofemailserverlevelalerts;
             Usequickfindviewforgridsearch = usequickfindviewforgridsearch;
+            Discountcalculationmethod = discountcalculationmethod;
             Organizationid = organizationid;
-            Mailboxpermanentissueminrange = mailboxpermanentissueminrange;
-            Allowentityonlyaudit = allowentityonlyaudit;
+            Maximumactivebusinessprocessflowsallowedperentity = maximumactivebusinessprocessflowsallowedperentity;
             Kmsettings = kmsettings;
             Isfulltextsearchenabled = isfulltextsearchenabled;
+            Externalpartycorrelationkeys = externalpartycorrelationkeys;
             Hashminaddresscount = hashminaddresscount;
-            Clientfeatureset = clientfeatureset;
+            Dateseparator = dateseparator;
             Weekstartdaycode = weekstartdaycode;
-            Integrationuserid = integrationuserid;
+            Allowuserformmodepreference = allowuserformmodepreference;
             Numberseparator = numberseparator;
-            Enableunifiedinterfaceshellrefresh = enableunifiedinterfaceshellrefresh;
+            Campaignprefix = campaignprefix;
             Productrecommendationsenabled = productrecommendationsenabled;
             Recurrencedefaultnumberofoccurrences = recurrencedefaultnumberofoccurrences;
-            Grantaccesstonetworkservice = grantaccesstonetworkservice;
-            Tokenexpiry = tokenexpiry;
+            Quickfindrecordlimitenabled = quickfindrecordlimitenabled;
             Organizationstate = organizationstate;
+            Rendersecureiframeforemail = rendersecureiframeforemail;
+            Inactivitytimeoutinmins = inactivitytimeoutinmins;
+            Sessiontimeoutenabled = sessiontimeoutenabled;
+            Iscontactmailingaddresssyncenabled = iscontactmailingaddresssyncenabled;
             Externalbaseurl = externalbaseurl;
-            Dateseparator = dateseparator;
+            Isemailmonitoringallowed = isemailmonitoringallowed;
             Issalesassistantenabled = issalesassistantenabled;
+            this._defaultmobileofflineprofileidValue = _defaultmobileofflineprofileidValue;
             Amdesignator = amdesignator;
-            Enableimmersiveskypeintegration = enableimmersiveskypeintegration;
+            Pricingdecimalprecision = pricingdecimalprecision;
             Kbprefix = kbprefix;
-            Isduplicatedetectionenabled = isduplicatedetectionenabled;
+            Bounddashboarddefaultcardexpanded = bounddashboarddefaultcardexpanded;
             Hashmaxcount = hashmaxcount;
+            Reportinggroupname = reportinggroupname;
             Isdelegateaccessenabled = isdelegateaccessenabled;
+            Aciwebendpointurl = aciwebendpointurl;
             Featureset = featureset;
-            Sessiontimeoutreminderinmins = sessiontimeoutreminderinmins;
             Reportscripterrors = reportscripterrors;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            Fiscalyearformatsuffix = fiscalyearformatsuffix;
+            Fiscalyeardisplaycode = fiscalyeardisplaycode;
             Yammeroauthaccesstokenexpired = yammeroauthaccesstokenexpired;
-            Allowusersseeappdownloadmessage = allowusersseeappdownloadmessage;
+            Externalpartyentitysettings = externalpartyentitysettings;
             Defaultcountrycode = defaultcountrycode;
             Isactivityanalysisenabled = isactivityanalysisenabled;
             Iscontentsecuritypolicyenabled = iscontentsecuritypolicyenabled;
-            Isduplicatedetectionenabledforimport = isduplicatedetectionenabledforimport;
+            this._basecurrencyidValue = _basecurrencyidValue;
             Ismodeldrivenappsinmsteamsenabled = ismodeldrivenappsinmsteamsenabled;
-            Negativeformatcode = negativeformatcode;
+            Istextwrapenabled = istextwrapenabled;
+            Isnotesanalysisenabled = isnotesanalysisenabled;
             Allowclientmessagebarad = allowclientmessagebarad;
-            Taskbasedflowenabled = taskbasedflowenabled;
-            Contentsecuritypolicyconfiguration = contentsecuritypolicyconfiguration;
+            Usergroupid = usergroupid;
+            Isdisabled = isdisabled;
+            Isduplicatedetectionenabledforofflinesync = isduplicatedetectionenabledforofflinesync;
             Languagecode = languagecode;
             Appdesignerexperienceenabled = appdesignerexperienceenabled;
             Categoryprefix = categoryprefix;
             Ispreviewenabledforactioncard = ispreviewenabledforactioncard;
+            Ismobileofflineenabled = ismobileofflineenabled;
             Microsoftflowenvironment = microsoftflowenvironment;
-            Ispaienabled = ispaienabled;
-            EntityimageUrl = entityimageUrl;
-            Sessiontimeoutinmins = sessiontimeoutinmins;
-            Cortanaproactiveexperienceenabled = cortanaproactiveexperienceenabled;
+            Isexternalsearchindexenabled = isexternalsearchindexenabled;
             Enablelivepersonacarduci = enablelivepersonacarduci;
             Timeformatcode = timeformatcode;
             Dayssincerecordlastmodifiedmaxvalue = dayssincerecordlastmodifiedmaxvalue;
@@ -294,79 +292,81 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Useskypeprotocol = useskypeprotocol;
             Isfolderbasedtrackingenabled = isfolderbasedtrackingenabled;
             Isdefaultcountrycodecheckenabled = isdefaultcountrycodecheckenabled;
-            Generatealertsforerrors = generatealertsforerrors;
+            Auditretentionperiod = auditretentionperiod;
+            Entityimage = entityimage;
+            Fiscalyearformatyear = fiscalyearformatyear;
             EntityimageTimestamp = entityimageTimestamp;
             Privreportinggroupname = privreportinggroupname;
+            Yearstartweekcode = yearstartweekcode;
             Uselegacyrendering = uselegacyrendering;
             Maximumtrackingnumber = maximumtrackingnumber;
+            Isofficegraphenabled = isofficegraphenabled;
             Allowautoresponsecreation = allowautoresponsecreation;
             Allowlegacyclientexperience = allowlegacyclientexperience;
             Ismsteamsenabled = ismsteamsenabled;
             Enablemicrosoftflowintegration = enablemicrosoftflowintegration;
-            Yammernetworkpermalink = yammernetworkpermalink;
-            Allowlegacydialogsembedding = allowlegacydialogsembedding;
-            Enablepricingoncreate = enablepricingoncreate;
+            Emailcorrelationenabled = emailcorrelationenabled;
+            Socialinsightsenabled = socialinsightsenabled;
+            this._createdbyValue = _createdbyValue;
             Initialversion = initialversion;
-            Maximumactivebusinessprocessflowsallowedperentity = maximumactivebusinessprocessflowsallowedperentity;
-            Pricingdecimalprecision = pricingdecimalprecision;
+            Delegatedadminuserid = delegatedadminuserid;
+            Isfiscalperiodmonthbased = isfiscalperiodmonthbased;
             Fiscalperiodtype = fiscalperiodtype;
             Inactivitytimeoutreminderinmins = inactivitytimeoutreminderinmins;
             Disabledreason = disabledreason;
+            Uniquespecifierlength = uniquespecifierlength;
             Ispdfgenerationenabled = ispdfgenerationenabled;
-            Isduplicatedetectionenabledforofflinesync = isduplicatedetectionenabledforofflinesync;
+            Enablelivepersoncardintegrationinoffice = enablelivepersoncardintegrationinoffice;
             Maxrecordsforexporttoexcel = maxrecordsforexporttoexcel;
             Useraccessauditinginterval = useraccessauditinginterval;
             Kaprefix = kaprefix;
             Allowmarketingemailexecution = allowmarketingemailexecution;
-            Aciwebendpointurl = aciwebendpointurl;
+            Sqmenabled = sqmenabled;
             Timeformatstring = timeformatstring;
             Iscontextualemailenabled = iscontextualemailenabled;
             Dateformatcode = dateformatcode;
             Webresourcehash = webresourcehash;
             Syncoptinselection = syncoptinselection;
             Sortid = sortid;
-            Trackingprefix = trackingprefix;
+            Globalhelpurl = globalhelpurl;
             Isallmoneydecimal = isallmoneydecimal;
+            Fiscalyearformatsuffix = fiscalyearformatsuffix;
             Isauditenabled = isauditenabled;
             Fiscalyearformat = fiscalyearformat;
-            Ignoreinternalemail = ignoreinternalemail;
-            this._basecurrencyidValue = _basecurrencyidValue;
-            Rierrorstatus = rierrorstatus;
+            Sendbulkemailinuci = sendbulkemailinuci;
             Defaultcrmcustomname = defaultcrmcustomname;
-            Emailcorrelationenabled = emailcorrelationenabled;
             Currencyformatcode = currencyformatcode;
             Isbpfentitycustomizationfeatureenabled = isbpfentitycustomizationfeatureenabled;
-            Privacystatementurl = privacystatementurl;
+            Maxconditionsformobileofflinefilters = maxconditionsformobileofflinefilters;
             Businessclosurecalendarid = businessclosurecalendarid;
             Showweeknumber = showweeknumber;
-            Uniquespecifierlength = uniquespecifierlength;
-            Sendbulkemailinuci = sendbulkemailinuci;
+            Fiscalcalendarstart = fiscalcalendarstart;
+            Sessiontimeoutinmins = sessiontimeoutinmins;
             Appointmentricheditorexperience = appointmentricheditorexperience;
-            Isenabledforallroles = isenabledforallroles;
-            this._defaultmobileofflineprofileidValue = _defaultmobileofflineprofileidValue;
-            Isappointmentattachmentsyncenabled = isappointmentattachmentsyncenabled;
+            this._defaultemailserverprofileidValue = _defaultemailserverprofileidValue;
+            Integrationuserid = integrationuserid;
+            EntityimageUrl = entityimageUrl;
             Isnewaddproductexperienceenabled = isnewaddproductexperienceenabled;
-            Maxverboseloggingmailbox = maxverboseloggingmailbox;
-            Slapausestates = slapausestates;
-            Enablelivepersoncardintegrationinoffice = enablelivepersoncardintegrationinoffice;
+            Pmdesignator = pmdesignator;
             Sampledataimportid = sampledataimportid;
             Name = name;
+            Currencydecimalprecision = currencydecimalprecision;
             Emailconnectionchannel = emailconnectionchannel;
             Ispreviewforemailmonitoringallowed = ispreviewforemailmonitoringallowed;
             Allowunresolvedpartiesonemailsend = allowunresolvedpartiesonemailsend;
+            Ispaienabled = ispaienabled;
             Isautodatacapturev2enabled = isautodatacapturev2enabled;
-            Externalpartyentitysettings = externalpartyentitysettings;
-            Globalappendurlparametersenabled = globalappendurlparametersenabled;
-            Inactivitytimeoutinmins = inactivitytimeoutinmins;
-            Sqmenabled = sqmenabled;
+            Allowautounsubscribeacknowledgement = allowautounsubscribeacknowledgement;
+            Nexttrackingnumber = nexttrackingnumber;
+            Enablepricingoncreate = enablepricingoncreate;
             Parsedtablecolumnprefix = parsedtablecolumnprefix;
-            Socialinsightsenabled = socialinsightsenabled;
+            Allowusersseeappdownloadmessage = allowusersseeappdownloadmessage;
             Decimalsymbol = decimalsymbol;
             Modifiedon = modifiedon;
             Signupoutlookdownloadfwlink = signupoutlookdownloadfwlink;
             Disablesocialcare = disablesocialcare;
             Resolvesimilarunresolvedemailaddress = resolvesimilarunresolvedemailaddress;
-            Maxproductsinbundle = maxproductsinbundle;
+            Unresolveemailaddressifmultiplematch = unresolveemailaddressifmultiplematch;
             Sharetopreviousowneronassign = sharetopreviousowneronassign;
             Isactioncardenabled = isactioncardenabled;
             Reportinggroupid = reportinggroupid;
@@ -374,11 +374,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Isfolderautocreatedonsp = isfolderautocreatedonsp;
             Maxfolderbasedtrackingmappings = maxfolderbasedtrackingmappings;
             Sqlaccessgroupid = sqlaccessgroupid;
-            Currencydecimalprecision = currencydecimalprecision;
+            Trackingprefix = trackingprefix;
             Yammergroupid = yammergroupid;
             Dateformatstring = dateformatstring;
-            Defaultthemedata = defaultthemedata;
-            Allowuserformmodepreference = allowuserformmodepreference;
+            Yammerpostmethod = yammerpostmethod;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
             LkPrincipalobjectattributeaccessOrganizationid = lkPrincipalobjectattributeaccessOrganizationid;
             OrganizationTheme = organizationTheme;
             OrganizationUserMapping = organizationUserMapping;
@@ -539,6 +539,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "autoapplydefaultoncasecreate")]
+        public bool? Autoapplydefaultoncasecreate { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "maxverboseloggingsynccycles")]
         public int? Maxverboseloggingsynccycles { get; set; }
 
@@ -554,18 +559,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "entityimageid")]
-        public string Entityimageid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "minaddressbooksyncinterval")]
-        public int? Minaddressbooksyncinterval { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "showkbarticledeprecationnotification")]
-        public bool? Showkbarticledeprecationnotification { get; set; }
+        [JsonProperty(PropertyName = "expiresubscriptionsindays")]
+        public int? Expiresubscriptionsindays { get; set; }
 
         /// <summary>
         /// </summary>
@@ -579,8 +574,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "maxappointmentdurationdays")]
-        public int? Maxappointmentdurationdays { get; set; }
+        [JsonProperty(PropertyName = "taskbasedflowenabled")]
+        public bool? Taskbasedflowenabled { get; set; }
 
         /// <summary>
         /// </summary>
@@ -619,6 +614,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "sessiontimeoutreminderinmins")]
+        public int? Sessiontimeoutreminderinmins { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "mailboxpermanentissueminrange")]
+        public int? Mailboxpermanentissueminrange { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "allowwebexcelexport")]
         public bool? Allowwebexcelexport { get; set; }
 
@@ -634,8 +639,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "pastexpansionwindow")]
-        public int? Pastexpansionwindow { get; set; }
+        [JsonProperty(PropertyName = "longdateformatcode")]
+        public int? Longdateformatcode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -649,13 +654,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "defaultemailsettings")]
-        public string Defaultemailsettings { get; set; }
+        [JsonProperty(PropertyName = "allowentityonlyaudit")]
+        public bool? Allowentityonlyaudit { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "hashfilterkeywords")]
-        public string Hashfilterkeywords { get; set; }
+        [JsonProperty(PropertyName = "globalappendurlparametersenabled")]
+        public bool? Globalappendurlparametersenabled { get; set; }
 
         /// <summary>
         /// </summary>
@@ -679,8 +684,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "campaignprefix")]
-        public string Campaignprefix { get; set; }
+        [JsonProperty(PropertyName = "quoteprefix")]
+        public string Quoteprefix { get; set; }
 
         /// <summary>
         /// </summary>
@@ -699,13 +704,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "allowautounsubscribeacknowledgement")]
-        public bool? Allowautounsubscribeacknowledgement { get; set; }
+        [JsonProperty(PropertyName = "ismobileclientondemandsyncenabled")]
+        public bool? Ismobileclientondemandsyncenabled { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ismsteamssettingchangedbyuser")]
-        public bool? Ismsteamssettingchangedbyuser { get; set; }
+        [JsonProperty(PropertyName = "enableimmersiveskypeintegration")]
+        public bool? Enableimmersiveskypeintegration { get; set; }
 
         /// <summary>
         /// </summary>
@@ -739,18 +744,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "usergroupid")]
-        public string Usergroupid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "useinbuiltrulefordefaultpricelistselection")]
-        public bool? Useinbuiltrulefordefaultpricelistselection { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "bounddashboarddefaultcardexpanded")]
-        public bool? Bounddashboarddefaultcardexpanded { get; set; }
+        [JsonProperty(PropertyName = "blockedattachments")]
+        public string Blockedattachments { get; set; }
 
         /// <summary>
         /// </summary>
@@ -784,28 +779,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "maxconditionsformobileofflinefilters")]
-        public int? Maxconditionsformobileofflinefilters { get; set; }
+        [JsonProperty(PropertyName = "emailsendpollingperiod")]
+        public int? Emailsendpollingperiod { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "minoutlooksyncinterval")]
-        public int? Minoutlooksyncinterval { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "requireapprovalforqueueemail")]
-        public bool? Requireapprovalforqueueemail { get; set; }
+        [JsonProperty(PropertyName = "useinbuiltrulefordefaultpricelistselection")]
+        public bool? Useinbuiltrulefordefaultpricelistselection { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "isrichtextnotesenabled")]
         public bool? Isrichtextnotesenabled { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ismsteamscollaborationenabled")]
-        public bool? Ismsteamscollaborationenabled { get; set; }
 
         /// <summary>
         /// </summary>
@@ -844,8 +829,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "emailsendpollingperiod")]
-        public int? Emailsendpollingperiod { get; set; }
+        [JsonProperty(PropertyName = "requireapprovalforqueueemail")]
+        public bool? Requireapprovalforqueueemail { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "tokenexpiry")]
+        public int? Tokenexpiry { get; set; }
 
         /// <summary>
         /// </summary>
@@ -864,18 +854,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "longdateformatcode")]
-        public int? Longdateformatcode { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "isduplicatedetectionenabledforonlinecreateupdate")]
         public bool? Isduplicatedetectionenabledforonlinecreateupdate { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_defaultemailserverprofileid_value")]
-        public string _defaultemailserverprofileidValue { get; set; }
+        [JsonProperty(PropertyName = "contentsecuritypolicyconfiguration")]
+        public string Contentsecuritypolicyconfiguration { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "inactivitytimeoutenabled")]
+        public bool? Inactivitytimeoutenabled { get; set; }
 
         /// <summary>
         /// </summary>
@@ -894,8 +884,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "fiscalyearformatyear")]
-        public int? Fiscalyearformatyear { get; set; }
+        [JsonProperty(PropertyName = "supportuserid")]
+        public string Supportuserid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -914,8 +904,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "isactionsupportfeatureenabled")]
-        public bool? Isactionsupportfeatureenabled { get; set; }
+        [JsonProperty(PropertyName = "isappointmentattachmentsyncenabled")]
+        public bool? Isappointmentattachmentsyncenabled { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "isenabledforallroles")]
+        public bool? Isenabledforallroles { get; set; }
 
         /// <summary>
         /// </summary>
@@ -929,8 +924,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "auditretentionperiod")]
-        public int? Auditretentionperiod { get; set; }
+        [JsonProperty(PropertyName = "calendartype")]
+        public int? Calendartype { get; set; }
 
         /// <summary>
         /// </summary>
@@ -939,18 +934,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "autoapplydefaultoncasecreate")]
-        public bool? Autoapplydefaultoncasecreate { get; set; }
+        [JsonProperty(PropertyName = "hashfilterkeywords")]
+        public string Hashfilterkeywords { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "isnotesanalysisenabled")]
-        public bool? Isnotesanalysisenabled { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "iscontactmailingaddresssyncenabled")]
-        public bool? Iscontactmailingaddresssyncenabled { get; set; }
+        [JsonProperty(PropertyName = "ismsteamsusersyncenabled")]
+        public bool? Ismsteamsusersyncenabled { get; set; }
 
         /// <summary>
         /// </summary>
@@ -974,28 +964,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "schedulingengine")]
         public int? Schedulingengine { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        [JsonProperty(PropertyName = "grantaccesstonetworkservice")]
+        public bool? Grantaccesstonetworkservice { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "rendersecureiframeforemail")]
-        public bool? Rendersecureiframeforemail { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ispresenceenabled")]
-        public bool? Ispresenceenabled { get; set; }
+        [JsonProperty(PropertyName = "isdelveactionhubintegrationenabled")]
+        public bool? Isdelveactionhubintegrationenabled { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1009,28 +994,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "numbergroupformat")]
-        public string Numbergroupformat { get; set; }
+        [JsonProperty(PropertyName = "entityimageid")]
+        public string Entityimageid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "blockedattachments")]
-        public string Blockedattachments { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "inactivitytimeoutenabled")]
-        public bool? Inactivitytimeoutenabled { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "unresolveemailaddressifmultiplematch")]
-        public bool? Unresolveemailaddressifmultiplematch { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "calendartype")]
-        public int? Calendartype { get; set; }
+        [JsonProperty(PropertyName = "trackingtokeniddigits")]
+        public int? Trackingtokeniddigits { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1039,8 +1009,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "sessiontimeoutenabled")]
-        public bool? Sessiontimeoutenabled { get; set; }
+        [JsonProperty(PropertyName = "yammernetworkpermalink")]
+        public string Yammernetworkpermalink { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1059,8 +1029,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "isexternalsearchindexenabled")]
-        public bool? Isexternalsearchindexenabled { get; set; }
+        [JsonProperty(PropertyName = "ispresenceenabled")]
+        public bool? Ispresenceenabled { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "pastexpansionwindow")]
+        public int? Pastexpansionwindow { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1069,8 +1044,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "yammerpostmethod")]
-        public int? Yammerpostmethod { get; set; }
+        [JsonProperty(PropertyName = "ismsteamssettingchangedbyuser")]
+        public bool? Ismsteamssettingchangedbyuser { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1079,18 +1054,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "isdelveactionhubintegrationenabled")]
-        public bool? Isdelveactionhubintegrationenabled { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "azureschedulerjobcollectionname")]
         public string Azureschedulerjobcollectionname { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "isofficegraphenabled")]
-        public bool? Isofficegraphenabled { get; set; }
+        [JsonProperty(PropertyName = "numbergroupformat")]
+        public string Numbergroupformat { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1099,18 +1069,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "trackingtokeniddigits")]
-        public int? Trackingtokeniddigits { get; set; }
+        [JsonProperty(PropertyName = "rierrorstatus")]
+        public int? Rierrorstatus { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "discountcalculationmethod")]
-        public int? Discountcalculationmethod { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ismanualsalesforecastingenabled")]
-        public bool? Ismanualsalesforecastingenabled { get; set; }
+        [JsonProperty(PropertyName = "allowlegacydialogsembedding")]
+        public bool? Allowlegacydialogsembedding { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1119,8 +1084,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "fiscalyeardisplaycode")]
-        public int? Fiscalyeardisplaycode { get; set; }
+        [JsonProperty(PropertyName = "maxappointmentdurationdays")]
+        public int? Maxappointmentdurationdays { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "minaddressbooksyncinterval")]
+        public int? Minaddressbooksyncinterval { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1129,8 +1099,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "goalrollupexpirytime")]
-        public int? Goalrollupexpirytime { get; set; }
+        [JsonProperty(PropertyName = "isduplicatedetectionenabledforimport")]
+        public bool? Isduplicatedetectionenabledforimport { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "iscustomcontrolsincanvasappsenabled")]
+        public bool? Iscustomcontrolsincanvasappsenabled { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1139,19 +1114,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ismsteamsusersyncenabled")]
-        public bool? Ismsteamsusersyncenabled { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "createproductswithoutparentinactivestate")]
         public bool? Createproductswithoutparentinactivestate { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonConverter(typeof(Base64UrlJsonConverter))]
-        [JsonProperty(PropertyName = "entityimage")]
-        public byte[] Entityimage { get; set; }
+        [JsonProperty(PropertyName = "enableunifiedinterfaceshellrefresh")]
+        public bool? Enableunifiedinterfaceshellrefresh { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1167,11 +1136,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "usereadform")]
         public bool? Usereadform { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ismobileclientondemandsyncenabled")]
-        public bool? Ismobileclientondemandsyncenabled { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1200,8 +1164,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ismobileofflineenabled")]
-        public bool? Ismobileofflineenabled { get; set; }
+        [JsonProperty(PropertyName = "isactionsupportfeatureenabled")]
+        public bool? Isactionsupportfeatureenabled { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1210,13 +1174,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "defaultthemedata")]
+        public string Defaultthemedata { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "isonedriveenabled")]
         public bool? Isonedriveenabled { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "externalpartycorrelationkeys")]
-        public string Externalpartycorrelationkeys { get; set; }
+        [JsonProperty(PropertyName = "minoutlooksyncinterval")]
+        public int? Minoutlooksyncinterval { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1225,13 +1194,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "expiresubscriptionsindays")]
-        public int? Expiresubscriptionsindays { get; set; }
+        [JsonProperty(PropertyName = "auditretentionperiodv2")]
+        public int? Auditretentionperiodv2 { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "istextwrapenabled")]
-        public bool? Istextwrapenabled { get; set; }
+        [JsonProperty(PropertyName = "negativeformatcode")]
+        public int? Negativeformatcode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1245,8 +1214,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "nexttrackingnumber")]
-        public int? Nexttrackingnumber { get; set; }
+        [JsonProperty(PropertyName = "maxproductsinbundle")]
+        public int? Maxproductsinbundle { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "slapausestates")]
+        public string Slapausestates { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1257,11 +1231,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "plugintracelogsetting")]
         public int? Plugintracelogsetting { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "yearstartweekcode")]
-        public int? Yearstartweekcode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1285,11 +1254,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "delegatedadminuserid")]
-        public string Delegatedadminuserid { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "socialinsightsinstance")]
         public string Socialinsightsinstance { get; set; }
 
@@ -1297,6 +1261,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "ishierarchicalsecuritymodelenabled")]
         public bool? Ishierarchicalsecuritymodelenabled { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "privacystatementurl")]
+        public string Privacystatementurl { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1335,11 +1304,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "tagpollingperiod")]
         public int? Tagpollingperiod { get; set; }
 
@@ -1355,8 +1319,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "reportinggroupname")]
-        public string Reportinggroupname { get; set; }
+        [JsonProperty(PropertyName = "clientfeatureset")]
+        public string Clientfeatureset { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1365,13 +1329,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "isemailmonitoringallowed")]
-        public bool? Isemailmonitoringallowed { get; set; }
+        [JsonProperty(PropertyName = "maxverboseloggingmailbox")]
+        public int? Maxverboseloggingmailbox { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
+        [JsonProperty(PropertyName = "ismanualsalesforecastingenabled")]
+        public bool? Ismanualsalesforecastingenabled { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "isduplicatedetectionenabled")]
+        public bool? Isduplicatedetectionenabled { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1385,13 +1354,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "quickfindrecordlimitenabled")]
-        public bool? Quickfindrecordlimitenabled { get; set; }
+        [JsonProperty(PropertyName = "autoapplysla")]
+        public bool? Autoapplysla { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "isfiscalperiodmonthbased")]
-        public bool? Isfiscalperiodmonthbased { get; set; }
+        [JsonProperty(PropertyName = "ismsteamscollaborationenabled")]
+        public bool? Ismsteamscollaborationenabled { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1405,13 +1374,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "globalhelpurl")]
-        public string Globalhelpurl { get; set; }
+        [JsonProperty(PropertyName = "cortanaproactiveexperienceenabled")]
+        public bool? Cortanaproactiveexperienceenabled { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "supportuserid")]
-        public string Supportuserid { get; set; }
+        [JsonProperty(PropertyName = "goalrollupexpirytime")]
+        public int? Goalrollupexpirytime { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "showkbarticledeprecationnotification")]
+        public bool? Showkbarticledeprecationnotification { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1420,8 +1394,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "iscustomcontrolsincanvasappsenabled")]
-        public bool? Iscustomcontrolsincanvasappsenabled { get; set; }
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1435,18 +1409,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "quoteprefix")]
-        public string Quoteprefix { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "pmdesignator")]
-        public string Pmdesignator { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "auditretentionperiodv2")]
-        public int? Auditretentionperiodv2 { get; set; }
+        [JsonProperty(PropertyName = "ignoreinternalemail")]
+        public bool? Ignoreinternalemail { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1480,18 +1444,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "autoapplysla")]
-        public bool? Autoapplysla { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "socialinsightstermsaccepted")]
         public bool? Socialinsightstermsaccepted { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "isdisabled")]
-        public bool? Isdisabled { get; set; }
+        [JsonProperty(PropertyName = "defaultemailsettings")]
+        public string Defaultemailsettings { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "generatealertsforerrors")]
+        public bool? Generatealertsforerrors { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1530,11 +1494,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "fiscalcalendarstart")]
-        public System.DateTimeOffset? Fiscalcalendarstart { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "fullnameconventioncode")]
         public int? Fullnameconventioncode { get; set; }
 
@@ -1555,18 +1514,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "discountcalculationmethod")]
+        public int? Discountcalculationmethod { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "organizationid")]
         public string Organizationid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "mailboxpermanentissueminrange")]
-        public int? Mailboxpermanentissueminrange { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "allowentityonlyaudit")]
-        public bool? Allowentityonlyaudit { get; set; }
+        [JsonProperty(PropertyName = "maximumactivebusinessprocessflowsallowedperentity")]
+        public int? Maximumactivebusinessprocessflowsallowedperentity { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1580,13 +1539,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "externalpartycorrelationkeys")]
+        public string Externalpartycorrelationkeys { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "hashminaddresscount")]
         public int? Hashminaddresscount { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "clientfeatureset")]
-        public string Clientfeatureset { get; set; }
+        [JsonProperty(PropertyName = "dateseparator")]
+        public string Dateseparator { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1595,8 +1559,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "integrationuserid")]
-        public string Integrationuserid { get; set; }
+        [JsonProperty(PropertyName = "allowuserformmodepreference")]
+        public bool? Allowuserformmodepreference { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1605,8 +1569,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "enableunifiedinterfaceshellrefresh")]
-        public bool? Enableunifiedinterfaceshellrefresh { get; set; }
+        [JsonProperty(PropertyName = "campaignprefix")]
+        public string Campaignprefix { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1620,13 +1584,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "grantaccesstonetworkservice")]
-        public bool? Grantaccesstonetworkservice { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "tokenexpiry")]
-        public int? Tokenexpiry { get; set; }
+        [JsonProperty(PropertyName = "quickfindrecordlimitenabled")]
+        public bool? Quickfindrecordlimitenabled { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1635,13 +1594,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "rendersecureiframeforemail")]
+        public bool? Rendersecureiframeforemail { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "inactivitytimeoutinmins")]
+        public int? Inactivitytimeoutinmins { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "sessiontimeoutenabled")]
+        public bool? Sessiontimeoutenabled { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "iscontactmailingaddresssyncenabled")]
+        public bool? Iscontactmailingaddresssyncenabled { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "externalbaseurl")]
         public string Externalbaseurl { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "dateseparator")]
-        public string Dateseparator { get; set; }
+        [JsonProperty(PropertyName = "isemailmonitoringallowed")]
+        public bool? Isemailmonitoringallowed { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1650,13 +1629,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_defaultmobileofflineprofileid_value")]
+        public string _defaultmobileofflineprofileidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "amdesignator")]
         public string Amdesignator { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "enableimmersiveskypeintegration")]
-        public bool? Enableimmersiveskypeintegration { get; set; }
+        [JsonProperty(PropertyName = "pricingdecimalprecision")]
+        public int? Pricingdecimalprecision { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1665,8 +1649,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "isduplicatedetectionenabled")]
-        public bool? Isduplicatedetectionenabled { get; set; }
+        [JsonProperty(PropertyName = "bounddashboarddefaultcardexpanded")]
+        public bool? Bounddashboarddefaultcardexpanded { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1675,18 +1659,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "reportinggroupname")]
+        public string Reportinggroupname { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "isdelegateaccessenabled")]
         public bool? Isdelegateaccessenabled { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "featureset")]
-        public string Featureset { get; set; }
+        [JsonProperty(PropertyName = "aciwebendpointurl")]
+        public string Aciwebendpointurl { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "sessiontimeoutreminderinmins")]
-        public int? Sessiontimeoutreminderinmins { get; set; }
+        [JsonProperty(PropertyName = "featureset")]
+        public string Featureset { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1700,8 +1689,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "fiscalyearformatsuffix")]
-        public int? Fiscalyearformatsuffix { get; set; }
+        [JsonProperty(PropertyName = "fiscalyeardisplaycode")]
+        public int? Fiscalyeardisplaycode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1710,8 +1699,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "allowusersseeappdownloadmessage")]
-        public bool? Allowusersseeappdownloadmessage { get; set; }
+        [JsonProperty(PropertyName = "externalpartyentitysettings")]
+        public string Externalpartyentitysettings { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1730,8 +1719,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "isduplicatedetectionenabledforimport")]
-        public bool? Isduplicatedetectionenabledforimport { get; set; }
+        [JsonProperty(PropertyName = "_basecurrencyid_value")]
+        public string _basecurrencyidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1740,8 +1729,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "negativeformatcode")]
-        public int? Negativeformatcode { get; set; }
+        [JsonProperty(PropertyName = "istextwrapenabled")]
+        public bool? Istextwrapenabled { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "isnotesanalysisenabled")]
+        public bool? Isnotesanalysisenabled { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1750,13 +1744,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "taskbasedflowenabled")]
-        public bool? Taskbasedflowenabled { get; set; }
+        [JsonProperty(PropertyName = "usergroupid")]
+        public string Usergroupid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "contentsecuritypolicyconfiguration")]
-        public string Contentsecuritypolicyconfiguration { get; set; }
+        [JsonProperty(PropertyName = "isdisabled")]
+        public bool? Isdisabled { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "isduplicatedetectionenabledforofflinesync")]
+        public bool? Isduplicatedetectionenabledforofflinesync { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1780,28 +1779,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "ismobileofflineenabled")]
+        public bool? Ismobileofflineenabled { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "microsoftflowenvironment")]
         public string Microsoftflowenvironment { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ispaienabled")]
-        public bool? Ispaienabled { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "entityimage_url")]
-        public string EntityimageUrl { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "sessiontimeoutinmins")]
-        public int? Sessiontimeoutinmins { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "cortanaproactiveexperienceenabled")]
-        public bool? Cortanaproactiveexperienceenabled { get; set; }
+        [JsonProperty(PropertyName = "isexternalsearchindexenabled")]
+        public bool? Isexternalsearchindexenabled { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1845,8 +1834,19 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "generatealertsforerrors")]
-        public bool? Generatealertsforerrors { get; set; }
+        [JsonProperty(PropertyName = "auditretentionperiod")]
+        public int? Auditretentionperiod { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonConverter(typeof(Base64UrlJsonConverter))]
+        [JsonProperty(PropertyName = "entityimage")]
+        public byte[] Entityimage { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "fiscalyearformatyear")]
+        public int? Fiscalyearformatyear { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1860,6 +1860,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "yearstartweekcode")]
+        public int? Yearstartweekcode { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "uselegacyrendering")]
         public bool? Uselegacyrendering { get; set; }
 
@@ -1867,6 +1872,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "maximumtrackingnumber")]
         public int? Maximumtrackingnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "isofficegraphenabled")]
+        public bool? Isofficegraphenabled { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1890,18 +1900,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "yammernetworkpermalink")]
-        public string Yammernetworkpermalink { get; set; }
+        [JsonProperty(PropertyName = "emailcorrelationenabled")]
+        public bool? Emailcorrelationenabled { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "allowlegacydialogsembedding")]
-        public bool? Allowlegacydialogsembedding { get; set; }
+        [JsonProperty(PropertyName = "socialinsightsenabled")]
+        public bool? Socialinsightsenabled { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "enablepricingoncreate")]
-        public bool? Enablepricingoncreate { get; set; }
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1910,13 +1920,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "maximumactivebusinessprocessflowsallowedperentity")]
-        public int? Maximumactivebusinessprocessflowsallowedperentity { get; set; }
+        [JsonProperty(PropertyName = "delegatedadminuserid")]
+        public string Delegatedadminuserid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "pricingdecimalprecision")]
-        public int? Pricingdecimalprecision { get; set; }
+        [JsonProperty(PropertyName = "isfiscalperiodmonthbased")]
+        public bool? Isfiscalperiodmonthbased { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1935,13 +1945,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "uniquespecifierlength")]
+        public int? Uniquespecifierlength { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "ispdfgenerationenabled")]
         public string Ispdfgenerationenabled { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "isduplicatedetectionenabledforofflinesync")]
-        public bool? Isduplicatedetectionenabledforofflinesync { get; set; }
+        [JsonProperty(PropertyName = "enablelivepersoncardintegrationinoffice")]
+        public bool? Enablelivepersoncardintegrationinoffice { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1965,8 +1980,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "aciwebendpointurl")]
-        public string Aciwebendpointurl { get; set; }
+        [JsonProperty(PropertyName = "sqmenabled")]
+        public bool? Sqmenabled { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2000,13 +2015,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "trackingprefix")]
-        public string Trackingprefix { get; set; }
+        [JsonProperty(PropertyName = "globalhelpurl")]
+        public string Globalhelpurl { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "isallmoneydecimal")]
         public bool? Isallmoneydecimal { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "fiscalyearformatsuffix")]
+        public int? Fiscalyearformatsuffix { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2020,28 +2040,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ignoreinternalemail")]
-        public bool? Ignoreinternalemail { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_basecurrencyid_value")]
-        public string _basecurrencyidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "rierrorstatus")]
-        public int? Rierrorstatus { get; set; }
+        [JsonProperty(PropertyName = "sendbulkemailinuci")]
+        public bool? Sendbulkemailinuci { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "defaultcrmcustomname")]
         public string Defaultcrmcustomname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "emailcorrelationenabled")]
-        public bool? Emailcorrelationenabled { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2055,8 +2060,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "privacystatementurl")]
-        public string Privacystatementurl { get; set; }
+        [JsonProperty(PropertyName = "maxconditionsformobileofflinefilters")]
+        public int? Maxconditionsformobileofflinefilters { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2070,13 +2075,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "uniquespecifierlength")]
-        public int? Uniquespecifierlength { get; set; }
+        [JsonProperty(PropertyName = "fiscalcalendarstart")]
+        public System.DateTimeOffset? Fiscalcalendarstart { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "sendbulkemailinuci")]
-        public bool? Sendbulkemailinuci { get; set; }
+        [JsonProperty(PropertyName = "sessiontimeoutinmins")]
+        public int? Sessiontimeoutinmins { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2085,18 +2090,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "isenabledforallroles")]
-        public bool? Isenabledforallroles { get; set; }
+        [JsonProperty(PropertyName = "_defaultemailserverprofileid_value")]
+        public string _defaultemailserverprofileidValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_defaultmobileofflineprofileid_value")]
-        public string _defaultmobileofflineprofileidValue { get; set; }
+        [JsonProperty(PropertyName = "integrationuserid")]
+        public string Integrationuserid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "isappointmentattachmentsyncenabled")]
-        public bool? Isappointmentattachmentsyncenabled { get; set; }
+        [JsonProperty(PropertyName = "entityimage_url")]
+        public string EntityimageUrl { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2105,18 +2110,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "maxverboseloggingmailbox")]
-        public int? Maxverboseloggingmailbox { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "slapausestates")]
-        public string Slapausestates { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "enablelivepersoncardintegrationinoffice")]
-        public bool? Enablelivepersoncardintegrationinoffice { get; set; }
+        [JsonProperty(PropertyName = "pmdesignator")]
+        public string Pmdesignator { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2127,6 +2122,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "currencydecimalprecision")]
+        public int? Currencydecimalprecision { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2145,28 +2145,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "ispaienabled")]
+        public bool? Ispaienabled { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "isautodatacapturev2enabled")]
         public bool? Isautodatacapturev2enabled { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "externalpartyentitysettings")]
-        public string Externalpartyentitysettings { get; set; }
+        [JsonProperty(PropertyName = "allowautounsubscribeacknowledgement")]
+        public bool? Allowautounsubscribeacknowledgement { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "globalappendurlparametersenabled")]
-        public bool? Globalappendurlparametersenabled { get; set; }
+        [JsonProperty(PropertyName = "nexttrackingnumber")]
+        public int? Nexttrackingnumber { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "inactivitytimeoutinmins")]
-        public int? Inactivitytimeoutinmins { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "sqmenabled")]
-        public bool? Sqmenabled { get; set; }
+        [JsonProperty(PropertyName = "enablepricingoncreate")]
+        public bool? Enablepricingoncreate { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2175,8 +2175,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "socialinsightsenabled")]
-        public bool? Socialinsightsenabled { get; set; }
+        [JsonProperty(PropertyName = "allowusersseeappdownloadmessage")]
+        public bool? Allowusersseeappdownloadmessage { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2205,8 +2205,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "maxproductsinbundle")]
-        public int? Maxproductsinbundle { get; set; }
+        [JsonProperty(PropertyName = "unresolveemailaddressifmultiplematch")]
+        public bool? Unresolveemailaddressifmultiplematch { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2245,8 +2245,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "currencydecimalprecision")]
-        public int? Currencydecimalprecision { get; set; }
+        [JsonProperty(PropertyName = "trackingprefix")]
+        public string Trackingprefix { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2260,13 +2260,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "defaultthemedata")]
-        public string Defaultthemedata { get; set; }
+        [JsonProperty(PropertyName = "yammerpostmethod")]
+        public int? Yammerpostmethod { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "allowuserformmodepreference")]
-        public bool? Allowuserformmodepreference { get; set; }
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
         /// </summary>

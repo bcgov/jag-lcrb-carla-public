@@ -29,8 +29,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMuserquery
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMuserquery(int? statuscode = default(int?), string _owningteamValue = default(string), string returnedtypecode = default(string), int? querytype = default(int?), string advancedgroupby = default(string), string _parentqueryidValue = default(string), string columnsetxml = default(string), string conditionalformatting = default(string), string description = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string name = default(string), string _modifiedonbehalfbyValue = default(string), string layoutjson = default(string), string fetchxml = default(string), string _createdbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string userqueryid = default(string), string _owninguserValue = default(string), int? statecode = default(int?), string versionnumber = default(string), string _modifiedbyValue = default(string), string layoutxml = default(string), string _owneridValue = default(string), string offlinesqlquery = default(string), string _owningbusinessunitValue = default(string), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> userQuerySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMbulkdeletefailure> userQueryBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMasyncoperation> userQueryAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMuserquery(System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? statuscode = default(int?), string _owningteamValue = default(string), string returnedtypecode = default(string), int? querytype = default(int?), string advancedgroupby = default(string), string _parentqueryidValue = default(string), string columnsetxml = default(string), string fetchxml = default(string), string _owninguserValue = default(string), string description = default(string), string conditionalformatting = default(string), int? statecode = default(int?), string name = default(string), string _modifiedonbehalfbyValue = default(string), string layoutjson = default(string), string _owningbusinessunitValue = default(string), string _createdbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string userqueryid = default(string), string layoutxml = default(string), string versionnumber = default(string), string _modifiedbyValue = default(string), string _owneridValue = default(string), string offlinesqlquery = default(string), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> userQuerySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMbulkdeletefailure> userQueryBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMasyncoperation> userQueryAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser))
         {
+            Modifiedon = modifiedon;
             Statuscode = statuscode;
             this._owningteamValue = _owningteamValue;
             Returnedtypecode = returnedtypecode;
@@ -38,25 +39,24 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Advancedgroupby = advancedgroupby;
             this._parentqueryidValue = _parentqueryidValue;
             Columnsetxml = columnsetxml;
-            Conditionalformatting = conditionalformatting;
+            Fetchxml = fetchxml;
+            this._owninguserValue = _owninguserValue;
             Description = description;
-            Modifiedon = modifiedon;
+            Conditionalformatting = conditionalformatting;
+            Statecode = statecode;
             Name = name;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Layoutjson = layoutjson;
-            Fetchxml = fetchxml;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
             this._createdbyValue = _createdbyValue;
             Createdon = createdon;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Userqueryid = userqueryid;
-            this._owninguserValue = _owninguserValue;
-            Statecode = statecode;
+            Layoutxml = layoutxml;
             Versionnumber = versionnumber;
             this._modifiedbyValue = _modifiedbyValue;
-            Layoutxml = layoutxml;
             this._owneridValue = _owneridValue;
             Offlinesqlquery = offlinesqlquery;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
             Ownerid = ownerid;
             Modifiedby = modifiedby;
             Owningteam = owningteam;
@@ -75,6 +75,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -113,8 +118,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "conditionalformatting")]
-        public string Conditionalformatting { get; set; }
+        [JsonProperty(PropertyName = "fetchxml")]
+        public string Fetchxml { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owninguser_value")]
+        public string _owninguserValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -123,8 +133,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
+        [JsonProperty(PropertyName = "conditionalformatting")]
+        public string Conditionalformatting { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -143,8 +158,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "fetchxml")]
-        public string Fetchxml { get; set; }
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -168,13 +183,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
+        [JsonProperty(PropertyName = "layoutxml")]
+        public string Layoutxml { get; set; }
 
         /// <summary>
         /// </summary>
@@ -188,11 +198,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "layoutxml")]
-        public string Layoutxml { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
         public string _owneridValue { get; set; }
 
@@ -200,11 +205,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "offlinesqlquery")]
         public string Offlinesqlquery { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
         /// </summary>

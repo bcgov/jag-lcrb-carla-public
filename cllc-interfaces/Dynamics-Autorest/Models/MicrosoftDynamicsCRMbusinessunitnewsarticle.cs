@@ -29,28 +29,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMbusinessunitnewsarticle class.
         /// </summary>
-        public MicrosoftDynamicsCRMbusinessunitnewsarticle(string newsarticle = default(string), string businessunitnewsarticleid = default(string), string _createdbyValue = default(string), int? timezoneruleversionnumber = default(int?), bool? showonhomepage = default(bool?), string _modifiedbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? activeon = default(System.DateTimeOffset?), string _organizationidValue = default(string), string _createdonbehalfbyValue = default(string), string versionnumber = default(string), System.DateTimeOffset? activeuntil = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), int? articletypecode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), string articletitle = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string articleurl = default(string), string _modifiedonbehalfbyValue = default(string), IList<MicrosoftDynamicsCRMbulkdeletefailure> businessUnitNewsArticleBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMasyncoperation> businessUnitNewsArticleAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMprocesssession> businessUnitNewsArticleProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMbusinessunitnewsarticle(string newsarticle = default(string), string articleurl = default(string), string _organizationidValue = default(string), string businessunitnewsarticleid = default(string), string _modifiedbyValue = default(string), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? activeon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string versionnumber = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? activeuntil = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), int? articletypecode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string articletitle = default(string), string _createdbyValue = default(string), bool? showonhomepage = default(bool?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), int? utcconversiontimezonecode = default(int?), IList<MicrosoftDynamicsCRMbulkdeletefailure> businessUnitNewsArticleBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMasyncoperation> businessUnitNewsArticleAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMprocesssession> businessUnitNewsArticleProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Newsarticle = newsarticle;
-            Businessunitnewsarticleid = businessunitnewsarticleid;
-            this._createdbyValue = _createdbyValue;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
-            Showonhomepage = showonhomepage;
-            this._modifiedbyValue = _modifiedbyValue;
-            Createdon = createdon;
-            Activeon = activeon;
+            Articleurl = articleurl;
             this._organizationidValue = _organizationidValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Businessunitnewsarticleid = businessunitnewsarticleid;
+            this._modifiedbyValue = _modifiedbyValue;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            Activeon = activeon;
+            Createdon = createdon;
             Versionnumber = versionnumber;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Activeuntil = activeuntil;
             Importsequencenumber = importsequencenumber;
             Articletypecode = articletypecode;
             Overriddencreatedon = overriddencreatedon;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
             Articletitle = articletitle;
+            this._createdbyValue = _createdbyValue;
+            Showonhomepage = showonhomepage;
             Modifiedon = modifiedon;
-            Articleurl = articleurl;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
             BusinessUnitNewsArticleBulkDeleteFailures = businessUnitNewsArticleBulkDeleteFailures;
             Createdby = createdby;
             Modifiedby = modifiedby;
@@ -74,38 +74,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "businessunitnewsarticleid")]
-        public string Businessunitnewsarticleid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "showonhomepage")]
-        public bool? Showonhomepage { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "activeon")]
-        public System.DateTimeOffset? Activeon { get; set; }
+        [JsonProperty(PropertyName = "articleurl")]
+        public string Articleurl { get; set; }
 
         /// <summary>
         /// </summary>
@@ -114,13 +84,38 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "businessunitnewsarticleid")]
+        public string Businessunitnewsarticleid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "activeon")]
+        public System.DateTimeOffset? Activeon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
         public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -144,13 +139,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
+        [JsonProperty(PropertyName = "articletitle")]
+        public string Articletitle { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "articletitle")]
-        public string Articletitle { get; set; }
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "showonhomepage")]
+        public bool? Showonhomepage { get; set; }
 
         /// <summary>
         /// </summary>
@@ -159,13 +159,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "articleurl")]
-        public string Articleurl { get; set; }
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
         /// </summary>

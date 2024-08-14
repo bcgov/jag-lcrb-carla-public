@@ -27,9 +27,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMappmodulecomponent class.
         /// </summary>
-        public MicrosoftDynamicsCRMappmodulecomponent(int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), bool? ismetadata = default(bool?), string appmodulecomponentidunique = default(string), int? rootcomponentbehavior = default(int?), string introducedversion = default(string), string rootappmodulecomponentid = default(string), string _modifiedonbehalfbyValue = default(string), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string versionnumber = default(string), decimal? exchangerate = default(decimal?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), bool? isdefault = default(bool?), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string objectid = default(string), int? componenttype = default(int?), string _createdbyValue = default(string), string appmodulecomponentid = default(string), string _appmoduleiduniqueValue = default(string), MicrosoftDynamicsCRMsystemuser appmodulecomponentModifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser appmodulecomponentCreatedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMappmodule appmoduleid = default(MicrosoftDynamicsCRMappmodule))
+        public MicrosoftDynamicsCRMappmodulecomponent(System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), bool? ismetadata = default(bool?), string appmodulecomponentidunique = default(string), int? rootcomponentbehavior = default(int?), string introducedversion = default(string), string rootappmodulecomponentid = default(string), string _modifiedonbehalfbyValue = default(string), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string versionnumber = default(string), decimal? exchangerate = default(decimal?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), bool? isdefault = default(bool?), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string objectid = default(string), int? componenttype = default(int?), string _createdbyValue = default(string), string appmodulecomponentid = default(string), string _appmoduleiduniqueValue = default(string), MicrosoftDynamicsCRMsystemuser appmodulecomponentModifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser appmodulecomponentCreatedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMappmodule appmoduleid = default(MicrosoftDynamicsCRMappmodule))
         {
-            Utcconversiontimezonecode = utcconversiontimezonecode;
             Overwritetime = overwritetime;
             Ismetadata = ismetadata;
             Appmodulecomponentidunique = appmodulecomponentidunique;
@@ -42,6 +41,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Versionnumber = versionnumber;
             Exchangerate = exchangerate;
             Modifiedon = modifiedon;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
             Isdefault = isdefault;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             this._modifiedbyValue = _modifiedbyValue;
@@ -62,11 +62,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -127,6 +122,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
         /// </summary>
