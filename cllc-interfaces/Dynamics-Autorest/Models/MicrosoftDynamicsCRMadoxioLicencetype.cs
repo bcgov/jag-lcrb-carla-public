@@ -29,37 +29,37 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioLicencetype class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioLicencetype(int? utcconversiontimezonecode = default(int?), int? adoxioDisplayorder = default(int?), string _owningteamValue = default(string), string adoxioCode = default(string), string adoxioLicencetypeid = default(string), string _createdbyValue = default(string), string adoxioDefaultbpfid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), int? adoxioCategory = default(int?), string versionnumber = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? adoxioOnestopprogramaccounttype = default(int?), bool? adoxioUsepmuarea = default(bool?), string _adoxioApplicationfeeproductValue = default(string), bool? adoxioShowlicenseerepresentativetab = default(bool?), string _owningbusinessunitValue = default(string), int? timezoneruleversionnumber = default(int?), int? statecode = default(int?), string adoxioName = default(string), string _modifiedonbehalfbyValue = default(string), string _owninguserValue = default(string), int? statuscode = default(int?), string _adoxioLicencefeeproductValue = default(string), int? importsequencenumber = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string adoxioRequirements = default(string), string _createdonbehalfbyValue = default(string), string _owneridValue = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioLicencetypeSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioLicencetypeDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioLicencetypeDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioLicencetypeAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioLicencetypeMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioLicencetypeProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioLicencetypeBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioLicencetypePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMknowledgebaserecord> adoxioLicencetypeKnowledgebaserecord = default(IList<MicrosoftDynamicsCRMknowledgebaserecord>), IList<MicrosoftDynamicsCRMknowledgearticle> msdynAdoxioLicencetypeKnowledgearticle = default(IList<MicrosoftDynamicsCRMknowledgearticle>), IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation> adoxioAdoxioLicencetypeAdoxioApplicationtermsconditionslimitationLicenceType = default(IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation>), IList<MicrosoftDynamicsCRMadoxioInvestigation> adoxioAdoxioLicencetypeAdoxioInvestigation = default(IList<MicrosoftDynamicsCRMadoxioInvestigation>), IList<MicrosoftDynamicsCRMadoxioLicences> adoxioAdoxioLicencetypeAdoxioLicencesLicenceType = default(IList<MicrosoftDynamicsCRMadoxioLicences>), IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset> adoxioAdoxioLicencetypeAdoxioTermsconditionslimitationspresetLicenceType = default(IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset>), IList<MicrosoftDynamicsCRMincident> adoxioIncidentAdoxioLicencetype = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioLicencetypeAdoxioApplicationLicenceType = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioEstablishment> adoxioLicencetypeEstablishment = default(IList<MicrosoftDynamicsCRMadoxioEstablishment>), MicrosoftDynamicsCRMproduct adoxioApplicationFeeProduct = default(MicrosoftDynamicsCRMproduct), MicrosoftDynamicsCRMproduct adoxioLicenceFeeProduct = default(MicrosoftDynamicsCRMproduct), IList<MicrosoftDynamicsCRMadoxioApplicationtype> adoxioLicencetypesApplicationtypes = default(IList<MicrosoftDynamicsCRMadoxioApplicationtype>), IList<MicrosoftDynamicsCRMadoxioApplicationtype> adoxioLicencetypeAdoxioApplicationtypeLicenceType = default(IList<MicrosoftDynamicsCRMadoxioApplicationtype>), IList<MicrosoftDynamicsCRMadoxioInspectorcommentsrollup> adoxioLicencetypeAdoxioInspectorcommentsrollupLicenceType = default(IList<MicrosoftDynamicsCRMadoxioInspectorcommentsrollup>), IList<MicrosoftDynamicsCRMincident> adoxioLicencetypeInspections = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMadoxioRmreview> adoxioLicencetypeAdoxioRmreviewLicenceType = default(IList<MicrosoftDynamicsCRMadoxioRmreview>), IList<MicrosoftDynamicsCRMadoxioEnforcementaction> adoxioLicencetypeEnforcementactions = default(IList<MicrosoftDynamicsCRMadoxioEnforcementaction>), IList<MicrosoftDynamicsCRMadoxioLicencesubcategory> adoxioLicencetypeAdoxioLicencesubcategoryLicenceType = default(IList<MicrosoftDynamicsCRMadoxioLicencesubcategory>), IList<MicrosoftDynamicsCRMadoxioInspectionformconfiguration> adoxioLicencetypeAdoxioInspectionformconfigurationLicenceType = default(IList<MicrosoftDynamicsCRMadoxioInspectionformconfiguration>))
+        public MicrosoftDynamicsCRMadoxioLicencetype(int? utcconversiontimezonecode = default(int?), string _owningteamValue = default(string), string _createdbyValue = default(string), string adoxioDefaultbpfid = default(string), string adoxioName = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string versionnumber = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), string _owneridValue = default(string), string adoxioCode = default(string), string _adoxioApplicationfeeproductValue = default(string), bool? adoxioShowlicenseerepresentativetab = default(bool?), string _owningbusinessunitValue = default(string), int? timezoneruleversionnumber = default(int?), string _modifiedonbehalfbyValue = default(string), string _owninguserValue = default(string), int? statuscode = default(int?), string _adoxioLicencefeeproductValue = default(string), int? adoxioCategory = default(int?), string _createdonbehalfbyValue = default(string), int? adoxioOnestopprogramaccounttype = default(int?), bool? adoxioUsepmuarea = default(bool?), int? statecode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string adoxioRequirements = default(string), int? adoxioDisplayorder = default(int?), string adoxioLicencetypeid = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioLicencetypeSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioLicencetypeDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioLicencetypeDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioLicencetypeAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioLicencetypeMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioLicencetypeProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioLicencetypeBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioLicencetypePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMknowledgebaserecord> adoxioLicencetypeKnowledgebaserecord = default(IList<MicrosoftDynamicsCRMknowledgebaserecord>), IList<MicrosoftDynamicsCRMknowledgearticle> msdynAdoxioLicencetypeKnowledgearticle = default(IList<MicrosoftDynamicsCRMknowledgearticle>), IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation> adoxioAdoxioLicencetypeAdoxioApplicationtermsconditionslimitationLicenceType = default(IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation>), IList<MicrosoftDynamicsCRMadoxioInvestigation> adoxioAdoxioLicencetypeAdoxioInvestigation = default(IList<MicrosoftDynamicsCRMadoxioInvestigation>), IList<MicrosoftDynamicsCRMadoxioLicences> adoxioAdoxioLicencetypeAdoxioLicencesLicenceType = default(IList<MicrosoftDynamicsCRMadoxioLicences>), IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset> adoxioAdoxioLicencetypeAdoxioTermsconditionslimitationspresetLicenceType = default(IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset>), IList<MicrosoftDynamicsCRMincident> adoxioIncidentAdoxioLicencetype = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioLicencetypeAdoxioApplicationLicenceType = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioEstablishment> adoxioLicencetypeEstablishment = default(IList<MicrosoftDynamicsCRMadoxioEstablishment>), MicrosoftDynamicsCRMproduct adoxioApplicationFeeProduct = default(MicrosoftDynamicsCRMproduct), MicrosoftDynamicsCRMproduct adoxioLicenceFeeProduct = default(MicrosoftDynamicsCRMproduct), IList<MicrosoftDynamicsCRMadoxioApplicationtype> adoxioLicencetypesApplicationtypes = default(IList<MicrosoftDynamicsCRMadoxioApplicationtype>), IList<MicrosoftDynamicsCRMadoxioApplicationtype> adoxioLicencetypeAdoxioApplicationtypeLicenceType = default(IList<MicrosoftDynamicsCRMadoxioApplicationtype>), IList<MicrosoftDynamicsCRMadoxioInspectorcommentsrollup> adoxioLicencetypeAdoxioInspectorcommentsrollupLicenceType = default(IList<MicrosoftDynamicsCRMadoxioInspectorcommentsrollup>), IList<MicrosoftDynamicsCRMincident> adoxioLicencetypeInspections = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMadoxioRmreview> adoxioLicencetypeAdoxioRmreviewLicenceType = default(IList<MicrosoftDynamicsCRMadoxioRmreview>), IList<MicrosoftDynamicsCRMadoxioEnforcementaction> adoxioLicencetypeEnforcementactions = default(IList<MicrosoftDynamicsCRMadoxioEnforcementaction>), IList<MicrosoftDynamicsCRMadoxioLicencesubcategory> adoxioLicencetypeAdoxioLicencesubcategoryLicenceType = default(IList<MicrosoftDynamicsCRMadoxioLicencesubcategory>), IList<MicrosoftDynamicsCRMadoxioInspectionformconfiguration> adoxioLicencetypeAdoxioInspectionformconfigurationLicenceType = default(IList<MicrosoftDynamicsCRMadoxioInspectionformconfiguration>))
         {
             Utcconversiontimezonecode = utcconversiontimezonecode;
-            AdoxioDisplayorder = adoxioDisplayorder;
             this._owningteamValue = _owningteamValue;
-            AdoxioCode = adoxioCode;
-            AdoxioLicencetypeid = adoxioLicencetypeid;
             this._createdbyValue = _createdbyValue;
             AdoxioDefaultbpfid = adoxioDefaultbpfid;
-            Createdon = createdon;
+            AdoxioName = adoxioName;
             this._modifiedbyValue = _modifiedbyValue;
-            AdoxioCategory = adoxioCategory;
+            Createdon = createdon;
             Versionnumber = versionnumber;
             Modifiedon = modifiedon;
-            AdoxioOnestopprogramaccounttype = adoxioOnestopprogramaccounttype;
-            AdoxioUsepmuarea = adoxioUsepmuarea;
+            Importsequencenumber = importsequencenumber;
+            this._owneridValue = _owneridValue;
+            AdoxioCode = adoxioCode;
             this._adoxioApplicationfeeproductValue = _adoxioApplicationfeeproductValue;
             AdoxioShowlicenseerepresentativetab = adoxioShowlicenseerepresentativetab;
             this._owningbusinessunitValue = _owningbusinessunitValue;
             Timezoneruleversionnumber = timezoneruleversionnumber;
-            Statecode = statecode;
-            AdoxioName = adoxioName;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             this._owninguserValue = _owninguserValue;
             Statuscode = statuscode;
             this._adoxioLicencefeeproductValue = _adoxioLicencefeeproductValue;
-            Importsequencenumber = importsequencenumber;
+            AdoxioCategory = adoxioCategory;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            AdoxioOnestopprogramaccounttype = adoxioOnestopprogramaccounttype;
+            AdoxioUsepmuarea = adoxioUsepmuarea;
+            Statecode = statecode;
             Overriddencreatedon = overriddencreatedon;
             AdoxioRequirements = adoxioRequirements;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._owneridValue = _owneridValue;
+            AdoxioDisplayorder = adoxioDisplayorder;
+            AdoxioLicencetypeid = adoxioLicencetypeid;
             Createdbyname = createdbyname;
             Createdonbehalfbyname = createdonbehalfbyname;
             Modifiedbyname = modifiedbyname;
@@ -110,23 +110,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_displayorder")]
-        public int? AdoxioDisplayorder { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
         public string _owningteamValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_code")]
-        public string AdoxioCode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_licencetypeid")]
-        public string AdoxioLicencetypeid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -140,8 +125,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
+        [JsonProperty(PropertyName = "adoxio_name")]
+        public string AdoxioName { get; set; }
 
         /// <summary>
         /// </summary>
@@ -150,8 +135,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_category")]
-        public int? AdoxioCategory { get; set; }
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -165,13 +150,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_onestopprogramaccounttype")]
-        public int? AdoxioOnestopprogramaccounttype { get; set; }
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_usepmuarea")]
-        public bool? AdoxioUsepmuarea { get; set; }
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_code")]
+        public string AdoxioCode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -195,16 +185,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_name")]
-        public string AdoxioName { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
 
@@ -225,8 +205,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
+        [JsonProperty(PropertyName = "adoxio_category")]
+        public int? AdoxioCategory { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_onestopprogramaccounttype")]
+        public int? AdoxioOnestopprogramaccounttype { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_usepmuarea")]
+        public bool? AdoxioUsepmuarea { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -240,13 +240,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_displayorder")]
+        public int? AdoxioDisplayorder { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_licencetypeid")]
+        public string AdoxioLicencetypeid { get; set; }
 
         /// <summary>
         /// </summary>

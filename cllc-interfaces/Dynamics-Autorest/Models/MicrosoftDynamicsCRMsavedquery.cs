@@ -29,10 +29,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMsavedquery
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMsavedquery(string offlinesqlquery = default(string), bool? ismanaged = default(bool?), string versionnumber = default(string), int? statecode = default(int?), string _createdbyValue = default(string), bool? isuserdefined = default(bool?), string columnsetxml = default(string), int? organizationtaborder = default(int?), bool? isdefault = default(bool?), int? querytype = default(int?), string conditionalformatting = default(string), string _modifiedbyValue = default(string), string queryapi = default(string), string advancedgroupby = default(string), int? statuscode = default(int?), bool? isquickfindquery = default(bool?), string _organizationidValue = default(string), string solutionid = default(string), string fetchxml = default(string), string layoutjson = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string savedqueryidunique = default(string), string layoutxml = default(string), string iscustomizable = default(string), string returnedtypecode = default(string), string name = default(string), string description = default(string), int? queryappusage = default(int?), int? componentstate = default(int?), string _modifiedonbehalfbyValue = default(string), string savedqueryid = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string introducedversion = default(string), bool? iscustom = default(bool?), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string canbedeleted = default(string), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> savedQuerySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> savedQueryAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> savedQueryBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMmobileofflineprofileitem> lkMobileofflineprofileitemSavedquery = default(IList<MicrosoftDynamicsCRMmobileofflineprofileitem>))
+        public MicrosoftDynamicsCRMsavedquery(string offlinesqlquery = default(string), bool? ismanaged = default(bool?), string solutionid = default(string), string versionnumber = default(string), int? statecode = default(int?), string _createdbyValue = default(string), bool? isuserdefined = default(bool?), string columnsetxml = default(string), int? organizationtaborder = default(int?), bool? isdefault = default(bool?), int? querytype = default(int?), string conditionalformatting = default(string), string _modifiedbyValue = default(string), string queryapi = default(string), string advancedgroupby = default(string), int? statuscode = default(int?), bool? isquickfindquery = default(bool?), string _organizationidValue = default(string), string description = default(string), string fetchxml = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string savedqueryidunique = default(string), string layoutxml = default(string), string layoutjson = default(string), string returnedtypecode = default(string), string name = default(string), string iscustomizable = default(string), int? queryappusage = default(int?), int? componentstate = default(int?), string _modifiedonbehalfbyValue = default(string), string savedqueryid = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string introducedversion = default(string), bool? iscustom = default(bool?), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string canbedeleted = default(string), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> savedQuerySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> savedQueryAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> savedQueryBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMmobileofflineprofileitem> lkMobileofflineprofileitemSavedquery = default(IList<MicrosoftDynamicsCRMmobileofflineprofileitem>))
         {
             Offlinesqlquery = offlinesqlquery;
             Ismanaged = ismanaged;
+            Solutionid = solutionid;
             Versionnumber = versionnumber;
             Statecode = statecode;
             this._createdbyValue = _createdbyValue;
@@ -48,16 +49,15 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Statuscode = statuscode;
             Isquickfindquery = isquickfindquery;
             this._organizationidValue = _organizationidValue;
-            Solutionid = solutionid;
+            Description = description;
             Fetchxml = fetchxml;
-            Layoutjson = layoutjson;
             Createdon = createdon;
             Savedqueryidunique = savedqueryidunique;
             Layoutxml = layoutxml;
-            Iscustomizable = iscustomizable;
+            Layoutjson = layoutjson;
             Returnedtypecode = returnedtypecode;
             Name = name;
-            Description = description;
+            Iscustomizable = iscustomizable;
             Queryappusage = queryappusage;
             Componentstate = componentstate;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
@@ -94,6 +94,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "ismanaged")]
         public bool? Ismanaged { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "solutionid")]
+        public string Solutionid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -172,18 +177,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "solutionid")]
-        public string Solutionid { get; set; }
+        [JsonProperty(PropertyName = "description")]
+        public string Description { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "fetchxml")]
         public string Fetchxml { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "layoutjson")]
-        public string Layoutjson { get; set; }
 
         /// <summary>
         /// </summary>
@@ -202,8 +202,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "iscustomizable")]
-        public string Iscustomizable { get; set; }
+        [JsonProperty(PropertyName = "layoutjson")]
+        public string Layoutjson { get; set; }
 
         /// <summary>
         /// </summary>
@@ -217,8 +217,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "description")]
-        public string Description { get; set; }
+        [JsonProperty(PropertyName = "iscustomizable")]
+        public string Iscustomizable { get; set; }
 
         /// <summary>
         /// </summary>

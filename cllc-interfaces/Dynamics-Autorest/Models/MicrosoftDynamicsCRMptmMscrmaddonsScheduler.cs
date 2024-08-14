@@ -29,39 +29,39 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMptmMscrmaddonsScheduler class.
         /// </summary>
-        public MicrosoftDynamicsCRMptmMscrmaddonsScheduler(string ptmMscrmaddonsSchedulerid = default(string), bool? ptmCheckfield = default(bool?), int? ptmPagenumber = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? statecode = default(int?), int? timezoneruleversionnumber = default(int?), string ptmDebugmessage = default(string), string ptmName = default(string), string _modifiedonbehalfbyValue = default(string), string versionnumber = default(string), int? ptmRepetitionfrequency = default(int?), string _owneridValue = default(string), System.DateTimeOffset? ptmNextexecutiondate = default(System.DateTimeOffset?), string _owninguserValue = default(string), string ptmFetch2 = default(string), string ptmOperationid = default(string), int? statuscode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? ptmExecutionamount = default(int?), string ptmMessage = default(string), string _ptmWorkflowidValue = default(string), string _createdbyValue = default(string), string _owningbusinessunitValue = default(string), string _owningteamValue = default(string), string _createdonbehalfbyValue = default(string), int? importsequencenumber = default(int?), int? utcconversiontimezonecode = default(int?), string ptmFetch = default(string), string ptmDescription = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> ptmMscrmaddonsSchedulerSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> ptmMscrmaddonsSchedulerAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> ptmMscrmaddonsSchedulerMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> ptmMscrmaddonsSchedulerProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> ptmMscrmaddonsSchedulerBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> ptmMscrmaddonsSchedulerPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMannotation> ptmMscrmaddonsSchedulerAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMptmMscrmaddonsSettings> ptmPtmMscrmaddonsSchedulerPtmMscrmaddonsSettingsScheduler = default(IList<MicrosoftDynamicsCRMptmMscrmaddonsSettings>), MicrosoftDynamicsCRMworkflow ptmWorkflowId = default(MicrosoftDynamicsCRMworkflow))
+        public MicrosoftDynamicsCRMptmMscrmaddonsScheduler(System.DateTimeOffset? ptmNextexecutiondate = default(System.DateTimeOffset?), int? statecode = default(int?), string ptmMscrmaddonsSchedulerid = default(string), int? timezoneruleversionnumber = default(int?), string ptmDebugmessage = default(string), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string versionnumber = default(string), int? ptmRepetitionfrequency = default(int?), string ptmMessage = default(string), string ptmName = default(string), string _owninguserValue = default(string), string _owneridValue = default(string), string ptmFetch2 = default(string), int? statuscode = default(int?), int? ptmPagenumber = default(int?), int? ptmExecutionamount = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string ptmOperationid = default(string), string _owningbusinessunitValue = default(string), string _owningteamValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), int? utcconversiontimezonecode = default(int?), string _ptmWorkflowidValue = default(string), string ptmFetch = default(string), string ptmDescription = default(string), string _modifiedbyValue = default(string), bool? ptmCheckfield = default(bool?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> ptmMscrmaddonsSchedulerSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> ptmMscrmaddonsSchedulerAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> ptmMscrmaddonsSchedulerMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> ptmMscrmaddonsSchedulerProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> ptmMscrmaddonsSchedulerBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> ptmMscrmaddonsSchedulerPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMannotation> ptmMscrmaddonsSchedulerAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMptmMscrmaddonsSettings> ptmPtmMscrmaddonsSchedulerPtmMscrmaddonsSettingsScheduler = default(IList<MicrosoftDynamicsCRMptmMscrmaddonsSettings>), MicrosoftDynamicsCRMworkflow ptmWorkflowId = default(MicrosoftDynamicsCRMworkflow))
         {
-            PtmMscrmaddonsSchedulerid = ptmMscrmaddonsSchedulerid;
-            PtmCheckfield = ptmCheckfield;
-            PtmPagenumber = ptmPagenumber;
-            Overriddencreatedon = overriddencreatedon;
+            PtmNextexecutiondate = ptmNextexecutiondate;
             Statecode = statecode;
+            PtmMscrmaddonsSchedulerid = ptmMscrmaddonsSchedulerid;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             PtmDebugmessage = ptmDebugmessage;
-            PtmName = ptmName;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Modifiedon = modifiedon;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Versionnumber = versionnumber;
             PtmRepetitionfrequency = ptmRepetitionfrequency;
-            this._owneridValue = _owneridValue;
-            PtmNextexecutiondate = ptmNextexecutiondate;
-            this._owninguserValue = _owninguserValue;
-            PtmFetch2 = ptmFetch2;
-            PtmOperationid = ptmOperationid;
-            Statuscode = statuscode;
-            Createdon = createdon;
-            PtmExecutionamount = ptmExecutionamount;
             PtmMessage = ptmMessage;
-            this._ptmWorkflowidValue = _ptmWorkflowidValue;
+            PtmName = ptmName;
+            this._owninguserValue = _owninguserValue;
+            this._owneridValue = _owneridValue;
+            PtmFetch2 = ptmFetch2;
+            Statuscode = statuscode;
+            PtmPagenumber = ptmPagenumber;
+            PtmExecutionamount = ptmExecutionamount;
+            Overriddencreatedon = overriddencreatedon;
             this._createdbyValue = _createdbyValue;
+            PtmOperationid = ptmOperationid;
             this._owningbusinessunitValue = _owningbusinessunitValue;
             this._owningteamValue = _owningteamValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Createdon = createdon;
             Importsequencenumber = importsequencenumber;
             Utcconversiontimezonecode = utcconversiontimezonecode;
+            this._ptmWorkflowidValue = _ptmWorkflowidValue;
             PtmFetch = ptmFetch;
             PtmDescription = ptmDescription;
             this._modifiedbyValue = _modifiedbyValue;
-            Modifiedon = modifiedon;
+            PtmCheckfield = ptmCheckfield;
             Createdby = createdby;
             Createdonbehalfby = createdonbehalfby;
             Modifiedby = modifiedby;
@@ -89,28 +89,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ptm_mscrmaddons_schedulerid")]
-        public string PtmMscrmaddonsSchedulerid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ptm_checkfield")]
-        public bool? PtmCheckfield { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ptm_pagenumber")]
-        public int? PtmPagenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+        [JsonProperty(PropertyName = "ptm_nextexecutiondate")]
+        public System.DateTimeOffset? PtmNextexecutiondate { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "statecode")]
         public int? Statecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ptm_mscrmaddons_schedulerid")]
+        public string PtmMscrmaddonsSchedulerid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -124,13 +114,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ptm_name")]
-        public string PtmName { get; set; }
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -144,13 +139,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
+        [JsonProperty(PropertyName = "ptm_message")]
+        public string PtmMessage { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ptm_nextexecutiondate")]
-        public System.DateTimeOffset? PtmNextexecutiondate { get; set; }
+        [JsonProperty(PropertyName = "ptm_name")]
+        public string PtmName { get; set; }
 
         /// <summary>
         /// </summary>
@@ -159,13 +154,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ptm_fetch2")]
-        public string PtmFetch2 { get; set; }
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ptm_operationid")]
-        public string PtmOperationid { get; set; }
+        [JsonProperty(PropertyName = "ptm_fetch2")]
+        public string PtmFetch2 { get; set; }
 
         /// <summary>
         /// </summary>
@@ -174,8 +169,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
+        [JsonProperty(PropertyName = "ptm_pagenumber")]
+        public int? PtmPagenumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -184,18 +179,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ptm_message")]
-        public string PtmMessage { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_ptm_workflowid_value")]
-        public string _ptmWorkflowidValue { get; set; }
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ptm_operationid")]
+        public string PtmOperationid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -209,8 +204,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -221,6 +216,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "utcconversiontimezonecode")]
         public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_ptm_workflowid_value")]
+        public string _ptmWorkflowidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -239,8 +239,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
+        [JsonProperty(PropertyName = "ptm_checkfield")]
+        public bool? PtmCheckfield { get; set; }
 
         /// <summary>
         /// </summary>

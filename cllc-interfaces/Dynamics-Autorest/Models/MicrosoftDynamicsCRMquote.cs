@@ -27,19 +27,17 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// Initializes a new instance of the MicrosoftDynamicsCRMquote class.
         /// </summary>
-        public MicrosoftDynamicsCRMquote(int? statuscode = default(int?), string processid = default(string), string stageid = default(string), string emailaddress = default(string), System.DateTimeOffset? effectiveto = default(System.DateTimeOffset?), int? onholdtime = default(int?), decimal? freightamountBase = default(decimal?), string quotenumber = default(string), System.DateTimeOffset? lastonholdtime = default(System.DateTimeOffset?), string billtoComposite = default(string), string _transactioncurrencyidValue = default(string), string _modifiedonbehalfbyValue = default(string), int? timezoneruleversionnumber = default(int?), string _createdonbehalfbyValue = default(string), string _campaignidValue = default(string), decimal? exchangerate = default(decimal?), int? paymenttermscode = default(int?), decimal? totaltaxBase = default(decimal?), decimal? totallineitemdiscountamount = default(decimal?), string shiptoAddressid = default(string), string shiptoCountry = default(string), string shiptoLine3 = default(string), decimal? totallineitemamount = default(decimal?), int? shippingmethodcode = default(int?), string _owninguserValue = default(string), string billtoContactname = default(string), int? utcconversiontimezonecode = default(int?), string _pricelevelidValue = default(string), string shiptoName = default(string), int? skippricecalculation = default(int?), decimal? totalamount = default(decimal?), string _contactidValue = default(string), decimal? totalamountlessfreightBase = default(decimal?), decimal? freightamount = default(decimal?), string billtoTelephone = default(string), string description = default(string), string shiptoLine1 = default(string), string billtoAddressid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? effectivefrom = default(System.DateTimeOffset?), string billtoName = default(string), System.DateTimeOffset? expireson = default(System.DateTimeOffset?), decimal? totalamountlessfreight = default(decimal?), bool? willcall = default(bool?), decimal? totalamountBase = default(decimal?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? shiptoFreighttermscode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), decimal? totaldiscountamount = default(decimal?), decimal? totaldiscountamountBase = default(decimal?), string _accountidValue = default(string), string shiptoTelephone = default(string), int? revisionnumber = default(int?), int? importsequencenumber = default(int?), string _slainvokedidValue = default(string), string traversedpath = default(string), string billtoPostalcode = default(string), string billtoStateorprovince = default(string), string billtoCity = default(string), string _owneridValue = default(string), int? pricingerrorcode = default(int?), string quoteid = default(string), decimal? totallineitemamountBase = default(decimal?), string _owningteamValue = default(string), decimal? discountamount = default(decimal?), string billtoLine1 = default(string), string billtoLine3 = default(string), string billtoLine2 = default(string), string shiptoCity = default(string), string _opportunityidValue = default(string), string shiptoContactname = default(string), string _slaidValue = default(string), int? freighttermscode = default(int?), decimal? discountamountBase = default(decimal?), string shiptoStateorprovince = default(string), string shiptoPostalcode = default(string), string shiptoComposite = default(string), string _owningbusinessunitValue = default(string), string versionnumber = default(string), decimal? totaltax = default(decimal?), string _modifiedbyValue = default(string), decimal? totallineitemdiscountamountBase = default(decimal?), string billtoFax = default(string), string _createdbyValue = default(string), System.DateTimeOffset? requestdeliveryby = default(System.DateTimeOffset?), decimal? discountpercentage = default(decimal?), string shiptoLine2 = default(string), int? statecode = default(int?), string _customeridValue = default(string), string shiptoFax = default(string), System.DateTimeOffset? closedon = default(System.DateTimeOffset?), string name = default(string), string billtoCountry = default(string), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> quoteAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), MicrosoftDynamicsCRMcampaign campaignid = default(MicrosoftDynamicsCRMcampaign), IList<MicrosoftDynamicsCRMcontact> contactquotesAssociation = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMteam> quoteTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMquoteclose> quoteQuoteCloses = default(IList<MicrosoftDynamicsCRMquoteclose>), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMopportunitysalesprocess> quoteOpportunitysalesprocess = default(IList<MicrosoftDynamicsCRMopportunitysalesprocess>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> quoteSharepointDocumentLocation = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMquoteclose> quoteQuoteClose = default(IList<MicrosoftDynamicsCRMquoteclose>), MicrosoftDynamicsCRMcontact customeridContact = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMconnection> quoteConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMconnection> quoteConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMletter> quoteLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMbulkdeletefailure> quoteBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMtask> quoteTasks = default(IList<MicrosoftDynamicsCRMtask>), MicrosoftDynamicsCRMsla slainvokedidQuoteSla = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMsocialactivity> quoteSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), MicrosoftDynamicsCRMsla slaQuoteSla = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMsalesorder> quoteOrders = default(IList<MicrosoftDynamicsCRMsalesorder>), IList<MicrosoftDynamicsCRMprocesssession> quoteProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMappointment> quoteAppointments = default(IList<MicrosoftDynamicsCRMappointment>), MicrosoftDynamicsCRMpricelevel pricelevelid = default(MicrosoftDynamicsCRMpricelevel), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> quoteMailboxTrackingFolder = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), IList<MicrosoftDynamicsCRMduplicaterecord> quoteDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMaccount customeridAccount = default(MicrosoftDynamicsCRMaccount), IList<MicrosoftDynamicsCRMactivityparty> quoteActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMfax> quoteFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMsyncerror> quoteSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> quoteAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> quotePrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> quoteRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMslakpiinstance> slakpiinstanceQuote = default(IList<MicrosoftDynamicsCRMslakpiinstance>), IList<MicrosoftDynamicsCRMannotation> quoteAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMquotedetail> quoteDetails = default(IList<MicrosoftDynamicsCRMquotedetail>), IList<MicrosoftDynamicsCRMphonecall> quotePhonecalls = default(IList<MicrosoftDynamicsCRMphonecall>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMopportunity opportunityid = default(MicrosoftDynamicsCRMopportunity), IList<MicrosoftDynamicsCRMemail> quoteEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMduplicaterecord> quoteDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMserviceappointment> quoteServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMactivitypointer> quoteActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMmsdynPlaybookinstance> msdynPlaybookinstanceQuote = default(IList<MicrosoftDynamicsCRMmsdynPlaybookinstance>))
+        public MicrosoftDynamicsCRMquote(int? statuscode = default(int?), string stageid = default(string), string processid = default(string), string emailaddress = default(string), System.DateTimeOffset? effectiveto = default(System.DateTimeOffset?), int? onholdtime = default(int?), decimal? freightamountBase = default(decimal?), string quotenumber = default(string), string billtoComposite = default(string), string _modifiedonbehalfbyValue = default(string), int? timezoneruleversionnumber = default(int?), string _createdonbehalfbyValue = default(string), string _campaignidValue = default(string), decimal? exchangerate = default(decimal?), int? paymenttermscode = default(int?), decimal? totaltaxBase = default(decimal?), string billtoContactname = default(string), string _createdbyValue = default(string), string shiptoAddressid = default(string), string shiptoCountry = default(string), string shiptoLine3 = default(string), string _transactioncurrencyidValue = default(string), decimal? totallineitemamount = default(decimal?), int? shippingmethodcode = default(int?), string _owninguserValue = default(string), int? utcconversiontimezonecode = default(int?), string _pricelevelidValue = default(string), string shiptoName = default(string), int? skippricecalculation = default(int?), decimal? totalamount = default(decimal?), string _contactidValue = default(string), decimal? totalamountlessfreightBase = default(decimal?), decimal? freightamount = default(decimal?), System.DateTimeOffset? lastonholdtime = default(System.DateTimeOffset?), string description = default(string), string shiptoLine1 = default(string), string billtoAddressid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string billtoTelephone = default(string), System.DateTimeOffset? effectivefrom = default(System.DateTimeOffset?), string billtoName = default(string), System.DateTimeOffset? expireson = default(System.DateTimeOffset?), decimal? totalamountlessfreight = default(decimal?), bool? willcall = default(bool?), decimal? totalamountBase = default(decimal?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? shiptoFreighttermscode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), decimal? totaldiscountamount = default(decimal?), decimal? totaldiscountamountBase = default(decimal?), string _accountidValue = default(string), string shiptoTelephone = default(string), int? revisionnumber = default(int?), int? importsequencenumber = default(int?), string _slainvokedidValue = default(string), string traversedpath = default(string), string billtoPostalcode = default(string), string billtoStateorprovince = default(string), string billtoCity = default(string), string _owneridValue = default(string), int? pricingerrorcode = default(int?), string quoteid = default(string), decimal? totallineitemamountBase = default(decimal?), string _owningteamValue = default(string), decimal? discountamount = default(decimal?), string billtoLine1 = default(string), string billtoLine3 = default(string), string billtoLine2 = default(string), string shiptoCity = default(string), string _opportunityidValue = default(string), string shiptoContactname = default(string), string _slaidValue = default(string), int? freighttermscode = default(int?), decimal? discountamountBase = default(decimal?), string shiptoStateorprovince = default(string), string shiptoPostalcode = default(string), string shiptoComposite = default(string), string _owningbusinessunitValue = default(string), string versionnumber = default(string), decimal? totaltax = default(decimal?), string _modifiedbyValue = default(string), decimal? totallineitemdiscountamountBase = default(decimal?), string billtoFax = default(string), decimal? totallineitemdiscountamount = default(decimal?), System.DateTimeOffset? requestdeliveryby = default(System.DateTimeOffset?), decimal? discountpercentage = default(decimal?), string shiptoLine2 = default(string), int? statecode = default(int?), string _customeridValue = default(string), string shiptoFax = default(string), System.DateTimeOffset? closedon = default(System.DateTimeOffset?), string name = default(string), string billtoCountry = default(string), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> quoteAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), MicrosoftDynamicsCRMcampaign campaignid = default(MicrosoftDynamicsCRMcampaign), IList<MicrosoftDynamicsCRMcontact> contactquotesAssociation = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMteam> quoteTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMquoteclose> quoteQuoteCloses = default(IList<MicrosoftDynamicsCRMquoteclose>), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMopportunitysalesprocess> quoteOpportunitysalesprocess = default(IList<MicrosoftDynamicsCRMopportunitysalesprocess>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> quoteSharepointDocumentLocation = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMquoteclose> quoteQuoteClose = default(IList<MicrosoftDynamicsCRMquoteclose>), MicrosoftDynamicsCRMcontact customeridContact = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMconnection> quoteConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMconnection> quoteConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMletter> quoteLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMbulkdeletefailure> quoteBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMtask> quoteTasks = default(IList<MicrosoftDynamicsCRMtask>), MicrosoftDynamicsCRMsla slainvokedidQuoteSla = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMsocialactivity> quoteSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), MicrosoftDynamicsCRMsla slaQuoteSla = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMsalesorder> quoteOrders = default(IList<MicrosoftDynamicsCRMsalesorder>), IList<MicrosoftDynamicsCRMprocesssession> quoteProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMappointment> quoteAppointments = default(IList<MicrosoftDynamicsCRMappointment>), MicrosoftDynamicsCRMpricelevel pricelevelid = default(MicrosoftDynamicsCRMpricelevel), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> quoteMailboxTrackingFolder = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), IList<MicrosoftDynamicsCRMduplicaterecord> quoteDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMaccount customeridAccount = default(MicrosoftDynamicsCRMaccount), IList<MicrosoftDynamicsCRMactivityparty> quoteActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMfax> quoteFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMsyncerror> quoteSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> quoteAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> quotePrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> quoteRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMslakpiinstance> slakpiinstanceQuote = default(IList<MicrosoftDynamicsCRMslakpiinstance>), IList<MicrosoftDynamicsCRMannotation> quoteAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMquotedetail> quoteDetails = default(IList<MicrosoftDynamicsCRMquotedetail>), IList<MicrosoftDynamicsCRMphonecall> quotePhonecalls = default(IList<MicrosoftDynamicsCRMphonecall>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMopportunity opportunityid = default(MicrosoftDynamicsCRMopportunity), IList<MicrosoftDynamicsCRMemail> quoteEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMduplicaterecord> quoteDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMserviceappointment> quoteServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMactivitypointer> quoteActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMmsdynPlaybookinstance> msdynPlaybookinstanceQuote = default(IList<MicrosoftDynamicsCRMmsdynPlaybookinstance>))
         {
             Statuscode = statuscode;
-            Processid = processid;
             Stageid = stageid;
+            Processid = processid;
             Emailaddress = emailaddress;
             Effectiveto = effectiveto;
             Onholdtime = onholdtime;
             FreightamountBase = freightamountBase;
             Quotenumber = quotenumber;
-            Lastonholdtime = lastonholdtime;
             BilltoComposite = billtoComposite;
-            this._transactioncurrencyidValue = _transactioncurrencyidValue;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
@@ -47,14 +45,15 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Exchangerate = exchangerate;
             Paymenttermscode = paymenttermscode;
             TotaltaxBase = totaltaxBase;
-            Totallineitemdiscountamount = totallineitemdiscountamount;
+            BilltoContactname = billtoContactname;
+            this._createdbyValue = _createdbyValue;
             ShiptoAddressid = shiptoAddressid;
             ShiptoCountry = shiptoCountry;
             ShiptoLine3 = shiptoLine3;
+            this._transactioncurrencyidValue = _transactioncurrencyidValue;
             Totallineitemamount = totallineitemamount;
             Shippingmethodcode = shippingmethodcode;
             this._owninguserValue = _owninguserValue;
-            BilltoContactname = billtoContactname;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             this._pricelevelidValue = _pricelevelidValue;
             ShiptoName = shiptoName;
@@ -63,11 +62,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             this._contactidValue = _contactidValue;
             TotalamountlessfreightBase = totalamountlessfreightBase;
             Freightamount = freightamount;
-            BilltoTelephone = billtoTelephone;
+            Lastonholdtime = lastonholdtime;
             Description = description;
             ShiptoLine1 = shiptoLine1;
             BilltoAddressid = billtoAddressid;
             Modifiedon = modifiedon;
+            BilltoTelephone = billtoTelephone;
             Effectivefrom = effectivefrom;
             BilltoName = billtoName;
             Expireson = expireson;
@@ -112,7 +112,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             this._modifiedbyValue = _modifiedbyValue;
             TotallineitemdiscountamountBase = totallineitemdiscountamountBase;
             BilltoFax = billtoFax;
-            this._createdbyValue = _createdbyValue;
+            Totallineitemdiscountamount = totallineitemdiscountamount;
             Requestdeliveryby = requestdeliveryby;
             Discountpercentage = discountpercentage;
             ShiptoLine2 = shiptoLine2;
@@ -187,13 +187,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "processid")]
-        public string Processid { get; set; }
+        [JsonProperty(PropertyName = "stageid")]
+        public string Stageid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "stageid")]
-        public string Stageid { get; set; }
+        [JsonProperty(PropertyName = "processid")]
+        public string Processid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -222,18 +222,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lastonholdtime")]
-        public System.DateTimeOffset? Lastonholdtime { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "billto_composite")]
         public string BilltoComposite { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -272,8 +262,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "totallineitemdiscountamount")]
-        public decimal? Totallineitemdiscountamount { get; set; }
+        [JsonProperty(PropertyName = "billto_contactname")]
+        public string BilltoContactname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -292,6 +287,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
+        public string _transactioncurrencyidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "totallineitemamount")]
         public decimal? Totallineitemamount { get; set; }
 
@@ -304,11 +304,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
         public string _owninguserValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "billto_contactname")]
-        public string BilltoContactname { get; set; }
 
         /// <summary>
         /// </summary>
@@ -352,8 +347,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "billto_telephone")]
-        public string BilltoTelephone { get; set; }
+        [JsonProperty(PropertyName = "lastonholdtime")]
+        public System.DateTimeOffset? Lastonholdtime { get; set; }
 
         /// <summary>
         /// </summary>
@@ -374,6 +369,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "billto_telephone")]
+        public string BilltoTelephone { get; set; }
 
         /// <summary>
         /// </summary>
@@ -597,8 +597,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        [JsonProperty(PropertyName = "totallineitemdiscountamount")]
+        public decimal? Totallineitemdiscountamount { get; set; }
 
         /// <summary>
         /// </summary>

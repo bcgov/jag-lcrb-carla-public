@@ -27,11 +27,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// Initializes a new instance of the MicrosoftDynamicsCRMbot class.
         /// </summary>
-        public MicrosoftDynamicsCRMbot(int? utcconversiontimezonecode = default(int?), int? importsequencenumber = default(int?), bool? ismanaged = default(bool?), string _owneridValue = default(string), string versionnumber = default(string), string iconbase64 = default(string), string schemaname = default(string), string name = default(string), string _owningbusinessunitValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string applicationmanifestinformation = default(string), int? accesscontrolpolicy = default(int?), int? statuscode = default(int?), System.DateTimeOffset? publishedon = default(System.DateTimeOffset?), string _owningteamValue = default(string), string componentidunique = default(string), string solutionid = default(string), string botid = default(string), int? language = default(int?), string _modifiedbyValue = default(string), string iscustomizable = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? statecode = default(int?), string _publishedbyValue = default(string), int? authenticationmode = default(int?), int? authenticationtrigger = default(int?), string _modifiedonbehalfbyValue = default(string), string configuration = default(string), int? componentstate = default(int?), string _owninguserValue = default(string), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), string authorizedsecuritygroupids = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> botSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> botAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> botMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> botProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> botBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> botPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMbotcomponent> botBotcomponent = default(IList<MicrosoftDynamicsCRMbotcomponent>), IList<MicrosoftDynamicsCRMconversationtranscript> botConversationtranscript = default(IList<MicrosoftDynamicsCRMconversationtranscript>), MicrosoftDynamicsCRMsystemuser publishedby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMbot(int? utcconversiontimezonecode = default(int?), int? importsequencenumber = default(int?), int? language = default(int?), string _owneridValue = default(string), string versionnumber = default(string), string iconbase64 = default(string), string schemaname = default(string), string name = default(string), string _owningbusinessunitValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string applicationmanifestinformation = default(string), int? accesscontrolpolicy = default(int?), int? statuscode = default(int?), System.DateTimeOffset? publishedon = default(System.DateTimeOffset?), string _owningteamValue = default(string), bool? ismanaged = default(bool?), string componentidunique = default(string), string solutionid = default(string), string botid = default(string), string _modifiedbyValue = default(string), string iscustomizable = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? statecode = default(int?), string _publishedbyValue = default(string), string _owninguserValue = default(string), string _modifiedonbehalfbyValue = default(string), int? authenticationtrigger = default(int?), string configuration = default(string), int? componentstate = default(int?), string _createdbyValue = default(string), int? authenticationmode = default(int?), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), string authorizedsecuritygroupids = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> botSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> botAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> botMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> botProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> botBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> botPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMbotcomponent> botBotcomponent = default(IList<MicrosoftDynamicsCRMbotcomponent>), IList<MicrosoftDynamicsCRMconversationtranscript> botConversationtranscript = default(IList<MicrosoftDynamicsCRMconversationtranscript>), MicrosoftDynamicsCRMsystemuser publishedby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Utcconversiontimezonecode = utcconversiontimezonecode;
             Importsequencenumber = importsequencenumber;
-            Ismanaged = ismanaged;
+            Language = language;
             this._owneridValue = _owneridValue;
             Versionnumber = versionnumber;
             Iconbase64 = iconbase64;
@@ -44,22 +44,22 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Statuscode = statuscode;
             Publishedon = publishedon;
             this._owningteamValue = _owningteamValue;
+            Ismanaged = ismanaged;
             Componentidunique = componentidunique;
             Solutionid = solutionid;
             Botid = botid;
-            Language = language;
             this._modifiedbyValue = _modifiedbyValue;
             Iscustomizable = iscustomizable;
             Modifiedon = modifiedon;
             Statecode = statecode;
             this._publishedbyValue = _publishedbyValue;
-            Authenticationmode = authenticationmode;
-            Authenticationtrigger = authenticationtrigger;
+            this._owninguserValue = _owninguserValue;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Authenticationtrigger = authenticationtrigger;
             Configuration = configuration;
             Componentstate = componentstate;
-            this._owninguserValue = _owninguserValue;
             this._createdbyValue = _createdbyValue;
+            Authenticationmode = authenticationmode;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Overriddencreatedon = overriddencreatedon;
             Timezoneruleversionnumber = timezoneruleversionnumber;
@@ -102,8 +102,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ismanaged")]
-        public bool? Ismanaged { get; set; }
+        [JsonProperty(PropertyName = "language")]
+        public int? Language { get; set; }
 
         /// <summary>
         /// </summary>
@@ -167,6 +167,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "ismanaged")]
+        public bool? Ismanaged { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "componentidunique")]
         public string Componentidunique { get; set; }
 
@@ -179,11 +184,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "botid")]
         public string Botid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "language")]
-        public int? Language { get; set; }
 
         /// <summary>
         /// </summary>
@@ -212,18 +212,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "authenticationmode")]
-        public int? Authenticationmode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "authenticationtrigger")]
-        public int? Authenticationtrigger { get; set; }
+        [JsonProperty(PropertyName = "_owninguser_value")]
+        public string _owninguserValue { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "authenticationtrigger")]
+        public int? Authenticationtrigger { get; set; }
 
         /// <summary>
         /// </summary>
@@ -237,13 +237,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        [JsonProperty(PropertyName = "authenticationmode")]
+        public int? Authenticationmode { get; set; }
 
         /// <summary>
         /// </summary>

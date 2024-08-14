@@ -29,36 +29,36 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMsolutioncomponentconfiguration class.
         /// </summary>
-        public MicrosoftDynamicsCRMsolutioncomponentconfiguration(int? filescope = default(int?), int? statuscode = default(int?), string _modifiedbyValue = default(string), string _entityidValue = default(string), bool? isdisplayable = default(bool?), string _createdbyValue = default(string), bool? issoftdeleteenabled = default(bool?), string _modifiedonbehalfbyValue = default(string), int? timezoneruleversionnumber = default(int?), int? statecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), bool? keepactivecustomizationafterconversion = default(bool?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), string versionnumber = default(string), string solutioncomponentconfigurationid = default(string), int? utcconversiontimezonecode = default(int?), string iscustomizable = default(string), string name = default(string), int? componentstate = default(int?), bool? ismanaged = default(bool?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), int? fileformat = default(int?), string componentidunique = default(string), string solutionid = default(string), string _organizationidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> solutioncomponentconfigurationSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> solutioncomponentconfigurationDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> solutioncomponentconfigurationDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> solutioncomponentconfigurationAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> solutioncomponentconfigurationMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> solutioncomponentconfigurationProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> solutioncomponentconfigurationBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> solutioncomponentconfigurationPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMsolutioncomponentattributeconfiguration> solutioncomponentconfigSolutioncomponentattrconfig = default(IList<MicrosoftDynamicsCRMsolutioncomponentattributeconfiguration>), MicrosoftDynamicsCRMentity entityId = default(MicrosoftDynamicsCRMentity))
+        public MicrosoftDynamicsCRMsolutioncomponentconfiguration(int? filescope = default(int?), int? componentstate = default(int?), string _entityidValue = default(string), bool? isdisplayable = default(bool?), string _createdbyValue = default(string), bool? keepactivecustomizationafterconversion = default(bool?), int? statuscode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), bool? issoftdeleteenabled = default(bool?), string _modifiedonbehalfbyValue = default(string), int? timezoneruleversionnumber = default(int?), int? statecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), string name = default(string), string versionnumber = default(string), string solutioncomponentconfigurationid = default(string), int? utcconversiontimezonecode = default(int?), string iscustomizable = default(string), string _createdonbehalfbyValue = default(string), bool? ismanaged = default(bool?), string solutionid = default(string), int? fileformat = default(int?), string componentidunique = default(string), string _organizationidValue = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> solutioncomponentconfigurationSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> solutioncomponentconfigurationDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> solutioncomponentconfigurationDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> solutioncomponentconfigurationAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> solutioncomponentconfigurationMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> solutioncomponentconfigurationProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> solutioncomponentconfigurationBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> solutioncomponentconfigurationPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMsolutioncomponentattributeconfiguration> solutioncomponentconfigSolutioncomponentattrconfig = default(IList<MicrosoftDynamicsCRMsolutioncomponentattributeconfiguration>), MicrosoftDynamicsCRMentity entityId = default(MicrosoftDynamicsCRMentity))
         {
             Filescope = filescope;
-            Statuscode = statuscode;
-            this._modifiedbyValue = _modifiedbyValue;
+            Componentstate = componentstate;
             this._entityidValue = _entityidValue;
             Isdisplayable = isdisplayable;
             this._createdbyValue = _createdbyValue;
+            Keepactivecustomizationafterconversion = keepactivecustomizationafterconversion;
+            Statuscode = statuscode;
+            Createdon = createdon;
             Issoftdeleteenabled = issoftdeleteenabled;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             Statecode = statecode;
             Modifiedon = modifiedon;
-            Keepactivecustomizationafterconversion = keepactivecustomizationafterconversion;
-            Overriddencreatedon = overriddencreatedon;
+            Overwritetime = overwritetime;
             Importsequencenumber = importsequencenumber;
+            Name = name;
             Versionnumber = versionnumber;
             Solutioncomponentconfigurationid = solutioncomponentconfigurationid;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             Iscustomizable = iscustomizable;
-            Name = name;
-            Componentstate = componentstate;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Ismanaged = ismanaged;
-            Overwritetime = overwritetime;
+            Solutionid = solutionid;
             Fileformat = fileformat;
             Componentidunique = componentidunique;
-            Solutionid = solutionid;
             this._organizationidValue = _organizationidValue;
-            Createdon = createdon;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            this._modifiedbyValue = _modifiedbyValue;
+            Overriddencreatedon = overriddencreatedon;
             Createdby = createdby;
             Createdonbehalfby = createdonbehalfby;
             Modifiedby = modifiedby;
@@ -89,13 +89,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        [JsonProperty(PropertyName = "componentstate")]
+        public int? Componentstate { get; set; }
 
         /// <summary>
         /// </summary>
@@ -111,6 +106,21 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "keepactivecustomizationafterconversion")]
+        public bool? Keepactivecustomizationafterconversion { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -139,18 +149,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "keepactivecustomizationafterconversion")]
-        public bool? Keepactivecustomizationafterconversion { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+        [JsonProperty(PropertyName = "overwritetime")]
+        public System.DateTimeOffset? Overwritetime { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
 
         /// <summary>
         /// </summary>
@@ -174,13 +184,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "componentstate")]
-        public int? Componentstate { get; set; }
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -189,8 +194,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "overwritetime")]
-        public System.DateTimeOffset? Overwritetime { get; set; }
+        [JsonProperty(PropertyName = "solutionid")]
+        public string Solutionid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -204,23 +209,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "solutionid")]
-        public string Solutionid { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
         public string _organizationidValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>

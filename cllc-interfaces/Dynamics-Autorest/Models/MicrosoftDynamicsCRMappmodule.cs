@@ -29,24 +29,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMappmodule
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMappmodule(string appmodulexmlmanaged = default(string), string webresourceid = default(string), string uniquename = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string url = default(string), string appmoduleversion = default(string), string appmoduleidunique = default(string), int? clienttype = default(int?), string _modifiedonbehalfbyValue = default(string), string solutionid = default(string), bool? isdefault = default(bool?), int? navigationtype = default(int?), string versionnumber = default(string), bool? isfeatured = default(bool?), string _publisheridValue = default(string), bool? ismanaged = default(bool?), int? formfactor = default(int?), string _modifiedbyValue = default(string), int? statuscode = default(int?), string introducedversion = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string welcomepageid = default(string), int? statecode = default(int?), string name = default(string), string _createdonbehalfbyValue = default(string), string appmoduleid = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? componentstate = default(int?), string description = default(string), string configxml = default(string), string eventhandlers = default(string), System.DateTimeOffset? publishedon = default(System.DateTimeOffset?), string optimizedfor = default(string), string _createdbyValue = default(string), string _organizationidValue = default(string), int? importsequencenumber = default(int?), string descriptor = default(string), IList<MicrosoftDynamicsCRMrole> appmodulerolesAssociation = default(IList<MicrosoftDynamicsCRMrole>), MicrosoftDynamicsCRMsystemuser appmoduleModifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMappconfig> appmoduleAppconfig = default(IList<MicrosoftDynamicsCRMappconfig>), MicrosoftDynamicsCRMsystemuser appmoduleCreatedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMpublisher publisherAppmoduleAppmodule = default(MicrosoftDynamicsCRMpublisher), IList<MicrosoftDynamicsCRMappmodulecomponent> appmoduleAppmodulecomponent = default(IList<MicrosoftDynamicsCRMappmodulecomponent>), MicrosoftDynamicsCRMsystemuser appmoduleModifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser appmoduleCreatedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationAppmoduleAppmodule = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMserviceplan> serviceplanAppmoduleAssociation = default(IList<MicrosoftDynamicsCRMserviceplan>))
+        public MicrosoftDynamicsCRMappmodule(string appmodulexmlmanaged = default(string), string webresourceid = default(string), string uniquename = default(string), int? componentstate = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? publishedon = default(System.DateTimeOffset?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string url = default(string), string appmoduleversion = default(string), string appmoduleidunique = default(string), int? clienttype = default(int?), string _modifiedonbehalfbyValue = default(string), bool? isdefault = default(bool?), int? navigationtype = default(int?), string versionnumber = default(string), bool? ismanaged = default(bool?), int? formfactor = default(int?), string _modifiedbyValue = default(string), int? statuscode = default(int?), string introducedversion = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string welcomepageid = default(string), int? statecode = default(int?), string name = default(string), string _createdonbehalfbyValue = default(string), string appmoduleid = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string solutionid = default(string), bool? isfeatured = default(bool?), string description = default(string), string configxml = default(string), string eventhandlers = default(string), string _publisheridValue = default(string), string optimizedfor = default(string), string _createdbyValue = default(string), string _organizationidValue = default(string), int? importsequencenumber = default(int?), string descriptor = default(string), IList<MicrosoftDynamicsCRMrole> appmodulerolesAssociation = default(IList<MicrosoftDynamicsCRMrole>), MicrosoftDynamicsCRMsystemuser appmoduleModifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMappconfig> appmoduleAppconfig = default(IList<MicrosoftDynamicsCRMappconfig>), MicrosoftDynamicsCRMsystemuser appmoduleCreatedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMpublisher publisherAppmoduleAppmodule = default(MicrosoftDynamicsCRMpublisher), IList<MicrosoftDynamicsCRMappmodulecomponent> appmoduleAppmodulecomponent = default(IList<MicrosoftDynamicsCRMappmodulecomponent>), MicrosoftDynamicsCRMsystemuser appmoduleModifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser appmoduleCreatedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationAppmoduleAppmodule = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMserviceplan> serviceplanAppmoduleAssociation = default(IList<MicrosoftDynamicsCRMserviceplan>))
         {
             Appmodulexmlmanaged = appmodulexmlmanaged;
             Webresourceid = webresourceid;
             Uniquename = uniquename;
+            Componentstate = componentstate;
             Createdon = createdon;
+            Publishedon = publishedon;
             Overwritetime = overwritetime;
             Url = url;
             Appmoduleversion = appmoduleversion;
             Appmoduleidunique = appmoduleidunique;
             Clienttype = clienttype;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            Solutionid = solutionid;
             Isdefault = isdefault;
             Navigationtype = navigationtype;
             Versionnumber = versionnumber;
-            Isfeatured = isfeatured;
-            this._publisheridValue = _publisheridValue;
             Ismanaged = ismanaged;
             Formfactor = formfactor;
             this._modifiedbyValue = _modifiedbyValue;
@@ -59,11 +58,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Appmoduleid = appmoduleid;
             Overriddencreatedon = overriddencreatedon;
-            Componentstate = componentstate;
+            Solutionid = solutionid;
+            Isfeatured = isfeatured;
             Description = description;
             Configxml = configxml;
             Eventhandlers = eventhandlers;
-            Publishedon = publishedon;
+            this._publisheridValue = _publisheridValue;
             Optimizedfor = optimizedfor;
             this._createdbyValue = _createdbyValue;
             this._organizationidValue = _organizationidValue;
@@ -104,8 +104,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "componentstate")]
+        public int? Componentstate { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "publishedon")]
+        public System.DateTimeOffset? Publishedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -139,11 +149,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "solutionid")]
-        public string Solutionid { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "isdefault")]
         public bool? Isdefault { get; set; }
 
@@ -156,16 +161,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
         public string Versionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "isfeatured")]
-        public bool? Isfeatured { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_publisherid_value")]
-        public string _publisheridValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -229,8 +224,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "componentstate")]
-        public int? Componentstate { get; set; }
+        [JsonProperty(PropertyName = "solutionid")]
+        public string Solutionid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "isfeatured")]
+        public bool? Isfeatured { get; set; }
 
         /// <summary>
         /// </summary>
@@ -249,8 +249,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "publishedon")]
-        public System.DateTimeOffset? Publishedon { get; set; }
+        [JsonProperty(PropertyName = "_publisherid_value")]
+        public string _publisheridValue { get; set; }
 
         /// <summary>
         /// </summary>

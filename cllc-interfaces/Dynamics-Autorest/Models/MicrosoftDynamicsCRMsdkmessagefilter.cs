@@ -29,30 +29,30 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMsdkmessagefilter class.
         /// </summary>
-        public MicrosoftDynamicsCRMsdkmessagefilter(string sdkmessagefilteridunique = default(string), bool? ismanaged = default(bool?), string sdkmessagefilterid = default(string), string name = default(string), string _modifiedonbehalfbyValue = default(string), string secondaryobjecttypecode = default(string), string primaryobjecttypecode = default(string), bool? workflowsdkstepenabled = default(bool?), string solutionid = default(string), string introducedversion = default(string), bool? isvisible = default(bool?), string versionnumber = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _sdkmessageidValue = default(string), string _organizationidValue = default(string), int? componentstate = default(int?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), int? restrictionlevel = default(int?), string _createdbyValue = default(string), int? customizationlevel = default(int?), bool? iscustomprocessingstepallowed = default(bool?), int? availability = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> sdkmessagefilteridSdkmessageprocessingstep = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsdkmessage sdkmessageid = default(MicrosoftDynamicsCRMsdkmessage), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMsdkmessagefilter(bool? ismanaged = default(bool?), string secondaryobjecttypecode = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string name = default(string), string sdkmessagefilterid = default(string), string _modifiedonbehalfbyValue = default(string), int? customizationlevel = default(int?), string _sdkmessageidValue = default(string), bool? isvisible = default(bool?), bool? workflowsdkstepenabled = default(bool?), string primaryobjecttypecode = default(string), string introducedversion = default(string), string sdkmessagefilteridunique = default(string), string versionnumber = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _organizationidValue = default(string), int? componentstate = default(int?), string _modifiedbyValue = default(string), int? restrictionlevel = default(int?), string _createdbyValue = default(string), string solutionid = default(string), bool? iscustomprocessingstepallowed = default(bool?), int? availability = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> sdkmessagefilteridSdkmessageprocessingstep = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsdkmessage sdkmessageid = default(MicrosoftDynamicsCRMsdkmessage), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
-            Sdkmessagefilteridunique = sdkmessagefilteridunique;
             Ismanaged = ismanaged;
-            Sdkmessagefilterid = sdkmessagefilterid;
-            Name = name;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Secondaryobjecttypecode = secondaryobjecttypecode;
-            Primaryobjecttypecode = primaryobjecttypecode;
-            Workflowsdkstepenabled = workflowsdkstepenabled;
-            Solutionid = solutionid;
-            Introducedversion = introducedversion;
+            Overwritetime = overwritetime;
+            Name = name;
+            Sdkmessagefilterid = sdkmessagefilterid;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Customizationlevel = customizationlevel;
+            this._sdkmessageidValue = _sdkmessageidValue;
             Isvisible = isvisible;
+            Workflowsdkstepenabled = workflowsdkstepenabled;
+            Primaryobjecttypecode = primaryobjecttypecode;
+            Introducedversion = introducedversion;
+            Sdkmessagefilteridunique = sdkmessagefilteridunique;
             Versionnumber = versionnumber;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Createdon = createdon;
-            this._sdkmessageidValue = _sdkmessageidValue;
             this._organizationidValue = _organizationidValue;
             Componentstate = componentstate;
-            Overwritetime = overwritetime;
             this._modifiedbyValue = _modifiedbyValue;
             Restrictionlevel = restrictionlevel;
             this._createdbyValue = _createdbyValue;
-            Customizationlevel = customizationlevel;
+            Solutionid = solutionid;
             Iscustomprocessingstepallowed = iscustomprocessingstepallowed;
             Availability = availability;
             Modifiedon = modifiedon;
@@ -73,28 +73,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "sdkmessagefilteridunique")]
-        public string Sdkmessagefilteridunique { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "ismanaged")]
         public bool? Ismanaged { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "sdkmessagefilterid")]
-        public string Sdkmessagefilterid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -103,8 +83,38 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "primaryobjecttypecode")]
-        public string Primaryobjecttypecode { get; set; }
+        [JsonProperty(PropertyName = "overwritetime")]
+        public System.DateTimeOffset? Overwritetime { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "sdkmessagefilterid")]
+        public string Sdkmessagefilterid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "customizationlevel")]
+        public int? Customizationlevel { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_sdkmessageid_value")]
+        public string _sdkmessageidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "isvisible")]
+        public bool? Isvisible { get; set; }
 
         /// <summary>
         /// </summary>
@@ -113,8 +123,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "solutionid")]
-        public string Solutionid { get; set; }
+        [JsonProperty(PropertyName = "primaryobjecttypecode")]
+        public string Primaryobjecttypecode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -123,8 +133,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "isvisible")]
-        public bool? Isvisible { get; set; }
+        [JsonProperty(PropertyName = "sdkmessagefilteridunique")]
+        public string Sdkmessagefilteridunique { get; set; }
 
         /// <summary>
         /// </summary>
@@ -143,11 +153,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_sdkmessageid_value")]
-        public string _sdkmessageidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
         public string _organizationidValue { get; set; }
 
@@ -155,11 +160,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "componentstate")]
         public int? Componentstate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "overwritetime")]
-        public System.DateTimeOffset? Overwritetime { get; set; }
 
         /// <summary>
         /// </summary>
@@ -178,8 +178,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "customizationlevel")]
-        public int? Customizationlevel { get; set; }
+        [JsonProperty(PropertyName = "solutionid")]
+        public string Solutionid { get; set; }
 
         /// <summary>
         /// </summary>

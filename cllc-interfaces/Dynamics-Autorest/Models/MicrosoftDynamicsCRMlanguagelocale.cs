@@ -29,17 +29,17 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMlanguagelocale class.
         /// </summary>
-        public MicrosoftDynamicsCRMlanguagelocale(int? statuscode = default(int?), string languagelocaleid = default(string), string language = default(string), string code = default(string), string versionnumber = default(string), int? statecode = default(int?), string _organizationidValue = default(string), string name = default(string), string region = default(string), int? localeid = default(int?), IList<MicrosoftDynamicsCRMknowledgearticle> knowledgearticleLanguagelocaleid = default(IList<MicrosoftDynamicsCRMknowledgearticle>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
+        public MicrosoftDynamicsCRMlanguagelocale(string languagelocaleid = default(string), string region = default(string), string name = default(string), string language = default(string), string code = default(string), string versionnumber = default(string), int? statecode = default(int?), int? statuscode = default(int?), string _organizationidValue = default(string), int? localeid = default(int?), IList<MicrosoftDynamicsCRMknowledgearticle> knowledgearticleLanguagelocaleid = default(IList<MicrosoftDynamicsCRMknowledgearticle>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
         {
-            Statuscode = statuscode;
             Languagelocaleid = languagelocaleid;
+            Region = region;
+            Name = name;
             Language = language;
             Code = code;
             Versionnumber = versionnumber;
             Statecode = statecode;
+            Statuscode = statuscode;
             this._organizationidValue = _organizationidValue;
-            Name = name;
-            Region = region;
             Localeid = localeid;
             KnowledgearticleLanguagelocaleid = knowledgearticleLanguagelocaleid;
             Organizationid = organizationid;
@@ -53,13 +53,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
+        [JsonProperty(PropertyName = "languagelocaleid")]
+        public string Languagelocaleid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "languagelocaleid")]
-        public string Languagelocaleid { get; set; }
+        [JsonProperty(PropertyName = "region")]
+        public string Region { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
 
         /// <summary>
         /// </summary>
@@ -83,18 +88,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
         public string _organizationidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "region")]
-        public string Region { get; set; }
 
         /// <summary>
         /// </summary>
