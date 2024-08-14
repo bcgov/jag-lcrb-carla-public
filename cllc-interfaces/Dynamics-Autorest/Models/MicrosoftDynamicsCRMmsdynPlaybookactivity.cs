@@ -29,22 +29,22 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMmsdynPlaybookactivity class.
         /// </summary>
-        public MicrosoftDynamicsCRMmsdynPlaybookactivity(string msdynActivityLogicalName = default(string), string _createdbyValue = default(string), int? statecode = default(int?), string _msdynPlaybooktemplateidValue = default(string), int? importsequencenumber = default(int?), string versionnumber = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? statuscode = default(int?), int? msdynActivityType = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), string _owningbusinessunitValue = default(string), string _modifiedbyValue = default(string), string _owningteamValue = default(string), string _modifiedonbehalfbyValue = default(string), string _createdonbehalfbyValue = default(string), string _owninguserValue = default(string), string _owneridValue = default(string), int? timezoneruleversionnumber = default(int?), string msdynPlaybookactivityid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string msdynPlaybookactivityJson = default(string), string msdynSubject = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> msdynPlaybookactivitySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> msdynPlaybookactivityDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> msdynPlaybookactivityDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> msdynPlaybookactivitySharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMasyncoperation> msdynPlaybookactivityAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> msdynPlaybookactivityMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> msdynPlaybookactivityProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> msdynPlaybookactivityBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> msdynPlaybookactivityPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMmsdynPlaybooktemplate msdynPlaybooktemplateid = default(MicrosoftDynamicsCRMmsdynPlaybooktemplate), IList<MicrosoftDynamicsCRMmsdynPlaybookactivityattribute> msdynPlaybookactivityMsdynPlaybookactivityattribute = default(IList<MicrosoftDynamicsCRMmsdynPlaybookactivityattribute>))
+        public MicrosoftDynamicsCRMmsdynPlaybookactivity(string _owningteamValue = default(string), string _createdbyValue = default(string), int? statecode = default(int?), string _msdynPlaybooktemplateidValue = default(string), int? importsequencenumber = default(int?), string versionnumber = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string msdynSubject = default(string), int? statuscode = default(int?), int? msdynActivityType = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), string _modifiedbyValue = default(string), string _owningbusinessunitValue = default(string), string _modifiedonbehalfbyValue = default(string), string _createdonbehalfbyValue = default(string), string _owninguserValue = default(string), string _owneridValue = default(string), int? timezoneruleversionnumber = default(int?), string msdynPlaybookactivityid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string msdynActivityLogicalName = default(string), string msdynPlaybookactivityJson = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> msdynPlaybookactivitySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> msdynPlaybookactivityDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> msdynPlaybookactivityDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> msdynPlaybookactivitySharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMasyncoperation> msdynPlaybookactivityAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> msdynPlaybookactivityMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> msdynPlaybookactivityProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> msdynPlaybookactivityBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> msdynPlaybookactivityPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMmsdynPlaybooktemplate msdynPlaybooktemplateid = default(MicrosoftDynamicsCRMmsdynPlaybooktemplate), IList<MicrosoftDynamicsCRMmsdynPlaybookactivityattribute> msdynPlaybookactivityMsdynPlaybookactivityattribute = default(IList<MicrosoftDynamicsCRMmsdynPlaybookactivityattribute>))
         {
-            MsdynActivityLogicalName = msdynActivityLogicalName;
+            this._owningteamValue = _owningteamValue;
             this._createdbyValue = _createdbyValue;
             Statecode = statecode;
             this._msdynPlaybooktemplateidValue = _msdynPlaybooktemplateidValue;
             Importsequencenumber = importsequencenumber;
             Versionnumber = versionnumber;
             Overriddencreatedon = overriddencreatedon;
+            MsdynSubject = msdynSubject;
             Statuscode = statuscode;
             MsdynActivityType = msdynActivityType;
             Modifiedon = modifiedon;
             Utcconversiontimezonecode = utcconversiontimezonecode;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
             this._modifiedbyValue = _modifiedbyValue;
-            this._owningteamValue = _owningteamValue;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             this._owninguserValue = _owninguserValue;
@@ -52,8 +52,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Timezoneruleversionnumber = timezoneruleversionnumber;
             MsdynPlaybookactivityid = msdynPlaybookactivityid;
             Createdon = createdon;
+            MsdynActivityLogicalName = msdynActivityLogicalName;
             MsdynPlaybookactivityJson = msdynPlaybookactivityJson;
-            MsdynSubject = msdynSubject;
             Createdby = createdby;
             Createdonbehalfby = createdonbehalfby;
             Modifiedby = modifiedby;
@@ -83,8 +83,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_activityLogicalName")]
-        public string MsdynActivityLogicalName { get; set; }
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -118,6 +118,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "msdyn_subject")]
+        public string MsdynSubject { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
 
@@ -138,18 +143,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -188,13 +188,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_playbookactivity_json")]
-        public string MsdynPlaybookactivityJson { get; set; }
+        [JsonProperty(PropertyName = "msdyn_activityLogicalName")]
+        public string MsdynActivityLogicalName { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_subject")]
-        public string MsdynSubject { get; set; }
+        [JsonProperty(PropertyName = "msdyn_playbookactivity_json")]
+        public string MsdynPlaybookactivityJson { get; set; }
 
         /// <summary>
         /// </summary>

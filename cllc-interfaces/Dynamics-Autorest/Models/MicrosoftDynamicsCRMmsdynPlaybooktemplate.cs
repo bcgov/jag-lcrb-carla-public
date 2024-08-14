@@ -29,31 +29,31 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMmsdynPlaybooktemplate class.
         /// </summary>
-        public MicrosoftDynamicsCRMmsdynPlaybooktemplate(string _createdbyValue = default(string), string _owningbusinessunitValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string msdynRelatedentitylist = default(string), int? statuscode = default(int?), string msdynFullentitylist = default(string), int? importsequencenumber = default(int?), string msdynDescription = default(string), bool? msdynTrackprogress = default(bool?), string _owneridValue = default(string), int? utcconversiontimezonecode = default(int?), string msdynPlaybooktemplateid = default(string), string _msdynCategoryidValue = default(string), string _owningteamValue = default(string), string _owninguserValue = default(string), string versionnumber = default(string), string msdynName = default(string), string _modifiedbyValue = default(string), int? msdynEstimatedduration = default(int?), int? timezoneruleversionnumber = default(int?), int? statecode = default(int?), string _modifiedonbehalfbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> msdynPlaybooktemplateSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> msdynPlaybooktemplateDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> msdynPlaybooktemplateDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> msdynPlaybooktemplateAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> msdynPlaybooktemplateMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> msdynPlaybooktemplateProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> msdynPlaybooktemplateBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> msdynPlaybooktemplatePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMannotation> msdynPlaybooktemplateAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMmsdynPlaybookinstance> msdynPlaybooktemplateMsdynPlaybookinstance = default(IList<MicrosoftDynamicsCRMmsdynPlaybookinstance>), MicrosoftDynamicsCRMmsdynPlaybookcategory msdynCategoryid = default(MicrosoftDynamicsCRMmsdynPlaybookcategory), IList<MicrosoftDynamicsCRMmsdynPlaybookactivity> msdynPlaybooktemplateMsdynPlaybookactivity = default(IList<MicrosoftDynamicsCRMmsdynPlaybookactivity>), IList<MicrosoftDynamicsCRMmsdynCallablecontext> msdynCallablecontextMsdynPlaybooktemplate = default(IList<MicrosoftDynamicsCRMmsdynCallablecontext>))
+        public MicrosoftDynamicsCRMmsdynPlaybooktemplate(string _createdbyValue = default(string), string _owningbusinessunitValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string msdynRelatedentitylist = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), int? statuscode = default(int?), int? utcconversiontimezonecode = default(int?), int? importsequencenumber = default(int?), string msdynDescription = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), bool? msdynTrackprogress = default(bool?), string versionnumber = default(string), string _owneridValue = default(string), int? timezoneruleversionnumber = default(int?), string msdynPlaybooktemplateid = default(string), string _msdynCategoryidValue = default(string), string _owningteamValue = default(string), string _owninguserValue = default(string), string msdynName = default(string), string msdynFullentitylist = default(string), int? msdynEstimatedduration = default(int?), int? statecode = default(int?), string _modifiedonbehalfbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> msdynPlaybooktemplateSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> msdynPlaybooktemplateDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> msdynPlaybooktemplateDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> msdynPlaybooktemplateAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> msdynPlaybooktemplateMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> msdynPlaybooktemplateProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> msdynPlaybooktemplateBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> msdynPlaybooktemplatePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMannotation> msdynPlaybooktemplateAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMmsdynPlaybookinstance> msdynPlaybooktemplateMsdynPlaybookinstance = default(IList<MicrosoftDynamicsCRMmsdynPlaybookinstance>), MicrosoftDynamicsCRMmsdynPlaybookcategory msdynCategoryid = default(MicrosoftDynamicsCRMmsdynPlaybookcategory), IList<MicrosoftDynamicsCRMmsdynPlaybookactivity> msdynPlaybooktemplateMsdynPlaybookactivity = default(IList<MicrosoftDynamicsCRMmsdynPlaybookactivity>), IList<MicrosoftDynamicsCRMmsdynCallablecontext> msdynCallablecontextMsdynPlaybooktemplate = default(IList<MicrosoftDynamicsCRMmsdynCallablecontext>))
         {
             this._createdbyValue = _createdbyValue;
             this._owningbusinessunitValue = _owningbusinessunitValue;
             Modifiedon = modifiedon;
+            MsdynRelatedentitylist = msdynRelatedentitylist;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Createdon = createdon;
-            Overriddencreatedon = overriddencreatedon;
-            MsdynRelatedentitylist = msdynRelatedentitylist;
+            this._modifiedbyValue = _modifiedbyValue;
             Statuscode = statuscode;
-            MsdynFullentitylist = msdynFullentitylist;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
             Importsequencenumber = importsequencenumber;
             MsdynDescription = msdynDescription;
+            Overriddencreatedon = overriddencreatedon;
             MsdynTrackprogress = msdynTrackprogress;
+            Versionnumber = versionnumber;
             this._owneridValue = _owneridValue;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
             MsdynPlaybooktemplateid = msdynPlaybooktemplateid;
             this._msdynCategoryidValue = _msdynCategoryidValue;
             this._owningteamValue = _owningteamValue;
             this._owninguserValue = _owninguserValue;
-            Versionnumber = versionnumber;
             MsdynName = msdynName;
-            this._modifiedbyValue = _modifiedbyValue;
+            MsdynFullentitylist = msdynFullentitylist;
             MsdynEstimatedduration = msdynEstimatedduration;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
             Statecode = statecode;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Createdby = createdby;
@@ -102,6 +102,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "msdyn_relatedentitylist")]
+        public string MsdynRelatedentitylist { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
 
@@ -112,13 +117,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "msdyn_relatedentitylist")]
-        public string MsdynRelatedentitylist { get; set; }
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -127,8 +127,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_fullentitylist")]
-        public string MsdynFullentitylist { get; set; }
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -142,8 +142,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "msdyn_trackprogress")]
         public bool? MsdynTrackprogress { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -152,8 +162,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -177,28 +187,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "msdyn_name")]
         public string MsdynName { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        [JsonProperty(PropertyName = "msdyn_fullentitylist")]
+        public string MsdynFullentitylist { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "msdyn_estimatedduration")]
         public int? MsdynEstimatedduration { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
         /// </summary>

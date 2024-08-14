@@ -29,44 +29,46 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMadoxioWorker
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioWorker(string adoxioBcidcardnumber = default(string), int? adoxioIsmanual = default(int?), int? statecode = default(int?), string adoxioEmail = default(string), int? adoxioIslettersent = default(int?), int? adoxioSelfdisclosure = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioPaymentreceiveddate = default(System.DateTimeOffset?), int? adoxioTriggerphs = default(int?), int? adoxioInvoicetrigger = default(int?), int? utcconversiontimezonecode = default(int?), string _adoxioInvoiceValue = default(string), string _createdonbehalfbyValue = default(string), bool? adoxioCertifyinformationiscorrect = default(bool?), string _owneridValue = default(string), int? adoxioConsentvalidated = default(int?), int? importsequencenumber = default(int?), System.DateTimeOffset? adoxioDateofbirth = default(System.DateTimeOffset?), string _owningbusinessunitValue = default(string), int? adoxioSecuritystatus = default(int?), string adoxioExpirydatelongdatestring = default(string), string adoxioDateofbirthshortdatestring = default(string), System.DateTimeOffset? adoxioCurrentaddressdatefrom = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), bool? adoxioConsenttosecurityscreening = default(bool?), string adoxioPhonenumber = default(string), string adoxioDriverslicencenumber = default(string), string _adoxioContactidValue = default(string), string adoxioBirthplace = default(string), string adoxioFirstname = default(string), string adoxioMiddlename = default(string), string adoxioElectronicsignature = default(string), int? adoxioIsldbworker = default(int?), string adoxioDateofbirthlongdatestring = default(string), string _owningteamValue = default(string), string _owninguserValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioExporteddate = default(System.DateTimeOffset?), string adoxioLastname = default(string), int? adoxioGendercode = default(int?), string _modifiedonbehalfbyValue = default(string), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? adoxioExpirydate = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioSecuritycompletedon = default(System.DateTimeOffset?), int? statuscode = default(int?), string adoxioWorkerid = default(string), string _createdbyValue = default(string), int? adoxioPaymentreceived = default(int?), string adoxioName = default(string), string versionnumber = default(string), string adoxioEffectivedatelongdatestring = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMactivitypointer> adoxioWorkerActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMappointment> adoxioWorkerAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMemail> adoxioWorkerEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> adoxioWorkerFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMletter> adoxioWorkerLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMphonecall> adoxioWorkerPhoneCalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMserviceappointment> adoxioWorkerServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMtask> adoxioWorkerTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> adoxioWorkerRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMsocialactivity> adoxioWorkerSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> adoxioWorkerAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMsyncerror> adoxioWorkerSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioWorkerDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioWorkerDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> adoxioWorkerSharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMqueueitem> adoxioWorkerQueueItems = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMannotation> adoxioWorkerAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioWorkerAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioWorkerMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioWorkerProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioWorkerBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioWorkerPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMcontact adoxioContactId = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMinvoice adoxioInvoice = default(MicrosoftDynamicsCRMinvoice), IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory> adoxioWorkerAdoxioWorkerinvoicehistoryWorker = default(IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory>), IList<MicrosoftDynamicsCRMadoxioAlias> adoxioWorkerAliases = default(IList<MicrosoftDynamicsCRMadoxioAlias>), IList<MicrosoftDynamicsCRMadoxioPreviousaddress> adoxioWorkerPreviousaddresses = default(IList<MicrosoftDynamicsCRMadoxioPreviousaddress>), IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary> adoxioWorkerregistrationPersonalhistorysummary = default(IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary>), IList<MicrosoftDynamicsCRMadoxioDocument> adoxioWorkerDocuments = default(IList<MicrosoftDynamicsCRMadoxioDocument>))
+        public MicrosoftDynamicsCRMadoxioWorker(string adoxioBcidcardnumber = default(string), int? adoxioIsmanual = default(int?), int? adoxioSelfdisclosure = default(int?), int? statecode = default(int?), System.DateTimeOffset? adoxioDateofbirth = default(System.DateTimeOffset?), int? adoxioIslettersent = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioPaymentreceiveddate = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioExpirydate = default(System.DateTimeOffset?), int? adoxioTriggerphs = default(int?), int? adoxioIsldbworker = default(int?), int? utcconversiontimezonecode = default(int?), string _adoxioInvoiceValue = default(string), string _createdonbehalfbyValue = default(string), bool? adoxioCertifyinformationiscorrect = default(bool?), bool? adoxioConsenttosecurityscreening = default(bool?), int? adoxioConsentvalidated = default(int?), int? importsequencenumber = default(int?), string adoxioBirthplace = default(string), int? adoxioInvoicetrigger = default(int?), int? adoxioSecuritystatus = default(int?), string adoxioExpirydatelongdatestring = default(string), string adoxioDateofbirthshortdatestring = default(string), string _owningbusinessunitValue = default(string), System.DateTimeOffset? adoxioCurrentaddressdatefrom = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), string adoxioEmail = default(string), string adoxioPhonenumber = default(string), string adoxioDriverslicencenumber = default(string), string _owneridValue = default(string), string _adoxioContactidValue = default(string), string adoxioFirstname = default(string), string adoxioMiddlename = default(string), string adoxioElectronicsignature = default(string), string adoxioDateofbirthlongdatestring = default(string), string _owningteamValue = default(string), string adoxioWorkerid = default(string), string _owninguserValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioExporteddate = default(System.DateTimeOffset?), string adoxioLastname = default(string), int? adoxioGendercode = default(int?), string _modifiedonbehalfbyValue = default(string), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? adoxioSecuritycompletedon = default(System.DateTimeOffset?), int? statuscode = default(int?), string _createdbyValue = default(string), int? adoxioPaymentreceived = default(int?), string adoxioName = default(string), string versionnumber = default(string), string adoxioEffectivedatelongdatestring = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMactivitypointer> adoxioWorkerActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMappointment> adoxioWorkerAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMemail> adoxioWorkerEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> adoxioWorkerFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMletter> adoxioWorkerLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMphonecall> adoxioWorkerPhoneCalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMserviceappointment> adoxioWorkerServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMtask> adoxioWorkerTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> adoxioWorkerRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMsocialactivity> adoxioWorkerSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> adoxioWorkerAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMsyncerror> adoxioWorkerSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioWorkerDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioWorkerDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> adoxioWorkerSharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMqueueitem> adoxioWorkerQueueItems = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMannotation> adoxioWorkerAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioWorkerAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioWorkerMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioWorkerProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioWorkerBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioWorkerPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMcontact adoxioContactId = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMinvoice adoxioInvoice = default(MicrosoftDynamicsCRMinvoice), IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory> adoxioWorkerAdoxioWorkerinvoicehistoryWorker = default(IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory>), IList<MicrosoftDynamicsCRMadoxioAlias> adoxioWorkerAliases = default(IList<MicrosoftDynamicsCRMadoxioAlias>), IList<MicrosoftDynamicsCRMadoxioPreviousaddress> adoxioWorkerPreviousaddresses = default(IList<MicrosoftDynamicsCRMadoxioPreviousaddress>), IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary> adoxioWorkerregistrationPersonalhistorysummary = default(IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary>), IList<MicrosoftDynamicsCRMadoxioDocument> adoxioWorkerDocuments = default(IList<MicrosoftDynamicsCRMadoxioDocument>))
         {
             AdoxioBcidcardnumber = adoxioBcidcardnumber;
             AdoxioIsmanual = adoxioIsmanual;
-            Statecode = statecode;
-            AdoxioEmail = adoxioEmail;
-            AdoxioIslettersent = adoxioIslettersent;
             AdoxioSelfdisclosure = adoxioSelfdisclosure;
+            Statecode = statecode;
+            AdoxioDateofbirth = adoxioDateofbirth;
+            AdoxioIslettersent = adoxioIslettersent;
             Modifiedon = modifiedon;
             Createdon = createdon;
             AdoxioPaymentreceiveddate = adoxioPaymentreceiveddate;
+            AdoxioExpirydate = adoxioExpirydate;
             AdoxioTriggerphs = adoxioTriggerphs;
-            AdoxioInvoicetrigger = adoxioInvoicetrigger;
+            AdoxioIsldbworker = adoxioIsldbworker;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             this._adoxioInvoiceValue = _adoxioInvoiceValue;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             AdoxioCertifyinformationiscorrect = adoxioCertifyinformationiscorrect;
-            this._owneridValue = _owneridValue;
+            AdoxioConsenttosecurityscreening = adoxioConsenttosecurityscreening;
             AdoxioConsentvalidated = adoxioConsentvalidated;
             Importsequencenumber = importsequencenumber;
-            AdoxioDateofbirth = adoxioDateofbirth;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
+            AdoxioBirthplace = adoxioBirthplace;
+            AdoxioInvoicetrigger = adoxioInvoicetrigger;
             AdoxioSecuritystatus = adoxioSecuritystatus;
             AdoxioExpirydatelongdatestring = adoxioExpirydatelongdatestring;
             AdoxioDateofbirthshortdatestring = adoxioDateofbirthshortdatestring;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
             AdoxioCurrentaddressdatefrom = adoxioCurrentaddressdatefrom;
             this._modifiedbyValue = _modifiedbyValue;
-            AdoxioConsenttosecurityscreening = adoxioConsenttosecurityscreening;
+            AdoxioEmail = adoxioEmail;
             AdoxioPhonenumber = adoxioPhonenumber;
             AdoxioDriverslicencenumber = adoxioDriverslicencenumber;
+            this._owneridValue = _owneridValue;
             this._adoxioContactidValue = _adoxioContactidValue;
-            AdoxioBirthplace = adoxioBirthplace;
             AdoxioFirstname = adoxioFirstname;
             AdoxioMiddlename = adoxioMiddlename;
             AdoxioElectronicsignature = adoxioElectronicsignature;
-            AdoxioIsldbworker = adoxioIsldbworker;
             AdoxioDateofbirthlongdatestring = adoxioDateofbirthlongdatestring;
             this._owningteamValue = _owningteamValue;
+            AdoxioWorkerid = adoxioWorkerid;
             this._owninguserValue = _owninguserValue;
             Overriddencreatedon = overriddencreatedon;
             AdoxioExporteddate = adoxioExporteddate;
@@ -74,10 +76,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioGendercode = adoxioGendercode;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Timezoneruleversionnumber = timezoneruleversionnumber;
-            AdoxioExpirydate = adoxioExpirydate;
             AdoxioSecuritycompletedon = adoxioSecuritycompletedon;
             Statuscode = statuscode;
-            AdoxioWorkerid = adoxioWorkerid;
             this._createdbyValue = _createdbyValue;
             AdoxioPaymentreceived = adoxioPaymentreceived;
             AdoxioName = adoxioName;
@@ -140,23 +140,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_selfdisclosure")]
+        public int? AdoxioSelfdisclosure { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "statecode")]
         public int? Statecode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_email")]
-        public string AdoxioEmail { get; set; }
+        [JsonProperty(PropertyName = "adoxio_dateofbirth")]
+        public System.DateTimeOffset? AdoxioDateofbirth { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_islettersent")]
         public int? AdoxioIslettersent { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_selfdisclosure")]
-        public int? AdoxioSelfdisclosure { get; set; }
 
         /// <summary>
         /// </summary>
@@ -175,13 +175,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_expirydate")]
+        public System.DateTimeOffset? AdoxioExpirydate { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_triggerphs")]
         public int? AdoxioTriggerphs { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_invoicetrigger")]
-        public int? AdoxioInvoicetrigger { get; set; }
+        [JsonProperty(PropertyName = "adoxio_isldbworker")]
+        public int? AdoxioIsldbworker { get; set; }
 
         /// <summary>
         /// </summary>
@@ -205,8 +210,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_consenttosecurityscreening")]
+        public bool? AdoxioConsenttosecurityscreening { get; set; }
 
         /// <summary>
         /// </summary>
@@ -220,13 +225,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_dateofbirth")]
-        public System.DateTimeOffset? AdoxioDateofbirth { get; set; }
+        [JsonProperty(PropertyName = "adoxio_birthplace")]
+        public string AdoxioBirthplace { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_invoicetrigger")]
+        public int? AdoxioInvoicetrigger { get; set; }
 
         /// <summary>
         /// </summary>
@@ -245,6 +250,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_currentaddressdatefrom")]
         public System.DateTimeOffset? AdoxioCurrentaddressdatefrom { get; set; }
 
@@ -255,8 +265,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_consenttosecurityscreening")]
-        public bool? AdoxioConsenttosecurityscreening { get; set; }
+        [JsonProperty(PropertyName = "adoxio_email")]
+        public string AdoxioEmail { get; set; }
 
         /// <summary>
         /// </summary>
@@ -270,13 +280,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_contactid_value")]
-        public string _adoxioContactidValue { get; set; }
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_birthplace")]
-        public string AdoxioBirthplace { get; set; }
+        [JsonProperty(PropertyName = "_adoxio_contactid_value")]
+        public string _adoxioContactidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -295,11 +305,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_isldbworker")]
-        public int? AdoxioIsldbworker { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_dateofbirthlongdatestring")]
         public string AdoxioDateofbirthlongdatestring { get; set; }
 
@@ -307,6 +312,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
         public string _owningteamValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_workerid")]
+        public string AdoxioWorkerid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -345,11 +355,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_expirydate")]
-        public System.DateTimeOffset? AdoxioExpirydate { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_securitycompletedon")]
         public System.DateTimeOffset? AdoxioSecuritycompletedon { get; set; }
 
@@ -357,11 +362,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_workerid")]
-        public string AdoxioWorkerid { get; set; }
 
         /// <summary>
         /// </summary>

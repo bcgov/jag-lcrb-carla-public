@@ -27,22 +27,22 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMtimezonelocalizedname class.
         /// </summary>
-        public MicrosoftDynamicsCRMtimezonelocalizedname(string _timezonedefinitionidValue = default(string), string daylightname = default(string), string userinterfacename = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string timezonelocalizednameid = default(string), string standardname = default(string), string _modifiedbyValue = default(string), string _createdbyValue = default(string), string _modifiedonbehalfbyValue = default(string), int? cultureid = default(int?), string _createdonbehalfbyValue = default(string), string versionnumber = default(string), string _organizationidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtimezonedefinition timezonedefinitionid = default(MicrosoftDynamicsCRMtimezonedefinition), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMtimezonelocalizedname(string daylightname = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string timezonelocalizednameid = default(string), string standardname = default(string), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string userinterfacename = default(string), string _timezonedefinitionidValue = default(string), int? cultureid = default(int?), string _createdonbehalfbyValue = default(string), string versionnumber = default(string), string _organizationidValue = default(string), string _createdbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtimezonedefinition timezonedefinitionid = default(MicrosoftDynamicsCRMtimezonedefinition), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
         {
-            this._timezonedefinitionidValue = _timezonedefinitionidValue;
             Daylightname = daylightname;
-            Userinterfacename = userinterfacename;
+            this._modifiedbyValue = _modifiedbyValue;
             Modifiedon = modifiedon;
             Timezonelocalizednameid = timezonelocalizednameid;
             Standardname = standardname;
-            this._modifiedbyValue = _modifiedbyValue;
-            this._createdbyValue = _createdbyValue;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Createdon = createdon;
+            Userinterfacename = userinterfacename;
+            this._timezonedefinitionidValue = _timezonedefinitionidValue;
             Cultureid = cultureid;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Versionnumber = versionnumber;
             this._organizationidValue = _organizationidValue;
-            Createdon = createdon;
+            this._createdbyValue = _createdbyValue;
             Createdonbehalfby = createdonbehalfby;
             Timezonedefinitionid = timezonedefinitionid;
             Modifiedonbehalfby = modifiedonbehalfby;
@@ -58,18 +58,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_timezonedefinitionid_value")]
-        public string _timezonedefinitionidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "daylightname")]
         public string Daylightname { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "userinterfacename")]
-        public string Userinterfacename { get; set; }
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -88,18 +83,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "userinterfacename")]
+        public string Userinterfacename { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_timezonedefinitionid_value")]
+        public string _timezonedefinitionidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -123,8 +123,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>

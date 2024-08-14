@@ -31,12 +31,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMtemplate
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMtemplate(int? openrate = default(int?), int? replyrate = default(int?), string subjectpresentationxml = default(string), bool? isrecommended = default(bool?), int? generationtypecode = default(int?), string _createdbyValue = default(string), string mimetype = default(string), string subjectsafehtml = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), bool? ismanaged = default(bool?), string safehtml = default(string), string _owningbusinessunitValue = default(string), string _owneridValue = default(string), string description = default(string), string templateidunique = default(string), string body = default(string), string solutionid = default(string), string _modifiedbyValue = default(string), string _owningteamValue = default(string), string templatetypecode = default(string), string entityimageid = default(string), bool? ispersonal = default(bool?), int? componentstate = default(int?), int? usedcount = default(int?), string title = default(string), int? importsequencenumber = default(int?), string _owninguserValue = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), long? entityimageTimestamp = default(long?), string introducedversion = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string templateid = default(string), int? replycount = default(int?), string presentationxml = default(string), string iscustomizable = default(string), string subject = default(string), byte[] entityimage = default(byte[]), string entityimageUrl = default(string), int? languagecode = default(int?), string versionnumber = default(string), int? opencount = default(int?), string _createdonbehalfbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> templateAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> templateBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMactivitymimeattachment> templateActivityMimeAttachments = default(IList<MicrosoftDynamicsCRMactivitymimeattachment>), IList<MicrosoftDynamicsCRMprocesssession> templateProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), IList<MicrosoftDynamicsCRMsyncerror> templateSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMorganization> templateOrganization = default(IList<MicrosoftDynamicsCRMorganization>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMemail> emailEmailTemplate = default(IList<MicrosoftDynamicsCRMemail>))
+        public MicrosoftDynamicsCRMtemplate(int? openrate = default(int?), int? replyrate = default(int?), string subjectpresentationxml = default(string), bool? isrecommended = default(bool?), string solutionid = default(string), int? generationtypecode = default(int?), string _createdbyValue = default(string), string mimetype = default(string), string subjectsafehtml = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), bool? ismanaged = default(bool?), string safehtml = default(string), string _owningbusinessunitValue = default(string), string _owneridValue = default(string), string templateidunique = default(string), string body = default(string), string description = default(string), string _modifiedbyValue = default(string), string _owningteamValue = default(string), string templatetypecode = default(string), string entityimageid = default(string), bool? ispersonal = default(bool?), int? componentstate = default(int?), int? usedcount = default(int?), string title = default(string), int? importsequencenumber = default(int?), string _owninguserValue = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), long? entityimageTimestamp = default(long?), string introducedversion = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string templateid = default(string), int? replycount = default(int?), string presentationxml = default(string), string iscustomizable = default(string), string subject = default(string), byte[] entityimage = default(byte[]), string entityimageUrl = default(string), int? languagecode = default(int?), string versionnumber = default(string), int? opencount = default(int?), string _createdonbehalfbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> templateAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> templateBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMactivitymimeattachment> templateActivityMimeAttachments = default(IList<MicrosoftDynamicsCRMactivitymimeattachment>), IList<MicrosoftDynamicsCRMprocesssession> templateProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), IList<MicrosoftDynamicsCRMsyncerror> templateSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMorganization> templateOrganization = default(IList<MicrosoftDynamicsCRMorganization>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMemail> emailEmailTemplate = default(IList<MicrosoftDynamicsCRMemail>))
         {
             Openrate = openrate;
             Replyrate = replyrate;
             Subjectpresentationxml = subjectpresentationxml;
             Isrecommended = isrecommended;
+            Solutionid = solutionid;
             Generationtypecode = generationtypecode;
             this._createdbyValue = _createdbyValue;
             Mimetype = mimetype;
@@ -46,10 +47,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Safehtml = safehtml;
             this._owningbusinessunitValue = _owningbusinessunitValue;
             this._owneridValue = _owneridValue;
-            Description = description;
             Templateidunique = templateidunique;
             Body = body;
-            Solutionid = solutionid;
+            Description = description;
             this._modifiedbyValue = _modifiedbyValue;
             this._owningteamValue = _owningteamValue;
             Templatetypecode = templatetypecode;
@@ -121,6 +121,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "solutionid")]
+        public string Solutionid { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "generationtypecode")]
         public int? Generationtypecode { get; set; }
 
@@ -166,11 +171,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "description")]
-        public string Description { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "templateidunique")]
         public string Templateidunique { get; set; }
 
@@ -181,8 +181,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "solutionid")]
-        public string Solutionid { get; set; }
+        [JsonProperty(PropertyName = "description")]
+        public string Description { get; set; }
 
         /// <summary>
         /// </summary>

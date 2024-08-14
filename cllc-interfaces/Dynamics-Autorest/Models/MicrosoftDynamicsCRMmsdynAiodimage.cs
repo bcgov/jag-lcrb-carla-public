@@ -31,12 +31,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMmsdynAiodimage class.
         /// </summary>
-        public MicrosoftDynamicsCRMmsdynAiodimage(System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? statecode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string msdynDescription = default(string), long? entityimageTimestamp = default(long?), string msdynMetadata = default(string), int? statuscode = default(int?), string _owninguserValue = default(string), string _owningbusinessunitValue = default(string), int? timezoneruleversionnumber = default(int?), string msdynChecksum = default(string), string entityimageUrl = default(string), string msdynName = default(string), string versionnumber = default(string), string _owningteamValue = default(string), string entityimageid = default(string), byte[] entityimage = default(byte[]), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), int? utcconversiontimezonecode = default(int?), string _createdbyValue = default(string), string _owneridValue = default(string), int? importsequencenumber = default(int?), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string msdynAiodimageid = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> msdynAiodimageSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> msdynAiodimageDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> msdynAiodimageDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> msdynAiodimageAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> msdynAiodimageMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> msdynAiodimageProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> msdynAiodimageBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> msdynAiodimagePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMannotation> msdynAiodimageAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMmsdynAiodtrainingimage> msdynAiodimageMsdynAiodtrainingimage = default(IList<MicrosoftDynamicsCRMmsdynAiodtrainingimage>))
+        public MicrosoftDynamicsCRMmsdynAiodimage(System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? statecode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), long? entityimageTimestamp = default(long?), string msdynMetadata = default(string), int? statuscode = default(int?), string _owninguserValue = default(string), string _owningbusinessunitValue = default(string), int? timezoneruleversionnumber = default(int?), string msdynChecksum = default(string), string entityimageUrl = default(string), string msdynName = default(string), string msdynDescription = default(string), string versionnumber = default(string), string _owningteamValue = default(string), string entityimageid = default(string), byte[] entityimage = default(byte[]), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), int? utcconversiontimezonecode = default(int?), string _createdbyValue = default(string), string _owneridValue = default(string), int? importsequencenumber = default(int?), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string msdynAiodimageid = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> msdynAiodimageSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> msdynAiodimageDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> msdynAiodimageDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> msdynAiodimageAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> msdynAiodimageMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> msdynAiodimageProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> msdynAiodimageBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> msdynAiodimagePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMannotation> msdynAiodimageAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMmsdynAiodtrainingimage> msdynAiodimageMsdynAiodtrainingimage = default(IList<MicrosoftDynamicsCRMmsdynAiodtrainingimage>))
         {
             Overriddencreatedon = overriddencreatedon;
             Statecode = statecode;
             Createdon = createdon;
-            MsdynDescription = msdynDescription;
             EntityimageTimestamp = entityimageTimestamp;
             MsdynMetadata = msdynMetadata;
             Statuscode = statuscode;
@@ -46,6 +45,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             MsdynChecksum = msdynChecksum;
             EntityimageUrl = entityimageUrl;
             MsdynName = msdynName;
+            MsdynDescription = msdynDescription;
             Versionnumber = versionnumber;
             this._owningteamValue = _owningteamValue;
             Entityimageid = entityimageid;
@@ -102,11 +102,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_description")]
-        public string MsdynDescription { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "entityimage_timestamp")]
         public long? EntityimageTimestamp { get; set; }
 
@@ -149,6 +144,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "msdyn_name")]
         public string MsdynName { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "msdyn_description")]
+        public string MsdynDescription { get; set; }
 
         /// <summary>
         /// </summary>

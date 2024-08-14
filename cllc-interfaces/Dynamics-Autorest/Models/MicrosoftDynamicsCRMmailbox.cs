@@ -31,19 +31,20 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMmailbox
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMmailbox(int? testemailconfigurationretrycount = default(int?), int? noactcount = default(int?), bool? isactsyncorgflagset = default(bool?), string exchangesyncstatexml = default(string), bool? isforwardmailbox = default(bool?), string _emailserverprofileValue = default(string), bool? isemailaddressapprovedbyo365admin = default(bool?), string credentialinfo = default(string), int? actdeliverymethod = default(int?), int? mailboxprocessingcontext = default(int?), string folderhierarchy = default(string), string name = default(string), int? outgoingemaildeliverymethod = default(int?), int? exchangecontactsimportstatus = default(int?), string entityimageid = default(string), bool? officeappsdeploymentscheduled = default(bool?), string mailboxid = default(string), int? timezoneruleversionnumber = default(int?), string dataencryptionkey = default(string), string _owneridValue = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? lastsuccessfulsynccompletedon = default(System.DateTimeOffset?), System.DateTimeOffset? lastautodiscoveredon = default(System.DateTimeOffset?), string _owninguserValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string lastsyncerror = default(string), int? incomingemaildeliverymethod = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), bool? isdataencryptionkeyset = default(bool?), string versionnumber = default(string), string oauthrefreshtoken = default(string), string _organizationidValue = default(string), int? lastduration = default(int?), bool? testemailconfigurationscheduled = default(bool?), bool? processanddeleteemails = default(bool?), string officeappsdeploymenterror = default(string), bool? enabledforact = default(bool?), int? outgoingemailstatus = default(int?), string exchangesyncstatexmlfilerefName = default(string), int? lastsyncerrorcount = default(int?), string emailaddress = default(string), System.DateTimeOffset? lastsyncstartedon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? lastsyncerroroccurredon = default(System.DateTimeOffset?), System.DateTimeOffset? postponeofficeappsdeploymentuntil = default(System.DateTimeOffset?), byte[] entityimage = default(byte[]), bool? allowemailconnectortousecredentials = default(bool?), int? itemsprocessedforlastsync = default(int?), long? entityimageTimestamp = default(long?), System.DateTimeOffset? officeappsdeploymentcompleteon = default(System.DateTimeOffset?), int? processedtimes = default(int?), string oauthaccesstoken = default(string), string username = default(string), System.DateTimeOffset? processinglastattemptedon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), int? officeappsdeploymentstatus = default(int?), System.DateTimeOffset? postponesendinguntil = default(System.DateTimeOffset?), System.DateTimeOffset? postponetestemailconfigurationuntil = default(System.DateTimeOffset?), int? actstatus = default(int?), int? processingstatecode = default(int?), int? statuscode = default(int?), int? forcedunlockcount = default(int?), System.DateTimeOffset? receivingpostponeduntilforact = default(System.DateTimeOffset?), int? averagetotalduration = default(int?), System.DateTimeOffset? exchangecontactsimportcompletedon = default(System.DateTimeOffset?), bool? ispasswordset = default(bool?), string _owningteamValue = default(string), bool? orgmarkedasprimaryforexchangesync = default(bool?), string lastsyncerrormachinename = default(string), string _regardingobjectidValue = default(string), string ewsurl = default(string), System.DateTimeOffset? oauthtokenexpireson = default(System.DateTimeOffset?), int? lastsyncerrorcode = default(int?), string password = default(string), string _createdonbehalfbyValue = default(string), bool? isoauthrefreshtokenset = default(bool?), System.DateTimeOffset? postponemailboxprocessinguntil = default(System.DateTimeOffset?), System.DateTimeOffset? processemailreceivedafter = default(System.DateTimeOffset?), int? emailrouteraccessapproval = default(int?), int? mailboxstatus = default(int?), int? noemailcount = default(int?), int? incomingemailstatus = default(int?), bool? enabledforoutgoingemail = default(bool?), string _createdbyValue = default(string), bool? isoauthaccesstokenset = default(bool?), bool? enabledforincomingemail = default(bool?), bool? isexchangecontactsimportscheduled = default(bool?), int? transientfailurecount = default(int?), string _owningbusinessunitValue = default(string), bool? isserviceaccount = default(bool?), System.DateTimeOffset? testmailboxaccesscompletedon = default(System.DateTimeOffset?), int? verboseloggingenabled = default(int?), string entityimageUrl = default(string), int? itemsfailedforlastsync = default(int?), string undeliverablefolder = default(string), System.DateTimeOffset? lastmailboxforcedunlockoccurredon = default(System.DateTimeOffset?), byte[] exchangesyncstatexmlfileref = default(byte[]), int? statecode = default(int?), string hostid = default(string), System.DateTimeOffset? receivingpostponeduntil = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser regardingobjectid = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMemailserverprofile emailserverprofile = default(MicrosoftDynamicsCRMemailserverprofile), IList<MicrosoftDynamicsCRMsystemuser> systemuserDefaultmailboxMailbox = default(IList<MicrosoftDynamicsCRMsystemuser>), IList<MicrosoftDynamicsCRMqueue> queueDefaultmailboxMailbox = default(IList<MicrosoftDynamicsCRMqueue>), IList<MicrosoftDynamicsCRMtracelog> tracelogMailbox = default(IList<MicrosoftDynamicsCRMtracelog>), IList<MicrosoftDynamicsCRMactivitypointer> activitypointerSendermailboxidMailbox = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMasyncoperation> mailboxAsyncoperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMqueue regardingobjectidQueue = default(MicrosoftDynamicsCRMqueue), IList<MicrosoftDynamicsCRMemail> emailSendermailboxidMailbox = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMsyncerror> mailboxSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMannotation> mailboxAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> mailboxMailboxTrackingFolder = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMprocesssession> mailboxProcesssessions = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> absScheduledprocessexecutionMailboxSendermailboxid = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMbulkoperation> bulkoperationMailboxSendermailboxid = default(IList<MicrosoftDynamicsCRMbulkoperation>), IList<MicrosoftDynamicsCRMcampaignactivity> campaignactivityMailboxSendermailboxid = default(IList<MicrosoftDynamicsCRMcampaignactivity>), IList<MicrosoftDynamicsCRMcampaignresponse> campaignresponseMailboxSendermailboxid = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMincidentresolution> incidentresolutionMailboxSendermailboxid = default(IList<MicrosoftDynamicsCRMincidentresolution>), IList<MicrosoftDynamicsCRMserviceappointment> serviceappointmentMailboxSendermailboxid = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMopportunityclose> opportunitycloseMailboxSendermailboxid = default(IList<MicrosoftDynamicsCRMopportunityclose>), IList<MicrosoftDynamicsCRMorderclose> ordercloseMailboxSendermailboxid = default(IList<MicrosoftDynamicsCRMorderclose>), IList<MicrosoftDynamicsCRMquoteclose> quotecloseMailboxSendermailboxid = default(IList<MicrosoftDynamicsCRMquoteclose>), IList<MicrosoftDynamicsCRMfileattachment> mailboxFileAttachments = default(IList<MicrosoftDynamicsCRMfileattachment>))
+        public MicrosoftDynamicsCRMmailbox(int? testemailconfigurationretrycount = default(int?), int? noactcount = default(int?), bool? isactsyncorgflagset = default(bool?), string exchangesyncstatexml = default(string), bool? isforwardmailbox = default(bool?), string lastsyncerrormachinename = default(string), string _emailserverprofileValue = default(string), bool? isemailaddressapprovedbyo365admin = default(bool?), int? actdeliverymethod = default(int?), int? mailboxprocessingcontext = default(int?), string folderhierarchy = default(string), string credentialinfo = default(string), string name = default(string), int? outgoingemaildeliverymethod = default(int?), int? exchangecontactsimportstatus = default(int?), string entityimageid = default(string), bool? officeappsdeploymentscheduled = default(bool?), string mailboxid = default(string), int? timezoneruleversionnumber = default(int?), string dataencryptionkey = default(string), string _owneridValue = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? lastsuccessfulsynccompletedon = default(System.DateTimeOffset?), System.DateTimeOffset? lastautodiscoveredon = default(System.DateTimeOffset?), string _owninguserValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string lastsyncerror = default(string), int? incomingemaildeliverymethod = default(int?), System.DateTimeOffset? postponeofficeappsdeploymentuntil = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), bool? isdataencryptionkeyset = default(bool?), string versionnumber = default(string), string oauthrefreshtoken = default(string), string _organizationidValue = default(string), int? lastduration = default(int?), bool? testemailconfigurationscheduled = default(bool?), string officeappsdeploymenterror = default(string), bool? enabledforact = default(bool?), int? outgoingemailstatus = default(int?), string exchangesyncstatexmlfilerefName = default(string), int? lastsyncerrorcount = default(int?), string emailaddress = default(string), System.DateTimeOffset? lastsyncstartedon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? lastsyncerroroccurredon = default(System.DateTimeOffset?), bool? processanddeleteemails = default(bool?), byte[] entityimage = default(byte[]), bool? allowemailconnectortousecredentials = default(bool?), int? itemsprocessedforlastsync = default(int?), long? entityimageTimestamp = default(long?), System.DateTimeOffset? officeappsdeploymentcompleteon = default(System.DateTimeOffset?), int? processedtimes = default(int?), string oauthaccesstoken = default(string), string username = default(string), System.DateTimeOffset? processinglastattemptedon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), int? officeappsdeploymentstatus = default(int?), System.DateTimeOffset? postponesendinguntil = default(System.DateTimeOffset?), System.DateTimeOffset? postponetestemailconfigurationuntil = default(System.DateTimeOffset?), int? actstatus = default(int?), int? processingstatecode = default(int?), int? statuscode = default(int?), int? forcedunlockcount = default(int?), System.DateTimeOffset? receivingpostponeduntilforact = default(System.DateTimeOffset?), int? averagetotalduration = default(int?), System.DateTimeOffset? exchangecontactsimportcompletedon = default(System.DateTimeOffset?), bool? ispasswordset = default(bool?), string _owningteamValue = default(string), bool? orgmarkedasprimaryforexchangesync = default(bool?), string _regardingobjectidValue = default(string), string ewsurl = default(string), System.DateTimeOffset? oauthtokenexpireson = default(System.DateTimeOffset?), int? lastsyncerrorcode = default(int?), string password = default(string), string _createdonbehalfbyValue = default(string), bool? isoauthrefreshtokenset = default(bool?), System.DateTimeOffset? postponemailboxprocessinguntil = default(System.DateTimeOffset?), System.DateTimeOffset? processemailreceivedafter = default(System.DateTimeOffset?), int? emailrouteraccessapproval = default(int?), int? mailboxstatus = default(int?), int? noemailcount = default(int?), int? incomingemailstatus = default(int?), bool? enabledforoutgoingemail = default(bool?), string _createdbyValue = default(string), bool? isoauthaccesstokenset = default(bool?), bool? enabledforincomingemail = default(bool?), bool? isexchangecontactsimportscheduled = default(bool?), int? transientfailurecount = default(int?), string _owningbusinessunitValue = default(string), bool? isserviceaccount = default(bool?), System.DateTimeOffset? testmailboxaccesscompletedon = default(System.DateTimeOffset?), int? verboseloggingenabled = default(int?), string entityimageUrl = default(string), int? itemsfailedforlastsync = default(int?), string undeliverablefolder = default(string), System.DateTimeOffset? lastmailboxforcedunlockoccurredon = default(System.DateTimeOffset?), byte[] exchangesyncstatexmlfileref = default(byte[]), int? statecode = default(int?), string hostid = default(string), System.DateTimeOffset? receivingpostponeduntil = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser regardingobjectid = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMemailserverprofile emailserverprofile = default(MicrosoftDynamicsCRMemailserverprofile), IList<MicrosoftDynamicsCRMsystemuser> systemuserDefaultmailboxMailbox = default(IList<MicrosoftDynamicsCRMsystemuser>), IList<MicrosoftDynamicsCRMqueue> queueDefaultmailboxMailbox = default(IList<MicrosoftDynamicsCRMqueue>), IList<MicrosoftDynamicsCRMtracelog> tracelogMailbox = default(IList<MicrosoftDynamicsCRMtracelog>), IList<MicrosoftDynamicsCRMactivitypointer> activitypointerSendermailboxidMailbox = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMasyncoperation> mailboxAsyncoperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMqueue regardingobjectidQueue = default(MicrosoftDynamicsCRMqueue), IList<MicrosoftDynamicsCRMemail> emailSendermailboxidMailbox = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMsyncerror> mailboxSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMannotation> mailboxAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> mailboxMailboxTrackingFolder = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMprocesssession> mailboxProcesssessions = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> absScheduledprocessexecutionMailboxSendermailboxid = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMbulkoperation> bulkoperationMailboxSendermailboxid = default(IList<MicrosoftDynamicsCRMbulkoperation>), IList<MicrosoftDynamicsCRMcampaignactivity> campaignactivityMailboxSendermailboxid = default(IList<MicrosoftDynamicsCRMcampaignactivity>), IList<MicrosoftDynamicsCRMcampaignresponse> campaignresponseMailboxSendermailboxid = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMincidentresolution> incidentresolutionMailboxSendermailboxid = default(IList<MicrosoftDynamicsCRMincidentresolution>), IList<MicrosoftDynamicsCRMserviceappointment> serviceappointmentMailboxSendermailboxid = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMopportunityclose> opportunitycloseMailboxSendermailboxid = default(IList<MicrosoftDynamicsCRMopportunityclose>), IList<MicrosoftDynamicsCRMorderclose> ordercloseMailboxSendermailboxid = default(IList<MicrosoftDynamicsCRMorderclose>), IList<MicrosoftDynamicsCRMquoteclose> quotecloseMailboxSendermailboxid = default(IList<MicrosoftDynamicsCRMquoteclose>), IList<MicrosoftDynamicsCRMfileattachment> mailboxFileAttachments = default(IList<MicrosoftDynamicsCRMfileattachment>))
         {
             Testemailconfigurationretrycount = testemailconfigurationretrycount;
             Noactcount = noactcount;
             Isactsyncorgflagset = isactsyncorgflagset;
             Exchangesyncstatexml = exchangesyncstatexml;
             Isforwardmailbox = isforwardmailbox;
+            Lastsyncerrormachinename = lastsyncerrormachinename;
             this._emailserverprofileValue = _emailserverprofileValue;
             Isemailaddressapprovedbyo365admin = isemailaddressapprovedbyo365admin;
-            Credentialinfo = credentialinfo;
             Actdeliverymethod = actdeliverymethod;
             Mailboxprocessingcontext = mailboxprocessingcontext;
             Folderhierarchy = folderhierarchy;
+            Credentialinfo = credentialinfo;
             Name = name;
             Outgoingemaildeliverymethod = outgoingemaildeliverymethod;
             Exchangecontactsimportstatus = exchangecontactsimportstatus;
@@ -60,6 +61,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Modifiedon = modifiedon;
             Lastsyncerror = lastsyncerror;
             Incomingemaildeliverymethod = incomingemaildeliverymethod;
+            Postponeofficeappsdeploymentuntil = postponeofficeappsdeploymentuntil;
             Createdon = createdon;
             Isdataencryptionkeyset = isdataencryptionkeyset;
             Versionnumber = versionnumber;
@@ -67,7 +69,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             this._organizationidValue = _organizationidValue;
             Lastduration = lastduration;
             Testemailconfigurationscheduled = testemailconfigurationscheduled;
-            Processanddeleteemails = processanddeleteemails;
             Officeappsdeploymenterror = officeappsdeploymenterror;
             Enabledforact = enabledforact;
             Outgoingemailstatus = outgoingemailstatus;
@@ -77,7 +78,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Lastsyncstartedon = lastsyncstartedon;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             Lastsyncerroroccurredon = lastsyncerroroccurredon;
-            Postponeofficeappsdeploymentuntil = postponeofficeappsdeploymentuntil;
+            Processanddeleteemails = processanddeleteemails;
             Entityimage = entityimage;
             Allowemailconnectortousecredentials = allowemailconnectortousecredentials;
             Itemsprocessedforlastsync = itemsprocessedforlastsync;
@@ -101,7 +102,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Ispasswordset = ispasswordset;
             this._owningteamValue = _owningteamValue;
             Orgmarkedasprimaryforexchangesync = orgmarkedasprimaryforexchangesync;
-            Lastsyncerrormachinename = lastsyncerrormachinename;
             this._regardingobjectidValue = _regardingobjectidValue;
             Ewsurl = ewsurl;
             Oauthtokenexpireson = oauthtokenexpireson;
@@ -200,6 +200,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "lastsyncerrormachinename")]
+        public string Lastsyncerrormachinename { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_emailserverprofile_value")]
         public string _emailserverprofileValue { get; set; }
 
@@ -207,11 +212,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "isemailaddressapprovedbyo365admin")]
         public bool? Isemailaddressapprovedbyo365admin { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "credentialinfo")]
-        public string Credentialinfo { get; set; }
 
         /// <summary>
         /// </summary>
@@ -227,6 +227,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "folderhierarchy")]
         public string Folderhierarchy { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "credentialinfo")]
+        public string Credentialinfo { get; set; }
 
         /// <summary>
         /// </summary>
@@ -310,6 +315,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "postponeofficeappsdeploymentuntil")]
+        public System.DateTimeOffset? Postponeofficeappsdeploymentuntil { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
@@ -342,11 +352,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "testemailconfigurationscheduled")]
         public bool? Testemailconfigurationscheduled { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "processanddeleteemails")]
-        public bool? Processanddeleteemails { get; set; }
 
         /// <summary>
         /// </summary>
@@ -395,8 +400,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "postponeofficeappsdeploymentuntil")]
-        public System.DateTimeOffset? Postponeofficeappsdeploymentuntil { get; set; }
+        [JsonProperty(PropertyName = "processanddeleteemails")]
+        public bool? Processanddeleteemails { get; set; }
 
         /// <summary>
         /// </summary>
@@ -513,11 +518,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "orgmarkedasprimaryforexchangesync")]
         public bool? Orgmarkedasprimaryforexchangesync { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lastsyncerrormachinename")]
-        public string Lastsyncerrormachinename { get; set; }
 
         /// <summary>
         /// </summary>

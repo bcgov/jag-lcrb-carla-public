@@ -29,14 +29,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMmsdynAimodel
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMmsdynAimodel(string _owningbusinessunitValue = default(string), string msdynAimodelid = default(string), string msdynName = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string iscustomizable = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), string _msdynActiverunconfigurationidValue = default(string), string _owningteamValue = default(string), bool? msdynSharewithorganizationoncreate = default(bool?), string _msdynRetrainworkflowidValue = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string _createdbyValue = default(string), int? importsequencenumber = default(int?), string _msdynTemplateidValue = default(string), string introducedversion = default(string), string msdynModelcreationcontext = default(string), string versionnumber = default(string), bool? ismanaged = default(bool?), int? statecode = default(int?), string _modifiedonbehalfbyValue = default(string), string msdynAimodelidunique = default(string), int? componentstate = default(int?), int? statuscode = default(int?), string solutionid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), int? timezoneruleversionnumber = default(int?), string _owninguserValue = default(string), string _owneridValue = default(string), string _modifiedbyValue = default(string), string _msdynScheduleinferenceworkflowidValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> msdynAimodelSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> msdynAimodelAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> msdynAimodelMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> msdynAimodelProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> msdynAimodelBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> msdynAimodelPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMannotation> msdynAimodelAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMmsdynAiconfiguration> msdynAimodelMsdynAiconfiguration = default(IList<MicrosoftDynamicsCRMmsdynAiconfiguration>), MicrosoftDynamicsCRMworkflow msdynRetrainworkflowid = default(MicrosoftDynamicsCRMworkflow), MicrosoftDynamicsCRMworkflow msdynScheduleinferenceworkflowid = default(MicrosoftDynamicsCRMworkflow), MicrosoftDynamicsCRMmsdynAitemplate msdynTemplateId = default(MicrosoftDynamicsCRMmsdynAitemplate), IList<MicrosoftDynamicsCRMmsdynAibdatasetscontainer> msdynAIBDatasetsContainerMsdynAIModelI = default(IList<MicrosoftDynamicsCRMmsdynAibdatasetscontainer>))
+        public MicrosoftDynamicsCRMmsdynAimodel(string _owningbusinessunitValue = default(string), string msdynAimodelid = default(string), string msdynName = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string iscustomizable = default(string), int? utcconversiontimezonecode = default(int?), string _msdynActiverunconfigurationidValue = default(string), string _owningteamValue = default(string), bool? msdynSharewithorganizationoncreate = default(bool?), string _msdynRetrainworkflowidValue = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string _createdbyValue = default(string), int? importsequencenumber = default(int?), string _msdynTemplateidValue = default(string), string introducedversion = default(string), string msdynModelcreationcontext = default(string), string versionnumber = default(string), string _msdynScheduleinferenceworkflowidValue = default(string), int? statecode = default(int?), string msdynAimodelidunique = default(string), int? componentstate = default(int?), int? statuscode = default(int?), string _modifiedonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string solutionid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), int? timezoneruleversionnumber = default(int?), string _owninguserValue = default(string), string _owneridValue = default(string), bool? ismanaged = default(bool?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> msdynAimodelSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> msdynAimodelAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> msdynAimodelMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> msdynAimodelProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> msdynAimodelBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> msdynAimodelPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMannotation> msdynAimodelAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMmsdynAiconfiguration> msdynAimodelMsdynAiconfiguration = default(IList<MicrosoftDynamicsCRMmsdynAiconfiguration>), MicrosoftDynamicsCRMworkflow msdynRetrainworkflowid = default(MicrosoftDynamicsCRMworkflow), MicrosoftDynamicsCRMworkflow msdynScheduleinferenceworkflowid = default(MicrosoftDynamicsCRMworkflow), MicrosoftDynamicsCRMmsdynAitemplate msdynTemplateId = default(MicrosoftDynamicsCRMmsdynAitemplate), IList<MicrosoftDynamicsCRMmsdynAibdatasetscontainer> msdynAIBDatasetsContainerMsdynAIModelI = default(IList<MicrosoftDynamicsCRMmsdynAibdatasetscontainer>))
         {
             this._owningbusinessunitValue = _owningbusinessunitValue;
             MsdynAimodelid = msdynAimodelid;
             MsdynName = msdynName;
+            Createdon = createdon;
             Overriddencreatedon = overriddencreatedon;
             Iscustomizable = iscustomizable;
-            Createdon = createdon;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             this._msdynActiverunconfigurationidValue = _msdynActiverunconfigurationidValue;
             this._owningteamValue = _owningteamValue;
@@ -49,20 +49,20 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Introducedversion = introducedversion;
             MsdynModelcreationcontext = msdynModelcreationcontext;
             Versionnumber = versionnumber;
-            Ismanaged = ismanaged;
+            this._msdynScheduleinferenceworkflowidValue = _msdynScheduleinferenceworkflowidValue;
             Statecode = statecode;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             MsdynAimodelidunique = msdynAimodelidunique;
             Componentstate = componentstate;
             Statuscode = statuscode;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            this._modifiedbyValue = _modifiedbyValue;
             Solutionid = solutionid;
             Modifiedon = modifiedon;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             this._owninguserValue = _owninguserValue;
             this._owneridValue = _owneridValue;
-            this._modifiedbyValue = _modifiedbyValue;
-            this._msdynScheduleinferenceworkflowidValue = _msdynScheduleinferenceworkflowidValue;
+            Ismanaged = ismanaged;
             Createdby = createdby;
             Createdonbehalfby = createdonbehalfby;
             Modifiedby = modifiedby;
@@ -108,6 +108,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
@@ -115,11 +120,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "iscustomizable")]
         public string Iscustomizable { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -183,18 +183,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ismanaged")]
-        public bool? Ismanaged { get; set; }
+        [JsonProperty(PropertyName = "_msdyn_scheduleinferenceworkflowid_value")]
+        public string _msdynScheduleinferenceworkflowidValue { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "statecode")]
         public int? Statecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -210,6 +205,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -243,13 +248,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_msdyn_scheduleinferenceworkflowid_value")]
-        public string _msdynScheduleinferenceworkflowidValue { get; set; }
+        [JsonProperty(PropertyName = "ismanaged")]
+        public bool? Ismanaged { get; set; }
 
         /// <summary>
         /// </summary>

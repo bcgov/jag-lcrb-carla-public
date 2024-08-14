@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMannualfiscalcalendar class.
         /// </summary>
-        public MicrosoftDynamicsCRMannualfiscalcalendar(decimal? annual = default(decimal?), string _modifiedbyValue = default(string), System.DateTimeOffset? effectiveon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _businessunitidValue = default(string), string userfiscalcalendarid = default(string), string _transactioncurrencyidValue = default(string), string _salespersonidValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? fiscalperiodtype = default(int?), string _createdonbehalfbyValue = default(string), int? utcconversiontimezonecode = default(int?), decimal? annualBase = default(decimal?), decimal? exchangerate = default(decimal?), string _createdbyValue = default(string), int? timezoneruleversionnumber = default(int?), IList<MicrosoftDynamicsCRMbulkdeletefailure> annualFiscalCalendarBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMasyncoperation> annualFiscalCalendarAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser salespersonid = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMannualfiscalcalendar(decimal? annual = default(decimal?), string _modifiedbyValue = default(string), System.DateTimeOffset? effectiveon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _businessunitidValue = default(string), string _transactioncurrencyidValue = default(string), string _salespersonidValue = default(string), int? fiscalperiodtype = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string userfiscalcalendarid = default(string), int? utcconversiontimezonecode = default(int?), decimal? annualBase = default(decimal?), decimal? exchangerate = default(decimal?), string _createdbyValue = default(string), int? timezoneruleversionnumber = default(int?), IList<MicrosoftDynamicsCRMbulkdeletefailure> annualFiscalCalendarBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMasyncoperation> annualFiscalCalendarAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser salespersonid = default(MicrosoftDynamicsCRMsystemuser))
         {
             Annual = annual;
             this._modifiedbyValue = _modifiedbyValue;
@@ -37,12 +37,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Createdon = createdon;
             this._businessunitidValue = _businessunitidValue;
-            Userfiscalcalendarid = userfiscalcalendarid;
             this._transactioncurrencyidValue = _transactioncurrencyidValue;
             this._salespersonidValue = _salespersonidValue;
-            Modifiedon = modifiedon;
             Fiscalperiodtype = fiscalperiodtype;
+            Modifiedon = modifiedon;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Userfiscalcalendarid = userfiscalcalendarid;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             AnnualBase = annualBase;
             Exchangerate = exchangerate;
@@ -96,11 +96,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "userfiscalcalendarid")]
-        public string Userfiscalcalendarid { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
         public string _transactioncurrencyidValue { get; set; }
 
@@ -111,18 +106,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "fiscalperiodtype")]
         public int? Fiscalperiodtype { get; set; }
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "userfiscalcalendarid")]
+        public string Userfiscalcalendarid { get; set; }
 
         /// <summary>
         /// </summary>

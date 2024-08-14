@@ -29,22 +29,22 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMfieldpermission class.
         /// </summary>
-        public MicrosoftDynamicsCRMfieldpermission(string fieldpermissionid = default(string), int? canupdate = default(int?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string solutionid = default(string), int? componentstate = default(int?), int? canread = default(int?), string _organizationidValue = default(string), int? cancreate = default(int?), string _fieldsecurityprofileidValue = default(string), bool? ismanaged = default(bool?), string versionnumber = default(string), string fieldpermissionidunique = default(string), string attributelogicalname = default(string), string entityname = default(string), IList<MicrosoftDynamicsCRMsyncerror> fieldPermissionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMfieldsecurityprofile fieldsecurityprofileid = default(MicrosoftDynamicsCRMfieldsecurityprofile), MicrosoftDynamicsCRMsolution solutionFieldpermission = default(MicrosoftDynamicsCRMsolution))
+        public MicrosoftDynamicsCRMfieldpermission(string fieldpermissionid = default(string), bool? ismanaged = default(bool?), int? componentstate = default(int?), int? canupdate = default(int?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string solutionid = default(string), string entityname = default(string), int? canread = default(int?), string _organizationidValue = default(string), int? cancreate = default(int?), string _fieldsecurityprofileidValue = default(string), string versionnumber = default(string), string fieldpermissionidunique = default(string), string attributelogicalname = default(string), IList<MicrosoftDynamicsCRMsyncerror> fieldPermissionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMfieldsecurityprofile fieldsecurityprofileid = default(MicrosoftDynamicsCRMfieldsecurityprofile), MicrosoftDynamicsCRMsolution solutionFieldpermission = default(MicrosoftDynamicsCRMsolution))
         {
             Fieldpermissionid = fieldpermissionid;
+            Ismanaged = ismanaged;
+            Componentstate = componentstate;
             Canupdate = canupdate;
             Overwritetime = overwritetime;
             Solutionid = solutionid;
-            Componentstate = componentstate;
+            Entityname = entityname;
             Canread = canread;
             this._organizationidValue = _organizationidValue;
             Cancreate = cancreate;
             this._fieldsecurityprofileidValue = _fieldsecurityprofileidValue;
-            Ismanaged = ismanaged;
             Versionnumber = versionnumber;
             Fieldpermissionidunique = fieldpermissionidunique;
             Attributelogicalname = attributelogicalname;
-            Entityname = entityname;
             FieldPermissionSyncErrors = fieldPermissionSyncErrors;
             Fieldsecurityprofileid = fieldsecurityprofileid;
             SolutionFieldpermission = solutionFieldpermission;
@@ -63,6 +63,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "ismanaged")]
+        public bool? Ismanaged { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "componentstate")]
+        public int? Componentstate { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "canupdate")]
         public int? Canupdate { get; set; }
 
@@ -78,8 +88,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "componentstate")]
-        public int? Componentstate { get; set; }
+        [JsonProperty(PropertyName = "entityname")]
+        public string Entityname { get; set; }
 
         /// <summary>
         /// </summary>
@@ -103,11 +113,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ismanaged")]
-        public bool? Ismanaged { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
         public string Versionnumber { get; set; }
 
@@ -120,11 +125,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "attributelogicalname")]
         public string Attributelogicalname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "entityname")]
-        public string Entityname { get; set; }
 
         /// <summary>
         /// </summary>

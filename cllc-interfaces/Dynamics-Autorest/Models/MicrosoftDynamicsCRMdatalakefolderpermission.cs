@@ -29,8 +29,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMdatalakefolderpermission class.
         /// </summary>
-        public MicrosoftDynamicsCRMdatalakefolderpermission(string _createdonbehalfbyValue = default(string), string iscustomizable = default(string), bool? canexecute = default(bool?), int? timezoneruleversionnumber = default(int?), string _owneridValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string versionnumber = default(string), string solutionid = default(string), string _createdbyValue = default(string), bool? canread = default(bool?), string _modifiedonbehalfbyValue = default(string), string datalakefolderpermissionid = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string appid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _owningteamValue = default(string), int? statecode = default(int?), string _owninguserValue = default(string), int? utcconversiontimezonecode = default(int?), bool? canwrite = default(bool?), string _owningbusinessunitValue = default(string), int? statuscode = default(int?), string datalakefolderpermissionUniquename = default(string), int? importsequencenumber = default(int?), int? componentstate = default(int?), string _folderidValue = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string componentidunique = default(string), string _modifiedbyValue = default(string), bool? ismanaged = default(bool?), string name = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> datalakefolderpermissionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> datalakefolderpermissionDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> datalakefolderpermissionDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> datalakefolderpermissionAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> datalakefolderpermissionMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> datalakefolderpermissionProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> datalakefolderpermissionBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> datalakefolderpermissionPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMdatalakefolder folderid = default(MicrosoftDynamicsCRMdatalakefolder))
+        public MicrosoftDynamicsCRMdatalakefolderpermission(string appid = default(string), string _createdonbehalfbyValue = default(string), string iscustomizable = default(string), bool? canexecute = default(bool?), int? timezoneruleversionnumber = default(int?), string _owneridValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string versionnumber = default(string), string solutionid = default(string), string _createdbyValue = default(string), bool? canread = default(bool?), string _folderidValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _owningteamValue = default(string), int? statecode = default(int?), string _owninguserValue = default(string), int? utcconversiontimezonecode = default(int?), bool? canwrite = default(bool?), string _owningbusinessunitValue = default(string), int? statuscode = default(int?), string datalakefolderpermissionUniquename = default(string), int? importsequencenumber = default(int?), int? componentstate = default(int?), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string componentidunique = default(string), string _modifiedbyValue = default(string), bool? ismanaged = default(bool?), string datalakefolderpermissionid = default(string), string name = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> datalakefolderpermissionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> datalakefolderpermissionDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> datalakefolderpermissionDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> datalakefolderpermissionAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> datalakefolderpermissionMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> datalakefolderpermissionProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> datalakefolderpermissionBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> datalakefolderpermissionPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMdatalakefolder folderid = default(MicrosoftDynamicsCRMdatalakefolder))
         {
+            Appid = appid;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Iscustomizable = iscustomizable;
             Canexecute = canexecute;
@@ -41,10 +42,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Solutionid = solutionid;
             this._createdbyValue = _createdbyValue;
             Canread = canread;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            Datalakefolderpermissionid = datalakefolderpermissionid;
+            this._folderidValue = _folderidValue;
             Overriddencreatedon = overriddencreatedon;
-            Appid = appid;
             Createdon = createdon;
             this._owningteamValue = _owningteamValue;
             Statecode = statecode;
@@ -56,11 +55,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             DatalakefolderpermissionUniquename = datalakefolderpermissionUniquename;
             Importsequencenumber = importsequencenumber;
             Componentstate = componentstate;
-            this._folderidValue = _folderidValue;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Overwritetime = overwritetime;
             Componentidunique = componentidunique;
             this._modifiedbyValue = _modifiedbyValue;
             Ismanaged = ismanaged;
+            Datalakefolderpermissionid = datalakefolderpermissionid;
             Name = name;
             Createdby = createdby;
             Createdonbehalfby = createdonbehalfby;
@@ -86,6 +86,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "appid")]
+        public string Appid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -139,23 +144,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "datalakefolderpermissionid")]
-        public string Datalakefolderpermissionid { get; set; }
+        [JsonProperty(PropertyName = "_folderid_value")]
+        public string _folderidValue { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "appid")]
-        public string Appid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -214,8 +209,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_folderid_value")]
-        public string _folderidValue { get; set; }
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -236,6 +231,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "ismanaged")]
         public bool? Ismanaged { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "datalakefolderpermissionid")]
+        public string Datalakefolderpermissionid { get; set; }
 
         /// <summary>
         /// </summary>

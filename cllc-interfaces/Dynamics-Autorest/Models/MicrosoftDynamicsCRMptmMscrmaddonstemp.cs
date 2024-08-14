@@ -29,23 +29,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMptmMscrmaddonstemp class.
         /// </summary>
-        public MicrosoftDynamicsCRMptmMscrmaddonstemp(System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string ptmMscrmaddonstempid = default(string), int? statecode = default(int?), string _organizationidValue = default(string), string _createdbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string ptmValue = default(string), int? timezoneruleversionnumber = default(int?), int? statuscode = default(int?), string _modifiedbyValue = default(string), int? importsequencenumber = default(int?), string ptmName = default(string), int? utcconversiontimezonecode = default(int?), string versionnumber = default(string), string ptmDocumentproperty = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> ptmMscrmaddonstempSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> ptmMscrmaddonstempAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> ptmMscrmaddonstempMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> ptmMscrmaddonstempProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> ptmMscrmaddonstempBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> ptmMscrmaddonstempPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMannotation> ptmMscrmaddonstempAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMptmMscrmaddonsDcptemplates> ptmPtmMscrmaddonstempPtmMscrmaddonsDcptemplatesPreviewimage = default(IList<MicrosoftDynamicsCRMptmMscrmaddonsDcptemplates>), IList<MicrosoftDynamicsCRMptmAutomergeworkingitems> ptmPtmMscrmaddonstempPtmAmwiCreateddoc = default(IList<MicrosoftDynamicsCRMptmAutomergeworkingitems>), IList<MicrosoftDynamicsCRMptmAutomergeworkingitems> ptmPtmMscrmaddonstempPtmAmworkitemDelete = default(IList<MicrosoftDynamicsCRMptmAutomergeworkingitems>), IList<MicrosoftDynamicsCRMptmAutomergeworkingitems> ptmPtmMscrmaddonstempPtmAmworkitemLetter = default(IList<MicrosoftDynamicsCRMptmAutomergeworkingitems>), IList<MicrosoftDynamicsCRMptmAutomergeworkingitems> ptmPtmMscrmaddonstempPtmAutomergeworkingi = default(IList<MicrosoftDynamicsCRMptmAutomergeworkingitems>), IList<MicrosoftDynamicsCRMptmAutomergeworkingitems> ptmPtmMscrmaddonstempPtmAutomergeworkingitemsDocumentguidAppointmentid = default(IList<MicrosoftDynamicsCRMptmAutomergeworkingitems>), IList<MicrosoftDynamicsCRMptmAutomergeworkingitems> ptmPtmMscrmaddonstempPtmAutomergeworkingitemsDocument1guidChain = default(IList<MicrosoftDynamicsCRMptmAutomergeworkingitems>), IList<MicrosoftDynamicsCRMptmAutomergeworkingitems> ptmPtmMscrmaddonstempPtmAutomergeworkingitemsDocument2guidChain = default(IList<MicrosoftDynamicsCRMptmAutomergeworkingitems>), IList<MicrosoftDynamicsCRMptmAutomergeworkingitems> ptmPtmMscrmaddonstempPtmAutomergeworkingitemsDocumentGUIDEntity = default(IList<MicrosoftDynamicsCRMptmAutomergeworkingitems>), IList<MicrosoftDynamicsCRMptmAutomergeworkingitems> ptmPtmMscrmaddonstempPtmAutomergeworkingitemsDocumentGUIDSign = default(IList<MicrosoftDynamicsCRMptmAutomergeworkingitems>), IList<MicrosoftDynamicsCRMptmAutomergeworkingitems> ptmPtmMscrmaddonstempPtmAutomergeworkingitemsTemplatefromusertempsetting = default(IList<MicrosoftDynamicsCRMptmAutomergeworkingitems>))
+        public MicrosoftDynamicsCRMptmMscrmaddonstemp(System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string ptmMscrmaddonstempid = default(string), int? statecode = default(int?), string _organizationidValue = default(string), string _createdbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string _createdonbehalfbyValue = default(string), string ptmValue = default(string), int? timezoneruleversionnumber = default(int?), string ptmName = default(string), int? statuscode = default(int?), string _modifiedbyValue = default(string), int? importsequencenumber = default(int?), int? utcconversiontimezonecode = default(int?), string versionnumber = default(string), string ptmDocumentproperty = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> ptmMscrmaddonstempSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> ptmMscrmaddonstempAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> ptmMscrmaddonstempMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> ptmMscrmaddonstempProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> ptmMscrmaddonstempBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> ptmMscrmaddonstempPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMannotation> ptmMscrmaddonstempAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMptmMscrmaddonsDcptemplates> ptmPtmMscrmaddonstempPtmMscrmaddonsDcptemplatesPreviewimage = default(IList<MicrosoftDynamicsCRMptmMscrmaddonsDcptemplates>), IList<MicrosoftDynamicsCRMptmAutomergeworkingitems> ptmPtmMscrmaddonstempPtmAmwiCreateddoc = default(IList<MicrosoftDynamicsCRMptmAutomergeworkingitems>), IList<MicrosoftDynamicsCRMptmAutomergeworkingitems> ptmPtmMscrmaddonstempPtmAmworkitemDelete = default(IList<MicrosoftDynamicsCRMptmAutomergeworkingitems>), IList<MicrosoftDynamicsCRMptmAutomergeworkingitems> ptmPtmMscrmaddonstempPtmAmworkitemLetter = default(IList<MicrosoftDynamicsCRMptmAutomergeworkingitems>), IList<MicrosoftDynamicsCRMptmAutomergeworkingitems> ptmPtmMscrmaddonstempPtmAutomergeworkingi = default(IList<MicrosoftDynamicsCRMptmAutomergeworkingitems>), IList<MicrosoftDynamicsCRMptmAutomergeworkingitems> ptmPtmMscrmaddonstempPtmAutomergeworkingitemsDocumentguidAppointmentid = default(IList<MicrosoftDynamicsCRMptmAutomergeworkingitems>), IList<MicrosoftDynamicsCRMptmAutomergeworkingitems> ptmPtmMscrmaddonstempPtmAutomergeworkingitemsDocument1guidChain = default(IList<MicrosoftDynamicsCRMptmAutomergeworkingitems>), IList<MicrosoftDynamicsCRMptmAutomergeworkingitems> ptmPtmMscrmaddonstempPtmAutomergeworkingitemsDocument2guidChain = default(IList<MicrosoftDynamicsCRMptmAutomergeworkingitems>), IList<MicrosoftDynamicsCRMptmAutomergeworkingitems> ptmPtmMscrmaddonstempPtmAutomergeworkingitemsDocumentGUIDEntity = default(IList<MicrosoftDynamicsCRMptmAutomergeworkingitems>), IList<MicrosoftDynamicsCRMptmAutomergeworkingitems> ptmPtmMscrmaddonstempPtmAutomergeworkingitemsDocumentGUIDSign = default(IList<MicrosoftDynamicsCRMptmAutomergeworkingitems>), IList<MicrosoftDynamicsCRMptmAutomergeworkingitems> ptmPtmMscrmaddonstempPtmAutomergeworkingitemsTemplatefromusertempsetting = default(IList<MicrosoftDynamicsCRMptmAutomergeworkingitems>))
         {
-            Overriddencreatedon = overriddencreatedon;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            Createdon = createdon;
             Modifiedon = modifiedon;
+            Createdon = createdon;
             PtmMscrmaddonstempid = ptmMscrmaddonstempid;
             Statecode = statecode;
             this._organizationidValue = _organizationidValue;
             this._createdbyValue = _createdbyValue;
+            Overriddencreatedon = overriddencreatedon;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             PtmValue = ptmValue;
             Timezoneruleversionnumber = timezoneruleversionnumber;
+            PtmName = ptmName;
             Statuscode = statuscode;
             this._modifiedbyValue = _modifiedbyValue;
             Importsequencenumber = importsequencenumber;
-            PtmName = ptmName;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             Versionnumber = versionnumber;
             PtmDocumentproperty = ptmDocumentproperty;
@@ -82,23 +82,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -122,8 +112,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -134,6 +134,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "timezoneruleversionnumber")]
         public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ptm_name")]
+        public string PtmName { get; set; }
 
         /// <summary>
         /// </summary>
@@ -149,11 +154,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ptm_name")]
-        public string PtmName { get; set; }
 
         /// <summary>
         /// </summary>

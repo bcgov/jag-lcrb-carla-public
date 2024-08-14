@@ -287,8 +287,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioValidinterestestablishmentlocation = from.validInterestEstablishmentLocation? 1 : 0;
             to.AdoxioEstablishmentreopeningdate = from.EstablishmentReopeningDate;
             
-            // Temporary Relocations
-            to.AdoxioCriteria = from.temporaryRelocationCriteria;
+            // Temporary Relocations - removed 2024-08-14
+            //to.AdoxioCriteria = from.temporaryRelocationCriteria;
         }
 
 
@@ -696,8 +696,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 validInterestEstablishmentLocation = dynamicsApplication.AdoxioValidinterestestablishmentlocation.HasValue ? dynamicsApplication.AdoxioValidinterestestablishmentlocation.Value == 1 ? true : false : false,
                 EstablishmentReopeningDate = dynamicsApplication.AdoxioEstablishmentreopeningdate,
 
-                // Temporary Rlocations
-                temporaryRelocationCriteria = dynamicsApplication.AdoxioCriteria
+                // Temporary Relocations - removed 2024-08-14
+                //temporaryRelocationCriteria = dynamicsApplication.AdoxioCriteria
             };
 
 

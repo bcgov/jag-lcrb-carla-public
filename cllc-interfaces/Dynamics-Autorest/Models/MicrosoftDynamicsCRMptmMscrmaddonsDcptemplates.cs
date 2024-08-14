@@ -29,40 +29,40 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMptmMscrmaddonsDcptemplates class.
         /// </summary>
-        public MicrosoftDynamicsCRMptmMscrmaddonsDcptemplates(string ptmCompany = default(string), int? importsequencenumber = default(int?), string _owningteamValue = default(string), int? timezoneruleversionnumber = default(int?), string ptmComments = default(string), string _modifiedonbehalfbyValue = default(string), string _createdonbehalfbyValue = default(string), string _createdbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string ptmKeywords = default(string), string _ptmRevisionidValue = default(string), string ptmEntitytype = default(string), int? statecode = default(int?), string _owneridValue = default(string), string ptmMscrmaddonsDcptemplatesid = default(string), string ptmProperties = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _owningbusinessunitValue = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string ptmName = default(string), string ptmGroup = default(string), string ptmCategory = default(string), int? utcconversiontimezonecode = default(int?), bool? ptmLabeltemplate = default(bool?), string _ptmPreviewimageidValue = default(string), string _owninguserValue = default(string), string versionnumber = default(string), string ptmChecksum = default(string), int? statuscode = default(int?), string ptmManager = default(string), string ptmSubject = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> ptmMscrmaddonsDcptemplatesSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> ptmMscrmaddonsDcptemplatesAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> ptmMscrmaddonsDcptemplatesMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> ptmMscrmaddonsDcptemplatesProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> ptmMscrmaddonsDcptemplatesBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> ptmMscrmaddonsDcptemplatesPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMannotation> ptmMscrmaddonsDcptemplatesAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMptmMscrmaddonsDcptemplates ptmRevisionid = default(MicrosoftDynamicsCRMptmMscrmaddonsDcptemplates), IList<MicrosoftDynamicsCRMptmMscrmaddonsDcptemplates> ptmPtmMscrmaddonsDcptemplatesPtmMscrmaddonsDcptemplatesRevision = default(IList<MicrosoftDynamicsCRMptmMscrmaddonsDcptemplates>), MicrosoftDynamicsCRMptmMscrmaddonstemp ptmPreviewimageid = default(MicrosoftDynamicsCRMptmMscrmaddonstemp), IList<MicrosoftDynamicsCRMptmAutomergeworkingitems> ptmPtmMscrmaddonsDcptemplatesPtmAutomerg = default(IList<MicrosoftDynamicsCRMptmAutomergeworkingitems>))
+        public MicrosoftDynamicsCRMptmMscrmaddonsDcptemplates(int? statuscode = default(int?), bool? ptmLabeltemplate = default(bool?), string ptmCompany = default(string), int? importsequencenumber = default(int?), string _owningteamValue = default(string), string versionnumber = default(string), int? timezoneruleversionnumber = default(int?), string ptmComments = default(string), string _modifiedonbehalfbyValue = default(string), string ptmChecksum = default(string), string _createdbyValue = default(string), string _owninguserValue = default(string), string ptmKeywords = default(string), string _ptmRevisionidValue = default(string), string ptmEntitytype = default(string), string _createdonbehalfbyValue = default(string), string ptmName = default(string), string _owningbusinessunitValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string ptmMscrmaddonsDcptemplatesid = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string ptmGroup = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), string ptmProperties = default(string), int? utcconversiontimezonecode = default(int?), int? statecode = default(int?), string _ptmPreviewimageidValue = default(string), string ptmManager = default(string), string ptmSubject = default(string), string _owneridValue = default(string), string ptmCategory = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> ptmMscrmaddonsDcptemplatesSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> ptmMscrmaddonsDcptemplatesAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> ptmMscrmaddonsDcptemplatesMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> ptmMscrmaddonsDcptemplatesProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> ptmMscrmaddonsDcptemplatesBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> ptmMscrmaddonsDcptemplatesPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMannotation> ptmMscrmaddonsDcptemplatesAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMptmMscrmaddonsDcptemplates ptmRevisionid = default(MicrosoftDynamicsCRMptmMscrmaddonsDcptemplates), IList<MicrosoftDynamicsCRMptmMscrmaddonsDcptemplates> ptmPtmMscrmaddonsDcptemplatesPtmMscrmaddonsDcptemplatesRevision = default(IList<MicrosoftDynamicsCRMptmMscrmaddonsDcptemplates>), MicrosoftDynamicsCRMptmMscrmaddonstemp ptmPreviewimageid = default(MicrosoftDynamicsCRMptmMscrmaddonstemp), IList<MicrosoftDynamicsCRMptmAutomergeworkingitems> ptmPtmMscrmaddonsDcptemplatesPtmAutomerg = default(IList<MicrosoftDynamicsCRMptmAutomergeworkingitems>))
         {
+            Statuscode = statuscode;
+            PtmLabeltemplate = ptmLabeltemplate;
             PtmCompany = ptmCompany;
             Importsequencenumber = importsequencenumber;
             this._owningteamValue = _owningteamValue;
+            Versionnumber = versionnumber;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             PtmComments = ptmComments;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            PtmChecksum = ptmChecksum;
             this._createdbyValue = _createdbyValue;
-            Overriddencreatedon = overriddencreatedon;
+            this._owninguserValue = _owninguserValue;
             PtmKeywords = ptmKeywords;
             this._ptmRevisionidValue = _ptmRevisionidValue;
             PtmEntitytype = ptmEntitytype;
-            Statecode = statecode;
-            this._owneridValue = _owneridValue;
-            PtmMscrmaddonsDcptemplatesid = ptmMscrmaddonsDcptemplatesid;
-            PtmProperties = ptmProperties;
-            Modifiedon = modifiedon;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
-            this._modifiedbyValue = _modifiedbyValue;
-            Createdon = createdon;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             PtmName = ptmName;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
+            Modifiedon = modifiedon;
+            PtmMscrmaddonsDcptemplatesid = ptmMscrmaddonsDcptemplatesid;
+            Overriddencreatedon = overriddencreatedon;
             PtmGroup = ptmGroup;
-            PtmCategory = ptmCategory;
+            Createdon = createdon;
+            this._modifiedbyValue = _modifiedbyValue;
+            PtmProperties = ptmProperties;
             Utcconversiontimezonecode = utcconversiontimezonecode;
-            PtmLabeltemplate = ptmLabeltemplate;
+            Statecode = statecode;
             this._ptmPreviewimageidValue = _ptmPreviewimageidValue;
-            this._owninguserValue = _owninguserValue;
-            Versionnumber = versionnumber;
-            PtmChecksum = ptmChecksum;
-            Statuscode = statuscode;
             PtmManager = ptmManager;
             PtmSubject = ptmSubject;
+            this._owneridValue = _owneridValue;
+            PtmCategory = ptmCategory;
             Createdby = createdby;
             Createdonbehalfby = createdonbehalfby;
             Modifiedby = modifiedby;
@@ -92,6 +92,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ptm_labeltemplate")]
+        public bool? PtmLabeltemplate { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "ptm_company")]
         public string PtmCompany { get; set; }
 
@@ -104,6 +114,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
         public string _owningteamValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -122,8 +137,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "ptm_checksum")]
+        public string PtmChecksum { get; set; }
 
         /// <summary>
         /// </summary>
@@ -132,8 +147,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+        [JsonProperty(PropertyName = "_owninguser_value")]
+        public string _owninguserValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -152,43 +167,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ptm_mscrmaddons_dcptemplatesid")]
-        public string PtmMscrmaddonsDcptemplatesid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ptm_properties")]
-        public string PtmProperties { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -197,13 +177,43 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ptm_mscrmaddons_dcptemplatesid")]
+        public string PtmMscrmaddonsDcptemplatesid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "ptm_group")]
         public string PtmGroup { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ptm_category")]
-        public string PtmCategory { get; set; }
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ptm_properties")]
+        public string PtmProperties { get; set; }
 
         /// <summary>
         /// </summary>
@@ -212,33 +222,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ptm_labeltemplate")]
-        public bool? PtmLabeltemplate { get; set; }
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_ptm_previewimageid_value")]
         public string _ptmPreviewimageidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ptm_checksum")]
-        public string PtmChecksum { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -249,6 +239,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "ptm_subject")]
         public string PtmSubject { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ptm_category")]
+        public string PtmCategory { get; set; }
 
         /// <summary>
         /// </summary>

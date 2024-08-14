@@ -27,30 +27,30 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMownermapping
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMownermapping(string solutionid = default(string), string targetuservalueforsourcecrmuserlink = default(string), int? statuscode = default(int?), string _createdbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _targetsystemuseridValue = default(string), int? processcode = default(int?), int? statecode = default(int?), string _modifiedbyValue = default(string), string ownermappingidunique = default(string), string targetsystemuserdomainname = default(string), int? componentstate = default(int?), string introducedversion = default(string), string _importmapidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string sourcesystemusername = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string ownermappingid = default(string), bool? ismanaged = default(bool?), string sourceuservalueforsourcecrmuserlink = default(string), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser targetsystemuserid = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMimportmap importmapid = default(MicrosoftDynamicsCRMimportmap))
+        public MicrosoftDynamicsCRMownermapping(string solutionid = default(string), string ownermappingid = default(string), string targetuservalueforsourcecrmuserlink = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? statuscode = default(int?), string _targetsystemuseridValue = default(string), string introducedversion = default(string), string _modifiedonbehalfbyValue = default(string), int? processcode = default(int?), string ownermappingidunique = default(string), bool? ismanaged = default(bool?), string targetsystemuserdomainname = default(string), string _importmapidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string _modifiedbyValue = default(string), string sourceuservalueforsourcecrmuserlink = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string sourcesystemusername = default(string), string _createdonbehalfbyValue = default(string), int? statecode = default(int?), int? componentstate = default(int?), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser targetsystemuserid = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMimportmap importmapid = default(MicrosoftDynamicsCRMimportmap))
         {
             Solutionid = solutionid;
+            Ownermappingid = ownermappingid;
             Targetuservalueforsourcecrmuserlink = targetuservalueforsourcecrmuserlink;
+            Modifiedon = modifiedon;
             Statuscode = statuscode;
-            this._createdbyValue = _createdbyValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             this._targetsystemuseridValue = _targetsystemuseridValue;
-            Processcode = processcode;
-            Statecode = statecode;
-            this._modifiedbyValue = _modifiedbyValue;
-            Ownermappingidunique = ownermappingidunique;
-            Targetsystemuserdomainname = targetsystemuserdomainname;
-            Componentstate = componentstate;
             Introducedversion = introducedversion;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Processcode = processcode;
+            Ownermappingidunique = ownermappingidunique;
+            Ismanaged = ismanaged;
+            Targetsystemuserdomainname = targetsystemuserdomainname;
             this._importmapidValue = _importmapidValue;
             Createdon = createdon;
-            Sourcesystemusername = sourcesystemusername;
-            Overwritetime = overwritetime;
-            Modifiedon = modifiedon;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            Ownermappingid = ownermappingid;
-            Ismanaged = ismanaged;
+            this._createdbyValue = _createdbyValue;
+            this._modifiedbyValue = _modifiedbyValue;
             Sourceuservalueforsourcecrmuserlink = sourceuservalueforsourcecrmuserlink;
+            Overwritetime = overwritetime;
+            Sourcesystemusername = sourcesystemusername;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Statecode = statecode;
+            Componentstate = componentstate;
             Modifiedonbehalfby = modifiedonbehalfby;
             Createdonbehalfby = createdonbehalfby;
             Modifiedby = modifiedby;
@@ -72,8 +72,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "ownermappingid")]
+        public string Ownermappingid { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "targetuservalueforsourcecrmuserlink")]
         public string Targetuservalueforsourcecrmuserlink { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -82,8 +92,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        [JsonProperty(PropertyName = "_targetsystemuserid_value")]
+        public string _targetsystemuseridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "introducedversion")]
+        public string Introducedversion { get; set; }
 
         /// <summary>
         /// </summary>
@@ -92,23 +107,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_targetsystemuserid_value")]
-        public string _targetsystemuseridValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "processcode")]
         public int? Processcode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -117,18 +117,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "ismanaged")]
+        public bool? Ismanaged { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "targetsystemuserdomainname")]
         public string Targetsystemuserdomainname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "componentstate")]
-        public int? Componentstate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "introducedversion")]
-        public string Introducedversion { get; set; }
 
         /// <summary>
         /// </summary>
@@ -142,8 +137,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "sourcesystemusername")]
-        public string Sourcesystemusername { get; set; }
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "sourceuservalueforsourcecrmuserlink")]
+        public string Sourceuservalueforsourcecrmuserlink { get; set; }
 
         /// <summary>
         /// </summary>
@@ -152,8 +157,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
+        [JsonProperty(PropertyName = "sourcesystemusername")]
+        public string Sourcesystemusername { get; set; }
 
         /// <summary>
         /// </summary>
@@ -162,18 +167,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ownermappingid")]
-        public string Ownermappingid { get; set; }
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ismanaged")]
-        public bool? Ismanaged { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "sourceuservalueforsourcecrmuserlink")]
-        public string Sourceuservalueforsourcecrmuserlink { get; set; }
+        [JsonProperty(PropertyName = "componentstate")]
+        public int? Componentstate { get; set; }
 
         /// <summary>
         /// </summary>

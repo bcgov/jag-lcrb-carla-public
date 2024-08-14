@@ -29,39 +29,39 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMmbsPluginprofile class.
         /// </summary>
-        public MicrosoftDynamicsCRMmbsPluginprofile(int? utcconversiontimezonecode = default(int?), int? mbsOperationtype = default(int?), int? mbsDepth = default(int?), int? mbsMode = default(int?), string mbsPluginprofileid = default(string), string mbsProfile = default(string), System.DateTimeOffset? mbsPerformanceconstructorstarttime = default(System.DateTimeOffset?), int? statuscode = default(int?), string mbsMessagename = default(string), string _organizationidValue = default(string), string mbsLabel = default(string), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string versionnumber = default(string), string _mbsBusinessunitidValue = default(string), string mbsCorrelationid = default(string), string _mbsInitiatinguseridValue = default(string), int? mbsPerformanceexecutionduration = default(int?), string _modifiedbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), int? importsequencenumber = default(int?), string _modifiedonbehalfbyValue = default(string), string mbsSecureconfiguration = default(string), string mbsRequestid = default(string), string mbsPersistencekey = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? mbsPerformanceconstructorduration = default(int?), string mbsWorkflowstepid = default(string), string _createdbyValue = default(string), string mbsPrimaryentity = default(string), string mbsConfiguration = default(string), int? statecode = default(int?), System.DateTimeOffset? mbsPerformanceexecutionstarttime = default(System.DateTimeOffset?), string mbsTypename = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> mbsPluginprofileSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> mbsPluginprofileAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> mbsPluginprofileMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> mbsPluginprofileProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> mbsPluginprofileBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> mbsPluginprofilePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMbusinessunit mbsBusinessUnitId = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser mbsInitiatingUserId = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMmbsPluginprofile(string _createdbyValue = default(string), int? utcconversiontimezonecode = default(int?), int? mbsDepth = default(int?), string mbsPluginprofileid = default(string), string mbsProfile = default(string), System.DateTimeOffset? mbsPerformanceconstructorstarttime = default(System.DateTimeOffset?), int? statuscode = default(int?), string mbsSecureconfiguration = default(string), int? mbsPerformanceconstructorduration = default(int?), string mbsPersistencekey = default(string), string mbsRequestid = default(string), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _mbsInitiatinguseridValue = default(string), string _mbsBusinessunitidValue = default(string), string mbsCorrelationid = default(string), string mbsMessagename = default(string), int? mbsPerformanceexecutionduration = default(int?), string _modifiedbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string _organizationidValue = default(string), int? importsequencenumber = default(int?), string _modifiedonbehalfbyValue = default(string), string mbsPrimaryentity = default(string), string mbsLabel = default(string), string versionnumber = default(string), int? mbsOperationtype = default(int?), string mbsWorkflowstepid = default(string), int? mbsMode = default(int?), string mbsConfiguration = default(string), int? statecode = default(int?), System.DateTimeOffset? mbsPerformanceexecutionstarttime = default(System.DateTimeOffset?), string mbsTypename = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> mbsPluginprofileSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> mbsPluginprofileAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> mbsPluginprofileMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> mbsPluginprofileProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> mbsPluginprofileBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> mbsPluginprofilePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMbusinessunit mbsBusinessUnitId = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser mbsInitiatingUserId = default(MicrosoftDynamicsCRMsystemuser))
         {
+            this._createdbyValue = _createdbyValue;
             Utcconversiontimezonecode = utcconversiontimezonecode;
-            MbsOperationtype = mbsOperationtype;
             MbsDepth = mbsDepth;
-            MbsMode = mbsMode;
             MbsPluginprofileid = mbsPluginprofileid;
             MbsProfile = mbsProfile;
             MbsPerformanceconstructorstarttime = mbsPerformanceconstructorstarttime;
             Statuscode = statuscode;
-            MbsMessagename = mbsMessagename;
-            this._organizationidValue = _organizationidValue;
-            MbsLabel = mbsLabel;
+            MbsSecureconfiguration = mbsSecureconfiguration;
+            MbsPerformanceconstructorduration = mbsPerformanceconstructorduration;
+            MbsPersistencekey = mbsPersistencekey;
+            MbsRequestid = mbsRequestid;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             Createdon = createdon;
-            Versionnumber = versionnumber;
+            this._mbsInitiatinguseridValue = _mbsInitiatinguseridValue;
             this._mbsBusinessunitidValue = _mbsBusinessunitidValue;
             MbsCorrelationid = mbsCorrelationid;
-            this._mbsInitiatinguseridValue = _mbsInitiatinguseridValue;
+            MbsMessagename = mbsMessagename;
             MbsPerformanceexecutionduration = mbsPerformanceexecutionduration;
             this._modifiedbyValue = _modifiedbyValue;
             Modifiedon = modifiedon;
+            Overriddencreatedon = overriddencreatedon;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            this._organizationidValue = _organizationidValue;
             Importsequencenumber = importsequencenumber;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            MbsSecureconfiguration = mbsSecureconfiguration;
-            MbsRequestid = mbsRequestid;
-            MbsPersistencekey = mbsPersistencekey;
-            Overriddencreatedon = overriddencreatedon;
-            MbsPerformanceconstructorduration = mbsPerformanceconstructorduration;
-            MbsWorkflowstepid = mbsWorkflowstepid;
-            this._createdbyValue = _createdbyValue;
             MbsPrimaryentity = mbsPrimaryentity;
+            MbsLabel = mbsLabel;
+            Versionnumber = versionnumber;
+            MbsOperationtype = mbsOperationtype;
+            MbsWorkflowstepid = mbsWorkflowstepid;
+            MbsMode = mbsMode;
             MbsConfiguration = mbsConfiguration;
             Statecode = statecode;
             MbsPerformanceexecutionstarttime = mbsPerformanceexecutionstarttime;
@@ -89,23 +89,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "utcconversiontimezonecode")]
         public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "mbs_operationtype")]
-        public int? MbsOperationtype { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "mbs_depth")]
         public int? MbsDepth { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "mbs_mode")]
-        public int? MbsMode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -129,18 +124,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "mbs_messagename")]
-        public string MbsMessagename { get; set; }
+        [JsonProperty(PropertyName = "mbs_secureconfiguration")]
+        public string MbsSecureconfiguration { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
+        [JsonProperty(PropertyName = "mbs_performanceconstructorduration")]
+        public int? MbsPerformanceconstructorduration { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "mbs_label")]
-        public string MbsLabel { get; set; }
+        [JsonProperty(PropertyName = "mbs_persistencekey")]
+        public string MbsPersistencekey { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "mbs_requestid")]
+        public string MbsRequestid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -154,8 +154,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "_mbs_initiatinguserid_value")]
+        public string _mbsInitiatinguseridValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -169,8 +169,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_mbs_initiatinguserid_value")]
-        public string _mbsInitiatinguseridValue { get; set; }
+        [JsonProperty(PropertyName = "mbs_messagename")]
+        public string MbsMessagename { get; set; }
 
         /// <summary>
         /// </summary>
@@ -189,8 +189,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -204,28 +214,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "mbs_secureconfiguration")]
-        public string MbsSecureconfiguration { get; set; }
+        [JsonProperty(PropertyName = "mbs_primaryentity")]
+        public string MbsPrimaryentity { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "mbs_requestid")]
-        public string MbsRequestid { get; set; }
+        [JsonProperty(PropertyName = "mbs_label")]
+        public string MbsLabel { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "mbs_persistencekey")]
-        public string MbsPersistencekey { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "mbs_performanceconstructorduration")]
-        public int? MbsPerformanceconstructorduration { get; set; }
+        [JsonProperty(PropertyName = "mbs_operationtype")]
+        public int? MbsOperationtype { get; set; }
 
         /// <summary>
         /// </summary>
@@ -234,13 +239,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "mbs_primaryentity")]
-        public string MbsPrimaryentity { get; set; }
+        [JsonProperty(PropertyName = "mbs_mode")]
+        public int? MbsMode { get; set; }
 
         /// <summary>
         /// </summary>

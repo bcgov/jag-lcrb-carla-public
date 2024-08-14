@@ -27,36 +27,36 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMmobileofflineprofileitemassociation class.
         /// </summary>
-        public MicrosoftDynamicsCRMmobileofflineprofileitemassociation(int? componentstate = default(int?), string _modifiedbyValue = default(string), string relationshipdisplayname = default(string), string _createdbyValue = default(string), string solutionid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string introducedversion = default(string), string mobileofflineprofileitemassociationidunique = default(string), string name = default(string), int? selectedrelationshipsschema = default(int?), string stageid = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), bool? ismanaged = default(bool?), string relationshipname = default(string), string _organizationidValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string traversedpath = default(string), string _modifiedonbehalfbyValue = default(string), string _mobileofflineprofileitemidValue = default(string), bool? isvalidated = default(bool?), string relationshipid = default(string), string processid = default(string), string mobileofflineprofileitemassociationid = default(string), string profileitemassociationentityfilter = default(string), System.DateTimeOffset? publishedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string versionnumber = default(string), string relationshipdata = default(string), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMmobileofflineprofileitem regardingobjectid = default(MicrosoftDynamicsCRMmobileofflineprofileitem), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMmobileofflineprofileitemassociation(int? componentstate = default(int?), string _modifiedonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string processid = default(string), string _createdbyValue = default(string), string solutionid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string introducedversion = default(string), string mobileofflineprofileitemassociationidunique = default(string), string name = default(string), string stageid = default(string), string relationshipdisplayname = default(string), string profileitemassociationentityfilter = default(string), string relationshipname = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string traversedpath = default(string), bool? isvalidated = default(bool?), string _mobileofflineprofileitemidValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string versionnumber = default(string), string relationshipid = default(string), string _organizationidValue = default(string), string mobileofflineprofileitemassociationid = default(string), bool? ismanaged = default(bool?), System.DateTimeOffset? publishedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string relationshipdata = default(string), int? selectedrelationshipsschema = default(int?), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMmobileofflineprofileitem regardingobjectid = default(MicrosoftDynamicsCRMmobileofflineprofileitem), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Componentstate = componentstate;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             this._modifiedbyValue = _modifiedbyValue;
-            Relationshipdisplayname = relationshipdisplayname;
+            Processid = processid;
             this._createdbyValue = _createdbyValue;
             Solutionid = solutionid;
             Createdon = createdon;
             Introducedversion = introducedversion;
             Mobileofflineprofileitemassociationidunique = mobileofflineprofileitemassociationidunique;
             Name = name;
-            Selectedrelationshipsschema = selectedrelationshipsschema;
             Stageid = stageid;
-            Overwritetime = overwritetime;
-            Ismanaged = ismanaged;
-            Relationshipname = relationshipname;
-            this._organizationidValue = _organizationidValue;
-            Modifiedon = modifiedon;
-            Traversedpath = traversedpath;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._mobileofflineprofileitemidValue = _mobileofflineprofileitemidValue;
-            Isvalidated = isvalidated;
-            Relationshipid = relationshipid;
-            Processid = processid;
-            Mobileofflineprofileitemassociationid = mobileofflineprofileitemassociationid;
+            Relationshipdisplayname = relationshipdisplayname;
             Profileitemassociationentityfilter = profileitemassociationentityfilter;
+            Relationshipname = relationshipname;
+            Overwritetime = overwritetime;
+            Traversedpath = traversedpath;
+            Isvalidated = isvalidated;
+            this._mobileofflineprofileitemidValue = _mobileofflineprofileitemidValue;
+            Modifiedon = modifiedon;
+            Versionnumber = versionnumber;
+            Relationshipid = relationshipid;
+            this._organizationidValue = _organizationidValue;
+            Mobileofflineprofileitemassociationid = mobileofflineprofileitemassociationid;
+            Ismanaged = ismanaged;
             Publishedon = publishedon;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            Versionnumber = versionnumber;
             Relationshipdata = relationshipdata;
+            Selectedrelationshipsschema = selectedrelationshipsschema;
             Modifiedonbehalfby = modifiedonbehalfby;
             Modifiedby = modifiedby;
             Organizationid = organizationid;
@@ -78,13 +78,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "relationshipdisplayname")]
-        public string Relationshipdisplayname { get; set; }
+        [JsonProperty(PropertyName = "processid")]
+        public string Processid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -118,23 +123,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "selectedrelationshipsschema")]
-        public int? Selectedrelationshipsschema { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "stageid")]
         public string Stageid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "overwritetime")]
-        public System.DateTimeOffset? Overwritetime { get; set; }
+        [JsonProperty(PropertyName = "relationshipdisplayname")]
+        public string Relationshipdisplayname { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ismanaged")]
-        public bool? Ismanaged { get; set; }
+        [JsonProperty(PropertyName = "profileitemassociationentityfilter")]
+        public string Profileitemassociationentityfilter { get; set; }
 
         /// <summary>
         /// </summary>
@@ -143,13 +143,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
+        [JsonProperty(PropertyName = "overwritetime")]
+        public System.DateTimeOffset? Overwritetime { get; set; }
 
         /// <summary>
         /// </summary>
@@ -158,8 +153,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "isvalidated")]
+        public bool? Isvalidated { get; set; }
 
         /// <summary>
         /// </summary>
@@ -168,8 +163,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "isvalidated")]
-        public bool? Isvalidated { get; set; }
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -178,8 +178,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "processid")]
-        public string Processid { get; set; }
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -188,8 +188,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "profileitemassociationentityfilter")]
-        public string Profileitemassociationentityfilter { get; set; }
+        [JsonProperty(PropertyName = "ismanaged")]
+        public bool? Ismanaged { get; set; }
 
         /// <summary>
         /// </summary>
@@ -203,13 +203,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "relationshipdata")]
+        public string Relationshipdata { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "relationshipdata")]
-        public string Relationshipdata { get; set; }
+        [JsonProperty(PropertyName = "selectedrelationshipsschema")]
+        public int? Selectedrelationshipsschema { get; set; }
 
         /// <summary>
         /// </summary>

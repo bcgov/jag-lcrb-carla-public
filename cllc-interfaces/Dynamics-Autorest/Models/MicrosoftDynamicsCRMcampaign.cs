@@ -31,7 +31,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMcampaign
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMcampaign(System.DateTimeOffset? actualstart = default(System.DateTimeOffset?), string description = default(string), string codename = default(string), int? expectedresponse = default(int?), string message = default(string), byte[] entityimage = default(byte[]), string _owningbusinessunitValue = default(string), bool? istemplate = default(bool?), decimal? budgetedcostBase = default(decimal?), decimal? othercost = default(decimal?), decimal? expectedrevenueBase = default(decimal?), decimal? totalactualcost = default(decimal?), int? typecode = default(int?), decimal? othercostBase = default(decimal?), string _createdonbehalfbyValue = default(string), string emailaddress = default(string), decimal? exchangerate = default(decimal?), string entityimageid = default(string), System.DateTimeOffset? actualend = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), string _owneridValue = default(string), decimal? totalcampaignactivityactualcostBase = default(decimal?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), string entityimageUrl = default(string), string stageid = default(string), string processid = default(string), int? statecode = default(int?), decimal? totalactualcostBase = default(decimal?), string _modifiedonbehalfbyValue = default(string), string _createdbyValue = default(string), string _owninguserValue = default(string), string _transactioncurrencyidValue = default(string), long? entityimageTimestamp = default(long?), System.DateTimeOffset? proposedstart = default(System.DateTimeOffset?), System.DateTimeOffset? proposedend = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), string objective = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _pricelistidValue = default(string), string traversedpath = default(string), string promotioncodename = default(string), decimal? expectedrevenue = default(decimal?), string tmpregardingobjectid = default(string), decimal? totalcampaignactivityactualcost = default(decimal?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _owningteamValue = default(string), string campaignid = default(string), string versionnumber = default(string), int? statuscode = default(int?), decimal? budgetedcost = default(decimal?), string _modifiedbyValue = default(string), string name = default(string), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> campaignAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMlist> campaignlistAssociation = default(IList<MicrosoftDynamicsCRMlist>), IList<MicrosoftDynamicsCRMcampaign> campaigncampaignAssociation = default(IList<MicrosoftDynamicsCRMcampaign>), IList<MicrosoftDynamicsCRMcampaign> campaigncampaignAssociationReferenced = default(IList<MicrosoftDynamicsCRMcampaign>), IList<MicrosoftDynamicsCRMproduct> campaignproductAssociation = default(IList<MicrosoftDynamicsCRMproduct>), IList<MicrosoftDynamicsCRMteam> campaignTeams = default(IList<MicrosoftDynamicsCRMteam>), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> campaignPrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMcampaignactivity> campaignCampaignActivities = default(IList<MicrosoftDynamicsCRMcampaignactivity>), IList<MicrosoftDynamicsCRMduplicaterecord> campaignDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMbulkdeletefailure> campaignBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMletter> campaignLetters = default(IList<MicrosoftDynamicsCRMletter>), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> campaignRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMsyncerror> campaignSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> campaignMailboxTrackingFolder = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMappointment> campaignAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMcampaignresponse> campaignCampaignResponses = default(IList<MicrosoftDynamicsCRMcampaignresponse>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMconnection> campaignConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMduplicaterecord> campaignDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> campaignAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMtask> campaignTasks = default(IList<MicrosoftDynamicsCRMtask>), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), IList<MicrosoftDynamicsCRMemail> campaignEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMprocesssession> campaignProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMannotation> campaignAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMfax> campaignFaxes = default(IList<MicrosoftDynamicsCRMfax>), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMactivitypointer> campaignActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMactivityparty> campaignActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMphonecall> campaignPhonecalls = default(IList<MicrosoftDynamicsCRMphonecall>), MicrosoftDynamicsCRMpricelevel pricelistid = default(MicrosoftDynamicsCRMpricelevel), IList<MicrosoftDynamicsCRMconnection> campaignConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMlead> campaignLeads = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMopportunity> campaignOpportunities = default(IList<MicrosoftDynamicsCRMopportunity>), IList<MicrosoftDynamicsCRMsalesliterature> campaignsalesliteratureAssociation = default(IList<MicrosoftDynamicsCRMsalesliterature>), IList<MicrosoftDynamicsCRMsalesorder> campaignOrders = default(IList<MicrosoftDynamicsCRMsalesorder>), IList<MicrosoftDynamicsCRMquote> campaignQuotes = default(IList<MicrosoftDynamicsCRMquote>), IList<MicrosoftDynamicsCRMincidentresolution> campaignIncidentResolutions = default(IList<MicrosoftDynamicsCRMincidentresolution>), IList<MicrosoftDynamicsCRMopportunityclose> campaignOpportunityCloses = default(IList<MicrosoftDynamicsCRMopportunityclose>), IList<MicrosoftDynamicsCRMorderclose> campaignOrderCloses = default(IList<MicrosoftDynamicsCRMorderclose>), IList<MicrosoftDynamicsCRMquoteclose> campaignQuoteCloses = default(IList<MicrosoftDynamicsCRMquoteclose>), IList<MicrosoftDynamicsCRMserviceappointment> campaignServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>))
+        public MicrosoftDynamicsCRMcampaign(System.DateTimeOffset? actualstart = default(System.DateTimeOffset?), string description = default(string), string codename = default(string), int? expectedresponse = default(int?), string message = default(string), byte[] entityimage = default(byte[]), string campaignid = default(string), decimal? othercost = default(decimal?), int? typecode = default(int?), string processid = default(string), decimal? expectedrevenueBase = default(decimal?), string entityimageUrl = default(string), decimal? budgetedcost = default(decimal?), decimal? othercostBase = default(decimal?), string _createdonbehalfbyValue = default(string), string emailaddress = default(string), string entityimageid = default(string), System.DateTimeOffset? actualend = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), string _owneridValue = default(string), decimal? totalcampaignactivityactualcostBase = default(decimal?), string _pricelistidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), decimal? exchangerate = default(decimal?), string _owningbusinessunitValue = default(string), int? statecode = default(int?), decimal? totalactualcostBase = default(decimal?), string _modifiedonbehalfbyValue = default(string), string stageid = default(string), string _createdbyValue = default(string), string _owninguserValue = default(string), string _transactioncurrencyidValue = default(string), long? entityimageTimestamp = default(long?), int? statuscode = default(int?), System.DateTimeOffset? proposedstart = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), string objective = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string traversedpath = default(string), int? importsequencenumber = default(int?), string promotioncodename = default(string), decimal? expectedrevenue = default(decimal?), string tmpregardingobjectid = default(string), decimal? totalcampaignactivityactualcost = default(decimal?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _owningteamValue = default(string), System.DateTimeOffset? proposedend = default(System.DateTimeOffset?), string versionnumber = default(string), bool? istemplate = default(bool?), decimal? totalactualcost = default(decimal?), decimal? budgetedcostBase = default(decimal?), string _modifiedbyValue = default(string), string name = default(string), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> campaignAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMlist> campaignlistAssociation = default(IList<MicrosoftDynamicsCRMlist>), IList<MicrosoftDynamicsCRMcampaign> campaigncampaignAssociation = default(IList<MicrosoftDynamicsCRMcampaign>), IList<MicrosoftDynamicsCRMcampaign> campaigncampaignAssociationReferenced = default(IList<MicrosoftDynamicsCRMcampaign>), IList<MicrosoftDynamicsCRMproduct> campaignproductAssociation = default(IList<MicrosoftDynamicsCRMproduct>), IList<MicrosoftDynamicsCRMteam> campaignTeams = default(IList<MicrosoftDynamicsCRMteam>), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> campaignPrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMcampaignactivity> campaignCampaignActivities = default(IList<MicrosoftDynamicsCRMcampaignactivity>), IList<MicrosoftDynamicsCRMduplicaterecord> campaignDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMbulkdeletefailure> campaignBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMletter> campaignLetters = default(IList<MicrosoftDynamicsCRMletter>), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> campaignRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMsyncerror> campaignSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> campaignMailboxTrackingFolder = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMappointment> campaignAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMcampaignresponse> campaignCampaignResponses = default(IList<MicrosoftDynamicsCRMcampaignresponse>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMconnection> campaignConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMduplicaterecord> campaignDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> campaignAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMtask> campaignTasks = default(IList<MicrosoftDynamicsCRMtask>), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), IList<MicrosoftDynamicsCRMemail> campaignEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMprocesssession> campaignProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMannotation> campaignAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMfax> campaignFaxes = default(IList<MicrosoftDynamicsCRMfax>), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMactivitypointer> campaignActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMactivityparty> campaignActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMphonecall> campaignPhonecalls = default(IList<MicrosoftDynamicsCRMphonecall>), MicrosoftDynamicsCRMpricelevel pricelistid = default(MicrosoftDynamicsCRMpricelevel), IList<MicrosoftDynamicsCRMconnection> campaignConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMlead> campaignLeads = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMopportunity> campaignOpportunities = default(IList<MicrosoftDynamicsCRMopportunity>), IList<MicrosoftDynamicsCRMsalesliterature> campaignsalesliteratureAssociation = default(IList<MicrosoftDynamicsCRMsalesliterature>), IList<MicrosoftDynamicsCRMsalesorder> campaignOrders = default(IList<MicrosoftDynamicsCRMsalesorder>), IList<MicrosoftDynamicsCRMquote> campaignQuotes = default(IList<MicrosoftDynamicsCRMquote>), IList<MicrosoftDynamicsCRMincidentresolution> campaignIncidentResolutions = default(IList<MicrosoftDynamicsCRMincidentresolution>), IList<MicrosoftDynamicsCRMopportunityclose> campaignOpportunityCloses = default(IList<MicrosoftDynamicsCRMopportunityclose>), IList<MicrosoftDynamicsCRMorderclose> campaignOrderCloses = default(IList<MicrosoftDynamicsCRMorderclose>), IList<MicrosoftDynamicsCRMquoteclose> campaignQuoteCloses = default(IList<MicrosoftDynamicsCRMquoteclose>), IList<MicrosoftDynamicsCRMserviceappointment> campaignServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>))
         {
             Actualstart = actualstart;
             Description = description;
@@ -39,51 +39,51 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Expectedresponse = expectedresponse;
             Message = message;
             Entityimage = entityimage;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
-            Istemplate = istemplate;
-            BudgetedcostBase = budgetedcostBase;
+            Campaignid = campaignid;
             Othercost = othercost;
-            ExpectedrevenueBase = expectedrevenueBase;
-            Totalactualcost = totalactualcost;
             Typecode = typecode;
+            Processid = processid;
+            ExpectedrevenueBase = expectedrevenueBase;
+            EntityimageUrl = entityimageUrl;
+            Budgetedcost = budgetedcost;
             OthercostBase = othercostBase;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Emailaddress = emailaddress;
-            Exchangerate = exchangerate;
             Entityimageid = entityimageid;
             Actualend = actualend;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             this._owneridValue = _owneridValue;
             TotalcampaignactivityactualcostBase = totalcampaignactivityactualcostBase;
+            this._pricelistidValue = _pricelistidValue;
             Createdon = createdon;
-            Importsequencenumber = importsequencenumber;
-            EntityimageUrl = entityimageUrl;
-            Stageid = stageid;
-            Processid = processid;
+            Exchangerate = exchangerate;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
             Statecode = statecode;
             TotalactualcostBase = totalactualcostBase;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Stageid = stageid;
             this._createdbyValue = _createdbyValue;
             this._owninguserValue = _owninguserValue;
             this._transactioncurrencyidValue = _transactioncurrencyidValue;
             EntityimageTimestamp = entityimageTimestamp;
+            Statuscode = statuscode;
             Proposedstart = proposedstart;
-            Proposedend = proposedend;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             Objective = objective;
             Overriddencreatedon = overriddencreatedon;
-            this._pricelistidValue = _pricelistidValue;
             Traversedpath = traversedpath;
+            Importsequencenumber = importsequencenumber;
             Promotioncodename = promotioncodename;
             Expectedrevenue = expectedrevenue;
             Tmpregardingobjectid = tmpregardingobjectid;
             Totalcampaignactivityactualcost = totalcampaignactivityactualcost;
             Modifiedon = modifiedon;
             this._owningteamValue = _owningteamValue;
-            Campaignid = campaignid;
+            Proposedend = proposedend;
             Versionnumber = versionnumber;
-            Statuscode = statuscode;
-            Budgetedcost = budgetedcost;
+            Istemplate = istemplate;
+            Totalactualcost = totalactualcost;
+            BudgetedcostBase = budgetedcostBase;
             this._modifiedbyValue = _modifiedbyValue;
             Name = name;
             CampaignAbsScheduledprocessexecutions = campaignAbsScheduledprocessexecutions;
@@ -176,18 +176,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "istemplate")]
-        public bool? Istemplate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "budgetedcost_base")]
-        public decimal? BudgetedcostBase { get; set; }
+        [JsonProperty(PropertyName = "campaignid")]
+        public string Campaignid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -196,18 +186,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "typecode")]
+        public int? Typecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "processid")]
+        public string Processid { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "expectedrevenue_base")]
         public decimal? ExpectedrevenueBase { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "totalactualcost")]
-        public decimal? Totalactualcost { get; set; }
+        [JsonProperty(PropertyName = "entityimage_url")]
+        public string EntityimageUrl { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "typecode")]
-        public int? Typecode { get; set; }
+        [JsonProperty(PropertyName = "budgetedcost")]
+        public decimal? Budgetedcost { get; set; }
 
         /// <summary>
         /// </summary>
@@ -223,11 +223,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "emailaddress")]
         public string Emailaddress { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "exchangerate")]
-        public decimal? Exchangerate { get; set; }
 
         /// <summary>
         /// </summary>
@@ -256,28 +251,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_pricelistid_value")]
+        public string _pricelistidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
+        [JsonProperty(PropertyName = "exchangerate")]
+        public decimal? Exchangerate { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "entityimage_url")]
-        public string EntityimageUrl { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "stageid")]
-        public string Stageid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "processid")]
-        public string Processid { get; set; }
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -293,6 +283,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "stageid")]
+        public string Stageid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -316,13 +311,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "proposedstart")]
-        public System.DateTimeOffset? Proposedstart { get; set; }
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "proposedend")]
-        public System.DateTimeOffset? Proposedend { get; set; }
+        [JsonProperty(PropertyName = "proposedstart")]
+        public System.DateTimeOffset? Proposedstart { get; set; }
 
         /// <summary>
         /// </summary>
@@ -341,13 +336,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_pricelistid_value")]
-        public string _pricelistidValue { get; set; }
+        [JsonProperty(PropertyName = "traversedpath")]
+        public string Traversedpath { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "traversedpath")]
-        public string Traversedpath { get; set; }
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -381,8 +376,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "campaignid")]
-        public string Campaignid { get; set; }
+        [JsonProperty(PropertyName = "proposedend")]
+        public System.DateTimeOffset? Proposedend { get; set; }
 
         /// <summary>
         /// </summary>
@@ -391,13 +386,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
+        [JsonProperty(PropertyName = "istemplate")]
+        public bool? Istemplate { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "budgetedcost")]
-        public decimal? Budgetedcost { get; set; }
+        [JsonProperty(PropertyName = "totalactualcost")]
+        public decimal? Totalactualcost { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "budgetedcost_base")]
+        public decimal? BudgetedcostBase { get; set; }
 
         /// <summary>
         /// </summary>

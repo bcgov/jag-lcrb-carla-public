@@ -29,30 +29,30 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMimportlog
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMimportlog(string _createdonbehalfbyValue = default(string), string _owneridValue = default(string), int? statecode = default(int?), string _modifiedonbehalfbyValue = default(string), int? statuscode = default(int?), string _owningteamValue = default(string), string _modifiedbyValue = default(string), string additionalinfo = default(string), string headercolumn = default(string), string errordescription = default(string), int? sequencenumber = default(int?), string _importfileidValue = default(string), string _createdbyValue = default(string), string _owninguserValue = default(string), int? linenumber = default(int?), string importlogid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string columnvalue = default(string), string _owningbusinessunitValue = default(string), int? logphasecode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? errornumber = default(int?), string _importdataidValue = default(string), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> importLogBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMimportdata importdataid = default(MicrosoftDynamicsCRMimportdata), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMasyncoperation> importLogAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMimportfile importfileid = default(MicrosoftDynamicsCRMimportfile), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMimportlog(string _createdonbehalfbyValue = default(string), string _owneridValue = default(string), int? statecode = default(int?), string _modifiedonbehalfbyValue = default(string), string columnvalue = default(string), int? statuscode = default(int?), string _owningteamValue = default(string), string _modifiedbyValue = default(string), string _owningbusinessunitValue = default(string), string headercolumn = default(string), string errordescription = default(string), int? sequencenumber = default(int?), string _importfileidValue = default(string), string _createdbyValue = default(string), string additionalinfo = default(string), string _owninguserValue = default(string), int? linenumber = default(int?), string importlogid = default(string), int? errornumber = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? logphasecode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _importdataidValue = default(string), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> importLogBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMimportdata importdataid = default(MicrosoftDynamicsCRMimportdata), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMasyncoperation> importLogAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMimportfile importfileid = default(MicrosoftDynamicsCRMimportfile), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             this._owneridValue = _owneridValue;
             Statecode = statecode;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Columnvalue = columnvalue;
             Statuscode = statuscode;
             this._owningteamValue = _owningteamValue;
             this._modifiedbyValue = _modifiedbyValue;
-            Additionalinfo = additionalinfo;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
             Headercolumn = headercolumn;
             Errordescription = errordescription;
             Sequencenumber = sequencenumber;
             this._importfileidValue = _importfileidValue;
             this._createdbyValue = _createdbyValue;
+            Additionalinfo = additionalinfo;
             this._owninguserValue = _owninguserValue;
             Linenumber = linenumber;
             Importlogid = importlogid;
+            Errornumber = errornumber;
             Modifiedon = modifiedon;
-            Columnvalue = columnvalue;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
             Logphasecode = logphasecode;
             Createdon = createdon;
-            Errornumber = errornumber;
             this._importdataidValue = _importdataidValue;
             Owningbusinessunit = owningbusinessunit;
             Owninguser = owninguser;
@@ -96,6 +96,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "columnvalue")]
+        public string Columnvalue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
 
@@ -111,8 +116,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "additionalinfo")]
-        public string Additionalinfo { get; set; }
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -141,6 +146,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "additionalinfo")]
+        public string Additionalinfo { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
         public string _owninguserValue { get; set; }
 
@@ -156,18 +166,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "errornumber")]
+        public int? Errornumber { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "columnvalue")]
-        public string Columnvalue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -178,11 +183,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "errornumber")]
-        public int? Errornumber { get; set; }
 
         /// <summary>
         /// </summary>

@@ -27,25 +27,25 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMpicklistmapping class.
         /// </summary>
-        public MicrosoftDynamicsCRMpicklistmapping(System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string introducedversion = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? componentstate = default(int?), string picklistmappingid = default(string), int? statuscode = default(int?), string sourcevalue = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), int? targetvalue = default(int?), int? processcode = default(int?), string _modifiedbyValue = default(string), string solutionid = default(string), string picklistmappingidunique = default(string), string _columnmappingidValue = default(string), string _createdbyValue = default(string), string _modifiedonbehalfbyValue = default(string), int? statecode = default(int?), bool? ismanaged = default(bool?), MicrosoftDynamicsCRMcolumnmapping columnmappingid = default(MicrosoftDynamicsCRMcolumnmapping), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMpicklistmapping(System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? componentstate = default(int?), string picklistmappingid = default(string), int? statuscode = default(int?), string sourcevalue = default(string), string _createdonbehalfbyValue = default(string), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), int? targetvalue = default(int?), string _columnmappingidValue = default(string), string _modifiedbyValue = default(string), string solutionid = default(string), string picklistmappingidunique = default(string), int? processcode = default(int?), string introducedversion = default(string), string _createdbyValue = default(string), int? statecode = default(int?), bool? ismanaged = default(bool?), MicrosoftDynamicsCRMcolumnmapping columnmappingid = default(MicrosoftDynamicsCRMcolumnmapping), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Modifiedon = modifiedon;
-            Introducedversion = introducedversion;
             Createdon = createdon;
             Componentstate = componentstate;
             Picklistmappingid = picklistmappingid;
             Statuscode = statuscode;
             Sourcevalue = sourcevalue;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Overwritetime = overwritetime;
             Targetvalue = targetvalue;
-            Processcode = processcode;
+            this._columnmappingidValue = _columnmappingidValue;
             this._modifiedbyValue = _modifiedbyValue;
             Solutionid = solutionid;
             Picklistmappingidunique = picklistmappingidunique;
-            this._columnmappingidValue = _columnmappingidValue;
+            Processcode = processcode;
+            Introducedversion = introducedversion;
             this._createdbyValue = _createdbyValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Statecode = statecode;
             Ismanaged = ismanaged;
             Columnmappingid = columnmappingid;
@@ -65,11 +65,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "introducedversion")]
-        public string Introducedversion { get; set; }
 
         /// <summary>
         /// </summary>
@@ -103,6 +98,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "overwritetime")]
         public System.DateTimeOffset? Overwritetime { get; set; }
 
@@ -113,8 +113,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "processcode")]
-        public int? Processcode { get; set; }
+        [JsonProperty(PropertyName = "_columnmappingid_value")]
+        public string _columnmappingidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -133,18 +133,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_columnmappingid_value")]
-        public string _columnmappingidValue { get; set; }
+        [JsonProperty(PropertyName = "processcode")]
+        public int? Processcode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "introducedversion")]
+        public string Introducedversion { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>

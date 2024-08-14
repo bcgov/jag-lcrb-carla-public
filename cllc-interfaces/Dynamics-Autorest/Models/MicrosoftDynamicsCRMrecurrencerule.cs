@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMrecurrencerule class.
         /// </summary>
-        public MicrosoftDynamicsCRMrecurrencerule(System.DateTimeOffset? patternenddate = default(System.DateTimeOffset?), string _objectidValue = default(string), int? dayofmonth = default(int?), string _createdbyValue = default(string), string _owneridValue = default(string), int? monthofyear = default(int?), int? instance = default(int?), string _owninguserValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? starttime = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), bool? isnthmonthly = default(bool?), bool? isnthyearly = default(bool?), int? occurrences = default(int?), int? duration = default(int?), int? patternendtype = default(int?), string _owningteamValue = default(string), bool? isregenerate = default(bool?), bool? isweekdaypattern = default(bool?), string _createdonbehalfbyValue = default(string), int? daysofweekmask = default(int?), int? interval = default(int?), System.DateTimeOffset? effectivestartdate = default(System.DateTimeOffset?), System.DateTimeOffset? endtime = default(System.DateTimeOffset?), string versionnumber = default(string), string _owningbusinessunitValue = default(string), System.DateTimeOffset? patternstartdate = default(System.DateTimeOffset?), int? firstdayofweek = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? recurrencepatterntype = default(int?), string _modifiedonbehalfbyValue = default(string), string ruleid = default(string), System.DateTimeOffset? effectiveenddate = default(System.DateTimeOffset?), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> recurrenceruleRecurringappointmentmaster = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), MicrosoftDynamicsCRMactivitypointer objectid = default(MicrosoftDynamicsCRMactivitypointer))
+        public MicrosoftDynamicsCRMrecurrencerule(System.DateTimeOffset? patternenddate = default(System.DateTimeOffset?), string _objectidValue = default(string), int? dayofmonth = default(int?), string _createdbyValue = default(string), string _owneridValue = default(string), int? monthofyear = default(int?), int? instance = default(int?), string _owninguserValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? starttime = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), bool? isnthmonthly = default(bool?), bool? isnthyearly = default(bool?), int? occurrences = default(int?), int? duration = default(int?), int? patternendtype = default(int?), string _owningteamValue = default(string), bool? isregenerate = default(bool?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), int? daysofweekmask = default(int?), int? interval = default(int?), System.DateTimeOffset? effectivestartdate = default(System.DateTimeOffset?), System.DateTimeOffset? endtime = default(System.DateTimeOffset?), string versionnumber = default(string), string _owningbusinessunitValue = default(string), System.DateTimeOffset? patternstartdate = default(System.DateTimeOffset?), bool? isweekdaypattern = default(bool?), int? firstdayofweek = default(int?), int? recurrencepatterntype = default(int?), string _modifiedonbehalfbyValue = default(string), string ruleid = default(string), System.DateTimeOffset? effectiveenddate = default(System.DateTimeOffset?), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> recurrenceruleRecurringappointmentmaster = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), MicrosoftDynamicsCRMactivitypointer objectid = default(MicrosoftDynamicsCRMactivitypointer))
         {
             Patternenddate = patternenddate;
             this._objectidValue = _objectidValue;
@@ -49,7 +49,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Patternendtype = patternendtype;
             this._owningteamValue = _owningteamValue;
             Isregenerate = isregenerate;
-            Isweekdaypattern = isweekdaypattern;
+            Modifiedon = modifiedon;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Daysofweekmask = daysofweekmask;
             Interval = interval;
@@ -58,8 +58,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Versionnumber = versionnumber;
             this._owningbusinessunitValue = _owningbusinessunitValue;
             Patternstartdate = patternstartdate;
+            Isweekdaypattern = isweekdaypattern;
             Firstdayofweek = firstdayofweek;
-            Modifiedon = modifiedon;
             Recurrencepatterntype = recurrencepatterntype;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Ruleid = ruleid;
@@ -172,8 +172,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "isweekdaypattern")]
-        public bool? Isweekdaypattern { get; set; }
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -217,13 +217,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "firstdayofweek")]
-        public int? Firstdayofweek { get; set; }
+        [JsonProperty(PropertyName = "isweekdaypattern")]
+        public bool? Isweekdaypattern { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
+        [JsonProperty(PropertyName = "firstdayofweek")]
+        public int? Firstdayofweek { get; set; }
 
         /// <summary>
         /// </summary>

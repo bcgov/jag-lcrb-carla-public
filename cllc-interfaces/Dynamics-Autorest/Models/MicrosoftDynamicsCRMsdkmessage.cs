@@ -29,37 +29,37 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMsdkmessage
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMsdkmessage(string _organizationidValue = default(string), string throttlesettings = default(string), string _modifiedbyValue = default(string), string introducedversion = default(string), bool? workflowsdkstepenabled = default(bool?), bool? expand = default(bool?), int? availability = default(int?), bool? isprivate = default(bool?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), bool? template = default(bool?), string categoryname = default(string), string sdkmessageid = default(string), string solutionid = default(string), bool? autotransact = default(bool?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), bool? isactive = default(bool?), string _createdbyValue = default(string), bool? isreadonly = default(bool?), string name = default(string), string _modifiedonbehalfbyValue = default(string), string sdkmessageidunique = default(string), bool? ismanaged = default(bool?), int? customizationlevel = default(int?), int? componentstate = default(int?), bool? isvalidforexecuteasync = default(bool?), string _createdonbehalfbyValue = default(string), string executeprivilegename = default(string), string versionnumber = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> sdkmessageidSdkmessageprocessingstep = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsdkmessagefilter> sdkmessageidSdkmessagefilter = default(IList<MicrosoftDynamicsCRMsdkmessagefilter>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMcustomapi> customAPIId = default(IList<MicrosoftDynamicsCRMcustomapi>))
+        public MicrosoftDynamicsCRMsdkmessage(string _organizationidValue = default(string), bool? isprivate = default(bool?), string _modifiedbyValue = default(string), string introducedversion = default(string), bool? workflowsdkstepenabled = default(bool?), bool? expand = default(bool?), int? availability = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), bool? template = default(bool?), bool? isvalidforexecuteasync = default(bool?), string categoryname = default(string), bool? autotransact = default(bool?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), bool? isactive = default(bool?), string _createdbyValue = default(string), string name = default(string), string _modifiedonbehalfbyValue = default(string), bool? ismanaged = default(bool?), int? customizationlevel = default(int?), string sdkmessageid = default(string), string sdkmessageidunique = default(string), string throttlesettings = default(string), string _createdonbehalfbyValue = default(string), string solutionid = default(string), int? componentstate = default(int?), string executeprivilegename = default(string), string versionnumber = default(string), bool? isreadonly = default(bool?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> sdkmessageidSdkmessageprocessingstep = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsdkmessagefilter> sdkmessageidSdkmessagefilter = default(IList<MicrosoftDynamicsCRMsdkmessagefilter>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMcustomapi> customAPIId = default(IList<MicrosoftDynamicsCRMcustomapi>))
         {
             this._organizationidValue = _organizationidValue;
-            Throttlesettings = throttlesettings;
+            Isprivate = isprivate;
             this._modifiedbyValue = _modifiedbyValue;
             Introducedversion = introducedversion;
             Workflowsdkstepenabled = workflowsdkstepenabled;
             Expand = expand;
             Availability = availability;
-            Isprivate = isprivate;
             Modifiedon = modifiedon;
             Template = template;
+            Isvalidforexecuteasync = isvalidforexecuteasync;
             Categoryname = categoryname;
-            Sdkmessageid = sdkmessageid;
-            Solutionid = solutionid;
             Autotransact = autotransact;
             Createdon = createdon;
             Overwritetime = overwritetime;
             Isactive = isactive;
             this._createdbyValue = _createdbyValue;
-            Isreadonly = isreadonly;
             Name = name;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            Sdkmessageidunique = sdkmessageidunique;
             Ismanaged = ismanaged;
             Customizationlevel = customizationlevel;
-            Componentstate = componentstate;
-            Isvalidforexecuteasync = isvalidforexecuteasync;
+            Sdkmessageid = sdkmessageid;
+            Sdkmessageidunique = sdkmessageidunique;
+            Throttlesettings = throttlesettings;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Solutionid = solutionid;
+            Componentstate = componentstate;
             Executeprivilegename = executeprivilegename;
             Versionnumber = versionnumber;
+            Isreadonly = isreadonly;
             Createdby = createdby;
             SdkmessageidSdkmessageprocessingstep = sdkmessageidSdkmessageprocessingstep;
             Createdonbehalfby = createdonbehalfby;
@@ -83,8 +83,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "throttlesettings")]
-        public string Throttlesettings { get; set; }
+        [JsonProperty(PropertyName = "isprivate")]
+        public bool? Isprivate { get; set; }
 
         /// <summary>
         /// </summary>
@@ -113,11 +113,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "isprivate")]
-        public bool? Isprivate { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
@@ -128,18 +123,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "isvalidforexecuteasync")]
+        public bool? Isvalidforexecuteasync { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "categoryname")]
         public string Categoryname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "sdkmessageid")]
-        public string Sdkmessageid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "solutionid")]
-        public string Solutionid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -168,11 +158,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "isreadonly")]
-        public bool? Isreadonly { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
@@ -180,11 +165,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "sdkmessageidunique")]
-        public string Sdkmessageidunique { get; set; }
 
         /// <summary>
         /// </summary>
@@ -198,18 +178,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "componentstate")]
-        public int? Componentstate { get; set; }
+        [JsonProperty(PropertyName = "sdkmessageid")]
+        public string Sdkmessageid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "isvalidforexecuteasync")]
-        public bool? Isvalidforexecuteasync { get; set; }
+        [JsonProperty(PropertyName = "sdkmessageidunique")]
+        public string Sdkmessageidunique { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "throttlesettings")]
+        public string Throttlesettings { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "solutionid")]
+        public string Solutionid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "componentstate")]
+        public int? Componentstate { get; set; }
 
         /// <summary>
         /// </summary>
@@ -220,6 +215,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
         public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "isreadonly")]
+        public bool? Isreadonly { get; set; }
 
         /// <summary>
         /// </summary>

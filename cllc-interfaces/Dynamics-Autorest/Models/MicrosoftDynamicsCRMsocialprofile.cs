@@ -29,12 +29,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMsocialprofile
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMsocialprofile(decimal? exchangerate = default(decimal?), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _customeridValue = default(string), decimal? influencescore = default(decimal?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string profilelink = default(string), string _createdonbehalfbyValue = default(string), int? community = default(int?), string _transactioncurrencyidValue = default(string), string _createdbyValue = default(string), int? statecode = default(int?), bool? blocked = default(bool?), int? utcconversiontimezonecode = default(int?), string socialprofileid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string profilefullname = default(string), string uniqueprofileid = default(string), int? statuscode = default(int?), string _owninguserValue = default(string), string _owneridValue = default(string), string profilename = default(string), int? importsequencenumber = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _owningteamValue = default(string), string _owningbusinessunitValue = default(string), string versionnumber = default(string), int? timezoneruleversionnumber = default(int?), IList<MicrosoftDynamicsCRMduplicaterecord> socialProfileDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> socialProfileAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMconnection> socialprofileConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnection> socialprofileConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcontact customeridContact = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMsyncerror> socialProfileSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> socialprofilePrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMsocialactivity> socialprofileSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMprocesssession> socialProfileProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMduplicaterecord> socialProfileDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMaccount customeridAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMincident> socialprofileCases = default(IList<MicrosoftDynamicsCRMincident>))
+        public MicrosoftDynamicsCRMsocialprofile(string _modifiedbyValue = default(string), decimal? exchangerate = default(decimal?), string _modifiedonbehalfbyValue = default(string), decimal? influencescore = default(decimal?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string profilelink = default(string), string _createdonbehalfbyValue = default(string), int? community = default(int?), string _transactioncurrencyidValue = default(string), string _createdbyValue = default(string), int? statecode = default(int?), bool? blocked = default(bool?), int? utcconversiontimezonecode = default(int?), string socialprofileid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string profilefullname = default(string), string uniqueprofileid = default(string), int? timezoneruleversionnumber = default(int?), int? statuscode = default(int?), string _owninguserValue = default(string), string _owneridValue = default(string), string profilename = default(string), int? importsequencenumber = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _owningteamValue = default(string), string _owningbusinessunitValue = default(string), string versionnumber = default(string), string _customeridValue = default(string), IList<MicrosoftDynamicsCRMduplicaterecord> socialProfileDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> socialProfileAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMconnection> socialprofileConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnection> socialprofileConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcontact customeridContact = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMsyncerror> socialProfileSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> socialprofilePrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMsocialactivity> socialprofileSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMprocesssession> socialProfileProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMduplicaterecord> socialProfileDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMaccount customeridAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMincident> socialprofileCases = default(IList<MicrosoftDynamicsCRMincident>))
         {
-            Exchangerate = exchangerate;
             this._modifiedbyValue = _modifiedbyValue;
+            Exchangerate = exchangerate;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._customeridValue = _customeridValue;
             Influencescore = influencescore;
             Createdon = createdon;
             Profilelink = profilelink;
@@ -49,6 +48,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Modifiedon = modifiedon;
             Profilefullname = profilefullname;
             Uniqueprofileid = uniqueprofileid;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
             Statuscode = statuscode;
             this._owninguserValue = _owninguserValue;
             this._owneridValue = _owneridValue;
@@ -58,7 +58,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             this._owningteamValue = _owningteamValue;
             this._owningbusinessunitValue = _owningbusinessunitValue;
             Versionnumber = versionnumber;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
+            this._customeridValue = _customeridValue;
             SocialProfileDuplicateBaseRecord = socialProfileDuplicateBaseRecord;
             SocialProfileAsyncOperations = socialProfileAsyncOperations;
             Modifiedonbehalfby = modifiedonbehalfby;
@@ -87,23 +87,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "exchangerate")]
-        public decimal? Exchangerate { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "exchangerate")]
+        public decimal? Exchangerate { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_customerid_value")]
-        public string _customeridValue { get; set; }
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -177,6 +172,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
 
@@ -222,8 +222,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
+        [JsonProperty(PropertyName = "_customerid_value")]
+        public string _customeridValue { get; set; }
 
         /// <summary>
         /// </summary>

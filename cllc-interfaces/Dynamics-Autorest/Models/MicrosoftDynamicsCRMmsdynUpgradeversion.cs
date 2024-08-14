@@ -29,9 +29,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMmsdynUpgradeversion class.
         /// </summary>
-        public MicrosoftDynamicsCRMmsdynUpgradeversion(string msdynStartingversion = default(string), string _organizationidValue = default(string), int? utcconversiontimezonecode = default(int?), int? importsequencenumber = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string msdynTargetversion = default(string), System.DateTimeOffset? msdynFinished = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), int? statecode = default(int?), string _modifiedonbehalfbyValue = default(string), string _createdbyValue = default(string), int? msdynStatus = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string msdynUpgradeversionid = default(string), string msdynSummary = default(string), string _createdonbehalfbyValue = default(string), string _msdynUpgraderunValue = default(string), string versionnumber = default(string), int? statuscode = default(int?), string _modifiedbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> msdynUpgradeversionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> msdynUpgradeversionAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> msdynUpgradeversionMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> msdynUpgradeversionProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> msdynUpgradeversionBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> msdynUpgradeversionPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMmsdynUpgraderun msdynUpgradeRun = default(MicrosoftDynamicsCRMmsdynUpgraderun), IList<MicrosoftDynamicsCRMmsdynUpgradestep> msdynMsdynUpgradeversionMsdynUpgradestepUpgradeVersion = default(IList<MicrosoftDynamicsCRMmsdynUpgradestep>))
+        public MicrosoftDynamicsCRMmsdynUpgradeversion(string _organizationidValue = default(string), int? utcconversiontimezonecode = default(int?), int? importsequencenumber = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string msdynTargetversion = default(string), System.DateTimeOffset? msdynFinished = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), int? statecode = default(int?), string _modifiedonbehalfbyValue = default(string), string _createdbyValue = default(string), int? msdynStatus = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string msdynUpgradeversionid = default(string), string msdynSummary = default(string), string _createdonbehalfbyValue = default(string), string _msdynUpgraderunValue = default(string), string versionnumber = default(string), int? statuscode = default(int?), string msdynStartingversion = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> msdynUpgradeversionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> msdynUpgradeversionAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> msdynUpgradeversionMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> msdynUpgradeversionProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> msdynUpgradeversionBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> msdynUpgradeversionPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMmsdynUpgraderun msdynUpgradeRun = default(MicrosoftDynamicsCRMmsdynUpgraderun), IList<MicrosoftDynamicsCRMmsdynUpgradestep> msdynMsdynUpgradeversionMsdynUpgradestepUpgradeVersion = default(IList<MicrosoftDynamicsCRMmsdynUpgradestep>))
         {
-            MsdynStartingversion = msdynStartingversion;
             this._organizationidValue = _organizationidValue;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             Importsequencenumber = importsequencenumber;
@@ -50,6 +49,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             this._msdynUpgraderunValue = _msdynUpgraderunValue;
             Versionnumber = versionnumber;
             Statuscode = statuscode;
+            MsdynStartingversion = msdynStartingversion;
             this._modifiedbyValue = _modifiedbyValue;
             Createdon = createdon;
             Createdby = createdby;
@@ -72,11 +72,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "msdyn_startingversion")]
-        public string MsdynStartingversion { get; set; }
 
         /// <summary>
         /// </summary>
@@ -167,6 +162,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "msdyn_startingversion")]
+        public string MsdynStartingversion { get; set; }
 
         /// <summary>
         /// </summary>
