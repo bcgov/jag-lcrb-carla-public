@@ -240,7 +240,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
         areaLocation: [''],
         capacity: ['', Validators.required]
       }),
-      isPermittedInZoning: ['', []],
       isOnINLand: [false, []],
       patioIsLiquorCarried: [false, []],
       termConditionOriginalText: ['', []],
@@ -721,27 +720,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
 
     return false;
-  }
-
-  private isHoursOfSaleValid(): boolean {
-    return this.form.disabled || !this.application.applicationType.showHoursOfSale ||
-      this.application.applicationType.name === ApplicationTypeNames.FP ||
-      this.application.applicationType.name === ApplicationTypeNames.FPRelo ||
-      (this.form.get('serviceHoursSundayOpen').valid
-        && this.form.get('serviceHoursMondayOpen').valid
-        && this.form.get('serviceHoursTuesdayOpen').valid
-        && this.form.get('serviceHoursWednesdayOpen').valid
-        && this.form.get('serviceHoursThursdayOpen').valid
-        && this.form.get('serviceHoursFridayOpen').valid
-        && this.form.get('serviceHoursSaturdayOpen').valid
-        && this.form.get('serviceHoursSundayClose').valid
-        && this.form.get('serviceHoursMondayClose').valid
-        && this.form.get('serviceHoursTuesdayClose').valid
-        && this.form.get('serviceHoursWednesdayClose').valid
-        && this.form.get('serviceHoursThursdayClose').valid
-        && this.form.get('serviceHoursFridayClose').valid
-        && this.form.get('serviceHoursSaturdayClose').valid
-      );
   }
 
   private isHoursPopulated(hoursOpen, hoursClose, altHoursOpen): boolean {
@@ -1406,11 +1384,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.validationMessages.push('Only 8 applications can be submitted');
     }
 
-    if (!this.isHoursOfSaleValid() || !this.isHoursOfSalePopulated()) {
-      valid = false;
-      this.validationMessages.push('Hours of sale are required');
-    }
-
     if (this.application.applicationType.showOwnershipDeclaration) {
 
       if (!this.form.get('isOwner').value && !(this.form.get('isOwnerBusiness') && this.form.get('isOwnerBusiness').value)) {
@@ -1474,10 +1447,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
     if (!this.form.get('productsListAndDescription').value && this.application.applicationType.name === ApplicationTypeNames.MFG && this.form.get("licenceSubCategory").value != "Co-Packer") {
       valid = false;
       this.validationMessages.push('Please add products list and description.');
-    }
-
-    if (this.showZoning() && this.application.isPermittedInZoning != true) {
-      this.validationMessages.push('Zoning Declaration is required.');
     }
 
     if (this.isTemporaryRelocation() && !this.form.get('temporaryRelocationCriteria').value) {
@@ -1700,7 +1669,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
       isLocatedInGroceryStore: 'Please specify if the establishment is located in a grocery store.',
       isOwnerBusiness: 'Please enter a value for owner business',
       isPackaging: 'Please enter a value for packaging',
-      isPermittedInZoning: 'Please enter a value for permitted in zoning',
       isReadyDisplays: 'Please confirm displays are ready',
       isReadyExtranceExit: 'Please confirm the exit is ready',
       isReadyFireAlarm: 'Please confirm the fire alarm is ready',
