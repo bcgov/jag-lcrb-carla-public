@@ -50,3 +50,30 @@
     }
   }
 }
+
+.compact-button {
+  display: block; 
+  line-height: 1.4; 
+  margin: 0;
+  padding-top: 2px;
+  padding-bottom: 2px; 
+}
+
+.centered-title {
+  text-align: center;
+  width: 100%;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.center-actions {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  width: 100%;
+  margin-top: auto;
+}
