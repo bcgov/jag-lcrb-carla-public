@@ -172,7 +172,6 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioMfgstepsecfermorcarb = from.MfgStepSecFermOrCarb;
             to.AdoxioMfgusesneutralgrainspirits = (int?)from.MfgUsesNeutralGrainSpirits;
             to.AdoxioPidlist = from.PidList;
-            to.AdoxioIspermittedinzoning = from.IsPermittedInZoning;
 
             // Permanent Change to a Licensee
             to.AdoxioFirstnameold = from.FirstNameOld;
@@ -589,7 +588,6 @@ namespace Gov.Lclb.Cllb.Public.Models
 
 
                 PidList = dynamicsApplication.AdoxioPidlist,
-                IsPermittedInZoning = dynamicsApplication.AdoxioIspermittedinzoning,
 
                 // Manufacturing structural change fields
 

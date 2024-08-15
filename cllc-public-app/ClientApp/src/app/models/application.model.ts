@@ -147,7 +147,6 @@ export interface Application {
   // Manufactuer
   licenceSubCategory: string;
   isPackaging: boolean;
-  isPermittedInZoning: boolean;
 
   relocateOnSiteStore: boolean;
   confirmPermitsRetailSales: boolean;

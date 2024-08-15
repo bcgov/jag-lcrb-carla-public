@@ -622,7 +622,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         // Manufactuer
 
         public bool? IsPackaging { get; set; }
-        public bool? IsPermittedInZoning { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
         public YesNoNotApplicable? MfgBrewPubOnSite { get; set; }
