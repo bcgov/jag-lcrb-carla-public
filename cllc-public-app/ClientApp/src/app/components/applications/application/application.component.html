@@ -713,7 +713,7 @@
                   <p>Select the primary criteria your establishment meets for a temporary relocation.</p>
                   <mat-radio-group formControlName="temporaryRelocationCriteria">
                     <mat-radio-button class="mr-5" [value]=845280000><span class="wrap-mat-radio-label">Repairs due to fire, flood, or other event beyond the licensee's control</span></mat-radio-button>
-                    <mat-radio-button class="mr-5" [value]=845280001><span class="wrap-mat-radio-label">Significant alterations to, or renovations of the store by someone other than the liccensee</span></mat-radio-button>
+                    <mat-radio-button class="mr-5" [value]=845280001><span class="wrap-mat-radio-label">Significant alterations to, or renovations of the store by someone other than the licensee</span></mat-radio-button>
                     <mat-radio-button class="mr-5" [value]=845280002><span class="wrap-mat-radio-label">Significant alterations to, or renovations of the store by the licensee under reasonable grounds the store cannot continue operating during the alterations or renovations</span></mat-radio-button>
                   </mat-radio-group>
                 </section>
@@ -874,17 +874,17 @@
                   <app-field class="col-md-12 col-xs-12" label="Address" [required]="true" [isFullWidth]="true"
                              [valid]="isValidOrNotTouched('establishmentAddressStreet')"
                              errorMessage="Please enter the street address">
-                    <input class="form-control" type="text" autocomplete="off"
+                    <input class="form-control" type="text" autocomplete=""
                            formControlName="establishmentAddressStreet" id="establishmentAddressStreet">
                   </app-field>
                   <app-field class="col-md-4 col-xs-12" label="City" [required]="true" [isFullWidth]="true"
                              [valid]="isValidOrNotTouched('establishmentAddressCity')" errorMessage="Please enter the city">
-                    <input class="form-control" type="text" autocomplete="off"
+                    <input class="form-control" type="text" autocomplete=""
                            formControlName="establishmentAddressCity" id="establishmentAddressCity">
                   </app-field>
                   <section class="col-md-4 col-xs-12">
                     <app-field label="Province" [isFullWidth]="true">
-                      <input class="form-control" autocomplete="off" readonly type="text"
+                      <input class="form-control" autocomplete="" readonly type="text"
                              value="British Columbia">
                     </app-field>
                   </section>
@@ -892,12 +892,12 @@
                     <app-field label="Postal Code" [required]="true" [isFullWidth]="true"
                                [valid]="isValidOrNotTouched('establishmentAddressPostalCode')"
                                errorMessage="Please enter the postal code">
-                      <input class="form-control" type="text" autocomplete="off"
+                      <input class="form-control" type="text" autocomplete=""
                              formControlName="establishmentAddressPostalCode" id="establishmentAddressPostalCode">
                     </app-field>
                   </section>
                   <app-field class="col-md-4 col-xs-12" label="Country" [isFullWidth]="true">
-                    <input class="form-control" autocomplete="off" readonly type="text" value="Canada">
+                    <input class="form-control" autocomplete="" readonly type="text" value="Canada">
                   </app-field>
                 </address>
 
@@ -1139,7 +1139,7 @@
                          [valid]="isValidOrNotTouched('indigenousNation')" errorMessage="Please select a value">
                 <input type="text" class="form-control" style="width: 500px;"
                        placeholder="Type to search and then select a value" formControlName="indigenousNation"
-                       [matAutocomplete]="lgAutoCompleteBox" #lgAutoCompleteTrigger autocomplete="off">
+                       [matAutocomplete]="lgAutoCompleteBox" #lgAutoCompleteTrigger autocomplete="">
                 <mat-autocomplete #lgAutoCompleteBox="matAutocomplete" [displayWith]="autocompleteDisplay">
                   <mat-option *ngFor="let item of autocompleteLocalGovernmemts" [value]="item">
                     {{item.name}}
@@ -1510,27 +1510,6 @@
                                        entityName="application" [useDocumentTypeForName]="true"
                                        (numberOfUploadedFiles)="uploadedPhotosOrRenderingsDocuments = $event" [entityId]="applicationId"
                                        [uploadHeader]="'TO UPLOAD DISCRETION REQUEST'">
-                    </app-file-uploader>
-
-                  </div>
-                </div>
-              </section>
-            </div>
-            <div *ngIf="application?.applicationType?.name === ApplicationTypeNames.DormancyReinstatement">
-              <section>
-                <div>
-                  <h3 class="blue-header">Supporting Documents</h3>
-                  <div class="content-bottom">
-                    <p>
-                      Proof of valid interest (lease or land title) is required - attach a copy when submitting the form.
-                    </p>
-
-                    <app-file-uploader *ngIf="applicationId" documentType="Supporting Document"
-                                       fileTypes="FILE MUST BE IN PDF FORMAT." [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
-                                       [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()" [multipleFiles]="true"
-                                       entityName="application" [useDocumentTypeForName]="true"
-                                       (numberOfUploadedFiles)="proofofValidInterestDocuments = $event" [entityId]="applicationId"
-                                       [uploadHeader]="'TO UPLOAD SUPPORTING DOCUMENTS'">
                     </app-file-uploader>
 
                   </div>
