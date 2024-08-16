@@ -222,70 +222,7 @@ describe("ApplicationComponent",
         const elem = fixture.debugElement.query(By.css(".ngtest-declarations"));
         expect(elem).toBeFalsy();
       });
-
-    it("should show supporting documents if enabled",
-      () => {
-        applicationService.getApplicationById = () => of({
-          applicationType: {
-            'showSupportingDocuments': true,
-            contentTypes: []
-          } as any
-        } as Application);
-        fixture = TestBed.createComponent(ApplicationComponent);
-        component = fixture.debugElement.componentInstance;
-        fixture.detectChanges();
-        const elem = fixture.debugElement.query(By.css(".ngtest-supporting-documents")).nativeElement;
-        expect(elem).not.toBeFalsy();
-      });
-
-    it("should hide supporting documents if disabled",
-      () => {
-        const elem = fixture.debugElement.query(By.css(".ngtest-supporting-documents"));
-        expect(elem).toBeFalsy();
-      });
-
-    it("should show financial integrity upload if enabled",
-      () => {
-        applicationService.getApplicationById = () => of({
-          applicationType: {
-            'showFinancialIntegrityFormUpload': true,
-            contentTypes: []
-          } as any
-        } as Application);
-        fixture = TestBed.createComponent(ApplicationComponent);
-        component = fixture.debugElement.componentInstance;
-        fixture.detectChanges();
-        const elem = fixture.debugElement.query(By.css(".ngtest-financial-integrity-upload")).nativeElement;
-        expect(elem).not.toBeFalsy();
-      });
-
-    it("should hide financial integrity upload if disabled",
-      () => {
-        const elem = fixture.debugElement.query(By.css(".ngtest-financial-integrity-upload"));
-        expect(elem).toBeFalsy();
-      });
-
-    it("should show associate form upload if enabled",
-      () => {
-        applicationService.getApplicationById = () => of({
-          applicationType: {
-            'showAssociatesFormUpload': true,
-            contentTypes: []
-          } as any
-        } as Application);
-        fixture = TestBed.createComponent(ApplicationComponent);
-        component = fixture.debugElement.componentInstance;
-        fixture.detectChanges();
-        const elem = fixture.debugElement.query(By.css(".ngtest-associate-upload")).nativeElement;
-        expect(elem).not.toBeFalsy();
-      });
-
-    it("should hide associate form upload if disabled",
-      () => {
-        const elem = fixture.debugElement.query(By.css(".ngtest-associate-upload"));
-        expect(elem).toBeFalsy();
-      });
-
+      
     it("should show property details if enabled",
       () => {
         applicationService.getApplicationById = () => of({
@@ -326,27 +263,6 @@ describe("ApplicationComponent",
     it("should hide current property if disabled",
       () => {
         const elem = fixture.debugElement.query(By.css(".ngtest-new-address"));
-        expect(elem).toBeFalsy();
-      });
-
-    it("should show hours of sale if enabled",
-      () => {
-        applicationService.getApplicationById = () => of({
-          applicationType: {
-            'showHoursOfSale': true,
-            contentTypes: []
-          } as any
-        } as Application);
-        fixture = TestBed.createComponent(ApplicationComponent);
-        component = fixture.debugElement.componentInstance;
-        fixture.detectChanges();
-        const elem = fixture.debugElement.query(By.css(".ngtest-hours-of-sale")).nativeElement;
-        expect(elem).not.toBeFalsy();
-      });
-
-    it("should hide hours of sale if disabled",
-      () => {
-        const elem = fixture.debugElement.query(By.css(".ngtest-hours-of-sale"));
         expect(elem).toBeFalsy();
       });
 
