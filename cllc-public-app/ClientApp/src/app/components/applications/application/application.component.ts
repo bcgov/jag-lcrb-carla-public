@@ -35,19 +35,6 @@ import { faExclamationCircle, faTrashAlt, faUniversity } from '@fortawesome/free
 import { faCreditCard, faIdCard, faSave } from '@fortawesome/free-regular-svg-icons';
 import { RelatedLicence } from "@models/related-licence";
 
-const ServiceHours = [
-  '00:00', '00:15', '00:30', '00:45', '01:00', '01:15', '01:30', '01:45', '02:00', '02:15', '02:30', '02:45', '03:00',
-  '03:15', '03:30', '03:45', '04:00', '04:15', '04:30', '04:45', '05:00', '05:15', '05:30', '05:45', '06:00', '06:15',
-  '06:30', '06:45', '07:00', '07:15', '07:30', '07:45', '08:00', '08:15', '08:30', '08:45',
-  '09:00', '09:15', '09:30',
-  '09:45', '10:00', '10:15', '10:30', '10:45', '11:00', '11:15', '11:30', '11:45', '12:00', '12:15', '12:30', '12:45',
-  '13:00', '13:15', '13:30', '13:45', '14:00', '14:15', '14:30', '14:45', '15:00', '15:15', '15:30', '15:45', '16:00',
-  '16:15', '16:30', '16:45', '17:00', '17:15', '17:30', '17:45', '18:00', '18:15', '18:30', '18:45', '19:00', '19:15',
-  '19:30', '19:45', '20:00', '20:15', '20:30', '20:45', '21:00', '21:15', '21:30', '21:45', '22:00', '22:15', '22:30',
-  '22:45', '23:00', '23:15', '23:30', '23:45'
-];
-
-
 
 @Component({
   selector: 'app-application',
@@ -67,8 +54,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
   @Input() skipPayment: boolean = false;
   @Output() saveComplete: EventEmitter<boolean> = new EventEmitter<boolean>();
   @ViewChild('mainForm') mainForm: FileUploaderComponent;
-  @ViewChild('financialIntegrityDocuments') financialIntegrityDocuments: FileUploaderComponent;
-  @ViewChild('supportingDocuments') supportingDocuments: FileUploaderComponent;
   @ViewChild(ConnectionToNonMedicalStoresComponent) connectionsToProducers: ConnectionToNonMedicalStoresComponent;
   @ViewChild(ProofOfZoningComponent) proofOfZoning: ProofOfZoningComponent;
   @ViewChild('lgAutoCompleteTrigger', { read: MatAutocompleteTrigger }) lgAutoComplete: MatAutocompleteTrigger;
@@ -83,7 +68,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
   validationMessages: any[];
   showValidationMessages: boolean;
   submittedApplications = 8;
-  ServiceHours = ServiceHours;
   tiedHouseFormData: TiedHouseConnection;
   possibleProblematicNameWarning = false;
   htmlContent: ApplicationHTMLContent = <ApplicationHTMLContent>{};
@@ -94,9 +78,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
   mode: string;
   account: Account;
 
-  uploadedSupportingDocuments = 0;
-  uploadedFinancialIntegrityDocuments: 0;
-  uploadedAssociateDocuments: 0;
   uploadedSignageDocuments: 0;
   uploadedValidInterestDocuments: 0;
   uploadedSitePlanDocuments: 0;
@@ -193,20 +174,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
       tempSuspensionOrPatronParticipationStart: [''],
       tempSuspensionOrPatronParticipationEnd: [''],
       establishmentPhone: [''],
-      serviceHoursSundayOpen: [''],
-      serviceHoursMondayOpen: [''],
-      serviceHoursTuesdayOpen: [''],
-      serviceHoursWednesdayOpen: [''],
-      serviceHoursThursdayOpen: [''],
-      serviceHoursFridayOpen: [''],
-      serviceHoursSaturdayOpen: [''],
-      serviceHoursSundayClose: [''],
-      serviceHoursMondayClose: [''],
-      serviceHoursTuesdayClose: [''],
-      serviceHoursWednesdayClose: [''],
-      serviceHoursThursdayClose: [''],
-      serviceHoursFridayClose: [''],
-      serviceHoursSaturdayClose: [''],
       liquorDeclarationCheck: [''],
       applyAsIndigenousNation: [false],
       indigenousNationId: [{ value: null, disabled: true }, Validators.required],
@@ -282,49 +249,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     this.form.get('establishmentParcelId').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
       this.form.get('pin').updateValueAndValidity();
     });
-    this.form.get('serviceHoursSundayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateRequiredValidator(val, 'serviceHoursSundayClose');
-    });
-    this.form.get('serviceHoursSundayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateRequiredValidator(val, 'serviceHoursSundayOpen');
-    });
-    this.form.get('serviceHoursMondayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateRequiredValidator(val, 'serviceHoursMondayClose');
-    });
-    this.form.get('serviceHoursMondayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateRequiredValidator(val, 'serviceHoursMondayOpen');
-    });
-    this.form.get('serviceHoursTuesdayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateRequiredValidator(val, 'serviceHoursTuesdayClose');
-    });
-    this.form.get('serviceHoursTuesdayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateRequiredValidator(val, 'serviceHoursTuesdayOpen');
-    });
-    this.form.get('serviceHoursWednesdayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateRequiredValidator(val, 'serviceHoursWednesdayClose');
-    });
-    this.form.get('serviceHoursWednesdayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateRequiredValidator(val, 'serviceHoursWednesdayOpen');
-    });
-    this.form.get('serviceHoursThursdayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateRequiredValidator(val, 'serviceHoursThursdayClose');
-    });
-    this.form.get('serviceHoursThursdayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateRequiredValidator(val, 'serviceHoursThursdayOpen');
-    });
-    this.form.get('serviceHoursFridayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateRequiredValidator(val, 'serviceHoursFridayClose');
-    });
-    this.form.get('serviceHoursFridayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateRequiredValidator(val, 'serviceHoursFridayOpen');
-    });
-    this.form.get('serviceHoursSaturdayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateRequiredValidator(val, 'serviceHoursSaturdayClose');
-    });
-    this.form.get('serviceHoursSaturdayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateRequiredValidator(val, 'serviceHoursSaturdayOpen');
-    });
-
+  
     this.form.get('indigenousNation').valueChanges
       .pipe(filter(value => value && value.length >= 3),
         tap(_ => {
@@ -630,25 +555,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.form.get('establishmentPhone').disable();
     }
 
-    if (!this.application.applicationType.showHoursOfSale || this.application.applicationType.name === ApplicationTypeNames.FP || this.application.applicationType.name === ApplicationTypeNames.FPRelo) {
-      // Opening hours
-      this.form.get('serviceHoursSundayOpen').disable();
-      this.form.get('serviceHoursMondayOpen').disable();
-      this.form.get('serviceHoursTuesdayOpen').disable();
-      this.form.get('serviceHoursWednesdayOpen').disable();
-      this.form.get('serviceHoursThursdayOpen').disable();
-      this.form.get('serviceHoursFridayOpen').disable();
-      this.form.get('serviceHoursSaturdayOpen').disable();
-      // Closing hours
-      this.form.get('serviceHoursSundayClose').disable();
-      this.form.get('serviceHoursMondayClose').disable();
-      this.form.get('serviceHoursTuesdayClose').disable();
-      this.form.get('serviceHoursWednesdayClose').disable();
-      this.form.get('serviceHoursThursdayClose').disable();
-      this.form.get('serviceHoursFridayClose').disable();
-      this.form.get('serviceHoursSaturdayClose').disable();
-    }
-
     if (this.application.applicationType.name !== ApplicationTypeNames.Marketer) {
       this.form.get('federalProducerNames').disable();
     }
@@ -721,106 +627,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
 
     return false;
-  }
-
-  private isHoursOfSaleValid(): boolean {
-    return this.form.disabled || !this.application.applicationType.showHoursOfSale ||
-      this.application.applicationType.name === ApplicationTypeNames.FP ||
-      this.application.applicationType.name === ApplicationTypeNames.FPRelo ||
-      (this.form.get('serviceHoursSundayOpen').valid
-        && this.form.get('serviceHoursMondayOpen').valid
-        && this.form.get('serviceHoursTuesdayOpen').valid
-        && this.form.get('serviceHoursWednesdayOpen').valid
-        && this.form.get('serviceHoursThursdayOpen').valid
-        && this.form.get('serviceHoursFridayOpen').valid
-        && this.form.get('serviceHoursSaturdayOpen').valid
-        && this.form.get('serviceHoursSundayClose').valid
-        && this.form.get('serviceHoursMondayClose').valid
-        && this.form.get('serviceHoursTuesdayClose').valid
-        && this.form.get('serviceHoursWednesdayClose').valid
-        && this.form.get('serviceHoursThursdayClose').valid
-        && this.form.get('serviceHoursFridayClose').valid
-        && this.form.get('serviceHoursSaturdayClose').valid
-      );
-  }
-
-  private isHoursPopulated(hoursOpen, hoursClose, altHoursOpen): boolean {
-    if (hoursOpen != '' && hoursClose != '') {
-      var timeTokensOpen = hoursOpen.split(':');
-      var timeTokensClose = hoursClose.split(':');
-      var timeTokensAltOpen = altHoursOpen.split(':');
-      let openDate = new Date(1970, 0, 2, timeTokensOpen[0], timeTokensOpen[1]);
-      let closeDate = new Date(1970, 0, 2, timeTokensClose[0], timeTokensClose[1]);
-      if (closeDate.getTime() < openDate.getTime()) {
-        //Open time may be the day before.  ie) Open Saturday at 9am Close Sunday 2am
-        openDate = new Date(1970, 0, 1, timeTokensAltOpen[0], timeTokensAltOpen[1]);
-      }
-      let minutes = (closeDate.getTime() - openDate.getTime()) / 60000; // minutes between
-      if (minutes <= 0) {
-        return false;
-      } else {
-        return true;
-      }
-    }
-  }
-
-  private isHoursOfSalePopulated(): boolean {
-    if (!this.application.applicationType.showHoursOfSale ||
-      this.application.applicationType.name === ApplicationTypeNames.FP ||
-      this.application.applicationType.name === ApplicationTypeNames.FPRelo) {
-      return true;
-    }
-    if (this.form.get('serviceHoursSundayOpen').value != '' && this.form.get('serviceHoursSundayClose').value != '' && this.form.get('serviceHoursSaturdayOpen').value != '') {
-      if (!this.isHoursPopulated(this.form.get('serviceHoursSundayOpen').value, this.form.get('serviceHoursSundayClose').value, this.form.get('serviceHoursSaturdayOpen').value)) {
-        return false;
-      }
-    } else {
-      return false;
-    }
-    if (this.form.get('serviceHoursMondayOpen').value != '' && this.form.get('serviceHoursMondayClose').value != '' && this.form.get('serviceHoursSundayOpen').value != '') {
-      if (!this.isHoursPopulated(this.form.get('serviceHoursMondayOpen').value, this.form.get('serviceHoursMondayClose').value, this.form.get('serviceHoursSundayOpen').value)) {
-        return false;
-      }
-    } else {
-      return false;
-    }
-    if (this.form.get('serviceHoursTuesdayOpen').value != '' && this.form.get('serviceHoursTuesdayClose').value != '' && this.form.get('serviceHoursMondayOpen').value != '') {
-      if (!this.isHoursPopulated(this.form.get('serviceHoursTuesdayOpen').value, this.form.get('serviceHoursTuesdayClose').value, this.form.get('serviceHoursMondayOpen').value)) {
-        return false;
-      }
-    } else {
-      return false;
-    }
-    if (this.form.get('serviceHoursWednesdayOpen').value != '' && this.form.get('serviceHoursWednesdayClose').value != '' && this.form.get('serviceHoursTuesdayOpen').value != '') {
-      if (!this.isHoursPopulated(this.form.get('serviceHoursWednesdayOpen').value, this.form.get('serviceHoursWednesdayClose').value, this.form.get('serviceHoursTuesdayOpen').value)) {
-        return false;
-      }
-    } else {
-      return false;
-    }
-    if (this.form.get('serviceHoursThursdayOpen').value != '' && this.form.get('serviceHoursThursdayClose').value != '' && this.form.get('serviceHoursWednesdayOpen').value != '') {
-      if (!this.isHoursPopulated(this.form.get('serviceHoursThursdayOpen').value, this.form.get('serviceHoursThursdayClose').value, this.form.get('serviceHoursWednesdayOpen').value)) {
-        return false;
-      }
-    } else {
-      return false;
-    }
-    if (this.form.get('serviceHoursFridayOpen').value != '' && this.form.get('serviceHoursFridayClose').value != '' && this.form.get('serviceHoursThursdayOpen').value != '') {
-      if (!this.isHoursPopulated(this.form.get('serviceHoursFridayOpen').value, this.form.get('serviceHoursFridayClose').value, this.form.get('serviceHoursThursdayOpen').value)) {
-        return false;
-      }
-    } else {
-      return false;
-    }
-    if (this.form.get('serviceHoursSaturdayOpen').value != '' && this.form.get('serviceHoursSaturdayClose').value != '' && this.form.get('serviceHoursFridayOpen').value != '') {
-      if (!this.isHoursPopulated(this.form.get('serviceHoursSaturdayOpen').value, this.form.get('serviceHoursSaturdayClose').value, this.form.get('serviceHoursFridayOpen').value)) {
-        return false;
-      }
-    }
-    else {
-      return false;
-    }
-    return true;
   }
 
   lgHasReviewedZoning(): boolean {
@@ -1302,19 +1108,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.validationMessages.push('At least one service area is required.');
     }
 
-    if (this.application.applicationType.showAssociatesFormUpload &&
-      ((this.uploadedAssociateDocuments || 0) < 1)) {
-      valid = false;
-      this.validationMessages.push('Associate form is required.');
-    }
-
-    // if we're showing supporting documents and it's not a marketing soleprop application add validation
-    if (this.application.applicationType.showSupportingDocuments && !marketing_soleprop &&
-      ((this.uploadedSupportingDocuments || 0) < 1)) {
-      valid = false;
-      this.validationMessages.push('At least one supporting document is required.');
-    }
-
     // optional for this application type
     const signageNotRequired = (
       applicationTypeName === ApplicationTypeNames.LiquorLicenceTransfer ||
@@ -1360,13 +1153,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
         this.validationMessages.push('At least one Notice of Articles document is required.');
       }
 
-      if (!this.isLiquor() &&
-        this.application.applicationType.showFinancialIntegrityFormUpload &&
-        ((this.uploadedFinancialIntegrityDocuments || 0) < 1)) {
-        valid = false;
-        this.validationMessages.push('At least one Financial Intergrity document is required.');
-      }
-
       if (this.account.isOtherBusinessType() &&
         ((this.uploadedOrganizationDetails || 0) < 1)) {
         valid = false;
@@ -1404,11 +1190,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
     if (applicationTypeName === ApplicationTypeNames.CannabisRetailStore && this.submittedApplications >= 8) {
       valid = false;
       this.validationMessages.push('Only 8 applications can be submitted');
-    }
-
-    if (!this.isHoursOfSaleValid() || !this.isHoursOfSalePopulated()) {
-      valid = false;
-      this.validationMessages.push('Hours of sale are required');
     }
 
     if (this.application.applicationType.showOwnershipDeclaration) {
