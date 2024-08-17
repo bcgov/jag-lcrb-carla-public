@@ -874,17 +874,20 @@
                   <app-field class="col-md-12 col-xs-12" label="Address" [required]="true" [isFullWidth]="true"
                              [valid]="isValidOrNotTouched('establishmentAddressStreet')"
                              errorMessage="Please enter the street address">
-                    <input class="form-control" type="text" autocomplete=""
+                    <input type="text" style="display:none" autocomplete="off">
+                    <input class="form-control" type="text" autocomplete="new-address"
                            formControlName="establishmentAddressStreet" id="establishmentAddressStreet">
                   </app-field>
                   <app-field class="col-md-4 col-xs-12" label="City" [required]="true" [isFullWidth]="true"
                              [valid]="isValidOrNotTouched('establishmentAddressCity')" errorMessage="Please enter the city">
-                    <input class="form-control" type="text" autocomplete=""
+                    <input type="text" style="display:none" autocomplete="off">
+                    <input class="form-control" type="text" autocomplete="new-city"
                            formControlName="establishmentAddressCity" id="establishmentAddressCity">
                   </app-field>
                   <section class="col-md-4 col-xs-12">
                     <app-field label="Province" [isFullWidth]="true">
-                      <input class="form-control" autocomplete="" readonly type="text"
+                      <input type="text" style="display:none" autocomplete="off">
+                      <input class="form-control" autocomplete="new-province" readonly type="text"
                              value="British Columbia">
                     </app-field>
                   </section>
@@ -892,12 +895,14 @@
                     <app-field label="Postal Code" [required]="true" [isFullWidth]="true"
                                [valid]="isValidOrNotTouched('establishmentAddressPostalCode')"
                                errorMessage="Please enter the postal code">
-                      <input class="form-control" type="text" autocomplete=""
+                      <input type="text" style="display:none" autocomplete="off">
+                      <input class="form-control" type="text" autocomplete="new-postal-code"
                              formControlName="establishmentAddressPostalCode" id="establishmentAddressPostalCode">
                     </app-field>
                   </section>
                   <app-field class="col-md-4 col-xs-12" label="Country" [isFullWidth]="true">
-                    <input class="form-control" autocomplete="" readonly type="text" value="Canada">
+                    <input type="text" style="display:none" autocomplete="off">
+                    <input class="form-control" autocomplete="new-country" readonly type="text" value="Canada">
                   </app-field>
                 </address>
 
