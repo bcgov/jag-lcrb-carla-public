@@ -1757,4 +1757,23 @@ export class ApplicationComponent extends FormBase implements OnInit {
     this.licenseToRemove = assignedLicence;
     this.form.get("description1").patchValue(this.licenseToRemove.name);
   }
+
+  ngAfterViewInit() {
+
+    const newEstablishmentAddressStreet = document.getElementById('newEstablishmentAddressStreet') as HTMLInputElement;
+    const newEstablishmentAddressCity = document.getElementById('newEstablishmentAddressCity') as HTMLInputElement;
+    const newEstablishmentAddressPostalCode = document.getElementById('newEstablishmentAddressPostalCode') as HTMLInputElement;
+
+    if (newEstablishmentAddressStreet) {
+      newEstablishmentAddressStreet.value = '';
+    }
+
+    if (newEstablishmentAddressCity) {
+      newEstablishmentAddressCity.value = '';
+    }
+
+    if (newEstablishmentAddressPostalCode) {
+      newEstablishmentAddressPostalCode.value = '';
+    }
+  }
 }
