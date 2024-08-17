@@ -875,12 +875,12 @@
                              [valid]="isValidOrNotTouched('establishmentAddressStreet')"
                              errorMessage="Please enter the street address">
                     <input class="form-control" type="text" value="" autocomplete="off"
-                           formControlName="establishmentAddressStreet" id="tempEstablishmentAddressStreet">
+                           formControlName="establishmentAddressStreet" id="establishmentAddressStreet">
                   </app-field>
                   <app-field class="col-md-4 col-xs-12" label="City" [required]="true" [isFullWidth]="true"
                              [valid]="isValidOrNotTouched('establishmentAddressCity')" errorMessage="Please enter the city">
                     <input class="form-control" type="text" type="text" value="" autocomplete="off"
-                           formControlName="establishmentAddressCity" id="tempEstablishmentAddressCity">
+                           formControlName="establishmentAddressCity" id="establishmentAddressCity">
                   </app-field>
                   <section class="col-md-4 col-xs-12">
                     <app-field label="Province" [isFullWidth]="true">
@@ -893,7 +893,7 @@
                                [valid]="isValidOrNotTouched('establishmentAddressPostalCode')"
                                errorMessage="Please enter the postal code">
                       <input class="form-control" type="text" type="text" value="" autocomplete="off"
-                             formControlName="establishmentAddressPostalCode" id="tempEstablishmentAddressPostalCode">
+                             formControlName="establishmentAddressPostalCode" id="establishmentAddressPostalCode">
                     </app-field>
                   </section>
                   <app-field class="col-md-4 col-xs-12" label="Country" [isFullWidth]="true">
