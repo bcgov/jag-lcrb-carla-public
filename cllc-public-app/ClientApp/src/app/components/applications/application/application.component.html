@@ -874,17 +874,17 @@
                   <app-field class="col-md-12 col-xs-12" label="Address" [required]="true" [isFullWidth]="true"
                              [valid]="isValidOrNotTouched('establishmentAddressStreet')"
                              errorMessage="Please enter the street address">
-                    <input class="form-control" type="text" autocomplete=""
+                    <input class="form-control" type="text" value="" autocomplete="off"
                            formControlName="establishmentAddressStreet" id="establishmentAddressStreet">
                   </app-field>
                   <app-field class="col-md-4 col-xs-12" label="City" [required]="true" [isFullWidth]="true"
                              [valid]="isValidOrNotTouched('establishmentAddressCity')" errorMessage="Please enter the city">
-                    <input class="form-control" type="text" autocomplete=""
+                    <input class="form-control" type="text" type="text" value="" autocomplete="off"
                            formControlName="establishmentAddressCity" id="establishmentAddressCity">
                   </app-field>
                   <section class="col-md-4 col-xs-12">
                     <app-field label="Province" [isFullWidth]="true">
-                      <input class="form-control" autocomplete="" readonly type="text"
+                      <input class="form-control" type="text" autocomplete="off" readonly type="text"
                              value="British Columbia">
                     </app-field>
                   </section>
@@ -892,12 +892,12 @@
                     <app-field label="Postal Code" [required]="true" [isFullWidth]="true"
                                [valid]="isValidOrNotTouched('establishmentAddressPostalCode')"
                                errorMessage="Please enter the postal code">
-                      <input class="form-control" type="text" autocomplete=""
+                      <input class="form-control" type="text" type="text" value="" autocomplete="off"
                              formControlName="establishmentAddressPostalCode" id="establishmentAddressPostalCode">
                     </app-field>
                   </section>
                   <app-field class="col-md-4 col-xs-12" label="Country" [isFullWidth]="true">
-                    <input class="form-control" autocomplete="" readonly type="text" value="Canada">
+                    <input class="form-control" type="text" autocomplete="off" readonly type="text" value="Canada">
                   </app-field>
                 </address>
 
@@ -1139,7 +1139,7 @@
                          [valid]="isValidOrNotTouched('indigenousNation')" errorMessage="Please select a value">
                 <input type="text" class="form-control" style="width: 500px;"
                        placeholder="Type to search and then select a value" formControlName="indigenousNation"
-                       [matAutocomplete]="lgAutoCompleteBox" #lgAutoCompleteTrigger autocomplete="">
+                       [matAutocomplete]="lgAutoCompleteBox" #lgAutoCompleteTrigger type="text" value="" autocomplete="off">
                 <mat-autocomplete #lgAutoCompleteBox="matAutocomplete" [displayWith]="autocompleteDisplay">
                   <mat-option *ngFor="let item of autocompleteLocalGovernmemts" [value]="item">
                     {{item.name}}
