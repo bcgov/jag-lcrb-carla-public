@@ -27,46 +27,46 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// Initializes a new instance of the MicrosoftDynamicsCRMlist class.
         /// </summary>
-        public MicrosoftDynamicsCRMlist(string description = default(string), bool? lockstatus = default(bool?), int? processedmembercount = default(int?), string stageid = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _owninguserValue = default(string), string _owningbusinessunitValue = default(string), decimal? exchangerate = default(decimal?), bool? ignoreinactivelistmembers = default(bool?), int? membertype = default(int?), string listname = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), int? membercount = default(int?), int? statuscode = default(int?), string versionnumber = default(string), string _createdonbehalfbyValue = default(string), string processfetchxml = default(string), string listid = default(string), string _modifiedonbehalfbyValue = default(string), int? createdfromcode = default(int?), string _owningteamValue = default(string), bool? donotsendonoptout = default(bool?), decimal? cost = default(decimal?), string purpose = default(string), int? importsequencenumber = default(int?), int? statecode = default(int?), string _owneridValue = default(string), string processid = default(string), string source = default(string), string _createdbyValue = default(string), bool? type = default(bool?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), decimal? costBase = default(decimal?), string traversedpath = default(string), int? utcconversiontimezonecode = default(int?), string query = default(string), string _transactioncurrencyidValue = default(string), System.DateTimeOffset? lastusedon = default(System.DateTimeOffset?), IList<MicrosoftDynamicsCRMadoxioExternalcontact> adoxioListAdoxioExternalcontact = default(IList<MicrosoftDynamicsCRMadoxioExternalcontact>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> listSharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMcampaign> campaignlistAssociation = default(IList<MicrosoftDynamicsCRMcampaign>), IList<MicrosoftDynamicsCRMcampaignactivity> campaignactivitylistAssociation = default(IList<MicrosoftDynamicsCRMcampaignactivity>), IList<MicrosoftDynamicsCRMteam> listTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> listMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMannotation> listAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMconnection> listConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMprocesssession> listProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkoperation> listBulkOperations = default(IList<MicrosoftDynamicsCRMbulkoperation>), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMduplicaterecord> listDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMsyncerror> listSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMconnection> listConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMasyncoperation> listAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> listPrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMduplicaterecord> listDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMbulkdeletefailure> listBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMcontact> listcontactAssociation = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMlead> listleadAssociation = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMaccount> listaccountAssociation = default(IList<MicrosoftDynamicsCRMaccount>), IList<MicrosoftDynamicsCRMlistoperation> listListoperationListId = default(IList<MicrosoftDynamicsCRMlistoperation>))
+        public MicrosoftDynamicsCRMlist(string processfetchxml = default(string), bool? lockstatus = default(bool?), int? processedmembercount = default(int?), string stageid = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _owninguserValue = default(string), string description = default(string), bool? type = default(bool?), string _owningbusinessunitValue = default(string), bool? ignoreinactivelistmembers = default(bool?), string processid = default(string), int? membertype = default(int?), decimal? exchangerate = default(decimal?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string _modifiedonbehalfbyValue = default(string), int? createdfromcode = default(int?), string listid = default(string), string _owningteamValue = default(string), bool? donotsendonoptout = default(bool?), decimal? cost = default(decimal?), string purpose = default(string), int? importsequencenumber = default(int?), int? membercount = default(int?), int? statecode = default(int?), string _owneridValue = default(string), string _modifiedbyValue = default(string), string source = default(string), string _createdbyValue = default(string), string versionnumber = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), string listname = default(string), decimal? costBase = default(decimal?), string traversedpath = default(string), int? utcconversiontimezonecode = default(int?), string query = default(string), int? statuscode = default(int?), string _transactioncurrencyidValue = default(string), System.DateTimeOffset? lastusedon = default(System.DateTimeOffset?), IList<MicrosoftDynamicsCRMadoxioExternalcontact> adoxioListAdoxioExternalcontact = default(IList<MicrosoftDynamicsCRMadoxioExternalcontact>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> listSharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMcampaign> campaignlistAssociation = default(IList<MicrosoftDynamicsCRMcampaign>), IList<MicrosoftDynamicsCRMcampaignactivity> campaignactivitylistAssociation = default(IList<MicrosoftDynamicsCRMcampaignactivity>), IList<MicrosoftDynamicsCRMteam> listTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> listMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMannotation> listAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMconnection> listConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMprocesssession> listProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkoperation> listBulkOperations = default(IList<MicrosoftDynamicsCRMbulkoperation>), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMduplicaterecord> listDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMsyncerror> listSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMconnection> listConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMasyncoperation> listAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> listPrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMduplicaterecord> listDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMbulkdeletefailure> listBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMcontact> listcontactAssociation = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMlead> listleadAssociation = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMaccount> listaccountAssociation = default(IList<MicrosoftDynamicsCRMaccount>), IList<MicrosoftDynamicsCRMlistoperation> listListoperationListId = default(IList<MicrosoftDynamicsCRMlistoperation>))
         {
-            Description = description;
+            Processfetchxml = processfetchxml;
             Lockstatus = lockstatus;
             Processedmembercount = processedmembercount;
             Stageid = stageid;
             Overriddencreatedon = overriddencreatedon;
             this._owninguserValue = _owninguserValue;
+            Description = description;
+            Type = type;
             this._owningbusinessunitValue = _owningbusinessunitValue;
-            Exchangerate = exchangerate;
             Ignoreinactivelistmembers = ignoreinactivelistmembers;
+            Processid = processid;
             Membertype = membertype;
-            Listname = listname;
+            Exchangerate = exchangerate;
             Modifiedon = modifiedon;
-            this._modifiedbyValue = _modifiedbyValue;
-            Membercount = membercount;
-            Statuscode = statuscode;
-            Versionnumber = versionnumber;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            Processfetchxml = processfetchxml;
-            Listid = listid;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Createdfromcode = createdfromcode;
+            Listid = listid;
             this._owningteamValue = _owningteamValue;
             Donotsendonoptout = donotsendonoptout;
             Cost = cost;
             Purpose = purpose;
             Importsequencenumber = importsequencenumber;
+            Membercount = membercount;
             Statecode = statecode;
             this._owneridValue = _owneridValue;
-            Processid = processid;
+            this._modifiedbyValue = _modifiedbyValue;
             Source = source;
             this._createdbyValue = _createdbyValue;
-            Type = type;
+            Versionnumber = versionnumber;
             Createdon = createdon;
             Timezoneruleversionnumber = timezoneruleversionnumber;
+            Listname = listname;
             CostBase = costBase;
             Traversedpath = traversedpath;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             Query = query;
+            Statuscode = statuscode;
             this._transactioncurrencyidValue = _transactioncurrencyidValue;
             Lastusedon = lastusedon;
             AdoxioListAdoxioExternalcontact = adoxioListAdoxioExternalcontact;
@@ -110,8 +110,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "description")]
-        public string Description { get; set; }
+        [JsonProperty(PropertyName = "processfetchxml")]
+        public string Processfetchxml { get; set; }
 
         /// <summary>
         /// </summary>
@@ -140,13 +140,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
+        [JsonProperty(PropertyName = "description")]
+        public string Description { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "exchangerate")]
-        public decimal? Exchangerate { get; set; }
+        [JsonProperty(PropertyName = "type")]
+        public bool? Type { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -155,13 +160,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "processid")]
+        public string Processid { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "membertype")]
         public int? Membertype { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "listname")]
-        public string Listname { get; set; }
+        [JsonProperty(PropertyName = "exchangerate")]
+        public decimal? Exchangerate { get; set; }
 
         /// <summary>
         /// </summary>
@@ -170,38 +180,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "membercount")]
-        public int? Membercount { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "processfetchxml")]
-        public string Processfetchxml { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "listid")]
-        public string Listid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -212,6 +192,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "createdfromcode")]
         public int? Createdfromcode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "listid")]
+        public string Listid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -240,6 +225,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "membercount")]
+        public int? Membercount { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "statecode")]
         public int? Statecode { get; set; }
 
@@ -250,8 +240,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "processid")]
-        public string Processid { get; set; }
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -265,8 +255,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "type")]
-        public bool? Type { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -277,6 +267,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "timezoneruleversionnumber")]
         public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "listname")]
+        public string Listname { get; set; }
 
         /// <summary>
         /// </summary>
@@ -297,6 +292,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "query")]
         public string Query { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
 
         /// <summary>
         /// </summary>

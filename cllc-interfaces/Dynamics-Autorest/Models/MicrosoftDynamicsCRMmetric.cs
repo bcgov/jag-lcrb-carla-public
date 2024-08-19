@@ -27,18 +27,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// Initializes a new instance of the MicrosoftDynamicsCRMmetric class.
         /// </summary>
-        public MicrosoftDynamicsCRMmetric(System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), string _modifiedbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), bool? isstretchtracked = default(bool?), string _createdbyValue = default(string), int? statecode = default(int?), bool? isamount = default(bool?), string metricid = default(string), int? statuscode = default(int?), int? importsequencenumber = default(int?), int? amountdatatype = default(int?), string _createdonbehalfbyValue = default(string), string versionnumber = default(string), int? timezoneruleversionnumber = default(int?), string name = default(string), string _organizationidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string description = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMgoal> metricGoal = default(IList<MicrosoftDynamicsCRMgoal>), IList<MicrosoftDynamicsCRMrollupfield> metricRollupfield = default(IList<MicrosoftDynamicsCRMrollupfield>), IList<MicrosoftDynamicsCRMprocesssession> metricProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMasyncoperation> metricAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMsyncerror> metricSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>))
+        public MicrosoftDynamicsCRMmetric(System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string metricid = default(string), string _modifiedbyValue = default(string), int? statecode = default(int?), string _modifiedonbehalfbyValue = default(string), bool? isstretchtracked = default(bool?), string _createdbyValue = default(string), bool? isamount = default(bool?), int? statuscode = default(int?), int? importsequencenumber = default(int?), int? amountdatatype = default(int?), string _createdonbehalfbyValue = default(string), string versionnumber = default(string), int? timezoneruleversionnumber = default(int?), string name = default(string), int? utcconversiontimezonecode = default(int?), string _organizationidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string description = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMgoal> metricGoal = default(IList<MicrosoftDynamicsCRMgoal>), IList<MicrosoftDynamicsCRMrollupfield> metricRollupfield = default(IList<MicrosoftDynamicsCRMrollupfield>), IList<MicrosoftDynamicsCRMprocesssession> metricProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMasyncoperation> metricAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMsyncerror> metricSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>))
         {
             Modifiedon = modifiedon;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
+            Metricid = metricid;
             this._modifiedbyValue = _modifiedbyValue;
-            Overriddencreatedon = overriddencreatedon;
+            Statecode = statecode;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Isstretchtracked = isstretchtracked;
             this._createdbyValue = _createdbyValue;
-            Statecode = statecode;
             Isamount = isamount;
-            Metricid = metricid;
             Statuscode = statuscode;
             Importsequencenumber = importsequencenumber;
             Amountdatatype = amountdatatype;
@@ -46,9 +44,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Versionnumber = versionnumber;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             Name = name;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
             this._organizationidValue = _organizationidValue;
             Createdon = createdon;
             Description = description;
+            Overriddencreatedon = overriddencreatedon;
             Createdby = createdby;
             Createdonbehalfby = createdonbehalfby;
             Modifiedby = modifiedby;
@@ -74,8 +74,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
+        [JsonProperty(PropertyName = "metricid")]
+        public string Metricid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -84,8 +84,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -104,18 +104,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "isamount")]
         public bool? Isamount { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "metricid")]
-        public string Metricid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -154,6 +144,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
         public string _organizationidValue { get; set; }
 
@@ -166,6 +161,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>

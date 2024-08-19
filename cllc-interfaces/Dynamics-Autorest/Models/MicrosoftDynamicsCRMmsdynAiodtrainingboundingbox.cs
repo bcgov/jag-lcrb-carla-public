@@ -29,31 +29,31 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMmsdynAiodtrainingboundingbox class.
         /// </summary>
-        public MicrosoftDynamicsCRMmsdynAiodtrainingboundingbox(decimal? msdynTop = default(decimal?), string msdynName = default(string), string _modifiedonbehalfbyValue = default(string), string _owninguserValue = default(string), string msdynAiodtrainingboundingboxid = default(string), int? importsequencenumber = default(int?), int? statuscode = default(int?), string _createdbyValue = default(string), decimal? msdynWidth = default(decimal?), string _owningteamValue = default(string), string _modifiedbyValue = default(string), decimal? msdynLeft = default(decimal?), int? utcconversiontimezonecode = default(int?), int? statecode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _owningbusinessunitValue = default(string), decimal? msdynHeight = default(decimal?), int? timezoneruleversionnumber = default(int?), string versionnumber = default(string), string _msdynAiodtrainingimageidValue = default(string), string _owneridValue = default(string), string _msdynAiodlabelidValue = default(string), string _createdonbehalfbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> msdynAiodtrainingboundingboxSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> msdynAiodtrainingboundingboxDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> msdynAiodtrainingboundingboxDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> msdynAiodtrainingboundingboxAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> msdynAiodtrainingboundingboxMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> msdynAiodtrainingboundingboxProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> msdynAiodtrainingboundingboxBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> msdynAiodtrainingboundingboxPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMmsdynAiodlabel msdynAIOdLabelId = default(MicrosoftDynamicsCRMmsdynAiodlabel), MicrosoftDynamicsCRMmsdynAiodtrainingimage msdynAIOdTrainingImageId = default(MicrosoftDynamicsCRMmsdynAiodtrainingimage))
+        public MicrosoftDynamicsCRMmsdynAiodtrainingboundingbox(string msdynName = default(string), string _modifiedonbehalfbyValue = default(string), string _owninguserValue = default(string), string msdynAiodtrainingboundingboxid = default(string), string _msdynAiodtrainingimageidValue = default(string), int? importsequencenumber = default(int?), int? statuscode = default(int?), string _createdbyValue = default(string), string _owningteamValue = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), decimal? msdynLeft = default(decimal?), int? utcconversiontimezonecode = default(int?), int? statecode = default(int?), decimal? msdynTop = default(decimal?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _owningbusinessunitValue = default(string), decimal? msdynHeight = default(decimal?), string versionnumber = default(string), decimal? msdynWidth = default(decimal?), int? timezoneruleversionnumber = default(int?), string _owneridValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _msdynAiodlabelidValue = default(string), string _createdonbehalfbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> msdynAiodtrainingboundingboxSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> msdynAiodtrainingboundingboxDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> msdynAiodtrainingboundingboxDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> msdynAiodtrainingboundingboxAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> msdynAiodtrainingboundingboxMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> msdynAiodtrainingboundingboxProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> msdynAiodtrainingboundingboxBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> msdynAiodtrainingboundingboxPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMmsdynAiodlabel msdynAIOdLabelId = default(MicrosoftDynamicsCRMmsdynAiodlabel), MicrosoftDynamicsCRMmsdynAiodtrainingimage msdynAIOdTrainingImageId = default(MicrosoftDynamicsCRMmsdynAiodtrainingimage))
         {
-            MsdynTop = msdynTop;
             MsdynName = msdynName;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             this._owninguserValue = _owninguserValue;
             MsdynAiodtrainingboundingboxid = msdynAiodtrainingboundingboxid;
+            this._msdynAiodtrainingimageidValue = _msdynAiodtrainingimageidValue;
             Importsequencenumber = importsequencenumber;
             Statuscode = statuscode;
             this._createdbyValue = _createdbyValue;
-            MsdynWidth = msdynWidth;
             this._owningteamValue = _owningteamValue;
             this._modifiedbyValue = _modifiedbyValue;
+            Overriddencreatedon = overriddencreatedon;
             MsdynLeft = msdynLeft;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             Statecode = statecode;
-            Overriddencreatedon = overriddencreatedon;
+            MsdynTop = msdynTop;
             Modifiedon = modifiedon;
-            Createdon = createdon;
             this._owningbusinessunitValue = _owningbusinessunitValue;
             MsdynHeight = msdynHeight;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
             Versionnumber = versionnumber;
-            this._msdynAiodtrainingimageidValue = _msdynAiodtrainingimageidValue;
+            MsdynWidth = msdynWidth;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
             this._owneridValue = _owneridValue;
+            Createdon = createdon;
             this._msdynAiodlabelidValue = _msdynAiodlabelidValue;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Createdby = createdby;
@@ -84,11 +84,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_top")]
-        public decimal? MsdynTop { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "msdyn_name")]
         public string MsdynName { get; set; }
 
@@ -109,6 +104,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_msdyn_aiodtrainingimageid_value")]
+        public string _msdynAiodtrainingimageidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
@@ -124,11 +124,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_width")]
-        public decimal? MsdynWidth { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
         public string _owningteamValue { get; set; }
 
@@ -136,6 +131,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -154,18 +154,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+        [JsonProperty(PropertyName = "msdyn_top")]
+        public decimal? MsdynTop { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -179,23 +174,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
         public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_msdyn_aiodtrainingimageid_value")]
-        public string _msdynAiodtrainingimageidValue { get; set; }
+        [JsonProperty(PropertyName = "msdyn_width")]
+        public decimal? MsdynWidth { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
         public string _owneridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>

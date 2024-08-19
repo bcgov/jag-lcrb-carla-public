@@ -29,17 +29,17 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMattributeimageconfig class.
         /// </summary>
-        public MicrosoftDynamicsCRMattributeimageconfig(string versionnumber = default(string), string attributelogicalname = default(string), string componentidunique = default(string), bool? canstorefullimage = default(bool?), string parententitylogicalname = default(string), string attributeimageconfigid = default(string), int? componentstate = default(int?), string solutionid = default(string), bool? ismanaged = default(bool?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), IList<MicrosoftDynamicsCRMsyncerror> attributeimageconfigSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> attributeimageconfigAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> attributeimageconfigMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> attributeimageconfigBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> attributeimageconfigPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>))
+        public MicrosoftDynamicsCRMattributeimageconfig(string componentidunique = default(string), string attributelogicalname = default(string), string solutionid = default(string), int? componentstate = default(int?), bool? ismanaged = default(bool?), bool? canstorefullimage = default(bool?), string parententitylogicalname = default(string), string versionnumber = default(string), string attributeimageconfigid = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), IList<MicrosoftDynamicsCRMsyncerror> attributeimageconfigSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> attributeimageconfigAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> attributeimageconfigMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> attributeimageconfigBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> attributeimageconfigPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>))
         {
-            Versionnumber = versionnumber;
-            Attributelogicalname = attributelogicalname;
             Componentidunique = componentidunique;
+            Attributelogicalname = attributelogicalname;
+            Solutionid = solutionid;
+            Componentstate = componentstate;
+            Ismanaged = ismanaged;
             Canstorefullimage = canstorefullimage;
             Parententitylogicalname = parententitylogicalname;
+            Versionnumber = versionnumber;
             Attributeimageconfigid = attributeimageconfigid;
-            Componentstate = componentstate;
-            Solutionid = solutionid;
-            Ismanaged = ismanaged;
             Overwritetime = overwritetime;
             AttributeimageconfigSyncErrors = attributeimageconfigSyncErrors;
             AttributeimageconfigAsyncOperations = attributeimageconfigAsyncOperations;
@@ -56,8 +56,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "componentidunique")]
+        public string Componentidunique { get; set; }
 
         /// <summary>
         /// </summary>
@@ -66,8 +66,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "componentidunique")]
-        public string Componentidunique { get; set; }
+        [JsonProperty(PropertyName = "solutionid")]
+        public string Solutionid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "componentstate")]
+        public int? Componentstate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ismanaged")]
+        public bool? Ismanaged { get; set; }
 
         /// <summary>
         /// </summary>
@@ -81,23 +91,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "attributeimageconfigid")]
         public string Attributeimageconfigid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "componentstate")]
-        public int? Componentstate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "solutionid")]
-        public string Solutionid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ismanaged")]
-        public bool? Ismanaged { get; set; }
 
         /// <summary>
         /// </summary>

@@ -31,86 +31,86 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMincident
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMincident(int? adoxioPschecklistonsiteconsumption = default(int?), string adoxioMktrchecklistlicencenotes = default(string), int? adoxioRoutinechecklistvisitationrecords = default(int?), string adoxioRoutinechecklistcontractsfinancialsnotes = default(string), string adoxioChecklistendorsementsrequirementsnotes = default(string), string description = default(string), int? adoxioContraventionsadded = default(int?), string _createdonbehalfbyValue = default(string), int? adoxioRoutinechecklistbondingagreements = default(int?), string _contractdetailidValue = default(string), string adoxioSepchecklistliquorreceiptscomment = default(string), string adoxioRoutinechecklistnonliquorsaleitemsnotes = default(string), System.DateTimeOffset? responseby = default(System.DateTimeOffset?), int? adoxioPschecklistminorsidentified = default(int?), bool? routecase = default(bool?), int? adoxioSepchecklistliquorreceipts = default(int?), int? adoxioPschecklistentertainment = default(int?), string adoxioMapagentid1 = default(string), bool? firstresponsesent = default(bool?), int? adoxioRoutinechecklistminorsaspatrons = default(int?), string adoxioSepcheckliststaffconsumingliquorcomment = default(string), int? adoxioServicehourstuesdayopen = default(int?), int? adoxioSepchecklistpricelistreqs = default(int?), int? adoxioPschecklistunlawfulactivity = default(int?), string adoxioPschecklistentertainmentnotes = default(string), string _modifiedbyexternalpartyValue = default(string), int? adoxioChecklistsocialrespposterprovided = default(int?), string adoxioChecklistcontractmanufacturingreqsnotes = default(string), string adoxioPschecklistovercrowdingnotes = default(string), string _adoxioLicenceValue = default(string), string _adoxioEventlocationidValue = default(string), string adoxioRoutinechecklistminorsaspatronsnotes = default(string), string adoxioLcpnumber = default(string), string adoxioSepchecklistcommunitydisturbancecomment = default(string), string adoxioPschecklistunlawfulactivitynotes = default(string), int? adoxioRoutinecheckliststaffresponsibility = default(int?), int? adoxioServicehoursmondayopen = default(int?), int? adoxioRoutinechecklistphotostaken = default(int?), string adoxioRoutinechecklisteventcontractsnotes = default(string), string adoxioSepchecklistpermitcheckedcomment = default(string), string adoxioSepchecklisteventsignagecomment = default(string), string adoxioInspchecklistphototakennotes = default(string), int? adoxioChecklistworkerverification = default(int?), int? adoxioServicehourssaturdayopen = default(int?), bool? merged = default(bool?), string _contractidValue = default(string), int? adoxioRoutinecheckliststorageavailable = default(int?), bool? adoxioCreatefollowup = default(bool?), int? adoxioPschecklistoutsideopshours = default(int?), string adoxioSepchecklistmarketauthpostednotes = default(string), int? adoxioSepchecklistaccesscontrolled = default(int?), string adoxioSepchecklisteventhourscomment = default(string), int? adoxioPschecklistproductstoragesecured = default(int?), string adoxioChecklistliquorstoragenotes = default(string), string adoxioRoutinechecklistservingitrightnanotes = default(string), bool? blockedprofile = default(bool?), string _adoxioReactivatebyValue = default(string), string _modifiedonbehalfbyValue = default(string), string adoxioExternalinvestigationfilenumber = default(string), bool? adoxioRoutinechecklisttakehome = default(bool?), int? adoxioServicehourssundayclose = default(int?), int? adoxioSepchecklistsecuritystaff = default(int?), int? adoxioMapchecklistnumberpatrons = default(int?), int? adoxioChecklistregulatoryapprovalsreceived = default(int?), int? adoxioChecklistalcoholsensematerials = default(int?), int? adoxioInspectionoccurrence = default(int?), int? adoxioServicehoursthursdayclose = default(int?), string adoxioChecklistcustomerdeclarationsnotes = default(string), int? adoxioInspchecklisttempexpansion = default(int?), string _adoxioSpecialeventidValue = default(string), int? adoxioMktrchecklistcerequirementsreviewed = default(int?), string adoxioNoeachoiceprocedure = default(string), string adoxioChecklistdiscusscateringrequirementsnotes = default(string), int? adoxioSepchecklistsirses = default(int?), int? adoxioSepchecklistmarketauthposted = default(int?), int? adoxioSepchecklistfoodrequirements = default(int?), string _adoxioRegionalmanagerValue = default(string), int? adoxioInspectionviolationticketsissued = default(int?), string adoxioRoutinechecklistcontactinfochangenotes = default(string), string _resolvebykpiidValue = default(string), int? contractservicelevelcode = default(int?), int? numberofchildincidents = default(int?), int? adoxioSepchecklistapplicantonsite = default(int?), string adoxioRoutinechecklistminprodamountsnotes = default(string), string adoxioChecklistsocialrespposterprovidednotes = default(string), string adoxioPrimarybusinesspurposes = default(string), string adoxioRoutinechecklistincidentlognotes = default(string), int? servicestage = default(int?), int? adoxioPschecklistdrinksizespricing = default(int?), string _parentcaseidValue = default(string), string adoxioInspchecklistsignageadvertisingnotes = default(string), string _contactidValue = default(string), string _accountidValue = default(string), System.DateTimeOffset? adoxioDatein = default(System.DateTimeOffset?), int? adoxioRoutinechecklistminorsaspatronsna = default(int?), string _createdbyValue = default(string), string _firstresponsebykpiidValue = default(string), int? adoxioSepchecklistmaxservingsizes = default(int?), int? statuscode = default(int?), int? adoxioRoutinechecklistsamplesizes = default(int?), int? adoxioRoutinechecklistpicnicendorsementreqs = default(int?), bool? adoxioIsremotecommunity = default(bool?), string _adoxioEstablishmentValue = default(string), string adoxioSepchecklistfoodrequirementscomment = default(string), System.DateTimeOffset? adoxioNoeasentdate = default(System.DateTimeOffset?), string _adoxioAreaValue = default(string), string _adoxioProjectValue = default(string), int? utcconversiontimezonecode = default(int?), string adoxioRoutinecheckliststorageavailablenotes = default(string), string adoxioRoutinechecklistcateringrecordsnotes = default(string), string adoxioRoutinechecklistvisitationrecordsnotes = default(string), int? adoxioSepchecklistovercrowding = default(int?), string _adoxioLicencesubcategoryidValue = default(string), string adoxioInspchecklistnootherbusinessnotes = default(string), int? adoxioChecklistservingitright = default(int?), int? adoxioChecklistsellingitright = default(int?), string productserialnumber = default(string), string adoxioRoutinechecklistsocialrespmaterialnanotes = default(string), int? caseorigincode = default(int?), string _entitlementidValue = default(string), string adoxioRoutinecheckliststaffresponsibilitynotes = default(string), int? adoxioChecklistequipmentreqclassification = default(int?), int? adoxioChecklistprocessstepsbyclassification = default(int?), string adoxioMapchecklistnumberofpatronsnotes = default(string), string adoxioPschecklistminorsidentifiednotes = default(string), string _masteridValue = default(string), string adoxioRoutinechecklistcontractmanufacturingnote = default(string), bool? adoxioIscontraventionfollowup = default(bool?), string _adoxioEventidValue = default(string), int? adoxioRoutinechecklistcrtcsocialmedia = default(int?), string adoxioInspchecklistproductnoselfservicenotes = default(string), bool? adoxioCreateinspection = default(bool?), System.DateTimeOffset? adoxioReactivationdate = default(System.DateTimeOffset?), int? adoxioPschecklistidchecking = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), long? entityimageTimestamp = default(long?), bool? followuptaskcreated = default(bool?), int? adoxioChecklistsufficientequipandpersons = default(int?), string adoxioChecklistservingitrightnotes = default(string), string adoxioSepchecklistsamplesizereqsnotes = default(string), string adoxioChecklistequipmentchecksnotes = default(string), string adoxioSepchecklistsiteplancomment = default(string), string adoxioInspchecklistproductnotvisibleroutinenote = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioInspectioncompletedate = default(System.DateTimeOffset?), string adoxioRoutinechecklistingredientrecordsnotes = default(string), int? importsequencenumber = default(int?), string adoxioDistilleryequipmentlist = default(string), int? incidentstagecode = default(int?), string adoxioMapagentid2 = default(string), int? adoxioInspchecklistsocialrespmaterialroutine = default(int?), int? adoxioRoutinechecklistliquordisplays = default(int?), int? onholdtime = default(int?), int? adoxioIsmarketer = default(int?), int? adoxioPschecklistotherobservations = default(int?), byte[] entityimage = default(byte[]), string adoxioMfgcopackerequipmentlist = default(string), string adoxioRoutinechecklistcustcompletestasksnotes = default(string), string adoxioEstablishmentaddress2 = default(string), string adoxioPschecklistidcheckingnotes = default(string), int? adoxioRoutinechecklistsalesrecords = default(int?), string _adoxioLicenseeValue = default(string), string _existingcaseValue = default(string), int? adoxioSepchecklistsiteplan = default(int?), string adoxioPschecklistliquorregisternotes = default(string), string adoxioInspchecklistworkerqualificationnotes = default(string), int? adoxioRoutinechecklistcustcompletestasks = default(int?), System.DateTimeOffset? escalatedon = default(System.DateTimeOffset?), int? adoxioMktrchecklistonsiterequirementsreviewed = default(int?), string adoxioInspchecklisttempexpansionnotes = default(string), string adoxioInspchecklistfloorplanroutinenotes = default(string), int? prioritycode = default(int?), int? adoxioPschecklisttempexpansion = default(int?), int? timezoneruleversionnumber = default(int?), string adoxioNoeanarrative = default(string), string adoxioComments = default(string), int? adoxioRoutinechecklisteventcontracts = default(int?), string adoxioMapchecklistagentidnotes = default(string), string _subjectidValue = default(string), string emailaddress = default(string), string adoxioRoutinechecklistsamplerecordsnotes = default(string), int? adoxioRoutinechecklistservingitrightna = default(int?), string adoxioRoutinechecklistbottledprodonsitenotes = default(string), string adoxioChecklistagentiddiscussednotes = default(string), string adoxioRoutinechecklistliquordisplaysnotes = default(string), int? adoxioInspectionoutcome = default(int?), int? resolvebyslastatus = default(int?), int? adoxioChecklistproductnotvisible = default(int?), string adoxioAhchecklistliquorclearedpatronsnotes = default(string), int? adoxioSepchecklistpermitteeonsite = default(int?), string adoxioChecklistsufficientequipandpersonsnotes = default(string), string adoxioImportid = default(string), int? adoxioServicehourssaturdayclose = default(int?), string adoxioInspectioncompleteddate = default(string), string adoxioExternalid = default(string), string adoxioSepchecklistsirsescomment = default(string), string _createdbyexternalpartyValue = default(string), string adoxioChecklistminorsasemployeesnotes = default(string), int? adoxioRoutinechecklistsocialrespmaterialna = default(int?), int? adoxioAhchecklistpatronsclearedestablishment = default(int?), string adoxioRoutinechecklistloungeseareqsnotes = default(string), int? adoxioChecklistproductnoselfservice = default(int?), int? adoxioChecklistsignandlogomeetsrequirements = default(int?), int? adoxioInspchecklistadvertisingroutine = default(int?), string adoxioInspchecklistsecurityoperationalnotes = default(string), int? adoxioRoutinechecklistauthorizationletters = default(int?), string _adoxioInvestigationidValue = default(string), string adoxioPschecklistservingitrightnotes = default(string), int? adoxioPschecklisttakeawayordeliveryonly = default(int?), int? adoxioPschecklistcontrarytolicence = default(int?), string adoxioNoeasection1penaltychoice = default(string), bool? adoxioImportcompleted = default(bool?), int? adoxioRoutinechecklistcateringrecords = default(int?), string adoxioRoutinechecklistcrtcsocialmedianotes = default(string), int? adoxioMktrchecklistvalidlettersemployproof = default(int?), string adoxioChecklistsocialresponsibilitynotes = default(string), string stageid = default(string), string adoxioChecklistbondedwarehousediscussednotes = default(string), System.DateTimeOffset? adoxioDateout = default(System.DateTimeOffset?), int? adoxioInspectiontimeoutmm = default(int?), string adoxioChecklistequipmentreqclassificationnotes = default(string), int? adoxioRoutinechecklistloungeseareqs = default(int?), int? adoxioAhchecklistliquorsaleoutsidehours = default(int?), string adoxioInspchecklistaccordancewithaipletternotes = default(string), string adoxioRoutinechecklistcustdeclreceiptsnotes = default(string), int? adoxioRoutinechecklistcarboyscompliant = default(int?), string adoxioRoutinechecklistliquorregisternotes = default(string), string _adoxioRegionValue = default(string), string adoxioContraventionsummary = default(string), int? adoxioChecklistsignage = default(int?), int? adoxioInspchecklisttakeawayordeliveryonly = default(int?), string adoxioChecklistmanufacturingstorageareanotes = default(string), int? adoxioPschecklistcommunitydisturbance = default(int?), int? adoxioMktrchecklistrequirementsreviewed = default(int?), int? adoxioChecklisttakeandsendphotos = default(int?), string adoxioRoutinechecklistminorsasemployeesnotes = default(string), bool? adoxioServicehoursstandardhours = default(bool?), decimal? sentimentvalue = default(decimal?), string adoxioSepchecklistsecurityplancomment = default(string), string _primarycontactidValue = default(string), string adoxioRoutinechecklistbondingagreementsnotes = default(string), int? adoxioAhchecklistliquorclearedpatrons = default(int?), int? adoxioSepchecklistpermitchecked = default(int?), int? adoxioRoutinechecklistsocialrespmaterial = default(int?), string adoxioIsremotecomments = default(string), int? adoxioSepchecklistdisorderlyunlawfulactivity = default(int?), string adoxioEstablishmentpostalcode = default(string), int? adoxioPiecesofidchecked = default(int?), int? adoxioSepchecklistintoxication = default(int?), string versionnumber = default(string), string adoxioChecklistsellingitrightnotes = default(string), int? customersatisfactioncode = default(int?), string adoxioRoutinechecklistsamplesrecordsnotes = default(string), int? adoxioAlcoholsensematerial = default(int?), string adoxioChecklistbondedwarehousenanotes = default(string), int? adoxioSepchecklistunauthorizedgames = default(int?), bool? isescalated = default(bool?), string adoxioSepchecklistovercrowdingcomment = default(string), string adoxioMapchecklistmapinspectiontypenotes = default(string), int? adoxioSepchecklistliquorregister = default(int?), string adoxioRoutinechecklistsamplesizesnotes = default(string), bool? adoxioSendcompliancemeetingnotification = default(bool?), bool? adoxioIsremote3rdpartycontacted = default(bool?), int? adoxioRoutinechecklistequipmentchecks = default(int?), int? severitycode = default(int?), string adoxioSepchecklistapplicantonsitecomment = default(string), string _modifiedbyValue = default(string), string adoxioWineryequipmentlist = default(string), string adoxioInspchecklistdepictsaipfloorplannotes = default(string), string adoxioRoutinechecklistalcoholsensematerialnotes = default(string), int? adoxioPschecklistservingitright = default(int?), string processid = default(string), bool? activitiescomplete = default(bool?), int? adoxioRoutinechecklistliquorstorage = default(int?), string adoxioRoutinechecklistauthorizationlettersnotes = default(string), int? adoxioMktrchecklistadvertisingreviewed = default(int?), string _customeridValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? adoxioParentinspectiontype = default(int?), string adoxioChecklistfloorplannanotes = default(string), int? adoxioChecklistliquorstorage = default(int?), string adoxioBreweryequipmentlist = default(string), bool? isdecrementing = default(bool?), int? adoxioChecklistdepictsaipfloorplan = default(int?), int? adoxioChecklistcustomerdeclarations = default(int?), bool? adoxioIsremotesendletter = default(bool?), int? adoxioSepchecklistcommunitydisturbance = default(int?), int? adoxioAllactivitiesconcluded = default(int?), string adoxioPschecklistcommunitydisturbancenotes = default(string), System.DateTimeOffset? followupby = default(System.DateTimeOffset?), string adoxioInspchecklistproductnotvisiblenotes = default(string), string adoxioInspchecklistcannabisregisternotes = default(string), int? adoxioChecklistaccordancewithaipletter = default(int?), string adoxioPschecklistsecuritycamsoperatingnotes = default(string), string _adoxioEnforcementactionidValue = default(string), int? adoxioRoutinechecklistnonliquorsaleitems = default(int?), int? adoxioPschecklistsecuritycamsoperating = default(int?), int? adoxioRoutinechecklistcontractmanufacturing = default(int?), int? adoxioInspchecklistworkersverifiedroutine = default(int?), string adoxioChecklistseatingconfirmednotes = default(string), string _owningbusinessunitValue = default(string), bool? customercontacted = default(bool?), string adoxioRoutinechecklistsalesrecordsnotes = default(string), string _slaidValue = default(string), int? adoxioSepchecklisteventhours = default(int?), int? adoxioRoutinechecklistpromotionvalidity = default(int?), int? adoxioChecklistminorspatrons = default(int?), string adoxioAhchecklistpatronsclearestablishmentnotes = default(string), System.DateTimeOffset? adoxioActualinspectiondate = default(System.DateTimeOffset?), int? adoxioLicencepostedroutine = default(int?), int? adoxioInspchecklistsecrequirementsroutine = default(int?), string _owneridValue = default(string), string adoxioSepchecklistsecuritystaffcomment = default(string), string _adoxioLicencetypeidValue = default(string), string adoxioRoutinechecklistpicnicendorsementreqsnote = default(string), string adoxioRoutinechecklistpromotionvaliditynotes = default(string), System.DateTimeOffset? adoxioInspectionactivitiesconcludeddate = default(System.DateTimeOffset?), int? adoxioChecklistdiscusstermsconditions = default(int?), bool? adoxioSendenoticenotification = default(bool?), string adoxioRoutinechecklistsocialrespmaterialnotes = default(string), int? adoxioRoutinechecklistincidentlog = default(int?), string adoxioChecklistsafetysecuritynotes = default(string), string entityimageid = default(string), string _owningteamValue = default(string), int? adoxioChecklistnootherbusinessassociated = default(int?), string adoxioRoutinechecklistsellingitrightnotes = default(string), int? adoxioRoutinechecklistliquorpricelist = default(int?), string adoxioRoutinechecklistphotostakennotes = default(string), string adoxioChecklistprocessstepsbyclassificationnote = default(string), int? adoxioInspectiontype = default(int?), int? adoxioSepcheckliststaffconsumingliquor = default(int?), string adoxioSepchecklistunauthorizedgamescomment = default(string), int? adoxioInspectionservingitright = default(int?), string adoxioRoutinechecklisttakehomenotes = default(string), int? adoxioChecklistsocialresponsibility = default(int?), string adoxioSepchecklistliquorregistercomment = default(string), string adoxioRlrsprimarybusinesspurposes = default(string), int? adoxioChecklistdiscusscateringrequirements = default(int?), string adoxioDuedatechangereason = default(string), int? adoxioRoutinechecklistcustdeclreceipts = default(int?), int? adoxioChecklistbondedwarehousediscussed = default(int?), int? adoxioInspchecklistfloorplanroutine = default(int?), System.DateTimeOffset? lastonholdtime = default(System.DateTimeOffset?), string _adoxioParentinspectionidValue = default(string), string adoxioEstablishmentaddress = default(string), System.DateTimeOffset? adoxioRemotecommunitylettersentdate = default(System.DateTimeOffset?), string adoxioSepchecklistminorspresentcomment = default(string), string adoxioRoutinechecklistservingitrightnotes = default(string), System.DateTimeOffset? adoxioInspectionduedate = default(System.DateTimeOffset?), int? adoxioSepchecklistliquorservice = default(int?), string adoxioSepchecklistdisorderunlawactivitycomment = default(string), int? adoxioRoutinechecklistcontactinfochange = default(int?), string adoxioPschecklisttempexpansionnotes = default(string), string _owninguserValue = default(string), int? adoxioInspchecklistfollowupinspectionrequired = default(int?), int? messagetypecode = default(int?), int? adoxioPschecklistliquorregister = default(int?), int? adoxioPackagingsealed = default(int?), int? casetypecode = default(int?), string adoxioChecklistadvertisingnotes = default(string), string adoxioPschecklistotherobservationsnotes = default(string), int? adoxioChecklistingredientsrecords = default(int?), int? adoxioMapchecklistmapinspectiontype = default(int?), string entityimageUrl = default(string), int? actualserviceunits = default(int?), int? adoxioChecklistfloorplanna = default(int?), int? adoxioChecklistmanufacturingstoragearea = default(int?), int? adoxioInspectiontimeouthh = default(int?), string incidentid = default(string), int? adoxioPschecklistincidentlogreviewed = default(int?), int? adoxioRoutinechecklistonsiteendorsementreqs = default(int?), string title = default(string), int? billedserviceunits = default(int?), string adoxioRoutinechecklistliquorpricelistnotes = default(string), int? adoxioServicehourssundayopen = default(int?), string adoxioPschecklistunlawfulcannabisnotes = default(string), string traversedpath = default(string), int? adoxioChecklistcontractmanufacturingreqs = default(int?), int? adoxioServicehourswednesdayclose = default(int?), string adoxioChecklistdiscusstermsconditionsnotes = default(string), string adoxioRoutinechecklistcarboyscompliantnotes = default(string), string adoxioSepchecklistaccesscontrolledcomment = default(string), int? adoxioInspchecklistpackagingroutine = default(int?), int? adoxioRoutinechecklistingredientrecords = default(int?), string adoxioSepchecklistintoxicationcomment = default(string), int? adoxioEmployeesconsumingliquor = default(int?), string adoxioPschecklistliquorservicenotes = default(string), string adoxioChecklistworkerverificationnotes = default(string), string _slainvokedidValue = default(string), int? adoxioChecklistphysicalsecurityoperating = default(int?), int? adoxioRoutinechecklistpricingsizing = default(int?), string adoxioInspchecklistphysicalsecuritynotes = default(string), int? adoxioRoutinechecklistidentification = default(int?), string _socialprofileidValue = default(string), int? adoxioChecklistbondedwarehousena = default(int?), System.DateTimeOffset? adoxioCompliancemeetingdate = default(System.DateTimeOffset?), int? adoxioPschecklistcovertinspectiontype = default(int?), int? adoxioRoutinechecklistservingitright = default(int?), int? adoxioChecklistadvertising = default(int?), string _adoxioComplaintidValue = default(string), string adoxioRoutinechecklistidrequirementsnotes = default(string), string adoxioRoutinechecklistpricingsizingnotes = default(string), string adoxioRoutinechecklistminorsaspatronsnanotes = default(string), int? adoxioChecklistminorsasemployees = default(int?), System.DateTimeOffset? adoxioInspectiondate = default(System.DateTimeOffset?), bool? checkemail = default(bool?), bool? decremententitlementterm = default(bool?), int? adoxioRoutinechecklistliquorregister = default(int?), string adoxioChecklistphotostakennanotes = default(string), decimal? exchangerate = default(decimal?), int? adoxioPschecklistunlawfulcannabis = default(int?), int? adoxioRoutinechecklistalcoholsensematerial = default(int?), int? adoxioInspchecklistsmelljarsroutine = default(int?), int? adoxioChecklistphotostakenna = default(int?), string adoxioSepchecklistmarketqualifiesnotes = default(string), string _adoxioApplicationValue = default(string), string ticketnumber = default(string), string adoxioMapchecklistpiecesofidcheckednotes = default(string), string adoxioPschecklistcontrarytolicencenotes = default(string), string adoxioChecklistdiscussroutineinspectionsnotes = default(string), string adoxioChecklistingredientsrecordsnotes = default(string), string adoxioInspchecklistpackagingsealednotes = default(string), int? statecode = default(int?), string adoxioExternalinvestigationjobnumber = default(string), string _adoxioApplicationtypeidValue = default(string), int? adoxioMktrchecklistlicence = default(int?), int? adoxioInspchecklistproductnotvisibleroutine = default(int?), string adoxioRoutinechecklistcontactedpolicenotes = default(string), int? firstresponseslastatus = default(int?), string adoxioPschecklistonsiteconsumptionnotes = default(string), string adoxioPschecklistopenproductnotes = default(string), int? adoxioSepchecklisteventsignage = default(int?), string adoxioSepchecklistliquorservicecomment = default(string), string adoxioRoutinechecklistequipmentchecksnotes = default(string), string adoxioPschecklistincidentlogreviewednotes = default(string), int? adoxioMktrchecklistpromotionsreviewed = default(int?), string adoxioChecklistsignagenotes = default(string), string adoxioInspchecklistsmelljarsnotes = default(string), string adoxioInspchecklisttakeawayordeliveryonlynotes = default(string), string adoxioPschecklistproductstoragesecurednotes = default(string), System.DateTimeOffset? resolveby = default(System.DateTimeOffset?), int? adoxioSepchecklistminorspresent = default(int?), int? adoxioChecklistequipmentchecks = default(int?), string adoxioSepchecklistpermitteeonsitenotes = default(string), string adoxioRoutinechecklisteducationaltasksnotes = default(string), int? adoxioPschecklistworkerreviewed = default(int?), string _adoxioPmuareaidValue = default(string), int? adoxioChecklistsafetysecurity = default(int?), int? adoxioSepchecklistmarketqualifies = default(int?), int? adoxioChecklistendorsementsrequirements = default(int?), int? adoxioServicehoursfridayclose = default(int?), string adoxioChecklistregulatoryapprovalsreceivednotes = default(string), int? adoxioPschecklistliquorservice = default(int?), string adoxioChecklistalcoholsensematerialsnotes = default(string), int? adoxioInspectionsminors = default(int?), int? adoxioChecklistagentiddiscussed = default(int?), int? adoxioRoutinechecklistbottledprodonsite = default(int?), string adoxioChecklistminorsaspatronsnotes = default(string), int? adoxioPschecklistovercrowding = default(int?), int? adoxioRoutinechecklistsamplerecords = default(int?), string adoxioEstablishmentcity = default(string), int? adoxioInspchecklistcannabisregisterroutine = default(int?), int? adoxioChecklistdiscussroutineinspections = default(int?), int? adoxioRoutinechecklistsamplesrecords = default(int?), int? adoxioPschecklistopenproduct = default(int?), int? adoxioRoutinechecklistcontactedpolice = default(int?), int? adoxioInspectiontimeinhh = default(int?), int? adoxioRoutinechecklistminprodamounts = default(int?), string adoxioInspchecklistsignmeetsrequirementsnotes = default(string), string adoxioRoutinechecklistliquorstoragenotes = default(string), string _transactioncurrencyidValue = default(string), decimal? influencescore = default(decimal?), int? adoxioRoutinechecklistcontractsfinancials = default(int?), int? adoxioSepchecklistsamplesizereqs = default(int?), int? adoxioMinorsserved = default(int?), string adoxioSepchecklistmaxservingsizescomment = default(string), string adoxioMapchecklistminorservednotes = default(string), int? adoxioInspectiontimeinmm = default(int?), string adoxioPschecklistintoxicationidentifiednotes = default(string), string _productidValue = default(string), int? adoxioRoutinechecklistsellingitright = default(int?), int? adoxioServicehoursmondayclose = default(int?), int? adoxioServicehourstuesdayclose = default(int?), string adoxioInspchecklistlicencepostednotes = default(string), int? adoxioRoutinechecklisteducationaltasks = default(int?), int? adoxioSepchecklistsecurityplan = default(int?), int? adoxioRoutinechecklistidrequirements = default(int?), string adoxioAhchecklistliquorsaleoutsidehoursnotes = default(string), string adoxioRoutinechecklistonsiteendorsementreqsnote = default(string), string adoxioRoutinechecklistidentificationnotes = default(string), string adoxioRmreactivationnotes = default(string), int? adoxioMapchecklistminorserved = default(int?), string adoxioPschecklistoutsideopshoursnotes = default(string), string adoxioPschecklistworkerreviewednotes = default(string), string _kbarticleidValue = default(string), string adoxioPschecklistdrinksizespricingnotes = default(string), int? adoxioServicehoursfridayopen = default(int?), int? adoxioChecklistseatingconfirmed = default(int?), int? adoxioServicehoursthursdayopen = default(int?), int? adoxioRoutinechecklistminorsasemployees = default(int?), int? adoxioMapchecklistpiecesofidchecked = default(int?), int? adoxioPschecklistintoxicationidentified = default(int?), int? adoxioServicehourswednesdayopen = default(int?), string adoxioInspchecklistsocialrespmaterialnotes = default(string), string adoxioSepchecklistpricelistreqsnotes = default(string), string adoxioMapchecklistmapviolationticketsissued = default(string), string adoxioPschecklisttakeawayordeliverynotes = default(string), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> incidentAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> incidentSharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), MicrosoftDynamicsCRMaccount adoxioLicensee = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMadoxioApplication adoxioApplication = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioEstablishment adoxioEstablishment = default(MicrosoftDynamicsCRMadoxioEstablishment), MicrosoftDynamicsCRMadoxioLicences adoxioLicence = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioRegion adoxioRegion = default(MicrosoftDynamicsCRMadoxioRegion), MicrosoftDynamicsCRMadoxioArea adoxioArea = default(MicrosoftDynamicsCRMadoxioArea), IList<MicrosoftDynamicsCRMadoxioLicencetype> adoxioIncidentAdoxioLicencetype = default(IList<MicrosoftDynamicsCRMadoxioLicencetype>), MicrosoftDynamicsCRMincident adoxioParentInspectionId = default(MicrosoftDynamicsCRMincident), IList<MicrosoftDynamicsCRMincident> adoxioInspectionInspections = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMsystemuser> adoxioInspectionInspectors = default(IList<MicrosoftDynamicsCRMsystemuser>), MicrosoftDynamicsCRMsystemuser adoxioRegionalManager = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMadoxioDocument> adoxioInspectionDocuments = default(IList<MicrosoftDynamicsCRMadoxioDocument>), IList<MicrosoftDynamicsCRMadoxioContravention> adoxioIncidentAdoxioContravention = default(IList<MicrosoftDynamicsCRMadoxioContravention>), MicrosoftDynamicsCRMadoxioComplaint adoxioComplaintId = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioComplianceinvestigation adoxioInvestigationId = default(MicrosoftDynamicsCRMadoxioComplianceinvestigation), IList<MicrosoftDynamicsCRMadoxioInvestigationactivity> adoxioInspectionInvestigationactivities = default(IList<MicrosoftDynamicsCRMadoxioInvestigationactivity>), IList<MicrosoftDynamicsCRMadoxioCompliancemeeting> adoxioInspectionCompliancemeetings = default(IList<MicrosoftDynamicsCRMadoxioCompliancemeeting>), MicrosoftDynamicsCRMsystemuser adoxioReactivateBy = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMadoxioInspectionreactivationhistory> adoxioIncidentAdoxioInspectionreactivationhistoryInspection = default(IList<MicrosoftDynamicsCRMadoxioInspectionreactivationhistory>), MicrosoftDynamicsCRMadoxioApplicationtype adoxioApplicationTypeId = default(MicrosoftDynamicsCRMadoxioApplicationtype), MicrosoftDynamicsCRMadoxioLicencetype adoxioLicenceTypeId = default(MicrosoftDynamicsCRMadoxioLicencetype), MicrosoftDynamicsCRMadoxioEvent adoxioEventId = default(MicrosoftDynamicsCRMadoxioEvent), IList<MicrosoftDynamicsCRMadoxioRmreview> adoxioIncidentAdoxioRmreviewInspection = default(IList<MicrosoftDynamicsCRMadoxioRmreview>), MicrosoftDynamicsCRMadoxioEnforcementaction adoxioEnforcementActionId = default(MicrosoftDynamicsCRMadoxioEnforcementaction), MicrosoftDynamicsCRMadoxioLicencesubcategory adoxioLicenceSubCategoryId = default(MicrosoftDynamicsCRMadoxioLicencesubcategory), IList<MicrosoftDynamicsCRMadoxioHoursofservice> adoxioInspectionHoursofservice = default(IList<MicrosoftDynamicsCRMadoxioHoursofservice>), MicrosoftDynamicsCRMadoxioPmuarea adoxioPMUAreaId = default(MicrosoftDynamicsCRMadoxioPmuarea), IList<MicrosoftDynamicsCRMadoxioEnforcementaction> adoxioIncidentAdoxioEnforcementactionInspection = default(IList<MicrosoftDynamicsCRMadoxioEnforcementaction>), MicrosoftDynamicsCRMadoxioSpecialevent adoxioSpecialEventId = default(MicrosoftDynamicsCRMadoxioSpecialevent), IList<MicrosoftDynamicsCRMadoxioRelatedparty> adoxioInspectionRelatedparties = default(IList<MicrosoftDynamicsCRMadoxioRelatedparty>), IList<MicrosoftDynamicsCRMadoxioAdditionalinspector> adoxioInspectionAdditionalinspectors = default(IList<MicrosoftDynamicsCRMadoxioAdditionalinspector>), MicrosoftDynamicsCRMadoxioSpecialeventlocation adoxioEventLocationId = default(MicrosoftDynamicsCRMadoxioSpecialeventlocation), MicrosoftDynamicsCRMadoxioCeproject adoxioProject = default(MicrosoftDynamicsCRMadoxioCeproject), MicrosoftDynamicsCRMincident masterid = default(MicrosoftDynamicsCRMincident), IList<MicrosoftDynamicsCRMincident> incidentMasterIncident = default(IList<MicrosoftDynamicsCRMincident>), MicrosoftDynamicsCRMincident parentcaseid = default(MicrosoftDynamicsCRMincident), IList<MicrosoftDynamicsCRMincident> incidentParentIncident = default(IList<MicrosoftDynamicsCRMincident>), MicrosoftDynamicsCRMincident existingcase = default(MicrosoftDynamicsCRMincident), IList<MicrosoftDynamicsCRMincident> incidentExistingcase = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMpostregarding> incidentPostRegardings = default(IList<MicrosoftDynamicsCRMpostregarding>), IList<MicrosoftDynamicsCRMpostfollow> incidentPostFollows = default(IList<MicrosoftDynamicsCRMpostfollow>), IList<MicrosoftDynamicsCRMteam> incidentTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> incidentMailboxTrackingFolder = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMlead> originatingCaseLead = default(IList<MicrosoftDynamicsCRMlead>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMactivityparty> incidentActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMsla slainvokedidSla = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMsocialactivity> incidentSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), MicrosoftDynamicsCRMslakpiinstance firstresponsebykpiid = default(MicrosoftDynamicsCRMslakpiinstance), MicrosoftDynamicsCRMsla slaidSla = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMproduct productid = default(MicrosoftDynamicsCRMproduct), IList<MicrosoftDynamicsCRMslakpiinstance> slakpiinstanceIncident = default(IList<MicrosoftDynamicsCRMslakpiinstance>), IList<MicrosoftDynamicsCRMactioncard> incidentActioncard = default(IList<MicrosoftDynamicsCRMactioncard>), IList<MicrosoftDynamicsCRMappointment> incidentAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMconnection> incidentConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMserviceappointment> incidentServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMcontractdetail contractdetailid = default(MicrosoftDynamicsCRMcontractdetail), IList<MicrosoftDynamicsCRMqueueitem> incidentQueueItem = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMphonetocaseprocess> incidentPhonetocaseprocess = default(IList<MicrosoftDynamicsCRMphonetocaseprocess>), IList<MicrosoftDynamicsCRMemail> incidentEmails = default(IList<MicrosoftDynamicsCRMemail>), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMasyncoperation> incidentAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMduplicaterecord> incidentDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMprocesssession> incidentProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMphonecall> incidentPhonecalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMconnection> incidentConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMcontact customeridContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMsubject subjectid = default(MicrosoftDynamicsCRMsubject), MicrosoftDynamicsCRMentitlement entitlementid = default(MicrosoftDynamicsCRMentitlement), IList<MicrosoftDynamicsCRMannotation> incidentAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> incidentRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), MicrosoftDynamicsCRMsocialprofile socialprofileid = default(MicrosoftDynamicsCRMsocialprofile), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMactivitypointer> incidentActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMbulkdeletefailure> incidentBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMaccount customeridAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMslakpiinstance resolvebykpiid = default(MicrosoftDynamicsCRMslakpiinstance), MicrosoftDynamicsCRMcontact primarycontactid = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMcontact responsiblecontactid = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), IList<MicrosoftDynamicsCRMletter> incidentLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMsyncerror> incidentSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> incidentPrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMfax> incidentFaxes = default(IList<MicrosoftDynamicsCRMfax>), MicrosoftDynamicsCRMcontract contractid = default(MicrosoftDynamicsCRMcontract), IList<MicrosoftDynamicsCRMknowledgearticleincident> knowledgearticleIncidents = default(IList<MicrosoftDynamicsCRMknowledgearticleincident>), IList<MicrosoftDynamicsCRMduplicaterecord> incidentDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMtask> incidentTasks = default(IList<MicrosoftDynamicsCRMtask>), MicrosoftDynamicsCRMkbarticle kbarticleid = default(MicrosoftDynamicsCRMkbarticle), IList<MicrosoftDynamicsCRMopportunityclose> incidentOpportunityCloses = default(IList<MicrosoftDynamicsCRMopportunityclose>), IList<MicrosoftDynamicsCRMorderclose> incidentOrderCloses = default(IList<MicrosoftDynamicsCRMorderclose>), IList<MicrosoftDynamicsCRMquoteclose> incidentQuoteCloses = default(IList<MicrosoftDynamicsCRMquoteclose>), IList<MicrosoftDynamicsCRMmsdynFederatedarticleincident> msdynIncidentMsdynFederatedarticleincidentIncidentId = default(IList<MicrosoftDynamicsCRMmsdynFederatedarticleincident>), IList<MicrosoftDynamicsCRMknowledgebaserecord> knowledgeBaseRecordIncident = default(IList<MicrosoftDynamicsCRMknowledgebaserecord>), IList<MicrosoftDynamicsCRMincidentresolution> incidentIncidentResolutions = default(IList<MicrosoftDynamicsCRMincidentresolution>))
+        public MicrosoftDynamicsCRMincident(int? adoxioMktrchecklistpromotionsreviewed = default(int?), int? adoxioPschecklistonsiteconsumption = default(int?), int? adoxioRoutinechecklistbottledprodonsite = default(int?), string adoxioRoutinechecklistcontractsfinancialsnotes = default(string), string description = default(string), int? adoxioMktrchecklistadvertisingreviewed = default(int?), string _createdonbehalfbyValue = default(string), int? adoxioRoutinechecklistbondingagreements = default(int?), string adoxioAhchecklistpatronsclearestablishmentnotes = default(string), string _contractdetailidValue = default(string), string adoxioChecklistendorsementsrequirementsnotes = default(string), System.DateTimeOffset? responseby = default(System.DateTimeOffset?), int? adoxioPschecklistminorsidentified = default(int?), int? adoxioChecklistcontractmanufacturingreqs = default(int?), int? adoxioRoutinechecklistsamplerecords = default(int?), bool? routecase = default(bool?), int? adoxioSepchecklistliquorreceipts = default(int?), string adoxioSepchecklisteventhourscomment = default(string), int? adoxioPschecklistentertainment = default(int?), string adoxioMapagentid1 = default(string), int? adoxioPschecklistintoxicationidentified = default(int?), int? adoxioRoutinechecklistminorsaspatrons = default(int?), string adoxioPschecklistproductstoragesecurednotes = default(string), int? adoxioSepchecklistfoodrequirements = default(int?), string adoxioSepcheckliststaffconsumingliquorcomment = default(string), int? adoxioChecklistsignandlogomeetsrequirements = default(int?), int? adoxioServicehourstuesdayopen = default(int?), int? adoxioServicehoursmondayclose = default(int?), int? adoxioPschecklistunlawfulactivity = default(int?), string adoxioPschecklistentertainmentnotes = default(string), string _modifiedbyexternalpartyValue = default(string), string adoxioChecklistagentiddiscussednotes = default(string), string adoxioChecklistcontractmanufacturingreqsnotes = default(string), int? adoxioSepchecklistliquorregister = default(int?), string adoxioPschecklistovercrowdingnotes = default(string), string _adoxioLicenceValue = default(string), string adoxioRoutinechecklistminorsaspatronsnotes = default(string), string adoxioLcpnumber = default(string), string adoxioSepchecklistliquorreceiptscomment = default(string), string adoxioPschecklistunlawfulactivitynotes = default(string), string _adoxioEstablishmentValue = default(string), int? adoxioServicehoursmondayopen = default(int?), int? adoxioRoutinechecklistphotostaken = default(int?), string adoxioChecklistregulatoryapprovalsreceivednotes = default(string), string adoxioRoutinechecklisteventcontractsnotes = default(string), string adoxioInspchecklistphototakennotes = default(string), int? adoxioServicehourssaturdayopen = default(int?), bool? merged = default(bool?), string _contractidValue = default(string), int? adoxioMapchecklistmapinspectiontype = default(int?), string adoxioChecklistingredientsrecordsnotes = default(string), int? adoxioChecklistaccordancewithaipletter = default(int?), int? adoxioPschecklistproductstoragesecured = default(int?), string adoxioChecklistliquorstoragenotes = default(string), string adoxioMktrchecklistlicencenotes = default(string), string adoxioRoutinechecklistservingitrightnanotes = default(string), string adoxioNoeachoiceprocedure = default(string), string _adoxioReactivatebyValue = default(string), string _modifiedonbehalfbyValue = default(string), int? adoxioInspectiontimeoutmm = default(int?), int? adoxioServicehourssundayclose = default(int?), int? adoxioSepchecklistsecuritystaff = default(int?), int? adoxioChecklistregulatoryapprovalsreceived = default(int?), string adoxioChecklistphotostakennanotes = default(string), int? adoxioChecklistalcoholsensematerials = default(int?), int? adoxioInspectionoccurrence = default(int?), int? adoxioServicehoursthursdayclose = default(int?), string adoxioRoutinechecklistbottledprodonsitenotes = default(string), string adoxioExternalinvestigationfilenumber = default(string), int? adoxioInspchecklisttempexpansion = default(int?), string _adoxioSpecialeventidValue = default(string), int? adoxioMktrchecklistcerequirementsreviewed = default(int?), int? adoxioChecklistagentiddiscussed = default(int?), int? adoxioSepcheckliststaffconsumingliquor = default(int?), int? adoxioSepchecklistmarketauthposted = default(int?), string _adoxioRegionalmanagerValue = default(string), int? adoxioInspectionviolationticketsissued = default(int?), string adoxioAhchecklistliquorclearedpatronsnotes = default(string), string adoxioRoutinechecklistcontactinfochangenotes = default(string), string _resolvebykpiidValue = default(string), int? contractservicelevelcode = default(int?), int? numberofchildincidents = default(int?), int? adoxioSepchecklistapplicantonsite = default(int?), string adoxioRoutinechecklistminprodamountsnotes = default(string), string adoxioChecklistsocialrespposterprovidednotes = default(string), string adoxioPschecklistincidentlogreviewednotes = default(string), int? adoxioRoutinechecklistservingitrightna = default(int?), string _adoxioEventlocationidValue = default(string), string adoxioRoutinechecklistincidentlognotes = default(string), int? servicestage = default(int?), int? adoxioPschecklistdrinksizespricing = default(int?), int? adoxioServicehourstuesdayclose = default(int?), int? adoxioPschecklistincidentlogreviewed = default(int?), string _parentcaseidValue = default(string), string adoxioInspchecklistsignageadvertisingnotes = default(string), string adoxioRoutinechecklistalcoholsensematerialnotes = default(string), int? adoxioServicehourssaturdayclose = default(int?), string _accountidValue = default(string), System.DateTimeOffset? adoxioDatein = default(System.DateTimeOffset?), int? adoxioRoutinechecklistminorsaspatronsna = default(int?), string _firstresponsebykpiidValue = default(string), int? adoxioSepchecklistmaxservingsizes = default(int?), string _adoxioParentinspectionidValue = default(string), int? statuscode = default(int?), int? adoxioAllactivitiesconcluded = default(int?), int? adoxioRoutinechecklistsamplesizes = default(int?), byte[] entityimage = default(byte[]), string _socialprofileidValue = default(string), int? adoxioRoutinechecklistpicnicendorsementreqs = default(int?), bool? adoxioIsremotecommunity = default(bool?), int? adoxioChecklistliquorstorage = default(int?), string adoxioSepchecklistfoodrequirementscomment = default(string), int? adoxioChecklistprocessstepsbyclassification = default(int?), System.DateTimeOffset? adoxioNoeasentdate = default(System.DateTimeOffset?), string _adoxioAreaValue = default(string), string _adoxioProjectValue = default(string), int? utcconversiontimezonecode = default(int?), string adoxioRoutinecheckliststorageavailablenotes = default(string), string adoxioRoutinechecklistvisitationrecordsnotes = default(string), int? adoxioSepchecklistovercrowding = default(int?), string _adoxioLicencesubcategoryidValue = default(string), int? adoxioInspchecklistcannabisregisterroutine = default(int?), string adoxioInspchecklistnootherbusinessnotes = default(string), int? adoxioChecklistsellingitright = default(int?), string adoxioRoutinechecklistsocialrespmaterialnanotes = default(string), int? caseorigincode = default(int?), string adoxioEstablishmentcity = default(string), string adoxioRoutinechecklisteducationaltasksnotes = default(string), string adoxioRoutinechecklistcarboyscompliantnotes = default(string), string _transactioncurrencyidValue = default(string), int? adoxioChecklistequipmentreqclassification = default(int?), int? adoxioInspectiontimeouthh = default(int?), bool? firstresponsesent = default(bool?), string adoxioMapchecklistnumberofpatronsnotes = default(string), string adoxioPschecklistminorsidentifiednotes = default(string), string _masteridValue = default(string), string adoxioRoutinechecklistcontractmanufacturingnote = default(string), bool? adoxioIscontraventionfollowup = default(bool?), string adoxioSepchecklistmarketauthpostednotes = default(string), string _adoxioEventidValue = default(string), int? adoxioRoutinechecklistcrtcsocialmedia = default(int?), string adoxioInspchecklistproductnoselfservicenotes = default(string), bool? adoxioCreateinspection = default(bool?), string adoxioRoutinecheckliststaffresponsibilitynotes = default(string), System.DateTimeOffset? adoxioReactivationdate = default(System.DateTimeOffset?), int? adoxioPschecklistidchecking = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), long? entityimageTimestamp = default(long?), bool? followuptaskcreated = default(bool?), int? adoxioChecklistsufficientequipandpersons = default(int?), int? adoxioChecklistworkerverification = default(int?), string adoxioSepchecklistsiteplancomment = default(string), string adoxioChecklistdiscusscateringrequirementsnotes = default(string), string adoxioRoutinechecklistminorsaspatronsnanotes = default(string), int? adoxioChecklistsignage = default(int?), string adoxioRoutinechecklistingredientrecordsnotes = default(string), int? importsequencenumber = default(int?), string adoxioDistilleryequipmentlist = default(string), int? incidentstagecode = default(int?), string adoxioChecklistseatingconfirmednotes = default(string), int? adoxioInspchecklistsocialrespmaterialroutine = default(int?), int? adoxioRoutinechecklistliquordisplays = default(int?), int? onholdtime = default(int?), int? adoxioLicencepostedroutine = default(int?), int? adoxioPschecklistotherobservations = default(int?), string adoxioMfgcopackerequipmentlist = default(string), string adoxioRoutinechecklistcustcompletestasksnotes = default(string), string adoxioEstablishmentaddress2 = default(string), int? adoxioPschecklistservingitright = default(int?), string adoxioPschecklistidcheckingnotes = default(string), string _adoxioLicenseeValue = default(string), string _existingcaseValue = default(string), int? adoxioSepchecklistsiteplan = default(int?), string adoxioInspchecklistworkerqualificationnotes = default(string), int? adoxioRoutinechecklistcustcompletestasks = default(int?), int? adoxioSepchecklistunauthorizedgames = default(int?), string adoxioInspchecklistproductnotvisibleroutinenote = default(string), string adoxioInspchecklisttempexpansionnotes = default(string), string adoxioSepchecklistsecuritystaffcomment = default(string), int? adoxioPschecklisttempexpansion = default(int?), int? adoxioChecklistservingitright = default(int?), int? timezoneruleversionnumber = default(int?), int? adoxioChecklistsafetysecurity = default(int?), string adoxioComments = default(string), int? adoxioPschecklistsecuritycamsoperating = default(int?), string _slainvokedidValue = default(string), string adoxioRoutinechecklistphotostakennotes = default(string), string adoxioPrimarybusinesspurposes = default(string), int? adoxioSepchecklistsirses = default(int?), string adoxioMapchecklistagentidnotes = default(string), bool? adoxioImportcompleted = default(bool?), string adoxioSepchecklistminorspresentcomment = default(string), string emailaddress = default(string), string adoxioRoutinechecklistcateringrecordsnotes = default(string), string adoxioRoutinechecklistbondingagreementsnotes = default(string), System.DateTimeOffset? adoxioInspectioncompletedate = default(System.DateTimeOffset?), string entityimageid = default(string), int? adoxioInspectionoutcome = default(int?), int? adoxioChecklistproductnotvisible = default(int?), int? adoxioSepchecklistpermitteeonsite = default(int?), string adoxioChecklistsufficientequipandpersonsnotes = default(string), string adoxioImportid = default(string), string adoxioInspectioncompleteddate = default(string), string adoxioExternalid = default(string), int? adoxioInspchecklistfollowupinspectionrequired = default(int?), string adoxioSepchecklistsirsescomment = default(string), int? adoxioSepchecklistsamplesizereqs = default(int?), string _createdbyexternalpartyValue = default(string), string adoxioChecklistminorsasemployeesnotes = default(string), string _entitlementidValue = default(string), int? adoxioRoutinechecklistsocialrespmaterialna = default(int?), int? adoxioRoutinechecklistincidentlog = default(int?), bool? blockedprofile = default(bool?), string adoxioRoutinechecklistloungeseareqsnotes = default(string), int? adoxioChecklistproductnoselfservice = default(int?), int? adoxioServicehourssundayopen = default(int?), string productserialnumber = default(string), int? adoxioRoutinechecklistauthorizationletters = default(int?), int? adoxioSepchecklistcommunitydisturbance = default(int?), string adoxioPschecklistservingitrightnotes = default(string), int? adoxioPschecklisttakeawayordeliveryonly = default(int?), int? adoxioPschecklistcontrarytolicence = default(int?), int? adoxioRoutinechecklistcateringrecords = default(int?), string adoxioRoutinechecklistcrtcsocialmedianotes = default(string), int? adoxioMktrchecklistvalidlettersemployproof = default(int?), string adoxioChecklistsocialresponsibilitynotes = default(string), string stageid = default(string), System.DateTimeOffset? adoxioDateout = default(System.DateTimeOffset?), string adoxioChecklistequipmentreqclassificationnotes = default(string), int? adoxioRoutinechecklistloungeseareqs = default(int?), string adoxioInspchecklistaccordancewithaipletternotes = default(string), string adoxioRoutinechecklistcustdeclreceiptsnotes = default(string), int? adoxioMktrchecklistonsiterequirementsreviewed = default(int?), string adoxioContraventionsummary = default(string), int? adoxioInspchecklisttakeawayordeliveryonly = default(int?), int? adoxioPschecklistcommunitydisturbance = default(int?), int? adoxioMktrchecklistrequirementsreviewed = default(int?), int? adoxioChecklisttakeandsendphotos = default(int?), int? adoxioPschecklistunlawfulcannabis = default(int?), string adoxioRoutinechecklistminorsasemployeesnotes = default(string), bool? adoxioServicehoursstandardhours = default(bool?), decimal? sentimentvalue = default(decimal?), string adoxioRoutinechecklisttakehomenotes = default(string), string adoxioSepchecklistsecurityplancomment = default(string), int? adoxioAhchecklistliquorclearedpatrons = default(int?), string processid = default(string), string _primarycontactidValue = default(string), string adoxioChecklistmanufacturingstorageareanotes = default(string), string adoxioChecklistbondedwarehousediscussednotes = default(string), int? adoxioRoutinecheckliststorageavailable = default(int?), int? adoxioSepchecklistpermitchecked = default(int?), int? adoxioRoutinechecklistsocialrespmaterial = default(int?), string adoxioIsremotecomments = default(string), int? adoxioSepchecklistdisorderlyunlawfulactivity = default(int?), string adoxioEstablishmentpostalcode = default(string), string adoxioSepchecklisteventsignagecomment = default(string), int? adoxioPiecesofidchecked = default(int?), int? adoxioSepchecklistintoxication = default(int?), string versionnumber = default(string), string adoxioChecklistsellingitrightnotes = default(string), string adoxioRoutinechecklistsamplesrecordsnotes = default(string), string adoxioInspchecklistsecurityoperationalnotes = default(string), int? adoxioAlcoholsensematerial = default(int?), string adoxioChecklistbondedwarehousenanotes = default(string), int? adoxioChecklistequipmentchecks = default(int?), bool? isescalated = default(bool?), string adoxioSepchecklistovercrowdingcomment = default(string), int? adoxioInspchecklistpackagingroutine = default(int?), string adoxioMapchecklistmapinspectiontypenotes = default(string), string adoxioPschecklisttempexpansionnotes = default(string), int? adoxioIsmarketer = default(int?), string adoxioRoutinechecklistsamplesizesnotes = default(string), bool? adoxioSendcompliancemeetingnotification = default(bool?), bool? adoxioIsremote3rdpartycontacted = default(bool?), int? adoxioRoutinechecklistequipmentchecks = default(int?), int? severitycode = default(int?), string adoxioSepchecklistapplicantonsitecomment = default(string), string adoxioRoutinechecklistpricingsizingnotes = default(string), string adoxioWineryequipmentlist = default(string), string adoxioInspchecklistdepictsaipfloorplannotes = default(string), string adoxioSepchecklistsamplesizereqsnotes = default(string), int? adoxioSepchecklistminorspresent = default(int?), bool? activitiescomplete = default(bool?), int? adoxioRoutinechecklistliquorstorage = default(int?), string adoxioRoutinechecklistauthorizationlettersnotes = default(string), int? adoxioPschecklistworkerreviewed = default(int?), int? adoxioRoutinechecklistsamplesrecords = default(int?), string _customeridValue = default(string), string _owningbusinessunitValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? adoxioParentinspectiontype = default(int?), string adoxioChecklistfloorplannanotes = default(string), string adoxioNoeanarrative = default(string), string adoxioNoeasection1penaltychoice = default(string), string adoxioBreweryequipmentlist = default(string), bool? isdecrementing = default(bool?), int? adoxioChecklistdepictsaipfloorplan = default(int?), int? adoxioChecklistcustomerdeclarations = default(int?), bool? adoxioIsremotesendletter = default(bool?), int? adoxioRoutinecheckliststaffresponsibility = default(int?), string adoxioPschecklistcommunitydisturbancenotes = default(string), System.DateTimeOffset? followupby = default(System.DateTimeOffset?), int? adoxioMapchecklistnumberpatrons = default(int?), string adoxioInspchecklistproductnotvisiblenotes = default(string), string adoxioInspchecklistcannabisregisternotes = default(string), string adoxioInspchecklistsmelljarsnotes = default(string), string _adoxioEnforcementactionidValue = default(string), int? adoxioRoutinechecklistnonliquorsaleitems = default(int?), int? adoxioRoutinechecklistcustdeclreceipts = default(int?), int? adoxioRoutinechecklistcontractmanufacturing = default(int?), int? adoxioInspchecklistworkersverifiedroutine = default(int?), int? customersatisfactioncode = default(int?), string adoxioSepchecklistdisorderunlawactivitycomment = default(string), int? adoxioContraventionsadded = default(int?), int? adoxioRoutinechecklistcarboyscompliant = default(int?), int? resolvebyslastatus = default(int?), string _slaidValue = default(string), int? adoxioChecklistsocialrespposterprovided = default(int?), string adoxioSepchecklistpermitteeonsitenotes = default(string), int? adoxioRoutinechecklistpromotionvalidity = default(int?), int? adoxioChecklistminorspatrons = default(int?), System.DateTimeOffset? adoxioActualinspectiondate = default(System.DateTimeOffset?), int? adoxioInspchecklistfloorplanroutine = default(int?), int? adoxioInspchecklistsecrequirementsroutine = default(int?), int? adoxioPschecklistliquorregister = default(int?), System.DateTimeOffset? adoxioInspectiondate = default(System.DateTimeOffset?), string adoxioRoutinechecklistpicnicendorsementreqsnote = default(string), int? adoxioPschecklistoutsideopshours = default(int?), string adoxioRoutinechecklistpromotionvaliditynotes = default(string), System.DateTimeOffset? adoxioInspectionactivitiesconcludeddate = default(System.DateTimeOffset?), string _subjectidValue = default(string), bool? adoxioSendenoticenotification = default(bool?), string adoxioRoutinechecklistsocialrespmaterialnotes = default(string), string adoxioChecklistsafetysecuritynotes = default(string), string _owningteamValue = default(string), string adoxioRoutinechecklistsellingitrightnotes = default(string), int? adoxioRoutinechecklistsalesrecords = default(int?), int? adoxioSepchecklistsecurityplan = default(int?), string adoxioChecklistprocessstepsbyclassificationnote = default(string), int? adoxioInspectiontype = default(int?), string adoxioSepchecklistunauthorizedgamescomment = default(string), int? adoxioInspectionservingitright = default(int?), string adoxioChecklistworkerverificationnotes = default(string), string adoxioRoutinechecklistliquorpricelistnotes = default(string), int? adoxioChecklistdiscusstermsconditions = default(int?), string adoxioSepchecklistliquorregistercomment = default(string), string adoxioRlrsprimarybusinesspurposes = default(string), int? adoxioChecklistdiscusscateringrequirements = default(int?), int? adoxioRoutinechecklistliquorregister = default(int?), int? adoxioAhchecklistliquorsaleoutsidehours = default(int?), int? adoxioChecklistbondedwarehousediscussed = default(int?), int? adoxioAhchecklistpatronsclearedestablishment = default(int?), System.DateTimeOffset? lastonholdtime = default(System.DateTimeOffset?), string adoxioEstablishmentaddress = default(string), System.DateTimeOffset? adoxioRemotecommunitylettersentdate = default(System.DateTimeOffset?), string _adoxioApplicationValue = default(string), int? prioritycode = default(int?), string adoxioRoutinechecklistservingitrightnotes = default(string), System.DateTimeOffset? adoxioInspectionduedate = default(System.DateTimeOffset?), int? adoxioSepchecklistliquorservice = default(int?), string adoxioRoutinechecklistidrequirementsnotes = default(string), string adoxioDuedatechangereason = default(string), string adoxioPschecklistsecuritycamsoperatingnotes = default(string), string _owninguserValue = default(string), string adoxioMapagentid2 = default(string), int? messagetypecode = default(int?), int? adoxioRoutinechecklisteducationaltasks = default(int?), string incidentid = default(string), int? casetypecode = default(int?), bool? adoxioRoutinechecklisttakehome = default(bool?), string adoxioChecklistadvertisingnotes = default(string), string adoxioPschecklistotherobservationsnotes = default(string), int? adoxioChecklistingredientsrecords = default(int?), string entityimageUrl = default(string), int? actualserviceunits = default(int?), int? adoxioChecklistfloorplanna = default(int?), int? adoxioChecklistmanufacturingstoragearea = default(int?), int? adoxioRoutinechecklistonsiteendorsementreqs = default(int?), string title = default(string), int? billedserviceunits = default(int?), int? adoxioChecklistsocialresponsibility = default(int?), string adoxioPschecklistunlawfulcannabisnotes = default(string), string traversedpath = default(string), string _owneridValue = default(string), int? adoxioServicehourswednesdayclose = default(int?), string adoxioChecklistdiscusstermsconditionsnotes = default(string), string adoxioSepchecklistaccesscontrolledcomment = default(string), string adoxioChecklistminorsaspatronsnotes = default(string), string _contactidValue = default(string), int? adoxioRoutinechecklistingredientrecords = default(int?), string adoxioSepchecklistintoxicationcomment = default(string), int? adoxioEmployeesconsumingliquor = default(int?), string adoxioPschecklistliquorservicenotes = default(string), string adoxioInspchecklistfloorplanroutinenotes = default(string), int? adoxioChecklistphysicalsecurityoperating = default(int?), int? adoxioRoutinechecklistpricingsizing = default(int?), string adoxioInspchecklistphysicalsecuritynotes = default(string), int? adoxioRoutinechecklistidentification = default(int?), int? adoxioChecklistbondedwarehousena = default(int?), System.DateTimeOffset? adoxioCompliancemeetingdate = default(System.DateTimeOffset?), int? adoxioPschecklistcovertinspectiontype = default(int?), int? adoxioChecklistadvertising = default(int?), string adoxioChecklistservingitrightnotes = default(string), string _adoxioComplaintidValue = default(string), int? adoxioChecklistminorsasemployees = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), bool? checkemail = default(bool?), bool? decremententitlementterm = default(bool?), string _adoxioRegionValue = default(string), decimal? exchangerate = default(decimal?), int? adoxioSepchecklistaccesscontrolled = default(int?), string adoxioRoutinechecklistnonliquorsaleitemsnotes = default(string), int? adoxioRoutinechecklistalcoholsensematerial = default(int?), int? adoxioInspchecklistsmelljarsroutine = default(int?), int? adoxioChecklistphotostakenna = default(int?), string adoxioSepchecklistmarketqualifiesnotes = default(string), string ticketnumber = default(string), string adoxioMapchecklistpiecesofidcheckednotes = default(string), string adoxioPschecklistcontrarytolicencenotes = default(string), string adoxioChecklistdiscussroutineinspectionsnotes = default(string), string adoxioInspchecklistpackagingsealednotes = default(string), int? statecode = default(int?), string adoxioExternalinvestigationjobnumber = default(string), string _adoxioApplicationtypeidValue = default(string), string adoxioRoutinechecklistequipmentchecksnotes = default(string), int? adoxioSepchecklistpricelistreqs = default(int?), int? adoxioMktrchecklistlicence = default(int?), int? adoxioInspchecklistproductnotvisibleroutine = default(int?), int? adoxioSepchecklisteventhours = default(int?), string adoxioRoutinechecklistcontactedpolicenotes = default(string), int? firstresponseslastatus = default(int?), string adoxioPschecklistonsiteconsumptionnotes = default(string), string adoxioPschecklistopenproductnotes = default(string), int? adoxioSepchecklisteventsignage = default(int?), string adoxioSepchecklistliquorservicecomment = default(string), int? adoxioPackagingsealed = default(int?), string adoxioRoutinechecklistliquorregisternotes = default(string), int? adoxioRoutinechecklistliquorpricelist = default(int?), string adoxioChecklistcustomerdeclarationsnotes = default(string), int? adoxioRoutinechecklistvisitationrecords = default(int?), string adoxioChecklistsignagenotes = default(string), string adoxioInspchecklisttakeawayordeliveryonlynotes = default(string), System.DateTimeOffset? resolveby = default(System.DateTimeOffset?), string adoxioSepchecklistcommunitydisturbancecomment = default(string), string adoxioPschecklistliquorregisternotes = default(string), string _createdbyValue = default(string), string _adoxioPmuareaidValue = default(string), int? adoxioRoutinechecklistcontractsfinancials = default(int?), int? adoxioSepchecklistmarketqualifies = default(int?), int? adoxioChecklistendorsementsrequirements = default(int?), int? adoxioServicehoursfridayclose = default(int?), int? adoxioChecklistnootherbusinessassociated = default(int?), string adoxioRoutinechecklistsalesrecordsnotes = default(string), int? adoxioPschecklistliquorservice = default(int?), int? adoxioRoutinechecklisteventcontracts = default(int?), string adoxioChecklistalcoholsensematerialsnotes = default(string), int? adoxioInspectionsminors = default(int?), string _kbarticleidValue = default(string), string _adoxioInvestigationidValue = default(string), int? adoxioPschecklistovercrowding = default(int?), string adoxioChecklistequipmentchecksnotes = default(string), System.DateTimeOffset? escalatedon = default(System.DateTimeOffset?), int? adoxioRoutinechecklistcontactinfochange = default(int?), int? adoxioChecklistdiscussroutineinspections = default(int?), int? adoxioPschecklistopenproduct = default(int?), int? adoxioRoutinechecklistcontactedpolice = default(int?), int? adoxioInspectiontimeinhh = default(int?), string _modifiedbyValue = default(string), int? adoxioRoutinechecklistminprodamounts = default(int?), string adoxioInspchecklistsignmeetsrequirementsnotes = default(string), string adoxioRoutinechecklistliquorstoragenotes = default(string), bool? adoxioCreatefollowup = default(bool?), int? adoxioInspchecklistadvertisingroutine = default(int?), bool? customercontacted = default(bool?), int? adoxioMinorsserved = default(int?), string adoxioSepchecklistmaxservingsizescomment = default(string), string adoxioMapchecklistminorservednotes = default(string), int? adoxioInspectiontimeinmm = default(int?), string adoxioSepchecklistpermitcheckedcomment = default(string), string adoxioPschecklistintoxicationidentifiednotes = default(string), string _productidValue = default(string), int? adoxioRoutinechecklistsellingitright = default(int?), string adoxioRoutinechecklistliquordisplaysnotes = default(string), string adoxioInspchecklistlicencepostednotes = default(string), int? adoxioRoutinechecklistservingitright = default(int?), int? adoxioRoutinechecklistidrequirements = default(int?), string _adoxioLicencetypeidValue = default(string), string adoxioAhchecklistliquorsaleoutsidehoursnotes = default(string), string adoxioRoutinechecklistonsiteendorsementreqsnote = default(string), string adoxioRoutinechecklistidentificationnotes = default(string), string adoxioRmreactivationnotes = default(string), int? adoxioMapchecklistminorserved = default(int?), string adoxioPschecklistoutsideopshoursnotes = default(string), string adoxioPschecklistworkerreviewednotes = default(string), string adoxioRoutinechecklistsamplerecordsnotes = default(string), int? adoxioServicehoursfridayopen = default(int?), int? adoxioChecklistseatingconfirmed = default(int?), int? adoxioServicehoursthursdayopen = default(int?), string adoxioPschecklistdrinksizespricingnotes = default(string), int? adoxioRoutinechecklistminorsasemployees = default(int?), int? adoxioMapchecklistpiecesofidchecked = default(int?), decimal? influencescore = default(decimal?), int? adoxioServicehourswednesdayopen = default(int?), string adoxioInspchecklistsocialrespmaterialnotes = default(string), string adoxioSepchecklistpricelistreqsnotes = default(string), string adoxioMapchecklistmapviolationticketsissued = default(string), string adoxioPschecklisttakeawayordeliverynotes = default(string), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> incidentAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> incidentSharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), MicrosoftDynamicsCRMaccount adoxioLicensee = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMadoxioApplication adoxioApplication = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioEstablishment adoxioEstablishment = default(MicrosoftDynamicsCRMadoxioEstablishment), MicrosoftDynamicsCRMadoxioLicences adoxioLicence = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioRegion adoxioRegion = default(MicrosoftDynamicsCRMadoxioRegion), MicrosoftDynamicsCRMadoxioArea adoxioArea = default(MicrosoftDynamicsCRMadoxioArea), IList<MicrosoftDynamicsCRMadoxioLicencetype> adoxioIncidentAdoxioLicencetype = default(IList<MicrosoftDynamicsCRMadoxioLicencetype>), MicrosoftDynamicsCRMincident adoxioParentInspectionId = default(MicrosoftDynamicsCRMincident), IList<MicrosoftDynamicsCRMincident> adoxioInspectionInspections = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMsystemuser> adoxioInspectionInspectors = default(IList<MicrosoftDynamicsCRMsystemuser>), MicrosoftDynamicsCRMsystemuser adoxioRegionalManager = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMadoxioDocument> adoxioInspectionDocuments = default(IList<MicrosoftDynamicsCRMadoxioDocument>), IList<MicrosoftDynamicsCRMadoxioContravention> adoxioIncidentAdoxioContravention = default(IList<MicrosoftDynamicsCRMadoxioContravention>), MicrosoftDynamicsCRMadoxioComplaint adoxioComplaintId = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioComplianceinvestigation adoxioInvestigationId = default(MicrosoftDynamicsCRMadoxioComplianceinvestigation), IList<MicrosoftDynamicsCRMadoxioInvestigationactivity> adoxioInspectionInvestigationactivities = default(IList<MicrosoftDynamicsCRMadoxioInvestigationactivity>), IList<MicrosoftDynamicsCRMadoxioCompliancemeeting> adoxioInspectionCompliancemeetings = default(IList<MicrosoftDynamicsCRMadoxioCompliancemeeting>), MicrosoftDynamicsCRMsystemuser adoxioReactivateBy = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMadoxioInspectionreactivationhistory> adoxioIncidentAdoxioInspectionreactivationhistoryInspection = default(IList<MicrosoftDynamicsCRMadoxioInspectionreactivationhistory>), MicrosoftDynamicsCRMadoxioApplicationtype adoxioApplicationTypeId = default(MicrosoftDynamicsCRMadoxioApplicationtype), MicrosoftDynamicsCRMadoxioLicencetype adoxioLicenceTypeId = default(MicrosoftDynamicsCRMadoxioLicencetype), MicrosoftDynamicsCRMadoxioEvent adoxioEventId = default(MicrosoftDynamicsCRMadoxioEvent), IList<MicrosoftDynamicsCRMadoxioRmreview> adoxioIncidentAdoxioRmreviewInspection = default(IList<MicrosoftDynamicsCRMadoxioRmreview>), MicrosoftDynamicsCRMadoxioEnforcementaction adoxioEnforcementActionId = default(MicrosoftDynamicsCRMadoxioEnforcementaction), MicrosoftDynamicsCRMadoxioLicencesubcategory adoxioLicenceSubCategoryId = default(MicrosoftDynamicsCRMadoxioLicencesubcategory), IList<MicrosoftDynamicsCRMadoxioHoursofservice> adoxioInspectionHoursofservice = default(IList<MicrosoftDynamicsCRMadoxioHoursofservice>), MicrosoftDynamicsCRMadoxioPmuarea adoxioPMUAreaId = default(MicrosoftDynamicsCRMadoxioPmuarea), IList<MicrosoftDynamicsCRMadoxioEnforcementaction> adoxioIncidentAdoxioEnforcementactionInspection = default(IList<MicrosoftDynamicsCRMadoxioEnforcementaction>), MicrosoftDynamicsCRMadoxioSpecialevent adoxioSpecialEventId = default(MicrosoftDynamicsCRMadoxioSpecialevent), IList<MicrosoftDynamicsCRMadoxioRelatedparty> adoxioInspectionRelatedparties = default(IList<MicrosoftDynamicsCRMadoxioRelatedparty>), IList<MicrosoftDynamicsCRMadoxioAdditionalinspector> adoxioInspectionAdditionalinspectors = default(IList<MicrosoftDynamicsCRMadoxioAdditionalinspector>), MicrosoftDynamicsCRMadoxioSpecialeventlocation adoxioEventLocationId = default(MicrosoftDynamicsCRMadoxioSpecialeventlocation), MicrosoftDynamicsCRMadoxioCeproject adoxioProject = default(MicrosoftDynamicsCRMadoxioCeproject), MicrosoftDynamicsCRMincident masterid = default(MicrosoftDynamicsCRMincident), IList<MicrosoftDynamicsCRMincident> incidentMasterIncident = default(IList<MicrosoftDynamicsCRMincident>), MicrosoftDynamicsCRMincident parentcaseid = default(MicrosoftDynamicsCRMincident), IList<MicrosoftDynamicsCRMincident> incidentParentIncident = default(IList<MicrosoftDynamicsCRMincident>), MicrosoftDynamicsCRMincident existingcase = default(MicrosoftDynamicsCRMincident), IList<MicrosoftDynamicsCRMincident> incidentExistingcase = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMpostregarding> incidentPostRegardings = default(IList<MicrosoftDynamicsCRMpostregarding>), IList<MicrosoftDynamicsCRMpostfollow> incidentPostFollows = default(IList<MicrosoftDynamicsCRMpostfollow>), IList<MicrosoftDynamicsCRMteam> incidentTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> incidentMailboxTrackingFolder = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMlead> originatingCaseLead = default(IList<MicrosoftDynamicsCRMlead>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMactivityparty> incidentActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMsla slainvokedidSla = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMsocialactivity> incidentSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), MicrosoftDynamicsCRMslakpiinstance firstresponsebykpiid = default(MicrosoftDynamicsCRMslakpiinstance), MicrosoftDynamicsCRMsla slaidSla = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMproduct productid = default(MicrosoftDynamicsCRMproduct), IList<MicrosoftDynamicsCRMslakpiinstance> slakpiinstanceIncident = default(IList<MicrosoftDynamicsCRMslakpiinstance>), IList<MicrosoftDynamicsCRMactioncard> incidentActioncard = default(IList<MicrosoftDynamicsCRMactioncard>), IList<MicrosoftDynamicsCRMappointment> incidentAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMconnection> incidentConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMserviceappointment> incidentServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMcontractdetail contractdetailid = default(MicrosoftDynamicsCRMcontractdetail), IList<MicrosoftDynamicsCRMqueueitem> incidentQueueItem = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMphonetocaseprocess> incidentPhonetocaseprocess = default(IList<MicrosoftDynamicsCRMphonetocaseprocess>), IList<MicrosoftDynamicsCRMemail> incidentEmails = default(IList<MicrosoftDynamicsCRMemail>), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMasyncoperation> incidentAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMduplicaterecord> incidentDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMprocesssession> incidentProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMphonecall> incidentPhonecalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMconnection> incidentConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMcontact customeridContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMsubject subjectid = default(MicrosoftDynamicsCRMsubject), MicrosoftDynamicsCRMentitlement entitlementid = default(MicrosoftDynamicsCRMentitlement), IList<MicrosoftDynamicsCRMannotation> incidentAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> incidentRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), MicrosoftDynamicsCRMsocialprofile socialprofileid = default(MicrosoftDynamicsCRMsocialprofile), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMactivitypointer> incidentActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMbulkdeletefailure> incidentBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMaccount customeridAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMslakpiinstance resolvebykpiid = default(MicrosoftDynamicsCRMslakpiinstance), MicrosoftDynamicsCRMcontact primarycontactid = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMcontact responsiblecontactid = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), IList<MicrosoftDynamicsCRMletter> incidentLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMsyncerror> incidentSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> incidentPrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMfax> incidentFaxes = default(IList<MicrosoftDynamicsCRMfax>), MicrosoftDynamicsCRMcontract contractid = default(MicrosoftDynamicsCRMcontract), IList<MicrosoftDynamicsCRMknowledgearticleincident> knowledgearticleIncidents = default(IList<MicrosoftDynamicsCRMknowledgearticleincident>), IList<MicrosoftDynamicsCRMduplicaterecord> incidentDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMtask> incidentTasks = default(IList<MicrosoftDynamicsCRMtask>), MicrosoftDynamicsCRMkbarticle kbarticleid = default(MicrosoftDynamicsCRMkbarticle), IList<MicrosoftDynamicsCRMopportunityclose> incidentOpportunityCloses = default(IList<MicrosoftDynamicsCRMopportunityclose>), IList<MicrosoftDynamicsCRMorderclose> incidentOrderCloses = default(IList<MicrosoftDynamicsCRMorderclose>), IList<MicrosoftDynamicsCRMquoteclose> incidentQuoteCloses = default(IList<MicrosoftDynamicsCRMquoteclose>), IList<MicrosoftDynamicsCRMmsdynFederatedarticleincident> msdynIncidentMsdynFederatedarticleincidentIncidentId = default(IList<MicrosoftDynamicsCRMmsdynFederatedarticleincident>), IList<MicrosoftDynamicsCRMknowledgebaserecord> knowledgeBaseRecordIncident = default(IList<MicrosoftDynamicsCRMknowledgebaserecord>), IList<MicrosoftDynamicsCRMincidentresolution> incidentIncidentResolutions = default(IList<MicrosoftDynamicsCRMincidentresolution>))
         {
+            AdoxioMktrchecklistpromotionsreviewed = adoxioMktrchecklistpromotionsreviewed;
             AdoxioPschecklistonsiteconsumption = adoxioPschecklistonsiteconsumption;
-            AdoxioMktrchecklistlicencenotes = adoxioMktrchecklistlicencenotes;
-            AdoxioRoutinechecklistvisitationrecords = adoxioRoutinechecklistvisitationrecords;
+            AdoxioRoutinechecklistbottledprodonsite = adoxioRoutinechecklistbottledprodonsite;
             AdoxioRoutinechecklistcontractsfinancialsnotes = adoxioRoutinechecklistcontractsfinancialsnotes;
-            AdoxioChecklistendorsementsrequirementsnotes = adoxioChecklistendorsementsrequirementsnotes;
             Description = description;
-            AdoxioContraventionsadded = adoxioContraventionsadded;
+            AdoxioMktrchecklistadvertisingreviewed = adoxioMktrchecklistadvertisingreviewed;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             AdoxioRoutinechecklistbondingagreements = adoxioRoutinechecklistbondingagreements;
+            AdoxioAhchecklistpatronsclearestablishmentnotes = adoxioAhchecklistpatronsclearestablishmentnotes;
             this._contractdetailidValue = _contractdetailidValue;
-            AdoxioSepchecklistliquorreceiptscomment = adoxioSepchecklistliquorreceiptscomment;
-            AdoxioRoutinechecklistnonliquorsaleitemsnotes = adoxioRoutinechecklistnonliquorsaleitemsnotes;
+            AdoxioChecklistendorsementsrequirementsnotes = adoxioChecklistendorsementsrequirementsnotes;
             Responseby = responseby;
             AdoxioPschecklistminorsidentified = adoxioPschecklistminorsidentified;
+            AdoxioChecklistcontractmanufacturingreqs = adoxioChecklistcontractmanufacturingreqs;
+            AdoxioRoutinechecklistsamplerecords = adoxioRoutinechecklistsamplerecords;
             Routecase = routecase;
             AdoxioSepchecklistliquorreceipts = adoxioSepchecklistliquorreceipts;
+            AdoxioSepchecklisteventhourscomment = adoxioSepchecklisteventhourscomment;
             AdoxioPschecklistentertainment = adoxioPschecklistentertainment;
             AdoxioMapagentid1 = adoxioMapagentid1;
-            Firstresponsesent = firstresponsesent;
+            AdoxioPschecklistintoxicationidentified = adoxioPschecklistintoxicationidentified;
             AdoxioRoutinechecklistminorsaspatrons = adoxioRoutinechecklistminorsaspatrons;
+            AdoxioPschecklistproductstoragesecurednotes = adoxioPschecklistproductstoragesecurednotes;
+            AdoxioSepchecklistfoodrequirements = adoxioSepchecklistfoodrequirements;
             AdoxioSepcheckliststaffconsumingliquorcomment = adoxioSepcheckliststaffconsumingliquorcomment;
+            AdoxioChecklistsignandlogomeetsrequirements = adoxioChecklistsignandlogomeetsrequirements;
             AdoxioServicehourstuesdayopen = adoxioServicehourstuesdayopen;
-            AdoxioSepchecklistpricelistreqs = adoxioSepchecklistpricelistreqs;
+            AdoxioServicehoursmondayclose = adoxioServicehoursmondayclose;
             AdoxioPschecklistunlawfulactivity = adoxioPschecklistunlawfulactivity;
             AdoxioPschecklistentertainmentnotes = adoxioPschecklistentertainmentnotes;
             this._modifiedbyexternalpartyValue = _modifiedbyexternalpartyValue;
-            AdoxioChecklistsocialrespposterprovided = adoxioChecklistsocialrespposterprovided;
+            AdoxioChecklistagentiddiscussednotes = adoxioChecklistagentiddiscussednotes;
             AdoxioChecklistcontractmanufacturingreqsnotes = adoxioChecklistcontractmanufacturingreqsnotes;
+            AdoxioSepchecklistliquorregister = adoxioSepchecklistliquorregister;
             AdoxioPschecklistovercrowdingnotes = adoxioPschecklistovercrowdingnotes;
             this._adoxioLicenceValue = _adoxioLicenceValue;
-            this._adoxioEventlocationidValue = _adoxioEventlocationidValue;
             AdoxioRoutinechecklistminorsaspatronsnotes = adoxioRoutinechecklistminorsaspatronsnotes;
             AdoxioLcpnumber = adoxioLcpnumber;
-            AdoxioSepchecklistcommunitydisturbancecomment = adoxioSepchecklistcommunitydisturbancecomment;
+            AdoxioSepchecklistliquorreceiptscomment = adoxioSepchecklistliquorreceiptscomment;
             AdoxioPschecklistunlawfulactivitynotes = adoxioPschecklistunlawfulactivitynotes;
-            AdoxioRoutinecheckliststaffresponsibility = adoxioRoutinecheckliststaffresponsibility;
+            this._adoxioEstablishmentValue = _adoxioEstablishmentValue;
             AdoxioServicehoursmondayopen = adoxioServicehoursmondayopen;
             AdoxioRoutinechecklistphotostaken = adoxioRoutinechecklistphotostaken;
+            AdoxioChecklistregulatoryapprovalsreceivednotes = adoxioChecklistregulatoryapprovalsreceivednotes;
             AdoxioRoutinechecklisteventcontractsnotes = adoxioRoutinechecklisteventcontractsnotes;
-            AdoxioSepchecklistpermitcheckedcomment = adoxioSepchecklistpermitcheckedcomment;
-            AdoxioSepchecklisteventsignagecomment = adoxioSepchecklisteventsignagecomment;
             AdoxioInspchecklistphototakennotes = adoxioInspchecklistphototakennotes;
-            AdoxioChecklistworkerverification = adoxioChecklistworkerverification;
             AdoxioServicehourssaturdayopen = adoxioServicehourssaturdayopen;
             Merged = merged;
             this._contractidValue = _contractidValue;
-            AdoxioRoutinecheckliststorageavailable = adoxioRoutinecheckliststorageavailable;
-            AdoxioCreatefollowup = adoxioCreatefollowup;
-            AdoxioPschecklistoutsideopshours = adoxioPschecklistoutsideopshours;
-            AdoxioSepchecklistmarketauthpostednotes = adoxioSepchecklistmarketauthpostednotes;
-            AdoxioSepchecklistaccesscontrolled = adoxioSepchecklistaccesscontrolled;
-            AdoxioSepchecklisteventhourscomment = adoxioSepchecklisteventhourscomment;
+            AdoxioMapchecklistmapinspectiontype = adoxioMapchecklistmapinspectiontype;
+            AdoxioChecklistingredientsrecordsnotes = adoxioChecklistingredientsrecordsnotes;
+            AdoxioChecklistaccordancewithaipletter = adoxioChecklistaccordancewithaipletter;
             AdoxioPschecklistproductstoragesecured = adoxioPschecklistproductstoragesecured;
             AdoxioChecklistliquorstoragenotes = adoxioChecklistliquorstoragenotes;
+            AdoxioMktrchecklistlicencenotes = adoxioMktrchecklistlicencenotes;
             AdoxioRoutinechecklistservingitrightnanotes = adoxioRoutinechecklistservingitrightnanotes;
-            Blockedprofile = blockedprofile;
+            AdoxioNoeachoiceprocedure = adoxioNoeachoiceprocedure;
             this._adoxioReactivatebyValue = _adoxioReactivatebyValue;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            AdoxioExternalinvestigationfilenumber = adoxioExternalinvestigationfilenumber;
-            AdoxioRoutinechecklisttakehome = adoxioRoutinechecklisttakehome;
+            AdoxioInspectiontimeoutmm = adoxioInspectiontimeoutmm;
             AdoxioServicehourssundayclose = adoxioServicehourssundayclose;
             AdoxioSepchecklistsecuritystaff = adoxioSepchecklistsecuritystaff;
-            AdoxioMapchecklistnumberpatrons = adoxioMapchecklistnumberpatrons;
             AdoxioChecklistregulatoryapprovalsreceived = adoxioChecklistregulatoryapprovalsreceived;
+            AdoxioChecklistphotostakennanotes = adoxioChecklistphotostakennanotes;
             AdoxioChecklistalcoholsensematerials = adoxioChecklistalcoholsensematerials;
             AdoxioInspectionoccurrence = adoxioInspectionoccurrence;
             AdoxioServicehoursthursdayclose = adoxioServicehoursthursdayclose;
-            AdoxioChecklistcustomerdeclarationsnotes = adoxioChecklistcustomerdeclarationsnotes;
+            AdoxioRoutinechecklistbottledprodonsitenotes = adoxioRoutinechecklistbottledprodonsitenotes;
+            AdoxioExternalinvestigationfilenumber = adoxioExternalinvestigationfilenumber;
             AdoxioInspchecklisttempexpansion = adoxioInspchecklisttempexpansion;
             this._adoxioSpecialeventidValue = _adoxioSpecialeventidValue;
             AdoxioMktrchecklistcerequirementsreviewed = adoxioMktrchecklistcerequirementsreviewed;
-            AdoxioNoeachoiceprocedure = adoxioNoeachoiceprocedure;
-            AdoxioChecklistdiscusscateringrequirementsnotes = adoxioChecklistdiscusscateringrequirementsnotes;
-            AdoxioSepchecklistsirses = adoxioSepchecklistsirses;
+            AdoxioChecklistagentiddiscussed = adoxioChecklistagentiddiscussed;
+            AdoxioSepcheckliststaffconsumingliquor = adoxioSepcheckliststaffconsumingliquor;
             AdoxioSepchecklistmarketauthposted = adoxioSepchecklistmarketauthposted;
-            AdoxioSepchecklistfoodrequirements = adoxioSepchecklistfoodrequirements;
             this._adoxioRegionalmanagerValue = _adoxioRegionalmanagerValue;
             AdoxioInspectionviolationticketsissued = adoxioInspectionviolationticketsissued;
+            AdoxioAhchecklistliquorclearedpatronsnotes = adoxioAhchecklistliquorclearedpatronsnotes;
             AdoxioRoutinechecklistcontactinfochangenotes = adoxioRoutinechecklistcontactinfochangenotes;
             this._resolvebykpiidValue = _resolvebykpiidValue;
             Contractservicelevelcode = contractservicelevelcode;
@@ -118,408 +118,408 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioSepchecklistapplicantonsite = adoxioSepchecklistapplicantonsite;
             AdoxioRoutinechecklistminprodamountsnotes = adoxioRoutinechecklistminprodamountsnotes;
             AdoxioChecklistsocialrespposterprovidednotes = adoxioChecklistsocialrespposterprovidednotes;
-            AdoxioPrimarybusinesspurposes = adoxioPrimarybusinesspurposes;
+            AdoxioPschecklistincidentlogreviewednotes = adoxioPschecklistincidentlogreviewednotes;
+            AdoxioRoutinechecklistservingitrightna = adoxioRoutinechecklistservingitrightna;
+            this._adoxioEventlocationidValue = _adoxioEventlocationidValue;
             AdoxioRoutinechecklistincidentlognotes = adoxioRoutinechecklistincidentlognotes;
             Servicestage = servicestage;
             AdoxioPschecklistdrinksizespricing = adoxioPschecklistdrinksizespricing;
+            AdoxioServicehourstuesdayclose = adoxioServicehourstuesdayclose;
+            AdoxioPschecklistincidentlogreviewed = adoxioPschecklistincidentlogreviewed;
             this._parentcaseidValue = _parentcaseidValue;
             AdoxioInspchecklistsignageadvertisingnotes = adoxioInspchecklistsignageadvertisingnotes;
-            this._contactidValue = _contactidValue;
+            AdoxioRoutinechecklistalcoholsensematerialnotes = adoxioRoutinechecklistalcoholsensematerialnotes;
+            AdoxioServicehourssaturdayclose = adoxioServicehourssaturdayclose;
             this._accountidValue = _accountidValue;
             AdoxioDatein = adoxioDatein;
             AdoxioRoutinechecklistminorsaspatronsna = adoxioRoutinechecklistminorsaspatronsna;
-            this._createdbyValue = _createdbyValue;
             this._firstresponsebykpiidValue = _firstresponsebykpiidValue;
             AdoxioSepchecklistmaxservingsizes = adoxioSepchecklistmaxservingsizes;
+            this._adoxioParentinspectionidValue = _adoxioParentinspectionidValue;
             Statuscode = statuscode;
+            AdoxioAllactivitiesconcluded = adoxioAllactivitiesconcluded;
             AdoxioRoutinechecklistsamplesizes = adoxioRoutinechecklistsamplesizes;
+            Entityimage = entityimage;
+            this._socialprofileidValue = _socialprofileidValue;
             AdoxioRoutinechecklistpicnicendorsementreqs = adoxioRoutinechecklistpicnicendorsementreqs;
             AdoxioIsremotecommunity = adoxioIsremotecommunity;
-            this._adoxioEstablishmentValue = _adoxioEstablishmentValue;
+            AdoxioChecklistliquorstorage = adoxioChecklistliquorstorage;
             AdoxioSepchecklistfoodrequirementscomment = adoxioSepchecklistfoodrequirementscomment;
+            AdoxioChecklistprocessstepsbyclassification = adoxioChecklistprocessstepsbyclassification;
             AdoxioNoeasentdate = adoxioNoeasentdate;
             this._adoxioAreaValue = _adoxioAreaValue;
             this._adoxioProjectValue = _adoxioProjectValue;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             AdoxioRoutinecheckliststorageavailablenotes = adoxioRoutinecheckliststorageavailablenotes;
-            AdoxioRoutinechecklistcateringrecordsnotes = adoxioRoutinechecklistcateringrecordsnotes;
             AdoxioRoutinechecklistvisitationrecordsnotes = adoxioRoutinechecklistvisitationrecordsnotes;
             AdoxioSepchecklistovercrowding = adoxioSepchecklistovercrowding;
             this._adoxioLicencesubcategoryidValue = _adoxioLicencesubcategoryidValue;
+            AdoxioInspchecklistcannabisregisterroutine = adoxioInspchecklistcannabisregisterroutine;
             AdoxioInspchecklistnootherbusinessnotes = adoxioInspchecklistnootherbusinessnotes;
-            AdoxioChecklistservingitright = adoxioChecklistservingitright;
             AdoxioChecklistsellingitright = adoxioChecklistsellingitright;
-            Productserialnumber = productserialnumber;
             AdoxioRoutinechecklistsocialrespmaterialnanotes = adoxioRoutinechecklistsocialrespmaterialnanotes;
             Caseorigincode = caseorigincode;
-            this._entitlementidValue = _entitlementidValue;
-            AdoxioRoutinecheckliststaffresponsibilitynotes = adoxioRoutinecheckliststaffresponsibilitynotes;
+            AdoxioEstablishmentcity = adoxioEstablishmentcity;
+            AdoxioRoutinechecklisteducationaltasksnotes = adoxioRoutinechecklisteducationaltasksnotes;
+            AdoxioRoutinechecklistcarboyscompliantnotes = adoxioRoutinechecklistcarboyscompliantnotes;
+            this._transactioncurrencyidValue = _transactioncurrencyidValue;
             AdoxioChecklistequipmentreqclassification = adoxioChecklistequipmentreqclassification;
-            AdoxioChecklistprocessstepsbyclassification = adoxioChecklistprocessstepsbyclassification;
+            AdoxioInspectiontimeouthh = adoxioInspectiontimeouthh;
+            Firstresponsesent = firstresponsesent;
             AdoxioMapchecklistnumberofpatronsnotes = adoxioMapchecklistnumberofpatronsnotes;
             AdoxioPschecklistminorsidentifiednotes = adoxioPschecklistminorsidentifiednotes;
             this._masteridValue = _masteridValue;
             AdoxioRoutinechecklistcontractmanufacturingnote = adoxioRoutinechecklistcontractmanufacturingnote;
             AdoxioIscontraventionfollowup = adoxioIscontraventionfollowup;
+            AdoxioSepchecklistmarketauthpostednotes = adoxioSepchecklistmarketauthpostednotes;
             this._adoxioEventidValue = _adoxioEventidValue;
             AdoxioRoutinechecklistcrtcsocialmedia = adoxioRoutinechecklistcrtcsocialmedia;
             AdoxioInspchecklistproductnoselfservicenotes = adoxioInspchecklistproductnoselfservicenotes;
             AdoxioCreateinspection = adoxioCreateinspection;
+            AdoxioRoutinecheckliststaffresponsibilitynotes = adoxioRoutinecheckliststaffresponsibilitynotes;
             AdoxioReactivationdate = adoxioReactivationdate;
             AdoxioPschecklistidchecking = adoxioPschecklistidchecking;
             Overriddencreatedon = overriddencreatedon;
             EntityimageTimestamp = entityimageTimestamp;
             Followuptaskcreated = followuptaskcreated;
             AdoxioChecklistsufficientequipandpersons = adoxioChecklistsufficientequipandpersons;
-            AdoxioChecklistservingitrightnotes = adoxioChecklistservingitrightnotes;
-            AdoxioSepchecklistsamplesizereqsnotes = adoxioSepchecklistsamplesizereqsnotes;
-            AdoxioChecklistequipmentchecksnotes = adoxioChecklistequipmentchecksnotes;
+            AdoxioChecklistworkerverification = adoxioChecklistworkerverification;
             AdoxioSepchecklistsiteplancomment = adoxioSepchecklistsiteplancomment;
-            AdoxioInspchecklistproductnotvisibleroutinenote = adoxioInspchecklistproductnotvisibleroutinenote;
-            Createdon = createdon;
-            AdoxioInspectioncompletedate = adoxioInspectioncompletedate;
+            AdoxioChecklistdiscusscateringrequirementsnotes = adoxioChecklistdiscusscateringrequirementsnotes;
+            AdoxioRoutinechecklistminorsaspatronsnanotes = adoxioRoutinechecklistminorsaspatronsnanotes;
+            AdoxioChecklistsignage = adoxioChecklistsignage;
             AdoxioRoutinechecklistingredientrecordsnotes = adoxioRoutinechecklistingredientrecordsnotes;
             Importsequencenumber = importsequencenumber;
             AdoxioDistilleryequipmentlist = adoxioDistilleryequipmentlist;
             Incidentstagecode = incidentstagecode;
-            AdoxioMapagentid2 = adoxioMapagentid2;
+            AdoxioChecklistseatingconfirmednotes = adoxioChecklistseatingconfirmednotes;
             AdoxioInspchecklistsocialrespmaterialroutine = adoxioInspchecklistsocialrespmaterialroutine;
             AdoxioRoutinechecklistliquordisplays = adoxioRoutinechecklistliquordisplays;
             Onholdtime = onholdtime;
-            AdoxioIsmarketer = adoxioIsmarketer;
+            AdoxioLicencepostedroutine = adoxioLicencepostedroutine;
             AdoxioPschecklistotherobservations = adoxioPschecklistotherobservations;
-            Entityimage = entityimage;
             AdoxioMfgcopackerequipmentlist = adoxioMfgcopackerequipmentlist;
             AdoxioRoutinechecklistcustcompletestasksnotes = adoxioRoutinechecklistcustcompletestasksnotes;
             AdoxioEstablishmentaddress2 = adoxioEstablishmentaddress2;
+            AdoxioPschecklistservingitright = adoxioPschecklistservingitright;
             AdoxioPschecklistidcheckingnotes = adoxioPschecklistidcheckingnotes;
-            AdoxioRoutinechecklistsalesrecords = adoxioRoutinechecklistsalesrecords;
             this._adoxioLicenseeValue = _adoxioLicenseeValue;
             this._existingcaseValue = _existingcaseValue;
             AdoxioSepchecklistsiteplan = adoxioSepchecklistsiteplan;
-            AdoxioPschecklistliquorregisternotes = adoxioPschecklistliquorregisternotes;
             AdoxioInspchecklistworkerqualificationnotes = adoxioInspchecklistworkerqualificationnotes;
             AdoxioRoutinechecklistcustcompletestasks = adoxioRoutinechecklistcustcompletestasks;
-            Escalatedon = escalatedon;
-            AdoxioMktrchecklistonsiterequirementsreviewed = adoxioMktrchecklistonsiterequirementsreviewed;
+            AdoxioSepchecklistunauthorizedgames = adoxioSepchecklistunauthorizedgames;
+            AdoxioInspchecklistproductnotvisibleroutinenote = adoxioInspchecklistproductnotvisibleroutinenote;
             AdoxioInspchecklisttempexpansionnotes = adoxioInspchecklisttempexpansionnotes;
-            AdoxioInspchecklistfloorplanroutinenotes = adoxioInspchecklistfloorplanroutinenotes;
-            Prioritycode = prioritycode;
+            AdoxioSepchecklistsecuritystaffcomment = adoxioSepchecklistsecuritystaffcomment;
             AdoxioPschecklisttempexpansion = adoxioPschecklisttempexpansion;
+            AdoxioChecklistservingitright = adoxioChecklistservingitright;
             Timezoneruleversionnumber = timezoneruleversionnumber;
-            AdoxioNoeanarrative = adoxioNoeanarrative;
+            AdoxioChecklistsafetysecurity = adoxioChecklistsafetysecurity;
             AdoxioComments = adoxioComments;
-            AdoxioRoutinechecklisteventcontracts = adoxioRoutinechecklisteventcontracts;
+            AdoxioPschecklistsecuritycamsoperating = adoxioPschecklistsecuritycamsoperating;
+            this._slainvokedidValue = _slainvokedidValue;
+            AdoxioRoutinechecklistphotostakennotes = adoxioRoutinechecklistphotostakennotes;
+            AdoxioPrimarybusinesspurposes = adoxioPrimarybusinesspurposes;
+            AdoxioSepchecklistsirses = adoxioSepchecklistsirses;
             AdoxioMapchecklistagentidnotes = adoxioMapchecklistagentidnotes;
-            this._subjectidValue = _subjectidValue;
+            AdoxioImportcompleted = adoxioImportcompleted;
+            AdoxioSepchecklistminorspresentcomment = adoxioSepchecklistminorspresentcomment;
             Emailaddress = emailaddress;
-            AdoxioRoutinechecklistsamplerecordsnotes = adoxioRoutinechecklistsamplerecordsnotes;
-            AdoxioRoutinechecklistservingitrightna = adoxioRoutinechecklistservingitrightna;
-            AdoxioRoutinechecklistbottledprodonsitenotes = adoxioRoutinechecklistbottledprodonsitenotes;
-            AdoxioChecklistagentiddiscussednotes = adoxioChecklistagentiddiscussednotes;
-            AdoxioRoutinechecklistliquordisplaysnotes = adoxioRoutinechecklistliquordisplaysnotes;
+            AdoxioRoutinechecklistcateringrecordsnotes = adoxioRoutinechecklistcateringrecordsnotes;
+            AdoxioRoutinechecklistbondingagreementsnotes = adoxioRoutinechecklistbondingagreementsnotes;
+            AdoxioInspectioncompletedate = adoxioInspectioncompletedate;
+            Entityimageid = entityimageid;
             AdoxioInspectionoutcome = adoxioInspectionoutcome;
-            Resolvebyslastatus = resolvebyslastatus;
             AdoxioChecklistproductnotvisible = adoxioChecklistproductnotvisible;
-            AdoxioAhchecklistliquorclearedpatronsnotes = adoxioAhchecklistliquorclearedpatronsnotes;
             AdoxioSepchecklistpermitteeonsite = adoxioSepchecklistpermitteeonsite;
             AdoxioChecklistsufficientequipandpersonsnotes = adoxioChecklistsufficientequipandpersonsnotes;
             AdoxioImportid = adoxioImportid;
-            AdoxioServicehourssaturdayclose = adoxioServicehourssaturdayclose;
             AdoxioInspectioncompleteddate = adoxioInspectioncompleteddate;
             AdoxioExternalid = adoxioExternalid;
+            AdoxioInspchecklistfollowupinspectionrequired = adoxioInspchecklistfollowupinspectionrequired;
             AdoxioSepchecklistsirsescomment = adoxioSepchecklistsirsescomment;
+            AdoxioSepchecklistsamplesizereqs = adoxioSepchecklistsamplesizereqs;
             this._createdbyexternalpartyValue = _createdbyexternalpartyValue;
             AdoxioChecklistminorsasemployeesnotes = adoxioChecklistminorsasemployeesnotes;
+            this._entitlementidValue = _entitlementidValue;
             AdoxioRoutinechecklistsocialrespmaterialna = adoxioRoutinechecklistsocialrespmaterialna;
-            AdoxioAhchecklistpatronsclearedestablishment = adoxioAhchecklistpatronsclearedestablishment;
+            AdoxioRoutinechecklistincidentlog = adoxioRoutinechecklistincidentlog;
+            Blockedprofile = blockedprofile;
             AdoxioRoutinechecklistloungeseareqsnotes = adoxioRoutinechecklistloungeseareqsnotes;
             AdoxioChecklistproductnoselfservice = adoxioChecklistproductnoselfservice;
-            AdoxioChecklistsignandlogomeetsrequirements = adoxioChecklistsignandlogomeetsrequirements;
-            AdoxioInspchecklistadvertisingroutine = adoxioInspchecklistadvertisingroutine;
-            AdoxioInspchecklistsecurityoperationalnotes = adoxioInspchecklistsecurityoperationalnotes;
+            AdoxioServicehourssundayopen = adoxioServicehourssundayopen;
+            Productserialnumber = productserialnumber;
             AdoxioRoutinechecklistauthorizationletters = adoxioRoutinechecklistauthorizationletters;
-            this._adoxioInvestigationidValue = _adoxioInvestigationidValue;
+            AdoxioSepchecklistcommunitydisturbance = adoxioSepchecklistcommunitydisturbance;
             AdoxioPschecklistservingitrightnotes = adoxioPschecklistservingitrightnotes;
             AdoxioPschecklisttakeawayordeliveryonly = adoxioPschecklisttakeawayordeliveryonly;
             AdoxioPschecklistcontrarytolicence = adoxioPschecklistcontrarytolicence;
-            AdoxioNoeasection1penaltychoice = adoxioNoeasection1penaltychoice;
-            AdoxioImportcompleted = adoxioImportcompleted;
             AdoxioRoutinechecklistcateringrecords = adoxioRoutinechecklistcateringrecords;
             AdoxioRoutinechecklistcrtcsocialmedianotes = adoxioRoutinechecklistcrtcsocialmedianotes;
             AdoxioMktrchecklistvalidlettersemployproof = adoxioMktrchecklistvalidlettersemployproof;
             AdoxioChecklistsocialresponsibilitynotes = adoxioChecklistsocialresponsibilitynotes;
             Stageid = stageid;
-            AdoxioChecklistbondedwarehousediscussednotes = adoxioChecklistbondedwarehousediscussednotes;
             AdoxioDateout = adoxioDateout;
-            AdoxioInspectiontimeoutmm = adoxioInspectiontimeoutmm;
             AdoxioChecklistequipmentreqclassificationnotes = adoxioChecklistequipmentreqclassificationnotes;
             AdoxioRoutinechecklistloungeseareqs = adoxioRoutinechecklistloungeseareqs;
-            AdoxioAhchecklistliquorsaleoutsidehours = adoxioAhchecklistliquorsaleoutsidehours;
             AdoxioInspchecklistaccordancewithaipletternotes = adoxioInspchecklistaccordancewithaipletternotes;
             AdoxioRoutinechecklistcustdeclreceiptsnotes = adoxioRoutinechecklistcustdeclreceiptsnotes;
-            AdoxioRoutinechecklistcarboyscompliant = adoxioRoutinechecklistcarboyscompliant;
-            AdoxioRoutinechecklistliquorregisternotes = adoxioRoutinechecklistliquorregisternotes;
-            this._adoxioRegionValue = _adoxioRegionValue;
+            AdoxioMktrchecklistonsiterequirementsreviewed = adoxioMktrchecklistonsiterequirementsreviewed;
             AdoxioContraventionsummary = adoxioContraventionsummary;
-            AdoxioChecklistsignage = adoxioChecklistsignage;
             AdoxioInspchecklisttakeawayordeliveryonly = adoxioInspchecklisttakeawayordeliveryonly;
-            AdoxioChecklistmanufacturingstorageareanotes = adoxioChecklistmanufacturingstorageareanotes;
             AdoxioPschecklistcommunitydisturbance = adoxioPschecklistcommunitydisturbance;
             AdoxioMktrchecklistrequirementsreviewed = adoxioMktrchecklistrequirementsreviewed;
             AdoxioChecklisttakeandsendphotos = adoxioChecklisttakeandsendphotos;
+            AdoxioPschecklistunlawfulcannabis = adoxioPschecklistunlawfulcannabis;
             AdoxioRoutinechecklistminorsasemployeesnotes = adoxioRoutinechecklistminorsasemployeesnotes;
             AdoxioServicehoursstandardhours = adoxioServicehoursstandardhours;
             Sentimentvalue = sentimentvalue;
+            AdoxioRoutinechecklisttakehomenotes = adoxioRoutinechecklisttakehomenotes;
             AdoxioSepchecklistsecurityplancomment = adoxioSepchecklistsecurityplancomment;
-            this._primarycontactidValue = _primarycontactidValue;
-            AdoxioRoutinechecklistbondingagreementsnotes = adoxioRoutinechecklistbondingagreementsnotes;
             AdoxioAhchecklistliquorclearedpatrons = adoxioAhchecklistliquorclearedpatrons;
+            Processid = processid;
+            this._primarycontactidValue = _primarycontactidValue;
+            AdoxioChecklistmanufacturingstorageareanotes = adoxioChecklistmanufacturingstorageareanotes;
+            AdoxioChecklistbondedwarehousediscussednotes = adoxioChecklistbondedwarehousediscussednotes;
+            AdoxioRoutinecheckliststorageavailable = adoxioRoutinecheckliststorageavailable;
             AdoxioSepchecklistpermitchecked = adoxioSepchecklistpermitchecked;
             AdoxioRoutinechecklistsocialrespmaterial = adoxioRoutinechecklistsocialrespmaterial;
             AdoxioIsremotecomments = adoxioIsremotecomments;
             AdoxioSepchecklistdisorderlyunlawfulactivity = adoxioSepchecklistdisorderlyunlawfulactivity;
             AdoxioEstablishmentpostalcode = adoxioEstablishmentpostalcode;
+            AdoxioSepchecklisteventsignagecomment = adoxioSepchecklisteventsignagecomment;
             AdoxioPiecesofidchecked = adoxioPiecesofidchecked;
             AdoxioSepchecklistintoxication = adoxioSepchecklistintoxication;
             Versionnumber = versionnumber;
             AdoxioChecklistsellingitrightnotes = adoxioChecklistsellingitrightnotes;
-            Customersatisfactioncode = customersatisfactioncode;
             AdoxioRoutinechecklistsamplesrecordsnotes = adoxioRoutinechecklistsamplesrecordsnotes;
+            AdoxioInspchecklistsecurityoperationalnotes = adoxioInspchecklistsecurityoperationalnotes;
             AdoxioAlcoholsensematerial = adoxioAlcoholsensematerial;
             AdoxioChecklistbondedwarehousenanotes = adoxioChecklistbondedwarehousenanotes;
-            AdoxioSepchecklistunauthorizedgames = adoxioSepchecklistunauthorizedgames;
+            AdoxioChecklistequipmentchecks = adoxioChecklistequipmentchecks;
             Isescalated = isescalated;
             AdoxioSepchecklistovercrowdingcomment = adoxioSepchecklistovercrowdingcomment;
+            AdoxioInspchecklistpackagingroutine = adoxioInspchecklistpackagingroutine;
             AdoxioMapchecklistmapinspectiontypenotes = adoxioMapchecklistmapinspectiontypenotes;
-            AdoxioSepchecklistliquorregister = adoxioSepchecklistliquorregister;
+            AdoxioPschecklisttempexpansionnotes = adoxioPschecklisttempexpansionnotes;
+            AdoxioIsmarketer = adoxioIsmarketer;
             AdoxioRoutinechecklistsamplesizesnotes = adoxioRoutinechecklistsamplesizesnotes;
             AdoxioSendcompliancemeetingnotification = adoxioSendcompliancemeetingnotification;
             AdoxioIsremote3rdpartycontacted = adoxioIsremote3rdpartycontacted;
             AdoxioRoutinechecklistequipmentchecks = adoxioRoutinechecklistequipmentchecks;
             Severitycode = severitycode;
             AdoxioSepchecklistapplicantonsitecomment = adoxioSepchecklistapplicantonsitecomment;
-            this._modifiedbyValue = _modifiedbyValue;
+            AdoxioRoutinechecklistpricingsizingnotes = adoxioRoutinechecklistpricingsizingnotes;
             AdoxioWineryequipmentlist = adoxioWineryequipmentlist;
             AdoxioInspchecklistdepictsaipfloorplannotes = adoxioInspchecklistdepictsaipfloorplannotes;
-            AdoxioRoutinechecklistalcoholsensematerialnotes = adoxioRoutinechecklistalcoholsensematerialnotes;
-            AdoxioPschecklistservingitright = adoxioPschecklistservingitright;
-            Processid = processid;
+            AdoxioSepchecklistsamplesizereqsnotes = adoxioSepchecklistsamplesizereqsnotes;
+            AdoxioSepchecklistminorspresent = adoxioSepchecklistminorspresent;
             Activitiescomplete = activitiescomplete;
             AdoxioRoutinechecklistliquorstorage = adoxioRoutinechecklistliquorstorage;
             AdoxioRoutinechecklistauthorizationlettersnotes = adoxioRoutinechecklistauthorizationlettersnotes;
-            AdoxioMktrchecklistadvertisingreviewed = adoxioMktrchecklistadvertisingreviewed;
+            AdoxioPschecklistworkerreviewed = adoxioPschecklistworkerreviewed;
+            AdoxioRoutinechecklistsamplesrecords = adoxioRoutinechecklistsamplesrecords;
             this._customeridValue = _customeridValue;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
             Modifiedon = modifiedon;
             AdoxioParentinspectiontype = adoxioParentinspectiontype;
             AdoxioChecklistfloorplannanotes = adoxioChecklistfloorplannanotes;
-            AdoxioChecklistliquorstorage = adoxioChecklistliquorstorage;
+            AdoxioNoeanarrative = adoxioNoeanarrative;
+            AdoxioNoeasection1penaltychoice = adoxioNoeasection1penaltychoice;
             AdoxioBreweryequipmentlist = adoxioBreweryequipmentlist;
             Isdecrementing = isdecrementing;
             AdoxioChecklistdepictsaipfloorplan = adoxioChecklistdepictsaipfloorplan;
             AdoxioChecklistcustomerdeclarations = adoxioChecklistcustomerdeclarations;
             AdoxioIsremotesendletter = adoxioIsremotesendletter;
-            AdoxioSepchecklistcommunitydisturbance = adoxioSepchecklistcommunitydisturbance;
-            AdoxioAllactivitiesconcluded = adoxioAllactivitiesconcluded;
+            AdoxioRoutinecheckliststaffresponsibility = adoxioRoutinecheckliststaffresponsibility;
             AdoxioPschecklistcommunitydisturbancenotes = adoxioPschecklistcommunitydisturbancenotes;
             Followupby = followupby;
+            AdoxioMapchecklistnumberpatrons = adoxioMapchecklistnumberpatrons;
             AdoxioInspchecklistproductnotvisiblenotes = adoxioInspchecklistproductnotvisiblenotes;
             AdoxioInspchecklistcannabisregisternotes = adoxioInspchecklistcannabisregisternotes;
-            AdoxioChecklistaccordancewithaipletter = adoxioChecklistaccordancewithaipletter;
-            AdoxioPschecklistsecuritycamsoperatingnotes = adoxioPschecklistsecuritycamsoperatingnotes;
+            AdoxioInspchecklistsmelljarsnotes = adoxioInspchecklistsmelljarsnotes;
             this._adoxioEnforcementactionidValue = _adoxioEnforcementactionidValue;
             AdoxioRoutinechecklistnonliquorsaleitems = adoxioRoutinechecklistnonliquorsaleitems;
-            AdoxioPschecklistsecuritycamsoperating = adoxioPschecklistsecuritycamsoperating;
+            AdoxioRoutinechecklistcustdeclreceipts = adoxioRoutinechecklistcustdeclreceipts;
             AdoxioRoutinechecklistcontractmanufacturing = adoxioRoutinechecklistcontractmanufacturing;
             AdoxioInspchecklistworkersverifiedroutine = adoxioInspchecklistworkersverifiedroutine;
-            AdoxioChecklistseatingconfirmednotes = adoxioChecklistseatingconfirmednotes;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
-            Customercontacted = customercontacted;
-            AdoxioRoutinechecklistsalesrecordsnotes = adoxioRoutinechecklistsalesrecordsnotes;
+            Customersatisfactioncode = customersatisfactioncode;
+            AdoxioSepchecklistdisorderunlawactivitycomment = adoxioSepchecklistdisorderunlawactivitycomment;
+            AdoxioContraventionsadded = adoxioContraventionsadded;
+            AdoxioRoutinechecklistcarboyscompliant = adoxioRoutinechecklistcarboyscompliant;
+            Resolvebyslastatus = resolvebyslastatus;
             this._slaidValue = _slaidValue;
-            AdoxioSepchecklisteventhours = adoxioSepchecklisteventhours;
+            AdoxioChecklistsocialrespposterprovided = adoxioChecklistsocialrespposterprovided;
+            AdoxioSepchecklistpermitteeonsitenotes = adoxioSepchecklistpermitteeonsitenotes;
             AdoxioRoutinechecklistpromotionvalidity = adoxioRoutinechecklistpromotionvalidity;
             AdoxioChecklistminorspatrons = adoxioChecklistminorspatrons;
-            AdoxioAhchecklistpatronsclearestablishmentnotes = adoxioAhchecklistpatronsclearestablishmentnotes;
             AdoxioActualinspectiondate = adoxioActualinspectiondate;
-            AdoxioLicencepostedroutine = adoxioLicencepostedroutine;
+            AdoxioInspchecklistfloorplanroutine = adoxioInspchecklistfloorplanroutine;
             AdoxioInspchecklistsecrequirementsroutine = adoxioInspchecklistsecrequirementsroutine;
-            this._owneridValue = _owneridValue;
-            AdoxioSepchecklistsecuritystaffcomment = adoxioSepchecklistsecuritystaffcomment;
-            this._adoxioLicencetypeidValue = _adoxioLicencetypeidValue;
+            AdoxioPschecklistliquorregister = adoxioPschecklistliquorregister;
+            AdoxioInspectiondate = adoxioInspectiondate;
             AdoxioRoutinechecklistpicnicendorsementreqsnote = adoxioRoutinechecklistpicnicendorsementreqsnote;
+            AdoxioPschecklistoutsideopshours = adoxioPschecklistoutsideopshours;
             AdoxioRoutinechecklistpromotionvaliditynotes = adoxioRoutinechecklistpromotionvaliditynotes;
             AdoxioInspectionactivitiesconcludeddate = adoxioInspectionactivitiesconcludeddate;
-            AdoxioChecklistdiscusstermsconditions = adoxioChecklistdiscusstermsconditions;
+            this._subjectidValue = _subjectidValue;
             AdoxioSendenoticenotification = adoxioSendenoticenotification;
             AdoxioRoutinechecklistsocialrespmaterialnotes = adoxioRoutinechecklistsocialrespmaterialnotes;
-            AdoxioRoutinechecklistincidentlog = adoxioRoutinechecklistincidentlog;
             AdoxioChecklistsafetysecuritynotes = adoxioChecklistsafetysecuritynotes;
-            Entityimageid = entityimageid;
             this._owningteamValue = _owningteamValue;
-            AdoxioChecklistnootherbusinessassociated = adoxioChecklistnootherbusinessassociated;
             AdoxioRoutinechecklistsellingitrightnotes = adoxioRoutinechecklistsellingitrightnotes;
-            AdoxioRoutinechecklistliquorpricelist = adoxioRoutinechecklistliquorpricelist;
-            AdoxioRoutinechecklistphotostakennotes = adoxioRoutinechecklistphotostakennotes;
+            AdoxioRoutinechecklistsalesrecords = adoxioRoutinechecklistsalesrecords;
+            AdoxioSepchecklistsecurityplan = adoxioSepchecklistsecurityplan;
             AdoxioChecklistprocessstepsbyclassificationnote = adoxioChecklistprocessstepsbyclassificationnote;
             AdoxioInspectiontype = adoxioInspectiontype;
-            AdoxioSepcheckliststaffconsumingliquor = adoxioSepcheckliststaffconsumingliquor;
             AdoxioSepchecklistunauthorizedgamescomment = adoxioSepchecklistunauthorizedgamescomment;
             AdoxioInspectionservingitright = adoxioInspectionservingitright;
-            AdoxioRoutinechecklisttakehomenotes = adoxioRoutinechecklisttakehomenotes;
-            AdoxioChecklistsocialresponsibility = adoxioChecklistsocialresponsibility;
+            AdoxioChecklistworkerverificationnotes = adoxioChecklistworkerverificationnotes;
+            AdoxioRoutinechecklistliquorpricelistnotes = adoxioRoutinechecklistliquorpricelistnotes;
+            AdoxioChecklistdiscusstermsconditions = adoxioChecklistdiscusstermsconditions;
             AdoxioSepchecklistliquorregistercomment = adoxioSepchecklistliquorregistercomment;
             AdoxioRlrsprimarybusinesspurposes = adoxioRlrsprimarybusinesspurposes;
             AdoxioChecklistdiscusscateringrequirements = adoxioChecklistdiscusscateringrequirements;
-            AdoxioDuedatechangereason = adoxioDuedatechangereason;
-            AdoxioRoutinechecklistcustdeclreceipts = adoxioRoutinechecklistcustdeclreceipts;
+            AdoxioRoutinechecklistliquorregister = adoxioRoutinechecklistliquorregister;
+            AdoxioAhchecklistliquorsaleoutsidehours = adoxioAhchecklistliquorsaleoutsidehours;
             AdoxioChecklistbondedwarehousediscussed = adoxioChecklistbondedwarehousediscussed;
-            AdoxioInspchecklistfloorplanroutine = adoxioInspchecklistfloorplanroutine;
+            AdoxioAhchecklistpatronsclearedestablishment = adoxioAhchecklistpatronsclearedestablishment;
             Lastonholdtime = lastonholdtime;
-            this._adoxioParentinspectionidValue = _adoxioParentinspectionidValue;
             AdoxioEstablishmentaddress = adoxioEstablishmentaddress;
             AdoxioRemotecommunitylettersentdate = adoxioRemotecommunitylettersentdate;
-            AdoxioSepchecklistminorspresentcomment = adoxioSepchecklistminorspresentcomment;
+            this._adoxioApplicationValue = _adoxioApplicationValue;
+            Prioritycode = prioritycode;
             AdoxioRoutinechecklistservingitrightnotes = adoxioRoutinechecklistservingitrightnotes;
             AdoxioInspectionduedate = adoxioInspectionduedate;
             AdoxioSepchecklistliquorservice = adoxioSepchecklistliquorservice;
-            AdoxioSepchecklistdisorderunlawactivitycomment = adoxioSepchecklistdisorderunlawactivitycomment;
-            AdoxioRoutinechecklistcontactinfochange = adoxioRoutinechecklistcontactinfochange;
-            AdoxioPschecklisttempexpansionnotes = adoxioPschecklisttempexpansionnotes;
+            AdoxioRoutinechecklistidrequirementsnotes = adoxioRoutinechecklistidrequirementsnotes;
+            AdoxioDuedatechangereason = adoxioDuedatechangereason;
+            AdoxioPschecklistsecuritycamsoperatingnotes = adoxioPschecklistsecuritycamsoperatingnotes;
             this._owninguserValue = _owninguserValue;
-            AdoxioInspchecklistfollowupinspectionrequired = adoxioInspchecklistfollowupinspectionrequired;
+            AdoxioMapagentid2 = adoxioMapagentid2;
             Messagetypecode = messagetypecode;
-            AdoxioPschecklistliquorregister = adoxioPschecklistliquorregister;
-            AdoxioPackagingsealed = adoxioPackagingsealed;
+            AdoxioRoutinechecklisteducationaltasks = adoxioRoutinechecklisteducationaltasks;
+            Incidentid = incidentid;
             Casetypecode = casetypecode;
+            AdoxioRoutinechecklisttakehome = adoxioRoutinechecklisttakehome;
             AdoxioChecklistadvertisingnotes = adoxioChecklistadvertisingnotes;
             AdoxioPschecklistotherobservationsnotes = adoxioPschecklistotherobservationsnotes;
             AdoxioChecklistingredientsrecords = adoxioChecklistingredientsrecords;
-            AdoxioMapchecklistmapinspectiontype = adoxioMapchecklistmapinspectiontype;
             EntityimageUrl = entityimageUrl;
             Actualserviceunits = actualserviceunits;
             AdoxioChecklistfloorplanna = adoxioChecklistfloorplanna;
             AdoxioChecklistmanufacturingstoragearea = adoxioChecklistmanufacturingstoragearea;
-            AdoxioInspectiontimeouthh = adoxioInspectiontimeouthh;
-            Incidentid = incidentid;
-            AdoxioPschecklistincidentlogreviewed = adoxioPschecklistincidentlogreviewed;
             AdoxioRoutinechecklistonsiteendorsementreqs = adoxioRoutinechecklistonsiteendorsementreqs;
             Title = title;
             Billedserviceunits = billedserviceunits;
-            AdoxioRoutinechecklistliquorpricelistnotes = adoxioRoutinechecklistliquorpricelistnotes;
-            AdoxioServicehourssundayopen = adoxioServicehourssundayopen;
+            AdoxioChecklistsocialresponsibility = adoxioChecklistsocialresponsibility;
             AdoxioPschecklistunlawfulcannabisnotes = adoxioPschecklistunlawfulcannabisnotes;
             Traversedpath = traversedpath;
-            AdoxioChecklistcontractmanufacturingreqs = adoxioChecklistcontractmanufacturingreqs;
+            this._owneridValue = _owneridValue;
             AdoxioServicehourswednesdayclose = adoxioServicehourswednesdayclose;
             AdoxioChecklistdiscusstermsconditionsnotes = adoxioChecklistdiscusstermsconditionsnotes;
-            AdoxioRoutinechecklistcarboyscompliantnotes = adoxioRoutinechecklistcarboyscompliantnotes;
             AdoxioSepchecklistaccesscontrolledcomment = adoxioSepchecklistaccesscontrolledcomment;
-            AdoxioInspchecklistpackagingroutine = adoxioInspchecklistpackagingroutine;
+            AdoxioChecklistminorsaspatronsnotes = adoxioChecklistminorsaspatronsnotes;
+            this._contactidValue = _contactidValue;
             AdoxioRoutinechecklistingredientrecords = adoxioRoutinechecklistingredientrecords;
             AdoxioSepchecklistintoxicationcomment = adoxioSepchecklistintoxicationcomment;
             AdoxioEmployeesconsumingliquor = adoxioEmployeesconsumingliquor;
             AdoxioPschecklistliquorservicenotes = adoxioPschecklistliquorservicenotes;
-            AdoxioChecklistworkerverificationnotes = adoxioChecklistworkerverificationnotes;
-            this._slainvokedidValue = _slainvokedidValue;
+            AdoxioInspchecklistfloorplanroutinenotes = adoxioInspchecklistfloorplanroutinenotes;
             AdoxioChecklistphysicalsecurityoperating = adoxioChecklistphysicalsecurityoperating;
             AdoxioRoutinechecklistpricingsizing = adoxioRoutinechecklistpricingsizing;
             AdoxioInspchecklistphysicalsecuritynotes = adoxioInspchecklistphysicalsecuritynotes;
             AdoxioRoutinechecklistidentification = adoxioRoutinechecklistidentification;
-            this._socialprofileidValue = _socialprofileidValue;
             AdoxioChecklistbondedwarehousena = adoxioChecklistbondedwarehousena;
             AdoxioCompliancemeetingdate = adoxioCompliancemeetingdate;
             AdoxioPschecklistcovertinspectiontype = adoxioPschecklistcovertinspectiontype;
-            AdoxioRoutinechecklistservingitright = adoxioRoutinechecklistservingitright;
             AdoxioChecklistadvertising = adoxioChecklistadvertising;
+            AdoxioChecklistservingitrightnotes = adoxioChecklistservingitrightnotes;
             this._adoxioComplaintidValue = _adoxioComplaintidValue;
-            AdoxioRoutinechecklistidrequirementsnotes = adoxioRoutinechecklistidrequirementsnotes;
-            AdoxioRoutinechecklistpricingsizingnotes = adoxioRoutinechecklistpricingsizingnotes;
-            AdoxioRoutinechecklistminorsaspatronsnanotes = adoxioRoutinechecklistminorsaspatronsnanotes;
             AdoxioChecklistminorsasemployees = adoxioChecklistminorsasemployees;
-            AdoxioInspectiondate = adoxioInspectiondate;
+            Createdon = createdon;
             Checkemail = checkemail;
             Decremententitlementterm = decremententitlementterm;
-            AdoxioRoutinechecklistliquorregister = adoxioRoutinechecklistliquorregister;
-            AdoxioChecklistphotostakennanotes = adoxioChecklistphotostakennanotes;
+            this._adoxioRegionValue = _adoxioRegionValue;
             Exchangerate = exchangerate;
-            AdoxioPschecklistunlawfulcannabis = adoxioPschecklistunlawfulcannabis;
+            AdoxioSepchecklistaccesscontrolled = adoxioSepchecklistaccesscontrolled;
+            AdoxioRoutinechecklistnonliquorsaleitemsnotes = adoxioRoutinechecklistnonliquorsaleitemsnotes;
             AdoxioRoutinechecklistalcoholsensematerial = adoxioRoutinechecklistalcoholsensematerial;
             AdoxioInspchecklistsmelljarsroutine = adoxioInspchecklistsmelljarsroutine;
             AdoxioChecklistphotostakenna = adoxioChecklistphotostakenna;
             AdoxioSepchecklistmarketqualifiesnotes = adoxioSepchecklistmarketqualifiesnotes;
-            this._adoxioApplicationValue = _adoxioApplicationValue;
             Ticketnumber = ticketnumber;
             AdoxioMapchecklistpiecesofidcheckednotes = adoxioMapchecklistpiecesofidcheckednotes;
             AdoxioPschecklistcontrarytolicencenotes = adoxioPschecklistcontrarytolicencenotes;
             AdoxioChecklistdiscussroutineinspectionsnotes = adoxioChecklistdiscussroutineinspectionsnotes;
-            AdoxioChecklistingredientsrecordsnotes = adoxioChecklistingredientsrecordsnotes;
             AdoxioInspchecklistpackagingsealednotes = adoxioInspchecklistpackagingsealednotes;
             Statecode = statecode;
             AdoxioExternalinvestigationjobnumber = adoxioExternalinvestigationjobnumber;
             this._adoxioApplicationtypeidValue = _adoxioApplicationtypeidValue;
+            AdoxioRoutinechecklistequipmentchecksnotes = adoxioRoutinechecklistequipmentchecksnotes;
+            AdoxioSepchecklistpricelistreqs = adoxioSepchecklistpricelistreqs;
             AdoxioMktrchecklistlicence = adoxioMktrchecklistlicence;
             AdoxioInspchecklistproductnotvisibleroutine = adoxioInspchecklistproductnotvisibleroutine;
+            AdoxioSepchecklisteventhours = adoxioSepchecklisteventhours;
             AdoxioRoutinechecklistcontactedpolicenotes = adoxioRoutinechecklistcontactedpolicenotes;
             Firstresponseslastatus = firstresponseslastatus;
             AdoxioPschecklistonsiteconsumptionnotes = adoxioPschecklistonsiteconsumptionnotes;
             AdoxioPschecklistopenproductnotes = adoxioPschecklistopenproductnotes;
             AdoxioSepchecklisteventsignage = adoxioSepchecklisteventsignage;
             AdoxioSepchecklistliquorservicecomment = adoxioSepchecklistliquorservicecomment;
-            AdoxioRoutinechecklistequipmentchecksnotes = adoxioRoutinechecklistequipmentchecksnotes;
-            AdoxioPschecklistincidentlogreviewednotes = adoxioPschecklistincidentlogreviewednotes;
-            AdoxioMktrchecklistpromotionsreviewed = adoxioMktrchecklistpromotionsreviewed;
+            AdoxioPackagingsealed = adoxioPackagingsealed;
+            AdoxioRoutinechecklistliquorregisternotes = adoxioRoutinechecklistliquorregisternotes;
+            AdoxioRoutinechecklistliquorpricelist = adoxioRoutinechecklistliquorpricelist;
+            AdoxioChecklistcustomerdeclarationsnotes = adoxioChecklistcustomerdeclarationsnotes;
+            AdoxioRoutinechecklistvisitationrecords = adoxioRoutinechecklistvisitationrecords;
             AdoxioChecklistsignagenotes = adoxioChecklistsignagenotes;
-            AdoxioInspchecklistsmelljarsnotes = adoxioInspchecklistsmelljarsnotes;
             AdoxioInspchecklisttakeawayordeliveryonlynotes = adoxioInspchecklisttakeawayordeliveryonlynotes;
-            AdoxioPschecklistproductstoragesecurednotes = adoxioPschecklistproductstoragesecurednotes;
             Resolveby = resolveby;
-            AdoxioSepchecklistminorspresent = adoxioSepchecklistminorspresent;
-            AdoxioChecklistequipmentchecks = adoxioChecklistequipmentchecks;
-            AdoxioSepchecklistpermitteeonsitenotes = adoxioSepchecklistpermitteeonsitenotes;
-            AdoxioRoutinechecklisteducationaltasksnotes = adoxioRoutinechecklisteducationaltasksnotes;
-            AdoxioPschecklistworkerreviewed = adoxioPschecklistworkerreviewed;
+            AdoxioSepchecklistcommunitydisturbancecomment = adoxioSepchecklistcommunitydisturbancecomment;
+            AdoxioPschecklistliquorregisternotes = adoxioPschecklistliquorregisternotes;
+            this._createdbyValue = _createdbyValue;
             this._adoxioPmuareaidValue = _adoxioPmuareaidValue;
-            AdoxioChecklistsafetysecurity = adoxioChecklistsafetysecurity;
+            AdoxioRoutinechecklistcontractsfinancials = adoxioRoutinechecklistcontractsfinancials;
             AdoxioSepchecklistmarketqualifies = adoxioSepchecklistmarketqualifies;
             AdoxioChecklistendorsementsrequirements = adoxioChecklistendorsementsrequirements;
             AdoxioServicehoursfridayclose = adoxioServicehoursfridayclose;
-            AdoxioChecklistregulatoryapprovalsreceivednotes = adoxioChecklistregulatoryapprovalsreceivednotes;
+            AdoxioChecklistnootherbusinessassociated = adoxioChecklistnootherbusinessassociated;
+            AdoxioRoutinechecklistsalesrecordsnotes = adoxioRoutinechecklistsalesrecordsnotes;
             AdoxioPschecklistliquorservice = adoxioPschecklistliquorservice;
+            AdoxioRoutinechecklisteventcontracts = adoxioRoutinechecklisteventcontracts;
             AdoxioChecklistalcoholsensematerialsnotes = adoxioChecklistalcoholsensematerialsnotes;
             AdoxioInspectionsminors = adoxioInspectionsminors;
-            AdoxioChecklistagentiddiscussed = adoxioChecklistagentiddiscussed;
-            AdoxioRoutinechecklistbottledprodonsite = adoxioRoutinechecklistbottledprodonsite;
-            AdoxioChecklistminorsaspatronsnotes = adoxioChecklistminorsaspatronsnotes;
+            this._kbarticleidValue = _kbarticleidValue;
+            this._adoxioInvestigationidValue = _adoxioInvestigationidValue;
             AdoxioPschecklistovercrowding = adoxioPschecklistovercrowding;
-            AdoxioRoutinechecklistsamplerecords = adoxioRoutinechecklistsamplerecords;
-            AdoxioEstablishmentcity = adoxioEstablishmentcity;
-            AdoxioInspchecklistcannabisregisterroutine = adoxioInspchecklistcannabisregisterroutine;
+            AdoxioChecklistequipmentchecksnotes = adoxioChecklistequipmentchecksnotes;
+            Escalatedon = escalatedon;
+            AdoxioRoutinechecklistcontactinfochange = adoxioRoutinechecklistcontactinfochange;
             AdoxioChecklistdiscussroutineinspections = adoxioChecklistdiscussroutineinspections;
-            AdoxioRoutinechecklistsamplesrecords = adoxioRoutinechecklistsamplesrecords;
             AdoxioPschecklistopenproduct = adoxioPschecklistopenproduct;
             AdoxioRoutinechecklistcontactedpolice = adoxioRoutinechecklistcontactedpolice;
             AdoxioInspectiontimeinhh = adoxioInspectiontimeinhh;
+            this._modifiedbyValue = _modifiedbyValue;
             AdoxioRoutinechecklistminprodamounts = adoxioRoutinechecklistminprodamounts;
             AdoxioInspchecklistsignmeetsrequirementsnotes = adoxioInspchecklistsignmeetsrequirementsnotes;
             AdoxioRoutinechecklistliquorstoragenotes = adoxioRoutinechecklistliquorstoragenotes;
-            this._transactioncurrencyidValue = _transactioncurrencyidValue;
-            Influencescore = influencescore;
-            AdoxioRoutinechecklistcontractsfinancials = adoxioRoutinechecklistcontractsfinancials;
-            AdoxioSepchecklistsamplesizereqs = adoxioSepchecklistsamplesizereqs;
+            AdoxioCreatefollowup = adoxioCreatefollowup;
+            AdoxioInspchecklistadvertisingroutine = adoxioInspchecklistadvertisingroutine;
+            Customercontacted = customercontacted;
             AdoxioMinorsserved = adoxioMinorsserved;
             AdoxioSepchecklistmaxservingsizescomment = adoxioSepchecklistmaxservingsizescomment;
             AdoxioMapchecklistminorservednotes = adoxioMapchecklistminorservednotes;
             AdoxioInspectiontimeinmm = adoxioInspectiontimeinmm;
+            AdoxioSepchecklistpermitcheckedcomment = adoxioSepchecklistpermitcheckedcomment;
             AdoxioPschecklistintoxicationidentifiednotes = adoxioPschecklistintoxicationidentifiednotes;
             this._productidValue = _productidValue;
             AdoxioRoutinechecklistsellingitright = adoxioRoutinechecklistsellingitright;
-            AdoxioServicehoursmondayclose = adoxioServicehoursmondayclose;
-            AdoxioServicehourstuesdayclose = adoxioServicehourstuesdayclose;
+            AdoxioRoutinechecklistliquordisplaysnotes = adoxioRoutinechecklistliquordisplaysnotes;
             AdoxioInspchecklistlicencepostednotes = adoxioInspchecklistlicencepostednotes;
-            AdoxioRoutinechecklisteducationaltasks = adoxioRoutinechecklisteducationaltasks;
-            AdoxioSepchecklistsecurityplan = adoxioSepchecklistsecurityplan;
+            AdoxioRoutinechecklistservingitright = adoxioRoutinechecklistservingitright;
             AdoxioRoutinechecklistidrequirements = adoxioRoutinechecklistidrequirements;
+            this._adoxioLicencetypeidValue = _adoxioLicencetypeidValue;
             AdoxioAhchecklistliquorsaleoutsidehoursnotes = adoxioAhchecklistliquorsaleoutsidehoursnotes;
             AdoxioRoutinechecklistonsiteendorsementreqsnote = adoxioRoutinechecklistonsiteendorsementreqsnote;
             AdoxioRoutinechecklistidentificationnotes = adoxioRoutinechecklistidentificationnotes;
@@ -527,14 +527,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioMapchecklistminorserved = adoxioMapchecklistminorserved;
             AdoxioPschecklistoutsideopshoursnotes = adoxioPschecklistoutsideopshoursnotes;
             AdoxioPschecklistworkerreviewednotes = adoxioPschecklistworkerreviewednotes;
-            this._kbarticleidValue = _kbarticleidValue;
-            AdoxioPschecklistdrinksizespricingnotes = adoxioPschecklistdrinksizespricingnotes;
+            AdoxioRoutinechecklistsamplerecordsnotes = adoxioRoutinechecklistsamplerecordsnotes;
             AdoxioServicehoursfridayopen = adoxioServicehoursfridayopen;
             AdoxioChecklistseatingconfirmed = adoxioChecklistseatingconfirmed;
             AdoxioServicehoursthursdayopen = adoxioServicehoursthursdayopen;
+            AdoxioPschecklistdrinksizespricingnotes = adoxioPschecklistdrinksizespricingnotes;
             AdoxioRoutinechecklistminorsasemployees = adoxioRoutinechecklistminorsasemployees;
             AdoxioMapchecklistpiecesofidchecked = adoxioMapchecklistpiecesofidchecked;
-            AdoxioPschecklistintoxicationidentified = adoxioPschecklistintoxicationidentified;
+            Influencescore = influencescore;
             AdoxioServicehourswednesdayopen = adoxioServicehourswednesdayopen;
             AdoxioInspchecklistsocialrespmaterialnotes = adoxioInspchecklistsocialrespmaterialnotes;
             AdoxioSepchecklistpricelistreqsnotes = adoxioSepchecklistpricelistreqsnotes;
@@ -653,18 +653,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_mktrchecklistpromotionsreviewed")]
+        public int? AdoxioMktrchecklistpromotionsreviewed { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_pschecklistonsiteconsumption")]
         public int? AdoxioPschecklistonsiteconsumption { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_mktrchecklistlicencenotes")]
-        public string AdoxioMktrchecklistlicencenotes { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_routinechecklistvisitationrecords")]
-        public int? AdoxioRoutinechecklistvisitationrecords { get; set; }
+        [JsonProperty(PropertyName = "adoxio_routinechecklistbottledprodonsite")]
+        public int? AdoxioRoutinechecklistbottledprodonsite { get; set; }
 
         /// <summary>
         /// </summary>
@@ -673,18 +673,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistendorsementsrequirementsnotes")]
-        public string AdoxioChecklistendorsementsrequirementsnotes { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_contraventionsadded")]
-        public int? AdoxioContraventionsadded { get; set; }
+        [JsonProperty(PropertyName = "adoxio_mktrchecklistadvertisingreviewed")]
+        public int? AdoxioMktrchecklistadvertisingreviewed { get; set; }
 
         /// <summary>
         /// </summary>
@@ -698,18 +693,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_ahchecklistpatronsclearestablishmentnotes")]
+        public string AdoxioAhchecklistpatronsclearestablishmentnotes { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_contractdetailid_value")]
         public string _contractdetailidValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_sepchecklistliquorreceiptscomment")]
-        public string AdoxioSepchecklistliquorreceiptscomment { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_routinechecklistnonliquorsaleitemsnotes")]
-        public string AdoxioRoutinechecklistnonliquorsaleitemsnotes { get; set; }
+        [JsonProperty(PropertyName = "adoxio_checklistendorsementsrequirementsnotes")]
+        public string AdoxioChecklistendorsementsrequirementsnotes { get; set; }
 
         /// <summary>
         /// </summary>
@@ -723,6 +718,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistcontractmanufacturingreqs")]
+        public int? AdoxioChecklistcontractmanufacturingreqs { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_routinechecklistsamplerecords")]
+        public int? AdoxioRoutinechecklistsamplerecords { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "routecase")]
         public bool? Routecase { get; set; }
 
@@ -730,6 +735,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_sepchecklistliquorreceipts")]
         public int? AdoxioSepchecklistliquorreceipts { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_sepchecklisteventhourscomment")]
+        public string AdoxioSepchecklisteventhourscomment { get; set; }
 
         /// <summary>
         /// </summary>
@@ -743,8 +753,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "firstresponsesent")]
-        public bool? Firstresponsesent { get; set; }
+        [JsonProperty(PropertyName = "adoxio_pschecklistintoxicationidentified")]
+        public int? AdoxioPschecklistintoxicationidentified { get; set; }
 
         /// <summary>
         /// </summary>
@@ -753,8 +763,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_pschecklistproductstoragesecurednotes")]
+        public string AdoxioPschecklistproductstoragesecurednotes { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_sepchecklistfoodrequirements")]
+        public int? AdoxioSepchecklistfoodrequirements { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_sepcheckliststaffconsumingliquorcomment")]
         public string AdoxioSepcheckliststaffconsumingliquorcomment { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistsignandlogomeetsrequirements")]
+        public int? AdoxioChecklistsignandlogomeetsrequirements { get; set; }
 
         /// <summary>
         /// </summary>
@@ -763,8 +788,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_sepchecklistpricelistreqs")]
-        public int? AdoxioSepchecklistpricelistreqs { get; set; }
+        [JsonProperty(PropertyName = "adoxio_servicehoursmondayclose")]
+        public int? AdoxioServicehoursmondayclose { get; set; }
 
         /// <summary>
         /// </summary>
@@ -783,13 +808,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistsocialrespposterprovided")]
-        public int? AdoxioChecklistsocialrespposterprovided { get; set; }
+        [JsonProperty(PropertyName = "adoxio_checklistagentiddiscussednotes")]
+        public string AdoxioChecklistagentiddiscussednotes { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_checklistcontractmanufacturingreqsnotes")]
         public string AdoxioChecklistcontractmanufacturingreqsnotes { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_sepchecklistliquorregister")]
+        public int? AdoxioSepchecklistliquorregister { get; set; }
 
         /// <summary>
         /// </summary>
@@ -803,11 +833,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_eventlocationid_value")]
-        public string _adoxioEventlocationidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_routinechecklistminorsaspatronsnotes")]
         public string AdoxioRoutinechecklistminorsaspatronsnotes { get; set; }
 
@@ -818,8 +843,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_sepchecklistcommunitydisturbancecomment")]
-        public string AdoxioSepchecklistcommunitydisturbancecomment { get; set; }
+        [JsonProperty(PropertyName = "adoxio_sepchecklistliquorreceiptscomment")]
+        public string AdoxioSepchecklistliquorreceiptscomment { get; set; }
 
         /// <summary>
         /// </summary>
@@ -828,8 +853,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_routinecheckliststaffresponsibility")]
-        public int? AdoxioRoutinecheckliststaffresponsibility { get; set; }
+        [JsonProperty(PropertyName = "_adoxio_establishment_value")]
+        public string _adoxioEstablishmentValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -843,28 +868,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistregulatoryapprovalsreceivednotes")]
+        public string AdoxioChecklistregulatoryapprovalsreceivednotes { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_routinechecklisteventcontractsnotes")]
         public string AdoxioRoutinechecklisteventcontractsnotes { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_sepchecklistpermitcheckedcomment")]
-        public string AdoxioSepchecklistpermitcheckedcomment { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_sepchecklisteventsignagecomment")]
-        public string AdoxioSepchecklisteventsignagecomment { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_inspchecklistphototakennotes")]
         public string AdoxioInspchecklistphototakennotes { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistworkerverification")]
-        public int? AdoxioChecklistworkerverification { get; set; }
 
         /// <summary>
         /// </summary>
@@ -883,33 +898,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_routinecheckliststorageavailable")]
-        public int? AdoxioRoutinecheckliststorageavailable { get; set; }
+        [JsonProperty(PropertyName = "adoxio_mapchecklistmapinspectiontype")]
+        public int? AdoxioMapchecklistmapinspectiontype { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_createfollowup")]
-        public bool? AdoxioCreatefollowup { get; set; }
+        [JsonProperty(PropertyName = "adoxio_checklistingredientsrecordsnotes")]
+        public string AdoxioChecklistingredientsrecordsnotes { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_pschecklistoutsideopshours")]
-        public int? AdoxioPschecklistoutsideopshours { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_sepchecklistmarketauthpostednotes")]
-        public string AdoxioSepchecklistmarketauthpostednotes { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_sepchecklistaccesscontrolled")]
-        public int? AdoxioSepchecklistaccesscontrolled { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_sepchecklisteventhourscomment")]
-        public string AdoxioSepchecklisteventhourscomment { get; set; }
+        [JsonProperty(PropertyName = "adoxio_checklistaccordancewithaipletter")]
+        public int? AdoxioChecklistaccordancewithaipletter { get; set; }
 
         /// <summary>
         /// </summary>
@@ -923,13 +923,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_mktrchecklistlicencenotes")]
+        public string AdoxioMktrchecklistlicencenotes { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_routinechecklistservingitrightnanotes")]
         public string AdoxioRoutinechecklistservingitrightnanotes { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "blockedprofile")]
-        public bool? Blockedprofile { get; set; }
+        [JsonProperty(PropertyName = "adoxio_noeachoiceprocedure")]
+        public string AdoxioNoeachoiceprocedure { get; set; }
 
         /// <summary>
         /// </summary>
@@ -943,13 +948,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_externalinvestigationfilenumber")]
-        public string AdoxioExternalinvestigationfilenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_routinechecklisttakehome")]
-        public bool? AdoxioRoutinechecklisttakehome { get; set; }
+        [JsonProperty(PropertyName = "adoxio_inspectiontimeoutmm")]
+        public int? AdoxioInspectiontimeoutmm { get; set; }
 
         /// <summary>
         /// </summary>
@@ -963,13 +963,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_mapchecklistnumberpatrons")]
-        public int? AdoxioMapchecklistnumberpatrons { get; set; }
+        [JsonProperty(PropertyName = "adoxio_checklistregulatoryapprovalsreceived")]
+        public int? AdoxioChecklistregulatoryapprovalsreceived { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistregulatoryapprovalsreceived")]
-        public int? AdoxioChecklistregulatoryapprovalsreceived { get; set; }
+        [JsonProperty(PropertyName = "adoxio_checklistphotostakennanotes")]
+        public string AdoxioChecklistphotostakennanotes { get; set; }
 
         /// <summary>
         /// </summary>
@@ -988,8 +988,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistcustomerdeclarationsnotes")]
-        public string AdoxioChecklistcustomerdeclarationsnotes { get; set; }
+        [JsonProperty(PropertyName = "adoxio_routinechecklistbottledprodonsitenotes")]
+        public string AdoxioRoutinechecklistbottledprodonsitenotes { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_externalinvestigationfilenumber")]
+        public string AdoxioExternalinvestigationfilenumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1008,28 +1013,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_noeachoiceprocedure")]
-        public string AdoxioNoeachoiceprocedure { get; set; }
+        [JsonProperty(PropertyName = "adoxio_checklistagentiddiscussed")]
+        public int? AdoxioChecklistagentiddiscussed { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistdiscusscateringrequirementsnotes")]
-        public string AdoxioChecklistdiscusscateringrequirementsnotes { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_sepchecklistsirses")]
-        public int? AdoxioSepchecklistsirses { get; set; }
+        [JsonProperty(PropertyName = "adoxio_sepcheckliststaffconsumingliquor")]
+        public int? AdoxioSepcheckliststaffconsumingliquor { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_sepchecklistmarketauthposted")]
         public int? AdoxioSepchecklistmarketauthposted { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_sepchecklistfoodrequirements")]
-        public int? AdoxioSepchecklistfoodrequirements { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1040,6 +1035,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_inspectionviolationticketsissued")]
         public int? AdoxioInspectionviolationticketsissued { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_ahchecklistliquorclearedpatronsnotes")]
+        public string AdoxioAhchecklistliquorclearedpatronsnotes { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1078,8 +1078,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_primarybusinesspurposes")]
-        public string AdoxioPrimarybusinesspurposes { get; set; }
+        [JsonProperty(PropertyName = "adoxio_pschecklistincidentlogreviewednotes")]
+        public string AdoxioPschecklistincidentlogreviewednotes { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_routinechecklistservingitrightna")]
+        public int? AdoxioRoutinechecklistservingitrightna { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_eventlocationid_value")]
+        public string _adoxioEventlocationidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1098,6 +1108,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_servicehourstuesdayclose")]
+        public int? AdoxioServicehourstuesdayclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_pschecklistincidentlogreviewed")]
+        public int? AdoxioPschecklistincidentlogreviewed { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_parentcaseid_value")]
         public string _parentcaseidValue { get; set; }
 
@@ -1108,8 +1128,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_contactid_value")]
-        public string _contactidValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_routinechecklistalcoholsensematerialnotes")]
+        public string AdoxioRoutinechecklistalcoholsensematerialnotes { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_servicehourssaturdayclose")]
+        public int? AdoxioServicehourssaturdayclose { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1128,11 +1153,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_firstresponsebykpiid_value")]
         public string _firstresponsebykpiidValue { get; set; }
 
@@ -1143,13 +1163,34 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_parentinspectionid_value")]
+        public string _adoxioParentinspectionidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_allactivitiesconcluded")]
+        public int? AdoxioAllactivitiesconcluded { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_routinechecklistsamplesizes")]
         public int? AdoxioRoutinechecklistsamplesizes { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonConverter(typeof(Base64UrlJsonConverter))]
+        [JsonProperty(PropertyName = "entityimage")]
+        public byte[] Entityimage { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_socialprofileid_value")]
+        public string _socialprofileidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1163,13 +1204,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_establishment_value")]
-        public string _adoxioEstablishmentValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_checklistliquorstorage")]
+        public int? AdoxioChecklistliquorstorage { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_sepchecklistfoodrequirementscomment")]
         public string AdoxioSepchecklistfoodrequirementscomment { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistprocessstepsbyclassification")]
+        public int? AdoxioChecklistprocessstepsbyclassification { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1198,11 +1244,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_routinechecklistcateringrecordsnotes")]
-        public string AdoxioRoutinechecklistcateringrecordsnotes { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_routinechecklistvisitationrecordsnotes")]
         public string AdoxioRoutinechecklistvisitationrecordsnotes { get; set; }
 
@@ -1218,23 +1259,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_inspchecklistcannabisregisterroutine")]
+        public int? AdoxioInspchecklistcannabisregisterroutine { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_inspchecklistnootherbusinessnotes")]
         public string AdoxioInspchecklistnootherbusinessnotes { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistservingitright")]
-        public int? AdoxioChecklistservingitright { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_checklistsellingitright")]
         public int? AdoxioChecklistsellingitright { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "productserialnumber")]
-        public string Productserialnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1248,13 +1284,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_entitlementid_value")]
-        public string _entitlementidValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_establishmentcity")]
+        public string AdoxioEstablishmentcity { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_routinecheckliststaffresponsibilitynotes")]
-        public string AdoxioRoutinecheckliststaffresponsibilitynotes { get; set; }
+        [JsonProperty(PropertyName = "adoxio_routinechecklisteducationaltasksnotes")]
+        public string AdoxioRoutinechecklisteducationaltasksnotes { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_routinechecklistcarboyscompliantnotes")]
+        public string AdoxioRoutinechecklistcarboyscompliantnotes { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
+        public string _transactioncurrencyidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1263,8 +1309,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistprocessstepsbyclassification")]
-        public int? AdoxioChecklistprocessstepsbyclassification { get; set; }
+        [JsonProperty(PropertyName = "adoxio_inspectiontimeouthh")]
+        public int? AdoxioInspectiontimeouthh { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "firstresponsesent")]
+        public bool? Firstresponsesent { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1293,6 +1344,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_sepchecklistmarketauthpostednotes")]
+        public string AdoxioSepchecklistmarketauthpostednotes { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_adoxio_eventid_value")]
         public string _adoxioEventidValue { get; set; }
 
@@ -1310,6 +1366,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_createinspection")]
         public bool? AdoxioCreateinspection { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_routinecheckliststaffresponsibilitynotes")]
+        public string AdoxioRoutinecheckliststaffresponsibilitynotes { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1343,18 +1404,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistservingitrightnotes")]
-        public string AdoxioChecklistservingitrightnotes { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_sepchecklistsamplesizereqsnotes")]
-        public string AdoxioSepchecklistsamplesizereqsnotes { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistequipmentchecksnotes")]
-        public string AdoxioChecklistequipmentchecksnotes { get; set; }
+        [JsonProperty(PropertyName = "adoxio_checklistworkerverification")]
+        public int? AdoxioChecklistworkerverification { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1363,18 +1414,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_inspchecklistproductnotvisibleroutinenote")]
-        public string AdoxioInspchecklistproductnotvisibleroutinenote { get; set; }
+        [JsonProperty(PropertyName = "adoxio_checklistdiscusscateringrequirementsnotes")]
+        public string AdoxioChecklistdiscusscateringrequirementsnotes { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
+        [JsonProperty(PropertyName = "adoxio_routinechecklistminorsaspatronsnanotes")]
+        public string AdoxioRoutinechecklistminorsaspatronsnanotes { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_inspectioncompletedate")]
-        public System.DateTimeOffset? AdoxioInspectioncompletedate { get; set; }
+        [JsonProperty(PropertyName = "adoxio_checklistsignage")]
+        public int? AdoxioChecklistsignage { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1398,8 +1449,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_mapagentid2")]
-        public string AdoxioMapagentid2 { get; set; }
+        [JsonProperty(PropertyName = "adoxio_checklistseatingconfirmednotes")]
+        public string AdoxioChecklistseatingconfirmednotes { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1418,19 +1469,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_ismarketer")]
-        public int? AdoxioIsmarketer { get; set; }
+        [JsonProperty(PropertyName = "adoxio_licencepostedroutine")]
+        public int? AdoxioLicencepostedroutine { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_pschecklistotherobservations")]
         public int? AdoxioPschecklistotherobservations { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonConverter(typeof(Base64UrlJsonConverter))]
-        [JsonProperty(PropertyName = "entityimage")]
-        public byte[] Entityimage { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1449,13 +1494,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_pschecklistidcheckingnotes")]
-        public string AdoxioPschecklistidcheckingnotes { get; set; }
+        [JsonProperty(PropertyName = "adoxio_pschecklistservingitright")]
+        public int? AdoxioPschecklistservingitright { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_routinechecklistsalesrecords")]
-        public int? AdoxioRoutinechecklistsalesrecords { get; set; }
+        [JsonProperty(PropertyName = "adoxio_pschecklistidcheckingnotes")]
+        public string AdoxioPschecklistidcheckingnotes { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1474,11 +1519,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_pschecklistliquorregisternotes")]
-        public string AdoxioPschecklistliquorregisternotes { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_inspchecklistworkerqualificationnotes")]
         public string AdoxioInspchecklistworkerqualificationnotes { get; set; }
 
@@ -1489,13 +1529,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "escalatedon")]
-        public System.DateTimeOffset? Escalatedon { get; set; }
+        [JsonProperty(PropertyName = "adoxio_sepchecklistunauthorizedgames")]
+        public int? AdoxioSepchecklistunauthorizedgames { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_mktrchecklistonsiterequirementsreviewed")]
-        public int? AdoxioMktrchecklistonsiterequirementsreviewed { get; set; }
+        [JsonProperty(PropertyName = "adoxio_inspchecklistproductnotvisibleroutinenote")]
+        public string AdoxioInspchecklistproductnotvisibleroutinenote { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1504,13 +1544,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_inspchecklistfloorplanroutinenotes")]
-        public string AdoxioInspchecklistfloorplanroutinenotes { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "prioritycode")]
-        public int? Prioritycode { get; set; }
+        [JsonProperty(PropertyName = "adoxio_sepchecklistsecuritystaffcomment")]
+        public string AdoxioSepchecklistsecuritystaffcomment { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1519,13 +1554,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistservingitright")]
+        public int? AdoxioChecklistservingitright { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "timezoneruleversionnumber")]
         public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_noeanarrative")]
-        public string AdoxioNoeanarrative { get; set; }
+        [JsonProperty(PropertyName = "adoxio_checklistsafetysecurity")]
+        public int? AdoxioChecklistsafetysecurity { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1534,8 +1574,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_routinechecklisteventcontracts")]
-        public int? AdoxioRoutinechecklisteventcontracts { get; set; }
+        [JsonProperty(PropertyName = "adoxio_pschecklistsecuritycamsoperating")]
+        public int? AdoxioPschecklistsecuritycamsoperating { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_slainvokedid_value")]
+        public string _slainvokedidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_routinechecklistphotostakennotes")]
+        public string AdoxioRoutinechecklistphotostakennotes { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_primarybusinesspurposes")]
+        public string AdoxioPrimarybusinesspurposes { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_sepchecklistsirses")]
+        public int? AdoxioSepchecklistsirses { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1544,8 +1604,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_subjectid_value")]
-        public string _subjectidValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_importcompleted")]
+        public bool? AdoxioImportcompleted { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_sepchecklistminorspresentcomment")]
+        public string AdoxioSepchecklistminorspresentcomment { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1554,28 +1619,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_routinechecklistsamplerecordsnotes")]
-        public string AdoxioRoutinechecklistsamplerecordsnotes { get; set; }
+        [JsonProperty(PropertyName = "adoxio_routinechecklistcateringrecordsnotes")]
+        public string AdoxioRoutinechecklistcateringrecordsnotes { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_routinechecklistservingitrightna")]
-        public int? AdoxioRoutinechecklistservingitrightna { get; set; }
+        [JsonProperty(PropertyName = "adoxio_routinechecklistbondingagreementsnotes")]
+        public string AdoxioRoutinechecklistbondingagreementsnotes { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_routinechecklistbottledprodonsitenotes")]
-        public string AdoxioRoutinechecklistbottledprodonsitenotes { get; set; }
+        [JsonProperty(PropertyName = "adoxio_inspectioncompletedate")]
+        public System.DateTimeOffset? AdoxioInspectioncompletedate { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistagentiddiscussednotes")]
-        public string AdoxioChecklistagentiddiscussednotes { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_routinechecklistliquordisplaysnotes")]
-        public string AdoxioRoutinechecklistliquordisplaysnotes { get; set; }
+        [JsonProperty(PropertyName = "entityimageid")]
+        public string Entityimageid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1584,18 +1644,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "resolvebyslastatus")]
-        public int? Resolvebyslastatus { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_checklistproductnotvisible")]
         public int? AdoxioChecklistproductnotvisible { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_ahchecklistliquorclearedpatronsnotes")]
-        public string AdoxioAhchecklistliquorclearedpatronsnotes { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1614,11 +1664,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_servicehourssaturdayclose")]
-        public int? AdoxioServicehourssaturdayclose { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_inspectioncompleteddate")]
         public string AdoxioInspectioncompleteddate { get; set; }
 
@@ -1629,8 +1674,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_inspchecklistfollowupinspectionrequired")]
+        public int? AdoxioInspchecklistfollowupinspectionrequired { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_sepchecklistsirsescomment")]
         public string AdoxioSepchecklistsirsescomment { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_sepchecklistsamplesizereqs")]
+        public int? AdoxioSepchecklistsamplesizereqs { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1644,13 +1699,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_entitlementid_value")]
+        public string _entitlementidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_routinechecklistsocialrespmaterialna")]
         public int? AdoxioRoutinechecklistsocialrespmaterialna { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_ahchecklistpatronsclearedestablishment")]
-        public int? AdoxioAhchecklistpatronsclearedestablishment { get; set; }
+        [JsonProperty(PropertyName = "adoxio_routinechecklistincidentlog")]
+        public int? AdoxioRoutinechecklistincidentlog { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "blockedprofile")]
+        public bool? Blockedprofile { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1664,18 +1729,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistsignandlogomeetsrequirements")]
-        public int? AdoxioChecklistsignandlogomeetsrequirements { get; set; }
+        [JsonProperty(PropertyName = "adoxio_servicehourssundayopen")]
+        public int? AdoxioServicehourssundayopen { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_inspchecklistadvertisingroutine")]
-        public int? AdoxioInspchecklistadvertisingroutine { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_inspchecklistsecurityoperationalnotes")]
-        public string AdoxioInspchecklistsecurityoperationalnotes { get; set; }
+        [JsonProperty(PropertyName = "productserialnumber")]
+        public string Productserialnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1684,8 +1744,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_investigationid_value")]
-        public string _adoxioInvestigationidValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_sepchecklistcommunitydisturbance")]
+        public int? AdoxioSepchecklistcommunitydisturbance { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1701,16 +1761,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_pschecklistcontrarytolicence")]
         public int? AdoxioPschecklistcontrarytolicence { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_noeasection1penaltychoice")]
-        public string AdoxioNoeasection1penaltychoice { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_importcompleted")]
-        public bool? AdoxioImportcompleted { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1739,18 +1789,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistbondedwarehousediscussednotes")]
-        public string AdoxioChecklistbondedwarehousediscussednotes { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_dateout")]
         public System.DateTimeOffset? AdoxioDateout { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_inspectiontimeoutmm")]
-        public int? AdoxioInspectiontimeoutmm { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1764,11 +1804,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_ahchecklistliquorsaleoutsidehours")]
-        public int? AdoxioAhchecklistliquorsaleoutsidehours { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_inspchecklistaccordancewithaipletternotes")]
         public string AdoxioInspchecklistaccordancewithaipletternotes { get; set; }
 
@@ -1779,18 +1814,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_routinechecklistcarboyscompliant")]
-        public int? AdoxioRoutinechecklistcarboyscompliant { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_routinechecklistliquorregisternotes")]
-        public string AdoxioRoutinechecklistliquorregisternotes { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_region_value")]
-        public string _adoxioRegionValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_mktrchecklistonsiterequirementsreviewed")]
+        public int? AdoxioMktrchecklistonsiterequirementsreviewed { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1799,18 +1824,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistsignage")]
-        public int? AdoxioChecklistsignage { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_inspchecklisttakeawayordeliveryonly")]
         public int? AdoxioInspchecklisttakeawayordeliveryonly { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistmanufacturingstorageareanotes")]
-        public string AdoxioChecklistmanufacturingstorageareanotes { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1829,6 +1844,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_pschecklistunlawfulcannabis")]
+        public int? AdoxioPschecklistunlawfulcannabis { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_routinechecklistminorsasemployeesnotes")]
         public string AdoxioRoutinechecklistminorsasemployeesnotes { get; set; }
 
@@ -1844,8 +1864,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_routinechecklisttakehomenotes")]
+        public string AdoxioRoutinechecklisttakehomenotes { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_sepchecklistsecurityplancomment")]
         public string AdoxioSepchecklistsecurityplancomment { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_ahchecklistliquorclearedpatrons")]
+        public int? AdoxioAhchecklistliquorclearedpatrons { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "processid")]
+        public string Processid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1854,13 +1889,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_routinechecklistbondingagreementsnotes")]
-        public string AdoxioRoutinechecklistbondingagreementsnotes { get; set; }
+        [JsonProperty(PropertyName = "adoxio_checklistmanufacturingstorageareanotes")]
+        public string AdoxioChecklistmanufacturingstorageareanotes { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_ahchecklistliquorclearedpatrons")]
-        public int? AdoxioAhchecklistliquorclearedpatrons { get; set; }
+        [JsonProperty(PropertyName = "adoxio_checklistbondedwarehousediscussednotes")]
+        public string AdoxioChecklistbondedwarehousediscussednotes { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_routinecheckliststorageavailable")]
+        public int? AdoxioRoutinecheckliststorageavailable { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1889,6 +1929,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_sepchecklisteventsignagecomment")]
+        public string AdoxioSepchecklisteventsignagecomment { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_piecesofidchecked")]
         public int? AdoxioPiecesofidchecked { get; set; }
 
@@ -1909,13 +1954,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "customersatisfactioncode")]
-        public int? Customersatisfactioncode { get; set; }
+        [JsonProperty(PropertyName = "adoxio_routinechecklistsamplesrecordsnotes")]
+        public string AdoxioRoutinechecklistsamplesrecordsnotes { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_routinechecklistsamplesrecordsnotes")]
-        public string AdoxioRoutinechecklistsamplesrecordsnotes { get; set; }
+        [JsonProperty(PropertyName = "adoxio_inspchecklistsecurityoperationalnotes")]
+        public string AdoxioInspchecklistsecurityoperationalnotes { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1929,8 +1974,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_sepchecklistunauthorizedgames")]
-        public int? AdoxioSepchecklistunauthorizedgames { get; set; }
+        [JsonProperty(PropertyName = "adoxio_checklistequipmentchecks")]
+        public int? AdoxioChecklistequipmentchecks { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1944,13 +1989,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_inspchecklistpackagingroutine")]
+        public int? AdoxioInspchecklistpackagingroutine { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_mapchecklistmapinspectiontypenotes")]
         public string AdoxioMapchecklistmapinspectiontypenotes { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_sepchecklistliquorregister")]
-        public int? AdoxioSepchecklistliquorregister { get; set; }
+        [JsonProperty(PropertyName = "adoxio_pschecklisttempexpansionnotes")]
+        public string AdoxioPschecklisttempexpansionnotes { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_ismarketer")]
+        public int? AdoxioIsmarketer { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1984,8 +2039,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_routinechecklistpricingsizingnotes")]
+        public string AdoxioRoutinechecklistpricingsizingnotes { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1999,18 +2054,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_routinechecklistalcoholsensematerialnotes")]
-        public string AdoxioRoutinechecklistalcoholsensematerialnotes { get; set; }
+        [JsonProperty(PropertyName = "adoxio_sepchecklistsamplesizereqsnotes")]
+        public string AdoxioSepchecklistsamplesizereqsnotes { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_pschecklistservingitright")]
-        public int? AdoxioPschecklistservingitright { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "processid")]
-        public string Processid { get; set; }
+        [JsonProperty(PropertyName = "adoxio_sepchecklistminorspresent")]
+        public int? AdoxioSepchecklistminorspresent { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2029,13 +2079,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_mktrchecklistadvertisingreviewed")]
-        public int? AdoxioMktrchecklistadvertisingreviewed { get; set; }
+        [JsonProperty(PropertyName = "adoxio_pschecklistworkerreviewed")]
+        public int? AdoxioPschecklistworkerreviewed { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_routinechecklistsamplesrecords")]
+        public int? AdoxioRoutinechecklistsamplesrecords { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_customerid_value")]
         public string _customeridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2054,8 +2114,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistliquorstorage")]
-        public int? AdoxioChecklistliquorstorage { get; set; }
+        [JsonProperty(PropertyName = "adoxio_noeanarrative")]
+        public string AdoxioNoeanarrative { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_noeasection1penaltychoice")]
+        public string AdoxioNoeasection1penaltychoice { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2084,13 +2149,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_sepchecklistcommunitydisturbance")]
-        public int? AdoxioSepchecklistcommunitydisturbance { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_allactivitiesconcluded")]
-        public int? AdoxioAllactivitiesconcluded { get; set; }
+        [JsonProperty(PropertyName = "adoxio_routinecheckliststaffresponsibility")]
+        public int? AdoxioRoutinecheckliststaffresponsibility { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2104,6 +2164,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_mapchecklistnumberpatrons")]
+        public int? AdoxioMapchecklistnumberpatrons { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_inspchecklistproductnotvisiblenotes")]
         public string AdoxioInspchecklistproductnotvisiblenotes { get; set; }
 
@@ -2114,13 +2179,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistaccordancewithaipletter")]
-        public int? AdoxioChecklistaccordancewithaipletter { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_pschecklistsecuritycamsoperatingnotes")]
-        public string AdoxioPschecklistsecuritycamsoperatingnotes { get; set; }
+        [JsonProperty(PropertyName = "adoxio_inspchecklistsmelljarsnotes")]
+        public string AdoxioInspchecklistsmelljarsnotes { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2134,8 +2194,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_pschecklistsecuritycamsoperating")]
-        public int? AdoxioPschecklistsecuritycamsoperating { get; set; }
+        [JsonProperty(PropertyName = "adoxio_routinechecklistcustdeclreceipts")]
+        public int? AdoxioRoutinechecklistcustdeclreceipts { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2149,23 +2209,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistseatingconfirmednotes")]
-        public string AdoxioChecklistseatingconfirmednotes { get; set; }
+        [JsonProperty(PropertyName = "customersatisfactioncode")]
+        public int? Customersatisfactioncode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_sepchecklistdisorderunlawactivitycomment")]
+        public string AdoxioSepchecklistdisorderunlawactivitycomment { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "customercontacted")]
-        public bool? Customercontacted { get; set; }
+        [JsonProperty(PropertyName = "adoxio_contraventionsadded")]
+        public int? AdoxioContraventionsadded { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_routinechecklistsalesrecordsnotes")]
-        public string AdoxioRoutinechecklistsalesrecordsnotes { get; set; }
+        [JsonProperty(PropertyName = "adoxio_routinechecklistcarboyscompliant")]
+        public int? AdoxioRoutinechecklistcarboyscompliant { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "resolvebyslastatus")]
+        public int? Resolvebyslastatus { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2174,8 +2239,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_sepchecklisteventhours")]
-        public int? AdoxioSepchecklisteventhours { get; set; }
+        [JsonProperty(PropertyName = "adoxio_checklistsocialrespposterprovided")]
+        public int? AdoxioChecklistsocialrespposterprovided { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_sepchecklistpermitteeonsitenotes")]
+        public string AdoxioSepchecklistpermitteeonsitenotes { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2189,18 +2259,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_ahchecklistpatronsclearestablishmentnotes")]
-        public string AdoxioAhchecklistpatronsclearestablishmentnotes { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_actualinspectiondate")]
         public System.DateTimeOffset? AdoxioActualinspectiondate { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_licencepostedroutine")]
-        public int? AdoxioLicencepostedroutine { get; set; }
+        [JsonProperty(PropertyName = "adoxio_inspchecklistfloorplanroutine")]
+        public int? AdoxioInspchecklistfloorplanroutine { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2209,23 +2274,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_pschecklistliquorregister")]
+        public int? AdoxioPschecklistliquorregister { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_sepchecklistsecuritystaffcomment")]
-        public string AdoxioSepchecklistsecuritystaffcomment { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_licencetypeid_value")]
-        public string _adoxioLicencetypeidValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_inspectiondate")]
+        public System.DateTimeOffset? AdoxioInspectiondate { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_routinechecklistpicnicendorsementreqsnote")]
         public string AdoxioRoutinechecklistpicnicendorsementreqsnote { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_pschecklistoutsideopshours")]
+        public int? AdoxioPschecklistoutsideopshours { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2239,8 +2304,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistdiscusstermsconditions")]
-        public int? AdoxioChecklistdiscusstermsconditions { get; set; }
+        [JsonProperty(PropertyName = "_subjectid_value")]
+        public string _subjectidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2254,18 +2319,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_routinechecklistincidentlog")]
-        public int? AdoxioRoutinechecklistincidentlog { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_checklistsafetysecuritynotes")]
         public string AdoxioChecklistsafetysecuritynotes { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "entityimageid")]
-        public string Entityimageid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2274,23 +2329,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistnootherbusinessassociated")]
-        public int? AdoxioChecklistnootherbusinessassociated { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_routinechecklistsellingitrightnotes")]
         public string AdoxioRoutinechecklistsellingitrightnotes { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_routinechecklistliquorpricelist")]
-        public int? AdoxioRoutinechecklistliquorpricelist { get; set; }
+        [JsonProperty(PropertyName = "adoxio_routinechecklistsalesrecords")]
+        public int? AdoxioRoutinechecklistsalesrecords { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_routinechecklistphotostakennotes")]
-        public string AdoxioRoutinechecklistphotostakennotes { get; set; }
+        [JsonProperty(PropertyName = "adoxio_sepchecklistsecurityplan")]
+        public int? AdoxioSepchecklistsecurityplan { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2304,11 +2354,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_sepcheckliststaffconsumingliquor")]
-        public int? AdoxioSepcheckliststaffconsumingliquor { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_sepchecklistunauthorizedgamescomment")]
         public string AdoxioSepchecklistunauthorizedgamescomment { get; set; }
 
@@ -2319,13 +2364,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_routinechecklisttakehomenotes")]
-        public string AdoxioRoutinechecklisttakehomenotes { get; set; }
+        [JsonProperty(PropertyName = "adoxio_checklistworkerverificationnotes")]
+        public string AdoxioChecklistworkerverificationnotes { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistsocialresponsibility")]
-        public int? AdoxioChecklistsocialresponsibility { get; set; }
+        [JsonProperty(PropertyName = "adoxio_routinechecklistliquorpricelistnotes")]
+        public string AdoxioRoutinechecklistliquorpricelistnotes { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistdiscusstermsconditions")]
+        public int? AdoxioChecklistdiscusstermsconditions { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2344,13 +2394,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_duedatechangereason")]
-        public string AdoxioDuedatechangereason { get; set; }
+        [JsonProperty(PropertyName = "adoxio_routinechecklistliquorregister")]
+        public int? AdoxioRoutinechecklistliquorregister { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_routinechecklistcustdeclreceipts")]
-        public int? AdoxioRoutinechecklistcustdeclreceipts { get; set; }
+        [JsonProperty(PropertyName = "adoxio_ahchecklistliquorsaleoutsidehours")]
+        public int? AdoxioAhchecklistliquorsaleoutsidehours { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2359,18 +2409,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_inspchecklistfloorplanroutine")]
-        public int? AdoxioInspchecklistfloorplanroutine { get; set; }
+        [JsonProperty(PropertyName = "adoxio_ahchecklistpatronsclearedestablishment")]
+        public int? AdoxioAhchecklistpatronsclearedestablishment { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "lastonholdtime")]
         public System.DateTimeOffset? Lastonholdtime { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_parentinspectionid_value")]
-        public string _adoxioParentinspectionidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2384,8 +2429,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_sepchecklistminorspresentcomment")]
-        public string AdoxioSepchecklistminorspresentcomment { get; set; }
+        [JsonProperty(PropertyName = "_adoxio_application_value")]
+        public string _adoxioApplicationValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "prioritycode")]
+        public int? Prioritycode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2404,18 +2454,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_sepchecklistdisorderunlawactivitycomment")]
-        public string AdoxioSepchecklistdisorderunlawactivitycomment { get; set; }
+        [JsonProperty(PropertyName = "adoxio_routinechecklistidrequirementsnotes")]
+        public string AdoxioRoutinechecklistidrequirementsnotes { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_routinechecklistcontactinfochange")]
-        public int? AdoxioRoutinechecklistcontactinfochange { get; set; }
+        [JsonProperty(PropertyName = "adoxio_duedatechangereason")]
+        public string AdoxioDuedatechangereason { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_pschecklisttempexpansionnotes")]
-        public string AdoxioPschecklisttempexpansionnotes { get; set; }
+        [JsonProperty(PropertyName = "adoxio_pschecklistsecuritycamsoperatingnotes")]
+        public string AdoxioPschecklistsecuritycamsoperatingnotes { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2424,8 +2474,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_inspchecklistfollowupinspectionrequired")]
-        public int? AdoxioInspchecklistfollowupinspectionrequired { get; set; }
+        [JsonProperty(PropertyName = "adoxio_mapagentid2")]
+        public string AdoxioMapagentid2 { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2434,18 +2484,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_pschecklistliquorregister")]
-        public int? AdoxioPschecklistliquorregister { get; set; }
+        [JsonProperty(PropertyName = "adoxio_routinechecklisteducationaltasks")]
+        public int? AdoxioRoutinechecklisteducationaltasks { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_packagingsealed")]
-        public int? AdoxioPackagingsealed { get; set; }
+        [JsonProperty(PropertyName = "incidentid")]
+        public string Incidentid { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "casetypecode")]
         public int? Casetypecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_routinechecklisttakehome")]
+        public bool? AdoxioRoutinechecklisttakehome { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2461,11 +2516,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_checklistingredientsrecords")]
         public int? AdoxioChecklistingredientsrecords { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_mapchecklistmapinspectiontype")]
-        public int? AdoxioMapchecklistmapinspectiontype { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2489,21 +2539,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_inspectiontimeouthh")]
-        public int? AdoxioInspectiontimeouthh { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "incidentid")]
-        public string Incidentid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_pschecklistincidentlogreviewed")]
-        public int? AdoxioPschecklistincidentlogreviewed { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_routinechecklistonsiteendorsementreqs")]
         public int? AdoxioRoutinechecklistonsiteendorsementreqs { get; set; }
 
@@ -2519,13 +2554,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_routinechecklistliquorpricelistnotes")]
-        public string AdoxioRoutinechecklistliquorpricelistnotes { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_servicehourssundayopen")]
-        public int? AdoxioServicehourssundayopen { get; set; }
+        [JsonProperty(PropertyName = "adoxio_checklistsocialresponsibility")]
+        public int? AdoxioChecklistsocialresponsibility { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2539,8 +2569,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistcontractmanufacturingreqs")]
-        public int? AdoxioChecklistcontractmanufacturingreqs { get; set; }
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2554,18 +2584,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_routinechecklistcarboyscompliantnotes")]
-        public string AdoxioRoutinechecklistcarboyscompliantnotes { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_sepchecklistaccesscontrolledcomment")]
         public string AdoxioSepchecklistaccesscontrolledcomment { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_inspchecklistpackagingroutine")]
-        public int? AdoxioInspchecklistpackagingroutine { get; set; }
+        [JsonProperty(PropertyName = "adoxio_checklistminorsaspatronsnotes")]
+        public string AdoxioChecklistminorsaspatronsnotes { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_contactid_value")]
+        public string _contactidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2589,13 +2619,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistworkerverificationnotes")]
-        public string AdoxioChecklistworkerverificationnotes { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_slainvokedid_value")]
-        public string _slainvokedidValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_inspchecklistfloorplanroutinenotes")]
+        public string AdoxioInspchecklistfloorplanroutinenotes { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2619,11 +2644,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_socialprofileid_value")]
-        public string _socialprofileidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_checklistbondedwarehousena")]
         public int? AdoxioChecklistbondedwarehousena { get; set; }
 
@@ -2639,13 +2659,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_routinechecklistservingitright")]
-        public int? AdoxioRoutinechecklistservingitright { get; set; }
+        [JsonProperty(PropertyName = "adoxio_checklistadvertising")]
+        public int? AdoxioChecklistadvertising { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistadvertising")]
-        public int? AdoxioChecklistadvertising { get; set; }
+        [JsonProperty(PropertyName = "adoxio_checklistservingitrightnotes")]
+        public string AdoxioChecklistservingitrightnotes { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2654,28 +2674,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_routinechecklistidrequirementsnotes")]
-        public string AdoxioRoutinechecklistidrequirementsnotes { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_routinechecklistpricingsizingnotes")]
-        public string AdoxioRoutinechecklistpricingsizingnotes { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_routinechecklistminorsaspatronsnanotes")]
-        public string AdoxioRoutinechecklistminorsaspatronsnanotes { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_checklistminorsasemployees")]
         public int? AdoxioChecklistminorsasemployees { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_inspectiondate")]
-        public System.DateTimeOffset? AdoxioInspectiondate { get; set; }
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2689,13 +2694,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_routinechecklistliquorregister")]
-        public int? AdoxioRoutinechecklistliquorregister { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistphotostakennanotes")]
-        public string AdoxioChecklistphotostakennanotes { get; set; }
+        [JsonProperty(PropertyName = "_adoxio_region_value")]
+        public string _adoxioRegionValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2704,8 +2704,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_pschecklistunlawfulcannabis")]
-        public int? AdoxioPschecklistunlawfulcannabis { get; set; }
+        [JsonProperty(PropertyName = "adoxio_sepchecklistaccesscontrolled")]
+        public int? AdoxioSepchecklistaccesscontrolled { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_routinechecklistnonliquorsaleitemsnotes")]
+        public string AdoxioRoutinechecklistnonliquorsaleitemsnotes { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2729,11 +2734,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_application_value")]
-        public string _adoxioApplicationValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "ticketnumber")]
         public string Ticketnumber { get; set; }
 
@@ -2751,11 +2751,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_checklistdiscussroutineinspectionsnotes")]
         public string AdoxioChecklistdiscussroutineinspectionsnotes { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistingredientsrecordsnotes")]
-        public string AdoxioChecklistingredientsrecordsnotes { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2779,6 +2774,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_routinechecklistequipmentchecksnotes")]
+        public string AdoxioRoutinechecklistequipmentchecksnotes { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_sepchecklistpricelistreqs")]
+        public int? AdoxioSepchecklistpricelistreqs { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_mktrchecklistlicence")]
         public int? AdoxioMktrchecklistlicence { get; set; }
 
@@ -2786,6 +2791,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_inspchecklistproductnotvisibleroutine")]
         public int? AdoxioInspchecklistproductnotvisibleroutine { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_sepchecklisteventhours")]
+        public int? AdoxioSepchecklisteventhours { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2819,18 +2829,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_routinechecklistequipmentchecksnotes")]
-        public string AdoxioRoutinechecklistequipmentchecksnotes { get; set; }
+        [JsonProperty(PropertyName = "adoxio_packagingsealed")]
+        public int? AdoxioPackagingsealed { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_pschecklistincidentlogreviewednotes")]
-        public string AdoxioPschecklistincidentlogreviewednotes { get; set; }
+        [JsonProperty(PropertyName = "adoxio_routinechecklistliquorregisternotes")]
+        public string AdoxioRoutinechecklistliquorregisternotes { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_mktrchecklistpromotionsreviewed")]
-        public int? AdoxioMktrchecklistpromotionsreviewed { get; set; }
+        [JsonProperty(PropertyName = "adoxio_routinechecklistliquorpricelist")]
+        public int? AdoxioRoutinechecklistliquorpricelist { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistcustomerdeclarationsnotes")]
+        public string AdoxioChecklistcustomerdeclarationsnotes { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_routinechecklistvisitationrecords")]
+        public int? AdoxioRoutinechecklistvisitationrecords { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2839,18 +2859,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_inspchecklistsmelljarsnotes")]
-        public string AdoxioInspchecklistsmelljarsnotes { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_inspchecklisttakeawayordeliveryonlynotes")]
         public string AdoxioInspchecklisttakeawayordeliveryonlynotes { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_pschecklistproductstoragesecurednotes")]
-        public string AdoxioPschecklistproductstoragesecurednotes { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2859,28 +2869,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_sepchecklistminorspresent")]
-        public int? AdoxioSepchecklistminorspresent { get; set; }
+        [JsonProperty(PropertyName = "adoxio_sepchecklistcommunitydisturbancecomment")]
+        public string AdoxioSepchecklistcommunitydisturbancecomment { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistequipmentchecks")]
-        public int? AdoxioChecklistequipmentchecks { get; set; }
+        [JsonProperty(PropertyName = "adoxio_pschecklistliquorregisternotes")]
+        public string AdoxioPschecklistliquorregisternotes { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_sepchecklistpermitteeonsitenotes")]
-        public string AdoxioSepchecklistpermitteeonsitenotes { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_routinechecklisteducationaltasksnotes")]
-        public string AdoxioRoutinechecklisteducationaltasksnotes { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_pschecklistworkerreviewed")]
-        public int? AdoxioPschecklistworkerreviewed { get; set; }
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2889,8 +2889,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistsafetysecurity")]
-        public int? AdoxioChecklistsafetysecurity { get; set; }
+        [JsonProperty(PropertyName = "adoxio_routinechecklistcontractsfinancials")]
+        public int? AdoxioRoutinechecklistcontractsfinancials { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2909,13 +2909,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistregulatoryapprovalsreceivednotes")]
-        public string AdoxioChecklistregulatoryapprovalsreceivednotes { get; set; }
+        [JsonProperty(PropertyName = "adoxio_checklistnootherbusinessassociated")]
+        public int? AdoxioChecklistnootherbusinessassociated { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_routinechecklistsalesrecordsnotes")]
+        public string AdoxioRoutinechecklistsalesrecordsnotes { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_pschecklistliquorservice")]
         public int? AdoxioPschecklistliquorservice { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_routinechecklisteventcontracts")]
+        public int? AdoxioRoutinechecklisteventcontracts { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2929,18 +2939,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistagentiddiscussed")]
-        public int? AdoxioChecklistagentiddiscussed { get; set; }
+        [JsonProperty(PropertyName = "_kbarticleid_value")]
+        public string _kbarticleidValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_routinechecklistbottledprodonsite")]
-        public int? AdoxioRoutinechecklistbottledprodonsite { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistminorsaspatronsnotes")]
-        public string AdoxioChecklistminorsaspatronsnotes { get; set; }
+        [JsonProperty(PropertyName = "_adoxio_investigationid_value")]
+        public string _adoxioInvestigationidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2949,28 +2954,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_routinechecklistsamplerecords")]
-        public int? AdoxioRoutinechecklistsamplerecords { get; set; }
+        [JsonProperty(PropertyName = "adoxio_checklistequipmentchecksnotes")]
+        public string AdoxioChecklistequipmentchecksnotes { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_establishmentcity")]
-        public string AdoxioEstablishmentcity { get; set; }
+        [JsonProperty(PropertyName = "escalatedon")]
+        public System.DateTimeOffset? Escalatedon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_inspchecklistcannabisregisterroutine")]
-        public int? AdoxioInspchecklistcannabisregisterroutine { get; set; }
+        [JsonProperty(PropertyName = "adoxio_routinechecklistcontactinfochange")]
+        public int? AdoxioRoutinechecklistcontactinfochange { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_checklistdiscussroutineinspections")]
         public int? AdoxioChecklistdiscussroutineinspections { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_routinechecklistsamplesrecords")]
-        public int? AdoxioRoutinechecklistsamplesrecords { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2989,6 +2989,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_routinechecklistminprodamounts")]
         public int? AdoxioRoutinechecklistminprodamounts { get; set; }
 
@@ -3004,23 +3009,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_createfollowup")]
+        public bool? AdoxioCreatefollowup { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "influencescore")]
-        public decimal? Influencescore { get; set; }
+        [JsonProperty(PropertyName = "adoxio_inspchecklistadvertisingroutine")]
+        public int? AdoxioInspchecklistadvertisingroutine { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_routinechecklistcontractsfinancials")]
-        public int? AdoxioRoutinechecklistcontractsfinancials { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_sepchecklistsamplesizereqs")]
-        public int? AdoxioSepchecklistsamplesizereqs { get; set; }
+        [JsonProperty(PropertyName = "customercontacted")]
+        public bool? Customercontacted { get; set; }
 
         /// <summary>
         /// </summary>
@@ -3044,6 +3044,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_sepchecklistpermitcheckedcomment")]
+        public string AdoxioSepchecklistpermitcheckedcomment { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_pschecklistintoxicationidentifiednotes")]
         public string AdoxioPschecklistintoxicationidentifiednotes { get; set; }
 
@@ -3059,13 +3064,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_servicehoursmondayclose")]
-        public int? AdoxioServicehoursmondayclose { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_servicehourstuesdayclose")]
-        public int? AdoxioServicehourstuesdayclose { get; set; }
+        [JsonProperty(PropertyName = "adoxio_routinechecklistliquordisplaysnotes")]
+        public string AdoxioRoutinechecklistliquordisplaysnotes { get; set; }
 
         /// <summary>
         /// </summary>
@@ -3074,18 +3074,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_routinechecklisteducationaltasks")]
-        public int? AdoxioRoutinechecklisteducationaltasks { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_sepchecklistsecurityplan")]
-        public int? AdoxioSepchecklistsecurityplan { get; set; }
+        [JsonProperty(PropertyName = "adoxio_routinechecklistservingitright")]
+        public int? AdoxioRoutinechecklistservingitright { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_routinechecklistidrequirements")]
         public int? AdoxioRoutinechecklistidrequirements { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_licencetypeid_value")]
+        public string _adoxioLicencetypeidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -3124,13 +3124,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_kbarticleid_value")]
-        public string _kbarticleidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_pschecklistdrinksizespricingnotes")]
-        public string AdoxioPschecklistdrinksizespricingnotes { get; set; }
+        [JsonProperty(PropertyName = "adoxio_routinechecklistsamplerecordsnotes")]
+        public string AdoxioRoutinechecklistsamplerecordsnotes { get; set; }
 
         /// <summary>
         /// </summary>
@@ -3149,6 +3144,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_pschecklistdrinksizespricingnotes")]
+        public string AdoxioPschecklistdrinksizespricingnotes { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_routinechecklistminorsasemployees")]
         public int? AdoxioRoutinechecklistminorsasemployees { get; set; }
 
@@ -3159,8 +3159,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_pschecklistintoxicationidentified")]
-        public int? AdoxioPschecklistintoxicationidentified { get; set; }
+        [JsonProperty(PropertyName = "influencescore")]
+        public decimal? Influencescore { get; set; }
 
         /// <summary>
         /// </summary>

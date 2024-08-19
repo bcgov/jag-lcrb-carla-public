@@ -29,39 +29,39 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioOnestopmessageitem class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioOnestopmessageitem(string adoxioErrordescription = default(string), int? statuscode = default(int?), int? adoxioMessagesendstatus = default(int?), string adoxioMessagestatus = default(string), string _modifiedonbehalfbyValue = default(string), string _owningbusinessunitValue = default(string), string adoxioAcknowledgementstatus = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? adoxioStatuschangedescription = default(int?), System.DateTimeOffset? adoxioDatetimesent = default(System.DateTimeOffset?), string versionnumber = default(string), string _owningteamValue = default(string), int? utcconversiontimezonecode = default(int?), string _owneridValue = default(string), string _adoxioLicenceValue = default(string), string adoxioStatuschange = default(string), string adoxioPayload = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? statecode = default(int?), string adoxioName = default(string), string adoxioMessagestatusreason = default(string), string _createdbyValue = default(string), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? adoxioDatesent = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioDateacknowledgementreceived = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), string adoxioOnestopmessageitemid = default(string), int? importsequencenumber = default(int?), string _owninguserValue = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioOnestopmessageitemSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioOnestopmessageitemDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioOnestopmessageitemDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioOnestopmessageitemAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioOnestopmessageitemMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioOnestopmessageitemProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioOnestopmessageitemBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioOnestopmessageitemPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMadoxioLicences adoxioLicence = default(MicrosoftDynamicsCRMadoxioLicences))
+        public MicrosoftDynamicsCRMadoxioOnestopmessageitem(System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string adoxioOnestopmessageitemid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string adoxioPayload = default(string), int? statuscode = default(int?), System.DateTimeOffset? adoxioDateacknowledgementreceived = default(System.DateTimeOffset?), string adoxioErrordescription = default(string), string adoxioAcknowledgementstatus = default(string), System.DateTimeOffset? adoxioDatetimesent = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string _owningbusinessunitValue = default(string), string _createdonbehalfbyValue = default(string), int? utcconversiontimezonecode = default(int?), int? adoxioStatuschangedescription = default(int?), string _owneridValue = default(string), string versionnumber = default(string), string _adoxioLicenceValue = default(string), string adoxioMessagestatusreason = default(string), string _owningteamValue = default(string), int? statecode = default(int?), string adoxioName = default(string), int? adoxioMessagesendstatus = default(int?), string _createdbyValue = default(string), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? adoxioDatesent = default(System.DateTimeOffset?), string adoxioStatuschange = default(string), string _modifiedbyValue = default(string), int? importsequencenumber = default(int?), string _owninguserValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string adoxioMessagestatus = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioOnestopmessageitemSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioOnestopmessageitemDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioOnestopmessageitemDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioOnestopmessageitemAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioOnestopmessageitemMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioOnestopmessageitemProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioOnestopmessageitemBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioOnestopmessageitemPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMadoxioLicences adoxioLicence = default(MicrosoftDynamicsCRMadoxioLicences))
         {
-            AdoxioErrordescription = adoxioErrordescription;
+            Createdon = createdon;
+            AdoxioOnestopmessageitemid = adoxioOnestopmessageitemid;
+            Modifiedon = modifiedon;
+            AdoxioPayload = adoxioPayload;
             Statuscode = statuscode;
-            AdoxioMessagesendstatus = adoxioMessagesendstatus;
-            AdoxioMessagestatus = adoxioMessagestatus;
+            AdoxioDateacknowledgementreceived = adoxioDateacknowledgementreceived;
+            AdoxioErrordescription = adoxioErrordescription;
+            AdoxioAcknowledgementstatus = adoxioAcknowledgementstatus;
+            AdoxioDatetimesent = adoxioDatetimesent;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             this._owningbusinessunitValue = _owningbusinessunitValue;
-            AdoxioAcknowledgementstatus = adoxioAcknowledgementstatus;
-            Overriddencreatedon = overriddencreatedon;
-            AdoxioStatuschangedescription = adoxioStatuschangedescription;
-            AdoxioDatetimesent = adoxioDatetimesent;
-            Versionnumber = versionnumber;
-            this._owningteamValue = _owningteamValue;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Utcconversiontimezonecode = utcconversiontimezonecode;
+            AdoxioStatuschangedescription = adoxioStatuschangedescription;
             this._owneridValue = _owneridValue;
+            Versionnumber = versionnumber;
             this._adoxioLicenceValue = _adoxioLicenceValue;
-            AdoxioStatuschange = adoxioStatuschange;
-            AdoxioPayload = adoxioPayload;
-            Modifiedon = modifiedon;
+            AdoxioMessagestatusreason = adoxioMessagestatusreason;
+            this._owningteamValue = _owningteamValue;
             Statecode = statecode;
             AdoxioName = adoxioName;
-            AdoxioMessagestatusreason = adoxioMessagestatusreason;
+            AdoxioMessagesendstatus = adoxioMessagesendstatus;
             this._createdbyValue = _createdbyValue;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             AdoxioDatesent = adoxioDatesent;
-            AdoxioDateacknowledgementreceived = adoxioDateacknowledgementreceived;
+            AdoxioStatuschange = adoxioStatuschange;
             this._modifiedbyValue = _modifiedbyValue;
-            AdoxioOnestopmessageitemid = adoxioOnestopmessageitemid;
             Importsequencenumber = importsequencenumber;
             this._owninguserValue = _owninguserValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            Createdon = createdon;
+            Overriddencreatedon = overriddencreatedon;
+            AdoxioMessagestatus = adoxioMessagestatus;
             Createdby = createdby;
             Createdonbehalfby = createdonbehalfby;
             Modifiedby = modifiedby;
@@ -89,8 +89,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_errordescription")]
-        public string AdoxioErrordescription { get; set; }
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_onestopmessageitemid")]
+        public string AdoxioOnestopmessageitemid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_payload")]
+        public string AdoxioPayload { get; set; }
 
         /// <summary>
         /// </summary>
@@ -99,13 +114,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_messagesendstatus")]
-        public int? AdoxioMessagesendstatus { get; set; }
+        [JsonProperty(PropertyName = "adoxio_dateacknowledgementreceived")]
+        public System.DateTimeOffset? AdoxioDateacknowledgementreceived { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_messagestatus")]
-        public string AdoxioMessagestatus { get; set; }
+        [JsonProperty(PropertyName = "adoxio_errordescription")]
+        public string AdoxioErrordescription { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_acknowledgementstatus")]
+        public string AdoxioAcknowledgementstatus { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_datetimesent")]
+        public System.DateTimeOffset? AdoxioDatetimesent { get; set; }
 
         /// <summary>
         /// </summary>
@@ -119,33 +144,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_acknowledgementstatus")]
-        public string AdoxioAcknowledgementstatus { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_statuschangedescription")]
-        public int? AdoxioStatuschangedescription { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_datetimesent")]
-        public System.DateTimeOffset? AdoxioDatetimesent { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -154,8 +154,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_statuschangedescription")]
+        public int? AdoxioStatuschangedescription { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
         public string _owneridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -164,18 +174,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_statuschange")]
-        public string AdoxioStatuschange { get; set; }
+        [JsonProperty(PropertyName = "adoxio_messagestatusreason")]
+        public string AdoxioMessagestatusreason { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_payload")]
-        public string AdoxioPayload { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -189,8 +194,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_messagestatusreason")]
-        public string AdoxioMessagestatusreason { get; set; }
+        [JsonProperty(PropertyName = "adoxio_messagesendstatus")]
+        public int? AdoxioMessagesendstatus { get; set; }
 
         /// <summary>
         /// </summary>
@@ -209,18 +214,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_dateacknowledgementreceived")]
-        public System.DateTimeOffset? AdoxioDateacknowledgementreceived { get; set; }
+        [JsonProperty(PropertyName = "adoxio_statuschange")]
+        public string AdoxioStatuschange { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_onestopmessageitemid")]
-        public string AdoxioOnestopmessageitemid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -234,13 +234,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
+        [JsonProperty(PropertyName = "adoxio_messagestatus")]
+        public string AdoxioMessagestatus { get; set; }
 
         /// <summary>
         /// </summary>

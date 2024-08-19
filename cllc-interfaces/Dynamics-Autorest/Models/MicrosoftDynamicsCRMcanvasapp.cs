@@ -31,68 +31,68 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMcanvasapp
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMcanvasapp(string largeiconName = default(string), string mediumiconName = default(string), string tags = default(string), string introducedversion = default(string), byte[] assets = default(byte[]), string _owneridValue = default(string), string solutionid = default(string), string authorizationreferences = default(string), string appversion = default(string), System.DateTimeOffset? createdtime = default(System.DateTimeOffset?), byte[] wideIcon = default(byte[]), byte[] mediumIcon = default(byte[]), string _owningteamValue = default(string), string canvasappid = default(string), string connectionreferences = default(string), string teamsiconName = default(string), string databasereferences = default(string), string wideiconName = default(string), bool? admincontrolbypassconsent = default(bool?), string smalliconName = default(string), string assetsName = default(string), byte[] document = default(byte[]), byte[] largeIcon = default(byte[]), string embeddedapp = default(string), string appcomponents = default(string), string status = default(string), string description = default(string), bool? isheroapp = default(bool?), string aadlastmodifiedbyid = default(string), string galleryitemid = default(string), string minclientversion = default(string), int? canvasapptype = default(int?), string commitmessage = default(string), byte[] smallIcon = default(byte[]), bool? iscdsupgraded = default(bool?), string appcomponentdependencies = default(string), System.DateTimeOffset? lastmodifiedtime = default(System.DateTimeOffset?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), bool? canconsumeapppass = default(bool?), string appopenuri = default(string), bool? isfeaturedapp = default(bool?), string _owningbusinessunitValue = default(string), string versionnumber = default(string), string displayname = default(string), string createdbyclientversion = default(string), string aadlastpublishedbyid = default(string), string backgroundimageName = default(string), string publisher = default(string), string name = default(string), bool? ishidden = default(bool?), byte[] teamsIcon = default(byte[]), string cdsdependencies = default(string), string backgroundcolor = default(string), string canvasapprowid = default(string), string _owninguserValue = default(string), System.DateTimeOffset? lastpublishtime = default(System.DateTimeOffset?), bool? ismanaged = default(bool?), bool? bypassconsent = default(bool?), byte[] backgroundImage = default(byte[]), int? componentstate = default(int?), string documentName = default(string), string aadcreatedbyid = default(string), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsolution fKCanvasAppSolution = default(MicrosoftDynamicsCRMsolution), IList<MicrosoftDynamicsCRMfileattachment> canvasappFileAttachments = default(IList<MicrosoftDynamicsCRMfileattachment>), MicrosoftDynamicsCRMfileattachment backgroundimage = default(MicrosoftDynamicsCRMfileattachment), MicrosoftDynamicsCRMfileattachment smallicon = default(MicrosoftDynamicsCRMfileattachment), MicrosoftDynamicsCRMfileattachment mediumicon = default(MicrosoftDynamicsCRMfileattachment), MicrosoftDynamicsCRMfileattachment largeicon = default(MicrosoftDynamicsCRMfileattachment), MicrosoftDynamicsCRMfileattachment wideicon = default(MicrosoftDynamicsCRMfileattachment), MicrosoftDynamicsCRMfileattachment teamsicon = default(MicrosoftDynamicsCRMfileattachment))
+        public MicrosoftDynamicsCRMcanvasapp(string largeiconName = default(string), string mediumiconName = default(string), string description = default(string), string introducedversion = default(string), byte[] assets = default(byte[]), string _owneridValue = default(string), string solutionid = default(string), string authorizationreferences = default(string), byte[] mediumIcon = default(byte[]), string appversion = default(string), bool? isheroapp = default(bool?), string galleryitemid = default(string), string createdbyclientversion = default(string), System.DateTimeOffset? createdtime = default(System.DateTimeOffset?), string embeddedapp = default(string), string name = default(string), string tags = default(string), string teamsiconName = default(string), string databasereferences = default(string), byte[] smallIcon = default(byte[]), bool? admincontrolbypassconsent = default(bool?), byte[] wideIcon = default(byte[]), string assetsName = default(string), byte[] document = default(byte[]), byte[] largeIcon = default(byte[]), int? componentstate = default(int?), string wideiconName = default(string), string appcomponents = default(string), string connectionreferences = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string aadlastmodifiedbyid = default(string), string commitmessage = default(string), bool? bypassconsent = default(bool?), int? canvasapptype = default(int?), string aadlastpublishedbyid = default(string), string minclientversion = default(string), bool? iscdsupgraded = default(bool?), System.DateTimeOffset? lastmodifiedtime = default(System.DateTimeOffset?), string canvasappid = default(string), bool? canconsumeapppass = default(bool?), bool? isfeaturedapp = default(bool?), string _owningbusinessunitValue = default(string), string versionnumber = default(string), string displayname = default(string), string _owningteamValue = default(string), byte[] teamsIcon = default(byte[]), string appcomponentdependencies = default(string), string backgroundimageName = default(string), string publisher = default(string), bool? ishidden = default(bool?), string appopenuri = default(string), string status = default(string), string backgroundcolor = default(string), string canvasapprowid = default(string), string _owninguserValue = default(string), System.DateTimeOffset? lastpublishtime = default(System.DateTimeOffset?), bool? ismanaged = default(bool?), string smalliconName = default(string), byte[] backgroundImage = default(byte[]), string cdsdependencies = default(string), string documentName = default(string), string aadcreatedbyid = default(string), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsolution fKCanvasAppSolution = default(MicrosoftDynamicsCRMsolution), IList<MicrosoftDynamicsCRMfileattachment> canvasappFileAttachments = default(IList<MicrosoftDynamicsCRMfileattachment>), MicrosoftDynamicsCRMfileattachment backgroundimage = default(MicrosoftDynamicsCRMfileattachment), MicrosoftDynamicsCRMfileattachment smallicon = default(MicrosoftDynamicsCRMfileattachment), MicrosoftDynamicsCRMfileattachment mediumicon = default(MicrosoftDynamicsCRMfileattachment), MicrosoftDynamicsCRMfileattachment largeicon = default(MicrosoftDynamicsCRMfileattachment), MicrosoftDynamicsCRMfileattachment wideicon = default(MicrosoftDynamicsCRMfileattachment), MicrosoftDynamicsCRMfileattachment teamsicon = default(MicrosoftDynamicsCRMfileattachment))
         {
             LargeiconName = largeiconName;
             MediumiconName = mediumiconName;
-            Tags = tags;
+            Description = description;
             Introducedversion = introducedversion;
             Assets = assets;
             this._owneridValue = _owneridValue;
             Solutionid = solutionid;
             Authorizationreferences = authorizationreferences;
-            Appversion = appversion;
-            Createdtime = createdtime;
-            WideIcon = wideIcon;
             MediumIcon = mediumIcon;
-            this._owningteamValue = _owningteamValue;
-            Canvasappid = canvasappid;
-            Connectionreferences = connectionreferences;
+            Appversion = appversion;
+            Isheroapp = isheroapp;
+            Galleryitemid = galleryitemid;
+            Createdbyclientversion = createdbyclientversion;
+            Createdtime = createdtime;
+            Embeddedapp = embeddedapp;
+            Name = name;
+            Tags = tags;
             TeamsiconName = teamsiconName;
             Databasereferences = databasereferences;
-            WideiconName = wideiconName;
+            SmallIcon = smallIcon;
             Admincontrolbypassconsent = admincontrolbypassconsent;
-            SmalliconName = smalliconName;
+            WideIcon = wideIcon;
             AssetsName = assetsName;
             Document = document;
             LargeIcon = largeIcon;
-            Embeddedapp = embeddedapp;
+            Componentstate = componentstate;
+            WideiconName = wideiconName;
             Appcomponents = appcomponents;
-            Status = status;
-            Description = description;
-            Isheroapp = isheroapp;
-            Aadlastmodifiedbyid = aadlastmodifiedbyid;
-            Galleryitemid = galleryitemid;
-            Minclientversion = minclientversion;
-            Canvasapptype = canvasapptype;
-            Commitmessage = commitmessage;
-            SmallIcon = smallIcon;
-            Iscdsupgraded = iscdsupgraded;
-            Appcomponentdependencies = appcomponentdependencies;
-            Lastmodifiedtime = lastmodifiedtime;
+            Connectionreferences = connectionreferences;
             Overwritetime = overwritetime;
+            Aadlastmodifiedbyid = aadlastmodifiedbyid;
+            Commitmessage = commitmessage;
+            Bypassconsent = bypassconsent;
+            Canvasapptype = canvasapptype;
+            Aadlastpublishedbyid = aadlastpublishedbyid;
+            Minclientversion = minclientversion;
+            Iscdsupgraded = iscdsupgraded;
+            Lastmodifiedtime = lastmodifiedtime;
+            Canvasappid = canvasappid;
             Canconsumeapppass = canconsumeapppass;
-            Appopenuri = appopenuri;
             Isfeaturedapp = isfeaturedapp;
             this._owningbusinessunitValue = _owningbusinessunitValue;
             Versionnumber = versionnumber;
             Displayname = displayname;
-            Createdbyclientversion = createdbyclientversion;
-            Aadlastpublishedbyid = aadlastpublishedbyid;
+            this._owningteamValue = _owningteamValue;
+            TeamsIcon = teamsIcon;
+            Appcomponentdependencies = appcomponentdependencies;
             BackgroundimageName = backgroundimageName;
             Publisher = publisher;
-            Name = name;
             Ishidden = ishidden;
-            TeamsIcon = teamsIcon;
-            Cdsdependencies = cdsdependencies;
+            Appopenuri = appopenuri;
+            Status = status;
             Backgroundcolor = backgroundcolor;
             Canvasapprowid = canvasapprowid;
             this._owninguserValue = _owninguserValue;
             Lastpublishtime = lastpublishtime;
             Ismanaged = ismanaged;
-            Bypassconsent = bypassconsent;
+            SmalliconName = smalliconName;
             BackgroundImage = backgroundImage;
-            Componentstate = componentstate;
+            Cdsdependencies = cdsdependencies;
             DocumentName = documentName;
             Aadcreatedbyid = aadcreatedbyid;
             Owningbusinessunit = owningbusinessunit;
@@ -125,8 +125,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "tags")]
-        public string Tags { get; set; }
+        [JsonProperty(PropertyName = "description")]
+        public string Description { get; set; }
 
         /// <summary>
         /// </summary>
@@ -156,8 +156,29 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonConverter(typeof(Base64UrlJsonConverter))]
+        [JsonProperty(PropertyName = "medium_icon")]
+        public byte[] MediumIcon { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "appversion")]
         public string Appversion { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "isheroapp")]
+        public bool? Isheroapp { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "galleryitemid")]
+        public string Galleryitemid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdbyclientversion")]
+        public string Createdbyclientversion { get; set; }
 
         /// <summary>
         /// </summary>
@@ -166,30 +187,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonConverter(typeof(Base64UrlJsonConverter))]
-        [JsonProperty(PropertyName = "wide_icon")]
-        public byte[] WideIcon { get; set; }
+        [JsonProperty(PropertyName = "embeddedapp")]
+        public string Embeddedapp { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonConverter(typeof(Base64UrlJsonConverter))]
-        [JsonProperty(PropertyName = "medium_icon")]
-        public byte[] MediumIcon { get; set; }
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "canvasappid")]
-        public string Canvasappid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "connectionreferences")]
-        public string Connectionreferences { get; set; }
+        [JsonProperty(PropertyName = "tags")]
+        public string Tags { get; set; }
 
         /// <summary>
         /// </summary>
@@ -203,8 +212,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "wideicon_name")]
-        public string WideiconName { get; set; }
+        [JsonConverter(typeof(Base64UrlJsonConverter))]
+        [JsonProperty(PropertyName = "small_icon")]
+        public byte[] SmallIcon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -213,8 +223,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "smallicon_name")]
-        public string SmalliconName { get; set; }
+        [JsonConverter(typeof(Base64UrlJsonConverter))]
+        [JsonProperty(PropertyName = "wide_icon")]
+        public byte[] WideIcon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -235,8 +246,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "embeddedapp")]
-        public string Embeddedapp { get; set; }
+        [JsonProperty(PropertyName = "componentstate")]
+        public int? Componentstate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "wideicon_name")]
+        public string WideiconName { get; set; }
 
         /// <summary>
         /// </summary>
@@ -245,64 +261,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "status")]
-        public string Status { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "description")]
-        public string Description { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "isheroapp")]
-        public bool? Isheroapp { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "aadlastmodifiedbyid")]
-        public string Aadlastmodifiedbyid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "galleryitemid")]
-        public string Galleryitemid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "minclientversion")]
-        public string Minclientversion { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "canvasapptype")]
-        public int? Canvasapptype { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "commitmessage")]
-        public string Commitmessage { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonConverter(typeof(Base64UrlJsonConverter))]
-        [JsonProperty(PropertyName = "small_icon")]
-        public byte[] SmallIcon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "iscdsupgraded")]
-        public bool? Iscdsupgraded { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "appcomponentdependencies")]
-        public string Appcomponentdependencies { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "lastmodifiedtime")]
-        public System.DateTimeOffset? Lastmodifiedtime { get; set; }
+        [JsonProperty(PropertyName = "connectionreferences")]
+        public string Connectionreferences { get; set; }
 
         /// <summary>
         /// </summary>
@@ -311,13 +271,53 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "canconsumeapppass")]
-        public bool? Canconsumeapppass { get; set; }
+        [JsonProperty(PropertyName = "aadlastmodifiedbyid")]
+        public string Aadlastmodifiedbyid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "appopenuri")]
-        public string Appopenuri { get; set; }
+        [JsonProperty(PropertyName = "commitmessage")]
+        public string Commitmessage { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "bypassconsent")]
+        public bool? Bypassconsent { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "canvasapptype")]
+        public int? Canvasapptype { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "aadlastpublishedbyid")]
+        public string Aadlastpublishedbyid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "minclientversion")]
+        public string Minclientversion { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "iscdsupgraded")]
+        public bool? Iscdsupgraded { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "lastmodifiedtime")]
+        public System.DateTimeOffset? Lastmodifiedtime { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "canvasappid")]
+        public string Canvasappid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "canconsumeapppass")]
+        public bool? Canconsumeapppass { get; set; }
 
         /// <summary>
         /// </summary>
@@ -341,13 +341,19 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdbyclientversion")]
-        public string Createdbyclientversion { get; set; }
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "aadlastpublishedbyid")]
-        public string Aadlastpublishedbyid { get; set; }
+        [JsonConverter(typeof(Base64UrlJsonConverter))]
+        [JsonProperty(PropertyName = "teams_icon")]
+        public byte[] TeamsIcon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "appcomponentdependencies")]
+        public string Appcomponentdependencies { get; set; }
 
         /// <summary>
         /// </summary>
@@ -361,24 +367,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "ishidden")]
         public bool? Ishidden { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonConverter(typeof(Base64UrlJsonConverter))]
-        [JsonProperty(PropertyName = "teams_icon")]
-        public byte[] TeamsIcon { get; set; }
+        [JsonProperty(PropertyName = "appopenuri")]
+        public string Appopenuri { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "cdsdependencies")]
-        public string Cdsdependencies { get; set; }
+        [JsonProperty(PropertyName = "status")]
+        public string Status { get; set; }
 
         /// <summary>
         /// </summary>
@@ -407,8 +407,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "bypassconsent")]
-        public bool? Bypassconsent { get; set; }
+        [JsonProperty(PropertyName = "smallicon_name")]
+        public string SmalliconName { get; set; }
 
         /// <summary>
         /// </summary>
@@ -418,8 +418,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "componentstate")]
-        public int? Componentstate { get; set; }
+        [JsonProperty(PropertyName = "cdsdependencies")]
+        public string Cdsdependencies { get; set; }
 
         /// <summary>
         /// </summary>

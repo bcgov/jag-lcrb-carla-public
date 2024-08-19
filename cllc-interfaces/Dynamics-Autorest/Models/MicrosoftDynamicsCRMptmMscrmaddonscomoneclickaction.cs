@@ -29,20 +29,19 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMptmMscrmaddonscomoneclickaction class.
         /// </summary>
-        public MicrosoftDynamicsCRMptmMscrmaddonscomoneclickaction(string _createdbyValue = default(string), string ptmMscrmaddonscomoneclickactionid = default(string), int? ptmPosition = default(int?), string _owneridValue = default(string), string _owningbusinessunitValue = default(string), string ptmDisplayrules = default(string), int? importsequencenumber = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string ptmName = default(string), string _ptmGroupidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), int? utcconversiontimezonecode = default(int?), string ptmOca = default(string), string ptmEntity = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _owningteamValue = default(string), string ptmDescription = default(string), string _owninguserValue = default(string), int? statecode = default(int?), string _modifiedonbehalfbyValue = default(string), string versionnumber = default(string), int? statuscode = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> ptmMscrmaddonscomoneclickactionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> ptmMscrmaddonscomoneclickactionAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> ptmMscrmaddonscomoneclickactionMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> ptmMscrmaddonscomoneclickactionProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> ptmMscrmaddonscomoneclickactionBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> ptmMscrmaddonscomoneclickactionPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMptmAutomergeworkingitems> ptmPtmMscrmaddonscomoneclickactionPtmAutomergeworkingitemsOca = default(IList<MicrosoftDynamicsCRMptmAutomergeworkingitems>), MicrosoftDynamicsCRMptmMscrmaddonscomoneclickaction ptmGroupid = default(MicrosoftDynamicsCRMptmMscrmaddonscomoneclickaction), IList<MicrosoftDynamicsCRMptmMscrmaddonscomoneclickaction> ptmPtmMscrmaddonscomoneclickactionPtmMscrmaddonscomoneclickactionGroup = default(IList<MicrosoftDynamicsCRMptmMscrmaddonscomoneclickaction>))
+        public MicrosoftDynamicsCRMptmMscrmaddonscomoneclickaction(string _createdbyValue = default(string), string _owningbusinessunitValue = default(string), string _owneridValue = default(string), string ptmDisplayrules = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string ptmMscrmaddonscomoneclickactionid = default(string), int? importsequencenumber = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), string ptmName = default(string), string _ptmGroupidValue = default(string), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), int? utcconversiontimezonecode = default(int?), string ptmOca = default(string), string ptmEntity = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _owningteamValue = default(string), string ptmDescription = default(string), string _owninguserValue = default(string), int? statecode = default(int?), string _modifiedonbehalfbyValue = default(string), string versionnumber = default(string), int? ptmPosition = default(int?), int? statuscode = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> ptmMscrmaddonscomoneclickactionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> ptmMscrmaddonscomoneclickactionAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> ptmMscrmaddonscomoneclickactionMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> ptmMscrmaddonscomoneclickactionProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> ptmMscrmaddonscomoneclickactionBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> ptmMscrmaddonscomoneclickactionPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMptmAutomergeworkingitems> ptmPtmMscrmaddonscomoneclickactionPtmAutomergeworkingitemsOca = default(IList<MicrosoftDynamicsCRMptmAutomergeworkingitems>), MicrosoftDynamicsCRMptmMscrmaddonscomoneclickaction ptmGroupid = default(MicrosoftDynamicsCRMptmMscrmaddonscomoneclickaction), IList<MicrosoftDynamicsCRMptmMscrmaddonscomoneclickaction> ptmPtmMscrmaddonscomoneclickactionPtmMscrmaddonscomoneclickactionGroup = default(IList<MicrosoftDynamicsCRMptmMscrmaddonscomoneclickaction>))
         {
             this._createdbyValue = _createdbyValue;
-            PtmMscrmaddonscomoneclickactionid = ptmMscrmaddonscomoneclickactionid;
-            PtmPosition = ptmPosition;
-            this._owneridValue = _owneridValue;
             this._owningbusinessunitValue = _owningbusinessunitValue;
+            this._owneridValue = _owneridValue;
             PtmDisplayrules = ptmDisplayrules;
+            Createdon = createdon;
+            PtmMscrmaddonscomoneclickactionid = ptmMscrmaddonscomoneclickactionid;
             Importsequencenumber = importsequencenumber;
             Modifiedon = modifiedon;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
             PtmName = ptmName;
             this._ptmGroupidValue = _ptmGroupidValue;
-            Createdon = createdon;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             this._modifiedbyValue = _modifiedbyValue;
             Utcconversiontimezonecode = utcconversiontimezonecode;
@@ -55,6 +54,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Statecode = statecode;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Versionnumber = versionnumber;
+            PtmPosition = ptmPosition;
             Statuscode = statuscode;
             Createdby = createdby;
             Createdonbehalfby = createdonbehalfby;
@@ -88,13 +88,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ptm_mscrmaddonscomoneclickactionid")]
-        public string PtmMscrmaddonscomoneclickactionid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ptm_position")]
-        public int? PtmPosition { get; set; }
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -103,13 +98,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
+        [JsonProperty(PropertyName = "ptm_displayrules")]
+        public string PtmDisplayrules { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ptm_displayrules")]
-        public string PtmDisplayrules { get; set; }
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ptm_mscrmaddonscomoneclickactionid")]
+        public string PtmMscrmaddonscomoneclickactionid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -123,6 +123,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "ptm_name")]
         public string PtmName { get; set; }
 
@@ -130,16 +135,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_ptm_groupid_value")]
         public string _ptmGroupidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -200,6 +195,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
         public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ptm_position")]
+        public int? PtmPosition { get; set; }
 
         /// <summary>
         /// </summary>

@@ -29,33 +29,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMpackage
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMpackage(string packageid = default(string), int? utcconversiontimezonecode = default(int?), string appid = default(string), string publisherid = default(string), int? importsequencenumber = default(int?), System.DateTimeOffset? installedon = default(System.DateTimeOffset?), string packageuniquename = default(string), int? statuscode = default(int?), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string packageversion = default(string), int? statecode = default(int?), string versionnumber = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string packageinstanceid = default(string), string _createdonbehalfbyValue = default(string), string tpspackageid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string applicationname = default(string), int? timezoneruleversionnumber = default(int?), string packageinstanceoperationid = default(string), string _modifiedbyValue = default(string), string _createdbyValue = default(string), string _organizationidValue = default(string), string publishername = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> packageSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> packageDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> packageDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> packageAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> packageMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> packageProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> packageBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> packagePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMsolution> packageSolution = default(IList<MicrosoftDynamicsCRMsolution>))
+        public MicrosoftDynamicsCRMpackage(string packageid = default(string), string packageuniquename = default(string), string publishername = default(string), string publisherid = default(string), string _organizationidValue = default(string), int? importsequencenumber = default(int?), System.DateTimeOffset? installedon = default(System.DateTimeOffset?), int? statuscode = default(int?), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), int? statecode = default(int?), string versionnumber = default(string), string applicationname = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string packageinstanceid = default(string), string tpspackageid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string appid = default(string), string packageinstanceoperationid = default(string), string _modifiedbyValue = default(string), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), string packageversion = default(string), int? utcconversiontimezonecode = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> packageSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> packageDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> packageDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> packageAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> packageMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> packageProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> packageBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> packagePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMsolution> packageSolution = default(IList<MicrosoftDynamicsCRMsolution>))
         {
             Packageid = packageid;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
-            Appid = appid;
+            Packageuniquename = packageuniquename;
+            Publishername = publishername;
             Publisherid = publisherid;
+            this._organizationidValue = _organizationidValue;
             Importsequencenumber = importsequencenumber;
             Installedon = installedon;
-            Packageuniquename = packageuniquename;
             Statuscode = statuscode;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Createdon = createdon;
-            Packageversion = packageversion;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
             Statecode = statecode;
             Versionnumber = versionnumber;
+            Applicationname = applicationname;
             Overriddencreatedon = overriddencreatedon;
             Packageinstanceid = packageinstanceid;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Tpspackageid = tpspackageid;
             Modifiedon = modifiedon;
-            Applicationname = applicationname;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
+            Appid = appid;
             Packageinstanceoperationid = packageinstanceoperationid;
             this._modifiedbyValue = _modifiedbyValue;
             this._createdbyValue = _createdbyValue;
-            this._organizationidValue = _organizationidValue;
-            Publishername = publishername;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Packageversion = packageversion;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
             Createdby = createdby;
             Createdonbehalfby = createdonbehalfby;
             Modifiedby = modifiedby;
@@ -85,18 +85,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
+        [JsonProperty(PropertyName = "packageuniquename")]
+        public string Packageuniquename { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "appid")]
-        public string Appid { get; set; }
+        [JsonProperty(PropertyName = "publishername")]
+        public string Publishername { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "publisherid")]
         public string Publisherid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -107,11 +112,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "installedon")]
         public System.DateTimeOffset? Installedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "packageuniquename")]
-        public string Packageuniquename { get; set; }
 
         /// <summary>
         /// </summary>
@@ -130,8 +130,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "packageversion")]
-        public string Packageversion { get; set; }
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -145,6 +145,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "applicationname")]
+        public string Applicationname { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
@@ -152,11 +157,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "packageinstanceid")]
         public string Packageinstanceid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -170,13 +170,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "applicationname")]
-        public string Applicationname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
+        [JsonProperty(PropertyName = "appid")]
+        public string Appid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -195,13 +190,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "publishername")]
-        public string Publishername { get; set; }
+        [JsonProperty(PropertyName = "packageversion")]
+        public string Packageversion { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
         /// </summary>
