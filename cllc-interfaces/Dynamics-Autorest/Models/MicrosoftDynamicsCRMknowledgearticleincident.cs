@@ -29,9 +29,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMknowledgearticleincident class.
         /// </summary>
-        public MicrosoftDynamicsCRMknowledgearticleincident(int? importsequencenumber = default(int?), string _transactioncurrencyidValue = default(string), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), decimal? exchangerate = default(decimal?), string owningbusinessunit = default(string), string _owneridValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _knowledgearticleidValue = default(string), string _createdonbehalfbyValue = default(string), string knowledgearticleincidentid = default(string), string _owningteamValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string versionnumber = default(string), int? statecode = default(int?), string _incidentidValue = default(string), int? knowledgeusage = default(int?), bool? issenttocustomer = default(bool?), int? timezoneruleversionnumber = default(int?), string _modifiedbyValue = default(string), int? utcconversiontimezonecode = default(int?), int? statuscode = default(int?), string owninguser = default(string), string _createdbyValue = default(string), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMteam> knowledgearticleincidentTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMasyncoperation> knowledgearticleincidentAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> knowledgearticleincidentMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> knowledgearticleincidentProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> knowledgearticleincidentBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> knowledgearticleincidentPrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> knowledgeArticleIncidentSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMknowledgearticle knowledgearticleid = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMincident incidentid = default(MicrosoftDynamicsCRMincident))
+        public MicrosoftDynamicsCRMknowledgearticleincident(int? timezoneruleversionnumber = default(int?), string _transactioncurrencyidValue = default(string), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), decimal? exchangerate = default(decimal?), string owningbusinessunit = default(string), string _owneridValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _knowledgearticleidValue = default(string), string _createdonbehalfbyValue = default(string), int? importsequencenumber = default(int?), string knowledgearticleincidentid = default(string), string _owningteamValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string versionnumber = default(string), int? statecode = default(int?), int? knowledgeusage = default(int?), bool? issenttocustomer = default(bool?), string _incidentidValue = default(string), string _modifiedbyValue = default(string), int? utcconversiontimezonecode = default(int?), int? statuscode = default(int?), string owninguser = default(string), string _createdbyValue = default(string), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMteam> knowledgearticleincidentTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMasyncoperation> knowledgearticleincidentAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> knowledgearticleincidentMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> knowledgearticleincidentProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> knowledgearticleincidentBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> knowledgearticleincidentPrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> knowledgeArticleIncidentSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMknowledgearticle knowledgearticleid = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMincident incidentid = default(MicrosoftDynamicsCRMincident))
         {
-            Importsequencenumber = importsequencenumber;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
             this._transactioncurrencyidValue = _transactioncurrencyidValue;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Overriddencreatedon = overriddencreatedon;
@@ -41,15 +41,15 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Modifiedon = modifiedon;
             this._knowledgearticleidValue = _knowledgearticleidValue;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Importsequencenumber = importsequencenumber;
             Knowledgearticleincidentid = knowledgearticleincidentid;
             this._owningteamValue = _owningteamValue;
             Createdon = createdon;
             Versionnumber = versionnumber;
             Statecode = statecode;
-            this._incidentidValue = _incidentidValue;
             Knowledgeusage = knowledgeusage;
             Issenttocustomer = issenttocustomer;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
+            this._incidentidValue = _incidentidValue;
             this._modifiedbyValue = _modifiedbyValue;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             Statuscode = statuscode;
@@ -80,8 +80,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -130,6 +130,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "knowledgearticleincidentid")]
         public string Knowledgearticleincidentid { get; set; }
 
@@ -155,11 +160,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_incidentid_value")]
-        public string _incidentidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "knowledgeusage")]
         public int? Knowledgeusage { get; set; }
 
@@ -170,8 +170,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
+        [JsonProperty(PropertyName = "_incidentid_value")]
+        public string _incidentidValue { get; set; }
 
         /// <summary>
         /// </summary>

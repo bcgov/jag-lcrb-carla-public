@@ -27,38 +27,38 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMnavigationsetting class.
         /// </summary>
-        public MicrosoftDynamicsCRMnavigationsetting(string parentnavigationsettingid = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string solutionid = default(string), string introducedversion = default(string), string name = default(string), int? componentstate = default(int?), int? advancedsettingorder = default(int?), int? settingtype = default(int?), string appconfigidunique = default(string), string resourceid = default(string), string _appconfigidValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), bool? ismanaged = default(bool?), int? privileges = default(int?), string groupname = default(string), string iconresourceid = default(string), string _organizationidValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), string _createdonbehalfbyValue = default(string), string _createdbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string pageurl = default(string), int? importsequencenumber = default(int?), int? objecttypecode = default(int?), string description = default(string), string navigationsettingid = default(string), string navigationsettingidunique = default(string), int? quicksettingorder = default(int?), bool? progressstate = default(bool?), MicrosoftDynamicsCRMsystemuser navigationsettingModifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser navigationsettingCreatedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMappconfig navigationsettingAppconfig = default(MicrosoftDynamicsCRMappconfig), MicrosoftDynamicsCRMsystemuser navigationsettingModifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser navigationsettingCreatedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationNavigationsettingNavigationsetting = default(MicrosoftDynamicsCRMorganization))
+        public MicrosoftDynamicsCRMnavigationsetting(string parentnavigationsettingid = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string solutionid = default(string), string name = default(string), int? componentstate = default(int?), int? settingtype = default(int?), string appconfigidunique = default(string), string resourceid = default(string), string _createdonbehalfbyValue = default(string), int? privileges = default(int?), int? importsequencenumber = default(int?), bool? ismanaged = default(bool?), int? advancedsettingorder = default(int?), string _appconfigidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string iconresourceid = default(string), string _modifiedonbehalfbyValue = default(string), string _organizationidValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? quicksettingorder = default(int?), string _modifiedbyValue = default(string), string _createdbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string pageurl = default(string), string groupname = default(string), int? objecttypecode = default(int?), string introducedversion = default(string), string description = default(string), string navigationsettingid = default(string), string navigationsettingidunique = default(string), bool? progressstate = default(bool?), MicrosoftDynamicsCRMsystemuser navigationsettingModifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser navigationsettingCreatedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMappconfig navigationsettingAppconfig = default(MicrosoftDynamicsCRMappconfig), MicrosoftDynamicsCRMsystemuser navigationsettingModifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser navigationsettingCreatedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationNavigationsettingNavigationsetting = default(MicrosoftDynamicsCRMorganization))
         {
             Parentnavigationsettingid = parentnavigationsettingid;
             Overwritetime = overwritetime;
             Solutionid = solutionid;
-            Introducedversion = introducedversion;
             Name = name;
             Componentstate = componentstate;
-            Advancedsettingorder = advancedsettingorder;
             Settingtype = settingtype;
             Appconfigidunique = appconfigidunique;
             Resourceid = resourceid;
-            this._appconfigidValue = _appconfigidValue;
-            Modifiedon = modifiedon;
-            Createdon = createdon;
-            Ismanaged = ismanaged;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Privileges = privileges;
-            Groupname = groupname;
+            Importsequencenumber = importsequencenumber;
+            Ismanaged = ismanaged;
+            Advancedsettingorder = advancedsettingorder;
+            this._appconfigidValue = _appconfigidValue;
+            Createdon = createdon;
             Iconresourceid = iconresourceid;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             this._organizationidValue = _organizationidValue;
             Overriddencreatedon = overriddencreatedon;
+            Quicksettingorder = quicksettingorder;
             this._modifiedbyValue = _modifiedbyValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             this._createdbyValue = _createdbyValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Modifiedon = modifiedon;
             Pageurl = pageurl;
-            Importsequencenumber = importsequencenumber;
+            Groupname = groupname;
             Objecttypecode = objecttypecode;
+            Introducedversion = introducedversion;
             Description = description;
             Navigationsettingid = navigationsettingid;
             Navigationsettingidunique = navigationsettingidunique;
-            Quicksettingorder = quicksettingorder;
             Progressstate = progressstate;
             NavigationsettingModifiedby = navigationsettingModifiedby;
             NavigationsettingCreatedonbehalfby = navigationsettingCreatedonbehalfby;
@@ -91,11 +91,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "introducedversion")]
-        public string Introducedversion { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
@@ -103,11 +98,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "componentstate")]
         public int? Componentstate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "advancedsettingorder")]
-        public int? Advancedsettingorder { get; set; }
 
         /// <summary>
         /// </summary>
@@ -126,23 +116,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_appconfigid_value")]
-        public string _appconfigidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ismanaged")]
-        public bool? Ismanaged { get; set; }
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -151,13 +126,38 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "groupname")]
-        public string Groupname { get; set; }
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ismanaged")]
+        public bool? Ismanaged { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "advancedsettingorder")]
+        public int? Advancedsettingorder { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_appconfigid_value")]
+        public string _appconfigidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "iconresourceid")]
         public string Iconresourceid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -171,13 +171,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        [JsonProperty(PropertyName = "quicksettingorder")]
+        public int? Quicksettingorder { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -186,8 +186,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -196,13 +196,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
+        [JsonProperty(PropertyName = "groupname")]
+        public string Groupname { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "objecttypecode")]
         public int? Objecttypecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "introducedversion")]
+        public string Introducedversion { get; set; }
 
         /// <summary>
         /// </summary>
@@ -218,11 +223,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "navigationsettingidunique")]
         public string Navigationsettingidunique { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "quicksettingorder")]
-        public int? Quicksettingorder { get; set; }
 
         /// <summary>
         /// </summary>

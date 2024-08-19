@@ -29,33 +29,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMmsdynIcebreakersconfig class.
         /// </summary>
-        public MicrosoftDynamicsCRMmsdynIcebreakersconfig(int? timezoneruleversionnumber = default(int?), int? importsequencenumber = default(int?), string msdynName = default(string), bool? msdynIsentertainmentcategoryenabled = default(bool?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), bool? msdynIsfamilycategoryenabled = default(bool?), string msdynIcebreakersconfigid = default(string), bool? msdynAretermsaccepted = default(bool?), bool? msdynIsadminsettingenabled = default(bool?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), bool? msdynIssportscategoryenabled = default(bool?), string _modifiedonbehalfbyValue = default(string), string _owninguserValue = default(string), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), bool? msdynIshealthcategoryenabled = default(bool?), string _owningbusinessunitValue = default(string), string _owningteamValue = default(string), string _createdbyValue = default(string), int? statecode = default(int?), string versionnumber = default(string), string _modifiedbyValue = default(string), string _createdonbehalfbyValue = default(string), int? statuscode = default(int?), string _owneridValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> msdynIcebreakersconfigSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> msdynIcebreakersconfigDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> msdynIcebreakersconfigDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> msdynIcebreakersconfigAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> msdynIcebreakersconfigMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> msdynIcebreakersconfigProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> msdynIcebreakersconfigBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> msdynIcebreakersconfigPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>))
+        public MicrosoftDynamicsCRMmsdynIcebreakersconfig(int? importsequencenumber = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), bool? msdynAretermsaccepted = default(bool?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), bool? msdynIsfamilycategoryenabled = default(bool?), string msdynIcebreakersconfigid = default(string), int? timezoneruleversionnumber = default(int?), bool? msdynIsadminsettingenabled = default(bool?), string _modifiedbyValue = default(string), bool? msdynIssportscategoryenabled = default(bool?), string _modifiedonbehalfbyValue = default(string), bool? msdynIsentertainmentcategoryenabled = default(bool?), string _owninguserValue = default(string), string _owneridValue = default(string), string _owningteamValue = default(string), string msdynName = default(string), string versionnumber = default(string), string _createdbyValue = default(string), bool? msdynIshealthcategoryenabled = default(bool?), int? statecode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), int? statuscode = default(int?), string _owningbusinessunitValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> msdynIcebreakersconfigSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> msdynIcebreakersconfigDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> msdynIcebreakersconfigDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> msdynIcebreakersconfigAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> msdynIcebreakersconfigMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> msdynIcebreakersconfigProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> msdynIcebreakersconfigBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> msdynIcebreakersconfigPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>))
         {
-            Timezoneruleversionnumber = timezoneruleversionnumber;
             Importsequencenumber = importsequencenumber;
-            MsdynName = msdynName;
-            MsdynIsentertainmentcategoryenabled = msdynIsentertainmentcategoryenabled;
+            Modifiedon = modifiedon;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            MsdynAretermsaccepted = msdynAretermsaccepted;
             Overriddencreatedon = overriddencreatedon;
             MsdynIsfamilycategoryenabled = msdynIsfamilycategoryenabled;
             MsdynIcebreakersconfigid = msdynIcebreakersconfigid;
-            MsdynAretermsaccepted = msdynAretermsaccepted;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
             MsdynIsadminsettingenabled = msdynIsadminsettingenabled;
-            Modifiedon = modifiedon;
+            this._modifiedbyValue = _modifiedbyValue;
             MsdynIssportscategoryenabled = msdynIssportscategoryenabled;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            MsdynIsentertainmentcategoryenabled = msdynIsentertainmentcategoryenabled;
             this._owninguserValue = _owninguserValue;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
-            Createdon = createdon;
-            MsdynIshealthcategoryenabled = msdynIshealthcategoryenabled;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
-            this._owningteamValue = _owningteamValue;
-            this._createdbyValue = _createdbyValue;
-            Statecode = statecode;
-            Versionnumber = versionnumber;
-            this._modifiedbyValue = _modifiedbyValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            Statuscode = statuscode;
             this._owneridValue = _owneridValue;
+            this._owningteamValue = _owningteamValue;
+            MsdynName = msdynName;
+            Versionnumber = versionnumber;
+            this._createdbyValue = _createdbyValue;
+            MsdynIshealthcategoryenabled = msdynIshealthcategoryenabled;
+            Statecode = statecode;
+            Createdon = createdon;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            Statuscode = statuscode;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
             Createdby = createdby;
             Createdonbehalfby = createdonbehalfby;
             Modifiedby = modifiedby;
@@ -82,23 +82,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_name")]
-        public string MsdynName { get; set; }
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_isentertainmentcategoryenabled")]
-        public bool? MsdynIsentertainmentcategoryenabled { get; set; }
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "msdyn_aretermsaccepted")]
+        public bool? MsdynAretermsaccepted { get; set; }
 
         /// <summary>
         /// </summary>
@@ -117,8 +117,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_aretermsaccepted")]
-        public bool? MsdynAretermsaccepted { get; set; }
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -127,8 +127,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -142,28 +142,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "msdyn_isentertainmentcategoryenabled")]
+        public bool? MsdynIsentertainmentcategoryenabled { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
         public string _owninguserValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "msdyn_ishealthcategoryenabled")]
-        public bool? MsdynIshealthcategoryenabled { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -172,13 +162,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
+        [JsonProperty(PropertyName = "msdyn_name")]
+        public string MsdynName { get; set; }
 
         /// <summary>
         /// </summary>
@@ -187,13 +172,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "msdyn_ishealthcategoryenabled")]
+        public bool? MsdynIshealthcategoryenabled { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -202,8 +202,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
         /// </summary>

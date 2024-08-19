@@ -29,14 +29,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMfileattachment class.
         /// </summary>
-        public MicrosoftDynamicsCRMfileattachment(long? filesizeinbytes = default(long?), string filename = default(string), string versionnumber = default(string), string fileattachmentid = default(string), string mimetype = default(string), string _objectidValue = default(string), string regardingfieldname = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string objecttypecode = default(string), IList<MicrosoftDynamicsCRMsyncerror> fileAttachmentSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsolution fileAttachmentSolution = default(MicrosoftDynamicsCRMsolution), IList<MicrosoftDynamicsCRMsolution> solutionFileid = default(IList<MicrosoftDynamicsCRMsolution>), MicrosoftDynamicsCRMstagesolutionupload objectidStagesolutionupload = default(MicrosoftDynamicsCRMstagesolutionupload), MicrosoftDynamicsCRMexportsolutionupload objectidExportsolutionupload = default(MicrosoftDynamicsCRMexportsolutionupload), MicrosoftDynamicsCRMcascadegrantrevokeaccessrecordstracker objectidCascadegrantrevokeaccessrecordstracker = default(MicrosoftDynamicsCRMcascadegrantrevokeaccessrecordstracker), MicrosoftDynamicsCRMasyncoperation objectidAsyncoperation = default(MicrosoftDynamicsCRMasyncoperation), MicrosoftDynamicsCRMcanvasapp objectidCanvasapp = default(MicrosoftDynamicsCRMcanvasapp), IList<MicrosoftDynamicsCRMcanvasapp> fileAttachmentCanvasAppBackgroundImage = default(IList<MicrosoftDynamicsCRMcanvasapp>), IList<MicrosoftDynamicsCRMcanvasapp> fileAttachmentCanvasAppSmallIcon = default(IList<MicrosoftDynamicsCRMcanvasapp>), IList<MicrosoftDynamicsCRMcanvasapp> fileAttachmentCanvasAppMediumIcon = default(IList<MicrosoftDynamicsCRMcanvasapp>), IList<MicrosoftDynamicsCRMcanvasapp> fileAttachmentCanvasAppLargeIcon = default(IList<MicrosoftDynamicsCRMcanvasapp>), IList<MicrosoftDynamicsCRMcanvasapp> fileAttachmentCanvasAppWideIcon = default(IList<MicrosoftDynamicsCRMcanvasapp>), IList<MicrosoftDynamicsCRMcanvasapp> fileAttachmentCanvasAppTeamsIcon = default(IList<MicrosoftDynamicsCRMcanvasapp>), MicrosoftDynamicsCRMworkflowlog objectidWorkflowlog = default(MicrosoftDynamicsCRMworkflowlog), MicrosoftDynamicsCRMflowsession objectidFlowsession = default(MicrosoftDynamicsCRMflowsession), MicrosoftDynamicsCRMworkflowbinary objectidWorkflowbinary = default(MicrosoftDynamicsCRMworkflowbinary), MicrosoftDynamicsCRMmsdynKnowledgearticleimage objectidMsdynKnowledgearticleimage = default(MicrosoftDynamicsCRMmsdynKnowledgearticleimage), MicrosoftDynamicsCRMmailbox objectidMailbox = default(MicrosoftDynamicsCRMmailbox), MicrosoftDynamicsCRMmsdynRichtextfile objectidMsdynRichtextfile = default(MicrosoftDynamicsCRMmsdynRichtextfile), MicrosoftDynamicsCRMmsdynAiconfiguration objectidMsdynAiconfiguration = default(MicrosoftDynamicsCRMmsdynAiconfiguration), MicrosoftDynamicsCRMmsdynAibfile objectidMsdynAibfile = default(MicrosoftDynamicsCRMmsdynAibfile))
+        public MicrosoftDynamicsCRMfileattachment(long? filesizeinbytes = default(long?), string filename = default(string), string fileattachmentid = default(string), string _objectidValue = default(string), string mimetype = default(string), string versionnumber = default(string), string regardingfieldname = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string objecttypecode = default(string), IList<MicrosoftDynamicsCRMsyncerror> fileAttachmentSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsolution fileAttachmentSolution = default(MicrosoftDynamicsCRMsolution), IList<MicrosoftDynamicsCRMsolution> solutionFileid = default(IList<MicrosoftDynamicsCRMsolution>), MicrosoftDynamicsCRMstagesolutionupload objectidStagesolutionupload = default(MicrosoftDynamicsCRMstagesolutionupload), MicrosoftDynamicsCRMexportsolutionupload objectidExportsolutionupload = default(MicrosoftDynamicsCRMexportsolutionupload), MicrosoftDynamicsCRMcascadegrantrevokeaccessrecordstracker objectidCascadegrantrevokeaccessrecordstracker = default(MicrosoftDynamicsCRMcascadegrantrevokeaccessrecordstracker), MicrosoftDynamicsCRMasyncoperation objectidAsyncoperation = default(MicrosoftDynamicsCRMasyncoperation), MicrosoftDynamicsCRMcanvasapp objectidCanvasapp = default(MicrosoftDynamicsCRMcanvasapp), IList<MicrosoftDynamicsCRMcanvasapp> fileAttachmentCanvasAppBackgroundImage = default(IList<MicrosoftDynamicsCRMcanvasapp>), IList<MicrosoftDynamicsCRMcanvasapp> fileAttachmentCanvasAppSmallIcon = default(IList<MicrosoftDynamicsCRMcanvasapp>), IList<MicrosoftDynamicsCRMcanvasapp> fileAttachmentCanvasAppMediumIcon = default(IList<MicrosoftDynamicsCRMcanvasapp>), IList<MicrosoftDynamicsCRMcanvasapp> fileAttachmentCanvasAppLargeIcon = default(IList<MicrosoftDynamicsCRMcanvasapp>), IList<MicrosoftDynamicsCRMcanvasapp> fileAttachmentCanvasAppWideIcon = default(IList<MicrosoftDynamicsCRMcanvasapp>), IList<MicrosoftDynamicsCRMcanvasapp> fileAttachmentCanvasAppTeamsIcon = default(IList<MicrosoftDynamicsCRMcanvasapp>), MicrosoftDynamicsCRMworkflowlog objectidWorkflowlog = default(MicrosoftDynamicsCRMworkflowlog), MicrosoftDynamicsCRMflowsession objectidFlowsession = default(MicrosoftDynamicsCRMflowsession), MicrosoftDynamicsCRMworkflowbinary objectidWorkflowbinary = default(MicrosoftDynamicsCRMworkflowbinary), MicrosoftDynamicsCRMmsdynKnowledgearticleimage objectidMsdynKnowledgearticleimage = default(MicrosoftDynamicsCRMmsdynKnowledgearticleimage), MicrosoftDynamicsCRMmailbox objectidMailbox = default(MicrosoftDynamicsCRMmailbox), MicrosoftDynamicsCRMmsdynRichtextfile objectidMsdynRichtextfile = default(MicrosoftDynamicsCRMmsdynRichtextfile), MicrosoftDynamicsCRMmsdynAiconfiguration objectidMsdynAiconfiguration = default(MicrosoftDynamicsCRMmsdynAiconfiguration), MicrosoftDynamicsCRMmsdynAibfile objectidMsdynAibfile = default(MicrosoftDynamicsCRMmsdynAibfile))
         {
             Filesizeinbytes = filesizeinbytes;
             Filename = filename;
-            Versionnumber = versionnumber;
             Fileattachmentid = fileattachmentid;
-            Mimetype = mimetype;
             this._objectidValue = _objectidValue;
+            Mimetype = mimetype;
+            Versionnumber = versionnumber;
             Regardingfieldname = regardingfieldname;
             Createdon = createdon;
             Objecttypecode = objecttypecode;
@@ -82,13 +82,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "fileattachmentid")]
+        public string Fileattachmentid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "fileattachmentid")]
-        public string Fileattachmentid { get; set; }
+        [JsonProperty(PropertyName = "_objectid_value")]
+        public string _objectidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -97,8 +97,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_objectid_value")]
-        public string _objectidValue { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>

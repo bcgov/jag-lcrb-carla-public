@@ -27,26 +27,26 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMcallbackregistration class.
         /// </summary>
-        public MicrosoftDynamicsCRMcallbackregistration(string _modifiedonbehalfbyValue = default(string), string _createdbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string url = default(string), int? scope = default(int?), string _owningbusinessunitValue = default(string), string _modifiedbyValue = default(string), string _owneridValue = default(string), int? runas = default(int?), string name = default(string), int? version = default(int?), string postponeuntil = default(string), int? message = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string filterexpression = default(string), string filteringattributes = default(string), string entityname = default(string), string _owningteamValue = default(string), string _owninguserValue = default(string), string callbackregistrationid = default(string), MicrosoftDynamicsCRMsystemuser callbackregistrationModifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser callbackregistrationModifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser callbackregistrationCreatedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser callbackregistrationCreatedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal))
+        public MicrosoftDynamicsCRMcallbackregistration(string entityname = default(string), string _modifiedonbehalfbyValue = default(string), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), string url = default(string), int? scope = default(int?), string _owningbusinessunitValue = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? runas = default(int?), string name = default(string), string _owneridValue = default(string), int? version = default(int?), int? message = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string filterexpression = default(string), string filteringattributes = default(string), string postponeuntil = default(string), string _owningteamValue = default(string), string _owninguserValue = default(string), string callbackregistrationid = default(string), MicrosoftDynamicsCRMsystemuser callbackregistrationModifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser callbackregistrationModifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser callbackregistrationCreatedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser callbackregistrationCreatedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal))
         {
+            Entityname = entityname;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             this._createdbyValue = _createdbyValue;
-            Modifiedon = modifiedon;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Url = url;
             Scope = scope;
             this._owningbusinessunitValue = _owningbusinessunitValue;
             this._modifiedbyValue = _modifiedbyValue;
-            this._owneridValue = _owneridValue;
+            Modifiedon = modifiedon;
             Runas = runas;
             Name = name;
+            this._owneridValue = _owneridValue;
             Version = version;
-            Postponeuntil = postponeuntil;
             Message = message;
             Createdon = createdon;
             Filterexpression = filterexpression;
             Filteringattributes = filteringattributes;
-            Entityname = entityname;
+            Postponeuntil = postponeuntil;
             this._owningteamValue = _owningteamValue;
             this._owninguserValue = _owninguserValue;
             Callbackregistrationid = callbackregistrationid;
@@ -66,6 +66,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "entityname")]
+        public string Entityname { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
 
@@ -73,11 +78,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -106,8 +106,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -121,13 +121,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "version")]
-        public int? Version { get; set; }
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "postponeuntil")]
-        public string Postponeuntil { get; set; }
+        [JsonProperty(PropertyName = "version")]
+        public int? Version { get; set; }
 
         /// <summary>
         /// </summary>
@@ -151,8 +151,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "entityname")]
-        public string Entityname { get; set; }
+        [JsonProperty(PropertyName = "postponeuntil")]
+        public string Postponeuntil { get; set; }
 
         /// <summary>
         /// </summary>

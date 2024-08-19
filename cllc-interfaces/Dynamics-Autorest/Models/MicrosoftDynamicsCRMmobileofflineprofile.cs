@@ -29,30 +29,30 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMmobileofflineprofile class.
         /// </summary>
-        public MicrosoftDynamicsCRMmobileofflineprofile(string _organizationidValue = default(string), string versionnumber = default(string), string mobileofflineprofileid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string mobileofflineprofileidunique = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), bool? isvalidated = default(bool?), string _modifiedonbehalfbyValue = default(string), bool? ismanaged = default(bool?), System.DateTimeOffset? publishedon = default(System.DateTimeOffset?), string processid = default(string), string solutionid = default(string), string description = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string introducedversion = default(string), string stageid = default(string), string name = default(string), string selectedentitymetadata = default(string), string traversedpath = default(string), int? componentstate = default(int?), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMorganization> defaultMobileOfflineProfileOrganization = default(IList<MicrosoftDynamicsCRMorganization>), IList<MicrosoftDynamicsCRMmobileofflineprofileitem> mobileOfflineProfileMobileOfflineProfileItem = default(IList<MicrosoftDynamicsCRMmobileofflineprofileitem>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsystemuser> mobileOfflineProfileSystemUser = default(IList<MicrosoftDynamicsCRMsystemuser>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMmobileofflineprofile(string _organizationidValue = default(string), string versionnumber = default(string), string mobileofflineprofileid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string introducedversion = default(string), string _createdonbehalfbyValue = default(string), string mobileofflineprofileidunique = default(string), string _modifiedbyValue = default(string), bool? isvalidated = default(bool?), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), System.DateTimeOffset? publishedon = default(System.DateTimeOffset?), string processid = default(string), string solutionid = default(string), string description = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string stageid = default(string), string name = default(string), string selectedentitymetadata = default(string), string traversedpath = default(string), bool? ismanaged = default(bool?), int? componentstate = default(int?), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMorganization> defaultMobileOfflineProfileOrganization = default(IList<MicrosoftDynamicsCRMorganization>), IList<MicrosoftDynamicsCRMmobileofflineprofileitem> mobileOfflineProfileMobileOfflineProfileItem = default(IList<MicrosoftDynamicsCRMmobileofflineprofileitem>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsystemuser> mobileOfflineProfileSystemUser = default(IList<MicrosoftDynamicsCRMsystemuser>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
             this._organizationidValue = _organizationidValue;
             Versionnumber = versionnumber;
             Mobileofflineprofileid = mobileofflineprofileid;
             Modifiedon = modifiedon;
+            Introducedversion = introducedversion;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Mobileofflineprofileidunique = mobileofflineprofileidunique;
-            Overwritetime = overwritetime;
             this._modifiedbyValue = _modifiedbyValue;
             Isvalidated = isvalidated;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            Ismanaged = ismanaged;
+            Overwritetime = overwritetime;
             Publishedon = publishedon;
             Processid = processid;
             Solutionid = solutionid;
             Description = description;
             Createdon = createdon;
             this._createdbyValue = _createdbyValue;
-            Introducedversion = introducedversion;
             Stageid = stageid;
             Name = name;
             Selectedentitymetadata = selectedentitymetadata;
             Traversedpath = traversedpath;
+            Ismanaged = ismanaged;
             Componentstate = componentstate;
             Modifiedonbehalfby = modifiedonbehalfby;
             DefaultMobileOfflineProfileOrganization = defaultMobileOfflineProfileOrganization;
@@ -92,6 +92,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "introducedversion")]
+        public string Introducedversion { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
 
@@ -99,11 +104,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "mobileofflineprofileidunique")]
         public string Mobileofflineprofileidunique { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "overwritetime")]
-        public System.DateTimeOffset? Overwritetime { get; set; }
 
         /// <summary>
         /// </summary>
@@ -122,8 +122,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ismanaged")]
-        public bool? Ismanaged { get; set; }
+        [JsonProperty(PropertyName = "overwritetime")]
+        public System.DateTimeOffset? Overwritetime { get; set; }
 
         /// <summary>
         /// </summary>
@@ -157,11 +157,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "introducedversion")]
-        public string Introducedversion { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "stageid")]
         public string Stageid { get; set; }
 
@@ -179,6 +174,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "traversedpath")]
         public string Traversedpath { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ismanaged")]
+        public bool? Ismanaged { get; set; }
 
         /// <summary>
         /// </summary>

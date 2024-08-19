@@ -29,13 +29,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMprovisionlanguageforuser class.
         /// </summary>
-        public MicrosoftDynamicsCRMprovisionlanguageforuser(string userid = default(string), string provisionlanguageforuserid = default(string), string name = default(string), int? lcid = default(int?), string organizationid = default(string), int? operationstatus = default(int?), string asyncoperationid = default(string), IList<MicrosoftDynamicsCRMsyncerror> provisionlanguageforuserSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> provisionlanguageforuserAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> provisionlanguageforuserMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> provisionlanguageforuserProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> provisionlanguageforuserBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> provisionlanguageforuserPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>))
+        public MicrosoftDynamicsCRMprovisionlanguageforuser(string userid = default(string), string provisionlanguageforuserid = default(string), string organizationid = default(string), string name = default(string), int? lcid = default(int?), int? operationstatus = default(int?), string asyncoperationid = default(string), IList<MicrosoftDynamicsCRMsyncerror> provisionlanguageforuserSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> provisionlanguageforuserAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> provisionlanguageforuserMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> provisionlanguageforuserProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> provisionlanguageforuserBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> provisionlanguageforuserPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>))
         {
             Userid = userid;
             Provisionlanguageforuserid = provisionlanguageforuserid;
+            Organizationid = organizationid;
             Name = name;
             Lcid = lcid;
-            Organizationid = organizationid;
             Operationstatus = operationstatus;
             Asyncoperationid = asyncoperationid;
             ProvisionlanguageforuserSyncErrors = provisionlanguageforuserSyncErrors;
@@ -64,6 +64,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "organizationid")]
+        public string Organizationid { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
@@ -71,11 +76,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "lcid")]
         public int? Lcid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "organizationid")]
-        public string Organizationid { get; set; }
 
         /// <summary>
         /// </summary>

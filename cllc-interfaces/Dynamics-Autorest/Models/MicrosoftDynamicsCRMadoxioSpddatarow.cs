@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioSpddatarow class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioSpddatarow(string adoxioPreviouspostalcode3 = default(string), string adoxioPreviouspostalcode2 = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string adoxioPreviousprovstate1 = default(string), string adoxioPreviousstreetaddress8 = default(string), bool? adoxioIsexport = default(bool?), string adoxioPreviousprovstatex = default(string), int? statecode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string adoxioPreviousprovstate2 = default(string), string adoxioAlias2middlename = default(string), string adoxioPreviousprovstate6 = default(string), string adoxioSelfdisclosureyn = default(string), int? importsequencenumber = default(int?), string adoxioPreviouscountry7 = default(string), string adoxioPreviouscity7 = default(string), string adoxioAlias5surname = default(string), string _createdbyValue = default(string), string adoxioPreviouscountry1 = default(string), string adoxioPreviouscountry4 = default(string), string adoxioPreviousstreetaddress7 = default(string), string adoxioPreviouscity5 = default(string), string adoxioBcidentificationcardnumber = default(string), string adoxioPreviouspostalcode6 = default(string), string adoxioLcrbbusinessjobid = default(string), string adoxioAlias3middlename = default(string), System.DateTimeOffset? adoxioExporteddate = default(System.DateTimeOffset?), string versionnumber = default(string), string adoxioAlias5middlename = default(string), string adoxioLcrbworkerjobid = default(string), string adoxioAlias4surname = default(string), string adoxioPreviousprovstate4 = default(string), string _adoxioSpdexportValue = default(string), string _modifiedonbehalfbyValue = default(string), string adoxioPreviouscountry6 = default(string), int? statuscode = default(int?), string adoxioAlias2surname = default(string), int? utcconversiontimezonecode = default(int?), string adoxioAddressline1 = default(string), string _owningteamValue = default(string), string adoxioGendermf = default(string), string adoxioAlias3surname = default(string), string adoxioContactphone = default(string), string adoxioAlias5firstname = default(string), string adoxioLegalsurname = default(string), string adoxioPreviouscity8 = default(string), string adoxioPreviousstreetaddress2 = default(string), string adoxioAddresscountry = default(string), string adoxioPreviouscity3 = default(string), string adoxioPreviouscity4 = default(string), string adoxioPreviouscountryx = default(string), string adoxioParcelidnumber = default(string), string adoxioAddresscity = default(string), string adoxioPreviouscity1 = default(string), string adoxioPreviousstreetaddress1 = default(string), bool? adoxioSelfdisclosure = default(bool?), string adoxioAlias1surname = default(string), string adoxioPreviousstreetaddress5 = default(string), string adoxioAlias2firstname = default(string), string adoxioDriverslicence = default(string), string adoxioPreviousprovstate7 = default(string), string adoxioAlias3firstname = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string adoxioPreviousstreetaddress3 = default(string), string adoxioPreviousprovstate9 = default(string), string adoxioLegalfirstname = default(string), string adoxioPreviouscity6 = default(string), string adoxioBirthdate = default(string), string _owninguserValue = default(string), string adoxioAlias4firstname = default(string), string _createdonbehalfbyValue = default(string), string adoxioAlias1middlename = default(string), string adoxioPreviousstreetaddress9 = default(string), string adoxioPreviouspostalcode1 = default(string), string adoxioSpddatarowid = default(string), int? timezoneruleversionnumber = default(int?), string adoxioPreviouscountry5 = default(string), string adoxioPreviouspostalcode9 = default(string), string adoxioPreviousprovstate5 = default(string), string adoxioPreviousprovstate8 = default(string), string adoxioPreviousstreetaddress4 = default(string), string adoxioLcrbassociatejobid = default(string), string adoxioPreviouspostalcode7 = default(string), string adoxioAlias4middlename = default(string), string adoxioAlias1firstname = default(string), string adoxioAddressprovstate = default(string), string adoxioPreviouscountry2 = default(string), string adoxioPreviouspostalcode5 = default(string), string adoxioPersonalemailaddress = default(string), string adoxioPreviousstreetaddressx = default(string), string adoxioPreviousprovstate3 = default(string), string adoxioPreviouscountry3 = default(string), string adoxioPreviouscountry9 = default(string), string _owningbusinessunitValue = default(string), string adoxioLegalmiddlename = default(string), string adoxioPreviouscountry8 = default(string), string adoxioBirthplacecity = default(string), string adoxioPreviousstreetaddress6 = default(string), string adoxioPreviouspostalcodex = default(string), string adoxioName = default(string), string _owneridValue = default(string), string adoxioPreviouspostalcode8 = default(string), string adoxioBcregistriesnumber = default(string), string adoxioPreviouspostalcode4 = default(string), string adoxioPreviouscity9 = default(string), string adoxioPreviouscityx = default(string), string adoxioPreviouscity2 = default(string), string adoxioAddresspostalcode = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioSpddatarowSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioSpddatarowAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioSpddatarowMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioSpddatarowProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioSpddatarowBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioSpddatarowPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMadoxioSpdexports adoxioSPDExport = default(MicrosoftDynamicsCRMadoxioSpdexports))
+        public MicrosoftDynamicsCRMadoxioSpddatarow(string adoxioPreviouspostalcode3 = default(string), string adoxioPreviouspostalcode2 = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string adoxioPreviousprovstate1 = default(string), string adoxioPreviousstreetaddress8 = default(string), bool? adoxioIsexport = default(bool?), string adoxioPreviousprovstatex = default(string), int? statecode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string adoxioPreviouscity2 = default(string), string adoxioAlias2middlename = default(string), string adoxioPreviousprovstate6 = default(string), string adoxioSelfdisclosureyn = default(string), string adoxioBirthdate = default(string), int? importsequencenumber = default(int?), string adoxioPreviouscountry7 = default(string), string adoxioPreviouscity7 = default(string), string adoxioAlias5surname = default(string), string _createdbyValue = default(string), string adoxioPreviouscountry1 = default(string), string adoxioPreviouscountry4 = default(string), string adoxioBcidentificationcardnumber = default(string), string adoxioPreviouspostalcode6 = default(string), string adoxioLcrbbusinessjobid = default(string), string adoxioAlias3middlename = default(string), System.DateTimeOffset? adoxioExporteddate = default(System.DateTimeOffset?), string versionnumber = default(string), string adoxioAlias5middlename = default(string), string adoxioLcrbworkerjobid = default(string), string adoxioAlias4surname = default(string), string _adoxioSpdexportValue = default(string), string _modifiedonbehalfbyValue = default(string), string adoxioPreviouscountry6 = default(string), string adoxioContactphone = default(string), string adoxioAlias2surname = default(string), string adoxioSpddatarowid = default(string), int? utcconversiontimezonecode = default(int?), string adoxioAddressline1 = default(string), string adoxioPreviouscity5 = default(string), string _owningteamValue = default(string), string adoxioGendermf = default(string), string adoxioAlias3surname = default(string), string adoxioAlias5firstname = default(string), string adoxioLegalsurname = default(string), string adoxioPreviouscity8 = default(string), string adoxioPreviousstreetaddress2 = default(string), string adoxioPreviouspostalcodex = default(string), string adoxioAddresscountry = default(string), string adoxioPreviouscity3 = default(string), string adoxioPreviouscity4 = default(string), string adoxioPreviousprovstate4 = default(string), string adoxioParcelidnumber = default(string), string adoxioAddresscity = default(string), string adoxioPreviouscity1 = default(string), bool? adoxioSelfdisclosure = default(bool?), string adoxioAlias1surname = default(string), string adoxioPreviousstreetaddress5 = default(string), string adoxioAlias2firstname = default(string), string adoxioDriverslicence = default(string), string adoxioPreviousprovstate7 = default(string), string adoxioPreviousprovstate2 = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string adoxioPreviousstreetaddress3 = default(string), string adoxioPreviousprovstate9 = default(string), string adoxioLegalfirstname = default(string), string adoxioPreviouscity6 = default(string), string adoxioLegalmiddlename = default(string), string _owninguserValue = default(string), string adoxioAlias4firstname = default(string), string _createdonbehalfbyValue = default(string), string adoxioPreviouscountryx = default(string), string adoxioAlias1middlename = default(string), string adoxioPreviousstreetaddress9 = default(string), string adoxioPreviouspostalcode1 = default(string), string adoxioAlias3firstname = default(string), int? timezoneruleversionnumber = default(int?), string adoxioPreviouscountry5 = default(string), string adoxioPreviouspostalcode9 = default(string), string adoxioPreviousprovstate5 = default(string), string adoxioPreviousprovstate8 = default(string), string adoxioPreviousstreetaddress4 = default(string), string adoxioLcrbassociatejobid = default(string), int? statuscode = default(int?), string adoxioAlias4middlename = default(string), string adoxioAlias1firstname = default(string), string adoxioAddressprovstate = default(string), string adoxioPreviouscountry2 = default(string), string adoxioPreviouspostalcode5 = default(string), string adoxioPersonalemailaddress = default(string), string adoxioPreviousstreetaddressx = default(string), string adoxioPreviousprovstate3 = default(string), string adoxioPreviouscountry3 = default(string), string adoxioPreviouscountry9 = default(string), string _owningbusinessunitValue = default(string), string adoxioPreviousstreetaddress7 = default(string), string adoxioPreviouscountry8 = default(string), string adoxioBirthplacecity = default(string), string adoxioPreviousstreetaddress6 = default(string), string adoxioPreviousstreetaddress1 = default(string), string adoxioPreviouspostalcode7 = default(string), string adoxioName = default(string), string _owneridValue = default(string), string adoxioPreviouspostalcode8 = default(string), string adoxioBcregistriesnumber = default(string), string adoxioPreviouspostalcode4 = default(string), string adoxioPreviouscity9 = default(string), string adoxioPreviouscityx = default(string), string adoxioAddresspostalcode = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioSpddatarowSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioSpddatarowAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioSpddatarowMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioSpddatarowProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioSpddatarowBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioSpddatarowPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMadoxioSpdexports adoxioSPDExport = default(MicrosoftDynamicsCRMadoxioSpdexports))
         {
             AdoxioPreviouspostalcode3 = adoxioPreviouspostalcode3;
             AdoxioPreviouspostalcode2 = adoxioPreviouspostalcode2;
@@ -41,10 +41,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioPreviousprovstatex = adoxioPreviousprovstatex;
             Statecode = statecode;
             Createdon = createdon;
-            AdoxioPreviousprovstate2 = adoxioPreviousprovstate2;
+            AdoxioPreviouscity2 = adoxioPreviouscity2;
             AdoxioAlias2middlename = adoxioAlias2middlename;
             AdoxioPreviousprovstate6 = adoxioPreviousprovstate6;
             AdoxioSelfdisclosureyn = adoxioSelfdisclosureyn;
+            AdoxioBirthdate = adoxioBirthdate;
             Importsequencenumber = importsequencenumber;
             AdoxioPreviouscountry7 = adoxioPreviouscountry7;
             AdoxioPreviouscity7 = adoxioPreviouscity7;
@@ -52,8 +53,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             this._createdbyValue = _createdbyValue;
             AdoxioPreviouscountry1 = adoxioPreviouscountry1;
             AdoxioPreviouscountry4 = adoxioPreviouscountry4;
-            AdoxioPreviousstreetaddress7 = adoxioPreviousstreetaddress7;
-            AdoxioPreviouscity5 = adoxioPreviouscity5;
             AdoxioBcidentificationcardnumber = adoxioBcidentificationcardnumber;
             AdoxioPreviouspostalcode6 = adoxioPreviouspostalcode6;
             AdoxioLcrbbusinessjobid = adoxioLcrbbusinessjobid;
@@ -63,50 +62,51 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioAlias5middlename = adoxioAlias5middlename;
             AdoxioLcrbworkerjobid = adoxioLcrbworkerjobid;
             AdoxioAlias4surname = adoxioAlias4surname;
-            AdoxioPreviousprovstate4 = adoxioPreviousprovstate4;
             this._adoxioSpdexportValue = _adoxioSpdexportValue;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             AdoxioPreviouscountry6 = adoxioPreviouscountry6;
-            Statuscode = statuscode;
+            AdoxioContactphone = adoxioContactphone;
             AdoxioAlias2surname = adoxioAlias2surname;
+            AdoxioSpddatarowid = adoxioSpddatarowid;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             AdoxioAddressline1 = adoxioAddressline1;
+            AdoxioPreviouscity5 = adoxioPreviouscity5;
             this._owningteamValue = _owningteamValue;
             AdoxioGendermf = adoxioGendermf;
             AdoxioAlias3surname = adoxioAlias3surname;
-            AdoxioContactphone = adoxioContactphone;
             AdoxioAlias5firstname = adoxioAlias5firstname;
             AdoxioLegalsurname = adoxioLegalsurname;
             AdoxioPreviouscity8 = adoxioPreviouscity8;
             AdoxioPreviousstreetaddress2 = adoxioPreviousstreetaddress2;
+            AdoxioPreviouspostalcodex = adoxioPreviouspostalcodex;
             AdoxioAddresscountry = adoxioAddresscountry;
             AdoxioPreviouscity3 = adoxioPreviouscity3;
             AdoxioPreviouscity4 = adoxioPreviouscity4;
-            AdoxioPreviouscountryx = adoxioPreviouscountryx;
+            AdoxioPreviousprovstate4 = adoxioPreviousprovstate4;
             AdoxioParcelidnumber = adoxioParcelidnumber;
             AdoxioAddresscity = adoxioAddresscity;
             AdoxioPreviouscity1 = adoxioPreviouscity1;
-            AdoxioPreviousstreetaddress1 = adoxioPreviousstreetaddress1;
             AdoxioSelfdisclosure = adoxioSelfdisclosure;
             AdoxioAlias1surname = adoxioAlias1surname;
             AdoxioPreviousstreetaddress5 = adoxioPreviousstreetaddress5;
             AdoxioAlias2firstname = adoxioAlias2firstname;
             AdoxioDriverslicence = adoxioDriverslicence;
             AdoxioPreviousprovstate7 = adoxioPreviousprovstate7;
-            AdoxioAlias3firstname = adoxioAlias3firstname;
+            AdoxioPreviousprovstate2 = adoxioPreviousprovstate2;
             Overriddencreatedon = overriddencreatedon;
             AdoxioPreviousstreetaddress3 = adoxioPreviousstreetaddress3;
             AdoxioPreviousprovstate9 = adoxioPreviousprovstate9;
             AdoxioLegalfirstname = adoxioLegalfirstname;
             AdoxioPreviouscity6 = adoxioPreviouscity6;
-            AdoxioBirthdate = adoxioBirthdate;
+            AdoxioLegalmiddlename = adoxioLegalmiddlename;
             this._owninguserValue = _owninguserValue;
             AdoxioAlias4firstname = adoxioAlias4firstname;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            AdoxioPreviouscountryx = adoxioPreviouscountryx;
             AdoxioAlias1middlename = adoxioAlias1middlename;
             AdoxioPreviousstreetaddress9 = adoxioPreviousstreetaddress9;
             AdoxioPreviouspostalcode1 = adoxioPreviouspostalcode1;
-            AdoxioSpddatarowid = adoxioSpddatarowid;
+            AdoxioAlias3firstname = adoxioAlias3firstname;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             AdoxioPreviouscountry5 = adoxioPreviouscountry5;
             AdoxioPreviouspostalcode9 = adoxioPreviouspostalcode9;
@@ -114,7 +114,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioPreviousprovstate8 = adoxioPreviousprovstate8;
             AdoxioPreviousstreetaddress4 = adoxioPreviousstreetaddress4;
             AdoxioLcrbassociatejobid = adoxioLcrbassociatejobid;
-            AdoxioPreviouspostalcode7 = adoxioPreviouspostalcode7;
+            Statuscode = statuscode;
             AdoxioAlias4middlename = adoxioAlias4middlename;
             AdoxioAlias1firstname = adoxioAlias1firstname;
             AdoxioAddressprovstate = adoxioAddressprovstate;
@@ -126,11 +126,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioPreviouscountry3 = adoxioPreviouscountry3;
             AdoxioPreviouscountry9 = adoxioPreviouscountry9;
             this._owningbusinessunitValue = _owningbusinessunitValue;
-            AdoxioLegalmiddlename = adoxioLegalmiddlename;
+            AdoxioPreviousstreetaddress7 = adoxioPreviousstreetaddress7;
             AdoxioPreviouscountry8 = adoxioPreviouscountry8;
             AdoxioBirthplacecity = adoxioBirthplacecity;
             AdoxioPreviousstreetaddress6 = adoxioPreviousstreetaddress6;
-            AdoxioPreviouspostalcodex = adoxioPreviouspostalcodex;
+            AdoxioPreviousstreetaddress1 = adoxioPreviousstreetaddress1;
+            AdoxioPreviouspostalcode7 = adoxioPreviouspostalcode7;
             AdoxioName = adoxioName;
             this._owneridValue = _owneridValue;
             AdoxioPreviouspostalcode8 = adoxioPreviouspostalcode8;
@@ -138,7 +139,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioPreviouspostalcode4 = adoxioPreviouspostalcode4;
             AdoxioPreviouscity9 = adoxioPreviouscity9;
             AdoxioPreviouscityx = adoxioPreviouscityx;
-            AdoxioPreviouscity2 = adoxioPreviouscity2;
             AdoxioAddresspostalcode = adoxioAddresspostalcode;
             Createdbyname = createdbyname;
             Createdonbehalfbyname = createdonbehalfbyname;
@@ -215,8 +215,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_previousprovstate2")]
-        public string AdoxioPreviousprovstate2 { get; set; }
+        [JsonProperty(PropertyName = "adoxio_previouscity2")]
+        public string AdoxioPreviouscity2 { get; set; }
 
         /// <summary>
         /// </summary>
@@ -232,6 +232,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_selfdisclosureyn")]
         public string AdoxioSelfdisclosureyn { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_birthdate")]
+        public string AdoxioBirthdate { get; set; }
 
         /// <summary>
         /// </summary>
@@ -267,16 +272,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_previouscountry4")]
         public string AdoxioPreviouscountry4 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_previousstreetaddress7")]
-        public string AdoxioPreviousstreetaddress7 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_previouscity5")]
-        public string AdoxioPreviouscity5 { get; set; }
 
         /// <summary>
         /// </summary>
@@ -325,11 +320,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_previousprovstate4")]
-        public string AdoxioPreviousprovstate4 { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_adoxio_spdexport_value")]
         public string _adoxioSpdexportValue { get; set; }
 
@@ -345,13 +335,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
+        [JsonProperty(PropertyName = "adoxio_contactphone")]
+        public string AdoxioContactphone { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_alias2surname")]
         public string AdoxioAlias2surname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_spddatarowid")]
+        public string AdoxioSpddatarowid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -362,6 +357,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_addressline1")]
         public string AdoxioAddressline1 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_previouscity5")]
+        public string AdoxioPreviouscity5 { get; set; }
 
         /// <summary>
         /// </summary>
@@ -377,11 +377,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_alias3surname")]
         public string AdoxioAlias3surname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_contactphone")]
-        public string AdoxioContactphone { get; set; }
 
         /// <summary>
         /// </summary>
@@ -405,6 +400,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_previouspostalcodex")]
+        public string AdoxioPreviouspostalcodex { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_addresscountry")]
         public string AdoxioAddresscountry { get; set; }
 
@@ -420,8 +420,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_previouscountryx")]
-        public string AdoxioPreviouscountryx { get; set; }
+        [JsonProperty(PropertyName = "adoxio_previousprovstate4")]
+        public string AdoxioPreviousprovstate4 { get; set; }
 
         /// <summary>
         /// </summary>
@@ -437,11 +437,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_previouscity1")]
         public string AdoxioPreviouscity1 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_previousstreetaddress1")]
-        public string AdoxioPreviousstreetaddress1 { get; set; }
 
         /// <summary>
         /// </summary>
@@ -475,8 +470,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_alias3firstname")]
-        public string AdoxioAlias3firstname { get; set; }
+        [JsonProperty(PropertyName = "adoxio_previousprovstate2")]
+        public string AdoxioPreviousprovstate2 { get; set; }
 
         /// <summary>
         /// </summary>
@@ -505,8 +500,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_birthdate")]
-        public string AdoxioBirthdate { get; set; }
+        [JsonProperty(PropertyName = "adoxio_legalmiddlename")]
+        public string AdoxioLegalmiddlename { get; set; }
 
         /// <summary>
         /// </summary>
@@ -525,6 +520,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_previouscountryx")]
+        public string AdoxioPreviouscountryx { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_alias1middlename")]
         public string AdoxioAlias1middlename { get; set; }
 
@@ -540,8 +540,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_spddatarowid")]
-        public string AdoxioSpddatarowid { get; set; }
+        [JsonProperty(PropertyName = "adoxio_alias3firstname")]
+        public string AdoxioAlias3firstname { get; set; }
 
         /// <summary>
         /// </summary>
@@ -580,8 +580,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_previouspostalcode7")]
-        public string AdoxioPreviouspostalcode7 { get; set; }
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -640,8 +640,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_legalmiddlename")]
-        public string AdoxioLegalmiddlename { get; set; }
+        [JsonProperty(PropertyName = "adoxio_previousstreetaddress7")]
+        public string AdoxioPreviousstreetaddress7 { get; set; }
 
         /// <summary>
         /// </summary>
@@ -660,8 +660,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_previouspostalcodex")]
-        public string AdoxioPreviouspostalcodex { get; set; }
+        [JsonProperty(PropertyName = "adoxio_previousstreetaddress1")]
+        public string AdoxioPreviousstreetaddress1 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_previouspostalcode7")]
+        public string AdoxioPreviouspostalcode7 { get; set; }
 
         /// <summary>
         /// </summary>
@@ -697,11 +702,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_previouscityx")]
         public string AdoxioPreviouscityx { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_previouscity2")]
-        public string AdoxioPreviouscity2 { get; set; }
 
         /// <summary>
         /// </summary>

@@ -29,21 +29,22 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// Initializes a new instance of the MicrosoftDynamicsCRMreport class.
         /// </summary>
-        public MicrosoftDynamicsCRMreport(bool? isscheduledreport = default(bool?), int? signaturemajorversion = default(int?), string reportidunique = default(string), string solutionid = default(string), string description = default(string), string _owneridValue = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string reportnameonsrs = default(string), int? signaturelcid = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string iscustomizable = default(string), bool? ispersonal = default(bool?), string customreportxml = default(string), bool? iscustomreport = default(bool?), string schedulexml = default(string), string reportid = default(string), string _owningteamValue = default(string), string mimetype = default(string), int? signatureminorversion = default(int?), string filename = default(string), int? languagecode = default(int?), string signatureid = default(string), string bodyurl = default(string), string defaultfilter = default(string), string _owninguserValue = default(string), string _createdbyValue = default(string), string originalbodytext = default(string), string _createdonbehalfbyValue = default(string), int? filesize = default(int?), int? componentstate = default(int?), int? timezoneruleversionnumber = default(int?), int? rdlhash = default(int?), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? signaturedate = default(System.DateTimeOffset?), string queryinfo = default(string), string _modifiedbyValue = default(string), string introducedversion = default(string), string name = default(string), string versionnumber = default(string), string bodybinary = default(string), byte[] bodybinaryBinary = default(byte[]), int? reporttypecode = default(int?), string _owningbusinessunitValue = default(string), bool? ismanaged = default(bool?), string _parentreportidValue = default(string), int? utcconversiontimezonecode = default(int?), int? createdinmajorversion = default(int?), string bodytext = default(string), IList<MicrosoftDynamicsCRMasyncoperation> reportAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMreportcategory> reportReportcategories = default(IList<MicrosoftDynamicsCRMreportcategory>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMprocesssession> reportProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> reportSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMreport parentreportid = default(MicrosoftDynamicsCRMreport), IList<MicrosoftDynamicsCRMreport> reportParentReport = default(IList<MicrosoftDynamicsCRMreport>))
+        public MicrosoftDynamicsCRMreport(bool? isscheduledreport = default(bool?), string solutionid = default(string), string description = default(string), string _owneridValue = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string reportnameonsrs = default(string), int? signaturelcid = default(int?), string queryinfo = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string bodytext = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? signaturedate = default(System.DateTimeOffset?), string iscustomizable = default(string), string customreportxml = default(string), bool? iscustomreport = default(bool?), string schedulexml = default(string), string reportid = default(string), string _owningteamValue = default(string), string mimetype = default(string), int? signatureminorversion = default(int?), string filename = default(string), int? languagecode = default(int?), string signatureid = default(string), string bodyurl = default(string), string defaultfilter = default(string), string _owninguserValue = default(string), string _createdbyValue = default(string), bool? ispersonal = default(bool?), string _parentreportidValue = default(string), int? componentstate = default(int?), int? timezoneruleversionnumber = default(int?), int? rdlhash = default(int?), string _modifiedonbehalfbyValue = default(string), string originalbodytext = default(string), string _modifiedbyValue = default(string), string introducedversion = default(string), string reportidunique = default(string), string versionnumber = default(string), int? filesize = default(int?), string bodybinary = default(string), byte[] bodybinaryBinary = default(byte[]), int? reporttypecode = default(int?), string _owningbusinessunitValue = default(string), bool? ismanaged = default(bool?), int? signaturemajorversion = default(int?), int? utcconversiontimezonecode = default(int?), int? createdinmajorversion = default(int?), string name = default(string), IList<MicrosoftDynamicsCRMasyncoperation> reportAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMreportcategory> reportReportcategories = default(IList<MicrosoftDynamicsCRMreportcategory>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMprocesssession> reportProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> reportSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMreport parentreportid = default(MicrosoftDynamicsCRMreport), IList<MicrosoftDynamicsCRMreport> reportParentReport = default(IList<MicrosoftDynamicsCRMreport>))
         {
             Isscheduledreport = isscheduledreport;
-            Signaturemajorversion = signaturemajorversion;
-            Reportidunique = reportidunique;
             Solutionid = solutionid;
             Description = description;
             this._owneridValue = _owneridValue;
             Overwritetime = overwritetime;
             Reportnameonsrs = reportnameonsrs;
             Signaturelcid = signaturelcid;
+            Queryinfo = queryinfo;
             Createdon = createdon;
             Modifiedon = modifiedon;
+            Bodytext = bodytext;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Signaturedate = signaturedate;
             Iscustomizable = iscustomizable;
-            Ispersonal = ispersonal;
             Customreportxml = customreportxml;
             Iscustomreport = iscustomreport;
             Schedulexml = schedulexml;
@@ -58,28 +59,27 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Defaultfilter = defaultfilter;
             this._owninguserValue = _owninguserValue;
             this._createdbyValue = _createdbyValue;
-            Originalbodytext = originalbodytext;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            Filesize = filesize;
+            Ispersonal = ispersonal;
+            this._parentreportidValue = _parentreportidValue;
             Componentstate = componentstate;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             Rdlhash = rdlhash;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            Signaturedate = signaturedate;
-            Queryinfo = queryinfo;
+            Originalbodytext = originalbodytext;
             this._modifiedbyValue = _modifiedbyValue;
             Introducedversion = introducedversion;
-            Name = name;
+            Reportidunique = reportidunique;
             Versionnumber = versionnumber;
+            Filesize = filesize;
             Bodybinary = bodybinary;
             BodybinaryBinary = bodybinaryBinary;
             Reporttypecode = reporttypecode;
             this._owningbusinessunitValue = _owningbusinessunitValue;
             Ismanaged = ismanaged;
-            this._parentreportidValue = _parentreportidValue;
+            Signaturemajorversion = signaturemajorversion;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             Createdinmajorversion = createdinmajorversion;
-            Bodytext = bodytext;
+            Name = name;
             ReportAsyncOperations = reportAsyncOperations;
             ReportReportcategories = reportReportcategories;
             Modifiedonbehalfby = modifiedonbehalfby;
@@ -104,16 +104,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "isscheduledreport")]
         public bool? Isscheduledreport { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "signaturemajorversion")]
-        public int? Signaturemajorversion { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "reportidunique")]
-        public string Reportidunique { get; set; }
 
         /// <summary>
         /// </summary>
@@ -147,6 +137,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "queryinfo")]
+        public string Queryinfo { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
@@ -157,13 +152,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "iscustomizable")]
-        public string Iscustomizable { get; set; }
+        [JsonProperty(PropertyName = "bodytext")]
+        public string Bodytext { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ispersonal")]
-        public bool? Ispersonal { get; set; }
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "signaturedate")]
+        public System.DateTimeOffset? Signaturedate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "iscustomizable")]
+        public string Iscustomizable { get; set; }
 
         /// <summary>
         /// </summary>
@@ -237,18 +242,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "originalbodytext")]
-        public string Originalbodytext { get; set; }
+        [JsonProperty(PropertyName = "ispersonal")]
+        public bool? Ispersonal { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "filesize")]
-        public int? Filesize { get; set; }
+        [JsonProperty(PropertyName = "_parentreportid_value")]
+        public string _parentreportidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -272,13 +272,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "signaturedate")]
-        public System.DateTimeOffset? Signaturedate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "queryinfo")]
-        public string Queryinfo { get; set; }
+        [JsonProperty(PropertyName = "originalbodytext")]
+        public string Originalbodytext { get; set; }
 
         /// <summary>
         /// </summary>
@@ -292,13 +287,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
+        [JsonProperty(PropertyName = "reportidunique")]
+        public string Reportidunique { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
         public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "filesize")]
+        public int? Filesize { get; set; }
 
         /// <summary>
         /// </summary>
@@ -328,8 +328,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_parentreportid_value")]
-        public string _parentreportidValue { get; set; }
+        [JsonProperty(PropertyName = "signaturemajorversion")]
+        public int? Signaturemajorversion { get; set; }
 
         /// <summary>
         /// </summary>
@@ -343,8 +343,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "bodytext")]
-        public string Bodytext { get; set; }
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
 
         /// <summary>
         /// </summary>

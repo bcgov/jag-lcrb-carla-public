@@ -29,34 +29,34 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMmsdynKnowledgeinteractioninsight class.
         /// </summary>
-        public MicrosoftDynamicsCRMmsdynKnowledgeinteractioninsight(string _modifiedonbehalfbyValue = default(string), string _owneridValue = default(string), string _owninguserValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string msdynKnowledgeoperationid = default(string), int? msdynArticlerank = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), string versionnumber = default(string), string _createdonbehalfbyValue = default(string), string _createdbyValue = default(string), string msdynKnowledgeoperationtype = default(string), string _owningbusinessunitValue = default(string), int? statecode = default(int?), string msdynInteractioncontext = default(string), decimal? msdynArticlerelevance = default(decimal?), int? statuscode = default(int?), string msdynArticlerecordid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string msdynInteractiontype = default(string), int? timezoneruleversionnumber = default(int?), int? importsequencenumber = default(int?), string msdynKnowledgeinteractioninsightid = default(string), string _owningteamValue = default(string), System.DateTimeOffset? msdynTimestamp = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> msdynKnowledgeinteractioninsightSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> msdynKnowledgeinteractioninsightDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> msdynKnowledgeinteractioninsightDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> msdynKnowledgeinteractioninsightAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> msdynKnowledgeinteractioninsightMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> msdynKnowledgeinteractioninsightProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> msdynKnowledgeinteractioninsightBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> msdynKnowledgeinteractioninsightPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>))
+        public MicrosoftDynamicsCRMmsdynKnowledgeinteractioninsight(string _modifiedonbehalfbyValue = default(string), string msdynKnowledgeoperationtype = default(string), string msdynInteractiontype = default(string), string _modifiedbyValue = default(string), string _owneridValue = default(string), string _owninguserValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string msdynKnowledgeoperationid = default(string), int? msdynArticlerank = default(int?), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? msdynTimestamp = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string _createdbyValue = default(string), string versionnumber = default(string), string msdynArticlerecordid = default(string), int? statecode = default(int?), string msdynInteractioncontext = default(string), decimal? msdynArticlerelevance = default(decimal?), string _owningbusinessunitValue = default(string), string _owningteamValue = default(string), int? statuscode = default(int?), int? timezoneruleversionnumber = default(int?), int? importsequencenumber = default(int?), string msdynKnowledgeinteractioninsightid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> msdynKnowledgeinteractioninsightSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> msdynKnowledgeinteractioninsightDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> msdynKnowledgeinteractioninsightDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> msdynKnowledgeinteractioninsightAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> msdynKnowledgeinteractioninsightMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> msdynKnowledgeinteractioninsightProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> msdynKnowledgeinteractioninsightBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> msdynKnowledgeinteractioninsightPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>))
         {
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            MsdynKnowledgeoperationtype = msdynKnowledgeoperationtype;
+            MsdynInteractiontype = msdynInteractiontype;
+            this._modifiedbyValue = _modifiedbyValue;
             this._owneridValue = _owneridValue;
             this._owninguserValue = _owninguserValue;
             Createdon = createdon;
             MsdynKnowledgeoperationid = msdynKnowledgeoperationid;
             MsdynArticlerank = msdynArticlerank;
-            Overriddencreatedon = overriddencreatedon;
             Utcconversiontimezonecode = utcconversiontimezonecode;
-            Versionnumber = versionnumber;
+            MsdynTimestamp = msdynTimestamp;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             this._createdbyValue = _createdbyValue;
-            MsdynKnowledgeoperationtype = msdynKnowledgeoperationtype;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
+            Versionnumber = versionnumber;
+            MsdynArticlerecordid = msdynArticlerecordid;
             Statecode = statecode;
             MsdynInteractioncontext = msdynInteractioncontext;
             MsdynArticlerelevance = msdynArticlerelevance;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
+            this._owningteamValue = _owningteamValue;
             Statuscode = statuscode;
-            MsdynArticlerecordid = msdynArticlerecordid;
-            Modifiedon = modifiedon;
-            MsdynInteractiontype = msdynInteractiontype;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             Importsequencenumber = importsequencenumber;
             MsdynKnowledgeinteractioninsightid = msdynKnowledgeinteractioninsightid;
-            this._owningteamValue = _owningteamValue;
-            MsdynTimestamp = msdynTimestamp;
-            this._modifiedbyValue = _modifiedbyValue;
+            Modifiedon = modifiedon;
+            Overriddencreatedon = overriddencreatedon;
             Createdby = createdby;
             Createdonbehalfby = createdonbehalfby;
             Modifiedby = modifiedby;
@@ -88,6 +88,21 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "msdyn_knowledgeoperationtype")]
+        public string MsdynKnowledgeoperationtype { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "msdyn_interactiontype")]
+        public string MsdynInteractiontype { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
         public string _owneridValue { get; set; }
 
@@ -113,18 +128,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "utcconversiontimezonecode")]
         public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "msdyn_timestamp")]
+        public System.DateTimeOffset? MsdynTimestamp { get; set; }
 
         /// <summary>
         /// </summary>
@@ -138,13 +148,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_knowledgeoperationtype")]
-        public string MsdynKnowledgeoperationtype { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
+        [JsonProperty(PropertyName = "msdyn_articlerecordid")]
+        public string MsdynArticlerecordid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -163,23 +173,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "msdyn_articlerecordid")]
-        public string MsdynArticlerecordid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "msdyn_interactiontype")]
-        public string MsdynInteractiontype { get; set; }
 
         /// <summary>
         /// </summary>
@@ -198,18 +203,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_timestamp")]
-        public System.DateTimeOffset? MsdynTimestamp { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>

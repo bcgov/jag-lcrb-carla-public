@@ -29,16 +29,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioExternalcontact class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioExternalcontact(string adoxioPhone = default(string), string adoxioName = default(string), string adoxioAddressstreet = default(string), string adoxioPosition = default(string), string _modifiedbyValue = default(string), string _slainvokedidValue = default(string), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? lastonholdtime = default(System.DateTimeOffset?), string adoxioLastname = default(string), int? onholdtime = default(int?), string _createdbyValue = default(string), string _owningbusinessunitValue = default(string), int? utcconversiontimezonecode = default(int?), int? adoxioEngagementstatus = default(int?), string traversedpath = default(string), string adoxioAddresspostalcode = default(string), string adoxioFirstname = default(string), string emailaddress = default(string), string versionnumber = default(string), string adoxioOrganization = default(string), string processid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _stageidValue = default(string), string _owneridValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), bool? adoxioPrimarycontact = default(bool?), int? statecode = default(int?), string adoxioExternalcontactid = default(string), string _createdonbehalfbyValue = default(string), string adoxioAddresscity = default(string), int? adoxioTitle = default(int?), string _owningteamValue = default(string), string _slaidValue = default(string), string _modifiedonbehalfbyValue = default(string), string _owninguserValue = default(string), int? importsequencenumber = default(int?), int? statuscode = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMactivitypointer> adoxioExternalcontactActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> adoxioExternalcontactAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMsyncerror> adoxioExternalcontactSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMactivityparty> adoxioExternalcontactActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioExternalcontactDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioExternalcontactDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> adoxioExternalcontactSharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioExternalcontactAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioExternalcontactMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioExternalcontactProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioExternalcontactBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioExternalcontactPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMappointment> adoxioExternalcontactAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMemail> adoxioExternalcontactEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> adoxioExternalcontactFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMletter> adoxioExternalcontactLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMphonecall> adoxioExternalcontactPhoneCalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMtask> adoxioExternalcontactTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> adoxioExternalcontactRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMsocialactivity> adoxioExternalcontactSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMqueueitem> adoxioExternalcontactQueueItems = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMannotation> adoxioExternalcontactAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMsla slaid = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMsla slainvokedid = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMslakpiinstance> adoxioExternalcontactSLAKPIInstances = default(IList<MicrosoftDynamicsCRMslakpiinstance>), IList<MicrosoftDynamicsCRMknowledgebaserecord> adoxioExternalcontactKnowledgebaserecord = default(IList<MicrosoftDynamicsCRMknowledgebaserecord>), IList<MicrosoftDynamicsCRMknowledgearticle> msdynAdoxioExternalcontactKnowledgearticle = default(IList<MicrosoftDynamicsCRMknowledgearticle>), IList<MicrosoftDynamicsCRMserviceappointment> adoxioExternalcontactServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), MicrosoftDynamicsCRMprocessstage stageid = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMlist> adoxioListAdoxioExternalcontact = default(IList<MicrosoftDynamicsCRMlist>), IList<MicrosoftDynamicsCRMadoxioExternalprofile> adoxioExternalcontactAdoxioExternalprofile = default(IList<MicrosoftDynamicsCRMadoxioExternalprofile>))
+        public MicrosoftDynamicsCRMadoxioExternalcontact(string adoxioPhone = default(string), string adoxioName = default(string), string adoxioAddressstreet = default(string), string adoxioPosition = default(string), System.DateTimeOffset? lastonholdtime = default(System.DateTimeOffset?), string _slainvokedidValue = default(string), int? timezoneruleversionnumber = default(int?), string adoxioAddresscity = default(string), string adoxioLastname = default(string), int? onholdtime = default(int?), string _createdbyValue = default(string), string _owningbusinessunitValue = default(string), int? utcconversiontimezonecode = default(int?), int? adoxioEngagementstatus = default(int?), string traversedpath = default(string), string _modifiedbyValue = default(string), string adoxioAddresspostalcode = default(string), string adoxioFirstname = default(string), string versionnumber = default(string), string adoxioOrganization = default(string), string processid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _stageidValue = default(string), string _owneridValue = default(string), bool? adoxioPrimarycontact = default(bool?), int? statecode = default(int?), string adoxioExternalcontactid = default(string), string _createdonbehalfbyValue = default(string), string emailaddress = default(string), int? adoxioTitle = default(int?), string _owningteamValue = default(string), string _slaidValue = default(string), string _modifiedonbehalfbyValue = default(string), string _owninguserValue = default(string), int? importsequencenumber = default(int?), int? statuscode = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMactivitypointer> adoxioExternalcontactActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> adoxioExternalcontactAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMsyncerror> adoxioExternalcontactSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMactivityparty> adoxioExternalcontactActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioExternalcontactDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioExternalcontactDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> adoxioExternalcontactSharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioExternalcontactAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioExternalcontactMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioExternalcontactProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioExternalcontactBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioExternalcontactPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMappointment> adoxioExternalcontactAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMemail> adoxioExternalcontactEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> adoxioExternalcontactFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMletter> adoxioExternalcontactLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMphonecall> adoxioExternalcontactPhoneCalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMtask> adoxioExternalcontactTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> adoxioExternalcontactRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMsocialactivity> adoxioExternalcontactSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMqueueitem> adoxioExternalcontactQueueItems = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMannotation> adoxioExternalcontactAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMsla slaid = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMsla slainvokedid = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMslakpiinstance> adoxioExternalcontactSLAKPIInstances = default(IList<MicrosoftDynamicsCRMslakpiinstance>), IList<MicrosoftDynamicsCRMknowledgebaserecord> adoxioExternalcontactKnowledgebaserecord = default(IList<MicrosoftDynamicsCRMknowledgebaserecord>), IList<MicrosoftDynamicsCRMknowledgearticle> msdynAdoxioExternalcontactKnowledgearticle = default(IList<MicrosoftDynamicsCRMknowledgearticle>), IList<MicrosoftDynamicsCRMserviceappointment> adoxioExternalcontactServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), MicrosoftDynamicsCRMprocessstage stageid = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMlist> adoxioListAdoxioExternalcontact = default(IList<MicrosoftDynamicsCRMlist>), IList<MicrosoftDynamicsCRMadoxioExternalprofile> adoxioExternalcontactAdoxioExternalprofile = default(IList<MicrosoftDynamicsCRMadoxioExternalprofile>))
         {
             AdoxioPhone = adoxioPhone;
             AdoxioName = adoxioName;
             AdoxioAddressstreet = adoxioAddressstreet;
             AdoxioPosition = adoxioPosition;
-            this._modifiedbyValue = _modifiedbyValue;
+            Lastonholdtime = lastonholdtime;
             this._slainvokedidValue = _slainvokedidValue;
             Timezoneruleversionnumber = timezoneruleversionnumber;
-            Lastonholdtime = lastonholdtime;
+            AdoxioAddresscity = adoxioAddresscity;
             AdoxioLastname = adoxioLastname;
             Onholdtime = onholdtime;
             this._createdbyValue = _createdbyValue;
@@ -46,22 +46,22 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Utcconversiontimezonecode = utcconversiontimezonecode;
             AdoxioEngagementstatus = adoxioEngagementstatus;
             Traversedpath = traversedpath;
+            this._modifiedbyValue = _modifiedbyValue;
             AdoxioAddresspostalcode = adoxioAddresspostalcode;
             AdoxioFirstname = adoxioFirstname;
-            Emailaddress = emailaddress;
             Versionnumber = versionnumber;
             AdoxioOrganization = adoxioOrganization;
             Processid = processid;
             Createdon = createdon;
             Overriddencreatedon = overriddencreatedon;
+            Modifiedon = modifiedon;
             this._stageidValue = _stageidValue;
             this._owneridValue = _owneridValue;
-            Modifiedon = modifiedon;
             AdoxioPrimarycontact = adoxioPrimarycontact;
             Statecode = statecode;
             AdoxioExternalcontactid = adoxioExternalcontactid;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            AdoxioAddresscity = adoxioAddresscity;
+            Emailaddress = emailaddress;
             AdoxioTitle = adoxioTitle;
             this._owningteamValue = _owningteamValue;
             this._slaidValue = _slaidValue;
@@ -138,8 +138,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        [JsonProperty(PropertyName = "lastonholdtime")]
+        public System.DateTimeOffset? Lastonholdtime { get; set; }
 
         /// <summary>
         /// </summary>
@@ -153,8 +153,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lastonholdtime")]
-        public System.DateTimeOffset? Lastonholdtime { get; set; }
+        [JsonProperty(PropertyName = "adoxio_addresscity")]
+        public string AdoxioAddresscity { get; set; }
 
         /// <summary>
         /// </summary>
@@ -193,6 +193,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_addresspostalcode")]
         public string AdoxioAddresspostalcode { get; set; }
 
@@ -200,11 +205,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_firstname")]
         public string AdoxioFirstname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "emailaddress")]
-        public string Emailaddress { get; set; }
 
         /// <summary>
         /// </summary>
@@ -233,6 +233,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_stageid_value")]
         public string _stageidValue { get; set; }
 
@@ -240,11 +245,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
         public string _owneridValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -268,8 +268,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_addresscity")]
-        public string AdoxioAddresscity { get; set; }
+        [JsonProperty(PropertyName = "emailaddress")]
+        public string Emailaddress { get; set; }
 
         /// <summary>
         /// </summary>

@@ -29,25 +29,25 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMappconfig
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMappconfig(int? componentstate = default(int?), string solutionid = default(string), int? importsequencenumber = default(int?), string versionnumber = default(string), bool? ismanaged = default(bool?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _organizationidValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string appconfigimportxml = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string appconfigidunique = default(string), string introducedversion = default(string), string _modifiedbyValue = default(string), string _appmoduleidValue = default(string), string appconfigid = default(string), int? statecode = default(int?), int? statuscode = default(int?), string _modifiedonbehalfbyValue = default(string), MicrosoftDynamicsCRMappmodule appmoduleAppconfig = default(MicrosoftDynamicsCRMappmodule), MicrosoftDynamicsCRMsystemuser appconfigModifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser appconfigModifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMnavigationsetting> appconfigNavigationsetting = default(IList<MicrosoftDynamicsCRMnavigationsetting>), MicrosoftDynamicsCRMsystemuser appconfigCreatedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMappconfiginstance> appconfigAppconfiginstance = default(IList<MicrosoftDynamicsCRMappconfiginstance>), MicrosoftDynamicsCRMsystemuser appconfigCreatedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationAppconfig = default(MicrosoftDynamicsCRMorganization))
+        public MicrosoftDynamicsCRMappconfig(int? componentstate = default(int?), string solutionid = default(string), string _organizationidValue = default(string), string versionnumber = default(string), bool? ismanaged = default(bool?), string appconfigimportxml = default(string), string appconfigidunique = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), string introducedversion = default(string), string _modifiedbyValue = default(string), string _appmoduleidValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string appconfigid = default(string), int? statecode = default(int?), int? statuscode = default(int?), string _modifiedonbehalfbyValue = default(string), MicrosoftDynamicsCRMappmodule appmoduleAppconfig = default(MicrosoftDynamicsCRMappmodule), MicrosoftDynamicsCRMsystemuser appconfigModifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser appconfigModifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMnavigationsetting> appconfigNavigationsetting = default(IList<MicrosoftDynamicsCRMnavigationsetting>), MicrosoftDynamicsCRMsystemuser appconfigCreatedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMappconfiginstance> appconfigAppconfiginstance = default(IList<MicrosoftDynamicsCRMappconfiginstance>), MicrosoftDynamicsCRMsystemuser appconfigCreatedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationAppconfig = default(MicrosoftDynamicsCRMorganization))
         {
             Componentstate = componentstate;
             Solutionid = solutionid;
-            Importsequencenumber = importsequencenumber;
+            this._organizationidValue = _organizationidValue;
             Versionnumber = versionnumber;
             Ismanaged = ismanaged;
-            Overriddencreatedon = overriddencreatedon;
-            this._organizationidValue = _organizationidValue;
+            Appconfigimportxml = appconfigimportxml;
+            Appconfigidunique = appconfigidunique;
             Modifiedon = modifiedon;
             Createdon = createdon;
             this._createdbyValue = _createdbyValue;
-            Appconfigimportxml = appconfigimportxml;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Overwritetime = overwritetime;
-            Appconfigidunique = appconfigidunique;
+            Importsequencenumber = importsequencenumber;
             Introducedversion = introducedversion;
             this._modifiedbyValue = _modifiedbyValue;
             this._appmoduleidValue = _appmoduleidValue;
+            Overriddencreatedon = overriddencreatedon;
             Appconfigid = appconfigid;
             Statecode = statecode;
             Statuscode = statuscode;
@@ -80,8 +80,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -95,13 +95,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+        [JsonProperty(PropertyName = "appconfigimportxml")]
+        public string Appconfigimportxml { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
+        [JsonProperty(PropertyName = "appconfigidunique")]
+        public string Appconfigidunique { get; set; }
 
         /// <summary>
         /// </summary>
@@ -120,11 +120,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "appconfigimportxml")]
-        public string Appconfigimportxml { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
 
@@ -135,8 +130,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "appconfigidunique")]
-        public string Appconfigidunique { get; set; }
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -152,6 +147,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_appmoduleid_value")]
         public string _appmoduleidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>

@@ -29,37 +29,37 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMdatalakeworkspacepermission class.
         /// </summary>
-        public MicrosoftDynamicsCRMdatalakeworkspacepermission(int? statecode = default(int?), string versionnumber = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string solutionid = default(string), string tenantid = default(string), string _modifiedbyValue = default(string), int? importsequencenumber = default(int?), string _createdbyValue = default(string), string _workspaceidValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string iscustomizable = default(string), int? statuscode = default(int?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string componentidunique = default(string), bool? canread = default(bool?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), bool? ismanaged = default(bool?), string whitelistedappid = default(string), string datalakeworkspacepermissionid = default(string), string appid = default(string), int? timezoneruleversionnumber = default(int?), string _organizationidValue = default(string), string _modifiedonbehalfbyValue = default(string), bool? canwrite = default(bool?), string datalakeworkspacepermissionUniquename = default(string), int? utcconversiontimezonecode = default(int?), string name = default(string), bool? canexecute = default(bool?), int? componentstate = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> datalakeworkspacepermissionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> datalakeworkspacepermissionDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> datalakeworkspacepermissionDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> datalakeworkspacepermissionAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> datalakeworkspacepermissionMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> datalakeworkspacepermissionProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> datalakeworkspacepermissionBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> datalakeworkspacepermissionPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMdatalakeworkspace workspaceid = default(MicrosoftDynamicsCRMdatalakeworkspace))
+        public MicrosoftDynamicsCRMdatalakeworkspacepermission(int? statecode = default(int?), string versionnumber = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string solutionid = default(string), string tenantid = default(string), string datalakeworkspacepermissionUniquename = default(string), string _modifiedbyValue = default(string), bool? canexecute = default(bool?), int? importsequencenumber = default(int?), string _createdbyValue = default(string), string _workspaceidValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string iscustomizable = default(string), string _createdonbehalfbyValue = default(string), string componentidunique = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), bool? ismanaged = default(bool?), string whitelistedappid = default(string), bool? canread = default(bool?), string datalakeworkspacepermissionid = default(string), string appid = default(string), int? timezoneruleversionnumber = default(int?), string _organizationidValue = default(string), string _modifiedonbehalfbyValue = default(string), bool? canwrite = default(bool?), int? statuscode = default(int?), int? utcconversiontimezonecode = default(int?), string name = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), int? componentstate = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> datalakeworkspacepermissionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> datalakeworkspacepermissionDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> datalakeworkspacepermissionDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> datalakeworkspacepermissionAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> datalakeworkspacepermissionMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> datalakeworkspacepermissionProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> datalakeworkspacepermissionBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> datalakeworkspacepermissionPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMdatalakeworkspace workspaceid = default(MicrosoftDynamicsCRMdatalakeworkspace))
         {
             Statecode = statecode;
             Versionnumber = versionnumber;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Modifiedon = modifiedon;
             Solutionid = solutionid;
             Tenantid = tenantid;
+            DatalakeworkspacepermissionUniquename = datalakeworkspacepermissionUniquename;
             this._modifiedbyValue = _modifiedbyValue;
+            Canexecute = canexecute;
             Importsequencenumber = importsequencenumber;
             this._createdbyValue = _createdbyValue;
             this._workspaceidValue = _workspaceidValue;
             Overriddencreatedon = overriddencreatedon;
             Iscustomizable = iscustomizable;
-            Statuscode = statuscode;
-            Overwritetime = overwritetime;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Componentidunique = componentidunique;
-            Canread = canread;
             Createdon = createdon;
             Ismanaged = ismanaged;
             Whitelistedappid = whitelistedappid;
+            Canread = canread;
             Datalakeworkspacepermissionid = datalakeworkspacepermissionid;
             Appid = appid;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             this._organizationidValue = _organizationidValue;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Canwrite = canwrite;
-            DatalakeworkspacepermissionUniquename = datalakeworkspacepermissionUniquename;
+            Statuscode = statuscode;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             Name = name;
-            Canexecute = canexecute;
+            Overwritetime = overwritetime;
             Componentstate = componentstate;
             Createdby = createdby;
             Createdonbehalfby = createdonbehalfby;
@@ -95,11 +95,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
@@ -115,8 +110,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "datalakeworkspacepermission_uniquename")]
+        public string DatalakeworkspacepermissionUniquename { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "canexecute")]
+        public bool? Canexecute { get; set; }
 
         /// <summary>
         /// </summary>
@@ -145,23 +150,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "overwritetime")]
-        public System.DateTimeOffset? Overwritetime { get; set; }
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "componentidunique")]
         public string Componentidunique { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "canread")]
-        public bool? Canread { get; set; }
 
         /// <summary>
         /// </summary>
@@ -177,6 +172,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "whitelistedappid")]
         public string Whitelistedappid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "canread")]
+        public bool? Canread { get; set; }
 
         /// <summary>
         /// </summary>
@@ -210,8 +210,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "datalakeworkspacepermission_uniquename")]
-        public string DatalakeworkspacepermissionUniquename { get; set; }
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -225,8 +225,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "canexecute")]
-        public bool? Canexecute { get; set; }
+        [JsonProperty(PropertyName = "overwritetime")]
+        public System.DateTimeOffset? Overwritetime { get; set; }
 
         /// <summary>
         /// </summary>

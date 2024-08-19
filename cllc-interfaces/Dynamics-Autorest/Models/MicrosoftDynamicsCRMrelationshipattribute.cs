@@ -29,18 +29,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMrelationshipattribute class.
         /// </summary>
-        public MicrosoftDynamicsCRMrelationshipattribute(string componentidunique = default(string), string iscustomizable = default(string), string relationshipattributeid = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string _referencingattributeidValue = default(string), string solutionid = default(string), string _referencedattributeidValue = default(string), string _relationshipidValue = default(string), string name = default(string), int? componentstate = default(int?), bool? ismanaged = default(bool?), IList<MicrosoftDynamicsCRMsyncerror> relationshipattributeSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> relationshipattributeAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> relationshipattributeMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> relationshipattributeBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> relationshipattributePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMattribute referencingattributeidRelationshipattribute = default(MicrosoftDynamicsCRMattribute), MicrosoftDynamicsCRMattribute referencedattributeidRelationshipattribute = default(MicrosoftDynamicsCRMattribute), MicrosoftDynamicsCRMrelationship relationshipidRelationshipattribute = default(MicrosoftDynamicsCRMrelationship))
+        public MicrosoftDynamicsCRMrelationshipattribute(string componentidunique = default(string), string relationshipattributeid = default(string), string iscustomizable = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string _referencingattributeidValue = default(string), string solutionid = default(string), string _referencedattributeidValue = default(string), string _relationshipidValue = default(string), int? componentstate = default(int?), string name = default(string), bool? ismanaged = default(bool?), IList<MicrosoftDynamicsCRMsyncerror> relationshipattributeSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> relationshipattributeAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> relationshipattributeMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> relationshipattributeBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> relationshipattributePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMattribute referencingattributeidRelationshipattribute = default(MicrosoftDynamicsCRMattribute), MicrosoftDynamicsCRMattribute referencedattributeidRelationshipattribute = default(MicrosoftDynamicsCRMattribute), MicrosoftDynamicsCRMrelationship relationshipidRelationshipattribute = default(MicrosoftDynamicsCRMrelationship))
         {
             Componentidunique = componentidunique;
-            Iscustomizable = iscustomizable;
             Relationshipattributeid = relationshipattributeid;
+            Iscustomizable = iscustomizable;
             Overwritetime = overwritetime;
             this._referencingattributeidValue = _referencingattributeidValue;
             Solutionid = solutionid;
             this._referencedattributeidValue = _referencedattributeidValue;
             this._relationshipidValue = _relationshipidValue;
-            Name = name;
             Componentstate = componentstate;
+            Name = name;
             Ismanaged = ismanaged;
             RelationshipattributeSyncErrors = relationshipattributeSyncErrors;
             RelationshipattributeAsyncOperations = relationshipattributeAsyncOperations;
@@ -65,13 +65,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "iscustomizable")]
-        public string Iscustomizable { get; set; }
+        [JsonProperty(PropertyName = "relationshipattributeid")]
+        public string Relationshipattributeid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "relationshipattributeid")]
-        public string Relationshipattributeid { get; set; }
+        [JsonProperty(PropertyName = "iscustomizable")]
+        public string Iscustomizable { get; set; }
 
         /// <summary>
         /// </summary>
@@ -100,13 +100,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
+        [JsonProperty(PropertyName = "componentstate")]
+        public int? Componentstate { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "componentstate")]
-        public int? Componentstate { get; set; }
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
 
         /// <summary>
         /// </summary>

@@ -29,28 +29,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMcatalogassignment class.
         /// </summary>
-        public MicrosoftDynamicsCRMcatalogassignment(int? statecode = default(int?), int? utcconversiontimezonecode = default(int?), string catalogassignmentid = default(string), string _organizationidValue = default(string), string _catalogidValue = default(string), int? timezoneruleversionnumber = default(int?), string _modifiedonbehalfbyValue = default(string), string _objectValue = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string versionnumber = default(string), int? componentstate = default(int?), string iscustomizable = default(string), string name = default(string), string _createdonbehalfbyValue = default(string), int? importsequencenumber = default(int?), string componentidunique = default(string), int? statuscode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string solutionid = default(string), bool? ismanaged = default(bool?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> catalogassignmentSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> catalogassignmentDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> catalogassignmentDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> catalogassignmentAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> catalogassignmentMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> catalogassignmentProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> catalogassignmentBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> catalogassignmentPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMworkflow workflowId = default(MicrosoftDynamicsCRMworkflow), MicrosoftDynamicsCRMcatalog catalogId = default(MicrosoftDynamicsCRMcatalog), MicrosoftDynamicsCRMentity entityId = default(MicrosoftDynamicsCRMentity), MicrosoftDynamicsCRMcustomapi customAPIId = default(MicrosoftDynamicsCRMcustomapi))
+        public MicrosoftDynamicsCRMcatalogassignment(int? statecode = default(int?), int? importsequencenumber = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? componentstate = default(int?), string componentidunique = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _catalogidValue = default(string), string versionnumber = default(string), string _objectValue = default(string), string iscustomizable = default(string), int? statuscode = default(int?), string catalogassignmentid = default(string), string name = default(string), string _createdonbehalfbyValue = default(string), string _organizationidValue = default(string), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), string solutionid = default(string), bool? ismanaged = default(bool?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> catalogassignmentSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> catalogassignmentDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> catalogassignmentDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> catalogassignmentAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> catalogassignmentMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> catalogassignmentProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> catalogassignmentBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> catalogassignmentPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMworkflow workflowId = default(MicrosoftDynamicsCRMworkflow), MicrosoftDynamicsCRMcatalog catalogId = default(MicrosoftDynamicsCRMcatalog), MicrosoftDynamicsCRMentity entityId = default(MicrosoftDynamicsCRMentity), MicrosoftDynamicsCRMcustomapi customAPIId = default(MicrosoftDynamicsCRMcustomapi))
         {
             Statecode = statecode;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
-            Catalogassignmentid = catalogassignmentid;
-            this._organizationidValue = _organizationidValue;
-            this._catalogidValue = _catalogidValue;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._objectValue = _objectValue;
-            this._modifiedbyValue = _modifiedbyValue;
+            Importsequencenumber = importsequencenumber;
             Overriddencreatedon = overriddencreatedon;
-            Versionnumber = versionnumber;
             Componentstate = componentstate;
+            Componentidunique = componentidunique;
+            Overwritetime = overwritetime;
+            this._modifiedbyValue = _modifiedbyValue;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            this._catalogidValue = _catalogidValue;
+            Versionnumber = versionnumber;
+            this._objectValue = _objectValue;
             Iscustomizable = iscustomizable;
+            Statuscode = statuscode;
+            Catalogassignmentid = catalogassignmentid;
             Name = name;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            Importsequencenumber = importsequencenumber;
-            Componentidunique = componentidunique;
-            Statuscode = statuscode;
+            this._organizationidValue = _organizationidValue;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
             Createdon = createdon;
-            Overwritetime = overwritetime;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
             Solutionid = solutionid;
             Ismanaged = ismanaged;
             Modifiedon = modifiedon;
@@ -87,43 +87,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "catalogassignmentid")]
-        public string Catalogassignmentid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_catalogid_value")]
-        public string _catalogidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_object_value")]
-        public string _objectValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -132,18 +97,58 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "componentstate")]
         public int? Componentstate { get; set; }
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "componentidunique")]
+        public string Componentidunique { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overwritetime")]
+        public System.DateTimeOffset? Overwritetime { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_catalogid_value")]
+        public string _catalogidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_object_value")]
+        public string _objectValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "iscustomizable")]
         public string Iscustomizable { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "catalogassignmentid")]
+        public string Catalogassignmentid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -157,18 +162,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "componentidunique")]
-        public string Componentidunique { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -177,8 +177,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "overwritetime")]
-        public System.DateTimeOffset? Overwritetime { get; set; }
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
         /// </summary>

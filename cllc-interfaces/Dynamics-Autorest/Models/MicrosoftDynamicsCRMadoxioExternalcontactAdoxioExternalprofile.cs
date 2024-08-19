@@ -29,12 +29,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// MicrosoftDynamicsCRMadoxioExternalcontactAdoxioExternalprofile
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioExternalcontactAdoxioExternalprofile(string adoxioExternalcontactAdoxioExternalprofileid = default(string), string adoxioExternalcontactid = default(string), string adoxioExternalprofileid = default(string), string versionnumber = default(string))
+        public MicrosoftDynamicsCRMadoxioExternalcontactAdoxioExternalprofile(string adoxioExternalprofileid = default(string), string adoxioExternalcontactid = default(string), string versionnumber = default(string), string adoxioExternalcontactAdoxioExternalprofileid = default(string))
         {
-            AdoxioExternalcontactAdoxioExternalprofileid = adoxioExternalcontactAdoxioExternalprofileid;
-            AdoxioExternalcontactid = adoxioExternalcontactid;
             AdoxioExternalprofileid = adoxioExternalprofileid;
+            AdoxioExternalcontactid = adoxioExternalcontactid;
             Versionnumber = versionnumber;
+            AdoxioExternalcontactAdoxioExternalprofileid = adoxioExternalcontactAdoxioExternalprofileid;
             CustomInit();
         }
 
@@ -45,8 +45,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_externalcontact_adoxio_externalprofileid")]
-        public string AdoxioExternalcontactAdoxioExternalprofileid { get; set; }
+        [JsonProperty(PropertyName = "adoxio_externalprofileid")]
+        public string AdoxioExternalprofileid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -55,13 +55,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_externalprofileid")]
-        public string AdoxioExternalprofileid { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "adoxio_externalcontact_adoxio_externalprofileid")]
+        public string AdoxioExternalcontactAdoxioExternalprofileid { get; set; }
 
     }
 }

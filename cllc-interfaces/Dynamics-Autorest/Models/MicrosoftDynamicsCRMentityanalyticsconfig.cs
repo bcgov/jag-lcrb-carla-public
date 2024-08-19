@@ -29,20 +29,20 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMentityanalyticsconfig class.
         /// </summary>
-        public MicrosoftDynamicsCRMentityanalyticsconfig(bool? ismanaged = default(bool?), string versionnumber = default(string), int? componentstate = default(int?), string _organizationidValue = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string parententitylogicalname = default(string), string componentidunique = default(string), string solutionid = default(string), string entityanalyticsconfigid = default(string), bool? isenabledfortimeseries = default(bool?), string _parententityidValue = default(string), bool? isenabledforadls = default(bool?), IList<MicrosoftDynamicsCRMsyncerror> entityanalyticsconfigSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> entityanalyticsconfigAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> entityanalyticsconfigMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> entityanalyticsconfigBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> entityanalyticsconfigPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMentity parententityid = default(MicrosoftDynamicsCRMentity), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
+        public MicrosoftDynamicsCRMentityanalyticsconfig(string solutionid = default(string), bool? ismanaged = default(bool?), string versionnumber = default(string), bool? isenabledfortimeseries = default(bool?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string parententitylogicalname = default(string), string _parententityidValue = default(string), bool? isenabledforadls = default(bool?), string componentidunique = default(string), string entityanalyticsconfigid = default(string), int? componentstate = default(int?), string _organizationidValue = default(string), IList<MicrosoftDynamicsCRMsyncerror> entityanalyticsconfigSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> entityanalyticsconfigAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> entityanalyticsconfigMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMbulkdeletefailure> entityanalyticsconfigBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> entityanalyticsconfigPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMentity parententityid = default(MicrosoftDynamicsCRMentity), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
         {
+            Solutionid = solutionid;
             Ismanaged = ismanaged;
             Versionnumber = versionnumber;
-            Componentstate = componentstate;
-            this._organizationidValue = _organizationidValue;
+            Isenabledfortimeseries = isenabledfortimeseries;
             Overwritetime = overwritetime;
             Parententitylogicalname = parententitylogicalname;
-            Componentidunique = componentidunique;
-            Solutionid = solutionid;
-            Entityanalyticsconfigid = entityanalyticsconfigid;
-            Isenabledfortimeseries = isenabledfortimeseries;
             this._parententityidValue = _parententityidValue;
             Isenabledforadls = isenabledforadls;
+            Componentidunique = componentidunique;
+            Entityanalyticsconfigid = entityanalyticsconfigid;
+            Componentstate = componentstate;
+            this._organizationidValue = _organizationidValue;
             EntityanalyticsconfigSyncErrors = entityanalyticsconfigSyncErrors;
             EntityanalyticsconfigAsyncOperations = entityanalyticsconfigAsyncOperations;
             EntityanalyticsconfigMailboxTrackingFolders = entityanalyticsconfigMailboxTrackingFolders;
@@ -60,6 +60,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "solutionid")]
+        public string Solutionid { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "ismanaged")]
         public bool? Ismanaged { get; set; }
 
@@ -70,13 +75,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "componentstate")]
-        public int? Componentstate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
+        [JsonProperty(PropertyName = "isenabledfortimeseries")]
+        public bool? Isenabledfortimeseries { get; set; }
 
         /// <summary>
         /// </summary>
@@ -90,13 +90,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "componentidunique")]
-        public string Componentidunique { get; set; }
+        [JsonProperty(PropertyName = "_parententityid_value")]
+        public string _parententityidValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "solutionid")]
-        public string Solutionid { get; set; }
+        [JsonProperty(PropertyName = "isenabledforadls")]
+        public bool? Isenabledforadls { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "componentidunique")]
+        public string Componentidunique { get; set; }
 
         /// <summary>
         /// </summary>
@@ -105,18 +110,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "isenabledfortimeseries")]
-        public bool? Isenabledfortimeseries { get; set; }
+        [JsonProperty(PropertyName = "componentstate")]
+        public int? Componentstate { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_parententityid_value")]
-        public string _parententityidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "isenabledforadls")]
-        public bool? Isenabledforadls { get; set; }
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// </summary>

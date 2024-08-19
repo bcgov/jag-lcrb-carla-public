@@ -29,28 +29,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMptmMscrmaddonscommetadata class.
         /// </summary>
-        public MicrosoftDynamicsCRMptmMscrmaddonscommetadata(int? statecode = default(int?), string ptmName = default(string), string _modifiedbyValue = default(string), int? ptmObjecttypecode = default(int?), string _organizationidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string versionnumber = default(string), string _createdonbehalfbyValue = default(string), string ptmFullxml = default(string), string _createdbyValue = default(string), int? importsequencenumber = default(int?), int? statuscode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), bool? ptmIscustomizable = default(bool?), string ptmLocalizedlabels = default(string), string ptmMscrmaddonscommetadataid = default(string), int? utcconversiontimezonecode = default(int?), int? timezoneruleversionnumber = default(int?), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string ptmValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> ptmMscrmaddonscommetadataSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> ptmMscrmaddonscommetadataAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> ptmMscrmaddonscommetadataMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> ptmMscrmaddonscommetadataProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> ptmMscrmaddonscommetadataBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> ptmMscrmaddonscommetadataPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>))
+        public MicrosoftDynamicsCRMptmMscrmaddonscommetadata(string ptmLocalizedlabels = default(string), int? ptmObjecttypecode = default(int?), string _modifiedbyValue = default(string), string _organizationidValue = default(string), int? statecode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string ptmFullxml = default(string), string _createdbyValue = default(string), string versionnumber = default(string), int? importsequencenumber = default(int?), int? statuscode = default(int?), string _createdonbehalfbyValue = default(string), string ptmName = default(string), bool? ptmIscustomizable = default(bool?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string ptmMscrmaddonscommetadataid = default(string), string ptmValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> ptmMscrmaddonscommetadataSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> ptmMscrmaddonscommetadataAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> ptmMscrmaddonscommetadataMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> ptmMscrmaddonscommetadataProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> ptmMscrmaddonscommetadataBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> ptmMscrmaddonscommetadataPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>))
         {
-            Statecode = statecode;
-            PtmName = ptmName;
-            this._modifiedbyValue = _modifiedbyValue;
+            PtmLocalizedlabels = ptmLocalizedlabels;
             PtmObjecttypecode = ptmObjecttypecode;
+            this._modifiedbyValue = _modifiedbyValue;
             this._organizationidValue = _organizationidValue;
-            Createdon = createdon;
-            Versionnumber = versionnumber;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Statecode = statecode;
+            Overriddencreatedon = overriddencreatedon;
             PtmFullxml = ptmFullxml;
             this._createdbyValue = _createdbyValue;
+            Versionnumber = versionnumber;
             Importsequencenumber = importsequencenumber;
             Statuscode = statuscode;
-            Modifiedon = modifiedon;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            PtmName = ptmName;
             PtmIscustomizable = ptmIscustomizable;
-            PtmLocalizedlabels = ptmLocalizedlabels;
-            PtmMscrmaddonscommetadataid = ptmMscrmaddonscommetadataid;
+            Createdon = createdon;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             Timezoneruleversionnumber = timezoneruleversionnumber;
+            Modifiedon = modifiedon;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            Overriddencreatedon = overriddencreatedon;
+            PtmMscrmaddonscommetadataid = ptmMscrmaddonscommetadataid;
             PtmValue = ptmValue;
             Createdby = createdby;
             Createdonbehalfby = createdonbehalfby;
@@ -73,18 +73,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ptm_name")]
-        public string PtmName { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        [JsonProperty(PropertyName = "ptm_localizedlabels")]
+        public string PtmLocalizedlabels { get; set; }
 
         /// <summary>
         /// </summary>
@@ -93,23 +83,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
         public string _organizationidValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -123,6 +113,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
@@ -133,8 +128,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ptm_name")]
+        public string PtmName { get; set; }
 
         /// <summary>
         /// </summary>
@@ -143,13 +143,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ptm_localizedlabels")]
-        public string PtmLocalizedlabels { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ptm_mscrmaddonscommetadataid")]
-        public string PtmMscrmaddonscommetadataid { get; set; }
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -163,13 +158,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+        [JsonProperty(PropertyName = "ptm_mscrmaddonscommetadataid")]
+        public string PtmMscrmaddonscommetadataid { get; set; }
 
         /// <summary>
         /// </summary>

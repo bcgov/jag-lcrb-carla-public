@@ -27,26 +27,26 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMplugintypestatistic class.
         /// </summary>
-        public MicrosoftDynamicsCRMplugintypestatistic(string _organizationidValue = default(string), int? terminatememorycontributionpercent = default(int?), string _modifiedbyValue = default(string), int? crashcount = default(int?), int? terminatecpucontributionpercent = default(int?), string _createdbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _createdonbehalfbyValue = default(string), int? failurepercent = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? averageexecutetimeinmilliseconds = default(int?), string _plugintypeidValue = default(string), int? terminateothercontributionpercent = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string plugintypestatisticid = default(string), int? terminatehandlescontributionpercent = default(int?), int? crashpercent = default(int?), int? executecount = default(int?), int? failurecount = default(int?), int? crashcontributionpercent = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMplugintype plugintypeid = default(MicrosoftDynamicsCRMplugintype), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMplugintypestatistic(string _organizationidValue = default(string), string _createdbyValue = default(string), string _modifiedbyValue = default(string), int? crashcount = default(int?), int? executecount = default(int?), int? terminatememorycontributionpercent = default(int?), int? terminateothercontributionpercent = default(int?), string _modifiedonbehalfbyValue = default(string), int? terminatecpucontributionpercent = default(int?), int? failurepercent = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? averageexecutetimeinmilliseconds = default(int?), string _plugintypeidValue = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string plugintypestatisticid = default(string), int? terminatehandlescontributionpercent = default(int?), int? crashpercent = default(int?), int? failurecount = default(int?), int? crashcontributionpercent = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMplugintype plugintypeid = default(MicrosoftDynamicsCRMplugintype), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
             this._organizationidValue = _organizationidValue;
-            Terminatememorycontributionpercent = terminatememorycontributionpercent;
+            this._createdbyValue = _createdbyValue;
             this._modifiedbyValue = _modifiedbyValue;
             Crashcount = crashcount;
-            Terminatecpucontributionpercent = terminatecpucontributionpercent;
-            this._createdbyValue = _createdbyValue;
+            Executecount = executecount;
+            Terminatememorycontributionpercent = terminatememorycontributionpercent;
+            Terminateothercontributionpercent = terminateothercontributionpercent;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Terminatecpucontributionpercent = terminatecpucontributionpercent;
             Failurepercent = failurepercent;
             Createdon = createdon;
             Averageexecutetimeinmilliseconds = averageexecutetimeinmilliseconds;
             this._plugintypeidValue = _plugintypeidValue;
-            Terminateothercontributionpercent = terminateothercontributionpercent;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Modifiedon = modifiedon;
             Plugintypestatisticid = plugintypestatisticid;
             Terminatehandlescontributionpercent = terminatehandlescontributionpercent;
             Crashpercent = crashpercent;
-            Executecount = executecount;
             Failurecount = failurecount;
             Crashcontributionpercent = crashcontributionpercent;
             Createdby = createdby;
@@ -70,8 +70,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "terminatememorycontributionpercent")]
-        public int? Terminatememorycontributionpercent { get; set; }
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -85,13 +85,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "terminatecpucontributionpercent")]
-        public int? Terminatecpucontributionpercent { get; set; }
+        [JsonProperty(PropertyName = "executecount")]
+        public int? Executecount { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        [JsonProperty(PropertyName = "terminatememorycontributionpercent")]
+        public int? Terminatememorycontributionpercent { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "terminateothercontributionpercent")]
+        public int? Terminateothercontributionpercent { get; set; }
 
         /// <summary>
         /// </summary>
@@ -100,8 +105,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "terminatecpucontributionpercent")]
+        public int? Terminatecpucontributionpercent { get; set; }
 
         /// <summary>
         /// </summary>
@@ -125,8 +130,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "terminateothercontributionpercent")]
-        public int? Terminateothercontributionpercent { get; set; }
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -147,11 +152,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "crashpercent")]
         public int? Crashpercent { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "executecount")]
-        public int? Executecount { get; set; }
 
         /// <summary>
         /// </summary>

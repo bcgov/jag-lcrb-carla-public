@@ -31,56 +31,56 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMmsdynAiconfiguration class.
         /// </summary>
-        public MicrosoftDynamicsCRMmsdynAiconfiguration(string solutionid = default(string), string msdynCustomconfiguration = default(string), string msdynDatabinding = default(string), string msdynRunconfiguration = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), string _msdynCreatedfromconfigurationidValue = default(string), string msdynSchedulingoptions = default(string), string _msdynTrainedmodelaiconfigurationpareidValue = default(string), int? msdynTemplateversion = default(int?), int? msdynMinoriterationnumber = default(int?), string iscustomizable = default(string), string introducedversion = default(string), int? timezoneruleversionnumber = default(int?), string msdynModelprovisioningstatus = default(string), string msdynModelglobalexplainability = default(string), string _owninguserValue = default(string), string _msdynAimodelidValue = default(string), string msdynModelName = default(string), string _createdbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? componentstate = default(int?), string msdynLasterrors = default(string), string msdynName = default(string), string msdynResourceinfo = default(string), string _createdonbehalfbyValue = default(string), string _owningbusinessunitValue = default(string), string _modifiedonbehalfbyValue = default(string), string msdynModelrundataspecification = default(string), int? statuscode = default(int?), int? statecode = default(int?), string msdynModeldata = default(string), string _owneridValue = default(string), System.DateTimeOffset? msdynLasttrainorrundate = default(System.DateTimeOffset?), string msdynAiconfigurationidunique = default(string), byte[] msdynModel = default(byte[]), string msdynAiconfigurationid = default(string), int? msdynType = default(int?), string versionnumber = default(string), string msdynModelprovisioningmetadata = default(string), string _modifiedbyValue = default(string), int? msdynMajoriterationnumber = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string msdynModelperformance = default(string), bool? ismanaged = default(bool?), int? utcconversiontimezonecode = default(int?), string _owningteamValue = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> msdynAiconfigurationSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> msdynAiconfigurationAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> msdynAiconfigurationMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> msdynAiconfigurationProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> msdynAiconfigurationBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> msdynAiconfigurationPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMfileattachment> msdynAiconfigurationFileAttachments = default(IList<MicrosoftDynamicsCRMfileattachment>), MicrosoftDynamicsCRMmsdynAiconfiguration msdynTrainedModelAIConfigurationPareId = default(MicrosoftDynamicsCRMmsdynAiconfiguration), IList<MicrosoftDynamicsCRMmsdynAiconfiguration> msdynAiconfigurationMsdynAiconfiguration = default(IList<MicrosoftDynamicsCRMmsdynAiconfiguration>), MicrosoftDynamicsCRMmsdynAiconfiguration msdynCreatedFromConfigurationId = default(MicrosoftDynamicsCRMmsdynAiconfiguration), IList<MicrosoftDynamicsCRMmsdynAiconfiguration> msdynCreatedfromconfigurationMsdynToconfiguration = default(IList<MicrosoftDynamicsCRMmsdynAiconfiguration>), MicrosoftDynamicsCRMmsdynAimodel msdynAIModelId = default(MicrosoftDynamicsCRMmsdynAimodel), IList<MicrosoftDynamicsCRMmsdynAiodtrainingimage> msdynAiconfigurationMsdynAiodtrainingimage = default(IList<MicrosoftDynamicsCRMmsdynAiodtrainingimage>), IList<MicrosoftDynamicsCRMmsdynAiodlabel> msdynAiodlabelMsdynAiconfiguration = default(IList<MicrosoftDynamicsCRMmsdynAiodlabel>), IList<MicrosoftDynamicsCRMmsdynAifptrainingdocument> msdynMsdynAiconfigurationMsdynAifptrainingdocumentAIConfigurationId = default(IList<MicrosoftDynamicsCRMmsdynAifptrainingdocument>))
+        public MicrosoftDynamicsCRMmsdynAiconfiguration(string solutionid = default(string), string msdynDatabinding = default(string), string msdynRunconfiguration = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), string _msdynCreatedfromconfigurationidValue = default(string), string msdynSchedulingoptions = default(string), int? msdynTemplateversion = default(int?), int? msdynMinoriterationnumber = default(int?), string msdynAiconfigurationid = default(string), string iscustomizable = default(string), string introducedversion = default(string), int? timezoneruleversionnumber = default(int?), string msdynModelglobalexplainability = default(string), string _owninguserValue = default(string), string _msdynAimodelidValue = default(string), string msdynAiconfigurationidunique = default(string), string _createdbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string msdynName = default(string), string msdynResourceinfo = default(string), string _createdonbehalfbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string msdynModelrundataspecification = default(string), string _owningbusinessunitValue = default(string), int? statecode = default(int?), string msdynModeldata = default(string), string _owneridValue = default(string), System.DateTimeOffset? msdynLasttrainorrundate = default(System.DateTimeOffset?), string msdynCustomconfiguration = default(string), byte[] msdynModel = default(byte[]), string msdynModelName = default(string), string msdynLasterrors = default(string), int? msdynType = default(int?), string versionnumber = default(string), string msdynModelprovisioningmetadata = default(string), int? componentstate = default(int?), string _modifiedbyValue = default(string), int? statuscode = default(int?), int? msdynMajoriterationnumber = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string msdynModelperformance = default(string), string _msdynTrainedmodelaiconfigurationpareidValue = default(string), bool? ismanaged = default(bool?), int? utcconversiontimezonecode = default(int?), string _owningteamValue = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string msdynModelprovisioningstatus = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> msdynAiconfigurationSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> msdynAiconfigurationAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> msdynAiconfigurationMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> msdynAiconfigurationProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> msdynAiconfigurationBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> msdynAiconfigurationPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMfileattachment> msdynAiconfigurationFileAttachments = default(IList<MicrosoftDynamicsCRMfileattachment>), MicrosoftDynamicsCRMmsdynAiconfiguration msdynTrainedModelAIConfigurationPareId = default(MicrosoftDynamicsCRMmsdynAiconfiguration), IList<MicrosoftDynamicsCRMmsdynAiconfiguration> msdynAiconfigurationMsdynAiconfiguration = default(IList<MicrosoftDynamicsCRMmsdynAiconfiguration>), MicrosoftDynamicsCRMmsdynAiconfiguration msdynCreatedFromConfigurationId = default(MicrosoftDynamicsCRMmsdynAiconfiguration), IList<MicrosoftDynamicsCRMmsdynAiconfiguration> msdynCreatedfromconfigurationMsdynToconfiguration = default(IList<MicrosoftDynamicsCRMmsdynAiconfiguration>), MicrosoftDynamicsCRMmsdynAimodel msdynAIModelId = default(MicrosoftDynamicsCRMmsdynAimodel), IList<MicrosoftDynamicsCRMmsdynAiodtrainingimage> msdynAiconfigurationMsdynAiodtrainingimage = default(IList<MicrosoftDynamicsCRMmsdynAiodtrainingimage>), IList<MicrosoftDynamicsCRMmsdynAiodlabel> msdynAiodlabelMsdynAiconfiguration = default(IList<MicrosoftDynamicsCRMmsdynAiodlabel>), IList<MicrosoftDynamicsCRMmsdynAifptrainingdocument> msdynMsdynAiconfigurationMsdynAifptrainingdocumentAIConfigurationId = default(IList<MicrosoftDynamicsCRMmsdynAifptrainingdocument>))
         {
             Solutionid = solutionid;
-            MsdynCustomconfiguration = msdynCustomconfiguration;
             MsdynDatabinding = msdynDatabinding;
             MsdynRunconfiguration = msdynRunconfiguration;
             Modifiedon = modifiedon;
             Importsequencenumber = importsequencenumber;
             this._msdynCreatedfromconfigurationidValue = _msdynCreatedfromconfigurationidValue;
             MsdynSchedulingoptions = msdynSchedulingoptions;
-            this._msdynTrainedmodelaiconfigurationpareidValue = _msdynTrainedmodelaiconfigurationpareidValue;
             MsdynTemplateversion = msdynTemplateversion;
             MsdynMinoriterationnumber = msdynMinoriterationnumber;
+            MsdynAiconfigurationid = msdynAiconfigurationid;
             Iscustomizable = iscustomizable;
             Introducedversion = introducedversion;
             Timezoneruleversionnumber = timezoneruleversionnumber;
-            MsdynModelprovisioningstatus = msdynModelprovisioningstatus;
             MsdynModelglobalexplainability = msdynModelglobalexplainability;
             this._owninguserValue = _owninguserValue;
             this._msdynAimodelidValue = _msdynAimodelidValue;
-            MsdynModelName = msdynModelName;
+            MsdynAiconfigurationidunique = msdynAiconfigurationidunique;
             this._createdbyValue = _createdbyValue;
             Createdon = createdon;
-            Componentstate = componentstate;
-            MsdynLasterrors = msdynLasterrors;
             MsdynName = msdynName;
             MsdynResourceinfo = msdynResourceinfo;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             MsdynModelrundataspecification = msdynModelrundataspecification;
-            Statuscode = statuscode;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
             Statecode = statecode;
             MsdynModeldata = msdynModeldata;
             this._owneridValue = _owneridValue;
             MsdynLasttrainorrundate = msdynLasttrainorrundate;
-            MsdynAiconfigurationidunique = msdynAiconfigurationidunique;
+            MsdynCustomconfiguration = msdynCustomconfiguration;
             MsdynModel = msdynModel;
-            MsdynAiconfigurationid = msdynAiconfigurationid;
+            MsdynModelName = msdynModelName;
+            MsdynLasterrors = msdynLasterrors;
             MsdynType = msdynType;
             Versionnumber = versionnumber;
             MsdynModelprovisioningmetadata = msdynModelprovisioningmetadata;
+            Componentstate = componentstate;
             this._modifiedbyValue = _modifiedbyValue;
+            Statuscode = statuscode;
             MsdynMajoriterationnumber = msdynMajoriterationnumber;
             Overriddencreatedon = overriddencreatedon;
             MsdynModelperformance = msdynModelperformance;
+            this._msdynTrainedmodelaiconfigurationpareidValue = _msdynTrainedmodelaiconfigurationpareidValue;
             Ismanaged = ismanaged;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             this._owningteamValue = _owningteamValue;
             Overwritetime = overwritetime;
+            MsdynModelprovisioningstatus = msdynModelprovisioningstatus;
             Createdby = createdby;
             Createdonbehalfby = createdonbehalfby;
             Modifiedby = modifiedby;
@@ -119,11 +119,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_customconfiguration")]
-        public string MsdynCustomconfiguration { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "msdyn_databinding")]
         public string MsdynDatabinding { get; set; }
 
@@ -154,11 +149,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_msdyn_trainedmodelaiconfigurationpareid_value")]
-        public string _msdynTrainedmodelaiconfigurationpareidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "msdyn_templateversion")]
         public int? MsdynTemplateversion { get; set; }
 
@@ -166,6 +156,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "msdyn_minoriterationnumber")]
         public int? MsdynMinoriterationnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "msdyn_aiconfigurationid")]
+        public string MsdynAiconfigurationid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -184,11 +179,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_modelprovisioningstatus")]
-        public string MsdynModelprovisioningstatus { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "msdyn_modelglobalexplainability")]
         public string MsdynModelglobalexplainability { get; set; }
 
@@ -204,8 +194,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_model_name")]
-        public string MsdynModelName { get; set; }
+        [JsonProperty(PropertyName = "msdyn_aiconfigurationidunique")]
+        public string MsdynAiconfigurationidunique { get; set; }
 
         /// <summary>
         /// </summary>
@@ -216,16 +206,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "componentstate")]
-        public int? Componentstate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "msdyn_lasterrors")]
-        public string MsdynLasterrors { get; set; }
 
         /// <summary>
         /// </summary>
@@ -244,11 +224,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
 
@@ -259,8 +234,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -284,8 +259,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_aiconfigurationidunique")]
-        public string MsdynAiconfigurationidunique { get; set; }
+        [JsonProperty(PropertyName = "msdyn_customconfiguration")]
+        public string MsdynCustomconfiguration { get; set; }
 
         /// <summary>
         /// </summary>
@@ -295,8 +270,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_aiconfigurationid")]
-        public string MsdynAiconfigurationid { get; set; }
+        [JsonProperty(PropertyName = "msdyn_model_name")]
+        public string MsdynModelName { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "msdyn_lasterrors")]
+        public string MsdynLasterrors { get; set; }
 
         /// <summary>
         /// </summary>
@@ -315,8 +295,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "componentstate")]
+        public int? Componentstate { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -332,6 +322,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "msdyn_modelperformance")]
         public string MsdynModelperformance { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_msdyn_trainedmodelaiconfigurationpareid_value")]
+        public string _msdynTrainedmodelaiconfigurationpareidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -352,6 +347,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "overwritetime")]
         public System.DateTimeOffset? Overwritetime { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "msdyn_modelprovisioningstatus")]
+        public string MsdynModelprovisioningstatus { get; set; }
 
         /// <summary>
         /// </summary>

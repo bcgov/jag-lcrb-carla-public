@@ -31,31 +31,31 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMterritory
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMterritory(string _parentterritoryidValue = default(string), string entityimageUrl = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string name = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string territoryid = default(string), int? importsequencenumber = default(int?), decimal? exchangerate = default(decimal?), int? utcconversiontimezonecode = default(int?), string description = default(string), string entityimageid = default(string), int? timezoneruleversionnumber = default(int?), string _modifiedbyValue = default(string), string _transactioncurrencyidValue = default(string), string _organizationidValue = default(string), byte[] entityimage = default(byte[]), long? entityimageTimestamp = default(long?), string versionnumber = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string _manageridValue = default(string), IList<MicrosoftDynamicsCRMteam> territoryTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> territoryMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMconnection> territoryConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMsystemuser managerid = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> territorySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMsystemuser> territorySystemUsers = default(IList<MicrosoftDynamicsCRMsystemuser>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMconnection> territoryConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMduplicaterecord> territoryDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMbulkdeletefailure> territoryBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprocesssession> territoryProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMduplicaterecord> territoryDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMaccount> territoryAccounts = default(IList<MicrosoftDynamicsCRMaccount>), IList<MicrosoftDynamicsCRMasyncoperation> territoryAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> territoryPrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMterritory parentterritoryid = default(MicrosoftDynamicsCRMterritory), IList<MicrosoftDynamicsCRMterritory> territoryParentTerritory = default(IList<MicrosoftDynamicsCRMterritory>))
+        public MicrosoftDynamicsCRMterritory(System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string entityimageUrl = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string description = default(string), string _createdonbehalfbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _createdbyValue = default(string), string _manageridValue = default(string), int? importsequencenumber = default(int?), decimal? exchangerate = default(decimal?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _parentterritoryidValue = default(string), string entityimageid = default(string), int? utcconversiontimezonecode = default(int?), int? timezoneruleversionnumber = default(int?), string _transactioncurrencyidValue = default(string), string _organizationidValue = default(string), string _modifiedbyValue = default(string), byte[] entityimage = default(byte[]), long? entityimageTimestamp = default(long?), string versionnumber = default(string), string territoryid = default(string), string name = default(string), IList<MicrosoftDynamicsCRMteam> territoryTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> territoryMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMconnection> territoryConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMsystemuser managerid = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> territorySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMsystemuser> territorySystemUsers = default(IList<MicrosoftDynamicsCRMsystemuser>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMconnection> territoryConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMduplicaterecord> territoryDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMbulkdeletefailure> territoryBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprocesssession> territoryProcessSessions = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMduplicaterecord> territoryDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMaccount> territoryAccounts = default(IList<MicrosoftDynamicsCRMaccount>), IList<MicrosoftDynamicsCRMasyncoperation> territoryAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> territoryPrincipalobjectattributeaccess = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMterritory parentterritoryid = default(MicrosoftDynamicsCRMterritory), IList<MicrosoftDynamicsCRMterritory> territoryParentTerritory = default(IList<MicrosoftDynamicsCRMterritory>))
         {
-            this._parentterritoryidValue = _parentterritoryidValue;
+            Createdon = createdon;
             EntityimageUrl = entityimageUrl;
             Modifiedon = modifiedon;
+            Description = description;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            Name = name;
-            Createdon = createdon;
-            Territoryid = territoryid;
+            this._createdbyValue = _createdbyValue;
+            this._manageridValue = _manageridValue;
             Importsequencenumber = importsequencenumber;
             Exchangerate = exchangerate;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
-            Description = description;
+            Overriddencreatedon = overriddencreatedon;
+            this._parentterritoryidValue = _parentterritoryidValue;
             Entityimageid = entityimageid;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
             Timezoneruleversionnumber = timezoneruleversionnumber;
-            this._modifiedbyValue = _modifiedbyValue;
             this._transactioncurrencyidValue = _transactioncurrencyidValue;
             this._organizationidValue = _organizationidValue;
+            this._modifiedbyValue = _modifiedbyValue;
             Entityimage = entityimage;
             EntityimageTimestamp = entityimageTimestamp;
             Versionnumber = versionnumber;
-            Overriddencreatedon = overriddencreatedon;
-            this._createdbyValue = _createdbyValue;
-            this._manageridValue = _manageridValue;
+            Territoryid = territoryid;
+            Name = name;
             TerritoryTeams = territoryTeams;
             TerritoryMailboxTrackingFolders = territoryMailboxTrackingFolders;
             TerritoryConnections1 = territoryConnections1;
@@ -88,8 +88,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_parentterritoryid_value")]
-        public string _parentterritoryidValue { get; set; }
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -103,6 +103,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "description")]
+        public string Description { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
 
@@ -113,18 +118,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "territoryid")]
-        public string Territoryid { get; set; }
+        [JsonProperty(PropertyName = "_managerid_value")]
+        public string _manageridValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -138,13 +138,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "description")]
-        public string Description { get; set; }
+        [JsonProperty(PropertyName = "_parentterritoryid_value")]
+        public string _parentterritoryidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -153,13 +153,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -170,6 +170,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
         public string _organizationidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -189,18 +194,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+        [JsonProperty(PropertyName = "territoryid")]
+        public string Territoryid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_managerid_value")]
-        public string _manageridValue { get; set; }
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
 
         /// <summary>
         /// </summary>

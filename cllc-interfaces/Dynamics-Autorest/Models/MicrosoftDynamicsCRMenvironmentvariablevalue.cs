@@ -29,36 +29,36 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMenvironmentvariablevalue class.
         /// </summary>
-        public MicrosoftDynamicsCRMenvironmentvariablevalue(int? importsequencenumber = default(int?), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? componentstate = default(int?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string value = default(string), string _createdbyValue = default(string), string iscustomizable = default(string), string _environmentvariabledefinitionidValue = default(string), int? statecode = default(int?), string solutionid = default(string), int? utcconversiontimezonecode = default(int?), string _owningbusinessunitValue = default(string), string environmentvariablevalueidunique = default(string), string _owningteamValue = default(string), int? statuscode = default(int?), string _modifiedonbehalfbyValue = default(string), string introducedversion = default(string), string schemaname = default(string), bool? ismanaged = default(bool?), string _owneridValue = default(string), string _createdonbehalfbyValue = default(string), string versionnumber = default(string), string _owninguserValue = default(string), string environmentvariablevalueid = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> environmentvariablevalueSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> environmentvariablevalueDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> environmentvariablevalueDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> environmentvariablevalueAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> environmentvariablevalueMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> environmentvariablevalueProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> environmentvariablevalueBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> environmentvariablevaluePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMenvironmentvariabledefinition environmentVariableDefinitionId = default(MicrosoftDynamicsCRMenvironmentvariabledefinition))
+        public MicrosoftDynamicsCRMenvironmentvariablevalue(string versionnumber = default(string), int? timezoneruleversionnumber = default(int?), string value = default(string), int? importsequencenumber = default(int?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string _createdbyValue = default(string), string iscustomizable = default(string), string _environmentvariabledefinitionidValue = default(string), int? statecode = default(int?), string solutionid = default(string), int? utcconversiontimezonecode = default(int?), string environmentvariablevalueidunique = default(string), int? statuscode = default(int?), string _modifiedonbehalfbyValue = default(string), string introducedversion = default(string), string _owningbusinessunitValue = default(string), string _owneridValue = default(string), string _owningteamValue = default(string), string schemaname = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), bool? ismanaged = default(bool?), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string _owninguserValue = default(string), string environmentvariablevalueid = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? componentstate = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> environmentvariablevalueSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> environmentvariablevalueDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> environmentvariablevalueDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> environmentvariablevalueAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> environmentvariablevalueMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> environmentvariablevalueProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> environmentvariablevalueBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> environmentvariablevaluePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMenvironmentvariabledefinition environmentVariableDefinitionId = default(MicrosoftDynamicsCRMenvironmentvariabledefinition))
         {
-            Importsequencenumber = importsequencenumber;
+            Versionnumber = versionnumber;
             Timezoneruleversionnumber = timezoneruleversionnumber;
-            Modifiedon = modifiedon;
-            Componentstate = componentstate;
-            Overwritetime = overwritetime;
             Value = value;
+            Importsequencenumber = importsequencenumber;
+            Overwritetime = overwritetime;
             this._createdbyValue = _createdbyValue;
             Iscustomizable = iscustomizable;
             this._environmentvariabledefinitionidValue = _environmentvariabledefinitionidValue;
             Statecode = statecode;
             Solutionid = solutionid;
             Utcconversiontimezonecode = utcconversiontimezonecode;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
             Environmentvariablevalueidunique = environmentvariablevalueidunique;
-            this._owningteamValue = _owningteamValue;
             Statuscode = statuscode;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Introducedversion = introducedversion;
-            Schemaname = schemaname;
-            Ismanaged = ismanaged;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
             this._owneridValue = _owneridValue;
+            this._owningteamValue = _owningteamValue;
+            Schemaname = schemaname;
+            Createdon = createdon;
+            Ismanaged = ismanaged;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            Versionnumber = versionnumber;
+            this._modifiedbyValue = _modifiedbyValue;
             this._owninguserValue = _owninguserValue;
             Environmentvariablevalueid = environmentvariablevalueid;
             Overriddencreatedon = overriddencreatedon;
-            this._modifiedbyValue = _modifiedbyValue;
-            Createdon = createdon;
+            Modifiedon = modifiedon;
+            Componentstate = componentstate;
             Createdby = createdby;
             Createdonbehalfby = createdonbehalfby;
             Modifiedby = modifiedby;
@@ -86,8 +86,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -96,23 +96,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
+        [JsonProperty(PropertyName = "value")]
+        public string Value { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "componentstate")]
-        public int? Componentstate { get; set; }
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "overwritetime")]
         public System.DateTimeOffset? Overwritetime { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "value")]
-        public string Value { get; set; }
 
         /// <summary>
         /// </summary>
@@ -146,18 +141,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "environmentvariablevalueidunique")]
         public string Environmentvariablevalueidunique { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -176,13 +161,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "schemaname")]
-        public string Schemaname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ismanaged")]
-        public bool? Ismanaged { get; set; }
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -191,13 +171,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "schemaname")]
+        public string Schemaname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ismanaged")]
+        public bool? Ismanaged { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -216,13 +216,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
+        [JsonProperty(PropertyName = "componentstate")]
+        public int? Componentstate { get; set; }
 
         /// <summary>
         /// </summary>

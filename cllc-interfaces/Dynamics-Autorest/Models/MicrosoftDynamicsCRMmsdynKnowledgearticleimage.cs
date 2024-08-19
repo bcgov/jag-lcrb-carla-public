@@ -31,28 +31,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMmsdynKnowledgearticleimage class.
         /// </summary>
-        public MicrosoftDynamicsCRMmsdynKnowledgearticleimage(System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? statecode = default(int?), byte[] msdynBlobfile = default(byte[]), string _msdynParentknowledgearticleidValue = default(string), string _modifiedbyValue = default(string), string _owninguserValue = default(string), int? timezoneruleversionnumber = default(int?), string _owneridValue = default(string), string msdynFilename = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string msdynKnowledgearticleimageid = default(string), string _owningteamValue = default(string), string _createdbyValue = default(string), string msdynBlobfileName = default(string), string _owningbusinessunitValue = default(string), string _modifiedonbehalfbyValue = default(string), int? importsequencenumber = default(int?), int? utcconversiontimezonecode = default(int?), string _createdonbehalfbyValue = default(string), string versionnumber = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? statuscode = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> msdynKnowledgearticleimageSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> msdynKnowledgearticleimageDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> msdynKnowledgearticleimageDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> msdynKnowledgearticleimageAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> msdynKnowledgearticleimageMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> msdynKnowledgearticleimageProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> msdynKnowledgearticleimageBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> msdynKnowledgearticleimagePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMfileattachment> msdynKnowledgearticleimageFileAttachments = default(IList<MicrosoftDynamicsCRMfileattachment>))
+        public MicrosoftDynamicsCRMmsdynKnowledgearticleimage(System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? statecode = default(int?), byte[] msdynBlobfile = default(byte[]), string _msdynParentknowledgearticleidValue = default(string), string _owninguserValue = default(string), string _owningbusinessunitValue = default(string), string _owneridValue = default(string), string msdynFilename = default(string), int? importsequencenumber = default(int?), string _owningteamValue = default(string), string _createdbyValue = default(string), string msdynBlobfileName = default(string), string _modifiedonbehalfbyValue = default(string), int? utcconversiontimezonecode = default(int?), string _createdonbehalfbyValue = default(string), string versionnumber = default(string), int? timezoneruleversionnumber = default(int?), string msdynKnowledgearticleimageid = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? statuscode = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> msdynKnowledgearticleimageSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> msdynKnowledgearticleimageDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> msdynKnowledgearticleimageDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> msdynKnowledgearticleimageAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> msdynKnowledgearticleimageMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> msdynKnowledgearticleimageProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> msdynKnowledgearticleimageBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> msdynKnowledgearticleimagePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMfileattachment> msdynKnowledgearticleimageFileAttachments = default(IList<MicrosoftDynamicsCRMfileattachment>))
         {
             Createdon = createdon;
+            Modifiedon = modifiedon;
             Statecode = statecode;
             MsdynBlobfile = msdynBlobfile;
             this._msdynParentknowledgearticleidValue = _msdynParentknowledgearticleidValue;
-            this._modifiedbyValue = _modifiedbyValue;
             this._owninguserValue = _owninguserValue;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
             this._owneridValue = _owneridValue;
             MsdynFilename = msdynFilename;
-            Modifiedon = modifiedon;
-            MsdynKnowledgearticleimageid = msdynKnowledgearticleimageid;
+            Importsequencenumber = importsequencenumber;
             this._owningteamValue = _owningteamValue;
             this._createdbyValue = _createdbyValue;
             MsdynBlobfileName = msdynBlobfileName;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            Importsequencenumber = importsequencenumber;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Versionnumber = versionnumber;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            MsdynKnowledgearticleimageid = msdynKnowledgearticleimageid;
+            this._modifiedbyValue = _modifiedbyValue;
             Overriddencreatedon = overriddencreatedon;
             Statuscode = statuscode;
             Createdby = createdby;
@@ -87,6 +87,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "statecode")]
         public int? Statecode { get; set; }
 
@@ -103,18 +108,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
         public string _owninguserValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -128,13 +128,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "msdyn_knowledgearticleimageid")]
-        public string MsdynKnowledgearticleimageid { get; set; }
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -153,18 +148,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -180,6 +165,21 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
         public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "msdyn_knowledgearticleimageid")]
+        public string MsdynKnowledgearticleimageid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>

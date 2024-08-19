@@ -29,39 +29,39 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMslakpiinstance class.
         /// </summary>
-        public MicrosoftDynamicsCRMslakpiinstance(decimal? exchangerate = default(decimal?), System.DateTimeOffset? failuretime = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), System.DateTimeOffset? pausedon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? terminalstatetime = default(System.DateTimeOffset?), System.DateTimeOffset? computedwarningtime = default(System.DateTimeOffset?), string slakpiinstanceid = default(string), string _owningbusinessunitValue = default(string), string _owneridValue = default(string), bool? terminalstatereached = default(bool?), System.DateTimeOffset? successcheckedat = default(System.DateTimeOffset?), string _regardingValue = default(string), System.DateTimeOffset? applicablefromvalue = default(System.DateTimeOffset?), string _owninguserValue = default(string), int? elapsedtime = default(int?), string name = default(string), int? warningtimereached = default(int?), string _owningteamValue = default(string), System.DateTimeOffset? lastresumetime = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string versionnumber = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? succeededon = default(System.DateTimeOffset?), System.DateTimeOffset? computedfailuretime = default(System.DateTimeOffset?), string regardingentityid = default(string), string _createdbyValue = default(string), string _transactioncurrencyidValue = default(string), string description = default(string), int? status = default(int?), System.DateTimeOffset? warningtime = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMletter regardingLetter = default(MicrosoftDynamicsCRMletter), MicrosoftDynamicsCRMtask regardingTask = default(MicrosoftDynamicsCRMtask), MicrosoftDynamicsCRMemail regardingEmail = default(MicrosoftDynamicsCRMemail), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsocialactivity regardingSocialactivity = default(MicrosoftDynamicsCRMsocialactivity), MicrosoftDynamicsCRMaccount regardingAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMappointment regardingAppointment = default(MicrosoftDynamicsCRMappointment), MicrosoftDynamicsCRMcontact regardingContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMfax regardingFax = default(MicrosoftDynamicsCRMfax), MicrosoftDynamicsCRMphonecall regardingPhonecall = default(MicrosoftDynamicsCRMphonecall), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMactivitypointer regardingActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), IList<MicrosoftDynamicsCRMsyncerror> sLAKPIInstanceSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMadoxioApplication regardingAdoxioApplication = default(MicrosoftDynamicsCRMadoxioApplication), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioSlakpiinstanceAdoxioApplicationSLA = default(IList<MicrosoftDynamicsCRMadoxioApplication>), MicrosoftDynamicsCRMadoxioExternalprofile regardingAdoxioExternalprofile = default(MicrosoftDynamicsCRMadoxioExternalprofile), MicrosoftDynamicsCRMadoxioExternalcontact regardingAdoxioExternalcontact = default(MicrosoftDynamicsCRMadoxioExternalcontact), MicrosoftDynamicsCRMserviceappointment regardingServiceappointment = default(MicrosoftDynamicsCRMserviceappointment), IList<MicrosoftDynamicsCRMincident> slakpiinstanceIncidentFirstresponsebykpi = default(IList<MicrosoftDynamicsCRMincident>), MicrosoftDynamicsCRMincident regarding = default(MicrosoftDynamicsCRMincident), IList<MicrosoftDynamicsCRMincident> slakpiinstanceIncidentResolvebykpi = default(IList<MicrosoftDynamicsCRMincident>), MicrosoftDynamicsCRMsalesorder regardingSalesorder = default(MicrosoftDynamicsCRMsalesorder), MicrosoftDynamicsCRMopportunity regardingOpportunity = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMquote regardingQuote = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMinvoice regardingInvoice = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMlead regardingLead = default(MicrosoftDynamicsCRMlead))
+        public MicrosoftDynamicsCRMslakpiinstance(decimal? exchangerate = default(decimal?), string _modifiedbyValue = default(string), System.DateTimeOffset? lastresumetime = default(System.DateTimeOffset?), System.DateTimeOffset? terminalstatetime = default(System.DateTimeOffset?), System.DateTimeOffset? computedwarningtime = default(System.DateTimeOffset?), string slakpiinstanceid = default(string), string versionnumber = default(string), string _owneridValue = default(string), string _modifiedonbehalfbyValue = default(string), string _owningbusinessunitValue = default(string), bool? terminalstatereached = default(bool?), string _regardingValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? applicablefromvalue = default(System.DateTimeOffset?), string _owninguserValue = default(string), string description = default(string), int? elapsedtime = default(int?), System.DateTimeOffset? pausedon = default(System.DateTimeOffset?), string name = default(string), int? warningtimereached = default(int?), string _owningteamValue = default(string), string _createdbyValue = default(string), string _transactioncurrencyidValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? computedfailuretime = default(System.DateTimeOffset?), string regardingentityid = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? successcheckedat = default(System.DateTimeOffset?), System.DateTimeOffset? failuretime = default(System.DateTimeOffset?), int? status = default(int?), System.DateTimeOffset? succeededon = default(System.DateTimeOffset?), System.DateTimeOffset? warningtime = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMletter regardingLetter = default(MicrosoftDynamicsCRMletter), MicrosoftDynamicsCRMtask regardingTask = default(MicrosoftDynamicsCRMtask), MicrosoftDynamicsCRMemail regardingEmail = default(MicrosoftDynamicsCRMemail), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsocialactivity regardingSocialactivity = default(MicrosoftDynamicsCRMsocialactivity), MicrosoftDynamicsCRMaccount regardingAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMappointment regardingAppointment = default(MicrosoftDynamicsCRMappointment), MicrosoftDynamicsCRMcontact regardingContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMfax regardingFax = default(MicrosoftDynamicsCRMfax), MicrosoftDynamicsCRMphonecall regardingPhonecall = default(MicrosoftDynamicsCRMphonecall), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMactivitypointer regardingActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), IList<MicrosoftDynamicsCRMsyncerror> sLAKPIInstanceSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMadoxioApplication regardingAdoxioApplication = default(MicrosoftDynamicsCRMadoxioApplication), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioSlakpiinstanceAdoxioApplicationSLA = default(IList<MicrosoftDynamicsCRMadoxioApplication>), MicrosoftDynamicsCRMadoxioExternalprofile regardingAdoxioExternalprofile = default(MicrosoftDynamicsCRMadoxioExternalprofile), MicrosoftDynamicsCRMadoxioExternalcontact regardingAdoxioExternalcontact = default(MicrosoftDynamicsCRMadoxioExternalcontact), MicrosoftDynamicsCRMserviceappointment regardingServiceappointment = default(MicrosoftDynamicsCRMserviceappointment), IList<MicrosoftDynamicsCRMincident> slakpiinstanceIncidentFirstresponsebykpi = default(IList<MicrosoftDynamicsCRMincident>), MicrosoftDynamicsCRMincident regarding = default(MicrosoftDynamicsCRMincident), IList<MicrosoftDynamicsCRMincident> slakpiinstanceIncidentResolvebykpi = default(IList<MicrosoftDynamicsCRMincident>), MicrosoftDynamicsCRMsalesorder regardingSalesorder = default(MicrosoftDynamicsCRMsalesorder), MicrosoftDynamicsCRMopportunity regardingOpportunity = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMquote regardingQuote = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMinvoice regardingInvoice = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMlead regardingLead = default(MicrosoftDynamicsCRMlead))
         {
             Exchangerate = exchangerate;
-            Failuretime = failuretime;
-            Createdon = createdon;
             this._modifiedbyValue = _modifiedbyValue;
-            Pausedon = pausedon;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Lastresumetime = lastresumetime;
             Terminalstatetime = terminalstatetime;
             Computedwarningtime = computedwarningtime;
             Slakpiinstanceid = slakpiinstanceid;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
+            Versionnumber = versionnumber;
             this._owneridValue = _owneridValue;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
             Terminalstatereached = terminalstatereached;
-            Successcheckedat = successcheckedat;
             this._regardingValue = _regardingValue;
+            Createdon = createdon;
             Applicablefromvalue = applicablefromvalue;
             this._owninguserValue = _owninguserValue;
+            Description = description;
             Elapsedtime = elapsedtime;
+            Pausedon = pausedon;
             Name = name;
             Warningtimereached = warningtimereached;
             this._owningteamValue = _owningteamValue;
-            Lastresumetime = lastresumetime;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            Versionnumber = versionnumber;
-            Modifiedon = modifiedon;
-            Succeededon = succeededon;
-            Computedfailuretime = computedfailuretime;
-            Regardingentityid = regardingentityid;
             this._createdbyValue = _createdbyValue;
             this._transactioncurrencyidValue = _transactioncurrencyidValue;
-            Description = description;
+            Modifiedon = modifiedon;
+            Computedfailuretime = computedfailuretime;
+            Regardingentityid = regardingentityid;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Successcheckedat = successcheckedat;
+            Failuretime = failuretime;
             Status = status;
+            Succeededon = succeededon;
             Warningtime = warningtime;
             Createdonbehalfby = createdonbehalfby;
             Createdby = createdby;
@@ -109,28 +109,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "failuretime")]
-        public System.DateTimeOffset? Failuretime { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "pausedon")]
-        public System.DateTimeOffset? Pausedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "lastresumetime")]
+        public System.DateTimeOffset? Lastresumetime { get; set; }
 
         /// <summary>
         /// </summary>
@@ -149,8 +134,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -159,18 +144,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "terminalstatereached")]
         public bool? Terminalstatereached { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "successcheckedat")]
-        public System.DateTimeOffset? Successcheckedat { get; set; }
+        [JsonProperty(PropertyName = "_regarding_value")]
+        public string _regardingValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_regarding_value")]
-        public string _regardingValue { get; set; }
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -184,8 +179,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "description")]
+        public string Description { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "elapsedtime")]
         public int? Elapsedtime { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "pausedon")]
+        public System.DateTimeOffset? Pausedon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -204,28 +209,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lastresumetime")]
-        public System.DateTimeOffset? Lastresumetime { get; set; }
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
+        public string _transactioncurrencyidValue { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "succeededon")]
-        public System.DateTimeOffset? Succeededon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -239,23 +234,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
+        [JsonProperty(PropertyName = "successcheckedat")]
+        public System.DateTimeOffset? Successcheckedat { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "description")]
-        public string Description { get; set; }
+        [JsonProperty(PropertyName = "failuretime")]
+        public System.DateTimeOffset? Failuretime { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "status")]
         public int? Status { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "succeededon")]
+        public System.DateTimeOffset? Succeededon { get; set; }
 
         /// <summary>
         /// </summary>

@@ -29,29 +29,29 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMmsdynKnowledgearticletemplate class.
         /// </summary>
-        public MicrosoftDynamicsCRMmsdynKnowledgearticletemplate(string msdynContent = default(string), int? importsequencenumber = default(int?), string msdynLanguageLocaleIdName = default(string), string _owningteamValue = default(string), string msdynKeywords = default(string), int? statecode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _owninguserValue = default(string), string _modifiedbyValue = default(string), string _owneridValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), bool? msdynIsinternal = default(bool?), string msdynTitle = default(string), string msdynDescription = default(string), int? statuscode = default(int?), string _createdbyValue = default(string), string msdynName = default(string), string _msdynSubjectidValue = default(string), string msdynKnowledgearticletemplateid = default(string), string _modifiedonbehalfbyValue = default(string), string versionnumber = default(string), int? timezoneruleversionnumber = default(int?), int? utcconversiontimezonecode = default(int?), string msdynLanguagelocaleid = default(string), string _createdonbehalfbyValue = default(string), string _owningbusinessunitValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> msdynKnowledgearticletemplateSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> msdynKnowledgearticletemplateDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> msdynKnowledgearticletemplateDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> msdynKnowledgearticletemplateSharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMasyncoperation> msdynKnowledgearticletemplateAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> msdynKnowledgearticletemplateMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> msdynKnowledgearticletemplateProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> msdynKnowledgearticletemplateBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> msdynKnowledgearticletemplatePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMqueueitem> msdynKnowledgearticletemplateQueueItems = default(IList<MicrosoftDynamicsCRMqueueitem>), MicrosoftDynamicsCRMsubject msdynSubjectid = default(MicrosoftDynamicsCRMsubject))
+        public MicrosoftDynamicsCRMmsdynKnowledgearticletemplate(string msdynContent = default(string), int? importsequencenumber = default(int?), bool? msdynIsinternal = default(bool?), string _owningteamValue = default(string), string msdynKeywords = default(string), int? statecode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _owninguserValue = default(string), string msdynLanguageLocaleIdName = default(string), string _owneridValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string msdynKnowledgearticletemplateid = default(string), string msdynTitle = default(string), string msdynDescription = default(string), int? statuscode = default(int?), string versionnumber = default(string), string msdynName = default(string), string _msdynSubjectidValue = default(string), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _createdbyValue = default(string), int? timezoneruleversionnumber = default(int?), int? utcconversiontimezonecode = default(int?), string msdynLanguagelocaleid = default(string), string _createdonbehalfbyValue = default(string), string _owningbusinessunitValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> msdynKnowledgearticletemplateSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> msdynKnowledgearticletemplateDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> msdynKnowledgearticletemplateDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> msdynKnowledgearticletemplateSharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMasyncoperation> msdynKnowledgearticletemplateAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> msdynKnowledgearticletemplateMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> msdynKnowledgearticletemplateProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> msdynKnowledgearticletemplateBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> msdynKnowledgearticletemplatePrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMqueueitem> msdynKnowledgearticletemplateQueueItems = default(IList<MicrosoftDynamicsCRMqueueitem>), MicrosoftDynamicsCRMsubject msdynSubjectid = default(MicrosoftDynamicsCRMsubject))
         {
             MsdynContent = msdynContent;
             Importsequencenumber = importsequencenumber;
-            MsdynLanguageLocaleIdName = msdynLanguageLocaleIdName;
+            MsdynIsinternal = msdynIsinternal;
             this._owningteamValue = _owningteamValue;
             MsdynKeywords = msdynKeywords;
             Statecode = statecode;
             Createdon = createdon;
             this._owninguserValue = _owninguserValue;
-            this._modifiedbyValue = _modifiedbyValue;
+            MsdynLanguageLocaleIdName = msdynLanguageLocaleIdName;
             this._owneridValue = _owneridValue;
             Overriddencreatedon = overriddencreatedon;
-            MsdynIsinternal = msdynIsinternal;
+            MsdynKnowledgearticletemplateid = msdynKnowledgearticletemplateid;
             MsdynTitle = msdynTitle;
             MsdynDescription = msdynDescription;
             Statuscode = statuscode;
-            this._createdbyValue = _createdbyValue;
+            Versionnumber = versionnumber;
             MsdynName = msdynName;
             this._msdynSubjectidValue = _msdynSubjectidValue;
-            MsdynKnowledgearticletemplateid = msdynKnowledgearticletemplateid;
+            this._modifiedbyValue = _modifiedbyValue;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            Versionnumber = versionnumber;
+            this._createdbyValue = _createdbyValue;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             MsdynLanguagelocaleid = msdynLanguagelocaleid;
@@ -97,8 +97,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_LanguageLocaleIdName")]
-        public string MsdynLanguageLocaleIdName { get; set; }
+        [JsonProperty(PropertyName = "msdyn_isinternal")]
+        public bool? MsdynIsinternal { get; set; }
 
         /// <summary>
         /// </summary>
@@ -127,8 +127,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        [JsonProperty(PropertyName = "msdyn_LanguageLocaleIdName")]
+        public string MsdynLanguageLocaleIdName { get; set; }
 
         /// <summary>
         /// </summary>
@@ -142,8 +142,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_isinternal")]
-        public bool? MsdynIsinternal { get; set; }
+        [JsonProperty(PropertyName = "msdyn_knowledgearticletemplateid")]
+        public string MsdynKnowledgearticletemplateid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -162,8 +162,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -177,8 +177,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "msdyn_knowledgearticletemplateid")]
-        public string MsdynKnowledgearticletemplateid { get; set; }
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -187,8 +187,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>

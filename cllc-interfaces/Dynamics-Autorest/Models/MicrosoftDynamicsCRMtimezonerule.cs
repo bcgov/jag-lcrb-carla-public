@@ -27,37 +27,37 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMtimezonerule
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMtimezonerule(int? daylighthour = default(int?), int? daylightminute = default(int?), int? standardsecond = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? daylightyear = default(int?), string timezoneruleid = default(string), int? bias = default(int?), string versionnumber = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? standarddayofweek = default(int?), int? standardday = default(int?), int? daylightdayofweek = default(int?), string _createdonbehalfbyValue = default(string), int? standardyear = default(int?), int? standardbias = default(int?), int? timezoneruleversionnumber = default(int?), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string _createdbyValue = default(string), string _timezonedefinitionidValue = default(string), int? daylightbias = default(int?), int? daylightmonth = default(int?), string _organizationidValue = default(string), System.DateTimeOffset? effectivedatetime = default(System.DateTimeOffset?), int? daylightsecond = default(int?), int? standardmonth = default(int?), int? standardhour = default(int?), int? daylightday = default(int?), int? standardminute = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtimezonedefinition timezonedefinitionid = default(MicrosoftDynamicsCRMtimezonedefinition), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMtimezonerule(int? daylighthour = default(int?), int? daylightminute = default(int?), int? standardsecond = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? standardmonth = default(int?), int? standardhour = default(int?), int? bias = default(int?), string _timezonedefinitionidValue = default(string), string versionnumber = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? standardday = default(int?), int? daylightbias = default(int?), int? standardminute = default(int?), string _createdonbehalfbyValue = default(string), string timezoneruleid = default(string), int? daylightyear = default(int?), int? standardbias = default(int?), int? timezoneruleversionnumber = default(int?), int? standardyear = default(int?), string _modifiedonbehalfbyValue = default(string), string _createdbyValue = default(string), int? standarddayofweek = default(int?), int? daylightsecond = default(int?), int? daylightmonth = default(int?), string _organizationidValue = default(string), int? daylightdayofweek = default(int?), string _modifiedbyValue = default(string), int? daylightday = default(int?), System.DateTimeOffset? effectivedatetime = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtimezonedefinition timezonedefinitionid = default(MicrosoftDynamicsCRMtimezonedefinition), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Daylighthour = daylighthour;
             Daylightminute = daylightminute;
             Standardsecond = standardsecond;
             Createdon = createdon;
-            Daylightyear = daylightyear;
-            Timezoneruleid = timezoneruleid;
-            Bias = bias;
-            Versionnumber = versionnumber;
-            Modifiedon = modifiedon;
-            Standarddayofweek = standarddayofweek;
-            Standardday = standardday;
-            Daylightdayofweek = daylightdayofweek;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            Standardyear = standardyear;
-            Standardbias = standardbias;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
-            this._modifiedbyValue = _modifiedbyValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._createdbyValue = _createdbyValue;
-            this._timezonedefinitionidValue = _timezonedefinitionidValue;
-            Daylightbias = daylightbias;
-            Daylightmonth = daylightmonth;
-            this._organizationidValue = _organizationidValue;
-            Effectivedatetime = effectivedatetime;
-            Daylightsecond = daylightsecond;
             Standardmonth = standardmonth;
             Standardhour = standardhour;
-            Daylightday = daylightday;
+            Bias = bias;
+            this._timezonedefinitionidValue = _timezonedefinitionidValue;
+            Versionnumber = versionnumber;
+            Modifiedon = modifiedon;
+            Standardday = standardday;
+            Daylightbias = daylightbias;
             Standardminute = standardminute;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Timezoneruleid = timezoneruleid;
+            Daylightyear = daylightyear;
+            Standardbias = standardbias;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            Standardyear = standardyear;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            this._createdbyValue = _createdbyValue;
+            Standarddayofweek = standarddayofweek;
+            Daylightsecond = daylightsecond;
+            Daylightmonth = daylightmonth;
+            this._organizationidValue = _organizationidValue;
+            Daylightdayofweek = daylightdayofweek;
+            this._modifiedbyValue = _modifiedbyValue;
+            Daylightday = daylightday;
+            Effectivedatetime = effectivedatetime;
             Createdby = createdby;
             Createdonbehalfby = createdonbehalfby;
             Timezonedefinitionid = timezonedefinitionid;
@@ -93,18 +93,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "daylightyear")]
-        public int? Daylightyear { get; set; }
+        [JsonProperty(PropertyName = "standardmonth")]
+        public int? Standardmonth { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleid")]
-        public string Timezoneruleid { get; set; }
+        [JsonProperty(PropertyName = "standardhour")]
+        public int? Standardhour { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "bias")]
         public int? Bias { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_timezonedefinitionid_value")]
+        public string _timezonedefinitionidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -118,18 +123,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "standarddayofweek")]
-        public int? Standarddayofweek { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "standardday")]
         public int? Standardday { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "daylightdayofweek")]
-        public int? Daylightdayofweek { get; set; }
+        [JsonProperty(PropertyName = "daylightbias")]
+        public int? Daylightbias { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "standardminute")]
+        public int? Standardminute { get; set; }
 
         /// <summary>
         /// </summary>
@@ -138,8 +143,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "standardyear")]
-        public int? Standardyear { get; set; }
+        [JsonProperty(PropertyName = "timezoneruleid")]
+        public string Timezoneruleid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "daylightyear")]
+        public int? Daylightyear { get; set; }
 
         /// <summary>
         /// </summary>
@@ -153,8 +163,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        [JsonProperty(PropertyName = "standardyear")]
+        public int? Standardyear { get; set; }
 
         /// <summary>
         /// </summary>
@@ -168,13 +178,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_timezonedefinitionid_value")]
-        public string _timezonedefinitionidValue { get; set; }
+        [JsonProperty(PropertyName = "standarddayofweek")]
+        public int? Standarddayofweek { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "daylightbias")]
-        public int? Daylightbias { get; set; }
+        [JsonProperty(PropertyName = "daylightsecond")]
+        public int? Daylightsecond { get; set; }
 
         /// <summary>
         /// </summary>
@@ -188,23 +198,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "effectivedatetime")]
-        public System.DateTimeOffset? Effectivedatetime { get; set; }
+        [JsonProperty(PropertyName = "daylightdayofweek")]
+        public int? Daylightdayofweek { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "daylightsecond")]
-        public int? Daylightsecond { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "standardmonth")]
-        public int? Standardmonth { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "standardhour")]
-        public int? Standardhour { get; set; }
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -213,8 +213,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "standardminute")]
-        public int? Standardminute { get; set; }
+        [JsonProperty(PropertyName = "effectivedatetime")]
+        public System.DateTimeOffset? Effectivedatetime { get; set; }
 
         /// <summary>
         /// </summary>

@@ -29,23 +29,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioSepinvoicehistory class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioSepinvoicehistory(string versionnumber = default(string), string _adoxioSpecialeventValue = default(string), string _createdonbehalfbyValue = default(string), string _owningbusinessunitValue = default(string), int? timezoneruleversionnumber = default(int?), string _owneridValue = default(string), string _modifiedbyValue = default(string), string _adoxioInvoiceValue = default(string), int? statecode = default(int?), string adoxioSepinvoicehistoryid = default(string), string adoxioName = default(string), string _createdbyValue = default(string), int? statuscode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), int? utcconversiontimezonecode = default(int?), string _modifiedonbehalfbyValue = default(string), string _owninguserValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _owningteamValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioSepinvoicehistorySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioSepinvoicehistoryAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioSepinvoicehistoryMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioSepinvoicehistoryProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioSepinvoicehistoryBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioSepinvoicehistoryPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMinvoice adoxioInvoice = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMadoxioSpecialevent adoxioSpecialEvent = default(MicrosoftDynamicsCRMadoxioSpecialevent))
+        public MicrosoftDynamicsCRMadoxioSepinvoicehistory(string versionnumber = default(string), string _createdonbehalfbyValue = default(string), string _owningbusinessunitValue = default(string), int? timezoneruleversionnumber = default(int?), string _owneridValue = default(string), string _modifiedbyValue = default(string), string adoxioName = default(string), string _adoxioInvoiceValue = default(string), int? statecode = default(int?), string _createdbyValue = default(string), string _adoxioSpecialeventValue = default(string), int? statuscode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), string adoxioSepinvoicehistoryid = default(string), int? utcconversiontimezonecode = default(int?), string _modifiedonbehalfbyValue = default(string), string _owninguserValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _owningteamValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioSepinvoicehistorySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioSepinvoicehistoryAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioSepinvoicehistoryMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioSepinvoicehistoryProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioSepinvoicehistoryBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioSepinvoicehistoryPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), MicrosoftDynamicsCRMinvoice adoxioInvoice = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMadoxioSpecialevent adoxioSpecialEvent = default(MicrosoftDynamicsCRMadoxioSpecialevent))
         {
             Versionnumber = versionnumber;
-            this._adoxioSpecialeventValue = _adoxioSpecialeventValue;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             this._owningbusinessunitValue = _owningbusinessunitValue;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             this._owneridValue = _owneridValue;
             this._modifiedbyValue = _modifiedbyValue;
+            AdoxioName = adoxioName;
             this._adoxioInvoiceValue = _adoxioInvoiceValue;
             Statecode = statecode;
-            AdoxioSepinvoicehistoryid = adoxioSepinvoicehistoryid;
-            AdoxioName = adoxioName;
             this._createdbyValue = _createdbyValue;
+            this._adoxioSpecialeventValue = _adoxioSpecialeventValue;
             Statuscode = statuscode;
             Modifiedon = modifiedon;
             Importsequencenumber = importsequencenumber;
+            AdoxioSepinvoicehistoryid = adoxioSepinvoicehistoryid;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             this._owninguserValue = _owninguserValue;
@@ -83,11 +83,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_specialevent_value")]
-        public string _adoxioSpecialeventValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
 
@@ -113,6 +108,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_name")]
+        public string AdoxioName { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_adoxio_invoice_value")]
         public string _adoxioInvoiceValue { get; set; }
 
@@ -123,18 +123,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_sepinvoicehistoryid")]
-        public string AdoxioSepinvoicehistoryid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_name")]
-        public string AdoxioName { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_specialevent_value")]
+        public string _adoxioSpecialeventValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -150,6 +145,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_sepinvoicehistoryid")]
+        public string AdoxioSepinvoicehistoryid { get; set; }
 
         /// <summary>
         /// </summary>

@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMptmAutomergeworkingitems class.
         /// </summary>
-        public MicrosoftDynamicsCRMptmAutomergeworkingitems(string _owningbusinessunitValue = default(string), string ptmReturnvalue2 = default(string), string _createdbyValue = default(string), string _owneridValue = default(string), bool? ptmConverttopdf = default(bool?), string ptmSignname = default(string), string _createdonbehalfbyValue = default(string), string _ptmAppointmenttoattacheidValue = default(string), string ptmReturnvalue = default(string), int? ptmPrintcopies = default(int?), int? statuscode = default(int?), int? ptmBatchsize = default(int?), int? ptmSignprovider = default(int?), string _ptmDocumentguidLetteridValue = default(string), string _modifiedonbehalfbyValue = default(string), bool? ptmDeletetempforcreatedocumentstep = default(bool?), string _ptmCrmdocumentlocationValue = default(string), bool? ptmSavepdftosharepoint = default(bool?), bool? ptmSavetotemprecord = default(bool?), string _ptmDocumentguidEmailidValue = default(string), string ptmPrimaryrecordurl = default(string), string ptmSharepointurl = default(string), int? ptmBatchdelay = default(int?), int? ptmOutputfileformatChain = default(int?), string ptmSignemail = default(string), string ptmMultidocumentxml = default(string), int? ptmAutomergeaction = default(int?), string _ptmDocument2guidChainValue = default(string), string ptmSortbyfield = default(string), bool? ptmUpdatefieldsChain = default(bool?), string versionnumber = default(string), int? ptmSaveas = default(int?), string _ptmTemplatetoexecuteValue = default(string), string _ptmDocumentguidDeleteidValue = default(string), int? utcconversiontimezonecode = default(int?), string _ptmOcaValue = default(string), string _ptmEmailtosendidValue = default(string), string _ptmLettertoattachidValue = default(string), string ptmCreatesharepointfolder = default(string), string ptmName = default(string), int? importsequencenumber = default(int?), string ptmPrinttoPrinter = default(string), string _ptmDocumentguidAppointmentidValue = default(string), string ptmExecutinguser = default(string), string ptmJsondata = default(string), string _owningteamValue = default(string), string _ptmDocumentguidSignidValue = default(string), string ptmPrintsettingsPrinter = default(string), string _ptmTemplatefromusertempsettingValue = default(string), int? ptmCategory = default(int?), int? statecode = default(int?), bool? ptmDeletesharepointfile = default(bool?), int? ptmDirection = default(int?), int? ptmSortdirection = default(int?), string ptmPrintto = default(string), string _ptmPrinteridValue = default(string), string ptmAutomergeworkingitemsid = default(string), string _ptmEmailtoattacheidValue = default(string), string _ptmDocument1guidChainValue = default(string), string _owninguserValue = default(string), int? timezoneruleversionnumber = default(int?), string _modifiedbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _ptmImpersonatinguserValue = default(string), string _ptmCreateddocumentidValue = default(string), string ptmSharepointsubfolders = default(string), string ptmEntitytoattachid = default(string), bool? ptmSaveonlyintotemp = default(bool?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string ptmCombinetypeChain = default(string), string _ptmDocumentguidEntityidValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMactivitypointer> ptmAutomergeworkingitemsActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> ptmAutomergeworkingitemsAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMsyncerror> ptmAutomergeworkingitemsSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> ptmAutomergeworkingitemsDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> ptmAutomergeworkingitemsDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> ptmAutomergeworkingitemsAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> ptmAutomergeworkingitemsMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> ptmAutomergeworkingitemsProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> ptmAutomergeworkingitemsBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> ptmAutomergeworkingitemsPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMappointment> ptmAutomergeworkingitemsAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMemail> ptmAutomergeworkingitemsEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> ptmAutomergeworkingitemsFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMletter> ptmAutomergeworkingitemsLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMphonecall> ptmAutomergeworkingitemsPhoneCalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMtask> ptmAutomergeworkingitemsTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> ptmAutomergeworkingitemsRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMsocialactivity> ptmAutomergeworkingitemsSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMconnection> ptmAutomergeworkingitemsConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnection> ptmAutomergeworkingitemsConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMannotation> ptmAutomergeworkingitemsAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMserviceappointment> ptmAutomergeworkingitemsServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), MicrosoftDynamicsCRMemail ptmEmailToSendId = default(MicrosoftDynamicsCRMemail), MicrosoftDynamicsCRMemail ptmEmailToAttacheId = default(MicrosoftDynamicsCRMemail), MicrosoftDynamicsCRMappointment ptmAppointmenttoattacheid = default(MicrosoftDynamicsCRMappointment), MicrosoftDynamicsCRMletter ptmLetterToAttachId = default(MicrosoftDynamicsCRMletter), MicrosoftDynamicsCRMptmMscrmaddonsDcptemplates ptmTemplateToExecute = default(MicrosoftDynamicsCRMptmMscrmaddonsDcptemplates), MicrosoftDynamicsCRMptmMscrmaddonsKey ptmPrinterId = default(MicrosoftDynamicsCRMptmMscrmaddonsKey), MicrosoftDynamicsCRMptmMscrmaddonstemp ptmCreatedDocumentId = default(MicrosoftDynamicsCRMptmMscrmaddonstemp), MicrosoftDynamicsCRMptmMscrmaddonstemp ptmDocumentGUIDDeleteId = default(MicrosoftDynamicsCRMptmMscrmaddonstemp), MicrosoftDynamicsCRMptmMscrmaddonstemp ptmDocumentGUIDLetterId = default(MicrosoftDynamicsCRMptmMscrmaddonstemp), MicrosoftDynamicsCRMptmMscrmaddonstemp ptmDocumentGUIDEmailId = default(MicrosoftDynamicsCRMptmMscrmaddonstemp), MicrosoftDynamicsCRMptmMscrmaddonstemp ptmDocumentguidAppointmentid = default(MicrosoftDynamicsCRMptmMscrmaddonstemp), MicrosoftDynamicsCRMptmMscrmaddonstemp ptmDocument1guidChain = default(MicrosoftDynamicsCRMptmMscrmaddonstemp), MicrosoftDynamicsCRMptmMscrmaddonstemp ptmDocument2guidChain = default(MicrosoftDynamicsCRMptmMscrmaddonstemp), MicrosoftDynamicsCRMptmMscrmaddonstemp ptmDocumentGUIDEntityId = default(MicrosoftDynamicsCRMptmMscrmaddonstemp), MicrosoftDynamicsCRMptmMscrmaddonstemp ptmDocumentguidSignid = default(MicrosoftDynamicsCRMptmMscrmaddonstemp), MicrosoftDynamicsCRMptmMscrmaddonstemp ptmTemplatefromusertempsetting = default(MicrosoftDynamicsCRMptmMscrmaddonstemp), MicrosoftDynamicsCRMsharepointdocumentlocation ptmCrmdocumentlocation = default(MicrosoftDynamicsCRMsharepointdocumentlocation), MicrosoftDynamicsCRMsystemuser ptmImpersonatinguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMptmMscrmaddonscomoneclickaction ptmOca = default(MicrosoftDynamicsCRMptmMscrmaddonscomoneclickaction))
+        public MicrosoftDynamicsCRMptmAutomergeworkingitems(string _owningbusinessunitValue = default(string), string ptmReturnvalue2 = default(string), string _createdbyValue = default(string), string _owneridValue = default(string), bool? ptmConverttopdf = default(bool?), string ptmSignname = default(string), string _createdonbehalfbyValue = default(string), int? ptmAutomergeaction = default(int?), string ptmReturnvalue = default(string), int? ptmPrintcopies = default(int?), int? statuscode = default(int?), int? ptmBatchsize = default(int?), int? ptmSignprovider = default(int?), string _ptmDocumentguidLetteridValue = default(string), string _modifiedonbehalfbyValue = default(string), bool? ptmDeletetempforcreatedocumentstep = default(bool?), bool? ptmSavepdftosharepoint = default(bool?), bool? ptmSavetotemprecord = default(bool?), string ptmSortbyfield = default(string), string _ptmCrmdocumentlocationValue = default(string), string ptmPrimaryrecordurl = default(string), string ptmSharepointurl = default(string), int? ptmBatchdelay = default(int?), int? ptmOutputfileformatChain = default(int?), string ptmSignemail = default(string), string ptmMultidocumentxml = default(string), string _ptmTemplatetoexecuteValue = default(string), string _ptmDocument2guidChainValue = default(string), bool? ptmUpdatefieldsChain = default(bool?), string versionnumber = default(string), int? ptmSaveas = default(int?), string _ptmDocumentguidEmailidValue = default(string), string _ptmDocumentguidDeleteidValue = default(string), int? utcconversiontimezonecode = default(int?), string _ptmOcaValue = default(string), string _ptmAppointmenttoattacheidValue = default(string), string _ptmEmailtosendidValue = default(string), string _ptmLettertoattachidValue = default(string), string ptmCreatesharepointfolder = default(string), string ptmName = default(string), int? importsequencenumber = default(int?), string ptmPrinttoPrinter = default(string), string _ptmDocumentguidAppointmentidValue = default(string), string ptmExecutinguser = default(string), string ptmJsondata = default(string), string _owningteamValue = default(string), string _ptmDocumentguidSignidValue = default(string), string ptmPrintsettingsPrinter = default(string), string _ptmTemplatefromusertempsettingValue = default(string), int? ptmCategory = default(int?), int? statecode = default(int?), bool? ptmDeletesharepointfile = default(bool?), int? ptmDirection = default(int?), int? ptmSortdirection = default(int?), string ptmPrintto = default(string), string _ptmPrinteridValue = default(string), string ptmAutomergeworkingitemsid = default(string), string _ptmEmailtoattacheidValue = default(string), string _ptmDocument1guidChainValue = default(string), string _owninguserValue = default(string), int? timezoneruleversionnumber = default(int?), string _modifiedbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _ptmImpersonatinguserValue = default(string), string _ptmCreateddocumentidValue = default(string), string ptmSharepointsubfolders = default(string), string ptmEntitytoattachid = default(string), bool? ptmSaveonlyintotemp = default(bool?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string ptmCombinetypeChain = default(string), string _ptmDocumentguidEntityidValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMactivitypointer> ptmAutomergeworkingitemsActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> ptmAutomergeworkingitemsAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMsyncerror> ptmAutomergeworkingitemsSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> ptmAutomergeworkingitemsDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> ptmAutomergeworkingitemsDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> ptmAutomergeworkingitemsAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> ptmAutomergeworkingitemsMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> ptmAutomergeworkingitemsProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> ptmAutomergeworkingitemsBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> ptmAutomergeworkingitemsPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMappointment> ptmAutomergeworkingitemsAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMemail> ptmAutomergeworkingitemsEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> ptmAutomergeworkingitemsFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMletter> ptmAutomergeworkingitemsLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMphonecall> ptmAutomergeworkingitemsPhoneCalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMtask> ptmAutomergeworkingitemsTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> ptmAutomergeworkingitemsRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMsocialactivity> ptmAutomergeworkingitemsSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMconnection> ptmAutomergeworkingitemsConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnection> ptmAutomergeworkingitemsConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMannotation> ptmAutomergeworkingitemsAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMserviceappointment> ptmAutomergeworkingitemsServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), MicrosoftDynamicsCRMemail ptmEmailToSendId = default(MicrosoftDynamicsCRMemail), MicrosoftDynamicsCRMemail ptmEmailToAttacheId = default(MicrosoftDynamicsCRMemail), MicrosoftDynamicsCRMappointment ptmAppointmenttoattacheid = default(MicrosoftDynamicsCRMappointment), MicrosoftDynamicsCRMletter ptmLetterToAttachId = default(MicrosoftDynamicsCRMletter), MicrosoftDynamicsCRMptmMscrmaddonsDcptemplates ptmTemplateToExecute = default(MicrosoftDynamicsCRMptmMscrmaddonsDcptemplates), MicrosoftDynamicsCRMptmMscrmaddonsKey ptmPrinterId = default(MicrosoftDynamicsCRMptmMscrmaddonsKey), MicrosoftDynamicsCRMptmMscrmaddonstemp ptmCreatedDocumentId = default(MicrosoftDynamicsCRMptmMscrmaddonstemp), MicrosoftDynamicsCRMptmMscrmaddonstemp ptmDocumentGUIDDeleteId = default(MicrosoftDynamicsCRMptmMscrmaddonstemp), MicrosoftDynamicsCRMptmMscrmaddonstemp ptmDocumentGUIDLetterId = default(MicrosoftDynamicsCRMptmMscrmaddonstemp), MicrosoftDynamicsCRMptmMscrmaddonstemp ptmDocumentGUIDEmailId = default(MicrosoftDynamicsCRMptmMscrmaddonstemp), MicrosoftDynamicsCRMptmMscrmaddonstemp ptmDocumentguidAppointmentid = default(MicrosoftDynamicsCRMptmMscrmaddonstemp), MicrosoftDynamicsCRMptmMscrmaddonstemp ptmDocument1guidChain = default(MicrosoftDynamicsCRMptmMscrmaddonstemp), MicrosoftDynamicsCRMptmMscrmaddonstemp ptmDocument2guidChain = default(MicrosoftDynamicsCRMptmMscrmaddonstemp), MicrosoftDynamicsCRMptmMscrmaddonstemp ptmDocumentGUIDEntityId = default(MicrosoftDynamicsCRMptmMscrmaddonstemp), MicrosoftDynamicsCRMptmMscrmaddonstemp ptmDocumentguidSignid = default(MicrosoftDynamicsCRMptmMscrmaddonstemp), MicrosoftDynamicsCRMptmMscrmaddonstemp ptmTemplatefromusertempsetting = default(MicrosoftDynamicsCRMptmMscrmaddonstemp), MicrosoftDynamicsCRMsharepointdocumentlocation ptmCrmdocumentlocation = default(MicrosoftDynamicsCRMsharepointdocumentlocation), MicrosoftDynamicsCRMsystemuser ptmImpersonatinguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMptmMscrmaddonscomoneclickaction ptmOca = default(MicrosoftDynamicsCRMptmMscrmaddonscomoneclickaction))
         {
             this._owningbusinessunitValue = _owningbusinessunitValue;
             PtmReturnvalue2 = ptmReturnvalue2;
@@ -38,7 +38,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             PtmConverttopdf = ptmConverttopdf;
             PtmSignname = ptmSignname;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._ptmAppointmenttoattacheidValue = _ptmAppointmenttoattacheidValue;
+            PtmAutomergeaction = ptmAutomergeaction;
             PtmReturnvalue = ptmReturnvalue;
             PtmPrintcopies = ptmPrintcopies;
             Statuscode = statuscode;
@@ -47,26 +47,26 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             this._ptmDocumentguidLetteridValue = _ptmDocumentguidLetteridValue;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             PtmDeletetempforcreatedocumentstep = ptmDeletetempforcreatedocumentstep;
-            this._ptmCrmdocumentlocationValue = _ptmCrmdocumentlocationValue;
             PtmSavepdftosharepoint = ptmSavepdftosharepoint;
             PtmSavetotemprecord = ptmSavetotemprecord;
-            this._ptmDocumentguidEmailidValue = _ptmDocumentguidEmailidValue;
+            PtmSortbyfield = ptmSortbyfield;
+            this._ptmCrmdocumentlocationValue = _ptmCrmdocumentlocationValue;
             PtmPrimaryrecordurl = ptmPrimaryrecordurl;
             PtmSharepointurl = ptmSharepointurl;
             PtmBatchdelay = ptmBatchdelay;
             PtmOutputfileformatChain = ptmOutputfileformatChain;
             PtmSignemail = ptmSignemail;
             PtmMultidocumentxml = ptmMultidocumentxml;
-            PtmAutomergeaction = ptmAutomergeaction;
+            this._ptmTemplatetoexecuteValue = _ptmTemplatetoexecuteValue;
             this._ptmDocument2guidChainValue = _ptmDocument2guidChainValue;
-            PtmSortbyfield = ptmSortbyfield;
             PtmUpdatefieldsChain = ptmUpdatefieldsChain;
             Versionnumber = versionnumber;
             PtmSaveas = ptmSaveas;
-            this._ptmTemplatetoexecuteValue = _ptmTemplatetoexecuteValue;
+            this._ptmDocumentguidEmailidValue = _ptmDocumentguidEmailidValue;
             this._ptmDocumentguidDeleteidValue = _ptmDocumentguidDeleteidValue;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             this._ptmOcaValue = _ptmOcaValue;
+            this._ptmAppointmenttoattacheidValue = _ptmAppointmenttoattacheidValue;
             this._ptmEmailtosendidValue = _ptmEmailtosendidValue;
             this._ptmLettertoattachidValue = _ptmLettertoattachidValue;
             PtmCreatesharepointfolder = ptmCreatesharepointfolder;
@@ -197,8 +197,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_ptm_appointmenttoattacheid_value")]
-        public string _ptmAppointmenttoattacheidValue { get; set; }
+        [JsonProperty(PropertyName = "ptm_automergeaction")]
+        public int? PtmAutomergeaction { get; set; }
 
         /// <summary>
         /// </summary>
@@ -242,11 +242,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_ptm_crmdocumentlocation_value")]
-        public string _ptmCrmdocumentlocationValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "ptm_savepdftosharepoint")]
         public bool? PtmSavepdftosharepoint { get; set; }
 
@@ -257,8 +252,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_ptm_documentguid_emailid_value")]
-        public string _ptmDocumentguidEmailidValue { get; set; }
+        [JsonProperty(PropertyName = "ptm_sortbyfield")]
+        public string PtmSortbyfield { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_ptm_crmdocumentlocation_value")]
+        public string _ptmCrmdocumentlocationValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -292,18 +292,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ptm_automergeaction")]
-        public int? PtmAutomergeaction { get; set; }
+        [JsonProperty(PropertyName = "_ptm_templatetoexecute_value")]
+        public string _ptmTemplatetoexecuteValue { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_ptm_document2guid_chain_value")]
         public string _ptmDocument2guidChainValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ptm_sortbyfield")]
-        public string PtmSortbyfield { get; set; }
 
         /// <summary>
         /// </summary>
@@ -322,8 +317,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_ptm_templatetoexecute_value")]
-        public string _ptmTemplatetoexecuteValue { get; set; }
+        [JsonProperty(PropertyName = "_ptm_documentguid_emailid_value")]
+        public string _ptmDocumentguidEmailidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -339,6 +334,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_ptm_oca_value")]
         public string _ptmOcaValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_ptm_appointmenttoattacheid_value")]
+        public string _ptmAppointmenttoattacheidValue { get; set; }
 
         /// <summary>
         /// </summary>

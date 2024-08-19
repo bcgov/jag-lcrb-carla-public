@@ -31,43 +31,43 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMpluginassembly class.
         /// </summary>
-        public MicrosoftDynamicsCRMpluginassembly(string url = default(string), string culture = default(string), string path = default(string), string version = default(string), string description = default(string), bool? ispasswordset = default(bool?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string sourcehash = default(string), string username = default(string), bool? ismanaged = default(bool?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), int? componentstate = default(int?), int? customizationlevel = default(int?), string publickeytoken = default(string), string content = default(string), byte[] contentBinary = default(byte[]), string pluginassemblyid = default(string), string name = default(string), int? minor = default(int?), string pluginassemblyidunique = default(string), string introducedversion = default(string), string _organizationidValue = default(string), int? isolationmode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string iscustomizable = default(string), string _createdbyValue = default(string), int? major = default(int?), string _createdonbehalfbyValue = default(string), string solutionid = default(string), string _modifiedonbehalfbyValue = default(string), int? authtype = default(int?), int? sourcetype = default(int?), string ishidden = default(string), string password = default(string), string versionnumber = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMplugintype> pluginassemblyPlugintype = default(IList<MicrosoftDynamicsCRMplugintype>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMpluginassembly(string culture = default(string), string _modifiedbyValue = default(string), string version = default(string), string description = default(string), string sourcehash = default(string), string username = default(string), bool? ismanaged = default(bool?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string introducedversion = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? customizationlevel = default(int?), string publickeytoken = default(string), string content = default(string), byte[] contentBinary = default(byte[]), string path = default(string), string name = default(string), string _createdonbehalfbyValue = default(string), bool? ispasswordset = default(bool?), string password = default(string), string _organizationidValue = default(string), int? isolationmode = default(int?), string url = default(string), string iscustomizable = default(string), string _createdbyValue = default(string), int? major = default(int?), int? minor = default(int?), int? componentstate = default(int?), string _modifiedonbehalfbyValue = default(string), string solutionid = default(string), int? authtype = default(int?), int? sourcetype = default(int?), string pluginassemblyid = default(string), string ishidden = default(string), string pluginassemblyidunique = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string versionnumber = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMplugintype> pluginassemblyPlugintype = default(IList<MicrosoftDynamicsCRMplugintype>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
         {
-            Url = url;
             Culture = culture;
-            Path = path;
+            this._modifiedbyValue = _modifiedbyValue;
             Version = version;
             Description = description;
-            Ispasswordset = ispasswordset;
-            Overwritetime = overwritetime;
             Sourcehash = sourcehash;
             Username = username;
             Ismanaged = ismanaged;
             Modifiedon = modifiedon;
-            this._modifiedbyValue = _modifiedbyValue;
-            Componentstate = componentstate;
+            Introducedversion = introducedversion;
+            Createdon = createdon;
             Customizationlevel = customizationlevel;
             Publickeytoken = publickeytoken;
             Content = content;
             ContentBinary = contentBinary;
-            Pluginassemblyid = pluginassemblyid;
+            Path = path;
             Name = name;
-            Minor = minor;
-            Pluginassemblyidunique = pluginassemblyidunique;
-            Introducedversion = introducedversion;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Ispasswordset = ispasswordset;
+            Password = password;
             this._organizationidValue = _organizationidValue;
             Isolationmode = isolationmode;
-            Createdon = createdon;
+            Url = url;
             Iscustomizable = iscustomizable;
             this._createdbyValue = _createdbyValue;
             Major = major;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            Solutionid = solutionid;
+            Minor = minor;
+            Componentstate = componentstate;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Solutionid = solutionid;
             Authtype = authtype;
             Sourcetype = sourcetype;
+            Pluginassemblyid = pluginassemblyid;
             Ishidden = ishidden;
-            Password = password;
+            Pluginassemblyidunique = pluginassemblyidunique;
+            Overwritetime = overwritetime;
             Versionnumber = versionnumber;
             Createdby = createdby;
             PluginassemblyPlugintype = pluginassemblyPlugintype;
@@ -85,18 +85,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "url")]
-        public string Url { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "culture")]
         public string Culture { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "path")]
-        public string Path { get; set; }
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -107,16 +102,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ispasswordset")]
-        public bool? Ispasswordset { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "overwritetime")]
-        public System.DateTimeOffset? Overwritetime { get; set; }
 
         /// <summary>
         /// </summary>
@@ -140,13 +125,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        [JsonProperty(PropertyName = "introducedversion")]
+        public string Introducedversion { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "componentstate")]
-        public int? Componentstate { get; set; }
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -171,8 +156,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "pluginassemblyid")]
-        public string Pluginassemblyid { get; set; }
+        [JsonProperty(PropertyName = "path")]
+        public string Path { get; set; }
 
         /// <summary>
         /// </summary>
@@ -181,18 +166,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "minor")]
-        public int? Minor { get; set; }
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "pluginassemblyidunique")]
-        public string Pluginassemblyidunique { get; set; }
+        [JsonProperty(PropertyName = "ispasswordset")]
+        public bool? Ispasswordset { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "introducedversion")]
-        public string Introducedversion { get; set; }
+        [JsonProperty(PropertyName = "password")]
+        public string Password { get; set; }
 
         /// <summary>
         /// </summary>
@@ -206,8 +191,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
+        [JsonProperty(PropertyName = "url")]
+        public string Url { get; set; }
 
         /// <summary>
         /// </summary>
@@ -226,18 +211,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "minor")]
+        public int? Minor { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "solutionid")]
-        public string Solutionid { get; set; }
+        [JsonProperty(PropertyName = "componentstate")]
+        public int? Componentstate { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "solutionid")]
+        public string Solutionid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -251,13 +241,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "pluginassemblyid")]
+        public string Pluginassemblyid { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "ishidden")]
         public string Ishidden { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "password")]
-        public string Password { get; set; }
+        [JsonProperty(PropertyName = "pluginassemblyidunique")]
+        public string Pluginassemblyidunique { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overwritetime")]
+        public System.DateTimeOffset? Overwritetime { get; set; }
 
         /// <summary>
         /// </summary>

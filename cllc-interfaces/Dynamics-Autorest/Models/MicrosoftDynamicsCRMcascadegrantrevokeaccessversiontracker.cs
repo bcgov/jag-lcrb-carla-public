@@ -29,25 +29,25 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMcascadegrantrevokeaccessversiontracker class.
         /// </summary>
-        public MicrosoftDynamicsCRMcascadegrantrevokeaccessversiontracker(int? statecode = default(int?), string _modifiedonbehalfbyValue = default(string), string _createdonbehalfbyValue = default(string), int? importsequencenumber = default(int?), string cascadegrantrevokeaccessversiontrackerid = default(string), int? parentobjecttypecode = default(int?), string _createdbyValue = default(string), string messagename = default(string), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string parententityid = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), string _modifiedbyValue = default(string), string name = default(string), int? statuscode = default(int?), IList<MicrosoftDynamicsCRMsyncerror> cascadegrantrevokeaccessversiontrackerSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> cascadegrantrevokeaccessversiontrackerDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> cascadegrantrevokeaccessversiontrackerDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> cascadegrantrevokeaccessversiontrackerAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> cascadegrantrevokeaccessversiontrackerMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> cascadegrantrevokeaccessversiontrackerProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> cascadegrantrevokeaccessversiontrackerBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> cascadegrantrevokeaccessversiontrackerPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMcascadegrantrevokeaccessrecordstracker> syncTrackerIdLookup = default(IList<MicrosoftDynamicsCRMcascadegrantrevokeaccessrecordstracker>))
+        public MicrosoftDynamicsCRMcascadegrantrevokeaccessversiontracker(int? statecode = default(int?), string _modifiedonbehalfbyValue = default(string), int? importsequencenumber = default(int?), string parententityid = default(string), string cascadegrantrevokeaccessversiontrackerid = default(string), int? parentobjecttypecode = default(int?), string _createdbyValue = default(string), string messagename = default(string), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), string _modifiedbyValue = default(string), string name = default(string), int? statuscode = default(int?), string _createdonbehalfbyValue = default(string), IList<MicrosoftDynamicsCRMsyncerror> cascadegrantrevokeaccessversiontrackerSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> cascadegrantrevokeaccessversiontrackerDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> cascadegrantrevokeaccessversiontrackerDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> cascadegrantrevokeaccessversiontrackerAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> cascadegrantrevokeaccessversiontrackerMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> cascadegrantrevokeaccessversiontrackerProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> cascadegrantrevokeaccessversiontrackerBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> cascadegrantrevokeaccessversiontrackerPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMcascadegrantrevokeaccessrecordstracker> syncTrackerIdLookup = default(IList<MicrosoftDynamicsCRMcascadegrantrevokeaccessrecordstracker>))
         {
             Statecode = statecode;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Importsequencenumber = importsequencenumber;
+            Parententityid = parententityid;
             Cascadegrantrevokeaccessversiontrackerid = cascadegrantrevokeaccessversiontrackerid;
             Parentobjecttypecode = parentobjecttypecode;
             this._createdbyValue = _createdbyValue;
             Messagename = messagename;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             Modifiedon = modifiedon;
-            Parententityid = parententityid;
             Overriddencreatedon = overriddencreatedon;
             Createdon = createdon;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             this._modifiedbyValue = _modifiedbyValue;
             Name = name;
             Statuscode = statuscode;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             CascadegrantrevokeaccessversiontrackerSyncErrors = cascadegrantrevokeaccessversiontrackerSyncErrors;
             CascadegrantrevokeaccessversiontrackerDuplicateMatchingRecord = cascadegrantrevokeaccessversiontrackerDuplicateMatchingRecord;
             CascadegrantrevokeaccessversiontrackerDuplicateBaseRecord = cascadegrantrevokeaccessversiontrackerDuplicateBaseRecord;
@@ -77,13 +77,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
+        [JsonProperty(PropertyName = "parententityid")]
+        public string Parententityid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -117,11 +117,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "parententityid")]
-        public string Parententityid { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
@@ -149,6 +144,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>

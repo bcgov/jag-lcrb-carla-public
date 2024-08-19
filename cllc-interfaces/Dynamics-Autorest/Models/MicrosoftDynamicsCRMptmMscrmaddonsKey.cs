@@ -29,26 +29,26 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMptmMscrmaddonsKey class.
         /// </summary>
-        public MicrosoftDynamicsCRMptmMscrmaddonsKey(string ptmKeyvalue = default(string), string ptmName = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), int? importsequencenumber = default(int?), bool? ptmIscached = default(bool?), string _createdbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), int? statecode = default(int?), string _organizationidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), string versionnumber = default(string), int? statuscode = default(int?), string _modifiedonbehalfbyValue = default(string), string _createdonbehalfbyValue = default(string), string ptmMscrmaddonsKeyid = default(string), string _ptmMscrmaddonsSettingsidValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> ptmMscrmaddonsKeySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> ptmMscrmaddonsKeyAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> ptmMscrmaddonsKeyMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> ptmMscrmaddonsKeyProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> ptmMscrmaddonsKeyBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> ptmMscrmaddonsKeyPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMannotation> ptmMscrmaddonsKeyAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMptmMscrmaddonsSettings ptmMscrmaddonsSettingsid = default(MicrosoftDynamicsCRMptmMscrmaddonsSettings), IList<MicrosoftDynamicsCRMptmAutomergeworkingitems> ptmPtmMscrmaddonsKeyPtmAmwiPrinter = default(IList<MicrosoftDynamicsCRMptmAutomergeworkingitems>))
+        public MicrosoftDynamicsCRMptmMscrmaddonsKey(string ptmKeyvalue = default(string), string versionnumber = default(string), int? utcconversiontimezonecode = default(int?), string _modifiedbyValue = default(string), string _organizationidValue = default(string), string _modifiedonbehalfbyValue = default(string), string ptmMscrmaddonsKeyid = default(string), bool? ptmIscached = default(bool?), string ptmName = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _createdbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? statecode = default(int?), int? importsequencenumber = default(int?), int? statuscode = default(int?), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), string _ptmMscrmaddonsSettingsidValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> ptmMscrmaddonsKeySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> ptmMscrmaddonsKeyAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> ptmMscrmaddonsKeyMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> ptmMscrmaddonsKeyProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> ptmMscrmaddonsKeyBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> ptmMscrmaddonsKeyPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMannotation> ptmMscrmaddonsKeyAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMptmMscrmaddonsSettings ptmMscrmaddonsSettingsid = default(MicrosoftDynamicsCRMptmMscrmaddonsSettings), IList<MicrosoftDynamicsCRMptmAutomergeworkingitems> ptmPtmMscrmaddonsKeyPtmAmwiPrinter = default(IList<MicrosoftDynamicsCRMptmAutomergeworkingitems>))
         {
             PtmKeyvalue = ptmKeyvalue;
-            PtmName = ptmName;
-            Modifiedon = modifiedon;
-            this._modifiedbyValue = _modifiedbyValue;
-            Importsequencenumber = importsequencenumber;
-            PtmIscached = ptmIscached;
-            this._createdbyValue = _createdbyValue;
-            Overriddencreatedon = overriddencreatedon;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
-            Statecode = statecode;
-            this._organizationidValue = _organizationidValue;
-            Createdon = createdon;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
             Versionnumber = versionnumber;
-            Statuscode = statuscode;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            this._modifiedbyValue = _modifiedbyValue;
+            this._organizationidValue = _organizationidValue;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
             PtmMscrmaddonsKeyid = ptmMscrmaddonsKeyid;
+            PtmIscached = ptmIscached;
+            PtmName = ptmName;
+            Overriddencreatedon = overriddencreatedon;
+            this._createdbyValue = _createdbyValue;
+            Createdon = createdon;
+            Statecode = statecode;
+            Importsequencenumber = importsequencenumber;
+            Statuscode = statuscode;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Modifiedon = modifiedon;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
             this._ptmMscrmaddonsSettingsidValue = _ptmMscrmaddonsSettingsidValue;
             Createdby = createdby;
             Createdonbehalfby = createdonbehalfby;
@@ -79,58 +79,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ptm_name")]
-        public string PtmName { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "ptm_iscached")]
-        public bool? PtmIscached { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -139,13 +89,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
+        [JsonProperty(PropertyName = "_organizationid_value")]
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -154,13 +104,63 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "ptm_mscrmaddons_keyid")]
+        public string PtmMscrmaddonsKeyid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ptm_iscached")]
+        public bool? PtmIscached { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ptm_name")]
+        public string PtmName { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ptm_mscrmaddons_keyid")]
-        public string PtmMscrmaddonsKeyid { get; set; }
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
         /// </summary>
