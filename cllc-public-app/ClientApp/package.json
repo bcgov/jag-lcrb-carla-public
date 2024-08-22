@@ -4,7 +4,6 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "preinstall": "npx npm-force-resolutions && npx browserslist --update-db",
     "start": "set NODE_ENV=development && ng serve --host 0.0.0.0",
     "build": "ng build --progress=false --verbose=false --statsJson=false --base-href /lcrb/",
     "builduat": "ng build --progress=false --verbose=false --statsJson=false --base-href /uat/lcrb/",
@@ -112,7 +111,8 @@
     "ts-node": "~7.0.0",
     "tslint": "~6.1.0",
     "webpack": "^5.70.0",
-    "xmlhttprequest": "^1.8.0"
+    "xmlhttprequest": "^1.8.0",
+    "moment-timezone": "^0.5.34"
   },
   "resolutions": {
     "node-fetch": "2.6.7",
