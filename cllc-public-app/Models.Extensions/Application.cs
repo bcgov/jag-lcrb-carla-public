@@ -287,8 +287,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioValidinterestestablishmentlocation = from.validInterestEstablishmentLocation? 1 : 0;
             to.AdoxioEstablishmentreopeningdate = from.EstablishmentReopeningDate;
             
-            // Temporary Relocations - removed 2024-08-14
-            //to.AdoxioCriteria = from.temporaryRelocationCriteria;
+            to.AdoxioChecklistdrivingrecordcomplete = from.temporaryRelocationCriteria;
         }
 
 
@@ -697,7 +696,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 EstablishmentReopeningDate = dynamicsApplication.AdoxioEstablishmentreopeningdate,
 
                 // Temporary Relocations - removed 2024-08-14
-                //temporaryRelocationCriteria = dynamicsApplication.AdoxioCriteria
+                temporaryRelocationCriteria = dynamicsApplication.AdoxioChecklistdrivingrecordcomplete,
             };
 
 
