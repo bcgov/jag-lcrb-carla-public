@@ -115,7 +115,6 @@ export class AccountProfileComponent extends FormBase implements OnInit {
   renewalType: string;
 
   @ViewChild('badgeTemplateDialog') badgeTemplateDialog: TemplateRef<any>;
-
   generatedOrvCode = generatedText.verificationBadge;
 
   get contacts(): FormArray {
