@@ -371,7 +371,6 @@ export class AccountProfileComponent extends FormBase implements OnInit {
 
   onCopy(): void {
     this.clipboard.copy(this.generatedOrvCode);
-    console.log('HTML copied to clipboard');
     this.snackBar.open('HTML copied to clipboard', null, {
       duration: 2000,
     });
