@@ -1,8 +1,4 @@
 <div class="user-menu" [class.open]="t.menuOpen">
-  <button mat-raised-button color="primary" (click)="openBadgeTemplateDialog()">
-    <span class="compact-button">Icon / Badge</span>
-    <span class="compact-button">Template</span>
-  </button>
   <button class="user-button" mat-button disableRipple="true" [matMenuTriggerFor]="userMenu" #t="matMenuTrigger">
     <fa-icon [icon]="userIcon" size="2x" transform="down-3"></fa-icon>
     <div class="user-name pl-3 pr-4">
@@ -27,13 +23,3 @@
   </a-->
   <a mat-menu-item href="logout">Sign out</a>
 </mat-menu>
-
-<!-- Modal HTML -->
-<ng-template #badgeTemplateDialog>
-  <h2 mat-dialog-title class="centered-title">Icon / Badge Template</h2>
-  <p>Paste this code into your website:</p>
-  <pre><code>{{nonsenseCode}}</code></pre>
-  <div mat-dialog-actions class="center-actions">
-    <button mat-raised-button color="primary" (click)="onCopy()">Copy</button>
-  </div>
-</ng-template>
