@@ -1,5 +1,5 @@
 import { filter, map, catchError, takeWhile } from "rxjs/operators";
-import { Component, OnInit, ViewChild, Input, EventEmitter, Output } from "@angular/core";
+import { Component, OnInit, ViewChild, Input, TemplateRef, EventEmitter, Output } from "@angular/core";
 import { User } from "@models/user.model";
 import { ContactDataService } from "@services/contact-data.service";
 import { Contact } from "@models/contact.model";
@@ -24,6 +24,10 @@ import { UserDataService } from "@services/user-data.service";
 import { endOfToday } from "date-fns";
 import { ApplicationDataService } from "@services/application-data.service";
 import { ApplicationTypeNames } from "../../models/application-type.model";
+import { MatDialog } from "@angular/material/dialog";
+import { Clipboard } from '@angular/cdk/clipboard';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { generatedText } from "environments/environment";
 
 // See the Moment.js docs for the meaning of these formats:
 // https://momentjs.com/docs/#/displaying/format/
@@ -110,6 +114,9 @@ export class AccountProfileComponent extends FormBase implements OnInit {
   validationMessages: string[];
   renewalType: string;
 
+  @ViewChild('badgeTemplateDialog') badgeTemplateDialog: TemplateRef<any>;
+  generatedOrvCode = generatedText.verificationBadge;
+
   get contacts(): FormArray {
     return this.form.get("otherContacts") as FormArray;
   }
@@ -124,7 +131,10 @@ export class AccountProfileComponent extends FormBase implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private tiedHouseService: TiedHouseConnectionsDataService
+    private tiedHouseService: TiedHouseConnectionsDataService,
+    private dialog: MatDialog, 
+    private clipboard: Clipboard,
+    private snackBar: MatSnackBar
   ) {
     super();
     this.route.paramMap.subscribe(params => {
@@ -345,6 +355,26 @@ export class AccountProfileComponent extends FormBase implements OnInit {
     } else {
       return this.save();
     }
+  }
+
+  openBadgeTemplateDialog() {
+    this.dialog.open(this.badgeTemplateDialog, {
+      disableClose: true,
+      autoFocus: true,
+      width: "auto",
+      height: "auto",
+      maxWidth: "500px",
+      maxHeight: "80vh",
+      panelClass: 'custom-dialog-container'
+    });
+  }
+
+  onCopy(): void {
+    this.clipboard.copy(this.generatedOrvCode);
+    this.snackBar.open('HTML copied to clipboard', null, {
+      duration: 2000,
+    });
+    this.dialog.closeAll();
   }
 
   save(): Observable<boolean> {
