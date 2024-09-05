@@ -51,7 +51,7 @@ const ValidationFieldNameMap = {
   'businessProfile.businessNumber': "Business Number",
   'businessProfile.businessType': "Business Type",
   'businessProfile.contactPhone': "Corporation Address Business Phone",
-  // 'businessProfile.accountUrls': "Account URL(s)", TODO: Re-implement this
+  'businessProfile.accountUrls': "Account URL(s)",
   // 'businessProfile.contactEmail': 'Corporation Address Business Email',
 
   'businessProfile.physicalAddressStreet': "Physical Address Street",
@@ -176,7 +176,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
         mailingAddressProvince: ["British Columbia", Validators.required],
         mailingAddressCountry: ["Canada", Validators.required],
         websiteUrl: [""],
-        // accountUrls: ["", Validators.pattern("^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\/[^\s,]*)?(,(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\/[^\s,]*)?)*$")], TODO: Re-implement this
+        accountUrls: ["", Validators.pattern("^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\/[^\s,]*)?(,(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\/[^\s,]*)?)*$")],
       }),
       contact: this.fb.group({
         id: [],
