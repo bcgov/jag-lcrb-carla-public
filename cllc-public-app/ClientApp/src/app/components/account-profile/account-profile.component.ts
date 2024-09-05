@@ -42,6 +42,7 @@ export const MY_FORMATS = {
   },
 };
 
+
 const ValidationFieldNameMap = {
   'businessProfile.id': "Account ID",
   'businessProfile._mailingSameAsPhysicalAddress': "Mailing Address Same as Physical Address",
@@ -112,10 +113,9 @@ export class AccountProfileComponent extends FormBase implements OnInit {
   tiedHouseFormData: Observable<TiedHouseConnection>;
   validationMessages: string[];
   renewalType: string;
+  generatedOrvCode: string = `<a href="#" onclick="window.open('https://orgbook-app-b7aa30-dev.apps.silver.devops.gov.bc.ca/verify/BC123456', '_blank', 'width=800,height=600'); return false;">Verify Retailer</a>`;
 
   @ViewChild('badgeTemplateDialog') badgeTemplateDialog: TemplateRef<any>;
-  generatedOrvCode = `<a href="#" onclick="window.open('https://orgbook-app-b7aa30-dev.apps.silver.devops.gov.bc.ca/verify/BC123456', '_blank', 'width=800,height=600'); return false;">Verify Retailer</a>`
-
   get contacts(): FormArray {
     return this.form.get("otherContacts") as FormArray;
   }
