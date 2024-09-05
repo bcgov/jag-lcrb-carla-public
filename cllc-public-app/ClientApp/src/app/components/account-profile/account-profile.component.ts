@@ -27,7 +27,7 @@ import { ApplicationTypeNames } from "../../models/application-type.model";
 import { MatDialog } from "@angular/material/dialog";
 import { Clipboard } from '@angular/cdk/clipboard';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { generatedText } from "environments/environment";
+import { environment } from "environments/environment";
 
 // See the Moment.js docs for the meaning of these formats:
 // https://momentjs.com/docs/#/displaying/format/
@@ -115,7 +115,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
   renewalType: string;
 
   @ViewChild('badgeTemplateDialog') badgeTemplateDialog: TemplateRef<any>;
-  generatedOrvCode = generatedText.verificationBadge;
+  generatedOrvCode = environment.verificationBadge;
 
   get contacts(): FormArray {
     return this.form.get("otherContacts") as FormArray;
