@@ -187,10 +187,10 @@ namespace Gov.Lclb.Cllb.Public.Models
                 }
 
             }
-            // if (copyIfNull || (!copyIfNull && fromVM.accountUrls != null)) TODO: Re-implement this
-            // {
-            //     toDynamics.AdoxioAccounturls = fromVM.accountUrls;
-            // }
+            if (copyIfNull || (!copyIfNull && fromVM.accountUrls != null))
+            {
+                toDynamics.AdoxioAccounturls = fromVM.accountUrls;
+            }
 
             // toDynamics.Websiteurl = fromVM.websiteUrl;
 
@@ -279,7 +279,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 accountVM.LocalGovernmentId = account._adoxioLginlinkidValue;
 
                 accountVM.websiteUrl = account.Websiteurl;
-                // accountVM.accountUrls = account.AdoxioAccounturls; TODO: Re-implement this
+                accountVM.accountUrls = account.AdoxioAccounturls;
                 
                 // SEP Police Review Limits
                 accountVM.isLateHoursApproval = account.AdoxioIslatehoursapproval;
