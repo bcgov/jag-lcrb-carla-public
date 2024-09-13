@@ -355,7 +355,7 @@ const routes: Routes = [
     canActivate: [BCeidAuthGuard]
   },
   {
-    path: "relocation-type/:applicationId",
+    path: "relocation-type/:licenceId",
     component: RelocationTypeComponent,
     canActivate: [BCeidAuthGuard],
   },

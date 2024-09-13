@@ -268,6 +268,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 RepresentativeCanAttendEducationSessions = licence.AdoxioCanattendeducationsessions,
                 RepresentativeCanAttendComplianceMeetings = licence.AdoxioCanattendcompliancemeetings,
                 RepresentativeCanRepresentAtHearings = licence.AdoxioCanrepresentathearings,
+                TemporaryRelocationStatus = licence.AdoxioTrlstatus,
                 AutoRenewal = (licence.AdoxioAutorenewal == true)
             };
 
