@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AppState } from "@app/app-state/models/app-state";
@@ -16,6 +16,7 @@ import { ContactComponent, ContactData } from "@shared/components/contact/contac
 import { faIdCard } from "@fortawesome/free-regular-svg-icons";
 import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 
+export const SharepointNameRegex = /^[^~#%&*{}\\:<>?/+|""]*$/;
 @Component({
   selector: "app-permanent-change-to-a-licensee",
   templateUrl: "./permanent-change-to-a-licensee.component.html",
@@ -114,7 +115,7 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
       lastNameOld: [""],
       lastNameNew: [""],
       description2: [""],
-      description3: [""],
+      description3: ["", Validators.pattern(SharepointNameRegex)],
       authorizedToSubmit: ["", [this.customRequiredCheckboxValidator()]],
       signatureAgreement: ["", [this.customRequiredCheckboxValidator()]],
     });
@@ -171,7 +172,6 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
         this.appContactDisabled = true;
       }
       this.form.patchValue(application);
-     
       this.dataLoaded = true;
     }
   }
@@ -345,11 +345,11 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
         }));
   }
 
-  showLiquorCostColumn(item: any){
+  showLiquorCostColumn(item: any) {
     //const show = this.form.get(item.formControlName).value === true
     const show = true
-    && (item.name !== 'Internal Transfer of Shares')
-    && !(item.name === 'Change of Directors or Officers' && this.account.businessType  === 'PrivateCorporation');
+      && (item.name !== 'Internal Transfer of Shares')
+      && !(item.name === 'Change of Directors or Officers' && this.account.businessType === 'PrivateCorporation');
     return show;
   }
 
@@ -362,7 +362,8 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
       contactPersonFirstName: "Please enter the business contact's first name",
       contactPersonLastName: "Please enter the business contact's last name",
       contactPersonPhone: "Please enter the business contact's 10-digit phone number",
-      contactPersonRole: "Please enter the contact person role"
+      contactPersonRole: "Please enter the contact person role",
+      description3: "The following characters are not allowed in a Company Name: ~ # % & * { } \\ : < > ? / + | \"",
     };
     return errorMap;
   }
@@ -404,7 +405,7 @@ const masterChangeList = [
   {
     name: "Change of Directors or Officers",
     formControlName: "csChangeOfDirectorsOrOfficers",
-    availableTo: ["PrivateCorporation", "PublicCorporation", "Society", "Coop", "MilitaryMess","LocalGovernment", "University"],
+    availableTo: ["PrivateCorporation", "PublicCorporation", "Society", "Coop", "MilitaryMess", "LocalGovernment", "University"],
     CannabisFee: 500,
     LiquorFee: 220,
     RequiresPHS: false,
@@ -419,7 +420,7 @@ const masterChangeList = [
     name: "Name Change, Licensee -- Corporation",
     otherName: "Name Change, Licensee -- Organization",
     formControlName: "csNameChangeLicenseeCorporation",
-    availableTo: ["PrivateCorporation", "PublicCorporation", "SoleProprietorship", "Coop", "MilitaryMess","University"],
+    availableTo: ["PrivateCorporation", "PublicCorporation", "SoleProprietorship", "Coop", "MilitaryMess", "University"],
     CannabisFee: 220,
     LiquorFee: 220,
     RequiresPHS: false,
