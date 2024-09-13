@@ -53,7 +53,7 @@ export class RelocationTypeComponent extends FormBase implements OnInit {
     ngOnInit() {
         this.busy = this.licenceDataService.getAllCurrentLicenses().subscribe(data => {
             this.licence = data.find(lic => lic.licenseId === this.licenceId);
-            if (this.licence.temporaryRelocationStatus === TemporaryRelocationStatus.Yes) {
+            if (this.licence && this.licence.temporaryRelocationStatus === TemporaryRelocationStatus.Yes) {
                 this.isOperatingAtTemporaryLocation = true;
             }
         });
