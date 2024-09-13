@@ -2298,8 +2298,8 @@
               </p>
               <section>
                 <app-file-uploader *ngIf="applicationId" documentType="Valid Interest"
-                                   fileTypes="FILE MUST BE IN PDF FORMAT." [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
-                                   [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()" [multipleFiles]="false"
+                                   fileTypes="FILES MUST BE IN PDF FORMAT." [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
+                                   [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()" [multipleFiles]="true"
                                    entityName="application" [useDocumentTypeForName]="true"
                                    (numberOfUploadedFiles)="uploadedValidInterestDocuments = $event" [entityId]="applicationId"
                                    [uploadHeader]="'TO UPLOAD OWNERSHIP OR LEASE DOCUMENTS, DRAG FILES HERE OR'">
