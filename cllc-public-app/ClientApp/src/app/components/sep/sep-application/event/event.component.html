@@ -260,13 +260,20 @@
                                             <mat-panel-title *ngIf="getIsOpen(i, k) === false">
                                                 Event Date: {{ item.get('eventDate')?.value | date}}
                                                 <br>
-                                                Event Times: {{ item.get('eventStartValue').value}} - {{
-                                                item.get('eventEndValue').value}}
+                                                Event Times (Pacific): {{ item.get('isPacificTimeZone').value 
+                                                    ? item.get('eventStartValue').value        
+                                                    : 'Pacific: ' + item.get('mountainAdjustedPacificEventStartValue')?.value }} 
+                                                  - {{ item.get('isPacificTimeZone').value 
+                                                    ? item.get('eventEndValue').value        
+                                                    : item.get('mountainAdjustedPacificEventEndValue')?.value }} 
                                             </mat-panel-title>
                                             <mat-panel-title *ngIf="getIsOpen(i, k) === false">
-                                                Liquor will be served: {{
-                                                item.get('serviceStartValue').value}} - {{
-                                                item.get('serviceEndValue').value}}
+                                                Liquor will be served (Pacific): {{ item.get('isPacificTimeZone').value 
+                                                    ? item.get('serviceStartValue').value        
+                                                    : 'Pacific: ' + item.get('mountainAdjustedPacificServiceStartValue')?.value }} 
+                                                  - {{ item.get('isPacificTimeZone').value 
+                                                    ? item.get('serviceEndValue').value        
+                                                    : item.get('mountainAdjustedPacificServiceEndValue')?.value }}
                                             </mat-panel-title>
                                         </mat-expansion-panel-header>
 
@@ -274,37 +281,53 @@
                                           <tr>
                                             <td>
                                               <app-field label="Date of your event"
-                                                         errorMessage="Please select a value"
-                                                         [valid]="!item.get('eventDate').touched || item.get('eventDate').valid">
+                                                        errorMessage="Please select a value"
+                                                        [valid]="!item.get('eventDate').touched || item.get('eventDate').valid">
                                                 <input type="text" formControlName="eventDate"
-                                                       style="background-color: #fff; width: 170px;"
-                                                       placeholder="yyyy-mm-dd" readonly class="form-control"
-                                                       [min]="minDate" [matDatepicker]="picker"
-                                                       (focus)="picker.open()" (click)="picker.open()">
+                                                      style="background-color: #fff; width: 170px;"
+                                                      placeholder="yyyy-mm-dd" readonly class="form-control"
+                                                      [min]="minDate" [matDatepicker]="picker"
+                                                      (focus)="picker.open()" (click)="picker.open()">
                                                 <mat-datepicker #picker></mat-datepicker>
                                               </app-field>
                                             </td>
                                             <td>
-                                              <app-field label="From" errorMessage="Please select a value"
-                                                         [valid]="!item.get('eventStartValue').touched || item.get('eventStartValue').valid">
-                                                <select class="form-control" formControlName="eventStartValue">
-                                                  <option value=""></option>
-                                                  <option [value]="item.value" *ngFor="let item of timeSlots">
-                                                    {{item.name}}
-                                                  </option>
-                                                </select>
-                                              </app-field>
+                                              <div class="d-flex align-items-start">
+                                                <app-field [label]="!item.get('isPacificTimeZone').value ? 'From (Mountain):' : 'From (Pacific):'" 
+                                                          errorMessage="Please select a value"
+                                                          [valid]="!item.get('eventStartValue').touched || item.get('eventStartValue').valid">
+                                                  <select class="form-control" formControlName="eventStartValue">
+                                                    <option value=""></option>
+                                                    <option [value]="item.value" *ngFor="let item of timeSlots">
+                                                      {{item.name}}
+                                                    </option>
+                                                  </select>
+                                                  <div *ngIf="!item.get('isPacificTimeZone').value">
+                                                    <div class="form-group ml-3">
+                                                      <p class="form-control-static">Pacific: {{ item.get('mountainAdjustedPacificEventStartValue')?.value }}</p>
+                                                    </div>
+                                                  </div>
+                                                </app-field>
+                                              </div>
                                             </td>
                                             <td>
-                                              <app-field label="To" errorMessage="Please select a value"
-                                                         [valid]="!item.get('eventEndValue').touched || item.get('eventEndValue').valid">
-                                                <select class="form-control" formControlName="eventEndValue">
-                                                  <option value=""></option>
-                                                  <option [value]="item.value" *ngFor="let item of timeSlots">
-                                                    {{item.name}}
-                                                  </option>
-                                                </select>
-                                              </app-field>
+                                              <div class="d-flex align-items-start">
+                                                <app-field [label]="!item.get('isPacificTimeZone').value ? 'To (Mountain):' : 'To (Pacific):'" 
+                                                          errorMessage="Please select a value"
+                                                          [valid]="!item.get('eventEndValue').touched || item.get('eventEndValue').valid">
+                                                  <select class="form-control" formControlName="eventEndValue">
+                                                    <option value=""></option>
+                                                    <option [value]="item.value" *ngFor="let item of timeSlots">
+                                                      {{item.name}}
+                                                    </option>
+                                                  </select>
+                                                  <div *ngIf="!item.get('isPacificTimeZone').value">
+                                                    <div class="form-group ml-3">
+                                                      <p class="form-control-static">Pacific: {{ item.get('mountainAdjustedPacificEventEndValue')?.value }}</p>
+                                                    </div>
+                                                  </div>
+                                                </app-field>
+                                              </div>
                                             </td>
                                             <td class="text-right">
                                               <button [disabled]="disableForm" mat-raised-button color="warn"
@@ -314,44 +337,73 @@
                                             </td>
                                           </tr>
                                           <tr>
+                                            <td>
+                                              <app-field label="Time Zone" errorMessage="Please select a value" [valid]="!item.get('isPacificTimeZone').touched || item.get('isPacificTimeZone').valid">
+                                                <div class="form-check">
+                                                  <input class="form-check-input" type="radio" formControlName="isPacificTimeZone" [value]="true" [id]="'pacific-' + k">
+                                                  <label class="form-check-label" for="'pacific-' + k">
+                                                    &nbsp;Pacific Time
+                                                  </label>
+                                                </div>
+                                                <div class="form-check">
+                                                  <input class="form-check-input" type="radio" formControlName="isPacificTimeZone" [value]="false" [id]="'mountain-' + k">
+                                                  <label class="form-check-label" for="'mountain-' + k">
+                                                    &nbsp;Mountain Time
+                                                  </label>
+                                                </div>
+                                              </app-field>
+                                            </td>
                                             <td class="text-right">
                                               <label>Liquor will be served:</label>
                                             </td>
                                             <td>
-                                              <app-field label="From" errorMessage="Please select a value"
-                                                         [valid]="!item.get('serviceStartValue').touched || item.get('serviceStartValue').valid">
-                                                <select class="form-control"
-                                                        formControlName="serviceStartValue">
-                                                  <option value=""></option>
-                                                  <option [value]="item.value" *ngFor="let item of timeSlots">
-                                                    {{item.name}}
-                                                  </option>
-                                                </select>
-                                              </app-field>
+                                              <div class="d-flex align-items-start">
+                                                <app-field [label]="!item.get('isPacificTimeZone').value ? 'From (Mountain):' : 'From (Pacific):'" 
+                                                          errorMessage="Please select a value"
+                                                          [valid]="!item.get('serviceStartValue').touched || item.get('serviceStartValue').valid">
+                                                  <select class="form-control"
+                                                          formControlName="serviceStartValue">
+                                                    <option value=""></option>
+                                                    <option [value]="timeSlot.value" *ngFor="let timeSlot of timeSlots">
+                                                      {{timeSlot.name}}
+                                                    </option>
+                                                  </select>
+                                                  <div *ngIf="!item.get('isPacificTimeZone').value">
+                                                    <div class="form-group ml-3">
+                                                      <p class="form-control-static">Pacific: {{ item.get('mountainAdjustedPacificServiceStartValue')?.value }}</p>
+                                                    </div>
+                                                  </div>
+                                                </app-field>
+                                              </div>
                                             </td>
                                             <td>
-                                              <app-field label="To" errorMessage="Please select a value"
-                                                         [valid]="!item.get('serviceEndValue').touched || item.get('serviceEndValue').valid">
-                                                <select class="form-control" formControlName="serviceEndValue">
-                                                  <option value=""></option>
-                                                  <option [value]="item.value" *ngFor="let item of timeSlots">
-                                                    {{item.name}}
-                                                  </option>
-                                                </select>
-                                              </app-field>
-                                            </td>
-                                            <td>
+                                              <div class="d-flex align-items-start">
+                                                <app-field [label]="!item.get('isPacificTimeZone').value ? 'To (Mountain):' : 'To (Pacific):'" 
+                                                          errorMessage="Please select a value"
+                                                          [valid]="!item.get('serviceEndValue').touched || item.get('serviceEndValue').valid">
+                                                  <select class="form-control" formControlName="serviceEndValue">
+                                                    <option value=""></option>
+                                                    <option [value]="timeSlot.value" *ngFor="let timeSlot of timeSlots">
+                                                      {{timeSlot.name}}
+                                                    </option>
+                                                  </select>
+                                                  <div *ngIf="!item.get('isPacificTimeZone').value">
+                                                    <div class="form-group ml-3">
+                                                      <p class="form-control-static">Pacific: {{ item.get('mountainAdjustedPacificServiceEndValue')?.value }}</p>
+                                                    </div>
+                                                  </div>
+                                                </app-field>
+                                              </div>
                                             </td>
                                           </tr>
                                           <tr>
                                             <td colspan="4">
                                               <div>
-                                                <button (click)="checkTimeZone()">Is the event located outside of Pacific Standard Time? </button>  
-                                                  <app-error-alert *ngIf="!isPacificTimeZone">
+                                                  <app-error-notice *ngIf="!item.get('isPacificTimeZone').value">
                                                     <p>
-                                                      If the area you’re applying from or if the event is located outside of PST, please note the time on your permit may not accurately reflect the time your event is scheduled to start. Please contact the LCRB team at <a href="mailto:LCRB.SEP@gov.bc.ca">LCRB.SEP@gov.bc.ca</a>
+                                                      Please note:  The time on the license you receive will be shown in Pacific Time, adjusted for your Time Zone selection above.  For more information please contact the LCRB team at <a href="mailto:LCRB.SEP@gov.bc.ca">LCRB.SEP@gov.bc.ca</a>
                                                     </p>
-                                                  </app-error-alert>                                                
+                                                  </app-error-notice>
                                               </div>
                                             </td>
                                           </tr>
@@ -378,12 +430,12 @@
                                                 </p>
 
                                                 <app-field [isFullWidth]="true"
-                                                           label="Why would you like to extend your liquor service hours?">
+                                                          label="Why would you like to extend your liquor service hours?">
                                                   <textarea formControlName="liquorServiceHoursExtensionReason" class="form-control w-100" rows="5"></textarea>
                                                 </app-field>
 
                                                 <app-field [isFullWidth]="true"
-                                                           label="Please describe what measures you will take to prevent community disturbances.">
+                                                          label="Please describe what measures you will take to prevent community disturbances.">
                                                   <textarea formControlName="disturbancePreventionMeasuresDetails" class="form-control w-100" rows="5"></textarea>
                                                 </app-field>
 
@@ -418,8 +470,8 @@
                 {{message}}
             </span>
         </p>
-    </section>
+      </section>
 
-    <button  [disabled]="disableForm" mat-raised-button color="secondary" class="mr-3" matStepperPrevious>BACK</button>
-    <button  [disabled]="disableForm" mat-raised-button color="primary" (click)="next()">NEXT</button>
-</div>
+      <button  [disabled]="disableForm" mat-raised-button color="secondary" class="mr-3" matStepperPrevious>BACK</button>
+      <button  [disabled]="disableForm" mat-raised-button color="primary" (click)="next()">NEXT</button>
+    </div>

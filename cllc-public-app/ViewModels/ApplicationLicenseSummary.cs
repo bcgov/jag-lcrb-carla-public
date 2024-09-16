@@ -41,6 +41,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string LicenseId { get; set; }
         public string ApplicationId { get; set; }
         public string ApplicationTypeName { get; set; }
+        public int? TemporaryRelocationStatus { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
         public ApplicationTypeCategory? ApplicationTypeCategory { get; set; }
