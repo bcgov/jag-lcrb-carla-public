@@ -75,6 +75,8 @@ export class ApplicationLicenseSummary {
   headerRowSpan: number;
   serviceAreas: ServiceArea[];
   offsiteStorageLocations: OffsiteStorage[];
+
+  temporaryRelocationStatus: number;
 }
 
 export interface LicenceActionApplication {

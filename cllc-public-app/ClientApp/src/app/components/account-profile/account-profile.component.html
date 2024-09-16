@@ -71,13 +71,12 @@
     <input class="form-control" style="max-width: 450px; min-width: 250px;" type="text" disabled
            [value]="account?.name || ''">
   </app-field>
-  <!-- TODO: Re-implement this -->
-  <!-- <app-field label="Account URL(s)" [required]="false"
+  <app-field label="Account URL(s)" [required]="false"
              [valid]="form.get('businessProfile.accountUrls').valid || !form.get('businessProfile.accountUrls').touched"
              errorMessage="Please enter valid Account URL(s) separated by commas without spaces (i.e. www.gov.bc.ca,justice.gov.bc.ca)">
     <input class="form-control" style="width: 350px;" type="text"
            formControlName="accountUrls">
-  </app-field> -->
+  </app-field>
   <app-field label="Business Number (9 digit number from the Canada Revenue Agency)" [required]="true"
              [valid]="form.get('businessProfile.businessNumber').valid || !form.get('businessProfile.businessNumber').touched"
              errorMessage="Please enter the business number (9 digits)" *ngIf="['Police'].indexOf(getBusinessTypeName()) == -1">
@@ -365,6 +364,21 @@
     </div>
   </section>
   <section class="submit-container" style="background-color: #F2F2F2; border: none; color: #000;">
+    <h2 style="color: #000">Online Retailer Verification:</h2>
+    <div class="submit-content">
+      <p>To obtain the Online Retailer Verification button to place on your Website(s), 
+        please select the "Generate ORV Code" button below.  Once you have the code, 
+        you will need to add it to your Website(s).  
+        Consult your development team to add the code to your Website(s).
+      </p>
+    </div>
+    <div style="display: flex; justify-content: center;">
+      <button class="btn btn-primary" color="primary" (click)="openBadgeTemplateDialog()">
+          <span class="compact-button">Generate ORV Code</span>
+      </button>
+    </div>
+  </section>
+  <section class="submit-container" style="background-color: #F2F2F2; border: none; color: #000;">
     <h2 style="color: #000">Collection Notice:</h2>
     <div class="submit-content">
       <p>
@@ -380,3 +394,13 @@
 </div>
 </div>
 </div>
+
+<!-- Modal HTML -->
+<ng-template #badgeTemplateDialog>
+  <h2 mat-dialog-title class="centered-title">Generate ORV Code</h2>
+  <p>Paste this code into your website to create your Online Retailer Verification button:</p>
+  <pre><code>{{generatedOrvCode}}</code></pre>
+  <div mat-dialog-actions class="center-actions">
+    <button mat-raised-button color="primary" (click)="onCopy()">Copy</button>
+  </div>
+</ng-template>
