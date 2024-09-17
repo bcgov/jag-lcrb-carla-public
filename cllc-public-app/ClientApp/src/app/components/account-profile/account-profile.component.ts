@@ -115,7 +115,8 @@ export class AccountProfileComponent extends FormBase implements OnInit {
   renewalType: string;
 
   @ViewChild('badgeTemplateDialog') badgeTemplateDialog: TemplateRef<any>;
-  generatedOrvCode: string = `<a href="#" onclick="window.open('https://orgbook-app-b7aa30-dev.apps.silver.devops.gov.bc.ca/verify/BC123456', '_blank', 'width=800,height=600'); return false;">Verify Retailer</a>`
+  // 2024-09-13: Temporary disabling this until further development work can be completed to support this feature.
+  // generatedOrvCode: string = `<a href="#" onclick="window.open('https://orgbook-app-b7aa30-dev.apps.silver.devops.gov.bc.ca/verify/BC123456', '_blank', 'width=800,height=600'); return false;">Verify Retailer</a>`
 
   get contacts(): FormArray {
     return this.form.get("otherContacts") as FormArray;
@@ -369,13 +370,14 @@ export class AccountProfileComponent extends FormBase implements OnInit {
     });
   }
 
-  onCopy(): void {
-    this.clipboard.copy(this.generatedOrvCode);
-    this.snackBar.open('HTML copied to clipboard', null, {
-      duration: 2000,
-    });
-    this.dialog.closeAll();
-  }
+  // 2024-09-13: Temporary disabling this until further development work can be completed to support this feature.
+  // onCopy(): void {
+  //   this.clipboard.copy(this.generatedOrvCode);
+  //   this.snackBar.open('HTML copied to clipboard', null, {
+  //     duration: 2000,
+  //   });
+  //   this.dialog.closeAll();
+  // }
 
   save(): Observable<boolean> {
     const _tiedHouse = this.tiedHouseFormData || {};
