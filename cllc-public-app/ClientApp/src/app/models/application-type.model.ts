@@ -122,6 +122,7 @@ export enum ApplicationTypeNames {
   DormancyReinstatement = "Dormancy Reinstatement",
   PicnicAreaEndorsement = "Picnic Area Endorsement",
   ChangetoApprovedPicnicArea = "Change to Approved Picnic Area",
+  TPO = "Third Party Operator",
 }
 
 // 2024-01-11 LCSD-6459 waynezen: instead of hard-coding Application Status, use these
