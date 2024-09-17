@@ -229,7 +229,7 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
         if (loc.eventDates?.length > 0) {
           const formatterdDates = [];
           loc.eventDates.forEach(ed => {
-            ed = Object.assign(new SepSchedule(null, null), ed);
+            ed = Object.assign(new SepSchedule(null), ed);
             formatterdDates.push({ ed, ...ed.toEventFormValue() });
           });
           loc.eventDates = formatterdDates;

@@ -696,7 +696,6 @@ namespace Gov.Lclb.Cllb.Public.Models
                 EstablishmentReopeningDate = dynamicsApplication.AdoxioEstablishmentreopeningdate,
 
                 // Temporary Relocations - removed 2024-08-14
-                // Note 2024-09-13: This is a temporary fix - TODO: Assign the appropriate value to temporaryRelocationCriteria and update workflow for AdoxioChecklistdrivingrecordcomplete
                 temporaryRelocationCriteria = dynamicsApplication.AdoxioChecklistdrivingrecordcomplete,
             };
 

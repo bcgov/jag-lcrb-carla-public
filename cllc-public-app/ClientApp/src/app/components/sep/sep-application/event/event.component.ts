@@ -35,6 +35,7 @@ export class EventComponent extends FormBase implements OnInit {
   validationMessages: string[];
   previewCities: AutoCompleteItem[] = [];
   autocompleteCities: AutoCompleteItem[] = [];
+  isPacificTimeZone: boolean;
   isOpen: boolean[][] = [];
   get minDate() {
     return new Date();
@@ -85,6 +86,7 @@ export class EventComponent extends FormBase implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isPacificTimeZone = true;
     // create a form for the basic details
     this.form = this.fb.group({
       sepCity: ["", [Validators.required, Validators.minLength(2)]],
@@ -119,6 +121,9 @@ export class EventComponent extends FormBase implements OnInit {
             this.snackBar.open("No match found", "", { duration: 2500, panelClass: ["green-snackbar"] });
           }
         });
+  }
+  checkTimeZone() {
+    this.isPacificTimeZone = !this.isPacificTimeZone;
   }
   setFormValue(app: SepApplication) {
     // if there's an app
@@ -239,6 +244,7 @@ export class EventComponent extends FormBase implements OnInit {
     this.locations.push(locationForm);
   }
 
+
   removeLocation(locationIndex: number) {
     this.locations.removeAt(locationIndex);
   }
@@ -265,49 +271,21 @@ export class EventComponent extends FormBase implements OnInit {
       eventEndValue: ["10:00 PM", [Validators.required]],
       serviceStartValue: ["9:00 AM", [Validators.required]],
       serviceEndValue: ["9:30 PM", [Validators.required]],
-      mountainAdjustedPacificEventStartValue: ["8:00 AM", [Validators.required]],
-      mountainAdjustedPacificEventEndValue: ["9:00 PM", [Validators.required]],
-      mountainAdjustedPacificServiceStartValue: ["8:00 AM", [Validators.required]],
-      mountainAdjustedPacificServiceEndValue: ["8:30 PM", [Validators.required]],
       liquorServiceHoursExtensionReason: [""],
-      disturbancePreventionMeasuresDetails: [""],
-      isPacificTimeZone: [true]
+      disturbancePreventionMeasuresDetails: [""]
     }, { validators: eventTimesValidator });
 
-    eventDate = Object.assign(new SepSchedule(null, true), eventDate);
+    eventDate = Object.assign(new SepSchedule(null), eventDate);
     const val = eventDate.toEventFormValue();
 
     // Set default to event start date
     if (!val.eventDate) {
       val.eventDate = this?.sepApplication?.eventStartDate;     
     }
-
     datesForm.patchValue(val);
-
-    datesForm.get('isPacificTimeZone').valueChanges.subscribe(value => {
-      localStorage.setItem('isPacificTimeZone', JSON.stringify(value));
-    });
-
-    const updateMountainTime = (controlName: string, mountainControlName: string) => {
-
-      const mountainTimeControlValue = datesForm.get(controlName).value;
-      const newMountainValue = this.getPacificTimeFromMountain(mountainTimeControlValue);
-      datesForm.get(mountainControlName).setValue(newMountainValue, { emitEvent: false });
-
-      datesForm.get(controlName).valueChanges.subscribe(value => {
-        const newMountainValue = this.getPacificTimeFromMountain(value);
-        datesForm.get(mountainControlName).setValue(newMountainValue, { emitEvent: false });
-      });
-    };
-    
-    updateMountainTime('eventStartValue', 'mountainAdjustedPacificEventStartValue');
-    updateMountainTime('eventEndValue', 'mountainAdjustedPacificEventEndValue');
-    updateMountainTime('serviceStartValue', 'mountainAdjustedPacificServiceStartValue');
-    updateMountainTime('serviceEndValue', 'mountainAdjustedPacificServiceEndValue');
-
     return datesForm;
   }
-  
+
   getIsOpen(locationIndex: number, eventIndex: number): boolean {
     if(this.isOpen[locationIndex] === undefined) {
       return true;
@@ -472,7 +450,7 @@ export class EventComponent extends FormBase implements OnInit {
     formData?.eventLocations.forEach(location => {
       const dateValues = [];
       location?.eventDates.forEach(sched => {
-        dateValues.push(new SepSchedule(sched, sched.isPacificTimeZone));
+        dateValues.push(new SepSchedule(sched));
       });
       location.eventDates = dateValues;
     });
@@ -517,40 +495,6 @@ export class EventComponent extends FormBase implements OnInit {
     const outdoorAreaExists = !!serviceAreas.find(area => area.setting === "Outdoors" || area.setting === "BothOutdoorsAndIndoors");
     return outdoorAreaExists;
   }
-
-  getPacificTimeFromMountain(time: string): string {
-  
-    // Convert 12-hour format with AM/PM to 24-hour format
-    const [timePart, modifier] = time.split(' ');
-    let [hours, minutes] = timePart.split(':').map(Number);
-  
-    if (modifier === 'PM' && hours < 12) {
-      hours += 12;
-    }
-    if (modifier === 'AM' && hours === 12) {
-      hours = 0;
-    }
-  
-    // Create a new Date object and adjust for the time zone difference
-    const date = new Date();
-    date.setHours(hours, minutes); // Set the time to the Mountain Time
-    date.setHours(date.getHours() - 1); // Convert from Mountain to Pacific Time
-  
-    // Convert back to 12-hour format with AM/PM
-    let pacificHours = date.getHours();
-    const pacificMinutes = date.getMinutes();
-    const pacificModifier = pacificHours >= 12 ? 'PM' : 'AM';
-  
-    if (pacificHours > 12) {
-      pacificHours -= 12;
-    } else if (pacificHours === 0) {
-      pacificHours = 12;
-    }
-  
-    const convertedTime = `${pacificHours}:${pacificMinutes.toString().padStart(2, '0')} ${pacificModifier}`;
-  
-    return convertedTime;
-}
 
   next() {
     this.showValidationMessages = false;
