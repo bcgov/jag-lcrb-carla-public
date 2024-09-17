@@ -584,15 +584,31 @@
           and certificate number on the certificate of incorporation have not
           changed. The fee is 20 per licence.
         </p>
-        <app-field label="Current licensee or holding company">
-          <input placeholder="Company Name" class="form-control" style="width: 350px;" type="text"
-            formControlName="description2" id="description2">
-        </app-field>
-        <app-field label="Name changed to (in full)" [valid]=" !showValidationMessages || form.get('description3').valid" 
-          errorMessage="The following characters are not allowed in a Company Name: ~ # % & * { } \ : < > ? / + | &quot;">
-          <input placeholder="New Copmany Name" class="form-control" style="width: 350px;" type="text"
-            formControlName="description3" id="description3">
-        </app-field>
+        <div class="">
+
+          <span>
+            <strong>Current licensee or holding company name (in full):</strong>
+          </span>
+
+          <mat-form-field class="ml-1 mr-2">
+            <mat-label>Company Name</mat-label>
+            <input matInput type="text" formControlName="description2">
+            <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+
+          <span>Name changed to (in full):</span>
+
+          <mat-form-field class="ml-1 mr-2">
+            <mat-label>New Company Name</mat-label>
+            <input matInput type="text" formControlName="description3">
+            <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+
+        </div>
         <h4>
           Copy of the Certificate of Change of Name Form from BC Registrar of Companies
         </h4>

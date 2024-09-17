@@ -74,7 +74,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string businessType { get; set; }
 
         public string websiteUrl { get; set; }
-        public string accountUrls { get; set; } //dynamics = adoxio_accounturls
+        // public string accountUrls { get; set; } //dynamics = adoxio_accounturls TODO: Re-implement this
 
         // SEP Police Review Limits
         public bool? isLateHoursApproval { get; set; }

@@ -63,8 +63,8 @@
       from your local government that the location is zoned appropriately to operate
       a {{application?.licenseType}} licence.
     </p>
-    <app-file-uploader *ngIf="application?.id" documentType="Zoning" fileTypes="FILES MUST BE IN PDF FORMAT."
-                       [multipleFiles]="true" entityName="application" [useDocumentTypeForName]="true"
+    <app-file-uploader *ngIf="application?.id" documentType="Zoning" fileTypes="FILE MUST BE IN PDF FORMAT."
+                       [multipleFiles]="false" entityName="application" [useDocumentTypeForName]="true"
                        (numberOfUploadedFiles)="uploadedZoningDocuments = $event" [entityId]="application?.id"
                        [uploadHeader]="'TO UPLOAD ZONING DOCUMENTS, DRAG FILES HERE OR'" #proofOfZoningDocs>
     </app-file-uploader>
