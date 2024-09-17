@@ -1673,6 +1673,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
       && this?.application?.applicationType?.name !== ApplicationTypeNames.Catering
       && this?.application?.applicationType?.name !== ApplicationTypeNames.UBV
       && this?.application?.applicationType?.name !== ApplicationTypeNames.RLRS
+      && this?.application?.applicationType?.name !== ApplicationTypeNames.TPO
+      && this?.application?.applicationType?.name !== ApplicationTypeNames.LiquorLicenceTransfer
     ) {
       return true;
     }
