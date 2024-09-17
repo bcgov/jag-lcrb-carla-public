@@ -58,8 +58,6 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
   uploadedPartnershipRegistration = 0;
   uploadedSocietyNameChange = 0;
   uploadedExecutorDocuments = 0;
-  showDirectorsAndOfficersNotice: boolean = false;
-
 
   get hasLiquor(): boolean {
     return this.liquorLicences.length > 0;
@@ -139,19 +137,6 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
     this.liquorLicences = licences.filter(item => item.licenceTypeCategory === "Liquor" && item.status === "Active");
     this.cannabisLicences =
       licences.filter(item => item.licenceTypeCategory === "Cannabis" && item.status === "Active");
-      // Check if licensee holds any licences that require a Personal History Summary
-      licences.forEach(item => {
-      if (
-        item.licenceTypeName === this.ApplicationTypeNames.FP
-        || item.licenceTypeName === this.ApplicationTypeNames.LP
-        || item.licenceTypeName === this.ApplicationTypeNames.LPC
-        || item.licenceTypeName === this.ApplicationTypeNames.Catering
-        || item.licenceTypeName === this.ApplicationTypeNames.UBV
-        || item.licenceTypeName === this.ApplicationTypeNames.RLRS
-      ) {
-        this.showDirectorsAndOfficersNotice = true;
-      }
-    })
     this.application = application;
     this.applicationContact = {
       contactPersonFirstName: this.application.contactPersonFirstName,
