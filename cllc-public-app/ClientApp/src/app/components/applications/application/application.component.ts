@@ -1680,6 +1680,19 @@ export class ApplicationComponent extends FormBase implements OnInit {
         this.showFormControl(this.application?.applicationType?.currentEstablishmentAddress)));
   }
 
+  showDirectorsAndOfficersNotice(): boolean {
+    if ( this?.application?.applicationType?.name !== ApplicationTypeNames.FP
+      && this?.application?.applicationType?.name !== ApplicationTypeNames.LP
+      && this?.application?.applicationType?.name !== ApplicationTypeNames.LPC
+      && this?.application?.applicationType?.name !== ApplicationTypeNames.Catering
+      && this?.application?.applicationType?.name !== ApplicationTypeNames.UBV
+      && this?.application?.applicationType?.name !== ApplicationTypeNames.RLRS
+    ) {
+      return true;
+    }
+   return false;
+  }
+
   isCRSRenewalApplication(): boolean {
     return this.application
       && this.application.applicationType
