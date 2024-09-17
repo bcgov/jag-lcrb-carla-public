@@ -58,7 +58,7 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
   uploadedPartnershipRegistration = 0;
   uploadedSocietyNameChange = 0;
   uploadedExecutorDocuments = 0;
-  showDirectorsAndOfficersNotice: boolean = true;
+  showDirectorsAndOfficersNotice: boolean = false;
 
 
   get hasLiquor(): boolean {
@@ -149,7 +149,7 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
         || item.licenceTypeName === this.ApplicationTypeNames.UBV
         || item.licenceTypeName === this.ApplicationTypeNames.RLRS
       ) {
-        this.showDirectorsAndOfficersNotice = false;
+        this.showDirectorsAndOfficersNotice = true;
       }
     })
     this.application = application;
