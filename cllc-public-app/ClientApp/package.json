@@ -46,7 +46,6 @@
     "leaflet": "^1.7.1",
     "lodash": "^4.17.21",
     "material-design-icons": "^3.0.1",
-    "moment-timezone": "^0.5.45",
     "mygovbc-bootstrap-theme": "^0.4.1",
     "ng-busy": "^12.0.2",
     "ng2-currency-mask": "^12.0.3",
