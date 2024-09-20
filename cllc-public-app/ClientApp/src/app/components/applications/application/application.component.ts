@@ -393,6 +393,20 @@ export class ApplicationComponent extends FormBase implements OnInit {
               }, {});
 
             this.form.patchValue(noNulls);
+
+            // LCSD-7327: If the application is a permanent or temporary LRS relocation, set new address, LG/IN, and police fields to empty
+            if (this.application.applicationType.name === ApplicationTypeNames.LRSTransferofLocation || this.application.applicationType.name === ApplicationTypeNames.LRSTemporaryRelocation) {
+              // New Address Fields
+              this.form.get('establishmentAddressStreet').patchValue('');
+              this.form.get('establishmentAddressCity').patchValue('');
+              this.form.get('establishmentAddressPostalCode').patchValue('');
+              this.form.get('establishmentParcelId').patchValue('');
+              // LG/IN field
+              this.form.get('indigenousNation').patchValue('');
+              // Police Field
+              this.form.get('policeJurisdiction').patchValue('');
+            }
+
             //LCSD-5764 get address from application if no assigned license
             if (this.application != null && this.application.assignedLicence == null) {
               if (this.application.establishmentAddressStreet != null) {

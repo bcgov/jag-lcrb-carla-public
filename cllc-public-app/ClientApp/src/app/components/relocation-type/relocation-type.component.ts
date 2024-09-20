@@ -10,6 +10,11 @@ import { FormBase } from "@shared/form-base";
 import { Subscription } from "rxjs";
 import { takeWhile } from "rxjs/operators";
 
+export enum TemporaryRelocationStatus {
+    Yes = 845280000,
+    No = 845280001,
+    NotApplicable = 845280002
+}
 @Component({
     selector: "app-relocation-type",
     templateUrl: "./relocation-type.component.html",
@@ -17,13 +22,14 @@ import { takeWhile } from "rxjs/operators";
 })
 export class RelocationTypeComponent extends FormBase implements OnInit {
     // Properties
-    applicationId: string;
+    licenceId: string;
     licence: ApplicationLicenseSummary;
     form: FormGroup;
     busy: Subscription;
     requestStarted: boolean = false;
     temporaryRelocation = this.ApplicationTypeNames.LRSTemporaryRelocation;
     permanentRelocation = this.ApplicationTypeNames.LRSTransferofLocation;
+    isOperatingAtTemporaryLocation: boolean = false;
 
     // Icons
     faTrash = faTrash;
@@ -35,20 +41,26 @@ export class RelocationTypeComponent extends FormBase implements OnInit {
         private fb: FormBuilder,
         private router: Router,
         private snackBar: MatSnackBar,
-        private licenceDataService: LicenseDataService
+        private licenceDataService: LicenseDataService,
     ) {
         super();
-        // Fetch the application ID from the route params
+        // Fetch the licence ID from the route params
         this.route.paramMap.subscribe(pmap => {
-            this.applicationId = pmap.get("applicationId");
+            this.licenceId = pmap.get("licenceId");
         });
+
         // Fetch the license object from the route state
         const navigation = this.router.getCurrentNavigation();
-        if (navigation?.extras.state && navigation.extras.state['licence']) {
+        if (navigation?.extras?.state && navigation.extras.state['licence']) {
             this.licence = JSON.parse(navigation.extras.state['licence']);
+            if (this.licence && this.licence.temporaryRelocationStatus === TemporaryRelocationStatus.Yes) {
+                this.isOperatingAtTemporaryLocation = true;
+            }
         } else {
-            // Handle the case where the licence is not available
+            // Handle the case where the licence is not available in the router state (page refresh)
             console.error('Licence object not found in the router state.');
+            // Redirect user to licenses page to get licence object again
+            this.router.navigateByUrl(`/licences`);
         }
     }
 
@@ -67,10 +79,8 @@ export class RelocationTypeComponent extends FormBase implements OnInit {
             this.snackBar.open("An error occurred. Please return to Licences & Authorizations and try again.", "Warning", { duration: 3500, panelClass: ["red-snackbar"] });
         }
         this.requestStarted = true;
-        const actionName = this.form.value.relocationType 
+        const actionName = this.form.value.relocationType
         const isTemporaryApplication = this.form.value.relocationType === this.ApplicationTypeNames.LRSTemporaryRelocation;
-        // We need to figure out what the action name for temp relocations is
-        // We need to get the license (ApplicationLicenseSummary) before we can process this
         try {
             const actionApplication = this.licence.actionApplications.find(
                 app => app.applicationTypeName === actionName
@@ -81,6 +91,7 @@ export class RelocationTypeComponent extends FormBase implements OnInit {
             if (typeof (actionApplication) !== "undefined" && !isTemporaryApplication) {
                 // We found a permanent relocation application in progress
                 if (actionApplication.isPaid === false) {
+                    // Navigate to existing application to continue
                     this.router.navigateByUrl(`/account-profile/${actionApplication.applicationId}`);
                 } else {
                     this.requestStarted = false;
@@ -90,7 +101,7 @@ export class RelocationTypeComponent extends FormBase implements OnInit {
                         { duration: 3500, panelClass: ["red-snackbar"] });
                 }
             } else {
-                // We didn't find an application, or this is a temporary relocation application
+                // We didn't find an application, or this is a temporary relocation application. Create a new application
                 this.busy = this.licenceDataService.createApplicationForActionType(this.licence.licenseId, actionName)
                     .pipe(takeWhile(() => this.componentActive))
                     .subscribe(data => {
