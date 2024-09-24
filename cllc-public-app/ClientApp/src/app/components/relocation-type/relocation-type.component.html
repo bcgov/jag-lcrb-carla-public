@@ -36,15 +36,15 @@
           />
           Permanent Relocation
           <br />
-          <div *ngIf="isOperatingAtTemporaryLocation">
+          <div *ngIf="isOperatingAtTemporaryLocation || temporaryRelocationApplicationExists">
             <input
               type="radio"
-              matTooltip="You cannot apply for a temporary relocation if your establishment is currently operating from a temporary location."
+              matTooltip="You cannot apply for a temporary relocation if your establishment is currently operating from a temporary location or you have an existing temporary relocation application in progress."
               disabled
             />
             Temporary Relocation
           </div>
-          <div *ngIf="!isOperatingAtTemporaryLocation">
+          <div *ngIf="!isOperatingAtTemporaryLocation && !temporaryRelocationApplicationExists">
             <input
               type="radio"
               [value]="temporaryRelocation"
