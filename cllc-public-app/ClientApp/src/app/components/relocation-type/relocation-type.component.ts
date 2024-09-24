@@ -30,6 +30,7 @@ export class RelocationTypeComponent extends FormBase implements OnInit {
     temporaryRelocation = this.ApplicationTypeNames.LRSTemporaryRelocation;
     permanentRelocation = this.ApplicationTypeNames.LRSTransferofLocation;
     isOperatingAtTemporaryLocation: boolean = false;
+    temporaryRelocationApplicationExists: boolean = false;
 
     // Icons
     faTrash = faTrash;
@@ -56,6 +57,24 @@ export class RelocationTypeComponent extends FormBase implements OnInit {
             if (this.licence && this.licence.temporaryRelocationStatus === TemporaryRelocationStatus.Yes) {
                 this.isOperatingAtTemporaryLocation = true;
             }
+            this.licence.actionApplications.forEach(app => {
+                console.log("app: ", app);
+                if (app.applicationTypeName === this.ApplicationTypeNames.LRSTemporaryRelocation) {
+                    if (
+                        app.applicationStatus === ApplicationStatuses.Submitted ||
+                        app.applicationStatus === ApplicationStatuses.Incomplete ||
+                        app.applicationStatus === ApplicationStatuses.PendingApproval ||
+                        app.applicationStatus === ApplicationStatuses.Review ||
+                        app.applicationStatus === ApplicationStatuses.Assessment ||
+                        app.applicationStatus === ApplicationStatuses.Issued ||
+                        app.applicationStatus === ApplicationStatuses.PendingFinalInspection ||
+                        app.applicationStatus === ApplicationStatuses.ReviewingResults ||
+                        app.applicationStatus === ApplicationStatuses.PendingLicenseFee
+                    ) {
+                        this.temporaryRelocationApplicationExists = true;
+                    }
+                }
+            });
         } else {
             // Handle the case where the licence is not available in the router state (page refresh)
             console.error('Licence object not found in the router state.');
