@@ -58,7 +58,6 @@ export class RelocationTypeComponent extends FormBase implements OnInit {
                 this.isOperatingAtTemporaryLocation = true;
             }
             this.licence.actionApplications.forEach(app => {
-                console.log("app: ", app);
                 if (app.applicationTypeName === this.ApplicationTypeNames.LRSTemporaryRelocation) {
                     if (
                         app.applicationStatus === ApplicationStatuses.Submitted ||
@@ -72,6 +71,7 @@ export class RelocationTypeComponent extends FormBase implements OnInit {
                         app.applicationStatus === ApplicationStatuses.PendingLicenseFee
                     ) {
                         this.temporaryRelocationApplicationExists = true;
+                        return;
                     }
                 }
             });
