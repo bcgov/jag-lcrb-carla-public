@@ -425,9 +425,9 @@
               <h4 *ngIf="this.businessTypeIsCorporation()">Notice of Articles (or Register of Directors and Officers)</h4>
               <h4 *ngIf="this.businessTypeIsSociety()">List of Directors and Officers</h4>
               <p>Provide the Notice of Articles for your <span *ngIf="this.businessTypeIsSociety()">Society</span><span *ngIf="this.businessTypeIsCorporation()">Corporation</span>. Alternatively, you can provide list of all current directors/officers by full legal name, position and date of appointment.</p>
-              <p *ngIf="this.isLiquor() && !this.businessTypeIsSociety()">
+              <!-- <p *ngIf="this.isLiquor() && !this.businessTypeIsSociety()">
                 <strong>Directors and Officers are <u>not</u> required to submit a Personal History Summary form for liquor-related applications.</strong>
-              </p>
+              </p> -->
               <app-file-uploader *ngIf="true || applicationId" documentType="NOA"
                                  fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application" [extensions]="['pdf']"
                                  (numberOfUploadedFiles)="uploadedNOA = $event" [entityId]="applicationId"
