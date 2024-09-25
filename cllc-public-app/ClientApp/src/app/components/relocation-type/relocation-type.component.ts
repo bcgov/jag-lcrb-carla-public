@@ -68,7 +68,8 @@ export class RelocationTypeComponent extends FormBase implements OnInit {
                         app.applicationStatus === ApplicationStatuses.Issued ||
                         app.applicationStatus === ApplicationStatuses.PendingFinalInspection ||
                         app.applicationStatus === ApplicationStatuses.ReviewingResults ||
-                        app.applicationStatus === ApplicationStatuses.PendingLicenseFee
+                        app.applicationStatus === ApplicationStatuses.PendingLicenseFee ||
+                        app.applicationStatus === ApplicationStatuses.Intake
                     ) {
                         this.temporaryRelocationApplicationExists = true;
                         return;
