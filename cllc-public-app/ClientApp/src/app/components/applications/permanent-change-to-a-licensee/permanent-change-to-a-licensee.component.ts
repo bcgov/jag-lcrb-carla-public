@@ -60,7 +60,6 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
   uploadedSocietyNameChange = 0;
   uploadedExecutorDocuments = 0;
 
-
   get hasLiquor(): boolean {
     return this.liquorLicences.length > 0;
   }
