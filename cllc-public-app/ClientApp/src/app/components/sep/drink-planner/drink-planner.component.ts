@@ -201,7 +201,8 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
   }
 
   storageUnits(config: DrinkConfig): number {
-    const servings = this.servings(config);
+    //calculate free and paid servings
+    const servings: number = (this.form.get(config.group).value + this.form.get(config.group_free).value) || 0;  
     const storageUnits = servings * config.servingSizeMl / config.storageSizeMl;
     return storageUnits > 0 && storageUnits < 1 ? 1 : storageUnits;
   }
@@ -319,5 +320,13 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
       error = `Please enter a value less or equal to ${control.errors.max.max}`;
     }
     return error;
+  }
+
+
+  //validate input should only accept numbers
+  validateInput(event:Event):void{
+   const input = event.target as HTMLInputElement;
+   input.value = input.value.replace(/-/g,'');
+
   }
 }
