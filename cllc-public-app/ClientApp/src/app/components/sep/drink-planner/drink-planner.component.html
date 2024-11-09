@@ -55,13 +55,13 @@
 
         <mat-form-field appearance="outline" floatLabel="always">
           <mat-label>No. Servings</mat-label>
-          <input matInput type="number" [formControlName]="item.group" class="average-price" placeholder="0">
+          <input matInput type="number" (input)="validateInput($event)" [formControlName]="item.group" class="average-price" placeholder="0" min="0" pattern="^[0-9]*$">
         </mat-form-field>
 
         <ng-container *ngIf="someFree">
           <mat-form-field appearance="outline" floatLabel="always">
             <mat-label>No. Free Servings</mat-label>
-            <input matInput type="number" [formControlName]="item.group_free" class="average-price" placeholder="0">
+            <input matInput type="number" (input)="validateInput($event)" [formControlName]="item.group_free" class="average-price" placeholder="0" min="0" pattern="^[0-9]*$">
           </mat-form-field>
         </ng-container>
 
