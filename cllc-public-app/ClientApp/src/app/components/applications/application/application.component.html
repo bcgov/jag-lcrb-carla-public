@@ -1826,20 +1826,29 @@
                                    [uploadHeader]="'TO UPLOAD FLOOR PLANS, DRAG FILES HERE OR'">
                 </app-file-uploader>
               </section>
-            </div>
+              <br>
+             <section  *ngIf="application.applicationType.serviceAreas" > <p>Enter the total occupant load as indicated by the occupant load stamp on the floor plan. This number can be either the total stamped on the floor plan or the sum of occupant loads across all service areas, as listed in the occupant load stamp. </p>
+              <app-field [valid]="!showValidationMessages || form.get('totalOccupantLoad').valid"  errorMessage="Total occupant load is required.">   <input class="form-control" formControlName="totalOccupantLoad" id="totalOccupantLoad"
+              style="width: 250px;" type="number" min="1"  placeholder="Total occupant load"  (input)="validateInput($event)"  ></app-field></section>
+            </div> 
+          
           </section>
 
           <!-- Service Area -->
           <h3 class="blue-header" *ngIf="application.applicationType.serviceAreas">SERVICE AREAS</h3>
           <section *ngIf="application.applicationType.serviceAreas" class="padded-section content-bottom">
 
-            <div *ngIf="htmlContent?.serviceAreas" [innerHTML]="htmlContent.serviceAreas"></div>
+            <div *ngIf="htmlContent?.serviceAreas" [innerHTML]="htmlContent.serviceAreas" ></div>
 
             <app-field [valid]="!showValidationMessages || form.get('serviceAreas').valid" errorMessage="All fields are required."
                        [showChevrons]="false" [isFullWidth]="true">
               <app-capacity-table formControlName="serviceAreas" [areaCategory]="getAreaCategoryNumber('Service')"
                                   [enabled]="!isOpenedByLGForApproval && !lGHasApproved()">
               </app-capacity-table>
+              <div *ngIf="!isOccupantLoadCorrect()">
+                <br>
+                 <p  class="error-text">The sum of occupant loads across all service areas does not match the total occupant load entered in the total occupant load field.</p>
+              </div>
             </app-field>
 
             <mat-card class="mat-elevation-z0 mb-3" *ngIf="showHoldsOtherManufactureLicence()">
