@@ -95,7 +95,9 @@ export class SummaryComponent implements OnInit {
   loaded: boolean;
   savingToAPI: boolean;
   isRefundPolicyChecked: boolean = false;
-  showError:boolean = false;
+  showRefundPolicyError:boolean = false;
+  isDeclarationChecked: boolean = false;
+  showDeclarationError: boolean = false;
 
   @Input() set localId(value: number) {
     this._appID = value;
@@ -419,6 +421,13 @@ export class SummaryComponent implements OnInit {
   }
 
   async submitApplication(): Promise<void> {
+    // check declaration
+    if(!this.isDeclarationChecked){
+      this.showDeclarationError = true;
+      return;
+    }
+
+    this.showDeclarationError = false;
     this.savingToAPI = true;
     const appData = await this.db.getSepApplication(this.localId);
 
@@ -475,7 +484,7 @@ export class SummaryComponent implements OnInit {
   }
 
   validateRefundPolicyCheckbox() {
-    this.showError = !this.isRefundPolicyChecked;
+    this.showRefundPolicyError = !this.isRefundPolicyChecked;
   }
 
 }
