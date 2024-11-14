@@ -470,6 +470,39 @@
   </app-field>
 </address>
 
+<h3 class="blue-header">REFUND POLICYY</h3>
+<div class="content-bottom">
+  <p>
+    Licence renewal fees are generally non-refundable.
+    <br><br>
+    Refunds for <a href="https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/241_2016#Schedule1" target="_blank">licence renewal fees</a> may be available if the:
+  </p>
+  <ul>
+    <li>The LCRB has made an error</li>
+    <li>Applicant has overpaid</li>
+  </ul>
+  <p>
+    Renewal fees must be paid in full for a licence to remain valid.
+  </p>
+  <p>
+    Payment may appear on a credit card statement as:<br>
+    "Liquor and Cannabis Re… Victoria BC" and other variations.
+  </p>
+  <p>
+    The LCRB investigates all credit card chargeback requests for fees and will dispute chargeback requests. A note will also be made on your LCRB account and there may be consequences for fraudulent requests.
+  </p>
+
+  <app-field [valid]="!showValidationMessages || form.get('readRefundPolicy').valid"
+             errorMessage="Please affirm that you have read and understand the refund policy." [showChevrons]="false">
+    <mat-checkbox formControlName="readRefundPolicy">
+      <span class="error-states">*</span>
+      <span class="ml-2">
+        I have read and understand the refund policy.
+      </span>
+    </mat-checkbox>
+  </app-field>
+</div>
+
 <h3 class="blue-header ngtest-declarations">
   DECLARATIONS
 </h3>
