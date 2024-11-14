@@ -88,7 +88,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   uploadedPartnershipAgreement: 0;
   uploadedOtherDocuments: 0;
   uploadedIndividualsWithLessThan10: 0;
-  proofofValidInterestDocuments: 0;
+  proofOfValidInterestDocuments: 0;
   dynamicsForm: DynamicsForm;
   autocompleteLocalGovernmemts: any[];
   autocompletePoliceDurisdictions: any[];
@@ -1231,7 +1231,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       }
 
     }
-    if (this.application?.applicationType?.name === ApplicationTypeNames.DormancyReinstatement && (this.proofofValidInterestDocuments || 0) < 1) {
+    if (this.application?.applicationType?.name === ApplicationTypeNames.DormancyReinstatement && (this.proofOfValidInterestDocuments || 0) < 1) {
       valid = false;
       this.validationMessages.push('At least one proof of valid interest document is required.');
     }
