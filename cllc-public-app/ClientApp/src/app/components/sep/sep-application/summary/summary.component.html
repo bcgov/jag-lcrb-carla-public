@@ -112,11 +112,12 @@
           {{application.policeDecisionBy?.name}}.</p>
       </section>
 
-      <section *ngIf="getStatus() == 'Payment Required' || trnApproved === 0 || mode ==='payNow'">
+      <!-- hiding the duplicate button  -->
+      <!-- <section *ngIf="false">
         <button mat-raised-button color="primary" (click)="payNow()">
           <fa-icon [icon]="faShoppingCart" style="margin-right: 10px;"></fa-icon>PAY NOW
         </button>
-      </section>
+      </section> -->
 
       <section *ngIf="getStatus() == 'Approval Expired'">
         <p>Your application was approved, however you did not pay for it before the event start date. Therefore, the permit
@@ -497,17 +498,59 @@
           <p><fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>Permits cannot be issued before or on the date that they are submitted.</p>
 
         </div>
+
+        <section >
+          <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                  SPECIAL EVENT REFUND
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div><p>Generally, <a href="https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/241_2016#Schedule1" target="_blank">Permit fees</a> are non-refundable. A cancelled event is not grounds for a refund.</p>
+              <p>Refunds for permit fees may be available if:</p>
+              <ul>
+                <li>The LCRB has made an error</li>
+                <li>You have overpaid</li>
+                <li>The event is cancelled due to exceptional circumstances such as a provincial state of emergency.</li>
+              </ul>
+      
+              <p>The LCRB investigates all credit card chargeback requests for fees and will dispute chargeback requests. A note will also be made on your LCRB account and there may be consequences for fraudulent requests.</p>
+              <p>Payment may appear on a credit card statement as:</p>
+              <ul>
+                <li>"Special Occasion licence"</li>
+                <li>"Special Occasio"</li>
+                <li>Other variations</li>
+              </ul></div>
+            <div *ngIf="getStatus() == 'Payment Required' && !trnId || mode ==='payNow'">
+              <mat-checkbox [(ngModel)] = "isRefundPolicyChecked">
+                <span class="error-states">*</span>
+                I have read and understand the refund policy.
+              </mat-checkbox>
+              <div *ngIf="showError" class="error-text">
+                Please affirm that you have read and understand the refund policy.
+              </div>
+            </div>
+          </mat-expansion-panel>
+        </section> <!-- special event refund -->
+        
+
+
         <section *ngIf="getStatus() == 'Payment Required' && !trnId || mode ==='payNow'">
 
           <section style="border: solid #ccc 1px;
-          padding: 20px;
-          background-color: #fcba19; padding-bottom: 20px;">
-          <h3>Application Approved!</h3>
-
+                          padding: 20px;
+                          background-color: #fcba19;
+                          padding-bottom: 20px;">
+            <h3>Application Approved!</h3>
 
             <p><fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>You must pay these fees to get a special event permit. If you do not pay these fees, your application will not be valid and a licence will not be issued for your event.</p>
             <p>In the event that the information on this application is no longer correct or if you wish to make additional changes, you may contact the LCRB or withdraw your application up to 24 hours before the event begins.</p>
             <button mat-raised-button color="primary" (click)="payNow()"><fa-icon [icon]="faShoppingCart" style="margin-right: 10px;"></fa-icon>PAY NOW</button>
+
+            <div *ngIf="showError" class="error-text">
+              <br>
+              Please affirm that you have read and understand the refund policy.
+            </div>
           </section>
 
           <!--button mat-raised-button (click)="payNow()">Pay Now</button-->

@@ -94,6 +94,8 @@ export class SummaryComponent implements OnInit {
   paymentTransactionMessage: string;
   loaded: boolean;
   savingToAPI: boolean;
+  isRefundPolicyChecked: boolean = false;
+  showError:boolean = false;
 
   @Input() set localId(value: number) {
     this._appID = value;
@@ -448,7 +450,12 @@ export class SummaryComponent implements OnInit {
 
   // present a confirmation dialog prior to the payment being processed.
   payNow() {
-    //this.submitApplication();
+    this.validateRefundPolicyCheckbox();
+
+    if (!this.isRefundPolicyChecked) {
+      return;
+    }
+
     // set dialogConfig settings
     const dialogConfig = {
       autoFocus: true,
@@ -467,6 +474,9 @@ export class SummaryComponent implements OnInit {
     window.print();
   }
 
+  validateRefundPolicyCheckbox() {
+    this.showError = !this.isRefundPolicyChecked;
+  }
 
 }
 
