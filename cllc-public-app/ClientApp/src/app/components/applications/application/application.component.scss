@@ -50,7 +50,15 @@
     padding-left: 15px;
     margin-bottom: 20px;
   }
+  .text-red {
+    color: #ff0800;
+  }
 
+  .error-text {
+    color: #d8292f;
+    font-weight: 400;
+    line-height: 1.5;
+  }
   .warning-state {
     color: #ffc107;
   }

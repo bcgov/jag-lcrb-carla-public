@@ -178,6 +178,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       applyAsIndigenousNation: [false],
       indigenousNationId: [{ value: null, disabled: true }, Validators.required],
       federalProducerNames: ['', Validators.required],
+      totalOccupantLoad: ['', Validators.required],
       applicantType: ['', Validators.required],
       description1: [''],
       description2: [''],
@@ -617,6 +618,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
     if (!this.application.applicationType.serviceAreas) {
       this.form.get('serviceAreas').disable();
+      this.form.get('totalOccupantLoad').disable();
+
     }
     if (!this.application.applicationType.outsideAreas) {
       this.form.get('outsideAreas').disable();
@@ -1114,12 +1117,19 @@ export class ApplicationComponent extends FormBase implements OnInit {
       }
     }
 
-    const serviceArea = ('areas' in this.form.get('serviceAreas').value) ? this.form.get('serviceAreas').value['areas'] : this.form.get('serviceAreas').value;
 
+    const serviceArea = ('areas' in this.form.get('serviceAreas').value) ? this.form.get('serviceAreas').value['areas'] : this.form.get('serviceAreas').value;
+    
     //if (this.showServiceArea() && serviceArea.length === 0 && (this.isLP() || ApplicationTypeNames.SpecialEventAreaEndorsement || ApplicationTypeNames.LoungeAreaEndorsment) )	{
     if (this.showServiceArea() && serviceArea.length === 0) {
       valid = false;
       this.validationMessages.push('At least one service area is required.');
+    }else{
+        if(!this.isOccupantLoadCorrect()){
+          valid = false;
+          this.validationMessages.push('The sum of occupant loads across all service areas does not match the total occupant load entered in the total occupant load field.');
+        }
+
     }
 
     // optional for this application type
@@ -1489,6 +1499,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       establishmentParcelId: 'Please enter the Parcel Identifier (format: 9 digits)',
       establishmentopeningdate: 'Please enter the store opening date',
       federalProducerNames: 'Please enter the name of federal producer',
+      totalOccupantLoad:'Please enter the total occupant load',
       hasValidInterest: 'Please enter a value for valid interest',
       indigenousNationId: 'Please select the Indigenous nation',
       isAlr: 'Please indicate ALR status',
@@ -1771,4 +1782,16 @@ export class ApplicationComponent extends FormBase implements OnInit {
     this.licenseToRemove = assignedLicence;
     this.form.get("description1").patchValue(this.licenseToRemove.name);
   }
+
+  validateInput(event:Event):void{
+    const input = event.target as HTMLInputElement;
+    input.value = input.value.replace(/-/g,'');
+   }
+
+   isOccupantLoadCorrect(): Boolean{
+    const serviceArea = ('areas' in this.form.get('serviceAreas').value) ? this.form.get('serviceAreas').value['areas'] : this.form.get('serviceAreas').value;
+    let totalCapacity = serviceArea.reduce((sum,item)=> Number(sum+(+item.capacity)),0);
+    let totalOccupantLoad = this.form.get('totalOccupantLoad').value | 0;
+    return totalOccupantLoad>=totalCapacity;
+   }
 }
