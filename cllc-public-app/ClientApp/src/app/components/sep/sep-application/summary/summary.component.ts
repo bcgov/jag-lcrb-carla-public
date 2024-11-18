@@ -94,6 +94,10 @@ export class SummaryComponent implements OnInit {
   paymentTransactionMessage: string;
   loaded: boolean;
   savingToAPI: boolean;
+  isRefundPolicyChecked: boolean = false;
+  showRefundPolicyError:boolean = false;
+  isDeclarationChecked: boolean = false;
+  showDeclarationError: boolean = false;
 
   @Input() set localId(value: number) {
     this._appID = value;
@@ -417,6 +421,13 @@ export class SummaryComponent implements OnInit {
   }
 
   async submitApplication(): Promise<void> {
+    // check declaration
+    if(!this.isDeclarationChecked){
+      this.showDeclarationError = true;
+      return;
+    }
+
+    this.showDeclarationError = false;
     this.savingToAPI = true;
     const appData = await this.db.getSepApplication(this.localId);
 
@@ -448,7 +459,12 @@ export class SummaryComponent implements OnInit {
 
   // present a confirmation dialog prior to the payment being processed.
   payNow() {
-    //this.submitApplication();
+    this.validateRefundPolicyCheckbox();
+
+    if (!this.isRefundPolicyChecked) {
+      return;
+    }
+
     // set dialogConfig settings
     const dialogConfig = {
       autoFocus: true,
@@ -467,6 +483,9 @@ export class SummaryComponent implements OnInit {
     window.print();
   }
 
+  validateRefundPolicyCheckbox() {
+    this.showRefundPolicyError = !this.isRefundPolicyChecked;
+  }
 
 }
 
