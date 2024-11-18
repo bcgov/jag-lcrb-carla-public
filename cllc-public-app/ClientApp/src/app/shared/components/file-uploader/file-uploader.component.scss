@@ -32,3 +32,26 @@
 .red-snackbar {
     background: #F44336;
 }
+
+.validation-message {
+    margin-top: 10px;
+    font-size: 14px;
+    color: inherit;
+    border: none !important;
+    background: none;
+    box-shadow: none;
+    padding: 0;
+  }
+  
+  .validation-message.invalid {
+    color: red;
+  }
+  
+  .validation-message.expired {
+    color: red;
+  }
+  
+  .validation-message.valid {
+    color: green;
+  }
+  

@@ -1428,6 +1428,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
   }
 
+  onOccupantLoadUpdated(load: number) {
+    this.form.patchValue({ totalOccupantLoad: load });
+  }
+
   relocateWinaryLicenceChanged() {
     if (this.application.relocateWinaryLicence == undefined || this.application.relocateWinaryLicence == false) {
       this.application.relocateWinaryLicence = true;

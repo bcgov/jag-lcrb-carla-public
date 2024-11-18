@@ -1838,13 +1838,20 @@
                 The below floor plan is on file.
               </p>
               <section>
-                <app-file-uploader *ngIf="application?.id" documentType="Floor Plan"
-                                   fileTypes="FILE MUST BE IN PDF FORMAT."
-                                   [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
-                                   [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()" [multipleFiles]="true"
-                                   entityName="application" [useDocumentTypeForName]="true"
-                                   (numberOfUploadedFiles)="uploadedFloorPlanDocuments = $event" [entityId]="application?.id"
-                                   [uploadHeader]="'TO UPLOAD FLOOR PLANS, DRAG FILES HERE OR'">
+                <app-file-uploader
+                  *ngIf="application?.id"
+                  documentType="Floor Plan"
+                  fileTypes="FILE MUST BE IN PDF FORMAT."
+                  [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
+                  [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()"
+                  [multipleFiles]="true"
+                  entityName="application"
+                  [useDocumentTypeForName]="true"
+                  [isFloorPlanUploader]="true"
+                  (numberOfUploadedFiles)="uploadedFloorPlanDocuments = $event"
+                  (occupantLoadUpdated)="onOccupantLoadUpdated($event)"
+                  [entityId]="application?.id"
+                  [uploadHeader]="'TO UPLOAD FLOOR PLANS, DRAG FILES HERE OR'">
                 </app-file-uploader>
               </section>
               <br>
