@@ -88,7 +88,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   uploadedPartnershipAgreement: 0;
   uploadedOtherDocuments: 0;
   uploadedIndividualsWithLessThan10: 0;
-  proofofValidInterestDocuments: 0;
+  proofOfValidInterestDocuments: 0;
   dynamicsForm: DynamicsForm;
   autocompleteLocalGovernmemts: any[];
   autocompletePoliceDurisdictions: any[];
@@ -107,7 +107,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   uploadedCentralSecuritiesRegisterDocuments: number = 0;
   tiedHouseExemptions: { jobNumber: string, displayName: string }[] = [];
   licenseToRemove: RelatedLicence;
-
+  showOccupantLoadCheckBox: boolean = false;
 
   isHasPatioBackingFld: boolean = true;
 
@@ -179,6 +179,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       indigenousNationId: [{ value: null, disabled: true }, Validators.required],
       federalProducerNames: ['', Validators.required],
       totalOccupantLoad: ['', Validators.required],
+      totalOccupantLoadExceed: [false, Validators.required],
       applicantType: ['', Validators.required],
       description1: [''],
       description2: [''],
@@ -1231,7 +1232,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       }
 
     }
-    if (this.application?.applicationType?.name === ApplicationTypeNames.DormancyReinstatement && (this.proofofValidInterestDocuments || 0) < 1) {
+    if (this.application?.applicationType?.name === ApplicationTypeNames.DormancyReinstatement && (this.proofOfValidInterestDocuments || 0) < 1) {
       valid = false;
       this.validationMessages.push('At least one proof of valid interest document is required.');
     }
@@ -1792,6 +1793,15 @@ export class ApplicationComponent extends FormBase implements OnInit {
     const serviceArea = ('areas' in this.form.get('serviceAreas').value) ? this.form.get('serviceAreas').value['areas'] : this.form.get('serviceAreas').value;
     let totalCapacity = serviceArea.reduce((sum,item)=> Number(sum+(+item.capacity)),0);
     let totalOccupantLoad = this.form.get('totalOccupantLoad').value | 0;
-    return totalOccupantLoad>=totalCapacity;
+    const isExceeded:boolean = totalOccupantLoad>=totalCapacity
+    if(isExceeded){
+      this.form.controls['totalOccupantLoadExceed'].enabled;
+      this.showOccupantLoadCheckBox = true;
+    }else{
+      this.form.controls['totalOccupantLoadExceed'].disabled;
+      this.showOccupantLoadCheckBox = false;
+
+    }
+    return  this.form.get('totalOccupantLoadExceed').value === true || isExceeded;
    }
 }

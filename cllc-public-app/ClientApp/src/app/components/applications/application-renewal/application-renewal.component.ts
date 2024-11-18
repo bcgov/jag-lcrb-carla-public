@@ -52,6 +52,7 @@ const ValidationErrorMap = {
   contactPersonPhone: "Please enter the business contact's 10-digit phone number",
   authorizedToSubmit: "Please affirm that you are authorized to submit the application",
   signatureAgreement: "Please affirm that all of the information provided for this application is true and complete",
+  readRefundPolicy: "Please affirm that you have read and understand the refund policy"
 };
 
 
@@ -242,6 +243,7 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
     
           authorizedToSubmit: ["", [this.customRequiredCheckboxValidator()]],
           signatureAgreement: ["", [this.customRequiredCheckboxValidator()]],
+          readRefundPolicy: ["", [this.customRequiredCheckboxValidator()]],
     
           assignedLicence: this.fb.group({
             id: [""],

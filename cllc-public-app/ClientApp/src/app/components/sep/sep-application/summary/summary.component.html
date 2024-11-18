@@ -453,52 +453,6 @@
 
         </mat-expansion-panel>
 
-        <div *ngIf="!isReadOnly() && !isSubmitted() && !this.isEventPast()">
-
-          <section class="d-flex">
-
-            <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
-            <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
-              <section>
-                <h2 style="margin-bottom: 24px;">Declaration</h2>
-
-                <mat-checkbox class="declaration-checkbox" style="white-space: normal; margin:0px;">
-                <p style="white-space: normal;"><em>
-                  I, <strong><u>{{contact?.name}}</u></strong>, certify that all of the information is true and complete to the best of my
-                  knowledge. I have read the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals/guide-sep.pdf" target="_blank">terms and conditions of the permit</a>, and if the application is approved,
-                  the
-                  permittee listed on the permit will be responsible for liquor service at the event.
-                </em></p>
-
-
-                  <p style="white-space: normal;"><em>By checking this box, I confirm that I have read, agree to and acknowledge the declaration. I also
-                  certify that I am at least 19 years old and that no essential information has been concealed or
-                  misrepresented on this application.</em></p>
-              </mat-checkbox>
-
-              <div class="d-flex" style="margin-top: 20px;">
-                <!--button mat-raised-button color="secondary" class="mr-2">BACK</button-->
-
-                <button [disabled]="savingToAPI" mat-raised-button color="primary" (click)="submitApplication()">
-                    <span>SUBMIT APPLICATION</span>
-                    <mat-progress-bar *ngIf="savingToAPI" mode="indeterminate"></mat-progress-bar>
-                </button>
-
-              </div>
-              </section>
-
-            </div>
-          </section>
-        </div>
-
-
-
-        <div *ngIf="!isReadOnly() && this.isEventPast()" class="d-flex" style="margin-top: 20px;">
-
-          <p><fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>Permits cannot be issued before or on the date that they are submitted.</p>
-
-        </div>
-
         <section >
           <mat-expansion-panel [expanded]="true">
             <mat-expansion-panel-header>
@@ -526,12 +480,67 @@
                 <span class="error-states">*</span>
                 I have read and understand the refund policy.
               </mat-checkbox>
-              <div *ngIf="showError" class="error-text">
+              <div *ngIf="showRefundPolicyError" class="error-text">
                 Please affirm that you have read and understand the refund policy.
               </div>
             </div>
           </mat-expansion-panel>
         </section> <!-- special event refund -->
+        
+        <div *ngIf="!isReadOnly() && !isSubmitted() && !this.isEventPast()">
+
+          <section class="d-flex">
+
+            <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
+            <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
+              <section>
+                <h2 style="margin-bottom: 24px;">Declaration</h2>
+                <p style="white-space: normal;"><em>
+                  I, <strong><u>{{contact?.name}}</u></strong>, certify that all of the information is true and complete to the best of my
+                  knowledge. I have read the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals/guide-sep.pdf" target="_blank">terms and conditions of the permit</a>, and if the application is approved,
+                  the
+                  permittee listed on the permit will be responsible for liquor service at the event.
+                </em></p>
+                <mat-checkbox
+                  [(ngModel)]="isDeclarationChecked"
+                  (change)="showDeclarationError = false"
+                  class="declaration-checkbox"
+                  style="white-space: normal; margin:0px;"
+                >
+                  <p style="white-space: normal;">
+                    <span class="error-states">*</span>
+                    <em>By checking this box, I confirm that I have read, agree to and acknowledge the declaration. I also
+                    certify that I am at least 19 years old and that no essential information has been concealed or
+                    misrepresented on this application.</em>
+                  </p>
+              </mat-checkbox>
+
+              <div *ngIf="showDeclarationError" class="error-message" style="color: #D8292F; margin-top: 8px;">
+                Please read and acknowledge the declaration before proceeding.
+              </div>
+
+              <div class="d-flex" style="margin-top: 20px;">
+                <!--button mat-raised-button color="secondary" class="mr-2">BACK</button-->
+
+                <button [disabled]="savingToAPI" mat-raised-button color="primary" (click)="submitApplication()">
+                    <span>SUBMIT APPLICATION</span>
+                    <mat-progress-bar *ngIf="savingToAPI" mode="indeterminate"></mat-progress-bar>
+                </button>
+
+              </div>
+              </section>
+
+            </div>
+          </section>
+        </div> <!-- DECLARATION SECTION -->
+
+
+
+        <div *ngIf="!isReadOnly() && this.isEventPast()" class="d-flex" style="margin-top: 20px;">
+
+          <p><fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>Permits cannot be issued before or on the date that they are submitted.</p>
+
+        </div>
         
 
 
@@ -547,7 +556,7 @@
             <p>In the event that the information on this application is no longer correct or if you wish to make additional changes, you may contact the LCRB or withdraw your application up to 24 hours before the event begins.</p>
             <button mat-raised-button color="primary" (click)="payNow()"><fa-icon [icon]="faShoppingCart" style="margin-right: 10px;"></fa-icon>PAY NOW</button>
 
-            <div *ngIf="showError" class="error-text">
+            <div *ngIf="showRefundPolicyError" class="error-text">
               <br>
               Please affirm that you have read and understand the refund policy.
             </div>
