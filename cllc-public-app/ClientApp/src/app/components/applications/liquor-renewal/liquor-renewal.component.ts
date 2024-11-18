@@ -44,6 +44,7 @@ const ValidationErrorMap = {
   contactPersonPhone: "Please enter the business contact's 10-digit phone number",
   authorizedToSubmit: "Please affirm that you are authorized to submit the application",
   signatureAgreement: "Please affirm that all of the information provided for this application is true and complete",
+  readRefundPolicy: "Please affirm that you have read and understand the refund policy",
 
   ldbOrderTotals: "Please provide LDB Order Totals ($0 - $10,000,000)",
   ldbOrderTotalsConfirm: "Please confirm LDB Order Totals matches",
@@ -142,7 +143,9 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
 
       authorizedToSubmit: ["", [this.customRequiredCheckboxValidator()]],
       signatureAgreement: ["", [this.customRequiredCheckboxValidator()]],
-      isManufacturedMinimum: ["", []]
+      isManufacturedMinimum: ["", []],
+
+      readRefundPolicy: ["", [this.customRequiredCheckboxValidator()]],
     });
 
     this.previousYear = (new Date().getFullYear() - 1).toString();

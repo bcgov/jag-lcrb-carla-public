@@ -88,7 +88,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   uploadedPartnershipAgreement: 0;
   uploadedOtherDocuments: 0;
   uploadedIndividualsWithLessThan10: 0;
-  proofofValidInterestDocuments: 0;
+  proofOfValidInterestDocuments: 0;
   dynamicsForm: DynamicsForm;
   autocompleteLocalGovernmemts: any[];
   autocompletePoliceDurisdictions: any[];
@@ -107,7 +107,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   uploadedCentralSecuritiesRegisterDocuments: number = 0;
   tiedHouseExemptions: { jobNumber: string, displayName: string }[] = [];
   licenseToRemove: RelatedLicence;
-
+  showOccupantLoadCheckBox: boolean = false;
 
   isHasPatioBackingFld: boolean = true;
 
@@ -178,6 +178,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
       applyAsIndigenousNation: [false],
       indigenousNationId: [{ value: null, disabled: true }, Validators.required],
       federalProducerNames: ['', Validators.required],
+      totalOccupantLoad: ['', Validators.required],
+      totalOccupantLoadExceed: [false, Validators.required],
       applicantType: ['', Validators.required],
       description1: [''],
       description2: [''],
@@ -617,6 +619,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
     if (!this.application.applicationType.serviceAreas) {
       this.form.get('serviceAreas').disable();
+      this.form.get('totalOccupantLoad').disable();
+
     }
     if (!this.application.applicationType.outsideAreas) {
       this.form.get('outsideAreas').disable();
@@ -1114,12 +1118,19 @@ export class ApplicationComponent extends FormBase implements OnInit {
       }
     }
 
-    const serviceArea = ('areas' in this.form.get('serviceAreas').value) ? this.form.get('serviceAreas').value['areas'] : this.form.get('serviceAreas').value;
 
+    const serviceArea = ('areas' in this.form.get('serviceAreas').value) ? this.form.get('serviceAreas').value['areas'] : this.form.get('serviceAreas').value;
+    
     //if (this.showServiceArea() && serviceArea.length === 0 && (this.isLP() || ApplicationTypeNames.SpecialEventAreaEndorsement || ApplicationTypeNames.LoungeAreaEndorsment) )	{
     if (this.showServiceArea() && serviceArea.length === 0) {
       valid = false;
       this.validationMessages.push('At least one service area is required.');
+    }else{
+        if(!this.isOccupantLoadCorrect()){
+          valid = false;
+          this.validationMessages.push('The sum of occupant loads across all service areas does not match the total occupant load entered in the total occupant load field.');
+        }
+
     }
 
     // optional for this application type
@@ -1221,7 +1232,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       }
 
     }
-    if (this.application?.applicationType?.name === ApplicationTypeNames.DormancyReinstatement && (this.proofofValidInterestDocuments || 0) < 1) {
+    if (this.application?.applicationType?.name === ApplicationTypeNames.DormancyReinstatement && (this.proofOfValidInterestDocuments || 0) < 1) {
       valid = false;
       this.validationMessages.push('At least one proof of valid interest document is required.');
     }
@@ -1489,6 +1500,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       establishmentParcelId: 'Please enter the Parcel Identifier (format: 9 digits)',
       establishmentopeningdate: 'Please enter the store opening date',
       federalProducerNames: 'Please enter the name of federal producer',
+      totalOccupantLoad:'Please enter the total occupant load',
       hasValidInterest: 'Please enter a value for valid interest',
       indigenousNationId: 'Please select the Indigenous nation',
       isAlr: 'Please indicate ALR status',
@@ -1771,4 +1783,25 @@ export class ApplicationComponent extends FormBase implements OnInit {
     this.licenseToRemove = assignedLicence;
     this.form.get("description1").patchValue(this.licenseToRemove.name);
   }
+
+  validateInput(event:Event):void{
+    const input = event.target as HTMLInputElement;
+    input.value = input.value.replace(/-/g,'');
+   }
+
+   isOccupantLoadCorrect(): Boolean{
+    const serviceArea = ('areas' in this.form.get('serviceAreas').value) ? this.form.get('serviceAreas').value['areas'] : this.form.get('serviceAreas').value;
+    let totalCapacity = serviceArea.reduce((sum,item)=> Number(sum+(+item.capacity)),0);
+    let totalOccupantLoad = this.form.get('totalOccupantLoad').value | 0;
+    const isExceeded:boolean = totalOccupantLoad>=totalCapacity
+    if(isExceeded){
+      this.form.controls['totalOccupantLoadExceed'].enabled;
+      this.showOccupantLoadCheckBox = true;
+    }else{
+      this.form.controls['totalOccupantLoadExceed'].disabled;
+      this.showOccupantLoadCheckBox = false;
+
+    }
+    return  this.form.get('totalOccupantLoadExceed').value === true || isExceeded;
+   }
 }
