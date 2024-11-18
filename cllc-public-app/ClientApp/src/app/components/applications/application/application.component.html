@@ -1516,6 +1516,27 @@
                 </div>
               </section>
             </div>
+            <div *ngIf="application?.applicationType?.name === ApplicationTypeNames.DormancyReinstatement">
+              <section>
+                <div>
+                  <h3 class="blue-header">Supporting Documents</h3>
+                  <div class="content-bottom">
+                    <p>
+                      Proof of valid interest (lease or land title) is required - attach a copy when submitting the form.
+                    </p>
+
+                    <app-file-uploader *ngIf="applicationId" documentType="Supporting Document"
+                                       fileTypes="FILE MUST BE IN PDF FORMAT." [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
+                                       [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()" [multipleFiles]="true"
+                                       entityName="application" [useDocumentTypeForName]="true"
+                                       (numberOfUploadedFiles)="proofOfValidInterestDocuments = $event" [entityId]="applicationId"
+                                       [uploadHeader]="'TO UPLOAD SUPPORTING DOCUMENTS'">
+                    </app-file-uploader>
+
+                  </div>
+                </div>
+              </section>
+            </div>
           </section>
 
           <!-- The label of the field will now be used to communicate the message of the alert -->
