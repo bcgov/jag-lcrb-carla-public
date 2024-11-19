@@ -1126,6 +1126,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       valid = false;
       this.validationMessages.push('At least one service area is required.');
     }else{
+       
         if(!this.isOccupantLoadCorrect()){
           valid = false;
           this.validationMessages.push('The sum of occupant loads across all service areas does not match the total occupant load entered in the total occupant load field.');
@@ -1790,18 +1791,27 @@ export class ApplicationComponent extends FormBase implements OnInit {
    }
 
    isOccupantLoadCorrect(): Boolean{
+    if(this.hideOcupantLoadFields()){
+       this.form.get('totalOccupantLoadExceed').disable();
+      return true;
+    }
     const serviceArea = ('areas' in this.form.get('serviceAreas').value) ? this.form.get('serviceAreas').value['areas'] : this.form.get('serviceAreas').value;
     let totalCapacity = serviceArea.reduce((sum,item)=> Number(sum+(+item.capacity)),0);
     let totalOccupantLoad = this.form.get('totalOccupantLoad').value | 0;
     const isExceeded:boolean = totalOccupantLoad>=totalCapacity
     if(isExceeded){
-      this.form.controls['totalOccupantLoadExceed'].enabled;
+      this.form.get('totalOccupantLoadExceed').enable();
       this.showOccupantLoadCheckBox = true;
     }else{
-      this.form.controls['totalOccupantLoadExceed'].disabled;
+      this.form.get('totalOccupantLoadExceed').disable();
       this.showOccupantLoadCheckBox = false;
-
     }
     return  this.form.get('totalOccupantLoadExceed').value === true || isExceeded;
    }
+
+//Check if applicant is waiting for LG approcval or has been approved by LG.
+ //In this case do not block user to pay and submit if the fields are empty 
+ hideOcupantLoadFields(): Boolean{
+  return this.isOpenedByLGForApproval || this.lGHasApproved();
+ }
 }

@@ -1846,10 +1846,13 @@
                 </app-file-uploader>
               </section>
               <br>
-             <section  *ngIf="application.applicationType.serviceAreas" > <p>Enter the total occupant load as indicated by your local government. This number can be either the total stamped on the floor plan or the sum of occupant loads across all service areas, as listed in the occupant load stamp. </p>
               
-              <app-field [required]="true"  label="Total occupant load" [valid]="!showValidationMessages || form.get('totalOccupantLoad').valid"  errorMessage="Total occupant load is required.">   <input class="form-control" formControlName="totalOccupantLoad" id="totalOccupantLoad"
-              style="width: 250px;" type="number" min="1"  placeholder="Total occupant load"  (input)="validateInput($event)"  /></app-field></section>
+             <div>
+              <section  *ngIf="application.applicationType.serviceAreas" > <p>Enter the total occupant load as indicated by your local government. This number can be either the total stamped on the floor plan or the sum of occupant loads across all service areas, as listed in the occupant load stamp. </p>
+                <app-field [required]="true"   label="Total occupant load" [valid]="!showValidationMessages || form.get('totalOccupantLoad').valid"  errorMessage="Total occupant load is required.">   <input class="form-control" formControlName="totalOccupantLoad" id="totalOccupantLoad"
+                style="width: 250px;" type="number" min="1"  placeholder="Total occupant load"  (input)="validateInput($event)"  /></app-field>
+              </section>
+             </div>
             </div> 
           
           </section>
@@ -1865,17 +1868,20 @@
               <app-capacity-table formControlName="serviceAreas" [areaCategory]="getAreaCategoryNumber('Service')"
                                   [enabled]="!isOpenedByLGForApproval && !lGHasApproved()">
               </app-capacity-table>
-              <div *ngIf="!isOccupantLoadCorrect()">
-                <br>
-                 <p  class="error-text">The sum of occupant loads across all service areas does not match the total occupant load entered in the total occupant load field.</p>
-                 
-                </div>
 
-                <div *ngIf="!showOccupantLoadCheckBox">
-                  <mat-checkbox formControlName="totalOccupantLoadExceed"  > <span class="error-states">*</span>
-                    I affirm that the combined service area capacity exceeds the total occupant load.
-                  </mat-checkbox>
-                </div>
+              <div  *ngIf="!hideOcupantLoadFields()" >
+                <div *ngIf="!isOccupantLoadCorrect()">
+                  <br>
+                   <p  class="error-text">The sum of occupant loads across all service areas does not match the total occupant load entered in the total occupant load field.</p>
+                   
+                  </div>
+  
+                  <div *ngIf="!showOccupantLoadCheckBox">
+                    <mat-checkbox formControlName="totalOccupantLoadExceed"  > <span class="error-states">*</span>
+                      I affirm that the combined service area capacity exceeds the total occupant load.
+                    </mat-checkbox>
+                  </div>
+              </div>
             </app-field>
 
             <mat-card class="mat-elevation-z0 mb-3" *ngIf="showHoldsOtherManufactureLicence()">
