@@ -333,62 +333,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
     this.form.get('serviceHoursSaturdayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
       this.updateRequiredValidator(val, 'serviceHoursSaturdayOpen');
     });
-
-    this.form.get('serviceHoursSundayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateRequiredValidator(val, 'serviceHoursSundayClose');
-    });
-
-    this.form.get('serviceHoursSundayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateRequiredValidator(val, 'serviceHoursSundayOpen');
-    });
-
-    this.form.get('serviceHoursMondayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateRequiredValidator(val, 'serviceHoursMondayClose');
-    });
-
-    this.form.get('serviceHoursMondayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateRequiredValidator(val, 'serviceHoursMondayOpen');
-    });
-
-    this.form.get('serviceHoursTuesdayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateRequiredValidator(val, 'serviceHoursTuesdayClose');
-    });
-
-    this.form.get('serviceHoursTuesdayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateRequiredValidator(val, 'serviceHoursTuesdayOpen');
-    });
-
-    this.form.get('serviceHoursWednesdayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateRequiredValidator(val, 'serviceHoursWednesdayClose');
-    });
-
-    this.form.get('serviceHoursWednesdayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateRequiredValidator(val, 'serviceHoursWednesdayOpen');
-    });
-
-    this.form.get('serviceHoursThursdayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateRequiredValidator(val, 'serviceHoursThursdayClose');
-    });
-
-    this.form.get('serviceHoursThursdayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateRequiredValidator(val, 'serviceHoursThursdayOpen');
-    });
-    
-    this.form.get('serviceHoursFridayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateRequiredValidator(val, 'serviceHoursFridayClose');
-    });
-
-    this.form.get('serviceHoursFridayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateRequiredValidator(val, 'serviceHoursFridayOpen');
-    });
-
-    this.form.get('serviceHoursSaturdayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateRequiredValidator(val, 'serviceHoursSaturdayClose');
-    });
-
-    this.form.get('serviceHoursSaturdayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateRequiredValidator(val, 'serviceHoursSaturdayOpen');
-    });
   
     this.form.get('indigenousNation').valueChanges
       .pipe(filter(value => value && value.length >= 3),
@@ -728,24 +672,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.form.get('serviceHoursSaturdayClose').disable();
     }
 
-    if (!this.application.applicationType.showHoursOfSale || this.application.applicationType.name === ApplicationTypeNames.FP || this.application.applicationType.name === ApplicationTypeNames.FPRelo) {
-      // Opening hours
-      this.form.get('serviceHoursSundayOpen').disable();
-      this.form.get('serviceHoursMondayOpen').disable();
-      this.form.get('serviceHoursTuesdayOpen').disable();
-      this.form.get('serviceHoursWednesdayOpen').disable();
-      this.form.get('serviceHoursThursdayOpen').disable();
-      this.form.get('serviceHoursFridayOpen').disable();
-      this.form.get('serviceHoursSaturdayOpen').disable();
-      // Closing hours
-      this.form.get('serviceHoursSundayClose').disable();
-      this.form.get('serviceHoursMondayClose').disable();
-      this.form.get('serviceHoursTuesdayClose').disable();
-      this.form.get('serviceHoursWednesdayClose').disable();
-      this.form.get('serviceHoursThursdayClose').disable();
-      this.form.get('serviceHoursFridayClose').disable();
-      this.form.get('serviceHoursSaturdayClose').disable();
-    }
 
     if (this.application.applicationType.name !== ApplicationTypeNames.Marketer) {
       this.form.get('federalProducerNames').disable();
@@ -1501,10 +1427,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.validationMessages.push('Hours of sale are required');
     }
 
-    if (!this.isHoursOfSaleValid() || !this.isHoursOfSalePopulated()) {
-      valid = false;
-      this.validationMessages.push('Hours of sale are required');
-    }
 
     if (this.application.applicationType.showOwnershipDeclaration) {
 
