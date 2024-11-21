@@ -672,6 +672,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.form.get('serviceHoursSaturdayClose').disable();
     }
 
+
     if (this.application.applicationType.name !== ApplicationTypeNames.Marketer) {
       this.form.get('federalProducerNames').disable();
     }
@@ -848,6 +849,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     return true;
   }
 
+  
   lgHasReviewedZoning(): boolean {
     let hasReviewed = false;
     if (this.application && this.application.lGDecisionSubmissionDate && this.application.lgZoning) {
@@ -1328,6 +1330,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.validationMessages.push('At least one service area is required.');
     }else{
        
+       
         if(!this.isOccupantLoadCorrect()){
           valid = false;
           this.validationMessages.push('The sum of occupant loads across all service areas does not match the total occupant load entered in the total occupant load field.');
@@ -1423,6 +1426,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       valid = false;
       this.validationMessages.push('Hours of sale are required');
     }
+
 
     if (this.application.applicationType.showOwnershipDeclaration) {
 
@@ -1997,22 +2001,26 @@ export class ApplicationComponent extends FormBase implements OnInit {
    }
 
    isOccupantLoadCorrect(): Boolean{
+    
     if(this.hideOcupantLoadFields()){
        this.form.get('totalOccupantLoadExceed').disable();
       return true;
     }
+
     const serviceArea = ('areas' in this.form.get('serviceAreas').value) ? this.form.get('serviceAreas').value['areas'] : this.form.get('serviceAreas').value;
     let totalCapacity = serviceArea.reduce((sum,item)=> Number(sum+(+item.capacity)),0);
     let totalOccupantLoad = this.form.get('totalOccupantLoad').value | 0;
-    const isExceeded:boolean = totalOccupantLoad>=totalCapacity
+    const isExceeded:boolean = totalCapacity > totalOccupantLoad
     if(isExceeded){
+      this.form.get('totalOccupantLoadExceed').enable();
       this.form.get('totalOccupantLoadExceed').enable();
       this.showOccupantLoadCheckBox = true;
     }else{
       this.form.get('totalOccupantLoadExceed').disable();
+      this.form.get('totalOccupantLoadExceed').disable();
       this.showOccupantLoadCheckBox = false;
     }
-    return  this.form.get('totalOccupantLoadExceed').value === true || isExceeded;
+    return  this.form.get('totalOccupantLoadExceed').value === true || !isExceeded;
    }
 
 //Check if applicant is waiting for LG approcval or has been approved by LG.
