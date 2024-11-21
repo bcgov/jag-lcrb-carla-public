@@ -1997,14 +1997,22 @@ export class ApplicationComponent extends FormBase implements OnInit {
    }
 
    isOccupantLoadCorrect(): Boolean{
+    
     if(this.hideOcupantLoadFields()){
        this.form.get('totalOccupantLoadExceed').disable();
       return true;
     }
+
     const serviceArea = ('areas' in this.form.get('serviceAreas').value) ? this.form.get('serviceAreas').value['areas'] : this.form.get('serviceAreas').value;
     let totalCapacity = serviceArea.reduce((sum,item)=> Number(sum+(+item.capacity)),0);
     let totalOccupantLoad = this.form.get('totalOccupantLoad').value | 0;
-    const isExceeded:boolean = totalOccupantLoad>=totalCapacity
+  
+    const outsideAreas = ('areas' in this.form.get('outsideAreas').value) ? this.form.get('outsideAreas').value['areas'] : this.form.get('outsideAreas').value;
+    let totalCapacityoutsideAreas = outsideAreas.reduce((sum,item)=> Number(sum+(+item.capacity)),0);
+
+    totalCapacity =totalCapacity+totalCapacityoutsideAreas;
+    const isExceeded:boolean = totalCapacity > totalOccupantLoad
+
     if(isExceeded){
       this.form.get('totalOccupantLoadExceed').enable();
       this.showOccupantLoadCheckBox = true;
@@ -2012,7 +2020,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.form.get('totalOccupantLoadExceed').disable();
       this.showOccupantLoadCheckBox = false;
     }
-    return  this.form.get('totalOccupantLoadExceed').value === true || isExceeded;
+    return  this.form.get('totalOccupantLoadExceed').value === true || !isExceeded;
    }
 
 //Check if applicant is waiting for LG approcval or has been approved by LG.
