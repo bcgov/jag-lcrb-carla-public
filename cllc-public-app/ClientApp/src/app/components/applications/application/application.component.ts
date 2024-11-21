@@ -2006,13 +2006,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     const serviceArea = ('areas' in this.form.get('serviceAreas').value) ? this.form.get('serviceAreas').value['areas'] : this.form.get('serviceAreas').value;
     let totalCapacity = serviceArea.reduce((sum,item)=> Number(sum+(+item.capacity)),0);
     let totalOccupantLoad = this.form.get('totalOccupantLoad').value | 0;
-  
-    const outsideAreas = ('areas' in this.form.get('outsideAreas').value) ? this.form.get('outsideAreas').value['areas'] : this.form.get('outsideAreas').value;
-    let totalCapacityoutsideAreas = outsideAreas.reduce((sum,item)=> Number(sum+(+item.capacity)),0);
-
-    totalCapacity =totalCapacity+totalCapacityoutsideAreas;
     const isExceeded:boolean = totalCapacity > totalOccupantLoad
-
     if(isExceeded){
       this.form.get('totalOccupantLoadExceed').enable();
       this.showOccupantLoadCheckBox = true;
