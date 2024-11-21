@@ -266,6 +266,27 @@ describe("ApplicationComponent",
         expect(elem).toBeFalsy();
       });
 
+    it("should show hours of sale if enabled",
+      () => {
+        applicationService.getApplicationById = () => of({
+          applicationType: {
+            'showHoursOfSale': true,
+            contentTypes: []
+          } as any
+        } as Application);
+        fixture = TestBed.createComponent(ApplicationComponent);
+        component = fixture.debugElement.componentInstance;
+        fixture.detectChanges();
+        const elem = fixture.debugElement.query(By.css(".ngtest-hours-of-sale")).nativeElement;
+        expect(elem).not.toBeFalsy();
+      });
+
+    it("should hide hours of sale if disabled",
+      () => {
+        const elem = fixture.debugElement.query(By.css(".ngtest-hours-of-sale"));
+        expect(elem).toBeFalsy();
+      });
+
     it("should be invalid if no supporting documents are uploaded",
       () => {
         applicationService.getApplicationById = () => of({
