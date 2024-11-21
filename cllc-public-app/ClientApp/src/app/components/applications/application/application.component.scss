@@ -106,6 +106,26 @@
   .normal-mode {
     display: none;
   }
+  
+  .store-hours {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 2px;
+
+    th {
+      text-align: center;
+    }
+
+    td,
+    th {
+      padding: 5px;
+      background-color: #E1E8F2;
+    }
+
+    th.lead {
+      background-color: transparent;
+    }
+  }
 
   td.primary {
     padding: 10px;
