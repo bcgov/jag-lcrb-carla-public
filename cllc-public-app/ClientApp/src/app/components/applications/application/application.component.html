@@ -1853,13 +1853,6 @@
                 style="width: 250px;" type="number" min="1"  placeholder="Total occupant load"  (input)="validateInput($event)"  /></app-field>
               </section>
              </div>
-              
-             <div>
-              <section  *ngIf="application.applicationType.serviceAreas" > <p>Enter the total occupant load as indicated by your local government. This number can be either the total stamped on the floor plan or the sum of occupant loads across all service areas, as listed in the occupant load stamp. </p>
-                <app-field [required]="true"   label="Total occupant load" [valid]="!showValidationMessages || form.get('totalOccupantLoad').valid"  errorMessage="Total occupant load is required.">   <input class="form-control" formControlName="totalOccupantLoad" id="totalOccupantLoad"
-                style="width: 250px;" type="number" min="1"  placeholder="Total occupant load"  (input)="validateInput($event)"  /></app-field>
-              </section>
-             </div>
             </div> 
           
           </section>
