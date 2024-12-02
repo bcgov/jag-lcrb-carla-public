@@ -345,7 +345,7 @@ namespace Gov.Lclb.Cllb.Public
 
                     httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {tokenReply.Token}");
 
-                    var channel = GrpcChannel.ForAddress(fileManagerURI, new GrpcChannelOptions { HttpClient = httpClient });
+                    var channel = GrpcChannel.ForAddress(fileManagerURI, new GrpcChannelOptions { HttpClient = httpClient, MaxSendMessageSize = null, MaxReceiveMessageSize = null });
 
                     services.AddTransient(_ => new FileManagerClient(channel));
 
