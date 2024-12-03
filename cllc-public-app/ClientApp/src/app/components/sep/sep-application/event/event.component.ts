@@ -32,6 +32,7 @@ export class EventComponent extends FormBase implements OnInit {
   faQuestionCircle = faQuestionCircle;
   form: FormGroup;
   showValidationMessages: boolean;
+  showAmountExceedValidation: boolean;
   validationMessages: string[];
   previewCities: AutoCompleteItem[] = [];
   autocompleteCities: AutoCompleteItem[] = [];
@@ -360,6 +361,9 @@ export class EventComponent extends FormBase implements OnInit {
     this.markControlsAsTouched(this.form);
     this.form.updateValueAndValidity();
     this.validationMessages = this.listControlsWithErrors(this.form, {});
+    if (this.showAmountExceedValidation) {
+      this.validationMessages.push("Maximum number of guests in the service area exceeds maximum number of guests at location");
+    }
     const valid = this.form.valid;
     return valid;
   }
@@ -498,13 +502,32 @@ export class EventComponent extends FormBase implements OnInit {
 
   next() {
     this.showValidationMessages = false;
-    if (this.isValid() && this.form.get('sepCity')?.value?.id) {
+    if (this.isValid() && this.form.get('sepCity')?.value?.id && !this.showAmountExceedValidation) {
       this.saveComplete.emit(this.getFormValue());
       //console.log("saving...")
     } else {
       //console.log('showing validation messages')
       this.showValidationMessages = true;
     }
+  }
+
+  isMaxGuestExceed(locationNumber, locationIndex: number): Boolean {
+
+    if (locationNumber === undefined) {
+      return true;
+    }
+    let sum = 0;
+    let areas = this.getServiceAreas(locationIndex);
+    areas.controls.forEach((area) => {
+      const value = area.get('licencedAreaMaxNumberOfGuests').value;
+      if (!isNaN(value)) {
+        sum += (Number(value));
+      }
+    });
+
+    let totalGuestOnLocation = locationNumber;
+    this.showAmountExceedValidation = Number(sum) > Number(totalGuestOnLocation);
+    return this.showAmountExceedValidation;
   }
 
 }
