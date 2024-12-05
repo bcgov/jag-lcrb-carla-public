@@ -2028,4 +2028,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
  hideOcupantLoadFields(): Boolean{
   return this.isOpenedByLGForApproval || this.lGHasApproved();
  }
+
+ private hasInvoiceTriggerRun(): boolean {
+  const hasRun: boolean = (
+    this?.application?.invoiceTrigger === 1)
+  return hasRun;
+}
 }
