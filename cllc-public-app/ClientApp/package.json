@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "preinstall": "npx npm-force-resolutions && npx browserslist --update-db",
-    "start": "set NODE_ENV=development && ng serve --host 0.0.0.0",
+    "start": "set NODE_ENV=development && ng serve --host 0.0.0.0 --watch",
     "build": "ng build --progress=false --verbose=false --statsJson=false --base-href /lcrb/",
     "builduat": "ng build --progress=false --verbose=false --statsJson=false --base-href /uat/lcrb/",
     "buildprod": "ng build --progress=false --verbose=false --statsJson=false --base-href /",
