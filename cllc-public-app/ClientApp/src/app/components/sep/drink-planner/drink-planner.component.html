@@ -136,7 +136,7 @@
         </ng-container>
 
             <mat-form-field appearance="outline" floatLabel="always" *ngIf="hideGuestsAndHours">
-              <mat-label *ngIf="!canRaisePrice()">Max Drink Price (inc. PST)</mat-label>
+              <mat-label *ngIf="!canRaisePrice()">Max Drink Price (inc. PST)<sup>*ⱡ</sup></mat-label>
               <mat-label *ngIf="canRaisePrice()">Avg. Drink Price (inc. PST)</mat-label>
               <input matInput [formControlName]="getAVControlName(item.group)" class="average-price"
                      placeholder="0.00"
@@ -147,7 +147,7 @@
 </div> <!-- ngFor -->
     </div>
     <p *ngIf="!canRaisePrice()" style="text-align: center;"><small>*The maximum
-        sales price for drinks cannot exceed the price set by the Branch for non-charitable events.</small></p>
+        sales price for drinks cannot exceed the price set by the Branch for non-charitable events.<br><sup>ⱡ</sup> If your venue is in a local government that requires a single-use cup charge, do not include the single-use cup charge in the max drink price. </small></p>
 
     <!-- Drink Totals -->
 
