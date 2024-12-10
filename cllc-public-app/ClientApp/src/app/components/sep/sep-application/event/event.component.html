@@ -166,11 +166,16 @@
                                                   <app-field
                                                       label="Maximum number of guests in the service area at any given time"
                                                       errorMessage="Please enter a value"
+                                                      [required]="true"
                                                       [valid]="!area.get('licencedAreaMaxNumberOfGuests').touched || area.get('licencedAreaMaxNumberOfGuests').valid">
                                                       <input type="number"
                                                           formControlName="licencedAreaMaxNumberOfGuests"
                                                           class="form-control">
+                                                          <div class="error-text"   *ngIf="isMaxGuestExceed( location.get('maximumNumberOfGuests').value, i )">
+                                                            Maximum number of guests in the service area exceeds maximum number of guests at location
+                                                          </div>
                                                   </app-field>
+                                                  
                                                   <app-field label="Will minors be in the service area?"
                                                       errorMessage="Please enter a value"
                                                       [valid]="!area.get('minorPresent').touched || area.get('minorPresent').valid">
