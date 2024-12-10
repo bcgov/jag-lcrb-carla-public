@@ -2938,7 +2938,7 @@
             <!-- LG Approved OR NO LG Approvals Required -->
             <ng-container *ngIf="lGHasApproved() || ((!application?.applicationType?.isShowLGINApproval && !application?.applicationType?.isShowLGZoningConfirmation) || !showSubmitToLG())">
 
-              <button mat-raised-button *ngIf="!application?.applicationType?.requiresSecurityScreening  && !hasInvoiceTriggerRun()" color="primary"
+              <button mat-raised-button *ngIf="!application?.applicationType?.requiresSecurityScreening" color="primary"
                       (click)="submit_application()" [disabled]="submitApplicationInProgress">
                 SUBMIT&nbsp;<span *ngIf="!isFreeEndorsement() && !application?.applicationType?.isFree &&  !skipPayment && !isRAS()">&amp; PAY</span>
                 <mat-progress-bar *ngIf="submitApplicationInProgress" mode="indeterminate"></mat-progress-bar>
