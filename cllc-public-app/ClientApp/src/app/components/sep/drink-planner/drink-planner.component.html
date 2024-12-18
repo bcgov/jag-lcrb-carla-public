@@ -155,14 +155,14 @@
     <div class="row">
       <div style="width:100%;" *ngIf="hideGuestsAndHours">
         <div class="status yellow" *ngIf="totalPercentage < (totalServings || 0)">
-          <fa-icon [icon]="faExclamationTriange" style="margin-right:10px;"></fa-icon>Drink Servings Must Add To 100%
+          <fa-icon [icon]="faExclamationTriange" style="margin-right:10px;"></fa-icon>Drink servings must add to 100%
         </div>
         <div class="status red" *ngIf="totalPercentage > (totalServings || 0)">
-          <fa-icon [icon]="faExclamationTriange" style="margin-right:10px;"></fa-icon>Drink Servings Must Not Exceed
+          <fa-icon [icon]="faExclamationTriange" style="margin-right:10px;"></fa-icon>Drink servings must not exceed
           100%
         </div>
         <div class="status green" *ngIf="totalPercentage == (totalServings || 0)">
-          <fa-icon [icon]="faCheckCircle" style="margin-right:10px;"></fa-icon>Servings Add To 100%
+          <fa-icon [icon]="faCheckCircle" style="margin-right:10px;"></fa-icon>Servings add to 100%
         </div>
       </div>
       <div class="col-md-8 offset-md-4 col-12" *ngIf="!hideGuestsAndHours">
