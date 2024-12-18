@@ -182,7 +182,7 @@
             <h3 class="blue-header">Manufacturer previous year production amount</h3>
             <section class="padded-section content-bottom">
               <div class="row">
-                <label class="col-md-6 col-xs-12"><strong>Manufacturer production amount (less spillage) for the prevouis year:</strong></label>
+                <label class="col-md-6 col-xs-12"><strong>Manufacturer production amount (less spillage) for the previous year, or if the manufacturer has not been in operation for 12 months, an estimate of the production volumes for the 12 months after submitting the exemption application:</strong></label>
                 <div class="col-md-3 col-xs-12" style="align-content:start;">
                   <input class="form-control" type="number" onkeypress="return event.charCode >= 48 && event.charCode<=57" min="1"
                          formControlName="manufacturerProductionAmountForPrevYear">
@@ -942,7 +942,7 @@
                     </span>
 
                     <ul style="display: inline-block">
-                      <li><a href="https://www.bcassessment.ca/ " target="_bl">BC Assessment’s e-valueBC website</a> </li>
+                      <li>BC Assessment’s e-valueBC website </li>
                       <li>The municipal tax notice</li>
                       <li>The property lease</li>
                     </ul>
@@ -1585,13 +1585,14 @@
                         <li>Movie Theatre</li>
                         <li>Museum</li>
                         <li>Night Club/Cabaret</li>
+                        <li>Outdoor Event Venue</li>
                         <li>Private Club</li>
                         <li>Public House (Pub)</li>
-                        <li>Recreation Facility</li>
                       </ul>
                     </td>
                     <td>
                       <ul>
+                        <li>Recreation Facility</li>
                         <li>Rental Hall</li>
                         <li>Resort</li>
                         <li>Retail Store</li>
@@ -1846,13 +1847,6 @@
                 </app-file-uploader>
               </section>
               <br>
-              
-             <div>
-              <section  *ngIf="application.applicationType.serviceAreas" > <p>Enter the total occupant load as indicated by your local government. This number can be either the total stamped on the floor plan or the sum of occupant loads across all service areas, as listed in the occupant load stamp. </p>
-                <app-field [required]="true"   label="Total occupant load" [valid]="!showValidationMessages || form.get('totalOccupantLoad').valid"  errorMessage="Total occupant load is required.">   <input class="form-control" formControlName="totalOccupantLoad" id="totalOccupantLoad"
-                style="width: 250px;" type="number" min="1"  placeholder="Total occupant load"  (input)="validateInput($event)"  /></app-field>
-              </section>
-             </div>
               
              <div>
               <section  *ngIf="application.applicationType.serviceAreas" > <p>Enter the total occupant load as indicated by your local government. This number can be either the total stamped on the floor plan or the sum of occupant loads across all service areas, as listed in the occupant load stamp. </p>
