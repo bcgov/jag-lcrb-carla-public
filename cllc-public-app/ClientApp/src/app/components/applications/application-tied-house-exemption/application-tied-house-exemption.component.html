@@ -93,9 +93,9 @@
       <h3 class="blue-header">Manufacturer previous year production amount</h3>
       <section class="content-bottom">
         <div class="row">
-          <label class="col-md-6 col-xs-12"><strong>Manufacturer production amount (less spillage) for the prevouis year:</strong></label>
+          <label class="col-md-6 col-xs-12"><strong>Manufacturer production amount (less spillage) for the previous year, or if the manufacturer has not been in operation for 12 months, an estimate of the production volumes for the 12 months after submitting the exemption application:</strong></label>
           <div class="col-md-3 col-xs-12" style="align-content:start;">
-            <input class="form-control" type="number" onkeypress="return event.charCode >= 48 && event.charCode<=57" min="1" formControlName="manufacturerProductionAmountforPrevYear" [readonly]="isAppId != 'true'">
+            <input class="form-control" type="number" onkeypress="return event.charCode >= 48 && event.charCode<=57" min="1" formControlName="manufacturerProductionAmountforPrevYear">
           </div>
           <div class="col-md-3 col-xs-12" style="align-content:start;">
             <select class="form-control" style="height:35px;" formControlName="manufacturerProductionAmountUnit">
