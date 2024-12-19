@@ -1761,7 +1761,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             // Application Status == Pending Review && Police Decision == Under Review
-            var result = GetPagedSepSummaries($"_adoxio_policejurisdictionid_value eq {userAccount._adoxioPolicejurisdictionidValue} and adoxio_policeapproval eq {(int?)ApproverStatus.PendingReview} and statuscode ne {(int?)EventStatus.Cancelled}", pageIndex, pageSize, sort, sortdir);
+            var result = GetPagedSepSummaries($"_adoxio_policejurisdictionid_value eq {userAccount._adoxioPolicejurisdictionidValue} and adoxio_policeapproval eq {(int?)ApproverStatus.PendingReview} and statuscode ne {(int?)EventStatus.Cancelled} and statuscode ne {(int?)EventStatus.Denied}", pageIndex, pageSize, sort, sortdir);
 
             return new JsonResult(result);
 
