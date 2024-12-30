@@ -18,10 +18,12 @@ export interface Address {
   providedIn: 'root'
 })
 export class AddressService {
+  apiPath = "api/geocoder";
+
   constructor(private http: HttpClient) { }
 
   getAddressData(query: string): Observable<Address[]> {
-    return this.http.get<GeocoderModel>(`/api/geocoder/get-civic-address?queryParam=${query}`).pipe(
+    return this.http.get<GeocoderModel>(`${this.apiPath}/get-civic-address?queryParam=${query}`).pipe(
       map(response =>
         response.features.map(feature => ({
           fullAddress: feature.properties.fullAddress,
@@ -35,11 +37,8 @@ export class AddressService {
     );
   }
 
-
-
-
   getPid(siteId?: String): Observable<string> {
-    return this.http.get<string>(`/api/geocoder/get-pid?siteId=${siteId}`);
+    return this.http.get<string>(`${this.apiPath}/get-pid?siteId=${siteId}`);
   }
 
 }
