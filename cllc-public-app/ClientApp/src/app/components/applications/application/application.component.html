@@ -874,8 +874,12 @@
                   <app-field class="col-md-12 col-xs-12" label="Address" [required]="true" [isFullWidth]="true"
                              [valid]="isValidOrNotTouched('establishmentAddressStreet')"
                              errorMessage="Please enter the street address">
-                    <input class="form-control" type="text" value="" autocomplete="off"
-                           formControlName="establishmentAddressStreet" id="establishmentAddressStreet">
+           <input class="form-control" type="text" formControlName="establishmentAddressStreet" id="establishmentAddressStreet"  [matAutocomplete]="auto" >
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onAddressOptionSelect($event)"  >
+                  <mat-option *ngFor="let address of addresses | async" [value]="address">
+                    "{{address.fullAddress}}"
+                  </mat-option>
+                </mat-autocomplete>
                   </app-field>
                   <app-field class="col-md-4 col-xs-12" label="City" [required]="true" [isFullWidth]="true"
                              [valid]="isValidOrNotTouched('establishmentAddressCity')" errorMessage="Please enter the city">

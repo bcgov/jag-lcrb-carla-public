@@ -1,4 +1,4 @@
-import { filter, takeWhile, catchError, mergeMap, delay, tap, switchMap, distinctUntilChanged } from 'rxjs/operators';
+import { debounceTime, filter, takeWhile, catchError, mergeMap, delay, tap, switchMap, distinctUntilChanged } from 'rxjs/operators';
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -34,6 +34,7 @@ import { AreaCategory, ServiceArea } from '@models/service-area.model';
 import { faExclamationCircle, faTrashAlt, faUniversity } from '@fortawesome/free-solid-svg-icons';
 import { faCreditCard, faIdCard, faSave } from '@fortawesome/free-regular-svg-icons';
 import { RelatedLicence } from "@models/related-licence";
+import { AddressService, Address  } from '../../../services/geocoder.service'; // Adjust the import path as necessary
 
 const ServiceHours = [
   '00:00', '00:15', '00:30', '00:45', '01:00', '01:15', '01:30', '01:45', '02:00', '02:15', '02:30', '02:45', '03:00',
@@ -69,6 +70,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   @ViewChild(ProofOfZoningComponent) proofOfZoning: ProofOfZoningComponent;
   @ViewChild('lgAutoCompleteTrigger', { read: MatAutocompleteTrigger }) lgAutoComplete: MatAutocompleteTrigger;
   @ViewChild('pdAutoCompleteTrigger', { read: MatAutocompleteTrigger }) pdAutoComplete: MatAutocompleteTrigger;
+
   form: FormGroup;
   savedFormData: any;
   applicationId: string;
@@ -123,6 +125,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   isHasPatioBackingFld: boolean = true;
 
+  addresses: Observable<Address[]>;
+
+
   get isOpenedByLGForApproval(): boolean {
     let openedByLG = false;
     if (this.account && this.application && this.application.applicant &&
@@ -149,7 +154,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
     public dialog: MatDialog,
     public establishmentWatchWordsService: EstablishmentWatchWordsService,
     private policeJurisdictionDataService: PoliceJurisdictionDataService,
-    private localGovDataService: LocalGovernmentDataService
+    private localGovDataService: LocalGovernmentDataService,
+    private addressService: AddressService
   ) {
     super();
     this.route.paramMap.subscribe(pmap => this.applicationId = pmap.get('applicationId'));
@@ -549,6 +555,13 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
     this.dynamicsDataService.getRecord('indigenousnations', '')
       .subscribe(data => this.indigenousNations = data);
+
+      this.addresses = this.form.get('establishmentAddressStreet')!.valueChanges.pipe(
+        debounceTime(300),
+        distinctUntilChanged(),
+        filter(streetName => streetName.length > 3),
+        switchMap(streetName => this.addressService.getAddressData(streetName))
+      );
 
   }
 
@@ -2028,4 +2041,41 @@ export class ApplicationComponent extends FormBase implements OnInit {
  hideOcupantLoadFields(): Boolean{
   return this.isOpenedByLGForApproval || this.lGHasApproved();
  }
+
+ private hasInvoiceTriggerRun(): boolean {
+  const hasRun: boolean = (
+    this?.application?.invoiceTrigger === 1)
+  return hasRun;
+}
+
+onAddressOptionSelect (event: any) {
+  const selectedAddress: Address = event.option.value;
+  this.form.get('establishmentAddressStreet').setValue(selectedAddress.fullAddress);
+  this.form.get('establishmentAddressCity').setValue(selectedAddress.localityName);
+  this.form.get('establishmentParcelId').setValue("");
+
+  
+  this.addressService.getPid(selectedAddress.siteID).subscribe(
+    (response: string) => {
+      try {
+        const parsedResponse = JSON.parse(JSON.stringify(response));
+
+        const pids = parsedResponse.pids;
+    
+        // Check if the key exists and print the value
+        if (pids !== undefined) {
+            const firstValue = pids.split(',')[0];
+            this.form.get('establishmentParcelId').setValue(firstValue);
+        } else {
+            console.log("Key 'pids' does not exist in the response.");
+        }
+    } catch (error) {
+        console.error('Error parsing JSON:', error);
+    }
+    },
+    (error) => {
+      console.error('Error fetching data:', error);
+    } 
+  );
+}
 }
