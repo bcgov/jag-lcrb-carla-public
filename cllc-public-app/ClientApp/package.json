@@ -89,7 +89,7 @@
     "babel-minify-webpack-plugin": "^0.3.1",
     "babel-plugin-import": "^1.13.3",
     "babel-plugin-module-resolver": "^4.1.0",
-    "bootstrap": "^4.6.0",
+    "bootstrap": "^5.0.0",
     "browserlist": "^1.0.1",
     "codelyzer": "^6.0.2",
     "eslint": "^7.31.0",
