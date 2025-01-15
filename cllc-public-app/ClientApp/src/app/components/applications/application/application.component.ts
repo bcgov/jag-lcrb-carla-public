@@ -2054,28 +2054,33 @@ onAddressOptionSelect (event: any) {
   this.form.get('establishmentAddressCity').setValue(selectedAddress.localityName);
   this.form.get('establishmentParcelId').setValue("");
 
+  if(selectedAddress && selectedAddress.siteID !== undefined && selectedAddress.siteID !== null && selectedAddress.siteID !== ""){ 
+    this.addressService.getPid(selectedAddress.siteID).subscribe(
+      (response: string) => {
+        try {
+          const parsedResponse = JSON.parse(JSON.stringify(response));
   
-  this.addressService.getPid(selectedAddress.siteID).subscribe(
-    (response: string) => {
-      try {
-        const parsedResponse = JSON.parse(JSON.stringify(response));
+          const pids = parsedResponse.pids;
+      
+          // Check if the key exists and print the value
+          if (pids !== undefined) {
+              const pidArray = pids.split('|');
+              if(pidArray.length == 1){
+                this.form.get('establishmentParcelId').setValue(pidArray[0]);
+              }
+          } else {
+             // console.log("Key 'pids' does not exist in the response.");
+          }
+      } catch (error) {
+          //console.error('Error parsing JSON:', error);
+      }
+      },
+      (error) => {
+      //  console.error('Error fetching data:', error);
+      } 
+    );
+  }
+  
+}
+}
 
-        const pids = parsedResponse.pids;
-    
-        // Check if the key exists and print the value
-        if (pids !== undefined) {
-            const firstValue = pids.split(',')[0];
-            this.form.get('establishmentParcelId').setValue(firstValue);
-        } else {
-            console.log("Key 'pids' does not exist in the response.");
-        }
-    } catch (error) {
-        console.error('Error parsing JSON:', error);
-    }
-    },
-    (error) => {
-      console.error('Error fetching data:', error);
-    } 
-  );
-}
-}
