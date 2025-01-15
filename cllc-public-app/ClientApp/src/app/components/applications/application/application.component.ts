@@ -2064,8 +2064,10 @@ onAddressOptionSelect (event: any) {
     
         // Check if the key exists and print the value
         if (pids !== undefined) {
-            const firstValue = pids.split(',')[0];
-            this.form.get('establishmentParcelId').setValue(firstValue);
+            const pidArray = pids.split('|');
+            if(pidArray.length == 1){
+              this.form.get('establishmentParcelId').setValue(pidArray[0]);
+            }
         } else {
             console.log("Key 'pids' does not exist in the response.");
         }
