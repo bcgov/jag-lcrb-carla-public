@@ -136,7 +136,7 @@
         </ng-container>
 
             <mat-form-field appearance="outline" floatLabel="always" *ngIf="hideGuestsAndHours">
-              <mat-label *ngIf="!canRaisePrice()">Max Drink Price (inc. PST)</mat-label>
+              <mat-label *ngIf="!canRaisePrice()">Max Drink Price (inc. PST)<sup>*ⱡ</sup></mat-label>
               <mat-label *ngIf="canRaisePrice()">Avg. Drink Price (inc. PST)</mat-label>
               <input matInput [formControlName]="getAVControlName(item.group)" class="average-price"
                      placeholder="0.00"
@@ -147,7 +147,7 @@
 </div> <!-- ngFor -->
     </div>
     <p *ngIf="!canRaisePrice()" style="text-align: center;"><small>*The maximum
-        sales price for drinks cannot exceed the price set by the Branch for non-charitable events.</small></p>
+        sales price for drinks cannot exceed the price set by the Branch for non-charitable events.<br><sup>ⱡ</sup> If your venue is in a local government that requires a single-use cup charge, do not include the single-use cup charge in the max drink price. </small></p>
 
     <!-- Drink Totals -->
 
@@ -155,14 +155,14 @@
     <div class="row">
       <div style="width:100%;" *ngIf="hideGuestsAndHours">
         <div class="status yellow" *ngIf="totalPercentage < (totalServings || 0)">
-          <fa-icon [icon]="faExclamationTriange" style="margin-right:10px;"></fa-icon>Drink Servings Must Add To 100%
+          <fa-icon [icon]="faExclamationTriange" style="margin-right:10px;"></fa-icon>Drink servings must add to 100%
         </div>
         <div class="status red" *ngIf="totalPercentage > (totalServings || 0)">
-          <fa-icon [icon]="faExclamationTriange" style="margin-right:10px;"></fa-icon>Drink Servings Must Not Exceed
+          <fa-icon [icon]="faExclamationTriange" style="margin-right:10px;"></fa-icon>Drink servings must not exceed
           100%
         </div>
         <div class="status green" *ngIf="totalPercentage == (totalServings || 0)">
-          <fa-icon [icon]="faCheckCircle" style="margin-right:10px;"></fa-icon>Servings Add To 100%
+          <fa-icon [icon]="faCheckCircle" style="margin-right:10px;"></fa-icon>Servings add to 100%
         </div>
       </div>
       <div class="col-md-8 offset-md-4 col-12" *ngIf="!hideGuestsAndHours">
