@@ -37,7 +37,12 @@
       fermentation) the minimum requirement of 4500 litres on site.
     </mat-checkbox>
     <p>
-      As part of your licence, wineries are generally required to produce at least 4,500 litres of wine on-site each year. We understand that meeting this requirement may not always be possible due to unforeseen circumstances. If you were unable to meet the minimum production level for the 2022 reporting period, we encourage you to include a letter with your renewal application explaining the situation. The Liquor and Cannabis Regulation Branch will review exemption requests on a case-by-case basis. Requests are typically considered in situations involving crop failure, standard agricultural practices leading to temporary shortages, or events beyond your control.
+      As part of your licence, wineries are generally required to produce at least 4,500 litres of wine on-site each year.
+      We understand that meeting this requirement may not always be possible due to unforeseen circumstances. If you were
+      unable to meet the minimum production level for the reporting period, we encourage you to include a letter with your
+      renewal application explaining the situation. The Liquor and Cannabis Regulation Branch will review exemption
+      requests on a case-by-case basis. Requests are typically considered in situations involving crop failure, standard
+      agricultural practices leading to temporary shortages, or events beyond your control.
     </p>
     <app-file-uploader documentType="Discretion Letter"
                        [disableUploads]="form.get('isManufacturedMinimum').value" [enableFileDeletion]="true"
@@ -50,7 +55,7 @@
   </section>
   <section>
     <ul>
-      <li>Production reporting period is January 1 to December 31 each year.</li>
+      <li>Production reporting period is January 1, {{previousYear}} to December 31, {{previousYear}}</li>
       <li *ngIf="isSubcategory('Brewery')">
         Production includes all malt liquor shipped by a brewer in BC
         from any brewery owned, occupied or used by that brewer in the previous year.
@@ -74,7 +79,10 @@
     <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
     <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
       <p>
-        Please Note: You are required to retain all records of your primary ingredients, additions to wine, what your wine was produced from, any wine purchased, and any wine sold and to whom. Documents must be readily available upon request from the Liquor and Cannabis Regulation Branch. The Liquor and Cannabis Regulation Branch is here to support you through this process. If you have any questions on what to include in your letter, or concerns, please don’t hesitate to reach out to our team.
+        Please Note: You are required to retain all records of your primary ingredients, additions to wine, what your wine
+        was produced from, any wine purchased, and any wine sold and to whom. Documents must be readily available upon request
+        from the Liquor and Cannabis Regulation Branch. The Liquor and Cannabis Regulation Branch is here to support you
+        through this process. If you have any questions on what to include in your letter, or concerns, please don’t hesitate to reach out to our team.
       </p>
     </div>
   </section>
