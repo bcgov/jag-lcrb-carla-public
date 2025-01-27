@@ -334,8 +334,7 @@ import { ApplicationTypeDataService } from "./services/application-type-data.ser
 import { ForbiddenModalComponent } from '@shared/components/forbidden-modal/forbidden-modal.component';
 import { RelatedJobnumberPickerComponent } from './shared/components/related-jobnumber-picker/related-jobnumber-picker.component';
 import { RelocationTypeComponent } from "@components/relocation-type/relocation-type.component";
-
-
+import { FeedbackComponent } from "@components/feedback/feedback.component";
 
 
 
@@ -532,7 +531,8 @@ import { RelocationTypeComponent } from "@components/relocation-type/relocation-
     CancelSepApplicationDialogComponent,
     ForbiddenModalComponent,
     RelatedJobnumberPickerComponent,
-    RelocationTypeComponent
+    RelocationTypeComponent,
+    FeedbackComponent
   ],
   imports: [
     AppRoutingModule,

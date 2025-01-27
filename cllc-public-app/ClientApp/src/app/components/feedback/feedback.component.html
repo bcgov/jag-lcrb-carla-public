@@ -1,0 +1,49 @@
+<div class="dialog-container ">
+    <div *ngIf="!isSubmitted">
+        <div class="dialog-header">
+            <h2>Tell us about your experience!</h2>
+            <button class="close-btn" (click)="closeFeedbackDialog()">&times;</button>
+        </div>
+
+        <div class="dialog-body">
+            <p>Please use this form to share your thoughts about your experience using the Liquor and Cannabis Regulation Branch's (LCRB) online licensing portal. Your feedback is anonymous and will be used to enhance our services.</p>
+            <p>If you are encountering any issues or require assistance, please contact the LCRB Client Service Teams through the following options:</p>
+            <ul>
+                <li>Live Chat (available in this portal).</li>
+                <li><a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/about-lcrb/contact-lcrb" target="_blank">Email or Phone</a></li>
+            </ul>
+            <mat-form-field appearance="fill" class="feedback-input">
+                <textarea matInput placeholder="Provide feedback" [(ngModel)]="feedbackText" maxlength="10000"
+                    (keyup)="filterText($event)" rows="5" required></textarea>
+                <mat-hint align="start">{{feedbackText.length}} / 10000</mat-hint>
+                <mat-error *ngIf="feedbackText?.trim().length < 5">The field must contain at least 5
+                    charachters.</mat-error>
+
+
+            </mat-form-field>
+        </div>
+        <div class="dialog-footer">
+            <button class="btn btn-primary" *ngIf="!isLoading" (click)="submitFeedback()">Submit</button>
+            <mat-spinner *ngIf="isLoading" diameter="24"></mat-spinner>
+
+        </div>
+
+    </div>
+
+
+    <div class="thank-you-container" *ngIf="isSubmitted && !isLoading &&!isError">
+        <p><strong>Thank you, your feedback has been sent.</strong></p>
+        <mat-icon class="check-icon">check_circle</mat-icon>
+
+        <button class="btn btn-primary" (click)="closeFeedbackDialog()">Close</button>
+
+    </div>
+
+    <div class="thank-you-container" *ngIf="isError">
+        <p><strong>Oops! An error occurred while submitting your feedback. Please try again later.</strong></p>
+        <mat-icon class="error-icon">error_outline </mat-icon>
+
+        <button class="btn btn-primary" (click)="closeFeedbackDialog()">Close</button>
+
+    </div>
+</div>
