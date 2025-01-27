@@ -13,13 +13,10 @@
                 <li><a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/about-lcrb/contact-lcrb" target="_blank">Email or Phone</a></li>
             </ul>
             <mat-form-field appearance="fill" class="feedback-input">
-                <textarea matInput placeholder="Provide feedback" [(ngModel)]="feedbackText" maxlength="10000"
-                    (keyup)="filterText($event)" rows="5" required></textarea>
+                <textarea matInput placeholder="Provide feedback" [(ngModel)]="feedbackText" maxlength="10000" rows="5" required></textarea>
                 <mat-hint align="start">{{feedbackText.length}} / 10000</mat-hint>
                 <mat-error *ngIf="feedbackText?.trim().length < 5">The field must contain at least 5
                     charachters.</mat-error>
-
-
             </mat-form-field>
         </div>
         <div class="dialog-footer">

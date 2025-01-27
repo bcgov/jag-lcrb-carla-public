@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import { MatDialogRef } from "@angular/material/dialog";
 import { FeedbackService } from "@services/feedback.service";
-import { ca } from "date-fns/locale";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: "app-feedback",
@@ -20,11 +20,15 @@ export class FeedbackComponent {
   constructor(
     private dialogRef: MatDialogRef<FeedbackComponent>,
     private cd: ChangeDetectorRef,
-    private feedbackService: FeedbackService
+    private feedbackService: FeedbackService,
+    public snackBar: MatSnackBar
   ) {}
 
   submitFeedback() {
     if (this.feedbackText.trim().length < 5) {
+      this.snackBar.open(`Please enter at least 5 characters.`,
+        "Required",
+        { duration: 3500, panelClass: ["red-snackbar"] });
       return;
     }
 
@@ -51,13 +55,4 @@ export class FeedbackComponent {
     this.dialogRef.close();
   }
 
-  filterText(event: KeyboardEvent) {
-    // const inputElement = event.target as HTMLInputElement;
-    // const filteredText = inputElement.value.replace(/[<>{};`~]/g, "");
-    // if (this.feedbackText !== filteredText) {
-    //   this.feedbackText = filteredText;
-    //   inputElement.value = filteredText;
-    //   this.cd.detectChanges();
-    // }
-  }
 }
