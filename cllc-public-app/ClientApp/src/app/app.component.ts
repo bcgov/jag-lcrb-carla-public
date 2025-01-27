@@ -26,6 +26,7 @@ import { HttpHeaders } from "@angular/common/http";
 import { faInternetExplorer } from "@fortawesome/free-brands-svg-icons";
 import { faBell, faBusinessTime } from "@fortawesome/free-solid-svg-icons";
 import { Observable, of } from "rxjs";
+import { FeedbackComponent } from "@components/feedback/feedback.component";
 
 const Months = [
   "January", "February", "March", "April", "May", "June",
@@ -248,5 +249,13 @@ export class AppComponent extends FormBase implements OnInit {
       imWindow.location.href = imHref;
     }
     imWindow.focus();
+  }
+
+  openFeedbackDialog() {
+     const dialogRef = this.dialog.open(FeedbackComponent, {
+        disableClose: true,
+        autoFocus: false,
+        maxHeight: "95vh"
+      });
   }
 }
