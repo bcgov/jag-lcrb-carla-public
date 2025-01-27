@@ -308,12 +308,34 @@ button:focus {
 }
 
 .chat-button {
+  width: 130px;
+}
+.feedback-button {
+  color: #3d598c;;
+  width: 130px;
+}
+.btn-outline-primary{
+  border: 1px solid #3d598c;
+  border-radius: 4px;
+  background: white;
+  transition: none;
+}
+.btn-outline-primary:focus,
+.btn-outline-primary:active,
+.btn-outline-primary:hover{
+  background:#3d598c;
+  color: white;
+}
+
+.app-widgets{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   position: fixed;
-  bottom: 40px;
+  bottom: 30px;
   right: 20px;
   padding: 10px 20px;
   z-index: 1000;
-  // font-size: small;
 }
 
 ::ng-deep {

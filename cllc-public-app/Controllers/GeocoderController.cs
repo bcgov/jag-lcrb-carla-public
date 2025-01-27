@@ -42,7 +42,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _bcep = bcep;
         }
         [HttpGet("get-civic-address")]
-        [AllowAnonymous]
         public async Task<IActionResult>GetExternalData([FromQuery] string queryParam){
             var baseUrl = $"{_configuration["GEOCODER_BASE_URL"]}/addresses.json?addressString={Uri.EscapeDataString(queryParam)}&locationDescriptor=any&maxResults=3&interpolation=adaptive&echo=true&brief=false&autoComplete=true&exactSpelling=false&setBack=0&outputSRS=4326&minScore=1&provinceCode=BC";
             using var httpClient = new HttpClient();
@@ -65,7 +64,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 
         [HttpGet("get-pid")]
-        [AllowAnonymous]
         public async Task<IActionResult>GetPID([FromQuery] string siteId){
             var baseUrl = $"{_configuration["GEOCODER_BASE_URL"]}/parcels/pids/{Uri.EscapeDataString(siteId)}.json";
             using var httpClient = new HttpClient();

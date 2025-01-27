@@ -97,9 +97,18 @@
     </div>
 
     <!-- Chat With Us button -->
-    <button class="chat-button btn btn-primary btn-sm" (click)="openChat('en-CA', 'main')" tabindex="3">
-      <strong>Chat with us</strong>
-    </button>
+     <div  tabindex="3">  
+      <div class="chat-button-container app-widgets">
+        <button class="chat-button btn btn-primary btn-sm" (click)="openChat('en-CA', 'main')">
+          <strong>Chat with us</strong> 
+        </button>
+            <!-- Feedback button -->
+         <button  *ngIf="currentUser"  type="button"  class="feedback-button btn btn-outline-primary" (click)="openFeedbackDialog()">
+          <strong>Feedback</strong> 
+        </button>
+      </div>
+     </div>
+    
 
     <footer class="app-footer">
       <nav class="navbar navbar-default navbar-expand navbar-footer navbar-static-bottom">
