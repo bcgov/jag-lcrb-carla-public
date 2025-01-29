@@ -41,8 +41,8 @@
 
     <!-- System Maintenance Banner -->
     <section *ngIf="showBanner()">
-      <div style="background: red; color: #ffffff; padding-left: 25px; padding-right: 25px; font-weight: bold; text-align: center;" 
-      [innerHTML]="bannerMessage">
+      <div style="background: red; color: #ffffff; padding-left: 25px; padding-right: 25px; font-weight: bold; text-align: center;">
+        {{bannerMessage}}
 			</div>
 		</section>
 
