@@ -220,11 +220,11 @@
               <ul>
                 <li>
                   Applicable fees for cannabis licences and authorizations are listed in <a href="http://www.bclaws.ca/civix/document/id/complete/statreg/202_2018#Schedule1"
-                                                                                            target="_blank">Schedule 1</a> of the Cannabis Licensing Regulation.
+                    target="_blank">Schedule 1</a> of the Cannabis Licensing Regulation.
                 </li>
                 <li>
                   Applicable fees for liquor licences are listed in <a href="http://www.bclaws.ca/civix/document/id/complete/statreg/241_2016#Schedule1"
-                                                                       target="_blank">Schedule 1</a> of the Liquor Control and Licensing Regulation.
+                    target="_blank">Schedule 1</a> of the Liquor Control and Licensing Regulation.
                 </li>
               </ul>
             </section>
@@ -266,7 +266,7 @@
           <p *ngIf="item.helpTextHeader">{{item.helpTextHeader}}</p>
           <section *ngIf="item.helpText && item.helpText.length > 0" style="padding: 5px;">
             <ul>
-              <li *ngFor="let help of item.helpText">{{help}}</li>
+              <li *ngFor="let help of item.helpText" [innerHTML]="help"></li>
             </ul>
           </section>
 
@@ -309,11 +309,17 @@
         <h4>
           <fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>Security Screening Information Required
         </h4>
-        <p>All newly added shareholders holding 10% or greater interest must complete a <strong>Personal History
-            Summary</strong> and/or
-          <strong>Cannabis
-            Associate
-            Security Screening</strong> form and required documents as described below
+        <p>All newly added shareholders holding 10% or greater interest must complete a <strong><a
+              href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/lcrb004_personal_history_summary.pdf"
+              target="_blank">
+              Personal History Summary
+            </a></strong> and/or
+          <strong>
+            <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-licences/cannabis-resources-information/associate-forms"
+              target="_blank">
+              Cannabis Associate Security Screening
+            </a>
+          </strong> form and required documents as described below
         </p>
 
         <h4>Shareholders (individuals) Holding Less Than 10% Interest (and Non-Voting Shareholders)</h4>
@@ -493,7 +499,7 @@
         <h4>Notice of Articles (or Register of Directors and Officers)</h4>
         <p>Provide the updated Notice of Articles for your corporation. Alternatively, you can provide list of all
           current directors/officers by full legal name, position and date of appointment.</p>
-        <p *ngIf="hasLiquor"><strong>For Liquor Licensees: Directors and Officers are required to submit a 
+        <p *ngIf="hasLiquor"><strong>For Liquor Licensees: Directors and Officers are required to submit a
           Personal History Summary Form for liquor-related applications, except for <u>private corporations</u>.</strong></p>
         <app-file-uploader *ngIf="application?.id" documentType="NOA" fileTypes="FILE MUST BE IN PDF FORMAT."
           [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
