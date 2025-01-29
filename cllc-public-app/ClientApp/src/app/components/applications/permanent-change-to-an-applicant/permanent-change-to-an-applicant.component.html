@@ -9,8 +9,7 @@
       <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
         <section>
           <!-- For all corporations -->
-          <section
-            *ngIf="this.account?.businessType === 'PrivateCorporation' || this.account?.businessType === 'PublicCorporation'">
+          <section *ngIf="this.account?.businessType === 'PrivateCorporation' || this.account?.businessType === 'PublicCorporation'">
             <p>
               All applicants must maintain a complete and current list of leadership and
               businesses
@@ -149,11 +148,9 @@
 
           <section *ngIf="this.account?.businessType !=='IndigenousNation'">
             <p>
-              Fees are calculated based on the type of change reported and the number of licences and/or authorizations
-              impacted.
+              Fees are calculated based on the type of change reported and the number of licences and/or authorizations impacted.
               If
-              no changes are made, or no licences or authorizations are held, you will not be charged a fee for
-              submitting
+              no changes are made, or no licences or authorizations are held, you will not be charged a fee for submitting
               this
               information.
             </p>
@@ -231,9 +228,9 @@
           Updated Central Securities Register (shareholders) for the licensee corporation or holding company
         </h4>
         <app-file-uploader *ngIf="application?.id" documentType="CentralSecuritiesRegister"
-          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
-          (numberOfUploadedFiles)="uploadedCentralSecuritiesRegister = $event" [entityId]="application.id"
-          [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER, DRAG FILES HERE OR'">
+                           fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+                           [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedCentralSecuritiesRegister = $event"
+                           [entityId]="application.id" [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER, DRAG FILES HERE OR'">
         </app-file-uploader>
 
         <h4>
@@ -256,22 +253,22 @@
 
         <h4>Shareholders (individuals) Holding Less Than 10% Interest (and Non-Voting Shareholders)</h4>
         <p>
-          Shareholders (individuals) holding less than 10% interest, or non-voting shareholders, in the applicant
-          corporation must provide their
+          Shareholders (individuals) holding less than 10% interest, or non-voting shareholders, in the applicant corporation must provide their
           full
           legal name and date of birth. They do not need to provide a Personal History Summary or Cannabis Associate
           Security Screening form.
         </p>
         <app-file-uploader *ngIf="application?.id" documentType="IndividualsWithLessThan10"
-          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
-          (numberOfUploadedFiles)="uploadedIndividualsWithLessThan10 = $event" [entityId]="application.id"
+                           fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+                           [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedIndividualsWithLessThan10 = $event"
+                           [entityId]="application.id"
           [uploadHeader]="'TO UPLOAD LIST OF INDIVIDUALS WITH 10% OR LESS INTEREST, DRAG FILE HERE OR'">
         </app-file-uploader>
 
         <hr>
 
-        <app-field label="Have you amalgamated with another company?" [valid]="true" [showChevrons]="false"
-          [isFullWidth]="true">
+        <app-field label="Have you amalgamated with another company?"
+                   [valid]="true" [showChevrons]="false" [isFullWidth]="true">
           <!-- This value is not saved to dynamics. That is why it is not in the 'form' and the data model.-->
           <mat-radio-group [(ngModel)]="isAmalgamated" [ngModelOptions]="{standalone: true}">
             <mat-radio-button class="mr-5" [value]="true">Yes</mat-radio-button>
@@ -320,9 +317,9 @@
         <img src="assets/central-securities-register-example.png"
           style="width:500px; margin: 10px; border: solid #e0e0e0 1px;">
         <app-file-uploader *ngIf="application?.id" documentType="CentralSecuritiesRegister"
-          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
-          (numberOfUploadedFiles)="uploadedCentralSecuritiesRegister = $event" [entityId]="application.id"
-          [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER, DRAG FILES HERE OR'">
+                           fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+                           [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedCentralSecuritiesRegister = $event"
+                           [entityId]="application.id" [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER, DRAG FILES HERE OR'">
         </app-file-uploader>
         <hr>
         <p>
@@ -415,8 +412,9 @@
         </ul>
         <h4>Supporting Business Documentation</h4>
         <app-file-uploader *ngIf="application?.id" documentType="RegisterOfDirectorsAndOfficers"
-          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
-          (numberOfUploadedFiles)="uploadedRegisterOfDirectorsAndOfficers = $event" [entityId]="application.id"
+                           fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+                           [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedRegisterOfDirectorsAndOfficers = $event"
+                           [entityId]="application.id"
           [uploadHeader]="'TO UPLOAD REGISTER OF DIRECTORS AND OFFICERS, DRAG FILES HERE OR'">
         </app-file-uploader>
 
@@ -438,8 +436,9 @@
           Security Screening form.
         </p>
         <app-file-uploader *ngIf="application?.id" documentType="IndividualsWithLessThan10"
-          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
-          (numberOfUploadedFiles)="uploadedIndividualsWithLessThan10 = $event" [entityId]="application.id"
+                           fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+                           [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedIndividualsWithLessThan10 = $event"
+                           [entityId]="application.id"
           [uploadHeader]="'TO UPLOAD LIST OF INDIVIDUALS WITH 10% OR LESS INTEREST, DRAG FILE HERE OR'">
         </app-file-uploader>
       </div>
@@ -523,9 +522,9 @@
         </table>
         <h4>Copy of Certificate of name Change, Marriage Certificate, etc.</h4>
         <app-file-uploader *ngIf="application?.id" documentType="NameChangeDocument"
-          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
-          (numberOfUploadedFiles)="uploadedNameChangeDocuments = $event" [entityId]="application.id"
-          [uploadHeader]="'TO UPLOAD NAME CHANGE DOCUMENTS, DRAG FILES HERE OR'">
+                           fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+                           [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedNameChangeDocuments = $event"
+                           [entityId]="application.id" [uploadHeader]="'TO UPLOAD NAME CHANGE DOCUMENTS, DRAG FILES HERE OR'">
         </app-file-uploader>
       </div>
     </section>
@@ -877,7 +876,8 @@
     </section>
     <!-- Submit Change -->
     <section *ngIf="selectedChangeList?.length > 0">
-      <button mat-raised-button color="primary" style="width:250px;margin-top:25px;" (click)="submit_application()">
+      <button mat-raised-button color="primary" style="width:250px;margin-top:25px;"
+              (click)="submit_application()">
         <span>SUBMIT CHANGE</span>
         <mat-progress-bar *ngIf="primaryPaymentInProgress" mode="indeterminate">
         </mat-progress-bar>

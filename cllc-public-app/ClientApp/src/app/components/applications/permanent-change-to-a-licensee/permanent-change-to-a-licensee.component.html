@@ -13,8 +13,7 @@
           <section
             *ngIf="this.account?.businessType === 'PrivateCorporation' || this.account?.businessType === 'PublicCorporation'">
             <p>
-              All licensees, authorization holders and applicants must maintain a complete and current list of
-              leadership and
+              All licensees, authorization holders and applicants must maintain a complete and current list of leadership and
               businesses
               associated with their organization.
             </p>
@@ -29,8 +28,7 @@
               <li *ngIf="this.account?.businessType === 'PrivateCorporation'">External transfer of shares</li>
             </ul>
             <p>
-              <b>Please note:</b> Licence or authorization transfers to a different legal entity may be requested
-              through
+              <b>Please note:</b> Licence or authorization transfers to a different legal entity may be requested through
               the
               <a href="/licences/">
                 Licences & Authorizations
@@ -54,8 +52,7 @@
               <li>External transfer of shares for partner businesses</li>
             </ul>
             <p>
-              <b>Please note:</b> licence or authorization transfers to a different legal entity may be requested
-              through
+              <b>Please note:</b> licence or authorization transfers to a different legal entity may be requested through
               the
               Licences
               dashboard.
@@ -70,8 +67,7 @@
               made.
             </p>
             <p>
-              <b>Please note:</b> licence or authorization transfers to a different legal entity may be requested
-              through
+              <b>Please note:</b> licence or authorization transfers to a different legal entity may be requested through
               the
               Licences
               dashboard.
@@ -89,8 +85,7 @@
               made.
             </p>
             <p>
-              <b>Please note:</b> licence or authorization transfers to a different legal entity may be requested
-              through
+              <b>Please note:</b> licence or authorization transfers to a different legal entity may be requested through
               the
               Licences
               dashboard.
@@ -170,34 +165,23 @@
 
           <section *ngIf="this.account?.businessType !=='IndigenousNation'">
             <p>
-              Fees are calculated based on the type of change reported and the number of licences and/or authorizations
-              impacted.
+              Fees are calculated based on the type of change reported and the number of licences and/or authorizations impacted.
               If
-              no changes are made, or no licences or authorizations are held, you will not be charged a fee for
-              submitting
+              no changes are made, or no licences or authorizations are held, you will not be charged a fee for submitting
               this
               information.
             </p>
             <p>
               <strong>Section 119 Agreement Holders</strong>
-              If the Indigenous nation that is a party to a section 119 agreement no longer complies with the ownership
-              and control requirements set out in the agreement relating to a licence, that licensee may no longer be
-              eligible to receive benefits under the section 119 agreement. Please refer to the section 119 agreement
-              for further information.
+              If the Indigenous nation that is a party to a section 119 agreement no longer complies with the ownership and control requirements set out in the agreement relating to a licence, that licensee may no longer be eligible to receive benefits under the section 119 agreement. Please refer to the section 119 agreement for further information.
             </p>
             <p>
-              The details of a licensee or authorization holder’s application were the basis for granting them the
-              licence or authorization. Licensees and authorization holders must inform the Branch of any changes that
-              alter the original information they provided, or of a change in circumstance related to their licence or
-              authorization. This requirement is in addition to any obligations in the applicable section 119 agreement
-              to notify B.C.'s designated official of certain changes related to the licensee or authorization holder’s
-              business. Please refer to the relevant section 119 agreement.
+              The details of a licensee or authorization holder’s application were the basis for granting them the licence or authorization. Licensees and authorization holders must inform the Branch of any changes that alter the original information they provided, or of a change in circumstance related to their licence or authorization. This requirement is in addition to any obligations in the applicable section 119 agreement to notify B.C.'s designated official of certain changes related to the licensee or authorization holder’s business. Please refer to the relevant section 119 agreement.
             </p>
 
 
             <!-- Licensee Details -->
-            <section
-              *ngIf="(cannabisLicences && cannabisLicences.length > 0) || (liquorLicences && liquorLicences.length > 0)">
+            <section *ngIf="(cannabisLicences && cannabisLicences.length > 0) || (liquorLicences && liquorLicences.length > 0)">
               <h3>Licensee or Authorization Holder Details</h3>
               <p>You have the following licences or authorization:</p>
               <table style="border: solid black 1px;">
@@ -235,13 +219,11 @@
               <p>&nbsp;</p>
               <ul>
                 <li>
-                  Applicable fees for cannabis licences and authorizations are listed in <a
-                    href="http://www.bclaws.ca/civix/document/id/complete/statreg/202_2018#Schedule1"
+                  Applicable fees for cannabis licences and authorizations are listed in <a href="http://www.bclaws.ca/civix/document/id/complete/statreg/202_2018#Schedule1"
                     target="_blank">Schedule 1</a> of the Cannabis Licensing Regulation.
                 </li>
                 <li>
-                  Applicable fees for liquor licences are listed in <a
-                    href="http://www.bclaws.ca/civix/document/id/complete/statreg/241_2016#Schedule1"
+                  Applicable fees for liquor licences are listed in <a href="http://www.bclaws.ca/civix/document/id/complete/statreg/241_2016#Schedule1"
                     target="_blank">Schedule 1</a> of the Liquor Control and Licensing Regulation.
                 </li>
               </ul>
@@ -319,9 +301,9 @@
           Updated Central Securities Register (shareholders) for the licensee corporation or holding company
         </h4>
         <app-file-uploader *ngIf="application?.id" documentType="CentralSecuritiesRegister"
-          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
-          (numberOfUploadedFiles)="uploadedCentralSecuritiesRegister = $event" [entityId]="application.id"
-          [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER, DRAG FILES HERE OR'">
+          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+          [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedCentralSecuritiesRegister = $event"
+          [entityId]="application.id" [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER, DRAG FILES HERE OR'">
         </app-file-uploader>
 
         <h4>
@@ -341,21 +323,21 @@
         </p>
 
         <h4>Shareholders (individuals) Holding Less Than 10% Interest (and Non-Voting Shareholders)</h4>
-        <p>Shareholders (individuals) holding less than 10% interest, or non-voting shareholders, in the applicant
-          corporation must provide their
+        <p>Shareholders (individuals) holding less than 10% interest, or non-voting shareholders, in the applicant corporation must provide their
           full
           legal name and date of birth. They do not need to provide a Personal History Summary or Cannabis Associate
           Security Screening form.</p>
         <app-file-uploader *ngIf="application?.id" documentType="IndividualsWithLessThan10"
-          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
-          (numberOfUploadedFiles)="uploadedIndividualsWithLessThan10 = $event" [entityId]="application.id"
+          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+          [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedIndividualsWithLessThan10 = $event"
+          [entityId]="application.id"
           [uploadHeader]="'TO UPLOAD LIST OF INDIVIDUALS WITH 10% OR LESS INTEREST, DRAG FILE HERE OR'">
         </app-file-uploader>
 
         <hr>
 
-        <app-field label="Have you amalgamated with another company?" [valid]="true" [showChevrons]="false"
-          [isFullWidth]="true">
+        <app-field label="Have you amalgamated with another company?"
+          [valid]="true" [showChevrons]="false" [isFullWidth]="true">
           <!-- This value is not saved to dynamics. That is why it is not in the 'form' and the data model.-->
           <mat-radio-group [(ngModel)]="isAmalgamated" [ngModelOptions]="{standalone: true}">
             <mat-radio-button class="mr-5" [value]="true">Yes</mat-radio-button>
@@ -403,9 +385,9 @@
         <img src="assets/central-securities-register-example.png"
           style="width:500px; margin: 10px; border: solid #e0e0e0 1px;">
         <app-file-uploader *ngIf="application?.id" documentType="CentralSecuritiesRegister"
-          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
-          (numberOfUploadedFiles)="uploadedCentralSecuritiesRegister = $event" [entityId]="application.id"
-          [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER, DRAG FILES HERE OR'">
+          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+          [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedCentralSecuritiesRegister = $event"
+          [entityId]="application.id" [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER, DRAG FILES HERE OR'">
         </app-file-uploader>
         <hr>
         <p>If one of the new shareholders is a private corporation, a public corporation, a society or a
@@ -476,8 +458,9 @@
         </ul>
         <h4>Supporting Business Documentation</h4>
         <app-file-uploader *ngIf="application?.id" documentType="RegisterOfDirectorsAndOfficers"
-          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
-          (numberOfUploadedFiles)="uploadedRegisterOfDirectorsAndOfficers = $event" [entityId]="application.id"
+          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+          [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedRegisterOfDirectorsAndOfficers = $event"
+          [entityId]="application.id"
           [uploadHeader]="'TO UPLOAD REGISTER OF DIRECTORS AND OFFICERS, DRAG FILES HERE OR'">
         </app-file-uploader>
 
@@ -495,8 +478,9 @@
           legal name and date of birth. They do not need to provide a Personal History Summary or Cannabis Associate
           Security Screening form.</p>
         <app-file-uploader *ngIf="application?.id" documentType="IndividualsWithLessThan10"
-          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
-          (numberOfUploadedFiles)="uploadedIndividualsWithLessThan10 = $event" [entityId]="application.id"
+          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+          [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedIndividualsWithLessThan10 = $event"
+          [entityId]="application.id"
           [uploadHeader]="'TO UPLOAD LIST OF INDIVIDUALS WITH 10% OR LESS INTEREST, DRAG FILE HERE OR'">
         </app-file-uploader>
       </div>
@@ -516,8 +500,7 @@
         <p>Provide the updated Notice of Articles for your corporation. Alternatively, you can provide list of all
           current directors/officers by full legal name, position and date of appointment.</p>
         <p *ngIf="hasLiquor"><strong>For Liquor Licensees: Directors and Officers are required to submit a
-            Personal History Summary Form for liquor-related applications, except for <u>private
-              corporations</u>.</strong></p>
+          Personal History Summary Form for liquor-related applications, except for <u>private corporations</u>.</strong></p>
         <app-file-uploader *ngIf="application?.id" documentType="NOA" fileTypes="FILE MUST BE IN PDF FORMAT."
           [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
           (numberOfUploadedFiles)="uploadedNOA = $event" [entityId]="application.id"
@@ -590,9 +573,9 @@
         </table>
         <h4>Copy of Certificate of name Change, Marriage Certificate, etc.</h4>
         <app-file-uploader *ngIf="application?.id" documentType="NameChangeDocument"
-          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
-          (numberOfUploadedFiles)="uploadedNameChangeDocuments = $event" [entityId]="application.id"
-          [uploadHeader]="'TO UPLOAD NAME CHANGE DOCUMENTS, DRAG FILES HERE OR'">
+          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+          [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedNameChangeDocuments = $event"
+          [entityId]="application.id" [uploadHeader]="'TO UPLOAD NAME CHANGE DOCUMENTS, DRAG FILES HERE OR'">
         </app-file-uploader>
       </div>
     </section>
@@ -611,8 +594,7 @@
           <input placeholder="Company Name" class="form-control" style="width: 350px;" type="text"
             formControlName="description2" id="description2">
         </app-field>
-        <app-field label="Name changed to (in full)"
-          [valid]=" !showValidationMessages || form.get('description3').valid"
+        <app-field label="Name changed to (in full)" [valid]=" !showValidationMessages || form.get('description3').valid" 
           errorMessage="The following characters are not allowed in a Company Name: ~ # % & * { } \ : < > ? / + | &quot;">
           <input placeholder="New Copmany Name" class="form-control" style="width: 350px;" type="text"
             formControlName="description3" id="description3">
@@ -820,8 +802,7 @@
           Newly added associates for a cannabis licence or authorization are required to
           submit
           documentation for
-          security screenings and/or financial integrity checks. Cannabis retail store licence or authorization
-          applications
+          security screenings and/or financial integrity checks. Cannabis retail store licence or authorization applications
           cannot
           be processed until
           all required materials have been received.
@@ -856,9 +837,9 @@
           </a>.
         </p>
         <app-file-uploader *ngIf="application?.id" documentType="FinancialIntegrity"
-          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
-          (numberOfUploadedFiles)="uploadedFinancialIntegrity = $event" [entityId]="application.id"
-          [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY DOCUMENTS, DRAG FILES HERE OR'">
+          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+          [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedFinancialIntegrity = $event"
+          [entityId]="application.id" [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY DOCUMENTS, DRAG FILES HERE OR'">
         </app-file-uploader>
       </div>
     </section>
@@ -885,9 +866,9 @@
             href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/lcrb004_personal_history_summary.pdf"
             target="_blank">Personal History Summary Form</a>.</p>
         <app-file-uploader *ngIf="application?.id" documentType="FinancialIntegrity"
-          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
-          (numberOfUploadedFiles)="uploadedFinancialIntegrity = $event" [entityId]="application.id"
-          [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY DOCUMENTS, DRAG FILES HERE OR'">
+          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+          [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedFinancialIntegrity = $event"
+          [entityId]="application.id" [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY DOCUMENTS, DRAG FILES HERE OR'">
         </app-file-uploader>
       </div>
     </section>
