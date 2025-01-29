@@ -410,7 +410,7 @@ const masterChangeList = [
     RequiresPHS: false,
     RequiresCAS: false,
     helpTextHeader: 'Use this option to report:',
-    helpText: ['For liquor licensees - when there are changes in directors or officers of a public corporation or society that holds a licence, or of a public corporation or society within the licensee legal entity',
+    helpText: ['For liquor licensees - when there are changes in directors or officers, as defined by the <a href="https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/02057_00_multi#section1" target="_blank">BC Corporations Act</a> or the <a href="https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/15018_01#section1" target="_blank">BC Societies Act</a>, of a public corporation or society that holds a licence, or of a public corporation or society within the licensee legal entity',
       'For cannabis licensees – when there are changes in directors or officers of a private or public  corporation or society that holds a licence, or of a public or private corporation or society within the licensee legal entity'
     ],
     //helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
