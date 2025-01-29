@@ -6,9 +6,5 @@
 export const environment = {
   production: false,
   lite: false,
-  development: true,
-  bannerEnabled: true,
-  bannerMessage: '',
-  bannerStartDate: '',
-  bannerEndDate: '',
+  development: true
 };
