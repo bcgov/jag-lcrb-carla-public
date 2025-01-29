@@ -105,7 +105,7 @@
             <p>
               Applicants should direct associates to the
               <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation/associate-forms"
-                 target="_blank" rel="noopener noreferrer">LCRB non-medical cannabis webpage</a> to
+                target="_blank" rel="noopener noreferrer">LCRB non-medical cannabis webpage</a> to
               download
               required
               forms and instructions
@@ -121,7 +121,7 @@
               associates
               to the
               <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation/associate-forms"
-                 target="_blank" rel="noopener noreferrer">
+                target="_blank" rel="noopener noreferrer">
                 link provided
               </a>.
             </p>
@@ -178,7 +178,7 @@
           {{ account.isOtherBusinessType() && item.otherName ? item.otherName : item.name}}
         </mat-checkbox>
         <fa-icon [icon]="faQuestionCircle" style="color: #38598a; margin-left: 10px;"
-                 (click)="item.show = !!!item.show">
+          (click)="item.show = !!!item.show">
         </fa-icon>
         <section class="infoCell" *ngIf="item.show && (item.helpTextHeader || item.helpText || item.helpTextLink)">
           <p *ngIf="item.CannabisFee == item.LiquorFee" style="padding-right: 30px; text-align: right;">
@@ -193,7 +193,7 @@
           <p *ngIf="item.helpTextHeader">{{item.helpTextHeader}}</p>
           <section *ngIf="item.helpText && item.helpText.length > 0" style="padding: 5px;">
             <ul>
-              <li *ngFor="let help of item.helpText">{{help}}</li>
+              <li *ngFor="let help of item.helpText" [innerHTML]="help"></li>
             </ul>
           </section>
 
@@ -218,7 +218,7 @@
           shareholders have been added (holding companies or individuals). See example:
         </p>
         <img src="assets/central-securities-register-example.png"
-             style="border: solid #e0e0e0 1px; margin: 10px; width: 500px;">
+          style="border: solid #e0e0e0 1px; margin: 10px; width: 500px;">
         <p>
           Third party operators should also complete this section when an internal share transfer or an
           amalgamation occurs.
@@ -237,14 +237,17 @@
           <fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>Security Screening Information Required
         </h4>
         <p>
-          All newly added shareholders holding 10% or greater interest must complete a <strong>
-            Personal History
-            Summary
-          </strong> and/or
+          All newly added shareholders holding 10% or greater interest must complete a
+          <strong><a
+              href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/lcrb004_personal_history_summary.pdf"
+              target="_blank">
+              Personal History Summary
+            </a></strong> and/or
           <strong>
-            Cannabis
-            Associate
-            Security Screening
+            <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-licences/cannabis-resources-information/associate-forms"
+              target="_blank">
+              Cannabis Associate Security Screening
+            </a>
           </strong> form and required documents as described below
         </p>
 
@@ -259,7 +262,7 @@
                            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
                            [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedIndividualsWithLessThan10 = $event"
                            [entityId]="application.id"
-                           [uploadHeader]="'TO UPLOAD LIST OF INDIVIDUALS WITH 10% OR LESS INTEREST, DRAG FILE HERE OR'">
+          [uploadHeader]="'TO UPLOAD LIST OF INDIVIDUALS WITH 10% OR LESS INTEREST, DRAG FILE HERE OR'">
         </app-file-uploader>
 
         <hr>
@@ -277,25 +280,25 @@
 
           <h4>Certificate of Amalgamation</h4>
           <app-file-uploader *ngIf="application?.id" documentType="CertificateOfAmalgamation"
-                             fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
-                             [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedCertificateOfAmalgamation = $event"
-                             [entityId]="application.id" [uploadHeader]="'TO UPLOAD CERTIFICATE OF AMALGAMATION, DRAG FILES HERE OR'">
+            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+            [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedCertificateOfAmalgamation = $event"
+            [entityId]="application.id" [uploadHeader]="'TO UPLOAD CERTIFICATE OF AMALGAMATION, DRAG FILES HERE OR'">
           </app-file-uploader>
 
           <h4>Central Securities Register (shareholders) for the amalgamated company</h4>
           <app-file-uploader *ngIf="application?.id" documentType="CentralSecuritiesRegisterForAmalgamated"
-                             fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
-                             [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedCertificateOfAmalgamation = $event"
-                             [entityId]="application.id"
-                             [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER FOR AMALGAMATED COMPANY, DRAG FILES HERE OR'">
+            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+            [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedCertificateOfAmalgamation = $event"
+            [entityId]="application.id"
+            [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER FOR AMALGAMATED COMPANY, DRAG FILES HERE OR'">
           </app-file-uploader>
 
           <h4>Notice of Articles for the amalgamated company</h4>
           <app-file-uploader *ngIf="application?.id" documentType="NOAAmalgamated"
-                             fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
-                             [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedNOAAmalgamation = $event"
-                             [entityId]="application.id"
-                             [uploadHeader]="'TO UPLOAD NOTICE OF ARTICLES FOR AMALGAMATED COMPANY, DRAG FILES HERE OR'">
+            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+            [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedNOAAmalgamation = $event"
+            [entityId]="application.id"
+            [uploadHeader]="'TO UPLOAD NOTICE OF ARTICLES FOR AMALGAMATED COMPANY, DRAG FILES HERE OR'">
           </app-file-uploader>
         </section>
       </div>
@@ -312,12 +315,12 @@
         </h4>
         <p>Provide an updated central securities register.</p>
         <img src="assets/central-securities-register-example.png"
-             style="width:500px; margin: 10px; border: solid #e0e0e0 1px;">
+          style="width:500px; margin: 10px; border: solid #e0e0e0 1px;">
         <app-file-uploader *ngIf="application?.id" documentType="CentralSecuritiesRegister"
                            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
                            [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedCentralSecuritiesRegister = $event"
                            [entityId]="application.id" [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER, DRAG FILES HERE OR'">
-        </app-file-uploader>
+        </app-file-uploader> 
         <hr>
         <p>
           If one of the new shareholders is a private corporation, a public corporation, a society or a
@@ -454,9 +457,9 @@
         </p>
 
         <app-file-uploader *ngIf="application?.id" documentType="NOA" fileTypes="FILE MUST BE IN PDF FORMAT."
-                           [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
-                           (numberOfUploadedFiles)="uploadedNOA = $event" [entityId]="application.id"
-                           [uploadHeader]="'TO UPLOAD NOTICE OF ARTICLES, DRAG FILES HERE OR'">
+          [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
+          (numberOfUploadedFiles)="uploadedNOA = $event" [entityId]="application.id"
+          [uploadHeader]="'TO UPLOAD NOTICE OF ARTICLES, DRAG FILES HERE OR'">
         </app-file-uploader>
 
       </div>
@@ -565,9 +568,9 @@
           Copy of the Certificate of Change of Name Form from BC Registrar of Companies
         </h4>
         <app-file-uploader *ngIf="application?.id" documentType="CertificateOfNameChange"
-                           fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
-                           (numberOfUploadedFiles)="uploadedCertificateOfNameChange = $event" [entityId]="application.id"
-                           [uploadHeader]="'TO UPLOAD CERTIFICATE OF NAME CHANGE, DRAG FILES HERE OR'">
+          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
+          (numberOfUploadedFiles)="uploadedCertificateOfNameChange = $event" [entityId]="application.id"
+          [uploadHeader]="'TO UPLOAD CERTIFICATE OF NAME CHANGE, DRAG FILES HERE OR'">
         </app-file-uploader>
       </div>
     </section>
@@ -615,9 +618,9 @@
         </p>
 
         <app-file-uploader *ngIf="application?.id" documentType="PartnershipRegistration"
-                           fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
-                           (numberOfUploadedFiles)="uploadedPartnershipRegistration = $event" [entityId]="application.id"
-                           [uploadHeader]="'TO UPLOAD PARTNERSHIP REGISTRATION, DRAG FILES HERE OR'">
+          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
+          (numberOfUploadedFiles)="uploadedPartnershipRegistration = $event" [entityId]="application.id"
+          [uploadHeader]="'TO UPLOAD PARTNERSHIP REGISTRATION, DRAG FILES HERE OR'">
         </app-file-uploader>
       </div>
 
@@ -654,9 +657,9 @@
         <h4>Copy of the Certificate of Change of Name under the Societies Act</h4>
 
         <app-file-uploader *ngIf="application?.id" documentType="SocietyNameChange"
-                           fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
-                           (numberOfUploadedFiles)="uploadedSocietyNameChange = $event" [entityId]="application.id"
-                           [uploadHeader]="'TO UPLOAD SOCIETY NAME CHANGE CERTIFICATE, DRAG FILES HERE OR'">
+          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
+          (numberOfUploadedFiles)="uploadedSocietyNameChange = $event" [entityId]="application.id"
+          [uploadHeader]="'TO UPLOAD SOCIETY NAME CHANGE CERTIFICATE, DRAG FILES HERE OR'">
         </app-file-uploader>
       </div>
     </section>
@@ -700,9 +703,9 @@
         </p>
 
         <app-file-uploader *ngIf="application?.id" documentType="ExecutorDocuments"
-                           fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
-                           (numberOfUploadedFiles)="uploadedExecutorDocuments = $event" [entityId]="application.id"
-                           [uploadHeader]="'TO UPLOAD EXECUTOR DOCUMENTS, DRAG FILES HERE OR'">
+          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
+          (numberOfUploadedFiles)="uploadedExecutorDocuments = $event" [entityId]="application.id"
+          [uploadHeader]="'TO UPLOAD EXECUTOR DOCUMENTS, DRAG FILES HERE OR'">
         </app-file-uploader>
 
         <p>
@@ -710,9 +713,9 @@
         </p>
 
         <app-file-uploader *ngIf="application?.id" documentType="DeathCertificate"
-                           fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
-                           (numberOfUploadedFiles)="uploadedlDeathCertificateDocuments = $event" [entityId]="application.id"
-                           [uploadHeader]="'TO UPLOAD DEATH CERTIFICATE, DRAG FILES HERE OR'">
+          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
+          (numberOfUploadedFiles)="uploadedlDeathCertificateDocuments = $event" [entityId]="application.id"
+          [uploadHeader]="'TO UPLOAD DEATH CERTIFICATE, DRAG FILES HERE OR'">
         </app-file-uploader>
 
         <hr>
@@ -743,17 +746,17 @@
         </p>
 
         <app-file-uploader *ngIf="application?.id" documentType="ReceiverAppointment"
-                           fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
-                           (numberOfUploadedFiles)="uploadedletterOfIntentDocuments = $event" [entityId]="application.id"
-                           [uploadHeader]="'TO UPLOAD RECEIVER APPOINTMENT ORDER, DRAG FILES HERE OR'">
+          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
+          (numberOfUploadedFiles)="uploadedletterOfIntentDocuments = $event" [entityId]="application.id"
+          [uploadHeader]="'TO UPLOAD RECEIVER APPOINTMENT ORDER, DRAG FILES HERE OR'">
         </app-file-uploader>
 
         <p>Upload a copy of Court Order filed under the Office of the Superintendent of Bankruptcy Canada.</p>
 
         <app-file-uploader *ngIf="application?.id" documentType="BankruptcyOrder"
-                           fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
-                           (numberOfUploadedFiles)="uploadedletterOfIntentDocuments = $event" [entityId]="application.id"
-                           [uploadHeader]="'TO UPLOAD COURT ORDER, DRAG FILES HERE OR'">
+          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
+          (numberOfUploadedFiles)="uploadedletterOfIntentDocuments = $event" [entityId]="application.id"
+          [uploadHeader]="'TO UPLOAD COURT ORDER, DRAG FILES HERE OR'">
         </app-file-uploader>
       </div>
     </section>
@@ -819,7 +822,7 @@
           </p>
 
           <app-field [valid]="!showValidationMessages || form.get('authorizedToSubmit').valid"
-                     errorMessage="Please affirm that you are authorized to submit the application." [showChevrons]="false">
+            errorMessage="Please affirm that you are authorized to submit the application." [showChevrons]="false">
             <mat-checkbox formControlName="authorizedToSubmit">
               <span class="error-states">*</span>
               I understand and affirm that I am authorized to submit the application.
@@ -847,8 +850,8 @@
         </p>-->
 
           <app-field [valid]="!showValidationMessages || form.get('signatureAgreement').valid"
-                     errorMessage="Please affirm that all of the information provided for this application is true and complete."
-                     [showChevrons]="false">
+            errorMessage="Please affirm that all of the information provided for this application is true and complete."
+            [showChevrons]="false">
             <mat-checkbox formControlName="signatureAgreement">
               <span class="error-states">*</span>
               I understand and affirm that all of the information provided for this
@@ -872,7 +875,7 @@
       </div>
     </section>
     <!-- Submit Change -->
-    <section *ngIf="selectedChangeList?.length > 0">   
+    <section *ngIf="selectedChangeList?.length > 0">
       <button mat-raised-button color="primary" style="width:250px;margin-top:25px;"
               (click)="submit_application()">
         <span>SUBMIT CHANGE</span>
