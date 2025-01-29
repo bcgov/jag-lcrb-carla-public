@@ -415,7 +415,7 @@
                            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
                            [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedRegisterOfDirectorsAndOfficers = $event"
                            [entityId]="application.id"
-          [uploadHeader]="'TO UPLOAD REGISTER OF DIRECTORS AND OFFICERS, DRAG FILES HERE OR'">
+                           [uploadHeader]="'TO UPLOAD REGISTER OF DIRECTORS AND OFFICERS, DRAG FILES HERE OR'">
         </app-file-uploader>
 
         <hr>
@@ -439,7 +439,7 @@
                            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
                            [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedIndividualsWithLessThan10 = $event"
                            [entityId]="application.id"
-          [uploadHeader]="'TO UPLOAD LIST OF INDIVIDUALS WITH 10% OR LESS INTEREST, DRAG FILE HERE OR'">
+                           [uploadHeader]="'TO UPLOAD LIST OF INDIVIDUALS WITH 10% OR LESS INTEREST, DRAG FILE HERE OR'">
         </app-file-uploader>
       </div>
 
