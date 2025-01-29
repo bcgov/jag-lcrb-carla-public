@@ -27,6 +27,7 @@ import { faInternetExplorer } from "@fortawesome/free-brands-svg-icons";
 import { faBell, faBusinessTime } from "@fortawesome/free-solid-svg-icons";
 import { Observable, of } from "rxjs";
 import { FeedbackComponent } from "@components/feedback/feedback.component";
+import { environment } from "environments/environment";
 
 const Months = [
   "January", "February", "March", "April", "May", "June",
@@ -258,4 +259,40 @@ export class AppComponent extends FormBase implements OnInit {
         maxHeight: "95vh"
       });
   }
+
+  get bannerMessage(): string {
+    return environment.bannerMessage;
+  }
+
+  showBanner(): boolean {
+    try{
+      const isBannerEnabled = environment.bannerEnabled === true;
+      const bannerMessage = environment.bannerMessage;
+
+      if(!isBannerEnabled || !bannerMessage.length){
+        return false;
+      }
+
+      // If the start and end date are not set, show the banner if enabled
+      if (!environment.bannerStartDate || !environment.bannerEndDate) {
+        return isBannerEnabled && bannerMessage.length > 0;
+      }
+
+      const bannerStartDate = new Date(environment.bannerStartDate);
+      const bannerEndDate = new Date(environment.bannerEndDate);
+
+      // If the current date is between the start and end date, show the banner
+      const currentDate = new Date();
+      const startDate = new Date(bannerStartDate);
+      const endDate = new Date(bannerEndDate);
+
+      return isBannerEnabled && bannerMessage.length > 0 && currentDate >= startDate && currentDate <= endDate;
+
+    } catch (error) {
+      console.error("Error in showBanner: ", error);
+      return false;
+    }
+    
+  }
+
 }
