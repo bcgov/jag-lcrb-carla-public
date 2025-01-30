@@ -27,7 +27,6 @@ import { faInternetExplorer } from "@fortawesome/free-brands-svg-icons";
 import { faBell, faBusinessTime } from "@fortawesome/free-solid-svg-icons";
 import { Observable, of } from "rxjs";
 import { FeedbackComponent } from "@components/feedback/feedback.component";
-import { environment } from "environments/environment";
 
 const Months = [
   "January", "February", "March", "April", "May", "June",
@@ -64,6 +63,9 @@ export class AppComponent extends FormBase implements OnInit {
   // This is Observable will be set to true when there are e-notices attached to the current account.
   // The value determines whether or not to display a warning badge for the "Notices" link in the NavBar.
   showNoticesBadge$ = of(false);
+
+  // Config for the dynamic banner
+  config: any = {}; //store loaded config
 
   constructor(
     private snackBar: MatSnackBar,
@@ -127,6 +129,11 @@ export class AppComponent extends FormBase implements OnInit {
       .subscribe(state => {
         this.businessProfiles = state.legalEntities;
       });
+
+    // Fetch the banner config dynamically
+    this.httpCLient.get('assets/banner-config.json').subscribe(config => {
+      this.config = config;
+    });
 
   }
 
@@ -261,25 +268,25 @@ export class AppComponent extends FormBase implements OnInit {
   }
 
   get bannerMessage(): string {
-    return environment.bannerMessage;
+    return this.config.BANNER_MESSAGE;
   }
 
   showBanner(): boolean {
     try{
-      const isBannerEnabled = environment.bannerEnabled === true;
-      const bannerMessage = environment.bannerMessage;
+      const isBannerEnabled = this.config.BANNER_ENABLED === true;
+      const bannerMessage = this.config.BANNER_MESSAGE;
 
       if(!isBannerEnabled || !bannerMessage.length){
         return false;
       }
 
       // If the start and end date are not set, show the banner if enabled
-      if (!environment.bannerStartDate || !environment.bannerEndDate) {
+      if (!this.config.BANNER_START_DATE || !this.config.BANNER_END_DATE) {
         return isBannerEnabled && bannerMessage.length > 0;
       }
 
-      const bannerStartDate = new Date(environment.bannerStartDate);
-      const bannerEndDate = new Date(environment.bannerEndDate);
+      const bannerStartDate = new Date(this.config.BANNER_START_DATE);
+      const bannerEndDate = new Date(this.config.BANNER_END_DATE);
 
       // If the current date is between the start and end date, show the banner
       const currentDate = new Date();
