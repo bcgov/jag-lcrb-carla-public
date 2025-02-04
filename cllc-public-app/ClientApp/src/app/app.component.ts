@@ -64,9 +64,6 @@ export class AppComponent extends FormBase implements OnInit {
   // The value determines whether or not to display a warning badge for the "Notices" link in the NavBar.
   showNoticesBadge$ = of(false);
 
-  // Config for the dynamic banner
-  config: any = {}; //store loaded config
-
   constructor(
     private snackBar: MatSnackBar,
     public dialog: MatDialog,

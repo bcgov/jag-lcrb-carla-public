@@ -3,7 +3,7 @@ import { of } from "rxjs";
 import { MaintenanceBannerComponent } from "./maintenance-banner.component";
 import { MaintenanceBanner, MaintenanceBannerService } from "@services/maintenance-banner.service";
 
-fdescribe("MaintenanceBannerComponent", () => {
+describe("MaintenanceBannerComponent", () => {
     let component: MaintenanceBannerComponent;
     let fixture: ComponentFixture<MaintenanceBannerComponent>;
     let maintenanceBannerService: MaintenanceBannerService;
