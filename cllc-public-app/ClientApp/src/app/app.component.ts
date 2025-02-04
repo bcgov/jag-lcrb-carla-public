@@ -64,9 +64,6 @@ export class AppComponent extends FormBase implements OnInit {
   // The value determines whether or not to display a warning badge for the "Notices" link in the NavBar.
   showNoticesBadge$ = of(false);
 
-  // Config for the dynamic banner
-  config: any = {}; //store loaded config
-
   constructor(
     private snackBar: MatSnackBar,
     public dialog: MatDialog,
@@ -129,13 +126,8 @@ export class AppComponent extends FormBase implements OnInit {
       .subscribe(state => {
         this.businessProfiles = state.legalEntities;
       });
-
-    // Fetch the banner config dynamically
-    this.httpCLient.get('assets/banner-config.json').subscribe(config => {
-      this.config = config;
-    });
-
   }
+
 
   loadVersionInfo() {
     this.versionInfoDataService.getVersionInfo()
@@ -248,7 +240,7 @@ export class AppComponent extends FormBase implements OnInit {
   }
 
   openChat(lang, destinationId) {
-    console.log("Button clicked");
+    // console.log("Button clicked");
     // [alternative] var baseSite = "https://bclcbr.icescape.com/iceMessaging/";
     var baseSite = "https://16012.icescape.com/iceMessaging/";
     var imHref = baseSite + "Login.html?dId=" + encodeURIComponent(destinationId) + "&lang=" + encodeURIComponent(lang);
@@ -265,41 +257,6 @@ export class AppComponent extends FormBase implements OnInit {
         autoFocus: false,
         maxHeight: "95vh"
       });
-  }
-
-  get bannerMessage(): string {
-    return this.config.BANNER_MESSAGE;
-  }
-
-  showBanner(): boolean {
-    try{
-      const isBannerEnabled = this.config.BANNER_ENABLED === true;
-      const bannerMessage = this.config.BANNER_MESSAGE;
-
-      if(!isBannerEnabled || !bannerMessage.length){
-        return false;
-      }
-
-      // If the start and end date are not set, show the banner if enabled
-      if (!this.config.BANNER_START_DATE || !this.config.BANNER_END_DATE) {
-        return isBannerEnabled && bannerMessage.length > 0;
-      }
-
-      const bannerStartDate = new Date(this.config.BANNER_START_DATE);
-      const bannerEndDate = new Date(this.config.BANNER_END_DATE);
-
-      // If the current date is between the start and end date, show the banner
-      const currentDate = new Date();
-      const startDate = new Date(bannerStartDate);
-      const endDate = new Date(bannerEndDate);
-
-      return isBannerEnabled && bannerMessage.length > 0 && currentDate >= startDate && currentDate <= endDate;
-
-    } catch (error) {
-      console.error("Error in showBanner: ", error);
-      return false;
-    }
-    
   }
 
 }

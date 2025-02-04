@@ -40,11 +40,7 @@
 
 
     <!-- System Maintenance Banner -->
-    <section *ngIf="showBanner()">
-      <div style="background: red; color: #ffffff; padding-left: 25px; padding-right: 25px; padding-top: 2px; padding-bottom: 2px; font-weight: bold; text-align: center;">
-        {{bannerMessage}}
-			</div>
-		</section>
+    <app-maintenance-banner></app-maintenance-banner>
 
     <div *ngIf="showBceidTermsOfUse()">
       <main class="app-content">
