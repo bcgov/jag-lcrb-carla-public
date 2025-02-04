@@ -1760,7 +1760,7 @@
                 <!-- if there is configured floor plan text, show it-->
                 <div *ngIf="htmlContent.floorPlan">
                   <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.floorPlan"></section>
-                  <img *ngIf="application?.licenseType == 'Food Primary' && application?.applicationType.name != 'Temporary Extension of Licensed Area'" src="assets/Food-Primary-floor-plan-sample.png" style="width: 700px;" alt="Sample Floor Plan">
+                  <img *ngIf="this.showFloorPlanSample()" src="assets/Food-Primary-floor-plan-sample.png" style="width: 700px;" alt="Sample Floor Plan">
                   <img *ngIf="this.showMFGImages()" src="assets/MFG-FLOOR.png">
 
                 </div>

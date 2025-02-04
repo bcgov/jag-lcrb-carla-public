@@ -1154,6 +1154,21 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
   }
 
+  showFloorPlanSample(): boolean {
+    const licenceTypeName = this.application?.licenseType;
+    const applicationTypeName = this.application?.applicationType.name;
+    const isShow = (licenceTypeName == 'Food Primary' && applicationTypeName != 'Temporary Extension of Licensed Area')
+      || (  (licenceTypeName == 'Liquor Primary' || licenceTypeName == 'Liquor Primary Club')
+          && ( applicationTypeName == 'Liquor Primary'
+            || applicationTypeName == 'Liquor Primary Club'
+            || applicationTypeName == 'Liquor Primary Location Change'
+            || applicationTypeName == 'LP Relocation'
+            || applicationTypeName == 'Liquor Primary New Outdoor Patio'
+            || applicationTypeName == 'LP Structural (cap inc.)'
+            || applicationTypeName == 'LP Structural (no cap inc.)'));
+    return isShow;
+  }
+
   showMFGImages(): boolean {
     const isit = this.application?.licenseType === 'Manufacturer'
       && (this.application?.applicationType?.isEndorsement || this.application?.applicationType?.isStructural)
