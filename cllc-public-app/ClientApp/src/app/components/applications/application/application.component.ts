@@ -1459,14 +1459,17 @@ export class ApplicationComponent extends FormBase implements OnInit {
     if (this.application.applicationType.showOwnershipDeclaration) {
 
       if (!this.form.get('isOwner').value && !(this.form.get('isOwnerBusiness') && this.form.get('isOwnerBusiness').value)) {
+        valid = false;
         this.validationMessages.push('Only the owner of the business may submit this information');
       }
 
       if (!this.form.get('hasValidInterest').value) {
+        valid = false;
         this.validationMessages.push('The owner of the business must own or have an agreement to purchase the proposed establishment, or, be the lessee or have a binding agreement to lease the proposed establishment');
       }
 
       if (!this.form.get('willHaveValidInterest').value) {
+        valid = false;
         this.validationMessages.push('Ownership or the lease agreement must be in place at the time of licensing');
       }
 
