@@ -2342,11 +2342,13 @@
                 <section>
                   <div>
                     <mat-checkbox formControlName="isOwnerBusiness">
+                      <span class="error-states">*</span>
                       The applicant is the owner of the business in respect of which the licence is to be issued or will become the owner before the licence is issued.
                     </mat-checkbox>
                   </div>
                   <div>
                     <mat-checkbox formControlName="hasValidInterest">
+                      <span class="error-states">*</span>
                       At the time of this submission, the applicant is:
                       <ul>
                         <li>
@@ -2363,6 +2365,7 @@
                   </div>
                   <div>
                     <mat-checkbox formControlName="willHaveValidInterest">
+                      <span class="error-states">*</span>
                       At the time the licence is issued, the applicant will be:
                       <ul>
                         <li>The owner of the place or premises that forms the establishment, or</li>
