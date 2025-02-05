@@ -335,7 +335,7 @@ import { ForbiddenModalComponent } from '@shared/components/forbidden-modal/forb
 import { RelatedJobnumberPickerComponent } from './shared/components/related-jobnumber-picker/related-jobnumber-picker.component';
 import { RelocationTypeComponent } from "@components/relocation-type/relocation-type.component";
 import { FeedbackComponent } from "@components/feedback/feedback.component";
-
+import { MaintenanceBannerComponent } from "@components/maintenance-banner/maintenance-banner.component";
 
 
 @NgModule({
@@ -532,7 +532,8 @@ import { FeedbackComponent } from "@components/feedback/feedback.component";
     ForbiddenModalComponent,
     RelatedJobnumberPickerComponent,
     RelocationTypeComponent,
-    FeedbackComponent
+    FeedbackComponent,
+    MaintenanceBannerComponent
   ],
   imports: [
     AppRoutingModule,
