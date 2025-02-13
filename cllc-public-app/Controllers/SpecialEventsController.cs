@@ -1483,7 +1483,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 ("Spirits", (int)specialEvent.Spirits,true, specialEvent.AverageSpiritsPrice)
             };
             // if ChargingForLiquorReason is Combination, Adding 3 records with 0 price
-            if (specialEvent.ChargingForLiquorReason == ChargingForLiquorReasons.Combination)
+            if (specialEvent.ChargingForLiquorReason == ChargingForLiquorReasons.Combination || specialEvent.ChargingForLiquorReason ==ChargingForLiquorReasons.RaiseMoney)
             {
                 typeData.AddRange(new List<(string, int, bool, decimal?)>{
                 ("Beer/Cider/Cooler", (int)specialEvent.Beer_free, false, 0),

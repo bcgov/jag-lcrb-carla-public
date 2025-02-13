@@ -69,7 +69,7 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
 
   // Some of the drinks are provided free
   get someFree(): boolean {
-    return this.sepApplication?.chargingForLiquorReason === "Combination";
+    return this.sepApplication?.chargingForLiquorReason === "Combination" ||  this.sepApplication?.chargingForLiquorReason === "RaiseMoney";
   }
 
   getTotalServings(): number {
