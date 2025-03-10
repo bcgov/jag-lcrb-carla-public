@@ -284,9 +284,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.form.get('pin').updateValueAndValidity();
     });
 
+    console.log('form: ',  this.form);
     this.form.get('serviceHoursSundayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
       this.updateRequiredValidator(val, 'serviceHoursSundayClose');
     });
+
 
     this.form.get('serviceHoursSundayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
       this.updateRequiredValidator(val, 'serviceHoursSundayOpen');
@@ -413,6 +415,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
             }
 
             this.application = data;
+            console.log('application: ', this.application);
             this.isShowLGINApproval = (
               this?.application?.applicationType?.isShowLGINApproval ||
               (this?.application?.applicationStatus === "Pending for LG/FN/Police Feedback"
@@ -666,7 +669,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.form.get('establishmentPhone').disable();
     }
 
-    if (!this.application.applicationType.showHoursOfSale || this.application.applicationType.name === ApplicationTypeNames.FP || this.application.applicationType.name === ApplicationTypeNames.FPRelo) {
+    if (!this.application.applicationType.showHoursOfSale || this.application.applicationType.name === ApplicationTypeNames.FP || this.application.applicationType.name === ApplicationTypeNames.FPRelo || this.application.applicationType.name === ApplicationTypeNames.LPCTransitionToLP) {  
       // Opening hours
       this.form.get('serviceHoursSundayOpen').disable();
       this.form.get('serviceHoursMondayOpen').disable();
@@ -763,6 +766,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   private isHoursOfSaleValid(): boolean {
+    console.log('Application Type Name: ' + this.application.applicationType.name);
     return this.form.disabled || !this.application.applicationType.showHoursOfSale ||
         this.application.applicationType.name === ApplicationTypeNames.FP ||
         this.application.applicationType.name === ApplicationTypeNames.FPRelo ||
