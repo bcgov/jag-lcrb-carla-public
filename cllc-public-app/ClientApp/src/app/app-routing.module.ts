@@ -79,6 +79,8 @@ import { LicenceRepresentativeFormComponent } from
 import { MarketEventComponent } from "@components/market-event/market-event.component";
 import { PermanentChangeToALicenseeComponent } from
   "@components/applications/permanent-change-to-a-licensee/permanent-change-to-a-licensee.component";
+import { PermanentChangeToAnApplicantComponent } from
+  "@components/applications/permanent-change-to-an-applicant/permanent-change-to-an-applicant.component";
 import { OffsiteStorageComponent } from "@components/offsite-storage/offsite-storage.component";
 import { NoticesComponent } from "@components/notices/notices.component";
 import { LicenseeRetailStoresComponent } from "./components/licensee-retail-stores/licensee-retail-stores.component";
@@ -201,6 +203,12 @@ const routes: Routes = [
     component: PermanentChangeToALicenseeComponent,
     canActivate: [BCeidAuthGuard, FeatureGuard],
     data: { feature: "PermanentChangesToLicensee" }
+  },
+  {
+    path: "org-structure",
+    component: PermanentChangeToAnApplicantComponent,
+    canActivate: [BCeidAuthGuard, FeatureGuard],
+    data: { feature: "PermanentChangesToApplicant" }
   },
   {
     path: "lg-approvals",
@@ -362,6 +370,18 @@ const routes: Routes = [
     component: PermanentChangeToALicenseeComponent,
     canActivate: [BCeidAuthGuard, FeatureGuard],
     data: { feature: "PermanentChangesToLicensee" }
+  },
+  {
+    path: "permanent-change-to-an-applicant",
+    component: PermanentChangeToAnApplicantComponent,
+    canActivate: [BCeidAuthGuard, FeatureGuard],
+    data: { feature: "PermanentChangesToApplicant" }
+  },
+  {
+    path: "permanent-change-to-an-applicant/:applicationId",
+    component: PermanentChangeToAnApplicantComponent,
+    canActivate: [BCeidAuthGuard, FeatureGuard],
+    data: { feature: "PermanentChangesToApplicant" }
   },
   {
     path: "permanent-change-to-a-licensee/:applicationId",

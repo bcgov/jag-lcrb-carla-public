@@ -91,7 +91,6 @@ export enum ApplicationTypeNames {
   LicenseeChanges = "Licensee Changes",
   LP = "Liquor Primary",
   LPC = "Liquor Primary Club",
-  LPCTransitionToLP = "Application to Transition to Liquor Primary Licence",
   LPR = 'LP Relocation',
   Marketer = "Marketing",
   MarketingRenewal = "Marketing Renewal",

@@ -1176,6 +1176,105 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(data);
         }
 
+        private MicrosoftDynamicsCRMadoxioApplication GetPermanentChangeApplicant(UserSettings userSettings, string applicationId)
+        {
+            MicrosoftDynamicsCRMadoxioApplication result = null;
+
+            var applicationType = _dynamicsClient.GetApplicationTypeByName("Permanent Change to an Applicant");
+
+            string[] expand =
+            {
+                    "adoxio_localgovindigenousnationid",
+                    "adoxio_application_SharePointDocumentLocations",
+                    "adoxio_application_adoxio_tiedhouseconnection_Application",
+                    //"adoxio_AssignedLicence",
+                    "adoxio_ApplicationTypeId",
+                    //"adoxio_LicenceFeeInvoice",
+                    "adoxio_Invoice",
+                    "adoxio_application_SharePointDocumentLocations"
+                };
+
+            var filter =
+                 $"_adoxio_applicant_value eq {userSettings.AccountId} and statuscode ne {(int)AdoxioApplicationStatusCodes.Processed} and statuscode ne {(int)AdoxioApplicationStatusCodes.Terminated}";
+            // filter += $" and adoxio_isapplicationcomplete ne 1";
+            filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Cancelled}";
+            filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Approved}";
+            filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Refused}";
+            filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
+
+            // this filter is required
+            filter += $" and _adoxio_applicationtypeid_value eq {applicationType.AdoxioApplicationtypeid} ";
+
+            if (!string.IsNullOrEmpty(applicationId))
+            {
+                filter += $" and adoxio_applicationid eq {applicationId}";
+            }
+
+            try
+            {
+                var applications = _dynamicsClient.Applications.Get(filter: filter, expand: expand).Value
+                    .OrderByDescending(app => app.Createdon);
+                var application = applications.FirstOrDefault(); // Get the latest application
+                if (application != null)
+                    result = application;
+                else
+                    result = null;
+            }
+            catch (HttpOperationException e)
+            {
+                _logger.LogError(e, "Error getting applicant application");
+                result = null;
+            }
+
+            bool applicationIsPaid = (
+                (result?._adoxioInvoiceValue != null || result?._adoxioSecondaryapplicationinvoiceValue != null) && // an invoice exists
+                (result?._adoxioInvoiceValue == null || result?.AdoxioPrimaryapplicationinvoicepaid == 1) &&
+                (result?._adoxioSecondaryapplicationinvoiceValue == null || result?.AdoxioSecondaryapplicationinvoicepaid == 1)
+                );
+
+            if ((result == null || applicationIsPaid) && applicationType != null && string.IsNullOrEmpty(applicationId))
+            {
+                // create one.
+                var account = _dynamicsClient.GetAccountById(userSettings.AccountId);
+                result = new MicrosoftDynamicsCRMadoxioApplication
+                {
+                    AdoxioApplicanttype = account.AdoxioBusinesstype,
+                    AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("accounts", userSettings.AccountId),
+                    // set application type relationship 
+                    AdoxioApplicationTypeIdODataBind = _dynamicsClient.GetEntityURI("adoxio_applicationtypes",
+                        applicationType.AdoxioApplicationtypeid)
+                };
+
+                try
+                {
+                    result = _dynamicsClient.Applications.Create(result);
+                    result = _dynamicsClient.GetApplicationByIdWithChildren(result.AdoxioApplicationid).GetAwaiter()
+                        .GetResult();
+                }
+                catch (HttpOperationException e)
+                {
+                    _logger.LogError(e, "Error creating applicant application");
+                    result = null;
+                }
+            }
+
+            return result;
+        }
+        [HttpGet("permanent-change-to-applicant-data")]
+        public async Task<IActionResult> GetPermanetChangesToApplicantData([FromQuery] string applicationId)
+        {
+            // get the current user.
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+            Application data = new Application();
+
+            // set application type relationship 
+            var app = GetPermanentChangeApplicant(userSettings, applicationId);
+
+            data = await app.ToViewModel(_dynamicsClient, _cache, _logger);
+            return new JsonResult(data);
+        }
+
+
         /// GET all applications in Dynamics for the current user
         [HttpGet("ongoing-licensee-application-id")]
         public IActionResult GetOngoingLicenseeApplicationId()
