@@ -255,12 +255,8 @@ import { ProductionStagesComponent } from
 import { PhsConfirmationComponent } from "@components/phs-confirmation/phs-confirmation.component";
 import { PermanentChangeToALicenseeComponent } from
   "./components/applications/permanent-change-to-a-licensee/permanent-change-to-a-licensee.component";
-import { PermanentChangeToAnApplicantComponent } from
-  "./components/applications/permanent-change-to-an-applicant/permanent-change-to-an-applicant.component";
 import { LegalEntityTypeUpdateCalloutboxComponent } from
   "./components/dashboard/legal-entity-type-update-calloutbox/legal-entity-type-update-calloutbox.component";
-import { LegalEntityTypeUpdateApplicantCalloutboxComponent } from
-  "./components/dashboard/legal-entity-type-update-applicant-calloutbox/legal-entity-type-update-applicant-calloutbox.component";
 import { OffsiteStorageComponent } from "@components/offsite-storage/offsite-storage.component";
 import { OffsiteTableComponent } from "@components/tables/offsite-table/offsite-table.component";
 import { ContactComponent } from "./shared/components/contact/contact.component";
@@ -469,9 +465,7 @@ import { MaintenanceBannerComponent } from "@components/maintenance-banner/maint
     ProductionStagesComponent,
     PhsConfirmationComponent,
     PermanentChangeToALicenseeComponent,
-    PermanentChangeToAnApplicantComponent,
     LegalEntityTypeUpdateCalloutboxComponent,
-    LegalEntityTypeUpdateApplicantCalloutboxComponent,
     OffsiteStorageComponent,
     OffsiteTableComponent,
     ContactComponent,
