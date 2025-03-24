@@ -1659,7 +1659,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             AdoxioFridayclose = (int?)item.ServiceHoursFridayClose,
                             AdoxioFridayopen = (int?)item.ServiceHoursFridayOpen,
                             AdoxioSaturdayclose = (int?)item.ServiceHoursSaturdayClose,
-                            AdoxioSaturdayopen = (int?)item.ServiceHoursSaturdayOpen
+                            AdoxioSaturdayopen = (int?)item.ServiceHoursSaturdayOpen,
+                            AdoxioRequestOutsideServiceours = item.RequestOutsideServiceHours
                         };
 
                         if (hoursEntity != null)

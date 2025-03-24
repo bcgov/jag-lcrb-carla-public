@@ -487,6 +487,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public ServiceHours? ServiceHoursSaturdayOpen { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
         public ServiceHours? ServiceHoursSaturdayClose { get; set; }
+        public bool? RequestOutsideServiceHours { get; set; }
 
         public ApplicationType ApplicationType { get; set; }
 
