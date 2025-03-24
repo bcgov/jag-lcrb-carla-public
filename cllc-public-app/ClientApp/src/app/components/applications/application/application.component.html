@@ -237,6 +237,11 @@
             <app-more-less-content>
               <div class="ngtest-before-starting-content" [innerHTML]="htmlContent.beforeStarting">
               </div>
+              <span *ngIf="application?.applicationType?.name === ApplicationTypeNames.ChangeHoursOfService_Outside_Service_Hours ||
+                           application?.applicationType?.name === ApplicationTypeNames.ChangeHoursOfService_Lounge_Area ||
+                           application?.applicationType?.name === ApplicationTypeNames.ChangeHoursOfService__Special_Event_Area"  >
+                           If requesting to extend hours of liquor service outside of 9am-4am, you will also need to submit an application for a Request of Change in Terms and Conditions/Request for Discretion.
+              </span>
             </app-more-less-content>
 
             <p *ngIf="isShowLGINApproval || application?.applicationType?.isShowLGZoningConfirmation">
@@ -2273,8 +2278,23 @@
                 </tr>
               </table>
               <p class="error-states" *ngIf="showValidationMessages && !isHoursOfSaleValid()">
-                Hours of Sale are required
+                Hours of Sale are required 
               </p>
+              <span *ngIf="application?.applicationType?.name === ApplicationTypeNames.ChangeHoursOfService_Outside_Service_Hours ||
+                           application?.applicationType?.name === ApplicationTypeNames.ChangeHoursOfService_Lounge_Area ||
+                           application?.applicationType?.name === ApplicationTypeNames.ChangeHoursOfService__Special_Event_Area" > 
+                <br>
+                <app-field label="Are you requesting to extend liquor service hours outside of 9am - 4am?" [valid]="true">
+                  <mat-button-toggle-group formControlName="requestOutsideServiceHours" aria-label="Font Style">
+                    <mat-button-toggle [value]="true">Yes</mat-button-toggle>
+                    <mat-button-toggle [value]="false">No</mat-button-toggle>
+                  </mat-button-toggle-group>
+                </app-field>
+              </span>
+             <div *ngIf="form.get('requestOutsideServiceHours').value" style="margin-bottom: 10px; margin-top: 10px;">
+                Please also submit an application for a Request of Change in Terms and Conditions/Request for Discretion.
+              </div>
+              <!-- </span> -->
             </div>
           </section>
           
