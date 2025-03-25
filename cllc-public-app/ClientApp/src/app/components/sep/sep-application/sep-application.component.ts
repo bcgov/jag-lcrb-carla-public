@@ -9,6 +9,7 @@ import { IndexedDBService } from "@services/indexed-db.service";
 import { SepApplication } from "@models/sep-application.model";
 import { environment } from "environments/environment";
 import { SpecialEventsDataService } from "@services/special-events-data.service";
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 export const SEP_APPLICATION_STEPS = ["applicant", "eligibility", "event", "liquor", "summary"];
 
@@ -31,7 +32,7 @@ export class SepApplicationComponent implements OnInit {
   account: Account;
   step: string;
   savingToAPI: boolean;
-
+  isFormEditable: boolean = false;
   get selectedIndex(): number {
     let index = 0;
     if (this.step) {
@@ -44,6 +45,7 @@ export class SepApplicationComponent implements OnInit {
   }
 
   constructor(private store: Store<AppState>,
+    public snackBar: MatSnackBar,
     private db: IndexedDBService,
     private cd: ChangeDetectorRef,
     private sepDataService: SpecialEventsDataService,
@@ -68,6 +70,7 @@ export class SepApplicationComponent implements OnInit {
           const value = JSON.parse(JSON.stringify(app));
           delete value.totalMaximumNumberOfGuests;
           this.application = Object.assign(new SepApplication(), value);
+          this.isFormEditable = this.application.eventStatus.toLowerCase() === "draft";     
         }, err => {
           console.error(err);
         });
@@ -88,22 +91,36 @@ export class SepApplicationComponent implements OnInit {
 
   async saveToAPI(): Promise<void> {
     this.savingToAPI = true;
-    const appData = await this.db.getSepApplication(this.localId);
-    if (appData.id) { // do an update ( the record exists in dynamics)
-      const result = await this.sepDataService.updateSepApplication({ ...appData, invoiceTrigger: true } as SepApplication, appData.id)
+    try {
+      const appData = await this.db.getSepApplication(this.localId);
+      if (appData.id) { // do an update (the record exists in dynamics)
+      try {
+        const result = await this.sepDataService.updateSepApplication({ ...appData, invoiceTrigger: true } as SepApplication, appData.id)
         .toPromise();
-      if (result.localId) {
+        if (result.localId) {
         await this.db.saveSepApplication(result);
+        }
+      } catch (error) {
+        this.snackBar.open("Unable to update application", '', { duration: 2500, panelClass: ['red-snackbar'] });
       }
-    } else {
-      const result = await this.sepDataService.createSepApplication({ ...appData, invoiceTrigger: true } as SepApplication)
+      } else { // create a new record
+      try {
+        const result = await this.sepDataService.createSepApplication({ ...appData, invoiceTrigger: true } as SepApplication)
         .toPromise();
-      if (result.localId) {
+        if (result.localId) {
         await this.db.saveSepApplication(result);
         this.localId = result.localId;
+        }
+      } catch (error) {
+        this.snackBar.open("Unable to create application", '', { duration: 2500, panelClass: ['red-snackbar'] });
       }
+      }
+    } catch (error) {
+      console.error("Error retrieving application data:", error);
+      this.snackBar.open("Unable to retrieve application data", '', { duration: 2500, panelClass: ['red-snackbar'] });
+    } finally {
+      this.savingToAPI = false;
     }
-    this.savingToAPI = false;
   }
 
   completeStep(step: string, stepper: any, data: SepApplication, saveToApi: boolean) {
