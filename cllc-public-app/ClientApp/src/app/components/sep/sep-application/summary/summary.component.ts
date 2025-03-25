@@ -449,7 +449,7 @@ export class SummaryComponent implements OnInit {
         this.router.navigateByUrl("/sep/my-applications");
       }
       if (this.localId) {
-        await this.db.applications.update(this.localId, result);
+        await this.db.saveSepApplication(result);
         this.localId = this.localId; // trigger data refresh
       }
       //} else {
