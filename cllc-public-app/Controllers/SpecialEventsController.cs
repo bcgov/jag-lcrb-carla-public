@@ -1237,6 +1237,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             var existingEvent = GetSpecialEventData(eventId);
+           
+            if((existingEvent.Statuscode != (int?)EventStatus.Draft)){
+                  return BadRequest("Updating a special event is only allowed in Draft status.");
+            }
             if (existingEvent._adoxioAccountidValue != userSettings.AccountId &&
                existingEvent._adoxioContactidValue != userSettings.ContactId)
             {
@@ -1486,9 +1490,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (specialEvent.ChargingForLiquorReason == ChargingForLiquorReasons.Combination || specialEvent.ChargingForLiquorReason ==ChargingForLiquorReasons.RaiseMoney)
             {
                 typeData.AddRange(new List<(string, int, bool, decimal?)>{
-                ("Beer/Cider/Cooler", (int)specialEvent.Beer_free, false, 0),
-                ("Wine", (int)specialEvent.Wine_free, false, 0),
-                ("Spirits", (int)specialEvent.Spirits_free, false, 0)
+                ("Beer/Cider/Cooler", (int)(specialEvent.Beer_free ?? 0), false, 0),
+                ("Wine", (int)(specialEvent.Wine_free ?? 0), false, 0),
+                ("Spirits", (int)(specialEvent.Spirits_free ?? 0), false, 0)
                 }
             );
             }
