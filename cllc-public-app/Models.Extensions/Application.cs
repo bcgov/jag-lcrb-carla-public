@@ -158,7 +158,6 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioLgapprovaldecision = (int?)from.LGApprovalDecision;
 
             // Manufacturing fields
-
             to.AdoxioIspackaging = from.IsPackaging;
             to.AdoxioMfgpipedinproduct = (int?)from.MfgPipedInProduct;
             to.AdoxioMfgbrewpubonsite = (int?)from.MfgBrewPubOnSite;
@@ -801,6 +800,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                         applicationVM.ServiceHoursFridayClose = (ServiceHours?)hourEntity.AdoxioFridayclose;
                         applicationVM.ServiceHoursSaturdayOpen = (ServiceHours?)hourEntity.AdoxioSaturdayopen;
                         applicationVM.ServiceHoursSaturdayClose = (ServiceHours?)hourEntity.AdoxioSaturdayclose;
+                        applicationVM.RequestOutsideServiceHours = hourEntity.AdoxioRequestOutsideServiceours;
                     }
                 }
                 catch (HttpOperationException httpOperationException)

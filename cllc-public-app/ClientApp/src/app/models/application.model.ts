@@ -71,6 +71,7 @@ export interface Application {
   serviceHoursWednesdayClose: string;
   serviceHoursWednesdayOpen: string;
   servicehHoursStandardHours: boolean;
+  requestOutsideServiceHours: boolean;
   signatureAgreement: boolean;
   tiedHouse: TiedHouseConnection;
   indigenousNationId: string;

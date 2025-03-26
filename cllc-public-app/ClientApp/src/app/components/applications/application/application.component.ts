@@ -206,6 +206,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       serviceHoursThursdayClose: [''],
       serviceHoursFridayClose: [''],
       serviceHoursSaturdayClose: [''],
+      requestOutsideServiceHours: [false],
       liquorDeclarationCheck: [''],
       applyAsIndigenousNation: [false],
       indigenousNationId: [{ value: null, disabled: true }, Validators.required],
@@ -338,6 +339,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
     this.form.get('serviceHoursSaturdayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
       this.updateRequiredValidator(val, 'serviceHoursSaturdayOpen');
+    });
+
+    this.form.get('requestOutsideServiceHours').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
+      this.updateRequiredValidator(val, 'requestOutsideServiceHours');
     });
   
     this.form.get('indigenousNation').valueChanges
@@ -683,6 +688,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.form.get('serviceHoursThursdayClose').disable();
       this.form.get('serviceHoursFridayClose').disable();
       this.form.get('serviceHoursSaturdayClose').disable();
+
+      this.form.get('requestOutsideServiceHours').disable();
     }
 
 
