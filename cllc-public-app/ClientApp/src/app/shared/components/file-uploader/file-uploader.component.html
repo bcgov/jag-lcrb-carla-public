@@ -22,7 +22,7 @@
       </div>
     </ng-template>
   </ngx-file-drop>
-  <mat-progress-bar class="mt-1 mb-1" *ngIf="!dataLoaded || fileReqOngoing" mode="indeterminate"></mat-progress-bar>
+  <mat-progress-bar class="mt-1 mb-1" *ngIf="!dataLoaded || fileReqOngoing || isLoading" mode="indeterminate"></mat-progress-bar>
   <div style="color: #2C679E; margin-top: 5px;">
     <section *ngFor="let item of files; let i=index" class="file-list">
       <a name="{{item.name}}" href="{{item.downloadUrl}}">{{ item.name }}</a>
@@ -31,5 +31,15 @@
         <a *ngIf="enableFileDeletion" href="javascript: void(0)" (click)="deleteFile(item.serverrelativeurl)">Delete</a>
       </span>
     </section>
+  </div>
+  <!-- Validation Messages -->
+  <div *ngIf="apiValidationStatus === 'invalid'" class="validation-message invalid">
+    <span>&#9888; {{ validationMessage }}</span>
+  </div>
+  <div *ngIf="apiValidationStatus === 'expired'" class="validation-message expired">
+    <span>&#9888; {{ validationMessage }}</span>
+  </div>
+  <div *ngIf="apiValidationStatus === 'valid'" class="validation-message valid">
+    <span>&#10004; Your floor plan contains a valid occupant load stamp.</span>
   </div>
 </div>
