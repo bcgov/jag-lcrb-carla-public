@@ -239,7 +239,7 @@
               </div>
               <span *ngIf="application?.applicationType?.name === ApplicationTypeNames.ChangeHoursOfService_Outside_Service_Hours ||
                            application?.applicationType?.name === ApplicationTypeNames.ChangeHoursOfService_Lounge_Area ||
-                           application?.applicationType?.name === ApplicationTypeNames.ChangeHoursOfService__Special_Event_Area"  >
+                           application?.applicationType?.name === ApplicationTypeNames.ChangeHoursOfService_Special_Event_Area"  >
                            If requesting to extend hours of liquor service outside of 9am-4am, you will also need to submit an application for a Request of Change in Terms and Conditions/Request for Discretion.
               </span>
             </app-more-less-content>
@@ -2282,7 +2282,7 @@
               </p>
               <span *ngIf="application?.applicationType?.name === ApplicationTypeNames.ChangeHoursOfService_Outside_Service_Hours ||
                            application?.applicationType?.name === ApplicationTypeNames.ChangeHoursOfService_Lounge_Area ||
-                           application?.applicationType?.name === ApplicationTypeNames.ChangeHoursOfService__Special_Event_Area" > 
+                           application?.applicationType?.name === ApplicationTypeNames.ChangeHoursOfService_Special_Event_Area" > 
                 <br>
                 <app-field label="Are you requesting to extend liquor service hours outside of 9am - 4am?" [valid]="true">
                   <mat-button-toggle-group formControlName="requestOutsideServiceHours" aria-label="Font Style">
