@@ -49,7 +49,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 );
             }
 
-    /*  string smSession = HttpContext.Request.Cookies["SMSESSION"];
+            string smSession = HttpContext.Request.Cookies["SMSESSION"];
             if (!string.IsNullOrEmpty(smSession))
             {
                 Response.Cookies.Append(
@@ -62,7 +62,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         Expires = DateTime.UtcNow.AddDays(-1)
                     }
                 );
-            }*/
+            }
 
             if (!_env.IsProduction()) // clear dev tokens
             {
