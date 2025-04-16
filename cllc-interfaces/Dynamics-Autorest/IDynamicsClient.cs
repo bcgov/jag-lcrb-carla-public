@@ -108,6 +108,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IApplicationcrsbpfv4s Applicationcrsbpfv4s { get; }
 
         /// <summary>
+        /// Gets the IApplicationextensions.
+        /// </summary>
+        IApplicationextensions Applicationextensions { get; }
+
+        /// <summary>
         /// Gets the IApplicationinvoicehistories.
         /// </summary>
         IApplicationinvoicehistories Applicationinvoicehistories { get; }
