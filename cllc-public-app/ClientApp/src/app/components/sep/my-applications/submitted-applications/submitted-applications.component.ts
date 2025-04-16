@@ -216,10 +216,14 @@ export class SubmittedApplicationsComponent implements OnInit {
     
   }
 
-
-  async cancelApplication(appSummary: SepApplicationSummary): Promise<void> {
-
-    // open dialog, get reference and process returned data from dialog
+  /**
+   * Cancel (withdraw) an application.
+   *
+   * @param {(SepApplicationSummary | SepApplication)} appSummary
+   * @return {*}  {Promise<void>}
+   * @memberof SubmittedApplicationsComponent
+   */
+  async cancelApplication(appSummary: SepApplicationSummary | SepApplication): Promise<void> {
     const dialogConfig = {
       disableClose: true,
       autoFocus: true,
@@ -231,25 +235,43 @@ export class SubmittedApplicationsComponent implements OnInit {
     };
 
     const dialogRef = this.dialog.open(CancelSepApplicationDialogComponent, dialogConfig);
-    dialogRef.afterClosed()  
-      .subscribe(async ([cancelApplication, reason]) => {
-      if (cancelApplication) {
-        if (appSummary.specialEventId)
-        {
-          const result = await this.sepDataService.updateSepApplication({ id: appSummary.specialEventId, cancelReason: reason, eventStatus: "Cancelled" } as SepApplication, appSummary.specialEventId)
-          .toPromise();
 
-          if (appSummary.localId) {
-            await this.db.applications.update(+appSummary.localId, result);    
-          }
-          this.router.navigateByUrl(`/sep/my-applications`)
-          .then(() => {
-            window.location.reload();
-          });
-        }
-    }
-  });
-}
+    dialogRef.afterClosed().subscribe(async ([cancelApplication, reason]) => {
+      if (cancelApplication !== true) {
+        return;
+      }
+
+      const applicationId = this.isSepApplicationSummary(appSummary)
+        ? appSummary.specialEventId
+        : appSummary.id;
+
+      if (applicationId) {
+        // If this application was persisted (submitted or persisted draft), update the application with a cancelled 
+        // status/reason.
+        await this.sepDataService
+          .updateSepApplication(
+            {
+              id: applicationId,
+              cancelReason: reason,
+              eventStatus: "Cancelled",
+            } as SepApplication,
+            applicationId
+          )
+          .toPromise();
+      }
+
+      // `localId` can be 0 so explicitly check for undefined or null
+      if (appSummary.localId !== undefined && appSummary.localId !== null) {
+        // If this application was cached locally (submitted or persisted draft or local draft), remove it from local 
+        // storage
+        await this.db.applications.delete(Number(appSummary.localId));
+      }
+
+      this.router.navigateByUrl(`/sep/my-applications`).then(() => {
+        window.location.reload();
+      });
+    });
+  }
 
   // async getApplications() {
   //   let applications = await this.db.applications.toArray();
@@ -278,4 +300,9 @@ export class SubmittedApplicationsComponent implements OnInit {
       }));
   }
 
+  isSepApplicationSummary = (
+    app: SepApplication | SepApplicationSummary
+  ): app is SepApplicationSummary => {
+    return (app as SepApplicationSummary).specialEventId !== undefined;
+  }
 }

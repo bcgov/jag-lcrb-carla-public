@@ -1237,10 +1237,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             var existingEvent = GetSpecialEventData(eventId);
-           
-            if((existingEvent.Statuscode != (int?)EventStatus.Draft)){
-                  return BadRequest("Updating a special event is only allowed in Draft status.");
+
+            if (
+                specialEvent.EventStatus != EventStatus.Cancelled
+                && existingEvent.Statuscode != (int?)EventStatus.Draft
+            )
+            {
+                // Only allow drafts to be updated, unless the update action is a cancellation
+                return BadRequest("Updating a special event is only allowed in Draft status.");
             }
+
             if (existingEvent._adoxioAccountidValue != userSettings.AccountId &&
                existingEvent._adoxioContactidValue != userSettings.ContactId)
             {
