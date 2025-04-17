@@ -800,7 +800,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                         applicationVM.ServiceHoursFridayClose = (ServiceHours?)hourEntity.AdoxioFridayclose;
                         applicationVM.ServiceHoursSaturdayOpen = (ServiceHours?)hourEntity.AdoxioSaturdayopen;
                         applicationVM.ServiceHoursSaturdayClose = (ServiceHours?)hourEntity.AdoxioSaturdayclose;
-                        applicationVM.RequestOutsideServiceHours = hourEntity.AdoxioRequestOutsideServiceours;
+                        applicationVM.RequestOutsideServiceHours = hourEntity.AdoxioRequestoutsideservicehours;
                     }
                 }
                 catch (HttpOperationException httpOperationException)

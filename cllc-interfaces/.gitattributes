@@ -1,0 +1,6 @@
+# Ensure all line endings in the Dynamics-Autorest folder are LF. 
+# The line endings will be dependent on the OS of the machine that generated the files, which can lead to messy merges 
+# where no actual changes were made, but the line endings are different.
+Dynamics-Autorest/** text eol=lf
+# This could be applied more broadly by removing the hard-coded subfolder and moving this file to the root of the repo.
+# See details here: https://git-scm.com/docs/gitattributes

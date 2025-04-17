@@ -111,6 +111,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IApplicationcrsbpfv4s Applicationcrsbpfv4s { get; private set; }
 
         /// <summary>
+        /// Gets the IApplicationextensions.
+        /// </summary>
+        public virtual IApplicationextensions Applicationextensions { get; private set; }
+
+        /// <summary>
         /// Gets the IApplicationinvoicehistories.
         /// </summary>
         public virtual IApplicationinvoicehistories Applicationinvoicehistories { get; private set; }
@@ -1030,6 +1035,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Applicationbpfdormancies = new Applicationbpfdormancies(this);
             Applicationbpfv3s = new Applicationbpfv3s(this);
             Applicationcrsbpfv4s = new Applicationcrsbpfv4s(this);
+            Applicationextensions = new Applicationextensions(this);
             Applicationinvoicehistories = new Applicationinvoicehistories(this);
             Applicationlicenseechangesv10s = new Applicationlicenseechangesv10s(this);
             Applicationliquorbpfv2s = new Applicationliquorbpfv2s(this);
