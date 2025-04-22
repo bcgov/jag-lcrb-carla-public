@@ -148,6 +148,15 @@ namespace Gov.Lclb.Cllb.Public
                                       || context.User.HasClaim(c => c.Type == User.PermissionClaim && c.Value == Permission.NewUserRegistration));
                                       return res;
                                   }));
+                // This policy is used for existing bc services card accounts
+                options.AddPolicy("Service-Card-User", policy =>
+                                  policy.RequireAssertion(context =>
+                                  {
+                                      var res = context.User.HasClaim(c => c.Type == User.UserTypeClaim && c.Value == "VerfiedIndividual")
+                                      && context.User.HasClaim(c => c.Type == User.PermissionClaim && c.Value == Permission.ExistingUser);
+                                      return res;
+                                  }));
+
             });
             services.RegisterPermissionHandler();
             if (!string.IsNullOrEmpty(_configuration["KEY_RING_DIRECTORY"]))
