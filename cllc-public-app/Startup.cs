@@ -152,7 +152,7 @@ namespace Gov.Lclb.Cllb.Public
                 options.AddPolicy("Service-Card-User", policy =>
                                   policy.RequireAssertion(context =>
                                   {
-                                      var res = context.User.HasClaim(c => c.Type == User.UserTypeClaim && c.Value == "VerfiedIndividual")
+                                      var res = context.User.HasClaim(c => c.Type == User.UserTypeClaim && c.Value == "VerifiedIndividual")
                                       && context.User.HasClaim(c => c.Type == User.PermissionClaim && c.Value == Permission.ExistingUser);
                                       return res;
                                   }));
