@@ -25,7 +25,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Policy = "Business-User")]
+    
     public class FeedbackController : ControllerBase
     {
 

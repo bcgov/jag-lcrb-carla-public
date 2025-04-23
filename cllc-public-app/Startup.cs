@@ -148,6 +148,7 @@ namespace Gov.Lclb.Cllb.Public
                                       || context.User.HasClaim(c => c.Type == User.PermissionClaim && c.Value == Permission.NewUserRegistration));
                                       return res;
                                   }));
+
             });
             services.RegisterPermissionHandler();
             if (!string.IsNullOrEmpty(_configuration["KEY_RING_DIRECTORY"]))
