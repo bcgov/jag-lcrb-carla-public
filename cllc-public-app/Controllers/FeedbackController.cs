@@ -25,6 +25,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
+    
     public class FeedbackController : ControllerBase
     {
 
