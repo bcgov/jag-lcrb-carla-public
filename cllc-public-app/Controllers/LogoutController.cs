@@ -49,20 +49,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 );
             }
 
+
             string smSession = HttpContext.Request.Cookies["SMSESSION"];
-            if (!string.IsNullOrEmpty(smSession))
-            {
-                Response.Cookies.Append(
-                    "SMSESSION",
-                    smSession,
-                    new CookieOptions
-                    {
-                        Path = "/",
-                        SameSite = SameSiteMode.Strict,
-                        Expires = DateTime.UtcNow.AddDays(-1)
-                    }
-                );
-            }
+
 
             if (!_env.IsProduction()) // clear dev tokens
             {
