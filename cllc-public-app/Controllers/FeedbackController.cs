@@ -25,7 +25,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Policy = "Existing-User")]
     public class FeedbackController : ControllerBase
     {
 
