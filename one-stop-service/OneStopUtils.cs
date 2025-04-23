@@ -481,8 +481,7 @@ namespace Gov.Jag.Lcrb.OneStopService
             try
             {
                 string filter = "adoxio_messagesendstatus eq 845280002";
-                List<string> _orderby = new List<String>() { "desc createdon" };
-                var result1 = dynamicsClient.Onestopmessageitems.Get(orderby: _orderby).Value;
+                List<string> _orderby = new List<String>() { "createdon" };
                 result = dynamicsClient.Onestopmessageitems.Get(filter: filter, orderby: _orderby).Value;
             }
             catch (HttpOperationException odee)

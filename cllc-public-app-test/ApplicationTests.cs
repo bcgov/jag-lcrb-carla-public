@@ -61,8 +61,8 @@ namespace Gov.Lclb.Cllb.Public.Test
                 ,
                 ApplicationType = await GetDefaultCannabisApplicationType(),
                 RegisteredEstablishment = GeneralYesNo.No //*Mandatory (Yes=1, No=0)
-                                                          //,name = initialName
-                                                          //,applyingPerson = "Applying Person" //contact
+                                                                     //,name = initialName
+                                                                     //,applyingPerson = "Applying Person" //contact
                 ,
                 Applicant = currentAccount //account
                                            //,jobNumber = "123"
@@ -178,8 +178,8 @@ namespace Gov.Lclb.Cllb.Public.Test
                 ,
                 ApplicationType = await GetDefaultCannabisApplicationType(),
                 RegisteredEstablishment = GeneralYesNo.No //*Mandatory (Yes=1, No=0)
-                                                          //,name = initialName
-                                                          //,applyingPerson = "Applying Person" //contact
+                                                                     //,name = initialName
+                                                                     //,applyingPerson = "Applying Person" //contact
                 ,
                 Applicant = currentAccount //account
                                            //,jobNumber = "123"
