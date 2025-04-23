@@ -60,6 +60,10 @@ namespace Gov.Lclb.Cllb.Public.Test
                 ApplicantType = AdoxioApplicantTypeCodes.PrivateCorporation //*Mandatory (label=business type)
                 ,
                 ApplicationType = await GetDefaultCannabisApplicationType(),
+                RegisteredEstablishment = GeneralYesNo.No //*Mandatory (Yes=1, No=0)
+                                                          //,name = initialName
+                                                          //,applyingPerson = "Applying Person" //contact
+                ,
                 Applicant = currentAccount //account
                                            //,jobNumber = "123"
 
@@ -173,6 +177,10 @@ namespace Gov.Lclb.Cllb.Public.Test
                 ApplicantType = AdoxioApplicantTypeCodes.PrivateCorporation //*Mandatory (label=business type)
                 ,
                 ApplicationType = await GetDefaultCannabisApplicationType(),
+                RegisteredEstablishment = GeneralYesNo.No //*Mandatory (Yes=1, No=0)
+                                                          //,name = initialName
+                                                          //,applyingPerson = "Applying Person" //contact
+                ,
                 Applicant = currentAccount //account
                                            //,jobNumber = "123"
                 ,
@@ -387,6 +395,8 @@ namespace Gov.Lclb.Cllb.Public.Test
                 ApplicantType = AdoxioApplicantTypeCodes.PrivateCorporation
                 ,
                 ApplicationType = await GetDefaultCannabisApplicationType(),
+                RegisteredEstablishment = GeneralYesNo.No
+                ,
                 Applicant = currentAccount
                 ,
                 EstablishmentName = "Not a Dispensary"
@@ -487,6 +497,8 @@ namespace Gov.Lclb.Cllb.Public.Test
                 ApplicantType = AdoxioApplicantTypeCodes.PrivateCorporation
                 ,
                 ApplicationType = await GetDefaultCannabisApplicationType(),
+                RegisteredEstablishment = GeneralYesNo.No
+                ,
                 Applicant = currentAccount
                 ,
                 EstablishmentName = "Not a Dispensary"
