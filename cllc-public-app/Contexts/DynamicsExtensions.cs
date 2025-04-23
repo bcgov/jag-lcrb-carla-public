@@ -20,6 +20,7 @@ using System.Xml.Linq;
 using System.Xml.XPath;
 using Serilog;
 using ILogger = Microsoft.Extensions.Logging.ILogger;
+using System.Text;
 
 namespace Gov.Lclb.Cllb.Interfaces
 {
@@ -1466,6 +1467,8 @@ namespace Gov.Lclb.Cllb.Interfaces
                     // Update the contact with info from Siteminder
                     var contactVM = new Public.ViewModels.Contact();
                     contactVM.CopyHeaderValues(Headers);
+                    //TEMPORARY - REMOVE
+                    _logger.LogInformation("LoadUserLegacy Headers: " + HeadersToString(Headers));
                     _logger.LogDebug(">>>> After reading headers: " + JsonConvert.SerializeObject(contactVM));
                     MicrosoftDynamicsCRMcontact patchContact = new MicrosoftDynamicsCRMcontact();
                     patchContact.CopyValues(contactVM);
@@ -2015,6 +2018,16 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 Log.Logger.Error(e, "Unexpected Error creating Login record.");
             }
+        }
+        //TEMPORARY - REMOVE
+        private static string HeadersToString(IHeaderDictionary headers)
+        {
+            var sb = new StringBuilder();
+            foreach (var header in headers)
+            {
+                sb.AppendLine($"{header.Key}: {string.Join(", ", header.Value)}");
+            }
+            return sb.ToString();
         }
     }
 }
