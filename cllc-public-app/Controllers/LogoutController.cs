@@ -50,9 +50,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
 
-            string smSession = HttpContext.Request.Cookies["SMSESSION"];
-
-
             if (!_env.IsProduction()) // clear dev tokens
             {
                 string temp = HttpContext.Request.Cookies[_options.DevAuthenticationTokenKey];
