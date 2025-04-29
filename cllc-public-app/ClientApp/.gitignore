@@ -1,9 +1,5 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
-# `package-lock.json` is not currently being leveraged in this project, removing it from the repo until we
-# migrate to using `npm ci` instead of `npm install`.
-package-lock.json
-
 # compiled output
 /dist
 /dist-server
