@@ -2170,6 +2170,246 @@
         }
       }
     },
+    "/adoxio_applicationextensions": {
+      "get": {
+        "tags": [
+          "applicationextensions"
+        ],
+        "summary": "Get entities from adoxio_applicationextensions",
+        "operationId": "applicationextensions_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationextensionCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "adoxio_applicationextensions.adoxio_applicationextension"
+        ],
+        "summary": "Add new entity to adoxio_applicationextensions",
+        "operationId": "applicationextensions_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Prefer",
+            "description": "Required in order for the service to return a JSON representation of the object.",
+            "type": "string",
+            "default": "return=representation"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "New entity",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationextension"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationextension"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_applicationextensions({adoxio_applicationextensionid})": {
+      "get": {
+        "tags": [
+          "applicationextensions"
+        ],
+        "summary": "Get entity from adoxio_applicationextensions by key",
+        "operationId": "applicationextensions_GetByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_applicationextensionid",
+            "description": "key: adoxio_applicationextensionid of adoxio_applicationextension",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationextension"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "adoxio_applicationextensions.adoxio_applicationextension"
+        ],
+        "summary": "Update entity in adoxio_applicationextensions",
+        "operationId": "applicationextensions_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_applicationextensionid",
+            "description": "key: adoxio_applicationextensionid of adoxio_applicationextension",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "New property values",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationextension"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "adoxio_applicationextensions.adoxio_applicationextension"
+        ],
+        "summary": "Delete entity from adoxio_applicationextensions",
+        "operationId": "applicationextensions_Delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_applicationextensionid",
+            "description": "key: adoxio_applicationextensionid of adoxio_applicationextension",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "If-Match",
+            "description": "ETag",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/adoxio_applicationinvoicehistories": {
       "get": {
         "tags": [
@@ -34883,6 +35123,9 @@
         },
         "regardingobjectid_ptm_automergeworkingitems_abs_scheduledprocessexecution": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.ptm_automergeworkingitems"
+        },
+        "regardingobjectid_adoxio_policejurisdiction_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_policejurisdiction"
         }
       }
     },
@@ -37712,6 +37955,9 @@
         },
         "regardingobjectid_ptm_automergeworkingitems": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.ptm_automergeworkingitems"
+        },
+        "regardingobjectid_adoxio_policejurisdiction": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_policejurisdiction"
         }
       }
     },
@@ -38857,6 +39103,153 @@
         }
       }
     },
+    "Microsoft.Dynamics.CRM.adoxio_applicationextension": {
+      "description": "Microsoft.Dynamics.CRM.adoxio_applicationextension",
+      "type": "object",
+      "properties": {
+        "_createdby_value": {
+          "type": "string"
+        },
+        "_modifiedonbehalfby_value": {
+          "type": "string"
+        },
+        "importsequencenumber": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_modifiedby_value": {
+          "type": "string"
+        },
+        "_adoxio_application_value": {
+          "type": "string"
+        },
+        "createdon": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "timezoneruleversionnumber": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "utcconversiontimezonecode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_otherdetails": {
+          "type": "string"
+        },
+        "adoxio_name": {
+          "type": "string"
+        },
+        "versionnumber": {
+          "format": "int64",
+          "type": "string"
+        },
+        "_ownerid_value": {
+          "type": "string"
+        },
+        "statuscode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "adoxio_applicationextensionid": {
+          "type": "string"
+        },
+        "overriddencreatedon": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "_owningteam_value": {
+          "type": "string"
+        },
+        "_owningbusinessunit_value": {
+          "type": "string"
+        },
+        "_createdonbehalfby_value": {
+          "type": "string"
+        },
+        "modifiedon": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "_owninguser_value": {
+          "type": "string"
+        },
+        "statecode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "createdby": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "createdonbehalfby": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "modifiedby": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "modifiedonbehalfby": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "owninguser": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "owningteam": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.team"
+        },
+        "ownerid": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.principal"
+        },
+        "owningbusinessunit": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.businessunit"
+        },
+        "adoxio_applicationextension_SyncErrors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.syncerror"
+          }
+        },
+        "adoxio_applicationextension_AsyncOperations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.asyncoperation"
+          }
+        },
+        "adoxio_applicationextension_MailboxTrackingFolders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.mailboxtrackingfolder"
+          }
+        },
+        "adoxio_applicationextension_ProcessSession": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.processsession"
+          }
+        },
+        "adoxio_applicationextension_BulkDeleteFailures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.bulkdeletefailure"
+          }
+        },
+        "adoxio_applicationextension_PrincipalObjectAttributeAccesses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.principalobjectattributeaccess"
+          }
+        },
+        "adoxio_Application": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_application"
+        },
+        "adoxio_adoxio_applicationextension_adoxio_application_ApplicationExtension": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_application"
+          }
+        }
+      }
+    },
     "Microsoft.Dynamics.CRM.adoxio_applicationinvoicehistory": {
       "description": "Microsoft.Dynamics.CRM.adoxio_applicationinvoicehistory",
       "type": "object",
@@ -39677,6 +40070,9 @@
         "adoxio_checklistlicencehistorycheck": {
           "format": "int32",
           "type": "integer"
+        },
+        "_adoxio_applicationextension_value": {
+          "type": "string"
         },
         "adoxio_checklistexecutedleasereceived": {
           "format": "int32",
@@ -40921,10 +41317,6 @@
           "format": "date-time",
           "type": "string"
         },
-        "adoxio_registeredestablishment": {
-          "format": "int32",
-          "type": "integer"
-        },
         "adoxio_validinterestestablishmentlocation": {
           "format": "int32",
           "type": "integer"
@@ -40948,9 +41340,6 @@
         "adoxio_csinternaltransferofshares": {
           "type": "boolean"
         },
-        "adoxio_businessstructureinstructionfield": {
-          "type": "string"
-        },
         "adoxio_contactpersonname": {
           "type": "string"
         },
@@ -40959,6 +41348,9 @@
         },
         "adoxio_finalcapassessmentdate": {
           "format": "date-time",
+          "type": "string"
+        },
+        "adoxio_initialcapassessmentusingleconn": {
           "type": "string"
         },
         "adoxio_additionaldocumentcopies": {
@@ -41083,9 +41475,6 @@
         },
         "adoxio_lgnoobjection": {
           "type": "boolean"
-        },
-        "adoxio_initialcapassessmentusingleconn": {
-          "type": "string"
         },
         "traversedpath": {
           "type": "string"
@@ -41924,6 +42313,15 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licences"
           }
+        },
+        "adoxio_adoxio_application_adoxio_applicationextension_Application": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationextension"
+          }
+        },
+        "adoxio_ApplicationExtension": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationextension"
         }
       }
     },
@@ -53870,6 +54268,9 @@
         "_owningteam_value": {
           "type": "string"
         },
+        "adoxio_requestoutsideservicehours": {
+          "type": "boolean"
+        },
         "adoxio_fridayclose": {
           "format": "int32",
           "type": "integer"
@@ -57952,10 +58353,6 @@
         "adoxio_establishmentaddresspostalcode": {
           "type": "string"
         },
-        "adoxio_dormancyreasons": {
-          "format": "int32",
-          "type": "integer"
-        },
         "adoxio_tporequested": {
           "format": "int32",
           "type": "integer"
@@ -58023,6 +58420,9 @@
           "type": "string"
         },
         "adoxio_canobtainlicenceinformation": {
+          "type": "boolean"
+        },
+        "adoxio_onestopsent": {
           "type": "boolean"
         },
         "processid": {
@@ -58166,6 +58566,10 @@
           "format": "int32",
           "type": "integer"
         },
+        "adoxio_dormancyreasons": {
+          "format": "int32",
+          "type": "integer"
+        },
         "adoxio_licencesid": {
           "type": "string"
         },
@@ -58219,8 +58623,9 @@
           "format": "int32",
           "type": "integer"
         },
-        "adoxio_onestopsent": {
-          "type": "boolean"
+        "adoxio_statusfororv": {
+          "format": "int32",
+          "type": "integer"
         },
         "_adoxio_pmuareaid_value": {
           "type": "string"
@@ -58237,6 +58642,9 @@
         "adoxio_dormancystartdate": {
           "format": "date-time",
           "type": "string"
+        },
+        "adoxio_isorgbooksyncneeded": {
+          "type": "boolean"
         },
         "adoxio_suspended": {
           "format": "int32",
@@ -61338,6 +61746,78 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_sepcity"
+          }
+        },
+        "adoxio_policejurisdiction_ActivityPointers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.activitypointer"
+          }
+        },
+        "adoxio_policejurisdiction_abs_scheduledprocessexecutions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
+          }
+        },
+        "adoxio_policejurisdiction_Appointments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.appointment"
+          }
+        },
+        "adoxio_policejurisdiction_Emails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.email"
+          }
+        },
+        "adoxio_policejurisdiction_Faxes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.fax"
+          }
+        },
+        "adoxio_policejurisdiction_Letters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.letter"
+          }
+        },
+        "adoxio_policejurisdiction_PhoneCalls": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.phonecall"
+          }
+        },
+        "adoxio_policejurisdiction_Tasks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.task"
+          }
+        },
+        "adoxio_policejurisdiction_RecurringAppointmentMasters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.recurringappointmentmaster"
+          }
+        },
+        "adoxio_policejurisdiction_SocialActivities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.socialactivity"
+          }
+        },
+        "adoxio_policejurisdiction_ServiceAppointments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.serviceappointment"
+          }
+        },
+        "adoxio_policejurisdiction_Annotations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.annotation"
           }
         }
       }
@@ -69254,6 +69734,9 @@
         },
         "objectid_ptm_automergeworkingitems": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.ptm_automergeworkingitems"
+        },
+        "objectid_adoxio_policejurisdiction": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_policejurisdiction"
         }
       }
     },
@@ -70234,6 +70717,9 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.ptm_automergeworkingitems"
           }
+        },
+        "regardingobjectid_adoxio_policejurisdiction_appointment": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_policejurisdiction"
         }
       }
     },
@@ -71661,6 +72147,9 @@
         },
         "regardingobjectid_ptm_mscrmaddonscomoneclickaction": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.ptm_mscrmaddonscomoneclickaction"
+        },
+        "regardingobjectid_adoxio_applicationextension": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationextension"
         }
       }
     },
@@ -75219,6 +75708,9 @@
         },
         "regardingobjectid_ptm_mscrmaddonscomoneclickaction": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.ptm_mscrmaddonscomoneclickaction"
+        },
+        "regardingobjectid_adoxio_applicationextension": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationextension"
         }
       }
     },
@@ -77817,6 +78309,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.ptm_mscrmaddonscomoneclickaction"
+          }
+        },
+        "business_unit_adoxio_applicationextension": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationextension"
           }
         }
       }
@@ -90338,6 +90836,9 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.ptm_automergeworkingitems"
           }
+        },
+        "regardingobjectid_adoxio_policejurisdiction_email": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_policejurisdiction"
         }
       }
     },
@@ -93575,6 +94076,9 @@
         },
         "regardingobjectid_ptm_automergeworkingitems_fax": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.ptm_automergeworkingitems"
+        },
+        "regardingobjectid_adoxio_policejurisdiction_fax": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_policejurisdiction"
         }
       }
     },
@@ -102873,6 +103377,9 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.ptm_automergeworkingitems"
           }
+        },
+        "regardingobjectid_adoxio_policejurisdiction_letter": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_policejurisdiction"
         }
       }
     },
@@ -105125,6 +105632,9 @@
         },
         "regardingobjectid_ptm_mscrmaddonscomoneclickaction": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.ptm_mscrmaddonscomoneclickaction"
+        },
+        "regardingobjectid_adoxio_applicationextension": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationextension"
         }
       }
     },
@@ -121390,6 +121900,12 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.ptm_mscrmaddonscomoneclickaction"
           }
+        },
+        "owner_adoxio_applicationextension": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationextension"
+          }
         }
       }
     },
@@ -121920,6 +122436,9 @@
         },
         "regardingobjectid_ptm_automergeworkingitems_phonecall": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.ptm_automergeworkingitems"
+        },
+        "regardingobjectid_adoxio_policejurisdiction_phonecall": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_policejurisdiction"
         }
       }
     },
@@ -124539,6 +125058,9 @@
         },
         "objectid_ptm_mscrmaddonscomoneclickaction": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.ptm_mscrmaddonscomoneclickaction"
+        },
+        "objectid_adoxio_applicationextension": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationextension"
         }
       }
     },
@@ -125822,6 +126344,9 @@
         },
         "regardingobjectid_ptm_mscrmaddonscomoneclickaction": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.ptm_mscrmaddonscomoneclickaction"
+        },
+        "regardingobjectid_adoxio_applicationextension": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationextension"
         }
       }
     },
@@ -132577,6 +133102,9 @@
         },
         "regardingobjectid_ptm_automergeworkingitems_recurringappointmentmaster": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.ptm_automergeworkingitems"
+        },
+        "regardingobjectid_adoxio_policejurisdiction_recurringappointmentmaster": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_policejurisdiction"
         }
       }
     },
@@ -136317,6 +136845,9 @@
         },
         "regardingobjectid_ptm_automergeworkingitems_serviceappointment": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.ptm_automergeworkingitems"
+        },
+        "regardingobjectid_adoxio_policejurisdiction_serviceappointment": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_policejurisdiction"
         }
       }
     },
@@ -139249,6 +139780,9 @@
         },
         "regardingobjectid_ptm_automergeworkingitems_socialactivity": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.ptm_automergeworkingitems"
+        },
+        "regardingobjectid_adoxio_policejurisdiction_socialactivity": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_policejurisdiction"
         }
       }
     },
@@ -153512,6 +154046,36 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_violationticket"
           }
+        },
+        "lk_adoxio_applicationextension_createdby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationextension"
+          }
+        },
+        "lk_adoxio_applicationextension_createdonbehalfby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationextension"
+          }
+        },
+        "lk_adoxio_applicationextension_modifiedby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationextension"
+          }
+        },
+        "lk_adoxio_applicationextension_modifiedonbehalfby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationextension"
+          }
+        },
+        "user_adoxio_applicationextension": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationextension"
+          }
         }
       }
     },
@@ -153803,6 +154367,9 @@
         },
         "regardingobjectid_ptm_automergeworkingitems_task": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.ptm_automergeworkingitems"
+        },
+        "regardingobjectid_adoxio_policejurisdiction_task": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_policejurisdiction"
         }
       }
     },
@@ -155856,6 +156423,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.ptm_mscrmaddonscomoneclickaction"
+          }
+        },
+        "team_adoxio_applicationextension": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationextension"
           }
         }
       }
@@ -160447,6 +161020,19 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationcrsbpfv4"
+          }
+        }
+      }
+    },
+    "Microsoft.Dynamics.CRM.adoxio_applicationextensionCollection": {
+      "title": "Collection of adoxio_applicationextension",
+      "description": "Microsoft.Dynamics.CRM.adoxio_applicationextensionCollection",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationextension"
           }
         }
       }
