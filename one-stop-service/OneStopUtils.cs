@@ -194,7 +194,7 @@ namespace Gov.Jag.Lcrb.OneStopService
         /// <summary>
         /// Hangfire job to send Change Status message to One stop.
         /// </summary>
-        public async Task SendChangeNameRest(PerformContext hangfireContext, string licenceGuidRaw, string queueItemId, bool isTransfer)
+        public async Task SendChangeNameRest(PerformContext hangfireContext, string licenceGuidRaw, string queueItemId, bool isTransfer, ChangeNameType changeNameType)
         {
             IDynamicsClient dynamicsClient = DynamicsSetupUtil.SetupDynamics(_configuration);
             if (hangfireContext != null)
@@ -231,21 +231,12 @@ namespace Gov.Jag.Lcrb.OneStopService
             {
                 string targetBusinessNumber = null;
                 
-                ChangeNameType changeNameType = ChangeNameType.ChangeName;
-                if (isTransfer && !string.IsNullOrEmpty(licence._adoxioProposedownerValue))
+                if (changeNameType == ChangeNameType.Transfer)
                 {
-                    changeNameType = ChangeNameType.Transfer;
                     var targetOwner = dynamicsClient.GetAccountById(licence._adoxioProposedownerValue);
                     if (targetOwner != null)
                     {
                         targetBusinessNumber = targetOwner.Accountnumber;
-                    }
-                }
-                else
-                {
-                    if (!string.IsNullOrEmpty(licence._adoxioThirdpartyoperatoridValue))
-                    {
-                        changeNameType = ChangeNameType.ThirdPartyOperator;
                     }
                 }
 
@@ -491,7 +482,6 @@ namespace Gov.Jag.Lcrb.OneStopService
             {
                 string filter = "adoxio_messagesendstatus eq 845280002";
                 List<string> _orderby = new List<String>() { "createdon" };
-                
                 result = dynamicsClient.Onestopmessageitems.Get(filter: filter, orderby: _orderby).Value;
             }
             catch (HttpOperationException odee)
@@ -607,12 +597,15 @@ namespace Gov.Jag.Lcrb.OneStopService
                                 break;
                             case OneStopHubStatusChange.ChangeOfName:
                                 await SendChangeNameRest(hangfireContext, licenceId,
-                                    queueItem.AdoxioOnestopmessageitemid, false);
-
+                                    queueItem.AdoxioOnestopmessageitemid, false, ChangeNameType.ChangeName);
+                                break;
+                            case OneStopHubStatusChange.ChangeOfNameThirdPartyOperator:
+                                await SendChangeNameRest(hangfireContext, licenceId,
+                                    queueItem.AdoxioOnestopmessageitemid, false, ChangeNameType.ThirdPartyOperator);
                                 break;
                             case OneStopHubStatusChange.LicenceDeemedAtTransfer:
                                 await SendChangeNameRest(hangfireContext, licenceId,
-                                    queueItem.AdoxioOnestopmessageitemid, true);
+                                    queueItem.AdoxioOnestopmessageitemid, true, ChangeNameType.Transfer);
                                 break;
                             default:
                                 msg = $"Failed updating OneStop queue item {queueItem.AdoxioOnestopmessageitemid}, OneStopHubStatusChange is {queueItem.AdoxioStatuschangedescription} ";
