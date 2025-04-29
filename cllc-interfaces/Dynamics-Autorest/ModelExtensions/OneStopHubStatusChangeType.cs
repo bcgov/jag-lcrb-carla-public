@@ -10,6 +10,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         [Display(Name = "Issued")] Issued = 845280000,
         [Display(Name = "Updated - Change of Address")] ChangeOfAddress = 845280001,
         [Display(Name = "Updated - Change of Name")] ChangeOfName = 845280002,
+        [Display(Name = "Updated - Change of Name Third Party Operator")] ChangeOfNameThirdPartyOperator = 845280017,
         [Display(Name = "Updated - Entered Dormancy")] EnteredDormancy = 845280003,
         [Display(Name = "Updated - Dormancy Ended")] DormancyEnded = 845280004,
         [Display(Name = "Updated - Suspended")] Suspended = 845280005,
