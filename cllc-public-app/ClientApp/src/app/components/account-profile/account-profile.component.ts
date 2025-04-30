@@ -129,12 +129,12 @@ export class AccountProfileComponent extends FormBase implements OnInit {
 
   /**
    * Regex validator that asserts a valid url string.
-   * 
-   * @example 
+   *
+   * @example
    * 'www.gov.bc.ca' // valid
    * 'bad string' // invalid
    */
-  urlValidator = Validators.pattern("^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\/[^\s]*)?$");
+  urlValidator = Validators.pattern(/^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\/[^\s]*)?$/);
 
   /**
    * Removes an account URL field from the form.
@@ -157,7 +157,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
    * Trims each string, and removes empty strings.
    *
    * @param {(string | null)} csvString
-   * @return {*}  {string[]} An array of strings. If the input string is null or empty, returns an array with an empty 
+   * @return {*}  {string[]} An array of strings. If the input string is null or empty, returns an array with an empty
    * string.
    * @memberof AccountProfileComponent
    */
@@ -172,7 +172,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
 
     return accountUrls;
   }
-  
+
   /**
    * Combines an array of strings into a comma separated string.
    * Trims each string, and removes empty strings.
@@ -188,7 +188,6 @@ export class AccountProfileComponent extends FormBase implements OnInit {
 
     return strings.map(item => item.trim()).filter(Boolean).join(",");
   }
-  
 
   businessTypes = BUSINESS_TYPE_LIST;
 
@@ -201,7 +200,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private tiedHouseService: TiedHouseConnectionsDataService,
-    private dialog: MatDialog, 
+    private dialog: MatDialog,
     private clipboard: Clipboard,
     private snackBar: MatSnackBar
   ) {
@@ -291,7 +290,6 @@ export class AccountProfileComponent extends FormBase implements OnInit {
       .subscribe(() => {
         this.copyPhysicalToMailingAddress();
       });
-    
 
     this.form.get("businessProfile.physicalAddressCountry").valueChanges.pipe(
       filter(() => this.form.get("businessProfile._mailingSameAsPhysicalAddress").value))
@@ -376,15 +374,19 @@ export class AccountProfileComponent extends FormBase implements OnInit {
 
   private loadAccount(account: Account) {
     this.account = account;
+
     // Make a copy of the account object stored in Ngrx (which is read-only)
+    // Remove `accountUrls` as the API returns a string, but the form is expecting an array.
     // See https://stackoverflow.com/questions/57591012/ngrx-cannot-assign-to-read-only-property-property-of-object-object
-    const businessProfile: Partial<Account> = { ...account };
+    const { accountUrls, ...businessProfile }: Partial<Account> = { ...account };
+
     businessProfile.physicalAddressProvince = businessProfile.physicalAddressProvince || "British Columbia";
     businessProfile.physicalAddressCountry = "Canada";
     businessProfile.mailingAddressProvince = businessProfile.mailingAddressProvince || "British Columbia";
     businessProfile.mailingAddressCountry = "Canada";
 
     this.form.patchValue({ businessProfile: businessProfile });
+
     this.saveFormData = this.form.value;
 
     // normalize postal codes
@@ -406,9 +408,10 @@ export class AccountProfileComponent extends FormBase implements OnInit {
     }
 
     // Transform the accountUrls comma-separated string into an array
-    const accountUrls = this.splitAccountURLString(businessProfile.accountUrls);
+    const accountUrlsArray = this.splitAccountURLString(accountUrls);
     const accountUrlsArrayControl = this.form.get("businessProfile.accountUrls") as FormArray;
-    for (const accountUrl of accountUrls) {
+    for (const accountUrl of accountUrlsArray) {
+        // Add a form control for each account URL
         accountUrlsArrayControl.push(this.fb.control(accountUrl, [this.urlValidator]));
     }
   }
