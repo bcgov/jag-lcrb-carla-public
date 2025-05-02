@@ -410,6 +410,9 @@ export class AccountProfileComponent extends FormBase implements OnInit {
     // Transform the accountUrls comma-separated string into an array
     const accountUrlsArray = this.splitAccountURLString(accountUrls);
     const accountUrlsArrayControl = this.form.get("businessProfile.accountUrls") as FormArray;
+    // Clear the existing account form controls, if any, so duplicate controls are not created if this function is
+    // called multiple times
+    accountUrlsArrayControl.clear();
     for (const accountUrl of accountUrlsArray) {
         // Add a form control for each account URL
         accountUrlsArrayControl.push(this.fb.control(accountUrl, [this.urlValidator]));
