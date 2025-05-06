@@ -14,12 +14,14 @@ namespace one_stop_service.Controllers
         private readonly IConfiguration Configuration;
         private readonly IMemoryCache _cache;
         private readonly ILogger _logger;
+        private readonly IReceiveFromHubService _hubService;
 
-        public OneStopController(IConfiguration configuration, IMemoryCache cache)
+        public OneStopController(IConfiguration configuration, IMemoryCache cache, IReceiveFromHubService hubService)
         {
             Configuration = configuration;
             _cache = cache;
             _logger = Log.Logger;
+            _hubService = hubService;
 
 
         }
@@ -88,13 +90,13 @@ namespace one_stop_service.Controllers
             return Ok();
         }
 
-        [HttpGet("SendProgramAccountDetailsBroadcastMessage/{licenceGuid}")]
-        public IActionResult SendProgramAccountDetailsBroadcastMessage(string licenceGuid)
+        [HttpGet("SendProgramAccountDetailsBroadcastMessage/{licenceGuid}/{itemId}")]
+        public IActionResult SendProgramAccountDetailsBroadcastMessage(string licenceGuid, string itemId)
         {
             _logger.Information("Reached SendProgramAccountDetailsBroadcastMessage");
-            BackgroundJob.Enqueue(() => new OneStopUtils(Configuration, _cache).SendProgramAccountDetailsBroadcastMessageRest(null, licenceGuid));
+            BackgroundJob.Enqueue(() => new OneStopUtils(Configuration, _cache).SendProgramAccountDetailsBroadcastMessageRest(null, licenceGuid, itemId));
             return Ok();
-        }
+        }        
 
 
     }

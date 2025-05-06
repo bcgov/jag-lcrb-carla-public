@@ -67,7 +67,7 @@ namespace Gov.Jag.Lcrb.OneStopService
         public const string OPERATING_NAME_SEQUENCE_NUMBER = "1";
         public const string UPDATE_REASON_CODE = "01";
         public const string UPDATE_REASON_CODE_ADDRESS = "03";
-        
+
 
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace Gov.Jag.Lcrb.OneStopService
                         AdoxioDatetimesent = DateTime.Now,
                         AdoxioPayload = payload,
                         AdoxioMessagestatus = response,
-                        AdoxioMessagesendstatus= (int)OneStopMessageStatus.Sent
+                        AdoxioMessagesendstatus = (int)OneStopMessageStatus.Sent
                     };
                 try
                 {
@@ -230,7 +230,7 @@ namespace Gov.Jag.Lcrb.OneStopService
             else
             {
                 string targetBusinessNumber = null;
-                
+
                 if (changeNameType == ChangeNameType.Transfer)
                 {
                     var targetOwner = dynamicsClient.GetAccountById(licence._adoxioProposedownerValue);
@@ -289,7 +289,7 @@ namespace Gov.Jag.Lcrb.OneStopService
                 hangfireContext.WriteLine($"Got Licence {licenceGuid}.");
             }
 
-            if ( licence == null )
+            if (licence == null)
             {
                 if (hangfireContext != null)
                 {
@@ -340,7 +340,7 @@ namespace Gov.Jag.Lcrb.OneStopService
         public async Task SendProgramAccountRequestREST(PerformContext hangfireContext, string licenceGuidRaw, string suffix, string queueItemId)
         {
             hangfireContext?.WriteLine("Starting OneStop ProgramAccountRequest Job.");
-            
+
             IDynamicsClient dynamicsClient = DynamicsSetupUtil.SetupDynamics(_configuration);
 
             string licenceGuid = Utils.ParseGuid(licenceGuidRaw);
@@ -349,7 +349,7 @@ namespace Gov.Jag.Lcrb.OneStopService
             var req = new ProgramAccountRequest();
 
             hangfireContext?.WriteLine($"Getting Licence {licenceGuid}");
-            
+
 
             var licence = dynamicsClient.GetLicenceByIdWithChildren(licenceGuid);
 
@@ -398,7 +398,7 @@ namespace Gov.Jag.Lcrb.OneStopService
 
 
             hangfireContext?.WriteLine("End of OneStop ProgramAccountRequest  Job.");
-            
+
         }
 
 
@@ -406,7 +406,7 @@ namespace Gov.Jag.Lcrb.OneStopService
         /// <summary>
         /// Hangfire job to send LicenceDetailsMessage to One stop.
         /// </summary>
-        public async Task SendProgramAccountDetailsBroadcastMessageRest(PerformContext hangfireContext, string licenceGuidRaw)
+        public async Task SendProgramAccountDetailsBroadcastMessageRest(PerformContext hangfireContext, string licenceGuidRaw, string itemId)
         {
             IDynamicsClient dynamicsClient = DynamicsSetupUtil.SetupDynamics(_configuration);
             if (hangfireContext != null)
@@ -461,6 +461,9 @@ namespace Gov.Jag.Lcrb.OneStopService
                     hangfireContext.WriteLine(outputXML);
                     hangfireContext.WriteLine("End of OneStop REST ProgramAccountDetailsBroadcast  Job.");
                 }
+
+                CreateOneStopAcknowledgmentMessage(dynamicsClient, itemId, innerXml);
+
             }
         }
 
@@ -506,25 +509,25 @@ namespace Gov.Jag.Lcrb.OneStopService
                 if (!string.IsNullOrEmpty(queueItem._adoxioLicenceValue))
                 {
                     var item = dynamicsClient.GetLicenceByIdWithChildren(queueItem._adoxioLicenceValue);
-                    
+
                     string licenceId = item.AdoxioLicencesid;
                     try
                     {
 
                         var msg = $"Processing One stop message item id {queueItem.AdoxioOnestopmessageitemid}";
-                        switch ((OneStopHubStatusChange) queueItem.AdoxioStatuschangedescription)
+                        switch ((OneStopHubStatusChange)queueItem.AdoxioStatuschangedescription)
                         {
                             case OneStopHubStatusChange.Issued:
                             case OneStopHubStatusChange.TransferComplete:
                             case OneStopHubStatusChange.LicenseeBn9Changed:
                             case OneStopHubStatusChange.LicenseeBn9Added:
                             case OneStopHubStatusChange.LicenseeBn9Removed:
-                                if ((OneStopHubStatusChange) queueItem.AdoxioStatuschangedescription ==
+                                if ((OneStopHubStatusChange)queueItem.AdoxioStatuschangedescription ==
                                     OneStopHubStatusChange.TransferComplete)
                                 {
                                     // send a change status to the old licensee
                                     await SendChangeStatusRest(hangfireContext, licenceId,
-                                        (OneStopHubStatusChange) queueItem.AdoxioStatuschangedescription,
+                                        (OneStopHubStatusChange)queueItem.AdoxioStatuschangedescription,
                                         queueItem.AdoxioOnestopmessageitemid);
                                 }
 
@@ -569,7 +572,8 @@ namespace Gov.Jag.Lcrb.OneStopService
                                     await SendProgramAccountRequestREST(hangfireContext, licenceId, suffix,
                                         queueItem.AdoxioOnestopmessageitemid);
 
-                                }else
+                                }
+                                else
                                 {
                                     msg = $"Failed updating OneStop queue item {queueItem.AdoxioOnestopmessageitemid}, Establishment is Null or  isAgentLicenceType is False Value is {isAgentLicenceType}";
                                     UpdateOneStopMessageStatus(hangfireContext, dynamicsClient, queueItem.AdoxioOnestopmessageitemid, msg);
@@ -587,7 +591,7 @@ namespace Gov.Jag.Lcrb.OneStopService
                             case OneStopHubStatusChange.EndorsementApproved:
 
                                 await SendChangeStatusRest(hangfireContext, licenceId,
-                                    (OneStopHubStatusChange) queueItem.AdoxioStatuschangedescription,
+                                    (OneStopHubStatusChange)queueItem.AdoxioStatuschangedescription,
                                     queueItem.AdoxioOnestopmessageitemid);
                                 break;
 
@@ -606,6 +610,9 @@ namespace Gov.Jag.Lcrb.OneStopService
                             case OneStopHubStatusChange.LicenceDeemedAtTransfer:
                                 await SendChangeNameRest(hangfireContext, licenceId,
                                     queueItem.AdoxioOnestopmessageitemid, true, ChangeNameType.Transfer);
+                                break;
+                            case OneStopHubStatusChange.AccountDetailsBroadcast:
+                                await SendProgramAccountDetailsBroadcastMessageRest(hangfireContext, licenceId, queueItem.AdoxioOnestopmessageitemid);
                                 break;
                             default:
                                 msg = $"Failed updating OneStop queue item {queueItem.AdoxioOnestopmessageitemid}, OneStopHubStatusChange is {queueItem.AdoxioStatuschangedescription} ";
@@ -635,7 +642,7 @@ namespace Gov.Jag.Lcrb.OneStopService
                     UpdateOneStopMessageStatus(hangfireContext, dynamicsClient, queueItem.AdoxioOnestopmessageitemid, msg);
                 }
             }
-            
+
 
 
             hangfireContext.WriteLine("End of check for new OneStop queue items");
@@ -731,6 +738,25 @@ namespace Gov.Jag.Lcrb.OneStopService
                 result = secondParts[0];
             }
             return result;
+        }
+
+        private void CreateOneStopAcknowledgmentMessage(IDynamicsClient dynamicsClient, string itemId, string payload)
+        {
+            MicrosoftDynamicsCRMadoxioOnestopmessageitem update =
+                new MicrosoftDynamicsCRMadoxioOnestopmessageitem()
+                {
+                    AdoxioDateacknowledgementreceived = DateTimeOffset.Now.Date,
+                    AdoxioAcknowledgementstatus = payload,
+                };
+            try
+            {
+                dynamicsClient.Onestopmessageitems.Update(itemId, update);
+            }
+            catch (HttpOperationException odee)
+            {
+                Log.Logger.Error(odee, $"ERROR updating queue items for OneStop meassage {itemId}");
+
+            }
         }
     }
 }
