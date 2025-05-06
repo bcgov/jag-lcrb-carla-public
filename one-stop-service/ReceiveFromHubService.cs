@@ -179,8 +179,7 @@ namespace Gov.Jag.Lcrb.OneStopService
 
 
 
-                //Trigger the Send ProgramAccountDetailsBroadcast Message                
-                BackgroundJob.Enqueue(() => new OneStopUtils(_configuration, _cache).SendProgramAccountDetailsBroadcastMessageRest(null, licence.AdoxioLicencesid));
+                CreateOneStopBroadcastItem(dynamicsClient, licence.AdoxioLicencesid, inputXML);
 
                 Log.Logger.Information("send program account details broadcast done.");
             }
@@ -313,5 +312,26 @@ namespace Gov.Jag.Lcrb.OneStopService
             return result;
 
         }
+
+        private void CreateOneStopBroadcastItem(IDynamicsClient dynamicsClient, string licenceId, string payload)
+        {
+            MicrosoftDynamicsCRMadoxioOnestopmessageitem item =
+                new MicrosoftDynamicsCRMadoxioOnestopmessageitem()
+                {
+                    AdoxioPayload = payload,
+                    AdoxioLicenceODataBind = "/adoxio_licenceses(" + licenceId + ")",
+                    AdoxioStatuschangedescription = (int)OneStopHubStatusChange.Issued
+                };
+            try
+            {
+                dynamicsClient.Onestopmessageitems.Create(item);
+            }
+            catch (HttpOperationException odee)
+            {
+                Log.Logger.Error(odee, $"ERROR updating queue items for OneStop license {licenceId}");
+
+            }
+        }
+
     }
 }
