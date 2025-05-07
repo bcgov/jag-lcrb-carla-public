@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMsavedqueryvisualization class.
         /// </summary>
-        public MicrosoftDynamicsCRMsavedqueryvisualization(string presentationdescription = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string canbedeleted = default(string), string _createdbyValue = default(string), int? type = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), string savedqueryvisualizationidunique = default(string), string description = default(string), string introducedversion = default(string), int? charttype = default(int?), int? componentstate = default(int?), string datadescription = default(string), string primaryentitytypecode = default(string), bool? ismanaged = default(bool?), string _organizationidValue = default(string), string _modifiedonbehalfbyValue = default(string), string versionnumber = default(string), string savedqueryvisualizationid = default(string), string _webresourceidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string name = default(string), bool? isdefault = default(bool?), string iscustomizable = default(string), string _createdonbehalfbyValue = default(string), string solutionid = default(string), IList<MicrosoftDynamicsCRMsyncerror> savedQueryVisualizationSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMwebresource webresourceid = default(MicrosoftDynamicsCRMwebresource), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMsavedqueryvisualization(string presentationdescription = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), MicrosoftDynamicsCRMBooleanManagedProperty canbedeleted = default(MicrosoftDynamicsCRMBooleanManagedProperty), string _createdbyValue = default(string), int? type = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), string savedqueryvisualizationidunique = default(string), string description = default(string), string introducedversion = default(string), int? charttype = default(int?), int? componentstate = default(int?), string datadescription = default(string), string primaryentitytypecode = default(string), bool? ismanaged = default(bool?), string _organizationidValue = default(string), string _modifiedonbehalfbyValue = default(string), string versionnumber = default(string), string savedqueryvisualizationid = default(string), string _webresourceidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string name = default(string), bool? isdefault = default(bool?), MicrosoftDynamicsCRMBooleanManagedProperty iscustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), string _createdonbehalfbyValue = default(string), string solutionid = default(string), IList<MicrosoftDynamicsCRMsyncerror> savedQueryVisualizationSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMwebresource webresourceid = default(MicrosoftDynamicsCRMwebresource), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Presentationdescription = presentationdescription;
             Overwritetime = overwritetime;
@@ -85,7 +85,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "canbedeleted")]
-        public string Canbedeleted { get; set; }
+        public MicrosoftDynamicsCRMBooleanManagedProperty Canbedeleted { get; set; }
 
         /// <summary>
         /// </summary>
@@ -190,7 +190,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "iscustomizable")]
-        public string Iscustomizable { get; set; }
+        public MicrosoftDynamicsCRMBooleanManagedProperty Iscustomizable { get; set; }
 
         /// <summary>
         /// </summary>

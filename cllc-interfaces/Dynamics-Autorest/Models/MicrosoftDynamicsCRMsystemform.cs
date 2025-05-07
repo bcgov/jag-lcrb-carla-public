@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMsystemform
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMsystemform(string formjson = default(string), int? formactivationstate = default(int?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string canbedeleted = default(string), int? componentstate = default(int?), string _organizationidValue = default(string), int? version = default(int?), string description = default(string), bool? istabletenabled = default(bool?), bool? isdefault = default(bool?), string introducedversion = default(string), string objecttypecode = default(string), bool? ismanaged = default(bool?), string versionnumber = default(string), int? type = default(int?), string formidunique = default(string), int? formpresentation = default(int?), string formid = default(string), string solutionid = default(string), string name = default(string), string uniquename = default(string), string formxml = default(string), bool? isdesktopenabled = default(bool?), string iscustomizable = default(string), System.DateTimeOffset? publishedon = default(System.DateTimeOffset?), string _ancestorformidValue = default(string), bool? isairmerged = default(bool?), IList<MicrosoftDynamicsCRMasyncoperation> systemFormAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMprocesstrigger> processtriggerSystemform = default(IList<MicrosoftDynamicsCRMprocesstrigger>), IList<MicrosoftDynamicsCRMbulkdeletefailure> systemFormBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemform ancestorformid = default(MicrosoftDynamicsCRMsystemform), IList<MicrosoftDynamicsCRMsystemform> formAncestorForm = default(IList<MicrosoftDynamicsCRMsystemform>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
+        public MicrosoftDynamicsCRMsystemform(string formjson = default(string), int? formactivationstate = default(int?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), MicrosoftDynamicsCRMBooleanManagedProperty canbedeleted = default(MicrosoftDynamicsCRMBooleanManagedProperty), int? componentstate = default(int?), string _organizationidValue = default(string), int? version = default(int?), string description = default(string), bool? istabletenabled = default(bool?), bool? isdefault = default(bool?), string introducedversion = default(string), string objecttypecode = default(string), bool? ismanaged = default(bool?), string versionnumber = default(string), int? type = default(int?), string formidunique = default(string), int? formpresentation = default(int?), string formid = default(string), string solutionid = default(string), string name = default(string), string uniquename = default(string), string formxml = default(string), bool? isdesktopenabled = default(bool?), MicrosoftDynamicsCRMBooleanManagedProperty iscustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), System.DateTimeOffset? publishedon = default(System.DateTimeOffset?), string _ancestorformidValue = default(string), bool? isairmerged = default(bool?), IList<MicrosoftDynamicsCRMasyncoperation> systemFormAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMprocesstrigger> processtriggerSystemform = default(IList<MicrosoftDynamicsCRMprocesstrigger>), IList<MicrosoftDynamicsCRMbulkdeletefailure> systemFormBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemform ancestorformid = default(MicrosoftDynamicsCRMsystemform), IList<MicrosoftDynamicsCRMsystemform> formAncestorForm = default(IList<MicrosoftDynamicsCRMsystemform>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
         {
             Formjson = formjson;
             Formactivationstate = formactivationstate;
@@ -90,7 +90,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "canbedeleted")]
-        public string Canbedeleted { get; set; }
+        public MicrosoftDynamicsCRMBooleanManagedProperty Canbedeleted { get; set; }
 
         /// <summary>
         /// </summary>
@@ -190,7 +190,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "iscustomizable")]
-        public string Iscustomizable { get; set; }
+        public MicrosoftDynamicsCRMBooleanManagedProperty Iscustomizable { get; set; }
 
         /// <summary>
         /// </summary>

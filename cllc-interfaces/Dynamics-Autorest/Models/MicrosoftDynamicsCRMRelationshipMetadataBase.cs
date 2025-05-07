@@ -27,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMRelationshipMetadataBase class.
         /// </summary>
-        public MicrosoftDynamicsCRMRelationshipMetadataBase(bool? isCustomRelationship = default(bool?), string isCustomizable = default(string), bool? isValidForAdvancedFind = default(bool?), string schemaName = default(string), string securityTypes = default(string), bool? isManaged = default(bool?), string relationshipType = default(string), string introducedVersion = default(string))
+        public MicrosoftDynamicsCRMRelationshipMetadataBase(bool? isCustomRelationship = default(bool?), MicrosoftDynamicsCRMBooleanManagedProperty isCustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), bool? isValidForAdvancedFind = default(bool?), string schemaName = default(string), string securityTypes = default(string), bool? isManaged = default(bool?), string relationshipType = default(string), string introducedVersion = default(string))
         {
             IsCustomRelationship = isCustomRelationship;
             IsCustomizable = isCustomizable;
@@ -53,7 +53,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "IsCustomizable")]
-        public string IsCustomizable { get; set; }
+        public MicrosoftDynamicsCRMBooleanManagedProperty IsCustomizable { get; set; }
 
         /// <summary>
         /// </summary>

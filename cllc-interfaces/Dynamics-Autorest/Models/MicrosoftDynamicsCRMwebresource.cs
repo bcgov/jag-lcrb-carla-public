@@ -31,7 +31,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMwebresource
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMwebresource(System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string solutionid = default(string), string versionnumber = default(string), int? componentstate = default(int?), string _modifiedonbehalfbyValue = default(string), string _modifiedbyValue = default(string), int? webresourcetype = default(int?), string ishidden = default(string), string description = default(string), string canbedeleted = default(string), string introducedversion = default(string), string content = default(string), byte[] contentBinary = default(byte[]), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? languagecode = default(int?), string contentjson = default(string), string _createdbyValue = default(string), bool? isenabledformobileclient = default(bool?), string webresourceidunique = default(string), string webresourceid = default(string), string _organizationidValue = default(string), string iscustomizable = default(string), string dependencyxml = default(string), string silverlightversion = default(string), bool? ismanaged = default(bool?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), bool? isavailableformobileoffline = default(bool?), string displayname = default(string), string name = default(string), IList<MicrosoftDynamicsCRMsolution> solutionConfigurationWebresource = default(IList<MicrosoftDynamicsCRMsolution>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMuserqueryvisualization> webresourceUserqueryvisualizations = default(IList<MicrosoftDynamicsCRMuserqueryvisualization>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsavedqueryvisualization> webresourceSavedqueryvisualizations = default(IList<MicrosoftDynamicsCRMsavedqueryvisualization>), IList<MicrosoftDynamicsCRMtheme> lkThemeLogoid = default(IList<MicrosoftDynamicsCRMtheme>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMwebresource(System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string solutionid = default(string), string versionnumber = default(string), int? componentstate = default(int?), string _modifiedonbehalfbyValue = default(string), string _modifiedbyValue = default(string), int? webresourcetype = default(int?), MicrosoftDynamicsCRMBooleanManagedProperty ishidden = default(MicrosoftDynamicsCRMBooleanManagedProperty), string description = default(string), MicrosoftDynamicsCRMBooleanManagedProperty canbedeleted = default(MicrosoftDynamicsCRMBooleanManagedProperty), string introducedversion = default(string), string content = default(string), byte[] contentBinary = default(byte[]), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? languagecode = default(int?), string contentjson = default(string), string _createdbyValue = default(string), bool? isenabledformobileclient = default(bool?), string webresourceidunique = default(string), string webresourceid = default(string), string _organizationidValue = default(string), MicrosoftDynamicsCRMBooleanManagedProperty iscustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), string dependencyxml = default(string), string silverlightversion = default(string), bool? ismanaged = default(bool?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), bool? isavailableformobileoffline = default(bool?), string displayname = default(string), string name = default(string), IList<MicrosoftDynamicsCRMsolution> solutionConfigurationWebresource = default(IList<MicrosoftDynamicsCRMsolution>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMuserqueryvisualization> webresourceUserqueryvisualizations = default(IList<MicrosoftDynamicsCRMuserqueryvisualization>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsavedqueryvisualization> webresourceSavedqueryvisualizations = default(IList<MicrosoftDynamicsCRMsavedqueryvisualization>), IList<MicrosoftDynamicsCRMtheme> lkThemeLogoid = default(IList<MicrosoftDynamicsCRMtheme>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Overwritetime = overwritetime;
             Solutionid = solutionid;
@@ -118,7 +118,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "ishidden")]
-        public string Ishidden { get; set; }
+        public MicrosoftDynamicsCRMBooleanManagedProperty Ishidden { get; set; }
 
         /// <summary>
         /// </summary>
@@ -128,7 +128,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "canbedeleted")]
-        public string Canbedeleted { get; set; }
+        public MicrosoftDynamicsCRMBooleanManagedProperty Canbedeleted { get; set; }
 
         /// <summary>
         /// </summary>
@@ -194,7 +194,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "iscustomizable")]
-        public string Iscustomizable { get; set; }
+        public MicrosoftDynamicsCRMBooleanManagedProperty Iscustomizable { get; set; }
 
         /// <summary>
         /// </summary>
