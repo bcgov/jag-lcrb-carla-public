@@ -27,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMOptionSetMetadataBase class.
         /// </summary>
-        public MicrosoftDynamicsCRMOptionSetMetadataBase(string description = default(string), string displayName = default(string), bool? isCustomOptionSet = default(bool?), bool? isGlobal = default(bool?), bool? isManaged = default(bool?), string isCustomizable = default(string), string name = default(string), string externalTypeName = default(string), string optionSetType = default(string), string introducedVersion = default(string))
+        public MicrosoftDynamicsCRMOptionSetMetadataBase(string description = default(string), string displayName = default(string), bool? isCustomOptionSet = default(bool?), bool? isGlobal = default(bool?), bool? isManaged = default(bool?), MicrosoftDynamicsCRMBooleanManagedProperty isCustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), string name = default(string), string externalTypeName = default(string), string optionSetType = default(string), string introducedVersion = default(string))
         {
             Description = description;
             DisplayName = displayName;
@@ -75,7 +75,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "IsCustomizable")]
-        public string IsCustomizable { get; set; }
+        public MicrosoftDynamicsCRMBooleanManagedProperty IsCustomizable { get; set; }
 
         /// <summary>
         /// </summary>
