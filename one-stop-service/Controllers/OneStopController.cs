@@ -49,7 +49,25 @@ namespace one_stop_service.Controllers
         public IActionResult SendChangeNameMessage(string licenceGuid)
         {
             _logger.Information($"Reached SendChangeNameMessage. licenceGuid: {licenceGuid}");
-            BackgroundJob.Enqueue(() => new OneStopUtils(Configuration, _cache).SendChangeNameRest(null, licenceGuid, null, false));
+            BackgroundJob.Enqueue(() => new OneStopUtils(Configuration, _cache).SendChangeNameRest(null, licenceGuid, null, false, ChangeNameType.ChangeName));
+            return Ok();
+        }
+
+
+        [HttpGet("SendTransferName/{licenceGuid}")]
+        public IActionResult SendTransferMessage(string licenceGuid)
+        {
+            _logger.Information($"Reached SendChangeNameMessage. licenceGuid: {licenceGuid}");
+            BackgroundJob.Enqueue(() => new OneStopUtils(Configuration, _cache).SendChangeNameRest(null, licenceGuid, null, false, ChangeNameType.Transfer));
+            return Ok();
+        }
+
+
+        [HttpGet("ThirdPartyOperator/{licenceGuid}")]
+        public IActionResult SendThirdPartyOperatorMessage(string licenceGuid)
+        {
+            _logger.Information($"Reached SendChangeNameMessage. licenceGuid: {licenceGuid}");
+            BackgroundJob.Enqueue(() => new OneStopUtils(Configuration, _cache).SendChangeNameRest(null, licenceGuid, null, false, ChangeNameType.ThirdPartyOperator));
             return Ok();
         }
 

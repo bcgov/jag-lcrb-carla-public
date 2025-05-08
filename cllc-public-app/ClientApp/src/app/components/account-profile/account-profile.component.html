@@ -71,12 +71,30 @@
     <input class="form-control" style="max-width: 450px; min-width: 250px;" type="text" disabled
            [value]="account?.name || ''">
   </app-field>
-  <app-field label="Account URL(s)" [required]="false"
-             [valid]="form.get('businessProfile.accountUrls').valid || !form.get('businessProfile.accountUrls').touched"
-             errorMessage="Please enter valid Account URL(s) separated by commas without spaces (i.e. www.gov.bc.ca,justice.gov.bc.ca)">
-    <input class="form-control" style="width: 350px;" type="text"
-           formControlName="accountUrls">
-  </app-field>
+  
+  <div formArrayName="accountUrls" class="mb-2 account-urls">
+    <label>Account URL(s)</label>
+
+    <div *ngFor="let accountUrl of accountUrls.controls; let i = index">
+        <app-field 
+            [required]="false" 
+            [valid]="accountUrl.valid || !accountUrl.touched"
+            errorMessage="Please enter a valid Account URL (i.e. www.gov.bc.ca)">
+
+            <input class="form-control" style="width: 350px;" type="url" [formControl]="accountUrl">
+
+            <button *ngIf="i > 0" (click)="removeAccountUrl(i)" type="button" class="btn btn-md btn-icon" aria-label="Remove">    
+                <fa-icon [icon]="faTrash" style="margin-right: 10px"></fa-icon>
+            </button>
+        </app-field>
+    </div>
+    
+    <button (click)="addAccountUrl()" type="button" class="btn btn-md btn-icon" aria-label="Add">    
+        <fa-icon [icon]="faPlus" style="margin-right: 10px"></fa-icon>
+        <span>Add Another URL</span>
+    </button>
+  </div>
+
   <app-field label="Business Number (9 digit number from the Canada Revenue Agency)" [required]="true"
              [valid]="form.get('businessProfile.businessNumber').valid || !form.get('businessProfile.businessNumber').touched"
              errorMessage="Please enter the business number (9 digits)" *ngIf="['Police'].indexOf(getBusinessTypeName()) == -1">

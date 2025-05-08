@@ -18,7 +18,7 @@ import { ConnectionToProducersComponent } from "./tabs/connection-to-producers/c
 import { TiedHouseConnection } from "@models/tied-house-connection.model";
 import { TiedHouseConnectionsDataService } from "@services/tied-house-connections-data.service";
 import { AppState } from "@app/app-state/models/app-state";
-import { faAddressCard, faChevronRight, faEnvelope, faExclamationTriangle, faPhone, faTrash } from
+import { faAddressCard, faChevronRight, faEnvelope, faExclamationTriangle, faPhone, faTrash, faPlus } from
   "@fortawesome/free-solid-svg-icons";
 import { UserDataService } from "@services/user-data.service";
 import { endOfToday } from "date-fns";
@@ -87,6 +87,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
   faAddressCard = faAddressCard;
   faEnvelope = faEnvelope;
   faPhone = faPhone;
+  faPlus = faPlus;
   @Input()
   useInStepperMode = false;
   @Output()
@@ -122,6 +123,72 @@ export class AccountProfileComponent extends FormBase implements OnInit {
     return this.form.get("otherContacts") as FormArray;
   }
 
+  get accountUrls(): FormArray {
+    return this.form.get("businessProfile.accountUrls") as FormArray;
+  }
+
+  /**
+   * Regex validator that asserts a valid url string.
+   *
+   * @example
+   * 'www.gov.bc.ca' // valid
+   * 'bad string' // invalid
+   */
+  urlValidator = Validators.pattern(/^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\/[^\s]*)?$/);
+
+  /**
+   * Removes an account URL field from the form.
+   */
+  removeAccountUrl(index: number): void {
+    const accountUrls = this.form.get("businessProfile.accountUrls") as FormArray;
+    accountUrls.removeAt(index);
+  }
+
+  /**
+   * Adds a new account URL field to the form.
+   */
+  addAccountUrl(): void {
+    const accountUrls = this.form.get("businessProfile.accountUrls") as FormArray;
+    accountUrls.push(this.fb.control("", [this.urlValidator]));
+  }
+
+  /**
+   * Splits a comma separated string into an array of strings.
+   * Trims each string, and removes empty strings.
+   *
+   * @param {(string | null)} csvString
+   * @return {*}  {string[]} An array of strings. If the input string is null or empty, returns an array with an empty
+   * string.
+   * @memberof AccountProfileComponent
+   */
+  splitAccountURLString(csvString: string | null): string[] {
+    const accountUrls = csvString?.split(",").map(item => item.trim()).filter(Boolean) ?? []
+
+    if(accountUrls.length === 0) {
+      // No initial account URLs, return an array with an empty string
+      // to ensure the form control is initialized with at least one empty field
+      return [""];
+    }
+
+    return accountUrls;
+  }
+
+  /**
+   * Combines an array of strings into a comma separated string.
+   * Trims each string, and removes empty strings.
+   *
+   * @param {(string[] | null)} strings
+   * @return {*}  {string} A comma separated string. If the input array is null or empty, returns an empty string.
+   * @memberof AccountProfileComponent
+   */
+  combineAccountURLStrings(strings: string[] | null): string {
+    if (!strings?.length) {
+      return "";
+    }
+
+    return strings.map(item => item.trim()).filter(Boolean).join(",");
+  }
+
   businessTypes = BUSINESS_TYPE_LIST;
 
   constructor(private store: Store<AppState>,
@@ -133,7 +200,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private tiedHouseService: TiedHouseConnectionsDataService,
-    private dialog: MatDialog, 
+    private dialog: MatDialog,
     private clipboard: Clipboard,
     private snackBar: MatSnackBar
   ) {
@@ -177,7 +244,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
         mailingAddressProvince: ["British Columbia", Validators.required],
         mailingAddressCountry: ["Canada", Validators.required],
         websiteUrl: [""],
-        accountUrls: ["", Validators.pattern("^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\/[^\s,]*)?(,(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\/[^\s,]*)?)*$")],
+        accountUrls: this.fb.array([]),
       }),
       contact: this.fb.group({
         id: [],
@@ -223,7 +290,6 @@ export class AccountProfileComponent extends FormBase implements OnInit {
       .subscribe(() => {
         this.copyPhysicalToMailingAddress();
       });
-    
 
     this.form.get("businessProfile.physicalAddressCountry").valueChanges.pipe(
       filter(() => this.form.get("businessProfile._mailingSameAsPhysicalAddress").value))
@@ -308,15 +374,19 @@ export class AccountProfileComponent extends FormBase implements OnInit {
 
   private loadAccount(account: Account) {
     this.account = account;
+
     // Make a copy of the account object stored in Ngrx (which is read-only)
+    // Remove `accountUrls` as the API returns a string, but the form is expecting an array.
     // See https://stackoverflow.com/questions/57591012/ngrx-cannot-assign-to-read-only-property-property-of-object-object
-    const businessProfile: Partial<Account> = { ...account };
+    const { accountUrls, ...businessProfile }: Partial<Account> = { ...account };
+
     businessProfile.physicalAddressProvince = businessProfile.physicalAddressProvince || "British Columbia";
     businessProfile.physicalAddressCountry = "Canada";
     businessProfile.mailingAddressProvince = businessProfile.mailingAddressProvince || "British Columbia";
     businessProfile.mailingAddressCountry = "Canada";
 
     this.form.patchValue({ businessProfile: businessProfile });
+
     this.saveFormData = this.form.value;
 
     // normalize postal codes
@@ -335,6 +405,17 @@ export class AccountProfileComponent extends FormBase implements OnInit {
         .setValidators([Validators.pattern("^[A-Za-z][A-Za-z]?[0-9][0-9][0-9][0-9][0-9][0-9][0-9]$")]);
     } else {
       this.form.get("businessProfile.bcIncorporationNumber").clearValidators();
+    }
+
+    // Transform the accountUrls comma-separated string into an array
+    const accountUrlsArray = this.splitAccountURLString(accountUrls);
+    const accountUrlsArrayControl = this.form.get("businessProfile.accountUrls") as FormArray;
+    // Clear the existing account form controls, if any, so duplicate controls are not created if this function is
+    // called multiple times
+    accountUrlsArrayControl.clear();
+    for (const accountUrl of accountUrlsArray) {
+        // Add a form control for each account URL
+        accountUrlsArrayControl.push(this.fb.control(accountUrl, [this.urlValidator]));
     }
   }
 
@@ -383,7 +464,9 @@ export class AccountProfileComponent extends FormBase implements OnInit {
     const _tiedHouse = this.tiedHouseFormData || {};
     this.form.get("businessProfile").patchValue({ physicalAddressCountry: "Canada" });
     const value = {
-      ...this.form.get("businessProfile").value
+      ...this.form.get("businessProfile").value,
+      // Transform the accountUrls array into a comma-separated string as expected by the API
+      accountUrls: this.combineAccountURLStrings(this.form.get("businessProfile.accountUrls").value),
     } as Account;
     const saves = [
       this.accountDataService.updateAccount(value),
