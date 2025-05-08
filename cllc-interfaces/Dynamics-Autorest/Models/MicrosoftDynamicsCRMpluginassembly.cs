@@ -31,7 +31,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMpluginassembly class.
         /// </summary>
-        public MicrosoftDynamicsCRMpluginassembly(string culture = default(string), string _modifiedbyValue = default(string), string version = default(string), string description = default(string), string sourcehash = default(string), string username = default(string), bool? ismanaged = default(bool?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string introducedversion = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? customizationlevel = default(int?), string publickeytoken = default(string), string content = default(string), byte[] contentBinary = default(byte[]), string path = default(string), string name = default(string), string _createdonbehalfbyValue = default(string), bool? ispasswordset = default(bool?), string password = default(string), string _organizationidValue = default(string), int? isolationmode = default(int?), string url = default(string), string iscustomizable = default(string), string _createdbyValue = default(string), int? major = default(int?), int? minor = default(int?), int? componentstate = default(int?), string _modifiedonbehalfbyValue = default(string), string solutionid = default(string), int? authtype = default(int?), int? sourcetype = default(int?), string pluginassemblyid = default(string), string ishidden = default(string), string pluginassemblyidunique = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string versionnumber = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMplugintype> pluginassemblyPlugintype = default(IList<MicrosoftDynamicsCRMplugintype>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMpluginassembly(string culture = default(string), string _modifiedbyValue = default(string), string version = default(string), string description = default(string), string sourcehash = default(string), string username = default(string), bool? ismanaged = default(bool?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string introducedversion = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? customizationlevel = default(int?), string publickeytoken = default(string), string content = default(string), byte[] contentBinary = default(byte[]), string path = default(string), string name = default(string), string _createdonbehalfbyValue = default(string), bool? ispasswordset = default(bool?), string password = default(string), string _organizationidValue = default(string), int? isolationmode = default(int?), string url = default(string), MicrosoftDynamicsCRMBooleanManagedProperty iscustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), string _createdbyValue = default(string), int? major = default(int?), int? minor = default(int?), int? componentstate = default(int?), string _modifiedonbehalfbyValue = default(string), string solutionid = default(string), int? authtype = default(int?), int? sourcetype = default(int?), string pluginassemblyid = default(string), MicrosoftDynamicsCRMBooleanManagedProperty ishidden = default(MicrosoftDynamicsCRMBooleanManagedProperty), string pluginassemblyidunique = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string versionnumber = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMplugintype> pluginassemblyPlugintype = default(IList<MicrosoftDynamicsCRMplugintype>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Culture = culture;
             this._modifiedbyValue = _modifiedbyValue;
@@ -197,7 +197,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "iscustomizable")]
-        public string Iscustomizable { get; set; }
+        public MicrosoftDynamicsCRMBooleanManagedProperty Iscustomizable { get; set; }
 
         /// <summary>
         /// </summary>
@@ -247,7 +247,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "ishidden")]
-        public string Ishidden { get; set; }
+        public MicrosoftDynamicsCRMBooleanManagedProperty Ishidden { get; set; }
 
         /// <summary>
         /// </summary>

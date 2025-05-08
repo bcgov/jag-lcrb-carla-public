@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioPolicejurisdiction class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioPolicejurisdiction(string _createdonbehalfbyValue = default(string), int? utcconversiontimezonecode = default(int?), string _organizationidValue = default(string), int? statecode = default(int?), string adoxioPolicejurisdictionid = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), int? statuscode = default(int?), string versionnumber = default(string), string adoxioPosition = default(string), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string adoxioName = default(string), string adoxioEmail = default(string), string _adoxioLginidValue = default(string), string adoxioContactname = default(string), int? importsequencenumber = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string adoxioPhonenumber = default(string), string adoxioFaxnumber = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> adoxioPolicejurisdictionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioPolicejurisdictionDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioPolicejurisdictionDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioPolicejurisdictionAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioPolicejurisdictionMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioPolicejurisdictionProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioPolicejurisdictionBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioPolicejurisdictionPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMadoxioEstablishment> adoxioPolicejurisdictionAdoxioEstablishmentPDJurisdiction = default(IList<MicrosoftDynamicsCRMadoxioEstablishment>), IList<MicrosoftDynamicsCRMadoxioLicences> adoxioPolicejurisdictionAdoxioLicencesPDJurisdiction = default(IList<MicrosoftDynamicsCRMadoxioLicences>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioPolicejurisdictionApplications = default(IList<MicrosoftDynamicsCRMadoxioApplication>), MicrosoftDynamicsCRMadoxioLocalgovindigenousnation adoxioLGINId = default(MicrosoftDynamicsCRMadoxioLocalgovindigenousnation), IList<MicrosoftDynamicsCRMaccount> adoxioPolicejurisdictionAccount = default(IList<MicrosoftDynamicsCRMaccount>), IList<MicrosoftDynamicsCRMadoxioSpecialevent> adoxioPolicejurisdictionSpecialevents = default(IList<MicrosoftDynamicsCRMadoxioSpecialevent>), IList<MicrosoftDynamicsCRMadoxioSepcity> adoxioPolicejurisdictionSepcities = default(IList<MicrosoftDynamicsCRMadoxioSepcity>))
+        public MicrosoftDynamicsCRMadoxioPolicejurisdiction(string _createdonbehalfbyValue = default(string), int? utcconversiontimezonecode = default(int?), string _organizationidValue = default(string), int? statecode = default(int?), string adoxioPolicejurisdictionid = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), int? statuscode = default(int?), string versionnumber = default(string), string adoxioPosition = default(string), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string adoxioName = default(string), string adoxioEmail = default(string), string _adoxioLginidValue = default(string), string adoxioContactname = default(string), int? importsequencenumber = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string adoxioPhonenumber = default(string), string adoxioFaxnumber = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> adoxioPolicejurisdictionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioPolicejurisdictionDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioPolicejurisdictionDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioPolicejurisdictionAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMmailboxtrackingfolder> adoxioPolicejurisdictionMailboxTrackingFolders = default(IList<MicrosoftDynamicsCRMmailboxtrackingfolder>), IList<MicrosoftDynamicsCRMprocesssession> adoxioPolicejurisdictionProcessSession = default(IList<MicrosoftDynamicsCRMprocesssession>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioPolicejurisdictionBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess> adoxioPolicejurisdictionPrincipalObjectAttributeAccesses = default(IList<MicrosoftDynamicsCRMprincipalobjectattributeaccess>), IList<MicrosoftDynamicsCRMadoxioEstablishment> adoxioPolicejurisdictionAdoxioEstablishmentPDJurisdiction = default(IList<MicrosoftDynamicsCRMadoxioEstablishment>), IList<MicrosoftDynamicsCRMadoxioLicences> adoxioPolicejurisdictionAdoxioLicencesPDJurisdiction = default(IList<MicrosoftDynamicsCRMadoxioLicences>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioPolicejurisdictionApplications = default(IList<MicrosoftDynamicsCRMadoxioApplication>), MicrosoftDynamicsCRMadoxioLocalgovindigenousnation adoxioLGINId = default(MicrosoftDynamicsCRMadoxioLocalgovindigenousnation), IList<MicrosoftDynamicsCRMaccount> adoxioPolicejurisdictionAccount = default(IList<MicrosoftDynamicsCRMaccount>), IList<MicrosoftDynamicsCRMadoxioSpecialevent> adoxioPolicejurisdictionSpecialevents = default(IList<MicrosoftDynamicsCRMadoxioSpecialevent>), IList<MicrosoftDynamicsCRMadoxioSepcity> adoxioPolicejurisdictionSepcities = default(IList<MicrosoftDynamicsCRMadoxioSepcity>), IList<MicrosoftDynamicsCRMactivitypointer> adoxioPolicejurisdictionActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> adoxioPolicejurisdictionAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMappointment> adoxioPolicejurisdictionAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMemail> adoxioPolicejurisdictionEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> adoxioPolicejurisdictionFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMletter> adoxioPolicejurisdictionLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMphonecall> adoxioPolicejurisdictionPhoneCalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMtask> adoxioPolicejurisdictionTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> adoxioPolicejurisdictionRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMsocialactivity> adoxioPolicejurisdictionSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMserviceappointment> adoxioPolicejurisdictionServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMannotation> adoxioPolicejurisdictionAnnotations = default(IList<MicrosoftDynamicsCRMannotation>))
         {
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Utcconversiontimezonecode = utcconversiontimezonecode;
@@ -73,6 +73,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioPolicejurisdictionAccount = adoxioPolicejurisdictionAccount;
             AdoxioPolicejurisdictionSpecialevents = adoxioPolicejurisdictionSpecialevents;
             AdoxioPolicejurisdictionSepcities = adoxioPolicejurisdictionSepcities;
+            AdoxioPolicejurisdictionActivityPointers = adoxioPolicejurisdictionActivityPointers;
+            AdoxioPolicejurisdictionAbsScheduledprocessexecutions = adoxioPolicejurisdictionAbsScheduledprocessexecutions;
+            AdoxioPolicejurisdictionAppointments = adoxioPolicejurisdictionAppointments;
+            AdoxioPolicejurisdictionEmails = adoxioPolicejurisdictionEmails;
+            AdoxioPolicejurisdictionFaxes = adoxioPolicejurisdictionFaxes;
+            AdoxioPolicejurisdictionLetters = adoxioPolicejurisdictionLetters;
+            AdoxioPolicejurisdictionPhoneCalls = adoxioPolicejurisdictionPhoneCalls;
+            AdoxioPolicejurisdictionTasks = adoxioPolicejurisdictionTasks;
+            AdoxioPolicejurisdictionRecurringAppointmentMasters = adoxioPolicejurisdictionRecurringAppointmentMasters;
+            AdoxioPolicejurisdictionSocialActivities = adoxioPolicejurisdictionSocialActivities;
+            AdoxioPolicejurisdictionServiceAppointments = adoxioPolicejurisdictionServiceAppointments;
+            AdoxioPolicejurisdictionAnnotations = adoxioPolicejurisdictionAnnotations;
             CustomInit();
         }
 
@@ -290,6 +302,66 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_policejurisdiction_sepcities")]
         public IList<MicrosoftDynamicsCRMadoxioSepcity> AdoxioPolicejurisdictionSepcities { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_policejurisdiction_ActivityPointers")]
+        public IList<MicrosoftDynamicsCRMactivitypointer> AdoxioPolicejurisdictionActivityPointers { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_policejurisdiction_abs_scheduledprocessexecutions")]
+        public IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> AdoxioPolicejurisdictionAbsScheduledprocessexecutions { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_policejurisdiction_Appointments")]
+        public IList<MicrosoftDynamicsCRMappointment> AdoxioPolicejurisdictionAppointments { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_policejurisdiction_Emails")]
+        public IList<MicrosoftDynamicsCRMemail> AdoxioPolicejurisdictionEmails { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_policejurisdiction_Faxes")]
+        public IList<MicrosoftDynamicsCRMfax> AdoxioPolicejurisdictionFaxes { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_policejurisdiction_Letters")]
+        public IList<MicrosoftDynamicsCRMletter> AdoxioPolicejurisdictionLetters { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_policejurisdiction_PhoneCalls")]
+        public IList<MicrosoftDynamicsCRMphonecall> AdoxioPolicejurisdictionPhoneCalls { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_policejurisdiction_Tasks")]
+        public IList<MicrosoftDynamicsCRMtask> AdoxioPolicejurisdictionTasks { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_policejurisdiction_RecurringAppointmentMasters")]
+        public IList<MicrosoftDynamicsCRMrecurringappointmentmaster> AdoxioPolicejurisdictionRecurringAppointmentMasters { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_policejurisdiction_SocialActivities")]
+        public IList<MicrosoftDynamicsCRMsocialactivity> AdoxioPolicejurisdictionSocialActivities { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_policejurisdiction_ServiceAppointments")]
+        public IList<MicrosoftDynamicsCRMserviceappointment> AdoxioPolicejurisdictionServiceAppointments { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_policejurisdiction_Annotations")]
+        public IList<MicrosoftDynamicsCRMannotation> AdoxioPolicejurisdictionAnnotations { get; set; }
 
     }
 }

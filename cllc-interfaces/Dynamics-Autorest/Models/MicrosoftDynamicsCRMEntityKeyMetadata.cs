@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMEntityKeyMetadata class.
         /// </summary>
-        public MicrosoftDynamicsCRMEntityKeyMetadata(string displayName = default(string), string logicalName = default(string), string schemaName = default(string), string entityLogicalName = default(string), IList<string> keyAttributes = default(IList<string>), string isCustomizable = default(string), bool? isManaged = default(bool?), string introducedVersion = default(string), string entityKeyIndexStatus = default(string), string asyncJob = default(string), bool? isSynchronous = default(bool?), bool? isExportKey = default(bool?))
+        public MicrosoftDynamicsCRMEntityKeyMetadata(string displayName = default(string), string logicalName = default(string), string schemaName = default(string), string entityLogicalName = default(string), IList<string> keyAttributes = default(IList<string>), MicrosoftDynamicsCRMBooleanManagedProperty isCustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), bool? isManaged = default(bool?), string introducedVersion = default(string), string entityKeyIndexStatus = default(string), string asyncJob = default(string), bool? isSynchronous = default(bool?), bool? isExportKey = default(bool?))
         {
             DisplayName = displayName;
             LogicalName = logicalName;
@@ -79,7 +79,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "IsCustomizable")]
-        public string IsCustomizable { get; set; }
+        public MicrosoftDynamicsCRMBooleanManagedProperty IsCustomizable { get; set; }
 
         /// <summary>
         /// </summary>
