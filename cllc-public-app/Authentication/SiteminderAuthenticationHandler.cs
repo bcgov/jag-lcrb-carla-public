@@ -806,16 +806,11 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
         private async Task HandleBuisnessLogin(UserSettings userSettings, HttpContext context)
         {
-            IConfiguration _configuration = (IConfiguration)context.RequestServices.GetService(typeof(IConfiguration));
-            IDynamicsClient _dynamicsClient = (IDynamicsClient)context.RequestServices.GetService(typeof(IDynamicsClient));
-            FileManagerClient _fileManagerClient = (FileManagerClient)context.RequestServices.GetService(typeof(FileManagerClient));
 
             BCeIDBusinessQuery _bceid = (BCeIDBusinessQuery)context.RequestServices.GetService(typeof (BCeIDBusinessQuery));
 
             ViewModels.Contact contact = new ViewModels.Contact();
             contact.CopyHeaderValues(context.Request.Headers);
-            //LCSD-6488 - Change to Alway get First & Lastname from BCEID Web Query
-            //These fields (FIRSTNAME & LASTNAME) are READONLY on our form and managed in BCEID.
             Gov.Lclb.Cllb.Interfaces.BCeIDBusiness bceidBusiness = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
             if(bceidBusiness != null) 
             {
