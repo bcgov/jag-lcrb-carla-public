@@ -826,6 +826,8 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     contact.lastname = bceidBasic.individualSurname;
                 }
             }
+
+            _dynamicsClient.Contacts.Update(userSettings.ContactId, contact.ToModel());
         }
 
         private async Task HandleVerifiedIndividualLogin(UserSettings userSettings, HttpContext context)
