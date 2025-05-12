@@ -408,6 +408,9 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 userSettings.NewContact = new ViewModels.Contact();
                 userSettings.NewContact.CopyHeaderValues(context.Request.Headers);
             }
+            else if (siteMinderUserType == "Business"){
+                await HandleBuisnessLogin(userSettings, context);
+            }
             else if (siteMinderUserType == "VerifiedIndividual")
             {
                 await HandleVerifiedIndividualLogin(userSettings, context);
@@ -577,6 +580,9 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
                 userSettings.NewContact = new ViewModels.Contact();
                 userSettings.NewContact.CopyHeaderValues(context.Request.Headers);
+            }
+            else if (siteMinderUserType == "Buisness"){
+                await HandleBuisnessLogin(userSettings, context);
             }
             else if (siteMinderUserType == "VerifiedIndividual")
             {
@@ -795,6 +801,35 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             catch (Exception e)
             {
                 _logger.Error(e, $"Error creating folder for contact {logFolderName}");
+            }
+        }
+
+        private async Task HandleBuisnessLogin(UserSettings userSettings, HttpContext context)
+        {
+            IConfiguration _configuration = (IConfiguration)context.RequestServices.GetService(typeof(IConfiguration));
+            IDynamicsClient _dynamicsClient = (IDynamicsClient)context.RequestServices.GetService(typeof(IDynamicsClient));
+            FileManagerClient _fileManagerClient = (FileManagerClient)context.RequestServices.GetService(typeof(FileManagerClient));
+
+            BCeIDBusinessQuery _bceid = (BCeIDBusinessQuery)context.RequestServices.GetService(typeof (BCeIDBusinessQuery));
+
+            ViewModels.Contact contact = new ViewModels.Contact();
+            contact.CopyHeaderValues(context.Request.Headers);
+            //LCSD-6488 - Change to Alway get First & Lastname from BCEID Web Query
+            //These fields (FIRSTNAME & LASTNAME) are READONLY on our form and managed in BCEID.
+            Gov.Lclb.Cllb.Interfaces.BCeIDBusiness bceidBusiness = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
+            if(bceidBusiness != null) 
+            {
+                contact.firstname = bceidBusiness.individualFirstname;
+                contact.lastname = bceidBusiness.individualSurname;
+            }
+            else
+            {
+                Gov.Lclb.Cllb.Interfaces.BCeIDBasic bceidBasic = await _bceid.ProcessBasicQuery(userSettings.SiteMinderGuid);
+                if(bceidBasic != null)
+                {
+                    contact.firstname = bceidBasic.individualFirstname;
+                    contact.lastname = bceidBasic.individualSurname;
+                }
             }
         }
 
