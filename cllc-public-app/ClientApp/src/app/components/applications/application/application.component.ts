@@ -1330,6 +1330,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
       }, (err: any) => {
         if (err._body === 'Payment already made') {
           this.snackBar.open('Application payment has already been made, please refresh the page.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+          this.paymentDataService.verifyPaymentSubmission(this.applicationId).subscribe(
+            res => {})
         }
       }));
   }
