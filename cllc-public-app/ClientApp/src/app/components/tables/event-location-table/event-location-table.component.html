@@ -1,48 +1,51 @@
-<table class="tua-locations">
+<table *ngIf="serviceAreas.length !== 0" class="tua-locations">
   <thead *ngIf="rows.controls.length > 0">
-    <th style="width: 100px">Location ID</th>
-    <th>Location Name</th>
-    <th style="width: 200px">Attendance</th>
-    <th style="width: 45px"></th>
+    <th style="min-width: 100px">Location ID</th>
+    <th style="min-width: 100px">Location Name</th>
+    <th style="width: 100px">Attendance</th>
+    <th style="width: 50px"></th>
   </thead>
-  <tr *ngFor="let row of rows.controls; let i=index" [ngClass]="{ 'text-grey': readonly(i) }">
+  <tr *ngFor="let row of rows.controls; let i = index" [ngClass]="{ 'text-grey': readonly(i) }">
     <ng-container [formGroup]="row">
-      <td>
+      <td style="min-width: 100px">
         <select class="form-control" formControlName="serviceAreaId">
-          <option *ngFor="let item of serviceAreas" [ngValue]="item.id">{{item.areaLocation}}</option>
+          <option *ngFor="let item of serviceAreas" [ngValue]="item.id">{{ item.areaLocation }}</option>
         </select>
       </td>
-      <td>
-        <input type="text" formControlName="name" placeholder="Enter a name for this location"
+      <td style="min-width: 100px">
+        <input type="text" formControlName="name" placeholder="Enter a name for this location" [readonly]="readonly(i)"
+          style="width: 100%" />
+      </td>
+      <td style="width: 100px">
+        <input type="text" formControlName="attendance" placeholder="Enter attendance" mask="0*" maxlength="6"
           [readonly]="readonly(i)" />
       </td>
-      <td>
-        <input type="text" formControlName="attendance" placeholder="Enter attendance" mask="0*" maxlength="4"
-          [readonly]="readonly(i)" />
-      </td>
-      <td>
+      <td style="width: 50px">
         <button type="button" (click)="removeRow(i)" class="btn-clear" *ngIf="!readonly(i)">
           <fa-icon [icon]="faTrash" style="color: #ee220e"></fa-icon>
         </button>
       </td>
     </ng-container>
   </tr>
-  <tr>
-    <td [colSpan]="2" class="pt-3 text-left">
-      <button type="button" (click)="addRow()" class="btn btn-secondary" style="height: 100%;" *ngIf="enabled">
-        <fa-icon [icon]="faPlusCircle" style="color: #1a5a96;"></fa-icon> Add Location
-      </button>
-    </td>
-    <td></td>
-    <td class="text-right">Event Total Attendance:</td>
-    <td>{{total}}</td>
-  </tr>
 </table>
+
+<div *ngIf="serviceAreas.length === 0" style="margin-bottom: 10px">
+  <span>No service areas defined under the TUA Endorsement. Please add at least one service area first.</span>
+</div>
+
+<div class="tua-locations-actions">
+  <button type="button" (click)="addRow()" class="btn btn-secondary" *ngIf="enabled"
+    [disabled]="serviceAreas.length === 0">
+    <fa-icon [icon]="faPlusCircle" style="color: #1a5a96"></fa-icon>
+    Add Location
+  </button>
+  <span>Event Total Attendance: {{ total }}</span>
+</div>
 <section class="error mt-3" *ngIf="showErrorSection">
   <p *ngFor="let message of validationMessages">
     <span class="app-cancel">
-      <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
-      {{message}}
+      <mat-icon aria-label="error icon" style="font-size: 15px">error</mat-icon>
+      {{ message }}
     </span>
   </p>
 </section>
