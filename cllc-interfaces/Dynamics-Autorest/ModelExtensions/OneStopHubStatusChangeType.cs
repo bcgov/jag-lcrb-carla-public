@@ -25,5 +25,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         [Display(Name = "Expired")] Expired = 845280011,
         [Display(Name = "Renewed")] Renewed = 845280012,
         [Display(Name = "Updated - Endorsement Approved")] EndorsementApproved = 845280016,
+        [Display(Name = "Account Details Broadcast")] AccountDetailsBroadcast = 845280018,
     }
 }
