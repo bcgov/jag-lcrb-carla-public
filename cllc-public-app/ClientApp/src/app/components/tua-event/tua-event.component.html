@@ -20,7 +20,7 @@
     <section class="content-bottom clearfix">
       <div class="row">
         <app-field class="col-md-4 col-xs-12" label="Event Name" [required]="true"
-                   [valid]="isValidOrNotTouched('eventName')" errorMessage="Please enter the event name" [isFullWidth]="true">
+          [valid]="isValidOrNotTouched('eventName')" errorMessage="Please enter the event name" [isFullWidth]="true">
           <input class="form-control" type="text" formControlName="eventName">
         </app-field>
       </div>
@@ -30,13 +30,13 @@
     <section class="content-bottom clearfix">
       <div class="row">
         <app-field class="col-md-4 col-xs-12" label="Name" [required]="true" [isFullWidth]="true"
-                   [valid]="isValidOrNotTouched('contactName')" errorMessage="Please enter the contact name">
+          [valid]="isValidOrNotTouched('contactName')" errorMessage="Please enter the contact name">
           <input class="form-control" type="text" formControlName="contactName">
         </app-field>
         <fa-icon [icon]="faQuestionCircle" class="question-mark"
-                 matTooltip="The name of the contact person for the event."></fa-icon>
+          matTooltip="The name of the contact person for the event."></fa-icon>
         <app-field class="col-md-4 col-xs-12" label="Phone" [required]="true" [isFullWidth]="true"
-                   [valid]="isValidOrNotTouched('contactPhone')" errorMessage="Please enter the contact phone number">
+          [valid]="isValidOrNotTouched('contactPhone')" errorMessage="Please enter the contact phone number">
           <input class="form-control" type="text" formControlName="contactPhone" mask="(000) 000-0000">
         </app-field>
       </div>
@@ -46,7 +46,7 @@
     <section class="content-bottom clearfix">
       <p>Specify one or more locations where your event will take place.</p>
       <app-event-location-table formControlName="eventLocations" [enabled]="!isReadOnly"
-                                [serviceAreas]="licence?.serviceAreas" [eventId]="licenceEvent?.id" [shouldValidate]="showErrorSection">
+        [serviceAreas]="licenceEndorsementServiceAreas" [eventId]="licenceEvent?.id" [shouldValidate]="showErrorSection">
       </app-event-location-table>
     </section>
 
@@ -56,18 +56,18 @@
       <p>Note that if you submit a multi-day event, the locations and event details must be the same, otherwise you need
         to submit separate events.</p>
       <div class="row">
-        <app-field class="col-md-2 col-xs-6" label="Start Date" [required]="true"
-                   [valid]="isValidOrNotTouched('startDate')" [isFullWidth]="true">
+        <app-field class="col-md-4 col-xs-6" label="Start Date" [required]="true"
+          [valid]="isValidOrNotTouched('startDate')" [isFullWidth]="true">
           <input type="text" formControlName='startDate' placeholder="yyyy-mm-dd" class="form-control"
-                 [min]="startDateMinimum" [matDatepicker]="startPicker" (focus)="startPicker.open()"
-                 (click)="startPicker.open()" (dateChange)="startDateChanged()">
+            [min]="startDateMinimum" [matDatepicker]="startPicker" (focus)="startPicker.open()"
+            (click)="startPicker.open()" (dateChange)="startDateChanged()">
           <mat-datepicker #startPicker></mat-datepicker>
         </app-field>
-        <app-field class="col-md-2 col-xs-6" label="End Date" [required]="true" [valid]="isValidOrNotTouched('endDate')"
-                   [isFullWidth]="true">
+        <app-field class="col-md-4 col-xs-6" label="End Date" [required]="true" [valid]="isValidOrNotTouched('endDate')"
+          [isFullWidth]="true">
           <input type="text" formControlName='endDate' placeholder="yyyy-mm-dd" class="form-control"
-                 [min]="endDateMinimum" [matDatepicker]="endPicker" (focus)="endPicker.open()" (click)="endPicker.open()"
-                 (dateChange)="endDateChanged()">
+            [min]="endDateMinimum" [matDatepicker]="endPicker" (focus)="endPicker.open()" (click)="endPicker.open()"
+            (dateChange)="endDateChanged()">
           <mat-datepicker #endPicker></mat-datepicker>
         </app-field>
       </div>
@@ -93,7 +93,7 @@
       <div class="row">
         <app-field class="col-xs-12">
           <mat-checkbox [checked]="scheduleIsInconsistent" (change)="toggleScheduleConsistency()"
-                        [disabled]="form.get('startDate').invalid || form.get('endDate').invalid || isReadOnly">
+            [disabled]="form.get('startDate').invalid || form.get('endDate').invalid || isReadOnly">
             The event times are different on specific dates.</mat-checkbox>
         </app-field>
       </div>
@@ -103,8 +103,8 @@
     <section class="content-bottom clearfix">
       <div class="row">
         <app-field class="col-md-4 col-xs-12" label="Event Total Attendance" [required]="true"
-                   [valid]="isValidOrNotTouched('maxAttendance')"
-                   errorMessage="Please enter the maximum attendance (must be a number)" [isFullWidth]="true">
+          [valid]="isValidOrNotTouched('maxAttendance')"
+          errorMessage="Please enter the maximum attendance (must be a number)" [isFullWidth]="true">
           <input class="form-control" type="number" formControlName="maxAttendance">
         </app-field>
         <!--<app-field class="col-md-4 col-xs-12" label="Minors Attending" [enabled]="false" [disabled]="true" [required]="true"
@@ -116,21 +116,21 @@
           </select>
         </app-field>-->
         <app-field class="col-md-4 col-xs-12" label="Event Type" [required]="true"
-                   [valid]="isValidOrNotTouched('tuaEventType')" errorMessage="Please indicate the type of event"
-                   [isFullWidth]="true">
+          [valid]="isValidOrNotTouched('tuaEventType')" errorMessage="Please indicate the type of event"
+          [isFullWidth]="true">
           <select class="form-control" formControlName="tuaEventType">
             <option *ngFor="let item of tuaEventType" [ngValue]="item.value">{{item.label}}</option>
           </select>
         </app-field>
         <fa-icon [icon]="faQuestionCircle" style="color: #38598a; margin-left: 5px; margin-top:30px;"
-                 matTooltip="Select the type of event."></fa-icon>
+          matTooltip="Select the type of event."></fa-icon>
       </div>
 
       <div class="row">
         <app-field class="col-md-8 col-xs-12"
-                   label="Will your permanent licensed establishment also be closed to the public during the event hours?"
-                   [required]="true" [valid]="isValidOrNotTouched('tuaEventType')"
-                   errorMessage="Please indicate if licensed establishment will be closed" [isFullWidth]="false">
+          label="Will your permanent licensed establishment also be closed to the public during the event hours?"
+          [required]="true" [valid]="isValidOrNotTouched('tuaEventType')"
+          errorMessage="Please indicate if licensed establishment will be closed" [isFullWidth]="false">
           <select class="form-control" formControlName="isClosedToPublic">
             <option value="true">Yes</option>
             <option value="false">No</option>
@@ -139,8 +139,8 @@
       </div>
       <div class="row">
         <app-field class="col-md-8 col-xs-12" label="Description" [required]="true"
-                   [valid]="isValidOrNotTouched('eventTypeDescription')" errorMessage="Please enter a description of the event"
-                   [isFullWidth]="true">
+          [valid]="isValidOrNotTouched('eventTypeDescription')" errorMessage="Please enter a description of the event"
+          [isFullWidth]="true">
           <textarea class="form-control" formControlName="eventTypeDescription"></textarea>
         </app-field>
         <fa-icon [icon]="faQuestionCircle" class="question-mark" matTooltip="Briefly describe the event."></fa-icon>
@@ -173,13 +173,13 @@
       <p>We will send the event notification to the contact entered here.</p>
       <div class="row">
         <app-field class="col-md-4 col-xs-12" label="Please provide your email address" [required]="true"
-                   [isFullWidth]="true" [valid]="isValidOrNotTouched('contactEmail')">
+          [isFullWidth]="true" [valid]="isValidOrNotTouched('contactEmail')">
           <input class="form-control" type="text" formControlName="contactEmail">
         </app-field>
       </div>
       <div class="row">
         <app-field class="col-md-4 col-xs-12" label="Retype your email address" [required]="true" [isFullWidth]="true"
-                   [valid]="isValidOrNotTouched('contactEmailConfirmation')">
+          [valid]="isValidOrNotTouched('contactEmailConfirmation')">
           <input class="form-control" type="text" formControlName="contactEmailConfirmation">
         </app-field>
       </div>
@@ -205,7 +205,14 @@
     </section>
 
     <section class="p-3 attention-section">
-      <p>The information requested on this form is collected by the Liquor and Cannabis Regulation Branch under Sections 26 (a), (b) and (c) of the Freedom of Information and Protection of Privacy Act (FOIPPA) for the purpose of liquor and cannabis licensing and compliance and enforcement matters in accordance with the Liquor Control and Licensing Act and Cannabis Control and Licensing Act. Additionally, LCRB may collect personal information under section 26(e) of FOIPPA for the purpose of evaluating LCRB programs and activities to better serve you. Should you have any questions about the collection, use, or disclosure of personal information, please contact the Freedom of Information Officer at PO Box 9292 STN PROV GVT, Victoria, BC, V8W 9J8 or by phone toll free at 1-866-209-2111.</p>
+      <p>The information requested on this form is collected by the Liquor and Cannabis Regulation Branch under Sections
+        26 (a), (b) and (c) of the Freedom of Information and Protection of Privacy Act (FOIPPA) for the purpose of
+        liquor and cannabis licensing and compliance and enforcement matters in accordance with the Liquor Control and
+        Licensing Act and Cannabis Control and Licensing Act. Additionally, LCRB may collect personal information under
+        section 26(e) of FOIPPA for the purpose of evaluating LCRB programs and activities to better serve you. Should
+        you have any questions about the collection, use, or disclosure of personal information, please contact the
+        Freedom of Information Officer at PO Box 9292 STN PROV GVT, Victoria, BC, V8W 9J8 or by phone toll free at
+        1-866-209-2111.</p>
     </section>
 
     <section class="error mt-3" *ngIf="showErrorSection">

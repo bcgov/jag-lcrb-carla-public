@@ -4,6 +4,9 @@ export class Endorsement {
   applicationTypeId: string;
   applicationTypeName: string;
   hoursOfServiceList: HoursOfService[];
+  /**
+   * The sum total capacity of all service areas under this endorsement.
+   */
   areaCapacity: number;
 }
 export class HoursOfService {
