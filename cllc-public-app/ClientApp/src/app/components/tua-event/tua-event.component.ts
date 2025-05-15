@@ -1,19 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
-import { FormBase } from '@shared/form-base';
-import { dateRangeValidator, DAYS, DEFAULT_END_TIME, DEFAULT_START_TIME, getDaysArray } from '@shared/date-fns';
-import { EventCategory, EventStatus, LicenceEvent, TuaEventType } from '@models/licence-event.model';
-import { AppState } from '@app/app-state/models/app-state';
-import { LicenceEventsService } from '@services/licence-events.service';
-import { LicenseDataService } from '@services/license-data.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { faSave } from '@fortawesome/free-regular-svg-icons';
 import { faQuestionCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { LicenceEventSchedule } from '@models/licence-event-schedule';
+import { EventCategory, EventStatus, LicenceEvent, TuaEventType } from '@models/licence-event.model';
 import { License } from '@models/license.model';
-import { HoursOfService } from '../../models/endorsement.model';
+import { ServiceArea } from '@models/service-area.model';
+import { LicenceEventsService } from '@services/licence-events.service';
+import { LicenseDataService } from '@services/license-data.service';
+import { dateRangeValidator, DAYS, DEFAULT_END_TIME, DEFAULT_START_TIME, getDaysArray } from '@shared/date-fns';
+import { FormBase } from '@shared/form-base';
+import { Subscription } from 'rxjs';
+import { Endorsement, HoursOfService } from '../../models/endorsement.model';
 
 @Component({
   selector: 'app-tua-event',
@@ -43,63 +42,69 @@ export class TuaEventComponent extends FormBase implements OnInit {
   endDateMinimum = new Date(this.startDateMinimum.valueOf());
   scheduleIsInconsistent = false;
 
+  licenceEndorsements: Endorsement[] = [];
+  licenceEndorsementServiceAreas: ServiceArea[] = [];
+
   // TUA event form
   timeForms = this.fb.array([]);
-  form = this.fb.group({
-    id: ['', []],
-    status: ['', [Validators.required]],
-    licenceId: ['', []],
-    accountId: ['', []],
-    eventCategory: [this.getOptionFromLabel(this.eventCategory, 'Temporary Use Area').value, []],
+  form = this.fb.group(
+    {
+      id: ['', []],
+      status: ['', [Validators.required]],
+      licenceId: ['', []],
+      accountId: ['', []],
+      eventCategory: [this.getOptionFromLabel(this.eventCategory, 'Temporary Use Area').value, []],
 
-    eventName: ['', [Validators.required]], // TUA event name
-    contactName: ['', [Validators.required]],
-    contactPhone: ['', [Validators.required]],
+      eventName: ['', [Validators.required]], // TUA event name
+      contactName: ['', [Validators.required]],
+      contactPhone: ['', [Validators.required]],
 
-    // TUA locations
-    eventLocations: ['', []],
+      // TUA locations
+      eventLocations: ['', []],
 
-    // date & time
-    startDate: ['', [Validators.required]],
-    endDate: ['', [Validators.required]],
+      // date & time
+      startDate: ['', [Validators.required]],
+      endDate: ['', [Validators.required]],
 
-    maxAttendance: ['', [Validators.required, Validators.max(100000)]],
-    //minorsAttending: ['', [Validators.required]],
-    tuaEventType: ['', [Validators.required]],
-    eventTypeDescription: ['', [Validators.required]],
+      maxAttendance: ['', [Validators.required, Validators.max(100000)]],
+      //minorsAttending: ['', [Validators.required]],
+      tuaEventType: ['', [Validators.required]],
+      eventTypeDescription: ['', [Validators.required]],
 
-    isClosedToPublic: [false, []],
-    isWedding: [false, []],
-    isNetworkingParty: [false, []],
-    isConcert: [false, []],
-    isNoneOfTheAbove: [false, []],
-    isBanquet: [false, []],
-    isAmplifiedSound: [false, []],
-    isDancing: [false, []],
-    isReception: [false, []],
-    isLiveEntertainment: [false, []],
-    isGambling: [false, []],
+      isClosedToPublic: [false, []],
+      isWedding: [false, []],
+      isNetworkingParty: [false, []],
+      isConcert: [false, []],
+      isNoneOfTheAbove: [false, []],
+      isBanquet: [false, []],
+      isAmplifiedSound: [false, []],
+      isDancing: [false, []],
+      isReception: [false, []],
+      isLiveEntertainment: [false, []],
+      isGambling: [false, []],
 
-    contactEmail: ['', [Validators.required]],
-    contactEmailConfirmation: ['', [Validators.required]],
+      contactEmail: ['', [Validators.required]],
+      contactEmailConfirmation: ['', [Validators.required]],
 
-    isAgreement1: [false, [Validators.required]],
-    isAgreement2: [false, [Validators.required]],
-  }, {
-    // end date must be later than or equal to start date
-    validators: dateRangeValidator('startDate', 'endDate')
-  });
+      isAgreement1: [false, [Validators.required]],
+      isAgreement2: [false, [Validators.required]]
+    },
+    {
+      // end date must be later than or equal to start date
+      validators: dateRangeValidator('startDate', 'endDate')
+    }
+  );
 
   constructor(
     private fb: FormBuilder,
     private licenceEvents: LicenceEventsService,
     private licenceDataService: LicenseDataService,
-    private store: Store<AppState>,
+    // Service areas that are available under the TUA Endorsement
     private router: Router,
     private route: ActivatedRoute
   ) {
     super();
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params) => {
       const licenceId = params.get('licenceId');
       this.form.controls['licenceId'].setValue(licenceId);
       this.retrieveLicence(licenceId);
@@ -114,8 +119,7 @@ export class TuaEventComponent extends FormBase implements OnInit {
     });
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   get status(): string {
     const statusObj = this.getOptionFromValue(this.eventStatus, this.form?.get('status')?.value);
@@ -123,18 +127,18 @@ export class TuaEventComponent extends FormBase implements OnInit {
   }
 
   retrieveLicence(licenceId: string) {
-    this.busy = this.licenceDataService.getLicenceById(licenceId)
-      .subscribe((licence) => {
-        this.licence = licence;
-      });
+    this.busy = this.licenceDataService.getLicenceById(licenceId).subscribe((licence) => {
+      this.licence = licence;
+      this.setLicenceEndorsements(licence);
+      this.setLicenceEndorsementServiceAreas(licence);
+    });
   }
 
   retrieveSavedEvent(eventId: string) {
-    this.busy = this.licenceEvents.getLicenceEvent(eventId)
-      .subscribe((licenceEvent) => {
-        this.licenceEvent = licenceEvent;
-        this.setFormToLicenceEvent(licenceEvent);
-      });
+    this.busy = this.licenceEvents.getLicenceEvent(eventId).subscribe((licenceEvent) => {
+      this.licenceEvent = licenceEvent;
+      this.setFormToLicenceEvent(licenceEvent);
+    });
   }
 
   setFormToLicenceEvent(licenceEvent: LicenceEvent) {
@@ -176,7 +180,7 @@ export class TuaEventComponent extends FormBase implements OnInit {
       isLiveEntertainment: licenceEvent.isLiveEntertainment,
       isGambling: licenceEvent.isGambling,
       isAgreement1: licenceEvent.isAgreement1,
-      isAgreement2: licenceEvent.isAgreement2,
+      isAgreement2: licenceEvent.isAgreement2
     });
 
     const schedules = licenceEvent.schedules;
@@ -190,7 +194,7 @@ export class TuaEventComponent extends FormBase implements OnInit {
       // Make them re-sign the declaration section whenever changes are made to the form
       this.form.patchValue({
         isAgreement1: true,
-        isAgreement2: true,
+        isAgreement2: true
       });
     }
   }
@@ -202,7 +206,7 @@ export class TuaEventComponent extends FormBase implements OnInit {
       const liquorStart = new Date(sched.serviceStartDateTime);
       const liquorEnd = new Date(sched.serviceEndDateTime);
 
-      const isDefault = ((endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24)) > 1;
+      const isDefault = (endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24) > 1;
       if (!isDefault) {
         this.scheduleIsInconsistent = true;
       }
@@ -223,16 +227,51 @@ export class TuaEventComponent extends FormBase implements OnInit {
     }
   }
 
+  /**
+   * Sets the TUA endorsements.
+   * Sets `licenceEndorsements`.
+   *
+   * @param {License} licence
+   * @memberof TuaEventComponent
+   */
+  setLicenceEndorsements(licence: License) {
+    // Get all tua endorsements under the licence
+    this.licenceEndorsements = licence.endorsements.filter(
+      (item) => item.applicationTypeName === 'Temporary Use Area Endorsement'
+    );
+  }
+
+  /**
+   * Sets the service areas available for the TUA Application.
+   * Sets `licenceEndorsementServiceAreas`.
+   *
+   * Note: The licence may have other service areas which are not defined under the TUA Endorsement, and should
+   * therefore not be selectable in the TUA Application.
+   *
+   * @param {License} licence
+   * @memberof TuaEventComponent
+   */
+  setLicenceEndorsementServiceAreas(licence: License) {
+    // Get all tua endorsements under the licence
+    const tuaEndorsementIds = licence.endorsements
+      .filter((item) => item.applicationTypeName === 'Temporary Use Area Endorsement')
+      .map((item) => item.endorsementId);
+
+    // Get all service areas under the tua endorsements
+    this.licenceEndorsementServiceAreas = licence.serviceAreas.filter((item) =>
+      tuaEndorsementIds.includes(item.endorsementId)
+    );
+  }
+
   cancel() {
     if (this.isEditMode) {
       const id = this.form.get('id').value;
       const licenceId = this.form.get('licenceId').value;
       const statusCancelled = this.getOptionFromLabel(this.eventStatus, 'Cancelled').value;
       const payload: LicenceEvent = { ...this.form.value, status: statusCancelled, licenceId };
-      this.busy = this.licenceEvents.updateLicenceEvent(id, payload)
-        .subscribe((licenceEvent) => {
-          this.router.navigate(['/licences']);
-        });
+      this.busy = this.licenceEvents.updateLicenceEvent(id, payload).subscribe((licenceEvent) => {
+        this.router.navigate(['/licences']);
+      });
     } else {
       this.router.navigate(['/licences']);
     }
@@ -265,7 +304,7 @@ export class TuaEventComponent extends FormBase implements OnInit {
   packageUpTimeForms() {
     const dateArray = new Array();
 
-    for (var i = 0; i < this.timeForms.controls.length; i++) {
+    for (let i = 0; i < this.timeForms.controls.length; i++) {
       if (this.timeForms.controls[i].invalid) {
         return new Array();
       }
@@ -295,11 +334,11 @@ export class TuaEventComponent extends FormBase implements OnInit {
       serviceEnd.setHours(this.timeForms.controls[i]['controls']['liquorEndTime'].value['hour']);
       serviceEnd.setMinutes(this.timeForms.controls[i]['controls']['liquorEndTime'].value['minute']);
 
-      if ((eventEnd.getTime() - eventBegin.getTime()) < 0) {
+      if (eventEnd.getTime() - eventBegin.getTime() < 0) {
         eventEnd.setDate(eventEnd.getDate() + 1);
       }
 
-      if ((serviceEnd.getTime() - serviceBegin.getTime()) < 0) {
+      if (serviceEnd.getTime() - serviceBegin.getTime() < 0) {
         serviceEnd.setDate(serviceEnd.getDate() + 1);
       }
 
@@ -315,7 +354,8 @@ export class TuaEventComponent extends FormBase implements OnInit {
   }
 
   updateLicence(schedules: LicenceEventSchedule[]) {
-    this.busy = this.licenceEvents.updateLicenceEvent(this.form.get('id').value, { ...this.form.value, schedules })
+    this.busy = this.licenceEvents
+      .updateLicenceEvent(this.form.get('id').value, { ...this.form.value, schedules })
       .subscribe((licenceEvent) => {
         this.router.navigate(['/licences']);
       });
@@ -323,7 +363,8 @@ export class TuaEventComponent extends FormBase implements OnInit {
 
   createLicence(schedules: LicenceEventSchedule[]) {
     this.form.removeControl('id');
-    this.busy = this.licenceEvents.createLicenceEvent({ ...this.form.value, schedules: schedules })
+    this.busy = this.licenceEvents
+      .createLicenceEvent({ ...this.form.value, schedules: schedules })
       .subscribe((licenceEvent) => {
         this.router.navigate(['/licences']);
       });
@@ -353,28 +394,43 @@ export class TuaEventComponent extends FormBase implements OnInit {
 
   resetTimeFormsToDefault() {
     this.timeForms = this.fb.array([]);
-    this.timeForms.push(this.fb.group({
-      dateTitle: [null, []],
-      date: [null, []],
-      startTime: [DEFAULT_START_TIME, [Validators.required]],
-      endTime: [DEFAULT_END_TIME, [Validators.required]],
-      liquorStartTime: [DEFAULT_START_TIME, [Validators.required]],
-      liquorEndTime: [DEFAULT_END_TIME, [Validators.required]]
-    }));
+    this.timeForms.push(
+      this.fb.group({
+        dateTitle: [null, []],
+        date: [null, []],
+        startTime: [DEFAULT_START_TIME, [Validators.required]],
+        endTime: [DEFAULT_END_TIME, [Validators.required]],
+        liquorStartTime: [DEFAULT_START_TIME, [Validators.required]],
+        liquorEndTime: [DEFAULT_END_TIME, [Validators.required]]
+      })
+    );
   }
 
   resetTimeFormsToArray(datesArray: Date[]) {
     this.timeForms = this.fb.array([]);
     for (const dt of datesArray) {
-      this.timeForms.push(this.fb.group({
-        dateTitle: [DAYS[dt.getDay()] + ', ' + dt.toLocaleDateString('en-US'), []],
-        date: [dt, []],
-        startTime: [DEFAULT_START_TIME, [Validators.required]],
-        endTime: [DEFAULT_END_TIME, [Validators.required]],
-        liquorStartTime: [DEFAULT_START_TIME, [Validators.required]],
-        liquorEndTime: [DEFAULT_END_TIME, [Validators.required]]
-      }));
+      this.timeForms.push(
+        this.fb.group({
+          dateTitle: [DAYS[dt.getDay()] + ', ' + dt.toLocaleDateString('en-US'), []],
+          date: [dt, []],
+          startTime: [DEFAULT_START_TIME, [Validators.required]],
+          endTime: [DEFAULT_END_TIME, [Validators.required]],
+          liquorStartTime: [DEFAULT_START_TIME, [Validators.required]],
+          liquorEndTime: [DEFAULT_END_TIME, [Validators.required]]
+        })
+      );
     }
+  }
+
+  /**
+   * Gets a service area record from the service area id.
+   *
+   * @param {string} serviceAreaId
+   * @return {*}  {ServiceArea}
+   * @memberof TuaEventComponent
+   */
+  getServiceAreaFromServiceAreaId(serviceAreaId: string): ServiceArea {
+    return this.licenceEndorsementServiceAreas.find((serviceArea) => serviceArea.id === serviceAreaId);
   }
 
   get validationErrorMap() {
@@ -402,52 +458,60 @@ export class TuaEventComponent extends FormBase implements OnInit {
       isLiveEntertainment: '',
       isGambling: '',
       agreement1: 'Please agree to all terms',
-      agreement2: 'Please agree to all terms',
+      agreement2: 'Please agree to all terms'
     };
   }
 
   validateForm(): boolean {
     this.validationMessages = [...new Set(this.listControlsWithErrors(this.form, this.validationErrorMap))];
 
-    // ... TODO: add more validation rules here - e.g. date range validation
-    var outDoor = false;
+    let outDoor = false;
     if (this.licence != undefined && this.licence.serviceAreas != undefined && this.licence.serviceAreas.length > 0) {
       outDoor = this.licence.serviceAreas[this.licence.serviceAreas.length - 1].isOutdoor;
     }
+
     if (this.timeForms.controls.length < 1) {
       this.validationMessages.push('No event dates selected');
     }
-    // Validate Capacity
-    var locationAttendance = 0;
-    for (var i = 0; i < this.form.value.eventLocations.length; i++) {
-      locationAttendance += Number(this.form.value.eventLocations[i].attendance);
+
+    // Get the selected event locations from the form data
+    const tuaEventLocations = this.form.value.eventLocations;
+
+    if (tuaEventLocations.length < 1) {
+      this.validationMessages.push('At least one event location is required');
     }
-    var endorsements = this.licence.endorsements.filter(k => k.endorsementName = 'Temporary Use Area Endorsement');
-    if (endorsements != null && endorsements != undefined && endorsements.length > 0) {
-      var lastEndorsement = endorsements[endorsements.length - 1];
 
-      if (locationAttendance > lastEndorsement.areaCapacity) {
-        this.validationMessages.push('Capacity cannot exceed the current licence limits');
+    // Check if the event locations have an attendance greater than the allowed endorsement capacity
+    for (const tuaEventLocation of tuaEventLocations) {
+      const matchingServiceArea = this.getServiceAreaFromServiceAreaId(tuaEventLocation.serviceAreaId);
+
+      if (tuaEventLocation.attendance > matchingServiceArea.capacity) {
+        this.validationMessages.push(
+          `The Attendance of location "${tuaEventLocation.name}" cannot exceed the service area capacity of ${matchingServiceArea.capacity}`
+        );
       }
-      //Validate Timing 
-      if (this.timeForms.length > 0) {
-        var hoursOfServiceList = lastEndorsement.hoursOfServiceList;
-        if (hoursOfServiceList != null && hoursOfServiceList != undefined && hoursOfServiceList.length > 0) {
+    }
 
+    //Validate entered TUA event date/time against each selected event location
+    if (this.timeForms.length > 0) {
+      for (const tuaEventLocation of tuaEventLocations) {
+        const hoursOfServiceList = tuaEventLocation.hoursOfServiceList;
+
+        if (hoursOfServiceList != null && hoursOfServiceList != undefined && hoursOfServiceList.length > 0) {
           //Check if different timings
           if (this.timeForms.length > 1) {
-            for (var i = 0; i < this.timeForms.length; i++) {
-              var startDate = this.timeForms.value[i].date;
-              var dayOfWeek = startDate.getDay();
-              var hoursOfService = hoursOfServiceList.filter(k => k.dayOfWeek == dayOfWeek)[0];
+            for (let i = 0; i < this.timeForms.length; i++) {
+              const startDate = this.timeForms.value[i].date;
+              const dayOfWeek = startDate.getDay();
+              const hoursOfService = hoursOfServiceList.filter((k) => k.dayOfWeek == dayOfWeek)[0];
               if (hoursOfService == null || hoursOfService == undefined) {
                 this.validationMessages.push('Service hours should be within endorsement service hours');
                 break;
               } else {
-                var liquorStartTimeHour = this.timeForms.value[i].startTime.hour;
-                var liquorStartTimeMinute = this.timeForms.value[i].startTime.minute;
-                var liquorEndTimeHour = this.timeForms.value[i].endTime.hour;
-                var liquorEndTimeMinute = this.timeForms.value[i].endTime.minute;
+                const liquorStartTimeHour = this.timeForms.value[i].startTime.hour;
+                const liquorStartTimeMinute = this.timeForms.value[i].startTime.minute;
+                let liquorEndTimeHour = this.timeForms.value[i].endTime.hour;
+                const liquorEndTimeMinute = this.timeForms.value[i].endTime.minute;
                 if (hoursOfService.endTimeHour < hoursOfService.startTimeHour) {
                   hoursOfService.endTimeHour += 24;
                 }
@@ -457,35 +521,38 @@ export class TuaEventComponent extends FormBase implements OnInit {
                 //If event is outdoor, Maximum closing hours is 10 PM
                 if (outDoor) {
                   //Check if the approved closing hours is before 10 PM
-                  if (hoursOfService.endTimeHour > 22 || (hoursOfService.endTimeHour == 22 && hoursOfService.endTimeMinute > 0)) {
+                  if (
+                    hoursOfService.endTimeHour > 22 ||
+                    (hoursOfService.endTimeHour == 22 && hoursOfService.endTimeMinute > 0)
+                  ) {
                     hoursOfService.endTimeHour = 22;
                     hoursOfService.endTimeMinute = 0;
                   }
                 }
-                if (liquorStartTimeHour < hoursOfService.startTimeHour ||
-                  (liquorStartTimeHour == hoursOfService.startTimeHour
-                    && liquorStartTimeMinute < hoursOfService.startTimeMinute)) {
+                if (
+                  liquorStartTimeHour < hoursOfService.startTimeHour ||
+                  (liquorStartTimeHour == hoursOfService.startTimeHour &&
+                    liquorStartTimeMinute < hoursOfService.startTimeMinute)
+                ) {
                   this.validationMessages.push('Service hours should be within endorsement service hours');
                   break;
                 }
-                if (liquorEndTimeHour > hoursOfService.endTimeHour ||
-                  (liquorEndTimeHour == hoursOfService.endTimeHour
-                    && liquorEndTimeMinute > hoursOfService.endTimeMinute)) {
+                if (
+                  liquorEndTimeHour > hoursOfService.endTimeHour ||
+                  (liquorEndTimeHour == hoursOfService.endTimeHour &&
+                    liquorEndTimeMinute > hoursOfService.endTimeMinute)
+                ) {
                   this.validationMessages.push('Service hours should be within endorsement service hours');
                   break;
                 }
-
               }
-
             }
-
-          }
-          else {
+          } else {
             //Every day at the same time
-            var startDate = this.form.value.startDate;
-            var dayOfWeek = startDate.getDay();
-            var existedHoursOfService = hoursOfServiceList.filter(k => k.dayOfWeek == dayOfWeek)[0];
-            var hoursOfService = new HoursOfService();
+            const startDate = this.form.value.startDate;
+            const dayOfWeek = startDate.getDay();
+            const existedHoursOfService = hoursOfServiceList.filter((k) => k.dayOfWeek == dayOfWeek)[0];
+            const hoursOfService = new HoursOfService();
 
             hoursOfService.dayOfWeek = existedHoursOfService.dayOfWeek;
             hoursOfService.startTimeHour = existedHoursOfService.startTimeHour;
@@ -493,10 +560,10 @@ export class TuaEventComponent extends FormBase implements OnInit {
             hoursOfService.endTimeHour = existedHoursOfService.endTimeHour;
             hoursOfService.endTimeMinute = existedHoursOfService.endTimeMinute;
 
-            var liquorStartTimeHour = this.timeForms.value[0].startTime.hour;
-            var liquorStartTimeMinute = this.timeForms.value[0].startTime.minute;
-            var liquorEndTimeHour = this.timeForms.value[0].endTime.hour;
-            var liquorEndTimeMinute = this.timeForms.value[0].endTime.minute;
+            const liquorStartTimeHour = this.timeForms.value[0].startTime.hour;
+            const liquorStartTimeMinute = this.timeForms.value[0].startTime.minute;
+            let liquorEndTimeHour = this.timeForms.value[0].endTime.hour;
+            const liquorEndTimeMinute = this.timeForms.value[0].endTime.minute;
             if (hoursOfService.endTimeHour < hoursOfService.startTimeHour) {
               hoursOfService.endTimeHour += 24;
             }
@@ -506,31 +573,38 @@ export class TuaEventComponent extends FormBase implements OnInit {
             //If event is outdoor, Maximum closing hours is 10 PM
             if (outDoor) {
               //Check if the approved closing hours is before 10 PM
-              if (hoursOfService.endTimeHour > 22 || (hoursOfService.endTimeHour == 22 && hoursOfService.endTimeMinute > 0)) {
+              if (
+                hoursOfService.endTimeHour > 22 ||
+                (hoursOfService.endTimeHour == 22 && hoursOfService.endTimeMinute > 0)
+              ) {
                 hoursOfService.endTimeHour = 22;
                 hoursOfService.endTimeMinute = 0;
               }
             }
-            if (liquorStartTimeHour < hoursOfService.startTimeHour ||
-              (liquorStartTimeHour == hoursOfService.startTimeHour
-                && liquorStartTimeMinute < hoursOfService.startTimeMinute)) {
+            if (
+              liquorStartTimeHour < hoursOfService.startTimeHour ||
+              (liquorStartTimeHour == hoursOfService.startTimeHour &&
+                liquorStartTimeMinute < hoursOfService.startTimeMinute)
+            ) {
               this.validationMessages.push('Service hours should be within endorsement service hours');
             }
-            if (liquorEndTimeHour > hoursOfService.endTimeHour ||
-              (liquorEndTimeHour == hoursOfService.endTimeHour
-                && liquorEndTimeMinute > hoursOfService.endTimeMinute)) {
+            if (
+              liquorEndTimeHour > hoursOfService.endTimeHour ||
+              (liquorEndTimeHour == hoursOfService.endTimeHour && liquorEndTimeMinute > hoursOfService.endTimeMinute)
+            ) {
               this.validationMessages.push('Service hours should be within endorsement service hours');
             }
           }
         }
       }
-
     }
+
     this.markControlsAsTouched(this.form);
 
     if (this.validationMessages.length > 0) {
       return false; // form is invalid
     }
+
     return true; // valid form
   }
 }
