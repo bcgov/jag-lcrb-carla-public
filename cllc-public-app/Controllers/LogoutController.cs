@@ -65,7 +65,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         Domain = domain
                     }
                 );
-            }
+            } 
 
 
             if (!_env.IsProduction()) // clear dev tokens
