@@ -8,62 +8,47 @@
   }
 }
 
-table {
+.tua-locations {
   width: 100%;
+  margin-bottom: 1rem;
 
   thead {
     th {
       border: 1px solid black;
       padding: 3px;
       text-align: center;
+
       &:last-child {
         border: none;
       }
     }
   }
+
   tr {
     td {
       background-color: white;
       text-align: center;
       border: 1px solid black;
       height: 35px;
-      &:last-of-type {
-        background: none !important;
-        border: none;
-      }
+
       input {
-        width: 100%;
         height: 100%;
         text-align: center;
         border: none;
       }
     }
-    &:last-child {
-      td {
-        background: none !important;
-        border: none !important;
-      }
-    }
   }
 
-  .btn-save {
-    float: right;
-    background-color: #38598a;
-    border: #38598a 1px solid;
-    border-radius: 3px;
-    color: white;
-    &:hover {
-      background-color: #003366 !important;
-    }
-  }
   .btn-clear {
     background: none;
     border: none;
   }
 }
 
-.bold {
-  font-weight: bold;
+.tua-locations-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .text-grey {
