@@ -406,7 +406,7 @@ namespace Gov.Jag.Lcrb.OneStopService
         /// <summary>
         /// Hangfire job to send LicenceDetailsMessage to One stop.
         /// </summary>
-        public async Task SendProgramAccountDetailsBroadcastMessageRest(PerformContext hangfireContext, string licenceGuidRaw, string queueItemId)
+        public async Task SendProgramAccountDetailsBroadcastMessageRest(PerformContext hangfireContext, string licenceGuidRaw)
         {
             IDynamicsClient dynamicsClient = DynamicsSetupUtil.SetupDynamics(_configuration);
             if (hangfireContext != null)
@@ -456,7 +456,6 @@ namespace Gov.Jag.Lcrb.OneStopService
                 //send message to Onestop hub
                 var outputXML = await _onestopRestClient.ReceiveFromPartner(innerXml);
 
-                UpdateQueueItemForSend(dynamicsClient, hangfireContext, queueItemId, innerXml, outputXML);
                 if (hangfireContext != null)
                 {
                     hangfireContext.WriteLine(outputXML);
@@ -607,9 +606,6 @@ namespace Gov.Jag.Lcrb.OneStopService
                             case OneStopHubStatusChange.LicenceDeemedAtTransfer:
                                 await SendChangeNameRest(hangfireContext, licenceId,
                                     queueItem.AdoxioOnestopmessageitemid, true, ChangeNameType.Transfer);
-                                break;
-                            case OneStopHubStatusChange.AccountDetailsBroadcast:
-                                await SendProgramAccountDetailsBroadcastMessageRest(hangfireContext, licenceId, queueItem.AdoxioOnestopmessageitemid);
                                 break;
                             default:
                                 msg = $"Failed updating OneStop queue item {queueItem.AdoxioOnestopmessageitemid}, OneStopHubStatusChange is {queueItem.AdoxioStatuschangedescription} ";
