@@ -1,0 +1,51 @@
+<h3 class="blue-header">Person's Name Change</h3>
+<div class="content-bottom">
+  <p>To be completed when a person holding an interest in a licence has legally changed their name.</p>
+  <table>
+    <tr>
+      <td>
+        <span><strong>Person's Name:</strong></span>
+      </td>
+      <td>
+        <mat-form-field class="ml-1 mr-2">
+          <mat-label>First Name</mat-label>
+          <input matInput type="text" formControlName="firstNameOld" />
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="example-form-field">
+          <mat-label>Last Name</mat-label>
+          <input matInput type="text" formControlName="lastNameOld" />
+      </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span><strong>Name changed to:</strong></span>
+      </td>
+      <td>
+        <mat-form-field class="ml-1 mr-2">
+          <mat-label>First Name</mat-label>
+          <input matInput type="text" formControlName="firstNameNew" />
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="example-form-field">
+          <mat-label>Last Name</mat-label>
+          <input matInput type="text" formControlName="lastNameNew" />
+        </mat-form-field>
+      </td>
+    </tr>
+  </table>
+  <h4>Copy of Certificate of name Change, Marriage Certificate, etc.</h4>
+  <app-file-uploader
+    *ngIf="application?.id"
+    documentType="NameChangeDocument"
+    fileTypes="FILE MUST BE IN PDF FORMAT."
+    [multipleFiles]="true"
+    entityName="application"
+    [extensions]="['pdf']"
+    (numberOfUploadedFiles)="onUploadedNameChangeDocuments($event)"
+    [entityId]="application.id"
+    [uploadHeader]="'TO UPLOAD NAME CHANGE DOCUMENTS, DRAG FILES HERE OR'"></app-file-uploader>
+</div>

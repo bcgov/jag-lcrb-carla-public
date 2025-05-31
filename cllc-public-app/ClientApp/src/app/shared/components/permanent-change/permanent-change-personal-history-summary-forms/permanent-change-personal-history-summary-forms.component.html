@@ -1,0 +1,33 @@
+<!-- Personal History Summary Forms -->
+
+<h3 class="blue-header">
+  <fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>
+  Personal History Summary Forms
+</h3>
+<div class="content-bottom">
+  <p>
+    Newly added individuals involved in the applicant’s legal entity structure must submit a Personal History Summary
+    form and a copy of your Criminal Record Search completed by the RCMP or local Police Department. The form may also
+    require you to submit copy of your driver’s abstract or a statutory declaration. See the form for full details.
+  </p>
+  <h4>Personal History Summary Documents</h4>
+  <p>
+    Each liquor affiliate must provide a complete
+    <a
+      href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/lcrb004_personal_history_summary.pdf"
+      target="_blank">
+      Personal History Summary Form
+    </a>
+    .
+  </p>
+  <app-file-uploader
+    *ngIf="application?.id"
+    documentType="FinancialIntegrity"
+    fileTypes="FILE MUST BE IN PDF FORMAT."
+    [multipleFiles]="true"
+    entityName="application"
+    [extensions]="['pdf']"
+    (numberOfUploadedFiles)="onUploadedFinancialIntegrity($event)"
+    [entityId]="application.id"
+    [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY DOCUMENTS, DRAG FILES HERE OR'"></app-file-uploader>
+</div>
