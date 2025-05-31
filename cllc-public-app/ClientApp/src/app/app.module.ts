@@ -325,6 +325,7 @@ import { SepClaimComponent } from './components/sep/sep-claim/sep-claim.componen
 import { FinalConfirmationComponent } from './components/sep/sep-application/final-confirmation/final-confirmation.component';
 import { CancelSepApplicationDialogComponent } from './components/sep/sep-application/cancel-sep-application-dialog/cancel-sep-application-dialog.component';
 import { ApplicationTypeDataService } from "./services/application-type-data.service";
+import { PermanentChangeDeclarationsComponent } from "@shared/components/permanent-change/permanent-change-declarations/permanent-change-declarations.component";
 
 // LCSD - 6243: 2024-02-28 waynezen
 import { ForbiddenModalComponent } from '@shared/components/forbidden-modal/forbidden-modal.component';
@@ -332,6 +333,7 @@ import { RelatedJobnumberPickerComponent } from './shared/components/related-job
 import { RelocationTypeComponent } from "@components/relocation-type/relocation-type.component";
 import { FeedbackComponent } from "@components/feedback/feedback.component";
 import { MaintenanceBannerComponent } from "@components/maintenance-banner/maintenance-banner.component";
+import { PermanentChangeDisclaimerModule } from "@shared/components/permanent-change/permanent-change-disclaimer/permanent-change-disclaimer.module";
 
 
 @NgModule({
@@ -527,7 +529,8 @@ import { MaintenanceBannerComponent } from "@components/maintenance-banner/maint
     RelatedJobnumberPickerComponent,
     RelocationTypeComponent,
     FeedbackComponent,
-    MaintenanceBannerComponent
+    MaintenanceBannerComponent,
+    PermanentChangeDeclarationsComponent
   ],
   imports: [
     AppRoutingModule,
@@ -584,7 +587,8 @@ import { MaintenanceBannerComponent } from "@components/maintenance-banner/maint
     StoreDevtoolsModule.instrument
       ({
         maxAge: 5
-      })
+      }),
+    PermanentChangeDisclaimerModule
   ],
   exports: [
     AppRoutingModule,
