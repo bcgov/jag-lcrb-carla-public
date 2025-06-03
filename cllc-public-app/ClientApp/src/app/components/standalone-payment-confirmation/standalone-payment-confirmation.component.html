@@ -13,7 +13,7 @@
       <!-- Normal success -->
       <h1 *ngIf="!error && !isDuplicate">Thank you for your submission!</h1>
       <!-- Duplicate transaction -->
-      <h1 *ngIf="isDuplicate">Duplicate Transaction</h1>
+      <h1 *ngIf="isDuplicate" style="color: red; font-weight: bold;">Transaction Declined</h1>
     </mat-card-title>
   </mat-card-header>
 
