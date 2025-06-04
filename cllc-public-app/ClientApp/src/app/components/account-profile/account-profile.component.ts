@@ -327,7 +327,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
       (this.form.get("businessProfile.physicalAddressPostalCode").value || "").replace(/\s+/g, "")
     );
 
-    //https://jira.justice.gov.bc.ca/browse/LCSD-7412
+    //LCSD-7412
     //Simplified vaidators for bcIncorporationNumber
    // Incorporation Number	|incorporationNumber:	Registry number for Corporations |	Up to 10 alphanumeric characters.
    
