@@ -13,7 +13,3 @@ uploads
 .s2i
 .angular
 .vscode
-
-*.html
-*.css
-*.scss
