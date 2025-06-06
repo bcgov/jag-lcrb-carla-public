@@ -74,7 +74,7 @@ export class RelatedJobnumberPickerComponent implements OnInit {
     if (selectedLicence && selectedLicence.valid) {
 
       // use the licence # autocomplete function to get missing Licensee name
-      this.licenseDataService.getAutocomplete(selectedLicence.licenceNumber)
+      this.licenseDataService.getAutocomplete({ licenceNumber: selectedLicence.licenceNumber })
         .subscribe((data) => {
           if (data && data.length > 0) {
             let lookupLicence = data[0] as RelatedLicence;
