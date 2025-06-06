@@ -1,0 +1,55 @@
+<h3 class="blue-header">
+  <fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>
+  Cannabis Associate Security Screening Forms
+</h3>
+<div class="content-bottom">
+  <p>
+    Newly added associates for a cannabis licence or authorization are required to submit documentation for security
+    screenings and/or financial integrity checks. Cannabis retail store licence or authorization applications cannot be
+    processed until all required materials have been received.
+  </p>
+
+  <p>The screening for associates considers the associate within the context of a larger organizational structure.</p>
+
+  <p>
+    Please provide the documents as outlined on
+    <a
+      href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/non-medical-cannabis-licenses/cannabis-resources-information/associate-forms"
+      target="_blank">
+      this page
+    </a>
+    .
+  </p>
+
+  <h4>Cannabis Associate Security Screening Forms</h4>
+  <app-file-uploader
+    *ngIf="application?.id"
+    documentType="CAS"
+    fileTypes="FILE MUST BE IN PDF FORMAT."
+    [multipleFiles]="true"
+    entityName="application"
+    [extensions]="['pdf']"
+    (numberOfUploadedFiles)="onUploadedCAS($event)"
+    [entityId]="application.id"
+    [uploadHeader]="'TO UPLOAD CANNABIS ASSOCIATES DOCUMENTS, DRAG FILES HERE OR'"></app-file-uploader>
+
+  <h4>Financial Integrity Documents</h4>
+  <p>
+    Each associate must provide a complete a
+    <a
+      href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/cannabis-forms/form-cannabis-retail-store-fin-integrity--associate.pdf">
+      Financial Integrity Form
+    </a>
+    .
+  </p>
+  <app-file-uploader
+    *ngIf="application?.id"
+    documentType="FinancialIntegrity"
+    fileTypes="FILE MUST BE IN PDF FORMAT."
+    [multipleFiles]="true"
+    entityName="application"
+    [extensions]="['pdf']"
+    (numberOfUploadedFiles)="onUploadedFinancialIntegrity($event)"
+    [entityId]="application.id"
+    [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY DOCUMENTS, DRAG FILES HERE OR'"></app-file-uploader>
+</div>
