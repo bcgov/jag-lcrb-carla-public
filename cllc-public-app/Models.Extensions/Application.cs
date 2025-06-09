@@ -497,6 +497,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 PaymentReceivedDate = dynamicsApplication.AdoxioPaymentreceiveddate,
                 Description1 = dynamicsApplication.AdoxioDescription1,
                 Description2 = dynamicsApplication.AdoxioDescription2,
+                Description3 = dynamicsApplication.AdoxioDescription3,
                 TempDateFrom = dynamicsApplication.AdoxioTempdatefrom,
                 TempDateTo = dynamicsApplication.AdoxioTempdateto,
 
