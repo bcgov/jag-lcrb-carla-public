@@ -345,7 +345,7 @@ import { PermanentChangeInternalTransferShares } from "@shared/components/perman
 import { PermanentChangeNameLicenseeCorporationComponent } from "@shared/components/permanent-change/permanent-change-name-licensee-corporation/permanent-change-name-licensee-corporation.component";
 import { PermanentChangeDirectorsOfficers } from "@shared/components/permanent-change/permanent-change-directors-officers/permanent-change-directors-officers.component";
 import { PermanentChangeNameLicenseeSocitey } from "@shared/components/permanent-change/permanent-change-name-licensee-society/permanent-change-name-licensee-society.component";
-import { PermanentChangeNamePersonComponent } from "@shared/components/permanent-change/permanent-change-name-person copy/permanent-change-name-person.component";
+import { PermanentChangeNamePersonComponent } from "@shared/components/permanent-change/permanent-change-name-person/permanent-change-name-person.component";
 import { PermanentChangeExternalTransferShares } from "@shared/components/permanent-change/permanent-change-external-transfer-shares/permanent-change-external-transfer-shares.component";
 import { PermanentChangeNameLicenseePartnership } from "@shared/components/permanent-change/permanent-change-name-licensee-partnership/permanent-change-name-licensee-partnership.component";
 
