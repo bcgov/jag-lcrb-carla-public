@@ -1,0 +1,39 @@
+<h3 class="blue-header">Types of Changes Requested</h3>
+<section class="content-bottom">
+  <p>
+    Below are the types Of changes identified in the LE Review application required to bring your account up to date.
+  </p>
+
+  <ul>
+    <ng-container *ngFor="let item of changeList; let first = first">
+      <hr *ngIf="!first" />
+      <li>
+        {{ account.isOtherBusinessType() && item.otherName ? item.otherName : item.name }}
+      </li>
+      <fa-icon
+        [icon]="faQuestionCircle"
+        style="color: #38598a; margin-left: 10px"
+        (click)="item.show = !item.show"></fa-icon>
+      <section class="infoCell" *ngIf="item.show && (item.helpTextHeader || item.helpText || item.helpTextLink)">
+        <p *ngIf="item.CannabisFee == item.LiquorFee" style="padding-right: 30px; text-align: right">
+          <strong>Application Fee of ${{ item.CannabisFee }} per Licence</strong>
+        </p>
+        <p *ngIf="item.CannabisFee != item.LiquorFee" style="padding-right: 30px; text-align: right">
+          <strong>
+            Application Fee of ${{ item.CannabisFee }} per Cannabis Licence, ${{ item.LiquorFee }} per Liquor Licence
+          </strong>
+        </p>
+        <p *ngIf="item.helpTextHeader">{{ item.helpTextHeader }}</p>
+        <section *ngIf="item.helpText && item.helpText.length > 0" style="padding: 5px">
+          <ul>
+            <li *ngFor="let help of item.helpText" [innerHTML]="help"></li>
+          </ul>
+        </section>
+
+        <section *ngIf="item.helpTextLink" style="padding-right: 30px; text-align: right">
+          <a href="{{ item.helpTextLink }}" target="_blank">More Information</a>
+        </section>
+      </section>
+    </ng-container>
+  </ul>
+</section>

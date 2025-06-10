@@ -348,6 +348,8 @@ import { PermanentChangeNameLicenseeSocitey } from "@shared/components/permanent
 import { PermanentChangeNamePersonComponent } from "@shared/components/permanent-change/permanent-change-name-person/permanent-change-name-person.component";
 import { PermanentChangeExternalTransferShares } from "@shared/components/permanent-change/permanent-change-external-transfer-shares/permanent-change-external-transfer-shares.component";
 import { PermanentChangeNameLicenseePartnership } from "@shared/components/permanent-change/permanent-change-name-licensee-partnership/permanent-change-name-licensee-partnership.component";
+import { PermanentChangeLegalEntityReviewTypesOfChangesRequestedComponent } from "@shared/components/permanent-change/permanent-change-legal-entity-review-types-of-changes-requested/permanent-change-legal-entity-review-types-of-changes-requested.component";
+import { PermanentChangeLegalEntityReviewJobComponent } from "@shared/components/permanent-change/permanent-change-legal-entity-review-job/permanent-change-legal-entity-review-job.component";
 
 @NgModule({
   declarations: [
@@ -559,7 +561,9 @@ import { PermanentChangeNameLicenseePartnership } from "@shared/components/perma
     PermanentChangeNamePersonComponent,
     PermanentChangePaymentComponent,
     PermanentChangePersonalHistorySummaryFormsComponent,
-    PermanentChangeTypesOfChangesRequestedComponent
+    PermanentChangeTypesOfChangesRequestedComponent,
+    PermanentChangeLegalEntityReviewTypesOfChangesRequestedComponent,
+    PermanentChangeLegalEntityReviewJobComponent
   ],
   imports: [
     AppRoutingModule,
