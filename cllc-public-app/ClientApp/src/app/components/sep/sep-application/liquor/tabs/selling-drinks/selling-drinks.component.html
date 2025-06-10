@@ -9,7 +9,7 @@
             <select formControlName="chargingForLiquorReason" class="form-control w-100">
                 <option value=""></option>
                 <option value="RecoverCost">Yes - To recover event operating costs</option>
-                <option value="RaiseMoney">Combination - To raise money for a charitable purpose</option>
+                <option value="RaiseMoney">Yes - To raise money for a charitable purpose</option>
                 <option value="LiquorIsFree">No - Drinks will be free of charge</option>
                 <option value="Combination">Combination - Some drinks will be sold and some will be given away for free
                 </option>
@@ -17,7 +17,7 @@
         </app-field>
         <div>
             <fa-icon [icon]="faQuestionCircle" (click)="tooltip.toggle()"
-                matTooltip="You will be able to select a combination of drink choices in the option of charity as well. " #tooltip="matTooltip">
+                matTooltip="You will be able to select a combination of drink choices in the option for charity as well. " #tooltip="matTooltip">
             </fa-icon>
         </div>
     </div>
