@@ -104,6 +104,7 @@ import { SepPaymentConfirmationComponent } from "@components/sep/payment-confirm
 import { SummaryComponent } from "@components/sep/sep-application/summary/summary.component";
 import { SepClaimComponent } from "@components/sep/sep-claim/sep-claim.component";
 import { RelocationTypeComponent } from "@components/relocation-type/relocation-type.component";
+import { PermanentChangeToALicenseeLegalEntityReviewComponent } from "@components/applications/permanent-change-to-a-licensee-legal-entity-review/permanent-change-to-a-licensee-legal-entity-review.component";
 
 const routes: Routes = [
   {
@@ -351,6 +352,7 @@ const routes: Routes = [
     component: RelocationTypeComponent,
     canActivate: [BCeidAuthGuard],
   },
+  // Permanent Change to a Licensee
   {
     path: "permanent-change-to-a-licensee",
     component: PermanentChangeToALicenseeComponent,
@@ -365,6 +367,25 @@ const routes: Routes = [
   },
   {
     path: "permanent-change-to-a-licensee/:applicationId",
+    component: PermanentChangeToALicenseeComponent,
+    canActivate: [BCeidAuthGuard, FeatureGuard],
+    data: { feature: "PermanentChangesToLicensee" }
+  },
+  // Permanent Change to a Licensee Legal Entity Review
+  {
+    path: "permanent-change-to-a-licensee-legal-entity-review",
+    component: PermanentChangeToALicenseeComponent,
+    canActivate: [BCeidAuthGuard, FeatureGuard],
+    data: { feature: "PermanentChangesToLicensee" }
+  },
+  {
+    path: "permanent-change-to-a-licensee-legal-entity-review/:applicationId",
+    component: PermanentChangeToALicenseeLegalEntityReviewComponent,
+    canActivate: [BCeidAuthGuard, FeatureGuard],
+    data: { feature: "PermanentChangesToLicenseeLegalEntityReview" }
+  },
+  {
+    path: "permanent-change-to-a-licensee-legal-entity-review/:applicationId/:invoiceType",
     component: PermanentChangeToALicenseeComponent,
     canActivate: [BCeidAuthGuard, FeatureGuard],
     data: { feature: "PermanentChangesToLicensee" }
