@@ -9,7 +9,7 @@ Start node app from  the `cllc-public-app/ClientApp` directory in Command Prompt
 ```bash
 cd ClientApp
 npm install
-npm run
+npm start
 ```
 
 ### Run API from Command Line (need VPN running)
