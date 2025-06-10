@@ -45,7 +45,7 @@ export class Account {
   legalEntity: LegalEntity;
 
   websiteUrl: string;
-  accountUrls: string;
+  accountUrls: string | null;
 
   // SEP Police Review Limits
   isLateHoursApproval: boolean;
