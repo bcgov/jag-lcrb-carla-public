@@ -3,6 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { SepApplication } from "@models/sep-application.model";
 import { FormBase } from "@shared/form-base";
+import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: "app-selling-drinks",
@@ -36,6 +37,7 @@ export class SellingDrinksComponent extends FormBase implements OnInit {
   @Output() saved: EventEmitter<{ declaredServings: number }> = new EventEmitter<{ declaredServings: number }>();
   form: FormGroup;
   @Output() back: EventEmitter<boolean> = new EventEmitter<boolean>();
+  faQuestionCircle = faQuestionCircle;
   constructor(private fb: FormBuilder) {
     super();
   }
