@@ -97,8 +97,6 @@ import { SecurityAssessmentsComponent } from
 import { BeforeYouStartComponent } from "@components/account-profile/tabs/before-you-start/before-you-start.component";
 import { FinancialInformationComponent } from
   "@components/account-profile/tabs/financial-information/financial-information.component";
-import { AccountProfileSummaryComponent } from
-  "@components/account-profile/account-profile-summary/account-profile-summary.component";
 
 import { NgBusyModule } from "ng-busy";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
@@ -366,7 +364,6 @@ import { PermanentChangeToALicenseeLegalEntityReviewComponent } from "@component
     BeforeYouStartComponent,
     BreadcrumbComponent,
     AccountProfileComponent,
-    AccountProfileSummaryComponent,
     ConnectionToProducersComponent,
     CorporateDetailsComponent,
     DashboardComponent,
