@@ -374,9 +374,9 @@ const routes: Routes = [
   // Permanent Change to a Licensee Legal Entity Review
   {
     path: "permanent-change-to-a-licensee-legal-entity-review",
-    component: PermanentChangeToALicenseeComponent,
+    component: PermanentChangeToALicenseeLegalEntityReviewComponent,
     canActivate: [BCeidAuthGuard, FeatureGuard],
-    data: { feature: "PermanentChangesToLicensee" }
+    data: { feature: "PermanentChangesToLicenseeLegalEntityReview" }
   },
   {
     path: "permanent-change-to-a-licensee-legal-entity-review/:applicationId",
@@ -386,9 +386,9 @@ const routes: Routes = [
   },
   {
     path: "permanent-change-to-a-licensee-legal-entity-review/:applicationId/:invoiceType",
-    component: PermanentChangeToALicenseeComponent,
+    component: PermanentChangeToALicenseeLegalEntityReviewComponent,
     canActivate: [BCeidAuthGuard, FeatureGuard],
-    data: { feature: "PermanentChangesToLicensee" }
+    data: { feature: "PermanentChangesToLicenseeLegalEntityReview" }
   },
   {
     path: "multi-step-application/:applicationId",

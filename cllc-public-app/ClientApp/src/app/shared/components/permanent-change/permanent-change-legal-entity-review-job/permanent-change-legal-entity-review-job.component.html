@@ -1,12 +1,15 @@
-<div>
-  <!-- For all corporations -->
-  <section>
+<h3 class="blue-header">Legal Entity Review</h3>
+<div class="content-bottom">
+  <div class="mb-3">
     <ul>
       <li>We have performed a Legal Entity Review and have determined...</li>
       <li>Below outlines the unreported changes that must be reported and paid for.</li>
       <li>Explain howihis review has come about and why they need to be paid.</li>
     </ul>
-    <h2>Review Outcome</h2>
+  </div>
+  <div class="mb-5">
+    <h4>Review Outcome</h4>
+    <hr />
     <p>
       Sed lacinia aliquet quam, ac mollis arcu facilisis sit amet. Proin sem leo, commodo ac viverra sed, tristique nec
       odio. Proin euismod dictum magna et molestie. Morbi lobortis non nisl eget posuere. Nulla facilisi. Nullam
@@ -21,12 +24,11 @@
       volutpat massa a augue suscipit ultrices. Mauris sit amet bibendum odio. Ut nunc dui, pellentesque id sodales in,
       molestie ultrices lacus. Proin congue pretium ante, a porta est dapibus convallis.
     </p>
-    <div>
-      <!-- Link to PermanentChangeContactSupportComponent header -->
-      <span>
-        If you have any questions, please click
-        <a href="#questions-section">Here</a>
-      </span>
-    </div>
-  </section>
+  </div>
+  <div>
+    <span class="contact-support-text">
+      If you have any questions, please click
+      <button mat-button class="button-as-link" (click)="scrollToQuestionsSection()">Here</button>.
+    </span>
+  </div>
 </div>

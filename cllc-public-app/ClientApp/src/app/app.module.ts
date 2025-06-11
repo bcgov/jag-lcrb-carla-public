@@ -348,8 +348,9 @@ import { PermanentChangeNameLicenseeSocitey } from "@shared/components/permanent
 import { PermanentChangeNamePersonComponent } from "@shared/components/permanent-change/permanent-change-name-person/permanent-change-name-person.component";
 import { PermanentChangeExternalTransferShares } from "@shared/components/permanent-change/permanent-change-external-transfer-shares/permanent-change-external-transfer-shares.component";
 import { PermanentChangeNameLicenseePartnership } from "@shared/components/permanent-change/permanent-change-name-licensee-partnership/permanent-change-name-licensee-partnership.component";
-import { PermanentChangeLegalEntityReviewTypesOfChangesRequestedComponent } from "@shared/components/permanent-change/permanent-change-legal-entity-review-types-of-changes-requested/permanent-change-legal-entity-review-types-of-changes-requested.component";
+import { PermanentChangeLegalEntityReviewTypesOfChangesRequiredComponent } from "@shared/components/permanent-change/permanent-change-legal-entity-review-types-of-changes-required/permanent-change-legal-entity-review-types-of-changes-required.component";
 import { PermanentChangeLegalEntityReviewJobComponent } from "@shared/components/permanent-change/permanent-change-legal-entity-review-job/permanent-change-legal-entity-review-job.component";
+import { PermanentChangeToALicenseeLegalEntityReviewComponent } from "@components/applications/permanent-change-to-a-licensee-legal-entity-review/permanent-change-to-a-licensee-legal-entity-review.component";
 
 @NgModule({
   declarations: [
@@ -562,7 +563,8 @@ import { PermanentChangeLegalEntityReviewJobComponent } from "@shared/components
     PermanentChangePaymentComponent,
     PermanentChangePersonalHistorySummaryFormsComponent,
     PermanentChangeTypesOfChangesRequestedComponent,
-    PermanentChangeLegalEntityReviewTypesOfChangesRequestedComponent,
+    PermanentChangeToALicenseeLegalEntityReviewComponent,
+    PermanentChangeLegalEntityReviewTypesOfChangesRequiredComponent,
     PermanentChangeLegalEntityReviewJobComponent
   ],
   imports: [
