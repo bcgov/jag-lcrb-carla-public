@@ -7,7 +7,7 @@ import { Store } from "@ngrx/store";
 import { Subscription, Observable, forkJoin, of } from "rxjs";
 import { FormBuilder, FormGroup, Validators, FormArray } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
-import { COUNTRIES } from "./country-list";
+import { COUNTRIES } from "@app/constants/countries";
 
 
 // tslint:disable-next-line:no-duplicate-imports
