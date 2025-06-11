@@ -650,6 +650,15 @@
         <span>Resolve Incompleteness</span>
       </a>
     </div>
+
+    <div
+      *ngIf="item.applicationStatus === 'Legal Entity Review'"
+      style="margin-top: 5px">
+      <a [routerLink]="['/permanent-change-to-a-licensee-legal-entity-review/' + item.id]">
+        <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px"></fa-icon>
+        <span>Start Application: Permanent Change to Licence</span>
+      </a>
+    </div>
   </td>
   <td>
     <section *ngIf="item?.endorsements?.length">

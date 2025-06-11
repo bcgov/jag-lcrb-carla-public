@@ -1,5 +1,5 @@
 <div [formGroup]="form" class="form-wrapper">
-  <h1>Permanent Change to a Licensee or Authorization Holder</h1>
+  <h1>Permanent Change to a Licensee or Authorization Holder as a result of a Legal Entity Review</h1>
 
   <mat-progress-bar class="mt-1" *ngIf="!dataLoaded" mode="indeterminate"></mat-progress-bar>
 
@@ -15,9 +15,15 @@
     </section>
 
     <section>
-      <app-permanent-change-types-of-changes-requested
+      <app-permanent-change-legal-entity-review-job
         [account]="account"
-        [changeList]="changeList"></app-permanent-change-types-of-changes-requested>
+        [changeList]="changeList"></app-permanent-change-legal-entity-review-job>
+    </section>
+
+    <section>
+      <app-permanent-change-legal-entity-review-types-of-changes-required
+        [account]="account"
+        [changeList]="changeList"></app-permanent-change-legal-entity-review-types-of-changes-required>
     </section>
 
     <!-- Internal Share Transfer -->

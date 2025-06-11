@@ -86,19 +86,11 @@ import { NotFoundComponent } from "@components/not-found/not-found.component";
 import { FileUploaderComponent } from "@shared/components/file-uploader/file-uploader.component";
 import { DelayedFileUploaderComponent } from "@shared/components/delayed-file-uploader/delayed-file-uploader.component";
 
-import { CorporateDetailsComponent } from
-  "@components/account-profile/tabs/corporate-details/corporate-details.component";
 import {
   DirectorsAndOfficersComponent,
   DirectorAndOfficerPersonDialogComponent
 } from "@components/account-profile/tabs/directors-and-officers/directors-and-officers.component";
-import { SecurityAssessmentsComponent } from
-  "@components/account-profile/tabs/security-assessments/security-assessments.component";
 import { BeforeYouStartComponent } from "@components/account-profile/tabs/before-you-start/before-you-start.component";
-import { FinancialInformationComponent } from
-  "@components/account-profile/tabs/financial-information/financial-information.component";
-import { AccountProfileSummaryComponent } from
-  "@components/account-profile/account-profile-summary/account-profile-summary.component";
 
 import { NgBusyModule } from "ng-busy";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
@@ -156,7 +148,7 @@ import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { EstablishmentWatchWordsService } from "@services/establishment-watch-words.service";
 import {
   ConnectionToNonMedicalStoresComponent
-} from "@components/account-profile/tabs/connection-to-non-medical-stores/connection-to-non-medical-stores.component";
+} from "@components/applications/application/tabs/connection-to-non-medical-stores/connection-to-non-medical-stores.component";
 import { AssociatePageComponent } from "@components/associate-page/associate-page.component";
 import { LicenceRenewalStepsComponent } from
   "@components/licences/licence-renewal-steps/licence-renewal-steps.component";
@@ -348,6 +340,10 @@ import { PermanentChangeNameLicenseeSocitey } from "@shared/components/permanent
 import { PermanentChangeNamePersonComponent } from "@shared/components/permanent-change/permanent-change-name-person/permanent-change-name-person.component";
 import { PermanentChangeExternalTransferShares } from "@shared/components/permanent-change/permanent-change-external-transfer-shares/permanent-change-external-transfer-shares.component";
 import { PermanentChangeNameLicenseePartnership } from "@shared/components/permanent-change/permanent-change-name-licensee-partnership/permanent-change-name-licensee-partnership.component";
+import { PermanentChangeLegalEntityReviewTypesOfChangesRequiredComponent } from "@shared/components/permanent-change/permanent-change-legal-entity-review-types-of-changes-required/permanent-change-legal-entity-review-types-of-changes-required.component";
+import { PermanentChangeLegalEntityReviewJobComponent } from "@shared/components/permanent-change/permanent-change-legal-entity-review-job/permanent-change-legal-entity-review-job.component";
+import { PermanentChangeToALicenseeLegalEntityReviewComponent } from "@components/applications/permanent-change-to-a-licensee-legal-entity-review/permanent-change-to-a-licensee-legal-entity-review.component";
+import { ConnectionToOtherLiquorLicencesComponent } from "@components/account-profile/tabs/connection-to-producers/connection-to-other-liquor-licences/connection-to-other-liquor-licences.component";
 
 @NgModule({
   declarations: [
@@ -363,9 +359,8 @@ import { PermanentChangeNameLicenseePartnership } from "@shared/components/perma
     BeforeYouStartComponent,
     BreadcrumbComponent,
     AccountProfileComponent,
-    AccountProfileSummaryComponent,
     ConnectionToProducersComponent,
-    CorporateDetailsComponent,
+    ConnectionToOtherLiquorLicencesComponent,
     DashboardComponent,
     SepDashboardComponent,
     DelayedFileUploaderComponent,
@@ -375,7 +370,6 @@ import { PermanentChangeNameLicenseePartnership } from "@shared/components/perma
     EditShareholdersComponent,
     FieldComponent,
     FileUploaderComponent,
-    FinancialInformationComponent,
     FormViewerComponent,
     HomeComponent,
     IndividualAssociatesResultsComponent,
@@ -399,7 +393,6 @@ import { PermanentChangeNameLicenseePartnership } from "@shared/components/perma
     PrePaymentComponent,
     ProofOfZoningComponent,
     ResultComponent,
-    SecurityAssessmentsComponent,
     SolePropResultsComponent,
     SpdConsentComponent,
     StaticComponent,
@@ -559,7 +552,10 @@ import { PermanentChangeNameLicenseePartnership } from "@shared/components/perma
     PermanentChangeNamePersonComponent,
     PermanentChangePaymentComponent,
     PermanentChangePersonalHistorySummaryFormsComponent,
-    PermanentChangeTypesOfChangesRequestedComponent
+    PermanentChangeTypesOfChangesRequestedComponent,
+    PermanentChangeToALicenseeLegalEntityReviewComponent,
+    PermanentChangeLegalEntityReviewTypesOfChangesRequiredComponent,
+    PermanentChangeLegalEntityReviewJobComponent
   ],
   imports: [
     AppRoutingModule,
