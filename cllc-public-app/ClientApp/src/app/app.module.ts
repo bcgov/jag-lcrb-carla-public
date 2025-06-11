@@ -86,17 +86,11 @@ import { NotFoundComponent } from "@components/not-found/not-found.component";
 import { FileUploaderComponent } from "@shared/components/file-uploader/file-uploader.component";
 import { DelayedFileUploaderComponent } from "@shared/components/delayed-file-uploader/delayed-file-uploader.component";
 
-import { CorporateDetailsComponent } from
-  "@components/account-profile/tabs/corporate-details/corporate-details.component";
 import {
   DirectorsAndOfficersComponent,
   DirectorAndOfficerPersonDialogComponent
 } from "@components/account-profile/tabs/directors-and-officers/directors-and-officers.component";
-import { SecurityAssessmentsComponent } from
-  "@components/account-profile/tabs/security-assessments/security-assessments.component";
 import { BeforeYouStartComponent } from "@components/account-profile/tabs/before-you-start/before-you-start.component";
-import { FinancialInformationComponent } from
-  "@components/account-profile/tabs/financial-information/financial-information.component";
 
 import { NgBusyModule } from "ng-busy";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
@@ -154,7 +148,7 @@ import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { EstablishmentWatchWordsService } from "@services/establishment-watch-words.service";
 import {
   ConnectionToNonMedicalStoresComponent
-} from "@components/account-profile/tabs/connection-to-non-medical-stores/connection-to-non-medical-stores.component";
+} from "@components/applications/application/tabs/connection-to-non-medical-stores/connection-to-non-medical-stores.component";
 import { AssociatePageComponent } from "@components/associate-page/associate-page.component";
 import { LicenceRenewalStepsComponent } from
   "@components/licences/licence-renewal-steps/licence-renewal-steps.component";
@@ -365,7 +359,6 @@ import { PermanentChangeToALicenseeLegalEntityReviewComponent } from "@component
     BreadcrumbComponent,
     AccountProfileComponent,
     ConnectionToProducersComponent,
-    CorporateDetailsComponent,
     DashboardComponent,
     SepDashboardComponent,
     DelayedFileUploaderComponent,
@@ -375,7 +368,6 @@ import { PermanentChangeToALicenseeLegalEntityReviewComponent } from "@component
     EditShareholdersComponent,
     FieldComponent,
     FileUploaderComponent,
-    FinancialInformationComponent,
     FormViewerComponent,
     HomeComponent,
     IndividualAssociatesResultsComponent,
@@ -399,7 +391,6 @@ import { PermanentChangeToALicenseeLegalEntityReviewComponent } from "@component
     PrePaymentComponent,
     ProofOfZoningComponent,
     ResultComponent,
-    SecurityAssessmentsComponent,
     SolePropResultsComponent,
     SpdConsentComponent,
     StaticComponent,

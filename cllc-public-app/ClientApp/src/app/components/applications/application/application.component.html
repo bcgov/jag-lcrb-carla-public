@@ -73,7 +73,7 @@
                       A sale area located within the Agricultural Land Reserve must not have ground cover (e.g. paving, gravel pad, concrete, etc.) unless otherwise approved by the Agricultural Land Commission.
                     </li>
                   </ul>
-                 
+
                   As part of this application, you are required to confirm:
                   <br />
                 </section>
@@ -1856,15 +1856,15 @@
                 </app-file-uploader>
               </section>
               <br>
-              
+
              <div>
               <section  *ngIf="application.applicationType.serviceAreas" > <p>Enter the total occupant load as indicated by your local government. This number can be either the total stamped on the floor plan or the sum of occupant loads across all service areas, as listed in the occupant load stamp. </p>
                 <app-field [required]="true"   label="Total occupant load" [valid]="!showValidationMessages || form.get('totalOccupantLoad').valid"  errorMessage="Total occupant load is required.">   <input class="form-control" formControlName="totalOccupantLoad" id="totalOccupantLoad"
                 style="width: 250px;" type="number" min="1"  placeholder="Total occupant load"  (input)="validateInput($event)"  /></app-field>
               </section>
              </div>
-            </div> 
-          
+            </div>
+
           </section>
 
           <!-- Service Area -->
@@ -1883,7 +1883,7 @@
         <div *ngIf="!isOccupantLoadCorrect()">
           <br>
           <p  class="error-text">The sum of occupant loads across all service areas does not match the total occupant load entered in the total occupant load field.</p>
-          
+
           </div>
 
           <div *ngIf="showOccupantLoadCheckBox">
@@ -1955,7 +1955,7 @@
             </div>
           </section>
 
-          
+
           <!-- Capacity Area -->
           <h3 class="blue-header" *ngIf="application.applicationType.capacityArea
              && application?.applicationType?.name != ApplicationTypeNames.TemporaryExtensionOfLicensedAreaLP">
@@ -2120,30 +2120,30 @@
             <div *ngIf="showGroceryStore()">
               <section>
                 <p>
-                  If you selected yes, have the owner of an eligible grocery store complete the 
+                  If you selected yes, have the owner of an eligible grocery store complete the
                   <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/lcrb090_grocery_store_declaration.pdf">
                     Grocery Store Declaration
-                  </a> 
+                  </a>
                   . Upload the completed document.
                 </p>
                 <p>An eligible grocery store must:</p>
                 <ul>
                   <li>
-                    Be primarily engaged in retailing the following types of foods and non-alcoholic beverages: canned, dry and frozen food; fresh fruits and vegetables; fresh and prepared meats, fish and poultry; dairy products; baked products; snack foods; and non-alcoholic beverages; and 
+                    Be primarily engaged in retailing the following types of foods and non-alcoholic beverages: canned, dry and frozen food; fresh fruits and vegetables; fresh and prepared meats, fish and poultry; dairy products; baked products; snack foods; and non-alcoholic beverages; and
                   </li>
                   <li>
                     Have an area of at least 929 square metres (10,000 square feet), including storage.
                   </li>
                 </ul>
                 <p>
-                  To maintain eligibility, the grocery store must continue to meet the conditions above, and the sales revenue derived from the sale of food and non-liquor beverages at the grocery store must: 
+                  To maintain eligibility, the grocery store must continue to meet the conditions above, and the sales revenue derived from the sale of food and non-liquor beverages at the grocery store must:
                 </p>
                 <ul>
                   <li>
                     total at least 70% of the total sales revenue of non-liquor products at the grocery store, and
                   </li>
                   <li>
-                    total more than 50% of the total sales revenue of liquor and non-liquor products at the grocery store. 
+                    total more than 50% of the total sales revenue of liquor and non-liquor products at the grocery store.
                   </li>
                 </ul>
 
@@ -2278,11 +2278,11 @@
                 </tr>
               </table>
               <p class="error-states" *ngIf="showValidationMessages && !isHoursOfSaleValid()">
-                Hours of Sale are required 
+                Hours of Sale are required
               </p>
               <span *ngIf="application?.applicationType?.name === ApplicationTypeNames.ChangeHoursOfService_Outside_Service_Hours ||
                            application?.applicationType?.name === ApplicationTypeNames.ChangeHoursOfService_Lounge_Area ||
-                           application?.applicationType?.name === ApplicationTypeNames.ChangeHoursOfService_Special_Event_Area" > 
+                           application?.applicationType?.name === ApplicationTypeNames.ChangeHoursOfService_Special_Event_Area" >
                 <br>
                 <app-field label="Are you requesting to extend liquor service hours outside of 9am - 4am?" [valid]="true">
                   <mat-button-toggle-group formControlName="requestOutsideServiceHours" aria-label="Font Style">
@@ -2297,7 +2297,7 @@
               <!-- </span> -->
             </div>
           </section>
-          
+
           <!-- Licensed Producer -->
           <div *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
             <h3 class="blue-header">INFORMATION ABOUT THE LICENSED PRODUCER</h3>
@@ -2327,7 +2327,7 @@
             </div>
           </section>
 
-        
+
           <div class="ngtest-ethyl-documents-upload"
                *ngIf="application?.applicationType?.name === 'Ethyl Alcohol Permit'">
             <!-- <hr><br> -->
