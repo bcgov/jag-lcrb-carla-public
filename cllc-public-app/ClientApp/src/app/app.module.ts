@@ -343,6 +343,7 @@ import { PermanentChangeNameLicenseePartnership } from "@shared/components/perma
 import { PermanentChangeLegalEntityReviewTypesOfChangesRequiredComponent } from "@shared/components/permanent-change/permanent-change-legal-entity-review-types-of-changes-required/permanent-change-legal-entity-review-types-of-changes-required.component";
 import { PermanentChangeLegalEntityReviewJobComponent } from "@shared/components/permanent-change/permanent-change-legal-entity-review-job/permanent-change-legal-entity-review-job.component";
 import { PermanentChangeToALicenseeLegalEntityReviewComponent } from "@components/applications/permanent-change-to-a-licensee-legal-entity-review/permanent-change-to-a-licensee-legal-entity-review.component";
+import { ConnectionToOtherLiquorLicencesComponent } from "@components/account-profile/tabs/connection-to-producers/connection-to-other-liquor-licences/connection-to-other-liquor-licences.component";
 
 @NgModule({
   declarations: [
@@ -359,6 +360,7 @@ import { PermanentChangeToALicenseeLegalEntityReviewComponent } from "@component
     BreadcrumbComponent,
     AccountProfileComponent,
     ConnectionToProducersComponent,
+    ConnectionToOtherLiquorLicencesComponent,
     DashboardComponent,
     SepDashboardComponent,
     DelayedFileUploaderComponent,
