@@ -1,7 +1,6 @@
 import { ViewportScroller } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { ControlContainer, FormGroup, FormGroupDirective } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Account } from '@models/account.model';
 import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
 
@@ -27,8 +26,7 @@ export class PermanentChangeLegalEntityReviewJobComponent implements OnInit {
 
   constructor(
     public controlContainer: ControlContainer,
-    private scroller: ViewportScroller,
-    private router: Router
+    private scroller: ViewportScroller
   ) {}
 
   scrollToQuestionsSection() {
