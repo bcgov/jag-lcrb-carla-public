@@ -15,4 +15,5 @@ uploads
 .vscode
 
 *.html
-
+*.css
+*.scss

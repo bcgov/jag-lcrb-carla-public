@@ -397,15 +397,15 @@ export class AccountProfileComponent extends FormBase implements OnInit {
       (this.form.get("businessProfile.physicalAddressPostalCode").value || "").replace(/\s+/g, "")
     );
 
-    if (this.account.isPrivateCorporation()) {
-      this.form.get("businessProfile.bcIncorporationNumber")
-        .setValidators([Validators.pattern("^[A-Za-z][A-Za-z]?[0-9][0-9][0-9][0-9][0-9][0-9][0-9]$")]);
-    } else if (this.account.businessType === "Society") {
-      this.form.get("businessProfile.bcIncorporationNumber")
-        .setValidators([Validators.pattern("^[A-Za-z][A-Za-z]?[0-9][0-9][0-9][0-9][0-9][0-9][0-9]$")]);
-    } else {
-      this.form.get("businessProfile.bcIncorporationNumber").clearValidators();
-    }
+    //LCSD-7412
+    //Simplified vaidators for bcIncorporationNumber
+   // Incorporation Number	|incorporationNumber:	Registry number for Corporations |	Up to 10 alphanumeric characters.
+   
+    if (this.account.isPrivateCorporation() || this.account.businessType === "Society") {
+     this.form.get("businessProfile.bcIncorporationNumber")
+     .setValidators([Validators.pattern("^[A-Za-z0-9]{1,15}$")]);
+  } else {
+    this.form.get("businessProfile.bcIncorporationNumber").clearValidators();
 
     // Transform the accountUrls comma-separated string into an array
     const accountUrlsArray = this.splitAccountURLString(accountUrls);
@@ -417,6 +417,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
         // Add a form control for each account URL
         accountUrlsArrayControl.push(this.fb.control(accountUrl, [this.urlValidator]));
     }
+  }
   }
 
   private loadUser(user: User) {
