@@ -1,4 +1,3 @@
-
 export enum AreaCategory {
   Service = 845280000,
   OutsideArea = 845280001,
@@ -15,4 +14,5 @@ export class ServiceArea {
   isPatio: boolean;
   capacity: string;
   isTemporaryExtensionArea: boolean;
+  endorsementId?: string;
 }
