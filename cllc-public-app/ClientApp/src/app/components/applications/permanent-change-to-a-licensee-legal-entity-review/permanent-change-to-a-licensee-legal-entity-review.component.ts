@@ -22,12 +22,20 @@ import { catchError, filter, mergeMap, takeWhile } from 'rxjs/operators';
 
 export const SharepointNameRegex = /^[^~#%&*{}\\:<>?/+|""]*$/;
 
+/**
+ * A component that displays a form page for a permanent change to a licensee legal entity application.
+ *
+ * @export
+ * @class PermanentChangeToALicenseeLegalEntityReviewComponent
+ * @extends {FormBase}
+ * @implements {OnInit}
+ */
 @Component({
-  selector: 'app-permanent-change-to-a-licensee',
-  templateUrl: './permanent-change-to-a-licensee.component.html',
-  styleUrls: ['./permanent-change-to-a-licensee.component.scss']
+  selector: 'app-permanent-change-to-a-licensee-legal-entity-review',
+  templateUrl: './permanent-change-to-a-licensee-legal-entity-review.component.html',
+  styleUrls: ['./permanent-change-to-a-licensee-legal-entity-review.component.scss']
 })
-export class PermanentChangeToALicenseeComponent extends FormBase implements OnInit {
+export class PermanentChangeToALicenseeLegalEntityReviewComponent extends FormBase implements OnInit {
   faQuestionCircle = faQuestionCircle;
   faIdCard = faIdCard;
   application: Application;

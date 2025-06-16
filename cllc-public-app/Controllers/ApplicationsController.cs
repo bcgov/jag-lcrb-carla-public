@@ -1052,7 +1052,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return result;
         }
 
-        private MicrosoftDynamicsCRMadoxioApplication GetPermanentChangeApplication(UserSettings userSettings, string applicationId)
+        /// <summary>
+        /// Fetches a "Permanent Change to a Licensee" application.
+        ///
+        /// Fetches the application using the logged in user's account ID.
+        /// If an "applicationId" is provided, will additionally filter results using that specific application id.
+        ///
+        /// If no application is found, it will create a new "Permanent Change to a Licensee" application and return it.
+        /// </summary>
+        /// <param name="userSettings"></param>
+        /// <param name="applicationId"></param> Filter results by a specific application ID. (Optional)
+        /// <returns></returns>
+        private MicrosoftDynamicsCRMadoxioApplication GetPermanentChangeApplication(UserSettings userSettings, string applicationId = null)
         {
             MicrosoftDynamicsCRMadoxioApplication result = null;
             var applicationType = _dynamicsClient.GetApplicationTypeByName("Permanent Change to a Licensee");
@@ -1137,8 +1148,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             return result;
         }
+
+        /// <summary>
+        /// Fetches a "Permanent Change to a Licensee" application.
+        ///
+        /// Fetches the application using the logged in user's account ID.
+        /// If an "applicationId" is provided, will additionally filter results using that specific application id.
+        ///
+        /// If no application is found, it will create a new "Permanent Change to a Licensee" application and return it.
+        /// </summary>
+        /// <param name="applicationId"></param> Filter results by a specific application ID. (Optional)
+        /// <returns></returns> <summary>
         [HttpGet("permanent-change-to-licensee-data")]
-        public async Task<IActionResult> GetPermanetChangesToLicenseeData([FromQuery] string applicationId)
+        public async Task<IActionResult> GetPermanetChangesToLicenseeData([FromQuery] string applicationId = null)
         {
             // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);

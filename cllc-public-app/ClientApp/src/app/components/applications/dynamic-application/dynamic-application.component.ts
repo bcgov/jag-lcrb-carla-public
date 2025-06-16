@@ -22,8 +22,6 @@ import { EstablishmentWatchWordsService } from "@services/establishment-watch-wo
 import { KeyValue } from "@angular/common";
 import { FeatureFlagService } from "@services/feature-flag.service";
 import { FileUploaderComponent } from "@shared/components/file-uploader/file-uploader.component";
-import { ConnectionToNonMedicalStoresComponent } from
-  "@components/account-profile/tabs/connection-to-non-medical-stores/connection-to-non-medical-stores.component";
 import { UPLOAD_FILES_MODE } from "@components/licences/licences.component";
 import { ApplicationCancellationDialogComponent } from
   "@components/dashboard/applications-and-licences/applications-and-licences.component";
@@ -71,8 +69,6 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
   supportingDocuments: FileUploaderComponent;
   @ViewChild("accountCompleteness")
   accountCompleteness: AccountCompletenessComponent;
-  @ViewChild(ConnectionToNonMedicalStoresComponent)
-  connectionsToProducers: ConnectionToNonMedicalStoresComponent;
   form: FormGroup;
   savedFormData: any;
   applicationId: string;
@@ -200,7 +196,7 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
     this.dynamicsDataService.getRecord("indigenousnations", "")
       .subscribe(data => this.indigenousNations = data);
 
-    // get the application form 
+    // get the application form
     this.dynamicsFormDataService.getDynamicsForm("df0e3410-b8d4-46f8-bcef-1b20a01a66d7") // catering form for demo
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(value => this.dynamicsForm = value);
@@ -293,9 +289,8 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
   }
 
   canDeactivate(): Observable<boolean> {
-    const connectionsDidntChang = !(this.connectionsToProducers && this.connectionsToProducers.formHasChanged());
     const formDidntChange = JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value);
-    if (connectionsDidntChang && formDidntChange) {
+    if (formDidntChange) {
       return of(true);
     } else {
       const subj = new Subject<boolean>();

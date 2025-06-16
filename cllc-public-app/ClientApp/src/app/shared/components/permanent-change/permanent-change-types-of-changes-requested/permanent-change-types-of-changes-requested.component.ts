@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ControlContainer, FormGroup, FormGroupDirective } from '@angular/forms';
+import { PermanentChangeTypesOfChangesOption } from '@app/constants/permanent-change-types-of-changes';
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { Account } from '@models/account.model';
 
@@ -18,7 +19,7 @@ import { Account } from '@models/account.model';
 })
 export class PermanentChangeTypesOfChangesRequestedComponent implements OnInit {
   @Input() account: Account;
-  @Input() changeList: any[];
+  @Input() changeList: PermanentChangeTypesOfChangesOption[];
 
   faQuestionCircle = faQuestionCircle;
 
