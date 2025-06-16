@@ -49,9 +49,18 @@ fi
 
 if [ -n "${PHASE2}" ]; then
 mkdir /opt/app-root/dist
-mkdir /opt/app-root/dist/lcrb
 
-npm run build -- --configuration production --base-href /lcrb/ --outputPath=/opt/app-root/src/dist/lcrb
+# Get the base href value from the environment variable or use a default
+BASE_HREF_VALUE="${BASE_HREF:-/lcrb}"  # Fallback to '/lcrb' if not set
+CLEAN_BASE_HREF_VALUE="${BASE_HREF_VALUE#/}"  # Remove leading slash for directory name
+
+# Create output directory
+mkdir -p "/opt/app-root/dist/$CLEAN_BASE_HREF_VALUE"
+
+# Run Angular build
+echo "Building Angular app with base href: $BASE_HREF_VALUE"
+npm run build -- --configuration production --base-href "$BASE_HREF_VALUE/" --outputPath="/opt/app-root/src/dist/$CLEAN_BASE_HREF_VALUE"
+
 # fix permissions
 fix-permissions /opt/app-root/src/dist
 fi
