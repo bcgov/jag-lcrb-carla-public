@@ -1,421 +1,595 @@
-<div class="form-wrapper" style="position: relative;">
-<div [ngBusy]="[busy, busy2]"></div>
-<div class="row" [formGroup]="form">
-<div class="col-lg-8 col-sm-12">
-<div [formGroup]="form">
-<div *ngIf="dataLoaded || true">
-<section *ngIf="!applicationId">
-  <h1>
-    Account Profile
-  </h1>
-  <p>
-    Please complete the account profile below. The information will only be saved once you click the Save
-    button at the end of the page.
-  </p>
-</section>
-<section *ngIf="applicationId">
-  <h1>
-    Please Review Your Account Profile
-  </h1>
-  <p>
-    Please review the account profile below. If any information has changed, you can update it before starting
-    the application.
-  </p>
-</section>
+<div class="form-wrapper" style="position: relative">
+  <div [ngBusy]="[busy, busy2]"></div>
+  <div class="row" [formGroup]="form">
+    <div class="col-lg-8 col-sm-12">
+      <div [formGroup]="form">
+        <div *ngIf="dataLoaded || true">
+          <section *ngIf="!applicationId">
+            <h1>Account Profile</h1>
+            <p>
+              Please complete the account profile below. The information will only be saved once you click the Save
+              button at the end of the page.
+            </p>
+          </section>
+          <section *ngIf="applicationId">
+            <h1>Please Review Your Account Profile</h1>
+            <p>
+              Please review the account profile below. If any information has changed, you can update it before starting
+              the application.
+            </p>
+          </section>
 
-<h3 class="blue-header" *ngIf="getBusinessTypeName() !== 'Indigenous Nation'">
-  {{getBusinessTypeName().toLocaleUpperCase()}} CONTACT
-</h3>
-<h3 class="blue-header" *ngIf="getBusinessTypeName() === 'Indigenous Nation'">AUTHORIZED PERSON</h3>
-<div formGroupName="contact" class="padded-section content-bottom">
-  <i>
-    The name and contact information of the person the LCRB should contact for ongoing communication. The contact
-    must be authorized to represent the applicant and have the authority to bind the applicant.
-  </i><br>
+          <h3 class="blue-header" *ngIf="getBusinessTypeName() !== 'Indigenous Nation'">
+            {{ getBusinessTypeName().toLocaleUpperCase() }} CONTACT
+          </h3>
+          <h3 class="blue-header" *ngIf="getBusinessTypeName() === 'Indigenous Nation'">AUTHORIZED PERSON</h3>
+          <div formGroupName="contact" class="padded-section content-bottom">
+            <i>
+              The name and contact information of the person the LCRB should contact for ongoing communication. The
+              contact must be authorized to represent the applicant and have the authority to bind the applicant.
+            </i>
+            <br />
 
-  <app-field label="First Name" [required]="true"
-             [valid]="isValidOrNotTouched('contact.firstname')"
-             errorMessage="Please enter the business contact's first name">
-    <input class="form-control" style="width: 350px;" type="text" formControlName="firstname" readonly>
-  </app-field>
+            <app-field
+              label="First Name"
+              [required]="true"
+              [valid]="isValidOrNotTouched('contact.firstname')"
+              errorMessage="Please enter the business contact's first name">
+              <input class="form-control" style="width: 350px" type="text" formControlName="firstname" readonly />
+            </app-field>
 
-  <app-field label="Last Name" [required]="true"
-             [valid]="isValidOrNotTouched('contact.lastname')"
-             errorMessage="Please enter the business contact's last name">
-    <input class="form-control" style="width: 350px;" type="text" formControlName="lastname" readonly>
-  </app-field>
+            <app-field
+              label="Last Name"
+              [required]="true"
+              [valid]="isValidOrNotTouched('contact.lastname')"
+              errorMessage="Please enter the business contact's last name">
+              <input class="form-control" style="width: 350px" type="text" formControlName="lastname" readonly />
+            </app-field>
 
-  <app-field label="Title/Position" [required]="false" [valid]="true">
-    <input class="form-control" style="width: 350px;" type="text" formControlName="jobTitle">
-  </app-field>
+            <app-field label="Title/Position" [required]="false" [valid]="true">
+              <input class="form-control" style="width: 350px" type="text" formControlName="jobTitle" />
+            </app-field>
 
-  <app-field label="Phone Number" [required]="true"
-             [valid]="isValidOrNotTouched('contact.telephone1')"
-             errorMessage="Please enter the business contact's 10-digit phone number">
-    <input class="form-control" style="width: 250px;" mask="(000) 000-0000"
-           type="text" formControlName="telephone1">
-  </app-field>
+            <app-field
+              label="Phone Number"
+              [required]="true"
+              [valid]="isValidOrNotTouched('contact.telephone1')"
+              errorMessage="Please enter the business contact's 10-digit phone number">
+              <input
+                class="form-control"
+                style="width: 250px"
+                mask="(000) 000-0000"
+                type="text"
+                formControlName="telephone1" />
+            </app-field>
 
-  <app-field label="Email" [required]="true"
-             [valid]="isValidOrNotTouched('contact.emailaddress1')"
-             errorMessage="Please enter the business contact's email address">
-    <input class="form-control" style="width: 350px;" type="text" formControlName="emailaddress1"
-           (blur)="trimValue(form.get('contact.emailaddress1'))">
-  </app-field>
-</div>
+            <app-field
+              label="Email"
+              [required]="true"
+              [valid]="isValidOrNotTouched('contact.emailaddress1')"
+              errorMessage="Please enter the business contact's email address">
+              <input
+                class="form-control"
+                style="width: 350px"
+                type="text"
+                formControlName="emailaddress1"
+                (blur)="trimValue(form.get('contact.emailaddress1'))" />
+            </app-field>
+          </div>
 
-<h3 class="blue-header">{{getBusinessTypeName().toLocaleUpperCase()}} DETAILS</h3>
+          <h3 class="blue-header">{{ getBusinessTypeName().toLocaleUpperCase() }} DETAILS</h3>
 
-<div formGroupName="businessProfile" class="padded-section content-bottom">
-  <app-field [label]="legalNameLabel()">
-    <input class="form-control" style="max-width: 450px; min-width: 250px;" type="text" disabled
-           [value]="account?.name || ''">
-  </app-field>
-  
-  <div formArrayName="accountUrls" class="mb-2 account-urls">
-    <label>Account URL(s)</label>
+          <div formGroupName="businessProfile" class="padded-section content-bottom">
+            <app-field [label]="legalNameLabel()">
+              <input
+                class="form-control"
+                style="max-width: 450px; min-width: 250px"
+                type="text"
+                disabled
+                [value]="account?.name || ''" />
+            </app-field>
 
-    <div *ngFor="let accountUrl of accountUrls.controls; let i = index">
-        <app-field 
-            [required]="false" 
-            [valid]="accountUrl.valid || !accountUrl.touched"
-            errorMessage="Please enter a valid Account URL (i.e. www.gov.bc.ca)">
+            <div formArrayName="accountUrls" class="mb-2 account-urls">
+              <label>Account URL(s)</label>
 
-            <input class="form-control" style="width: 350px;" type="url" [formControl]="accountUrl">
+              <div *ngFor="let accountUrl of accountUrls.controls; let i = index">
+                <app-field
+                  [required]="false"
+                  [valid]="accountUrl.valid || !accountUrl.touched"
+                  errorMessage="Please enter a valid Account URL (i.e. www.gov.bc.ca)">
+                  <input class="form-control" style="width: 350px" type="url" [formControl]="accountUrl" />
 
-            <button *ngIf="i > 0" (click)="removeAccountUrl(i)" type="button" class="btn btn-md btn-icon" aria-label="Remove">    
-                <fa-icon [icon]="faTrash" style="margin-right: 10px"></fa-icon>
+                  <button
+                    *ngIf="i > 0"
+                    (click)="removeAccountUrl(i)"
+                    type="button"
+                    class="btn btn-md btn-icon"
+                    aria-label="Remove">
+                    <fa-icon [icon]="faTrash" style="margin-right: 10px"></fa-icon>
+                  </button>
+                </app-field>
+              </div>
+
+              <button (click)="addAccountUrl()" type="button" class="btn btn-md btn-icon" aria-label="Add">
+                <fa-icon [icon]="faPlus" style="margin-right: 10px"></fa-icon>
+                <span>Add Another URL</span>
+              </button>
+            </div>
+
+            <app-field
+              label="Business Number (9 digit number from the Canada Revenue Agency)"
+              [required]="true"
+              [valid]="
+                form.get('businessProfile.businessNumber').valid || !form.get('businessProfile.businessNumber').touched
+              "
+              errorMessage="Please enter the business number (9 digits)"
+              *ngIf="['Police'].indexOf(getBusinessTypeName()) == -1">
+              <input
+                class="form-control"
+                disabled
+                readonly
+                style="width: 150px"
+                maxlength="9"
+                type="text"
+                formControlName="businessNumber"
+                (keydown)="rejectIfNotDigitOrBackSpace($event)" />
+            </app-field>
+
+            <app-field
+              label="Business Type"
+              [required]="true"
+              *ngIf="getBusinessTypeName() !== 'Indigenous Nation'"
+              [valid]="
+                form.get('businessProfile.businessType').valid || !form.get('businessProfile.businessType').touched
+              "
+              errorMessage="Please select a business type from the dropdown list">
+              <select
+                class="form-control"
+                disabled
+                readonly
+                style="width: 250px"
+                [value]="account?.businessType"
+                formControlName="businessType">
+                <option *ngFor="let item of businessTypes" [value]="item.value">{{ item.name }}</option>
+              </select>
+            </app-field>
+
+            <!-- Incorporation/ BC Registration Number Box-->
+            <section
+              *ngIf="
+                !account?.isOtherBusinessType() &&
+                [
+                  'Partnership',
+                  'Sole Proprietorship',
+                  'University',
+                  'Church',
+                  'Indigenous Nation',
+                  'Local Government',
+                  'Police'
+                ].indexOf(getBusinessTypeName()) == -1
+              ">
+              <div [ngClass]="{ 'has-error': false }">
+                <label
+                  *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1 || account?.isOtherBusinessType()"
+                  for="">
+                  Incorporation Number
+                </label>
+                <label *ngIf="getBusinessTypeName() == 'Society'" for="">B.C. Society Incorporation Number</label>
+                <br />
+                <input
+                  class="form-control"
+                  disabled
+                  readonly
+                  style="width: 250px"
+                  type="text"
+                  id="bcIncorporationNumber"
+                  formControlName="bcIncorporationNumber" />
+                <div
+                  *ngIf="
+                    !form.get('businessProfile.bcIncorporationNumber').valid &&
+                    form.get('businessProfile.bcIncorporationNumber').touched
+                  "
+                  class="alert alert-danger"
+                  style="width: 250px">
+                  <span *ngIf="account?.isPrivateCorporation()">Please use this format: 'BC1234567'</span>
+                  <span *ngIf="account?.businessType === 'Society'">Please use this format: 'S1234567'</span>
+                </div>
+              </div>
+            </section>
+
+            <p></p>
+
+            <!-- Incorporation Date -->
+            <section
+              *ngIf="
+                [
+                  'Partnership',
+                  'Sole Proprietorship',
+                  'University',
+                  'Church',
+                  'Local Government',
+                  'Indigenous Nation',
+                  'Police'
+                ].indexOf(getBusinessTypeName()) == -1
+              ">
+              <div [ngClass]="{ 'has-error': false }">
+                <label>Date of Incorporation in B.C.</label>
+                <br />
+                <input
+                  type="text"
+                  formControlName="dateOfIncorporationInBC"
+                  style="background-color: #fff; width: 200px"
+                  placeholder="yyyy-mm-dd"
+                  class="form-control"
+                  [max]="maxDate"
+                  [matDatepicker]="picker"
+                  (focus)="picker.open()"
+                  (click)="picker.open()" />
+                <mat-datepicker #picker></mat-datepicker>
+              </div>
+            </section>
+          </div>
+
+          <h3 class="blue-header" *ngIf="getBusinessTypeName() !== 'Indigenous Nation'">
+            {{ getBusinessTypeName().toLocaleUpperCase() }} ADDRESSES
+          </h3>
+          <h3 class="blue-header" *ngIf="getBusinessTypeName() === 'Indigenous Nation'">CONTACT ADDRESSES</h3>
+          <div formGroupName="businessProfile" class="padded-section content-bottom">
+            <p></p>
+            <h3>Physical Address</h3>
+            <p *ngIf="application?.applicationType?.name === 'Ethyl Alcohol Permit'">
+              The physical address must be the address where the ethyl will be stored.
+            </p>
+            <div class="row">
+              <app-field
+                class="col-md-6 col-xs-12"
+                label="Street Address 1"
+                [required]="true"
+                [valid]="
+                  form.get('businessProfile.physicalAddressStreet').valid ||
+                  !form.get('businessProfile.physicalAddressStreet').touched
+                "
+                errorMessage="Please enter the street address"
+                [isFullWidth]="true">
+                <input class="form-control" type="text" formControlName="physicalAddressStreet" />
+              </app-field>
+              <app-field class="col-md-6 col-xs-12" label="Street Address 2" [isFullWidth]="true">
+                <input class="form-control" type="text" formControlName="physicalAddressStreet2" />
+              </app-field>
+              <app-field
+                class="col-md-6 col-xs-12"
+                label="City"
+                [required]="true"
+                [valid]="
+                  form.get('businessProfile.physicalAddressCity').valid ||
+                  !form.get('businessProfile.physicalAddressCity').touched
+                "
+                errorMessage="Please enter the city"
+                [isFullWidth]="true">
+                <input class="form-control" type="text" formControlName="physicalAddressCity" />
+              </app-field>
+              <section class="col-md-3 col-xs-12">
+                <app-field label="Province" [isFullWidth]="true" [required]="true">
+                  <select class="form-control" formControlName="physicalAddressProvince">
+                    <option value="British Columbia">British Columbia</option>
+                    <option value="Ontario">Ontario</option>
+                    <option value="Alberta">Alberta</option>
+                    <option value="Quebec">Quebec</option>
+                    <option value="Manitoba">Manitoba</option>
+                    <option value="Nova Scotia">Nova Scotia</option>
+                    <option value="New Brunswick">New Brunswick</option>
+                    <option value="Newfoundland and Labrador">Newfoundland and Labrador</option>
+                    <option value="Saskatchewan">Saskatchewan</option>
+                    <option value="Prince Edward Island">Prince Edward Island</option>
+                    <option value="Northwest Territories">Northwest Territories</option>
+                    <option value="Yukon">Yukon</option>
+                    <option value="Nunavut">Nunavut</option>
+                  </select>
+                </app-field>
+              </section>
+              <section class="col-md-3 col-xs-12">
+                <app-field
+                  label="Postal Code"
+                  [required]="true"
+                  (blur)="trimValue(form.get('businessProfile.physicalAddressPostalCode'))"
+                  [valid]="
+                    form.get('businessProfile.physicalAddressPostalCode').valid ||
+                    !form.get('businessProfile.physicalAddressPostalCode').touched
+                  "
+                  errorMessage="This is required. The postal code should be in one of the following formats: X1X1X1 (no spaces)"
+                  [isFullWidth]="true">
+                  <input class="form-control" type="text" formControlName="physicalAddressPostalCode" />
+                </app-field>
+              </section>
+              <app-field class="col-md-6 col-xs-12" [required]="true" [isFullWidth]="true" label="Country">
+                <input
+                  class="form-control"
+                  type="text"
+                  formControlName="physicalAddressCountry"
+                  value="Canada"
+                  readonly />
+              </app-field>
+            </div>
+            <p></p>
+            <div>
+              <hr />
+              <h3>Mailing Address</h3>
+              <section>
+                <mat-checkbox formControlName="_mailingSameAsPhysicalAddress">Same as physical address</mat-checkbox>
+              </section>
+              <div class="row">
+                <app-field
+                  class="col-md-6 col-xs-12"
+                  label="PO Box or Street Address 1"
+                  errorMessage="Please enter the street address"
+                  [valid]="
+                    form.get('businessProfile.mailingAddressStreet').valid ||
+                    !form.get('businessProfile.mailingAddressStreet').touched
+                  "
+                  [required]="true"
+                  [isFullWidth]="true">
+                  <input type="text" formControlName="mailingAddressStreet" class="form-control" />
+                </app-field>
+                <app-field
+                  class="col-md-6 col-xs-12"
+                  label="PO Box or Street Address 2"
+                  [required]="false"
+                  [isFullWidth]="true">
+                  <input type="text" formControlName="mailingAddressStreet2" class="form-control" />
+                </app-field>
+                <app-field
+                  class="col-md-6 col-xs-12"
+                  label="City"
+                  errorMessage="Please enter the city"
+                  [valid]="
+                    form.get('businessProfile.mailingAddressCity').valid ||
+                    !form.get('businessProfile.mailingAddressCity').touched
+                  "
+                  [required]="true"
+                  [isFullWidth]="true">
+                  <input type="text" formControlName="mailingAddressCity" class="form-control" />
+                </app-field>
+                <section class="col-md-3 col-xs-12">
+                  <app-field
+                    label="Province/State"
+                    [valid]="
+                      form.get('businessProfile.mailingAddressProvince').valid ||
+                      !form.get('businessProfile.mailingAddressProvince').touched
+                    "
+                    [required]="true"
+                    [isFullWidth]="true">
+                    <select class="form-control" formControlName="mailingAddressProvince">
+                      <option value="British Columbia">British Columbia</option>
+                      <option value="Ontario">Ontario</option>
+                      <option value="Alberta">Alberta</option>
+                      <option value="Quebec">Quebec</option>
+                      <option value="Manitoba">Manitoba</option>
+                      <option value="Nova Scotia">Nova Scotia</option>
+                      <option value="New Brunswick">New Brunswick</option>
+                      <option value="Newfoundland and Labrador">Newfoundland and Labrador</option>
+                      <option value="Saskatchewan">Saskatchewan</option>
+                      <option value="Prince Edward Island">Prince Edward Island</option>
+                      <option value="Northwest Territories">Northwest Territories</option>
+                      <option value="Yukon">Yukon</option>
+                      <option value="Nunavut">Nunavut</option>
+                    </select>
+                  </app-field>
+                </section>
+                <section class="col-md-3 col-xs-12">
+                  <app-field
+                    label="Postal /Zip Code"
+                    errorMessage="This is required. The postal / zip code should be in one of the following formats: X1X1X1,
+                    12345, 12345-1234"
+                    (blur)="trimValue(form.get('businessProfile.mailingAddressPostalCode'))"
+                    [valid]="
+                      form.get('businessProfile.mailingAddressPostalCode').valid ||
+                      !form.get('businessProfile.mailingAddressPostalCode').touched
+                    "
+                    [required]="true"
+                    [isFullWidth]="true">
+                    <input type="text" formControlName="mailingAddressPostalCode" class="form-control" />
+                  </app-field>
+                </section>
+                <app-field
+                  class="col-md-6 col-xs-12"
+                  label="Country"
+                  errorMessage="Please enter country"
+                  [valid]="
+                    form.get('businessProfile.mailingAddressCountry').valid ||
+                    !form.get('businessProfile.mailingAddressCountry').touched
+                  "
+                  [required]="true"
+                  [isFullWidth]="true">
+                  <input type="text" formControlName="mailingAddressCountry" class="form-control" readonly />
+                </app-field>
+              </div>
+            </div>
+
+            <hr />
+
+            <app-field
+              label="Business Phone Number"
+              [required]="true"
+              [valid]="
+                form.get('businessProfile.contactPhone').valid || !form.get('businessProfile.contactPhone').touched
+              "
+              errorMessage="Please enter the 10-digit business phone number, without including any spaces">
+              <input
+                class="form-control"
+                style="width: 250px"
+                mask="(000) 000-0000"
+                type="text"
+                formControlName="contactPhone" />
+            </app-field>
+
+            <app-field
+              label="Business Email"
+              [required]="true"
+              [valid]="
+                form.get('businessProfile.contactEmail').valid || !form.get('businessProfile.contactEmail').touched
+              "
+              errorMessage="Please enter a valid email address">
+              <input
+                class="form-control"
+                style="width: 350px"
+                type="text"
+                formControlName="contactEmail"
+                (blur)="trimValue(form.get('businessProfile.contactEmail'))" />
+            </app-field>
+            <p *ngIf="getBusinessTypeName() == 'Local Government'">
+              <em>This will be the primary email used for communication from LCRB.</em>
+            </p>
+
+            <app-field
+              *ngIf="getBusinessTypeName() === 'Indigenous Nation' || getBusinessTypeName() == 'Local Government'"
+              label="Liquor Policy Information Link"
+              [required]="true"
+              [valid]="form.get('businessProfile.websiteUrl').valid || !form.get('businessProfile.websiteUrl').touched"
+              errorMessage="Please enter a valid website address">
+              <input
+                class="form-control"
+                style="width: 350px"
+                type="text"
+                formControlName="websiteUrl"
+                (blur)="trimValue(form.get('businessProfile.websiteUrl'))" />
+            </app-field>
+          </div>
+
+          <div
+            *ngIf="
+              application?.applicationType?.name !== 'Ethyl Alcohol Permit' &&
+              saveFormData?.businessProfile?.id &&
+              ['Police'].indexOf(getBusinessTypeName()) == -1
+            ">
+            <app-connection-to-producers
+              *ngIf="account?.tiedHouse"
+              [tiedHouse]="account?.tiedHouse"
+              [account]="account"
+              [applicationTypeName]="application?.applicationType?.name"
+              (value)="tiedHouseFormData = $event"></app-connection-to-producers>
+          </div>
+
+          <div *ngIf="!form.valid && form.touched" class="error-summary mt-3">
+            <div *ngIf="!validationMessages?.length">
+              <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px"></fa-icon>
+              <span>Some required fields have not been completed</span>
+            </div>
+            <div *ngFor="let message of validationMessages">
+              <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px"></fa-icon>
+              <span>{{ message }}</span>
+            </div>
+          </div>
+          <section style="position: relative" class="py-4 button-row">
+            <div [ngBusy]="[busy3]"></div>
+            <button color="primary" mat-raised-button (click)="gotoReview()" class="save-cont" id="continueToApp">
+              <span *ngIf="!applicationId && !useInStepperMode">SAVE & CONTINUE</span>
+              <span *ngIf="applicationId && !useInStepperMode">CONTINUE TO APPLICATION</span>
+              <span *ngIf="useInStepperMode">CONTINUE TO ORGANIZATION REVIEW</span>
+              &nbsp;
+              <fa-icon [icon]="faChevronRight" class="mr-0"></fa-icon>
             </button>
-        </app-field>
-    </div>
-    
-    <button (click)="addAccountUrl()" type="button" class="btn btn-md btn-icon" aria-label="Add">    
-        <fa-icon [icon]="faPlus" style="margin-right: 10px"></fa-icon>
-        <span>Add Another URL</span>
-    </button>
-  </div>
-
-  <app-field label="Business Number (9 digit number from the Canada Revenue Agency)" [required]="true"
-             [valid]="form.get('businessProfile.businessNumber').valid || !form.get('businessProfile.businessNumber').touched"
-             errorMessage="Please enter the business number (9 digits)" *ngIf="['Police'].indexOf(getBusinessTypeName()) == -1">
-    <input class="form-control" disabled readonly style="width: 150px;" maxlength="9" type="text"
-           formControlName="businessNumber" (keydown)="rejectIfNotDigitOrBackSpace($event)">
-  </app-field>
-
-  <app-field label="Business Type" [required]="true" *ngIf="getBusinessTypeName() !== 'Indigenous Nation'"
-             [valid]="form.get('businessProfile.businessType').valid || !form.get('businessProfile.businessType').touched"
-             errorMessage="Please select a business type from the dropdown list">
-    <select class="form-control" disabled readonly style="width: 250px;" [value]="account?.businessType" formControlName="businessType">
-      <option *ngFor="let item of businessTypes" [value]="item.value">{{item.name}}</option>
-    </select> 
-  </app-field>
-
-  <!-- Incorporation/ BC Registration Number Box-->
-  <section
-    *ngIf="!account?.isOtherBusinessType() &&  ['Partnership', 'Sole Proprietorship', 'University', 'Church', 'Indigenous Nation', 'Local Government', 'Police'].indexOf(getBusinessTypeName()) == -1">
-    <div [ngClass]="{'has-error': false}">
-      <label *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1 || account?.isOtherBusinessType()" for="">
-        Incorporation
-        Number
-      </label>
-      <label *ngIf="getBusinessTypeName() == 'Society'" for="">
-        B.C. Society
-        Incorporation Number
-      </label>
-      <br/>
-      <input class="form-control" disabled readonly style="width: 250px;" type="text" id="bcIncorporationNumber"
-             formControlName="bcIncorporationNumber">
-      <div
-        *ngIf="!form.get('businessProfile.bcIncorporationNumber').valid && form.get('businessProfile.bcIncorporationNumber').touched"
-        class="alert alert-danger" style="width: 250px;">
-        <span *ngIf="account?.isPrivateCorporation()">Please use this format: 'BC1234567'</span>
-        <span *ngIf="account?.businessType === 'Society'">Please use this format: 'S1234567'</span>
-      </div>
-    </div>
-  </section>
-
-  <p></p>
-
-  <!-- Incorporation Date -->
-  <section
-    *ngIf="['Partnership', 'Sole Proprietorship', 'University', 'Church', 'Local Government', 'Indigenous Nation', 'Police'].indexOf(getBusinessTypeName()) == -1">
-    <div [ngClass]="{'has-error': false}">
-      <label >Date of Incorporation in B.C.
-      </label>
-      <br>
-      <input type="text" formControlName="dateOfIncorporationInBC"
-             style="background-color: #fff; width: 200px;" placeholder="yyyy-mm-dd" class="form-control"
-             [max]="maxDate" [matDatepicker]="picker" (focus)="picker.open()" (click)="picker.open()">
-      <mat-datepicker #picker></mat-datepicker>
-      <!-- <div *ngIf="this.isFieldError('businessProfile.dateOfIncorporationInBC')" class="alert alert-danger" style="width: 250px;">
-        <div *ngIf="form.controls['businessProfile.dateOfIncorporationInBC'].hasError('required') ">
-          This is required
+            <button class="btn btn-link btn-cancel" routerLink="/dashboard">
+              <fa-icon [icon]="faTrash"></fa-icon>
+              CANCEL
+            </button>
+          </section>
         </div>
-      </div> -->
-    </div>
-  </section>
-</div>
-
-<h3 class="blue-header" *ngIf="getBusinessTypeName() !== 'Indigenous Nation'">
-  {{getBusinessTypeName().toLocaleUpperCase()}} ADDRESSES
-</h3>
-<h3 class="blue-header" *ngIf="getBusinessTypeName() === 'Indigenous Nation'">CONTACT ADDRESSES</h3>
-<div formGroupName="businessProfile" class="padded-section content-bottom">
-  <p></p>
-  <h3>Physical Address</h3>
-  <p *ngIf="application?.applicationType?.name === 'Ethyl Alcohol Permit'">
-    The physical address must be the address where the ethyl will be stored.
-  </p>
-  <div class="row">
-    <app-field class="col-md-6 col-xs-12" label="Street Address 1" [required]="true"
-               [valid]="form.get('businessProfile.physicalAddressStreet').valid || !form.get('businessProfile.physicalAddressStreet').touched"
-               errorMessage="Please enter the street address" [isFullWidth]="true">
-      <input class="form-control" type="text" formControlName="physicalAddressStreet">
-    </app-field>
-    <app-field class="col-md-6 col-xs-12" label="Street Address 2" [isFullWidth]="true">
-      <input class="form-control" type="text" formControlName="physicalAddressStreet2">
-    </app-field>
-    <app-field class="col-md-6 col-xs-12" label="City" [required]="true"
-               [valid]="form.get('businessProfile.physicalAddressCity').valid || !form.get('businessProfile.physicalAddressCity').touched"
-               errorMessage="Please enter the city" [isFullWidth]="true">
-      <input class="form-control" type="text" formControlName="physicalAddressCity">
-    </app-field>
-    <section class="col-md-3 col-xs-12">
-      <app-field label="Province" [isFullWidth]="true" [required]="true">
-        <select class="form-control" formControlName="physicalAddressProvince">
-          <option value="British Columbia">British Columbia</option>
-          <option value="Ontario">Ontario</option>
-          <option value="Alberta">Alberta</option>
-          <option value="Quebec">Quebec</option>
-          <option value="Manitoba">Manitoba</option>
-          <option value="Nova Scotia">Nova Scotia</option>
-          <option value="New Brunswick">New Brunswick</option>
-          <option value="Newfoundland and Labrador">Newfoundland and Labrador</option>
-          <option value="Saskatchewan">Saskatchewan</option>
-          <option value="Prince Edward Island">Prince Edward Island</option>
-          <option value="Northwest Territories">Northwest Territories</option>
-          <option value="Yukon">Yukon</option>
-          <option value="Nunavut">Nunavut</option>
-        </select>
-      </app-field>
-    </section>
-    <section class="col-md-3 col-xs-12">
-      <app-field label="Postal Code" [required]="true"
-                 (blur)="trimValue(form.get('businessProfile.physicalAddressPostalCode'))"
-                 [valid]="form.get('businessProfile.physicalAddressPostalCode').valid || !form.get('businessProfile.physicalAddressPostalCode').touched"
-                 errorMessage="This is required. The postal code should be in one of the following formats: X1X1X1 (no spaces)"
-                 [isFullWidth]="true">
-        <input class="form-control" type="text" formControlName="physicalAddressPostalCode">
-      </app-field>
-    </section>
-    <app-field class="col-md-6 col-xs-12" [required]="true" [isFullWidth]="true" label="Country">
-      <input class="form-control" type="text" formControlName="physicalAddressCountry" value="Canada" readonly>
-    </app-field>
-  </div>
-  <p></p>
-  <div>
-    <hr>
-    <h3>Mailing Address</h3>
-    <section>
-      <mat-checkbox formControlName="_mailingSameAsPhysicalAddress">Same as physical address</mat-checkbox>
-    </section>
-    <div class="row">
-      <app-field class="col-md-6 col-xs-12" label="PO Box or Street Address 1"
-                 errorMessage="Please enter the street address"
-                 [valid]="form.get('businessProfile.mailingAddressStreet').valid || !form.get('businessProfile.mailingAddressStreet').touched"
-                 [required]="true" [isFullWidth]="true">
-        <input type="text" formControlName="mailingAddressStreet" class="form-control">
-      </app-field>
-      <app-field class="col-md-6 col-xs-12" label="PO Box or Street Address 2" [required]="false"
-                 [isFullWidth]="true">
-        <input type="text" formControlName="mailingAddressStreet2" class="form-control">
-      </app-field>
-      <app-field class="col-md-6 col-xs-12" label="City" errorMessage="Please enter the city"
-                 [valid]="form.get('businessProfile.mailingAddressCity').valid || !form.get('businessProfile.mailingAddressCity').touched"
-                 [required]="true" [isFullWidth]="true">
-        <input type="text" formControlName="mailingAddressCity" class="form-control">
-      </app-field>
-      <section class="col-md-3 col-xs-12">
-        <app-field label="Province/State"
-                   [valid]="form.get('businessProfile.mailingAddressProvince').valid || !form.get('businessProfile.mailingAddressProvince').touched"
-                   [required]="true" [isFullWidth]="true">
-          <select class="form-control" formControlName="mailingAddressProvince">
-            <option value="British Columbia">British Columbia</option>
-            <option value="Ontario">Ontario</option>
-            <option value="Alberta">Alberta</option>
-            <option value="Quebec">Quebec</option>
-            <option value="Manitoba">Manitoba</option>
-            <option value="Nova Scotia">Nova Scotia</option>
-            <option value="New Brunswick">New Brunswick</option>
-            <option value="Newfoundland and Labrador">Newfoundland and Labrador</option>
-            <option value="Saskatchewan">Saskatchewan</option>
-            <option value="Prince Edward Island">Prince Edward Island</option>
-            <option value="Northwest Territories">Northwest Territories</option>
-            <option value="Yukon">Yukon</option>
-            <option value="Nunavut">Nunavut</option>
-          </select>
-          </app-field>
-      </section>
-      <section class="col-md-3 col-xs-12">
-        <app-field label="Postal /Zip Code" errorMessage="This is required. The postal / zip code should be in one of the following formats: X1X1X1,
-                    12345, 12345-1234" (blur)="trimValue(form.get('businessProfile.mailingAddressPostalCode'))"
-                   [valid]="form.get('businessProfile.mailingAddressPostalCode').valid || !form.get('businessProfile.mailingAddressPostalCode').touched"
-                   [required]="true" [isFullWidth]="true">
-          <input type="text" formControlName="mailingAddressPostalCode" class="form-control">
-        </app-field>
-      </section>
-      <app-field class="col-md-6 col-xs-12" label="Country" errorMessage="Please enter country"
-                 [valid]="form.get('businessProfile.mailingAddressCountry').valid || !form.get('businessProfile.mailingAddressCountry').touched"
-                 [required]="true" [isFullWidth]="true">
-        <input type="text" formControlName="mailingAddressCountry" class="form-control" readonly>
-      </app-field>
-    </div>
-  </div>
-
-  <hr>
-
-  <app-field label="Business Phone Number" [required]="true"
-             [valid]="form.get('businessProfile.contactPhone').valid || !form.get('businessProfile.contactPhone').touched"
-             errorMessage="Please enter the 10-digit business phone number, without including any spaces">
-    <input class="form-control" style="width: 250px;" mask="(000) 000-0000"
-           type="text" formControlName="contactPhone">
-  </app-field>
-
-  <app-field label="Business Email" [required]="true"
-             [valid]="form.get('businessProfile.contactEmail').valid || !form.get('businessProfile.contactEmail').touched"
-             errorMessage="Please enter a valid email address">
-    <input class="form-control" style="width: 350px;" type="text" formControlName="contactEmail"
-           (blur)="trimValue(form.get('businessProfile.contactEmail'))">
-  </app-field>
-  <p *ngIf="getBusinessTypeName() == 'Local Government'"><em>This will be the primary email used for communication from LCRB.</em></p>
-
-  <app-field *ngIf="getBusinessTypeName() === 'Indigenous Nation' || getBusinessTypeName() == 'Local Government'" label="Liquor Policy Information Link" [required]="true"
-             [valid]="form.get('businessProfile.websiteUrl').valid || !form.get('businessProfile.websiteUrl').touched"
-             errorMessage="Please enter a valid website address">
-    <input class="form-control" style="width: 350px;" type="text" formControlName="websiteUrl"
-           (blur)="trimValue(form.get('businessProfile.websiteUrl'))">
-  </app-field>
-
-</div>
-
-<div *ngIf="application?.applicationType?.name !== 'Ethyl Alcohol Permit' && saveFormData?.businessProfile?.id && ['Police'].indexOf(getBusinessTypeName()) == -1">
-  <app-connection-to-producers *ngIf="account?.tiedHouse" [tiedHouse]="account?.tiedHouse"
-                               [account]="account" [applicationTypeName]="application?.applicationType?.name" (value)="tiedHouseFormData = $event">
-  </app-connection-to-producers>
-</div>
-
-<div *ngIf="!form.valid && form.touched" class="error-summary mt-3">
-  <div *ngIf="!validationMessages?.length">
-    <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>
-    <span>Some required fields have not been completed</span>
-  </div>
-  <div *ngFor="let message of validationMessages">
-    <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>
-    <span>{{message}}</span>
-  </div>
-</div>
-<section style="position: relative;" class="py-4 button-row">
-  <div [ngBusy]="[busy3]"></div>
-  <button color="primary" mat-raised-button (click)="gotoReview()" class="save-cont" id="continueToApp">
-    <span *ngIf="!applicationId && !useInStepperMode">SAVE & CONTINUE</span>
-    <span *ngIf="applicationId && !useInStepperMode">CONTINUE TO APPLICATION</span>
-    <span *ngIf="useInStepperMode">CONTINUE TO ORGANIZATION REVIEW</span>&nbsp;
-    <fa-icon [icon]="faChevronRight" class="mr-0"></fa-icon>
-  </button>
-  <button class="btn btn-link btn-cancel" routerLink="/dashboard">
-    <fa-icon [icon]="faTrash"></fa-icon>CANCEL
-  </button>
-</section>
-</div>
-</div>
-</div>
-<div class="col-lg-4 col-sm-12" style="padding-left: 50px; position: relative;">
-  <!-- <div [ngBusy]="busy"></div> -->
-  <p></p>
-  <section class="submit-container">
-    <table>
-      <tr>
-        <td>
-          <h2 class="round-icon-wrapper">
-            <fa-icon [icon]="faAddressCard"></fa-icon>
-          </h2>
-        </td>
-        <td style="padding-left: 10px">
-          <h2>Update your BCeID information</h2>
-        </td>
-      </tr>
-    </table>
-    <div class="submit-content">
-      <p>
-        The Legal Business Name is imported from BCeID. If there is an error or change in
-        this information, you must contact BCeID to correct it.
-      </p>
-      <div>
-        <fa-icon [icon]="faPhone" style="margin-right: 10px"></fa-icon>
-        <strong>Phone</strong>
-        <br>
-        <span>1 888 356-2741 (Canada and USA toll free)</span>
-        <br>
-        <span>604 660-2355 (Within lower mainland or outside Canada and USA)</span>
       </div>
-      <div>
-        <fa-icon [icon]="faEnvelope" style="margin-right: 10px"></fa-icon>
-        <strong>Email</strong>
-        <br>
-        <span>
-          Contact us using our
-          <a href="https://www.bceid.ca/help_request/default.aspx?referrer=AB%2f2"
-             style="color: white">
-            online
-            form
-          </a> or at
-          <a href="mailto:BCeIDREgistrationDesk@gov.bc.ca"
-             style="color: white">
-            BCeIDRegistrationDesk@gov.bc.ca
-          </a>
-        </span>
-      </div>
-      <p>
-        All other information can be changed on this Account Profile page.
-      </p>
-
     </div>
-   </section>
-  <!-- 2024-09-13: Temporary disabling this until further development work can be completed to support this feature.-->
-  <!-- <section class="submit-container" style="background-color: #F2F2F2; border: none; color: #000;">
-    <h2 style="color: #000">Online Retailer Verification:</h2>
-    <div class="submit-content">
-      <p>To obtain the Online Retailer Verification button to place on your Website(s), 
-        please select the "Generate ORV Code" button below.  Once you have the code, 
-        you will need to add it to your Website(s).  
-        Consult your development team to add the code to your Website(s).
-      </p>
+    <div class="col-lg-4 col-sm-12" style="padding-left: 50px; position: relative">
+      <!-- <div [ngBusy]="busy"></div> -->
+      <p></p>
+      <section class="submit-container">
+        <table>
+          <tr>
+            <td>
+              <h2 class="round-icon-wrapper">
+                <fa-icon [icon]="faAddressCard"></fa-icon>
+              </h2>
+            </td>
+            <td style="padding-left: 10px">
+              <h2>Update your BCeID information</h2>
+            </td>
+          </tr>
+        </table>
+        <div class="submit-content">
+          <p>
+            The Legal Business Name is imported from BCeID. If there is an error or change in this information, you must
+            contact BCeID to correct it.
+          </p>
+          <div>
+            <fa-icon [icon]="faPhone" style="margin-right: 10px"></fa-icon>
+            <strong>Phone</strong>
+            <br />
+            <span>1 888 356-2741 (Canada and USA toll free)</span>
+            <br />
+            <span>604 660-2355 (Within lower mainland or outside Canada and USA)</span>
+          </div>
+          <div>
+            <fa-icon [icon]="faEnvelope" style="margin-right: 10px"></fa-icon>
+            <strong>Email</strong>
+            <br />
+            <span>
+              Contact us using our
+              <a href="https://www.bceid.ca/help_request/default.aspx?referrer=AB%2f2" style="color: white">
+                online form
+              </a>
+              or at
+              <a href="mailto:BCeIDREgistrationDesk@gov.bc.ca" style="color: white">
+                BCeIDRegistrationDesk&#64;gov.bc.ca
+              </a>
+            </span>
+          </div>
+          <p>All other information can be changed on this Account Profile page.</p>
+        </div>
+      </section>
+      <ng-container *ngIf="ORVFeatureEnabled">
+        <section class="submit-container" style="background-color: #f2f2f2; border: none; color: #000">
+          <h2 style="color: #000">Online Retailer Verification:</h2>
+          <div class="submit-content">
+            <p>
+              To obtain the Online Retailer Verification button to place on your Website(s), please select the "Generate
+              ORV Code" button below. Once you have the code, you will need to add it to your Website(s). Consult your
+              development team to add the code to your Website(s).
+            </p>
+          </div>
+          <div style="display: flex; justify-content: center">
+            <button
+              class="btn btn-primary"
+              color="primary"
+              (click)="openBadgeTemplateDialog()"
+              [disabled]="!isORVButtonEnabled()"
+              [attr.title]="!isORVButtonEnabled() ? 'Can not generate ORV Code if account has URL(s)' : null">
+              <span class="compact-button">Generate ORV Code</span>
+            </button>
+          </div>
+        </section>
+      </ng-container>
+      <section class="submit-container" style="background-color: #f2f2f2; border: none; color: #000">
+        <h2 style="color: #000">Collection Notice:</h2>
+        <div class="submit-content">
+          <p>
+            The information requested on this form is collected by the Liquor and Cannabis Regulation Branch under
+            Sections 26 (a), (b) and (c) of the Freedom of Information and Protection of Privacy Act (FOIPPA) for the
+            purpose of liquor and cannabis licensing and compliance and enforcement matters in accordance with the
+            Liquor Control and Licensing Act and Cannabis Control and Licensing Act. Additionally, LCRB may collect
+            personal information under section 26(e) of FOIPPA for the purpose of evaluating LCRB programs and
+            activities to better serve you. Should you have any questions about the collection, use, or disclosure of
+            personal information, please contact the Freedom of Information Officer at PO Box 9292 STN PROV GVT,
+            Victoria, BC, V8W 9J8 or by phone toll free at 1-866-209-2111.
+          </p>
+        </div>
+      </section>
     </div>
-    <div style="display: flex; justify-content: center;">
-      <button class="btn btn-primary" color="primary" (click)="openBadgeTemplateDialog()" [disabled]="accountUrls?.controls?.length > 1 || accountUrls?.controls[0].value" [attr.title]="(accountUrls?.controls?.length > 1 || accountUrls?.controls[0].value)? 'Can not generate ORV Code if account has URL(s)': null">
-          <span class="compact-button">Generate ORV Code</span>
-      </button>
-    </div>
-  </section> -->
-  <section class="submit-container" style="background-color: #F2F2F2; border: none; color: #000;">
-    <h2 style="color: #000">Collection Notice:</h2>
-    <div class="submit-content">
-      <p>
-        The information requested on this form is collected by the Liquor and Cannabis Regulation Branch under Sections 26 (a), (b) and (c) of the Freedom of Information and Protection of Privacy Act (FOIPPA) for the purpose of liquor and cannabis licensing and compliance and enforcement matters in accordance with the Liquor Control and Licensing Act and Cannabis Control and Licensing Act. Additionally, LCRB may collect personal information under section 26(e) of FOIPPA for the purpose of evaluating LCRB programs and activities to better serve you. Should you have any questions about the collection, use, or disclosure of personal information, please contact the Freedom of Information Officer at PO Box 9292 STN PROV GVT, Victoria, BC, V8W 9J8 or by phone toll free at 1-866-209-2111.
-      </p>
-    </div>
-  </section>
-</div>
-</div>
+  </div>
 </div>
 
 <!-- Modal HTML -->
-<!-- 2024-09-13: Temporary disabling this until further development work can be completed to support this feature. -->
-<!-- <ng-template #badgeTemplateDialog>
+<ng-template #badgeTemplateDialog *ngIf="ORVFeatureEnabled && isORVButtonEnabled">
   <h2 mat-dialog-title class="centered-title">Generate ORV Code</h2>
   <p>Paste this code into your website to create your Online Retailer Verification button:</p>
   <pre><code>{{generatedOrvCode}}</code></pre>
   <div mat-dialog-actions class="center-actions">
     <button mat-raised-button color="primary" (click)="onCopy()">Copy</button>
   </div>
-</ng-template> -->
+</ng-template>
