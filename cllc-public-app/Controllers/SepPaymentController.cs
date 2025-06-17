@@ -12,6 +12,8 @@ using Microsoft.Extensions.Configuration;
 using System.Net.Mail;
 using Microsoft.AspNetCore.Http;
 
+using Gov.Lclb.Cllb.Public.Models;
+
 using System.Web;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
@@ -53,16 +55,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         }
 
-        [HttpGet("encrypted")]
-        public IActionResult GetEncrypted()  {
-            var filePath = Path.Combine(_env.ContentRootPath, "sep.json");
-            if (!System.IO.File.Exists(filePath))
-                throw new FileNotFoundException($"Could not find sep.json at '{filePath}'.");
-             var plainJson = System.IO.File.ReadAllText(filePath);
+        // [HttpGet("encrypted")]
+        // public IActionResult GetEncrypted()  {
+        //     var filePath = Path.Combine(_env.ContentRootPath, "sep.json");
+        //     if (!System.IO.File.Exists(filePath))
+        //         throw new FileNotFoundException($"Could not find sep.json at '{filePath}'.");
+        //      var plainJson = System.IO.File.ReadAllText(filePath);
 
-          var   _encFileJson = CryptoHelper.Encrypt(plainJson, _Password);
-            return Ok(_encFileJson);
-        }
+        //   var   _encFileJson = CryptoHelper.Encrypt(plainJson, _Password);
+        //     return Ok(_encFileJson);
+        // }
 
 
 
@@ -76,11 +78,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (string.IsNullOrWhiteSpace(sepId))
                 return NotFound(new { message = "Required paramter is missing." });
             //load the encrypted JSON file from the content root path
-            var encPath = Path.Combine(_env.ContentRootPath, "permitdata");
-            if (!System.IO.File.Exists(encPath))
-                throw new FileNotFoundException($"Could not find encrypted data.");
-            _encryptedJson = System.IO.File.ReadAllText(encPath).Trim();
-            var plainJson = CryptoHelper.Decrypt(_encryptedJson, _Password);
+            // var encPath = Path.Combine(_env.ContentRootPath, "permitdata");
+            // if (!System.IO.File.Exists(encPath))
+            //     throw new FileNotFoundException($"Could not find encrypted data.");
+           // _encryptedJson = System.IO.File.ReadAllText(encPath).Trim();
+            var plainJson = CryptoHelper.Decrypt(PermitCache.PermitData, _Password);
 
             var payments = JsonConvert.DeserializeObject<List<SepPayment>>(plainJson)
                            ?? new List<SepPayment>();
