@@ -76,7 +76,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (string.IsNullOrWhiteSpace(sepId))
                 return NotFound(new { message = "Required paramter is missing." });
             //load the encrypted JSON file from the content root path
-            var encPath = Path.Combine(_env.ContentRootPath, "permitdata");
+            var encPath = Path.Combine(_env.ContentRootPath, "permitdata.txt");
             if (!System.IO.File.Exists(encPath))
                 throw new FileNotFoundException($"Could not find encrypted data.");
             _encryptedJson = System.IO.File.ReadAllText(encPath).Trim();
