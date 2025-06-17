@@ -2,19 +2,25 @@
     <p>
         Almost there... Give us a few more details
     </p>
-
-    <app-field label="Are you charging for drinks at your event?" [required]="true" [isFullWidth]="true"
-    errorMessage="Please select a value"
-    [valid]="isValidOrNotTouched('chargingForLiquorReason')">
-        <select formControlName="chargingForLiquorReason" class="form-control w-100">
-            <option value=""></option>
-            <option value="RecoverCost">Yes - To recover event operating costs</option>
-            <option value="RaiseMoney">Yes - To raise money for a charitable purpose</option>
-            <option value="LiquorIsFree">No - Drinks will be free of charge</option>
-            <option value="Combination">Combination - Some drinks will be sold and some will be given away for free
-            </option>
-        </select>
-    </app-field>
+    <div class="d-flex justify-content-between">
+        <app-field label="Are you charging for drinks at your event?" [required]="true" [isFullWidth]="true"
+        errorMessage="Please select a value"
+        [valid]="isValidOrNotTouched('chargingForLiquorReason')">
+            <select formControlName="chargingForLiquorReason" class="form-control w-100">
+                <option value=""></option>
+                <option value="RecoverCost">Yes - To recover event operating costs</option>
+                <option value="LiquorIsFree">No - Drinks will be free of charge</option>
+                <option value="Combination">Combination - Some drinks will be sold and some will be given away for free
+                </option>
+                <option value="RaiseMoney">Combination - To raise money for a charitable purpose</option>
+            </select>
+        </app-field>
+        <div>
+            <fa-icon [icon]="faQuestionCircle" (click)="tooltip.toggle()"
+                matTooltip="Selecting “Combination - To raise money for a charitable purpose” will allow you to give some drinks away for free" #tooltip="matTooltip">
+            </fa-icon>
+        </div>
+    </div>
 
     <section *ngIf="form.get('chargingForLiquorReason').value === 'RaiseMoney'" class="p-3">
         <app-field label="Enter the name of the non-profit organization receiving charitable proceeds from this event"
