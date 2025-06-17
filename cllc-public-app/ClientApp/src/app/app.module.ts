@@ -332,6 +332,7 @@ import { RelatedJobnumberPickerComponent } from './shared/components/related-job
 import { RelocationTypeComponent } from "@components/relocation-type/relocation-type.component";
 import { FeedbackComponent } from "@components/feedback/feedback.component";
 import { MaintenanceBannerComponent } from "@components/maintenance-banner/maintenance-banner.component";
+import { StandalonePaymentConfirmationComponent } from "@components/standalone-payment-confirmation/standalone-payment-confirmation.component";
 
 
 @NgModule({
@@ -379,6 +380,7 @@ import { MaintenanceBannerComponent } from "@components/maintenance-banner/maint
     OrganizationResultsComponent,
     PaymentConfirmationComponent,
     SepPaymentConfirmationComponent,
+    StandalonePaymentConfirmationComponent,
     PolicyDocumentComponent,
     PolicyDocumentSidebarComponent,
     PrePaymentComponent,
