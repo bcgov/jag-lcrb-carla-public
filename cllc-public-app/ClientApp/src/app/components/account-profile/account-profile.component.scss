@@ -49,6 +49,7 @@ hr {
   margin-bottom: 20px;
   padding: 30px;
   padding-top: 20px;
+
   h2 {
     color: #fff;
   }
@@ -70,6 +71,7 @@ hr {
 
 .button-row {
   display: flex;
+
   button:last-child {
     margin-left: auto;
   }
@@ -82,11 +84,11 @@ hr {
 }
 
 .compact-button {
-  display: block; 
-  line-height: 1.4; 
+  display: block;
+  line-height: 1.4;
   margin: 0;
   padding-top: 2px;
-  padding-bottom: 2px; 
+  padding-bottom: 2px;
 }
 
 .centered-title {
@@ -99,10 +101,11 @@ hr {
 }
 
 .account-urls {
-    fa-icon {
-        color: #38598a;
-    }
-    & .btn {
-        color: #38598a;
-    }
+  fa-icon {
+    color: #38598a;
+  }
+
+  & .btn {
+    color: #38598a;
+  }
 }
