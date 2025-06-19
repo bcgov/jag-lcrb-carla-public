@@ -1,582 +1,655 @@
 <ng-container *ngIf="mode === 'readonlySummary' || mode === 'pendingReview' || mode === 'payNow'">
-
   <div class="form-wrapper-summary" *ngIf="application">
-
-    <div class="row" style="padding-left: 50px; padding-right: 30px; max-width:1000px; margin-left:5px;">
+    <div class="row" style="padding-left: 50px; padding-right: 30px; max-width: 1000px; margin-left: 5px">
       <div style="width: 70%">
-      <h1 class="mat-heading">Application Summary</h1>
-      <h3>{{application?.eventName}}</h3>
-      <p><label>Start Date:</label> {{application?.eventStartDate | date: 'dd MMM yyyy'}}</p>
-      <p><label>Application Number:</label> {{application.specialEventPermitNumber}}</p>
+        <h1 class="mat-heading">Application Summary</h1>
+        <h3>{{ application?.eventName }}</h3>
+        <p>
+          <label>Start Date:</label>
+          {{ application?.eventStartDate | date: 'dd MMM yyyy' }}
+        </p>
+        <p>
+          <label>Application Number:</label>
+          {{ application.specialEventPermitNumber }}
+        </p>
 
-
-      <section *ngIf="getStatus() == 'Draft'">
-        <section *ngIf="!this.isEventPast()">
-        <p>Here’s a summary of your event. Does everything look right? Review your event details one more time before
-          submitting your application for review.</p>
-
-        <p>Scroll down the page to complete the review and submit your application. Please be sure to complete the final
-          declaration and submit your application.</p>
-        </section>
-
-          <section style="border: solid #ccc 1px;
-                    padding: 20px;
-                    background-color: #fcba19;">
-            <h3>IMPORTANT</h3>
-
-          <div *ngIf="!isReadOnly() && this.isEventPast()" class="d-flex" style="margin-top: 20px;">
-
-            <p><fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>Permits cannot be issued before or on the date that they are submitted.</p>
-
-          </div>
-          <div *ngIf="!this.isEventPast()">
-            <p>Changes cannot be made once your application is submitted.</p>
+        <section *ngIf="getStatus() == 'Draft'">
+          <section *ngIf="!this.isEventPast()">
             <p>
-              If you have any questions before submitting the application please contact the SEP Online Help Line at 1
-              855
-              999 7656 or email <a href="mailto:LCRB.Sep@gov.bc.ca" target="_blank">LCRB.Sep@gov.bc.ca</a>
+              Here’s a summary of your event. Does everything look right? Review your event details one more time before
+              submitting your application for review.
             </p>
-          </div>
+
+            <p>
+              Scroll down the page to complete the review and submit your application. Please be sure to complete the
+              final declaration and submit your application.
+            </p>
           </section>
 
+          <section style="border: solid #ccc 1px; padding: 20px; background-color: #fcba19">
+            <h3>IMPORTANT</h3>
 
-      </section>
-
-      <section *ngIf="getStatus() == 'Pending Review'">
-        <p><label>Date Submitted:</label>&nbsp;{{application?.dateSubmitted | date: 'dd MMM yyyy'}}</p>
-        <p>Your application requires review from <span *ngIf="application?.lcrbApproval == 'Pending Review'"><strong>LCRB</strong></span> <span *ngIf="application?.lcrbApproval == 'Pending Review' && application?.policeApproval == 'Pending Review'">&nbsp;and&nbsp;</span> <span *ngIf="application?.policeApproval == 'Pending Review'"><strong>Police</strong></span>.</p>
+            <div *ngIf="!isReadOnly() && this.isEventPast()" class="d-flex" style="margin-top: 20px">
+              <p>
+                <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px"></fa-icon>
+                Permits cannot be issued before or on the date that they are submitted.
+              </p>
+            </div>
+            <div *ngIf="!this.isEventPast()">
+              <p>Changes cannot be made once your application is submitted.</p>
+              <p>
+                If you have any questions before submitting the application please contact the SEP Online Help Line at 1
+                855 999 7656 or email
+                <a href="mailto:LCRB.Sep@gov.bc.ca" target="_blank">LCRB.Sep&#64;gov.bc.ca</a>
+              </p>
+            </div>
+          </section>
         </section>
 
-
-      <section *ngIf="getStatus() == 'Payment Required' || mode ==='payNow'">
-        <h3>Congratulations!</h3>
-        <p>Your application is approved</p>
-        <h3>Fees Due: {{application?.invoice?.totalamount
-          | currency}}</h3>
-
-        <section style="border: solid #ccc 1px;
-        padding: 20px;
-        background-color: #fcba19;">
-
-
-          <p><fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>You must pay these fees to get a special event permit. If you do not pay these fees, your application will not be valid and a licence will not be issued for your event.</p>
-          <p>In the event that the information on this application is no longer correct or if you wish to make additional changes, you may contact the LCRB or withdraw your application.</p>
+        <section *ngIf="getStatus() == 'Pending Review'">
+          <p>
+            <label>Date Submitted:</label>
+            &nbsp;{{ application?.dateSubmitted | date: 'dd MMM yyyy' }}
+          </p>
+          <p>
+            Your application requires review from
+            <span *ngIf="application?.lcrbApproval == 'Pending Review'"><strong>LCRB</strong></span>
+            <span
+              *ngIf="application?.lcrbApproval == 'Pending Review' && application?.policeApproval == 'Pending Review'">
+              &nbsp;and&nbsp;
+            </span>
+            <span *ngIf="application?.policeApproval == 'Pending Review'"><strong>Police</strong></span>
+            .
+          </p>
         </section>
 
-      </section>
+        <section *ngIf="getStatus() == 'Payment Required' || mode === 'payNow'">
+          <h3>Your application has been approved. Your permit will be issued once payment has been received.</h3>
+          <h3>Fees Due: {{ application?.invoice?.totalamount | currency }}</h3>
 
-      <section *ngIf="getStatus() == 'Issued' && !isEventPast()">
-      <h3>What’s next</h3>
-      <ul>
-      <li>Purchase liquor product at an approved outlet. Note: Liquor products purchased from and returned to a liquor retailer may be subject to a return policy and restocking fee.</li>
-      <li>Print and sign your Special Event Permit. This permit will only become valid once it has been signed by the Permittee.</li>
-      <li>Post your signed SEP along with the following materials in a visible location at the bar or serving area during your event hours.</li>
-      <li>If you haven’t yet completed Responsible Beverage Service training, take the course and print out a certificate to bring to the event.</li>
-    </ul>
-      <h3>What to post on event day</h3>
-      <ul>
-      <li>Your signed SEP in a visible location at the bar or serving area during your event hours.</li>
-      <li>Any comments from police or liquor inspectors imposing additional terms and conditions.</li>
-      <li>Receipts for the liquor purchased for your event must also be kept on site for inspection by a liquor inspector.</li>
-      <li>Any other document you have been directed to post.</li>
-      <li>If your SEP requires a security plan, you are not required to display it; however, it must be on site and immediately available should police and/or liquor inspectors request to see it.</li>
-      <li>If your event takes place in more than one location, you should also post the name and contact information of an individual who can be in attendance at the event on behalf of the licensee.</li>
-      </ul>
-      </section>
+          <section style="border: solid #ccc 1px; padding: 20px; background-color: #fcba19">
+            <p>
+              <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px"></fa-icon>
+              You must pay these fees to get a special event permit. If you do not pay these fees, your application will
+              not be valid and a licence will not be issued for your event.
+            </p>
+            <p>
+              In the event that the information on this application is no longer correct or if you wish to make
+              additional changes, you may contact the LCRB or withdraw your application.
+            </p>
+          </section>
+        </section>
+
+        <section *ngIf="getStatus() == 'Issued' && !isEventPast()">
+          <h3>What’s next</h3>
+          <ul>
+            <li>
+              Purchase liquor product at an approved outlet. Note: Liquor products purchased from and returned to a
+              liquor retailer may be subject to a return policy and restocking fee.
+            </li>
+            <li>
+              Print and sign your Special Event Permit. This permit will only become valid once it has been signed by
+              the Permittee.
+            </li>
+            <li>
+              Post your signed SEP along with the following materials in a visible location at the bar or serving area
+              during your event hours.
+            </li>
+            <li>
+              If you haven’t yet completed Responsible Beverage Service training, take the course and print out a
+              certificate to bring to the event.
+            </li>
+          </ul>
+          <h3>What to post on event day</h3>
+          <ul>
+            <li>Your signed SEP in a visible location at the bar or serving area during your event hours.</li>
+            <li>Any comments from police or liquor inspectors imposing additional terms and conditions.</li>
+            <li>
+              Receipts for the liquor purchased for your event must also be kept on site for inspection by a liquor
+              inspector.
+            </li>
+            <li>Any other document you have been directed to post.</li>
+            <li>
+              If your SEP requires a security plan, you are not required to display it; however, it must be on site and
+              immediately available should police and/or liquor inspectors request to see it.
+            </li>
+            <li>
+              If your event takes place in more than one location, you should also post the name and contact information
+              of an individual who can be in attendance at the event on behalf of the licensee.
+            </li>
+          </ul>
+        </section>
+      </div>
+
+      <div style="margin-top: 30px; text-align: center; width: 30%">
+        <!-- approve and deny buttons -->
+
+        <mat-card style="background-color: #e0e0e0; min-height: 200px; margin-top: 20px; margin-left: 20px">
+          <section class="d-flex flex-column" style="gap: 0.5rem">
+            <h3>
+              <fa-icon [icon]="getStatusIcon()" style="margin-right: 10px"></fa-icon>
+              {{ getStatus() }}
+            </h3>
+            <div *ngIf="getStatus() == 'Draft'">
+              <p>
+                Your application has not yet been submitted to the branch. Confirm everything is correct and click
+                submit at the bottom of this page.
+              </p>
+            </div>
+            <div *ngIf="getStatus() == 'Pending Review'">
+              <p>
+                Your application is currently under review by the
+                <span *ngIf="application?.lcrbApproval == 'Pending Review'"><strong>LCRB</strong></span>
+                <span
+                  *ngIf="
+                    application?.lcrbApproval == 'Pending Review' && application?.policeApproval == 'Pending Review'
+                  ">
+                  &nbsp;and&nbsp;
+                </span>
+                <span *ngIf="application?.policeApproval == 'Pending Review'">
+                  <strong>Police</strong>
+                  in your local area
+                </span>
+                .
+              </p>
+              <p *ngIf="application.policeDecisionBy">
+                The liquor service for this event is currently under review by {{ application.policeDecisionBy?.name }}.
+              </p>
+            </div>
+            <div *ngIf="getStatus() == 'Review Expired'">
+              <p>Your application was not reviewed before the event start date.</p>
+
+              <p *ngIf="application.policeDecisionBy">
+                The liquor service for this event is currently under review by {{ application.policeDecisionBy?.name }}.
+              </p>
+            </div>
+            <div *ngIf="getStatus() == 'Approval Expired'">
+              <p>
+                Your application was approved, however you did not pay for it before the event start date. Therefore,
+                the permit was not issued.
+              </p>
+            </div>
+            <div *ngIf="getStatus() == 'Issued'">
+              <p *ngIf="application?.dateIssued">
+                Your Special Event Permit was issued on
+                {{ application?.dateIssued | date: 'MMM dd yyyy' }}.
+              </p>
+              <a
+                [href]="'api/special-events/applicant/' + application.id + '/permit/summary.pdf'"
+                target="_blank"
+                *ngIf="application.id">
+                <fa-icon [icon]="faCertificate" style="margin-right: 10px"></fa-icon>
+                Print Permit
+              </a>
+            </div>
+            <div *ngIf="getStatus() == 'Cancelled'">
+              <p>This application/permit has been cancelled.</p>
+              <p>
+                <em>{{ application?.cancelReason }}</em>
+              </p>
+            </div>
+            <div *ngIf="this.isDenied()">
+              <p>Liquor service for this event has been {{ application?.eventStatus }} for the following reason:</p>
+              <p>
+                <em>{{ application?.denialReason }}</em>
+              </p>
+            </div>
+            <div class="d-flex flex-column" style="gap: 0.5rem">
+              <a
+                [href]="'api/special-events/applicant/' + application.id + '/summary/summary.pdf'"
+                target="_blank"
+                *ngIf="application.id && getStatus() === 'Issued'">
+                <fa-icon [icon]="faDownLoad" style="margin-right: 10px; color: #41598b"></fa-icon>
+                Print Summary
+              </a>
+              <a
+                (click)="cancelApplication()"
+                style="text-decoration: underline; color: #1a5a96; cursor: pointer"
+                *ngIf="canWithdraw()">
+                <fa-icon [icon]="faBan" style="margin-right: 10px"></fa-icon>
+                Withdraw Application
+              </a>
+            </div>
+          </section>
+        </mat-card>
+
+        <mat-card
+          style="background-color: #e0e0e0; min-height: 200px; margin-top: 20px; margin-left: 20px"
+          *ngIf="getStatus() != 'Draft'">
+          <h3>Contact</h3>
+          <p>If you have any questions or concerns contact the LCRB.</p>
+          <p>
+            SEP Online Support Line 1-866-209-2111 or
+            <a href="mailto:lcrbliquor@gov.bc.ca" target="_blank">lcrbliquor&#64;gov.bc.ca</a>
+          </p>
+          <div *ngIf="application?.policeAccount">
+            <h3>Police Authority</h3>
+            <p>
+              {{ application.policeAccount?.name }}
+              <br />
+              {{ application.policeAccount?.contactPhone | mask: '(000) 000-0000' }}
+              <br />
+            </p>
+          </div>
+        </mat-card>
+      </div>
     </div>
 
+    <div
+      class="form-wrapper-summary"
+      style="padding-left: 50px; padding-right: 30px; max-width: 1000px; margin-left: 5px">
+      <hr />
+      <div *ngIf="getStatus() == 'Issued'">
+        <app-error-alert>Please print this page for your records!</app-error-alert>
+        <span class="print-page" (click)="printPage()">
+          <!--<mat-icon aria-label="Print Page" style="text-decoration: solid">print</mat-icon>-->
+          <fa-icon [icon]="faPrint" class="fa-lg mr-3"></fa-icon>
+          <a href="javascript: void(0)">Print Page</a>
+        </span>
+        <h2 style="color: green" *ngIf="getStatus() == 'Issued'">Payment Approved</h2>
+        <h2 style="color: red" *ngIf="getStatus() == 'Payment Required' && trnApproved != '1'">
+          {{ paymentTransactionTitle }}
+        </h2>
+        <p *ngIf="getStatus() == 'Payment Required' && trnApproved != '1'">{{ paymentTransactionMessage }}</p>
+        <div class="table" style="padding: 0px">
+          <table>
+            <tr>
+              <td>Card Type</td>
+              <td>{{ cardType }}</td>
+            </tr>
+            <tr>
+              <td>Date/Time</td>
+              <td>{{ trnDate }}</td>
+            </tr>
+            <tr>
+              <td>Invoice Number</td>
+              <td>{{ invoice }}</td>
+            </tr>
+            <tr>
+              <td>Transaction ID</td>
+              <td>{{ trnId }}</td>
+            </tr>
+            <tr>
+              <td>Amount</td>
+              <td>{{ trnAmount | currency }}</td>
+            </tr>
+          </table>
+        </div>
+        <hr />
+      </div>
 
-  <div style="margin-top: 30px; text-align: center; width: 30%; ">
-    <!-- approve and deny buttons -->
+      <h2>Summary</h2>
 
-    <mat-card style="background-color: #e0e0e0; min-height: 200px; margin-top: 20px; margin-left: 20px;">
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>GENERAL APPLICATION INFO</mat-panel-title>
+        </mat-expansion-panel-header>
 
-    <section>
-      <h3>
-        <fa-icon [icon]="getStatusIcon()" style="margin-right: 10px;"></fa-icon>{{getStatus()}}
-      </h3>
-
-      <section *ngIf="getStatus() == 'Draft'">
-        <p>Your application has not yet been submitted to the branch. Confirm everything is correct and click submit at the
-          bottom of this page.</p>
-      </section>
-      <section *ngIf="getStatus() == 'Pending Review'">
-        <p>Your application is currently under review by the <span *ngIf="application?.lcrbApproval == 'Pending Review'"><strong>LCRB</strong></span> <span *ngIf="application?.lcrbApproval == 'Pending Review' && application?.policeApproval == 'Pending Review'">&nbsp;and&nbsp;</span> <span *ngIf="application?.policeApproval == 'Pending Review'"><strong>Police</strong> in your local area</span>.</p>
-        <p *ngIf="application.policeDecisionBy">The liquor service for this event is currently under review by
-          {{application.policeDecisionBy?.name}}.</p>
-      </section>
-      <section *ngIf="getStatus() == 'Review Expired'">
-        <p>Your application was not reviewed before the event start date.</p>
-
-        <p *ngIf="application.policeDecisionBy">The liquor service for this event is currently under review by
-          {{application.policeDecisionBy?.name}}.</p>
-      </section>
-
-      <!-- hiding the duplicate button  -->
-      <!-- <section *ngIf="false">
-        <button mat-raised-button color="primary" (click)="payNow()">
-          <fa-icon [icon]="faShoppingCart" style="margin-right: 10px;"></fa-icon>PAY NOW
-        </button>
-      </section> -->
-
-      <section *ngIf="getStatus() == 'Approval Expired'">
-        <p>Your application was approved, however you did not pay for it before the event start date. Therefore, the permit
-          was not issued.</p>
-      </section>
-
-      <section *ngIf="getStatus() == 'Issued'">
-        <p *ngIf="application?.dateIssued">Your Special Event Permit was issued on {{application?.dateIssued | date: 'MMM dd
-          yyyy'}}.</p>
-        <a [href]="'api/special-events/applicant/' + application.id + '/permit/summary.pdf'" target="_blank"
-          *ngIf="application.id">
-          <fa-icon [icon]="faCertificate" style="margin-right: 10px;"></fa-icon>Print Permit
-        </a>
-      </section>
-
-      <section *ngIf="getStatus() == 'Cancelled'">
-        <p>This application/permit has been cancelled.</p>
-        <p><em>{{application?.cancelReason}}</em></p>
-      </section>
-
-      <section *ngIf="this.isDenied()">
-        <p>Liquor service for this event has been {{application?.eventStatus}} for the following reason:</p>
-        <p><em>{{application?.denialReason}}</em></p>
-      </section>
-    </section>
-
-      <br>
-      <a [href]="'api/special-events/applicant/' + application.id + '/summary/summary.pdf'" target="_blank" *ngIf="application.id"><fa-icon [icon]="faDownLoad" style="margin-right: 10px; color: #41598b;"></fa-icon>Print Summary</a>
-      <br>
-      <hr>
-      <a (click)="cancelApplication()" style="text-decoration: underline; color:#1a5a96; cursor: pointer;" *ngIf="canWithdraw()"><fa-icon [icon]="faBan" style="margin-right: 10px;"></fa-icon>Withdraw Application</a>
-
-  </mat-card>
-
-  <mat-card style="background-color: #e0e0e0; min-height: 200px; margin-top: 20px; margin-left: 20px;" *ngIf="getStatus() != 'Draft'">
-    <h3>Contact</h3>
-    <p>If you have any questions or concerns contact the LCRB.</p>
-    <p>SEP Online Support Line
-      1-866-209-2111 or <a href="mailto:lcrbliquor@gov.bc.ca" target="_blank">lcrbliquor@gov.bc.ca</a></p>
-    <h3>Police Authority</h3>
-    <p>{{application?.policeAccount?.name}}<br>
-      {{application?.policeAccount?.contactPhone | mask: "(000) 000-0000"}}<br>
-    </p>
-  </mat-card>
-  </div>
-  </div>
-
-
-    <div class="form-wrapper-summary" [ngClass]="{'form-wrapper': isReadOnly()}">
-        <!--section *ngIf="!isReadOnly()">
-        <p>
-            Here’s a summary of your event. Does everything look right? {{application?.eventStatus}}
-        </p>
-
-        <p>
-            Review your event details one more time before submitting your application for review.
-        </p>
-
-        <p>
-            Scroll down the page to complete the review and submit your application. Please be sure to complete the
-            final
-            declaration and submit your application.
-        </p>
-
-
-      </section-->
-
-        <hr>
-        <div *ngIf="getStatus() == 'Issued' || (getStatus() == 'Payment Required' && trnApproved != '1')">
-          <app-error-alert>
-            Please print this page for your records!
-          </app-error-alert>
-          <span class="print-page" (click)="printPage()">
-            <!--<mat-icon aria-label="Print Page" style="text-decoration: solid">print</mat-icon>-->
-            <fa-icon [icon]="faPrint" class="fa-lg"></fa-icon>
-            <a href="javascript: void(0)"> Print Page</a>
-          </span>
-          <h2 style="color: green" *ngIf="getStatus() == 'Issued'">Payment Approved</h2>
-          <h2 style="color: red" *ngIf="(getStatus() == 'Payment Required' && trnApproved != '1')">{{paymentTransactionTitle}}</h2>
-          <p *ngIf="getStatus() == 'Payment Required' && trnApproved != '1'">{{paymentTransactionMessage}}</p>
-          <div class="table" style="padding: 0px;">
-            <table>
-              <tr>
-                <td>Card Type</td>
-                <td>{{cardType}}</td>
-              </tr>
-              <tr>
-                <td>Date/Time</td>
-                <td>{{trnDate}}</td>
-              </tr>
-              <tr>
-                <td>Invoice Number</td>
-                <td>{{invoice}}</td>
-              </tr>
-              <tr>
-                <td>Transaction ID</td>
-                <td>{{trnId}}</td>
-              </tr>
-              <tr>
-                <td>Amount</td>
-                <td>{{trnAmount | currency}}</td>
-              </tr>
-            </table>
-          </div>
-          <hr>
+        <div class="d-flex">
+          <label>Event Name:</label>
+          <span>{{ application?.eventName }}</span>
+        </div>
+        <hr />
+        <div class="d-flex">
+          <label>City, District, or Indigenous Nation:</label>
+          <span>{{ application?.sepCity?.name }}</span>
+        </div>
+        <div class="d-flex">
+          <p *ngIf="getStatus() == 'Pending Review'">
+            <em>
+              If the city, district or Indigenous Nation has been submitted incorrectly, the police representative will
+              modify it and submit the application to the correct authority.
+            </em>
+          </p>
         </div>
 
-        <h2>Summary</h2>
+        <hr />
 
+        <div class="d-flex">
+          <label>Applicant Name:</label>
+          <span>{{ application?.applicant?.name }}</span>
+        </div>
 
-        <mat-expansion-panel [expanded]="true">
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    GENERAL APPLICATION INFO
-                </mat-panel-title>
-            </mat-expansion-panel-header>
+        <hr />
 
-            <div class="d-flex">
-              <label>Event Name:</label> <span>{{application?.eventName}}</span>
-            </div>
-            <hr>
-            <div class="d-flex">
-                <label>City, District, or Indigenous Nation:</label> <span>{{application?.sepCity?.name}}</span>
-            </div>
-            <div class="d-flex">
+        <div class="d-flex">
+          <label>Applicant Info:</label>
+          <section>
+            <div>{{ application?.applicant?.telephone1 | mask: '(000) 000-0000' }}</div>
+            <div>{{ application?.applicant?.emailaddress1 }}</div>
+          </section>
+        </div>
+      </mat-expansion-panel>
 
-              <p *ngIf="getStatus() == 'Pending Review'"><em>If the city, district or Indigenous Nation has been submitted incorrectly, the police representative will modify it and submit the application to the correct authority.</em></p>
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>ELIGIBILITY</mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="d-flex">
+          <label>Event Starts On:</label>
+          <span>{{ application?.eventStartDate | date: 'd MMM yyyy' }}</span>
+        </div>
+        <hr />
+        <div class="d-flex">
+          <label>Responsible Beverage Service #:</label>
+          <span>{{ application?.responsibleBevServiceNumber }}</span>
+        </div>
+        <hr />
 
-            </div>
-
-            <hr>
-
-            <div class="d-flex">
-              <label>Applicant Name:</label> <span>{{application?.applicant?.name}}</span>
+        <section *ngIf="application?.hostOrganizationName != null">
+          <div class="d-flex">
+            <label>Organization Type:</label>
+            <span>{{ application?.hostOrganizationCategory }}</span>
           </div>
-
-          <hr>
+          <hr />
+          <div class="d-flex">
+            <label>Name of The Organization:</label>
+            <span>{{ application?.hostOrganizationName }}</span>
+          </div>
+          <hr />
 
           <div class="d-flex">
-              <label>Applicant Info:</label>
-              <section>
-                  <!--div>{{application?.applicant?.address1_line1}}</div>
-                  <div>{{application?.applicant?.address1_city}}</div>
-                  <div>{{application?.applicant?.address1_stateorprovince}}</div>
-                  <div>{{application?.applicant?.address1_postalcode}}</div-->
-                  <div>{{application?.applicant?.telephone1 | mask: "(000) 000-0000"}}</div>
-                  <div>{{application?.applicant?.emailaddress1}}</div>
-              </section>
+            <label>Address of The Organization:</label>
+            <span>{{ application?.hostOrganizationAddress }}</span>
           </div>
+          <hr />
+        </section>
+        <div class="d-flex">
+          <label>Occasion of event:</label>
+          <span>{{ application?.specialEventDescription }}</span>
+        </div>
+        <hr />
+        <div class="d-flex">
+          <label>Licence Already exists in location:</label>
+          <span>{{ application?.isLocationLicensed }}</span>
+        </div>
+        <hr />
+        <div class="d-flex">
+          <label>Permit Category</label>
+          <span>{{ SummaryComponent.getPermitCategoryLabel(application?.privateOrPublic) }}</span>
+        </div>
+        <hr />
+        <div class="d-flex">
+          <label>Public Property</label>
+          <span>{{ application?.isOnPublicProperty ? 'Yes' : 'No' }}</span>
+        </div>
+      </mat-expansion-panel>
 
-        </mat-expansion-panel>
+      <mat-expansion-panel [expanded]="true" *ngFor="let loc of application?.eventLocations; let i = index">
+        <mat-expansion-panel-header>
+          <mat-panel-title>EVENT LOCATION ({{ i + 1 }} of {{ application?.eventLocations.length }})</mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="d-flex">
+          <label>Location Name:</label>
+          <span>{{ loc.locationName }}</span>
+        </div>
+        <div class="d-flex">
+          <label>Location Description:</label>
+          <span>{{ loc.locationDescription }}</span>
+        </div>
+        <div class="d-flex">
+          <label>Max Attendees at Location:</label>
+          <span>{{ loc.maximumNumberOfGuests }}</span>
+        </div>
+        <div class="d-flex">
+          <label>Event Address:</label>
+          <section>
+            <span>{{ loc.eventLocationStreet1 }}</span>
+            <br />
+            <span>{{ application?.sepCity?.name }}, BC</span>
+            <br />
+            <span>{{ loc.eventLocationPostalCode }}</span>
+            <br />
+          </section>
+        </div>
 
+        <div *ngFor="let serviceArea of loc.serviceAreas; let k = index">
+          <h4>SERVICE AREA ({{ k + 1 }} of {{ loc.serviceAreas.length }})</h4>
+          <div class="d-flex">
+            <label>Description:</label>
+            <span>{{ serviceArea?.eventName }}</span>
+          </div>
+          <div class="d-flex">
+            <label>Max. Guests in Service Area:</label>
+            <span>{{ serviceArea?.licencedAreaMaxNumberOfGuests }}</span>
+          </div>
+          <div class="d-flex">
+            <label>Minors Present?</label>
+            <span>{{ serviceArea?.minorPresent ? 'Yes' : 'No' }}</span>
+          </div>
+          <div *ngIf="serviceArea.minorPresent" class="d-flex">
+            <label>Number of Minors:</label>
+            <span>{{ serviceArea.numberOfMinors }}</span>
+          </div>
+        </div>
+
+        <section *ngFor="let eventDate of loc.eventDates; let j = index">
+          <h4>EVENT DATE ({{ j + 1 }} of {{ loc.eventDates.length }})</h4>
+          <div class="d-flex">
+            <label>Start Date:</label>
+            <span>{{ eventDate.eventDate | date: 'dd MMM yyyy' }}</span>
+          </div>
+          <div class="d-flex">
+            <label>Start Time:</label>
+            <span>{{ eventDate.eventStartValue }} - {{ eventDate.eventEndValue }}</span>
+          </div>
+          <div class="d-flex">
+            <label>Liquor Service:</label>
+            <span>{{ eventDate.serviceStartValue }} - {{ eventDate.serviceEndValue }}</span>
+          </div>
+        </section>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>LIQUOR FEES</mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <h4>LIQUOR QUANTITIES</h4>
+
+        <table>
+          <tr>
+            <th class="forecast">&nbsp;</th>
+            <th class="forecast">No. Servings</th>
+            <th class="forecast">Est. Sell Price</th>
+            <th class="forecast">Est. Revenue</th>
+            <th class="forecast">Est. Cost</th>
+          </tr>
+          <tr *ngFor="let f of application?.drinksSalesForecasts">
+            <td class="forecast">
+              <label>{{ f.name.substring(f.name.indexOf('-') + 2, f.name.lastIndexOf('-')) }}</label>
+            </td>
+            <td class="forecast">{{ f.estimatedServings }}</td>
+            <td class="forecast">{{ f.pricePerServing | currency }}</td>
+            <td class="forecast">{{ f.estimatedRevenue | currency }}</td>
+            <td class="forecast">{{ f.estimatedCost | currency }}</td>
+          </tr>
+        </table>
+
+        <hr />
+
+        <div class="d-flex">
+          <label>Est. Total Liquor Sales Revenue</label>
+          <span class="fee-amount">{{ application?.totalRevenue | currency }}</span>
+        </div>
+        <div class="d-flex">
+          <label>Est. Liquor Purchase Cost</label>
+          <span class="fee-amount">{{ application?.totalPurchaseCost | currency }}</span>
+        </div>
+        <div class="d-flex">
+          <label>Est. Net Proceeds/Profit From Liquor Sales</label>
+          <span class="fee-amount">{{ getProfit() | currency }}</span>
+        </div>
+        <div class="d-flex">
+          <label>Total PST Due</label>
+          <span class="fee-amount">{{ application?.netEstimatedPST | currency }}</span>
+        </div>
+        <div class="d-flex">
+          <label>
+            Application Fees
+            <br />
+          </label>
+          <span class="fee-amount">
+            {{ application?.invoice?.totalamount - application?.netEstimatedPST | currency }}
+          </span>
+          <em>
+            &nbsp;(based on {{ application?.eventLocations.length }} event location
+            <span *ngIf="application?.eventLocations.length > 1">s</span>
+            and capacity)
+          </em>
+        </div>
+
+        <hr />
+
+        <div class="d-flex total-fees-due">
+          <label>
+            <span *ngIf="application?.eventStatus != 'Issued'">Total Fees Due Upon Approval</span>
+            <span *ngIf="application?.eventStatus == 'Issued'">Fees Paid</span>
+          </label>
+          <span class="fee-amount">{{ application?.invoice?.totalamount | currency }}</span>
+        </div>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel [expanded]="true" *ngIf="application?.termsAndConditions?.length > 0">
+        <mat-expansion-panel-header>
+          <mat-panel-title>TERMS & CONDITIONS</mat-panel-title>
+        </mat-expansion-panel-header>
+        <ul>
+          <li *ngFor="let tc of application?.termsAndConditions; let i = index">{{ tc.content }}</li>
+        </ul>
+      </mat-expansion-panel>
+
+      <section>
         <mat-expansion-panel [expanded]="true">
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    ELIGIBILITY
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-            <div class="d-flex">
-                <label>Event Starts On:</label> <span>{{application?.eventStartDate | date: 'd MMM yyyy'}}</span>
-            </div>
-            <hr>
-            <div class="d-flex">
-              <label>Responsible Beverage Service #:</label> <span>{{application?.responsibleBevServiceNumber}}</span>
-            </div>
-            <hr>
-
-            <section *ngIf="application?.hostOrganizationName != null">
-              <div class="d-flex">
-                <label>Organization Type:</label> <span>{{application?.hostOrganizationCategory}}</span>
-              </div>
-              <hr>
-              <div class="d-flex">
-                <label>Name of The Organization:</label> <span>{{application?.hostOrganizationName}}</span>
-              </div>
-              <hr>
-
-              <div class="d-flex">
-                <label>Address of The Organization:</label> <span>{{application?.hostOrganizationAddress}}</span>
-              </div>
-              <hr>
-            </section>
-            <div class="d-flex">
-                <label>Occasion of event:</label> <span>{{application?.specialEventDescription}}</span>
-            </div>
-            <hr>
-            <div class="d-flex">
-                <label>Licence Already exists in location:</label> <span>{{application?.isLocationLicensed}}</span>
-            </div>
-            <hr>
-            <div class="d-flex">
-                <label>Permit Category</label> <span>{{SummaryComponent.getPermitCategoryLabel(application?.privateOrPublic)}}</span>
-            </div>
-            <hr>
-            <div class="d-flex">
-                <label>Public Property</label> <span>{{application?.isOnPublicProperty ? 'Yes' : 'No'}}</span>
-            </div>
-        </mat-expansion-panel>
-
-        <mat-expansion-panel [expanded]="true" *ngFor="let loc of application?.eventLocations; let i = index;">
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    EVENT LOCATION ({{i+1}} of {{application?.eventLocations.length}})
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-            <div class="d-flex">
-                <label>Location Name:</label> <span>{{loc.locationName}}</span>
-            </div>
-            <div class="d-flex">
-                <label>Location Description:</label> <span>{{loc.locationDescription}}</span>
-            </div>
-            <div class="d-flex">
-              <label>Max Attendees at Location:</label> <span>{{loc.maximumNumberOfGuests}}</span>
-          </div>
-            <div class="d-flex">
-                <label>Event Address:</label>
-                <section>
-                    <span>{{loc.eventLocationStreet1}}</span> <br>
-                    <span>{{application?.sepCity?.name}}, BC</span> <br>
-                    <span>{{loc.eventLocationPostalCode}}</span> <br>
-                </section>
-            </div>
-
-            <div *ngFor="let serviceArea of loc.serviceAreas; let k = index;">
-              <h4> SERVICE AREA ({{k+1}} of {{loc.serviceAreas.length}})</h4>
-              <div class="d-flex">
-                  <label>Description:</label> <span>{{serviceArea?.eventName}}</span>
-              </div>
-              <div class="d-flex">
-                  <label>Max. Guests in Service Area:</label> <span>{{serviceArea?.licencedAreaMaxNumberOfGuests}}</span>
-              </div>
-              <div class="d-flex">
-                  <label>Minors Present?</label> <span>{{serviceArea?.minorPresent ? "Yes" : "No"}}</span>
-              </div>
-              <div *ngIf="serviceArea.minorPresent" class="d-flex">
-                  <label>Number of Minors:</label> <span>{{serviceArea.numberOfMinors}}</span>
-              </div>
-          </div>
-
-
-            <section *ngFor="let eventDate of loc.eventDates; let j = index;">
-                <h4>EVENT DATE ({{j+1}} of {{loc.eventDates.length}})</h4>
-                <div class="d-flex">
-                    <label>Start Date:</label> <span>{{eventDate.eventDate | date: 'dd MMM yyyy'}}</span>
-                </div>
-                <div class="d-flex">
-                    <label>Start Time:</label> <span>{{eventDate.eventStartValue}} - {{eventDate.eventEndValue}}</span>
-                </div>
-                <div class="d-flex">
-                    <label>Liquor Service:</label> <span>{{eventDate.serviceStartValue}} -
-                        {{eventDate.serviceEndValue}}</span>
-                </div>
-            </section>
-        </mat-expansion-panel>
-
-        <mat-expansion-panel [expanded]="true">
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    LIQUOR FEES
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-
-            <h4>LIQUOR QUANTITIES</h4>
-
-            <!--div class="d-flex" style="white-space: nowrap; font-weight:900;">
-              <label>Total Servings:</label> <span class="fee-amount">{{application?.totalServings || 0}}</span>
-          </div>
-
-            <div class="d-flex" style="white-space: nowrap; font-weight:900;">
-                <label>Beer</label> <span class="fee-amount">{{application?.beer || 0}}</span>
-            </div>
-            <div class="d-flex" style="white-space: nowrap; font-weight:900;">
-                <label>Wine</label> <span class="fee-amount">{{application?.wine || 0}}</span>
-            </div>
-            <div class="d-flex" style="white-space: nowrap; font-weight:900;">
-                <label>Spirits</label> <span class="fee-amount">{{application?.spirits || 0}}</span>
-            </div-->
-
-            <table>
-              <tr><th class="forecast">&nbsp;</th><th class="forecast">No. Servings</th><th class="forecast">Est. Sell Price</th><th class="forecast">Est. Revenue</th><th class="forecast">Est. Cost</th></tr>
-              <tr *ngFor="let f of application?.drinksSalesForecasts;"><td class="forecast"><label>{{f.name.substring(f.name.indexOf("-")+2,f.name.lastIndexOf("-"))}}</label></td><td class="forecast">{{f.estimatedServings}}</td><td class="forecast">{{f.pricePerServing | currency}}</td><td class="forecast">{{f.estimatedRevenue | currency}}</td><td class="forecast">{{f.estimatedCost | currency}}</td></tr>
-
-            </table>
-
-
-            <hr>
-
-            <div class="d-flex">
-                <label>Est. Total Liquor Sales Revenue</label> <span class="fee-amount">{{application?.totalRevenue | currency}}</span>
-            </div>
-            <div class="d-flex">
-                <label>Est. Liquor Purchase Cost</label> <span class="fee-amount">{{application?.totalPurchaseCost | currency}}</span>
-            </div>
-            <div class="d-flex">
-                <label>Est. Net Proceeds/Profit From Liquor Sales</label> <span class="fee-amount">{{getProfit() | currency}}</span>
-            </div>
-            <div class="d-flex">
-                <label>Total PST Due</label> <span class="fee-amount">{{application?.netEstimatedPST | currency}}</span>
-            </div>
-            <div class="d-flex">
-              <label>Application Fees <br>
-              </label> <span class="fee-amount">{{application?.invoice?.totalamount - application?.netEstimatedPST |
-                currency}}</span><em>&nbsp;(based on {{application?.eventLocations.length}} event location<span
-                  *ngIf="application?.eventLocations.length > 1">s</span> and capacity)</em>
-            </div>
-
-
-            <hr>
-
-            <div class="d-flex total-fees-due">
-
-                <label>
-                  <span *ngIf="application?.eventStatus != 'Issued'">Total Fees Due Upon Approval</span>
-                  <span *ngIf="application?.eventStatus == 'Issued'">Fees Paid</span>
-
-
-                </label> <span class="fee-amount">{{application?.invoice?.totalamount
-                    | currency}}</span>
-            </div>
-        </mat-expansion-panel >
-
-        <mat-expansion-panel [expanded]="true" *ngIf="application?.termsAndConditions?.length > 0">
-
           <mat-expansion-panel-header>
-            <mat-panel-title>
-                TERMS & CONDITIONS
-            </mat-panel-title>
+            <mat-panel-title>SPECIAL EVENT REFUND</mat-panel-title>
           </mat-expansion-panel-header>
+          <div>
+            <p>
+              Generally,
+              <a
+                href="https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/241_2016#Schedule1"
+                target="_blank">
+                Permit fees
+              </a>
+              are non-refundable. A cancelled event is not grounds for a refund.
+            </p>
+            <p>Refunds for permit fees may be available if:</p>
             <ul>
-              <li *ngFor="let tc of application?.termsAndConditions; let i = index;">{{tc.content}}</li>
+              <li>The LCRB has made an error</li>
+              <li>You have overpaid</li>
+              <li>The event is cancelled due to exceptional circumstances such as a provincial state of emergency</li>
             </ul>
 
-
-        </mat-expansion-panel>
-
-        <section >
-          <mat-expansion-panel [expanded]="true">
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                  SPECIAL EVENT REFUND
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-            <div><p>Generally, <a href="https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/241_2016#Schedule1" target="_blank">Permit fees</a> are non-refundable. A cancelled event is not grounds for a refund.</p>
-              <p>Refunds for permit fees may be available if:</p>
-              <ul>
-                <li>The LCRB has made an error</li>
-                <li>You have overpaid</li>
-                <li>The event is cancelled due to exceptional circumstances such as a provincial state of emergency</li>
-              </ul>
-      
-              <p>The LCRB investigates all credit card chargeback requests for fees and will dispute chargeback requests. A note will also be made on your LCRB account and there may be consequences for fraudulent requests.</p>
-              <p>Payment may appear on a credit card statement as:</p>
-              <ul>
-                <li>"Special Occasion licence"</li>
-                <li>"Special Occasio"</li>
-                <li>Other variations</li>
-              </ul></div>
-            <div *ngIf="getStatus() == 'Payment Required' && !trnId || mode ==='payNow'">
-              <mat-checkbox [(ngModel)] = "isRefundPolicyChecked">
-                <span class="error-states">*</span>
-                I have read and understand the refund policy.
-              </mat-checkbox>
-              <div *ngIf="showRefundPolicyError" class="error-text">
-                Please affirm that you have read and understand the refund policy.
-              </div>
+            <p>
+              The LCRB investigates all credit card chargeback requests for fees and will dispute chargeback requests. A
+              note will also be made on your LCRB account and there may be consequences for fraudulent requests.
+            </p>
+            <p>Payment may appear on a credit card statement as:</p>
+            <ul>
+              <li>"Special Occasion licence"</li>
+              <li>"Special Occasio"</li>
+              <li>Other variations</li>
+            </ul>
+          </div>
+          <div *ngIf="(getStatus() == 'Payment Required' && !trnId) || mode === 'payNow'">
+            <mat-checkbox [(ngModel)]="isRefundPolicyChecked">
+              <span class="error-states">*</span>
+              I have read and understand the refund policy.
+            </mat-checkbox>
+            <div *ngIf="showRefundPolicyError" class="error-text">
+              Please affirm that you have read and understand the refund policy.
             </div>
-          </mat-expansion-panel>
-        </section> <!-- special event refund -->
-        
-        <div *ngIf="!isReadOnly() && !isSubmitted() && !this.isEventPast()">
+          </div>
+        </mat-expansion-panel>
+      </section>
+      <!-- special event refund -->
 
-          <section class="d-flex">
-
-            <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
-            <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
-              <section>
-                <h2 style="margin-bottom: 24px;">Declaration</h2>
-                <p style="white-space: normal;"><em>
-                  I, <strong><u>{{contact?.name}}</u></strong>, certify that all of the information is true and complete to the best of my
-                  knowledge. I have read the <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals/guide-sep.pdf" target="_blank">terms and conditions of the permit</a>, and if the application is approved,
+      <div *ngIf="!isReadOnly() && !isSubmitted() && !this.isEventPast()">
+        <section class="d-flex">
+          <div class="flex-grow-0" style="background-color: #e1e8f2; width: 50px"></div>
+          <div class="flex-grow-1 p-3" style="background-color: #f1f4fa; padding: 20px">
+            <section>
+              <h2 style="margin-bottom: 24px">Declaration</h2>
+              <p style="white-space: normal">
+                <em>
+                  I,
+                  <strong>
+                    <u>{{ contact?.name }}</u>
+                  </strong>
+                  , certify that all of the information is true and complete to the best of my knowledge. I have read
                   the
-                  permittee listed on the permit will be responsible for liquor service at the event.
-                </em></p>
-                <mat-checkbox
-                  [(ngModel)]="isDeclarationChecked"
-                  (change)="showDeclarationError = false"
-                  class="declaration-checkbox"
-                  style="white-space: normal; margin:0px;"
-                >
-                  <p style="white-space: normal;">
-                    <span class="error-states">*</span>
-                    <em>By checking this box, I confirm that I have read, agree to and acknowledge the declaration. I also
+                  <a
+                    href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals/guide-sep.pdf"
+                    target="_blank">
+                    terms and conditions of the permit
+                  </a>
+                  , and if the application is approved, the permittee listed on the permit will be responsible for
+                  liquor service at the event.
+                </em>
+              </p>
+              <mat-checkbox
+                [(ngModel)]="isDeclarationChecked"
+                (change)="showDeclarationError = false"
+                class="declaration-checkbox"
+                style="white-space: normal; margin: 0px">
+                <p style="white-space: normal">
+                  <span class="error-states">*</span>
+                  <em>
+                    By checking this box, I confirm that I have read, agree to and acknowledge the declaration. I also
                     certify that I am at least 19 years old and that no essential information has been concealed or
-                    misrepresented on this application.</em>
-                  </p>
+                    misrepresented on this application.
+                  </em>
+                </p>
               </mat-checkbox>
 
-              <div *ngIf="showDeclarationError" class="error-message" style="color: #D8292F; margin-top: 8px;">
+              <div *ngIf="showDeclarationError" class="error-message" style="color: #d8292f; margin-top: 8px">
                 Please read and acknowledge the declaration before proceeding.
               </div>
 
-              <div class="d-flex" style="margin-top: 20px;">
-                <!--button mat-raised-button color="secondary" class="mr-2">BACK</button-->
-
+              <div class="d-flex" style="margin-top: 20px">
                 <button [disabled]="savingToAPI" mat-raised-button color="primary" (click)="submitApplication()">
-                    <span>SUBMIT APPLICATION</span>
-                    <mat-progress-bar *ngIf="savingToAPI" mode="indeterminate"></mat-progress-bar>
+                  <span>SUBMIT APPLICATION</span>
+                  <mat-progress-bar *ngIf="savingToAPI" mode="indeterminate"></mat-progress-bar>
                 </button>
-
               </div>
-              </section>
-
-            </div>
-          </section>
-        </div> <!-- DECLARATION SECTION -->
-
-
-
-        <div *ngIf="!isReadOnly() && this.isEventPast()" class="d-flex" style="margin-top: 20px;">
-
-          <p><fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>Permits cannot be issued before or on the date that they are submitted.</p>
-
-        </div>
-        
-
-
-        <section *ngIf="getStatus() == 'Payment Required' && !trnId || mode ==='payNow'">
-
-          <section style="border: solid #ccc 1px;
-                          padding: 20px;
-                          background-color: #fcba19;
-                          padding-bottom: 20px;">
-            <h3>Application Approved!</h3>
-
-            <p><fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>You must pay these fees to get a special event permit. If you do not pay these fees, your application will not be valid and a licence will not be issued for your event.</p>
-            <p>If the information on this application is no longer correct or if you wish to make additional changes, you may contact the LCRB or withdraw your application up to 24 hours before the event begins.</p>
-            <button mat-raised-button color="primary" (click)="payNow()"><fa-icon [icon]="faShoppingCart" style="margin-right: 10px;"></fa-icon>PAY NOW</button>
-
-            <div *ngIf="showRefundPolicyError" class="error-text">
-              <br>
-              Please affirm that you have read and understand the refund policy.
-            </div>
-          </section>
-
-          <!--button mat-raised-button (click)="payNow()">Pay Now</button-->
-
+            </section>
+          </div>
         </section>
+      </div>
+      <!-- DECLARATION SECTION -->
 
+      <div *ngIf="!isReadOnly() && this.isEventPast()" class="d-flex" style="margin-top: 20px">
+        <p>
+          <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px"></fa-icon>
+          Permits cannot be issued before or on the date that they are submitted.
+        </p>
+      </div>
 
+      <section *ngIf="(getStatus() == 'Payment Required' && !trnId) || mode === 'payNow'">
+        <section style="border: solid #ccc 1px; padding: 20px; background-color: #fcba19; padding-bottom: 20px">
+          <h3>Application Approved!</h3>
 
+          <p>
+            <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px"></fa-icon>
+            You must pay these fees to get a special event permit. If you do not pay these fees, your application will
+            not be valid and a licence will not be issued for your event.
+          </p>
+          <p>
+            If the information on this application is no longer correct or if you wish to make additional changes, you
+            may contact the LCRB or withdraw your application up to 24 hours before the event begins.
+          </p>
+          <button mat-raised-button color="primary" (click)="payNow()">
+            <fa-icon [icon]="faShoppingCart" style="margin-right: 10px"></fa-icon>
+            PAY NOW
+          </button>
+
+          <div *ngIf="showRefundPolicyError" class="error-text">
+            <br />
+            Please affirm that you have read and understand the refund policy.
+          </div>
+        </section>
+      </section>
     </div>
   </div>
 </ng-container>
-
-
-
-<!--div *ngIf="mode === 'payNow' && !isReadOnly()">
-    <p>
-        Your may now pay for your application
-    </p>
-    <button mat-raised-button (click)="payNow()">Pay Now</button>
-</div-->
