@@ -104,13 +104,19 @@ import { SepPaymentConfirmationComponent } from "@components/sep/payment-confirm
 import { SummaryComponent } from "@components/sep/sep-application/summary/summary.component";
 import { SepClaimComponent } from "@components/sep/sep-claim/sep-claim.component";
 import { RelocationTypeComponent } from "@components/relocation-type/relocation-type.component";
+import { TiedHouseDeclarationFormComponent } from "@components/applications/tied-house-decleration/tied-house-decleration-form/tied-house-declaration-form.component";
+import { TiedHouseDeclarationComponent } from "@components/applications/tied-house-decleration/tied-house-declaration.component";
 
 const routes: Routes = [
   {
     path: "",
     component: HomeComponent
   },
+  //Temp route for dev
   {
+    path: "tied-house-test",
+    component: TiedHouseDeclarationComponent
+  },{
     path: "sep",
     component: LoginComponent,
     canActivate: [FeatureGuard],
