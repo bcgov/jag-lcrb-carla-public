@@ -552,7 +552,7 @@
               <li>Other variations</li>
             </ul>
           </div>
-          <div *ngIf="(getStatus() == 'Payment Required' && !trnId) || mode === 'payNow'">
+          <div *ngIf="(getStatus() == 'Payment Required' && (!trnId || trnId === '0')) || mode === 'payNow'">
             <mat-checkbox [(ngModel)]="isRefundPolicyChecked">
               <span class="error-states">*</span>
               I have read and understand the refund policy.
@@ -626,7 +626,7 @@
         </p>
       </div>
 
-      <section *ngIf="(getStatus() == 'Payment Required' && !trnId) || mode === 'payNow'">
+      <section *ngIf="(getStatus() == 'Payment Required' && (!trnId || trnId === '0')) || mode === 'payNow'">
         <section style="border: solid #ccc 1px; padding: 20px; background-color: #fcba19; padding-bottom: 20px">
           <h3>Application Approved!</h3>
 
