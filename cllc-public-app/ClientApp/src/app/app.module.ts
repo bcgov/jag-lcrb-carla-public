@@ -341,9 +341,14 @@ import { PermanentChangeNameLicenseeSocitey } from "@shared/components/permanent
 import { PermanentChangeNamePersonComponent } from "@shared/components/permanent-change/permanent-change-name-person/permanent-change-name-person.component";
 import { PermanentChangeExternalTransferShares } from "@shared/components/permanent-change/permanent-change-external-transfer-shares/permanent-change-external-transfer-shares.component";
 import { PermanentChangeNameLicenseePartnership } from "@shared/components/permanent-change/permanent-change-name-licensee-partnership/permanent-change-name-licensee-partnership.component";
-import { PermanentChangeLegalEntityReviewTypesOfChangesRequiredComponent } from "@shared/components/permanent-change/permanent-change-legal-entity-review-types-of-changes-required/permanent-change-legal-entity-review-types-of-changes-required.component";
-import { PermanentChangeLegalEntityReviewJobComponent } from "@shared/components/permanent-change/permanent-change-legal-entity-review-job/permanent-change-legal-entity-review-job.component";
-import { PermanentChangeToALicenseeLegalEntityReviewComponent } from "@components/applications/permanent-change-to-a-licensee-legal-entity-review/permanent-change-to-a-licensee-legal-entity-review.component";
+import { LegalEntityReviewTypesOfChangesRequiredComponent } from "@shared/components/legal-entity-review/legal-entity-review-types-of-changes-required/legal-entity-review-types-of-changes-required.component";
+import { LegalEntityReviewJobComponent } from "@shared/components/legal-entity-review/legal-entity-review-job/legal-entity-review-job.component";
+import { LegalEntityReviewComponent } from "@components/applications/legal-entity-review/legal-entity-review.component";
+import { LegalEntityReviewDisclaimerComponent } from "@shared/components/legal-entity-review/legal-entity-review-disclaimer/legal-entity-review-disclaimer.component";
+import { LegalEntityReviewDeclarationsComponent } from "@shared/components/legal-entity-review/legal-entity-review-declarations/legal-entity-review-declarations.component";
+import { LegalEntityReviewWhatHappensNextComponent } from "@shared/components/legal-entity-review/legal-entity-review-what-happens-next/legal-entity-review-what-happens-next.component";
+import { LegalEntityReviewTiedHouseComponent } from "@shared/components/legal-entity-review/legal-entity-review-tied-house/legal-entity-review-tied-house.component";
+import { LegalEntityReviewSupportingDocumentsComponent } from "@shared/components/legal-entity-review/legal-entity-review-supporting-documents/legal-entity-review-supporting-documents.component";
 import { ConnectionToOtherLiquorLicencesComponent } from "@components/account-profile/tabs/connection-to-producers/connection-to-other-liquor-licences/connection-to-other-liquor-licences.component";
 
 @NgModule({
@@ -555,9 +560,14 @@ import { ConnectionToOtherLiquorLicencesComponent } from "@components/account-pr
     PermanentChangePaymentComponent,
     PermanentChangePersonalHistorySummaryFormsComponent,
     PermanentChangeTypesOfChangesRequestedComponent,
-    PermanentChangeToALicenseeLegalEntityReviewComponent,
-    PermanentChangeLegalEntityReviewTypesOfChangesRequiredComponent,
-    PermanentChangeLegalEntityReviewJobComponent
+    LegalEntityReviewComponent,
+    LegalEntityReviewDeclarationsComponent,
+    LegalEntityReviewDisclaimerComponent,
+    LegalEntityReviewJobComponent,
+    LegalEntityReviewSupportingDocumentsComponent,
+    LegalEntityReviewTiedHouseComponent,
+    LegalEntityReviewTypesOfChangesRequiredComponent,
+    LegalEntityReviewWhatHappensNextComponent
   ],
   imports: [
     AppRoutingModule,

@@ -5,19 +5,19 @@ import { Account } from '@models/account.model';
 import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
 
 /**
- * The legal entity review job section of a permanent change legal entity review application.
+ * The legal entity review job section of a legal entity review application.
  *
  * @export
- * @class PermanentChangeLegalEntityReviewJobComponent
+ * @class LegalEntityReviewJobComponent
  * @implements {OnInit}
  */
 @Component({
-  selector: 'app-permanent-change-legal-entity-review-job',
-  templateUrl: './permanent-change-legal-entity-review-job.component.html',
-  styleUrls: ['./permanent-change-legal-entity-review-job.component.scss'],
+  selector: 'app-legal-entity-review-job',
+  templateUrl: './legal-entity-review-job.component.html',
+  styleUrls: ['./legal-entity-review-job.component.scss'],
   viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
 })
-export class PermanentChangeLegalEntityReviewJobComponent implements OnInit {
+export class LegalEntityReviewJobComponent implements OnInit {
   @Input() account: Account;
   @Input() liquorLicences: ApplicationLicenseSummary[] = [];
   @Input() cannabisLicences: ApplicationLicenseSummary[] = [];

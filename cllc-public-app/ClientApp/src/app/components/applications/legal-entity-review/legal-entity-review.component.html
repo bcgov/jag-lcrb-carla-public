@@ -1,0 +1,59 @@
+<div [formGroup]="form" class="form-wrapper">
+  <h1>Legal Entity Review</h1>
+
+  <mat-progress-bar class="mt-1" *ngIf="!dataLoaded" mode="indeterminate"></mat-progress-bar>
+
+  <ng-container *ngIf="dataLoaded">
+    <section>
+      <app-legal-entity-review-disclaimer
+        [account]="account"
+        [liquorLicences]="liquorLicences"
+        [cannabisLicences]="cannabisLicences"></app-legal-entity-review-disclaimer>
+    </section>
+
+    <!-- Tied House Connections -->
+    <section>
+      <app-legal-entity-review-tied-house
+        [hasLiquor]="hasLiquor"
+        [hasCannabis]="hasCannabis"
+        [showValidationMessages]="showValidationMessages"></app-legal-entity-review-tied-house>
+    </section>
+
+    <!-- Supporting Documents -->
+    <section>
+      <app-legal-entity-review-supporting-documents
+        [hasLiquor]="hasLiquor"
+        [hasCannabis]="hasCannabis"
+        [showValidationMessages]="showValidationMessages"></app-legal-entity-review-supporting-documents>
+    </section>
+
+    <!-- Declaration -->
+    <section>
+      <app-legal-entity-review-declarations
+        [hasLiquor]="hasLiquor"
+        [hasCannabis]="hasCannabis"
+        [showValidationMessages]="showValidationMessages"></app-legal-entity-review-declarations>
+    </section>
+
+    <!-- What Happens Next -->
+    <section>
+      <app-legal-entity-review-what-happens-next
+        [account]="account"
+        [liquorLicences]="liquorLicences"
+        [cannabisLicences]="cannabisLicences"></app-legal-entity-review-what-happens-next>
+    </section>
+
+    <section class="error mt-3" *ngIf="showValidationMessages">
+      <p *ngFor="let message of validationMessages">
+        <span class="app-cancel">
+          <mat-icon aria-label="error icon" style="font-size: 15px">error</mat-icon>
+          {{ message }}
+        </span>
+      </p>
+    </section>
+
+    <section>
+      <app-permanent-change-contact-support></app-permanent-change-contact-support>
+    </section>
+  </ng-container>
+</div>

@@ -23,19 +23,19 @@ import { catchError, filter, mergeMap, takeWhile } from 'rxjs/operators';
 export const SharepointNameRegex = /^[^~#%&*{}\\:<>?/+|""]*$/;
 
 /**
- * A component that displays a form page for a permanent change to a licensee legal entity application.
+ * A component that displays a form page for a legal entity review application.
  *
  * @export
- * @class PermanentChangeToALicenseeLegalEntityReviewComponent
+ * @class LegalEntityReviewComponent
  * @extends {FormBase}
  * @implements {OnInit}
  */
 @Component({
-  selector: 'app-permanent-change-to-a-licensee-legal-entity-review',
-  templateUrl: './permanent-change-to-a-licensee-legal-entity-review.component.html',
-  styleUrls: ['./permanent-change-to-a-licensee-legal-entity-review.component.scss']
+  selector: 'app-legal-entity-review',
+  templateUrl: './legal-entity-review.component.html',
+  styleUrls: ['./legal-entity-review.component.scss']
 })
-export class PermanentChangeToALicenseeLegalEntityReviewComponent extends FormBase implements OnInit {
+export class LegalEntityReviewComponent extends FormBase implements OnInit {
   faQuestionCircle = faQuestionCircle;
   faIdCard = faIdCard;
   application: Application;
@@ -146,7 +146,7 @@ export class PermanentChangeToALicenseeLegalEntityReviewComponent extends FormBa
    * Loads the form data.
    *
    * @private
-   * @memberof PermanentChangeToALicenseeComponent
+   * @memberof LegalEntityReviewComponent
    */
   private loadData() {
     const sub = this.applicationDataService.getPermanentChangesToLicenseeData(this.applicationId).subscribe((data) => {
@@ -158,7 +158,7 @@ export class PermanentChangeToALicenseeLegalEntityReviewComponent extends FormBa
   /**
    * Navigates to the application create page.
    *
-   * @memberof PermanentChangeToALicenseeComponent
+   * @memberof LegalEntityReviewComponent
    */
   onNewApplication(_invoiceType: 'primary' | 'secondary') {
     this.router.navigateByUrl(`/permanent-change-to-a-licensee`);
@@ -169,7 +169,7 @@ export class PermanentChangeToALicenseeLegalEntityReviewComponent extends FormBa
    *
    * @private
    * @param {*} { application, licences, primary, secondary }
-   * @memberof PermanentChangeToALicenseeComponent
+   * @memberof LegalEntityReviewComponent
    */
   private setFormData({ application, licences, primary, secondary }) {
     this.liquorLicences = licences.filter((item) => item.licenceTypeCategory === 'Liquor' && item.status === 'Active');
@@ -221,7 +221,7 @@ export class PermanentChangeToALicenseeLegalEntityReviewComponent extends FormBa
    * @param {boolean} [showProgress=false]
    * @param {Application} [appData={} as Application]
    * @return {*}  {Observable<[boolean, Application]>}
-   * @memberof PermanentChangeToALicenseeComponent
+   * @memberof LegalEntityReviewComponent
    */
   private save(
     showProgress: boolean = false,
@@ -260,7 +260,7 @@ export class PermanentChangeToALicenseeLegalEntityReviewComponent extends FormBa
    * Checks if the form is valid and collects validation messages.
    *
    * @return {*}  {boolean}
-   * @memberof PermanentChangeToALicenseeComponent
+   * @memberof LegalEntityReviewComponent
    */
   private isValid(): boolean {
     this.showValidationMessages = false;
@@ -320,7 +320,7 @@ export class PermanentChangeToALicenseeLegalEntityReviewComponent extends FormBa
    * Submit the application for payment.
    *
    * @param {('primary' | 'secondary')} invoiceType
-   * @memberof PermanentChangeToALicenseeComponent
+   * @memberof LegalEntityReviewComponent
    */
   onSubmit(invoiceType: 'primary' | 'secondary') {
     if (!this.isValid()) {
@@ -377,7 +377,7 @@ export class PermanentChangeToALicenseeLegalEntityReviewComponent extends FormBa
    * @private
    * @param {('primary' | 'secondary')} invoiceType
    * @return {*}
-   * @memberof PermanentChangeToALicenseeComponent
+   * @memberof LegalEntityReviewComponent
    */
   private submitPayment(invoiceType: 'primary' | 'secondary') {
     let payMethod = this.paymentDataService.getPaymentURI('primaryInvoice', this.application.id);
@@ -406,7 +406,7 @@ export class PermanentChangeToALicenseeLegalEntityReviewComponent extends FormBa
    * Returns a map of validation error messages for the form controls.
    *
    * @return {*}
-   * @memberof PermanentChangeToALicenseeComponent
+   * @memberof LegalEntityReviewComponent
    */
   getValidationErrorMap() {
     const errorMap = {

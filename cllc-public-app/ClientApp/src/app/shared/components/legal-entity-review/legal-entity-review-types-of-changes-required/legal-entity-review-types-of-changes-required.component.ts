@@ -5,19 +5,19 @@ import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { Account } from '@models/account.model';
 
 /**
- * The types of changes required section of a permanent change legal entity review application.
+ * The types of changes required section of a legal entity review application.
  *
  * @export
- * @class PermanentChangeLegalEntityReviewTypesOfChangesRequiredComponent
+ * @class LegalEntityReviewTypesOfChangesRequiredComponent
  * @implements {OnInit}
  */
 @Component({
-  selector: 'app-permanent-change-legal-entity-review-types-of-changes-required',
-  templateUrl: './permanent-change-legal-entity-review-types-of-changes-required.component.html',
-  styleUrls: ['./permanent-change-legal-entity-review-types-of-changes-required.component.scss'],
+  selector: 'app-legal-entity-review-types-of-changes-required',
+  templateUrl: './legal-entity-review-types-of-changes-required.component.html',
+  styleUrls: ['./legal-entity-review-types-of-changes-required.component.scss'],
   viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
 })
-export class PermanentChangeLegalEntityReviewTypesOfChangesRequiredComponent implements OnInit {
+export class LegalEntityReviewTypesOfChangesRequiredComponent implements OnInit {
   @Input() account: Account;
   @Input() changeList: PermanentChangeTypesOfChangesOption[];
 

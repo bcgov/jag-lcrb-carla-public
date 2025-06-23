@@ -14,7 +14,6 @@ import { CanDeactivateGuard } from "@services/can-deactivate-guard.service";
 import { BCeidAuthGuard } from "@services/bceid-auth-guard.service";
 import { ServiceCardAuthGuard } from "@services/service-card-auth-guard.service";
 import { DashboardComponent } from "@components/dashboard/dashboard.component";
-import { DashboardComponent as SepDashboardComponent } from "@components/sep/dashboard/dashboard.component";
 import { ApplicationComponent } from "@components/applications/application/application.component";
 import { WorkerQualificationComponent } from "@components/worker-qualification/worker-qualification.component";
 import { WorkerDashboardComponent } from "@components/worker-qualification/dashboard/dashboard.component";
@@ -69,11 +68,6 @@ import { CovidConfirmationComponent } from
 import { TerminateTPORelationshipComponent } from
   "@components/applications/terminate-tpo-relationship/terminate-tpo-relationship.component";
 import { LgApprovalsComponent } from "@components/lg-approvals/lg-approvals.component";
-
-import { DecisionMadeButNoDocsApplicationsComponent } from "./components/lg-approvals/decision-made-but-no-docs-applications/decision-made-but-no-docs-applications.component";
-import { DecisionNotMadeApplicationsComponent } from "./components/lg-approvals/decision-not-made-applications/decision-not-made-applications.component";
-import { ForZoningApplicationsComponent } from "./components/lg-approvals/for-zoning-applications/for-zoning-applications.component";
-
 import { LicenceRepresentativeFormComponent } from
   "@components/licence-representative-form/licence-representative-form.component";
 import { MarketEventComponent } from "@components/market-event/market-event.component";
@@ -93,7 +87,6 @@ import { SepApplicationComponent } from "@components/sep/sep-application/sep-app
 import { MyApplicationsComponent } from "@components/sep/my-applications/my-applications.component";
 import { ServiceCardProfileComponent } from "@components/servicecard-profile/servicecard-profile.component";
 import { DrinkPlannerComponent } from "@components/sep/drink-planner/drink-planner.component";
-import { DashboardComponent as PoliceDashboardComponent } from "@components/police-representative/dashboard/dashboard.component";
 import { SepHomeComponent } from "@components/sep/home/home.component";
 import { ApprovalSettingsComponent } from "@components/police-representative/approval-settings/approval-settings.component";
 import { PoliceAuthGuard } from "@services/police-auth-guard.service";
@@ -104,7 +97,7 @@ import { SepPaymentConfirmationComponent } from "@components/sep/payment-confirm
 import { SummaryComponent } from "@components/sep/sep-application/summary/summary.component";
 import { SepClaimComponent } from "@components/sep/sep-claim/sep-claim.component";
 import { RelocationTypeComponent } from "@components/relocation-type/relocation-type.component";
-import { PermanentChangeToALicenseeLegalEntityReviewComponent } from "@components/applications/permanent-change-to-a-licensee-legal-entity-review/permanent-change-to-a-licensee-legal-entity-review.component";
+import { LegalEntityReviewComponent } from "@components/applications/legal-entity-review/legal-entity-review.component";
 import { StandalonePaymentConfirmationComponent } from "@components/standalone-payment-confirmation/standalone-payment-confirmation.component";
 
 const routes: Routes = [
@@ -150,8 +143,8 @@ const routes: Routes = [
    {
     path: "permit/payment-confirmation/:id?",
     component: StandalonePaymentConfirmationComponent,
-        
-     
+
+
   },
   {
     path: "sep/police/approval-settings",
@@ -378,24 +371,24 @@ const routes: Routes = [
     canActivate: [BCeidAuthGuard, FeatureGuard],
     data: { feature: "PermanentChangesToLicensee" }
   },
-  // Permanent Change to a Licensee Legal Entity Review
+  // Legal Entity Review
   {
-    path: "permanent-change-to-a-licensee-legal-entity-review",
-    component: PermanentChangeToALicenseeLegalEntityReviewComponent,
+    path: "legal-entity-review",
+    component: LegalEntityReviewComponent,
     canActivate: [BCeidAuthGuard, FeatureGuard],
-    data: { feature: "PermanentChangesToLicenseeLegalEntityReview" }
+    data: { feature: "LegalEntityReview" }
   },
   {
-    path: "permanent-change-to-a-licensee-legal-entity-review/:applicationId",
-    component: PermanentChangeToALicenseeLegalEntityReviewComponent,
+    path: "legal-entity-review/:applicationId",
+    component: LegalEntityReviewComponent,
     canActivate: [BCeidAuthGuard, FeatureGuard],
-    data: { feature: "PermanentChangesToLicenseeLegalEntityReview" }
+    data: { feature: "LegalEntityReview" }
   },
   {
-    path: "permanent-change-to-a-licensee-legal-entity-review/:applicationId/:invoiceType",
-    component: PermanentChangeToALicenseeLegalEntityReviewComponent,
+    path: "legal-entity-review/:applicationId/:invoiceType",
+    component: LegalEntityReviewComponent,
     canActivate: [BCeidAuthGuard, FeatureGuard],
-    data: { feature: "PermanentChangesToLicenseeLegalEntityReview" }
+    data: { feature: "LegalEntityReview" }
   },
   {
     path: "multi-step-application/:applicationId",
