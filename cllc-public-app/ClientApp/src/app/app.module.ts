@@ -333,6 +333,7 @@ import { RelatedJobnumberPickerComponent } from './shared/components/related-job
 import { RelocationTypeComponent } from "@components/relocation-type/relocation-type.component";
 import { FeedbackComponent } from "@components/feedback/feedback.component";
 import { MaintenanceBannerComponent } from "@components/maintenance-banner/maintenance-banner.component";
+import { StandalonePaymentConfirmationComponent } from "@components/standalone-payment-confirmation/standalone-payment-confirmation.component";
 import { PermanentChangeDisclaimerComponent } from "@shared/components/permanent-change/permanent-change-disclaimer/permanent-change-disclaimer.component";
 import { PermanentChangeHolderDetailsComponent } from "@shared/components/permanent-change/permanent-change-disclaimer/permanent-change-holder-details/permanent-change-holder-details.component";
 import { PermanentChangeTypesOfChangesRequestedComponent } from "@shared/components/permanent-change/permanent-change-types-of-changes-requested/permanent-change-types-of-changes-requested.component";
@@ -394,6 +395,7 @@ import { PermanentChangeNameLicenseePartnership } from "@shared/components/perma
     OrganizationResultsComponent,
     PaymentConfirmationComponent,
     SepPaymentConfirmationComponent,
+    StandalonePaymentConfirmationComponent,
     PolicyDocumentComponent,
     PolicyDocumentSidebarComponent,
     PrePaymentComponent,
