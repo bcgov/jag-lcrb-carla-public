@@ -1,0 +1,88 @@
+<mat-card class="payment-card mat-elevation-z2">
+  <!-- Print Button -->
+  <div class="print-btn-wrapper">
+    <button mat-stroked-button color="primary" (click)="printPage()" class="print-btn">
+      <fa-icon [icon]="faPrint" class="mr-1"></fa-icon>
+      Print Page
+    </button>
+  </div>
+
+  <!-- Headings -->
+  <mat-card-header class="header-success">
+    <mat-card-title>
+      <!-- Normal success -->
+      <h1 *ngIf="!error && !isDuplicate">Thank you for your submission!</h1>
+      <!-- Duplicate transaction -->
+      <h1 *ngIf="isDuplicate" style="color: red; font-weight: bold;">Transaction Declined</h1>
+    </mat-card-title>
+  </mat-card-header>
+
+  <!-- Error Banner -->
+  <mat-card *ngIf="error" color="warn" class="error-banner mat-elevation-z1">
+    <mat-card-content>{{ error }}</mat-card-content>
+  </mat-card>
+
+  <!-- Duplicate-transaction details -->
+  <mat-card-content *ngIf="isDuplicate">
+    <table class="details-table">
+      <tbody>
+        <tr>
+          <th scope="row">Transaction Id</th>
+          <td>{{ trnId }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Message Id</th>
+          <td>{{ messageId }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Message Text</th>
+          <td>{{ messageText }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Order Number</th>
+          <td>{{ trnOrderNumber }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="save-note">Please print this page for your records.</p>
+  </mat-card-content>
+
+  <!-- Normal payment details -->
+  <mat-card-content *ngIf="payment">
+    <table class="details-table">
+      <tbody>
+        <tr>
+          <th scope="row">Permit&nbsp;Number</th>
+          <td>{{ payment.permitNumber }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Contact&nbsp;Name</th>
+          <td>{{ payment.contactName }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Event&nbsp;Name</th>
+          <td>{{ payment.eventName }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Amount</th>
+          <td>{{ payment.drinkCostPSTDiff }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Transaction&nbsp;Id</th>
+          <td>{{ trnId }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="save-note">Please print this page for your records.</p>
+  </mat-card-content>
+
+  <!-- Action Footer -->
+  <mat-divider></mat-divider>
+  <mat-card-actions class="footer-actions">
+    <a mat-button color="primary" routerLink="/dashboard">
+      <fa-icon [icon]="faAngleDoubleLeft" class="mr-1"></fa-icon>
+      Return to Dashboard
+    </a>
+  </mat-card-actions>
+</mat-card>

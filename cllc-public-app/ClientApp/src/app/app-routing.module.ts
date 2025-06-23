@@ -105,6 +105,7 @@ import { SummaryComponent } from "@components/sep/sep-application/summary/summar
 import { SepClaimComponent } from "@components/sep/sep-claim/sep-claim.component";
 import { RelocationTypeComponent } from "@components/relocation-type/relocation-type.component";
 import { PermanentChangeToALicenseeLegalEntityReviewComponent } from "@components/applications/permanent-change-to-a-licensee-legal-entity-review/permanent-change-to-a-licensee-legal-entity-review.component";
+import { StandalonePaymentConfirmationComponent } from "@components/standalone-payment-confirmation/standalone-payment-confirmation.component";
 
 const routes: Routes = [
   {
@@ -145,6 +146,12 @@ const routes: Routes = [
     path: "sep/payment-confirmation",
     component: SepPaymentConfirmationComponent,
     data: { feature: "Sep" }
+  },
+   {
+    path: "permit/payment-confirmation/:id?",
+    component: StandalonePaymentConfirmationComponent,
+        
+     
   },
   {
     path: "sep/police/approval-settings",
