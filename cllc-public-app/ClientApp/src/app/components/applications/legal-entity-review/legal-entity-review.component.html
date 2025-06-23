@@ -24,7 +24,8 @@
       <app-legal-entity-review-supporting-documents
         [hasLiquor]="hasLiquor"
         [hasCannabis]="hasCannabis"
-        [showValidationMessages]="showValidationMessages"></app-legal-entity-review-supporting-documents>
+        [showValidationMessages]="showValidationMessages"
+        (onUploadedFileEvent)="uploadedSupportingDocuments = $event"></app-legal-entity-review-supporting-documents>
     </section>
 
     <!-- Declaration -->
@@ -54,6 +55,26 @@
 
     <section>
       <app-permanent-change-contact-support></app-permanent-change-contact-support>
+    </section>
+
+    <section style="margin-top: 20px; position: relative">
+      <button mat-raised-button color="secondary" style="margin-right: 10px" (click)="saveForLater()">
+        <span>
+          <fa-icon [icon]="faSave"></fa-icon>
+          SAVE FOR LATER
+        </span>
+        <mat-progress-bar class="mt-1" *ngIf="saveForLateInProgress" mode="indeterminate"></mat-progress-bar>
+      </button>
+      <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="submitApplicationInProgress">
+        <span>SUBMIT</span>
+        <mat-progress-bar class="mt-1" *ngIf="submitApplicationInProgress" mode="indeterminate"></mat-progress-bar>
+      </button>
+      <span style="color: #1a5a96; float: right; padding-top: 10px">
+        <span (click)="cancelApplication()">
+          <fa-icon [icon]="faTrashAlt" style="color: #1a5a96"></fa-icon>
+          <a href="javascript: void(0)"> CANCEL </a>
+        </span>
+      </span>
     </section>
   </ng-container>
 </div>

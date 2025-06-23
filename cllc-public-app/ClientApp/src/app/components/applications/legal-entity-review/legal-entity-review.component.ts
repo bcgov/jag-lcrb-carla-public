@@ -1,21 +1,15 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { AppState } from '@app/app-state/models/app-state';
-import { permanentChangeTypesOfChanges } from '@app/constants/permanent-change-types-of-changes';
-import { faIdCard } from '@fortawesome/free-regular-svg-icons';
+import { faIdCard, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { Account } from '@models/account.model';
 import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
 import { Application } from '@models/application.model';
 import { Store } from '@ngrx/store';
 import { ApplicationDataService } from '@services/application-data.service';
-import { PaymentDataService } from '@services/payment-data.service';
-import {
-  ContactData,
-  PermanentChangeContactComponent
-} from '@shared/components/permanent-change/permanent-change-contact/permanent-change-contact.component';
 import { FormBase } from '@shared/form-base';
 import { Observable, of } from 'rxjs';
 import { catchError, filter, mergeMap, takeWhile } from 'rxjs/operators';
@@ -38,44 +32,24 @@ export const SharepointNameRegex = /^[^~#%&*{}\\:<>?/+|""]*$/;
 export class LegalEntityReviewComponent extends FormBase implements OnInit {
   faQuestionCircle = faQuestionCircle;
   faIdCard = faIdCard;
+  faTrashAlt = faTrashAlt;
+
   application: Application;
   liquorLicences: ApplicationLicenseSummary[] = [];
   cannabisLicences: ApplicationLicenseSummary[] = [];
   account: Account;
-  businessType: string;
-  submitApplicationInProgress: boolean;
-  showValidationMessages: boolean;
-  invoiceType: any;
-  dataLoaded: boolean;
-  primaryPaymentInProgress: boolean;
-  secondaryPaymentInProgress: boolean;
-  applicationContact: ContactData;
-  verifyRquestMade: boolean;
-  validationMessages: string[];
-  @ViewChild('appContact')
-  appContact: PermanentChangeContactComponent;
-  appContactDisabled: boolean;
-  applicationId: string;
-  canCreateNewApplication: boolean;
-  createApplicationInProgress: boolean;
-  primaryInvoice: any;
-  secondaryInvoice: any;
 
-  uploadedCentralSecuritiesRegister: 0;
-  uploadedIndividualsWithLessThan10: 0;
-  uploadedCertificateOfAmalgamation: 0;
-  uploadedNOAAmalgamation: 0;
-  uploadedRegisterOfDirectorsAndOfficers: 0;
-  uploadedNOA: 0;
-  uploadedNameChangeDocuments: 0;
-  uploadedCertificateOfNameChange: 0;
-  uploadedPartnershipRegistration: 0;
-  uploadedSocietyNameChange: 0;
-  uploadedExecutorDocuments: 0;
-  uploadedlDeathCertificateDocuments: 0;
-  uploadedletterOfIntentDocuments: 0;
-  uploadedCAS: 0;
-  uploadedFinancialIntegrity: 0;
+  showValidationMessages: boolean;
+  dataLoaded: boolean;
+
+  applicationId: string;
+  validationMessages: string[];
+
+  uploadedSupportingDocuments: 0;
+
+  submitApplicationInProgress: boolean;
+
+  form: FormGroup;
 
   get hasLiquor(): boolean {
     return this.liquorLicences.length > 0;
@@ -85,18 +59,8 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
     return this.cannabisLicences.length > 0;
   }
 
-  changeList = [];
-
-  get selectedChangeList() {
-    return this.changeList.filter((item) => this.form && this.form.get(item.formControlName).value === true);
-  }
-
-  form: FormGroup;
-
   constructor(
     private applicationDataService: ApplicationDataService,
-    private paymentDataService: PaymentDataService,
-    private router: Router,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
     private fb: FormBuilder,
@@ -108,33 +72,15 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
       .pipe(filter((account) => !!account))
       .subscribe((account) => {
         this.account = account;
-        this.changeList = permanentChangeTypesOfChanges.filter(
-          (item) => !!item.availableTo.find((bt) => bt === account.businessType)
-        );
       });
 
     this.route.paramMap.subscribe((pmap) => {
-      this.invoiceType = pmap.get('invoiceType');
       this.applicationId = pmap.get('applicationId');
     });
   }
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      csInternalTransferOfShares: [''],
-      csExternalTransferOfShares: [''],
-      csChangeOfDirectorsOrOfficers: [''],
-      csNameChangeLicenseeCorporation: [''],
-      csNameChangeLicenseePartnership: [''],
-      csNameChangeLicenseeSociety: [''],
-      csNameChangeLicenseePerson: [''],
-      csAdditionalReceiverOrExecutor: [''],
-      firstNameOld: [''],
-      firstNameNew: [''],
-      lastNameOld: [''],
-      lastNameNew: [''],
-      description2: [''],
-      description3: ['', Validators.pattern(SharepointNameRegex)],
       authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]]
     });
@@ -156,63 +102,24 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
   }
 
   /**
-   * Navigates to the application create page.
-   *
-   * @memberof LegalEntityReviewComponent
-   */
-  onNewApplication(_invoiceType: 'primary' | 'secondary') {
-    this.router.navigateByUrl(`/permanent-change-to-a-licensee`);
-  }
-
-  /**
    * Sets the form data based on the provided application, licences, and invoice information.
    *
    * @private
-   * @param {*} { application, licences, primary, secondary }
+   * @param {*} { application, licences }
    * @memberof LegalEntityReviewComponent
    */
-  private setFormData({ application, licences, primary, secondary }) {
+  private setFormData({ application, licences }) {
     this.liquorLicences = licences.filter((item) => item.licenceTypeCategory === 'Liquor' && item.status === 'Active');
+
     this.cannabisLicences = licences.filter(
       (item) => item.licenceTypeCategory === 'Cannabis' && item.status === 'Active'
     );
+
     this.application = application;
-    this.applicationContact = {
-      contactPersonFirstName: this.application.contactPersonFirstName,
-      contactPersonLastName: this.application.contactPersonLastName,
-      contactPersonRole: this.application.contactPersonRole,
-      contactPersonPhone: this.application.contactPersonPhone,
-      contactPersonEmail: this.application.contactPersonEmail
-    };
 
-    this.primaryInvoice = primary;
-    this.secondaryInvoice = secondary;
+    this.form.patchValue(application);
 
-    const primaryInvoiceInfoMissing = primary && primary.isApproved && !this.application.primaryInvoicePaid;
-    const secondaryInvoiceInfoMissing = secondary && secondary.isApproved && !this.application.secondaryInvoicePaid;
-
-    // if all required payments are made, go to the dashboard
-    if (
-      (!this.hasCannabis || this.application.primaryInvoicePaid) &&
-      (!this.hasLiquor || this.application.secondaryInvoicePaid)
-    ) {
-      this.canCreateNewApplication = true;
-    }
-
-    if (primaryInvoiceInfoMissing || secondaryInvoiceInfoMissing) {
-      // the asynchonous workflow in dynamics has not yet run. Pause for a second and get data again
-      setTimeout(() => {
-        this.loadData();
-      }, 1000);
-    } else {
-      // if any payment was made, disable the form
-      if (this.application.primaryInvoicePaid || this.application.secondaryInvoicePaid) {
-        this.form.disable();
-        this.appContactDisabled = true;
-      }
-      this.form.patchValue(application);
-      this.dataLoaded = true;
-    }
+    this.dataLoaded = true;
   }
 
   /**
@@ -231,7 +138,6 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
       .updateApplication({
         ...this.application,
         ...this.form.value,
-        ...this.appContact.form.value,
         ...appData
       })
       .pipe(takeWhile(() => this.componentActive))
@@ -264,78 +170,27 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
    */
   private isValid(): boolean {
     this.showValidationMessages = false;
-    this.validationMessages = [];
+
     this.validationMessages = this.listControlsWithErrors(this.form, this.getValidationErrorMap());
+
     let valid = this.form.disabled || this.form.valid;
-
-    const securitiesDocIsRequired =
-      this.form.get('csInternalTransferOfShares').value || this.form.get('csExternalTransferOfShares').value;
-    if (securitiesDocIsRequired && this.uploadedCentralSecuritiesRegister < 1) {
-      this.validationMessages.push('At least one Central Securities Register document is required.');
-      valid = false;
-    }
-
-    const noticeOfArticlesDocIsRequired = this.form.get('csChangeOfDirectorsOrOfficers').value;
-    if (noticeOfArticlesDocIsRequired && this.uploadedNOA < 1) {
-      this.validationMessages.push('The Notice of Articles document is required.');
-      valid = false;
-    }
-
-    const partnershipRegistrationDocIsRequired = this.form.get('csNameChangeLicenseeSociety').value;
-    if (partnershipRegistrationDocIsRequired && this.uploadedSocietyNameChange < 1) {
-      this.validationMessages.push('A Partnership Registration document is required.');
-      valid = false;
-    }
-
-    const corpNameChangeDocIsRequired = this.form.get('csNameChangeLicenseeCorporation').value;
-    if (corpNameChangeDocIsRequired && this.uploadedCertificateOfNameChange < 1) {
-      this.validationMessages.push('A copy of the Certificate of Change of Name Form is required.');
-      valid = false;
-    }
-
-    const partnerLicenseeNameChangeDocIsRequired = this.form.get('csNameChangeLicenseePartnership').value;
-    if (partnerLicenseeNameChangeDocIsRequired && this.uploadedPartnershipRegistration < 1) {
-      this.validationMessages.push('A Change of Name document is required.');
-      valid = false;
-    }
-
-    const nameChangeDocIsRequired = this.form.get('csNameChangeLicenseePerson').value;
-    if (nameChangeDocIsRequired && this.uploadedNameChangeDocuments < 1) {
-      this.validationMessages.push('A Change of Name document is required.');
-      valid = false;
-    }
-
-    const executorDocIsRequired = this.form.get('csAdditionalReceiverOrExecutor').value && this.form.get('');
-    if (executorDocIsRequired && this.uploadedExecutorDocuments < 1) {
-      this.validationMessages.push(
-        'Please upload a copy of Assignment of Executor, a copy of the last will(s) and testament(s) or a copy of the Death Certificate.'
-      );
-      valid = false;
-    }
 
     return valid;
   }
 
   /**
-   * Submit the application for payment.
+   * Submit the application.
    *
-   * @param {('primary' | 'secondary')} invoiceType
    * @memberof LegalEntityReviewComponent
    */
-  onSubmit(invoiceType: 'primary' | 'secondary') {
+  onSubmit() {
     if (!this.isValid()) {
       this.showValidationMessages = true;
       this.markControlsAsTouched(this.form);
-      this.markControlsAsTouched(this.appContact.form);
 
       return;
     }
 
-    if (invoiceType === 'primary') {
-      this.primaryPaymentInProgress = true;
-    } else {
-      this.secondaryPaymentInProgress = true;
-    }
     this.submitApplicationInProgress = true;
     var trigInv = 0;
     if (this.application.licenceFeeInvoice == null) {
@@ -349,57 +204,13 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
     this.save(!this.application.applicationType.isFree, { invoiceTrigger: trigInv } as Application) // trigger invoice generation when saving LCSD6564 Only if not present or cancelled.
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(([saveSucceeded, app]) => {
-        if (saveSucceeded) {
-          if (app) {
-            this.submitPayment(invoiceType).subscribe((res) => {
-              if (invoiceType === 'primary') {
-                this.primaryPaymentInProgress = false;
-              } else {
-                this.secondaryPaymentInProgress = false;
-              }
-            });
-          }
-        } else if (this.application.applicationType.isFree) {
-          // show error message the save failed and the application is free
-          this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-          if (invoiceType === 'primary') {
-            this.primaryPaymentInProgress = false;
-          } else {
-            this.secondaryPaymentInProgress = false;
+        if (!saveSucceeded) {
+          if (this.application.applicationType.isFree) {
+            // show error message the save failed and the application is free
+            this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
           }
         }
       });
-  }
-
-  /**
-   * Redirect to payment processing page (Express Pay / Bambora service)
-   *
-   * @private
-   * @param {('primary' | 'secondary')} invoiceType
-   * @return {*}
-   * @memberof LegalEntityReviewComponent
-   */
-  private submitPayment(invoiceType: 'primary' | 'secondary') {
-    let payMethod = this.paymentDataService.getPaymentURI('primaryInvoice', this.application.id);
-    if (invoiceType === 'secondary') {
-      payMethod = this.paymentDataService.getPaymentURI('secondaryInvoice', this.application.id);
-    }
-    return payMethod.pipe(takeWhile(() => this.componentActive)).pipe(
-      mergeMap(
-        (jsonUrl) => {
-          window.location.href = jsonUrl['url'];
-          return jsonUrl['url'];
-        },
-        (err: any) => {
-          if (err === 'Payment already made') {
-            this.snackBar.open('Application payment has already been made, please refresh the page.', 'Fail', {
-              duration: 3500,
-              panelClass: ['red-snackbar']
-            });
-          }
-        }
-      )
-    );
   }
 
   /**
@@ -412,13 +223,7 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
     const errorMap = {
       signatureAgreement:
         'Please affirm that all of the information provided for this application is true and complete',
-      authorizedToSubmit: 'Please affirm that you are authorized to submit the application',
-      contactPersonEmail: "Please enter the business contact's email address",
-      contactPersonFirstName: "Please enter the business contact's first name",
-      contactPersonLastName: "Please enter the business contact's last name",
-      contactPersonPhone: "Please enter the business contact's 10-digit phone number",
-      contactPersonRole: 'Please enter the contact person role',
-      description3: 'The following characters are not allowed in a Company Name: ~ # % & * { } \\ : < > ? / + | "'
+      authorizedToSubmit: 'Please affirm that you are authorized to submit the application'
     };
     return errorMap;
   }
