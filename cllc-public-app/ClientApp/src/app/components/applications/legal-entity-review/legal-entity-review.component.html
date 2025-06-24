@@ -58,21 +58,26 @@
     </section>
 
     <section style="margin-top: 20px; position: relative">
-      <button mat-raised-button color="secondary" style="margin-right: 10px" (click)="saveForLater()">
+      <button
+        mat-raised-button
+        color="secondary"
+        class="progress-button mr-4"
+        (click)="saveForLater()"
+        [disabled]="isSavingForLater">
         <span>
-          <fa-icon [icon]="faSave"></fa-icon>
+          <fa-icon [icon]="faSave" class="mr-3"></fa-icon>
           SAVE FOR LATER
         </span>
-        <mat-progress-bar class="mt-1" *ngIf="saveForLateInProgress" mode="indeterminate"></mat-progress-bar>
+        <mat-progress-bar *ngIf="isSavingForLater" mode="indeterminate"></mat-progress-bar>
       </button>
-      <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="submitApplicationInProgress">
+      <button mat-raised-button color="primary" class="progress-button" (click)="onSubmit()" [disabled]="isSubmitting">
         <span>SUBMIT</span>
-        <mat-progress-bar class="mt-1" *ngIf="submitApplicationInProgress" mode="indeterminate"></mat-progress-bar>
+        <mat-progress-bar *ngIf="isSubmitting" mode="indeterminate"></mat-progress-bar>
       </button>
-      <span style="color: #1a5a96; float: right; padding-top: 10px">
-        <span (click)="cancelApplication()">
-          <fa-icon [icon]="faTrashAlt" style="color: #1a5a96"></fa-icon>
-          <a href="javascript: void(0)"> CANCEL </a>
+      <span style="color: #1a5a96; float: right;">
+        <span (click)="onCancel()">
+          <fa-icon [icon]="faTrashAlt" style="color: #1a5a96" class="mr-3"></fa-icon>
+          <a href="javascript: void(0)">CANCEL</a>
         </span>
       </span>
     </section>

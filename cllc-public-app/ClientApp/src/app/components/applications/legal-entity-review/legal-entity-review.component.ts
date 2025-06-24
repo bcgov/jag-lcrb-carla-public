@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AppState } from '@app/app-state/models/app-state';
-import { faIdCard, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
+import { faIdCard, faSave, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { Account } from '@models/account.model';
 import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
 import { Application } from '@models/application.model';
 import { Store } from '@ngrx/store';
 import { ApplicationDataService } from '@services/application-data.service';
+import { GenericConfirmationDialogComponent } from '@shared/components/dialog/generic-confirmation-dialog/generic-confirmation-dialog.component';
 import { FormBase } from '@shared/form-base';
 import { Observable, of } from 'rxjs';
 import { catchError, filter, mergeMap, takeWhile } from 'rxjs/operators';
@@ -32,6 +34,7 @@ export const SharepointNameRegex = /^[^~#%&*{}\\:<>?/+|""]*$/;
 export class LegalEntityReviewComponent extends FormBase implements OnInit {
   faQuestionCircle = faQuestionCircle;
   faIdCard = faIdCard;
+  faSave = faSave;
   faTrashAlt = faTrashAlt;
 
   application: Application;
@@ -47,7 +50,7 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
 
   uploadedSupportingDocuments: 0;
 
-  submitApplicationInProgress: boolean;
+  isSubmitting: boolean;
 
   form: FormGroup;
 
@@ -62,11 +65,14 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
   constructor(
     private applicationDataService: ApplicationDataService,
     private route: ActivatedRoute,
+    private router: Router,
     private snackBar: MatSnackBar,
     private fb: FormBuilder,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private dialog: MatDialog
   ) {
     super();
+
     this.store
       .select((state) => state.currentAccountState.currentAccount)
       .pipe(filter((account) => !!account))
@@ -125,38 +131,35 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
   /**
    * Saves the application data.
    *
-   * @param {boolean} [showProgress=false]
-   * @param {Application} [appData={} as Application]
+   * @private
    * @return {*}  {Observable<[boolean, Application]>}
    * @memberof LegalEntityReviewComponent
    */
-  private save(
-    showProgress: boolean = false,
-    appData: Application = {} as Application
-  ): Observable<[boolean, Application]> {
+  private save(): Observable<[boolean, Application]> {
     return this.applicationDataService
       .updateApplication({
         ...this.application,
-        ...this.form.value,
-        ...appData
+        ...this.form.value
       })
       .pipe(takeWhile(() => this.componentActive))
       .pipe(
         catchError(() => {
           this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+
           const res: [boolean, Application] = [false, null];
+
           return of(res);
         })
       )
       .pipe(
         mergeMap((data) => {
-          if (showProgress === true) {
-            this.snackBar.open('Application has been saved', 'Success', {
-              duration: 2500,
-              panelClass: ['green-snackbar']
-            });
-          }
+          this.snackBar.open('Application has been saved', 'Success', {
+            duration: 3500,
+            panelClass: ['green-snackbar']
+          });
+
           const res: [boolean, Application] = [true, data as Application];
+
           return of(res);
         })
       );
@@ -191,25 +194,16 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
       return;
     }
 
-    this.submitApplicationInProgress = true;
-    var trigInv = 0;
-    if (this.application.licenceFeeInvoice == null) {
-      trigInv = 1;
-    } else {
-      if (this.application.licenceFeeInvoice.statuscode == 3) {
-        //cancelled
-        trigInv = 1;
-      }
-    }
-    this.save(!this.application.applicationType.isFree, { invoiceTrigger: trigInv } as Application) // trigger invoice generation when saving LCSD6564 Only if not present or cancelled.
+    this.isSubmitting = true;
+
+    this.save()
       .pipe(takeWhile(() => this.componentActive))
-      .subscribe(([saveSucceeded, app]) => {
+      .subscribe(([saveSucceeded]) => {
         if (!saveSucceeded) {
-          if (this.application.applicationType.isFree) {
-            // show error message the save failed and the application is free
-            this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-          }
+          this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
         }
+
+        this.isSubmitting = false;
       });
   }
 
@@ -226,5 +220,26 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
       authorizedToSubmit: 'Please affirm that you are authorized to submit the application'
     };
     return errorMap;
+  }
+
+  /**
+   * Cancels the application and returns the user to the dashboard page.
+   *
+   * @memberof LegalEntityReviewComponent
+   */
+  onCancel() {
+    this.dialog.open(GenericConfirmationDialogComponent, {
+      disableClose: true,
+      autoFocus: true,
+      data: {
+        title: 'Cancel Legal Entity Review',
+        message: `Are you sure you want to cancel? Any unsaved changes will be lost.`,
+        confirmButtonText: 'Yes, Cancel',
+        cancelButtonText: 'No, Go Back',
+        onConfirm: () => {
+          this.router.navigate(['/dashboard']);
+        }
+      }
+    });
   }
 }

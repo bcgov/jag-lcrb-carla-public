@@ -350,6 +350,7 @@ import { LegalEntityReviewWhatHappensNextComponent } from "@shared/components/le
 import { LegalEntityReviewTiedHouseComponent } from "@shared/components/legal-entity-review/legal-entity-review-tied-house/legal-entity-review-tied-house.component";
 import { LegalEntityReviewSupportingDocumentsComponent } from "@shared/components/legal-entity-review/legal-entity-review-supporting-documents/legal-entity-review-supporting-documents.component";
 import { ConnectionToOtherLiquorLicencesComponent } from "@components/account-profile/tabs/connection-to-producers/connection-to-other-liquor-licences/connection-to-other-liquor-licences.component";
+import { GenericConfirmationDialogComponent } from "@shared/components/dialog/generic-confirmation-dialog/generic-confirmation-dialog.component";
 
 @NgModule({
   declarations: [
@@ -567,7 +568,8 @@ import { ConnectionToOtherLiquorLicencesComponent } from "@components/account-pr
     LegalEntityReviewSupportingDocumentsComponent,
     LegalEntityReviewTiedHouseComponent,
     LegalEntityReviewTypesOfChangesRequiredComponent,
-    LegalEntityReviewWhatHappensNextComponent
+    LegalEntityReviewWhatHappensNextComponent,
+    GenericConfirmationDialogComponent
   ],
   imports: [
     AppRoutingModule,

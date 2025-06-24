@@ -5,3 +5,13 @@
 h4 {
   font-weight: 900;
 }
+
+.progress-button {
+  .mat-progress-bar {
+    position: absolute;
+    bottom: 2px;
+    left: 5%;
+    width: 90%;
+    height: 4px;
+  }
+}
