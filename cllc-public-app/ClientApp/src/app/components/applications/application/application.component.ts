@@ -22,7 +22,7 @@ import { EstablishmentWatchWordsService } from '@services/establishment-watch-wo
 import { formatDate, KeyValue } from '@angular/common';
 import { FeatureFlagService } from '@services/feature-flag.service';
 import { FileUploaderComponent } from '@shared/components/file-uploader/file-uploader.component';
-import { ConnectionToNonMedicalStoresComponent } from '@components/account-profile/tabs/connection-to-non-medical-stores/connection-to-non-medical-stores.component';
+import { ConnectionToNonMedicalStoresComponent } from '@components/applications/application/tabs/connection-to-non-medical-stores/connection-to-non-medical-stores.component';
 import { UPLOAD_FILES_MODE, INCOMPLETE } from '@components/licences/licences.component';
 import { ApplicationCancellationDialogComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
 //import { User } from '@models/user.model';
@@ -324,7 +324,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     this.form.get('serviceHoursThursdayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
       this.updateRequiredValidator(val, 'serviceHoursThursdayOpen');
     });
-    
+
     this.form.get('serviceHoursFridayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
       this.updateRequiredValidator(val, 'serviceHoursFridayClose');
     });
@@ -344,7 +344,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     this.form.get('requestOutsideServiceHours').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
       this.updateRequiredValidator(val, 'requestOutsideServiceHours');
     });
-  
+
     this.form.get('indigenousNation').valueChanges
       .pipe(filter(value => value && value.length >= 3),
         tap(_ => {
@@ -536,7 +536,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
             if (data.isPaid || this.isOpenedByLGForApproval || this.application.lGDecisionSubmissionDate) {
               this.form.disable();
             }
-            //LCSD-5784 loading same user's application 
+            //LCSD-5784 loading same user's application
             /*if (data && data.applicationType && data.applicationType.name == 'Tied House Exemption Removal') {
               this.tiedHouseExemptions = [];
               this.applicationDataService.getApplicationsByType(ApplicationTypeNames.TiedHouseExemption)
@@ -546,7 +546,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
                       this.tiedHouseExemptions.push({ jobNumber: item.jobNumber, displayName: item.name });
                     }
                   })
-                });             
+                });
             }*/
             this.savedFormData = this.form.value;
             this.dataLoaded = true;
@@ -869,7 +869,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     return true;
   }
 
-  
+
   lgHasReviewedZoning(): boolean {
     let hasReviewed = false;
     if (this.application && this.application.lGDecisionSubmissionDate && this.application.lgZoning) {
@@ -1098,7 +1098,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   //LCSD-6495 NOTE: this logic is no necessary. If an application.applicationType is free, then the endorsement is free.
-  //                so we only need checked the applicationType.isFree no matter the 
+  //                so we only need checked the applicationType.isFree no matter the
   isFreeEndorsement(): boolean {
     let freeEndorsement = this.application.applicationType.isFree && (this?.application?.assignedLicence == null);
     return freeEndorsement;
@@ -1358,14 +1358,14 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
 
     const serviceArea = ('areas' in this.form.get('serviceAreas').value) ? this.form.get('serviceAreas').value['areas'] : this.form.get('serviceAreas').value;
-    
+
     //if (this.showServiceArea() && serviceArea.length === 0 && (this.isLP() || ApplicationTypeNames.SpecialEventAreaEndorsement || ApplicationTypeNames.LoungeAreaEndorsment) )	{
     if (this.showServiceArea() && serviceArea.length === 0) {
       valid = false;
       this.validationMessages.push('At least one service area is required.');
     }else{
-       
-       
+
+
         if(!this.isOccupantLoadCorrect()){
           valid = false;
           this.validationMessages.push('The sum of occupant loads across all service areas does not match the total occupant load entered in the total occupant load field.');
@@ -2015,7 +2015,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   showValidInterestforTransfer() {
     return (this.application.applicationType.name === ApplicationTypeNames.LiquorLicenceTransfer &&
-      (this.application.licenseType === "Licensee Retail Store" 
+      (this.application.licenseType === "Licensee Retail Store"
         || this.application.licenseType === "Wine Store"
         || this.application.licenseType === "Rural Licensee Retail Store"));
   }
@@ -2041,7 +2041,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
    }
 
    isOccupantLoadCorrect(): Boolean{
-    
+
     if(this.hideOcupantLoadFields()){
        this.form.get('totalOccupantLoadExceed').disable();
       return true;
@@ -2064,7 +2064,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
    }
 
 //Check if applicant is waiting for LG approcval or has been approved by LG.
- //In this case do not block user to pay and submit if the fields are empty 
+ //In this case do not block user to pay and submit if the fields are empty
  hideOcupantLoadFields(): Boolean{
   return this.isOpenedByLGForApproval || this.lGHasApproved();
  }
@@ -2081,14 +2081,14 @@ onAddressOptionSelect (event: any) {
   this.form.get('establishmentAddressCity').setValue(selectedAddress.localityName);
   this.form.get('establishmentParcelId').setValue("");
 
-  if(selectedAddress && selectedAddress.siteID !== undefined && selectedAddress.siteID !== null && selectedAddress.siteID !== ""){ 
+  if(selectedAddress && selectedAddress.siteID !== undefined && selectedAddress.siteID !== null && selectedAddress.siteID !== ""){
     this.addressService.getPid(selectedAddress.siteID).subscribe(
       (response: string) => {
         try {
           const parsedResponse = JSON.parse(JSON.stringify(response));
-  
+
           const pids = parsedResponse.pids;
-      
+
           // Check if the key exists and print the value
           if (pids !== undefined) {
               const pidArray = pids.split('|');
@@ -2104,10 +2104,10 @@ onAddressOptionSelect (event: any) {
       },
       (error) => {
       //  console.error('Error fetching data:', error);
-      } 
+      }
     );
   }
-  
+
 }
 }
 

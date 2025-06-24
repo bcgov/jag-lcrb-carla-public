@@ -101,6 +101,7 @@ export enum ApplicationTypeNames {
   LiquorRenewal = "Liquor Licence Renewal",
   LiquorLicenceTransfer = "Liquor Licence Transfer",
   PermanentChangeToALicensee = "Permanent Change to a Licensee",
+  LegalEntityReview = "Legal Entity Review",
   PermanentChangeToAnApplicant = "Permanent Change to an Applicant",
   WineStore = "Wine Store",
   RAS = "Rural Agency Store",

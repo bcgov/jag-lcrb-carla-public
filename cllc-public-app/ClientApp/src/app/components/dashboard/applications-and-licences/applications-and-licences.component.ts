@@ -786,6 +786,8 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   getApplicationLink(item: ApplicationSummary) {
     if (item.applicationTypeName == ApplicationTypeNames.PermanentChangeToALicensee) {
       return `/permanent-change-to-a-licensee/${item.id}`;
+    } else if (item.applicationTypeName == ApplicationTypeNames.LegalEntityReview) {
+      return `/legal-entity-review/${item.id}`;
     } else {
       return `/account-profile/${item.id}`;
     }

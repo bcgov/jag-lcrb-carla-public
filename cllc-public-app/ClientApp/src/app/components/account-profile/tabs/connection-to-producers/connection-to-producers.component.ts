@@ -1,15 +1,14 @@
-import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from "@angular/core";
-import { MatSnackBar } from "@angular/material/snack-bar";
-import { FormBuilder } from "@angular/forms";
-import { TiedHouseConnection } from "@models/tied-house-connection.model";
-import { Subscription } from "rxjs";
-import { Account } from "@models/account.model";
-import { ApplicationType } from "@models/application-type.model";
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Account } from '@models/account.model';
+import { TiedHouseConnection } from '@models/tied-house-connection.model';
+import { Subscription } from 'rxjs';
 
 @Component({
-  selector: "app-connection-to-producers",
-  templateUrl: "./connection-to-producers.component.html",
-  styleUrls: ["./connection-to-producers.component.css"]
+  selector: 'app-connection-to-producers',
+  templateUrl: './connection-to-producers.component.html',
+  styleUrls: ['./connection-to-producers.component.scss']
 })
 export class ConnectionToProducersComponent implements OnInit, OnDestroy {
   @Input()
@@ -17,13 +16,13 @@ export class ConnectionToProducersComponent implements OnInit, OnDestroy {
   @Input()
   isMarketer: boolean;
   @Input()
-  licensedProducerText = "federally licensed producer";
+  licensedProducerText = 'federally licensed producer';
   @Input()
-  federalProducerText = "federal producer";
+  federalProducerText = 'federal producer';
   @Input()
   applicationTypeName: String;
 
-  @Input("tiedHouse")
+  @Input('tiedHouse')
   set tiedHouse(value: TiedHouseConnection) {
     if (value && this.form) {
       this.form.patchValue(value);
@@ -44,38 +43,39 @@ export class ConnectionToProducersComponent implements OnInit, OnDestroy {
   @Output()
   value = new EventEmitter<TiedHouseConnection>();
 
-  constructor(private fb: FormBuilder,
-    public snackBar: MatSnackBar) {
-  }
+  constructor(
+    private fb: FormBuilder,
+    public snackBar: MatSnackBar
+  ) {}
 
   ngOnInit() {
     this.form = this.fb.group({
-      corpConnectionFederalProducer: [""],
-      corpConnectionFederalProducerDetails: [""],
-      federalProducerConnectionToCorp: [""],
-      federalProducerConnectionToCorpDetails: [""],
-      share20PlusConnectionProducer: [""],
-      share20PlusConnectionProducerDetails: [""],
-      share20PlusFamilyConnectionProducer: [""],
-      share20PlusFamilyConnectionProducerDetail: [""],
-      partnersConnectionFederalProducer: [""],
-      partnersConnectionFederalProducerDetails: [""],
-      societyConnectionFederalProducer: [""],
-      societyConnectionFederalProducerDetails: [""],
-      liquorFinancialInterest: [""],
-      liquorFinancialInterestDetails: [""],
-      iNConnectionToFederalProducer: [""],
-      iNConnectionToFederalProducerDetails: [""],
+      corpConnectionFederalProducer: [''],
+      corpConnectionFederalProducerDetails: [''],
+      federalProducerConnectionToCorp: [''],
+      federalProducerConnectionToCorpDetails: [''],
+      share20PlusConnectionProducer: [''],
+      share20PlusConnectionProducerDetails: [''],
+      share20PlusFamilyConnectionProducer: [''],
+      share20PlusFamilyConnectionProducerDetail: [''],
+      partnersConnectionFederalProducer: [''],
+      partnersConnectionFederalProducerDetails: [''],
+      societyConnectionFederalProducer: [''],
+      societyConnectionFederalProducerDetails: [''],
+      liquorFinancialInterest: [''],
+      liquorFinancialInterestDetails: [''],
+      iNConnectionToFederalProducer: [''],
+      iNConnectionToFederalProducerDetails: ['']
     });
 
     if (this.tiedHouse) {
       this.form.patchValue(this.tiedHouse);
     }
-    this.form.valueChanges.subscribe(value => this.value.emit(Object.assign(this.tiedHouse, value)));
+    this.form.valueChanges.subscribe((value) => this.value.emit(Object.assign(this.tiedHouse, value)));
   }
 
   ngOnDestroy() {
-    this.subscriptions.forEach(sub => sub.unsubscribe());
+    this.subscriptions.forEach((sub) => sub.unsubscribe());
   }
 
   formHasChanged(): boolean {
@@ -88,8 +88,13 @@ export class ConnectionToProducersComponent implements OnInit, OnDestroy {
   }
 
   requiresWordingChange(name: String): boolean {
-    if (name === "Producer Retail Store" ||
-      name == "PRS Relocation" || name == "PRS Transfer of Ownership" || name == "Section 119 Authorization(PRS)" || name == "CRS Renewal") {
+    if (
+      name === 'Producer Retail Store' ||
+      name == 'PRS Relocation' ||
+      name == 'PRS Transfer of Ownership' ||
+      name == 'Section 119 Authorization(PRS)' ||
+      name == 'CRS Renewal'
+    ) {
       return true;
     }
 
@@ -97,6 +102,6 @@ export class ConnectionToProducersComponent implements OnInit, OnDestroy {
   }
 
   isPRS(): boolean {
-    return this.applicationTypeName == "Producer Retail Store";
+    return this.applicationTypeName == 'Producer Retail Store';
   }
 }

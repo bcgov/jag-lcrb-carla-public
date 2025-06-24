@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppState } from '@app/app-state/models/app-state';
+import { COUNTRIES } from '@app/constants/countries';
 import {
   faAddressCard,
   faChevronRight,
@@ -29,7 +30,6 @@ import { endOfToday } from 'date-fns';
 import { forkJoin, Observable, of, Subscription } from 'rxjs';
 import { catchError, filter, map, takeWhile } from 'rxjs/operators';
 import { ApplicationTypeNames } from '../../models/application-type.model';
-import { COUNTRIES } from './country-list';
 import { ConnectionToProducersComponent } from './tabs/connection-to-producers/connection-to-producers.component';
 
 // See the Moment.js docs for the meaning of these formats:
