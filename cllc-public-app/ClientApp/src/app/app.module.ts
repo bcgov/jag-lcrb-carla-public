@@ -349,6 +349,9 @@ import { PermanentChangeNameLicenseeSocitey } from "@shared/components/permanent
 import { PermanentChangeNamePersonComponent } from "@shared/components/permanent-change/permanent-change-name-person/permanent-change-name-person.component";
 import { PermanentChangeExternalTransferShares } from "@shared/components/permanent-change/permanent-change-external-transfer-shares/permanent-change-external-transfer-shares.component";
 import { PermanentChangeNameLicenseePartnership } from "@shared/components/permanent-change/permanent-change-name-licensee-partnership/permanent-change-name-licensee-partnership.component";
+import { RelatedLicencePickerMulitiSelectComponent } from "@shared/components/related-licence-picker-multi-select/related-licence-picker-multi-select.component";
+import { TiedHouseDeclarationFormComponent } from "@components/applications/tied-house-decleration/tied-house-decleration-form/tied-house-declaration-form.component";
+import { TiedHouseDeclarationComponent } from './components/applications/tied-house-decleration/tied-house-declaration.component';
 
 @NgModule({
   declarations: [
@@ -494,6 +497,7 @@ import { PermanentChangeNameLicenseePartnership } from "@shared/components/perma
     EventLocationTableComponent,
     ResolvedApplicationsComponent,
     RelatedLicencePickerComponent,
+    RelatedLicencePickerMulitiSelectComponent,
     ApplicationTiedHouseExemptionComponent,
     LiquorFreeEventComponent,
     WorkerLandingPageComponent,
@@ -561,7 +565,9 @@ import { PermanentChangeNameLicenseePartnership } from "@shared/components/perma
     PermanentChangeNamePersonComponent,
     PermanentChangePaymentComponent,
     PermanentChangePersonalHistorySummaryFormsComponent,
-    PermanentChangeTypesOfChangesRequestedComponent
+    PermanentChangeTypesOfChangesRequestedComponent,
+    TiedHouseDeclarationFormComponent,
+    TiedHouseDeclarationComponent
   ],
   imports: [
     AppRoutingModule,
@@ -663,7 +669,9 @@ import { PermanentChangeNameLicenseePartnership } from "@shared/components/perma
     MatStepperModule,
     NgxFileDropModule,
     ReactiveFormsModule,
-    MatBadgeModule
+    MatBadgeModule,
+    TiedHouseDeclarationFormComponent,
+    TiedHouseDeclarationComponent
   ],
   providers: [
     AnnualVolumeService,

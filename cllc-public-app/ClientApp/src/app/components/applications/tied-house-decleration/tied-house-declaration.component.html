@@ -1,0 +1,68 @@
+<form [formGroup]="form">
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let group of tiedHouseDeclarations">
+      <mat-expansion-panel-header class="blue-header">
+        <mat-panel-title>
+          {{ group[0] || 'New Declarations'}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+
+      <table class="table table-bordered table-sm w-100 mt-2">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Relationship</th>
+            <th>Licence #/Establishment</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let declaration of group[1]; let i = index">
+            <tr *ngIf="declaration.viewMode == TiedHouseViewMode.table"> 
+              <td>{{ i + 1 }}</td>
+              <td>{{ declaration.relationshipToLicence}}</td>
+              <td>
+                <ul *ngFor="let license of declaration.associatedLiquorLicense">
+                  <li>{{license}}</li>
+                </ul>
+              </td>
+              <td>
+                <button class="btn btn-danger btn-sm" type="button" (click)="changeDeclarationViewMode( TiedHouseViewMode.editExistingRecord, declaration)">
+                  Edit
+                </button>
+                <button class="btn btn-danger btn-sm" type="button" (click)="removeTiedHouseDeclaration(declaration)">
+                  Remove
+                </button>
+              </td>
+            </tr>
+
+            <tr *ngIf="declaration.viewMode != TiedHouseViewMode.table">
+              <td colspan="4">
+                <app-tied-house-declaration-form [tiedHouseDecleration]="declaration"
+                  [tiedHouseTypes]="tiedHouseTypes" [tiedHouseRelationships]="tiedHouseRelationships"
+                  (saveTiedHouseDecclaration)="saveTiedHouseDeclaration($event, declaration)"
+                  (removeTiedHouseDeclaration)="removeTiedHouseDeclaration(declaration)">
+                </app-tied-house-declaration-form>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+      <button class="thAddButton" type="button"
+        (click)="addNewTiedHouse(TiedHouseViewMode.addNewRelationship, group[1][0])">
+        <fa-icon [icon]="faPlus"></fa-icon>
+        Add New Tied House for {{group[0]}}
+      </button>
+      <!-- Temporary for dev tests -->
+      <button class="thAddButton" type="button" (click)="addNewTiedHouse(TiedHouseViewMode.table, group[1][0])">
+        <fa-icon [icon]="faPlus"></fa-icon>
+        Add Existing record
+      </button>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <button class="thAddButton" type="button" (click)="addNewTiedHouse(TiedHouseViewMode.editable)">
+    <fa-icon [icon]="faPlus"></fa-icon>
+    Add New Tied House
+  </button>
+</form>
