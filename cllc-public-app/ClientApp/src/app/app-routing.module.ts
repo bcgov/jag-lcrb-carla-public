@@ -106,6 +106,7 @@ import { SepClaimComponent } from "@components/sep/sep-claim/sep-claim.component
 import { RelocationTypeComponent } from "@components/relocation-type/relocation-type.component";
 import { TiedHouseDeclarationFormComponent } from "@components/applications/tied-house-decleration/tied-house-decleration-form/tied-house-declaration-form.component";
 import { TiedHouseDeclarationComponent } from "@components/applications/tied-house-decleration/tied-house-declaration.component";
+import { StandalonePaymentConfirmationComponent } from "@components/standalone-payment-confirmation/standalone-payment-confirmation.component";
 
 const routes: Routes = [
   {
@@ -150,6 +151,12 @@ const routes: Routes = [
     path: "sep/payment-confirmation",
     component: SepPaymentConfirmationComponent,
     data: { feature: "Sep" }
+  },
+   {
+    path: "permit/payment-confirmation/:id?",
+    component: StandalonePaymentConfirmationComponent,
+        
+     
   },
   {
     path: "sep/police/approval-settings",

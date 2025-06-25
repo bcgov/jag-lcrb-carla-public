@@ -1,6 +1,12 @@
 <div class="row mb-3">
-  <div style="width:100%;">
-    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z0 w-100" matSortActive="eventStartDate" matSortDirection="desc">
+  <div style="width: 100%">
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      matSort
+      class="mat-elevation-z0 w-100"
+      matSortActive="eventStartDate"
+      matSortDirection="desc">
       <!--- Note that these columns can be defined in any order.
       The actual rendered columns are set as a property on the row definition" -->
 
@@ -8,7 +14,7 @@
       <ng-container matColumnDef="dateSubmitted">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Submitted Date</th>
         <td mat-cell *matCellDef="let row" class="mat-body-1">
-          {{row.dateSubmitted | date: 'dd-MMM-yyyy HH:mm:ss'}}
+          {{ row.dateSubmitted | date: 'dd-MMM-yyyy HH:mm:ss' }}
         </td>
       </ng-container>
 
@@ -16,7 +22,9 @@
       <ng-container matColumnDef="eventName">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Event Name</th>
         <td mat-cell *matCellDef="let row" class="mat-body-1">
-          <button mat-button color="primary" (click)="openApplication(row)">{{row.eventName ? row.eventName : "Unnamed Event"}}</button>
+          <button mat-button color="primary" (click)="openApplication(row)">
+            {{ row.eventName ? row.eventName : 'Unnamed Event' }}
+          </button>
         </td>
       </ng-container>
 
@@ -24,71 +32,102 @@
       <ng-container matColumnDef="eventStartDate">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Start Date</th>
         <td mat-cell *matCellDef="let row" class="mat-body-1">
-          {{row.eventStartDate | date: 'MMM dd, yyyy'}}
+          {{ row.eventStartDate | date: 'MMM dd, yyyy' }}
         </td>
       </ng-container>
 
       <!-- Status -->
       <ng-container matColumnDef="eventStatusLabel">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header style="min-width:150px;">Status</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="min-width: 150px">Status</th>
         <td mat-cell *matCellDef="let row" class="mat-body-1">
-          <fa-icon [icon]="getStatusIcon(getStatus(row))" style="margin-right: 10px;"></fa-icon><strong>{{row.eventStatus ? getStatus(row) : "Draft"}}</strong>
+          <fa-icon [icon]="getStatusIcon(getStatus(row))" style="margin-right: 10px"></fa-icon>
+          <strong>{{ row.eventStatus ? getStatus(row) : 'Draft' }}</strong>
         </td>
       </ng-container>
-
 
       <!-- Size -->
       <ng-container matColumnDef="maximumNumberOfGuests">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Size</th>
-        <td mat-cell *matCellDef="let row" class="mat-body-1">{{row.maximumNumberOfGuests}}</td>
+        <td mat-cell *matCellDef="let row" class="mat-body-1">{{ row.maximumNumberOfGuests }}</td>
       </ng-container>
 
       <!-- Type -->
       <ng-container matColumnDef="typeOfEventLabel">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
-        <td mat-cell *matCellDef="let row" class="mat-body-1">{{row.typeOfEventLabel}}</td>
+        <td mat-cell *matCellDef="let row" class="mat-body-1">{{ row.typeOfEventLabel }}</td>
       </ng-container>
 
       <!-- Actions -->
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef>Action</th>
-        <td mat-cell *matCellDef="let row" class="p-0" style="padding: 10px !important; ">
-          <span style="margin-bottom:5px;">
-          <!-- instead of having them pay from the summary, we should have them open the app to pay it there.-->
-          <a (click)="openApplication(row)" *ngIf="row.eventStatus ==='Approved' && row.invoiceId && !row.isInvoicePaid && !isEventPast(row.eventStartDate)" style="text-decoration: underline; color:#1a5a96; cursor: pointer;"><fa-icon [icon]="faShoppingCart" style="margin-right: 10px;"></fa-icon>Pay Now</a>
+        <td mat-cell *matCellDef="let row" class="p-0" style="padding: 10px !important">
+          <span style="margin-bottom: 5px">
+            <!-- instead of having them pay from the summary, we should have them open the app to pay it there.-->
+            <a
+              (click)="openApplication(row)"
+              *ngIf="
+                row.eventStatus === 'Approved' &&
+                row.invoiceId &&
+                !row.isInvoicePaid &&
+                !isEventPast(row.eventStartDate)
+              "
+              style="text-decoration: underline; color: #1a5a96; cursor: pointer">
+              <fa-icon [icon]="faShoppingCart" style="margin-right: 10px"></fa-icon>
+              Pay Now
+            </a>
 
-          <!--button mat-button color="primary" (click)="openApplication(row)">{{row.eventName ? row.eventName : "Unnamed Event"}}</button-->
-          <br>
+            <br />
           </span>
-          <span *ngIf="row.specialEventId && row.eventStatus === 'Issued'" style="margin-bottom:5px;">
-            <a [href]="'api/special-events/applicant/' + row.specialEventId + '/permit/summary.pdf'" target="_blank"><fa-icon [icon]="faCertificate" style="margin-right: 10px;"></fa-icon>Print Permit</a>
-            <br>
+          <span *ngIf="row.specialEventId && row.eventStatus === 'Issued'" style="margin-bottom: 5px">
+            <a [href]="'api/special-events/applicant/' + row.specialEventId + '/permit/summary.pdf'" target="_blank">
+              <fa-icon [icon]="faCertificate" style="margin-right: 10px"></fa-icon>
+              Print Permit
+            </a>
+            <br />
           </span>
-          <span *ngIf="row.specialEventId" style="margin-bottom:5px;">
-            <a [href]="'api/special-events/applicant/' + row.specialEventId + '/summary/summary.pdf'" target="_blank"><fa-icon [icon]="faDownload" style="margin-right: 10px;"></fa-icon>Print Summary</a>
-            <br>
+          <span *ngIf="row.specialEventId && row.eventStatus === 'Issued'" style="margin-bottom: 5px">
+            <a [href]="'api/special-events/applicant/' + row.specialEventId + '/summary/summary.pdf'" target="_blank">
+              <fa-icon [icon]="faDownload" style="margin-right: 10px"></fa-icon>
+              Print Summary
+            </a>
+            <br />
           </span>
-          <span style="margin-bottom:5px;">
-            <a (click)="cancelApplication(row)" target="_blank" style="text-decoration: underline; color:#1a5a96; cursor: pointer;"><fa-icon [icon]="faCopy" style="margin-right: 10px;"></fa-icon>Withdraw</a>
-            <br>
+          <span style="margin-bottom: 5px">
+            <a
+              (click)="cancelApplication(row)"
+              target="_blank"
+              style="text-decoration: underline; color: #1a5a96; cursor: pointer">
+              <fa-icon [icon]="faCopy" style="margin-right: 10px"></fa-icon>
+              Withdraw
+            </a>
+            <br />
           </span>
 
-          <span style="margin-bottom:5px;">
-            <a (click)="cloneApplication(row)" target="_blank" style="text-decoration: underline; color:#1a5a96; cursor: pointer;"><fa-icon [icon]="faCopy" style="margin-right: 10px;"></fa-icon>Create a Copy</a>
+          <span style="margin-bottom: 5px">
+            <a
+              (click)="cloneApplication(row)"
+              target="_blank"
+              style="text-decoration: underline; color: #1a5a96; cursor: pointer">
+              <fa-icon [icon]="faCopy" style="margin-right: 10px"></fa-icon>
+              Create a Copy
+            </a>
           </span>
-
         </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-      <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
     </table>
   </div>
 </div>
 
 <div class="row">
   <div class="col-2 d-flex align-items-center">
-    <span>Displaying <strong>{{dataSource?.data?.length}}</strong> application form(s)</span>
+    <span>
+      Displaying
+      <strong>{{ dataSource?.data?.length }}</strong>
+      application form(s)
+    </span>
   </div>
   <div class="col-7">
     <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
