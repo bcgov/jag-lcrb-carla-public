@@ -33,11 +33,11 @@ export class RelatedLicencePickerMulitiSelectComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if(!this.form)
-    this.form = this.fb.group({
-      autocompleteInput: [''],
-      associatedLiquorLicense: this.fb.array([]),
-    });
+    if (!this.form)
+      this.form = this.fb.group({
+        autocompleteInput: [''],
+        associatedLiquorLicense: this.fb.array([]),
+      });
 
     this.form.get("autocompleteInput").valueChanges
       .pipe(filter(value => value && value.length >= 3),

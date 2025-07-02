@@ -141,10 +141,10 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
       this.form.get('businessType')?.setValidators(Validators.required);
       this.form.get('legalEntityName')?.setValidators(Validators.required);
     }
-    if(this.showOtherField){
+    if (this.showOtherField) {
       this.form.get('otherDescription')?.setValidators(Validators.required);
     }
-    else{
+    else {
       this.form.get('otherDescription')?.clearValidators();
     }
 

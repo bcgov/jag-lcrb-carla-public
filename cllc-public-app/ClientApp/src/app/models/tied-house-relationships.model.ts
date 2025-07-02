@@ -1,7 +1,6 @@
 import { RelatedLicence } from "./related-licence";
 
-export class TiedHouseDeclaration
-{
+export class TiedHouseDeclaration {
     id: string;
     applicationId: string;
     tiedHouseType: number = TiedHouseTypeEnum.Individual;
@@ -15,23 +14,21 @@ export class TiedHouseDeclaration
     viewMode: TiedHouseViewMode;
 };
 
-export enum TiedHouseViewMode
-{
-    new =1,
+export enum TiedHouseViewMode {
+    new = 1,
     readonly = 2,
     table = 3,
     disabled = 4,
-    addNewRelationship =5,
+    addNewRelationship = 5,
     editExistingRecord = 6
 }
 
-export enum TiedHouseTypeEnum
-{
+export enum TiedHouseTypeEnum {
     Individual = 1,
     LegalEntity = 2,
 }
 
 export const TiedHouseTypes = [
-  { name: "Individual", id: TiedHouseTypeEnum.Individual },
-  { name: "Legal Entity", id: TiedHouseTypeEnum.LegalEntity }
+    { name: "Individual", id: TiedHouseTypeEnum.Individual },
+    { name: "Legal Entity", id: TiedHouseTypeEnum.LegalEntity }
 ];
