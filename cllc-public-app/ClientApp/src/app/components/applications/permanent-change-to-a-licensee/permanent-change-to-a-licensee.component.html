@@ -9,23 +9,19 @@
     <section class="d-flex">
       <div class="flex-grow-0" style="background-color: #e1e8f2; width: 50px"></div>
       <div class="flex-grow-1 p-3" style="background-color: #f1f4fa; padding: 20px">
-        <app-permanent-change-disclaimer
-          [account]="account"
-          [liquorLicences]="liquorLicences"
+        <app-permanent-change-disclaimer [account]="account" [liquorLicences]="liquorLicences"
           [cannabisLicences]="cannabisLicences"></app-permanent-change-disclaimer>
       </div>
     </section>
 
     <section>
-      <app-permanent-change-types-of-changes-requested
-        [account]="account"
+      <app-permanent-change-types-of-changes-requested [account]="account"
         [changeList]="changeList"></app-permanent-change-types-of-changes-requested>
     </section>
 
     <!-- Internal Share Transfer -->
     <section *ngIf="form.get('csInternalTransferOfShares').value">
-      <app-permanent-change-internal-transfer-shares
-        [application]="application"
+      <app-permanent-change-internal-transfer-shares [application]="application"
         (uploadedCentralSecuritiesRegister)="uploadedCentralSecuritiesRegister = $event"
         (uploadedIndividualsWithLessThan10)="uploadedIndividualsWithLessThan10 = $event"
         (uploadedCertificateOfAmalgamation)="uploadedCertificateOfAmalgamation = $event"
@@ -34,8 +30,7 @@
 
     <!-- External Share Transfer -->
     <section *ngIf="form.get('csExternalTransferOfShares').value">
-      <app-permanent-change-external-transfer-shares
-        [application]="application"
+      <app-permanent-change-external-transfer-shares [application]="application"
         (uploadedCentralSecuritiesRegister)="uploadedCentralSecuritiesRegister = $event"
         (uploadedRegisterOfDirectorsAndOfficers)="uploadedRegisterOfDirectorsAndOfficers = $event"
         (uploadedIndividualsWithLessThan10)="
@@ -45,50 +40,40 @@
 
     <!-- Change of Directors or Officers -->
     <section *ngIf="form.get('csChangeOfDirectorsOrOfficers').value">
-      <app-permanent-change-directors-officers
-        [hasLiquor]="hasLiquor"
-        [hasCannabis]="hasCannabis"
-        [application]="application"
-        (uploadedNOA)="uploadedNOA = $event"></app-permanent-change-directors-officers>
+      <app-permanent-change-directors-officers [hasLiquor]="hasLiquor" [hasCannabis]="hasCannabis"
+        [application]="application" (uploadedNOA)="uploadedNOA = $event"></app-permanent-change-directors-officers>
     </section>
 
     <!-- Person's Name Change -->
     <section *ngIf="form.get('csNameChangeLicenseePerson').value">
-      <app-permanent-change-name-person
-        [application]="application"
+      <app-permanent-change-name-person [application]="application"
         (uploadedNameChangeDocuments)="uploadedNameChangeDocuments = $event"></app-permanent-change-name-person>
     </section>
 
     <!-- Corporation Name Change -->
     <section *ngIf="form.get('csNameChangeLicenseeCorporation').value">
-      <app-permanent-change-name-licensee-corporation
-        [application]="application"
-        [showValidationMessages]="showValidationMessages"
-        (uploadedCertificateOfNameChange)="
+      <app-permanent-change-name-licensee-corporation [application]="application"
+        [showValidationMessages]="showValidationMessages" (uploadedCertificateOfNameChange)="
           uploadedCertificateOfNameChange = $event
         "></app-permanent-change-name-licensee-corporation>
     </section>
 
     <!-- Partnership Business Name Change -->
     <section *ngIf="form.get('csNameChangeLicenseePartnership').value">
-      <app-permanent-change-name-licensee-partnership
-        [application]="application"
-        (uploadedPartnershipRegistration)="
+      <app-permanent-change-name-licensee-partnership [application]="application" (uploadedPartnershipRegistration)="
           uploadedPartnershipRegistration = $event
         "></app-permanent-change-name-licensee-partnership>
     </section>
 
     <!-- Society Name Change -->
     <section *ngIf="form.get('csNameChangeLicenseeSociety').value">
-      <app-permanent-change-name-licensee-socitey
-        [application]="application"
+      <app-permanent-change-name-licensee-socitey [application]="application"
         (uploadedSocietyNameChange)="uploadedSocietyNameChange = $event"></app-permanent-change-name-licensee-socitey>
     </section>
 
     <!-- Addition of Executor or Receiver -->
     <section *ngIf="form.get('csAdditionalReceiverOrExecutor').value">
-      <app-permanent-change-addition-receiver-executor
-        [application]="application"
+      <app-permanent-change-addition-receiver-executor [application]="application"
         (uploadedExecutorDocuments)="uploadedExecutorDocuments = $event"
         (uploadedlDeathCertificateDocuments)="uploadedlDeathCertificateDocuments = $event"
         (uploadedletterOfIntentDocuments)="
@@ -98,64 +83,49 @@
 
     <!-- Cannabis Associate Security Screening Forms -->
     <section *ngIf="hasCannabis">
-      <app-permanent-change-cannabis-security-screening-forms
-        [application]="application"
-        (uploadedCAS)="uploadedCAS = $event"
-        (uploadedFinancialIntegrity)="
+      <app-permanent-change-cannabis-security-screening-forms [application]="application"
+        (uploadedCAS)="uploadedCAS = $event" (uploadedFinancialIntegrity)="
           uploadedFinancialIntegrity = $event
         "></app-permanent-change-cannabis-security-screening-forms>
     </section>
 
     <!-- Personal History Summary Forms -->
     <section *ngIf="hasLiquor">
-      <app-permanent-change-personal-history-summary-forms
-        [application]="application"
-        (uploadedFinancialIntegrity)="
+      <app-permanent-change-personal-history-summary-forms [application]="application" (uploadedFinancialIntegrity)="
           uploadedFinancialIntegrity = $event
         "></app-permanent-change-personal-history-summary-forms>
     </section>
-     <!-- Tied House Declaration -->
-     <!-- {{application |json}} -->
-    <section>
+    <!-- Tied House Declaration -->
+    <!-- {{application |json}} -->
+    <section *ngIf="form.get('csTiedHouseDeclaration').value">
       <h3 class="blue-header">Tied House Declarations</h3>
       <section class="content-bottom">
-      <app-tied-house-declaration></app-tied-house-declaration>
+        <app-tied-house-declaration></app-tied-house-declaration>
       </section>
     </section>
 
     <!-- Declaration -->
     <section>
-      <app-permanent-change-declarations
-        [hasLiquor]="hasLiquor"
-        [hasCannabis]="hasCannabis"
+      <app-permanent-change-declarations [hasLiquor]="hasLiquor" [hasCannabis]="hasCannabis"
         [showValidationMessages]="showValidationMessages"></app-permanent-change-declarations>
     </section>
 
     <!-- Application Contact Details -->
     <section>
-      <app-permanent-change-contact
-        [contact]="applicationContact"
-        [disabled]="appContactDisabled"
+      <app-permanent-change-contact [contact]="applicationContact" [disabled]="appContactDisabled"
         #appContact></app-permanent-change-contact>
     </section>
 
     <!-- Payment -->
-    <section
-      *ngIf="
+    <section *ngIf="
         selectedChangeList?.length > 0 &&
         ((cannabisLicences && cannabisLicences.length > 0) || (liquorLicences && liquorLicences.length > 0))
       ">
-      <app-permanent-change-payment
-        [application]="application"
-        [liquorLicences]="liquorLicences"
-        [cannabisLicences]="cannabisLicences"
-        [selectedChangeList]="selectedChangeList"
-        [canCreateNewApplication]="canCreateNewApplication"
-        [onNewApplication]="onNewApplication"
-        [createApplicationInProgress]="createApplicationInProgress"
-        [primaryInvoice]="primaryInvoice"
-        [secondaryInvoice]="secondaryInvoice"
-        [primaryPaymentInProgress]="primaryPaymentInProgress"
+      <app-permanent-change-payment [application]="application" [liquorLicences]="liquorLicences"
+        [cannabisLicences]="cannabisLicences" [selectedChangeList]="selectedChangeList"
+        [canCreateNewApplication]="canCreateNewApplication" [onNewApplication]="onNewApplication"
+        [createApplicationInProgress]="createApplicationInProgress" [primaryInvoice]="primaryInvoice"
+        [secondaryInvoice]="secondaryInvoice" [primaryPaymentInProgress]="primaryPaymentInProgress"
         [secondaryPaymentInProgress]="secondaryPaymentInProgress"
         [onSubmit]="onSubmit.bind(this)"></app-permanent-change-payment>
     </section>

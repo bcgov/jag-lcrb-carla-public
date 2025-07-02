@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TiedHouseViewMode, TiedHouseDeclaration } from '@models/tied-house-relationships.model';
+import { TiedHouseViewMode, TiedHouseDeclaration, TiedHouseTypeEnum } from '@models/tied-house-relationships.model';
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 
@@ -9,11 +9,11 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
   styleUrls: ['./tied-house-declaration.component.scss']
 })
 export class TiedHouseDeclarationComponent implements OnInit {
-  tiedHouseTypes = [{ name: "Indivual", id: 1 }, { name: "Legal Entity", id: 2 }]
   tiedHouseRelationships = [{ name: "Father", id: 1 }, { name: "Other", id: 2 }]
   tiedHouseDeclarationstoAdd: TiedHouseDeclaration[] = [];
   tiedHouseDeclarations: [string, TiedHouseDeclaration[]][] = [];
   TiedHouseViewMode = TiedHouseViewMode;
+  openedPanelIndex: number | null = null;
   faPlus = faPlus;
 
 
@@ -22,9 +22,9 @@ export class TiedHouseDeclarationComponent implements OnInit {
   ngOnInit(): void {
 
   }
-  addNewTiedHouse(viewMode: TiedHouseViewMode, declaration?: TiedHouseDeclaration ) {
+  addNewTiedHouse(viewMode: TiedHouseViewMode, declaration?: TiedHouseDeclaration, index?: number) {
     var newTiedHouseDeclaration = new TiedHouseDeclaration();
-    if(declaration){
+    if (declaration) {
       newTiedHouseDeclaration.firstName = declaration.firstName;
       newTiedHouseDeclaration.lastName = declaration.lastName;
       newTiedHouseDeclaration.middleName = declaration.middleName;
@@ -33,10 +33,12 @@ export class TiedHouseDeclarationComponent implements OnInit {
     }
     newTiedHouseDeclaration.viewMode = viewMode;
     this.tiedHouseDeclarationstoAdd.push(newTiedHouseDeclaration);
-    this.updateTiedHouseDeclarations()
+    this.updateTiedHouseDeclarations();
+
+    this.openPanel(index);
   }
 
-  changeDeclarationViewMode(viewMode: TiedHouseViewMode, declaration: TiedHouseDeclaration ){
+  changeDeclarationViewMode(viewMode: TiedHouseViewMode, declaration: TiedHouseDeclaration) {
     declaration.viewMode = viewMode;
   }
 
@@ -54,9 +56,30 @@ export class TiedHouseDeclarationComponent implements OnInit {
     this.updateTiedHouseDeclarations();
   }
 
+  removeExistingTiedHouseDeclaration(declaration: TiedHouseDeclaration, undo: boolean) {
+    declaration.removeExistingLicense = undo;
+  }
+
+  hasExistingDeclarations(group: TiedHouseDeclaration[]): boolean {
+    return group.find(d => d.viewMode == TiedHouseViewMode.table) != undefined;
+  }
+
+  openPanel(index?: number) {
+    this.openedPanelIndex = index ?? this.tiedHouseDeclarations.length - 1;
+  }
+
+
   private updateTiedHouseDeclarations() {
     const grouped = this.tiedHouseDeclarationstoAdd?.reduce((acc, declaration) => {
-      const key = `${declaration.firstName} -${declaration.dateOfBirth}`;
+      var key = '';
+      if (declaration.tiedHouseType == TiedHouseTypeEnum.Individual) {
+        if (!declaration.firstName || !declaration.dateOfBirth) {
+          key = "New Declaration"
+        }
+        else {
+          key = `${declaration.firstName} -${declaration.dateOfBirth}`;
+        }
+      }
 
       if (!acc[key]) {
         acc[key] = [];

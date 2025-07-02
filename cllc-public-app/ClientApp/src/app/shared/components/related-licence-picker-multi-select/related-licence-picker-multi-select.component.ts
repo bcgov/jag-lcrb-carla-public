@@ -72,7 +72,6 @@ export class RelatedLicencePickerMulitiSelectComponent implements OnInit {
   }
 
   onOptionSelect($event: any): void {
-    var x = $event;
     const selectedLicence = $event.option.value as RelatedLicence;
 
     // Avoid duplicates
@@ -89,7 +88,7 @@ export class RelatedLicencePickerMulitiSelectComponent implements OnInit {
     this.autocompleteLicences = [];
   }
 
-  removeLicenceAtIndex(index: number): void {
+  removeLicence(index: number): void {
     this.associatedLicencesFormArray.removeAt(index);
   }
 }

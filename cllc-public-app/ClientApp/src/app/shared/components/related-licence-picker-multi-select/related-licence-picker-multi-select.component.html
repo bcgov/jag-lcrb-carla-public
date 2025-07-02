@@ -1,5 +1,4 @@
 <div [formGroup]="form">
-<pre>{{ form.value | json }}</pre>
     <input  type="text" class="form-control" style="width: 500px;" placeholder="Enter Licence #" formControlName="autocompleteInput" [matAutocomplete]="auto"
            #autocomplete (focus)="autoCompFldFocus()" [disabled]="form.get('autocompleteInput')?.disabled">
     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onOptionSelect($event)" [displayWith]="autocompleteDisplay">
@@ -11,10 +10,9 @@
     <mat-progress-bar *ngIf="licenceRequestInProgress" mode="indeterminate"></mat-progress-bar>
   <mat-form-field class="multi-chip-autocomplete" style="width: 500px;">
     <mat-chip-list #chipList aria-label="Licence selection">
-      <mat-chip *ngFor="let licence of associatedLicencesFormArray?.controls" [selectable]="true" [removable]="!form.get('autocompleteInput')?.disabled"
-                (removed)="removeLicence(licence.value)">
+      <mat-chip *ngFor="let licence of associatedLicencesFormArray?.controls; let i = index" [selectable]="true">
         {{ licence.value.name }}
-        <mat-icon matChipRemove>cancel</mat-icon>
+        <mat-icon *ngIf="!form.get('autocompleteInput')?.disabled" (click)="removeLicence(i)" matChipRemove>cancel</mat-icon>
       </mat-chip>
     </mat-chip-list>
   </mat-form-field>
