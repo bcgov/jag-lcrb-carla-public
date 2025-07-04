@@ -101,6 +101,7 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
    * @memberof LegalEntityReviewComponent
    */
   private loadData() {
+    // TODO Update this API call to fetch the legal entity review application data
     const sub = this.applicationDataService.getPermanentChangesToLicenseeData(this.applicationId).subscribe((data) => {
       this.setFormData(data);
     });
