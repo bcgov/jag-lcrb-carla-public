@@ -474,7 +474,9 @@
         </mat-radio-group>
       </section>
       <section *ngIf="form.get('liquorFinancialInterest').value == '1'">
-        <app-connection-to-other-liquor-licences></app-connection-to-other-liquor-licences>
+        <div class="container w-100">
+          <app-tied-house-declaration></app-tied-house-declaration>
+        </div>
       </section>
     </div>
   </div>
