@@ -352,7 +352,6 @@ import { LegalEntityReviewDeclarationsComponent } from "@shared/components/legal
 import { LegalEntityReviewWhatHappensNextComponent } from "@shared/components/legal-entity-review/legal-entity-review-what-happens-next/legal-entity-review-what-happens-next.component";
 import { LegalEntityReviewTiedHouseComponent } from "@shared/components/legal-entity-review/legal-entity-review-tied-house/legal-entity-review-tied-house.component";
 import { LegalEntityReviewSupportingDocumentsComponent } from "@shared/components/legal-entity-review/legal-entity-review-supporting-documents/legal-entity-review-supporting-documents.component";
-import { ConnectionToOtherLiquorLicencesComponent } from "@components/account-profile/tabs/connection-to-producers/connection-to-other-liquor-licences/connection-to-other-liquor-licences.component";
 import { GenericConfirmationDialogComponent } from "@shared/components/dialog/generic-confirmation-dialog/generic-confirmation-dialog.component";
 
 @NgModule({
@@ -370,7 +369,6 @@ import { GenericConfirmationDialogComponent } from "@shared/components/dialog/ge
     BreadcrumbComponent,
     AccountProfileComponent,
     ConnectionToProducersComponent,
-    ConnectionToOtherLiquorLicencesComponent,
     DashboardComponent,
     SepDashboardComponent,
     DelayedFileUploaderComponent,
