@@ -1,0 +1,57 @@
+.th-accordian-header {
+  height: 32px !important;
+}
+
+.th-accordian-header:hover {
+  background-color: #38598a !important;
+
+}
+
+.th-accordian {
+  background-color: white !important;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
+.th-table-body {
+  padding: 20px !important;
+}
+
+.th-table {
+  border-collapse: collapse;
+  background-color: #f1f4fa;
+  width: 100%;
+}
+
+.th-form {
+  border-top: 10px solid white;
+}
+
+.th-existing-table td,
+th {
+  text-align: center;
+  /* Horizontal center */
+  vertical-align: middle;
+  /* Vertical center */
+}
+
+.th-remove-existing-table {
+  background-color: #faefef;
+}
+
+th,
+td {
+  border: 1px solid white;
+}
+
+.th-remove-existing-index {
+  background-color: #f2e1e1;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.th-existing-index {
+  background-color: #e1e8f2;
+  text-align: center;
+  vertical-align: middle;
+}

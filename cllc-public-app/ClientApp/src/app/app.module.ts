@@ -341,6 +341,9 @@ import { PermanentChangeNameLicenseeSocitey } from "@shared/components/permanent
 import { PermanentChangeNamePersonComponent } from "@shared/components/permanent-change/permanent-change-name-person/permanent-change-name-person.component";
 import { PermanentChangeExternalTransferShares } from "@shared/components/permanent-change/permanent-change-external-transfer-shares/permanent-change-external-transfer-shares.component";
 import { PermanentChangeNameLicenseePartnership } from "@shared/components/permanent-change/permanent-change-name-licensee-partnership/permanent-change-name-licensee-partnership.component";
+import { RelatedLicencePickerMulitiSelectComponent } from "@shared/components/related-licence-picker-multi-select/related-licence-picker-multi-select.component";
+import { TiedHouseDeclarationFormComponent } from "@components/applications/tied-house-decleration/tied-house-decleration-form/tied-house-declaration-form.component";
+import { TiedHouseDeclarationComponent } from './components/applications/tied-house-decleration/tied-house-declaration.component';
 import { LegalEntityReviewTypesOfChangesRequiredComponent } from "@shared/components/legal-entity-review/legal-entity-review-types-of-changes-required/legal-entity-review-types-of-changes-required.component";
 import { LegalEntityReviewJobComponent } from "@shared/components/legal-entity-review/legal-entity-review-job/legal-entity-review-job.component";
 import { LegalEntityReviewComponent } from "@components/applications/legal-entity-review/legal-entity-review.component";
@@ -493,6 +496,7 @@ import { GenericConfirmationDialogComponent } from "@shared/components/dialog/ge
     EventLocationTableComponent,
     ResolvedApplicationsComponent,
     RelatedLicencePickerComponent,
+    RelatedLicencePickerMulitiSelectComponent,
     ApplicationTiedHouseExemptionComponent,
     LiquorFreeEventComponent,
     WorkerLandingPageComponent,
@@ -560,6 +564,9 @@ import { GenericConfirmationDialogComponent } from "@shared/components/dialog/ge
     PermanentChangeNamePersonComponent,
     PermanentChangePaymentComponent,
     PermanentChangePersonalHistorySummaryFormsComponent,
+    PermanentChangeTypesOfChangesRequestedComponent,
+    TiedHouseDeclarationFormComponent,
+    TiedHouseDeclarationComponent,
     PermanentChangeTypesOfChangesRequestedComponent,
     LegalEntityReviewComponent,
     LegalEntityReviewDeclarationsComponent,
@@ -671,7 +678,9 @@ import { GenericConfirmationDialogComponent } from "@shared/components/dialog/ge
     MatStepperModule,
     NgxFileDropModule,
     ReactiveFormsModule,
-    MatBadgeModule
+    MatBadgeModule,
+    TiedHouseDeclarationFormComponent,
+    TiedHouseDeclarationComponent
   ],
   providers: [
     AnnualVolumeService,

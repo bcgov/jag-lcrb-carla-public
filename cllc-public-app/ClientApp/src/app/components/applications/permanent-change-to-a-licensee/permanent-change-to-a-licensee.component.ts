@@ -68,6 +68,9 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
   uploadedletterOfIntentDocuments: 0;
   uploadedCAS: 0;
   uploadedFinancialIntegrity: 0;
+  //Temp values
+  tiedHouseTypes = [{ name: "Indivual", id: 1 }, { name: "Legal Entity", id: 2 }]
+  tiedHouseRelationships = [{ name: "Father", id: 1 }, { name: "Other", id: 2 }]
 
   get hasLiquor(): boolean {
     return this.liquorLicences.length > 0;
@@ -121,6 +124,7 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
       csNameChangeLicenseeSociety: [''],
       csNameChangeLicenseePerson: [''],
       csAdditionalReceiverOrExecutor: [''],
+      csTiedHouseDeclaration: [''],
       firstNameOld: [''],
       firstNameNew: [''],
       lastNameOld: [''],

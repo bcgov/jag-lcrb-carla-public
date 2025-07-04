@@ -203,5 +203,23 @@ export const permanentChangeTypesOfChanges: PermanentChangeTypesOfChangesOption[
     helpTextHeader: 'Use this option to report:',
     helpText: ['Upon the death, bankruptcy or receivership of a licensee']
     // helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
+  },
+  {
+    name: 'Tied House Declaration',
+    formControlName: 'csTiedHouseDeclaration',
+    availableTo: [
+      'PrivateCorporation',
+      'PublicCorporation',
+      'GeneralPartnership',
+      'Partnership',
+      'LimitedLiabilityPartnership',
+      'Society',
+      'MilitaryMess'
+    ],
+    CannabisFee: 220,
+    LiquorFee: 220,
+    helpTextHeader: 'Use this option to report:',
+    helpText: ['Upon the death, bankruptcy or receivership of a licensee']
+    //helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
   }
 ];
