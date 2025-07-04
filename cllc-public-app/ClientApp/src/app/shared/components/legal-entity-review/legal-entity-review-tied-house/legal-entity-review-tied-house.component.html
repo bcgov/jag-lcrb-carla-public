@@ -1,0 +1,31 @@
+<h3 class="blue-header">Opportunity for Self-Declaration of any unreported Tied House changes?</h3>
+<section class="content-bottom">
+  <div>
+    <app-field
+      label="Please select if you would like to self-declare any unreported Tied House relationship changes that exist for
+      your account."
+      [valid]="true"
+      [showChevrons]="false"
+      [isFullWidth]="true">
+      <!-- This value is not saved to dynamics. That is why it is not in the 'form' and the data model.-->
+      <mat-radio-group
+        [(ngModel)]="hasTiedHouseChangesToDeclare"
+        [ngModelOptions]="{ standalone: true }"
+        class="d-flex flex-column">
+        <mat-radio-button [value]="true" class="p-2">
+          I would like to update my Tied House relationships
+        </mat-radio-button>
+        <mat-radio-button [value]="false" class="p-2"> I have no Tied House relationships to declare </mat-radio-button>
+      </mat-radio-group>
+    </app-field>
+  </div>
+</section>
+
+<ng-container *ngIf="hasTiedHouseChangesToDeclare">
+  <h3 class="blue-header">Tied House Declaration</h3>
+  <section class="content-bottom">
+    <div class="container w-100">
+      <app-tied-house-declaration></app-tied-house-declaration>
+    </div>
+  </section>
+</ng-container>

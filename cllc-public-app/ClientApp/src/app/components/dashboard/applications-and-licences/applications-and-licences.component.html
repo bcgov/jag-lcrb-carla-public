@@ -165,7 +165,7 @@
   </td>
   <td style="text-align: center;">
     <button *ngIf="liquorOne" mat-raised-button color="secondary" [disabled]="startCateringOngoing"
-            (click)="startNewCateringApplication()" id="startCatering"> 
+            (click)="startNewCateringApplication()" id="startCatering">
       <span>START APPLICATION</span>
       <mat-progress-bar class="mb-1" *ngIf="startCateringOngoing" mode="indeterminate"></mat-progress-bar>
     </button>
@@ -530,14 +530,14 @@
     <p *ngIf="item.applicationStatus === 'Transfer Initiated'">
       This transfer application has not yet been submitted.
     </p>
-   
-    <p *ngIf="item.applicationStatus === 'PendingForLicenceFee'">     
+
+    <p *ngIf="item.applicationStatus === 'PendingForLicenceFee'">
         <a href="javascript:void(0);" (click)="payLicenceFee(item)" class="missing">
           <span>
             <fa-icon [icon]="faShoppingCart" style="margin-right: 10px;"></fa-icon>
             Pay First Year Fee
           </span>
-        </a>      
+        </a>
     </p>
 
     <p *ngIf="item.applicationStatus === 'Incomplete'">
@@ -648,6 +648,15 @@
       <a style="margin-top: 5px;" href="javascript:void(0);" (click)="resolveIncompleteness(item)">
         <fa-icon [icon]="faPlus" style="color: #1a5a96; margin-right: 10px;"></fa-icon>
         <span>Resolve Incompleteness</span>
+      </a>
+    </div>
+
+    <div
+      *ngIf="item.applicationStatus === 'Legal Entity Review'"
+      style="margin-top: 5px">
+      <a [routerLink]="['/legal-entity-review/' + item.id]">
+        <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px"></fa-icon>
+        <span>Start Application: Permanent Change to Licence</span>
       </a>
     </div>
   </td>
