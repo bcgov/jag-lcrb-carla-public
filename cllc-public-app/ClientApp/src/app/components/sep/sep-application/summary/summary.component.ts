@@ -132,13 +132,8 @@ export class SummaryComponent implements OnInit {
       });
 
     this.route.queryParams.subscribe((params) => {
-      if (params['trnId']) {
-        this.transactionId = params['trnId'];
-      }
-
-      if (params['SessionKey']) {
-        this.appId = params['SessionKey'];
-      }
+      this.transactionId = params["trnId"];
+      this.appId = params["SessionKey"];
     });
 
     this.route.params.subscribe((params: Params) => {
@@ -153,21 +148,12 @@ export class SummaryComponent implements OnInit {
 
     this.sepDataService.getSpecialEventForApplicant(id).subscribe(async (app) => {
       this.application = app;
-
-      if (!this.transactionId || !this.appId) {
-        // If not already set from query params, set the transactionId and appId from the application, and attempt
-        // to verify payment.
-        this.transactionId = this.application?.invoice?.returnedTransactionId;
-        this.appId = this.application?.id;
-        this.verify_payment();
-      }
-
       this.formatEventDatesForDisplay();
     });
   }
 
   ngOnInit(): void {
-    if (this.transactionId && this.appId) {
+    if (this.transactionId) {
       this.verify_payment();
     }
     window.scrollTo(0, 0);
