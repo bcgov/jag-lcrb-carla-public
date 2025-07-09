@@ -492,6 +492,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public ApplicationType ApplicationType { get; set; }
 
         public TiedHouseConnection TiedHouse { get; set; }
+        public List<TiedHouseConnection> TiedHouseConnections { get; set; }
         public PoliceJurisdiction PoliceJurisdiction { get; set; }
         public IndigenousNation IndigenousNation { get; set; }
         public ServiceHours ServiceHours { get; set; }
@@ -697,6 +698,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool? CsNameChangeLicenseeSociety { get; set; }
         public bool? CsNameChangeLicenseePerson { get; set; }
         public bool? CsAdditionalReceiverOrExecutor { get; set; }
+        public bool? CsTiedHouseDeclaration { get; set; }
         public bool? PrimaryInvoicePaid { get; set; }
         public bool? SecondaryInvoicePaid { get; set; }
         public bool? IsOnINLand { get; set; }

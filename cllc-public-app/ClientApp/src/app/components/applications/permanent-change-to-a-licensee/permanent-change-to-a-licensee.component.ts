@@ -19,6 +19,9 @@ import {
 import { FormBase } from '@shared/form-base';
 import { Observable, of } from 'rxjs';
 import { catchError, filter, mergeMap, takeWhile } from 'rxjs/operators';
+import { TiedHouseDeclarationComponent } from '../tied-house-decleration/tied-house-declaration.component';
+import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
+import { TiedHouseViewMode } from '@models/tied-house-connection.model';
 
 export const SharepointNameRegex = /^[^~#%&*{}\\:<>?/+|""]*$/;
 
@@ -46,6 +49,8 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
   validationMessages: string[];
   @ViewChild('appContact')
   appContact: PermanentChangeContactComponent;
+  @ViewChild('tiedHouseDeclaration')
+  tiedHouseDeclaration: TiedHouseDeclarationComponent;
   appContactDisabled: boolean;
   applicationId: string;
   canCreateNewApplication: boolean;
@@ -68,9 +73,6 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
   uploadedletterOfIntentDocuments: 0;
   uploadedCAS: 0;
   uploadedFinancialIntegrity: 0;
-  //Temp values
-  tiedHouseTypes = [{ name: "Indivual", id: 1 }, { name: "Legal Entity", id: 2 }]
-  tiedHouseRelationships = [{ name: "Father", id: 1 }, { name: "Other", id: 2 }]
 
   get hasLiquor(): boolean {
     return this.liquorLicences.length > 0;
@@ -181,6 +183,8 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
       contactPersonEmail: this.application.contactPersonEmail
     };
 
+    
+
     this.primaryInvoice = primary;
     this.secondaryInvoice = secondary;
 
@@ -228,7 +232,8 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
         ...this.application,
         ...this.form.value,
         ...this.appContact.form.value,
-        ...appData
+        ...appData,
+        tiedHouseConnections: this.tiedHouseDeclaration.flatDeclarations
       })
       .pipe(takeWhile(() => this.componentActive))
       .pipe(
@@ -309,7 +314,17 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
       valid = false;
     }
 
+    const tiedHouseDeclarationIsRequired = this.form.get('csTiedHouseDeclaration').value;
+    if (tiedHouseDeclarationIsRequired && this.isTiedHouseValid()) {
+      this.validationMessages.push('A Tide House Declaration is required.');
+      valid = false;
+    }
+
     return valid;
+  }
+
+  isTiedHouseValid() {
+    return this.tiedHouseDeclaration.tiedHouseDeclarations.length < 1 && !this.tiedHouseDeclaration.tiedHouseDeclarations.find(th => [TiedHouseViewMode.new, TiedHouseViewMode.editExistingRecord ].includes(th.viewMode))
   }
 
   /**
@@ -345,6 +360,7 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
     this.save(!this.application.applicationType.isFree, { invoiceTrigger: trigInv } as Application) // trigger invoice generation when saving LCSD6564 Only if not present or cancelled.
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(([saveSucceeded, app]) => {
+        //saveSucceeded = false;
         if (saveSucceeded) {
           if (app) {
             this.submitPayment(invoiceType).subscribe((res) => {

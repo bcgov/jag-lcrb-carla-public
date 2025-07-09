@@ -187,6 +187,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioCsnamechangelicenseesociety = from.CsNameChangeLicenseeSociety;
             to.AdoxioCsnamechangeperson = from.CsNameChangeLicenseePerson;
             to.AdoxioCsadditionofreceiverorexecutor = from.CsAdditionalReceiverOrExecutor;
+            to.AdoxioCschangetotiedhouse = from.CsTiedHouseDeclaration;
 
             // Manufacturing structural change fields
 
@@ -287,6 +288,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioEstablishmentreopeningdate = from.EstablishmentReopeningDate;
             
             to.AdoxioChecklistdrivingrecordcomplete = from.temporaryRelocationCriteria;
+
         }
 
 
@@ -889,10 +891,10 @@ namespace Gov.Lclb.Cllb.Public.Models
             }
             if (dynamicsApplication.AdoxioApplicationAdoxioTiedhouseconnectionApplication != null)
             {
-                var tiedHouse = dynamicsApplication.AdoxioApplicationAdoxioTiedhouseconnectionApplication.FirstOrDefault();
-                if (tiedHouse != null)
+                var tiedHouses = dynamicsApplication.AdoxioApplicationAdoxioTiedhouseconnectionApplication;
+                if (tiedHouses != null)
                 {
-                    applicationVM.TiedHouse = tiedHouse.ToViewModel();
+                    applicationVM.TiedHouseConnections = tiedHouses.Select(x => x.ToViewModel()).ToList();
                 }
             }
 

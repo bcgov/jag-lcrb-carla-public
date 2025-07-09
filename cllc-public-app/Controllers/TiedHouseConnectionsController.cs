@@ -1,5 +1,6 @@
 ﻿using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
+using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -20,12 +21,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     public class TiedHouseConnectionsController : ControllerBase
     {
         private readonly IDynamicsClient _dynamicsClient;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
 
-        public TiedHouseConnectionsController(ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
+        public TiedHouseConnectionsController(ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient, IHttpContextAccessor httpContextAccessor)
         {
             _dynamicsClient = dynamicsClient;
             _logger = loggerFactory.CreateLogger(typeof(TiedHouseConnectionsController));
+            _httpContextAccessor = httpContextAccessor;
         }
 
         /// <summary>
@@ -51,6 +54,24 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(result.FirstOrDefault());
         }
 
+        [HttpGet("getall")]
+        public JsonResult GetAllTiedHouseConnections()
+        {
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+            var result = new List<ViewModels.TiedHouseConnection>();
+            IEnumerable<MicrosoftDynamicsCRMadoxioTiedhouseconnection> tiedHouseConnections = null;
+            string accountfilter = "_adoxio_accountid_value eq " + userSettings.AccountId;
+            _logger.LogDebug("Account filter = " + accountfilter);
+
+            tiedHouseConnections = _dynamicsClient.Tiedhouseconnections.Get(filter: accountfilter).Value;
+
+            foreach (var tiedHouse in tiedHouseConnections)
+            {
+                result.Add(tiedHouse.ToViewModel());
+            }
+
+            return new JsonResult(result);
+        }
 
         /// <summary>
         /// Update a TiedHouseConnection

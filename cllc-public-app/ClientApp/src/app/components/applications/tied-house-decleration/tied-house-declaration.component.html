@@ -1,11 +1,12 @@
 <form [formGroup]="form">
-  <div class="row">Do you or any of your shareholders, directors, or officers have any amount of interest in another
-    B.C. liquor licence, or any association with a third
-    party operator for another liquor licence, or have an immediate family member (spouse, parent, sibling, or child)
-    with any amount of interest in
-    another liquor licence?</div>
+  <div class="content-bottom">
+    <p>Do you or any of your shareholders, directors, or officers have any amount of interest in another
+      B.C. liquor licence, or any association with a third
+      party operator for another liquor licence, or have an immediate family member (spouse, parent, sibling, or child)
+      with any amount of interest in
+      another liquor licence?</p>
   <mat-accordion>
-    <mat-expansion-panel class="th-accordian" *ngFor="let group of tiedHouseDeclarations; let i = index"
+    <mat-expansion-panel class="th-accordian" *ngFor="let group of groupedTiedHouseDeclarations; let i = index"
       [expanded]="openedPanelIndex === i">
       <mat-expansion-panel-header class="blue-header th-accordian-header">
         {{ group[0] || 'New Declarations'}}
@@ -30,14 +31,12 @@
         <tbody class="th-table-body">
           <ng-container *ngFor="let declaration of group[1]; let j = index">
             <tr [ngClass]="declaration.removeExistingLicense? 'th-remove-existing-table': 'th-existing-table'"
-              *ngIf="declaration.viewMode == TiedHouseViewMode.table">
+              *ngIf="declaration.viewMode == TiedHouseViewMode.existing">
               <td [ngClass]="declaration.removeExistingLicense? 'th-remove-existing-index': 'th-existing-index'">{{ j +
                 1 }}</td>
-              <td>{{ declaration.relationshipToLicense}}
-                <!-- {{declaration |json}} -->
+              <td>{{ getRelationshipName(declaration.relationshipToLicence)}}
               </td>
               <td>
-                <!-- {{declaration.associatedLiquorLicense| json}} -->
                 <ul *ngFor="let license of declaration.associatedLiquorLicense">
                   <li>{{license.name}}</li>
                 </ul>
@@ -69,16 +68,15 @@
               </td>
             </tr>
 
-            <tr *ngIf="declaration.viewMode != TiedHouseViewMode.table">
+            <tr *ngIf="declaration.viewMode != TiedHouseViewMode.existing">
               <td class="p-4 th-form" colspan="4">
                 <app-tied-house-declaration-form style="width: 100%;" [tiedHouseDecleration]="declaration"
-                  [tiedHouseRelationships]="tiedHouseRelationships"
                   (saveTiedHouseDecclaration)="saveTiedHouseDeclaration($event, declaration)"
                   (removeTiedHouseDeclaration)="removeTiedHouseDeclaration(declaration)"
                   (cancelTiedHouseDeclaration)="changeDeclarationViewMode( $event, declaration)">
                 </app-tied-house-declaration-form>
                 <button class="btn btn-primary" type="button"
-                  (click)="changeDeclarationViewMode( TiedHouseViewMode.table, declaration)">
+                  (click)="changeDeclarationViewMode( TiedHouseViewMode.existing, declaration)">
                   To Existing
                 </button>
               </td>
@@ -96,11 +94,6 @@
         both yours and your establishment s file.
       </div>
 
-      <!-- Temporary for dev tests -->
-      <button class="thAddButton" type="button" (click)="addNewTiedHouse(TiedHouseViewMode.table, group[1][0], i)">
-        <fa-icon [icon]="faPlus"></fa-icon>
-        Add Existing record
-      </button>
     </mat-expansion-panel>
   </mat-accordion>
 
@@ -112,9 +105,8 @@
   both yours and your establishment s file.
 
   <br />
-  <pre>tiedHouseDeclarations <br/>{{ tiedHouseDeclarations | json }}</pre>
-
-  <br />
-  <!-- <pre>form <br/>{{ form.value | json }}</pre> -->
-  <!-- <pre>{{ tiedHouseDeclarations | json }}</pre> -->
+  <!-- Tempory for dev -->
+  <!-- <pre>grouped tiedHouseDeclarations <br/>{{ groupedTiedHouseDeclarations | json }}</pre>
+   <pre>tiedHouseDeclarations <br/>{{ tiedHouseDeclarations | json }}</pre> -->
+</div>
 </form>

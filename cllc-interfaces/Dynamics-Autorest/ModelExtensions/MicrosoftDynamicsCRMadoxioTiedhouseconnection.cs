@@ -9,8 +9,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_AccountId@odata.bind")]
         public string AccountODataBind { get; set; }
+        [JsonProperty(PropertyName = "adoxio_Application@odata.bind")]
+        public string ApplicationOdataBind { get; set; }
 
-        
+
 
     }
 }

@@ -21,6 +21,12 @@ export class TiedHouseConnectionsDataService extends DataService {
       .pipe(catchError(this.handleError));
   }
 
+  getAllTiedHouses() {
+    const apiPath = `api/tiedhouseconnections/getall`;
+    return this.http.get<TiedHouseConnection[]>(apiPath, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
 
   /**
    * Create a new legal entity in Dynamics

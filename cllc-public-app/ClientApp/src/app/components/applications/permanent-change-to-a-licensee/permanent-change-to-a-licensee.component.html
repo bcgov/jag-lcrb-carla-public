@@ -97,8 +97,8 @@
     <!-- {{application |json}} -->
     <section *ngIf="form.get('csTiedHouseDeclaration').value">
       <h3 class="blue-header">Tied House Declarations</h3>
-      <section class="content-bottom">
-        <app-tied-house-declaration></app-tied-house-declaration>
+      <section>
+        <app-tied-house-declaration #tiedHouseDeclaration></app-tied-house-declaration>
       </section>
     </section>
 
