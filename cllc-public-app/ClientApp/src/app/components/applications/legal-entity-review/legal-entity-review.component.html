@@ -1,0 +1,87 @@
+<div [formGroup]="form" class="form-wrapper">
+  <h1>Legal Entity Review</h1>
+
+  <mat-progress-bar class="mt-1" *ngIf="!dataLoaded" mode="indeterminate"></mat-progress-bar>
+
+  <ng-container *ngIf="dataLoaded">
+    <section>
+      <app-legal-entity-review-disclaimer
+        [account]="account"
+        [liquorLicences]="liquorLicences"
+        [cannabisLicences]="cannabisLicences"></app-legal-entity-review-disclaimer>
+    </section>
+
+    <!-- Tied House Connections -->
+    <section>
+      <app-legal-entity-review-tied-house
+        [hasLiquor]="hasLiquor"
+        [hasCannabis]="hasCannabis"
+        [showValidationMessages]="showValidationMessages"></app-legal-entity-review-tied-house>
+    </section>
+
+    <!-- Supporting Documents -->
+    <section>
+      <app-legal-entity-review-supporting-documents
+        [account]="account"
+        [application]="application"
+        [hasLiquor]="hasLiquor"
+        [hasCannabis]="hasCannabis"
+        [showValidationMessages]="showValidationMessages"
+        (onUploadedFileEvent)="uploadedSupportingDocuments = $event"></app-legal-entity-review-supporting-documents>
+    </section>
+
+    <!-- Declaration -->
+    <section>
+      <app-legal-entity-review-declarations
+        [hasLiquor]="hasLiquor"
+        [hasCannabis]="hasCannabis"
+        [showValidationMessages]="showValidationMessages"></app-legal-entity-review-declarations>
+    </section>
+
+    <!-- What Happens Next -->
+    <section>
+      <app-legal-entity-review-what-happens-next
+        [account]="account"
+        [liquorLicences]="liquorLicences"
+        [cannabisLicences]="cannabisLicences"></app-legal-entity-review-what-happens-next>
+    </section>
+
+    <section class="error mt-3" *ngIf="showValidationMessages">
+      <p *ngFor="let message of validationMessages">
+        <span class="app-cancel">
+          <mat-icon aria-label="error icon" style="font-size: 15px">error</mat-icon>
+          {{ message }}
+        </span>
+      </p>
+    </section>
+
+    <section>
+      <app-permanent-change-contact-support></app-permanent-change-contact-support>
+    </section>
+
+    <section style="margin-top: 20px; position: relative">
+      <button
+        mat-raised-button
+        color="secondary"
+        class="progress-button mr-4"
+        (click)="saveForLater()"
+        [disabled]="isSavingForLater">
+        <span>
+          <fa-icon [icon]="faSave" class="mr-3"></fa-icon>
+          SAVE FOR LATER
+        </span>
+        <mat-progress-bar *ngIf="isSavingForLater" mode="indeterminate"></mat-progress-bar>
+      </button>
+      <button mat-raised-button color="primary" class="progress-button" (click)="onSubmit()" [disabled]="isSubmitting">
+        <span>SUBMIT</span>
+        <mat-progress-bar *ngIf="isSubmitting" mode="indeterminate"></mat-progress-bar>
+      </button>
+      <span style="color: #1a5a96; float: right;">
+        <span (click)="onCancel()">
+          <fa-icon [icon]="faTrashAlt" style="color: #1a5a96" class="mr-3"></fa-icon>
+          <a href="javascript: void(0)">CANCEL</a>
+        </span>
+      </span>
+    </section>
+  </ng-container>
+</div>

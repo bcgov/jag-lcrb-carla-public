@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppState } from '@app/app-state/models/app-state';
+import { permanentChangeTypesOfChanges } from '@app/constants/permanent-change-types-of-changes';
 import { faIdCard } from '@fortawesome/free-regular-svg-icons';
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { Account } from '@models/account.model';
@@ -104,7 +105,7 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
       .pipe(filter((account) => !!account))
       .subscribe((account) => {
         this.account = account;
-        this.changeList = masterChangeList.filter(
+        this.changeList = permanentChangeTypesOfChanges.filter(
           (item) => !!item.availableTo.find((bt) => bt === account.businessType)
         );
       });
@@ -434,174 +435,3 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
     return errorMap;
   }
 }
-
-const masterChangeList = [
-  {
-    name: 'Internal Transfer of Shares',
-    formControlName: 'csInternalTransferOfShares',
-    availableTo: ['PrivateCorporation', 'LimitedLiabilityPartnership'],
-    CannabisFee: 110,
-    LiquorFee: 110,
-    RequiresPHS: false,
-    RequiresCAS: false,
-    helpTextHeader: 'Use this option to report:',
-    helpText: [
-      'When shares or partnership units are redistributed between existing shareholders/partners  but no new shareholders/partners are added to the business structure (if new shareholders are added, see external transfer of shares)',
-      'Removal of shareholders/unit holders',
-      'Amalgamations that do not add new shareholders or legal entities to the licensee  corporation',
-      'Holding companies within the licensee corporation and/or third party operators should also complete this section when an internal share transfer or an amalgamation occurs'
-    ]
-    ////helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
-  },
-  {
-    name: 'External Transfer of Shares',
-    formControlName: 'csExternalTransferOfShares',
-    availableTo: ['PrivateCorporation', 'LimitedLiabilityPartnership'],
-    CannabisFee: 330,
-    LiquorFee: 330,
-    RequiresPHS: false,
-    RequiresCAS: false,
-    helpTextHeader: 'Use this option to report:',
-    helpText: [
-      'When new shareholders (companies or individuals) have been added to the licensee corporation or holding companies as a result of a transfer of existing shares or the issuance of new shares',
-      'Amalgamations that add new shareholders or legal entities to the licensee corporation',
-      'Third party operators should also complete this section when an external transfer occurs'
-    ]
-    //helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
-  },
-  {
-    name: 'Change of Directors or Officers',
-    formControlName: 'csChangeOfDirectorsOrOfficers',
-    availableTo: [
-      'PrivateCorporation',
-      'PublicCorporation',
-      'Society',
-      'Coop',
-      'MilitaryMess',
-      'LocalGovernment',
-      'University'
-    ],
-    CannabisFee: 500,
-    LiquorFee: 220,
-    RequiresPHS: false,
-    RequiresCAS: false,
-    helpTextHeader: 'Use this option to report:',
-    helpText: [
-      'For liquor licensees - when there are changes in directors or officers, as defined by the <a href="https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/02057_00_multi#section1" target="_blank">BC Corporations Act</a> or the <a href="https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/15018_01#section1" target="_blank">BC Societies Act</a>, of a public corporation or society that holds a licence, or of a public corporation or society within the licensee legal entity',
-      'For cannabis licensees – when there are changes in directors or officers of a private or public  corporation or society that holds a licence, or of a public or private corporation or society within the licensee legal entity'
-    ]
-    //helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
-  },
-  {
-    name: 'Name Change, Licensee -- Corporation',
-    otherName: 'Name Change, Licensee -- Organization',
-    formControlName: 'csNameChangeLicenseeCorporation',
-    availableTo: [
-      'PrivateCorporation',
-      'PublicCorporation',
-      'SoleProprietorship',
-      'Coop',
-      'MilitaryMess',
-      'University'
-    ],
-    CannabisFee: 220,
-    LiquorFee: 220,
-    RequiresPHS: false,
-    RequiresCAS: false,
-    helpTextHeader: 'Use this option to report:',
-    helpText: [
-      'When a corporation with an interest in a licence has legally changed its name, but existing corporate shareholders, directors and officers, and certificate number on the certificate of incorporation have not changed'
-    ]
-
-    //helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
-  },
-  {
-    name: 'Name Change, Licensee -- Partnership',
-    formControlName: 'csNameChangeLicenseePartnership',
-    availableTo: ['GeneralPartnership', 'Partnership', 'LimitedLiabilityPartnership'],
-    CannabisFee: 220,
-    LiquorFee: 220,
-    RequiresPHS: false,
-    RequiresCAS: false,
-    helpTextHeader: 'Use this option to report:',
-    helpText: ['When a person holding an interest in a licence has legally changed their name']
-    //helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
-  },
-  {
-    name: 'Name Change, Licensee -- Society',
-    formControlName: 'csNameChangeLicenseeSociety',
-    availableTo: ['Society'],
-    CannabisFee: 220,
-    LiquorFee: 220,
-    RequiresPHS: false,
-    RequiresCAS: false,
-    helpTextHeader: 'Use this option to report:',
-    helpText: [
-      'When the legal name of a society is changed, but the society structure, membership and certification number on the certificate of incorporation does not change'
-    ]
-    //helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
-  },
-  {
-    name: 'Name Change, Person',
-    formControlName: 'csNameChangeLicenseePerson',
-    availableTo: [
-      'PrivateCorporation',
-      'PublicCorporation',
-      'GeneralPartnership',
-      'Partnership',
-      'LimitedLiabilityPartnership',
-      'IndigenousNation',
-      'LocalGovernment',
-      'Society',
-      'Coop',
-      'MilitaryMess'
-    ],
-    CannabisFee: 220,
-    LiquorFee: 220,
-    RequiresPHS: false,
-    RequiresCAS: false,
-    helpTextHeader: 'Use this option to report:',
-    helpText: ['when a person holding an interest in a licence has legally changed their name']
-    //helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
-  },
-  {
-    name: 'Addition of Receiver or Executor',
-    formControlName: 'csAdditionalReceiverOrExecutor',
-    availableTo: [
-      'PrivateCorporation',
-      'PublicCorporation',
-      'GeneralPartnership',
-      'Partnership',
-      'LimitedLiabilityPartnership',
-      'Society',
-      'MilitaryMess'
-    ],
-    CannabisFee: 220,
-    LiquorFee: 220,
-    RequiresPHS: false,
-    RequiresCAS: false,
-    helpTextHeader: 'Use this option to report:',
-    helpText: ['Upon the death, bankruptcy or receivership of a licensee']
-    //helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
-  },
-  {
-    name: 'Tied House Declaration',
-    formControlName: 'csTiedHouseDeclaration',
-    availableTo: [
-      'PrivateCorporation',
-      'PublicCorporation',
-      'GeneralPartnership',
-      'Partnership',
-      'LimitedLiabilityPartnership',
-      'Society',
-      'MilitaryMess'
-    ],
-    CannabisFee: 220,
-    LiquorFee: 220,
-    RequiresPHS: false,
-    RequiresCAS: false,
-    helpTextHeader: 'Use this option to report:',
-    helpText: ['Upon the death, bankruptcy or receivership of a licensee']
-    //helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
-  }
-];

@@ -86,19 +86,11 @@ import { NotFoundComponent } from "@components/not-found/not-found.component";
 import { FileUploaderComponent } from "@shared/components/file-uploader/file-uploader.component";
 import { DelayedFileUploaderComponent } from "@shared/components/delayed-file-uploader/delayed-file-uploader.component";
 
-import { CorporateDetailsComponent } from
-  "@components/account-profile/tabs/corporate-details/corporate-details.component";
 import {
   DirectorsAndOfficersComponent,
   DirectorAndOfficerPersonDialogComponent
 } from "@components/account-profile/tabs/directors-and-officers/directors-and-officers.component";
-import { SecurityAssessmentsComponent } from
-  "@components/account-profile/tabs/security-assessments/security-assessments.component";
 import { BeforeYouStartComponent } from "@components/account-profile/tabs/before-you-start/before-you-start.component";
-import { FinancialInformationComponent } from
-  "@components/account-profile/tabs/financial-information/financial-information.component";
-import { AccountProfileSummaryComponent } from
-  "@components/account-profile/account-profile-summary/account-profile-summary.component";
 
 import { NgBusyModule } from "ng-busy";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
@@ -156,7 +148,7 @@ import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { EstablishmentWatchWordsService } from "@services/establishment-watch-words.service";
 import {
   ConnectionToNonMedicalStoresComponent
-} from "@components/account-profile/tabs/connection-to-non-medical-stores/connection-to-non-medical-stores.component";
+} from "@components/applications/application/tabs/connection-to-non-medical-stores/connection-to-non-medical-stores.component";
 import { AssociatePageComponent } from "@components/associate-page/associate-page.component";
 import { LicenceRenewalStepsComponent } from
   "@components/licences/licence-renewal-steps/licence-renewal-steps.component";
@@ -352,6 +344,15 @@ import { PermanentChangeNameLicenseePartnership } from "@shared/components/perma
 import { RelatedLicencePickerMulitiSelectComponent } from "@shared/components/related-licence-picker-multi-select/related-licence-picker-multi-select.component";
 import { TiedHouseDeclarationFormComponent } from "@components/applications/tied-house-decleration/tied-house-decleration-form/tied-house-declaration-form.component";
 import { TiedHouseDeclarationComponent } from './components/applications/tied-house-decleration/tied-house-declaration.component';
+import { LegalEntityReviewTypesOfChangesRequiredComponent } from "@shared/components/legal-entity-review/legal-entity-review-types-of-changes-required/legal-entity-review-types-of-changes-required.component";
+import { LegalEntityReviewJobComponent } from "@shared/components/legal-entity-review/legal-entity-review-job/legal-entity-review-job.component";
+import { LegalEntityReviewComponent } from "@components/applications/legal-entity-review/legal-entity-review.component";
+import { LegalEntityReviewDisclaimerComponent } from "@shared/components/legal-entity-review/legal-entity-review-disclaimer/legal-entity-review-disclaimer.component";
+import { LegalEntityReviewDeclarationsComponent } from "@shared/components/legal-entity-review/legal-entity-review-declarations/legal-entity-review-declarations.component";
+import { LegalEntityReviewWhatHappensNextComponent } from "@shared/components/legal-entity-review/legal-entity-review-what-happens-next/legal-entity-review-what-happens-next.component";
+import { LegalEntityReviewTiedHouseComponent } from "@shared/components/legal-entity-review/legal-entity-review-tied-house/legal-entity-review-tied-house.component";
+import { LegalEntityReviewSupportingDocumentsComponent } from "@shared/components/legal-entity-review/legal-entity-review-supporting-documents/legal-entity-review-supporting-documents.component";
+import { GenericConfirmationDialogComponent } from "@shared/components/dialog/generic-confirmation-dialog/generic-confirmation-dialog.component";
 
 @NgModule({
   declarations: [
@@ -367,9 +368,7 @@ import { TiedHouseDeclarationComponent } from './components/applications/tied-ho
     BeforeYouStartComponent,
     BreadcrumbComponent,
     AccountProfileComponent,
-    AccountProfileSummaryComponent,
     ConnectionToProducersComponent,
-    CorporateDetailsComponent,
     DashboardComponent,
     SepDashboardComponent,
     DelayedFileUploaderComponent,
@@ -379,7 +378,6 @@ import { TiedHouseDeclarationComponent } from './components/applications/tied-ho
     EditShareholdersComponent,
     FieldComponent,
     FileUploaderComponent,
-    FinancialInformationComponent,
     FormViewerComponent,
     HomeComponent,
     IndividualAssociatesResultsComponent,
@@ -404,7 +402,6 @@ import { TiedHouseDeclarationComponent } from './components/applications/tied-ho
     PrePaymentComponent,
     ProofOfZoningComponent,
     ResultComponent,
-    SecurityAssessmentsComponent,
     SolePropResultsComponent,
     SpdConsentComponent,
     StaticComponent,
@@ -567,7 +564,17 @@ import { TiedHouseDeclarationComponent } from './components/applications/tied-ho
     PermanentChangePersonalHistorySummaryFormsComponent,
     PermanentChangeTypesOfChangesRequestedComponent,
     TiedHouseDeclarationFormComponent,
-    TiedHouseDeclarationComponent
+    TiedHouseDeclarationComponent,
+    PermanentChangeTypesOfChangesRequestedComponent,
+    LegalEntityReviewComponent,
+    LegalEntityReviewDeclarationsComponent,
+    LegalEntityReviewDisclaimerComponent,
+    LegalEntityReviewJobComponent,
+    LegalEntityReviewSupportingDocumentsComponent,
+    LegalEntityReviewTiedHouseComponent,
+    LegalEntityReviewTypesOfChangesRequiredComponent,
+    LegalEntityReviewWhatHappensNextComponent,
+    GenericConfirmationDialogComponent
   ],
   imports: [
     AppRoutingModule,
