@@ -3921,5 +3921,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         [JsonProperty(PropertyName = "adoxio_ApplicationExtension")]
         public MicrosoftDynamicsCRMadoxioApplicationextension AdoxioApplicationExtension { get; set; }
 
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_cschangetotiedhouse")]
+        public bool? AdoxioCschangetotiedhouse { get; set; }
+
     }
 }

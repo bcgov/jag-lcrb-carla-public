@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
+using System.Collections.Generic;
 
 namespace Gov.Lclb.Cllb.Public.ViewModels
 {
@@ -41,6 +42,31 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string LiquorFinancialInterestDetails { get; set; } 
         public string TiedHouse { get; set; } //adoxio_TiedHouse (LookupType)
         public string TiedHouseName { get; set; } //adoxio_TiedHouseName (StringType)
+        public string ApplicationId { get; set; }
+
+        public bool? IsLegalEntity { get; set; }
+
+        public DateTimeOffset? DateOfBirth { get; set; }
+
+        public string FirstName { get; set; }
+
+        public string MiddleName { get; set; }
+
+        public string LastName { get; set; }
+
+        public int RelationshipToLicence { get; set; }
+
+        public List<RelatedLicence> AssociatedLiquorLicense { get; set; }
+
+        public bool RemoveExistingLicense { get; set; } = false;
+
+        public string LegalEntityName { get; set; }
+
+        public string RelationshipToLicense { get; set; }
+
+        public string OtherDescription { get; set; }
+
+        public string BusinessType { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
         public TiedHouseConnectionType? ConnectionType { get; set; }
@@ -61,6 +87,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         [JsonProperty(PropertyName = "iNConnectionToFederalProducerDetails")]
         public string INConnectionToFederalProducerDetails { get; set; }
+        public string OtherRelationship { get; internal set; }
 
         public bool isConnectionToProducersComplete(AdoxioApplicantTypeCodes? legalentitytype)
         {

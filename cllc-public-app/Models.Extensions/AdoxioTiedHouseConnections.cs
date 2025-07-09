@@ -1,5 +1,8 @@
-﻿using Gov.Lclb.Cllb.Interfaces.Models;
+﻿using Gov.Lclb.Cllb.Interfaces;
+using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.ViewModels;
+using System;
+using System.Collections.Generic;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
@@ -44,10 +47,16 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioMarketerconnectiontocrs = (int?)from.MarketerConnectionToCrs;
             to.AdoxioMarketerconnectiontocrsdetails = from.MarketerConnectionToCrsDetails;
             to.AdoxioInconnectiontofederalproducer = (int?)from.INConnectionToFederalProducer;
-            to.AdoxioInconnectiontofederalproducerdetails  = from.INConnectionToFederalProducerDetails;
+            to.AdoxioInconnectiontofederalproducerdetails = from.INConnectionToFederalProducerDetails;
             to.AdoxioLiquorfinancialinterest = @from.LiquorFinancialInterest;
             to.AdoxioLiquorfinancialinterestdetails = from.LiquorFinancialInterestDetails;
-
+            to.AdoxioFirstName = from.FirstName;
+            to.AdoxioMiddlename = from.LastName;
+            to.AdoxioDateOfBirth = from.DateOfBirth;
+            to.AdoxioLastname = from.LastName;
+            to.AdoxioOtherRelationship = from.OtherRelationship;
+            to.AdoxioRelationshipType = from.RelationshipToLicence;
+            to.AdoxioLegalEntityReview = from.IsLegalEntity == true ? 1: 0;
         }
 
 
@@ -92,6 +101,14 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.MarketerConnectionToCrsDetails = tiedHouse.AdoxioMarketerconnectiontocrsdetails;
                 result.INConnectionToFederalProducer = (MarketerYesNo?)tiedHouse.AdoxioInconnectiontofederalproducer;
                 result.INConnectionToFederalProducerDetails = tiedHouse.AdoxioInconnectiontofederalproducerdetails;
+                result.FirstName = tiedHouse.AdoxioFirstName;
+                result.MiddleName = tiedHouse.AdoxioMiddlename;
+                result.LastName = tiedHouse.AdoxioLastname;
+                result.RelationshipToLicence = tiedHouse.AdoxioRelationshipType;
+                result.DateOfBirth = tiedHouse.AdoxioDateOfBirth;
+                result.IsLegalEntity = tiedHouse.AdoxioLegalEntityReview == 1;
+                result.ApplicationId = tiedHouse._adoxioApplicationValue;
+
             }
             return result;
         }

@@ -274,4 +274,6 @@ export interface Application {
   // Temporary Relocations
   temporaryRelocationCriteria: number;
 
+  tiedHouseConnections: TiedHouseConnection[];
+
 }

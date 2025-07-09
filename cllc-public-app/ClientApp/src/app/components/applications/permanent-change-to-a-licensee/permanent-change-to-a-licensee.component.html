@@ -1,5 +1,4 @@
 <div [formGroup]="form" class="form-wrapper">
-  <!-- TODO tiedhouse - Toggle headers based on application type (regular vs legal entity review) -->
   <h1>Permanent Change to a Licensee or Authorization Holder</h1>
   <h1 *ngIf="false">Permanent Change to a Licensee or Authorization Holder as a result of a Legal Entity Review</h1>
 
@@ -99,8 +98,8 @@
     <!-- {{application |json}} -->
     <section *ngIf="form.get('csTiedHouseDeclaration').value">
       <h3 class="blue-header">Tied House Declarations</h3>
-      <section class="content-bottom">
-        <app-tied-house-declaration></app-tied-house-declaration>
+      <section>
+        <app-tied-house-declaration #tiedHouseDeclaration></app-tied-house-declaration>
       </section>
     </section>
 

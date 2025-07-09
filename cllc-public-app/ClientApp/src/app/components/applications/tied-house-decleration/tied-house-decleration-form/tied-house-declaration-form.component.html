@@ -1,15 +1,14 @@
 <form [formGroup]="form">
   <div class="row">
     <app-field class="col-md-6" label="Select Tied House Type" [required]="true">
-      <select class="form-control" formControlName="tiedHouseType">
+      <select class="form-control" formControlName="isLegalEntity">
         <option value="" disabled>Select a type</option>
-        <option *ngFor="let option of tiedHouseTypes" [value]="option.id">{{option.name}}</option>
+        <option *ngFor="let option of tiedHouseTypes" [ngValue]="option.value">{{option.name}}</option>
       </select>
     </app-field>
   </div>
-
   <!-- ------Individual------ -->
-  <span *ngIf="form.get('tiedHouseType')?.value == tiedHouseTypeEnum.Individual">
+  <span *ngIf="form.get('isLegalEntity')?.value == false">
     <div class="row">
       <app-field class="col-md-6" label="Date of Birth" [required]="true" [valid]="isValidOrNotTouched('dateOfBirth')"
         errorMessage="Date of Birth is required">
@@ -35,7 +34,7 @@
     </div>
   </span>
   <!-- ------Legal Entity------ -->
-  <div class="row" *ngIf="form.get('tiedHouseType')?.value == tiedHouseTypeEnum.LegalEntity">
+  <div class="row" *ngIf="form.get('isLegalEntity')?.value == true">
     <app-field class="col-md-6" label="Business Type" [required]="true" errorMessage="Business Type is required">
       <select class="form-control" formControlName="businessType">
         <option value="" disabled>Select a Business Type</option>
@@ -52,11 +51,11 @@
 
   <div class="row">
     <app-field class="col-md-6" label="Relationship to Declared Licence" [required]="true"
-      [valid]="form.get('relationshipToLicense')?.valid || !form.get('relationshipToLicense')?.touched"
+      [valid]="form.get('relationshipToLicence')?.valid || !form.get('relationshipToLicence')?.touched"
       errorMessage="Legal Entity Name is required">
-      <select class="form-control" formControlName="relationshipToLicense">
+      <select class="form-control" formControlName="relationshipToLicence">
         <option value="" disabled>Select a relationship</option>
-        <option *ngFor="let option of tiedHouseRelationships" [value]="option.id">
+        <option *ngFor="let option of relationshipTypes" [value]="option.value">
           {{ option.name }}
         </option>
       </select>
@@ -79,9 +78,12 @@
       <app-related-licence-picker-multi-select [form]="form"></app-related-licence-picker-multi-select>
     </app-field>
   </div>
-  <pre> {{getInvalidControls(form) |json}}
+
+  <!-- Temporary for Dev -->
+  <!-- <pre> {{getInvalidControls(form) |json}}
 
 </pre>
+<pre>Tied House Connections {{tiedHouseConnections}}</pre> -->
   <!-- ------Footer------ -->
 
   <div class="row justify-content-end mt-4">
@@ -102,6 +104,7 @@
       </button>
     </div>
   </div>
-  <pre>{{ form.value | json }}</pre>
+  <!-- Tempory for dev -->
+  <!-- <pre>{{ form.value | json }}</pre> -->
 
 </form>

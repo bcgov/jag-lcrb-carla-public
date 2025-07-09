@@ -1365,7 +1365,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 // copy more data for endorsements
                 // LCSD-5744 - Also copy more data for Change to Hours of Liquor Service (After Midnight) application
-                if (applicationType.AdoxioIsendorsement == true || 
+                if (applicationType.AdoxioIsendorsement == true ||
                         (applicationType.AdoxioName != null && applicationType.AdoxioName == "Change to Hours of Liquor Service (After Midnight)"))
                 {
                     adoxioApplication.AdoxioEstablishmentaddress = item.EstablishmentAddress;
@@ -1389,7 +1389,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     if (!string.IsNullOrEmpty(item?.ParentApplicationId))
                     {
                         adoxioApplication.AdoxioParentApplicationIDODataBind =
-                            _dynamicsClient.GetEntityURI("adoxio_applications", item.ParentApplicationId);                       
+                            _dynamicsClient.GetEntityURI("adoxio_applications", item.ParentApplicationId);
                     }
                     //LCSD-6495: set endorsement application is free if not licence assigned with it.
                     //if (item?.AssignedLicence ==null)
@@ -1412,7 +1412,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             }
                         };
 
-               
+
                 //LCSD-5779 create TiedHouseExemption 
                 if (item.WillHaveTiedHouseExemption.HasValue && item.WillHaveTiedHouseExemption.Value)
                 {
@@ -1427,11 +1427,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     adoxioTiedHouseExemption.AdoxioAssignedLicenceODataBind = adoxioTiedHouseExemption.AdoxioRelatedLicenceODataBind;
                     adoxioTiedHouseExemption.AdoxioParentApplicationIDODataBind = _dynamicsClient.GetEntityURI("adoxio_applications", item.ParentApplicationId);
 
-                   
+
                     MicrosoftDynamicsCRMadoxioLicences adoxioLicense = _dynamicsClient.GetLicenceByIdWithChildren(item.AssignedLicenceId);
                     if (adoxioLicense != null)
                     {
-                        if (adoxioLicense.AdoxioLicencee!=null)
+                        if (adoxioLicense.AdoxioLicencee != null)
                         {
                             adoxioTiedHouseExemption.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("accounts", adoxioLicense.AdoxioLicencee.Accountid);
                         }
@@ -1440,8 +1440,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             adoxioTiedHouseExemption.AdoxioLicenceEstablishmentODataBind = _dynamicsClient.GetEntityURI("adoxio_establishments", adoxioLicense.AdoxioEstablishment.AdoxioEstablishmentid);
                         }
                     }
-                    var app= _dynamicsClient.Applications.Create(adoxioTiedHouseExemption);
-                }else
+                    var app = _dynamicsClient.Applications.Create(adoxioTiedHouseExemption);
+                }
+                else
                 {
                     // create application
                     adoxioApplication = _dynamicsClient.Applications.Create(adoxioApplication);
@@ -1453,6 +1454,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 if (item.OutsideAreas != null && item.OutsideAreas.Count > 0)
                     AddServiceAreasToApplication(item.OutsideAreas, adoxioApplication.AdoxioApplicationid);
+                    
+                if (item.TiedHouseConnections != null)
+                    AddTiedHouseConnectionToApplication(item.TiedHouseConnections, item.Id);
             }
             catch (HttpOperationException httpOperationException)
             {
@@ -1585,8 +1589,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             application = new MicrosoftDynamicsCRMadoxioApplication();
 
-            application.CopyValues(item);
-
+                application.CopyValues(item);
             // set licence subtype
             if (!string.IsNullOrEmpty(item.LicenceSubCategory))
             {
@@ -1603,7 +1606,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 application.Statuscode = (int?)item.ApplicationStatus;
             }
 
-            try
+           try
             {
                 // Indigenous nation association
                 if (!string.IsNullOrEmpty(item?.IndigenousNation?.Id))
@@ -1636,6 +1639,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 if (item.CapacityArea != null && item.CapacityArea.Count > 0 && item.CapacityArea.FirstOrDefault().Capacity.HasValue)
                 {
                     AddServiceAreasToApplication(item.CapacityArea, item.Id);
+                }
+                if (item.TiedHouseConnections != null)
+                {
+                    AddTiedHouseConnectionToApplication(item.TiedHouseConnections, item.Id);
                 }
 
                 if ((bool)item.ApplicationType?.ShowHoursOfSale)
@@ -1695,7 +1702,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     adoxioTiedHouseExemption.AdoxioManufacturerproductionamountforprevyear = 0;
                     _dynamicsClient.Applications.Create(adoxioTiedHouseExemption);
                 }
-
+                string json = JsonConvert.SerializeObject(application);
                 _dynamicsClient.Applications.Update(id, application);
 
             }
@@ -2003,6 +2010,26 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     AdoxioTemporaryextensionarea= area.IsTemporaryExtensionArea,
                 };
                 _dynamicsClient.Serviceareas.Create(serviceArea);
+            }
+        }
+
+        private void AddTiedHouseConnectionToApplication(IList<TiedHouseConnection> tiedHouseConnections, string applicationId)
+        {
+            //var applicationUri = _dynamicsClient.GetEntityURI("adoxio_applications", applicationId);
+            foreach (TiedHouseConnection tiedhouseConnection in tiedHouseConnections)
+            {
+                MicrosoftDynamicsCRMadoxioTiedhouseconnection adoxioTiedHouseConnection = new MicrosoftDynamicsCRMadoxioTiedhouseconnection();
+                adoxioTiedHouseConnection.CopyValues(tiedhouseConnection);
+                adoxioTiedHouseConnection.ApplicationOdataBind = $"/adoxio_applications({applicationId})";
+                if (String.IsNullOrEmpty(adoxioTiedHouseConnection.AdoxioTiedhouseconnectionid))
+                {
+                    string json = JsonConvert.SerializeObject(adoxioTiedHouseConnection);
+                    _dynamicsClient.Tiedhouseconnections.Create(adoxioTiedHouseConnection);
+                }
+                else
+                {
+                    _dynamicsClient.Tiedhouseconnections.Update(adoxioTiedHouseConnection.AdoxioTiedhouseconnectionid, adoxioTiedHouseConnection);
+                }
             }
         }
 

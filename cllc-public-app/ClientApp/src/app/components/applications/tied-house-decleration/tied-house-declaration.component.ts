@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { TiedHouseViewMode, TiedHouseDeclaration, TiedHouseTypeEnum } from '@models/tied-house-relationships.model';
+import { Component, Input, OnInit } from '@angular/core';
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
+import { FormBase } from '@shared/form-base';
+import { RelationshipTypes, TiedHouseConnection, TiedHouseViewMode } from '@models/tied-house-connection.model';
 
 
 @Component({
@@ -8,76 +10,113 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
   templateUrl: './tied-house-declaration.component.html',
   styleUrls: ['./tied-house-declaration.component.scss']
 })
-export class TiedHouseDeclarationComponent implements OnInit {
-  tiedHouseRelationships = [{ name: "Father", id: 1 }, { name: "Other", id: 2 }]
-  tiedHouseDeclarationstoAdd: TiedHouseDeclaration[] = [];
-  tiedHouseDeclarations: [string, TiedHouseDeclaration[]][] = [];
+export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
+  @Input() applicationId: string;
+  tiedHouseConnections: TiedHouseConnection[];
+
+  tiedHouseDeclarations: TiedHouseConnection[] = [];
+  groupedTiedHouseDeclarations: [string, TiedHouseConnection[]][] = [];
   TiedHouseViewMode = TiedHouseViewMode;
   openedPanelIndex: number | null = null;
   faPlus = faPlus;
 
+  get flatDeclarations(): TiedHouseConnection[] {
+    return this.groupedTiedHouseDeclarations.reduce((acc, [_, declarations]) => acc.concat(declarations), []);
+  }
 
-  constructor() { }
+  constructor(
+    private tiedHouseService: TiedHouseConnectionsDataService) {
+    super();
+  }
 
   ngOnInit(): void {
-
+    this.loadData();
   }
-  addNewTiedHouse(viewMode: TiedHouseViewMode, declaration?: TiedHouseDeclaration, index?: number) {
-    var newTiedHouseDeclaration = new TiedHouseDeclaration();
+
+  addNewTiedHouse(viewMode: TiedHouseViewMode, declaration?: TiedHouseConnection, index?: number) {
+    var newTiedHouseDeclaration = new TiedHouseConnection();
+    newTiedHouseDeclaration.isLegalEntity = false;
     if (declaration) {
       newTiedHouseDeclaration.firstName = declaration.firstName;
       newTiedHouseDeclaration.lastName = declaration.lastName;
       newTiedHouseDeclaration.middleName = declaration.middleName;
       newTiedHouseDeclaration.dateOfBirth = declaration.dateOfBirth;
-      newTiedHouseDeclaration.tiedHouseType = declaration.tiedHouseType;
+      newTiedHouseDeclaration.isLegalEntity = declaration.isLegalEntity;
     }
     newTiedHouseDeclaration.viewMode = viewMode;
-    this.tiedHouseDeclarationstoAdd.push(newTiedHouseDeclaration);
+    this.tiedHouseDeclarations.push(newTiedHouseDeclaration);
     this.updateTiedHouseDeclarations();
 
     this.openPanel(index);
   }
 
-  changeDeclarationViewMode(viewMode: TiedHouseViewMode, declaration: TiedHouseDeclaration) {
+  changeDeclarationViewMode(viewMode: TiedHouseViewMode, declaration: TiedHouseConnection) {
     declaration.viewMode = viewMode;
   }
 
-  saveTiedHouseDeclaration(updated: TiedHouseDeclaration, original: TiedHouseDeclaration) {
+  saveTiedHouseDeclaration(updated: TiedHouseConnection, original: TiedHouseConnection) {
     updated.viewMode = TiedHouseViewMode.disabled;
     Object.assign(original, updated);
     this.updateTiedHouseDeclarations();
   }
 
-  removeTiedHouseDeclaration(declaration: TiedHouseDeclaration) {
-    var index = this.tiedHouseDeclarationstoAdd.indexOf(declaration);
+  removeTiedHouseDeclaration(declaration: TiedHouseConnection) {
+    var index = this.tiedHouseDeclarations.indexOf(declaration);
     if (index !== -1) {
-      this.tiedHouseDeclarationstoAdd.splice(index, 1);
+      this.tiedHouseDeclarations.splice(index, 1);
     }
     this.updateTiedHouseDeclarations();
   }
 
-  removeExistingTiedHouseDeclaration(declaration: TiedHouseDeclaration, undo: boolean) {
+  removeExistingTiedHouseDeclaration(declaration: TiedHouseConnection, undo: boolean) {
     declaration.removeExistingLicense = undo;
   }
 
-  hasExistingDeclarations(group: TiedHouseDeclaration[]): boolean {
-    return group.find(d => d.viewMode == TiedHouseViewMode.table) != undefined;
+  hasExistingDeclarations(group: TiedHouseConnection[]): boolean {
+    return group.find(d => d.viewMode == TiedHouseViewMode.existing) != undefined;
   }
 
   openPanel(index?: number) {
-    this.openedPanelIndex = index ?? this.tiedHouseDeclarations.length - 1;
+    this.openedPanelIndex = index ?? this.groupedTiedHouseDeclarations.length - 1;
   }
 
+  loadData() {
+    this.tiedHouseService.getAllTiedHouses().subscribe(data =>{
+        this.tiedHouseDeclarations = data;
+        this.tiedHouseDeclarations.forEach(th => {
+        if (th.applicationId == this.applicationId) {
+          th.viewMode = TiedHouseViewMode.disabled;
+        }
+        else {
+          th.viewMode = TiedHouseViewMode.existing;
+        }
+      })
+    this.updateTiedHouseDeclarations();
+    })
+      
+  }
+
+  getRelationshipName(value: number){
+    return RelationshipTypes.find(o=> o.value == value).name;
+  }
 
   private updateTiedHouseDeclarations() {
-    const grouped = this.tiedHouseDeclarationstoAdd?.reduce((acc, declaration) => {
+    const grouped = this.tiedHouseDeclarations?.reduce((acc, declaration) => {
       var key = '';
-      if (declaration.tiedHouseType == TiedHouseTypeEnum.Individual) {
+      if (declaration.isLegalEntity == false) {
         if (!declaration.firstName || !declaration.dateOfBirth) {
           key = "New Declaration"
         }
         else {
-          key = `${declaration.firstName} -${declaration.dateOfBirth}`;
+          key = `${declaration.firstName} ${declaration.middleName} ${declaration.lastName} -${this.formatDate(declaration.dateOfBirth)}`;
+        }
+      }
+      else {
+        if (!declaration.legalEntityName) {
+          key = "New Declaration"
+        }
+        else {
+          key = `${declaration.legalEntityName}`;
         }
       }
 
@@ -87,8 +126,12 @@ export class TiedHouseDeclarationComponent implements OnInit {
 
       acc[key].push(declaration);
       return acc;
-    }, {} as Record<string, TiedHouseDeclaration[]>);
+    }, {} as Record<string, TiedHouseConnection[]>);
 
-    this.tiedHouseDeclarations = Object.entries(grouped);
+    this.groupedTiedHouseDeclarations = Object.entries(grouped);
+  }
+
+  formatDate(dateString: string): string {
+    return new Date(dateString).toISOString().split('T')[0];
   }
 }
