@@ -58,7 +58,8 @@ export enum TiedHouseViewMode {
     existing = 3,
     disabled = 4,
     addNewRelationship = 5,
-    editExistingRecord = 6
+    editExistingRecord = 6,
+    hidden = 7
 }
 
 export enum TiedHouseStatusCode{

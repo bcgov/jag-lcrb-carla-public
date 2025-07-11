@@ -77,7 +77,7 @@
                     style="width: 100%"
                     [tiedHouseDecleration]="declaration"
                     (saveTiedHouseDecclaration)="saveTiedHouseDeclaration($event, declaration)"
-                    (removeTiedHouseDeclaration)="removeTiedHouseDeclaration(declaration)"
+                    (removeTiedHouseDeclaration)="removeTiedHouseDeclaration(declaration, group.length >1, i)"
                     (cancelTiedHouseDeclaration)="changeDeclarationViewMode($event, declaration)">
                   </app-tied-house-declaration-form>
                   <button

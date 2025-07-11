@@ -2047,7 +2047,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     adoxioTiedHouseConnection.CopyValues(tiedhouseConnection);
                     try
                     {
-                        if (adoxioTiedHouseConnection._adoxioApplicationValue == applicationId)
+                        if (tiedhouseConnection.ApplicationId == applicationId)
                         {
                             _dynamicsClient.Tiedhouseconnections.Update(adoxioTiedHouseConnection.AdoxioTiedhouseconnectionid, adoxioTiedHouseConnection);
                         }
