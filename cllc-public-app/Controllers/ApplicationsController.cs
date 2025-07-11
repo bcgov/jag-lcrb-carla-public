@@ -2045,12 +2045,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     MicrosoftDynamicsCRMadoxioTiedhouseconnection adoxioTiedHouseConnection = new MicrosoftDynamicsCRMadoxioTiedhouseconnection();
                     adoxioTiedHouseConnection.CopyValues(tiedhouseConnection);
-                    adoxioTiedHouseConnection.ApplicationOdataBind = $"/adoxio_applications({applicationId})";
-
-                    adoxioTiedHouseConnection.AdoxioTiedhouseconnectionid = null;
                     try
                     {
-                        _dynamicsClient.Tiedhouseconnections.Create(adoxioTiedHouseConnection);
+                        if (adoxioTiedHouseConnection._adoxioApplicationValue == applicationId)
+                        {
+                            _dynamicsClient.Tiedhouseconnections.Update(adoxioTiedHouseConnection.AdoxioTiedhouseconnectionid, adoxioTiedHouseConnection);
+                        }
+                        else
+                        {
+                            adoxioTiedHouseConnection.ApplicationOdataBind = $"/adoxio_applications({applicationId})";
+
+                            adoxioTiedHouseConnection.AdoxioTiedhouseconnectionid = null;
+
+                            _dynamicsClient.Tiedhouseconnections.Create(adoxioTiedHouseConnection);
+                        }
                     }
                     catch (HttpOperationException httpOperationException)
                     {

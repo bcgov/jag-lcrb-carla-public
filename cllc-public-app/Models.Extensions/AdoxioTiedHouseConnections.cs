@@ -59,6 +59,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioRelationshipType = from.RelationshipToLicence;
             to.AdoxioLegalEntityReview = from.IsLegalEntity == true ? 1: 0;
             to.SupersededByOdataBind = !String.IsNullOrEmpty(from.SupersededById) ? $"/adoxio_tiedhouseconnections({from.SupersededById})": null;
+            to.AdoxioMarkedForRemoval = from.MarkedForRemoval == true ? 1 : 0;
         }
 
 
@@ -112,6 +113,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.ApplicationId = tiedHouse._adoxioApplicationValue;
                 result.SupersededById = tiedHouse._adoxio_supersededbyValue;
                 result.StatusCode = tiedHouse.Statuscode;
+                result.MarkedForRemoval = tiedHouse.AdoxioMarkedForRemoval == 1;
 
             }
             return result;

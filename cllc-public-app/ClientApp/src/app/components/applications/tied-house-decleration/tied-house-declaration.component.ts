@@ -77,8 +77,8 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
     this.updateTiedHouseDeclarations();
   }
 
-  removeExistingTiedHouseDeclaration(declaration: TiedHouseConnection, undo: boolean) {
-    declaration.removeExistingLicense = undo;
+  removeExistingTiedHouseDeclaration(declaration: TiedHouseConnection, remove: boolean) {
+    declaration.markedForRemoval = remove;
   }
 
   hasExistingDeclarations(group: TiedHouseConnection[]): boolean {

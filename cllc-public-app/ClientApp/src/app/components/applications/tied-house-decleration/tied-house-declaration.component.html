@@ -31,9 +31,9 @@
           <tbody class="th-table-body">
             <ng-container *ngFor="let declaration of group[1]; let j = index">
               <tr
-                [ngClass]="declaration.removeExistingLicense ? 'th-remove-existing-table' : 'th-existing-table'"
+                [ngClass]="declaration.markedForRemoval ? 'th-remove-existing-table' : 'th-existing-table'"
                 *ngIf="declaration.viewMode == TiedHouseViewMode.existing">
-                <td [ngClass]="declaration.removeExistingLicense ? 'th-remove-existing-index' : 'th-existing-index'">
+                <td [ngClass]="declaration.markedForRemoval ? 'th-remove-existing-index' : 'th-existing-index'">
                   {{ j + 1 }}
                 </td>
                 <td>{{ getRelationshipName(declaration.relationshipToLicence) }}</td>
@@ -43,7 +43,7 @@
                   </ul>
                 </td>
                 <td>
-                  <span *ngIf="!declaration.removeExistingLicense">
+                  <span *ngIf="!declaration.markedForRemoval">
                     <div class="row m-1">
                       <button
                         class="btn btn-primary btn-lg"
@@ -61,7 +61,7 @@
                       </button>
                     </div>
                   </span>
-                  <span *ngIf="declaration.removeExistingLicense">
+                  <span *ngIf="declaration.markedForRemoval">
                     <div class="row m-1">
                       <button class="btn btn-link" (click)="removeExistingTiedHouseDeclaration(declaration, false)">
                         Click to undo

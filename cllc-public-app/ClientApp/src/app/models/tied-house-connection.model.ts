@@ -49,6 +49,7 @@ export class TiedHouseConnection {
   businessType: string;
   statusCode: number = TiedHouseStatusCode.new;
   supersededById: string;
+  markedForRemoval: boolean
 }
 
 export enum TiedHouseViewMode {
