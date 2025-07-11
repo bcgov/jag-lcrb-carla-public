@@ -353,6 +353,7 @@ import { LegalEntityReviewWhatHappensNextComponent } from "@shared/components/le
 import { LegalEntityReviewTiedHouseComponent } from "@shared/components/legal-entity-review/legal-entity-review-tied-house/legal-entity-review-tied-house.component";
 import { LegalEntityReviewSupportingDocumentsComponent } from "@shared/components/legal-entity-review/legal-entity-review-supporting-documents/legal-entity-review-supporting-documents.component";
 import { GenericConfirmationDialogComponent } from "@shared/components/dialog/generic-confirmation-dialog/generic-confirmation-dialog.component";
+import { GenericMessageDialogComponent } from "@shared/components/dialog/generic-message-dialog/generic-message-dialog.component";
 
 @NgModule({
   declarations: [
@@ -574,7 +575,8 @@ import { GenericConfirmationDialogComponent } from "@shared/components/dialog/ge
     LegalEntityReviewTiedHouseComponent,
     LegalEntityReviewTypesOfChangesRequiredComponent,
     LegalEntityReviewWhatHappensNextComponent,
-    GenericConfirmationDialogComponent
+    GenericConfirmationDialogComponent,
+    GenericMessageDialogComponent
   ],
   imports: [
     AppRoutingModule,

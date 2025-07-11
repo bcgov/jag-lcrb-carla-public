@@ -98,8 +98,6 @@
         </option>
       </select>
     </app-field>
-    {{ _tiedHouseDecleration.viewMode }} view mode
-
     <app-field
       class="col-md-6"
       *ngIf="showOtherField"
@@ -111,7 +109,6 @@
       {{ form.get('otherDescription')?.valid }} {{ !form.get('otherDescription')?.touched }}1{{
         isValidOrNotTouched('otherDescription')
       }}
-      2{{ !showOtherField }} 3 {{ !showOtherField || (showOtherField && isValidOrNotTouched('otherDescription')) }}
     </app-field>
   </div>
 

@@ -1,119 +1,134 @@
 <form [formGroup]="form">
   <div class="content-bottom">
-    <p>
-      Do you or any of your shareholders, directors, or officers have any amount of interest in another B.C. liquor
-      licence, or any association with a third party operator for another liquor licence, or have an immediate family
-      member (spouse, parent, sibling, or child) with any amount of interest in another liquor licence?
-    </p>
-    <mat-accordion>
-      <mat-expansion-panel
-        class="th-accordian"
-        *ngFor="let group of groupedTiedHouseDeclarations; let i = index"
-        [expanded]="openedPanelIndex === i">
-        <mat-expansion-panel-header class="blue-header th-accordian-header">
-          {{ group[0] || 'New Declarations' }}
-        </mat-expansion-panel-header>
-        <table class="th-table">
-          <colgroup>
-            <col style="width: 5%" />
-            <col style="width: 40%" />
-            <col style="width: 40%" />
-            <col style="width: 15%" />
-          </colgroup>
-          <thead>
-            <tr *ngIf="hasExistingDeclarations(group[1])">
-              <th>#</th>
-              <th>Relationship</th>
-              <th>Licence #/Establishment</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody class="th-table-body">
-            <ng-container *ngFor="let declaration of group[1]; let j = index">
-              <tr
-                [ngClass]="declaration.removeExistingLicense ? 'th-remove-existing-table' : 'th-existing-table'"
-                *ngIf="declaration.viewMode == TiedHouseViewMode.existing">
-                <td [ngClass]="declaration.removeExistingLicense ? 'th-remove-existing-index' : 'th-existing-index'">
-                  {{ j + 1 }}
-                </td>
-                <td>{{ getRelationshipName(declaration.relationshipToLicence) }}</td>
-                <td>
-                  <ul *ngFor="let license of declaration.associatedLiquorLicense">
-                    <li>{{ license.name }}</li>
-                  </ul>
-                </td>
-                <td>
-                  <span *ngIf="!declaration.removeExistingLicense">
-                    <div class="row m-1">
+    <div class="mb-2">
+      <p>
+        Do you or any of your shareholders, directors, or officers have any amount of interest in another B.C. liquor
+        licence, or any association with a third party operator for another liquor licence, or have an immediate family
+        member (spouse, parent, sibling, or child) with any amount of interest in another liquor licence?
+      </p>
+    </div>
+
+    <div class="mb-2">
+      <mat-accordion>
+        <mat-expansion-panel
+          class="th-accordian"
+          *ngFor="let _tiedHouseDeclarations of groupedTiedHouseDeclarations; let tiedHouseDeclarationsIndex = index"
+          [expanded]="openedPanelIndex === tiedHouseDeclarationsIndex">
+          <mat-expansion-panel-header class="blue-header th-accordian-header">
+            <mat-panel-title>
+              {{ _tiedHouseDeclarations[0] }}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <table class="th-table">
+            <colgroup>
+              <col style="width: 5%" />
+              <col style="width: 40%" />
+              <col style="width: 40%" />
+              <col style="width: 15%" />
+            </colgroup>
+            <thead>
+              <tr *ngIf="hasExistingDeclarations(_tiedHouseDeclarations[1])">
+                <th>#</th>
+                <th>Relationship</th>
+                <th>Licence #/Establishment</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody class="th-table-body">
+              <ng-container
+                *ngFor="let _tiedHouseDeclaration of _tiedHouseDeclarations[1]; let tiedHouseDeclarationIndex = index">
+                <tr
+                  [ngClass]="
+                    _tiedHouseDeclaration.removeExistingLicense ? 'th-remove-existing-table' : 'th-existing-table'
+                  "
+                  *ngIf="_tiedHouseDeclaration.viewMode == TiedHouseViewMode.existing">
+                  <td
+                    [ngClass]="
+                      _tiedHouseDeclaration.removeExistingLicense ? 'th-remove-existing-index' : 'th-existing-index'
+                    ">
+                    {{ tiedHouseDeclarationIndex + 1 }}
+                  </td>
+                  <td>{{ getRelationshipName(_tiedHouseDeclaration.relationshipToLicence) }}</td>
+                  <td>
+                    <ul *ngFor="let license of _tiedHouseDeclaration.associatedLiquorLicense">
+                      <li>{{ license.name }}</li>
+                    </ul>
+                  </td>
+                  <td>
+                    <div class="existing-declaration-buttons">
                       <button
-                        class="btn btn-primary btn-lg"
+                        *ngIf="!_tiedHouseDeclaration.removeExistingLicense"
+                        class="btn btn-primary btn-md"
                         type="button"
-                        (click)="changeDeclarationViewMode(TiedHouseViewMode.editExistingRecord, declaration, true)">
+                        (click)="
+                          changeDeclarationViewMode(TiedHouseViewMode.editExistingRecord, _tiedHouseDeclaration, true)
+                        ">
                         Edit
                       </button>
-                    </div>
-                    <div class="row m-1">
                       <button
-                        class="btn btn-danger btn-lg"
+                        *ngIf="!_tiedHouseDeclaration.removeExistingLicense"
+                        class="btn btn-danger btn-md"
                         type="button"
-                        (click)="removeExistingTiedHouseDeclaration(declaration, true)">
+                        (click)="removeExistingTiedHouseDeclaration(_tiedHouseDeclaration)">
                         Remove
                       </button>
-                    </div>
-                  </span>
-                  <span *ngIf="declaration.removeExistingLicense">
-                    <div class="row m-1">
-                      <button class="btn btn-link" (click)="removeExistingTiedHouseDeclaration(declaration, false)">
-                        Click to undo
+                      <button
+                        *ngIf="_tiedHouseDeclaration.removeExistingLicense"
+                        class="btn btn-link"
+                        (click)="undoRemoveExistingTiedHouseDeclaration(_tiedHouseDeclaration)">
+                        Restore
                       </button>
                     </div>
-                  </span>
-                </td>
-              </tr>
+                  </td>
+                </tr>
 
-              <tr *ngIf="declaration.viewMode != TiedHouseViewMode.existing">
-                <td class="p-4 th-form" colspan="4">
-                  <app-tied-house-declaration-form
-                    style="width: 100%"
-                    [tiedHouseDecleration]="declaration"
-                    (saveTiedHouseDecclaration)="saveTiedHouseDeclaration($event, declaration)"
-                    (removeTiedHouseDeclaration)="removeTiedHouseDeclaration(declaration)"
-                    (cancelTiedHouseDeclaration)="changeDeclarationViewMode($event, declaration)">
-                  </app-tied-house-declaration-form>
-                  <button
-                    class="btn btn-primary"
-                    type="button"
-                    (click)="changeDeclarationViewMode(TiedHouseViewMode.existing, declaration)">
-                    To Existing
-                  </button>
-                </td>
-              </tr>
-            </ng-container>
-          </tbody>
-        </table>
-        <div class="row">
-          <button
-            class="btn btn-link pl-0"
-            (click)="addNewTiedHouse(TiedHouseViewMode.addNewRelationship, group[1][0], i)">
-            <fa-icon [icon]="faPlus" class="pr-2"></fa-icon>Add New Tied House for {{ group[0] }}
-          </button>
-          <br />
-          By submitting this information, you agree that a Tied House has been declared with the aforementioned
-          information and will become date tied to both yours and your establishment s file.
-        </div>
-      </mat-expansion-panel>
-    </mat-accordion>
+                <tr *ngIf="_tiedHouseDeclaration.viewMode != TiedHouseViewMode.existing">
+                  <td class="p-4 th-form" colspan="4">
+                    <app-tied-house-declaration-form
+                      style="width: 100%"
+                      [tiedHouseDecleration]="_tiedHouseDeclaration"
+                      (saveTiedHouseDecclaration)="saveTiedHouseDeclaration($event, _tiedHouseDeclaration)"
+                      (removeTiedHouseDeclaration)="removeTiedHouseDeclaration(_tiedHouseDeclaration)"
+                      (cancelTiedHouseDeclaration)="changeDeclarationViewMode($event, _tiedHouseDeclaration)">
+                    </app-tied-house-declaration-form>
+                    <button
+                      class="btn btn-primary"
+                      type="button"
+                      (click)="changeDeclarationViewMode(TiedHouseViewMode.existing, _tiedHouseDeclaration)">
+                      To Existing
+                    </button>
+                  </td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+          <div class="mt-2 mb-2" *ngIf="_tiedHouseDeclarations[0] !== NEW_DECLARATION_KEY">
+            <button
+              class="btn btn-link pl-0"
+              (click)="addNewTiedHouseRelationship(_tiedHouseDeclarations[1][0], tiedHouseDeclarationsIndex)">
+              <fa-icon [icon]="faPlus" class="pr-2"></fa-icon>Add New Tied House for {{ _tiedHouseDeclarations[0] }}
+            </button>
+            <p>
+              By submitting this information, you agree that a Tied House has been declared with the aforementioned
+              information and will become date tied to both yours and your establishment s file.
+            </p>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
 
-    <button class="btn btn-link mt-5 pl-0" (click)="addNewTiedHouse(TiedHouseViewMode.new)">
-      <fa-icon [icon]="faPlus" class="pr-5"></fa-icon>Add New Tied House
-    </button>
-    <br />
-    By submitting this information, you agree that a Tied House has been declared with the aforementioned information
-    and will become date tied to both yours and your establishment s file.
+    <div class="mt-2 mb-2">
+      <button class="btn btn-link pl-0" (click)="addNewTiedHouse()">
+        <fa-icon [icon]="faPlus" class="pr-2"></fa-icon>Add New Tied House
+      </button>
+    </div>
 
-    <br />
+    <div>
+      By submitting this information, you agree that a Tied House has been declared with the aforementioned information
+      and will become date tied to both yours and your establishment s file.
+    </div>
     <!-- Tempory for dev -->
-    <!-- <pre>grouped tiedHouseDeclarations <br/>{{ groupedTiedHouseDeclarations | json }}</pre> -->
-    <!--  <pre>tiedHouseDeclarations <br/>{{ tiedHouseDeclarations | json }}</pre> -->
+    <pre>grouped tiedHouseDeclarations <br/>{{ groupedTiedHouseDeclarations | json }}</pre>
   </div>
 </form>
