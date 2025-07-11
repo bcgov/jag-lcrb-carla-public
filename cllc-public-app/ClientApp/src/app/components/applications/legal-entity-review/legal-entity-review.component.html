@@ -16,7 +16,14 @@
       <app-legal-entity-review-tied-house
         [hasLiquor]="hasLiquor"
         [hasCannabis]="hasCannabis"
-        [showValidationMessages]="showValidationMessages"></app-legal-entity-review-tied-house>
+        [showValidationMessages]="showValidationMessages"
+        (showTiedHouseConnections)="showTiedHouseConnections($event)"></app-legal-entity-review-tied-house>
+    </section>
+
+    <!-- Tied House Connections -->
+    <section *ngIf="isTiedHouseVisible">
+      <h3 class="blue-header">Tied House Declaration</h3>
+      <app-tied-house-declaration #tiedHouseDeclaration></app-tied-house-declaration>
     </section>
 
     <!-- Supporting Documents -->
@@ -76,7 +83,7 @@
         <span>SUBMIT</span>
         <mat-progress-bar *ngIf="isSubmitting" mode="indeterminate"></mat-progress-bar>
       </button>
-      <span style="color: #1a5a96; float: right;">
+      <span style="color: #1a5a96; float: right">
         <span (click)="onCancel()">
           <fa-icon [icon]="faTrashAlt" style="color: #1a5a96" class="mr-3"></fa-icon>
           <a href="javascript: void(0)">CANCEL</a>

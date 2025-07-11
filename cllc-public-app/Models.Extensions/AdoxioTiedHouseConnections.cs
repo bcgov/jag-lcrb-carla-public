@@ -3,6 +3,7 @@ using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using System;
 using System.Collections.Generic;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
@@ -57,6 +58,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioOtherRelationship = from.OtherRelationship;
             to.AdoxioRelationshipType = from.RelationshipToLicence;
             to.AdoxioLegalEntityReview = from.IsLegalEntity == true ? 1: 0;
+            to.SupersededByOdataBind = !String.IsNullOrEmpty(from.SupersededById) ? $"/adoxio_tiedhouseconnections({from.SupersededById})": null;
         }
 
 
@@ -108,6 +110,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.DateOfBirth = tiedHouse.AdoxioDateOfBirth;
                 result.IsLegalEntity = tiedHouse.AdoxioLegalEntityReview == 1;
                 result.ApplicationId = tiedHouse._adoxioApplicationValue;
+                result.SupersededById = tiedHouse._adoxio_supersededbyValue;
+                result.StatusCode = tiedHouse.Statuscode;
 
             }
             return result;

@@ -616,6 +616,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 CsNameChangeLicenseeSociety = dynamicsApplication.AdoxioCsnamechangelicenseesociety,
                 CsNameChangeLicenseePerson = dynamicsApplication.AdoxioCsnamechangeperson,
                 CsAdditionalReceiverOrExecutor = dynamicsApplication.AdoxioCsadditionofreceiverorexecutor,
+                CsTiedHouseDeclaration = dynamicsApplication.AdoxioCschangetotiedhouse,
                 PrimaryInvoicePaid = dynamicsApplication.AdoxioPrimaryapplicationinvoicepaid == 1,
                 SecondaryInvoicePaid = dynamicsApplication.AdoxioSecondaryapplicationinvoicepaid == 1,
                 IsOnINLand = ConvertYesNoLookupToBool(dynamicsApplication.AdoxioIsoninland),

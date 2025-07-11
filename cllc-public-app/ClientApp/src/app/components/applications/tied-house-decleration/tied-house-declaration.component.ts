@@ -1,9 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import {
+  RelationshipTypes,
+  TiedHouseConnection,
+  TiedHouseStatusCode,
+  TiedHouseViewMode
+} from '@models/tied-house-connection.model';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
 import { FormBase } from '@shared/form-base';
-import { RelationshipTypes, TiedHouseConnection, TiedHouseViewMode } from '@models/tied-house-connection.model';
-
 
 @Component({
   selector: 'app-tied-house-declaration',
@@ -24,8 +28,7 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
     return this.groupedTiedHouseDeclarations.reduce((acc, [_, declarations]) => acc.concat(declarations), []);
   }
 
-  constructor(
-    private tiedHouseService: TiedHouseConnectionsDataService) {
+  constructor(private tiedHouseService: TiedHouseConnectionsDataService) {
     super();
   }
 
@@ -50,8 +53,14 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
     this.openPanel(index);
   }
 
-  changeDeclarationViewMode(viewMode: TiedHouseViewMode, declaration: TiedHouseConnection) {
+  changeDeclarationViewMode(viewMode: TiedHouseViewMode, declaration: TiedHouseConnection, isNew?: boolean) {
     declaration.viewMode = viewMode;
+    if (isNew === true) {
+      declaration.statusCode = TiedHouseStatusCode.new;
+    }
+    if (isNew === false) {
+      declaration.statusCode = TiedHouseStatusCode.existing;
+    }
   }
 
   saveTiedHouseDeclaration(updated: TiedHouseConnection, original: TiedHouseConnection) {
@@ -73,7 +82,7 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
   }
 
   hasExistingDeclarations(group: TiedHouseConnection[]): boolean {
-    return group.find(d => d.viewMode == TiedHouseViewMode.existing) != undefined;
+    return group.find((d) => d.viewMode == TiedHouseViewMode.existing) != undefined;
   }
 
   openPanel(index?: number) {
@@ -81,57 +90,58 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
   }
 
   loadData() {
-    this.tiedHouseService.getAllTiedHouses().subscribe(data =>{
-        this.tiedHouseDeclarations = data;
-        this.tiedHouseDeclarations.forEach(th => {
-        if (th.applicationId == this.applicationId) {
+    this.tiedHouseService.getAllTiedHouses(this.applicationId).subscribe((data) => {
+      this.tiedHouseDeclarations = data;
+      this.tiedHouseDeclarations.forEach((th) => {
+        if (th.statusCode == TiedHouseStatusCode.new) {
           th.viewMode = TiedHouseViewMode.disabled;
-        }
-        else {
+        } else {
           th.viewMode = TiedHouseViewMode.existing;
         }
-      })
-    this.updateTiedHouseDeclarations();
-    })
-      
+      });
+      this.updateTiedHouseDeclarations();
+    });
   }
 
-  getRelationshipName(value: number){
-    return RelationshipTypes.find(o=> o.value == value).name;
+  getRelationshipName(value: number) {
+    return RelationshipTypes.find((o) => o.value == value).name;
   }
 
   private updateTiedHouseDeclarations() {
-    const grouped = this.tiedHouseDeclarations?.reduce((acc, declaration) => {
-      var key = '';
-      if (declaration.isLegalEntity == false) {
-        if (!declaration.firstName || !declaration.dateOfBirth) {
-          key = "New Declaration"
+    const grouped = this.tiedHouseDeclarations?.reduce(
+      (acc, declaration) => {
+        var key = '';
+        if (declaration.isLegalEntity == false) {
+          if (!declaration.firstName || !declaration.dateOfBirth) {
+            key = 'New Declaration';
+          } else {
+            key = `${declaration.firstName} ${declaration.middleName} ${declaration.lastName} -${this.formatDate(declaration.dateOfBirth)}`;
+          }
+        } else {
+          if (!declaration.legalEntityName) {
+            key = 'New Declaration';
+          } else {
+            key = `${declaration.legalEntityName}`;
+          }
         }
-        else {
-          key = `${declaration.firstName} ${declaration.middleName} ${declaration.lastName} -${this.formatDate(declaration.dateOfBirth)}`;
-        }
-      }
-      else {
-        if (!declaration.legalEntityName) {
-          key = "New Declaration"
-        }
-        else {
-          key = `${declaration.legalEntityName}`;
-        }
-      }
 
-      if (!acc[key]) {
-        acc[key] = [];
-      }
+        if (!acc[key]) {
+          acc[key] = [];
+        }
 
-      acc[key].push(declaration);
-      return acc;
-    }, {} as Record<string, TiedHouseConnection[]>);
+        acc[key].push(declaration);
+        return acc;
+      },
+      {} as Record<string, TiedHouseConnection[]>
+    );
 
     this.groupedTiedHouseDeclarations = Object.entries(grouped);
   }
 
-  formatDate(dateString: string): string {
-    return new Date(dateString).toISOString().split('T')[0];
+  private formatDate(dateString: string | null | undefined): string | null {
+    if (!dateString?.trim()) return null;
+
+    const date = new Date(dateString);
+    return isNaN(date.getTime()) ? null : date.toISOString().split('T')[0];
   }
 }

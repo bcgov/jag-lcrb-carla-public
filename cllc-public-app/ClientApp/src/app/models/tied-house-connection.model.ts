@@ -47,6 +47,8 @@ export class TiedHouseConnection {
   legalEntityName: string;
   otherDescription: string;
   businessType: string;
+  statusCode: number = TiedHouseStatusCode.new;
+  supersededById: string;
 }
 
 export enum TiedHouseViewMode {
@@ -58,6 +60,12 @@ export enum TiedHouseViewMode {
     editExistingRecord = 6
 }
 
+export enum TiedHouseStatusCode{
+    new = 1,
+    ready = 845280000,
+    existing = 845280001,
+    inactive = 2
+}        
 
 export const TiedHouseTypes = [
     { name: "Individual", value: false },

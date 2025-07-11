@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ControlContainer, FormGroup, FormGroupDirective } from '@angular/forms';
 import { Account } from '@models/account.model';
 import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
@@ -20,7 +20,7 @@ export class LegalEntityReviewTiedHouseComponent implements OnInit {
   @Input() account: Account;
   @Input() liquorLicences: ApplicationLicenseSummary[] = [];
   @Input() cannabisLicences: ApplicationLicenseSummary[] = [];
-
+  @Output() showTiedHouseConnections: EventEmitter<boolean> = new EventEmitter<boolean>();
   form: FormGroup;
 
   hasTiedHouseChangesToDeclare = false;

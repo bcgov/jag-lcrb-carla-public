@@ -10,6 +10,7 @@
       <!-- This value is not saved to dynamics. That is why it is not in the 'form' and the data model.-->
       <mat-radio-group
         [(ngModel)]="hasTiedHouseChangesToDeclare"
+        (ngModelChange)="showTiedHouseConnections.emit($event)"
         [ngModelOptions]="{ standalone: true }"
         class="d-flex flex-column">
         <mat-radio-button [value]="true" class="p-2">
@@ -20,12 +21,3 @@
     </app-field>
   </div>
 </section>
-
-<ng-container *ngIf="hasTiedHouseChangesToDeclare">
-  <h3 class="blue-header">Tied House Declaration</h3>
-  <section class="content-bottom">
-    <div class="container w-100">
-      <app-tied-house-declaration></app-tied-house-declaration>
-    </div>
-  </section>
-</ng-container>
