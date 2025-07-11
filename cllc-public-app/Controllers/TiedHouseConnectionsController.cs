@@ -65,7 +65,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string accountFilter = $"(_adoxio_accountid_value eq {userSettings.AccountId} and statuscode eq {(int)TiedHouseStatusCode.Existing})";
             if (!String.IsNullOrEmpty(applicationId))
             {
-                accountFilter = accountFilter + $" or _adoxio_application_value eq {applicationId}";
+                accountFilter = accountFilter + $" or (_adoxio_application_value eq {applicationId} and adoxio_markedforremoval ne 1)";
             }
             _logger.LogDebug("Account filter = " + accountFilter);
 

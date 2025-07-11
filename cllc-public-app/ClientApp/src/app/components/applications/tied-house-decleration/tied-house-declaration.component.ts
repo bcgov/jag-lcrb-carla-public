@@ -69,16 +69,18 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
     this.updateTiedHouseDeclarations();
   }
 
-  removeTiedHouseDeclaration(declaration: TiedHouseConnection) {
-    var index = this.tiedHouseDeclarations.indexOf(declaration);
-    if (index !== -1) {
-      this.tiedHouseDeclarations.splice(index, 1);
+  removeTiedHouseDeclaration(declaration: TiedHouseConnection, keepAccordionOpen: boolean, accordionIndex: number) {
+    declaration.viewMode = TiedHouseViewMode.hidden;
+    declaration.markedForRemoval = true;
+    if(keepAccordionOpen){
+      this.openPanel(accordionIndex);
     }
     this.updateTiedHouseDeclarations();
   }
 
-  removeExistingTiedHouseDeclaration(declaration: TiedHouseConnection, undo: boolean) {
-    declaration.removeExistingLicense = undo;
+  removeExistingTiedHouseDeclaration(declaration: TiedHouseConnection, remove: boolean) {
+    declaration.statusCode = TiedHouseStatusCode.new;
+    declaration.markedForRemoval = remove;
   }
 
   hasExistingDeclarations(group: TiedHouseConnection[]): boolean {
@@ -93,7 +95,7 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
     this.tiedHouseService.getAllTiedHouses(this.applicationId).subscribe((data) => {
       this.tiedHouseDeclarations = data;
       this.tiedHouseDeclarations.forEach((th) => {
-        if (th.statusCode == TiedHouseStatusCode.new) {
+        if (th.statusCode == TiedHouseStatusCode.new && !th.markedForRemoval ) {
           th.viewMode = TiedHouseViewMode.disabled;
         } else {
           th.viewMode = TiedHouseViewMode.existing;
@@ -108,7 +110,7 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
   }
 
   private updateTiedHouseDeclarations() {
-    const grouped = this.tiedHouseDeclarations?.reduce(
+    const grouped = this.tiedHouseDeclarations.filter(th=> th.viewMode != TiedHouseViewMode.hidden)?.reduce(
       (acc, declaration) => {
         var key = '';
         if (declaration.isLegalEntity == false) {

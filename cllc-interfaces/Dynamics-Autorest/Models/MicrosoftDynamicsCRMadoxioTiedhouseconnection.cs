@@ -520,7 +520,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string _adoxioLicenseeValue { get; set; }
 
         [JsonProperty(PropertyName = "_adoxio_supersededby_value")]
-        public string _adoxio_supersededbyValue { get; set; }
+        public string _adoxio_supersededbyValue { get; set; }      
+        [JsonProperty(PropertyName = "adoxio_markedforremoval")]
+        public int? AdoxioMarkedForRemoval { get; set; }
 
     }
 }
