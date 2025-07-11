@@ -250,7 +250,7 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
     });
   }
 
-  showTiedHouseConnection(showValue: boolean) {
+  showTiedHouseConnections(showValue: boolean) {
     this.isTiedHouseVisible = showValue;
   }
 }

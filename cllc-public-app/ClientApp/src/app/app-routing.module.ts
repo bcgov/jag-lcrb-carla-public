@@ -381,19 +381,19 @@ const routes: Routes = [
   {
     path: "legal-entity-review",
     component: LegalEntityReviewComponent,
-    canActivate: [BCeidAuthGuard, FeatureGuard],
+    // canActivate: [BCeidAuthGuard, FeatureGuard],
     data: { feature: "LegalEntityReview" }
   },
   {
     path: "legal-entity-review/:applicationId",
     component: LegalEntityReviewComponent,
-    canActivate: [BCeidAuthGuard, FeatureGuard],
+    // canActivate: [BCeidAuthGuard, FeatureGuard],
     data: { feature: "LegalEntityReview" }
   },
   {
     path: "legal-entity-review/:applicationId/:invoiceType",
     component: LegalEntityReviewComponent,
-    canActivate: [BCeidAuthGuard, FeatureGuard],
+    // canActivate: [BCeidAuthGuard, FeatureGuard],
     data: { feature: "LegalEntityReview" }
   },
   {

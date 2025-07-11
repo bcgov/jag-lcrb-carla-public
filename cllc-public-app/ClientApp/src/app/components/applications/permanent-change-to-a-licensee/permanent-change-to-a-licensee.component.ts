@@ -9,6 +9,7 @@ import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { Account } from '@models/account.model';
 import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
 import { Application } from '@models/application.model';
+import { TiedHouseViewMode } from '@models/tied-house-connection.model';
 import { Store } from '@ngrx/store';
 import { ApplicationDataService } from '@services/application-data.service';
 import { PaymentDataService } from '@services/payment-data.service';
@@ -20,8 +21,6 @@ import { FormBase } from '@shared/form-base';
 import { Observable, of } from 'rxjs';
 import { catchError, filter, mergeMap, takeWhile } from 'rxjs/operators';
 import { TiedHouseDeclarationComponent } from '../tied-house-decleration/tied-house-declaration.component';
-import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
-import { TiedHouseViewMode } from '@models/tied-house-connection.model';
 
 export const SharepointNameRegex = /^[^~#%&*{}\\:<>?/+|""]*$/;
 
@@ -321,7 +320,12 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
   }
 
   isTiedHouseValid() {
-    return this.tiedHouseDeclaration.tiedHouseDeclarations.length < 1 && !this.tiedHouseDeclaration.tiedHouseDeclarations.find(th => [TiedHouseViewMode.new, TiedHouseViewMode.editExistingRecord ].includes(th.viewMode))
+    return (
+      this.tiedHouseDeclaration.tiedHouseDeclarations.length < 1 &&
+      !this.tiedHouseDeclaration.tiedHouseDeclarations.find((th) =>
+        [TiedHouseViewMode.new, TiedHouseViewMode.editExistingRecord].includes(th.viewMode)
+      )
+    );
   }
 
   /**

@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ControlContainer, FormGroup, FormGroupDirective } from '@angular/forms';
 import { Account } from '@models/account.model';
 import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
 /**
  * The tied house connections section of a legal entity review application.
@@ -24,19 +23,11 @@ export class LegalEntityReviewTiedHouseComponent implements OnInit {
   @Output() showTiedHouseConnections: EventEmitter<boolean> = new EventEmitter<boolean>();
   form: FormGroup;
 
+  hasTiedHouseChangesToDeclare: boolean;
 
-  hasTiedHouseChangesToDeclare$ = new BehaviorSubject<boolean>(false);
-
-  constructor(public controlContainer: ControlContainer) { }
-
-
-
+  constructor(public controlContainer: ControlContainer) {}
 
   ngOnInit() {
     this.form = this.controlContainer.control as FormGroup;
-    this.hasTiedHouseChangesToDeclare$.subscribe(value => {
-      this.showTiedHouseConnections.emit(value);
-    });
   }
-
 }
