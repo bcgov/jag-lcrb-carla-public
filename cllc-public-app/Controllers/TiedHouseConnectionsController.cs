@@ -77,10 +77,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 foreach (var tiedHouse in tiedHouseConnections)
                 {
-                    if (tiedHouse.AdoxioMarkedForRemoval == 1)
-                    {
-                        var x = 1;
-                    }
                     if (tiedHouse.Statuscode == (int)TiedHouseStatusCode.Existing)
                     {
                         tiedHouse._adoxio_supersededbyValue = tiedHouse.AdoxioTiedhouseconnectionid;
