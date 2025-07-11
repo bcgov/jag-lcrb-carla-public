@@ -11,8 +11,6 @@
       <mat-expansion-panel-header class="blue-header th-accordian-header">
         {{ group[0] || 'New Declarations'}}
       </mat-expansion-panel-header>
-
-
       <table class="th-table">
         <colgroup>
           <col style="width: 5%;">
@@ -45,7 +43,7 @@
                 <span *ngIf="!declaration.removeExistingLicense">
                   <div class="row m-1">
                     <button class="btn btn-primary btn-lg" type="button"
-                      (click)="changeDeclarationViewMode( TiedHouseViewMode.editExistingRecord, declaration)">
+                      (click)="changeDeclarationViewMode( TiedHouseViewMode.editExistingRecord, declaration, true)">
                       Edit
                     </button>
                   </div>
@@ -97,7 +95,7 @@
     </mat-expansion-panel>
   </mat-accordion>
 
-  <button class="btn btn-link mt-5 pl-0" (click)="addNewTiedHouse(TiedHouseViewMode.editable)">
+  <button class="btn btn-link mt-5 pl-0" (click)="addNewTiedHouse(TiedHouseViewMode.new)">
     <fa-icon [icon]="faPlus" class="pr-5"></fa-icon>Add New Tied House</button>
   <br />
   By submitting this information, you agree that a Tied House has been declared with the aforementioned information
@@ -106,7 +104,7 @@
 
   <br />
   <!-- Tempory for dev -->
-  <!-- <pre>grouped tiedHouseDeclarations <br/>{{ groupedTiedHouseDeclarations | json }}</pre>
-   <pre>tiedHouseDeclarations <br/>{{ tiedHouseDeclarations | json }}</pre> -->
+  <!-- <pre>grouped tiedHouseDeclarations <br/>{{ groupedTiedHouseDeclarations | json }}</pre> -->
+  <!--  <pre>tiedHouseDeclarations <br/>{{ tiedHouseDeclarations | json }}</pre> -->
 </div>
 </form>

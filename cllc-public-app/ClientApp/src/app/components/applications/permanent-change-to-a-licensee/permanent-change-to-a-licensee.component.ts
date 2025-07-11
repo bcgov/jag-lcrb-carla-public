@@ -182,9 +182,6 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
       contactPersonPhone: this.application.contactPersonPhone,
       contactPersonEmail: this.application.contactPersonEmail
     };
-
-    
-
     this.primaryInvoice = primary;
     this.secondaryInvoice = secondary;
 

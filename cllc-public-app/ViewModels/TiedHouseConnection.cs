@@ -16,6 +16,14 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         Marketer = 845280006
     }
 
+    public enum TiedHouseStatusCode
+    {
+        New = 1,
+        Ready = 845280000,
+        Existing = 845280001,
+        Inactive = 2
+    }
+
     public class TiedHouseConnection
     {
         public string id { get; set; } //adoxio_tiedhouseconnectionId (primary key)
@@ -88,6 +96,10 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         [JsonProperty(PropertyName = "iNConnectionToFederalProducerDetails")]
         public string INConnectionToFederalProducerDetails { get; set; }
         public string OtherRelationship { get; internal set; }
+
+        public string SupersededById { get; set; }
+
+        public int? StatusCode { get; set; }
 
         public bool isConnectionToProducersComplete(AdoxioApplicantTypeCodes? legalentitytype)
         {

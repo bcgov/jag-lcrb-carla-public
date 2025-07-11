@@ -21,8 +21,8 @@ export class TiedHouseConnectionsDataService extends DataService {
       .pipe(catchError(this.handleError));
   }
 
-  getAllTiedHouses() {
-    const apiPath = `api/tiedhouseconnections/getall`;
+  getAllTiedHouses(applicationId: string) {
+    const apiPath = `api/tiedhouseconnections/application/${applicationId?? ''}`;
     return this.http.get<TiedHouseConnection[]>(apiPath, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }

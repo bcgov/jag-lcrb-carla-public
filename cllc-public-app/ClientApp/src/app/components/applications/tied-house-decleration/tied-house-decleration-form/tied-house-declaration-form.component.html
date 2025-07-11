@@ -60,6 +60,7 @@
         </option>
       </select>
     </app-field>
+    {{_tiedHouseDecleration.viewMode}} view mode
 
     <app-field class="col-md-6" *ngIf="showOtherField" label="If ‘Other’, describe your relationship" [required]="true"
       [valid]="!showOtherField || (showOtherField && isValidOrNotTouched('otherDescription'))"

@@ -5,44 +5,38 @@
 
   <ng-container *ngIf="dataLoaded">
     <section>
-      <app-legal-entity-review-disclaimer
-        [account]="account"
-        [liquorLicences]="liquorLicences"
+      <app-legal-entity-review-disclaimer [account]="account" [liquorLicences]="liquorLicences"
         [cannabisLicences]="cannabisLicences"></app-legal-entity-review-disclaimer>
     </section>
 
     <!-- Tied House Connections -->
     <section>
-      <app-legal-entity-review-tied-house
-        [hasLiquor]="hasLiquor"
-        [hasCannabis]="hasCannabis"
-        [showValidationMessages]="showValidationMessages"></app-legal-entity-review-tied-house>
+      <app-legal-entity-review-tied-house [hasLiquor]="hasLiquor" [hasCannabis]="hasCannabis"
+        [showValidationMessages]="showValidationMessages" (showTiedHouseConnection)="showTiedHouseConnection($event)"></app-legal-entity-review-tied-house>
+    </section>
+
+    <!-- Tied House Connections -->
+    <section *ngIf="isTiedHouseVisible">
+        <h3 class="blue-header">Tied House Declaration</h3>
+        <app-tied-house-declaration #tiedHouseDeclaration></app-tied-house-declaration>
     </section>
 
     <!-- Supporting Documents -->
     <section>
-      <app-legal-entity-review-supporting-documents
-        [account]="account"
-        [application]="application"
-        [hasLiquor]="hasLiquor"
-        [hasCannabis]="hasCannabis"
-        [showValidationMessages]="showValidationMessages"
+      <app-legal-entity-review-supporting-documents [account]="account" [application]="application"
+        [hasLiquor]="hasLiquor" [hasCannabis]="hasCannabis" [showValidationMessages]="showValidationMessages"
         (onUploadedFileEvent)="uploadedSupportingDocuments = $event"></app-legal-entity-review-supporting-documents>
     </section>
 
     <!-- Declaration -->
     <section>
-      <app-legal-entity-review-declarations
-        [hasLiquor]="hasLiquor"
-        [hasCannabis]="hasCannabis"
+      <app-legal-entity-review-declarations [hasLiquor]="hasLiquor" [hasCannabis]="hasCannabis"
         [showValidationMessages]="showValidationMessages"></app-legal-entity-review-declarations>
     </section>
 
     <!-- What Happens Next -->
     <section>
-      <app-legal-entity-review-what-happens-next
-        [account]="account"
-        [liquorLicences]="liquorLicences"
+      <app-legal-entity-review-what-happens-next [account]="account" [liquorLicences]="liquorLicences"
         [cannabisLicences]="cannabisLicences"></app-legal-entity-review-what-happens-next>
     </section>
 
@@ -60,11 +54,7 @@
     </section>
 
     <section style="margin-top: 20px; position: relative">
-      <button
-        mat-raised-button
-        color="secondary"
-        class="progress-button mr-4"
-        (click)="saveForLater()"
+      <button mat-raised-button color="secondary" class="progress-button mr-4" (click)="saveForLater()"
         [disabled]="isSavingForLater">
         <span>
           <fa-icon [icon]="faSave" class="mr-3"></fa-icon>

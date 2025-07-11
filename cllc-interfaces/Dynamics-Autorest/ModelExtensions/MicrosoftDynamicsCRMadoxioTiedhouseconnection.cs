@@ -11,8 +11,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string AccountODataBind { get; set; }
         [JsonProperty(PropertyName = "adoxio_Application@odata.bind")]
         public string ApplicationOdataBind { get; set; }
-
-
-
+        [JsonProperty(PropertyName = "adoxio_SupersededBy@odata.bind")]
+        public string SupersededByOdataBind { get; set; }
+        
     }
 }

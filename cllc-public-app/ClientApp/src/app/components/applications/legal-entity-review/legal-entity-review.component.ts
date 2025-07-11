@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -15,6 +15,7 @@ import { GenericConfirmationDialogComponent } from '@shared/components/dialog/ge
 import { FormBase } from '@shared/form-base';
 import { Observable, of } from 'rxjs';
 import { catchError, filter, mergeMap, takeWhile } from 'rxjs/operators';
+import { TiedHouseDeclarationComponent } from '../tied-house-decleration/tied-house-declaration.component';
 
 export const SharepointNameRegex = /^[^~#%&*{}\\:<>?/+|""]*$/;
 
@@ -32,6 +33,10 @@ export const SharepointNameRegex = /^[^~#%&*{}\\:<>?/+|""]*$/;
   styleUrls: ['./legal-entity-review.component.scss']
 })
 export class LegalEntityReviewComponent extends FormBase implements OnInit {
+  @ViewChild('tiedHouseDeclaration')
+  tiedHouseDeclaration: TiedHouseDeclarationComponent;
+  isTiedHouseVisible: boolean = false;
+
   faQuestionCircle = faQuestionCircle;
   faIdCard = faIdCard;
   faSave = faSave;
@@ -140,7 +145,8 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
     return this.applicationDataService
       .updateApplication({
         ...this.application,
-        ...this.form.value
+        ...this.form.value,
+        tiedHouseConnections: this.tiedHouseDeclaration.flatDeclarations
       })
       .pipe(takeWhile(() => this.componentActive))
       .pipe(
@@ -242,5 +248,9 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
         }
       }
     });
+  }
+
+  showTiedHouseConnection(showValue: boolean) {
+    this.isTiedHouseVisible = showValue;
   }
 }

@@ -3,8 +3,7 @@ import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '
 import { FormBase } from '@shared/form-base';
 import { faTrash } from
   "@fortawesome/free-solid-svg-icons";
-import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
-import { BusinessTypes, RelationshipTypes, TiedHouseConnection, TiedHouseTypes, TiedHouseViewMode } from '@models/tied-house-connection.model';
+import { BusinessTypes, RelationshipTypes, TiedHouseConnection, TiedHouseStatusCode, TiedHouseTypes, TiedHouseViewMode } from '@models/tied-house-connection.model';
 
 @Component({
   selector: 'app-tied-house-declaration-form',
@@ -73,11 +72,12 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
   }
 
   cancel() {
-    if (this._tiedHouseDecleration.viewMode == TiedHouseViewMode.new || this._tiedHouseDecleration.viewMode ==  TiedHouseViewMode.addNewRelationship) {
+    if (this._tiedHouseDecleration.viewMode == TiedHouseViewMode.new || this._tiedHouseDecleration.viewMode == TiedHouseViewMode.addNewRelationship) {
       this.remove();
     }
     else {
       this._tiedHouseDecleration.viewMode = TiedHouseViewMode.existing;
+      this._tiedHouseDecleration.statusCode = TiedHouseStatusCode.existing;
     }
   }
 
@@ -118,16 +118,15 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
         otherDescription: ["", [Validators.required]],
         autocompleteInput: [""]
       });
-      
+
       if (this._tiedHouseDecleration) {
         this.setFormState(this._tiedHouseDecleration.viewMode);
         this._tiedHouseDecleration.dateOfBirth = this.formatDate(this._tiedHouseDecleration.dateOfBirth);
-          this.form.patchValue(this._tiedHouseDecleration);
+        this.form.patchValue(this._tiedHouseDecleration);
         this.updateAssociatedLicenses(this._tiedHouseDecleration.associatedLiquorLicense || []);
       }
       this.updateFieldValidators();
     }
-  
   }
 
   updateFieldValidators() {
@@ -170,8 +169,11 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
     return hasAtLeastOne ? null : { required: true };
   }
 
-  formatDate(dateString: string): string {
-    return new Date(dateString).toISOString().split('T')[0];
+  private formatDate(dateString: string | null | undefined): string | null {
+    if (!dateString?.trim()) return null;
+
+    const date = new Date(dateString);
+    return isNaN(date.getTime()) ? null : date.toISOString().split('T')[0];
   }
 
   private setFormState(viewMode) {

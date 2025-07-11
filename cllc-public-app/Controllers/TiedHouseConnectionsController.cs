@@ -2,6 +2,7 @@
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
+using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -54,22 +55,50 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(result.FirstOrDefault());
         }
 
-        [HttpGet("getall")]
-        public JsonResult GetAllTiedHouseConnections()
+        [HttpGet("application/{applicationId?}")]
+        public JsonResult GetAllTiedHouseConnections(string applicationId)
         {
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             var result = new List<ViewModels.TiedHouseConnection>();
+            var supersededbyIds = new List<string>();
             IEnumerable<MicrosoftDynamicsCRMadoxioTiedhouseconnection> tiedHouseConnections = null;
-            string accountfilter = "_adoxio_accountid_value eq " + userSettings.AccountId;
-            _logger.LogDebug("Account filter = " + accountfilter);
-
-            tiedHouseConnections = _dynamicsClient.Tiedhouseconnections.Get(filter: accountfilter).Value;
-
-            foreach (var tiedHouse in tiedHouseConnections)
+            string accountFilter = $"(_adoxio_accountid_value eq {userSettings.AccountId} and statuscode eq {(int)TiedHouseStatusCode.Existing})";
+            if (!String.IsNullOrEmpty(applicationId))
             {
-                result.Add(tiedHouse.ToViewModel());
+                accountFilter = accountFilter + $" or _adoxio_application_value eq {applicationId}";
+            }
+            _logger.LogDebug("Account filter = " + accountFilter);
+
+            try
+            {
+
+
+                tiedHouseConnections = _dynamicsClient.Tiedhouseconnections.Get(filter: accountFilter).Value;
+
+                foreach (var tiedHouse in tiedHouseConnections)
+                {
+                    if (tiedHouse.Statuscode == (int)TiedHouseStatusCode.Existing)
+                    {
+                        tiedHouse._adoxio_supersededbyValue = tiedHouse.AdoxioTiedhouseconnectionid;
+                    }
+                    if (tiedHouse.Statuscode == (int)TiedHouseStatusCode.New)
+                    {
+                        supersededbyIds.Add(tiedHouse._adoxio_supersededbyValue);
+                    }
+
+                    result.Add(tiedHouse.ToViewModel());
+                }
             }
 
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Error updating tied house connections");
+                throw new Exception("Unable to add tied house connection");
+            }
+
+            result = result
+                .Where(s => !supersededbyIds.Contains(s.id))
+                .ToList();
             return new JsonResult(result);
         }
 

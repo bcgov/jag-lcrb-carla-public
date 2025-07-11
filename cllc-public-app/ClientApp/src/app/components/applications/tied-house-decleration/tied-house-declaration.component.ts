@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
 import { FormBase } from '@shared/form-base';
-import { RelationshipTypes, TiedHouseConnection, TiedHouseViewMode } from '@models/tied-house-connection.model';
+import { RelationshipTypes, TiedHouseConnection, TiedHouseStatusCode, TiedHouseViewMode } from '@models/tied-house-connection.model';
 
 
 @Component({
@@ -50,8 +50,14 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
     this.openPanel(index);
   }
 
-  changeDeclarationViewMode(viewMode: TiedHouseViewMode, declaration: TiedHouseConnection) {
+  changeDeclarationViewMode(viewMode: TiedHouseViewMode, declaration: TiedHouseConnection, isNew?: boolean) {
     declaration.viewMode = viewMode;
+    if(isNew === true){
+      declaration.statusCode = TiedHouseStatusCode.new;
+    }
+    if(isNew === false){
+      declaration.statusCode = TiedHouseStatusCode.existing;
+    }
   }
 
   saveTiedHouseDeclaration(updated: TiedHouseConnection, original: TiedHouseConnection) {
@@ -81,23 +87,23 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
   }
 
   loadData() {
-    this.tiedHouseService.getAllTiedHouses().subscribe(data =>{
-        this.tiedHouseDeclarations = data;
-        this.tiedHouseDeclarations.forEach(th => {
-        if (th.applicationId == this.applicationId) {
+    this.tiedHouseService.getAllTiedHouses(this.applicationId).subscribe(data => {
+      this.tiedHouseDeclarations = data;
+      this.tiedHouseDeclarations.forEach(th => {
+        if (th.statusCode == TiedHouseStatusCode.new) {
           th.viewMode = TiedHouseViewMode.disabled;
         }
         else {
           th.viewMode = TiedHouseViewMode.existing;
         }
       })
-    this.updateTiedHouseDeclarations();
+      this.updateTiedHouseDeclarations();
     })
-      
+
   }
 
-  getRelationshipName(value: number){
-    return RelationshipTypes.find(o=> o.value == value).name;
+  getRelationshipName(value: number) {
+    return RelationshipTypes.find(o => o.value == value).name;
   }
 
   private updateTiedHouseDeclarations() {
@@ -131,7 +137,10 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
     this.groupedTiedHouseDeclarations = Object.entries(grouped);
   }
 
-  formatDate(dateString: string): string {
-    return new Date(dateString).toISOString().split('T')[0];
+ private formatDate(dateString: string | null | undefined): string | null {
+    if (!dateString?.trim()) return null;
+
+    const date = new Date(dateString);
+    return isNaN(date.getTime()) ? null : date.toISOString().split('T')[0];
   }
 }
