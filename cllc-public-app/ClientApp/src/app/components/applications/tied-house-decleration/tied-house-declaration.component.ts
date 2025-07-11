@@ -48,11 +48,11 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
     this.tiedHouseService.getAllTiedHouses(this.applicationId).subscribe({
       next: (data) => {
         this.tiedHouseDeclarations = data;
-        this.tiedHouseDeclarations.forEach((th) => {
-          if (th.statusCode == TiedHouseStatusCode.new) {
-            th.viewMode = TiedHouseViewMode.disabled;
+        this.tiedHouseDeclarations.forEach((item) => {
+          if (item.statusCode == TiedHouseStatusCode.new && !item.markedForRemoval) {
+            item.viewMode = TiedHouseViewMode.disabled;
           } else {
-            th.viewMode = TiedHouseViewMode.existing;
+            item.viewMode = TiedHouseViewMode.existing;
           }
         });
         this.updateGroupedTiedHouseDeclarations();
@@ -133,20 +133,26 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
    * @param {TiedHouseConnection} original
    */
   saveTiedHouseDeclaration(updated: TiedHouseConnection, original: TiedHouseConnection) {
-    original = { ...original, ...updated, viewMode: TiedHouseViewMode.disabled };
+    updated.viewMode = TiedHouseViewMode.disabled;
+    Object.assign(original, updated);
     this.updateGroupedTiedHouseDeclarations();
   }
 
   /**
-   * Removes a Tied House declaration.
+   * Removes a new (non-existing) Tied House declaration.
    *
    * @param {TiedHouseConnection} declaration
+   * @param {boolean} keepAccordionOpen
+   * @param {number} accordionIndex
    */
-  removeTiedHouseDeclaration(declaration: TiedHouseConnection) {
-    var index = this.tiedHouseDeclarations.indexOf(declaration);
-    if (index !== -1) {
-      this.tiedHouseDeclarations.splice(index, 1);
+  removeNewTiedHouseDeclaration(declaration: TiedHouseConnection, keepAccordionOpen: boolean, accordionIndex: number) {
+    declaration.viewMode = TiedHouseViewMode.hidden;
+    declaration.markedForRemoval = true;
+
+    if (keepAccordionOpen) {
+      this.openPanel(accordionIndex);
     }
+
     this.updateGroupedTiedHouseDeclarations();
   }
 
@@ -158,12 +164,13 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
    * @return {*}
    */
   removeExistingTiedHouseDeclaration(declaration: TiedHouseConnection) {
-    if (declaration.removeExistingLicense === true) {
+    if (declaration.markedForRemoval === true) {
       // Already marked for removal, nothing to do
       return;
     }
 
-    declaration.removeExistingLicense = true;
+    declaration.statusCode = TiedHouseStatusCode.new;
+    declaration.markedForRemoval = true;
   }
 
   /**
@@ -174,12 +181,13 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
    * @return {*}
    */
   undoRemoveExistingTiedHouseDeclaration(declaration: TiedHouseConnection) {
-    if (declaration.removeExistingLicense === false) {
+    if (declaration.markedForRemoval === false) {
       // Already not marked for removal, nothing to do
       return;
     }
 
-    declaration.removeExistingLicense = false;
+    declaration.statusCode = TiedHouseStatusCode.new;
+    declaration.markedForRemoval = false;
   }
 
   hasExistingDeclarations(group: TiedHouseConnection[]): boolean {
@@ -197,6 +205,16 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
 
   getRelationshipName(value: number): string | undefined {
     return RelationshipTypes.find((item) => item.value == value)?.name;
+  }
+
+  doesGroupHaveAtLeastOneDeclaration(groupIndex: number): boolean {
+    const group = this.groupedTiedHouseDeclarations[groupIndex];
+
+    if (!group) {
+      return false;
+    }
+
+    return group[1].some((declaration) => declaration.viewMode != TiedHouseViewMode.hidden);
   }
 
   private getLegalEntityKey(declaration: TiedHouseConnection): string {
@@ -224,20 +242,22 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
   }
 
   private updateGroupedTiedHouseDeclarations() {
-    const grouped = this.tiedHouseDeclarations?.reduce(
-      (acc, declaration) => {
-        var key = this.getGroupedTiedHouseKey(declaration);
+    const grouped = this.tiedHouseDeclarations
+      .filter((item) => item.viewMode != TiedHouseViewMode.hidden)
+      ?.reduce(
+        (acc, declaration) => {
+          var key = this.getGroupedTiedHouseKey(declaration);
 
-        if (!acc[key]) {
-          acc[key] = [];
-        }
+          if (!acc[key]) {
+            acc[key] = [];
+          }
 
-        acc[key].push(declaration);
+          acc[key].push(declaration);
 
-        return acc;
-      },
-      {} as Record<string, TiedHouseConnection[]>
-    );
+          return acc;
+        },
+        {} as Record<string, TiedHouseConnection[]>
+      );
 
     this.groupedTiedHouseDeclarations = Object.entries(grouped);
   }

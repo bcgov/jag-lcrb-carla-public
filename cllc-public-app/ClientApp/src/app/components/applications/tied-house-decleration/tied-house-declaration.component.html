@@ -38,14 +38,13 @@
             <tbody class="th-table-body">
               <ng-container
                 *ngFor="let _tiedHouseDeclaration of _tiedHouseDeclarations[1]; let tiedHouseDeclarationIndex = index">
+                <!-- Existing declarations -->
                 <tr
-                  [ngClass]="
-                    _tiedHouseDeclaration.removeExistingLicense ? 'th-remove-existing-table' : 'th-existing-table'
-                  "
+                  [ngClass]="_tiedHouseDeclaration.markedForRemoval ? 'th-remove-existing-table' : 'th-existing-table'"
                   *ngIf="_tiedHouseDeclaration.viewMode == TiedHouseViewMode.existing">
                   <td
                     [ngClass]="
-                      _tiedHouseDeclaration.removeExistingLicense ? 'th-remove-existing-index' : 'th-existing-index'
+                      _tiedHouseDeclaration.markedForRemoval ? 'th-remove-existing-index' : 'th-existing-index'
                     ">
                     {{ tiedHouseDeclarationIndex + 1 }}
                   </td>
@@ -58,7 +57,7 @@
                   <td>
                     <div class="existing-declaration-buttons">
                       <button
-                        *ngIf="!_tiedHouseDeclaration.removeExistingLicense"
+                        *ngIf="!_tiedHouseDeclaration.markedForRemoval"
                         class="btn btn-primary btn-md"
                         type="button"
                         (click)="
@@ -67,14 +66,14 @@
                         Edit
                       </button>
                       <button
-                        *ngIf="!_tiedHouseDeclaration.removeExistingLicense"
+                        *ngIf="!_tiedHouseDeclaration.markedForRemoval"
                         class="btn btn-danger btn-md"
                         type="button"
                         (click)="removeExistingTiedHouseDeclaration(_tiedHouseDeclaration)">
                         Remove
                       </button>
                       <button
-                        *ngIf="_tiedHouseDeclaration.removeExistingLicense"
+                        *ngIf="_tiedHouseDeclaration.markedForRemoval"
                         class="btn btn-link"
                         (click)="undoRemoveExistingTiedHouseDeclaration(_tiedHouseDeclaration)">
                         Restore
@@ -83,21 +82,29 @@
                   </td>
                 </tr>
 
+                <!-- New declarations -->
                 <tr *ngIf="_tiedHouseDeclaration.viewMode != TiedHouseViewMode.existing">
                   <td class="p-4 th-form" colspan="4">
                     <app-tied-house-declaration-form
                       style="width: 100%"
                       [tiedHouseDecleration]="_tiedHouseDeclaration"
                       (saveTiedHouseDecclaration)="saveTiedHouseDeclaration($event, _tiedHouseDeclaration)"
-                      (removeTiedHouseDeclaration)="removeTiedHouseDeclaration(_tiedHouseDeclaration)"
+                      (removeTiedHouseDeclaration)="
+                        removeNewTiedHouseDeclaration(
+                          _tiedHouseDeclaration,
+                          _tiedHouseDeclarations.length > 1,
+                          tiedHouseDeclarationsIndex
+                        )
+                      "
                       (cancelTiedHouseDeclaration)="changeDeclarationViewMode($event, _tiedHouseDeclaration)">
                     </app-tied-house-declaration-form>
-                    <button
+                    <!-- Tempory for dev -->
+                    <!-- <button
                       class="btn btn-primary"
                       type="button"
                       (click)="changeDeclarationViewMode(TiedHouseViewMode.existing, _tiedHouseDeclaration)">
                       To Existing
-                    </button>
+                    </button> -->
                   </td>
                 </tr>
               </ng-container>
@@ -129,6 +136,6 @@
       and will become date tied to both yours and your establishment s file.
     </div>
     <!-- Tempory for dev -->
-    <pre>grouped tiedHouseDeclarations <br/>{{ groupedTiedHouseDeclarations | json }}</pre>
+    <!-- <pre>grouped tiedHouseDeclarations <br/>{{ groupedTiedHouseDeclarations | json }}</pre> -->
   </div>
 </form>

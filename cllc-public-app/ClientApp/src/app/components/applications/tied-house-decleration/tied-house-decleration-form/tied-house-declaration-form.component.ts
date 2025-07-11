@@ -220,6 +220,7 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
    */
   private setFormState(viewMode) {
     this.form.enable();
+
     switch (viewMode) {
       case TiedHouseViewMode.disabled:
         this.form.disable();
@@ -233,11 +234,14 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
 
       case TiedHouseViewMode.addNewRelationship:
         this.form.disable();
+        // A related record inherits some of the values of the related record, and so only a subset of fields are
+        // editable
         this.form.get('relationshipToLicence')?.enable();
         this.form.get('otherDescription')?.enable();
         this.form.get('autocompleteInput')?.enable();
         this.isEditable = true;
         break;
+
       case TiedHouseViewMode.editExistingRecord:
         this.form.disable();
         this.form.get('relationshipToLicence')?.enable();
@@ -245,6 +249,7 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
         this.form.get('autocompleteInput')?.enable();
         this.isEditable = true;
         break;
+
       default:
         this.form.enable();
         break;

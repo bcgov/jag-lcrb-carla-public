@@ -253,7 +253,7 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
         ...this.form.value,
         ...this.appContact.form.value,
         ...appData,
-        tiedHouseConnections: this.tiedHouseDeclaration.flatDeclarations
+        tiedHouseConnections: this.tiedHouseDeclaration.tiedHouseDeclarations
       })
       .pipe(takeWhile(() => this.componentActive))
       .pipe(
