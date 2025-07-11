@@ -78,6 +78,7 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
   }
 
   removeExistingTiedHouseDeclaration(declaration: TiedHouseConnection, remove: boolean) {
+    declaration.statusCode = TiedHouseStatusCode.new;
     declaration.markedForRemoval = remove;
   }
 
