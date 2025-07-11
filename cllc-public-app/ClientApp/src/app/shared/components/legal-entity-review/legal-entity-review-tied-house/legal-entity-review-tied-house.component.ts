@@ -23,7 +23,7 @@ export class LegalEntityReviewTiedHouseComponent implements OnInit {
   @Output() showTiedHouseConnections: EventEmitter<boolean> = new EventEmitter<boolean>();
   form: FormGroup;
 
-  hasTiedHouseChangesToDeclare: boolean;
+  hasTiedHouseChangesToDeclare = false;
 
   constructor(public controlContainer: ControlContainer) {}
 
