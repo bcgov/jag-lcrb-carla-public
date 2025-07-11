@@ -106,9 +106,10 @@
       [valid]="!showOtherField || (showOtherField && isValidOrNotTouched('otherDescription'))"
       errorMessage="Relation description required">
       <textarea class="form-control" formControlName="otherDescription" rows="5"></textarea>
-      {{ form.get('otherDescription')?.valid }} {{ !form.get('otherDescription')?.touched }}1{{
+      <!-- Temporary for Dev -->
+      <!-- {{ form.get('otherDescription')?.valid }} {{ !form.get('otherDescription')?.touched }}1{{
         isValidOrNotTouched('otherDescription')
-      }}
+      }} -->
     </app-field>
   </div>
 
