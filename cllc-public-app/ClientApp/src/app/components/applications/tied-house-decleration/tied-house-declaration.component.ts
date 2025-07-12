@@ -191,7 +191,7 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
   }
 
   hasExistingDeclarations(group: TiedHouseConnection[]): boolean {
-    return group.find((d) => d.viewMode == TiedHouseViewMode.existing) != undefined;
+    return group.find((item) => item.viewMode == TiedHouseViewMode.existing) != undefined;
   }
 
   /**
