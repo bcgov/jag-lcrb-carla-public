@@ -1,14 +1,6 @@
 <form [formGroup]="form">
   <div>
-    <div>
-      <p class="m-0">
-        Do you or any of your shareholders, directors, or officers have any amount of interest in another B.C. liquor
-        licence, or any association with a third party operator for another liquor licence, or have an immediate family
-        member (spouse, parent, sibling, or child) with any amount of interest in another liquor licence?
-      </p>
-    </div>
-
-    <div *ngIf="groupedTiedHouseDeclarations.length > 0" class="mt-3">
+    <div *ngIf="groupedTiedHouseDeclarations.length > 0" class="mb-3">
       <mat-accordion>
         <mat-expansion-panel
           class="th-accordian"
@@ -20,7 +12,7 @@
             </mat-panel-title>
           </mat-expansion-panel-header>
 
-          <table class="th-table">
+          <table class="th-table mb-3">
             <colgroup>
               <col style="width: 5%" />
               <col style="width: 40%" />
@@ -133,9 +125,9 @@
                 {{ _tiedHouseDeclarations[0] }}
               </button>
             </span>
-            <p class="m-0">
+            <p class="m-0 mt-3">
               By submitting this information, you agree that a Tied House has been declared with the aforementioned
-              information and will become date tied to both yours and your establishment s file.
+              information and will become date tied to both yours and your establishment's file.
             </p>
           </div>
         </mat-expansion-panel>
@@ -156,9 +148,9 @@
           <fa-icon [icon]="faPlusSquare" class="pr-2"></fa-icon>Add New Tied House
         </button>
       </span>
-      <p class="m-0">
+      <p class="m-0 mt-3">
         By submitting this information, you agree that a Tied House has been declared with the aforementioned
-        information and will become date tied to both yours and your establishment s file.
+        information and will become date tied to both yours and your establishment's file.
       </p>
     </div>
     <!-- Tempory for dev -->
