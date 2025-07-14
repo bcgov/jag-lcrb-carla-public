@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppState } from '@app/app-state/models/app-state';
 import { COUNTRIES } from '@app/constants/countries';
+import { ConnectionToOtherLiquorLicencesComponent } from '@components/account-profile/tabs/connection-to-other-liquor-licences/connection-to-other-liquor-licences.component';
 import {
   faAddressCard,
   faChevronRight,
@@ -30,7 +31,6 @@ import { endOfToday } from 'date-fns';
 import { forkJoin, Observable, of, Subscription } from 'rxjs';
 import { catchError, filter, map, takeWhile } from 'rxjs/operators';
 import { ApplicationTypeNames } from '../../models/application-type.model';
-import { ConnectionToProducersComponent } from './tabs/connection-to-producers/connection-to-producers.component';
 
 // See the Moment.js docs for the meaning of these formats:
 // https://momentjs.com/docs/#/displaying/format/
@@ -108,8 +108,10 @@ export class AccountProfileComponent extends FormBase implements OnInit {
   _showAdditionalAddress: boolean;
   _showAdditionalContact: boolean;
   legalEntityId: string;
-  @ViewChild(ConnectionToProducersComponent)
-  connectionsToProducers: ConnectionToProducersComponent;
+
+  @ViewChild(ConnectionToOtherLiquorLicencesComponent)
+  connectionToOtherLiquorLicencesComponent: ConnectionToOtherLiquorLicencesComponent;
+
   applicationId: string;
   applicationMode: string;
   account: Account;
@@ -457,7 +459,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
 
   canDeactivate(): Observable<boolean> {
     if (
-      !this.connectionsToProducers.formHasChanged() &&
+      !this.connectionToOtherLiquorLicencesComponent.formHasChanged() &&
       JSON.stringify(this.saveFormData) === JSON.stringify(this.form.value)
     ) {
       return of(true);
@@ -500,7 +502,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
       this.contactDataService.updateContact(this.form.get('contact').value)
     ];
 
-    if (this.connectionsToProducers) {
+    if (this.connectionToOtherLiquorLicencesComponent) {
       saves.push(this.prepareTiedHouseSaveRequest({ ...this.account.tiedHouse, ..._tiedHouse }));
     }
 
@@ -526,7 +528,10 @@ export class AccountProfileComponent extends FormBase implements OnInit {
       route = '/sep/dashboard';
     }
 
-    if (this.form.valid && (!this.connectionsToProducers || this.connectionsToProducers.form.valid)) {
+    if (
+      this.form.valid &&
+      (!this.connectionToOtherLiquorLicencesComponent || this.connectionToOtherLiquorLicencesComponent.form.valid)
+    ) {
       this.busy = this.save().subscribe(() => {
         if (this.useInStepperMode) {
           this.saveComplete.emit(true);

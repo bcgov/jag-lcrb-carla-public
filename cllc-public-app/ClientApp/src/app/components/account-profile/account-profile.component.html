@@ -462,11 +462,8 @@
               ['Police'].indexOf(getBusinessTypeName()) == -1
             ">
             <app-connection-to-producers
-              *ngIf="account?.tiedHouse"
-              [tiedHouse]="account?.tiedHouse"
               [account]="account"
-              [applicationTypeName]="application?.applicationType?.name"
-              (value)="tiedHouseFormData = $event"></app-connection-to-producers>
+              [applicationTypeName]="application?.applicationType?.name"></app-connection-to-producers>
           </div>
 
           <div>
