@@ -151,5 +151,8 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Thrown when a required parameter is null
         /// </exception>
         Task<HttpOperationResponse> DeleteWithHttpMessagesAsync(string adoxioTiedhouseconnectionid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        Task<HttpOperationResponse> AddReferenceWithHttpMessagesAsync(string adoxioApplicationid, string fieldname, Odataid odataid = default, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default);
+
     }
 }
