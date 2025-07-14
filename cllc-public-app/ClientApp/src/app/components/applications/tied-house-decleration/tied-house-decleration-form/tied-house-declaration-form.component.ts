@@ -18,9 +18,19 @@ import { FormBase } from '@shared/form-base';
   styleUrls: ['./tied-house-declaration-form.component.scss']
 })
 export class TiedHouseDeclarationFormComponent extends FormBase implements OnInit {
+  /**
+   * Whether the form is in read-only mode. Default is false.
+   */
+  @Input() isReadOnly = false;
+  /**
+   * The tied house declaration data to load into the form.
+   */
   @Input() set tiedHouseDecleration(val: TiedHouseConnection) {
     this._tiedHouseDecleration = val;
-    this.tryPatchForm();
+
+    if (this.form) {
+      this.patchFormFromInput();
+    }
   }
 
   @Output() saveTiedHouseDecclaration: EventEmitter<TiedHouseConnection> = new EventEmitter<TiedHouseConnection>();
@@ -43,6 +53,12 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
   }
 
   ngOnInit(): void {
+    this.initForm();
+
+    if (this._tiedHouseDecleration) {
+      this.patchFormFromInput();
+    }
+
     this.form.get('relationshipToLicence')?.valueChanges.subscribe((value) => {
       this.showOtherField = value == 845280002;
       this.updateFieldValidators();
@@ -59,33 +75,41 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
     });
 
     this.updateFieldValidators();
+
+    if (this.isReadOnly) {
+      this.form?.disable();
+    }
   }
 
-  private tryPatchForm() {
-    if (!this.form) {
-      this.form = this.fb.group({
-        isLegalEntity: [false, [Validators.required]],
-        dateOfBirth: [''],
-        firstName: [''],
-        middleName: [''],
-        lastName: [''],
-        businessType: [''],
-        legalEntityName: [''],
-        relationshipToLicence: ['', [Validators.required]],
-        associatedLiquorLicense: this.fb.array([], this.requiredFormArray),
-        otherDescription: ['', [Validators.required]],
-        autocompleteInput: ['']
-      });
-
-      if (this._tiedHouseDecleration) {
-        this.setFormState(this._tiedHouseDecleration.viewMode);
-        this._tiedHouseDecleration.dateOfBirth = formatDate(this._tiedHouseDecleration.dateOfBirth);
-        this.form.patchValue(this._tiedHouseDecleration);
-        this.updateAssociatedLicenses(this._tiedHouseDecleration.associatedLiquorLicense || []);
-      }
-
-      this.updateFieldValidators();
+  private patchFormFromInput() {
+    if (this._tiedHouseDecleration) {
+      this.setFormState(this._tiedHouseDecleration.viewMode);
+      this._tiedHouseDecleration.dateOfBirth = formatDate(this._tiedHouseDecleration.dateOfBirth);
+      this.form.patchValue(this._tiedHouseDecleration);
+      this.updateAssociatedLicenses(this._tiedHouseDecleration.associatedLiquorLicense || []);
     }
+
+    this.updateFieldValidators();
+
+    if (this.isReadOnly) {
+      this.form?.disable();
+    }
+  }
+
+  private initForm() {
+    this.form = this.fb.group({
+      isLegalEntity: [false, [Validators.required]],
+      dateOfBirth: [''],
+      firstName: [''],
+      middleName: [''],
+      lastName: [''],
+      businessType: [''],
+      legalEntityName: [''],
+      relationshipToLicence: ['', [Validators.required]],
+      associatedLiquorLicense: this.fb.array([], this.requiredFormArray),
+      otherDescription: ['', [Validators.required]],
+      autocompleteInput: ['']
+    });
   }
 
   get associatedLiquorLicenses(): FormArray {

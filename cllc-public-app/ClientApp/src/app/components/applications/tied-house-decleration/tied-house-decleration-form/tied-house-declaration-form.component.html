@@ -126,7 +126,7 @@
 <pre>Tied House Connections {{tiedHouseConnections}}</pre> -->
   <!-- ------Footer------ -->
 
-  <div class="row justify-content-end">
+  <div *ngIf="!isReadOnly" class="row justify-content-end">
     <div class="col-auto" *ngIf="isEditable">
       <button class="btn btn-link btn-cancel" (click)="cancel()">
         <fa-icon [icon]="faTrash" class="mr-2"></fa-icon>CANCEL

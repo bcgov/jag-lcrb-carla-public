@@ -20,7 +20,11 @@ const NEW_DECLARATION_KEY = 'New Declaration';
   styleUrls: ['./tied-house-declaration.component.scss']
 })
 export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
-  @Input() applicationId: string;
+  @Input() applicationId?: string;
+  /**
+   * Indicates whether the tied house component is in read-only mode. Default is false.
+   */
+  @Input() isReadOnly?: boolean = false;
 
   tiedHouseConnections: TiedHouseConnection[];
 
@@ -41,14 +45,16 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadData();
+    if (this.applicationId) {
+      this.loadDataByApplicationId();
+    }
   }
 
-  loadData() {
+  loadDataByApplicationId() {
     this.tiedHouseService.getAllTiedHouses(this.applicationId).subscribe({
       next: (data) => {
         this.tiedHouseDeclarations = data.map((item) => {
-          // TODO will declarations fetched from the API ever be `new`?
+          // TODO will declarations fetched from the API ever be `new`? Won't they always be `existing`?
           if (item.statusCode === TiedHouseStatusCode.new && !item.markedForRemoval) {
             item.viewMode = TiedHouseViewMode.disabled;
           } else {
@@ -137,14 +143,25 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
    */
   hasInProgressDeclarations(): boolean {
     // Return true if there are any declarations that are in the process of being added or edited.
-    const x = this.tiedHouseDeclarations.some((declaration) =>
+    return this.tiedHouseDeclarations.some((declaration) =>
       [TiedHouseViewMode.new, TiedHouseViewMode.addNewRelationship, TiedHouseViewMode.editExistingRecord].includes(
         declaration.viewMode
       )
     );
+  }
 
-    console.log('hasInProgressDeclarations', x);
-    return x;
+  /**
+   * Checks if a related group of Tied House declarations has been saved.
+   *
+   * This is necessary when determining if a new related declaration can be added, as a new related declaration
+   * requires a completed declaration in the same group to inherit some details from.
+   *
+   * @param {[string, TiedHouseConnection[]]} groupedTiedHouseDeclarations
+   * @return {*}  {boolean}
+   */
+  hasSavedRelatedDeclaration(groupedTiedHouseDeclarations: [string, TiedHouseConnection[]]): boolean {
+    // Only new (unsaved) declarations will have the NEW_DECLARATION_KEY as the name of the group.
+    return groupedTiedHouseDeclarations[0] !== NEW_DECLARATION_KEY;
   }
 
   /**

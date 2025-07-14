@@ -47,7 +47,7 @@
                     </ul>
                   </td>
                   <td>
-                    <div class="existing-declaration-buttons">
+                    <div *ngIf="!isReadOnly" class="existing-declaration-buttons">
                       <span
                         [title]="
                           hasInProgressDeclarations()
@@ -87,6 +87,7 @@
                   <td class="p-4 th-form" colspan="4">
                     <app-tied-house-declaration-form
                       style="width: 100%"
+                      [isReadOnly]="isReadOnly"
                       [tiedHouseDecleration]="_tiedHouseDeclaration"
                       (saveTiedHouseDecclaration)="saveTiedHouseDeclaration($event, _tiedHouseDeclaration)"
                       (removeTiedHouseDeclaration)="
@@ -110,7 +111,8 @@
               </ng-container>
             </tbody>
           </table>
-          <div *ngIf="_tiedHouseDeclarations[0] !== NEW_DECLARATION_KEY">
+
+          <div *ngIf="!isReadOnly && hasSavedRelatedDeclaration(_tiedHouseDeclarations)">
             <span
               [title]="
                 hasInProgressDeclarations()
@@ -134,7 +136,7 @@
       </mat-accordion>
     </div>
 
-    <div>
+    <div *ngIf="!isReadOnly">
       <span
         [title]="
           hasInProgressDeclarations()
