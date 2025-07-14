@@ -34,12 +34,7 @@
       </app-field>
     </div>
     <div class="row">
-      <app-field
-        class="col-md-6"
-        label="Middle Name"
-        [required]="true"
-        [valid]="isValidOrNotTouched('middleName')"
-        errorMessage="Middle Name is required">
+      <app-field class="col-md-6" label="Middle Name" [required]="false" [valid]="isValidOrNotTouched('middleName')">
         <input
           class="form-control"
           style="width: 100%"
