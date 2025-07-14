@@ -24,9 +24,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Rest;
-using System.Text.Json;
 using Newtonsoft.Json;
-using static System.Net.Mime.MediaTypeNames;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 using Application = Gov.Lclb.Cllb.Public.ViewModels.Application;
 
@@ -2057,7 +2055,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                             adoxioTiedHouseConnection.AdoxioTiedhouseconnectionid = null;
 
-                            _dynamicsClient.Tiedhouseconnections.Create(adoxioTiedHouseConnection);
+                            var response = _dynamicsClient.Tiedhouseconnections.Create(adoxioTiedHouseConnection);
+                            
+
+                            AssociateLicenses(tiedhouseConnection.AssociatedLiquorLicense.Select(x => x.Id).ToList(), response.AdoxioTiedhouseconnectionid);
                         }
                     }
                     catch (HttpOperationException httpOperationException)
@@ -2069,5 +2070,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
         }
 
+        private void AssociateLicenses(List<string> licenses, string tiedHouseId)
+        {
+            licenses.ForEach(licenceId =>
+            {
+                Odataid odataId = new Odataid()
+                {
+                    OdataidProperty =
+                            _dynamicsClient.GetEntityURI("adoxio_licenceses", "ea5e1d86-a1f7-ea11-b818-005056830319")
+                };
+                _dynamicsClient.Tiedhouseconnections.AddReferenceWithHttpMessagesAsync(
+                             tiedHouseId,
+                             "adoxio_adoxio_tiedhouseconnection_adoxio_licence",
+                             odataid: odataId);
+            });
+        }
     }
 }
