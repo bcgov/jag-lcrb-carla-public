@@ -1,6 +1,7 @@
 namespace Gov.Lclb.Cllb.Interfaces.Models
 {
     using Newtonsoft.Json;
+    using System.Collections.Generic;
 
     public partial class MicrosoftDynamicsCRMadoxioTiedhouseconnection
     {
@@ -13,6 +14,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string ApplicationOdataBind { get; set; }
         [JsonProperty(PropertyName = "adoxio_SupersededBy@odata.bind")]
         public string SupersededByOdataBind { get; set; }
-        
+        [JsonProperty(PropertyName = "adoxio_adoxio_tiedhouseconnection_adoxio_licence")]
+        public IList<MicrosoftDynamicsCRMadoxioLicences> Adoxio_Adoxio_TiedHouseConnection_Adoxio_Licence { get; set; }
+
     }
 }

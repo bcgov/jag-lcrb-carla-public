@@ -3,6 +3,7 @@ using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace Gov.Lclb.Cllb.Public.Models
@@ -76,7 +77,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 {
                     result.id = tiedHouse.AdoxioTiedhouseconnectionid;
                 }
-
+                result.AssociatedLiquorLicense = tiedHouse.Adoxio_Adoxio_TiedHouseConnection_Adoxio_Licence?.Select(x => new RelatedLicence(){ Id = x.AdoxioLicencesid, Name = x.AdoxioName }).ToList();
                 result.CorpConnectionFederalProducer = tiedHouse.AdoxioCorpconnectionfederalproducer;
                 result.CorpConnectionFederalProducerDetails = tiedHouse.AdoxioCorpconnectionfederalproducerdetails;
                 result.FamilyMemberFederalProducer = tiedHouse.AdoxioFamilymemberfederalproducer;

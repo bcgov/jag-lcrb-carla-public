@@ -44,8 +44,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             IEnumerable<MicrosoftDynamicsCRMadoxioTiedhouseconnection> tiedHouseConnections = null;
             string accountfilter = "_adoxio_accountid_value eq " + accountId;
             _logger.LogDebug("Account filter = " + accountfilter);
-
-            tiedHouseConnections = _dynamicsClient.Tiedhouseconnections.Get(filter: accountfilter).Value;
+            var expand = new List<string> { "adoxio_adoxio_tiedhouseconnection_adoxio_licence" };
+            tiedHouseConnections = _dynamicsClient.Tiedhouseconnections.Get(filter: accountfilter, expand: expand).Value;
 
             foreach (var tiedHouse in tiedHouseConnections)
             {
@@ -65,15 +65,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string accountFilter = $"(_adoxio_accountid_value eq {userSettings.AccountId} and statuscode eq {(int)TiedHouseStatusCode.Existing})";
             if (!String.IsNullOrEmpty(applicationId))
             {
-                accountFilter = accountFilter + $" or (_adoxio_application_value eq {applicationId} and adoxio_markedforremoval ne 1)";
+                /* If updating saved application
+                 * only marked for removed connections if they are updating existing connection*/
+                accountFilter = accountFilter + $" or (_adoxio_application_value eq {applicationId} and (_adoxio_supersededby_value ne null or (_adoxio_supersededby_value eq null and adoxio_markedforremoval ne 1)))";
             }
             _logger.LogDebug("Account filter = " + accountFilter);
 
             try
             {
 
-
-                tiedHouseConnections = _dynamicsClient.Tiedhouseconnections.Get(filter: accountFilter).Value;
+                var expand = new List<string> { "adoxio_adoxio_tiedhouseconnection_adoxio_licence" };
+                tiedHouseConnections = _dynamicsClient.Tiedhouseconnections.Get(filter: accountFilter, expand: expand).Value;
 
                 foreach (var tiedHouse in tiedHouseConnections)
                 {
@@ -95,7 +97,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.LogError(httpOperationException, "Error updating tied house connections");
                 throw new Exception("Unable to add tied house connection");
             }
-
+            /* If connection is loaded that is updating existing record
+             Do not show existing record*/
             result = result
                 .Where(s => !supersededbyIds.Contains(s.id))
                 .ToList();
