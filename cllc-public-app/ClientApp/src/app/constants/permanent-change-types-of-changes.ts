@@ -219,7 +219,12 @@ export const permanentChangeTypesOfChanges: PermanentChangeTypesOfChangesOption[
     CannabisFee: 220,
     LiquorFee: 220,
     helpTextHeader: 'Use this option to report:',
-    helpText: ['Upon the death, bankruptcy or receivership of a licensee']
+    helpText: [
+      'When a Tied House relationship is formed, and is not reported through one of the above options.',
+      'Ex: A new director has a Tied House relationship. If you are required to report a Change of Directors or Officers, then you do not need to report this application as well.',
+      'Generally, tied house relationships between licensees (specifically liquor primary, food primary, private liquor/wine store, or the business location of a caterer) and manufacturers or agents are prohibited under the <a href="https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/15019#section62" target="_blank">LCLA</a>.',
+      '“Tied house” refers to a relationship between a manufacturer/agent and another licensee if the relationship puts the licensee in the position of being likely to promote the sale of that manufacturer’s/agent’s liquor products over another manufacturer.'
+    ]
     //helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
   }
 ];
