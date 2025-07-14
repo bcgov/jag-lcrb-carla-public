@@ -60,12 +60,12 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
         this.updateGroupedTiedHouseDeclarations();
       },
       error: (error) => {
-        console.error('Error loading tied house data', error);
+        console.error('Error loading Tied House data', error);
         this.matDialog.open(GenericMessageDialogComponent, {
           data: {
             title: 'Error Loading Tied House Form Data',
             message:
-              'Failed to load tied house form data. Please try again. If the problem persists, please contact support.',
+              'Failed to load Tied House form data. Please try again. If the problem persists, please contact support.',
             closeButtonText: 'Close'
           }
         });
