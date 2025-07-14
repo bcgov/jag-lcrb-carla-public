@@ -85,3 +85,19 @@ td {
 ::ng-deep .mat-expansion-panel-header .mat-expansion-indicator::after {
   transform-origin: center !important;
 }
+
+// Add new declaration buttons
+
+.add-new-declaration-button {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: -1rem; // Adjusted to align button text with the section
+}
+
+.add-new-declaration-button:disabled {
+  background-color: transparent;
+  color: inherit;
+  opacity: 0.65;
+  cursor: not-allowed;
+  border: none;
+}

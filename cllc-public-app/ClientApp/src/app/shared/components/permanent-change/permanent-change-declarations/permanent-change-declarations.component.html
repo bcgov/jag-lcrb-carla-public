@@ -13,7 +13,7 @@
       [valid]="!showValidationMessages || form.get('authorizedToSubmit').valid"
       errorMessage="Please affirm that you are authorized to submit the application."
       [showChevrons]="false">
-      <mat-checkbox formControlName="authorizedToSubmit">
+      <mat-checkbox formControlName="authorizedToSubmit" class="text-wrap">
         <span class="error-states">*</span>
         I understand and affirm that I am authorized to submit the application.
       </mat-checkbox>
@@ -34,7 +34,7 @@
       [valid]="!showValidationMessages || form.get('signatureAgreement').valid"
       errorMessage="Please affirm that all of the information provided for this application is true and complete."
       [showChevrons]="false">
-      <mat-checkbox formControlName="signatureAgreement">
+      <mat-checkbox formControlName="signatureAgreement" class="text-wrap">
         <span class="error-states">*</span>
         I understand and affirm that all of the information provided for this application is true and complete.
       </mat-checkbox>

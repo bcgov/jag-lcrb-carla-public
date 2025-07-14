@@ -1,14 +1,14 @@
 <form [formGroup]="form">
   <div>
-    <div class="mb-2">
-      <p>
+    <div>
+      <p class="m-0">
         Do you or any of your shareholders, directors, or officers have any amount of interest in another B.C. liquor
         licence, or any association with a third party operator for another liquor licence, or have an immediate family
         member (spouse, parent, sibling, or child) with any amount of interest in another liquor licence?
       </p>
     </div>
 
-    <div class="mb-2">
+    <div *ngIf="groupedTiedHouseDeclarations.length > 0" class="mt-3">
       <mat-accordion>
         <mat-expansion-panel
           class="th-accordian"
@@ -56,15 +56,23 @@
                   </td>
                   <td>
                     <div class="existing-declaration-buttons">
-                      <button
-                        *ngIf="!_tiedHouseDeclaration.markedForRemoval"
-                        class="btn btn-primary btn-md"
-                        type="button"
-                        (click)="
-                          changeDeclarationViewMode(TiedHouseViewMode.editExistingRecord, _tiedHouseDeclaration, true)
+                      <span
+                        [title]="
+                          hasInProgressDeclarations()
+                            ? 'You can only add or edit one tied house declaration at a time'
+                            : 'Edit tied house declaration'
                         ">
-                        Edit
-                      </button>
+                        <button
+                          *ngIf="!_tiedHouseDeclaration.markedForRemoval"
+                          class="btn btn-primary btn-md"
+                          type="button"
+                          [disabled]="hasInProgressDeclarations()"
+                          (click)="
+                            changeDeclarationViewMode(TiedHouseViewMode.editExistingRecord, _tiedHouseDeclaration, true)
+                          ">
+                          Edit
+                        </button>
+                      </span>
                       <button
                         *ngIf="!_tiedHouseDeclaration.markedForRemoval"
                         class="btn btn-danger btn-md"
@@ -75,7 +83,7 @@
                       <button
                         *ngIf="_tiedHouseDeclaration.markedForRemoval"
                         class="btn btn-link"
-                        (click)="undoRemoveExistingTiedHouseDeclaration(_tiedHouseDeclaration)">
+                        (click)="restoreExistingTiedHouseDeclaration(_tiedHouseDeclaration)">
                         Restore
                       </button>
                     </div>
@@ -110,13 +118,22 @@
               </ng-container>
             </tbody>
           </table>
-          <div class="mt-2 mb-2" *ngIf="_tiedHouseDeclarations[0] !== NEW_DECLARATION_KEY">
-            <button
-              class="btn btn-link pl-0"
-              (click)="addNewTiedHouseRelationship(_tiedHouseDeclarations[1][0], tiedHouseDeclarationsIndex)">
-              <fa-icon [icon]="faPlus" class="pr-2"></fa-icon>Add New Tied House for {{ _tiedHouseDeclarations[0] }}
-            </button>
-            <p>
+          <div *ngIf="_tiedHouseDeclarations[0] !== NEW_DECLARATION_KEY">
+            <span
+              [title]="
+                hasInProgressDeclarations()
+                  ? 'You can only add or edit one tied house declaration at a time'
+                  : 'Add a new related tied house declaration'
+              ">
+              <button
+                class="btn btn-link add-new-declaration-button"
+                [disabled]="hasInProgressDeclarations()"
+                (click)="addNewTiedHouseRelationship(_tiedHouseDeclarations[1][0], tiedHouseDeclarationsIndex)">
+                <fa-icon [icon]="faPlusSquare" class="pr-2"></fa-icon>Add New Tied House for
+                {{ _tiedHouseDeclarations[0] }}
+              </button>
+            </span>
+            <p class="m-0">
               By submitting this information, you agree that a Tied House has been declared with the aforementioned
               information and will become date tied to both yours and your establishment s file.
             </p>
@@ -125,15 +142,24 @@
       </mat-accordion>
     </div>
 
-    <div class="mt-2 mb-2">
-      <button class="btn btn-link pl-0" (click)="addNewTiedHouse()">
-        <fa-icon [icon]="faPlus" class="pr-2"></fa-icon>Add New Tied House
-      </button>
-    </div>
-
     <div>
-      By submitting this information, you agree that a Tied House has been declared with the aforementioned information
-      and will become date tied to both yours and your establishment s file.
+      <span
+        [title]="
+          hasInProgressDeclarations()
+            ? 'You can only add or edit one tied house declaration at a time'
+            : 'Add a new tied house declaration'
+        ">
+        <button
+          class="btn btn-link add-new-declaration-button"
+          [disabled]="hasInProgressDeclarations()"
+          (click)="addNewTiedHouse()">
+          <fa-icon [icon]="faPlusSquare" class="pr-2"></fa-icon>Add New Tied House
+        </button>
+      </span>
+      <p class="m-0">
+        By submitting this information, you agree that a Tied House has been declared with the aforementioned
+        information and will become date tied to both yours and your establishment s file.
+      </p>
     </div>
     <!-- Tempory for dev -->
     <!-- <pre>grouped tiedHouseDeclarations <br/>{{ groupedTiedHouseDeclarations | json }}</pre> -->

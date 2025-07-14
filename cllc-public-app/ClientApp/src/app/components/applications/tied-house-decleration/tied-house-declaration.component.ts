@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { formatDate } from '@components/applications/tied-house-decleration/tide-house-utils';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlusSquare } from '@fortawesome/free-regular-svg-icons';
 import {
   RelationshipTypes,
   TiedHouseConnection,
@@ -31,7 +31,7 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
 
   openedPanelIndex: number | null = null;
 
-  faPlus = faPlus;
+  faPlusSquare = faPlusSquare;
 
   constructor(
     private tiedHouseService: TiedHouseConnectionsDataService,
@@ -47,14 +47,16 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
   loadData() {
     this.tiedHouseService.getAllTiedHouses(this.applicationId).subscribe({
       next: (data) => {
-        this.tiedHouseDeclarations = data;
-        this.tiedHouseDeclarations.forEach((item) => {
-          if (item.statusCode == TiedHouseStatusCode.new && !item.markedForRemoval) {
+        this.tiedHouseDeclarations = data.map((item) => {
+          // TODO will declarations fetched from the API ever be `new`?
+          if (item.statusCode === TiedHouseStatusCode.new && !item.markedForRemoval) {
             item.viewMode = TiedHouseViewMode.disabled;
           } else {
             item.viewMode = TiedHouseViewMode.existing;
           }
+          return item;
         });
+
         this.updateGroupedTiedHouseDeclarations();
       },
       error: (error) => {
@@ -71,6 +73,12 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
     });
   }
 
+  /**
+   * Flattens the `groupedTiedHouseDeclarations` into a single array of `TiedHouseConnection` records.
+   *
+   * @readonly
+   * @type {TiedHouseConnection[]}
+   */
   get flatDeclarations(): TiedHouseConnection[] {
     return this.groupedTiedHouseDeclarations.reduce((acc, [_, declarations]) => acc.concat(declarations), []);
   }
@@ -91,7 +99,8 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
   }
 
   /**
-   * Add a new Tied House declaration, which is related to an existing declaration.
+   * Add a new Tied House declaration, which is related to an existing declaration. A related declaration will
+   * automatically inherit some of the details from the related declaration.
    *
    * @param {TiedHouseConnection} relatedDeclaration
    * @param {number} groupedTiedHouseDeclarationsIndex
@@ -116,6 +125,38 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
     this.openPanel(groupedTiedHouseDeclarationsIndex);
   }
 
+  /**
+   * Checks if any Tied House declarations are in the process of being added or edited.
+   *
+   * We want to limit the number of in-progress declarations to one at a time.
+   *
+   * This is to prevent too many in-progress form elements from being created at once, which is particularly important
+   * for new related declarations, as they need to inherit some details from a completed declaration.
+   *
+   * @return {*}  {boolean}
+   */
+  hasInProgressDeclarations(): boolean {
+    // Return true if there are any declarations that are in the process of being added or edited.
+    const x = this.tiedHouseDeclarations.some((declaration) =>
+      [TiedHouseViewMode.new, TiedHouseViewMode.addNewRelationship, TiedHouseViewMode.editExistingRecord].includes(
+        declaration.viewMode
+      )
+    );
+
+    console.log('hasInProgressDeclarations', x);
+    return x;
+  }
+
+  /**
+   * Changes the view mode of a Tied House declaration.
+   * Additionally updates the status code, if `isNew` is provided.
+   *
+   * @param {TiedHouseViewMode} viewMode
+   * @param {TiedHouseConnection} declaration
+   * @param {boolean} [isNew] If provided, and set to `true`, the status code will be set to `TiedHouseStatusCode.new`.
+   * If set to `false`, the status code will be set to `TiedHouseStatusCode.existing`. If not provided, the status code
+   * will not be changed.
+   */
   changeDeclarationViewMode(viewMode: TiedHouseViewMode, declaration: TiedHouseConnection, isNew?: boolean) {
     declaration.viewMode = viewMode;
     if (isNew === true) {
@@ -174,24 +215,31 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
   }
 
   /**
-   * Unmarks an existing Tied House declaration for removal.
+   * Restores an existing Tied House declaration that was marked for removal.
    * Does nothing if the declaration is not marked for removal.
    *
    * @param {TiedHouseConnection} declaration
    * @return {*}
    */
-  undoRemoveExistingTiedHouseDeclaration(declaration: TiedHouseConnection) {
+  restoreExistingTiedHouseDeclaration(declaration: TiedHouseConnection) {
     if (declaration.markedForRemoval === false) {
       // Already not marked for removal, nothing to do
       return;
     }
 
-    declaration.statusCode = TiedHouseStatusCode.new;
+    declaration.statusCode = TiedHouseStatusCode.existing;
     declaration.markedForRemoval = false;
   }
 
+  /**
+   * Given a group of Tied House declarations, checks if there are any declarations with
+   * `viewMode === TiedHouseViewMode.existing`.
+   *
+   * @param {TiedHouseConnection[]} group
+   * @return {*}  {boolean}
+   */
   hasExistingDeclarations(group: TiedHouseConnection[]): boolean {
-    return group.find((item) => item.viewMode == TiedHouseViewMode.existing) != undefined;
+    return group.find((item) => item.viewMode === TiedHouseViewMode.existing) != undefined;
   }
 
   /**
@@ -203,10 +251,22 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
     this.openedPanelIndex = index ?? this.groupedTiedHouseDeclarations.length - 1;
   }
 
+  /**
+   * Give a `relationshipToLicence` value, returns the corresponding `RelationshipTypes` enum name.
+   *
+   * @param {number} value
+   * @return {*}  {(string | undefined)}
+   */
   getRelationshipName(value: number): string | undefined {
-    return RelationshipTypes.find((item) => item.value == value)?.name;
+    return RelationshipTypes.find((item) => item.value === value)?.name;
   }
 
+  /**
+   * Given a group index, checks if that group has at least one declaration, that is not hidden.
+   *
+   * @param {number} groupIndex
+   * @return {*}  {boolean}
+   */
   doesGroupHaveAtLeastOneDeclaration(groupIndex: number): boolean {
     const group = this.groupedTiedHouseDeclarations[groupIndex];
 
@@ -217,6 +277,12 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
     return group[1].some((declaration) => declaration.viewMode != TiedHouseViewMode.hidden);
   }
 
+  /**
+   * Given a Tied House declaration for a Legal Entity, returns a unique key.
+   *
+   * @param {TiedHouseConnection} declaration
+   * @return {*}  {string}
+   */
   private getLegalEntityKey(declaration: TiedHouseConnection): string {
     if (!declaration.legalEntityName) {
       return NEW_DECLARATION_KEY;
@@ -225,6 +291,12 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
     return declaration.legalEntityName;
   }
 
+  /**
+   * Given an Tied House declaration for an Individual, returns a unique key.
+   *
+   * @param {TiedHouseConnection} declaration
+   * @return {*}  {string}
+   */
   private getIndividualKey(declaration: TiedHouseConnection): string {
     if (!declaration.firstName || !declaration.dateOfBirth) {
       return NEW_DECLARATION_KEY;
@@ -233,7 +305,13 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
     return `${declaration.firstName} ${declaration.middleName || ''} ${declaration.lastName} - ${formatDate(declaration.dateOfBirth)}`;
   }
 
-  private getGroupedTiedHouseKey(declaration: TiedHouseConnection): string {
+  /**
+   * Given a Tied House declaration, returns a unique key.
+   *
+   * @param {TiedHouseConnection} declaration
+   * @return {*}  {string}
+   */
+  getGroupedTiedHouseKey(declaration: TiedHouseConnection): string {
     if (declaration.isLegalEntity) {
       return this.getLegalEntityKey(declaration);
     }
@@ -241,7 +319,11 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
     return this.getIndividualKey(declaration);
   }
 
-  private updateGroupedTiedHouseDeclarations() {
+  /**
+   * Updates the `groupedTiedHouseDeclarations` property based on the current `tiedHouseDeclarations`.
+   *
+   */
+  updateGroupedTiedHouseDeclarations() {
     const grouped = this.tiedHouseDeclarations
       .filter((item) => item.viewMode != TiedHouseViewMode.hidden)
       ?.reduce(
