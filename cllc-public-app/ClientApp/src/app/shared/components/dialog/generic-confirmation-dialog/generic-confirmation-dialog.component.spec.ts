@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CancelDialogComponent } from '@components/police-representative/police-summary/cancel-dialog/cancel-dialog.component';
+import { GenericConfirmationDialogComponent } from '@shared/components/dialog/generic-confirmation-dialog/generic-confirmation-dialog.component';
 
-describe('CancelDialogComponent', () => {
-  let component: CancelDialogComponent;
-  let fixture: ComponentFixture<CancelDialogComponent>;
+describe('GenericConfirmationDialogComponent', () => {
+  let component: GenericConfirmationDialogComponent;
+  let fixture: ComponentFixture<GenericConfirmationDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CancelDialogComponent]
+      declarations: [GenericConfirmationDialogComponent]
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CancelDialogComponent);
+    fixture = TestBed.createComponent(GenericConfirmationDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

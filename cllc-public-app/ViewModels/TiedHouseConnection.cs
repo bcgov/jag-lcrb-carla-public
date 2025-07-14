@@ -66,8 +66,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public List<RelatedLicence> AssociatedLiquorLicense { get; set; }
 
-        public bool RemoveExistingLicense { get; set; } = false;
-
         public string LegalEntityName { get; set; }
 
         public string RelationshipToLicense { get; set; }

@@ -1,4 +1,4 @@
-import { RelatedLicence } from "./related-licence";
+import { RelatedLicence } from './related-licence';
 
 export class TiedHouseConnection {
   id: string;
@@ -42,36 +42,61 @@ export class TiedHouseConnection {
   lastName: string;
   relationshipToLicence: string;
   associatedLiquorLicense: RelatedLicence[];
-  removeExistingLicense: boolean = false;
   viewMode: number;
   legalEntityName: string;
   otherDescription: string;
   businessType: string;
   statusCode: number = TiedHouseStatusCode.new;
   supersededById: string;
-  markedForRemoval: boolean
+
+  /**
+   * Indicates that an existing tied house declartion record is marked for removal.
+   */
+  markedForRemoval: boolean;
 }
 
 export enum TiedHouseViewMode {
-    new = 1,
-    readonly = 2,
-    existing = 3,
-    disabled = 4,
-    addNewRelationship = 5,
-    editExistingRecord = 6,
-    hidden = 7
+  /**
+   * The record is new and is editable.
+   */
+  new = 1,
+  /**
+   * The record was previously persisted to dynamics, and is being displayed in a non-editable format.
+   */
+  existing = 3,
+  /**
+   * The record is not editable.
+   */
+  disabled = 4,
+  /**
+   * The record is new and is partially editable.
+   * The record is related to an existing record, and so not all fields are editable.
+   */
+  addNewRelationship = 5,
+  /**
+   * The record was previously persisted to dynamics, and is being edited.
+   */
+  editExistingRecord = 6,
+  /**
+   * The record is hidden (not displayed in the UI).
+   */
+  hidden = 7
 }
 
-export enum TiedHouseStatusCode{
-    new = 1,
-    ready = 845280000,
-    existing = 845280001,
-    inactive = 2
-}        
+export enum TiedHouseStatusCode {
+  /**
+   * The record is new (not yet persisted).
+   */
+  new = 1,
+  /**
+   * The record is existing (has previously been persisted).
+   */
+  existing = 845280001
+}
 
 export const TiedHouseTypes = [
-    { name: "Individual", value: false },
-    { name: "Legal Entity", value: true}
+  { name: 'Individual', value: false },
+  { name: 'Legal Entity', value: true }
 ];
 
 export const RelationshipTypes = [

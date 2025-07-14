@@ -14,9 +14,12 @@
         [ngModelOptions]="{ standalone: true }"
         class="d-flex flex-column">
         <mat-radio-button [value]="true" class="p-2">
-          I would like to update my Tied House relationships
+          I would like to declare a new Tied House relationship or update my Tied House relationships
         </mat-radio-button>
-        <mat-radio-button [value]="false" class="p-2"> I have no Tied House relationships to declare </mat-radio-button>
+        <mat-radio-button [value]="false" class="p-2">
+          I have no new Tied House relationships to declare or I'm unsure if I have any new Tied House relationships to
+          declare
+        </mat-radio-button>
       </mat-radio-group>
     </app-field>
   </div>

@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { MatDialog } from '@angular/material/dialog';
+import { formatDate } from '@components/applications/tied-house-decleration/tide-house-utils';
+import { faPlusSquare } from '@fortawesome/free-regular-svg-icons';
 import {
   RelationshipTypes,
   TiedHouseConnection,
@@ -7,7 +9,10 @@ import {
   TiedHouseViewMode
 } from '@models/tied-house-connection.model';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
+import { GenericMessageDialogComponent } from '@shared/components/dialog/generic-message-dialog/generic-message-dialog.component';
 import { FormBase } from '@shared/form-base';
+
+const NEW_DECLARATION_KEY = 'New Declaration';
 
 @Component({
   selector: 'app-tied-house-declaration',
@@ -16,19 +21,22 @@ import { FormBase } from '@shared/form-base';
 })
 export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
   @Input() applicationId: string;
+
   tiedHouseConnections: TiedHouseConnection[];
 
   tiedHouseDeclarations: TiedHouseConnection[] = [];
   groupedTiedHouseDeclarations: [string, TiedHouseConnection[]][] = [];
+
   TiedHouseViewMode = TiedHouseViewMode;
+
   openedPanelIndex: number | null = null;
-  faPlus = faPlus;
 
-  get flatDeclarations(): TiedHouseConnection[] {
-    return this.groupedTiedHouseDeclarations.reduce((acc, [_, declarations]) => acc.concat(declarations), []);
-  }
+  faPlusSquare = faPlusSquare;
 
-  constructor(private tiedHouseService: TiedHouseConnectionsDataService) {
+  constructor(
+    private tiedHouseService: TiedHouseConnectionsDataService,
+    private matDialog: MatDialog
+  ) {
     super();
   }
 
@@ -36,23 +44,119 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
     this.loadData();
   }
 
-  addNewTiedHouse(viewMode: TiedHouseViewMode, declaration?: TiedHouseConnection, index?: number) {
-    var newTiedHouseDeclaration = new TiedHouseConnection();
-    newTiedHouseDeclaration.isLegalEntity = false;
-    if (declaration) {
-      newTiedHouseDeclaration.firstName = declaration.firstName;
-      newTiedHouseDeclaration.lastName = declaration.lastName;
-      newTiedHouseDeclaration.middleName = declaration.middleName;
-      newTiedHouseDeclaration.dateOfBirth = declaration.dateOfBirth;
-      newTiedHouseDeclaration.isLegalEntity = declaration.isLegalEntity;
-    }
-    newTiedHouseDeclaration.viewMode = viewMode;
-    this.tiedHouseDeclarations.push(newTiedHouseDeclaration);
-    this.updateTiedHouseDeclarations();
+  loadData() {
+    this.tiedHouseService.getAllTiedHouses(this.applicationId).subscribe({
+      next: (data) => {
+        this.tiedHouseDeclarations = data.map((item) => {
+          // TODO will declarations fetched from the API ever be `new`?
+          if (item.statusCode === TiedHouseStatusCode.new && !item.markedForRemoval) {
+            item.viewMode = TiedHouseViewMode.disabled;
+          } else {
+            item.viewMode = TiedHouseViewMode.existing;
+          }
+          return item;
+        });
 
-    this.openPanel(index);
+        this.updateGroupedTiedHouseDeclarations();
+      },
+      error: (error) => {
+        console.error('Error loading tied house data', error);
+        this.matDialog.open(GenericMessageDialogComponent, {
+          data: {
+            title: 'Error Loading Tied House Form Data',
+            message:
+              'Failed to load tied house form data. Please try again. If the problem persists, please contact support.',
+            closeButtonText: 'Close'
+          }
+        });
+      }
+    });
   }
 
+  /**
+   * Flattens the `groupedTiedHouseDeclarations` into a single array of `TiedHouseConnection` records.
+   *
+   * @readonly
+   * @type {TiedHouseConnection[]}
+   */
+  get flatDeclarations(): TiedHouseConnection[] {
+    return this.groupedTiedHouseDeclarations.reduce((acc, [_, declarations]) => acc.concat(declarations), []);
+  }
+
+  /**
+   * Add a new Tied House declaration.
+   *
+   */
+  addNewTiedHouse() {
+    var newTiedHouseDeclaration = new TiedHouseConnection();
+    newTiedHouseDeclaration.isLegalEntity = false;
+    newTiedHouseDeclaration.viewMode = TiedHouseViewMode.new;
+
+    this.tiedHouseDeclarations.push(newTiedHouseDeclaration);
+    this.updateGroupedTiedHouseDeclarations();
+
+    this.openPanel();
+  }
+
+  /**
+   * Add a new Tied House declaration, which is related to an existing declaration. A related declaration will
+   * automatically inherit some of the details from the related declaration.
+   *
+   * @param {TiedHouseConnection} relatedDeclaration
+   * @param {number} groupedTiedHouseDeclarationsIndex
+   */
+  addNewTiedHouseRelationship(relatedDeclaration: TiedHouseConnection, groupedTiedHouseDeclarationsIndex: number) {
+    var newTiedHouseDeclaration = new TiedHouseConnection();
+    newTiedHouseDeclaration.isLegalEntity = false;
+    newTiedHouseDeclaration.viewMode = TiedHouseViewMode.addNewRelationship;
+
+    if (relatedDeclaration) {
+      // Update the new declaration with the related declaration's details
+      newTiedHouseDeclaration.firstName = relatedDeclaration.firstName;
+      newTiedHouseDeclaration.lastName = relatedDeclaration.lastName;
+      newTiedHouseDeclaration.middleName = relatedDeclaration.middleName;
+      newTiedHouseDeclaration.dateOfBirth = relatedDeclaration.dateOfBirth;
+      newTiedHouseDeclaration.isLegalEntity = relatedDeclaration.isLegalEntity;
+    }
+
+    this.tiedHouseDeclarations.push(newTiedHouseDeclaration);
+    this.updateGroupedTiedHouseDeclarations();
+
+    this.openPanel(groupedTiedHouseDeclarationsIndex);
+  }
+
+  /**
+   * Checks if any Tied House declarations are in the process of being added or edited.
+   *
+   * We want to limit the number of in-progress declarations to one at a time.
+   *
+   * This is to prevent too many in-progress form elements from being created at once, which is particularly important
+   * for new related declarations, as they need to inherit some details from a completed declaration.
+   *
+   * @return {*}  {boolean}
+   */
+  hasInProgressDeclarations(): boolean {
+    // Return true if there are any declarations that are in the process of being added or edited.
+    const x = this.tiedHouseDeclarations.some((declaration) =>
+      [TiedHouseViewMode.new, TiedHouseViewMode.addNewRelationship, TiedHouseViewMode.editExistingRecord].includes(
+        declaration.viewMode
+      )
+    );
+
+    console.log('hasInProgressDeclarations', x);
+    return x;
+  }
+
+  /**
+   * Changes the view mode of a Tied House declaration.
+   * Additionally updates the status code, if `isNew` is provided.
+   *
+   * @param {TiedHouseViewMode} viewMode
+   * @param {TiedHouseConnection} declaration
+   * @param {boolean} [isNew] If provided, and set to `true`, the status code will be set to `TiedHouseStatusCode.new`.
+   * If set to `false`, the status code will be set to `TiedHouseStatusCode.existing`. If not provided, the status code
+   * will not be changed.
+   */
   changeDeclarationViewMode(viewMode: TiedHouseViewMode, declaration: TiedHouseConnection, isNew?: boolean) {
     declaration.viewMode = viewMode;
     if (isNew === true) {
@@ -63,87 +167,180 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
     }
   }
 
+  /**
+   * Saves/updates a Tied House declaration.
+   *
+   * @param {TiedHouseConnection} updated
+   * @param {TiedHouseConnection} original
+   */
   saveTiedHouseDeclaration(updated: TiedHouseConnection, original: TiedHouseConnection) {
     updated.viewMode = TiedHouseViewMode.disabled;
     Object.assign(original, updated);
-    this.updateTiedHouseDeclarations();
+    this.updateGroupedTiedHouseDeclarations();
   }
 
-  removeTiedHouseDeclaration(declaration: TiedHouseConnection, keepAccordionOpen: boolean, accordionIndex: number) {
+  /**
+   * Removes a new (non-existing) Tied House declaration.
+   *
+   * @param {TiedHouseConnection} declaration
+   * @param {boolean} keepAccordionOpen
+   * @param {number} accordionIndex
+   */
+  removeNewTiedHouseDeclaration(declaration: TiedHouseConnection, keepAccordionOpen: boolean, accordionIndex: number) {
     declaration.viewMode = TiedHouseViewMode.hidden;
     declaration.markedForRemoval = true;
-    if(keepAccordionOpen){
+
+    if (keepAccordionOpen) {
       this.openPanel(accordionIndex);
     }
-    this.updateTiedHouseDeclarations();
+
+    this.updateGroupedTiedHouseDeclarations();
   }
 
-  removeExistingTiedHouseDeclaration(declaration: TiedHouseConnection, remove: boolean) {
+  /**
+   * Marks an existing Tied House declaration for removal.
+   * Does nothing if the declaration is already marked for removal.
+   *
+   * @param {TiedHouseConnection} declaration
+   * @return {*}
+   */
+  removeExistingTiedHouseDeclaration(declaration: TiedHouseConnection) {
+    if (declaration.markedForRemoval === true) {
+      // Already marked for removal, nothing to do
+      return;
+    }
+
     declaration.statusCode = TiedHouseStatusCode.new;
-    declaration.markedForRemoval = remove;
+    declaration.markedForRemoval = true;
   }
 
+  /**
+   * Restores an existing Tied House declaration that was marked for removal.
+   * Does nothing if the declaration is not marked for removal.
+   *
+   * @param {TiedHouseConnection} declaration
+   * @return {*}
+   */
+  restoreExistingTiedHouseDeclaration(declaration: TiedHouseConnection) {
+    if (declaration.markedForRemoval === false) {
+      // Already not marked for removal, nothing to do
+      return;
+    }
+
+    declaration.statusCode = TiedHouseStatusCode.existing;
+    declaration.markedForRemoval = false;
+  }
+
+  /**
+   * Given a group of Tied House declarations, checks if there are any declarations with
+   * `viewMode === TiedHouseViewMode.existing`.
+   *
+   * @param {TiedHouseConnection[]} group
+   * @return {*}  {boolean}
+   */
   hasExistingDeclarations(group: TiedHouseConnection[]): boolean {
-    return group.find((d) => d.viewMode == TiedHouseViewMode.existing) != undefined;
+    return group.find((item) => item.viewMode === TiedHouseViewMode.existing) != undefined;
   }
 
+  /**
+   * Open the panel for a specific index or the last index of `groupedTiedHouseDeclarations` if no index is provided.
+   *
+   * @param {number} [index]
+   */
   openPanel(index?: number) {
     this.openedPanelIndex = index ?? this.groupedTiedHouseDeclarations.length - 1;
   }
 
-  loadData() {
-    this.tiedHouseService.getAllTiedHouses(this.applicationId).subscribe((data) => {
-      this.tiedHouseDeclarations = data;
-      this.tiedHouseDeclarations.forEach((th) => {
-        if (th.statusCode == TiedHouseStatusCode.new && !th.markedForRemoval ) {
-          th.viewMode = TiedHouseViewMode.disabled;
-        } else {
-          th.viewMode = TiedHouseViewMode.existing;
-        }
-      });
-      this.updateTiedHouseDeclarations();
-    });
+  /**
+   * Give a `relationshipToLicence` value, returns the corresponding `RelationshipTypes` enum name.
+   *
+   * @param {number} value
+   * @return {*}  {(string | undefined)}
+   */
+  getRelationshipName(value: number): string | undefined {
+    return RelationshipTypes.find((item) => item.value === value)?.name;
   }
 
-  getRelationshipName(value: number) {
-    return RelationshipTypes.find((o) => o.value == value).name;
+  /**
+   * Given a group index, checks if that group has at least one declaration, that is not hidden.
+   *
+   * @param {number} groupIndex
+   * @return {*}  {boolean}
+   */
+  doesGroupHaveAtLeastOneDeclaration(groupIndex: number): boolean {
+    const group = this.groupedTiedHouseDeclarations[groupIndex];
+
+    if (!group) {
+      return false;
+    }
+
+    return group[1].some((declaration) => declaration.viewMode != TiedHouseViewMode.hidden);
   }
 
-  private updateTiedHouseDeclarations() {
-    const grouped = this.tiedHouseDeclarations.filter(th=> th.viewMode != TiedHouseViewMode.hidden)?.reduce(
-      (acc, declaration) => {
-        var key = '';
-        if (declaration.isLegalEntity == false) {
-          if (!declaration.firstName || !declaration.dateOfBirth) {
-            key = 'New Declaration';
-          } else {
-            key = `${declaration.firstName} ${declaration.middleName} ${declaration.lastName} -${this.formatDate(declaration.dateOfBirth)}`;
-          }
-        } else {
-          if (!declaration.legalEntityName) {
-            key = 'New Declaration';
-          } else {
-            key = `${declaration.legalEntityName}`;
-          }
-        }
+  /**
+   * Given a Tied House declaration for a Legal Entity, returns a unique key.
+   *
+   * @param {TiedHouseConnection} declaration
+   * @return {*}  {string}
+   */
+  private getLegalEntityKey(declaration: TiedHouseConnection): string {
+    if (!declaration.legalEntityName) {
+      return NEW_DECLARATION_KEY;
+    }
 
-        if (!acc[key]) {
-          acc[key] = [];
-        }
+    return declaration.legalEntityName;
+  }
 
-        acc[key].push(declaration);
-        return acc;
-      },
-      {} as Record<string, TiedHouseConnection[]>
-    );
+  /**
+   * Given an Tied House declaration for an Individual, returns a unique key.
+   *
+   * @param {TiedHouseConnection} declaration
+   * @return {*}  {string}
+   */
+  private getIndividualKey(declaration: TiedHouseConnection): string {
+    if (!declaration.firstName || !declaration.dateOfBirth) {
+      return NEW_DECLARATION_KEY;
+    }
+
+    return `${declaration.firstName} ${declaration.middleName || ''} ${declaration.lastName} - ${formatDate(declaration.dateOfBirth)}`;
+  }
+
+  /**
+   * Given a Tied House declaration, returns a unique key.
+   *
+   * @param {TiedHouseConnection} declaration
+   * @return {*}  {string}
+   */
+  getGroupedTiedHouseKey(declaration: TiedHouseConnection): string {
+    if (declaration.isLegalEntity) {
+      return this.getLegalEntityKey(declaration);
+    }
+
+    return this.getIndividualKey(declaration);
+  }
+
+  /**
+   * Updates the `groupedTiedHouseDeclarations` property based on the current `tiedHouseDeclarations`.
+   *
+   */
+  updateGroupedTiedHouseDeclarations() {
+    const grouped = this.tiedHouseDeclarations
+      .filter((item) => item.viewMode != TiedHouseViewMode.hidden)
+      ?.reduce(
+        (acc, declaration) => {
+          var key = this.getGroupedTiedHouseKey(declaration);
+
+          if (!acc[key]) {
+            acc[key] = [];
+          }
+
+          acc[key].push(declaration);
+
+          return acc;
+        },
+        {} as Record<string, TiedHouseConnection[]>
+      );
 
     this.groupedTiedHouseDeclarations = Object.entries(grouped);
-  }
-
-  private formatDate(dateString: string | null | undefined): string | null {
-    if (!dateString?.trim()) return null;
-
-    const date = new Date(dateString);
-    return isNaN(date.getTime()) ? null : date.toISOString().split('T')[0];
   }
 }

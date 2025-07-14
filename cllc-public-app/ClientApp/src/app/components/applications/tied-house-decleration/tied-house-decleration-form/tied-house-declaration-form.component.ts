@@ -1,9 +1,16 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { formatDate } from '@components/applications/tied-house-decleration/tide-house-utils';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import {
+  BusinessTypes,
+  RelationshipTypes,
+  TiedHouseConnection,
+  TiedHouseStatusCode,
+  TiedHouseTypes,
+  TiedHouseViewMode
+} from '@models/tied-house-connection.model';
 import { FormBase } from '@shared/form-base';
-import { faTrash } from
-  "@fortawesome/free-solid-svg-icons";
-import { BusinessTypes, RelationshipTypes, TiedHouseConnection, TiedHouseStatusCode, TiedHouseTypes, TiedHouseViewMode } from '@models/tied-house-connection.model';
 
 @Component({
   selector: 'app-tied-house-declaration-form',
@@ -11,16 +18,7 @@ import { BusinessTypes, RelationshipTypes, TiedHouseConnection, TiedHouseStatusC
   styleUrls: ['./tied-house-declaration-form.component.scss']
 })
 export class TiedHouseDeclarationFormComponent extends FormBase implements OnInit {
-  _tiedHouseDecleration = {} as TiedHouseConnection;
-  showOtherField = false;
-  faTrash = faTrash;
-  isEditable = true;
-  tiedHouseTypes = TiedHouseTypes;
-  relationshipTypes = RelationshipTypes;
-  businessTypes = BusinessTypes;
-
-  @Input()
-  set tiedHouseDecleration(val: TiedHouseConnection) {
+  @Input() set tiedHouseDecleration(val: TiedHouseConnection) {
     this._tiedHouseDecleration = val;
     this.tryPatchForm();
   }
@@ -28,18 +26,27 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
   @Output() saveTiedHouseDecclaration: EventEmitter<TiedHouseConnection> = new EventEmitter<TiedHouseConnection>();
   @Output() removeTiedHouseDeclaration: EventEmitter<any> = new EventEmitter<any>();
   @Output() cancelTiedHouseDeclaration: EventEmitter<any> = new EventEmitter<any>();
-  get associatedLiquorLicenses(): FormArray {
-    return this.form.get('associatedLiquorLicense') as FormArray;
-  }
+
+  _tiedHouseDecleration = {} as TiedHouseConnection;
+
+  faTrash = faTrash;
+
+  tiedHouseTypes = TiedHouseTypes;
+  relationshipTypes = RelationshipTypes;
+  businessTypes = BusinessTypes;
+
+  showOtherField = false;
+  isEditable = true;
+
   constructor(private fb: FormBuilder) {
     super();
   }
-  ngOnInit(): void {
 
-    this.form.get('relationshipToLicence')?.valueChanges.subscribe(value => {
+  ngOnInit(): void {
+    this.form.get('relationshipToLicence')?.valueChanges.subscribe((value) => {
       this.showOtherField = value == 845280002;
       this.updateFieldValidators();
-    })
+    });
 
     this.form.get('isLegalEntity')?.valueChanges.subscribe(() => {
       this.updateFieldValidators();
@@ -54,28 +61,66 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
     this.updateFieldValidators();
   }
 
+  private tryPatchForm() {
+    if (!this.form) {
+      this.form = this.fb.group({
+        isLegalEntity: [false, [Validators.required]],
+        dateOfBirth: [''],
+        firstName: [''],
+        middleName: [''],
+        lastName: [''],
+        businessType: [''],
+        legalEntityName: [''],
+        relationshipToLicence: ['', [Validators.required]],
+        associatedLiquorLicense: this.fb.array([], this.requiredFormArray),
+        otherDescription: ['', [Validators.required]],
+        autocompleteInput: ['']
+      });
+
+      if (this._tiedHouseDecleration) {
+        this.setFormState(this._tiedHouseDecleration.viewMode);
+        this._tiedHouseDecleration.dateOfBirth = formatDate(this._tiedHouseDecleration.dateOfBirth);
+        this.form.patchValue(this._tiedHouseDecleration);
+        this.updateAssociatedLicenses(this._tiedHouseDecleration.associatedLiquorLicense || []);
+      }
+
+      this.updateFieldValidators();
+    }
+  }
+
+  get associatedLiquorLicenses(): FormArray {
+    return this.form.get('associatedLiquorLicense') as FormArray;
+  }
+
   updateAssociatedLicenses(associatedLiquorLicense: any[]) {
     this.associatedLiquorLicenses.clear();
-    associatedLiquorLicense.forEach(licence => {
+
+    associatedLiquorLicense.forEach((licence) => {
       this.associatedLiquorLicenses.push(this.fb.control(licence));
     });
   }
 
   save() {
     this.form.markAllAsTouched();
-    if (this.form.valid) {
-      const tiedHouse: TiedHouseConnection = {
-        ...this.form.value
-      };
-      this.saveTiedHouseDecclaration.emit(tiedHouse);
+
+    if (!this.form.valid) {
+      return;
     }
+
+    const tiedHouse: TiedHouseConnection = { ...this.form.value };
+
+    this.saveTiedHouseDecclaration.emit(tiedHouse);
   }
 
   cancel() {
-    if (this._tiedHouseDecleration.viewMode == TiedHouseViewMode.new || this._tiedHouseDecleration.viewMode == TiedHouseViewMode.addNewRelationship) {
+    if (
+      this._tiedHouseDecleration.viewMode == TiedHouseViewMode.new ||
+      this._tiedHouseDecleration.viewMode == TiedHouseViewMode.addNewRelationship
+    ) {
+      // If the declaration is new or in add relationship mode, we remove it as it has not yet been persisted.
       this.remove();
-    }
-    else {
+    } else {
+      // If the declaration is existing, we reset the view mode and status code to existing (aka: stop editing).
       this._tiedHouseDecleration.viewMode = TiedHouseViewMode.existing;
       this._tiedHouseDecleration.statusCode = TiedHouseStatusCode.existing;
     }
@@ -88,7 +133,7 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
   getInvalidControls(form: FormGroup | FormArray, parentKey: string = ''): string[] {
     let invalidControls: string[] = [];
 
-    Object.keys(form.controls).forEach(key => {
+    Object.keys(form.controls).forEach((key) => {
       const control = form.get(key);
       const controlPath = parentKey ? `${parentKey}.${key}` : key;
 
@@ -102,58 +147,33 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
     return invalidControls;
   }
 
+  private updateLegalEntityFieldValidators() {
+    this.form.get('firstName')?.clearValidators();
+    this.form.get('middleName')?.clearValidators();
+    this.form.get('lastName')?.clearValidators();
+    this.form.get('dateOfBirth')?.clearValidators();
+    this.form.get('businessType')?.setValidators(Validators.required);
+    this.form.get('legalEntityName')?.setValidators(Validators.required);
+  }
 
-  private tryPatchForm() {
-    if (!this.form) {
-      this.form = this.fb.group({
-        isLegalEntity: [false, [Validators.required]],
-        dateOfBirth: [""],
-        firstName: [""],
-        middleName: [""],
-        lastName: [""],
-        businessType: [""],
-        legalEntityName: [""],
-        relationshipToLicence: ["", [Validators.required]],
-        associatedLiquorLicense: this.fb.array([], this.requiredFormArray),
-        otherDescription: ["", [Validators.required]],
-        autocompleteInput: [""]
-      });
+  private updateIndividualFieldValidators() {
+    this.form.get('firstName')?.setValidators(Validators.required);
+    this.form.get('middleName')?.setValidators(Validators.required);
+    this.form.get('lastName')?.setValidators(Validators.required);
+    this.form.get('dateOfBirth')?.setValidators(Validators.required);
+    this.form.get('businessType')?.clearValidators();
+    this.form.get('legalEntityName')?.clearValidators();
+  }
 
-      if (this._tiedHouseDecleration) {
-        this.setFormState(this._tiedHouseDecleration.viewMode);
-        this._tiedHouseDecleration.dateOfBirth = this.formatDate(this._tiedHouseDecleration.dateOfBirth);
-        this.form.patchValue(this._tiedHouseDecleration);
-        this.updateAssociatedLicenses(this._tiedHouseDecleration.associatedLiquorLicense || []);
-      }
-      this.updateFieldValidators();
+  private updateOtherFieldValidators() {
+    if (this.showOtherField) {
+      this.form.get('otherDescription')?.setValidators(Validators.required);
+    } else {
+      this.form.get('otherDescription')?.clearValidators();
     }
   }
 
-  updateFieldValidators() {
-
-    if (this.form.get('isLegalEntity')?.value == false) {
-      this.form.get('firstName')?.setValidators(Validators.required);
-      this.form.get('middleName')?.setValidators(Validators.required);
-      this.form.get('lastName')?.setValidators(Validators.required);
-      this.form.get('dateOfBirth')?.setValidators(Validators.required);
-      this.form.get('businessType')?.clearValidators();
-      this.form.get('legalEntityName')?.clearValidators();
-    } else {
-      this.form.get('firstName')?.clearValidators();
-      this.form.get('middleName')?.clearValidators();
-      this.form.get('lastName')?.clearValidators();
-      this.form.get('dateOfBirth')?.clearValidators();
-      this.form.get('businessType')?.setValidators(Validators.required);
-      this.form.get('legalEntityName')?.setValidators(Validators.required);
-    }
-    if (this.showOtherField) {
-      this.form.get('otherDescription')?.setValidators(Validators.required);
-    }
-    else {
-      this.form.get('otherDescription')?.clearValidators();
-    }
-
-
+  private updateFieldValuesAndValidities() {
     this.form.get('firstName')?.updateValueAndValidity();
     this.form.get('middleName')?.updateValueAndValidity();
     this.form.get('lastName')?.updateValueAndValidity();
@@ -163,21 +183,44 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
     this.form.get('otherDescription')?.updateValueAndValidity();
   }
 
+  /**
+   * Update the form field values and validators based on the current state of the form.
+   *
+   */
+  updateFieldValidators() {
+    if (this.form.get('isLegalEntity')?.value == false) {
+      this.updateIndividualFieldValidators();
+    } else {
+      this.updateLegalEntityFieldValidators();
+    }
+
+    this.updateOtherFieldValidators();
+
+    this.updateFieldValuesAndValidities();
+  }
+
+  /**
+   * A custom validator to ensure that a FormArray control has at least one item.
+   * Marks the field as "required" if the control is not an array, or if it is empty.
+   *
+   * @param {AbstractControl} control
+   * @return {*}
+   */
   requiredFormArray(control: AbstractControl) {
     const isArray = Array.isArray(control?.value);
     const hasAtLeastOne = isArray && control.value.length > 0;
     return hasAtLeastOne ? null : { required: true };
   }
 
-  private formatDate(dateString: string | null | undefined): string | null {
-    if (!dateString?.trim()) return null;
-
-    const date = new Date(dateString);
-    return isNaN(date.getTime()) ? null : date.toISOString().split('T')[0];
-  }
-
+  /**
+   * Sets the form state based on the provided view mode.
+   *
+   * @private
+   * @param {*} viewMode
+   */
   private setFormState(viewMode) {
     this.form.enable();
+
     switch (viewMode) {
       case TiedHouseViewMode.disabled:
         this.form.disable();
@@ -191,16 +234,22 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
 
       case TiedHouseViewMode.addNewRelationship:
         this.form.disable();
-        this.form.get("relationshipToLicence")?.enable();
-        this.form.get("autocompleteInput")?.enable();
+        // A related record inherits some of the values of the related record, and so only a subset of fields are
+        // editable
+        this.form.get('relationshipToLicence')?.enable();
+        this.form.get('otherDescription')?.enable();
+        this.form.get('autocompleteInput')?.enable();
         this.isEditable = true;
         break;
+
       case TiedHouseViewMode.editExistingRecord:
         this.form.disable();
-        this.form.get("relationshipToLicence")?.enable();
-        this.form.get("autocompleteInput")?.enable();
+        this.form.get('relationshipToLicence')?.enable();
+        this.form.get('otherDescription')?.enable();
+        this.form.get('autocompleteInput')?.enable();
         this.isEditable = true;
         break;
+
       default:
         this.form.enable();
         break;

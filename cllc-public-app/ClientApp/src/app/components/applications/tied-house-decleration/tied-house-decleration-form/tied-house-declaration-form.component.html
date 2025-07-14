@@ -23,7 +23,7 @@
         label="First Name"
         [required]="true"
         [valid]="isValidOrNotTouched('firstName')"
-        errorMessage="First name is required">
+        errorMessage="First Name is required">
         <input
           class="form-control"
           style="width: 100%"
@@ -39,7 +39,7 @@
         label="Middle Name"
         [required]="true"
         [valid]="isValidOrNotTouched('middleName')"
-        errorMessage="Date of Birth is required">
+        errorMessage="Middle Name is required">
         <input
           class="form-control"
           style="width: 100%"
@@ -53,7 +53,7 @@
         label="Last Name"
         [required]="true"
         [valid]="isValidOrNotTouched('lastName')"
-        errorMessage="Last name is required">
+        errorMessage="Last Name is required">
         <input
           class="form-control"
           style="width: 100%"
@@ -98,8 +98,6 @@
         </option>
       </select>
     </app-field>
-    {{ _tiedHouseDecleration.viewMode }} view mode
-
     <app-field
       class="col-md-6"
       *ngIf="showOtherField"
@@ -108,10 +106,10 @@
       [valid]="!showOtherField || (showOtherField && isValidOrNotTouched('otherDescription'))"
       errorMessage="Relation description required">
       <textarea class="form-control" formControlName="otherDescription" rows="5"></textarea>
-      {{ form.get('otherDescription')?.valid }} {{ !form.get('otherDescription')?.touched }}1{{
+      <!-- Temporary for Dev -->
+      <!-- {{ form.get('otherDescription')?.valid }} {{ !form.get('otherDescription')?.touched }}1{{
         isValidOrNotTouched('otherDescription')
-      }}
-      2{{ !showOtherField }} 3 {{ !showOtherField || (showOtherField && isValidOrNotTouched('otherDescription')) }}
+      }} -->
     </app-field>
   </div>
 
@@ -133,9 +131,11 @@
 <pre>Tied House Connections {{tiedHouseConnections}}</pre> -->
   <!-- ------Footer------ -->
 
-  <div class="row justify-content-end mt-4">
+  <div class="row justify-content-end">
     <div class="col-auto" *ngIf="isEditable">
-      <button class="btn btn-link btn-cancel" (click)="cancel()"><fa-icon [icon]="faTrash"></fa-icon> CANCEL</button>
+      <button class="btn btn-link btn-cancel" (click)="cancel()">
+        <fa-icon [icon]="faTrash" class="mr-2"></fa-icon>CANCEL
+      </button>
     </div>
     <div class="col-auto" *ngIf="isEditable">
       <button class="btn btn-primary" type="button" (click)="save()">Save</button>

@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppState } from '@app/app-state/models/app-state';
@@ -13,6 +14,7 @@ import { TiedHouseViewMode } from '@models/tied-house-connection.model';
 import { Store } from '@ngrx/store';
 import { ApplicationDataService } from '@services/application-data.service';
 import { PaymentDataService } from '@services/payment-data.service';
+import { GenericMessageDialogComponent } from '@shared/components/dialog/generic-message-dialog/generic-message-dialog.component';
 import {
   ContactData,
   PermanentChangeContactComponent
@@ -32,10 +34,13 @@ export const SharepointNameRegex = /^[^~#%&*{}\\:<>?/+|""]*$/;
 export class PermanentChangeToALicenseeComponent extends FormBase implements OnInit {
   faQuestionCircle = faQuestionCircle;
   faIdCard = faIdCard;
+
   application: Application;
   liquorLicences: ApplicationLicenseSummary[] = [];
   cannabisLicences: ApplicationLicenseSummary[] = [];
   account: Account;
+  applicationContact: ContactData;
+
   businessType: string;
   submitApplicationInProgress: boolean;
   showValidationMessages: boolean;
@@ -43,13 +48,15 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
   dataLoaded: boolean;
   primaryPaymentInProgress: boolean;
   secondaryPaymentInProgress: boolean;
-  applicationContact: ContactData;
   verifyRquestMade: boolean;
   validationMessages: string[];
+
   @ViewChild('appContact')
   appContact: PermanentChangeContactComponent;
+
   @ViewChild('tiedHouseDeclaration')
   tiedHouseDeclaration: TiedHouseDeclarationComponent;
+
   appContactDisabled: boolean;
   applicationId: string;
   canCreateNewApplication: boolean;
@@ -96,7 +103,8 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
     private fb: FormBuilder,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private matDialog: MatDialog
   ) {
     super();
     this.store
@@ -136,6 +144,10 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]]
     });
 
+    this.form.valueChanges.subscribe((value) => {
+      console.log('Form changed:', value);
+    });
+
     this.loadData();
   }
 
@@ -146,8 +158,20 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
    * @memberof PermanentChangeToALicenseeComponent
    */
   private loadData() {
-    const sub = this.applicationDataService.getPermanentChangesToLicenseeData(this.applicationId).subscribe((data) => {
-      this.setFormData(data);
+    const sub = this.applicationDataService.getPermanentChangesToLicenseeData(this.applicationId).subscribe({
+      next: (data) => {
+        this.setFormData(data);
+      },
+      error: (error) => {
+        console.error('Error loading form data', error);
+        this.matDialog.open(GenericMessageDialogComponent, {
+          data: {
+            title: 'Error Loading Form Data',
+            message: 'Failed to load form data. Please try again. If the problem persists, please contact support.',
+            closeButtonText: 'Close'
+          }
+        });
+      }
     });
     this.subscriptionList.push(sub);
   }
@@ -360,26 +384,50 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
     }
     this.save(!this.application.applicationType.isFree, { invoiceTrigger: trigInv } as Application) // trigger invoice generation when saving LCSD6564 Only if not present or cancelled.
       .pipe(takeWhile(() => this.componentActive))
-      .subscribe(([saveSucceeded, app]) => {
-        //saveSucceeded = false;
-        if (saveSucceeded) {
-          if (app) {
-            this.submitPayment(invoiceType).subscribe((res) => {
-              if (invoiceType === 'primary') {
-                this.primaryPaymentInProgress = false;
-              } else {
-                this.secondaryPaymentInProgress = false;
-              }
-            });
+      .subscribe({
+        next: ([saveSucceeded, app]) => {
+          if (saveSucceeded) {
+            if (app) {
+              this.submitPayment(invoiceType).subscribe({
+                next: () => {
+                  if (invoiceType === 'primary') {
+                    this.primaryPaymentInProgress = false;
+                  } else {
+                    this.secondaryPaymentInProgress = false;
+                  }
+                },
+                error: (error) => {
+                  console.error('Error submitting payment', error);
+                  this.matDialog.open(GenericMessageDialogComponent, {
+                    data: {
+                      title: 'Error Submitting Payment',
+                      message:
+                        'Failed to submit payment. Please try again. If the problem persists, please contact support.',
+                      closeButtonText: 'Close'
+                    }
+                  });
+                }
+              });
+            }
+          } else if (this.application.applicationType.isFree) {
+            // show error message the save failed and the application is free
+            this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+            if (invoiceType === 'primary') {
+              this.primaryPaymentInProgress = false;
+            } else {
+              this.secondaryPaymentInProgress = false;
+            }
           }
-        } else if (this.application.applicationType.isFree) {
-          // show error message the save failed and the application is free
-          this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-          if (invoiceType === 'primary') {
-            this.primaryPaymentInProgress = false;
-          } else {
-            this.secondaryPaymentInProgress = false;
-          }
+        },
+        error: (error) => {
+          console.error('Error saving form data', error);
+          this.matDialog.open(GenericMessageDialogComponent, {
+            data: {
+              title: 'Error Saving Form Data',
+              message: 'Failed to save form data. Please try again. If the problem persists, please contact support.',
+              closeButtonText: 'Close'
+            }
+          });
         }
       });
   }

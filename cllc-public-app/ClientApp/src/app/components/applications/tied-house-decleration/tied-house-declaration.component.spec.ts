@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { TiedHouseDeclarationComponent } from './tied-house-declaration.component';
 
 describe('TiedHouseDeclarationComponent', () => {
@@ -8,9 +7,8 @@ describe('TiedHouseDeclarationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TiedHouseDeclarationComponent ]
-    })
-    .compileComponents();
+      declarations: [TiedHouseDeclarationComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {
