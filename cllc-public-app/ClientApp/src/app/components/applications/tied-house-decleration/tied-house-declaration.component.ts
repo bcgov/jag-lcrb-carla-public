@@ -27,7 +27,7 @@ export class TiedHouseDeclarationComponent implements OnInit {
   @Input() applicationId?: string;
   /**
    * Optional set of initial tied house connections data to initialize the component with.
-   * If provided, `applicationId` will be ignored.
+   * If provided, no API call will be made to fetch the tied house connections.
    *
    * @type {TiedHouseConnection[]}
    */
@@ -55,8 +55,10 @@ export class TiedHouseDeclarationComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.tiedHouseConnections) {
+      // Use the provided tied house connections
       this.initTiedHouseDeclarations(this.tiedHouseConnections);
-    } else if (this.applicationId) {
+    } else {
+      // Fetch the tied house connections
       this.loadData();
     }
   }

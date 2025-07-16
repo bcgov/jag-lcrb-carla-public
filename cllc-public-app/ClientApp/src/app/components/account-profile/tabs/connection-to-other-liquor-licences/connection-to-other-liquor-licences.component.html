@@ -49,7 +49,9 @@
       </section>
 
       <section *ngIf="showTiedHouseDeclarationSection">
-        <app-tied-house-declaration></app-tied-house-declaration>
+        <app-tied-house-declaration
+          [tiedHouseConnections]="tiedHouseConnections"
+          [isReadOnly]="isTiedHouseReadOnly"></app-tied-house-declaration>
       </section>
     </div>
   </div>

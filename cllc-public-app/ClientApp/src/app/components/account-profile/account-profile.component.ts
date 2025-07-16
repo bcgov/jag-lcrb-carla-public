@@ -112,6 +112,10 @@ export class AccountProfileComponent extends FormBase implements OnInit {
   @ViewChild(ConnectionToOtherLiquorLicencesComponent)
   connectionToOtherLiquorLicencesComponent: ConnectionToOtherLiquorLicencesComponent;
 
+  /**
+   * The application ID under which this account profile is being edited.
+   * This will only be set if this component is being used in the context of an application.
+   */
   applicationId: string;
   applicationMode: string;
   account: Account;

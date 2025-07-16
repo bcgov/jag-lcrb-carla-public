@@ -10,13 +10,28 @@ import { TiedHouseConnection } from '@models/tied-house-connection.model';
   styleUrls: ['./connection-to-other-liquor-licences.component.scss']
 })
 export class ConnectionToOtherLiquorLicencesComponent implements OnInit {
+  /**
+   * The user account information.
+   *
+   * @type {Account}
+   */
   @Input() account: Account;
+  /**
+   * The application ID under which this component is being used.
+   *
+   * @type {string}
+   */
+  @Input() applicationId?: string;
 
   @Output() onTiedHouseFormData = new EventEmitter<TiedHouseConnection>();
 
-  tiedHouseFormData: TiedHouseConnection[];
+  tiedHouseFormData: TiedHouseConnection[] = [];
 
   form: FormGroup;
+
+  get tiedHouseConnections(): TiedHouseConnection[] {
+    return this.account?.tiedHouse ?? [];
+  }
 
   constructor(
     private fb: FormBuilder,
@@ -34,6 +49,19 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit {
       hasThirdPartyAssociations: [0],
       hasImmediateFamilyMemberInvolvement: [0]
     });
+  }
+
+  /**
+   * Whether the Tied House Connections form is read-only.
+   *
+   * If this component is NOT being used in the context of an application (i.e., `applicationId` is not set), then
+   * the form is read-only.
+   *
+   * @readonly
+   * @type {boolean}
+   */
+  get isTiedHouseReadOnly(): boolean {
+    return this.applicationId === null || this.applicationId === undefined;
   }
 
   /**
