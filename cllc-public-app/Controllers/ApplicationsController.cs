@@ -1476,8 +1476,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 if (item.OutsideAreas != null && item.OutsideAreas.Count > 0)
                     AddServiceAreasToApplication(item.OutsideAreas, adoxioApplication.AdoxioApplicationid);
 
-                if (item.TiedHouseConnections != null)
-                    AddTiedHouseConnectionToApplication(item.TiedHouseConnections, item.Id);
             }
             catch (HttpOperationException httpOperationException)
             {
@@ -1660,10 +1658,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 if (item.CapacityArea != null && item.CapacityArea.Count > 0 && item.CapacityArea.FirstOrDefault().Capacity.HasValue)
                 {
                     AddServiceAreasToApplication(item.CapacityArea, item.Id);
-                }
-                if (item.TiedHouseConnections != null)
-                {
-                    AddTiedHouseConnectionToApplication(item.TiedHouseConnections, item.Id);
                 }
 
                 if ((bool)item.ApplicationType?.ShowHoursOfSale)
@@ -2034,56 +2028,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
         }
 
-        private void AddTiedHouseConnectionToApplication(IList<TiedHouseConnection> tiedHouseConnections, string applicationId)
-        {
-            //var applicationUri = _dynamicsClient.GetEntityURI("adoxio_applications", applicationId);
-            foreach (TiedHouseConnection tiedhouseConnection in tiedHouseConnections)
-            {
-                if (tiedhouseConnection.StatusCode != (int)TiedHouseStatusCode.Existing)
-                {
-                    MicrosoftDynamicsCRMadoxioTiedhouseconnection adoxioTiedHouseConnection = new MicrosoftDynamicsCRMadoxioTiedhouseconnection();
-                    adoxioTiedHouseConnection.CopyValues(tiedhouseConnection);
-                    try
-                    {
-                        if (tiedhouseConnection.ApplicationId == applicationId)
-                        {
-                            _dynamicsClient.Tiedhouseconnections.Update(adoxioTiedHouseConnection.AdoxioTiedhouseconnectionid, adoxioTiedHouseConnection);
-                        }
-                        else
-                        {
-                            adoxioTiedHouseConnection.ApplicationOdataBind = $"/adoxio_applications({applicationId})";
+     
 
-                            adoxioTiedHouseConnection.AdoxioTiedhouseconnectionid = null;
-
-                            var response = _dynamicsClient.Tiedhouseconnections.Create(adoxioTiedHouseConnection);
-                            
-
-                            AssociateLicenses(tiedhouseConnection.AssociatedLiquorLicense.Select(x => x.Id).ToList(), response.AdoxioTiedhouseconnectionid);
-                        }
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.LogError(httpOperationException, "Error updating tied house connections");
-                        throw new Exception("Unable to add tied house connection");
-                    }
-                }
-            }
-        }
-
-        private void AssociateLicenses(List<string> licenses, string tiedHouseId)
-        {
-            licenses.ForEach(licenceId =>
-            {
-                Odataid odataId = new Odataid()
-                {
-                    OdataidProperty =
-                            _dynamicsClient.GetEntityURI("adoxio_licenceses", "ea5e1d86-a1f7-ea11-b818-005056830319")
-                };
-                _dynamicsClient.Tiedhouseconnections.AddReferenceWithHttpMessagesAsync(
-                             tiedHouseId,
-                             "adoxio_adoxio_tiedhouseconnection_adoxio_licence",
-                             odataid: odataId);
-            });
-        }
     }
 }

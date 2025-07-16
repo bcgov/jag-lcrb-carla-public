@@ -21,6 +21,8 @@ export class ConnectionToProducersComponent implements OnInit, OnDestroy {
   federalProducerText = 'federal producer';
   @Input()
   applicationTypeName: String;
+  @Input()
+  applicationId: String;
 
   @Input('tiedHouse')
   set tiedHouse(value: TiedHouseConnection) {

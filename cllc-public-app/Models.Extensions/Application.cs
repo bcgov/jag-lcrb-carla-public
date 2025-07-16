@@ -890,14 +890,6 @@ namespace Gov.Lclb.Cllb.Public.Models
                     applicationVM.ApplicationType.DynamicsForm = dynamicsClient.GetSystemformViewModel(cache, logger, applicationVM.ApplicationType.FormReference);
                 }
             }
-            if (dynamicsApplication.AdoxioApplicationAdoxioTiedhouseconnectionApplication != null)
-            {
-                var tiedHouses = dynamicsApplication.AdoxioApplicationAdoxioTiedhouseconnectionApplication;
-                if (tiedHouses != null)
-                {
-                    applicationVM.TiedHouseConnections = tiedHouses.Select(x => x.ToViewModel()).ToList();
-                }
-            }
 
             if (dynamicsApplication.AdoxioPoliceJurisdictionId != null)
             {
