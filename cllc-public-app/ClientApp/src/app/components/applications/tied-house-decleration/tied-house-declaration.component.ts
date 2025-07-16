@@ -90,7 +90,6 @@ export class TiedHouseDeclarationComponent implements OnInit {
 
   initTiedHouseDeclarations(tiedHouseConnections: TiedHouseConnection[]) {
     this.tiedHouseDeclarations = tiedHouseConnections.map((item) => {
-      // TODO will declarations fetched from the API ever be `new`? Won't they always be `existing`?
       if (item.statusCode === TiedHouseStatusCode.new && !item.markedForRemoval) {
         item.viewMode = TiedHouseViewMode.disabled;
       } else {

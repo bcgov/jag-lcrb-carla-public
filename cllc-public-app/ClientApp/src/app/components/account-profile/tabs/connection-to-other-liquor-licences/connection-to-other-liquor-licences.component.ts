@@ -43,7 +43,7 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit {
   }
 
   initForm() {
-    // TODO: initialize the form checkbox values from the account data
+    // TODO: We need to initialize these 3 checkboxes from the account data? Do these fields exist in dynamics yet?
     this.form = this.fb.group({
       hasOwnershipOrControl: [0],
       hasThirdPartyAssociations: [0],
