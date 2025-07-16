@@ -22,7 +22,7 @@ const NEW_DECLARATION_KEY = 'New Declaration';
   templateUrl: './tied-house-declaration.component.html',
   styleUrls: ['./tied-house-declaration.component.scss']
 })
-export class TiedHouseDeclarationComponent implements OnInit {
+export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
   /**
    * Optional application ID used to fetch any existing tied house connections to initialize the component with.
    *
@@ -54,9 +54,7 @@ export class TiedHouseDeclarationComponent implements OnInit {
 
   constructor(
     private tiedHouseService: TiedHouseConnectionsDataService,
-
-    private matDialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
     private matDialog: MatDialog
   ) {
     super();

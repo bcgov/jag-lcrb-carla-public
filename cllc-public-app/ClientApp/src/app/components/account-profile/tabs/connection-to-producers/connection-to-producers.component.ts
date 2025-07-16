@@ -20,8 +20,6 @@ export class ConnectionToProducersComponent implements OnInit, OnDestroy {
   federalProducerText = 'federal producer';
   @Input()
   applicationTypeName: String;
-  @Input()
-  applicationId: String;
 
   busy: Subscription;
   subscriptions: Subscription[] = [];

@@ -456,26 +456,5 @@
         </section>
       </div>
     </div>
-
-    <!-- CONNECTIONS TO OTHER LICENCES -->
-    <div>
-      <section class="mb-3">
-        <p id="liquor-interest-label" class="font-weight-bold">
-          Do you or any of your shareholders have any amount of ownership interest in another B.C. liquor licence, or
-          any association with a third party operator for another liquor licence, or have an immediate family member
-          (spouse, parent, sibling or child) with any amount of ownership interest in another liquor licence?
-        </p>
-        <mat-radio-group
-          formControlName="liquorFinancialInterest"
-          aria-labelledby="liquor-interest-label"
-          class="d-flex flex-column align-items-start">
-          <mat-radio-button value="1">Yes</mat-radio-button>
-          <mat-radio-button value="0">No</mat-radio-button>
-        </mat-radio-group>
-      </section>
-      <section *ngIf="form.get('liquorFinancialInterest').value == '1'">
-        <app-tied-house-declaration [applicationId]="application.id"></app-tied-house-declaration>
-      </section>
-    </div>
   </div>
 </section>
