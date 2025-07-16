@@ -22,10 +22,26 @@ const NEW_DECLARATION_KEY = 'New Declaration';
   templateUrl: './tied-house-declaration.component.html',
   styleUrls: ['./tied-house-declaration.component.scss']
 })
-export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
-  @Input() applicationId: string;
-
-  tiedHouseConnections: TiedHouseConnection[];
+export class TiedHouseDeclarationComponent implements OnInit {
+  /**
+   * Optional application ID used to fetch any existing tied house connections to initialize the component with.
+   *
+   * @type {string}
+   */
+  @Input() applicationId?: string;
+  /**
+   * Optional set of initial tied house connections data to initialize the component with.
+   * If provided, no API call will be made to fetch the tied house connections.
+   *
+   * @type {TiedHouseConnection[]}
+   */
+  @Input() tiedHouseConnections?: TiedHouseConnection[];
+  /**
+   * Indicates whether the tied house component is in read-only mode. Default is false.
+   *
+   * @type {boolean}
+   */
+  @Input() isReadOnly?: boolean = false;
 
   tiedHouseDeclarations: TiedHouseConnection[] = [];
   groupedTiedHouseDeclarations: [string, TiedHouseConnection[]][] = [];
@@ -38,43 +54,60 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
 
   constructor(
     private tiedHouseService: TiedHouseConnectionsDataService,
+
     private matDialog: MatDialog,
     private snackBar: MatSnackBar
+    private matDialog: MatDialog
   ) {
     super();
   }
 
   ngOnInit(): void {
-    this.loadData();
+    if (this.tiedHouseConnections) {
+      // Use the provided tied house connections
+      this.initTiedHouseDeclarations(this.tiedHouseConnections);
+    } else {
+      // Fetch the tied house connections
+      this.loadData();
+    }
   }
 
   loadData() {
-    this.tiedHouseService.getAllTiedHouses(this.applicationId).subscribe({
-      next: (data) => {
-        this.tiedHouseDeclarations = data.map((item) => {
-          // TODO will declarations fetched from the API ever be `new`?
-          if (item.statusCode === TiedHouseStatusCode.new && !item.markedForRemoval) {
-            item.viewMode = TiedHouseViewMode.disabled;
-          } else {
-            item.viewMode = TiedHouseViewMode.existing;
-          }
-          return item;
-        });
+    // If an application ID is provided, fetch tied house connections for that application.
+    // Otherwise, fetch tied house connections for the current user.
+    const request$ = this.applicationId
+      ? this.tiedHouseService.GetAllTiedHouseConnectionsForApplication(this.applicationId)
+      : this.tiedHouseService.GetAllTiedHouseConnectionsForUser();
 
-        this.updateGroupedTiedHouseDeclarations();
+    request$.subscribe({
+      next: (data) => {
+        this.initTiedHouseDeclarations(data);
       },
       error: (error) => {
-        console.error('Error loading tied house data', error);
+        console.error('Error loading Tied House data', error);
         this.matDialog.open(GenericMessageDialogComponent, {
           data: {
             title: 'Error Loading Tied House Form Data',
             message:
-              'Failed to load tied house form data. Please try again. If the problem persists, please contact support.',
+              'Failed to load Tied House form data. Please try again. If the problem persists, please contact support.',
             closeButtonText: 'Close'
           }
         });
       }
     });
+  }
+
+  initTiedHouseDeclarations(tiedHouseConnections: TiedHouseConnection[]) {
+    this.tiedHouseDeclarations = tiedHouseConnections.map((item) => {
+      if (item.statusCode === TiedHouseStatusCode.new && !item.markedForRemoval) {
+        item.viewMode = TiedHouseViewMode.disabled;
+      } else {
+        item.viewMode = TiedHouseViewMode.existing;
+      }
+      return item;
+    });
+
+    this.updateGroupedTiedHouseDeclarations();
   }
 
   /**
@@ -144,14 +177,25 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
    */
   hasInProgressDeclarations(): boolean {
     // Return true if there are any declarations that are in the process of being added or edited.
-    const x = this.tiedHouseDeclarations.some((declaration) =>
+    return this.tiedHouseDeclarations.some((declaration) =>
       [TiedHouseViewMode.new, TiedHouseViewMode.addNewRelationship, TiedHouseViewMode.editExistingRecord].includes(
         declaration.viewMode
       )
     );
+  }
 
-    console.log('hasInProgressDeclarations', x);
-    return x;
+  /**
+   * Checks if a related group of Tied House declarations has been saved.
+   *
+   * This is necessary when determining if a new related declaration can be added, as a new related declaration
+   * requires a completed declaration in the same group to inherit some details from.
+   *
+   * @param {[string, TiedHouseConnection[]]} groupedTiedHouseDeclarations
+   * @return {*}  {boolean}
+   */
+  hasSavedRelatedDeclaration(groupedTiedHouseDeclarations: [string, TiedHouseConnection[]]): boolean {
+    // Only new (unsaved) declarations will have the NEW_DECLARATION_KEY as the name of the group.
+    return groupedTiedHouseDeclarations[0] !== NEW_DECLARATION_KEY;
   }
 
   /**

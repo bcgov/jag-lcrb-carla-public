@@ -144,10 +144,6 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]]
     });
 
-    this.form.valueChanges.subscribe((value) => {
-      console.log('Form changed:', value);
-    });
-
     this.loadData();
   }
 
@@ -353,7 +349,11 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
     return (
       this.tiedHouseDeclaration.tiedHouseDeclarations.length < 1 &&
       !this.tiedHouseDeclaration.tiedHouseDeclarations.find((th) =>
-        [TiedHouseViewMode.new, TiedHouseViewMode.editExistingRecord].includes(th.viewMode)
+        // If any declarations are in a new or edit mode, then they have not yet been saved, and the tied house form
+        // is therefore not valid (and not ready to be submitted as part of the larger form).
+        [TiedHouseViewMode.new, TiedHouseViewMode.addNewRelationship, TiedHouseViewMode.editExistingRecord].includes(
+          th.viewMode
+        )
       )
     );
   }

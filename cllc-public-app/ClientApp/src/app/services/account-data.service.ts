@@ -48,12 +48,10 @@ export class AccountDataService extends DataService {
 
   loadCurrentAccountToStore(id: string) {
     return forkJoin(this.getAccount(id),
-        this.tiedHouseService.getTiedHouse(id),
         this.legalEntityDataService.getBusinessProfileSummary())
       .pipe(map(data => {
         const account: Account = data[0];
-        account.tiedHouse = data[1];
-        account.legalEntity = data[2].length ? data[2][0] : null;
+        account.legalEntity = data[1].length ? data[1][0] : null;
         this.store.dispatch(new SetCurrentAccountAction({ ...account } as Account));
         return account;
       }));

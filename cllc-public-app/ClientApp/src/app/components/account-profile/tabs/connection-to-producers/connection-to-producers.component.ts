@@ -1,8 +1,7 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Account } from '@models/account.model';
-import { TiedHouseConnection } from '@models/tied-house-connection.model';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -24,26 +23,11 @@ export class ConnectionToProducersComponent implements OnInit, OnDestroy {
   @Input()
   applicationId: String;
 
-  @Input('tiedHouse')
-  set tiedHouse(value: TiedHouseConnection) {
-    if (value && this.form) {
-      this.form.patchValue(value);
-    }
-    this._tiedHouseData = value;
-  }
-
-  get tiedHouse(): TiedHouseConnection {
-    return { ...this._tiedHouseData };
-  }
-
   busy: Subscription;
   subscriptions: Subscription[] = [];
   savedFormData: any = {};
 
   form: any;
-  _tiedHouseData: TiedHouseConnection;
-  @Output()
-  value = new EventEmitter<TiedHouseConnection>();
 
   constructor(
     private fb: FormBuilder,
@@ -69,24 +53,10 @@ export class ConnectionToProducersComponent implements OnInit, OnDestroy {
       iNConnectionToFederalProducer: [''],
       iNConnectionToFederalProducerDetails: ['']
     });
-
-    if (this.tiedHouse) {
-      this.form.patchValue(this.tiedHouse);
-    }
-    this.form.valueChanges.subscribe((value) => this.value.emit(Object.assign(this.tiedHouse, value)));
   }
 
   ngOnDestroy() {
     this.subscriptions.forEach((sub) => sub.unsubscribe());
-  }
-
-  formHasChanged(): boolean {
-    let hasChanged = false;
-    const data = (Object as any).assign(this.tiedHouse, this.form.value);
-    if (JSON.stringify(data) !== JSON.stringify(this.tiedHouse)) {
-      hasChanged = true;
-    }
-    return hasChanged;
   }
 
   requiresWordingChange(name: String): boolean {

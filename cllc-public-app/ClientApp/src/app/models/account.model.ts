@@ -41,7 +41,7 @@ export class Account {
 
   primarycontact: Contact;
   businessType: string;
-  tiedHouse: TiedHouseConnection;
+  tiedHouse: TiedHouseConnection[];
   legalEntity: LegalEntity;
 
   websiteUrl: string;

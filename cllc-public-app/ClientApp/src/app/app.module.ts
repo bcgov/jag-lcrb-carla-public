@@ -354,6 +354,7 @@ import { LegalEntityReviewTiedHouseComponent } from "@shared/components/legal-en
 import { LegalEntityReviewSupportingDocumentsComponent } from "@shared/components/legal-entity-review/legal-entity-review-supporting-documents/legal-entity-review-supporting-documents.component";
 import { GenericConfirmationDialogComponent } from "@shared/components/dialog/generic-confirmation-dialog/generic-confirmation-dialog.component";
 import { GenericMessageDialogComponent } from "@shared/components/dialog/generic-message-dialog/generic-message-dialog.component";
+import { ConnectionToOtherLiquorLicencesComponent } from "@components/account-profile/tabs/connection-to-other-liquor-licences/connection-to-other-liquor-licences.component";
 
 @NgModule({
   declarations: [
@@ -575,6 +576,7 @@ import { GenericMessageDialogComponent } from "@shared/components/dialog/generic
     LegalEntityReviewTiedHouseComponent,
     LegalEntityReviewTypesOfChangesRequiredComponent,
     LegalEntityReviewWhatHappensNextComponent,
+    ConnectionToOtherLiquorLicencesComponent,
     GenericConfirmationDialogComponent,
     GenericMessageDialogComponent
   ],

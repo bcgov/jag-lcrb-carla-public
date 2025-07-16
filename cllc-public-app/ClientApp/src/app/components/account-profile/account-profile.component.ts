@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppState } from '@app/app-state/models/app-state';
 import { COUNTRIES } from '@app/constants/countries';
+import { ConnectionToOtherLiquorLicencesComponent } from '@components/account-profile/tabs/connection-to-other-liquor-licences/connection-to-other-liquor-licences.component';
 import {
   faAddressCard,
   faChevronRight,
@@ -30,7 +31,6 @@ import { endOfToday } from 'date-fns';
 import { forkJoin, Observable, of, Subscription } from 'rxjs';
 import { catchError, filter, map, takeWhile } from 'rxjs/operators';
 import { ApplicationTypeNames } from '../../models/application-type.model';
-import { ConnectionToProducersComponent } from './tabs/connection-to-producers/connection-to-producers.component';
 
 // See the Moment.js docs for the meaning of these formats:
 // https://momentjs.com/docs/#/displaying/format/
@@ -108,8 +108,14 @@ export class AccountProfileComponent extends FormBase implements OnInit {
   _showAdditionalAddress: boolean;
   _showAdditionalContact: boolean;
   legalEntityId: string;
-  @ViewChild(ConnectionToProducersComponent)
-  connectionsToProducers: ConnectionToProducersComponent;
+
+  @ViewChild(ConnectionToOtherLiquorLicencesComponent)
+  connectionToOtherLiquorLicencesComponent: ConnectionToOtherLiquorLicencesComponent;
+
+  /**
+   * The application ID under which this account profile is being edited.
+   * This will only be set if this component is being used in the context of an application.
+   */
   applicationId: string;
   applicationMode: string;
   account: Account;
@@ -457,7 +463,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
 
   canDeactivate(): Observable<boolean> {
     if (
-      !this.connectionsToProducers.formHasChanged() &&
+      !this.connectionToOtherLiquorLicencesComponent.formHasChanged() &&
       JSON.stringify(this.saveFormData) === JSON.stringify(this.form.value)
     ) {
       return of(true);
@@ -500,9 +506,10 @@ export class AccountProfileComponent extends FormBase implements OnInit {
       this.contactDataService.updateContact(this.form.get('contact').value)
     ];
 
-    if (this.connectionsToProducers) {
-      saves.push(this.prepareTiedHouseSaveRequest({ ...this.account.tiedHouse, ..._tiedHouse }));
-    }
+    // TODO: Enable/Replace with new tied house saving logic
+    // if (this.connectionToOtherLiquorLicencesComponent) {
+      // saves.push(this.prepareTiedHouseSaveRequest({ ...this.account.tiedHouse, ..._tiedHouse }));
+    // }
 
     return forkJoin(saves).pipe(
       catchError(() => of(false)),
@@ -526,7 +533,10 @@ export class AccountProfileComponent extends FormBase implements OnInit {
       route = '/sep/dashboard';
     }
 
-    if (this.form.valid && (!this.connectionsToProducers || this.connectionsToProducers.form.valid)) {
+    if (
+      this.form.valid &&
+      (!this.connectionToOtherLiquorLicencesComponent || this.connectionToOtherLiquorLicencesComponent.form.valid)
+    ) {
       this.busy = this.save().subscribe(() => {
         if (this.useInStepperMode) {
           this.saveComplete.emit(true);
@@ -566,15 +576,16 @@ export class AccountProfileComponent extends FormBase implements OnInit {
     }
   }
 
-  prepareTiedHouseSaveRequest(_tiedHouseData) {
-    const data = { ...this.account.tiedHouse, ..._tiedHouseData };
+  // TODO: Enable/Replace with new tied house saving logic
+  // prepareTiedHouseSaveRequest(_tiedHouseData) {
+  //   const data = { ...this.account.tiedHouse, ..._tiedHouseData };
 
-    if (data.id) {
-      return this.tiedHouseService.updateTiedHouse(data, data.id);
-    } else {
-      return this.accountDataService.createTiedHouseConnection(data, this.accountId);
-    }
-  }
+  //   if (data.id) {
+  //     return this.tiedHouseService.updateTiedHouse(data, data.id);
+  //   } else {
+  //     return this.accountDataService.createTiedHouseConnection(data, this.accountId);
+  //   }
+  // }
 
   // marking the form as touched makes the validation messages show
   markAsTouched() {
