@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { TiedHouseConnection } from "@models/tied-house-connection.model";
 import { catchError } from "rxjs/operators";
 import { DataService } from "./data.service";
+import { Observable } from "rxjs";
 
 @Injectable()
 export class TiedHouseConnectionsDataService extends DataService {
@@ -12,21 +13,28 @@ export class TiedHouseConnectionsDataService extends DataService {
   }
 
   /**
-   * Get legal entities from Dynamics filtered by position
-   * @param positionType
+   * Get all tied house connections for a user.
+   * - If `accountId` is provided, it filters results by that account.
+   * - If `accountId` is not provided, it returns results for the current logged in user.
+   *
+   * @param {string} [accountId] An optional account ID to filter results by
+   * @return {*}  {Observable<TiedHouseConnection[]>}
    */
-  getTiedHouse(accountId: string) {
-    const apiPath = `api/tiedhouseconnections/${accountId}`;
-    return this.http.get<TiedHouseConnection>(apiPath, { headers: this.headers })
-      .pipe(catchError(this.handleError));
+  GetAllTiedHouseConnectionsForUser(accountId?: string): Observable<TiedHouseConnection[]> {
+    const apiPath = `api/tiedhouseconnections/user/${accountId ?? ''}`;
+    return this.http.get<TiedHouseConnection[]>(apiPath, { headers: this.headers }).pipe(catchError(this.handleError));
   }
 
-  getAllTiedHouses(applicationId: string) {
-    const apiPath = `api/tiedhouseconnections/application/${applicationId?? ''}`;
-    return this.http.get<TiedHouseConnection[]>(apiPath, { headers: this.headers })
-      .pipe(catchError(this.handleError));
+  /**
+   * Get all tied house connections for a specific application.
+   *
+   * @param {string} applicationId
+   * @return {*}  {Observable<TiedHouseConnection[]>}
+   */
+  GetAllTiedHouseConnectionsForApplication(applicationId: string): Observable<TiedHouseConnection[]> {
+    const apiPath = `api/tiedhouseconnections/application/${applicationId ?? ''}`;
+    return this.http.get<TiedHouseConnection[]>(apiPath, { headers: this.headers }).pipe(catchError(this.handleError));
   }
-
 
   /**
    * Create a new legal entity in Dynamics

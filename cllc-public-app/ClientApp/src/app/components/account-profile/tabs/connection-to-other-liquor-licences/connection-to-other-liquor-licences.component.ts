@@ -11,29 +11,30 @@ import { TiedHouseConnection } from '@models/tied-house-connection.model';
 })
 export class ConnectionToOtherLiquorLicencesComponent implements OnInit {
   @Input() account: Account;
-  @Input() isMarketer: boolean;
-  @Input() licensedProducerText = 'federally licensed producer';
-  @Input() federalProducerText = 'federal producer';
-  @Input() applicationTypeName: String;
 
-  @Input('tiedHouse')
-  set tiedHouse(value: TiedHouseConnection) {
-    if (value && this.form) {
-      this.form.patchValue(value);
-    }
+  @Output() onTiedHouseFormData = new EventEmitter<TiedHouseConnection>();
 
-    this._tiedHouseData = value;
+  tiedHouseFormData: TiedHouseConnection[];
+
+  form: FormGroup;
+
+  constructor(
+    private fb: FormBuilder,
+    public snackBar: MatSnackBar
+  ) {}
+
+  ngOnInit() {
+    this.initForm();
   }
 
-  get tiedHouse(): TiedHouseConnection {
-    return { ...this._tiedHouseData };
+  initForm() {
+    // TODO: initialize the form checkbox values from the account data
+    this.form = this.fb.group({
+      hasOwnershipOrControl: [0],
+      hasThirdPartyAssociations: [0],
+      hasImmediateFamilyMemberInvolvement: [0]
+    });
   }
-
-  @Output() value = new EventEmitter<TiedHouseConnection>();
-
-  _tiedHouseData: TiedHouseConnection;
-
-  form: FormGroup | undefined;
 
   /**
    * Indicates whether the tied house declaration section should be shown.
@@ -55,25 +56,6 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit {
     );
   }
 
-  constructor(
-    private fb: FormBuilder,
-    public snackBar: MatSnackBar
-  ) {}
-
-  ngOnInit() {
-    this.form = this.fb.group({
-      hasOwnershipOrControl: [''],
-      hasThirdPartyAssociations: [''],
-      hasImmediateFamilyMemberInvolvement: ['']
-    });
-
-    if (this.tiedHouse) {
-      this.form.patchValue(this.tiedHouse);
-    }
-
-    this.form.valueChanges.subscribe((value) => this.value.emit(Object.assign(this.tiedHouse, value)));
-  }
-
   /**
    * Checks if the form data has changed compared to the initial tied house form data this component was initialized
    * with.
@@ -83,9 +65,9 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit {
   formHasChanged(): boolean {
     let hasChanged = false;
 
-    const data = (Object as any).assign(this.tiedHouse, this.form.value);
+    const data = (Object as any).assign(this.tiedHouseFormData, this.form.value);
 
-    if (JSON.stringify(data) !== JSON.stringify(this.tiedHouse)) {
+    if (JSON.stringify(data) !== JSON.stringify(this.tiedHouseFormData)) {
       hasChanged = true;
     }
 

@@ -33,26 +33,49 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         /// <summary>
-        /// Get TiedHouseConnection by accountId
+        /// Get all Tied House Connections for a user.
+        /// If `accountId` is provided, it will return connections for that account.
+        /// If `accountId` is not provided, it will return connections for the current logged in user's account.
         /// </summary>
-        /// <param name=""></param>
-        /// <returns></returns>
-        [HttpGet("{accountId}")]
-        public JsonResult GetTiedHouseConnection(string accountId)
+        /// <param name="accountId">An optional accountId to filter results by</param>
+        /// <returns>A list of tied house connections</returns>
+        [HttpGet("user/{accountId?}")]
+        [ProducesResponseType(typeof(IEnumerable<TiedHouseConnection>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public ActionResult<IEnumerable<TiedHouseConnection>> GetAllTiedHouseConnectionsForUser(string accountId)
         {
-            var result = new List<ViewModels.TiedHouseConnection>();
-            IEnumerable<MicrosoftDynamicsCRMadoxioTiedhouseconnection> tiedHouseConnections = null;
-            string accountfilter = "_adoxio_accountid_value eq " + accountId;
-            _logger.LogDebug("Account filter = " + accountfilter);
-            var expand = new List<string> { "adoxio_adoxio_tiedhouseconnection_adoxio_licence" };
-            tiedHouseConnections = _dynamicsClient.Tiedhouseconnections.Get(filter: accountfilter, expand: expand).Value;
-
-            foreach (var tiedHouse in tiedHouseConnections)
+            try
             {
-                result.Add(tiedHouse.ToViewModel());
-            }
+                IEnumerable<MicrosoftDynamicsCRMadoxioTiedhouseconnection> tiedHouseConnections = null;
 
-            return new JsonResult(result.FirstOrDefault());
+                UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+
+
+                // Use `accountId` if provided, otherwise use the current logged in user's account Id
+                var accountIdForFilter = accountId != null ? accountId : userSettings.AccountId;
+
+                _logger.LogDebug($"GetAllTiedHouseConnectionsForUser. AccountId = {accountIdForFilter}.");
+
+                var filter =
+                    $"(_adoxio_accountid_value eq {accountIdForFilter} and statuscode eq {(int)TiedHouseStatusCode.Existing})";
+                var expand = new List<string> { "adoxio_adoxio_tiedhouseconnection_adoxio_licence" };
+
+                tiedHouseConnections = _dynamicsClient.Tiedhouseconnections.Get(filter: filter, expand: expand).Value;
+
+                var result = tiedHouseConnections.Select(item => item.ToViewModel()).ToList();
+
+                return new JsonResult(result);
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Failed to fetch tied house connections.");
+                throw new HttpOperationException("Failed to fetch tied house connections.");
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(exception, "Failed to fetch tied house connections.");
+                throw new Exception("Failed to fetch tied house connections.");
+            }
         }
 
         [HttpGet("application/{applicationId?}")]

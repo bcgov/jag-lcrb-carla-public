@@ -10,7 +10,6 @@ import {
 } from '@models/tied-house-connection.model';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
 import { GenericMessageDialogComponent } from '@shared/components/dialog/generic-message-dialog/generic-message-dialog.component';
-import { FormBase } from '@shared/form-base';
 
 const NEW_DECLARATION_KEY = 'New Declaration';
 
@@ -19,14 +18,26 @@ const NEW_DECLARATION_KEY = 'New Declaration';
   templateUrl: './tied-house-declaration.component.html',
   styleUrls: ['./tied-house-declaration.component.scss']
 })
-export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
+export class TiedHouseDeclarationComponent implements OnInit {
+  /**
+   * Optional application ID used to fetch any existing tied house connections to initialize the component with.
+   *
+   * @type {string}
+   */
   @Input() applicationId?: string;
   /**
+   * Optional set of initial tied house connections data to initialize the component with.
+   * If provided, `applicationId` will be ignored.
+   *
+   * @type {TiedHouseConnection[]}
+   */
+  @Input() tiedHouseConnections?: TiedHouseConnection[];
+  /**
    * Indicates whether the tied house component is in read-only mode. Default is false.
+   *
+   * @type {boolean}
    */
   @Input() isReadOnly?: boolean = false;
-
-  tiedHouseConnections: TiedHouseConnection[];
 
   tiedHouseDeclarations: TiedHouseConnection[] = [];
   groupedTiedHouseDeclarations: [string, TiedHouseConnection[]][] = [];
@@ -40,30 +51,26 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
   constructor(
     private tiedHouseService: TiedHouseConnectionsDataService,
     private matDialog: MatDialog
-  ) {
-    super();
-  }
+  ) {}
 
   ngOnInit(): void {
-    if (this.applicationId) {
-      this.loadDataByApplicationId();
+    if (this.tiedHouseConnections) {
+      this.initTiedHouseDeclarations(this.tiedHouseConnections);
+    } else if (this.applicationId) {
+      this.loadData();
     }
   }
 
-  loadDataByApplicationId() {
-    this.tiedHouseService.getAllTiedHouses(this.applicationId).subscribe({
-      next: (data) => {
-        this.tiedHouseDeclarations = data.map((item) => {
-          // TODO will declarations fetched from the API ever be `new`? Won't they always be `existing`?
-          if (item.statusCode === TiedHouseStatusCode.new && !item.markedForRemoval) {
-            item.viewMode = TiedHouseViewMode.disabled;
-          } else {
-            item.viewMode = TiedHouseViewMode.existing;
-          }
-          return item;
-        });
+  loadData() {
+    // If an application ID is provided, fetch tied house connections for that application.
+    // Otherwise, fetch tied house connections for the current user.
+    const request$ = this.applicationId
+      ? this.tiedHouseService.GetAllTiedHouseConnectionsForApplication(this.applicationId)
+      : this.tiedHouseService.GetAllTiedHouseConnectionsForUser();
 
-        this.updateGroupedTiedHouseDeclarations();
+    request$.subscribe({
+      next: (data) => {
+        this.initTiedHouseDeclarations(data);
       },
       error: (error) => {
         console.error('Error loading Tied House data', error);
@@ -77,6 +84,20 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
         });
       }
     });
+  }
+
+  initTiedHouseDeclarations(tiedHouseConnections: TiedHouseConnection[]) {
+    this.tiedHouseDeclarations = tiedHouseConnections.map((item) => {
+      // TODO will declarations fetched from the API ever be `new`? Won't they always be `existing`?
+      if (item.statusCode === TiedHouseStatusCode.new && !item.markedForRemoval) {
+        item.viewMode = TiedHouseViewMode.disabled;
+      } else {
+        item.viewMode = TiedHouseViewMode.existing;
+      }
+      return item;
+    });
+
+    this.updateGroupedTiedHouseDeclarations();
   }
 
   /**

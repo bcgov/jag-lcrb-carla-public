@@ -1,161 +1,157 @@
-<form [formGroup]="form">
-  <div>
-    <div *ngIf="groupedTiedHouseDeclarations.length > 0" class="mb-3">
-      <mat-accordion>
-        <mat-expansion-panel
-          class="th-accordian"
-          *ngFor="let _tiedHouseDeclarations of groupedTiedHouseDeclarations; let tiedHouseDeclarationsIndex = index"
-          [expanded]="openedPanelIndex === tiedHouseDeclarationsIndex">
-          <mat-expansion-panel-header class="blue-header th-accordian-header">
-            <mat-panel-title>
-              {{ _tiedHouseDeclarations[0] }}
-            </mat-panel-title>
-          </mat-expansion-panel-header>
+<div>
+  <div *ngIf="groupedTiedHouseDeclarations.length > 0" class="mb-3">
+    <mat-accordion>
+      <mat-expansion-panel
+        class="th-accordian"
+        *ngFor="let _tiedHouseDeclarations of groupedTiedHouseDeclarations; let tiedHouseDeclarationsIndex = index"
+        [expanded]="openedPanelIndex === tiedHouseDeclarationsIndex">
+        <mat-expansion-panel-header class="blue-header th-accordian-header">
+          <mat-panel-title>
+            {{ _tiedHouseDeclarations[0] }}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
 
-          <table class="th-table mb-3">
-            <colgroup>
-              <col style="width: 5%" />
-              <col style="width: 40%" />
-              <col style="width: 40%" />
-              <col style="width: 15%" />
-            </colgroup>
-            <thead>
-              <tr *ngIf="hasExistingDeclarations(_tiedHouseDeclarations[1])">
-                <th>#</th>
-                <th>Relationship</th>
-                <th>Licence #/Establishment</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody class="th-table-body">
-              <ng-container
-                *ngFor="let _tiedHouseDeclaration of _tiedHouseDeclarations[1]; let tiedHouseDeclarationIndex = index">
-                <!-- Existing declarations -->
-                <tr
-                  [ngClass]="_tiedHouseDeclaration.markedForRemoval ? 'th-remove-existing-table' : 'th-existing-table'"
-                  *ngIf="_tiedHouseDeclaration.viewMode == TiedHouseViewMode.existing">
-                  <td
-                    [ngClass]="
-                      _tiedHouseDeclaration.markedForRemoval ? 'th-remove-existing-index' : 'th-existing-index'
-                    ">
-                    {{ tiedHouseDeclarationIndex + 1 }}
-                  </td>
-                  <td>{{ getRelationshipName(_tiedHouseDeclaration.relationshipToLicence) }}</td>
-                  <td>
-                    <ul *ngFor="let license of _tiedHouseDeclaration.associatedLiquorLicense">
-                      <li>{{ license.name }}</li>
-                    </ul>
-                  </td>
-                  <td>
-                    <div *ngIf="!isReadOnly" class="existing-declaration-buttons">
-                      <span
-                        [title]="
-                          hasInProgressDeclarations()
-                            ? 'You can only add or edit one Tied House declaration at a time'
-                            : 'Edit Tied House declaration'
-                        ">
-                        <button
-                          *ngIf="!_tiedHouseDeclaration.markedForRemoval"
-                          class="btn btn-primary btn-md"
-                          type="button"
-                          [disabled]="hasInProgressDeclarations()"
-                          (click)="
-                            changeDeclarationViewMode(TiedHouseViewMode.editExistingRecord, _tiedHouseDeclaration, true)
-                          ">
-                          Edit
-                        </button>
-                      </span>
+        <table class="th-table mb-3">
+          <colgroup>
+            <col style="width: 5%" />
+            <col style="width: 40%" />
+            <col style="width: 40%" />
+            <col style="width: 15%" />
+          </colgroup>
+          <thead>
+            <tr *ngIf="hasExistingDeclarations(_tiedHouseDeclarations[1])">
+              <th>#</th>
+              <th>Relationship</th>
+              <th>Licence #/Establishment</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody class="th-table-body">
+            <ng-container
+              *ngFor="let _tiedHouseDeclaration of _tiedHouseDeclarations[1]; let tiedHouseDeclarationIndex = index">
+              <!-- Existing declarations -->
+              <tr
+                [ngClass]="_tiedHouseDeclaration.markedForRemoval ? 'th-remove-existing-table' : 'th-existing-table'"
+                *ngIf="_tiedHouseDeclaration.viewMode == TiedHouseViewMode.existing">
+                <td
+                  [ngClass]="_tiedHouseDeclaration.markedForRemoval ? 'th-remove-existing-index' : 'th-existing-index'">
+                  {{ tiedHouseDeclarationIndex + 1 }}
+                </td>
+                <td>{{ getRelationshipName(_tiedHouseDeclaration.relationshipToLicence) }}</td>
+                <td>
+                  <ul *ngFor="let license of _tiedHouseDeclaration.associatedLiquorLicense">
+                    <li>{{ license.name }}</li>
+                  </ul>
+                </td>
+                <td>
+                  <div *ngIf="!isReadOnly" class="existing-declaration-buttons">
+                    <span
+                      [title]="
+                        hasInProgressDeclarations()
+                          ? 'You can only add or edit one Tied House declaration at a time'
+                          : 'Edit Tied House declaration'
+                      ">
                       <button
                         *ngIf="!_tiedHouseDeclaration.markedForRemoval"
-                        class="btn btn-danger btn-md"
+                        class="btn btn-primary btn-md"
                         type="button"
-                        (click)="removeExistingTiedHouseDeclaration(_tiedHouseDeclaration)">
-                        Remove
+                        [disabled]="hasInProgressDeclarations()"
+                        (click)="
+                          changeDeclarationViewMode(TiedHouseViewMode.editExistingRecord, _tiedHouseDeclaration, true)
+                        ">
+                        Edit
                       </button>
-                      <button
-                        *ngIf="_tiedHouseDeclaration.markedForRemoval"
-                        class="btn btn-link"
-                        (click)="restoreExistingTiedHouseDeclaration(_tiedHouseDeclaration)">
-                        Restore
-                      </button>
-                    </div>
-                  </td>
-                </tr>
+                    </span>
+                    <button
+                      *ngIf="!_tiedHouseDeclaration.markedForRemoval"
+                      class="btn btn-danger btn-md"
+                      type="button"
+                      (click)="removeExistingTiedHouseDeclaration(_tiedHouseDeclaration)">
+                      Remove
+                    </button>
+                    <button
+                      *ngIf="_tiedHouseDeclaration.markedForRemoval"
+                      class="btn btn-link"
+                      (click)="restoreExistingTiedHouseDeclaration(_tiedHouseDeclaration)">
+                      Restore
+                    </button>
+                  </div>
+                </td>
+              </tr>
 
-                <!-- New declarations -->
-                <tr *ngIf="_tiedHouseDeclaration.viewMode != TiedHouseViewMode.existing">
-                  <td class="p-4 th-form" colspan="4">
-                    <app-tied-house-declaration-form
-                      style="width: 100%"
-                      [isReadOnly]="isReadOnly"
-                      [tiedHouseDecleration]="_tiedHouseDeclaration"
-                      (saveTiedHouseDecclaration)="saveTiedHouseDeclaration($event, _tiedHouseDeclaration)"
-                      (removeTiedHouseDeclaration)="
-                        removeNewTiedHouseDeclaration(
-                          _tiedHouseDeclaration,
-                          _tiedHouseDeclarations.length > 1,
-                          tiedHouseDeclarationsIndex
-                        )
-                      "
-                      (cancelTiedHouseDeclaration)="changeDeclarationViewMode($event, _tiedHouseDeclaration)">
-                    </app-tied-house-declaration-form>
-                    <!-- Tempory for dev -->
-                    <!-- <button
+              <!-- New declarations -->
+              <tr *ngIf="_tiedHouseDeclaration.viewMode != TiedHouseViewMode.existing">
+                <td class="p-4 th-form" colspan="4">
+                  <app-tied-house-declaration-form
+                    style="width: 100%"
+                    [isReadOnly]="isReadOnly"
+                    [tiedHouseDecleration]="_tiedHouseDeclaration"
+                    (saveTiedHouseDecclaration)="saveTiedHouseDeclaration($event, _tiedHouseDeclaration)"
+                    (removeTiedHouseDeclaration)="
+                      removeNewTiedHouseDeclaration(
+                        _tiedHouseDeclaration,
+                        _tiedHouseDeclarations.length > 1,
+                        tiedHouseDeclarationsIndex
+                      )
+                    "
+                    (cancelTiedHouseDeclaration)="changeDeclarationViewMode($event, _tiedHouseDeclaration)">
+                  </app-tied-house-declaration-form>
+                  <!-- Tempory for dev -->
+                  <!-- <button
                       class="btn btn-primary"
                       type="button"
                       (click)="changeDeclarationViewMode(TiedHouseViewMode.existing, _tiedHouseDeclaration)">
                       To Existing
                     </button> -->
-                  </td>
-                </tr>
-              </ng-container>
-            </tbody>
-          </table>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
 
-          <div *ngIf="!isReadOnly && hasSavedRelatedDeclaration(_tiedHouseDeclarations)">
-            <span
-              [title]="
-                hasInProgressDeclarations()
-                  ? 'You can only add or edit one Tied House declaration at a time'
-                  : 'Add a new related Tied House declaration'
-              ">
-              <button
-                class="btn btn-link add-new-declaration-button"
-                [disabled]="hasInProgressDeclarations()"
-                (click)="addNewTiedHouseRelationship(_tiedHouseDeclarations[1][0], tiedHouseDeclarationsIndex)">
-                <fa-icon [icon]="faPlusSquare" class="pr-2"></fa-icon>Add New Tied House for
-                {{ _tiedHouseDeclarations[0] }}
-              </button>
-            </span>
-            <p class="m-0 mt-3">
-              By submitting this information, you agree that a Tied House has been declared with the aforementioned
-              information and will become date tied to both yours and your establishment's file.
-            </p>
-          </div>
-        </mat-expansion-panel>
-      </mat-accordion>
-    </div>
-
-    <div *ngIf="!isReadOnly">
-      <span
-        [title]="
-          hasInProgressDeclarations()
-            ? 'You can only add or edit one Tied House declaration at a time'
-            : 'Add a new Tied House declaration'
-        ">
-        <button
-          class="btn btn-link add-new-declaration-button"
-          [disabled]="hasInProgressDeclarations()"
-          (click)="addNewTiedHouse()">
-          <fa-icon [icon]="faPlusSquare" class="pr-2"></fa-icon>Add New Tied House
-        </button>
-      </span>
-      <p class="m-0 mt-3">
-        By submitting this information, you agree that a Tied House has been declared with the aforementioned
-        information and will become date tied to both yours and your establishment's file.
-      </p>
-    </div>
-    <!-- Tempory for dev -->
-    <!-- <pre>grouped tiedHouseDeclarations <br/>{{ groupedTiedHouseDeclarations | json }}</pre> -->
+        <div *ngIf="!isReadOnly && hasSavedRelatedDeclaration(_tiedHouseDeclarations)">
+          <span
+            [title]="
+              hasInProgressDeclarations()
+                ? 'You can only add or edit one Tied House declaration at a time'
+                : 'Add a new related Tied House declaration'
+            ">
+            <button
+              class="btn btn-link add-new-declaration-button"
+              [disabled]="hasInProgressDeclarations()"
+              (click)="addNewTiedHouseRelationship(_tiedHouseDeclarations[1][0], tiedHouseDeclarationsIndex)">
+              <fa-icon [icon]="faPlusSquare" class="pr-2"></fa-icon>Add New Tied House for
+              {{ _tiedHouseDeclarations[0] }}
+            </button>
+          </span>
+          <p class="m-0 mt-3">
+            By submitting this information, you agree that a Tied House has been declared with the aforementioned
+            information and will become date tied to both yours and your establishment's file.
+          </p>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
   </div>
-</form>
+
+  <div *ngIf="!isReadOnly">
+    <span
+      [title]="
+        hasInProgressDeclarations()
+          ? 'You can only add or edit one Tied House declaration at a time'
+          : 'Add a new Tied House declaration'
+      ">
+      <button
+        class="btn btn-link add-new-declaration-button"
+        [disabled]="hasInProgressDeclarations()"
+        (click)="addNewTiedHouse()">
+        <fa-icon [icon]="faPlusSquare" class="pr-2"></fa-icon>Add New Tied House
+      </button>
+    </span>
+    <p class="m-0 mt-3">
+      By submitting this information, you agree that a Tied House has been declared with the aforementioned information
+      and will become date tied to both yours and your establishment's file.
+    </p>
+  </div>
+  <!-- Tempory for dev -->
+  <!-- <pre>grouped tiedHouseDeclarations <br/>{{ groupedTiedHouseDeclarations | json }}</pre> -->
+</div>

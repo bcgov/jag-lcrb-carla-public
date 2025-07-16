@@ -468,11 +468,8 @@
 
           <div>
             <app-connection-to-other-liquor-licences
-              *ngIf="account?.tiedHouse"
-              [tiedHouse]="account?.tiedHouse"
               [account]="account"
-              [applicationTypeName]="application?.applicationType?.name"
-              (value)="tiedHouseFormData = $event"></app-connection-to-other-liquor-licences>
+              (onTiedHouseFormData)="tiedHouseFormData = $event"></app-connection-to-other-liquor-licences>
           </div>
 
           <div *ngIf="!form.valid && form.touched" class="error-summary mt-3">

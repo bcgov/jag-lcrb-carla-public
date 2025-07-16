@@ -48,7 +48,7 @@ export class AccountDataService extends DataService {
 
   loadCurrentAccountToStore(id: string) {
     return forkJoin(this.getAccount(id),
-        this.tiedHouseService.getTiedHouse(id),
+        this.tiedHouseService.GetAllTiedHouseConnectionsForUser(id),
         this.legalEntityDataService.getBusinessProfileSummary())
       .pipe(map(data => {
         const account: Account = data[0];
