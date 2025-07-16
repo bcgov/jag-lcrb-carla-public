@@ -248,8 +248,7 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
         ...this.application,
         ...this.form.value,
         ...this.appContact.form.value,
-        ...appData,
-        tiedHouseConnections: this.tiedHouseDeclaration.tiedHouseDeclarations
+        ...appData
       })
       .pipe(takeWhile(() => this.componentActive))
       .pipe(
@@ -331,8 +330,15 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
     }
 
     const tiedHouseDeclarationIsRequired = this.form.get('csTiedHouseDeclaration').value;
-    if (tiedHouseDeclarationIsRequired && this.isTiedHouseValid()) {
-      this.validationMessages.push('A Tide House Declaration is required.');
+    if (
+      tiedHouseDeclarationIsRequired &&
+      this.tiedHouseDeclaration.tiedHouseDeclarations.find((th) =>
+        [TiedHouseViewMode.new, TiedHouseViewMode.editExistingRecord, TiedHouseViewMode.addNewRelationship].includes(
+          th.viewMode
+        )
+      )
+    ) {
+      this.validationMessages.push('Tide House Declaration has not been saved.');
       valid = false;
     }
 

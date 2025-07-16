@@ -72,7 +72,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public string OtherDescription { get; set; }
 
-        public string BusinessType { get; set; }
+        public int? BusinessType { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
         public TiedHouseConnectionType? ConnectionType { get; set; }

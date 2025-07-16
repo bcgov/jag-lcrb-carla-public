@@ -470,6 +470,9 @@
             <app-connection-to-other-liquor-licences
               [account]="account"
               (onTiedHouseFormData)="tiedHouseFormData = $event"></app-connection-to-other-liquor-licences>
+              [applicationTypeName]="application?.applicationType?.name"
+              [applicationId]="applicationId"
+              (value)="tiedHouseFormData = $event"></app-connection-to-producers>
           </div>
 
           <div *ngIf="!form.valid && form.touched" class="error-summary mt-3">

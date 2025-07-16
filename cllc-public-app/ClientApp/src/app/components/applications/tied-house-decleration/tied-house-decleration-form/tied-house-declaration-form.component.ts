@@ -48,7 +48,8 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
   showOtherField = false;
   isEditable = true;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder) {
     super();
   }
 
@@ -131,9 +132,11 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
       return;
     }
 
-    const tiedHouse: TiedHouseConnection = { ...this.form.value };
-
+    const tiedHouse: TiedHouseConnection = { ...this.form.getRawValue() };
+    tiedHouse.applicationId = this._tiedHouseDecleration.applicationId;
+    tiedHouse.id = this._tiedHouseDecleration.id;
     this.saveTiedHouseDecclaration.emit(tiedHouse);
+    this.setFormState(TiedHouseViewMode.disabled);
   }
 
   cancel() {
@@ -173,7 +176,6 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
 
   private updateLegalEntityFieldValidators() {
     this.form.get('firstName')?.clearValidators();
-    this.form.get('middleName')?.clearValidators();
     this.form.get('lastName')?.clearValidators();
     this.form.get('dateOfBirth')?.clearValidators();
     this.form.get('businessType')?.setValidators(Validators.required);
@@ -182,7 +184,6 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
 
   private updateIndividualFieldValidators() {
     this.form.get('firstName')?.setValidators(Validators.required);
-    this.form.get('middleName')?.setValidators(Validators.required);
     this.form.get('lastName')?.setValidators(Validators.required);
     this.form.get('dateOfBirth')?.setValidators(Validators.required);
     this.form.get('businessType')?.clearValidators();
@@ -199,7 +200,6 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
 
   private updateFieldValuesAndValidities() {
     this.form.get('firstName')?.updateValueAndValidity();
-    this.form.get('middleName')?.updateValueAndValidity();
     this.form.get('lastName')?.updateValueAndValidity();
     this.form.get('dateOfBirth')?.updateValueAndValidity();
     this.form.get('businessType')?.updateValueAndValidity();

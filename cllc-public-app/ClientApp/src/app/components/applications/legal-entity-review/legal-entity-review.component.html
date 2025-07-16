@@ -24,7 +24,7 @@
     <section *ngIf="isTiedHouseVisible">
       <h3 class="blue-header">Tied House Declaration</h3>
       <div class="content-bottom">
-        <app-tied-house-declaration #tiedHouseDeclaration></app-tied-house-declaration>
+        <app-tied-house-declaration #tiedHouseDeclaration [applicationId]="application.id"></app-tied-house-declaration>
       </div>
     </section>
 

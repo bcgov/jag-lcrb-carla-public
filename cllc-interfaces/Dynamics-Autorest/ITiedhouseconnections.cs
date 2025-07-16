@@ -154,5 +154,8 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         Task<HttpOperationResponse> AddReferenceWithHttpMessagesAsync(string adoxioApplicationid, string fieldname, Odataid odataid = default, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default);
 
+        Task<HttpOperationResponse> DeleteReferenceWithHttpMessagesAsync(string accountId, string fieldname, string licenceid, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default);
+
+
     }
 }

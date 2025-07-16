@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { formatDate } from '@components/applications/tied-house-decleration/tide-house-utils';
 import { faPlusSquare } from '@fortawesome/free-regular-svg-icons';
 import {
@@ -10,6 +11,9 @@ import {
 } from '@models/tied-house-connection.model';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
 import { GenericMessageDialogComponent } from '@shared/components/dialog/generic-message-dialog/generic-message-dialog.component';
+import { FormBase } from '@shared/form-base';
+import { Observable, of } from 'rxjs';
+import { catchError, mergeMap, takeWhile } from 'rxjs/operators';
 
 const NEW_DECLARATION_KEY = 'New Declaration';
 
@@ -50,8 +54,13 @@ export class TiedHouseDeclarationComponent implements OnInit {
 
   constructor(
     private tiedHouseService: TiedHouseConnectionsDataService,
+
+    private matDialog: MatDialog,
+    private snackBar: MatSnackBar
     private matDialog: MatDialog
-  ) {}
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
     if (this.tiedHouseConnections) {
@@ -145,6 +154,9 @@ export class TiedHouseDeclarationComponent implements OnInit {
       newTiedHouseDeclaration.middleName = relatedDeclaration.middleName;
       newTiedHouseDeclaration.dateOfBirth = relatedDeclaration.dateOfBirth;
       newTiedHouseDeclaration.isLegalEntity = relatedDeclaration.isLegalEntity;
+      newTiedHouseDeclaration.legalEntityName = relatedDeclaration.legalEntityName;
+      newTiedHouseDeclaration.relationshipToLicence = relatedDeclaration.relationshipToLicence;
+      newTiedHouseDeclaration.businessType = relatedDeclaration.businessType;
     }
 
     this.tiedHouseDeclarations.push(newTiedHouseDeclaration);
@@ -215,7 +227,19 @@ export class TiedHouseDeclarationComponent implements OnInit {
   saveTiedHouseDeclaration(updated: TiedHouseConnection, original: TiedHouseConnection) {
     updated.viewMode = TiedHouseViewMode.disabled;
     Object.assign(original, updated);
+
+    this.submitTiedHouseDeclarationChange(updated);
     this.updateGroupedTiedHouseDeclarations();
+  }
+
+  submitTiedHouseDeclarationChange(declaration: TiedHouseConnection) {
+    this.save(declaration)
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe(([saveSucceeded]) => {
+        if (!saveSucceeded) {
+          this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        }
+      });
   }
 
   /**
@@ -226,14 +250,21 @@ export class TiedHouseDeclarationComponent implements OnInit {
    * @param {number} accordionIndex
    */
   removeNewTiedHouseDeclaration(declaration: TiedHouseConnection, keepAccordionOpen: boolean, accordionIndex: number) {
-    declaration.viewMode = TiedHouseViewMode.hidden;
-    declaration.markedForRemoval = true;
+    if(declaration.supersededById){
+      declaration.viewMode = TiedHouseViewMode.existing;
+      declaration.markedForRemoval = true;
+      this.submitTiedHouseDeclarationChange(declaration);
+    }
+    else {
+      declaration.viewMode = TiedHouseViewMode.hidden;
+      declaration.markedForRemoval = true;
+      this.submitTiedHouseDeclarationChange(declaration);
+      this.updateGroupedTiedHouseDeclarations();
+    }
 
     if (keepAccordionOpen) {
       this.openPanel(accordionIndex);
     }
-
-    this.updateGroupedTiedHouseDeclarations();
   }
 
   /**
@@ -251,6 +282,7 @@ export class TiedHouseDeclarationComponent implements OnInit {
 
     declaration.statusCode = TiedHouseStatusCode.new;
     declaration.markedForRemoval = true;
+    this.submitTiedHouseDeclarationChange(declaration);
   }
 
   /**
@@ -268,6 +300,7 @@ export class TiedHouseDeclarationComponent implements OnInit {
 
     declaration.statusCode = TiedHouseStatusCode.existing;
     declaration.markedForRemoval = false;
+    this.submitTiedHouseDeclarationChange(declaration);
   }
 
   /**
@@ -381,5 +414,35 @@ export class TiedHouseDeclarationComponent implements OnInit {
       );
 
     this.groupedTiedHouseDeclarations = Object.entries(grouped);
+  }
+
+  private save(declaration: TiedHouseConnection): Observable<[boolean, TiedHouseConnection]> {
+    return this.tiedHouseService
+      .createTiedHouse(declaration, this.applicationId)
+      .pipe(takeWhile(() => this.componentActive))
+      .pipe(
+        catchError(() => {
+          this.snackBar.open('Error saving Tied House Declaration', 'Fail', {
+            duration: 3500,
+            panelClass: ['red-snackbar']
+          });
+
+          const res: [boolean, TiedHouseConnection] = [false, null];
+
+          return of(res);
+        })
+      )
+      .pipe(
+        mergeMap((data) => {
+          this.snackBar.open('Tied House Declaration has been saved', 'Success', {
+            duration: 3500,
+            panelClass: ['green-snackbar']
+          });
+
+          const res: [boolean, TiedHouseConnection] = [true, data as TiedHouseConnection];
+
+          return of(res);
+        })
+      );
   }
 }

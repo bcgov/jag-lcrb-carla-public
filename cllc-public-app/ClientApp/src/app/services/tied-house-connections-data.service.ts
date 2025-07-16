@@ -40,8 +40,8 @@ export class TiedHouseConnectionsDataService extends DataService {
    * Create a new legal entity in Dynamics
    * @param data - legal entity data
    */
-  createTiedHouse(data: any) {
-    return this.http.post<TiedHouseConnection>("api/tiedhouseconnections/", data, { headers: this.headers })
+  createTiedHouse(data: any, applicationId: string) {
+    return this.http.post<TiedHouseConnection>(`api/tiedhouseconnections/application/${applicationId}`, data, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 

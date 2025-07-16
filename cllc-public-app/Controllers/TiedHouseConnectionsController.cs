@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Rest;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -169,6 +170,86 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 
             return new JsonResult(tiedHouse.ToViewModel());
+        }
+
+        [HttpPost("application/{applicationId}")]
+        public async Task<IActionResult> AddTiedHouseConnectionToApplication([FromBody] ViewModels.TiedHouseConnection tiedHouseConnection, string applicationId)
+        {
+            MicrosoftDynamicsCRMadoxioTiedhouseconnection adoxioTiedHouseConnection = new MicrosoftDynamicsCRMadoxioTiedhouseconnection();
+
+
+            adoxioTiedHouseConnection.CopyValues(tiedHouseConnection);
+            try
+            {
+                if (tiedHouseConnection.ApplicationId == applicationId)
+                {
+                    await _dynamicsClient.Tiedhouseconnections.UpdateAsync(adoxioTiedHouseConnection.AdoxioTiedhouseconnectionid, adoxioTiedHouseConnection);
+                    await RemoveAndAddAssociateLicenses(tiedHouseConnection.AssociatedLiquorLicense.Select(x => x.Id).ToList(), adoxioTiedHouseConnection.AdoxioTiedhouseconnectionid);
+                }
+                else
+                {
+                    if (!String.IsNullOrEmpty(tiedHouseConnection.id))
+                    {
+                        adoxioTiedHouseConnection.SupersededByOdataBind = $"/adoxio_tiedhouseconnections({tiedHouseConnection.id})";
+                    }
+                    adoxioTiedHouseConnection.ApplicationOdataBind = $"/adoxio_applications({applicationId})";
+                    
+
+                    adoxioTiedHouseConnection.AdoxioTiedhouseconnectionid = null;
+
+                    var response = await _dynamicsClient.Tiedhouseconnections.CreateAsync(adoxioTiedHouseConnection);
+
+
+                    await AssociateLicenses(tiedHouseConnection.AssociatedLiquorLicense.Select(x => x.Id).ToList(), response.AdoxioTiedhouseconnectionid);
+                }
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Error adding tied house connections");
+                throw new Exception("Unable to add tied house connection");
+            }
+
+            return new JsonResult(adoxioTiedHouseConnection);
+        }
+
+        private async Task RemoveAndAddAssociateLicenses(List<string> licenses, string tiedHouseId)
+        {
+            var result = new List<ViewModels.TiedHouseConnection>();
+            IEnumerable<MicrosoftDynamicsCRMadoxioTiedhouseconnection> tiedHouseConnections = null;
+            string filter = "adoxio_tiedhouseconnectionid eq " + tiedHouseId;
+            var expand = new List<string> { "adoxio_adoxio_tiedhouseconnection_adoxio_licence" };
+            var select = new List<string>() { "adoxio_adoxio_tiedhouseconnection_adoxio_licence" };
+            var tiedHouseConnection = _dynamicsClient.Tiedhouseconnections.Get(filter: filter, select: select, expand: expand).Value.FirstOrDefault();
+
+            var licencesIds = tiedHouseConnection.Adoxio_Adoxio_TiedHouseConnection_Adoxio_Licence.Select(l => l.AdoxioLicencesid);
+            var hasLicencesBeenUpdated = !licencesIds.OrderBy(x => x).SequenceEqual(licenses.OrderBy(x => x));
+            if (hasLicencesBeenUpdated)
+            {
+                foreach (var id in licencesIds)
+                {
+                    _dynamicsClient.Tiedhouseconnections.DeleteReferenceWithHttpMessagesAsync(
+                            tiedHouseId,
+                            "adoxio_adoxio_tiedhouseconnection_adoxio_licence", id).GetAwaiter().GetResult();
+                }
+                ;
+
+                await AssociateLicenses(licenses, tiedHouseId);
+            }
+        }
+        private async Task AssociateLicenses(List<string> licenses, string tiedHouseId)
+        {
+            foreach (var licenceId in licenses)
+            {
+                var odataId = new Odataid
+                {
+                    OdataidProperty = _dynamicsClient.GetEntityURI("adoxio_licenceses", licenceId)
+                };
+
+                await _dynamicsClient.Tiedhouseconnections.AddReferenceWithHttpMessagesAsync(
+                    tiedHouseId,
+                    "adoxio_adoxio_tiedhouseconnection_adoxio_licence",
+                    odataid: odataId);
+            }
         }
     }
 }

@@ -28,18 +28,22 @@
           class="form-control"
           style="width: 100%"
           type="text"
-          autocomplete="family-name"
+          autocomplete="first-name"
           formControlName="firstName"
           id="firstName" />
       </app-field>
     </div>
     <div class="row">
-      <app-field class="col-md-6" label="Middle Name" [required]="false" [valid]="isValidOrNotTouched('middleName')">
+      <app-field
+        class="col-md-6"
+        label="Middle Name"
+        [required]="false"
+        [valid]="isValidOrNotTouched('middleName')">
         <input
           class="form-control"
           style="width: 100%"
           type="text"
-          autocomplete="family-name"
+          autocomplete="middle-name"
           formControlName="middleName"
           id="middleName" />
       </app-field>
@@ -53,7 +57,7 @@
           class="form-control"
           style="width: 100%"
           type="text"
-          autocomplete="family-name"
+          autocomplete="last-name"
           formControlName="lastName"
           id="lastName" />
       </app-field>
@@ -61,10 +65,10 @@
   </span>
   <!-- ------Legal Entity------ -->
   <div class="row" *ngIf="form.get('isLegalEntity')?.value == true">
-    <app-field class="col-md-6" label="Business Type" [required]="true" errorMessage="Business Type is required">
+    <app-field class="col-md-6" label="Business Type" [required]="true" [valid]="form.get('businessType')?.valid || !form.get('businessType')?.touched" errorMessage="Business Type is required">
       <select class="form-control" formControlName="businessType">
         <option value="" disabled>Select a Business Type</option>
-        <option *ngFor="let option of businessTypes" [value]="option.id">
+        <option *ngFor="let option of businessTypes" [value]="option.value">
           {{ option.name }}
         </option>
       </select>
@@ -75,7 +79,7 @@
       [required]="true"
       [valid]="isValidOrNotTouched('legalEntityName')"
       errorMessage="Legal Entity Name is required">
-      <input class="form-control" type="text" formControlName="legalEntityName" />
+      <input class="form-control" type="text" autocomplete="legal-entity-name" formControlName="legalEntityName" />
     </app-field>
   </div>
 
@@ -85,7 +89,7 @@
       label="Relationship to Declared Licence"
       [required]="true"
       [valid]="form.get('relationshipToLicence')?.valid || !form.get('relationshipToLicence')?.touched"
-      errorMessage="Legal Entity Name is required">
+      errorMessage="Relationship to Declared Licence is required">
       <select class="form-control" formControlName="relationshipToLicence">
         <option value="" disabled>Select a relationship</option>
         <option *ngFor="let option of relationshipTypes" [value]="option.value">
@@ -119,11 +123,6 @@
     </app-field>
   </div>
 
-  <!-- Temporary for Dev -->
-  <!-- <pre> {{getInvalidControls(form) |json}}
-
-</pre>
-<pre>Tied House Connections {{tiedHouseConnections}}</pre> -->
   <!-- ------Footer------ -->
 
   <div *ngIf="!isReadOnly" class="row justify-content-end">
@@ -140,6 +139,4 @@
       <button class="btn btn-link btn-cancel" (click)="remove()"><fa-icon [icon]="faTrash"></fa-icon> Remove</button>
     </div>
   </div>
-  <!-- Tempory for dev -->
-  <!-- <pre>{{ form.value | json }}</pre> -->
 </form>

@@ -522,7 +522,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         [JsonProperty(PropertyName = "_adoxio_supersededby_value")]
         public string _adoxio_supersededbyValue { get; set; }      
         [JsonProperty(PropertyName = "adoxio_markedforremoval")]
-        public int? AdoxioMarkedForRemoval { get; set; }
+        public int? AdoxioMarkedForRemoval { get; set; }    
+        [JsonProperty(PropertyName = "adoxio_legalentityname")]
+        public string AdoxioLegalEntityName { get; set; }        
+        [JsonProperty(PropertyName = "adoxio_businesstype")]
+        public int? AdoxioBusinessType { get; set; }
 
     }
 }
