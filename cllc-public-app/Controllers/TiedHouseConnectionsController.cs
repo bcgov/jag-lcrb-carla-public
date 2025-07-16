@@ -57,7 +57,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.LogDebug($"GetAllTiedHouseConnectionsForUser. AccountId = {accountIdForFilter}.");
 
                 var filter =
-                    $"(_adoxio_accountid_value eq {accountIdForFilter} and statuscode eq {(int)TiedHouseStatusCode.Existing})";
+                    $"(_adoxio_accountid_value eq {accountIdForFilter} and statuscode eq {(int)TiedHouseStatusCode.Existing}) and statecode eq 0";
                 var expand = new List<string> { "adoxio_adoxio_tiedhouseconnection_adoxio_licence" };
 
                 tiedHouseConnections = _dynamicsClient.Tiedhouseconnections.Get(filter: filter, expand: expand).Value;

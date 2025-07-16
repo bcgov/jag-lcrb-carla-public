@@ -29,10 +29,6 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit {
 
   form: FormGroup;
 
-  get tiedHouseConnections(): TiedHouseConnection[] {
-    return this.account?.tiedHouse ?? [];
-  }
-
   constructor(
     private fb: FormBuilder,
     public snackBar: MatSnackBar

@@ -506,9 +506,10 @@ export class AccountProfileComponent extends FormBase implements OnInit {
       this.contactDataService.updateContact(this.form.get('contact').value)
     ];
 
-    if (this.connectionToOtherLiquorLicencesComponent) {
-      saves.push(this.prepareTiedHouseSaveRequest({ ...this.account.tiedHouse, ..._tiedHouse }));
-    }
+    // TODO: Enable/Replace with new tied house saving logic
+    // if (this.connectionToOtherLiquorLicencesComponent) {
+      // saves.push(this.prepareTiedHouseSaveRequest({ ...this.account.tiedHouse, ..._tiedHouse }));
+    // }
 
     return forkJoin(saves).pipe(
       catchError(() => of(false)),
@@ -575,15 +576,16 @@ export class AccountProfileComponent extends FormBase implements OnInit {
     }
   }
 
-  prepareTiedHouseSaveRequest(_tiedHouseData) {
-    const data = { ...this.account.tiedHouse, ..._tiedHouseData };
+  // TODO: Enable/Replace with new tied house saving logic
+  // prepareTiedHouseSaveRequest(_tiedHouseData) {
+  //   const data = { ...this.account.tiedHouse, ..._tiedHouseData };
 
-    if (data.id) {
-      return this.tiedHouseService.updateTiedHouse(data, data.id);
-    } else {
-      return this.accountDataService.createTiedHouseConnection(data, this.accountId);
-    }
-  }
+  //   if (data.id) {
+  //     return this.tiedHouseService.updateTiedHouse(data, data.id);
+  //   } else {
+  //     return this.accountDataService.createTiedHouseConnection(data, this.accountId);
+  //   }
+  // }
 
   // marking the form as touched makes the validation messages show
   markAsTouched() {
