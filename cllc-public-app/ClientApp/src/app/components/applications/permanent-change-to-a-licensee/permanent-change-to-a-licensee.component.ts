@@ -279,7 +279,6 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
    */
   private isValid(): boolean {
     this.showValidationMessages = false;
-    this.validationMessages = [];
     this.validationMessages = this.listControlsWithErrors(this.form, this.getValidationErrorMap());
     let valid = this.form.disabled || this.form.valid;
 
@@ -349,9 +348,9 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
     }
 
     if (
-      this.tiedHouseDeclaration.tiedHouseDeclarations.find((th) =>
+      this.tiedHouseDeclaration.tiedHouseDeclarations.find((item) =>
         [TiedHouseViewMode.new, TiedHouseViewMode.editExistingRecord, TiedHouseViewMode.addNewRelationship].includes(
-          th.viewMode
+          item.viewMode
         )
       )
     ) {

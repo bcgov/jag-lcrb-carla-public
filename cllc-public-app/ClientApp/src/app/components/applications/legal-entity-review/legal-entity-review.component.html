@@ -1,26 +1,18 @@
 <div [formGroup]="form" class="form-wrapper">
   <h1>Legal Entity Review</h1>
 
-  <mat-progress-bar class="mt-1" *ngIf="!dataLoaded" mode="indeterminate"></mat-progress-bar>
+  <mat-progress-bar class="mt-1" *ngIf="!isDataLoaded" mode="indeterminate"></mat-progress-bar>
 
-  <ng-container *ngIf="dataLoaded">
+  <ng-container *ngIf="isDataLoaded">
     <section>
-      <app-legal-entity-review-disclaimer
-        [account]="account"
-        [liquorLicences]="liquorLicences"
-        [cannabisLicences]="cannabisLicences"></app-legal-entity-review-disclaimer>
+      <app-legal-entity-review-disclaimer [account]="account"></app-legal-entity-review-disclaimer>
     </section>
 
-    <!-- Tied House Connections -->
     <section>
       <app-legal-entity-review-tied-house
-        [hasLiquor]="hasLiquor"
-        [hasCannabis]="hasCannabis"
-        [showValidationMessages]="showValidationMessages"
         (showTiedHouseConnections)="showTiedHouseConnections($event)"></app-legal-entity-review-tied-house>
     </section>
 
-    <!-- Tied House Connections -->
     <section *ngIf="isTiedHouseVisible">
       <h3 class="blue-header">Tied House Declaration</h3>
       <div class="content-bottom">
@@ -28,18 +20,13 @@
       </div>
     </section>
 
-    <!-- Supporting Documents -->
     <section>
       <app-legal-entity-review-supporting-documents
-        [account]="account"
         [application]="application"
-        [hasLiquor]="hasLiquor"
-        [hasCannabis]="hasCannabis"
-        [showValidationMessages]="showValidationMessages"
-        (onUploadedFileCountEvent)="uploadedSupportingDocumentsCount = $event"></app-legal-entity-review-supporting-documents>
+        (onUploadedFileCountEvent)="uploadedSupportingDocumentsCount = $event">
+      </app-legal-entity-review-supporting-documents>
     </section>
 
-    <!-- Declaration -->
     <section>
       <app-legal-entity-review-declarations
         [hasLiquor]="hasLiquor"
@@ -47,12 +34,8 @@
         [showValidationMessages]="showValidationMessages"></app-legal-entity-review-declarations>
     </section>
 
-    <!-- What Happens Next -->
     <section>
-      <app-legal-entity-review-what-happens-next
-        [account]="account"
-        [liquorLicences]="liquorLicences"
-        [cannabisLicences]="cannabisLicences"></app-legal-entity-review-what-happens-next>
+      <app-legal-entity-review-what-happens-next></app-legal-entity-review-what-happens-next>
     </section>
 
     <section class="error mt-3" *ngIf="showValidationMessages">

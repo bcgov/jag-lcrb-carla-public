@@ -9,6 +9,7 @@ import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { Account } from '@models/account.model';
 import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
 import { Application } from '@models/application.model';
+import { TiedHouseViewMode } from '@models/tied-house-connection.model';
 import { Store } from '@ngrx/store';
 import { ApplicationDataService } from '@services/application-data.service';
 import { GenericConfirmationDialogComponent } from '@shared/components/dialog/generic-confirmation-dialog/generic-confirmation-dialog.component';
@@ -41,27 +42,28 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
   tiedHouseDeclaration: TiedHouseDeclarationComponent;
   isTiedHouseVisible: boolean = false;
 
+  account: Account;
+  application: Application;
+  liquorLicences: ApplicationLicenseSummary[] = [];
+  cannabisLicences: ApplicationLicenseSummary[] = [];
+
+  applicationId: string;
+
+  // TODO: This is currently unused, remove if not needed.
+  uploadedSupportingDocumentsCount: 0;
+
+  validationMessages: string[];
+  showValidationMessages: boolean;
+
+  isDataLoaded: boolean;
+  isSubmitting: boolean;
+
+  form: FormGroup;
+
   faQuestionCircle = faQuestionCircle;
   faIdCard = faIdCard;
   faSave = faSave;
   faTrashAlt = faTrashAlt;
-
-  application: Application;
-  liquorLicences: ApplicationLicenseSummary[] = [];
-  cannabisLicences: ApplicationLicenseSummary[] = [];
-  account: Account;
-
-  showValidationMessages: boolean;
-  dataLoaded: boolean;
-
-  applicationId: string;
-  validationMessages: string[];
-
-  uploadedSupportingDocumentsCount: 0;
-
-  isSubmitting: boolean;
-
-  form: FormGroup;
 
   get hasLiquor(): boolean {
     return this.liquorLicences.length > 0;
@@ -95,12 +97,20 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
   }
 
   ngOnInit(): void {
+    this.initForm();
+    this.loadData();
+  }
+
+  /**
+   * Initializes the form with the required controls and validators.
+   *
+   * @private
+   */
+  private initForm() {
     this.form = this.fb.group({
       authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]]
     });
-
-    this.loadData();
   }
 
   /**
@@ -109,10 +119,12 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
    * @private
    */
   private loadData() {
-    // TODO Update this API call to fetch the legal entity review application data
+    // TODO Update this API call to fetch the legal entity review application data, unless it uses the same endpoint as
+    // a PCL?
     const sub = this.applicationDataService.getPermanentChangesToLicenseeData(this.applicationId).subscribe((data) => {
       this.setFormData(data);
     });
+
     this.subscriptionList.push(sub);
   }
 
@@ -133,7 +145,7 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
 
     this.form.patchValue(application);
 
-    this.dataLoaded = true;
+    this.isDataLoaded = true;
   }
 
   /**
@@ -167,10 +179,13 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
    */
   private isValid(): boolean {
     this.showValidationMessages = false;
-
     this.validationMessages = this.listControlsWithErrors(this.form, this.getValidationErrorMap());
-
     let valid = this.form.disabled || this.form.valid;
+
+    if (!this.areTiedHouseDeclarationsValid()) {
+      this.validationMessages.push('Tide House Declaration has not been saved.');
+      valid = false;
+    }
 
     return valid;
   }
@@ -185,8 +200,7 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
     return this.applicationDataService
       .updateApplication({
         ...this.application,
-        ...this.form.value,
-        tiedHouseConnections: this.tiedHouseDeclaration.flatDeclarations
+        ...this.form.value
       })
       .pipe(takeWhile(() => this.componentActive))
       .pipe(
@@ -215,9 +229,10 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
   /**
    * Returns a map of validation error messages for the form controls.
    *
+   * @private
    * @return {*}
    */
-  getValidationErrorMap() {
+  private getValidationErrorMap() {
     const errorMap = {
       signatureAgreement:
         'Please affirm that all of the information provided for this application is true and complete',
@@ -252,5 +267,25 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
    */
   showTiedHouseConnections(showValue: boolean) {
     this.isTiedHouseVisible = showValue;
+  }
+
+  /**
+   * Checks if the tied house declarations are valid.
+   *
+   * @return {*}  {boolean} `true` if valid, `false` otherwise.
+   */
+  areTiedHouseDeclarationsValid(): boolean {
+    if (
+      this.tiedHouseDeclaration.tiedHouseDeclarations.find((item) =>
+        [TiedHouseViewMode.new, TiedHouseViewMode.editExistingRecord, TiedHouseViewMode.addNewRelationship].includes(
+          item.viewMode
+        )
+      )
+    ) {
+      // One or more declarations are in an unsaved state.
+      return false;
+    }
+
+    return true;
   }
 }

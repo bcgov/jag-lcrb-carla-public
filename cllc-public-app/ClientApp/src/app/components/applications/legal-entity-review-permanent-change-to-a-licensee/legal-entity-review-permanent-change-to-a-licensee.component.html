@@ -15,12 +15,15 @@
     </section>
 
     <section>
+      <app-legal-entity-review-job [account]="account"></app-legal-entity-review-job>
+    </section>
+
+    <section>
       <app-legal-entity-review-types-of-changes-required
         [account]="account"
         [changesRequired]="changeList"></app-legal-entity-review-types-of-changes-required>
     </section>
 
-    <!-- Declaration -->
     <section>
       <app-permanent-change-declarations
         [hasLiquor]="hasLiquor"
@@ -28,7 +31,6 @@
         [showValidationMessages]="showValidationMessages"></app-permanent-change-declarations>
     </section>
 
-    <!-- Payment -->
     <section>
       <app-permanent-change-payment
         [application]="application"

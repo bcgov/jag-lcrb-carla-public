@@ -352,6 +352,8 @@ import { LegalEntityReviewWhatHappensNextComponent } from "@shared/components/le
 import { LegalEntityReviewTiedHouseComponent } from "@shared/components/legal-entity-review/legal-entity-review-tied-house/legal-entity-review-tied-house.component";
 import { LegalEntityReviewSupportingDocumentsComponent } from "@shared/components/legal-entity-review/legal-entity-review-supporting-documents/legal-entity-review-supporting-documents.component";
 import { LegalEntityReviewPermanentChangeToALicenseeComponent } from "@components/applications/legal-entity-review-permanent-change-to-a-licensee/legal-entity-review-permanent-change-to-a-licensee.component";
+import { LegalEntityReviewNoticeLetterComponent } from "@shared/components/legal-entity-review/legal-entity-review-notice-letter/legal-entity-review-notice-letter.component";
+import { LegalEntityReviewOutcomeLetterComponent } from "@shared/components/legal-entity-review/legal-entity-review-outcome-letter/legal-entity-review-outcome-letter.component";
 import { GenericConfirmationDialogComponent } from "@shared/components/dialog/generic-confirmation-dialog/generic-confirmation-dialog.component";
 import { GenericMessageDialogComponent } from "@shared/components/dialog/generic-message-dialog/generic-message-dialog.component";
 import { ConnectionToOtherLiquorLicencesComponent } from "@components/account-profile/tabs/connection-to-other-liquor-licences/connection-to-other-liquor-licences.component";
@@ -576,6 +578,8 @@ import { ConnectionToOtherLiquorLicencesComponent } from "@components/account-pr
     LegalEntityReviewTypesOfChangesRequiredComponent,
     LegalEntityReviewWhatHappensNextComponent,
     LegalEntityReviewPermanentChangeToALicenseeComponent,
+    LegalEntityReviewNoticeLetterComponent,
+    LegalEntityReviewOutcomeLetterComponent,
     ConnectionToOtherLiquorLicencesComponent,
     GenericConfirmationDialogComponent,
     GenericMessageDialogComponent

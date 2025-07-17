@@ -51,9 +51,7 @@
       <a href="mailto:LCRBLiquor@gov.bc.ca">LCRBLiquor&#64;gov.bc.ca</a>
     </p>
   </div>
-  <div *ngFor="let notice of notices">
-    <a target="_blank" href="{{ notice.downloadUrl }}" download
-      ><i class="fa fa-download" class="mr-2"></i>{{ notice.name }}</a
-    >
+  <div>
+    <app-legal-entity-review-notices [account]="account"></app-legal-entity-review-notices>
   </div>
 </section>
