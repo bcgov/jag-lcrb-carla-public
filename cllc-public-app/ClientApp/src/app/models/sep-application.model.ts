@@ -1,3 +1,4 @@
+import { SepInvoice } from "@models/sep-invoice.model";
 import { Account } from "./account.model";
 import { Contact } from "./contact.model";
 import { SepCity } from "./sep-city.model";
@@ -5,6 +6,14 @@ import { SepDrinkSalesForecast } from "./sep-drink-sales-forecast.model";
 import { SepLocation } from "./sep-location.model";
 import { differenceInHours } from "date-fns";
 
+/**
+ * Special Event Application Model.
+ *
+ * TODO: This model is out of date and missing properties.
+ *
+ * @export
+ * @class SepApplication
+ */
 export class SepApplication {
     applicant: Contact;
     applicantInfo: any;
@@ -67,6 +76,8 @@ export class SepApplication {
     totalRevenue: number;
     totalProceeds: number;
     totalPurchaseCost: number;
+
+    invoice: SepInvoice;
 
     public get totalMaximumNumberOfGuests(): number {
         let maxGuests = 0;

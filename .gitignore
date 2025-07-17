@@ -48,3 +48,4 @@ cllc-public-app/ClientApp/.vscode/
 /cllc-public-app/ClientApp/chrome-profiler-events.json
 /cllc-public-app/ClientApp/speed-measure-plugin.json
 **/MSBuild_Logs/
+cllc-public-app/sep.json
