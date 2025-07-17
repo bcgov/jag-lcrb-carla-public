@@ -48,7 +48,6 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
   dataLoaded: boolean;
   primaryPaymentInProgress: boolean;
   secondaryPaymentInProgress: boolean;
-  verifyRquestMade: boolean;
   validationMessages: string[];
 
   @ViewChild('appContact')

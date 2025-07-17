@@ -1,5 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ControlContainer, FormGroup, FormGroupDirective } from '@angular/forms';
+import { Component, Input } from '@angular/core';
 import { PermanentChangeTypesOfChangesOption } from '@app/constants/permanent-change-types-of-changes';
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { Account } from '@models/account.model';
@@ -9,35 +8,25 @@ import { Account } from '@models/account.model';
  *
  * @export
  * @class LegalEntityReviewTypesOfChangesRequiredComponent
- * @implements {OnInit}
  */
 @Component({
   selector: 'app-legal-entity-review-types-of-changes-required',
   templateUrl: './legal-entity-review-types-of-changes-required.component.html',
-  styleUrls: ['./legal-entity-review-types-of-changes-required.component.scss'],
-  viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
+  styleUrls: ['./legal-entity-review-types-of-changes-required.component.scss']
 })
-export class LegalEntityReviewTypesOfChangesRequiredComponent implements OnInit {
+export class LegalEntityReviewTypesOfChangesRequiredComponent {
+  /**
+   * The account associated with the legal entity review application.
+   *
+   * @type {Account}
+   */
   @Input() account: Account;
-  @Input() changeList: PermanentChangeTypesOfChangesOption[];
+  /**
+   * The list of changes required for the permanent change application.
+   *
+   * @type {PermanentChangeTypesOfChangesOption[]}
+   */
+  @Input() changesRequired: PermanentChangeTypesOfChangesOption[];
 
   faQuestionCircle = faQuestionCircle;
-
-  form: FormGroup;
-
-  typesOfChangesRequired: PermanentChangeTypesOfChangesOption[] = [];
-
-  constructor(public controlContainer: ControlContainer) {}
-
-  ngOnInit() {
-    this.form = this.controlContainer.control as FormGroup;
-
-    for (const changeListItem of this.changeList) {
-      const formControlName = changeListItem.formControlName;
-
-      if (this.form.get(formControlName)?.value) {
-        this.typesOfChangesRequired.push(changeListItem);
-      }
-    }
-  }
 }

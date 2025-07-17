@@ -53,7 +53,7 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
   applicationId: string;
   validationMessages: string[];
 
-  uploadedSupportingDocuments: 0;
+  uploadedSupportingDocumentsCount: 0;
 
   isSubmitting: boolean;
 

@@ -23,7 +23,7 @@ export class LegalEntityReviewSupportingDocumentsComponent implements OnInit {
   @Input() liquorLicences: ApplicationLicenseSummary[] = [];
   @Input() cannabisLicences: ApplicationLicenseSummary[] = [];
 
-  @Output() onUploadedFileEvent = new EventEmitter<number>();
+  @Output() onUploadedFileCountEvent = new EventEmitter<number>();
 
   form: FormGroup;
 
@@ -33,7 +33,7 @@ export class LegalEntityReviewSupportingDocumentsComponent implements OnInit {
     this.form = this.controlContainer.control as FormGroup;
   }
 
-  onUploadedFile(event: number) {
-    this.onUploadedFileEvent.emit(event);
+  onUploadedFileCount(event: number) {
+    this.onUploadedFileCountEvent.emit(event);
   }
 }

@@ -6,7 +6,7 @@
   </p>
 
   <ul>
-    <ng-container *ngFor="let item of typesOfChangesRequired; let first = first">
+    <ng-container *ngFor="let item of changesRequired; let first = first">
       <li>
         {{ account.isOtherBusinessType() && item.otherName ? item.otherName : item.name }}
         <fa-icon

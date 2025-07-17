@@ -100,6 +100,7 @@ import { RelocationTypeComponent } from "@components/relocation-type/relocation-
 import { TiedHouseDeclarationFormComponent } from "@components/applications/tied-house-decleration/tied-house-decleration-form/tied-house-declaration-form.component";
 import { TiedHouseDeclarationComponent } from "@components/applications/tied-house-decleration/tied-house-declaration.component";
 import { LegalEntityReviewComponent } from "@components/applications/legal-entity-review/legal-entity-review.component";
+import { LegalEntityReviewPermanentChangeToALicenseeComponent } from "@components/applications/legal-entity-review-permanent-change-to-a-licensee/legal-entity-review-permanent-change-to-a-licensee.component";
 import { StandalonePaymentConfirmationComponent } from "@components/standalone-payment-confirmation/standalone-payment-confirmation.component";
 
 const routes: Routes = [
@@ -378,6 +379,7 @@ const routes: Routes = [
     data: { feature: "PermanentChangesToLicensee" }
   },
   // Legal Entity Review
+  // TODO: Finalize these routes
   {
     path: "legal-entity-review",
     component: LegalEntityReviewComponent,
@@ -393,6 +395,26 @@ const routes: Routes = [
   {
     path: "legal-entity-review/:applicationId/:invoiceType",
     component: LegalEntityReviewComponent,
+    canActivate: [BCeidAuthGuard, FeatureGuard],
+    data: { feature: "LegalEntityReview" }
+  },
+  // Legal Entity Review Permanent Change to a Licensee
+  // TODO: Finalize these routes
+  {
+    path: "legal-entity-review-permanent-change-to-a-licensee",
+    component: LegalEntityReviewPermanentChangeToALicenseeComponent,
+    canActivate: [BCeidAuthGuard, FeatureGuard],
+    data: { feature: "LegalEntityReview" }
+  },
+  {
+    path: "legal-entity-review-permanent-change-to-a-licensee/:applicationId",
+    component: LegalEntityReviewPermanentChangeToALicenseeComponent,
+    canActivate: [BCeidAuthGuard, FeatureGuard],
+    data: { feature: "LegalEntityReview" }
+  },
+  {
+    path: "legal-entity-review-permanent-change-to-a-licensee/:applicationId/:invoiceType",
+    component: LegalEntityReviewPermanentChangeToALicenseeComponent,
     canActivate: [BCeidAuthGuard, FeatureGuard],
     data: { feature: "LegalEntityReview" }
   },
