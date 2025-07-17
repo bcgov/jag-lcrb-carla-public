@@ -18,6 +18,17 @@ import { catchError, filter, mergeMap, takeWhile } from 'rxjs/operators';
 
 export const SharepointNameRegex = /^[^~#%&*{}\\:<>?/+|""]*$/;
 
+/**
+ * A component that displays a form page for a legal entity review permanent change to a licensee application.
+ *
+ * This is step 2 of the legal entity review process, where the user pays for the legal entity review changes.
+ * For step 1, see `LegalEntityReviewComponent`.
+ *
+ * @export
+ * @class LegalEntityReviewPermanentChangeToALicenseeComponent
+ * @extends {FormBase}
+ * @implements {OnInit}
+ */
 @Component({
   selector: 'app-legal-entity-review-permanent-change-to-a-licensee',
   templateUrl: './legal-entity-review-permanent-change-to-a-licensee.component.html',

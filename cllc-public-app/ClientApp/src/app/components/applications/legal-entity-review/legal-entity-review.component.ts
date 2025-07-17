@@ -22,6 +22,10 @@ export const SharepointNameRegex = /^[^~#%&*{}\\:<>?/+|""]*$/;
 /**
  * A component that displays a form page for a legal entity review application.
  *
+ * This is step 1 of the legal entity review process, where the user submits supporting documents and declares any tied
+ * house connections.
+ * For step 2, see `LegalEntityReviewPermanentChangeToALicenseeComponent`.
+ *
  * @export
  * @class LegalEntityReviewComponent
  * @extends {FormBase}
@@ -103,7 +107,6 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
    * Loads the form data.
    *
    * @private
-   * @memberof LegalEntityReviewComponent
    */
   private loadData() {
     // TODO Update this API call to fetch the legal entity review application data
@@ -118,7 +121,6 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
    *
    * @private
    * @param {*} { application, licences }
-   * @memberof LegalEntityReviewComponent
    */
   private setFormData({ application, licences }) {
     this.liquorLicences = licences.filter((item) => item.licenceTypeCategory === 'Liquor' && item.status === 'Active');
@@ -135,11 +137,49 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
   }
 
   /**
+   * Submit the application.
+   */
+  onSubmit() {
+    if (!this.isValid()) {
+      this.showValidationMessages = true;
+      this.markControlsAsTouched(this.form);
+
+      return;
+    }
+
+    this.isSubmitting = true;
+
+    this.save()
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe(([saveSucceeded]) => {
+        if (!saveSucceeded) {
+          this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        }
+
+        this.isSubmitting = false;
+      });
+  }
+
+  /**
+   * Checks if the form is valid and collects validation messages.
+   *
+   * @return {*}  {boolean}
+   */
+  private isValid(): boolean {
+    this.showValidationMessages = false;
+
+    this.validationMessages = this.listControlsWithErrors(this.form, this.getValidationErrorMap());
+
+    let valid = this.form.disabled || this.form.valid;
+
+    return valid;
+  }
+
+  /**
    * Saves the application data.
    *
    * @private
    * @return {*}  {Observable<[boolean, Application]>}
-   * @memberof LegalEntityReviewComponent
    */
   private save(): Observable<[boolean, Application]> {
     return this.applicationDataService
@@ -173,52 +213,9 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
   }
 
   /**
-   * Checks if the form is valid and collects validation messages.
-   *
-   * @return {*}  {boolean}
-   * @memberof LegalEntityReviewComponent
-   */
-  private isValid(): boolean {
-    this.showValidationMessages = false;
-
-    this.validationMessages = this.listControlsWithErrors(this.form, this.getValidationErrorMap());
-
-    let valid = this.form.disabled || this.form.valid;
-
-    return valid;
-  }
-
-  /**
-   * Submit the application.
-   *
-   * @memberof LegalEntityReviewComponent
-   */
-  onSubmit() {
-    if (!this.isValid()) {
-      this.showValidationMessages = true;
-      this.markControlsAsTouched(this.form);
-
-      return;
-    }
-
-    this.isSubmitting = true;
-
-    this.save()
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe(([saveSucceeded]) => {
-        if (!saveSucceeded) {
-          this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-        }
-
-        this.isSubmitting = false;
-      });
-  }
-
-  /**
    * Returns a map of validation error messages for the form controls.
    *
    * @return {*}
-   * @memberof LegalEntityReviewComponent
    */
   getValidationErrorMap() {
     const errorMap = {
@@ -231,8 +228,6 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
 
   /**
    * Cancels the application and returns the user to the dashboard page.
-   *
-   * @memberof LegalEntityReviewComponent
    */
   onCancel() {
     this.dialog.open(GenericConfirmationDialogComponent, {
@@ -250,6 +245,11 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
     });
   }
 
+  /**
+   * Toggles the visibility of the tied house connections section.
+   *
+   * @param {boolean} showValue
+   */
   showTiedHouseConnections(showValue: boolean) {
     this.isTiedHouseVisible = showValue;
   }
