@@ -35,7 +35,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
             string htmlVal = "";
 
             // get the hours of service and create a table
-            MicrosoftDynamicsCRMadoxioHoursofserviceCollection hours = _dynamicsClient.Hoursofservices.Get(filter: $"_adoxio_endorsement_value eq {EndorsementId}");
+            MicrosoftDynamicsCRMadoxioHoursofserviceCollection hours = _dynamicsClient.Hoursofservices.Get(filter: $"_adoxio_endorsement_value eq {EndorsementId} and statecode eq 0");
             if (hours.Value.Count > 0)
             {
                 MicrosoftDynamicsCRMadoxioHoursofservice hoursVal = hours.Value.First();
@@ -75,7 +75,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
             }
 
             // get the service areas and get their html
-            MicrosoftDynamicsCRMadoxioServiceareaCollection allServiceAreas = _dynamicsClient.Serviceareas.Get(filter: $"_adoxio_endorsement_value eq {EndorsementId}");
+            MicrosoftDynamicsCRMadoxioServiceareaCollection allServiceAreas = _dynamicsClient.Serviceareas.Get(filter: $"_adoxio_endorsement_value eq {EndorsementId} and statecode eq 0");
             if (allServiceAreas.Value.Count > 0)
             {
                 // sort the areas
