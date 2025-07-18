@@ -222,12 +222,14 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
    * @param {TiedHouseConnection} updated
    * @param {TiedHouseConnection} original
    */
-  saveTiedHouseDeclaration(updated: TiedHouseConnection, original: TiedHouseConnection) {
+  saveTiedHouseDeclaration(updated: TiedHouseConnection, original: TiedHouseConnection, groupIndex?: number) {
     updated.viewMode = TiedHouseViewMode.disabled;
     Object.assign(original, updated);
 
     this.submitTiedHouseDeclarationChange(updated);
     this.updateGroupedTiedHouseDeclarations();
+    
+    this.openPanel(groupIndex);
   }
 
   submitTiedHouseDeclarationChange(declaration: TiedHouseConnection) {
