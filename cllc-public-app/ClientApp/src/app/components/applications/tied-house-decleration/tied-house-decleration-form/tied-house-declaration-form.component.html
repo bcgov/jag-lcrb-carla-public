@@ -16,7 +16,7 @@
         [required]="true"
         [valid]="isValidOrNotTouched('dateOfBirth')"
         errorMessage="Date of Birth is required">
-        <input class="form-control" type="date" formControlName="dateOfBirth" />
+        <input class="form-control w-100" type="date" style="width: 100%; max-width: none;" formControlName="dateOfBirth" />
       </app-field>
       <app-field
         class="col-md-6"
@@ -25,7 +25,7 @@
         [valid]="isValidOrNotTouched('firstName')"
         errorMessage="First Name is required">
         <input
-          class="form-control"
+          class="form-control w-100"
           style="width: 100%"
           type="text"
           autocomplete="first-name"
@@ -114,7 +114,7 @@
 
   <div class="row">
     <app-field
-      class="col-md-12"
+      class="col-md-6"
       label="Associated Liquor Licence # (6 Digits) OR Establishment Name"
       [valid]="!form.get('autocompleteInput')?.touched || associatedLiquorLicenses.length > 0"
       errorMessage="Please select a value"
@@ -133,6 +133,10 @@
     </div>
     <div class="col-auto" *ngIf="isEditable">
       <button class="btn btn-primary" type="button" (click)="save()">Save</button>
+    </div>
+
+    <div class="col-auto" *ngIf="!isEditable">
+      <button class="btn btn-link btn-cancel" (click)="edit()"><fa-icon [icon]="faTrash"></fa-icon> Edit</button>
     </div>
 
     <div class="col-auto" *ngIf="!isEditable">

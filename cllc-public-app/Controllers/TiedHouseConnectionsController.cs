@@ -183,8 +183,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 if (tiedHouseConnection.ApplicationId == applicationId)
                 {
-                    await _dynamicsClient.Tiedhouseconnections.UpdateAsync(adoxioTiedHouseConnection.AdoxioTiedhouseconnectionid, adoxioTiedHouseConnection);
-                    await RemoveAndAddAssociateLicenses(tiedHouseConnection.AssociatedLiquorLicense.Select(x => x.Id).ToList(), adoxioTiedHouseConnection.AdoxioTiedhouseconnectionid);
+                    if (tiedHouseConnection.MarkedForRemoval == true && tiedHouseConnection.SupersededById == null)
+                    {
+                        await _dynamicsClient.Tiedhouseconnections.DeleteAsync(adoxioTiedHouseConnection.AdoxioTiedhouseconnectionid);
+                    }
+                    else
+                    {
+                        await _dynamicsClient.Tiedhouseconnections.UpdateAsync(adoxioTiedHouseConnection.AdoxioTiedhouseconnectionid, adoxioTiedHouseConnection);
+                        await RemoveAndAddAssociateLicenses(tiedHouseConnection.AssociatedLiquorLicense.Select(x => x.Id).ToList(), adoxioTiedHouseConnection.AdoxioTiedhouseconnectionid);
+                    }
                 }
                 else
                 {
@@ -193,7 +200,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         adoxioTiedHouseConnection.SupersededByOdataBind = $"/adoxio_tiedhouseconnections({tiedHouseConnection.id})";
                     }
                     adoxioTiedHouseConnection.ApplicationOdataBind = $"/adoxio_applications({applicationId})";
-                    
+
 
                     adoxioTiedHouseConnection.AdoxioTiedhouseconnectionid = null;
 
