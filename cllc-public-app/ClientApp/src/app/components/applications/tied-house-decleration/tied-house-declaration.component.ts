@@ -35,7 +35,7 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
    *
    * @type {TiedHouseConnection[]}
    */
-  @Input() tiedHouseConnections?: TiedHouseConnection[];
+  @Input() initialTiedHouseConnections?: TiedHouseConnection[];
   /**
    * Indicates whether the tied house component is in read-only mode. Default is false.
    *
@@ -61,9 +61,9 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.tiedHouseConnections) {
+    if (this.initialTiedHouseConnections) {
       // Use the provided tied house connections
-      this.initTiedHouseDeclarations(this.tiedHouseConnections);
+      this.initTiedHouseDeclarations(this.initialTiedHouseConnections);
     } else {
       // Fetch the tied house connections
       this.loadData();
@@ -218,7 +218,7 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
 
     this.submitTiedHouseDeclarationChange(updated);
     this.updateGroupedTiedHouseDeclarations();
-    
+
     this.openPanel(groupIndex);
   }
 

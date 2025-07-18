@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Account } from '@models/account.model';
@@ -20,6 +20,14 @@ export class ConnectionToProducersComponent implements OnInit, OnDestroy {
   federalProducerText = 'federal producer';
   @Input()
   applicationTypeName: String;
+  @Input()
+  initialFormData: any;
+
+  /**
+   * Emits the form data on change.
+   */
+  @Output()
+  onFormChanges = new EventEmitter();
 
   busy: Subscription;
   subscriptions: Subscription[] = [];
@@ -51,10 +59,29 @@ export class ConnectionToProducersComponent implements OnInit, OnDestroy {
       iNConnectionToFederalProducer: [''],
       iNConnectionToFederalProducerDetails: ['']
     });
+
+    if (this.initialFormData) {
+      this.form.patchValue(this.initialFormData);
+    }
+
+    this.form.valueChanges.subscribe((value) => this.onFormChanges.emit(value));
   }
 
   ngOnDestroy() {
     this.subscriptions.forEach((sub) => sub.unsubscribe());
+  }
+
+  /**
+   * Checks if the form data has changed from the initial data.
+   *
+   * @return {*}  {boolean} `true` if the form data has changed, `false` otherwise.
+   */
+  formHasChanged(): boolean {
+    if (JSON.stringify(this.initialFormData) !== JSON.stringify(this.form.value)) {
+      return true;
+    }
+
+    return false;
   }
 
   requiresWordingChange(name: String): boolean {

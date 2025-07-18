@@ -2,7 +2,7 @@
   <h3 class="blue-header">CONNECTIONS TO OTHER LIQUOR LICENCES</h3>
 
   <div class="padded-section content-bottom" [formGroup]="form">
-    <div>
+    <div *ngIf="showTiedHouseCheckboxes">
       <section class="mb-5">
         <span class="font-weight-bold">1. Ownership or Control</span>
         <p id="ownership-or-control-label" class="font-weight-bold">
@@ -47,12 +47,17 @@
           <mat-radio-button value="0">No</mat-radio-button>
         </mat-radio-group>
       </section>
-
-      <section *ngIf="showTiedHouseDeclarationSection">
-        <app-tied-house-declaration
-          [applicationId]="applicationId"
-          [isReadOnly]="isTiedHouseReadOnly"></app-tied-house-declaration>
-      </section>
     </div>
+
+    <section *ngIf="showTiedHouseDeclarationSection">
+      <app-tied-house-declaration
+        [applicationId]="applicationId"
+        [initialTiedHouseConnections]="tiedHouseConnections"
+        [isReadOnly]="isTiedHouseReadOnly"></app-tied-house-declaration>
+    </section>
+
+    <section *ngIf="!hasTiedHouseConnections && hasLoadedData">
+      <span>No connections to other liquor licences have been declared.</span>
+    </section>
   </div>
 </section>

@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AppState } from '@app/app-state/models/app-state';
 import { COUNTRIES } from '@app/constants/countries';
 import { ConnectionToOtherLiquorLicencesComponent } from '@components/account-profile/tabs/connection-to-other-liquor-licences/connection-to-other-liquor-licences.component';
+import { ConnectionToProducersComponent } from '@components/account-profile/tabs/connection-to-producers/connection-to-producers.component';
 import {
   faAddressCard,
   faChevronRight,
@@ -17,14 +18,12 @@ import {
   faTrash
 } from '@fortawesome/free-solid-svg-icons';
 import { Account, BUSINESS_TYPE_LIST } from '@models/account.model';
-import { TiedHouseConnection } from '@models/tied-house-connection.model';
 import { User } from '@models/user.model';
 import { Store } from '@ngrx/store';
 import { AccountDataService } from '@services/account-data.service';
 import { ApplicationDataService } from '@services/application-data.service';
 import { ContactDataService } from '@services/contact-data.service';
 import { FeatureFlagService } from '@services/feature-flag.service';
-import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
 import { UserDataService } from '@services/user-data.service';
 import { FormBase } from '@shared/form-base';
 import { endOfToday } from 'date-fns';
@@ -109,8 +108,13 @@ export class AccountProfileComponent extends FormBase implements OnInit {
   _showAdditionalContact: boolean;
   legalEntityId: string;
 
+  @ViewChild(ConnectionToProducersComponent)
+  connectionToProducersComponent: ConnectionToProducersComponent;
+  connectionToProducersFormData: any;
+
   @ViewChild(ConnectionToOtherLiquorLicencesComponent)
   connectionToOtherLiquorLicencesComponent: ConnectionToOtherLiquorLicencesComponent;
+  connectionToOtherLiquorLicencesFormData: any;
 
   /**
    * The application ID under which this account profile is being edited.
@@ -119,7 +123,6 @@ export class AccountProfileComponent extends FormBase implements OnInit {
   applicationId: string;
   applicationMode: string;
   account: Account;
-  tiedHouseFormData: Observable<TiedHouseConnection>;
   validationMessages: string[];
   renewalType: string;
 
@@ -216,7 +219,6 @@ export class AccountProfileComponent extends FormBase implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private tiedHouseService: TiedHouseConnectionsDataService,
     private dialog: MatDialog,
     private clipboard: Clipboard,
     private snackBar: MatSnackBar,
@@ -461,15 +463,34 @@ export class AccountProfileComponent extends FormBase implements OnInit {
     }
   }
 
+  /**
+   * Checks if the component can be deactivated.
+   *
+   * @return {*}  {Observable<boolean>}
+   */
   canDeactivate(): Observable<boolean> {
     if (
-      !this.connectionToOtherLiquorLicencesComponent.formHasChanged() &&
-      JSON.stringify(this.saveFormData) === JSON.stringify(this.form.value)
+      !this.hasFormChanged() &&
+      !this.connectionToProducersComponent.formHasChanged() &&
+      !this.connectionToOtherLiquorLicencesComponent.formHasChanged()
     ) {
       return of(true);
     } else {
       return this.save();
     }
+  }
+
+  /**
+   * Checks if the form data has changed from the saved form data.
+   *
+   * @return {*}  {boolean}
+   */
+  hasFormChanged(): boolean {
+    if (JSON.stringify(this.saveFormData) !== JSON.stringify(this.form.value)) {
+      return true;
+    }
+
+    return false;
   }
 
   openBadgeTemplateDialog() {
@@ -494,7 +515,6 @@ export class AccountProfileComponent extends FormBase implements OnInit {
   }
 
   save(): Observable<boolean> {
-    const _tiedHouse = this.tiedHouseFormData || {};
     this.form.get('businessProfile').patchValue({ physicalAddressCountry: 'Canada' });
     const value = {
       ...this.form.get('businessProfile').value,
@@ -506,10 +526,17 @@ export class AccountProfileComponent extends FormBase implements OnInit {
       this.contactDataService.updateContact(this.form.get('contact').value)
     ];
 
-    // TODO: Enable/Replace with new tied house saving logic
-    // if (this.connectionToOtherLiquorLicencesComponent) {
-      // saves.push(this.prepareTiedHouseSaveRequest({ ...this.account.tiedHouse, ..._tiedHouse }));
-    // }
+    if (this.connectionToProducersFormData) {
+      // TODO: Save the connection to producers form data. This used to be what the tied house data was. Now its just
+      // the 2 checkboxes and 2 corresponding text fields, for cannabis connections. Are these still saved as
+      // "tied house connections"?
+    }
+
+    if (this.connectionToOtherLiquorLicencesFormData) {
+      // TODO: Save the connection to other liquor licences form data? This component just has the 3 checkboxes which
+      // toggle the tied house component. Are these even saved to dynamics? If not, remove references to this form data
+      // and component.
+    }
 
     return forkJoin(saves).pipe(
       catchError(() => of(false)),
@@ -533,10 +560,12 @@ export class AccountProfileComponent extends FormBase implements OnInit {
       route = '/sep/dashboard';
     }
 
-    if (
+    const isValid =
       this.form.valid &&
-      (!this.connectionToOtherLiquorLicencesComponent || this.connectionToOtherLiquorLicencesComponent.form.valid)
-    ) {
+      this.connectionToProducersComponent?.form?.valid &&
+      this.connectionToOtherLiquorLicencesComponent?.form?.valid;
+
+    if (isValid) {
       this.busy = this.save().subscribe(() => {
         if (this.useInStepperMode) {
           this.saveComplete.emit(true);
@@ -576,20 +605,11 @@ export class AccountProfileComponent extends FormBase implements OnInit {
     }
   }
 
-  // TODO: Enable/Replace with new tied house saving logic
-  // prepareTiedHouseSaveRequest(_tiedHouseData) {
-  //   const data = { ...this.account.tiedHouse, ..._tiedHouseData };
-
-  //   if (data.id) {
-  //     return this.tiedHouseService.updateTiedHouse(data, data.id);
-  //   } else {
-  //     return this.accountDataService.createTiedHouseConnection(data, this.accountId);
-  //   }
-  // }
-
   // marking the form as touched makes the validation messages show
   markAsTouched() {
     this.form.markAsTouched();
+    this.connectionToProducersComponent?.form?.markAsTouched();
+    this.connectionToOtherLiquorLicencesComponent?.form?.markAsTouched();
 
     const businessProfileControls = (this.form.get('businessProfile') as FormGroup).controls;
     for (const c in businessProfileControls) {

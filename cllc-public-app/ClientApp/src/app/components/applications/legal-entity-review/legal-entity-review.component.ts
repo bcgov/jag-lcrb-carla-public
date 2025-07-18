@@ -275,8 +275,13 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
    * @return {*}  {boolean} `true` if valid, `false` otherwise.
    */
   areTiedHouseDeclarationsValid(): boolean {
+    if (!this.isTiedHouseVisible || !this.tiedHouseDeclaration) {
+      // If the tied house section is not visible, or the component is not initialized, we assume it's valid.
+      return true;
+    }
+
     if (
-      this.tiedHouseDeclaration.tiedHouseDeclarations.find((item) =>
+      this.tiedHouseDeclaration?.tiedHouseDeclarations.find((item) =>
         [TiedHouseViewMode.new, TiedHouseViewMode.editExistingRecord, TiedHouseViewMode.addNewRelationship].includes(
           item.viewMode
         )
