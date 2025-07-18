@@ -210,6 +210,7 @@ export interface Application {
   csNameChangeLicenseeSociety: boolean;
   csNameChangeLicenseePerson: boolean;
   csAdditionalReceiverOrExecutor: boolean;
+  csTiedHouseDeclaration: boolean;
   primaryInvoicePaid: boolean;
   secondaryInvoicePaid: boolean;
   isOnINLand: boolean;

@@ -15,6 +15,7 @@ using Gov.Lclb.Cllb.Public.Extensions;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.Utils;
 using Gov.Lclb.Cllb.Public.ViewModels;
+using Grpc.Core;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -1062,10 +1063,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="userSettings"></param>
         /// <param name="applicationId"></param> Filter results by a specific application ID. (Optional)
         /// <returns></returns>
-        private MicrosoftDynamicsCRMadoxioApplication GetPermanentChangeApplication(UserSettings userSettings, string applicationId = null)
+        private MicrosoftDynamicsCRMadoxioApplication GetPermanentChangeApplication(UserSettings userSettings, string applicationId = null, bool isLegalEntityReview = false)
         {
             MicrosoftDynamicsCRMadoxioApplication result = null;
-            var applicationType = _dynamicsClient.GetApplicationTypeByName("Permanent Change to a Licensee");
+
+            var applicationType = _dynamicsClient.GetApplicationTypeByName("Permanent Change to a Licensee"); 
+
+            if (isLegalEntityReview == true)
+            {
+                applicationType = _dynamicsClient.GetApplicationTypeByName("LE Review");
+            }
+            
 
             string[] expand =
             {
@@ -1166,7 +1174,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             PermanentChangesPageData data = new PermanentChangesPageData();
 
             // set application type relationship 
-            var app = GetPermanentChangeApplication(userSettings, applicationId);
+            var app = GetPermanentChangeApplication(userSettings, applicationId, true);
+            
             // get all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
             data.Licences = _dynamicsClient.GetLicensesByLicencee(userSettings.AccountId, _cache);
 
@@ -1194,6 +1203,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 app = await _dynamicsClient.GetApplicationByIdWithChildren(Guid.Parse(app.AdoxioApplicationid));
             }
             data.Application = await app.ToViewModel(_dynamicsClient, _cache, _logger);
+
             return new JsonResult(data);
         }
 
@@ -1731,6 +1741,46 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             application = await _dynamicsClient.GetApplicationByIdWithChildren(applicationId);
 
             return new JsonResult(await application.ToViewModel(_dynamicsClient, _cache, _logger));
+        }
+
+
+        [HttpPut("legal_entity/{id}")]
+        public async Task<IActionResult> SubmitLegalEntityApplication([FromBody] Application item, string id)
+        {
+            if (id != item.Id) return BadRequest();
+
+            //Prepare application for update
+            var applicationId = new Guid(id);
+            var application = await _dynamicsClient.GetApplicationById(applicationId);
+            var allowLgAccess = await CurrentUserIsLgForApplication(application);
+            if (!CurrentUserHasAccessToApplicationOwnedBy(application._adoxioApplicantValue) && !allowLgAccess)
+                throw new Exception("User doesn't have an access the application");
+
+            application = new MicrosoftDynamicsCRMadoxioApplication();
+
+            application.CopyValues(item);
+
+            if (application.Statuscode == (int)AdoxioApplicationStatusCodes.Incomplete)
+            {
+                try
+                {
+                    application.Statuscode = (int)AdoxioApplicationStatusCodes.ReviewingInspectionResults;
+                    string json = JsonConvert.SerializeObject(application);
+                    _dynamicsClient.Applications.Update(id, application);
+                    return new JsonResult(await application.ToViewModel(_dynamicsClient, _cache, _logger));
+                }
+                catch (HttpOperationException httpOperationException)
+                {
+                    _logger.LogError(httpOperationException, "Error updating application");
+                    // fail if we can't create.
+                    throw httpOperationException;
+                }
+            }
+
+            else
+            {
+                throw new Exception("Error submitting Legal eneity incorrect Application Status");
+            }
         }
 
         /// <summary>

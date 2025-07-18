@@ -155,6 +155,17 @@ export class ApplicationDataService extends DataService {
       .pipe(catchError(this.handleError));
   }
 
+    /**
+   * Update the Dynamics Application
+   * @param applicationData
+   */
+  submitLegalEntityApplication(applicationData: Application): Observable<Application> {
+    // call API
+    // console.log("===== AdoxioApplicationDataService.SubmitLegalEntityApplication: ", applicationData);
+    return this.http.put<Application>(this.apiPath +"legal_entity/" + applicationData.id, applicationData, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
   /**
    * Create a Dynamics Application
    * @param applicationData

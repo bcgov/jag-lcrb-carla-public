@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { AppState } from '@app/app-state/models/app-state';
-import { PermanentChangeTypesOfChangesOption } from '@app/constants/permanent-change-types-of-changes';
+import { permanentChangeTypesOfChanges, PermanentChangeTypesOfChangesOption } from '@app/constants/permanent-change-types-of-changes';
 import { Account } from '@models/account.model';
 import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
 import { Application } from '@models/application.model';
@@ -54,6 +54,7 @@ export class LegalEntityReviewPermanentChangeToALicenseeComponent extends FormBa
   submitApplicationInProgress: boolean = false;
   primaryPaymentInProgress: boolean = false;
   secondaryPaymentInProgress: boolean = false;
+  changeList: any;
 
   get hasLiquor(): boolean {
     return this.liquorLicences.length > 0;
@@ -61,6 +62,10 @@ export class LegalEntityReviewPermanentChangeToALicenseeComponent extends FormBa
 
   get hasCannabis(): boolean {
     return this.cannabisLicences.length > 0;
+  }
+
+  get selectedChangeList() {
+    return this.changeList.filter((item) => this.form && this.form.get(item.formControlName).value === true);
   }
 
   /**
@@ -99,6 +104,9 @@ export class LegalEntityReviewPermanentChangeToALicenseeComponent extends FormBa
   ngOnInit(): void {
     this.initForm();
     this.loadData();
+    this.application.csChangeOfDirectorsOrOfficers = true;
+    this.application.csTiedHouseDeclaration = true;
+    this.getChangeList();
   }
 
   /**
@@ -370,5 +378,11 @@ export class LegalEntityReviewPermanentChangeToALicenseeComponent extends FormBa
     };
 
     return errorMap;
+  }
+
+  private getChangeList() {
+    this.changeList = permanentChangeTypesOfChanges.filter(
+        (item) => !!item.availableTo.find((bt) => bt === this.account.businessType)
+            );
   }
 }

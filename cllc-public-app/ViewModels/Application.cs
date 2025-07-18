@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Google.Protobuf.WellKnownTypes;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
@@ -35,7 +36,10 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         ReviewingInspectionResults = 845280012,
 
         [EnumMember(Value = "Application Assessment")]
-        ApplicationAssessment = 845280014
+        ApplicationAssessment = 845280014,
+        // To be updated with correct status
+        [EnumMember(Value = "In Review")]
+        InReview = 0
     }
 
     public enum AdoxioFinalDecisionCodes
