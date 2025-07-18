@@ -117,3 +117,8 @@ h3 {
 .detail-step {
   padding-top: 20px;
 }
+
+:host ::ng-deep section {
+  flex-grow: 1;
+  width: 100%;
+}

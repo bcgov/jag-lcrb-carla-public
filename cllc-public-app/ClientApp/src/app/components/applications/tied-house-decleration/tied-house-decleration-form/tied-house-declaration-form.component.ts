@@ -84,7 +84,7 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
 
   private patchFormFromInput() {
     if (this._tiedHouseDecleration) {
-      this.setFormState(this._tiedHouseDecleration.viewMode);
+      this.setFormState();
       this._tiedHouseDecleration.dateOfBirth = formatDate(this._tiedHouseDecleration.dateOfBirth);
       this.form.patchValue(this._tiedHouseDecleration);
       this.updateAssociatedLicenses(this._tiedHouseDecleration.associatedLiquorLicense || []);
@@ -136,7 +136,8 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
     tiedHouse.applicationId = this._tiedHouseDecleration.applicationId;
     tiedHouse.id = this._tiedHouseDecleration.id;
     this.saveTiedHouseDecclaration.emit(tiedHouse);
-    this.setFormState(TiedHouseViewMode.disabled);
+    this._tiedHouseDecleration.viewMode = TiedHouseViewMode.disabled;
+    this.setFormState();
   }
 
   cancel() {
@@ -151,6 +152,18 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
       this._tiedHouseDecleration.viewMode = TiedHouseViewMode.existing;
       this._tiedHouseDecleration.statusCode = TiedHouseStatusCode.existing;
     }
+  }
+
+  edit(){
+    if(this._tiedHouseDecleration.supersededById != null){
+      this._tiedHouseDecleration.viewMode = TiedHouseViewMode.editExistingRecord;
+    }
+    else{
+      this._tiedHouseDecleration.viewMode = TiedHouseViewMode.addNewRelationship;
+    }
+
+    this.setFormState();
+    this.form.patchValue(this._tiedHouseDecleration);
   }
 
   remove() {
@@ -242,7 +255,8 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
    * @private
    * @param {*} viewMode
    */
-  private setFormState(viewMode) {
+  private setFormState() {
+    var viewMode = this._tiedHouseDecleration.viewMode;
     this.form.enable();
 
     switch (viewMode) {
