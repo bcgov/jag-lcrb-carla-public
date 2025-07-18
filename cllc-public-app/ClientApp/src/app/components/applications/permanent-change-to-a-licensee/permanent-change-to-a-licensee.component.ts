@@ -450,10 +450,14 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
    * @memberof PermanentChangeToALicenseeComponent
    */
   private submitPayment(invoiceType: 'primary' | 'secondary') {
-    let payMethod = this.paymentDataService.getPaymentURI('primaryInvoice', this.application.id);
-    if (invoiceType === 'secondary') {
-      payMethod = this.paymentDataService.getPaymentURI('secondaryInvoice', this.application.id);
+    let payMethod: Observable<object>;
+
+    if (invoiceType === 'primary') {
+      payMethod = this.paymentDataService.getPermanentChangePaymentURI('primaryInvoice', this.application.id);
+    } else if (invoiceType === 'secondary') {
+      payMethod = this.paymentDataService.getPermanentChangePaymentURI('secondaryInvoice', this.application.id);
     }
+
     return payMethod.pipe(takeWhile(() => this.componentActive)).pipe(
       mergeMap(
         (jsonUrl) => {
