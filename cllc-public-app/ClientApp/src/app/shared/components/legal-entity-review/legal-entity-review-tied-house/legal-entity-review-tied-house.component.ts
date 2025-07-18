@@ -1,33 +1,21 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ControlContainer, FormGroup, FormGroupDirective } from '@angular/forms';
-import { Account } from '@models/account.model';
-import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 /**
  * The tied house connections section of a legal entity review application.
  *
  * @export
  * @class LegalEntityReviewComponent
- * @implements {OnInit}
  */
 @Component({
   selector: 'app-legal-entity-review-tied-house',
   templateUrl: './legal-entity-review-tied-house.component.html',
-  styleUrls: ['./legal-entity-review-tied-house.component.scss'],
-  viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
+  styleUrls: ['./legal-entity-review-tied-house.component.scss']
 })
-export class LegalEntityReviewTiedHouseComponent implements OnInit {
-  @Input() account: Account;
-  @Input() liquorLicences: ApplicationLicenseSummary[] = [];
-  @Input() cannabisLicences: ApplicationLicenseSummary[] = [];
+export class LegalEntityReviewTiedHouseComponent {
   @Output() showTiedHouseConnections: EventEmitter<boolean> = new EventEmitter<boolean>();
+
   form: FormGroup;
 
   hasTiedHouseChangesToDeclare = false;
-
-  constructor(public controlContainer: ControlContainer) {}
-
-  ngOnInit() {
-    this.form = this.controlContainer.control as FormGroup;
-  }
 }

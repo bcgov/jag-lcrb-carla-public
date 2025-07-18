@@ -48,7 +48,6 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
   dataLoaded: boolean;
   primaryPaymentInProgress: boolean;
   secondaryPaymentInProgress: boolean;
-  verifyRquestMade: boolean;
   validationMessages: string[];
 
   @ViewChild('appContact')
@@ -280,7 +279,6 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
    */
   private isValid(): boolean {
     this.showValidationMessages = false;
-    this.validationMessages = [];
     this.validationMessages = this.listControlsWithErrors(this.form, this.getValidationErrorMap());
     let valid = this.form.disabled || this.form.valid;
 
@@ -329,15 +327,7 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
       valid = false;
     }
 
-    const tiedHouseDeclarationIsRequired = this.form.get('csTiedHouseDeclaration').value;
-    if (
-      tiedHouseDeclarationIsRequired &&
-      this.tiedHouseDeclaration.tiedHouseDeclarations.find((th) =>
-        [TiedHouseViewMode.new, TiedHouseViewMode.editExistingRecord, TiedHouseViewMode.addNewRelationship].includes(
-          th.viewMode
-        )
-      )
-    ) {
+    if (!this.areTiedHouseDeclarationsValid()) {
       this.validationMessages.push('Tide House Declaration has not been saved.');
       valid = false;
     }
@@ -345,17 +335,30 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
     return valid;
   }
 
-  isTiedHouseValid() {
-    return (
-      this.tiedHouseDeclaration.tiedHouseDeclarations.length < 1 &&
-      !this.tiedHouseDeclaration.tiedHouseDeclarations.find((th) =>
-        // If any declarations are in a new or edit mode, then they have not yet been saved, and the tied house form
-        // is therefore not valid (and not ready to be submitted as part of the larger form).
-        [TiedHouseViewMode.new, TiedHouseViewMode.addNewRelationship, TiedHouseViewMode.editExistingRecord].includes(
-          th.viewMode
+  /**
+   * Checks if the tied house declarations are valid.
+   *
+   * @return {*}  {boolean} `true` if valid, `false` otherwise.
+   */
+  areTiedHouseDeclarationsValid(): boolean {
+    const tiedHouseDeclarationIsRequired = this.form.get('csTiedHouseDeclaration').value;
+
+    if (!tiedHouseDeclarationIsRequired) {
+      return false;
+    }
+
+    if (
+      this.tiedHouseDeclaration.tiedHouseDeclarations.find((item) =>
+        [TiedHouseViewMode.new, TiedHouseViewMode.editExistingRecord, TiedHouseViewMode.addNewRelationship].includes(
+          item.viewMode
         )
       )
-    );
+    ) {
+      // One or more declarations are in an unsaved state.
+      return false;
+    }
+
+    return true;
   }
 
   /**

@@ -15,7 +15,17 @@ import { ControlContainer, FormGroup, FormGroupDirective } from '@angular/forms'
   viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
 })
 export class LegalEntityReviewDeclarationsComponent implements OnInit {
+  /**
+   * Set to `true` if the application has liquor-related declarations.
+   *
+   * @type {boolean}
+   */
   @Input() hasLiquor: boolean = false;
+  /**
+   * Set to `true` if the application has cannabis-related declarations.
+   *
+   * @type {boolean}
+   */
   @Input() hasCannabis: boolean = false;
   /**
    * Set to `true` to force the display of validation messages.

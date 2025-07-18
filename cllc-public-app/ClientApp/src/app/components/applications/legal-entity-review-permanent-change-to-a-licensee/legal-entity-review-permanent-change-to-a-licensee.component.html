@@ -1,0 +1,63 @@
+<div [formGroup]="form" class="form-wrapper">
+  <h1>Permanent Change to a Licensee or Authorization Holder as a result of a Legal Entity Review</h1>
+
+  <mat-progress-bar class="mt-1" *ngIf="!hasDataLoaded" mode="indeterminate"></mat-progress-bar>
+
+  <ng-container *ngIf="hasDataLoaded">
+    <section class="d-flex">
+      <div class="flex-grow-0" style="background-color: #e1e8f2; width: 50px"></div>
+      <div class="flex-grow-1 p-3" style="background-color: #f1f4fa; padding: 20px">
+        <app-permanent-change-disclaimer
+          [account]="account"
+          [liquorLicences]="liquorLicences"
+          [cannabisLicences]="cannabisLicences"></app-permanent-change-disclaimer>
+      </div>
+    </section>
+
+    <section>
+      <app-legal-entity-review-job [account]="account"></app-legal-entity-review-job>
+    </section>
+
+    <section>
+      <app-legal-entity-review-types-of-changes-required
+        [account]="account"
+        [changesRequired]="changeList"></app-legal-entity-review-types-of-changes-required>
+    </section>
+
+    <section>
+      <app-permanent-change-declarations
+        [hasLiquor]="hasLiquor"
+        [hasCannabis]="hasCannabis"
+        [showValidationMessages]="showValidationMessages"></app-permanent-change-declarations>
+    </section>
+
+    <section>
+      <app-permanent-change-contact-support></app-permanent-change-contact-support>
+    </section>
+
+    <section>
+      <app-permanent-change-payment
+        [application]="application"
+        [liquorLicences]="liquorLicences"
+        [cannabisLicences]="cannabisLicences"
+        [selectedChangeList]="changesRequired"
+        [canCreateNewApplication]="canCreateNewApplication"
+        [onNewApplication]="onNewApplication"
+        [createApplicationInProgress]="createApplicationInProgress"
+        [primaryInvoice]="primaryInvoice"
+        [secondaryInvoice]="secondaryInvoice"
+        [primaryPaymentInProgress]="primaryPaymentInProgress"
+        [secondaryPaymentInProgress]="secondaryPaymentInProgress"
+        [onSubmit]="onSubmit.bind(this)"></app-permanent-change-payment>
+    </section>
+
+    <section class="error mt-3" *ngIf="showValidationMessages">
+      <p *ngFor="let message of validationMessages">
+        <span class="app-cancel">
+          <mat-icon aria-label="error icon" style="font-size: 15px">error</mat-icon>
+          {{ message }}
+        </span>
+      </p>
+    </section>
+  </ng-container>
+</div>

@@ -109,16 +109,6 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
   }
 
   /**
-   * Flattens the `groupedTiedHouseDeclarations` into a single array of `TiedHouseConnection` records.
-   *
-   * @readonly
-   * @type {TiedHouseConnection[]}
-   */
-  get flatDeclarations(): TiedHouseConnection[] {
-    return this.groupedTiedHouseDeclarations.reduce((acc, [_, declarations]) => acc.concat(declarations), []);
-  }
-
-  /**
    * Add a new Tied House declaration.
    *
    */
