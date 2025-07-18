@@ -289,6 +289,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             
             to.AdoxioChecklistdrivingrecordcomplete = from.temporaryRelocationCriteria;
 
+            to.Statuscode = (int)from.ApplicationStatus;
+
         }
 
 

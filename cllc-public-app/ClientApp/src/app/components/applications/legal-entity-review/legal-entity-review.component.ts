@@ -198,7 +198,7 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
    */
   private save(): Observable<[boolean, Application]> {
     return this.applicationDataService
-      .updateApplication({
+      .submitLegalEntityApplication({
         ...this.application,
         ...this.form.value
       })
@@ -220,7 +220,7 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
           });
 
           const res: [boolean, Application] = [true, data as Application];
-
+          this.router.navigate(['/dashboard']);
           return of(res);
         })
       );
