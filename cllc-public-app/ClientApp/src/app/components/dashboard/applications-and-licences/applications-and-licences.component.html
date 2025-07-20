@@ -1,694 +1,792 @@
 <mat-progress-bar class="mt-1 mb-1" *ngIf="!dataLoaded" mode="indeterminate"></mat-progress-bar>
 
 <div>
-<h3 class="blue-header" style="margin-bottom: 0; margin-top: 0;">APPLICATIONS</h3>
-<section style="border: 1px solid #ccc; border-bottom: 4px solid #FFCC00; padding: 10px;">
-<section>
-<div *ngIf="submittedApplications < 300">
-<p>
-  Use the list below to find the application type you are looking for:
-</p>
+  <h3 class="blue-header" style="margin-bottom: 0; margin-top: 0">APPLICATIONS</h3>
+  <section style="border: 1px solid #ccc; border-bottom: 4px solid #ffcc00; padding: 10px">
+    <section>
+      <div *ngIf="submittedApplications < 300">
+        <p>Use the list below to find the application type you are looking for:</p>
 
-<section *ngIf="!marketerExists && !account.isOtherBusinessType()">
-  <h3>CANNABIS LICENCE/AUTHORIZATION APPLICATIONS</h3>
-  <!--<div *ngIf="!(nonMarketerExists || marketerExists) && CRSElligible()">
+        <section *ngIf="!marketerExists && !account.isOtherBusinessType()">
+          <h3>CANNABIS LICENCE/AUTHORIZATION APPLICATIONS</h3>
+          <!--<div *ngIf="!(nonMarketerExists || marketerExists) && CRSElligible()">
     <p>
       <i>*You cannot apply for both cannabis licences, you can apply for one or other.</i>
     </p>
   </div>-->
 
-  <table class="start-application">
-    <!-- <tr>
+          <table class="start-application">
+            <!-- <tr>
     <th colspan=2>LICENCE</th>
     <th></th>
   </tr> -->
-    <tr>
-      <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
-        <img class="icon" src="assets/Cannabis-store-icon-blue-40px.png" alt="">
-      </td>
-      <td style="width: 700px;">
+            <tr>
+              <td style="background-color: #e1e8f2; padding: 10px; width: 15px">
+                <img class="icon" src="assets/Cannabis-store-icon-blue-40px.png" alt="" />
+              </td>
+              <td style="width: 700px">
+                <h3>Cannabis Retail Store</h3>
+                <p>
+                  The cannabis retail store licence or authorization allows licensees and authorization holders to sell
+                  cannabis and accessories.
+                </p>
+                <!--<P>(A separate application must be submitted for each proposed store)</P>-->
+                <!--href="policy-document/cannabis-retail-licence"-->
+                <a
+                  href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/non-medical-cannabis-licenses/apply-cannabis-licence/apply-for-a-cannabis-retail-store-licence"
+                  target="_blank"
+                  rel="noopener noreferrer">
+                  Learn more
+                </a>
+              </td>
+              <td style="text-align: center">
+                <button
+                  mat-raised-button
+                  color="secodary"
+                  [disabled]="startCRSOngoing"
+                  (click)="startNewLicenceApplication()"
+                  id="startCRS">
+                  <span>START APPLICATION</span>
+                  <mat-progress-bar class="mb-1" *ngIf="startCRSOngoing" mode="indeterminate"></mat-progress-bar>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td style="background-color: #e1e8f2; padding: 10px; width: 15px">
+                <img class="icon" src="assets/Cannabis-marketing-icon-blue-40px.png" alt="" />
+              </td>
+              <td style="width: 700px">
+                <h3>Cannabis Marketing</h3>
+                <p>
+                  The Cannabis Marketing licence allows licensees to promote cannabis to licensed cannabis stores and
+                  the adult public.
+                </p>
+                <!--href="policy-document/cannabis-marketing-licence"-->
+                <a
+                  href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/non-medical-cannabis-licenses/apply-cannabis-licence/apply-for-a-cannabis-marketing-licence">
+                  Learn more
+                </a>
+              </td>
+              <td style="text-align: center">
+                <button
+                  mat-raised-button
+                  color="secondary"
+                  [disabled]="startMarketingOngoing"
+                  (click)="startNewMarketerApplication()"
+                  id="startMarketing">
+                  <span>START APPLICATION</span>
+                  <mat-progress-bar class="mb-1" *ngIf="startMarketingOngoing" mode="indeterminate"></mat-progress-bar>
+                </button>
+              </td>
+            </tr>
+            <tr appRemoveIfFeatureOff="PrsEnabled">
+              <td style="background-color: #e1e8f2; padding: 10px; width: 15px">
+                <img class="icon" src="assets/Cannabis-store-icon-blue-40px.png" alt="" />
+              </td>
+              <td style="width: 700px">
+                <h3>Producer Retail Store</h3>
+                <p>
+                  The producer retail store licence or authorization allows cultivators to sell cannabis from a store
+                  located at their production site.
+                </p>
+                <!--<P>(A separate application must be submitted for each proposed store)</P>-->
+                <!--href="policy-document/cannabis-retail-licence"-->
+                <a
+                  href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/non-medical-cannabis-licenses/apply-cannabis-licence/apply-for-a-producer-retail-store-licence"
+                  target="_blank"
+                  rel="noopener noreferrer">
+                  Learn more
+                </a>
+              </td>
+              <td style="text-align: center">
+                <button
+                  mat-raised-button
+                  color="secodary"
+                  [disabled]="startPRSOngoing"
+                  (click)="startNewPRSLicenceApplication()"
+                  id="startPRS">
+                  <span>START APPLICATION</span>
+                  <mat-progress-bar class="mb-1" *ngIf="startPRSOngoing" mode="indeterminate"></mat-progress-bar>
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="F2G">
+              <td style="background-color: #e1e8f2; padding: 10px; width: 15px">
+                <img class="icon" src="assets/Cannabis-store-icon-blue-40px.png" alt="" />
+              </td>
+              <td style="width: 700px">
+                <h3>Farm to Gate</h3>
+                <p>
+                  The Cannabis Farm to Gate Licence allows licensed federal producers of cannabis to sell non-medical
+                  cannabis on their production site.
+                </p>
+                <a href="policy-document/cannabis-f2g-licence"> Learn more about this licence </a>
+              </td>
+              <td style="text-align: center">
+                <button
+                  mat-raised-button
+                  color="secondary"
+                  [disabled]="startF2G"
+                  (click)="startNewF2GApplication()"
+                  id="startF2G">
+                  <span>START APPLICATION</span>
+                  <mat-progress-bar class="mb-1" *ngIf="startF2GOngoing" mode="indeterminate"></mat-progress-bar>
+                </button>
+              </td>
+            </tr>
+          </table>
+          <hr />
+        </section>
 
-        <h3>Cannabis Retail Store</h3>
-        <p>The cannabis retail store licence or authorization allows licensees and authorization holders to sell cannabis and accessories.</p>
-        <!--<P>(A separate application must be submitted for each proposed store)</P>-->
-        <!--href="policy-document/cannabis-retail-licence"-->
-        <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/non-medical-cannabis-licenses/apply-cannabis-licence/apply-for-a-cannabis-retail-store-licence"
-           target="_blank" rel="noopener noreferrer">
-          Learn more
-        </a>
-      </td>
-      <td style="text-align: center;">
-        <button mat-raised-button color="secodary" [disabled]="startCRSOngoing"
-                (click)="startNewLicenceApplication()" id="startCRS">
-          <span>START APPLICATION</span>
-          <mat-progress-bar class="mb-1" *ngIf="startCRSOngoing" mode="indeterminate"></mat-progress-bar>
-        </button>
-      </td>
-    </tr>
-    <tr>
-      <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
-        <img class="icon" src="assets/Cannabis-marketing-icon-blue-40px.png" alt="">
-      </td>
-      <td style="width: 700px;">
-        <h3>Cannabis Marketing</h3>
-        <p>
-          The Cannabis Marketing licence allows licensees to promote cannabis to licensed cannabis
-          stores and the adult public.
-        </p>
-        <!--href="policy-document/cannabis-marketing-licence"-->
-        <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/non-medical-cannabis-licenses/apply-cannabis-licence/apply-for-a-cannabis-marketing-licence">
-          Learn more
-        </a>
-      </td>
-      <td style="text-align: center;">
-        <button mat-raised-button color="secondary" [disabled]="startMarketingOngoing"
-                (click)="startNewMarketerApplication()" id="startMarketing">
-          <span>START APPLICATION</span>
-          <mat-progress-bar class="mb-1" *ngIf="startMarketingOngoing" mode="indeterminate"></mat-progress-bar>
-        </button>
-      </td>
-    </tr>
-    <tr appRemoveIfFeatureOff="PrsEnabled">
-      <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
-        <img class="icon" src="assets/Cannabis-store-icon-blue-40px.png" alt="">
-      </td>
-      <td style="width: 700px;">
+        <section>
+          <h3>LIQUOR LICENCE APPLICATIONS</h3>
+          <table class="start-application">
+            <tr *ngIf="liquorThree">
+              <td style="background-color: #e1e8f2; padding: 10px; width: 15px">
+                <img class="icon" src="assets/agent-blue.png" alt="" />
+              </td>
+              <td style="width: 700px">
+                <h3>Agent Licence</h3>
+                <p>
+                  An agent's licence allows independent liquor agents and importers to promote, market and take
+                  wholesale orders for liquor products.
+                </p>
+                <a
+                  href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licence-permits/apply-for-liquor-licence-permit/apply-for-an-agent-licence"
+                  target="_blank">
+                  Learn more about this licence
+                </a>
+              </td>
+              <td style="text-align: center">
+                <button
+                  mat-raised-button
+                  color="secondary"
+                  [disabled]="startAgentOngoing || isOutstandingPriorBalanceInvoiceDue"
+                  (click)="startNewAgentApplication()"
+                  id="startAgent">
+                  <span> START APPLICATION </span>
+                  <mat-progress-bar class="mb-1" *ngIf="startAgentOngoing" mode="indeterminate"></mat-progress-bar>
+                </button>
+              </td>
+            </tr>
 
-        <h3>Producer Retail Store </h3>
-        <p>The producer retail store licence or authorization allows cultivators to sell cannabis from a store located at their production site.</p>
-        <!--<P>(A separate application must be submitted for each proposed store)</P>-->
-        <!--href="policy-document/cannabis-retail-licence"-->
-        <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/non-medical-cannabis-licenses/apply-cannabis-licence/apply-for-a-producer-retail-store-licence"
-           target="_blank" rel="noopener noreferrer">
-          Learn more
-        </a>
-      </td>
-      <td style="text-align: center;">
-        <button mat-raised-button color="secodary" [disabled]="startPRSOngoing"
-                (click)="startNewPRSLicenceApplication()" id="startPRS">
-          <span>START APPLICATION</span>
-          <mat-progress-bar class="mb-1" *ngIf="startPRSOngoing" mode="indeterminate"></mat-progress-bar>
-        </button>
-      </td>
-    </tr>
-    <tr *ngIf="F2G">
-      <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
-        <img class="icon" src="assets/Cannabis-store-icon-blue-40px.png" alt="">
-      </td>
-      <td style="width: 700px;">
-        <h3>Farm to Gate</h3>
-        <p>
-          The Cannabis Farm to Gate Licence allows licensed federal producers of cannabis to sell non-medical cannabis on their production site.
-        </p>
-        <a href="policy-document/cannabis-f2g-licence">
-          Learn
-          more about this licence
-        </a>
-      </td>
-      <td style="text-align: center;">
-        <button mat-raised-button color="secondary" [disabled]="startF2G"
-                (click)="startNewF2GApplication()" id="startF2G">
-          <span>START APPLICATION</span>
-          <mat-progress-bar class="mb-1" *ngIf="startF2GOngoing" mode="indeterminate"></mat-progress-bar>
-        </button>
-      </td>
-    </tr>
-  </table>
-  <hr>
-</section>
+            <tr>
+              <td style="background-color: #e1e8f2; padding: 10px; width: 15px">
+                <img class="icon" src="assets/Catering-icon-blue-40px.png" alt="" />
+              </td>
+              <td style="width: 700px">
+                <h3>Catering Licence</h3>
+                <p>
+                  Catering licences are for catering businesses that provide a full range of food and beverage services
+                  to their clients. Licensed caterers can sell liquor and maintain a liquor inventory.
+                </p>
+                <!--href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/applying-for-a-liquor-licence-or-permit/catering-liquor-licence"-->
 
-<section>
-<h3>LIQUOR LICENCE APPLICATIONS</h3>
-<table class="start-application">
-  <tr *ngIf="liquorThree">
-    <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
-      <img class="icon" src="assets/agent-blue.png" alt="">
-    </td>
-    <td style="width: 700px;">
-      <h3>Agent Licence</h3>
-      <p>
-        An agent's licence allows independent liquor agents and importers to promote, market and take wholesale orders for liquor products.
-      </p>
-      <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licence-permits/apply-for-liquor-licence-permit/apply-for-an-agent-licence"
-         target="_blank">
-        Learn
-        more about this licence
-      </a>
-    </td>
-    <td style="text-align: center;">
-      <button mat-raised-button color="secondary" [disabled]="startAgentOngoing|| isOutstandingPriorBalanceInvoiceDue"
-              (click)="startNewAgentApplication()" id="startAgent">
-        <span>
-          START APPLICATION
-        </span>
-        <mat-progress-bar class="mb-1" *ngIf="startAgentOngoing" mode="indeterminate"></mat-progress-bar>
-      </button>
-    </td>
-  </tr>
+                <a
+                  href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licence-permits/apply-for-liquor-licence-permit/apply-for-a-catering-licence"
+                  target="_blank">
+                  Learn more about this licence
+                </a>
+              </td>
+              <td style="text-align: center">
+                <button
+                  *ngIf="liquorOne"
+                  mat-raised-button
+                  color="secondary"
+                  [disabled]="startCateringOngoing"
+                  (click)="startNewCateringApplication()"
+                  id="startCatering">
+                  <span>START APPLICATION</span>
+                  <mat-progress-bar class="mb-1" *ngIf="startCateringOngoing" mode="indeterminate"></mat-progress-bar>
+                </button>
+                <button *ngIf="!liquorOne" mat-raised-button color="secondary" id="startCatering" disabled>
+                  COMING SOON
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td style="background-color: #e1e8f2; padding: 10px; width: 15px">
+                <!--img class="icon" src="assets/food-primary-blue.png" alt=""-->
+              </td>
+              <td style="width: 700px">
+                <h3>Ethyl Alcohol Permit</h3>
+                <p>
+                  Permit for purchasing quantities of ethyl alcohol for manufacturing, scientific, or other purposes.
+                </p>
+                <a
+                  href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licence-permits/apply-for-liquor-licence-permit/apply-for-an-ethyl-alcohol-permit"
+                  target="_blank">
+                  Learn more about this licence
+                </a>
+              </td>
+              <td style="text-align: center">
+                <button
+                  mat-raised-button
+                  color="secondary"
+                  [disabled]="startEthylOngoing"
+                  (click)="startNewEthylApplication()"
+                  id="startEthyl">
+                  <span> START APPLICATION </span>
+                  <mat-progress-bar class="mb-1" *ngIf="startEthylOngoing" mode="indeterminate"></mat-progress-bar>
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="liquorThree">
+              <td style="background-color: #e1e8f2; padding: 10px; width: 15px">
+                <img class="icon" src="assets/food-primary-blue.png" alt="" />
+              </td>
+              <td style="width: 700px">
+                <h3>Food Primary Licence</h3>
+                <p>
+                  Food primary licences are for establishments where the primary focus is the service of food such as
+                  restaurants, bistros, and cafes. Take-out restaurants, mall food fairs, food trucks, and banquet halls
+                  without fully equipped kitchens are not eligible.
+                </p>
+                <!--href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/applying-for-a-liquor-licence-or-permit/food-primary-liquor-licence"-->
 
-<tr>
-  <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
-    <img class="icon" src="assets/Catering-icon-blue-40px.png" alt="">
-  </td>
-  <td style="width: 700px;">
-    <h3>Catering Licence</h3>
-    <p>
-      Catering licences are for catering businesses that provide a full range of food and beverage services
-      to their clients. Licensed caterers can sell liquor and maintain a liquor inventory.
-    </p>
-    <!--href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/applying-for-a-liquor-licence-or-permit/catering-liquor-licence"-->
+                <a
+                  href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licence-permits/apply-for-liquor-licence-permit/apply-for-a-food-primary-licence"
+                  target="_blank">
+                  Learn more about this licence
+                </a>
+              </td>
+              <td style="text-align: center">
+                <button
+                  mat-raised-button
+                  color="secondary"
+                  [disabled]="startFPOngoing"
+                  (click)="startNewFPApplication()"
+                  id="startFP">
+                  <span> START APPLICATION </span>
+                  <mat-progress-bar class="mb-1" *ngIf="startFPOngoing" mode="indeterminate"></mat-progress-bar>
+                </button>
+              </td>
+            </tr>
 
-    <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licence-permits/apply-for-liquor-licence-permit/apply-for-a-catering-licence" target="_blank">
-      Learn
-      more about this licence
-    </a>
-  </td>
-  <td style="text-align: center;">
-    <button *ngIf="liquorOne" mat-raised-button color="secondary" [disabled]="startCateringOngoing"
-            (click)="startNewCateringApplication()" id="startCatering">
-      <span>START APPLICATION</span>
-      <mat-progress-bar class="mb-1" *ngIf="startCateringOngoing" mode="indeterminate"></mat-progress-bar>
-    </button>
-    <button *ngIf="!liquorOne" mat-raised-button color="secondary" id="startCatering" disabled>
-      COMING
-      SOON
-    </button>
-  </td>
-</tr>
-<tr >
-  <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
-    <!--img class="icon" src="assets/food-primary-blue.png" alt=""-->
-  </td>
-  <td style="width: 700px;">
-    <h3>Ethyl Alcohol Permit</h3>
-    <p>
-      Permit for purchasing quantities of ethyl alcohol for manufacturing, scientific, or other purposes.
-    </p>
-    <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licence-permits/apply-for-liquor-licence-permit/apply-for-an-ethyl-alcohol-permit"
-                 target="_blank">
-      Learn
-      more about this licence
-    </a>
-  </td>
-  <td style="text-align: center;">
-    <button mat-raised-button color="secondary" [disabled]="startEthylOngoing"
-            (click)="startNewEthylApplication()" id="startEthyl">
-      <span>
-        START APPLICATION
-      </span>
-      <mat-progress-bar class="mb-1" *ngIf="startEthylOngoing" mode="indeterminate"></mat-progress-bar>
-    </button>
-  </td>
-</tr>
-<tr *ngIf="liquorThree">
-  <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
-    <img class="icon" src="assets/food-primary-blue.png" alt="">
-  </td>
-  <td style="width: 700px;">
-    <h3>Food Primary Licence</h3>
-    <p>
-      Food primary licences are for establishments where the primary focus is the service of food such as
-      restaurants,
-      bistros, and cafes. Take-out restaurants, mall food fairs, food trucks, and banquet halls without
-      fully equipped
-      kitchens are not eligible.
-    </p>
-    <!--href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/applying-for-a-liquor-licence-or-permit/food-primary-liquor-licence"-->
+            <tr *ngIf="liquorTwo">
+              <td style="background-color: #e1e8f2; padding: 10px; width: 15px">
+                <img class="icon" src="assets/Manufacturer-icon-blue-40px.png" alt="" />
+              </td>
+              <td style="width: 700px">
+                <h3>Manufacturer Licence</h3>
+                <p>
+                  Any business making wine, cider, beer (this includes brew pubs), or spirits must have a winery,
+                  brewery, distillery or co-packer licence from the Liquor and Cannabis Regulation Branch.
+                </p>
+                <!--href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/applying-for-a-liquor-licence-or-permit/manufacturer-liquor-licence"-->
 
-    <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licence-permits/apply-for-liquor-licence-permit/apply-for-a-food-primary-licence"
-       target="_blank">
-      Learn
-      more about this licence
-    </a>
-  </td>
-  <td style="text-align: center;">
-    <button mat-raised-button color="secondary" [disabled]="startFPOngoing"
-            (click)="startNewFPApplication()" id="startFP">
-      <span>
-        START
-        APPLICATION
-      </span>
-      <mat-progress-bar class="mb-1" *ngIf="startFPOngoing" mode="indeterminate"></mat-progress-bar>
-    </button>
-  </td>
-</tr>
+                <a
+                  href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licence-permits/apply-for-liquor-licence-permit/apply-for-a-manufacturer-licence"
+                  target="_blank">
+                  Learn more about this licence
+                </a>
+              </td>
+              <td style="text-align: center">
+                <button
+                  mat-raised-button
+                  color="secodary"
+                  [disabled]="startMfgOngoing"
+                  (click)="startNewMfgApplication()"
+                  id="startMfg">
+                  <span>START APPLICATION</span>
+                  <mat-progress-bar class="mb-1" *ngIf="startMfgOngoing" mode="indeterminate"></mat-progress-bar>
+                </button>
+              </td>
+            </tr>
 
-<tr *ngIf="liquorTwo">
-  <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
-    <img class="icon" src="assets/Manufacturer-icon-blue-40px.png" alt="">
-  </td>
-  <td style="width: 700px;">
-    <h3>Manufacturer Licence</h3>
-    <p>
-      Any business making wine, cider, beer (this includes brew pubs), or spirits must have a winery,
-      brewery, distillery or co-packer licence from the Liquor and Cannabis Regulation Branch.
-    </p>
-    <!--href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/applying-for-a-liquor-licence-or-permit/manufacturer-liquor-licence"-->
+            <tr *ngIf="liquorTwo">
+              <td style="background-color: #e1e8f2; padding: 10px; width: 15px">
+                <img class="icon" src="assets/Licensee-icon-blue-40px.png" alt="" />
+              </td>
+              <td style="width: 700px">
+                <h3>Licensee Retail Store</h3>
+                <p>
+                  Often referred to as private liquor stores or cold beer and wine stores, licensee retail stores (LRS)
+                  may sell beer, wine, coolers, cider, and a full range of spirits for private consumption. An LRS may
+                  also sell packaged snacks, non-alcoholic beverages, B.C. Lottery products, and liquor-related items,
+                  such as glasses, bottle openers and corkscrews.
+                </p>
+                <!--href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/applying-for-a-liquor-licence-or-permit/licensee-private-retail-store-liquor-licence"-->
 
-    <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licence-permits/apply-for-liquor-licence-permit/apply-for-a-manufacturer-licence"
-       target="_blank">
-      Learn
-      more about this licence
-    </a>
-  </td>
-  <td style="text-align: center;">
-    <button mat-raised-button color="secodary" [disabled]="startMfgOngoing"
-            (click)="startNewMfgApplication()" id="startMfg">
-      <span>START APPLICATION</span>
-      <mat-progress-bar class="mb-1" *ngIf="startMfgOngoing" mode="indeterminate"></mat-progress-bar>
-    </button>
-  </td>
-</tr>
+                <a
+                  href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licence-permits/apply-for-liquor-licence-permit/licensee-retail-store"
+                  target="_blank">
+                  Learn more about this licence
+                </a>
+              </td>
+              <td style="text-align: center">
+                <i>New Licensee Retail Store applications <br />are closed at this time.</i>
+              </td>
+            </tr>
 
-<tr *ngIf="liquorTwo">
-  <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
-    <img class="icon" src="assets/Licensee-icon-blue-40px.png" alt="">
-  </td>
-  <td style="width: 700px;">
-    <h3>Licensee Retail Store</h3>
-    <p>
-      Often referred to as private liquor stores or cold beer and wine stores, licensee retail stores (LRS)
-      may sell beer,
-      wine, coolers, cider, and a full range of spirits for private consumption. An LRS may also sell
-      packaged snacks,
-      non-alcoholic beverages, B.C. Lottery products, and liquor-related items, such as glasses, bottle
-      openers and
-      corkscrews.
-    </p>
-    <!--href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/applying-for-a-liquor-licence-or-permit/licensee-private-retail-store-liquor-licence"-->
+            <tr *ngIf="liquorThree">
+              <td style="background-color: #e1e8f2; padding: 10px; width: 15px">
+                <img class="icon" src="assets/liquor-primary-bars-blue.png" alt="" />
+              </td>
+              <td style="width: 700px">
+                <h3>Liquor Primary Licence</h3>
+                <p>
+                  A Liquor Primary licence is for businesses where the primary purpose is to sell liquor (bars, as well
+                  as stadiums, theatres, aircraft, etc.) as well as other businesses that wish to serve liquor as an
+                  additional service to their primary business (spas, salons, art galleries, etc).
+                </p>
+                <!--href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals/liquorprimary-handbook.pdf"-->
 
-    <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licence-permits/apply-for-liquor-licence-permit/licensee-retail-store"
-       target="_blank">
-      Learn
-      more about this licence
-    </a>
-  </td>
-  <td style="text-align: center;">
-    <i>New Licensee Retail Store applications <br>are closed at this time.</i>
-  </td>
-</tr>
+                <a
+                  href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licence-permits/apply-for-liquor-licence-permit/apply-for-a-liquor-primary-licence"
+                  target="_blank">
+                  Learn more about this licence
+                </a>
+              </td>
+              <td style="text-align: center">
+                <button
+                  mat-raised-button
+                  color="secondary"
+                  [disabled]="startLPOngoing"
+                  (click)="startNewLPApplication(true)"
+                  id="startLP">
+                  <span> START APPLICATION </span>
+                  <mat-progress-bar class="mb-1" *ngIf="startLPOngoing" mode="indeterminate"></mat-progress-bar>
+                </button>
+              </td>
+            </tr>
 
-<tr *ngIf="liquorThree">
-  <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
-    <img class="icon" src="assets/liquor-primary-bars-blue.png" alt="">
-  </td>
-  <td style="width: 700px;">
-    <h3>Liquor Primary Licence</h3>
-    <p>A Liquor Primary licence is for businesses where the primary purpose is to sell liquor (bars, as well as stadiums, theatres, aircraft, etc.) as well as other businesses that wish to serve liquor as an additional service to their primary business (spas, salons, art galleries, etc).</p>
-    <!--href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals/liquorprimary-handbook.pdf"-->
+            <tr *ngIf="liquorThree">
+              <td style="background-color: #e1e8f2; padding: 10px; width: 15px">
+                <img class="icon" src="assets/liquor-primary-bars-blue.png" alt="" />
+              </td>
+              <td style="width: 700px">
+                <h3>Liquor Primary Club Licence</h3>
+                <p>
+                  A society registered under the provincial Societies Act or a non-profit or veterans organization
+                  incorporated by special act of parliament, may apply for an LP Club Licence. LP Clubs must have at
+                  least 50 members who pay annual fees. The service area of an LP Club is restricted to members and
+                  guests only.
+                </p>
+                <a
+                  href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals/liquorprimary-handbook.pdf"
+                  target="_blank">
+                  Learn more about this licence
+                </a>
+              </td>
+              <td style="text-align: center">
+                <button
+                  mat-raised-button
+                  color="secondary"
+                  [disabled]="startLPCOngoing"
+                  (click)="startNewLPCApplication()"
+                  id="startLPC">
+                  <span> START APPLICATION </span>
+                  <mat-progress-bar class="mb-1" *ngIf="startLPCOngoing" mode="indeterminate"></mat-progress-bar>
+                </button>
+              </td>
+            </tr>
 
-    <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licence-permits/apply-for-liquor-licence-permit/apply-for-a-liquor-primary-licence"
-       target="_blank">
-      Learn
-      more about this licence
-    </a>
-  </td>
-  <td style="text-align: center;">
-    <button mat-raised-button color="secondary" [disabled]="startLPOngoing"
-            (click)="startNewLPApplication(true)" id="startLP">
-      <span>
-        START
-        APPLICATION
-      </span>
-      <mat-progress-bar class="mb-1" *ngIf="startLPOngoing" mode="indeterminate"></mat-progress-bar>
-    </button>
-  </td>
-</tr>
+            <tr *ngIf="liquorTwo">
+              <td style="background-color: #e1e8f2; padding: 10px; width: 15px">
+                <img class="icon" src="assets/U-Brew-icon-blue-40px.png" alt="" />
+              </td>
+              <td style="width: 700px">
+                <h3>UBrew / UVin Licence</h3>
+                <p>
+                  Also known as Ferment-on-Premises, UBrews and UVins are businesses that provide their customers with
+                  the ingredients, equipment and advice they need to make their own beer, wine, cider or coolers
+                  on-site. Once it's made, UBrew and UVin customers must take their liquor away, for their own private
+                  consumption. It cannot be sold to others.
+                </p>
+                <!--href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/applying-for-a-liquor-licence-or-permit/ubrew-and-uvin-liquor-licence"-->
 
-<tr *ngIf="liquorThree">
-  <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
-    <img class="icon" src="assets/liquor-primary-bars-blue.png" alt="">
-  </td>
-  <td style="width: 700px;">
-    <h3>Liquor Primary Club Licence</h3>
-    <p>A society registered under the provincial Societies Act or a non-profit or veterans organization incorporated by special act of parliament, may apply for an LP Club Licence. LP Clubs must have at least 50 members who pay annual fees. The service area of an LP Club is restricted to members and guests only.</p>
-    <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals/liquorprimary-handbook.pdf"
-       target="_blank">
-      Learn
-      more about this licence
-    </a>
-  </td>
-  <td style="text-align: center;">
-    <button mat-raised-button color="secondary" [disabled]="startLPCOngoing"
-            (click)="startNewLPCApplication()" id="startLPC">
-      <span>
-        START
-        APPLICATION
-      </span>
-      <mat-progress-bar class="mb-1" *ngIf="startLPCOngoing" mode="indeterminate"></mat-progress-bar>
-    </button>
-  </td>
-</tr>
+                <a
+                  href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licence-permits/apply-for-liquor-licence-permit/apply-for-a-ubrew-or-uvin-licence"
+                  target="_blank">
+                  Learn more about this licence
+                </a>
+              </td>
+              <td style="text-align: center">
+                <button
+                  mat-raised-button
+                  color="secondary"
+                  [disabled]="startUBVOngoing"
+                  (click)="startNewUBVApplication()"
+                  id="startUBV">
+                  <span>START APPLICATION</span>
+                  <mat-progress-bar class="mb-1" *ngIf="startUBVOngoing" mode="indeterminate"></mat-progress-bar>
+                </button>
+              </td>
+            </tr>
 
-<tr *ngIf="liquorTwo">
-  <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
-    <img class="icon" src="assets/U-Brew-icon-blue-40px.png" alt="">
-  </td>
-  <td style="width: 700px;">
-    <h3>UBrew / UVin Licence</h3>
-    <p>
-      Also known as Ferment-on-Premises, UBrews and UVins are businesses that provide their customers
-      with the ingredients, equipment and advice they need to make their own beer, wine, cider or coolers
-      on-site.
-      Once it's made, UBrew and UVin customers must take their liquor away, for their own private
-      consumption.
-      It cannot be sold to others.
-    </p>
-    <!--href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/applying-for-a-liquor-licence-or-permit/ubrew-and-uvin-liquor-licence"-->
+            <tr>
+              <td style="background-color: #e1e8f2; padding: 10px; width: 15px">
+                <img class="icon" src="assets/Wine-store-icon-blue-40px.png" alt="" />
+              </td>
+              <td style="width: 700px">
+                <h3>Wine Retail Store Licence</h3>
+                <p>
+                  Wine Stores licences allow businesses to sell wine to retail customers. This includes stores
+                  associated with a particular winery or group of wineries, independent wine stores, Vintners Quality
+                  Alliance (VQA) wine stores and tourist wine stores. They operate as a separate retail store and are
+                  not located at a winery.
+                </p>
+                <!--href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/applying-for-a-liquor-licence-or-permit/wine-store-liquor-licence"-->
 
-    <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licence-permits/apply-for-liquor-licence-permit/apply-for-a-ubrew-or-uvin-licence" target="_blank">
-      Learn
-      more about this licence
-    </a>
-  </td>
-  <td style="text-align: center;">
-    <button mat-raised-button color="secondary" [disabled]="startUBVOngoing"
-            (click)="startNewUBVApplication()" id="startUBV">
-       <span>START APPLICATION</span>
-      <mat-progress-bar class="mb-1" *ngIf="startUBVOngoing" mode="indeterminate"></mat-progress-bar>
-    </button>
-  </td>
-</tr>
+                <a
+                  href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licence-permits/apply-for-liquor-licence-permit/wine-store"
+                  target="_blank">
+                  Learn more about this licence
+                </a>
+              </td>
+              <td style="text-align: center">
+                <i>New wine store applications <br />are closed at this time.</i>
+              </td>
+            </tr>
 
-
-<tr>
-  <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
-    <img class="icon" src="assets/Wine-store-icon-blue-40px.png" alt="">
-  </td>
-  <td style="width: 700px;">
-    <h3>Wine Retail Store Licence</h3>
-    <p>
-      Wine Stores licences allow businesses to sell wine to retail customers. This includes stores
-      associated with a particular winery or group of wineries, independent wine stores, Vintners Quality
-      Alliance (VQA) wine stores and tourist wine stores. They operate as a separate retail store and are
-      not located at a winery.
-    </p>
-    <!--href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/applying-for-a-liquor-licence-or-permit/wine-store-liquor-licence"-->
-
-    <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licence-permits/apply-for-liquor-licence-permit/wine-store"
-       target="_blank">
-      Learn
-      more about this licence
-    </a>
-  </td>
-  <td style="text-align: center;">
-    <i>New wine store applications <br>are closed at this time.</i>
-  </td>
-</tr>
-
-<tr *ngIf="!RLRS">
-  <!-- Apply for a Rural Agency Store Licence -->
-  <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
-    <img class="icon" src="assets/Wine-store-icon-blue-40px.png" alt="">
-  </td>
-  <td style="width: 700px;">
-    <h3>Rural Agency Store Information Submission</h3>
-    <p>
-      Existing Rural Agency Stores must submit their store and business information to the LCRB in order to
-      be issued a licence in the future. Note, you will need an existing Rural Agency Store Certificate
-      number to complete the submission.
-    </p>
-    <!--a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/applying-for-a-liquor-licence-or-permit/wine-store-liquor-licence"
+            <tr *ngIf="!RLRS">
+              <!-- Apply for a Rural Agency Store Licence -->
+              <td style="background-color: #e1e8f2; padding: 10px; width: 15px">
+                <img class="icon" src="assets/Wine-store-icon-blue-40px.png" alt="" />
+              </td>
+              <td style="width: 700px">
+                <h3>Rural Agency Store Information Submission</h3>
+                <p>
+                  Existing Rural Agency Stores must submit their store and business information to the LCRB in order to
+                  be issued a licence in the future. Note, you will need an existing Rural Agency Store Certificate
+                  number to complete the submission.
+                </p>
+                <!--a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/applying-for-a-liquor-licence-or-permit/wine-store-liquor-licence"
   target="_blank">Learn
   more about this Expression of Interest</a-->
-  </td>
-  <td style="text-align: center;">
-    <button mat-raised-button color="secondary" (click)="startNewRASApplication()" id="startRAS">
-      SUBMIT INFORMATION
-      <mat-progress-bar class="mb-1" *ngIf="startRASOngoing" mode="indeterminate"></mat-progress-bar>
-    </button>
-  </td>
-</tr>
-<tr *ngIf="RLRS">
-  <!-- Apply for a Rural Agency Store Licence -->
-  <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
-    <img class="icon" src="assets/Wine-store-icon-blue-40px.png" alt="">
-  </td>
-  <td style="width: 700px;">
-    <h3>Rural Licensee Retail Store Application</h3>
-    <p>
-      The Rural Licensee Retail Store (RLRS) licence is intended for rural communities and tourist destination resorts, which are generally unable to support a standalone liquor store, i.e. a Licensee Retail Store (LRS) or Government Liquor Store (GLS). A RLRS licence authorizes a licensee to sell packaged liquor (beer, wine, coolers, cider and spirits) in a full-service general grocery store for customers to purchase and consume away from the store.
-    </p>
-    <!--a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/applying-for-a-liquor-licence-or-permit/wine-store-liquor-licence"
+              </td>
+              <td style="text-align: center">
+                <button mat-raised-button color="secondary" (click)="startNewRASApplication()" id="startRAS">
+                  SUBMIT INFORMATION
+                  <mat-progress-bar class="mb-1" *ngIf="startRASOngoing" mode="indeterminate"></mat-progress-bar>
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="RLRS">
+              <!-- Apply for a Rural Agency Store Licence -->
+              <td style="background-color: #e1e8f2; padding: 10px; width: 15px">
+                <img class="icon" src="assets/Wine-store-icon-blue-40px.png" alt="" />
+              </td>
+              <td style="width: 700px">
+                <h3>Rural Licensee Retail Store Application</h3>
+                <p>
+                  The Rural Licensee Retail Store (RLRS) licence is intended for rural communities and tourist
+                  destination resorts, which are generally unable to support a standalone liquor store, i.e. a Licensee
+                  Retail Store (LRS) or Government Liquor Store (GLS). A RLRS licence authorizes a licensee to sell
+                  packaged liquor (beer, wine, coolers, cider and spirits) in a full-service general grocery store for
+                  customers to purchase and consume away from the store.
+                </p>
+                <!--a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/applying-for-a-liquor-licence-or-permit/wine-store-liquor-licence"
   target="_blank">Learn
   more about this Expression of Interest</a-->
-    <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licence-permits/apply-for-liquor-licence-permit/apply-for-a-rural-licensee-retail-store-licence"
-       target="_blank">
-      Learn
-      more about this licence
-    </a>
-  </td>
-  <td style="text-align: center;">
-    <button mat-raised-button color="secondary" (click)="startNewRLRSApplication()" id="startRLRS">
-      SUBMIT APPLICATION
-      <mat-progress-bar class="mb-1" *ngIf="startRLRSOngoing" mode="indeterminate"></mat-progress-bar>
-    </button>
-  </td>
-</tr>
+                <a
+                  href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licence-permits/apply-for-liquor-licence-permit/apply-for-a-rural-licensee-retail-store-licence"
+                  target="_blank">
+                  Learn more about this licence
+                </a>
+              </td>
+              <td style="text-align: center">
+                <button mat-raised-button color="secondary" (click)="startNewRLRSApplication()" id="startRLRS">
+                  SUBMIT APPLICATION
+                  <mat-progress-bar class="mb-1" *ngIf="startRLRSOngoing" mode="indeterminate"></mat-progress-bar>
+                </button>
+              </td>
+            </tr>
+          </table>
+        </section>
+      </div>
+      <mat-progress-bar class="mt-1" *ngIf="!dataLoaded" mode="indeterminate"></mat-progress-bar>
+      <mat-tab-group *ngIf="dataLoaded" [selectedIndex]="0">
+        <mat-tab label="In Progress Applications" id="inProgressApplications">
+          <section *ngIf="inProgressApplications?.length > 0">
+            <label>Please note:</label> <br />
+            <p>
+              Due to the high volume of applications, we ask that you limit questions about the status of your
+              application as much as possible. Answering fewer questions provides us more capacity to process
+              applications.
+            </p>
+            <p>
+              We will contact you regarding your application as soon as we have an update to communicate, have
+              information that you will need to know, or are requesting additional information from you.
+            </p>
+            <p>Thank you for your patience.</p>
+          </section>
+          <p *ngIf="inProgressApplications?.length == 0">You do not have any In Progress Applications.</p>
 
-</table>
-</section>
-</div>
-<mat-progress-bar class="mt-1" *ngIf="!dataLoaded" mode="indeterminate"></mat-progress-bar>
-<mat-tab-group *ngIf="dataLoaded" [selectedIndex]="0">
-<mat-tab label="In Progress Applications" id="inProgressApplications">
-<section *ngIf="inProgressApplications?.length > 0">
-  <label>Please note:</label> <br>
-  <p>
-    Due to the high volume of applications, we ask that you limit questions about the status of your
-    application
-    as much as possible. Answering fewer questions provides us more capacity to process applications.
-  </p>
-  <p>
-    We will contact you regarding your application as soon as we have an update to communicate, have
-    information
-    that you will need to know, or are requesting additional information from you.
-  </p>
-  <p>Thank you for your patience.</p>
-</section>
-<p *ngIf="inProgressApplications?.length == 0 ">
-  You do not have any In Progress Applications.
-</p>
+          <table *ngIf="inProgressApplications?.length > 0" class="eq-table">
+            <tr>
+              <th colspan="2">Application</th>
+              <!-- <th style="width: 95px">Last Updated</th> -->
+              <th style="width: 235px">Status</th>
+              <th>Actions</th>
+              <th>Apply for Endorsements</th>
+            </tr>
+            <tr *ngFor="let item of inProgressApplications; let i = index" style="border: 1px solid #ccc">
+              <td style="background-color: #e1e8f2; padding: 10px; width: 15px">
+                <span>{{ i + 1 }}</span>
+              </td>
+              <td style="background-color: #f1f4fa; padding: 10px; padding-bottom: 15px">
+                <ng-container *ngIf="item.applicationTypeName === ApplicationTypeNames.PermanentChangeToALicensee">
+                  <span style="font-weight: 600">{{ ApplicationTypeNames.PermanentChangeToALicensee }}</span> <br />
+                  <span>Job No: </span> <i>{{ item.jobNumber }}</i> <br />
+                  <span>Reference #: {{ item.name }} </span> <br />
+                </ng-container>
 
-<table *ngIf="inProgressApplications?.length > 0" class="eq-table">
-<tr>
-  <th colspan="2">Application</th>
-  <!-- <th style="width: 95px">Last Updated</th> -->
-  <th style="width: 235px">Status</th>
-  <th>Actions</th>
-  <th>Apply for Endorsements</th>
-</tr>
-<tr *ngFor="let item of inProgressApplications; let i = index;" style="border: 1px solid #ccc;">
-  <td style="background-color: #E1E8F2; padding: 10px; width: 15px;">
-    <span>{{i+1}}</span>
-  </td>
-  <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">
-    <ng-container *ngIf="item.applicationTypeName === ApplicationTypeNames.PermanentChangeToALicensee">
-      <span style="font-weight: 600">{{ApplicationTypeNames.PermanentChangeToALicensee}}</span> <br>
-      <span>Job No: </span> <i>{{item.jobNumber}}</i> <br>
-      <span>Reference #: {{item.name}} </span> <br>
-    </ng-container>
+                <ng-container *ngIf="item.applicationTypeName === ApplicationTypeNames.LegalEntityReview">
+                  <span style="font-weight: 600">Legal Entity Review</span> <br />
+                  <span>Job No: </span> <i>{{ item.jobNumber }}</i> <br />
+                  <span>Reference #: {{ item.name }} </span> <br />
+                </ng-container>
 
-    <ng-container *ngIf="item.applicationTypeName === ApplicationTypeNames.LegalEntityReview">
-      <span style="font-weight: 600">Legal Entity Review</span> <br>
-      <span>Job No: </span> <i>{{item.jobNumber}}</i> <br>
-      <span>Reference #: {{item.name}} </span> <br>
-    </ng-container>
+                <ng-container
+                  *ngIf="
+                    item.applicationTypeName !== ApplicationTypeNames.PermanentChangeToALicensee &&
+                    item.applicationTypeName !== ApplicationTypeNames.LegalEntityReview
+                  ">
+                  <span style="font-weight: 600">{{ item.establishmentName }}</span> <br />
+                  <span>{{ item.portallabel }}</span> <br />
+                  <span>Job No: </span> <i>{{ item.jobNumber }}</i> <br />
+                  <span>Reference #: {{ item.name }} </span> <br />
+                </ng-container>
 
-    <ng-container *ngIf="item.applicationTypeName !== ApplicationTypeNames.PermanentChangeToALicensee && item.applicationTypeName !== ApplicationTypeNames.LegalEntityReview">
-      <span style="font-weight: 600">{{item.establishmentName}}</span> <br>
-      <span>{{item.portallabel}}</span> <br>
-      <span>Job No: </span> <i>{{item.jobNumber}}</i> <br>
-      <span>Reference #: {{item.name}} </span> <br>
-    </ng-container>
-
-    <!--div *ngIf="item.dateApplicationSubmitted">
+                <!--div *ngIf="item.dateApplicationSubmitted">
       Date Submitted: {{item.dateApplicationSubmitted | date : 'dd MMM yyyy'}}
     </div-->
+              </td>
 
+              <td style="background-color: #e1e8f2; padding: 10px">
+                <div style="font-weight: 600; text-transform: uppercase">
+                  <span
+                    *ngIf="!isApprovedByLGAndNotSubmitted(item) && item.applicationStatus !== 'PendingForLicenceFee'">
+                    {{ item.applicationStatus }}
+                  </span>
+                  <span *ngIf="item.applicationStatus == 'PendingForLicenceFee'"> Pending Licence Fee </span>
 
-  </td>
+                  <span *ngIf="isApprovedByLGAndNotSubmitted(item)"> Ready for Submission </span>
+                </div>
+                <p *ngIf="item.applicationStatus === 'Under Review'">
+                  This application has been received and is being reviewed by the LCRB.
+                </p>
+                <p *ngIf="item.applicationStatus === 'Not Submitted'">This application has not yet been submitted.</p>
 
-  <td style="background-color: #E1E8F2; padding: 10px;">
-    <div style="font-weight: 600; text-transform: uppercase;">
-      <span *ngIf="!isApprovedByLGAndNotSubmitted(item) && !isLegalEntityReviewUnderReview(item) && item.applicationStatus !== 'PendingForLicenceFee'">
-        {{item.applicationStatus}}
-      </span>
-      <span *ngIf="item.applicationStatus == 'PendingForLicenceFee'">
-        Pending Licence Fee
-      </span>
+                <p *ngIf="item.applicationStatus === 'Relocation Initiated'">
+                  This relocation application has not yet been submitted.
+                </p>
+                <p *ngIf="item.applicationStatus === 'Transfer Initiated'">
+                  This transfer application has not yet been submitted.
+                </p>
 
-      <span *ngIf="isApprovedByLGAndNotSubmitted(item)">
-        Ready for Submission
-      </span>
+                <p *ngIf="item.applicationStatus === 'PendingForLicenceFee'">
+                  <a href="javascript:void(0);" (click)="payLicenceFee(item)" class="missing">
+                    <span>
+                      <fa-icon [icon]="faShoppingCart" style="margin-right: 10px"></fa-icon>
+                      Pay First Year Fee
+                    </span>
+                  </a>
+                </p>
 
-    </div>
-    <p *ngIf="item.applicationStatus === 'Under Review'">
-      This application has been received and is being reviewed by the LCRB.
-    </p>
-    <p *ngIf="item.applicationStatus === 'Not Submitted'">
-      This application has not yet been submitted.
-    </p>
-
-    <p *ngIf="item.applicationStatus === 'Relocation Initiated'">
-      This relocation application has not yet been submitted.
-    </p>
-    <p *ngIf="item.applicationStatus === 'Transfer Initiated'">
-      This transfer application has not yet been submitted.
-    </p>
-
-    <p *ngIf="item.applicationStatus === 'PendingForLicenceFee'">
-        <a href="javascript:void(0);" (click)="payLicenceFee(item)" class="missing">
-          <span>
-            <fa-icon [icon]="faShoppingCart" style="margin-right: 10px;"></fa-icon>
-            Pay First Year Fee
-          </span>
-        </a>
-    </p>
-
-    <p *ngIf="item.applicationStatus === 'Incomplete'">
-      Your application has been found to be incomplete. You must provide additional information for it to be processed.
-    </p>
-    <div *ngIf="item.applicationStatus === 'Pending External Review'">
-      <p *ngIf="!item.lgHasApproved">
-        Your application has been sent for local government or Indigenous Nation review.
-      </p>
-      <p *ngIf="item.lgHasApproved">
-        Your application has been reviewed by the local government or indigenous nation.
-      </p>
-      <!--div *ngIf="item.dateApplicantSentToLG">
+                <p *ngIf="item.applicationStatus === 'Incomplete'">
+                  Your application has been found to be incomplete. You must provide additional information for it to be
+                  processed.
+                </p>
+                <p *ngIf="item.applicationStatus === 'Licensee Action Required'">
+                  A specific action is required to advance your application. Please refer to the steps outlined in your
+                  outcome letter and complete the required changes in the specified timeframe.
+                </p>
+                <div *ngIf="item.applicationStatus === 'Pending External Review'">
+                  <p *ngIf="!item.lgHasApproved">
+                    Your application has been sent for local government or Indigenous Nation review.
+                  </p>
+                  <p *ngIf="item.lgHasApproved">
+                    Your application has been reviewed by the local government or indigenous nation.
+                  </p>
+                  <!--div *ngIf="item.dateApplicantSentToLG">
         <strong>Date Sent to LG</strong>: {{item.dateApplicantSentToLG | date : 'dd MMM yyyy'}}
       </div-->
-    </div>
-  </td>
-  <td style="background-color: #E1E8F2; padding: 10px;">
-    <!-- If the application has been sent to LG/IN, the applicant cannot access it, unless they have approved it -->
-    <div *ngIf="item.applicationStatus === 'Pending External Review'">
-      <ng-container *ngIf="item.lgHasApproved">
-        <a appRemoveIfFeatureOff="LicenseeChanges"
-           *ngIf="item.applicationTypeName !== ApplicationTypeNames.CRSRenewal && item.applicationTypeName !== ApplicationTypeNames.Catering && item.applicationTypeName !== ApplicationTypeNames.LiquorRenewal"
-           routerLink="/account-profile/{{item.id}}" id="completeApp{{item.id}}">
-          <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px;"></fa-icon>
-          <span>Complete Application</span>
-        </a>
-      </ng-container>
-    </div>
+                </div>
+              </td>
+              <td style="background-color: #e1e8f2; padding: 10px">
+                <!-- If the application has been sent to LG/IN, the applicant cannot access it, unless they have approved it -->
+                <div *ngIf="item.applicationStatus === 'Pending External Review'">
+                  <ng-container *ngIf="item.lgHasApproved">
+                    <a
+                      appRemoveIfFeatureOff="LicenseeChanges"
+                      *ngIf="
+                        item.applicationTypeName !== ApplicationTypeNames.CRSRenewal &&
+                        item.applicationTypeName !== ApplicationTypeNames.Catering &&
+                        item.applicationTypeName !== ApplicationTypeNames.LiquorRenewal
+                      "
+                      routerLink="/account-profile/{{ item.id }}"
+                      id="completeApp{{ item.id }}">
+                      <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px"></fa-icon>
+                      <span>Complete Application</span>
+                    </a>
+                  </ng-container>
+                </div>
 
-    <div *ngIf="item.applicationStatus === 'Not Submitted'">
-      <a *ngIf="item.applicationTypeName !== ApplicationTypeNames.CRSRenewal
-                      && item.applicationTypeName !== ApplicationTypeNames.LiquorRenewal
-                      && item.applicationTypeName !== ApplicationTypeNames.MarketingRenewal"
+                <div *ngIf="item.applicationStatus === 'Not Submitted'">
+                  <a
+                    *ngIf="
+                      item.applicationTypeName !== ApplicationTypeNames.CRSRenewal &&
+                      item.applicationTypeName !== ApplicationTypeNames.LiquorRenewal &&
+                      item.applicationTypeName !== ApplicationTypeNames.MarketingRenewal
+                    "
+                    [routerLink]="getApplicationLink(item)"
+                    id="completeApp{{ item.id }}">
+                    <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px"></fa-icon>
+                    <span>Complete Application</span>
+                  </a>
+                  <a
+                    *ngIf="
+                      item.applicationTypeName === ApplicationTypeNames.CRSRenewal ||
+                      item.applicationTypeName === ApplicationTypeNames.LiquorRenewal ||
+                      item.applicationTypeName === ApplicationTypeNames.MarketingRenewal
+                    "
+                    routerLink="/renew-licence/{{ getRenewalType(item.applicationTypeName) }}/{{ item.id }}">
+                    <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px"></fa-icon>
+                    <span>Complete Renewal</span>
+                  </a>
+                </div>
 
-         [routerLink]="getApplicationLink(item)" id="completeApp{{item.id}}">
-        <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px;"></fa-icon>
-        <span>Complete Application</span>
-      </a>
-      <a *ngIf="item.applicationTypeName === ApplicationTypeNames.CRSRenewal || item.applicationTypeName === ApplicationTypeNames.LiquorRenewal || item.applicationTypeName === ApplicationTypeNames.MarketingRenewal"
-         routerLink="/renew-licence/{{getRenewalType(item.applicationTypeName)}}/{{item.id}}">
-        <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px;"></fa-icon>
-        <span>Complete Renewal</span>
-      </a>
-    </div>
+                <div *ngIf="item.applicationStatus === 'Relocation Initiated'">
+                  <a [routerLink]="['/account-profile/' + item.id, { mode: CHANGE_OF_LOCATION_MODE }]">
+                    <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px"></fa-icon>
+                    <span>Complete Relocation</span>
+                  </a>
+                </div>
 
-    <div *ngIf="item.applicationStatus === 'Relocation Initiated'">
-      <a [routerLink]="['/account-profile/' + item.id, { mode: CHANGE_OF_LOCATION_MODE }]">
-        <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px;"></fa-icon>
-        <span>Complete Relocation</span>
-      </a>
-    </div>
+                <div *ngIf="item.applicationStatus === 'Transfer Initiated'">
+                  <a routerLink="/account-profile/{{ item.id }}">
+                    <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px"></fa-icon>
+                    <span>Complete Transfer</span>
+                  </a>
+                </div>
 
-    <div *ngIf="item.applicationStatus === 'Transfer Initiated'">
-      <a routerLink="/account-profile/{{item.id}}">
-        <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px;"></fa-icon>
-        <span>Complete Transfer</span>
-      </a>
-    </div>
+                <div *ngIf="item.applicationStatus === 'Licensee Change Initiated'">
+                  <a [routerLink]="['/licensee-changes/' + item.id]">
+                    <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px"></fa-icon>
+                    <span>Complete Licensee Change</span>
+                  </a>
+                </div>
 
-    <div *ngIf="item.applicationStatus === 'Licensee Change Initiated'">
-      <a [routerLink]="['/licensee-changes/' + item.id]">
-        <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px;"></fa-icon>
-        <span>Complete Licensee Change</span>
-      </a>
-    </div>
+                <div
+                  *ngIf="item.applicationStatus === 'Not Submitted'"
+                  style="margin-top: 5px"
+                  (click)="cancelApplication(item.id, item.establishmentName, item.name)">
+                  <a href="javascript: void(0)">
+                    <fa-icon [icon]="faTrashAlt" style="color: #1a5a96; margin-right: 10px"></fa-icon>
+                    <span>Cancel Application</span>
+                  </a>
+                </div>
 
-    <div *ngIf="item.applicationStatus === 'Not Submitted'" style="margin-top: 5px;"
-         (click)="cancelApplication(item.id, item.establishmentName, item.name)">
-      <a href="javascript: void(0)">
-        <fa-icon [icon]="faTrashAlt" style="color: #1a5a96; margin-right: 10px;"></fa-icon>
-        <span>Cancel Application</span>
-      </a>
-    </div>
+                <div
+                  *ngIf="item.applicationStatus === 'Relocation Initiated'"
+                  style="margin-top: 5px"
+                  (click)="cancelApplication(item.id, item.establishmentName, item.name)">
+                  <a href="javascript: void(0)">
+                    <fa-icon [icon]="faTrashAlt" style="color: #1a5a96; margin-right: 10px"></fa-icon>
+                    <span>Cancel Relocation</span>
+                  </a>
+                </div>
 
-    <div *ngIf="item.applicationStatus === 'Relocation Initiated'" style="margin-top: 5px;"
-         (click)="cancelApplication(item.id, item.establishmentName, item.name)">
-      <a href="javascript: void(0)">
-        <fa-icon [icon]="faTrashAlt" style="color: #1a5a96; margin-right: 10px;"></fa-icon>
-        <span>Cancel Relocation</span>
-      </a>
-    </div>
+                <div
+                  *ngIf="item.applicationStatus === 'Transfer Initiated'"
+                  style="margin-top: 5px"
+                  (click)="cancelApplication(item.id, item.establishmentName, item.name)">
+                  <a href="javascript: void(0)">
+                    <fa-icon [icon]="faTrashAlt" style="color: #1a5a96; margin-right: 10px"></fa-icon>
+                    <span>Cancel Transfer</span>
+                  </a>
+                </div>
 
-    <div *ngIf="item.applicationStatus === 'Transfer Initiated'" style="margin-top: 5px;"
-         (click)="cancelApplication(item.id, item.establishmentName, item.name)">
-      <a href="javascript: void(0)">
-        <fa-icon [icon]="faTrashAlt" style="color: #1a5a96; margin-right: 10px;"></fa-icon>
-        <span>Cancel Transfer</span>
-      </a>
-    </div>
+                <div
+                  *ngIf="item.applicationStatus === 'Licensee Change Initiated'"
+                  style="margin-top: 5px"
+                  (click)="cancelApplication(item.id, item.establishmentName, item.name)">
+                  <a href="javascript: void(0)">
+                    <fa-icon [icon]="faTrashAlt" style="color: #1a5a96; margin-right: 10px"></fa-icon>
+                    <span>Cancel Licensee Change</span>
+                  </a>
+                </div>
 
-    <div *ngIf="item.applicationStatus === 'Licensee Change Initiated'" style="margin-top: 5px;"
-         (click)="cancelApplication(item.id, item.establishmentName, item.name)">
-      <a href="javascript: void(0)">
-        <fa-icon [icon]="faTrashAlt" style="color: #1a5a96; margin-right: 10px;"></fa-icon>
-        <span>Cancel Licensee Change</span>
-      </a>
-    </div>
+                <div
+                  *ngIf="
+                    [
+                      'Relocation Application Under Review',
+                      'Transfer Application Under Review',
+                      'Under Review',
+                      'Processed'
+                    ].indexOf(item.applicationStatus) !== -1 &&
+                    item.applicationTypeName != ApplicationTypeNames.LegalEntityReview
+                  ">
+                  <a style="margin-top: 5px" href="javascript:void(0);" (click)="uploadMoreFiles(item)">
+                    <fa-icon [icon]="faPlus" style="color: #1a5a96; margin-right: 10px"></fa-icon>
+                    <span>Add Supporting Documents</span>
+                  </a>
+                </div>
 
-    <div *ngIf="['Relocation Application Under Review','Transfer Application Under Review', 'Under Review', 'Processed'].indexOf(item.applicationStatus) !== -1">
-      <a style="margin-top: 5px;" href="javascript:void(0);" (click)="uploadMoreFiles(item)">
-        <fa-icon [icon]="faPlus" style="color: #1a5a96; margin-right: 10px;"></fa-icon>
-        <span>Add Supporting Documents</span>
-      </a>
-    </div>
+                <div *ngIf="['Incomplete'].indexOf(item.applicationStatus) !== -1">
+                  <a style="margin-top: 5px" href="javascript:void(0);" (click)="resolveIncompleteness(item)">
+                    <fa-icon [icon]="faPlus" style="color: #1a5a96; margin-right: 10px"></fa-icon>
+                    <span>Resolve Incompleteness</span>
+                  </a>
+                </div>
 
-    <div *ngIf="['Incomplete'].indexOf(item.applicationStatus) !== -1">
-      <a style="margin-top: 5px;" href="javascript:void(0);" (click)="resolveIncompleteness(item)">
-        <fa-icon [icon]="faPlus" style="color: #1a5a96; margin-right: 10px;"></fa-icon>
-        <span>Resolve Incompleteness</span>
-      </a>
-    </div>
-
-    <div
-      *ngIf="item.applicationStatus === 'Legal Entity Review'"
-      style="margin-top: 5px">
-      <a [routerLink]="['/legal-entity-review/' + item.id]">
-        <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px"></fa-icon>
-        <span>Start Application: Permanent Change to Licence</span>
-      </a>
-    </div>
-  </td>
-  <td>
-    <section *ngIf="item?.endorsements?.length">
-      <!--p>Third Party Operator Application</p-->
-      <ul>
-        <li *ngIf="(item?.applicationStatus == 'Not Submitted'||item?.applicationStatus == 'Under Review'||item?.applicationStatus == 'Application Incomplete')&& item.portallabel == 'Manufacturer Licence'">
-          <a [routerLink]="[ '/tied-house-exemption/true/'+item.id]">
-            Invitation for Tied House Exemption
-          </a>
-        </li>
-        <ng-container *ngFor="let appType of item.endorsements">
-          <li *ngIf="!((item?.applicationStatus == 'Not Submitted'||item?.applicationStatus == 'Under Review'||item?.applicationStatus == 'Application Incomplete')&& item?.applicationTypeName == ApplicationTypeNames.MFG && appType == ApplicationTypeNames.TiedHouseExemptionRemoval)">
-            <a href="javascript:void(0)" (click)="startEndorsementApplication(item, appType)">{{appType}}</a>
-          </li>
-        </ng-container>
-      </ul>
+                <div *ngIf="item.applicationStatus === 'Legal Entity Review'" style="margin-top: 5px">
+                  <a [routerLink]="['/legal-entity-review/' + item.id]">
+                    <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px"></fa-icon>
+                    <span>Start Application: Permanent Change to Licence</span>
+                  </a>
+                </div> 
+                <div *ngIf="item.applicationStatus === 'Licensee Action Required'" style="margin-top: 5px">
+                  <a [routerLink]="['/legal-entity-review-permanent-change-to-a-licensee/' + item.id]">
+                    <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px"></fa-icon>
+                    <span>Start Application: 
+Permanent Change 
+to Licensee</span>
+                  </a>
+                </div>
+              </td>
+              <td>
+                <section *ngIf="item?.endorsements?.length">
+                  <!--p>Third Party Operator Application</p-->
+                  <ul>
+                    <li
+                      *ngIf="
+                        (item?.applicationStatus == 'Not Submitted' ||
+                          item?.applicationStatus == 'Under Review' ||
+                          item?.applicationStatus == 'Application Incomplete') &&
+                        item.portallabel == 'Manufacturer Licence'
+                      ">
+                      <a [routerLink]="['/tied-house-exemption/true/' + item.id]">
+                        Invitation for Tied House Exemption
+                      </a>
+                    </li>
+                    <ng-container *ngFor="let appType of item.endorsements">
+                      <li
+                        *ngIf="
+                          !(
+                            (item?.applicationStatus == 'Not Submitted' ||
+                              item?.applicationStatus == 'Under Review' ||
+                              item?.applicationStatus == 'Application Incomplete') &&
+                            item?.applicationTypeName == ApplicationTypeNames.MFG &&
+                            appType == ApplicationTypeNames.TiedHouseExemptionRemoval
+                          )
+                        ">
+                        <a href="javascript:void(0)" (click)="startEndorsementApplication(item, appType)">{{
+                          appType
+                        }}</a>
+                      </li>
+                    </ng-container>
+                  </ul>
+                </section>
+              </td>
+            </tr>
+          </table>
+          <p></p>
+        </mat-tab>
+      </mat-tab-group>
     </section>
-  </td>
-</tr>
-</table>
-<p></p>
-</mat-tab>
-</mat-tab-group>
-</section>
-
-</section>
+  </section>
 </div>
