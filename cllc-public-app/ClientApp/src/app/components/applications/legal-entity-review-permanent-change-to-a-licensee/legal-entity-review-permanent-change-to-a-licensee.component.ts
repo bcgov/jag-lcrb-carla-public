@@ -4,7 +4,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { AppState } from '@app/app-state/models/app-state';
-import { permanentChangeTypesOfChanges, PermanentChangeTypesOfChangesOption } from '@app/constants/permanent-change-types-of-changes';
+import {
+  permanentChangeTypesOfChanges,
+  PermanentChangeTypesOfChangesOption
+} from '@app/constants/permanent-change-types-of-changes';
 import { Account } from '@models/account.model';
 import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
 import { Application } from '@models/application.model';
@@ -65,7 +68,7 @@ export class LegalEntityReviewPermanentChangeToALicenseeComponent extends FormBa
   }
 
   get selectedChangeList() {
-    return this.changeList.filter((item) => this.form && this.form.get(item.formControlName).value === true);
+    return this.changeList?.filter((item) => this.form && this.form.get(item.formControlName).value === true);
   }
 
   /**
@@ -104,9 +107,6 @@ export class LegalEntityReviewPermanentChangeToALicenseeComponent extends FormBa
   ngOnInit(): void {
     this.initForm();
     this.loadData();
-    this.application.csChangeOfDirectorsOrOfficers = true;
-    this.application.csTiedHouseDeclaration = true;
-    this.getChangeList();
   }
 
   /**
@@ -116,7 +116,16 @@ export class LegalEntityReviewPermanentChangeToALicenseeComponent extends FormBa
   initForm(): void {
     this.form = this.fb.group({
       authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
-      signatureAgreement: ['', [this.customRequiredCheckboxValidator()]]
+      signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
+      csInternalTransferOfShares: [''],
+      csExternalTransferOfShares: [''],
+      csChangeOfDirectorsOrOfficers: [''],
+      csNameChangeLicenseeCorporation: [''],
+      csNameChangeLicenseePartnership: [''],
+      csNameChangeLicenseeSociety: [''],
+      csNameChangeLicenseePerson: [''],
+      csAdditionalReceiverOrExecutor: [''],
+      csTiedHouseDeclaration: ['']
     });
   }
 
@@ -130,6 +139,7 @@ export class LegalEntityReviewPermanentChangeToALicenseeComponent extends FormBa
     const sub = this.applicationDataService.getPermanentChangesToLicenseeData(this.applicationId).subscribe({
       next: (data) => {
         this.setFormData(data);
+        this.getChangeList();
       },
       error: (error) => {
         console.error('Error loading form data', error);
@@ -183,6 +193,9 @@ export class LegalEntityReviewPermanentChangeToALicenseeComponent extends FormBa
     if (this.application.primaryInvoicePaid || this.application.secondaryInvoicePaid) {
       this.form.disable();
     }
+
+    this.application.csChangeOfDirectorsOrOfficers = true;
+    this.application.csTiedHouseDeclaration = true;
 
     this.form.patchValue(application);
 
@@ -382,7 +395,7 @@ export class LegalEntityReviewPermanentChangeToALicenseeComponent extends FormBa
 
   private getChangeList() {
     this.changeList = permanentChangeTypesOfChanges.filter(
-        (item) => !!item.availableTo.find((bt) => bt === this.account.businessType)
-            );
+      (item) => !!item.availableTo.find((bt) => bt === this.account.businessType)
+    );
   }
 }
