@@ -392,12 +392,6 @@ const routes: Routes = [
     canActivate: [BCeidAuthGuard, FeatureGuard],
     data: { feature: "LegalEntityReview" }
   },
-  {
-    path: "legal-entity-review/:applicationId/:invoiceType",
-    component: LegalEntityReviewComponent,
-    canActivate: [BCeidAuthGuard, FeatureGuard],
-    data: { feature: "LegalEntityReview" }
-  },
   // Legal Entity Review Permanent Change to a Licensee
   // TODO: Finalize these routes
   {

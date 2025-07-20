@@ -342,9 +342,9 @@ export class LegalEntityReviewPermanentChangeToALicenseeComponent extends FormBa
     let payMethod: Observable<object>;
 
     if (invoiceType === 'primary') {
-      payMethod = this.paymentDataService.getPaymentURI('primaryInvoice', this.application.id);
+      payMethod = this.paymentDataService.getLegalEntityPaymentURI('primaryInvoice', this.application.id);
     } else if (invoiceType === 'secondary') {
-      payMethod = this.paymentDataService.getPaymentURI('secondaryInvoice', this.application.id);
+      payMethod = this.paymentDataService.getLegalEntityPaymentURI('secondaryInvoice', this.application.id);
     }
 
     return payMethod.pipe(takeWhile(() => this.componentActive)).pipe(

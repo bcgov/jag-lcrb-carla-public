@@ -164,9 +164,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// </summary>
         /// <param name="invoiceType">Allowed values: 'primary' and 'secondary'</param>
         /// <param name="id">GUID of the Application to pay</param>
+        /// <param name="redirectContext">
+        /// Optional context for determining the post-payment redirect URL.
+        /// Allowed values: "permanent-change" and "legal-entity".
+        /// If not provided, the default value is "permanent-change".
+        /// </param>
         /// <returns></returns>
         [HttpGet("payment-uri/{invoiceType}/{id}")]
-        public async Task<IActionResult> GetPaymentUrlUpdated(string id, string invoiceType)
+        public async Task<IActionResult> GetPaymentUrlUpdated(string id, string invoiceType, [FromQuery] string redirectContext = "permanent-change")
         {
             const string primary = "primary";
             const string secondary = "secondary";
@@ -185,6 +190,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return BadRequest("Invalid invoiceType");
             }
 
+            if (redirectContext != "permanent-change" && redirectContext != "legal-entity")
+            {
+                return BadRequest("Invalid redirectContext");
+            }
 
             bool invoicePaid = application?.AdoxioPrimaryapplicationinvoicepaid == 1;
             if (invoiceType == secondary)
@@ -283,7 +292,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     paymentType = PaymentType.LIQUOR;
                 }
 
-                string redirectPath = $"{_configuration["BASE_URI"]}{_configuration["BASE_PATH"]}/permanent-change-to-a-licensee/{id}/{invoiceType}";
+                string redirectPath;
+                if (redirectContext == "permanent-change")
+                {
+                    redirectPath =
+                        $"{_configuration["BASE_URI"]}{_configuration["BASE_PATH"]}/permanent-change-to-a-licensee/{id}/{invoiceType}";
+                }
+                else
+                {
+                    redirectPath =
+                        $"{_configuration["BASE_URI"]}{_configuration["BASE_PATH"]}/legal-entity-review-permanent-change-to-a-licensee/{id}/{invoiceType}";
+                }
+
                 redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt), paymentType, redirectPath);
 
                 _logger.Debug(">>>>>" + redirectUrl["url"]);

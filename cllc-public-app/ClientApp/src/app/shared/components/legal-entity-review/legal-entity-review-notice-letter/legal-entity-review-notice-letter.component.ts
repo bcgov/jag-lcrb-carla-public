@@ -26,6 +26,8 @@ export class LegalEntityReviewNoticeLetterComponent implements OnInit {
    */
   notices: FileSystemItem[] = [];
 
+  readonly legalEntityReviewNoticeLetterName = 'Legal Entity Review Notice Letter';
+
   constructor(private accountDataService: AccountDataService) {}
 
   ngOnInit() {
@@ -42,9 +44,8 @@ export class LegalEntityReviewNoticeLetterComponent implements OnInit {
       }
 
       data.forEach((file) => {
-        // TODO: We need to figure out which notice(s) are relevant to the legal entity review, and update this logic
-        // accordingly.
-        if (file.documenttype === 'LegalEntityReview TEMP') {
+        // This assumes that the name of the legal entity review notice letter is consistent/static.
+        if (file.name === this.legalEntityReviewNoticeLetterName) {
           this.notices.push(file);
         }
       });
