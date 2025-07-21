@@ -468,7 +468,7 @@
               (onFormChanges)="connectionToProducersFormData = $event"></app-connection-to-producers>
           </div>
 
-          <div>
+          <div *ngIf="showConnectionsToOtherLiquorLicencesSection">
             <app-connection-to-other-liquor-licences
               [account]="account"
               [applicationId]="applicationId"

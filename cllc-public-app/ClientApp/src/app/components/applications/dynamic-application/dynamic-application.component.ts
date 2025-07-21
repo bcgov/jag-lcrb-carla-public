@@ -180,7 +180,7 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
       this.addDynamicContent();
     });
 
-    this.applicationDataService.getSubmittedApplicationCount()
+    this.applicationDataService.getSubmittedCannabisRetailStoreApplicationCount()
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(value => this.submittedApplications = value);
 

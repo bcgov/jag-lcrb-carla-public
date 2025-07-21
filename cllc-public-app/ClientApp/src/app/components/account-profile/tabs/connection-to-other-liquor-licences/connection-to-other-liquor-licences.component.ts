@@ -3,8 +3,10 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Account } from '@models/account.model';
 import { TiedHouseConnection } from '@models/tied-house-connection.model';
+import { ApplicationDataService } from '@services/application-data.service';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
 import { GenericMessageDialogComponent } from '@shared/components/dialog/generic-message-dialog/generic-message-dialog.component';
+import { forkJoin } from 'rxjs/internal/observable/forkJoin';
 
 @Component({
   selector: 'app-connection-to-other-liquor-licences',
@@ -31,12 +33,15 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit {
 
   initialTiedHouseConnections: TiedHouseConnection[] = [];
 
+  userHasSubmittedAtLeastOneApplication: boolean = false;
+
   form: FormGroup;
 
   hasLoadedData = false;
 
   constructor(
     private fb: FormBuilder,
+    private applicationDataService: ApplicationDataService,
     private tiedHouseService: TiedHouseConnectionsDataService,
     private matDialog: MatDialog
   ) {}
@@ -60,13 +65,19 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit {
   loadData() {
     // If an application ID is provided, fetch tied house connections for that application.
     // Otherwise, fetch tied house connections for the current user.
-    const request$ = this.applicationId
+    const tiedHouseConnectionsRequest$ = this.applicationId
       ? this.tiedHouseService.GetAllTiedHouseConnectionsForApplication(this.applicationId)
       : this.tiedHouseService.GetAllTiedHouseConnectionsForUser();
 
-    request$.subscribe({
-      next: (data) => {
-        this.initialTiedHouseConnections = data;
+    const applicationCountRequest$ = this.applicationDataService.getSubmittedApplicationCount();
+
+    forkJoin({
+      tiedHouseData: tiedHouseConnectionsRequest$,
+      applicationCount: applicationCountRequest$
+    }).subscribe({
+      next: ({ tiedHouseData, applicationCount }) => {
+        this.initialTiedHouseConnections = tiedHouseData;
+        this.userHasSubmittedAtLeastOneApplication = applicationCount > 0;
 
         this.hasLoadedData = true;
       },
@@ -94,7 +105,18 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit {
    * @type {boolean}
    */
   get isTiedHouseReadOnly(): boolean {
-    return this.applicationId === null || this.applicationId === undefined;
+    if (this.applicationId === null || this.applicationId === undefined) {
+      // If no application ID is provided, the form is read-only.
+      return true;
+    }
+
+    if (this.userHasSubmittedAtLeastOneApplication) {
+      // If the user has at least one application, the form is read-only.
+      return true;
+    }
+
+    // If an application ID is provided and the user has no applications, the form is editable.
+    return false;
   }
 
   /**

@@ -76,7 +76,6 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
   payMethod: string;
   validationMessages: any[];
   showValidationMessages: boolean;
-  submittedApplications = 8;
   tiedHouseFormData: TiedHouseConnection;
   possibleProblematicNameWarning = false;
   htmlContent = {} as ApplicationHTMLContent;
@@ -155,21 +154,13 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
   requiredAlternateQuestionValidator(): ValidatorFn {
     if(this.showAlternateQuestions()) {
       return Validators.required;
-    } 
+    }
 
     return Validators.nullValidator;
   }
 
   ngOnInit() {
-
-    let sub = this.applicationDataService.getSubmittedApplicationCount()
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe(value => this.submittedApplications = value);
-    this.subscriptionList.push(sub);
-
-    //this.establishmentWatchWordsService.initialize();
-
-    sub = this.store.select(state => state.currentAccountState.currentAccount)
+    let sub = this.store.select(state => state.currentAccountState.currentAccount)
       .pipe(takeWhile(() => this.componentActive))
       .pipe(filter(account => !!account))
       .subscribe((account) => {
@@ -199,7 +190,7 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
 
         this.form = this.fb.group({
           id: [""],
-    
+
           // #1
           renewalCriminalOffenceCheck: ["", Validators.required],
           // #2
@@ -234,17 +225,17 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
           renewalFederalLicence: ["", [this.requiredAlternateQuestionValidator()]],
           // #17
           renewalFederalSecurity: ["", [this.requiredAlternateQuestionValidator()]],
-    
+
           contactPersonFirstName: ["", Validators.required],
           contactPersonLastName: ["", Validators.required],
           contactPersonRole: [""],
           contactPersonEmail: ["", Validators.required],
           contactPersonPhone: ["", Validators.required],
-    
+
           authorizedToSubmit: ["", [this.customRequiredCheckboxValidator()]],
           signatureAgreement: ["", [this.customRequiredCheckboxValidator()]],
           readRefundPolicy: ["", [this.customRequiredCheckboxValidator()]],
-    
+
           assignedLicence: this.fb.group({
             id: [""],
             establishmentAddressStreet: [""],
@@ -302,7 +293,7 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
     if(licenceType === LicenceTypeNames.S119 || licenceType === LicenceTypeNames.PRS) {
       return true;
     }
-    
+
     return false;
   }
 

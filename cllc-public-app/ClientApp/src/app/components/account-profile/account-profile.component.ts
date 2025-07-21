@@ -651,4 +651,28 @@ export class AccountProfileComponent extends FormBase implements OnInit {
     // One or more account URLs are specified, ORV is disabled.
     return false;
   }
+
+  /**
+   * Determines if the "Connections to Other Liquor Licences" section should be shown.
+   *
+   * @readonly
+   * @return {*}  {boolean}
+   */
+  get showConnectionsToOtherLiquorLicencesSection(): boolean {
+    if (!this.applicationId) {
+      // Not in the context of an application, always show the section.
+      return true;
+    }
+
+    // In the context of an application, show the section only for specific application types.
+    // TODO Confirm this list. Is there no better way to this, without relying on a hardcoded list?
+    return [
+      'Cannabis Retail Store',
+      'Liquor Primary',
+      'Liquor Licence Renewal',
+      'Liquor Licence Transfer',
+      'Permanent Change to a Licensee',
+      'Legal Entity Review'
+    ].includes(this.application?.licenseType);
+  }
 }

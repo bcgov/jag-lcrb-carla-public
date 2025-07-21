@@ -167,13 +167,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return result;
         }
 
-
         /// <summary>
-        ///     Gets the number of active licences
+        /// Get the count of approved cannabis retail store licences for the given user.
         /// </summary>
         /// <param name="licenceeId"></param>
         /// <returns></returns>
-        private int GetApprovedLicenceCountByApplicant(string licenceeId)
+        private int GetApprovedCannabisRetailStoreLicenceCountByApplicant(string licenceeId)
         {
             var result = 0;
             if (!string.IsNullOrEmpty(licenceeId))
@@ -186,8 +185,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     result = _dynamicsClient.Licenceses.Get(filter: filter, expand: expand).Value
                         .Count(licence => licence.AdoxioLicenceType.AdoxioName == "Cannabis Retail Store");
                 }
-                catch (HttpOperationException)
+                catch (HttpOperationException error)
                 {
+                    _logger.LogError(error, "GetApprovedCannabisRetailStoreLicenceCountByApplicant Error");
                     result = 0;
                 }
             }
@@ -195,13 +195,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return result;
         }
 
-
         /// <summary>
         ///     Gets the number of applications that are submitted
         /// </summary>
         /// <param name="applicantId"></param>
         /// <returns></returns>
-        private int GetSubmittedCountByApplicant(string applicantId)
+        private int GetSubmittedCannabisRetailStoreCountByApplicant(string applicantId)
         {
             var result = 0;
             if (!string.IsNullOrEmpty(applicantId))
@@ -221,10 +220,41 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     result = _dynamicsClient.Applications.Get(filter: filter).Value.Count;
                 }
-                catch (HttpOperationException)
+                catch (HttpOperationException error)
                 {
+                    _logger.LogError(error, "GetSubmittedCannabisRetailStoreCountByApplicant Error");
                     result = 0;
                 }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Get the count of submitted applications (all statuses) for the current user.
+        /// </summary>
+        /// <param name="applicantId"></param>
+        /// <returns></returns>
+        private int GetSubmittedApplicationsCountByApplicant(string applicantId)
+        {
+            if (string.IsNullOrEmpty(applicantId))
+            {
+                return 0;
+            }
+
+            int result;
+
+            try
+            {
+                var filter = $"_adoxio_applicant_value eq {applicantId}";
+                var response = _dynamicsClient.Applications.Get(filter: filter, top: 1, count: true);
+
+                result = int.TryParse(response?.Count, out var parsedCount) ? parsedCount : 0;
+            }
+            catch (HttpOperationException error)
+            {
+                _logger.LogError(error, "GetSubmittedApplicationsCountByApplicant Error");
+                return 0;
             }
 
             return result;
@@ -1231,16 +1261,35 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return result;
         }
 
-        /// GET submitted applications in Dynamics for the current user
-        [HttpGet("current/submitted-count")]
+        /// <summary>
+        /// Get the count of submitted cannabis retail store applications for the current user.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("current/cannabis-retail-store/submitted-count")]
         public JsonResult GetCountForCurrentUserSubmittedApplications()
         {
             // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             // GET all applications in Dynamics by applicant using the account Id assigned to the user logged in
-            var count = GetSubmittedCountByApplicant(userSettings.AccountId);
-            count += GetApprovedLicenceCountByApplicant(userSettings.AccountId);
+            var countCannabisRetailStore = GetSubmittedCannabisRetailStoreCountByApplicant(userSettings.AccountId);
+            countCannabisRetailStore += GetApprovedCannabisRetailStoreLicenceCountByApplicant(userSettings.AccountId);
+            return new JsonResult(countCannabisRetailStore);
+        }
+
+        /// <summary>
+        /// Get the count of all approved applications for the current user.
+        /// </summary>
+        /// <returns>Number</returns>
+        [HttpGet("current/submitted-count")]
+        public JsonResult GetCountOfSubmittedApplicationsForCurrentUser()
+        {
+            // Get the current user.
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+
+            // Get count of all submitted applications for the current user.
+            int count = GetSubmittedApplicationsCountByApplicant(userSettings.AccountId);
+
             return new JsonResult(count);
         }
 
@@ -1335,10 +1384,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
-            var count = GetSubmittedCountByApplicant(userSettings.AccountId);
-            count += GetApprovedLicenceCountByApplicant(userSettings.AccountId);
+            var countCannabisRetailStore = GetSubmittedCannabisRetailStoreCountByApplicant(userSettings.AccountId);
+            countCannabisRetailStore += GetApprovedCannabisRetailStoreLicenceCountByApplicant(userSettings.AccountId);
 
-            if (count >= 8 && item.ApplicationType.Name == "Cannabis Retail Store")
+            if (countCannabisRetailStore >= 8 && item.ApplicationType.Name == "Cannabis Retail Store")
                 return BadRequest("8 applications have already been submitted. Can not create more");
             var adoxioApplication = new MicrosoftDynamicsCRMadoxioApplication();
 
@@ -1498,8 +1547,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     _logger.LogError(httpOperationException, "Error creating application");
                     // fail if we can't create.
-                    throw httpOperationException;
+                    throw;
                 }
+            }
+            catch (Exception error)
+            {
+                _logger.LogError(error, "Error creating application");
+                throw;
             }
 
             // in case the job number is not there, try getting the record from the server.

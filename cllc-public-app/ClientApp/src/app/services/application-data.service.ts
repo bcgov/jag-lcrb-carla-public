@@ -41,13 +41,26 @@ export class ApplicationDataService extends DataService {
   }
 
   /**
-   * Gets the number of submitted Applications for the current user
-   * */
+   * Gets the count of all submitted applications for the current user.
+   *
+   * @return {*}  {Observable<number>}
+   */
   getSubmittedApplicationCount(): Observable<number> {
-    return this.http.get<number>(this.apiPath + "current/submitted-count", { headers: this.headers })
+    return this.http
+      .get<number>(this.apiPath + 'current/submitted-count', { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
+  /**
+   * Gets the count of submitted cannabis retail store applications for the current user
+   *
+   * @return {*}  {Observable<number>}
+   */
+  getSubmittedCannabisRetailStoreApplicationCount(): Observable<number> {
+    return this.http
+      .get<number>(this.apiPath + 'current/cannabis-retail-store/submitted-count', { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
 
   getAllCurrentApplications(): Observable<ApplicationSummary[]> {
     return this.http.get<ApplicationSummary[]>(this.apiPath + "current", { headers: this.headers })
@@ -58,7 +71,7 @@ export class ApplicationDataService extends DataService {
     return this.http.get<Application[]>(this.apiPath + "current/lg-approvals", { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
-  //LCSD-6357 part 1: 
+  //LCSD-6357 part 1:
   getLGApprovalApplicationsDecisionNotMade(pageIndex: number = 0, pageSize: number = 10): Observable<PagingResult<Application>> {
     const url = `${this.apiPath}current/lg-approvals-decision-not-made?pageIndex=${pageIndex}&pageSize=${pageSize}`;
     return this.http.get<PagingResult<Application>>(url, { headers: this.headers })
