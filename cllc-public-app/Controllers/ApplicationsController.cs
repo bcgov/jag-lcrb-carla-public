@@ -1765,7 +1765,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 try
                 {
-                    application.Statuscode = (int)AdoxioApplicationStatusCodes.ReviewingInspectionResults;
+                    application.Statuscode = (int)AdoxioApplicationStatusCodes.UnderReview;
                     string json = JsonConvert.SerializeObject(application);
                     _dynamicsClient.Applications.Update(id, application);
                     return new JsonResult(await application.ToViewModel(_dynamicsClient, _cache, _logger));
