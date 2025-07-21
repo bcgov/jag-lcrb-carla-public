@@ -101,9 +101,16 @@ export const TiedHouseTypes = [
 
 // TODO: Populate real values
 export const RelationshipTypes = [
-  { name: 'TBD 1', value: 845280000 },
-  { name: 'TBD 2', value: 845280001 },
-  { name: 'Other', value: 845280002 }
+  { name: 'Shareholder', value: 845280000 },
+  { name: 'Director', value: 845280001 },
+  { name: 'Officer', value: 845280002 },
+  { name: 'Partner', value: 845280003 },
+  { name: 'Key Personnel', value: 845280004 },
+  { name: 'Trustee', value: 845280005 },
+  { name: 'Beneficiary', value: 845280006 },
+  { name: 'Representative', value: 845280007 },
+  { name: 'Immediate Family Member', value: 845280008 },
+  { name: 'Other', value: 845280009 },
 ];
 
 export const BusinessTypes = [
