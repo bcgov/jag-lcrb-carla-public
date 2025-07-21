@@ -10,6 +10,7 @@ import {
   TiedHouseViewMode
 } from '@models/tied-house-connection.model';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
+import { GenericConfirmationDialogComponent } from '@shared/components/dialog/generic-confirmation-dialog/generic-confirmation-dialog.component';
 import { GenericMessageDialogComponent } from '@shared/components/dialog/generic-message-dialog/generic-message-dialog.component';
 import { FormBase } from '@shared/form-base';
 import { Observable, of } from 'rxjs';
@@ -240,21 +241,32 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
    * @param {number} accordionIndex
    */
   removeNewTiedHouseDeclaration(declaration: TiedHouseConnection, keepAccordionOpen: boolean, accordionIndex: number) {
-    if(declaration.supersededById){
-      declaration.viewMode = TiedHouseViewMode.existing;
-      declaration.markedForRemoval = true;
-      this.submitTiedHouseDeclarationChange(declaration);
-    }
-    else {
-      declaration.viewMode = TiedHouseViewMode.hidden;
-      declaration.markedForRemoval = true;
-      this.submitTiedHouseDeclarationChange(declaration);
-      this.updateGroupedTiedHouseDeclarations();
-    }
+    this.matDialog.open(GenericConfirmationDialogComponent, {
+      disableClose: true,
+      autoFocus: true,
+      data: {
+        title: 'Remove Tied House Connection',
+        message: `Are you sure you want to remove? Any unsaved changes will be lost.`,
+        confirmButtonText: 'Yes, Cancel',
+        cancelButtonText: 'No, Go Back',
+        onConfirm: () => {
+          if (declaration.supersededById) {
+            declaration.viewMode = TiedHouseViewMode.existing;
+            declaration.markedForRemoval = true;
+            this.submitTiedHouseDeclarationChange(declaration);
+          } else {
+            declaration.viewMode = TiedHouseViewMode.hidden;
+            declaration.markedForRemoval = true;
+            this.submitTiedHouseDeclarationChange(declaration);
+            this.updateGroupedTiedHouseDeclarations();
+          }
 
-    if (keepAccordionOpen) {
-      this.openPanel(accordionIndex);
-    }
+          if (keepAccordionOpen) {
+            this.openPanel(accordionIndex);
+          }
+        }
+      }
+    });
   }
 
   /**
@@ -269,10 +281,21 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
       // Already marked for removal, nothing to do
       return;
     }
-
-    declaration.statusCode = TiedHouseStatusCode.new;
-    declaration.markedForRemoval = true;
-    this.submitTiedHouseDeclarationChange(declaration);
+    this.matDialog.open(GenericConfirmationDialogComponent, {
+      disableClose: true,
+      autoFocus: true,
+      data: {
+        title: 'Remove Tied House Connection',
+        message: `Are you sure you want to remove?`,
+        confirmButtonText: 'Yes, Cancel',
+        cancelButtonText: 'No, Go Back',
+        onConfirm: () => {
+          declaration.statusCode = TiedHouseStatusCode.new;
+          declaration.markedForRemoval = true;
+          this.submitTiedHouseDeclarationChange(declaration);
+        }
+      }
+    });
   }
 
   /**

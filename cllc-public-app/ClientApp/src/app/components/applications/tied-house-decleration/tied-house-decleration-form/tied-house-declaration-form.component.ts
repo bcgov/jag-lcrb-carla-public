@@ -48,8 +48,11 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
   showOtherField = false;
   isEditable = true;
 
-  constructor(
-    private fb: FormBuilder) {
+  get isExistingDeclaration() {
+    return this._tiedHouseDecleration.supersededById;
+  }
+
+  constructor(private fb: FormBuilder) {
     super();
   }
 
@@ -61,7 +64,7 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
     }
 
     this.form.get('relationshipToLicence')?.valueChanges.subscribe((value) => {
-      this.showOtherField = value == 845280002;
+      this.showOtherField = value == 845280009;
       this.updateFieldValidators();
     });
 
@@ -141,24 +144,23 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
   }
 
   cancel() {
-    if (
-      this._tiedHouseDecleration.viewMode == TiedHouseViewMode.new ||
-      this._tiedHouseDecleration.viewMode == TiedHouseViewMode.addNewRelationship
-    ) {
+    if (!this._tiedHouseDecleration.applicationId) {
       // If the declaration is new or in add relationship mode, we remove it as it has not yet been persisted.
       this.remove();
-    } else {
+    } else if (this.isExistingDeclaration) {
       // If the declaration is existing, we reset the view mode and status code to existing (aka: stop editing).
       this._tiedHouseDecleration.viewMode = TiedHouseViewMode.existing;
       this._tiedHouseDecleration.statusCode = TiedHouseStatusCode.existing;
+    } else {
+      this._tiedHouseDecleration.viewMode = TiedHouseViewMode.disabled;
+      this.updateFormValues();
     }
   }
 
-  edit(){
-    if(this._tiedHouseDecleration.supersededById != null){
+  edit() {
+    if (this._tiedHouseDecleration.supersededById != null) {
       this._tiedHouseDecleration.viewMode = TiedHouseViewMode.editExistingRecord;
-    }
-    else{
+    } else {
       this._tiedHouseDecleration.viewMode = TiedHouseViewMode.addNewRelationship;
     }
 
@@ -218,6 +220,13 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
     this.form.get('businessType')?.updateValueAndValidity();
     this.form.get('legalEntityName')?.updateValueAndValidity();
     this.form.get('otherDescription')?.updateValueAndValidity();
+  }
+
+  private updateFormValues() {
+    this.setFormState();
+    this.showOtherField = this.form.get('relationshipToLicence').value == 845280009;
+    this.form.patchValue(this._tiedHouseDecleration);
+    this.updateAssociatedLicenses(this._tiedHouseDecleration.associatedLiquorLicense || []);
   }
 
   /**
@@ -282,8 +291,6 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
 
       case TiedHouseViewMode.editExistingRecord:
         this.form.disable();
-        this.form.get('relationshipToLicence')?.enable();
-        this.form.get('otherDescription')?.enable();
         this.form.get('autocompleteInput')?.enable();
         this.isEditable = true;
         break;

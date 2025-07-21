@@ -61,6 +61,8 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   account: Account;
   @Output()
   marketerApplicationExists = new EventEmitter<boolean>();
+  @Output()
+  legalEntityApplicationExists = new EventEmitter<boolean>();
   dataLoaded = false;
   licencePresentLabel: string;
   licenceAbsentLabel: string;
@@ -198,6 +200,8 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
             .map((item) => item as any)
             .concat(licenses.filter((item) => item.licenceTypeName !== ApplicationTypeNames.Marketer)).length > 0;
 
+        //emits if user has an inprogress legal entity review or not
+        this.legalEntityApplicationExists.emit(applications.find( app=> app.applicationTypeName === ApplicationTypeNames.LegalEntityReview ) !== undefined);
         this.dataLoaded = true;
       });
 
