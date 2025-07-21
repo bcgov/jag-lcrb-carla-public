@@ -310,7 +310,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 return new JsonResult(redirectUrl);
             }
-
+            var x = application.AdoxioJobnumber;
             _logger.Error("GetPaymentUrl failed - Unable to get invoice for application {id}");
             return NotFound();
         }
