@@ -136,7 +136,7 @@ export class LegalEntityReviewPermanentChangeToALicenseeComponent extends FormBa
    * @memberof PermanentChangeToALicenseeComponent
    */
   private loadData() {
-    const sub = this.applicationDataService.getPermanentChangesToLicenseeData(this.applicationId).subscribe({
+    const sub = this.applicationDataService.getLegalEntityPermanentChangesToLicenseeData(this.applicationId).subscribe({
       next: (data) => {
         this.setFormData(data);
         this.getChangeList();

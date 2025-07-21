@@ -1093,7 +1093,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="userSettings"></param>
         /// <param name="applicationId"></param> Filter results by a specific application ID. (Optional)
         /// <returns></returns>
-        private MicrosoftDynamicsCRMadoxioApplication GetPermanentChangeApplication(UserSettings userSettings, string applicationId = null, bool isLegalEntityReview = false)
+        private MicrosoftDynamicsCRMadoxioApplication GetPermanentChangeApplication(UserSettings userSettings, bool isLegalEntityReview, string applicationId = null)
         {
             MicrosoftDynamicsCRMadoxioApplication result = null;
 
@@ -1196,15 +1196,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// </summary>
         /// <param name="applicationId"></param> Filter results by a specific application ID. (Optional)
         /// <returns></returns> <summary>
-        [HttpGet("permanent-change-to-licensee-data")]
-        public async Task<IActionResult> GetPermanetChangesToLicenseeData([FromQuery] string applicationId = null)
+        [HttpGet("permanent-change-to-licensee-data/{isLegalEntity}")]
+        public async Task<IActionResult> GetPermanetChangesToLicenseeData([FromQuery] string applicationId, bool isLegalEntity)
         {
+            //"permanent-change-to-licensee"
             // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             PermanentChangesPageData data = new PermanentChangesPageData();
 
             // set application type relationship 
-            var app = GetPermanentChangeApplication(userSettings, applicationId, true);
+            var app = GetPermanentChangeApplication(userSettings, isLegalEntity, applicationId);
             
             // get all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
             data.Licences = _dynamicsClient.GetLicensesByLicencee(userSettings.AccountId, _cache);
