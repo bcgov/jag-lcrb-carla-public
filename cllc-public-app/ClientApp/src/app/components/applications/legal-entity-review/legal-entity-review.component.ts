@@ -121,7 +121,7 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
   private loadData() {
     // TODO Update this API call to fetch the legal entity review application data, unless it uses the same endpoint as
     // a PCL?
-    const sub = this.applicationDataService.getPermanentChangesToLicenseeData(this.applicationId).subscribe((data) => {
+    const sub = this.applicationDataService.getLegalEntityPermanentChangesToLicenseeData(this.applicationId).subscribe((data) => {
       this.setFormData(data);
     });
 

@@ -90,7 +90,16 @@ export class ApplicationDataService extends DataService {
   }
 
   getPermanentChangesToLicenseeData(applicationId: string = null): Observable<any> {
-    let url = this.apiPath + "permanent-change-to-licensee-data";
+    let url = this.apiPath + "permanent-change-to-licensee-data/false";
+    if (applicationId) {
+      url = `${url}?applicationId=${applicationId}`;
+    }
+    return this.http.get<any>(url, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
+    getLegalEntityPermanentChangesToLicenseeData(applicationId: string = null): Observable<any> {
+    let url = this.apiPath + "permanent-change-to-licensee-data/true";
     if (applicationId) {
       url = `${url}?applicationId=${applicationId}`;
     }
