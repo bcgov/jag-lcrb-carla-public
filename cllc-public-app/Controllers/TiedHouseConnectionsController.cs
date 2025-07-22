@@ -6,6 +6,7 @@ using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
+using Gov.Lclb.Cllb.Public.Repositories;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -13,7 +14,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Rest;
-using Newtonsoft.Json.Linq;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -25,16 +25,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IDynamicsClient _dynamicsClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
+        private readonly TiedHouseConnectionsRepository _tiedHouseConnectionsRepository;
 
         public TiedHouseConnectionsController(
             ILoggerFactory loggerFactory,
             IDynamicsClient dynamicsClient,
-            IHttpContextAccessor httpContextAccessor
+            IHttpContextAccessor httpContextAccessor,
+            TiedHouseConnectionsRepository tiedHouseConnectionsRepository
         )
         {
             _dynamicsClient = dynamicsClient;
             _logger = loggerFactory.CreateLogger(typeof(TiedHouseConnectionsController));
             _httpContextAccessor = httpContextAccessor;
+            _tiedHouseConnectionsRepository = tiedHouseConnectionsRepository;
         }
 
         /// <summary>
@@ -60,13 +63,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 _logger.LogDebug($"GetAllTiedHouseConnectionsForUser. AccountId = {accountIdForFilter}.");
 
-                var filter =
-                    $"(_adoxio_accountid_value eq {accountIdForFilter} and statuscode eq {(int)TiedHouseStatusCode.Existing}) and statecode eq 0";
-                var expand = new List<string> { "adoxio_adoxio_tiedhouseconnection_adoxio_licence" };
-
-                tiedHouseConnections = _dynamicsClient.Tiedhouseconnections.Get(filter: filter, expand: expand).Value;
-
-                var result = tiedHouseConnections.Select(item => item.ToViewModel()).ToList();
+                var result = _tiedHouseConnectionsRepository.GetAllTiedHouseConnectionsForUser(accountIdForFilter);
 
                 return new JsonResult(result);
             }
@@ -103,12 +100,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 _logger.LogDebug($"GetExistingTiedHouseConnectionsCountForUser. AccountId = {accountIdForFilter}.");
 
-                var filter =
-                    $"(_adoxio_accountid_value eq {accountIdForFilter} and statuscode eq {(int)TiedHouseStatusCode.Existing}) and statecode eq 0";
-
-                var response = _dynamicsClient.Tiedhouseconnections.Get(filter: filter, top: 1, count: true);
-
-                int result = int.TryParse(response?.Count, out var parsedCount) ? parsedCount : 0;
+                int result = _tiedHouseConnectionsRepository.GetExistingTiedHouseConnectionsCountForUser(
+                    accountIdForFilter
+                );
 
                 return new JsonResult(result);
             }
