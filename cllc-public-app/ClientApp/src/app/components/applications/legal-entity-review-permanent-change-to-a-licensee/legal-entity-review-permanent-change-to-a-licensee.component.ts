@@ -71,13 +71,6 @@ export class LegalEntityReviewPermanentChangeToALicenseeComponent extends FormBa
     return this.changeList?.filter((item) => this.form && this.form.get(item.formControlName).value === true);
   }
 
-  /**
-   * The list of changes required for this legal entity review permanent change application.
-   *
-   * @type {PermanentChangeTypesOfChangesOption[]}
-   */
-  changesRequired: PermanentChangeTypesOfChangesOption[] = [];
-
   form: FormGroup;
 
   constructor(
@@ -173,9 +166,6 @@ export class LegalEntityReviewPermanentChangeToALicenseeComponent extends FormBa
 
     this.primaryInvoice = primary;
     this.secondaryInvoice = secondary;
-
-    // TODO Update this to pull the list of changes from the correct properties
-    this.changesRequired = application.permanentChangeTypesOfChangesRequired || [];
 
     const isPrimaryInvoiceInfoMissing: boolean = primary?.isApproved && !this.application.primaryInvoicePaid;
     const isSecondaryInvoiceInfoMissing: boolean = secondary?.isApproved && !this.application.secondaryInvoicePaid;

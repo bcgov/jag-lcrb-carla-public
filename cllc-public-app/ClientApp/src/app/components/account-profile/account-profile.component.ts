@@ -527,13 +527,13 @@ export class AccountProfileComponent extends FormBase implements OnInit {
     ];
 
     if (this.connectionToProducersFormData) {
-      // TODO: Save the connection to producers form data. This used to be what the tied house data was. Now its just
+      // TODO: tiedhouse - Save the connection to producers form data. This used to be what the tied house data was. Now its just
       // the 2 checkboxes and 2 corresponding text fields, for cannabis connections. Are these still saved as
       // "tied house connections"?
     }
 
     if (this.connectionToOtherLiquorLicencesFormData) {
-      // TODO: Save the connection to other liquor licences form data? This component just has the 3 checkboxes which
+      // TODO: tiedhouse - Save the connection to other liquor licences form data? This component just has the 3 checkboxes which
       // toggle the tied house component. Are these even saved to dynamics? If not, remove references to this form data
       // and component.
     }
@@ -665,7 +665,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
     }
 
     // In the context of an application, show the section only for specific application types.
-    // TODO Confirm this list. Is there no better way to this, without relying on a hardcoded list?
+    // TODO: tiedhouse - Confirm this list. Is there no better way to this, without relying on a hardcoded list?
     return [
       'Cannabis Retail Store',
       'Liquor Primary',

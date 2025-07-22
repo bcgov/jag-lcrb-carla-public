@@ -231,11 +231,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         /// <summary>
-        /// Get the count of submitted applications (all statuses) for the current user.
+        /// Get the count of approved applications for the current user.
         /// </summary>
         /// <param name="applicantId"></param>
         /// <returns></returns>
-        private int GetSubmittedApplicationsCountByApplicant(string applicantId)
+        private int GetApprovedApplicationsCountByApplicant(string applicantId)
         {
             if (string.IsNullOrEmpty(applicantId))
             {
@@ -246,7 +246,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             try
             {
-                var filter = $"_adoxio_applicant_value eq {applicantId}";
+                var andFilterConditions = new List<string>
+                {
+                    $"_adoxio_applicant_value eq {applicantId}",
+                    $"statuscode eq {(int)AdoxioApplicationStatusCodes.Approved}",
+                    "statecode eq 0"
+                };
+                var filter = string.Join(" and ", andFilterConditions);
+
                 var response = _dynamicsClient.Applications.Get(filter: filter, top: 1, count: true);
 
                 result = int.TryParse(response?.Count, out var parsedCount) ? parsedCount : 0;
@@ -1263,18 +1270,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         /// <summary>
-        /// Get the count of submitted cannabis retail store applications for the current user.
+        /// Get the count of submitted and approved cannabis retail store applications for the current user.
         /// </summary>
         /// <returns></returns>
         [HttpGet("current/cannabis-retail-store/submitted-count")]
         public JsonResult GetCountForCurrentUserSubmittedApplications()
         {
-            // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
-            // GET all applications in Dynamics by applicant using the account Id assigned to the user logged in
             var countCannabisRetailStore = GetSubmittedCannabisRetailStoreCountByApplicant(userSettings.AccountId);
             countCannabisRetailStore += GetApprovedCannabisRetailStoreLicenceCountByApplicant(userSettings.AccountId);
+
             return new JsonResult(countCannabisRetailStore);
         }
 
@@ -1282,14 +1288,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// Get the count of all approved applications for the current user.
         /// </summary>
         /// <returns>Number</returns>
-        [HttpGet("current/submitted-count")]
+        [HttpGet("current/approved-count")]
         public JsonResult GetCountOfSubmittedApplicationsForCurrentUser()
         {
-            // Get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
-            // Get count of all submitted applications for the current user.
-            int count = GetSubmittedApplicationsCountByApplicant(userSettings.AccountId);
+            int count = GetApprovedApplicationsCountByApplicant(userSettings.AccountId);
 
             return new JsonResult(count);
         }

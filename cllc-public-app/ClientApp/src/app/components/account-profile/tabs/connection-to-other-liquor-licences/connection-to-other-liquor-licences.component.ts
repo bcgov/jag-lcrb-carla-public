@@ -33,7 +33,8 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit {
 
   initialTiedHouseConnections: TiedHouseConnection[] = [];
 
-  userHasSubmittedAtLeastOneApplication: boolean = false;
+  userHasAtLeastOneApprovedApplication: boolean = false;
+  userHasAtLeastOneExistingTiedHouseConnection: boolean = false;
 
   form: FormGroup;
 
@@ -52,7 +53,8 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit {
   }
 
   initForm() {
-    // TODO: We need to initialize these 3 checkboxes from the account data? Do these fields exist in dynamics yet?
+    // TODO: tiedhouse - These need to be created in dynamics, and initialized with the initial form data, rather
+    // than hardcoded to 0.
     this.form = this.fb.group({
       hasOwnershipOrControl: [0],
       hasThirdPartyAssociations: [0],
@@ -63,21 +65,22 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit {
   }
 
   loadData() {
-    // If an application ID is provided, fetch tied house connections for that application.
-    // Otherwise, fetch tied house connections for the current user.
-    const tiedHouseConnectionsRequest$ = this.applicationId
-      ? this.tiedHouseService.GetAllTiedHouseConnectionsForApplication(this.applicationId)
-      : this.tiedHouseService.GetAllTiedHouseConnectionsForUser();
-
-    const applicationCountRequest$ = this.applicationDataService.getSubmittedApplicationCount();
+    const tiedHouseConnectionsForApplicationIdRequest$ = this.tiedHouseService.GetAllTiedHouseConnectionsForApplication(
+      this.applicationId
+    );
+    const tiedHouseConnectionsForUserRequest$ = this.tiedHouseService.GetAllTiedHouseConnectionsForUser();
+    const applicationCountRequest$ = this.applicationDataService.getApprovedApplicationCount();
 
     forkJoin({
-      tiedHouseData: tiedHouseConnectionsRequest$,
-      applicationCount: applicationCountRequest$
+      tiedHouseDataForApplication: tiedHouseConnectionsForApplicationIdRequest$,
+      tiedHouseDataForUser: tiedHouseConnectionsForUserRequest$,
+      approvedApplicationCount: applicationCountRequest$
     }).subscribe({
-      next: ({ tiedHouseData, applicationCount }) => {
-        this.initialTiedHouseConnections = tiedHouseData;
-        this.userHasSubmittedAtLeastOneApplication = applicationCount > 0;
+      next: ({ tiedHouseDataForApplication, tiedHouseDataForUser, approvedApplicationCount }) => {
+        this.initialTiedHouseConnections = [...tiedHouseDataForUser, ...tiedHouseDataForApplication];
+
+        this.userHasAtLeastOneApprovedApplication = approvedApplicationCount > 0;
+        this.userHasAtLeastOneExistingTiedHouseConnection = tiedHouseDataForUser.length > 0;
 
         this.hasLoadedData = true;
       },
@@ -85,9 +88,9 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit {
         console.error('Error loading Tied House data', error);
         this.matDialog.open(GenericMessageDialogComponent, {
           data: {
-            title: 'Error Loading Tied House Form Data',
+            title: 'Error Loading Tied House Data',
             message:
-              'Failed to load Tied House form data. Please try again. If the problem persists, please contact support.',
+              'Failed to load Tied House data. Please try again. If the problem persists, please contact support.',
             closeButtonText: 'Close'
           }
         });
@@ -98,56 +101,33 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit {
   /**
    * Whether the Tied House Connections form is read-only.
    *
-   * If this component is NOT being used in the context of an application (i.e., `applicationId` is not set), then
-   * the form is read-only.
-   *
    * @readonly
    * @type {boolean}
    */
   get isTiedHouseReadOnly(): boolean {
-    if (this.applicationId === null || this.applicationId === undefined) {
-      // If no application ID is provided, the form is read-only.
-      return true;
-    }
-
-    if (this.userHasSubmittedAtLeastOneApplication) {
-      // If the user has at least one application, the form is read-only.
-      return true;
-    }
-
-    // If an application ID is provided and the user has no applications, the form is editable.
-    return false;
-  }
-
-  /**
-   * Indicates whether there are any tied house connections.
-   *
-   * @readonly
-   * @type {boolean}
-   */
-  get hasTiedHouseConnections(): boolean {
-    return this.initialTiedHouseConnections?.length > 0;
-  }
-
-  /**
-   * Indicates whether the Tied House checkboxes should be shown, which allows users to toggle the tied house
-   * declaration section, in order to add/edit tied house connections.
-   *
-   * @readonly
-   * @type {boolean}
-   */
-  get showTiedHouseCheckboxes(): boolean {
-    if (this.isTiedHouseReadOnly) {
-      // If the form is read-only, do not show the checkboxes, as the user cannot add/edit tied house connections.
+    if (this.applicationId !== null && this.applicationId !== undefined) {
+      // If an application ID is provided then the form is editable.
       return false;
     }
 
-    if (this.hasTiedHouseConnections) {
-      // If the user has existing tied house connections, do not show the checkboxes.
+    if (this.userHasAtLeastOneApprovedApplication || this.userHasAtLeastOneExistingTiedHouseConnection) {
+      // If no application ID is provided, but the user also has no existing applications or tied house connections then
+      // the form is editable.
       return false;
     }
 
+    // The form is not editable.
     return true;
+  }
+
+  /**
+   * Whether there are any initial tied house connections.
+   *
+   * @readonly
+   * @type {boolean}
+   */
+  get hasInitialTiedHouseConnections(): boolean {
+    return this.initialTiedHouseConnections?.length > 0;
   }
 
   /**

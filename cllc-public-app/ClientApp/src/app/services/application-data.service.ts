@@ -41,13 +41,13 @@ export class ApplicationDataService extends DataService {
   }
 
   /**
-   * Gets the count of all submitted applications for the current user.
+   * Gets the count of all approved applications for the current user.
    *
    * @return {*}  {Observable<number>}
    */
-  getSubmittedApplicationCount(): Observable<number> {
+  getApprovedApplicationCount(): Observable<number> {
     return this.http
-      .get<number>(this.apiPath + 'current/submitted-count', { headers: this.headers })
+      .get<number>(this.apiPath + 'current/approved-count', { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 

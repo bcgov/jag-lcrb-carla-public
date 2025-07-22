@@ -26,6 +26,19 @@ export class TiedHouseConnectionsDataService extends DataService {
   }
 
   /**
+   * Get the count of existing tied house connections for a user.
+   * - If `accountId` is provided, it filters results by that account.
+   * - If `accountId` is not provided, it returns results for the current logged in user.
+   *
+   * @param {string} [accountId] An optional account ID to filter results by
+   * @return {*}  {Observable<number>} The count of existing tied house connections.
+   */
+  GetExistingTiedHouseConnectionsCountForUser(accountId?: string): Observable<number> {
+    const apiPath = `api/tiedhouseconnections/user/existing/count/${accountId ?? ''}`;
+    return this.http.get<number>(apiPath, { headers: this.headers }).pipe(catchError(this.handleError));
+  }
+
+  /**
    * Get all tied house connections for a specific application.
    *
    * @param {string} applicationId

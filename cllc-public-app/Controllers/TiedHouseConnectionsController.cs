@@ -1,4 +1,8 @@
-﻿using Gov.Lclb.Cllb.Interfaces;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
@@ -10,10 +14,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Rest;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -26,7 +26,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
 
-        public TiedHouseConnectionsController(ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient, IHttpContextAccessor httpContextAccessor)
+        public TiedHouseConnectionsController(
+            ILoggerFactory loggerFactory,
+            IDynamicsClient dynamicsClient,
+            IHttpContextAccessor httpContextAccessor
+        )
         {
             _dynamicsClient = dynamicsClient;
             _logger = loggerFactory.CreateLogger(typeof(TiedHouseConnectionsController));
@@ -50,7 +54,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 IEnumerable<MicrosoftDynamicsCRMadoxioTiedhouseconnection> tiedHouseConnections = null;
 
                 UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
-
 
                 // Use `accountId` if provided, otherwise use the current logged in user's account Id
                 var accountIdForFilter = accountId != null ? accountId : userSettings.AccountId;
@@ -79,6 +82,48 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
         }
 
+        /// <summary>
+        /// Get the count of all "existing" Tied House Connections for a user.
+        /// If `accountId` is provided, it will return connections for that account.
+        /// If `accountId` is not provided, it will return connections for the current logged in user's account.
+        /// </summary>
+        /// <param name="accountId">An optional accountId to filter results by</param>
+        /// <returns>The count of "existing" tied house connections</returns>
+        [HttpGet("user/existing/count/{accountId?}")]
+        [ProducesResponseType(typeof(int), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public ActionResult<int> GetExistingTiedHouseConnectionsCountForUser(string accountId)
+        {
+            try
+            {
+                UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+
+                // Use `accountId` if provided, otherwise use the current logged in user's account Id
+                var accountIdForFilter = accountId != null ? accountId : userSettings.AccountId;
+
+                _logger.LogDebug($"GetExistingTiedHouseConnectionsCountForUser. AccountId = {accountIdForFilter}.");
+
+                var filter =
+                    $"(_adoxio_accountid_value eq {accountIdForFilter} and statuscode eq {(int)TiedHouseStatusCode.Existing}) and statecode eq 0";
+
+                var response = _dynamicsClient.Tiedhouseconnections.Get(filter: filter, top: 1, count: true);
+
+                int result = int.TryParse(response?.Count, out var parsedCount) ? parsedCount : 0;
+
+                return new JsonResult(result);
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Failed to fetch existing tied house connections count.");
+                throw new HttpOperationException("Failed to fetch existing tied house connections count.");
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(exception, "Failed to fetch existing tied house connections count.");
+                throw new Exception("Failed to fetch existing tied house connections count.");
+            }
+        }
+
         [HttpGet("application/{applicationId?}")]
         public JsonResult GetAllTiedHouseConnections(string applicationId)
         {
@@ -86,20 +131,24 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var result = new List<ViewModels.TiedHouseConnection>();
             var supersededbyIds = new List<string>();
             IEnumerable<MicrosoftDynamicsCRMadoxioTiedhouseconnection> tiedHouseConnections = null;
-            string accountFilter = $"(_adoxio_accountid_value eq {userSettings.AccountId} and statuscode eq {(int)TiedHouseStatusCode.Existing})";
+            string accountFilter =
+                $"(_adoxio_accountid_value eq {userSettings.AccountId} and statuscode eq {(int)TiedHouseStatusCode.Existing})";
             if (!String.IsNullOrEmpty(applicationId))
             {
                 /* If updating saved application
                  * only marked for removed connections if they are updating existing connection*/
-                accountFilter = accountFilter + $" or (_adoxio_application_value eq {applicationId} and (_adoxio_supersededby_value ne null or (_adoxio_supersededby_value eq null and adoxio_markedforremoval ne 1)))";
+                accountFilter =
+                    accountFilter
+                    + $" or (_adoxio_application_value eq {applicationId} and (_adoxio_supersededby_value ne null or (_adoxio_supersededby_value eq null and adoxio_markedforremoval ne 1)))";
             }
             _logger.LogDebug("Account filter = " + accountFilter);
 
             try
             {
-
                 var expand = new List<string> { "adoxio_adoxio_tiedhouseconnection_adoxio_licence" };
-                tiedHouseConnections = _dynamicsClient.Tiedhouseconnections.Get(filter: accountFilter, expand: expand).Value;
+                tiedHouseConnections = _dynamicsClient
+                    .Tiedhouseconnections.Get(filter: accountFilter, expand: expand)
+                    .Value;
 
                 foreach (var tiedHouse in tiedHouseConnections)
                 {
@@ -115,7 +164,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     result.Add(tiedHouse.ToViewModel());
                 }
             }
-
             catch (HttpOperationException httpOperationException)
             {
                 _logger.LogError(httpOperationException, "Error updating tied house connections");
@@ -123,9 +171,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             /* If connection is loaded that is updating existing record
              Do not show existing record*/
-            result = result
-                .Where(s => !supersededbyIds.Contains(s.id))
-                .ToList();
+            result = result.Where(s => !supersededbyIds.Contains(s.id)).ToList();
             return new JsonResult(result);
         }
 
@@ -146,7 +192,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // get the legal entity.
             Guid tiedHouseId = new Guid(id);
 
-            MicrosoftDynamicsCRMadoxioTiedhouseconnection res = await _dynamicsClient.GetTiedHouseConnectionById(tiedHouseId);
+            MicrosoftDynamicsCRMadoxioTiedhouseconnection res = await _dynamicsClient.GetTiedHouseConnectionById(
+                tiedHouseId
+            );
             if (res == null)
             {
                 return new NotFoundResult();
@@ -168,15 +216,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw new Exception("Unable to update tied house connections");
             }
 
-
             return new JsonResult(tiedHouse.ToViewModel());
         }
 
         [HttpPost("application/{applicationId}")]
-        public async Task<IActionResult> AddTiedHouseConnectionToApplication([FromBody] ViewModels.TiedHouseConnection tiedHouseConnection, string applicationId)
+        public async Task<IActionResult> AddTiedHouseConnectionToApplication(
+            [FromBody] ViewModels.TiedHouseConnection tiedHouseConnection,
+            string applicationId
+        )
         {
-            MicrosoftDynamicsCRMadoxioTiedhouseconnection adoxioTiedHouseConnection = new MicrosoftDynamicsCRMadoxioTiedhouseconnection();
-
+            MicrosoftDynamicsCRMadoxioTiedhouseconnection adoxioTiedHouseConnection =
+                new MicrosoftDynamicsCRMadoxioTiedhouseconnection();
 
             adoxioTiedHouseConnection.CopyValues(tiedHouseConnection);
             try
@@ -185,29 +235,39 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     if (tiedHouseConnection.MarkedForRemoval == true && tiedHouseConnection.SupersededById == null)
                     {
-                        await _dynamicsClient.Tiedhouseconnections.DeleteAsync(adoxioTiedHouseConnection.AdoxioTiedhouseconnectionid);
+                        await _dynamicsClient.Tiedhouseconnections.DeleteAsync(
+                            adoxioTiedHouseConnection.AdoxioTiedhouseconnectionid
+                        );
                     }
                     else
                     {
-                        await _dynamicsClient.Tiedhouseconnections.UpdateAsync(adoxioTiedHouseConnection.AdoxioTiedhouseconnectionid, adoxioTiedHouseConnection);
-                        await RemoveAndAddAssociateLicenses(tiedHouseConnection.AssociatedLiquorLicense.Select(x => x.Id).ToList(), adoxioTiedHouseConnection.AdoxioTiedhouseconnectionid);
+                        await _dynamicsClient.Tiedhouseconnections.UpdateAsync(
+                            adoxioTiedHouseConnection.AdoxioTiedhouseconnectionid,
+                            adoxioTiedHouseConnection
+                        );
+                        await RemoveAndAddAssociateLicenses(
+                            tiedHouseConnection.AssociatedLiquorLicense.Select(x => x.Id).ToList(),
+                            adoxioTiedHouseConnection.AdoxioTiedhouseconnectionid
+                        );
                     }
                 }
                 else
                 {
                     if (!String.IsNullOrEmpty(tiedHouseConnection.id))
                     {
-                        adoxioTiedHouseConnection.SupersededByOdataBind = $"/adoxio_tiedhouseconnections({tiedHouseConnection.id})";
+                        adoxioTiedHouseConnection.SupersededByOdataBind =
+                            $"/adoxio_tiedhouseconnections({tiedHouseConnection.id})";
                     }
                     adoxioTiedHouseConnection.ApplicationOdataBind = $"/adoxio_applications({applicationId})";
-
 
                     adoxioTiedHouseConnection.AdoxioTiedhouseconnectionid = null;
 
                     var response = await _dynamicsClient.Tiedhouseconnections.CreateAsync(adoxioTiedHouseConnection);
 
-
-                    await AssociateLicenses(tiedHouseConnection.AssociatedLiquorLicense.Select(x => x.Id).ToList(), response.AdoxioTiedhouseconnectionid);
+                    await AssociateLicenses(
+                        tiedHouseConnection.AssociatedLiquorLicense.Select(x => x.Id).ToList(),
+                        response.AdoxioTiedhouseconnectionid
+                    );
                 }
             }
             catch (HttpOperationException httpOperationException)
@@ -226,23 +286,33 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string filter = "adoxio_tiedhouseconnectionid eq " + tiedHouseId;
             var expand = new List<string> { "adoxio_adoxio_tiedhouseconnection_adoxio_licence" };
             var select = new List<string>() { "adoxio_adoxio_tiedhouseconnection_adoxio_licence" };
-            var tiedHouseConnection = _dynamicsClient.Tiedhouseconnections.Get(filter: filter, select: select, expand: expand).Value.FirstOrDefault();
+            var tiedHouseConnection = _dynamicsClient
+                .Tiedhouseconnections.Get(filter: filter, select: select, expand: expand)
+                .Value.FirstOrDefault();
 
-            var licencesIds = tiedHouseConnection.Adoxio_Adoxio_TiedHouseConnection_Adoxio_Licence.Select(l => l.AdoxioLicencesid);
+            var licencesIds = tiedHouseConnection.Adoxio_Adoxio_TiedHouseConnection_Adoxio_Licence.Select(l =>
+                l.AdoxioLicencesid
+            );
             var hasLicencesBeenUpdated = !licencesIds.OrderBy(x => x).SequenceEqual(licenses.OrderBy(x => x));
             if (hasLicencesBeenUpdated)
             {
                 foreach (var id in licencesIds)
                 {
-                    _dynamicsClient.Tiedhouseconnections.DeleteReferenceWithHttpMessagesAsync(
+                    _dynamicsClient
+                        .Tiedhouseconnections.DeleteReferenceWithHttpMessagesAsync(
                             tiedHouseId,
-                            "adoxio_adoxio_tiedhouseconnection_adoxio_licence", id).GetAwaiter().GetResult();
+                            "adoxio_adoxio_tiedhouseconnection_adoxio_licence",
+                            id
+                        )
+                        .GetAwaiter()
+                        .GetResult();
                 }
                 ;
 
                 await AssociateLicenses(licenses, tiedHouseId);
             }
         }
+
         private async Task AssociateLicenses(List<string> licenses, string tiedHouseId)
         {
             foreach (var licenceId in licenses)
@@ -255,7 +325,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 await _dynamicsClient.Tiedhouseconnections.AddReferenceWithHttpMessagesAsync(
                     tiedHouseId,
                     "adoxio_adoxio_tiedhouseconnection_adoxio_licence",
-                    odataid: odataId);
+                    odataid: odataId
+                );
             }
         }
     }
