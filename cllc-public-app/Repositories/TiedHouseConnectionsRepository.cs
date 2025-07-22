@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.ViewModels;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
 namespace Gov.Lclb.Cllb.Public.Repositories
@@ -142,6 +142,50 @@ namespace Gov.Lclb.Cllb.Public.Repositories
                 _logger.LogError(exception, "Failed to fetch existing cannabis tied house connection.");
                 throw new Exception("Failed to fetch existing cannabis tied house connection.");
             }
+        }
+
+        /// <summary>
+        /// Updates the cannabis tied house connection by fully replacing the existing record.
+        /// This method does not perform a partial update (patch); instead, all existing values are overwritten
+        /// with the values from the provided record.
+        /// </summary>
+        /// <param name="incomingTiedHouseConnectionRecord">The updated cannabis tied house connection record.</param>
+        /// <param name="tiedHouseConnectionId">The ID of the cannabis tied house connection to update.</param>
+        /// <returns>The updated cannabis tied house connection record.</returns>
+        /// <exception cref="Exception">Thrown when there is an error updating the record.</exception>
+        public async Task<TiedHouseConnection> UpdateCannabisTiedHouseConnection(
+            TiedHouseConnection incomingTiedHouseConnectionRecord,
+            string tiedHouseConnectionId
+        )
+        {
+            Guid tiedHouseConnectionGuid = new Guid(tiedHouseConnectionId);
+
+            MicrosoftDynamicsCRMadoxioTiedhouseconnection existingTiedHouseConnectionRecord =
+                await _dynamicsClient.GetTiedHouseConnectionById(tiedHouseConnectionGuid);
+
+            if (existingTiedHouseConnectionRecord == null)
+            {
+                throw new Exception($"Tied House Connection with ID {tiedHouseConnectionId} could not be found.");
+            }
+
+            var updatedTiedHouseConnectionRecord = new MicrosoftDynamicsCRMadoxioTiedhouseconnection();
+
+            updatedTiedHouseConnectionRecord.CopyValues(incomingTiedHouseConnectionRecord);
+
+            try
+            {
+                await _dynamicsClient.Tiedhouseconnections.UpdateAsync(
+                    tiedHouseConnectionId.ToString(),
+                    updatedTiedHouseConnectionRecord
+                );
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(exception, "Error updating cannabis tied house connection");
+                throw new Exception("Error updating cannabis tied house connection");
+            }
+
+            return updatedTiedHouseConnectionRecord.ToViewModel();
         }
     }
 }
