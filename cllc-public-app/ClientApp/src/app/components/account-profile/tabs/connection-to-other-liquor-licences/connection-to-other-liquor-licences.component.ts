@@ -8,6 +8,13 @@ import { TiedHouseConnectionsDataService } from '@services/tied-house-connection
 import { GenericMessageDialogComponent } from '@shared/components/dialog/generic-message-dialog/generic-message-dialog.component';
 import { forkJoin } from 'rxjs/internal/observable/forkJoin';
 
+/**
+ * Component for managing connections to other liquor licences.
+ *
+ * @export
+ * @class ConnectionToOtherLiquorLicencesComponent
+ * @implements {OnInit}
+ */
 @Component({
   selector: 'app-connection-to-other-liquor-licences',
   templateUrl: './connection-to-other-liquor-licences.component.html',

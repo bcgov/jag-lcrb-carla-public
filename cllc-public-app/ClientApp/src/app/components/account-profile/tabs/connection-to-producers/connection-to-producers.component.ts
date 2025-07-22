@@ -4,6 +4,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Account } from '@models/account.model';
 import { Subscription } from 'rxjs';
 
+/**
+ * Component for managing connections to other cannabis producers.
+ *
+ * @export
+ * @class ConnectionToProducersComponent
+ * @implements {OnInit}
+ * @implements {OnDestroy}
+ */
 @Component({
   selector: 'app-connection-to-producers',
   templateUrl: './connection-to-producers.component.html',
