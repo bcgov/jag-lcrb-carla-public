@@ -81,7 +81,6 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
   payMethod: string;
   validationMessages: any[];
   showValidationMessages: boolean;
-  tiedHouseFormData: TiedHouseConnection;
   possibleProblematicNameWarning = false;
   htmlContent = {} as ApplicationHTMLContent;
   readonly UPLOAD_FILES_MODE = UPLOAD_FILES_MODE;

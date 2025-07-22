@@ -85,7 +85,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool isCorporateDetailsComplete(AdoxioApplicantTypeCodes? legalentitytype, bool corporateDetailsFilesExists)
         {
             var isComplete = false;
-            var tiedHouse = new TiedHouseConnection();
             switch (legalentitytype)
             {
                 case AdoxioApplicantTypeCodes.PrivateCorporation:

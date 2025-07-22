@@ -54,7 +54,6 @@ export class ApplicationTiedHouseExemptionComponent extends FormBase implements 
   account: Account;
   minDate = new Date();
   dataLoaded: boolean;
-  tiedHouseFormData: TiedHouseConnection;
   applicationType: ApplicationType;
   applicationId: string;
   isAppId: string;
@@ -201,7 +200,7 @@ export class ApplicationTiedHouseExemptionComponent extends FormBase implements 
       case "autocompleteInput":
         // cursor entered autocomplete search by Licence fld - clear autocomplete search by JobNumber fld
         this.autocompletejobcomponent.autoCompFldClear();
-       
+
 
         break;
       case "autocompleteJobNumber":
@@ -263,7 +262,7 @@ export class ApplicationTiedHouseExemptionComponent extends FormBase implements 
           this.router.navigateByUrl('/dashboard');
         });
 
-      // this.busy = 
+      // this.busy =
       return of(true);
     }
     else {
@@ -294,14 +293,6 @@ export class ApplicationTiedHouseExemptionComponent extends FormBase implements 
     }
   }
 
-    prepareTiedHouseSaveRequest(_tiedHouseData) {
-    if (!this.application.tiedHouse) {
-      return of(null);
-    }
-    let data = (<any>Object).assign(this.application.tiedHouse, _tiedHouseData);
-    data = { ...data };
-    return this.tiedHouseService.updateTiedHouse(data, data.id);
-  }
   normalizeFormData() {
     let description2 = '';
 

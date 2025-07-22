@@ -76,7 +76,6 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
   payMethod: string;
   validationMessages: any[];
   showValidationMessages: boolean;
-  tiedHouseFormData: TiedHouseConnection;
   possibleProblematicNameWarning = false;
   htmlContent = {} as ApplicationHTMLContent;
   readonly UPLOAD_FILES_MODE = UPLOAD_FILES_MODE;
@@ -330,7 +329,6 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
 
     return forkJoin([
       this.applicationDataService.updateApplication({ ...this.application, ...this.form.value }),
-      this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
     ]).pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
         this.snackBar.open("Error saving Application", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
@@ -346,15 +344,6 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
         }
         return of(true);
       }));
-  }
-
-  prepareTiedHouseSaveRequest(_tiedHouseData) {
-    if (!this.application.tiedHouse) {
-      return of(null);
-    }
-    let data = (Object as any).assign(this.application.tiedHouse, _tiedHouseData);
-    data = { ...data };
-    return this.tiedHouseService.updateTiedHouse(data, data.id);
   }
 
   updateApplicationInStore() {

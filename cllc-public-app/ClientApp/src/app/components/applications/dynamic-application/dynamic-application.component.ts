@@ -80,7 +80,6 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
   showValidationMessages: boolean;
   submittedApplications = 8;
   ServiceHours = ServiceHours;
-  tiedHouseFormData: TiedHouseConnection;
   possibleProblematicNameWarning = false;
   htmlContent = {} as ApplicationHTMLContent;
   indigenousNations: { id: string, name: string }[] = [];
@@ -342,7 +341,6 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
     }
     return forkJoin(
         this.applicationDataService.updateApplication({ ...this.application, ...this.form.value }),
-        this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
       ).pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
         this.snackBar.open("Error saving Application", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
@@ -366,15 +364,6 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
       .then(() => {
         this.router.navigateByUrl("/dashboard");
       });
-  }
-
-  prepareTiedHouseSaveRequest(_tiedHouseData) {
-    if (!this.application.tiedHouse) {
-      return of(null);
-    }
-    let data = (Object as any).assign(this.application.tiedHouse, _tiedHouseData);
-    data = { ...data };
-    return this.tiedHouseService.updateTiedHouse(data, data.id);
   }
 
   updateApplicationInStore() {
