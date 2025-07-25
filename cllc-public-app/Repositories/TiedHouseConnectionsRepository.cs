@@ -118,6 +118,8 @@ namespace Gov.Lclb.Cllb.Public.Repositories
                 };
                 var filter = string.Join(" and ", andFilterConditions);
 
+                _logger.LogDebug($"Filter for cannabis tied house connection: {filter}");
+
                 var expand = new List<string> { "adoxio_adoxio_tiedhouseconnection_adoxio_licence" };
 
                 var tiedHouseConnections = _dynamicsClient.Tiedhouseconnections.Get(filter: filter, expand: expand);
@@ -147,7 +149,9 @@ namespace Gov.Lclb.Cllb.Public.Repositories
         }
 
         /// <summary>
-        /// Creates the cannabis tied house connection.
+        /// Creates the singleton cannabis tied house connection.
+        /// If a cannabis tied house connection already exists for the user, it will return that existing record
+        /// instead of creating a new one.
         /// </summary>
         /// <param name="accountId">The ID of the account associated with the cannabis tied house connection.</param>
         /// <param name="incomingTiedHouseConnectionRecord">Optional cannabis tied house connection record used to
