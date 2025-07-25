@@ -24,6 +24,13 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         Inactive = 2
     }
 
+    public enum TiedHouseCategoryType
+    {
+        Liquor = 845280000,
+        Cannabis = 845280001
+
+    }
+
     public class TiedHouseConnection
     {
         public string id { get; set; } //adoxio_tiedhouseconnectionId (primary key)
@@ -99,6 +106,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public int? StatusCode { get; set; }
         public bool? MarkedForRemoval { get; set; }
+
+        public int? CategoryType { get; set; }
 
         public bool isConnectionToProducersComplete(AdoxioApplicantTypeCodes? legalentitytype)
         {

@@ -63,6 +63,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioMarkedForRemoval = from.MarkedForRemoval == true ? 1 : 0;
             to.AdoxioLegalEntityName = from.LegalEntityName;
             to.AdoxioBusinessType = from.BusinessType;
+            to.AdoxioCategoryType = from.CategoryType;
         }
 
 
@@ -119,6 +120,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.MarkedForRemoval = tiedHouse.AdoxioMarkedForRemoval == 1;
                 result.BusinessType = tiedHouse.AdoxioBusinessType;
                 result.LegalEntityName = tiedHouse.AdoxioLegalEntityName;
+                result.CategoryType = tiedHouse.AdoxioCategoryType;
 
             }
             return result;
