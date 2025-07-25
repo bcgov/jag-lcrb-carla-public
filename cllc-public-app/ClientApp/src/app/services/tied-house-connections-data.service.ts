@@ -77,13 +77,14 @@ export class TiedHouseConnectionsDataService extends DataService {
   }
 
   /**
-   * Create a new cannabis tied house connection.
+   * Creates or updates a cannabis tied house connection.
    *
-   * @param {TiedHouseConnection} tiedHouseConnection
+   * @param {TiedHouseConnection} tiedHouseConnection Optional tied house connection data used to create or update the
+   * record.
    * @param {string} accountId The ID of the account to associate with the tied house connection.
    * @return {*}
    */
-  createCannabisTiedHouseConnection(tiedHouseConnection: TiedHouseConnection, accountId: string) {
+  upsertCannabisTiedHouseConnection(tiedHouseConnection: TiedHouseConnection, accountId: string) {
     return this.http
       .post<TiedHouseConnection>(`api/tiedhouseconnections/cannabis/${accountId}`, tiedHouseConnection, {
         headers: this.headers
@@ -94,13 +95,13 @@ export class TiedHouseConnectionsDataService extends DataService {
   /**
    * Update an existing cannabis tied house connection.
    *
-   * @param {TiedHouseConnection} tiedHouseConnection
+   * @param {TiedHouseConnection} tiedHouseConnection The tied house connection data used to update the existing record.
    * @param {string} tiedHouseConnectionId The ID of the tied house connection to update.
    * @return {*}
    */
   updateCannabisTiedHouseConnection(tiedHouseConnection: TiedHouseConnection, tiedHouseConnectionId: string) {
     return this.http
-      .post<TiedHouseConnection>(`api/tiedhouseconnections/cannabis/${tiedHouseConnectionId}`, tiedHouseConnection, {
+      .put<TiedHouseConnection>(`api/tiedhouseconnections/cannabis/${tiedHouseConnectionId}`, tiedHouseConnection, {
         headers: this.headers
       })
       .pipe(catchError(this.handleError));

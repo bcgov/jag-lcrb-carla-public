@@ -48,11 +48,12 @@ export class TiedHouseConnection {
   businessType: string;
   statusCode: number = TiedHouseStatusCode.new;
   supersededById: string;
+  categorytype: number;
 
   /**
    * Indicates that an existing tied house declartion record is marked for removal.
    */
-  markedForRemoval: boolean;
+  markedForRemoval?: boolean;
 }
 
 export enum TiedHouseViewMode {
@@ -109,7 +110,7 @@ export const RelationshipTypes = [
   { name: 'Beneficiary', value: 845280006 },
   { name: 'Representative', value: 845280007 },
   { name: 'Immediate Family Member', value: 845280008 },
-  { name: 'Other', value: 845280009 },
+  { name: 'Other', value: 845280009 }
 ];
 
 export const BusinessTypes = [
@@ -133,4 +134,9 @@ export const BusinessTypes = [
   { value: 845280017, name: 'Military Mess' },
   { value: 845280018, name: 'Other' },
   { value: 845280019, name: 'Police' }
+];
+
+export const TiedHouseCategoryTypes = [
+  { name: 'Liquor', value: 845280000 },
+  { name: 'Cannabis', value: 845280001 }
 ];

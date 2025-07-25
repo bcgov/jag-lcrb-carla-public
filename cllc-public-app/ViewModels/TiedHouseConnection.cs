@@ -60,6 +60,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         // TODO: Is this field still used? If not, remove it.
         public string TiedHouseName { get; set; } //adoxio_TiedHouseName (StringType)
         public string ApplicationId { get; set; }
+        public string AccountId { get; set; }
 
         public bool? IsLegalEntity { get; set; }
 
@@ -71,7 +72,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public string LastName { get; set; }
 
-        public int RelationshipToLicence { get; set; }
+        public int? RelationshipToLicence { get; set; }
 
         public List<RelatedLicence> AssociatedLiquorLicense { get; set; }
 

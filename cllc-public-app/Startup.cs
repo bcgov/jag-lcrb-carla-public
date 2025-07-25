@@ -548,6 +548,7 @@ namespace Gov.Lclb.Cllb.Public
             else
             {
                 Log.Logger = new LoggerConfiguration()
+                    .MinimumLevel.Debug()
                     .Enrich.FromLogContext()
                     .Enrich.WithExceptionDetails()
                     .WriteTo.Console()
