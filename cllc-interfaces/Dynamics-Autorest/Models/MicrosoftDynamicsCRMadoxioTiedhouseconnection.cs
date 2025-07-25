@@ -527,6 +527,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string AdoxioLegalEntityName { get; set; }        
         [JsonProperty(PropertyName = "adoxio_businesstype")]
         public int? AdoxioBusinessType { get; set; }
+        [JsonProperty(PropertyName = "adoxio_categorytype")]
+        public int? AdoxioCategoryType { get; set; }
 
     }
 }
