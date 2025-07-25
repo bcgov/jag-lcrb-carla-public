@@ -41,6 +41,10 @@ export class Account {
 
   primarycontact: Contact;
   businessType: string;
+  /**
+   * The singleton cannabis tied house connection record for the user account.
+   */
+  tiedHouse: TiedHouseConnection;
   legalEntity: LegalEntity;
 
   websiteUrl: string;

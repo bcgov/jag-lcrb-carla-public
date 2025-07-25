@@ -497,6 +497,10 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public ApplicationType ApplicationType { get; set; }
 
+        /// <summary>
+        /// The singleton cannabis tied house connection record for the user account.
+        /// </summary>
+        /// <value></value>
         public TiedHouseConnection TiedHouse { get; set; }
         public List<TiedHouseConnection> TiedHouseConnections { get; set; }
         public PoliceJurisdiction PoliceJurisdiction { get; set; }

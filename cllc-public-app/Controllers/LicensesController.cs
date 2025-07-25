@@ -1766,4 +1766,3 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public int? ManufacturerProductionAmountUnit { get; set; }
     }
 }
-

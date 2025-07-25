@@ -439,7 +439,7 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
 
   private save(declaration: TiedHouseConnection): Observable<[boolean, TiedHouseConnection]> {
     return this.tiedHouseService
-      .createTiedHouse(declaration, this.applicationId)
+      .createLiquorTiedHouseConnection(declaration, this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
       .pipe(
         catchError(() => {

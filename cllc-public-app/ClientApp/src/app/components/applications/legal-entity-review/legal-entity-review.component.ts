@@ -49,9 +49,6 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
 
   applicationId: string;
 
-  // TODO: tiedhouse - This is currently unused, remove if not needed.
-  uploadedSupportingDocumentsCount: 0;
-
   validationMessages: string[];
   showValidationMessages: boolean;
 

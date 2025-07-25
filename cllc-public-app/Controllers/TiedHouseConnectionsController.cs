@@ -41,55 +41,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         /// <summary>
-        /// Get all Tied House Connections for a user.
+        /// Get all liquor Tied House Connections for a user.
         /// If `accountId` is provided, it will return connections for that account.
         /// If `accountId` is not provided, it will return connections for the current logged in user's account.
         /// </summary>
         /// <param name="accountId">An optional accountId to filter results by</param>
         /// <returns>A list of tied house connections</returns>
-        [HttpGet("user/{accountId?}")]
+        [HttpGet("user/liquor/{accountId?}")]
         [ProducesResponseType(typeof(IEnumerable<TiedHouseConnection>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<IEnumerable<TiedHouseConnection>> GetAllTiedHouseConnectionsForUser(string accountId)
-        {
-            try
-            {
-                IEnumerable<MicrosoftDynamicsCRMadoxioTiedhouseconnection> tiedHouseConnections = null;
-
-                UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
-
-                // Use `accountId` if provided, otherwise use the current logged in user's account Id
-                var accountIdForFilter = accountId != null ? accountId : userSettings.AccountId;
-
-                _logger.LogDebug($"GetAllTiedHouseConnectionsForUser. AccountId = {accountIdForFilter}.");
-
-                var result = _tiedHouseConnectionsRepository.GetAllTiedHouseConnectionsForUser(accountIdForFilter);
-
-                return new JsonResult(result);
-            }
-            catch (HttpOperationException httpOperationException)
-            {
-                _logger.LogError(httpOperationException, "Failed to fetch tied house connections.");
-                throw new HttpOperationException("Failed to fetch tied house connections.");
-            }
-            catch (Exception exception)
-            {
-                _logger.LogError(exception, "Failed to fetch tied house connections.");
-                throw new Exception("Failed to fetch tied house connections.");
-            }
-        }
-
-        /// <summary>
-        /// Get the count of all "existing" Tied House Connections for a user.
-        /// If `accountId` is provided, it will return connections for that account.
-        /// If `accountId` is not provided, it will return connections for the current logged in user's account.
-        /// </summary>
-        /// <param name="accountId">An optional accountId to filter results by</param>
-        /// <returns>The count of "existing" tied house connections</returns>
-        [HttpGet("user/existing/count/{accountId?}")]
-        [ProducesResponseType(typeof(int), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<int> GetExistingTiedHouseConnectionsCountForUser(string accountId)
+        public ActionResult<IEnumerable<TiedHouseConnection>> GetAllLiquorTiedHouseConnectionsForUser(string accountId)
         {
             try
             {
@@ -98,9 +59,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // Use `accountId` if provided, otherwise use the current logged in user's account Id
                 var accountIdForFilter = accountId != null ? accountId : userSettings.AccountId;
 
-                _logger.LogDebug($"GetExistingTiedHouseConnectionsCountForUser. AccountId = {accountIdForFilter}.");
+                _logger.LogDebug($"GetAllLiquorTiedHouseConnectionsForUser. AccountId = {accountIdForFilter}.");
 
-                int result = _tiedHouseConnectionsRepository.GetExistingTiedHouseConnectionsCountForUser(
+                var result = _tiedHouseConnectionsRepository.GetAllLiquorTiedHouseConnectionsForUser(
                     accountIdForFilter
                 );
 
@@ -108,18 +69,99 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(httpOperationException, "Failed to fetch existing tied house connections count.");
-                throw new HttpOperationException("Failed to fetch existing tied house connections count.");
+                _logger.LogError(httpOperationException, "Failed to fetch liquor tied house connections.");
+                throw new HttpOperationException("Failed to fetch liquor tied house connections.");
             }
             catch (Exception exception)
             {
-                _logger.LogError(exception, "Failed to fetch existing tied house connections count.");
-                throw new Exception("Failed to fetch existing tied house connections count.");
+                _logger.LogError(exception, "Failed to fetch liquor tied house connections.");
+                throw new Exception("Failed to fetch liquor tied house connections.");
             }
         }
 
-        [HttpGet("application/{applicationId?}")]
-        public JsonResult GetAllTiedHouseConnections(string applicationId)
+        /// <summary>
+        /// Get the singleton cannabis Tied House Connection for a user.
+        /// If `accountId` is provided, it will return connections for that account.
+        /// If `accountId` is not provided, it will return connections for the current logged in user's account.
+        /// </summary>
+        /// <param name="accountId">An optional accountId to filter results by</param>
+        /// <returns>A single cannabis tied house connection</returns>
+        [HttpGet("user/cannabis/{accountId?}")]
+        [ProducesResponseType(typeof(IEnumerable<TiedHouseConnection>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public ActionResult<TiedHouseConnection> GetCannabisTiedHouseConnectionForUser(string accountId)
+        {
+            try
+            {
+                UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+
+                // Use `accountId` if provided, otherwise use the current logged in user's account Id
+                var accountIdForFilter = accountId != null ? accountId : userSettings.AccountId;
+
+                _logger.LogDebug($"GetCannabisTiedHouseConnectionForUser. AccountId = {accountIdForFilter}.");
+
+                var result = _tiedHouseConnectionsRepository.GetCannabisTiedHouseConnectionForUser(accountIdForFilter);
+
+                return new JsonResult(result);
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Failed to fetch cannabis tied house connection.");
+                throw new HttpOperationException("Failed to fetch cannabis tied house connection.");
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(exception, "Failed to fetch cannabis tied house connection.");
+                throw new Exception("Failed to fetch cannabis tied house connection.");
+            }
+        }
+
+        /// <summary>
+        /// Get the count of all "existing" liquor Tied House Connections for a user.
+        /// If `accountId` is provided, it will return connections for that account.
+        /// If `accountId` is not provided, it will return connections for the current logged in user's account.
+        /// </summary>
+        /// <param name="accountId">An optional accountId to filter results by</param>
+        /// <returns>The count of "existing" tied house connections</returns>
+        [HttpGet("user/liquor/existing/count/{accountId?}")]
+        [ProducesResponseType(typeof(int), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public ActionResult<int> GetExistingLiquorTiedHouseConnectionsCountForUser(string accountId)
+        {
+            try
+            {
+                UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+
+                // Use `accountId` if provided, otherwise use the current logged in user's account Id
+                var accountIdForFilter = accountId != null ? accountId : userSettings.AccountId;
+
+                _logger.LogDebug(
+                    $"GetExistingLiquorTiedHouseConnectionsCountForUser. AccountId = {accountIdForFilter}."
+                );
+
+                int result = _tiedHouseConnectionsRepository.GetExistingLiquorTiedHouseConnectionsCountForUser(
+                    accountIdForFilter
+                );
+
+                return new JsonResult(result);
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(
+                    httpOperationException,
+                    "Failed to fetch existing liquor tied house connections count."
+                );
+                throw new HttpOperationException("Failed to fetch existing liquor tied house connections count.");
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(exception, "Failed to fetch existing liquor tied house connections count.");
+                throw new Exception("Failed to fetch existing liquor tied house connections count.");
+            }
+        }
+
+        [HttpGet("liquor/application/{applicationId?}")]
+        public JsonResult GetAllLiquorTiedHouseConnections(string applicationId)
         {
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             var result = new List<ViewModels.TiedHouseConnection>();
@@ -133,7 +175,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                  * only marked for removed connections if they are updating existing connection*/
                 accountFilter =
                     accountFilter
-                    + $" or (_adoxio_application_value eq {applicationId} and (_adoxio_supersededby_value ne null or (_adoxio_supersededby_value eq null and adoxio_markedforremoval ne 1)))";
+                    + $" or (_adoxio_application_value eq {applicationId} and adoxio_categorytype eq {(int)TiedHouseCategoryType.Liquor} and (_adoxio_supersededby_value ne null or (_adoxio_supersededby_value eq null and adoxio_markedforremoval ne 1)))";
             }
             _logger.LogDebug("Account filter = " + accountFilter);
 
@@ -169,52 +211,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(result);
         }
 
-        /// <summary>
-        /// Update a TiedHouseConnection
-        /// </summary>
-        /// <param name="item"></param>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateTiedHouse([FromBody] ViewModels.TiedHouseConnection item, string id)
-        {
-            if (item == null || id != item.id)
-            {
-                return BadRequest();
-            }
-
-            // get the legal entity.
-            Guid tiedHouseId = new Guid(id);
-
-            MicrosoftDynamicsCRMadoxioTiedhouseconnection res = await _dynamicsClient.GetTiedHouseConnectionById(
-                tiedHouseId
-            );
-            if (res == null)
-            {
-                return new NotFoundResult();
-            }
-
-            // we are doing a patch, so wipe out the record.
-            var tiedHouse = new MicrosoftDynamicsCRMadoxioTiedhouseconnection();
-
-            // copy values over from the data provided
-            tiedHouse.CopyValues(item);
-
-            try
-            {
-                await _dynamicsClient.Tiedhouseconnections.UpdateAsync(tiedHouseId.ToString(), tiedHouse);
-            }
-            catch (HttpOperationException httpOperationException)
-            {
-                _logger.LogError(httpOperationException, "Error updating tied house connections");
-                throw new Exception("Unable to update tied house connections");
-            }
-
-            return new JsonResult(tiedHouse.ToViewModel());
-        }
-
-        [HttpPost("application/{applicationId}")]
-        public async Task<IActionResult> AddTiedHouseConnectionToApplication(
+        [HttpPost("liquor/application/{applicationId}")]
+        public async Task<IActionResult> AddLiquorTiedHouseConnectionToApplication(
             [FromBody] ViewModels.TiedHouseConnection tiedHouseConnection,
             string applicationId
         )
@@ -223,6 +221,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 new MicrosoftDynamicsCRMadoxioTiedhouseconnection();
 
             adoxioTiedHouseConnection.CopyValues(tiedHouseConnection);
+
+            adoxioTiedHouseConnection.AdoxioCategoryType = (int)TiedHouseCategoryType.Liquor;
             try
             {
                 if (tiedHouseConnection.ApplicationId == applicationId)
@@ -271,6 +271,62 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             return new JsonResult(adoxioTiedHouseConnection);
+        }
+
+        [HttpPost("cannabis/{accountId}")]
+        public async Task<ActionResult<TiedHouseConnection>> CreateCannabisTiedHouseConnectionForUser(
+            string accountId,
+            [FromBody] TiedHouseConnection tiedHouseConnection
+        )
+        {
+            try
+            {
+                var createdCannabisTiedHouseConnection =
+                    await _tiedHouseConnectionsRepository.CreateCannabisTiedHouseConnection(
+                        accountId,
+                        tiedHouseConnection
+                    );
+
+                return new JsonResult(createdCannabisTiedHouseConnection);
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Failed to create cannabis tied house connection");
+                throw new Exception("Failed to create cannabis tied house connection");
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(exception, "Failed to create cannabis tied house connection");
+                throw new Exception("Failed to create cannabis tied house connection");
+            }
+        }
+
+        [HttpPost("cannabis/{tiedHouseConnectionId}")]
+        public async Task<ActionResult<TiedHouseConnection>> UpdateCannabisTiedHouseConnectionForUser(
+            string tiedHouseConnectionId,
+            [FromBody] TiedHouseConnection tiedHouseConnection
+        )
+        {
+            try
+            {
+                var createdCannabisTiedHouseConnection =
+                    await _tiedHouseConnectionsRepository.UpdateCannabisTiedHouseConnection(
+                        tiedHouseConnectionId,
+                        tiedHouseConnection
+                    );
+
+                return new JsonResult(createdCannabisTiedHouseConnection);
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Failed to update cannabis tied house connection");
+                throw new Exception("Failed to update cannabis tied house connection");
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(exception, "Failed to update cannabis tied house connection");
+                throw new Exception("Failed to update cannabis tied house connection");
+            }
         }
 
         private async Task RemoveAndAddAssociateLicenses(List<string> licenses, string tiedHouseId)

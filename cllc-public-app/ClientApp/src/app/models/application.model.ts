@@ -71,6 +71,9 @@ export interface Application {
   servicehHoursStandardHours: boolean;
   requestOutsideServiceHours: boolean;
   signatureAgreement: boolean;
+  /**
+   * The singleton cannabis tied house connection record for the user account.
+   */
   tiedHouse: TiedHouseConnection;
   indigenousNationId: string;
   policeJurisdictionId: string;

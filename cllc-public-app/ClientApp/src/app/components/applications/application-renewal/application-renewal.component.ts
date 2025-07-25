@@ -18,8 +18,6 @@ import { FormBase, ApplicationHTMLContent } from "@shared/form-base";
 import { Account } from "@models/account.model";
 import { ApplicationTypeNames, FormControlState } from "@models/application-type.model";
 import { LicenceTypeNames} from "@models/license-type.model";
-import { TiedHouseConnection } from "@models/tied-house-connection.model";
-import { TiedHouseConnectionsDataService } from "@services/tied-house-connections-data.service";
 import { EstablishmentWatchWordsService } from "@services/establishment-watch-words.service";
 import { FeatureFlagService } from "@services/feature-flag.service";
 import { LicenseDataService } from "@app/services/license-data.service";
@@ -103,7 +101,6 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
     public featureFlagService: FeatureFlagService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private tiedHouseService: TiedHouseConnectionsDataService,
     public dialog: MatDialog,
     public establishmentWatchWordsService: EstablishmentWatchWordsService) {
     super();

@@ -6,8 +6,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppState } from '@app/app-state/models/app-state';
 import { COUNTRIES } from '@app/constants/countries';
-import { ConnectionToOtherLiquorLicencesComponent } from '@components/account-profile/tabs/connection-to-other-liquor-licences/connection-to-other-liquor-licences.component';
-import { ConnectionToProducersComponent } from '@components/account-profile/tabs/connection-to-producers/connection-to-producers.component';
+import {
+  ConnectionToOtherLiquorLicencesComponent,
+  ConnectionToOtherLiquorLicencesFormData
+} from '@components/account-profile/tabs/connection-to-other-liquor-licences/connection-to-other-liquor-licences.component';
+import {
+  ConnectionToProducersComponent,
+  ConnectionToProducersFormData
+} from '@components/account-profile/tabs/connection-to-producers/connection-to-producers.component';
 import {
   faAddressCard,
   faChevronRight,
@@ -18,12 +24,14 @@ import {
   faTrash
 } from '@fortawesome/free-solid-svg-icons';
 import { Account, BUSINESS_TYPE_LIST } from '@models/account.model';
+import { Application } from '@models/application.model';
 import { User } from '@models/user.model';
 import { Store } from '@ngrx/store';
 import { AccountDataService } from '@services/account-data.service';
 import { ApplicationDataService } from '@services/application-data.service';
 import { ContactDataService } from '@services/contact-data.service';
 import { FeatureFlagService } from '@services/feature-flag.service';
+import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
 import { UserDataService } from '@services/user-data.service';
 import { FormBase } from '@shared/form-base';
 import { endOfToday } from 'date-fns';
@@ -110,11 +118,11 @@ export class AccountProfileComponent extends FormBase implements OnInit {
 
   @ViewChild(ConnectionToProducersComponent)
   connectionToProducersComponent: ConnectionToProducersComponent;
-  connectionToProducersFormData: any;
+  connectionToProducersFormData: ConnectionToProducersFormData;
 
   @ViewChild(ConnectionToOtherLiquorLicencesComponent)
   connectionToOtherLiquorLicencesComponent: ConnectionToOtherLiquorLicencesComponent;
-  connectionToOtherLiquorLicencesFormData: any;
+  connectionToOtherLiquorLicencesFormData: ConnectionToOtherLiquorLicencesFormData;
 
   /**
    * The application ID under which this account profile is being edited.
@@ -216,6 +224,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
     private contactDataService: ContactDataService,
     private userDataService: UserDataService,
     private applicationDataService: ApplicationDataService,
+    private tiedHouseService: TiedHouseConnectionsDataService,
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
@@ -231,6 +240,8 @@ export class AccountProfileComponent extends FormBase implements OnInit {
       if (this.applicationId) {
         this.applicationDataService.getApplicationById(this.applicationId).subscribe((res) => {
           this.application = res;
+
+          this.connectionToOtherLiquorLicencesFormData = this.application.applicationExtension;
         });
       }
     });
@@ -469,11 +480,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
    * @return {*}  {Observable<boolean>}
    */
   canDeactivate(): Observable<boolean> {
-    if (
-      !this.hasFormChanged() &&
-      !this.connectionToProducersComponent.formHasChanged() &&
-      !this.connectionToOtherLiquorLicencesComponent.formHasChanged()
-    ) {
+    if (!this.hasFormChanged() && !this.connectionToOtherLiquorLicencesComponent.formHasChanged()) {
       return of(true);
     } else {
       return this.save();
@@ -516,26 +523,47 @@ export class AccountProfileComponent extends FormBase implements OnInit {
 
   save(): Observable<boolean> {
     this.form.get('businessProfile').patchValue({ physicalAddressCountry: 'Canada' });
+
     const value = {
       ...this.form.get('businessProfile').value,
       // Transform the accountUrls array into a comma-separated string as expected by the API
       accountUrls: this.combineAccountURLStrings(this.form.get('businessProfile.accountUrls').value)
     } as Account;
+
     const saves = [
       this.accountDataService.updateAccount(value),
       this.contactDataService.updateContact(this.form.get('contact').value)
     ];
 
+    // Save the cannabis tied house connection form data
     if (this.connectionToProducersFormData) {
-      // TODO: tiedhouse - Save the connection to producers form data. This used to be what the tied house data was. Now its just
-      // the 2 checkboxes and 2 corresponding text fields, for cannabis connections. Are these still saved as
-      // "tied house connections"?
+      if (this.connectionToProducersFormData.id) {
+        // If we have a primary id, update the existing connection
+        saves.push(
+          this.tiedHouseService.updateCannabisTiedHouseConnection(
+            this.connectionToProducersFormData,
+            this.connectionToProducersFormData.id
+          )
+        );
+      } else {
+        saves.push(
+          this.tiedHouseService.createCannabisTiedHouseConnection(this.connectionToProducersFormData, this.account.id)
+        );
+      }
     }
 
-    if (this.connectionToOtherLiquorLicencesFormData) {
-      // TODO: tiedhouse - Save the connection to other liquor licences form data? This component just has the 3 checkboxes which
-      // toggle the tied house component. Are these even saved to dynamics? If not, remove references to this form data
-      // and component.
+    // Save the connection to other liquor licences form data
+    if (this.applicationId) {
+      // Only persist the connection to other liquor licences form data if this component is being used in the context
+      // of an application.
+      if (this.connectionToOtherLiquorLicencesFormData) {
+        const updatedApplicationData: Application = {
+          ...this.application,
+          applicationExtension: this.connectionToOtherLiquorLicencesFormData
+        };
+
+        saves.push(this.applicationDataService.updateApplication(updatedApplicationData));
+      }
     }
 
     return forkJoin(saves).pipe(
