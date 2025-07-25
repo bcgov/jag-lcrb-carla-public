@@ -289,7 +289,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             
             to.AdoxioChecklistdrivingrecordcomplete = from.temporaryRelocationCriteria;
 
-            to.Statuscode = (int)from.ApplicationStatus;
+            to.Statuscode = (int?)from.ApplicationStatus == 0 ? null : (int?)from.ApplicationStatus;
 
         }
 
@@ -927,6 +927,11 @@ namespace Gov.Lclb.Cllb.Public.Models
             if(dynamicsApplication.AdoxioRelatedLicence != null)
             {
                 applicationVM.RelatedLicenceNumber = dynamicsApplication.AdoxioRelatedLicence.AdoxioLicencenumber;
+            }
+
+            if(dynamicsApplication.AdoxioApplicationExtension != null)
+            {
+                applicationVM.ApplicationExtension = dynamicsApplication.AdoxioApplicationExtension.ToViewModel();
             }
 
             return applicationVM;
