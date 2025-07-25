@@ -507,7 +507,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         [JsonProperty(PropertyName = "adoxio_lastname")]
         public string AdoxioLastname { get; set; }
         [JsonProperty(PropertyName = "adoxio_relationshiptype")]
-        public int AdoxioRelationshipType { get; set; }
+        public int? AdoxioRelationshipType { get; set; }
         [JsonProperty(PropertyName = "adoxio_otherrelationship")]
         public string AdoxioOtherRelationship { get; set; }
         [JsonProperty(PropertyName = "adoxio_middlename")]

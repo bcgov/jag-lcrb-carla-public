@@ -57,7 +57,7 @@ namespace Gov.Lclb.Cllb.Public.Repositories
             }
             catch (Exception exception)
             {
-                _logger.LogError(exception, "Failed to fetch tied house connections.");
+                _logger.LogError(exception, "Error fetching tied house connections.");
                 throw;
             }
         }
@@ -91,7 +91,7 @@ namespace Gov.Lclb.Cllb.Public.Repositories
             }
             catch (Exception exception)
             {
-                _logger.LogError(exception, "Failed to fetch existing tied house connections count.");
+                _logger.LogError(exception, "Error fetching existing tied house connections count.");
                 throw;
             }
         }
@@ -143,7 +143,7 @@ namespace Gov.Lclb.Cllb.Public.Repositories
             }
             catch (Exception exception)
             {
-                _logger.LogError(exception, "Failed to fetch existing cannabis tied house connection.");
+                _logger.LogError(exception, "Error fetching existing cannabis tied house connection.");
                 throw;
             }
         }

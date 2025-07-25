@@ -71,7 +71,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public string LastName { get; set; }
 
-        public int RelationshipToLicence { get; set; }
+        public int? RelationshipToLicence { get; set; }
 
         public List<RelatedLicence> AssociatedLiquorLicense { get; set; }
 
