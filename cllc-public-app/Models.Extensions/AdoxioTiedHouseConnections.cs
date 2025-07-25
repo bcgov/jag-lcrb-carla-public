@@ -52,6 +52,9 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioInconnectiontofederalproducerdetails = from.INConnectionToFederalProducerDetails;
             to.AdoxioLiquorfinancialinterest = @from.LiquorFinancialInterest;
             to.AdoxioLiquorfinancialinterestdetails = from.LiquorFinancialInterestDetails;
+
+            to.AccountODataBind = !String.IsNullOrEmpty(from.AccountId) ? $"/accounts({from.AccountId})" : null;
+            to.ApplicationOdataBind = !String.IsNullOrEmpty(from.ApplicationId) ? $"/adoxio_applications({from.ApplicationId})" : null;
             to.AdoxioFirstName = from.FirstName;
             to.AdoxioMiddlename = from.LastName;
             to.AdoxioDateOfBirth = from.DateOfBirth;
@@ -115,6 +118,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.DateOfBirth = tiedHouse.AdoxioDateOfBirth;
                 result.IsLegalEntity = tiedHouse.AdoxioLegalEntityReview == 1;
                 result.ApplicationId = tiedHouse._adoxioApplicationValue;
+                result.AccountId = tiedHouse._adoxioAccountidValue;
                 result.SupersededById = tiedHouse._adoxio_supersededbyValue;
                 result.StatusCode = tiedHouse.Statuscode;
                 result.MarkedForRemoval = tiedHouse.AdoxioMarkedForRemoval == 1;
