@@ -26,6 +26,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Rest;
 using Newtonsoft.Json;
+using static System.Net.Mime.MediaTypeNames;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 using Application = Gov.Lclb.Cllb.Public.ViewModels.Application;
 
@@ -1121,7 +1122,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     "adoxio_ApplicationTypeId",
                     "adoxio_LicenceFeeInvoice",
                     "adoxio_Invoice",
-                    "adoxio_application_SharePointDocumentLocations"
+                    "adoxio_application_SharePointDocumentLocations",
+                    "adoxio_ApplicationExtension"
                 };
 
             // GET all licensee change applications in Dynamics by applicant using the account Id assigned to the user logged in
@@ -1320,7 +1322,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (!CurrentUserHasAccessToApplicationOwnedBy(dynamicsApplication._adoxioApplicantValue)
                 && !allowLgAccess)
                 return new NotFoundResult();
-            result = await dynamicsApplication.ToViewModel(_dynamicsClient, _cache, _logger);
+            result = await dynamicsApplication.ToViewModel(_dynamicsClient, _cache, _logger);            
             //if (result.LicenseType == "Manufacturer")
             //{
             //    string filter = $"_adoxio_application_value eq {id}";
@@ -1786,6 +1788,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     adoxioTiedHouseExemption.AdoxioManufacturerproductionamountforprevyear = 0;
                     _dynamicsClient.Applications.Create(adoxioTiedHouseExemption);
                 }
+
+                if (item.ApplicationExtension != null)
+                {
+                    await UpdateApplicationExtensionAsync(item.ApplicationExtension, item.Id);
+                }
+
                 string json = JsonConvert.SerializeObject(application);
                 _dynamicsClient.Applications.Update(id, application);
 
@@ -2137,7 +2145,34 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
         }
 
-     
+        private async Task UpdateApplicationExtensionAsync(ApplicationExtension? applicationExtension, string applicationId)
+        {
+            MicrosoftDynamicsCRMadoxioApplicationextension adoxioApplicationextension = new MicrosoftDynamicsCRMadoxioApplicationextension();
+            adoxioApplicationextension.CopyValues(applicationExtension);
+            if (applicationExtension == null)
+            {
+                var extension = await _dynamicsClient.Applicationextensions.CreateAsync(adoxioApplicationextension);
+                await LinkApplicationExtensionToApplication(applicationId, extension.AdoxioApplicationextensionid);
+            }
+            else
+            {
+                await _dynamicsClient.Applicationextensions.UpdateAsync(applicationExtension.Id, adoxioApplicationextension);
+            }
+        }
+
+        private async Task LinkApplicationExtensionToApplication(string applicationId, string extensionId)
+        {
+            
+            var odataId = new Odataid
+                {
+                    OdataidProperty = _dynamicsClient.GetEntityURI("adoxio_applicationextensions", extensionId)
+                };
+
+            await _dynamicsClient.Applications.AddReferenceWithHttpMessagesAsync(
+                applicationId,
+                "adoxio_adoxio_application_adoxio_applicationextension_Application",
+                odataid: odataId);
+        }
 
     }
 }
