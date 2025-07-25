@@ -78,7 +78,7 @@ namespace Gov.Lclb.Cllb.Public.Repositories
                 {
                     $"_adoxio_accountid_value eq {accountId}",
                     $"statuscode eq {(int)TiedHouseStatusCode.Existing}",
-                    $"categorytype eq {(int)TiedHouseCategoryType.Liquor}",
+                    $"adoxio_categorytype eq {(int)TiedHouseCategoryType.Liquor}",
                     "statecode eq 0"
                 };
                 var filter = string.Join(" and ", andFilterConditions);
