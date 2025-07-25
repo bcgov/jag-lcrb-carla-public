@@ -250,11 +250,19 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
         confirmButtonText: 'Yes, Cancel',
         cancelButtonText: 'No, Go Back',
         onConfirm: () => {
+          //if removing existing declaration mark as removed 
           if (declaration.supersededById) {
             declaration.viewMode = TiedHouseViewMode.existing;
             declaration.markedForRemoval = true;
             this.submitTiedHouseDeclarationChange(declaration);
-          } else {
+          }
+          //if declaration has not been saved to dynamics remove from declaration list
+          else if(!declaration.applicationId){
+            this.tiedHouseDeclarations = this.tiedHouseDeclarations.filter(th=> th != declaration);
+            this.updateGroupedTiedHouseDeclarations();
+          }
+          //else declaration is not an existing declaration but has been saved to dynamics so hide and call api to remove declaration from dynamics
+          else {
             declaration.viewMode = TiedHouseViewMode.hidden;
             declaration.markedForRemoval = true;
             this.submitTiedHouseDeclarationChange(declaration);

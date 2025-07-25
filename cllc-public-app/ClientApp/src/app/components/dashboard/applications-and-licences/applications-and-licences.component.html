@@ -733,18 +733,10 @@
                   </a>
                 </div>
 
-                <div *ngIf="item.applicationStatus === 'Legal Entity Review'" style="margin-top: 5px">
-                  <a [routerLink]="['/legal-entity-review/' + item.id]">
-                    <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px"></fa-icon>
-                    <span>Start Application: Permanent Change to Licence</span>
-                  </a>
-                </div> 
                 <div *ngIf="item.applicationStatus === 'Licensee Action Required'" style="margin-top: 5px">
                   <a [routerLink]="['/legal-entity-review-permanent-change-to-a-licensee/' + item.id]">
                     <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px"></fa-icon>
-                    <span>Start Application: 
-Permanent Change 
-to Licensee</span>
+                    <span>Start Application: Permanent Change to Licensee</span>
                   </a>
                 </div>
               </td>
