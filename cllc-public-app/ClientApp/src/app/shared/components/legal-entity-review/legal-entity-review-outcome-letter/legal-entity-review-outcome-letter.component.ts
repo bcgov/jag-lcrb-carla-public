@@ -26,7 +26,7 @@ export class LegalEntityReviewOutcomeLetterComponent implements OnInit {
    */
   notices: FileSystemItem[] = [];
 
-  readonly legalEntityReviewOutcomeLetterName = 'Legal Entity Review Outcome Letter';
+  readonly legalEntityReviewOutcomeLetterName = 'Notice__Legal_Entity_Review_Outcome_Letter.pdf';
 
   constructor(private accountDataService: AccountDataService) {}
 
