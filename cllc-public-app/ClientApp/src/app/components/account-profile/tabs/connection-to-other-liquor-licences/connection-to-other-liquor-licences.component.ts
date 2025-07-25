@@ -93,10 +93,10 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnDestr
   }
 
   loadTiedHouseData() {
-    const tiedHouseConnectionsForApplicationIdRequest$ = this.tiedHouseService.GetAllTiedHouseConnectionsForApplication(
+    const tiedHouseConnectionsForApplicationIdRequest$ = this.tiedHouseService.GetAllLiquorTiedHouseConnectionsForApplication(
       this.applicationId
     );
-    const tiedHouseConnectionsForUserRequest$ = this.tiedHouseService.GetAllTiedHouseConnectionsForUser();
+    const tiedHouseConnectionsForUserRequest$ = this.tiedHouseService.GetAllLiquorTiedHouseConnectionsForUser();
     const applicationCountRequest$ = this.applicationDataService.getApprovedApplicationCount();
 
     forkJoin({

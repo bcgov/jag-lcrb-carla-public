@@ -12,15 +12,15 @@ export class TiedHouseConnectionsDataService extends DataService {
   }
 
   /**
-   * Get all tied house connections for a user.
+   * Get all liquor tied house connections for a user.
    * - If `accountId` is provided, it filters results by that account.
    * - If `accountId` is not provided, it returns results for the current logged in user.
    *
    * @param {string} [accountId] An optional account ID to filter results by
    * @return {*}  {Observable<TiedHouseConnection[]>}
    */
-  GetAllTiedHouseConnectionsForUser(accountId?: string): Observable<TiedHouseConnection[]> {
-    const apiPath = `api/tiedhouseconnections/user/${accountId ?? ''}`;
+  GetAllLiquorTiedHouseConnectionsForUser(accountId?: string): Observable<TiedHouseConnection[]> {
+    const apiPath = `api/tiedhouseconnections/user/liquor/${accountId ?? ''}`;
     return this.http.get<TiedHouseConnection[]>(apiPath, { headers: this.headers }).pipe(catchError(this.handleError));
   }
 
@@ -38,31 +38,31 @@ export class TiedHouseConnectionsDataService extends DataService {
   }
 
   /**
-   * Get the count of existing tied house connections for a user.
+   * Get the count of existing liquor tied house connections for a user.
    * - If `accountId` is provided, it filters results by that account.
    * - If `accountId` is not provided, it returns results for the current logged in user.
    *
    * @param {string} [accountId] An optional account ID to filter results by
    * @return {*}  {Observable<number>} The count of existing tied house connections.
    */
-  GetExistingTiedHouseConnectionsCountForUser(accountId?: string): Observable<number> {
-    const apiPath = `api/tiedhouseconnections/user/existing/count/${accountId ?? ''}`;
+  GetExistingLiquorTiedHouseConnectionsCountForUser(accountId?: string): Observable<number> {
+    const apiPath = `api/tiedhouseconnections/user/liquor/existing/count/${accountId ?? ''}`;
     return this.http.get<number>(apiPath, { headers: this.headers }).pipe(catchError(this.handleError));
   }
 
   /**
-   * Get all tied house connections for a specific application.
+   * Get all liquor tied house connections for a specific application.
    *
    * @param {string} applicationId
    * @return {*}  {Observable<TiedHouseConnection[]>}
    */
-  GetAllTiedHouseConnectionsForApplication(applicationId: string): Observable<TiedHouseConnection[]> {
-    const apiPath = `api/tiedhouseconnections/application/${applicationId ?? ''}`;
+  GetAllLiquorTiedHouseConnectionsForApplication(applicationId: string): Observable<TiedHouseConnection[]> {
+    const apiPath = `api/tiedhouseconnections/liquor/application/${applicationId ?? ''}`;
     return this.http.get<TiedHouseConnection[]>(apiPath, { headers: this.headers }).pipe(catchError(this.handleError));
   }
 
   /**
-   * Create a liquor tied house connection.
+   * Create or Update a liquor tied house connection.
    *
    * @param {TiedHouseConnection} tiedHouseConnection
    * @param {string} applicationId
@@ -70,7 +70,7 @@ export class TiedHouseConnectionsDataService extends DataService {
    */
   createLiquorTiedHouseConnection(tiedHouseConnection: TiedHouseConnection, applicationId: string) {
     return this.http
-      .post<TiedHouseConnection>(`api/tiedhouseconnections/application/${applicationId}`, tiedHouseConnection, {
+      .post<TiedHouseConnection>(`api/tiedhouseconnections/liquor/application/${applicationId}`, tiedHouseConnection, {
         headers: this.headers
       })
       .pipe(catchError(this.handleError));
