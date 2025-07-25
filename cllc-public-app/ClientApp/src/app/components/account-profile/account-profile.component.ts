@@ -686,7 +686,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
    * @readonly
    * @return {*}  {boolean}
    */
-  get showConnectionsToOtherLiquorLicencesSection(): boolean {
+  get isConnectionsToOtherLiquorLicencesSectionEditable(): boolean {
     if (!this.applicationId) {
       // Not in the context of an application, always show the section.
       return true;

@@ -23,178 +23,186 @@ export type ConnectionToOtherLiquorLicencesFormData = ApplicationExtension;
  * @implements {OnDestroy}
  */
 @Component({
-  selector: 'app-connection-to-other-liquor-licences',
-  templateUrl: './connection-to-other-liquor-licences.component.html',
-  styleUrls: ['./connection-to-other-liquor-licences.component.scss']
+    selector: 'app-connection-to-other-liquor-licences',
+    templateUrl: './connection-to-other-liquor-licences.component.html',
+    styleUrls: ['./connection-to-other-liquor-licences.component.scss']
 })
 export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnDestroy {
-  /**
-   * The user account information.
-   */
-  @Input() account: Account;
-  /**
-   * The application ID under which this component is being used.
-   */
-  @Input() applicationId?: string;
-  /**
-   * The initial form data to populate the form with.
-   */
-  @Input() initialFormData: ConnectionToOtherLiquorLicencesFormData;
-  /**
-   * Emits the form data on change.
-   */
-  @Output() onFormChanges = new EventEmitter<ConnectionToOtherLiquorLicencesFormData>();
+    /**
+     * The user account information.
+     */
+    @Input() account: Account;
+    /**
+     * The application ID under which this component is being used.
+     */
+    @Input() applicationId?: string;
+    /**
+     * The initial form data to populate the form with.
+     */
+    @Input() initialFormData: ConnectionToOtherLiquorLicencesFormData;
+    /**
+     * Emits the form data on change.
+     */
+    @Input() readonly = false;
+    @Output() onFormChanges = new EventEmitter<ConnectionToOtherLiquorLicencesFormData>();
 
-  /**
-   * The initial tied house data to populate the tied house declarations component with.
-   */
-  initialTiedHouseConnections: TiedHouseConnection[] = [];
+    /**
+     * The initial tied house data to populate the tied house declarations component with.
+     */
+    initialTiedHouseConnections: TiedHouseConnection[] = [];
 
-  userHasAtLeastOneApprovedApplication: boolean = false;
-  userHasAtLeastOneExistingTiedHouseConnection: boolean = false;
+    userHasAtLeastOneApprovedApplication: boolean = false;
+    userHasAtLeastOneExistingTiedHouseConnection: boolean = false;
 
-  form: FormGroup;
+    form: FormGroup;
 
-  get busy(): boolean {
-    return !this.hasLoadedData;
-  }
-
-  hasLoadedData = false;
-
-  destroy$ = new Subject<void>();
-
-  constructor(
-    private fb: FormBuilder,
-    private applicationDataService: ApplicationDataService,
-    private tiedHouseService: TiedHouseConnectionsDataService,
-    private matDialog: MatDialog
-  ) {}
-
-  ngOnInit() {
-    this.initForm();
-    this.loadFormData();
-    this.loadTiedHouseData();
-  }
-
-  initForm() {
-    this.form = this.fb.group({
-      hasLiquorTiedHouseOwnershipOrControl: [''],
-      hasLiquorTiedHouseThirdPartyAssociations: [''],
-      hasLiquorTiedHouseFamilyMemberInvolvement: ['']
-    });
-
-    this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe((value) => this.onFormChanges.emit(value));
-  }
-
-  loadFormData() {
-    if (this.initialFormData) {
-      this.form.patchValue(this.initialFormData);
+    get busy(): boolean {
+        return !this.hasLoadedData;
     }
-  }
 
-  loadTiedHouseData() {
-    const tiedHouseConnectionsForApplicationIdRequest$ = this.tiedHouseService.GetAllLiquorTiedHouseConnectionsForApplication(
-      this.applicationId
-    );
-    const tiedHouseConnectionsForUserRequest$ = this.tiedHouseService.GetAllLiquorTiedHouseConnectionsForUser();
-    const applicationCountRequest$ = this.applicationDataService.getApprovedApplicationCount();
+    hasLoadedData = false;
 
-    forkJoin({
-      tiedHouseDataForApplication: tiedHouseConnectionsForApplicationIdRequest$,
-      tiedHouseDataForUser: tiedHouseConnectionsForUserRequest$,
-      approvedApplicationCount: applicationCountRequest$
-    })
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: ({ tiedHouseDataForApplication, tiedHouseDataForUser, approvedApplicationCount }) => {
-          this.initialTiedHouseConnections = [...tiedHouseDataForUser, ...tiedHouseDataForApplication];
+    destroy$ = new Subject<void>();
 
-          this.userHasAtLeastOneApprovedApplication = approvedApplicationCount > 0;
-          this.userHasAtLeastOneExistingTiedHouseConnection = tiedHouseDataForUser.length > 0;
+    constructor(
+        private fb: FormBuilder,
+        private applicationDataService: ApplicationDataService,
+        private tiedHouseService: TiedHouseConnectionsDataService,
+        private matDialog: MatDialog
+    ) {}
 
-          this.hasLoadedData = true;
-        },
-        error: (error) => {
-          console.error('Error loading Liquor Tied House data', error);
-          this.matDialog.open(GenericMessageDialogComponent, {
-            data: {
-              title: 'Error Loading Tied House Data',
-              message:
-                'Failed to load Tied House data. Please try again. If the problem persists, please contact support.',
-              closeButtonText: 'Close'
-            }
-          });
+    ngOnInit() {
+        this.initForm();
+        this.loadFormData();
+        this.loadTiedHouseData();
+        if (this.readonly) {
+            console.log("readonly");
+            this.form.disable();
         }
-      });
-  }
-
-  /**
-   * Whether the Tied House Connections form is read-only.
-   *
-   * @readonly
-   * @type {boolean}
-   */
-  get isTiedHouseReadOnly(): boolean {
-    if (this.applicationId !== null && this.applicationId !== undefined) {
-      // If an application ID is provided then the form is editable.
-      return false;
     }
 
-    if (this.userHasAtLeastOneApprovedApplication || this.userHasAtLeastOneExistingTiedHouseConnection) {
-      // If no application ID is provided, but the user also has no existing applications or tied house connections then
-      // the form is editable.
-      return false;
+    initForm() {
+        this.form = this.fb.group({
+            hasLiquorTiedHouseOwnershipOrControl: [''],
+            hasLiquorTiedHouseThirdPartyAssociations: [''],
+            hasLiquorTiedHouseFamilyMemberInvolvement: ['']
+        });
+
+        this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe((value) => this.onFormChanges.emit(value));
     }
 
-    // The form is not editable.
-    return true;
-  }
-
-  /**
-   * Whether there are any initial tied house connections.
-   *
-   * @readonly
-   * @type {boolean}
-   */
-  get hasInitialTiedHouseConnections(): boolean {
-    return this.initialTiedHouseConnections?.length > 0;
-  }
-
-  /**
-   * Indicates whether the tied house declaration section should be shown.
-   *
-   * Show the section if any of the checkboxes are selected.
-   *
-   * @readonly
-   * @type {boolean}
-   */
-  get showTiedHouseDeclarationSection(): boolean {
-    if (!this.form) {
-      return false;
+    loadFormData() {
+        if (this.initialFormData) {
+            this.form.patchValue(this.initialFormData);
+        }
     }
 
-    return (
-      this.form.get('hasLiquorTiedHouseOwnershipOrControl').value === '1' ||
-      this.form.get('hasLiquorTiedHouseThirdPartyAssociations').value === '1' ||
-      this.form.get('hasLiquorTiedHouseFamilyMemberInvolvement').value === '1'
-    );
-  }
+    loadTiedHouseData() {
+        const tiedHouseConnectionsForApplicationIdRequest$ = this.tiedHouseService.GetAllLiquorTiedHouseConnectionsForApplication(
+            this.applicationId
+        );
+        const tiedHouseConnectionsForUserRequest$ = this.tiedHouseService.GetAllLiquorTiedHouseConnectionsForUser();
+        const applicationCountRequest$ = this.applicationDataService.getApprovedApplicationCount();
 
-  /**
-   * Checks if the form data has changed from the current data.
-   *
-   * @return {*}  {boolean} `true` if the form data has changed, `false` otherwise.
-   */
-  formHasChanged(): boolean {
-    if (JSON.stringify(this.initialFormData) !== JSON.stringify({ ...this.initialFormData, ...this.form.value })) {
-      return true;
+        forkJoin({
+            tiedHouseDataForApplication: tiedHouseConnectionsForApplicationIdRequest$,
+            tiedHouseDataForUser: tiedHouseConnectionsForUserRequest$,
+            approvedApplicationCount: applicationCountRequest$
+        })
+            .pipe(takeUntil(this.destroy$))
+            .subscribe({
+                next: ({ tiedHouseDataForApplication, tiedHouseDataForUser, approvedApplicationCount }) => {
+                    this.initialTiedHouseConnections = [...tiedHouseDataForUser, ...tiedHouseDataForApplication];
+
+                    this.userHasAtLeastOneApprovedApplication = approvedApplicationCount > 0;
+                    this.userHasAtLeastOneExistingTiedHouseConnection = tiedHouseDataForUser.length > 0;
+
+                    this.hasLoadedData = true;
+                },
+                error: (error) => {
+                    console.error('Error loading Liquor Tied House data', error);
+                    this.matDialog.open(GenericMessageDialogComponent, {
+                        data: {
+                            title: 'Error Loading Tied House Data',
+                            message:
+                                'Failed to load Tied House data. Please try again. If the problem persists, please contact support.',
+                            closeButtonText: 'Close'
+                        }
+                    });
+                }
+            });
     }
 
-    return false;
-  }
+    /**
+     * Whether the Tied House Connections form is read-only.
+     *
+     * @readonly
+     * @type {boolean}
+     */
+    get isTiedHouseReadOnly(): boolean {
+        if (this.readonly) {
+            return true;
+        }
+        if (this.applicationId !== null && this.applicationId !== undefined) {
+            // If an application ID is provided then the form is editable.
+            return false;
+        }
 
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
+        if (this.userHasAtLeastOneApprovedApplication || this.userHasAtLeastOneExistingTiedHouseConnection) {
+            // If no application ID is provided, but the user also has no existing applications or tied house connections then
+            // the form is editable.
+            return false;
+        }
+
+        // The form is not editable.
+        return true;
+    }
+
+    /**
+     * Whether there are any initial tied house connections.
+     *
+     * @readonly
+     * @type {boolean}
+     */
+    get hasInitialTiedHouseConnections(): boolean {
+        return this.initialTiedHouseConnections?.length > 0;
+    }
+
+    /**
+     * Indicates whether the tied house declaration section should be shown.
+     *
+     * Show the section if any of the checkboxes are selected.
+     *
+     * @readonly
+     * @type {boolean}
+     */
+    get showTiedHouseDeclarationSection(): boolean {
+        if (!this.form) {
+            return false;
+        }
+
+        return (
+            this.form.get('hasLiquorTiedHouseOwnershipOrControl').value === '1' ||
+            this.form.get('hasLiquorTiedHouseThirdPartyAssociations').value === '1' ||
+            this.form.get('hasLiquorTiedHouseFamilyMemberInvolvement').value === '1'
+        );
+    }
+
+    /**
+     * Checks if the form data has changed from the current data.
+     *
+     * @return {*}  {boolean} `true` if the form data has changed, `false` otherwise.
+     */
+    formHasChanged(): boolean {
+        if (JSON.stringify(this.initialFormData) !== JSON.stringify({ ...this.initialFormData, ...this.form.value })) {
+            return true;
+        }
+
+        return false;
+    }
+
+    ngOnDestroy(): void {
+        this.destroy$.next();
+        this.destroy$.complete();
+    }
 }
