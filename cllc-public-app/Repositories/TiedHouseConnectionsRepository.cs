@@ -201,6 +201,8 @@ namespace Gov.Lclb.Cllb.Public.Repositories
 
             // Ensure the tied house connection is of type (category) "cannabis"
             newCannabisTiedHouseConnectionRecord.AdoxioCategoryType = (int)TiedHouseCategoryType.Cannabis;
+            // The singleton cannabis tied house connection should always be in the "Existing" status
+            newCannabisTiedHouseConnectionRecord.Statuscode = (int)TiedHouseStatusCode.Existing;
 
             var createdCannabisTiedHouseConnectionRecord = await _dynamicsClient.Tiedhouseconnections.CreateAsync(
                 newCannabisTiedHouseConnectionRecord
@@ -241,6 +243,8 @@ namespace Gov.Lclb.Cllb.Public.Repositories
 
             // Ensure the tied house connection is of type (category) "cannabis"
             updatedTiedHouseConnectionRecord.AdoxioCategoryType = (int)TiedHouseCategoryType.Cannabis;
+            // The singleton cannabis tied house connection should always be in the "Existing" status
+            updatedTiedHouseConnectionRecord.Statuscode = (int)TiedHouseStatusCode.Existing;
 
             await _dynamicsClient.Tiedhouseconnections.UpdateAsync(
                 tiedHouseConnectionId.ToString(),
