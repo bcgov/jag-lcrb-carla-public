@@ -547,7 +547,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
         );
       } else {
         saves.push(
-          this.tiedHouseService.createCannabisTiedHouseConnection(this.connectionToProducersFormData, this.account.id)
+          this.tiedHouseService.upsertCannabisTiedHouseConnection(this.connectionToProducersFormData, this.account.id)
         );
       }
     }

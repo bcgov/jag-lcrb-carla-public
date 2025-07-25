@@ -698,7 +698,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 try
                 {
                     // Create the singletone cannabis tied house connection record for the user account
-                    await _tiedHouseConnectionsRepository.CreateCannabisTiedHouseConnection(account.Accountid, null);
+                    await _tiedHouseConnectionsRepository.UpsertCannabisTiedHouseConnection(account.Accountid, null);
                 }
                 catch (HttpOperationException httpOperationException)
                 {

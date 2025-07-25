@@ -1090,7 +1090,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       // If we have a primary id, update the existing connection
       return this.tiedHouseService.updateCannabisTiedHouseConnection(data, data.id);
     } else {
-      return this.tiedHouseService.createCannabisTiedHouseConnection(data, this.account.id);
+      return this.tiedHouseService.upsertCannabisTiedHouseConnection(data, this.account.id);
     }
   }
 

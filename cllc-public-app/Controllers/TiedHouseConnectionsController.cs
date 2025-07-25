@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Rest;
+using Newtonsoft.Json;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -69,12 +70,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(httpOperationException, "Failed to fetch liquor tied house connections.");
-                throw new HttpOperationException("Failed to fetch liquor tied house connections.");
+                _logger.LogError(httpOperationException, "Error fetching liquor tied house connections.");
+                _logger.LogDebug($"Request: {JsonConvert.SerializeObject(httpOperationException.Request)}");
+                _logger.LogDebug($"Response: {JsonConvert.SerializeObject(httpOperationException.Response)}");
+                throw new Exception("Failed to fetch liquor tied house connections.");
             }
             catch (Exception exception)
             {
-                _logger.LogError(exception, "Failed to fetch liquor tied house connections.");
+                _logger.LogError(exception, "Error fetching liquor tied house connections.");
                 throw new Exception("Failed to fetch liquor tied house connections.");
             }
         }
@@ -106,12 +109,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(httpOperationException, "Failed to fetch cannabis tied house connection.");
-                throw new HttpOperationException("Failed to fetch cannabis tied house connection.");
+                _logger.LogError(httpOperationException, "Error fetching cannabis tied house connection.");
+                _logger.LogDebug($"Request: {JsonConvert.SerializeObject(httpOperationException.Request)}");
+                _logger.LogDebug($"Response: {JsonConvert.SerializeObject(httpOperationException.Response)}");
+                throw new Exception("Failed to fetch cannabis tied house connection.");
             }
             catch (Exception exception)
             {
-                _logger.LogError(exception, "Failed to fetch cannabis tied house connection.");
+                _logger.LogError(exception, "Error fetching cannabis tied house connection.");
                 throw new Exception("Failed to fetch cannabis tied house connection.");
             }
         }
@@ -149,13 +154,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 _logger.LogError(
                     httpOperationException,
-                    "Failed to fetch existing liquor tied house connections count."
+                    "Error fetching existing liquor tied house connections count."
                 );
-                throw new HttpOperationException("Failed to fetch existing liquor tied house connections count.");
+                throw new Exception("Failed to fetch existing liquor tied house connections count.");
             }
             catch (Exception exception)
             {
-                _logger.LogError(exception, "Failed to fetch existing liquor tied house connections count.");
+                _logger.LogError(exception, "Error fetching existing liquor tied house connections count.");
                 throw new Exception("Failed to fetch existing liquor tied house connections count.");
             }
         }
@@ -203,6 +208,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             catch (HttpOperationException httpOperationException)
             {
                 _logger.LogError(httpOperationException, "Error updating tied house connections");
+                _logger.LogDebug($"Request: {JsonConvert.SerializeObject(httpOperationException.Request)}");
+                _logger.LogDebug($"Response: {JsonConvert.SerializeObject(httpOperationException.Response)}");
+                throw new Exception("Unable to add tied house connection");
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(exception, "Error updating tied house connections");
                 throw new Exception("Unable to add tied house connection");
             }
             /* If connection is loaded that is updating existing record
@@ -267,14 +279,34 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             catch (HttpOperationException httpOperationException)
             {
                 _logger.LogError(httpOperationException, "Error adding tied house connections");
+                _logger.LogDebug($"Request: {JsonConvert.SerializeObject(httpOperationException.Request)}");
+                _logger.LogDebug($"Response: {JsonConvert.SerializeObject(httpOperationException.Response)}");
+                throw new Exception("Unable to add tied house connection");
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(exception, "Error adding tied house connections");
                 throw new Exception("Unable to add tied house connection");
             }
 
             return new JsonResult(adoxioTiedHouseConnection);
         }
 
+        /// <summary>
+        /// Creates or Updates the singleton cannabis tied house connection.
+        ///
+        /// If a cannabis tied house connection already exists for the user, it will update and return that existing
+        /// record.
+        ///
+        /// If no cannabis tied house connection exists, it will create a new one and return it.
+        /// </summary>
+        /// <param name="accountId">The ID of the account associated with the cannabis tied house connection.</param>
+        /// <param name="incomingTiedHouseConnectionRecord">Optional cannabis tied house connection record used to
+        /// create or update the record.</param>
+        /// <returns>The cannabis tied house connection record.</returns>
+        /// <exception cref="Exception">Thrown when there is an error creating or updating the record.</exception>
         [HttpPost("cannabis/{accountId}")]
-        public async Task<ActionResult<TiedHouseConnection>> CreateCannabisTiedHouseConnectionForUser(
+        public async Task<ActionResult<TiedHouseConnection>> UpsertCannabisTiedHouseConnectionForUser(
             string accountId,
             [FromBody] TiedHouseConnection tiedHouseConnection
         )
@@ -282,7 +314,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             try
             {
                 var createdCannabisTiedHouseConnection =
-                    await _tiedHouseConnectionsRepository.CreateCannabisTiedHouseConnection(
+                    await _tiedHouseConnectionsRepository.UpsertCannabisTiedHouseConnection(
                         accountId,
                         tiedHouseConnection
                     );
@@ -291,17 +323,26 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(httpOperationException, "Failed to create cannabis tied house connection");
-                throw new Exception("Failed to create cannabis tied house connection");
+                _logger.LogError(httpOperationException, "Error upserting cannabis tied house connection");
+                _logger.LogDebug($"Request: {JsonConvert.SerializeObject(httpOperationException.Request)}");
+                _logger.LogDebug($"Response: {JsonConvert.SerializeObject(httpOperationException.Response)}");
+                throw new Exception("Failed to upsert cannabis tied house connection");
             }
             catch (Exception exception)
             {
-                _logger.LogError(exception, "Failed to create cannabis tied house connection");
-                throw new Exception("Failed to create cannabis tied house connection");
+                _logger.LogError(exception, "Error upserting cannabis tied house connection");
+                throw new Exception("Failed to upsert cannabis tied house connection");
             }
         }
 
-        [HttpPost("cannabis/{tiedHouseConnectionId}")]
+        /// <summary>
+        /// Updates an existing cannabis tied house connection for a user.
+        /// </summary>
+        /// <param name="tiedHouseConnectionId"></param>
+        /// <param name="tiedHouseConnection"></param>
+        /// <returns>The updating tied house connection</returns>
+        /// <exception cref="Exception">Thrown when there is an error updating the record.</exception>
+        [HttpPut("cannabis/{tiedHouseConnectionId}")]
         public async Task<ActionResult<TiedHouseConnection>> UpdateCannabisTiedHouseConnectionForUser(
             string tiedHouseConnectionId,
             [FromBody] TiedHouseConnection tiedHouseConnection
@@ -319,12 +360,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(httpOperationException, "Failed to update cannabis tied house connection");
+                _logger.LogError(httpOperationException, "Error updating cannabis tied house connection");
+                _logger.LogDebug($"Request: {JsonConvert.SerializeObject(httpOperationException.Request)}");
+                _logger.LogDebug($"Response: {JsonConvert.SerializeObject(httpOperationException.Response)}");
                 throw new Exception("Failed to update cannabis tied house connection");
             }
             catch (Exception exception)
             {
-                _logger.LogError(exception, "Failed to update cannabis tied house connection");
+                _logger.LogError(exception, "Error updating cannabis tied house connection");
                 throw new Exception("Failed to update cannabis tied house connection");
             }
         }
