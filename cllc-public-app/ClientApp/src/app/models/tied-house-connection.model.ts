@@ -99,7 +99,6 @@ export const TiedHouseTypes = [
   { name: 'Legal Entity', value: true }
 ];
 
-// TODO: Populate real values
 export const RelationshipTypes = [
   { name: 'Shareholder', value: 845280000 },
   { name: 'Director', value: 845280001 },

@@ -58,14 +58,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("submit/{id}")]
         public async Task<IActionResult> GetPaymentUrl(string id)
         {
-            _logger.Debug("Called GetPaymentUrl(" + id + ")");
+            _logger.Debug($"Called GetPaymentUrl({id})");
 
             // get the application and confirm access (call parse to ensure we are getting a valid id)
             Guid applicationId = Guid.Parse(id);
             MicrosoftDynamicsCRMadoxioApplication application = await GetDynamicsApplication(id);
             if (application == null)
             {
-                return NotFound();
+                return NotFound("Application not found");
             }
             if (application.AdoxioInvoice?.Statuscode == (int?)Adoxio_invoicestatuses.Paid)
             {
@@ -148,7 +148,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt), paymentType);
 
-                _logger.Debug(">>>>>" + redirectUrl["url"]);
+                _logger.Debug($"Payment redirect url = {redirectUrl["url"]}");
 
                 return new JsonResult(redirectUrl);
             }
@@ -173,16 +173,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("payment-uri/{invoiceType}/{id}")]
         public async Task<IActionResult> GetPaymentUrlUpdated(string id, string invoiceType, [FromQuery] string redirectContext = "permanent-change")
         {
+            _logger.Debug($"Called GetPaymentUrlUpdated({id})");
+
             const string primary = "primary";
             const string secondary = "secondary";
-            _logger.Debug("Called GetPaymentUrl(" + id + ")");
 
             // get the application and confirm access (call parse to ensure we are getting a valid id)
             Guid applicationId = Guid.Parse(id);
             MicrosoftDynamicsCRMadoxioApplication application = await GetDynamicsApplication(id);
             if (application == null)
             {
-                return NotFound();
+                return NotFound("Application not found");
             }
 
             if (invoiceType != primary && invoiceType != secondary)
@@ -306,11 +307,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt), paymentType, redirectPath);
 
-                _logger.Debug(">>>>>" + redirectUrl["url"]);
+                _logger.Debug($"Payment redirect url = {redirectUrl["url"]}");
 
                 return new JsonResult(redirectUrl);
             }
-            _logger.Error("GetPaymentUrl failed - Unable to get invoice for application {id}");
+
+            _logger.Error($"GetPaymentUrl failed - Unable to get invoice for application {id}");
             return NotFound();
         }
 
@@ -324,7 +326,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("submit/licence-fee/{id}")]
         public async Task<IActionResult> GetLicencePaymentUrl(string id)
         {
-            _logger.Debug("Called GetLicencePaymentUrl(" + id + ")");
+            _logger.Debug($"Called GetLicencePaymentUrl({id})");
 
             // get the application and confirm access (call parse to ensure we are getting a valid id)
             Guid applicationId = Guid.Parse(id);
@@ -332,7 +334,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (application == null)
             {
-                return NotFound();
+                return NotFound("Application not found");
             }
 
             if (application.AdoxioLicenceFeeInvoice?.Statuscode == (int?)Adoxio_invoicestatuses.Paid)
@@ -440,7 +442,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 var redirectPath = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/licence-fee-payment-confirmation";
                 redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt), paymentType, redirectPath);
 
-                _logger.Debug(">>>>>" + redirectUrl["url"]);
+                _logger.Debug($"Payment redirect url = {redirectUrl["url"]}");
 
                 return new JsonResult(redirectUrl);
             }
@@ -459,7 +461,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("submit/outstanding-prior-balance-invoice/{id}")]
         public async Task<IActionResult> GetOutStandingPriorBalanceInvoicePaymentUrl(string id)
         {
-            _logger.Debug("Called GetOutStandingPriorBalanceInvoicePaymentUrl(" + id + ")");
+            _logger.Debug($"Called GetOutStandingPriorBalanceInvoicePaymentUrl({id})");
 
             // get the application and confirm access (call parse to ensure we are getting a valid id)
             //Guid applicationGuidId = Guid.Parse(applicationId);
@@ -467,7 +469,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (application == null)
             {
-                return NotFound();
+                return NotFound("Application not found");
             }
             //LCSD-6388 TODO: add new application.OutstandingPriorBalanceInvoice
             if (application.AdoxioLicenceFeeInvoice?.Statuscode == (int?)Adoxio_invoicestatuses.Paid)
@@ -573,7 +575,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 var redirectPath = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/licence-fee-payment-confirmation";
                 redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt), paymentType, redirectPath);
 
-                _logger.Debug(">>>>>" + redirectUrl["url"]);
+                _logger.Debug($"Payment redirect url = {redirectUrl["url"]}");
 
                 return new JsonResult(redirectUrl);
             }
@@ -598,7 +600,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             MicrosoftDynamicsCRMadoxioApplication application = await GetDynamicsApplication(id);
             if (application == null)
             {
-                return NotFound();
+                return NotFound("Application not found");
             }
 
             // load the invoice for this application
@@ -933,7 +935,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             MicrosoftDynamicsCRMadoxioApplication application = await GetDynamicsApplication(id);
             if (application == null)
             {
-                return NotFound();
+                return NotFound("Application not found");
             }
 
             // load the invoice for this application
@@ -1253,7 +1255,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             MicrosoftDynamicsCRMadoxioApplication application = await GetDynamicsApplication(id);
             if (application == null)
             {
-                return NotFound();
+                return NotFound("Application not found");
             }
 
             // load the invoice for this application
@@ -1580,8 +1582,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
-            _logger.Debug("Application id = " + id);
-            _logger.Debug("User id = " + userSettings.AccountId);
+            _logger.Debug($"Application id = {id}");
+            _logger.Debug($"User id = {userSettings.AccountId}");
             var expand = new List<string> { "adoxio_LicenceFeeInvoice", "adoxio_Invoice", "adoxio_Establishment" };
 
             MicrosoftDynamicsCRMadoxioApplication dynamicsApplication = await _dynamicsClient.GetApplicationByIdWithChildren(Guid.Parse(id));
@@ -1603,8 +1605,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
-            _logger.Debug("Worker id = " + id);
-            _logger.Debug("User Contact id = " + userSettings.ContactId);
+            _logger.Debug($"Worker id = {id}");
+            _logger.Debug($"User Contact id = {userSettings.ContactId}");
 
             MicrosoftDynamicsCRMadoxioWorker worker = null;
             if (getInvoice)
@@ -1736,12 +1738,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // should happen immediately, but ...
                 // pause and try again - in case Dynamics is slow ...
                 retries++;
-                _logger.Debug("No invoice found, retry = " + retries);
+                _logger.Debug($"No invoice found, retry = {retries}");
                 System.Threading.Thread.Sleep(1000);
                 patchWorker = await GetDynamicsWorker(workerId, false);
                 invoiceId = patchWorker._adoxioInvoiceValue;
             }
-            _logger.Debug("Created invoice for worker = " + invoiceId);
+            _logger.Debug($"Created invoice for worker = {invoiceId}");
 
             /*
              * When the applicant submits their Application, we will set the application "Application Invoice Trigger" to "Y" - this will trigger a workflow that will create the Invoice
@@ -1768,7 +1770,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var redirectPath = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/worker-qualification/payment-confirmation";
             redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, workerId, String.Format("{0:0.00}", orderamt), paymentType, redirectPath);
 
-            _logger.Debug(">>>>>" + redirectUrl["url"]);
+            _logger.Debug($"Payment redirect url = {redirectUrl["url"]}");
 
             return new JsonResult(redirectUrl);
         }
@@ -2110,7 +2112,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("submit/sep-application/{id}")]
         public async Task<IActionResult> GetSepPaymentUrl(string id)
         {
-            _logger.Debug("Called GetSepPaymentUrl(" + id + ")");
+            _logger.Debug($"Called GetSepPaymentUrl({id})");
 
             // get the application and confirm access (call parse to ensure we are getting a valid id)
             MicrosoftDynamicsCRMadoxioSpecialevent application = GetSpecialEventData(id);
@@ -2202,7 +2204,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 var redirectPath = $"{_configuration["BASE_URI"]}{_configuration["BASE_PATH"]}/sep/application-summary/{id}";
                 redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt), paymentType, redirectPath);
 
-                _logger.Debug(">>>>>" + redirectUrl["url"]);
+                _logger.Debug($"Payment redirect url = {redirectUrl["url"]}");
 
                 return new JsonResult(redirectUrl);
             }

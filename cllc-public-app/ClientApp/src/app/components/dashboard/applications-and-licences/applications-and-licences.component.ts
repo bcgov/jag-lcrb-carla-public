@@ -129,7 +129,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     this.displayApplications();
     this.startMarketingOngoing = false;
     this.applicationDataService
-      .getSubmittedApplicationCount()
+      .getSubmittedCannabisRetailStoreApplicationCount()
       .subscribe((value) => (this.submittedApplications = value));
   }
 

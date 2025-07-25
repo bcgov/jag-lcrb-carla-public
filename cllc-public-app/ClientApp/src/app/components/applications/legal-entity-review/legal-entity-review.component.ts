@@ -49,7 +49,7 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
 
   applicationId: string;
 
-  // TODO: This is currently unused, remove if not needed.
+  // TODO: tiedhouse - This is currently unused, remove if not needed.
   uploadedSupportingDocumentsCount: 0;
 
   validationMessages: string[];
@@ -119,11 +119,11 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
    * @private
    */
   private loadData() {
-    // TODO Update this API call to fetch the legal entity review application data, unless it uses the same endpoint as
-    // a PCL?
-    const sub = this.applicationDataService.getLegalEntityPermanentChangesToLicenseeData(this.applicationId).subscribe((data) => {
-      this.setFormData(data);
-    });
+    const sub = this.applicationDataService
+      .getLegalEntityPermanentChangesToLicenseeData(this.applicationId)
+      .subscribe((data) => {
+        this.setFormData(data);
+      });
 
     this.subscriptionList.push(sub);
   }

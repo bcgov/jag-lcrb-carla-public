@@ -81,8 +81,6 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
   payMethod: string;
   validationMessages: any[];
   showValidationMessages: boolean;
-  submittedApplications = 8;
-  tiedHouseFormData: TiedHouseConnection;
   possibleProblematicNameWarning = false;
   htmlContent = {} as ApplicationHTMLContent;
   readonly UPLOAD_FILES_MODE = UPLOAD_FILES_MODE;
@@ -149,10 +147,6 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
     });
 
     this.previousYear = (new Date().getFullYear() - 1).toString();
-
-    this.applicationDataService.getSubmittedApplicationCount()
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe(value => this.submittedApplications = value);
 
     this.establishmentWatchWordsService.initialize();
 
