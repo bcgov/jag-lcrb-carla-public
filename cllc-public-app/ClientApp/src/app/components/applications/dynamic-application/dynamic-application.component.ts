@@ -16,8 +16,6 @@ import { FormBase, CanadaPostalRegex, ApplicationHTMLContent } from "@shared/for
 import { DynamicsDataService } from "@services/dynamics-data.service";
 import { Account } from "@models/account.model";
 import { ApplicationTypeNames, FormControlState } from "@models/application-type.model";
-import { TiedHouseConnection } from "@models/tied-house-connection.model";
-import { TiedHouseConnectionsDataService } from "@services/tied-house-connections-data.service";
 import { EstablishmentWatchWordsService } from "@services/establishment-watch-words.service";
 import { KeyValue } from "@angular/common";
 import { FeatureFlagService } from "@services/feature-flag.service";
@@ -108,7 +106,6 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
     public featureFlagService: FeatureFlagService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private tiedHouseService: TiedHouseConnectionsDataService,
     public dialog: MatDialog,
     public establishmentWatchWordsService: EstablishmentWatchWordsService,
     private dynamicsFormDataService: DynamicsFormDataService

@@ -43,7 +43,6 @@ export class LegalEntityReviewNoticeLetterComponent implements OnInit {
       }
 
       data.forEach((file) => {
-        console.log(file.name)
         // This assumes that the name of the legal entity review notice letter is consistent/static.
         if (file.name === this.legalEntityReviewNoticeLetterName) {
           this.notices.push(file);

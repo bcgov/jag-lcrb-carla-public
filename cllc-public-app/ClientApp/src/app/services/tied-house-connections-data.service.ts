@@ -1,79 +1,108 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { TiedHouseConnection } from "@models/tied-house-connection.model";
-import { catchError } from "rxjs/operators";
-import { DataService } from "./data.service";
-import { Observable } from "rxjs";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { TiedHouseConnection } from '@models/tied-house-connection.model';
+import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { DataService } from './data.service';
 
 @Injectable()
 export class TiedHouseConnectionsDataService extends DataService {
-
   constructor(private http: HttpClient) {
     super();
   }
 
   /**
-   * Get all tied house connections for a user.
+   * Get all liquor tied house connections for a user.
    * - If `accountId` is provided, it filters results by that account.
    * - If `accountId` is not provided, it returns results for the current logged in user.
    *
    * @param {string} [accountId] An optional account ID to filter results by
    * @return {*}  {Observable<TiedHouseConnection[]>}
    */
-  GetAllTiedHouseConnectionsForUser(accountId?: string): Observable<TiedHouseConnection[]> {
-    const apiPath = `api/tiedhouseconnections/user/${accountId ?? ''}`;
+  GetAllLiquorTiedHouseConnectionsForUser(accountId?: string): Observable<TiedHouseConnection[]> {
+    const apiPath = `api/tiedhouseconnections/user/liquor/${accountId ?? ''}`;
     return this.http.get<TiedHouseConnection[]>(apiPath, { headers: this.headers }).pipe(catchError(this.handleError));
   }
 
   /**
-   * Get the count of existing tied house connections for a user.
+   * Get the cannabis Tied House Connection for a user.
+   * - If `accountId` is provided, it filters results by that account.
+   * - If `accountId` is not provided, it returns results for the current logged in user.
+   *
+   * @param {string} [accountId] An optional account ID to filter results by
+   * @return {*}  {Observable<TiedHouseConnection>}
+   */
+  GetCannabisTiedHouseConnectionForUser(accountId?: string): Observable<TiedHouseConnection> {
+    const apiPath = `api/tiedhouseconnections/user/cannabis/${accountId ?? ''}`;
+    return this.http.get<TiedHouseConnection>(apiPath, { headers: this.headers }).pipe(catchError(this.handleError));
+  }
+
+  /**
+   * Get the count of existing liquor tied house connections for a user.
    * - If `accountId` is provided, it filters results by that account.
    * - If `accountId` is not provided, it returns results for the current logged in user.
    *
    * @param {string} [accountId] An optional account ID to filter results by
    * @return {*}  {Observable<number>} The count of existing tied house connections.
    */
-  GetExistingTiedHouseConnectionsCountForUser(accountId?: string): Observable<number> {
-    const apiPath = `api/tiedhouseconnections/user/existing/count/${accountId ?? ''}`;
+  GetExistingLiquorTiedHouseConnectionsCountForUser(accountId?: string): Observable<number> {
+    const apiPath = `api/tiedhouseconnections/user/liquor/existing/count/${accountId ?? ''}`;
     return this.http.get<number>(apiPath, { headers: this.headers }).pipe(catchError(this.handleError));
   }
 
   /**
-   * Get all tied house connections for a specific application.
+   * Get all liquor tied house connections for a specific application.
    *
    * @param {string} applicationId
    * @return {*}  {Observable<TiedHouseConnection[]>}
    */
-  GetAllTiedHouseConnectionsForApplication(applicationId: string): Observable<TiedHouseConnection[]> {
-    const apiPath = `api/tiedhouseconnections/application/${applicationId ?? ''}`;
+  GetAllLiquorTiedHouseConnectionsForApplication(applicationId: string): Observable<TiedHouseConnection[]> {
+    const apiPath = `api/tiedhouseconnections/liquor/application/${applicationId ?? ''}`;
     return this.http.get<TiedHouseConnection[]>(apiPath, { headers: this.headers }).pipe(catchError(this.handleError));
   }
 
   /**
-   * Create a new legal entity in Dynamics
-   * @param data - legal entity data
+   * Create or Update a liquor tied house connection.
+   *
+   * @param {TiedHouseConnection} tiedHouseConnection
+   * @param {string} applicationId
+   * @return {*}
    */
-  createTiedHouse(data: any, applicationId: string) {
-    return this.http.post<TiedHouseConnection>(`api/tiedhouseconnections/application/${applicationId}`, data, { headers: this.headers })
+  createLiquorTiedHouseConnection(tiedHouseConnection: TiedHouseConnection, applicationId: string) {
+    return this.http
+      .post<TiedHouseConnection>(`api/tiedhouseconnections/liquor/application/${applicationId}`, tiedHouseConnection, {
+        headers: this.headers
+      })
       .pipe(catchError(this.handleError));
   }
 
   /**
-   * update a  legal entity in Dynamics
-   * @param data - legal entity data
+   * Create a new cannabis tied house connection.
+   *
+   * @param {TiedHouseConnection} tiedHouseConnection
+   * @param {string} accountId The ID of the account to associate with the tied house connection.
+   * @return {*}
    */
-  updateTiedHouse(data: any, id: string) {
-    return this.http.put<TiedHouseConnection>(`api/tiedhouseconnections/${id}`, data, { headers: this.headers })
+  createCannabisTiedHouseConnection(tiedHouseConnection: TiedHouseConnection, accountId: string) {
+    return this.http
+      .post<TiedHouseConnection>(`api/tiedhouseconnections/cannabis/${accountId}`, tiedHouseConnection, {
+        headers: this.headers
+      })
       .pipe(catchError(this.handleError));
   }
 
   /**
-   * delete a  legal entity in Dynamics
-   * @param data - legal entity data
+   * Update an existing cannabis tied house connection.
+   *
+   * @param {TiedHouseConnection} tiedHouseConnection
+   * @param {string} tiedHouseConnectionId The ID of the tied house connection to update.
+   * @return {*}
    */
-  deleteTiedHouse(id: string) {
-    return this.http.post<TiedHouseConnection>(`api/tiedhouseconnections/${id}/delete`, {}, { headers: this.headers })
+  updateCannabisTiedHouseConnection(tiedHouseConnection: TiedHouseConnection, tiedHouseConnectionId: string) {
+    return this.http
+      .post<TiedHouseConnection>(`api/tiedhouseconnections/cannabis/${tiedHouseConnectionId}`, tiedHouseConnection, {
+        headers: this.headers
+      })
       .pipe(catchError(this.handleError));
   }
-
 }

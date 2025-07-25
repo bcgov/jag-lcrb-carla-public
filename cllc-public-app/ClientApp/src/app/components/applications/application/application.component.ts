@@ -66,7 +66,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   @Input() skipPayment: boolean = false;
   @Output() saveComplete: EventEmitter<boolean> = new EventEmitter<boolean>();
   @ViewChild('mainForm') mainForm: FileUploaderComponent;
-  @ViewChild(ConnectionToNonMedicalStoresComponent) connectionsToProducers: ConnectionToNonMedicalStoresComponent;
+  @ViewChild(ConnectionToNonMedicalStoresComponent) connectionToNonMedicalStores: ConnectionToNonMedicalStoresComponent;
   @ViewChild(ProofOfZoningComponent) proofOfZoning: ProofOfZoningComponent;
   @ViewChild('lgAutoCompleteTrigger', { read: MatAutocompleteTrigger }) lgAutoComplete: MatAutocompleteTrigger;
   @ViewChild('pdAutoCompleteTrigger', { read: MatAutocompleteTrigger }) pdAutoComplete: MatAutocompleteTrigger;
@@ -887,7 +887,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   canDeactivate(): Observable<boolean> {
-    const connectionsDidntChang = !(this.connectionsToProducers && this.connectionsToProducers.formHasChanged());
+    const connectionsDidntChang = !(this.connectionToNonMedicalStores && this.connectionToNonMedicalStores.formHasChanged());
     const formDidntChange = JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value);
     if (connectionsDidntChang && formDidntChange) {
       return of(true);
@@ -1085,7 +1085,13 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
     let data = (<any>Object).assign(this.application.tiedHouse, _tiedHouseData);
     data = { ...data };
-    return this.tiedHouseService.updateTiedHouse(data, data.id);
+
+    if (this.application.tiedHouse.id) {
+      // If we have a primary id, update the existing connection
+      return this.tiedHouseService.updateCannabisTiedHouseConnection(data, data.id);
+    } else {
+      return this.tiedHouseService.createCannabisTiedHouseConnection(data, this.account.id);
+    }
   }
 
   updateApplicationInStore() {

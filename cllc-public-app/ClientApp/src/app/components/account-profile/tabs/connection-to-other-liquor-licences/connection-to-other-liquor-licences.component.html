@@ -1,3 +1,5 @@
+<div [ngBusy]="busy"></div>
+
 <section>
   <h3 class="blue-header">CONNECTIONS TO OTHER LIQUOR LICENCES</h3>
 
@@ -10,7 +12,7 @@
           in another B.C. liquor licence?
         </p>
         <mat-radio-group
-          formControlName="hasOwnershipOrControl"
+          formControlName="hasLiquorTiedHouseOwnershipOrControl"
           aria-labelledby="ownership-or-control-label"
           class="d-flex flex-column align-items-start">
           <mat-radio-button value="1">Yes</mat-radio-button>
@@ -25,7 +27,7 @@
           another liquor licence in B.C.?
         </p>
         <mat-radio-group
-          formControlName="hasThirdPartyAssociations"
+          formControlName="hasLiquorTiedHouseThirdPartyAssociations"
           aria-labelledby="third-party-associations-label"
           class="d-flex flex-column align-items-start">
           <mat-radio-button value="1">Yes</mat-radio-button>
@@ -40,7 +42,7 @@
           sibling, or child) have any amount of ownership, interest, or control in another B.C. liquor licence?
         </p>
         <mat-radio-group
-          formControlName="hasImmediateFamilyMemberInvolvement"
+          formControlName="hasLiquorTiedHouseFamilyMemberInvolvement"
           aria-labelledby="has-immediate-family-member-involvement-label"
           class="d-flex flex-column align-items-start">
           <mat-radio-button value="1">Yes</mat-radio-button>

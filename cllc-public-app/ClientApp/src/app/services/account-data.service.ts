@@ -9,7 +9,6 @@ import { TiedHouseConnection } from "@models/tied-house-connection.model";
 import { Store } from "@ngrx/store";
 import { AppState } from "@app/app-state/models/app-state";
 import { SetCurrentAccountAction } from "@app/app-state/actions/current-account.action";
-import { TiedHouseConnectionsDataService } from "@services/tied-house-connections-data.service";
 import { LegalEntityDataService } from "@services/legal-entity-data.service";
 import { FileSystemItem } from "@models/file-system-item.model";
 import { Contact } from "../models/contact.model";
@@ -20,7 +19,6 @@ export class AccountDataService extends DataService {
   apiPath = "api/accounts/";
 
   constructor(private http: HttpClient,
-    private tiedHouseService: TiedHouseConnectionsDataService,
     private legalEntityDataService: LegalEntityDataService,
     private store: Store<AppState>) {
     super();
@@ -69,11 +67,6 @@ export class AccountDataService extends DataService {
 
   updateAccount(accountModel: Account) {
     return this.http.put(this.apiPath + accountModel.id, accountModel, { headers: this.headers })
-      .pipe(catchError(this.handleError));
-  }
-
-  createTiedHouseConnection(tiedHouse: TiedHouseConnection, accountId: string) {
-    return this.http.post(this.apiPath + accountId + "/tiedhouseconnection", tiedHouse, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 

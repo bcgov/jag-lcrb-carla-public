@@ -3,7 +3,6 @@ import { KeyValue } from "@angular/common";
 import { Application } from "@models/application.model";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Observable, Subject, forkJoin, of } from "rxjs";
-import { TiedHouseConnection } from "@models/tied-house-connection.model";
 import { UPLOAD_FILES_MODE } from "@components/licences/licences.component";
 import { ApplicationTypeNames, FormControlState } from "@models/application-type.model";
 import { Store } from "@ngrx/store";

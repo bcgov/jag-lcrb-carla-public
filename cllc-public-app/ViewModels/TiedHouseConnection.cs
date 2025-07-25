@@ -54,8 +54,10 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public int? SocietyConnectionFederalProducer { get; set; } //adoxio_societyconnectionfederalproducer (PicklistType)
         public string SocietyConnectionFederalProducerDetails { get; set; } //adoxio_societyconnectionfederalproducerdetails (MemoType)
         public int? LiquorFinancialInterest { get; set; } 
-        public string LiquorFinancialInterestDetails { get; set; } 
+        public string LiquorFinancialInterestDetails { get; set; }
+        // TODO: Is this field still used? If not, remove it.
         public string TiedHouse { get; set; } //adoxio_TiedHouse (LookupType)
+        // TODO: Is this field still used? If not, remove it.
         public string TiedHouseName { get; set; } //adoxio_TiedHouseName (StringType)
         public string ApplicationId { get; set; }
 

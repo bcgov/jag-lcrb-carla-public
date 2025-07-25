@@ -1,11 +1,18 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Account } from '@models/account.model';
-import { Subscription } from 'rxjs';
+import { TiedHouseConnection } from '@models/tied-house-connection.model';
+import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
+import { GenericMessageDialogComponent } from '@shared/components/dialog/generic-message-dialog/generic-message-dialog.component';
+import { Subject, takeUntil } from 'rxjs';
+
+export type ConnectionToProducersFormData = TiedHouseConnection;
 
 /**
  * Component for managing connections to other cannabis producers.
+ * - A singleton tied house connection for connections to cannabis producers
  *
  * @export
  * @class ConnectionToProducersComponent
@@ -18,37 +25,41 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./connection-to-producers.component.scss']
 })
 export class ConnectionToProducersComponent implements OnInit, OnDestroy {
-  @Input()
-  account: Account;
-  @Input()
-  isMarketer: boolean;
-  @Input()
-  licensedProducerText = 'federally licensed producer';
-  @Input()
-  federalProducerText = 'federal producer';
-  @Input()
-  applicationTypeName: String;
-  @Input()
-  initialFormData: any;
-
+  @Input() account: Account;
+  @Input() applicationTypeName: String;
   /**
    * Emits the form data on change.
    */
-  @Output()
-  onFormChanges = new EventEmitter();
+  @Output() onFormChanges = new EventEmitter();
 
-  busy: Subscription;
-  subscriptions: Subscription[] = [];
-  savedFormData: any = {};
+  /**
+   * The initial tied house data to populate the tied house declarations component with.
+   */
+  initialTiedHouseConnection: TiedHouseConnection;
 
-  form: any;
+  form: FormGroup;
+
+  get busy(): boolean {
+    return !this.hasLoadedData;
+  }
+
+  hasLoadedData = false;
+
+  destroy$ = new Subject<void>();
 
   constructor(
     private fb: FormBuilder,
-    public snackBar: MatSnackBar
+    private tiedHouseService: TiedHouseConnectionsDataService,
+    public snackBar: MatSnackBar,
+    public matDialog: MatDialog
   ) {}
 
   ngOnInit() {
+    this.initForm();
+    this.loadFormData();
+  }
+
+  initForm() {
     this.form = this.fb.group({
       corpConnectionFederalProducer: [''],
       corpConnectionFederalProducerDetails: [''],
@@ -68,28 +79,36 @@ export class ConnectionToProducersComponent implements OnInit, OnDestroy {
       iNConnectionToFederalProducerDetails: ['']
     });
 
-    if (this.initialFormData) {
-      this.form.patchValue(this.initialFormData);
-    }
-
-    this.form.valueChanges.subscribe((value) => this.onFormChanges.emit(value));
+    this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe((value) => this.onFormChanges.emit(value));
   }
 
-  ngOnDestroy() {
-    this.subscriptions.forEach((sub) => sub.unsubscribe());
-  }
+  loadFormData() {
+    const cannabisTiedHouseConnectionForUserRequest$ = this.tiedHouseService.GetCannabisTiedHouseConnectionForUser(
+      this.account.id
+    );
 
-  /**
-   * Checks if the form data has changed from the initial data.
-   *
-   * @return {*}  {boolean} `true` if the form data has changed, `false` otherwise.
-   */
-  formHasChanged(): boolean {
-    if (JSON.stringify(this.initialFormData) !== JSON.stringify(this.form.value)) {
-      return true;
-    }
+    cannabisTiedHouseConnectionForUserRequest$.pipe(takeUntil(this.destroy$)).subscribe({
+      next: (cannabisTiedHouseDataForUser) => {
+        this.initialTiedHouseConnection = cannabisTiedHouseDataForUser;
 
-    return false;
+        if (this.initialTiedHouseConnection) {
+          this.form.patchValue(this.initialTiedHouseConnection);
+        }
+
+        this.hasLoadedData = true;
+      },
+      error: (error) => {
+        console.error('Error loading Cannabis Tied House data', error);
+        this.matDialog.open(GenericMessageDialogComponent, {
+          data: {
+            title: 'Error Loading Tied House Data',
+            message:
+              'Failed to load Tied House data. Please try again. If the problem persists, please contact support.',
+            closeButtonText: 'Close'
+          }
+        });
+      }
+    });
   }
 
   requiresWordingChange(name: String): boolean {
@@ -106,7 +125,8 @@ export class ConnectionToProducersComponent implements OnInit, OnDestroy {
     return false;
   }
 
-  isPRS(): boolean {
-    return this.applicationTypeName == 'Producer Retail Store';
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

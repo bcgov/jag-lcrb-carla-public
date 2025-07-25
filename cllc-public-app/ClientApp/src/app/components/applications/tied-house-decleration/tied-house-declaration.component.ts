@@ -75,8 +75,8 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
     // If an application ID is provided, fetch tied house connections for that application.
     // Otherwise, fetch tied house connections for the current user.
     const request$ = this.applicationId
-      ? this.tiedHouseService.GetAllTiedHouseConnectionsForApplication(this.applicationId)
-      : this.tiedHouseService.GetAllTiedHouseConnectionsForUser();
+      ? this.tiedHouseService.GetAllLiquorTiedHouseConnectionsForApplication(this.applicationId)
+      : this.tiedHouseService.GetAllLiquorTiedHouseConnectionsForUser();
 
     request$.subscribe({
       next: (data) => {
@@ -250,7 +250,7 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
         confirmButtonText: 'Yes, Cancel',
         cancelButtonText: 'No, Go Back',
         onConfirm: () => {
-          //if removing existing declaration mark as removed 
+          //if removing existing declaration mark as removed
           if (declaration.supersededById) {
             declaration.viewMode = TiedHouseViewMode.existing;
             declaration.markedForRemoval = true;
@@ -439,7 +439,7 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
 
   private save(declaration: TiedHouseConnection): Observable<[boolean, TiedHouseConnection]> {
     return this.tiedHouseService
-      .createTiedHouse(declaration, this.applicationId)
+      .createLiquorTiedHouseConnection(declaration, this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
       .pipe(
         catchError(() => {
