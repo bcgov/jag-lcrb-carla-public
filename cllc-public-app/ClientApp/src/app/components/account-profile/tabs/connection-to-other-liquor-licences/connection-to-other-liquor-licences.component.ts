@@ -7,7 +7,7 @@ import { TiedHouseConnection } from '@models/tied-house-connection.model';
 import { ApplicationDataService } from '@services/application-data.service';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
 import { GenericMessageDialogComponent } from '@shared/components/dialog/generic-message-dialog/generic-message-dialog.component';
-import { Subject, takeUntil } from 'rxjs';
+import { of, Subject, takeUntil } from 'rxjs';
 import { forkJoin } from 'rxjs/internal/observable/forkJoin';
 
 export type ConnectionToOtherLiquorLicencesFormData = ApplicationExtension;
@@ -93,9 +93,10 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnDestr
   }
 
   loadTiedHouseData() {
-    const tiedHouseConnectionsForApplicationIdRequest$ = this.tiedHouseService.GetAllLiquorTiedHouseConnectionsForApplication(
-      this.applicationId
-    );
+    const tiedHouseConnectionsForApplicationIdRequest$ = this.applicationId
+      ? this.tiedHouseService.GetAllLiquorTiedHouseConnectionsForApplication(this.applicationId)
+      : of([]);
+
     const tiedHouseConnectionsForUserRequest$ = this.tiedHouseService.GetAllLiquorTiedHouseConnectionsForUser();
     const applicationCountRequest$ = this.applicationDataService.getApprovedApplicationCount();
 
