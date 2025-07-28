@@ -95,6 +95,28 @@ export class ConnectionToProducersComponent implements OnInit, OnDestroy {
           this.form.patchValue(this.initialTiedHouseConnection);
         }
 
+        // Register change handlers to clear the details field when the corresponding checkbox field is unchecked
+        this.clearDetailsWhenCheckboxIsFalse('corpConnectionFederalProducer', 'corpConnectionFederalProducerDetails');
+        this.clearDetailsWhenCheckboxIsFalse(
+          'federalProducerConnectionToCorp',
+          'federalProducerConnectionToCorpDetails'
+        );
+        this.clearDetailsWhenCheckboxIsFalse('share20PlusConnectionProducer', 'share20PlusConnectionProducerDetails');
+        this.clearDetailsWhenCheckboxIsFalse(
+          'share20PlusFamilyConnectionProducer',
+          'share20PlusFamilyConnectionProducerDetail'
+        );
+        this.clearDetailsWhenCheckboxIsFalse(
+          'partnersConnectionFederalProducer',
+          'partnersConnectionFederalProducerDetails'
+        );
+        this.clearDetailsWhenCheckboxIsFalse(
+          'societyConnectionFederalProducer',
+          'societyConnectionFederalProducerDetails'
+        );
+        this.clearDetailsWhenCheckboxIsFalse('liquorFinancialInterest', 'liquorFinancialInterestDetails');
+        this.clearDetailsWhenCheckboxIsFalse('iNConnectionToFederalProducer', 'iNConnectionToFederalProducerDetails');
+
         this.hasLoadedData = true;
       },
       error: (error) => {
@@ -109,6 +131,23 @@ export class ConnectionToProducersComponent implements OnInit, OnDestroy {
         });
       }
     });
+  }
+
+  /**
+   * Change handler to clear the details field when the corresponding checkbox field is unchecked.
+   *
+   * @param {string} checkboxFormControlName
+   * @param {string} detailsFormControlName
+   */
+  clearDetailsWhenCheckboxIsFalse(checkboxFormControlName: string, detailsFormControlName: string) {
+    this.form
+      .get(checkboxFormControlName)
+      ?.valueChanges.pipe(takeUntil(this.destroy$))
+      .subscribe((value) => {
+        if (value === 0) {
+          this.form.get(detailsFormControlName)?.setValue('');
+        }
+      });
   }
 
   requiresWordingChange(name: String): boolean {

@@ -31,6 +31,12 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
    */
   @Input() applicationId?: string;
   /**
+   * Optional account ID used to fetch any existing tied house connections to initialize the component with.
+   *
+   * @type {string}
+   */
+  @Input() accountId?: string;
+  /**
    * Optional set of initial tied house connections data to initialize the component with.
    * If provided, no API call will be made to fetch the tied house connections.
    *
@@ -74,9 +80,23 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
   loadData() {
     // If an application ID is provided, fetch tied house connections for that application.
     // Otherwise, fetch tied house connections for the current user.
-    const request$ = this.applicationId
-      ? this.tiedHouseService.GetAllLiquorTiedHouseConnectionsForApplication(this.applicationId)
-      : this.tiedHouseService.GetAllLiquorTiedHouseConnectionsForUser();
+    let request$ = null;
+
+    if (this.applicationId) {
+      request$ = this.tiedHouseService.GetAllLiquorTiedHouseConnectionsForApplication(this.applicationId);
+    } else if (this.accountId) {
+      request$ = this.tiedHouseService.GetAllLiquorTiedHouseConnectionsForUser(this.accountId);
+    } else {
+      this.matDialog.open(GenericMessageDialogComponent, {
+        data: {
+          title: 'Error Loading Tied House Form Data',
+          message: 'No application ID or account ID provided to load Tied House data.',
+          closeButtonText: 'Close'
+        }
+      });
+
+      return;
+    }
 
     request$.subscribe({
       next: (data) => {
@@ -246,8 +266,8 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
       autoFocus: true,
       data: {
         title: 'Remove Tied House Connection',
-        message: `Are you sure you want to remove? Any unsaved changes will be lost.`,
-        confirmButtonText: 'Yes, Cancel',
+        message: `Are you sure you want to remove this tied house declaration?`,
+        confirmButtonText: 'Yes, Remove',
         cancelButtonText: 'No, Go Back',
         onConfirm: () => {
           //if removing existing declaration mark as removed
@@ -257,8 +277,8 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
             this.submitTiedHouseDeclarationChange(declaration);
           }
           //if declaration has not been saved to dynamics remove from declaration list
-          else if(!declaration.applicationId){
-            this.tiedHouseDeclarations = this.tiedHouseDeclarations.filter(th=> th != declaration);
+          else if (!declaration.applicationId) {
+            this.tiedHouseDeclarations = this.tiedHouseDeclarations.filter((th) => th != declaration);
             this.updateGroupedTiedHouseDeclarations();
           }
           //else declaration is not an existing declaration but has been saved to dynamics so hide and call api to remove declaration from dynamics
@@ -294,8 +314,8 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
       autoFocus: true,
       data: {
         title: 'Remove Tied House Connection',
-        message: `Are you sure you want to remove?`,
-        confirmButtonText: 'Yes, Cancel',
+        message: `Are you sure you want to remove this tied house declaration?`,
+        confirmButtonText: 'Yes, Remove',
         cancelButtonText: 'No, Go Back',
         onConfirm: () => {
           declaration.statusCode = TiedHouseStatusCode.new;
@@ -438,8 +458,24 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
   }
 
   private save(declaration: TiedHouseConnection): Observable<[boolean, TiedHouseConnection]> {
-    return this.tiedHouseService
-      .createLiquorTiedHouseConnection(declaration, this.applicationId)
+    let request$;
+    if (this.applicationId) {
+      request$ = this.tiedHouseService.createLiquorTiedHouseConnection(declaration, this.applicationId);
+    } else if (this.accountId) {
+      request$ = this.tiedHouseService.createLiquorTiedHouseConnectionForUser(declaration, this.accountId);
+    } else {
+      this.matDialog.open(GenericMessageDialogComponent, {
+        data: {
+          title: 'Error Saving Tied House Form Data',
+          message: 'No application ID or account ID provided to save Tied House data.',
+          closeButtonText: 'Close'
+        }
+      });
+
+      return;
+    }
+
+    return request$
       .pipe(takeWhile(() => this.componentActive))
       .pipe(
         catchError(() => {

@@ -15,8 +15,8 @@
           formControlName="hasLiquorTiedHouseOwnershipOrControl"
           aria-labelledby="ownership-or-control-label"
           class="d-flex flex-column align-items-start">
-          <mat-radio-button value="1">Yes</mat-radio-button>
-          <mat-radio-button value="0">No</mat-radio-button>
+          <mat-radio-button [value]="1">Yes</mat-radio-button>
+          <mat-radio-button [value]="0">No</mat-radio-button>
         </mat-radio-group>
       </section>
 
@@ -30,8 +30,8 @@
           formControlName="hasLiquorTiedHouseThirdPartyAssociations"
           aria-labelledby="third-party-associations-label"
           class="d-flex flex-column align-items-start">
-          <mat-radio-button value="1">Yes</mat-radio-button>
-          <mat-radio-button value="0">No</mat-radio-button>
+          <mat-radio-button [value]="1">Yes</mat-radio-button>
+          <mat-radio-button [value]="0">No</mat-radio-button>
         </mat-radio-group>
       </section>
 
@@ -45,8 +45,8 @@
           formControlName="hasLiquorTiedHouseFamilyMemberInvolvement"
           aria-labelledby="has-immediate-family-member-involvement-label"
           class="d-flex flex-column align-items-start">
-          <mat-radio-button value="1">Yes</mat-radio-button>
-          <mat-radio-button value="0">No</mat-radio-button>
+          <mat-radio-button [value]="1">Yes</mat-radio-button>
+          <mat-radio-button [value]="0">No</mat-radio-button>
         </mat-radio-group>
       </section>
     </div>
@@ -54,6 +54,7 @@
     <section *ngIf="showTiedHouseDeclarationSection">
       <app-tied-house-declaration
         [applicationId]="applicationId"
+        [accountId]="accountId"
         [initialTiedHouseConnections]="initialTiedHouseConnections"
         [isReadOnly]="isTiedHouseReadOnly"></app-tied-house-declaration>
     </section>

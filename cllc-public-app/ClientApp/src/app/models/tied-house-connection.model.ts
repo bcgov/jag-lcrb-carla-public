@@ -3,36 +3,55 @@ import { RelatedLicence } from './related-licence';
 export class TiedHouseConnection {
   id: string;
   accountid: string;
-  corpConnectionFederalProducer: string;
+
+  corpConnectionFederalProducer: number | null;
   corpConnectionFederalProducerDetails: string;
+
   familyMemberFederalProducer: string;
   familyMemberFederalProducerDetails: string;
-  federalProducerConnectionToCorp: string;
+
+  federalProducerConnectionToCorp: number | null;
   federalProducerConnectionToCorpDetails: string;
+
   isConnectionBoolean: Boolean;
+
   name: string;
   ownershipType: string;
-  partnersConnectionFederalProducer: string;
+
+  partnersConnectionFederalProducer: number | null;
   partnersConnectionFederalProducerDetails: string;
+
   percentageofOwnershipNumber: number;
-  share20PlusConnectionProducer: string;
+
+  share20PlusConnectionProducer: number | null;
   share20PlusConnectionProducerDetails: string;
-  share20PlusFamilyConnectionProducer: string;
+  share20PlusFamilyConnectionProducer: number | null;
   share20PlusFamilyConnectionProducerDetail: string;
   shareType: string;
-  societyConnectionFederalProducer: string;
+
+  societyConnectionFederalProducer: number | null;
   societyConnectionFederalProducerDetails: string;
-  tiedHouse: string;
-  tiedHouseName: string;
-  liquorFinancialInterest: number;
+
+  liquorFinancialInterest: number | null;
   liquorFinancialInterestDetails: string;
 
-  crsConnectionToMarketer: string;
+  crsConnectionToMarketer: number | null;
   crsConnectionToMarketerDetails: string;
-  marketerConnectionToCrs: string;
+
+  marketerConnectionToCrs: number | null;
   marketerConnectionToCrsDetails: string;
-  iNConnectionToFederalProducer: string;
+
+  iNConnectionToFederalProducer: number | null;
   iNConnectionToFederalProducerDetails: string;
+
+  /**
+   * TODO: tiedhouse - Deprecated?
+   */
+  tiedHouse: string;
+  /**
+   * TODO: tiedhouse - Deprecated?
+   */
+  tiedHouseName: string;
 
   applicationId: string;
   isLegalEntity: boolean = false;

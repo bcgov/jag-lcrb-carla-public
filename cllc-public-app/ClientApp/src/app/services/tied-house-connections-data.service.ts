@@ -77,6 +77,25 @@ export class TiedHouseConnectionsDataService extends DataService {
   }
 
   /**
+   * Create or Update a liquor tied house connection for a user (account).
+   *
+   * Business Rules - This endpoint should only be called if:
+   * - The user does not have any existing tied house connections of type `Liquor`.
+   * - The user does not have any approved applications, of any type.
+   *
+   * @param {TiedHouseConnection} tiedHouseConnection
+   * @param {string} accountId
+   * @return {*}
+   */
+  createLiquorTiedHouseConnectionForUser(tiedHouseConnection: TiedHouseConnection, accountId: string) {
+    return this.http
+      .post<TiedHouseConnection>(`api/tiedhouseconnections/liquor/user/${accountId}`, tiedHouseConnection, {
+        headers: this.headers
+      })
+      .pipe(catchError(this.handleError));
+  }
+
+  /**
    * Creates or updates a cannabis tied house connection.
    *
    * @param {TiedHouseConnection} tiedHouseConnection Optional tied house connection data used to create or update the

@@ -33,7 +33,7 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnDestr
    */
   @Input() account: Account;
   /**
-   * The application ID under which this component is being used.
+   * Optional application ID under which this component is being used.
    */
   @Input() applicationId?: string;
   /**
@@ -54,6 +54,10 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnDestr
   userHasAtLeastOneExistingTiedHouseConnection: boolean = false;
 
   form: FormGroup;
+
+  get accountId(): string | undefined {
+    return this.account?.id;
+  }
 
   get busy(): boolean {
     return !this.hasLoadedData;
@@ -138,16 +142,17 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnDestr
   get isTiedHouseReadOnly(): boolean {
     if (this.applicationId !== null && this.applicationId !== undefined) {
       // If an application ID is provided then the form is editable.
+      console.log('not readonly 1');
       return false;
     }
 
-    if (this.userHasAtLeastOneApprovedApplication || this.userHasAtLeastOneExistingTiedHouseConnection) {
-      // If no application ID is provided, but the user also has no existing applications or tied house connections then
-      // the form is editable.
+    if (!this.userHasAtLeastOneApprovedApplication && !this.userHasAtLeastOneExistingTiedHouseConnection) {
+      // If no application ID is provided, but the user also has no existing applications and no existing tied house
+      // connections then the form is editable.
       return false;
     }
 
-    // The form is not editable.
+    // The form is read-only (not editable).
     return true;
   }
 
@@ -164,8 +169,6 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnDestr
   /**
    * Indicates whether the tied house declaration section should be shown.
    *
-   * Show the section if any of the checkboxes are selected.
-   *
    * @readonly
    * @type {boolean}
    */
@@ -174,11 +177,19 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnDestr
       return false;
     }
 
-    return (
-      this.form.get('hasLiquorTiedHouseOwnershipOrControl').value === '1' ||
-      this.form.get('hasLiquorTiedHouseThirdPartyAssociations').value === '1' ||
-      this.form.get('hasLiquorTiedHouseFamilyMemberInvolvement').value === '1'
-    );
+    if (this.isTiedHouseReadOnly) {
+      return true;
+    }
+
+    if (
+      this.form.get('hasLiquorTiedHouseOwnershipOrControl').value === 1 ||
+      this.form.get('hasLiquorTiedHouseThirdPartyAssociations').value === 1 ||
+      this.form.get('hasLiquorTiedHouseFamilyMemberInvolvement').value === 1
+    ) {
+      return true;
+    }
+
+    return false;
   }
 
   /**
