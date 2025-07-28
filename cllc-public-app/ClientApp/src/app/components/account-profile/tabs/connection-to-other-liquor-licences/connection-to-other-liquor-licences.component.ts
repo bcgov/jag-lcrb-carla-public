@@ -182,7 +182,15 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnDestr
    * @type {boolean}
    */
   get showNoTiedHouseDeclarationsSection(): boolean {
-    return !this.initialTiedHouseConnections?.length && !this.showTiedHouseDeclarationSection;
+    if (this.showTiedHouseDeclarationSection && !this.isTiedHouseReadOnly) {
+      return false;
+    }
+
+    if (!this.initialTiedHouseConnections?.length) {
+      return true;
+    }
+
+    return false;
   }
 
   /**
