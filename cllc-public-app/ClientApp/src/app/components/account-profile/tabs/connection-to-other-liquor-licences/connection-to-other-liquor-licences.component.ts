@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angu
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Account } from '@models/account.model';
-import { ApplicationExtension } from '@models/application.model';
+import { Application, ApplicationExtension } from '@models/application.model';
 import { TiedHouseConnection } from '@models/tied-house-connection.model';
 import { ApplicationDataService } from '@services/application-data.service';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
@@ -33,9 +33,9 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnDestr
    */
   @Input() account: Account;
   /**
-   * Optional application ID under which this component is being used.
+   * Optional application under which this component is being used.
    */
-  @Input() applicationId?: string;
+  @Input() application?: Application;
   /**
    * The initial form data to populate the form with.
    */
@@ -43,7 +43,6 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnDestr
   /**
    * Emits the form data on change.
    */
-  @Input() readonly = false;
   @Output() onFormChanges = new EventEmitter<ConnectionToOtherLiquorLicencesFormData>();
 
   /**
@@ -58,6 +57,10 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnDestr
 
   get accountId(): string | undefined {
     return this.account?.id;
+  }
+
+  get applicationId(): string | undefined {
+    return this.application?.id;
   }
 
   get busy(): boolean {
@@ -79,9 +82,6 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnDestr
     this.initForm();
     this.loadFormData();
     this.loadTiedHouseData();
-    if (this.readonly) {
-      this.form.disable();
-    }
   }
 
   initForm() {
@@ -101,8 +101,8 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnDestr
   }
 
   loadTiedHouseData() {
-    const tiedHouseConnectionsForApplicationIdRequest$ = this.applicationId
-      ? this.tiedHouseService.GetAllLiquorTiedHouseConnectionsForApplication(this.applicationId)
+    const tiedHouseConnectionsForApplicationIdRequest$ = this.application?.id
+      ? this.tiedHouseService.GetAllLiquorTiedHouseConnectionsForApplication(this.application.id)
       : of([]);
 
     const tiedHouseConnectionsForUserRequest$ = this.tiedHouseService.GetAllLiquorTiedHouseConnectionsForUser();
@@ -138,39 +138,13 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnDestr
   }
 
   /**
-   * Whether the Tied House Connections form is read-only.
+   * Indicates whether the tied house questions section should be shown.
    *
    * @readonly
    * @type {boolean}
    */
-  get isTiedHouseReadOnly(): boolean {
-    if (this.readonly) {
-      return true;
-    }
-    if (this.applicationId !== null && this.applicationId !== undefined) {
-      // If an application ID is provided then the form is editable.
-      console.log('not readonly 1');
-      return false;
-    }
-
-    if (!this.userHasAtLeastOneApprovedApplication && !this.userHasAtLeastOneExistingTiedHouseConnection) {
-      // If no application ID is provided, but the user also has no existing applications and no existing tied house
-      // connections then the form is editable.
-      return false;
-    }
-
-    // The form is read-only (not editable).
-    return true;
-  }
-
-  /**
-   * Whether there are any initial tied house connections.
-   *
-   * @readonly
-   * @type {boolean}
-   */
-  get hasInitialTiedHouseConnections(): boolean {
-    return this.initialTiedHouseConnections?.length > 0;
+  get showTiedHouseQuestionsSection(): boolean {
+    return !this.isTiedHouseReadOnly;
   }
 
   /**
@@ -180,12 +154,13 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnDestr
    * @type {boolean}
    */
   get showTiedHouseDeclarationSection(): boolean {
-    if (!this.form) {
-      return false;
+    if (this.isTiedHouseReadOnly) {
+      // Always show the section if the form is read-only.
+      return true;
     }
 
-    if (this.isTiedHouseReadOnly) {
-      return true;
+    if (!this.form) {
+      return false;
     }
 
     if (
@@ -193,6 +168,77 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnDestr
       this.form.get('hasLiquorTiedHouseThirdPartyAssociations').value === 1 ||
       this.form.get('hasLiquorTiedHouseFamilyMemberInvolvement').value === 1
     ) {
+      // Show the section if any of the tied house questions are answered with 'Yes'.
+      return true;
+    }
+
+    return false;
+  }
+
+  /**
+   * Indicates whether the "No Tied House Declarations" section should be shown.
+   *
+   * @readonly
+   * @type {boolean}
+   */
+  get showNoTiedHouseDeclarationsSection(): boolean {
+    return !this.initialTiedHouseConnections?.length && !this.showTiedHouseDeclarationSection;
+  }
+
+  /**
+   * Whether the Tied House Connections form is read-only.
+   *
+   * @readonly
+   * @type {boolean}
+   */
+  get isTiedHouseReadOnly(): boolean {
+    if (this.application) {
+      // If an application is provided, then the form is editable if the application is of a certain type.
+      return !this.isTiedHouseConnectionsEditableForApplication;
+    }
+
+    if (!this.userHasAtLeastOneApprovedApplication && !this.userHasAtLeastOneExistingTiedHouseConnection) {
+      // If no application is provided, but the user also has no existing applications and no existing tied house
+      // connections, then the form is editable.
+      return false;
+    }
+
+    return true;
+  }
+
+  /**
+   * Checks if the tied house declarations are editable based on the type of application.
+   *
+   * @readonly
+   * @type {boolean}
+   */
+  get isTiedHouseConnectionsEditableForApplication(): boolean {
+    if (!this.application) {
+      return false;
+    }
+
+    if (
+      [
+        'Agent',
+        'Catering',
+        'Food Primary',
+        'Manufacturer',
+        'Liquor Primary',
+        'Liquor Primary Club',
+        'UBrew and UVin',
+        'Rural Licensee Retail Store'
+      ].includes(this.application.licenseType)
+    ) {
+      // If the application is for a licence of a certain type, then the form is editable.
+      return true;
+    }
+
+    if (
+      ['Third Party Operator', 'Liquor Licence Renewal', 'Liquor Licence Transfer'].includes(
+        this.application.applicationType.name
+      )
+    ) {
+      // If the application is of a certain type, then the form is editable.
       return true;
     }
 
