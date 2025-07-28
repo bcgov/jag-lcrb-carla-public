@@ -379,7 +379,6 @@ const routes: Routes = [
     data: { feature: "PermanentChangesToLicensee" }
   },
   // Legal Entity Review
-  // TODO: Finalize these routes
   {
     path: "legal-entity-review",
     component: LegalEntityReviewComponent,
@@ -393,7 +392,6 @@ const routes: Routes = [
     data: { feature: "LegalEntityReview" }
   },
   // Legal Entity Review Permanent Change to a Licensee
-  // TODO: Finalize these routes
   {
     path: "legal-entity-review-permanent-change-to-a-licensee",
     component: LegalEntityReviewPermanentChangeToALicenseeComponent,

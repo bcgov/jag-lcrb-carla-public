@@ -223,6 +223,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(result);
         }
 
+        /// <summary>
+        /// Creates a new liquor tied house connection for an application.
+        /// </summary>
+        /// <param name="tiedHouseConnection"></param>
+        /// <param name="applicationId"></param>
+        /// <returns></returns>
         [HttpPost("liquor/application/{applicationId}")]
         public async Task<IActionResult> AddLiquorTiedHouseConnectionToApplication(
             [FromBody] ViewModels.TiedHouseConnection tiedHouseConnection,
@@ -234,7 +240,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             adoxioTiedHouseConnection.CopyValues(tiedHouseConnection);
 
+            // Ensure the tied house connection is of type (category) "Liquor"
             adoxioTiedHouseConnection.AdoxioCategoryType = (int)TiedHouseCategoryType.Liquor;
+
             try
             {
                 if (tiedHouseConnection.ApplicationId == applicationId)
@@ -251,7 +259,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             adoxioTiedHouseConnection.AdoxioTiedhouseconnectionid,
                             adoxioTiedHouseConnection
                         );
-                        await RemoveAndAddAssociateLicenses(
+
+                        await _tiedHouseConnectionsRepository.RemoveAndAddAssociateLicenses(
                             tiedHouseConnection.AssociatedLiquorLicense.Select(x => x.Id).ToList(),
                             adoxioTiedHouseConnection.AdoxioTiedhouseconnectionid
                         );
@@ -268,11 +277,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                     adoxioTiedHouseConnection.AdoxioTiedhouseconnectionid = null;
 
-                    var response = await _dynamicsClient.Tiedhouseconnections.CreateAsync(adoxioTiedHouseConnection);
+                    var createdCannabisTiedHouseConnectionRecord =
+                        await _dynamicsClient.Tiedhouseconnections.CreateAsync(adoxioTiedHouseConnection);
 
-                    await AssociateLicenses(
+                    await _tiedHouseConnectionsRepository.AssociateTiedHouseConnectionToLicenses(
                         tiedHouseConnection.AssociatedLiquorLicense.Select(x => x.Id).ToList(),
-                        response.AdoxioTiedhouseconnectionid
+                        createdCannabisTiedHouseConnectionRecord.AdoxioTiedhouseconnectionid
                     );
                 }
             }
@@ -287,6 +297,74 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 _logger.LogError(exception, "Error adding tied house connections");
                 throw new Exception("Unable to add tied house connection");
+            }
+
+            return new JsonResult(adoxioTiedHouseConnection);
+        }
+
+        /// <summary>
+        /// Creates new liquor tied house connections for a user.
+        /// </summary>
+        /// <remarks>
+        /// Business Rules - This endpoint should only be called if:
+        /// <br/>
+        /// <list type="bullet">
+        ///   <item><description>The user does not have any existing tied house connections of type <c>Liquor</c>.</description></item>
+        ///   <item><description>The user does not have any approved applications, of any type.</description></item>
+        /// </list>
+        /// </remarks>
+        /// <param name="tiedHouseConnection">The tied house connection data to create.</param>
+        /// <param name="accountId">The ID of the user's account.</param>
+        /// <returns>The created tied house connection.</returns>
+        [HttpPost("liquor/user/{accountId}")]
+        public async Task<IActionResult> AddLiquorTiedHouseConnectionToUser(
+            [FromBody] TiedHouseConnection tiedHouseConnection,
+            string accountId
+        )
+        {
+            MicrosoftDynamicsCRMadoxioTiedhouseconnection adoxioTiedHouseConnection =
+                new MicrosoftDynamicsCRMadoxioTiedhouseconnection();
+
+            adoxioTiedHouseConnection.CopyValues(tiedHouseConnection);
+
+            // Ensure this is a new tied house connection
+            adoxioTiedHouseConnection.AdoxioTiedhouseconnectionid = null;
+
+            // Tied house connections created directly against the user account are automatically set to "Existing"
+            adoxioTiedHouseConnection.Statuscode = (int)TiedHouseStatusCode.Existing;
+
+            // Ensure the tied house connection is of type (category) "Liquor"
+            adoxioTiedHouseConnection.AdoxioCategoryType = (int)TiedHouseCategoryType.Liquor;
+
+            try
+            {
+                var createdCannabisTiedHouseConnectionRecord = await _dynamicsClient.Tiedhouseconnections.CreateAsync(
+                    adoxioTiedHouseConnection
+                );
+
+                // Associate the new tied house connection with the account
+                await _tiedHouseConnectionsRepository.AssociateTiedHouseConnectionToUserAccount(
+                    createdCannabisTiedHouseConnectionRecord.AdoxioTiedhouseconnectionid,
+                    accountId
+                );
+
+                // Associate the new tied house connection with the provided licenses
+                await _tiedHouseConnectionsRepository.AssociateTiedHouseConnectionToLicenses(
+                    tiedHouseConnection.AssociatedLiquorLicense.Select(item => item.Id).ToList(),
+                    createdCannabisTiedHouseConnectionRecord.AdoxioTiedhouseconnectionid
+                );
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Error adding tied house connections for user");
+                _logger.LogDebug($"Request: {JsonConvert.SerializeObject(httpOperationException.Request)}");
+                _logger.LogDebug($"Response: {JsonConvert.SerializeObject(httpOperationException.Response)}");
+                throw new Exception("Failed to add tied house connection for user");
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(exception, "Error adding tied house connections for user");
+                throw new Exception("Failed to add tied house connection");
             }
 
             return new JsonResult(adoxioTiedHouseConnection);
@@ -369,57 +447,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 _logger.LogError(exception, "Error updating cannabis tied house connection");
                 throw new Exception("Failed to update cannabis tied house connection");
-            }
-        }
-
-        private async Task RemoveAndAddAssociateLicenses(List<string> licenses, string tiedHouseId)
-        {
-            var result = new List<ViewModels.TiedHouseConnection>();
-            IEnumerable<MicrosoftDynamicsCRMadoxioTiedhouseconnection> tiedHouseConnections = null;
-            string filter = "adoxio_tiedhouseconnectionid eq " + tiedHouseId;
-            var expand = new List<string> { "adoxio_adoxio_tiedhouseconnection_adoxio_licence" };
-            var select = new List<string>() { "adoxio_adoxio_tiedhouseconnection_adoxio_licence" };
-            var tiedHouseConnection = _dynamicsClient
-                .Tiedhouseconnections.Get(filter: filter, select: select, expand: expand)
-                .Value.FirstOrDefault();
-
-            var licencesIds = tiedHouseConnection.Adoxio_Adoxio_TiedHouseConnection_Adoxio_Licence.Select(l =>
-                l.AdoxioLicencesid
-            );
-            var hasLicencesBeenUpdated = !licencesIds.OrderBy(x => x).SequenceEqual(licenses.OrderBy(x => x));
-            if (hasLicencesBeenUpdated)
-            {
-                foreach (var id in licencesIds)
-                {
-                    _dynamicsClient
-                        .Tiedhouseconnections.DeleteReferenceWithHttpMessagesAsync(
-                            tiedHouseId,
-                            "adoxio_adoxio_tiedhouseconnection_adoxio_licence",
-                            id
-                        )
-                        .GetAwaiter()
-                        .GetResult();
-                }
-                ;
-
-                await AssociateLicenses(licenses, tiedHouseId);
-            }
-        }
-
-        private async Task AssociateLicenses(List<string> licenses, string tiedHouseId)
-        {
-            foreach (var licenceId in licenses)
-            {
-                var odataId = new Odataid
-                {
-                    OdataidProperty = _dynamicsClient.GetEntityURI("adoxio_licenceses", licenceId)
-                };
-
-                await _dynamicsClient.Tiedhouseconnections.AddReferenceWithHttpMessagesAsync(
-                    tiedHouseId,
-                    "adoxio_adoxio_tiedhouseconnection_adoxio_licence",
-                    odataid: odataId
-                );
             }
         }
     }
