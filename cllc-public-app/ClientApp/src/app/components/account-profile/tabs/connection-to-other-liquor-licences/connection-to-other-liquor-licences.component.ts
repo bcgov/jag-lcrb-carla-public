@@ -176,24 +176,6 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnDestr
   }
 
   /**
-   * Indicates whether the "No Tied House Declarations" section should be shown.
-   *
-   * @readonly
-   * @type {boolean}
-   */
-  get showNoTiedHouseDeclarationsSection(): boolean {
-    if (this.showTiedHouseDeclarationSection && !this.isTiedHouseReadOnly) {
-      return false;
-    }
-
-    if (!this.initialTiedHouseConnections?.length) {
-      return true;
-    }
-
-    return false;
-  }
-
-  /**
    * Whether the Tied House Connections form is read-only.
    *
    * @readonly
