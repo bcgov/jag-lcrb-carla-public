@@ -43,6 +43,7 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnDestr
   /**
    * Emits the form data on change.
    */
+  @Input() readonly = false;
   @Output() onFormChanges = new EventEmitter<ConnectionToOtherLiquorLicencesFormData>();
 
   /**
@@ -78,6 +79,9 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnDestr
     this.initForm();
     this.loadFormData();
     this.loadTiedHouseData();
+    if (this.readonly) {
+      this.form.disable();
+    }
   }
 
   initForm() {
@@ -140,6 +144,9 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnDestr
    * @type {boolean}
    */
   get isTiedHouseReadOnly(): boolean {
+    if (this.readonly) {
+      return true;
+    }
     if (this.applicationId !== null && this.applicationId !== undefined) {
       // If an application ID is provided then the form is editable.
       console.log('not readonly 1');
