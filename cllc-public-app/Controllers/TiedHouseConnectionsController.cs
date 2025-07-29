@@ -235,8 +235,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string applicationId
         )
         {
-            tiedHouseConnection.DeclarationDate = DateTimeOffset.Now;
-            tiedHouseConnection.SelfDeclared = 1;
             MicrosoftDynamicsCRMadoxioTiedhouseconnection adoxioTiedHouseConnection =
                 new MicrosoftDynamicsCRMadoxioTiedhouseconnection();
 
@@ -276,8 +274,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             $"/adoxio_tiedhouseconnections({tiedHouseConnection.id})";
                     }
                     adoxioTiedHouseConnection.ApplicationOdataBind = $"/adoxio_applications({applicationId})";
-
                     adoxioTiedHouseConnection.AdoxioTiedhouseconnectionid = null;
+                    adoxioTiedHouseConnection.AdoxioDeclarationDate = DateTimeOffset.Now;
+                    adoxioTiedHouseConnection.AdoxioSelfDeclared = 1;
 
                     var createdCannabisTiedHouseConnectionRecord =
                         await _dynamicsClient.Tiedhouseconnections.CreateAsync(adoxioTiedHouseConnection);
@@ -286,6 +285,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         tiedHouseConnection.AssociatedLiquorLicense.Select(x => x.Id).ToList(),
                         createdCannabisTiedHouseConnectionRecord.AdoxioTiedhouseconnectionid
                     );
+                    //Updates adoxioTiedHouseConnection with generated guids to return to portal
+                    adoxioTiedHouseConnection = createdCannabisTiedHouseConnectionRecord;
                 }
             }
             catch (HttpOperationException httpOperationException)
@@ -301,7 +302,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw new Exception("Unable to add tied house connection");
             }
 
-            return new JsonResult(adoxioTiedHouseConnection);
+            return new JsonResult(adoxioTiedHouseConnection.ToViewModel());
         }
 
         /// <summary>
