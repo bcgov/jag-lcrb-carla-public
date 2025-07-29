@@ -538,7 +538,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
     // Save the cannabis tied house connection form data
     if (this.connectionToProducersFormData) {
       if (this.connectionToProducersFormData.id) {
-        // If we have a primary id, update the existing connection
+        // If we have a primary id, update the existing cannabis tied house connection
         saves.push(
           this.tiedHouseService.updateCannabisTiedHouseConnection(
             this.connectionToProducersFormData,
@@ -546,6 +546,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
           )
         );
       } else {
+        // Create a new cannabis tied house connection
         saves.push(
           this.tiedHouseService.upsertCannabisTiedHouseConnection(this.connectionToProducersFormData, this.account.id)
         );
@@ -553,13 +554,18 @@ export class AccountProfileComponent extends FormBase implements OnInit {
     }
 
     // Save the connection to other liquor licences form data
-    if (this.applicationId) {
+    if (this.connectionToOtherLiquorLicencesFormData) {
       // Only persist the connection to other liquor licences form data if this component is being used in the context
       // of an application.
-      if (this.connectionToOtherLiquorLicencesFormData) {
+      if (this.applicationId) {
+        const updatedApplicationExtensionData = {
+          ...this.application.applicationExtension,
+          ...this.connectionToOtherLiquorLicencesFormData
+        };
+
         const updatedApplicationData: Application = {
           ...this.application,
-          applicationExtension: this.connectionToOtherLiquorLicencesFormData
+          applicationExtension: updatedApplicationExtensionData
         };
 
         saves.push(this.applicationDataService.updateApplication(updatedApplicationData));
@@ -678,29 +684,5 @@ export class AccountProfileComponent extends FormBase implements OnInit {
 
     // One or more account URLs are specified, ORV is disabled.
     return false;
-  }
-
-  /**
-   * Determines if the "Connections to Other Liquor Licences" section should be shown.
-   *
-   * @readonly
-   * @return {*}  {boolean}
-   */
-  get isConnectionsToOtherLiquorLicencesSectionEditable(): boolean {
-    if (!this.applicationId) {
-      // Not in the context of an application, always show the section.
-      return true;
-    }
-
-    // In the context of an application, show the section only for specific application types.
-    // TODO: tiedhouse - Confirm this list. Is there no better way to this, without relying on a hardcoded list?
-    return [
-      'Cannabis Retail Store',
-      'Liquor Primary',
-      'Liquor Licence Renewal',
-      'Liquor Licence Transfer',
-      'Permanent Change to a Licensee',
-      'Legal Entity Review'
-    ].includes(this.application?.licenseType);
   }
 }
