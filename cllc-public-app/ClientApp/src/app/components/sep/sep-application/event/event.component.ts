@@ -1,20 +1,17 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { FormGroup, FormBuilder, FormArray, Validators, ValidatorFn, AbstractControl, ValidationErrors } from "@angular/forms";
+import { AbstractControl, FormArray, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router } from "@angular/router";
 import { faMapMarkerAlt, faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
-import { SepApplication } from "@models/sep-application.model";
-import { IndexedDBService } from "@services/indexed-db.service";
-import { CanadaPostalRegex, FormBase } from "@shared/form-base";
 import { Account } from "@models/account.model";
+import { SepApplication } from "@models/sep-application.model";
 import { SepLocation } from "@models/sep-location.model";
 import { SepSchedule, TIME_SLOTS } from "@models/sep-schedule.model";
 import { SepServiceArea } from "@models/sep-service-area.model";
+import { IndexedDBService } from "@services/indexed-db.service";
 import { AutoCompleteItem, SpecialEventsDataService } from "@services/special-events-data.service";
-import { filter, tap, switchMap, takeUntil, takeWhile, distinct } from "rxjs/operators";
-import { MatSnackBar } from "@angular/material/snack-bar";
-import { timeMasks } from "ngx-mask";
-import { differenceInCalendarDays } from "date-fns";
-import { differenceInCalendarYears } from "date-fns/esm";
+import { CanadaPostalRegex, FormBase } from "@shared/form-base";
+import { debounceTime, distinct, filter, switchMap, tap } from "rxjs/operators";
 
 @Component({
   selector: "app-event",
@@ -50,15 +47,23 @@ export class EventComponent extends FormBase implements OnInit {
         this.sepApplication = app;
         if (this.form) {
           this.setFormValue(this.sepApplication);
-        if (this.disableForm) {
-          this.form.disable();
+          if (this.disableForm) {
+            this.form.disable();
+          }
         }
-      }
-    });
+      });
   }
 
   get cities(): AutoCompleteItem[] {
-    return [...this.autocompleteCities, ...this.previewCities];
+    const raw = this.form?.get("sepCity")?.value;
+    const isTyping =
+      typeof raw === "string" && raw.trim().length >= 3;
+
+    // • Empty / <3 chars → show preview list only
+    // • Typing 3+ chars  → show live matches only
+    return isTyping
+      ? this.autocompleteCities
+      : this.previewCities;
   }
 
   get locations(): FormArray {
@@ -80,7 +85,7 @@ export class EventComponent extends FormBase implements OnInit {
   }
 
   get disableForm(): boolean {
-    if(this.sepApplication){
+    if (this.sepApplication) {
       return this.sepApplication?.eventStatus && this.sepApplication?.eventStatus !== "Draft";
     }
     return false;
@@ -107,21 +112,22 @@ export class EventComponent extends FormBase implements OnInit {
 
     this.form.get("sepCity").valueChanges
       .pipe(filter(value => value && value.length >= 3),
+        debounceTime(300),    // Add debounce to reduce API calls
         tap(_ => {
           this.autocompleteCities = [];
           this.sepCityRequestInProgress = true;
         }),
         switchMap(value => this.specialEventsDataService.getSepCityAutocompleteData(value, false))
-        )
-        .subscribe(data => {
-          this.autocompleteCities = data;
-          this.sepCityRequestInProgress = false;
+      )
+      .subscribe(data => {
+        this.autocompleteCities = data;
+        this.sepCityRequestInProgress = false;
 
-          this.cd.detectChanges();
-          if (data && data.length === 0) {
-            this.snackBar.open("No match found", "", { duration: 2500, panelClass: ["green-snackbar"] });
-          }
-        });
+        this.cd.detectChanges();
+        if (data && data.length === 0) {
+          this.snackBar.open("No match found", "", { duration: 2500, panelClass: ["green-snackbar"] });
+        }
+      });
   }
   checkTimeZone() {
     this.isPacificTimeZone = !this.isPacificTimeZone;
@@ -141,7 +147,7 @@ export class EventComponent extends FormBase implements OnInit {
     // if we've got any event locations loaded
     if (app?.eventLocations?.length > 0) {
       app.eventLocations.forEach(loc => {
-        loc.eventDates = loc.eventDates || [];        
+        loc.eventDates = loc.eventDates || [];
         loc.serviceAreas = loc.serviceAreas || [];
         this.addLocation(loc);
       });
@@ -166,12 +172,12 @@ export class EventComponent extends FormBase implements OnInit {
     if (location) {
       result = this.locations.at(locationIndex)
         .get("eventDates") as FormArray;
-      
+
       // Initialize isOpen array for this location if not already tracked
-      if(!this.isOpen[locationIndex]) {
+      if (!this.isOpen[locationIndex]) {
         let isOpen: boolean[] = []
-        for(let i = 0; i < result.controls.length; i++) {
-          if(i == result.controls.length - 1) {
+        for (let i = 0; i < result.controls.length; i++) {
+          if (i == result.controls.length - 1) {
             isOpen.push(true);
           } else {
             isOpen.push(false);
@@ -198,7 +204,7 @@ export class EventComponent extends FormBase implements OnInit {
       eventLocationPostalCode: ["", [Validators.required, Validators.pattern(CanadaPostalRegex)]],
       serviceAreas: this.fb.array([]),    // form array of service areas
       eventDates: this.fb.array([]),      // form array of event dates
-      
+
     });
 
     // patch the values in
@@ -281,14 +287,14 @@ export class EventComponent extends FormBase implements OnInit {
 
     // Set default to event start date
     if (!val.eventDate) {
-      val.eventDate = this?.sepApplication?.eventStartDate;     
+      val.eventDate = this?.sepApplication?.eventStartDate;
     }
     datesForm.patchValue(val);
     return datesForm;
   }
 
   getIsOpen(locationIndex: number, eventIndex: number): boolean {
-    if(this.isOpen[locationIndex] === undefined) {
+    if (this.isOpen[locationIndex] === undefined) {
       return true;
     }
 
@@ -296,7 +302,7 @@ export class EventComponent extends FormBase implements OnInit {
   }
 
   setIsOpen(locationIndex: number, eventIndex: number, isOpen: boolean) {
-    if(this.isOpen[locationIndex] === undefined) {
+    if (this.isOpen[locationIndex] === undefined) {
       this.isOpen[locationIndex] = [];
     }
 
@@ -385,8 +391,8 @@ export class EventComponent extends FormBase implements OnInit {
     const globalEventStart = new Date(this.sepApplication.eventStartDate);
 
     const eventStart = new Date(dateForm.get("eventDate").value);
-    
-    // the maximum date starts off as a year from now.    
+
+    // the maximum date starts off as a year from now.
     var maxDate = new Date();
     maxDate.setFullYear(maxDate.getFullYear() + 1);
 
@@ -394,51 +400,47 @@ export class EventComponent extends FormBase implements OnInit {
 
     // loop through the event locations and determine the earliest starting date.
 
-    this.form.value.eventLocations.forEach(location => {      
+    this.form.value.eventLocations.forEach(location => {
       location?.eventDates.forEach(sched => {
-        var locationStart  = new Date(sched.eventDate);        
+        var locationStart = new Date(sched.eventDate);
         locationStart.setDate(locationStart.getDate() + 6);
         var tempStart = new Date(this.sepApplication.eventStartDate);;
         tempStart.setDate(tempStart.getDate() + 6);
 
-        if (locationStart > globalEventStart && locationStart < maxDate)
-        {          
+        if (locationStart > globalEventStart && locationStart < maxDate) {
           maxDate = locationStart;
           noMaxDateFound = false;
-        }              
-      });      
+        }
+      });
     });
 
-    if (eventStart < globalEventStart ) 
+    if (eventStart < globalEventStart)
       error += "The location event date cannot start before the special event start date. ";
 
-    if (eventStart > maxDate && noMaxDateFound === true)
-    {
+    if (eventStart > maxDate && noMaxDateFound === true) {
       error += "You cannot have a location start date that is more than a year from today. ";
     }
-    else if (eventStart > maxDate)
-    {
-      error += "You cannot have a event start date that is more than six days from the earliest start date for the event. "; 
+    else if (eventStart > maxDate) {
+      error += "You cannot have a event start date that is more than six days from the earliest start date for the event. ";
     }
-    
+
     if (eventFromIndex >= eventToIndex) {
       error += "The event should end after the start time, not before. ";
-    } 
-    
+    }
+
     if (serviceFromIndex > serviceFromIndex) {
       error += "The liquor service should end after the start time, not before. ";
-    } 
-    
+    }
+
     if (eventToIndex <= serviceToIndex) {
       error += "Liquor service  must end at least 30 minutes prior to the end of the specified event time. ";
-    } 
-    
+    }
+
     if (eventFromIndex > serviceFromIndex) {
       error += "Liquor service must not start earlier than the event."
     }
 
-    if (error === "")
-    {
+    if (error === "") {
       error = null;
     }
 
