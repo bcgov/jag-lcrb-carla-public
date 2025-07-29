@@ -237,16 +237,22 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
     updated.viewMode = TiedHouseViewMode.disabled;
     Object.assign(original, updated);
 
-    this.submitTiedHouseDeclarationChange(updated);
-    this.updateGroupedTiedHouseDeclarations();
-
-    this.openPanel(groupIndex);
+    this.submitTiedHouseDeclarationChange(original, updated, groupIndex);
   }
 
-  submitTiedHouseDeclarationChange(declaration: TiedHouseConnection) {
+  submitTiedHouseDeclarationChange(declaration: TiedHouseConnection,x?: TiedHouseConnection, groupIndex?: number) {
     this.save(declaration)
       .pipe(takeWhile(() => this.componentActive))
-      .subscribe(([saveSucceeded]) => {
+      .subscribe(([saveSucceeded, result]) => {
+        if (saveSucceeded) {
+          //update connection with generated guids
+          declaration.accountid = result.accountid;
+          declaration.id = result.id;
+          declaration.applicationId = result.applicationId;
+          
+          this.updateGroupedTiedHouseDeclarations();
+          this.openPanel(groupIndex);
+        }
         if (!saveSucceeded) {
           this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
         }
@@ -261,40 +267,42 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
    * @param {number} accordionIndex
    */
   removeNewTiedHouseDeclaration(declaration: TiedHouseConnection, keepAccordionOpen: boolean, accordionIndex: number) {
-    this.matDialog.open(GenericConfirmationDialogComponent, {
-      disableClose: true,
-      autoFocus: true,
-      data: {
-        title: 'Remove Tied House Connection',
-        message: `Are you sure you want to remove this tied house declaration?`,
-        confirmButtonText: 'Yes, Remove',
-        cancelButtonText: 'No, Go Back',
-        onConfirm: () => {
-          //if removing existing declaration mark as removed
-          if (declaration.supersededById) {
-            declaration.viewMode = TiedHouseViewMode.existing;
-            declaration.markedForRemoval = true;
-            this.submitTiedHouseDeclarationChange(declaration);
-          }
-          //if declaration has not been saved to dynamics remove from declaration list
-          else if (!declaration.applicationId) {
-            this.tiedHouseDeclarations = this.tiedHouseDeclarations.filter((th) => th != declaration);
-            this.updateGroupedTiedHouseDeclarations();
-          }
-          //else declaration is not an existing declaration but has been saved to dynamics so hide and call api to remove declaration from dynamics
-          else {
-            declaration.viewMode = TiedHouseViewMode.hidden;
-            declaration.markedForRemoval = true;
-            this.submitTiedHouseDeclarationChange(declaration);
-            this.updateGroupedTiedHouseDeclarations();
-          }
+    var isExistingDeclaration = declaration.supersededById;
+    //if declaration has not been saved to dynamics remove from declaration list
+    if (!declaration.id) {
+      console.log(JSON.stringify(declaration));
+      this.tiedHouseDeclarations = this.tiedHouseDeclarations.filter((th) => th != declaration);
+      this.updateGroupedTiedHouseDeclarations();
+    } else {
+      this.matDialog.open(GenericConfirmationDialogComponent, {
+        disableClose: true,
+        autoFocus: true,
+        data: {
+          title: 'Remove Tied House Connection',
+          message: `Are you sure you want to remove this tied house declaration?`,
+          confirmButtonText: 'Yes, Remove',
+          cancelButtonText: 'No, Go Back',
+          onConfirm: () => {
+            //if removing existing declaration mark as removed
+            if (isExistingDeclaration) {
+              declaration.viewMode = TiedHouseViewMode.existing;
+              declaration.markedForRemoval = true;
+              this.submitTiedHouseDeclarationChange(declaration);
+            }
+            //else declaration is not an existing declaration but has been saved to dynamics so hide and call api to remove declaration from dynamics
+            else {
+              declaration.viewMode = TiedHouseViewMode.hidden;
+              declaration.markedForRemoval = true;
+              this.submitTiedHouseDeclarationChange(declaration);
+            }
 
-          if (keepAccordionOpen) {
-            this.openPanel(accordionIndex);
+            if (keepAccordionOpen) {
+              this.openPanel(accordionIndex);
+            }
           }
         }
-      }
-    });
+      });
+    }
   }
 
   /**
@@ -501,5 +509,16 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
           return of(res);
         })
       );
+  }
+  updateGroupDeclarationsValue(originalValue: TiedHouseConnection, updatedValue: TiedHouseConnection) {
+    for (const [, conns] of this.groupedTiedHouseDeclarations) {
+      const index = conns.findIndex((c) => c === originalValue);
+      if (index !== -1) {
+        console.log(updatedValue.id);
+        console.log(conns[index].legalEntityName);
+        conns[index] = updatedValue;
+        break; // stop after updating
+      }
+    }
   }
 }
