@@ -27,6 +27,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 result = new ApplicationExtension
                 {
+                    Id = applicationExtension.AdoxioApplicationextensionid,
                     HasLiquorTiedHouseThirdPartyAssociations = applicationExtension.AdoxioHasLiquorTiedHouseThirdPartyAssociations,
                     HasLiquorTiedHouseOwnershipOrControl = applicationExtension.AdoxioHasLiquorTiedHouseOwnershipOrControl,
                     HasLiquorTiedHouseFamilyMemberInvolvement = applicationExtension.AdoxioHasLiquorTiedHouseFamilyMemberInvolvement
