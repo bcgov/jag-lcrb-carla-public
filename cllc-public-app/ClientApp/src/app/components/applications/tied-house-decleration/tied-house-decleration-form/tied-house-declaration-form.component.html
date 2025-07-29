@@ -16,7 +16,11 @@
         [required]="true"
         [valid]="isValidOrNotTouched('dateOfBirth')"
         errorMessage="Date of Birth is required">
-        <input class="form-control w-100" type="date" style="width: 100%; max-width: none;" formControlName="dateOfBirth" />
+        <input
+          class="form-control w-100"
+          type="date"
+          style="width: 100%; max-width: none"
+          formControlName="dateOfBirth" />
       </app-field>
       <app-field
         class="col-md-6"
@@ -34,11 +38,7 @@
       </app-field>
     </div>
     <div class="row">
-      <app-field
-        class="col-md-6"
-        label="Middle Name"
-        [required]="false"
-        [valid]="isValidOrNotTouched('middleName')">
+      <app-field class="col-md-6" label="Middle Name" [required]="false" [valid]="isValidOrNotTouched('middleName')">
         <input
           class="form-control"
           style="width: 100%"
@@ -65,7 +65,12 @@
   </span>
   <!-- ------Legal Entity------ -->
   <div class="row" *ngIf="form.get('isLegalEntity')?.value == true">
-    <app-field class="col-md-6" label="Business Type" [required]="true" [valid]="form.get('businessType')?.valid || !form.get('businessType')?.touched" errorMessage="Business Type is required">
+    <app-field
+      class="col-md-6"
+      label="Business Type"
+      [required]="true"
+      [valid]="form.get('businessType')?.valid || !form.get('businessType')?.touched"
+      errorMessage="Business Type is required">
       <select class="form-control" formControlName="businessType">
         <option value="" disabled>Select a Business Type</option>
         <option *ngFor="let option of businessTypes" [value]="option.value">
@@ -105,10 +110,6 @@
       [valid]="!showOtherField || (showOtherField && isValidOrNotTouched('otherDescription'))"
       errorMessage="Relation description required">
       <textarea class="form-control" formControlName="otherDescription" rows="5"></textarea>
-      <!-- Temporary for Dev -->
-      <!-- {{ form.get('otherDescription')?.valid }} {{ !form.get('otherDescription')?.touched }}1{{
-        isValidOrNotTouched('otherDescription')
-      }} -->
     </app-field>
   </div>
 

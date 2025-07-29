@@ -4,7 +4,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { Account } from '@models/account.model';
 import { Application, ApplicationExtension } from '@models/application.model';
 import { TiedHouseConnection } from '@models/tied-house-connection.model';
-import { ApplicationDataService } from '@services/application-data.service';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
 import { GenericMessageDialogComponent } from '@shared/components/dialog/generic-message-dialog/generic-message-dialog.component';
 import { of, Subject, takeUntil } from 'rxjs';
@@ -73,7 +72,6 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnDestr
 
   constructor(
     private fb: FormBuilder,
-    private applicationDataService: ApplicationDataService,
     private tiedHouseService: TiedHouseConnectionsDataService,
     private matDialog: MatDialog
   ) {}
@@ -106,7 +104,12 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnDestr
       : of([]);
 
     const tiedHouseConnectionsForUserRequest$ = this.tiedHouseService.GetAllLiquorTiedHouseConnectionsForUser();
-    const applicationCountRequest$ = this.applicationDataService.getApprovedApplicationCount();
+
+    /*
+     * TODO: tiedhouse - Temporarily skipping this call
+     * See comment for https://jira.justice.gov.bc.ca/browse/LCSD-7700?focusedCommentId=437017
+     */
+    const applicationCountRequest$ = of(0); // this.applicationDataService.getApprovedApplicationCount();
 
     forkJoin({
       tiedHouseDataForApplication: tiedHouseConnectionsForApplicationIdRequest$,
@@ -187,13 +190,19 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnDestr
       return !this.isTiedHouseConnectionsEditableForApplication;
     }
 
-    if (!this.userHasAtLeastOneApprovedApplication && !this.userHasAtLeastOneExistingTiedHouseConnection) {
-      // If no application is provided, but the user also has no existing applications and no existing tied house
-      // connections, then the form is editable.
-      return false;
-    }
-
+    /*
+     * TODO: tiedhouse - Temporarily skipping the below conditions.
+     * See comment for https://jira.justice.gov.bc.ca/browse/LCSD-7700?focusedCommentId=437017
+     */
     return true;
+
+    // if (!this.userHasAtLeastOneApprovedApplication && !this.userHasAtLeastOneExistingTiedHouseConnection) {
+    //   // If no application is provided, but the user also has no existing applications and no existing tied house
+    //   // connections, then the form is editable.
+    //   return false;
+    // }
+
+    // return true;
   }
 
   /**
