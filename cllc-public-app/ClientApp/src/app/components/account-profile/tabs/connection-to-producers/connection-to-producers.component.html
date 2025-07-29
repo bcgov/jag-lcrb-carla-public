@@ -41,12 +41,12 @@
             formControlName="corpConnectionFederalProducer"
             aria-labelledby="corp-connection-federal-producer"
             class="d-flex flex-column align-items-start">
-            <mat-radio-button value="1">Yes</mat-radio-button>
-            <mat-radio-button value="0">No</mat-radio-button>
+            <mat-radio-button [value]="1">Yes</mat-radio-button>
+            <mat-radio-button [value]="0">No</mat-radio-button>
           </mat-radio-group>
         </section>
 
-        <section *ngIf="form.get('corpConnectionFederalProducer').value == '1'">
+        <section *ngIf="form.get('corpConnectionFederalProducer').value === 1">
           <label for="corp-connection-federal-producer-details">
             Provide the name of the federal producer and details of the connection (e.g. percentage and type of shares
             held).
@@ -80,12 +80,12 @@
             formControlName="federalProducerConnectionToCorp"
             aria-labelledby="federal-producer-connection-to-corp"
             class="d-flex flex-column align-items-start">
-            <mat-radio-button value="1">Yes</mat-radio-button>
-            <mat-radio-button value="0">No</mat-radio-button>
+            <mat-radio-button [value]="1">Yes</mat-radio-button>
+            <mat-radio-button [value]="0">No</mat-radio-button>
           </mat-radio-group>
         </section>
 
-        <section *ngIf="form.get('federalProducerConnectionToCorp').value == '1'">
+        <section *ngIf="form.get('federalProducerConnectionToCorp').value === 1">
           <label for="federal-producer-connection-to-corp-details">
             Provide the name of the federal producer and details of the connection (e.g. percentage and type of shares
             held).
@@ -120,8 +120,8 @@
             formControlName="iNConnectionToFederalProducer"
             aria-labelledby="in-connection-to-federal-producer"
             class="d-flex flex-column align-items-start">
-            <mat-radio-button value="1">Yes</mat-radio-button>
-            <mat-radio-button value="0">No</mat-radio-button>
+            <mat-radio-button [value]="1">Yes</mat-radio-button>
+            <mat-radio-button [value]="0">No</mat-radio-button>
           </mat-radio-group>
         </section>
         <section *ngIf="form.get('iNConnectionToFederalProducer').value == 'Yes'">
@@ -160,11 +160,11 @@
             formControlName="corpConnectionFederalProducer"
             aria-labelledby="corp-connection-federal-producer"
             class="d-flex flex-column align-items-start">
-            <mat-radio-button value="1">Yes</mat-radio-button>
-            <mat-radio-button value="0">No</mat-radio-button>
+            <mat-radio-button [value]="1">Yes</mat-radio-button>
+            <mat-radio-button [value]="0">No</mat-radio-button>
           </mat-radio-group>
         </section>
-        <section *ngIf="form.get('corpConnectionFederalProducer').value == '1'">
+        <section *ngIf="form.get('corpConnectionFederalProducer').value === 1">
           <label for="corp-connection-federal-producer-details">
             Provide the name of the federal producer and details of the connection (e.g. percentage and type of shares
             held).
@@ -197,12 +197,12 @@
             formControlName="share20PlusConnectionProducer"
             aria-labelledby="share-20-plus-connection-producer"
             class="d-flex flex-column align-items-start">
-            <mat-radio-button value="1">Yes</mat-radio-button>
-            <mat-radio-button value="0">No</mat-radio-button>
+            <mat-radio-button [value]="1">Yes</mat-radio-button>
+            <mat-radio-button [value]="0">No</mat-radio-button>
           </mat-radio-group>
         </section>
 
-        <section *ngIf="form.get('share20PlusConnectionProducer').value == '1'">
+        <section *ngIf="form.get('share20PlusConnectionProducer').value === 1">
           <label for="share-20-plus-connection-producer-details">
             Provide the name of the federal producer and details of the connection (e.g. percentage and type of shares
             held).
@@ -236,11 +236,11 @@
             formControlName="share20PlusFamilyConnectionProducer"
             aria-labelledby="share-20-plus-family-connection-producer"
             class="d-flex flex-column align-items-start">
-            <mat-radio-button value="1">Yes</mat-radio-button>
-            <mat-radio-button value="0">No</mat-radio-button>
+            <mat-radio-button [value]="1">Yes</mat-radio-button>
+            <mat-radio-button [value]="0">No</mat-radio-button>
           </mat-radio-group>
         </section>
-        <section *ngIf="form.get('share20PlusFamilyConnectionProducer').value == '1'">
+        <section *ngIf="form.get('share20PlusFamilyConnectionProducer').value === 1">
           <label for="share-20-plus-family-connection-producer-detail">
             Provide the relationship of the family member, the name of the federal producer, the type of shares,
             percentage of ownership, and any other details about the holding of voting shares
@@ -276,11 +276,11 @@
             formControlName="corpConnectionFederalProducer"
             aria-labelledby="corp-connection-federal-producer"
             class="d-flex flex-column align-items-start">
-            <mat-radio-button value="1">Yes</mat-radio-button>
-            <mat-radio-button value="0">No</mat-radio-button>
+            <mat-radio-button [value]="1">Yes</mat-radio-button>
+            <mat-radio-button [value]="0">No</mat-radio-button>
           </mat-radio-group>
         </section>
-        <section *ngIf="form.get('corpConnectionFederalProducer').value == '1'">
+        <section *ngIf="form.get('corpConnectionFederalProducer').value === 1">
           <label for="corp-connection-federal-producer-details">
             Provide the name of the federal producer and details of the connection (e.g. percentage and type of shares
             held).
@@ -316,11 +316,11 @@
             formControlName="federalProducerConnectionToCorp"
             aria-labelledby="federal-producer-connection-to-corp"
             class="d-flex flex-column align-items-start">
-            <mat-radio-button value="1">Yes</mat-radio-button>
-            <mat-radio-button value="0">No</mat-radio-button>
+            <mat-radio-button [value]="1">Yes</mat-radio-button>
+            <mat-radio-button [value]="0">No</mat-radio-button>
           </mat-radio-group>
         </section>
-        <section *ngIf="form.get('federalProducerConnectionToCorp').value == '1'">
+        <section *ngIf="form.get('federalProducerConnectionToCorp').value === 1">
           <label for="federal-producer-connection-to-corp-details">
             Provide the name of the federal producer and details of the connection (e.g. percentage and type of shares
             held).s
@@ -361,11 +361,11 @@
             formControlName="partnersConnectionFederalProducer"
             aria-labelledby="partners-connection-federal-producer"
             class="d-flex flex-column align-items-start">
-            <mat-radio-button value="1">Yes</mat-radio-button>
-            <mat-radio-button value="0">No</mat-radio-button>
+            <mat-radio-button [value]="1">Yes</mat-radio-button>
+            <mat-radio-button [value]="0">No</mat-radio-button>
           </mat-radio-group>
         </section>
-        <section *ngIf="form.get('partnersConnectionFederalProducer').value == '1'">
+        <section *ngIf="form.get('partnersConnectionFederalProducer').value === 1">
           <label for="partners-connection-federal-producer-details">
             Provide the name of the federal producer and details of the connection (e.g. percentage and type of shares
             held).
@@ -398,11 +398,11 @@
             formControlName="federalProducerConnectionToCorp"
             aria-labelledby="federal-producer-connection-to-corp"
             class="d-flex flex-column align-items-start">
-            <mat-radio-button value="1">Yes</mat-radio-button>
-            <mat-radio-button value="0">No</mat-radio-button>
+            <mat-radio-button [value]="1">Yes</mat-radio-button>
+            <mat-radio-button [value]="0">No</mat-radio-button>
           </mat-radio-group>
         </section>
-        <section *ngIf="form.get('federalProducerConnectionToCorp').value == '1'">
+        <section *ngIf="form.get('federalProducerConnectionToCorp').value === 1">
           <label for="federal-producer-connection-to-corp-details">
             Provide the name of the federal producer and details of the connection (e.g. percentage and type of shares
             held)
@@ -438,11 +438,11 @@
             formControlName="societyConnectionFederalProducer"
             aria-labelledby="society-connection-federal-producer"
             class="d-flex flex-column align-items-start">
-            <mat-radio-button value="1">Yes</mat-radio-button>
-            <mat-radio-button value="0">No</mat-radio-button>
+            <mat-radio-button [value]="1">Yes</mat-radio-button>
+            <mat-radio-button [value]="0">No</mat-radio-button>
           </mat-radio-group>
         </section>
-        <section *ngIf="form.get('societyConnectionFederalProducer').value == '1'">
+        <section *ngIf="form.get('societyConnectionFederalProducer').value === 1">
           <label for="society-connection-federal-producer-details">
             Provide the name of the federal producer and details of the connection (e.g. percentage and type of shares
             held)

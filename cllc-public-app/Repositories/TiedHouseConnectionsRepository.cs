@@ -196,16 +196,19 @@ namespace Gov.Lclb.Cllb.Public.Repositories
                 newCannabisTiedHouseConnectionRecord.CopyValues(incomingTiedHouseConnectionRecord);
             }
 
-            // Associate the new tied house connection with the account
-            newCannabisTiedHouseConnectionRecord.AccountODataBind = _dynamicsClient.GetEntityURI("accounts", accountId);
-
-            // Ensure the tied house connection is of type (category) "cannabis"
+            // Ensure the tied house connection is of type (category) "Cannabis"
             newCannabisTiedHouseConnectionRecord.AdoxioCategoryType = (int)TiedHouseCategoryType.Cannabis;
             // The singleton cannabis tied house connection should always be in the "Existing" status
             newCannabisTiedHouseConnectionRecord.Statuscode = (int)TiedHouseStatusCode.Existing;
 
             var createdCannabisTiedHouseConnectionRecord = await _dynamicsClient.Tiedhouseconnections.CreateAsync(
                 newCannabisTiedHouseConnectionRecord
+            );
+
+            // Associate the new tied house connection with the account
+            await AssociateTiedHouseConnectionToUserAccount(
+                createdCannabisTiedHouseConnectionRecord.AdoxioTiedhouseconnectionid.ToString(),
+                accountId
             );
 
             return createdCannabisTiedHouseConnectionRecord.ToViewModel();
@@ -241,7 +244,7 @@ namespace Gov.Lclb.Cllb.Public.Repositories
 
             updatedTiedHouseConnectionRecord.CopyValues(incomingTiedHouseConnectionRecord);
 
-            // Ensure the tied house connection is of type (category) "cannabis"
+            // Ensure the tied house connection is of type (category) "Cannabis"
             updatedTiedHouseConnectionRecord.AdoxioCategoryType = (int)TiedHouseCategoryType.Cannabis;
             // The singleton cannabis tied house connection should always be in the "Existing" status
             updatedTiedHouseConnectionRecord.Statuscode = (int)TiedHouseStatusCode.Existing;
@@ -264,6 +267,89 @@ namespace Gov.Lclb.Cllb.Public.Repositories
             _logger.LogDebug($"DeleteTiedHouseConnectionById. TiedHouseConnectionId = {tiedHouseConnectionId}.");
 
             _dynamicsClient.Tiedhouseconnections.Delete(tiedHouseConnectionId);
+        }
+
+        /// <summary>
+        /// Associates a tied house connection with a list of licenses.
+        /// </summary>
+        /// <param name="licenses"></param>
+        /// <param name="tiedHouseId"></param>
+        /// <returns></returns>
+        public async Task AssociateTiedHouseConnectionToLicenses(List<string> licenses, string tiedHouseId)
+        {
+            foreach (string licenceId in licenses)
+            {
+                Odataid odataid = new Odataid
+                {
+                    OdataidProperty = _dynamicsClient.GetEntityURI("adoxio_licenceses", licenceId)
+                };
+
+                await _dynamicsClient.Tiedhouseconnections.AddReferenceWithHttpMessagesAsync(
+                    tiedHouseId,
+                    "adoxio_adoxio_tiedhouseconnection_adoxio_licence",
+                    odataid
+                );
+            }
+        }
+
+        /// <summary>
+        /// Associates a tied house connection record with a user account record.
+        /// </summary>
+        /// <param name="tiedHouseConnectionId"></param>
+        /// <param name="accountId"></param>
+        /// <returns></returns>
+        public async Task AssociateTiedHouseConnectionToUserAccount(string tiedHouseConnectionId, string accountId)
+        {
+            Odataid odataid = new Odataid { OdataidProperty = _dynamicsClient.GetEntityURI("accounts", accountId) };
+
+            await _dynamicsClient.Tiedhouseconnections.AddReferenceWithHttpMessagesAsync(
+                tiedHouseConnectionId,
+                "adoxio_AccountId",
+                odataid
+            );
+        }
+
+        /// <summary>
+        /// Removes existing license associations and adds new ones for a tied house connection.
+        /// </summary>
+        /// <param name="licenses"></param>
+        /// <param name="tiedHouseId"></param>
+        /// <returns></returns>
+        public async Task RemoveAndAddAssociateLicenses(List<string> licenses, string tiedHouseId)
+        {
+            var result = new List<TiedHouseConnection>();
+
+            string filter = $"adoxio_tiedhouseconnectionid eq {tiedHouseId}";
+            var expand = new List<string> { "adoxio_adoxio_tiedhouseconnection_adoxio_licence" };
+            var select = new List<string>() { "adoxio_adoxio_tiedhouseconnection_adoxio_licence" };
+
+            var tiedHouseConnection = _dynamicsClient
+                .Tiedhouseconnections.Get(filter: filter, select: select, expand: expand)
+                .Value.FirstOrDefault();
+
+            var licencesIds = tiedHouseConnection.Adoxio_Adoxio_TiedHouseConnection_Adoxio_Licence.Select(item =>
+                item.AdoxioLicencesid
+            );
+
+            var hasLicencesBeenUpdated = !licencesIds
+                .OrderBy(item => item)
+                .SequenceEqual(licenses.OrderBy(item => item));
+
+            if (!hasLicencesBeenUpdated)
+            {
+                return;
+            }
+
+            foreach (var id in licencesIds)
+            {
+                await _dynamicsClient.Tiedhouseconnections.DeleteReferenceWithHttpMessagesAsync(
+                    tiedHouseId,
+                    "adoxio_adoxio_tiedhouseconnection_adoxio_licence",
+                    id
+                );
+            }
+
+            await AssociateTiedHouseConnectionToLicenses(licenses, tiedHouseId);
         }
     }
 }
