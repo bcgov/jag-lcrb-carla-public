@@ -67,6 +67,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioLegalEntityName = from.LegalEntityName;
             to.AdoxioBusinessType = from.BusinessType;
             to.AdoxioCategoryType = from.CategoryType;
+            to.AdoxioSelfDeclared = from.SelfDeclared;
+            to.AdoxioDeclarationDate = from.DeclarationDate;
         }
 
 
@@ -125,6 +127,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.BusinessType = tiedHouse.AdoxioBusinessType;
                 result.LegalEntityName = tiedHouse.AdoxioLegalEntityName;
                 result.CategoryType = tiedHouse.AdoxioCategoryType;
+                result.SelfDeclared = tiedHouse.AdoxioSelfDeclared;
+                result.DeclarationDate = tiedHouse.AdoxioDeclarationDate;
 
             }
             return result;

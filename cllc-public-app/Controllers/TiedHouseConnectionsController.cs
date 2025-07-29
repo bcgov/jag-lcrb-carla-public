@@ -235,6 +235,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string applicationId
         )
         {
+            tiedHouseConnection.DeclarationDate = DateTimeOffset.Now;
+            tiedHouseConnection.SelfDeclared = 1;
             MicrosoftDynamicsCRMadoxioTiedhouseconnection adoxioTiedHouseConnection =
                 new MicrosoftDynamicsCRMadoxioTiedhouseconnection();
 

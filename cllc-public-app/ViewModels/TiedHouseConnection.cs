@@ -112,6 +112,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public int? CategoryType { get; set; }
 
+        public DateTimeOffset? DeclarationDate { get; set; }
+        public int? SelfDeclared { get; set; }
+
         public bool isConnectionToProducersComplete(AdoxioApplicantTypeCodes? legalentitytype)
         {
             var isComplete = false;

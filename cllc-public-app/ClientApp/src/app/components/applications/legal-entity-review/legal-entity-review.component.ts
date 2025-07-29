@@ -158,6 +158,8 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
 
     this.isSubmitting = true;
 
+    this.application.invoiceTrigger = 0;
+
     this.save()
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(([saveSucceeded]) => {
