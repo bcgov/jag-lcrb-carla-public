@@ -528,7 +528,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         [JsonProperty(PropertyName = "adoxio_businesstype")]
         public int? AdoxioBusinessType { get; set; }
         [JsonProperty(PropertyName = "adoxio_categorytype")]
-        public int? AdoxioCategoryType { get; set; }
+        public int? AdoxioCategoryType { get; set; } 
+        [JsonProperty(PropertyName = "adoxio_declarationdate")]
+        public DateTimeOffset? AdoxioDeclarationDate { get; set; }
+        [JsonProperty(PropertyName = "adoxio_selfdeclared")]
+        public int? AdoxioSelfDeclared { get; set; }
 
     }
 }
