@@ -46,19 +46,6 @@
     </section>
 
     <section style="margin-top: 20px; position: relative">
-      <!-- // TODO: tiedhouse - Implement Save for Later functionality or remove entirely -->
-      <!-- <button
-        mat-raised-button
-        color="secondary"
-        class="progress-button mr-4"
-        (click)="saveForLater()"
-        [disabled]="isSavingForLater">
-        <span>
-          <fa-icon [icon]="faSave" class="mr-3"></fa-icon>
-          SAVE FOR LATER
-        </span>
-        <mat-progress-bar *ngIf="isSavingForLater" mode="indeterminate"></mat-progress-bar>
-      </button> -->
       <button mat-raised-button color="primary" class="progress-button" (click)="onSubmit()" [disabled]="isSubmitting">
         <span>SUBMIT</span>
         <mat-progress-bar *ngIf="isSubmitting" mode="indeterminate"></mat-progress-bar>

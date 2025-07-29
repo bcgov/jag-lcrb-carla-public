@@ -93,7 +93,7 @@ namespace Gov.Lclb.Cllb.Public.Repositories
             {
                 $"_adoxio_accountid_value eq {accountId}",
                 $"statuscode eq {(int)TiedHouseStatusCode.Existing}",
-                $"adoxio_categorytype eq {(int)TiedHouseCategoryType.Cannabis}",
+                $"(adoxio_categorytype eq {(int)TiedHouseCategoryType.Cannabis} or adoxio_categorytype ne {(int)TiedHouseCategoryType.Liquor})",
                 "statecode eq 0"
             };
             var filter = string.Join(" and ", andFilterConditions);
@@ -102,24 +102,27 @@ namespace Gov.Lclb.Cllb.Public.Repositories
 
             var expand = new List<string> { "adoxio_adoxio_tiedhouseconnection_adoxio_licence" };
 
-            var tiedHouseConnections = _dynamicsClient.Tiedhouseconnections.Get(filter: filter, expand: expand);
+            var matchingTiedHouseConnections = _dynamicsClient.Tiedhouseconnections.Get(filter: filter, expand: expand);
 
-            if (tiedHouseConnections.Value.Count > 1)
+            if (matchingTiedHouseConnections.Value.Count == 0)
             {
-                _logger.LogError(
-                    $"Found {tiedHouseConnections.Value.Count} cannabis tied house connections for account {accountId}. Expecting only one. This may indicate a data issue."
-                );
+                _logger.LogDebug($"No cannabis tied house connection found for account {accountId}.");
 
                 return null;
             }
 
-            if (tiedHouseConnections.Value.Count == 0)
+            var cannabisTiedHouseConnection = matchingTiedHouseConnections
+                .Value.OrderByDescending(item => item.AdoxioCategoryType == (int)TiedHouseCategoryType.Cannabis)
+                .ThenByDescending(item => item.Modifiedon)
+                .First();
+
+            if (cannabisTiedHouseConnection == null)
             {
                 _logger.LogDebug($"No cannabis tied house connection found for account {accountId}.");
                 return null;
             }
 
-            return tiedHouseConnections.Value[0].ToViewModel();
+            return cannabisTiedHouseConnection.ToViewModel();
         }
 
         /// <summary>
@@ -321,7 +324,7 @@ namespace Gov.Lclb.Cllb.Public.Repositories
 
             string filter = $"adoxio_tiedhouseconnectionid eq {tiedHouseId}";
             var expand = new List<string> { "adoxio_adoxio_tiedhouseconnection_adoxio_licence" };
-            var select = new List<string>() { "adoxio_adoxio_tiedhouseconnection_adoxio_licence" };
+            var select = new List<string> { "adoxio_adoxio_tiedhouseconnection_adoxio_licence" };
 
             var tiedHouseConnection = _dynamicsClient
                 .Tiedhouseconnections.Get(filter: filter, select: select, expand: expand)

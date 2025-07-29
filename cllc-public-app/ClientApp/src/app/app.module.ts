@@ -331,7 +331,6 @@ import { PermanentChangeHolderDetailsComponent } from "@shared/components/perman
 import { PermanentChangeTypesOfChangesRequestedComponent } from "@shared/components/permanent-change/permanent-change-types-of-changes-requested/permanent-change-types-of-changes-requested.component";
 import { PermanentChangePersonalHistorySummaryFormsComponent } from "@shared/components/permanent-change/permanent-change-personal-history-summary-forms/permanent-change-personal-history-summary-forms.component";
 import { PermanentChangePaymentComponent } from "@shared/components/permanent-change/permanent-change-payment/permanent-change-payment.component";
-import { PermanentChangeContactSupportComponent } from "@shared/components/permanent-change/permanent-change-contact-support/permanent-change-contact-support.component";
 import { PermanentChangeCannabisSecurityScreeningFormsComponent } from "@shared/components/permanent-change/permanent-change-cannabis-security-screening-forms/permanent-change-cannabis-security-screening-forms.component";
 import { PermanentChangeAdditionReceiverExecutorComponent } from "@shared/components/permanent-change/permanent-change-addition-receiver-executor/permanent-change-addition-receiver-executor.component";
 import { PermanentChangeInternalTransferShares } from "@shared/components/permanent-change/permanent-change-internal-transfer-shares/permanent-change-internal-transfer-shares.component";
@@ -355,6 +354,7 @@ import { LegalEntityReviewSupportingDocumentsComponent } from "@shared/component
 import { LegalEntityReviewPermanentChangeToALicenseeComponent } from "@components/applications/legal-entity-review-permanent-change-to-a-licensee/legal-entity-review-permanent-change-to-a-licensee.component";
 import { LegalEntityReviewNoticeLetterComponent } from "@shared/components/legal-entity-review/legal-entity-review-notice-letter/legal-entity-review-notice-letter.component";
 import { LegalEntityReviewOutcomeLetterComponent } from "@shared/components/legal-entity-review/legal-entity-review-outcome-letter/legal-entity-review-outcome-letter.component";
+import { LegalEntityQuestionsComponent } from "@shared/components/legal-entity-review/legal-entity-questions/legal-entity-questions.component";
 import { GenericConfirmationDialogComponent } from "@shared/components/dialog/generic-confirmation-dialog/generic-confirmation-dialog.component";
 import { GenericMessageDialogComponent } from "@shared/components/dialog/generic-message-dialog/generic-message-dialog.component";
 import { ConnectionToOtherLiquorLicencesComponent } from "@components/account-profile/tabs/connection-to-other-liquor-licences/connection-to-other-liquor-licences.component";
@@ -554,7 +554,6 @@ import { ConnectionToOtherLiquorLicencesComponent } from "@components/account-pr
     PermanentChangeAdditionReceiverExecutorComponent,
     PermanentChangeAdditionReceiverExecutorComponent,
     PermanentChangeCannabisSecurityScreeningFormsComponent,
-    PermanentChangeContactSupportComponent,
     PermanentChangeDeclarationsComponent,
     PermanentChangeDirectorsOfficers,
     PermanentChangeDisclaimerComponent,
@@ -582,6 +581,7 @@ import { ConnectionToOtherLiquorLicencesComponent } from "@components/account-pr
     LegalEntityReviewPermanentChangeToALicenseeComponent,
     LegalEntityReviewNoticeLetterComponent,
     LegalEntityReviewOutcomeLetterComponent,
+    LegalEntityQuestionsComponent,
     ConnectionToOtherLiquorLicencesComponent,
     GenericConfirmationDialogComponent,
     GenericMessageDialogComponent
