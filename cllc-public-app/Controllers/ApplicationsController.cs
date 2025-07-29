@@ -1670,7 +1670,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             //Prepare application for update
             var applicationId = new Guid(id);
-            var application = await _dynamicsClient.GetApplicationById(applicationId);
+            var application = await _dynamicsClient.GetApplicationByIdWithChildren(applicationId);
             var allowLgAccess = await CurrentUserIsLgForApplication(application);
             if (!CurrentUserHasAccessToApplicationOwnedBy(application._adoxioApplicantValue) && !allowLgAccess)
                 throw new Exception("User doesn't have an access the application");
@@ -2145,11 +2145,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
         }
 
-        private async Task UpdateApplicationExtensionAsync(ApplicationExtension? applicationExtension, string applicationId)
+        private async Task UpdateApplicationExtensionAsync(ApplicationExtension applicationExtension, string applicationId)
         {
             MicrosoftDynamicsCRMadoxioApplicationextension adoxioApplicationextension = new MicrosoftDynamicsCRMadoxioApplicationextension();
             adoxioApplicationextension.CopyValues(applicationExtension);
-            if (applicationExtension == null)
+            if (applicationExtension.Id == null)
             {
                 var extension = await _dynamicsClient.Applicationextensions.CreateAsync(adoxioApplicationextension);
                 await LinkApplicationExtensionToApplication(applicationId, extension.AdoxioApplicationextensionid);

@@ -702,6 +702,8 @@ namespace Gov.Lclb.Cllb.Public.Models
 
                 // Temporary Relocations - removed 2024-08-14
                 temporaryRelocationCriteria = dynamicsApplication.AdoxioChecklistdrivingrecordcomplete,
+
+                ApplicationExtension = dynamicsApplication.AdoxioApplicationExtension.ToViewModel()
             };
 
 
@@ -825,6 +827,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 applicationVM.ApplicantType = (AdoxioApplicantTypeCodes)dynamicsApplication.AdoxioApplicanttype;
             }
+
 
             //get applying person from Contact entity
             if (dynamicsApplication._adoxioApplyingpersonValue != null)
