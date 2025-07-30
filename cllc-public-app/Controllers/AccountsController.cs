@@ -1164,7 +1164,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     try
                     {
-                        _tiedHouseConnectionsRepository.DeleteTiedHouseConnectionById(
+                        await _tiedHouseConnectionsRepository.DeleteTiedHouseConnectionById(
                             tiedHouseConnection.AdoxioTiedhouseconnectionid
                         );
                     }
