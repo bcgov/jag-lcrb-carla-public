@@ -5,10 +5,11 @@ export class DynamicsFormField {
   controltype: string;
   datafieldname: string;
   name: string;
+  label: string;
   required: boolean;
   showlabel: boolean;
   visible: boolean;
   options: DynamicsFormFieldOption[];
 
-  constructor() {}
+  constructor() { }
 }
