@@ -1,40 +1,40 @@
-import { debounceTime, filter, takeWhile, catchError, mergeMap, delay, tap, switchMap, distinctUntilChanged } from 'rxjs/operators';
-import { Component, OnInit, ViewChild, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { Store } from '@ngrx/store';
-import { AppState } from '@app/app-state/models/app-state';
-import { Subscription, Subject, Observable, forkJoin, of } from 'rxjs';
+import { KeyValue } from '@angular/common';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import * as currentApplicationActions from '@app/app-state/actions/current-application.action';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ApplicationDataService } from '@services/application-data.service';
-import { PaymentDataService } from '@services/payment-data.service';
-import { Application } from '@models/application.model';
-import { FormBase, CanadaPostalRegex, ApplicationHTMLContent } from '@shared/form-base';
-import { DynamicsDataService } from '@services/dynamics-data.service';
+import * as currentApplicationActions from '@app/app-state/actions/current-application.action';
+import { AppState } from '@app/app-state/models/app-state';
+import { ConnectionToNonMedicalStoresComponent } from '@components/applications/application/tabs/connection-to-non-medical-stores/connection-to-non-medical-stores.component';
+import { ApplicationCancellationDialogComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
+import { INCOMPLETE, UPLOAD_FILES_MODE } from '@components/licences/licences.component';
 import { Account, TransferAccount } from '@models/account.model';
 import { ApplicationStatuses, ApplicationType, ApplicationTypeNames, FormControlState } from '@models/application-type.model';
+import { Application } from '@models/application.model';
 import { TiedHouseConnection } from '@models/tied-house-connection.model';
-import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
+import { Store } from '@ngrx/store';
+import { ApplicationDataService } from '@services/application-data.service';
+import { DynamicsDataService } from '@services/dynamics-data.service';
 import { EstablishmentWatchWordsService } from '@services/establishment-watch-words.service';
-import { formatDate, KeyValue } from '@angular/common';
 import { FeatureFlagService } from '@services/feature-flag.service';
+import { PaymentDataService } from '@services/payment-data.service';
+import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
 import { FileUploaderComponent } from '@shared/components/file-uploader/file-uploader.component';
-import { ConnectionToNonMedicalStoresComponent } from '@components/applications/application/tabs/connection-to-non-medical-stores/connection-to-non-medical-stores.component';
-import { UPLOAD_FILES_MODE, INCOMPLETE } from '@components/licences/licences.component';
-import { ApplicationCancellationDialogComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
+import { ApplicationHTMLContent, CanadaPostalRegex, FormBase } from '@shared/form-base';
+import { forkJoin, Observable, of, Subject, Subscription } from 'rxjs';
+import { catchError, debounceTime, delay, distinctUntilChanged, filter, mergeMap, switchMap, takeWhile, tap } from 'rxjs/operators';
 //import { User } from '@models/user.model';
-import { DynamicsForm } from '../../../models/dynamics-form.model';
-import { PoliceJurisdictionDataService } from '@services/police-jurisdiction-data.service';
-import { LocalGovernmentDataService } from '@services/local-government-data.service';
-import { ProofOfZoningComponent } from './tabs/proof-of-zoning/proof-of-zoning.component';
-import { AreaCategory, ServiceArea } from '@models/service-area.model';
-import { faExclamationCircle, faTrashAlt, faUniversity } from '@fortawesome/free-solid-svg-icons';
 import { faCreditCard, faIdCard, faSave } from '@fortawesome/free-regular-svg-icons';
+import { faExclamationCircle, faTrashAlt, faUniversity } from '@fortawesome/free-solid-svg-icons';
 import { RelatedLicence } from "@models/related-licence";
-import { AddressService, Address  } from '../../../services/geocoder.service'; // Adjust the import path as necessary
+import { AreaCategory, ServiceArea } from '@models/service-area.model';
+import { LocalGovernmentDataService } from '@services/local-government-data.service';
+import { PoliceJurisdictionDataService } from '@services/police-jurisdiction-data.service';
+import { DynamicsForm } from '../../../models/dynamics-form.model';
+import { Address, AddressService } from '../../../services/geocoder.service'; // Adjust the import path as necessary
+import { ProofOfZoningComponent } from './tabs/proof-of-zoning/proof-of-zoning.component';
 
 const ServiceHours = [
   '00:00', '00:15', '00:30', '00:45', '01:00', '01:15', '01:30', '01:45', '02:00', '02:15', '02:30', '02:45', '03:00',
@@ -432,7 +432,23 @@ export class ApplicationComponent extends FormBase implements OnInit {
             if (data.applicationType.formReference) {
               //console.log("Getting form layout");
               // get the application form
-              this.dynamicsForm = data.applicationType.dynamicsForm;
+              const formRef = data.applicationType.dynamicsForm;
+              /**
+               * Prunes the provided form reference based on the specified application type ID.
+               *
+               * This method processes the given form reference (`formRef`) and removes or modifies
+               * fields according to the rules defined for the provided application type (`data.applicationType.id`).
+               * The resulting object, `pruned`, contains only the relevant data required for the specific
+               * application type, ensuring that unnecessary or invalid fields are excluded before further processing.
+               *
+               * @param formRef - The form reference object containing the original form data.
+               * @param applicationTypeId - The identifier for the application type, used to determine pruning rules.
+               * @returns The pruned form data object, tailored to the specified application type.
+               */
+              const pruned = this.prune(formRef, data.applicationType.id);
+              data.applicationType.dynamicsForm = pruned;
+              this.dynamicsForm = pruned;
+
               if (this.dynamicsForm != null) {
                 this.dynamicsForm.tabs.forEach(function (tab) {
                   tab.sections.forEach(function (section) {
@@ -568,6 +584,77 @@ export class ApplicationComponent extends FormBase implements OnInit {
         switchMap(streetName => this.addressService.getAddressData(streetName))
       );
 
+  }
+
+  /**
+   * Prunes the provided form reference by removing sections that do not match the given application type.
+   *
+   * This method is currently only used for Manufacturer Picnic Area Endorsement Application
+   * and changes in Picnic Area Application. It can be enhanced as needed for other application types.
+   *
+   * The pruning logic depends on section names containing the splitter string "____" and the application type id as a suffix.
+   * Only sections whose name ends with "____<type>" will be kept for the given application type.
+   *
+   * @param formRef The form reference object containing sections and/or tabs with sections.
+   * @param type The application type id to match against section names.
+   * @returns A deep-cloned and pruned form reference containing only relevant sections for the given type.
+   */
+  private prune<
+    T extends {
+      sections?: Array<{ id: string; name?: string;[k: string]: any }>;
+      tabs?: Array<{ sections: Array<{ id: string; name?: string;[k: string]: any }> }>;
+    }
+  >(formRef: T, type: string): T {
+    const SPLITTER = "____";
+
+    // 1) Detect whether we even need to do anything
+    let sawPattern = false;
+    let sawMatch = false;
+
+    // Inspect section names for the splitter and type match
+    const inspect = (sec?: { name?: string }) => {
+      const name = sec?.name;
+      if (typeof name !== "string") return;
+      const i = name.indexOf(SPLITTER);
+      if (i === -1) return;
+      sawPattern = true;
+      const suffix = name.slice(i + SPLITTER.length);
+      if (suffix === type) sawMatch = true;
+    };
+
+    formRef.sections?.forEach(inspect);
+    formRef.tabs?.forEach(tab => tab.sections.forEach(inspect));
+
+    // If there are no pattern sections OR none match the given type, return as-is
+    if (!sawPattern || !sawMatch) {
+      return formRef;
+    }
+
+    // 2) We have something to prune: deep-clone and filter
+    const clone: T = JSON.parse(JSON.stringify(formRef));
+
+    // Keep only sections whose name ends with the correct type after the splitter
+    const keepSection = (sec: { name?: string }) => {
+      const name = sec.name;
+      if (typeof name !== "string") return true; // no name -> keep
+      const i = name.indexOf(SPLITTER);
+      if (i === -1) return true;                // no splitter -> keep
+      const suffix = name.slice(i + SPLITTER.length);
+      return suffix === type;                   // keep only if suffix matches `type`
+    };
+
+    if (clone.sections) {
+      clone.sections = clone.sections.filter(keepSection);
+    }
+
+    if (clone.tabs) {
+      clone.tabs = clone.tabs.map(tab => ({
+        ...tab,
+        sections: tab.sections.filter(keepSection),
+      }));
+    }
+
+    return clone;
   }
 
   updateDescriptionRequired(checked, descriptionField) {
@@ -2070,7 +2157,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
    }
 
 //Check if applicant is waiting for LG approcval or has been approved by LG.
- //In this case do not block user to pay and submit if the fields are empty
+  //In this case do not block user to pay and submit if the fields are empty
  hideOcupantLoadFields(): Boolean{
   return this.isOpenedByLGForApproval || this.lGHasApproved();
  }
@@ -2087,7 +2174,7 @@ onAddressOptionSelect (event: any) {
   this.form.get('establishmentAddressCity').setValue(selectedAddress.localityName);
   this.form.get('establishmentParcelId').setValue("");
 
-  if(selectedAddress && selectedAddress.siteID !== undefined && selectedAddress.siteID !== null && selectedAddress.siteID !== ""){
+    if (selectedAddress && selectedAddress.siteID !== undefined && selectedAddress.siteID !== null && selectedAddress.siteID !== "") {
     this.addressService.getPid(selectedAddress.siteID).subscribe(
       (response: string) => {
         try {
@@ -2110,7 +2197,7 @@ onAddressOptionSelect (event: any) {
       },
       (error) => {
       //  console.error('Error fetching data:', error);
-      }
+        }
     );
   }
 

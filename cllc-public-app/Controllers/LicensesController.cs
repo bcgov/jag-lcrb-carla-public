@@ -1284,7 +1284,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             var expand = new List<string> {
                 "adoxio_Licencee",
-                "adoxio_adoxio_licences_adoxio_applicationtermsconditionslimitation_Licence",
                 "adoxio_adoxio_licences_adoxio_application_AssignedLicence",
                 "adoxio_LicenceType",
                 "adoxio_establishment",
@@ -1313,8 +1312,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     expiraryDateParam = expiryDate.ToString("MMMM dd, yyyy");
                 }
 
+                // Fetch the active terms and conditions for the licence
+                IEnumerable<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation> licenceTermsAndConditions =
+                    _dynamicsClient
+                        .Applicationtermsconditionslimitations.Get(
+                            filter: $"_adoxio_licence_value eq {licenceId} and statecode eq 0",
+                            expand: new List<string> {"adoxio_TermsConditionsPreset"}
+                        )
+                        .Value;
+
+                // Build the human-readable terms and conditions list
                 var termsAndConditions = "";
-                foreach (var item in adoxioLicense.AdoxioAdoxioLicencesAdoxioApplicationtermsconditionslimitationLicence)
+                foreach (var item in licenceTermsAndConditions)
                 {
                     termsAndConditions += $"<li>{item.AdoxioTermsandconditions}</li>";
                 }
@@ -1416,13 +1425,23 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         _logger.LogError(e, $"Error loading service areas for {adoxioLicense.AdoxioLicencenumber}");
                     }
-                        //MicrosoftDynamicsCRMadoxioHoursofserviceCollection hours = _dynamicsClient.Hoursofservices.Get(filter: $"_adoxio_licence_value eq {licenceId} and _adoxio_endorsement_value eq null");
+
                         if (allServiceAreas != null && allServiceAreas.Value.Count > 0)
                         {
                             
-                            // sort the areas
-                            IEnumerable<MicrosoftDynamicsCRMadoxioServicearea> serviceAreas = allServiceAreas.Value
+                            IEnumerable<MicrosoftDynamicsCRMadoxioServicearea> filteredServiceAreas = allServiceAreas.Value
+                            // Filter out service areas that should not be printed on the licence
+                            // Context: It appears that the area category field is being utilized to dictate whether or 
+                            // not  a service area should be printed on the licence. In Dynamics, as of July 2025 at 
+                            // least, the field in Dynamics is labelled "Printed On Licence?", and the "Capacity" value 
+                            // is set when the user selects "No" from the dropdown.
                             .Where(area => area.AdoxioAreacategory != (int)ServiceAreaCategoryEnum.Capacity)
+                            // Filter out service areas that have invalid data (possibly a holdover from old data?)
+                            .Where(area => area.AdoxioArealocation != null && area.AdoxioCapacity != null)
+                            // Filter out service areas that are temporary extension areas. A temporary extension area
+                            // is not printed on the licence because it is only relevant for a short period of time.
+                            .Where(area => area.AdoxioTemporaryextensionarea == false)
+                            // Sort the service areas
                             .OrderBy(area => area.AdoxioAreanumber);
 
                             serviceAreaText += $@"<h3 style=""text-align: center;"">CAPACITY</h3>";
@@ -1431,18 +1450,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             var cells = 0;
                             var leftover = 0;
 
-                            foreach (CapacityArea area in licenceVM.ServiceAreas)
+                            foreach (MicrosoftDynamicsCRMadoxioServicearea area in filteredServiceAreas)
                             {
-                                // sometimes we have bad data and should not try to spend our life fixing other people's problems
-                                if (area.AreaLocation == null || area.Capacity == null ||
-                                    area.AreaCategory != 845280000 || area.IsTemporaryExtensionArea == true)
-                                {
-                                    continue;
-                                }
-
                                 cells++;
 
-                                serviceAreaText += $@"<td class='area'><table style='padding:0px; margin: 0px; width:100%; border: 0px solid white;'><tr><td>{area.AreaLocation}</td><td>{area.Capacity}</td></tr></table></td>";
+                                serviceAreaText += $@"<td class='area'><table style='padding:0px; margin: 0px; width:100%; border: 0px solid white;'><tr><td>{area.AdoxioArealocation}</td><td>{area.AdoxioCapacity}</td></tr></table></td>";
 
                                 // every 4 cells
                                 leftover = cells % 4;
