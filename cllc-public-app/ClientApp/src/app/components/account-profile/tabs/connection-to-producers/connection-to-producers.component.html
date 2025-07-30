@@ -1,459 +1,467 @@
-<div [ngBusy]="busy"></div>
+<div [ngBusy]="!hasLoadedData">
+  <ng-container *ngIf="hasLoadedData">
+    <section *ngIf="!account.isOtherBusinessType()">
+      <h3 *ngIf="!requiresWordingChange(applicationTypeName)" class="blue-header">
+        CONNECTIONS TO FEDERAL PRODUCERS OF CANNABIS
+      </h3>
+      <h3 *ngIf="requiresWordingChange(applicationTypeName)" class="blue-header">
+        CONNECTIONS TO OTHER FEDERAL PRODUCERS
+      </h3>
 
-<section *ngIf="!account.isOtherBusinessType()">
-  <h3 *ngIf="!requiresWordingChange(applicationTypeName)" class="blue-header">
-    CONNECTIONS TO FEDERAL PRODUCERS OF CANNABIS
-  </h3>
-  <h3 *ngIf="requiresWordingChange(applicationTypeName)" class="blue-header">CONNECTIONS TO OTHER FEDERAL PRODUCERS</h3>
+      <div class="padded-section content-bottom" [formGroup]="form">
+        <div class="mb-3">
+          <span *ngIf="federalProducerText === 'federal producer'">
+            A "<strong>federal producer</strong>" is a federally licensed producer of cannabis
+          </span>
+        </div>
 
-  <div class="padded-section content-bottom" [formGroup]="form">
-    <div class="mb-3">
-      <span *ngIf="federalProducerText === 'federal producer'">
-        A "<strong>federal producer</strong>" is a federally licensed producer of cannabis
-      </span>
-    </div>
+        <!-- CORPORATIONS -->
+        <div
+          *ngIf="
+            ['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation'].indexOf(
+              account.businessType
+            ) !== -1
+          ">
+          <div class="mb-5">
+            <section class="mb-3">
+              <p id="corp-connection-federal-producer" class="font-weight-bold">
+                Does the corporation have any association, connection or financial interest in a federally licensed
+                producer of cannabis? If the application is for a Producer Retail Store licence, identify any
+                connections to other federal producers that are not the applicant.
+              </p>
+              <span>This includes, but is not limited to:</span>
+              <ul>
+                <li>Directly holding voting shares in a federal producer.</li>
+                <li>
+                  Indirectly holding voting shares in a federal producer. For example, through a subsidiary or holding
+                  voting shares in a company that holds voting shares in a federal producer.
+                </li>
+                <li>Having a beneficial interest in a federal producer. For example, through a trust.</li>
+                <li>A contractual business arrangement of any sort</li>
+              </ul>
+              <mat-radio-group
+                formControlName="corpConnectionFederalProducer"
+                aria-labelledby="corp-connection-federal-producer"
+                class="d-flex flex-column align-items-start">
+                <mat-radio-button [value]="1">Yes</mat-radio-button>
+                <mat-radio-button [value]="0">No</mat-radio-button>
+              </mat-radio-group>
+            </section>
 
-    <!-- CORPORATIONS -->
-    <div
-      *ngIf="
-        ['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation'].indexOf(
-          account.businessType
-        ) !== -1
-      ">
-      <div class="mb-5">
-        <section class="mb-3">
-          <p id="corp-connection-federal-producer" class="font-weight-bold">
-            Does the corporation have any association, connection or financial interest in a federally licensed producer
-            of cannabis? If the application is for a Producer Retail Store licence, identify any connections to other
-            federal producers that are not the applicant.
-          </p>
-          <span>This includes, but is not limited to:</span>
-          <ul>
-            <li>Directly holding voting shares in a federal producer.</li>
-            <li>
-              Indirectly holding voting shares in a federal producer. For example, through a subsidiary or holding
-              voting shares in a company that holds voting shares in a federal producer.
-            </li>
-            <li>Having a beneficial interest in a federal producer. For example, through a trust.</li>
-            <li>A contractual business arrangement of any sort</li>
-          </ul>
-          <mat-radio-group
-            formControlName="corpConnectionFederalProducer"
-            aria-labelledby="corp-connection-federal-producer"
-            class="d-flex flex-column align-items-start">
-            <mat-radio-button [value]="1">Yes</mat-radio-button>
-            <mat-radio-button [value]="0">No</mat-radio-button>
-          </mat-radio-group>
-        </section>
+            <section *ngIf="form.get('corpConnectionFederalProducer').value === 1">
+              <label for="corp-connection-federal-producer-details">
+                Provide the name of the federal producer and details of the connection (e.g. percentage and type of
+                shares held).
+              </label>
+              <textarea
+                id="corp-connection-federal-producer-details"
+                class="form-control"
+                formControlName="corpConnectionFederalProducerDetails"
+                rows="5"></textarea>
+            </section>
+          </div>
 
-        <section *ngIf="form.get('corpConnectionFederalProducer').value === 1">
-          <label for="corp-connection-federal-producer-details">
-            Provide the name of the federal producer and details of the connection (e.g. percentage and type of shares
-            held).
-          </label>
-          <textarea
-            id="corp-connection-federal-producer-details"
-            class="form-control"
-            formControlName="corpConnectionFederalProducerDetails"
-            rows="5"></textarea>
-        </section>
+          <div>
+            <section class="mb-3">
+              <p id="federal-producer-connection-to-corp" class="font-weight-bold">
+                Does a federally licensed producer of cannabis have any association, connection or financial interest in
+                the corporation? If the application is for a Producer Retail Store licence, identify any connections to
+                other federal producers that are not the applicant.
+              </p>
+              <span>This includes, but is not limited to:</span>
+              <ul>
+                <li>Directly holding voting shares in the corporation.</li>
+                <li>
+                  Indirectly holding voting shares in the corporation. For example, through a subsidiary or holding
+                  voting shares in a company that holds voting shares in the corporation.
+                </li>
+                <li>Having a beneficial interest in the corporation. For example, through a trust.</li>
+                <li>A contractual business arrangement of any sort.</li>
+              </ul>
+              <mat-radio-group
+                formControlName="federalProducerConnectionToCorp"
+                aria-labelledby="federal-producer-connection-to-corp"
+                class="d-flex flex-column align-items-start">
+                <mat-radio-button [value]="1">Yes</mat-radio-button>
+                <mat-radio-button [value]="0">No</mat-radio-button>
+              </mat-radio-group>
+            </section>
+
+            <section *ngIf="form.get('federalProducerConnectionToCorp').value === 1">
+              <label for="federal-producer-connection-to-corp-details">
+                Provide the name of the federal producer and details of the connection (e.g. percentage and type of
+                shares held).
+              </label>
+              <textarea
+                id="federal-producer-connection-to-corp-details"
+                class="form-control"
+                formControlName="federalProducerConnectionToCorpDetails"
+                rows="5"></textarea>
+            </section>
+          </div>
+        </div>
+
+        <!---- LG or IN -->
+        <div *ngIf="['IndigenousNation', 'LocalGovernment'].indexOf(account.businessType) !== -1">
+          <div class="mb-5">
+            <section class="mb-3">
+              <p id="in-connection-to-federal-producer" class="font-weight-bold">
+                Do you have any association, connection or financial interest in a federally licensed producer of
+                cannabis?
+              </p>
+              <span>This includes, but is not limited to:</span>
+              <ul>
+                <li>Directly holding voting shares in a federal producer.</li>
+                <li>
+                  Indirectly holding voting shares in a federal producer. For example, through a subsidiary or holding
+                  voting shares in a company that holds voting shares in a federal producer.
+                </li>
+                <li>Having a beneficial interest in a federal producer. For example, through a trust.</li>
+                <li>A contractual business arrangement of any sort</li>
+              </ul>
+              <mat-radio-group
+                formControlName="iNConnectionToFederalProducer"
+                aria-labelledby="in-connection-to-federal-producer"
+                class="d-flex flex-column align-items-start">
+                <mat-radio-button [value]="1">Yes</mat-radio-button>
+                <mat-radio-button [value]="0">No</mat-radio-button>
+              </mat-radio-group>
+            </section>
+            <section *ngIf="form.get('iNConnectionToFederalProducer').value == 'Yes'">
+              <label for="in-connection-to-federal-producer-details">
+                Provide the name of the federal producer and details of the connection (e.g. percentage and type of
+                shares held).
+              </label>
+              <textarea
+                id="in-connection-to-federal-producer-details"
+                class="form-control"
+                formControlName="iNConnectionToFederalProducerDetails"
+                rows="5"></textarea>
+            </section>
+          </div>
+        </div>
+
+        <!-- PUBLIC -->
+        <div *ngIf="['PublicCorporation'].indexOf(account.businessType) !== -1">
+          <div class="mb-5">
+            <section class="mb-3">
+              <p id="corp-connection-federal-producer" class="font-weight-bold">
+                Does the corporation have any association, connection or financial interest in a federally licensed
+                producer of cannabis?
+              </p>
+              <span>This includes, but is not limited to:</span>
+              <ul>
+                <li>Directly holding voting shares in a federal producer.</li>
+                <li>
+                  Indirectly holding voting shares in a federal producer. For example, through a subsidiary or holding
+                  voting shares in a company that holds voting shares in a federal producer.
+                </li>
+                <li>Having a beneficial interest in a federal producer. For example, through a trust.</li>
+                <li>A contractual business arrangement of any sort</li>
+              </ul>
+              <mat-radio-group
+                formControlName="corpConnectionFederalProducer"
+                aria-labelledby="corp-connection-federal-producer"
+                class="d-flex flex-column align-items-start">
+                <mat-radio-button [value]="1">Yes</mat-radio-button>
+                <mat-radio-button [value]="0">No</mat-radio-button>
+              </mat-radio-group>
+            </section>
+            <section *ngIf="form.get('corpConnectionFederalProducer').value === 1">
+              <label for="corp-connection-federal-producer-details">
+                Provide the name of the federal producer and details of the connection (e.g. percentage and type of
+                shares held).
+              </label>
+              <textarea
+                id="corp-connection-federal-producer-details"
+                class="form-control"
+                formControlName="corpConnectionFederalProducerDetails"
+                rows="5"></textarea>
+            </section>
+          </div>
+
+          <div class="mb-5">
+            <section class="mb-3">
+              <p id="share-20-plus-connection-producer" class="font-weight-bold">
+                Does any shareholder with 20% or more voting shares have any association, connection or financial
+                interest in a federally licensed producer of cannabis?
+              </p>
+              <span>This includes, but is not limited to:</span>
+              <ul>
+                <li>Directly holding voting shares in a federal producer.</li>
+                <li>
+                  Indirectly holding voting shares in a federal producer. For example, through a subsidiary or holding
+                  voting shares in a company that holds voting shares in a federal producer.
+                </li>
+                <li>Having a beneficial interest in a federal producer. For example, through a trust.</li>
+                <li>A contractual business arrangement of any sort.</li>
+              </ul>
+              <mat-radio-group
+                formControlName="share20PlusConnectionProducer"
+                aria-labelledby="share-20-plus-connection-producer"
+                class="d-flex flex-column align-items-start">
+                <mat-radio-button [value]="1">Yes</mat-radio-button>
+                <mat-radio-button [value]="0">No</mat-radio-button>
+              </mat-radio-group>
+            </section>
+
+            <section *ngIf="form.get('share20PlusConnectionProducer').value === 1">
+              <label for="share-20-plus-connection-producer-details">
+                Provide the name of the federal producer and details of the connection (e.g. percentage and type of
+                shares held).
+              </label>
+              <textarea
+                id="share-20-plus-connection-producer-details"
+                class="form-control"
+                formControlName="share20PlusConnectionProducerDetails"
+                rows="5"></textarea>
+            </section>
+          </div>
+
+          <div>
+            <section class="mb-3">
+              <p id="share-20-plus-family-connection-producer" class="font-weight-bold">
+                Does any shareholder with 20% or more of voting shares have any immediate family members with any
+                connection to a federally licensed producer of cannabis?
+              </p>
+              <span>This includes, but is not limited to:</span>
+              <ul>
+                <li>Directly holding voting shares in a federal producer.</li>
+                <li>
+                  Indirectly holding voting shares in a federal producer. For example, through a subsidiary or holding
+                  voting shares in a company that holds voting shares in a federal producer.
+                </li>
+                <li>Having a beneficial interest in a federal producer. For example, through a trust.</li>
+                <li>A contractual business arrangement of any sort.</li>
+              </ul>
+              <i
+                >Immediate family members include spouses, parents, siblings, children, sons-in-law and
+                daughters-in-law</i
+              >
+              <mat-radio-group
+                formControlName="share20PlusFamilyConnectionProducer"
+                aria-labelledby="share-20-plus-family-connection-producer"
+                class="d-flex flex-column align-items-start">
+                <mat-radio-button [value]="1">Yes</mat-radio-button>
+                <mat-radio-button [value]="0">No</mat-radio-button>
+              </mat-radio-group>
+            </section>
+            <section *ngIf="form.get('share20PlusFamilyConnectionProducer').value === 1">
+              <label for="share-20-plus-family-connection-producer-detail">
+                Provide the relationship of the family member, the name of the federal producer, the type of shares,
+                percentage of ownership, and any other details about the holding of voting shares
+              </label>
+              <textarea
+                id="share-20-plus-family-connection-producer-detail"
+                class="form-control"
+                formControlName="share20PlusFamilyConnectionProducerDetail"
+                rows="5"></textarea>
+            </section>
+          </div>
+        </div>
+
+        <!-- SOLE PROPRIETORSHIP OR UNIVERSITY OR CHURCH -->
+        <div *ngIf="['SoleProprietorship', 'University', 'Church'].indexOf(account.businessType) !== -1">
+          <div class="mb-5">
+            <section class="mb-3">
+              <p id="corp-connection-federal-producer" class="font-weight-bold">
+                Does the {{ account.businessType }} have any association, connection or financial interest in a
+                federally licensed producer of cannabis?
+              </p>
+              <span>This includes, but is not limited to:</span>
+              <ul>
+                <li>Directly holding voting shares in a federal producer.</li>
+                <li>
+                  Indirectly holding voting shares in a federal producer. For example, through a subsidiary or holding
+                  voting shares in a company that holds voting shares in a federal producer.
+                </li>
+                <li>Having a beneficial interest in a federal producer. For example, through a trust.</li>
+                <li>A contractual business arrangement of any sort.</li>
+              </ul>
+              <mat-radio-group
+                formControlName="corpConnectionFederalProducer"
+                aria-labelledby="corp-connection-federal-producer"
+                class="d-flex flex-column align-items-start">
+                <mat-radio-button [value]="1">Yes</mat-radio-button>
+                <mat-radio-button [value]="0">No</mat-radio-button>
+              </mat-radio-group>
+            </section>
+            <section *ngIf="form.get('corpConnectionFederalProducer').value === 1">
+              <label for="corp-connection-federal-producer-details">
+                Provide the name of the federal producer and details of the connection (e.g. percentage and type of
+                shares held).
+              </label>
+              <textarea
+                id="corp-connection-federal-producer-details"
+                class="form-control"
+                formControlName="corpConnectionFederalProducerDetails"
+                rows="5"></textarea>
+            </section>
+          </div>
+
+          <div>
+            <section class="mb-3">
+              <label id="federal-producer-connection-to-corp">
+                Does the {{ account.businessType }} have an immediate family member that has any interest in a federal
+                producer?
+              </label>
+              <span>This includes, but is not limited to:</span>
+              <ul>
+                <li>Directly holding voting shares in a federal producer.</li>
+                <li>
+                  Indirectly holding voting shares in a federal producer. For example, through a subsidiary or holding
+                  voting shares in a company that holds voting shares in a federal producer.
+                </li>
+                <li>Having a beneficial interest in a federal producer. For example, through a trust.</li>
+                <li>A contractual business arrangement of any sort.</li>
+              </ul>
+              <i>
+                Immediate family members include spouses, parents, siblings, children, sons-in-law and daughters-in-law.
+              </i>
+              <mat-radio-group
+                formControlName="federalProducerConnectionToCorp"
+                aria-labelledby="federal-producer-connection-to-corp"
+                class="d-flex flex-column align-items-start">
+                <mat-radio-button [value]="1">Yes</mat-radio-button>
+                <mat-radio-button [value]="0">No</mat-radio-button>
+              </mat-radio-group>
+            </section>
+            <section *ngIf="form.get('federalProducerConnectionToCorp').value === 1">
+              <label for="federal-producer-connection-to-corp-details">
+                Provide the name of the federal producer and details of the connection (e.g. percentage and type of
+                shares held).s
+              </label>
+              <textarea
+                id="federal-producer-connection-to-corp-details"
+                class="form-control"
+                formControlName="federalProducerConnectionToCorpDetails"
+                rows="5"></textarea>
+            </section>
+          </div>
+        </div>
+
+        <!-- PARTNERSHIP OR GENERAL PARTNERSHIP OR LIMITED PARTNERSHIP OR LIMITED LIABILITY PARTNERSHIP -->
+        <div
+          *ngIf="
+            ['Partnership', 'GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(
+              account.businessType
+            ) !== -1
+          ">
+          <div class="mb-5">
+            <section class="mb-3">
+              <p id="partners-connection-federal-producer" class="font-weight-bold">
+                Does the partnership have any association, connection or financial interest in a federally licensed
+                producer of cannabis?
+              </p>
+              <span>This includes, but is not limited to:</span>
+              <ul>
+                <li>Directly holding voting shares in a federal producer.</li>
+                <li>
+                  Indirectly holding voting shares in a federal producer. For example, through a subsidiary or holding
+                  voting shares in a company that holds voting shares in a federal producer.
+                </li>
+                <li>Having a beneficial interest in a federal producer. For example, through a trust.</li>
+                <li>A contractual business arrangement of any sort</li>
+              </ul>
+              <mat-radio-group
+                formControlName="partnersConnectionFederalProducer"
+                aria-labelledby="partners-connection-federal-producer"
+                class="d-flex flex-column align-items-start">
+                <mat-radio-button [value]="1">Yes</mat-radio-button>
+                <mat-radio-button [value]="0">No</mat-radio-button>
+              </mat-radio-group>
+            </section>
+            <section *ngIf="form.get('partnersConnectionFederalProducer').value === 1">
+              <label for="partners-connection-federal-producer-details">
+                Provide the name of the federal producer and details of the connection (e.g. percentage and type of
+                shares held).
+              </label>
+              <textarea
+                id="partners-connection-federal-producer-details"
+                class="form-control"
+                formControlName="partnersConnectionFederalProducerDetails"
+                rows="5"></textarea>
+            </section>
+          </div>
+
+          <div>
+            <section class="mb-3">
+              <p id="federal-producer-connection-to-corp" class="font-weight-bold">
+                Does a federally licensed producer of cannabis have any association, connection or financial interest in
+                the partnership?
+              </p>
+              <span>This includes, but is not limited to:</span>
+              <ul>
+                <li>Directly holding voting shares in the partnership.</li>
+                <li>
+                  Indirectly holding voting shares in the partnership. For example, through a subsidiary or holding
+                  voting shares in a company that holds voting shares in the partnership.
+                </li>
+                <li>Having a beneficial interest in the partnership. For example, through a trust.</li>
+                <li>A contractual business arrangement of any sort.</li>
+              </ul>
+              <mat-radio-group
+                formControlName="federalProducerConnectionToCorp"
+                aria-labelledby="federal-producer-connection-to-corp"
+                class="d-flex flex-column align-items-start">
+                <mat-radio-button [value]="1">Yes</mat-radio-button>
+                <mat-radio-button [value]="0">No</mat-radio-button>
+              </mat-radio-group>
+            </section>
+            <section *ngIf="form.get('federalProducerConnectionToCorp').value === 1">
+              <label for="federal-producer-connection-to-corp-details">
+                Provide the name of the federal producer and details of the connection (e.g. percentage and type of
+                shares held)
+              </label>
+              <textarea
+                id="federal-producer-connection-to-corp-details"
+                class="form-control"
+                formControlName="federalProducerConnectionToCorpDetails"
+                rows="5"></textarea>
+            </section>
+          </div>
+        </div>
+
+        <!-- SOCIETY -->
+        <div *ngIf="['Society'].indexOf(account.businessType) !== -1">
+          <div class="mb-5">
+            <section class="mb-3">
+              <p id="liquor-interest-label" class="font-weight-bold">
+                Does the society have any association, connection or financial interest in a federally licensed producer
+                of cannabis?
+              </p>
+              <span>This includes, but is not limited to:</span>
+              <ul>
+                <li>Directly holding voting shares in a federal producer.</li>
+                <li>
+                  Indirectly holding voting shares in a federal producer. For example, through a subsidiary or holding
+                  voting shares in a company that holds voting shares in a federal producer.
+                </li>
+                <li>Having a benefi cial interest in a federal producer. For example, through a trust.</li>
+                <li>A contractual business arrangement of any sort.</li>
+              </ul>
+              <mat-radio-group
+                formControlName="societyConnectionFederalProducer"
+                aria-labelledby="society-connection-federal-producer"
+                class="d-flex flex-column align-items-start">
+                <mat-radio-button [value]="1">Yes</mat-radio-button>
+                <mat-radio-button [value]="0">No</mat-radio-button>
+              </mat-radio-group>
+            </section>
+            <section *ngIf="form.get('societyConnectionFederalProducer').value === 1">
+              <label for="society-connection-federal-producer-details">
+                Provide the name of the federal producer and details of the connection (e.g. percentage and type of
+                shares held)
+              </label>
+              <textarea
+                id="society-connection-federal-producer-details"
+                class="form-control"
+                formControlName="societyConnectionFederalProducerDetails"
+                rows="5"></textarea>
+            </section>
+          </div>
+        </div>
       </div>
-
-      <div>
-        <section class="mb-3">
-          <p id="federal-producer-connection-to-corp" class="font-weight-bold">
-            Does a federally licensed producer of cannabis have any association, connection or financial interest in the
-            corporation? If the application is for a Producer Retail Store licence, identify any connections to other
-            federal producers that are not the applicant.
-          </p>
-          <span>This includes, but is not limited to:</span>
-          <ul>
-            <li>Directly holding voting shares in the corporation.</li>
-            <li>
-              Indirectly holding voting shares in the corporation. For example, through a subsidiary or holding voting
-              shares in a company that holds voting shares in the corporation.
-            </li>
-            <li>Having a beneficial interest in the corporation. For example, through a trust.</li>
-            <li>A contractual business arrangement of any sort.</li>
-          </ul>
-          <mat-radio-group
-            formControlName="federalProducerConnectionToCorp"
-            aria-labelledby="federal-producer-connection-to-corp"
-            class="d-flex flex-column align-items-start">
-            <mat-radio-button [value]="1">Yes</mat-radio-button>
-            <mat-radio-button [value]="0">No</mat-radio-button>
-          </mat-radio-group>
-        </section>
-
-        <section *ngIf="form.get('federalProducerConnectionToCorp').value === 1">
-          <label for="federal-producer-connection-to-corp-details">
-            Provide the name of the federal producer and details of the connection (e.g. percentage and type of shares
-            held).
-          </label>
-          <textarea
-            id="federal-producer-connection-to-corp-details"
-            class="form-control"
-            formControlName="federalProducerConnectionToCorpDetails"
-            rows="5"></textarea>
-        </section>
-      </div>
-    </div>
-
-    <!---- LG or IN -->
-    <div *ngIf="['IndigenousNation', 'LocalGovernment'].indexOf(account.businessType) !== -1">
-      <div class="mb-5">
-        <section class="mb-3">
-          <p id="in-connection-to-federal-producer" class="font-weight-bold">
-            Do you have any association, connection or financial interest in a federally licensed producer of cannabis?
-          </p>
-          <span>This includes, but is not limited to:</span>
-          <ul>
-            <li>Directly holding voting shares in a federal producer.</li>
-            <li>
-              Indirectly holding voting shares in a federal producer. For example, through a subsidiary or holding
-              voting shares in a company that holds voting shares in a federal producer.
-            </li>
-            <li>Having a beneficial interest in a federal producer. For example, through a trust.</li>
-            <li>A contractual business arrangement of any sort</li>
-          </ul>
-          <mat-radio-group
-            formControlName="iNConnectionToFederalProducer"
-            aria-labelledby="in-connection-to-federal-producer"
-            class="d-flex flex-column align-items-start">
-            <mat-radio-button [value]="1">Yes</mat-radio-button>
-            <mat-radio-button [value]="0">No</mat-radio-button>
-          </mat-radio-group>
-        </section>
-        <section *ngIf="form.get('iNConnectionToFederalProducer').value == 'Yes'">
-          <label for="in-connection-to-federal-producer-details">
-            Provide the name of the federal producer and details of the connection (e.g. percentage and type of shares
-            held).
-          </label>
-          <textarea
-            id="in-connection-to-federal-producer-details"
-            class="form-control"
-            formControlName="iNConnectionToFederalProducerDetails"
-            rows="5"></textarea>
-        </section>
-      </div>
-    </div>
-
-    <!-- PUBLIC -->
-    <div *ngIf="['PublicCorporation'].indexOf(account.businessType) !== -1">
-      <div class="mb-5">
-        <section class="mb-3">
-          <p id="corp-connection-federal-producer" class="font-weight-bold">
-            Does the corporation have any association, connection or financial interest in a federally licensed producer
-            of cannabis?
-          </p>
-          <span>This includes, but is not limited to:</span>
-          <ul>
-            <li>Directly holding voting shares in a federal producer.</li>
-            <li>
-              Indirectly holding voting shares in a federal producer. For example, through a subsidiary or holding
-              voting shares in a company that holds voting shares in a federal producer.
-            </li>
-            <li>Having a beneficial interest in a federal producer. For example, through a trust.</li>
-            <li>A contractual business arrangement of any sort</li>
-          </ul>
-          <mat-radio-group
-            formControlName="corpConnectionFederalProducer"
-            aria-labelledby="corp-connection-federal-producer"
-            class="d-flex flex-column align-items-start">
-            <mat-radio-button [value]="1">Yes</mat-radio-button>
-            <mat-radio-button [value]="0">No</mat-radio-button>
-          </mat-radio-group>
-        </section>
-        <section *ngIf="form.get('corpConnectionFederalProducer').value === 1">
-          <label for="corp-connection-federal-producer-details">
-            Provide the name of the federal producer and details of the connection (e.g. percentage and type of shares
-            held).
-          </label>
-          <textarea
-            id="corp-connection-federal-producer-details"
-            class="form-control"
-            formControlName="corpConnectionFederalProducerDetails"
-            rows="5"></textarea>
-        </section>
-      </div>
-
-      <div class="mb-5">
-        <section class="mb-3">
-          <p id="share-20-plus-connection-producer" class="font-weight-bold">
-            Does any shareholder with 20% or more voting shares have any association, connection or financial interest
-            in a federally licensed producer of cannabis?
-          </p>
-          <span>This includes, but is not limited to:</span>
-          <ul>
-            <li>Directly holding voting shares in a federal producer.</li>
-            <li>
-              Indirectly holding voting shares in a federal producer. For example, through a subsidiary or holding
-              voting shares in a company that holds voting shares in a federal producer.
-            </li>
-            <li>Having a beneficial interest in a federal producer. For example, through a trust.</li>
-            <li>A contractual business arrangement of any sort.</li>
-          </ul>
-          <mat-radio-group
-            formControlName="share20PlusConnectionProducer"
-            aria-labelledby="share-20-plus-connection-producer"
-            class="d-flex flex-column align-items-start">
-            <mat-radio-button [value]="1">Yes</mat-radio-button>
-            <mat-radio-button [value]="0">No</mat-radio-button>
-          </mat-radio-group>
-        </section>
-
-        <section *ngIf="form.get('share20PlusConnectionProducer').value === 1">
-          <label for="share-20-plus-connection-producer-details">
-            Provide the name of the federal producer and details of the connection (e.g. percentage and type of shares
-            held).
-          </label>
-          <textarea
-            id="share-20-plus-connection-producer-details"
-            class="form-control"
-            formControlName="share20PlusConnectionProducerDetails"
-            rows="5"></textarea>
-        </section>
-      </div>
-
-      <div>
-        <section class="mb-3">
-          <p id="share-20-plus-family-connection-producer" class="font-weight-bold">
-            Does any shareholder with 20% or more of voting shares have any immediate family members with any connection
-            to a federally licensed producer of cannabis?
-          </p>
-          <span>This includes, but is not limited to:</span>
-          <ul>
-            <li>Directly holding voting shares in a federal producer.</li>
-            <li>
-              Indirectly holding voting shares in a federal producer. For example, through a subsidiary or holding
-              voting shares in a company that holds voting shares in a federal producer.
-            </li>
-            <li>Having a beneficial interest in a federal producer. For example, through a trust.</li>
-            <li>A contractual business arrangement of any sort.</li>
-          </ul>
-          <i>Immediate family members include spouses, parents, siblings, children, sons-in-law and daughters-in-law</i>
-          <mat-radio-group
-            formControlName="share20PlusFamilyConnectionProducer"
-            aria-labelledby="share-20-plus-family-connection-producer"
-            class="d-flex flex-column align-items-start">
-            <mat-radio-button [value]="1">Yes</mat-radio-button>
-            <mat-radio-button [value]="0">No</mat-radio-button>
-          </mat-radio-group>
-        </section>
-        <section *ngIf="form.get('share20PlusFamilyConnectionProducer').value === 1">
-          <label for="share-20-plus-family-connection-producer-detail">
-            Provide the relationship of the family member, the name of the federal producer, the type of shares,
-            percentage of ownership, and any other details about the holding of voting shares
-          </label>
-          <textarea
-            id="share-20-plus-family-connection-producer-detail"
-            class="form-control"
-            formControlName="share20PlusFamilyConnectionProducerDetail"
-            rows="5"></textarea>
-        </section>
-      </div>
-    </div>
-
-    <!-- SOLE PROPRIETORSHIP OR UNIVERSITY OR CHURCH -->
-    <div *ngIf="['SoleProprietorship', 'University', 'Church'].indexOf(account.businessType) !== -1">
-      <div class="mb-5">
-        <section class="mb-3">
-          <p id="corp-connection-federal-producer" class="font-weight-bold">
-            Does the {{ account.businessType }} have any association, connection or financial interest in a federally
-            licensed producer of cannabis?
-          </p>
-          <span>This includes, but is not limited to:</span>
-          <ul>
-            <li>Directly holding voting shares in a federal producer.</li>
-            <li>
-              Indirectly holding voting shares in a federal producer. For example, through a subsidiary or holding
-              voting shares in a company that holds voting shares in a federal producer.
-            </li>
-            <li>Having a beneficial interest in a federal producer. For example, through a trust.</li>
-            <li>A contractual business arrangement of any sort.</li>
-          </ul>
-          <mat-radio-group
-            formControlName="corpConnectionFederalProducer"
-            aria-labelledby="corp-connection-federal-producer"
-            class="d-flex flex-column align-items-start">
-            <mat-radio-button [value]="1">Yes</mat-radio-button>
-            <mat-radio-button [value]="0">No</mat-radio-button>
-          </mat-radio-group>
-        </section>
-        <section *ngIf="form.get('corpConnectionFederalProducer').value === 1">
-          <label for="corp-connection-federal-producer-details">
-            Provide the name of the federal producer and details of the connection (e.g. percentage and type of shares
-            held).
-          </label>
-          <textarea
-            id="corp-connection-federal-producer-details"
-            class="form-control"
-            formControlName="corpConnectionFederalProducerDetails"
-            rows="5"></textarea>
-        </section>
-      </div>
-
-      <div>
-        <section class="mb-3">
-          <label id="federal-producer-connection-to-corp">
-            Does the {{ account.businessType }} have an immediate family member that has any interest in a federal
-            producer?
-          </label>
-          <span>This includes, but is not limited to:</span>
-          <ul>
-            <li>Directly holding voting shares in a federal producer.</li>
-            <li>
-              Indirectly holding voting shares in a federal producer. For example, through a subsidiary or holding
-              voting shares in a company that holds voting shares in a federal producer.
-            </li>
-            <li>Having a beneficial interest in a federal producer. For example, through a trust.</li>
-            <li>A contractual business arrangement of any sort.</li>
-          </ul>
-          <i>
-            Immediate family members include spouses, parents, siblings, children, sons-in-law and daughters-in-law.
-          </i>
-          <mat-radio-group
-            formControlName="federalProducerConnectionToCorp"
-            aria-labelledby="federal-producer-connection-to-corp"
-            class="d-flex flex-column align-items-start">
-            <mat-radio-button [value]="1">Yes</mat-radio-button>
-            <mat-radio-button [value]="0">No</mat-radio-button>
-          </mat-radio-group>
-        </section>
-        <section *ngIf="form.get('federalProducerConnectionToCorp').value === 1">
-          <label for="federal-producer-connection-to-corp-details">
-            Provide the name of the federal producer and details of the connection (e.g. percentage and type of shares
-            held).s
-          </label>
-          <textarea
-            id="federal-producer-connection-to-corp-details"
-            class="form-control"
-            formControlName="federalProducerConnectionToCorpDetails"
-            rows="5"></textarea>
-        </section>
-      </div>
-    </div>
-
-    <!-- PARTNERSHIP OR GENERAL PARTNERSHIP OR LIMITED PARTNERSHIP OR LIMITED LIABILITY PARTNERSHIP -->
-    <div
-      *ngIf="
-        ['Partnership', 'GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(
-          account.businessType
-        ) !== -1
-      ">
-      <div class="mb-5">
-        <section class="mb-3">
-          <p id="partners-connection-federal-producer" class="font-weight-bold">
-            Does the partnership have any association, connection or financial interest in a federally licensed producer
-            of cannabis?
-          </p>
-          <span>This includes, but is not limited to:</span>
-          <ul>
-            <li>Directly holding voting shares in a federal producer.</li>
-            <li>
-              Indirectly holding voting shares in a federal producer. For example, through a subsidiary or holding
-              voting shares in a company that holds voting shares in a federal producer.
-            </li>
-            <li>Having a beneficial interest in a federal producer. For example, through a trust.</li>
-            <li>A contractual business arrangement of any sort</li>
-          </ul>
-          <mat-radio-group
-            formControlName="partnersConnectionFederalProducer"
-            aria-labelledby="partners-connection-federal-producer"
-            class="d-flex flex-column align-items-start">
-            <mat-radio-button [value]="1">Yes</mat-radio-button>
-            <mat-radio-button [value]="0">No</mat-radio-button>
-          </mat-radio-group>
-        </section>
-        <section *ngIf="form.get('partnersConnectionFederalProducer').value === 1">
-          <label for="partners-connection-federal-producer-details">
-            Provide the name of the federal producer and details of the connection (e.g. percentage and type of shares
-            held).
-          </label>
-          <textarea
-            id="partners-connection-federal-producer-details"
-            class="form-control"
-            formControlName="partnersConnectionFederalProducerDetails"
-            rows="5"></textarea>
-        </section>
-      </div>
-
-      <div>
-        <section class="mb-3">
-          <p id="federal-producer-connection-to-corp" class="font-weight-bold">
-            Does a federally licensed producer of cannabis have any association, connection or financial interest in the
-            partnership?
-          </p>
-          <span>This includes, but is not limited to:</span>
-          <ul>
-            <li>Directly holding voting shares in the partnership.</li>
-            <li>
-              Indirectly holding voting shares in the partnership. For example, through a subsidiary or holding voting
-              shares in a company that holds voting shares in the partnership.
-            </li>
-            <li>Having a beneficial interest in the partnership. For example, through a trust.</li>
-            <li>A contractual business arrangement of any sort.</li>
-          </ul>
-          <mat-radio-group
-            formControlName="federalProducerConnectionToCorp"
-            aria-labelledby="federal-producer-connection-to-corp"
-            class="d-flex flex-column align-items-start">
-            <mat-radio-button [value]="1">Yes</mat-radio-button>
-            <mat-radio-button [value]="0">No</mat-radio-button>
-          </mat-radio-group>
-        </section>
-        <section *ngIf="form.get('federalProducerConnectionToCorp').value === 1">
-          <label for="federal-producer-connection-to-corp-details">
-            Provide the name of the federal producer and details of the connection (e.g. percentage and type of shares
-            held)
-          </label>
-          <textarea
-            id="federal-producer-connection-to-corp-details"
-            class="form-control"
-            formControlName="federalProducerConnectionToCorpDetails"
-            rows="5"></textarea>
-        </section>
-      </div>
-    </div>
-
-    <!-- SOCIETY -->
-    <div *ngIf="['Society'].indexOf(account.businessType) !== -1">
-      <div class="mb-5">
-        <section class="mb-3">
-          <p id="liquor-interest-label" class="font-weight-bold">
-            Does the society have any association, connection or financial interest in a federally licensed producer of
-            cannabis?
-          </p>
-          <span>This includes, but is not limited to:</span>
-          <ul>
-            <li>Directly holding voting shares in a federal producer.</li>
-            <li>
-              Indirectly holding voting shares in a federal producer. For example, through a subsidiary or holding
-              voting shares in a company that holds voting shares in a federal producer.
-            </li>
-            <li>Having a benefi cial interest in a federal producer. For example, through a trust.</li>
-            <li>A contractual business arrangement of any sort.</li>
-          </ul>
-          <mat-radio-group
-            formControlName="societyConnectionFederalProducer"
-            aria-labelledby="society-connection-federal-producer"
-            class="d-flex flex-column align-items-start">
-            <mat-radio-button [value]="1">Yes</mat-radio-button>
-            <mat-radio-button [value]="0">No</mat-radio-button>
-          </mat-radio-group>
-        </section>
-        <section *ngIf="form.get('societyConnectionFederalProducer').value === 1">
-          <label for="society-connection-federal-producer-details">
-            Provide the name of the federal producer and details of the connection (e.g. percentage and type of shares
-            held)
-          </label>
-          <textarea
-            id="society-connection-federal-producer-details"
-            class="form-control"
-            formControlName="societyConnectionFederalProducerDetails"
-            rows="5"></textarea>
-        </section>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
+  </ng-container>
+</div>

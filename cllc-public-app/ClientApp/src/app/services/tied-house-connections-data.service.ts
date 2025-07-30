@@ -19,7 +19,7 @@ export class TiedHouseConnectionsDataService extends DataService {
    * @param {string} [accountId] An optional account ID to filter results by
    * @return {*}  {Observable<TiedHouseConnection[]>}
    */
-  GetAllLiquorTiedHouseConnectionsForUser(accountId?: string): Observable<TiedHouseConnection[]> {
+  GetLiquorTiedHouseConnectionsForUser(accountId?: string): Observable<TiedHouseConnection[]> {
     const apiPath = `api/tiedhouseconnections/user/liquor/${accountId ?? ''}`;
     return this.http.get<TiedHouseConnection[]>(apiPath, { headers: this.headers }).pipe(catchError(this.handleError));
   }
@@ -53,11 +53,14 @@ export class TiedHouseConnectionsDataService extends DataService {
   /**
    * Get all liquor tied house connections for a specific application.
    *
+   * Note: This includes liquor tied house connections that are associated with the user account, as well as those that
+   * are associated with the application.
+   *
    * @param {string} applicationId
    * @return {*}  {Observable<TiedHouseConnection[]>}
    */
-  GetAllLiquorTiedHouseConnectionsForApplication(applicationId: string): Observable<TiedHouseConnection[]> {
-    const apiPath = `api/tiedhouseconnections/liquor/application/${applicationId ?? ''}`;
+  GetLiquorTiedHouseConnectionsForApplication(applicationId: string): Observable<TiedHouseConnection[]> {
+    const apiPath = `api/tiedhouseconnections/liquor/application/${applicationId}`;
     return this.http.get<TiedHouseConnection[]>(apiPath, { headers: this.headers }).pipe(catchError(this.handleError));
   }
 
@@ -68,7 +71,7 @@ export class TiedHouseConnectionsDataService extends DataService {
    * @param {string} applicationId
    * @return {*}
    */
-  createLiquorTiedHouseConnection(tiedHouseConnection: TiedHouseConnection, applicationId: string) {
+  AddLiquorTiedHouseConnectionToApplication(tiedHouseConnection: TiedHouseConnection, applicationId: string) {
     return this.http
       .post<TiedHouseConnection>(`api/tiedhouseconnections/liquor/application/${applicationId}`, tiedHouseConnection, {
         headers: this.headers
@@ -87,7 +90,7 @@ export class TiedHouseConnectionsDataService extends DataService {
    * @param {string} accountId
    * @return {*}
    */
-  createLiquorTiedHouseConnectionForUser(tiedHouseConnection: TiedHouseConnection, accountId: string) {
+  AddLiquorTiedHouseConnectionToUser(tiedHouseConnection: TiedHouseConnection, accountId: string) {
     return this.http
       .post<TiedHouseConnection>(`api/tiedhouseconnections/liquor/user/${accountId}`, tiedHouseConnection, {
         headers: this.headers

@@ -83,9 +83,9 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
     let request$ = null;
 
     if (this.applicationId) {
-      request$ = this.tiedHouseService.GetAllLiquorTiedHouseConnectionsForApplication(this.applicationId);
+      request$ = this.tiedHouseService.GetLiquorTiedHouseConnectionsForApplication(this.applicationId);
     } else if (this.accountId) {
-      request$ = this.tiedHouseService.GetAllLiquorTiedHouseConnectionsForUser(this.accountId);
+      request$ = this.tiedHouseService.GetLiquorTiedHouseConnectionsForUser(this.accountId);
     } else {
       this.matDialog.open(GenericMessageDialogComponent, {
         data: {
@@ -240,7 +240,7 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
     this.submitTiedHouseDeclarationChange(original, updated, groupIndex);
   }
 
-  submitTiedHouseDeclarationChange(declaration: TiedHouseConnection,x?: TiedHouseConnection, groupIndex?: number) {
+  submitTiedHouseDeclarationChange(declaration: TiedHouseConnection, x?: TiedHouseConnection, groupIndex?: number) {
     this.save(declaration)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(([saveSucceeded, result]) => {
@@ -249,7 +249,7 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
           declaration.accountid = result.accountid;
           declaration.id = result.id;
           declaration.applicationId = result.applicationId;
-          
+
           this.updateGroupedTiedHouseDeclarations();
           this.openPanel(groupIndex);
         }
@@ -468,9 +468,9 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
   private save(declaration: TiedHouseConnection): Observable<[boolean, TiedHouseConnection]> {
     let request$;
     if (this.applicationId) {
-      request$ = this.tiedHouseService.createLiquorTiedHouseConnection(declaration, this.applicationId);
+      request$ = this.tiedHouseService.AddLiquorTiedHouseConnectionToApplication(declaration, this.applicationId);
     } else if (this.accountId) {
-      request$ = this.tiedHouseService.createLiquorTiedHouseConnectionForUser(declaration, this.accountId);
+      request$ = this.tiedHouseService.AddLiquorTiedHouseConnectionToUser(declaration, this.accountId);
     } else {
       this.matDialog.open(GenericMessageDialogComponent, {
         data: {

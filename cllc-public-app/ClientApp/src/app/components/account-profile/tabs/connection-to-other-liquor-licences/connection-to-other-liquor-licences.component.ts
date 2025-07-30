@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Account } from '@models/account.model';
@@ -19,6 +19,7 @@ export type ConnectionToOtherLiquorLicencesFormData = ApplicationExtension;
  * @export
  * @class ConnectionToOtherLiquorLicencesComponent
  * @implements {OnInit}
+ * @implements {OnChanges}
  * @implements {OnDestroy}
  */
 @Component({
@@ -26,7 +27,7 @@ export type ConnectionToOtherLiquorLicencesFormData = ApplicationExtension;
   templateUrl: './connection-to-other-liquor-licences.component.html',
   styleUrls: ['./connection-to-other-liquor-licences.component.scss']
 })
-export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnDestroy {
+export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnChanges, OnDestroy {
   /**
    * The user account information.
    */
@@ -62,10 +63,6 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnDestr
     return this.application?.id;
   }
 
-  get busy(): boolean {
-    return !this.hasLoadedData;
-  }
-
   hasLoadedData = false;
 
   destroy$ = new Subject<void>();
@@ -80,6 +77,16 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnDestr
     this.initForm();
     this.loadFormData();
     this.loadTiedHouseData();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.application) {
+      this.loadFormData();
+    }
+
+    if (changes.account) {
+      this.loadFormData();
+    }
   }
 
   initForm() {
@@ -99,11 +106,15 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnDestr
   }
 
   loadTiedHouseData() {
-    const tiedHouseConnectionsForApplicationIdRequest$ = this.application?.id
-      ? this.tiedHouseService.GetAllLiquorTiedHouseConnectionsForApplication(this.application.id)
-      : of([]);
+    let tiedHouseConnectionsForApplicationIdRequest$ = this.applicationId
+      ? this.tiedHouseService.GetLiquorTiedHouseConnectionsForApplication(this.applicationId)
+      : this.tiedHouseService.GetLiquorTiedHouseConnectionsForUser(this.accountId);
 
-    const tiedHouseConnectionsForUserRequest$ = this.tiedHouseService.GetAllLiquorTiedHouseConnectionsForUser();
+    /*
+     * TODO: tiedhouse - Temporarily skipping this call
+     * See comment for https://jira.justice.gov.bc.ca/browse/LCSD-7700?focusedCommentId=437017
+     */
+    const tiedHouseConnectionsForUserRequest$ = of([]); // this.tiedHouseService.GetLiquorTiedHouseConnectionsForUser(this.accountId);
 
     /*
      * TODO: tiedhouse - Temporarily skipping this call

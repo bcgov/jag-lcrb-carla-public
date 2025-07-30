@@ -33,10 +33,11 @@ import { ContactDataService } from '@services/contact-data.service';
 import { FeatureFlagService } from '@services/feature-flag.service';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
 import { UserDataService } from '@services/user-data.service';
+import { GenericMessageDialogComponent } from '@shared/components/dialog/generic-message-dialog/generic-message-dialog.component';
 import { FormBase } from '@shared/form-base';
 import { endOfToday } from 'date-fns';
-import { forkJoin, Observable, of, Subscription } from 'rxjs';
-import { catchError, filter, map, takeWhile } from 'rxjs/operators';
+import { combineLatest, forkJoin, Observable, of, Subscription } from 'rxjs';
+import { catchError, filter, map, switchMap, takeWhile } from 'rxjs/operators';
 import { ApplicationTypeNames } from '../../models/application-type.model';
 
 // See the Moment.js docs for the meaning of these formats:
@@ -104,8 +105,6 @@ export class AccountProfileComponent extends FormBase implements OnInit {
   currentUser: User;
   dataLoaded = false;
   busy: Subscription;
-  busy2: Promise<any>;
-  busy3: Promise<any>;
   form: FormGroup;
   countryList = COUNTRIES;
   maxDate = endOfToday();
@@ -138,6 +137,8 @@ export class AccountProfileComponent extends FormBase implements OnInit {
   ORVFeatureEnabled: boolean = false;
   @ViewChild('badgeTemplateDialog') badgeTemplateDialog: TemplateRef<any>;
   generatedOrvCode: string = `<a href="#" onclick="window.open('https://orgbook-app-b7aa30-dev.apps.silver.devops.gov.bc.ca/verify/BC123456', '_blank', 'width=800,height=600'); return false;">Verify Retailer</a>`;
+
+  hasLoadedData = false;
 
   get contacts(): FormArray {
     return this.form.get('otherContacts') as FormArray;
@@ -234,22 +235,45 @@ export class AccountProfileComponent extends FormBase implements OnInit {
     public featureFlagService: FeatureFlagService
   ) {
     super();
-    this.route.paramMap.subscribe((params) => {
-      this.applicationId = params.get('applicationId');
 
-      if (this.applicationId) {
-        this.applicationDataService.getApplicationById(this.applicationId).subscribe((res) => {
-          this.application = res;
+    combineLatest([this.route.paramMap, this.featureFlagService.featureOn('ORVEnabled')])
+      .pipe(
+        takeWhile(() => this.componentActive),
+        switchMap(([params, orvEnabled]) => {
+          this.renewalType = params.get('renewalType');
+          this.applicationMode = params.get('mode');
+          this.applicationId = params.get('applicationId');
 
-          this.connectionToOtherLiquorLicencesFormData = this.application.applicationExtension;
-        });
-      }
-    });
+          this.ORVFeatureEnabled = orvEnabled;
 
-    this.route.paramMap.subscribe((params) => (this.renewalType = params.get('renewalType')));
-    this.route.paramMap.subscribe((params) => (this.applicationMode = params.get('mode')));
+          if (this.applicationId) {
+            return this.applicationDataService.getApplicationById(this.applicationId);
+          }
 
-    this.featureFlagService.featureOn('ORVEnabled').subscribe((result) => (this.ORVFeatureEnabled = result));
+          return of(null);
+        })
+      )
+      .subscribe({
+        next: (application) => {
+          if (application) {
+            this.application = application;
+            this.connectionToOtherLiquorLicencesFormData = application.applicationExtension;
+          }
+
+          this.hasLoadedData = true;
+        },
+        error: (error) => {
+          console.error('Error Loading Account Data', error);
+          this.dialog.open(GenericMessageDialogComponent, {
+            data: {
+              title: 'Error Loading Account Data',
+              message:
+                'Failed to load Account data. Please try again. If the problem persists, please contact support.',
+              closeButtonText: 'Close'
+            }
+          });
+        }
+      });
   }
 
   ngOnInit() {
