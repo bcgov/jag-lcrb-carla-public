@@ -270,7 +270,6 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
     var isExistingDeclaration = declaration.supersededById;
     //if declaration has not been saved to dynamics remove from declaration list
     if (!declaration.id) {
-      console.log(JSON.stringify(declaration));
       this.tiedHouseDeclarations = this.tiedHouseDeclarations.filter((th) => th != declaration);
       this.updateGroupedTiedHouseDeclarations();
     } else {
@@ -514,8 +513,6 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
     for (const [, conns] of this.groupedTiedHouseDeclarations) {
       const index = conns.findIndex((c) => c === originalValue);
       if (index !== -1) {
-        console.log(updatedValue.id);
-        console.log(conns[index].legalEntityName);
         conns[index] = updatedValue;
         break; // stop after updating
       }
