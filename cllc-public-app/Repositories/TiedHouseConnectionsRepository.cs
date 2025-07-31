@@ -239,6 +239,7 @@ namespace Gov.Lclb.Cllb.Public.Repositories
                     
                 }
 
+                adoxioTiedHouseConnection._adoxioApplicationValue = applicationId;
                 return adoxioTiedHouseConnection.ToViewModel();
             }
 
