@@ -17,7 +17,7 @@ import { Account } from "@models/account.model";
 
 const applicationDataServiceStub: Partial<ApplicationDataService> = {
   getAllCurrentApplications: () => of([]),
-  getSubmittedApplicationCount: () => of(0)
+  getSubmittedCannabisRetailStoreApplicationCount: () => of(0)
 };
 const licenceDataServiceStub: Partial<LicenseDataService> = { getAllCurrentLicenses: () => of([]) };
 const routerStub: Partial<Router> = {};

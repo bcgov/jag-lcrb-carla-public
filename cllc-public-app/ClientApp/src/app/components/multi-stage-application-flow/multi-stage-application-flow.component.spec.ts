@@ -51,7 +51,6 @@ describe("MultiStageApplicationFlowComponent",
             { provide: HttpClient, useValue: httpClientSpy },
             { provide: TiedHouseConnectionsDataService, useValue: {} },
             { provide: PaymentDataService, useValue: {} },
-            { provide: ApplicationDataService, useValue: { getSubmittedApplicationCount: () => of(0) } },
             { provide: FeatureFlagService, useValue: { featureOn: () => of(true) } }
           ]
         })

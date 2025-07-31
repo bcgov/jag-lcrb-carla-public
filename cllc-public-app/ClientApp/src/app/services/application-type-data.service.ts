@@ -40,15 +40,6 @@ export class ApplicationTypeDataService extends DataService {
       .pipe(catchError(this.handleError));
   }
 
-  /**
-   * Gets the number of submitted Applications for the current user
-   * */
-  getSubmittedApplicationCount(): Observable<number> {
-    return this.http.get<number>(this.apiPath + "current/submitted-count", { headers: this.headers })
-      .pipe(catchError(this.handleError));
-  }
-
-
   getAllCurrentApplications(): Observable<ApplicationSummary[]> {
     return this.http.get<ApplicationSummary[]>(this.apiPath + "current", { headers: this.headers })
       .pipe(catchError(this.handleError));
@@ -58,7 +49,7 @@ export class ApplicationTypeDataService extends DataService {
     return this.http.get<Application[]>(this.apiPath + "current/lg-approvals", { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
-  //LCSD-6357 part 1: 
+  //LCSD-6357 part 1:
   getLGApprovalApplicationsDecisionNotMade(pageIndex: number = 0, pageSize: number = 10): Observable<PagingResult<Application>> {
     const url = `${this.apiPath}current/lg-approvals-decision-not-made?pageIndex=${pageIndex}&pageSize=${pageSize}`;
     return this.http.get<PagingResult<Application>>(url, { headers: this.headers })

@@ -1,0 +1,98 @@
+<h3 class="blue-header">Addition of Executor or Receiver</h3>
+<div class="content-bottom">
+  <p>
+    To be completed upon the death, bankruptcy or receivership of a licensee. Fill out A or B and attach the required
+    documents.
+  </p>
+  <p>
+    Note: The Branch may renew the licence with the name of the executor, administrator or successor appended, for a
+    period of one year. By the end of the one-year renewal period, relevant applications (e.g. transfer of ownership or
+    transfer of shares) and appropriate documentation must be submitted to the Branch.
+  </p>
+
+  <h4>A. Addition of Executor</h4>
+  <span>
+    <strong>Executor's Name:</strong>
+  </span>
+  <mat-form-field class="ml-1 mr-2">
+    <mat-label>First Name</mat-label>
+    <input matInput type="text" formControlName="firstNameNew" />
+  </mat-form-field>
+
+  <mat-form-field class="ml-1 mr-2">
+    <mat-label>Last Name</mat-label>
+    <input matInput type="text" formControlName="lastNameNew" />
+  </mat-form-field>
+
+  <p>Upload a copy of Assignment of Executor or a copy of the last will(s) and testament(s):</p>
+
+  <app-file-uploader
+    *ngIf="application?.id"
+    documentType="ExecutorDocuments"
+    fileTypes="FILE MUST BE IN PDF FORMAT."
+    [multipleFiles]="true"
+    entityName="application"
+    [extensions]="['pdf']"
+    (numberOfUploadedFiles)="onUploadedExecutorDocuments($event)"
+    [entityId]="application.id"
+    [uploadHeader]="'TO UPLOAD EXECUTOR DOCUMENTS, DRAG FILES HERE OR'"></app-file-uploader>
+
+  <p>Upload a copy of the Death Certificate:</p>
+
+  <app-file-uploader
+    *ngIf="application?.id"
+    documentType="DeathCertificate"
+    fileTypes="FILE MUST BE IN PDF FORMAT."
+    [multipleFiles]="true"
+    entityName="application"
+    [extensions]="['pdf']"
+    (numberOfUploadedFiles)="onUploadedlDeathCertificateDocuments($event)"
+    [entityId]="application.id"
+    [uploadHeader]="'TO UPLOAD DEATH CERTIFICATE, DRAG FILES HERE OR'"></app-file-uploader>
+
+  <hr />
+
+  <h4>B. Addition of Receiver</h4>
+  <span>
+    <strong>Receiver's Name:</strong>
+  </span>
+  <mat-form-field class="ml-1 mr-2">
+    <mat-label>First Name</mat-label>
+    <input matInput type="text" formControlName="firstNameNew" />
+  </mat-form-field>
+
+  <mat-form-field class="ml-1 mr-2">
+    <mat-label>Last Name</mat-label>
+    <input matInput type="text" formControlName="lastNameNew" />
+  </mat-form-field>
+
+  <p>
+    Upload a copy of Court Order appointing Receiver
+    <br />
+    (Order must include authority to operate the licensee's business and must specify the licence number(s)).
+  </p>
+
+  <app-file-uploader
+    *ngIf="application?.id"
+    documentType="ReceiverAppointment"
+    fileTypes="FILE MUST BE IN PDF FORMAT."
+    [multipleFiles]="true"
+    entityName="application"
+    [extensions]="['pdf']"
+    (numberOfUploadedFiles)="onUploadedletterOfIntentDocuments($event)"
+    [entityId]="application.id"
+    [uploadHeader]="'TO UPLOAD RECEIVER APPOINTMENT ORDER, DRAG FILES HERE OR'"></app-file-uploader>
+
+  <p>Upload a copy of Court Order filed under the Office of the Superintendent of Bankruptcy Canada.</p>
+
+  <app-file-uploader
+    *ngIf="application?.id"
+    documentType="BankruptcyOrder"
+    fileTypes="FILE MUST BE IN PDF FORMAT."
+    [multipleFiles]="true"
+    entityName="application"
+    [extensions]="['pdf']"
+    (numberOfUploadedFiles)="onUploadedletterOfIntentDocuments($event)"
+    [entityId]="application.id"
+    [uploadHeader]="'TO UPLOAD COURT ORDER, DRAG FILES HERE OR'"></app-file-uploader>
+</div>

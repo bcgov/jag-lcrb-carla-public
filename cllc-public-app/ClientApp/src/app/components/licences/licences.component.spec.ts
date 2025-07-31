@@ -18,8 +18,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { LicenceEventsService } from "@services/licence-events.service";
 
 const applicationDataServiceStub: Partial<ApplicationDataService> = {
-  getAllCurrentApplications: () => of([]),
-  getSubmittedApplicationCount: () => of(0)
+  getAllCurrentApplications: () => of([])
 };
 const licenceDataServiceStub: Partial<LicenseDataService> =
   { getAllOperatedLicenses: () => of([]), getAllCurrentLicenses: () => of([]) };

@@ -43,6 +43,7 @@ using System.Net.Http;
 using System.Net.Mime;
 using StackExchange.Redis;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
+using Gov.Lclb.Cllb.Public.Repositories;
 
 namespace Gov.Lclb.Cllb.Public
 {
@@ -76,6 +77,9 @@ namespace Gov.Lclb.Cllb.Public
 #endif
             // add singleton to allow Controllers to query the Request object
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            // Add repository classes, from /Repositories/*
+            services.AddScoped<TiedHouseConnectionsRepository>();
 
             // determine if we wire up Dynamics.
             if (!string.IsNullOrEmpty(_configuration["DYNAMICS_ODATA_URI"]))
@@ -544,6 +548,7 @@ namespace Gov.Lclb.Cllb.Public
             else
             {
                 Log.Logger = new LoggerConfiguration()
+                    .MinimumLevel.Debug()
                     .Enrich.FromLogContext()
                     .Enrich.WithExceptionDetails()
                     .WriteTo.Console()

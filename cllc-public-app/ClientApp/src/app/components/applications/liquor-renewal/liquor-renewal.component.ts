@@ -3,7 +3,6 @@ import { KeyValue } from "@angular/common";
 import { Application } from "@models/application.model";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Observable, Subject, forkJoin, of } from "rxjs";
-import { TiedHouseConnection } from "@models/tied-house-connection.model";
 import { UPLOAD_FILES_MODE } from "@components/licences/licences.component";
 import { ApplicationTypeNames, FormControlState } from "@models/application-type.model";
 import { Store } from "@ngrx/store";
@@ -81,8 +80,6 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
   payMethod: string;
   validationMessages: any[];
   showValidationMessages: boolean;
-  submittedApplications = 8;
-  tiedHouseFormData: TiedHouseConnection;
   possibleProblematicNameWarning = false;
   htmlContent = {} as ApplicationHTMLContent;
   readonly UPLOAD_FILES_MODE = UPLOAD_FILES_MODE;
@@ -149,10 +146,6 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
     });
 
     this.previousYear = (new Date().getFullYear() - 1).toString();
-
-    this.applicationDataService.getSubmittedApplicationCount()
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe(value => this.submittedApplications = value);
 
     this.establishmentWatchWordsService.initialize();
 

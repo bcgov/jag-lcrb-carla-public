@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Google.Protobuf.WellKnownTypes;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         [EnumMember(Value = "Pending Final Inspection")]
         PendingFinalInspection = 845280008,
         [EnumMember(Value = "Submitted")]
-        Submitted = 845280013,        
+        Submitted = 845280013,
         Terminated = 845280009,
         [EnumMember(Value = "Terminated and Refunded")]
         TerminatedAndRefunded = 845280010,
@@ -35,7 +36,10 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         ReviewingInspectionResults = 845280012,
 
         [EnumMember(Value = "Application Assessment")]
-        ApplicationAssessment = 845280014
+        ApplicationAssessment = 845280014,
+
+        [EnumMember(Value = "Licensee Action Required")]
+        LicenseeActionRequired = 845280016
     }
 
     public enum AdoxioFinalDecisionCodes
@@ -416,6 +420,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string AdditionalPropertyInformation { get; set; } //adoxio_additionalpropertyinformation
         public string InvoiceId;
         public string SecondaryInvoiceId;
+        public ApplicationExtension ApplicationExtension { get; set; }
+
         public string ApplyingPerson { get; set; } //_adoxio_applyingperson_value
         public bool? AuthorizedToSubmit { get; set; } //adoxio_authorizedtosubmit        
 
@@ -491,7 +497,12 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public ApplicationType ApplicationType { get; set; }
 
+        /// <summary>
+        /// The singleton cannabis tied house connection record for the user account.
+        /// </summary>
+        /// <value></value>
         public TiedHouseConnection TiedHouse { get; set; }
+        public List<TiedHouseConnection> TiedHouseConnections { get; set; }
         public PoliceJurisdiction PoliceJurisdiction { get; set; }
         public IndigenousNation IndigenousNation { get; set; }
         public ServiceHours ServiceHours { get; set; }
@@ -541,25 +552,25 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string Description1 { get; set; }
         public string Description2 { get; set; }
         public string Description3 { get; set; }
-        
+
         [JsonConverter(typeof(StringEnumConverter))]
         public ValueNotChanged? RenewalDUI { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
         public ValueNotChanged? RenewalThirdParty { get; set; }
 
 
-        public bool? IsMonth01 {get; set;}
-        public bool? IsMonth02 {get; set;}
-        public bool? IsMonth03 {get; set;}
-        public bool? IsMonth04 {get; set;}
-        public bool? IsMonth05 {get; set;}
-        public bool? IsMonth06 {get; set;}
-        public bool? IsMonth07 {get; set;}
-        public bool? IsMonth08 {get; set;}
-        public bool? IsMonth09 {get; set;}
-        public bool? IsMonth10 {get; set;}
-        public bool? IsMonth11 {get; set;}
-        public bool? IsMonth12 {get; set;}
+        public bool? IsMonth01 { get; set; }
+        public bool? IsMonth02 { get; set; }
+        public bool? IsMonth03 { get; set; }
+        public bool? IsMonth04 { get; set; }
+        public bool? IsMonth05 { get; set; }
+        public bool? IsMonth06 { get; set; }
+        public bool? IsMonth07 { get; set; }
+        public bool? IsMonth08 { get; set; }
+        public bool? IsMonth09 { get; set; }
+        public bool? IsMonth10 { get; set; }
+        public bool? IsMonth11 { get; set; }
+        public bool? IsMonth12 { get; set; }
 
         public DateTimeOffset? Establishmentopeningdate { get; set; }
         public bool? IsReadyValidInterest { get; set; }
@@ -697,6 +708,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool? CsNameChangeLicenseeSociety { get; set; }
         public bool? CsNameChangeLicenseePerson { get; set; }
         public bool? CsAdditionalReceiverOrExecutor { get; set; }
+        public bool? CsTiedHouseDeclaration { get; set; }
         public bool? PrimaryInvoicePaid { get; set; }
         public bool? SecondaryInvoicePaid { get; set; }
         public bool? IsOnINLand { get; set; }
@@ -734,7 +746,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public int? IsApplicantFranchiseOrAffiliated { get; set; }
 
         public string FranchiseOrAffiliatedBusiness { get; set; }
-        
+
         public int? HasSufficientRangeOfProducts { get; set; }
 
         public int? HasOtherProducts { get; set; }
@@ -754,11 +766,11 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public int? ManufacturerProductionAmountUnit { get; set; }
 
         //LCSD-6406
-        public string FederalLicenceNumber {get;set;}
+        public string FederalLicenceNumber { get; set; }
         public string FederalLicenceName { get; set; }
-        public string FPAddressCity {get;set;}
-        public string FPAddressPostalCode {get;set;}
-        public string FPAddressStreet {get;set;}
+        public string FPAddressCity { get; set; }
+        public string FPAddressPostalCode { get; set; }
+        public string FPAddressStreet { get; set; }
 
         public string ProductsListAndDescription { get; set; }
         public bool? UploadDeclarations { get; set; }
@@ -793,4 +805,14 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public DateTimeOffset? EstablishmentReopeningDate { get; set; }
         public int? temporaryRelocationCriteria { get; set; }
     }
+
+    public class ApplicationExtension
+    {
+        public string Id { get; set; }
+        public int HasLiquorTiedHouseOwnershipOrControl { get; set; }
+        public int HasLiquorTiedHouseThirdPartyAssociations { get; set; }
+        public int HasLiquorTiedHouseFamilyMemberInvolvement { get; set; }
+
+    }
+
 }

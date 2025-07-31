@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { DataService } from "./data.service";
 import { catchError } from "rxjs/operators";
+import { Observable } from "rxjs";
 
 type PaymentType =
 'default' |
@@ -11,8 +12,18 @@ type PaymentType =
 'secondaryInvoice' |
 'specialEventInvoice'
 ;
+
+type PaymentTypes = Record<PaymentType, {
+  getPaymentURI: (id: string) => string;
+  verifyPaymentURI: (id: string) => string;
+}>;
+
 /**
- * 
+ * Service for handling payment-related data operations.
+ *
+ * @export
+ * @class PaymentDataService
+ * @extends {DataService}
  */
 @Injectable()
 export class PaymentDataService extends DataService {
@@ -20,7 +31,7 @@ export class PaymentDataService extends DataService {
   submitPath = "submit/";
   verifyPath = "verify/";
 
-  readonly paymentTypes = {
+  readonly paymentTypes: PaymentTypes = {
     default: {
       getPaymentURI: (id) => `api/payment/submit/${id}`,
       verifyPaymentURI: (id) => `api/payment/verify/${id}`
@@ -51,20 +62,58 @@ export class PaymentDataService extends DataService {
     super();
   }
 
-  getPaymentURI(paymentType: PaymentType, id: string) {
+
+  /**
+   * Gets the payment URI for a permanent change application.
+   *
+   * @param {PaymentType} paymentType
+   * @param {string} id
+   * @return {*}  {Observable<Object>}
+   */
+  getPermanentChangePaymentURI(paymentType: PaymentType, id: string): Observable<Object> {
+    return this.getPaymentURI(paymentType, id, {
+      redirectContext: 'permanent-change'
+    });
+  }
+
+  /**
+   * Gets the payment URI for a legal entity application.
+   *
+   * @param {PaymentType} paymentType
+   * @param {string} id
+   * @return {*}  {Observable<Object>}
+   */
+  getLegalEntityPaymentURI(paymentType: PaymentType, id: string): Observable<Object> {
+    return this.getPaymentURI(paymentType, id, {
+      redirectContext: 'legal-entity'
+    });
+  }
+
+  /**
+   * Gets the payment URI for a specific payment type and ID.
+   *
+   * @param {PaymentType} paymentType
+   * @param {string} id
+   * @param {Record<string, string>} [queryParams] Optional query parameters to include in the request.
+   * @return {*}  {Observable<Object>}
+   */
+  getPaymentURI(paymentType: PaymentType, id: string, queryParams?: Record<string, string>): Observable<Object> {
     const payType = this.paymentTypes[paymentType];
-    if (!payType) {
-      return;
-    }
-    return this.http.get(payType.getPaymentURI(id), { headers: this.headers })
+
+    return this.http.get(payType.getPaymentURI(id), { headers: this.headers, params: queryParams })
       .pipe(catchError(this.handleError));
   }
 
+  /**
+   * Verifies the payment for a specific payment type and ID.
+   *
+   * @param {PaymentType} paymentType
+   * @param {string} id
+   * @return {*}
+   */
   verifyPaymentURI(paymentType: PaymentType, id: string) {
     const payType = this.paymentTypes[paymentType];
-    if (!payType) {
-      return;
-    }
+
     return this.http.get(payType.verifyPaymentURI(id), { headers: this.headers })
       .pipe(catchError(this.handleErrorWith503));
   }
