@@ -237,10 +237,10 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
     updated.viewMode = TiedHouseViewMode.disabled;
     Object.assign(original, updated);
 
-    this.submitTiedHouseDeclarationChange(original, updated, groupIndex);
+    this.submitTiedHouseDeclarationChange(original, groupIndex);
   }
 
-  submitTiedHouseDeclarationChange(declaration: TiedHouseConnection, x?: TiedHouseConnection, groupIndex?: number) {
+  submitTiedHouseDeclarationChange(declaration: TiedHouseConnection, groupIndex: number) {
     this.save(declaration)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(([saveSucceeded, result]) => {
@@ -267,6 +267,7 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
    * @param {number} accordionIndex
    */
   removeNewTiedHouseDeclaration(declaration: TiedHouseConnection, keepAccordionOpen: boolean, accordionIndex: number) {
+    console.log(accordionIndex);
     var isExistingDeclaration = declaration.supersededById;
     //if declaration has not been saved to dynamics remove from declaration list
     if (!declaration.id) {
@@ -286,18 +287,15 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
             if (isExistingDeclaration) {
               declaration.viewMode = TiedHouseViewMode.existing;
               declaration.markedForRemoval = true;
-              this.submitTiedHouseDeclarationChange(declaration);
+              this.submitTiedHouseDeclarationChange(declaration, accordionIndex);
             }
             //else declaration is not an existing declaration but has been saved to dynamics so hide and call api to remove declaration from dynamics
             else {
               declaration.viewMode = TiedHouseViewMode.hidden;
               declaration.markedForRemoval = true;
-              this.submitTiedHouseDeclarationChange(declaration);
+              this.submitTiedHouseDeclarationChange(declaration, accordionIndex);
             }
 
-            if (keepAccordionOpen) {
-              this.openPanel(accordionIndex);
-            }
           }
         }
       });
@@ -311,7 +309,7 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
    * @param {TiedHouseConnection} declaration
    * @return {*}
    */
-  removeExistingTiedHouseDeclaration(declaration: TiedHouseConnection) {
+  removeExistingTiedHouseDeclaration(declaration: TiedHouseConnection, groupIndex: number) {
     if (declaration.markedForRemoval === true) {
       // Already marked for removal, nothing to do
       return;
@@ -327,7 +325,7 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
         onConfirm: () => {
           declaration.statusCode = TiedHouseStatusCode.new;
           declaration.markedForRemoval = true;
-          this.submitTiedHouseDeclarationChange(declaration);
+          this.submitTiedHouseDeclarationChange(declaration, groupIndex);
         }
       }
     });
@@ -340,7 +338,7 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
    * @param {TiedHouseConnection} declaration
    * @return {*}
    */
-  restoreExistingTiedHouseDeclaration(declaration: TiedHouseConnection) {
+  restoreExistingTiedHouseDeclaration(declaration: TiedHouseConnection, groupIndex: number) {
     if (declaration.markedForRemoval === false) {
       // Already not marked for removal, nothing to do
       return;
@@ -348,7 +346,7 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
 
     declaration.statusCode = TiedHouseStatusCode.existing;
     declaration.markedForRemoval = false;
-    this.submitTiedHouseDeclarationChange(declaration);
+    this.submitTiedHouseDeclarationChange(declaration, groupIndex);
   }
 
   /**
@@ -368,6 +366,7 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
    * @param {number} [index]
    */
   openPanel(index?: number) {
+    console.log(index);
     this.openedPanelIndex = index ?? this.groupedTiedHouseDeclarations.length - 1;
   }
 
