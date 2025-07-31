@@ -66,8 +66,19 @@ export interface PermanentChangeTypesOfChangesOption {
    * @memberof PermanentChangeTypesOfChangesOption
    */
   helpTextLink?: string;
+  /**
+   * Used to filter change types by applicant licences
+   *
+   * @type {string}
+   * @memberof PermanentChangeTypesOfChangesOption
+   */
+  availableToLicenceType?: AvailableToLicenceTypes;
 }
-
+export enum AvailableToLicenceTypes{
+  LiquorLicenceOnly = 1,
+  CannabisLicenceOnly = 2,
+  Both = 3
+}
 /**
  * The list of options for the types of changes in a permanent change application.
  */
@@ -224,7 +235,7 @@ export const permanentChangeTypesOfChanges: PermanentChangeTypesOfChangesOption[
       'Ex: A new director has a Tied House relationship. If you are required to report a Change of Directors or Officers, then you do not need to report this application as well.',
       'Generally, Tied House relationships between licensees (specifically liquor primary, food primary, private liquor/wine store, or the business location of a caterer) and manufacturers or agents are prohibited under the <a href="https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/15019#section62" target="_blank">LCLA</a>.',
       '“Tied house” refers to a relationship between a manufacturer/agent and another licensee if the relationship puts the licensee in the position of being likely to promote the sale of that manufacturer’s/agent’s liquor products over another manufacturer.'
-    ]
-    //helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
+    ],
+    availableToLicenceType: AvailableToLicenceTypes.LiquorLicenceOnly
   }
 ];

@@ -236,8 +236,10 @@ namespace Gov.Lclb.Cllb.Public.Repositories
                         incomingTiedHouseConnection.AssociatedLiquorLicense.Select(item => item.Id).ToList(),
                         adoxioTiedHouseConnection.AdoxioTiedhouseconnectionid
                     );
+                    
                 }
 
+                adoxioTiedHouseConnection._adoxioApplicationValue = applicationId;
                 return adoxioTiedHouseConnection.ToViewModel();
             }
 

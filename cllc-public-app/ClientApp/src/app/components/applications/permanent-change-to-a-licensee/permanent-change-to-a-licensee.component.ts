@@ -4,7 +4,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppState } from '@app/app-state/models/app-state';
-import { permanentChangeTypesOfChanges } from '@app/constants/permanent-change-types-of-changes';
+import {
+  AvailableToLicenceTypes,
+  permanentChangeTypesOfChanges
+} from '@app/constants/permanent-change-types-of-changes';
 import { faIdCard } from '@fortawesome/free-regular-svg-icons';
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { Account } from '@models/account.model';
@@ -57,6 +60,7 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
   tiedHouseDeclaration: TiedHouseDeclarationComponent;
 
   appContactDisabled: boolean;
+  formDisabled: boolean;
   applicationId: string;
   canCreateNewApplication: boolean;
   createApplicationInProgress: boolean;
@@ -106,15 +110,6 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
     private matDialog: MatDialog
   ) {
     super();
-    this.store
-      .select((state) => state.currentAccountState.currentAccount)
-      .pipe(filter((account) => !!account))
-      .subscribe((account) => {
-        this.account = account;
-        this.changeList = permanentChangeTypesOfChanges.filter(
-          (item) => !!item.availableTo.find((bt) => bt === account.businessType)
-        );
-      });
 
     this.route.paramMap.subscribe((pmap) => {
       this.invoiceType = pmap.get('invoiceType');
@@ -142,6 +137,22 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
       authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]]
     });
+
+    this.store
+      .select((state) => state.currentAccountState.currentAccount)
+      .pipe(filter((account) => !!account))
+      .subscribe((account) => {
+        this.account = account;
+        this.changeList = permanentChangeTypesOfChanges.filter(
+          (item) => !!item.availableTo.find((bt) => bt === account.businessType)
+        );
+        //if cannabis Licence exists filter out change types that are for liquor licences only
+        if (this.hasCannabis) {
+          this.changeList = this.changeList.filter(
+            (item) => item.availableToLicenceType != AvailableToLicenceTypes.LiquorLicenceOnly
+          );
+        }
+      });
 
     this.loadData();
   }
@@ -224,9 +235,17 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
       if (this.application.primaryInvoicePaid || this.application.secondaryInvoicePaid) {
         this.form.disable();
         this.appContactDisabled = true;
+        this.formDisabled = true;
       }
       this.form.patchValue(application);
       this.dataLoaded = true;
+    }
+
+    //if cannabis Licence exists filter out change types that are for liquor licences only
+    if (this.hasCannabis) {
+      this.changeList = this.changeList.filter(
+        (item) => item.availableToLicenceType != AvailableToLicenceTypes.LiquorLicenceOnly
+      );
     }
   }
 
