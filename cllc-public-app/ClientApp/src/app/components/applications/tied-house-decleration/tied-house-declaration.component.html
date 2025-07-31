@@ -66,13 +66,13 @@
                       *ngIf="!_tiedHouseDeclaration.markedForRemoval"
                       class="btn btn-danger btn-md"
                       type="button"
-                      (click)="removeExistingTiedHouseDeclaration(_tiedHouseDeclaration)">
+                      (click)="removeExistingTiedHouseDeclaration(_tiedHouseDeclaration, tiedHouseDeclarationsIndex)">
                       Remove
                     </button>
                     <button
                       *ngIf="_tiedHouseDeclaration.markedForRemoval"
                       class="btn btn-link"
-                      (click)="restoreExistingTiedHouseDeclaration(_tiedHouseDeclaration)">
+                      (click)="restoreExistingTiedHouseDeclaration(_tiedHouseDeclaration, tiedHouseDeclarationsIndex)">
                       Restore
                     </button>
                   </div>
@@ -86,7 +86,7 @@
                     style="width: 100%"
                     [isReadOnly]="isReadOnly"
                     [tiedHouseDecleration]="_tiedHouseDeclaration"
-                    (saveTiedHouseDecclaration)="saveTiedHouseDeclaration($event, _tiedHouseDeclaration)"
+                    (saveTiedHouseDecclaration)="saveTiedHouseDeclaration($event, _tiedHouseDeclaration, tiedHouseDeclarationsIndex)"
                     (removeTiedHouseDeclaration)="
                       removeNewTiedHouseDeclaration(
                         _tiedHouseDeclaration,

@@ -235,7 +235,6 @@ export class AccountProfileComponent extends FormBase implements OnInit {
     public featureFlagService: FeatureFlagService
   ) {
     super();
-
     combineLatest([this.route.paramMap, this.featureFlagService.featureOn('ORVEnabled')])
       .pipe(
         takeWhile(() => this.componentActive),
@@ -259,7 +258,6 @@ export class AccountProfileComponent extends FormBase implements OnInit {
             this.application = application;
             this.connectionToOtherLiquorLicencesFormData = application.applicationExtension;
           }
-
           this.hasLoadedData = true;
         },
         error: (error) => {

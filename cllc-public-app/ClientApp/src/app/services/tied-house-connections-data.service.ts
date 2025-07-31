@@ -59,7 +59,7 @@ export class TiedHouseConnectionsDataService extends DataService {
    * @param {string} applicationId
    * @return {*}  {Observable<TiedHouseConnection[]>}
    */
-  GetLiquorTiedHouseConnectionsForApplication(applicationId: string): Observable<TiedHouseConnection[]> {
+  GetLiquorTiedHouseConnectionsForApplication(applicationId: string): Observable<TiedHouseConnection[]> { 
     const apiPath = `api/tiedhouseconnections/liquor/application/${applicationId}`;
     return this.http.get<TiedHouseConnection[]>(apiPath, { headers: this.headers }).pipe(catchError(this.handleError));
   }
