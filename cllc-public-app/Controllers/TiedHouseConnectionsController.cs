@@ -176,6 +176,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
+            _logger.LogDebug(
+                $"GetLiquorTiedHouseConnectionsForApplication. ApplicationId = {applicationId}. AccountId = {userSettings.AccountId}."
+            );
+
             try
             {
                 var result = _tiedHouseConnectionsRepository.GetLiquorTiedHouseConnectionsForApplication(
@@ -216,6 +220,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string applicationId
         )
         {
+            _logger.LogDebug($"AddLiquorTiedHouseConnectionToApplication. ApplicationId = {applicationId}.");
+
             try
             {
                 var result = await _tiedHouseConnectionsRepository.AddLiquorTiedHouseConnectionToApplication(
@@ -259,14 +265,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string accountId
         )
         {
+            _logger.LogDebug($"AddLiquorTiedHouseConnectionToUser. AccountId = {accountId}.");
+
             try
             {
-                var result = _tiedHouseConnectionsRepository.AddLiquorTiedHouseConnectionToUser(
+                var result = await _tiedHouseConnectionsRepository.AddLiquorTiedHouseConnectionToUser(
                     tiedHouseConnection,
                     accountId
                 );
 
-                return new JsonResult(tiedHouseConnection);
+                return new JsonResult(result);
             }
             catch (HttpOperationException httpOperationException)
             {
@@ -302,15 +310,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             [FromBody] TiedHouseConnection tiedHouseConnection
         )
         {
+            _logger.LogDebug($"AddCannabisTiedHouseConnectionToUser. AccountId = {accountId}.");
+
             try
             {
-                var createdCannabisTiedHouseConnection =
-                    await _tiedHouseConnectionsRepository.UpsertCannabisTiedHouseConnection(
-                        accountId,
-                        tiedHouseConnection
-                    );
+                var result = await _tiedHouseConnectionsRepository.UpsertCannabisTiedHouseConnection(
+                    accountId,
+                    tiedHouseConnection
+                );
 
-                return new JsonResult(createdCannabisTiedHouseConnection);
+                return new JsonResult(result);
             }
             catch (HttpOperationException httpOperationException)
             {
@@ -341,13 +350,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             try
             {
-                var createdCannabisTiedHouseConnection =
-                    await _tiedHouseConnectionsRepository.UpdateCannabisTiedHouseConnection(
-                        tiedHouseConnectionId,
-                        tiedHouseConnection
-                    );
+                var result = await _tiedHouseConnectionsRepository.UpdateCannabisTiedHouseConnection(
+                    tiedHouseConnectionId,
+                    tiedHouseConnection
+                );
 
-                return new JsonResult(createdCannabisTiedHouseConnection);
+                return new JsonResult(result);
             }
             catch (HttpOperationException httpOperationException)
             {

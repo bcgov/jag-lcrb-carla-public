@@ -199,25 +199,29 @@ namespace Gov.Lclb.Cllb.Public.Repositories
         /// data, and the old record is updated to set the `SupersededBy` field to the new record's ID. In this way,
         /// the history of changes to the tied house connection record is preserved.
         /// </remarks>
-        /// <param name="tiedHouseConnection"></param>
+        /// <param name="incomingTiedHouseConnection"></param>
         /// <param name="applicationId"></param>
         /// <returns></returns>
         public async Task<TiedHouseConnection> AddLiquorTiedHouseConnectionToApplication(
-            TiedHouseConnection tiedHouseConnection,
+            TiedHouseConnection incomingTiedHouseConnection,
             string applicationId
         )
         {
             MicrosoftDynamicsCRMadoxioTiedhouseconnection adoxioTiedHouseConnection =
                 new MicrosoftDynamicsCRMadoxioTiedhouseconnection();
 
-            adoxioTiedHouseConnection.CopyValues(tiedHouseConnection);
+            adoxioTiedHouseConnection.CopyValues(incomingTiedHouseConnection);
 
             // Ensure the tied house connection is of type (category) "Liquor"
             adoxioTiedHouseConnection.AdoxioCategoryType = (int)TiedHouseCategoryType.Liquor;
 
-            if (tiedHouseConnection.ApplicationId == applicationId)
+            // If the incoming record already has an account ID defined, then we are updating an existing record.
+            if (incomingTiedHouseConnection.ApplicationId == applicationId)
             {
-                if (tiedHouseConnection.MarkedForRemoval == true && tiedHouseConnection.SupersededById == null)
+                if (
+                    incomingTiedHouseConnection.MarkedForRemoval == true
+                    && incomingTiedHouseConnection.SupersededById == null
+                )
                 {
                     await DeleteTiedHouseConnectionById(adoxioTiedHouseConnection.AdoxioTiedhouseconnectionid);
                 }
@@ -229,39 +233,47 @@ namespace Gov.Lclb.Cllb.Public.Repositories
                     );
 
                     await RemoveAndAddAssociateLicenses(
-                        tiedHouseConnection.AssociatedLiquorLicense.Select(item => item.Id).ToList(),
+                        incomingTiedHouseConnection.AssociatedLiquorLicense.Select(item => item.Id).ToList(),
                         adoxioTiedHouseConnection.AdoxioTiedhouseconnectionid
                     );
-                    //Used to populate applicationId in return json
-                    adoxioTiedHouseConnection._adoxioApplicationValue = applicationId;
+                    
                 }
+
+                adoxioTiedHouseConnection._adoxioApplicationValue = applicationId;
+                return adoxioTiedHouseConnection.ToViewModel();
             }
-            else
+
+            // If the incoming record does not have an account ID defined, then we are creating a new record.
+
+            if (!string.IsNullOrEmpty(incomingTiedHouseConnection.id))
             {
-                if (!string.IsNullOrEmpty(tiedHouseConnection.id))
-                {
-                    adoxioTiedHouseConnection.SupersededByOdataBind =
-                        $"/adoxio_tiedhouseconnections({tiedHouseConnection.id})";
-                }
-                adoxioTiedHouseConnection.ApplicationOdataBind = $"/adoxio_applications({applicationId})";
-
-                adoxioTiedHouseConnection.AdoxioTiedhouseconnectionid = null;
-                adoxioTiedHouseConnection.AdoxioSelfDeclared = 1;
-                adoxioTiedHouseConnection.AdoxioDeclarationDate = DateTimeOffset.Now;
-
-                var createdCannabisTiedHouseConnectionRecord = await _dynamicsClient.Tiedhouseconnections.CreateAsync(
-                    adoxioTiedHouseConnection
-                );
-
-                await AssociateTiedHouseConnectionToLicenses(
-                    tiedHouseConnection.AssociatedLiquorLicense.Select(item => item.Id).ToList(),
-                    createdCannabisTiedHouseConnectionRecord.AdoxioTiedhouseconnectionid
-                );
-
-                //Updates adoxioTiedHouseConnection with generated guids to return to portal
-                adoxioTiedHouseConnection = createdCannabisTiedHouseConnectionRecord;
+                // If the incoming record already has an ID, then we are soft-deleting the previous version of the
+                // record, and creating a new record, which will "supersede" the previous version.
+                adoxioTiedHouseConnection.SupersededByOdataBind =
+                    $"/adoxio_tiedhouseconnections({incomingTiedHouseConnection.id})";
             }
-            return adoxioTiedHouseConnection.ToViewModel();
+
+            // Associate the tied house connection with the application
+            adoxioTiedHouseConnection.ApplicationOdataBind = $"/adoxio_applications({applicationId})";
+
+            // Ensure this is a new tied house connection
+            adoxioTiedHouseConnection.AdoxioTiedhouseconnectionid = null;
+
+            adoxioTiedHouseConnection.AdoxioSelfDeclared = 1;
+
+            adoxioTiedHouseConnection.AdoxioDeclarationDate = DateTimeOffset.Now;
+
+            var createdTiedHouseConnection = await _dynamicsClient.Tiedhouseconnections.CreateAsync(
+                adoxioTiedHouseConnection
+            );
+
+            // Associate the new tied house connection with the associated liquor licenses
+            await AssociateTiedHouseConnectionToLicenses(
+                incomingTiedHouseConnection.AssociatedLiquorLicense.Select(item => item.Id).ToList(),
+                createdTiedHouseConnection.AdoxioTiedhouseconnectionid
+            );
+
+            return createdTiedHouseConnection.ToViewModel();
         }
 
         /// <summary>
@@ -275,18 +287,57 @@ namespace Gov.Lclb.Cllb.Public.Repositories
         ///   <item><description>The user does not have any approved applications, of any type.</description></item>
         /// </list>
         /// </remarks>
-        /// <param name="tiedHouseConnection">The tied house connection data to create.</param>
-        /// <param name="accountId">The ID of the user's account.</param>
+        /// <param name="incomingTiedHouseConnection">The tied house connection data to create.</param>
+        /// /// <param name="accountId">The ID of the user's account.</param>
         /// <returns>The created tied house connection.</returns>
         public async Task<TiedHouseConnection> AddLiquorTiedHouseConnectionToUser(
-            TiedHouseConnection tiedHouseConnection,
+            TiedHouseConnection incomingTiedHouseConnection,
             string accountId
         )
         {
             MicrosoftDynamicsCRMadoxioTiedhouseconnection adoxioTiedHouseConnection =
                 new MicrosoftDynamicsCRMadoxioTiedhouseconnection();
 
-            adoxioTiedHouseConnection.CopyValues(tiedHouseConnection);
+            adoxioTiedHouseConnection.CopyValues(incomingTiedHouseConnection);
+
+            // Ensure the tied house connection is of type (category) "Liquor"
+            adoxioTiedHouseConnection.AdoxioCategoryType = (int)TiedHouseCategoryType.Liquor;
+
+            // If the incoming record already has an account ID defined, then we are updating an existing record.
+            if (incomingTiedHouseConnection.AccountId == accountId)
+            {
+                if (
+                    incomingTiedHouseConnection.MarkedForRemoval == true
+                    && incomingTiedHouseConnection.SupersededById == null
+                )
+                {
+                    await DeleteTiedHouseConnectionById(adoxioTiedHouseConnection.AdoxioTiedhouseconnectionid);
+                }
+                else
+                {
+                    await _dynamicsClient.Tiedhouseconnections.UpdateAsync(
+                        adoxioTiedHouseConnection.AdoxioTiedhouseconnectionid,
+                        adoxioTiedHouseConnection
+                    );
+
+                    await RemoveAndAddAssociateLicenses(
+                        incomingTiedHouseConnection.AssociatedLiquorLicense.Select(item => item.Id).ToList(),
+                        adoxioTiedHouseConnection.AdoxioTiedhouseconnectionid
+                    );
+                }
+
+                return adoxioTiedHouseConnection.ToViewModel();
+            }
+
+            // If the incoming record does not have an account ID defined, then we are creating a new record.
+
+            if (!string.IsNullOrEmpty(incomingTiedHouseConnection.id))
+            {
+                // If the incoming record already has an ID, then we are soft-deleting the previous version of the
+                // record, and creating a new record, which will "supersede" the previous version.
+                adoxioTiedHouseConnection.SupersededByOdataBind =
+                    $"/adoxio_tiedhouseconnections({incomingTiedHouseConnection.id})";
+            }
 
             // Ensure this is a new tied house connection
             adoxioTiedHouseConnection.AdoxioTiedhouseconnectionid = null;
@@ -294,26 +345,27 @@ namespace Gov.Lclb.Cllb.Public.Repositories
             // Tied house connections created directly against the user account are automatically set to "Existing"
             adoxioTiedHouseConnection.Statuscode = (int)TiedHouseStatusCode.Existing;
 
-            // Ensure the tied house connection is of type (category) "Liquor"
-            adoxioTiedHouseConnection.AdoxioCategoryType = (int)TiedHouseCategoryType.Liquor;
+            adoxioTiedHouseConnection.AdoxioSelfDeclared = 1;
 
-            var createdCannabisTiedHouseConnectionRecord = await _dynamicsClient.Tiedhouseconnections.CreateAsync(
+            adoxioTiedHouseConnection.AdoxioDeclarationDate = DateTimeOffset.Now;
+
+            var createdTiedHouseConnection = await _dynamicsClient.Tiedhouseconnections.CreateAsync(
                 adoxioTiedHouseConnection
             );
 
             // Associate the new tied house connection with the account
             await AssociateTiedHouseConnectionToUserAccount(
-                createdCannabisTiedHouseConnectionRecord.AdoxioTiedhouseconnectionid,
+                createdTiedHouseConnection.AdoxioTiedhouseconnectionid,
                 accountId
             );
 
-            // Associate the new tied house connection with the provided licenses
+            // Associate the new tied house connection with the associated liquor licenses
             await AssociateTiedHouseConnectionToLicenses(
-                tiedHouseConnection.AssociatedLiquorLicense.Select(item => item.Id).ToList(),
-                createdCannabisTiedHouseConnectionRecord.AdoxioTiedhouseconnectionid
+                incomingTiedHouseConnection.AssociatedLiquorLicense.Select(item => item.Id).ToList(),
+                createdTiedHouseConnection.AdoxioTiedhouseconnectionid
             );
 
-            return adoxioTiedHouseConnection.ToViewModel();
+            return createdTiedHouseConnection.ToViewModel();
         }
 
         /// <summary>
@@ -506,6 +558,11 @@ namespace Gov.Lclb.Cllb.Public.Repositories
         /// <summary>
         /// Removes existing license associations and adds new ones for a tied house connection.
         /// </summary>
+        /// <remarks>
+        /// Fetches the existing tied house connection by ID, and compares the existing license associations
+        /// with the provided list of licenses. If they differ, it removes the existing associations and
+        /// adds the new ones.
+        /// </remarks>
         /// <param name="licenses"></param>
         /// <param name="tiedHouseId"></param>
         /// <returns></returns>
