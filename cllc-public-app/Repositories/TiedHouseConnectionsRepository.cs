@@ -232,6 +232,8 @@ namespace Gov.Lclb.Cllb.Public.Repositories
                         tiedHouseConnection.AssociatedLiquorLicense.Select(item => item.Id).ToList(),
                         adoxioTiedHouseConnection.AdoxioTiedhouseconnectionid
                     );
+                    
+                    adoxioTiedHouseConnection._adoxioApplicationValue = applicationId;
                 }
             }
             else
@@ -259,7 +261,6 @@ namespace Gov.Lclb.Cllb.Public.Repositories
                 //Updates adoxioTiedHouseConnection with generated guids to return to portal
                 adoxioTiedHouseConnection = createdCannabisTiedHouseConnectionRecord;
             }
-
             return adoxioTiedHouseConnection.ToViewModel();
         }
 
