@@ -524,7 +524,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     //LCSD-6488: Change to BCEID Web Query
                     Gov.Lclb.Cllb.Interfaces.BCeIDBasic bceidBasic = await _bceid.ProcessBasicQuery(userSettings.SiteMinderGuid);
                     _logger.LogDebug(LoggingEvents.Get, $"basic Info from bceid: {JsonConvert.SerializeObject(bceidBasic)}");
-                    if(bceidBasic != null)
+                    if (bceidBasic != null)
                     {
                         userContact.Firstname = bceidBasic.individualFirstname;
                         userContact.Lastname = bceidBasic.individualSurname;
@@ -635,8 +635,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     var patchContact = new MicrosoftDynamicsCRMcontact()
                     {
                         ParentCustomerIdAccountODataBind = _dynamicsClient.GetEntityURI("accounts", account.Accountid),
-                        
-                };
+
+                    };
                     try
                     {
                         _dynamicsClient.Contacts.Update(userContact.Contactid, patchContact);
@@ -644,8 +644,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     catch (HttpOperationException httpOperationException)
                     {
                         _logger.LogError(httpOperationException, "Error setting primary contact link for contact");
-                            throw new HttpOperationException("Error setting primary contact link for contact");
-                        
+                        throw new HttpOperationException("Error setting primary contact link for contact");
+
                     }
                     catch (Exception e)
                     {
@@ -654,7 +654,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
 
                     Odataid contactId = new Odataid()
-                    { 
+                    {
                         OdataidProperty = _dynamicsClient.GetEntityURI("contacts", userContact.Contactid)
                     };
                     try
@@ -690,7 +690,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     legalEntity.AdoxioAccount = await _dynamicsClient.GetAccountByIdAsync(Guid.Parse(account.Accountid));
                 }
 
- 
+
 
                 legalEntityString = JsonConvert.SerializeObject(legalEntity);
                 _logger.LogDebug("Legal Entity after creation in dynamics --> " + legalEntityString);
@@ -755,7 +755,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
             }
 
-            
+
             _logger.LogDebug(LoggingEvents.Save, "Patching the userContact so it relates to the account.");
             // parent customer id relationship will be created using the method here:
             //https://msdn.microsoft.com/en-us/library/mt607875.aspx
@@ -1257,9 +1257,58 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
 
             }
-            
+
             return Ok("OK");
-            
+
+        }
+
+        /// <summary>
+        /// Returns a summary of the current user's account. This contains basic high level information about the
+        /// account and all licences they have. This is useful for conditional logic that depends on a user having
+        /// or not having certain licences.
+        /// <remarks>
+        /// This controller could be expanded to include other high level information, as needed.
+        /// </remarks>
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("current/summary")]
+        [Authorize(Policy = "Business-User")]
+        public async Task<ActionResult<AccountSummary>> AccountSummary()
+        {
+            _logger.LogDebug("getAccountSummary");
+
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+
+            if (userSettings.AccountId == null)
+            {
+                _logger.LogError(LoggingEvents.NotFound, "No account found for the user.");
+                return NotFound("No account found for the user.");
+            }
+
+            var userType = userSettings.UserType;
+
+            var filter = $"_adoxio_licencee_value eq {userSettings.AccountId} and statecode eq 0";
+            var select = new List<string> { "adoxio_licencesid,adoxio_LicenceType,adoxio_expirydate,statuscode" };
+            var expand = new List<string> { "adoxio_LicenceType($select=adoxio_name)" };
+
+            var licences = await _dynamicsClient.Licenceses.GetAsync(filter: filter, select: select, expand: expand);
+
+            var accountSummary = new AccountSummary
+            {
+                accountId = userSettings.AccountId,
+                licences = licences
+                    .Value.Select(item => new AccountSummaryLicence
+                    {
+                        licenceId = item.AdoxioLicencesid,
+                        licenseType = item.AdoxioLicenceType?.AdoxioName,
+                        expiryDate = item.AdoxioExpirydate,
+                        statusCode = item.Statuscode
+                    })
+                    .ToList(),
+                applications = new List<AccountSummaryApplications>()
+            };
+
+            return Ok(accountSummary);
         }
     }
 }
