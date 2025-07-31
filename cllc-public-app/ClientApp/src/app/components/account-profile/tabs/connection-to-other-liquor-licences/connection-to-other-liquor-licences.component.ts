@@ -11,6 +11,25 @@ import { forkJoin } from 'rxjs/internal/observable/forkJoin';
 
 export type ConnectionToOtherLiquorLicencesFormData = ApplicationExtension;
 
+// Business rule: Tied House Connections are editable for certain licence types.
+const LICENCE_TYPES_FOR_WHICH_TIED_HOUSE_IS_EDITABLE = [
+  'Agent',
+  'Catering',
+  'Food Primary',
+  'Manufacturer',
+  'Liquor Primary',
+  'Liquor Primary Club',
+  'UBrew and UVin',
+  'Rural Licensee Retail Store'
+];
+
+// Business rule: Tied House Connections are editable for certain application types.
+const APPLICATION_TYPES_FOR_WHICH_TIED_HOUSE_IS_EDITABLE = [
+  'Third Party Operator',
+  'Liquor Licence Renewal',
+  'Liquor Licence Transfer'
+];
+
 /**
  * Component for managing connections to other liquor licences.
  * - Application level form fields pertaining to connections to other liquor licences
@@ -169,7 +188,7 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnChang
    */
   get showTiedHouseDeclarationSection(): boolean {
     if (this.isTiedHouseReadOnly) {
-      // Always show the section if the form is read-only.
+      // Always show the section if the tied house component is read-only.
       return true;
     }
 
@@ -190,14 +209,14 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnChang
   }
 
   /**
-   * Whether the Tied House Connections form is read-only.
+   * Whether the Tied House Connections component is read-only.
    *
    * @readonly
    * @type {boolean}
    */
   get isTiedHouseReadOnly(): boolean {
     if (this.application) {
-      // If an application is provided, then the form is editable if the application is of a certain type.
+      // If an application is provided, then the tied house component is editable if the application is of a certain type.
       return !this.isTiedHouseConnectionsEditableForApplication;
     }
 
@@ -209,7 +228,7 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnChang
 
     // if (!this.userHasAtLeastOneApprovedApplication && !this.userHasAtLeastOneExistingTiedHouseConnection) {
     //   // If no application is provided, but the user also has no existing applications and no existing tied house
-    //   // connections, then the form is editable.
+    //   // connections, then the tied house component is editable.
     //   return false;
     // }
 
@@ -227,28 +246,13 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnChang
       return false;
     }
 
-    if (
-      [
-        'Agent',
-        'Catering',
-        'Food Primary',
-        'Manufacturer',
-        'Liquor Primary',
-        'Liquor Primary Club',
-        'UBrew and UVin',
-        'Rural Licensee Retail Store'
-      ].includes(this.application.licenseType)
-    ) {
-      // If the application is for a licence of a certain type, then the form is editable.
+    if (LICENCE_TYPES_FOR_WHICH_TIED_HOUSE_IS_EDITABLE.includes(this.application.licenseType)) {
+      // If the application is for a licence of a certain type, then the tied house component is editable.
       return true;
     }
 
-    if (
-      ['Third Party Operator', 'Liquor Licence Renewal', 'Liquor Licence Transfer'].includes(
-        this.application.applicationType.name
-      )
-    ) {
-      // If the application is of a certain type, then the form is editable.
+    if (APPLICATION_TYPES_FOR_WHICH_TIED_HOUSE_IS_EDITABLE.includes(this.application.applicationType.name)) {
+      // If the application is of a certain type, then the tied house component is editable.
       return true;
     }
 

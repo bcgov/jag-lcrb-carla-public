@@ -12,6 +12,7 @@ import { SetCurrentAccountAction } from "@app/app-state/actions/current-account.
 import { LegalEntityDataService } from "@services/legal-entity-data.service";
 import { FileSystemItem } from "@models/file-system-item.model";
 import { Contact } from "../models/contact.model";
+import { AccountSummary } from "@models/account-summary.model";
 
 @Injectable()
 export class AccountDataService extends DataService {
@@ -100,5 +101,19 @@ export class AccountDataService extends DataService {
         }`;
     }
     return files;
+  }
+
+  /**
+   * Returns a summary of the current user's account. This contains basic high level information about the account and
+   * all licences they have. This is useful for conditional logic that depends on a user having or not having certain
+   * licences.
+   *
+   * Note: The supporting controller could be expanded to include other high level information, as needed.
+   *
+   * @return {*}  {Observable<AccountSummary>}
+   */
+  getAccountSummary(): Observable<AccountSummary> {
+    return this.http.get<AccountSummary>(`${this.apiPath}current/summary`, { headers: this.headers })
+      .pipe(catchError(this.handleError));
   }
 }
