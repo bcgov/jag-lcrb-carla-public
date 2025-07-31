@@ -232,7 +232,7 @@ namespace Gov.Lclb.Cllb.Public.Repositories
                         tiedHouseConnection.AssociatedLiquorLicense.Select(item => item.Id).ToList(),
                         adoxioTiedHouseConnection.AdoxioTiedhouseconnectionid
                     );
-                    
+                    //Used to populate applicationId in return json
                     adoxioTiedHouseConnection._adoxioApplicationValue = applicationId;
                 }
             }
