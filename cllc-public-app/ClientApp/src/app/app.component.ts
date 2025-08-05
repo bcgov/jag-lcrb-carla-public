@@ -1,8 +1,9 @@
-import { Component, OnInit, Renderer2 } from "@angular/core";
+import { Component, OnInit, Renderer2, ViewChild } from "@angular/core";
 import { NavigationEnd, Router } from "@angular/router";
 import { User } from "@models/user.model";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatSidenav, MatSidenavContainer } from "@angular/material/sidenav";
 import { isDevMode } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { AppState } from "./app-state/models/app-state";
@@ -59,6 +60,8 @@ export class AppComponent extends FormBase implements OnInit {
   isEligibilityDialogOpen: boolean;
   showNavbar = true;
   testAPIRestul = "";
+  @ViewChild('aiSidenav') aiSidenav: MatSidenav;
+  showAISearch = false;
 
   // This is Observable will be set to true when there are e-notices attached to the current account.
   // The value determines whether or not to display a warning badge for the "Notices" link in the NavBar.
@@ -249,6 +252,35 @@ export class AppComponent extends FormBase implements OnInit {
       imWindow.location.href = imHref;
     }
     imWindow.focus();
+  }
+
+  toggleAISearch() {
+    this.aiSidenav.toggle();
+  }
+
+  handleKeyPress(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      this.handleSearch();
+    }
+  }
+
+  handleSearch() {
+    const inputEl = document.getElementById('searchInput') as HTMLInputElement;
+    const query = inputEl.value.trim();
+    if (!query) { return; }
+    this.httpCLient.post<any>(
+      'https://chatmvp-bydygzcccxb5cwa8.canadacentral-01.azurewebsites.net/api/search',
+      { query, index: 'portal-index', top: '5' }
+    ).subscribe(data => {
+      const container = document.getElementById('search-results');
+      container.innerHTML = data.summary ? `<div class="search-summary">${data.summary}</div>` : '';
+      data.results.forEach(r => {
+        container.innerHTML += `
+          <div class="search-result-item">
+            <a href="${r.url}" target="_blank">${r.title}</a>
+          </div>`;
+      });
+    });
   }
 
   openFeedbackDialog() {
