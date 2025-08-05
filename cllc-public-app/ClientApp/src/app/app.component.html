@@ -1,148 +1,228 @@
-<div style="height: 100%;" *ngIf="featureFlagService.initialized">
-  <section class="container not-supported-browser" *ngIf="isIE()">
-    <p>
-      <fa-icon [icon]="faInternetExplorer" style="margin-right: 10px;"></fa-icon>Internet Explorer is no longer
-      supported.
-    </p>
-    <p>
-      Please use <a href="https://google.com/chrome" target="_blank" class="IE">Google Chrome</a>,
-      <a href="https://www.mozilla.org/en-CA/firefox/new/" target="_blank" class="IE">Firefox</a> or
-      <a href="https://www.microsoft.com/en-us/edge" target="_blank" class="IE">Microsoft Edge</a>.
-    </p>
-  </section>
+<mat-sidenav-container *ngIf="featureFlagService.initialized" class="app-sidenav-container">
+  <mat-sidenav
+    #aiSidenav
+    mode="side"
+    position="end"
+    class="ai-search-sidenav"
+    [opened]="showAISearch"
+  >
+    <!-- Search Section -->
+    <div class="search-section">
+    <!-- Close button -->
+    <button mat-icon-button aria-label="Close AI Search" class="ai-search-close" (click)="toggleAISearch()">
+      <mat-icon>close</mat-icon>
+    </button>
+      <h4 class="search-title">Just ask</h4>
+      <div class="search-container">
+        <input 
+          type="text" 
+          class="search-input" 
+          placeholder="Enter a prompt here"
+          id="searchInput"
+          (keypress)="handleKeyPress($event)"
+        />
+        <button class="search-button" (click)="handleSearch()">Search</button>
+      </div>
+      <div id="search-results" class="search-results"></div>
+    </div>
+  </mat-sidenav>
 
-  <div class="app-outer" *ngIf="!isIE()">
-    <header class="app-header">
-      <div class="top-menu row" style="margin: 0; padding-left: 30px; padding-right: 30px;">
-        <section class="col-md-8 col-xs-12">
-          <a href="http://www2.gov.bc.ca/" tabindex="1">
-            <img class="header-logo" alt="B.C. Government Logo" src="assets/bc-logo.svg">
+  <mat-sidenav-content>
+    <section class="container not-supported-browser" *ngIf="isIE()">
+      <p>
+        <fa-icon [icon]="faInternetExplorer" style="margin-right: 10px;"></fa-icon>
+        Internet Explorer is no longer supported.
+      </p>
+      <p>
+        Please use
+        <a href="https://google.com/chrome" target="_blank" class="IE">Google Chrome</a>,
+        <a href="https://www.mozilla.org/en-CA/firefox/new/" target="_blank" class="IE">Firefox</a> or
+        <a href="https://www.microsoft.com/en-us/edge" target="_blank" class="IE">Microsoft Edge</a>.
+      </p>
+    </section>
+
+    <div class="app-outer" *ngIf="!isIE()">
+      <header class="app-header">
+        <div class="top-menu row" style="margin: 0; padding-left: 30px; padding-right: 30px;">
+          <section class="col-md-8 col-xs-12">
+            <a href="http://www2.gov.bc.ca/" tabindex="1">
+              <img class="header-logo" alt="B.C. Government Logo" src="assets/bc-logo.svg" />
+            </a>
+            <span class="title" role="banner">Liquor and Cannabis Licensing</span>
+          </section>
+          <section class="col-md-4 col-xs-12 sign-container">
+            <app-user-menu *ngIf="currentUser" [currentUser]="currentUser" class="user-menu-container"></app-user-menu>
+            <span class="sign" *ngIf="!currentUser">
+              <span appRemoveIfFeatureOff="DisableLogin" class="text-right signin">
+                <a href="https://www.bceid.ca/register/" tabindex="1">Register</a>
+              </span>
+              <span appRemoveIfFeatureOn="DisableLogin" class="text-right signin">
+                <a href="https://www.bceid.ca/register/" tabindex="1">Register</a>
+                or
+                <a href="login" tabindex="1">Log In</a>
+              </span>
+            </span>
+          </section>
+        </div>
+      </header>
+
+      <!-- System Maintenance Banner -->
+      <app-maintenance-banner></app-maintenance-banner>
+
+      <div *ngIf="showBceidTermsOfUse()">
+        <main class="app-content">
+          <app-bceid-confirmation (reloadUser)="reloadUser()" [currentUser]="currentUser"></app-bceid-confirmation>
+        </main>
+      </div>
+
+      <div class="content-wrapper" *ngIf="!showBceidTermsOfUse()">
+        <!-- /NAVBAR -->
+        <app-navbar
+          *ngIf="showNavbar && !currentUser && !account"
+          [currentUser]="currentUser"
+          [account]="account"
+          [showNoticesBadge]="showNoticesBadge$ | async"
+          [showMessageCenterBadge]="linkedFederalReports?.length"
+          (messageCenterClick)="showMessageCenterContent = !showMessageCenterContent"
+        ></app-navbar>
+        <app-navbar
+          *ngIf="showNavbar && currentUser && !account"
+          [currentUser]="currentUser"
+          [account]="account"
+          [showNoticesBadge]="showNoticesBadge$ | async"
+          [showMessageCenterBadge]="linkedFederalReports?.length"
+          (messageCenterClick)="showMessageCenterContent = !showMessageCenterContent"
+        ></app-navbar>
+        <app-navbar
+          *ngIf="showNavbar && account && currentUser"
+          [currentUser]="currentUser"
+          [account]="account"
+          [showNoticesBadge]="showNoticesBadge$ | async"
+          [showMessageCenterBadge]="linkedFederalReports?.length"
+          (messageCenterClick)="showMessageCenterContent = !showMessageCenterContent"
+        ></app-navbar>
+        <!-- /NAVBAR END -->
+
+        <section *ngIf="showMessageCenterContent" style="background-color: #FFF; padding: 10px;">
+          <mat-card *ngFor="let item of linkedFederalReports" style="margin-bottom: 5px;">
+            <fa-icon [icon]="faBusinessTime" class="fa-2x"></fa-icon>
+            &nbsp;<strong>Federal Tracking Report</strong> for
+            <strong>{{ item.establishmentName }}</strong> for
+            <strong>{{ Months[+item.reportingPeriodMonth - 1] }} {{ item.reportingPeriodYear }}</strong>
+            has not been submitted. The report is due on the 10th of each month.
+            <a
+              style="color: #1a5a96;"
+              (click)="showMessageCenterContent = !showMessageCenterContent"
+              [routerLink]="['/federal-reporting', item.licenseId, item.monthlyReportId]"
+            >
+              Click to action
+            </a>
+            .
+          </mat-card>
+        </section>
+
+        <main class="app-content">
+          <app-insert id="sidebar-left" class="sidebar-left"></app-insert>
+
+          <div class="app-main">
+            <breadcrumb></breadcrumb>
+            <router-outlet></router-outlet>
+          </div>
+
+          <app-insert id="sidebar-right" class="sidebar-right"></app-insert>
+        </main>
+      </div>
+
+      <!-- Chat With Us and AI Search buttons -->
+      <div tabindex="3">
+        <div class="chat-button-container app-widgets">
+          <button class="chat-button btn btn-primary btn-sm" (click)="openChat('en-CA', 'main')">
+            <strong>Chat with us</strong>
+          </button>
+          <button class="ai-search-button btn btn-primary btn-sm" (click)="toggleAISearch()">
+            <strong>AI Search</strong>
+          </button>
+          <button
+            *ngIf="currentUser"
+            type="button"
+            class="feedback-button btn btn-outline-primary"
+            (click)="openFeedbackDialog()"
+          >
+            <strong>Feedback</strong>
+          </button>
+        </div>
+      </div>
+
+      <footer class="app-footer">
+        <nav class="navbar navbar-default navbar-expand navbar-footer navbar-static-bottom">
+          <div class="container c1">
+            <ul class="navbar-nav">
+              <li class="c2">
+                <a
+                  href="https://www2.gov.bc.ca/gov/content/home/disclaimer"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="Goes to BC Gov Disclaimer Page"
+                >
+                  Disclaimer
+                </a>
+              </li>
+              <li class="c2">
+                <a
+                  href="https://www2.gov.bc.ca/gov/content/home/privacy"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="Goes to BC Gov Privacy Page"
+                >
+                  Privacy
+                </a>
+              </li>
+              <li class="c2">
+                <a
+                  href="https://www2.gov.bc.ca/gov/content/home/accessibility"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="Goes to BC Gov Accessibility Page"
+                >
+                  Accessibility
+                </a>
+              </li>
+              <li class="c2">
+                <a
+                  href="https://www2.gov.bc.ca/gov/content/home/copyright"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="Goes to BC Gov Copyright Page"
+                >
+                  Copyright
+                </a>
+              </li>
+            </ul>
+          </div>
+          <a
+            *ngIf="versionInfo?.fileVersion"
+            (click)="openVersionInfoDialog()"
+            class="nav-link version-info"
+          >
+            {{ versionInfo.fileVersion }}
           </a>
-          <span class="title" role="banner">
-            Liquor and Cannabis Licensing
-          </span>
-        </section>
-        <section class="col-md-4 col-xs-12 sign-container">
-          <app-user-menu *ngIf="currentUser" [currentUser]="currentUser" class="user-menu-container"></app-user-menu>
-          <span class="sign" *ngIf="!currentUser">
-            <span appRemoveIfFeatureOff="DisableLogin" class="text-right signin">
-              <a href="https://www.bceid.ca/register/" tabindex="1">Register</a>
-            </span>
-            <span appRemoveIfFeatureOn="DisableLogin" class="text-right signin">
-              <a href="https://www.bceid.ca/register/" tabindex="1">Register</a>
-              or
-              <a href="login" tabindex="1">Log In</a>
-            </span>
-          </span>
-        </section>
-      </div>
-    </header>
-
-
-    <!-- System Maintenance Banner -->
-    <app-maintenance-banner></app-maintenance-banner>
-
-    <div *ngIf="showBceidTermsOfUse()">
-      <main class="app-content">
-        <app-bceid-confirmation (reloadUser)="reloadUser()" [currentUser]="currentUser"></app-bceid-confirmation>
-      </main>
+        </nav>
+      </footer>
     </div>
-    <div class="content-wrapper" *ngIf="!showBceidTermsOfUse()">
-      <!-- /NAVBAR -->
-      <app-navbar *ngIf="showNavbar && currentUser==undefined && account==undefined" [currentUser]="currentUser" [account]="account"
-                  [showNoticesBadge]="showNoticesBadge$ | async"
-                  [showMessageCenterBadge]="linkedFederalReports && linkedFederalReports.length"
-                  (messageCenterClick)="showMessageCenterContent = !showMessageCenterContent"></app-navbar>
-      <app-navbar *ngIf="showNavbar && currentUser && account==undefined" [currentUser]="currentUser" [account]="account"
-                  [showNoticesBadge]="showNoticesBadge$ | async"
-                  [showMessageCenterBadge]="linkedFederalReports && linkedFederalReports.length"
-                  (messageCenterClick)="showMessageCenterContent = !showMessageCenterContent"></app-navbar>
-      <app-navbar *ngIf="showNavbar && account && currentUser" [currentUser]="currentUser" [account]="account"
-                  [showNoticesBadge]="showNoticesBadge$ | async"
-                  [showMessageCenterBadge]="linkedFederalReports && linkedFederalReports.length"
-                  (messageCenterClick)="showMessageCenterContent = !showMessageCenterContent"></app-navbar>
-      <!-- /NAVBAR END -->
-      <section *ngIf="showMessageCenterContent" style="background-color: #FFF; padding: 10px;">
-        <mat-card *ngFor="let item of linkedFederalReports" style="margin-bottom: 5px;">
-          <fa-icon [icon]="faBusinessTime" class="fa-2x"></fa-icon> &nbsp;
-          <strong>Federal Tracking Report</strong> for <strong>{{item.establishmentName}}</strong> for
-          <strong>{{Months[parseInt(item.reportingPeriodMonth, 10) -1]}} {{item.reportingPeriodYear}}</strong> has not
-          been submitted. The report
-          is due on the 10th of each month.
-          <a style="color: #1a5a96;" (click)="showMessageCenterContent = !showMessageCenterContent"
-             [routerLink]="['/federal-reporting/' + item.licenseId + '/' + item.monthlyReportId]">
-            Click to action
-          </a>.
-        </mat-card>
-      </section>
-      <main class="app-content">
-        <app-insert id="sidebar-left" class="sidebar-left"></app-insert>
-
-        <div class="app-main">
-          <breadcrumb></breadcrumb>
-          <router-outlet></router-outlet>
-        </div>
-
-        <app-insert id="sidebar-right" class="sidebar-right"></app-insert>
-      </main>
-    </div>
-
-    <!-- Chat With Us button -->
-     <div  tabindex="3">  
-      <div class="chat-button-container app-widgets">
-        <button class="chat-button btn btn-primary btn-sm" (click)="openChat('en-CA', 'main')">
-          <strong>Chat with us</strong> 
-        </button>
-            <!-- Feedback button -->
-         <button  *ngIf="currentUser"  type="button"  class="feedback-button btn btn-outline-primary" (click)="openFeedbackDialog()">
-          <strong>Feedback</strong> 
-        </button>
-      </div>
-     </div>
-    
-
-    <footer class="app-footer">
-      <nav class="navbar navbar-default navbar-expand navbar-footer navbar-static-bottom">
-        <div class="container c1">
-          <ul class="navbar-nav">
-            <li class="c2">
-              <a href="https://www2.gov.bc.ca/gov/content/home/disclaimer" target="_blank" rel="noopener noreferrer"
-                title="Goes to BC Gov Disclaimer Page">
-                Disclaimer
-              </a>
-            </li>
-            <li class="c2">
-              <a href="https://www2.gov.bc.ca/gov/content/home/privacy" target="_blank" rel="noopener noreferrer"
-                title="Goes to BC Gov Privacy Page">
-                Privacy
-              </a>
-            </li>
-            <li class="c2">
-              <a href="https://www2.gov.bc.ca/gov/content/home/accessibility" target="_blank" rel="noopener noreferrer"
-                title="Goes to BC Gov Accessibility Page">
-                Accessibility
-              </a>
-            </li>
-            <li class="c2">
-              <a href="https://www2.gov.bc.ca/gov/content/home/copyright" target="_blank" rel="noopener noreferrer"
-                title="Goes to BC Gov Copyright Page">
-                Copyright
-              </a>
-            </li>
-          </ul>
-        </div>
-        <a *ngIf="versionInfo && versionInfo.fileVersion" (click)="openVersionInfoDialog()"
-          class="nav-link version-info">
-          {{versionInfo.fileVersion}}
-        </a>
-      </nav>
-    </footer>
-  </div>
-</div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
 
 <section style="height: 1px; position: absolute; width: 1px; z-index: 10;">
-  <input style="border: none; height: 1px; margin: 0; padding: 0; width: 1px;" type="text" id="testUrl" #testUrl>
-  <button style="border: none; height: 3px; margin: 0; padding: 0; width: 3px;" id="testAPIButton"
-    (click)="makeAPICall(testUrl.value)"></button>
-  <span style="height: 1px; width: 1px;" id="testAPIResult">{{testAPIRestul}}</span>
+  <input
+    style="border: none; height: 1px; margin: 0; padding: 0; width: 1px;"
+    type="text"
+    id="testUrl"
+    #testUrl
+  />
+  <button
+    style="border: none; height: 3px; margin: 0; padding: 0; width: 3px;"
+    id="testAPIButton"
+    (click)="makeAPICall(testUrl.value)"
+  ></button>
+  <span style="height: 1px; width: 1px;" id="testAPIResult">{{ testAPIRestul }}</span>
 </section>
