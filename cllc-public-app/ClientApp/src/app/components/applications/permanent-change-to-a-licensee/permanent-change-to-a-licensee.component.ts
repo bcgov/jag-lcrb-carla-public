@@ -3,19 +3,26 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AppState } from '@app/app-state/models/app-state';
 import {
-  AvailableToLicenceTypes,
-  permanentChangeTypesOfChanges
-} from '@app/constants/permanent-change-types-of-changes';
+  AccountType,
+  PCLFormControlDefinitionOption,
+  PCLFormControlName,
+  PCLMatrixLicenceGroup
+} from '@components/applications/permanent-change-to-a-licensee/pcl-business-rules/pcl-bussiness-rules-types';
+import {
+  getPCLMatrixConditionalGroup,
+  getPCLMatrixGroup,
+  getPCLMatrixSectionBusinessRules
+} from '@components/applications/permanent-change-to-a-licensee/pcl-business-rules/pcl-bussiness-rules-utils';
 import { faIdCard } from '@fortawesome/free-regular-svg-icons';
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { Account } from '@models/account.model';
 import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
 import { Application } from '@models/application.model';
 import { TiedHouseViewMode } from '@models/tied-house-connection.model';
-import { Store } from '@ngrx/store';
+import { AccountDataService } from '@services/account-data.service';
 import { ApplicationDataService } from '@services/application-data.service';
+import { LegalEntityDataService } from '@services/legal-entity-data.service';
 import { PaymentDataService } from '@services/payment-data.service';
 import { GenericMessageDialogComponent } from '@shared/components/dialog/generic-message-dialog/generic-message-dialog.component';
 import {
@@ -23,8 +30,8 @@ import {
   PermanentChangeContactComponent
 } from '@shared/components/permanent-change/permanent-change-contact/permanent-change-contact.component';
 import { FormBase } from '@shared/form-base';
-import { Observable, of } from 'rxjs';
-import { catchError, filter, mergeMap, takeWhile } from 'rxjs/operators';
+import { forkJoin, Observable, of } from 'rxjs';
+import { catchError, map, mergeMap, takeWhile } from 'rxjs/operators';
 import { TiedHouseDeclarationComponent } from '../tied-house-decleration/tied-house-declaration.component';
 
 export const SharepointNameRegex = /^[^~#%&*{}\\:<>?/+|""]*$/;
@@ -91,7 +98,7 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
     return this.cannabisLicences.length > 0;
   }
 
-  changeList = [];
+  changeList: PCLFormControlDefinitionOption[] = [];
 
   get selectedChangeList() {
     return this.changeList.filter((item) => this.form && this.form.get(item.formControlName).value === true);
@@ -99,14 +106,20 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
 
   form: FormGroup;
 
+  // PCL Matrix business rules variables
+  _PCLMatrixAccountType: AccountType;
+  _PCLMatrixLicenceGroup: PCLMatrixLicenceGroup;
+  _PCLMatrixEnabledSections: PCLFormControlName[] = [];
+
   constructor(
     private applicationDataService: ApplicationDataService,
     private paymentDataService: PaymentDataService,
+    private accountDataService: AccountDataService,
+    private legalEntityDataService: LegalEntityDataService,
     private router: Router,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
     private fb: FormBuilder,
-    private store: Store<AppState>,
     private matDialog: MatDialog
   ) {
     super();
@@ -138,23 +151,38 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]]
     });
 
-    this.store
-      .select((state) => state.currentAccountState.currentAccount)
-      .pipe(filter((account) => !!account))
-      .subscribe((account) => {
-        this.account = account;
-        this.changeList = permanentChangeTypesOfChanges.filter(
-          (item) => !!item.availableTo.find((bt) => bt === account.businessType)
-        );
-        //if cannabis Licence exists filter out change types that are for liquor licences only
-        if (this.hasCannabis) {
-          this.changeList = this.changeList.filter(
-            (item) => item.availableToLicenceType != AvailableToLicenceTypes.LiquorLicenceOnly
-          );
-        }
-      });
+    const _PCLSectionFormControlNames = Object.values(PCLFormControlName);
+
+    this.form.valueChanges.subscribe((values) => {
+      if (_PCLSectionFormControlNames.some((key) => key in values)) {
+        // If any of the PCL section form controls change, update the business rules
+        this._PCLMatrixOnFormControlChanges();
+      }
+    });
 
     this.loadData();
+  }
+
+  /**
+   * Updates the PCL business rules based on the selected form controls.
+   */
+  _PCLMatrixOnFormControlChanges() {
+    console.log(Object.entries(this.form.value));
+    const _PCLSectionSelectedFormControlNames = (Object.entries(this.form.value) as [PCLFormControlName, any][])
+      .filter(([_, value]) => value === true)
+      .map(([key]) => key);
+
+    const pclMatrixConditionalGroup = getPCLMatrixConditionalGroup({
+      selectedPCLSections: _PCLSectionSelectedFormControlNames
+    });
+
+    const businessRules = getPCLMatrixSectionBusinessRules({
+      accountType: this._PCLMatrixAccountType,
+      conditionalGroup: pclMatrixConditionalGroup,
+      licenceGroup: this._PCLMatrixLicenceGroup
+    });
+
+    this.changeList = businessRules;
   }
 
   /**
@@ -164,9 +192,32 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
    * @memberof PermanentChangeToALicenseeComponent
    */
   private loadData() {
-    const sub = this.applicationDataService.getPermanentChangesToLicenseeData(this.applicationId).subscribe({
-      next: (data) => {
-        this.setFormData(data);
+    const accountData$ = forkJoin({
+      accountData: this.accountDataService.getCurrentAccount(),
+      legalEntityData: this.legalEntityDataService.getBusinessProfileSummary()
+    }).pipe(
+      map(({ accountData, legalEntityData }) => {
+        const account = accountData;
+        account.legalEntity = legalEntityData?.length ? legalEntityData[0] : null;
+        return Object.assign(new Account(), account);
+      })
+    );
+    const permanentChangeData$ = this.applicationDataService.getPermanentChangesToLicenseeData(this.applicationId);
+    const accountSummary$ = this.accountDataService.getAccountSummary();
+
+    const sub = forkJoin({
+      accountData: accountData$,
+      permanentChangeData: permanentChangeData$,
+      accountSummaryData: accountSummary$
+    }).subscribe({
+      next: ({ accountData, permanentChangeData, accountSummaryData }) => {
+        this.account = accountData;
+
+        this.setFormData(permanentChangeData);
+
+        this._PCLMatrixAccountType = this.account.businessType as AccountType;
+        this._PCLMatrixLicenceGroup = getPCLMatrixGroup(accountSummaryData);
+        this._PCLMatrixOnFormControlChanges();
       },
       error: (error) => {
         console.error('Error loading form data', error);
@@ -179,6 +230,7 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
         });
       }
     });
+
     this.subscriptionList.push(sub);
   }
 
@@ -239,13 +291,6 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
       }
       this.form.patchValue(application);
       this.dataLoaded = true;
-    }
-
-    //if cannabis Licence exists filter out change types that are for liquor licences only
-    if (this.hasCannabis) {
-      this.changeList = this.changeList.filter(
-        (item) => item.availableToLicenceType != AvailableToLicenceTypes.LiquorLicenceOnly
-      );
     }
   }
 

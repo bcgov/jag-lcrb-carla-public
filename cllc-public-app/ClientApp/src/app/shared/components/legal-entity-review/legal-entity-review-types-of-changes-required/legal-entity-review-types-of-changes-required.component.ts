@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { PermanentChangeTypesOfChangesOption } from '@app/constants/permanent-change-types-of-changes';
+import { PCLFormControlDefinitionOption } from '@components/applications/permanent-change-to-a-licensee/pcl-business-rules/pcl-bussiness-rules-types';
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { Account } from '@models/account.model';
 
@@ -24,9 +24,9 @@ export class LegalEntityReviewTypesOfChangesRequiredComponent {
   /**
    * The list of changes required for the permanent change application.
    *
-   * @type {PermanentChangeTypesOfChangesOption[]}
+   * @type {PCLFormControlDefinitionOption[]}
    */
-  @Input() changesRequired: PermanentChangeTypesOfChangesOption[];
+  @Input() changesRequired: PCLFormControlDefinitionOption[];
 
   faQuestionCircle = faQuestionCircle;
 }
