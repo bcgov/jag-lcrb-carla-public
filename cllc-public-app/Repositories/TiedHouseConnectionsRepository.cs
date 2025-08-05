@@ -234,7 +234,6 @@ namespace Gov.Lclb.Cllb.Public.Repositories
                         incomingTiedHouseConnection.AssociatedLiquorLicense.Select(item => item.Id).ToList(),
                         adoxioTiedHouseConnection.AdoxioTiedhouseconnectionid
                     );
-                    
                 }
 
                 adoxioTiedHouseConnection._adoxioApplicationValue = applicationId;
@@ -451,7 +450,7 @@ namespace Gov.Lclb.Cllb.Public.Repositories
 
             // Associate the new tied house connection with the account
             await AssociateTiedHouseConnectionToUserAccount(
-                createdCannabisTiedHouseConnectionRecord.AdoxioTiedhouseconnectionid.ToString(),
+                createdCannabisTiedHouseConnectionRecord.AdoxioTiedhouseconnectionid,
                 accountId
             );
 
@@ -495,12 +494,9 @@ namespace Gov.Lclb.Cllb.Public.Repositories
             // The singleton cannabis tied house connection should always be in the "Existing" status
             adoxioTiedHouseConnection.Statuscode = (int)TiedHouseStatusCode.Existing;
 
-            await _dynamicsClient.Tiedhouseconnections.UpdateAsync(
-                tiedHouseConnectionId.ToString(),
-                adoxioTiedHouseConnection
-            );
+            await _dynamicsClient.Tiedhouseconnections.UpdateAsync(tiedHouseConnectionId, adoxioTiedHouseConnection);
 
-            return await GetTiedHouseConnectionById(adoxioTiedHouseConnection.AdoxioTiedhouseconnectionid);
+            return await GetTiedHouseConnectionById(tiedHouseConnectionId);
         }
 
         /// <summary>
