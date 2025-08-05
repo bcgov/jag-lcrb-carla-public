@@ -119,50 +119,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         /// <summary>
-        /// Get the count of all "existing" liquor Tied House Connections for a user.
-        /// If `accountId` is provided, it will return connections for that account.
-        /// If `accountId` is not provided, it will return connections for the current logged in user's account.
-        /// </summary>
-        /// <param name="accountId">An optional accountId to filter results by</param>
-        /// <returns>The count of "existing" tied house connections</returns>
-        [HttpGet("user/liquor/existing/count/{accountId?}")]
-        [ProducesResponseType(typeof(int), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<int> GetExistingLiquorTiedHouseConnectionsCountForUser(string accountId)
-        {
-            try
-            {
-                UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
-
-                // Use `accountId` if provided, otherwise use the current logged in user's account Id
-                var accountIdForFilter = accountId != null ? accountId : userSettings.AccountId;
-
-                _logger.LogDebug(
-                    $"GetExistingLiquorTiedHouseConnectionsCountForUser. AccountId = {accountIdForFilter}."
-                );
-
-                int result = _tiedHouseConnectionsRepository.GetExistingLiquorTiedHouseConnectionsCountForUser(
-                    accountIdForFilter
-                );
-
-                return new JsonResult(result);
-            }
-            catch (HttpOperationException httpOperationException)
-            {
-                _logger.LogError(
-                    httpOperationException,
-                    "Error fetching existing liquor tied house connections count."
-                );
-                throw new Exception("Failed to fetch existing liquor tied house connections count.");
-            }
-            catch (Exception exception)
-            {
-                _logger.LogError(exception, "Error fetching existing liquor tied house connections count.");
-                throw new Exception("Failed to fetch existing liquor tied house connections count.");
-            }
-        }
-
-        /// <summary>
         /// Gets all liquor tied house connections for an application.
         /// </summary>
         /// <remarks>

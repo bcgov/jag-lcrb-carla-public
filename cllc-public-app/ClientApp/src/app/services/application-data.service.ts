@@ -102,22 +102,38 @@ export class ApplicationDataService extends DataService {
       .pipe(catchError(this.handleError));
   }
 
+  /**
+   * Get the application data for a permanent change to licensee application.
+   *
+   * @param {string} [applicationId=null]
+   * @return {*}  {Observable<any>}
+   */
   getPermanentChangesToLicenseeData(applicationId: string = null): Observable<any> {
-    let url = this.apiPath + "permanent-change-to-licensee-data/false";
+    let url = `${this.apiPath}permanent-change-to-licensee-data`;
+    let params: Record<string, any> = { isLegalEntity: 'false' };
+
     if (applicationId) {
-      url = `${url}?applicationId=${applicationId}`;
+      params = { ...params, applicationId: applicationId };
     }
-    return this.http.get<any>(url, { headers: this.headers })
-      .pipe(catchError(this.handleError));
+
+    return this.http.get<any>(url, { headers: this.headers, params: params }).pipe(catchError(this.handleError));
   }
 
-    getLegalEntityPermanentChangesToLicenseeData(applicationId: string = null): Observable<any> {
-    let url = this.apiPath + "permanent-change-to-licensee-data/true";
+  /**
+   * Get the application data for a legal entity permanent change to licensee application.
+   *
+   * @param {string} [applicationId=null]
+   * @return {*}  {Observable<any>}
+   */
+  getLegalEntityPermanentChangesToLicenseeData(applicationId: string = null): Observable<any> {
+    let url = `${this.apiPath}permanent-change-to-licensee-data`;
+    let params: Record<string, any> = { isLegalEntity: 'true' };
+
     if (applicationId) {
-      url = `${url}?applicationId=${applicationId}`;
+      params = { ...params, applicationId: applicationId };
     }
-    return this.http.get<any>(url, { headers: this.headers })
-      .pipe(catchError(this.handleError));
+
+    return this.http.get<any>(url, { headers: this.headers, params: params }).pipe(catchError(this.handleError));
   }
 
   getPermanentChangesToApplicantData(applicationId: string = null): Observable<any> {

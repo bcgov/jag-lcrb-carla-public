@@ -2,7 +2,7 @@ import { RelatedLicence } from './related-licence';
 
 export class TiedHouseConnection {
   id: string;
-  accountid: string;
+  accountId: string;
 
   corpConnectionFederalProducer: number | null;
   corpConnectionFederalProducerDetails: string;

@@ -1289,7 +1289,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             var filter = $"_adoxio_licencee_value eq {userSettings.AccountId} and statecode eq 0";
             var select = new List<string> { "adoxio_licencesid,adoxio_LicenceType,adoxio_expirydate,statuscode" };
-            var expand = new List<string> { "adoxio_LicenceType($select=adoxio_name)" };
+            var expand = new List<string> { "adoxio_LicenceType($select=adoxio_name,adoxio_category)" };
 
             var licences = await _dynamicsClient.Licenceses.GetAsync(filter: filter, select: select, expand: expand);
 
@@ -1300,7 +1300,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     .Value.Select(item => new AccountSummaryLicence
                     {
                         licenceId = item.AdoxioLicencesid,
-                        licenseType = item.AdoxioLicenceType?.AdoxioName,
+                        licenceType = item.AdoxioLicenceType?.AdoxioName,
+                        licenceTypeCategory = (LicenceTypeCategory)item.AdoxioLicenceType?.AdoxioCategory,
                         expiryDate = item.AdoxioExpirydate,
                         statusCode = item.Statuscode
                     })

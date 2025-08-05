@@ -1,92 +1,16 @@
-export interface PermanentChangeTypesOfChangesOption {
-  /**
-   * The name of the type of change, used to display the option in the UI.
-   *
-   * @type {string}
-   * @memberof PermanentChangeTypesOfChangesOption
-   */
-  name: string;
-  /**
-   * The name, if the businessType of the account is classified as other.
-   *
-   * See `isOtherBusinessType` in `account.model.ts`
-   *
-   * @type {string}
-   * @memberof PermanentChangeTypesOfChangesOption
-   */
-  otherName?: string;
-  /**
-   * The form control name for the option, used to bind the option to a form control in the Angular form.
-   *
-   * @type {string}
-   * @memberof PermanentChangeTypesOfChangesOption
-   */
-  formControlName: string;
-  /**
-   * The list of business types that this type of change is available to.
-   *
-   * Uses `businessType` from `account.model.ts`.
-   *
-   * @type {string[]}
-   * @memberof PermanentChangeTypesOfChangesOption
-   */
-  availableTo: string[];
-  /**
-   * The fee for this type of change to a cannabis application, if applicable.
-   *
-   * @type {number}
-   * @memberof PermanentChangeTypesOfChangesOption
-   */
-  CannabisFee: number;
-  /**
-   * The fee for this type of change to a liquor application, if applicable.
-   *
-   * @type {number}
-   * @memberof PermanentChangeTypesOfChangesOption
-   */
-  LiquorFee: number;
-  /**
-   * The header text for the help text section, providing context for the type of change.
-   *
-   * @type {string}
-   * @memberof PermanentChangeTypesOfChangesOption
-   */
-  helpTextHeader: string;
-  /**
-   * The help text for the type of change, providing additional information about the type of change.
-   *
-   * @type {string[]}
-   * @memberof PermanentChangeTypesOfChangesOption
-   */
-  helpText: string[];
-  /**
-   * The link to additional help text or documentation for the type of change, if applicable.
-   *
-   * @type {string}
-   * @memberof PermanentChangeTypesOfChangesOption
-   */
-  helpTextLink?: string;
-  /**
-   * Used to filter change types by applicant licences
-   *
-   * @type {string}
-   * @memberof PermanentChangeTypesOfChangesOption
-   */
-  availableToLicenceType?: AvailableToLicenceTypes;
-}
-export enum AvailableToLicenceTypes{
-  LiquorLicenceOnly = 1,
-  CannabisLicenceOnly = 2,
-  Both = 3
-}
+import {
+  PCLFormControlDefinitionOption,
+  PCLFormControlName
+} from '@components/applications/permanent-change-to-a-licensee/pcl-business-rules/pcl-bussiness-rules-types';
+
 /**
  * The list of options for the types of changes in a permanent change application.
  */
-export const permanentChangeTypesOfChanges: PermanentChangeTypesOfChangesOption[] = [
+export const PCLFormControlDefinitions: PCLFormControlDefinitionOption[] = [
   {
     name: 'Internal Transfer of Shares',
-    formControlName: 'csInternalTransferOfShares',
-    availableTo: ['PrivateCorporation', 'LimitedLiabilityPartnership'],
+    formControlName: PCLFormControlName.csInternalTransferOfShares,
+    // availableTo: ['PrivateCorporation', 'LimitedLiabilityPartnership'],
     CannabisFee: 110,
     LiquorFee: 110,
     helpTextHeader: 'Use this option to report:',
@@ -100,8 +24,8 @@ export const permanentChangeTypesOfChanges: PermanentChangeTypesOfChangesOption[
   },
   {
     name: 'External Transfer of Shares',
-    formControlName: 'csExternalTransferOfShares',
-    availableTo: ['PrivateCorporation', 'LimitedLiabilityPartnership'],
+    formControlName: PCLFormControlName.csExternalTransferOfShares,
+    // availableTo: ['PrivateCorporation', 'LimitedLiabilityPartnership'],
     CannabisFee: 330,
     LiquorFee: 330,
     helpTextHeader: 'Use this option to report:',
@@ -114,16 +38,16 @@ export const permanentChangeTypesOfChanges: PermanentChangeTypesOfChangesOption[
   },
   {
     name: 'Change of Directors or Officers',
-    formControlName: 'csChangeOfDirectorsOrOfficers',
-    availableTo: [
-      'PrivateCorporation',
-      'PublicCorporation',
-      'Society',
-      'Coop',
-      'MilitaryMess',
-      'LocalGovernment',
-      'University'
-    ],
+    formControlName: PCLFormControlName.csChangeOfDirectorsOrOfficers,
+    // availableTo: [
+    //   'PrivateCorporation',
+    //   'PublicCorporation',
+    //   'Society',
+    //   'Coop',
+    //   'MilitaryMess',
+    //   'LocalGovernment',
+    //   'University'
+    // ],
     CannabisFee: 500,
     LiquorFee: 220,
     helpTextHeader: 'Use this option to report:',
@@ -136,15 +60,15 @@ export const permanentChangeTypesOfChanges: PermanentChangeTypesOfChangesOption[
   {
     name: 'Name Change, Licensee -- Corporation',
     otherName: 'Name Change, Licensee -- Organization',
-    formControlName: 'csNameChangeLicenseeCorporation',
-    availableTo: [
-      'PrivateCorporation',
-      'PublicCorporation',
-      'SoleProprietorship',
-      'Coop',
-      'MilitaryMess',
-      'University'
-    ],
+    formControlName: PCLFormControlName.csNameChangeLicenseeCorporation,
+    // availableTo: [
+    //   'PrivateCorporation',
+    //   'PublicCorporation',
+    //   'SoleProprietorship',
+    //   'Coop',
+    //   'MilitaryMess',
+    //   'University'
+    // ],
     CannabisFee: 220,
     LiquorFee: 220,
     helpTextHeader: 'Use this option to report:',
@@ -156,8 +80,8 @@ export const permanentChangeTypesOfChanges: PermanentChangeTypesOfChangesOption[
   },
   {
     name: 'Name Change, Licensee -- Partnership',
-    formControlName: 'csNameChangeLicenseePartnership',
-    availableTo: ['GeneralPartnership', 'Partnership', 'LimitedLiabilityPartnership'],
+    formControlName: PCLFormControlName.csNameChangeLicenseePartnership,
+    // availableTo: ['GeneralPartnership', 'Partnership', 'LimitedLiabilityPartnership'],
     CannabisFee: 220,
     LiquorFee: 220,
     helpTextHeader: 'Use this option to report:',
@@ -166,8 +90,8 @@ export const permanentChangeTypesOfChanges: PermanentChangeTypesOfChangesOption[
   },
   {
     name: 'Name Change, Licensee -- Society',
-    formControlName: 'csNameChangeLicenseeSociety',
-    availableTo: ['Society'],
+    formControlName: PCLFormControlName.csNameChangeLicenseeSociety,
+    // availableTo: ['Society'],
     CannabisFee: 220,
     LiquorFee: 220,
     helpTextHeader: 'Use this option to report:',
@@ -178,19 +102,19 @@ export const permanentChangeTypesOfChanges: PermanentChangeTypesOfChangesOption[
   },
   {
     name: 'Name Change, Person',
-    formControlName: 'csNameChangeLicenseePerson',
-    availableTo: [
-      'PrivateCorporation',
-      'PublicCorporation',
-      'GeneralPartnership',
-      'Partnership',
-      'LimitedLiabilityPartnership',
-      'IndigenousNation',
-      'LocalGovernment',
-      'Society',
-      'Coop',
-      'MilitaryMess'
-    ],
+    formControlName: PCLFormControlName.csNameChangeLicenseePerson,
+    // availableTo: [
+    //   'PrivateCorporation',
+    //   'PublicCorporation',
+    //   'GeneralPartnership',
+    //   'Partnership',
+    //   'LimitedLiabilityPartnership',
+    //   'IndigenousNation',
+    //   'LocalGovernment',
+    //   'Society',
+    //   'Coop',
+    //   'MilitaryMess'
+    // ],
     CannabisFee: 220,
     LiquorFee: 220,
     helpTextHeader: 'Use this option to report:',
@@ -199,16 +123,16 @@ export const permanentChangeTypesOfChanges: PermanentChangeTypesOfChangesOption[
   },
   {
     name: 'Addition of Receiver or Executor',
-    formControlName: 'csAdditionalReceiverOrExecutor',
-    availableTo: [
-      'PrivateCorporation',
-      'PublicCorporation',
-      'GeneralPartnership',
-      'Partnership',
-      'LimitedLiabilityPartnership',
-      'Society',
-      'MilitaryMess'
-    ],
+    formControlName: PCLFormControlName.csAdditionalReceiverOrExecutor,
+    // availableTo: [
+    //   'PrivateCorporation',
+    //   'PublicCorporation',
+    //   'GeneralPartnership',
+    //   'Partnership',
+    //   'LimitedLiabilityPartnership',
+    //   'Society',
+    //   'MilitaryMess'
+    // ],
     CannabisFee: 220,
     LiquorFee: 220,
     helpTextHeader: 'Use this option to report:',
@@ -217,16 +141,16 @@ export const permanentChangeTypesOfChanges: PermanentChangeTypesOfChangesOption[
   },
   {
     name: 'Tied House Declaration',
-    formControlName: 'csTiedHouseDeclaration',
-    availableTo: [
-      'PrivateCorporation',
-      'PublicCorporation',
-      'GeneralPartnership',
-      'Partnership',
-      'LimitedLiabilityPartnership',
-      'Society',
-      'MilitaryMess'
-    ],
+    formControlName: PCLFormControlName.csTiedHouseDeclaration,
+    // availableTo: [
+    //   'PrivateCorporation',
+    //   'PublicCorporation',
+    //   'GeneralPartnership',
+    //   'Partnership',
+    //   'LimitedLiabilityPartnership',
+    //   'Society',
+    //   'MilitaryMess'
+    // ],
     CannabisFee: 220,
     LiquorFee: 220,
     helpTextHeader: 'Use this option to report:',
@@ -235,7 +159,6 @@ export const permanentChangeTypesOfChanges: PermanentChangeTypesOfChangesOption[
       'Ex: A new director has a Tied House relationship. If you are required to report a Change of Directors or Officers, then you do not need to report this application as well.',
       'Generally, Tied House relationships between licensees (specifically liquor primary, food primary, private liquor/wine store, or the business location of a caterer) and manufacturers or agents are prohibited under the <a href="https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/15019#section62" target="_blank">LCLA</a>.',
       '“Tied house” refers to a relationship between a manufacturer/agent and another licensee if the relationship puts the licensee in the position of being likely to promote the sale of that manufacturer’s/agent’s liquor products over another manufacturer.'
-    ],
-    availableToLicenceType: AvailableToLicenceTypes.LiquorLicenceOnly
+    ]
   }
 ];

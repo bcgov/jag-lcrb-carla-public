@@ -26,6 +26,29 @@ namespace Gov.Lclb.Cllb.Public.Repositories
         }
 
         /// <summary>
+        /// Fetch a single Tied House Connection by its ID.
+        /// </summary>
+        /// <param name="tiedHouseConnectionId"></param>
+        /// <returns></returns>
+        public async Task<TiedHouseConnection> GetTiedHouseConnectionById(string tiedHouseConnectionId)
+        {
+            _logger.LogDebug($"GetTiedHouseConnectionById. TiedHouseConnectionId = {tiedHouseConnectionId}.");
+
+            var filter = $"adoxio_tiedhouseconnectionid eq {tiedHouseConnectionId}";
+            var expand = new List<string> { "adoxio_adoxio_tiedhouseconnection_adoxio_licence" };
+
+            var response = await _dynamicsClient.Tiedhouseconnections.GetAsync(filter: filter, expand: expand, top: 1);
+
+            if (response == null || response.Value.Count == 0)
+            {
+                _logger.LogDebug($"No Tied House Connection found for ID {tiedHouseConnectionId}.");
+                return null;
+            }
+
+            return response.Value[0].ToViewModel();
+        }
+
+        /// <summary>
         /// Get all liquor Tied House Connections for a user.
         /// </summary>
         /// <param name="accountId">The accountId of the user to filter results by</param>
@@ -50,31 +73,6 @@ namespace Gov.Lclb.Cllb.Public.Repositories
             tiedHouseConnections = _dynamicsClient.Tiedhouseconnections.Get(filter: filter, expand: expand).Value;
 
             var result = tiedHouseConnections.Select(item => item.ToViewModel()).ToList();
-
-            return result;
-        }
-
-        /// <summary>
-        /// Get the count of all "existing" liquor Tied House Connections for a user.
-        /// </summary>
-        /// <param name="accountId">The accountId of the user to filter results by</param>
-        /// <returns>The count of "existing" tied house connections</returns>
-        public int GetExistingLiquorTiedHouseConnectionsCountForUser(string accountId)
-        {
-            _logger.LogDebug($"GetExistingLiquorTiedHouseConnectionsCountForUser. AccountId = {accountId}.");
-
-            var andFilterConditions = new List<string>
-            {
-                $"_adoxio_accountid_value eq {accountId}",
-                $"statuscode eq {(int)TiedHouseStatusCode.Existing}",
-                $"adoxio_categorytype eq {(int)TiedHouseCategoryType.Liquor}",
-                "statecode eq 0"
-            };
-            var filter = string.Join(" and ", andFilterConditions);
-
-            var response = _dynamicsClient.Tiedhouseconnections.Get(filter: filter, top: 1, count: true);
-
-            int result = int.TryParse(response?.Count, out var parsedCount) ? parsedCount : 0;
 
             return result;
         }
@@ -201,7 +199,7 @@ namespace Gov.Lclb.Cllb.Public.Repositories
         /// </remarks>
         /// <param name="incomingTiedHouseConnection"></param>
         /// <param name="applicationId"></param>
-        /// <returns></returns>
+        /// <returns>The created tied house connection.</returns>
         public async Task<TiedHouseConnection> AddLiquorTiedHouseConnectionToApplication(
             TiedHouseConnection incomingTiedHouseConnection,
             string applicationId
@@ -273,7 +271,7 @@ namespace Gov.Lclb.Cllb.Public.Repositories
                 createdTiedHouseConnection.AdoxioTiedhouseconnectionid
             );
 
-            return createdTiedHouseConnection.ToViewModel();
+            return await GetTiedHouseConnectionById(createdTiedHouseConnection.AdoxioTiedhouseconnectionid);
         }
 
         /// <summary>
@@ -288,7 +286,7 @@ namespace Gov.Lclb.Cllb.Public.Repositories
         /// </list>
         /// </remarks>
         /// <param name="incomingTiedHouseConnection">The tied house connection data to create.</param>
-        /// /// <param name="accountId">The ID of the user's account.</param>
+        /// <param name="accountId">The ID of the user's account.</param>
         /// <returns>The created tied house connection.</returns>
         public async Task<TiedHouseConnection> AddLiquorTiedHouseConnectionToUser(
             TiedHouseConnection incomingTiedHouseConnection,
@@ -365,7 +363,7 @@ namespace Gov.Lclb.Cllb.Public.Repositories
                 createdTiedHouseConnection.AdoxioTiedhouseconnectionid
             );
 
-            return createdTiedHouseConnection.ToViewModel();
+            return await GetTiedHouseConnectionById(createdTiedHouseConnection.AdoxioTiedhouseconnectionid);
         }
 
         /// <summary>
@@ -435,20 +433,20 @@ namespace Gov.Lclb.Cllb.Public.Repositories
         {
             _logger.LogDebug($"CreateCannabisTiedHouseConnection. AccountId = {accountId}.");
 
-            var newCannabisTiedHouseConnectionRecord = new MicrosoftDynamicsCRMadoxioTiedhouseconnection();
+            var adoxioTiedHouseConnection = new MicrosoftDynamicsCRMadoxioTiedhouseconnection();
 
             if (incomingTiedHouseConnectionRecord != null)
             {
-                newCannabisTiedHouseConnectionRecord.CopyValues(incomingTiedHouseConnectionRecord);
+                adoxioTiedHouseConnection.CopyValues(incomingTiedHouseConnectionRecord);
             }
 
             // Ensure the tied house connection is of type (category) "Cannabis"
-            newCannabisTiedHouseConnectionRecord.AdoxioCategoryType = (int)TiedHouseCategoryType.Cannabis;
+            adoxioTiedHouseConnection.AdoxioCategoryType = (int)TiedHouseCategoryType.Cannabis;
             // The singleton cannabis tied house connection should always be in the "Existing" status
-            newCannabisTiedHouseConnectionRecord.Statuscode = (int)TiedHouseStatusCode.Existing;
+            adoxioTiedHouseConnection.Statuscode = (int)TiedHouseStatusCode.Existing;
 
             var createdCannabisTiedHouseConnectionRecord = await _dynamicsClient.Tiedhouseconnections.CreateAsync(
-                newCannabisTiedHouseConnectionRecord
+                adoxioTiedHouseConnection
             );
 
             // Associate the new tied house connection with the account
@@ -457,7 +455,9 @@ namespace Gov.Lclb.Cllb.Public.Repositories
                 accountId
             );
 
-            return createdCannabisTiedHouseConnectionRecord.ToViewModel();
+            return await GetTiedHouseConnectionById(
+                createdCannabisTiedHouseConnectionRecord.AdoxioTiedhouseconnectionid
+            );
         }
 
         /// <summary>
@@ -486,21 +486,21 @@ namespace Gov.Lclb.Cllb.Public.Repositories
                 throw new Exception($"Tied House Connection with ID {tiedHouseConnectionId} could not be found.");
             }
 
-            var updatedTiedHouseConnectionRecord = new MicrosoftDynamicsCRMadoxioTiedhouseconnection();
+            var adoxioTiedHouseConnection = new MicrosoftDynamicsCRMadoxioTiedhouseconnection();
 
-            updatedTiedHouseConnectionRecord.CopyValues(incomingTiedHouseConnectionRecord);
+            adoxioTiedHouseConnection.CopyValues(incomingTiedHouseConnectionRecord);
 
             // Ensure the tied house connection is of type (category) "Cannabis"
-            updatedTiedHouseConnectionRecord.AdoxioCategoryType = (int)TiedHouseCategoryType.Cannabis;
+            adoxioTiedHouseConnection.AdoxioCategoryType = (int)TiedHouseCategoryType.Cannabis;
             // The singleton cannabis tied house connection should always be in the "Existing" status
-            updatedTiedHouseConnectionRecord.Statuscode = (int)TiedHouseStatusCode.Existing;
+            adoxioTiedHouseConnection.Statuscode = (int)TiedHouseStatusCode.Existing;
 
             await _dynamicsClient.Tiedhouseconnections.UpdateAsync(
                 tiedHouseConnectionId.ToString(),
-                updatedTiedHouseConnectionRecord
+                adoxioTiedHouseConnection
             );
 
-            return updatedTiedHouseConnectionRecord.ToViewModel();
+            return await GetTiedHouseConnectionById(adoxioTiedHouseConnection.AdoxioTiedhouseconnectionid);
         }
 
         /// <summary>

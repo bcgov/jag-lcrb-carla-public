@@ -6,7 +6,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
     public class AccountSummaryLicence
     {
         public string licenceId { get; set; }
-        public string licenseType { get; set; }
+        public string licenceType { get; set; }
+        public LicenceTypeCategory? licenceTypeCategory { get; set; }
         public DateTimeOffset? expiryDate { get; set; }
         public int? statusCode { get; set; }
     }

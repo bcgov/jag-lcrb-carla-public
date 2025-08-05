@@ -6,7 +6,7 @@ import { Application, ApplicationExtension } from '@models/application.model';
 import { TiedHouseConnection } from '@models/tied-house-connection.model';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
 import { GenericMessageDialogComponent } from '@shared/components/dialog/generic-message-dialog/generic-message-dialog.component';
-import { of, Subject, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { forkJoin } from 'rxjs/internal/observable/forkJoin';
 
 export type ConnectionToOtherLiquorLicencesFormData = ApplicationExtension;
@@ -69,9 +69,6 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnChang
    */
   initialTiedHouseConnections: TiedHouseConnection[] = [];
 
-  userHasAtLeastOneApprovedApplication: boolean = false;
-  userHasAtLeastOneExistingTiedHouseConnection: boolean = false;
-
   form: FormGroup;
 
   get accountId(): string | undefined {
@@ -129,30 +126,13 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnChang
       ? this.tiedHouseService.GetLiquorTiedHouseConnectionsForApplication(this.applicationId)
       : this.tiedHouseService.GetLiquorTiedHouseConnectionsForUser(this.accountId);
 
-    /*
-     * TODO: tiedhouse - Temporarily skipping this call
-     * See comment for https://jira.justice.gov.bc.ca/browse/LCSD-7700?focusedCommentId=437017
-     */
-    const tiedHouseConnectionsForUserRequest$ = of([]); // this.tiedHouseService.GetLiquorTiedHouseConnectionsForUser(this.accountId);
-
-    /*
-     * TODO: tiedhouse - Temporarily skipping this call
-     * See comment for https://jira.justice.gov.bc.ca/browse/LCSD-7700?focusedCommentId=437017
-     */
-    const applicationCountRequest$ = of(0); // this.applicationDataService.getApprovedApplicationCount();
-
     forkJoin({
-      tiedHouseDataForApplication: tiedHouseConnectionsForApplicationIdRequest$,
-      tiedHouseDataForUser: tiedHouseConnectionsForUserRequest$,
-      approvedApplicationCount: applicationCountRequest$
+      tiedHouseDataForApplication: tiedHouseConnectionsForApplicationIdRequest$
     })
       .pipe(takeUntil(this.destroy$))
       .subscribe({
-        next: ({ tiedHouseDataForApplication, tiedHouseDataForUser, approvedApplicationCount }) => {
-          this.initialTiedHouseConnections = [...tiedHouseDataForUser, ...tiedHouseDataForApplication];
-
-          this.userHasAtLeastOneApprovedApplication = approvedApplicationCount > 0;
-          this.userHasAtLeastOneExistingTiedHouseConnection = tiedHouseDataForUser.length > 0;
+        next: ({ tiedHouseDataForApplication }) => {
+          this.initialTiedHouseConnections = tiedHouseDataForApplication;
 
           this.hasLoadedData = true;
         },
@@ -220,19 +200,7 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnChang
       return !this.isTiedHouseConnectionsEditableForApplication;
     }
 
-    /*
-     * TODO: tiedhouse - Temporarily skipping the below conditions.
-     * See comment for https://jira.justice.gov.bc.ca/browse/LCSD-7700?focusedCommentId=437017
-     */
     return true;
-
-    // if (!this.userHasAtLeastOneApprovedApplication && !this.userHasAtLeastOneExistingTiedHouseConnection) {
-    //   // If no application is provided, but the user also has no existing applications and no existing tied house
-    //   // connections, then the tied house component is editable.
-    //   return false;
-    // }
-
-    // return true;
   }
 
   /**

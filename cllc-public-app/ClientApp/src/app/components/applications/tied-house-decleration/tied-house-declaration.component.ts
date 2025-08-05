@@ -246,7 +246,7 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
       .subscribe(([saveSucceeded, result]) => {
         if (saveSucceeded) {
           //update connection with generated guids
-          declaration.accountid = result.accountid;
+          declaration.accountId = result.accountId;
           declaration.id = result.id;
           declaration.applicationId = result.applicationId;
 

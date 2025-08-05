@@ -1091,27 +1091,35 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         /// <summary>
-        /// Fetches a "Permanent Change to a Licensee" application.
+        /// Fetches a "Permanent Change to a Licensee" or "Legal Entity Review" application.
         ///
         /// Fetches the application using the logged in user's account ID.
+        /// 
         /// If an "applicationId" is provided, will additionally filter results using that specific application id.
+        /// 
+        /// If "isLegalEntityReview" is true, it will fetch a "Legal Entity Review" application instead of a 
+        /// "Permanent Change to a Licensee" application.
         ///
-        /// If no application is found, it will create a new "Permanent Change to a Licensee" application and return it.
+        /// If no application is found, it will create a new application and return it.
         /// </summary>
         /// <param name="userSettings"></param>
-        /// <param name="applicationId"></param> Filter results by a specific application ID. (Optional)
+        /// <param name="applicationId">Filter results by a specific application ID. (Optional)</param>
+        /// <param name="isLegalEntityReview">Whether or not the change application is a legal entity review. (Optional)</param>
         /// <returns></returns>
-        private MicrosoftDynamicsCRMadoxioApplication GetPermanentChangeApplication(UserSettings userSettings, bool isLegalEntityReview, string applicationId = null)
+        private MicrosoftDynamicsCRMadoxioApplication GetPermanentChangeApplication(UserSettings userSettings, string applicationId = null, bool isLegalEntityReview = false)
         {
             MicrosoftDynamicsCRMadoxioApplication result = null;
 
-            var applicationType = _dynamicsClient.GetApplicationTypeByName("Permanent Change to a Licensee"); 
+            MicrosoftDynamicsCRMadoxioApplicationtype applicationType;
 
             if (isLegalEntityReview == true)
             {
                 applicationType = _dynamicsClient.GetApplicationTypeByName("LE Review");
             }
-            
+            else
+            {
+                 applicationType = _dynamicsClient.GetApplicationTypeByName("Permanent Change to a Licensee");
+            }
 
             string[] expand =
             {
@@ -1203,10 +1211,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         ///
         /// If no application is found, it will create a new "Permanent Change to a Licensee" application and return it.
         /// </summary>
-        /// <param name="applicationId"></param> Filter results by a specific application ID. (Optional)
+        /// <param name="applicationId"></param>Filter results by a specific application ID.(Optional)
+        /// <param name="isLegalEntity">
+        /// Optional query param for indicating that the payment is being made for a legal entity review.
+        /// Allowed values: "true" and "false".
+        /// If not provided, the default value is "false".
+        /// </param>
         /// <returns></returns> <summary>
-        [HttpGet("permanent-change-to-licensee-data/{isLegalEntity}")]
-        public async Task<IActionResult> GetPermanetChangesToLicenseeData([FromQuery] string applicationId, bool isLegalEntity)
+        [HttpGet("permanent-change-to-licensee-data")]
+        public async Task<IActionResult> GetPermanetChangesToLicenseeData([FromQuery] string applicationId, [FromQuery] bool isLegalEntity = false)
         {
             //"permanent-change-to-licensee"
             // get the current user.
@@ -1214,8 +1227,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             PermanentChangesPageData data = new PermanentChangesPageData();
 
             // set application type relationship 
-            var app = GetPermanentChangeApplication(userSettings, isLegalEntity, applicationId);
-            
+            var app = GetPermanentChangeApplication(userSettings, applicationId, isLegalEntity);
+
             // get all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
             data.Licences = _dynamicsClient.GetLicensesByLicencee(userSettings.AccountId, _cache);
 

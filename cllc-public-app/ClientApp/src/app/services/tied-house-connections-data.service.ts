@@ -38,19 +38,6 @@ export class TiedHouseConnectionsDataService extends DataService {
   }
 
   /**
-   * Get the count of existing liquor tied house connections for a user.
-   * - If `accountId` is provided, it filters results by that account.
-   * - If `accountId` is not provided, it returns results for the current logged in user.
-   *
-   * @param {string} [accountId] An optional account ID to filter results by
-   * @return {*}  {Observable<number>} The count of existing tied house connections.
-   */
-  GetExistingLiquorTiedHouseConnectionsCountForUser(accountId?: string): Observable<number> {
-    const apiPath = `api/tiedhouseconnections/user/liquor/existing/count/${accountId ?? ''}`;
-    return this.http.get<number>(apiPath, { headers: this.headers }).pipe(catchError(this.handleError));
-  }
-
-  /**
    * Get all liquor tied house connections for a specific application.
    *
    * Note: This includes liquor tied house connections that are associated with the user account, as well as those that
@@ -59,7 +46,7 @@ export class TiedHouseConnectionsDataService extends DataService {
    * @param {string} applicationId
    * @return {*}  {Observable<TiedHouseConnection[]>}
    */
-  GetLiquorTiedHouseConnectionsForApplication(applicationId: string): Observable<TiedHouseConnection[]> { 
+  GetLiquorTiedHouseConnectionsForApplication(applicationId: string): Observable<TiedHouseConnection[]> {
     const apiPath = `api/tiedhouseconnections/liquor/application/${applicationId}`;
     return this.http.get<TiedHouseConnection[]>(apiPath, { headers: this.headers }).pipe(catchError(this.handleError));
   }
@@ -69,9 +56,12 @@ export class TiedHouseConnectionsDataService extends DataService {
    *
    * @param {TiedHouseConnection} tiedHouseConnection
    * @param {string} applicationId
-   * @return {*}
+   * @return {*}  {Observable<TiedHouseConnection>} The created tied house connection.
    */
-  AddLiquorTiedHouseConnectionToApplication(tiedHouseConnection: TiedHouseConnection, applicationId: string) {
+  AddLiquorTiedHouseConnectionToApplication(
+    tiedHouseConnection: TiedHouseConnection,
+    applicationId: string
+  ): Observable<TiedHouseConnection> {
     return this.http
       .post<TiedHouseConnection>(`api/tiedhouseconnections/liquor/application/${applicationId}`, tiedHouseConnection, {
         headers: this.headers
@@ -88,9 +78,12 @@ export class TiedHouseConnectionsDataService extends DataService {
    *
    * @param {TiedHouseConnection} tiedHouseConnection
    * @param {string} accountId
-   * @return {*}
+   * @return {*}  {Observable<TiedHouseConnection>} The created tied house connection.
    */
-  AddLiquorTiedHouseConnectionToUser(tiedHouseConnection: TiedHouseConnection, accountId: string) {
+  AddLiquorTiedHouseConnectionToUser(
+    tiedHouseConnection: TiedHouseConnection,
+    accountId: string
+  ): Observable<TiedHouseConnection> {
     return this.http
       .post<TiedHouseConnection>(`api/tiedhouseconnections/liquor/user/${accountId}`, tiedHouseConnection, {
         headers: this.headers
@@ -104,9 +97,12 @@ export class TiedHouseConnectionsDataService extends DataService {
    * @param {TiedHouseConnection} tiedHouseConnection Optional tied house connection data used to create or update the
    * record.
    * @param {string} accountId The ID of the account to associate with the tied house connection.
-   * @return {*}
+   * @return {*}  {Observable<TiedHouseConnection>} The created or updated tied house connection.
    */
-  upsertCannabisTiedHouseConnection(tiedHouseConnection: TiedHouseConnection, accountId: string) {
+  upsertCannabisTiedHouseConnection(
+    tiedHouseConnection: TiedHouseConnection,
+    accountId: string
+  ): Observable<TiedHouseConnection> {
     return this.http
       .post<TiedHouseConnection>(`api/tiedhouseconnections/cannabis/${accountId}`, tiedHouseConnection, {
         headers: this.headers
@@ -119,9 +115,12 @@ export class TiedHouseConnectionsDataService extends DataService {
    *
    * @param {TiedHouseConnection} tiedHouseConnection The tied house connection data used to update the existing record.
    * @param {string} tiedHouseConnectionId The ID of the tied house connection to update.
-   * @return {*}
+   * @return {*}  {Observable<TiedHouseConnection>} The updated tied house connection.
    */
-  updateCannabisTiedHouseConnection(tiedHouseConnection: TiedHouseConnection, tiedHouseConnectionId: string) {
+  updateCannabisTiedHouseConnection(
+    tiedHouseConnection: TiedHouseConnection,
+    tiedHouseConnectionId: string
+  ): Observable<TiedHouseConnection> {
     return this.http
       .put<TiedHouseConnection>(`api/tiedhouseconnections/cannabis/${tiedHouseConnectionId}`, tiedHouseConnection, {
         headers: this.headers

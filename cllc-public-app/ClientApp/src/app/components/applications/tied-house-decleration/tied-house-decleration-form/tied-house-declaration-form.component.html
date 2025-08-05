@@ -129,19 +129,24 @@
   <div *ngIf="!isReadOnly" class="row justify-content-end">
     <div class="col-auto" *ngIf="isEditable">
       <button class="btn btn-link btn-cancel" (click)="cancel()">
-        <fa-icon [icon]="faTrash" class="mr-2"></fa-icon>CANCEL
+        <fa-icon [icon]="faTrash" class="mr-2"></fa-icon>Cancel
       </button>
     </div>
+
     <div class="col-auto" *ngIf="isEditable">
       <button class="btn btn-primary" type="button" (click)="save()">Save</button>
     </div>
 
     <div class="col-auto" *ngIf="!isEditable">
-      <button class="btn btn-link btn-cancel" (click)="edit()"><fa-icon [icon]="faTrash"></fa-icon> Edit</button>
+      <button class="btn btn-link btn-cancel" (click)="edit()">
+        <fa-icon [icon]="faTrash" class="mr-2"></fa-icon>Edit
+      </button>
     </div>
 
     <div class="col-auto" *ngIf="!isEditable">
-      <button class="btn btn-link btn-cancel" (click)="remove()"><fa-icon [icon]="faTrash"></fa-icon> Remove</button>
+      <button class="btn btn-link btn-cancel" (click)="remove()">
+        <fa-icon [icon]="faTrash" class="mr-2"></fa-icon>Remove
+      </button>
     </div>
   </div>
 </form>
