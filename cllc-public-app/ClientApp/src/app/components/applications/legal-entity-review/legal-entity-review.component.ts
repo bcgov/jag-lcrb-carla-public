@@ -18,8 +18,6 @@ import { Observable, of } from 'rxjs';
 import { catchError, filter, mergeMap, takeWhile } from 'rxjs/operators';
 import { TiedHouseDeclarationComponent } from '../tied-house-decleration/tied-house-declaration.component';
 
-export const SharepointNameRegex = /^[^~#%&*{}\\:<>?/+|""]*$/;
-
 /**
  * A component that displays a form page for a legal entity review application.
  *
