@@ -152,7 +152,9 @@ namespace Gov.Lclb.Cllb.Interfaces
                     "adoxio_PoliceJurisdictionId",
                     "adoxio_application_SharePointDocumentLocations",
                     "adoxio_adoxio_application_adoxio_applicationtermsconditionslimitation_Application",
-                    "adoxio_RelatedLicence"
+                    "adoxio_RelatedLicence",
+                    "adoxio_adoxio_application_adoxio_applicationextension_Application",
+                    "adoxio_ApplicationExtension"
                 };
 
                 // fetch from Dynamics.

@@ -7,7 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as currentApplicationActions from '@app/app-state/actions/current-application.action';
 import { AppState } from '@app/app-state/models/app-state';
-import { ConnectionToNonMedicalStoresComponent } from '@components/account-profile/tabs/connection-to-non-medical-stores/connection-to-non-medical-stores.component';
+import { ConnectionToNonMedicalStoresComponent } from '@components/applications/application/tabs/connection-to-non-medical-stores/connection-to-non-medical-stores.component';
 import { ApplicationCancellationDialogComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
 import { INCOMPLETE, UPLOAD_FILES_MODE } from '@components/licences/licences.component';
 import { Account, TransferAccount } from '@models/account.model';
@@ -66,7 +66,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   @Input() skipPayment: boolean = false;
   @Output() saveComplete: EventEmitter<boolean> = new EventEmitter<boolean>();
   @ViewChild('mainForm') mainForm: FileUploaderComponent;
-  @ViewChild(ConnectionToNonMedicalStoresComponent) connectionsToProducers: ConnectionToNonMedicalStoresComponent;
+  @ViewChild(ConnectionToNonMedicalStoresComponent) connectionToNonMedicalStores: ConnectionToNonMedicalStoresComponent;
   @ViewChild(ProofOfZoningComponent) proofOfZoning: ProofOfZoningComponent;
   @ViewChild('lgAutoCompleteTrigger', { read: MatAutocompleteTrigger }) lgAutoComplete: MatAutocompleteTrigger;
   @ViewChild('pdAutoCompleteTrigger', { read: MatAutocompleteTrigger }) pdAutoComplete: MatAutocompleteTrigger;
@@ -392,7 +392,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.addDynamicContent();
     });
 
-    this.applicationDataService.getSubmittedApplicationCount()
+    this.applicationDataService.getSubmittedCannabisRetailStoreApplicationCount()
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(value => this.submittedApplications = value);
 
@@ -577,12 +577,12 @@ export class ApplicationComponent extends FormBase implements OnInit {
     this.dynamicsDataService.getRecord('indigenousnations', '')
       .subscribe(data => this.indigenousNations = data);
 
-    this.addresses = this.form.get('establishmentAddressStreet')!.valueChanges.pipe(
-      debounceTime(300),
-      distinctUntilChanged(),
-      filter(streetName => streetName.length > 3),
-      switchMap(streetName => this.addressService.getAddressData(streetName))
-    );
+      this.addresses = this.form.get('establishmentAddressStreet')!.valueChanges.pipe(
+        debounceTime(300),
+        distinctUntilChanged(),
+        filter(streetName => streetName.length > 3),
+        switchMap(streetName => this.addressService.getAddressData(streetName))
+      );
 
   }
 
@@ -858,8 +858,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   private isHoursOfSaleValid(): boolean {
     return this.form.disabled || !this.application.applicationType.showHoursOfSale ||
-      this.application.applicationType.name === ApplicationTypeNames.FP ||
-      this.application.applicationType.name === ApplicationTypeNames.FPRelo ||
+        this.application.applicationType.name === ApplicationTypeNames.FP ||
+        this.application.applicationType.name === ApplicationTypeNames.FPRelo ||
       (this.form.get('serviceHoursSundayOpen').valid
         && this.form.get('serviceHoursMondayOpen').valid
         && this.form.get('serviceHoursTuesdayOpen').valid
@@ -974,7 +974,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   canDeactivate(): Observable<boolean> {
-    const connectionsDidntChang = !(this.connectionsToProducers && this.connectionsToProducers.formHasChanged());
+    const connectionsDidntChang = !(this.connectionToNonMedicalStores && this.connectionToNonMedicalStores.formHasChanged());
     const formDidntChange = JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value);
     if (connectionsDidntChang && formDidntChange) {
       return of(true);
@@ -1172,7 +1172,13 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
     let data = (<any>Object).assign(this.application.tiedHouse, _tiedHouseData);
     data = { ...data };
-    return this.tiedHouseService.updateTiedHouse(data, data.id);
+
+    if (this.application.tiedHouse.id) {
+      // If we have a primary id, update the existing connection
+      return this.tiedHouseService.updateCannabisTiedHouseConnection(data, data.id);
+    } else {
+      return this.tiedHouseService.upsertCannabisTiedHouseConnection(data, this.account.id);
+    }
   }
 
   updateApplicationInStore() {
@@ -1252,14 +1258,14 @@ export class ApplicationComponent extends FormBase implements OnInit {
     const licenceTypeName = this.application?.licenseType;
     const applicationTypeName = this.application?.applicationType.name;
     const isShow = (licenceTypeName == 'Food Primary' && applicationTypeName != 'Temporary Extension of Licensed Area')
-      || ((licenceTypeName == 'Liquor Primary' || licenceTypeName == 'Liquor Primary Club')
-        && (applicationTypeName == 'Liquor Primary'
-          || applicationTypeName == 'Liquor Primary Club'
-          || applicationTypeName == 'Liquor Primary Location Change'
-          || applicationTypeName == 'LP Relocation'
-          || applicationTypeName == 'Liquor Primary New Outdoor Patio'
-          || applicationTypeName == 'LP Structural (cap inc.)'
-          || applicationTypeName == 'LP Structural (no cap inc.)'));
+      || (  (licenceTypeName == 'Liquor Primary' || licenceTypeName == 'Liquor Primary Club')
+          && ( applicationTypeName == 'Liquor Primary'
+            || applicationTypeName == 'Liquor Primary Club'
+            || applicationTypeName == 'Liquor Primary Location Change'
+            || applicationTypeName == 'LP Relocation'
+            || applicationTypeName == 'Liquor Primary New Outdoor Patio'
+            || applicationTypeName == 'LP Structural (cap inc.)'
+            || applicationTypeName == 'LP Structural (no cap inc.)'));
     return isShow;
   }
 
@@ -1450,13 +1456,13 @@ export class ApplicationComponent extends FormBase implements OnInit {
     if (this.showServiceArea() && serviceArea.length === 0) {
       valid = false;
       this.validationMessages.push('At least one service area is required.');
-    } else {
+    }else{
 
 
-      if (!this.isOccupantLoadCorrect()) {
-        valid = false;
-        this.validationMessages.push('The sum of occupant loads across all service areas does not match the total occupant load entered in the total occupant load field.');
-      }
+        if(!this.isOccupantLoadCorrect()){
+          valid = false;
+          this.validationMessages.push('The sum of occupant loads across all service areas does not match the total occupant load entered in the total occupant load field.');
+        }
 
     }
 
@@ -1836,7 +1842,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       establishmentParcelId: 'Please enter the Parcel Identifier (format: 9 digits)',
       establishmentopeningdate: 'Please enter the store opening date',
       federalProducerNames: 'Please enter the name of federal producer',
-      totalOccupantLoad: 'Please enter the total occupant load',
+      totalOccupantLoad:'Please enter the total occupant load',
       hasValidInterest: 'Please enter a value for valid interest',
       indigenousNationId: 'Please select the Indigenous nation',
       isAlr: 'Please indicate ALR status',
@@ -2122,79 +2128,79 @@ export class ApplicationComponent extends FormBase implements OnInit {
     this.form.get("description1").patchValue(this.licenseToRemove.name);
   }
 
-  validateInput(event: Event): void {
+  validateInput(event:Event):void{
     const input = event.target as HTMLInputElement;
-    input.value = input.value.replace(/-/g, '');
-  }
+    input.value = input.value.replace(/-/g,'');
+   }
 
-  isOccupantLoadCorrect(): Boolean {
+   isOccupantLoadCorrect(): Boolean{
 
-    if (this.hideOcupantLoadFields()) {
-      this.form.get('totalOccupantLoadExceed').disable();
+    if(this.hideOcupantLoadFields()){
+       this.form.get('totalOccupantLoadExceed').disable();
       return true;
     }
 
     const serviceArea = ('areas' in this.form.get('serviceAreas').value) ? this.form.get('serviceAreas').value['areas'] : this.form.get('serviceAreas').value;
-    let totalCapacity = serviceArea.reduce((sum, item) => Number(sum + (+item.capacity)), 0);
+    let totalCapacity = serviceArea.reduce((sum,item)=> Number(sum+(+item.capacity)),0);
     let totalOccupantLoad = this.form.get('totalOccupantLoad').value | 0;
-    const isExceeded: boolean = totalCapacity > totalOccupantLoad
-    if (isExceeded) {
+    const isExceeded:boolean = totalCapacity > totalOccupantLoad
+    if(isExceeded){
       this.form.get('totalOccupantLoadExceed').enable();
       this.form.get('totalOccupantLoadExceed').enable();
       this.showOccupantLoadCheckBox = true;
-    } else {
+    }else{
       this.form.get('totalOccupantLoadExceed').disable();
       this.form.get('totalOccupantLoadExceed').disable();
       this.showOccupantLoadCheckBox = false;
     }
-    return this.form.get('totalOccupantLoadExceed').value === true || !isExceeded;
-  }
+    return  this.form.get('totalOccupantLoadExceed').value === true || !isExceeded;
+   }
 
-  //Check if applicant is waiting for LG approcval or has been approved by LG.
+//Check if applicant is waiting for LG approcval or has been approved by LG.
   //In this case do not block user to pay and submit if the fields are empty
-  hideOcupantLoadFields(): Boolean {
-    return this.isOpenedByLGForApproval || this.lGHasApproved();
-  }
+ hideOcupantLoadFields(): Boolean{
+  return this.isOpenedByLGForApproval || this.lGHasApproved();
+ }
 
-  private hasInvoiceTriggerRun(): boolean {
-    const hasRun: boolean = (
-      this?.application?.invoiceTrigger === 1)
-    return hasRun;
-  }
+ private hasInvoiceTriggerRun(): boolean {
+  const hasRun: boolean = (
+    this?.application?.invoiceTrigger === 1)
+  return hasRun;
+}
 
-  onAddressOptionSelect(event: any) {
-    const selectedAddress: Address = event.option.value;
-    this.form.get('establishmentAddressStreet').setValue(selectedAddress.fullAddress);
-    this.form.get('establishmentAddressCity').setValue(selectedAddress.localityName);
-    this.form.get('establishmentParcelId').setValue("");
+onAddressOptionSelect (event: any) {
+  const selectedAddress: Address = event.option.value;
+  this.form.get('establishmentAddressStreet').setValue(selectedAddress.fullAddress);
+  this.form.get('establishmentAddressCity').setValue(selectedAddress.localityName);
+  this.form.get('establishmentParcelId').setValue("");
 
     if (selectedAddress && selectedAddress.siteID !== undefined && selectedAddress.siteID !== null && selectedAddress.siteID !== "") {
-      this.addressService.getPid(selectedAddress.siteID).subscribe(
-        (response: string) => {
-          try {
-            const parsedResponse = JSON.parse(JSON.stringify(response));
+    this.addressService.getPid(selectedAddress.siteID).subscribe(
+      (response: string) => {
+        try {
+          const parsedResponse = JSON.parse(JSON.stringify(response));
 
-            const pids = parsedResponse.pids;
+          const pids = parsedResponse.pids;
 
-            // Check if the key exists and print the value
-            if (pids !== undefined) {
+          // Check if the key exists and print the value
+          if (pids !== undefined) {
               const pidArray = pids.split('|');
-              if (pidArray.length == 1) {
+              if(pidArray.length == 1){
                 this.form.get('establishmentParcelId').setValue(pidArray[0]);
               }
-            } else {
-              // console.log("Key 'pids' does not exist in the response.");
-            }
-          } catch (error) {
-            //console.error('Error parsing JSON:', error);
+          } else {
+             // console.log("Key 'pids' does not exist in the response.");
           }
-        },
-        (error) => {
-          //  console.error('Error fetching data:', error);
+      } catch (error) {
+          //console.error('Error parsing JSON:', error);
+      }
+      },
+      (error) => {
+      //  console.error('Error fetching data:', error);
         }
-      );
-    }
-
+    );
   }
+
+}
 }
 

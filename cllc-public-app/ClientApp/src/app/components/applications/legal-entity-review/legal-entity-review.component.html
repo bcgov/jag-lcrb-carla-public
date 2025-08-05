@@ -1,0 +1,61 @@
+<div [formGroup]="form" class="form-wrapper">
+  <h1>Legal Entity Review</h1>
+
+  <mat-progress-bar class="mt-1" *ngIf="!isDataLoaded" mode="indeterminate"></mat-progress-bar>
+
+  <ng-container *ngIf="isDataLoaded">
+    <section>
+      <app-legal-entity-review-disclaimer [account]="account"></app-legal-entity-review-disclaimer>
+    </section>
+
+    <section>
+      <app-legal-entity-review-tied-house
+        (showTiedHouseConnections)="showTiedHouseConnections($event)"></app-legal-entity-review-tied-house>
+    </section>
+
+    <section *ngIf="isTiedHouseVisible">
+      <h3 class="blue-header">Tied House Declaration</h3>
+      <div class="content-bottom">
+        <app-tied-house-declaration #tiedHouseDeclaration [applicationId]="application.id"></app-tied-house-declaration>
+      </div>
+    </section>
+
+    <section>
+      <app-legal-entity-review-supporting-documents [application]="application">
+      </app-legal-entity-review-supporting-documents>
+    </section>
+
+    <section>
+      <app-legal-entity-review-declarations
+        [hasLiquor]="hasLiquor"
+        [hasCannabis]="hasCannabis"
+        [showValidationMessages]="showValidationMessages"></app-legal-entity-review-declarations>
+    </section>
+
+    <section>
+      <app-legal-entity-review-what-happens-next></app-legal-entity-review-what-happens-next>
+    </section>
+
+    <section class="error mt-3" *ngIf="showValidationMessages">
+      <p *ngFor="let message of validationMessages">
+        <span class="app-cancel">
+          <mat-icon aria-label="error icon" style="font-size: 15px">error</mat-icon>
+          {{ message }}
+        </span>
+      </p>
+    </section>
+
+    <section style="margin-top: 20px; position: relative">
+      <button mat-raised-button color="primary" class="progress-button" (click)="onSubmit()" [disabled]="isSubmitting">
+        <span>SUBMIT</span>
+        <mat-progress-bar *ngIf="isSubmitting" mode="indeterminate"></mat-progress-bar>
+      </button>
+      <span style="color: #1a5a96; float: right">
+        <span (click)="onCancel()">
+          <fa-icon [icon]="faTrashAlt" style="color: #1a5a96" class="mr-3"></fa-icon>
+          <a href="javascript: void(0)">CANCEL</a>
+        </span>
+      </span>
+    </section>
+  </ng-container>
+</div>
