@@ -4,10 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { AppState } from '@app/app-state/models/app-state';
-import {
-  permanentChangeTypesOfChanges,
-  PermanentChangeTypesOfChangesOption
-} from '@app/constants/permanent-change-types-of-changes';
+import { PCLFormControlDefinitions } from '@components/applications/permanent-change-to-a-licensee/pcl-business-rules/pcl-bussiness-rules-content';
 import { Account } from '@models/account.model';
 import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
 import { Application } from '@models/application.model';
@@ -18,8 +15,6 @@ import { GenericMessageDialogComponent } from '@shared/components/dialog/generic
 import { FormBase } from '@shared/form-base';
 import { EMPTY, Observable, of } from 'rxjs';
 import { catchError, filter, mergeMap, takeWhile } from 'rxjs/operators';
-
-export const SharepointNameRegex = /^[^~#%&*{}\\:<>?/+|""]*$/;
 
 /**
  * A component that displays a form page for a legal entity review permanent change to a licensee application.
@@ -57,7 +52,6 @@ export class LegalEntityReviewPermanentChangeToALicenseeComponent extends FormBa
   submitApplicationInProgress: boolean = false;
   primaryPaymentInProgress: boolean = false;
   secondaryPaymentInProgress: boolean = false;
-  changeList: any;
 
   get hasLiquor(): boolean {
     return this.liquorLicences.length > 0;
@@ -68,7 +62,7 @@ export class LegalEntityReviewPermanentChangeToALicenseeComponent extends FormBa
   }
 
   get selectedChangeList() {
-    return this.changeList?.filter((item) => this.form && this.form.get(item.formControlName).value === true);
+    return PCLFormControlDefinitions.filter((item) => this.form && this.form.get(item.formControlName).value === true);
   }
 
   form: FormGroup;
@@ -132,7 +126,6 @@ export class LegalEntityReviewPermanentChangeToALicenseeComponent extends FormBa
     const sub = this.applicationDataService.getLegalEntityPermanentChangesToLicenseeData(this.applicationId).subscribe({
       next: (data) => {
         this.setFormData(data);
-        this.getChangeList();
       },
       error: (error) => {
         console.error('Error loading form data', error);
@@ -381,11 +374,5 @@ export class LegalEntityReviewPermanentChangeToALicenseeComponent extends FormBa
     };
 
     return errorMap;
-  }
-
-  private getChangeList() {
-    this.changeList = permanentChangeTypesOfChanges.filter(
-      (item) => !!item.availableTo.find((bt) => bt === this.account.businessType)
-    );
   }
 }
