@@ -14,7 +14,6 @@ import { faChevronLeft, faExclamationTriangle, faQuestionCircle, faTrash, faInfo
 import { faSave } from "@fortawesome/free-regular-svg-icons";
 "@fortawesome/free-solid-svg-icons";
 import { InventorySalesReport } from "@models/inventory-sales-report.model";
-import getMonth from "date-fns/fp/getMonth/index.js";
 
 interface FederalReportingParams {
   licenceId: string;
@@ -51,7 +50,7 @@ export class FederalReportingComponent implements OnInit {
   loadingMonthlyReports = false;
 
   reportYears: string[] = [];
-  selectedYear: string;  
+  selectedYear: string;
   reportMonths: string[] = [];
   selectedMonth: string;
 
@@ -112,7 +111,7 @@ export class FederalReportingComponent implements OnInit {
     this.selectedYear = "";
     this.selectedMonth = "";
     this.busy = forkJoin([
-      this.licenceDataService.getAllCurrentLicenses()      
+      this.licenceDataService.getAllCurrentLicenses()
     ])
       .subscribe(results => {
         this.licenses = results[0].filter(l => l.licenceTypeName === "Cannabis Retail Store"
@@ -120,13 +119,13 @@ export class FederalReportingComponent implements OnInit {
           || l.licenceTypeName === "S119 CRS Authorization"
           || l.licenceTypeName === "Producer Retail Store");
 
-        if (this.licenses?.length > 0) 
+        if (this.licenses?.length > 0)
         {
           this.setYearMonthDropDownListDataSource();
-          this.selectedLicense = this.licenses[0];         
+          this.selectedLicense = this.licenses[0];
           this.getMonthlyReport(this.licenses[0].licenseId, this.selectedYear, this.selectedMonth);
           this.renderMonthlyReport();
-        }       
+        }
       });
   }
 
@@ -136,12 +135,12 @@ export class FederalReportingComponent implements OnInit {
 
   getMonthlyReport(licenceId, year = null, month = null) {
     this.selectedMonthlyReport = null;
-    this.loadingMonthlyReports = true;   
+    this.loadingMonthlyReports = true;
     return forkJoin([
       this.monthlyReportDataService.getMonthlyReportByLicenceYearMonth(licenceId, year, month)
     ])
-      .subscribe(([monthlyReport]) => {       
-        this.selectedMonthlyReport = monthlyReport;       
+      .subscribe(([monthlyReport]) => {
+        this.selectedMonthlyReport = monthlyReport;
         this.loadingMonthlyReports = false;
         this.renderMonthlyReport();
       });
@@ -164,16 +163,16 @@ export class FederalReportingComponent implements OnInit {
     } else {
       this.selectedMonth = tmpMonth.toString();
     }
-    
-  }  
-  
 
-  handleLicenceSelectedChanged() {    
+  }
+
+
+  handleLicenceSelectedChanged() {
     this.getMonthlyReport(this.selectedLicense?.licenseId, this.selectedYear, this.selectedMonth);
     this.renderMonthlyReport();
   }
 
- 
+
   save(submit = false) {
     // main report fields
     const statusCode = submit ? this.monthlyReportStatusEnum.Submitted : this.monthlyReportStatusEnum.Draft;
@@ -196,19 +195,19 @@ export class FederalReportingComponent implements OnInit {
     )
       .subscribe(([report]) => {
         //const fullListIndex = this.monthlyReports.findIndex(rep => rep.monthlyReportId === report.monthlyReportId);
-        //this.monthlyReports[fullListIndex] = report;       
+        //this.monthlyReports[fullListIndex] = report;
         this.selectedMonthlyReport = report;
         this.renderMonthlyReport();
         this.loadingMonthlyReports = false;
       });
   }
-    
+
   renderMonthlyReport() {
     this.loadingMonthlyReports = true;
     if (this.selectedMonthlyReport==null) {
       this.loadingMonthlyReports = false;
       return;
-    }   
+    }
     // Update product forms
     this.productForms = this.selectedMonthlyReport.inventorySalesReports.map(
       (report) => {
@@ -267,7 +266,7 @@ export class FederalReportingComponent implements OnInit {
       }
       return 0;
     });
-   
+
     // Update monthly report form
     this.reportForm.patchValue({
       ...this.selectedMonthlyReport
@@ -379,7 +378,7 @@ export class FederalReportingComponent implements OnInit {
     return monthNames[Number(monthNumber) - 1]; //+"  "+temp.reportingPeriodYear;
   }
 
-  getMonthName(monthNumber): string {  
+  getMonthName(monthNumber): string {
     const monthNames = [
       "January", "February", "March", "April", "May", "June",
       "July", "August", "September", "October", "November", "December"
