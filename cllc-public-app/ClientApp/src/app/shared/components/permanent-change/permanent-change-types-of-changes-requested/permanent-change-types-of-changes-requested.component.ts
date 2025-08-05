@@ -1,9 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ControlContainer, FormGroup, FormGroupDirective } from '@angular/forms';
-import { PermanentChangeTypesOfChangesOption } from '@app/constants/permanent-change-types-of-changes';
+import { PCLFormControlDefinitionOption } from '@components/applications/permanent-change-to-a-licensee/pcl-business-rules/pcl-bussiness-rules-types';
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { Account } from '@models/account.model';
-
 /**
  * The types of changes section of a permanent change application.
  *
@@ -19,7 +18,7 @@ import { Account } from '@models/account.model';
 })
 export class PermanentChangeTypesOfChangesRequestedComponent implements OnInit {
   @Input() account: Account;
-  @Input() changeList: PermanentChangeTypesOfChangesOption[];
+  @Input() changeList: PCLFormControlDefinitionOption[];
 
   faQuestionCircle = faQuestionCircle;
 
