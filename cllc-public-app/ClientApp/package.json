@@ -43,6 +43,7 @@
     "@ng-bootstrap/ng-bootstrap": "^12.1.2",
     "@ngrx/store": "^13.2.0",
     "@ngrx/store-devtools": "^13.2.0",
+    "@popperjs/core": "^2.11.8",
     "angular-url-encode": "^1.0.0",
     "aspnet-prerendering": "^3.0.1",
     "core-js": "^2.6.12",
