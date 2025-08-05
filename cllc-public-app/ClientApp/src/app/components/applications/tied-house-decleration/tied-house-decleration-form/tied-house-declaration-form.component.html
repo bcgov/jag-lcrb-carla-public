@@ -1,0 +1,152 @@
+<form [formGroup]="form">
+  <div class="row">
+    <app-field class="col-md-6" label="Select Tied House Type" [required]="true">
+      <select class="form-control" formControlName="isLegalEntity">
+        <option value="" disabled>Select a type</option>
+        <option *ngFor="let option of tiedHouseTypes" [ngValue]="option.value">{{ option.name }}</option>
+      </select>
+    </app-field>
+  </div>
+  <!-- ------Individual------ -->
+  <span *ngIf="form.get('isLegalEntity')?.value == false">
+    <div class="row">
+      <app-field
+        class="col-md-6"
+        label="Date of Birth"
+        [required]="true"
+        [valid]="isValidOrNotTouched('dateOfBirth')"
+        errorMessage="Date of Birth is required">
+        <input
+          class="form-control w-100"
+          type="date"
+          style="width: 100%; max-width: none"
+          formControlName="dateOfBirth" />
+      </app-field>
+      <app-field
+        class="col-md-6"
+        label="First Name"
+        [required]="true"
+        [valid]="isValidOrNotTouched('firstName')"
+        errorMessage="First Name is required">
+        <input
+          class="form-control w-100"
+          style="width: 100%"
+          type="text"
+          autocomplete="first-name"
+          formControlName="firstName"
+          id="firstName" />
+      </app-field>
+    </div>
+    <div class="row">
+      <app-field class="col-md-6" label="Middle Name" [required]="false" [valid]="isValidOrNotTouched('middleName')">
+        <input
+          class="form-control"
+          style="width: 100%"
+          type="text"
+          autocomplete="middle-name"
+          formControlName="middleName"
+          id="middleName" />
+      </app-field>
+      <app-field
+        class="col-md-6"
+        label="Last Name"
+        [required]="true"
+        [valid]="isValidOrNotTouched('lastName')"
+        errorMessage="Last Name is required">
+        <input
+          class="form-control"
+          style="width: 100%"
+          type="text"
+          autocomplete="last-name"
+          formControlName="lastName"
+          id="lastName" />
+      </app-field>
+    </div>
+  </span>
+  <!-- ------Legal Entity------ -->
+  <div class="row" *ngIf="form.get('isLegalEntity')?.value == true">
+    <app-field
+      class="col-md-6"
+      label="Business Type"
+      [required]="true"
+      [valid]="form.get('businessType')?.valid || !form.get('businessType')?.touched"
+      errorMessage="Business Type is required">
+      <select class="form-control" formControlName="businessType">
+        <option value="" disabled>Select a Business Type</option>
+        <option *ngFor="let option of businessTypes" [value]="option.value">
+          {{ option.name }}
+        </option>
+      </select>
+    </app-field>
+    <app-field
+      class="col-md-6"
+      label="Legal Entity Name"
+      [required]="true"
+      [valid]="isValidOrNotTouched('legalEntityName')"
+      errorMessage="Legal Entity Name is required">
+      <input class="form-control" type="text" autocomplete="legal-entity-name" formControlName="legalEntityName" />
+    </app-field>
+  </div>
+
+  <div class="row">
+    <app-field
+      class="col-md-6"
+      label="Relationship to Declared Licence"
+      [required]="true"
+      [valid]="form.get('relationshipToLicence')?.valid || !form.get('relationshipToLicence')?.touched"
+      errorMessage="Relationship to Declared Licence is required">
+      <select class="form-control" formControlName="relationshipToLicence">
+        <option value="" disabled>Select a relationship</option>
+        <option *ngFor="let option of relationshipTypes" [value]="option.value">
+          {{ option.name }}
+        </option>
+      </select>
+    </app-field>
+    <app-field
+      class="col-md-6"
+      *ngIf="showOtherField"
+      label="If ‘Other’, describe your relationship"
+      [required]="true"
+      [valid]="!showOtherField || (showOtherField && isValidOrNotTouched('otherDescription'))"
+      errorMessage="Relation description required">
+      <textarea class="form-control" formControlName="otherDescription" rows="5"></textarea>
+    </app-field>
+  </div>
+
+  <div class="row">
+    <app-field
+      class="col-md-6"
+      label="Associated Liquor Licence # (6 Digits) OR Establishment Name"
+      [valid]="!form.get('autocompleteInput')?.touched || associatedLiquorLicenses.length > 0"
+      errorMessage="Please select a value"
+      [required]="false">
+      <app-related-licence-picker-multi-select [form]="form"></app-related-licence-picker-multi-select>
+    </app-field>
+  </div>
+
+  <!-- ------Footer------ -->
+
+  <div *ngIf="!isReadOnly" class="row justify-content-end">
+    <div class="col-auto" *ngIf="isEditable">
+      <button class="btn btn-link btn-cancel" (click)="cancel()">
+        <fa-icon [icon]="faTrash" class="mr-2"></fa-icon>Cancel
+      </button>
+    </div>
+
+    <div class="col-auto" *ngIf="isEditable">
+      <button class="btn btn-primary" type="button" (click)="save()">Save</button>
+    </div>
+
+    <div class="col-auto" *ngIf="!isEditable">
+      <button class="btn btn-link btn-cancel" (click)="edit()">
+        <fa-icon [icon]="faTrash" class="mr-2"></fa-icon>Edit
+      </button>
+    </div>
+
+    <div class="col-auto" *ngIf="!isEditable">
+      <button class="btn btn-link btn-cancel" (click)="remove()">
+        <fa-icon [icon]="faTrash" class="mr-2"></fa-icon>Remove
+      </button>
+    </div>
+  </div>
+</form>

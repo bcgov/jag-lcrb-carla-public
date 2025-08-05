@@ -5,6 +5,15 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppState } from '@app/app-state/models/app-state';
+import { COUNTRIES } from '@app/constants/countries';
+import {
+  ConnectionToOtherLiquorLicencesComponent,
+  ConnectionToOtherLiquorLicencesFormData
+} from '@components/account-profile/tabs/connection-to-other-liquor-licences/connection-to-other-liquor-licences.component';
+import {
+  ConnectionToProducersComponent,
+  ConnectionToProducersFormData
+} from '@components/account-profile/tabs/connection-to-producers/connection-to-producers.component';
 import {
   faAddressCard,
   faChevronRight,
@@ -15,7 +24,7 @@ import {
   faTrash
 } from '@fortawesome/free-solid-svg-icons';
 import { Account, BUSINESS_TYPE_LIST } from '@models/account.model';
-import { TiedHouseConnection } from '@models/tied-house-connection.model';
+import { Application } from '@models/application.model';
 import { User } from '@models/user.model';
 import { Store } from '@ngrx/store';
 import { AccountDataService } from '@services/account-data.service';
@@ -24,13 +33,12 @@ import { ContactDataService } from '@services/contact-data.service';
 import { FeatureFlagService } from '@services/feature-flag.service';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
 import { UserDataService } from '@services/user-data.service';
+import { GenericMessageDialogComponent } from '@shared/components/dialog/generic-message-dialog/generic-message-dialog.component';
 import { FormBase } from '@shared/form-base';
 import { endOfToday } from 'date-fns';
-import { forkJoin, Observable, of, Subscription } from 'rxjs';
-import { catchError, filter, map, takeWhile } from 'rxjs/operators';
+import { combineLatest, forkJoin, Observable, of, Subscription } from 'rxjs';
+import { catchError, filter, map, switchMap, takeWhile } from 'rxjs/operators';
 import { ApplicationTypeNames } from '../../models/application-type.model';
-import { COUNTRIES } from './country-list';
-import { ConnectionToProducersComponent } from './tabs/connection-to-producers/connection-to-producers.component';
 
 // See the Moment.js docs for the meaning of these formats:
 // https://momentjs.com/docs/#/displaying/format/
@@ -97,8 +105,6 @@ export class AccountProfileComponent extends FormBase implements OnInit {
   currentUser: User;
   dataLoaded = false;
   busy: Subscription;
-  busy2: Promise<any>;
-  busy3: Promise<any>;
   form: FormGroup;
   countryList = COUNTRIES;
   maxDate = endOfToday();
@@ -108,12 +114,22 @@ export class AccountProfileComponent extends FormBase implements OnInit {
   _showAdditionalAddress: boolean;
   _showAdditionalContact: boolean;
   legalEntityId: string;
+
   @ViewChild(ConnectionToProducersComponent)
-  connectionsToProducers: ConnectionToProducersComponent;
+  connectionToProducersComponent: ConnectionToProducersComponent;
+  connectionToProducersFormData: ConnectionToProducersFormData;
+
+  @ViewChild(ConnectionToOtherLiquorLicencesComponent)
+  connectionToOtherLiquorLicencesComponent: ConnectionToOtherLiquorLicencesComponent;
+  connectionToOtherLiquorLicencesFormData: ConnectionToOtherLiquorLicencesFormData;
+
+  /**
+   * The application ID under which this account profile is being edited.
+   * This will only be set if this component is being used in the context of an application.
+   */
   applicationId: string;
   applicationMode: string;
   account: Account;
-  tiedHouseFormData: Observable<TiedHouseConnection>;
   validationMessages: string[];
   renewalType: string;
 
@@ -121,6 +137,8 @@ export class AccountProfileComponent extends FormBase implements OnInit {
   ORVFeatureEnabled: boolean = false;
   @ViewChild('badgeTemplateDialog') badgeTemplateDialog: TemplateRef<any>;
   generatedOrvCode: string = `<a href="#" onclick="window.open('https://orgbook-app-b7aa30-dev.apps.silver.devops.gov.bc.ca/verify/BC123456', '_blank', 'width=800,height=600'); return false;">Verify Retailer</a>`;
+
+  hasLoadedData = false;
 
   get contacts(): FormArray {
     return this.form.get('otherContacts') as FormArray;
@@ -207,30 +225,53 @@ export class AccountProfileComponent extends FormBase implements OnInit {
     private contactDataService: ContactDataService,
     private userDataService: UserDataService,
     private applicationDataService: ApplicationDataService,
+    private tiedHouseService: TiedHouseConnectionsDataService,
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private tiedHouseService: TiedHouseConnectionsDataService,
     private dialog: MatDialog,
     private clipboard: Clipboard,
     private snackBar: MatSnackBar,
     public featureFlagService: FeatureFlagService
   ) {
     super();
-    this.route.paramMap.subscribe((params) => {
-      this.applicationId = params.get('applicationId');
+    combineLatest([this.route.paramMap, this.featureFlagService.featureOn('ORVEnabled')])
+      .pipe(
+        takeWhile(() => this.componentActive),
+        switchMap(([params, orvEnabled]) => {
+          this.renewalType = params.get('renewalType');
+          this.applicationMode = params.get('mode');
+          this.applicationId = params.get('applicationId');
 
-      if (this.applicationId) {
-        this.applicationDataService.getApplicationById(this.applicationId).subscribe((res) => {
-          this.application = res;
-        });
-      }
-    });
+          this.ORVFeatureEnabled = orvEnabled;
 
-    this.route.paramMap.subscribe((params) => (this.renewalType = params.get('renewalType')));
-    this.route.paramMap.subscribe((params) => (this.applicationMode = params.get('mode')));
+          if (this.applicationId) {
+            return this.applicationDataService.getApplicationById(this.applicationId);
+          }
 
-    this.featureFlagService.featureOn('ORVEnabled').subscribe((result) => (this.ORVFeatureEnabled = result));
+          return of(null);
+        })
+      )
+      .subscribe({
+        next: (application) => {
+          if (application) {
+            this.application = application;
+            this.connectionToOtherLiquorLicencesFormData = application.applicationExtension;
+          }
+          this.hasLoadedData = true;
+        },
+        error: (error) => {
+          console.error('Error Loading Account Data', error);
+          this.dialog.open(GenericMessageDialogComponent, {
+            data: {
+              title: 'Error Loading Account Data',
+              message:
+                'Failed to load Account data. Please try again. If the problem persists, please contact support.',
+              closeButtonText: 'Close'
+            }
+          });
+        }
+      });
   }
 
   ngOnInit() {
@@ -455,15 +496,30 @@ export class AccountProfileComponent extends FormBase implements OnInit {
     }
   }
 
+  /**
+   * Checks if the component can be deactivated.
+   *
+   * @return {*}  {Observable<boolean>}
+   */
   canDeactivate(): Observable<boolean> {
-    if (
-      !this.connectionsToProducers.formHasChanged() &&
-      JSON.stringify(this.saveFormData) === JSON.stringify(this.form.value)
-    ) {
+    if (!this.hasFormChanged() && !this.connectionToOtherLiquorLicencesComponent.formHasChanged()) {
       return of(true);
     } else {
       return this.save();
     }
+  }
+
+  /**
+   * Checks if the form data has changed from the saved form data.
+   *
+   * @return {*}  {boolean}
+   */
+  hasFormChanged(): boolean {
+    if (JSON.stringify(this.saveFormData) !== JSON.stringify(this.form.value)) {
+      return true;
+    }
+
+    return false;
   }
 
   openBadgeTemplateDialog() {
@@ -488,20 +544,54 @@ export class AccountProfileComponent extends FormBase implements OnInit {
   }
 
   save(): Observable<boolean> {
-    const _tiedHouse = this.tiedHouseFormData || {};
     this.form.get('businessProfile').patchValue({ physicalAddressCountry: 'Canada' });
+
     const value = {
       ...this.form.get('businessProfile').value,
       // Transform the accountUrls array into a comma-separated string as expected by the API
       accountUrls: this.combineAccountURLStrings(this.form.get('businessProfile.accountUrls').value)
     } as Account;
+
     const saves = [
       this.accountDataService.updateAccount(value),
       this.contactDataService.updateContact(this.form.get('contact').value)
     ];
 
-    if (this.connectionsToProducers) {
-      saves.push(this.prepareTiedHouseSaveRequest({ ...this.account.tiedHouse, ..._tiedHouse }));
+    // Save the cannabis tied house connection form data
+    if (this.connectionToProducersFormData) {
+      if (this.connectionToProducersFormData.id) {
+        // If we have a primary id, update the existing cannabis tied house connection
+        saves.push(
+          this.tiedHouseService.updateCannabisTiedHouseConnection(
+            this.connectionToProducersFormData,
+            this.connectionToProducersFormData.id
+          )
+        );
+      } else {
+        // Create a new cannabis tied house connection
+        saves.push(
+          this.tiedHouseService.upsertCannabisTiedHouseConnection(this.connectionToProducersFormData, this.account.id)
+        );
+      }
+    }
+
+    // Save the connection to other liquor licences form data
+    if (this.connectionToOtherLiquorLicencesFormData) {
+      // Only persist the connection to other liquor licences form data if this component is being used in the context
+      // of an application.
+      if (this.applicationId) {
+        const updatedApplicationExtensionData = {
+          ...this.application.applicationExtension,
+          ...this.connectionToOtherLiquorLicencesFormData
+        };
+
+        const updatedApplicationData: Application = {
+          ...this.application,
+          applicationExtension: updatedApplicationExtensionData
+        };
+
+        saves.push(this.applicationDataService.updateApplication(updatedApplicationData));
+      }
     }
 
     return forkJoin(saves).pipe(
@@ -526,7 +616,12 @@ export class AccountProfileComponent extends FormBase implements OnInit {
       route = '/sep/dashboard';
     }
 
-    if (this.form.valid && (!this.connectionsToProducers || this.connectionsToProducers.form.valid)) {
+    const isValid =
+      this.form.valid &&
+      this.connectionToProducersComponent?.form?.valid &&
+      this.connectionToOtherLiquorLicencesComponent?.form?.valid;
+
+    if (isValid) {
       this.busy = this.save().subscribe(() => {
         if (this.useInStepperMode) {
           this.saveComplete.emit(true);
@@ -566,19 +661,11 @@ export class AccountProfileComponent extends FormBase implements OnInit {
     }
   }
 
-  prepareTiedHouseSaveRequest(_tiedHouseData) {
-    const data = { ...this.account.tiedHouse, ..._tiedHouseData };
-
-    if (data.id) {
-      return this.tiedHouseService.updateTiedHouse(data, data.id);
-    } else {
-      return this.accountDataService.createTiedHouseConnection(data, this.accountId);
-    }
-  }
-
   // marking the form as touched makes the validation messages show
   markAsTouched() {
     this.form.markAsTouched();
+    this.connectionToProducersComponent?.form?.markAsTouched();
+    this.connectionToOtherLiquorLicencesComponent?.form?.markAsTouched();
 
     const businessProfileControls = (this.form.get('businessProfile') as FormGroup).controls;
     for (const c in businessProfileControls) {

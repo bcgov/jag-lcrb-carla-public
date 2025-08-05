@@ -1,0 +1,50 @@
+<section *ngIf="(cannabisLicences && cannabisLicences.length > 0) || (liquorLicences && liquorLicences.length > 0)">
+  <h3>Licensee or Authorization Holder Details</h3>
+  <p>You have the following licences or authorization:</p>
+  <table style="border: solid black 1px">
+    <tbody>
+      <tr>
+        <th class="licenceTable" style="background-color: #38598a; color: white">
+          Cannabis licences and/or Authorizations
+        </th>
+        <th class="licenceTable" style="background-color: #38598a; color: white">Liquor Licences</th>
+      </tr>
+      <tr>
+        <td class="licenceTable">
+          <ul>
+            <li *ngFor="let item of cannabisLicences">
+              {{ item.licenseNumber }} -
+              {{ item.establishmentName }}
+            </li>
+          </ul>
+        </td>
+        <td class="licenceTable">
+          <ul>
+            <li *ngFor="let item of liquorLicences">
+              {{ item.licenseNumber }} -
+              {{ item.establishmentName }}
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>&nbsp;</p>
+  <ul>
+    <li>
+      Applicable fees for cannabis licences and authorizations are listed in
+      <a href="http://www.bclaws.ca/civix/document/id/complete/statreg/202_2018#Schedule1" target="_blank">
+        Schedule 1
+      </a>
+      of the Cannabis Licensing Regulation.
+    </li>
+    <li>
+      Applicable fees for liquor licences are listed in
+      <a href="http://www.bclaws.ca/civix/document/id/complete/statreg/241_2016#Schedule1" target="_blank">
+        Schedule 1
+      </a>
+      of the Liquor Control and Licensing Regulation.
+    </li>
+  </ul>
+</section>

@@ -37,8 +37,7 @@
                                                                 href="mailto:lcrbcannabis@gov.bc.ca">lcrbcannabis@gov.bc.ca</a>.</p-->
       <p></p>
 
-      <app-applications-and-licences [account]="account"></app-applications-and-licences>
-
+      <app-applications-and-licences [account]="account" (legalEntityApplicationExists)="hideSubmitChange($event)"></app-applications-and-licences>
     </div>
 
     <div class="col-lg-4 col-sm-12" style="position: relative">
@@ -118,7 +117,7 @@
       </app-associate-content>
       <p></p>
 
-      <app-legal-entity-type-update-calloutbox *ngIf="hasLicence" appRemoveIfFeatureOff="PermanentChangesToLicensee" [account]="account"></app-legal-entity-type-update-calloutbox>
+      <app-legal-entity-type-update-calloutbox *ngIf="hasLicence" appRemoveIfFeatureOff="PermanentChangesToLicensee" [account]="account" [hideSubmitChangeButton]="hideSubmitChangeButton"></app-legal-entity-type-update-calloutbox>
       <p></p>
 
     </div>

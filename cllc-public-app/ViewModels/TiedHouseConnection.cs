@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
+using System.Collections.Generic;
 
 namespace Gov.Lclb.Cllb.Public.ViewModels
 {
@@ -13,6 +14,21 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
     public enum TiedHouseConnectionType
     {
         Marketer = 845280006
+    }
+
+    public enum TiedHouseStatusCode
+    {
+        New = 1,
+        Ready = 845280000,
+        Existing = 845280001,
+        Inactive = 2
+    }
+
+    public enum TiedHouseCategoryType
+    {
+        Liquor = 845280000,
+        Cannabis = 845280001
+
     }
 
     public class TiedHouseConnection
@@ -38,9 +54,35 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public int? SocietyConnectionFederalProducer { get; set; } //adoxio_societyconnectionfederalproducer (PicklistType)
         public string SocietyConnectionFederalProducerDetails { get; set; } //adoxio_societyconnectionfederalproducerdetails (MemoType)
         public int? LiquorFinancialInterest { get; set; } 
-        public string LiquorFinancialInterestDetails { get; set; } 
+        public string LiquorFinancialInterestDetails { get; set; }
+        // TODO: Is this field still used? If not, remove it.
         public string TiedHouse { get; set; } //adoxio_TiedHouse (LookupType)
+        // TODO: Is this field still used? If not, remove it.
         public string TiedHouseName { get; set; } //adoxio_TiedHouseName (StringType)
+        public string ApplicationId { get; set; }
+        public string AccountId { get; set; }
+
+        public bool? IsLegalEntity { get; set; }
+
+        public DateTimeOffset? DateOfBirth { get; set; }
+
+        public string FirstName { get; set; }
+
+        public string MiddleName { get; set; }
+
+        public string LastName { get; set; }
+
+        public int? RelationshipToLicence { get; set; }
+
+        public List<RelatedLicence> AssociatedLiquorLicense { get; set; }
+
+        public string LegalEntityName { get; set; }
+
+        public string RelationshipToLicense { get; set; }
+
+        public string OtherDescription { get; set; }
+
+        public int? BusinessType { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
         public TiedHouseConnectionType? ConnectionType { get; set; }
@@ -61,6 +103,17 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         [JsonProperty(PropertyName = "iNConnectionToFederalProducerDetails")]
         public string INConnectionToFederalProducerDetails { get; set; }
+        public string OtherRelationship { get; set; }
+
+        public string SupersededById { get; set; }
+
+        public int? StatusCode { get; set; }
+        public bool? MarkedForRemoval { get; set; }
+
+        public int? CategoryType { get; set; }
+
+        public DateTimeOffset? DeclarationDate { get; set; }
+        public int? SelfDeclared { get; set; }
 
         public bool isConnectionToProducersComplete(AdoxioApplicantTypeCodes? legalentitytype)
         {
