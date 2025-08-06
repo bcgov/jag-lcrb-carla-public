@@ -32,6 +32,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 ("FEATURE_CASS", "CASS"),
                 ("FEATURE_MARKET_EVENTS", "MarketEvents"),
                 ("FEATURE_PERMANENT_CHANGES_TO_LICENSEE", "PermanentChangesToLicensee"),
+                ("FEATURE_LEGAL_ENTITY_REVIEW", "LegalEntityReview"),
                 ("FEATURE_PERMANENT_CHANGES_TO_APPLICANT", "PermanentChangesToApplicant"),
                 ("FEATURE_NOTICES", "Notices"),
                 ("FEATURE_LE_CONNECTIONS", "LEConnections"),

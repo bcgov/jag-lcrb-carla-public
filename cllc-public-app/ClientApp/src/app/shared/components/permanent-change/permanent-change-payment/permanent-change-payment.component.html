@@ -1,0 +1,107 @@
+<h3 class="blue-header ngtest-payment">PAYMENT</h3>
+<div class="content-bottom">
+  <ng-container *ngIf="isLiquorPaymentRequired && isCannabisPaymentRequired">
+    <p>
+      You have both liquor and cannabis licences. Fees for the different types of licences must be paid separately. Your
+      application will not be submitted to the Branch until both are paid.
+    </p>
+    <hr />
+  </ng-container>
+
+  <ng-container *ngIf="isCannabisPaymentRequired || isCannabisInvoicePaid">
+    <table class="w-100" class="paymentSummary">
+      <tr>
+        <th colspan="3">
+          <h4>Fees for Cannabis Licences/Authorizations</h4>
+        </th>
+      </tr>
+      <tr>
+        <th class="paymentSummary">Type Of Change</th>
+        <th class="paymentSummary">No. Licences</th>
+        <th class="paymentSummary">Cost</th>
+      </tr>
+      <ng-container *ngFor="let item of selectedChangeList">
+        <tr
+          *ngIf="
+            form.get(item.formControlName).value === true &&
+            !(item.name == 'Internal Transfer of Shares' && form.get('csExternalTransferOfShares').value === true)
+          ">
+          <td class="paymentSummary1">{{ item.name }}</td>
+          <td class="paymentSummary2">x {{ cannabisLicences.length }}</td>
+          <td class="paymentSummary2">${{ item.CannabisFee }}</td>
+        </tr>
+      </ng-container>
+      <tr>
+        <td colspan="3" style="padding: 5px; text-align: right">
+          <button
+            mat-raised-button
+            [disabled]="isCannabisInvoicePaid"
+            color="primary"
+            style="width: 350px"
+            (click)="onSubmit('primary')">
+            <span>
+              {{ isCannabisInvoicePaid ? 'CANNABIS LICENSEE FEES PAID' : 'PAY CANNABIS LICENSEE CHANGE FEES' }}
+            </span>
+            <mat-progress-bar *ngIf="primaryPaymentInProgress" mode="indeterminate"></mat-progress-bar>
+          </button>
+        </td>
+      </tr>
+    </table>
+    <hr />
+  </ng-container>
+
+  <ng-container *ngIf="primaryInvoice">
+    <mat-card class="mat-elevation-z2">
+      <app-invoice-details [data]="primaryInvoice"></app-invoice-details>
+    </mat-card>
+    <hr />
+  </ng-container>
+
+  <table class="w-100" *ngIf="isLiquorPaymentRequired || isLiquorInvoicePaid" class="paymentSummary">
+    <tr>
+      <th colspan="3">
+        <h4>Fees for Liquor Licences</h4>
+      </th>
+    </tr>
+    <tr>
+      <th class="paymentSummary">Type Of Change</th>
+      <th class="paymentSummary">No. Licences</th>
+      <th class="paymentSummary">Cost</th>
+    </tr>
+    <ng-container *ngFor="let item of selectedChangeList">
+      <tr>
+        <td class="paymentSummary1">{{ item.name }}</td>
+        <td class="paymentSummary2">x {{ liquorLicences.length }}</td>
+        <td class="paymentSummary2">${{ item.LiquorFee }}</td>
+      </tr>
+    </ng-container>
+
+    <tr>
+      <td colspan="3" style="padding: 5px; text-align: right">
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="isLiquorInvoicePaid"
+          style="width: 250px"
+          (click)="onSubmit('secondary')">
+          <span>{{ isLiquorInvoicePaid ? 'FEES PAID' : 'PAY LIQUOR FEES' }}</span>
+          <mat-progress-bar *ngIf="secondaryPaymentInProgress" mode="indeterminate"></mat-progress-bar>
+        </button>
+      </td>
+    </tr>
+  </table>
+
+  <mat-card class="mat-elevation-z2" r *ngIf="secondaryInvoice">
+    <app-invoice-details [data]="secondaryInvoice"></app-invoice-details>
+  </mat-card>
+
+  <ng-container *ngIf="canCreateNewApplication">
+    <hr />
+    <section class="d-flex flex-row-reverse">
+      <button mat-raised-button color="primary" style="width: 250px" (click)="onNewApplication('secondary')">
+        <span>New Application</span>
+        <mat-progress-bar *ngIf="createApplicationInProgress" mode="indeterminate"></mat-progress-bar>
+      </button>
+    </section>
+  </ng-container>
+</div>

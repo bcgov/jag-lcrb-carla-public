@@ -53,7 +53,6 @@ describe("AssociatePageComponent",
     beforeEach(waitForAsync(() => {
       paymentDataServiceStub = {};
       applicationDataServiceStub = {
-        getSubmittedApplicationCount: () => of(0),
         cancelApplication: () => of(null),
         updateApplication: () => of(null),
         getApplicationById: () => of({

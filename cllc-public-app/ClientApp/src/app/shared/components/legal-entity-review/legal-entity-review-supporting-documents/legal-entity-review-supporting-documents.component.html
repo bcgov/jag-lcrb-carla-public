@@ -1,0 +1,18 @@
+<h3 class="blue-header">Add Supporting Information/Documents (Optional)</h3>
+<div class="content-bottom">
+  <p>
+    Use the upload box to provide the information requested in the letter above. Refer to your Legal Entity Review
+    letter for a full list of required information/documents to submit.
+  </p>
+
+  <app-file-uploader
+    *ngIf="application?.id"
+    documentType="NOA"
+    fileTypes="FILE MUST BE IN PDF FORMAT."
+    [multipleFiles]="true"
+    entityName="application"
+    [extensions]="['pdf']"
+    (numberOfUploadedFiles)="onUploadedFileCount($event)"
+    [entityId]="application.id"
+    [uploadHeader]="'TO UPLOAD NOTICE OF ARTICLES, DRAG FILES HERE OR'"></app-file-uploader>
+</div>

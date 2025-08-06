@@ -37,6 +37,7 @@ export class DashboardComponent extends FormBase implements OnInit {
   busy: Subscription;
   outstandingBalancePriorInvoiceData: OutstandingPriorBalanceInvoice[]=[];
   isOutstandingBalancePriorInvoiceDue: boolean; 
+  hideSubmitChangeButton = true;
 
   constructor(private store: Store<AppState>,
     private router: Router,
@@ -138,6 +139,10 @@ export class DashboardComponent extends FormBase implements OnInit {
           }
         });
     }
+  }
+
+  hideSubmitChange(legalEntityApplicationExists){
+    this.hideSubmitChangeButton = legalEntityApplicationExists;
   }
 }
 

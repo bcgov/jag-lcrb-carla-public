@@ -12,10 +12,11 @@
         <li>Name changes of individuals associated with your {{account.getBusinessTypeName()}}</li>
         <li>Entering Receivership</li>
         <li>Specifying an Executor</li>
+        <li>Change to Tied House</li>
       </ul>
 
       <div class="d-flex flex-row-reverse">
-        <button routerLink="/permanent-change-to-a-licensee" mat-raised-button color="primary">SUBMIT A CHANGE</button>
+        <button *ngIf="!hideSubmitChangeButton" routerLink="/permanent-change-to-a-licensee" mat-raised-button color="primary">SUBMIT A CHANGE</button>
       </div>
     </ng-container>
   </section>

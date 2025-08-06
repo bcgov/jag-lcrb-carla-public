@@ -1,0 +1,129 @@
+<h3 class="blue-header">External Share Transfer</h3>
+<div class="content-bottom">
+  <p>Complete this section when you have issued shares to a new individual or shareholder business.</p>
+  <h4>Updated Central Securities Register (shareholders) for the licensee corporation or holding company</h4>
+  <p>Provide an updated central securities register.</p>
+  <img
+    src="assets/central-securities-register-example.png"
+    style="width: 500px; margin: 10px; border: solid #e0e0e0 1px" />
+  <app-file-uploader
+    *ngIf="application?.id"
+    documentType="CentralSecuritiesRegister"
+    fileTypes="FILE MUST BE IN PDF FORMAT."
+    [multipleFiles]="true"
+    entityName="application"
+    [extensions]="['pdf']"
+    (numberOfUploadedFiles)="onUploadedCentralSecuritiesRegister($event)"
+    [entityId]="application.id"
+    [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER, DRAG FILES HERE OR'"></app-file-uploader>
+  <hr />
+  <p>
+    If one of the new shareholders is a private corporation, a public corporation, a society or a partnership,
+    documentation to support the applicable business type must be submitted, even if the shareholder holds less than 10%
+    interest in the applicant corporation:
+  </p>
+
+  <ul>
+    <li>
+      Society
+      <ul>
+        <li>Current list of officers and directors</li>
+        <li>
+          All directors must submit a completed Personal History Summary or Cannabis Associate Screening (see below)
+        </li>
+      </ul>
+    </li>
+    <li>
+      Partnership
+      <ul>
+        <li>
+          List the legal names of the partners with the percentage of ownership in the partnership listed beside each
+          name
+        </li>
+        <li>
+          Each partner must supply a completed Personal History Summary or Cannabis Associate Screening (see below)
+        </li>
+      </ul>
+    </li>
+    <li>
+      Public Corporation
+      <ul>
+        <li>List of Directors and Officers</li>
+        <li>
+          All directors must submit a completed Personal History Summary or Cannabis Associate Screening (see below)
+        </li>
+      </ul>
+    </li>
+    <li>
+      Private Corporation
+      <ul>
+        <li>Central Securities Register</li>
+        <li>Notice of Articles</li>
+        <li>
+          Special Rights and Restrictions within the articles of incorporation that detail the class and types of shares
+          and whether or not each class or type of share has voting privileges (if the information is not already
+          included in the Notice of Articles)
+        </li>
+        <li>
+          If one of the shareholders is a private corporation, a public corporation, a society or a partnership, submit
+          all the documents listed under that business type
+        </li>
+        <li>
+          all shareholders (individuals) holding 10% or greater interest in the applicant corporation must submit a
+          completed Personal History Summary or Cannabis Associate Screening (see below)
+        </li>
+      </ul>
+    </li>
+    <li>
+      Other
+      <ul>
+        <li>
+          This includes entities incorporated through Federal or Provincial legislation. Examples: Local Government,
+          First Nations, colleges, universities, etc. Contact the branch to discuss documentation requirements at
+          1-866-209-2111 or
+          <a href="mailto:LCLBHelpDesk@gov.bc.ca">LCLBHelpDesk&#64;gov.bc.ca</a>
+          .
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <h4>Supporting Business Documentation</h4>
+  <app-file-uploader
+    *ngIf="application?.id"
+    documentType="RegisterOfDirectorsAndOfficers"
+    fileTypes="FILE MUST BE IN PDF FORMAT."
+    [multipleFiles]="true"
+    entityName="application"
+    [extensions]="['pdf']"
+    (numberOfUploadedFiles)="onUploadedRegisterOfDirectorsAndOfficers($event)"
+    [entityId]="application.id"
+    [uploadHeader]="'TO UPLOAD REGISTER OF DIRECTORS AND OFFICERS, DRAG FILES HERE OR'"></app-file-uploader>
+
+  <hr />
+
+  <h4>
+    <fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>
+    Security Screening Information Required
+  </h4>
+  <p>
+    All newly added individuals with 10% or more interest must complete a Personal History Summary and/or Cannabis
+    Associate Security Screening form and required documents as described below.
+  </p>
+
+  <h4>Shareholders (individuals) Holding Less Than 10% Interest</h4>
+  <p>
+    Shareholders (individuals) holding less than 10% interest in the applicant corporation must provide their full legal
+    name and date of birth. They do not need to provide a Personal History Summary or Cannabis Associate Security
+    Screening form.
+  </p>
+  <app-file-uploader
+    *ngIf="application?.id"
+    documentType="IndividualsWithLessThan10"
+    fileTypes="FILE MUST BE IN PDF FORMAT."
+    [multipleFiles]="true"
+    entityName="application"
+    [extensions]="['pdf']"
+    (numberOfUploadedFiles)="onUploadedIndividualsWithLessThan10($event)"
+    [entityId]="application.id"
+    [uploadHeader]="'TO UPLOAD LIST OF INDIVIDUALS WITH 10% OR LESS INTEREST, DRAG FILE HERE OR'"></app-file-uploader>
+</div>

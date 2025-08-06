@@ -23,6 +23,7 @@ using System.Security.Claims;
 using Gov.Lclb.Cllb.Public.Extensions;
 using Gov.Lclb.Cllb.Services.FileManager;
 using Contact = Gov.Lclb.Cllb.Public.ViewModels.Contact;
+using Gov.Lclb.Cllb.Public.Repositories;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -38,6 +39,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly ILogger _logger;
         private readonly FileManagerClient _fileManagerClient;
         private readonly IWebHostEnvironment _env;
+        private readonly TiedHouseConnectionsRepository _tiedHouseConnectionsRepository;
 
         public AccountsController(IConfiguration configuration,
             IHttpContextAccessor httpContextAccessor,
@@ -46,12 +48,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             ILoggerFactory loggerFactory,
             IDynamicsClient dynamicsClient,
             FileManagerClient fileManagerClient,
-            IWebHostEnvironment env)
+            IWebHostEnvironment env,
+            TiedHouseConnectionsRepository tiedHouseConnectionsRepository
+        )
         {
             _configuration = configuration;
             _bceid = bceid;
             _dynamicsClient = dynamicsClient;
             _env = env;
+            _tiedHouseConnectionsRepository = tiedHouseConnectionsRepository;
             _orgBookclient = orgBookClient;
             _httpContextAccessor = httpContextAccessor;
             _fileManagerClient = fileManagerClient;
@@ -304,12 +309,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             entity.keyPersonnelFilesExists = FileUploadExists(entity.Account.id, entity.Account.name, "Key Personnel").Result;
                             entity.financialInformationFilesExists = FileUploadExists(entity.Account.id, entity.Account.name, "Financial Information").Result;
                             entity.shareholderFilesExists = FileUploadExists(entity.Account.id, entity.Account.name, "Central Securities Register").Result;
-                            var tiedHouse = _dynamicsClient.Tiedhouseconnections
-                                .Get(filter: $"_adoxio_accountid_value eq {entity.Account.id}")
-                                .Value.FirstOrDefault();
-                            if (tiedHouse != null)
+                            var cannabisTiedHouseConnection = _tiedHouseConnectionsRepository.GetCannabisTiedHouseConnectionForUser(entity.Account.id);
+                            if (cannabisTiedHouseConnection != null)
                             {
-                                entity.TiedHouse = tiedHouse.ToViewModel();
+                                entity.TiedHouse = cannabisTiedHouseConnection;
                             }
                             entity.ChildEntities = GetLegalEntityChildren(entity.AdoxioLegalEntity.id);
                             return entity;
@@ -369,12 +372,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                 AdoxioLegalEntity = legalEntity,
                                 Account = le.AdoxioShareholderAccountID == null ? le.AdoxioAccount.ToViewModel() : le.AdoxioShareholderAccountID.ToViewModel()
                             };
-                            var tiedHouse = _dynamicsClient.Tiedhouseconnections
-                                .Get(filter: $"_adoxio_accountid_value eq {entity.Account.id}")
-                                .Value.FirstOrDefault();
-                            if (tiedHouse != null)
+                            var cannabisTiedHouseConnection = _tiedHouseConnectionsRepository.GetCannabisTiedHouseConnectionForUser(entity.Account.id);
+                            if (cannabisTiedHouseConnection != null)
                             {
-                                entity.TiedHouse = tiedHouse.ToViewModel();
+                                entity.TiedHouse = cannabisTiedHouseConnection;
                             }
                             if (entity.AdoxioLegalEntity.isShareholder == true && entity.AdoxioLegalEntity.isindividual == false)
                             {
@@ -523,7 +524,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     //LCSD-6488: Change to BCEID Web Query
                     Gov.Lclb.Cllb.Interfaces.BCeIDBasic bceidBasic = await _bceid.ProcessBasicQuery(userSettings.SiteMinderGuid);
                     _logger.LogDebug(LoggingEvents.Get, $"basic Info from bceid: {JsonConvert.SerializeObject(bceidBasic)}");
-                    if(bceidBasic != null)
+                    if (bceidBasic != null)
                     {
                         userContact.Firstname = bceidBasic.individualFirstname;
                         userContact.Lastname = bceidBasic.individualSurname;
@@ -634,8 +635,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     var patchContact = new MicrosoftDynamicsCRMcontact()
                     {
                         ParentCustomerIdAccountODataBind = _dynamicsClient.GetEntityURI("accounts", account.Accountid),
-                        
-                };
+
+                    };
                     try
                     {
                         _dynamicsClient.Contacts.Update(userContact.Contactid, patchContact);
@@ -643,8 +644,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     catch (HttpOperationException httpOperationException)
                     {
                         _logger.LogError(httpOperationException, "Error setting primary contact link for contact");
-                            throw new HttpOperationException("Error setting primary contact link for contact");
-                        
+                        throw new HttpOperationException("Error setting primary contact link for contact");
+
                     }
                     catch (Exception e)
                     {
@@ -653,7 +654,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
 
                     Odataid contactId = new Odataid()
-                    { 
+                    {
                         OdataidProperty = _dynamicsClient.GetEntityURI("contacts", userContact.Contactid)
                     };
                     try
@@ -689,31 +690,29 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     legalEntity.AdoxioAccount = await _dynamicsClient.GetAccountByIdAsync(Guid.Parse(account.Accountid));
                 }
 
- 
+
 
                 legalEntityString = JsonConvert.SerializeObject(legalEntity);
                 _logger.LogDebug("Legal Entity after creation in dynamics --> " + legalEntityString);
 
-                var tiedHouse = new MicrosoftDynamicsCRMadoxioTiedhouseconnection();
-                tiedHouse.AccountODataBind = _dynamicsClient.GetEntityURI("accounts", account.Accountid);
-
-
                 try
                 {
-                    tiedHouse = await _dynamicsClient.Tiedhouseconnections.CreateAsync(tiedHouse);
+                    // Create the singletone cannabis tied house connection record for the user account
+                    await _tiedHouseConnectionsRepository.UpsertCannabisTiedHouseConnection(account.Accountid, null);
                 }
                 catch (HttpOperationException httpOperationException)
                 {
                     string tiedHouseId = _dynamicsClient.GetCreatedRecord(httpOperationException, null);
                     if (string.IsNullOrEmpty(tiedHouseId))
                     {
-                        _logger.LogError(httpOperationException, "Error creating Tied house connection. ");
-                        throw new HttpOperationException("Error creating Tied house connection.");
+                        _logger.LogError(httpOperationException, $"Error creating Cannabis Tied house connection for account {account.Accountid}.");
+                        throw new HttpOperationException("Error creating Cannabis Tied house connection.");
                     }
                 }
-                catch (Exception e)
+                catch (Exception exception)
                 {
-                    _logger.LogError(e, "Error creating Tied house connection.");
+                    _logger.LogError(exception, $"Error creating Cannabis Tied house connection for account {account.Accountid}.");
+                    throw new Exception("Error creating Cannabis Tied house connection.");
                 }
 
                 // call the web service
@@ -756,7 +755,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
             }
 
-            
+
             _logger.LogDebug(LoggingEvents.Save, "Patching the userContact so it relates to the account.");
             // parent customer id relationship will be created using the method here:
             //https://msdn.microsoft.com/en-us/library/mt607875.aspx
@@ -1165,7 +1164,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     try
                     {
-                        _dynamicsClient.Tiedhouseconnections.Delete(tiedHouseConnection.AdoxioTiedhouseconnectionid);
+                        await _tiedHouseConnectionsRepository.DeleteTiedHouseConnectionById(
+                            tiedHouseConnection.AdoxioTiedhouseconnectionid
+                        );
                     }
                     catch (HttpOperationException httpOperationException)
                     {
@@ -1256,82 +1257,59 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
 
             }
-            
+
             return Ok("OK");
-            
-        }
 
-        /**************
-         * TIED HOUSE *
-         **************/
-
-        /// <summary>
-        /// Get TiedHouseConnection by accountId
-        /// </summary>
-        /// <param name=""></param>
-        /// <returns></returns>
-        [HttpGet("{accountId}/tiedhouseconnection")]
-        [Authorize(Policy = "Business-User")]
-        public JsonResult GetTiedHouseConnection(string accountId)
-        {
-            var result = new List<TiedHouseConnection>();
-            IEnumerable<MicrosoftDynamicsCRMadoxioTiedhouseconnection> tiedHouseConnections = null;
-            String accountfilter = null;
-
-            // set account filter
-            accountfilter = "_adoxio_accountid_value eq " + accountId;
-            _logger.LogDebug("Account filter = " + accountfilter);
-
-            tiedHouseConnections = _dynamicsClient.Tiedhouseconnections.Get(filter: accountfilter).Value;
-
-            foreach (var tiedHouse in tiedHouseConnections)
-            {
-                result.Add(tiedHouse.ToViewModel());
-            }
-
-            return new JsonResult(result.FirstOrDefault());
         }
 
         /// <summary>
-        /// Add Tied House connection
+        /// Returns a summary of the current user's account. This contains basic high level information about the
+        /// account and all licences they have. This is useful for conditional logic that depends on a user having
+        /// or not having certain licences.
+        /// <remarks>
+        /// This controller could be expanded to include other high level information, as needed.
+        /// </remarks>
         /// </summary>
-        /// <param name=""></param>
         /// <returns></returns>
-        [HttpPost("{accountId}/tiedhouseconnection")]
+        [HttpGet("current/summary")]
         [Authorize(Policy = "Business-User")]
-        public ActionResult AddTiedHouseConnection([FromBody] TiedHouseConnection item, string accountId)
+        public async Task<ActionResult<AccountSummary>> AccountSummary()
         {
-            if (item == null)
+            _logger.LogDebug("getAccountSummary");
+
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+
+            if (userSettings.AccountId == null)
             {
-                return BadRequest();
+                _logger.LogError(LoggingEvents.NotFound, "No account found for the user.");
+                return NotFound("No account found for the user.");
             }
 
-            var tiedHouse = new MicrosoftDynamicsCRMadoxioTiedhouseconnection();
+            var userType = userSettings.UserType;
 
-            // copy values over from the data provided
-            tiedHouse.CopyValues(item);
-            tiedHouse.AccountODataBind = _dynamicsClient.GetEntityURI("accounts", accountId);
-            try
-            {
-                tiedHouse = _dynamicsClient.Tiedhouseconnections.Create(tiedHouse);
-            }
-            catch (HttpOperationException httpOperationException)
-            {
-                tiedHouse.AdoxioTiedhouseconnectionid = _dynamicsClient.GetCreatedRecord(httpOperationException, null);
-                if (string.IsNullOrEmpty(tiedHouse.AdoxioTiedhouseconnectionid))
-                {
-                    _logger.LogError(httpOperationException, "Error creating tiedhouse connection ");
-                    throw new Exception("Error creating tiedhouse connection");
-                }
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e, "Error creating tiedhouse connection");
-                throw new Exception("Error creating tiedhouse connection");
-            }
+            var filter = $"_adoxio_licencee_value eq {userSettings.AccountId} and statecode eq 0";
+            var select = new List<string> { "adoxio_licencesid,adoxio_LicenceType,adoxio_expirydate,statuscode" };
+            var expand = new List<string> { "adoxio_LicenceType($select=adoxio_name,adoxio_category)" };
 
-            return new JsonResult(tiedHouse.ToViewModel());
+            var licences = await _dynamicsClient.Licenceses.GetAsync(filter: filter, select: select, expand: expand);
+
+            var accountSummary = new AccountSummary
+            {
+                accountId = userSettings.AccountId,
+                licences = licences
+                    .Value.Select(item => new AccountSummaryLicence
+                    {
+                        licenceId = item.AdoxioLicencesid,
+                        licenceType = item.AdoxioLicenceType?.AdoxioName,
+                        licenceTypeCategory = (LicenceTypeCategory)item.AdoxioLicenceType?.AdoxioCategory,
+                        expiryDate = item.AdoxioExpirydate,
+                        statusCode = item.Statuscode
+                    })
+                    .ToList(),
+                applications = new List<AccountSummaryApplications>()
+            };
+
+            return Ok(accountSummary);
         }
-
     }
 }

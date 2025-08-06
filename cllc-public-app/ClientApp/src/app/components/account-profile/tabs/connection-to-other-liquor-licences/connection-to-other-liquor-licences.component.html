@@ -1,0 +1,64 @@
+<div [ngBusy]="!hasLoadedData">
+  <ng-container *ngIf="hasLoadedData">
+    <section>
+      <h3 class="blue-header">CONNECTIONS TO OTHER LIQUOR LICENCES</h3>
+
+      <div class="padded-section content-bottom" [formGroup]="form" *ngIf="hasLoadedData">
+        <div *ngIf="showTiedHouseQuestionsSection">
+          <section class="mb-5">
+            <span class="font-weight-bold">1. Ownership or Control</span>
+            <p id="ownership-or-control-label" class="font-weight-bold">
+              Do you or any of your directors, officers, or shareholders have any amount of ownership, interest, or
+              control in another B.C. liquor licence?
+            </p>
+            <mat-radio-group
+              formControlName="hasLiquorTiedHouseOwnershipOrControl"
+              aria-labelledby="ownership-or-control-label"
+              class="d-flex flex-column align-items-start">
+              <mat-radio-button [value]="1">Yes</mat-radio-button>
+              <mat-radio-button [value]="0">No</mat-radio-button>
+            </mat-radio-group>
+          </section>
+
+          <section class="mb-5">
+            <span class="font-weight-bold">2. Third-Party Associations</span>
+            <p id="third-party-associations-label" class="font-weight-bold">
+              Do you or any of your directors, officers, or shareholders have any association with a third party
+              operator of another liquor licence in B.C.?
+            </p>
+            <mat-radio-group
+              formControlName="hasLiquorTiedHouseThirdPartyAssociations"
+              aria-labelledby="third-party-associations-label"
+              class="d-flex flex-column align-items-start">
+              <mat-radio-button [value]="1">Yes</mat-radio-button>
+              <mat-radio-button [value]="0">No</mat-radio-button>
+            </mat-radio-group>
+          </section>
+
+          <section class="mb-5">
+            <span class="font-weight-bold">3. Immediate Family Member Involvement</span>
+            <p id="has-immediate-family-member-involvement-label" class="font-weight-bold">
+              Do you or any of your director's, officer's, or shareholder's immediate family member (spouse, parent,
+              sibling, or child) have any amount of ownership, interest, or control in another B.C. liquor licence?
+            </p>
+            <mat-radio-group
+              formControlName="hasLiquorTiedHouseFamilyMemberInvolvement"
+              aria-labelledby="has-immediate-family-member-involvement-label"
+              class="d-flex flex-column align-items-start">
+              <mat-radio-button [value]="1">Yes</mat-radio-button>
+              <mat-radio-button [value]="0">No</mat-radio-button>
+            </mat-radio-group>
+          </section>
+        </div>
+
+        <section *ngIf="showTiedHouseDeclarationSection">
+          <app-tied-house-declaration
+            [accountId]="accountId"
+            [applicationId]="applicationId"
+            [initialTiedHouseConnections]="initialTiedHouseConnections"
+            [isReadOnly]="isTiedHouseReadOnly"></app-tied-house-declaration>
+        </section>
+      </div>
+    </section>
+  </ng-container>
+</div>

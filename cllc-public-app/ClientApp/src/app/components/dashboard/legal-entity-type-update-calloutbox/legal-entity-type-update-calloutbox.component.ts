@@ -9,6 +9,8 @@ import { Account } from "@models/account.model";
 export class LegalEntityTypeUpdateCalloutboxComponent implements OnInit {
   @Input()
   account: Account;
+  @Input()
+  hideSubmitChangeButton: boolean;
 
   constructor() {}
 

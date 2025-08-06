@@ -1,52 +1,130 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { TiedHouseConnection } from "@models/tied-house-connection.model";
-import { catchError } from "rxjs/operators";
-import { DataService } from "./data.service";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { TiedHouseConnection } from '@models/tied-house-connection.model';
+import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { DataService } from './data.service';
 
 @Injectable()
 export class TiedHouseConnectionsDataService extends DataService {
-
   constructor(private http: HttpClient) {
     super();
   }
 
   /**
-   * Get legal entities from Dynamics filtered by position
-   * @param positionType
+   * Get all liquor tied house connections for a user.
+   * - If `accountId` is provided, it filters results by that account.
+   * - If `accountId` is not provided, it returns results for the current logged in user.
+   *
+   * @param {string} [accountId] An optional account ID to filter results by
+   * @return {*}  {Observable<TiedHouseConnection[]>}
    */
-  getTiedHouse(accountId: string) {
-    const apiPath = `api/tiedhouseconnections/${accountId}`;
-    return this.http.get<TiedHouseConnection>(apiPath, { headers: this.headers })
-      .pipe(catchError(this.handleError));
-  }
-
-
-  /**
-   * Create a new legal entity in Dynamics
-   * @param data - legal entity data
-   */
-  createTiedHouse(data: any) {
-    return this.http.post<TiedHouseConnection>("api/tiedhouseconnections/", data, { headers: this.headers })
-      .pipe(catchError(this.handleError));
+  GetLiquorTiedHouseConnectionsForUser(accountId?: string): Observable<TiedHouseConnection[]> {
+    const apiPath = `api/tiedhouseconnections/user/liquor/${accountId ?? ''}`;
+    return this.http.get<TiedHouseConnection[]>(apiPath, { headers: this.headers }).pipe(catchError(this.handleError));
   }
 
   /**
-   * update a  legal entity in Dynamics
-   * @param data - legal entity data
+   * Get the cannabis Tied House Connection for a user.
+   * - If `accountId` is provided, it filters results by that account.
+   * - If `accountId` is not provided, it returns results for the current logged in user.
+   *
+   * @param {string} [accountId] An optional account ID to filter results by
+   * @return {*}  {Observable<TiedHouseConnection>}
    */
-  updateTiedHouse(data: any, id: string) {
-    return this.http.put<TiedHouseConnection>(`api/tiedhouseconnections/${id}`, data, { headers: this.headers })
+  GetCannabisTiedHouseConnectionForUser(accountId?: string): Observable<TiedHouseConnection> {
+    const apiPath = `api/tiedhouseconnections/user/cannabis/${accountId ?? ''}`;
+    return this.http.get<TiedHouseConnection>(apiPath, { headers: this.headers }).pipe(catchError(this.handleError));
+  }
+
+  /**
+   * Get all liquor tied house connections for a specific application.
+   *
+   * Note: This includes liquor tied house connections that are associated with the user account, as well as those that
+   * are associated with the application.
+   *
+   * @param {string} applicationId
+   * @return {*}  {Observable<TiedHouseConnection[]>}
+   */
+  GetLiquorTiedHouseConnectionsForApplication(applicationId: string): Observable<TiedHouseConnection[]> {
+    const apiPath = `api/tiedhouseconnections/liquor/application/${applicationId}`;
+    return this.http.get<TiedHouseConnection[]>(apiPath, { headers: this.headers }).pipe(catchError(this.handleError));
+  }
+
+  /**
+   * Create or Update a liquor tied house connection.
+   *
+   * @param {TiedHouseConnection} tiedHouseConnection
+   * @param {string} applicationId
+   * @return {*}  {Observable<TiedHouseConnection>} The created tied house connection.
+   */
+  AddLiquorTiedHouseConnectionToApplication(
+    tiedHouseConnection: TiedHouseConnection,
+    applicationId: string
+  ): Observable<TiedHouseConnection> {
+    return this.http
+      .post<TiedHouseConnection>(`api/tiedhouseconnections/liquor/application/${applicationId}`, tiedHouseConnection, {
+        headers: this.headers
+      })
       .pipe(catchError(this.handleError));
   }
 
   /**
-   * delete a  legal entity in Dynamics
-   * @param data - legal entity data
+   * Create or Update a liquor tied house connection for a user (account).
+   *
+   * Business Rules - This endpoint should only be called if:
+   * - The user does not have any existing tied house connections of type `Liquor`.
+   * - The user does not have any approved applications, of any type.
+   *
+   * @param {TiedHouseConnection} tiedHouseConnection
+   * @param {string} accountId
+   * @return {*}  {Observable<TiedHouseConnection>} The created tied house connection.
    */
-  deleteTiedHouse(id: string) {
-    return this.http.post<TiedHouseConnection>(`api/tiedhouseconnections/${id}/delete`, {}, { headers: this.headers })
+  AddLiquorTiedHouseConnectionToUser(
+    tiedHouseConnection: TiedHouseConnection,
+    accountId: string
+  ): Observable<TiedHouseConnection> {
+    return this.http
+      .post<TiedHouseConnection>(`api/tiedhouseconnections/liquor/user/${accountId}`, tiedHouseConnection, {
+        headers: this.headers
+      })
       .pipe(catchError(this.handleError));
   }
 
+  /**
+   * Creates or updates a cannabis tied house connection.
+   *
+   * @param {TiedHouseConnection} tiedHouseConnection Optional tied house connection data used to create or update the
+   * record.
+   * @param {string} accountId The ID of the account to associate with the tied house connection.
+   * @return {*}  {Observable<TiedHouseConnection>} The created or updated tied house connection.
+   */
+  upsertCannabisTiedHouseConnection(
+    tiedHouseConnection: TiedHouseConnection,
+    accountId: string
+  ): Observable<TiedHouseConnection> {
+    return this.http
+      .post<TiedHouseConnection>(`api/tiedhouseconnections/cannabis/${accountId}`, tiedHouseConnection, {
+        headers: this.headers
+      })
+      .pipe(catchError(this.handleError));
+  }
+
+  /**
+   * Update an existing cannabis tied house connection.
+   *
+   * @param {TiedHouseConnection} tiedHouseConnection The tied house connection data used to update the existing record.
+   * @param {string} tiedHouseConnectionId The ID of the tied house connection to update.
+   * @return {*}  {Observable<TiedHouseConnection>} The updated tied house connection.
+   */
+  updateCannabisTiedHouseConnection(
+    tiedHouseConnection: TiedHouseConnection,
+    tiedHouseConnectionId: string
+  ): Observable<TiedHouseConnection> {
+    return this.http
+      .put<TiedHouseConnection>(`api/tiedhouseconnections/cannabis/${tiedHouseConnectionId}`, tiedHouseConnection, {
+        headers: this.headers
+      })
+      .pipe(catchError(this.handleError));
+  }
 }
