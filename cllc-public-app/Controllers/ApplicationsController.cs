@@ -2096,17 +2096,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if(application.AdoxioApplicationTypeId?.AdoxioName == "Le Review")
             {
-                if(application.AdoxioApplicationExtension?.AdoxioRelatedLeOrPclApplication == null)
+                //If LE review application is not linked to a PCL application, create a new PCL application
+                if (application.AdoxioApplicationExtension?.AdoxioRelatedLeOrPclApplication == null)
                 {
                     var pclApplication = await this._dynamicsClient.Applications.CreateAsync(CopyLEReviewApplicationToPCL(application));
                     var expandPcl = new List<string> { "adoxio_ApplicationExtension" };
+                    //Load extension table for newly created application
                     pclApplication = await _dynamicsClient.Applications.GetByKeyAsync(pclApplication.AdoxioApplicationid, expandPcl);
                     pclApplication.AdoxioApplicationExtension.AdoxioRelatedLeOrPclApplicationODataBind = _dynamicsClient.GetEntityURI("adoxio_applications", application.AdoxioApplicationid);
                     await _dynamicsClient.Applicationextensions.UpdateAsync(pclApplication.AdoxioApplicationExtension.AdoxioApplicationextensionid, pclApplication.AdoxioApplicationExtension);
 
                     return new JsonResult(pclApplication);
                 }
-
+                //If LE review application is linked to a PCL application, return the PCL application
                 else
                 {
                     var expandPcl = new List<string> { "adoxio_relatedleorpclapplication" };
