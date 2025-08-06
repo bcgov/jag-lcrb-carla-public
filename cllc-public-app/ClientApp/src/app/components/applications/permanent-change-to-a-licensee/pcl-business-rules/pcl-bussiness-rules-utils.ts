@@ -258,15 +258,10 @@ export const getPCLMatrixConditionalGroup = (
 export const getPCLMatrixSectionBusinessRules = (
   options: PCLSectionNamesFromBitmaskOptions
 ): PCLFormControlDefinitionOption[] => {
-  console.debug('1------------------------------------------------------------');
-  console.debug('getPCLSectionBusinessRules', options);
   const accountTypeBitMasks =
     PCLSectionBusinessRules[options.accountType] ?? PCLSectionBusinessRules[AccountType.Default];
 
   if (!accountTypeBitMasks) {
-    console.debug('!accountTypeBitMasks: returning default');
-    console.debug('2------------------------------------------------------------');
-
     const pclFormControlNames = getPCLSectionNamesFromBitmask(FULL_BITMASK);
     return getPCLFormControlDefinitions(pclFormControlNames);
   }
@@ -275,9 +270,6 @@ export const getPCLMatrixSectionBusinessRules = (
     accountTypeBitMasks[options.conditionalGroup] ?? accountTypeBitMasks[PCLMatrixConditionalGroup.Default];
 
   if (!conditionalGroupBitMasks) {
-    console.debug('!conditionalGroupBitMasks: returning default');
-    console.debug('3------------------------------------------------------------');
-
     const pclFormControlNames = getPCLSectionNamesFromBitmask(FULL_BITMASK);
     return getPCLFormControlDefinitions(pclFormControlNames);
   }
@@ -286,9 +278,6 @@ export const getPCLMatrixSectionBusinessRules = (
     conditionalGroupBitMasks[options.licenceGroup] ?? conditionalGroupBitMasks[PCLMatrixLicenceGroup.Default];
 
   if (!licenceGroupBitMasks) {
-    console.debug('!licenceGroupBitMasks: returning default');
-    console.debug('4------------------------------------------------------------');
-
     const pclFormControlNames = getPCLSectionNamesFromBitmask(FULL_BITMASK);
     return getPCLFormControlDefinitions(pclFormControlNames);
   }
@@ -299,9 +288,6 @@ export const getPCLMatrixSectionBusinessRules = (
 
   const pclFormControlDefinitions = getPCLFormControlDefinitions(pclFormControlNames);
 
-  console.debug('pclFormControlNames:', pclFormControlNames);
-  console.debug('pclFormControlDefinitions:', pclFormControlDefinitions);
-  console.debug('5------------------------------------------------------------');
   return pclFormControlDefinitions;
 };
 
