@@ -291,5 +291,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         [JsonProperty(PropertyName = "adoxio_hasliquortiedhousefamilymemberinvolvement")]
         public int AdoxioHasLiquorTiedHouseFamilyMemberInvolvement { get; set; }
 
+        [JsonProperty(PropertyName = "adoxio_relatedleorpclapplication")]
+        public MicrosoftDynamicsCRMadoxioApplication AdoxioRelatedLeOrPclApplication { get; set; }
+
+        [JsonProperty(PropertyName = "adoxio_relatedleorpclapplication@odata.bind")]
+        public string AdoxioRelatedLeOrPclApplicationODataBind { get; set; }
     }
 }
