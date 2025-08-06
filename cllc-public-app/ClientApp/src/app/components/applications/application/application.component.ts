@@ -7,45 +7,146 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as currentApplicationActions from '@app/app-state/actions/current-application.action';
 import { AppState } from '@app/app-state/models/app-state';
-import { ConnectionToNonMedicalStoresComponent } from '@components/account-profile/tabs/connection-to-non-medical-stores/connection-to-non-medical-stores.component';
+import { ConnectionToNonMedicalStoresComponent } from '@components/applications/application/tabs/connection-to-non-medical-stores/connection-to-non-medical-stores.component';
 import { ApplicationCancellationDialogComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
 import { INCOMPLETE, UPLOAD_FILES_MODE } from '@components/licences/licences.component';
+import { faCreditCard, faIdCard, faSave } from '@fortawesome/free-regular-svg-icons';
+import { faExclamationCircle, faTrashAlt, faUniversity } from '@fortawesome/free-solid-svg-icons';
 import { Account, TransferAccount } from '@models/account.model';
-import { ApplicationStatuses, ApplicationType, ApplicationTypeNames, FormControlState } from '@models/application-type.model';
+import {
+  ApplicationStatuses,
+  ApplicationType,
+  ApplicationTypeNames,
+  FormControlState
+} from '@models/application-type.model';
 import { Application } from '@models/application.model';
+import { RelatedLicence } from '@models/related-licence';
+import { AreaCategory, ServiceArea } from '@models/service-area.model';
 import { TiedHouseConnection } from '@models/tied-house-connection.model';
 import { Store } from '@ngrx/store';
 import { ApplicationDataService } from '@services/application-data.service';
 import { DynamicsDataService } from '@services/dynamics-data.service';
 import { EstablishmentWatchWordsService } from '@services/establishment-watch-words.service';
 import { FeatureFlagService } from '@services/feature-flag.service';
+import { LocalGovernmentDataService } from '@services/local-government-data.service';
 import { PaymentDataService } from '@services/payment-data.service';
+import { PoliceJurisdictionDataService } from '@services/police-jurisdiction-data.service';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
 import { FileUploaderComponent } from '@shared/components/file-uploader/file-uploader.component';
 import { ApplicationHTMLContent, CanadaPostalRegex, FormBase } from '@shared/form-base';
 import { forkJoin, Observable, of, Subject, Subscription } from 'rxjs';
-import { catchError, debounceTime, delay, distinctUntilChanged, filter, mergeMap, switchMap, takeWhile, tap } from 'rxjs/operators';
-//import { User } from '@models/user.model';
-import { faCreditCard, faIdCard, faSave } from '@fortawesome/free-regular-svg-icons';
-import { faExclamationCircle, faTrashAlt, faUniversity } from '@fortawesome/free-solid-svg-icons';
-import { RelatedLicence } from "@models/related-licence";
-import { AreaCategory, ServiceArea } from '@models/service-area.model';
-import { LocalGovernmentDataService } from '@services/local-government-data.service';
-import { PoliceJurisdictionDataService } from '@services/police-jurisdiction-data.service';
+import {
+  catchError,
+  debounceTime,
+  delay,
+  distinctUntilChanged,
+  filter,
+  mergeMap,
+  switchMap,
+  takeWhile,
+  tap
+} from 'rxjs/operators';
 import { DynamicsForm } from '../../../models/dynamics-form.model';
 import { Address, AddressService } from '../../../services/geocoder.service'; // Adjust the import path as necessary
 import { ProofOfZoningComponent } from './tabs/proof-of-zoning/proof-of-zoning.component';
 
 const ServiceHours = [
-  '00:00', '00:15', '00:30', '00:45', '01:00', '01:15', '01:30', '01:45', '02:00', '02:15', '02:30', '02:45', '03:00',
-  '03:15', '03:30', '03:45', '04:00', '04:15', '04:30', '04:45', '05:00', '05:15', '05:30', '05:45', '06:00', '06:15',
-  '06:30', '06:45', '07:00', '07:15', '07:30', '07:45', '08:00', '08:15', '08:30', '08:45',
-  '09:00', '09:15', '09:30',
-  '09:45', '10:00', '10:15', '10:30', '10:45', '11:00', '11:15', '11:30', '11:45', '12:00', '12:15', '12:30', '12:45',
-  '13:00', '13:15', '13:30', '13:45', '14:00', '14:15', '14:30', '14:45', '15:00', '15:15', '15:30', '15:45', '16:00',
-  '16:15', '16:30', '16:45', '17:00', '17:15', '17:30', '17:45', '18:00', '18:15', '18:30', '18:45', '19:00', '19:15',
-  '19:30', '19:45', '20:00', '20:15', '20:30', '20:45', '21:00', '21:15', '21:30', '21:45', '22:00', '22:15', '22:30',
-  '22:45', '23:00', '23:15', '23:30', '23:45'
+  '00:00',
+  '00:15',
+  '00:30',
+  '00:45',
+  '01:00',
+  '01:15',
+  '01:30',
+  '01:45',
+  '02:00',
+  '02:15',
+  '02:30',
+  '02:45',
+  '03:00',
+  '03:15',
+  '03:30',
+  '03:45',
+  '04:00',
+  '04:15',
+  '04:30',
+  '04:45',
+  '05:00',
+  '05:15',
+  '05:30',
+  '05:45',
+  '06:00',
+  '06:15',
+  '06:30',
+  '06:45',
+  '07:00',
+  '07:15',
+  '07:30',
+  '07:45',
+  '08:00',
+  '08:15',
+  '08:30',
+  '08:45',
+  '09:00',
+  '09:15',
+  '09:30',
+  '09:45',
+  '10:00',
+  '10:15',
+  '10:30',
+  '10:45',
+  '11:00',
+  '11:15',
+  '11:30',
+  '11:45',
+  '12:00',
+  '12:15',
+  '12:30',
+  '12:45',
+  '13:00',
+  '13:15',
+  '13:30',
+  '13:45',
+  '14:00',
+  '14:15',
+  '14:30',
+  '14:45',
+  '15:00',
+  '15:15',
+  '15:30',
+  '15:45',
+  '16:00',
+  '16:15',
+  '16:30',
+  '16:45',
+  '17:00',
+  '17:15',
+  '17:30',
+  '17:45',
+  '18:00',
+  '18:15',
+  '18:30',
+  '18:45',
+  '19:00',
+  '19:15',
+  '19:30',
+  '19:45',
+  '20:00',
+  '20:15',
+  '20:30',
+  '20:45',
+  '21:00',
+  '21:15',
+  '21:30',
+  '21:45',
+  '22:00',
+  '22:15',
+  '22:30',
+  '22:45',
+  '23:00',
+  '23:15',
+  '23:30',
+  '23:45'
 ];
 
 @Component({
@@ -66,7 +167,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   @Input() skipPayment: boolean = false;
   @Output() saveComplete: EventEmitter<boolean> = new EventEmitter<boolean>();
   @ViewChild('mainForm') mainForm: FileUploaderComponent;
-  @ViewChild(ConnectionToNonMedicalStoresComponent) connectionsToProducers: ConnectionToNonMedicalStoresComponent;
+  @ViewChild(ConnectionToNonMedicalStoresComponent) connectionToNonMedicalStores: ConnectionToNonMedicalStoresComponent;
   @ViewChild(ProofOfZoningComponent) proofOfZoning: ProofOfZoningComponent;
   @ViewChild('lgAutoCompleteTrigger', { read: MatAutocompleteTrigger }) lgAutoComplete: MatAutocompleteTrigger;
   @ViewChild('pdAutoCompleteTrigger', { read: MatAutocompleteTrigger }) pdAutoComplete: MatAutocompleteTrigger;
@@ -85,7 +186,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   tiedHouseFormData: TiedHouseConnection;
   possibleProblematicNameWarning = false;
   htmlContent: ApplicationHTMLContent = <ApplicationHTMLContent>{};
-  indigenousNations: { id: string, name: string }[] = [];
+  indigenousNations: { id: string; name: string }[] = [];
   readonly UPLOAD_FILES_MODE = UPLOAD_FILES_MODE;
   readonly INCOMPLETE = INCOMPLETE;
   FormControlState = FormControlState;
@@ -119,7 +220,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   uploadedNOA: number = 0;
   uploadedOrganizationDetails: number = 0;
   uploadedCentralSecuritiesRegisterDocuments: number = 0;
-  tiedHouseExemptions: { jobNumber: string, displayName: string }[] = [];
+  tiedHouseExemptions: { jobNumber: string; displayName: string }[] = [];
   licenseToRemove: RelatedLicence;
   showOccupantLoadCheckBox: boolean = false;
 
@@ -127,20 +228,25 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   addresses: Observable<Address[]>;
 
-
   get isOpenedByLGForApproval(): boolean {
     let openedByLG = false;
-    if (this.account && this.application && this.application.applicant &&
+    if (
+      this.account &&
+      this.application &&
+      this.application.applicant &&
       this.account.businessType === 'LocalGovernment' &&
       this.application.applicant.id !== this.account.id && // Application was not made by the LG/IN
-      this.account.localGovernmentId && this.application.indigenousNationId && // make sure these values are not null
-      this.account.localGovernmentId === this.application.indigenousNationId) {
+      this.account.localGovernmentId &&
+      this.application.indigenousNationId && // make sure these values are not null
+      this.account.localGovernmentId === this.application.indigenousNationId
+    ) {
       openedByLG = true;
     }
     return openedByLG;
   }
 
-  constructor(private store: Store<AppState>,
+  constructor(
+    private store: Store<AppState>,
     private paymentDataService: PaymentDataService,
     public snackBar: MatSnackBar,
     public router: Router,
@@ -158,11 +264,12 @@ export class ApplicationComponent extends FormBase implements OnInit {
     private addressService: AddressService
   ) {
     super();
-    this.route.paramMap.subscribe(pmap => this.applicationId = pmap.get('applicationId'));
-    this.route.paramMap.subscribe(pmap => this.mode = pmap.get('mode'));
+    this.route.paramMap.subscribe((pmap) => (this.applicationId = pmap.get('applicationId')));
+    this.route.paramMap.subscribe((pmap) => (this.mode = pmap.get('mode')));
 
-    this.featureFlagService.featureOn('LGApprovals')
-      .subscribe(featureOn => this.LGApprovalsFeatureIsOn = featureOn);
+    this.featureFlagService
+      .featureOn('LGApprovals')
+      .subscribe((featureOn) => (this.LGApprovalsFeatureIsOn = featureOn));
   }
 
   ngOnInit() {
@@ -175,11 +282,15 @@ export class ApplicationComponent extends FormBase implements OnInit {
         establishmentAddressPostalCode: [''],
         establishmentParcelId: ['']
       }),
-      establishmentName: ['', [
-        Validators.required,
-        this.establishmentWatchWordsService.forbiddenNameValidator()
-      ]],
-      establishmentParcelId: ['', [Validators.maxLength(9), Validators.minLength(9), this.requireOneOfGroupValidator(['pin', 'establishmentParcelId'])]],
+      establishmentName: ['', [Validators.required, this.establishmentWatchWordsService.forbiddenNameValidator()]],
+      establishmentParcelId: [
+        '',
+        [
+          Validators.maxLength(9),
+          Validators.minLength(9),
+          this.requireOneOfGroupValidator(['pin', 'establishmentParcelId'])
+        ]
+      ],
       contactPersonFirstName: ['', Validators.required],
       contactPersonLastName: ['', Validators.required],
       contactPersonRole: [''],
@@ -274,86 +385,139 @@ export class ApplicationComponent extends FormBase implements OnInit {
       validInterestDormancyPeriod: ['', []],
       affirmInformationProividedTrueAndComplete: ['', []],
       validInterestEstablishmentLocation: ['', []],
-      temporaryRelocationCriteria: ['', this.isTemporaryRelocation() ? Validators.required : null],
+      temporaryRelocationCriteria: ['', this.isTemporaryRelocation() ? Validators.required : null]
     });
 
-    this.form.get('pin').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.form.get('establishmentParcelId').updateValueAndValidity();
-    });
+    this.form
+      .get('pin')
+      .valueChanges.pipe(distinctUntilChanged())
+      .subscribe((val) => {
+        this.form.get('establishmentParcelId').updateValueAndValidity();
+      });
 
-    this.form.get('establishmentParcelId').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.form.get('pin').updateValueAndValidity();
-    });
+    this.form
+      .get('establishmentParcelId')
+      .valueChanges.pipe(distinctUntilChanged())
+      .subscribe((val) => {
+        this.form.get('pin').updateValueAndValidity();
+      });
 
-    this.form.get('serviceHoursSundayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateRequiredValidator(val, 'serviceHoursSundayClose');
-    });
+    this.form
+      .get('serviceHoursSundayOpen')
+      .valueChanges.pipe(distinctUntilChanged())
+      .subscribe((val) => {
+        this.updateRequiredValidator(val, 'serviceHoursSundayClose');
+      });
 
-    this.form.get('serviceHoursSundayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateRequiredValidator(val, 'serviceHoursSundayOpen');
-    });
+    this.form
+      .get('serviceHoursSundayClose')
+      .valueChanges.pipe(distinctUntilChanged())
+      .subscribe((val) => {
+        this.updateRequiredValidator(val, 'serviceHoursSundayOpen');
+      });
 
-    this.form.get('serviceHoursMondayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateRequiredValidator(val, 'serviceHoursMondayClose');
-    });
+    this.form
+      .get('serviceHoursMondayOpen')
+      .valueChanges.pipe(distinctUntilChanged())
+      .subscribe((val) => {
+        this.updateRequiredValidator(val, 'serviceHoursMondayClose');
+      });
 
-    this.form.get('serviceHoursMondayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateRequiredValidator(val, 'serviceHoursMondayOpen');
-    });
+    this.form
+      .get('serviceHoursMondayClose')
+      .valueChanges.pipe(distinctUntilChanged())
+      .subscribe((val) => {
+        this.updateRequiredValidator(val, 'serviceHoursMondayOpen');
+      });
 
-    this.form.get('serviceHoursTuesdayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateRequiredValidator(val, 'serviceHoursTuesdayClose');
-    });
+    this.form
+      .get('serviceHoursTuesdayOpen')
+      .valueChanges.pipe(distinctUntilChanged())
+      .subscribe((val) => {
+        this.updateRequiredValidator(val, 'serviceHoursTuesdayClose');
+      });
 
-    this.form.get('serviceHoursTuesdayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateRequiredValidator(val, 'serviceHoursTuesdayOpen');
-    });
+    this.form
+      .get('serviceHoursTuesdayClose')
+      .valueChanges.pipe(distinctUntilChanged())
+      .subscribe((val) => {
+        this.updateRequiredValidator(val, 'serviceHoursTuesdayOpen');
+      });
 
-    this.form.get('serviceHoursWednesdayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateRequiredValidator(val, 'serviceHoursWednesdayClose');
-    });
+    this.form
+      .get('serviceHoursWednesdayOpen')
+      .valueChanges.pipe(distinctUntilChanged())
+      .subscribe((val) => {
+        this.updateRequiredValidator(val, 'serviceHoursWednesdayClose');
+      });
 
-    this.form.get('serviceHoursWednesdayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateRequiredValidator(val, 'serviceHoursWednesdayOpen');
-    });
+    this.form
+      .get('serviceHoursWednesdayClose')
+      .valueChanges.pipe(distinctUntilChanged())
+      .subscribe((val) => {
+        this.updateRequiredValidator(val, 'serviceHoursWednesdayOpen');
+      });
 
-    this.form.get('serviceHoursThursdayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateRequiredValidator(val, 'serviceHoursThursdayClose');
-    });
+    this.form
+      .get('serviceHoursThursdayOpen')
+      .valueChanges.pipe(distinctUntilChanged())
+      .subscribe((val) => {
+        this.updateRequiredValidator(val, 'serviceHoursThursdayClose');
+      });
 
-    this.form.get('serviceHoursThursdayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateRequiredValidator(val, 'serviceHoursThursdayOpen');
-    });
+    this.form
+      .get('serviceHoursThursdayClose')
+      .valueChanges.pipe(distinctUntilChanged())
+      .subscribe((val) => {
+        this.updateRequiredValidator(val, 'serviceHoursThursdayOpen');
+      });
 
-    this.form.get('serviceHoursFridayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateRequiredValidator(val, 'serviceHoursFridayClose');
-    });
+    this.form
+      .get('serviceHoursFridayOpen')
+      .valueChanges.pipe(distinctUntilChanged())
+      .subscribe((val) => {
+        this.updateRequiredValidator(val, 'serviceHoursFridayClose');
+      });
 
-    this.form.get('serviceHoursFridayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateRequiredValidator(val, 'serviceHoursFridayOpen');
-    });
+    this.form
+      .get('serviceHoursFridayClose')
+      .valueChanges.pipe(distinctUntilChanged())
+      .subscribe((val) => {
+        this.updateRequiredValidator(val, 'serviceHoursFridayOpen');
+      });
 
-    this.form.get('serviceHoursSaturdayOpen').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateRequiredValidator(val, 'serviceHoursSaturdayClose');
-    });
+    this.form
+      .get('serviceHoursSaturdayOpen')
+      .valueChanges.pipe(distinctUntilChanged())
+      .subscribe((val) => {
+        this.updateRequiredValidator(val, 'serviceHoursSaturdayClose');
+      });
 
-    this.form.get('serviceHoursSaturdayClose').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateRequiredValidator(val, 'serviceHoursSaturdayOpen');
-    });
+    this.form
+      .get('serviceHoursSaturdayClose')
+      .valueChanges.pipe(distinctUntilChanged())
+      .subscribe((val) => {
+        this.updateRequiredValidator(val, 'serviceHoursSaturdayOpen');
+      });
 
-    this.form.get('requestOutsideServiceHours').valueChanges.pipe(distinctUntilChanged()).subscribe(val => {
-      this.updateRequiredValidator(val, 'requestOutsideServiceHours');
-    });
+    this.form
+      .get('requestOutsideServiceHours')
+      .valueChanges.pipe(distinctUntilChanged())
+      .subscribe((val) => {
+        this.updateRequiredValidator(val, 'requestOutsideServiceHours');
+      });
 
-    this.form.get('indigenousNation').valueChanges
-      .pipe(filter(value => value && value.length >= 3),
-        tap(_ => {
+    this.form
+      .get('indigenousNation')
+      .valueChanges.pipe(
+        filter((value) => value && value.length >= 3),
+        tap((_) => {
           this.autocompleteLocalGovernmemts = [];
           this.INRequestInProgress = true;
         }),
-        switchMap(value => this.localGovDataService.getAutocomplete(value))
+        switchMap((value) => this.localGovDataService.getAutocomplete(value))
       )
-      .subscribe(data => {
+      .subscribe((data) => {
         this.autocompleteLocalGovernmemts = data;
         this.INRequestInProgress = false;
 
@@ -363,15 +527,17 @@ export class ApplicationComponent extends FormBase implements OnInit {
         }
       });
 
-    this.form.get('policeJurisdiction').valueChanges
-      .pipe(filter(value => value && value.length >= 3),
-        tap(_ => {
+    this.form
+      .get('policeJurisdiction')
+      .valueChanges.pipe(
+        filter((value) => value && value.length >= 3),
+        tap((_) => {
           this.autocompleteLocalGovernmemts = [];
           this.policeJurisdictionReqInProgress = true;
         }),
-        switchMap(value => this.policeJurisdictionDataService.getAutocomplete(value))
+        switchMap((value) => this.policeJurisdictionDataService.getAutocomplete(value))
       )
-      .subscribe(data => {
+      .subscribe((data) => {
         this.autocompletePoliceDurisdictions = data;
         this.policeJurisdictionReqInProgress = false;
 
@@ -392,168 +558,188 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.addDynamicContent();
     });
 
-    this.applicationDataService.getSubmittedApplicationCount()
+    this.applicationDataService
+      .getSubmittedCannabisRetailStoreApplicationCount()
       .pipe(takeWhile(() => this.componentActive))
-      .subscribe(value => this.submittedApplications = value);
+      .subscribe((value) => (this.submittedApplications = value));
 
     this.establishmentWatchWordsService.initialize();
 
-    this.store.select(state => state.currentAccountState.currentAccount)
+    this.store
+      .select((state) => state.currentAccountState.currentAccount)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((account) => {
         this.account = account;
-        this.busy = this.applicationDataService.getApplicationById(this.applicationId)
+        this.busy = this.applicationDataService
+          .getApplicationById(this.applicationId)
           .pipe(takeWhile(() => this.componentActive))
-          .subscribe((data: Application) => {
-            if (data.establishmentParcelId) {
-              data.establishmentParcelId = data.establishmentParcelId.replace(/-/g, '');
-            }
-            // fix for no applicant type.
-            if (!data.applicantType) {
-              data.applicantType = this.account.businessType;
-            }
+          .subscribe(
+            (data: Application) => {
+              if (data.establishmentParcelId) {
+                data.establishmentParcelId = data.establishmentParcelId.replace(/-/g, '');
+              }
+              // fix for no applicant type.
+              if (!data.applicantType) {
+                data.applicantType = this.account.businessType;
+              }
 
-            if (data.applicantType === 'IndigenousNation') {
-              (<any>data).applyAsIndigenousNation = true;
-            }
+              if (data.applicantType === 'IndigenousNation') {
+                (<any>data).applyAsIndigenousNation = true;
+              }
 
-            this.application = data;
-            this.isShowLGINApproval = (
-              this?.application?.applicationType?.isShowLGINApproval ||
-              (this?.application?.applicationStatus === "Pending for LG/FN/Police Feedback"
-                && this?.application?.applicationType?.isShowLGZoningConfirmation !== true
-              )
-            );
+              this.application = data;
+              this.isShowLGINApproval =
+                this?.application?.applicationType?.isShowLGINApproval ||
+                (this?.application?.applicationStatus === 'Pending for LG/FN/Police Feedback' &&
+                  this?.application?.applicationType?.isShowLGZoningConfirmation !== true);
 
-            this.hideFormControlByType();
+              this.hideFormControlByType();
 
-            this.addDynamicContent();
+              this.addDynamicContent();
 
-            if (data.applicationType.formReference) {
-              //console.log("Getting form layout");
-              // get the application form
-              const formRef = data.applicationType.dynamicsForm;
-              /**
-               * Prunes the provided form reference based on the specified application type ID.
-               *
-               * This method processes the given form reference (`formRef`) and removes or modifies
-               * fields according to the rules defined for the provided application type (`data.applicationType.id`).
-               * The resulting object, `pruned`, contains only the relevant data required for the specific
-               * application type, ensuring that unnecessary or invalid fields are excluded before further processing.
-               *
-               * @param formRef - The form reference object containing the original form data.
-               * @param applicationTypeId - The identifier for the application type, used to determine pruning rules.
-               * @returns The pruned form data object, tailored to the specified application type.
-               */
-              const pruned = this.prune(formRef, data.applicationType.id);
-              data.applicationType.dynamicsForm = pruned;
-              this.dynamicsForm = pruned;
+              if (data.applicationType.formReference) {
+                //console.log("Getting form layout");
+                // get the application form
+                const formRef = data.applicationType.dynamicsForm;
+                /**
+                 * Prunes the provided form reference based on the specified application type ID.
+                 *
+                 * This method processes the given form reference (`formRef`) and removes or modifies
+                 * fields according to the rules defined for the provided application type (`data.applicationType.id`).
+                 * The resulting object, `pruned`, contains only the relevant data required for the specific
+                 * application type, ensuring that unnecessary or invalid fields are excluded before further processing.
+                 *
+                 * @param formRef - The form reference object containing the original form data.
+                 * @param applicationTypeId - The identifier for the application type, used to determine pruning rules.
+                 * @returns The pruned form data object, tailored to the specified application type.
+                 */
+                const pruned = this.prune(formRef, data.applicationType.id);
+                data.applicationType.dynamicsForm = pruned;
+                this.dynamicsForm = pruned;
 
-              if (this.dynamicsForm != null) {
-                this.dynamicsForm.tabs.forEach(function (tab) {
-                  tab.sections.forEach(function (section) {
-                    if (section.fields) {
-                      section.fields.forEach(function (field) {
-                        // add the field to the form.
-                        if (field.required) {
-                          this.form.addControl(field.datafieldname, new FormControl('', Validators.required));
-                        }
-                        else {
-                          this.form.addControl(field.datafieldname, new FormControl(''));
-                        }
-                      }, this);
+                if (this.dynamicsForm != null) {
+                  this.dynamicsForm.tabs.forEach(function (tab) {
+                    tab.sections.forEach(function (section) {
+                      if (section.fields) {
+                        section.fields.forEach(function (field) {
+                          // add the field to the form.
+                          if (field.required) {
+                            this.form.addControl(field.datafieldname, new FormControl('', Validators.required));
+                          } else {
+                            this.form.addControl(field.datafieldname, new FormControl(''));
+                          }
+                        }, this);
+                      }
+                    }, this);
+                  }, this);
+                  this.updateDynamicValidation();
+                }
+              }
+
+              // special logic for Patio
+              if (this.isPatioActive(this?.application?.applicationType)) {
+                if (this.form.get('patioIsLiquorCarried')) {
+                  this.form
+                    .get('patioIsLiquorCarried')
+                    .valueChanges.pipe(distinctUntilChanged())
+                    .subscribe((checked) => {
+                      this.updateDescriptionRequired(checked, 'patioLiquorCarriedDescription');
+                    });
+
+                  this.updatePatioRequired(true);
+                  this.application.isHasPatio = true;
+                }
+              } else {
+                this.form
+                  .get('isHasPatio')
+                  .valueChanges.pipe(distinctUntilChanged())
+                  .subscribe((checked) => {
+                    if (this.form.get('patioIsLiquorCarried')) {
+                      this.form
+                        .get('patioIsLiquorCarried')
+                        .valueChanges.pipe(distinctUntilChanged())
+                        .subscribe((checked) => {
+                          this.updateDescriptionRequired(checked, 'patioLiquorCarriedDescription');
+                        });
                     }
 
-                  }, this);
-                }, this);
-                this.updateDynamicValidation();
-              }
-            }
-
-            // special logic for Patio
-            if (this.isPatioActive(this?.application?.applicationType)) {
-
-              if (this.form.get('patioIsLiquorCarried')) {
-                this.form.get('patioIsLiquorCarried').valueChanges.pipe(distinctUntilChanged()).subscribe(checked => {
-                  this.updateDescriptionRequired(checked, 'patioLiquorCarriedDescription');
-                });
-
-                this.updatePatioRequired(true);
-                this.application.isHasPatio = true;
-              }
-            }
-            else {
-
-              this.form.get('isHasPatio').valueChanges.pipe(distinctUntilChanged()).subscribe(checked => {
-                if (this.form.get('patioIsLiquorCarried')) {
-                  this.form.get('patioIsLiquorCarried').valueChanges.pipe(distinctUntilChanged()).subscribe(checked => {
-                    this.updateDescriptionRequired(checked, 'patioLiquorCarriedDescription');
+                    this.updatePatioRequired(checked);
                   });
+              }
+
+              const noNulls = Object.keys(data)
+                .filter((e) => data[e] !== null)
+                .reduce((o, e) => {
+                  o[e] = data[e];
+                  return o;
+                }, {});
+
+              this.form.patchValue(noNulls);
+
+              // LCSD-7327: If the application is a permanent or temporary LRS relocation, set new address, LG/IN, and police fields to empty
+              if (
+                this.application.applicationType.name === ApplicationTypeNames.LRSTransferofLocation ||
+                this.application.applicationType.name === ApplicationTypeNames.LRSTemporaryRelocation
+              ) {
+                // New Address Fields
+                this.form.get('establishmentAddressStreet').patchValue('');
+                this.form.get('establishmentAddressCity').patchValue('');
+                this.form.get('establishmentAddressPostalCode').patchValue('');
+                this.form.get('establishmentParcelId').patchValue('');
+                // LG/IN field
+                this.form.get('indigenousNation').patchValue('');
+                // Police Field
+                this.form.get('policeJurisdiction').patchValue('');
+              }
+
+              //LCSD-5764 get address from application if no assigned license
+              if (this.application != null && this.application.assignedLicence == null) {
+                if (this.application.establishmentAddressStreet != null) {
+                  this.form
+                    .get('assignedLicence')
+                    .get('establishmentAddressStreet')
+                    .setValue(this.application.establishmentAddressStreet);
                 }
-
-                this.updatePatioRequired(checked);
-
-              });
-            }
-
-            const noNulls = Object.keys(data)
-              .filter(e => data[e] !== null)
-              .reduce((o, e) => {
-                o[e] = data[e];
-                return o;
-              }, {});
-
-            this.form.patchValue(noNulls);
-
-            // LCSD-7327: If the application is a permanent or temporary LRS relocation, set new address, LG/IN, and police fields to empty
-            if (this.application.applicationType.name === ApplicationTypeNames.LRSTransferofLocation || this.application.applicationType.name === ApplicationTypeNames.LRSTemporaryRelocation) {
-              // New Address Fields
-              this.form.get('establishmentAddressStreet').patchValue('');
-              this.form.get('establishmentAddressCity').patchValue('');
-              this.form.get('establishmentAddressPostalCode').patchValue('');
-              this.form.get('establishmentParcelId').patchValue('');
-              // LG/IN field
-              this.form.get('indigenousNation').patchValue('');
-              // Police Field
-              this.form.get('policeJurisdiction').patchValue('');
-            }
-
-            //LCSD-5764 get address from application if no assigned license
-            if (this.application != null && this.application.assignedLicence == null) {
-              if (this.application.establishmentAddressStreet != null) {
-                this.form.get('assignedLicence').get('establishmentAddressStreet').setValue(this.application.establishmentAddressStreet);
+                if (this.application.establishmentAddressCity != null) {
+                  this.form
+                    .get('assignedLicence')
+                    .get('establishmentAddressCity')
+                    .setValue(this.application.establishmentAddressCity);
+                }
+                if (this.application.establishmentAddressPostalCode != null) {
+                  this.form
+                    .get('assignedLicence')
+                    .get('establishmentAddressPostalCode')
+                    .setValue(this.application.establishmentAddressPostalCode);
+                }
+                if (this.application.establishmentParcelId != null) {
+                  this.form
+                    .get('assignedLicence')
+                    .get('establishmentParcelId')
+                    .setValue(this.application.establishmentParcelId.replace(/-/g, ''));
+                }
               }
-              if (this.application.establishmentAddressCity != null) {
-                this.form.get('assignedLicence').get('establishmentAddressCity').setValue(this.application.establishmentAddressCity);
-              }
-              if (this.application.establishmentAddressPostalCode != null) {
-                this.form.get('assignedLicence').get('establishmentAddressPostalCode').setValue(this.application.establishmentAddressPostalCode);
-              }
-              if (this.application.establishmentParcelId != null) {
-                this.form.get('assignedLicence').get('establishmentParcelId').setValue(this.application.establishmentParcelId.replace(/-/g, ''));
-              }
-            }
 
-            if (data.indigenousNation) {
-              this.form.get('indigenousNationId').patchValue(data.indigenousNation.id);
-            }
+              if (data.indigenousNation) {
+                this.form.get('indigenousNationId').patchValue(data.indigenousNation.id);
+              }
 
-            if (data.policeJurisdiction) {
-              this.form.get('indigenousNationId').patchValue(data.policeJurisdiction.id);
-            }
-            if (this.application.capacityArea.length > 0) {
-              this.form.get('capacityArea').patchValue({ ...this.application.capacityArea[0] });
-            } else {
-              this.form.get('capacityArea.areaLocation').patchValue(data.applicationType.name);
-            }
+              if (data.policeJurisdiction) {
+                this.form.get('indigenousNationId').patchValue(data.policeJurisdiction.id);
+              }
+              if (this.application.capacityArea.length > 0) {
+                this.form.get('capacityArea').patchValue({ ...this.application.capacityArea[0] });
+              } else {
+                this.form.get('capacityArea.areaLocation').patchValue(data.applicationType.name);
+              }
 
-            // make fields readonly if payment was made or the LG is viewing the application
-            // disable the form if the local government has reviewed the application
-            if (data.isPaid || this.isOpenedByLGForApproval || this.application.lGDecisionSubmissionDate) {
-              this.form.disable();
-            }
-            //LCSD-5784 loading same user's application
-            /*if (data && data.applicationType && data.applicationType.name == 'Tied House Exemption Removal') {
+              // make fields readonly if payment was made or the LG is viewing the application
+              // disable the form if the local government has reviewed the application
+              if (data.isPaid || this.isOpenedByLGForApproval || this.application.lGDecisionSubmissionDate) {
+                this.form.disable();
+              }
+              //LCSD-5784 loading same user's application
+              /*if (data && data.applicationType && data.applicationType.name == 'Tied House Exemption Removal') {
               this.tiedHouseExemptions = [];
               this.applicationDataService.getApplicationsByType(ApplicationTypeNames.TiedHouseExemption)
                 .subscribe((data: Application[]) => {
@@ -564,9 +750,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
                   })
                 });
             }*/
-            this.savedFormData = this.form.value;
-            this.dataLoaded = true;
-          },
+              this.savedFormData = this.form.value;
+              this.dataLoaded = true;
+            },
             () => {
               console.log('Error occured');
               this.dataLoaded = true;
@@ -574,16 +760,14 @@ export class ApplicationComponent extends FormBase implements OnInit {
           );
       });
 
-    this.dynamicsDataService.getRecord('indigenousnations', '')
-      .subscribe(data => this.indigenousNations = data);
+    this.dynamicsDataService.getRecord('indigenousnations', '').subscribe((data) => (this.indigenousNations = data));
 
     this.addresses = this.form.get('establishmentAddressStreet')!.valueChanges.pipe(
       debounceTime(300),
       distinctUntilChanged(),
-      filter(streetName => streetName.length > 3),
-      switchMap(streetName => this.addressService.getAddressData(streetName))
+      filter((streetName) => streetName.length > 3),
+      switchMap((streetName) => this.addressService.getAddressData(streetName))
     );
-
   }
 
   /**
@@ -601,11 +785,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
    */
   private prune<
     T extends {
-      sections?: Array<{ id: string; name?: string;[k: string]: any }>;
-      tabs?: Array<{ sections: Array<{ id: string; name?: string;[k: string]: any }> }>;
+      sections?: Array<{ id: string; name?: string; [k: string]: any }>;
+      tabs?: Array<{ sections: Array<{ id: string; name?: string; [k: string]: any }> }>;
     }
   >(formRef: T, type: string): T {
-    const SPLITTER = "____";
+    const SPLITTER = '____';
 
     // 1) Detect whether we even need to do anything
     let sawPattern = false;
@@ -614,7 +798,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     // Inspect section names for the splitter and type match
     const inspect = (sec?: { name?: string }) => {
       const name = sec?.name;
-      if (typeof name !== "string") return;
+      if (typeof name !== 'string') return;
       const i = name.indexOf(SPLITTER);
       if (i === -1) return;
       sawPattern = true;
@@ -623,7 +807,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     };
 
     formRef.sections?.forEach(inspect);
-    formRef.tabs?.forEach(tab => tab.sections.forEach(inspect));
+    formRef.tabs?.forEach((tab) => tab.sections.forEach(inspect));
 
     // If there are no pattern sections OR none match the given type, return as-is
     if (!sawPattern || !sawMatch) {
@@ -636,11 +820,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
     // Keep only sections whose name ends with the correct type after the splitter
     const keepSection = (sec: { name?: string }) => {
       const name = sec.name;
-      if (typeof name !== "string") return true; // no name -> keep
+      if (typeof name !== 'string') return true; // no name -> keep
       const i = name.indexOf(SPLITTER);
-      if (i === -1) return true;                // no splitter -> keep
+      if (i === -1) return true; // no splitter -> keep
       const suffix = name.slice(i + SPLITTER.length);
-      return suffix === type;                   // keep only if suffix matches `type`
+      return suffix === type; // keep only if suffix matches `type`
     };
 
     if (clone.sections) {
@@ -648,9 +832,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
 
     if (clone.tabs) {
-      clone.tabs = clone.tabs.map(tab => ({
+      clone.tabs = clone.tabs.map((tab) => ({
         ...tab,
-        sections: tab.sections.filter(keepSection),
+        sections: tab.sections.filter(keepSection)
       }));
     }
 
@@ -661,8 +845,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     var val;
     if (checked) {
       val = 'true';
-    }
-    else {
+    } else {
       val = '';
     }
     this.updateRequiredValidator(val, descriptionField);
@@ -672,8 +855,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     var val;
     if (checked) {
       val = 'true';
-    }
-    else {
+    } else {
       val = '';
     }
 
@@ -685,7 +867,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
     if (this.form.get('patioIsLiquorCarried').value) {
       this.updateRequiredValidator(val, 'patioLiquorCarriedDescription');
-    } else { // disable validation
+    } else {
+      // disable validation
       this.updateRequiredValidator('', 'patioLiquorCarriedDescription');
     }
 
@@ -723,14 +906,12 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.form.get('hasCoolerAccess').disable();
     }
 
-
     // 2024-02-21 LCSD-6975 waynezen: no longer hard-code ApplicationTypes to disable Has Patio? control
     //if ((this.application.applicationType.name !== ApplicationTypeNames.SpecialEventAreaEndorsement
     //  && this.application.applicationType.name !== ApplicationTypeNames.LoungeAreaEndorsment) &&
     if (!this.isPatioActive(this.application.applicationType) && !this.application.applicationType.showPatio) {
       this.form.get('isHasPatio').disable();
     }
-
 
     if (!this.application.applicationType.showPropertyDetails) {
       this.form.get('establishmentAddressStreet').disable();
@@ -758,7 +939,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.form.get('establishmentPhone').disable();
     }
 
-    if (!this.application.applicationType.showHoursOfSale || this.application.applicationType.name === ApplicationTypeNames.FP || this.application.applicationType.name === ApplicationTypeNames.FPRelo) {
+    if (
+      !this.application.applicationType.showHoursOfSale ||
+      this.application.applicationType.name === ApplicationTypeNames.FP ||
+      this.application.applicationType.name === ApplicationTypeNames.FPRelo
+    ) {
       // Opening hours
       this.form.get('serviceHoursSundayOpen').disable();
       this.form.get('serviceHoursMondayOpen').disable();
@@ -779,13 +964,14 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.form.get('requestOutsideServiceHours').disable();
     }
 
-
     if (this.application.applicationType.name !== ApplicationTypeNames.Marketer) {
       this.form.get('federalProducerNames').disable();
     }
 
-    if (this.application.applicationType.name !== ApplicationTypeNames.CRSStructuralChange
-      && this.application.applicationType.name !== ApplicationTypeNames.CRSEstablishmentNameChange) {
+    if (
+      this.application.applicationType.name !== ApplicationTypeNames.CRSStructuralChange &&
+      this.application.applicationType.name !== ApplicationTypeNames.CRSEstablishmentNameChange
+    ) {
       this.form.get('proposedChange').disable();
     }
 
@@ -805,11 +991,15 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
 
     // TG validation question for cannabis licences to confirm that product is not visible from outside
-    if (this.application.applicationType.floorPlan === FormControlState.Show && (this.application.licenseType === 'Cannabis Retail Store' || this.application.licenseType === 'S119 CRS Authorization')) {
+    if (
+      this.application.applicationType.floorPlan === FormControlState.Show &&
+      (this.application.licenseType === 'Cannabis Retail Store' ||
+        this.application.licenseType === 'S119 CRS Authorization')
+    ) {
       this.form.get('IsReadyProductNotVisibleOutside').setValidators([Validators.required]);
     }
 
-    if (this.application.applicationType.lGandPoliceSelectors === "Yes" && this.LGApprovalsFeatureIsOn) {
+    if (this.application.applicationType.lGandPoliceSelectors === 'Yes' && this.LGApprovalsFeatureIsOn) {
       this.form.get('indigenousNation').setValidators([this.requiredAutoCompleteId]);
       this.form.get('policeJurisdiction').setValidators([this.requiredAutoCompleteId]);
     }
@@ -829,12 +1019,14 @@ export class ApplicationComponent extends FormBase implements OnInit {
     if (!this.application.applicationType.serviceAreas) {
       this.form.get('serviceAreas').disable();
       this.form.get('totalOccupantLoad').disable();
-
     }
     if (!this.application.applicationType.outsideAreas) {
       this.form.get('outsideAreas').disable();
     }
-    if (!this.application.applicationType.capacityArea || this.application?.applicationType?.name === ApplicationTypeNames.TemporaryExtensionOfLicensedAreaLP) {
+    if (
+      !this.application.applicationType.capacityArea ||
+      this.application?.applicationType?.name === ApplicationTypeNames.TemporaryExtensionOfLicensedAreaLP
+    ) {
       this.form.get('capacityArea.capacity').disable();
     }
 
@@ -849,7 +1041,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   requiresFederalProductionInfo(): boolean {
     const applicationTypeName = this.application.applicationType.name;
-    if (applicationTypeName === "Producer Retail Store" || applicationTypeName === "PRS Relocation" || applicationTypeName === "PRS Transfer of Ownership") {
+    if (
+      applicationTypeName === 'Producer Retail Store' ||
+      applicationTypeName === 'PRS Relocation' ||
+      applicationTypeName === 'PRS Transfer of Ownership'
+    ) {
       return true;
     }
 
@@ -857,24 +1053,26 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   private isHoursOfSaleValid(): boolean {
-    return this.form.disabled || !this.application.applicationType.showHoursOfSale ||
+    return (
+      this.form.disabled ||
+      !this.application.applicationType.showHoursOfSale ||
       this.application.applicationType.name === ApplicationTypeNames.FP ||
       this.application.applicationType.name === ApplicationTypeNames.FPRelo ||
-      (this.form.get('serviceHoursSundayOpen').valid
-        && this.form.get('serviceHoursMondayOpen').valid
-        && this.form.get('serviceHoursTuesdayOpen').valid
-        && this.form.get('serviceHoursWednesdayOpen').valid
-        && this.form.get('serviceHoursThursdayOpen').valid
-        && this.form.get('serviceHoursFridayOpen').valid
-        && this.form.get('serviceHoursSaturdayOpen').valid
-        && this.form.get('serviceHoursSundayClose').valid
-        && this.form.get('serviceHoursMondayClose').valid
-        && this.form.get('serviceHoursTuesdayClose').valid
-        && this.form.get('serviceHoursWednesdayClose').valid
-        && this.form.get('serviceHoursThursdayClose').valid
-        && this.form.get('serviceHoursFridayClose').valid
-        && this.form.get('serviceHoursSaturdayClose').valid
-      );
+      (this.form.get('serviceHoursSundayOpen').valid &&
+        this.form.get('serviceHoursMondayOpen').valid &&
+        this.form.get('serviceHoursTuesdayOpen').valid &&
+        this.form.get('serviceHoursWednesdayOpen').valid &&
+        this.form.get('serviceHoursThursdayOpen').valid &&
+        this.form.get('serviceHoursFridayOpen').valid &&
+        this.form.get('serviceHoursSaturdayOpen').valid &&
+        this.form.get('serviceHoursSundayClose').valid &&
+        this.form.get('serviceHoursMondayClose').valid &&
+        this.form.get('serviceHoursTuesdayClose').valid &&
+        this.form.get('serviceHoursWednesdayClose').valid &&
+        this.form.get('serviceHoursThursdayClose').valid &&
+        this.form.get('serviceHoursFridayClose').valid &&
+        this.form.get('serviceHoursSaturdayClose').valid)
+    );
   }
 
   private isHoursPopulated(hoursOpen, hoursClose, altHoursOpen): boolean {
@@ -898,64 +1096,134 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   private isHoursOfSalePopulated(): boolean {
-    if (!this.application.applicationType.showHoursOfSale ||
+    if (
+      !this.application.applicationType.showHoursOfSale ||
       this.application.applicationType.name === ApplicationTypeNames.FP ||
-      this.application.applicationType.name === ApplicationTypeNames.FPRelo) {
+      this.application.applicationType.name === ApplicationTypeNames.FPRelo
+    ) {
       return true;
     }
-    if (this.form.get('serviceHoursSundayOpen').value != '' && this.form.get('serviceHoursSundayClose').value != '' && this.form.get('serviceHoursSaturdayOpen').value != '') {
-      if (!this.isHoursPopulated(this.form.get('serviceHoursSundayOpen').value, this.form.get('serviceHoursSundayClose').value, this.form.get('serviceHoursSaturdayOpen').value)) {
+    if (
+      this.form.get('serviceHoursSundayOpen').value != '' &&
+      this.form.get('serviceHoursSundayClose').value != '' &&
+      this.form.get('serviceHoursSaturdayOpen').value != ''
+    ) {
+      if (
+        !this.isHoursPopulated(
+          this.form.get('serviceHoursSundayOpen').value,
+          this.form.get('serviceHoursSundayClose').value,
+          this.form.get('serviceHoursSaturdayOpen').value
+        )
+      ) {
         return false;
       }
     } else {
       return false;
     }
-    if (this.form.get('serviceHoursMondayOpen').value != '' && this.form.get('serviceHoursMondayClose').value != '' && this.form.get('serviceHoursSundayOpen').value != '') {
-      if (!this.isHoursPopulated(this.form.get('serviceHoursMondayOpen').value, this.form.get('serviceHoursMondayClose').value, this.form.get('serviceHoursSundayOpen').value)) {
+    if (
+      this.form.get('serviceHoursMondayOpen').value != '' &&
+      this.form.get('serviceHoursMondayClose').value != '' &&
+      this.form.get('serviceHoursSundayOpen').value != ''
+    ) {
+      if (
+        !this.isHoursPopulated(
+          this.form.get('serviceHoursMondayOpen').value,
+          this.form.get('serviceHoursMondayClose').value,
+          this.form.get('serviceHoursSundayOpen').value
+        )
+      ) {
         return false;
       }
     } else {
       return false;
     }
-    if (this.form.get('serviceHoursTuesdayOpen').value != '' && this.form.get('serviceHoursTuesdayClose').value != '' && this.form.get('serviceHoursMondayOpen').value != '') {
-      if (!this.isHoursPopulated(this.form.get('serviceHoursTuesdayOpen').value, this.form.get('serviceHoursTuesdayClose').value, this.form.get('serviceHoursMondayOpen').value)) {
+    if (
+      this.form.get('serviceHoursTuesdayOpen').value != '' &&
+      this.form.get('serviceHoursTuesdayClose').value != '' &&
+      this.form.get('serviceHoursMondayOpen').value != ''
+    ) {
+      if (
+        !this.isHoursPopulated(
+          this.form.get('serviceHoursTuesdayOpen').value,
+          this.form.get('serviceHoursTuesdayClose').value,
+          this.form.get('serviceHoursMondayOpen').value
+        )
+      ) {
         return false;
       }
     } else {
       return false;
     }
-    if (this.form.get('serviceHoursWednesdayOpen').value != '' && this.form.get('serviceHoursWednesdayClose').value != '' && this.form.get('serviceHoursTuesdayOpen').value != '') {
-      if (!this.isHoursPopulated(this.form.get('serviceHoursWednesdayOpen').value, this.form.get('serviceHoursWednesdayClose').value, this.form.get('serviceHoursTuesdayOpen').value)) {
+    if (
+      this.form.get('serviceHoursWednesdayOpen').value != '' &&
+      this.form.get('serviceHoursWednesdayClose').value != '' &&
+      this.form.get('serviceHoursTuesdayOpen').value != ''
+    ) {
+      if (
+        !this.isHoursPopulated(
+          this.form.get('serviceHoursWednesdayOpen').value,
+          this.form.get('serviceHoursWednesdayClose').value,
+          this.form.get('serviceHoursTuesdayOpen').value
+        )
+      ) {
         return false;
       }
     } else {
       return false;
     }
-    if (this.form.get('serviceHoursThursdayOpen').value != '' && this.form.get('serviceHoursThursdayClose').value != '' && this.form.get('serviceHoursWednesdayOpen').value != '') {
-      if (!this.isHoursPopulated(this.form.get('serviceHoursThursdayOpen').value, this.form.get('serviceHoursThursdayClose').value, this.form.get('serviceHoursWednesdayOpen').value)) {
+    if (
+      this.form.get('serviceHoursThursdayOpen').value != '' &&
+      this.form.get('serviceHoursThursdayClose').value != '' &&
+      this.form.get('serviceHoursWednesdayOpen').value != ''
+    ) {
+      if (
+        !this.isHoursPopulated(
+          this.form.get('serviceHoursThursdayOpen').value,
+          this.form.get('serviceHoursThursdayClose').value,
+          this.form.get('serviceHoursWednesdayOpen').value
+        )
+      ) {
         return false;
       }
     } else {
       return false;
     }
-    if (this.form.get('serviceHoursFridayOpen').value != '' && this.form.get('serviceHoursFridayClose').value != '' && this.form.get('serviceHoursThursdayOpen').value != '') {
-      if (!this.isHoursPopulated(this.form.get('serviceHoursFridayOpen').value, this.form.get('serviceHoursFridayClose').value, this.form.get('serviceHoursThursdayOpen').value)) {
+    if (
+      this.form.get('serviceHoursFridayOpen').value != '' &&
+      this.form.get('serviceHoursFridayClose').value != '' &&
+      this.form.get('serviceHoursThursdayOpen').value != ''
+    ) {
+      if (
+        !this.isHoursPopulated(
+          this.form.get('serviceHoursFridayOpen').value,
+          this.form.get('serviceHoursFridayClose').value,
+          this.form.get('serviceHoursThursdayOpen').value
+        )
+      ) {
         return false;
       }
     } else {
       return false;
     }
-    if (this.form.get('serviceHoursSaturdayOpen').value != '' && this.form.get('serviceHoursSaturdayClose').value != '' && this.form.get('serviceHoursFridayOpen').value != '') {
-      if (!this.isHoursPopulated(this.form.get('serviceHoursSaturdayOpen').value, this.form.get('serviceHoursSaturdayClose').value, this.form.get('serviceHoursFridayOpen').value)) {
+    if (
+      this.form.get('serviceHoursSaturdayOpen').value != '' &&
+      this.form.get('serviceHoursSaturdayClose').value != '' &&
+      this.form.get('serviceHoursFridayOpen').value != ''
+    ) {
+      if (
+        !this.isHoursPopulated(
+          this.form.get('serviceHoursSaturdayOpen').value,
+          this.form.get('serviceHoursSaturdayClose').value,
+          this.form.get('serviceHoursFridayOpen').value
+        )
+      ) {
         return false;
       }
-    }
-    else {
+    } else {
       return false;
     }
     return true;
   }
-
 
   lgHasReviewedZoning(): boolean {
     let hasReviewed = false;
@@ -974,7 +1242,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   canDeactivate(): Observable<boolean> {
-    const connectionsDidntChang = !(this.connectionsToProducers && this.connectionsToProducers.formHasChanged());
+    const connectionsDidntChang = !(
+      this.connectionToNonMedicalStores && this.connectionToNonMedicalStores.formHasChanged()
+    );
     const formDidntChange = JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value);
     if (connectionsDidntChang && formDidntChange) {
       return of(true);
@@ -988,42 +1258,44 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   checkPossibleProblematicWords() {
-    this.possibleProblematicNameWarning =
-      this.establishmentWatchWordsService.potentiallyProblematicValidator(this.form.get('establishmentName').value);
+    this.possibleProblematicNameWarning = this.establishmentWatchWordsService.potentiallyProblematicValidator(
+      this.form.get('establishmentName').value
+    );
   }
 
   showSitePlan(): boolean {
-    let show = this.application
-      && this.application.applicationType
-      && (this.showFormControl(this.application.applicationType.sitePlan)
-        || this.showFormControl(this.application.applicationType.showLiquorSitePlan));
+    let show =
+      this.application &&
+      this.application.applicationType &&
+      (this.showFormControl(this.application.applicationType.sitePlan) ||
+        this.showFormControl(this.application.applicationType.showLiquorSitePlan));
 
     if (this.application && this.application.applicationType.name === ApplicationTypeNames.CRSStructuralChange) {
-      show = this.showFormControl(this.application.applicationType.sitePlan)
-        && this.form.get('proposedChange').value === 'Yes';
+      show =
+        this.showFormControl(this.application.applicationType.sitePlan) &&
+        this.form.get('proposedChange').value === 'Yes';
     }
 
     return show;
   }
 
   showZoning(): boolean {
-    let show = this.application
-      && this.application.applicationType
-      && this.showFormControl(this.application.applicationType.proofofZoning);
+    let show =
+      this.application &&
+      this.application.applicationType &&
+      this.showFormControl(this.application.applicationType.proofofZoning);
     return show;
-
   }
   showServiceArea(): boolean {
-    let show = this.application
-      && this.application.applicationType
-      && this.application.applicationType.serviceAreas;
+    let show = this.application && this.application.applicationType && this.application.applicationType.serviceAreas;
     return show;
-
   }
   showExteriorChangeQuestion(): boolean {
-    let show = this.application &&
-      (this.application.applicationType.name === ApplicationTypeNames.CRSEstablishmentNameChange
-        && (this.application.licenseType === 'Cannabis Retail Store' || this.application.licenseType === 'S119 CRS Authorization'));
+    let show =
+      this.application &&
+      this.application.applicationType.name === ApplicationTypeNames.CRSEstablishmentNameChange &&
+      (this.application.licenseType === 'Cannabis Retail Store' ||
+        this.application.licenseType === 'S119 CRS Authorization');
 
     if (show) {
       this.form.get('proposedChange').setValidators([Validators.required]);
@@ -1036,28 +1308,28 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   showExteriorRenderings() {
-    let show = this.application &&
-      (this.application.applicationType.name === ApplicationTypeNames.CRSEstablishmentNameChange
-      );
+    let show =
+      this.application && this.application.applicationType.name === ApplicationTypeNames.CRSEstablishmentNameChange;
     show = show && this.form.get('proposedChange').value === 'Yes';
     return show;
   }
 
   showGroceryQuestion() {
-    let show = this.application
-      && this.application.applicationType
-      && this.showFormControl(this.application.applicationType.connectedGroceryStore);
+    let show =
+      this.application &&
+      this.application.applicationType &&
+      this.showFormControl(this.application.applicationType.connectedGroceryStore);
     return show;
   }
 
   showGroceryStore() {
-    let show = (this.application && this.showFormControl(this.application.applicationType.connectedGroceryStore));
+    let show = this.application && this.showFormControl(this.application.applicationType.connectedGroceryStore);
     // show = show && this.form.get('isLocatedInGroceryStore').value === 'Yes';
     return show;
   }
 
   showSitePhotos() {
-    let show = (this.application && this.showFormControl(this.application.applicationType.sitePhotos));
+    let show = this.application && this.showFormControl(this.application.applicationType.sitePhotos);
     return show;
   }
 
@@ -1070,7 +1342,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   isLiquor(): boolean {
-    return this.application.applicationType.category == "Liquor";
+    return this.application.applicationType.category == 'Liquor';
   }
   isRelocation(): boolean {
     return this.application.applicationType.isRelocation;
@@ -1082,25 +1354,33 @@ export class ApplicationComponent extends FormBase implements OnInit {
       description2 += '\n';
       description2 += this.form.get('hasValidInterest').value ? 'Has valid interest = Yes' : 'Has valid interest = No';
       description2 += '\n';
-      description2 += this.form.get('willHaveValidInterest').value ? 'Will have valid interest = Yes' : 'Will have valid interest = No';
+      description2 += this.form.get('willHaveValidInterest').value
+        ? 'Will have valid interest = Yes'
+        : 'Will have valid interest = No';
     }
 
     // flatten the service areas if need be
-    const serviceAreas = ('areas' in this.form.get('serviceAreas').value) ? this.form.get('serviceAreas').value['areas'] : this.form.get('serviceAreas').value;
-    const outsideAreas = ('areas' in this.form.get('outsideAreas').value) ? this.form.get('outsideAreas').value['areas'] : this.form.get('outsideAreas').value;
+    const serviceAreas =
+      'areas' in this.form.get('serviceAreas').value
+        ? this.form.get('serviceAreas').value['areas']
+        : this.form.get('serviceAreas').value;
+    const outsideAreas =
+      'areas' in this.form.get('outsideAreas').value
+        ? this.form.get('outsideAreas').value['areas']
+        : this.form.get('outsideAreas').value;
     const capacityArea = [this.form.get('capacityArea').value];
     if (capacityArea) {
       if (this.application.applicationType.name == ApplicationTypeNames.TemporaryExtensionOfLicensedAreaLP) {
         capacityArea.forEach((area: ServiceArea) => {
           area.isTemporaryExtensionArea = true;
-        })
+        });
       }
     }
     if (serviceAreas) {
       if (this.application.applicationType.name == ApplicationTypeNames.TemporaryExtensionOfLicensedAreaLP) {
         serviceAreas.forEach((area: ServiceArea) => {
           area.isTemporaryExtensionArea = true;
-        })
+        });
       }
     }
     return {
@@ -1110,8 +1390,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
       outsideAreas,
       capacityArea,
       indigenousNationId: this.form.value.indigenousNation && this.form.value.indigenousNation.id,
-      policeJurisdictionId: this.form.value.policeJurisdiction && this.form.value.policeJurisdiction.id,
-    }
+      policeJurisdictionId: this.form.value.policeJurisdiction && this.form.value.policeJurisdiction.id
+    };
   }
 
   /**
@@ -1133,24 +1413,31 @@ export class ApplicationComponent extends FormBase implements OnInit {
         ...appData
       }),
       this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
-    ).pipe(takeWhile(() => this.componentActive))
-      .pipe(catchError(() => {
-        this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-        const res: [boolean, Application] = [false, null];
-        return of(res);
-      }))
-      .pipe(mergeMap((data) => {
-        this.savedFormData = saveData;
-        let application = data[0];
-        this.updateApplicationInStore();
-        if (showProgress === true) {
-          this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
-        }
-        const res: [boolean, Application] = [true, <Application>application];
-        return of(res);
-      }));
+    )
+      .pipe(takeWhile(() => this.componentActive))
+      .pipe(
+        catchError(() => {
+          this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+          const res: [boolean, Application] = [false, null];
+          return of(res);
+        })
+      )
+      .pipe(
+        mergeMap((data) => {
+          this.savedFormData = saveData;
+          let application = data[0];
+          this.updateApplicationInStore();
+          if (showProgress === true) {
+            this.snackBar.open('Application has been saved', 'Success', {
+              duration: 2500,
+              panelClass: ['green-snackbar']
+            });
+          }
+          const res: [boolean, Application] = [true, <Application>application];
+          return of(res);
+        })
+      );
   }
-
 
   saveForLater() {
     this.saveForLaterInProgress = true;
@@ -1172,22 +1459,28 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
     let data = (<any>Object).assign(this.application.tiedHouse, _tiedHouseData);
     data = { ...data };
-    return this.tiedHouseService.updateTiedHouse(data, data.id);
+
+    if (this.application.tiedHouse.id) {
+      // If we have a primary id, update the existing connection
+      return this.tiedHouseService.updateCannabisTiedHouseConnection(data, data.id);
+    } else {
+      return this.tiedHouseService.upsertCannabisTiedHouseConnection(data, this.account.id);
+    }
   }
 
   updateApplicationInStore() {
-    this.applicationDataService.getApplicationById(this.applicationId)
+    this.applicationDataService
+      .getApplicationById(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((data: Application) => {
         this.store.dispatch(new currentApplicationActions.SetCurrentApplicationAction(data));
-      }
-      );
+      });
   }
 
   //LCSD-6495 NOTE: this logic is no necessary. If an application.applicationType is free, then the endorsement is free.
   //                so we only need checked the applicationType.isFree no matter the
   isFreeEndorsement(): boolean {
-    let freeEndorsement = this.application.applicationType.isFree && (this?.application?.assignedLicence == null);
+    let freeEndorsement = this.application.applicationType.isFree && this?.application?.assignedLicence == null;
     return freeEndorsement;
   }
 
@@ -1202,7 +1495,12 @@ export class ApplicationComponent extends FormBase implements OnInit {
       // save and try to generate an invoice.
       // if it's not free, nor a free endorsement, show the progress
       //LCSD-6495 if an application is not free, then it should not be a free endorsement.
-      this.busy = this.save((this.application.applicationType != undefined && !this.application.applicationType.isFree && !this.isFreeEndorsement()), <Application>{ invoiceTrigger: 1 }) // trigger invoice generation when saving
+      this.busy = this.save(
+        this.application.applicationType != undefined &&
+          !this.application.applicationType.isFree &&
+          !this.isFreeEndorsement(),
+        <Application>{ invoiceTrigger: 1 }
+      ) // trigger invoice generation when saving
         .pipe(takeWhile(() => this.componentActive))
         .subscribe(([saveSucceeded, app]) => {
           // if we saved successfully...
@@ -1210,33 +1508,43 @@ export class ApplicationComponent extends FormBase implements OnInit {
             // and payment is required due to an invoice being generated
             if (app && app.invoiceId) {
               // proceed to payment
-              this.submitPayment()
-                .subscribe(res => {
+              this.submitPayment().subscribe(
+                (res) => {
                   this.saveComplete.emit(true);
                   this.submitApplicationInProgress = false;
                 },
-                  error => {
-                    if (error === "Payment already made") {
-                      this.snackBar.open("Payment has already been made, Please return to the dashboard.", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
-                    } else {
-                      this.snackBar.open('Error submitting payment', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-                    }
-                    this.submitApplicationInProgress = false;
+                (error) => {
+                  if (error === 'Payment already made') {
+                    this.snackBar.open('Payment has already been made, Please return to the dashboard.', 'Fail', {
+                      duration: 3500,
+                      panelClass: ['red-snackbar']
+                    });
+                  } else {
+                    this.snackBar.open('Error submitting payment', 'Fail', {
+                      duration: 3500,
+                      panelClass: ['red-snackbar']
+                    });
                   }
-                );
+                  this.submitApplicationInProgress = false;
+                }
+              );
               // otherwise if there was no invoice generated, dynamics understood it to be a free application
             } else if (app) {
               // mark application as complete so dynamics handles the status change correctly
-              this.save(this.application.applicationType.isFree || this.isFreeEndorsement(), <Application>{ isApplicationComplete: 'Yes' })
-                .subscribe(res => {
-                  this.saveComplete.emit(true);
-                  // saving for later will redirect to the dashboard on its own
-                  // if this was a free app, we will need to redirect to the dashboard
-                  if (this.application.applicationType.isFree || this.isFreeEndorsement()) {
-                    this.snackBar.open('Application submitted', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
-                    this.router.navigateByUrl('/dashboard');
-                  }
-                });
+              this.save(this.application.applicationType.isFree || this.isFreeEndorsement(), <Application>{
+                isApplicationComplete: 'Yes'
+              }).subscribe((res) => {
+                this.saveComplete.emit(true);
+                // saving for later will redirect to the dashboard on its own
+                // if this was a free app, we will need to redirect to the dashboard
+                if (this.application.applicationType.isFree || this.isFreeEndorsement()) {
+                  this.snackBar.open('Application submitted', 'Success', {
+                    duration: 2500,
+                    panelClass: ['green-snackbar']
+                  });
+                  this.router.navigateByUrl('/dashboard');
+                }
+              });
             }
           } else {
             this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
@@ -1251,26 +1559,27 @@ export class ApplicationComponent extends FormBase implements OnInit {
   showFloorPlanSample(): boolean {
     const licenceTypeName = this.application?.licenseType;
     const applicationTypeName = this.application?.applicationType.name;
-    const isShow = (licenceTypeName == 'Food Primary' && applicationTypeName != 'Temporary Extension of Licensed Area')
-      || ((licenceTypeName == 'Liquor Primary' || licenceTypeName == 'Liquor Primary Club')
-        && (applicationTypeName == 'Liquor Primary'
-          || applicationTypeName == 'Liquor Primary Club'
-          || applicationTypeName == 'Liquor Primary Location Change'
-          || applicationTypeName == 'LP Relocation'
-          || applicationTypeName == 'Liquor Primary New Outdoor Patio'
-          || applicationTypeName == 'LP Structural (cap inc.)'
-          || applicationTypeName == 'LP Structural (no cap inc.)'));
+    const isShow =
+      (licenceTypeName == 'Food Primary' && applicationTypeName != 'Temporary Extension of Licensed Area') ||
+      ((licenceTypeName == 'Liquor Primary' || licenceTypeName == 'Liquor Primary Club') &&
+        (applicationTypeName == 'Liquor Primary' ||
+          applicationTypeName == 'Liquor Primary Club' ||
+          applicationTypeName == 'Liquor Primary Location Change' ||
+          applicationTypeName == 'LP Relocation' ||
+          applicationTypeName == 'Liquor Primary New Outdoor Patio' ||
+          applicationTypeName == 'LP Structural (cap inc.)' ||
+          applicationTypeName == 'LP Structural (no cap inc.)'));
     return isShow;
   }
 
   showMFGImages(): boolean {
-    const isit = this.application?.licenseType === 'Manufacturer'
-      && (this.application?.applicationType?.isEndorsement || this.application?.applicationType?.isStructural)
-      && !(this.application?.applicationType?.name != "Structural Changes to a Manufacturing Facility") // so the tests pass for some reason
-      && !this.application?.applicationType?.isDefault;
+    const isit =
+      this.application?.licenseType === 'Manufacturer' &&
+      (this.application?.applicationType?.isEndorsement || this.application?.applicationType?.isStructural) &&
+      !(this.application?.applicationType?.name != 'Structural Changes to a Manufacturing Facility') && // so the tests pass for some reason
+      !this.application?.applicationType?.isDefault;
     return isit;
   }
-
 
   submitForLGINApproval() {
     const saveData = this.form.value;
@@ -1285,19 +1594,31 @@ export class ApplicationComponent extends FormBase implements OnInit {
           applicationStatus: 'PendingForLGFNPFeedback'
         }),
         this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
-      ).pipe(takeWhile(() => this.componentActive))
-        .pipe(catchError(() => {
-          this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-          return of(false);
-        }))
-        .pipe(mergeMap(() => {
-          this.savedFormData = saveData;
-          this.updateApplicationInStore();
-          this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
-          return of(true);
-        })).subscribe(res => {
+      )
+        .pipe(takeWhile(() => this.componentActive))
+        .pipe(
+          catchError(() => {
+            this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+            return of(false);
+          })
+        )
+        .pipe(
+          mergeMap(() => {
+            this.savedFormData = saveData;
+            this.updateApplicationInStore();
+            this.snackBar.open('Application has been saved', 'Success', {
+              duration: 2500,
+              panelClass: ['green-snackbar']
+            });
+            return of(true);
+          })
+        )
+        .subscribe((res) => {
           this.saveComplete.emit(true);
-          this.snackBar.open('Application Submitted to Local Government For Approval', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+          this.snackBar.open('Application Submitted to Local Government For Approval', 'Success', {
+            duration: 2500,
+            panelClass: ['green-snackbar']
+          });
           this.router.navigateByUrl('/dashboard');
         });
     } else {
@@ -1311,7 +1632,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
     this.disableIncomplete = true;
     // Only save if the data is valid
 
-
     this.busy = forkJoin(
       this.applicationDataService.updateApplication({
         ...this.application,
@@ -1319,28 +1639,39 @@ export class ApplicationComponent extends FormBase implements OnInit {
         applicationStatus: 'UnderReview'
       }),
       this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
-    ).pipe(takeWhile(() => this.componentActive))
-      .pipe(catchError(() => {
-        this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-        return of(false);
-      }))
-      .pipe(mergeMap(() => {
-        this.savedFormData = saveData;
-        this.updateApplicationInStore();
-        this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
-        return of(true);
-      })).subscribe(res => {
+    )
+      .pipe(takeWhile(() => this.componentActive))
+      .pipe(
+        catchError(() => {
+          this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+          return of(false);
+        })
+      )
+      .pipe(
+        mergeMap(() => {
+          this.savedFormData = saveData;
+          this.updateApplicationInStore();
+          this.snackBar.open('Application has been saved', 'Success', {
+            duration: 2500,
+            panelClass: ['green-snackbar']
+          });
+          return of(true);
+        })
+      )
+      .subscribe((res) => {
         this.saveComplete.emit(true);
-        this.snackBar.open('Application Submitted to the Branch for Review', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+        this.snackBar.open('Application Submitted to the Branch for Review', 'Success', {
+          duration: 2500,
+          panelClass: ['green-snackbar']
+        });
         this.router.navigateByUrl('/dashboard');
       });
-
   }
-
 
   private proceedToSecurityScreening() {
     //send event to move to the next step of the multi-step
-    if (this.isValid()) { // Only proceed if the data is valid
+    if (this.isValid()) {
+      // Only proceed if the data is valid
       this.proceedToSecurityScreeningInProgress = true;
       this.busyPromise = this.save(true)
         .toPromise()
@@ -1357,23 +1688,24 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
   }
 
-
   private lGHasApproved() {
-    let hasApproved = this.application && this.application.applicationType &&
-      (this.application.applicationType.isShowLGINApproval &&
+    let hasApproved =
+      (this.application &&
+        this.application.applicationType &&
+        this.application.applicationType.isShowLGINApproval &&
         (this.application.lGApprovalDecision === 'Approved' ||
           this.application.lGApprovalDecision === 'OptOut' ||
-          this.application.lGApprovalDecision === 'Pending'
-        )
-      ) ||
+          this.application.lGApprovalDecision === 'Pending')) ||
       (this.application.applicationType.isShowLGZoningConfirmation && this.application.lgZoning === 'Allows');
     return hasApproved;
   }
 
   private lGHasRejected() {
-    let hasApproved = this.application && this.application.applicationType &&
-      (this.application.applicationType.isShowLGINApproval &&
-        (this.application.lGApprovalDecision === 'Rejected')) ||
+    let hasApproved =
+      (this.application &&
+        this.application.applicationType &&
+        this.application.applicationType.isShowLGINApproval &&
+        this.application.lGApprovalDecision === 'Rejected') ||
       (this.application.applicationType.isShowLGZoningConfirmation && this.application.lgZoning === 'DoesNotAllow');
     return hasApproved;
   }
@@ -1383,10 +1715,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
    */
   private establishmentNameIsChanging(): boolean {
     const isChanging: boolean =
-      (this?.application?.assignedLicence // if there is an existing licence
-        && this.form // the form is created
-        && this?.application?.assignedLicence?.establishmentName != this.form.get('establishmentName').value // the name is different
-      );
+      this?.application?.assignedLicence && // if there is an existing licence
+      this.form && // the form is created
+      this?.application?.assignedLicence?.establishmentName != this.form.get('establishmentName').value; // the name is different
     return isChanging;
   }
 
@@ -1394,31 +1725,39 @@ export class ApplicationComponent extends FormBase implements OnInit {
    * LCSD-6243: 2024-02-28 waynezen: prevent deep-linking by hiding Cmd buttons
    */
   private canVisitApplicationForm(): boolean {
-    const isAllowed: boolean = (
-      (this?.account.businessType === "LocalGovernment") ||
+    const isAllowed: boolean =
+      this?.account.businessType === 'LocalGovernment' ||
       this?.application?.applicationStatus === ApplicationStatuses.Intake ||
       this?.application?.applicationStatus === ApplicationStatuses.InProgress ||
       // 2024-04-24 waynezen: added
-      this?.application?.applicationStatus === ApplicationStatuses.Incomplete)
+      this?.application?.applicationStatus === ApplicationStatuses.Incomplete;
 
     return isAllowed;
   }
-
 
   /**
    * Redirect to payment processing page (Express Pay / Bambora service)
    * */
   private submitPayment() {
-    return this.paymentDataService.getPaymentSubmissionUrl(this.applicationId)
+    return this.paymentDataService
+      .getPaymentSubmissionUrl(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
-      .pipe(mergeMap(jsonUrl => {
-        window.location.href = jsonUrl['url'];
-        return jsonUrl['url'];
-      }, (err: any) => {
-        if (err._body === 'Payment already made') {
-          this.snackBar.open('Application payment has already been made, please refresh the page.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-        }
-      }));
+      .pipe(
+        mergeMap(
+          (jsonUrl) => {
+            window.location.href = jsonUrl['url'];
+            return jsonUrl['url'];
+          },
+          (err: any) => {
+            if (err._body === 'Payment already made') {
+              this.snackBar.open('Application payment has already been made, please refresh the page.', 'Fail', {
+                duration: 3500,
+                panelClass: ['red-snackbar']
+              });
+            }
+          }
+        )
+      );
   }
 
   /**
@@ -1433,7 +1772,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
     this.markControlsAsTouched(this.form);
     // handle supporting documents for sole proprietor who submit marketing applications
-    let marketing_soleprop = applicationTypeName === ApplicationTypeNames.Marketer && this.account.businessType === "SoleProprietorship";
+    let marketing_soleprop =
+      applicationTypeName === ApplicationTypeNames.Marketer && this.account.businessType === 'SoleProprietorship';
 
     if (this.proofOfZoning) {
       let zoningErrors = this.proofOfZoning.getValidationErrors();
@@ -1443,29 +1783,29 @@ export class ApplicationComponent extends FormBase implements OnInit {
       }
     }
 
-
-    const serviceArea = ('areas' in this.form.get('serviceAreas').value) ? this.form.get('serviceAreas').value['areas'] : this.form.get('serviceAreas').value;
+    const serviceArea =
+      'areas' in this.form.get('serviceAreas').value
+        ? this.form.get('serviceAreas').value['areas']
+        : this.form.get('serviceAreas').value;
 
     //if (this.showServiceArea() && serviceArea.length === 0 && (this.isLP() || ApplicationTypeNames.SpecialEventAreaEndorsement || ApplicationTypeNames.LoungeAreaEndorsment) )	{
     if (this.showServiceArea() && serviceArea.length === 0) {
       valid = false;
       this.validationMessages.push('At least one service area is required.');
     } else {
-
-
       if (!this.isOccupantLoadCorrect()) {
         valid = false;
-        this.validationMessages.push('The sum of occupant loads across all service areas does not match the total occupant load entered in the total occupant load field.');
+        this.validationMessages.push(
+          'The sum of occupant loads across all service areas does not match the total occupant load entered in the total occupant load field.'
+        );
       }
-
     }
 
     // optional for this application type
-    const signageNotRequired = (
+    const signageNotRequired =
       applicationTypeName === ApplicationTypeNames.LiquorLicenceTransfer ||
       applicationTypeName === ApplicationTypeNames.MFG ||
-      applicationTypeName === ApplicationTypeNames.LRSTransferofLocation
-    );
+      applicationTypeName === ApplicationTypeNames.LRSTransferofLocation;
 
     //    if ((this.establishmentNameIsChanging() || !signageNotRequired)
     //      && this.application.applicationType.signage === FormControlState.Show
@@ -1474,58 +1814,60 @@ export class ApplicationComponent extends FormBase implements OnInit {
     //      this.validationMessages.push('At least one signage document is required.');
     //    }
 
-    if (this.application.applicationType.validInterest === FormControlState.Show &&
-      ((this.uploadedValidInterestDocuments || 0) < 1)) {
+    if (
+      this.application.applicationType.validInterest === FormControlState.Show &&
+      (this.uploadedValidInterestDocuments || 0) < 1
+    ) {
       valid = false;
       this.validationMessages.push('At least one proof of ownership document is required.');
     }
 
-    if (this.showSitePlan() &&
-      ((this.uploadedSitePlanDocuments || 0) < 1)) {
+    if (this.showSitePlan() && (this.uploadedSitePlanDocuments || 0) < 1) {
       valid = false;
       this.validationMessages.push('At least one site plan document is required.');
     }
 
-    if (this.showExteriorRenderings() &&
-      ((this.uploadedPhotosOrRenderingsDocuments || 0) < 1)) {
+    if (this.showExteriorRenderings() && (this.uploadedPhotosOrRenderingsDocuments || 0) < 1) {
       valid = false;
       this.validationMessages.push('At least one store exterior rendering or photo is required.');
     }
 
     if (this.showLEDocumentSection()) {
-      if (this.businessTypeIsPrivateCorporation() &&
-        ((this.uploadedCentralSecuritiesRegisterDocuments || 0) < 1)) {
+      if (this.businessTypeIsPrivateCorporation() && (this.uploadedCentralSecuritiesRegisterDocuments || 0) < 1) {
         valid = false;
         this.validationMessages.push('At least one Central Securities Register document is required.');
       }
 
-      if ((this.businessTypeIsSociety() || this.businessTypeIsCorporation()) &&
-        ((this.uploadedNOA || 0) < 1)) {
+      if ((this.businessTypeIsSociety() || this.businessTypeIsCorporation()) && (this.uploadedNOA || 0) < 1) {
         valid = false;
         this.validationMessages.push('At least one Notice of Articles document is required.');
       }
 
-      if (this.account.isOtherBusinessType() &&
-        ((this.uploadedOrganizationDetails || 0) < 1)) {
+      if (this.account.isOtherBusinessType() && (this.uploadedOrganizationDetails || 0) < 1) {
         valid = false;
         this.validationMessages.push('At least one Organization Details document is required.');
       }
 
-      if (this.businessTypeIsPartnership() &&
-        ((this.uploadedPartnershipAgreement || 0) < 1)) {
+      if (this.businessTypeIsPartnership() && (this.uploadedPartnershipAgreement || 0) < 1) {
         valid = false;
         this.validationMessages.push('At least one Partnership Agreement document is required.');
       }
     }
 
-    if (this.application.applicationType.floorPlan === FormControlState.Show &&
-      this.application.applicationType.name !== ApplicationTypeNames.LRSTransferofLocation &&  // optional for this application type
-      ((this.uploadedFloorPlanDocuments || 0) < 1)) {
+    if (
+      this.application.applicationType.floorPlan === FormControlState.Show &&
+      this.application.applicationType.name !== ApplicationTypeNames.LRSTransferofLocation && // optional for this application type
+      (this.uploadedFloorPlanDocuments || 0) < 1
+    ) {
       valid = false;
       this.validationMessages.push('At least one floor plan document is required.');
     }
 
-    if (this.application.applicationType.showPropertyDetails && !this.form.get('establishmentName').value && this.application?.applicationType?.name != ApplicationTypeNames.TiedHouseExemptionApplication) {
+    if (
+      this.application.applicationType.showPropertyDetails &&
+      !this.form.get('establishmentName').value &&
+      this.application?.applicationType?.name != ApplicationTypeNames.TiedHouseExemptionApplication
+    ) {
       valid = false;
       this.validationMessages.push('Establishment name is required.');
     }
@@ -1535,7 +1877,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.validationMessages.push('Establishment Type is required.');
     }
     //LCSD-5784 the description1 is the Tied House Exemption Removal Identity Licnece JobNumber which is required.
-    if (this.application?.applicationType?.name === "Tied House Exemption Removal" && !this.form.get('description1').value) {
+    if (
+      this.application?.applicationType?.name === 'Tied House Exemption Removal' &&
+      !this.form.get('description1').value
+    ) {
       valid = false;
       this.validationMessages.push('Identify licence job number is required.');
     }
@@ -1549,71 +1894,97 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.validationMessages.push('Hours of sale are required');
     }
 
-
     if (this.application.applicationType.showOwnershipDeclaration) {
-
-      if (!this.form.get('isOwner').value && !(this.form.get('isOwnerBusiness') && this.form.get('isOwnerBusiness').value)) {
+      if (
+        !this.form.get('isOwner').value &&
+        !(this.form.get('isOwnerBusiness') && this.form.get('isOwnerBusiness').value)
+      ) {
         valid = false;
         this.validationMessages.push('Only the owner of the business may submit this information');
       }
 
       if (!this.form.get('hasValidInterest').value) {
         valid = false;
-        this.validationMessages.push('The owner of the business must own or have an agreement to purchase the proposed establishment, or, be the lessee or have a binding agreement to lease the proposed establishment');
+        this.validationMessages.push(
+          'The owner of the business must own or have an agreement to purchase the proposed establishment, or, be the lessee or have a binding agreement to lease the proposed establishment'
+        );
       }
 
       if (!this.form.get('willHaveValidInterest').value) {
         valid = false;
         this.validationMessages.push('Ownership or the lease agreement must be in place at the time of licensing');
       }
-
     }
-    if (this.application?.applicationType?.name === ApplicationTypeNames.DormancyReinstatement && (this.proofOfValidInterestDocuments || 0) < 1) {
+    if (
+      this.application?.applicationType?.name === ApplicationTypeNames.DormancyReinstatement &&
+      (this.proofOfValidInterestDocuments || 0) < 1
+    ) {
       valid = false;
       this.validationMessages.push('At least one proof of valid interest document is required.');
     }
     // special validation for RLRS
 
-    if (this.form.get('isRlrsLocatedInRuralCommunityAlone')
-      && this.form.get('isRlrsLocatedAtTouristDestinationAlone')
-      && this.form.get('isRlrsLocatedInRuralCommunityAlone').value
-      && this.form.get('isRlrsLocatedInRuralCommunityAlone').value !== 845280000 // NOT YES
-      && !this.form.get('isRlrsLocatedAtTouristDestinationAlone').value // NO VALUE FOR IS LOCATED AT TOURIST DESTINATION ALONE
+    if (
+      this.form.get('isRlrsLocatedInRuralCommunityAlone') &&
+      this.form.get('isRlrsLocatedAtTouristDestinationAlone') &&
+      this.form.get('isRlrsLocatedInRuralCommunityAlone').value &&
+      this.form.get('isRlrsLocatedInRuralCommunityAlone').value !== 845280000 && // NOT YES
+      !this.form.get('isRlrsLocatedAtTouristDestinationAlone').value // NO VALUE FOR IS LOCATED AT TOURIST DESTINATION ALONE
     ) {
       valid = false;
-      this.validationMessages.push('Please enter a value for Is the proposed RLRS located in a tourist destination resort with no other RLRS?');
+      this.validationMessages.push(
+        'Please enter a value for Is the proposed RLRS located in a tourist destination resort with no other RLRS?'
+      );
     }
 
-    if (this.form.get('isRlrsLocatedAtTouristDestinationAlone')
-      && this.form.get('rlrsResortCommunityDescription')
-      && this.form.get('isRlrsLocatedAtTouristDestinationAlone').value
-      && this.form.get('isRlrsLocatedAtTouristDestinationAlone').value === 845280000 // IS YES
-      && !this.form.get('rlrsResortCommunityDescription').value // NO VALUE FOR DESCRIPTION
+    if (
+      this.form.get('isRlrsLocatedAtTouristDestinationAlone') &&
+      this.form.get('rlrsResortCommunityDescription') &&
+      this.form.get('isRlrsLocatedAtTouristDestinationAlone').value &&
+      this.form.get('isRlrsLocatedAtTouristDestinationAlone').value === 845280000 && // IS YES
+      !this.form.get('rlrsResortCommunityDescription').value // NO VALUE FOR DESCRIPTION
     ) {
       valid = false;
       this.validationMessages.push('Resort community description is required.');
     }
 
-    if (this.application?.applicationType?.name === 'Picnic Area Endorsement' && this.application?.applicationType?.showZoningDeclarations) {
+    if (
+      this.application?.applicationType?.name === 'Picnic Area Endorsement' &&
+      this.application?.applicationType?.showZoningDeclarations
+    ) {
       if (!this.form.get('picnicReadAndAccept').value || this.form.get('picnicReadAndAccept').value == 0) {
         valid = false;
-        this.validationMessages.push('Please confirm have picnic area declaration read and understand the term and conditions.');
+        this.validationMessages.push(
+          'Please confirm have picnic area declaration read and understand the term and conditions.'
+        );
       }
       if (!this.form.get('picnicConfirmZoning').value || this.form.get('picnicConfirmZoning').value == 0) {
         valid = false;
-        this.validationMessages.push('Please confirm  picnic area declaration local zoning allows for the operation of a picnic area endorsement.');
+        this.validationMessages.push(
+          'Please confirm  picnic area declaration local zoning allows for the operation of a picnic area endorsement.'
+        );
       }
       if (!this.form.get('picnicConfirmLGFNCapacity').value || this.form.get('picnicConfirmLGFNCapacity').value == 0) {
         valid = false;
-        this.validationMessages.push('Please confirm  picnic area declaration local government/First Nation supports the proposed capacity for the picnic area endorsement.');
+        this.validationMessages.push(
+          'Please confirm  picnic area declaration local government/First Nation supports the proposed capacity for the picnic area endorsement.'
+        );
       }
     }
-    if (this.form.get('uploadDeclarations').value != true && (this.application?.applicationType.name == ApplicationTypeNames.LoungeAreaEndorsment || this.application?.applicationType.name == ApplicationTypeNames.SpecialEventAreaEndorsement)) {
+    if (
+      this.form.get('uploadDeclarations').value != true &&
+      (this.application?.applicationType.name == ApplicationTypeNames.LoungeAreaEndorsment ||
+        this.application?.applicationType.name == ApplicationTypeNames.SpecialEventAreaEndorsement)
+    ) {
       valid = false;
       this.validationMessages.push('Requirements For Operating is required.');
     }
 
-    if (!this.form.get('productsListAndDescription').value && this.application.applicationType.name === ApplicationTypeNames.MFG && this.form.get("licenceSubCategory").value != "Co-Packer") {
+    if (
+      !this.form.get('productsListAndDescription').value &&
+      this.application.applicationType.name === ApplicationTypeNames.MFG &&
+      this.form.get('licenceSubCategory').value != 'Co-Packer'
+    ) {
       valid = false;
       this.validationMessages.push('Please add products list and description.');
     }
@@ -1628,35 +1999,49 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
 
     if (this.application?.applicationType.name == ApplicationTypeNames.MFG) {
-      if (this.form.get("licenceSubCategory").value === "Brewery" &&
-        (this.form.get('mfrSupInfoReadUnderstand').value != true || this.form.get('mfrSupInfoOwnRent').value != true ||
-          this.form.get('mfrSupInfoProductionEquipment').value != true)) {
+      if (
+        this.form.get('licenceSubCategory').value === 'Brewery' &&
+        (this.form.get('mfrSupInfoReadUnderstand').value != true ||
+          this.form.get('mfrSupInfoOwnRent').value != true ||
+          this.form.get('mfrSupInfoProductionEquipment').value != true)
+      ) {
         valid = false;
         this.validationMessages.push('Manufacture supporting Information is required.');
       }
 
-      if (this.form.get("licenceSubCategory").value === "Winery" &&
-        (this.form.get('mfrSupInfoReadUnderstand').value != true || this.form.get('mfrSupInfoOwnRent').value != true ||
-          this.form.get('mfrSupInfoIntendProduce').value != true || this.form.get('mfrSupInfoProductionEquipment').value != true)) {
+      if (
+        this.form.get('licenceSubCategory').value === 'Winery' &&
+        (this.form.get('mfrSupInfoReadUnderstand').value != true ||
+          this.form.get('mfrSupInfoOwnRent').value != true ||
+          this.form.get('mfrSupInfoIntendProduce').value != true ||
+          this.form.get('mfrSupInfoProductionEquipment').value != true)
+      ) {
         valid = false;
         this.validationMessages.push('Manufacture supporting Information is required.');
       }
 
-      if (this.form.get("licenceSubCategory").value === "Co-Packer" &&
-        this.form.get('mfrSupInfoReadUnderstand').value != true) {
+      if (
+        this.form.get('licenceSubCategory').value === 'Co-Packer' &&
+        this.form.get('mfrSupInfoReadUnderstand').value != true
+      ) {
         valid = false;
         this.validationMessages.push('Manufacture supporting Information is required.');
       }
 
-      if (this.form.get("licenceSubCategory").value === "Distillery" &&
-        (this.form.get('mfrSupInfoReadUnderstand').value != true || this.form.get('mfrSupInfoOwnRent').value != true ||
-          this.form.get('mfrSupInfoProductionEquipment').value != true)) {
+      if (
+        this.form.get('licenceSubCategory').value === 'Distillery' &&
+        (this.form.get('mfrSupInfoReadUnderstand').value != true ||
+          this.form.get('mfrSupInfoOwnRent').value != true ||
+          this.form.get('mfrSupInfoProductionEquipment').value != true)
+      ) {
         valid = false;
         this.validationMessages.push('Manufacture supporting Information is required.');
       }
-
     }
-    if (this.application?.applicationType.name == "Temporary Delicensing" || this.application?.applicationType.name == "Temporary Patron Participation Entertainment Endorsement") {
+    if (
+      this.application?.applicationType.name == 'Temporary Delicensing' ||
+      this.application?.applicationType.name == 'Temporary Patron Participation Entertainment Endorsement'
+    ) {
       if (!this.form.get('tempSuspensionOrPatronParticipationStart').value) {
         valid = false;
         this.validationMessages.push('Start date is required.');
@@ -1665,7 +2050,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
         valid = false;
         this.validationMessages.push('End date is required.');
       }
-      if (this.form.get('tempSuspensionOrPatronParticipationEnd').value < this.form.get('tempSuspensionOrPatronParticipationStart').value) {
+      if (
+        this.form.get('tempSuspensionOrPatronParticipationEnd').value <
+        this.form.get('tempSuspensionOrPatronParticipationStart').value
+      ) {
         valid = false;
         this.validationMessages.push('Start date should be before the end date.');
       }
@@ -1673,15 +2061,24 @@ export class ApplicationComponent extends FormBase implements OnInit {
     if (this.application?.applicationType?.name == ApplicationTypeNames.ManufacturerLocationChange) {
       if (this.application.relocateOnSiteStore == true && this.application.confirmPermitsRetailSales != true) {
         valid = false;
-        this.validationMessages.push('Please confirm that zoning at the proposed location permits retail sales for off-site consumption.');
+        this.validationMessages.push(
+          'Please confirm that zoning at the proposed location permits retail sales for off-site consumption.'
+        );
       }
-      if (this.application.relocatePicnicAreaEndorsement == true && this.application.confirmrelocatePicnicAreaEndorsement != true) {
+      if (
+        this.application.relocatePicnicAreaEndorsement == true &&
+        this.application.confirmrelocatePicnicAreaEndorsement != true
+      ) {
         valid = false;
-        this.validationMessages.push('Please confirm that zoning at the proposed location permits the operation of picnic area endorsement.');
+        this.validationMessages.push(
+          'Please confirm that zoning at the proposed location permits the operation of picnic area endorsement.'
+        );
       }
       if (this.application.relocateWinaryLicence == true && this.application.confirmRelocateWinaryLicence != true) {
         valid = false;
-        this.validationMessages.push('Please confirm that you are understanding of the following requirements for a winery licence.');
+        this.validationMessages.push(
+          'Please confirm that you are understanding of the following requirements for a winery licence.'
+        );
       }
     }
     //Dormancy
@@ -1698,26 +2095,28 @@ export class ApplicationComponent extends FormBase implements OnInit {
         valid = false;
         this.validationMessages.push('Please Affirm it is Valid Interest Dormancy Period.');
       }
-
     }
     // 2024-02-06 LCSD-6170 waynezen: Add form-level Validation errors for Patio fields
     if (this.form.get('isHasPatio') && this.getHasPatio() === true) {
-
       if (!this.isValidYesNoFieldRequireTrue('isBoundingSufficientForControl')) {
         valid = false;
-        this.validationMessages.push('Patio service bounding - For you to monitor and control patron entry and exit? Field is required.');
+        this.validationMessages.push(
+          'Patio service bounding - For you to monitor and control patron entry and exit? Field is required.'
+        );
       }
       if (!this.isValidYesNoFieldRequireTrue('isBoundingSufficientToDefine')) {
         valid = false;
-        this.validationMessages.push('Patio service bounding - To visually and physically define the service area? Field is required.');
+        this.validationMessages.push(
+          'Patio service bounding - To visually and physically define the service area? Field is required.'
+        );
       }
       if (!this.isValidYesNoFieldRequireTrue('isAdequateCare')) {
         valid = false;
-        this.validationMessages.push('Patio area - You will take appropriate measures to maintain care and control? Field is required.');
+        this.validationMessages.push(
+          'Patio area - You will take appropriate measures to maintain care and control? Field is required.'
+        );
       }
-
     }
-
 
     return valid && (this.form.valid || this.form.disabled);
   }
@@ -1737,18 +2136,15 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   private getHasPatio(): boolean {
-
     let appType = this?.application?.applicationType;
 
     if (this.isPatioActive(appType)) {
       return true;
-    }
-    else {
+    } else {
       let hasPatio: boolean = this.form.get('isHasPatio').value;
       return hasPatio;
     }
   }
-
 
   // 2024-02-06 LCSD-6170 waynezen: Validation function for Dyn 365 Field defined as 2-option and drop-down values=Yes / No and Required
   isValidYesNoFieldRequireTrue(field: string): boolean {
@@ -1758,8 +2154,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     if (chkboxValidator && chkboxVal !== true) {
       // field is required but value isn't true - return fail.
       return false;
-    }
-    else {
+    } else {
       return true;
     }
   }
@@ -1780,26 +2175,34 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   showHoldsOtherManufactureLicence(): boolean {
-    const show = ['Special Event Area Endorsement', 'Lounge Area Endorsement', 'MFG New Outdoor Patio', 'Structural Changes to an Approved Lounge or Special Event Area(cap increase)']
-      .indexOf(this?.application?.applicationType?.name) !== -1;
+    const show =
+      [
+        'Special Event Area Endorsement',
+        'Lounge Area Endorsement',
+        'MFG New Outdoor Patio',
+        'Structural Changes to an Approved Lounge or Special Event Area(cap increase)'
+      ].indexOf(this?.application?.applicationType?.name) !== -1;
     return show;
   }
 
   showSubmitToLG(): boolean {
-
     // local governments don't submit to themselves...
-    let show = (this?.application?.applicationType?.isShowLGINApproval || this?.application?.applicationType?.isShowLGZoningConfirmation) && this.account.businessType !== 'LocalGovernment'
-      && !this.lGHasApproved()
-      && !this.lGHasRejected()
-      && (this.form.get('holdsOtherManufactureLicence1').value == false || this.form.get('holdsOtherManufactureLicence2').value == false)
-      && this?.application?.applicationStatus === 'Intake';
+    let show =
+      (this?.application?.applicationType?.isShowLGINApproval ||
+        this?.application?.applicationType?.isShowLGZoningConfirmation) &&
+      this.account.businessType !== 'LocalGovernment' &&
+      !this.lGHasApproved() &&
+      !this.lGHasRejected() &&
+      (this.form.get('holdsOtherManufactureLicence1').value == false ||
+        this.form.get('holdsOtherManufactureLicence2').value == false) &&
+      this?.application?.applicationStatus === 'Intake';
     return show;
   }
 
   getValidationErrorMap() {
     let errorMap = {
-      establishmentName: (_ => {
-        let control = this.getEstablishmentLabel(<ApplicationTypeNames>(this.application.applicationType.name))
+      establishmentName: ((_) => {
+        let control = this.getEstablishmentLabel(<ApplicationTypeNames>this.application.applicationType.name);
         let message = '';
         if (this.form && this.form.get('establishmentName')) {
           let errors = this.form.get('establishmentName').errors;
@@ -1812,7 +2215,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
         return message;
       })(),
 
-      signatureAgreement: 'Please affirm that all of the information provided for this application is true and complete',
+      signatureAgreement:
+        'Please affirm that all of the information provided for this application is true and complete',
 
       description1: 'Please enter a description',
       IsReadyProductNotVisibleOutside: 'Please confirm that product will not be visible from the outside',
@@ -1822,10 +2226,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
       applyingPerson: 'Please enter the applying person',
       authorizedToSubmit: 'Please affirm that you are authorized to submit the application',
       'capacityArea.capacity': 'Please enter capacity area',
-      contactPersonEmail: 'Please enter the business contact\'s email address',
-      contactPersonFirstName: 'Please enter the business contact\'s first name',
-      contactPersonLastName: 'Please enter the business contact\'s last name',
-      contactPersonPhone: 'Please enter the business contact\'s 10-digit phone number',
+      contactPersonEmail: "Please enter the business contact's email address",
+      contactPersonFirstName: "Please enter the business contact's first name",
+      contactPersonLastName: "Please enter the business contact's last name",
+      contactPersonPhone: "Please enter the business contact's 10-digit phone number",
       contactPersonRole: 'Please enter the contact person role',
 
       establishmentAddressStreet: 'Please enter the street address',
@@ -1867,7 +2271,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
       lGTitlePosition: 'Please enter a value for local government title of position',
       lgZoning: 'Please enter a value for local government zoning',
       licenceSubCategory: 'Please select the licence sub category',
-      liquorIndustryConnections: 'Please specify whether you or any of your shareholders, have any connection with a distillery, brewery or winery',
+      liquorIndustryConnections:
+        'Please specify whether you or any of your shareholders, have any connection with a distillery, brewery or winery',
       liquorIndustryConnectionsDetails: 'Please enter industry connection details',
       locatedAboveDescription: 'Please enter a value for located above description',
       mfgAcresOfFruit: 'Please enter a value for acres of fruit',
@@ -1931,7 +2336,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
       fpAddressPostalCode: 'Please enter the Federal production postal code'
     };
 
-
     // add the dynamic fields to the error map.
     if (this.dynamicsForm) {
       this.dynamicsForm.tabs.forEach(function (tab) {
@@ -1945,24 +2349,17 @@ export class ApplicationComponent extends FormBase implements OnInit {
               }
             }, this);
           }
-
         }, this);
       }, this);
     }
 
-
-
     return errorMap;
   }
-
-
-
 
   /**
    * Dialog to confirm the application cancellation (status changed to "Termindated")
    */
   cancelApplication() {
-
     const dialogConfig = {
       disableClose: true,
       autoFocus: true,
@@ -1976,66 +2373,83 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
     // open dialog, get reference and process returned data from dialog
     const dialogRef = this.dialog.open(ApplicationCancellationDialogComponent, dialogConfig);
-    dialogRef.afterClosed()
+    dialogRef
+      .afterClosed()
       .pipe(takeWhile(() => this.componentActive))
-      .subscribe(cancelApplication => {
+      .subscribe((cancelApplication) => {
         if (cancelApplication) {
           // delete the application.
-          this.busy = this.applicationDataService.cancelApplication(this.applicationId)
+          this.busy = this.applicationDataService
+            .cancelApplication(this.applicationId)
             .pipe(takeWhile(() => this.componentActive))
-            .subscribe(() => {
-              this.savedFormData = this.form.value;
-              this.router.navigate(['/dashboard']);
-            },
+            .subscribe(
               () => {
-                this.snackBar.open('Error cancelling the application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+                this.savedFormData = this.form.value;
+                this.router.navigate(['/dashboard']);
+              },
+              () => {
+                this.snackBar.open('Error cancelling the application', 'Fail', {
+                  duration: 3500,
+                  panelClass: ['red-snackbar']
+                });
                 console.error('Error cancelling the application');
-              });
+              }
+            );
         }
       });
   }
 
   businessTypeIsPartnership(): boolean {
-    return this.account &&
-      ['GeneralPartnership',
-        'LimitedPartnership',
-        'LimitedLiabilityPartnership',
-        'Partnership'].indexOf(this.account.businessType) !== -1;
+    return (
+      this.account &&
+      ['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership', 'Partnership'].indexOf(
+        this.account.businessType
+      ) !== -1
+    );
   }
 
   businessTypeIsPrivateCorporation(): boolean {
-    return this.account &&
-      ['PrivateCorporation',
-        'UnlimitedLiabilityCorporation',
-        'LimitedLiabilityCorporation'].indexOf(this.account.businessType) !== -1;
+    return (
+      this.account &&
+      ['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation'].indexOf(
+        this.account.businessType
+      ) !== -1
+    );
   }
 
   businessTypeIsCorporation(): boolean {
-    return this.businessTypeIsPrivateCorporation() || (this.account && ['PublicCorporation'].indexOf(this.account.businessType) !== -1);
+    return (
+      this.businessTypeIsPrivateCorporation() ||
+      (this.account && ['PublicCorporation'].indexOf(this.account.businessType) !== -1)
+    );
   }
 
   businessTypeIsSoleProp(): boolean {
-    return (this.account && ['SoleProprietorship'].indexOf(this.account.businessType) !== -1);
+    return this.account && ['SoleProprietorship'].indexOf(this.account.businessType) !== -1;
   }
 
   businessTypeIsSociety(): boolean {
-    return (this.account && ['Society'].indexOf(this.account.businessType) !== -1);
+    return this.account && ['Society'].indexOf(this.account.businessType) !== -1;
   }
 
   canRenameEstablishment(): boolean {
-    return (this.application?.applicationType?.name === ApplicationTypeNames.LiquorLicenceTransfer ||
+    return (
+      this.application?.applicationType?.name === ApplicationTypeNames.LiquorLicenceTransfer ||
       (this.application?.applicationType?.establishmentName !== FormControlState.ReadOnly &&
-        this.showFormControl(this.application?.applicationType?.currentEstablishmentAddress)));
+        this.showFormControl(this.application?.applicationType?.currentEstablishmentAddress))
+    );
   }
 
   isCRSRenewalApplication(): boolean {
-    return this.application
-      && this.application.applicationType
-      && [
+    return (
+      this.application &&
+      this.application.applicationType &&
+      [
         ApplicationTypeNames.CRSRenewal.toString(),
         ApplicationTypeNames.CRSRenewalLate30.toString(),
-        ApplicationTypeNames.CRSRenewalLate6Months.toString(),
-      ].indexOf(this.application.applicationType.name) !== -1;
+        ApplicationTypeNames.CRSRenewalLate6Months.toString()
+      ].indexOf(this.application.applicationType.name) !== -1
+    );
   }
 
   isFormControlDisabled(fieldName: string): boolean {
@@ -2044,7 +2458,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   getEstablishmentLabel(applicationTypeName: ApplicationTypeNames): string {
     let label = 'Establishment Name';
-    if ([ApplicationTypeNames.CRSTransferofOwnership, ApplicationTypeNames.CRSLocationChange].indexOf(applicationTypeName) !== -1) {
+    if (
+      [ApplicationTypeNames.CRSTransferofOwnership, ApplicationTypeNames.CRSLocationChange].indexOf(
+        applicationTypeName
+      ) !== -1
+    ) {
       label = 'Name of the Proposed Establishment';
     } else if (applicationTypeName === ApplicationTypeNames.CRSEstablishmentNameChange) {
       label = 'Proposed New Name';
@@ -2064,7 +2482,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   isLP(): boolean {
-    return this.application?.applicationType?.name === ApplicationTypeNames.LP || this.application?.applicationType?.name === ApplicationTypeNames.LPR || this.application?.applicationType?.name === ApplicationTypeNames.LPC;
+    return (
+      this.application?.applicationType?.name === ApplicationTypeNames.LP ||
+      this.application?.applicationType?.name === ApplicationTypeNames.LPR ||
+      this.application?.applicationType?.name === ApplicationTypeNames.LPC
+    );
   }
 
   isTemporaryRelocation(): boolean {
@@ -2093,7 +2515,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
                 }
               }, this);
             }
-
           }, this);
         }, this);
       }
@@ -2101,14 +2522,15 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   showValidInterestforTransfer() {
-    return (this.application.applicationType.name === ApplicationTypeNames.LiquorLicenceTransfer &&
-      (this.application.licenseType === "Licensee Retail Store"
-        || this.application.licenseType === "Wine Store"
-        || this.application.licenseType === "Rural Licensee Retail Store"));
+    return (
+      this.application.applicationType.name === ApplicationTypeNames.LiquorLicenceTransfer &&
+      (this.application.licenseType === 'Licensee Retail Store' ||
+        this.application.licenseType === 'Wine Store' ||
+        this.application.licenseType === 'Rural Licensee Retail Store')
+    );
   }
 
   showDynamicForm(formReference, tabs) {
-
     if (this.form.get('isHasPatio').enabled) {
       this.updateDynamicValidation();
 
@@ -2119,7 +2541,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   onLicenceSelect(assignedLicence: RelatedLicence) {
     this.licenseToRemove = assignedLicence;
-    this.form.get("description1").patchValue(this.licenseToRemove.name);
+    this.form.get('description1').patchValue(this.licenseToRemove.name);
   }
 
   validateInput(event: Event): void {
@@ -2128,16 +2550,18 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   isOccupantLoadCorrect(): Boolean {
-
     if (this.hideOcupantLoadFields()) {
       this.form.get('totalOccupantLoadExceed').disable();
       return true;
     }
 
-    const serviceArea = ('areas' in this.form.get('serviceAreas').value) ? this.form.get('serviceAreas').value['areas'] : this.form.get('serviceAreas').value;
-    let totalCapacity = serviceArea.reduce((sum, item) => Number(sum + (+item.capacity)), 0);
+    const serviceArea =
+      'areas' in this.form.get('serviceAreas').value
+        ? this.form.get('serviceAreas').value['areas']
+        : this.form.get('serviceAreas').value;
+    let totalCapacity = serviceArea.reduce((sum, item) => Number(sum + +item.capacity), 0);
     let totalOccupantLoad = this.form.get('totalOccupantLoad').value | 0;
-    const isExceeded: boolean = totalCapacity > totalOccupantLoad
+    const isExceeded: boolean = totalCapacity > totalOccupantLoad;
     if (isExceeded) {
       this.form.get('totalOccupantLoadExceed').enable();
       this.form.get('totalOccupantLoadExceed').enable();
@@ -2157,8 +2581,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   private hasInvoiceTriggerRun(): boolean {
-    const hasRun: boolean = (
-      this?.application?.invoiceTrigger === 1)
+    const hasRun: boolean = this?.application?.invoiceTrigger === 1;
     return hasRun;
   }
 
@@ -2166,9 +2589,14 @@ export class ApplicationComponent extends FormBase implements OnInit {
     const selectedAddress: Address = event.option.value;
     this.form.get('establishmentAddressStreet').setValue(selectedAddress.fullAddress);
     this.form.get('establishmentAddressCity').setValue(selectedAddress.localityName);
-    this.form.get('establishmentParcelId').setValue("");
+    this.form.get('establishmentParcelId').setValue('');
 
-    if (selectedAddress && selectedAddress.siteID !== undefined && selectedAddress.siteID !== null && selectedAddress.siteID !== "") {
+    if (
+      selectedAddress &&
+      selectedAddress.siteID !== undefined &&
+      selectedAddress.siteID !== null &&
+      selectedAddress.siteID !== ''
+    ) {
       this.addressService.getPid(selectedAddress.siteID).subscribe(
         (response: string) => {
           try {
@@ -2194,7 +2622,5 @@ export class ApplicationComponent extends FormBase implements OnInit {
         }
       );
     }
-
   }
 }
-

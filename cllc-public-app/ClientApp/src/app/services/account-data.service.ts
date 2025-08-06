@@ -9,10 +9,10 @@ import { TiedHouseConnection } from "@models/tied-house-connection.model";
 import { Store } from "@ngrx/store";
 import { AppState } from "@app/app-state/models/app-state";
 import { SetCurrentAccountAction } from "@app/app-state/actions/current-account.action";
-import { TiedHouseConnectionsDataService } from "@services/tied-house-connections-data.service";
 import { LegalEntityDataService } from "@services/legal-entity-data.service";
 import { FileSystemItem } from "@models/file-system-item.model";
 import { Contact } from "../models/contact.model";
+import { AccountSummary } from "@models/account-summary.model";
 
 @Injectable()
 export class AccountDataService extends DataService {
@@ -20,7 +20,6 @@ export class AccountDataService extends DataService {
   apiPath = "api/accounts/";
 
   constructor(private http: HttpClient,
-    private tiedHouseService: TiedHouseConnectionsDataService,
     private legalEntityDataService: LegalEntityDataService,
     private store: Store<AppState>) {
     super();
@@ -48,12 +47,10 @@ export class AccountDataService extends DataService {
 
   loadCurrentAccountToStore(id: string) {
     return forkJoin(this.getAccount(id),
-        this.tiedHouseService.getTiedHouse(id),
         this.legalEntityDataService.getBusinessProfileSummary())
       .pipe(map(data => {
         const account: Account = data[0];
-        account.tiedHouse = data[1];
-        account.legalEntity = data[2].length ? data[2][0] : null;
+        account.legalEntity = data[1].length ? data[1][0] : null;
         this.store.dispatch(new SetCurrentAccountAction({ ...account } as Account));
         return account;
       }));
@@ -71,11 +68,6 @@ export class AccountDataService extends DataService {
 
   updateAccount(accountModel: Account) {
     return this.http.put(this.apiPath + accountModel.id, accountModel, { headers: this.headers })
-      .pipe(catchError(this.handleError));
-  }
-
-  createTiedHouseConnection(tiedHouse: TiedHouseConnection, accountId: string) {
-    return this.http.post(this.apiPath + accountId + "/tiedhouseconnection", tiedHouse, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
@@ -109,5 +101,19 @@ export class AccountDataService extends DataService {
         }`;
     }
     return files;
+  }
+
+  /**
+   * Returns a summary of the current user's account. This contains basic high level information about the account and
+   * all licences they have. This is useful for conditional logic that depends on a user having or not having certain
+   * licences.
+   *
+   * Note: The supporting controller could be expanded to include other high level information, as needed.
+   *
+   * @return {*}  {Observable<AccountSummary>}
+   */
+  getAccountSummary(): Observable<AccountSummary> {
+    return this.http.get<AccountSummary>(`${this.apiPath}current/summary`, { headers: this.headers })
+      .pipe(catchError(this.handleError));
   }
 }

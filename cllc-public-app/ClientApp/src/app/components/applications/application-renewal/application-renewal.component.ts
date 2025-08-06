@@ -18,8 +18,6 @@ import { FormBase, ApplicationHTMLContent } from "@shared/form-base";
 import { Account } from "@models/account.model";
 import { ApplicationTypeNames, FormControlState } from "@models/application-type.model";
 import { LicenceTypeNames} from "@models/license-type.model";
-import { TiedHouseConnection } from "@models/tied-house-connection.model";
-import { TiedHouseConnectionsDataService } from "@services/tied-house-connections-data.service";
 import { EstablishmentWatchWordsService } from "@services/establishment-watch-words.service";
 import { FeatureFlagService } from "@services/feature-flag.service";
 import { LicenseDataService } from "@app/services/license-data.service";
@@ -76,8 +74,6 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
   payMethod: string;
   validationMessages: any[];
   showValidationMessages: boolean;
-  submittedApplications = 8;
-  tiedHouseFormData: TiedHouseConnection;
   possibleProblematicNameWarning = false;
   htmlContent = {} as ApplicationHTMLContent;
   readonly UPLOAD_FILES_MODE = UPLOAD_FILES_MODE;
@@ -105,7 +101,6 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
     public featureFlagService: FeatureFlagService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private tiedHouseService: TiedHouseConnectionsDataService,
     public dialog: MatDialog,
     public establishmentWatchWordsService: EstablishmentWatchWordsService) {
     super();
@@ -155,21 +150,13 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
   requiredAlternateQuestionValidator(): ValidatorFn {
     if(this.showAlternateQuestions()) {
       return Validators.required;
-    } 
+    }
 
     return Validators.nullValidator;
   }
 
   ngOnInit() {
-
-    let sub = this.applicationDataService.getSubmittedApplicationCount()
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe(value => this.submittedApplications = value);
-    this.subscriptionList.push(sub);
-
-    //this.establishmentWatchWordsService.initialize();
-
-    sub = this.store.select(state => state.currentAccountState.currentAccount)
+    let sub = this.store.select(state => state.currentAccountState.currentAccount)
       .pipe(takeWhile(() => this.componentActive))
       .pipe(filter(account => !!account))
       .subscribe((account) => {
@@ -199,7 +186,7 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
 
         this.form = this.fb.group({
           id: [""],
-    
+
           // #1
           renewalCriminalOffenceCheck: ["", Validators.required],
           // #2
@@ -234,17 +221,17 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
           renewalFederalLicence: ["", [this.requiredAlternateQuestionValidator()]],
           // #17
           renewalFederalSecurity: ["", [this.requiredAlternateQuestionValidator()]],
-    
+
           contactPersonFirstName: ["", Validators.required],
           contactPersonLastName: ["", Validators.required],
           contactPersonRole: [""],
           contactPersonEmail: ["", Validators.required],
           contactPersonPhone: ["", Validators.required],
-    
+
           authorizedToSubmit: ["", [this.customRequiredCheckboxValidator()]],
           signatureAgreement: ["", [this.customRequiredCheckboxValidator()]],
           readRefundPolicy: ["", [this.customRequiredCheckboxValidator()]],
-    
+
           assignedLicence: this.fb.group({
             id: [""],
             establishmentAddressStreet: [""],
@@ -302,7 +289,7 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
     if(licenceType === LicenceTypeNames.S119 || licenceType === LicenceTypeNames.PRS) {
       return true;
     }
-    
+
     return false;
   }
 
@@ -339,7 +326,6 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
 
     return forkJoin([
       this.applicationDataService.updateApplication({ ...this.application, ...this.form.value }),
-      this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
     ]).pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
         this.snackBar.open("Error saving Application", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
@@ -355,15 +341,6 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
         }
         return of(true);
       }));
-  }
-
-  prepareTiedHouseSaveRequest(_tiedHouseData) {
-    if (!this.application.tiedHouse) {
-      return of(null);
-    }
-    let data = (Object as any).assign(this.application.tiedHouse, _tiedHouseData);
-    data = { ...data };
-    return this.tiedHouseService.updateTiedHouse(data, data.id);
   }
 
   updateApplicationInStore() {
