@@ -2087,6 +2087,60 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return NoContent(); // 204
         }
 
+        [HttpGet("get_pcl_for_le_review/{id}")]
+        [AllowAnonymous]
+        public async Task<JsonResult> GetOrCreatePermanentChangeForLegalEntityReviewApplicationAsync(string id)
+        {
+            var expand = new List<string> { "adoxio_ApplicationExtension", "adoxio_ApplicationTypeId" };
+            var application = _dynamicsClient.Applications.GetByKey(id, expand: expand);
+
+            if(application.AdoxioApplicationTypeId?.AdoxioName == "Le Review")
+            {
+                if(application.AdoxioApplicationExtension?.AdoxioRelatedLeOrPclApplication == null)
+                {
+                    var pclApplication = await this._dynamicsClient.Applications.CreateAsync(CopyLEReviewApplicationToPCL(application));
+                    var expandPcl = new List<string> { "adoxio_ApplicationExtension" };
+                    pclApplication = await _dynamicsClient.Applications.GetByKeyAsync(pclApplication.AdoxioApplicationid, expandPcl);
+                    pclApplication.AdoxioApplicationExtension.AdoxioRelatedLeOrPclApplicationODataBind = _dynamicsClient.GetEntityURI("adoxio_applications", application.AdoxioApplicationid);
+                    await _dynamicsClient.Applicationextensions.UpdateAsync(pclApplication.AdoxioApplicationExtension.AdoxioApplicationextensionid, pclApplication.AdoxioApplicationExtension);
+
+                    return new JsonResult(pclApplication);
+                }
+
+                else
+                {
+                    var expandPcl = new List<string> { "adoxio_relatedleorpclapplication" };
+                    var pclApplication = await _dynamicsClient.Applicationextensions.GetByKeyAsync(application.AdoxioApplicationExtension.AdoxioApplicationextensionid, expandPcl);
+                    return new JsonResult(pclApplication.AdoxioRelatedLeOrPclApplication);
+                }
+
+
+            }
+            return new JsonResult(application);
+        }
+
+
+        private MicrosoftDynamicsCRMadoxioApplication CopyLEReviewApplicationToPCL(MicrosoftDynamicsCRMadoxioApplication LeReview)
+        {
+            var PCL = new MicrosoftDynamicsCRMadoxioApplication
+            {
+                AdoxioApplicanttype = LeReview.AdoxioApplicanttype,
+                AdoxioApplicantODataBind = LeReview.AdoxioApplicantODataBind,
+                AdoxioApplicationTypeIdODataBind = _dynamicsClient.GetEntityURI("adoxio_applicationtypes", "PCL"),
+
+                AdoxioCsinternaltransferofshares = LeReview.AdoxioCsinternaltransferofshares,
+                AdoxioCsexternaltransferofshares = LeReview.AdoxioCsexternaltransferofshares,
+                AdoxioCschangeofdirectorsorofficers = LeReview.AdoxioCschangeofdirectorsorofficers,
+                AdoxioCsnamechangelicenseecorporation = LeReview.AdoxioCsnamechangelicenseecorporation,
+                AdoxioCsnamechangelicenseepartnership = LeReview.AdoxioCsnamechangelicenseepartnership,
+                AdoxioCsnamechangelicenseesociety = LeReview.AdoxioCsnamechangelicenseesociety,
+                AdoxioCsnamechangeperson = LeReview.AdoxioCsnamechangeperson,
+                AdoxioCsadditionofreceiverorexecutor = LeReview.AdoxioCsadditionofreceiverorexecutor,
+                AdoxioCschangetotiedhouse = LeReview.AdoxioCschangetotiedhouse,
+            };
+            return PCL;
+        }
+
         /// <summary>
         ///     Verify whether currently logged in user has access to this account id
         /// </summary>
