@@ -283,4 +283,13 @@ export class ApplicationExtension {
   hasLiquorTiedHouseOwnershipOrControl: number;
   hasLiquorTiedHouseThirdPartyAssociations: number;
   hasLiquorTiedHouseFamilyMemberInvolvement: number;
+  /**
+   * The ID of a related legal entity or permanent change to a licensee application.
+   *
+   * For a legal entity review application, this will be the ID of the permanent change to a licensee application.
+   * For a permanent change to a licensee application, this will be the ID of the legal entity review application.
+   *
+   * @type {string}
+   */
+  relatedLEOrPCLApplication?: string;
 }

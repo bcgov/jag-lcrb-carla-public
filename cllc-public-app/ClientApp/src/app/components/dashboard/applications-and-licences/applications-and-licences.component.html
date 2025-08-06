@@ -9,17 +9,8 @@
 
         <section *ngIf="!marketerExists && !account.isOtherBusinessType()">
           <h3>CANNABIS LICENCE/AUTHORIZATION APPLICATIONS</h3>
-          <!--<div *ngIf="!(nonMarketerExists || marketerExists) && CRSElligible()">
-    <p>
-      <i>*You cannot apply for both cannabis licences, you can apply for one or other.</i>
-    </p>
-  </div>-->
 
           <table class="start-application">
-            <!-- <tr>
-    <th colspan=2>LICENCE</th>
-    <th></th>
-  </tr> -->
             <tr>
               <td style="background-color: #e1e8f2; padding: 10px; width: 15px">
                 <img class="icon" src="assets/Cannabis-store-icon-blue-40px.png" alt="" />
@@ -30,8 +21,6 @@
                   The cannabis retail store licence or authorization allows licensees and authorization holders to sell
                   cannabis and accessories.
                 </p>
-                <!--<P>(A separate application must be submitted for each proposed store)</P>-->
-                <!--href="policy-document/cannabis-retail-licence"-->
                 <a
                   href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/non-medical-cannabis-licenses/apply-cannabis-licence/apply-for-a-cannabis-retail-store-licence"
                   target="_blank"
@@ -61,7 +50,6 @@
                   The Cannabis Marketing licence allows licensees to promote cannabis to licensed cannabis stores and
                   the adult public.
                 </p>
-                <!--href="policy-document/cannabis-marketing-licence"-->
                 <a
                   href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/non-medical-cannabis-licenses/apply-cannabis-licence/apply-for-a-cannabis-marketing-licence">
                   Learn more
@@ -89,8 +77,6 @@
                   The producer retail store licence or authorization allows cultivators to sell cannabis from a store
                   located at their production site.
                 </p>
-                <!--<P>(A separate application must be submitted for each proposed store)</P>-->
-                <!--href="policy-document/cannabis-retail-licence"-->
                 <a
                   href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/non-medical-cannabis-licenses/apply-cannabis-licence/apply-for-a-producer-retail-store-licence"
                   target="_blank"
@@ -527,32 +513,35 @@
                 <span>{{ i + 1 }}</span>
               </td>
               <td style="background-color: #f1f4fa; padding: 10px; padding-bottom: 15px">
-                <ng-container *ngIf="item.applicationTypeName === ApplicationTypeNames.PermanentChangeToALicensee">
+                <!-- Permanent change to a licensee -->
+                <ng-container *ngIf="isPermanentChangeToLicenceApplication(item)">
                   <span style="font-weight: 600">{{ ApplicationTypeNames.PermanentChangeToALicensee }}</span> <br />
                   <span>Job No: </span> <i>{{ item.jobNumber }}</i> <br />
                   <span>Reference #: {{ item.name }} </span> <br />
                 </ng-container>
 
-                <ng-container *ngIf="item.applicationTypeName === ApplicationTypeNames.LegalEntityReview">
+                <!-- Permanent change to a licensee as a result of a legal entity review -->
+                <ng-container *ngIf="isPermanentChangeToLicenceAsAResultOfLegalEntityReview(item)">
+                  <span style="font-weight: 600">{{ ApplicationTypeNames.PermanentChangeToALicensee }}</span> <br />
+                  <span>Job No: </span> <i>{{ item.jobNumber }}</i> <br />
+                  <span>Reference #: {{ item.name }} </span> <br />
+                </ng-container>
+
+                <!-- Legal entity review -->
+                <ng-container *ngIf="isLegalEntityReviewApplication(item)">
                   <span style="font-weight: 600">Legal Entity Review</span> <br />
                   <span>Job No: </span> <i>{{ item.jobNumber }}</i> <br />
                   <span>Reference #: {{ item.name }} </span> <br />
                 </ng-container>
 
+                <!-- All others -->
                 <ng-container
-                  *ngIf="
-                    item.applicationTypeName !== ApplicationTypeNames.PermanentChangeToALicensee &&
-                    item.applicationTypeName !== ApplicationTypeNames.LegalEntityReview
-                  ">
+                  *ngIf="isOtherApplication(item)">
                   <span style="font-weight: 600">{{ item.establishmentName }}</span> <br />
                   <span>{{ item.portallabel }}</span> <br />
                   <span>Job No: </span> <i>{{ item.jobNumber }}</i> <br />
                   <span>Reference #: {{ item.name }} </span> <br />
                 </ng-container>
-
-                <!--div *ngIf="item.dateApplicationSubmitted">
-      Date Submitted: {{item.dateApplicationSubmitted | date : 'dd MMM yyyy'}}
-    </div-->
               </td>
 
               <td style="background-color: #e1e8f2; padding: 10px">
@@ -601,9 +590,6 @@
                   <p *ngIf="item.lgHasApproved">
                     Your application has been reviewed by the local government or indigenous nation.
                   </p>
-                  <!--div *ngIf="item.dateApplicantSentToLG">
-        <strong>Date Sent to LG</strong>: {{item.dateApplicantSentToLG | date : 'dd MMM yyyy'}}
-      </div-->
                 </div>
               </td>
               <td style="background-color: #e1e8f2; padding: 10px">
@@ -717,8 +703,7 @@
                       'Transfer Application Under Review',
                       'Under Review',
                       'Processed'
-                    ].indexOf(item.applicationStatus) !== -1 &&
-                    item.applicationTypeName != ApplicationTypeNames.LegalEntityReview
+                    ].indexOf(item.applicationStatus) !== -1 && !isLegalEntityReviewApplication(item)
                   ">
                   <a style="margin-top: 5px" href="javascript:void(0);" (click)="uploadMoreFiles(item)">
                     <fa-icon [icon]="faPlus" style="color: #1a5a96; margin-right: 10px"></fa-icon>
@@ -733,7 +718,7 @@
                   </a>
                 </div>
 
-                <div *ngIf="item.applicationStatus === 'Licensee Action Required'" style="margin-top: 5px">
+                <div *ngIf="isLegalEntityReviewApplication(item) && item.applicationStatus === 'Licensee Action Required'" style="margin-top: 5px">
                   <a [routerLink]="['/legal-entity-review-permanent-change-to-a-licensee/' + item.id]">
                     <fa-icon [icon]="faPencilAlt" style="color: #1a5a96; margin-right: 10px"></fa-icon>
                     <span>Start Application: Permanent Change to Licensee</span>

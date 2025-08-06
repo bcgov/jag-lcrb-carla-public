@@ -69,7 +69,6 @@ export class ApplicationTiedHouseExemptionComponent extends FormBase implements 
     private fb: FormBuilder,
     public dialog: MatDialog,
     public applicationDataService: ApplicationDataService,
-    public applicationTypeDataService: ApplicationTypeDataService,
     public establishmentWatchWordsService: EstablishmentWatchWordsService) {
     super();
     this.route.paramMap.subscribe(pmap => this.licenceId = pmap.get("licenceId"));
@@ -114,7 +113,7 @@ export class ApplicationTiedHouseExemptionComponent extends FormBase implements 
     });
 
     if (!this.licenceId) {
-      this.applicationTypeDataService.getApplicationTypeByName('Tied House Exemption Application')
+      this.applicationDataService.getApplicationTypeByName('Tied House Exemption Application')
         .pipe(takeWhile(() => this.componentActive))
         .subscribe((appType: ApplicationType) => {
           this.applicationType = appType;

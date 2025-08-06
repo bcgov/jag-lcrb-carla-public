@@ -27,11 +27,8 @@ import { takeWhile } from 'rxjs/operators';
 
 export const UPLOAD_FILES_MODE = 'UploadFilesMode';
 export const INCOMPLETE = 'Incomplete';
-// export const TRANSFER_LICENCE_MODE = 'TransferLicenceMode';
-// export const CHANGE_OF_LOCATION_MODE = 'ChangeOfLocationMode';
 
 const ACTIVE = 'Active';
-// const PAYMENT_REQUIRED = 'Payment Required';
 const RENEWAL_DUE = 'Renewal Due';
 
 @Component({
@@ -46,13 +43,9 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   faShoppingCart = faShoppingCart;
   faExchangeAlt = faExchangeAlt;
   inProgressApplications: ApplicationSummary[] = [];
-  licensedApplications: ApplicationLicenseSummary[] = [];
 
   readonly ACTIVE = ACTIVE;
-  // readonly PAYMENT_REQUIRED = PAYMENT_REQUIRED;
   readonly RENEWAL_DUE = RENEWAL_DUE;
-  // readonly TRANSFER_LICENCE_MODE = TRANSFER_LICENCE_MODE;
-  // readonly CHANGE_OF_LOCATION_MODE = CHANGE_OF_LOCATION_MODE;
 
   busy: Subscription;
   @Input()
@@ -138,21 +131,12 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     return result;
   }
 
-  isLegalEntityReviewUnderReview(item: ApplicationSummary): boolean {
-    const result =
-      item &&
-      item.applicationTypeName == ApplicationTypeNames.LegalEntityReview &&
-      item.applicationStatus == 'Under Review';
-    return result;
-  }
-
   /**
    *
-   * */
+   */
   private displayApplications() {
     this.dataLoaded = false;
     this.inProgressApplications = [];
-    this.licensedApplications = [];
     const sub = forkJoin([
       this.applicationDataService.getAllCurrentApplications(),
       this.licenceDataService.getAllCurrentLicenses()
@@ -170,26 +154,6 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
               this.inProgressApplications.push(application);
             }
           });
-
-        /*
-        // TG July 28, 2021
-        // licensedApplications is never used..
-        licenses.forEach((licence: ApplicationLicenseSummary) => {
-          licence.actionApplications = [];
-          const relatedApplications = applications.filter(l => l.licenceId === licence.licenseId);
-          relatedApplications.forEach(app => {
-            licence.actionApplications.push({
-              applicationId: app.id,
-              applicationTypeName: app.applicationTypeName,
-              applicationStatus: app.applicationStatus,
-              isPaid: app.isPaid,
-              isStructuralChange: app.isStructuralChange
-            });
-          });
-          this.licensedApplications.push(licence);
-
-        });
-          */
 
         // LCSD-6843: 2024-03-01 waynezen; executes asynchronously on long-running thread
         this.marketerExists = this.marketerExistsFunc(applications, licenses);
@@ -227,8 +191,6 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   }
 
   resolveIncompleteness(application: ApplicationSummary) {
-    var x = application.applicationTypeName;
-    console.log(x);
     if (application.applicationTypeName === ApplicationTypeNames.LegalEntityReview) {
       this.router.navigate([`/legal-entity-review/${application.id}`]);
     } else {
@@ -368,11 +330,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
       (data) => {
         // reload the user to cause the eligibility disclosure to show if needed
         this.userDataService.loadUserToStore().then(() => {});
-        //if (this.licenseeChangeFeatureOn) {
-        //  this.router.navigateByUrl(`/multi-step-application/${data.id}`);
-        //} else {
         this.router.navigateByUrl(`/account-profile/${data.id}`);
-        //}
         this.startCRSOngoing = false;
       },
       () => {
@@ -398,12 +356,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
       (data) => {
         // reload the user to cause the eligibility disclosure to show if needed
-        //this.userDataService.loadUserToStore().then(() => { });
-        //if (this.licenseeChangeFeatureOn) {
-        //  this.router.navigateByUrl(`/multi-step-application/${data.id}`);
-        //} else {
         this.router.navigateByUrl(`/account-profile/${data.id}`);
-        //}
         this.startPRSOngoing = false;
       },
       () => {
@@ -829,6 +782,58 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     } else {
       return `/account-profile/${item.id}`;
     }
+  }
+
+  /**
+   * Checks if the application summary is for a permanent change to a license application.
+   *
+   * @param {ApplicationSummary} ApplicationSummary
+   * @return {*}  {boolean}
+   */
+  isPermanentChangeToLicenceApplication(ApplicationSummary: ApplicationSummary): boolean {
+    return ApplicationSummary.applicationTypeName === ApplicationTypeNames.PermanentChangeToALicensee;
+  }
+
+  /**
+   * Checks if the application summary is for a permanent change to a license as a result of a legal entity review.
+   *
+   * Note: This is a regular Permanent Change to a Licensee application that has been created as a result of a
+   * legal entity review, and has a binding to the corresponding legal entity review application.
+   *
+   * @param {ApplicationSummary} ApplicationSummary
+   * @return {*}  {boolean}
+   */
+  isPermanentChangeToLicenceAsAResultOfLegalEntityReview(ApplicationSummary: ApplicationSummary): boolean {
+    // TODO: tiedhouse - finalize when extension table is updated.
+    return (
+      ApplicationSummary.applicationTypeName === ApplicationTypeNames.PermanentChangeToALicensee &&
+      // Check if the PCL application is linked to a legal entity review application.
+      ApplicationSummary.applicationExtension?.relatedLEOrPCLApplication?.length !== 0
+    );
+  }
+
+  /**
+   * Checks if the application summary is for a legal entity review application.
+   *
+   * @param {ApplicationSummary} ApplicationSummary
+   * @return {*}  {boolean}
+   */
+  isLegalEntityReviewApplication(ApplicationSummary: ApplicationSummary): boolean {
+    return ApplicationSummary.applicationTypeName === ApplicationTypeNames.LegalEntityReview;
+  }
+
+  /**
+   * Checks if the application summary is for any other application.
+   *
+   * @param {ApplicationSummary} ApplicationSummary
+   * @return {*}  {boolean}
+   */
+  isOtherApplication(ApplicationSummary: ApplicationSummary): boolean {
+    return (
+      !this.isPermanentChangeToLicenceApplication(ApplicationSummary) &&
+      !this.isLegalEntityReviewApplication(ApplicationSummary) &&
+      !this.isPermanentChangeToLicenceAsAResultOfLegalEntityReview(ApplicationSummary)
+    );
   }
 }
 
