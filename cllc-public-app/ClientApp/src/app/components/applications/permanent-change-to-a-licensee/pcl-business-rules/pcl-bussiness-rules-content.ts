@@ -151,7 +151,7 @@ export const PCLFormControlDefinitions: PCLFormControlDefinitionOption[] = [
     //   'Society',
     //   'MilitaryMess'
     // ],
-    CannabisFee: 220,
+    CannabisFee: 0,
     LiquorFee: 220,
     helpTextHeader: 'Use this option to report:',
     helpText: [

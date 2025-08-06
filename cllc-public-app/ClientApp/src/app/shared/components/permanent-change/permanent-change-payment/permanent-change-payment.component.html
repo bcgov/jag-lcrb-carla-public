@@ -1,6 +1,6 @@
 <h3 class="blue-header ngtest-payment">PAYMENT</h3>
 <div class="content-bottom">
-  <ng-container *ngIf="cannabisLicences && cannabisLicences.length > 0 && liquorLicences && liquorLicences.length > 0">
+  <ng-container *ngIf="isLiquorPaymentRequired && isCannabisPaymentRequired">
     <p>
       You have both liquor and cannabis licences. Fees for the different types of licences must be paid separately. Your
       application will not be submitted to the Branch until both are paid.
@@ -8,7 +8,7 @@
     <hr />
   </ng-container>
 
-  <ng-container *ngIf="cannabisLicences && cannabisLicences.length > 0">
+  <ng-container *ngIf="isCannabisPaymentRequired || isCannabisInvoicePaid">
     <table class="w-100" class="paymentSummary">
       <tr>
         <th colspan="3">
@@ -35,14 +35,12 @@
         <td colspan="3" style="padding: 5px; text-align: right">
           <button
             mat-raised-button
-            [disabled]="application.primaryInvoicePaid"
+            [disabled]="isCannabisInvoicePaid"
             color="primary"
             style="width: 350px"
             (click)="onSubmit('primary')">
             <span>
-              {{
-                application?.primaryInvoicePaid ? 'CANNABIS LICENSEE FEES PAID' : 'PAY CANNABIS LICENSEE CHANGE FEES'
-              }}
+              {{ isCannabisInvoicePaid ? 'CANNABIS LICENSEE FEES PAID' : 'PAY CANNABIS LICENSEE CHANGE FEES' }}
             </span>
             <mat-progress-bar *ngIf="primaryPaymentInProgress" mode="indeterminate"></mat-progress-bar>
           </button>
@@ -59,7 +57,7 @@
     <hr />
   </ng-container>
 
-  <table class="w-100" *ngIf="liquorLicences && liquorLicences.length" class="paymentSummary">
+  <table class="w-100" *ngIf="isLiquorPaymentRequired || isLiquorInvoicePaid" class="paymentSummary">
     <tr>
       <th colspan="3">
         <h4>Fees for Liquor Licences</h4>
@@ -83,10 +81,10 @@
         <button
           mat-raised-button
           color="primary"
-          [disabled]="application.secondaryInvoicePaid"
+          [disabled]="isLiquorInvoicePaid"
           style="width: 250px"
           (click)="onSubmit('secondary')">
-          <span>{{ application?.secondaryInvoicePaid ? 'FEES PAID' : 'PAY LIQUOR FEES' }}</span>
+          <span>{{ isLiquorInvoicePaid ? 'FEES PAID' : 'PAY LIQUOR FEES' }}</span>
           <mat-progress-bar *ngIf="secondaryPaymentInProgress" mode="indeterminate"></mat-progress-bar>
         </button>
       </td>

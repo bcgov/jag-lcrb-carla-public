@@ -39,4 +39,42 @@ export class PermanentChangePaymentComponent implements OnInit {
   ngOnInit() {
     this.form = this.controlContainer.control as FormGroup;
   }
+
+  /**
+   * Return `true` if there are any cannabis licences with fees that require payment.
+   *
+   * @return {*}  {boolean}
+   */
+  get isCannabisPaymentRequired(): boolean {
+    return this.cannabisLicences?.length > 0 && this.selectedChangeList.some((change) => change.CannabisFee > 0);
+  }
+
+  /**
+   * Return `true` if the cannabis invoice has been paid.
+   *
+   * @readonly
+   * @type {boolean}
+   */
+  get isCannabisInvoicePaid(): boolean {
+    return this.application?.primaryInvoicePaid || false;
+  }
+
+  /**
+   * Return `true` if there are any liquor licences with fees that require payment.
+   *
+   * @return {*}  {boolean}
+   */
+  get isLiquorPaymentRequired(): boolean {
+    return this.liquorLicences?.length > 0 && this.selectedChangeList.some((change) => change.LiquorFee > 0);
+  }
+
+  /**
+   * Return `true` if the liquor invoice has been paid.
+   *
+   * @readonly
+   * @type {boolean}
+   */
+  get isLiquorInvoicePaid(): boolean {
+    return this.application?.secondaryInvoicePaid || false;
+  }
 }
