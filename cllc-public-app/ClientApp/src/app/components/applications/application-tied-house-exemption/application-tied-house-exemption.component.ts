@@ -19,7 +19,6 @@ import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { RelatedLicence } from "@models/related-licence";
 import { ApplicationDataService } from "../../../services/application-data.service";
 import { Application } from "../../../models/application.model";
-import { ApplicationTypeDataService } from "../../../services/application-type-data.service";
 import { RelatedLicencePickerComponent } from "@shared/components/related-licence-picker/related-licence-picker.component";
 import { RelatedJobnumberPickerComponent } from "@shared/components/related-jobnumber-picker/related-jobnumber-picker.component";
 
