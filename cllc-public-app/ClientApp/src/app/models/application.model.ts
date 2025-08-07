@@ -291,5 +291,5 @@ export class ApplicationExtension {
    *
    * @type {string}
    */
-  relatedLEOrPCLApplication?: string;
+  relatedLeOrPclApplicationId?: string;
 }
