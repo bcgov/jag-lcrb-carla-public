@@ -1095,11 +1095,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return result;
         }
 
-        private async Task<IActionResult> _GetPermanentChangesToLicenseeData(string applicationId, bool isLegalEntityReview = false)
+        private async Task<IActionResult> _GetPermanentChangesToLicenseeData(string applicationId, UserSettings userSettings, bool isLegalEntityReview = false)
         {
-            //"permanent-change-to-licensee"
-            // get the current user.
-            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             PermanentChangesPageData data = new PermanentChangesPageData();
 
             // set application type relationship 
@@ -1268,7 +1265,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("permanent-change-to-licensee-data")]
         public async Task<IActionResult> GetPermanentChangesToLicenseeData([FromQuery] string applicationId, [FromQuery] bool isLegalEntity = false)
         {
-            return await _GetPermanentChangesToLicenseeData(applicationId, isLegalEntity);
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+
+            return await _GetPermanentChangesToLicenseeData(applicationId, userSettings, isLegalEntity);
         }
 
         /// GET all applications in Dynamics for the current user
@@ -2098,10 +2097,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return NoContent(); // 204
         }
 
+        /// <summary>
+        /// Get or Create a Permanent Change to Licensee Application (PCL) as a result of a Legal Entity Review (LE).
+        /// </summary>
+        /// <param name="id">Either the ID of the LE Review application or the PCL application.</param>
+        /// <returns></returns>
         [HttpGet("get_pcl_for_le_review/{id}")]
         [AllowAnonymous]
         public async Task<JsonResult> GetOrCreatePermanentChangeForLegalEntityReviewApplicationAsync(string id)
         {
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+
             var expand = new List<string> { "adoxio_ApplicationExtension", "adoxio_ApplicationTypeId" };
             var application = _dynamicsClient.Applications.GetByKey(id, expand: expand);
 
@@ -2125,7 +2131,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         pclApplication.AdoxioApplicationExtension.AdoxioRelatedLeOrPclApplicationODataBind = _dynamicsClient.GetEntityURI("adoxio_applications", application.AdoxioApplicationid);
                         await _dynamicsClient.Applicationextensions.UpdateAsync(pclApplication.AdoxioApplicationExtension.AdoxioApplicationextensionid, pclApplication.AdoxioApplicationExtension);
 
-                        var permanentChangesToLicenseeData = await _GetPermanentChangesToLicenseeData(application.AdoxioApplicationid);
+                        var permanentChangesToLicenseeData = await _GetPermanentChangesToLicenseeData(application.AdoxioApplicationid, userSettings);
 
                         return new JsonResult(permanentChangesToLicenseeData);
                     }
@@ -2135,7 +2141,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         var expandPcl = new List<string> { "adoxio_relatedleorpclapplication" };
                         var pclApplication = await _dynamicsClient.Applicationextensions.GetByKeyAsync(application.AdoxioApplicationExtension.AdoxioApplicationextensionid, expandPcl);
 
-                        var permanentChangesToLicenseeData = await _GetPermanentChangesToLicenseeData(pclApplication.AdoxioRelatedLeOrPclApplication.AdoxioApplicationid);
+                        var permanentChangesToLicenseeData = await _GetPermanentChangesToLicenseeData(pclApplication.AdoxioRelatedLeOrPclApplication.AdoxioApplicationid, userSettings);
 
                         return new JsonResult(permanentChangesToLicenseeData);
                     }
