@@ -164,12 +164,12 @@ export class ApplicationDataService extends DataService {
    * review rather than by the user.
    *
    * @param {string} applicationId Either the LER Application ID or the LE-PCL Application ID.
-   * @return {*}  {Observable<Application>}
+   * @return {*}  {Observable<any>}
    */
-  getOrCreateLegalEntityPermanentChangesToLicenseeApplication(applicationId: string): Observable<Application> {
-    let url = `${this.apiPath}legal-entity-permanent-change-to-licensee-application/${applicationId}`;
+  GetOrCreatePermanentChangeForLegalEntityReviewApplicationAsync(applicationId: string): Observable<any> {
+    let url = `${this.apiPath}get_pcl_for_le_review/${applicationId}`;
 
-    return this.http.get<Application>(url, { headers: this.headers }).pipe(catchError(this.handleError));
+    return this.http.get<any>(url, { headers: this.headers }).pipe(catchError(this.handleError));
   }
 
   getOngoingLicenseeData(type: "on-going" | "create"): Observable<OngoingLicenseeData> {
