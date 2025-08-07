@@ -38,7 +38,7 @@
         [cannabisLicences]="cannabisLicences"
         [selectedChangeList]="selectedChangeList"
         [canCreateNewApplication]="canCreateNewApplication"
-        [onNewApplication]="onNewApplication"
+        [onNewApplication]="onNewApplication.bind(this)"
         [createApplicationInProgress]="createApplicationInProgress"
         [primaryInvoice]="primaryInvoice"
         [secondaryInvoice]="secondaryInvoice"
