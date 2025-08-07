@@ -775,9 +775,11 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   }
 
   getApplicationLink(item: ApplicationSummary) {
-    if (item.applicationTypeName == ApplicationTypeNames.PermanentChangeToALicensee) {
+    if (this.isPermanentChangeToLicenceApplication(item)) {
       return `/permanent-change-to-a-licensee/${item.id}`;
-    } else if (item.applicationTypeName == ApplicationTypeNames.LegalEntityReview) {
+    } else if (this.isPermanentChangeToLicenceAsAResultOfLegalEntityReview(item)) {
+      return `/permanent-change-to-a-licensee/${item.applicationExtension.relatedLeOrPclApplicationId}`;
+    } else if (this.isLegalEntityReviewApplication(item)) {
       return `/legal-entity-review/${item.id}`;
     } else {
       return `/account-profile/${item.id}`;
@@ -804,7 +806,6 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
    * @return {*}  {boolean}
    */
   isPermanentChangeToLicenceAsAResultOfLegalEntityReview(ApplicationSummary: ApplicationSummary): boolean {
-    // TODO: tiedhouse - finalize when extension table is updated.
     return (
       ApplicationSummary.applicationTypeName === ApplicationTypeNames.PermanentChangeToALicensee &&
       // Check if the PCL application is linked to a legal entity review application.

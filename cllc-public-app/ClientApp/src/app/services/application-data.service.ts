@@ -152,8 +152,6 @@ export class ApplicationDataService extends DataService {
   }
 
   /**
-   * // TODO: tiedhouse - finalize when the API controllers are done.
-   *
    * Get or create the application for "permanent changes to licensee as a result of a legal entity review" (LE-PCL).
    *
    * Accepts either the Legal Entity Review (LER) Application ID or the LE-PCL Application ID.
