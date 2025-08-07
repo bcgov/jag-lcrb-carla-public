@@ -2118,24 +2118,30 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 if (application.AdoxioApplicationTypeId?.AdoxioName == "Le Review")
                 {
-                    //If LE review application is not linked to a PCL application, create a new PCL application
+                    // If LE review application is not linked to a PCL application, create a new PCL application and 
+                    // add the ID of the LE review application to the PCL application extension.
                     if (application.AdoxioApplicationExtension?.AdoxioRelatedLeOrPclApplication == null)
                     {
                         Console.WriteLine("creating pcl:");
                         var pclApplication = await this._dynamicsClient.Applications.CreateAsync(CopyLEReviewApplicationToPCL(application));
                         var expandPcl = new List<string> { "adoxio_ApplicationExtension" };
-                        //Load extension table for newly created application
+                        // Load extension table for newly created application
                         pclApplication = await _dynamicsClient.Applications.GetByKeyAsync(pclApplication.AdoxioApplicationid, expandPcl);
                         Console.WriteLine("application: " + JsonConvert.SerializeObject(pclApplication));
                         _logger.LogInformation("application: " + JsonConvert.SerializeObject(pclApplication));
+
+                        // Update the LE Application Extension to link it to the PCL application
+                        application.AdoxioApplicationExtension.AdoxioRelatedLeOrPclApplicationODataBind = _dynamicsClient.GetEntityURI("adoxio_applications", pclApplication.AdoxioApplicationid);
+                        await _dynamicsClient.Applicationextensions.UpdateAsync(application.AdoxioApplicationExtension.AdoxioApplicationextensionid, application.AdoxioApplicationExtension);
+
+                        // Update the PCL application extension to link it to the LE review application
                         pclApplication.AdoxioApplicationExtension.AdoxioRelatedLeOrPclApplicationODataBind = _dynamicsClient.GetEntityURI("adoxio_applications", application.AdoxioApplicationid);
                         await _dynamicsClient.Applicationextensions.UpdateAsync(pclApplication.AdoxioApplicationExtension.AdoxioApplicationextensionid, pclApplication.AdoxioApplicationExtension);
 
                         var permanentChangesToLicenseeData = await _GetPermanentChangesToLicenseeData(application.AdoxioApplicationid, userSettings);
-
                         return new JsonResult(permanentChangesToLicenseeData);
                     }
-                    //If LE review application is linked to a PCL application, return the PCL application
+                    // If LE review application is linked to a PCL application, return the PCL application
                     else
                     {
                         var expandPcl = new List<string> { "adoxio_relatedleorpclapplication" };
