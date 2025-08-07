@@ -20,12 +20,12 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public ApplicationTypeCategory? ApplicationTypeCategory { get; set; }
         public bool IsIndigenousNation { get; set; }
         public bool IsPaid { get; set; }
-        public bool IsStructuralChange  { get; set; }
+        public bool IsStructuralChange { get; set; }
         public string LicenceId { get; set; }
         public bool IsForLicence { get; set; }
         public string Portallabel { get; set; }
         public bool LGHasApproved { get; set; }
-        
+
         [JsonConverter(typeof(StringEnumConverter))]
         public GeneralYesNo? IsApplicationComplete { get; set; }
         public List<string> Endorsements { get; set; }
@@ -38,5 +38,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string EstablishmentPhone { get; set; }
         public string IndigenousNationId { get; set; }
         public string PoliceJurisdictionId { get; set; }
+        public ApplicationExtension ApplicationExtension { get; set; }
     }
 }
