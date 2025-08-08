@@ -1260,7 +1260,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// If no application is found, it will create a new "Permanent Change to a Licensee" application and return it.
         /// </summary>
         /// <param name="applicationId"></param>Filter results by a specific application ID.(Optional)
-        /// <param name="isLegalEntity">
+        /// <param name="isLegalEntityReview">
         /// Optional query param for indicating that the payment is being made for a legal entity review.
         /// Allowed values: "true" and "false".
         /// If not provided, the default value is "false".
@@ -1270,12 +1270,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("permanent-change-to-licensee-data")]
         public async Task<IActionResult> GetPermanetChangesToLicenseeData(
             [FromQuery] string applicationId,
-            [FromQuery] bool isLegalEntity = false
+            [FromQuery] bool isLegalEntityReview = false
         )
         {
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
-            return await _GetPermanentChangesToLicenseeData(applicationId, userSettings, isLegalEntity);
+            return await _GetPermanentChangesToLicenseeData(applicationId, userSettings, isLegalEntityReview);
         }
 
         /// GET all applications in Dynamics for the current user

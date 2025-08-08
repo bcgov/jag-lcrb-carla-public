@@ -123,7 +123,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioAuthorizedtosubmit = from.AuthorizedToSubmit;
             to.AdoxioSignatureagreement = from.SignatureAgreement;
 
-            to.AdoxioApplicanttype = (int?)from.ApplicantType;
+            to.AdoxioApplicanttype = (int?)from.ApplicantType == 0 ? null: (int?)from.ApplicantType;
             to.AdoxioLgzoning = (int?)from.LgZoning;
             to.AdoxioLgdecisioncomments = from.LGDecisionComments;
 
