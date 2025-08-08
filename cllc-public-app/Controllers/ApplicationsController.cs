@@ -1100,7 +1100,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             PermanentChangesPageData data = new PermanentChangesPageData();
 
             // set application type relationship
-            var initialApplication = GetPermanentChangeApplication(userSettings, applicationId, isLegalEntity);
+            var initialApplication = GetPermanentChangeApplication(userSettings, applicationId, isLegalEntityReview);
 
             // get all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
             data.Licences = _dynamicsClient.GetLicensesByLicencee(userSettings.AccountId, _cache);
