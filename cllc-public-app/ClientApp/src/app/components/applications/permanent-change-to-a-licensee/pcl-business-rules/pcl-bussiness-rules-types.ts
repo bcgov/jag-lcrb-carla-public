@@ -114,10 +114,24 @@ export enum PCLFormControlName {
 }
 
 export enum AccountType {
+  // Default
   Default = 'Default',
+  // Private Corporation
   PrivateCorporation = 'PrivateCorporation',
+  // Public Corporation
+  PublicCorporation = 'PublicCorporation',
+  // Partnership
   Partnership = 'Partnership',
-  Society = 'Society'
+  GeneralPartnership = 'GeneralPartnership',
+  LimitedLiabilityPartnership = 'LimitedLiabilityPartnership',
+  // Society
+  Society = 'Society',
+  IndigenousNation = 'IndigenousNation',
+  LocalGovernment = 'LocalGovernment',
+  Coop = 'Coop',
+  MilitaryMess = 'MilitaryMess',
+  University = 'University',
+  SoleProprietorship = 'SoleProprietorship'
 }
 
 export enum PCLMatrixConditionalGroup {
