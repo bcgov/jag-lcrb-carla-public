@@ -71,7 +71,7 @@
       <th class="paymentSummary">Cost</th>
     </tr>
     <ng-container *ngFor="let item of selectedChangeList">
-      <tr *ngIf="item.liquorFee > 0">
+      <tr *ngIf="item.LiquorFee > 0">
         <td class="paymentSummary1">{{ item.name }}</td>
         <td class="paymentSummary2">x {{ liquorLicences.length }}</td>
         <td class="paymentSummary2">${{ item.LiquorFee }}</td>
