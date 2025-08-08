@@ -1579,7 +1579,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         await UpdateRelatedLeReviewStatus(application.AdoxioApplicationExtension._adoxioRelatedLeOrPclApplicationValue, application.AdoxioApplicationid, dynamicsClient);
                     }
 
-
                     Log.Information($"Liquor Invoice Payment approved.  Application ID: {application.AdoxioApplicationid} Invoice: {invoice.Invoicenumber}.");
                 }
                 // if payment failed:
@@ -1792,7 +1791,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         await UpdateRelatedLeReviewStatus(application.AdoxioApplicationExtension._adoxioRelatedLeOrPclApplicationValue, application.AdoxioApplicationid, dynamicsClient);
                     }
 
-                    Log.Information($"Payment approved.  Application ID: {application.AdoxioApplicationid} Invoice: {invoice.Invoicenumber} Liquor: {isAlternateAccount}");
+                    Log.Information($"Liquor Invoice Payment approved.  Application ID: {application.AdoxioApplicationid} Invoice: {invoice.Invoicenumber}.");
                 }
                 // if payment failed:
                 else
