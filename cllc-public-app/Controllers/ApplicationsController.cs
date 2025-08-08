@@ -1260,7 +1260,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// If no application is found, it will create a new "Permanent Change to a Licensee" application and return it.
         /// </summary>
         /// <param name="applicationId"></param>Filter results by a specific application ID.(Optional)
-        /// <param name="isLegalEntity">
+        /// <param name="isLegalEntityReview">
         /// Optional query param for indicating that the payment is being made for a legal entity review.
         /// Allowed values: "true" and "false".
         /// If not provided, the default value is "false".
@@ -1270,12 +1270,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("permanent-change-to-licensee-data")]
         public async Task<IActionResult> GetPermanetChangesToLicenseeData(
             [FromQuery] string applicationId,
-            [FromQuery] bool isLegalEntity = false
+            [FromQuery] bool isLegalEntityReview = false
         )
         {
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
-            return await _GetPermanentChangesToLicenseeData(applicationId, userSettings, isLegalEntity);
+            return await _GetPermanentChangesToLicenseeData(applicationId, userSettings, isLegalEntityReview);
         }
 
         /// GET all applications in Dynamics for the current user
@@ -1711,7 +1711,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var allowLgAccess = await CurrentUserIsLgForApplication(application);
             if (!CurrentUserHasAccessToApplicationOwnedBy(application._adoxioApplicantValue) && !allowLgAccess)
             {
-                throw new Exception("User doesn't have an access the application");
+                throw new Exception("User does not have access to the application");
             }
 
             application = new MicrosoftDynamicsCRMadoxioApplication();
@@ -1839,11 +1839,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     try
                     {
-                        await UpdateApplicationExtensionAsync(item.ApplicationExtension, item.Id);
+                        await UpsertApplicationExtensionAsync(item.ApplicationExtension, item.Id);
                     }
                     catch (HttpOperationException httpOperationException)
                     {
-                        _logger.LogError(httpOperationException, "Error updating application extension");
+                        _logger.LogError(httpOperationException, "Error upserting application extension");
                         _logger.LogDebug($"Request: {JsonConvert.SerializeObject(httpOperationException.Request)}");
                         _logger.LogDebug($"Response: {JsonConvert.SerializeObject(httpOperationException.Response)}");
                         throw;
@@ -2174,7 +2174,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     // add the ID of the LE review application to the PCL application extension.
                     if (application.AdoxioApplicationExtension?._adoxioRelatedLeOrPclApplicationValue == null)
                     {
-                        Console.WriteLine("creating pcl:");
                         var pclApplication = await this._dynamicsClient.Applications.CreateAsync(CopyLEReviewApplicationToPCL(application));
                         var expandPcl = new List<string> { "adoxio_ApplicationExtension" };
                         // Load extension table for newly created application
@@ -2216,11 +2215,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         return permanentChangesToLicenseeData;
                     }
                 }
+
                 return await _GetPermanentChangesToLicenseeData(application.AdoxioApplicationid, userSettings);
             }
             catch (HttpOperationException httpOperationException)
             {
                 _logger.LogError(httpOperationException, "Error getting PCL application for LE Review application");
+                _logger.LogDebug($"Request: {JsonConvert.SerializeObject(httpOperationException.Request)}");
+                _logger.LogDebug($"Response: {JsonConvert.SerializeObject(httpOperationException.Response)}");
                 throw;
             }
             catch (Exception error)
@@ -2322,7 +2324,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
         }
 
-        private async Task UpdateApplicationExtensionAsync(
+        /// <summary>
+        /// Updates or creates an application extension record.
+        /// - If the application extension does not exist, it will be created and linked to the application.
+        /// - If it exists, it will be updated with the provided values.
+        /// </summary>
+        /// <param name="applicationExtension"></param>
+        /// <param name="applicationId"></param>
+        /// <returns></returns>
+        private async Task UpsertApplicationExtensionAsync(
             ApplicationExtension applicationExtension,
             string applicationId
         )
@@ -2332,11 +2342,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             adoxioApplicationextension.CopyValues(applicationExtension);
             if (applicationExtension.Id == null)
             {
+                // Create new extension record and link to parent application record
                 var extension = await _dynamicsClient.Applicationextensions.CreateAsync(adoxioApplicationextension);
                 await LinkApplicationExtensionToApplication(applicationId, extension.AdoxioApplicationextensionid);
             }
             else
             {
+                // Update existing extension record
                 await _dynamicsClient.Applicationextensions.UpdateAsync(
                     applicationExtension.Id,
                     adoxioApplicationextension
@@ -2344,6 +2356,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
         }
 
+        /// <summary>
+        /// Links an application extension record to an application record.
+        /// </summary>
+        /// <param name="applicationId"></param>
+        /// <param name="extensionId"></param>
+        /// <returns></returns>
         private async Task LinkApplicationExtensionToApplication(string applicationId, string extensionId)
         {
             var odataId = new Odataid

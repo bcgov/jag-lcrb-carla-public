@@ -812,8 +812,13 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public int HasLiquorTiedHouseOwnershipOrControl { get; set; }
         public int HasLiquorTiedHouseThirdPartyAssociations { get; set; }
         public int HasLiquorTiedHouseFamilyMemberInvolvement { get; set; }
+
+        /// <summary>
+        /// The ID of a related legal entity or permanent change to a licensee application.
+        /// - For a legal entity review application, this will be the ID of the permanent change to a licensee application.
+        /// - For a permanent change to a licensee application, this will be the ID of the legal entity review application.
+        /// - For other application types, this will typically be null or empty.
+        /// </summary>
         public string RelatedLeOrPclApplicationId { get; set; }
-
     }
-
 }
