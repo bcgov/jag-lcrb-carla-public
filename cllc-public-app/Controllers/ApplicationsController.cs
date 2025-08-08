@@ -1099,36 +1099,41 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             PermanentChangesPageData data = new PermanentChangesPageData();
 
-            // set application type relationship 
-            var app = GetPermanentChangeApplication(userSettings, applicationId, isLegalEntityReview);
+            // set application type relationship
+            var initialApplication = GetPermanentChangeApplication(userSettings, applicationId, isLegalEntity);
 
             // get all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
             data.Licences = _dynamicsClient.GetLicensesByLicencee(userSettings.AccountId, _cache);
 
-            PaymentResult primaryInvoiceResult = null;
             // if there is an invoice but the payment has not been confirmed
-            if (!string.IsNullOrEmpty(app._adoxioInvoiceValue) && app.AdoxioPrimaryapplicationinvoicepaid != 1)
-            {
-                primaryInvoiceResult = await PaymentController.GetPaymentStatus(app, "primary", _dynamicsClient, _bcep).ConfigureAwait(true);
-            }
-
-            PaymentResult secondaryInvoiceResult = null;
-            // if there is an invoice but the payment has not been confirmed
-            if (!string.IsNullOrEmpty(app._adoxioSecondaryapplicationinvoiceValue) && app.AdoxioSecondaryapplicationinvoicepaid != 1)
-            {
-                secondaryInvoiceResult = await PaymentController.GetPaymentStatus(app, "secondary", _dynamicsClient, _bcep).ConfigureAwait(true);
-            }
-            data.Primary = primaryInvoiceResult?.TrnId == "0" ? null : primaryInvoiceResult;
-            data.Secondary = secondaryInvoiceResult?.TrnId == "0" ? null : secondaryInvoiceResult;
-            ;
             if (
-                (data.Primary != null && string.IsNullOrEmpty(app._adoxioInvoiceValue)) ||
-                (data.Secondary != null && string.IsNullOrEmpty(app._adoxioSecondaryapplicationinvoiceValue))
+                !string.IsNullOrEmpty(initialApplication._adoxioInvoiceValue)
+                && initialApplication.AdoxioPrimaryapplicationinvoicepaid != 1
             )
             {
-                app = await _dynamicsClient.GetApplicationByIdWithChildren(Guid.Parse(app.AdoxioApplicationid));
+                PaymentResult primaryInvoiceResult = await PaymentController
+                    .GetCannabisPaymentStatus(initialApplication, _dynamicsClient, _bcep)
+                    .ConfigureAwait(true);
+                data.Primary = primaryInvoiceResult?.TrnId == "0" ? null : primaryInvoiceResult;
             }
-            data.Application = await app.ToViewModel(_dynamicsClient, _cache, _logger);
+
+            // if there is an invoice but the payment has not been confirmed
+            if (
+                !string.IsNullOrEmpty(initialApplication._adoxioSecondaryapplicationinvoiceValue)
+                && initialApplication.AdoxioSecondaryapplicationinvoicepaid != 1
+            )
+            {
+                PaymentResult secondaryInvoiceResult = await PaymentController
+                    .GetLiquorPaymentStatus(initialApplication, _dynamicsClient, _bcep)
+                    .ConfigureAwait(true);
+                data.Secondary = secondaryInvoiceResult?.TrnId == "0" ? null : secondaryInvoiceResult;
+            }
+
+            var updatedApplication = await _dynamicsClient.GetApplicationByIdWithChildren(
+                Guid.Parse(initialApplication.AdoxioApplicationid)
+            );
+
+            data.Application = await updatedApplication.ToViewModel(_dynamicsClient, _cache, _logger);
 
             return new JsonResult(data);
         }
@@ -1269,43 +1274,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         )
         {
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
-            PermanentChangesPageData data = new PermanentChangesPageData();
-
-            // set application type relationship
-            var initialApplication = GetPermanentChangeApplication(userSettings, applicationId, isLegalEntity);
-
-            // get all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
-            data.Licences = _dynamicsClient.GetLicensesByLicencee(userSettings.AccountId, _cache);
-
-            // if there is an invoice but the payment has not been confirmed
-            if (
-                !string.IsNullOrEmpty(initialApplication._adoxioInvoiceValue)
-                && initialApplication.AdoxioPrimaryapplicationinvoicepaid != 1
-            )
-            {
-                PaymentResult primaryInvoiceResult = await PaymentController
-                    .GetCannabisPaymentStatus(initialApplication, _dynamicsClient, _bcep)
-                    .ConfigureAwait(true);
-                data.Primary = primaryInvoiceResult?.TrnId == "0" ? null : primaryInvoiceResult;
-            }
-
-            // if there is an invoice but the payment has not been confirmed
-            if (
-                !string.IsNullOrEmpty(initialApplication._adoxioSecondaryapplicationinvoiceValue)
-                && initialApplication.AdoxioSecondaryapplicationinvoicepaid != 1
-            )
-            {
-                PaymentResult secondaryInvoiceResult = await PaymentController
-                    .GetLiquorPaymentStatus(initialApplication, _dynamicsClient, _bcep)
-                    .ConfigureAwait(true);
-                data.Secondary = secondaryInvoiceResult?.TrnId == "0" ? null : secondaryInvoiceResult;
-            }
-
-            var updatedApplication = await _dynamicsClient.GetApplicationByIdWithChildren(
-                Guid.Parse(initialApplication.AdoxioApplicationid)
-            );
-
-            data.Application = await updatedApplication.ToViewModel(_dynamicsClient, _cache, _logger);
 
             return await _GetPermanentChangesToLicenseeData(applicationId, userSettings, isLegalEntity);
         }
@@ -2197,11 +2165,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
-            var expand = new List<string> { "adoxio_ApplicationExtension", "adoxio_ApplicationTypeId" };
-            var application = await _dynamicsClient.Applications.GetByKeyAsync(id, expand: expand);
-
-
-
+                var expand = new List<string> { "adoxio_ApplicationExtension", "adoxio_ApplicationTypeId" };
+                var application = await _dynamicsClient.Applications.GetByKeyAsync(id, expand: expand);
 
                 if (application.AdoxioApplicationTypeId?.AdoxioName == "LE Review")
                 {
@@ -2264,7 +2229,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw;
             }
         }
-
 
         private MicrosoftDynamicsCRMadoxioApplication CopyLEReviewApplicationToPCL(MicrosoftDynamicsCRMadoxioApplication LeReview)
         {
