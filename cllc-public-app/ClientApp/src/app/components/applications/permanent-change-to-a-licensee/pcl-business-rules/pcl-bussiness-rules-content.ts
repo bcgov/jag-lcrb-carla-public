@@ -10,7 +10,6 @@ export const PCLFormControlDefinitions: PCLFormControlDefinitionOption[] = [
   {
     name: 'Internal Transfer of Shares',
     formControlName: PCLFormControlName.csInternalTransferOfShares,
-    // availableTo: ['PrivateCorporation', 'LimitedLiabilityPartnership'],
     CannabisFee: 110,
     LiquorFee: 110,
     helpTextHeader: 'Use this option to report:',
@@ -25,7 +24,6 @@ export const PCLFormControlDefinitions: PCLFormControlDefinitionOption[] = [
   {
     name: 'External Transfer of Shares',
     formControlName: PCLFormControlName.csExternalTransferOfShares,
-    // availableTo: ['PrivateCorporation', 'LimitedLiabilityPartnership'],
     CannabisFee: 330,
     LiquorFee: 330,
     helpTextHeader: 'Use this option to report:',
@@ -39,15 +37,6 @@ export const PCLFormControlDefinitions: PCLFormControlDefinitionOption[] = [
   {
     name: 'Change of Directors or Officers',
     formControlName: PCLFormControlName.csChangeOfDirectorsOrOfficers,
-    // availableTo: [
-    //   'PrivateCorporation',
-    //   'PublicCorporation',
-    //   'Society',
-    //   'Coop',
-    //   'MilitaryMess',
-    //   'LocalGovernment',
-    //   'University'
-    // ],
     CannabisFee: 500,
     LiquorFee: 220,
     helpTextHeader: 'Use this option to report:',
@@ -61,14 +50,6 @@ export const PCLFormControlDefinitions: PCLFormControlDefinitionOption[] = [
     name: 'Name Change, Licensee -- Corporation',
     otherName: 'Name Change, Licensee -- Organization',
     formControlName: PCLFormControlName.csNameChangeLicenseeCorporation,
-    // availableTo: [
-    //   'PrivateCorporation',
-    //   'PublicCorporation',
-    //   'SoleProprietorship',
-    //   'Coop',
-    //   'MilitaryMess',
-    //   'University'
-    // ],
     CannabisFee: 220,
     LiquorFee: 220,
     helpTextHeader: 'Use this option to report:',
@@ -81,7 +62,6 @@ export const PCLFormControlDefinitions: PCLFormControlDefinitionOption[] = [
   {
     name: 'Name Change, Licensee -- Partnership',
     formControlName: PCLFormControlName.csNameChangeLicenseePartnership,
-    // availableTo: ['GeneralPartnership', 'Partnership', 'LimitedLiabilityPartnership'],
     CannabisFee: 220,
     LiquorFee: 220,
     helpTextHeader: 'Use this option to report:',
@@ -103,18 +83,6 @@ export const PCLFormControlDefinitions: PCLFormControlDefinitionOption[] = [
   {
     name: 'Name Change, Person',
     formControlName: PCLFormControlName.csNameChangeLicenseePerson,
-    // availableTo: [
-    //   'PrivateCorporation',
-    //   'PublicCorporation',
-    //   'GeneralPartnership',
-    //   'Partnership',
-    //   'LimitedLiabilityPartnership',
-    //   'IndigenousNation',
-    //   'LocalGovernment',
-    //   'Society',
-    //   'Coop',
-    //   'MilitaryMess'
-    // ],
     CannabisFee: 220,
     LiquorFee: 220,
     helpTextHeader: 'Use this option to report:',
@@ -124,15 +92,6 @@ export const PCLFormControlDefinitions: PCLFormControlDefinitionOption[] = [
   {
     name: 'Addition of Receiver or Executor',
     formControlName: PCLFormControlName.csAdditionalReceiverOrExecutor,
-    // availableTo: [
-    //   'PrivateCorporation',
-    //   'PublicCorporation',
-    //   'GeneralPartnership',
-    //   'Partnership',
-    //   'LimitedLiabilityPartnership',
-    //   'Society',
-    //   'MilitaryMess'
-    // ],
     CannabisFee: 220,
     LiquorFee: 220,
     helpTextHeader: 'Use this option to report:',
@@ -142,15 +101,6 @@ export const PCLFormControlDefinitions: PCLFormControlDefinitionOption[] = [
   {
     name: 'Tied House Declaration',
     formControlName: PCLFormControlName.csTiedHouseDeclaration,
-    // availableTo: [
-    //   'PrivateCorporation',
-    //   'PublicCorporation',
-    //   'GeneralPartnership',
-    //   'Partnership',
-    //   'LimitedLiabilityPartnership',
-    //   'Society',
-    //   'MilitaryMess'
-    // ],
     CannabisFee: 0,
     LiquorFee: 220,
     helpTextHeader: 'Use this option to report:',

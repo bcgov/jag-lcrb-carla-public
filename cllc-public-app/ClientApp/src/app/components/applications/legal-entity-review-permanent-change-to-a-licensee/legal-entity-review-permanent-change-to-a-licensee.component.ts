@@ -179,9 +179,6 @@ export class LegalEntityReviewPermanentChangeToALicenseeComponent extends FormBa
       this.form.disable();
     }
 
-    this.application.csChangeOfDirectorsOrOfficers = true;
-    this.application.csTiedHouseDeclaration = true;
-
     this.form.patchValue(application);
 
     this.hasDataLoaded = true;
