@@ -31,7 +31,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                     HasLiquorTiedHouseThirdPartyAssociations = applicationExtension.AdoxioHasLiquorTiedHouseThirdPartyAssociations,
                     HasLiquorTiedHouseOwnershipOrControl = applicationExtension.AdoxioHasLiquorTiedHouseOwnershipOrControl,
                     HasLiquorTiedHouseFamilyMemberInvolvement = applicationExtension.AdoxioHasLiquorTiedHouseFamilyMemberInvolvement,
-                    RelatedLeOrPclApplicationId = applicationExtension.AdoxioRelatedLeOrPclApplication?.AdoxioApplicationid
+                    RelatedLeOrPclApplicationId = applicationExtension._adoxioRelatedLeOrPclApplicationValue
                 };
             }
             return result;
