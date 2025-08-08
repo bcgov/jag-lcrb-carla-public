@@ -19,7 +19,6 @@ import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { RelatedLicence } from "@models/related-licence";
 import { ApplicationDataService } from "../../../services/application-data.service";
 import { Application } from "../../../models/application.model";
-import { ApplicationTypeDataService } from "../../../services/application-type-data.service";
 import { RelatedLicencePickerComponent } from "@shared/components/related-licence-picker/related-licence-picker.component";
 import { RelatedJobnumberPickerComponent } from "@shared/components/related-jobnumber-picker/related-jobnumber-picker.component";
 
@@ -69,7 +68,6 @@ export class ApplicationTiedHouseExemptionComponent extends FormBase implements 
     private fb: FormBuilder,
     public dialog: MatDialog,
     public applicationDataService: ApplicationDataService,
-    public applicationTypeDataService: ApplicationTypeDataService,
     public establishmentWatchWordsService: EstablishmentWatchWordsService) {
     super();
     this.route.paramMap.subscribe(pmap => this.licenceId = pmap.get("licenceId"));
@@ -114,7 +112,7 @@ export class ApplicationTiedHouseExemptionComponent extends FormBase implements 
     });
 
     if (!this.licenceId) {
-      this.applicationTypeDataService.getApplicationTypeByName('Tied House Exemption Application')
+      this.applicationDataService.getApplicationTypeByName('Tied House Exemption Application')
         .pipe(takeWhile(() => this.componentActive))
         .subscribe((appType: ApplicationType) => {
           this.applicationType = appType;

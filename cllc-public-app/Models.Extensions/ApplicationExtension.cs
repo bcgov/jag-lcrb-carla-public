@@ -30,7 +30,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                     Id = applicationExtension.AdoxioApplicationextensionid,
                     HasLiquorTiedHouseThirdPartyAssociations = applicationExtension.AdoxioHasLiquorTiedHouseThirdPartyAssociations,
                     HasLiquorTiedHouseOwnershipOrControl = applicationExtension.AdoxioHasLiquorTiedHouseOwnershipOrControl,
-                    HasLiquorTiedHouseFamilyMemberInvolvement = applicationExtension.AdoxioHasLiquorTiedHouseFamilyMemberInvolvement
+                    HasLiquorTiedHouseFamilyMemberInvolvement = applicationExtension.AdoxioHasLiquorTiedHouseFamilyMemberInvolvement,
+                    RelatedLeOrPclApplicationId = applicationExtension.AdoxioRelatedLeOrPclApplication?.AdoxioApplicationid
                 };
             }
             return result;

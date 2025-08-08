@@ -812,6 +812,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public int HasLiquorTiedHouseOwnershipOrControl { get; set; }
         public int HasLiquorTiedHouseThirdPartyAssociations { get; set; }
         public int HasLiquorTiedHouseFamilyMemberInvolvement { get; set; }
+        public string RelatedLeOrPclApplicationId { get; set; }
 
     }
 
