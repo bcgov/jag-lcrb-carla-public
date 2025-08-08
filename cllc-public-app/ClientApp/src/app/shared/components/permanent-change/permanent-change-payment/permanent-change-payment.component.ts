@@ -45,7 +45,7 @@ export class PermanentChangePaymentComponent implements OnInit {
    *
    * @return {*}  {boolean}
    */
-  isCannabisPaymentRequired(): boolean {
+  get isCannabisPaymentRequired(): boolean {
     return this.cannabisLicences?.length > 0 && this.selectedChangeList.some((change) => change.CannabisFee > 0);
   }
 
@@ -55,7 +55,7 @@ export class PermanentChangePaymentComponent implements OnInit {
    * @readonly
    * @type {boolean}
    */
-  isCannabisInvoicePaid(): boolean {
+  get isCannabisInvoicePaid(): boolean {
     return this.application?.primaryInvoicePaid || false;
   }
 
@@ -69,7 +69,7 @@ export class PermanentChangePaymentComponent implements OnInit {
     const totalCannabisFee = this.selectedChangeList.reduce((sum, change) => sum + (change.CannabisFee || 0), 0);
     // Not all changes have a fee. If the total cannabis fee is 0, we do not show the invoice.
     // This is to prevent showing an invoice with a $0 amount, which can be confusing.
-    return totalCannabisFee > 0 && (this.isCannabisPaymentRequired() || this.isCannabisInvoicePaid());
+    return totalCannabisFee > 0 && (this.isCannabisPaymentRequired || this.isCannabisInvoicePaid);
   }
 
   /**
@@ -77,7 +77,7 @@ export class PermanentChangePaymentComponent implements OnInit {
    *
    * @return {*}  {boolean}
    */
-  isLiquorPaymentRequired(): boolean {
+  get isLiquorPaymentRequired(): boolean {
     return this.liquorLicences?.length > 0 && this.selectedChangeList.some((change) => change.LiquorFee > 0);
   }
 
@@ -87,7 +87,7 @@ export class PermanentChangePaymentComponent implements OnInit {
    * @readonly
    * @type {boolean}
    */
-  isLiquorInvoicePaid(): boolean {
+  get isLiquorInvoicePaid(): boolean {
     return this.application?.secondaryInvoicePaid || false;
   }
 
@@ -101,6 +101,6 @@ export class PermanentChangePaymentComponent implements OnInit {
     const totalLiquorFee = this.selectedChangeList.reduce((sum, change) => sum + (change.LiquorFee || 0), 0);
     // Not all changes have a fee. If the total liquor fee is 0, we do not show the invoice.
     // This is to prevent showing an invoice with a $0 amount, which can be confusing.
-    return totalLiquorFee > 0 && (this.isLiquorPaymentRequired() || this.isLiquorInvoicePaid());
+    return totalLiquorFee > 0 && (this.isLiquorPaymentRequired || this.isLiquorInvoicePaid);
   }
 }
