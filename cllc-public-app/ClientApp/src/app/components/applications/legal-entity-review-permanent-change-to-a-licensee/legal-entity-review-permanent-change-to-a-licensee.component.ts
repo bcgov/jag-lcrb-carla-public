@@ -123,21 +123,23 @@ export class LegalEntityReviewPermanentChangeToALicenseeComponent extends FormBa
    * @memberof PermanentChangeToALicenseeComponent
    */
   private loadData() {
-    const sub = this.applicationDataService.getLegalEntityPermanentChangesToLicenseeData(this.applicationId).subscribe({
-      next: (data) => {
-        this.setFormData(data);
-      },
-      error: (error) => {
-        console.error('Error loading form data', error);
-        this.matDialog.open(GenericMessageDialogComponent, {
-          data: {
-            title: 'Error Loading Form Data',
-            message: 'Failed to load form data. Please try again. If the problem persists, please contact support.',
-            closeButtonText: 'Close'
-          }
-        });
-      }
-    });
+    const sub = this.applicationDataService
+      .GetOrCreatePermanentChangeForLegalEntityReviewApplicationAsync(this.applicationId)
+      .subscribe({
+        next: (data) => {
+          this.setFormData(data);
+        },
+        error: (error) => {
+          console.error('Error loading form data', error);
+          this.matDialog.open(GenericMessageDialogComponent, {
+            data: {
+              title: 'Error Loading Form Data',
+              message: 'Failed to load form data. Please try again. If the problem persists, please contact support.',
+              closeButtonText: 'Close'
+            }
+          });
+        }
+      });
 
     this.subscriptionList.push(sub);
   }

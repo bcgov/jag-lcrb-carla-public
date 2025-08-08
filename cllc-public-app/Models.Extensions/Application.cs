@@ -123,7 +123,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioAuthorizedtosubmit = from.AuthorizedToSubmit;
             to.AdoxioSignatureagreement = from.SignatureAgreement;
 
-            to.AdoxioApplicanttype = (int?)from.ApplicantType;
+            to.AdoxioApplicanttype = (int?)from.ApplicantType == 0 ? null: (int?)from.ApplicantType;
             to.AdoxioLgzoning = (int?)from.LgZoning;
             to.AdoxioLgdecisioncomments = from.LGDecisionComments;
 
@@ -1058,7 +1058,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 EstablishmentAddressStreet = dynamicsApplication.AdoxioEstablishmentaddressstreet,
                 EstablishmentAddressCity = dynamicsApplication.AdoxioEstablishmentaddresscity,
                 EstablishmentAddressPostalCode = dynamicsApplication.AdoxioEstablishmentaddresspostalcode,
-                EstablishmentAddress =  dynamicsApplication.AdoxioEstablishmentaddressstreet
+                EstablishmentAddress = dynamicsApplication.AdoxioEstablishmentaddressstreet
                                         + ", " + dynamicsApplication.AdoxioEstablishmentaddresscity
                                         + " " + dynamicsApplication.AdoxioEstablishmentaddresspostalcode,
                 EstablishmentPhone = dynamicsApplication.AdoxioEstablishmentphone,
@@ -1070,6 +1070,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 IsStructuralChange = (dynamicsApplication?.AdoxioApplicationTypeId?.AdoxioIsstructuralchange == true),
                 DateApplicationSubmitted = dynamicsApplication?.AdoxioDateapplicationsubmitted,
                 DateApplicantSentToLG = dynamicsApplication?.AdoxioDateapplicantsenttolg,
+                ApplicationExtension = dynamicsApplication?.AdoxioApplicationExtension?.ToViewModel(),
             };
 
             // id

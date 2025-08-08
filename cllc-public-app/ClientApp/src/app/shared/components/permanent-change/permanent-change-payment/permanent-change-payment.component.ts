@@ -60,6 +60,19 @@ export class PermanentChangePaymentComponent implements OnInit {
   }
 
   /**
+   * Return `true` if the cannabis invoice section should be visible.
+   *
+   * @readonly
+   * @type {boolean}
+   */
+  get isCannabisInvoiceVisible(): boolean {
+    const totalCannabisFee = this.selectedChangeList.reduce((sum, change) => sum + (change.CannabisFee || 0), 0);
+    // Not all changes have a fee. If the total cannabis fee is 0, we do not show the invoice.
+    // This is to prevent showing an invoice with a $0 amount, which can be confusing.
+    return totalCannabisFee > 0 && (this.isCannabisPaymentRequired || this.isCannabisInvoicePaid);
+  }
+
+  /**
    * Return `true` if there are any liquor licences with fees that require payment.
    *
    * @return {*}  {boolean}
@@ -76,5 +89,18 @@ export class PermanentChangePaymentComponent implements OnInit {
    */
   get isLiquorInvoicePaid(): boolean {
     return this.application?.secondaryInvoicePaid || false;
+  }
+
+  /**
+   * Return `true` if the liquor invoice section should be visible.
+   *
+   * @readonly
+   * @type {boolean}
+   */
+  get isLiquorInvoiceVisible(): boolean {
+    const totalLiquorFee = this.selectedChangeList.reduce((sum, change) => sum + (change.LiquorFee || 0), 0);
+    // Not all changes have a fee. If the total liquor fee is 0, we do not show the invoice.
+    // This is to prevent showing an invoice with a $0 amount, which can be confusing.
+    return totalLiquorFee > 0 && (this.isLiquorPaymentRequired || this.isLiquorInvoicePaid);
   }
 }

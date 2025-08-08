@@ -316,7 +316,6 @@ import { NgxSliderModule } from "@angular-slider/ngx-slider";
 import { SepClaimComponent } from './components/sep/sep-claim/sep-claim.component';
 import { FinalConfirmationComponent } from './components/sep/sep-application/final-confirmation/final-confirmation.component';
 import { CancelSepApplicationDialogComponent } from './components/sep/sep-application/cancel-sep-application-dialog/cancel-sep-application-dialog.component';
-import { ApplicationTypeDataService } from "./services/application-type-data.service";
 import { PermanentChangeDeclarationsComponent } from "@shared/components/permanent-change/permanent-change-declarations/permanent-change-declarations.component";
 
 // LCSD - 6243: 2024-02-28 waynezen
@@ -728,7 +727,6 @@ import { ConnectionToOtherLiquorLicencesComponent } from "@components/account-pr
     SpecialEventsDataService,
     BCeidOrServiceCardAuthGuard,
     PoliceAuthGuard,
-    ApplicationTypeDataService,
     {
       provide: APP_INITIALIZER,
       useFactory: (featureFlagService: FeatureFlagService) => function () {
