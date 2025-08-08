@@ -650,7 +650,7 @@
                 </div>
 
                 <div
-                  *ngIf="item.applicationStatus === 'Not Submitted'"
+                  *ngIf="item.applicationStatus === 'Not Submitted' && !isPermanentChangeToLicenceAsAResultOfLegalEntityReview(item)"
                   style="margin-top: 5px"
                   (click)="cancelApplication(item.id, item.establishmentName, item.name)">
                   <a href="javascript: void(0)">
