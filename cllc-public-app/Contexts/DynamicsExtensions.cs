@@ -791,7 +791,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         // Does not return application of type "Licensee Changes"
         public static IEnumerable<MicrosoftDynamicsCRMadoxioApplication> GetApplicationListByApplicant(this IDynamicsClient _dynamicsClient, string applicantId)
         {
-            var expand = new List<string> { "adoxio_LicenceFeeInvoice", "adoxio_AssignedLicence", "adoxio_LicenceType", "adoxio_ApplicationTypeId" };
+            var expand = new List<string> { "adoxio_LicenceFeeInvoice", "adoxio_AssignedLicence", "adoxio_LicenceType", "adoxio_ApplicationTypeId", "adoxio_ApplicationExtension" };
             IEnumerable<MicrosoftDynamicsCRMadoxioApplication> dynamicsApplicationList = null;
             if (string.IsNullOrEmpty(applicantId))
             {
