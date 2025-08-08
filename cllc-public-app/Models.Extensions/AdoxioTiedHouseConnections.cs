@@ -59,7 +59,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioMiddlename = from.LastName;
             to.AdoxioDateOfBirth = from.DateOfBirth;
             to.AdoxioLastname = from.LastName;
-            to.AdoxioOtherRelationship = from.OtherRelationship;
+            to.AdoxioOtherRelationship = from.OtherDescription;
             to.AdoxioRelationshipType = from.RelationshipToLicence;
             to.AdoxioLegalEntityReview = from.IsLegalEntity == true ? 1: 0;
             to.SupersededByOdataBind = !String.IsNullOrEmpty(from.SupersededById) ? $"/adoxio_tiedhouseconnections({from.SupersededById})": null;
@@ -129,6 +129,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.CategoryType = tiedHouse.AdoxioCategoryType;
                 result.SelfDeclared = tiedHouse.AdoxioSelfDeclared;
                 result.DeclarationDate = tiedHouse.AdoxioDeclarationDate;
+                result.OtherDescription = tiedHouse.AdoxioOtherRelationship;
 
             }
             return result;

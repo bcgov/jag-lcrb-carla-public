@@ -63,6 +63,8 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
       this.patchFormFromInput();
     }
 
+    this.showOtherField =this.form.get('relationshipToLicence')?.value ==  845280009;
+
     this.form.get('relationshipToLicence')?.valueChanges.subscribe((value) => {
       this.showOtherField = value == 845280009;
       this.updateFieldValidators();
