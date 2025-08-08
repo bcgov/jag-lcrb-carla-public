@@ -432,14 +432,11 @@ type PCLMatrixConditionalGroupOptions = {
   selectedPCLSections?: PCLFormControlName[];
 };
 
-/**
- * This encodes all of the business rules for which PCL sections should be visible/editable, based on:
- * - The user's account type (e.g., Private Corporation)
- * - The selected PCL section (e.g., csChangeOfDirectorsOrOfficers)
- * - The licences the user has (e.g., Liquor Primary)
- */
-const PCLSectionBusinessRules: Partial<
-  Record<AccountType, Partial<Record<PCLMatrixConditionalGroup, Partial<Record<PCLMatrixLicenceGroup, () => number>>>>>
+const _PCLSectionGroupedBusinessRules: Partial<
+  Record<
+    AccountType,
+    Partial<Record<PCLMatrixConditionalGroup, Partial<Record<PCLMatrixLicenceGroup, () => number | null>>>>
+  >
 > = {
   [AccountType.Default]: {
     [PCLMatrixConditionalGroup.Default]: {
@@ -761,6 +758,327 @@ const PCLSectionBusinessRules: Partial<
       },
       [PCLMatrixLicenceGroup.Cannabis4]: () => {
         return 0b011110011;
+      }
+    }
+  },
+  [AccountType.PublicCorporation]: {
+    [PCLMatrixConditionalGroup.Default]: {
+      [PCLMatrixLicenceGroup.Default]: () => {
+        return FULL_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Liquor1]: () => {
+        return 0b100110010;
+      },
+      [PCLMatrixLicenceGroup.Liquor2]: () => {
+        return 0b100110010;
+      },
+      [PCLMatrixLicenceGroup.Liquor3]: () => {
+        return 0b100110010;
+      },
+      [PCLMatrixLicenceGroup.Cannabis1]: () => {
+        return 0b100110010;
+      },
+      [PCLMatrixLicenceGroup.Cannabis2]: () => {
+        return 0b100110010;
+      },
+      [PCLMatrixLicenceGroup.Cannabis3]: () => {
+        return 0b100110010;
+      },
+      [PCLMatrixLicenceGroup.Cannabis4]: () => {
+        return 0b100110010;
+      }
+    },
+    [PCLMatrixConditionalGroup.ReceiverOrExecutor]: {
+      [PCLMatrixLicenceGroup.Default]: () => {
+        return FULL_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Liquor1]: () => {
+        return 0b100000000;
+      },
+      [PCLMatrixLicenceGroup.Liquor2]: () => {
+        return 0b100000000;
+      },
+      [PCLMatrixLicenceGroup.Liquor3]: () => {
+        return 0b100000000;
+      },
+      [PCLMatrixLicenceGroup.Cannabis1]: () => {
+        return 0b100000000;
+      },
+      [PCLMatrixLicenceGroup.Cannabis2]: () => {
+        return 0b100000000;
+      },
+      [PCLMatrixLicenceGroup.Cannabis3]: () => {
+        return 0b100000000;
+      },
+      [PCLMatrixLicenceGroup.Cannabis4]: () => {
+        return 0b100000000;
+      }
+    },
+    // Not applicable for Public Corporation
+    [PCLMatrixConditionalGroup.TSE]: {
+      [PCLMatrixLicenceGroup.Default]: () => {
+        return FULL_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Liquor1]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Liquor2]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Liquor3]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis1]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis2]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis3]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis4]: () => {
+        return EMPTY_BITMASK;
+      }
+    },
+    // Not applicable for Public Corporation
+    [PCLMatrixConditionalGroup.TSI]: {
+      [PCLMatrixLicenceGroup.Default]: () => {
+        return FULL_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Liquor1]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Liquor2]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Liquor3]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis1]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis2]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis3]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis4]: () => {
+        return EMPTY_BITMASK;
+      }
+    },
+    [PCLMatrixConditionalGroup.CoD]: {
+      [PCLMatrixLicenceGroup.Default]: () => {
+        return FULL_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Liquor1]: () => {
+        return 0b000110010;
+      },
+      [PCLMatrixLicenceGroup.Liquor2]: () => {
+        return 0b000110010;
+      },
+      [PCLMatrixLicenceGroup.Liquor3]: () => {
+        return 0b000110010;
+      },
+      [PCLMatrixLicenceGroup.Cannabis1]: () => {
+        return 0b000110010;
+      },
+      [PCLMatrixLicenceGroup.Cannabis2]: () => {
+        return 0b000110010;
+      },
+      [PCLMatrixLicenceGroup.Cannabis3]: () => {
+        return 0b000110010;
+      },
+      [PCLMatrixLicenceGroup.Cannabis4]: () => {
+        return 0b000110010;
+      }
+    },
+    // Not applicable for Public Corporation
+    [PCLMatrixConditionalGroup.CoDAndTSE]: {
+      [PCLMatrixLicenceGroup.Default]: () => {
+        return FULL_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Liquor1]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Liquor2]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Liquor3]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis1]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis2]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis3]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis4]: () => {
+        return EMPTY_BITMASK;
+      }
+    },
+    // Not applicable for Public Corporation
+    [PCLMatrixConditionalGroup.CoDAndTSI]: {
+      [PCLMatrixLicenceGroup.Default]: () => {
+        return FULL_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Liquor1]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Liquor2]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Liquor3]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis1]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis2]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis3]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis4]: () => {
+        return EMPTY_BITMASK;
+      }
+    },
+    [PCLMatrixConditionalGroup.LENameChangeCorporation]: {
+      [PCLMatrixLicenceGroup.Default]: () => {
+        return FULL_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Liquor1]: () => {
+        return 0b000110010;
+      },
+      [PCLMatrixLicenceGroup.Liquor2]: () => {
+        return 0b000110010;
+      },
+      [PCLMatrixLicenceGroup.Liquor3]: () => {
+        return 0b000110010;
+      },
+      [PCLMatrixLicenceGroup.Cannabis1]: () => {
+        return 0b000110010;
+      },
+      [PCLMatrixLicenceGroup.Cannabis2]: () => {
+        return 0b000110010;
+      },
+      [PCLMatrixLicenceGroup.Cannabis3]: () => {
+        return 0b000110010;
+      },
+      [PCLMatrixLicenceGroup.Cannabis4]: () => {
+        return 0b000110010;
+      }
+    },
+    // Not applicable for Public Corporation
+    [PCLMatrixConditionalGroup.LENameChangePartnership]: {
+      [PCLMatrixLicenceGroup.Default]: () => {
+        return FULL_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Liquor1]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Liquor2]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Liquor3]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis1]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis2]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis3]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis4]: () => {
+        return EMPTY_BITMASK;
+      }
+    },
+    // Not applicable for Public Corporation
+    [PCLMatrixConditionalGroup.LENameChangeSociety]: {
+      [PCLMatrixLicenceGroup.Default]: () => {
+        return FULL_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Liquor1]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Liquor2]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Liquor3]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis1]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis2]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis3]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis4]: () => {
+        return EMPTY_BITMASK;
+      }
+    },
+    [PCLMatrixConditionalGroup.LENameChangeIndividual]: {
+      [PCLMatrixLicenceGroup.Default]: () => {
+        return FULL_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Liquor1]: () => {
+        return 0b000110010;
+      },
+      [PCLMatrixLicenceGroup.Liquor2]: () => {
+        return 0b000110010;
+      },
+      [PCLMatrixLicenceGroup.Liquor3]: () => {
+        return 0b000110010;
+      },
+      [PCLMatrixLicenceGroup.Cannabis1]: () => {
+        return 0b000110010;
+      },
+      [PCLMatrixLicenceGroup.Cannabis2]: () => {
+        return 0b000110010;
+      },
+      [PCLMatrixLicenceGroup.Cannabis3]: () => {
+        return 0b000110010;
+      },
+      [PCLMatrixLicenceGroup.Cannabis4]: () => {
+        return 0b000110010;
+      }
+    },
+    // Not applicable for Public Corporation
+    [PCLMatrixConditionalGroup.TiedHouseChange]: {
+      [PCLMatrixLicenceGroup.Default]: () => {
+        return FULL_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Liquor1]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Liquor2]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Liquor3]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis1]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis2]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis3]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis4]: () => {
+        return EMPTY_BITMASK;
       }
     }
   },
@@ -1401,4 +1719,42 @@ const PCLSectionBusinessRules: Partial<
       }
     }
   }
+};
+
+/**
+ * This encodes all of the business rules for which PCL sections should be visible/editable, based on:
+ * - The user's account type (e.g., Private Corporation)
+ * - The selected PCL section (e.g., csChangeOfDirectorsOrOfficers)
+ * - The licences the user has (e.g., Liquor Primary)
+ *
+ * Note: Some account types have the same rules, and so share the same values from _PCLSectionGroupedBusinessRules.
+ */
+const PCLSectionBusinessRules: Partial<
+  Record<
+    AccountType,
+    Partial<Record<PCLMatrixConditionalGroup, Partial<Record<PCLMatrixLicenceGroup, () => number | null>>>>
+  >
+> = {
+  // Default rules
+  [AccountType.Default]: _PCLSectionGroupedBusinessRules[AccountType.Default],
+
+  // Private Corporation rules
+  [AccountType.PrivateCorporation]: _PCLSectionGroupedBusinessRules[AccountType.PrivateCorporation],
+
+  // Public Corporation rules
+  [AccountType.PublicCorporation]: _PCLSectionGroupedBusinessRules[AccountType.PublicCorporation],
+
+  // Partnership rules
+  [AccountType.Partnership]: _PCLSectionGroupedBusinessRules[AccountType.Partnership],
+  [AccountType.GeneralPartnership]: _PCLSectionGroupedBusinessRules[AccountType.Partnership],
+  [AccountType.LimitedLiabilityPartnership]: _PCLSectionGroupedBusinessRules[AccountType.Partnership],
+
+  // Society rules
+  [AccountType.Society]: _PCLSectionGroupedBusinessRules[AccountType.Society],
+  [AccountType.IndigenousNation]: _PCLSectionGroupedBusinessRules[AccountType.Society],
+  [AccountType.LocalGovernment]: _PCLSectionGroupedBusinessRules[AccountType.Society],
+  [AccountType.Coop]: _PCLSectionGroupedBusinessRules[AccountType.Society],
+  [AccountType.MilitaryMess]: _PCLSectionGroupedBusinessRules[AccountType.Society],
+  [AccountType.University]: _PCLSectionGroupedBusinessRules[AccountType.Society],
+  [AccountType.SoleProprietorship]: _PCLSectionGroupedBusinessRules[AccountType.Society]
 };
