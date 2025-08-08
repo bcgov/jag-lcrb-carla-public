@@ -12,6 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Microsoft.Rest.Serialization;
 
     /// <summary>
     /// Auto Generated
@@ -126,8 +127,12 @@ namespace Gov.Lclb.Cllb.Interfaces
                     result.AdoxioApplicant = await GetAccountByIdAsync(Guid.Parse(result._adoxioApplicantValue));
                 }
             }
-            catch (HttpOperationException)
+            catch (HttpOperationException httpOperationException)
             {
+                Console.WriteLine(
+                    SafeJsonConvert.SerializeObject(httpOperationException),
+                    $"GetApplicationById - Error getting application by ID: {id}"
+                );
                 result = null;
             }
             return result;
@@ -182,8 +187,12 @@ namespace Gov.Lclb.Cllb.Interfaces
                     result.AdoxioAssignedLicence.AdoxioEstablishment = GetEstablishmentById(Guid.Parse(result.AdoxioAssignedLicence._adoxioEstablishmentValue));
                 }
             }
-            catch (HttpOperationException)
+            catch (HttpOperationException httpOperationException)
             {
+                Console.WriteLine(
+                    SafeJsonConvert.SerializeObject(httpOperationException),
+                    $"GetApplicationByIdWithChildren - Error getting application by ID: {id}"
+                );
                 result = null;
             }
             return result;
@@ -210,26 +219,14 @@ namespace Gov.Lclb.Cllb.Interfaces
                 result = Licencetypes.GetByKey(adoxioLicencetypeid: id, expand: expand);
 
             }
-            catch (HttpOperationException)
+            catch (HttpOperationException httpOperationException)
             {
+                Console.WriteLine(
+                    SafeJsonConvert.SerializeObject(httpOperationException),
+                    $"GetAdoxioLicencetypeById - Error getting licence type by ID: {id}"
+                );
                 result = null;
             }
-
-            // additional pass to populate the applicationtypes licencetype.
-            /*
-            if (result.AdoxioLicencetypesApplicationtypes != null)
-            {
-                foreach (var item in result.AdoxioLicencetypesApplicationtypes)
-                {
-
-                    if (item._adoxioLicencetypeidValue != null)
-                    {
-                        item.AdoxioLicenceTypeId = _dynamicsClient.GetAdoxioLicencetypeById(item._adoxioLicencetypeidValue);
-                    }
-                }
-             }
-            */
-
 
             return result;
         }

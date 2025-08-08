@@ -267,7 +267,6 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
    * @param {number} accordionIndex
    */
   removeNewTiedHouseDeclaration(declaration: TiedHouseConnection, keepAccordionOpen: boolean, accordionIndex: number) {
-    console.log(accordionIndex);
     var isExistingDeclaration = declaration.supersededById;
     //if declaration has not been saved to dynamics remove from declaration list
     if (!declaration.id) {
@@ -366,7 +365,6 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
    * @param {number} [index]
    */
   openPanel(index?: number) {
-    console.log(index);
     this.openedPanelIndex = index ?? this.groupedTiedHouseDeclarations.length - 1;
   }
 

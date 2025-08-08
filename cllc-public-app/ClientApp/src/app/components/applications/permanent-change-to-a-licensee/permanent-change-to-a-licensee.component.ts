@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -30,6 +30,7 @@ import {
   PermanentChangeContactComponent
 } from '@shared/components/permanent-change/permanent-change-contact/permanent-change-contact.component';
 import { FormBase } from '@shared/form-base';
+import { debounce } from 'lodash';
 import { forkJoin, Observable, of } from 'rxjs';
 import { catchError, map, mergeMap, takeWhile } from 'rxjs/operators';
 import { TiedHouseDeclarationComponent } from '../tied-house-decleration/tied-house-declaration.component';
@@ -41,7 +42,7 @@ export const SharepointNameRegex = /^[^~#%&*{}\\:<>?/+|""]*$/;
   templateUrl: './permanent-change-to-a-licensee.component.html',
   styleUrls: ['./permanent-change-to-a-licensee.component.scss']
 })
-export class PermanentChangeToALicenseeComponent extends FormBase implements OnInit {
+export class PermanentChangeToALicenseeComponent extends FormBase implements OnInit, OnDestroy {
   faQuestionCircle = faQuestionCircle;
   faIdCard = faIdCard;
 
@@ -157,6 +158,20 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
       if (_PCLSectionFormControlNames.some((key) => key in values)) {
         // If any of the PCL section form controls change, update the business rules
         this._PCLMatrixOnFormControlChanges();
+      }
+
+      if (!this.form.disabled) {
+        // Quietly auto save the application data when form changes, if it is still active/editable.
+        this.saveDebounced({ invoiceTrigger: 0 } as Application).subscribe({
+          next: ([saveSucceeded, app]) => {
+            if (saveSucceeded) {
+              this.application = app;
+            }
+          },
+          error: (error) => {
+            console.error('Error saving form data', error);
+          }
+        });
       }
     });
 
@@ -293,15 +308,14 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
     }
   }
 
-  /**
-   * Saves the application data.
-   *
-   * @param {boolean} [showProgress=false]
-   * @param {Application} [appData={} as Application]
-   * @return {*}  {Observable<[boolean, Application]>}
-   * @memberof PermanentChangeToALicenseeComponent
-   */
-  private save(
+  private _debouncedSave = debounce(
+    (appData: Application, observer: (value: [boolean, Application]) => void) => {
+      this._save(false, appData).subscribe(observer);
+    },
+    2000 // ms debounce delay
+  );
+
+  private _save(
     showProgress: boolean = false,
     appData: Application = {} as Application
   ): Observable<[boolean, Application]> {
@@ -315,23 +329,55 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
       .pipe(takeWhile(() => this.componentActive))
       .pipe(
         catchError(() => {
-          this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-          const res: [boolean, Application] = [false, null];
-          return of(res);
+          if (showProgress) {
+            this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+          }
+
+          return of<[boolean, Application]>([false, null]);
         })
       )
       .pipe(
         mergeMap((data) => {
-          if (showProgress === true) {
+          if (data[0] !== false && showProgress) {
             this.snackBar.open('Application has been saved', 'Success', {
               duration: 2500,
               panelClass: ['green-snackbar']
             });
           }
-          const res: [boolean, Application] = [true, data as Application];
-          return of(res);
+
+          return of<[boolean, Application]>([true, data as Application]);
         })
       );
+  }
+
+  /**
+   * Saves the application data.
+   *
+   * @param {boolean} [showProgress=false]
+   * @param {Application} [appData={} as Application]
+   * @return {*}  {Observable<[boolean, Application]>}
+   */
+  public save(
+    showProgress: boolean = false,
+    appData: Application = {} as Application
+  ): Observable<[boolean, Application]> {
+    return this._save(showProgress, appData);
+  }
+
+  /**
+   * Debounced save function to prevent excessive API calls.
+   *
+   * @param {boolean} [showProgress=false]
+   * @param {Application} [appData={} as Application]
+   * @return {*}  {Observable<[boolean, Application]>}
+   */
+  public saveDebounced(appData: Application = {} as Application): Observable<[boolean, Application]> {
+    return new Observable<[boolean, Application]>((subscriber) => {
+      this._debouncedSave(appData, (result) => {
+        subscriber.next(result);
+        subscriber.complete();
+      });
+    });
   }
 
   /**
@@ -558,5 +604,9 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
       description3: 'The following characters are not allowed in a Company Name: ~ # % & * { } \\ : < > ? / + | "'
     };
     return errorMap;
+  }
+
+  ngOnDestroy(): void {
+    this._debouncedSave.cancel();
   }
 }
