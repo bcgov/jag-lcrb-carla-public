@@ -811,7 +811,8 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     return (
       ApplicationSummary.applicationTypeName === ApplicationTypeNames.PermanentChangeToALicensee &&
       // Check if the PCL application is linked to a legal entity review application.
-      ApplicationSummary.applicationExtension?.relatedLeOrPclApplicationId?.length != undefined
+      ApplicationSummary.applicationExtension?.relatedLeOrPclApplicationId &&
+      ApplicationSummary.applicationExtension?.relatedLeOrPclApplicationId.length > 0
     );
   }
 
