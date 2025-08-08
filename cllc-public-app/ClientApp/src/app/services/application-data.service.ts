@@ -10,6 +10,7 @@ import { CovidApplication } from "@models/covid-application.model";
 import { OngoingLicenseeData } from "../models/ongoing-licensee-data";
 import { PagingResult } from "@models/paging-result.model";
 import { RelatedLicence } from "../models/related-licence";
+import { ApplicationType } from "@models/application-type.model";
 
 @Injectable()
 export class ApplicationDataService extends DataService {
@@ -20,6 +21,20 @@ export class ApplicationDataService extends DataService {
 
   constructor(private http: HttpClient) {
     super();
+  }
+
+  /**
+   * Get all Applications for the current user for the given application type.
+   *
+   * @param {string} applicationTypeName
+   * @return {*}  {Observable<ApplicationType>}
+   */
+  getApplicationTypeByName(applicationTypeName: string): Observable<ApplicationType> {
+    return this.http
+      .get<ApplicationType>(`${this.apiPath}GetByName/${encodeURIComponent(applicationTypeName)}`, {
+        headers: this.headers
+      })
+      .pipe(catchError(this.handleError));
   }
 
   /**
@@ -105,12 +120,12 @@ export class ApplicationDataService extends DataService {
   /**
    * Get the application data for a permanent change to licensee application.
    *
-   * @param {string} [applicationId=null]
+   * @param {string} applicationId
    * @return {*}  {Observable<any>}
    */
-  getPermanentChangesToLicenseeData(applicationId: string = null): Observable<any> {
+  getPermanentChangesToLicenseeData(applicationId: string): Observable<any> {
     let url = `${this.apiPath}permanent-change-to-licensee-data`;
-    let params: Record<string, any> = { isLegalEntity: 'false' };
+    let params: Record<string, any> = { isLegalEntityReview: 'false' };
 
     if (applicationId) {
       params = { ...params, applicationId: applicationId };
@@ -122,12 +137,12 @@ export class ApplicationDataService extends DataService {
   /**
    * Get the application data for a legal entity permanent change to licensee application.
    *
-   * @param {string} [applicationId=null]
+   * @param {string} applicationId
    * @return {*}  {Observable<any>}
    */
-  getLegalEntityPermanentChangesToLicenseeData(applicationId: string = null): Observable<any> {
+  getLegalEntityPermanentChangesToLicenseeData(applicationId: string): Observable<any> {
     let url = `${this.apiPath}permanent-change-to-licensee-data`;
-    let params: Record<string, any> = { isLegalEntity: 'true' };
+    let params: Record<string, any> = { isLegalEntityReview: 'true' };
 
     if (applicationId) {
       params = { ...params, applicationId: applicationId };
@@ -136,13 +151,23 @@ export class ApplicationDataService extends DataService {
     return this.http.get<any>(url, { headers: this.headers, params: params }).pipe(catchError(this.handleError));
   }
 
-  getPermanentChangesToApplicantData(applicationId: string = null): Observable<any> {
-    let url = this.apiPath + "permanent-change-to-applicant-data";
-    if (applicationId) {
-      url = `${url}?applicationId=${applicationId}`;
-    }
-    return this.http.get<any>(url, { headers: this.headers })
-      .pipe(catchError(this.handleError));
+  /**
+   * Get or create the application for "permanent changes to licensee as a result of a legal entity review" (LE-PCL).
+   *
+   * Accepts either the Legal Entity Review (LER) Application ID or the LE-PCL Application ID.
+   * - If the LER Application ID is provided, it will get or create the corresponding PCL application data.
+   * - If the PCL Application ID is provided, it will return the existing PCL application data.
+   *
+   * Note: An LE-PCL is the same as a regular PCL, except that it was initiated by staff as a result of a legal entity
+   * review rather than by the user.
+   *
+   * @param {string} applicationId Either the LER Application ID or the LE-PCL Application ID.
+   * @return {*}  {Observable<any>}
+   */
+  GetOrCreatePermanentChangeForLegalEntityReviewApplicationAsync(applicationId: string): Observable<any> {
+    let url = `${this.apiPath}get_pcl_for_le_review/${applicationId}`;
+
+    return this.http.get<any>(url, { headers: this.headers }).pipe(catchError(this.handleError));
   }
 
   getOngoingLicenseeData(type: "on-going" | "create"): Observable<OngoingLicenseeData> {

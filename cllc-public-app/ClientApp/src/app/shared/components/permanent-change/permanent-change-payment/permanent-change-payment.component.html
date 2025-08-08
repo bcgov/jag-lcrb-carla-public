@@ -8,7 +8,7 @@
     <hr />
   </ng-container>
 
-  <ng-container *ngIf="isCannabisPaymentRequired || isCannabisInvoicePaid">
+  <ng-container *ngIf="isCannabisInvoiceVisible">
     <table class="w-100" class="paymentSummary">
       <tr>
         <th colspan="3">
@@ -24,7 +24,9 @@
         <tr
           *ngIf="
             form.get(item.formControlName).value === true &&
-            !(item.name == 'Internal Transfer of Shares' && form.get('csExternalTransferOfShares').value === true)
+            !(item.name == 'Internal Transfer of Shares' &&
+            form.get('csExternalTransferOfShares').value === true) &&
+            item.CannabisFee > 0
           ">
           <td class="paymentSummary1">{{ item.name }}</td>
           <td class="paymentSummary2">x {{ cannabisLicences.length }}</td>
@@ -57,7 +59,7 @@
     <hr />
   </ng-container>
 
-  <table class="w-100" *ngIf="isLiquorPaymentRequired || isLiquorInvoicePaid" class="paymentSummary">
+  <table class="w-100" *ngIf="isLiquorInvoiceVisible" class="paymentSummary">
     <tr>
       <th colspan="3">
         <h4>Fees for Liquor Licences</h4>
@@ -69,7 +71,7 @@
       <th class="paymentSummary">Cost</th>
     </tr>
     <ng-container *ngFor="let item of selectedChangeList">
-      <tr>
+      <tr *ngIf="item.LiquorFee > 0">
         <td class="paymentSummary1">{{ item.name }}</td>
         <td class="paymentSummary2">x {{ liquorLicences.length }}</td>
         <td class="paymentSummary2">${{ item.LiquorFee }}</td>
