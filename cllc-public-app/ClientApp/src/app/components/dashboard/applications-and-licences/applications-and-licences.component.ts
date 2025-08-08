@@ -165,7 +165,9 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
             .concat(licenses.filter((item) => item.licenceTypeName !== ApplicationTypeNames.Marketer)).length > 0;
 
         //emits if user has an inprogress legal entity review or not
-        this.legalEntityApplicationExists.emit(applications.find( app=> app.applicationTypeName === ApplicationTypeNames.LegalEntityReview ) !== undefined);
+        this.legalEntityApplicationExists.emit(
+          applications.find((app) => app.applicationTypeName === ApplicationTypeNames.LegalEntityReview) !== undefined
+        );
         this.dataLoaded = true;
       });
 
@@ -775,10 +777,10 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   }
 
   getApplicationLink(item: ApplicationSummary) {
-    if (this.isPermanentChangeToLicenceApplication(item)) {
+    if (this.isPermanentChangeToLicenceAsAResultOfLegalEntityReview(item)) {
+      return `/legal-entity-review-permanent-change-to-a-licensee/${item.applicationExtension.relatedLeOrPclApplicationId}`;
+    } else if (this.isPermanentChangeToLicenceApplication(item)) {
       return `/permanent-change-to-a-licensee/${item.id}`;
-    } else if (this.isPermanentChangeToLicenceAsAResultOfLegalEntityReview(item)) {
-      return `/permanent-change-to-a-licensee/${item.applicationExtension.relatedLeOrPclApplicationId}`;
     } else if (this.isLegalEntityReviewApplication(item)) {
       return `/legal-entity-review/${item.id}`;
     } else {

@@ -41,7 +41,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Utcconversiontimezonecode = utcconversiontimezonecode;
             AdoxioOtherdetails = adoxioOtherdetails;
             AdoxioName = adoxioName;
-            Versionnumber = versionnumber;
             this._owneridValue = _owneridValue;
             Statuscode = statuscode;
             AdoxioApplicationextensionid = adoxioApplicationextensionid;
@@ -126,10 +125,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         [JsonProperty(PropertyName = "adoxio_name")]
         public string AdoxioName { get; set; }
 
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -296,5 +291,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         [JsonProperty(PropertyName = "adoxio_relatedleorpclapplication@odata.bind")]
         public string AdoxioRelatedLeOrPclApplicationODataBind { get; set; }
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_relatedleorpclapplication_value")]
+        public string _adoxioRelatedLeOrPclApplicationValue { get; set; }
+        
     }
 }

@@ -15,6 +15,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Serilog;
 using System.ServiceModel.Channels;
+using Gov.Lclb.Cllb.Public.ViewModels;
+using static System.Net.Mime.MediaTypeNames;
 
 
 namespace Gov.Lclb.Cllb.Public.Controllers
@@ -70,7 +72,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (application.AdoxioInvoice?.Statuscode == (int?)Adoxio_invoicestatuses.Paid)
             {
                 return NotFound("Payment already made");
-            } else
+            }
+            else
             {
                 //TODO Reverify Payment Status with BCEP
                 if (application._adoxioInvoiceValue != null)
@@ -204,7 +207,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (invoicePaid)
             {
                 return NotFound("Payment already made");
-            }else
+            }
+            else
             {
                 if (application._adoxioInvoiceValue != null)
                 {
@@ -357,7 +361,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                 }
                 return NotFound("Payment already made");
-            }else
+            }
+            else
             {
                 //TODO Reverify Payment Status with BCEP
                 if (application._adoxioLicencefeeinvoiceValue != null)
@@ -492,11 +497,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                 }
                 return NotFound("Payment already made");
-            } else
+            }
+            else
             {
                 //TODO Reverify Payment Status with BCEP
-                if (application._adoxioLicencefeeinvoiceValue != null) 
-                { 
+                if (application._adoxioLicencefeeinvoiceValue != null)
+                {
                     bool invoicePaid = await ReVerifyLicenceFeePaymentStatus(id);
                     if (invoicePaid)
                     {
@@ -616,12 +622,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.Error($"No application {id} invoice found, retry = " + retries);
                 System.Threading.Thread.Sleep(1000);
                 application = await GetDynamicsApplication(id);
-                invoiceId = application._adoxioInvoiceValue;              
+                invoiceId = application._adoxioInvoiceValue;
             }
-            if (invoiceId == null) 
+            if (invoiceId == null)
             {
                 _logger.Error($"No application {id} invoice found after 10 times retries. ");
-                return NotFound(); 
+                return NotFound();
             }
 
             Guid invoiceGuid = Guid.Parse(invoiceId);
@@ -704,6 +710,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         AdoxioPaymentmethod = (int?)Adoxio_paymentmethods.CC,
                         AdoxioAppchecklistpaymentreceived = (int?)ViewModels.GeneralYesNo.Yes
                     };
+
                     try
                     {
                         _dynamicsClient.Applications.Update(id, adoxioApplication2);
@@ -722,7 +729,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 else
                 {
                     _logger.Debug("Transaction NOT approved");
-                    if(messageId != "559" && messageId != "761")
+                    if (messageId != "559" && messageId != "761")
                     {
                         // If message is not 'No Transaction Found or Payment Cancelled' set invoice status to Cancelled
                         MicrosoftDynamicsCRMinvoice invoice2 = new MicrosoftDynamicsCRMinvoice
@@ -756,7 +763,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             throw (httpOperationException);
                         }
                     }
-                    
+
 
                     _logger.Information($"Payment not approved.  Application ID: {id} Invoice: {invoice.Invoicenumber} Liquor: {paymentType}");
 
@@ -797,15 +804,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 // handle error.
                 _logger.Error($"PAYMENT RE-VERIFICATION ERROR - {response["message"]} for application {id}");
-                return toReturn; 
+                return toReturn;
             }
             //Check if the payment processor has any record of this transaction
             var messageId = response["messageId"];
             var messageText = response["messageText"];
-            if (messageId == "559"  || messageId == "761")
+            if (messageId == "559" || messageId == "761")
             {
                 //Payment Processor has no record of this transaction do nothing
-                    return false;
+                return false;
             }
             //If the payment processor has a record proceed and verify if it was successful or not and update the record on our end. 
             response["invoice"] = invoice.Invoicenumber;
@@ -1115,7 +1122,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (messageId == "559" || messageId == "761")
             {
                 //Payment Processor has no record of this transaction do nothing
-                    return false;
+                return false;
             }
             //If the payment processor has a record proceed and verify if it was successful or not and update the record on our end. 
             response["invoice"] = invoice.Invoicenumber;
@@ -1523,6 +1530,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         throw (httpOperationException);
                     }
 
+                    if (application.AdoxioApplicationExtension._adoxioRelatedLeOrPclApplicationValue != null)
+                    {
+                        await UpdateRelatedLeReviewStatus(application.AdoxioApplicationExtension._adoxioRelatedLeOrPclApplicationValue, application.AdoxioApplicationid, dynamicsClient);
+                    }
+
+
                     Log.Information($"Payment approved.  Application ID: {application.AdoxioApplicationid} Invoice: {invoice.Invoicenumber} Liquor: {isAlternateAccount}");
 
                 }
@@ -1764,7 +1777,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var orderamt = invoice.Totalamount;
 
             PaymentType paymentType = PaymentType.CANNABIS; // always cannabis
-            
+
             Dictionary<string, string> redirectUrl;
             redirectUrl = new Dictionary<string, string>();
             var redirectPath = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/worker-qualification/payment-confirmation";
@@ -1802,7 +1815,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var orderamt = invoice.Totalamount;
 
             PaymentType paymentType = PaymentType.CANNABIS; // always cannabis
-            
+
             var response = await _bcep.ProcessPaymentResponse(ordernum, workerId, paymentType);
 
             if (response.ContainsKey("error"))
@@ -1960,7 +1973,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (messageId == "559" || messageId == "761")
             {
                 //Payment Processor has no record of this transaction do nothing
-                    return false;
+                return false;
             }
             //If the payment processor has a record proceed and verify if it was successful or not and update the record on our end. 
             response["invoice"] = invoice.Invoicenumber;
@@ -2146,7 +2159,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(Guid.Parse(application._adoxioInvoiceValue));
                 if (invoice != null && invoice.Statecode == (int)Adoxio_invoicestates.Cancelled)
                 {
-                    generateInvoice=true;
+                    generateInvoice = true;
                 }
             }
             if (generateInvoice)
@@ -2200,7 +2213,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 redirectUrl = new Dictionary<string, string>();
 
                 PaymentType paymentType = PaymentType.SPECIAL_EVENT; // always special event
-                
+
                 var redirectPath = $"{_configuration["BASE_URI"]}{_configuration["BASE_PATH"]}/sep/application-summary/{id}";
                 redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt), paymentType, redirectPath);
 
@@ -2240,7 +2253,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var orderamt = invoice.Totalamount;
 
             PaymentType paymentType = PaymentType.SPECIAL_EVENT; // always Special Event
-            
+
             var response = await _bcep.ProcessPaymentResponse(ordernum, id, paymentType);
 
             if (response.ContainsKey("error"))
@@ -2396,7 +2409,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (messageId == "559" || messageId == "761")
             {
                 //Payment Processor has no record of this transaction do nothing
-                    return false;
+                return false;
             }
             //If the payment processor has a record proceed and verify if it was successful or not and update the record on our end. 
             response["invoice"] = invoice.Invoicenumber;
@@ -2510,5 +2523,25 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return toReturn;
         }
 
+        private async static Task UpdateRelatedLeReviewStatus(string LeReviewId, string pclId, IDynamicsClient dynamicsClient)
+        {
+            var pclApplication = await dynamicsClient.Applications.GetByKeyAsync(pclId);
+
+            if (pclApplication.AdoxioSecondaryapplicationinvoicepaid == 1 && pclApplication.AdoxioPrimaryapplicationinvoicepaid == 1)
+            {
+                MicrosoftDynamicsCRMadoxioApplication adoxioApplication = new MicrosoftDynamicsCRMadoxioApplication
+                {
+                    Statuscode = (int)AdoxioApplicationStatusCodes.UnderReview
+                };
+                try
+                {
+                    dynamicsClient.Applications.Update(LeReviewId, adoxioApplication);
+                }
+                catch (HttpOperationException ex)
+                {
+                    throw (ex);
+                }
+            }
+        }
     }
 }

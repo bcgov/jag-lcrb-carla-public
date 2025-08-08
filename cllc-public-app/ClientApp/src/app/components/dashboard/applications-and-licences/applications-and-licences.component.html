@@ -520,13 +520,6 @@
                   <span>Reference #: {{ item.name }} </span> <br />
                 </ng-container>
 
-                <!-- Permanent change to a licensee as a result of a legal entity review -->
-                <ng-container *ngIf="isPermanentChangeToLicenceAsAResultOfLegalEntityReview(item)">
-                  <span style="font-weight: 600">{{ ApplicationTypeNames.PermanentChangeToALicensee }}</span> <br />
-                  <span>Job No: </span> <i>{{ item.jobNumber }}</i> <br />
-                  <span>Reference #: {{ item.name }} </span> <br />
-                </ng-container>
-
                 <!-- Legal entity review -->
                 <ng-container *ngIf="isLegalEntityReviewApplication(item)">
                   <span style="font-weight: 600">Legal Entity Review</span> <br />
