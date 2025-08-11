@@ -245,6 +245,14 @@ export class ApplicationComponent extends FormBase implements OnInit {
     return openedByLG;
   }
 
+  get licenceCapacity(): number {
+    var capacity = 0;
+    this.application.assignedLicence.serviceAreas.forEach((sa) => {
+      capacity += Number(sa.capacity);
+    });
+    return capacity;
+  }
+
   constructor(
     private store: Store<AppState>,
     private paymentDataService: PaymentDataService,
