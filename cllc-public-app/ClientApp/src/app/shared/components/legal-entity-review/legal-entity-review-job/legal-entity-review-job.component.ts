@@ -1,8 +1,8 @@
-import { ViewportScroller } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { ControlContainer, FormGroup, FormGroupDirective } from '@angular/forms';
 import { Account } from '@models/account.model';
 import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
+import { Application } from '@models/application.model';
 
 /**
  * The legal entity review job section of a legal entity review application.
@@ -19,19 +19,13 @@ import { ApplicationLicenseSummary } from '@models/application-license-summary.m
 })
 export class LegalEntityReviewJobComponent implements OnInit {
   @Input() account: Account;
+  @Input() application: Application;
   @Input() liquorLicences: ApplicationLicenseSummary[] = [];
   @Input() cannabisLicences: ApplicationLicenseSummary[] = [];
 
   form: FormGroup;
 
-  constructor(
-    public controlContainer: ControlContainer,
-    private scroller: ViewportScroller
-  ) {}
-
-  scrollToQuestionsSection() {
-    this.scroller.scrollToAnchor('questionssection');
-  }
+  constructor(public controlContainer: ControlContainer) {}
 
   ngOnInit() {
     this.form = this.controlContainer.control as FormGroup;
