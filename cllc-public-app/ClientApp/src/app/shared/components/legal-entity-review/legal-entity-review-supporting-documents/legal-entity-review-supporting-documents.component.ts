@@ -15,6 +15,7 @@ import { Application } from '@models/application.model';
 })
 export class LegalEntityReviewSupportingDocumentsComponent {
   @Input() application: Application;
+  @Input() disabled = false;
 
   @Output() onUploadedFileCountEvent = new EventEmitter<number>();
 
