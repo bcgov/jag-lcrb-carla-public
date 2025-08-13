@@ -5,23 +5,26 @@
 
   <ng-container *ngIf="isDataLoaded">
     <section>
-      <app-legal-entity-review-disclaimer [account]="account"></app-legal-entity-review-disclaimer>
+      <app-legal-entity-review-disclaimer
+        [account]="account"
+        [application]="application"></app-legal-entity-review-disclaimer>
     </section>
 
     <section>
       <app-legal-entity-review-tied-house
+        [disabled]="formDisabled"
         (showTiedHouseConnections)="showTiedHouseConnections($event)"></app-legal-entity-review-tied-house>
     </section>
 
     <section *ngIf="isTiedHouseVisible">
       <h3 class="blue-header">Tied House Declaration</h3>
       <div class="content-bottom">
-        <app-tied-house-declaration #tiedHouseDeclaration [applicationId]="application.id"></app-tied-house-declaration>
+        <app-tied-house-declaration #tiedHouseDeclaration [isReadOnly]="formDisabled" [applicationId]="application.id"></app-tied-house-declaration>
       </div>
     </section>
 
     <section>
-      <app-legal-entity-review-supporting-documents [application]="application">
+      <app-legal-entity-review-supporting-documents [disabled]="formDisabled" [application]="application">
       </app-legal-entity-review-supporting-documents>
     </section>
 
@@ -45,17 +48,11 @@
       </p>
     </section>
 
-    <section style="margin-top: 20px; position: relative">
+    <section *ngIf="!formDisabled" style="margin-top: 20px; position: relative">
       <button mat-raised-button color="primary" class="progress-button" (click)="onSubmit()" [disabled]="isSubmitting">
         <span>SUBMIT</span>
         <mat-progress-bar *ngIf="isSubmitting" mode="indeterminate"></mat-progress-bar>
       </button>
-      <span style="color: #1a5a96; float: right">
-        <span (click)="onCancel()">
-          <fa-icon [icon]="faTrashAlt" style="color: #1a5a96" class="mr-3"></fa-icon>
-          <a href="javascript: void(0)">CANCEL</a>
-        </span>
-      </span>
     </section>
   </ng-container>
 </div>

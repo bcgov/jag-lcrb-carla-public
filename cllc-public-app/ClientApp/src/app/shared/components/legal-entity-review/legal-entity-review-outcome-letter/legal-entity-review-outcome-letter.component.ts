@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Account } from '@models/account.model';
+import { Application } from '@models/application.model';
 import { FileSystemItem } from '@models/file-system-item.model';
 import { AccountDataService } from '@services/account-data.service';
+import { parseFileName } from '@shared/file-utils';
 
 /**
  * Renders one or more legal entity review outcome letters.
@@ -20,13 +22,15 @@ export class LegalEntityReviewOutcomeLetterComponent implements OnInit {
    * The account associated with the legal entity review application.
    */
   @Input() account: Account;
+  /**
+   * The legal entity review application.
+   */
+  @Input() application: Application;
 
   /**
    * The notices related to the legal entity review application.
    */
   notices: FileSystemItem[] = [];
-
-  readonly legalEntityReviewOutcomeLetterName = 'Notice__Legal_Entity_Review_Outcome_Letter.pdf';
 
   constructor(private accountDataService: AccountDataService) {}
 
@@ -38,17 +42,40 @@ export class LegalEntityReviewOutcomeLetterComponent implements OnInit {
    * Gets the notices related to the legal entity review application.
    */
   getLegalEntityReviewNotices(): void {
-    this.accountDataService.getFilesAttachedToAccount(this.account.id, 'Notice').subscribe((data) => {
-      if (!data?.length) {
+    this.accountDataService.getFilesAttachedToAccount(this.account.id, 'Notice').subscribe((allFiles) => {
+      if (!allFiles?.length) {
         return;
       }
 
-      data.forEach((file) => {
-        // This assumes that the name of the legal entity review outcome letter is consistent/static.
-        if (file.name === this.legalEntityReviewOutcomeLetterName) {
+      // Matches on `Notice__Legal_Entity_Review_Outcome_Letter_<job_number>.pdf`
+      const regex = new RegExp(`Notice__Legal_Entity_Review_Outcome_Letter_${this.application.jobNumber}.pdf`);
+
+      allFiles.forEach((file) => {
+        if (regex.test(file.name)) {
           this.notices.push(file);
         }
       });
     });
+  }
+
+  /**
+   * Formats the raw file name by removing the type/category prefix and removing the job number.
+   *
+   * @param {string} fileName
+   * @return {*}  {string}
+   */
+  getFormattedFileName(fileName: string): string {
+    // Split the fileName into its type/category and name parts
+    const parsedFileName = parseFileName(fileName);
+
+    // Matches on `(<any_string>)(_<job_number>)(.<any_string>)`
+    // Example: `(Legal_Entity_Review_Notice_Letter)(_123456)(.pdf)`
+    const regex = /^(.*)(_\d+)(\..*)$/;
+
+    // Remove the job number
+    const formattedFileName = parsedFileName.fileName.replace(regex, '$1$3');
+
+    // Fallback to the original fileName if formatting fails
+    return formattedFileName || fileName;
   }
 }

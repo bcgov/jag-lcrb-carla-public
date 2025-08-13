@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Account } from '@models/account.model';
+import { Application } from '@models/application.model';
 
 /**
  * The disclaimer section of a legal entity review application.
@@ -17,4 +18,8 @@ export class LegalEntityReviewDisclaimerComponent {
    * The account associated with the legal entity review application.
    */
   @Input() account: Account;
+  /**
+   * The legal entity review application.
+   */
+  @Input() application: Application;
 }
