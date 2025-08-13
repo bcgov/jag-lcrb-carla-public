@@ -86,13 +86,11 @@
                     style="width: 100%"
                     [isReadOnly]="isReadOnly"
                     [tiedHouseDecleration]="_tiedHouseDeclaration"
-                    (saveTiedHouseDecclaration)="saveTiedHouseDeclaration($event, _tiedHouseDeclaration, tiedHouseDeclarationsIndex)"
+                    (saveTiedHouseDecclaration)="
+                      saveTiedHouseDeclaration($event, _tiedHouseDeclaration, tiedHouseDeclarationsIndex)
+                    "
                     (removeTiedHouseDeclaration)="
-                      removeNewTiedHouseDeclaration(
-                        _tiedHouseDeclaration,
-                        _tiedHouseDeclarations.length > 1,
-                        tiedHouseDeclarationsIndex
-                      )
+                      removeNewTiedHouseDeclaration(_tiedHouseDeclaration, tiedHouseDeclarationsIndex)
                     "
                     (cancelTiedHouseDeclaration)="changeDeclarationViewMode($event, _tiedHouseDeclaration)">
                   </app-tied-house-declaration-form>
