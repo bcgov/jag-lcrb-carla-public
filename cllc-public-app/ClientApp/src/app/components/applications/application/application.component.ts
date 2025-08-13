@@ -204,6 +204,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   uploadedOtherDocuments: 0;
   uploadedIndividualsWithLessThan10: 0;
   proofOfValidInterestDocuments: 0;
+  uploadedletterOfIntentDocuments: 0;
   dynamicsForm: DynamicsForm;
   autocompleteLocalGovernmemts: any[];
   autocompletePoliceDurisdictions: any[];
@@ -1870,6 +1871,15 @@ export class ApplicationComponent extends FormBase implements OnInit {
       valid = false;
       this.validationMessages.push('At least one floor plan document is required.');
     }
+
+    if (
+      this.application.applicationType.name === ApplicationTypeNames.ApplicationToTransitionToLiquorPrimaryLicence && // optional for this application type
+      (this.uploadedletterOfIntentDocuments || 0) < 1
+    ) {
+      valid = false;
+      this.validationMessages.push('At least one letter of intent is required.');
+    }
+
 
     if (
       this.application.applicationType.showPropertyDetails &&
