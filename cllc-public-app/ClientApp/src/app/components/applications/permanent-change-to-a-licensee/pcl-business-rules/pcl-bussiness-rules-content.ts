@@ -56,7 +56,6 @@ export const PCLFormControlDefinitions: PCLFormControlDefinitionOption[] = [
     helpText: [
       'When a corporation with an interest in a licence has legally changed its name, but existing corporate shareholders, directors and officers, and certificate number on the certificate of incorporation have not changed'
     ]
-
     // helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
   },
   {
@@ -71,7 +70,6 @@ export const PCLFormControlDefinitions: PCLFormControlDefinitionOption[] = [
   {
     name: 'Name Change, Licensee -- Society',
     formControlName: PCLFormControlName.csNameChangeLicenseeSociety,
-    // availableTo: ['Society'],
     CannabisFee: 220,
     LiquorFee: 220,
     helpTextHeader: 'Use this option to report:',
