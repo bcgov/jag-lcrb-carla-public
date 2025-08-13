@@ -263,10 +263,9 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
    * Removes a new (non-existing) Tied House declaration.
    *
    * @param {TiedHouseConnection} declaration
-   * @param {boolean} keepAccordionOpen
    * @param {number} accordionIndex
    */
-  removeNewTiedHouseDeclaration(declaration: TiedHouseConnection, keepAccordionOpen: boolean, accordionIndex: number) {
+  removeNewTiedHouseDeclaration(declaration: TiedHouseConnection, accordionIndex: number) {
     var isExistingDeclaration = declaration.supersededById;
     //if declaration has not been saved to dynamics remove from declaration list
     if (!declaration.id) {

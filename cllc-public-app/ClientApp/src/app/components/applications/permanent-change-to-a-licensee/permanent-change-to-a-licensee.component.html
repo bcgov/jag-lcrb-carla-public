@@ -21,7 +21,7 @@
     </section>
 
     <!-- Internal Share Transfer -->
-    <section *ngIf="form.get('csInternalTransferOfShares').value">
+    <section *ngIf="isInternalTransferOfSharesVisible">
       <app-permanent-change-internal-transfer-shares
         [application]="application"
         (uploadedCentralSecuritiesRegister)="uploadedCentralSecuritiesRegister = $event"
@@ -31,7 +31,7 @@
     </section>
 
     <!-- External Share Transfer -->
-    <section *ngIf="form.get('csExternalTransferOfShares').value">
+    <section *ngIf="isExternalTransferOfSharesVisible">
       <app-permanent-change-external-transfer-shares
         [application]="application"
         (uploadedCentralSecuritiesRegister)="uploadedCentralSecuritiesRegister = $event"
@@ -42,7 +42,7 @@
     </section>
 
     <!-- Change of Directors or Officers -->
-    <section *ngIf="form.get('csChangeOfDirectorsOrOfficers').value">
+    <section *ngIf="isChangeOfDirectorsOrOfficersVisible">
       <app-permanent-change-directors-officers
         [hasLiquor]="hasLiquor"
         [hasCannabis]="hasCannabis"
@@ -51,14 +51,14 @@
     </section>
 
     <!-- Person's Name Change -->
-    <section *ngIf="form.get('csNameChangeLicenseePerson').value">
+    <section *ngIf="isNameChangeLicenseePersonVisible">
       <app-permanent-change-name-person
         [application]="application"
         (uploadedNameChangeDocuments)="uploadedNameChangeDocuments = $event"></app-permanent-change-name-person>
     </section>
 
     <!-- Corporation Name Change -->
-    <section *ngIf="form.get('csNameChangeLicenseeCorporation').value">
+    <section *ngIf="isNameChangeLicenseeCorporationVisible">
       <app-permanent-change-name-licensee-corporation
         [application]="application"
         [showValidationMessages]="showValidationMessages"
@@ -68,7 +68,7 @@
     </section>
 
     <!-- Partnership Business Name Change -->
-    <section *ngIf="form.get('csNameChangeLicenseePartnership').value">
+    <section *ngIf="isNameChangeLicenseePartnershipVisible">
       <app-permanent-change-name-licensee-partnership
         [application]="application"
         (uploadedPartnershipRegistration)="
@@ -77,14 +77,14 @@
     </section>
 
     <!-- Society Name Change -->
-    <section *ngIf="form.get('csNameChangeLicenseeSociety').value">
+    <section *ngIf="isNameChangeLicenseeSocietyVisible">
       <app-permanent-change-name-licensee-socitey
         [application]="application"
         (uploadedSocietyNameChange)="uploadedSocietyNameChange = $event"></app-permanent-change-name-licensee-socitey>
     </section>
 
     <!-- Addition of Executor or Receiver -->
-    <section *ngIf="form.get('csAdditionalReceiverOrExecutor').value">
+    <section *ngIf="isAdditionalReceiverOrExecutorVisible">
       <app-permanent-change-addition-receiver-executor
         [application]="application"
         (uploadedExecutorDocuments)="uploadedExecutorDocuments = $event"
@@ -113,7 +113,7 @@
         "></app-permanent-change-personal-history-summary-forms>
     </section>
     <!-- Tied House Declaration -->
-    <section *ngIf="form.get('csTiedHouseDeclaration').value">
+    <section *ngIf="isTiedHouseDeclarationVisible">
       <h3 class="blue-header">Tied House Declarations</h3>
       <section>
         <div class="content-bottom">
@@ -150,11 +150,7 @@
     </section>
 
     <!-- Payment -->
-    <section
-      *ngIf="
-        selectedChangeList?.length > 0 &&
-        ((cannabisLicences && cannabisLicences.length > 0) || (liquorLicences && liquorLicences.length > 0))
-      ">
+    <section *ngIf="isPaymentVisible">
       <app-permanent-change-payment
         [application]="application"
         [liquorLicences]="liquorLicences"

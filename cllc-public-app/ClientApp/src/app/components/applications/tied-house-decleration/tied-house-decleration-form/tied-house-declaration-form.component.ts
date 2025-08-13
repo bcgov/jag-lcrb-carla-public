@@ -146,8 +146,8 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
   }
 
   cancel() {
-    if (!this._tiedHouseDecleration.applicationId) {
-      // If the declaration is new or in add relationship mode, we remove it as it has not yet been persisted.
+    if (!this._tiedHouseDecleration.applicationId && !this._tiedHouseDecleration.accountId) {
+      // If the declaration is new (not yet persisted), we remove it when the user clicks cancel.
       this.remove();
     } else if (this.isExistingDeclaration) {
       // If the declaration is existing, we reset the view mode and status code to existing (aka: stop editing).

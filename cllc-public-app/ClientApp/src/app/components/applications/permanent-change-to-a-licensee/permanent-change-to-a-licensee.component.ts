@@ -91,10 +91,22 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
   uploadedCAS: 0;
   uploadedFinancialIntegrity: 0;
 
+  /**
+   * `true` if the user has any liquor licenses.
+   *
+   * @readonly
+   * @type {boolean}
+   */
   get hasLiquor(): boolean {
     return this.liquorLicences.length > 0;
   }
 
+  /**
+   * `true` if the user has any cannabis licenses.
+   *
+   * @readonly
+   * @type {boolean}
+   */
   get hasCannabis(): boolean {
     return this.cannabisLicences.length > 0;
   }
@@ -162,7 +174,7 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
 
       if (!this.form.disabled) {
         // Quietly auto save the application data when form changes, if it is still active/editable.
-        this.saveDebounced({ invoiceTrigger: 0 } as Application).subscribe({
+        this.saveDebounced({ invoiceTrigger: 0 } as Partial<Application>).subscribe({
           next: ([saveSucceeded, app]) => {
             if (saveSucceeded) {
               this.application = app;
@@ -309,23 +321,20 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
   }
 
   private _debouncedSave = debounce(
-    (appData: Application, observer: (value: [boolean, Application]) => void) => {
-      this._save(false, appData).subscribe(observer);
+    (applicationDataOverrides: Partial<Application> = {}, observer: (value: [boolean, Application]) => void) => {
+      this._save(false, applicationDataOverrides).subscribe(observer);
     },
     2000 // ms debounce delay
   );
 
   private _save(
     showProgress: boolean = false,
-    appData: Application = {} as Application
+    applicationDataOverrides: Partial<Application> = {}
   ): Observable<[boolean, Application]> {
+    const applicationDataForSave = this._getApplicationDataForSave(applicationDataOverrides);
+
     return this.applicationDataService
-      .updateApplication({
-        ...this.application,
-        ...this.form.value,
-        ...this.appContact.form.value,
-        ...appData
-      })
+      .updateApplication(applicationDataForSave)
       .pipe(takeWhile(() => this.componentActive))
       .pipe(
         catchError(() => {
@@ -351,29 +360,65 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
   }
 
   /**
+   * Prepares the application data for saving.
+   *
+   * @private
+   * @param {Partial<Application>} [applicationDataOverrides={}] Optional data that will override any existing
+   * application data.
+   * @return {*}  {Application}
+   */
+  private _getApplicationDataForSave(applicationDataOverrides: Partial<Application> = {}): Application {
+    let formData = this.form.value;
+
+    /*
+     * Business Rule:
+     * Tied House Declaration changes, like all changes, normally cost the user a fee. However, if the user is
+     * submitting Internal Transfer of Shares, or External Transfer of Shares, or Change of Directors or Officers
+     * changes, then the fee for the Tied House Declaration changes is waived (it is covered under the fee for the other
+     * changes). In order to accommodate this, we must ensure that `csTiedHouseDeclaration` is `false`. These booleans
+     * control which changes dynamics generates invoices for.
+     *
+     * See related business rules: `isTiedHouseDeclarationVisible`
+     */
+    if (
+      formData.csInternalTransferOfShares === true ||
+      formData.csExternalTransferOfShares === true ||
+      formData.csChangeOfDirectorsOrOfficers === true
+    ) {
+      formData.csTiedHouseDeclaration = false;
+    }
+
+    return {
+      ...this.application,
+      ...formData,
+      ...this.appContact.form.value,
+      ...applicationDataOverrides
+    };
+  }
+
+  /**
    * Saves the application data.
    *
    * @param {boolean} [showProgress=false]
-   * @param {Application} [appData={} as Application]
+   * @param {Partial<Application>} [applicationDataOverrides={}]
    * @return {*}  {Observable<[boolean, Application]>}
    */
   public save(
     showProgress: boolean = false,
-    appData: Application = {} as Application
+    applicationDataOverrides: Partial<Application> = {}
   ): Observable<[boolean, Application]> {
-    return this._save(showProgress, appData);
+    return this._save(showProgress, applicationDataOverrides);
   }
 
   /**
    * Debounced save function to prevent excessive API calls.
    *
-   * @param {boolean} [showProgress=false]
-   * @param {Application} [appData={} as Application]
+   * @param {Partial<Application>} [applicationDataOverrides={}]
    * @return {*}  {Observable<[boolean, Application]>}
    */
-  public saveDebounced(appData: Application = {} as Application): Observable<[boolean, Application]> {
+  public saveDebounced(applicationDataOverrides: Partial<Application> = {}): Observable<[boolean, Application]> {
     return new Observable<[boolean, Application]>((subscriber) => {
-      this._debouncedSave(appData, (result) => {
+      this._debouncedSave(applicationDataOverrides, (result) => {
         subscriber.next(result);
         subscriber.complete();
       });
@@ -437,7 +482,7 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
     }
 
     if (!this.areTiedHouseDeclarationsValid()) {
-      this.validationMessages.push('Tide House Declaration has not been saved.');
+      this.validationMessages.push('Tide House Declaration(s) have not been saved.');
       valid = false;
     }
 
@@ -450,12 +495,6 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
    * @return {*}  {boolean} `true` if valid, `false` otherwise.
    */
   areTiedHouseDeclarationsValid(): boolean {
-    const tiedHouseDeclarationIsRequired = this.form.get('csTiedHouseDeclaration').value;
-
-    if (!tiedHouseDeclarationIsRequired) {
-      return false;
-    }
-
     if (
       this.tiedHouseDeclaration.tiedHouseDeclarations.find((item) =>
         [TiedHouseViewMode.new, TiedHouseViewMode.editExistingRecord, TiedHouseViewMode.addNewRelationship].includes(
@@ -604,6 +643,113 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
       description3: 'The following characters are not allowed in a Company Name: ~ # % & * { } \\ : < > ? / + | "'
     };
     return errorMap;
+  }
+
+  /**
+   * Indicates whether the Internal Transfer of Shares section is visible.
+   *
+   * @readonly
+   */
+  get isInternalTransferOfSharesVisible() {
+    return this.form.get('csInternalTransferOfShares').value;
+  }
+
+  /**
+   * Indicates whether the External Transfer of Shares section is visible.
+   *
+   * @readonly
+   */
+  get isExternalTransferOfSharesVisible() {
+    return this.form.get('csExternalTransferOfShares').value;
+  }
+
+  /**
+   * Indicates whether the Change of Directors or Officers section is visible.
+   *
+   * @readonly
+   */
+  get isChangeOfDirectorsOrOfficersVisible() {
+    return this.form.get('csChangeOfDirectorsOrOfficers').value;
+  }
+
+  /**
+   * Indicates whether the Name Change (Person) section is visible.
+   *
+   * @readonly
+   */
+  get isNameChangeLicenseePersonVisible() {
+    return this.form.get('csNameChangeLicenseePerson').value;
+  }
+
+  /**
+   * Indicates whether the Name Change (Corporation) section is visible.
+   *
+   * @readonly
+   */
+  get isNameChangeLicenseeCorporationVisible() {
+    return this.form.get('csNameChangeLicenseeCorporation').value;
+  }
+
+  /**
+   * Indicates whether the Name Change (Partnership) section is visible.
+   *
+   * @readonly
+   */
+  get isNameChangeLicenseePartnershipVisible() {
+    return this.form.get('csNameChangeLicenseePartnership').value;
+  }
+
+  /**
+   * Indicates whether the Name Change (Society) section is visible.
+   *
+   * @readonly
+   */
+  get isNameChangeLicenseeSocietyVisible() {
+    return this.form.get('csNameChangeLicenseeSociety').value;
+  }
+
+  /**
+   * Indicates whether the Additional Receiver or Executor section is visible.
+   *
+   * @readonly
+   */
+  get isAdditionalReceiverOrExecutorVisible() {
+    return this.form.get('csAdditionalReceiverOrExecutor').value;
+  }
+
+  /**
+   * Indicates whether the Tied House Declaration section is visible.
+   *
+   * Business Rule:
+   * The Tied House Declaration section is visible if `csTiedHouseDeclaration` is `true` OR if any of the
+   * following are `true`:
+   * - csInternalTransferOfShares
+   * - csExternalTransferOfShares
+   * - csChangeOfDirectorsOrOfficers
+   *
+   * See related business rules: `_getApplicationDataForSave`
+   *
+   * @readonly
+   */
+  get isTiedHouseDeclarationVisible() {
+    return (
+      this.form.get('csTiedHouseDeclaration').value ||
+      this.form.get('csExternalTransferOfShares').value ||
+      this.form.get('csInternalTransferOfShares').value ||
+      this.form.get('csChangeOfDirectorsOrOfficers').value
+    );
+  }
+
+  /**
+   * Indicates whether the payment section is visible.
+   *
+   * @readonly
+   */
+  get isPaymentVisible() {
+    return (
+      this.selectedChangeList?.length !== 0 &&
+      (this.cannabisLicences?.length !== 0 || this.liquorLicences?.length !== 0)
+    );
   }
 
   ngOnDestroy(): void {

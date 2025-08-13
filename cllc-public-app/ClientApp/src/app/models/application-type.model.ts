@@ -147,5 +147,6 @@ export enum ApplicationStatuses {
   Terminated = "Terminated",
   TerminatedRefunded = "Terminated and Refunded",
   Processed = "(Do not Use) Processed",
+  LicenseeActionRequired = "Licensee Action Required",
   Approved = "Approved"
 }
