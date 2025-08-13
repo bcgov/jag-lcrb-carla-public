@@ -48,8 +48,24 @@ export const getPCLMatrixGroup = (accountSummary: AccountSummary): PCLMatrixLice
     return PCLMatrixLicenceGroup.Default;
   }
 
-  // If the user only has liquor licences
+  /*************************************************************
+   * If the user only has liquor licences
+   ************************************************************/
+
   if (hasOnlyLiquorLicences(accountSummary)) {
+    if (hasSomeLiquorLicences(accountSummary, [LiquorLicenceTypeNames.Manufacturer, LiquorLicenceTypeNames.Agent])) {
+      if (
+        hasAtLeastOneOtherLiquorLicenceType(accountSummary, [
+          LiquorLicenceTypeNames.Manufacturer,
+          LiquorLicenceTypeNames.Agent
+        ])
+      ) {
+        return PCLMatrixLicenceGroup.Liquor3;
+      }
+
+      return PCLMatrixLicenceGroup.Liquor2;
+    }
+
     if (
       hasSomeLiquorLicences(accountSummary, [
         LiquorLicenceTypeNames.FoodPrimary,
@@ -64,30 +80,30 @@ export const getPCLMatrixGroup = (accountSummary: AccountSummary): PCLMatrixLice
     ) {
       return PCLMatrixLicenceGroup.Liquor1;
     }
-
-    if (hasSomeLiquorLicences(accountSummary, [LiquorLicenceTypeNames.Manufacturer, LiquorLicenceTypeNames.Agent])) {
-      return PCLMatrixLicenceGroup.Liquor2;
-    }
-
-    if (hasSomeLiquorLicences(accountSummary, [LiquorLicenceTypeNames.Manufacturer, LiquorLicenceTypeNames.Agent])) {
-      if (
-        hasAtLeastOneOtherLiquorLicenceType(accountSummary, [
-          LiquorLicenceTypeNames.Manufacturer,
-          LiquorLicenceTypeNames.Agent
-        ])
-      ) {
-        return PCLMatrixLicenceGroup.Liquor3;
-      }
-    }
   }
 
-  // If the user only has cannabis licences
+  /*************************************************************
+   * If the user only has cannabis licences
+   *************************************************************/
+
   if (hasOnlyCannabisLicences(accountSummary)) {
     return PCLMatrixLicenceGroup.Cannabis1;
   }
 
-  // If the user has a mixture of liquor and cannabis licences
+  /*************************************************************
+   * If the user has a mixture of liquor and cannabis licences
+   *************************************************************/
+
   if (hasSomeLiquorLicences(accountSummary, [LiquorLicenceTypeNames.Manufacturer, LiquorLicenceTypeNames.Agent])) {
+    if (
+      hasAtLeastOneOtherLiquorLicenceType(accountSummary, [
+        LiquorLicenceTypeNames.Manufacturer,
+        LiquorLicenceTypeNames.Agent
+      ])
+    ) {
+      return PCLMatrixLicenceGroup.Cannabis4;
+    }
+
     return PCLMatrixLicenceGroup.Cannabis2;
   }
 
@@ -104,17 +120,6 @@ export const getPCLMatrixGroup = (accountSummary: AccountSummary): PCLMatrixLice
     ])
   ) {
     return PCLMatrixLicenceGroup.Cannabis3;
-  }
-
-  if (hasSomeLiquorLicences(accountSummary, [LiquorLicenceTypeNames.Manufacturer, LiquorLicenceTypeNames.Agent])) {
-    if (
-      hasAtLeastOneOtherLiquorLicenceType(accountSummary, [
-        LiquorLicenceTypeNames.Manufacturer,
-        LiquorLicenceTypeNames.Agent
-      ])
-    ) {
-      return PCLMatrixLicenceGroup.Cannabis4;
-    }
   }
 };
 
@@ -138,7 +143,7 @@ export const getPCLMatrixConditionalGroup = (
 
   // PCL Matrix - Private Corporation - If Add/Remove Receiver Executor selected
   if (
-    isExactMatch({
+    hasAllMatchSections({
       matchSections: [PCLFormControlName.csAdditionalReceiverOrExecutor],
       selectedSections: selectedPCLSections
     })
@@ -148,7 +153,7 @@ export const getPCLMatrixConditionalGroup = (
 
   // PCL Matrix - Private Corporation - If TSE is Selected
   if (
-    isExactMatch({
+    hasAllMatchSections({
       matchSections: [PCLFormControlName.csExternalTransferOfShares],
       selectedSections: selectedPCLSections
     })
@@ -158,7 +163,7 @@ export const getPCLMatrixConditionalGroup = (
 
   // PCL Matrix - Private Corporation - If TSI is Selected
   if (
-    isExactMatch({
+    hasAllMatchSections({
       matchSections: [PCLFormControlName.csInternalTransferOfShares],
       selectedSections: selectedPCLSections
     })
@@ -168,7 +173,7 @@ export const getPCLMatrixConditionalGroup = (
 
   // PCL Matrix - Private Corporation - If CoD is Selected
   if (
-    isExactMatch({
+    hasAllMatchSections({
       matchSections: [PCLFormControlName.csChangeOfDirectorsOrOfficers],
       selectedSections: selectedPCLSections
     })
@@ -178,7 +183,7 @@ export const getPCLMatrixConditionalGroup = (
 
   // PCL Matrix - Private Corporation - If CoD AND TSE selected
   if (
-    isExactMatch({
+    hasAllMatchSections({
       matchSections: [PCLFormControlName.csChangeOfDirectorsOrOfficers, PCLFormControlName.csExternalTransferOfShares],
       selectedSections: selectedPCLSections
     })
@@ -188,7 +193,7 @@ export const getPCLMatrixConditionalGroup = (
 
   // PCL Matrix - Private Corporation - If CoD AND TSI selected
   if (
-    isExactMatch({
+    hasAllMatchSections({
       matchSections: [PCLFormControlName.csChangeOfDirectorsOrOfficers, PCLFormControlName.csInternalTransferOfShares],
       selectedSections: selectedPCLSections
     })
@@ -198,7 +203,7 @@ export const getPCLMatrixConditionalGroup = (
 
   // PCL Matrix - Private Corporation - If LE Name Change Corporation is Selected
   if (
-    isExactMatch({
+    hasAllMatchSections({
       matchSections: [PCLFormControlName.csNameChangeLicenseeCorporation],
       selectedSections: selectedPCLSections
     })
@@ -208,7 +213,7 @@ export const getPCLMatrixConditionalGroup = (
 
   // PCL Matrix - Partnership - If LE Name Change Partnership is Selected
   if (
-    isExactMatch({
+    hasAllMatchSections({
       matchSections: [PCLFormControlName.csNameChangeLicenseePartnership],
       selectedSections: options.selectedPCLSections
     })
@@ -218,7 +223,7 @@ export const getPCLMatrixConditionalGroup = (
 
   // PCL Matrix - Society - If LE Name Change Society is Selected
   if (
-    isExactMatch({
+    hasAllMatchSections({
       matchSections: [PCLFormControlName.csNameChangeLicenseeSociety],
       selectedSections: options.selectedPCLSections
     })
@@ -228,7 +233,7 @@ export const getPCLMatrixConditionalGroup = (
 
   // PCL Matrix - Private Corporation - If LE Name Change Individual is Selected
   if (
-    isExactMatch({
+    hasAllMatchSections({
       matchSections: [PCLFormControlName.csNameChangeLicenseePerson],
       selectedSections: options.selectedPCLSections
     })
@@ -238,7 +243,7 @@ export const getPCLMatrixConditionalGroup = (
 
   // PCL Matrix - Private Corporation - If Report Tied House Change is Selected
   if (
-    isExactMatch({
+    hasAllMatchSections({
       matchSections: [PCLFormControlName.csTiedHouseDeclaration],
       selectedSections: options.selectedPCLSections
     })
@@ -406,7 +411,20 @@ const getPCLFormControlDefinitions = (pclFormControlNames: PCLFormControlName[])
 };
 
 /**
- * Return `true` if the selected sections match the specified sections exactly.
+ * Return `true` if the `matchSections` are all included in the `selectedSections`.
+ *
+ * @example
+ * ```typescript
+ * hasAllMatchSections({
+ *   matchSections: [PCLFormControlName.Section1, PCLFormControlName.Section2],
+ *   selectedSections: [PCLFormControlName.Section1, PCLFormControlName.Section2, PCLFormControlName.Section3]
+ * }); // true
+ *
+ * hasAllMatchSections({
+ *   matchSections: [PCLFormControlName.Section1, PCLFormControlName.Section2],
+ *   selectedSections: [PCLFormControlName.Section1, PCLFormControlName.Section3]
+ * }); // false
+ * ```
  *
  * @param {{
  *   matchSections: PCLFormControlName[];
@@ -414,18 +432,11 @@ const getPCLFormControlDefinitions = (pclFormControlNames: PCLFormControlName[])
  * }} options
  * @return {*}  {boolean}
  */
-const isExactMatch = (options: {
+const hasAllMatchSections = (options: {
   matchSections: PCLFormControlName[];
   selectedSections: PCLFormControlName[];
 }): boolean => {
-  if (options.selectedSections.length !== options.matchSections.length) {
-    return false;
-  }
-
-  return (
-    options.selectedSections.every((s) => options.matchSections.includes(s)) &&
-    options.matchSections.every((s) => options.selectedSections.includes(s))
-  );
+  return options.matchSections.every((item) => options.selectedSections.includes(item));
 };
 
 type PCLMatrixConditionalGroupOptions = {
@@ -1324,25 +1335,25 @@ const _PCLSectionGroupedBusinessRules: Partial<
         return FULL_BITMASK;
       },
       [PCLMatrixLicenceGroup.Liquor1]: () => {
-        return null;
+        return EMPTY_BITMASK;
       },
       [PCLMatrixLicenceGroup.Liquor2]: () => {
-        return null;
+        return EMPTY_BITMASK;
       },
       [PCLMatrixLicenceGroup.Liquor3]: () => {
-        return null;
+        return EMPTY_BITMASK;
       },
       [PCLMatrixLicenceGroup.Cannabis1]: () => {
-        return null;
+        return EMPTY_BITMASK;
       },
       [PCLMatrixLicenceGroup.Cannabis2]: () => {
-        return null;
+        return EMPTY_BITMASK;
       },
       [PCLMatrixLicenceGroup.Cannabis3]: () => {
-        return null;
+        return EMPTY_BITMASK;
       },
       [PCLMatrixLicenceGroup.Cannabis4]: () => {
-        return null;
+        return EMPTY_BITMASK;
       }
     },
     [PCLMatrixConditionalGroup.LENameChangeIndividual]: {

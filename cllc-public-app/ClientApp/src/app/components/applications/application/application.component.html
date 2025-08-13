@@ -1018,6 +1018,21 @@
                     >
                   </p>
                 </div>
+                
+                <!-- Application To Transition To Liquor Primary Licence Application Establishment Name fields -->
+                <div *ngIf="application?.applicationType?.name == ApplicationTypeNames.ApplicationToTransitionToLiquorPrimaryLicence">
+                <label for=""
+                    >Capacity</label>
+                <app-field>
+                 <input
+                      class="form-control"
+                      readonly
+                      style="width: 500px"
+                      type="text"
+                      [value]="licenceCapacity"
+                      id="licenceCapacity" />
+                  </app-field>
+              </div>
               </div>
               <div
                 formGroupName="assignedLicence"
