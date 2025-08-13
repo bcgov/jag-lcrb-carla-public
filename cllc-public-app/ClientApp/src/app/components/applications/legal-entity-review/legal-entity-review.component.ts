@@ -54,6 +54,7 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
   isSubmitting: boolean;
 
   form: FormGroup;
+  formDisabled = false;
 
   faQuestionCircle = faQuestionCircle;
   faIdCard = faIdCard;
@@ -141,6 +142,11 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
     this.form.patchValue(application);
 
     this.isDataLoaded = true;
+
+    if(this.application.applicationStatus !== 'Incomplete'){
+      this.form.disable();
+      this.formDisabled = true;
+    }
   }
 
   /**
@@ -236,25 +242,6 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
       authorizedToSubmit: 'Please affirm that you are authorized to submit the application'
     };
     return errorMap;
-  }
-
-  /**
-   * Cancels the application and returns the user to the dashboard page.
-   */
-  onCancel() {
-    this.dialog.open(GenericConfirmationDialogComponent, {
-      disableClose: true,
-      autoFocus: true,
-      data: {
-        title: 'Cancel Legal Entity Review',
-        message: `Are you sure you want to cancel? Any unsaved changes will be lost.`,
-        confirmButtonText: 'Yes, Cancel',
-        cancelButtonText: 'No, Go Back',
-        onConfirm: () => {
-          this.router.navigate(['/dashboard']);
-        }
-      }
-    });
   }
 
   /**

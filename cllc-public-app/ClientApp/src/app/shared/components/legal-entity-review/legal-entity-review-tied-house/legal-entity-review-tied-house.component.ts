@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 /**
@@ -13,6 +13,7 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./legal-entity-review-tied-house.component.scss']
 })
 export class LegalEntityReviewTiedHouseComponent {
+  @Input() disabled = false;
   @Output() showTiedHouseConnections: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   form: FormGroup;
