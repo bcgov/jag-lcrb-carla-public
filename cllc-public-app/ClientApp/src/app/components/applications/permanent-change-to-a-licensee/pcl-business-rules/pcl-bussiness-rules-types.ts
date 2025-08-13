@@ -153,12 +153,36 @@ export enum PCLMatrixConditionalGroup {
  * Represents all of the unique groups of licences, each with a unique set of conditional logic.
  */
 export enum PCLMatrixLicenceGroup {
+  /**
+   * Default fallback group if no other group matches
+   */
   Default = 'Default',
+  /**
+   * Rule: Liquor (Any of FP, LP, LPC, Catering, LRS, WS, RLRS, Ubrew/Uvin)
+   */
   Liquor1 = 'Liquor1',
+  /**
+   * Rule: Liquor (Any of MFR, Agent) AND Liquor (No Other)
+   */
   Liquor2 = 'Liquor2',
+  /**
+   * Rule: Liquor (Any of MFR, Agent) AND Liquor (At least one other (excluding MFR, Agent))
+   */
   Liquor3 = 'Liquor3',
+  /**
+   * Rule: Cannabis (Any of CRS, PRS, Marketing)
+   */
   Cannabis1 = 'Cannabis1',
+  /**
+   * Rule: Cannabis (Any of CRS, PRS, Marketing) AND Liquor (Any of MFR, Agent) AND Liquor (No Other)
+   */
   Cannabis2 = 'Cannabis2',
+  /**
+   * Rule: Cannabis (Any of CRS, PRS, Marketing) AND Liquor (Any of FP, LP, LPC, Catering, LRS, WS, RLRS, Ubrew/Uvin)
+   */
   Cannabis3 = 'Cannabis3',
+  /**
+   * Rule: Cannabis (Any of CRS, PRS, Marketing) AND Liquor (Any of MFR, Agent) AND Liquor (At least one other (excluding MFR, Agent))
+   */
   Cannabis4 = 'Cannabis4'
 }
