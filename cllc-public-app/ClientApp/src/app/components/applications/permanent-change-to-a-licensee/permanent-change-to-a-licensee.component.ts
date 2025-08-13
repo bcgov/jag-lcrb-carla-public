@@ -191,15 +191,29 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
   }
 
   /**
+   * Get the currently selected PCL form control names.
+   *
+   * @return {*}  {PCLFormControlName[]}
+   */
+  _PCLSelectedFormControlNames(): PCLFormControlName[] {
+    const pclMatrixFormControlNames = Object.values(PCLFormControlName);
+
+    const formValues = Object.entries(this.form.value);
+
+    return formValues
+      .filter(([key, _]) => pclMatrixFormControlNames.includes(key as PCLFormControlName))
+      .filter(([_, value]) => value === true)
+      .map(([key]) => key as PCLFormControlName);
+  }
+
+  /**
    * Updates the PCL business rules based on the selected form controls.
    */
   _PCLMatrixOnFormControlChanges() {
-    const _PCLSectionSelectedFormControlNames = (Object.entries(this.form.value) as [PCLFormControlName, any][])
-      .filter(([_, value]) => value === true)
-      .map(([key]) => key);
+    const pclSectionSelectedFormControlNames = this._PCLSelectedFormControlNames();
 
     const pclMatrixConditionalGroup = getPCLMatrixConditionalGroup({
-      selectedPCLSections: _PCLSectionSelectedFormControlNames
+      selectedPCLSections: pclSectionSelectedFormControlNames
     });
 
     const businessRules = getPCLMatrixSectionBusinessRules({
