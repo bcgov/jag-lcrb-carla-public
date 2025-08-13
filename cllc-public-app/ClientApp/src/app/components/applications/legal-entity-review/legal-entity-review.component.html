@@ -5,7 +5,9 @@
 
   <ng-container *ngIf="isDataLoaded">
     <section>
-      <app-legal-entity-review-disclaimer [account]="account"></app-legal-entity-review-disclaimer>
+      <app-legal-entity-review-disclaimer
+        [account]="account"
+        [application]="application"></app-legal-entity-review-disclaimer>
     </section>
 
     <section>

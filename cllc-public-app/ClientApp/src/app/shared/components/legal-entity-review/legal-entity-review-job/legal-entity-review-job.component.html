@@ -10,13 +10,9 @@
   <div class="mb-5">
     <h4>Review Outcome</h4>
     <div>
-      <app-legal-entity-review-outcome-letter [account]="account"></app-legal-entity-review-outcome-letter>
+      <app-legal-entity-review-outcome-letter
+        [account]="account"
+        [application]="application"></app-legal-entity-review-outcome-letter>
     </div>
-  </div>
-  <div>
-    <span class="contact-support-text">
-      If you have any questions, please click
-      <button mat-button class="button-as-link" (click)="scrollToQuestionsSection()">Here</button>.
-    </span>
   </div>
 </div>
