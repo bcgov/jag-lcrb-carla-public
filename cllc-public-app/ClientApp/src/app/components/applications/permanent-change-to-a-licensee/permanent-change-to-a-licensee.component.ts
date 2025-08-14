@@ -534,7 +534,8 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
       this.showValidationMessages = true;
       this.markControlsAsTouched(this.form);
       this.markControlsAsTouched(this.appContact.form);
-
+      this.tiedHouseDeclaration.markAllFormsTouched();
+      this.scrollToFirstInvalidControl();
       return;
     }
 
@@ -768,5 +769,43 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
 
   ngOnDestroy(): void {
     this._debouncedSave.cancel();
+  }
+
+  private scrollToFirstInvalidControl() {
+    // Grab the first invalid control
+    var firstInvalidControl: HTMLElement = document.querySelector('.form-wrapper .ng-invalid');
+    // if (!firstInvalidControl) {
+    //   firstInvalidControl = document.querySelector('.form-wrapper .form-error');
+    // }
+    const firstInvalidControl1: HTMLElement = document.querySelector('.form-wrapper .ng-invalid') as HTMLElement;
+
+    if (firstInvalidControl) {
+      // If inside a mat-expansion-panel, open that panel first
+      const panel = firstInvalidControl.closest('mat-expansion-panel');
+      if (panel) {
+        console.log(panel);
+        const panelComponent = this.tiedHouseDeclaration.panels.toArray().find(
+          (panel) => panel._body.nativeElement.contains(firstInvalidControl) // or panel._body.nativeElement.querySelector(...)
+        );
+        //const panelComponent = this.tiedHouseDeclaration.panels.find(p => (p as any)._element.nativeElement.contains(panel));;
+        panelComponent.open();
+      }
+
+      // Wait for the panel to expand, then scroll
+      setTimeout(() => {
+        firstInvalidControl.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center'
+        });
+      }, 300); // delay to allow animation to finish
+
+      if (
+        firstInvalidControl instanceof HTMLInputElement ||
+        firstInvalidControl instanceof HTMLSelectElement ||
+        firstInvalidControl instanceof HTMLTextAreaElement
+      ) {
+        firstInvalidControl.focus();
+      }
+    }
   }
 }
