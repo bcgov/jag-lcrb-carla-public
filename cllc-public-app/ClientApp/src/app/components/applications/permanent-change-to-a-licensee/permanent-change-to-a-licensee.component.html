@@ -95,7 +95,7 @@
     </section>
 
     <!-- Cannabis Associate Security Screening Forms -->
-    <section *ngIf="hasCannabis">
+    <section *ngIf="isPermanentChangeCannabisSecurityScreeningFormsVisible">
       <app-permanent-change-cannabis-security-screening-forms
         [application]="application"
         (uploadedCAS)="uploadedCAS = $event"
@@ -105,13 +105,14 @@
     </section>
 
     <!-- Personal History Summary Forms -->
-    <section *ngIf="hasLiquor">
+    <section *ngIf="isPermanentChangePersonalHistorySummaryFormsVisible">
       <app-permanent-change-personal-history-summary-forms
         [application]="application"
         (uploadedFinancialIntegrity)="
           uploadedFinancialIntegrity = $event
         "></app-permanent-change-personal-history-summary-forms>
     </section>
+
     <!-- Tied House Declaration -->
     <section *ngIf="isTiedHouseDeclarationVisible">
       <h3 class="blue-header">Tied House Declarations</h3>

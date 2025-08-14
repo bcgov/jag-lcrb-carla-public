@@ -755,6 +755,43 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
   }
 
   /**
+   * Indicates whether the Permanent Change Cannabis Security Screening Forms section is visible.
+   *
+   * Business Rule:
+   * The Permanent Change Cannabis Security Screening Forms section is visible if the user has at least 1 cannabis
+   * licence.
+   *
+   * @readonly
+   */
+  get isPermanentChangeCannabisSecurityScreeningFormsVisible() {
+    return this.hasCannabis;
+  }
+
+  /**
+   * Indicates whether the Permanent Change Personal History Summary Forms section is visible.
+   *
+   * Business Rule:
+   * The Permanent Change Personal History Summary Forms section is visible if the user has at least 1 liquor licence
+   * AND the Tied House Declaration section is not the only other visible section.
+   *
+   * @readonly
+   */
+  get isPermanentChangePersonalHistorySummaryFormsVisible() {
+    const atLeastOneNonTiedHouseSectionIsVisible = [
+      this.isInternalTransferOfSharesVisible,
+      this.isExternalTransferOfSharesVisible,
+      this.isChangeOfDirectorsOrOfficersVisible,
+      this.isNameChangeLicenseePersonVisible,
+      this.isNameChangeLicenseeCorporationVisible,
+      this.isNameChangeLicenseePartnershipVisible,
+      this.isNameChangeLicenseeSocietyVisible,
+      this.isAdditionalReceiverOrExecutorVisible
+    ].some(Boolean);
+
+    return this.hasLiquor && (atLeastOneNonTiedHouseSectionIsVisible || !this.isTiedHouseDeclarationVisible);
+  }
+
+  /**
    * Indicates whether the payment section is visible.
    *
    * @readonly
