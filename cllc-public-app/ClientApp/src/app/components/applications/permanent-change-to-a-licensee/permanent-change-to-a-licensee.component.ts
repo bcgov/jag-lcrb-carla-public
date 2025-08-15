@@ -756,6 +756,54 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
   }
 
   /**
+   * Indicates whether the Permanent Change Cannabis Security Screening Forms section is visible.
+   *
+   * Business Rule:
+   * The Permanent Change Personal History Summary Forms section is visible if the user has at least 1 cannabis licence
+   * AND has selected at least one type of change checkbox (excluding `csTiedHouseDeclaration`).
+   *
+   * @readonly
+   */
+  get isPermanentChangeCannabisSecurityScreeningFormsVisible() {
+    const atLeastOneNonTiedHouseSectionIsVisible = [
+      this.isInternalTransferOfSharesVisible,
+      this.isExternalTransferOfSharesVisible,
+      this.isChangeOfDirectorsOrOfficersVisible,
+      this.isNameChangeLicenseePersonVisible,
+      this.isNameChangeLicenseeCorporationVisible,
+      this.isNameChangeLicenseePartnershipVisible,
+      this.isNameChangeLicenseeSocietyVisible,
+      this.isAdditionalReceiverOrExecutorVisible
+    ].some(Boolean);
+
+    return this.hasCannabis && atLeastOneNonTiedHouseSectionIsVisible;
+  }
+
+  /**
+   * Indicates whether the Permanent Change Personal History Summary Forms section is visible.
+   *
+   * Business Rule:
+   * The Permanent Change Personal History Summary Forms section is visible if the user has at least 1 liquor licence
+   * AND has selected at least one type of change checkbox (excluding `csTiedHouseDeclaration`).
+   *
+   * @readonly
+   */
+  get isPermanentChangePersonalHistorySummaryFormsVisible() {
+    const atLeastOneNonTiedHouseSectionIsVisible = [
+      this.isInternalTransferOfSharesVisible,
+      this.isExternalTransferOfSharesVisible,
+      this.isChangeOfDirectorsOrOfficersVisible,
+      this.isNameChangeLicenseePersonVisible,
+      this.isNameChangeLicenseeCorporationVisible,
+      this.isNameChangeLicenseePartnershipVisible,
+      this.isNameChangeLicenseeSocietyVisible,
+      this.isAdditionalReceiverOrExecutorVisible
+    ].some(Boolean);
+
+    return this.hasLiquor && atLeastOneNonTiedHouseSectionIsVisible;
+  }
+
+  /**
    * Indicates whether the payment section is visible.
    *
    * @readonly
