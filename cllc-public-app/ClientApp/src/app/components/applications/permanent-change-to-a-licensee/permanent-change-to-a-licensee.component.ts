@@ -534,7 +534,8 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
       this.showValidationMessages = true;
       this.markControlsAsTouched(this.form);
       this.markControlsAsTouched(this.appContact.form);
-
+      this.tiedHouseDeclaration.markAllFormsTouched();
+      this.scrollToFirstInvalidControl();
       return;
     }
 
@@ -768,5 +769,30 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
 
   ngOnDestroy(): void {
     this._debouncedSave.cancel();
+  }
+
+  private scrollToFirstInvalidControl() {
+    // Grab the first invalid control
+    var firstInvalidControl: HTMLElement = document.querySelector('.form-wrapper .ng-invalid');
+    if (!firstInvalidControl) {
+      return;
+    }
+
+    // If inside a mat-expansion-panel, open that panel first
+    const panel = firstInvalidControl.closest('mat-expansion-panel');
+    if (panel) {
+      const panelComponent = this.tiedHouseDeclaration.panels
+        .toArray()
+        .find((panel) => panel._body.nativeElement.contains(firstInvalidControl));
+      panelComponent.open();
+    }
+
+    // Wait for the panel to expand, then scroll
+    setTimeout(() => {
+      firstInvalidControl.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      });
+    }, 300); // delay to allow animation to finishs
   }
 }

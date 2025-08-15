@@ -69,7 +69,7 @@
       class="col-md-6"
       label="Business Type"
       [required]="true"
-      [valid]="form.get('businessType')?.valid || !form.get('businessType')?.touched"
+      [valid]="form.get('businessType')?.value != undefined || !form.get('businessType')?.touched"
       errorMessage="Business Type is required">
       <select class="form-control" formControlName="businessType">
         <option value="" disabled>Select a Business Type</option>
@@ -93,7 +93,7 @@
       class="col-md-6"
       label="Relationship to Declared Licence"
       [required]="true"
-      [valid]="form.get('relationshipToLicence')?.valid || !form.get('relationshipToLicence')?.touched"
+      [valid]="form.get('relationshipToLicence')?.value != undefined || !form.get('relationshipToLicence')?.touched"
       errorMessage="Relationship to Declared Licence is required">
       <select class="form-control" formControlName="relationshipToLicence">
         <option value="" disabled>Select a relationship</option>
@@ -118,6 +118,7 @@
       class="col-md-6"
       label="Associated Liquor Licence # (6 Digits) OR Establishment Name"
       [valid]="!form.get('autocompleteInput')?.touched || associatedLiquorLicenses.length > 0"
+      [class.ng-invalid]="associatedLiquorLicenses.length == 0"
       errorMessage="Please select a value"
       [required]="false">
       <app-related-licence-picker-multi-select [form]="form"></app-related-licence-picker-multi-select>
