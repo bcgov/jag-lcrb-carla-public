@@ -56,7 +56,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AccountODataBind = !String.IsNullOrEmpty(from.AccountId) ? $"/accounts({from.AccountId})" : null;
             to.ApplicationOdataBind = !String.IsNullOrEmpty(from.ApplicationId) ? $"/adoxio_applications({from.ApplicationId})" : null;
             to.AdoxioFirstName = from.FirstName;
-            to.AdoxioMiddlename = from.LastName;
+            to.AdoxioMiddlename = from.MiddleName;
             to.AdoxioDateOfBirth = from.DateOfBirth;
             to.AdoxioLastname = from.LastName;
             to.AdoxioOtherRelationship = from.OtherDescription;
