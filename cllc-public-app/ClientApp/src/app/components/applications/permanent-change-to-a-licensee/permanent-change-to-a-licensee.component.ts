@@ -758,13 +758,24 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
    * Indicates whether the Permanent Change Cannabis Security Screening Forms section is visible.
    *
    * Business Rule:
-   * The Permanent Change Cannabis Security Screening Forms section is visible if the user has at least 1 cannabis
-   * licence.
+   * The Permanent Change Personal History Summary Forms section is visible if the user has at least 1 cannabis licence
+   * AND has selected at least one type of change checkbox (excluding `csTiedHouseDeclaration`).
    *
    * @readonly
    */
   get isPermanentChangeCannabisSecurityScreeningFormsVisible() {
-    return this.hasCannabis;
+    const atLeastOneNonTiedHouseSectionIsVisible = [
+      this.isInternalTransferOfSharesVisible,
+      this.isExternalTransferOfSharesVisible,
+      this.isChangeOfDirectorsOrOfficersVisible,
+      this.isNameChangeLicenseePersonVisible,
+      this.isNameChangeLicenseeCorporationVisible,
+      this.isNameChangeLicenseePartnershipVisible,
+      this.isNameChangeLicenseeSocietyVisible,
+      this.isAdditionalReceiverOrExecutorVisible
+    ].some(Boolean);
+
+    return this.hasCannabis && atLeastOneNonTiedHouseSectionIsVisible;
   }
 
   /**
@@ -772,7 +783,7 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
    *
    * Business Rule:
    * The Permanent Change Personal History Summary Forms section is visible if the user has at least 1 liquor licence
-   * AND the Tied House Declaration section is not the only other visible section.
+   * AND has selected at least one type of change checkbox (excluding `csTiedHouseDeclaration`).
    *
    * @readonly
    */
@@ -788,7 +799,7 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
       this.isAdditionalReceiverOrExecutorVisible
     ].some(Boolean);
 
-    return this.hasLiquor && (atLeastOneNonTiedHouseSectionIsVisible || !this.isTiedHouseDeclarationVisible);
+    return this.hasLiquor && atLeastOneNonTiedHouseSectionIsVisible;
   }
 
   /**
