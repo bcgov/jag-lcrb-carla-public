@@ -16,11 +16,18 @@
         [required]="true"
         [valid]="isValidOrNotTouched('dateOfBirth')"
         errorMessage="Date of Birth is required">
-      <input type="text" formControlName="dateOfBirth" style="background-color: #fff; width: 100%; max-width: none"
-             placeholder="yyyy-mm-dd" readonly class="form-control" [matDatepicker]="picker"
-             (focus)="picker.open()" (click)="picker.open()">
-      <mat-datepicker #picker></mat-datepicker>
-    </app-field>
+        <input
+          type="text"
+          formControlName="dateOfBirth"
+          style="background-color: #fff; width: 100%; max-width: none"
+          placeholder="yyyy-mm-dd"
+          readonly
+          class="form-control"
+          [matDatepicker]="picker"
+          (focus)="picker.open()"
+          (click)="picker.open()" />
+        <mat-datepicker #picker></mat-datepicker>
+      </app-field>
       <app-field
         class="col-md-6"
         label="First Name"
