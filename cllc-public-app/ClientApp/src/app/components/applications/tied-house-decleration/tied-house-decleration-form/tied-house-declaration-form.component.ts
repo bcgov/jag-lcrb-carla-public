@@ -97,7 +97,7 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
       this._tiedHouseDecleration.dateOfBirth = formatDate(this._tiedHouseDecleration.dateOfBirth);
       this.form.patchValue(this._tiedHouseDecleration);
       this.updateAssociatedLicenses(this._tiedHouseDecleration.associatedLiquorLicense || []);
-    }
+}
 
     this.updateFieldValidators();
 
@@ -144,6 +144,10 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
     const tiedHouse: TiedHouseConnection = { ...this.form.getRawValue() };
     tiedHouse.applicationId = this._tiedHouseDecleration.applicationId;
     tiedHouse.id = this._tiedHouseDecleration.id;
+
+    let dateOfBirth =  new Date(this.form.get('dateOfBirth').value);
+    tiedHouse.dateOfBirth = dateOfBirth.toISOString();
+
     this.saveTiedHouseDecclaration.emit(tiedHouse);
     this._tiedHouseDecleration.viewMode = TiedHouseViewMode.disabled;
     this.setFormState();
