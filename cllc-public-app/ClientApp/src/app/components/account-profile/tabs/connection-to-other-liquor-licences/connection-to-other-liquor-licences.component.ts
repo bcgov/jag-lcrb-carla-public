@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Account } from '@models/account.model';
 import { Application, ApplicationExtension } from '@models/application.model';
 import { TiedHouseConnection } from '@models/tied-house-connection.model';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
 import { GenericMessageDialogComponent } from '@shared/components/dialog/generic-message-dialog/generic-message-dialog.component';
+import { isValidOrNotTouched } from '@shared/form-utils';
 import { Subject, takeUntil } from 'rxjs';
 import { forkJoin } from 'rxjs/internal/observable/forkJoin';
 
@@ -107,9 +108,9 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnChang
 
   initForm() {
     this.form = this.fb.group({
-      hasLiquorTiedHouseOwnershipOrControl: [''],
-      hasLiquorTiedHouseThirdPartyAssociations: [''],
-      hasLiquorTiedHouseFamilyMemberInvolvement: ['']
+      hasLiquorTiedHouseOwnershipOrControl: [null, Validators.required],
+      hasLiquorTiedHouseThirdPartyAssociations: [null, Validators.required],
+      hasLiquorTiedHouseFamilyMemberInvolvement: [null, Validators.required]
     });
 
     this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe((value) => this.onFormChanges.emit(value));
@@ -238,6 +239,16 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnChang
     }
 
     return false;
+  }
+
+  /**
+   * Checks if a form control is valid or not touched.
+   *
+   * @param {string} fieldName
+   * @return {*}  {boolean}
+   */
+  isValidOrNotTouched(fieldName: string): boolean {
+    return isValidOrNotTouched(this.form, fieldName);
   }
 
   ngOnDestroy(): void {
