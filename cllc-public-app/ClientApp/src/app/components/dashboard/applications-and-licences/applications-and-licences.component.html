@@ -528,8 +528,8 @@
                 </ng-container>
 
                 <!-- All others -->
-                <ng-container
-                  *ngIf="isOtherApplication(item)">
+                <ng-container 
+                *ngIf="isOtherApplication(item)">
                   <span style="font-weight: 600">{{ item.establishmentName }}</span> <br />
                   <span>{{ item.portallabel }}</span> <br />
                   <span>Job No: </span> <i>{{ item.jobNumber }}</i> <br />
@@ -595,7 +595,12 @@
                         *ngIf="
                           item.applicationTypeName !== ApplicationTypeNames.CRSRenewal &&
                           item.applicationTypeName !== ApplicationTypeNames.Catering &&
-                          item.applicationTypeName !== ApplicationTypeNames.LiquorRenewal
+                          item.applicationTypeName !== ApplicationTypeNames.LiquorRenewal &&
+                          (isPermanentChangeToLicenceAsAResultOfLegalEntityReview(item) ||
+                            !(
+                              item.applicationTypeName === ApplicationTypeNames.PermanentChangeToALicensee &&
+                              !allowPCLSubmission
+                            ))
                         "
                         routerLink="/account-profile/{{ item.id }}"
                         id="completeApp{{ item.id }}">
@@ -610,7 +615,12 @@
                       *ngIf="
                         item.applicationTypeName !== ApplicationTypeNames.CRSRenewal &&
                         item.applicationTypeName !== ApplicationTypeNames.LiquorRenewal &&
-                        item.applicationTypeName !== ApplicationTypeNames.MarketingRenewal
+                        item.applicationTypeName !== ApplicationTypeNames.MarketingRenewal &&
+                        (isPermanentChangeToLicenceAsAResultOfLegalEntityReview(item) ||
+                          !(
+                            item.applicationTypeName === ApplicationTypeNames.PermanentChangeToALicensee &&
+                            !allowPCLSubmission
+                          ))
                       "
                       [routerLink]="getApplicationLink(item)"
                       id="completeApp{{ item.id }}">
