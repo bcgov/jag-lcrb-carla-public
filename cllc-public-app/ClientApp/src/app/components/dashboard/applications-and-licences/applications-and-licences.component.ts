@@ -85,7 +85,15 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   startF2GOngoing: boolean;
   startEthylOngoing: boolean;
 
-  leReviewInProgressStatuses: string[] = [ApplicationStatuses.Intake, ApplicationStatuses.Incomplete, ApplicationStatuses.Submitted, ApplicationStatuses.UnderReview, ApplicationStatuses.LicenseeActionRequired, ApplicationStatuses.ApplicationAssessment, ApplicationStatuses.NotSubmitted];
+  leReviewInProgressStatuses: string[] = [
+    ApplicationStatuses.Intake,
+    ApplicationStatuses.Incomplete,
+    ApplicationStatuses.Submitted,
+    ApplicationStatuses.UnderReview,
+    ApplicationStatuses.LicenseeActionRequired,
+    ApplicationStatuses.ApplicationAssessment,
+    ApplicationStatuses.NotSubmitted
+  ];
   allowPCLSubmission: boolean = true;
 
   constructor(
@@ -167,7 +175,12 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
             .map((item) => item as any)
             .concat(licenses.filter((item) => item.licenceTypeName !== ApplicationTypeNames.Marketer)).length > 0;
 
-        this.allowPCLSubmission = applications.find((app) => app.applicationTypeName === ApplicationTypeNames.LegalEntityReview && this.leReviewInProgressStatuses.find(s=> s === app.applicationStatus) !== undefined ) === undefined
+        this.allowPCLSubmission =
+          applications.find(
+            (app) =>
+              app.applicationTypeName === ApplicationTypeNames.LegalEntityReview &&
+              this.leReviewInProgressStatuses.find((s) => s === app.applicationStatus) !== undefined
+          ) === undefined;
         //emits if user has an inprogress legal entity review or not
         this.legalEntityApplicationExists.emit(!this.allowPCLSubmission);
         this.dataLoaded = true;
@@ -839,6 +852,19 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
       !this.isPermanentChangeToLicenceApplication(ApplicationSummary) &&
       !this.isLegalEntityReviewApplication(ApplicationSummary) &&
       !this.isPermanentChangeToLicenceAsAResultOfLegalEntityReview(ApplicationSummary)
+    );
+  }
+
+  isCompleteActionVisible(applicationSummary: ApplicationSummary): boolean {
+    return (
+      applicationSummary.applicationTypeName !== ApplicationTypeNames.CRSRenewal &&
+      applicationSummary.applicationTypeName !== ApplicationTypeNames.Catering &&
+      applicationSummary.applicationTypeName !== ApplicationTypeNames.LiquorRenewal &&
+      (this.isPermanentChangeToLicenceAsAResultOfLegalEntityReview(applicationSummary) ||
+        !(
+          applicationSummary.applicationTypeName === ApplicationTypeNames.PermanentChangeToALicensee &&
+          !this.allowPCLSubmission
+        ))
     );
   }
 }
