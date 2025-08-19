@@ -11,6 +11,7 @@ import {
   TiedHouseViewMode
 } from '@models/tied-house-connection.model';
 import { FormBase } from '@shared/form-base';
+import { endOfToday } from 'date-fns';
 
 @Component({
   selector: 'app-tied-house-declaration-form',
@@ -47,6 +48,8 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
 
   showOtherField = false;
   isEditable = true;
+
+  maxDate = endOfToday();
 
   requiredFormArray(control: AbstractControl): ValidationErrors | null {
     return control instanceof FormArray && control.length > 0 ? null : { required: true };
@@ -145,8 +148,9 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
     tiedHouse.applicationId = this._tiedHouseDecleration.applicationId;
     tiedHouse.id = this._tiedHouseDecleration.id;
 
-    let dateOfBirth =  new Date(this.form.get('dateOfBirth').value);
-    tiedHouse.dateOfBirth = dateOfBirth.toISOString();
+    let dateOfBirth = this.form.get('dateOfBirth').value? new Date(this.form.get('dateOfBirth').value) : undefined;
+
+    tiedHouse.dateOfBirth = dateOfBirth?.toISOString();
 
     this.saveTiedHouseDecclaration.emit(tiedHouse);
     this._tiedHouseDecleration.viewMode = TiedHouseViewMode.disabled;

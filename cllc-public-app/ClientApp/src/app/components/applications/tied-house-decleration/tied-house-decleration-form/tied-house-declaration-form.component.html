@@ -23,6 +23,7 @@
           placeholder="yyyy-mm-dd"
           readonly
           class="form-control"
+          [max]="maxDate"
           [matDatepicker]="picker"
           (focus)="picker.open()"
           (click)="picker.open()" />
@@ -75,7 +76,7 @@
       class="col-md-6"
       label="Business Type"
       [required]="true"
-      [valid]="form.get('businessType')?.value != undefined || !form.get('businessType')?.touched"
+      [valid]="form.get('businessType')?.value != '' || !form.get('businessType')?.touched"
       errorMessage="Business Type is required">
       <select class="form-control" formControlName="businessType">
         <option value="" disabled>Select a Business Type</option>
