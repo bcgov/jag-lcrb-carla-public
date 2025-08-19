@@ -118,6 +118,14 @@ h3 {
   padding-top: 20px;
 }
 
+.readonly-white {
+  background-color: #fff !important;
+}
+
+.disabled-grey {
+  background-color: #eee !important;
+}
+
 :host ::ng-deep section {
   flex-grow: 1;
   width: 100%;

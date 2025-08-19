@@ -11,7 +11,7 @@ import {
   TiedHouseViewMode
 } from '@models/tied-house-connection.model';
 import { FormBase } from '@shared/form-base';
-import { endOfToday } from 'date-fns';
+import { endOfToday, subYears } from 'date-fns';
 
 @Component({
   selector: 'app-tied-house-declaration-form',
@@ -50,6 +50,7 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
   isEditable = true;
 
   maxDate = endOfToday();
+  minDate = subYears(endOfToday(), 125);
 
   requiredFormArray(control: AbstractControl): ValidationErrors | null {
     return control instanceof FormArray && control.length > 0 ? null : { required: true };
