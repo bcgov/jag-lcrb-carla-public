@@ -520,8 +520,9 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
   }
 
   showUnsavedConnectionError(thIndex: number, panel: MatExpansionPanel) {
+    var unsavedStatuses: number[] = [TiedHouseViewMode.addNewRelationship, TiedHouseViewMode.new, TiedHouseViewMode.editExistingRecord];
     return (
-      !panel.expanded && this.groupedTiedHouseDeclarations[thIndex][1].find((th) => th.id == undefined) != undefined
+      !panel.expanded && this.groupedTiedHouseDeclarations[thIndex][1].find((th) =>  unsavedStatuses.find(s => s == th.viewMode) != undefined) != undefined
     );
   }
 
