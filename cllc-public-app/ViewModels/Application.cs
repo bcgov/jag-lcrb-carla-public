@@ -809,9 +809,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
     public class ApplicationExtension
     {
         public string Id { get; set; }
-        public int HasLiquorTiedHouseOwnershipOrControl { get; set; }
-        public int HasLiquorTiedHouseThirdPartyAssociations { get; set; }
-        public int HasLiquorTiedHouseFamilyMemberInvolvement { get; set; }
+        public int? HasLiquorTiedHouseOwnershipOrControl { get; set; }
+        public int? HasLiquorTiedHouseThirdPartyAssociations { get; set; }
+        public int? HasLiquorTiedHouseFamilyMemberInvolvement { get; set; }
 
         /// <summary>
         /// The ID of a related legal entity or permanent change to a licensee application.

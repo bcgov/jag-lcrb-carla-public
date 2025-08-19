@@ -35,6 +35,7 @@ import { TiedHouseConnectionsDataService } from '@services/tied-house-connection
 import { UserDataService } from '@services/user-data.service';
 import { GenericMessageDialogComponent } from '@shared/components/dialog/generic-message-dialog/generic-message-dialog.component';
 import { FormBase } from '@shared/form-base';
+import { isFormValidOrNotTouched } from '@shared/form-utils';
 import { endOfToday } from 'date-fns';
 import { combineLatest, forkJoin, Observable, of, Subscription } from 'rxjs';
 import { catchError, filter, map, switchMap, takeWhile } from 'rxjs/operators';
@@ -613,13 +614,13 @@ export class AccountProfileComponent extends FormBase implements OnInit {
    * Checks if the form is valid.
    *
    * @readonly
-   * @type {boolean} `true` if the form is valid, `false` otherwise.
+   * @type {boolean} `true` if the form is valid or disabled, `false` otherwise.
    */
   get isFormValid(): boolean {
-    return !!(
-      this.form.valid &&
-      this.connectionToProducersComponent?.form?.valid &&
-      this.connectionToOtherLiquorLicencesComponent?.form?.valid
+    return (
+      isFormValidOrNotTouched(this.form) &&
+      isFormValidOrNotTouched(this.connectionToProducersComponent?.form) &&
+      isFormValidOrNotTouched(this.connectionToOtherLiquorLicencesComponent?.form)
     );
   }
 
