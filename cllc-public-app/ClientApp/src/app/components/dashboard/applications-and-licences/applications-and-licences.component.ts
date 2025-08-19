@@ -14,7 +14,7 @@ import { faExchangeAlt, faPencilAlt, faPlus, faShoppingCart, faTrashAlt } from '
 import { Account } from '@models/account.model';
 import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
 import { ApplicationSummary } from '@models/application-summary.model';
-import { ApplicationType, ApplicationTypeNames } from '@models/application-type.model';
+import { ApplicationStatuses, ApplicationType, ApplicationTypeNames } from '@models/application-type.model';
 import { Application } from '@models/application.model';
 import { Store } from '@ngrx/store';
 import { FeatureFlagService } from '@services/feature-flag.service';
@@ -84,6 +84,17 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   startAgentOngoing: boolean;
   startF2GOngoing: boolean;
   startEthylOngoing: boolean;
+
+  leReviewInProgressStatuses: string[] = [
+    ApplicationStatuses.Intake,
+    ApplicationStatuses.Incomplete,
+    ApplicationStatuses.Submitted,
+    ApplicationStatuses.UnderReview,
+    ApplicationStatuses.LicenseeActionRequired,
+    ApplicationStatuses.ApplicationAssessment,
+    ApplicationStatuses.NotSubmitted
+  ];
+  allowPCLSubmission: boolean = true;
 
   constructor(
     private userDataService: UserDataService,
@@ -164,10 +175,14 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
             .map((item) => item as any)
             .concat(licenses.filter((item) => item.licenceTypeName !== ApplicationTypeNames.Marketer)).length > 0;
 
+        this.allowPCLSubmission =
+          applications.find(
+            (app) =>
+              app.applicationTypeName === ApplicationTypeNames.LegalEntityReview &&
+              this.leReviewInProgressStatuses.find((s) => s === app.applicationStatus) !== undefined
+          ) === undefined;
         //emits if user has an inprogress legal entity review or not
-        this.legalEntityApplicationExists.emit(
-          applications.find((app) => app.applicationTypeName === ApplicationTypeNames.LegalEntityReview) !== undefined
-        );
+        this.legalEntityApplicationExists.emit(!this.allowPCLSubmission);
         this.dataLoaded = true;
       });
 
@@ -837,6 +852,19 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
       !this.isPermanentChangeToLicenceApplication(ApplicationSummary) &&
       !this.isLegalEntityReviewApplication(ApplicationSummary) &&
       !this.isPermanentChangeToLicenceAsAResultOfLegalEntityReview(ApplicationSummary)
+    );
+  }
+
+  isCompleteActionVisible(applicationSummary: ApplicationSummary): boolean {
+    return (
+      applicationSummary.applicationTypeName !== ApplicationTypeNames.CRSRenewal &&
+      applicationSummary.applicationTypeName !== ApplicationTypeNames.Catering &&
+      applicationSummary.applicationTypeName !== ApplicationTypeNames.LiquorRenewal &&
+      (this.isPermanentChangeToLicenceAsAResultOfLegalEntityReview(applicationSummary) ||
+        !(
+          applicationSummary.applicationTypeName === ApplicationTypeNames.PermanentChangeToALicensee &&
+          !this.allowPCLSubmission
+        ))
     );
   }
 }
