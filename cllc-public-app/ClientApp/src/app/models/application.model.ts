@@ -280,9 +280,9 @@ export interface Application {
 
 export class ApplicationExtension {
   id: string;
-  hasLiquorTiedHouseOwnershipOrControl: number;
-  hasLiquorTiedHouseThirdPartyAssociations: number;
-  hasLiquorTiedHouseFamilyMemberInvolvement: number;
+  hasLiquorTiedHouseOwnershipOrControl: number | null;
+  hasLiquorTiedHouseThirdPartyAssociations: number | null;
+  hasLiquorTiedHouseFamilyMemberInvolvement: number | null;
   /**
    * The ID of a related legal entity or permanent change to a licensee application.
    * - For a legal entity review application, this will be the ID of the permanent change to a licensee application.
