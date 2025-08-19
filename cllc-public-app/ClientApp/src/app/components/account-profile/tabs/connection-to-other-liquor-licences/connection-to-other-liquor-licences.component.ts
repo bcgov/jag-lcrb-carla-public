@@ -1,13 +1,13 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Account } from '@models/account.model';
 import { Application, ApplicationExtension } from '@models/application.model';
 import { TiedHouseConnection } from '@models/tied-house-connection.model';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
 import { GenericMessageDialogComponent } from '@shared/components/dialog/generic-message-dialog/generic-message-dialog.component';
-import { Subject, takeUntil } from 'rxjs';
-import { forkJoin } from 'rxjs/internal/observable/forkJoin';
+import { isValidOrNotTouched } from '@shared/form-utils';
+import { forkJoin, Subject, takeUntil } from 'rxjs';
 
 export type ConnectionToOtherLiquorLicencesFormData = ApplicationExtension;
 
@@ -91,37 +91,89 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnChang
 
   ngOnInit() {
     this.initForm();
-    this.loadFormData();
+    this.initFormInitialData();
     this.loadTiedHouseData();
+    this.setFormMode();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.application) {
-      this.loadFormData();
+    if (
+      (changes.account &&
+        !changes.account.firstChange &&
+        changes.account.currentValue !== changes.account.previousValue) ||
+      (changes.application &&
+        !changes.application.firstChange &&
+        changes.application.currentValue !== changes.application.previousValue)
+    ) {
+      // If the account or application input changes, re-load the tiedhouse data and update the form mode.
+      this.loadTiedHouseData();
+      this.setFormMode();
     }
 
-    if (changes.account) {
-      this.loadFormData();
+    if (changes.initialFormData && !changes.initialFormData.firstChange && changes.initialFormData.currentValue) {
+      // If the initial form data input changes, re-patch the form data.
+      this.initFormInitialData();
     }
   }
 
+  /**
+   * Initialize the form.
+   * This should only be called once.
+   */
   initForm() {
     this.form = this.fb.group({
-      hasLiquorTiedHouseOwnershipOrControl: [''],
-      hasLiquorTiedHouseThirdPartyAssociations: [''],
-      hasLiquorTiedHouseFamilyMemberInvolvement: ['']
+      hasLiquorTiedHouseOwnershipOrControl: [null, Validators.required],
+      hasLiquorTiedHouseThirdPartyAssociations: [null, Validators.required],
+      hasLiquorTiedHouseFamilyMemberInvolvement: [null, Validators.required]
     });
 
     this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe((value) => this.onFormChanges.emit(value));
   }
 
-  loadFormData() {
-    if (this.initialFormData) {
-      this.form.patchValue(this.initialFormData);
+  /**
+   * Initialize the form with initial data, if any is provided.
+   */
+  initFormInitialData() {
+    if (!this.form) {
+      return;
+    }
+
+    if (!this.initialFormData) {
+      return;
+    }
+
+    this.form.patchValue(this.initialFormData);
+  }
+
+  /**
+   * Set the form mode to either read-only or editable based on the current state.
+   */
+  setFormMode() {
+    if (this.isTiedHouseReadOnly) {
+      // If the tied house component is read-only, disable the form and disable all validators
+      this.form.disable();
+      this.form.get('hasLiquorTiedHouseOwnershipOrControl').clearValidators();
+      this.form.get('hasLiquorTiedHouseThirdPartyAssociations').clearValidators();
+      this.form.get('hasLiquorTiedHouseFamilyMemberInvolvement').clearValidators();
+      this.form.updateValueAndValidity();
+    } else {
+      // If the tied house component is editable, enable the form and set all validators
+      this.form.enable();
+      this.form.get('hasLiquorTiedHouseOwnershipOrControl').setValidators([Validators.required]);
+      this.form.get('hasLiquorTiedHouseThirdPartyAssociations').setValidators([Validators.required]);
+      this.form.get('hasLiquorTiedHouseFamilyMemberInvolvement').setValidators([Validators.required]);
+      this.form.updateValueAndValidity();
     }
   }
 
+  /**
+   * Fetch tied house data for the current account or application.
+   */
   loadTiedHouseData() {
+    if (!this.applicationId && !this.accountId) {
+      return;
+    }
+
     let tiedHouseConnectionsForApplicationIdRequest$ = this.applicationId
       ? this.tiedHouseService.GetLiquorTiedHouseConnectionsForApplication(this.applicationId)
       : this.tiedHouseService.GetLiquorTiedHouseConnectionsForUser(this.accountId);
@@ -211,6 +263,7 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnChang
    */
   get isTiedHouseConnectionsEditableForApplication(): boolean {
     if (!this.application) {
+      // If no application is provided, the tied house component is not editable.
       return false;
     }
 
@@ -238,6 +291,21 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnChang
     }
 
     return false;
+  }
+
+  /**
+   * Checks if a form control is valid or not touched.
+   *
+   * @param {string} fieldName
+   * @return {*}  {boolean}
+   */
+  isValidOrNotTouched(fieldName: string): boolean {
+    if (this.isTiedHouseReadOnly) {
+      // Mark form fields as valid, if the form is in a read-only state.
+      return true;
+    }
+
+    return isValidOrNotTouched(this.form, fieldName);
   }
 
   ngOnDestroy(): void {

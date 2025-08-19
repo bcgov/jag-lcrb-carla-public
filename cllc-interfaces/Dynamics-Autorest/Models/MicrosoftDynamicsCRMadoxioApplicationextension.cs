@@ -278,13 +278,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public System.DateTimeOffset? AdoxioStartdatelicenseactionreq { get; set; }
         
         [JsonProperty(PropertyName = "adoxio_hasliquortiedhouseownershiporcontrol")]
-        public int AdoxioHasLiquorTiedHouseOwnershipOrControl { get; set; }
+        public int? AdoxioHasLiquorTiedHouseOwnershipOrControl { get; set; }
 
         [JsonProperty(PropertyName = "adoxio_hasliquortiedhousethirdpartyassociations")]
-        public int AdoxioHasLiquorTiedHouseThirdPartyAssociations { get; set; }
+        public int? AdoxioHasLiquorTiedHouseThirdPartyAssociations { get; set; }
 
         [JsonProperty(PropertyName = "adoxio_hasliquortiedhousefamilymemberinvolvement")]
-        public int AdoxioHasLiquorTiedHouseFamilyMemberInvolvement { get; set; }
+        public int? AdoxioHasLiquorTiedHouseFamilyMemberInvolvement { get; set; }
 
         [JsonProperty(PropertyName = "adoxio_relatedleorpclapplication")]
         public MicrosoftDynamicsCRMadoxioApplication AdoxioRelatedLeOrPclApplication { get; set; }

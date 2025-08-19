@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { faDownload } from '@fortawesome/free-solid-svg-icons';
 import { Account } from '@models/account.model';
 import { Application } from '@models/application.model';
 import { FileSystemItem } from '@models/file-system-item.model';
@@ -31,6 +32,8 @@ export class LegalEntityReviewNoticeLetterComponent implements OnInit {
    * The notices related to the legal entity review application.
    */
   notices: FileSystemItem[] = [];
+
+  faDownload = faDownload;
 
   constructor(private accountDataService: AccountDataService) {}
 
