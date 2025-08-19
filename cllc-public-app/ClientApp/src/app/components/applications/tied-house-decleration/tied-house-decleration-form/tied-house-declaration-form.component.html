@@ -17,10 +17,22 @@
         [valid]="isValidOrNotTouched('dateOfBirth')"
         errorMessage="Date of Birth is required">
         <input
-          class="form-control w-100"
-          type="date"
+          type="text"
+          formControlName="dateOfBirth"
           style="width: 100%; max-width: none"
-          formControlName="dateOfBirth" />
+          placeholder="yyyy-mm-dd"
+          readonly
+          class="form-control"
+          [max]="maxDate"
+          [min]="minDate"
+          [matDatepicker]="picker"
+          (focus)="picker.open()"
+          (click)="picker.open()"
+          [ngClass]="{
+            'readonly-white': !form.get('dateOfBirth').disabled,
+            'disabled-grey': form.get('dateOfBirth').disabled
+          }"/>
+        <mat-datepicker #picker></mat-datepicker>
       </app-field>
       <app-field
         class="col-md-6"
@@ -69,7 +81,7 @@
       class="col-md-6"
       label="Business Type"
       [required]="true"
-      [valid]="form.get('businessType')?.value != undefined || !form.get('businessType')?.touched"
+      [valid]="form.get('businessType')?.value != '' || !form.get('businessType')?.touched"
       errorMessage="Business Type is required">
       <select class="form-control" formControlName="businessType">
         <option value="" disabled>Select a Business Type</option>
