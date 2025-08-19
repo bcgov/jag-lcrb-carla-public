@@ -1,9 +1,10 @@
 <div>
   <div *ngIf="groupedTiedHouseDeclarations.length > 0" class="mb-3">
     <mat-accordion>
+      <span *ngFor="let _tiedHouseDeclarations of groupedTiedHouseDeclarations; let tiedHouseDeclarationsIndex = index">
       <mat-expansion-panel
+        #panel
         class="th-accordian"
-        *ngFor="let _tiedHouseDeclarations of groupedTiedHouseDeclarations; let tiedHouseDeclarationsIndex = index"
         [expanded]="openedPanelIndex === tiedHouseDeclarationsIndex">
         <mat-expansion-panel-header class="blue-header th-accordian-header">
           <mat-panel-title>
@@ -83,6 +84,7 @@
               <tr *ngIf="_tiedHouseDeclaration.viewMode != TiedHouseViewMode.existing">
                 <td class="p-4 th-form" colspan="4">
                   <app-tied-house-declaration-form
+                    #tiedHouseForm
                     style="width: 100%"
                     [isReadOnly]="isReadOnly"
                     [tiedHouseDecleration]="_tiedHouseDeclaration"
@@ -121,6 +123,12 @@
           </p>
         </div>
       </mat-expansion-panel>
+
+    <div *ngIf="showUnsavedConnectionError(tiedHouseDeclarationsIndex, panel)" class="app-cancel text-danger form-error">
+          <mat-icon [class.ng-invalid]="true" aria-label="error icon" style="font-size: 15px">error</mat-icon>
+          Tide House Declaration has not been saved.
+    </div>
+  </span>
     </mat-accordion>
   </div>
 

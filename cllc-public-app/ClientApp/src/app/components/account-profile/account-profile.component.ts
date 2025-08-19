@@ -35,6 +35,7 @@ import { TiedHouseConnectionsDataService } from '@services/tied-house-connection
 import { UserDataService } from '@services/user-data.service';
 import { GenericMessageDialogComponent } from '@shared/components/dialog/generic-message-dialog/generic-message-dialog.component';
 import { FormBase } from '@shared/form-base';
+import { isFormValidOrNotTouched } from '@shared/form-utils';
 import { endOfToday } from 'date-fns';
 import { combineLatest, forkJoin, Observable, of, Subscription } from 'rxjs';
 import { catchError, filter, map, switchMap, takeWhile } from 'rxjs/operators';
@@ -82,7 +83,11 @@ const ValidationFieldNameMap = {
   'contact.lastname': 'Corporation Contact LastName',
   'contact.jobTitle': 'Corporation Contact Job Title',
   'contact.telephone1': 'Corporation Contact Telephone',
-  'contact.emailaddress1': 'Corporation Contact Email'
+  'contact.emailaddress1': 'Corporation Contact Email',
+
+  hasLiquorTiedHouseOwnershipOrControl: 'Ownership or Control',
+  hasLiquorTiedHouseThirdPartyAssociations: 'Third-Party Associations',
+  hasLiquorTiedHouseFamilyMemberInvolvement: 'Immediate Family Member Involvement'
 };
 
 @Component({
@@ -605,6 +610,20 @@ export class AccountProfileComponent extends FormBase implements OnInit {
     );
   }
 
+  /**
+   * Checks if the form is valid.
+   *
+   * @readonly
+   * @type {boolean} `true` if the form is valid or disabled, `false` otherwise.
+   */
+  get isFormValid(): boolean {
+    return (
+      isFormValidOrNotTouched(this.form) &&
+      isFormValidOrNotTouched(this.connectionToProducersComponent?.form) &&
+      isFormValidOrNotTouched(this.connectionToOtherLiquorLicencesComponent?.form)
+    );
+  }
+
   gotoReview() {
     this.validationMessages = [];
 
@@ -616,56 +635,56 @@ export class AccountProfileComponent extends FormBase implements OnInit {
       route = '/sep/dashboard';
     }
 
-    const isValid =
-      this.form.valid &&
-      this.connectionToProducersComponent?.form?.valid &&
-      this.connectionToOtherLiquorLicencesComponent?.form?.valid;
-
-    if (isValid) {
-      this.busy = this.save().subscribe(() => {
-        if (this.useInStepperMode) {
-          this.saveComplete.emit(true);
-        } else if (this.applicationId) {
-          if (this.application?.applicationType?.name === ApplicationTypeNames.TiedHouseExemptionApplication) {
-            const route: any[] = [`/tied-house-exemption/${this.applicationId}`];
-            this.router.navigate(route);
-          }
-
-          if (this.renewalType) {
-            const route: any[] = [`/renew-licence/${this.renewalType}/${this.applicationId}`];
-            if (this.applicationMode) {
-              route.push({ mode: this.applicationMode });
-            }
-            this.router.navigate(route);
-          } else if (this.applicationMode === 'catering') {
-            // divert catering
-            const route: any[] = [`/application/catering/${this.applicationId}`];
-            if (this.applicationMode) {
-              route.push({ mode: this.applicationMode });
-            }
-            this.router.navigate(route);
-          } else {
-            const route: any[] = [`/application/${this.applicationId}`];
-            if (this.applicationMode) {
-              route.push({ mode: this.applicationMode });
-            }
-            this.router.navigate(route);
-          }
-        } else {
-          this.router.navigate([route]);
-        }
-      });
-    } else {
+    if (!this.isFormValid) {
       this.markAsTouched();
-      this.listControlsWithErrors(this.form, ValidationFieldNameMap).forEach((m) => this.validationMessages.push(m));
+
+      this.validationMessages = this.getFormValidationErrorMessages();
+
+      return;
     }
+
+    this.busy = this.save().subscribe(() => {
+      if (this.useInStepperMode) {
+        this.saveComplete.emit(true);
+      } else if (this.applicationId) {
+        if (this.application?.applicationType?.name === ApplicationTypeNames.TiedHouseExemptionApplication) {
+          const route: any[] = [`/tied-house-exemption/${this.applicationId}`];
+          this.router.navigate(route);
+        }
+
+        if (this.renewalType) {
+          const route: any[] = [`/renew-licence/${this.renewalType}/${this.applicationId}`];
+          if (this.applicationMode) {
+            route.push({ mode: this.applicationMode });
+          }
+          this.router.navigate(route);
+        } else if (this.applicationMode === 'catering') {
+          // divert catering
+          const route: any[] = [`/application/catering/${this.applicationId}`];
+          if (this.applicationMode) {
+            route.push({ mode: this.applicationMode });
+          }
+          this.router.navigate(route);
+        } else {
+          const route: any[] = [`/application/${this.applicationId}`];
+          if (this.applicationMode) {
+            route.push({ mode: this.applicationMode });
+          }
+          this.router.navigate(route);
+        }
+      } else {
+        this.router.navigate([route]);
+      }
+    });
   }
 
-  // marking the form as touched makes the validation messages show
+  /**
+   * Mark the forms as touched to trigger the display of validation error messages.
+   */
   markAsTouched() {
     this.form.markAsTouched();
-    this.connectionToProducersComponent?.form?.markAsTouched();
-    this.connectionToOtherLiquorLicencesComponent?.form?.markAsTouched();
+    this.connectionToProducersComponent?.form?.markAllAsTouched();
+    this.connectionToOtherLiquorLicencesComponent?.form?.markAllAsTouched();
 
     const businessProfileControls = (this.form.get('businessProfile') as FormGroup).controls;
     for (const c in businessProfileControls) {
@@ -680,6 +699,19 @@ export class AccountProfileComponent extends FormBase implements OnInit {
         contactControls[c].markAsTouched();
       }
     }
+  }
+
+  /**
+   * Get form validation error messages.
+   *
+   * @return {*}  {string[]}
+   */
+  getFormValidationErrorMessages(): string[] {
+    return [
+      ...this.listControlsWithErrors(this.form, ValidationFieldNameMap),
+      ...this.listControlsWithErrors(this.connectionToProducersComponent?.form, ValidationFieldNameMap),
+      ...this.listControlsWithErrors(this.connectionToOtherLiquorLicencesComponent?.form, ValidationFieldNameMap)
+    ];
   }
 
   /**

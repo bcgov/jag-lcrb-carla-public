@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { formatDate } from '@components/applications/tied-house-decleration/tide-house-utils';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import {
@@ -11,6 +11,7 @@ import {
   TiedHouseViewMode
 } from '@models/tied-house-connection.model';
 import { FormBase } from '@shared/form-base';
+import { endOfToday, subYears } from 'date-fns';
 
 @Component({
   selector: 'app-tied-house-declaration-form',
@@ -48,6 +49,13 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
   showOtherField = false;
   isEditable = true;
 
+  maxDate = endOfToday();
+  minDate = subYears(endOfToday(), 125);
+
+  requiredFormArray(control: AbstractControl): ValidationErrors | null {
+    return control instanceof FormArray && control.length > 0 ? null : { required: true };
+  }
+
   get isExistingDeclaration() {
     return this._tiedHouseDecleration.supersededById;
   }
@@ -63,7 +71,7 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
       this.patchFormFromInput();
     }
 
-    this.showOtherField =this.form.get('relationshipToLicence')?.value ==  845280009;
+    this.showOtherField = this.form.get('relationshipToLicence')?.value == 845280009;
 
     this.form.get('relationshipToLicence')?.valueChanges.subscribe((value) => {
       this.showOtherField = value == 845280009;
@@ -93,7 +101,7 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
       this._tiedHouseDecleration.dateOfBirth = formatDate(this._tiedHouseDecleration.dateOfBirth);
       this.form.patchValue(this._tiedHouseDecleration);
       this.updateAssociatedLicenses(this._tiedHouseDecleration.associatedLiquorLicense || []);
-    }
+}
 
     this.updateFieldValidators();
 
@@ -111,8 +119,8 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
       lastName: [''],
       businessType: [''],
       legalEntityName: [''],
-      relationshipToLicence: ['', [Validators.required]],
-      associatedLiquorLicense: this.fb.array([], this.requiredFormArray),
+      relationshipToLicence: [null, [Validators.required]],
+      associatedLiquorLicense: this.fb.array([], [this.requiredFormArray]),
       otherDescription: ['', [Validators.required]],
       autocompleteInput: ['']
     });
@@ -133,13 +141,18 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
   save() {
     this.form.markAllAsTouched();
 
-    if (!this.form.valid) {
+    if (!this.form.valid || this.form.get('associatedLiquorLicense')?.value.length ==0 ) {
       return;
     }
 
     const tiedHouse: TiedHouseConnection = { ...this.form.getRawValue() };
     tiedHouse.applicationId = this._tiedHouseDecleration.applicationId;
     tiedHouse.id = this._tiedHouseDecleration.id;
+
+    let dateOfBirth = this.form.get('dateOfBirth').value? new Date(this.form.get('dateOfBirth').value) : undefined;
+
+    tiedHouse.dateOfBirth = dateOfBirth?.toISOString();
+
     this.saveTiedHouseDecclaration.emit(tiedHouse);
     this._tiedHouseDecleration.viewMode = TiedHouseViewMode.disabled;
     this.setFormState();
@@ -245,19 +258,6 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
     this.updateOtherFieldValidators();
 
     this.updateFieldValuesAndValidities();
-  }
-
-  /**
-   * A custom validator to ensure that a FormArray control has at least one item.
-   * Marks the field as "required" if the control is not an array, or if it is empty.
-   *
-   * @param {AbstractControl} control
-   * @return {*}
-   */
-  requiredFormArray(control: AbstractControl) {
-    const isArray = Array.isArray(control?.value);
-    const hasAtLeastOne = isArray && control.value.length > 0;
-    return hasAtLeastOne ? null : { required: true };
   }
 
   /**

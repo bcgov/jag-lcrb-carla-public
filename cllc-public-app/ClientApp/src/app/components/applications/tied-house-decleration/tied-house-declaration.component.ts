@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatExpansionPanel } from '@angular/material/expansion';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { formatDate } from '@components/applications/tied-house-decleration/tide-house-utils';
 import { faPlusSquare } from '@fortawesome/free-regular-svg-icons';
@@ -15,6 +16,7 @@ import { GenericMessageDialogComponent } from '@shared/components/dialog/generic
 import { FormBase } from '@shared/form-base';
 import { Observable, of } from 'rxjs';
 import { catchError, mergeMap, takeWhile } from 'rxjs/operators';
+import { TiedHouseDeclarationFormComponent } from './tied-house-decleration-form/tied-house-declaration-form.component';
 
 const NEW_DECLARATION_KEY = 'New Declaration';
 
@@ -49,6 +51,9 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
    * @type {boolean}
    */
   @Input() isReadOnly?: boolean = false;
+
+  @ViewChildren('tiedHouseForm') tiedHouseForms!: QueryList<TiedHouseDeclarationFormComponent>;
+  @ViewChildren('panel') panels!: QueryList<MatExpansionPanel>;
 
   tiedHouseDeclarations: TiedHouseConnection[] = [];
   groupedTiedHouseDeclarations: [string, TiedHouseConnection[]][] = [];
@@ -293,7 +298,6 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
               declaration.markedForRemoval = true;
               this.submitTiedHouseDeclarationChange(declaration, accordionIndex);
             }
-
           }
         }
       });
@@ -513,5 +517,18 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
         break; // stop after updating
       }
     }
+  }
+
+  showUnsavedConnectionError(thIndex: number, panel: MatExpansionPanel) {
+    var unsavedStatuses: number[] = [TiedHouseViewMode.addNewRelationship, TiedHouseViewMode.new, TiedHouseViewMode.editExistingRecord];
+    return (
+      !panel.expanded && this.groupedTiedHouseDeclarations[thIndex][1].find((th) =>  unsavedStatuses.find(s => s == th.viewMode) != undefined) != undefined
+    );
+  }
+
+  markAllFormsTouched() {
+    this.tiedHouseForms.forEach((child) => {
+      child.form.markAllAsTouched(); // assuming child has 'form: FormGroup'
+    });
   }
 }
