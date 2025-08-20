@@ -509,8 +509,12 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
    * @return {*}  {boolean} `true` if valid, `false` otherwise.
    */
   areTiedHouseDeclarationsValid(): boolean {
+    if (!this.tiedHouseDeclaration) {
+      return true;
+    }
+
     if (
-      this.tiedHouseDeclaration.tiedHouseDeclarations.find((item) =>
+      this.tiedHouseDeclaration.tiedHouseDeclarations.some((item) =>
         [TiedHouseViewMode.new, TiedHouseViewMode.editExistingRecord, TiedHouseViewMode.addNewRelationship].includes(
           item.viewMode
         )
