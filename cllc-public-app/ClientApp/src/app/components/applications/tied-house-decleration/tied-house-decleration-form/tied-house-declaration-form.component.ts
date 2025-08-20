@@ -75,17 +75,25 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
 
     this.form.get('relationshipToLicence')?.valueChanges.subscribe((value) => {
       this.showOtherField = value == 845280009;
+
       this.updateFieldValidators();
     });
 
     this.form.get('isLegalEntity')?.valueChanges.subscribe(() => {
+      if (this.form.get('isLegalEntity').value === true) {
+        // Clear "individual" form fields
+        this.form.get('firstName')?.setValue('');
+        this.form.get('middleName')?.setValue('');
+        this.form.get('lastName')?.setValue('');
+        this.form.get('dateOfBirth')?.setValue('');
+        this.form.get('otherDescription')?.setValue('');
+      } else {
+        // Clear "legal entity" form fields
+        this.form.get('businessType')?.setValue('');
+        this.form.get('legalEntityName')?.setValue('');
+      }
+
       this.updateFieldValidators();
-      this.form.get('firstName')?.setValue('');
-      this.form.get('middleName')?.setValue('');
-      this.form.get('lastName')?.setValue('');
-      this.form.get('dateOfBirth')?.setValue('');
-      this.form.get('businessType')?.setValue('');
-      this.form.get('legalEntityName')?.setValue('');
     });
 
     this.updateFieldValidators();
@@ -101,7 +109,7 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
       this._tiedHouseDecleration.dateOfBirth = formatDate(this._tiedHouseDecleration.dateOfBirth);
       this.form.patchValue(this._tiedHouseDecleration);
       this.updateAssociatedLicenses(this._tiedHouseDecleration.associatedLiquorLicense || []);
-}
+    }
 
     this.updateFieldValidators();
 
@@ -141,7 +149,7 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
   save() {
     this.form.markAllAsTouched();
 
-    if (!this.form.valid || this.form.get('associatedLiquorLicense')?.value.length ==0 ) {
+    if (!this.form.valid || this.form.get('associatedLiquorLicense')?.value.length == 0) {
       return;
     }
 
@@ -149,7 +157,7 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
     tiedHouse.applicationId = this._tiedHouseDecleration.applicationId;
     tiedHouse.id = this._tiedHouseDecleration.id;
 
-    let dateOfBirth = this.form.get('dateOfBirth').value? new Date(this.form.get('dateOfBirth').value) : undefined;
+    let dateOfBirth = this.form.get('dateOfBirth').value ? new Date(this.form.get('dateOfBirth').value) : undefined;
 
     tiedHouse.dateOfBirth = dateOfBirth?.toISOString();
 
@@ -249,10 +257,10 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
    *
    */
   updateFieldValidators() {
-    if (this.form.get('isLegalEntity')?.value == false) {
-      this.updateIndividualFieldValidators();
-    } else {
+    if (this.form.get('isLegalEntity')?.value === true) {
       this.updateLegalEntityFieldValidators();
+    } else {
+      this.updateIndividualFieldValidators();
     }
 
     this.updateOtherFieldValidators();

@@ -8,7 +8,7 @@
     </app-field>
   </div>
   <!-- ------Individual------ -->
-  <span *ngIf="form.get('isLegalEntity')?.value == false">
+  <span *ngIf="form.get('isLegalEntity')?.value !== true">
     <div class="row">
       <app-field
         class="col-md-6"
@@ -76,7 +76,7 @@
     </div>
   </span>
   <!-- ------Legal Entity------ -->
-  <div class="row" *ngIf="form.get('isLegalEntity')?.value == true">
+  <div class="row" *ngIf="form.get('isLegalEntity')?.value === true">
     <app-field
       class="col-md-6"
       label="Business Type"

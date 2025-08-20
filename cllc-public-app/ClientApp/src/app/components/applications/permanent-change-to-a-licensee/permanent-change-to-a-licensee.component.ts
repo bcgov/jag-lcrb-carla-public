@@ -218,8 +218,8 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
 
     const businessRules = getPCLMatrixSectionBusinessRules({
       accountType: this._PCLMatrixAccountType,
-      conditionalGroup: pclMatrixConditionalGroup,
-      licenceGroup: this._PCLMatrixLicenceGroup
+      licenceGroup: this._PCLMatrixLicenceGroup,
+      conditionalGroup: pclMatrixConditionalGroup
     });
 
     this.changeList = businessRules;
@@ -387,10 +387,10 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
     /*
      * Business Rule:
      * Tied House Declaration changes, like all changes, normally cost the user a fee. However, if the user is
-     * submitting Internal Transfer of Shares, or External Transfer of Shares, or Change of Directors or Officers
-     * changes, then the fee for the Tied House Declaration changes is waived (it is covered under the fee for the other
-     * changes). In order to accommodate this, we must ensure that `csTiedHouseDeclaration` is `false`. These booleans
-     * control which changes dynamics generates invoices for.
+     * submitting Internal Transfer of Shares (TSI), or External Transfer of Shares (TSE), or Change of Directors or
+     * Officers (CoD) changes, then the fee for the Tied House Declaration changes is waived (it is covered under the
+     * fee for the other changes). In order to accommodate this, we must ensure that `csTiedHouseDeclaration` is
+     * `false`. These booleans control which types of changes dynamics generates invoices for.
      *
      * See related business rules: `isTiedHouseDeclarationVisible`
      */
@@ -509,8 +509,12 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
    * @return {*}  {boolean} `true` if valid, `false` otherwise.
    */
   areTiedHouseDeclarationsValid(): boolean {
+    if (!this.tiedHouseDeclaration) {
+      return true;
+    }
+
     if (
-      this.tiedHouseDeclaration.tiedHouseDeclarations.find((item) =>
+      this.tiedHouseDeclaration.tiedHouseDeclarations.some((item) =>
         [TiedHouseViewMode.new, TiedHouseViewMode.editExistingRecord, TiedHouseViewMode.addNewRelationship].includes(
           item.viewMode
         )
