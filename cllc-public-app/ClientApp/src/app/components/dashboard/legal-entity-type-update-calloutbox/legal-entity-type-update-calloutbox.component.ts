@@ -9,8 +9,11 @@ import { Account } from '@models/account.model';
 export class LegalEntityTypeUpdateCalloutboxComponent implements OnInit {
   @Input()
   account: Account;
+  /**
+   * Whether the user is allowed to submit a PCL application
+   */
   @Input()
-  canCreatePCLApplication: boolean;
+  canCreatePCLApplication: boolean = true;
 
   constructor() {}
 

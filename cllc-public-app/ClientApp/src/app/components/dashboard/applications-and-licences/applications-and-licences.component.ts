@@ -181,7 +181,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
             .map((item) => item as any)
             .concat(licenses.filter((item) => item.licenceTypeName !== ApplicationTypeNames.Marketer)).length > 0;
 
-        this.canCreatePCLApplication = this.canSubmitPCLApplication(applications);
+        this.canCreatePCLApplication = this.canUserCreatePCLApplication(applications);
         // Emits `true` if the user has an inprogress legal entity review, emits `false` otherwise
         this.canCreatePCLApplicationEvent.emit(this.canCreatePCLApplication);
 
@@ -195,21 +195,21 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   }
 
   /**
-   * Checks if the user can submit a PCL (Permanent Change to Licensee) application.
-   * A user can submit a PCL application if they do not have an in-progress Legal Entity Review application.
+   * Checks if the user can create a PCL (Permanent Change to Licensee) application.
+   * A user can create a PCL application if they do not have an in-progress Legal Entity Review application.
    *
    * @private
    * @param {ApplicationSummary[]} applications
-   * @return {*}  {boolean} `true` if the user can submit a PCL application, `false` otherwise
+   * @return {*}  {boolean} `true` if the user can create a PCL application, `false` otherwise
    */
-  private canSubmitPCLApplication(applications: ApplicationSummary[]): boolean {
+  private canUserCreatePCLApplication(applications: ApplicationSummary[]): boolean {
     const inProgressLegalEntityReviewExists = applications.some(
       (app) =>
         app.applicationTypeName === ApplicationTypeNames.LegalEntityReview &&
         this.leReviewInProgressStatuses.includes(app.applicationStatus)
     );
 
-    // A user cannot submit a PCL application if they have an in-progress Legal Entity Review application.
+    // A user cannot create a PCL application if they have an in-progress Legal Entity Review application.
     return !inProgressLegalEntityReviewExists;
   }
 
