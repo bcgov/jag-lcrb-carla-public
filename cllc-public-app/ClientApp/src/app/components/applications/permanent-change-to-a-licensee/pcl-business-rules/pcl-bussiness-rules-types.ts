@@ -39,8 +39,6 @@ export interface PCLFormControlDefinitionOption {
 /**
  * Enum for all License Type Names.
  *
- * TODO: tiedhouse - This was pulled from Dev. Is it the same in Prod?
- *
  * @export
  * @enum {number}
  */
@@ -113,6 +111,12 @@ export enum PCLFormControlName {
   csTiedHouseDeclaration = 'csTiedHouseDeclaration'
 }
 
+/**
+ * The user's account type (aka: business type)
+ *
+ * @export
+ * @enum {number}
+ */
 export enum AccountType {
   // Default
   Default = 'Default',
@@ -120,6 +124,8 @@ export enum AccountType {
   PrivateCorporation = 'PrivateCorporation',
   // Public Corporation
   PublicCorporation = 'PublicCorporation',
+  // Sole Proprietorship
+  SoleProprietorship = 'SoleProprietorship',
   // Partnership
   Partnership = 'Partnership',
   GeneralPartnership = 'GeneralPartnership',
@@ -130,10 +136,20 @@ export enum AccountType {
   LocalGovernment = 'LocalGovernment',
   Coop = 'Coop',
   MilitaryMess = 'MilitaryMess',
-  University = 'University',
-  SoleProprietorship = 'SoleProprietorship'
+  University = 'University'
 }
 
+/**
+ * Represents the different conditional groups for the PCL matrix.
+ *
+ * These are used to enforce PCL business rules, based on which "changes" the user has selected on the PCL
+ * form (or group of changes in some cases).
+ *
+ * Dev Note: These groups are based on business rules, and not any inherent or built-in logic.
+ *
+ * @export
+ * @enum {number}
+ */
 export enum PCLMatrixConditionalGroup {
   Default = 'Default', // If no sections are selected
   ReceiverOrExecutor = 'ReceiverOrExecutor', // If Add/Remove Receiver Executor selected
@@ -151,6 +167,8 @@ export enum PCLMatrixConditionalGroup {
 
 /**
  * Represents all of the unique groups of licences, each with a unique set of conditional logic.
+ *
+ * Dev Note: These groups are based on business rules, and not any inherent or built-in logic.
  */
 export enum PCLMatrixLicenceGroup {
   /**
