@@ -245,9 +245,8 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
         return Object.assign(new Account(), account);
       })
     );
-    const permanentChangeData$ = this.applicationId
-      ? this.applicationDataService.getPermanentChangesToLicenseeData(this.applicationId)
-      : of(null);
+    const permanentChangeData$ = this.applicationDataService.getPermanentChangesToLicenseeData(this.applicationId);
+
     const accountSummary$ = this.accountDataService.getAccountSummary();
 
     const sub = forkJoin({
