@@ -120,33 +120,31 @@ export class ApplicationDataService extends DataService {
   /**
    * Get the application data for a permanent change to licensee application.
    *
-   * @param {string} applicationId
+   * @param {string} [applicationId]
    * @return {*}  {Observable<any>}
    */
-  getPermanentChangesToLicenseeData(applicationId: string): Observable<any> {
+  getPermanentChangesToLicenseeData(applicationId?: string): Observable<any> {
     let url = `${this.apiPath}permanent-change-to-licensee-data`;
-    let params: Record<string, any> = { isLegalEntityReview: 'false' };
+
+    let params = {};
 
     if (applicationId) {
-      params = { ...params, applicationId: applicationId };
+      params = { applicationId: applicationId };
     }
 
     return this.http.get<any>(url, { headers: this.headers, params: params }).pipe(catchError(this.handleError));
   }
 
   /**
-   * Get the application data for a legal entity permanent change to licensee application.
+   * Get the application data for a legal entity review application.
    *
    * @param {string} applicationId
    * @return {*}  {Observable<any>}
    */
-  getLegalEntityPermanentChangesToLicenseeData(applicationId: string): Observable<any> {
-    let url = `${this.apiPath}permanent-change-to-licensee-data`;
-    let params: Record<string, any> = { isLegalEntityReview: 'true' };
+  getLegalEntityReviewData(applicationId: string): Observable<any> {
+    let url = `${this.apiPath}legal-entity-review-data`;
 
-    if (applicationId) {
-      params = { ...params, applicationId: applicationId };
-    }
+    const params = { applicationId: applicationId };
 
     return this.http.get<any>(url, { headers: this.headers, params: params }).pipe(catchError(this.handleError));
   }
@@ -165,7 +163,7 @@ export class ApplicationDataService extends DataService {
    * @return {*}  {Observable<any>}
    */
   GetOrCreatePermanentChangeForLegalEntityReviewApplicationAsync(applicationId: string): Observable<any> {
-    let url = `${this.apiPath}get_pcl_for_le_review/${applicationId}`;
+    let url = `${this.apiPath}pcl-for-le-review/${applicationId}`;
 
     return this.http.get<any>(url, { headers: this.headers }).pipe(catchError(this.handleError));
   }
@@ -175,6 +173,15 @@ export class ApplicationDataService extends DataService {
       .pipe(catchError(this.handleError));
   }
 
+  /**
+   * Fetches the user's in-progress Legal Entity Review applications.
+   *
+   * @return {*}  {Observable<Application[]>}
+   */
+  getInProgressLegalEntityReviewApplications(): Observable<Application[]> {
+    return this.http.get<Application[]>(`${this.apiPath}get-in-progress-legal-entity-review`, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
 
   /**
    * Get a Dynamics Application by application ID

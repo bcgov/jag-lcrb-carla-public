@@ -18,6 +18,7 @@ import { Application } from '@models/application.model';
 })
 export class PermanentChangeExternalTransferShares implements OnInit {
   @Input() application: Application;
+  @Input() disabled: boolean = false;
 
   @Output() uploadedCentralSecuritiesRegister = new EventEmitter<number>();
   @Output() uploadedRegisterOfDirectorsAndOfficers = new EventEmitter<number>();

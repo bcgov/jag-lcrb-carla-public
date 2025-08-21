@@ -54,8 +54,6 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   account: Account;
   @Output()
   marketerApplicationExists = new EventEmitter<boolean>();
-  @Output()
-  canCreatePCLApplicationEvent = new EventEmitter<boolean>();
   dataLoaded = false;
   licencePresentLabel: string;
   licenceAbsentLabel: string;
@@ -94,13 +92,9 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     ApplicationStatuses.Submitted,
     ApplicationStatuses.UnderReview,
     ApplicationStatuses.LicenseeActionRequired,
-    ApplicationStatuses.ApplicationAssessment,
-    ApplicationStatuses.NotSubmitted
+    ApplicationStatuses.ApplicationAssessment
   ];
-  /**
-   * Whether the user is allowed to submit a PCL application
-   */
-  canCreatePCLApplication: boolean = true;
+  hasInProgressLeReviewApplication: boolean = true;
 
   constructor(
     private userDataService: UserDataService,
@@ -181,9 +175,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
             .map((item) => item as any)
             .concat(licenses.filter((item) => item.licenceTypeName !== ApplicationTypeNames.Marketer)).length > 0;
 
-        this.canCreatePCLApplication = this.canUserCreatePCLApplication(applications);
-        // Emits `true` if the user has an inprogress legal entity review, emits `false` otherwise
-        this.canCreatePCLApplicationEvent.emit(this.canCreatePCLApplication);
+        this.hasInProgressLeReviewApplication = this.userHasInProgressLegalEntityReviewApplication(applications);
 
         this.dataLoaded = true;
       });
@@ -195,22 +187,18 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   }
 
   /**
-   * Checks if the user can create a PCL (Permanent Change to Licensee) application.
-   * A user can create a PCL application if they do not have an in-progress Legal Entity Review application.
+   * Checks if the user has an in-progress Legal Entity Review application
    *
    * @private
    * @param {ApplicationSummary[]} applications
-   * @return {*}  {boolean} `true` if the user can create a PCL application, `false` otherwise
+   * @return {*}  {boolean} `true` if the user has an in-progress Legal Entity Review application, `false` otherwise
    */
-  private canUserCreatePCLApplication(applications: ApplicationSummary[]): boolean {
-    const inProgressLegalEntityReviewExists = applications.some(
+  private userHasInProgressLegalEntityReviewApplication(applications: ApplicationSummary[]): boolean {
+    return applications.some(
       (app) =>
         app.applicationTypeName === ApplicationTypeNames.LegalEntityReview &&
         this.leReviewInProgressStatuses.includes(app.applicationStatus)
     );
-
-    // A user cannot create a PCL application if they have an in-progress Legal Entity Review application.
-    return !inProgressLegalEntityReviewExists;
   }
 
   // LCSD-6843: 2024-03-01 waynezen
@@ -877,16 +865,30 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   }
 
   isCompleteActionVisible(applicationSummary: ApplicationSummary): boolean {
-    return (
-      applicationSummary.applicationTypeName !== ApplicationTypeNames.CRSRenewal &&
-      applicationSummary.applicationTypeName !== ApplicationTypeNames.Catering &&
-      applicationSummary.applicationTypeName !== ApplicationTypeNames.LiquorRenewal &&
-      (this.isPermanentChangeToLicenceAsAResultOfLegalEntityReview(applicationSummary) ||
-        !(
-          applicationSummary.applicationTypeName === ApplicationTypeNames.PermanentChangeToALicensee &&
-          !this.canCreatePCLApplication
-        ))
-    );
+    // Hide for specific renewal and catering applications
+    if (
+      [ApplicationTypeNames.CRSRenewal, ApplicationTypeNames.Catering, ApplicationTypeNames.LiquorRenewal].includes(
+        applicationSummary.applicationTypeName as ApplicationTypeNames
+      )
+    ) {
+      return false;
+    }
+
+    // Show for PCL as result of LE Review application
+    if (this.isPermanentChangeToLicenceAsAResultOfLegalEntityReview(applicationSummary)) {
+      return true;
+    }
+
+    // Hide for regular PCL applications when user has an in-progress LE Review application
+    if (
+      applicationSummary.applicationTypeName === ApplicationTypeNames.PermanentChangeToALicensee &&
+      this.hasInProgressLeReviewApplication
+    ) {
+      return false;
+    }
+
+    // Show for all other applications
+    return true;
   }
 }
 

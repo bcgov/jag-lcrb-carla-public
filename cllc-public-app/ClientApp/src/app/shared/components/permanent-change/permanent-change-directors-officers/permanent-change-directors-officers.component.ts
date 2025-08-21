@@ -20,6 +20,7 @@ export class PermanentChangeDirectorsOfficers implements OnInit {
   @Input() hasLiquor: boolean = false;
   @Input() hasCannabis: boolean = false;
   @Input() application: Application;
+  @Input() disabled: boolean = false;
 
   @Output() uploadedNOA = new EventEmitter<number>();
 
