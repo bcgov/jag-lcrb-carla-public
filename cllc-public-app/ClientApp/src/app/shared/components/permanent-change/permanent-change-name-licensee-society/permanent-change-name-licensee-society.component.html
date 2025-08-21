@@ -1,8 +1,8 @@
 <h3 class="blue-header">Society Name Change</h3>
 <div class="content-bottom">
   <p>
-    To be completed when the legal name of a society is changed, but the society structure, membership and
-    certification number on the certificate of incorporation does not change.
+    To be completed when the legal name of a society is changed, but the society structure, membership and certification
+    number on the certificate of incorporation does not change.
   </p>
   <div class="">
     <span>Current registered society name (in full):</span>
@@ -28,5 +28,7 @@
     [extensions]="['pdf']"
     (numberOfUploadedFiles)="onUploadedSocietyNameChange($event)"
     [entityId]="application.id"
-    [uploadHeader]="'TO UPLOAD SOCIETY NAME CHANGE CERTIFICATE, DRAG FILES HERE OR'"></app-file-uploader>
+    [uploadHeader]="'TO UPLOAD SOCIETY NAME CHANGE CERTIFICATE, DRAG FILES HERE OR'"
+    [disableUploads]="disabled"
+    [enableFileDeletion]="!disabled"></app-file-uploader>
 </div>

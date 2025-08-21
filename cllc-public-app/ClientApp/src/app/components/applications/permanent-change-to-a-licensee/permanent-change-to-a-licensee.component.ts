@@ -144,6 +144,11 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
   }
 
   ngOnInit(): void {
+    this.initForm();
+    this.loadData();
+  }
+
+  private initForm() {
     this.form = this.fb.group({
       csInternalTransferOfShares: [''],
       csExternalTransferOfShares: [''],
@@ -186,8 +191,6 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
         });
       }
     });
-
-    this.loadData();
   }
 
   /**
@@ -243,6 +246,7 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
       })
     );
     const permanentChangeData$ = this.applicationDataService.getPermanentChangesToLicenseeData(this.applicationId);
+
     const accountSummary$ = this.accountDataService.getAccountSummary();
 
     const sub = forkJoin({
@@ -253,7 +257,9 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
       next: ({ accountData, permanentChangeData, accountSummaryData }) => {
         this.account = accountData;
 
-        this.setFormData(permanentChangeData);
+        if (permanentChangeData) {
+          this.setFormData(permanentChangeData);
+        }
 
         this._PCLMatrixAccountType = this.account.businessType as AccountType;
         this._PCLMatrixLicenceGroup = getPCLMatrixGroup(accountSummaryData);

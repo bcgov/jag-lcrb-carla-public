@@ -16,7 +16,7 @@
         <mat-form-field class="example-form-field">
           <mat-label>Last Name</mat-label>
           <input matInput type="text" formControlName="lastNameOld" />
-      </mat-form-field>
+        </mat-form-field>
       </td>
     </tr>
     <tr>
@@ -47,5 +47,7 @@
     [extensions]="['pdf']"
     (numberOfUploadedFiles)="onUploadedNameChangeDocuments($event)"
     [entityId]="application.id"
-    [uploadHeader]="'TO UPLOAD NAME CHANGE DOCUMENTS, DRAG FILES HERE OR'"></app-file-uploader>
+    [uploadHeader]="'TO UPLOAD NAME CHANGE DOCUMENTS, DRAG FILES HERE OR'"
+    [disableUploads]="disabled"
+    [enableFileDeletion]="!disabled"></app-file-uploader>
 </div>

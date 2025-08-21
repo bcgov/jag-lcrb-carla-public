@@ -35,7 +35,9 @@
     [extensions]="['pdf']"
     (numberOfUploadedFiles)="onUploadedExecutorDocuments($event)"
     [entityId]="application.id"
-    [uploadHeader]="'TO UPLOAD EXECUTOR DOCUMENTS, DRAG FILES HERE OR'"></app-file-uploader>
+    [uploadHeader]="'TO UPLOAD EXECUTOR DOCUMENTS, DRAG FILES HERE OR'"
+    [disableUploads]="disabled"
+    [enableFileDeletion]="!disabled"></app-file-uploader>
 
   <p>Upload a copy of the Death Certificate:</p>
 
@@ -48,7 +50,9 @@
     [extensions]="['pdf']"
     (numberOfUploadedFiles)="onUploadedlDeathCertificateDocuments($event)"
     [entityId]="application.id"
-    [uploadHeader]="'TO UPLOAD DEATH CERTIFICATE, DRAG FILES HERE OR'"></app-file-uploader>
+    [uploadHeader]="'TO UPLOAD DEATH CERTIFICATE, DRAG FILES HERE OR'"
+    [disableUploads]="disabled"
+    [enableFileDeletion]="!disabled"></app-file-uploader>
 
   <hr />
 
