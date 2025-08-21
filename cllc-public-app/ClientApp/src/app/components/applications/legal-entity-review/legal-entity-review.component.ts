@@ -116,7 +116,7 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
    */
   private loadData() {
     const sub = this.applicationDataService
-      .getLegalEntityPermanentChangesToLicenseeData(this.applicationId)
+      .getLegalEntityReviewData(this.applicationId)
       .subscribe((data) => {
         this.setFormData(data);
       });

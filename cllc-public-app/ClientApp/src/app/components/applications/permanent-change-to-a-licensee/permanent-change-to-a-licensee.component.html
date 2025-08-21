@@ -24,6 +24,7 @@
     <section *ngIf="isInternalTransferOfSharesVisible">
       <app-permanent-change-internal-transfer-shares
         [application]="application"
+        [disabled]="formDisabled"
         (uploadedCentralSecuritiesRegister)="uploadedCentralSecuritiesRegister = $event"
         (uploadedIndividualsWithLessThan10)="uploadedIndividualsWithLessThan10 = $event"
         (uploadedCertificateOfAmalgamation)="uploadedCertificateOfAmalgamation = $event"
@@ -34,6 +35,7 @@
     <section *ngIf="isExternalTransferOfSharesVisible">
       <app-permanent-change-external-transfer-shares
         [application]="application"
+        [disabled]="formDisabled"
         (uploadedCentralSecuritiesRegister)="uploadedCentralSecuritiesRegister = $event"
         (uploadedRegisterOfDirectorsAndOfficers)="uploadedRegisterOfDirectorsAndOfficers = $event"
         (uploadedIndividualsWithLessThan10)="
@@ -47,6 +49,7 @@
         [hasLiquor]="hasLiquor"
         [hasCannabis]="hasCannabis"
         [application]="application"
+        [disabled]="formDisabled"
         (uploadedNOA)="uploadedNOA = $event"></app-permanent-change-directors-officers>
     </section>
 
@@ -54,6 +57,7 @@
     <section *ngIf="isNameChangeLicenseePersonVisible">
       <app-permanent-change-name-person
         [application]="application"
+        [disabled]="formDisabled"
         (uploadedNameChangeDocuments)="uploadedNameChangeDocuments = $event"></app-permanent-change-name-person>
     </section>
 
@@ -61,6 +65,7 @@
     <section *ngIf="isNameChangeLicenseeCorporationVisible">
       <app-permanent-change-name-licensee-corporation
         [application]="application"
+        [disabled]="formDisabled"
         [showValidationMessages]="showValidationMessages"
         (uploadedCertificateOfNameChange)="
           uploadedCertificateOfNameChange = $event
@@ -71,6 +76,7 @@
     <section *ngIf="isNameChangeLicenseePartnershipVisible">
       <app-permanent-change-name-licensee-partnership
         [application]="application"
+        [disabled]="formDisabled"
         (uploadedPartnershipRegistration)="
           uploadedPartnershipRegistration = $event
         "></app-permanent-change-name-licensee-partnership>
@@ -80,6 +86,7 @@
     <section *ngIf="isNameChangeLicenseeSocietyVisible">
       <app-permanent-change-name-licensee-socitey
         [application]="application"
+        [disabled]="formDisabled"
         (uploadedSocietyNameChange)="uploadedSocietyNameChange = $event"></app-permanent-change-name-licensee-socitey>
     </section>
 
@@ -87,6 +94,7 @@
     <section *ngIf="isAdditionalReceiverOrExecutorVisible">
       <app-permanent-change-addition-receiver-executor
         [application]="application"
+        [disabled]="formDisabled"
         (uploadedExecutorDocuments)="uploadedExecutorDocuments = $event"
         (uploadedlDeathCertificateDocuments)="uploadedlDeathCertificateDocuments = $event"
         (uploadedletterOfIntentDocuments)="
@@ -98,6 +106,7 @@
     <section *ngIf="isPermanentChangeCannabisSecurityScreeningFormsVisible">
       <app-permanent-change-cannabis-security-screening-forms
         [application]="application"
+        [disabled]="formDisabled"
         (uploadedCAS)="uploadedCAS = $event"
         (uploadedFinancialIntegrity)="
           uploadedFinancialIntegrity = $event
@@ -108,6 +117,7 @@
     <section *ngIf="isPermanentChangePersonalHistorySummaryFormsVisible">
       <app-permanent-change-personal-history-summary-forms
         [application]="application"
+        [disabled]="formDisabled"
         (uploadedFinancialIntegrity)="
           uploadedFinancialIntegrity = $event
         "></app-permanent-change-personal-history-summary-forms>

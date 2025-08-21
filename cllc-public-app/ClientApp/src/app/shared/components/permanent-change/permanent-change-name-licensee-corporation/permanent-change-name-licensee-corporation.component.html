@@ -36,5 +36,7 @@
     [extensions]="['pdf']"
     (numberOfUploadedFiles)="onUploadedCertificateOfNameChange($event)"
     [entityId]="application.id"
-    [uploadHeader]="'TO UPLOAD CERTIFICATE OF NAME CHANGE, DRAG FILES HERE OR'"></app-file-uploader>
+    [uploadHeader]="'TO UPLOAD CERTIFICATE OF NAME CHANGE, DRAG FILES HERE OR'"
+    [disableUploads]="disabled"
+    [enableFileDeletion]="!disabled"></app-file-uploader>
 </div>

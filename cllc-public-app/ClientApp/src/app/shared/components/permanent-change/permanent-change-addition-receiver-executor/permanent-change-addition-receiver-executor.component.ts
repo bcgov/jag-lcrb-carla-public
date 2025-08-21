@@ -18,6 +18,7 @@ import { Application } from '@models/application.model';
 })
 export class PermanentChangeAdditionReceiverExecutorComponent implements OnInit {
   @Input() application: Application;
+  @Input() disabled: boolean = false;
 
   @Output() uploadedExecutorDocuments = new EventEmitter<number>();
   @Output() uploadedlDeathCertificateDocuments = new EventEmitter<number>();

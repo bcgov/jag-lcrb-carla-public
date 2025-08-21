@@ -31,7 +31,9 @@
     [extensions]="['pdf']"
     (numberOfUploadedFiles)="onUploadedNOA($event)"
     [entityId]="application.id"
-    [uploadHeader]="'TO UPLOAD NOTICE OF ARTICLES, DRAG FILES HERE OR'"></app-file-uploader>
+    [uploadHeader]="'TO UPLOAD NOTICE OF ARTICLES, DRAG FILES HERE OR'"
+    [disableUploads]="disabled"
+    [enableFileDeletion]="!disabled"></app-file-uploader>
   <p *ngIf="hasCannabis">
     <strong>
       <fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>

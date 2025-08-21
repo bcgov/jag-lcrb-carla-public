@@ -18,6 +18,7 @@ import { Application } from '@models/application.model';
 })
 export class PermanentChangeNameLicenseeSocitey implements OnInit {
   @Input() application: Application;
+  @Input() disabled: boolean = false;
 
   @Output() uploadedSocietyNameChange = new EventEmitter<number>();
 

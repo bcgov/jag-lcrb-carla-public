@@ -1096,122 +1096,142 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         /// <summary>
-        /// Fetches a "Permanent Change to a Licensee" or "Legal Entity Review" application.
+        /// Fetches a "Permanent Change to a Licensee" application.
         ///
-        /// If "isLegalEntityReview" is true, it will fetch a "Legal Entity Review" application instead of a
-        /// "Permanent Change to a Licensee" application.
+        /// Fetches the application using the logged in user's account ID.
+        /// If an "applicationId" is provided, will additionally filter results using that specific application id.
         ///
-        /// If no application is found, it will create a new application and return it.
-        ///
-        /// Additionally checks/updates the payment status of any related invoices.
+        /// If no application is found, it will create a new "Permanent Change to a Licensee" application and return it.
         /// </summary>
         /// <param name="userSettings"></param>
-        /// <param name="applicationId">
-        /// Filter results by a specific application ID. If not provided, will fetch the most recent in-progress
-        /// application.
-        /// </param>
-        /// <param name="isLegalEntityReview"></param>
+        /// <param name="applicationId"></param>
         /// <returns></returns>
         /// <summary>
         private async Task<IActionResult> _GetPermanentChangesToLicenseeData(
             UserSettings userSettings,
-            string applicationId = null,
-            bool isLegalEntityReview = false
+            string applicationId = null
         )
         {
             PermanentChangesPageData data = new PermanentChangesPageData();
 
-            // Get application
-            var initialApplication = await GetPermanentChangeApplication(
-                userSettings,
-                applicationId,
-                isLegalEntityReview
-            );
-
-            // Get all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
+            // Get all licenses for the current user
             data.Licences = _dynamicsClient.GetLicensesByLicencee(userSettings.AccountId, _cache);
 
-            // If there is a cannabis invoice but the payment has not been confirmed
+            // Attempt to fetch an existing in-progress application
+            var existingApplication = await _GetExistingInProgressPermanentChangeApplication(
+                userSettings,
+                applicationId
+            );
+
+            // If no existing in-progress application is found, create and return a new application
+            if (existingApplication == null)
+            {
+                var createdApplication = await _createPermanentChangeApplication(userSettings);
+
+                // Fetch the new record with all related data
+                var createdApplicationData = await _dynamicsClient.GetApplicationByIdWithChildren(
+                    Guid.Parse(createdApplication.AdoxioApplicationid)
+                );
+
+                data.Application = await createdApplicationData.ToViewModel(_dynamicsClient, _cache, _logger);
+
+                return new JsonResult(data);
+            }
+
+            // If the existing application has an unpaid cannabis (primary) invoice, check/update the payment status
             if (
-                !string.IsNullOrEmpty(initialApplication._adoxioInvoiceValue)
-                && initialApplication.AdoxioPrimaryapplicationinvoicepaid != 1
+                !string.IsNullOrEmpty(existingApplication._adoxioInvoiceValue)
+                && existingApplication.AdoxioPrimaryapplicationinvoicepaid != 1
             )
             {
                 PaymentResult primaryInvoiceResult = await PaymentController
-                    .GetCannabisPaymentStatus(initialApplication, _dynamicsClient, _bcep)
+                    .GetCannabisPaymentStatus(existingApplication, _dynamicsClient, _bcep)
                     .ConfigureAwait(true);
+
                 data.Primary = primaryInvoiceResult?.TrnId == "0" ? null : primaryInvoiceResult;
             }
 
-            // If there is a liquor invoice but the payment has not been confirmed
+            // If the existing application has an unpaid liquor (secondary) invoice, check/update the payment status
             if (
-                !string.IsNullOrEmpty(initialApplication._adoxioSecondaryapplicationinvoiceValue)
-                && initialApplication.AdoxioSecondaryapplicationinvoicepaid != 1
+                !string.IsNullOrEmpty(existingApplication._adoxioSecondaryapplicationinvoiceValue)
+                && existingApplication.AdoxioSecondaryapplicationinvoicepaid != 1
             )
             {
                 PaymentResult secondaryInvoiceResult = await PaymentController
-                    .GetLiquorPaymentStatus(initialApplication, _dynamicsClient, _bcep)
+                    .GetLiquorPaymentStatus(existingApplication, _dynamicsClient, _bcep)
                     .ConfigureAwait(true);
+
                 data.Secondary = secondaryInvoiceResult?.TrnId == "0" ? null : secondaryInvoiceResult;
             }
 
-            var updatedApplication = await _dynamicsClient.GetApplicationByIdWithChildren(
-                Guid.Parse(initialApplication.AdoxioApplicationid)
+            // Fetch the existing record with all related data
+            var existingApplicationData = await _dynamicsClient.GetApplicationByIdWithChildren(
+                Guid.Parse(existingApplication.AdoxioApplicationid)
             );
 
-            data.Application = await updatedApplication.ToViewModel(_dynamicsClient, _cache, _logger);
+            data.Application = await existingApplicationData.ToViewModel(_dynamicsClient, _cache, _logger);
 
             return new JsonResult(data);
         }
 
         /// <summary>
-        /// Fetches a "Permanent Change to a Licensee" or "Legal Entity Review" application.
-        ///
-        /// Fetches the application using the logged in user's account ID.
-        ///
-        /// If an "applicationId" is provided, will additionally filter results using that specific application id.
-        ///
-        /// If "isLegalEntityReview" is true, it will fetch a "Legal Entity Review" application instead of a
-        /// "Permanent Change to a Licensee" application.
-        ///
-        /// If no application is found, it will create a new application and return it.
+        /// Fetches a "LE Review" application.
         /// </summary>
         /// <param name="userSettings"></param>
-        /// <param name="applicationId">Filter results by a specific application ID. (Optional)</param>
-        /// <param name="isLegalEntityReview">Whether or not the change application is a legal entity review. (Optional)</param>
+        /// <param name="applicationId"></param>
         /// <returns></returns>
-        private async Task<MicrosoftDynamicsCRMadoxioApplication> GetPermanentChangeApplication(
+        /// <summary>
+        private async Task<IActionResult> _GetLegalEntityReviewData(UserSettings userSettings, string applicationId)
+        {
+            // TODO: tiedhouse - Replace this type with a new LE Review specific one, as the "permanent change" and 
+            // "le review" don't have similar, but not the exact same, data requirements.
+            PermanentChangesPageData data = new PermanentChangesPageData();
+
+            // Get all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
+            data.Licences = _dynamicsClient.GetLicensesByLicencee(userSettings.AccountId, _cache);
+
+            var application = await _dynamicsClient.GetApplicationByIdWithChildren(Guid.Parse(applicationId));
+
+            data.Application = await application.ToViewModel(_dynamicsClient, _cache, _logger);
+
+            return new JsonResult(data);
+        }
+
+        /// <summary>
+        /// Gets an existing in-progress Permanent Change to a Licensee application or creates a new one.
+        ///
+        /// If applicationId is provided, will fetch that specific record.
+        /// If applicationId is not provided, will fetch the most recent Permanent change application for the user.
+        ///
+        /// If no application is found, it will create a new application.
+        /// </summary>
+        /// <remarks>
+        /// An in-progress application is one that is not in a final/terminal status AND does not have a paid invoice.
+        /// </remarks>
+        /// <param name="userSettings"></param>
+        /// <param name="applicationId">Filter results by a specific application ID. (Optional)</param>
+        /// <returns></returns>
+        private async Task<MicrosoftDynamicsCRMadoxioApplication> _GetExistingInProgressPermanentChangeApplication(
             UserSettings userSettings,
-            string applicationId = null,
-            bool isLegalEntityReview = false
+            string applicationId = null
         )
         {
-            MicrosoftDynamicsCRMadoxioApplicationtype applicationType;
-            if (isLegalEntityReview == true)
-            {
-                applicationType = _dynamicsClient.GetApplicationTypeByName("LE Review");
-            }
-            else
-            {
-                applicationType = _dynamicsClient.GetApplicationTypeByName("Permanent Change to a Licensee");
-            }
+            MicrosoftDynamicsCRMadoxioApplicationtype applicationType = _dynamicsClient.GetApplicationTypeByName(
+                "Permanent Change to a Licensee"
+            );
 
             if (applicationType == null)
             {
-                _logger.LogError("Application type not found for Permanent Change Application");
-                throw new Exception("Application type not found for Permanent Change Application");
+                _logger.LogError("Application type not found for 'Permanent Change to a Licensee' Application");
+                throw new Exception("Application type not found for 'Permanent Change to a Licensee' Application");
             }
 
             string[] expand =
             {
-                "adoxio_localgovindigenousnationid",
-                "adoxio_application_SharePointDocumentLocations",
-                "adoxio_application_adoxio_tiedhouseconnection_Application",
                 "adoxio_AssignedLicence",
                 "adoxio_ApplicationTypeId",
                 "adoxio_LicenceFeeInvoice",
                 "adoxio_Invoice",
-                "adoxio_application_SharePointDocumentLocations",
                 "adoxio_ApplicationExtension"
             };
 
@@ -1226,57 +1246,56 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Refused}";
             filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
 
+            // Include only active records
+            filter += $" and statecode eq 0";
+
             // Filter by application type
             filter += $" and _adoxio_applicationtypeid_value eq {applicationType.AdoxioApplicationtypeid} ";
 
             if (!string.IsNullOrEmpty(applicationId))
             {
+                // Optionally filter by specific application id
                 filter += $" and adoxio_applicationid eq {applicationId}";
             }
 
-            MicrosoftDynamicsCRMadoxioApplication existingApplication = null;
             try
             {
                 var applications = _dynamicsClient
                     .Applications.Get(filter: filter, expand: expand)
                     .Value.OrderByDescending(app => app.Createdon);
 
-                existingApplication = applications.FirstOrDefault();
+                var existingApplication = applications.FirstOrDefault();
+
+                // Check if the existing application has an invoice and the invoice is paid
+                // If so, then this application is not considered to be "in-progress"
+                bool hasInvoice =
+                    existingApplication?._adoxioInvoiceValue != null
+                    || existingApplication?._adoxioSecondaryapplicationinvoiceValue != null;
+                bool primaryInvoicePaid =
+                    existingApplication?._adoxioInvoiceValue == null
+                    || existingApplication?.AdoxioPrimaryapplicationinvoicepaid == 1;
+                bool secondaryInvoicePaid =
+                    existingApplication?._adoxioSecondaryapplicationinvoiceValue == null
+                    || existingApplication?.AdoxioSecondaryapplicationinvoicepaid == 1;
+                bool existingApplicationIsPaid = hasInvoice && primaryInvoicePaid && secondaryInvoicePaid;
+
+                if (existingApplicationIsPaid)
+                {
+                    return null;
+                }
+
+                return existingApplication;
             }
             catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(httpOperationException, "Error getting licensee application");
+                _logger.LogError(
+                    httpOperationException,
+                    "Error getting existing in-progress  Permanent Change Application"
+                );
+                _logger.LogDebug($"Request: {JsonConvert.SerializeObject(httpOperationException.Request)}");
+                _logger.LogDebug($"Response: {JsonConvert.SerializeObject(httpOperationException.Response)}");
+                throw;
             }
-
-            if (existingApplication == null)
-            {
-                _logger.LogDebug("No existing permanent change application found");
-                // No existing application found, create a new one
-                return await _createPermanentChangeApplication(userSettings, applicationType);
-            }
-
-            // Check if application is paid: at least one invoice exists and all existing invoices are paid
-            bool hasInvoice =
-                existingApplication?._adoxioInvoiceValue != null
-                || existingApplication?._adoxioSecondaryapplicationinvoiceValue != null;
-            bool primaryInvoicePaid =
-                existingApplication?._adoxioInvoiceValue == null
-                || existingApplication?.AdoxioPrimaryapplicationinvoicepaid == 1;
-            bool secondaryInvoicePaid =
-                existingApplication?._adoxioSecondaryapplicationinvoiceValue == null
-                || existingApplication?.AdoxioSecondaryapplicationinvoicepaid == 1;
-            bool existingApplicationIsPaid = hasInvoice && primaryInvoicePaid && secondaryInvoicePaid;
-
-            if (existingApplicationIsPaid)
-            {
-                _logger.LogDebug("Existing permanent change application is already paid");
-                // Existing application is already paid, create a new one
-                return await _createPermanentChangeApplication(userSettings, applicationType);
-            }
-
-            _logger.LogDebug("Existing in-progress permanent change application found");
-            // Return existing in-progress application
-            return existingApplication;
         }
 
         /// <summary>
@@ -1286,12 +1305,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="applicationType"></param>
         /// <returns></returns>
         private async Task<MicrosoftDynamicsCRMadoxioApplication> _createPermanentChangeApplication(
-            UserSettings userSettings,
-            MicrosoftDynamicsCRMadoxioApplicationtype applicationType
+            UserSettings userSettings
         )
         {
             try
             {
+                MicrosoftDynamicsCRMadoxioApplicationtype applicationType = _dynamicsClient.GetApplicationTypeByName(
+                    "Permanent Change to a Licensee"
+                );
+
+                if (applicationType == null)
+                {
+                    _logger.LogError("Application type not found for Permanent Change Application");
+                    throw new Exception("Application type not found for Permanent Change Application");
+                }
+
                 var account = _dynamicsClient.GetAccountById(userSettings.AccountId);
 
                 var applicationData = new MicrosoftDynamicsCRMadoxioApplication
@@ -1308,10 +1336,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 return await _dynamicsClient.GetApplicationByIdWithChildren(createdApplication.AdoxioApplicationid);
             }
-            catch (HttpOperationException e)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(e, "Error creating permanent change application");
-                return null;
+                _logger.LogError(httpOperationException, "Error creating permanent change application");
+                _logger.LogDebug($"Request: {JsonConvert.SerializeObject(httpOperationException.Request)}");
+                _logger.LogDebug($"Response: {JsonConvert.SerializeObject(httpOperationException.Response)}");
+                throw;
             }
         }
 
@@ -1323,23 +1353,28 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         ///
         /// If no application is found, it will create a new "Permanent Change to a Licensee" application and return it.
         /// </summary>
-        /// <param name="applicationId"></param>Filter results by a specific application ID.(Optional)
-        /// <param name="isLegalEntityReview">
-        /// Optional query param for indicating that the payment is being made for a legal entity review.
-        /// Allowed values: "true" and "false".
-        /// If not provided, the default value is "false".
-        /// </param>
+        /// <param name="applicationId"></param>
         /// <returns></returns>
-        /// <summary>
         [HttpGet("permanent-change-to-licensee-data")]
-        public async Task<IActionResult> GetPermanetChangesToLicenseeData(
-            [FromQuery] string applicationId,
-            [FromQuery] bool isLegalEntityReview = false
-        )
+        public async Task<IActionResult> GetPermanentChangesToLicenseeData([FromQuery] string applicationId = null)
         {
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
-            return await _GetPermanentChangesToLicenseeData(userSettings, applicationId, isLegalEntityReview);
+            return await _GetPermanentChangesToLicenseeData(userSettings, applicationId);
+        }
+
+        /// <summary>
+        /// Fetches a "Legal Entity Review" application.
+        /// </summary>
+        /// <param name="applicationId"></param>
+        /// <returns></returns>
+        /// <summary>
+        [HttpGet("legal-entity-review-data")]
+        public async Task<IActionResult> GetLegalEntityReviewData([FromQuery] string applicationId)
+        {
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+
+            return await _GetLegalEntityReviewData(userSettings, applicationId);
         }
 
         /// GET all applications in Dynamics for the current user
@@ -2359,7 +2394,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 filter += $" or statuscode eq {(int)AdoxioApplicationStatusCodes.UnderReview}";
                 filter += $" or statuscode eq {(int)AdoxioApplicationStatusCodes.LicenseeActionRequired}";
                 filter += $" or statuscode eq {(int)AdoxioApplicationStatusCodes.ApplicationAssessment})";
-                // Exclude deactivated records
+                // Include only active records
                 filter += $" and statecode eq 0";
 
                 var applications = _dynamicsClient.Applications.Get(filter: filter, orderby: orderby).Value.ToList();
