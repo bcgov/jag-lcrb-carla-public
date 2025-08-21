@@ -165,7 +165,7 @@ export class ApplicationDataService extends DataService {
    * @return {*}  {Observable<any>}
    */
   GetOrCreatePermanentChangeForLegalEntityReviewApplicationAsync(applicationId: string): Observable<any> {
-    let url = `${this.apiPath}get_pcl_for_le_review/${applicationId}`;
+    let url = `${this.apiPath}pcl-for-le-review/${applicationId}`;
 
     return this.http.get<any>(url, { headers: this.headers }).pipe(catchError(this.handleError));
   }
@@ -175,6 +175,15 @@ export class ApplicationDataService extends DataService {
       .pipe(catchError(this.handleError));
   }
 
+  /**
+   * Fetches the user's in-progress Legal Entity Review applications.
+   *
+   * @return {*}  {Observable<Application[]>}
+   */
+  getInProgressLegalEntityReviewApplications(): Observable<Application[]> {
+    return this.http.get<Application[]>(`${this.apiPath}get-in-progress-legal-entity-review`, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
 
   /**
    * Get a Dynamics Application by application ID

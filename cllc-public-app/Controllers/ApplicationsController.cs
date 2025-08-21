@@ -2162,7 +2162,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// </summary>
         /// <param name="id">Either the ID of the LE Review application or the PCL application.</param>
         /// <returns></returns>
-        [HttpGet("get_pcl_for_le_review/{id}")]
+        [HttpGet("pcl-for-le-review/{id}")]
         [AllowAnonymous]
         public async Task<IActionResult> GetOrCreatePermanentChangeForLegalEntityReviewApplicationAsync(string id)
         {
@@ -2260,14 +2260,97 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
         }
 
-        private MicrosoftDynamicsCRMadoxioApplication CopyLEReviewApplicationToPCL(MicrosoftDynamicsCRMadoxioApplication LeReview)
+        /// <summary>
+        /// Fetches the user's in-progress Legal Entity Review applications.
+        /// </summary>
+        /// <returns>A list of in-progress Legal Entity Review applications</returns>
+        [HttpGet("get-in-progress-legal-entity-review")]
+        [AllowAnonymous]
+        public async Task<IActionResult> UserHasInProgressLegalEntityReview()
+        {
+            try
+            {
+                UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+
+                string applicationTypeName = "LE Review";
+                var applicationType = _dynamicsClient.GetApplicationTypeByName(applicationTypeName);
+
+                if (applicationType == null)
+                {
+                    _logger.LogWarning($"Application type '{applicationTypeName}' not found");
+                    return new JsonResult(false);
+                }
+
+                var orderby = new List<string> { "createdon" };
+
+                // Filter to find applications of type "LE Review"
+                var filter =
+                    $"_adoxio_applicant_value eq {userSettings.AccountId} and _adoxio_applicationtypeid_value eq {applicationType.AdoxioApplicationtypeid}";
+
+                // Exclude terminated, cancelled, refused, and terminated and refunded applications
+                filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Terminated}";
+                filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Cancelled}";
+                filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Refused}";
+                filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
+
+                // Include only "in-progress" statuses
+                filter += $" and (statuscode eq {(int)AdoxioApplicationStatusCodes.Intake}";
+                filter += $" or statuscode eq {(int)AdoxioApplicationStatusCodes.Incomplete}";
+                filter += $" or statuscode eq {(int)AdoxioApplicationStatusCodes.Submitted}";
+                filter += $" or statuscode eq {(int)AdoxioApplicationStatusCodes.UnderReview}";
+                filter += $" or statuscode eq {(int)AdoxioApplicationStatusCodes.LicenseeActionRequired}";
+                filter += $" or statuscode eq {(int)AdoxioApplicationStatusCodes.ApplicationAssessment})";
+
+                // Exclude deactivated records
+                filter += $" and statecode eq 0";
+
+                // Fetch only the count of the results
+                var applications = _dynamicsClient
+                    .Applications.Get(top: 50, filter: filter, orderby: orderby)
+                    .Value.ToList();
+
+                var results = new List<Application>();
+                foreach (var application in applications)
+                {
+                    var viewModel = application.ToViewModel(_dynamicsClient, _cache, _logger).GetAwaiter().GetResult();
+                    results.Add(viewModel);
+                }
+
+                return new JsonResult(results);
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Error fetching in-progress LE Review applications");
+                _logger.LogDebug($"Request: {JsonConvert.SerializeObject(httpOperationException.Request)}");
+                _logger.LogDebug($"Response: {JsonConvert.SerializeObject(httpOperationException.Response)}");
+                return StatusCode(
+                    StatusCodes.Status500InternalServerError,
+                    "Error fetching in-progress LE Review applications"
+                );
+            }
+            catch (Exception error)
+            {
+                _logger.LogError(error, "Error fetching in-progress LE Review applications");
+                return StatusCode(
+                    StatusCodes.Status500InternalServerError,
+                    "Error fetching in-progress LE Review applications"
+                );
+            }
+        }
+
+        private MicrosoftDynamicsCRMadoxioApplication CopyLEReviewApplicationToPCL(
+            MicrosoftDynamicsCRMadoxioApplication LeReview
+        )
         {
             var pclApplicationType = _dynamicsClient.GetApplicationTypeByName("Permanent Change to a Licensee");
             var PCL = new MicrosoftDynamicsCRMadoxioApplication
             {
                 AdoxioApplicanttype = LeReview.AdoxioApplicanttype,
                 AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("accounts", LeReview._adoxioApplicantValue),
-                AdoxioApplicationTypeIdODataBind = _dynamicsClient.GetEntityURI("adoxio_applicationtypes", pclApplicationType.AdoxioApplicationtypeid),
+                AdoxioApplicationTypeIdODataBind = _dynamicsClient.GetEntityURI(
+                    "adoxio_applicationtypes",
+                    pclApplicationType.AdoxioApplicationtypeid
+                ),
                 AdoxioCsinternaltransferofshares = LeReview.AdoxioCsinternaltransferofshares,
                 AdoxioCsexternaltransferofshares = LeReview.AdoxioCsexternaltransferofshares,
                 AdoxioCschangeofdirectorsorofficers = LeReview.AdoxioCschangeofdirectorsorofficers,
