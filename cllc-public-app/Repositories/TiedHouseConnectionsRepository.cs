@@ -213,7 +213,11 @@ namespace Gov.Lclb.Cllb.Public.Repositories
             // Ensure the tied house connection is of type (category) "Liquor"
             adoxioTiedHouseConnection.AdoxioCategoryType = (int)TiedHouseCategoryType.Liquor;
 
-            // If the incoming record already has an account ID defined, then we are updating an existing record.
+            // When adding a new tied house connection to an application, ensure it is not associated with an account.
+            // "New" records should not be associated with an account.
+            adoxioTiedHouseConnection.AccountODataBind = null;
+
+            // If the incoming record already has an application ID defined, then we are updating an existing record.
             if (incomingTiedHouseConnection.ApplicationId == applicationId)
             {
                 if (
@@ -240,8 +244,7 @@ namespace Gov.Lclb.Cllb.Public.Repositories
                 return adoxioTiedHouseConnection.ToViewModel();
             }
 
-            // If the incoming record does not have an account ID defined, then we are creating a new record.
-
+            // If the incoming record does not have an application ID defined, then we are creating a new record.
             if (!string.IsNullOrEmpty(incomingTiedHouseConnection.id))
             {
                 // If the incoming record already has an ID, then we are soft-deleting the previous version of the
@@ -280,8 +283,8 @@ namespace Gov.Lclb.Cllb.Public.Repositories
         /// Business Rules - This endpoint should only be called if:
         /// <br/>
         /// <list type="bullet">
-        ///   <item><description>The user does not have any existing tied house connections of type <c>Liquor</c>.</description></item>
-        ///   <item><description>The user does not have any approved applications, of any type.</description></item>
+        ///   <item>The user does not have any existing tied house connections of type <c>Liquor</c>.</item>
+        ///   <item>The user does not have any approved applications, of any type.</item>
         /// </list>
         /// </remarks>
         /// <param name="incomingTiedHouseConnection">The tied house connection data to create.</param>
@@ -327,7 +330,6 @@ namespace Gov.Lclb.Cllb.Public.Repositories
             }
 
             // If the incoming record does not have an account ID defined, then we are creating a new record.
-
             if (!string.IsNullOrEmpty(incomingTiedHouseConnection.id))
             {
                 // If the incoming record already has an ID, then we are soft-deleting the previous version of the
