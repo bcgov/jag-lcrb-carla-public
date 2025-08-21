@@ -18,7 +18,7 @@
 
       <div class="d-flex flex-row-reverse">
         <button
-          *ngIf="canCreatePCLApplication"
+          *ngIf="hasLoadedData && canCreatePCLApplication"
           routerLink="/permanent-change-to-a-licensee"
           mat-raised-button
           color="primary">

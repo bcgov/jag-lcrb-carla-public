@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Account } from '@models/account.model';
+import { ApplicationDataService } from '@services/application-data.service';
 
 @Component({
   selector: 'app-legal-entity-type-update-calloutbox',
@@ -7,15 +8,29 @@ import { Account } from '@models/account.model';
   styleUrls: ['./legal-entity-type-update-calloutbox.component.scss']
 })
 export class LegalEntityTypeUpdateCalloutboxComponent implements OnInit {
-  @Input()
-  account: Account;
+  @Input() account: Account;
+
   /**
-   * Whether the user is allowed to submit a PCL application
+   * Whether the data has been loaded.
    */
-  @Input()
+  hasLoadedData: boolean = false;
+
+  /**
+   * Whether the user is allowed to create a PCL application
+   */
   canCreatePCLApplication: boolean = true;
 
-  constructor() {}
+  constructor(private applicationsService: ApplicationDataService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loadData();
+  }
+
+  loadData() {
+    this.applicationsService.getInProgressLegalEntityReviewApplications().subscribe((inProgressLeReviewApplications) => {
+      this.canCreatePCLApplication = !inProgressLeReviewApplications || inProgressLeReviewApplications.length === 0;
+
+      this.hasLoadedData = true;
+    });
+  }
 }

@@ -31,7 +31,9 @@
     [extensions]="['pdf']"
     (numberOfUploadedFiles)="onUploadedCAS($event)"
     [entityId]="application.id"
-    [uploadHeader]="'TO UPLOAD CANNABIS ASSOCIATES DOCUMENTS, DRAG FILES HERE OR'"></app-file-uploader>
+    [uploadHeader]="'TO UPLOAD CANNABIS ASSOCIATES DOCUMENTS, DRAG FILES HERE OR'"
+    [disableUploads]="disabled"
+    [enableFileDeletion]="!disabled"></app-file-uploader>
 
   <h4>Financial Integrity Documents</h4>
   <p>
@@ -51,5 +53,7 @@
     [extensions]="['pdf']"
     (numberOfUploadedFiles)="onUploadedFinancialIntegrity($event)"
     [entityId]="application.id"
-    [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY DOCUMENTS, DRAG FILES HERE OR'"></app-file-uploader>
+    [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY DOCUMENTS, DRAG FILES HERE OR'"
+    [disableUploads]="disabled"
+    [enableFileDeletion]="!disabled"></app-file-uploader>
 </div>

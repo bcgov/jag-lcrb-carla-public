@@ -34,7 +34,6 @@ export class DashboardComponent extends FormBase implements OnInit {
   busy: Subscription;
   outstandingBalancePriorInvoiceData: OutstandingPriorBalanceInvoice[] = [];
   isOutstandingBalancePriorInvoiceDue: boolean;
-  canCreatePCLApplication = true;
 
   constructor(
     private store: Store<AppState>,
@@ -74,15 +73,15 @@ export class DashboardComponent extends FormBase implements OnInit {
           sub = this.legalEntityDataService
             .getCurrentHierachy()
             .pipe(takeWhile(() => this.componentActive))
-            .subscribe(
-              (data: LegalEntity) => {
+            .subscribe({
+              next: (data: LegalEntity) => {
                 this.tree = LicenseeChangeLog.CreateFromLegalEntity(data);
                 this.tree.isRoot = true;
               },
-              () => {
+              error: () => {
                 console.log('Error occured');
               }
-            );
+            });
           this.subscriptionList.push(sub);
 
           this.licenseDataService
@@ -102,7 +101,6 @@ export class DashboardComponent extends FormBase implements OnInit {
 
   startLicenseeChangeApplication() {
     const newLicenceApplicationData = {
-      // licenseType: ApplicationTypeNames.LeaderhsipChange,
       applicantType: this.account.businessType,
       applicationType: { name: ApplicationTypeNames.LicenseeChanges } as ApplicationType,
       account: this.account
@@ -148,9 +146,5 @@ export class DashboardComponent extends FormBase implements OnInit {
           }
         );
     }
-  }
-
-  handleCanCreatePCLApplicationEvent(event: boolean) {
-    this.canCreatePCLApplication = event;
   }
 }

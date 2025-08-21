@@ -22,7 +22,9 @@
     [extensions]="['pdf']"
     (numberOfUploadedFiles)="onUploadedCentralSecuritiesRegister($event)"
     [entityId]="application.id"
-    [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER, DRAG FILES HERE OR'"></app-file-uploader>
+    [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER, DRAG FILES HERE OR'"
+    [disableUploads]="disabled"
+    [enableFileDeletion]="!disabled"></app-file-uploader>
 
   <h4>
     <fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>
@@ -63,7 +65,9 @@
     [extensions]="['pdf']"
     (numberOfUploadedFiles)="onUploadedIndividualsWithLessThan10($event)"
     [entityId]="application.id"
-    [uploadHeader]="'TO UPLOAD LIST OF INDIVIDUALS WITH 10% OR LESS INTEREST, DRAG FILE HERE OR'"></app-file-uploader>
+    [uploadHeader]="'TO UPLOAD LIST OF INDIVIDUALS WITH 10% OR LESS INTEREST, DRAG FILE HERE OR'"
+    [disableUploads]="disabled"
+    [enableFileDeletion]="!disabled"></app-file-uploader>
 
   <hr />
 
@@ -91,7 +95,9 @@
       [extensions]="['pdf']"
       (numberOfUploadedFiles)="onUploadedCertificateOfAmalgamation($event)"
       [entityId]="application.id"
-      [uploadHeader]="'TO UPLOAD CERTIFICATE OF AMALGAMATION, DRAG FILES HERE OR'"></app-file-uploader>
+      [uploadHeader]="'TO UPLOAD CERTIFICATE OF AMALGAMATION, DRAG FILES HERE OR'"
+      [disableUploads]="disabled"
+      [enableFileDeletion]="!disabled"></app-file-uploader>
 
     <h4>Central Securities Register (shareholders) for the amalgamated company</h4>
     <app-file-uploader
@@ -103,9 +109,9 @@
       [extensions]="['pdf']"
       (numberOfUploadedFiles)="onUploadedCertificateOfAmalgamation($event)"
       [entityId]="application.id"
-      [uploadHeader]="
-        'TO UPLOAD CENTRAL SECURITIES REGISTER FOR AMALGAMATED COMPANY, DRAG FILES HERE OR'
-      "></app-file-uploader>
+      [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER FOR AMALGAMATED COMPANY, DRAG FILES HERE OR'"
+      [disableUploads]="disabled"
+      [enableFileDeletion]="!disabled"></app-file-uploader>
 
     <h4>Notice of Articles for the amalgamated company</h4>
     <app-file-uploader
@@ -117,6 +123,8 @@
       [extensions]="['pdf']"
       (numberOfUploadedFiles)="onUploadedNOAAmalgamation($event)"
       [entityId]="application.id"
-      [uploadHeader]="'TO UPLOAD NOTICE OF ARTICLES FOR AMALGAMATED COMPANY, DRAG FILES HERE OR'"></app-file-uploader>
+      [uploadHeader]="'TO UPLOAD NOTICE OF ARTICLES FOR AMALGAMATED COMPANY, DRAG FILES HERE OR'"
+      [disableUploads]="disabled"
+      [enableFileDeletion]="!disabled"></app-file-uploader>
   </section>
 </div>

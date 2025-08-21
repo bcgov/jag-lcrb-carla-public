@@ -18,6 +18,7 @@ import { Application } from '@models/application.model';
 })
 export class PermanentChangeCannabisSecurityScreeningFormsComponent implements OnInit {
   @Input() application: Application;
+  @Input() disabled: boolean = false;
 
   @Output() uploadedCAS = new EventEmitter<number>();
   @Output() uploadedFinancialIntegrity = new EventEmitter<number>();
