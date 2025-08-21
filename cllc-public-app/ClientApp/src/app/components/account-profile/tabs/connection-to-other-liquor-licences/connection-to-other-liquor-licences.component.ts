@@ -228,12 +228,17 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnChang
       return false;
     }
 
+    if (this.initialTiedHouseConnections && this.initialTiedHouseConnections.length > 0) {
+      // Show the section if the user has any existing Tied House connections
+      return true;
+    }
+
     if (
       this.form.get('hasLiquorTiedHouseOwnershipOrControl').value === 1 ||
       this.form.get('hasLiquorTiedHouseThirdPartyAssociations').value === 1 ||
       this.form.get('hasLiquorTiedHouseFamilyMemberInvolvement').value === 1
     ) {
-      // Show the section if any of the tied house questions are answered with 'Yes'.
+      // Show the section if any of the tied house questions are answered with 'Yes'
       return true;
     }
 
