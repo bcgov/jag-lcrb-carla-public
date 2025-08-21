@@ -1095,6 +1095,24 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return result;
         }
 
+        /// <summary>
+        /// Fetches a "Permanent Change to a Licensee" or "Legal Entity Review" application.
+        ///
+        /// If "isLegalEntityReview" is true, it will fetch a "Legal Entity Review" application instead of a
+        /// "Permanent Change to a Licensee" application.
+        ///
+        /// If no application is found, it will create a new application and return it.
+        ///
+        /// Additionally checks/updates the payment status of any related invoices.
+        /// </summary>
+        /// <param name="userSettings"></param>
+        /// <param name="applicationId">
+        /// Filter results by a specific application ID. If not provided, will fetch the most recent in-progress
+        /// application.
+        /// </param>
+        /// <param name="isLegalEntityReview"></param>
+        /// <returns></returns>
+        /// <summary>
         private async Task<IActionResult> _GetPermanentChangesToLicenseeData(
             UserSettings userSettings,
             string applicationId = null,
@@ -1103,17 +1121,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             PermanentChangesPageData data = new PermanentChangesPageData();
 
-            // set application type relationship
+            // Get application
             var initialApplication = await GetPermanentChangeApplication(
                 userSettings,
                 applicationId,
                 isLegalEntityReview
             );
 
-            // get all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
+            // Get all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
             data.Licences = _dynamicsClient.GetLicensesByLicencee(userSettings.AccountId, _cache);
 
-            // if there is an invoice but the payment has not been confirmed
+            // If there is a cannabis invoice but the payment has not been confirmed
             if (
                 !string.IsNullOrEmpty(initialApplication._adoxioInvoiceValue)
                 && initialApplication.AdoxioPrimaryapplicationinvoicepaid != 1
@@ -1125,7 +1143,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 data.Primary = primaryInvoiceResult?.TrnId == "0" ? null : primaryInvoiceResult;
             }
 
-            // if there is an invoice but the payment has not been confirmed
+            // If there is a liquor invoice but the payment has not been confirmed
             if (
                 !string.IsNullOrEmpty(initialApplication._adoxioSecondaryapplicationinvoiceValue)
                 && initialApplication.AdoxioSecondaryapplicationinvoicepaid != 1
