@@ -36,9 +36,7 @@
       </p>
       <p></p>
 
-      <app-applications-and-licences
-        [account]="account"
-        (canCreatePCLApplicationEvent)="handleCanCreatePCLApplicationEvent($event)"></app-applications-and-licences>
+      <app-applications-and-licences [account]="account"></app-applications-and-licences>
     </div>
 
     <div class="col-lg-4 col-sm-12" style="position: relative">
@@ -126,8 +124,7 @@
       <app-legal-entity-type-update-calloutbox
         *ngIf="hasLicence"
         appRemoveIfFeatureOff="PermanentChangesToLicensee"
-        [account]="account"
-        [canCreatePCLApplication]="canCreatePCLApplication"></app-legal-entity-type-update-calloutbox>
+        [account]="account"></app-legal-entity-type-update-calloutbox>
       <p></p>
     </div>
   </div>
@@ -136,8 +133,8 @@
     <p>
       All retail store licence holders must follow the
       <a href="https://www2.gov.bc.ca/gov/content?id=FFBF300FC24C4B4C92F13DBB73040523" target="_blank">
-        terms and conditions of their licence
-      </a>
+        terms and conditions of their licence</a
+      >
       as set out in the
       <a href="https://www2.gov.bc.ca/gov/content?id=FFBF300FC24C4B4C92F13DBB73040523" target="_blank">
         relevant handbook </a

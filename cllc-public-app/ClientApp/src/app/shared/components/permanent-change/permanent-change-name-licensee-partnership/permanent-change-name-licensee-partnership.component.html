@@ -39,5 +39,7 @@
     [extensions]="['pdf']"
     (numberOfUploadedFiles)="onUploadedPartnershipRegistration($event)"
     [entityId]="application.id"
-    [uploadHeader]="'TO UPLOAD PARTNERSHIP REGISTRATION, DRAG FILES HERE OR'"></app-file-uploader>
+    [uploadHeader]="'TO UPLOAD PARTNERSHIP REGISTRATION, DRAG FILES HERE OR'"
+    [disableUploads]="disabled"
+    [enableFileDeletion]="!disabled"></app-file-uploader>
 </div>

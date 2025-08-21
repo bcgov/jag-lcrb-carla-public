@@ -18,6 +18,7 @@ import { Application } from '@models/application.model';
 })
 export class PermanentChangeNameLicenseeCorporationComponent implements OnInit {
   @Input() application: Application;
+  @Input() disabled: boolean = false;
   @Input() showValidationMessages: boolean = false;
 
   @Output() uploadedCertificateOfNameChange = new EventEmitter<number>();

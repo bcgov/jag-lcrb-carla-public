@@ -15,7 +15,9 @@
     [extensions]="['pdf']"
     (numberOfUploadedFiles)="onUploadedCentralSecuritiesRegister($event)"
     [entityId]="application.id"
-    [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER, DRAG FILES HERE OR'"></app-file-uploader>
+    [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER, DRAG FILES HERE OR'"
+    [disableUploads]="disabled"
+    [enableFileDeletion]="!disabled"></app-file-uploader>
   <hr />
   <p>
     If one of the new shareholders is a private corporation, a public corporation, a society or a partnership,
@@ -97,7 +99,9 @@
     [extensions]="['pdf']"
     (numberOfUploadedFiles)="onUploadedRegisterOfDirectorsAndOfficers($event)"
     [entityId]="application.id"
-    [uploadHeader]="'TO UPLOAD REGISTER OF DIRECTORS AND OFFICERS, DRAG FILES HERE OR'"></app-file-uploader>
+    [uploadHeader]="'TO UPLOAD REGISTER OF DIRECTORS AND OFFICERS, DRAG FILES HERE OR'"
+    [disableUploads]="disabled"
+    [enableFileDeletion]="!disabled"></app-file-uploader>
 
   <hr />
 
@@ -126,4 +130,5 @@
     (numberOfUploadedFiles)="onUploadedIndividualsWithLessThan10($event)"
     [entityId]="application.id"
     [uploadHeader]="'TO UPLOAD LIST OF INDIVIDUALS WITH 10% OR LESS INTEREST, DRAG FILE HERE OR'"></app-file-uploader>
+  [disableUploads]="disabled" [enableFileDeletion]="!disabled"
 </div>

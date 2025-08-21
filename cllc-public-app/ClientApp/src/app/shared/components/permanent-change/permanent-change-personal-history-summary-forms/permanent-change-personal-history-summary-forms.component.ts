@@ -18,6 +18,7 @@ import { Application } from '@models/application.model';
 })
 export class PermanentChangePersonalHistorySummaryFormsComponent implements OnInit {
   @Input() application: Application;
+  @Input() disabled: boolean = false;
 
   @Output() uploadedFinancialIntegrity = new EventEmitter<number>();
 
