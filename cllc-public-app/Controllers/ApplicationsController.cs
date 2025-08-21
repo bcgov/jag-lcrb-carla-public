@@ -1175,6 +1175,74 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         /// <summary>
+        /// Fetches a "Permanent Change to a Licensee" application as a result of a "Legal Entity Review".
+        ///
+        /// If no application is found, it will create a new "Permanent Change to a Licensee" application and return it.
+        /// </summary>
+        /// <param name="userSettings"></param>
+        /// <param name="applicationId"></param>
+        /// <returns></returns>
+        /// <summary>
+        private async Task<IActionResult> _GetPermanentChangesToLicenseeDataForLegalEntityReview(
+            UserSettings userSettings,
+            string applicationId
+        )
+        {
+            PermanentChangesPageData data = new PermanentChangesPageData();
+
+            // Get all licenses for the current user
+            data.Licences = _dynamicsClient.GetLicensesByLicencee(userSettings.AccountId, _cache);
+
+            // Fetch the existing record with all related data
+            var existingApplication = await _dynamicsClient.GetApplicationByIdWithChildren(Guid.Parse(applicationId));
+
+            // If no existing in-progress application is found, create and return a new application
+            if (existingApplication == null)
+            {
+                var createdApplication = await _createPermanentChangeApplication(userSettings);
+
+                // Fetch the new record with all related data
+                var createdApplicationData = await _dynamicsClient.GetApplicationByIdWithChildren(
+                    Guid.Parse(createdApplication.AdoxioApplicationid)
+                );
+
+                data.Application = await createdApplicationData.ToViewModel(_dynamicsClient, _cache, _logger);
+
+                return new JsonResult(data);
+            }
+
+            // If the existing application has an unpaid cannabis (primary) invoice, check/update the payment status
+            if (
+                !string.IsNullOrEmpty(existingApplication._adoxioInvoiceValue)
+                && existingApplication.AdoxioPrimaryapplicationinvoicepaid != 1
+            )
+            {
+                PaymentResult primaryInvoiceResult = await PaymentController
+                    .GetCannabisPaymentStatus(existingApplication, _dynamicsClient, _bcep)
+                    .ConfigureAwait(true);
+
+                data.Primary = primaryInvoiceResult?.TrnId == "0" ? null : primaryInvoiceResult;
+            }
+
+            // If the existing application has an unpaid liquor (secondary) invoice, check/update the payment status
+            if (
+                !string.IsNullOrEmpty(existingApplication._adoxioSecondaryapplicationinvoiceValue)
+                && existingApplication.AdoxioSecondaryapplicationinvoicepaid != 1
+            )
+            {
+                PaymentResult secondaryInvoiceResult = await PaymentController
+                    .GetLiquorPaymentStatus(existingApplication, _dynamicsClient, _bcep)
+                    .ConfigureAwait(true);
+
+                data.Secondary = secondaryInvoiceResult?.TrnId == "0" ? null : secondaryInvoiceResult;
+            }
+
+            data.Application = await existingApplication.ToViewModel(_dynamicsClient, _cache, _logger);
+
+            return new JsonResult(data);
+        }
+
+        /// <summary>
         /// Fetches a "LE Review" application.
         /// </summary>
         /// <param name="userSettings"></param>
@@ -2276,7 +2344,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 if (application.AdoxioApplicationTypeId?.AdoxioName != "LE Review")
                 {
-                    return await _GetPermanentChangesToLicenseeData(userSettings, application.AdoxioApplicationid);
+                    return await _GetPermanentChangesToLicenseeDataForLegalEntityReview(
+                        userSettings,
+                        application.AdoxioApplicationid
+                    );
                 }
 
                 // If LE review application is linked to a PCL application, return the PCL Application data.
@@ -2289,7 +2360,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         expand: expandExistingPcl
                     );
 
-                    return await _GetPermanentChangesToLicenseeData(
+                    return await _GetPermanentChangesToLicenseeDataForLegalEntityReview(
                         userSettings,
                         existingPclApplication.AdoxioRelatedLeOrPclApplication.AdoxioApplicationid
                     );
@@ -2339,7 +2410,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 };
                 await UpsertApplicationExtensionAsync(pclUpdateExtension, createdPclApplication.AdoxioApplicationid);
 
-                return await _GetPermanentChangesToLicenseeData(
+                return await _GetPermanentChangesToLicenseeDataForLegalEntityReview(
                     userSettings,
                     createdPclApplication.AdoxioApplicationid
                 );
