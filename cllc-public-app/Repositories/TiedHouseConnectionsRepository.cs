@@ -213,10 +213,6 @@ namespace Gov.Lclb.Cllb.Public.Repositories
             // Ensure the tied house connection is of type (category) "Liquor"
             adoxioTiedHouseConnection.AdoxioCategoryType = (int)TiedHouseCategoryType.Liquor;
 
-            // When adding a new tied house connection to an application, ensure it is not associated with an account.
-            // "New" records should not be associated with an account.
-            adoxioTiedHouseConnection.AccountODataBind = null;
-
             // If the incoming record already has an application ID defined, then we are updating an existing record.
             if (incomingTiedHouseConnection.ApplicationId == applicationId)
             {
