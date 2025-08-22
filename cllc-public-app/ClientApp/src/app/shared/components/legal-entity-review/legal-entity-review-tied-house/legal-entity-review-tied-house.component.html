@@ -11,7 +11,7 @@
       <mat-radio-group
         [disabled]="disabled"
         [(ngModel)]="hasTiedHouseChangesToDeclare"
-        (ngModelChange)="showTiedHouseConnections.emit($event)"
+        (ngModelChange)="hasTiedHouseChangesToDeclareEvent.emit($event)"
         [ngModelOptions]="{ standalone: true }"
         class="d-flex flex-column">
         <mat-radio-button [value]="true" class="p-2">
