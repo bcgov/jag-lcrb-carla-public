@@ -54,23 +54,66 @@ export class TiedHouseConnection {
   tiedHouseName: string;
 
   applicationId: string;
-  isLegalEntity: boolean = false;
-  dateOfBirth: string;
-  firstName: string;
-  middleName: string;
-  lastName: string;
-  relationshipToLicence: string;
-  associatedLiquorLicense: RelatedLicence[];
-  viewMode: number;
-  legalEntityName: string;
-  otherDescription: string;
-  businessType: string;
-  statusCode: number = TiedHouseStatusCode.new;
-  supersededById: string;
-  categorytype: number;
-
   /**
-   * Indicates that an existing tied house declartion record is marked for removal.
+   * The type of the liquor tied house connections (i.e. `Individual` or `Legal Entity`)
+   */
+  liqTiedHouseType: number;
+  /**
+   * The date of birth of the individual (if type is `Individual`).
+   */
+  dateOfBirth: string;
+  /**
+   * The first name of the individual (if type is `Individual`).
+   */
+  firstName: string;
+  /**
+   * The middle name of the individual (if type is `Individual`).
+   */
+  middleName: string;
+  /**
+   * The last name of the individual (if type is `Individual`).
+   */
+  lastName: string;
+  /**
+   * The relationship of the individual or legal entity to the liquor license.
+   */
+  relationshipToLicence: string;
+  /**
+   * The associated liquor licenses.
+   */
+  associatedLiquorLicense: RelatedLicence[];
+  /**
+   * Additional description for the tied house connection.
+   */
+  otherDescription: string;
+  /**
+   * The name of the legal entity (if type is `Legal Entity`).
+   */
+  legalEntityName: string;
+  /**
+   * The legal entity business type.
+   */
+  businessType: string;
+  /**
+   * The status code of the tied house connection (i.e. `New` or `Existing`)
+   */
+  statusCode: number = TiedHouseStatusCode.new;
+  /**
+   * The ID of the record that supersedes this one (if applicable).
+   * Tied house connections are never hard-deleted, but instead are superseded by the updated version.
+   */
+  supersededById: string;
+  /**
+   * The category type of the tied house connection (i.e. `Liquor` or `Cannabis`)
+   */
+  categorytype: number;
+  /**
+   * The view mode of the tied house connection.
+   * Used by the UI to determine how to display the record.
+   */
+  viewMode: number;
+  /**
+   * Indicates that an existing tied house connection record is marked for removal.
    */
   markedForRemoval?: boolean;
 }
@@ -114,9 +157,14 @@ export enum TiedHouseStatusCode {
   existing = 845280001
 }
 
-export const TiedHouseTypes = [
-  { name: 'Individual', value: false },
-  { name: 'Legal Entity', value: true }
+export const LIQTiedHouseTypeCodes = {
+  Individual: 845280000,
+  LegalEntity: 845280001
+};
+
+export const LIQTiedHouseTypes = [
+  { name: 'Individual', value: LIQTiedHouseTypeCodes.Individual },
+  { name: 'Legal Entity', value: LIQTiedHouseTypeCodes.LegalEntity }
 ];
 
 export const RelationshipTypes = [
