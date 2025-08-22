@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 /**
@@ -14,9 +14,18 @@ import { FormGroup } from '@angular/forms';
 })
 export class LegalEntityReviewTiedHouseComponent {
   @Input() disabled = false;
-  @Output() showTiedHouseConnections: EventEmitter<boolean> = new EventEmitter<boolean>();
+  /**
+   * Emits an event when the user indicates whether they have tied house changes to declare.
+   *
+   * @type {EventEmitter<boolean>}
+   */
+  @Output() hasTiedHouseChangesToDeclareEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   form: FormGroup;
 
-  hasTiedHouseChangesToDeclare = false;
+  /**
+   * Whether or not the user has tied house changes to declare.
+   * Default to `null` so the user has to select either `Yes` or `No`.
+   */
+  hasTiedHouseChangesToDeclare = null;
 }
