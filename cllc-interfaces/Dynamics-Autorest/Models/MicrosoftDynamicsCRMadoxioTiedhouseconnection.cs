@@ -514,7 +514,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string AdoxioMiddlename { get; set; }
 
         [JsonProperty(PropertyName = "adoxio_liqtiedhousetype")]
-        public int AdoxioLIQTiedHouseType { get; set; }
+        public int? AdoxioLIQTiedHouseType { get; set; }
 
         [JsonProperty(PropertyName = "_adoxio_licensee_value")]
         public string _adoxioLicenseeValue { get; set; }

@@ -63,7 +63,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string ApplicationId { get; set; }
         public string AccountId { get; set; }
 
-        public int LIQTiedHouseType { get; set; }
+        public int? LIQTiedHouseType { get; set; }
 
         public DateTimeOffset? DateOfBirth { get; set; }
 

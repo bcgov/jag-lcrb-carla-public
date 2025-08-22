@@ -57,7 +57,7 @@ export class TiedHouseConnection {
   /**
    * The type of the liquor tied house connections (i.e. `Individual` or `Legal Entity`)
    */
-  liqTiedHouseType: number;
+  liqTiedHouseType: number | null;
   /**
    * The date of birth of the individual (if type is `Individual`).
    */
