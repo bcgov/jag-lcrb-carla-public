@@ -304,7 +304,7 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnChang
    * @param {string} fieldName
    * @return {*}  {boolean}
    */
-  isValidOrNotTouched(fieldName: string): boolean {
+  _isValidOrNotTouched(fieldName: string): boolean {
     if (this.isTiedHouseReadOnly) {
       // Mark form fields as valid, if the form is in a read-only state.
       return true;
