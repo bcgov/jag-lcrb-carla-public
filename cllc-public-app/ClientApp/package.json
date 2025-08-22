@@ -13,10 +13,10 @@
     "build:ssr": "npm run build -- --app=ssr --output-hashing=media",
     "test": "ng test --watch=false",
     "test-headless": "ng test --watch=false --browsers=ChromeHeadlessNoSandbox",
-    "lint": "eslint src/ --ext .jsx,.js,.ts,.tsx",
+    "lint": "eslint . --ext .jsx,.js,.ts,.tsx",
     "lint-fix": "npm run lint -- --fix",
-    "format": "prettier --loglevel=warn --check \"./src/**/*.{js,jsx,ts,tsx,html,css,scss}\"",
-    "format-fix": "prettier --loglevel=warn --write \"./src/**/*.{js,jsx,ts,tsx,json,html,css,scss}\"",
+    "format": "prettier --loglevel=warn --check \"./**/*.{js,jsx,ts,tsx,,json,html,css,scss}\"",
+    "format-fix": "prettier --loglevel=warn --write \"./**/*.{js,jsx,ts,tsx,json,html,css,scss}\"",
     "e2e": "ng e2e"
   },
   "engine": {

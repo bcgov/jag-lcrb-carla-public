@@ -1,0 +1,15 @@
+# CSharpier configuration file
+# See: https://csharpier.com/docs/Configuration
+
+# Print width - line length that the printer will wrap on
+printWidth: 120
+
+# Indentation
+useTabs: false
+tabWidth: 2
+
+# End of line
+endOfLine: lf
+
+# Include generated files
+includeGenerated: false
