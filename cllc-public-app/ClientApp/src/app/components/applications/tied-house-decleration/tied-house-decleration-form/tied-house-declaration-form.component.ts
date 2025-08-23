@@ -4,10 +4,11 @@ import { formatDate } from '@components/applications/tied-house-decleration/tide
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import {
   BusinessTypes,
+  LIQTiedHouseTypeCodes,
+  LIQTiedHouseTypes,
   RelationshipTypes,
   TiedHouseConnection,
   TiedHouseStatusCode,
-  TiedHouseTypes,
   TiedHouseViewMode
 } from '@models/tied-house-connection.model';
 import { FormBase } from '@shared/form-base';
@@ -42,7 +43,8 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
 
   faTrash = faTrash;
 
-  tiedHouseTypes = TiedHouseTypes;
+  tiedHouseTypes = LIQTiedHouseTypes;
+  LIQTiedHouseTypeCodes = LIQTiedHouseTypeCodes;
   relationshipTypes = RelationshipTypes;
   businessTypes = BusinessTypes;
 
@@ -79,8 +81,8 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
       this.updateFieldValidators();
     });
 
-    this.form.get('isLegalEntity')?.valueChanges.subscribe(() => {
-      if (this.form.get('isLegalEntity').value === true) {
+    this.form.get('liqTiedHouseType')?.valueChanges.subscribe(() => {
+      if (this.form.get('liqTiedHouseType')?.value === LIQTiedHouseTypeCodes.LegalEntity) {
         // Clear "individual" form fields
         this.form.get('firstName')?.setValue('');
         this.form.get('middleName')?.setValue('');
@@ -120,7 +122,7 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
 
   private initForm() {
     this.form = this.fb.group({
-      isLegalEntity: [false, [Validators.required]],
+      liqTiedHouseType: [LIQTiedHouseTypeCodes.Individual, [Validators.required]],
       dateOfBirth: [''],
       firstName: [''],
       middleName: [''],
@@ -257,7 +259,7 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
    *
    */
   updateFieldValidators() {
-    if (this.form.get('isLegalEntity')?.value === true) {
+    if (this.form.get('liqTiedHouseType')?.value === LIQTiedHouseTypeCodes.LegalEntity) {
       this.updateLegalEntityFieldValidators();
     } else {
       this.updateIndividualFieldValidators();
