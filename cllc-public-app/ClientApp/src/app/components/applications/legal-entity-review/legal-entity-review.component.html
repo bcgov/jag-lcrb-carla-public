@@ -1,4 +1,4 @@
-<div [formGroup]="form" class="form-wrapper">
+<div *ngIf="hasLoadedData" [formGroup]="form" class="form-wrapper">
   <h1>Legal Entity Review</h1>
 
   <mat-progress-bar class="mt-1" *ngIf="!isDataLoaded" mode="indeterminate"></mat-progress-bar>
@@ -18,13 +18,15 @@
         "></app-legal-entity-review-tied-house>
     </section>
 
-    <section *ngIf="hasTiedHouseChangesToDeclare">
+    <section *ngIf="showTiedHouseDeclarationSection">
       <h3 class="blue-header">Tied House Declaration</h3>
       <div class="content-bottom">
         <app-tied-house-declaration
           #tiedHouseDeclaration
           [isReadOnly]="formDisabled"
-          [applicationId]="application.id"></app-tied-house-declaration>
+          [applicationId]="application.id"
+          [initialTiedHouseConnections]="initialTiedHouseConnections"
+          (onChangesEvent)="handleOnTiedHouseChangesEvent($event)"></app-tied-house-declaration>
       </div>
     </section>
 
