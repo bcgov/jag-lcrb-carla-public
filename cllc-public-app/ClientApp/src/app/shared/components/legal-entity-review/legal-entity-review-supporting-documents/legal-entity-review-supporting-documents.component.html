@@ -1,9 +1,6 @@
-<h3 class="blue-header">Add Supporting Information/Documents{{ required ? '' : ' (Optional)' }}</h3>
+<h3 class="blue-header">{{ sectionHeader }}</h3>
 <div class="content-bottom">
-  <p>
-    Use the upload box to provide the information requested in the letter above. Refer to your Legal Entity Review
-    letter for a full list of required information/documents to submit.
-  </p>
+  <p>{{ sectionText }}</p>
 
   <app-file-uploader
     *ngIf="application?.id"
