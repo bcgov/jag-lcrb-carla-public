@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatExpansionPanel } from '@angular/material/expansion';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -52,6 +52,12 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
    * @type {boolean}
    */
   @Input() isReadOnly?: boolean = false;
+
+  /**
+   * Emits the current list of tied house connections whenever it changes.
+   * Changes include adding/removing records or updates to existing records.
+   */
+  @Output() onChangesEvent = new EventEmitter<TiedHouseConnection[]>();
 
   @ViewChildren('tiedHouseForm') tiedHouseForms!: QueryList<TiedHouseDeclarationFormComponent>;
   @ViewChildren('panel') panels!: QueryList<MatExpansionPanel>;
@@ -133,6 +139,7 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
     });
 
     this.updateGroupedTiedHouseDeclarations();
+    this.onChangesEvent.emit(this.tiedHouseDeclarations);
   }
 
   /**
@@ -146,6 +153,7 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
 
     this.tiedHouseDeclarations.push(newTiedHouseDeclaration);
     this.updateGroupedTiedHouseDeclarations();
+    this.onChangesEvent.emit(this.tiedHouseDeclarations);
 
     this.openPanel();
   }
@@ -176,6 +184,7 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
 
     this.tiedHouseDeclarations.push(newTiedHouseDeclaration);
     this.updateGroupedTiedHouseDeclarations();
+    this.onChangesEvent.emit(this.tiedHouseDeclarations);
 
     this.openPanel(groupedTiedHouseDeclarationsIndex);
   }
@@ -277,6 +286,7 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
     if (!declaration.id) {
       this.tiedHouseDeclarations = this.tiedHouseDeclarations.filter((th) => th != declaration);
       this.updateGroupedTiedHouseDeclarations();
+      this.onChangesEvent.emit(this.tiedHouseDeclarations);
     } else {
       this.matDialog.open(GenericConfirmationDialogComponent, {
         disableClose: true,
@@ -292,12 +302,14 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
               declaration.viewMode = TiedHouseViewMode.existing;
               declaration.markedForRemoval = true;
               this.submitTiedHouseDeclarationChange(declaration, accordionIndex);
+              this.onChangesEvent.emit(this.tiedHouseDeclarations);
             }
             //else declaration is not an existing declaration but has been saved to dynamics so hide and call api to remove declaration from dynamics
             else {
               declaration.viewMode = TiedHouseViewMode.hidden;
               declaration.markedForRemoval = true;
               this.submitTiedHouseDeclarationChange(declaration, accordionIndex);
+              this.onChangesEvent.emit(this.tiedHouseDeclarations);
             }
           }
         }
@@ -329,6 +341,7 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
           declaration.statusCode = TiedHouseStatusCode.new;
           declaration.markedForRemoval = true;
           this.submitTiedHouseDeclarationChange(declaration, groupIndex);
+          this.onChangesEvent.emit(this.tiedHouseDeclarations);
         }
       }
     });

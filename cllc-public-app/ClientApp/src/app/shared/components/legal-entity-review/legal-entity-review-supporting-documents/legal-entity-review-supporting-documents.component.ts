@@ -22,7 +22,22 @@ export class LegalEntityReviewSupportingDocumentsComponent {
 
   form: FormGroup;
 
+  readonly requiredHeader = 'Add Required Information/Documents';
+  readonly optionalHeader = 'Add Supporting Information/Documents (optional)';
+
+  readonly requiredText =
+    'Use the upload box to provide the information requested in the letter above. Refer to your Legal Entity Review letter for a full list of required information/documents to submit.';
+  readonly optionalText = 'Use the upload box to provide any supporting information/documents.';
+
   onUploadedFileCount(event: number) {
     this.onUploadedFileCountEvent.emit(event);
+  }
+
+  get sectionHeader(): string {
+    return this.required ? this.requiredHeader : this.optionalHeader;
+  }
+
+  get sectionText(): string {
+    return this.required ? this.requiredText : this.optionalText;
   }
 }

@@ -69,6 +69,11 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnChang
    */
   initialTiedHouseConnections: TiedHouseConnection[] = [];
 
+  /**
+   * Indicates whether the user has any tied house connections.
+   */
+  hasTiedHouseConnections: boolean = false;
+
   form: FormGroup;
 
   get accountId(): string | undefined {
@@ -79,6 +84,9 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnChang
     return this.application?.id;
   }
 
+  /**
+   * Indicates whether the required page data has been loaded.
+   */
   hasLoadedData = false;
 
   destroy$ = new Subject<void>();
@@ -186,6 +194,9 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnChang
         next: ({ tiedHouseDataForApplication }) => {
           this.initialTiedHouseConnections = tiedHouseDataForApplication;
 
+          this.hasTiedHouseConnections =
+            this.initialTiedHouseConnections && this.initialTiedHouseConnections.length > 0;
+
           this.hasLoadedData = true;
         },
         error: (error) => {
@@ -224,13 +235,13 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnChang
       return true;
     }
 
-    if (!this.form) {
-      return false;
+    if (this.hasTiedHouseConnections) {
+      // Always show the section if the user has any tied house connections
+      return true;
     }
 
-    if (this.initialTiedHouseConnections && this.initialTiedHouseConnections.length > 0) {
-      // Show the section if the user has any existing Tied House connections
-      return true;
+    if (!this.form) {
+      return false;
     }
 
     if (
@@ -283,6 +294,15 @@ export class ConnectionToOtherLiquorLicencesComponent implements OnInit, OnChang
     }
 
     return false;
+  }
+
+  /**
+   * Handles changes emitted from the tied house declarations component.
+   *
+   * @param {TiedHouseConnection[]} tiedHouseConnections
+   */
+  handleOnTiedHouseChangesEvent(tiedHouseConnections: TiedHouseConnection[]): void {
+    this.hasTiedHouseConnections = tiedHouseConnections && tiedHouseConnections.length > 0;
   }
 
   /**
