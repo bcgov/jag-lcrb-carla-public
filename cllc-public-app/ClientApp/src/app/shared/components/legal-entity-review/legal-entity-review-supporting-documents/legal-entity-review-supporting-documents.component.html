@@ -4,14 +4,14 @@
 
   <app-file-uploader
     *ngIf="application?.id"
-    documentType="NOA"
+    documentType="LER"
     fileTypes="FILE MUST BE IN PDF FORMAT."
     [multipleFiles]="true"
     entityName="application"
     [extensions]="['pdf']"
     (numberOfUploadedFiles)="onUploadedFileCount($event)"
     [entityId]="application.id"
-    [uploadHeader]="'TO UPLOAD NOTICE OF ARTICLES, DRAG FILES HERE OR'"
+    [uploadHeader]="'TO UPLOAD SUPPORTING INFORMATION/DOCUMENTS, DRAG FILES HERE OR'"
     [disableUploads]="disabled"
     [enableFileDeletion]="!disabled"></app-file-uploader>
 </div>
