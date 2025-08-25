@@ -482,7 +482,7 @@
                   "></app-connection-to-other-liquor-licences>
               </div>
 
-              <div *ngIf="!isFormValid && form.touched" class="error-summary mt-3">
+              <div *ngIf="!_isFormValid && form.touched" class="error-summary mt-3">
                 <div *ngIf="!validationMessages?.length">
                   <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px"></fa-icon>
                   <span>Some required fields have not been completed</span>

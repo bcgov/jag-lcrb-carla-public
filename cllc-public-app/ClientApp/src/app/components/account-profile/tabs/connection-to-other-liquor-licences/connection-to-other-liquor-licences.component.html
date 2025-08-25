@@ -10,7 +10,7 @@
             <app-field
               id="ownership-or-control-label"
               label="Do you or any of your directors, officers, or shareholders have any amount of ownership, interest, or control in another B.C. liquor licence?"
-              [valid]="isValidOrNotTouched('hasLiquorTiedHouseOwnershipOrControl')"
+              [valid]="_isValidOrNotTouched('hasLiquorTiedHouseOwnershipOrControl')"
               [showChevrons]="false"
               [required]="true"
               [isFullWidth]="true"
@@ -30,7 +30,7 @@
             <app-field
               id="third-party-associations-label"
               label="Do you or any of your directors, officers, or shareholders have any association with a third party operator of another liquor licence in B.C.?"
-              [valid]="isValidOrNotTouched('hasLiquorTiedHouseThirdPartyAssociations')"
+              [valid]="_isValidOrNotTouched('hasLiquorTiedHouseThirdPartyAssociations')"
               [showChevrons]="false"
               [required]="true"
               [isFullWidth]="true"
@@ -50,7 +50,7 @@
             <app-field
               id="has-immediate-family-member-involvement-label"
               label="Do you or any of your director's, officer's, or shareholder's immediate family member (spouse, parent, sibling, or child) have any amount of ownership, interest, or control in another B.C. liquor licence?"
-              [valid]="isValidOrNotTouched('hasLiquorTiedHouseFamilyMemberInvolvement')"
+              [valid]="_isValidOrNotTouched('hasLiquorTiedHouseFamilyMemberInvolvement')"
               [showChevrons]="false"
               [required]="true"
               [isFullWidth]="true"

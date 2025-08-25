@@ -35,7 +35,7 @@ import { TiedHouseConnectionsDataService } from '@services/tied-house-connection
 import { UserDataService } from '@services/user-data.service';
 import { GenericMessageDialogComponent } from '@shared/components/dialog/generic-message-dialog/generic-message-dialog.component';
 import { FormBase } from '@shared/form-base';
-import { isFormValidOrNotTouched } from '@shared/form-utils';
+import { isFormValid } from '@shared/form-utils';
 import { endOfToday } from 'date-fns';
 import { combineLatest, forkJoin, Observable, of, Subscription } from 'rxjs';
 import { catchError, filter, map, switchMap, takeWhile } from 'rxjs/operators';
@@ -616,11 +616,11 @@ export class AccountProfileComponent extends FormBase implements OnInit {
    * @readonly
    * @type {boolean} `true` if the form is valid or disabled, `false` otherwise.
    */
-  get isFormValid(): boolean {
+  get _isFormValid(): boolean {
     return (
-      isFormValidOrNotTouched(this.form) &&
-      isFormValidOrNotTouched(this.connectionToProducersComponent?.form) &&
-      isFormValidOrNotTouched(this.connectionToOtherLiquorLicencesComponent?.form)
+      isFormValid(this.form) &&
+      isFormValid(this.connectionToProducersComponent?.form) &&
+      isFormValid(this.connectionToOtherLiquorLicencesComponent?.form)
     );
   }
 
@@ -635,7 +635,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
       route = '/sep/dashboard';
     }
 
-    if (!this.isFormValid) {
+    if (!this._isFormValid) {
       this.markAsTouched();
 
       this.validationMessages = this.getFormValidationErrorMessages();
@@ -687,16 +687,16 @@ export class AccountProfileComponent extends FormBase implements OnInit {
     this.connectionToOtherLiquorLicencesComponent?.form?.markAllAsTouched();
 
     const businessProfileControls = (this.form.get('businessProfile') as FormGroup).controls;
-    for (const c in businessProfileControls) {
-      if (typeof businessProfileControls[c].markAsTouched === 'function') {
-        businessProfileControls[c].markAsTouched();
+    for (const businessProfileControl in businessProfileControls) {
+      if (typeof businessProfileControls[businessProfileControl].markAsTouched === 'function') {
+        businessProfileControls[businessProfileControl].markAsTouched();
       }
     }
 
     const contactControls = (this.form.get('contact') as FormGroup).controls;
-    for (const c in contactControls) {
-      if (typeof contactControls[c].markAsTouched === 'function') {
-        contactControls[c].markAsTouched();
+    for (const contactControl in contactControls) {
+      if (typeof contactControls[contactControl].markAsTouched === 'function') {
+        contactControls[contactControl].markAsTouched();
       }
     }
   }
