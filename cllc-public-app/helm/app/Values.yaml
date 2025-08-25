@@ -1,0 +1,36 @@
+image:
+  repository: ghcr.io/your-org/cllc-web
+  tag: "sha-abcdef"
+  pullPolicy: IfNotPresent
+imagePullSecrets: []
+
+replicaCount: 2
+
+service:
+  port: 8080
+  type: ClusterIP
+
+route:
+  enabled: true
+  host: lcrb.dev.example.gov.bc.ca
+  path: /lcrb
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+
+# If your Angular app calls the API, expose env var via window.__env or JSON:
+frontendEnv:
+  API_BASE_URL: "https://api.dev.example.gov.bc.ca"  # you can inject via a ConfigMap
+
+resources:
+  requests: { cpu: "50m", memory: "64Mi" }
+  limits:   { cpu: "250m", memory: "256Mi" }
+
+securityContext:
+  runAsNonRoot: true
+  allowPrivilegeEscalation: false
+
+nginx:
+  basePath: /lcrb
+  # Optional: caching for static assets
+  cacheStatic: true
