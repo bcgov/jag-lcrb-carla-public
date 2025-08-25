@@ -71,7 +71,8 @@
             [accountId]="accountId"
             [applicationId]="applicationId"
             [initialTiedHouseConnections]="initialTiedHouseConnections"
-            [isReadOnly]="isTiedHouseReadOnly"></app-tied-house-declaration>
+            [isReadOnly]="isTiedHouseReadOnly"
+            (onChangesEvent)="handleOnTiedHouseChangesEvent($event)"></app-tied-house-declaration>
         </section>
       </div>
     </section>

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -9,12 +9,14 @@ import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { Account } from '@models/account.model';
 import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
 import { Application } from '@models/application.model';
-import { TiedHouseViewMode } from '@models/tied-house-connection.model';
+import { TiedHouseConnection, TiedHouseViewMode } from '@models/tied-house-connection.model';
 import { Store } from '@ngrx/store';
 import { ApplicationDataService } from '@services/application-data.service';
+import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
+import { GenericMessageDialogComponent } from '@shared/components/dialog/generic-message-dialog/generic-message-dialog.component';
 import { FormBase } from '@shared/form-base';
-import { Observable, of } from 'rxjs';
-import { catchError, filter, mergeMap, takeWhile } from 'rxjs/operators';
+import { forkJoin, Observable, of, Subject } from 'rxjs';
+import { catchError, filter, mergeMap, takeUntil, takeWhile } from 'rxjs/operators';
 import { TiedHouseDeclarationComponent } from '../tied-house-decleration/tied-house-declaration.component';
 
 /**
@@ -28,13 +30,14 @@ import { TiedHouseDeclarationComponent } from '../tied-house-decleration/tied-ho
  * @class LegalEntityReviewComponent
  * @extends {FormBase}
  * @implements {OnInit}
+ * @implements {OnDestroy}
  */
 @Component({
   selector: 'app-legal-entity-review',
   templateUrl: './legal-entity-review.component.html',
   styleUrls: ['./legal-entity-review.component.scss']
 })
-export class LegalEntityReviewComponent extends FormBase implements OnInit {
+export class LegalEntityReviewComponent extends FormBase implements OnInit, OnDestroy {
   @ViewChild('tiedHouseDeclaration')
   tiedHouseDeclaration: TiedHouseDeclarationComponent;
 
@@ -64,11 +67,25 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
    * The count of uploaded legal entity review supporting documents.
    */
   uploadedLegalEntityReviewSupportingDocuments: number = 0;
+  /**
+   * The initial tied house data to populate the tied house declarations component with.
+   */
+  initialTiedHouseConnections: TiedHouseConnection[] = [];
+  /**
+   * Indicates whether the user has any tied house connections.
+   */
+  hasTiedHouseConnections: boolean = false;
+  /**
+   * Indicates whether the required page data has been loaded.
+   */
+  hasLoadedData: boolean = false;
 
   faQuestionCircle = faQuestionCircle;
   faIdCard = faIdCard;
   faSave = faSave;
   faTrashAlt = faTrashAlt;
+
+  destroy$ = new Subject<void>();
 
   get hasLiquor(): boolean {
     return this.liquorLicences.length > 0;
@@ -80,6 +97,7 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
 
   constructor(
     private applicationDataService: ApplicationDataService,
+    private tiedHouseService: TiedHouseConnectionsDataService,
     private route: ActivatedRoute,
     private router: Router,
     private snackBar: MatSnackBar,
@@ -124,9 +142,34 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
    * @private
    */
   private loadData() {
-    const sub = this.applicationDataService.getLegalEntityReviewData(this.applicationId).subscribe((data) => {
-      this.setFormData(data);
-    });
+    const sub = forkJoin({
+      applicationData: this.applicationDataService.getLegalEntityReviewData(this.applicationId),
+      tiedHouseDataForApplication: this.tiedHouseService.GetLiquorTiedHouseConnectionsForApplication(this.applicationId)
+    })
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: ({ applicationData, tiedHouseDataForApplication }) => {
+          this.setFormData(applicationData);
+
+          this.initialTiedHouseConnections = tiedHouseDataForApplication;
+
+          this.hasTiedHouseConnections =
+            this.initialTiedHouseConnections && this.initialTiedHouseConnections.length > 0;
+
+          this.hasLoadedData = true;
+        },
+        error: (error) => {
+          console.error('Error loading Liquor Tied House data', error);
+          this.dialog.open(GenericMessageDialogComponent, {
+            data: {
+              title: 'Error Loading Application Data',
+              message:
+                'Failed to load Application data. Please try again. If the problem persists, please contact support.',
+              closeButtonText: 'Close'
+            }
+          });
+        }
+      });
 
     this.subscriptionList.push(sub);
   }
@@ -269,12 +312,31 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
   }
 
   /**
+   * Handles changes emitted from the tied house declarations component.
+   *
+   * @param {TiedHouseConnection[]} tiedHouseConnections
+   */
+  handleOnTiedHouseChangesEvent(tiedHouseConnections: TiedHouseConnection[]): void {
+    this.hasTiedHouseConnections = tiedHouseConnections && tiedHouseConnections.length > 0;
+  }
+
+  /**
+   * Indicates whether the tied house declaration section should be shown.
+   *
+   * @readonly
+   * @type {boolean}
+   */
+  get showTiedHouseDeclarationSection(): boolean {
+    return this.hasTiedHouseChangesToDeclare || this.hasTiedHouseConnections;
+  }
+
+  /**
    * Checks if the tied house declarations are valid.
    *
    * @return {*}  {boolean} `true` if valid, `false` otherwise.
    */
   areTiedHouseDeclarationsValid(): boolean {
-    if (!this.hasTiedHouseChangesToDeclare || !this.tiedHouseDeclaration) {
+    if (!this.tiedHouseDeclaration) {
       // If the tied house section is not visible, or the component is not initialized, we assume it's valid.
       return true;
     }
@@ -291,5 +353,10 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
     }
 
     return true;
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
