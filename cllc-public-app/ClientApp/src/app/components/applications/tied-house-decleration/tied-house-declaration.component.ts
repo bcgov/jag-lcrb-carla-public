@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { formatDate } from '@components/applications/tied-house-decleration/tide-house-utils';
 import { faPlusSquare } from '@fortawesome/free-regular-svg-icons';
 import {
+  LIQTiedHouseTypeCodes,
   RelationshipTypes,
   TiedHouseConnection,
   TiedHouseStatusCode,
@@ -140,7 +141,7 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
    */
   addNewTiedHouse() {
     var newTiedHouseDeclaration = new TiedHouseConnection();
-    newTiedHouseDeclaration.isLegalEntity = false;
+    newTiedHouseDeclaration.liqTiedHouseType = LIQTiedHouseTypeCodes.Individual;
     newTiedHouseDeclaration.viewMode = TiedHouseViewMode.new;
 
     this.tiedHouseDeclarations.push(newTiedHouseDeclaration);
@@ -158,7 +159,7 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
    */
   addNewTiedHouseRelationship(relatedDeclaration: TiedHouseConnection, groupedTiedHouseDeclarationsIndex: number) {
     var newTiedHouseDeclaration = new TiedHouseConnection();
-    newTiedHouseDeclaration.isLegalEntity = false;
+    newTiedHouseDeclaration.liqTiedHouseType = LIQTiedHouseTypeCodes.Individual;
     newTiedHouseDeclaration.viewMode = TiedHouseViewMode.addNewRelationship;
 
     if (relatedDeclaration) {
@@ -167,7 +168,7 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
       newTiedHouseDeclaration.lastName = relatedDeclaration.lastName;
       newTiedHouseDeclaration.middleName = relatedDeclaration.middleName;
       newTiedHouseDeclaration.dateOfBirth = relatedDeclaration.dateOfBirth;
-      newTiedHouseDeclaration.isLegalEntity = relatedDeclaration.isLegalEntity;
+      newTiedHouseDeclaration.liqTiedHouseType = relatedDeclaration.liqTiedHouseType;
       newTiedHouseDeclaration.legalEntityName = relatedDeclaration.legalEntityName;
       newTiedHouseDeclaration.relationshipToLicence = relatedDeclaration.relationshipToLicence;
       newTiedHouseDeclaration.businessType = relatedDeclaration.businessType;
@@ -422,7 +423,9 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
       return NEW_DECLARATION_KEY;
     }
 
-    return `${declaration.firstName} ${declaration.middleName || ''} ${declaration.lastName} - ${formatDate(declaration.dateOfBirth)}`;
+    return `${declaration.firstName} ${declaration.middleName || ''} ${declaration.lastName} - ${formatDate(
+      declaration.dateOfBirth
+    )}`;
   }
 
   /**
@@ -432,7 +435,7 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
    * @return {*}  {string}
    */
   getGroupedTiedHouseKey(declaration: TiedHouseConnection): string {
-    if (declaration.isLegalEntity) {
+    if (declaration.liqTiedHouseType === LIQTiedHouseTypeCodes.LegalEntity) {
       return this.getLegalEntityKey(declaration);
     }
 
@@ -446,20 +449,17 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
   updateGroupedTiedHouseDeclarations() {
     const grouped = this.tiedHouseDeclarations
       .filter((item) => item.viewMode != TiedHouseViewMode.hidden)
-      ?.reduce(
-        (acc, declaration) => {
-          var key = this.getGroupedTiedHouseKey(declaration);
+      ?.reduce((acc, declaration) => {
+        var key = this.getGroupedTiedHouseKey(declaration);
 
-          if (!acc[key]) {
-            acc[key] = [];
-          }
+        if (!acc[key]) {
+          acc[key] = [];
+        }
 
-          acc[key].push(declaration);
+        acc[key].push(declaration);
 
-          return acc;
-        },
-        {} as Record<string, TiedHouseConnection[]>
-      );
+        return acc;
+      }, {} as Record<string, TiedHouseConnection[]>);
 
     this.groupedTiedHouseDeclarations = Object.entries(grouped);
   }
@@ -520,9 +520,16 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
   }
 
   showUnsavedConnectionError(thIndex: number, panel: MatExpansionPanel) {
-    var unsavedStatuses: number[] = [TiedHouseViewMode.addNewRelationship, TiedHouseViewMode.new, TiedHouseViewMode.editExistingRecord];
+    var unsavedStatuses: number[] = [
+      TiedHouseViewMode.addNewRelationship,
+      TiedHouseViewMode.new,
+      TiedHouseViewMode.editExistingRecord
+    ];
     return (
-      !panel.expanded && this.groupedTiedHouseDeclarations[thIndex][1].find((th) =>  unsavedStatuses.find(s => s == th.viewMode) != undefined) != undefined
+      !panel.expanded &&
+      this.groupedTiedHouseDeclarations[thIndex][1].find(
+        (th) => unsavedStatuses.find((s) => s == th.viewMode) != undefined
+      ) != undefined
     );
   }
 

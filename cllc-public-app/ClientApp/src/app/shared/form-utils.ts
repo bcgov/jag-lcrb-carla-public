@@ -30,9 +30,20 @@ export function isValidOrNotTouched(form: FormGroup, field: string): boolean {
  * @return {*}  {boolean}
  */
 export function isFormValidOrNotTouched(form: FormGroup): boolean {
+  return isFormValid(form) || !form.touched;
+}
+
+/**
+ * Returns `true` if the form is disabled or valid.
+ *
+ * @export
+ * @param {FormGroup} form
+ * @return {*}  {boolean}
+ */
+export function isFormValid(form: FormGroup): boolean {
   if (!form) {
     return false;
   }
 
-  return !!(form.disabled || form.valid || !form.touched);
+  return !!(form.disabled || form.valid);
 }

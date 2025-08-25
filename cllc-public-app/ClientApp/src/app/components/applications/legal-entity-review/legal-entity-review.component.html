@@ -13,18 +13,27 @@
     <section>
       <app-legal-entity-review-tied-house
         [disabled]="formDisabled"
-        (showTiedHouseConnections)="showTiedHouseConnections($event)"></app-legal-entity-review-tied-house>
+        (hasTiedHouseChangesToDeclareEvent)="
+          handleHasTiedHouseChangesToDeclareEvent($event)
+        "></app-legal-entity-review-tied-house>
     </section>
 
-    <section *ngIf="isTiedHouseVisible">
+    <section *ngIf="hasTiedHouseChangesToDeclare">
       <h3 class="blue-header">Tied House Declaration</h3>
       <div class="content-bottom">
-        <app-tied-house-declaration #tiedHouseDeclaration [isReadOnly]="formDisabled" [applicationId]="application.id"></app-tied-house-declaration>
+        <app-tied-house-declaration
+          #tiedHouseDeclaration
+          [isReadOnly]="formDisabled"
+          [applicationId]="application.id"></app-tied-house-declaration>
       </div>
     </section>
 
     <section>
-      <app-legal-entity-review-supporting-documents [disabled]="formDisabled" [application]="application">
+      <app-legal-entity-review-supporting-documents
+        [disabled]="formDisabled"
+        [application]="application"
+        [required]="!hasTiedHouseChangesToDeclare"
+        (onUploadedFileCountEvent)="uploadedLegalEntityReviewSupportingDocuments = $event">
       </app-legal-entity-review-supporting-documents>
     </section>
 

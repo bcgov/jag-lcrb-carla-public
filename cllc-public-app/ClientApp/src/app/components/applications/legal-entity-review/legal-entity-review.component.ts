@@ -12,7 +12,6 @@ import { Application } from '@models/application.model';
 import { TiedHouseViewMode } from '@models/tied-house-connection.model';
 import { Store } from '@ngrx/store';
 import { ApplicationDataService } from '@services/application-data.service';
-import { GenericConfirmationDialogComponent } from '@shared/components/dialog/generic-confirmation-dialog/generic-confirmation-dialog.component';
 import { FormBase } from '@shared/form-base';
 import { Observable, of } from 'rxjs';
 import { catchError, filter, mergeMap, takeWhile } from 'rxjs/operators';
@@ -38,7 +37,12 @@ import { TiedHouseDeclarationComponent } from '../tied-house-decleration/tied-ho
 export class LegalEntityReviewComponent extends FormBase implements OnInit {
   @ViewChild('tiedHouseDeclaration')
   tiedHouseDeclaration: TiedHouseDeclarationComponent;
-  isTiedHouseVisible: boolean = false;
+
+  /**
+   * Whether or not to show the Tied House changes declaration section.
+   * Default to `true` unless the user has explicitly said `No`.
+   */
+  hasTiedHouseChangesToDeclare: boolean = true;
 
   account: Account;
   application: Application;
@@ -55,6 +59,11 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
 
   form: FormGroup;
   formDisabled = false;
+
+  /**
+   * The count of uploaded legal entity review supporting documents.
+   */
+  uploadedLegalEntityReviewSupportingDocuments: number = 0;
 
   faQuestionCircle = faQuestionCircle;
   faIdCard = faIdCard;
@@ -115,11 +124,9 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
    * @private
    */
   private loadData() {
-    const sub = this.applicationDataService
-      .getLegalEntityReviewData(this.applicationId)
-      .subscribe((data) => {
-        this.setFormData(data);
-      });
+    const sub = this.applicationDataService.getLegalEntityReviewData(this.applicationId).subscribe((data) => {
+      this.setFormData(data);
+    });
 
     this.subscriptionList.push(sub);
   }
@@ -143,7 +150,7 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
 
     this.isDataLoaded = true;
 
-    if(this.application.applicationStatus !== 'Incomplete'){
+    if (this.application.applicationStatus !== 'Incomplete') {
       this.form.disable();
       this.formDisabled = true;
     }
@@ -183,10 +190,17 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
   private isValid(): boolean {
     this.showValidationMessages = false;
     this.validationMessages = this.listControlsWithErrors(this.form, this.getValidationErrorMap());
+
     let valid = this.form.disabled || this.form.valid;
 
+    // Invalid if hasTiedHouseChangesToDeclare is false AND uploadedLegalEntityReviewSupportingDocuments is equal to 0
+    if (!this.hasTiedHouseChangesToDeclare && this.uploadedLegalEntityReviewSupportingDocuments === 0) {
+      this.validationMessages.push('Please upload supporting documents.');
+      valid = false;
+    }
+
     if (!this.areTiedHouseDeclarationsValid()) {
-      this.validationMessages.push('Tide House Declaration has not been saved.');
+      this.validationMessages.push('Tied House Declaration has not been saved.');
       valid = false;
     }
 
@@ -247,10 +261,11 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
   /**
    * Toggles the visibility of the tied house connections section.
    *
-   * @param {boolean} showValue
+   * @param {boolean} hasTiedHouseChangesToDeclare
    */
-  showTiedHouseConnections(showValue: boolean) {
-    this.isTiedHouseVisible = showValue;
+  handleHasTiedHouseChangesToDeclareEvent(hasTiedHouseChangesToDeclare: boolean) {
+    // Default to true unless the user has explicitly said "No"
+    this.hasTiedHouseChangesToDeclare = hasTiedHouseChangesToDeclare ?? true;
   }
 
   /**
@@ -259,7 +274,7 @@ export class LegalEntityReviewComponent extends FormBase implements OnInit {
    * @return {*}  {boolean} `true` if valid, `false` otherwise.
    */
   areTiedHouseDeclarationsValid(): boolean {
-    if (!this.isTiedHouseVisible || !this.tiedHouseDeclaration) {
+    if (!this.hasTiedHouseChangesToDeclare || !this.tiedHouseDeclaration) {
       // If the tied house section is not visible, or the component is not initialized, we assume it's valid.
       return true;
     }
