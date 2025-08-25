@@ -1,0 +1,32 @@
+{
+  "version": "1.0.0",
+  "configurations": [
+    {
+      "name": "_attach_to_dotnet",
+      "type": "coreclr",
+      "request": "attach",
+      "processName": "cllc-public-app",
+      "presentation": {
+        "hidden": true
+      }
+    },
+    {
+      "name": "_attach_to_angular",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:5000/lcrb/",
+      "webRoot": "${workspaceFolder}/cllc-public-app/ClientApp",
+      "sourceMaps": true,
+      "trace": true,
+      "presentation": {
+        "hidden": true
+      }
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Debug: Dotnet & Angular",
+      "configurations": ["_attach_to_dotnet", "_attach_to_angular"]
+    }
+  ]
+}
