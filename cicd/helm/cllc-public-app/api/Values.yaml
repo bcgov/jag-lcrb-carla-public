@@ -1,0 +1,41 @@
+image:
+  repository: ghcr.io/your-org/cllc-api
+  tag: "sha-abcdef"          # set by CI
+  pullPolicy: IfNotPresent
+imagePullSecrets: []          # e.g., [{ name: ghcr-pull }]
+
+replicaCount: 2
+
+service:
+  port: 8080
+  type: ClusterIP
+
+route:
+  enabled: true               # OpenShift Route
+  host: api.dev.example.gov.bc.ca
+  path: /                     # API root
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+
+env:
+  - name: ASPNETCORE_ENVIRONMENT
+    value: "Production"
+  - name: BASE_PATH
+    value: "/lcrb"            # if your API is mounted behind a base path
+  # Add connection strings / secrets via Secret refs:
+  # - name: ConnectionStrings__Default
+  #   valueFrom:
+  #     secretKeyRef:
+  #       name: cllc-api-secrets
+  #       key: connstring
+
+resources:
+  requests: { cpu: "100m", memory: "256Mi" }
+  limits:   { cpu: "500m", memory: "512Mi" }
+
+# Security contexts that play nice with OpenShift random UID
+podSecurityContext: {}
+securityContext:
+  runAsNonRoot: true
+  allowPrivilegeEscalation: false

@@ -1,0 +1,58 @@
+name: Frontend Code Quality Check
+
+on:
+  pull_request:
+    branches: [develop, LCSD-7876]
+    paths:
+      - "cllc-public-app/ClientApp/**/*.ts"
+      - "cllc-public-app/ClientApp/**/*.tsx"
+      - "cllc-public-app/ClientApp/**/*.js"
+      - "cllc-public-app/ClientApp/**/*.jsx"
+      - "cllc-public-app/ClientApp/**/*.html"
+      - "cllc-public-app/ClientApp/**/*.css"
+      - "cllc-public-app/ClientApp/**/*.scss"
+      - "cllc-public-app/ClientApp/package.json"
+      - "cllc-public-app/ClientApp/.eslintrc.*"
+      - "cllc-public-app/ClientApp/.prettierrc*"
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  frontend-quality-check:
+    if: false
+    runs-on: ubuntu-latest
+    name: Check Frontend Code Quality
+
+    defaults:
+      run:
+        working-directory: cllc-public-app/ClientApp
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "16"
+          cache: "npm"
+          cache-dependency-path: cllc-public-app/ClientApp/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        id: eslint
+        run: npm run lint
+        continue-on-error: true
+
+      - name: Run Prettier check
+        id: prettier
+        run: npm run format
+        continue-on-error: true
+
+      - name: Fail if quality checks failed
+        if: steps.eslint.outcome == 'failure' || steps.prettier.outcome == 'failure'
+        run: exit 1

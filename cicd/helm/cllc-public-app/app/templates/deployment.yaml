@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "cllc-web.fullname" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels: {{- include "cllc-web.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels: {{- include "cllc-web.selectorLabels" . | nindent 8 }}
+    spec:
+      volumes:
+        - name: nginx-conf
+          configMap:
+            name: {{ include "cllc-web.fullname" . }}-nginx
+            items: [{ key: default.conf, path: default.conf }]
+      containers:
+        - name: web
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+          volumeMounts:
+            - name: nginx-conf
+              mountPath: /etc/nginx/conf.d/default.conf
+              subPath: default.conf
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}

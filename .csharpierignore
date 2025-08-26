@@ -1,0 +1,27 @@
+# CSharpier ignore patterns
+
+# Build outputs
+**/bin/**
+**/obj/**
+
+# Node modules and client app (TypeScript/JavaScript)
+**/node_modules/**
+**/ClientApp/**
+**/.angular
+
+# Generated files
+**/cllc-interfaces/Dynamics-Autorest
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDE
+**/.vs
+**/.vscode
+
+# Other files 
+**/*.md
+**/*.yml
+**/*.yaml
+**/Dockerfile

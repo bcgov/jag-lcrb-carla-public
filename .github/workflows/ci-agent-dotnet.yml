@@ -1,10 +1,9 @@
 name: ci-agent-dotnet
 on:
   push:
-
     branches:
       - develop
-      
+
     paths:
       - "/openshift/other-templates/agent-dotnet/**"
       - ".github/workflows/ci-agent-dotnet.yml"
@@ -24,7 +23,7 @@ jobs:
         run: echo "${{ secrets.OCP4_PASSWORD  }}" | docker login ${{ secrets.OCP4_REGISTRY }}/${{ secrets.OCP4_NAMESPACE }} -u ${{ secrets.OCP4_USERNAME }} --password-stdin
 
       - name: Pull image
-        run: docker pull $SOURCE_IMAGE_ID || true         
+        run: docker pull $SOURCE_IMAGE_ID || true
 
       - name: Build image
         working-directory: ./openshift/other-templates/agent-dotnet

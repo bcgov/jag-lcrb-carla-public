@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  # Option 1: Simple static nginx config (good for development)
+  cllc-public-app-simple:
+    build:
+      context: ../../../../
+      dockerfile: cicd/docker/cllc-public-app/app/Dockerfile
+    ports:
+      - "8080:8080"
+
+  # Option 2: Templated nginx config (good for production with different environments)
+  cllc-public-app-templated:
+    build:
+      context: ../../../../
+      dockerfile: cicd/docker/cllc-public-app/app/Dockerfile.templated
+    ports:
+      - "8081:8080"
+    environment:
+      - REAL_IP_FROM=10.0.0.0/8
+      - IP_FILTER_RULES=allow 10.0.0.0/8; deny all;
+      - HTTP_BASIC=auth_basic "Restricted"; auth_basic_user_file /tmp/.htpasswd;
+      # Add other environment variables as needed
+
+  # Option 3: Separate build and nginx services
+  # cllc-build:
+  #   build:
+  #     context: ../../../../
+  #     dockerfile: cicd/docker/cllc-public-app/app/Dockerfile.build
+  #     target: export
+  #   volumes:
+  #     - app-dist:/dist
+
+  # cllc-nginx:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile.nginx
+  #   ports:
+  #     - "8080:8080"
+  #   volumes:
+  #     - app-dist:/usr/share/nginx/html
+  #   depends_on:
+  #     - cllc-build
+
+# volumes:
+#   app-dist:

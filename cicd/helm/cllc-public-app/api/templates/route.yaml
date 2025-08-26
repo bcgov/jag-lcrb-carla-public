@@ -1,0 +1,13 @@
+{{- if .Values.route.enabled }}
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: {{ include "cllc-api.fullname" . }}
+spec:
+  host: {{ .Values.route.host }}
+  path: {{ .Values.route.path | default "/" }}
+  to: { kind: Service, name: {{ include "cllc-api.fullname" . }} }
+  port: { targetPort: http }
+  tls:
+    {{- toYaml .Values.route.tls | nindent 4 }}
+{{- end }}
