@@ -95,7 +95,7 @@ jobs:
 
       - name: Log into OpenShift registry
         run: |
-          echo "${{ secrets.OCP4_SANDBOX_PASSWORD }}" | docker login ${{ env.REGISTRY }}/${{ env.NAMESPACE }} -u ${{ secrets.OCP4_SANDBOX_USERNAME }} --password-stdin
+          echo "${{ secrets.OCP4_SANDBOX_PASSWORD }}" | docker login ${{ env.REGISTRY }} -u serviceaccount --password-stdin
 
       - name: Build API image
         working-directory: .
@@ -134,7 +134,7 @@ jobs:
 
       - name: Log into OpenShift registry
         run: |
-          echo "${{ secrets.OCP4_SANDBOX_PASSWORD }}" | docker login ${{ env.REGISTRY }}/${{ env.NAMESPACE }} -u ${{ secrets.OCP4_SANDBOX_USERNAME }} --password-stdin
+          echo "${{ secrets.OCP4_SANDBOX_PASSWORD }}" | docker login ${{ env.REGISTRY }} -u serviceaccount --password-stdin
 
       - name: Set dockerfile path
         id: dockerfile
@@ -170,68 +170,3 @@ jobs:
           IMAGE_FULL_NAME="${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ env.APP_IMAGE_NAME }}${{ steps.dockerfile.outputs.suffix }}"
           docker tag $IMAGE_FULL_NAME:${{ needs.prepare.outputs.image_tag }} $IMAGE_FULL_NAME:latest
           docker push $IMAGE_FULL_NAME:latest
-
-  summary:
-    runs-on: ubuntu-latest
-    needs: [prepare, build-api, build-app]
-    if: always()
-    steps:
-      - name: Build Summary
-        run: |
-          echo "## 🏗️ Build Summary" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Image Tag:** \`${{ needs.prepare.outputs.image_tag }}\`" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### Built Images:" >> $GITHUB_STEP_SUMMARY
-
-          if [[ "${{ needs.prepare.outputs.should_build_api }}" == "true" ]]; then
-            if [[ "${{ needs.build-api.result }}" == "success" ]]; then
-              echo "✅ **API**: \`${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ env.API_IMAGE_NAME }}:${{ needs.prepare.outputs.image_tag }}\`" >> $GITHUB_STEP_SUMMARY
-            else
-              echo "❌ **API**: Build failed" >> $GITHUB_STEP_SUMMARY
-            fi
-          else
-            echo "⏭️ **API**: Skipped" >> $GITHUB_STEP_SUMMARY
-          fi
-
-          if [[ "${{ needs.prepare.outputs.should_build_app }}" == "true" ]]; then
-            if [[ "${{ needs.build-app.result }}" == "success" ]]; then
-              echo "✅ **App (Simple)**: \`${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ env.APP_IMAGE_NAME }}:${{ needs.prepare.outputs.image_tag }}\`" >> $GITHUB_STEP_SUMMARY
-              echo "✅ **App (Templated)**: \`${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ env.APP_IMAGE_NAME }}-templated:${{ needs.prepare.outputs.image_tag }}\`" >> $GITHUB_STEP_SUMMARY
-            else
-              echo "❌ **App**: Build failed" >> $GITHUB_STEP_SUMMARY
-            fi
-          else
-            echo "⏭️ **App**: Skipped" >> $GITHUB_STEP_SUMMARY
-          fi
-
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### OpenShift Deployment" >> $GITHUB_STEP_SUMMARY
-          echo "Use these images in your OpenShift deployment configurations or Helm charts." >> $GITHUB_STEP_SUMMARY
-
-      - name: Comment on PR (if applicable)
-        if: github.event_name == 'pull_request' && (needs.build-api.result == 'success' || needs.build-app.result == 'success')
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const images = [];
-
-            if ('${{ needs.prepare.outputs.should_build_api }}' === 'true' && '${{ needs.build-api.result }}' === 'success') {
-              images.push(`🔧 **API**: \`${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ env.API_IMAGE_NAME }}:${{ needs.prepare.outputs.image_tag }}\``);
-            }
-
-            if ('${{ needs.prepare.outputs.should_build_app }}' === 'true' && '${{ needs.build-app.result }}' === 'success') {
-              images.push(`🌐 **App (Simple)**: \`${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ env.APP_IMAGE_NAME }}:${{ needs.prepare.outputs.image_tag }}\``);
-              images.push(`🌐 **App (Templated)**: \`${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ env.APP_IMAGE_NAME }}-templated:${{ needs.prepare.outputs.image_tag }}\``);
-            }
-
-            if (images.length > 0) {
-              const body = `## 🚀 Images Built Successfully\n\n${images.join('\n')}\n\nThese images are now available in the OpenShift registry and ready for deployment.`;
-              
-              github.rest.issues.createComment({
-                issue_number: context.issue.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                body: body
-              });
-            }
