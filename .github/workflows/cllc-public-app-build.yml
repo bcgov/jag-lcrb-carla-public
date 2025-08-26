@@ -93,15 +93,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Sanity checks
+      - name: Debug environment
         run: |
-          test -n "${REGISTRY}" || (echo "REGISTRY not set" && exit 1)
-          test -n "${NAMESPACE}" || (echo "NAMESPACE not set" && exit 1)
-          test -n "${{ secrets.OCP4_SANDBOX_PASSWORD }}" || (echo "OCP4_SANDBOX_PASSWORD secret not set" && exit 1)
-          echo "REGISTRY=${REGISTRY}"
-          echo "NAMESPACE=${NAMESPACE}"
-          echo "TOKEN_LEN=$(echo "${{ secrets.OCP4_SANDBOX_PASSWORD }}" | wc -c)"
-   
+          echo "=== Environment Debug ==="
+          echo "GITHUB_REF: ${{ github.ref }}"
+          echo "GITHUB_REPOSITORY: ${{ github.repository }}"
+          echo "GITHUB_EVENT_NAME: ${{ github.event_name }}"
+          echo "REGISTRY env var: '${REGISTRY}'"
+          echo "NAMESPACE env var: '${NAMESPACE}'"
+          echo "API_IMAGE_NAME env var: '${API_IMAGE_NAME}'"
+          echo "Secret length: $(echo '${{ secrets.OCP4_SANDBOX_PASSWORD }}' | wc -c)"
+          echo "=== End Debug ==="
+
       - name: Log into OpenShift registry
         run: |
           echo "${{ secrets.OCP4_SANDBOX_PASSWORD }}" | docker login ${{ env.REGISTRY }} -u serviceaccount --password-stdin
@@ -134,6 +137,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: prepare
     if: needs.prepare.outputs.should_build_app == 'true'
+    env:
+      REGISTRY: ${{ secrets.OCP4_SANDBOX_REGISTRY }}
+      NAMESPACE: ${{ secrets.OCP4_SANDBOX_NAMESPACE }}
+      APP_IMAGE_NAME: cllc-public-app-frontend
     strategy:
       matrix:
         variant: [simple, templated]

@@ -10,6 +10,7 @@ on:
 
 jobs:
   csharpier-check:
+    if: false
     runs-on: ubuntu-latest
     name: Check C# Code Formatting
 

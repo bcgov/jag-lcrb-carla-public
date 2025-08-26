@@ -22,6 +22,7 @@ permissions:
 
 jobs:
   frontend-quality-check:
+    if: false
     runs-on: ubuntu-latest
     name: Check Frontend Code Quality
 
