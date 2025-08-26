@@ -91,33 +91,18 @@ jobs:
     needs: prepare
     if: needs.prepare.outputs.should_build_api == 'true'
     steps:
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ secrets.OCP4_REGISTRY }}
+          username: ${{ secrets.OCP4_USERNAME }}
+          password: ${{ secrets.OCP4_PASSWORD }}
+
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Debug environment
-        run: |
-          echo "=== Environment Debug ==="
-          echo "GITHUB_REF: ${{ github.ref }}"
-          echo "GITHUB_REPOSITORY: ${{ github.repository }}"
-          echo "GITHUB_EVENT_NAME: ${{ github.event_name }}"
-          echo "REGISTRY env var: '${{ secrets.OCP4_SANDBOX_REGISTRY }}'"
-          echo "NAMESPACE env var: '${{ secrets.OCP4_SANDBOX_NAMESPACE }}'"
-          echo "API_IMAGE_NAME env var: '${API_IMAGE_NAME}'"
-          echo "Secret length: $(echo '${{ secrets.OCP4_SANDBOX_PASSWORD }}' | wc -c)"
-          echo "v2"
-          echo "=== End Debug ==="
-
-      - name: Debug login
-        run: |
-          echo "Registry: ${{ secrets.OCP4_SANDBOX_REGISTRY }}"
-          echo "Namespace: ${{ secrets.OCP4_SANDBOX_NAMESPACE }}"
-          echo "Login URL will be: ${{ secrets.OCP4_SANDBOX_REGISTRY }}/${{ secrets.OCP4_SANDBOX_NAMESPACE }}"
-          echo "Testing if we can reach registry..."
-          curl -s -o /dev/null -w "%{http_code}" "https://${{ secrets.OCP4_SANDBOX_REGISTRY }}/v2/" || echo "Registry not reachable via HTTPS"
-
-      - name: Log into OpenShift registry
-        run: |
-          echo "${{ secrets.OCP4_SANDBOX_PASSWORD }}" | docker login ${{ secrets.OCP4_SANDBOX_REGISTRY }}/${{ secrets.OCP4_SANDBOX_NAMESPACE }} -u ${{ secrets.OCP4_SANDBOX_USERNAME }} --password-stdin
 
       - name: Build API image
         working-directory: .
@@ -151,12 +136,18 @@ jobs:
       matrix:
         variant: [simple, templated]
     steps:
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ secrets.OCP4_REGISTRY }}
+          username: ${{ secrets.OCP4_USERNAME }}
+          password: ${{ secrets.OCP4_PASSWORD }}
+
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Log into OpenShift registry
-        run: |
-          echo "${{ secrets.OCP4_SANDBOX_PASSWORD }}" | docker login ${{ secrets.OCP4_SANDBOX_REGISTRY }}/${{ secrets.OCP4_SANDBOX_NAMESPACE }} -u ${{ secrets.OCP4_SANDBOX_USERNAME }} --password-stdin
 
       - name: Set dockerfile path
         id: dockerfile
