@@ -43,8 +43,6 @@ on:
           - "false"
 
 env:
-  REGISTRY: ${{ secrets.OCP4_SANDBOX_REGISTRY }}
-  NAMESPACE: ${{ secrets.OCP4_SANDBOX_NAMESPACE }}
   API_IMAGE_NAME: cllc-public-app-api
   APP_IMAGE_NAME: cllc-public-app-frontend
 
@@ -102,21 +100,29 @@ jobs:
           echo "GITHUB_REF: ${{ github.ref }}"
           echo "GITHUB_REPOSITORY: ${{ github.repository }}"
           echo "GITHUB_EVENT_NAME: ${{ github.event_name }}"
-          echo "REGISTRY env var: '${REGISTRY}'"
-          echo "NAMESPACE env var: '${NAMESPACE}'"
+          echo "REGISTRY env var: '${{ secrets.OCP4_SANDBOX_REGISTRY }}'"
+          echo "NAMESPACE env var: '${{ secrets.OCP4_SANDBOX_NAMESPACE }}'"
           echo "API_IMAGE_NAME env var: '${API_IMAGE_NAME}'"
           echo "Secret length: $(echo '${{ secrets.OCP4_SANDBOX_PASSWORD }}' | wc -c)"
           echo "v2"
           echo "=== End Debug ==="
 
+      - name: Debug login
+        run: |
+          echo "Registry: ${{ secrets.OCP4_SANDBOX_REGISTRY }}"
+          echo "Namespace: ${{ secrets.OCP4_SANDBOX_NAMESPACE }}"
+          echo "Login URL will be: ${{ secrets.OCP4_SANDBOX_REGISTRY }}/${{ secrets.OCP4_SANDBOX_NAMESPACE }}"
+          echo "Testing if we can reach registry..."
+          curl -s -o /dev/null -w "%{http_code}" "https://${{ secrets.OCP4_SANDBOX_REGISTRY }}/v2/" || echo "Registry not reachable via HTTPS"
+
       - name: Log into OpenShift registry
         run: |
-          echo "${{ secrets.OCP4_SANDBOX_PASSWORD }}" | docker login ${{ env.REGISTRY }} -u serviceaccount --password-stdin
+          echo "${{ secrets.OCP4_SANDBOX_PASSWORD }}" | docker login ${{ secrets.OCP4_SANDBOX_REGISTRY }}/${{ secrets.OCP4_SANDBOX_NAMESPACE }} -u ${{ secrets.OCP4_SANDBOX_USERNAME }} --password-stdin
 
       - name: Build API image
         working-directory: .
         run: |
-          IMAGE_FULL_NAME="${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ env.API_IMAGE_NAME }}:${{ needs.prepare.outputs.image_tag }}"
+          IMAGE_FULL_NAME="${{ secrets.OCP4_SANDBOX_REGISTRY }}/${{ secrets.OCP4_SANDBOX_NAMESPACE }}/${{ env.API_IMAGE_NAME }}:${{ needs.prepare.outputs.image_tag }}"
           echo "Building API image: $IMAGE_FULL_NAME"
 
           docker build \
@@ -126,14 +132,14 @@ jobs:
 
       - name: Push API image
         run: |
-          IMAGE_FULL_NAME="${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ env.API_IMAGE_NAME }}:${{ needs.prepare.outputs.image_tag }}"
+          IMAGE_FULL_NAME="${{ secrets.OCP4_SANDBOX_REGISTRY }}/${{ secrets.OCP4_SANDBOX_NAMESPACE }}/${{ env.API_IMAGE_NAME }}:${{ needs.prepare.outputs.image_tag }}"
           echo "Pushing API image: $IMAGE_FULL_NAME"
           docker push $IMAGE_FULL_NAME
 
       - name: Tag as latest (main branch only)
         if: github.ref == 'refs/heads/main'
         run: |
-          IMAGE_FULL_NAME="${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ env.API_IMAGE_NAME }}"
+          IMAGE_FULL_NAME="${{ secrets.OCP4_SANDBOX_REGISTRY }}/${{ secrets.OCP4_SANDBOX_NAMESPACE }}/${{ env.API_IMAGE_NAME }}"
           docker tag $IMAGE_FULL_NAME:${{ needs.prepare.outputs.image_tag }} $IMAGE_FULL_NAME:latest
           docker push $IMAGE_FULL_NAME:latest
 
@@ -141,10 +147,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: prepare
     if: needs.prepare.outputs.should_build_app == 'true'
-    env:
-      REGISTRY: ${{ secrets.OCP4_SANDBOX_REGISTRY }}
-      NAMESPACE: ${{ secrets.OCP4_SANDBOX_NAMESPACE }}
-      APP_IMAGE_NAME: cllc-public-app-frontend
     strategy:
       matrix:
         variant: [simple, templated]
@@ -154,7 +156,7 @@ jobs:
 
       - name: Log into OpenShift registry
         run: |
-          echo "${{ secrets.OCP4_SANDBOX_PASSWORD }}" | docker login ${{ env.REGISTRY }} -u serviceaccount --password-stdin
+          echo "${{ secrets.OCP4_SANDBOX_PASSWORD }}" | docker login ${{ secrets.OCP4_SANDBOX_REGISTRY }}/${{ secrets.OCP4_SANDBOX_NAMESPACE }} -u ${{ secrets.OCP4_SANDBOX_USERNAME }} --password-stdin
 
       - name: Set dockerfile path
         id: dockerfile
@@ -170,7 +172,7 @@ jobs:
       - name: Build App image
         working-directory: .
         run: |
-          IMAGE_FULL_NAME="${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ env.APP_IMAGE_NAME }}${{ steps.dockerfile.outputs.suffix }}:${{ needs.prepare.outputs.image_tag }}"
+          IMAGE_FULL_NAME="${{ secrets.OCP4_SANDBOX_REGISTRY }}/${{ secrets.OCP4_SANDBOX_NAMESPACE }}/${{ env.APP_IMAGE_NAME }}${{ steps.dockerfile.outputs.suffix }}:${{ needs.prepare.outputs.image_tag }}"
           echo "Building App image (${{ matrix.variant }}): $IMAGE_FULL_NAME"
 
           docker build \
@@ -180,13 +182,13 @@ jobs:
 
       - name: Push App image
         run: |
-          IMAGE_FULL_NAME="${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ env.APP_IMAGE_NAME }}${{ steps.dockerfile.outputs.suffix }}:${{ needs.prepare.outputs.image_tag }}"
+          IMAGE_FULL_NAME="${{ secrets.OCP4_SANDBOX_REGISTRY }}/${{ secrets.OCP4_SANDBOX_NAMESPACE }}/${{ env.APP_IMAGE_NAME }}${{ steps.dockerfile.outputs.suffix }}:${{ needs.prepare.outputs.image_tag }}"
           echo "Pushing App image (${{ matrix.variant }}): $IMAGE_FULL_NAME"
           docker push $IMAGE_FULL_NAME
 
       - name: Tag as latest (main branch only)
         if: github.ref == 'refs/heads/main'
         run: |
-          IMAGE_FULL_NAME="${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ env.APP_IMAGE_NAME }}${{ steps.dockerfile.outputs.suffix }}"
+          IMAGE_FULL_NAME="${{ secrets.OCP4_SANDBOX_REGISTRY }}/${{ secrets.OCP4_SANDBOX_NAMESPACE }}/${{ env.APP_IMAGE_NAME }}${{ steps.dockerfile.outputs.suffix }}"
           docker tag $IMAGE_FULL_NAME:${{ needs.prepare.outputs.image_tag }} $IMAGE_FULL_NAME:latest
           docker push $IMAGE_FULL_NAME:latest
