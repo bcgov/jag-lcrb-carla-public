@@ -86,11 +86,6 @@ jobs:
           echo "Will build App: $BUILD_APP"
 
   build-api:
-    env:
-      REGISTRY: ${{ secrets.OCP4_SANDBOX_REGISTRY }}
-      NAMESPACE: ${{ secrets.OCP4_SANDBOX_NAMESPACE }}
-      API_IMAGE_NAME: cllc-public-app-api
-      APP_IMAGE_NAME: cllc-public-app-frontend
     runs-on: ubuntu-latest
     needs: prepare
     if: needs.prepare.outputs.should_build_api == 'true'
@@ -108,6 +103,7 @@ jobs:
           echo "NAMESPACE env var: '${NAMESPACE}'"
           echo "API_IMAGE_NAME env var: '${API_IMAGE_NAME}'"
           echo "Secret length: $(echo '${{ secrets.OCP4_SANDBOX_PASSWORD }}' | wc -c)"
+          echo "v2"
           echo "=== End Debug ==="
 
       - name: Log into OpenShift registry
