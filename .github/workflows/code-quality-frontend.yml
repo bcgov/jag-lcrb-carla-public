@@ -2,7 +2,7 @@ name: Frontend Code Quality Check
 
 on:
   pull_request:
-    branches: [develop, sandbox-dev]
+    branches: [develop, LCSD-7876]
     paths:
       - "cllc-public-app/ClientApp/**/*.ts"
       - "cllc-public-app/ClientApp/**/*.tsx"

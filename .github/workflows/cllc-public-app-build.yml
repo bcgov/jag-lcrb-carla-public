@@ -1,0 +1,237 @@
+name: Build and Push OpenShift Images
+
+on:
+  push:
+    branches:
+      - develop
+      - LCSD-7876
+    paths:
+      - "cllc-public-app/**"
+      - "cicd/docker/cllc-public-app/**"
+      - ".github/workflows/build-openshift-images.yml"
+  pull_request:
+    branches:
+      - develop
+      - LCSD-7876
+    paths:
+      - "cllc-public-app/**"
+      - "cicd/docker/cllc-public-app/**"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Image tag (default: branch name or PR number)"
+        required: false
+        default: ""
+      build_api:
+        description: "Build API image"
+        required: false
+        default: "true"
+        type: choice
+        options:
+          - "true"
+          - "false"
+      build_app:
+        description: "Build App (nginx) image"
+        required: false
+        default: "true"
+        type: choice
+        options:
+          - "true"
+          - "false"
+
+env:
+  REGISTRY: ${{ secrets.OCP4_REGISTRY }}
+  NAMESPACE: ${{ secrets.OCP4_NAMESPACE }}
+  API_IMAGE_NAME: cllc-public-app-api
+  APP_IMAGE_NAME: cllc-public-app-frontend
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      image_tag: ${{ steps.prep.outputs.image_tag }}
+      should_build_api: ${{ steps.prep.outputs.should_build_api }}
+      should_build_app: ${{ steps.prep.outputs.should_build_app }}
+    steps:
+      - name: Prepare build variables
+        id: prep
+        run: |
+          # Determine image tag
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" && "${{ github.event.inputs.tag }}" != "" ]]; then
+            IMAGE_TAG="${{ github.event.inputs.tag }}"
+          elif [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            IMAGE_TAG="pr-${{ github.event.number }}"
+          else
+            # Extract branch name and sanitize for docker tag
+            BRANCH_NAME=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+            IMAGE_TAG=$(echo $BRANCH_NAME | sed 's/[^a-zA-Z0-9._-]/-/g' | tr '[:upper:]' '[:lower:]')
+            [[ "$IMAGE_TAG" == "main" ]] && IMAGE_TAG="latest"
+          fi
+
+          echo "image_tag=$IMAGE_TAG" >> $GITHUB_OUTPUT
+          echo "Image tag will be: $IMAGE_TAG"
+
+          # Determine what to build
+          BUILD_API="true"
+          BUILD_APP="true"
+
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            BUILD_API="${{ github.event.inputs.build_api }}"
+            BUILD_APP="${{ github.event.inputs.build_app }}"
+          fi
+
+          echo "should_build_api=$BUILD_API" >> $GITHUB_OUTPUT
+          echo "should_build_app=$BUILD_APP" >> $GITHUB_OUTPUT
+          echo "Will build API: $BUILD_API"
+          echo "Will build App: $BUILD_APP"
+
+  build-api:
+    runs-on: ubuntu-latest
+    needs: prepare
+    if: needs.prepare.outputs.should_build_api == 'true'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Log into OpenShift registry
+        run: |
+          echo "${{ secrets.OCP4_PASSWORD }}" | docker login ${{ env.REGISTRY }}/${{ env.NAMESPACE }} -u ${{ secrets.OCP4_USERNAME }} --password-stdin
+
+      - name: Build API image
+        working-directory: .
+        run: |
+          IMAGE_FULL_NAME="${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ env.API_IMAGE_NAME }}:${{ needs.prepare.outputs.image_tag }}"
+          echo "Building API image: $IMAGE_FULL_NAME"
+
+          docker build \
+            -f cicd/docker/cllc-public-app/api/Dockerfile \
+            -t $IMAGE_FULL_NAME \
+            .
+
+      - name: Push API image
+        run: |
+          IMAGE_FULL_NAME="${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ env.API_IMAGE_NAME }}:${{ needs.prepare.outputs.image_tag }}"
+          echo "Pushing API image: $IMAGE_FULL_NAME"
+          docker push $IMAGE_FULL_NAME
+
+      - name: Tag as latest (main branch only)
+        if: github.ref == 'refs/heads/main'
+        run: |
+          IMAGE_FULL_NAME="${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ env.API_IMAGE_NAME }}"
+          docker tag $IMAGE_FULL_NAME:${{ needs.prepare.outputs.image_tag }} $IMAGE_FULL_NAME:latest
+          docker push $IMAGE_FULL_NAME:latest
+
+  build-app:
+    runs-on: ubuntu-latest
+    needs: prepare
+    if: needs.prepare.outputs.should_build_app == 'true'
+    strategy:
+      matrix:
+        variant: [simple, templated]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Log into OpenShift registry
+        run: |
+          echo "${{ secrets.OCP4_PASSWORD }}" | docker login ${{ env.REGISTRY }}/${{ env.NAMESPACE }} -u ${{ secrets.OCP4_USERNAME }} --password-stdin
+
+      - name: Set dockerfile path
+        id: dockerfile
+        run: |
+          if [[ "${{ matrix.variant }}" == "templated" ]]; then
+            echo "dockerfile=cicd/docker/cllc-public-app/app/Dockerfile.templated" >> $GITHUB_OUTPUT
+            echo "suffix=-templated" >> $GITHUB_OUTPUT
+          else
+            echo "dockerfile=cicd/docker/cllc-public-app/app/Dockerfile" >> $GITHUB_OUTPUT
+            echo "suffix=" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Build App image
+        working-directory: .
+        run: |
+          IMAGE_FULL_NAME="${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ env.APP_IMAGE_NAME }}${{ steps.dockerfile.outputs.suffix }}:${{ needs.prepare.outputs.image_tag }}"
+          echo "Building App image (${{ matrix.variant }}): $IMAGE_FULL_NAME"
+
+          docker build \
+            -f ${{ steps.dockerfile.outputs.dockerfile }} \
+            -t $IMAGE_FULL_NAME \
+            .
+
+      - name: Push App image
+        run: |
+          IMAGE_FULL_NAME="${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ env.APP_IMAGE_NAME }}${{ steps.dockerfile.outputs.suffix }}:${{ needs.prepare.outputs.image_tag }}"
+          echo "Pushing App image (${{ matrix.variant }}): $IMAGE_FULL_NAME"
+          docker push $IMAGE_FULL_NAME
+
+      - name: Tag as latest (main branch only)
+        if: github.ref == 'refs/heads/main'
+        run: |
+          IMAGE_FULL_NAME="${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ env.APP_IMAGE_NAME }}${{ steps.dockerfile.outputs.suffix }}"
+          docker tag $IMAGE_FULL_NAME:${{ needs.prepare.outputs.image_tag }} $IMAGE_FULL_NAME:latest
+          docker push $IMAGE_FULL_NAME:latest
+
+  summary:
+    runs-on: ubuntu-latest
+    needs: [prepare, build-api, build-app]
+    if: always()
+    steps:
+      - name: Build Summary
+        run: |
+          echo "## 🏗️ Build Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Image Tag:** \`${{ needs.prepare.outputs.image_tag }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Built Images:" >> $GITHUB_STEP_SUMMARY
+
+          if [[ "${{ needs.prepare.outputs.should_build_api }}" == "true" ]]; then
+            if [[ "${{ needs.build-api.result }}" == "success" ]]; then
+              echo "✅ **API**: \`${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ env.API_IMAGE_NAME }}:${{ needs.prepare.outputs.image_tag }}\`" >> $GITHUB_STEP_SUMMARY
+            else
+              echo "❌ **API**: Build failed" >> $GITHUB_STEP_SUMMARY
+            fi
+          else
+            echo "⏭️ **API**: Skipped" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          if [[ "${{ needs.prepare.outputs.should_build_app }}" == "true" ]]; then
+            if [[ "${{ needs.build-app.result }}" == "success" ]]; then
+              echo "✅ **App (Simple)**: \`${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ env.APP_IMAGE_NAME }}:${{ needs.prepare.outputs.image_tag }}\`" >> $GITHUB_STEP_SUMMARY
+              echo "✅ **App (Templated)**: \`${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ env.APP_IMAGE_NAME }}-templated:${{ needs.prepare.outputs.image_tag }}\`" >> $GITHUB_STEP_SUMMARY
+            else
+              echo "❌ **App**: Build failed" >> $GITHUB_STEP_SUMMARY
+            fi
+          else
+            echo "⏭️ **App**: Skipped" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### OpenShift Deployment" >> $GITHUB_STEP_SUMMARY
+          echo "Use these images in your OpenShift deployment configurations or Helm charts." >> $GITHUB_STEP_SUMMARY
+
+      - name: Comment on PR (if applicable)
+        if: github.event_name == 'pull_request' && (needs.build-api.result == 'success' || needs.build-app.result == 'success')
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const images = [];
+
+            if ('${{ needs.prepare.outputs.should_build_api }}' === 'true' && '${{ needs.build-api.result }}' === 'success') {
+              images.push(`🔧 **API**: \`${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ env.API_IMAGE_NAME }}:${{ needs.prepare.outputs.image_tag }}\``);
+            }
+
+            if ('${{ needs.prepare.outputs.should_build_app }}' === 'true' && '${{ needs.build-app.result }}' === 'success') {
+              images.push(`🌐 **App (Simple)**: \`${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ env.APP_IMAGE_NAME }}:${{ needs.prepare.outputs.image_tag }}\``);
+              images.push(`🌐 **App (Templated)**: \`${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ env.APP_IMAGE_NAME }}-templated:${{ needs.prepare.outputs.image_tag }}\``);
+            }
+
+            if (images.length > 0) {
+              const body = `## 🚀 Images Built Successfully\n\n${images.join('\n')}\n\nThese images are now available in the OpenShift registry and ready for deployment.`;
+              
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: body
+              });
+            }

@@ -2,7 +2,7 @@ name: Backend Code Quality Check
 
 on:
   pull_request:
-    branches: [develop, sandbox-dev]
+    branches: [develop, LCSD-7876]
     paths:
       - "**/*.cs"
       - ".csharpierrc.yml"

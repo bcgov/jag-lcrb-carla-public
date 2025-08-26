@@ -20,4 +20,4 @@ COPY --from=build /app/publish ./
 EXPOSE 8080
 
 # No USER line: allows OpenShift to inject a random, non-root UID
-ENTRYPOINT ["dotnet","Your.Api.Assembly.dll"]
+ENTRYPOINT ["dotnet","cllc-public-app.dll"]
