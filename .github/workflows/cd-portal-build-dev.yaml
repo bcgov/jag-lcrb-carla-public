@@ -6,7 +6,6 @@ defaults:
     working-directory: "."
 
 jobs:
-
   openshift-compile-client-app:
     name: Compile Client App
     # needs: []

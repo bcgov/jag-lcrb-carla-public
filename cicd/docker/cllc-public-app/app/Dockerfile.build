@@ -1,0 +1,12 @@
+# Dockerfile for building Angular app only
+FROM node:18-bullseye AS build
+WORKDIR /app
+COPY ./cllc-public-app/ClientApp/package*.json ./
+RUN npm ci
+COPY ./cllc-public-app/ClientApp/ ./
+# Keep your base-href (/lcrb/) as needed
+RUN npm run build -- --configuration production --base-href /lcrb/ --output-path=dist/lcrb
+
+# Copy build artifacts to a volume or use multi-stage with nginx
+FROM scratch AS export
+COPY --from=build /app/dist/lcrb /dist/lcrb

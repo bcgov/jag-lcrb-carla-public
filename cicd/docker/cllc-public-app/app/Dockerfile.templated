@@ -1,0 +1,25 @@
+# Dockerfile with templated nginx configuration
+FROM node:18-bullseye AS build
+WORKDIR /app
+COPY ./cllc-public-app/ClientApp/package*.json ./
+RUN npm ci
+COPY ./cllc-public-app/ClientApp/ ./
+# Keep your base-href (/lcrb/) as needed
+RUN npm run build -- --configuration production --base-href /lcrb/ --output-path=dist/lcrb
+
+FROM nginx:alpine
+# Install envsubst for template processing
+RUN apk add --no-cache gettext
+
+# Copy app
+COPY --from=build /app/dist/lcrb /usr/share/nginx/html
+
+# Copy nginx configuration template and entrypoint script
+COPY nginx.conf.template /etc/nginx/nginx.conf.template
+COPY docker-entrypoint.sh /docker-entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh
+
+EXPOSE 8080
+
+# Use custom entrypoint that processes template
+ENTRYPOINT ["/docker-entrypoint.sh"]

@@ -2,7 +2,6 @@ name: ci-automated-test
 
 on:
   push:
-
     branches:
       - develop
     paths:
@@ -23,7 +22,7 @@ jobs:
         run: echo "${{ secrets.OCP4_PASSWORD  }}" | docker login ${{ secrets.OCP4_REGISTRY }}/${{ secrets.OCP4_NAMESPACE }} -u ${{ secrets.OCP4_USERNAME }} --password-stdin
 
       - name: Pull image
-        run: docker pull $IMAGE_ID || true  
-        
+        run: docker pull $IMAGE_ID || true
+
       - name: Run Test
         run: docker run -e DOTNET_CLI_HOME=/tmp -e baseUri="${{ secrets.TEST_BASE_URI }}" -e test_start="${{ secrets.TEST_START }}"  -e test_start_worker="${{ secrets.TEST_START_WORKER }}" -e test_cc="${{ secrets.TEST_CC }}" -e test_ccv="${{ secrets.TEST_CCV }}" -e CHROME_BINARY_LOCATION="/opt/google/chrome/chrome" -v "`pwd`:/test" -w /test/functional-tests/bdd-tests -t --tmpfs /test/functional-tests/bdd-tests/obj --tmpfs /test/functional-tests/bdd-tests/bin --entrypoint /bin/bash $IMAGE_ID -c "dotnet test --filter Category=$TEST_CATEGORY"

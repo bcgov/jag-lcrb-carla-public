@@ -56,12 +56,12 @@ jobs:
 
             if ('${{ steps.eslint.outcome }}' === 'failure') {
               message += '**ESLint Issues:**\n';
-              message += 'Please run `npm run lint-fix` in the ClientApp directory to fix linting issues.\n\n';
+              message += 'Please run `npm run lint-fix` in the cllc-public-app/ClientApp directory to fix linting issues.\n\n';
             }
 
             if ('${{ steps.prettier.outcome }}' === 'failure') {
               message += '**Prettier Issues:**\n';
-              message += 'Please run `npm run format-fix` in the ClientApp directory to fix formatting issues.\n\n';
+              message += 'Please run `npm run format-fix` in the cllc-public-app/ClientApp directory to fix formatting issues.\n\n';
             }
 
             message += 'To fix issues locally:\n';
