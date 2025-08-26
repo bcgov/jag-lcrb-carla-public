@@ -5,6 +5,7 @@ on:
     branches:
       - develop
       - LCSD-7876
+      - LCSD-7876-2
     paths:
       - "cllc-public-app/**"
       - "cicd/docker/cllc-public-app/**"
@@ -13,6 +14,7 @@ on:
     branches:
       - develop
       - LCSD-7876
+      - LCSD-7876-2
     paths:
       - "cllc-public-app/**"
       - "cicd/docker/cllc-public-app/**"
