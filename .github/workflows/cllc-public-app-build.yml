@@ -8,7 +8,7 @@ on:
     paths:
       - "cllc-public-app/**"
       - "cicd/docker/cllc-public-app/**"
-      - ".github/workflows/build-openshift-images.yml"
+      - ".github/workflows/cllc-public-app-build.yml"
   pull_request:
     branches:
       - develop
@@ -16,6 +16,7 @@ on:
     paths:
       - "cllc-public-app/**"
       - "cicd/docker/cllc-public-app/**"
+      - ".github/workflows/cllc-public-app-build.yml"
   workflow_dispatch:
     inputs:
       tag:
