@@ -40,8 +40,8 @@ on:
           - "false"
 
 env:
-  REGISTRY: ${{ secrets.OCP4_REGISTRY }}
-  NAMESPACE: ${{ secrets.OCP4_NAMESPACE }}
+  REGISTRY: ${{ secrets.OCP4_SANDBOX_REGISTRY }}
+  NAMESPACE: ${{ secrets.OCP4_SANDBOX_NAMESPACE }}
   API_IMAGE_NAME: cllc-public-app-api
   APP_IMAGE_NAME: cllc-public-app-frontend
 
@@ -95,7 +95,7 @@ jobs:
 
       - name: Log into OpenShift registry
         run: |
-          echo "${{ secrets.OCP4_PASSWORD }}" | docker login ${{ env.REGISTRY }}/${{ env.NAMESPACE }} -u ${{ secrets.OCP4_USERNAME }} --password-stdin
+          echo "${{ secrets.OCP4_SANDBOX_PASSWORD }}" | docker login ${{ env.REGISTRY }}/${{ env.NAMESPACE }} -u ${{ secrets.OCP4_SANDBOX_USERNAME }} --password-stdin
 
       - name: Build API image
         working-directory: .
@@ -134,7 +134,7 @@ jobs:
 
       - name: Log into OpenShift registry
         run: |
-          echo "${{ secrets.OCP4_PASSWORD }}" | docker login ${{ env.REGISTRY }}/${{ env.NAMESPACE }} -u ${{ secrets.OCP4_USERNAME }} --password-stdin
+          echo "${{ secrets.OCP4_SANDBOX_PASSWORD }}" | docker login ${{ env.REGISTRY }}/${{ env.NAMESPACE }} -u ${{ secrets.OCP4_SANDBOX_USERNAME }} --password-stdin
 
       - name: Set dockerfile path
         id: dockerfile

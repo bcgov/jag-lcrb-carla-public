@@ -15,6 +15,11 @@ on:
       - "cllc-public-app/ClientApp/.eslintrc.*"
       - "cllc-public-app/ClientApp/.prettierrc*"
 
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
 jobs:
   frontend-quality-check:
     runs-on: ubuntu-latest
