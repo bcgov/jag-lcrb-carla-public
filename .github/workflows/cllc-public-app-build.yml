@@ -93,6 +93,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Sanity checks
+        run: |
+          test -n "${REGISTRY}" || (echo "REGISTRY not set" && exit 1)
+          test -n "${NAMESPACE}" || (echo "NAMESPACE not set" && exit 1)
+          test -n "${{ secrets.OCP4_SANDBOX_PASSWORD }}" || (echo "OCP4_SANDBOX_PASSWORD secret not set" && exit 1)
+          echo "REGISTRY=${REGISTRY}"
+          echo "NAMESPACE=${NAMESPACE}"
+          echo "TOKEN_LEN=$(echo "${{ secrets.OCP4_SANDBOX_PASSWORD }}" | wc -c)"
+   
       - name: Log into OpenShift registry
         run: |
           echo "${{ secrets.OCP4_SANDBOX_PASSWORD }}" | docker login ${{ env.REGISTRY }} -u serviceaccount --password-stdin
