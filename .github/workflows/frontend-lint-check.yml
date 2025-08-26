@@ -1,0 +1,88 @@
+name: Frontend Code Quality Check
+
+on:
+  pull_request:
+    branches: [develop, sandbox-dev]
+    paths:
+      - "cllc-public-app/ClientApp/**/*.ts"
+      - "cllc-public-app/ClientApp/**/*.tsx"
+      - "cllc-public-app/ClientApp/**/*.js"
+      - "cllc-public-app/ClientApp/**/*.jsx"
+      - "cllc-public-app/ClientApp/**/*.html"
+      - "cllc-public-app/ClientApp/**/*.css"
+      - "cllc-public-app/ClientApp/**/*.scss"
+      - "cllc-public-app/ClientApp/package.json"
+      - "cllc-public-app/ClientApp/.eslintrc.*"
+      - "cllc-public-app/ClientApp/.prettierrc*"
+
+jobs:
+  frontend-quality-check:
+    runs-on: ubuntu-latest
+    name: Check Frontend Code Quality
+    
+    defaults:
+      run:
+        working-directory: cllc-public-app/ClientApp
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '16'
+          cache: 'npm'
+          cache-dependency-path: cllc-public-app/ClientApp/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        id: eslint
+        run: npm run lint
+        continue-on-error: true
+
+      - name: Run Prettier check
+        id: prettier
+        run: npm run format
+        continue-on-error: true
+
+      - name: Comment on PR if issues found
+        if: steps.eslint.outcome == 'failure' || steps.prettier.outcome == 'failure'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            let message = '❌ **Frontend code quality issues detected**\n\n';
+            
+            if ('${{ steps.eslint.outcome }}' === 'failure') {
+              message += '**ESLint Issues:**\n';
+              message += 'Please run `npm run lint-fix` in the ClientApp directory to fix linting issues.\n\n';
+            }
+            
+            if ('${{ steps.prettier.outcome }}' === 'failure') {
+              message += '**Prettier Issues:**\n';
+              message += 'Please run `npm run format-fix` in the ClientApp directory to fix formatting issues.\n\n';
+            }
+            
+            message += 'To fix issues locally:\n';
+            message += '```bash\n';
+            message += 'cd cllc-public-app/ClientApp\n';
+            message += 'npm install\n';
+            if ('${{ steps.eslint.outcome }}' === 'failure') {
+              message += 'npm run lint-fix\n';
+            }
+            if ('${{ steps.prettier.outcome }}' === 'failure') {
+              message += 'npm run format-fix\n';
+            }
+            message += '```';
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: message
+            });
+
+      - name: Fail if quality checks failed
+        if: steps.eslint.outcome == 'failure' || steps.prettier.outcome == 'failure'
+        run: exit 1
