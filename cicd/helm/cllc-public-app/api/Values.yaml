@@ -1,8 +1,10 @@
+
 image:
-  repository: image-registry.openshift-image-registry.svc:5000/cllc-public-app-api
+  repository: image-registry.openshift-image-registry.svc:5000
+  namespace: bf4ebe-tools
+  name: cllc-public-app-api
   tag: "latest" # set by CI
   pullPolicy: Always
-imagePullSecrets: [] # e.g., [{ name: ghcr-pull }]
 
 replicaCount: 1
 
@@ -11,18 +13,13 @@ service:
   type: ClusterIP
 
 route:
-  enabled: true # OpenShift Route
-  host: lcrb-api-bf4ebe-dev.apps.silver.devops.gov.bc.ca
+  enabled: true
+  host: lcrb-api-bf4ebe-dev-2.apps.silver.devops.gov.bc.ca
   tls:
     termination: edge
     insecureEdgeTerminationPolicy: Redirect
 
 env:
-  - name: BCEP_CONF_PATH
-    valueFrom:
-      secretKeyRef:
-        name: cllc-public
-        key: BCEP-CONF-PATH
   - name: REDIS_PASSWORD
     valueFrom:
       secretKeyRef:
@@ -41,6 +38,7 @@ env:
   - name: FEATURE_CASS
     value: "1"
   - name: FEATURE_COVID_APPLICATION
+    value: ""
   - name: FEATURE_INDIGENOUS_NATION
     value: "1"
   - name: FEATURE_LE_CONNECTIONS
@@ -68,9 +66,11 @@ env:
   - name: FEATURE_SECURITY_SCREENING
     value: "1"
   - name: FEATURE_ELIGIBILITY_DISABLED
+    value: ""
   - name: FEATURE_TUA_EVENTS
     value: "1"
   - name: FEATURE_DISABLE_LOGIN
+    value: ""
   - name: FEATURE_RLRS
     value: "1"
   - name: FEATURE_LIQUOR_FREE_EVENTS
@@ -85,13 +85,19 @@ env:
     value: "1"
   - name: FEATURE_PRS_ENABLED
     value: "1"
+  - name: DOTNET_SSL_CERT_DIR
+    value: "/opt/app-root/ssl_dir"
+  - name: DOTNET_GENERATE_ASPNET_CERTIFICATE
+    value: "false"
+  - name: ASPNETCORE_ENVIRONMENT
+    value: "Staging"
 
 resources:
-  requests: { cpu: "100m", memory: "256Mi" }
-  limits:   { cpu: "500m", memory: "512Mi" }
+  requests: 
+    cpu: "50m"
+    memory: "100Mi"
+  limits: 
+    cpu: "1"
+    memory: "2Gi"
 
-# Security contexts that play nice with OpenShift random UID
-podSecurityContext: {}
-securityContext:
-  runAsNonRoot: true
-  allowPrivilegeEscalation: false
+securityContext: {}

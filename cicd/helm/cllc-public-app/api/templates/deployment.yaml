@@ -5,27 +5,21 @@ metadata:
   labels: {{- include "cllc-public-app-api.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
+  revisionHistoryLimit: 10
   selector:
     matchLabels: {{- include "cllc-public-app-api.selectorLabels" . | nindent 6 }}
   strategy:
-    type: Rolling
-    rollingParams:
-      updatePeriodSeconds: 1
-      intervalSeconds: 1
-      timeoutSeconds: 600
+    type: RollingUpdate
+    rollingUpdate:
       maxUnavailable: 25%
       maxSurge: 25%
-    resources: {}
-    activeDeadlineSeconds: 21600
   template:
     metadata:
       labels: {{- include "cllc-public-app-api.selectorLabels" . | nindent 8 }}
     spec:
-      imagePullSecrets:
-        {{- toYaml .Values.imagePullSecrets | nindent 6 }}
       containers:
         - name: cllc-public-api
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          image: "{{ .Values.image.repository }}/{{ .Values.image.namespace }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: 8080-tcp
@@ -39,20 +33,23 @@ spec:
             - configMapRef:
                 name: banner-config
         #   readinessProbe:
-        #     httpGet: { path: /health/ready, port: http }
+        #     httpGet: { path: /health/ready, port: 8080-tcp }
         #     initialDelaySeconds: 5
         #     periodSeconds: 10
         #   livenessProbe:
-        #     httpGet: { path: /health/live, port: http }
+        #     httpGet: { path: /health/live, port: 8080-tcp }
         #     initialDelaySeconds: 15
         #     periodSeconds: 20
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
-          ports:
-            - containerPort: 8080
-              protocol: TCP
+            requests:
+              {{- toYaml .Values.resources.requests | nindent 14 }}
+            limits:
+              {{- toYaml .Values.resources.limits | nindent 14 }}
           volumeMounts:
-          - name: key-ring
+            - name: key-ring
               mountPath: /key-ring
-      securityContext:
-        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      volumes:
+        - name: key-ring
+          persistentVolumeClaim:
+            claimName: key-ring
+      securityContext: {}
