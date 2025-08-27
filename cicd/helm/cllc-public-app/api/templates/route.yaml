@@ -2,12 +2,14 @@
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
-  name: {{ include "cllc-api.fullname" . }}
+  name: {{ include "cllc-public-app-api.fullname" . }}
 spec:
   host: {{ .Values.route.host }}
-  path: {{ .Values.route.path | default "/" }}
-  to: { kind: Service, name: {{ include "cllc-api.fullname" . }} }
-  port: { targetPort: http }
+  to: 
+    kind: Service
+    name: {{ include "cllc-public-app-api.fullname" . }}
+  port: 
+    targetPort: 8080-tcp
   tls:
     {{- toYaml .Values.route.tls | nindent 4 }}
 {{- end }}

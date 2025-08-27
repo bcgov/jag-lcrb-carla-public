@@ -1,36 +1,58 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "cllc-api.fullname" . }}
-  labels: {{- include "cllc-api.labels" . | nindent 4 }}
+  name: {{ include "cllc-public-app-api.fullname" . }}
+  labels: {{- include "cllc-public-app-api.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
-    matchLabels: {{- include "cllc-api.selectorLabels" . | nindent 6 }}
+    matchLabels: {{- include "cllc-public-app-api.selectorLabels" . | nindent 6 }}
+  strategy:
+    type: Rolling
+    rollingParams:
+      updatePeriodSeconds: 1
+      intervalSeconds: 1
+      timeoutSeconds: 600
+      maxUnavailable: 25%
+      maxSurge: 25%
+    resources: {}
+    activeDeadlineSeconds: 21600
   template:
     metadata:
-      labels: {{- include "cllc-api.selectorLabels" . | nindent 8 }}
+      labels: {{- include "cllc-public-app-api.selectorLabels" . | nindent 8 }}
     spec:
       imagePullSecrets:
         {{- toYaml .Values.imagePullSecrets | nindent 6 }}
       containers:
-        - name: api
+        - name: cllc-public-api
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - name: http
+            - name: 8080-tcp
               containerPort: {{ .Values.service.port }}
+              protocol: TCP
           env:
             {{- toYaml .Values.env | nindent 12 }}
-          readinessProbe:
-            httpGet: { path: /health/ready, port: http }
-            initialDelaySeconds: 5
-            periodSeconds: 10
-          livenessProbe:
-            httpGet: { path: /health/live, port: http }
-            initialDelaySeconds: 15
-            periodSeconds: 20
+          envFrom:
+            - secretRef:
+                name: cllc-public-app
+            - configMapRef:
+                name: banner-config
+        #   readinessProbe:
+        #     httpGet: { path: /health/ready, port: http }
+        #     initialDelaySeconds: 5
+        #     periodSeconds: 10
+        #   livenessProbe:
+        #     httpGet: { path: /health/live, port: http }
+        #     initialDelaySeconds: 15
+        #     periodSeconds: 20
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          volumeMounts:
+          - name: key-ring
+              mountPath: /key-ring
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}

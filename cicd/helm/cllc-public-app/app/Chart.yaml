@@ -1,6 +1,6 @@
 apiVersion: v2
-name: cllc-public-app-api
-description: CLLC .NET API
+name: cllc-public-app-frontend
+description: Angular Frontend
 type: application
 version: 0.1.0
 appVersion: "1.0.0"

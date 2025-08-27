@@ -1,34 +1,90 @@
 image:
-  repository: ghcr.io/your-org/cllc-api
-  tag: "sha-abcdef"          # set by CI
-  pullPolicy: IfNotPresent
-imagePullSecrets: []          # e.g., [{ name: ghcr-pull }]
+  repository: image-registry.openshift-image-registry.svc:5000/cllc-public-app-api
+  tag: "latest" # set by CI
+  pullPolicy: Always
+imagePullSecrets: [] # e.g., [{ name: ghcr-pull }]
 
-replicaCount: 2
+replicaCount: 1
 
 service:
   port: 8080
   type: ClusterIP
 
 route:
-  enabled: true               # OpenShift Route
-  host: api.dev.example.gov.bc.ca
-  path: /                     # API root
+  enabled: true # OpenShift Route
+  host: lcrb-api-bf4ebe-dev.apps.silver.devops.gov.bc.ca
   tls:
     termination: edge
     insecureEdgeTerminationPolicy: Redirect
 
 env:
-  - name: ASPNETCORE_ENVIRONMENT
-    value: "Production"
-  - name: BASE_PATH
-    value: "/lcrb"            # if your API is mounted behind a base path
-  # Add connection strings / secrets via Secret refs:
-  # - name: ConnectionStrings__Default
-  #   valueFrom:
-  #     secretKeyRef:
-  #       name: cllc-api-secrets
-  #       key: connstring
+  - name: BCEP_CONF_PATH
+    valueFrom:
+      secretKeyRef:
+        name: cllc-public
+        key: BCEP-CONF-PATH
+  - name: REDIS_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: redis
+        key: database-password
+  - name: PDF_SERVICE_JWT_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: pdf-service
+        key: JWT_TOKEN_KEY
+  - name: GEOCODER_JWT_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: geocoder-service
+        key: JWT_TOKEN_KEY
+  - name: FEATURE_CASS
+    value: "1"
+  - name: FEATURE_COVID_APPLICATION
+  - name: FEATURE_INDIGENOUS_NATION
+    value: "1"
+  - name: FEATURE_LE_CONNECTIONS
+    value: "1"
+  - name: FEATURE_LG_APPROVALS
+    value: "1"
+  - name: FEATURE_LICENSEE_CHANGES
+    value: "1"
+  - name: FEATURE_LIQUOR_ONE
+    value: "1"
+  - name: FEATURE_LIQUOR_THREE
+    value: "1"
+  - name: FEATURE_LIQUOR_TWO
+    value: "1"
+  - name: FEATURE_MAPS
+    value: "1"
+  - name: FEATURE_MARKET_EVENTS
+    value: "1"
+  - name: FEATURE_NOTICES
+    value: "1"
+  - name: FEATURE_NO_WET_SIGNATURE
+    value: "1"
+  - name: FEATURE_PERMANENT_CHANGES_TO_LICENSEE
+    value: "1"
+  - name: FEATURE_SECURITY_SCREENING
+    value: "1"
+  - name: FEATURE_ELIGIBILITY_DISABLED
+  - name: FEATURE_TUA_EVENTS
+    value: "1"
+  - name: FEATURE_DISABLE_LOGIN
+  - name: FEATURE_RLRS
+    value: "1"
+  - name: FEATURE_LIQUOR_FREE_EVENTS
+    value: "1"
+  - name: FEATURE_SEP
+    value: "1"
+  - name: FEATURE_DISABLE_WORKER_QUALIFICATION
+    value: "1"
+  - name: FEATURE_BRIDGE_LOGIN
+    value: "1"
+  - name: FEATURE_PERMANENT_CHANGES_TO_APPLICANT
+    value: "1"
+  - name: FEATURE_PRS_ENABLED
+    value: "1"
 
 resources:
   requests: { cpu: "100m", memory: "256Mi" }

@@ -1,13 +1,19 @@
-# Dockerfile.api (dotnet 8)
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+# Dockerfile.api (dotnet 6.0)
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ./cllc-public-app/*.sln ./
 
-# copy all project files; adjust if your solution layout differs
-COPY ./cllc-public-app/ ./
-RUN dotnet restore
-RUN dotnet publish -c Release -o /app/publish /p:UseAppHost=false
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
+# Copy project files
+COPY ./cllc-interfaces/ ./cllc-interfaces/
+COPY ./cllc-public-app/ ./cllc-public-app/
+COPY ./file-manager-service/ ./file-manager-service/
+
+# Restore dependencies
+RUN dotnet restore ./cllc-public-app/cllc-public-app.sln
+
+# Build and publish the main project
+RUN dotnet publish ./cllc-public-app/cllc-public-app.csproj -c Release -o /app/publish /p:UseAppHost=false
+
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS runtime
 WORKDIR /app
 
 # OpenShift best-practice: listen on 8080 and run as non-root (random UID)
