@@ -3,7 +3,7 @@ image:
   repository: image-registry.openshift-image-registry.svc:5000
   namespace: bf4ebe-tools
   name: cllc-public-app-api
-  tag: "latest" # set by CI
+  tag: "latest"
   pullPolicy: Always
 
 replicaCount: 1
@@ -18,6 +18,14 @@ route:
   tls:
     termination: edge
     insecureEdgeTerminationPolicy: Redirect
+
+resources:
+  requests: 
+    cpu: "50m"
+    memory: "100Mi"
+  limits: 
+    cpu: "1"
+    memory: "2Gi"
 
 env:
   - name: REDIS_PASSWORD
@@ -91,13 +99,3 @@ env:
     value: "false"
   - name: ASPNETCORE_ENVIRONMENT
     value: "Staging"
-
-resources:
-  requests: 
-    cpu: "50m"
-    memory: "100Mi"
-  limits: 
-    cpu: "1"
-    memory: "2Gi"
-
-securityContext: {}

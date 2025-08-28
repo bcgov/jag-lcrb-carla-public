@@ -20,12 +20,11 @@ http {
     ignore_invalid_headers off;
 
     # IP filtering (can be configured via environment)
-    # ${IP_FILTER_RULES}
+    ${IP_FILTER_RULES}
 
-    # Logging rules with geo blocking capability
+    # Logging rules with geo blocking capability  
     geo $loggable {
         default 1;
-        # ${REAL_IP_FROM} 0;  # Disable logging for health checks
     }
 
     # Use schema suggested by proxy if any
@@ -45,10 +44,10 @@ http {
     keepalive_timeout 65;
 
     # Real IP configuration for proxy environments
-    # set_real_ip_from ${REAL_IP_FROM};
+    set_real_ip_from ${REAL_IP_FROM};
     # ${ADDITIONAL_REAL_IP_FROM_RULES}
-    # real_ip_recursive on;
-    # real_ip_header X-Forwarded-For;
+    real_ip_recursive on;
+    real_ip_header X-Forwarded-For;
 
     # Rate limiting zones
     limit_req_zone $binary_remote_addr zone=bra1:10m rate=1r/s;
@@ -75,13 +74,13 @@ http {
         add_header X-Frame-Options DENY;
 
         # API configuration section (can be templated)
-        # ${API_CONFIG_SECTION}
+        ${API_CONFIG_SECTION}
 
         # Remove path prefix when handling files
         rewrite ^/lcrb/(.*) /$1 last;
         
         # Extra configuration (can be templated)
-        # ${EXTRA_CONFIG}
+        ${EXTRA_CONFIG}
 
         # Serve our angular app
         location / {
@@ -93,7 +92,7 @@ http {
             gzip_types *;
 
             # HTTP Basic auth (optional, can be templated)
-            # ${HTTP_BASIC}
+            ${HTTP_BASIC}
             
             location ~.*\.css {
                 add_header Content-Type text/css;

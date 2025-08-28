@@ -1,25 +1,43 @@
-# Dockerfile with templated nginx configuration
+# Angular + nginx with runtime environment variable templating
 FROM node:18-bullseye AS build
+
 WORKDIR /app
+
+# Copy package files for better Docker layer caching
 COPY ./cllc-public-app/ClientApp/package*.json ./
-RUN npm ci
+
+RUN npm ci --production=false
+
+# Copy source and build
 COPY ./cllc-public-app/ClientApp/ ./
-# Keep your base-href (/lcrb/) as needed
-RUN npm run build -- --configuration production --base-href /lcrb/ --output-path=dist/lcrb
+
+# Use environment-specific base-href - can be overridden via build args
+ARG BASE_HREF=/lcrb/
+
+RUN npm run build -- --configuration production --base-href ${BASE_HREF} --output-path=dist/lcrb
 
 FROM nginx:alpine
+
 # Install envsubst for template processing
 RUN apk add --no-cache gettext
 
-# Copy app
-COPY --from=build /app/dist/lcrb /usr/share/nginx/html
+# Set proper permissions for OpenShift random UID
+RUN chmod g+rwx /var/cache/nginx /var/run /var/log/nginx && \
+    chmod g+rw /etc/nginx/conf.d && \
+    chmod g+rw /etc/nginx && \
+    chown -R nginx:0 /etc/nginx /var/cache/nginx /var/run /var/log/nginx && \
+    chmod -R g+w /etc/nginx /var/cache/nginx /var/run /var/log/nginx
+
+# Copy built Angular app
+COPY --from=build /app/dist/lcrb /usr/share/nginx/html/
 
 # Copy nginx configuration template and entrypoint script
-COPY nginx.conf.template /etc/nginx/nginx.conf.template
-COPY docker-entrypoint.sh /docker-entrypoint.sh
+COPY cicd/docker/cllc-public-app/app/nginx.conf.template /etc/nginx/nginx.conf.template
+COPY cicd/docker/cllc-public-app/app/docker-entrypoint.sh /docker-entrypoint.sh
+
 RUN chmod +x /docker-entrypoint.sh
 
 EXPOSE 8080
 
-# Use custom entrypoint that processes template
+# Use custom entrypoint that processes template with environment variables
 ENTRYPOINT ["/docker-entrypoint.sh"]

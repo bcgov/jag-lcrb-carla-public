@@ -32,14 +32,6 @@ spec:
                 name: cllc-public-app
             - configMapRef:
                 name: banner-config
-        #   readinessProbe:
-        #     httpGet: { path: /health/ready, port: 8080-tcp }
-        #     initialDelaySeconds: 5
-        #     periodSeconds: 10
-        #   livenessProbe:
-        #     httpGet: { path: /health/live, port: 8080-tcp }
-        #     initialDelaySeconds: 15
-        #     periodSeconds: 20
           resources:
             requests:
               {{- toYaml .Values.resources.requests | nindent 14 }}
