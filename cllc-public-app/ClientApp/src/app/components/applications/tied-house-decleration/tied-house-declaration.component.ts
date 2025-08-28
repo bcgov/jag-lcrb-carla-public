@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren
 import { MatDialog } from '@angular/material/dialog';
 import { MatExpansionPanel } from '@angular/material/expansion';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { formatDate } from '@components/applications/tied-house-decleration/tide-house-utils';
 import { faPlusSquare } from '@fortawesome/free-regular-svg-icons';
 import {
   LIQTiedHouseTypeCodes,
@@ -14,6 +13,7 @@ import {
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
 import { GenericConfirmationDialogComponent } from '@shared/components/dialog/generic-confirmation-dialog/generic-confirmation-dialog.component';
 import { GenericMessageDialogComponent } from '@shared/components/dialog/generic-message-dialog/generic-message-dialog.component';
+import { safeToDateString } from '@shared/date-fns';
 import { FormBase } from '@shared/form-base';
 import { Observable, of } from 'rxjs';
 import { catchError, mergeMap, takeWhile } from 'rxjs/operators';
@@ -436,7 +436,7 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
       return NEW_DECLARATION_KEY;
     }
 
-    return `${declaration.firstName} ${declaration.middleName || ''} ${declaration.lastName} - ${formatDate(
+    return `${declaration.firstName} ${declaration.middleName || ''} ${declaration.lastName} - ${safeToDateString(
       declaration.dateOfBirth
     )}`;
   }
