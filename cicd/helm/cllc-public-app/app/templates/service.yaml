@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "cllc-web.fullname" . }}
+  name: {{ include "cllc-public-app-app.fullname" . }}
 spec:
-  selector: {{- include "cllc-web.selectorLabels" . | nindent 4 }}
+  selector: {{- include "cllc-public-app-app.selectorLabels" . | nindent 4 }}
   ports:
-    - name: http
+    - name: 8080-tcp
       port: 8080
-      targetPort: http
+      targetPort: 8080-tcp

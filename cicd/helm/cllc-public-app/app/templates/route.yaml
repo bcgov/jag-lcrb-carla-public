@@ -2,12 +2,15 @@
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
-  name: {{ include "cllc-web.fullname" . }}
+  name: {{ include "cllc-public-app-app.fullname" . }}
 spec:
   host: {{ .Values.route.host }}
   path: {{ .Values.route.path | default "/lcrb" }}
-  to: { kind: Service, name: {{ include "cllc-web.fullname" . }} }
-  port: { targetPort: http }
+  to:
+    kind: Service
+    name: {{ include "cllc-public-app-app.fullname" . }}
+  port: 
+    targetPort: 8080-tcp
   tls:
     {{- toYaml .Values.route.tls | nindent 4 }}
 {{- end }}

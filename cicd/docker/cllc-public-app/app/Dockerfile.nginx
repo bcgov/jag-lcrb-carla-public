@@ -1,0 +1,12 @@
+# Dockerfile for nginx serving pre-built Angular app
+FROM nginx:alpine
+
+# Copy pre-built Angular app (expects dist/lcrb folder)
+COPY dist/lcrb /usr/share/nginx/html
+
+# Copy nginx configuration
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 8080
+# Don't set USER; OpenShift will inject a random non-root UID.
+CMD ["nginx","-g","daemon off;"]
