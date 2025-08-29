@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ControlContainer, FormGroup, FormGroupDirective } from '@angular/forms';
+import { PCLFormControlDefinitionOption } from '@components/applications/permanent-change-to-a-licensee/pcl-business-rules/pcl-bussiness-rules-types';
 import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
 import { Application } from '@models/application.model';
 
@@ -20,7 +21,10 @@ export class PermanentChangePaymentComponent implements OnInit {
   @Input() application: Application;
   @Input() liquorLicences: ApplicationLicenseSummary[] = [];
   @Input() cannabisLicences: ApplicationLicenseSummary[] = [];
-  @Input() selectedChangeList: any[];
+  /**
+   * The list of items the user needs to pay for, in order to submit the application.
+   */
+  @Input() paymentList: PCLFormControlDefinitionOption[];
 
   @Input() canCreateNewApplication: boolean;
   @Input() onNewApplication: (invoiceType: 'primary' | 'secondary') => void;
@@ -46,7 +50,7 @@ export class PermanentChangePaymentComponent implements OnInit {
    * @return {*}  {boolean}
    */
   get isCannabisPaymentRequired(): boolean {
-    return this.cannabisLicences?.length > 0 && this.selectedChangeList.some((change) => change.CannabisFee > 0);
+    return this.cannabisLicences?.length > 0 && this.paymentList.some((change) => change.CannabisFee > 0);
   }
 
   /**
@@ -66,7 +70,7 @@ export class PermanentChangePaymentComponent implements OnInit {
    * @type {boolean}
    */
   get isCannabisInvoiceVisible(): boolean {
-    const totalCannabisFee = this.selectedChangeList.reduce((sum, change) => sum + (change.CannabisFee || 0), 0);
+    const totalCannabisFee = this.paymentList.reduce((sum, change) => sum + (change.CannabisFee || 0), 0);
     // Not all changes have a fee. If the total cannabis fee is 0, we do not show the invoice.
     // This is to prevent showing an invoice with a $0 amount, which can be confusing.
     return totalCannabisFee > 0 && (this.isCannabisPaymentRequired || this.isCannabisInvoicePaid);
@@ -78,7 +82,7 @@ export class PermanentChangePaymentComponent implements OnInit {
    * @return {*}  {boolean}
    */
   get isLiquorPaymentRequired(): boolean {
-    return this.liquorLicences?.length > 0 && this.selectedChangeList.some((change) => change.LiquorFee > 0);
+    return this.liquorLicences?.length > 0 && this.paymentList.some((change) => change.LiquorFee > 0);
   }
 
   /**
@@ -98,7 +102,7 @@ export class PermanentChangePaymentComponent implements OnInit {
    * @type {boolean}
    */
   get isLiquorInvoiceVisible(): boolean {
-    const totalLiquorFee = this.selectedChangeList.reduce((sum, change) => sum + (change.LiquorFee || 0), 0);
+    const totalLiquorFee = this.paymentList.reduce((sum, change) => sum + (change.LiquorFee || 0), 0);
     // Not all changes have a fee. If the total liquor fee is 0, we do not show the invoice.
     // This is to prevent showing an invoice with a $0 amount, which can be confusing.
     return totalLiquorFee > 0 && (this.isLiquorPaymentRequired || this.isLiquorInvoicePaid);

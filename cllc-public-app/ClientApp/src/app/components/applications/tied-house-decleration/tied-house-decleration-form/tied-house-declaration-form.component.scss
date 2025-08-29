@@ -126,6 +126,18 @@ h3 {
   background-color: #eee !important;
 }
 
+::ng-deep .custom-date-picker-field {
+  .app-field-content-section {
+    display: flex;
+  }
+
+  input {
+    padding-left: 12px;
+    border: 1px solid #ccc;
+    border-radius: 0;
+  }
+}
+
 :host ::ng-deep section {
   flex-grow: 1;
   width: 100%;

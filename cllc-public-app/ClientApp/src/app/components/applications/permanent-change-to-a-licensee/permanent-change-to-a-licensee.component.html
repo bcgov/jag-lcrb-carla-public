@@ -17,7 +17,7 @@
     <section>
       <app-permanent-change-types-of-changes-requested
         [account]="account"
-        [changeList]="changeList"></app-permanent-change-types-of-changes-requested>
+        [changeList]="PCLMatrixAllowedChangesList"></app-permanent-change-types-of-changes-requested>
     </section>
 
     <!-- Internal Share Transfer -->
@@ -166,7 +166,7 @@
         [application]="application"
         [liquorLicences]="liquorLicences"
         [cannabisLicences]="cannabisLicences"
-        [selectedChangeList]="selectedChangeList"
+        [paymentList]="paymentList"
         [canCreateNewApplication]="canCreateNewApplication"
         [onNewApplication]="onNewApplication.bind(this)"
         [createApplicationInProgress]="createApplicationInProgress"
