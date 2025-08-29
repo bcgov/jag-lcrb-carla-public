@@ -20,7 +20,7 @@
         <th class="paymentSummary">No. Licences</th>
         <th class="paymentSummary">Cost</th>
       </tr>
-      <ng-container *ngFor="let item of selectedChangeList">
+      <ng-container *ngFor="let item of paymentList">
         <tr
           *ngIf="
             form.get(item.formControlName).value === true &&
@@ -70,7 +70,7 @@
       <th class="paymentSummary">No. Licences</th>
       <th class="paymentSummary">Cost</th>
     </tr>
-    <ng-container *ngFor="let item of selectedChangeList">
+    <ng-container *ngFor="let item of paymentList">
       <tr *ngIf="item.LiquorFee > 0">
         <td class="paymentSummary1">{{ item.name }}</td>
         <td class="paymentSummary2">x {{ liquorLicences.length }}</td>
