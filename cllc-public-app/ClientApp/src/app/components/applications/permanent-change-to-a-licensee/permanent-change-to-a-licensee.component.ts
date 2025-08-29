@@ -111,18 +111,54 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
     return this.cannabisLicences.length > 0;
   }
 
-  changeList: PCLFormControlDefinitionOption[] = [];
-
-  get selectedChangeList() {
-    return this.changeList.filter((item) => this.form && this.form.get(item.formControlName).value === true);
-  }
-
-  form: FormGroup;
+  /**
+   * The list of changes the user can select from.
+   * This is dynamics based on the PCL Matrix rules. See comments throughout.
+   */
+  _PCLMatrixAllowedChangeList: PCLFormControlDefinitionOption[] = [];
 
   // PCL Matrix business rules variables
   _PCLMatrixAccountType: AccountType;
   _PCLMatrixLicenceGroup: PCLMatrixLicenceGroup;
   _PCLMatrixEnabledSections: PCLFormControlName[] = [];
+
+  /**
+   * The list of changes the user has requested.
+   */
+  get selectedChangeList() {
+    return this._PCLMatrixAllowedChangeList.filter(
+      (item) => this.form && this.form.get(item.formControlName).value === true
+    );
+  }
+
+  /**
+   * The list of changes the user must pay for.
+   */
+  get paymentList(): PCLFormControlDefinitionOption[] {
+    let paymentList = this.selectedChangeList;
+
+    /*
+     * Business Rule:
+     * Tied House Declaration changes, like all changes, normally cost the user a fee. However, if the user is
+     * submitting Internal Transfer of Shares (TSI), or External Transfer of Shares (TSE), or Change of Directors or
+     * Officers (CoD) changes, then the fee for the Tied House Declaration changes is waived (it is covered under the
+     * fee for the other changes). Do not include Tied House Declaration changes in the payment list shown to the user.
+     */
+    if (
+      paymentList.some(
+        (item) =>
+          item.formControlName === PCLFormControlName.csExternalTransferOfShares ||
+          item.formControlName === PCLFormControlName.csInternalTransferOfShares ||
+          item.formControlName === PCLFormControlName.csChangeOfDirectorsOrOfficers
+      )
+    ) {
+      paymentList = paymentList.filter((item) => item.formControlName !== PCLFormControlName.csTiedHouseDeclaration);
+    }
+
+    return paymentList;
+  }
+
+  form: FormGroup;
 
   constructor(
     private applicationDataService: ApplicationDataService,
@@ -225,7 +261,7 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
       conditionalGroup: pclMatrixConditionalGroup
     });
 
-    this.changeList = businessRules;
+    this._PCLMatrixAllowedChangeList = businessRules;
   }
 
   /**
@@ -546,6 +582,7 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
       this.markControlsAsTouched(this.appContact.form);
       this.tiedHouseDeclaration.markAllFormsTouched();
       this.scrollToFirstInvalidControl();
+
       return;
     }
 
@@ -554,17 +591,21 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
     } else {
       this.secondaryPaymentInProgress = true;
     }
+
     this.submitApplicationInProgress = true;
-    var trigInv = 0;
+
+    var invoiceTrigger = 0;
     if (this.application.licenceFeeInvoice == null) {
-      trigInv = 1;
-    } else {
-      if (this.application.licenceFeeInvoice.statuscode == 3) {
-        //cancelled
-        trigInv = 1;
-      }
+      invoiceTrigger = 1;
+    } else if (this.application.licenceFeeInvoice.statuscode == 3) {
+      //cancelled
+      invoiceTrigger = 1;
     }
-    this.save(!this.application.applicationType.isFree, { invoiceTrigger: trigInv } as Application) // trigger invoice generation when saving LCSD6564 Only if not present or cancelled.
+
+    const showProgress = !this.application.applicationType.isFree;
+    const applicationDataOverrides = { invoiceTrigger: invoiceTrigger };
+
+    this.save(showProgress, applicationDataOverrides)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe({
         next: ([saveSucceeded, app]) => {
