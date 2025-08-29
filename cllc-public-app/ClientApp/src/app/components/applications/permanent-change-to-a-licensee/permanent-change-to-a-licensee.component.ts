@@ -113,9 +113,9 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
 
   /**
    * The list of changes the user can select from.
-   * This is dynamics based on the PCL Matrix rules. See comments throughout.
+   * This is dynamic based on the PCL Matrix rules. See related business rules comments.
    */
-  _PCLMatrixAllowedChangeList: PCLFormControlDefinitionOption[] = [];
+  PCLMatrixAllowedChangesList: PCLFormControlDefinitionOption[] = [];
 
   // PCL Matrix business rules variables
   _PCLMatrixAccountType: AccountType;
@@ -126,7 +126,7 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
    * The list of changes the user has requested.
    */
   get selectedChangeList() {
-    return this._PCLMatrixAllowedChangeList.filter(
+    return this.PCLMatrixAllowedChangesList.filter(
       (item) => this.form && this.form.get(item.formControlName).value === true
     );
   }
@@ -261,7 +261,7 @@ export class PermanentChangeToALicenseeComponent extends FormBase implements OnI
       conditionalGroup: pclMatrixConditionalGroup
     });
 
-    this._PCLMatrixAllowedChangeList = businessRules;
+    this.PCLMatrixAllowedChangesList = businessRules;
   }
 
   /**
