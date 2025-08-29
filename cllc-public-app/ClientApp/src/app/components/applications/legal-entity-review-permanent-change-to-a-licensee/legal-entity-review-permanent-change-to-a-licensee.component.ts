@@ -5,6 +5,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { AppState } from '@app/app-state/models/app-state';
 import { PCLFormControlDefinitions } from '@components/applications/permanent-change-to-a-licensee/pcl-business-rules/pcl-bussiness-rules-content';
+import {
+  PCLFormControlDefinitionOption,
+  PCLFormControlName
+} from '@components/applications/permanent-change-to-a-licensee/pcl-business-rules/pcl-bussiness-rules-types';
 import { Account } from '@models/account.model';
 import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
 import { Application } from '@models/application.model';
@@ -61,8 +65,38 @@ export class LegalEntityReviewPermanentChangeToALicenseeComponent extends FormBa
     return this.cannabisLicences.length > 0;
   }
 
-  get selectedChangeList() {
+  /**
+   * The list of changes the user has requested.
+   */
+  get selectedChangeList(): PCLFormControlDefinitionOption[] {
     return PCLFormControlDefinitions.filter((item) => this.form && this.form.get(item.formControlName).value === true);
+  }
+
+  /**
+   * The list of changes the user must pay for.
+   */
+  get paymentList(): PCLFormControlDefinitionOption[] {
+    let paymentList = this.selectedChangeList;
+
+    /*
+     * Business Rule:
+     * Tied House Declaration changes, like all changes, normally cost the user a fee. However, if the user is
+     * submitting Internal Transfer of Shares (TSI), or External Transfer of Shares (TSE), or Change of Directors or
+     * Officers (CoD) changes, then the fee for the Tied House Declaration changes is waived (it is covered under the
+     * fee for the other changes). Do not include Tied House Declaration changes in the payment list shown to the user.
+     */
+    if (
+      paymentList.some(
+        (item) =>
+          item.formControlName === PCLFormControlName.csExternalTransferOfShares ||
+          item.formControlName === PCLFormControlName.csInternalTransferOfShares ||
+          item.formControlName === PCLFormControlName.csChangeOfDirectorsOrOfficers
+      )
+    ) {
+      paymentList = paymentList.filter((item) => item.formControlName !== PCLFormControlName.csTiedHouseDeclaration);
+    }
+
+    return paymentList;
   }
 
   form: FormGroup;
@@ -215,7 +249,10 @@ export class LegalEntityReviewPermanentChangeToALicenseeComponent extends FormBa
       invoiceTrigger = 1;
     }
 
-    this.save(!this.application.applicationType.isFree, { invoiceTrigger: invoiceTrigger }) // trigger invoice generation when saving LCSD6564 Only if not present or cancelled.
+    const showProgress = !this.application.applicationType.isFree;
+    const applicationDataOverrides = { invoiceTrigger: invoiceTrigger };
+
+    this.save(showProgress, applicationDataOverrides)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe({
         next: ([saveSucceeded, app]) => {
@@ -292,14 +329,12 @@ export class LegalEntityReviewPermanentChangeToALicenseeComponent extends FormBa
    */
   private save(
     showProgress: boolean = false,
-    applicationData: Partial<Application>
+    applicationDataOverrides: Partial<Application> = {}
   ): Observable<[boolean, Application]> {
+    const applicationDataForSave = this._getApplicationDataForSave(applicationDataOverrides);
+
     return this.applicationDataService
-      .updateApplication({
-        ...this.application,
-        ...this.form.value,
-        ...applicationData
-      })
+      .updateApplication(applicationDataForSave)
       .pipe(takeWhile(() => this.componentActive))
       .pipe(
         catchError(() => {
@@ -324,6 +359,40 @@ export class LegalEntityReviewPermanentChangeToALicenseeComponent extends FormBa
           return of(res);
         })
       );
+  }
+
+  /**
+   * Prepares the application data for saving.
+   *
+   * @private
+   * @param {Partial<Application>} [applicationDataOverrides={}] Optional data that will override any existing
+   * application data.
+   * @return {*}  {Application}
+   */
+  private _getApplicationDataForSave(applicationDataOverrides: Partial<Application> = {}): Application {
+    let formData = this.form.value;
+
+    /*
+     * Business Rule:
+     * Tied House Declaration changes, like all changes, normally cost the user a fee. However, if the user is
+     * submitting Internal Transfer of Shares (TSI), or External Transfer of Shares (TSE), or Change of Directors or
+     * Officers (CoD) changes, then the fee for the Tied House Declaration changes is waived (it is covered under the
+     * fee for the other changes). In order to accommodate this, we must ensure that `csTiedHouseDeclaration` is
+     * `false`. These booleans control which types of changes dynamics generates invoices for.
+     */
+    if (
+      formData.csInternalTransferOfShares === true ||
+      formData.csExternalTransferOfShares === true ||
+      formData.csChangeOfDirectorsOrOfficers === true
+    ) {
+      formData.csTiedHouseDeclaration = false;
+    }
+
+    return {
+      ...this.application,
+      ...formData,
+      ...applicationDataOverrides
+    };
   }
 
   /**
