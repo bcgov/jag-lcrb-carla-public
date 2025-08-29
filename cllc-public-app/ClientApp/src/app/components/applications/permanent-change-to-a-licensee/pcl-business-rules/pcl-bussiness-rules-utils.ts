@@ -41,8 +41,8 @@ import { AccountSummary, LicenceTypeCategory } from '@models/account-summary.mod
  *   conditionalGroup: pclConditionalGroup;
  * });
  *
- * // Update the changeList with the new business rules
- * this.changeList = pclSectionBusinessRules;
+ * // Update the PCLMatrixAllowedChangesList with the new business rules
+ * this.PCLMatrixAllowedChangesList = pclSectionBusinessRules;
  */
 
 /**
