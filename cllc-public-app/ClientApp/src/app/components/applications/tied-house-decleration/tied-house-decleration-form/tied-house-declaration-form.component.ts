@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { formatDate } from '@components/applications/tied-house-decleration/tide-house-utils';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import {
   BusinessTypes,
@@ -11,13 +11,19 @@ import {
   TiedHouseStatusCode,
   TiedHouseViewMode
 } from '@models/tied-house-connection.model';
+import { CustomDateAdapter, CUSTOM_DATE_FORMATS } from '@shared/date-adapter';
+import { safeToISOString } from '@shared/date-fns';
 import { FormBase } from '@shared/form-base';
 import { endOfToday, subYears } from 'date-fns';
 
 @Component({
   selector: 'app-tied-house-declaration-form',
   templateUrl: './tied-house-declaration-form.component.html',
-  styleUrls: ['./tied-house-declaration-form.component.scss']
+  styleUrls: ['./tied-house-declaration-form.component.scss'],
+  providers: [
+    { provide: DateAdapter, useClass: CustomDateAdapter, deps: [MAT_DATE_LOCALE] },
+    { provide: MAT_DATE_FORMATS, useValue: CUSTOM_DATE_FORMATS }
+  ]
 })
 export class TiedHouseDeclarationFormComponent extends FormBase implements OnInit {
   /**
@@ -108,8 +114,11 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
   private patchFormFromInput() {
     if (this._tiedHouseDecleration) {
       this.setFormState();
-      this._tiedHouseDecleration.dateOfBirth = formatDate(this._tiedHouseDecleration.dateOfBirth);
-      this.form.patchValue(this._tiedHouseDecleration);
+      this.form.patchValue({
+        ...this._tiedHouseDecleration,
+        // Convert date string to Date object as expected by the form control
+        dateOfBirth: this._tiedHouseDecleration.dateOfBirth ? new Date(this._tiedHouseDecleration.dateOfBirth) : ''
+      });
       this.updateAssociatedLicenses(this._tiedHouseDecleration.associatedLiquorLicense || []);
     }
 
@@ -158,10 +167,8 @@ export class TiedHouseDeclarationFormComponent extends FormBase implements OnIni
     const tiedHouse: TiedHouseConnection = { ...this.form.getRawValue() };
     tiedHouse.applicationId = this._tiedHouseDecleration.applicationId;
     tiedHouse.id = this._tiedHouseDecleration.id;
-
-    let dateOfBirth = this.form.get('dateOfBirth').value ? new Date(this.form.get('dateOfBirth').value) : undefined;
-
-    tiedHouse.dateOfBirth = dateOfBirth?.toISOString();
+    // Convert Date object to ISO date string as expected by the API
+    tiedHouse.dateOfBirth = safeToISOString(this.form.get('dateOfBirth').value);
 
     this.saveTiedHouseDecclaration.emit(tiedHouse);
     this._tiedHouseDecleration.viewMode = TiedHouseViewMode.disabled;

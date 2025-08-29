@@ -11,28 +11,28 @@
   <span *ngIf="form.get('liqTiedHouseType')?.value !== LIQTiedHouseTypeCodes.LegalEntity">
     <div class="row">
       <app-field
-        class="col-md-6"
+        class="col-md-6 custom-date-picker-field"
         label="Date of Birth"
         [required]="true"
         [valid]="isValidOrNotTouched('dateOfBirth')"
         errorMessage="Date of Birth is required">
         <input
-          type="text"
+          matInput
           formControlName="dateOfBirth"
-          style="width: 100%; max-width: none"
           placeholder="yyyy-mm-dd"
           readonly
           class="form-control"
           [max]="maxDate"
           [min]="minDate"
-          [matDatepicker]="picker"
-          (focus)="picker.open()"
-          (click)="picker.open()"
+          [matDatepicker]="dateOfBirthPicker"
+          (focus)="dateOfBirthPicker.open()"
+          (click)="dateOfBirthPicker.open()"
           [ngClass]="{
             'readonly-white': !form.get('dateOfBirth').disabled,
             'disabled-grey': form.get('dateOfBirth').disabled
           }" />
-        <mat-datepicker #picker></mat-datepicker>
+        <mat-datepicker-toggle matSuffix [for]="dateOfBirthPicker"></mat-datepicker-toggle>
+        <mat-datepicker #dateOfBirthPicker></mat-datepicker>
       </app-field>
       <app-field
         class="col-md-6"
