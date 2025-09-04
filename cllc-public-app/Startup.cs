@@ -182,6 +182,8 @@ namespace Gov.Lclb.Cllb.Public
             if (!string.IsNullOrEmpty(_configuration["REDIS_SERVER"]))
             {
                 Console.WriteLine("********************************************* Configuring Redis ...");
+                Console.WriteLine($"[Redis] Server: {_configuration["REDIS_SERVER"]}");
+                Console.WriteLine($"[Redis] Password configured: {!string.IsNullOrEmpty(_configuration["REDIS_PASSWORD"])}");
 
                 // Build robust SE.Redis options
                 var redisOptions = ConfigurationOptions.Parse(_configuration["REDIS_SERVER"]); // e.g. "redis:6379"
@@ -191,6 +193,7 @@ namespace Gov.Lclb.Cllb.Public
                 {
                     redisOptions.Password = redisPassword;
                     redisHealthCheckConfig += $",password={redisPassword}";
+                    Console.WriteLine("[Redis] Password applied to connection options");
                 }
 
                 // Resilience & timeouts tuned for container environments
@@ -205,13 +208,45 @@ namespace Gov.Lclb.Cllb.Public
                 // If you were using "lazyConnection=true" before, the multiplexer will still lazily connect for you.
 
                 // 1) Register ONE shared multiplexer for the whole app
+                Console.WriteLine("[Redis] Creating shared connection multiplexer...");
                 IConnectionMultiplexer sharedMux = ConnectionMultiplexer.Connect(redisOptions);
-                // Basic visibility
+                Console.WriteLine($"[Redis] Connected to: {sharedMux.GetEndPoints().FirstOrDefault()}");
+                Console.WriteLine($"[Redis] Connection state: {sharedMux.IsConnected}");
+                
+                // Enhanced visibility with proper logging
                 sharedMux.ConnectionFailed += (_, e) =>
-                    Console.WriteLine($"[Redis] ConnectionFailed {e.EndPoint} {e.FailureType}");
-                sharedMux.ConnectionRestored += (_, e) => Console.WriteLine($"[Redis] ConnectionRestored {e.EndPoint}");
-                sharedMux.ErrorMessage += (_, e) => Console.WriteLine($"[Redis] Error {e.Message}");
+                {
+                    Console.WriteLine($"[Redis] ConnectionFailed - EndPoint: {e.EndPoint}, FailureType: {e.FailureType}, Exception: {e.Exception?.Message}");
+                };
+                sharedMux.ConnectionRestored += (_, e) => 
+                {
+                    Console.WriteLine($"[Redis] ConnectionRestored - EndPoint: {e.EndPoint}");
+                };
+                sharedMux.ErrorMessage += (_, e) => 
+                {
+                    Console.WriteLine($"[Redis] Error - EndPoint: {e.EndPoint}, Message: {e.Message}");
+                };
+                sharedMux.InternalError += (_, e) =>
+                {
+                    Console.WriteLine($"[Redis] InternalError - EndPoint: {e.EndPoint}, Exception: {e.Exception?.Message}");
+                };
+                
+                // Log regular Redis operations (non-error events)
+                sharedMux.ConfigurationChanged += (_, e) =>
+                {
+                    Console.WriteLine($"[Redis] ConfigurationChanged - EndPoint: {e.EndPoint}");
+                };
+                sharedMux.ConfigurationChangedBroadcast += (_, e) =>
+                {
+                    Console.WriteLine($"[Redis] ConfigurationChangedBroadcast - EndPoint: {e.EndPoint}");
+                };
+                sharedMux.HashSlotMoved += (_, e) =>
+                {
+                    Console.WriteLine($"[Redis] HashSlotMoved - OldEndPoint: {e.OldEndPoint}, NewEndPoint: {e.NewEndPoint}");
+                };
+                
                 services.AddSingleton(sharedMux);
+                Console.WriteLine("[Redis] Shared multiplexer registered in DI container");
 
                 // 2) Make the distributed cache (used by Session) reuse that multiplexer
                 services.AddStackExchangeRedisCache(o =>
@@ -219,6 +254,7 @@ namespace Gov.Lclb.Cllb.Public
                     // Use the already registered singleton instance
                     o.ConnectionMultiplexerFactory = () => Task.FromResult(sharedMux);
                 });
+                Console.WriteLine("[Redis] StackExchange Redis cache configured for sessions");
 
                 // 3) Health checks (kept as-is — the AddRedis overload accepts a connection string or options)
                 services
@@ -231,9 +267,12 @@ namespace Gov.Lclb.Cllb.Public
                     .AddSqlServer(DatabaseTools.GetConnectionString(Configuration), name: "Sql server")
 #endif
                     .AddRedis(redisHealthCheckConfig, name: "Redis");
+                Console.WriteLine("[Redis] Health checks configured");
+                Console.WriteLine("********************************************* Redis configuration complete");
             }
             else // checks with no redis.
             {
+                Console.WriteLine("[Redis] No REDIS_SERVER configured - using in-memory session storage");
                 services.AddHealthChecks()
 #if USE_GEOCODER_CHECK
                     .AddCheck<GeocoderHealthCheck>("Geocoder")
@@ -246,11 +285,13 @@ namespace Gov.Lclb.Cllb.Public
             }
 
             // session will automatically use redis or another distributed cache if it is available.
+            Console.WriteLine("[Session] Configuring session with Redis distributed cache...");
             services.AddSession(x =>
             {
                 x.IdleTimeout = TimeSpan.FromHours(4.0);
                 x.Cookie.IsEssential = true;
             });
+            Console.WriteLine($"[Session] Session timeout set to: {TimeSpan.FromHours(4.0)}");
         }
 
         /// <summary>
@@ -419,6 +460,41 @@ namespace Gov.Lclb.Cllb.Public
             }
 #endif
 
+            // Test Redis connectivity at startup
+            if (!string.IsNullOrEmpty(_configuration["REDIS_SERVER"]))
+            {
+                try
+                {
+                    using (var scope = app.ApplicationServices.CreateScope())
+                    {
+                        var redis = scope.ServiceProvider.GetService<IConnectionMultiplexer>();
+                        if (redis != null)
+                        {
+                            log.LogInformation($"[Redis] Startup connectivity check - IsConnected: {redis.IsConnected}");
+                            log.LogInformation($"[Redis] Connected endpoints: {string.Join(", ", redis.GetEndPoints().Select(ep => ep.ToString()))}");
+                            
+                            // Test a simple Redis operation
+                            var db = redis.GetDatabase();
+                            var testKey = "startup_test_" + DateTime.UtcNow.Ticks;
+                            db.StringSet(testKey, "startup_test_value", TimeSpan.FromSeconds(10));
+                            var retrieved = db.StringGet(testKey);
+                            if (retrieved.HasValue)
+                            {
+                                log.LogInformation("[Redis] Startup test successful - can read/write to Redis");
+                            }
+                            db.KeyDelete(testKey); // cleanup
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    log.LogError(ex, "[Redis] Startup connectivity test failed");
+                }
+            }
+            else
+            {
+                log.LogInformation("[Redis] Not configured - sessions will use in-memory storage");
+            }
 
             string pathBase = _configuration["BASE_PATH"];
 
@@ -482,11 +558,57 @@ namespace Gov.Lclb.Cllb.Public
 
             app.UseHealthChecks("/hc/live", new HealthCheckOptions
             {
-                // Exclude all checks and return a 200-Ok.
-                Predicate = _ => false
+            // Exclude all checks and return a 200-Ok.
+            Predicate = _ => false
+        });
+
+        // Add Redis test endpoint (only in non-production)
+        if (!env.IsProduction())
+        {
+            app.Map("/redis-test", appBuilder =>
+            {
+                appBuilder.Run(async context =>
+                {
+                    var logger = context.RequestServices.GetService<ILogger<Startup>>();
+                    var redis = context.RequestServices.GetService<IConnectionMultiplexer>();
+                    
+                    if (redis != null)
+                    {
+                        try
+                        {
+                            var db = redis.GetDatabase();
+                            var testKey = $"test_{DateTime.UtcNow.Ticks}";
+                            var testValue = $"Test value at {DateTime.UtcNow}";
+                            
+                            logger?.LogInformation($"[Redis] Manual test - Setting key: {testKey}");
+                            await db.StringSetAsync(testKey, testValue, TimeSpan.FromMinutes(1));
+                            
+                            logger?.LogInformation($"[Redis] Manual test - Getting key: {testKey}");
+                            var retrieved = await db.StringGetAsync(testKey);
+                            
+                            await context.Response.WriteAsync($"Redis Test Results:\n");
+                            await context.Response.WriteAsync($"Connected: {redis.IsConnected}\n");
+                            await context.Response.WriteAsync($"Endpoints: {string.Join(", ", redis.GetEndPoints().Select(ep => ep.ToString()))}\n");
+                            await context.Response.WriteAsync($"Set Key: {testKey}\n");
+                            await context.Response.WriteAsync($"Retrieved: {retrieved}\n");
+                            await context.Response.WriteAsync($"Success: {retrieved.HasValue && retrieved == testValue}\n");
+                            
+                            logger?.LogInformation($"[Redis] Manual test completed successfully");
+                            await db.KeyDeleteAsync(testKey); // cleanup
+                        }
+                        catch (Exception ex)
+                        {
+                            logger?.LogError(ex, "[Redis] Manual test failed");
+                            await context.Response.WriteAsync($"Redis Test Failed: {ex.Message}");
+                        }
+                    }
+                    else
+                    {
+                        await context.Response.WriteAsync("Redis not configured");
+                    }
+                });
             });
-
-
+        }
 
             app.UseXContentTypeOptions();
             app.UseXfo(xfo => xfo.Deny());
@@ -507,8 +629,36 @@ namespace Gov.Lclb.Cllb.Public
             app.UseSpaStaticFiles(staticFileOptions);
             app.UseXXssProtection(options => options.EnabledWithBlockMode());
             app.UseNoCacheHttpHeaders();
+            
             // IMPORTANT: This session call MUST go before UseMvc()
             app.UseSession();
+            
+            // Add middleware to log session usage (AFTER UseSession)
+            app.Use(async (context, next) =>
+            {
+                var logger = context.RequestServices.GetService<ILogger<Startup>>();
+                
+                // Log before processing (session load)
+                if (context.Session.IsAvailable)
+                {
+                    var sessionId = context.Session.Id;
+                    logger?.LogInformation($"[Session] Request from session: {sessionId?.Substring(0, 8)}... (Path: {context.Request.Path})");
+                }
+                
+                await next.Invoke();
+                
+                // Log after processing if session was modified
+                if (context.Session.IsAvailable && context.Response.HasStarted == false)
+                {
+                    // This will trigger session save if it was modified
+                    var sessionKeys = context.Session.Keys.Count();
+                    if (sessionKeys > 0)
+                    {
+                        logger?.LogInformation($"[Session] Session has {sessionKeys} keys - will be saved to Redis");
+                    }
+                }
+            });
+            
             app.UseAuthentication();
             app.UseMvc(routes =>
             {
