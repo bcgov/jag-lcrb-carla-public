@@ -41,9 +41,10 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Mime;
-using StackExchange.Redis;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 using Gov.Lclb.Cllb.Public.Repositories;
+using StackExchange.Redis;
+using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public
 {
@@ -177,58 +178,71 @@ namespace Gov.Lclb.Cllb.Public
             orgBook.ReadResponseAsString = true;
             services.AddTransient(_ => (IOrgBookClient)orgBook);
 
-
+            // ========= Redis (resilient, shared multiplexer) =========
             if (!string.IsNullOrEmpty(_configuration["REDIS_SERVER"]))
             {
-                string config = _configuration["REDIS_SERVER"];
-                if (!string.IsNullOrEmpty(_configuration["REDIS_PASSWORD"]))
+                Console.WriteLine("********************************************* Configuring Redis ...");
+
+                // Build robust SE.Redis options
+                var redisOptions = ConfigurationOptions.Parse(_configuration["REDIS_SERVER"]); // e.g. "redis:6379"
+                var redisHealthCheckConfig = _configuration["REDIS_SERVER"];
+                var redisPassword = _configuration["REDIS_PASSWORD"];
+                if (!string.IsNullOrEmpty(redisPassword))
                 {
-                    string redisPassword = _configuration["REDIS_PASSWORD"];
-                    config += $",password={redisPassword}";
+                    redisOptions.Password = redisPassword;
+                    redisHealthCheckConfig += $",password={redisPassword}";
                 }
-                // Abort Connect is a setting that controls if Redis will try a connection if it thinks the service is not available.
-                // For cloud installations such as Azure it should be set to false.
-                if (!string.IsNullOrEmpty(_configuration["REDIS_DISABLE_ABORT_CONNECT"]))
+
+                // Resilience & timeouts tuned for container environments
+                redisOptions.AbortOnConnectFail = false; // keep trying if not available at startup
+                redisOptions.ConnectRetry = 5;
+                redisOptions.ConnectTimeout = 10000; // ms
+                redisOptions.SyncTimeout = 8000; // ms
+                redisOptions.KeepAlive = 30; // seconds
+                redisOptions.AllowAdmin = false;
+                redisOptions.ReconnectRetryPolicy = new ExponentialRetry(5000); // ms backoff
+                redisHealthCheckConfig += ",abortConnect=false";
+                // If you were using "lazyConnection=true" before, the multiplexer will still lazily connect for you.
+
+                // 1) Register ONE shared multiplexer for the whole app
+                IConnectionMultiplexer sharedMux = ConnectionMultiplexer.Connect(redisOptions);
+                // Basic visibility
+                sharedMux.ConnectionFailed += (_, e) =>
+                    Console.WriteLine($"[Redis] ConnectionFailed {e.EndPoint} {e.FailureType}");
+                sharedMux.ConnectionRestored += (_, e) => Console.WriteLine($"[Redis] ConnectionRestored {e.EndPoint}");
+                sharedMux.ErrorMessage += (_, e) => Console.WriteLine($"[Redis] Error {e.Message}");
+                services.AddSingleton(sharedMux);
+
+                // 2) Make the distributed cache (used by Session) reuse that multiplexer
+                services.AddStackExchangeRedisCache(o =>
                 {
-                    config += ",abortConnect=false";
-                }
-                
-                services.AddDistributedRedisCache(o =>
-                {
-                    o.Configuration = config;
+                    // Use the already registered singleton instance
+                    o.ConnectionMultiplexerFactory = () => Task.FromResult(sharedMux);
                 });
 
-                // health checks
+                // 3) Health checks (kept as-is — the AddRedis overload accepts a connection string or options)
+                services
+                    .AddHealthChecks()
+#if USE_GEOCODER_CHECK
+                    .AddCheck<GeocoderHealthCheck>("Geocoder")
+#endif
+                    .AddCheck("cllc_public_app", () => HealthCheckResult.Healthy())
+#if (USE_MSSQL)
+                    .AddSqlServer(DatabaseTools.GetConnectionString(Configuration), name: "Sql server")
+#endif
+                    .AddRedis(redisHealthCheckConfig, name: "Redis");
+            }
+            else // checks with no redis.
+            {
                 services.AddHealthChecks()
 #if USE_GEOCODER_CHECK
                     .AddCheck<GeocoderHealthCheck>("Geocoder")
 #endif
                     .AddCheck("cllc_public_app", () => HealthCheckResult.Healthy())
-                    // No longer checking SQL Server in health checks as the SQL components are no longer active.
 #if (USE_MSSQL)
-                .AddSqlServer(DatabaseTools.GetConnectionString(Configuration), name: "Sql server")
+                    .AddSqlServer(DatabaseTools.GetConnectionString(Configuration), name: "Sql server")
 #endif
-                    .AddRedis(config, name: "Redis");
-                /*
-                 * .AddCheck<DynamicsHealthCheck>("Dynamics")
-                 *
-                 */
-
-            }
-            else // checks with no redis.
-            {
-                // health checks
-                services.AddHealthChecks()
-#if USE_GEOCODER_CHECK
-                    .AddCheck<GeocoderHealthCheck>("Geocoder")
-#endif
-                    .AddCheck("cllc_public_app", () => HealthCheckResult.Healthy());
-                // No longer checking SQL Server in health checks as the SQL components are no longer active.
-#if (USE_MSSQL)
-                .AddSqlServer(DatabaseTools.GetConnectionString(Configuration), name: "Sql server")
-#endif
-                //.AddCheck<DynamicsHealthCheck>("Dynamics")
-
+                ;
             }
 
             // session will automatically use redis or another distributed cache if it is available.
@@ -237,7 +251,6 @@ namespace Gov.Lclb.Cllb.Public
                 x.IdleTimeout = TimeSpan.FromHours(4.0);
                 x.Cookie.IsEssential = true;
             });
-
         }
 
         /// <summary>
