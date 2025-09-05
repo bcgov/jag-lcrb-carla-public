@@ -272,18 +272,24 @@ export class ConnectionToProducersComponent implements OnInit, OnChanges, OnDest
       });
   }
 
-  requiresWordingChange(name: String): boolean {
+  /**
+   * Gets the page header text based on the application type.
+   *
+   * @return {*}  {string}
+   */
+  get pageHeader(): string {
+    const applicationTypeName = this.application?.applicationType?.name;
     if (
-      name === 'Producer Retail Store' ||
-      name == 'PRS Relocation' ||
-      name == 'PRS Transfer of Ownership' ||
-      name == 'Section 119 Authorization(PRS)' ||
-      name == 'CRS Renewal'
+      applicationTypeName === 'Producer Retail Store' ||
+      applicationTypeName == 'PRS Relocation' ||
+      applicationTypeName == 'PRS Transfer of Ownership' ||
+      applicationTypeName == 'Section 119 Authorization(PRS)' ||
+      applicationTypeName == 'CRS Renewal'
     ) {
-      return true;
+      return 'CONNECTIONS TO OTHER FEDERAL PRODUCERS';
     }
 
-    return false;
+    return 'CONNECTIONS TO FEDERAL PRODUCERS OF CANNABIS';
   }
 
   ngOnDestroy(): void {
