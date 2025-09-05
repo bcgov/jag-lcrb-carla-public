@@ -1,18 +1,11 @@
 <div [ngBusy]="!hasLoadedData">
   <ng-container *ngIf="hasLoadedData">
     <section *ngIf="!account.isOtherBusinessType()">
-      <h3 *ngIf="!requiresWordingChange(application?.applicationType?.name)" class="blue-header">
-        CONNECTIONS TO FEDERAL PRODUCERS OF CANNABIS
-      </h3>
-      <h3 *ngIf="requiresWordingChange(application?.applicationType?.name)" class="blue-header">
-        CONNECTIONS TO OTHER FEDERAL PRODUCERS
-      </h3>
+      <h3 class="blue-header">{{ pageHeader }}</h3>
 
       <div class="padded-section content-bottom" [formGroup]="form">
         <div class="mb-3">
-          <span *ngIf="federalProducerText === 'federal producer'">
-            A "<strong>federal producer</strong>" is a federally licensed producer of cannabis
-          </span>
+          <span> A "<strong>federal producer</strong>" is a federally licensed producer of cannabis </span>
         </div>
 
         <!-- CORPORATIONS -->
