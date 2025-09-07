@@ -1,0 +1,69 @@
+<div *ngIf="hasLoadedData" [formGroup]="form" class="form-wrapper">
+  <h1>Legal Entity Review</h1>
+
+  <mat-progress-bar class="mt-1" *ngIf="!isDataLoaded" mode="indeterminate"></mat-progress-bar>
+
+  <ng-container *ngIf="isDataLoaded">
+    <section>
+      <app-legal-entity-review-disclaimer
+        [account]="account"
+        [application]="application"></app-legal-entity-review-disclaimer>
+    </section>
+
+    <section>
+      <app-legal-entity-review-tied-house
+        [disabled]="formDisabled"
+        (hasTiedHouseChangesToDeclareEvent)="
+          handleHasTiedHouseChangesToDeclareEvent($event)
+        "></app-legal-entity-review-tied-house>
+    </section>
+
+    <section *ngIf="showTiedHouseDeclarationSection">
+      <h3 class="blue-header">Tied House Declaration</h3>
+      <div class="content-bottom">
+        <app-tied-house-declaration
+          #tiedHouseDeclaration
+          [isReadOnly]="formDisabled"
+          [applicationId]="application.id"
+          [initialTiedHouseConnections]="initialTiedHouseConnections"
+          (onChangesEvent)="handleOnTiedHouseChangesEvent($event)"></app-tied-house-declaration>
+      </div>
+    </section>
+
+    <section>
+      <app-legal-entity-review-supporting-documents
+        [disabled]="formDisabled"
+        [application]="application"
+        [required]="!hasTiedHouseChangesToDeclare"
+        (onUploadedFileCountEvent)="uploadedLegalEntityReviewSupportingDocuments = $event">
+      </app-legal-entity-review-supporting-documents>
+    </section>
+
+    <section>
+      <app-legal-entity-review-declarations
+        [hasLiquor]="hasLiquor"
+        [hasCannabis]="hasCannabis"
+        [showValidationMessages]="showValidationMessages"></app-legal-entity-review-declarations>
+    </section>
+
+    <section>
+      <app-legal-entity-review-what-happens-next></app-legal-entity-review-what-happens-next>
+    </section>
+
+    <section class="error mt-3" *ngIf="showValidationMessages">
+      <p *ngFor="let message of validationMessages">
+        <span class="app-cancel">
+          <mat-icon aria-label="error icon" style="font-size: 15px">error</mat-icon>
+          {{ message }}
+        </span>
+      </p>
+    </section>
+
+    <section *ngIf="!formDisabled" style="margin-top: 20px; position: relative">
+      <button mat-raised-button color="primary" class="progress-button" (click)="onSubmit()" [disabled]="isSubmitting">
+        <span>SUBMIT</span>
+        <mat-progress-bar *ngIf="isSubmitting" mode="indeterminate"></mat-progress-bar>
+      </button>
+    </section>
+  </ng-container>
+</div>

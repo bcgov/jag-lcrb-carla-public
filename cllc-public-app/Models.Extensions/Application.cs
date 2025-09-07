@@ -123,7 +123,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioAuthorizedtosubmit = from.AuthorizedToSubmit;
             to.AdoxioSignatureagreement = from.SignatureAgreement;
 
-            to.AdoxioApplicanttype = (int?)from.ApplicantType;
+            to.AdoxioApplicanttype = (int?)from.ApplicantType == 0 ? null: (int?)from.ApplicantType;
             to.AdoxioLgzoning = (int?)from.LgZoning;
             to.AdoxioLgdecisioncomments = from.LGDecisionComments;
 
@@ -187,6 +187,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioCsnamechangelicenseesociety = from.CsNameChangeLicenseeSociety;
             to.AdoxioCsnamechangeperson = from.CsNameChangeLicenseePerson;
             to.AdoxioCsadditionofreceiverorexecutor = from.CsAdditionalReceiverOrExecutor;
+            to.AdoxioCschangetotiedhouse = from.CsTiedHouseDeclaration;
 
             // Manufacturing structural change fields
 
@@ -287,6 +288,9 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioEstablishmentreopeningdate = from.EstablishmentReopeningDate;
             
             to.AdoxioChecklistdrivingrecordcomplete = from.temporaryRelocationCriteria;
+
+            to.Statuscode = (int?)from.ApplicationStatus == 0 ? null : (int?)from.ApplicationStatus;
+
         }
 
 
@@ -497,6 +501,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 PaymentReceivedDate = dynamicsApplication.AdoxioPaymentreceiveddate,
                 Description1 = dynamicsApplication.AdoxioDescription1,
                 Description2 = dynamicsApplication.AdoxioDescription2,
+                Description3 = dynamicsApplication.AdoxioDescription3,
                 TempDateFrom = dynamicsApplication.AdoxioTempdatefrom,
                 TempDateTo = dynamicsApplication.AdoxioTempdateto,
 
@@ -613,6 +618,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 CsNameChangeLicenseeSociety = dynamicsApplication.AdoxioCsnamechangelicenseesociety,
                 CsNameChangeLicenseePerson = dynamicsApplication.AdoxioCsnamechangeperson,
                 CsAdditionalReceiverOrExecutor = dynamicsApplication.AdoxioCsadditionofreceiverorexecutor,
+                CsTiedHouseDeclaration = dynamicsApplication.AdoxioCschangetotiedhouse,
                 PrimaryInvoicePaid = dynamicsApplication.AdoxioPrimaryapplicationinvoicepaid == 1,
                 SecondaryInvoicePaid = dynamicsApplication.AdoxioSecondaryapplicationinvoicepaid == 1,
                 IsOnINLand = ConvertYesNoLookupToBool(dynamicsApplication.AdoxioIsoninland),
@@ -696,6 +702,8 @@ namespace Gov.Lclb.Cllb.Public.Models
 
                 // Temporary Relocations - removed 2024-08-14
                 temporaryRelocationCriteria = dynamicsApplication.AdoxioChecklistdrivingrecordcomplete,
+
+                ApplicationExtension = dynamicsApplication.AdoxioApplicationExtension.ToViewModel()
             };
 
 
@@ -820,6 +828,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 applicationVM.ApplicantType = (AdoxioApplicantTypeCodes)dynamicsApplication.AdoxioApplicanttype;
             }
 
+
             //get applying person from Contact entity
             if (dynamicsApplication._adoxioApplyingpersonValue != null)
             {
@@ -886,14 +895,6 @@ namespace Gov.Lclb.Cllb.Public.Models
                     applicationVM.ApplicationType.DynamicsForm = dynamicsClient.GetSystemformViewModel(cache, logger, applicationVM.ApplicationType.FormReference);
                 }
             }
-            if (dynamicsApplication.AdoxioApplicationAdoxioTiedhouseconnectionApplication != null)
-            {
-                var tiedHouse = dynamicsApplication.AdoxioApplicationAdoxioTiedhouseconnectionApplication.FirstOrDefault();
-                if (tiedHouse != null)
-                {
-                    applicationVM.TiedHouse = tiedHouse.ToViewModel();
-                }
-            }
 
             if (dynamicsApplication.AdoxioPoliceJurisdictionId != null)
             {
@@ -929,6 +930,11 @@ namespace Gov.Lclb.Cllb.Public.Models
             if(dynamicsApplication.AdoxioRelatedLicence != null)
             {
                 applicationVM.RelatedLicenceNumber = dynamicsApplication.AdoxioRelatedLicence.AdoxioLicencenumber;
+            }
+
+            if(dynamicsApplication.AdoxioApplicationExtension != null)
+            {
+                applicationVM.ApplicationExtension = dynamicsApplication.AdoxioApplicationExtension.ToViewModel();
             }
 
             return applicationVM;
@@ -1052,7 +1058,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 EstablishmentAddressStreet = dynamicsApplication.AdoxioEstablishmentaddressstreet,
                 EstablishmentAddressCity = dynamicsApplication.AdoxioEstablishmentaddresscity,
                 EstablishmentAddressPostalCode = dynamicsApplication.AdoxioEstablishmentaddresspostalcode,
-                EstablishmentAddress =  dynamicsApplication.AdoxioEstablishmentaddressstreet
+                EstablishmentAddress = dynamicsApplication.AdoxioEstablishmentaddressstreet
                                         + ", " + dynamicsApplication.AdoxioEstablishmentaddresscity
                                         + " " + dynamicsApplication.AdoxioEstablishmentaddresspostalcode,
                 EstablishmentPhone = dynamicsApplication.AdoxioEstablishmentphone,
@@ -1064,6 +1070,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 IsStructuralChange = (dynamicsApplication?.AdoxioApplicationTypeId?.AdoxioIsstructuralchange == true),
                 DateApplicationSubmitted = dynamicsApplication?.AdoxioDateapplicationsubmitted,
                 DateApplicantSentToLG = dynamicsApplication?.AdoxioDateapplicantsenttolg,
+                ApplicationExtension = dynamicsApplication?.AdoxioApplicationExtension?.ToViewModel(),
             };
 
             // id

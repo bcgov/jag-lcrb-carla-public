@@ -1,0 +1,112 @@
+import {
+  PCLFormControlDefinitionOption,
+  PCLFormControlName
+} from '@components/applications/permanent-change-to-a-licensee/pcl-business-rules/pcl-bussiness-rules-types';
+
+/**
+ * The list of options for the types of changes in a permanent change application.
+ */
+export const PCLFormControlDefinitions: PCLFormControlDefinitionOption[] = [
+  {
+    name: 'Internal Transfer of Shares',
+    formControlName: PCLFormControlName.csInternalTransferOfShares,
+    CannabisFee: 110,
+    LiquorFee: 110,
+    helpTextHeader: 'Use this option to report:',
+    helpText: [
+      'When shares or partnership units are redistributed between existing shareholders/partners  but no new shareholders/partners are added to the business structure (if new shareholders are added, see external transfer of shares)',
+      'Removal of shareholders/unit holders',
+      'Amalgamations that do not add new shareholders or legal entities to the licensee  corporation',
+      'Holding companies within the licensee corporation and/or third party operators should also complete this section when an internal share transfer or an amalgamation occurs'
+    ]
+    // helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
+  },
+  {
+    name: 'External Transfer of Shares',
+    formControlName: PCLFormControlName.csExternalTransferOfShares,
+    CannabisFee: 330,
+    LiquorFee: 330,
+    helpTextHeader: 'Use this option to report:',
+    helpText: [
+      'When new shareholders (companies or individuals) have been added to the licensee corporation or holding companies as a result of a transfer of existing shares or the issuance of new shares',
+      'Amalgamations that add new shareholders or legal entities to the licensee corporation',
+      'Third party operators should also complete this section when an external transfer occurs'
+    ]
+    // helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
+  },
+  {
+    name: 'Change of Directors or Officers',
+    formControlName: PCLFormControlName.csChangeOfDirectorsOrOfficers,
+    CannabisFee: 500,
+    LiquorFee: 220,
+    helpTextHeader: 'Use this option to report:',
+    helpText: [
+      'For liquor licensees - when there are changes in directors or officers, as defined by the <a href="https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/02057_00_multi#section1" target="_blank">BC Corporations Act</a> or the <a href="https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/15018_01#section1" target="_blank">BC Societies Act</a>, of a public corporation or society that holds a licence, or of a public corporation or society within the licensee legal entity',
+      'For cannabis licensees – when there are changes in directors or officers of a private or public  corporation or society that holds a licence, or of a public or private corporation or society within the licensee legal entity'
+    ]
+    // helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
+  },
+  {
+    name: 'Name Change, Licensee -- Corporation',
+    otherName: 'Name Change, Licensee -- Organization',
+    formControlName: PCLFormControlName.csNameChangeLicenseeCorporation,
+    CannabisFee: 220,
+    LiquorFee: 220,
+    helpTextHeader: 'Use this option to report:',
+    helpText: [
+      'When a corporation with an interest in a licence has legally changed its name, but existing corporate shareholders, directors and officers, and certificate number on the certificate of incorporation have not changed'
+    ]
+    // helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
+  },
+  {
+    name: 'Name Change, Licensee -- Partnership',
+    formControlName: PCLFormControlName.csNameChangeLicenseePartnership,
+    CannabisFee: 220,
+    LiquorFee: 220,
+    helpTextHeader: 'Use this option to report:',
+    helpText: ['When a person holding an interest in a licence has legally changed their name']
+    // helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
+  },
+  {
+    name: 'Name Change, Licensee -- Society',
+    formControlName: PCLFormControlName.csNameChangeLicenseeSociety,
+    CannabisFee: 220,
+    LiquorFee: 220,
+    helpTextHeader: 'Use this option to report:',
+    helpText: [
+      'When the legal name of a society is changed, but the society structure, membership and certification number on the certificate of incorporation does not change'
+    ]
+    // helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
+  },
+  {
+    name: 'Name Change, Person',
+    formControlName: PCLFormControlName.csNameChangeLicenseePerson,
+    CannabisFee: 220,
+    LiquorFee: 220,
+    helpTextHeader: 'Use this option to report:',
+    helpText: ['when a person holding an interest in a licence has legally changed their name']
+    // helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
+  },
+  {
+    name: 'Addition of Receiver or Executor',
+    formControlName: PCLFormControlName.csAdditionalReceiverOrExecutor,
+    CannabisFee: 220,
+    LiquorFee: 220,
+    helpTextHeader: 'Use this option to report:',
+    helpText: ['Upon the death, bankruptcy or receivership of a licensee']
+    // helpTextLink: 'https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licences-permits/changing-a-liquor-licence',
+  },
+  {
+    name: 'Tied House Declaration',
+    formControlName: PCLFormControlName.csTiedHouseDeclaration,
+    CannabisFee: 0,
+    LiquorFee: 220,
+    helpTextHeader: 'Use this option to report:',
+    helpText: [
+      'When a Tied House relationship is formed, and is not reported through one of the above options.',
+      'Ex: A new director has a Tied House relationship. If you are required to report a Change of Directors or Officers, then you do not need to report this application as well.',
+      'Generally, Tied House relationships between licensees (specifically liquor primary, food primary, private liquor/wine store, or the business location of a caterer) and manufacturers or agents are prohibited under the <a href="https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/15019#section62" target="_blank">LCLA</a>.',
+      '“Tied house” refers to a relationship between a manufacturer/agent and another licensee if the relationship puts the licensee in the position of being likely to promote the sale of that manufacturer’s/agent’s liquor products over another manufacturer.'
+    ]
+  }
+];

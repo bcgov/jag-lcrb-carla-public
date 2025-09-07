@@ -86,19 +86,11 @@ import { NotFoundComponent } from "@components/not-found/not-found.component";
 import { FileUploaderComponent } from "@shared/components/file-uploader/file-uploader.component";
 import { DelayedFileUploaderComponent } from "@shared/components/delayed-file-uploader/delayed-file-uploader.component";
 
-import { CorporateDetailsComponent } from
-  "@components/account-profile/tabs/corporate-details/corporate-details.component";
 import {
   DirectorsAndOfficersComponent,
   DirectorAndOfficerPersonDialogComponent
 } from "@components/account-profile/tabs/directors-and-officers/directors-and-officers.component";
-import { SecurityAssessmentsComponent } from
-  "@components/account-profile/tabs/security-assessments/security-assessments.component";
 import { BeforeYouStartComponent } from "@components/account-profile/tabs/before-you-start/before-you-start.component";
-import { FinancialInformationComponent } from
-  "@components/account-profile/tabs/financial-information/financial-information.component";
-import { AccountProfileSummaryComponent } from
-  "@components/account-profile/account-profile-summary/account-profile-summary.component";
 
 import { NgBusyModule } from "ng-busy";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
@@ -156,7 +148,7 @@ import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { EstablishmentWatchWordsService } from "@services/establishment-watch-words.service";
 import {
   ConnectionToNonMedicalStoresComponent
-} from "@components/account-profile/tabs/connection-to-non-medical-stores/connection-to-non-medical-stores.component";
+} from "@components/applications/application/tabs/connection-to-non-medical-stores/connection-to-non-medical-stores.component";
 import { AssociatePageComponent } from "@components/associate-page/associate-page.component";
 import { LicenceRenewalStepsComponent } from
   "@components/licences/licence-renewal-steps/licence-renewal-steps.component";
@@ -259,7 +251,7 @@ import { LegalEntityTypeUpdateCalloutboxComponent } from
   "./components/dashboard/legal-entity-type-update-calloutbox/legal-entity-type-update-calloutbox.component";
 import { OffsiteStorageComponent } from "@components/offsite-storage/offsite-storage.component";
 import { OffsiteTableComponent } from "@components/tables/offsite-table/offsite-table.component";
-import { ContactComponent } from "./shared/components/contact/contact.component";
+import { PermanentChangeContactComponent } from "./shared/components/permanent-change/permanent-change-contact/permanent-change-contact.component";
 import { InvoiceDetailsComponent } from "./shared/components/invoice-details/invoice-details.component";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { NoticesComponent } from "@components/notices/notices.component";
@@ -324,7 +316,7 @@ import { NgxSliderModule } from "@angular-slider/ngx-slider";
 import { SepClaimComponent } from './components/sep/sep-claim/sep-claim.component';
 import { FinalConfirmationComponent } from './components/sep/sep-application/final-confirmation/final-confirmation.component';
 import { CancelSepApplicationDialogComponent } from './components/sep/sep-application/cancel-sep-application-dialog/cancel-sep-application-dialog.component';
-import { ApplicationTypeDataService } from "./services/application-type-data.service";
+import { PermanentChangeDeclarationsComponent } from "@shared/components/permanent-change/permanent-change-declarations/permanent-change-declarations.component";
 
 // LCSD - 6243: 2024-02-28 waynezen
 import { ForbiddenModalComponent } from '@shared/components/forbidden-modal/forbidden-modal.component';
@@ -332,7 +324,38 @@ import { RelatedJobnumberPickerComponent } from './shared/components/related-job
 import { RelocationTypeComponent } from "@components/relocation-type/relocation-type.component";
 import { FeedbackComponent } from "@components/feedback/feedback.component";
 import { MaintenanceBannerComponent } from "@components/maintenance-banner/maintenance-banner.component";
-
+import { StandalonePaymentConfirmationComponent } from "@components/standalone-payment-confirmation/standalone-payment-confirmation.component";
+import { PermanentChangeDisclaimerComponent } from "@shared/components/permanent-change/permanent-change-disclaimer/permanent-change-disclaimer.component";
+import { PermanentChangeHolderDetailsComponent } from "@shared/components/permanent-change/permanent-change-disclaimer/permanent-change-holder-details/permanent-change-holder-details.component";
+import { PermanentChangeTypesOfChangesRequestedComponent } from "@shared/components/permanent-change/permanent-change-types-of-changes-requested/permanent-change-types-of-changes-requested.component";
+import { PermanentChangePersonalHistorySummaryFormsComponent } from "@shared/components/permanent-change/permanent-change-personal-history-summary-forms/permanent-change-personal-history-summary-forms.component";
+import { PermanentChangePaymentComponent } from "@shared/components/permanent-change/permanent-change-payment/permanent-change-payment.component";
+import { PermanentChangeCannabisSecurityScreeningFormsComponent } from "@shared/components/permanent-change/permanent-change-cannabis-security-screening-forms/permanent-change-cannabis-security-screening-forms.component";
+import { PermanentChangeAdditionReceiverExecutorComponent } from "@shared/components/permanent-change/permanent-change-addition-receiver-executor/permanent-change-addition-receiver-executor.component";
+import { PermanentChangeInternalTransferShares } from "@shared/components/permanent-change/permanent-change-internal-transfer-shares/permanent-change-internal-transfer-shares.component";
+import { PermanentChangeNameLicenseeCorporationComponent } from "@shared/components/permanent-change/permanent-change-name-licensee-corporation/permanent-change-name-licensee-corporation.component";
+import { PermanentChangeDirectorsOfficers } from "@shared/components/permanent-change/permanent-change-directors-officers/permanent-change-directors-officers.component";
+import { PermanentChangeNameLicenseeSocitey } from "@shared/components/permanent-change/permanent-change-name-licensee-society/permanent-change-name-licensee-society.component";
+import { PermanentChangeNamePersonComponent } from "@shared/components/permanent-change/permanent-change-name-person/permanent-change-name-person.component";
+import { PermanentChangeExternalTransferShares } from "@shared/components/permanent-change/permanent-change-external-transfer-shares/permanent-change-external-transfer-shares.component";
+import { PermanentChangeNameLicenseePartnership } from "@shared/components/permanent-change/permanent-change-name-licensee-partnership/permanent-change-name-licensee-partnership.component";
+import { RelatedLicencePickerMulitiSelectComponent } from "@shared/components/related-licence-picker-multi-select/related-licence-picker-multi-select.component";
+import { TiedHouseDeclarationFormComponent } from "@components/applications/tied-house-decleration/tied-house-decleration-form/tied-house-declaration-form.component";
+import { TiedHouseDeclarationComponent } from './components/applications/tied-house-decleration/tied-house-declaration.component';
+import { LegalEntityReviewTypesOfChangesRequiredComponent } from "@shared/components/legal-entity-review/legal-entity-review-types-of-changes-required/legal-entity-review-types-of-changes-required.component";
+import { LegalEntityReviewJobComponent } from "@shared/components/legal-entity-review/legal-entity-review-job/legal-entity-review-job.component";
+import { LegalEntityReviewComponent } from "@components/applications/legal-entity-review/legal-entity-review.component";
+import { LegalEntityReviewDisclaimerComponent } from "@shared/components/legal-entity-review/legal-entity-review-disclaimer/legal-entity-review-disclaimer.component";
+import { LegalEntityReviewDeclarationsComponent } from "@shared/components/legal-entity-review/legal-entity-review-declarations/legal-entity-review-declarations.component";
+import { LegalEntityReviewWhatHappensNextComponent } from "@shared/components/legal-entity-review/legal-entity-review-what-happens-next/legal-entity-review-what-happens-next.component";
+import { LegalEntityReviewTiedHouseComponent } from "@shared/components/legal-entity-review/legal-entity-review-tied-house/legal-entity-review-tied-house.component";
+import { LegalEntityReviewSupportingDocumentsComponent } from "@shared/components/legal-entity-review/legal-entity-review-supporting-documents/legal-entity-review-supporting-documents.component";
+import { LegalEntityReviewPermanentChangeToALicenseeComponent } from "@components/applications/legal-entity-review-permanent-change-to-a-licensee/legal-entity-review-permanent-change-to-a-licensee.component";
+import { LegalEntityReviewNoticeLetterComponent } from "@shared/components/legal-entity-review/legal-entity-review-notice-letter/legal-entity-review-notice-letter.component";
+import { LegalEntityReviewOutcomeLetterComponent } from "@shared/components/legal-entity-review/legal-entity-review-outcome-letter/legal-entity-review-outcome-letter.component";
+import { GenericConfirmationDialogComponent } from "@shared/components/dialog/generic-confirmation-dialog/generic-confirmation-dialog.component";
+import { GenericMessageDialogComponent } from "@shared/components/dialog/generic-message-dialog/generic-message-dialog.component";
+import { ConnectionToOtherLiquorLicencesComponent } from "@components/account-profile/tabs/connection-to-other-liquor-licences/connection-to-other-liquor-licences.component";
 
 @NgModule({
   declarations: [
@@ -348,9 +371,7 @@ import { MaintenanceBannerComponent } from "@components/maintenance-banner/maint
     BeforeYouStartComponent,
     BreadcrumbComponent,
     AccountProfileComponent,
-    AccountProfileSummaryComponent,
     ConnectionToProducersComponent,
-    CorporateDetailsComponent,
     DashboardComponent,
     SepDashboardComponent,
     DelayedFileUploaderComponent,
@@ -360,7 +381,6 @@ import { MaintenanceBannerComponent } from "@components/maintenance-banner/maint
     EditShareholdersComponent,
     FieldComponent,
     FileUploaderComponent,
-    FinancialInformationComponent,
     FormViewerComponent,
     HomeComponent,
     IndividualAssociatesResultsComponent,
@@ -379,12 +399,12 @@ import { MaintenanceBannerComponent } from "@components/maintenance-banner/maint
     OrganizationResultsComponent,
     PaymentConfirmationComponent,
     SepPaymentConfirmationComponent,
+    StandalonePaymentConfirmationComponent,
     PolicyDocumentComponent,
     PolicyDocumentSidebarComponent,
     PrePaymentComponent,
     ProofOfZoningComponent,
     ResultComponent,
-    SecurityAssessmentsComponent,
     SolePropResultsComponent,
     SpdConsentComponent,
     StaticComponent,
@@ -468,7 +488,7 @@ import { MaintenanceBannerComponent } from "@components/maintenance-banner/maint
     LegalEntityTypeUpdateCalloutboxComponent,
     OffsiteStorageComponent,
     OffsiteTableComponent,
-    ContactComponent,
+    PermanentChangeContactComponent,
     InvoiceDetailsComponent,
     NoticesComponent,
     NoticesTableComponent,
@@ -477,6 +497,7 @@ import { MaintenanceBannerComponent } from "@components/maintenance-banner/maint
     EventLocationTableComponent,
     ResolvedApplicationsComponent,
     RelatedLicencePickerComponent,
+    RelatedLicencePickerMulitiSelectComponent,
     ApplicationTiedHouseExemptionComponent,
     LiquorFreeEventComponent,
     WorkerLandingPageComponent,
@@ -527,7 +548,40 @@ import { MaintenanceBannerComponent } from "@components/maintenance-banner/maint
     RelatedJobnumberPickerComponent,
     RelocationTypeComponent,
     FeedbackComponent,
-    MaintenanceBannerComponent
+    MaintenanceBannerComponent,
+    PermanentChangeAdditionReceiverExecutorComponent,
+    PermanentChangeAdditionReceiverExecutorComponent,
+    PermanentChangeCannabisSecurityScreeningFormsComponent,
+    PermanentChangeDeclarationsComponent,
+    PermanentChangeDirectorsOfficers,
+    PermanentChangeDisclaimerComponent,
+    PermanentChangeExternalTransferShares,
+    PermanentChangeHolderDetailsComponent,
+    PermanentChangeInternalTransferShares,
+    PermanentChangeNameLicenseeCorporationComponent,
+    PermanentChangeNameLicenseePartnership,
+    PermanentChangeNameLicenseeSocitey,
+    PermanentChangeNamePersonComponent,
+    PermanentChangePaymentComponent,
+    PermanentChangePersonalHistorySummaryFormsComponent,
+    PermanentChangeTypesOfChangesRequestedComponent,
+    TiedHouseDeclarationFormComponent,
+    TiedHouseDeclarationComponent,
+    PermanentChangeTypesOfChangesRequestedComponent,
+    LegalEntityReviewComponent,
+    LegalEntityReviewDeclarationsComponent,
+    LegalEntityReviewDisclaimerComponent,
+    LegalEntityReviewJobComponent,
+    LegalEntityReviewSupportingDocumentsComponent,
+    LegalEntityReviewTiedHouseComponent,
+    LegalEntityReviewTypesOfChangesRequiredComponent,
+    LegalEntityReviewWhatHappensNextComponent,
+    LegalEntityReviewPermanentChangeToALicenseeComponent,
+    LegalEntityReviewNoticeLetterComponent,
+    LegalEntityReviewOutcomeLetterComponent,
+    ConnectionToOtherLiquorLicencesComponent,
+    GenericConfirmationDialogComponent,
+    GenericMessageDialogComponent
   ],
   imports: [
     AppRoutingModule,
@@ -629,7 +683,9 @@ import { MaintenanceBannerComponent } from "@components/maintenance-banner/maint
     MatStepperModule,
     NgxFileDropModule,
     ReactiveFormsModule,
-    MatBadgeModule
+    MatBadgeModule,
+    TiedHouseDeclarationFormComponent,
+    TiedHouseDeclarationComponent
   ],
   providers: [
     AnnualVolumeService,
@@ -669,7 +725,6 @@ import { MaintenanceBannerComponent } from "@components/maintenance-banner/maint
     SpecialEventsDataService,
     BCeidOrServiceCardAuthGuard,
     PoliceAuthGuard,
-    ApplicationTypeDataService,
     {
       provide: APP_INITIALIZER,
       useFactory: (featureFlagService: FeatureFlagService) => function () {

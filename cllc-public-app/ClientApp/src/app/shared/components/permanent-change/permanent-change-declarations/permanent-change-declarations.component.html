@@ -1,0 +1,43 @@
+<h3 class="blue-header ngtest-declarations">DECLARATIONS</h3>
+<div class="padded-section content-bottom">
+  <ng-container>
+    <p>
+      The application must only be submitted by an individual with the authority to bind the applicant. The branch
+      relies on the applicant to ensure that the individual who submits this application is authorized to do so.
+      Typically, an appropriate individual in a corporation will be a duly authorized signatory who will usually be an
+      officer or, in some cases, a director.
+    </p>
+    <p>Note: A lawyer or consultant, may NOT submit this application on behalf of the applicant.</p>
+
+    <app-field
+      [valid]="!showValidationMessages || form.get('authorizedToSubmit').valid"
+      errorMessage="Please affirm that you are authorized to submit the application."
+      [showChevrons]="false">
+      <mat-checkbox formControlName="authorizedToSubmit" class="text-wrap">
+        <span class="error-states">*</span>
+        I understand and affirm that I am authorized to submit the application.
+      </mat-checkbox>
+    </app-field>
+
+    <p *ngIf="hasCannabis">
+      Section 22(2) of the Cannabis Control and Licensing Act states: “A person must not submit to the general manager
+      an application, or information or a record included as part of the application, that contains false or misleading
+      information, or fails to disclose a material fact”.
+    </p>
+    <p *ngIf="hasLiquor">
+      Section 20 (1) of the Liquor Control and Licensing Act states: "The general manager may refuse to issue, renew,
+      transfer or amend a licence if the applicant fails to disclose a material fact required by the application or
+      makes a false or misleading statement in the application."
+    </p>
+
+    <app-field
+      [valid]="!showValidationMessages || form.get('signatureAgreement').valid"
+      errorMessage="Please affirm that all of the information provided for this application is true and complete."
+      [showChevrons]="false">
+      <mat-checkbox formControlName="signatureAgreement" class="text-wrap">
+        <span class="error-states">*</span>
+        I understand and affirm that all of the information provided for this application is true and complete.
+      </mat-checkbox>
+    </app-field>
+  </ng-container>
+</div>

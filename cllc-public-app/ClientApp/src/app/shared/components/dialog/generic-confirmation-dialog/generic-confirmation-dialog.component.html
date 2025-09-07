@@ -1,0 +1,11 @@
+<mat-dialog-content>
+  <div>
+    <h2>{{ data.title }}</h2>
+    <hr />
+    <p>{{ data.message }}</p>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions class="d-flex space-between">
+  <button class="btn btn-secondary" (click)="handleCancel()">{{ data.cancelButtonText }}</button>
+  <button class="btn btn-primary" (click)="handleConfirm()">{{ data.confirmButtonText }}</button>
+</mat-dialog-actions>

@@ -1,3 +1,4 @@
+import { ApplicationExtension } from "@models/application.model";
 
 export class ApplicationSummary {
   id: string;
@@ -18,4 +19,5 @@ export class ApplicationSummary {
   isForLicence: boolean;
   dateApplicationSubmitted: Date;
   dateApplicantSentToLG: Date;
+  applicationExtension?: ApplicationExtension;
 }

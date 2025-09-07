@@ -1,0 +1,157 @@
+<div>
+  <!-- For all corporations -->
+  <section *ngIf="account?.businessType === 'PrivateCorporation' || account?.businessType === 'PublicCorporation'">
+    <p>
+      All licensees, authorization holders and applicants must maintain a complete and current list of leadership and
+      businesses associated with their organization.
+    </p>
+    <p>
+      You are required to notify the LCRB of any changes to your legal entity structure within ten business days of the
+      change being made. These changes include:
+    </p>
+    <ul>
+      <li>Change of directors, officers, or senior managers</li>
+      <li>Name changes</li>
+      <!-- for private corporations only-->
+      <li *ngIf="account?.businessType === 'PrivateCorporation'">Internal transfer of shares</li>
+      <li *ngIf="account?.businessType === 'PrivateCorporation'">External transfer of shares</li>
+    </ul>
+    <p>
+      <b>Please note:</b>
+      Licence or authorization transfers to a different legal entity may be requested through the
+      <a href="/licences/">Licences & Authorizations dashboard</a>
+      .
+    </p>
+  </section>
+
+  <!-- For Partnerships -->
+  <section *ngIf="account?.businessType === 'Partnership'">
+    <p>
+      All licensees and applicants must maintain a complete and current list of individual and businesses partners
+      associated with their organization.
+    </p>
+    <p>
+      You are required to notify the LCRB of any changes to your legal entity structure within ten business days of the
+      change being made. These changes include:
+    </p>
+    <ul>
+      <li>Change of partners</li>
+      <li>Name changes</li>
+      <li>Internal transfer of shares for partner businesses</li>
+      <li>External transfer of shares for partner businesses</li>
+    </ul>
+    <p>
+      <b>Please note:</b>
+      licence or authorization transfers to a different legal entity may be requested through the Licences dashboard.
+    </p>
+  </section>
+
+  <!-- For Sole Proprietors -->
+  <section *ngIf="account?.businessType === 'SoleProprietorship'">
+    <p>Sole Proprietors must provide their leadership information and keep it up to date.</p>
+    <p>You are required to notify the LCRB of name changes within ten business days of the change being made.</p>
+    <p>
+      <b>Please note:</b>
+      licence or authorization transfers to a different legal entity may be requested through the Licences dashboard.
+    </p>
+  </section>
+
+  <!-- For Societies, Universities and Churches-->
+  <section *ngIf="['Society', 'University', 'Church'].indexOf(account?.businessType) !== -1">
+    <p>
+      {{ account?.businessType }} applicants and licensees must provide their leadership information and keep it up to
+      date.
+    </p>
+    <p>You are required to notify the LCRB of name changes within ten business days of the change being made.</p>
+    <p>
+      <b>Please note:</b>
+      licence or authorization transfers to a different legal entity may be requested through the Licences dashboard.
+    </p>
+  </section>
+
+  <!-- For Indigenous Nations -->
+  <section *ngIf="account?.businessType === 'IndigenousNation'">
+    <p>
+      An applicant that is an
+      <i>Indigenous Nation</i>
+      may have associates that are required to consent to security screening and financial integrity assessments as part
+      of the application for a non-medical cannabis retail store licence. Applicants are required to provide associates
+      with the Parcel Identifier (PID) or proposed retail store location address.
+    </p>
+    <span style="font-style: italic" class="li-header"><i>Parcel Identifier (PID):</i></span>
+    <br />
+    <ul>
+      <li>The PID is a nine-digit number permanently assigned to a parcel of land.</li>
+      <li>
+        The legal description and PID may be found on a Land Title Certificate, in BC Property Assessment documents, on
+        the lease, or obtained from the landlord.
+      </li>
+    </ul>
+    <p>
+      Applicants should direct associates to the
+      <a
+        href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation/associate-forms"
+        target="_blank"
+        rel="noopener noreferrer">
+        LCRB non-medical cannabis webpage
+      </a>
+      to download required forms and instructions for submitting documentation.
+    </p>
+
+    <p>
+      Associates will submit documentation for security screening and financial integrity assessments directly to the
+      LCRB. Applicants should not delay submitting a completed application form and business financial integrity form.
+      It is the applicant's responsibility to direct all associates to the
+      <a
+        href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation/associate-forms"
+        target="_blank"
+        rel="noopener noreferrer">
+        link provided
+      </a>
+      .
+    </p>
+    <p>
+      Associates for Indigenous Nations applications include all persons who are authorized to act on behalf of the
+      nation.
+    </p>
+    <p>
+      If you require more information please email
+      <a href="mailto:lcrbcannabis@gov.bc.ca?Subject=Indigenous Nations">lcrbcannabis&#64;gov.bc.ca</a>
+      .
+    </p>
+
+    <p>
+      Please note: While they are not normally required as part of the licence application process, the Liquor and
+      Cannabis Regulation Branch reserves the right to ask for an Indigenous Nation’s membership lists.
+    </p>
+  </section>
+
+  <!-- For Non-Indigenous Nations -->
+  <section *ngIf="account?.businessType !== 'IndigenousNation'">
+    <p>
+      Fees are calculated based on the type of change reported and the number of licences and/or authorizations
+      impacted. If no changes are made, or no licences or authorizations are held, you will not be charged a fee for
+      submitting this information.
+    </p>
+    <p>
+      <strong>Section 119 Agreement Holders</strong>
+      If the Indigenous nation that is a party to a section 119 agreement no longer complies with the ownership and
+      control requirements set out in the agreement relating to a licence, that licensee may no longer be eligible to
+      receive benefits under the section 119 agreement. Please refer to the section 119 agreement for further
+      information.
+    </p>
+    <p>
+      The details of a licensee or authorization holder’s application were the basis for granting them the licence or
+      authorization. Licensees and authorization holders must inform the Branch of any changes that alter the original
+      information they provided, or of a change in circumstance related to their licence or authorization. This
+      requirement is in addition to any obligations in the applicable section 119 agreement to notify B.C.'s designated
+      official of certain changes related to the licensee or authorization holder’s business. Please refer to the
+      relevant section 119 agreement.
+    </p>
+  </section>
+
+  <!-- Licensee Details -->
+  <app-permanent-change-holder-details
+    [cannabisLicences]="cannabisLicences"
+    [liquorLicences]="liquorLicences"></app-permanent-change-holder-details>
+</div>

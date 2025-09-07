@@ -1,0 +1,7 @@
+<ul class="list-no-bullets">
+  <li *ngFor="let notice of notices">
+    <a target="_blank" href="{{ notice.downloadUrl }}" download
+      >{{ getFormattedFileName(notice.name) }}<fa-icon [icon]="faDownload" class="ml-3"></fa-icon
+    ></a>
+  </li>
+</ul>

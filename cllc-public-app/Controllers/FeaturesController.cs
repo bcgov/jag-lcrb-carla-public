@@ -32,6 +32,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 ("FEATURE_CASS", "CASS"),
                 ("FEATURE_MARKET_EVENTS", "MarketEvents"),
                 ("FEATURE_PERMANENT_CHANGES_TO_LICENSEE", "PermanentChangesToLicensee"),
+                ("FEATURE_LEGAL_ENTITY_REVIEW", "LegalEntityReview"),
                 ("FEATURE_PERMANENT_CHANGES_TO_APPLICANT", "PermanentChangesToApplicant"),
                 ("FEATURE_NOTICES", "Notices"),
                 ("FEATURE_LE_CONNECTIONS", "LEConnections"),
@@ -43,9 +44,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 ("FEATURE_DISABLE_WORKER_QUALIFICATION", "DisableWorkerQualification"),  // Removes worker qualification from the portal
                 ("FEATURE_TAKE_HOME_EVENTS", "TakeHomeEvents"), // Take Home Public Sampling events - covers samples handed out in public for home consumption
                 ("FEATURE_BRIDGE_LOGIN", "BridgeLogin"), // Login using bridge entity
-                ("FEATURE_PRS_ENABLED", "PrsEnabled")
+                ("FEATURE_PRS_ENABLED", "PrsEnabled"),
+                ("FEATURE_ORV_ENABLED", "ORVEnabled"), // Online Retailer Verification (ORV) enabled for the portal
                 // CONFIG SETTINGS - MONTHLY_REPORTS_MAX_MONTHS - number of months that will be used on the monthly reports.
-            };
+        };
 
         public FeaturesController(IConfiguration configuration)
         {

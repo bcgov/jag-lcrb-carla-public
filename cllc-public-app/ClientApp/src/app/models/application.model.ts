@@ -1,13 +1,11 @@
-import { Account } from "./account.model";
-import { License } from "./license.model";
-import { Invoice } from "./invoice.model";
-import { ApplicationType } from "./application-type.model";
-import { TiedHouseConnection } from "./tied-house-connection.model";
-import { ServiceArea } from "./service-area.model";
-import { AnnualVolume } from "./annual-volume.model";
+import { Account } from './account.model';
+import { ApplicationType } from './application-type.model';
+import { Invoice } from './invoice.model';
+import { License } from './license.model';
+import { ServiceArea } from './service-area.model';
+import { TiedHouseConnection } from './tied-house-connection.model';
 
 export interface Application {
-
   previousApplication: number;
   previousApplicationDetails: string;
   ruralAgencyStoreAppointment: number;
@@ -73,6 +71,9 @@ export interface Application {
   servicehHoursStandardHours: boolean;
   requestOutsideServiceHours: boolean;
   signatureAgreement: boolean;
+  /**
+   * The singleton cannabis tied house connection record for the user account.
+   */
   tiedHouse: TiedHouseConnection;
   indigenousNationId: string;
   policeJurisdictionId: string;
@@ -144,7 +145,6 @@ export interface Application {
   outsideAreas: ServiceArea[];
   capacityArea: ServiceArea[];
 
-
   // Manufactuer
   licenceSubCategory: string;
   isPackaging: boolean;
@@ -158,10 +158,8 @@ export interface Application {
   relocateWinaryLicence: boolean;
   confirmRelocateWinaryLicence: boolean;
 
-
   mfgBrewPubOnSite: string;
   mfgPipedInProduct: string;
-
 
   // these are just optional int - not picklist references.
   mfgAcresOfFruit: number;
@@ -191,7 +189,7 @@ export interface Application {
   patioLiquorCarriedDescription: string;
   patioAccessControlDescription: string;
 
-  isHasPatio: boolean;    // 2024-04-03 LCSD-6975 waynezen
+  isHasPatio: boolean; // 2024-04-03 LCSD-6975 waynezen
 
   locatedAboveDescription: number;
   patioServiceBar: number;
@@ -210,6 +208,7 @@ export interface Application {
   csNameChangeLicenseeSociety: boolean;
   csNameChangeLicenseePerson: boolean;
   csAdditionalReceiverOrExecutor: boolean;
+  csTiedHouseDeclaration: boolean;
   primaryInvoicePaid: boolean;
   secondaryInvoicePaid: boolean;
   isOnINLand: boolean;
@@ -262,7 +261,7 @@ export interface Application {
   volumeProduced: number;
   volumeDestroyed: number;
   ldbOrderTotals: number;
-  //LCSD-5779 
+  //LCSD-5779
   willHaveTiedHouseExemption: boolean;
   tempSuspensionOrPatronParticipationStart: Date;
   tempSuspensionOrPatronParticipationEnd: Date;
@@ -274,4 +273,23 @@ export interface Application {
   // Temporary Relocations
   temporaryRelocationCriteria: number;
 
+  tiedHouseConnections: TiedHouseConnection[];
+
+  applicationExtension: ApplicationExtension;
+}
+
+export class ApplicationExtension {
+  id: string;
+  hasLiquorTiedHouseOwnershipOrControl: number | null;
+  hasLiquorTiedHouseThirdPartyAssociations: number | null;
+  hasLiquorTiedHouseFamilyMemberInvolvement: number | null;
+  /**
+   * The ID of a related legal entity or permanent change to a licensee application.
+   * - For a legal entity review application, this will be the ID of the permanent change to a licensee application.
+   * - For a permanent change to a licensee application, this will be the ID of the legal entity review application.
+   * - For other application types, this will typically be null or empty.
+   *
+   * @type {string}
+   */
+  relatedLeOrPclApplicationId?: string;
 }

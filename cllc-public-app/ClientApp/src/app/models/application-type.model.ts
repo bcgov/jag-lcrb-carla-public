@@ -101,6 +101,7 @@ export enum ApplicationTypeNames {
   LiquorRenewal = "Liquor Licence Renewal",
   LiquorLicenceTransfer = "Liquor Licence Transfer",
   PermanentChangeToALicensee = "Permanent Change to a Licensee",
+  LegalEntityReview = "LE Review",
   PermanentChangeToAnApplicant = "Permanent Change to an Applicant",
   WineStore = "Wine Store",
   RAS = "Rural Agency Store",
@@ -124,7 +125,8 @@ export enum ApplicationTypeNames {
   ChangetoApprovedPicnicArea = "Change to Approved Picnic Area",
   ChangeHoursOfService_Outside_Service_Hours = "Change to Hours of Liquor Service (outside Service Hours)",
   ChangeHoursOfService_Lounge_Area = "Change to Hours of Liquor Service (LOUNGE - Outside Service Hours)",
-  ChangeHoursOfService_Special_Event_Area = "Change to Hours of Liquor Service (SEA - Within Service Hours)"
+  ChangeHoursOfService_Special_Event_Area = "Change to Hours of Liquor Service (SEA - Within Service Hours)",
+  ApplicationToTransitionToLiquorPrimaryLicence ="Application to Transition to Liquor Primary Licence"
 
 }
 
@@ -146,5 +148,9 @@ export enum ApplicationStatuses {
   Terminated = "Terminated",
   TerminatedRefunded = "Terminated and Refunded",
   Processed = "(Do not Use) Processed",
-  Approved = "Approved"
+  LicenseeActionRequired = "Licensee Action Required",
+  Approved = "Approved",
+  UnderReview ="Under Review",
+  ApplicationAssessment = "Application Assessment",
+  NotSubmitted = "Not Submitted"
 }
