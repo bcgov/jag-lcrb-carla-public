@@ -1,14 +1,26 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Account } from '@models/account.model';
+import { Application } from '@models/application.model';
 import { TiedHouseConnection } from '@models/tied-house-connection.model';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
 import { GenericMessageDialogComponent } from '@shared/components/dialog/generic-message-dialog/generic-message-dialog.component';
 import { Subject, takeUntil } from 'rxjs';
 
 export type ConnectionToProducersFormData = TiedHouseConnection;
+
+// Business rule: Tied House Connections are editable for certain licence types.
+const LICENCE_TYPES_FOR_WHICH_TIED_HOUSE_IS_EDITABLE = [];
+
+// Business rule: Tied House Connections are editable for certain application types.
+const APPLICATION_TYPES_FOR_WHICH_TIED_HOUSE_IS_EDITABLE = [
+  'CRS Renewal',
+  'Marketing Renewal',
+  'CRS Transfer of Ownership',
+  'PRS Transfer of Ownership'
+];
 
 /**
  * Component for managing connections to other cannabis producers.
@@ -17,6 +29,7 @@ export type ConnectionToProducersFormData = TiedHouseConnection;
  * @export
  * @class ConnectionToProducersComponent
  * @implements {OnInit}
+ * @implements {OnChanges}
  * @implements {OnDestroy}
  */
 @Component({
@@ -24,9 +37,15 @@ export type ConnectionToProducersFormData = TiedHouseConnection;
   templateUrl: './connection-to-producers.component.html',
   styleUrls: ['./connection-to-producers.component.scss']
 })
-export class ConnectionToProducersComponent implements OnInit, OnDestroy {
+export class ConnectionToProducersComponent implements OnInit, OnChanges, OnDestroy {
+  /**
+   * The user account information.
+   */
   @Input() account: Account;
-  @Input() applicationTypeName: String;
+  /**
+   * Optional application under which this component is being used.
+   */
+  @Input() application: Application;
   /**
    * Emits the form data on change.
    */
@@ -56,7 +75,23 @@ export class ConnectionToProducersComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.initForm();
-    this.loadFormData();
+    this.loadTiedHouseData();
+    this.setFormMode();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (
+      (changes.account &&
+        !changes.account.firstChange &&
+        changes.account.currentValue !== changes.account.previousValue) ||
+      (changes.application &&
+        !changes.application.firstChange &&
+        changes.application.currentValue !== changes.application.previousValue)
+    ) {
+      // If the account or application input changes, re-load the tiedhouse data and update the form mode.
+      this.loadTiedHouseData();
+      this.setFormMode();
+    }
   }
 
   initForm() {
@@ -82,7 +117,54 @@ export class ConnectionToProducersComponent implements OnInit, OnDestroy {
     this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe((value) => this.onFormChanges.emit(value));
   }
 
-  loadFormData() {
+  /**
+   * Set the form mode to either read-only or editable based on the current state.
+   */
+  setFormMode() {
+    if (this.isTiedHouseReadOnly) {
+      // If the tied house component is read-only, disable the form and disable all validators
+      this.form.disable();
+      this.form.get('corpConnectionFederalProducer').clearValidators();
+      this.form.get('corpConnectionFederalProducerDetails').clearValidators();
+      this.form.get('federalProducerConnectionToCorp').clearValidators();
+      this.form.get('federalProducerConnectionToCorpDetails').clearValidators();
+      this.form.get('share20PlusConnectionProducer').clearValidators();
+      this.form.get('share20PlusConnectionProducerDetails').clearValidators();
+      this.form.get('share20PlusFamilyConnectionProducer').clearValidators();
+      this.form.get('share20PlusFamilyConnectionProducerDetail').clearValidators();
+      this.form.get('partnersConnectionFederalProducer').clearValidators();
+      this.form.get('partnersConnectionFederalProducerDetails').clearValidators();
+      this.form.get('societyConnectionFederalProducer').clearValidators();
+      this.form.get('societyConnectionFederalProducerDetails').clearValidators();
+      this.form.get('liquorFinancialInterest').clearValidators();
+      this.form.get('liquorFinancialInterestDetails').clearValidators();
+      this.form.get('iNConnectionToFederalProducer').clearValidators();
+      this.form.get('iNConnectionToFederalProducerDetails').clearValidators();
+      this.form.updateValueAndValidity();
+    } else {
+      // If the tied house component is editable, enable the form and set all validators
+      this.form.enable();
+      this.form.get('corpConnectionFederalProducer').setValidators([Validators.required]);
+      this.form.get('corpConnectionFederalProducerDetails').setValidators([Validators.required]);
+      this.form.get('federalProducerConnectionToCorp').setValidators([Validators.required]);
+      this.form.get('federalProducerConnectionToCorpDetails').setValidators([Validators.required]);
+      this.form.get('share20PlusConnectionProducer').setValidators([Validators.required]);
+      this.form.get('share20PlusConnectionProducerDetails').setValidators([Validators.required]);
+      this.form.get('share20PlusFamilyConnectionProducer').setValidators([Validators.required]);
+      this.form.get('share20PlusFamilyConnectionProducerDetail').setValidators([Validators.required]);
+      this.form.get('partnersConnectionFederalProducer').setValidators([Validators.required]);
+      this.form.get('partnersConnectionFederalProducerDetails').setValidators([Validators.required]);
+      this.form.get('societyConnectionFederalProducer').setValidators([Validators.required]);
+      this.form.get('societyConnectionFederalProducerDetails').setValidators([Validators.required]);
+      this.form.get('liquorFinancialInterest').setValidators([Validators.required]);
+      this.form.get('liquorFinancialInterestDetails').setValidators([Validators.required]);
+      this.form.get('iNConnectionToFederalProducer').setValidators([Validators.required]);
+      this.form.get('iNConnectionToFederalProducerDetails').setValidators([Validators.required]);
+      this.form.updateValueAndValidity();
+    }
+  }
+
+  loadTiedHouseData() {
     const cannabisTiedHouseConnectionForUserRequest$ = this.tiedHouseService.GetCannabisTiedHouseConnectionForUser(
       this.account.id
     );
@@ -134,6 +216,46 @@ export class ConnectionToProducersComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Whether the Tied House Connections component is read-only.
+   *
+   * @readonly
+   * @type {boolean}
+   */
+  get isTiedHouseReadOnly(): boolean {
+    if (this.application) {
+      // If an application is provided, then the tied house component is editable if the application is of a certain type.
+      return !this.isTiedHouseConnectionsEditableForApplication;
+    }
+
+    return true;
+  }
+
+  /**
+   * Checks if the tied house declarations are editable based on the type of application.
+   *
+   * @readonly
+   * @type {boolean}
+   */
+  get isTiedHouseConnectionsEditableForApplication(): boolean {
+    if (!this.application) {
+      // If no application is provided, the tied house component is not editable.
+      return false;
+    }
+
+    if (LICENCE_TYPES_FOR_WHICH_TIED_HOUSE_IS_EDITABLE.includes(this.application.licenseType)) {
+      // If the application is for a licence of a certain type, then the tied house component is editable.
+      return true;
+    }
+
+    if (APPLICATION_TYPES_FOR_WHICH_TIED_HOUSE_IS_EDITABLE.includes(this.application.applicationType.name)) {
+      // If the application is of a certain type, then the tied house component is editable.
+      return true;
+    }
+
+    return false;
+  }
+
+  /**
    * Change handler to clear the details field when the corresponding checkbox field is unchecked.
    *
    * @param {string} checkboxFormControlName
@@ -150,18 +272,24 @@ export class ConnectionToProducersComponent implements OnInit, OnDestroy {
       });
   }
 
-  requiresWordingChange(name: String): boolean {
+  /**
+   * Gets the page header text based on the application type.
+   *
+   * @return {*}  {string}
+   */
+  get pageHeader(): string {
+    const applicationTypeName = this.application?.applicationType?.name;
     if (
-      name === 'Producer Retail Store' ||
-      name == 'PRS Relocation' ||
-      name == 'PRS Transfer of Ownership' ||
-      name == 'Section 119 Authorization(PRS)' ||
-      name == 'CRS Renewal'
+      applicationTypeName === 'Producer Retail Store' ||
+      applicationTypeName == 'PRS Relocation' ||
+      applicationTypeName == 'PRS Transfer of Ownership' ||
+      applicationTypeName == 'Section 119 Authorization(PRS)' ||
+      applicationTypeName == 'CRS Renewal'
     ) {
-      return true;
+      return 'CONNECTIONS TO OTHER FEDERAL PRODUCERS';
     }
 
-    return false;
+    return 'CONNECTIONS TO FEDERAL PRODUCERS OF CANNABIS';
   }
 
   ngOnDestroy(): void {
