@@ -738,28 +738,28 @@ const _PCLSectionGroupedBusinessRules: PCLSectionGroupedBusinessRulesMatrix = {
     },
     [PCLMatrixConditionalGroup.TiedHouseChange]: {
       [PCLMatrixLicenceGroup.Default]: () => {
-        return EMPTY_BITMASK;
+        return 0b000110011;
       },
       [PCLMatrixLicenceGroup.Liquor1]: () => {
-        return EMPTY_BITMASK;
+        return 0b000110011;
       },
       [PCLMatrixLicenceGroup.Liquor2]: () => {
-        return EMPTY_BITMASK;
+        return 0b000110011;
       },
       [PCLMatrixLicenceGroup.Liquor3]: () => {
-        return EMPTY_BITMASK;
+        return 0b000110011;
       },
       [PCLMatrixLicenceGroup.Cannabis1]: () => {
-        return EMPTY_BITMASK;
+        return 0b000110011;
       },
       [PCLMatrixLicenceGroup.Cannabis2]: () => {
-        return EMPTY_BITMASK;
+        return 0b000110011;
       },
       [PCLMatrixLicenceGroup.Cannabis3]: () => {
-        return EMPTY_BITMASK;
+        return 0b000110011;
       },
       [PCLMatrixLicenceGroup.Cannabis4]: () => {
-        return EMPTY_BITMASK;
+        return 0b000110011;
       }
     }
   },
@@ -1724,6 +1724,326 @@ const _PCLSectionGroupedBusinessRules: PCLSectionGroupedBusinessRulesMatrix = {
       }
     }
   },
+  [AccountType.LocalGovernment]: {
+    [PCLMatrixConditionalGroup.Default]: {
+      [PCLMatrixLicenceGroup.Default]: () => {
+        return 0b100110010;
+      },
+      [PCLMatrixLicenceGroup.Liquor1]: () => {
+        return 0b100110010;
+      },
+      [PCLMatrixLicenceGroup.Liquor2]: () => {
+        return 0b100110010;
+      },
+      [PCLMatrixLicenceGroup.Liquor3]: () => {
+        return 0b100110010;
+      },
+      [PCLMatrixLicenceGroup.Cannabis1]: () => {
+        return 0b100110010;
+      },
+      [PCLMatrixLicenceGroup.Cannabis2]: () => {
+        return 0b100110010;
+      },
+      [PCLMatrixLicenceGroup.Cannabis3]: () => {
+        return 0b100110010;
+      },
+      [PCLMatrixLicenceGroup.Cannabis4]: () => {
+        return 0b100110010;
+      }
+    },
+    [PCLMatrixConditionalGroup.ReceiverOrExecutor]: {
+      [PCLMatrixLicenceGroup.Default]: () => {
+        return 0b100000000;
+      },
+      [PCLMatrixLicenceGroup.Liquor1]: () => {
+        return 0b100000000;
+      },
+      [PCLMatrixLicenceGroup.Liquor2]: () => {
+        return 0b100000000;
+      },
+      [PCLMatrixLicenceGroup.Liquor3]: () => {
+        return 0b100000000;
+      },
+      [PCLMatrixLicenceGroup.Cannabis1]: () => {
+        return 0b100000000;
+      },
+      [PCLMatrixLicenceGroup.Cannabis2]: () => {
+        return 0b100000000;
+      },
+      [PCLMatrixLicenceGroup.Cannabis3]: () => {
+        return 0b100000000;
+      },
+      [PCLMatrixLicenceGroup.Cannabis4]: () => {
+        return 0b100000000;
+      }
+    },
+    // Not applicable for Local Government
+    [PCLMatrixConditionalGroup.TSE]: {
+      [PCLMatrixLicenceGroup.Default]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Liquor1]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Liquor2]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Liquor3]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis1]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis2]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis3]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis4]: () => {
+        return EMPTY_BITMASK;
+      }
+    },
+    // Not applicable for Local Government
+    [PCLMatrixConditionalGroup.TSI]: {
+      [PCLMatrixLicenceGroup.Default]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Liquor1]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Liquor2]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Liquor3]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis1]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis2]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis3]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis4]: () => {
+        return EMPTY_BITMASK;
+      }
+    },
+    [PCLMatrixConditionalGroup.CoD]: {
+      [PCLMatrixLicenceGroup.Default]: () => {
+        return 0b000110010;
+      },
+      [PCLMatrixLicenceGroup.Liquor1]: () => {
+        return 0b000110010;
+      },
+      [PCLMatrixLicenceGroup.Liquor2]: () => {
+        return 0b000110010;
+      },
+      [PCLMatrixLicenceGroup.Liquor3]: () => {
+        return 0b000110010;
+      },
+      [PCLMatrixLicenceGroup.Cannabis1]: () => {
+        return 0b000110010;
+      },
+      [PCLMatrixLicenceGroup.Cannabis2]: () => {
+        return 0b000110010;
+      },
+      [PCLMatrixLicenceGroup.Cannabis3]: () => {
+        return 0b000110010;
+      },
+      [PCLMatrixLicenceGroup.Cannabis4]: () => {
+        return 0b000110010;
+      }
+    },
+    // Not applicable for Local Government
+    [PCLMatrixConditionalGroup.CoDAndTSE]: {
+      [PCLMatrixLicenceGroup.Default]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Liquor1]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Liquor2]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Liquor3]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis1]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis2]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis3]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis4]: () => {
+        return EMPTY_BITMASK;
+      }
+    },
+    // Not applicable for Local Government
+    [PCLMatrixConditionalGroup.CoDAndTSI]: {
+      [PCLMatrixLicenceGroup.Default]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Liquor1]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Liquor2]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Liquor3]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis1]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis2]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis3]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis4]: () => {
+        return EMPTY_BITMASK;
+      }
+    },
+    [PCLMatrixConditionalGroup.LENameChangeCorporation]: {
+      [PCLMatrixLicenceGroup.Default]: () => {
+        return 0b000110011;
+      },
+      [PCLMatrixLicenceGroup.Liquor1]: () => {
+        return 0b000110011;
+      },
+      [PCLMatrixLicenceGroup.Liquor2]: () => {
+        return 0b000110011;
+      },
+      [PCLMatrixLicenceGroup.Liquor3]: () => {
+        return 0b000110011;
+      },
+      [PCLMatrixLicenceGroup.Cannabis1]: () => {
+        return 0b000110011;
+      },
+      [PCLMatrixLicenceGroup.Cannabis2]: () => {
+        return 0b000110011;
+      },
+      [PCLMatrixLicenceGroup.Cannabis3]: () => {
+        return 0b000110011;
+      },
+      [PCLMatrixLicenceGroup.Cannabis4]: () => {
+        return 0b000110011;
+      }
+    },
+    // Not applicable for Local Government
+    [PCLMatrixConditionalGroup.LENameChangePartnership]: {
+      [PCLMatrixLicenceGroup.Default]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Liquor1]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Liquor2]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Liquor3]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis1]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis2]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis3]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis4]: () => {
+        return EMPTY_BITMASK;
+      }
+    },
+    // Not applicable for Local Government
+    [PCLMatrixConditionalGroup.LENameChangeSociety]: {
+      [PCLMatrixLicenceGroup.Default]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Liquor1]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Liquor2]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Liquor3]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis1]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis2]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis3]: () => {
+        return EMPTY_BITMASK;
+      },
+      [PCLMatrixLicenceGroup.Cannabis4]: () => {
+        return EMPTY_BITMASK;
+      }
+    },
+    [PCLMatrixConditionalGroup.LENameChangeIndividual]: {
+      [PCLMatrixLicenceGroup.Default]: () => {
+        return 0b000110011;
+      },
+      [PCLMatrixLicenceGroup.Liquor1]: () => {
+        return 0b000110011;
+      },
+      [PCLMatrixLicenceGroup.Liquor2]: () => {
+        return 0b000110011;
+      },
+      [PCLMatrixLicenceGroup.Liquor3]: () => {
+        return 0b000110011;
+      },
+      [PCLMatrixLicenceGroup.Cannabis1]: () => {
+        return 0b000110011;
+      },
+      [PCLMatrixLicenceGroup.Cannabis2]: () => {
+        return 0b000110011;
+      },
+      [PCLMatrixLicenceGroup.Cannabis3]: () => {
+        return 0b000110011;
+      },
+      [PCLMatrixLicenceGroup.Cannabis4]: () => {
+        return 0b000110011;
+      }
+    },
+    [PCLMatrixConditionalGroup.TiedHouseChange]: {
+      [PCLMatrixLicenceGroup.Default]: () => {
+        return 0b000110011;
+      },
+      [PCLMatrixLicenceGroup.Liquor1]: () => {
+        return 0b000110011;
+      },
+      [PCLMatrixLicenceGroup.Liquor2]: () => {
+        return 0b000110011;
+      },
+      [PCLMatrixLicenceGroup.Liquor3]: () => {
+        return 0b000110011;
+      },
+      [PCLMatrixLicenceGroup.Cannabis1]: () => {
+        return 0b000110011;
+      },
+      [PCLMatrixLicenceGroup.Cannabis2]: () => {
+        return 0b000110011;
+      },
+      [PCLMatrixLicenceGroup.Cannabis3]: () => {
+        return 0b000110011;
+      },
+      [PCLMatrixLicenceGroup.Cannabis4]: () => {
+        return 0b000110011;
+      }
+    }
+  },
   [AccountType.Partnership]: {
     [PCLMatrixConditionalGroup.Default]: {
       [PCLMatrixLicenceGroup.Default]: () => {
@@ -2386,6 +2706,9 @@ const PCLSectionBusinessRules: PCLSectionGroupedBusinessRulesMatrix = {
   // Sole Proprietorship rules
   [AccountType.SoleProprietorship]: _PCLSectionGroupedBusinessRules[AccountType.SoleProprietorship],
 
+  // Local Government rules
+  [AccountType.LocalGovernment]: _PCLSectionGroupedBusinessRules[AccountType.LocalGovernment],
+
   // Partnership rules
   [AccountType.Partnership]: _PCLSectionGroupedBusinessRules[AccountType.Partnership],
   [AccountType.GeneralPartnership]: _PCLSectionGroupedBusinessRules[AccountType.Partnership],
@@ -2394,7 +2717,6 @@ const PCLSectionBusinessRules: PCLSectionGroupedBusinessRulesMatrix = {
   // Society rules
   [AccountType.Society]: _PCLSectionGroupedBusinessRules[AccountType.Society],
   [AccountType.IndigenousNation]: _PCLSectionGroupedBusinessRules[AccountType.Society],
-  [AccountType.LocalGovernment]: _PCLSectionGroupedBusinessRules[AccountType.Society],
   [AccountType.Coop]: _PCLSectionGroupedBusinessRules[AccountType.Society],
   [AccountType.MilitaryMess]: _PCLSectionGroupedBusinessRules[AccountType.Society],
   [AccountType.University]: _PCLSectionGroupedBusinessRules[AccountType.Society]
