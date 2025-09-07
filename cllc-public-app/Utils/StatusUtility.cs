@@ -102,13 +102,13 @@ namespace Gov.Lclb.Cllb.Public.Utils
             return shownStatus;
         }
 
-    public static string GetTranslatedApplicationStatusV2(MicrosoftDynamicsCRMadoxioApplication application)
+        public static string GetTranslatedApplicationStatusV2(MicrosoftDynamicsCRMadoxioApplication application)
         {
             // gather the status from the application
             AdoxioApplicationStatusCodes status = (AdoxioApplicationStatusCodes)application.Statuscode;
             // create a string value to be displayed 
             string shownStatus = Enum.GetName(status.GetType(), status);
-            
+
             // for legacy support, we need the payment received details.
             bool paymentRecieved = (application?.AdoxioPaymentrecieved == true);
             if (application?.AdoxioApplicationTypeId?.AdoxioName == "Permanent Change to a Licensee")
@@ -116,7 +116,7 @@ namespace Gov.Lclb.Cllb.Public.Utils
                 paymentRecieved = (
                     (!string.IsNullOrEmpty(application?._adoxioInvoiceValue) ||
                     !string.IsNullOrEmpty(application?._adoxioSecondaryapplicationinvoiceValue) // there exist an invoice
-                    // and all existing invoices are paid
+                                                                                                // and all existing invoices are paid
                     && (string.IsNullOrEmpty(application?._adoxioInvoiceValue) || (application?.AdoxioPrimaryapplicationinvoicepaid == 1))
                     && (string.IsNullOrEmpty(application?._adoxioSecondaryapplicationinvoiceValue) || application?.AdoxioSecondaryapplicationinvoicepaid == 1))
                 );
@@ -127,11 +127,11 @@ namespace Gov.Lclb.Cllb.Public.Utils
             // intake -> submitted -> under review -> application assessment ->  pending final inspection -> reviewing inspection results -> pending licence fee -> approved
             // for changes or endorsement applications*: 
             // intake -> submitted -> under review -> application assessment --> approved
-            
+
             // *if LG review is required:
             // intake -> pending LG review -> submitted...
 
-            if(shownStatus == "Intake"){
+            if (shownStatus == "Intake") {
                 switch (application?.AdoxioApplicationTypeId?.AdoxioName) {
                     case "CRS Transfer of Ownership":
                     case "Liquor Licence Transfer":
@@ -140,16 +140,16 @@ namespace Gov.Lclb.Cllb.Public.Utils
                     default:
                         shownStatus = "Not Submitted";
                         break;
-                }            
+                }
             }
 
-            if(shownStatus == "PendingForLGFNPFeedback"){
+            if (shownStatus == "PendingForLGFNPFeedback") {
                 shownStatus = "Pending External Review";
             }
 
-            if (shownStatus == "InProgress" 
+            if (shownStatus == "InProgress"
                            || shownStatus == "Processed"        // legacy support
-                           //|| shownStatus == "Submitted"
+                                                                //|| shownStatus == "Submitted"
                            || shownStatus == "Under Review" || shownStatus == "UnderReview"
                            || shownStatus == "Application Assessment" || shownStatus == "ApplicationAssessment"
                            || shownStatus == "Pending Final Inspection" || shownStatus == "PendingFinalInspection"
@@ -157,7 +157,12 @@ namespace Gov.Lclb.Cllb.Public.Utils
                            || (shownStatus == "Intake" && paymentRecieved)) {  // legacy support
 
                 shownStatus = "Under Review";
-                           }
+            }
+
+            if (shownStatus == "LicenseeActionRequired")
+            {
+                shownStatus = "Licensee Action Required";
+            }
 
             // some application types get special messages in spe
 

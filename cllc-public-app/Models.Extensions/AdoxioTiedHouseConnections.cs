@@ -1,5 +1,10 @@
-﻿using Gov.Lclb.Cllb.Interfaces.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Gov.Lclb.Cllb.Interfaces;
+using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.ViewModels;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
@@ -8,8 +13,6 @@ namespace Gov.Lclb.Cllb.Public.Models
     /// </summary>
     public static class AdoxioTiedhouseconnectionsExtensions
     {
-
-
         /// <summary>
         /// Copy values from a Dynamics legal entity to another one
         /// </summary>
@@ -44,16 +47,35 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioMarketerconnectiontocrs = (int?)from.MarketerConnectionToCrs;
             to.AdoxioMarketerconnectiontocrsdetails = from.MarketerConnectionToCrsDetails;
             to.AdoxioInconnectiontofederalproducer = (int?)from.INConnectionToFederalProducer;
-            to.AdoxioInconnectiontofederalproducerdetails  = from.INConnectionToFederalProducerDetails;
+            to.AdoxioInconnectiontofederalproducerdetails = from.INConnectionToFederalProducerDetails;
             to.AdoxioLiquorfinancialinterest = @from.LiquorFinancialInterest;
             to.AdoxioLiquorfinancialinterestdetails = from.LiquorFinancialInterestDetails;
 
+            to.AccountODataBind = !String.IsNullOrEmpty(from.AccountId) ? $"/accounts({from.AccountId})" : null;
+            to.ApplicationOdataBind = !String.IsNullOrEmpty(from.ApplicationId)
+                ? $"/adoxio_applications({from.ApplicationId})"
+                : null;
+            to.AdoxioFirstName = from.FirstName;
+            to.AdoxioMiddlename = from.MiddleName;
+            to.AdoxioDateOfBirth = from.DateOfBirth;
+            to.AdoxioLastname = from.LastName;
+            to.AdoxioOtherRelationship = from.OtherDescription;
+            to.AdoxioRelationshipType = from.RelationshipToLicence;
+            to.AdoxioLIQTiedHouseType = from.LIQTiedHouseType;
+            to.SupersededByOdataBind = !String.IsNullOrEmpty(from.SupersededById)
+                ? $"/adoxio_tiedhouseconnections({from.SupersededById})"
+                : null;
+            to.AdoxioMarkedForRemoval = from.MarkedForRemoval == true ? 1 : 0;
+            to.AdoxioLegalEntityName = from.LegalEntityName;
+            to.AdoxioBusinessType = from.BusinessType;
+            to.AdoxioCategoryType = from.CategoryType;
+            to.AdoxioSelfDeclared = from.SelfDeclared;
+            to.AdoxioDeclarationDate = from.DeclarationDate;
         }
-
 
         /// <summary>
         /// Convert a Dynamics Legal Entity to a ViewModel
-        /// </summary>        
+        /// </summary>
         public static TiedHouseConnection ToViewModel(this MicrosoftDynamicsCRMadoxioTiedhouseconnection tiedHouse)
         {
             TiedHouseConnection result = null;
@@ -64,7 +86,13 @@ namespace Gov.Lclb.Cllb.Public.Models
                 {
                     result.id = tiedHouse.AdoxioTiedhouseconnectionid;
                 }
-
+                result.AssociatedLiquorLicense = tiedHouse
+                    .Adoxio_Adoxio_TiedHouseConnection_Adoxio_Licence?.Select(x => new RelatedLicence()
+                    {
+                        Id = x.AdoxioLicencesid,
+                        Name = x.AdoxioName
+                    })
+                    .ToList();
                 result.CorpConnectionFederalProducer = tiedHouse.AdoxioCorpconnectionfederalproducer;
                 result.CorpConnectionFederalProducerDetails = tiedHouse.AdoxioCorpconnectionfederalproducerdetails;
                 result.FamilyMemberFederalProducer = tiedHouse.AdoxioFamilymemberfederalproducer;
@@ -73,15 +101,18 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.FederalProducerConnectionToCorpDetails = tiedHouse.AdoxioFederalproducerconnectiontocorpdetails;
                 result.IsConnection = tiedHouse.AdoxioIsconnection;
                 result.PartnersConnectionFederalProducer = tiedHouse.AdoxioPartnersconnectionfederalproducer;
-                result.PartnersConnectionFederalProducerDetails = tiedHouse.AdoxioPartnersconnectionfederalproducerdetails;
+                result.PartnersConnectionFederalProducerDetails =
+                    tiedHouse.AdoxioPartnersconnectionfederalproducerdetails;
                 result.PercentageofOwnership = tiedHouse.AdoxioPercentageofownership;
                 result.Share20PlusConnectionProducer = tiedHouse.AdoxioShare20plusconnectionproducer;
                 result.Share20PlusConnectionProducerDetails = tiedHouse.AdoxioShare20plusconnectionproducerdetails;
                 result.Share20PlusFamilyConnectionProducer = tiedHouse.AdoxioShare20plusfamilyconnectionproducer;
-                result.Share20PlusFamilyConnectionProducerDetail = tiedHouse.AdoxioShare20plusfamilyconnectionproducerdetail;
+                result.Share20PlusFamilyConnectionProducerDetail =
+                    tiedHouse.AdoxioShare20plusfamilyconnectionproducerdetail;
                 result.ShareType = tiedHouse.AdoxioSharetype;
                 result.SocietyConnectionFederalProducer = tiedHouse.AdoxioSocietyconnectionfederalproducer;
-                result.SocietyConnectionFederalProducerDetails = tiedHouse.AdoxioSocietyconnectionfederalproducerdetails;
+                result.SocietyConnectionFederalProducerDetails =
+                    tiedHouse.AdoxioSocietyconnectionfederalproducerdetails;
                 result.LiquorFinancialInterest = tiedHouse.AdoxioLiquorfinancialinterest;
                 result.LiquorFinancialInterestDetails = tiedHouse.AdoxioLiquorfinancialinterestdetails;
 
@@ -92,10 +123,25 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.MarketerConnectionToCrsDetails = tiedHouse.AdoxioMarketerconnectiontocrsdetails;
                 result.INConnectionToFederalProducer = (MarketerYesNo?)tiedHouse.AdoxioInconnectiontofederalproducer;
                 result.INConnectionToFederalProducerDetails = tiedHouse.AdoxioInconnectiontofederalproducerdetails;
+                result.FirstName = tiedHouse.AdoxioFirstName;
+                result.MiddleName = tiedHouse.AdoxioMiddlename;
+                result.LastName = tiedHouse.AdoxioLastname;
+                result.RelationshipToLicence = tiedHouse.AdoxioRelationshipType;
+                result.DateOfBirth = tiedHouse.AdoxioDateOfBirth;
+                result.LIQTiedHouseType = tiedHouse.AdoxioLIQTiedHouseType;
+                result.ApplicationId = tiedHouse._adoxioApplicationValue;
+                result.AccountId = tiedHouse._adoxioAccountidValue;
+                result.SupersededById = tiedHouse._adoxio_supersededbyValue;
+                result.StatusCode = tiedHouse.Statuscode;
+                result.MarkedForRemoval = tiedHouse.AdoxioMarkedForRemoval == 1;
+                result.BusinessType = tiedHouse.AdoxioBusinessType;
+                result.LegalEntityName = tiedHouse.AdoxioLegalEntityName;
+                result.CategoryType = tiedHouse.AdoxioCategoryType;
+                result.SelfDeclared = tiedHouse.AdoxioSelfDeclared;
+                result.DeclarationDate = tiedHouse.AdoxioDeclarationDate;
+                result.OtherDescription = tiedHouse.AdoxioOtherRelationship;
             }
             return result;
         }
-
     }
-
 }

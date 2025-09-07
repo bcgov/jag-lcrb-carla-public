@@ -16,14 +16,10 @@ import { FormBase, CanadaPostalRegex, ApplicationHTMLContent } from "@shared/for
 import { DynamicsDataService } from "@services/dynamics-data.service";
 import { Account } from "@models/account.model";
 import { ApplicationTypeNames, FormControlState } from "@models/application-type.model";
-import { TiedHouseConnection } from "@models/tied-house-connection.model";
-import { TiedHouseConnectionsDataService } from "@services/tied-house-connections-data.service";
 import { EstablishmentWatchWordsService } from "@services/establishment-watch-words.service";
 import { KeyValue } from "@angular/common";
 import { FeatureFlagService } from "@services/feature-flag.service";
 import { FileUploaderComponent } from "@shared/components/file-uploader/file-uploader.component";
-import { ConnectionToNonMedicalStoresComponent } from
-  "@components/account-profile/tabs/connection-to-non-medical-stores/connection-to-non-medical-stores.component";
 import { UPLOAD_FILES_MODE } from "@components/licences/licences.component";
 import { ApplicationCancellationDialogComponent } from
   "@components/dashboard/applications-and-licences/applications-and-licences.component";
@@ -71,8 +67,6 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
   supportingDocuments: FileUploaderComponent;
   @ViewChild("accountCompleteness")
   accountCompleteness: AccountCompletenessComponent;
-  @ViewChild(ConnectionToNonMedicalStoresComponent)
-  connectionsToProducers: ConnectionToNonMedicalStoresComponent;
   form: FormGroup;
   savedFormData: any;
   applicationId: string;
@@ -84,7 +78,6 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
   showValidationMessages: boolean;
   submittedApplications = 8;
   ServiceHours = ServiceHours;
-  tiedHouseFormData: TiedHouseConnection;
   possibleProblematicNameWarning = false;
   htmlContent = {} as ApplicationHTMLContent;
   indigenousNations: { id: string, name: string }[] = [];
@@ -113,7 +106,6 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
     public featureFlagService: FeatureFlagService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private tiedHouseService: TiedHouseConnectionsDataService,
     public dialog: MatDialog,
     public establishmentWatchWordsService: EstablishmentWatchWordsService,
     private dynamicsFormDataService: DynamicsFormDataService
@@ -184,7 +176,7 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
       this.addDynamicContent();
     });
 
-    this.applicationDataService.getSubmittedApplicationCount()
+    this.applicationDataService.getSubmittedCannabisRetailStoreApplicationCount()
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(value => this.submittedApplications = value);
 
@@ -200,7 +192,7 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
     this.dynamicsDataService.getRecord("indigenousnations", "")
       .subscribe(data => this.indigenousNations = data);
 
-    // get the application form 
+    // get the application form
     this.dynamicsFormDataService.getDynamicsForm("df0e3410-b8d4-46f8-bcef-1b20a01a66d7") // catering form for demo
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(value => this.dynamicsForm = value);
@@ -293,9 +285,8 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
   }
 
   canDeactivate(): Observable<boolean> {
-    const connectionsDidntChang = !(this.connectionsToProducers && this.connectionsToProducers.formHasChanged());
     const formDidntChange = JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value);
-    if (connectionsDidntChang && formDidntChange) {
+    if (formDidntChange) {
       return of(true);
     } else {
       const subj = new Subject<boolean>();
@@ -347,7 +338,6 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
     }
     return forkJoin(
         this.applicationDataService.updateApplication({ ...this.application, ...this.form.value }),
-        this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
       ).pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
         this.snackBar.open("Error saving Application", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
@@ -371,15 +361,6 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
       .then(() => {
         this.router.navigateByUrl("/dashboard");
       });
-  }
-
-  prepareTiedHouseSaveRequest(_tiedHouseData) {
-    if (!this.application.tiedHouse) {
-      return of(null);
-    }
-    let data = (Object as any).assign(this.application.tiedHouse, _tiedHouseData);
-    data = { ...data };
-    return this.tiedHouseService.updateTiedHouse(data, data.id);
   }
 
   updateApplicationInStore() {

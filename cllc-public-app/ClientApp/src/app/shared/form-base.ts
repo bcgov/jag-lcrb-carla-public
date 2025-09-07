@@ -4,6 +4,7 @@ import { Application } from '@models/application.model';
 import { ApplicationTypeNames, FormControlState } from '@models/application-type.model';
 import { Account } from '@models/account.model';
 import { Subscription } from 'rxjs';
+import { isValidOrNotTouched } from '@shared/form-utils';
 
 
 export const CanadaPostalRegex = '^[A-Za-z][0-9][A-Za-z] ?[0-9][A-Za-z][0-9]$';
@@ -91,10 +92,14 @@ export class FormBase implements OnDestroy {
     return body;
   }
 
-  isValidOrNotTouched(field: string) {
-    return this.form.get(field).disabled
-      || this.form.get(field).valid
-      || !this.form.get(field).touched;
+  /**
+   * Returns `true` if a form control is disabled, valid, or not touched.
+   *
+   * @param {string} field
+   * @return {*}  {boolean}
+   */
+  isValidOrNotTouched(field: string): boolean {
+    return isValidOrNotTouched(this.form, field);
   }
 
   rejectIfNotDigitOrBackSpace(event) {

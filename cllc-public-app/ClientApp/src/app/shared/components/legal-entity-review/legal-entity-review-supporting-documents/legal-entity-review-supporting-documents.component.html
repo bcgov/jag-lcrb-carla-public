@@ -1,0 +1,17 @@
+<h3 class="blue-header">{{ sectionHeader }}</h3>
+<div class="content-bottom">
+  <p>{{ sectionText }}</p>
+
+  <app-file-uploader
+    *ngIf="application?.id"
+    documentType="LER"
+    fileTypes="FILE MUST BE IN PDF FORMAT."
+    [multipleFiles]="true"
+    entityName="application"
+    [extensions]="['pdf']"
+    (numberOfUploadedFiles)="onUploadedFileCount($event)"
+    [entityId]="application.id"
+    [uploadHeader]="'TO UPLOAD SUPPORTING INFORMATION/DOCUMENTS, DRAG FILES HERE OR'"
+    [disableUploads]="disabled"
+    [enableFileDeletion]="!disabled"></app-file-uploader>
+</div>

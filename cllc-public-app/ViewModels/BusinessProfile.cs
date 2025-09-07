@@ -33,7 +33,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public List<BusinessProfileLegalEntity> ChildEntities { get; set; }
 
         /// <summary>
-        /// The tied house associated with the <see cref="Account"/>
+        /// The singleton cannabis tied house connection record for the user account.
         /// </summary>
         /// <value></value>
         public TiedHouseConnection TiedHouse { get; set; }

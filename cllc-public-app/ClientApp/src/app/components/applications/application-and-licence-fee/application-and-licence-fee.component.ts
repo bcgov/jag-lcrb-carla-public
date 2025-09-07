@@ -43,7 +43,6 @@ export class ApplicationAndLicenceFeeComponent extends FormBase implements OnIni
   busy: Subscription;
   validationMessages: any[];
   showValidationMessages: boolean;
-  submittedApplications = 8;
   htmlContent = {} as ApplicationHTMLContent;
   ApplicationTypeNames = ApplicationTypeNames;
   FormControlState = FormControlState;
@@ -92,10 +91,6 @@ export class ApplicationAndLicenceFeeComponent extends FormBase implements OnIni
       isReadyProductNotVisibleOutside: [""],
       establishmentopeningdate: ["", [Validators.required]],
     });
-
-    this.applicationDataService.getSubmittedApplicationCount()
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe(value => this.submittedApplications = value);
 
     this.store.select(state => state.currentAccountState.currentAccount)
       .pipe(takeWhile(() => this.componentActive))

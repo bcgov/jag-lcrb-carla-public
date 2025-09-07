@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text.Encodings.Web;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Web;
 using Google.Protobuf.WellKnownTypes;
@@ -15,6 +16,7 @@ using Gov.Lclb.Cllb.Public.Extensions;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.Utils;
 using Gov.Lclb.Cllb.Public.ViewModels;
+using Grpc.Core;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -76,6 +78,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var dynamicsApplicationList = _dynamicsClient.GetApplicationListByApplicant(applicantId);
             // if we have some
             if (dynamicsApplicationList != null)
+            {
                 // loop through them
                 foreach (var dynamicsApplication in dynamicsApplicationList)
                 {
@@ -102,15 +105,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                 expand: expand);
                         // to get which endorsement applications link to it
                         if (licenceType?.AdoxioLicencetypesApplicationtypes != null)
+                        {
                             endorsements = licenceType.AdoxioLicencetypesApplicationtypes
                                 .Where(type => (type.AdoxioIsendorsement == true || type.AdoxioCopylicencetc == true))
                                 .Select(type => type.AdoxioName)
                                 .ToList();
+                        }
                     }
                     var row = dynamicsApplication.ToSummaryViewModel();
                     row.Endorsements = endorsements;
                     result.Add(row);
                 }
+            }
 
             return result;
         }
@@ -167,13 +173,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return result;
         }
 
-
         /// <summary>
-        ///     Gets the number of active licences
+        /// Get the count of approved cannabis retail store licences for the given user.
         /// </summary>
         /// <param name="licenceeId"></param>
         /// <returns></returns>
-        private int GetApprovedLicenceCountByApplicant(string licenceeId)
+        private int GetApprovedCannabisRetailStoreLicenceCountByApplicant(string licenceeId)
         {
             var result = 0;
             if (!string.IsNullOrEmpty(licenceeId))
@@ -186,8 +191,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     result = _dynamicsClient.Licenceses.Get(filter: filter, expand: expand).Value
                         .Count(licence => licence.AdoxioLicenceType.AdoxioName == "Cannabis Retail Store");
                 }
-                catch (HttpOperationException)
+                catch (HttpOperationException error)
                 {
+                    _logger.LogError(error, "GetApprovedCannabisRetailStoreLicenceCountByApplicant Error");
                     result = 0;
                 }
             }
@@ -195,13 +201,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return result;
         }
 
-
         /// <summary>
         ///     Gets the number of applications that are submitted
         /// </summary>
         /// <param name="applicantId"></param>
         /// <returns></returns>
-        private int GetSubmittedCountByApplicant(string applicantId)
+        private int GetSubmittedCannabisRetailStoreCountByApplicant(string applicantId)
         {
             var result = 0;
             if (!string.IsNullOrEmpty(applicantId))
@@ -221,10 +226,48 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     result = _dynamicsClient.Applications.Get(filter: filter).Value.Count;
                 }
-                catch (HttpOperationException)
+                catch (HttpOperationException error)
                 {
+                    _logger.LogError(error, "GetSubmittedCannabisRetailStoreCountByApplicant Error");
                     result = 0;
                 }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Get the count of approved applications for the current user.
+        /// </summary>
+        /// <param name="applicantId"></param>
+        /// <returns></returns>
+        private int GetApprovedApplicationsCountByApplicant(string applicantId)
+        {
+            if (string.IsNullOrEmpty(applicantId))
+            {
+                return 0;
+            }
+
+            int result;
+
+            try
+            {
+                var andFilterConditions = new List<string>
+                {
+                    $"_adoxio_applicant_value eq {applicantId}",
+                    $"statuscode eq {(int)AdoxioApplicationStatusCodes.Approved}",
+                    "statecode eq 0"
+                };
+                var filter = string.Join(" and ", andFilterConditions);
+
+                var response = _dynamicsClient.Applications.Get(filter: filter, top: 1, count: true);
+
+                result = int.TryParse(response?.Count, out var parsedCount) ? parsedCount : 0;
+            }
+            catch (HttpOperationException error)
+            {
+                _logger.LogError(error, "GetSubmittedApplicationsCountByApplicant Error");
+                return 0;
             }
 
             return result;
@@ -403,7 +446,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     filter += $" )";
                     if (islgzoningconfirmationFalse != null && islgzoningconfirmationFalse.Count > 0)
                     {
-                        filter+= $" or ((";
+                        filter += $" or ((";
                         var j = 0;
                         foreach (var item in islgzoningconfirmationFalse)
                         {
@@ -1052,128 +1095,354 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return result;
         }
 
-        private MicrosoftDynamicsCRMadoxioApplication GetPermanentChangeApplication(UserSettings userSettings, string applicationId)
+        /// <summary>
+        /// Fetches a "Permanent Change to a Licensee" application.
+        ///
+        /// Fetches the application using the logged in user's account ID.
+        /// If an "applicationId" is provided, will additionally filter results using that specific application id.
+        ///
+        /// If no application is found, it will create a new "Permanent Change to a Licensee" application and return it.
+        /// </summary>
+        /// <param name="userSettings"></param>
+        /// <param name="applicationId"></param>
+        /// <returns></returns>
+        /// <summary>
+        private async Task<IActionResult> _GetPermanentChangesToLicenseeData(
+            UserSettings userSettings,
+            string applicationId = null
+        )
         {
-            MicrosoftDynamicsCRMadoxioApplication result = null;
-            var applicationType = _dynamicsClient.GetApplicationTypeByName("Permanent Change to a Licensee");
+            PermanentChangesPageData data = new PermanentChangesPageData();
+
+            // Get all licenses for the current user
+            data.Licences = _dynamicsClient.GetLicensesByLicencee(userSettings.AccountId, _cache);
+
+            // Attempt to fetch an existing in-progress application
+            var existingApplication = await _GetExistingInProgressPermanentChangeApplication(
+                userSettings,
+                applicationId
+            );
+
+            // If no existing in-progress application is found, create and return a new application
+            if (existingApplication == null)
+            {
+                var createdApplication = await _createPermanentChangeApplication(userSettings);
+
+                // Fetch the new record with all related data
+                var createdApplicationData = await _dynamicsClient.GetApplicationByIdWithChildren(
+                    Guid.Parse(createdApplication.AdoxioApplicationid)
+                );
+
+                data.Application = await createdApplicationData.ToViewModel(_dynamicsClient, _cache, _logger);
+
+                return new JsonResult(data);
+            }
+
+            // If the existing application has an unpaid cannabis (primary) invoice, check/update the payment status
+            if (
+                !string.IsNullOrEmpty(existingApplication._adoxioInvoiceValue)
+                && existingApplication.AdoxioPrimaryapplicationinvoicepaid != 1
+            )
+            {
+                PaymentResult primaryInvoiceResult = await PaymentController
+                    .GetCannabisPaymentStatus(existingApplication, _dynamicsClient, _bcep)
+                    .ConfigureAwait(true);
+
+                data.Primary = primaryInvoiceResult?.TrnId == "0" ? null : primaryInvoiceResult;
+            }
+
+            // If the existing application has an unpaid liquor (secondary) invoice, check/update the payment status
+            if (
+                !string.IsNullOrEmpty(existingApplication._adoxioSecondaryapplicationinvoiceValue)
+                && existingApplication.AdoxioSecondaryapplicationinvoicepaid != 1
+            )
+            {
+                PaymentResult secondaryInvoiceResult = await PaymentController
+                    .GetLiquorPaymentStatus(existingApplication, _dynamicsClient, _bcep)
+                    .ConfigureAwait(true);
+
+                data.Secondary = secondaryInvoiceResult?.TrnId == "0" ? null : secondaryInvoiceResult;
+            }
+
+            // Fetch the existing record with all related data
+            var existingApplicationData = await _dynamicsClient.GetApplicationByIdWithChildren(
+                Guid.Parse(existingApplication.AdoxioApplicationid)
+            );
+
+            data.Application = await existingApplicationData.ToViewModel(_dynamicsClient, _cache, _logger);
+
+            return new JsonResult(data);
+        }
+
+        /// <summary>
+        /// Fetches a "Permanent Change to a Licensee" application as a result of a "Legal Entity Review".
+        ///
+        /// If no application is found, it will create a new "Permanent Change to a Licensee" application and return it.
+        /// </summary>
+        /// <param name="userSettings"></param>
+        /// <param name="applicationId"></param>
+        /// <returns></returns>
+        /// <summary>
+        private async Task<IActionResult> _GetPermanentChangesToLicenseeDataForLegalEntityReview(
+            UserSettings userSettings,
+            string applicationId
+        )
+        {
+            PermanentChangesPageData data = new PermanentChangesPageData();
+
+            // Get all licenses for the current user
+            data.Licences = _dynamicsClient.GetLicensesByLicencee(userSettings.AccountId, _cache);
+
+            // Fetch the existing record with all related data
+            var existingApplication = await _dynamicsClient.GetApplicationByIdWithChildren(Guid.Parse(applicationId));
+
+            // If no existing in-progress application is found, create and return a new application
+            if (existingApplication == null)
+            {
+                var createdApplication = await _createPermanentChangeApplication(userSettings);
+
+                // Fetch the new record with all related data
+                var createdApplicationData = await _dynamicsClient.GetApplicationByIdWithChildren(
+                    Guid.Parse(createdApplication.AdoxioApplicationid)
+                );
+
+                data.Application = await createdApplicationData.ToViewModel(_dynamicsClient, _cache, _logger);
+
+                return new JsonResult(data);
+            }
+
+            // If the existing application has an unpaid cannabis (primary) invoice, check/update the payment status
+            if (
+                !string.IsNullOrEmpty(existingApplication._adoxioInvoiceValue)
+                && existingApplication.AdoxioPrimaryapplicationinvoicepaid != 1
+            )
+            {
+                PaymentResult primaryInvoiceResult = await PaymentController
+                    .GetCannabisPaymentStatus(existingApplication, _dynamicsClient, _bcep)
+                    .ConfigureAwait(true);
+
+                data.Primary = primaryInvoiceResult?.TrnId == "0" ? null : primaryInvoiceResult;
+            }
+
+            // If the existing application has an unpaid liquor (secondary) invoice, check/update the payment status
+            if (
+                !string.IsNullOrEmpty(existingApplication._adoxioSecondaryapplicationinvoiceValue)
+                && existingApplication.AdoxioSecondaryapplicationinvoicepaid != 1
+            )
+            {
+                PaymentResult secondaryInvoiceResult = await PaymentController
+                    .GetLiquorPaymentStatus(existingApplication, _dynamicsClient, _bcep)
+                    .ConfigureAwait(true);
+
+                data.Secondary = secondaryInvoiceResult?.TrnId == "0" ? null : secondaryInvoiceResult;
+            }
+
+            data.Application = await existingApplication.ToViewModel(_dynamicsClient, _cache, _logger);
+
+            return new JsonResult(data);
+        }
+
+        /// <summary>
+        /// Fetches a "LE Review" application.
+        /// </summary>
+        /// <param name="userSettings"></param>
+        /// <param name="applicationId"></param>
+        /// <returns></returns>
+        /// <summary>
+        private async Task<IActionResult> _GetLegalEntityReviewData(UserSettings userSettings, string applicationId)
+        {
+            // TODO: tiedhouse - Replace this type with a new LE Review specific one, as the "permanent change" and 
+            // "le review" don't have similar, but not the exact same, data requirements.
+            PermanentChangesPageData data = new PermanentChangesPageData();
+
+            // Get all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
+            data.Licences = _dynamicsClient.GetLicensesByLicencee(userSettings.AccountId, _cache);
+
+            var application = await _dynamicsClient.GetApplicationByIdWithChildren(Guid.Parse(applicationId));
+
+            data.Application = await application.ToViewModel(_dynamicsClient, _cache, _logger);
+
+            return new JsonResult(data);
+        }
+
+        /// <summary>
+        /// Gets an existing in-progress Permanent Change to a Licensee application or creates a new one.
+        ///
+        /// If applicationId is provided, will fetch that specific record.
+        /// If applicationId is not provided, will fetch the most recent Permanent change application for the user.
+        ///
+        /// If no application is found, it will create a new application.
+        /// </summary>
+        /// <remarks>
+        /// An in-progress application is one that is not in a final/terminal status AND does not have a paid invoice.
+        /// </remarks>
+        /// <param name="userSettings"></param>
+        /// <param name="applicationId">Filter results by a specific application ID. (Optional)</param>
+        /// <returns></returns>
+        private async Task<MicrosoftDynamicsCRMadoxioApplication> _GetExistingInProgressPermanentChangeApplication(
+            UserSettings userSettings,
+            string applicationId = null
+        )
+        {
+            MicrosoftDynamicsCRMadoxioApplicationtype applicationType = _dynamicsClient.GetApplicationTypeByName(
+                "Permanent Change to a Licensee"
+            );
+
+            if (applicationType == null)
+            {
+                _logger.LogError("Application type not found for 'Permanent Change to a Licensee' Application");
+                throw new Exception("Application type not found for 'Permanent Change to a Licensee' Application");
+            }
 
             string[] expand =
             {
-                    "adoxio_localgovindigenousnationid",
-                    "adoxio_application_SharePointDocumentLocations",
-                    "adoxio_application_adoxio_tiedhouseconnection_Application",
-                    "adoxio_AssignedLicence",
-                    "adoxio_ApplicationTypeId",
-                    "adoxio_LicenceFeeInvoice",
-                    "adoxio_Invoice",
-                    "adoxio_application_SharePointDocumentLocations"
-                };
+                "adoxio_AssignedLicence",
+                "adoxio_ApplicationTypeId",
+                "adoxio_LicenceFeeInvoice",
+                "adoxio_Invoice",
+                "adoxio_ApplicationExtension"
+            };
 
-            // GET all licensee change applications in Dynamics by applicant using the account Id assigned to the user logged in
-            var filter =
-                $"_adoxio_applicant_value eq {userSettings.AccountId} and statuscode ne {(int)AdoxioApplicationStatusCodes.Processed} and statuscode ne {(int)AdoxioApplicationStatusCodes.Terminated}";
-            // filter += $" and adoxio_isapplicationcomplete ne 1";
+            // GET all licensee change applications for the current user
+            var filter = $"_adoxio_applicant_value eq {userSettings.AccountId}";
+
+            // Exclude final/terminal statuses
+            filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Processed}";
+            filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Terminated}";
             filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Cancelled}";
             filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Approved}";
             filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Refused}";
             filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
 
-            // this filter is required
+            // Include only active records
+            filter += $" and statecode eq 0";
+
+            // Filter by application type
             filter += $" and _adoxio_applicationtypeid_value eq {applicationType.AdoxioApplicationtypeid} ";
 
             if (!string.IsNullOrEmpty(applicationId))
             {
+                // Optionally filter by specific application id
                 filter += $" and adoxio_applicationid eq {applicationId}";
             }
 
-
             try
             {
-                var applications = _dynamicsClient.Applications.Get(filter: filter, expand: expand).Value
-                    .OrderByDescending(app => app.Createdon);
-                var application = applications.FirstOrDefault(); // Get the latest application
-                if (application != null)
-                    result = application;
-                else
-                    result = null;
-            }
-            catch (HttpOperationException e)
-            {
-                _logger.LogError(e, "Error getting licensee application");
-                result = null;
-            }
+                var applications = _dynamicsClient
+                    .Applications.Get(filter: filter, expand: expand)
+                    .Value.OrderByDescending(app => app.Createdon);
 
-            bool applicationIsPaid = (
-                (result?._adoxioInvoiceValue != null || result?._adoxioSecondaryapplicationinvoiceValue != null) && // an invoice exists
-                (result?._adoxioInvoiceValue == null || result?.AdoxioPrimaryapplicationinvoicepaid == 1) &&
-                (result?._adoxioSecondaryapplicationinvoiceValue == null || result?.AdoxioSecondaryapplicationinvoicepaid == 1)
+                var existingApplication = applications.FirstOrDefault();
+
+                // Check if the existing application has an invoice and the invoice is paid
+                // If so, then this application is not considered to be "in-progress"
+                bool hasInvoice =
+                    existingApplication?._adoxioInvoiceValue != null
+                    || existingApplication?._adoxioSecondaryapplicationinvoiceValue != null;
+                bool primaryInvoicePaid =
+                    existingApplication?._adoxioInvoiceValue == null
+                    || existingApplication?.AdoxioPrimaryapplicationinvoicepaid == 1;
+                bool secondaryInvoicePaid =
+                    existingApplication?._adoxioSecondaryapplicationinvoiceValue == null
+                    || existingApplication?.AdoxioSecondaryapplicationinvoicepaid == 1;
+                bool existingApplicationIsPaid = hasInvoice && primaryInvoicePaid && secondaryInvoicePaid;
+
+                if (existingApplicationIsPaid)
+                {
+                    return null;
+                }
+
+                return existingApplication;
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(
+                    httpOperationException,
+                    "Error getting existing in-progress  Permanent Change Application"
+                );
+                _logger.LogDebug($"Request: {JsonConvert.SerializeObject(httpOperationException.Request)}");
+                _logger.LogDebug($"Response: {JsonConvert.SerializeObject(httpOperationException.Response)}");
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Creates and returns a new permanent change application.
+        /// </summary>
+        /// <param name="userSettings"></param>
+        /// <param name="applicationType"></param>
+        /// <returns></returns>
+        private async Task<MicrosoftDynamicsCRMadoxioApplication> _createPermanentChangeApplication(
+            UserSettings userSettings
+        )
+        {
+            try
+            {
+                MicrosoftDynamicsCRMadoxioApplicationtype applicationType = _dynamicsClient.GetApplicationTypeByName(
+                    "Permanent Change to a Licensee"
                 );
 
-            if ((result == null || applicationIsPaid) && applicationType != null && string.IsNullOrEmpty(applicationId))
-            {
-                // create one.
+                if (applicationType == null)
+                {
+                    _logger.LogError("Application type not found for Permanent Change Application");
+                    throw new Exception("Application type not found for Permanent Change Application");
+                }
+
                 var account = _dynamicsClient.GetAccountById(userSettings.AccountId);
-                result = new MicrosoftDynamicsCRMadoxioApplication
+
+                var applicationData = new MicrosoftDynamicsCRMadoxioApplication
                 {
                     AdoxioApplicanttype = account.AdoxioBusinesstype,
                     AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("accounts", userSettings.AccountId),
-                    // set application type relationship 
-                    AdoxioApplicationTypeIdODataBind = _dynamicsClient.GetEntityURI("adoxio_applicationtypes",
-                        applicationType.AdoxioApplicationtypeid)
+                    AdoxioApplicationTypeIdODataBind = _dynamicsClient.GetEntityURI(
+                        "adoxio_applicationtypes",
+                        applicationType.AdoxioApplicationtypeid
+                    )
                 };
 
-                try
-                {
-                    result = _dynamicsClient.Applications.Create(result);
-                    result = _dynamicsClient.GetApplicationByIdWithChildren(result.AdoxioApplicationid).GetAwaiter()
-                        .GetResult();
-                }
-                catch (HttpOperationException e)
-                {
-                    _logger.LogError(e, "Error creating licensee application");
-                    result = null;
-                }
-            }
+                var createdApplication = await _dynamicsClient.Applications.CreateAsync(applicationData);
 
-            return result;
+                return await _dynamicsClient.GetApplicationByIdWithChildren(createdApplication.AdoxioApplicationid);
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Error creating permanent change application");
+                _logger.LogDebug($"Request: {JsonConvert.SerializeObject(httpOperationException.Request)}");
+                _logger.LogDebug($"Response: {JsonConvert.SerializeObject(httpOperationException.Response)}");
+                throw;
+            }
         }
+
+        /// <summary>
+        /// Fetches a "Permanent Change to a Licensee" application.
+        ///
+        /// Fetches the application using the logged in user's account ID.
+        /// If an "applicationId" is provided, will additionally filter results using that specific application id.
+        ///
+        /// If no application is found, it will create a new "Permanent Change to a Licensee" application and return it.
+        /// </summary>
+        /// <param name="applicationId"></param>
+        /// <returns></returns>
         [HttpGet("permanent-change-to-licensee-data")]
-        public async Task<IActionResult> GetPermanetChangesToLicenseeData([FromQuery] string applicationId)
+        public async Task<IActionResult> GetPermanentChangesToLicenseeData([FromQuery] string applicationId = null)
         {
-            // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
-            PermanentChangesPageData data = new PermanentChangesPageData();
 
-            // set application type relationship 
-            var app = GetPermanentChangeApplication(userSettings, applicationId);
-            // get all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
-            data.Licences = _dynamicsClient.GetLicensesByLicencee(userSettings.AccountId, _cache);
+            return await _GetPermanentChangesToLicenseeData(userSettings, applicationId);
+        }
 
-            PaymentResult primaryInvoiceResult = null;
-            // if there is an invoice but the payment has not been confirmed
-            if (!string.IsNullOrEmpty(app._adoxioInvoiceValue) && app.AdoxioPrimaryapplicationinvoicepaid != 1)
-            {
-                primaryInvoiceResult = await PaymentController.GetPaymentStatus(app, "primary", _dynamicsClient, _bcep).ConfigureAwait(true);
-            }
+        /// <summary>
+        /// Fetches a "Legal Entity Review" application.
+        /// </summary>
+        /// <param name="applicationId"></param>
+        /// <returns></returns>
+        /// <summary>
+        [HttpGet("legal-entity-review-data")]
+        public async Task<IActionResult> GetLegalEntityReviewData([FromQuery] string applicationId)
+        {
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
-            PaymentResult secondaryInvoiceResult = null;
-            // if there is an invoice but the payment has not been confirmed
-            if (!string.IsNullOrEmpty(app._adoxioSecondaryapplicationinvoiceValue) && app.AdoxioSecondaryapplicationinvoicepaid != 1)
-            {
-                secondaryInvoiceResult = await PaymentController.GetPaymentStatus(app, "secondary", _dynamicsClient, _bcep).ConfigureAwait(true);
-            }
-            data.Primary = primaryInvoiceResult?.TrnId == "0" ? null : primaryInvoiceResult;
-            data.Secondary = secondaryInvoiceResult?.TrnId == "0" ? null : secondaryInvoiceResult;
-            ;
-            if (
-                (data.Primary != null && string.IsNullOrEmpty(app._adoxioInvoiceValue)) ||
-                (data.Secondary != null && string.IsNullOrEmpty(app._adoxioSecondaryapplicationinvoiceValue))
-            )
-            {
-                app = await _dynamicsClient.GetApplicationByIdWithChildren(Guid.Parse(app.AdoxioApplicationid));
-            }
-            data.Application = await app.ToViewModel(_dynamicsClient, _cache, _logger);
-            return new JsonResult(data);
+            return await _GetLegalEntityReviewData(userSettings, applicationId);
         }
 
         /// GET all applications in Dynamics for the current user
@@ -1200,16 +1469,32 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return result;
         }
 
-        /// GET submitted applications in Dynamics for the current user
-        [HttpGet("current/submitted-count")]
+        /// <summary>
+        /// Get the count of submitted and approved cannabis retail store applications for the current user.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("current/cannabis-retail-store/submitted-count")]
         public JsonResult GetCountForCurrentUserSubmittedApplications()
         {
-            // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
-            // GET all applications in Dynamics by applicant using the account Id assigned to the user logged in
-            var count = GetSubmittedCountByApplicant(userSettings.AccountId);
-            count += GetApprovedLicenceCountByApplicant(userSettings.AccountId);
+            var countCannabisRetailStore = GetSubmittedCannabisRetailStoreCountByApplicant(userSettings.AccountId);
+            countCannabisRetailStore += GetApprovedCannabisRetailStoreLicenceCountByApplicant(userSettings.AccountId);
+
+            return new JsonResult(countCannabisRetailStore);
+        }
+
+        /// <summary>
+        /// Get the count of all approved applications for the current user.
+        /// </summary>
+        /// <returns>Number</returns>
+        [HttpGet("current/approved-count")]
+        public JsonResult GetCountOfSubmittedApplicationsForCurrentUser()
+        {
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+
+            int count = GetApprovedApplicationsCountByApplicant(userSettings.AccountId);
+
             return new JsonResult(count);
         }
 
@@ -1253,7 +1538,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             //                VolumeProduced = existingAnnualVolume.AdoxioVolumeproduced,
             //                CalendarYear = existingAnnualVolume.AdoxioCalendaryear
             //            };
-                            
+
             //        }
             //    }
             //    catch (Exception ex)
@@ -1304,17 +1589,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
-            var count = GetSubmittedCountByApplicant(userSettings.AccountId);
-            count += GetApprovedLicenceCountByApplicant(userSettings.AccountId);
+            var countCannabisRetailStore = GetSubmittedCannabisRetailStoreCountByApplicant(userSettings.AccountId);
+            countCannabisRetailStore += GetApprovedCannabisRetailStoreLicenceCountByApplicant(userSettings.AccountId);
 
-            if (count >= 8 && item.ApplicationType.Name == "Cannabis Retail Store")
+            if (countCannabisRetailStore >= 8 && item.ApplicationType.Name == "Cannabis Retail Store")
                 return BadRequest("8 applications have already been submitted. Can not create more");
             var adoxioApplication = new MicrosoftDynamicsCRMadoxioApplication();
 
             // copy received values to Dynamics Application
             adoxioApplication.CopyValues(item);
 
-        
+
             //TODO Disabled for Deployment to be reenabled after.
             //LCSD-6495 set applicationType is free of if this applicationType IsEndorsement and Non licence assigned to this application.    
             /*if (item.ApplicationType.IsEndorsement.HasValue && item.ApplicationType.IsEndorsement.Value && item.AssignedLicence == null
@@ -1365,7 +1650,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 // copy more data for endorsements
                 // LCSD-5744 - Also copy more data for Change to Hours of Liquor Service (After Midnight) application
-                if (applicationType.AdoxioIsendorsement == true || 
+                if (applicationType.AdoxioIsendorsement == true ||
                         (applicationType.AdoxioName != null && applicationType.AdoxioName == "Change to Hours of Liquor Service (After Midnight)"))
                 {
                     adoxioApplication.AdoxioEstablishmentaddress = item.EstablishmentAddress;
@@ -1389,7 +1674,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     if (!string.IsNullOrEmpty(item?.ParentApplicationId))
                     {
                         adoxioApplication.AdoxioParentApplicationIDODataBind =
-                            _dynamicsClient.GetEntityURI("adoxio_applications", item.ParentApplicationId);                       
+                            _dynamicsClient.GetEntityURI("adoxio_applications", item.ParentApplicationId);
                     }
                     //LCSD-6495: set endorsement application is free if not licence assigned with it.
                     //if (item?.AssignedLicence ==null)
@@ -1412,7 +1697,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             }
                         };
 
-               
+
                 //LCSD-5779 create TiedHouseExemption 
                 if (item.WillHaveTiedHouseExemption.HasValue && item.WillHaveTiedHouseExemption.Value)
                 {
@@ -1427,11 +1712,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     adoxioTiedHouseExemption.AdoxioAssignedLicenceODataBind = adoxioTiedHouseExemption.AdoxioRelatedLicenceODataBind;
                     adoxioTiedHouseExemption.AdoxioParentApplicationIDODataBind = _dynamicsClient.GetEntityURI("adoxio_applications", item.ParentApplicationId);
 
-                   
+
                     MicrosoftDynamicsCRMadoxioLicences adoxioLicense = _dynamicsClient.GetLicenceByIdWithChildren(item.AssignedLicenceId);
                     if (adoxioLicense != null)
                     {
-                        if (adoxioLicense.AdoxioLicencee!=null)
+                        if (adoxioLicense.AdoxioLicencee != null)
                         {
                             adoxioTiedHouseExemption.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("accounts", adoxioLicense.AdoxioLicencee.Accountid);
                         }
@@ -1440,8 +1725,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             adoxioTiedHouseExemption.AdoxioLicenceEstablishmentODataBind = _dynamicsClient.GetEntityURI("adoxio_establishments", adoxioLicense.AdoxioEstablishment.AdoxioEstablishmentid);
                         }
                     }
-                    var app= _dynamicsClient.Applications.Create(adoxioTiedHouseExemption);
-                }else
+                    var app = _dynamicsClient.Applications.Create(adoxioTiedHouseExemption);
+                }
+                else
                 {
                     // create application
                     adoxioApplication = _dynamicsClient.Applications.Create(adoxioApplication);
@@ -1453,6 +1739,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 if (item.OutsideAreas != null && item.OutsideAreas.Count > 0)
                     AddServiceAreasToApplication(item.OutsideAreas, adoxioApplication.AdoxioApplicationid);
+
             }
             catch (HttpOperationException httpOperationException)
             {
@@ -1465,8 +1752,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     _logger.LogError(httpOperationException, "Error creating application");
                     // fail if we can't create.
-                    throw httpOperationException;
+                    throw;
                 }
+            }
+            catch (Exception error)
+            {
+                _logger.LogError(error, "Error creating application");
+                throw;
             }
 
             // in case the job number is not there, try getting the record from the server.
@@ -1572,21 +1864,26 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateApplication([FromBody] Application item, string id)
         {
-            if (id != item.Id) return BadRequest();
+            if (id != item.Id)
+            {
+                _logger.LogError("UpdateApplication - Error updating application");
+                return BadRequest();
+            }
 
             //Prepare application for update
             var applicationId = new Guid(id);
-            var application = await _dynamicsClient.GetApplicationById(applicationId);
+
+            var application = await _dynamicsClient.GetApplicationByIdWithChildren(applicationId);
+
             var allowLgAccess = await CurrentUserIsLgForApplication(application);
             if (!CurrentUserHasAccessToApplicationOwnedBy(application._adoxioApplicantValue) && !allowLgAccess)
-                throw new Exception("User doesn't have an access the application");
-
-            //return new NotFoundResult();
+            {
+                throw new Exception("User does not have access to the application");
+            }
 
             application = new MicrosoftDynamicsCRMadoxioApplication();
 
             application.CopyValues(item);
-
             // set licence subtype
             if (!string.IsNullOrEmpty(item.LicenceSubCategory))
             {
@@ -1599,7 +1896,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (item.ApplicationStatus == AdoxioApplicationStatusCodes.PendingForLGFNPFeedback
                 || item.ApplicationStatus == AdoxioApplicationStatusCodes.UnderReview)
             {
-
                 application.Statuscode = (int?)item.ApplicationStatus;
             }
 
@@ -1607,20 +1903,28 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 // Indigenous nation association
                 if (!string.IsNullOrEmpty(item?.IndigenousNation?.Id))
+                {
                     application.AdoxioLocalgovindigenousnationidODataBind =
                         _dynamicsClient.GetEntityURI("adoxio_localgovindigenousnations", item.IndigenousNation.Id);
+                }
                 else
+                {
                     //remove reference
                     await _dynamicsClient.Applications.DeleteReferenceAsync(item.Id,
                         "adoxio_localgovindigenousnationid");
+                }
 
                 // Police Jurisdiction association
                 if (!string.IsNullOrEmpty(item?.PoliceJurisdiction?.id))
+                {
                     application.AdoxioPoliceJurisdictionIdODataBind =
                         _dynamicsClient.GetEntityURI("adoxio_policejurisdictions", item.PoliceJurisdiction.id);
+                }
                 else
+                {
                     //remove reference
                     await _dynamicsClient.Applications.DeleteReferenceAsync(item.Id, "adoxio_PoliceJurisdictionId");
+                }
 
                 RemoveServiceAreasFromApplication(item.Id);
 
@@ -1628,10 +1932,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     AddServiceAreasToApplication(item.ServiceAreas, item.Id);
                 }
+
                 if (item.OutsideAreas != null && item.OutsideAreas.Count > 0)
                 {
                     AddServiceAreasToApplication(item.OutsideAreas, item.Id);
                 }
+
                 // capacity is always added to the form, but if the capacity value is blank we can ignore it
                 if (item.CapacityArea != null && item.CapacityArea.Count > 0 && item.CapacityArea.FirstOrDefault().Capacity.HasValue)
                 {
@@ -1639,6 +1945,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
 
                 if ((bool)item.ApplicationType?.ShowHoursOfSale)
+                {
                     try
                     {
                         // get entityid
@@ -1665,8 +1972,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                         if (hoursEntity != null)
                         {
-                            _dynamicsClient.Hoursofservices.Update(hoursEntity.AdoxioHoursofserviceid,
-                                patchHoursEntity);
+                            _dynamicsClient.Hoursofservices.Update(hoursEntity.AdoxioHoursofserviceid, patchHoursEntity);
                         }
                         else
                         {
@@ -1678,13 +1984,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     catch (HttpOperationException httpOperationException)
                     {
-                        _logger.LogError(httpOperationException,
-                            "Error updating/creating application hours of service");
+                        _logger.LogError(httpOperationException, "Error updating/creating application hours of service");
                         throw;
                     }
+                }
 
                 //LCSD-5779 create TiedHouseExemption 
-                if (string.IsNullOrEmpty(item.Id) && item.WillHaveTiedHouseExemption.HasValue && item.WillHaveTiedHouseExemption.Value && item.TiedHouse ==null)
+                if (string.IsNullOrEmpty(item.Id) && item.WillHaveTiedHouseExemption.HasValue && item.WillHaveTiedHouseExemption.Value && item.TiedHouse == null)
                 {
                     var adoxioTiedHouseExemption = new MicrosoftDynamicsCRMadoxioApplication();
                     // set application type relationship
@@ -1696,19 +2002,97 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     _dynamicsClient.Applications.Create(adoxioTiedHouseExemption);
                 }
 
+                if (item.ApplicationExtension != null)
+                {
+                    try
+                    {
+                        await UpsertApplicationExtensionAsync(item.ApplicationExtension, item.Id);
+                    }
+                    catch (HttpOperationException httpOperationException)
+                    {
+                        _logger.LogError(httpOperationException, "Error upserting application extension");
+                        _logger.LogDebug($"Request: {JsonConvert.SerializeObject(httpOperationException.Request)}");
+                        _logger.LogDebug($"Response: {JsonConvert.SerializeObject(httpOperationException.Response)}");
+                        throw;
+                    }
+                }
+
+                string json = JsonConvert.SerializeObject(application);
+
                 _dynamicsClient.Applications.Update(id, application);
 
             }
             catch (HttpOperationException httpOperationException)
             {
                 _logger.LogError(httpOperationException, "Error updating application");
-                // fail if we can't create.
-                throw httpOperationException;
+                _logger.LogDebug($"Request: {JsonConvert.SerializeObject(httpOperationException.Request)}");
+                _logger.LogDebug($"Response: {JsonConvert.SerializeObject(httpOperationException.Response)}");
+                throw;
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(exception, "Error updating application");
+                throw;
             }
 
-            application = await _dynamicsClient.GetApplicationByIdWithChildren(applicationId);
+            try
+            {
+                application = await _dynamicsClient.GetApplicationByIdWithChildren(applicationId);
 
-            return new JsonResult(await application.ToViewModel(_dynamicsClient, _cache, _logger));
+                return new JsonResult(await application.ToViewModel(_dynamicsClient, _cache, _logger));
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Error getting updated application");
+                _logger.LogDebug($"Request: {JsonConvert.SerializeObject(httpOperationException.Request)}");
+                _logger.LogDebug($"Response: {JsonConvert.SerializeObject(httpOperationException.Response)}");
+                throw;
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(exception, "Error getting updated application");
+                throw;
+            }
+        }
+
+
+        [HttpPut("legal_entity/{id}")]
+        public async Task<IActionResult> SubmitLegalEntityApplication([FromBody] Application item, string id)
+        {
+            if (id != item.Id) return BadRequest();
+
+            //Prepare application for update
+            var applicationId = new Guid(id);
+            var application = await _dynamicsClient.GetApplicationById(applicationId);
+            var allowLgAccess = await CurrentUserIsLgForApplication(application);
+            if (!CurrentUserHasAccessToApplicationOwnedBy(application._adoxioApplicantValue) && !allowLgAccess)
+                throw new Exception("User doesn't have an access the application");
+
+            application = new MicrosoftDynamicsCRMadoxioApplication();
+
+            application.CopyValues(item);
+
+            if (application.Statuscode == (int)AdoxioApplicationStatusCodes.Incomplete)
+            {
+                try
+                {
+                    application.Statuscode = (int)AdoxioApplicationStatusCodes.UnderReview;
+                    string json = JsonConvert.SerializeObject(application);
+                    _dynamicsClient.Applications.Update(id, application);
+                    return new JsonResult(await application.ToViewModel(_dynamicsClient, _cache, _logger));
+                }
+                catch (HttpOperationException httpOperationException)
+                {
+                    _logger.LogError(httpOperationException, "Error updating application");
+                    // fail if we can't create.
+                    throw httpOperationException;
+                }
+            }
+
+            else
+            {
+                throw new Exception("Error submitting Legal eneity incorrect Application Status");
+            }
         }
 
         /// <summary>
@@ -1871,13 +2255,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 var applications = _dynamicsClient.Applications.Get(filter: filter, expand: expand, orderby: new List<string> { "adoxio_jobnumber asc" }).Value;
 
-                foreach (var app in applications) 
+                foreach (var app in applications)
                 {
                     if (app.AdoxioJobnumber.Contains(jobnumber))
                     {
                         // 2024-04-29 LCSD-6368 waynezen; further filtering to make sure record(s) have a valid Licence #
                         if (!String.IsNullOrEmpty(app?.AdoxioAssignedLicence?.AdoxioLicencenumber) &&
-                            app?.AdoxioAssignedLicence?.AdoxioExpirydate > DateTime.Now) 
+                            app?.AdoxioAssignedLicence?.AdoxioExpirydate > DateTime.Now)
                         {
                             var relatedLicence = new RelatedLicence
                             {
@@ -1933,6 +2317,212 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             await _dynamicsClient.Applications.DeleteAsync(applicationId.ToString());
 
             return NoContent(); // 204
+        }
+
+        /// <summary>
+        /// Get or Create a Permanent Change to Licensee Application (PCL) as a result of a Legal Entity Review (LE).
+        /// <remarks>
+        /// A "PCL as a result of an LE Review" is a regular PCL application, which has been created on behalf of an
+        /// LE Review application. The PCL application is linked to the LE Review application via the
+        /// `RelatedLeOrPclApplication` field.
+        /// </remarks>
+        /// </summary>
+        /// <param name="id">Either the ID of the LE Review application or the PCL application.</param>
+        /// <returns></returns>
+        [HttpGet("pcl-for-le-review/{id}")]
+        public async Task<IActionResult> GetOrCreatePermanentChangeForLegalEntityReviewApplicationAsync(string id)
+        {
+            try
+            {
+                UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+
+                var expandLe = new List<string> { "adoxio_ApplicationExtension", "adoxio_ApplicationTypeId" };
+                var application = await _dynamicsClient.Applications.GetByKeyAsync(id, expand: expandLe);
+
+                // If the provided `id` does not point to an LE Review Application, assume it is a PCL Application,
+                // and attempt to return the pcl application data.
+
+                if (application.AdoxioApplicationTypeId?.AdoxioName != "LE Review")
+                {
+                    return await _GetPermanentChangesToLicenseeDataForLegalEntityReview(
+                        userSettings,
+                        application.AdoxioApplicationid
+                    );
+                }
+
+                // If LE review application is linked to a PCL application, return the PCL Application data.
+
+                if (application.AdoxioApplicationExtension?._adoxioRelatedLeOrPclApplicationValue != null)
+                {
+                    var expandExistingPcl = new List<string> { "adoxio_relatedleorpclapplication" };
+                    var existingPclApplication = await _dynamicsClient.Applicationextensions.GetByKeyAsync(
+                        application.AdoxioApplicationExtension.AdoxioApplicationextensionid,
+                        expand: expandExistingPcl
+                    );
+
+                    return await _GetPermanentChangesToLicenseeDataForLegalEntityReview(
+                        userSettings,
+                        existingPclApplication.AdoxioRelatedLeOrPclApplication.AdoxioApplicationid
+                    );
+                }
+
+                // If LE Review Application is not linked to a PCL Application, create a new PCL Application and
+                // mutually link the LE Review Application to the PCL Application.
+
+                // Create the new PCL Application record
+                var createdPclApplication = await _dynamicsClient.Applications.CreateAsync(
+                    CopyLEReviewApplicationToPCL(application)
+                );
+                var expandCreatedPcl = new List<string> { "adoxio_ApplicationExtension" };
+                // Load extension table for newly created PCL Application
+                createdPclApplication = await _dynamicsClient.Applications.GetByKeyAsync(
+                    createdPclApplication.AdoxioApplicationid,
+                    expand: expandCreatedPcl
+                );
+
+                // Upsert the LE Review Application Extension record, and link it to the PCL Application
+                var leUpdateExtension = new MicrosoftDynamicsCRMadoxioApplicationextension
+                {
+                    // Set the extension id, if it exists
+                    AdoxioApplicationextensionid = application
+                        ?.AdoxioApplicationExtension
+                        ?.AdoxioApplicationextensionid,
+                    // Link the LE Review Application Extension to the PCL Application
+                    AdoxioRelatedLeOrPclApplicationODataBind = _dynamicsClient.GetEntityURI(
+                        "adoxio_applications",
+                        createdPclApplication.AdoxioApplicationid
+                    )
+                };
+                await UpsertApplicationExtensionAsync(leUpdateExtension, application.AdoxioApplicationid);
+
+                // Upsert the PCL Application Extension record, and link it to the LE Review Application
+                var pclUpdateExtension = new MicrosoftDynamicsCRMadoxioApplicationextension
+                {
+                    // Set the extension id, if it exists
+                    AdoxioApplicationextensionid = createdPclApplication
+                        ?.AdoxioApplicationExtension
+                        ?.AdoxioApplicationextensionid,
+                    // Link the PCL Application Extension to the LE Review Application
+                    AdoxioRelatedLeOrPclApplicationODataBind = _dynamicsClient.GetEntityURI(
+                        "adoxio_applications",
+                        application.AdoxioApplicationid
+                    )
+                };
+                await UpsertApplicationExtensionAsync(pclUpdateExtension, createdPclApplication.AdoxioApplicationid);
+
+                return await _GetPermanentChangesToLicenseeDataForLegalEntityReview(
+                    userSettings,
+                    createdPclApplication.AdoxioApplicationid
+                );
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Error getting PCL application for LE Review application");
+                _logger.LogDebug($"Request: {JsonConvert.SerializeObject(httpOperationException.Request)}");
+                _logger.LogDebug($"Response: {JsonConvert.SerializeObject(httpOperationException.Response)}");
+                throw;
+            }
+            catch (Exception error)
+            {
+                _logger.LogError(error, "Error getting PCL application for LE Review application");
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Fetches the user's in-progress Legal Entity Review applications.
+        /// </summary>
+        /// <remarks>
+        /// Business rule: The user is only expected to have 1 in-progress Legal Entity Review at a time.
+        /// </remarks>
+        /// <returns>A list of in-progress Legal Entity Review applications</returns>
+        [HttpGet("get-in-progress-legal-entity-review")]
+        public async Task<IActionResult> UserHasInProgressLegalEntityReview()
+        {
+            try
+            {
+                UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+
+                string applicationTypeName = "LE Review";
+                var applicationType = _dynamicsClient.GetApplicationTypeByName(applicationTypeName);
+
+                if (applicationType == null)
+                {
+                    _logger.LogWarning($"Application type '{applicationTypeName}' not found");
+                    return new JsonResult(false);
+                }
+
+                var orderby = new List<string> { "createdon" };
+
+                // Filter by current user
+                var filter = $"_adoxio_applicant_value eq {userSettings.AccountId}";
+                // Filter to find applications of type "LE Review"
+                filter += $" and _adoxio_applicationtypeid_value eq {applicationType.AdoxioApplicationtypeid}";
+                // Include only "in-progress" statuses
+                filter += $" and (statuscode eq {(int)AdoxioApplicationStatusCodes.Intake}";
+                filter += $" or statuscode eq {(int)AdoxioApplicationStatusCodes.Incomplete}";
+                filter += $" or statuscode eq {(int)AdoxioApplicationStatusCodes.Submitted}";
+                filter += $" or statuscode eq {(int)AdoxioApplicationStatusCodes.UnderReview}";
+                filter += $" or statuscode eq {(int)AdoxioApplicationStatusCodes.LicenseeActionRequired}";
+                filter += $" or statuscode eq {(int)AdoxioApplicationStatusCodes.ApplicationAssessment})";
+                // Include only active records
+                filter += $" and statecode eq 0";
+
+                var applications = _dynamicsClient.Applications.Get(filter: filter, orderby: orderby).Value.ToList();
+
+                var applicationViewModels = new List<Application>();
+                foreach (var application in applications)
+                {
+                    Application applicationViewModel = await application.ToViewModel(_dynamicsClient, _cache, _logger);
+                    applicationViewModels.Add(applicationViewModel);
+                }
+
+                return new JsonResult(applicationViewModels);
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Error fetching in-progress LE Review applications");
+                _logger.LogDebug($"Request: {JsonConvert.SerializeObject(httpOperationException.Request)}");
+                _logger.LogDebug($"Response: {JsonConvert.SerializeObject(httpOperationException.Response)}");
+                return StatusCode(
+                    StatusCodes.Status500InternalServerError,
+                    "Error fetching in-progress LE Review applications"
+                );
+            }
+            catch (Exception error)
+            {
+                _logger.LogError(error, "Error fetching in-progress LE Review applications");
+                return StatusCode(
+                    StatusCodes.Status500InternalServerError,
+                    "Error fetching in-progress LE Review applications"
+                );
+            }
+        }
+
+        private MicrosoftDynamicsCRMadoxioApplication CopyLEReviewApplicationToPCL(
+            MicrosoftDynamicsCRMadoxioApplication LeReview
+        )
+        {
+            var pclApplicationType = _dynamicsClient.GetApplicationTypeByName("Permanent Change to a Licensee");
+            var PCL = new MicrosoftDynamicsCRMadoxioApplication
+            {
+                AdoxioApplicanttype = LeReview.AdoxioApplicanttype,
+                AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("accounts", LeReview._adoxioApplicantValue),
+                AdoxioApplicationTypeIdODataBind = _dynamicsClient.GetEntityURI(
+                    "adoxio_applicationtypes",
+                    pclApplicationType.AdoxioApplicationtypeid
+                ),
+                AdoxioCsinternaltransferofshares = LeReview.AdoxioCsinternaltransferofshares,
+                AdoxioCsexternaltransferofshares = LeReview.AdoxioCsexternaltransferofshares,
+                AdoxioCschangeofdirectorsorofficers = LeReview.AdoxioCschangeofdirectorsorofficers,
+                AdoxioCsnamechangelicenseecorporation = LeReview.AdoxioCsnamechangelicenseecorporation,
+                AdoxioCsnamechangelicenseepartnership = LeReview.AdoxioCsnamechangelicenseepartnership,
+                AdoxioCsnamechangelicenseesociety = LeReview.AdoxioCsnamechangelicenseesociety,
+                AdoxioCsnamechangeperson = LeReview.AdoxioCsnamechangeperson,
+                AdoxioCsadditionofreceiverorexecutor = LeReview.AdoxioCsadditionofreceiverorexecutor,
+                AdoxioCschangetotiedhouse = LeReview.AdoxioCschangetotiedhouse,
+            };
+            return PCL;
         }
 
         /// <summary>
@@ -2000,11 +2590,96 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     AdoxioIspatio = area.IsPatio,
                     AdoxioDateadded = DateTimeOffset.Now,
                     AdoxioDateupdated = DateTimeOffset.Now,
-                    AdoxioTemporaryextensionarea= area.IsTemporaryExtensionArea,
+                    AdoxioTemporaryextensionarea = area.IsTemporaryExtensionArea,
                 };
                 _dynamicsClient.Serviceareas.Create(serviceArea);
             }
         }
 
+        /// <summary>
+        /// Updates or creates an application extension record.
+        /// <list type="bullet">
+        /// <item>
+        /// If the provided application extension has a null `AdoxioApplicationextensionid` then it will be created with
+        /// the provided values and linked to the application.
+        /// </item>
+        /// <item>
+        /// If `AdoxioApplicationextensionid` is not null, it will be updated with the provided values and linked to the
+        /// application.
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="applicationExtension"></param>
+        /// <param name="applicationId"></param>
+        /// <returns></returns>
+        private async Task UpsertApplicationExtensionAsync(
+            MicrosoftDynamicsCRMadoxioApplicationextension applicationExtension,
+            string applicationId
+        )
+        {
+            if (applicationExtension.AdoxioApplicationextensionid == null)
+            {
+                // Create new extension record and link to parent application record
+                var createdExtensionRecord = await _dynamicsClient.Applicationextensions.CreateAsync(
+                    applicationExtension
+                );
+                await LinkApplicationExtensionToApplication(
+                    applicationId,
+                    createdExtensionRecord.AdoxioApplicationextensionid
+                );
+                return;
+            }
+
+            // Update existing extension record link to parent application record
+            await _dynamicsClient.Applicationextensions.UpdateAsync(
+                applicationExtension.AdoxioApplicationextensionid,
+                applicationExtension
+            );
+            await LinkApplicationExtensionToApplication(
+                applicationId,
+                applicationExtension.AdoxioApplicationextensionid
+            );
+        }
+
+        /// <summary>
+        /// Updates or creates an application extension record.
+        /// - If the application extension does not exist, it will be created and linked to the application.
+        /// - If it exists, it will be updated with the provided values.
+        /// </summary>
+        /// <param name="applicationExtension"></param>
+        /// <param name="applicationId"></param>
+        /// <returns></returns>
+        private async Task UpsertApplicationExtensionAsync(
+            ApplicationExtension applicationExtension,
+            string applicationId
+        )
+        {
+            MicrosoftDynamicsCRMadoxioApplicationextension adoxioApplicationextension =
+                new MicrosoftDynamicsCRMadoxioApplicationextension();
+
+            adoxioApplicationextension.CopyValues(applicationExtension);
+
+            await UpsertApplicationExtensionAsync(adoxioApplicationextension, applicationId);
+        }
+
+        /// <summary>
+        /// Links an application extension record to an application record.
+        /// </summary>
+        /// <param name="applicationId"></param>
+        /// <param name="extensionId"></param>
+        /// <returns></returns>
+        private async Task LinkApplicationExtensionToApplication(string applicationId, string extensionId)
+        {
+            var odataId = new Odataid
+            {
+                OdataidProperty = _dynamicsClient.GetEntityURI("adoxio_applicationextensions", extensionId)
+            };
+
+            await _dynamicsClient.Applications.AddReferenceWithHttpMessagesAsync(
+                applicationId,
+                "adoxio_adoxio_application_adoxio_applicationextension_Application",
+                odataid: odataId
+            );
+        }
     }
 }

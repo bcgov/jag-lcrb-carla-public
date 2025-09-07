@@ -33,9 +33,8 @@ import {
 import {
   faBan
 } from "@fortawesome/free-solid-svg-icons";
-import { differenceInDays, isAfter, startOfDay, startOfToday } from "date-fns";
+import { addYears, differenceInDays, isAfter, startOfDay, startOfToday } from "date-fns";
 import { OutstandingPriorBalanceInvoice } from "@models/outstanding-prior-balance-invoce.model";
-import addYears from "date-fns/addYears/index";
 import { LicenceTypeNames } from "../../../models/license-type.model";
 
 export const UPLOAD_FILES_MODE = "UploadFilesMode";
@@ -339,7 +338,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
   }
 
   isExpiredOverOneYear(licence: ApplicationLicenseSummary) {
-    // LCSD-6479 if NOW is after one year of licence.expiryDate 
+    // LCSD-6479 if NOW is after one year of licence.expiryDate
     let licenceExpredDate = startOfDay(new Date(licence.expiryDate));
     const oneYearOfStartDay = addYears(licenceExpredDate, 1);
     const expired = isAfter(NOW, oneYearOfStartDay);
@@ -408,7 +407,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
       return;
     }
 
-    // Hefen.Zhou Note: LCSD-6229 Licensees should be able to submit more than one temporary change job at a time 
+    // Hefen.Zhou Note: LCSD-6229 Licensees should be able to submit more than one temporary change job at a time
     let tempApplications = [
       "Temporary Change to Hours of Sale (FP1)",
       "Temporary Change to Hours of Sale (FP2)",

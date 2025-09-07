@@ -11,7 +11,7 @@
   </i>
 
   <div style="align-items: center; display: flex;">
-    <section [ngClass]="{'fullWidth': isFullWidth}">
+    <section class="app-field-content-section" [ngClass]="{'fullWidth': isFullWidth}">
       <ng-content></ng-content>
     </section>
     <div *ngIf="!valid && showChevrons" style="flex: 0 0 25px;">
@@ -21,7 +21,7 @@
   </div>
 
   <div *ngIf="!valid" class="error-states error-container">
-    <div *ngIf="!valid">
+    <div>
       {{errorMessage}}
     </div>
   </div>

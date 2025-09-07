@@ -3,71 +3,83 @@
   <div class="row">
     <div class="col-lg-7 col-sm-12">
       <section class="small-screen-only">
-        <h3 class="blue-header" style="margin-bottom: 0; margin-top: 0;">ACCOUNT PROFILE</h3>
+        <h3 class="blue-header" style="margin-bottom: 0; margin-top: 0">ACCOUNT PROFILE</h3>
 
-        <div class="submitted-content" style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
-          <strong>{{account?.name}}</strong> <br>
+        <div class="submitted-content" style="background-color: #f1f4fa; border-bottom: 4px solid #e4e4e4">
+          <strong>{{ account?.name }}</strong> <br />
           <p></p>
-          <strong>Business Phone:</strong>&nbsp; <span>{{account?.contactPhone}}</span> <br>
+          <strong>Business Phone:</strong>&nbsp; <span>{{ account?.contactPhone }}</span> <br />
           <p></p>
-          <strong>Business Email: </strong>&nbsp; <span>{{account?.contactEmail}}</span> <br>
+          <strong>Business Email: </strong>&nbsp; <span>{{ account?.contactEmail }}</span> <br />
           <p></p>
-          <p>
-            Click below to view your complete account profile, and to update your address or contact
-            details.
-          </p>
+          <p>Click below to view your complete account profile, and to update your address or contact details.</p>
           <div>
-            <a routerLink="/account-profile" style="float: right;" id="editAccountProfile">
-              <fa-icon [icon]="faPencilAlt" style="margin-right: 5px;"></fa-icon>Edit Account Profile
+            <a routerLink="/account-profile" style="float: right" id="editAccountProfile">
+              <fa-icon [icon]="faPencilAlt" style="margin-right: 5px"></fa-icon>Edit Account Profile
             </a>
-            <div style="clear: both;"></div>
+            <div style="clear: both"></div>
           </div>
         </div>
       </section>
       <p></p>
       <p>
-        This dashboard allows applicants to submit applications for liquor and cannabis licences or authorizations in British Columbia.
-        Authorizations are specific to section 119 agreement holders only. Section 119 agreement holders may submit applications for cannabis retail store licences and authorizations, as well as producer retail store authorizations.
+        This dashboard allows applicants to submit applications for liquor and cannabis licences or authorizations in
+        British Columbia. Authorizations are specific to section 119 agreement holders only. Section 119 agreement
+        holders may submit applications for cannabis retail store licences and authorizations, as well as producer
+        retail store authorizations.
       </p>
       <p>
-        The Liquor and Cannabis Regulation Branch (LCRB) are only able to process complete applications. Applications which are submitted without all required information or documents cannot be processed. Applicants will be contacted and provided the opportunity to submit missing information. Once applicants provide all required documents to the LCRB, the application will be processed.
+        The Liquor and Cannabis Regulation Branch (LCRB) are only able to process complete applications. Applications
+        which are submitted without all required information or documents cannot be processed. Applicants will be
+        contacted and provided the opportunity to submit missing information. Once applicants provide all required
+        documents to the LCRB, the application will be processed.
       </p>
-
-      <!--p>Inquires related to your application can be directed to <a
-                                                                href="mailto:lcrbcannabis@gov.bc.ca">lcrbcannabis@gov.bc.ca</a>.</p-->
       <p></p>
 
       <app-applications-and-licences [account]="account"></app-applications-and-licences>
-
     </div>
 
     <div class="col-lg-4 col-sm-12" style="position: relative">
-      <app-liquor-approvals-callout appRemoveIfFeatureOff="LGApprovals" [account]="account"></app-liquor-approvals-callout>
-      <section class="large-screen-only" *ngIf="outstandingBalancePriorInvoiceData.length>0">
-        <h3 class="blue-header" style="margin-bottom: 0; margin-top: 0; background: #f44336;"><fa-icon [icon]="faExclamationTriangle" style="margin-right: 5px;"></fa-icon>Payment Due</h3>
+      <app-liquor-approvals-callout
+        appRemoveIfFeatureOff="LGApprovals"
+        [account]="account"></app-liquor-approvals-callout>
 
-        <div class="submitted-content" style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
-          <p>You have one or more outstanding balance(s) due. For more information, please refer to a communication from July 13, 2022 from the LCRB that explains the balance.</p>
+      <section class="large-screen-only" *ngIf="outstandingBalancePriorInvoiceData.length > 0">
+        <h3 class="blue-header" style="margin-bottom: 0; margin-top: 0; background: #f44336">
+          <fa-icon [icon]="faExclamationTriangle" style="margin-right: 5px"></fa-icon>Payment Due
+        </h3>
+
+        <div class="submitted-content" style="background-color: #f1f4fa; border-bottom: 4px solid #e4e4e4">
+          <p>
+            You have one or more outstanding balance(s) due. For more information, please refer to a communication from
+            July 13, 2022 from the LCRB that explains the balance.
+          </p>
           <table class="outstanding-table">
             <thead>
-              <tr style="height:50px;">
+              <tr style="height: 50px">
                 <th>LICENCE</th>
                 <th>DESCRIPTION</th>
-                <th style="padding-left:5px;padding-right:5px;">TOTAL AMOUNT</th>
+                <th style="padding-left: 5px; padding-right: 5px">TOTAL AMOUNT</th>
                 <th>DUE</th>
                 <th></th>
               </tr>
             </thead>
-            <tr *ngFor="let item of outstandingBalancePriorInvoiceData" [ngClass]="{'make-red': item.overdue }">
-              <td>{{item.licenceNumber}}</td>
-              <td>{{item.invoice.description}} </td>
-              <td style="text-align:right;">{{item.invoice.totalamount|currency}}CAD</td>
-              <td><div title="Past Due Invoice!" *ngIf="item.overdue"><fa-icon [icon]="faExclamationTriangle" style="margin-right: 5px;"></fa-icon></div> {{item.invoice.duedate|date:'dd/MM/yy'}}</td>
+            <tr *ngFor="let item of outstandingBalancePriorInvoiceData" [ngClass]="{ 'make-red': item.overdue }">
+              <td>{{ item.licenceNumber }}</td>
+              <td>{{ item.invoice.description }}</td>
+              <td style="text-align: right">{{ item.invoice.totalamount | currency }}CAD</td>
               <td>
-                <a href="javascript:void(0);" (click)="payOutstandingPriorBalanceInvoice(item.applicationId)" class="missing">
-                  <span>                   
-                    Make Payment
-                  </span>
+                <div title="Past Due Invoice!" *ngIf="item.overdue">
+                  <fa-icon [icon]="faExclamationTriangle" style="margin-right: 5px"></fa-icon>
+                </div>
+                {{ item.invoice.duedate | date : 'dd/MM/yy' }}
+              </td>
+              <td>
+                <a
+                  href="javascript:void(0);"
+                  (click)="payOutstandingPriorBalanceInvoice(item.applicationId)"
+                  class="missing">
+                  <span> Make Payment </span>
                 </a>
               </td>
             </tr>
@@ -76,63 +88,57 @@
       </section>
 
       <section class="large-screen-only">
-        <h3 class="blue-header" style="margin-bottom: 0; margin-top: 0;"><fa-icon [icon]="faExclamationTriangle" style="margin-right: 5px;"></fa-icon>RENEW A LIQUOR OR CANNABIS LICENCE OR AUTHORIZATION </h3>
+        <h3 class="blue-header" style="margin-bottom: 0; margin-top: 0">
+          <fa-icon [icon]="faExclamationTriangle" style="margin-right: 5px"></fa-icon>RENEW A LIQUOR OR CANNABIS LICENCE
+          OR AUTHORIZATION
+        </h3>
 
-        <div class="submitted-content" style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
+        <div class="submitted-content" style="background-color: #f1f4fa; border-bottom: 4px solid #e4e4e4">
+          <p>
+            To renew your liquor or cannabis licence or authorization, visit your
+            <a routerLink="/licences">Licences & Authorizations</a> page in the licensing portal.
+            <strong>Note:</strong> You should not submit a new application to complete a renewal.
+          </p>
 
-          <p>To renew your liquor or cannabis licence or authorization, visit your <a routerLink="/licences">Licences & Authorizations</a> page in the licensing portal. <strong>Note:</strong> You should not submit a new application to complete a renewal.</p>
+          <p>
+            Visit your Licences & Authorizations page on the licensing portal to submit changes to your licence or
+            authorization, or download a new copy of your licence or authorization for your records.
+          </p>
 
-          <p>Visit your Licences & Authorizations page on the licensing portal to submit changes to your licence or authorization, or download a new copy of your licence or authorization for your records.</p>
-
-          <p>Visit your <a routerLink="/account-profile">Account Profile</a> page to update your contact preferences.</p>
-
+          <p>
+            Visit your <a routerLink="/account-profile">Account Profile</a> page to update your contact preferences.
+          </p>
         </div>
       </section>
       <p></p>
-      <!--<section class="large-screen-only">
-        <h3 class="blue-header" style="margin-bottom: 0; margin-top: 0;"><fa-icon [icon]="faExclamationTriangle" style="margin-right: 5px;"></fa-icon>Apply to transfer cannabis products between licences</h3>
 
-        <div class="submitted-content" style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
-
-          <p>Cannabis retail store licensees must complete the <a href="https://www2.gov.bc.ca/assets/download/D47F4DB56C12447E8C9C96FBBD9D42A4">Application for Cannabis Products Transfer Form</a> and email it to <a href="mailto:LCRB.Product.Transfers@gov.bc.ca">LCRB.Product.Transfers@gov.bc.ca</a> if they wish to transfer cannabis products between their retail stores</p>
-
-          <p>Written Approval from the LCRB must be recieved by a licencee before initiaing product transfer.</p>
-
-        </div>
-      </section>
-      <p></p>-->
-      <!-- <section appRemoveIfFeatureOff="LicenseeChanges">
-    <h3 class="blue-header" style="margin-top: 0; margin-bottom: 0">ASSOCIATES</h3>
-
-    <div class="submitted-content" style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
-      <app-licensee-tree *ngIf="tree" [treeRoot]="tree" [enableEditing]="false"></app-licensee-tree>
-      <br>
-      <br>
-      <a href="javascript: void(0);" (click)="startLicenseeChangeApplication()" style="float: right;">
-        <fa-icon [icon]="faPencilAlt" style="margin-right: 5px; "></fa-icon> Start Licensee Change Application</a>
-      <div style="clear: both;"></div>
-    </div>
-  </section>
-  <p></p> -->
-      <app-associate-content *ngIf="account?.businessType !== 'LocalGovernment'" appRemoveIfFeatureOn="PermanentChangesToLicensee" [hasLicence]="hasLicence" [account]="account" [isIndigenousNation]="indigenousNationModeActive">
+      <app-associate-content
+        *ngIf="account?.businessType !== 'LocalGovernment'"
+        appRemoveIfFeatureOn="PermanentChangesToLicensee"
+        [hasLicence]="hasLicence"
+        [account]="account"
+        [isIndigenousNation]="indigenousNationModeActive">
       </app-associate-content>
       <p></p>
 
-      <app-legal-entity-type-update-calloutbox *ngIf="hasLicence" appRemoveIfFeatureOff="PermanentChangesToLicensee" [account]="account"></app-legal-entity-type-update-calloutbox>
+      <app-legal-entity-type-update-calloutbox
+        *ngIf="hasLicence"
+        appRemoveIfFeatureOff="PermanentChangesToLicensee"
+        [account]="account"></app-legal-entity-type-update-calloutbox>
       <p></p>
-
     </div>
   </div>
-  <section style="margin-top: 20px;">
+
+  <section style="margin-top: 20px">
     <p>
       All retail store licence holders must follow the
-      <a href='https://www2.gov.bc.ca/gov/content?id=FFBF300FC24C4B4C92F13DBB73040523' target="_blank">
-        terms and conditions of their licence
-      </a>
+      <a href="https://www2.gov.bc.ca/gov/content?id=FFBF300FC24C4B4C92F13DBB73040523" target="_blank">
+        terms and conditions of their licence</a
+      >
       as set out in the
       <a href="https://www2.gov.bc.ca/gov/content?id=FFBF300FC24C4B4C92F13DBB73040523" target="_blank">
-        relevant handbook
-      </a>.
+        relevant handbook </a
+      >.
     </p>
   </section>
 </div>
