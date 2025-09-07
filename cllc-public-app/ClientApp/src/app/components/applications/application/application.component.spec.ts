@@ -49,7 +49,7 @@ describe("ApplicationComponent",
     beforeEach(waitForAsync(() => {
       paymentDataServiceStub = {};
       applicationDataServiceStub = {
-        getSubmittedApplicationCount: () => of(0),
+        getSubmittedCannabisRetailStoreApplicationCount: () => of(0),
         cancelApplication: () => of(null),
         updateApplication: () => of(null),
         getApplicationById: () => of({
@@ -222,7 +222,7 @@ describe("ApplicationComponent",
         const elem = fixture.debugElement.query(By.css(".ngtest-declarations"));
         expect(elem).toBeFalsy();
       });
-      
+
     it("should show property details if enabled",
       () => {
         applicationService.getApplicationById = () => of({

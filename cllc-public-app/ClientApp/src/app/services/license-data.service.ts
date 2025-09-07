@@ -7,6 +7,7 @@ import { catchError } from "rxjs/operators";
 import { DataService } from "./data.service";
 import { License } from "@models/license.model";
 import { OutstandingPriorBalanceInvoice } from "../models/outstanding-prior-balance-invoce.model";
+import { RelatedLicence } from "@models/related-licence";
 
 @Injectable({
   providedIn: "root"
@@ -19,8 +20,18 @@ export class LicenseDataService extends DataService {
     super();
   }
 
-  getAutocomplete(search: string): Observable<any[]> {
-    return this.http.get<any[]>(this.apiPath + `autocomplete?name=${search}`, { headers: this.headers })
+  /**
+   * Get autocomplete list of licenses based on name and/or licence number.
+   *
+   * @param {{ name?: string; licenceNumber?: string }} queryParams
+   * @return {*}  {Observable<RelatedLicence[]>}
+   * @memberof LicenseDataService
+   */
+  getAutocomplete(queryParams: { name?: string; licenceNumber?: string }): Observable<RelatedLicence[]> {
+    return this.http
+      .get<
+        RelatedLicence[]
+      >(this.apiPath + `autocomplete?name=${queryParams.name}&licenceNumber=${queryParams.licenceNumber}`, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 

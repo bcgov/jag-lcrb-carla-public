@@ -1,0 +1,80 @@
+<div [ngBusy]="!hasLoadedData">
+  <ng-container *ngIf="hasLoadedData">
+    <section>
+      <h3 class="blue-header">CONNECTIONS TO OTHER LIQUOR LICENCES</h3>
+
+      <div class="padded-section content-bottom" [formGroup]="form" *ngIf="hasLoadedData">
+        <div *ngIf="showTiedHouseQuestionsSection">
+          <section class="mb-5">
+            <span class="font-weight-bold">1. Ownership or Control</span>
+            <app-field
+              id="ownership-or-control-label"
+              label="Do you or any of your directors, officers, or shareholders have any amount of ownership, interest, or control in another B.C. liquor licence?"
+              [valid]="_isValidOrNotTouched('hasLiquorTiedHouseOwnershipOrControl')"
+              [showChevrons]="false"
+              [required]="true"
+              [isFullWidth]="true"
+              errorMessage="Ownership or Control is required">
+              <mat-radio-group
+                formControlName="hasLiquorTiedHouseOwnershipOrControl"
+                aria-labelledby="ownership-or-control-label"
+                class="d-flex flex-column align-items-start">
+                <mat-radio-button [value]="1">Yes</mat-radio-button>
+                <mat-radio-button [value]="0">No</mat-radio-button>
+              </mat-radio-group>
+            </app-field>
+          </section>
+
+          <section class="mb-5">
+            <span class="font-weight-bold">2. Third-Party Associations</span>
+            <app-field
+              id="third-party-associations-label"
+              label="Do you or any of your directors, officers, or shareholders have any association with a third party operator of another liquor licence in B.C.?"
+              [valid]="_isValidOrNotTouched('hasLiquorTiedHouseThirdPartyAssociations')"
+              [showChevrons]="false"
+              [required]="true"
+              [isFullWidth]="true"
+              errorMessage="Third-Party Associations is required">
+              <mat-radio-group
+                formControlName="hasLiquorTiedHouseThirdPartyAssociations"
+                aria-labelledby="third-party-associations-label"
+                class="d-flex flex-column align-items-start">
+                <mat-radio-button [value]="1">Yes</mat-radio-button>
+                <mat-radio-button [value]="0">No</mat-radio-button>
+              </mat-radio-group>
+            </app-field>
+          </section>
+
+          <section class="mb-5">
+            <span class="font-weight-bold">3. Immediate Family Member Involvement</span>
+            <app-field
+              id="has-immediate-family-member-involvement-label"
+              label="Do you or any of your director's, officer's, or shareholder's immediate family member (spouse, parent, sibling, or child) have any amount of ownership, interest, or control in another B.C. liquor licence?"
+              [valid]="_isValidOrNotTouched('hasLiquorTiedHouseFamilyMemberInvolvement')"
+              [showChevrons]="false"
+              [required]="true"
+              [isFullWidth]="true"
+              errorMessage="Immediate Family Member Involvement is required">
+              <mat-radio-group
+                formControlName="hasLiquorTiedHouseFamilyMemberInvolvement"
+                aria-labelledby="has-immediate-family-member-involvement-label"
+                class="d-flex flex-column align-items-start">
+                <mat-radio-button [value]="1">Yes</mat-radio-button>
+                <mat-radio-button [value]="0">No</mat-radio-button>
+              </mat-radio-group>
+            </app-field>
+          </section>
+        </div>
+
+        <section *ngIf="showTiedHouseDeclarationSection">
+          <app-tied-house-declaration
+            [accountId]="accountId"
+            [applicationId]="applicationId"
+            [initialTiedHouseConnections]="initialTiedHouseConnections"
+            [isReadOnly]="isTiedHouseReadOnly"
+            (onChangesEvent)="handleOnTiedHouseChangesEvent($event)"></app-tied-house-declaration>
+        </section>
+      </div>
+    </section>
+  </ng-container>
+</div>

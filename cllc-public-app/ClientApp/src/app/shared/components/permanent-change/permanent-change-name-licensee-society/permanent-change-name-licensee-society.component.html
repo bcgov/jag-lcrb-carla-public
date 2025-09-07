@@ -1,0 +1,34 @@
+<h3 class="blue-header">Society Name Change</h3>
+<div class="content-bottom">
+  <p>
+    To be completed when the legal name of a society is changed, but the society structure, membership and certification
+    number on the certificate of incorporation does not change.
+  </p>
+  <div class="">
+    <span>Current registered society name (in full):</span>
+    <mat-form-field class="ml-1 mr-2">
+      <mat-label>Society Name</mat-label>
+      <input matInput type="text" />
+    </mat-form-field>
+
+    <span>Name Changed To (in full):</span>
+    <mat-form-field class="ml-1 mr-2">
+      <mat-label>New Society Name</mat-label>
+      <input matInput type="text" />
+    </mat-form-field>
+  </div>
+  <h4>Copy of the Certificate of Change of Name under the Societies Act</h4>
+
+  <app-file-uploader
+    *ngIf="application?.id"
+    documentType="SocietyNameChange"
+    fileTypes="FILE MUST BE IN PDF FORMAT."
+    [multipleFiles]="true"
+    entityName="application"
+    [extensions]="['pdf']"
+    (numberOfUploadedFiles)="onUploadedSocietyNameChange($event)"
+    [entityId]="application.id"
+    [uploadHeader]="'TO UPLOAD SOCIETY NAME CHANGE CERTIFICATE, DRAG FILES HERE OR'"
+    [disableUploads]="disabled"
+    [enableFileDeletion]="!disabled"></app-file-uploader>
+</div>

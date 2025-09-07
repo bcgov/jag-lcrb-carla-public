@@ -12,7 +12,7 @@ import { PreviousAddressDataService } from "@services/previous-address-data.serv
 import { Alias } from "@models/alias.model";
 import { PreviousAddress } from "@models/previous-address.model";
 import { ActivatedRoute, Router } from "@angular/router";
-import { COUNTRIES } from "./country-list";
+import { COUNTRIES } from "@app/constants/countries";
 import { FormBase } from "@shared/form-base";
 import { Worker } from "@models/worker.model";
 import { faCopy, faSave } from "@fortawesome/free-regular-svg-icons";

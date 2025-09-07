@@ -41,7 +41,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Utcconversiontimezonecode = utcconversiontimezonecode;
             AdoxioOtherdetails = adoxioOtherdetails;
             AdoxioName = adoxioName;
-            Versionnumber = versionnumber;
             this._owneridValue = _owneridValue;
             Statuscode = statuscode;
             AdoxioApplicationextensionid = adoxioApplicationextensionid;
@@ -126,10 +125,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         [JsonProperty(PropertyName = "adoxio_name")]
         public string AdoxioName { get; set; }
 
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -261,5 +256,45 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         [JsonProperty(PropertyName = "adoxio_adoxio_applicationextension_adoxio_application_ApplicationExtension")]
         public IList<MicrosoftDynamicsCRMadoxioApplication> AdoxioAdoxioApplicationextensionAdoxioApplicationApplicationExtension { get; set; }
 
+        [JsonProperty(PropertyName = "adoxio_outcomeofapplication")]
+        public string AdoxioOutcomeofapplication { get; set; }
+
+        [JsonProperty(PropertyName = "adoxio_outcomeofstaffreview")]
+        public string AdoxioOutcomeofstaffreview { get; set; }
+
+        [JsonProperty(PropertyName = "adoxio_outcomeletter")]
+        public string AdoxioOutcomeletter { get; set; }
+
+        [JsonProperty(PropertyName = "adoxio_outcomelettersendindicator")]
+        public bool? AdoxioOutcomelettersendindicator { get; set; }
+
+        [JsonProperty(PropertyName = "adoxio_noticeletter")]
+        public string AdoxioNoticeletter { get; set; }
+
+        [JsonProperty(PropertyName = "adoxio_noticelettersendindicator")]
+        public bool? AdoxioNoticelettersendindicator { get; set; }
+
+        [JsonProperty(PropertyName = "adoxio_startdatelicenseactionreq")]
+        public System.DateTimeOffset? AdoxioStartdatelicenseactionreq { get; set; }
+        
+        [JsonProperty(PropertyName = "adoxio_hasliquortiedhouseownershiporcontrol")]
+        public int? AdoxioHasLiquorTiedHouseOwnershipOrControl { get; set; }
+
+        [JsonProperty(PropertyName = "adoxio_hasliquortiedhousethirdpartyassociations")]
+        public int? AdoxioHasLiquorTiedHouseThirdPartyAssociations { get; set; }
+
+        [JsonProperty(PropertyName = "adoxio_hasliquortiedhousefamilymemberinvolvement")]
+        public int? AdoxioHasLiquorTiedHouseFamilyMemberInvolvement { get; set; }
+
+        [JsonProperty(PropertyName = "adoxio_relatedleorpclapplication")]
+        public MicrosoftDynamicsCRMadoxioApplication AdoxioRelatedLeOrPclApplication { get; set; }
+
+        [JsonProperty(PropertyName = "adoxio_relatedleorpclapplication@odata.bind")]
+        public string AdoxioRelatedLeOrPclApplicationODataBind { get; set; }
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_relatedleorpclapplication_value")]
+        public string _adoxioRelatedLeOrPclApplicationValue { get; set; }
+        
     }
 }

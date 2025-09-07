@@ -1,0 +1,45 @@
+<h3 class="blue-header">Partnership Business Name Change</h3>
+<div class="content-bottom">
+  <p>
+    To be completed when the legal name of a partnership is changed but no new partners are added and no existing
+    partners.
+  </p>
+  <div class="">
+    <span>
+      <strong>Current registered Partnership name (in full):</strong>
+    </span>
+
+    <mat-form-field class="ml-1 mr-2">
+      <mat-label>Partnership Name</mat-label>
+      <input matInput type="text" />
+    </mat-form-field>
+
+    <span>
+      <strong>Name Changed To (in full):</strong>
+    </span>
+
+    <mat-form-field class="ml-1 mr-2">
+      <mat-label>New Partnership Name</mat-label>
+
+      <input matInput type="text" />
+    </mat-form-field>
+  </div>
+  <p>
+    If the partnership is registered, upload a copy of the Partnership Registration document from the BC Registrar of
+    Companies showing the change of name. If the partnership is not registered, provide a legal document showing change
+    of name.
+  </p>
+
+  <app-file-uploader
+    *ngIf="application?.id"
+    documentType="PartnershipRegistration"
+    fileTypes="FILE MUST BE IN PDF FORMAT."
+    [multipleFiles]="true"
+    entityName="application"
+    [extensions]="['pdf']"
+    (numberOfUploadedFiles)="onUploadedPartnershipRegistration($event)"
+    [entityId]="application.id"
+    [uploadHeader]="'TO UPLOAD PARTNERSHIP REGISTRATION, DRAG FILES HERE OR'"
+    [disableUploads]="disabled"
+    [enableFileDeletion]="!disabled"></app-file-uploader>
+</div>

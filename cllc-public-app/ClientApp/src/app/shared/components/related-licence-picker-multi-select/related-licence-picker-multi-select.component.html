@@ -1,0 +1,22 @@
+<div [formGroup]="form">
+  <input type="text" class="form-control w-100"
+    formControlName="autocompleteInput" [matAutocomplete]="auto" #autocomplete (focus)="autoCompFldFocus()"
+    [disabled]="form.get('autocompleteInput')?.disabled">
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onOptionSelect($event)"
+    [displayWith]="autocompleteDisplay">
+    <mat-option *ngFor="let item of autocompleteLicences" [value]="item">
+      {{item.name}}
+    </mat-option>
+  </mat-autocomplete>
+  <br>
+  <mat-progress-bar *ngIf="licenceRequestInProgress" mode="indeterminate"></mat-progress-bar>
+  <mat-form-field class="multi-chip-autocomplete w-100" >
+    <mat-chip-list #chipList aria-label="Licence selection">
+      <mat-chip *ngFor="let licence of associatedLicencesFormArray?.controls; let i = index" [selectable]="true">
+        {{ licence.value.name }}
+        <mat-icon *ngIf="!form.get('autocompleteInput')?.disabled" (click)="removeLicence(i)"
+          matChipRemove>cancel</mat-icon>
+      </mat-chip>
+    </mat-chip-list>
+  </mat-form-field>
+</div>

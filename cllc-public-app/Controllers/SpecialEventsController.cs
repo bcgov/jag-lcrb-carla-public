@@ -15,13 +15,14 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Rest;
-using System.Threading.Tasks;
 using System.Web;
 using Google.Protobuf.WellKnownTypes;
 using Gov.Lclb.Cllb.Public.Extensions;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 using Gov.Lclb.Cllb.Public.Utils;
-
+using System.Text;
+using System.Threading.Tasks;
+using System.Net;
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/special-events")]
@@ -276,7 +277,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             appInfo += "</table>";
 
             var eligibilityInfo = "<h2 class='info'>Eligibility</h2>";
-            
+
             DateTime eventStartDate = DateUtility.FormatDatePacific(specialEvent.AdoxioEventstartdate).Value;
             string eventStartDateParam = eventStartDate.ToString("MMMM dd, yyyy");
 
@@ -425,8 +426,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     var startDateParam = "";
                     if (sched.AdoxioEventstart.HasValue)
                     {
-                        
-                        DateTime startDate = DateUtility.FormatDatePacific(sched.AdoxioEventstart).Value; 
+
+                        DateTime startDate = DateUtility.FormatDatePacific(sched.AdoxioEventstart).Value;
 
                         startDateParam = startDate.ToString("MMMM dd, yyyy");
                     }
@@ -592,7 +593,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // get the date issued
             try
             {
-                
+
                 DateTime issuedDate = DateUtility.FormatDatePacific(specialEvent.AdoxioDateissued).Value;
                 issuedDateParam = issuedDate.ToString("MMMM dd, yyyy");
             }
@@ -747,7 +748,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     if (sched.AdoxioLicencedareamaxnumberofguests != null)
                     {
                         serviceAttendees += (int)sched.AdoxioLicencedareamaxnumberofguests;
-                    }                    
+                    }
                     serviceAreaDetails += $"<tr><th class='heading'>Service Area #{serviceAreaCount++}:</th><td class='field'>{HttpUtility.HtmlEncode(sched.AdoxioEventname)} (capacity: {sched.AdoxioLicencedareamaxnumberofguests})</td></tr>";
                 }
 
@@ -873,7 +874,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 _logger.LogError(e, "Error uploading copy of PDF");
             }
-            
+
 
             return File(data, "application/pdf", $"Special Event Permit - {specialEvent.AdoxioSpecialeventpermitnumber}.pdf");
 
@@ -931,7 +932,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             }
                             parentLocation.AdoxioSpecialeventlocationSchedule.Add(schedule);
                         }
-                        
+
                     }
 
                     foreach (var area in areas)
@@ -944,7 +945,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                 parentLocation.AdoxioSpecialeventlocationLicencedareas = new List<MicrosoftDynamicsCRMadoxioSpecialeventlicencedarea>();
                             }
                             parentLocation.AdoxioSpecialeventlocationLicencedareas.Add(area);
-                        }                        
+                        }
                     }
                 }
                 catch (HttpOperationException e)
@@ -1167,13 +1168,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return Unauthorized();
             }
-            
+
             // just enable the invoice trigger.
             var patchEvent = new MicrosoftDynamicsCRMadoxioSpecialevent()
             {
                 AdoxioInvoicetrigger = true
             };
-            
+
             try
             {
                 _dynamicsClient.Specialevents.Update(eventId, patchEvent);
@@ -1183,7 +1184,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.LogError(httpOperationException, "Error creating/updating special event");
                 throw httpOperationException;
             }
-            
+
             return Ok();
         }
 
@@ -1213,7 +1214,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 Statuscode = (int?)EventStatus.Submitted
             };
-            
+
             try
             {
                 _dynamicsClient.Specialevents.Update(eventId, patchEvent);
@@ -1223,7 +1224,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.LogError(httpOperationException, "Error creating/updating special event");
                 throw httpOperationException;
             }
-            
+
             return Ok();
         }
 
@@ -1518,7 +1519,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             specialEvent.Beer = specialEvent.Beer ?? 0;
             specialEvent.Wine = specialEvent.Wine ?? 0;
             specialEvent.Spirits = specialEvent.Spirits ?? 0;
-            
+
             // calculate serving amounts from percentages
             int totalServings = specialEvent.TotalServings == null ? 0 : (int)specialEvent.TotalServings;
             var typeData = new List<(string, int, bool, decimal?)>{
@@ -1571,9 +1572,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         private void CreateOrUpdateForecast(
-            ViewModels.SpecialEvent specialEvent, 
-            MicrosoftDynamicsCRMadoxioSepdrinksalesforecast existingDrinkForecast, 
-            MicrosoftDynamicsCRMadoxioSepdrinktype beerType, 
+            ViewModels.SpecialEvent specialEvent,
+            MicrosoftDynamicsCRMadoxioSepdrinksalesforecast existingDrinkForecast,
+            MicrosoftDynamicsCRMadoxioSepdrinktype beerType,
             int estimatedServings,
             decimal? averagePrice,bool ischarging)
         {
@@ -1613,9 +1614,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     _logger.LogError(httpOperationException, "Error creating/updating sep drinks sales forecast");
                     throw httpOperationException;
-                }  
+                }
             }
-            
+
         }
 
         [HttpGet("drink-types")]
@@ -1656,7 +1657,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             return result;
         }
-        
+
         private PagingResult<ViewModels.SpecialEventSummary> GetPagedSepSummaries(string filter, int pageIndex, int pageSize, string sort, string sortdir)
         {
             PagingResult<ViewModels.SpecialEventSummary> result = new PagingResult<ViewModels.SpecialEventSummary>()
@@ -1670,7 +1671,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 string tmp = transformColumnNametoSchemaName(sort);
                 tmp = tmp + " " + sortdir;
                 orderby.Add(tmp);
-                
+
             }
             string[] expand = new[] { "adoxio_PoliceRepresentativeId", "adoxio_PoliceAccountId", "adoxio_specialevent_specialeventtsacs" };
             try
@@ -1694,8 +1695,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     sepSummaryQuery = _dynamicsClient.Specialevents.GetWithHttpMessagesAsync(filter: filter, expand: expand, customHeaders: customHeaders, count: true).GetAwaiter().GetResult();
                 }
-               
-                
+
+
                 while(pageIndex > 0)
                 {
                     string odataNextLink = sepSummaryQuery.Body.OdataNextLink;
@@ -1782,7 +1783,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // Application Status == Pending Review && Police Decision == Under Review
                 InProgress = GetSepSummaries($"_adoxio_policejurisdictionid_value eq {userAccount._adoxioPolicejurisdictionidValue} and adoxio_policeapproval eq {(int?)ApproverStatus.PendingReview}"),
 
-                // Police Decision == Reviewed 
+                // Police Decision == Reviewed
                 PoliceApproved = GetSepSummaries($"_adoxio_policejurisdictionid_value eq {userAccount._adoxioPolicejurisdictionidValue} and statuscode ne {(int?)EventStatus.Draft} and (adoxio_policeapproval eq { (int?)ApproverStatus.AutoReviewed } or adoxio_policeapproval eq { (int?)ApproverStatus.Approved } or adoxio_policeapproval eq {(int?)ApproverStatus.Reviewed})"),
 
                 // Police Decision == Denied || Cancelled
@@ -1840,7 +1841,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return Unauthorized();
             }
 
-            // Police Decision == Denied || Cancelled 
+            // Police Decision == Denied || Cancelled
             var result = GetPagedSepSummaries($"_adoxio_policejurisdictionid_value eq {userAccount._adoxioPolicejurisdictionidValue} and (adoxio_policeapproval eq {(int?)ApproverStatus.Denied} or adoxio_policeapproval eq {(int?)ApproverStatus.Cancelled})", pageIndex, pageSize, sort, sortdir);
 
             return new JsonResult(result);
@@ -1867,7 +1868,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // Police Decision == Reviewed
                 PoliceApproved = GetSepSummaries($"_adoxio_policerepresentativeid_value eq {userSettings.ContactId} and statuscode ne {(int?)EventStatus.Draft} and (adoxio_policeapproval eq { (int?)ApproverStatus.AutoReviewed } or adoxio_policeapproval eq { (int?)ApproverStatus.Approved } or adoxio_policeapproval eq {(int?)ApproverStatus.Reviewed})"),
 
-                // Police Decision == Denied || Cancelled                
+                // Police Decision == Denied || Cancelled
                 PoliceDenied = GetSepSummaries($"_adoxio_policerepresentativeid_value eq {userSettings.ContactId} and (adoxio_policeapproval eq {(int?)ApproverStatus.Denied} or adoxio_policeapproval eq {(int?)ApproverStatus.Cancelled})")
             };
 
@@ -1981,7 +1982,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // update the given special event.
             var patchEvent = new MicrosoftDynamicsCRMadoxioSpecialevent()
             {
-                AdoxioPoliceapproval = 845280001, // Denied 
+                AdoxioPoliceapproval = 845280001, // Denied
                 AdoxioDenialreason = reasonText.Reason,
                 AdoxioDatepoliceapproved = DateTime.Now
             };
@@ -2103,53 +2104,66 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="defaults">If set to true, the name parameter is ignored and a list of `preview` cities is returned instead</param>
         /// <param name="name">The name to filter by using startswith</param>
         /// <returns>Dictionary of key value pairs with accountid and name as the pairs</returns>
-        [HttpGet("sep-city/autocomplete")]
-        // [Authorize(Policy = "Business-User")]
-        public IActionResult GetAutocomplete(string name, bool defaults)
+[HttpGet("sep-city/autocomplete")]
+public IActionResult GetAutocomplete(string name, bool defaults = false)
+{
+    try
+    {
+        // ─── 1. Validate ────────────────────────────────────────────────
+        if (!defaults)
         {
-            var results = new List<ViewModels.SepCity>();
-            try
-            {
-                string filter = null;
-                // escape any apostophes.
-                if (name != null)
-                {
-                    name = name.Replace("'", "''");
-                    // select active accounts that match the given name
-                    if (defaults)
-                    {
-                        filter = $"statecode eq 0 and adoxio_ispreview eq true";
-                    }
-                    else
-                    {
-                        filter = $"statecode eq 0 and contains(adoxio_name,'{name}')";
-                    }
-                }
-                var expand = new List<string> { "adoxio_PoliceJurisdictionId", "adoxio_LGINId" };
-                var cities = _dynamicsClient.Sepcities.Get(filter: filter, expand: expand, top: 20).Value;
-                foreach (var city in cities)
-                {
-                    var newCity = new ViewModels.SepCity
-                    {
-                        Id = city.AdoxioSepcityid,
-                        Name = city.AdoxioName,
-                        PoliceJurisdictionName = city?.AdoxioPoliceJurisdictionId?.AdoxioName,
-                        LGINName = city?.AdoxioLGINId?.AdoxioName
-                    };
-                    results.Add(newCity);
-                }
-            }
-            catch (HttpOperationException httpOperationException)
-            {
-                _logger.LogError(httpOperationException, "Error while getting sep city autocomplete data.");
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e, "Error while getting sep city autocomplete data.");
-            }
+            if (string.IsNullOrWhiteSpace(name) || name.Trim().Length < 3)
+                return BadRequest("Please enter at least 3 characters.");
 
-            return new JsonResult(results);
+            name = name.Trim();
         }
+
+        // ─── 2. Build OData filter (no tolower!) ────────────────────────
+        var sb = new StringBuilder("statecode eq 0");
+
+        if (defaults)
+        {
+            sb.Append(" and adoxio_ispreview eq true");
+        }
+        else
+        {
+            var safe = name.Replace("'", "''");         // OData escape
+            sb.Append($" and contains(adoxio_name,'{safe}')");
+        }
+
+        var expand = new[] { "adoxio_PoliceJurisdictionId", "adoxio_LGINId" };
+
+        // ─── 3. Fetch & client‑side sort ───────────────────────────────
+        var cities = _dynamicsClient.Sepcities
+                                    .Get(filter: sb.ToString(), expand: expand, top: 100)
+                                    .Value;
+
+        var ordered = cities
+            .OrderByDescending(c => c.AdoxioName.StartsWith(name, StringComparison.OrdinalIgnoreCase))
+            .ThenBy(c => c.AdoxioName, StringComparer.OrdinalIgnoreCase)
+            .Select(c => new ViewModels.SepCity
+            {
+                Id                    = c.AdoxioSepcityid,
+                Name                  = c.AdoxioName,
+                PoliceJurisdictionName= c?.AdoxioPoliceJurisdictionId?.AdoxioName,
+                LGINName              = c?.AdoxioLGINId?.AdoxioName
+            })
+            .ToList();
+
+        return Ok(ordered);
+    }
+    catch (HttpOperationException ex)
+    {
+        _logger.LogError(ex, "Dynamics CRM returned an error while fetching SEP cities.");
+        return StatusCode((int)ex.Response.StatusCode, ex.Response.Content);
+    }
+    catch (Exception ex)
+    {
+        _logger.LogError(ex, "Unhandled error while fetching SEP cities.");
+        return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
+    }
+}
+
 
         [HttpGet("claim-info/{jobNumber}")]
         public IActionResult getClaimInfo(string jobNumber)

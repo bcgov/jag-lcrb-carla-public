@@ -1,0 +1,362 @@
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AppState } from '@app/app-state/models/app-state';
+import { faIdCard, faSave, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
+import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+import { Account } from '@models/account.model';
+import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
+import { Application } from '@models/application.model';
+import { TiedHouseConnection, TiedHouseViewMode } from '@models/tied-house-connection.model';
+import { Store } from '@ngrx/store';
+import { ApplicationDataService } from '@services/application-data.service';
+import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
+import { GenericMessageDialogComponent } from '@shared/components/dialog/generic-message-dialog/generic-message-dialog.component';
+import { FormBase } from '@shared/form-base';
+import { forkJoin, Observable, of, Subject } from 'rxjs';
+import { catchError, filter, mergeMap, takeUntil, takeWhile } from 'rxjs/operators';
+import { TiedHouseDeclarationComponent } from '../tied-house-decleration/tied-house-declaration.component';
+
+/**
+ * A component that displays a form page for a legal entity review application.
+ *
+ * This is step 1 of the legal entity review process, where the user submits supporting documents and declares any tied
+ * house connections.
+ * For step 2, see `LegalEntityReviewPermanentChangeToALicenseeComponent`.
+ *
+ * @export
+ * @class LegalEntityReviewComponent
+ * @extends {FormBase}
+ * @implements {OnInit}
+ * @implements {OnDestroy}
+ */
+@Component({
+  selector: 'app-legal-entity-review',
+  templateUrl: './legal-entity-review.component.html',
+  styleUrls: ['./legal-entity-review.component.scss']
+})
+export class LegalEntityReviewComponent extends FormBase implements OnInit, OnDestroy {
+  @ViewChild('tiedHouseDeclaration')
+  tiedHouseDeclaration: TiedHouseDeclarationComponent;
+
+  /**
+   * Whether or not to show the Tied House changes declaration section.
+   * Default to `true` unless the user has explicitly said `No`.
+   */
+  hasTiedHouseChangesToDeclare: boolean = true;
+
+  account: Account;
+  application: Application;
+  liquorLicences: ApplicationLicenseSummary[] = [];
+  cannabisLicences: ApplicationLicenseSummary[] = [];
+
+  applicationId: string;
+
+  validationMessages: string[];
+  showValidationMessages: boolean;
+
+  isDataLoaded: boolean;
+  isSubmitting: boolean;
+
+  form: FormGroup;
+  formDisabled = false;
+
+  /**
+   * The count of uploaded legal entity review supporting documents.
+   */
+  uploadedLegalEntityReviewSupportingDocuments: number = 0;
+  /**
+   * The initial tied house data to populate the tied house declarations component with.
+   */
+  initialTiedHouseConnections: TiedHouseConnection[] = [];
+  /**
+   * Indicates whether the user has any tied house connections.
+   */
+  hasTiedHouseConnections: boolean = false;
+  /**
+   * Indicates whether the required page data has been loaded.
+   */
+  hasLoadedData: boolean = false;
+
+  faQuestionCircle = faQuestionCircle;
+  faIdCard = faIdCard;
+  faSave = faSave;
+  faTrashAlt = faTrashAlt;
+
+  destroy$ = new Subject<void>();
+
+  get hasLiquor(): boolean {
+    return this.liquorLicences.length > 0;
+  }
+
+  get hasCannabis(): boolean {
+    return this.cannabisLicences.length > 0;
+  }
+
+  constructor(
+    private applicationDataService: ApplicationDataService,
+    private tiedHouseService: TiedHouseConnectionsDataService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private snackBar: MatSnackBar,
+    private fb: FormBuilder,
+    private store: Store<AppState>,
+    private dialog: MatDialog
+  ) {
+    super();
+
+    this.store
+      .select((state) => state.currentAccountState.currentAccount)
+      .pipe(filter((account) => !!account))
+      .subscribe((account) => {
+        this.account = account;
+      });
+
+    this.route.paramMap.subscribe((pmap) => {
+      this.applicationId = pmap.get('applicationId');
+    });
+  }
+
+  ngOnInit(): void {
+    this.initForm();
+    this.loadData();
+  }
+
+  /**
+   * Initializes the form with the required controls and validators.
+   *
+   * @private
+   */
+  private initForm() {
+    this.form = this.fb.group({
+      authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
+      signatureAgreement: ['', [this.customRequiredCheckboxValidator()]]
+    });
+  }
+
+  /**
+   * Loads the form data.
+   *
+   * @private
+   */
+  private loadData() {
+    const sub = forkJoin({
+      applicationData: this.applicationDataService.getLegalEntityReviewData(this.applicationId),
+      tiedHouseDataForApplication: this.tiedHouseService.GetLiquorTiedHouseConnectionsForApplication(this.applicationId)
+    })
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: ({ applicationData, tiedHouseDataForApplication }) => {
+          this.setFormData(applicationData);
+
+          this.initialTiedHouseConnections = tiedHouseDataForApplication;
+
+          this.hasTiedHouseConnections =
+            this.initialTiedHouseConnections && this.initialTiedHouseConnections.length > 0;
+
+          this.hasLoadedData = true;
+        },
+        error: (error) => {
+          console.error('Error loading Liquor Tied House data', error);
+          this.dialog.open(GenericMessageDialogComponent, {
+            data: {
+              title: 'Error Loading Application Data',
+              message:
+                'Failed to load Application data. Please try again. If the problem persists, please contact support.',
+              closeButtonText: 'Close'
+            }
+          });
+        }
+      });
+
+    this.subscriptionList.push(sub);
+  }
+
+  /**
+   * Sets the form data based on the provided application, licences, and invoice information.
+   *
+   * @private
+   * @param {*} { application, licences }
+   */
+  private setFormData({ application, licences }) {
+    this.liquorLicences = licences.filter((item) => item.licenceTypeCategory === 'Liquor' && item.status === 'Active');
+
+    this.cannabisLicences = licences.filter(
+      (item) => item.licenceTypeCategory === 'Cannabis' && item.status === 'Active'
+    );
+
+    this.application = application;
+
+    this.form.patchValue(application);
+
+    this.isDataLoaded = true;
+
+    if (this.application.applicationStatus !== 'Incomplete') {
+      this.form.disable();
+      this.formDisabled = true;
+    }
+  }
+
+  /**
+   * Submit the application.
+   */
+  onSubmit() {
+    if (!this.isValid()) {
+      this.showValidationMessages = true;
+      this.markControlsAsTouched(this.form);
+
+      return;
+    }
+
+    this.isSubmitting = true;
+
+    this.application.invoiceTrigger = 0;
+
+    this.save()
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe(([saveSucceeded]) => {
+        if (!saveSucceeded) {
+          this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        }
+
+        this.isSubmitting = false;
+      });
+  }
+
+  /**
+   * Checks if the form is valid and collects validation messages.
+   *
+   * @return {*}  {boolean}
+   */
+  private isValid(): boolean {
+    this.showValidationMessages = false;
+    this.validationMessages = this.listControlsWithErrors(this.form, this.getValidationErrorMap());
+
+    let valid = this.form.disabled || this.form.valid;
+
+    // Invalid if hasTiedHouseChangesToDeclare is false AND uploadedLegalEntityReviewSupportingDocuments is equal to 0
+    if (!this.hasTiedHouseChangesToDeclare && this.uploadedLegalEntityReviewSupportingDocuments === 0) {
+      this.validationMessages.push('Please upload supporting documents.');
+      valid = false;
+    }
+
+    if (!this.areTiedHouseDeclarationsValid()) {
+      this.validationMessages.push('Tied House Declaration has not been saved.');
+      valid = false;
+    }
+
+    return valid;
+  }
+
+  /**
+   * Saves the application data.
+   *
+   * @private
+   * @return {*}  {Observable<[boolean, Application]>}
+   */
+  private save(): Observable<[boolean, Application]> {
+    return this.applicationDataService
+      .submitLegalEntityApplication({
+        ...this.application,
+        ...this.form.value
+      })
+      .pipe(takeWhile(() => this.componentActive))
+      .pipe(
+        catchError(() => {
+          this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+
+          const res: [boolean, Application] = [false, null];
+
+          return of(res);
+        })
+      )
+      .pipe(
+        mergeMap((data) => {
+          this.snackBar.open('Application has been saved', 'Success', {
+            duration: 3500,
+            panelClass: ['green-snackbar']
+          });
+
+          const res: [boolean, Application] = [true, data as Application];
+          this.router.navigate(['/dashboard']);
+          return of(res);
+        })
+      );
+  }
+
+  /**
+   * Returns a map of validation error messages for the form controls.
+   *
+   * @private
+   * @return {*}
+   */
+  private getValidationErrorMap() {
+    const errorMap = {
+      signatureAgreement:
+        'Please affirm that all of the information provided for this application is true and complete',
+      authorizedToSubmit: 'Please affirm that you are authorized to submit the application'
+    };
+    return errorMap;
+  }
+
+  /**
+   * Toggles the visibility of the tied house connections section.
+   *
+   * @param {boolean} hasTiedHouseChangesToDeclare
+   */
+  handleHasTiedHouseChangesToDeclareEvent(hasTiedHouseChangesToDeclare: boolean) {
+    // Default to true unless the user has explicitly said "No"
+    this.hasTiedHouseChangesToDeclare = hasTiedHouseChangesToDeclare ?? true;
+  }
+
+  /**
+   * Handles changes emitted from the tied house declarations component.
+   *
+   * @param {TiedHouseConnection[]} tiedHouseConnections
+   */
+  handleOnTiedHouseChangesEvent(tiedHouseConnections: TiedHouseConnection[]): void {
+    this.hasTiedHouseConnections = tiedHouseConnections && tiedHouseConnections.length > 0;
+  }
+
+  /**
+   * Indicates whether the tied house declaration section should be shown.
+   *
+   * @readonly
+   * @type {boolean}
+   */
+  get showTiedHouseDeclarationSection(): boolean {
+    return this.hasTiedHouseChangesToDeclare || this.hasTiedHouseConnections;
+  }
+
+  /**
+   * Checks if the tied house declarations are valid.
+   *
+   * @return {*}  {boolean} `true` if valid, `false` otherwise.
+   */
+  areTiedHouseDeclarationsValid(): boolean {
+    if (!this.tiedHouseDeclaration) {
+      // If the tied house section is not visible, or the component is not initialized, we assume it's valid.
+      return true;
+    }
+
+    if (
+      this.tiedHouseDeclaration?.tiedHouseDeclarations.find((item) =>
+        [TiedHouseViewMode.new, TiedHouseViewMode.editExistingRecord, TiedHouseViewMode.addNewRelationship].includes(
+          item.viewMode
+        )
+      )
+    ) {
+      // One or more declarations are in an unsaved state.
+      return false;
+    }
+
+    return true;
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+}

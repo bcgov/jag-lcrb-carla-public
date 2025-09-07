@@ -51,44 +51,49 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         /// <summary>
-        /// Get Autocomplete data for a licence search
+        /// Get autocomplete data for a licence search, by name or licence number.
+        /// Returns an empty list if no search criteria is provided.
         /// </summary>
-        /// <param name="name">The name to filter by using startswith</param>
-        /// <returns>Dictionary of key value pairs with accountid and name as the pairs</returns>
+        /// <param name="name">The name to filter by using contains.</param>
+        /// <param name="licenceNumber">The licence number to filter by using contains.</param>
+        /// <returns>An array of licence objects.</returns>
         [HttpGet("autocomplete")]
         [Authorize(Policy = "Business-User")]
-        public List<RelatedLicence> GetAutocomplete(string name)
+        public List<RelatedLicence> GetAutocomplete(string name = null, string licenceNumber = null)
         {
             var results = new List<RelatedLicence>();
-            string crsId = _dynamicsClient.GetCachedLicenceTypeIdByName(ViewModels.LicenceTypeNames.CannabisRetailStore, _cache);
-            string marketingId = _dynamicsClient.GetCachedLicenceTypeIdByName(ViewModels.LicenceTypeNames.Marketing, _cache);
-            string manufacturerId = _dynamicsClient.GetCachedLicenceTypeIdByName(ViewModels.LicenceTypeNames.Marketing, _cache);
-            string cateringId = _dynamicsClient.GetCachedLicenceTypeIdByName(ViewModels.LicenceTypeNames.Catering, _cache);
-            string ubvId = _dynamicsClient.GetCachedLicenceTypeIdByName(ViewModels.LicenceTypeNames.UBV, _cache);
-            string agentId = _dynamicsClient.GetCachedLicenceTypeIdByName(ViewModels.LicenceTypeNames.Agent, _cache);
+
+            if (string.IsNullOrEmpty(name) && string.IsNullOrEmpty(licenceNumber))
+            {
+                // No search criteria provided, return empty results
+                return results;
+            }
 
             try
             {
-
-                string filter = null;
-                // escape any apostophes.
-                if (!string.IsNullOrEmpty(name) && crsId != null && marketingId != null && manufacturerId != null && cateringId != null && ubvId != null && agentId != null)
+                if (!string.IsNullOrEmpty(name))
                 {
-                    name = name.Replace("'", "''");
-                    // select active licences that match the given name
-                    /*
-                    filter = $"_adoxioLicencetypeValue ne {crsId} and "
-                        + $"_adoxioLicencetypeValue ne {marketingId} and "
-                        + $"_adoxioLicencetypeValue ne {manufacturerId} and "
-                        + $"_adoxioLicencetypeValue ne {cateringId} and "
-                        + $"_adoxioLicencetypeValue ne {ubvId} and "                        
-                        + $"_adoxioLicencetypeValue ne {agentId} and "
-                        + $"statecode eq 0 and contains(name,'{name}')";
-                    */
-                    filter = $"statecode eq 0 and contains(adoxio_name,'{name}')";
+                    var filter = $"statecode eq 0";
+
+                    List<string> orClauses = new List<string>();
+
+                    if (!string.IsNullOrWhiteSpace(name))
+                    {
+                        orClauses.Add($"contains(adoxio_name,'{name.Replace("'", "''")}')");
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(licenceNumber))
+                    {
+                        orClauses.Add($"contains(adoxio_licencenumber,'{licenceNumber.Replace("'", "''")}')");
+                    }
+
+                    string orClause = string.Join(" or ", orClauses);
+                    filter = $"{filter} and ({orClause})";
 
                     var expand = new List<string> { "adoxio_Licencee", "adoxio_establishment" };
+
                     var licences = _dynamicsClient.Licenceses.Get(filter: filter, expand: expand, top: 10).Value;
+
                     foreach (var licence in licences)
                     {
                         var relatedLicence = new RelatedLicence
@@ -97,8 +102,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             Name = licence.AdoxioName,
                             EstablishmentName = licence.AdoxioEstablishment?.AdoxioName,
                             Streetaddress = licence.AdoxioEstablishment?.AdoxioAddressstreet,
-                            // 2024-03-27 LCSD-6368 waynezen; correct someone else's mistake: City assigned value for Street address
-                            //City = licence.AdoxioEstablishment?.AdoxioAddressstreet,
                             City = licence.AdoxioEstablishment?.AdoxioAddresscity,
                             Provstate = "BC",
                             Country = "CANADA",
@@ -107,18 +110,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             LicenceNumber = licence.AdoxioLicencenumber,
                             Valid = true
                         };
+
                         results.Add(relatedLicence);
                     }
                 }
-
             }
             catch (HttpOperationException httpOperationException)
             {
                 _logger.LogError(httpOperationException, "Error while getting autocomplete data.");
             }
-            catch (Exception e)
+            catch (Exception error)
             {
-                _logger.LogError(e, "Error while getting autocomplete data.");
+                _logger.LogError(error, "Error while getting autocomplete data.");
             }
 
             return results;
@@ -1281,7 +1284,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             var expand = new List<string> {
                 "adoxio_Licencee",
-                "adoxio_adoxio_licences_adoxio_applicationtermsconditionslimitation_Licence",
                 "adoxio_adoxio_licences_adoxio_application_AssignedLicence",
                 "adoxio_LicenceType",
                 "adoxio_establishment",
@@ -1310,8 +1312,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     expiraryDateParam = expiryDate.ToString("MMMM dd, yyyy");
                 }
 
+                // Fetch the active terms and conditions for the licence
+                IEnumerable<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation> licenceTermsAndConditions =
+                    _dynamicsClient
+                        .Applicationtermsconditionslimitations.Get(
+                            filter: $"_adoxio_licence_value eq {licenceId} and statecode eq 0",
+                            expand: new List<string> {"adoxio_TermsConditionsPreset"}
+                        )
+                        .Value;
+
+                // Build the human-readable terms and conditions list
                 var termsAndConditions = "";
-                foreach (var item in adoxioLicense.AdoxioAdoxioLicencesAdoxioApplicationtermsconditionslimitationLicence)
+                foreach (var item in licenceTermsAndConditions)
                 {
                     termsAndConditions += $"<li>{item.AdoxioTermsandconditions}</li>";
                 }
@@ -1413,13 +1425,23 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         _logger.LogError(e, $"Error loading service areas for {adoxioLicense.AdoxioLicencenumber}");
                     }
-                        //MicrosoftDynamicsCRMadoxioHoursofserviceCollection hours = _dynamicsClient.Hoursofservices.Get(filter: $"_adoxio_licence_value eq {licenceId} and _adoxio_endorsement_value eq null");
+
                         if (allServiceAreas != null && allServiceAreas.Value.Count > 0)
                         {
                             
-                            // sort the areas
-                            IEnumerable<MicrosoftDynamicsCRMadoxioServicearea> serviceAreas = allServiceAreas.Value
+                            IEnumerable<MicrosoftDynamicsCRMadoxioServicearea> filteredServiceAreas = allServiceAreas.Value
+                            // Filter out service areas that should not be printed on the licence
+                            // Context: It appears that the area category field is being utilized to dictate whether or 
+                            // not  a service area should be printed on the licence. In Dynamics, as of July 2025 at 
+                            // least, the field in Dynamics is labelled "Printed On Licence?", and the "Capacity" value 
+                            // is set when the user selects "No" from the dropdown.
                             .Where(area => area.AdoxioAreacategory != (int)ServiceAreaCategoryEnum.Capacity)
+                            // Filter out service areas that have invalid data (possibly a holdover from old data?)
+                            .Where(area => area.AdoxioArealocation != null && area.AdoxioCapacity != null)
+                            // Filter out service areas that are temporary extension areas. A temporary extension area
+                            // is not printed on the licence because it is only relevant for a short period of time.
+                            .Where(area => area.AdoxioTemporaryextensionarea == false)
+                            // Sort the service areas
                             .OrderBy(area => area.AdoxioAreanumber);
 
                             serviceAreaText += $@"<h3 style=""text-align: center;"">CAPACITY</h3>";
@@ -1428,18 +1450,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             var cells = 0;
                             var leftover = 0;
 
-                            foreach (CapacityArea area in licenceVM.ServiceAreas)
+                            foreach (MicrosoftDynamicsCRMadoxioServicearea area in filteredServiceAreas)
                             {
-                                // sometimes we have bad data and should not try to spend our life fixing other people's problems
-                                if (area.AreaLocation == null || area.Capacity == null ||
-                                    area.AreaCategory != 845280000 || area.IsTemporaryExtensionArea == true)
-                                {
-                                    continue;
-                                }
-
                                 cells++;
 
-                                serviceAreaText += $@"<td class='area'><table style='padding:0px; margin: 0px; width:100%; border: 0px solid white;'><tr><td>{area.AreaLocation}</td><td>{area.Capacity}</td></tr></table></td>";
+                                serviceAreaText += $@"<td class='area'><table style='padding:0px; margin: 0px; width:100%; border: 0px solid white;'><tr><td>{area.AdoxioArealocation}</td><td>{area.AdoxioCapacity}</td></tr></table></td>";
 
                                 // every 4 cells
                                 leftover = cells % 4;
@@ -1763,4 +1778,3 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public int? ManufacturerProductionAmountUnit { get; set; }
     }
 }
-

@@ -23,7 +23,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public TermsAndConditionsController(ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
         {
             _dynamicsClient = dynamicsClient;
-            _logger = loggerFactory.CreateLogger(typeof(TiedHouseConnectionsController));
+            _logger = loggerFactory.CreateLogger(typeof(TermsAndConditionsController));
         }
 
         [HttpGet("{licenceId}")]

@@ -1,0 +1,44 @@
+<h3 class="blue-header">Change of Directors or Officers</h3>
+<div class="content-bottom">
+  <p *ngIf="hasLiquor && !hasCannabis">
+    To be completed when there are changes in directors or officers of a public corporation or society within the
+    licensee legal entity.
+  </p>
+  <p *ngIf="hasCannabis">
+    To be completed when there are changes in directors or officers of a public corporation or society, and when there
+    are changes in senior managers of a society, within the licensee legal entity.
+  </p>
+
+  <h4>Notice of Articles (or Register of Directors and Officers)</h4>
+  <p>
+    Provide the updated Notice of Articles for your corporation. Alternatively, you can provide list of all current
+    directors/officers by full legal name, position and date of appointment.
+  </p>
+  <p *ngIf="hasLiquor">
+    <strong>
+      For Liquor Licensees: Directors and Officers are required to submit a Personal History Summary Form for
+      liquor-related applications, except for
+      <u>private corporations</u>
+      .
+    </strong>
+  </p>
+  <app-file-uploader
+    *ngIf="application?.id"
+    documentType="NOA"
+    fileTypes="FILE MUST BE IN PDF FORMAT."
+    [multipleFiles]="true"
+    entityName="application"
+    [extensions]="['pdf']"
+    (numberOfUploadedFiles)="onUploadedNOA($event)"
+    [entityId]="application.id"
+    [uploadHeader]="'TO UPLOAD NOTICE OF ARTICLES, DRAG FILES HERE OR'"
+    [disableUploads]="disabled"
+    [enableFileDeletion]="!disabled"></app-file-uploader>
+  <p *ngIf="hasCannabis">
+    <strong>
+      <fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>
+      For Cannabis Licensees: All newly added directors must submit a completed Cannabis Associate Security Screening
+      form below.
+    </strong>
+  </p>
+</div>

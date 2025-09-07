@@ -17,11 +17,8 @@ import { License } from "@models/license.model";
 import { faSave } from "@fortawesome/free-regular-svg-icons";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { RelatedLicence } from "@models/related-licence";
-import { TiedHouseConnectionsDataService } from "../../../services/tied-house-connections-data.service";
 import { ApplicationDataService } from "../../../services/application-data.service";
 import { Application } from "../../../models/application.model";
-import { TiedHouseConnection } from "../../../models/tied-house-connection.model";
-import { ApplicationTypeDataService } from "../../../services/application-type-data.service";
 import { RelatedLicencePickerComponent } from "@shared/components/related-licence-picker/related-licence-picker.component";
 import { RelatedJobnumberPickerComponent } from "@shared/components/related-jobnumber-picker/related-jobnumber-picker.component";
 
@@ -54,7 +51,6 @@ export class ApplicationTiedHouseExemptionComponent extends FormBase implements 
   account: Account;
   minDate = new Date();
   dataLoaded: boolean;
-  tiedHouseFormData: TiedHouseConnection;
   applicationType: ApplicationType;
   applicationId: string;
   isAppId: string;
@@ -71,9 +67,7 @@ export class ApplicationTiedHouseExemptionComponent extends FormBase implements 
     private route: ActivatedRoute,
     private fb: FormBuilder,
     public dialog: MatDialog,
-    private tiedHouseService: TiedHouseConnectionsDataService,
     public applicationDataService: ApplicationDataService,
-    public applicationTypeDataService: ApplicationTypeDataService,
     public establishmentWatchWordsService: EstablishmentWatchWordsService) {
     super();
     this.route.paramMap.subscribe(pmap => this.licenceId = pmap.get("licenceId"));
@@ -118,7 +112,7 @@ export class ApplicationTiedHouseExemptionComponent extends FormBase implements 
     });
 
     if (!this.licenceId) {
-      this.applicationTypeDataService.getApplicationTypeByName('Tied House Exemption Application')
+      this.applicationDataService.getApplicationTypeByName('Tied House Exemption Application')
         .pipe(takeWhile(() => this.componentActive))
         .subscribe((appType: ApplicationType) => {
           this.applicationType = appType;
@@ -201,7 +195,7 @@ export class ApplicationTiedHouseExemptionComponent extends FormBase implements 
       case "autocompleteInput":
         // cursor entered autocomplete search by Licence fld - clear autocomplete search by JobNumber fld
         this.autocompletejobcomponent.autoCompFldClear();
-       
+
 
         break;
       case "autocompleteJobNumber":
@@ -263,7 +257,7 @@ export class ApplicationTiedHouseExemptionComponent extends FormBase implements 
           this.router.navigateByUrl('/dashboard');
         });
 
-      // this.busy = 
+      // this.busy =
       return of(true);
     }
     else {
@@ -294,14 +288,6 @@ export class ApplicationTiedHouseExemptionComponent extends FormBase implements 
     }
   }
 
-    prepareTiedHouseSaveRequest(_tiedHouseData) {
-    if (!this.application.tiedHouse) {
-      return of(null);
-    }
-    let data = (<any>Object).assign(this.application.tiedHouse, _tiedHouseData);
-    data = { ...data };
-    return this.tiedHouseService.updateTiedHouse(data, data.id);
-  }
   normalizeFormData() {
     let description2 = '';
 

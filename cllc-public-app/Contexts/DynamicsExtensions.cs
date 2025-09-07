@@ -325,7 +325,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
 
         /// <summary>
-        /// Get the first name from 
+        /// Get the first name from
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
@@ -791,7 +791,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         // Does not return application of type "Licensee Changes"
         public static IEnumerable<MicrosoftDynamicsCRMadoxioApplication> GetApplicationListByApplicant(this IDynamicsClient _dynamicsClient, string applicantId)
         {
-            var expand = new List<string> { "adoxio_LicenceFeeInvoice", "adoxio_AssignedLicence", "adoxio_LicenceType", "adoxio_ApplicationTypeId" };
+            var expand = new List<string> { "adoxio_LicenceFeeInvoice", "adoxio_AssignedLicence", "adoxio_LicenceType", "adoxio_ApplicationTypeId", "adoxio_ApplicationExtension" };
             IEnumerable<MicrosoftDynamicsCRMadoxioApplication> dynamicsApplicationList = null;
             if (string.IsNullOrEmpty(applicantId))
             {
@@ -928,7 +928,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             if (!string.IsNullOrEmpty(middlename))
             {
-                
+
                 middlename.Replace("'", "''");
                 filter += $" and middlename eq '{middlename}'";
             }
@@ -989,7 +989,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         public static MicrosoftDynamicsCRMcontact GetActiveContactByExternalIdBridged(this IDynamicsClient dynamicsClient, bool isServicesCard, string siteminderId)
         {
             int? adoxioType = dynamicsClient.GetLoginTypePicklistValue(isServicesCard);
-            
+
             string sanitizedSiteminderId = GuidUtility.SanitizeGuidString(siteminderId);
             MicrosoftDynamicsCRMcontact result = null;
             try
@@ -1162,7 +1162,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
-        
+
 
         public static MicrosoftDynamicsCRMadoxioLicencesubcategory GetAdoxioSubLicencetypeByName(this IDynamicsClient _dynamicsClient, string name)
         {
@@ -1277,6 +1277,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                             Public.ViewModels.FormSection formSection = new Public.ViewModels.FormSection();
                             formSection.fields = new List<Public.ViewModels.FormField>();
                             formSection.id = section.Attribute("id").Value;
+                             formSection.name = section.Attribute("name").Value;
                             formSection.showlabel = sectionShowLabel;
                             formSection.visible = sectionVisible;
 
@@ -1286,7 +1287,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                             // the section label is the section name.
                             foreach (var sectionLabel in sectionLabels)
                             {
-                                formSection.name = sectionLabel.Attribute("description").Value;
+                                formSection.label = sectionLabel.Attribute("description").Value;
                             }
                             // get the cells.
                             var cells = section.XPathSelectElements("rows/row/cell");
@@ -1306,28 +1307,30 @@ namespace Gov.Lclb.Cllb.Interfaces
 
                                 formField.showlabel = cellShowLabel;
                                 formField.visible = cellVisible;
+                                formField.name = cell.Attribute("name")?.Value ?? "";
 
-                                // get the cell label. 
+
+                                // get the cell label.
 
                                 if (formField.showlabel)
                                 {
                                     var cellLabels = cell.XPathSelectElements("labels/label");
                                     foreach (var cellLabel in cellLabels)
                                     {
-                                        formField.name = cellLabel.Attribute("description").Value;
+                                        formField.label = cellLabel.Attribute("description").Value;
                                     }
                                 }
                                 else
                                 {
                                     // use the section name.
-                                    formField.name = formSection.name;
-                                    formSection.name = "";
+                                    formField.label = formSection.label;
+                                    formSection.label = "";
                                 }
 
 
                                 // get the form field name.
                                 var control = cell.XPathSelectElement("control");
-                                if (!string.IsNullOrEmpty(formField.name) && control != null && control.Attribute("datafieldname") != null)
+                                if (!string.IsNullOrEmpty(formField.label) && control != null && control.Attribute("datafieldname") != null)
                                 {
                                     formField.classid = control.Attribute("classid").Value;
                                     formField.controltype = formField.classid.DynamicsControlClassidToName();
@@ -1757,7 +1760,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 Log.Logger.Error(e, "Problem getting user.");
             }
-            
+
             return result;
         }
 
@@ -1936,7 +1939,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="account"></param>
         /// <returns>True if the given account mostly has liquor licences.</returns>
@@ -1982,7 +1985,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 result = PaymentType.CANNABIS;
             }
 
-            // TODO - if this is a licencee changes application then check the account's licences.  
+            // TODO - if this is a licencee changes application then check the account's licences.
             // If the account has more liquor licences then use liquor.
 
             return result;
