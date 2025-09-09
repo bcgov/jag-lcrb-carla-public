@@ -41,9 +41,10 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Mime;
-using StackExchange.Redis;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 using Gov.Lclb.Cllb.Public.Repositories;
+using StackExchange.Redis;
+using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public
 {
@@ -177,67 +178,74 @@ namespace Gov.Lclb.Cllb.Public
             orgBook.ReadResponseAsString = true;
             services.AddTransient(_ => (IOrgBookClient)orgBook);
 
-
-            if (!string.IsNullOrEmpty(_configuration["REDIS_SERVER"]))
+            // Add Redis distributed caching and health checks
+            var redisServer = _configuration["REDIS_SERVER"];
+            var redisPassword = _configuration["REDIS_PASSWORD"];
+            if (!string.IsNullOrEmpty(redisServer))
             {
-                string config = _configuration["REDIS_SERVER"];
-                if (!string.IsNullOrEmpty(_configuration["REDIS_PASSWORD"]))
+                Console.WriteLine($"[Redis] Configuring Redis server: {redisServer}");
+
+                var redisOptions = ConfigurationOptions.Parse(redisServer);
+
+                if (!string.IsNullOrEmpty(redisPassword))
                 {
-                    string redisPassword = _configuration["REDIS_PASSWORD"];
-                    config += $",password={redisPassword}";
+                    redisOptions.Password = redisPassword;
                 }
-                // Abort Connect is a setting that controls if Redis will try a connection if it thinks the service is not available.
-                // For cloud installations such as Azure it should be set to false.
-                if (!string.IsNullOrEmpty(_configuration["REDIS_DISABLE_ABORT_CONNECT"]))
+
+                redisOptions.AbortOnConnectFail = false; // keep trying if not available at startup
+                redisOptions.ConnectRetry = 5;
+                redisOptions.ConnectTimeout = 10000; // ms
+                redisOptions.SyncTimeout = 8000; // ms
+                redisOptions.KeepAlive = 30; // seconds
+                redisOptions.AllowAdmin = false;
+                redisOptions.ReconnectRetryPolicy = new ExponentialRetry(5000); // ms backoff
+
+                IConnectionMultiplexer sharedMux = ConnectionMultiplexer.Connect(redisOptions);
+
+                sharedMux.ConnectionFailed += (_, e) =>
+                    Console.WriteLine($"[Redis] ConnectionFailed {e.EndPoint} {e.FailureType}");
+                sharedMux.ConnectionRestored += (_, e) => Console.WriteLine($"[Redis] ConnectionRestored {e.EndPoint}");
+                sharedMux.ErrorMessage += (_, e) => Console.WriteLine($"[Redis] Error {e.Message}");
+
+                services.AddSingleton(sharedMux);
+
+                services.AddStackExchangeRedisCache(o =>
                 {
-                    config += ",abortConnect=false";
-                }
-                
-                services.AddDistributedRedisCache(o =>
-                {
-                    o.Configuration = config;
+                    o.ConnectionMultiplexerFactory = () => Task.FromResult(sharedMux);
                 });
-
-                // health checks
-                services.AddHealthChecks()
-#if USE_GEOCODER_CHECK
-                    .AddCheck<GeocoderHealthCheck>("Geocoder")
-#endif
-                    .AddCheck("cllc_public_app", () => HealthCheckResult.Healthy())
-                    // No longer checking SQL Server in health checks as the SQL components are no longer active.
-#if (USE_MSSQL)
-                .AddSqlServer(DatabaseTools.GetConnectionString(Configuration), name: "Sql server")
-#endif
-                    .AddRedis(config, name: "Redis");
-                /*
-                 * .AddCheck<DynamicsHealthCheck>("Dynamics")
-                 *
-                 */
-
-            }
-            else // checks with no redis.
-            {
-                // health checks
-                services.AddHealthChecks()
-#if USE_GEOCODER_CHECK
-                    .AddCheck<GeocoderHealthCheck>("Geocoder")
-#endif
-                    .AddCheck("cllc_public_app", () => HealthCheckResult.Healthy());
-                // No longer checking SQL Server in health checks as the SQL components are no longer active.
-#if (USE_MSSQL)
-                .AddSqlServer(DatabaseTools.GetConnectionString(Configuration), name: "Sql server")
-#endif
-                //.AddCheck<DynamicsHealthCheck>("Dynamics")
-
             }
 
-            // session will automatically use redis or another distributed cache if it is available.
-            services.AddSession(x =>
+            // Configure health checks
+            var healthChecksBuilder = services.AddHealthChecks()
+                .AddCheck("cllc_public_app", () => HealthCheckResult.Healthy());
+
+            #if USE_GEOCODER_CHECK
+            healthChecksBuilder.AddCheck<GeocoderHealthCheck>("Geocoder")
+            #endif
+
+            #if USE_MSSQL
+            healthChecksBuilder.AddSqlServer(DatabaseTools.GetConnectionString(Configuration), name: "Sql server");
+            #endif
+
+            // Add Redis health check only if Redis is configured
+            if (!string.IsNullOrEmpty(redisServer))
             {
-                x.IdleTimeout = TimeSpan.FromHours(4.0);
-                x.Cookie.IsEssential = true;
+                var redisHealthCheckConfig = redisServer;
+                if (!string.IsNullOrEmpty(redisPassword))
+                {
+                    redisHealthCheckConfig += $",password={redisPassword}";
+                }
+                redisHealthCheckConfig += ",abortConnect=false";
+
+                healthChecksBuilder.AddRedis(redisHealthCheckConfig, name: "Redis");
+            }
+
+            // Session will automatically use redis or another distributed cache if it is available.
+            services.AddSession(configure =>
+            {
+                configure.IdleTimeout = TimeSpan.FromHours(4.0);
+                configure.Cookie.IsEssential = true;
             });
-
         }
 
         /// <summary>
