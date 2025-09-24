@@ -66,31 +66,35 @@ export class ConnectionToProducersComponent implements OnInit, OnChanges, OnDest
 
   destroy$ = new Subject<void>();
 
-  get showCorporation(){
-    return ['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation'].indexOf(
-              this.account.businessType
-            ) !== -1
+  get showCorporation() {
+    return (
+      ['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation'].indexOf(
+        this.account.businessType
+      ) !== -1
+    );
   }
 
-  get showLGorIN(){
+  get showLGorIN() {
     return ['IndigenousNation', 'LocalGovernment'].indexOf(this.account.businessType) !== -1;
   }
 
-  get showPublic(){
+  get showPublic() {
     return ['PublicCorporation'].indexOf(this.account.businessType) !== -1;
   }
 
-  get showSoleProprietorshipORUniversityOrChurch(){
+  get showSoleProprietorshipORUniversityOrChurch() {
     return ['SoleProprietorship', 'University', 'Church'].indexOf(this.account.businessType) !== -1;
   }
 
-  get showPartnership(){
-    return ['Partnership', 'GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(
-              this.account.businessType
-            ) !== -1;
-    }
+  get showPartnership() {
+    return (
+      ['Partnership', 'GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(
+        this.account.businessType
+      ) !== -1
+    );
+  }
 
-  get showSociety(){
+  get showSociety() {
     return ['Society'].indexOf(this.account.businessType) !== -1;
   }
 
@@ -145,7 +149,7 @@ export class ConnectionToProducersComponent implements OnInit, OnChanges, OnDest
     this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe((value) => this.onFormChanges.emit(value));
   }
 
-   /**
+  /**
    * Set the form mode to either read-only or editable based on the current state.
    */
   setFormMode() {
@@ -172,30 +176,26 @@ export class ConnectionToProducersComponent implements OnInit, OnChanges, OnDest
     } else {
       // If the tied house component is editable, enable the form and set all validators
       this.form.enable();
-      if(this.showCorporation){
+      if (this.showCorporation) {
         this.form.get('corpConnectionFederalProducer').setValidators([Validators.required]);
         this.form.get('federalProducerConnectionToCorp').setValidators([Validators.required]);
-
       }
-      if(this.showLGorIN){
+      if (this.showLGorIN) {
         this.form.get('iNConnectionToFederalProducer').setValidators([Validators.required]);
-
       }
-      if(this.showPublic){
+      if (this.showPublic) {
         this.form.get('corpConnectionFederalProducer').setValidators([Validators.required]);
         this.form.get('share20PlusConnectionProducer').setValidators([Validators.required]);
       }
-      if(this.showSoleProprietorshipORUniversityOrChurch){
+      if (this.showSoleProprietorshipORUniversityOrChurch) {
         this.form.get('corpConnectionFederalProducer').setValidators([Validators.required]);
         this.form.get('federalProducerConnectionToCorp').setValidators([Validators.required]);
         this.form.get('share20PlusFamilyConnectionProducer').setValidators([Validators.required]);
-
       }
-      if(this.showSociety){
+      if (this.showSociety) {
         this.form.get('societyConnectionFederalProducer').setValidators([Validators.required]);
-
       }
-      if(this.showPartnership){
+      if (this.showPartnership) {
         this.form.get('federalProducerConnectionToCorp').setValidators([Validators.required]);
         this.form.get('partnersConnectionFederalProducer').setValidators([Validators.required]);
       }
@@ -307,10 +307,10 @@ export class ConnectionToProducersComponent implements OnInit, OnChanges, OnDest
       .subscribe((value) => {
         if (value === 0) {
           this.form.get(detailsFormControlName)?.setValue('');
-          this.form.get(detailsFormControlName)?.clearValidators();  // Remove all validators
+          this.form.get(detailsFormControlName)?.clearValidators(); // Remove all validators
           this.form.get(detailsFormControlName)?.updateValueAndValidity();
         }
-         if (value === 1) {
+        if (value === 1) {
           this.form.get(detailsFormControlName)?.setValidators([Validators.required]);
         }
       });

@@ -9,8 +9,7 @@
         </div>
 
         <!-- CORPORATIONS -->
-        <div
-          *ngIf="showCorporation">
+        <div *ngIf="showCorporation">
           <div class="mb-5">
             <section class="mb-3">
               <p id="corp-connection-federal-producer" class="font-weight-bold">
@@ -318,7 +317,7 @@
             <section *ngIf="form.get('federalProducerConnectionToCorp').value === 1">
               <label for="federal-producer-connection-to-corp-details">
                 Provide the name of the federal producer and details of the connection (e.g. percentage and type of
-                shares held).s
+                shares held).
               </label>
               <textarea
                 id="federal-producer-connection-to-corp-details"
@@ -330,8 +329,7 @@
         </div>
 
         <!-- PARTNERSHIP OR GENERAL PARTNERSHIP OR LIMITED PARTNERSHIP OR LIMITED LIABILITY PARTNERSHIP -->
-        <div
-          *ngIf="showPartnership">
+        <div *ngIf="showPartnership">
           <div class="mb-5">
             <section class="mb-3">
               <p id="partners-connection-federal-producer" class="font-weight-bold">
