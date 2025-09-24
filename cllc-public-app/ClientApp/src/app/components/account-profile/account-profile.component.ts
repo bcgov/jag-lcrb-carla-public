@@ -85,6 +85,14 @@ const ValidationFieldNameMap = {
   'contact.telephone1': 'Corporation Contact Telephone',
   'contact.emailaddress1': 'Corporation Contact Email',
 
+  corpConnectionFederalProducerDetails: 'Corporation Federal Producer Details',
+  federalProducerConnectionToCorpDetails: 'Immediate Family Member Federal Producer Details',
+  share20PlusConnectionProducerDetails: 'Shareholder Federal Producer Details',
+  partnersConnectionFederalProducerDetails: 'Partnership Federal Producer Details',
+  societyConnectionFederalProducerDetails: 'Federal Producer Details',
+  liquorFinancialInterestDetails: 'Federal Producer Details',
+  iNConnectionToFederalProducerDetails: 'Federal Producer Details',
+
   hasLiquorTiedHouseOwnershipOrControl: 'Ownership or Control',
   hasLiquorTiedHouseThirdPartyAssociations: 'Third-Party Associations',
   hasLiquorTiedHouseFamilyMemberInvolvement: 'Immediate Family Member Involvement'

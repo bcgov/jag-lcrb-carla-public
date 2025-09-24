@@ -66,6 +66,38 @@ export class ConnectionToProducersComponent implements OnInit, OnChanges, OnDest
 
   destroy$ = new Subject<void>();
 
+  get showCorporation() {
+    return (
+      ['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation'].indexOf(
+        this.account.businessType
+      ) !== -1
+    );
+  }
+
+  get showLGorIN() {
+    return ['IndigenousNation', 'LocalGovernment'].indexOf(this.account.businessType) !== -1;
+  }
+
+  get showPublic() {
+    return ['PublicCorporation'].indexOf(this.account.businessType) !== -1;
+  }
+
+  get showSoleProprietorshipORUniversityOrChurch() {
+    return ['SoleProprietorship', 'University', 'Church'].indexOf(this.account.businessType) !== -1;
+  }
+
+  get showPartnership() {
+    return (
+      ['Partnership', 'GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(
+        this.account.businessType
+      ) !== -1
+    );
+  }
+
+  get showSociety() {
+    return ['Society'].indexOf(this.account.businessType) !== -1;
+  }
+
   constructor(
     private fb: FormBuilder,
     private tiedHouseService: TiedHouseConnectionsDataService,
@@ -144,22 +176,29 @@ export class ConnectionToProducersComponent implements OnInit, OnChanges, OnDest
     } else {
       // If the tied house component is editable, enable the form and set all validators
       this.form.enable();
-      this.form.get('corpConnectionFederalProducer').setValidators([Validators.required]);
-      this.form.get('corpConnectionFederalProducerDetails').setValidators([Validators.required]);
-      this.form.get('federalProducerConnectionToCorp').setValidators([Validators.required]);
-      this.form.get('federalProducerConnectionToCorpDetails').setValidators([Validators.required]);
-      this.form.get('share20PlusConnectionProducer').setValidators([Validators.required]);
-      this.form.get('share20PlusConnectionProducerDetails').setValidators([Validators.required]);
-      this.form.get('share20PlusFamilyConnectionProducer').setValidators([Validators.required]);
-      this.form.get('share20PlusFamilyConnectionProducerDetail').setValidators([Validators.required]);
-      this.form.get('partnersConnectionFederalProducer').setValidators([Validators.required]);
-      this.form.get('partnersConnectionFederalProducerDetails').setValidators([Validators.required]);
-      this.form.get('societyConnectionFederalProducer').setValidators([Validators.required]);
-      this.form.get('societyConnectionFederalProducerDetails').setValidators([Validators.required]);
-      this.form.get('liquorFinancialInterest').setValidators([Validators.required]);
-      this.form.get('liquorFinancialInterestDetails').setValidators([Validators.required]);
-      this.form.get('iNConnectionToFederalProducer').setValidators([Validators.required]);
-      this.form.get('iNConnectionToFederalProducerDetails').setValidators([Validators.required]);
+      if (this.showCorporation) {
+        this.form.get('corpConnectionFederalProducer').setValidators([Validators.required]);
+        this.form.get('federalProducerConnectionToCorp').setValidators([Validators.required]);
+      }
+      if (this.showLGorIN) {
+        this.form.get('iNConnectionToFederalProducer').setValidators([Validators.required]);
+      }
+      if (this.showPublic) {
+        this.form.get('corpConnectionFederalProducer').setValidators([Validators.required]);
+        this.form.get('share20PlusConnectionProducer').setValidators([Validators.required]);
+        this.form.get('share20PlusFamilyConnectionProducer').setValidators([Validators.required]);
+      }
+      if (this.showSoleProprietorshipORUniversityOrChurch) {
+        this.form.get('corpConnectionFederalProducer').setValidators([Validators.required]);
+        this.form.get('federalProducerConnectionToCorp').setValidators([Validators.required]);
+      }
+      if (this.showSociety) {
+        this.form.get('societyConnectionFederalProducer').setValidators([Validators.required]);
+      }
+      if (this.showPartnership) {
+        this.form.get('federalProducerConnectionToCorp').setValidators([Validators.required]);
+        this.form.get('partnersConnectionFederalProducer').setValidators([Validators.required]);
+      }
       this.form.updateValueAndValidity();
     }
   }
@@ -268,6 +307,11 @@ export class ConnectionToProducersComponent implements OnInit, OnChanges, OnDest
       .subscribe((value) => {
         if (value === 0) {
           this.form.get(detailsFormControlName)?.setValue('');
+          this.form.get(detailsFormControlName)?.clearValidators(); // Remove all validators
+          this.form.get(detailsFormControlName)?.updateValueAndValidity();
+        }
+        if (value === 1) {
+          this.form.get(detailsFormControlName)?.setValidators([Validators.required]);
         }
       });
   }
