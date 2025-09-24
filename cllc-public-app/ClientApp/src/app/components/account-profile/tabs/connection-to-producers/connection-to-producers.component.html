@@ -115,7 +115,7 @@
                 <mat-radio-button [value]="0">No</mat-radio-button>
               </mat-radio-group>
             </section>
-            <section *ngIf="form.get('iNConnectionToFederalProducer').value == 'Yes'">
+            <section *ngIf="form.get('iNConnectionToFederalProducer').value === 1">
               <label for="in-connection-to-federal-producer-details">
                 Provide the name of the federal producer and details of the connection (e.g. percentage and type of
                 shares held).
