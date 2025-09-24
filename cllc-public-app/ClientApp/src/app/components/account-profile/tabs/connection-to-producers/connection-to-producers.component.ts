@@ -186,11 +186,11 @@ export class ConnectionToProducersComponent implements OnInit, OnChanges, OnDest
       if (this.showPublic) {
         this.form.get('corpConnectionFederalProducer').setValidators([Validators.required]);
         this.form.get('share20PlusConnectionProducer').setValidators([Validators.required]);
+        this.form.get('share20PlusFamilyConnectionProducer').setValidators([Validators.required]);
       }
       if (this.showSoleProprietorshipORUniversityOrChurch) {
         this.form.get('corpConnectionFederalProducer').setValidators([Validators.required]);
         this.form.get('federalProducerConnectionToCorp').setValidators([Validators.required]);
-        this.form.get('share20PlusFamilyConnectionProducer').setValidators([Validators.required]);
       }
       if (this.showSociety) {
         this.form.get('societyConnectionFederalProducer').setValidators([Validators.required]);
