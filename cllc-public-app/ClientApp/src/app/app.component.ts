@@ -62,6 +62,20 @@ export class AppComponent extends FormBase implements OnInit {
   testAPIRestul = "";
   @ViewChild('aiSidenav') aiSidenav: MatSidenav;
   showAISearch = false;
+  chatCtas: Array<{ label: string; href?: string; routerLink?: string | any[]; params?: any }> = [];
+
+
+  private orchBase = 'https://lcrb-ai-orch-cudne2ese0ghgtcx.canadacentral-01.azurewebsites.net';
+  private readonly SESSION_ID = 'portal-s1';
+  chatMessages: Array<{ role: 'user' | 'assistant'; content: string }> = [];
+  isBusy = false;
+  lastError?: string;
+
+  awaitingField?: { id: string; label: string; type: string; required?: boolean; help?: string };
+  activeApplicationId?: string;
+  pendingHours?: { open: string; close: string; days: string };
+  pendingMinorsPolicy?: string;
+
 
   // This is Observable will be set to true when there are e-notices attached to the current account.
   // The value determines whether or not to display a warning badge for the "Notices" link in the NavBar.
@@ -71,7 +85,7 @@ export class AppComponent extends FormBase implements OnInit {
     private snackBar: MatSnackBar,
     public dialog: MatDialog,
     private renderer: Renderer2,
-    private httpCLient: HttpClient,
+    private httpClient: HttpClient,
     private router: Router,
     private store: Store<AppState>,
     private accountDataService: AccountDataService,
@@ -145,7 +159,7 @@ export class AppComponent extends FormBase implements OnInit {
     const headers = new HttpHeaders({
       'Content-Type': "text/html; charset=UTF-8"
     });
-    this.httpCLient.get<string>(decodeURI(url), { headers })
+    this.httpClient.get<string>(decodeURI(url), { headers })
       .subscribe(
         res => {
           this.testAPIRestul = res.toString();
@@ -255,7 +269,7 @@ export class AppComponent extends FormBase implements OnInit {
   }
 
   toggleAISearch() {
-    this.aiSidenav.toggle();
+    this.aiSidenav?.toggle();
   }
 
   handleKeyPress(event: KeyboardEvent) {
@@ -268,7 +282,7 @@ export class AppComponent extends FormBase implements OnInit {
     const inputEl = document.getElementById('searchInput') as HTMLInputElement;
     const query = inputEl.value.trim();
     if (!query) { return; }
-    this.httpCLient.post<any>(
+    this.httpClient.post<any>(
       'https://chatmvp-bydygzcccxb5cwa8.canadacentral-01.azurewebsites.net/api/search',
       { query, index: 'portal-index', top: '5' }
     ).subscribe(data => {
@@ -283,6 +297,122 @@ export class AppComponent extends FormBase implements OnInit {
     });
   }
 
+  handleChatKeypress(e: KeyboardEvent) {
+  if (e.key === 'Enter') { this.sendChat(); }
+}
+
+  sendChat() {
+    const input = document.getElementById('assistantInput') as HTMLInputElement;
+    const text = input?.value?.trim();
+    if (!text) { return; }
+
+    // show user bubble immediately
+    this.chatMessages.push({ role: 'user', content: text });
+    input.value = '';
+
+    // If we're awaiting a field value, upsert instead of chatting
+    if (this.awaitingField && this.activeApplicationId) {
+      this.isBusy = true; this.lastError = undefined;
+
+      const field = this.awaitingField;
+      let value: any = text;
+      if (field.type === 'boolean') {
+        value = /^true|yes|y|1$/i.test(text);
+      }
+      // NOTE: for "compound" hours, you'll supply a small UI later; for now we keep it simple.
+
+      this.upsertField(field.id, value).subscribe({
+        next: (r) => {
+          // Confirmation
+          if (r?.decision === 'warn' && r?.warnings?.length) {
+            this.chatMessages.push({ role: 'assistant', content: `Recorded "${field.label}". Warnings:\n- ${r.warnings.join('\n- ')}` });
+          } else {
+            this.chatMessages.push({ role: 'assistant', content: `Recorded "${field.label}".` });
+          }
+
+          // Recompute next field
+          this.getReview().subscribe({
+            next: (rev) => {
+              // find next missing field
+              this.fetchFields().subscribe({
+                next: (ff) => {
+                  const fields = ff?.fields || [];
+                  const missing: string[] = rev?.missing || [];
+                  const fid = missing[0];
+                  const nf = fields.find((f: any) => f.id === fid);
+                  if (nf) {
+                    this.awaitingField = nf;
+                    this.chatMessages.push({
+                      role: 'assistant',
+                      content: `Next field: ${nf.label} (${nf.id})${nf.required ? ' [required]' : ''}`
+                    });
+                  } else {
+                    this.awaitingField = undefined;
+                    // Optional: show warnings summary if any
+                    if (rev?.warnings?.length) {
+                      this.chatMessages.push({ role: 'assistant', content: `Review warnings:\n- ${rev.warnings.join('\n- ')}` });
+                    }
+                    this.chatMessages.push({ role: 'assistant', content: 'All required fields are complete. You can upload a floorplan, compute fees, and submit.' });
+                  }
+                },
+                error: () => { this.chatMessages.push({ role: 'assistant', content: 'Could not load fields.' }); }
+              });
+            },
+            error: () => { this.chatMessages.push({ role: 'assistant', content: 'Could not review application.' }); }
+          });
+        },
+        error: () => {
+          this.lastError = 'Assistant failed to save your answer.';
+          this.chatMessages.push({ role: 'assistant', content: 'Sorry—could not save that. Please try again.' });
+        },
+        complete: () => { this.isBusy = false; }
+      });
+
+      return; // IMPORTANT: do not fall through to /chat
+    }
+
+    // Normal chat flow
+    this.isBusy = true; this.lastError = undefined;
+    const body = { session_id: 'portal-s1', message: text, selected_index: 'portal-index' };
+    this.httpClient.post<any>(`${this.orchBase}/chat`, body).subscribe({
+      next: (res) => {
+        this.chatCtas = res?.ctas || [];
+        const a = res?.rag?.answer || res?.rag?.summary || res?.message || 'OK';
+        this.chatMessages.push({ role: 'assistant', content: a });
+
+        if (res?.application_id || res?.state?.active_application_id) {
+          this.activeApplicationId = res.application_id || res.state.active_application_id;
+        }
+        if (res?.next_field) {
+          this.awaitingField = res.next_field;
+          this.chatMessages.push({
+            role: 'assistant',
+            content: `Next field: ${res.next_field.label} (${res.next_field.id})${res.next_field.required ? ' [required]' : ''}`
+          });
+        }
+      },
+      error: () => {
+        this.lastError = 'Assistant failed to respond.';
+        this.chatMessages.push({ role: 'assistant', content: 'Sorry—something went wrong.' });
+      },
+      complete: () => { this.isBusy = false; }
+    });
+  }
+
+
+  navigateTo(path: string | any[], params?: any) {
+    if (Array.isArray(path)) {
+      this.router.navigate(path as any, params ? { queryParams: params } : undefined);
+    } else {
+      this.router.navigate([path], params ? { queryParams: params } : undefined);
+    }
+  }
+
+  openHref(url?: string) {
+    if (url) { window.open(url, '_blank'); }
+  }
+
+
   openFeedbackDialog() {
      const dialogRef = this.dialog.open(FeedbackComponent, {
         disableClose: true,
@@ -290,4 +420,104 @@ export class AppComponent extends FormBase implements OnInit {
         maxHeight: "95vh"
       });
   }
+
+  fetchFields() {
+    return this.httpClient.get<any>(`${this.orchBase}/application/fields`, {
+      params: { session_id: this.SESSION_ID }
+    });
+  }
+
+  upsertField(field_id: string, value: any) {
+    const fd = new FormData();
+    fd.append('application_id', this.activeApplicationId || '');
+    fd.append('session_id', 'portal-s1');
+    fd.append('field_id', field_id);
+    // hours must be JSON string; booleans as strings
+    if (field_id === 'hours') {
+      fd.append('value', JSON.stringify(value));
+    } else if (typeof value === 'boolean') {
+      fd.append('value', String(value));
+    } else {
+      fd.append('value', String(value));
+    }
+    return this.httpClient.post<any>(`${this.orchBase}/application/upsert`, fd);
+  }
+
+  getReview() {
+    return this.httpClient.get<any>(`${this.orchBase}/application/review`, {
+      params: { session_id: this.SESSION_ID }
+    });
+  }
+
+  getFees() {
+    return this.httpClient.get<any>(`${this.orchBase}/application/fees`, {
+      params: { session_id: this.SESSION_ID }
+    });
+  }
+
+  submitApplication(attestation = true) {
+    const fd = new FormData();
+    fd.append('attestation', String(attestation));
+    return this.httpClient.post<any>(`${this.orchBase}/application/submit`, fd, {
+      params: { session_id: this.SESSION_ID }
+    });
+  }
+
+  triggerFilePicker() {
+    (document.getElementById('floorplanInput') as HTMLInputElement)?.click();
+  }
+
+  async handleFloorplanSelected(evt: Event) {
+    const input = evt.target as HTMLInputElement;
+    const file = input?.files?.[0];
+    if (!file) return;
+
+    const fd = new FormData();
+    fd.append('file', file);
+    this.isBusy = true; this.lastError = undefined;
+    this.httpClient.post<any>(`${this.orchBase}/upload/floorplan`, fd, {
+      params: { session_id: this.SESSION_ID }
+    }).subscribe({
+      next: (res) => {
+        if (res?.passed) {
+          this.chatMessages.push({ role: 'assistant', content: 'Floorplan passed screening and was recorded.' });
+        } else {
+          this.chatMessages.push({ role: 'assistant', content: `Screening issues:\n- ${res?.reasons?.join('\n- ') || 'Unknown issue'}` });
+        }
+      },
+      error: () => {
+        this.lastError = 'Upload failed.';
+        this.chatMessages.push({ role: 'assistant', content: 'Sorry—floorplan upload failed.' });
+      },
+      complete: () => { this.isBusy = false; input.value = ''; }
+    });
+  }
+
+  handleCta(c: any) {
+    if (c.routerLink) {
+      this.navigateTo(c.routerLink, c.params);
+      return;
+    }
+    // Label-based fallbacks for now (you can switch to explicit 'action' later)
+    const label = (c.label || '').toLowerCase();
+    if (label.includes('upload floorplan')) {
+      this.triggerFilePicker();
+    } else if (label.includes('open application') && this.activeApplicationId) {
+      this.navigateTo(['/applications', this.activeApplicationId], c.params);
+    } else if (label.includes('compute fees') || label.includes('fees')) {
+      this.getFees().subscribe(res => {
+        this.chatMessages.push({ role: 'assistant', content: `Estimated fees: $${(res?.total ?? 0).toFixed(2)}` });
+      });
+    } else if (label.includes('submit')) {
+      this.submitApplication(true).subscribe(res => {
+        if (res?.ok) {
+          this.chatMessages.push({ role: 'assistant', content: `Submitted. Receipt: ${res.receipt_id}` });
+        } else {
+          this.chatMessages.push({ role: 'assistant', content: `Cannot submit: ${res?.error || 'Unknown error'}` });
+        }
+      });
+    }
+  }
+
+
 }

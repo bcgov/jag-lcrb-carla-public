@@ -362,7 +362,6 @@ button:focus {
 }
 
 .search-title {
-  font-size: 1.25rem;
   font-weight: 600;
   margin-bottom: 12px;
 }
@@ -376,7 +375,6 @@ button:focus {
 .search-input {
   flex: 1;
   padding: 8px 12px;
-  font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 4px 0 0 4px;
   &:focus {
@@ -386,7 +384,6 @@ button:focus {
 
 .search-button {
   padding: 8px 16px;
-  font-size: 1rem;
   border: 1px solid #003366;
   background-color: #003366;
   color: #fff;
@@ -419,6 +416,95 @@ button:focus {
     }
   }
 }
+/* Keep sidenav visible and structured */
+.ai-search-sidenav {
+  width: 360px;
+  border-left: 1px solid #e0e0e0;
+}
+.ai-search-sidenav .search-section {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden; /* required so the sticky footer works cleanly */
+}
+
+/* Pills → look like buttons, centered */
+.ai-quick-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.ai-quick-nav .mat-mdc-chip-option,
+.ai-quick-nav .mat-mdc-chip {
+  border-radius: 999px;
+  background: #f2f6ff;          /* filled background */
+  border: 1px solid #cfe0ff;
+  padding: 6px 12px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.ai-quick-nav .mat-mdc-chip-option:hover,
+.ai-quick-nav .mat-mdc-chip:hover {
+  background: #e8f0ff;
+  border-color: #b8d2ff;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+}
+.ai-quick-nav mat-icon {
+  font-size: 18px;
+  height: 18px;
+  width: 18px;
+  margin-right: 6px;
+}
+
+/* Messages area grows; input sticks to bottom */
+.messages {
+  flex: 1 1 auto;
+  min-height: 0;          /* important for flex overflow */
+  max-height: none;       /* let flex control height */
+  overflow: auto;
+  margin-bottom: 8px;
+}
+.msg-row {
+  display: flex;
+  gap: 8px;
+  margin: 6px 0;
+}
+.msg-row.assistant mat-icon {
+  margin-top: 2px;
+}
+.bubble {
+  background: #f5f5f5;
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+/* Intro message spacing (uses same bubble style) */
+.messages.intro {
+  margin-bottom: 12px;
+}
+
+/* Chat input pinned to bottom of the viewport */
+.chat-input {
+  position: sticky;
+  bottom: 0;
+  background: #fff;       /* mask content beneath when scrolling */
+  padding-top: 8px;
+  padding-bottom: 8px;
+  display: flex;
+  gap: 8px;
+  z-index: 1;
+}
+
+/* Optional: make the progress bar not jump content */
+mat-progress-bar {
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+}
+
 
 
 ::ng-deep {

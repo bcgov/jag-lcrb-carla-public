@@ -5,25 +5,67 @@
     position="end"
     class="ai-search-sidenav"
     [opened]="showAISearch"
+    fixedInViewport="true"
   >
-    <!-- Search Section -->
+    <!-- AI Sidebar -->
     <div class="search-section">
-    <!-- Close button -->
-    <button mat-icon-button aria-label="Close AI Search" class="ai-search-close" (click)="toggleAISearch()">
-      <mat-icon>close</mat-icon>
-    </button>
-      <h4 class="search-title">Just ask</h4>
-      <div class="search-container">
-        <input 
-          type="text" 
-          class="search-input" 
-          placeholder="Enter a prompt here"
-          id="searchInput"
-          (keypress)="handleKeyPress($event)"
-        />
-        <button class="search-button" (click)="handleSearch()">Search</button>
-      </div>
-      <div id="search-results" class="search-results"></div>
+      <!-- Close button -->
+      <button mat-icon-button aria-label="Close AI Search" class="ai-search-close" (click)="toggleAISearch()">
+        <mat-icon>close</mat-icon>
+      </button>
+        <h4 class="search-title">AI Assistant (beta)</h4>
+        <mat-divider style="margin: 16px 0;"></mat-divider>
+
+        <div *ngIf="!chatMessages.length" class="messages intro">
+          <div class="msg-row assistant">
+            <mat-icon>smart_toy</mat-icon>
+              <div class="bubble">
+                Hello!
+                <br/>
+                I am an AI assistant that can help you find information, navigate the portal, and complete applications.
+                Just ask a question below or chose any of the available actions. 
+              </div>
+          </div>
+        </div>
+
+        <!-- Chat Bubbles -->
+        <div class="messages">
+          <div *ngFor="let m of chatMessages" class="msg-row" [ngClass]="m.role" style="display:flex; gap:8px; margin:6px 0;">
+            <mat-icon *ngIf="m.role==='assistant'">smart_toy</mat-icon>
+            <div class="bubble" style="background:#f5f5f5; border-radius:8px; padding:8px 10px; flex:1;">
+              {{ m.content }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Assistant-returned CTAs -->
+        <div class="assistant-ctas" *ngIf="chatCtas?.length">
+          <button *ngFor="let c of chatCtas"
+                  mat-stroked-button
+                  (click)="handleCta(c)">
+            {{ c.label }}
+          </button>
+        </div>
+
+        <!-- Hidden file input for floorplan upload -->
+        <input id="floorplanInput" type="file" accept=".pdf,.png,.jpg,.jpeg"
+          style="display:none" (change)="handleFloorplanSelected($event)" />
+
+        <!-- Chat Input -->
+        <div class="chat-input" style="display:flex; gap:8px;">
+          <input id="assistantInput"
+                type="text"
+                class="search-input"
+                placeholder="Ask or say what you need…"
+                (keypress)="handleChatKeypress($event)" />
+          <button class="search-button" (click)="sendChat()" [disabled]="isBusy">
+            Send
+          </button>
+        </div>
+
+        <mat-progress-bar *ngIf="isBusy" mode="indeterminate" style="margin-top:8px;"></mat-progress-bar>
+        <mat-hint *ngIf="lastError" style="color:#c62828;">{{ lastError }}</mat-hint>
+
     </div>
   </mat-sidenav>
 
