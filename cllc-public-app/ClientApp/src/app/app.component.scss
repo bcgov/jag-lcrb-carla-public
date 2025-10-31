@@ -366,6 +366,11 @@ button:focus {
   margin-bottom: 12px;
 }
 
+.search-subtitle {
+  font-size: 11px;
+  color: #777;
+}
+
 .search-container {
   display: flex;
   gap: 8px;
@@ -497,6 +502,56 @@ button:focus {
   gap: 8px;
   z-index: 1;
 }
+
+.ai-resume-banner,
+.ai-mode-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0;
+  padding: 8px;
+  border-radius: 8px;
+  flex-direction: column;
+  align-items: stretch;
+}
+.required-text { color: #c62828 !important; font-weight: 700; }
+.ai-new-btn { margin-bottom: 8px; }
+
+
+.ai-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.ai-resume-banner {
+  border: 1px dashed #cfd8dc;
+  background: #fff;
+}
+
+.ai-mode-banner {
+  border: 1px solid #dfe3e8;
+  background: #f8fafc;
+}
+
+.ai-chip {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  background: #337ab7;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.ai-note {
+  font-size: 12px;
+  color: #546e7a;
+}
+
+.flex-1 { flex: 1; }
+
 
 /* Optional: make the progress bar not jump content */
 mat-progress-bar {

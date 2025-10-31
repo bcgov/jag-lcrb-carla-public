@@ -14,9 +14,11 @@
         <mat-icon>close</mat-icon>
       </button>
         <h4 class="search-title">AI Assistant (beta)</h4>
-        <mat-divider style="margin: 16px 0;"></mat-divider>
+        <button mat-stroked-button class="ai-new-btn" (click)="newSession()">New Session</button>
+        <p class="search-subtitle">This information is AI generated and does not constitute legal advice. It may be incomplete or contain errors. Please consult official sources for verification.</p>
+        <mat-divider style="margin: 8px 0;"></mat-divider>
 
-        <div *ngIf="!chatMessages.length" class="messages intro">
+        <!-- <div *ngIf="!chatMessages.length" class="messages intro">
           <div class="msg-row assistant">
             <mat-icon>smart_toy</mat-icon>
               <div class="bubble">
@@ -26,17 +28,46 @@
                 Just ask a question below or chose any of the available actions. 
               </div>
           </div>
+        </div> -->
+
+        <!-- Mode Banner (Chat or Application) -->
+        <!-- Resume application banner -->
+        <div *ngIf="mode==='chat' && activeApplicationId" class="ai-resume-banner">
+          <span class="ai-note">Draft ready: {{ activeApplicationId }}</span>
+          <button mat-stroked-button (click)="resumeApplication()">Resume</button>
         </div>
 
-        <!-- Chat Bubbles -->
-        <div class="messages">
-          <div *ngFor="let m of chatMessages" class="msg-row" [ngClass]="m.role" style="display:flex; gap:8px; margin:6px 0;">
-            <mat-icon *ngIf="m.role==='assistant'">smart_toy</mat-icon>
-            <div class="bubble" style="background:#f5f5f5; border-radius:8px; padding:8px 10px; flex:1;">
-              {{ m.content }}
-            </div>
+        <!-- Application mode banner -->
+        <div *ngIf="mode==='app'" class="ai-mode-banner">
+          <span class="ai-chip">Editing application: {{ activeApplicationId || '—' }}</span>
+          <span class="ai-note flex-1">Your messages will be saved to this application.</span>
+          <div class="ai-actions">
+            <button mat-stroked-button (click)="explainField()" [disabled]="!awaitingField">Explain</button>
+            <button mat-stroked-button (click)="skipField()" [disabled]="!awaitingField">Skip</button>
+            <button mat-button color="warn" (click)="exitApplicationMode()">Exit</button>
           </div>
         </div>
+
+
+
+        <!-- Chat Bubbles -->
+        <div class="messages" #msgList style = "height:60vh; overflow-y:auto;">
+          <div *ngFor="let m of chatMessages" class="msg-row" [ngClass]="m.role" style="display:flex; gap:8px; margin:6px 0;">
+            <mat-icon *ngIf="m.role==='assistant'">smart_toy</mat-icon>
+            <div class="bubble"
+              [innerHTML]="m.content"
+              style="background:#f5f5f5; border-radius:8px; padding:8px 10px; flex:1;">
+            </div>
+          </div>
+          <div #bottomAnchor></div>
+        </div>
+
+        <div class="intro-actions" *ngIf="mode==='chat' && chatMessages?.length===1" style="display:flex; gap:8px; flex-wrap:wrap; margin:4px 0 12px;">
+          <button mat-stroked-button (click)="quickAction('renewals')">Check upcoming licence renewals</button>
+          <button mat-stroked-button (click)="quickAction('startLP')">Start a Liquor Primary application</button>
+          <button mat-stroked-button (click)="quickAction('validateDocs')">Validate application documents</button>
+        </div>
+
 
         <!-- Assistant-returned CTAs -->
         <div class="assistant-ctas" *ngIf="chatCtas?.length">
@@ -56,10 +87,10 @@
           <input id="assistantInput"
                 type="text"
                 class="search-input"
-                placeholder="Ask or say what you need…"
+                [placeholder]="mode==='app' && awaitingField ? ('Enter: ' + awaitingField.label) : 'Ask or say what you need…' "
                 (keypress)="handleChatKeypress($event)" />
           <button class="search-button" (click)="sendChat()" [disabled]="isBusy">
-            Send
+            {{ mode==='app' ? 'Save' : 'Send' }}
           </button>
         </div>
 
@@ -168,7 +199,17 @@
 
           <div class="app-main">
             <breadcrumb></breadcrumb>
-            <router-outlet></router-outlet>
+
+            <!-- Demo Mock Iframe (shown when Open Application CTA is used) -->
+            <div [style.display]="showMockApp ? 'block' : 'none'" style="margin: 12px 0;">
+              <iframe
+                id="demoApp"
+                src="/assets/mock-app.html"
+                style="width:100%; height:70vh; border:1px solid #dfe3e8; border-radius:8px; background:#fff;"
+              ></iframe>
+            </div>
+
+            <router-outlet *ngIf="!showMockApp"></router-outlet>
           </div>
 
           <app-insert id="sidebar-right" class="sidebar-right"></app-insert>
@@ -182,7 +223,7 @@
             <strong>Chat with us</strong>
           </button>
           <button class="ai-search-button btn btn-primary btn-sm" (click)="toggleAISearch()">
-            <strong>AI Search</strong>
+            <strong>AI Assistant</strong>
           </button>
           <button
             *ngIf="currentUser"
