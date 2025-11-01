@@ -46,8 +46,6 @@
     <PackageReference Include="Serilog.Sinks.Splunk" Version="3.6.0" />
     <PackageReference Include="Spire.Doc" Version="11.9.19" />
     <PackageReference Include="Winista.MimeDetect" Version="1.0.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.32" />
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.35.0" />
   </ItemGroup>
 
 
@@ -55,8 +53,6 @@
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
     <Compile Remove="openshift\**" />
     <Compile Remove="Test\**" />
-    <Compile Remove="**\obj\**\*.cs" />
-    <Compile Remove="**\bin\**\*.cs" />
     <Content Remove="$(SpaRoot)**" />
     <Content Remove="openshift\**" />
     <Content Remove="Test\**" />
