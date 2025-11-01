@@ -1,8 +1,9 @@
-import { Component, OnInit, Renderer2 } from "@angular/core";
+import { Component, OnInit, OnDestroy, Renderer2, ViewChild, ElementRef, AfterViewInit, AfterViewChecked } from "@angular/core";
 import { NavigationEnd, Router } from "@angular/router";
 import { User } from "@models/user.model";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatSidenav } from "@angular/material/sidenav";
 import { isDevMode } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { AppState } from "./app-state/models/app-state";
@@ -38,7 +39,7 @@ const Months = [
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"]
 })
-export class AppComponent extends FormBase implements OnInit {
+export class AppComponent extends FormBase implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked {
   faInternetExplorer = faInternetExplorer;
   faBell = faBell;
   faBusinessTime = faBusinessTime;
@@ -58,7 +59,7 @@ export class AppComponent extends FormBase implements OnInit {
   eligibilityFeatureOn: boolean;
   isEligibilityDialogOpen: boolean;
   showNavbar = true;
-  testAPIRestul = "";
+  testAPIResult = "";  
 
   // This is Observable will be set to true when there are e-notices attached to the current account.
   // The value determines whether or not to display a warning badge for the "Notices" link in the NavBar.
@@ -68,7 +69,7 @@ export class AppComponent extends FormBase implements OnInit {
     private snackBar: MatSnackBar,
     public dialog: MatDialog,
     private renderer: Renderer2,
-    private httpCLient: HttpClient,
+    private httpClient: HttpClient,
     private router: Router,
     private store: Store<AppState>,
     private accountDataService: AccountDataService,
@@ -119,6 +120,7 @@ export class AppComponent extends FormBase implements OnInit {
   ngOnInit(): void {
     this.reloadUser();
     this.loadVersionInfo();
+    window.addEventListener('message', this.handleMockMessage);
 
     this.store.select(state => state.legalEntitiesState)
       .pipe(takeWhile(() => this.componentActive))
@@ -126,8 +128,17 @@ export class AppComponent extends FormBase implements OnInit {
       .subscribe(state => {
         this.businessProfiles = state.legalEntities;
       });
+    
+    // Initialize AI sidebar with intro message
+    if (!this.chatMessages.length) {
+      this.chatMessages.push(this.introMessage);
+      this.scrollToBottom();
+    }
   }
 
+  ngOnDestroy(): void {
+    window.removeEventListener('message', this.handleMockMessage);
+  }
 
   loadVersionInfo() {
     this.versionInfoDataService.getVersionInfo()
@@ -138,14 +149,14 @@ export class AppComponent extends FormBase implements OnInit {
   }
 
   makeAPICall(url: string) {
-    this.testAPIRestul = "";
+    this.testAPIResult = "";
     const headers = new HttpHeaders({
       'Content-Type': "text/html; charset=UTF-8"
     });
-    this.httpCLient.get<string>(decodeURI(url), { headers })
+    this.httpClient.get<string>(decodeURI(url), { headers })
       .subscribe(
         res => {
-          this.testAPIRestul = res.toString();
+          this.testAPIResult = res.toString();
         },
         err => {
           console.log(err);
@@ -177,7 +188,6 @@ export class AppComponent extends FormBase implements OnInit {
       dialogRef.afterClosed().subscribe(() => this.isEligibilityDialogOpen = false);
     }
   }
-
 
   reloadUser() {
     this.userDataService.loadUserToStore().then(() => {
@@ -251,11 +261,581 @@ export class AppComponent extends FormBase implements OnInit {
     imWindow.focus();
   }
 
+  navigateTo(path: string | any[], params?: any) {
+    if (Array.isArray(path)) {
+      this.router.navigate(path as any, params ? { queryParams: params } : undefined);
+    } else {
+      this.router.navigate([path], params ? { queryParams: params } : undefined);
+    }
+  }
+
+  openHref(url?: string) {
+    if (url) { window.open(url, '_blank'); }
+  }
+
   openFeedbackDialog() {
      const dialogRef = this.dialog.open(FeedbackComponent, {
         disableClose: true,
         autoFocus: false,
         maxHeight: "95vh"
       });
+  }
+
+  /* AI Sidebar */
+  @ViewChild('aiSidebar') aiSidebar: MatSidenav;
+  mode: 'chat' | 'app' = 'chat';
+  chatCtas: Array<{ label: string; href?: string; routerLink?: string | any[]; params?: any }> = [];
+  private orchBase = 'https://lcrb-ai-orch-cudne2ese0ghgtcx.canadacentral-01.azurewebsites.net';
+  private SESSION_ID = (sessionStorage.getItem('aiSessionId')
+    || (sessionStorage.setItem('aiSessionId', 'portal-' + Date.now()), sessionStorage.getItem('aiSessionId'))) as string;
+  private introMessage: { role: 'assistant' | 'user'; content: string } = {
+    role: 'assistant',
+    content: `Hello!<br/>I am an AI assistant that can help you find information, 
+              navigate the portal, and complete applications. Just ask a question below 
+              or chose any of the available actions. `
+  };
+  chatMessages: Array<{ role: 'user' | 'assistant'; content: string }> = [];
+  isBusy = false;
+  lastError?: string;
+  awaitingField?: { id: string; label: string; type: string; required?: boolean; help?: string };
+  activeApplicationId?: string;
+
+
+
+  // Auto Scroll to bottom on new messages
+  @ViewChild('msgList') msgList!: ElementRef<HTMLDivElement>
+  @ViewChild('bottomAnchor') bottomAnchor!: ElementRef<HTMLDivElement>;
+  private lastMsgCount = 0;
+  private scrollToBottom(){
+    requestAnimationFrame(() => {
+      const el = this.bottomAnchor?.nativeElement;
+      if (el) el.scrollIntoView({ behavior: 'auto', block: 'end' });
+    });
+  }
+  ngAfterViewInit(): void {
+      this.scrollToBottom();
+  }
+  ngAfterViewChecked(){
+    if (this.chatMessages.length !== this.lastMsgCount){
+      this.lastMsgCount = this.chatMessages.length;
+      this.scrollToBottom();
+    }
+  }
+  
+  // Helpers
+  async toggleSidebar() {
+    this.aiSidebar?.toggle();
+  }
+
+  handleChatKeypress(e: KeyboardEvent) {
+    if (e.key === 'Enter') { this.sendChat(); }
+  }
+  private defaultAppCtas () {
+    return [
+      { label: this.showMockApp ? 'Close Application' : 'Open Application' },
+      { label: 'Upload Floorplan' }];
+  }
+
+  private setMode(m: 'chat' | 'app'){
+    this.mode = m;
+    if (m === 'chat'){
+      this.awaitingField = undefined;
+      this.chatCtas = [];
+      this.showMockApp = false;
+    } else {
+      if (!this.chatCtas?.length) {
+        this.chatCtas = this.defaultAppCtas();
+      }
+    }
+  }
+
+  enterApplicationMode() {
+    this.setMode('app');
+    this.computeNextFieldPrompt?.()
+  }
+
+  exitApplicationMode() {
+    this.setMode('chat');
+  }
+
+  skipField() {
+    this.awaitingField = undefined;
+    this.computeNextFieldPrompt?.();
+  }
+
+  explainField() {
+    if (this.awaitingField) {
+      this.fieldSummary?.(this.awaitingField);
+    }
+  }
+
+  resumeApplication(){
+    if (this.activeApplicationId) {
+      this.setMode('app');
+      this.computeNextFieldPrompt?.();
+    }
+  }
+
+  newSession() {
+    this.SESSION_ID = 'portal-' + Date.now();
+    sessionStorage.setItem('aiSessionId', this.SESSION_ID);
+    this.activeApplicationId = undefined;
+    this.awaitingField = undefined;
+    this.showMockApp = false;
+    this.setMode('chat');
+    this.chatMessages = [this.introMessage];
+    this.chatCtas = [];
+    this.scrollToBottom();
+  }
+
+  fetchFields() {
+    return this.httpClient.get<any>(`${this.orchBase}/application/fields`, {
+      params: { session_id: this.SESSION_ID }
+    });
+  }
+
+  upsertField(field_id: string, value: any) {
+    const fd = new FormData();
+    fd.append('application_id', this.activeApplicationId || '');
+    fd.append('session_id', this.SESSION_ID);
+    fd.append('field_id', field_id);
+    fd.append('value', String(value));
+
+    return this.httpClient.post<any>(`${this.orchBase}/application/upsert`, fd);
+  }
+
+  getReview() {
+    return this.httpClient.get<any>(`${this.orchBase}/application/review`, {
+      params: { session_id: this.SESSION_ID }
+    });
+  }
+
+  getFees() {
+    return this.httpClient.get<any>(`${this.orchBase}/application/fees`, {
+      params: { session_id: this.SESSION_ID }
+    });
+  }
+
+  submitApplication(attestation = true) {
+    const fd = new FormData();
+    fd.append('attestation', String(attestation));
+    return this.httpClient.post<any>(`${this.orchBase}/application/submit`, fd, {
+      params: { session_id: this.SESSION_ID }
+    });
+  }
+
+  triggerFilePicker() {
+    (document.getElementById('floorplanInput') as HTMLInputElement)?.click();
+  }
+
+  quickAction(kind: 'renewals' | 'startLP' | 'validateDocs') {
+    if (kind === 'renewals') {
+      const input = document.getElementById('assistantInput') as HTMLInputElement;
+      if (input) input.value = 'check my upcoming licence renewals';
+      this.sendChat();
+      // this.chatMessages.push({ role: 'assistant', content: 'You currently do not have any upcoming licence renewals.' });
+      // this.scrollToBottom();
+    } else if (kind === 'startLP') {
+      const input = document.getElementById('assistantInput') as HTMLInputElement;
+      if (input) input.value = 'start a liquor primary application';
+      this.sendChat();
+    } else if (kind === 'validateDocs') {
+      this.chatCtas = [{ label: 'Upload Floorplan' }];
+    }
+  }
+
+  handleCta(c: any) {
+    const label = (c.label || '').toLowerCase();
+
+    // Detect and handle mock app CTAs
+    if (label.includes('open application') || (c.href && c.href.includes('/assets/mock'))) {
+      if (!this.activeApplicationId) {
+        this.chatMessages.push({ role: 'assistant', content: 'No active application to open.' });
+        this.scrollToBottom();
+        return;
+      }
+      this.openMockAppOnce();
+      setTimeout(() => this.refreshMockState(), 300);
+      this.chatCtas = this.defaultAppCtas();
+      return;
+    }
+    if (label.includes('close application')) {
+      this.showMockApp = false;
+      this.chatCtas = this.defaultAppCtas();
+      return;
+    }
+
+    // Fallbacks
+    if (c.href) {
+      this.openHref(c.href);
+      return;
+    }
+    if (c.routerLink) {
+      this.navigateTo(c.routerLink, c.params);
+      return;
+    }
+
+    // Label-based fallbacks
+    if (label.includes('upload floorplan')) {
+      this.triggerFilePicker();
+    } else if (label.includes('compute fees') || label.includes('fees')) {
+      this.getFees().subscribe(res => {
+        this.chatMessages.push({ role: 'assistant', content: `Estimated fees: $${(res?.total ?? 0).toFixed(2)}` });
+        this.scrollToBottom();
+      });
+    } else if (label.includes('submit')) {
+      this.submitApplication(true).subscribe(res => {
+        if (res?.ok) {
+          this.chatMessages.push({ role: 'assistant', content: `Submitted. Receipt: ${res.receipt_id}` });
+          this.scrollToBottom();
+        } else {
+          this.chatMessages.push({ role: 'assistant', content: `Cannot submit: ${res?.error || 'Unknown error'}` });
+          this.scrollToBottom();
+        }
+      });
+    }
+  }
+
+  private computeNextFieldPrompt() {
+    const body = { session_id: this.SESSION_ID, message: 'next field', selected_index: 'portal-index' };
+    this.httpClient.post<any>(`${this.orchBase}/chat`, body).subscribe({
+      next: (r) => {
+        const nf = r?.next_field;
+
+        if (nf) {
+          this.awaitingField = nf;
+          this.setMode('app');
+          if (!this.chatMessages[this.chatMessages.length - 1]?.content?.includes(nf.label)) {
+            this.chatMessages.push({
+              role: 'assistant',
+              content: `Please complete the next field: <strong>${nf.label}</strong>${nf.required ? ' <span class="required-text">*Required</span>' : ''}`
+            });
+            this.scrollToBottom();
+          }
+          if (this.showMockApp) { this.refreshMockState(); }
+          return;
+        }
+
+        // handle the case where backend returns no next form field
+        this.awaitingField = undefined;
+        const missing: string[] = r?.review?.missing || [];
+
+        if (missing.includes('floor_plan')) {
+          // Only non-form item(s) remain – steer to the floorplan upload
+          this.chatMessages.push({
+            role: 'assistant',
+            content: 'All form fields are complete. Please upload a stamped floorplan to continue.'
+          });
+          this.chatCtas = [
+            { label: this.showMockApp ? 'Close Application' : 'Open Application' },
+            { label: 'Upload Floorplan' }
+          ];
+        } else if (missing.length) {
+          // Some other non-form items remain (unlikely with your current schema, but safe)
+          this.chatMessages.push({
+            role: 'assistant',
+            content: 'Some items are still outstanding.'
+          });
+          this.chatCtas = (r?.ctas && r.ctas.length) ? r.ctas : this.defaultAppCtas();
+        } else {
+          // Nothing missing at all – show submit path
+          this.chatMessages.push({
+            role: 'assistant',
+            content: 'All required fields are complete. You can compute fees and submit.'
+          });
+          // Prefer backend CTAs if provided (it adds "Submit Application" when nothing is missing)
+          this.chatCtas = (r?.ctas && r.ctas.length)
+            ? r.ctas
+            : [
+                { label: this.showMockApp ? 'Close Application' : 'Open Application' },
+                { label: 'Upload Floorplan' },
+                { label: 'Compute Fees' },
+                { label: 'Submit Application' }
+              ];
+        }
+
+        this.scrollToBottom();
+        if (this.showMockApp) { this.refreshMockState(); }
+      }
+    });
+  }
+
+
+  private fieldSummary(field: { id: string; label: string }) {
+    const prompt = `You are a form assistant gathering input on the next form field. Briefly explain the "${field.label}" field, then ask the user for the value for their application. Keep it brief and simple using natural language`;
+    const body = { session_id: this.SESSION_ID, message: prompt, selected_index: 'portal-index' };
+    this.httpClient.post<any>(`${this.orchBase}/chat`, body).subscribe({
+      next: (res) => {
+        const text = res?.rag?.answer || res?.rag?.summary || res?.message;
+        if (text) {
+          this.chatMessages.push({ role: 'assistant', content: text });
+          this.scrollToBottom();
+        } 
+      }
+    });
+  }
+
+  /* 
+    Main function that controls the chat flow. In application mode, it will 
+    upsert field values to the backend directly instead of going through the 
+    main orchestrated /chat API.
+    TODO: Add upsert logic to the orchestrator and simplify this function.
+  */
+  async sendChat() {
+    const input = document.getElementById('assistantInput') as HTMLInputElement;
+    const text = input?.value?.trim();
+    if (!text) { return; }
+
+    // show user bubble immediately
+    this.chatMessages.push({ role: 'user', content: text });
+    this.scrollToBottom();
+    input.value = '';
+
+    // If awaiting a field value, upsert instead of chatting
+    if (this.awaitingField && this.activeApplicationId) {
+      this.isBusy = true; this.lastError = undefined;
+
+      const field = this.awaitingField;
+      let value: any = text;
+      if (field.type === 'boolean') {
+        value = /^true|yes|y|1$/i.test(text);
+      }
+
+      this.upsertField(field.id, value).subscribe({
+        next: (r) => {
+          if (r?.decision === 'warn' && r?.warnings?.length) {
+            this.chatMessages.push({ role: 'assistant', content: `Saved "${field.label}". Warnings:\n- ${r.warnings.join('\n- ')}` });
+            this.scrollToBottom();
+          } else {
+            this.chatMessages.push({ role: 'assistant', content: `Saved "${field.label}".` });
+            this.scrollToBottom();
+          }
+          if (this.showMockApp) {
+            this.postToMock({ type: 'setField', id: field.id, value });
+          }
+          this.getReview().subscribe({
+            next: (rev) => {
+              this.fetchFields().subscribe({
+                next: (ff) => {
+                  const fields = ff?.fields || [];
+                  const missing: string[] = rev?.missing || [];
+                  const fid = missing[0];
+                  const nf = fields.find((f: any) => f.id === fid);
+                  if (nf) {
+                    this.awaitingField = nf;
+                    this.mode = 'app';
+                    this.chatMessages.push({
+                      role: 'assistant',
+                      content: `Please complete the next field: <strong>${nf.label}</strong>${nf.required ? ' <span class="required-text">*Required</span>' : ''}`
+                    });
+                    this.scrollToBottom();
+                    if (this.showMockApp) { this.refreshMockState(); }
+                  } else {
+                    this.awaitingField = undefined;
+                    if (rev?.warnings?.length) {
+                      this.chatMessages.push({ role: 'assistant', content: `Review warnings:\n- ${rev.warnings.join('\n- ')}` });
+                      this.scrollToBottom();
+                    }
+                    this.chatMessages.push({ role: 'assistant', content: 'All required fields are complete. You can upload a floorplan, compute fees, and submit.' });
+                    this.scrollToBottom();
+                    if (this.showMockApp) { this.refreshMockState(); }
+                  }
+                },
+                error: () => { this.chatMessages.push({ role: 'assistant', content: 'Could not load fields.' }); this.scrollToBottom(); }
+              });
+            },
+            error: () => { this.chatMessages.push({ role: 'assistant', content: 'Could not review application.' }); this.scrollToBottom(); }
+          });
+        },
+        error: () => {
+          this.lastError = 'Assistant failed to save your answer.';
+          this.chatMessages.push({ role: 'assistant', content: 'Sorry—could not save that. Please try again.' });
+          this.scrollToBottom();
+        },
+        complete: () => { this.isBusy = false; }
+      });
+
+      return; // IMPORTANT: Return after upsert flow to avoid normal chat flow
+    }
+
+    // Normal chat flow
+    this.isBusy = true; this.lastError = undefined;
+    const body = { session_id: this.SESSION_ID, message: text, selected_index: 'portal-index' };
+    const makeCall = () => this.httpClient.post<any>(`${this.orchBase}/chat`, body);
+
+    const doRequest = () => makeCall().subscribe({
+      next: (res) => {
+        this.chatCtas = this.mode === 'app'
+          ? ((res?.ctas && res.ctas.length) ? res.ctas : this.defaultAppCtas())
+          : (res?.ctas || []).filter(c =>
+              (c?.href || c?.routerLink) &&
+              !/(^|\b)(open|close)\s+application\b|upload\s+floorplan|fees|submit/i.test(c?.label || '')
+            );
+
+        // clear default app CTAs if we’re in chat mode
+        if (this.mode === 'chat' && !res?.ctas?.length) {
+          this.chatCtas = [];
+        }
+
+        const a = res?.rag?.answer || res?.rag?.summary || res?.message || 'OK';
+        if (res?.intent === 'START_APPLICATION'){
+          this.setMode('app');
+          this.chatMessages.push({
+            role: 'assistant',
+            content: 'Started a Liquor Primary application draft. Your responses will be saved as field inputs for the application. Click the "More" button from the application toolbar to get more information on a field or click "Exit" at any time continue chatting.'
+          })
+          this.scrollToBottom();
+        } else {
+            this.chatMessages.push({ role: 'assistant', content: a });
+            this.scrollToBottom();
+        }
+
+        if (res?.application_id || res?.state?.active_application_id) {
+          this.activeApplicationId = res.application_id || res.state.active_application_id;
+          if (this.mode === 'app') {
+              this.chatCtas = (res?.ctas && res.ctas.length) ? res.ctas : [
+                {label: this.showMockApp? 'Close Application' : 'Open Application'},
+                {label: 'Upload Floorplan'}
+              ]
+          }
+        }
+        if (res?.intent === 'START_APPLICATION' && (res?.application_id || res?.state?.active_application_id)) {
+          this.computeNextFieldPrompt();
+        }
+        if (res?.next_field && this.mode === 'app') {
+          this.awaitingField = res.next_field;
+          this.chatMessages.push({
+            role: 'assistant',
+            content: `Please complete the next field: <strong>${res.next_field.label}</strong>${res.next_field.required ? ' <span class="required-text">*Required</span>' : ''}`
+          });
+          this.scrollToBottom();
+          // this.fieldSummary(res.next_field);
+        }
+      },
+      complete: () => { this.isBusy = false; }
+    });
+
+    doRequest();
+  }
+
+  /*
+    Document intelligence based floorplan upload and screening.
+    Runs some basic validation for scale text, load stamp, and professional
+    designations. ONLY supports floorplan validation, the other uploads are mocked. 
+    /upload: restricted to active applications
+    /validate: for general screening without an application
+  */
+  async handleFloorplanSelected(evt: Event) {
+    const input = evt.target as HTMLInputElement;
+    const file = input?.files?.[0];
+    if (!file) return;
+
+    const fd = new FormData();
+    fd.append('file', file);
+    this.isBusy = true; this.lastError = undefined;
+    const url = this.activeApplicationId
+      ? `${this.orchBase}/upload/floorplan`
+      : `${this.orchBase}/validate/floorplan`;
+
+    const params = this.activeApplicationId ? { session_id: this.SESSION_ID } : undefined;
+
+    this.httpClient.post<any>(url, fd, { params }).subscribe({
+      next: (res) => {
+        const passed = res?.passed ?? res?.screening?.passed;
+        const reasons: string[] = res?.reasons ?? (res?.screening?.issues || []).map((i: any) => i?.message).filter(Boolean);
+        this.chatMessages.push({
+          role: 'assistant',
+          content: passed
+            ? (this.activeApplicationId
+                ? 'Floorplan passed screening and was recorded.'
+                : 'Floorplan passed screening.')
+            : `Screening issues:\n- ${reasons.length ? reasons.join('\n- ') : 'Unknown issue'}`
+        });
+        this.scrollToBottom();
+        // TODO: add back this guardrail after demo
+        // if (passed) {
+          this.computeNextFieldPrompt?.();
+        // }
+      },
+      error: () => {
+        this.lastError = 'Upload failed.';
+        this.chatMessages.push({ role: 'assistant', content: 'Sorry—floorplan upload failed.' });
+        this.scrollToBottom();
+      },
+      complete: () => { this.isBusy = false; input.value = ''; }
+    });
+
+  }
+
+  // Demo iframe wiring
+  showMockApp = false;
+
+  private get demoFrame(): HTMLIFrameElement | null {
+    return document.getElementById('demoApp') as HTMLIFrameElement | null;
+  }
+
+  private postToMock(msg: any) {
+    try { this.demoFrame?.contentWindow?.postMessage(msg, '*'); } catch {}
+  }
+
+  private openMockAppOnce() {
+    if (!this.activeApplicationId) { return; }
+    if (!this.showMockApp) { this.showMockApp = true; }
+  }
+
+  private handleMockMessage = (evt: MessageEvent) => {
+    const msg = evt?.data || {};
+    if (!msg || typeof msg !== 'object') return;
+    switch (msg.type) {
+      case 'mock:init':
+      case 'mock:requestState':
+        this.refreshMockState();
+        break;
+      case 'mock:setField': {
+        const { field_id, value } = msg;
+        if (!field_id) return;
+        this.upsertField(field_id, value).subscribe({
+          next: () => this.refreshMockState(),
+          error: () => this.postToMock({ type: 'toast', level: 'error', text: 'Could not save field.' })
+        });
+        break;
+      }
+      case 'mock:submit':
+        this.submitApplication(true).subscribe({
+          next: (res) => this.postToMock({ type: 'submitted', ok: !!res?.ok, receipt_id: res?.receipt_id }),
+          error: () => this.postToMock({ type: 'toast', level: 'error', text: 'Submit failed.' })
+        });
+        break;
+      default:
+        break;
+    }
+  };
+
+  private refreshMockState() {
+    // Guard for no active application
+    if (!this.activeApplicationId){
+      this.postToMock({ type: 'state', application_id: null, next_field: null, missing: [], warnings: [], fields: [] });
+      return;
+    }
+    // Gather latest application state for the iframe
+    const afterFields = (fields: any[]) => {
+      this.getReview().subscribe({
+        next: (rev) => {
+          this.postToMock({
+            type: 'state',
+            application_id: this.activeApplicationId || null,
+            next_field: this.awaitingField || null,
+            missing: rev?.missing || [],
+            warnings: rev?.warnings || [],
+            fields: fields || []
+          });
+        },
+        error: () => this.postToMock({ type: 'toast', level: 'error', text: 'Could not load review.' })
+      });
+    };
+    this.fetchFields().subscribe({
+      next: (ff) => afterFields(ff?.fields || []),
+      error: () => afterFields([])
+    });
   }
 }

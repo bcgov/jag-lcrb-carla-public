@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Liquor Primary – Demo Application</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body { font-family: system-ui, Arial, sans-serif; margin: 0; background:#fafafa; }
+    header, footer { background:#003366; color:#fff; padding:12px 16px; }
+    main { max-width: 1100px; margin: 24px auto; padding: 0 16px 64px; }
+    h2 { margin: 24px 0 8px; font-size: 18px; }
+    .grid { display: grid; gap: 12px; grid-template-columns: repeat(12, 1fr); }
+    .col-6 { grid-column: span 6; } .col-12 { grid-column: span 12; } .col-4 { grid-column: span 4; }
+    .field { display:flex; flex-direction:column; gap:6px; background:#fff; border:1px solid #e7e7e7; border-radius:8px; padding:10px 12px; }
+    .field.required label::after { content:" *"; color:#c62828; }
+    label { font-weight:600; font-size: 13px; }
+    input[type="text"], input[type="email"], input[type="tel"], input[type="number"], select, .hours-grid input {
+      border:1px solid #cfd8dc; border-radius:6px; padding:8px; background:#fff;
+    }
+    .uploads { display:grid; gap:12px; grid-template-columns: repeat(3, 1fr); }
+    .upload-tile { border:1px dashed #90a4ae; border-radius:8px; padding:12px; background:#fff; min-height:72px; position:relative; }
+    .upload-tile .status { position:absolute; right:10px; top:10px; font-size:12px; }
+    .badge { display:inline-block; padding:2px 8px; border-radius:999px; font-size:12px; background:#eee; }
+    .badge.ok { background:#e6f4ea; color:#1e7a34; }
+    .badge.missing { background:#fdecea; color:#b71c1c; }
+    .hours-grid { display:grid; grid-template-columns: 1.2fr 1fr 1fr; gap:8px; align-items:center; }
+    .note { font-size:12px; color:#546e7a; }
+  </style>
+</head>
+<body>
+  <header>
+    <strong>Liquor Primary Licence Application</strong> · (Mock)
+  </header>
+
+  <main id="app"></main>
+
+  <footer>
+    <span class="note">This is a mock for demonstration purposes. Data is not persisted.</span>
+  </footer>
+
+  <script type="application/json" id="schema">
+  {
+    "title": "Liquor Primary Application (Demo)",
+    "sections": [
+      {
+        "id": "uploads1",
+        "title": "Legal Entity Document Requirements",
+        "layout": "uploads",
+        "fields": [
+          { "id":"centralSecuritiesRegister", "label":"Central Securities Register (shareholder register)", "type":"file" },
+          { "id":"supportingBusinessForms", "label":"Supporting Business Forms", "type":"file" },
+          { "id":"noticeOfArticles", "label":"Notice of Articles (or Register of Directors and Officers)", "type":"file" },
+          { "id":"personalHistorySummary", "label":"Personal History Summary Documents", "type":"file" },
+          { "id":"listOfShareholders", "label":"Shareholders (individuals) Holding Less Than 10% Interest (or Non-Voting Shareholders)", "type":"file" }
+        ]
+      },
+      {
+        "id": "establishment",
+        "title": "Establishment details",
+        "layout": "grid",
+        "fields": [
+          { "id":"establishmentName", "label":"Proposed Establishment Name", "type":"string", "required": true, "span": 6 },
+          { "id":"establishmentAddressStreet", "label":"Address", "type":"string", "required": true, "span": 6 },
+          { "id":"establishmentAddressCity", "label":"City", "type":"string", "required": true, "span": 4 },
+          { "id":"establishmentAddressProvince", "label":"Province", "type":"string", "default":"British Columbia", "span": 4 },
+          { "id":"establishmentAddressPostalCode", "label":"Postal Code", "type":"string", "required": true, "span": 4 },
+          { "id":"establishmentAddressCountry", "label":"Country", "type":"string", "default":"Canada", "span": 4 },
+          { "id":"isOnINLand", "label":"Is the proposed establishment on Treaty First Nation Land?", "type":"boolean", "required": false, "span": 4 },
+          { "id":"isPermittedInZoning", "label":"Confirm that current zoning at the proposed location permits a Liquor Primary.", "type":"boolean", "required": false, "span": 4 }
+        ]
+      },
+      {
+        "id": "uploads2",
+        "title": "Letter of Intent",
+        "layout": "uploads",
+        "fields": [
+          { "id":"letterOfIntent", "label":"Letter of Intent", "type":"file" }
+        ]
+      },
+      {
+        "id": "lgin",
+        "title": "Local Government / Indigenous Nation and Police Jurisdiction",
+        "layout": "grid",
+        "fields": [
+          { "id":"indigenousNation", "label":"Local Government / Indigenous Nation", "type":"string", "span": 6 },
+          { "id":"policeJurisdiction", "label":"Police Jurisdiction", "type":"string", "span": 6 }
+        ]
+      },
+      {
+        "id": "ops",
+        "title": "Establishment Operation Details",
+        "layout": "grid",
+        "fields": [
+          { "id":"establishmentEmail", "label":"Establishment Email", "type":"email", "span": 6 },
+          { "id":"establishmentPhone", "label":"Establishment Phone", "type":"tel", "span": 6 },
+          { "id":"isHasPatio", "label":"Will the establishment have a patio?", "type":"boolean", "span": 6 },
+          { "id":"establishmentType", "label":"Establishment Type", "type":"string", "required": true, "span": 6 },
+          { "id":"totalOccupantLoad", "label":"Total Occupant Load", "type":"number", "required": true, "span": 4 }
+        ]
+      },
+      {
+        "id": "uploads3",
+        "title": "Signage and Floor Plan",
+        "layout": "uploads",
+        "fields": [
+          { "id":"signageDocuments", "label":"Photos or renderings of the establishment's signage", "type":"file" },
+          { "id":"floorPlan", "label":"Floor Plan", "type":"file" },
+          { "id":"sitePlan", "label":"Site Plan", "type":"file" }
+        ]
+      },
+      {
+        "id": "hours",
+        "title": "Hours of Sale",
+        "layout": "hours"
+      },
+      {
+        "id": "applicant",
+        "title": "Application Contact Details",
+        "layout": "grid",
+        "fields": [
+          { "id":"contactPersonFirstName", "label":"First Name", "type":"string", "required": true, "span": 4 },
+          { "id":"contactPersonLastName", "label":"Last Name", "type":"string", "required": true, "span": 4 },
+          { "id":"contactPersonRole", "label":"Title / Position", "type":"string", "span": 4 },
+          { "id":"contactPersonPhone", "label":"Phone Number (main)", "type":"tel", "required": true, "span": 6 },
+          { "id":"contactPersonEmail", "label":"Email", "type":"email", "required": true, "span": 6 }
+        ]
+      },
+      {
+        "id": "declarations",
+        "title": "Declarations",
+        "layout": "grid",
+        "fields": [
+          { "id":"authorizedToSubmit", "label":"I understand and affirm that I am authorized to submit the application", "type":"boolean", "required": true, "span": 12 },
+          { "id":"isOwner", "label":"I am the owner of the business in respect of which the licence is to be issued or will become the owner before the licence is issued.", "type":"boolean", "required": true, "span": 12 }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <script>
+  (function () {
+    const appEl = document.getElementById('app');
+    const schema = JSON.parse(document.getElementById('schema').textContent);
+    function el(tag, attrs={}, ...children) {
+      const n = document.createElement(tag);
+      Object.entries(attrs).forEach(([k,v]) => {
+        if (k === 'class') n.className = v;
+        else if (k === 'dataset') Object.entries(v).forEach(([dk,dv]) => n.dataset[dk] = dv);
+        else if (k.startsWith('on') && typeof v === 'function') n.addEventListener(k.substring(2), v);
+        else n.setAttribute(k, v);
+      });
+      children.forEach(c => n.appendChild(typeof c === 'string' ? document.createTextNode(c) : c));
+      return n;
+    }
+    function fieldToNode(f) {
+      const span = f.span || 12;
+      const wrap = el('div', { class: `field col-${span} ${f.required ? 'required':''}`, dataset: { field: f.id } },
+        el('label', {}, f.label || f.id)
+      );
+      let input;
+      switch (f.type) {
+        case 'string':
+        case 'email':
+        case 'tel':
+          input = el('input', { type: f.type === 'string' ? 'text' : f.type, value: f.default || '' });
+          break;
+        case 'number':
+          input = el('input', { type: 'number', value: f.default ?? '' });
+          break;
+        case 'select':
+          input = el('select', {},
+            ...(f.options || []).map(opt => el('option', { value: opt }, opt))
+          );
+          if (f.default) input.value = f.default;
+          break;
+        case 'boolean':
+          input = el('input', { type: 'checkbox' });
+          if (f.default === true) input.checked = true;
+          break;
+        case 'file':
+          input = el('div', { class:'upload-tile' },
+            el('div', {}, f.label || f.id),
+            el('div', { class:'status badge missing', dataset:{ statusFor: f.id } }, 'missing')
+          );
+          break;
+        default:
+          input = el('input', { type:'text' });
+      }
+      wrap.appendChild(input);
+      return wrap;
+    }
+    function renderSection(sec) {
+      const sectionEl = el('section', {}, el('h2', {}, sec.title || sec.id));
+      if (sec.layout === 'uploads') {
+        const grid = el('div', { class:'uploads' });
+        (sec.fields || []).forEach(f => grid.appendChild(fieldToNode(f)));
+        sectionEl.appendChild(grid);
+      } else if (sec.layout === 'hours') {
+        const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+        const grid = el('div', { class:'field col-12' },
+          el('label', {}, 'Weekly Hours'),
+          el('div', { class:'hours-grid', dataset:{ field:'hours' } },
+            ...days.flatMap(d => [
+              el('div', {}, d),
+              el('input', { type:'text', placeholder:'Open (e.g., 10:00)' }),
+              el('input', { type:'text', placeholder:'Close (e.g., 01:30)' })
+            ])
+          )
+        );
+        sectionEl.appendChild(grid);
+      } else {
+        const grid = el('div', { class:'grid' });
+        (sec.fields || []).forEach(f => grid.appendChild(fieldToNode(f)));
+        sectionEl.appendChild(grid);
+      }
+      return sectionEl;
+    }
+    function renderApp() {
+      appEl.innerHTML = '';
+      schema.sections.forEach(sec => appEl.appendChild(renderSection(sec)));
+    }
+    window.addEventListener('message', (evt) => {
+      const msg = evt.data || {};
+      if (msg.type === 'setField') {
+        const node = appEl.querySelector(`[data-field="${msg.id}"]`);
+        if (!node) return;
+        const control = node.querySelector('input, select, textarea, .upload-tile');
+        if (!control) return;
+        if (control.classList.contains('upload-tile')) return;
+        if (control.type === 'checkbox') control.checked = !!msg.value;
+        else control.value = msg.value ?? '';
+      } else if (msg.type === 'uploadStatus') {
+        const badge = appEl.querySelector(`.status.badge[data-status-for="${msg.id}"]`);
+        if (badge) {
+          if (msg.status === 'ok') { badge.textContent = 'uploaded'; badge.classList.add('ok'); badge.classList.remove('missing'); }
+          else { badge.textContent = 'missing'; badge.classList.add('missing'); badge.classList.remove('ok'); }
+        }
+      } else if (msg.type === 'toast') {
+        alert(String(msg.message || 'Notice'));
+      }
+    });
+    renderApp();
+  })();
+  </script>
+</body>
+</html>
