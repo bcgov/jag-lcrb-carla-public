@@ -338,8 +338,8 @@ button:focus {
   z-index: 1000;
 }
 
-// AI Search Sidebar
-.ai-search-sidenav {
+// AI sidebar Sidebar
+.ai-sidebar {
   background: #fff;
   padding: 16px;
   width: 300px;
@@ -347,37 +347,37 @@ button:focus {
 }
 
 // Close button
-.ai-search-close {
+.ai-sidebar-close {
   position: absolute;
   top: 8px;
   right: 8px;
   z-index: 1;
 }
 
-// Search layout
-.search-section {
+// sidebar layout
+.sidebar-section {
   display: flex;
   flex-direction: column;
   height: 100%;
 }
 
-.search-title {
+.sidebar-title {
   font-weight: 600;
   margin-bottom: 12px;
 }
 
-.search-subtitle {
+.sidebar-subtitle {
   font-size: 11px;
   color: #777;
 }
 
-.search-container {
+.sidebar-container {
   display: flex;
   gap: 8px;
   margin-bottom: 16px;
 }
 
-.search-input {
+.sidebar-input {
   flex: 1;
   padding: 8px 12px;
   border: 1px solid #ccc;
@@ -387,7 +387,7 @@ button:focus {
   }
 }
 
-.search-button {
+.sidebar-button {
   padding: 8px 16px;
   border: 1px solid #003366;
   background-color: #003366;
@@ -400,19 +400,19 @@ button:focus {
   }
 }
 
-.search-results {
+.sidebar-results {
   flex: 1;
   overflow-y: auto;
 }
 
-.search-summary {
+.sidebar-summary {
   margin-bottom: 12px;
   font-style: italic;
 }
 
-.search-result-item {
+.sidebar-result-item {
   margin-bottom: 10px;
-  .search-result-title {
+  .sidebar-result-title {
     font-weight: 500;
     text-decoration: none;
     color: #1a5a96;
@@ -422,11 +422,11 @@ button:focus {
   }
 }
 /* Keep sidenav visible and structured */
-.ai-search-sidenav {
+.ai-sidebar {
   width: 360px;
   border-left: 1px solid #e0e0e0;
 }
-.ai-search-sidenav .search-section {
+.ai-sidebar .sidebar-section {
   padding: 16px;
   display: flex;
   flex-direction: column;

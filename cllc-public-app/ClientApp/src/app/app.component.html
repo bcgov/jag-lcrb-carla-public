@@ -1,34 +1,21 @@
 <mat-sidenav-container *ngIf="featureFlagService.initialized" class="app-sidenav-container">
   <mat-sidenav
-    #aiSidenav
+    #aiSidebar
     mode="side"
     position="end"
-    class="ai-search-sidenav"
-    [opened]="showAISearch"
+    class="ai-sidebar"
     fixedInViewport="true"
   >
     <!-- AI Sidebar -->
-    <div class="search-section">
+    <div class="sidebar-section">
       <!-- Close button -->
-      <button mat-icon-button aria-label="Close AI Search" class="ai-search-close" (click)="toggleAISearch()">
+      <button mat-icon-button aria-label="Close AI sidebar" class="ai-sidebar-close" (click)="toggleSidebar()">
         <mat-icon>close</mat-icon>
       </button>
-        <h4 class="search-title">AI Assistant (beta)</h4>
+        <h4 class="sidebar-title">AI Assistant (beta)</h4>
         <button mat-stroked-button class="ai-new-btn" (click)="newSession()">New Session</button>
-        <p class="search-subtitle">This information is AI generated and does not constitute legal advice. It may be incomplete or contain errors. Please consult official sources for verification.</p>
+        <p class="sidebar-subtitle">This information is AI generated and does not constitute legal advice. It may be incomplete or contain errors. Please consult official sources for verification.</p>
         <mat-divider style="margin: 8px 0;"></mat-divider>
-
-        <!-- <div *ngIf="!chatMessages.length" class="messages intro">
-          <div class="msg-row assistant">
-            <mat-icon>smart_toy</mat-icon>
-              <div class="bubble">
-                Hello!
-                <br/>
-                I am an AI assistant that can help you find information, navigate the portal, and complete applications.
-                Just ask a question below or chose any of the available actions. 
-              </div>
-          </div>
-        </div> -->
 
         <!-- Mode Banner (Chat or Application) -->
         <!-- Resume application banner -->
@@ -82,14 +69,19 @@
         <input id="floorplanInput" type="file" accept=".pdf,.png,.jpg,.jpeg"
           style="display:none" (change)="handleFloorplanSelected($event)" />
 
+        <!-- Hidden file input for generic upload -->
+        <input id="genericUploadInput" type="file" 
+          style="display:none" (change)="handleGenericUploadSelected($event)">
+
+
         <!-- Chat Input -->
         <div class="chat-input" style="display:flex; gap:8px;">
           <input id="assistantInput"
                 type="text"
-                class="search-input"
+                class="sidebar-input"
                 [placeholder]="mode==='app' && awaitingField ? ('Enter: ' + awaitingField.label) : 'Ask or say what you need…' "
                 (keypress)="handleChatKeypress($event)" />
-          <button class="search-button" (click)="sendChat()" [disabled]="isBusy">
+          <button class="sidebar-button" (click)="sendChat()" [disabled]="isBusy">
             {{ mode==='app' ? 'Save' : 'Send' }}
           </button>
         </div>
@@ -216,13 +208,13 @@
         </main>
       </div>
 
-      <!-- Chat With Us and AI Search buttons -->
+      <!-- Chat With Us and AI sidebar buttons -->
       <div tabindex="3">
         <div class="chat-button-container app-widgets">
           <button class="chat-button btn btn-primary btn-sm" (click)="openChat('en-CA', 'main')">
             <strong>Chat with us</strong>
           </button>
-          <button class="ai-search-button btn btn-primary btn-sm" (click)="toggleAISearch()">
+          <button class="ai-sidebar-button btn btn-primary btn-sm" (click)="toggleSidebar()">
             <strong>AI Assistant</strong>
           </button>
           <button
