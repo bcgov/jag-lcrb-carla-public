@@ -338,6 +338,230 @@ button:focus {
   z-index: 1000;
 }
 
+// AI sidebar Sidebar
+.ai-sidebar {
+  background: #fff;
+  padding: 16px;
+  width: 300px;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.2);
+}
+
+// Close button
+.ai-sidebar-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 1;
+}
+
+// sidebar layout
+.sidebar-section {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.sidebar-title {
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.sidebar-subtitle {
+  font-size: 11px;
+  color: #777;
+}
+
+.sidebar-container {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.sidebar-input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px 0 0 4px;
+  &:focus {
+    outline: 2px solid #337ab7;
+  }
+}
+
+.sidebar-button {
+  padding: 8px 16px;
+  border: 1px solid #003366;
+  background-color: #003366;
+  color: #fff;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  &:hover {
+    background-color: #286090;
+  }
+}
+
+.sidebar-results {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.sidebar-summary {
+  margin-bottom: 12px;
+  font-style: italic;
+}
+
+.sidebar-result-item {
+  margin-bottom: 10px;
+  .sidebar-result-title {
+    font-weight: 500;
+    text-decoration: none;
+    color: #1a5a96;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+/* Keep sidenav visible and structured */
+.ai-sidebar {
+  width: 360px;
+  border-left: 1px solid #e0e0e0;
+}
+.ai-sidebar .sidebar-section {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden; /* required so the sticky footer works cleanly */
+}
+
+/* Pills → look like buttons, centered */
+.ai-quick-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.ai-quick-nav .mat-mdc-chip-option,
+.ai-quick-nav .mat-mdc-chip {
+  border-radius: 999px;
+  background: #f2f6ff;          /* filled background */
+  border: 1px solid #cfe0ff;
+  padding: 6px 12px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.ai-quick-nav .mat-mdc-chip-option:hover,
+.ai-quick-nav .mat-mdc-chip:hover {
+  background: #e8f0ff;
+  border-color: #b8d2ff;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+}
+.ai-quick-nav mat-icon {
+  font-size: 18px;
+  height: 18px;
+  width: 18px;
+  margin-right: 6px;
+}
+
+/* Messages area grows; input sticks to bottom */
+.messages {
+  flex: 1 1 auto;
+  min-height: 0;          /* important for flex overflow */
+  max-height: none;       /* let flex control height */
+  overflow: auto;
+  margin-bottom: 8px;
+}
+.msg-row {
+  display: flex;
+  gap: 8px;
+  margin: 6px 0;
+}
+.msg-row.assistant mat-icon {
+  margin-top: 2px;
+}
+.bubble {
+  background: #f5f5f5;
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+/* Intro message spacing (uses same bubble style) */
+.messages.intro {
+  margin-bottom: 12px;
+}
+
+/* Chat input pinned to bottom of the viewport */
+.chat-input {
+  position: sticky;
+  bottom: 0;
+  background: #fff;       /* mask content beneath when scrolling */
+  padding-top: 8px;
+  padding-bottom: 8px;
+  display: flex;
+  gap: 8px;
+  z-index: 1;
+}
+
+.ai-resume-banner,
+.ai-mode-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0;
+  padding: 8px;
+  border-radius: 8px;
+  flex-direction: column;
+  align-items: stretch;
+}
+.required-text { color: #c62828 !important; font-weight: 700; }
+.ai-new-btn { margin-bottom: 8px; }
+
+
+.ai-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.ai-resume-banner {
+  border: 1px dashed #cfd8dc;
+  background: #fff;
+}
+
+.ai-mode-banner {
+  border: 1px solid #dfe3e8;
+  background: #f8fafc;
+}
+
+.ai-chip {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  background: #337ab7;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.ai-note {
+  font-size: 12px;
+  color: #546e7a;
+}
+
+.flex-1 { flex: 1; }
+
+
+/* Optional: make the progress bar not jump content */
+mat-progress-bar {
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+}
+
+
+
 ::ng-deep {
   .mat-calendar-body-selected {
     background-color: #337ab7;
