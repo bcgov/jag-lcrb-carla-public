@@ -1,93 +1,84 @@
 <mat-sidenav-container *ngIf="featureFlagService.initialized" class="app-sidenav-container">
-  <mat-sidenav
-    #aiSidebar
-    mode="side"
-    position="end"
-    class="ai-sidebar"
-    fixedInViewport="true"
-  >
+  <mat-sidenav #aiSidebar mode="side" position="end" class="ai-sidebar" fixedInViewport="true">
     <!-- AI Sidebar -->
     <div class="sidebar-section">
       <!-- Close button -->
       <button mat-icon-button aria-label="Close AI sidebar" class="ai-sidebar-close" (click)="toggleSidebar()">
         <mat-icon>close</mat-icon>
       </button>
-        <h4 class="sidebar-title">AI Assistant (beta)</h4>
-        <button mat-stroked-button class="ai-new-btn" (click)="newSession()">New Session</button>
-        <p class="sidebar-subtitle">This information is AI generated and does not constitute legal advice. It may be incomplete or contain errors. Please consult official sources for verification.</p>
-        <mat-divider style="margin: 8px 0;"></mat-divider>
+      <h4 class="sidebar-title">AI Assistant (beta)</h4>
+      <button mat-stroked-button class="ai-new-btn" (click)="newSession()">New Session</button>
+      <p class="sidebar-subtitle">This information is AI generated and does not constitute legal advice. It may be
+        incomplete or contain errors. Please consult official sources for verification.</p>
+      <mat-divider style="margin: 8px 0;"></mat-divider>
 
-        <!-- Mode Banner (Chat or Application) -->
-        <!-- Resume application banner -->
-        <div *ngIf="mode==='chat' && activeApplicationId" class="ai-resume-banner">
-          <span class="ai-note">Draft ready: {{ activeApplicationId }}</span>
-          <button mat-stroked-button (click)="resumeApplication()">Resume</button>
+      <!-- Mode Banner (Chat or Application) -->
+      <!-- Resume application banner -->
+      <div *ngIf="mode==='chat' && activeApplicationId" class="ai-resume-banner">
+        <span class="ai-note">Draft ready: {{ activeApplicationId }}</span>
+        <button mat-stroked-button (click)="resumeApplication()">Resume</button>
+      </div>
+
+      <!-- Application mode banner -->
+      <div *ngIf="mode==='app'" class="ai-mode-banner">
+        <span class="ai-chip">Editing application: {{ activeApplicationId || '—' }}</span>
+        <span class="ai-note flex-1">Your messages will be saved to this application.</span>
+        <div class="ai-actions">
+          <button mat-stroked-button (click)="explainField()" [disabled]="!awaitingField">Explain</button>
+          <button mat-stroked-button (click)="skipField()" [disabled]="!awaitingField">Skip</button>
+          <button mat-button color="warn" (click)="exitApplicationMode()">Exit</button>
         </div>
+      </div>
 
-        <!-- Application mode banner -->
-        <div *ngIf="mode==='app'" class="ai-mode-banner">
-          <span class="ai-chip">Editing application: {{ activeApplicationId || '—' }}</span>
-          <span class="ai-note flex-1">Your messages will be saved to this application.</span>
-          <div class="ai-actions">
-            <button mat-stroked-button (click)="explainField()" [disabled]="!awaitingField">Explain</button>
-            <button mat-stroked-button (click)="skipField()" [disabled]="!awaitingField">Skip</button>
-            <button mat-button color="warn" (click)="exitApplicationMode()">Exit</button>
+
+
+      <!-- Chat Bubbles -->
+      <div class="messages" #msgList style="height:60vh; overflow-y:auto;">
+        <div *ngFor="let m of chatMessages" class="msg-row" [ngClass]="m.role"
+          style="display:flex; gap:8px; margin:6px 0;">
+          <mat-icon *ngIf="m.role==='assistant'">smart_toy</mat-icon>
+          <div class="bubble" [innerHTML]="m.content"
+            style="background:#f5f5f5; border-radius:8px; padding:8px 10px; flex:1;">
           </div>
         </div>
+        <div #bottomAnchor></div>
+      </div>
+
+      <div class="intro-actions" *ngIf="mode==='chat' && chatMessages?.length===1"
+        style="display:flex; gap:8px; flex-wrap:wrap; margin:4px 0 12px;">
+        <button mat-stroked-button (click)="quickAction('renewals')">Check upcoming licence renewals</button>
+        <button mat-stroked-button (click)="quickAction('startLP')">Start a Liquor Primary application</button>
+        <button mat-stroked-button (click)="quickAction('validateDocs')">Validate application documents</button>
+      </div>
 
 
+      <!-- Assistant-returned CTAs -->
+      <div class="assistant-ctas" *ngIf="chatCtas?.length">
+        <button *ngFor="let c of chatCtas" mat-stroked-button (click)="handleCta(c)">
+          {{ c.label }}
+        </button>
+      </div>
 
-        <!-- Chat Bubbles -->
-        <div class="messages" #msgList style = "height:60vh; overflow-y:auto;">
-          <div *ngFor="let m of chatMessages" class="msg-row" [ngClass]="m.role" style="display:flex; gap:8px; margin:6px 0;">
-            <mat-icon *ngIf="m.role==='assistant'">smart_toy</mat-icon>
-            <div class="bubble"
-              [innerHTML]="m.content"
-              style="background:#f5f5f5; border-radius:8px; padding:8px 10px; flex:1;">
-            </div>
-          </div>
-          <div #bottomAnchor></div>
-        </div>
+      <!-- Hidden file input for floorplan upload -->
+      <input id="floorplanInput" type="file" accept=".pdf,.png,.jpg,.jpeg" style="display:none"
+        (change)="handleFloorplanSelected($event)" />
 
-        <div class="intro-actions" *ngIf="mode==='chat' && chatMessages?.length===1" style="display:flex; gap:8px; flex-wrap:wrap; margin:4px 0 12px;">
-          <button mat-stroked-button (click)="quickAction('renewals')">Check upcoming licence renewals</button>
-          <button mat-stroked-button (click)="quickAction('startLP')">Start a Liquor Primary application</button>
-          <button mat-stroked-button (click)="quickAction('validateDocs')">Validate application documents</button>
-        </div>
+      <!-- Hidden file input for generic upload -->
+      <input id="genericUploadInput" type="file" style="display:none" (change)="handleGenericUploadSelected($event)">
 
 
-        <!-- Assistant-returned CTAs -->
-        <div class="assistant-ctas" *ngIf="chatCtas?.length">
-          <button *ngFor="let c of chatCtas"
-                  mat-stroked-button
-                  (click)="handleCta(c)">
-            {{ c.label }}
-          </button>
-        </div>
+      <!-- Chat Input -->
+      <div class="chat-input" style="display:flex; gap:8px;">
+        <input id="assistantInput" type="text" class="sidebar-input"
+          [placeholder]="mode==='app' && awaitingField ? ('Enter: ' + awaitingField.label) : 'Ask or say what you need…' "
+          (keypress)="handleChatKeypress($event)" />
+        <button class="sidebar-button" (click)="sendChat()" [disabled]="isBusy">
+          {{ mode==='app' ? 'Save' : 'Send' }}
+        </button>
+      </div>
 
-        <!-- Hidden file input for floorplan upload -->
-        <input id="floorplanInput" type="file" accept=".pdf,.png,.jpg,.jpeg"
-          style="display:none" (change)="handleFloorplanSelected($event)" />
-
-        <!-- Hidden file input for generic upload -->
-        <input id="genericUploadInput" type="file" 
-          style="display:none" (change)="handleGenericUploadSelected($event)">
-
-
-        <!-- Chat Input -->
-        <div class="chat-input" style="display:flex; gap:8px;">
-          <input id="assistantInput"
-                type="text"
-                class="sidebar-input"
-                [placeholder]="mode==='app' && awaitingField ? ('Enter: ' + awaitingField.label) : 'Ask or say what you need…' "
-                (keypress)="handleChatKeypress($event)" />
-          <button class="sidebar-button" (click)="sendChat()" [disabled]="isBusy">
-            {{ mode==='app' ? 'Save' : 'Send' }}
-          </button>
-        </div>
-
-        <mat-progress-bar *ngIf="isBusy" mode="indeterminate" style="margin-top:8px;"></mat-progress-bar>
-        <mat-hint *ngIf="lastError" style="color:#c62828;">{{ lastError }}</mat-hint>
+      <mat-progress-bar *ngIf="isBusy" mode="indeterminate" style="margin-top:8px;"></mat-progress-bar>
+      <mat-hint *ngIf="lastError" style="color:#c62828;">{{ lastError }}</mat-hint>
 
     </div>
   </mat-sidenav>
@@ -142,30 +133,15 @@
 
       <div class="content-wrapper" *ngIf="!showBceidTermsOfUse()">
         <!-- /NAVBAR -->
-        <app-navbar
-          *ngIf="showNavbar && !currentUser && !account"
-          [currentUser]="currentUser"
-          [account]="account"
-          [showNoticesBadge]="showNoticesBadge$ | async"
-          [showMessageCenterBadge]="linkedFederalReports?.length"
-          (messageCenterClick)="showMessageCenterContent = !showMessageCenterContent"
-        ></app-navbar>
-        <app-navbar
-          *ngIf="showNavbar && currentUser && !account"
-          [currentUser]="currentUser"
-          [account]="account"
-          [showNoticesBadge]="showNoticesBadge$ | async"
-          [showMessageCenterBadge]="linkedFederalReports?.length"
-          (messageCenterClick)="showMessageCenterContent = !showMessageCenterContent"
-        ></app-navbar>
-        <app-navbar
-          *ngIf="showNavbar && account && currentUser"
-          [currentUser]="currentUser"
-          [account]="account"
-          [showNoticesBadge]="showNoticesBadge$ | async"
-          [showMessageCenterBadge]="linkedFederalReports?.length"
-          (messageCenterClick)="showMessageCenterContent = !showMessageCenterContent"
-        ></app-navbar>
+        <app-navbar *ngIf="showNavbar && !currentUser && !account" [currentUser]="currentUser" [account]="account"
+          [showNoticesBadge]="showNoticesBadge$ | async" [showMessageCenterBadge]="linkedFederalReports?.length"
+          (messageCenterClick)="showMessageCenterContent = !showMessageCenterContent"></app-navbar>
+        <app-navbar *ngIf="showNavbar && currentUser && !account" [currentUser]="currentUser" [account]="account"
+          [showNoticesBadge]="showNoticesBadge$ | async" [showMessageCenterBadge]="linkedFederalReports?.length"
+          (messageCenterClick)="showMessageCenterContent = !showMessageCenterContent"></app-navbar>
+        <app-navbar *ngIf="showNavbar && account && currentUser" [currentUser]="currentUser" [account]="account"
+          [showNoticesBadge]="showNoticesBadge$ | async" [showMessageCenterBadge]="linkedFederalReports?.length"
+          (messageCenterClick)="showMessageCenterContent = !showMessageCenterContent"></app-navbar>
         <!-- /NAVBAR END -->
 
         <section *ngIf="showMessageCenterContent" style="background-color: #FFF; padding: 10px;">
@@ -175,11 +151,8 @@
             <strong>{{ item.establishmentName }}</strong> for
             <strong>{{ Months[+item.reportingPeriodMonth - 1] }} {{ item.reportingPeriodYear }}</strong>
             has not been submitted. The report is due on the 10th of each month.
-            <a
-              style="color: #1a5a96;"
-              (click)="showMessageCenterContent = !showMessageCenterContent"
-              [routerLink]="['/federal-reporting', item.licenseId, item.monthlyReportId]"
-            >
+            <a style="color: #1a5a96;" (click)="showMessageCenterContent = !showMessageCenterContent"
+              [routerLink]="['/federal-reporting', item.licenseId, item.monthlyReportId]">
               Click to action
             </a>
             .
@@ -193,14 +166,19 @@
             <breadcrumb></breadcrumb>
 
             <!-- Demo Mock Iframe (shown when Open Application CTA is used) -->
-            <div [style.display]="showMockApp ? 'block' : 'none'" style="margin: 12px 0;">
+            <!-- <div [style.display]="showMockApp ? 'block' : 'none'" style="margin: 12px 0;">
               <iframe
                 id="demoApp"
                 src="/lcrb/assets/mock-app.html"
                 style="width:100%; height:70vh; border:1px solid #dfe3e8; border-radius:8px; background:#fff;"
               ></iframe>
+            </div> -->
+            <div [style.display]="showMockApp ? 'block' : 'none'" style="margin: 12px 0;">
+              <app-mock-application *ngIf="mockSchema" [schema]="mockSchema" [values]="mockValues"
+                [uploadStatuses]="uploadStatuses" (valueChange)="onMockValueChange($event)"
+                (uploadRequested)="onMockUpload($event)" (submitRequested)="onMockSubmit()">
+              </app-mock-application>
             </div>
-
             <router-outlet *ngIf="!showMockApp"></router-outlet>
           </div>
 
@@ -217,12 +195,8 @@
           <button class="ai-sidebar-button btn btn-primary btn-sm" (click)="toggleSidebar()">
             <strong>AI Assistant</strong>
           </button>
-          <button
-            *ngIf="currentUser"
-            type="button"
-            class="feedback-button btn btn-outline-primary"
-            (click)="openFeedbackDialog()"
-          >
+          <button *ngIf="currentUser" type="button" class="feedback-button btn btn-outline-primary"
+            (click)="openFeedbackDialog()">
             <strong>Feedback</strong>
           </button>
         </div>
@@ -233,52 +207,32 @@
           <div class="container c1">
             <ul class="navbar-nav">
               <li class="c2">
-                <a
-                  href="https://www2.gov.bc.ca/gov/content/home/disclaimer"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  title="Goes to BC Gov Disclaimer Page"
-                >
+                <a href="https://www2.gov.bc.ca/gov/content/home/disclaimer" target="_blank" rel="noopener noreferrer"
+                  title="Goes to BC Gov Disclaimer Page">
                   Disclaimer
                 </a>
               </li>
               <li class="c2">
-                <a
-                  href="https://www2.gov.bc.ca/gov/content/home/privacy"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  title="Goes to BC Gov Privacy Page"
-                >
+                <a href="https://www2.gov.bc.ca/gov/content/home/privacy" target="_blank" rel="noopener noreferrer"
+                  title="Goes to BC Gov Privacy Page">
                   Privacy
                 </a>
               </li>
               <li class="c2">
-                <a
-                  href="https://www2.gov.bc.ca/gov/content/home/accessibility"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  title="Goes to BC Gov Accessibility Page"
-                >
+                <a href="https://www2.gov.bc.ca/gov/content/home/accessibility" target="_blank"
+                  rel="noopener noreferrer" title="Goes to BC Gov Accessibility Page">
                   Accessibility
                 </a>
               </li>
               <li class="c2">
-                <a
-                  href="https://www2.gov.bc.ca/gov/content/home/copyright"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  title="Goes to BC Gov Copyright Page"
-                >
+                <a href="https://www2.gov.bc.ca/gov/content/home/copyright" target="_blank" rel="noopener noreferrer"
+                  title="Goes to BC Gov Copyright Page">
                   Copyright
                 </a>
               </li>
             </ul>
           </div>
-          <a
-            *ngIf="versionInfo?.fileVersion"
-            (click)="openVersionInfoDialog()"
-            class="nav-link version-info"
-          >
+          <a *ngIf="versionInfo?.fileVersion" (click)="openVersionInfoDialog()" class="nav-link version-info">
             {{ versionInfo.fileVersion }}
           </a>
         </nav>
@@ -288,17 +242,9 @@
 </mat-sidenav-container>
 
 <section style="height: 1px; position: absolute; width: 1px; z-index: 10;">
-  <input
-    style="border: none; height: 1px; margin: 0; padding: 0; width: 1px;"
-    type="text"
-    id="testUrl"
-    #testUrl
-  />
-  <button
-    style="border: none; height: 3px; margin: 0; padding: 0; width: 3px;"
-    id="testAPIButton"
-    (click)="makeAPICall(testUrl.value)"
-  ></button>
-  <span style="height: 1px; width: 1px;" id="testAPIResult">{{ testAPIResult  }}</span>
+  <input style="border: none; height: 1px; margin: 0; padding: 0; width: 1px;" type="text" id="testUrl" #testUrl />
+  <button style="border: none; height: 3px; margin: 0; padding: 0; width: 3px;" id="testAPIButton"
+    (click)="makeAPICall(testUrl.value)"></button>
+  <span style="height: 1px; width: 1px;" id="testAPIResult">{{ testAPIResult }}</span>
 
 </section>

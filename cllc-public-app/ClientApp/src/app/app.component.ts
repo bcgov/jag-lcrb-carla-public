@@ -1,33 +1,31 @@
-import { Component, OnInit, OnDestroy, Renderer2, ViewChild, ElementRef, AfterViewInit, AfterViewChecked } from "@angular/core";
-import { NavigationEnd, Router } from "@angular/router";
-import { User } from "@models/user.model";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { AfterViewChecked, AfterViewInit, Component, ElementRef, isDevMode, OnDestroy, OnInit, Renderer2, ViewChild } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
-import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatSidenav } from "@angular/material/sidenav";
-import { isDevMode } from "@angular/core";
-import { Store } from "@ngrx/store";
-import { AppState } from "./app-state/models/app-state";
-import { filter, map, takeWhile } from "rxjs/operators";
-import { FeatureFlagService } from "@services/feature-flag.service";
-import { LegalEntity } from "@models/legal-entity.model";
-import { AccountDataService } from "@services/account-data.service";
-import { FormBase } from "@shared/form-base";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { NavigationEnd, Router } from "@angular/router";
 import { SetCurrentAccountAction } from "@app/app-state/actions/current-account.action";
-import { Account } from "@models/account.model";
-import { VersionInfoDataService } from "@services/version-info-data.service";
-import { VersionInfo } from "@models/version-info.model";
-import { VersionInfoDialogComponent } from "@components/version-info/version-info-dialog.component";
-import { MonthlyReportDataService } from "@services/monthly-report.service";
-import { MonthlyReport, monthlyReportStatus } from "@models/monthly-report.model";
-import { ApplicationDataService } from "@services/application-data.service";
 import { EligibilityFormComponent } from "@components/eligibility-form/eligibility-form.component";
-import { UserDataService } from "@services/user-data.service";
-import { HttpClient } from "@angular/common/http";
-import { HttpHeaders } from "@angular/common/http";
+import { FeedbackComponent } from "@components/feedback/feedback.component";
+import { VersionInfoDialogComponent } from "@components/version-info/version-info-dialog.component";
 import { faInternetExplorer } from "@fortawesome/free-brands-svg-icons";
 import { faBell, faBusinessTime } from "@fortawesome/free-solid-svg-icons";
+import { Account } from "@models/account.model";
+import { LegalEntity } from "@models/legal-entity.model";
+import { MonthlyReport, monthlyReportStatus } from "@models/monthly-report.model";
+import { User } from "@models/user.model";
+import { VersionInfo } from "@models/version-info.model";
+import { Store } from "@ngrx/store";
+import { AccountDataService } from "@services/account-data.service";
+import { ApplicationDataService } from "@services/application-data.service";
+import { FeatureFlagService } from "@services/feature-flag.service";
+import { MonthlyReportDataService } from "@services/monthly-report.service";
+import { UserDataService } from "@services/user-data.service";
+import { VersionInfoDataService } from "@services/version-info-data.service";
+import { FormBase } from "@shared/form-base";
 import { Observable, of } from "rxjs";
-import { FeedbackComponent } from "@components/feedback/feedback.component";
+import { filter, map, takeWhile } from "rxjs/operators";
+import { AppState } from "./app-state/models/app-state";
 
 const Months = [
   "January", "February", "March", "April", "May", "June",
@@ -59,8 +57,10 @@ export class AppComponent extends FormBase implements OnInit, OnDestroy, AfterVi
   eligibilityFeatureOn: boolean;
   isEligibilityDialogOpen: boolean;
   showNavbar = true;
-  testAPIResult = "";  
-
+  testAPIResult = "";
+  mockSchema: any;
+  mockValues: Record<string, any> = {};
+  uploadStatuses: Record<string, 'ok' | 'missing'> = {};
   // This is Observable will be set to true when there are e-notices attached to the current account.
   // The value determines whether or not to display a warning badge for the "Notices" link in the NavBar.
   showNoticesBadge$ = of(false);
@@ -120,15 +120,17 @@ export class AppComponent extends FormBase implements OnInit, OnDestroy, AfterVi
   ngOnInit(): void {
     this.reloadUser();
     this.loadVersionInfo();
-    window.addEventListener('message', this.handleMockMessage);
-
+    // window.addEventListener('message', this.handleMockMessage);
+    this.httpClient.get('/lcrb/assets/mock-app.schema.json').subscribe(schema => {
+      this.mockSchema = schema;
+    });
     this.store.select(state => state.legalEntitiesState)
       .pipe(takeWhile(() => this.componentActive))
       .pipe(filter(state => !!state))
       .subscribe(state => {
         this.businessProfiles = state.legalEntities;
       });
-    
+
     // Initialize AI sidebar with intro message
     if (!this.chatMessages.length) {
       this.chatMessages.push(this.introMessage);
@@ -137,7 +139,7 @@ export class AppComponent extends FormBase implements OnInit, OnDestroy, AfterVi
   }
 
   ngOnDestroy(): void {
-    window.removeEventListener('message', this.handleMockMessage);
+    // window.removeEventListener('message', this.handleMockMessage);
   }
 
   loadVersionInfo() {
@@ -274,11 +276,11 @@ export class AppComponent extends FormBase implements OnInit, OnDestroy, AfterVi
   }
 
   openFeedbackDialog() {
-     const dialogRef = this.dialog.open(FeedbackComponent, {
-        disableClose: true,
-        autoFocus: false,
-        maxHeight: "95vh"
-      });
+    const dialogRef = this.dialog.open(FeedbackComponent, {
+      disableClose: true,
+      autoFocus: false,
+      maxHeight: "95vh"
+    });
   }
 
   /* AI Sidebar */
@@ -290,8 +292,8 @@ export class AppComponent extends FormBase implements OnInit, OnDestroy, AfterVi
     || (sessionStorage.setItem('aiSessionId', 'portal-' + Date.now()), sessionStorage.getItem('aiSessionId'))) as string;
   private introMessage: { role: 'assistant' | 'user'; content: string } = {
     role: 'assistant',
-    content: `Hello!<br/>I am an AI assistant that can help you find information, 
-              navigate the portal, and complete applications. Just ask a question below 
+    content: `Hello!<br/>I am an AI assistant that can help you find information,
+              navigate the portal, and complete applications. Just ask a question below
               or chose any of the available actions. `
   };
   chatMessages: Array<{ role: 'user' | 'assistant'; content: string }> = [];
@@ -306,22 +308,22 @@ export class AppComponent extends FormBase implements OnInit, OnDestroy, AfterVi
   @ViewChild('msgList') msgList!: ElementRef<HTMLDivElement>
   @ViewChild('bottomAnchor') bottomAnchor!: ElementRef<HTMLDivElement>;
   private lastMsgCount = 0;
-  private scrollToBottom(){
+  private scrollToBottom() {
     requestAnimationFrame(() => {
       const el = this.bottomAnchor?.nativeElement;
       if (el) el.scrollIntoView({ behavior: 'auto', block: 'end' });
     });
   }
   ngAfterViewInit(): void {
-      this.scrollToBottom();
+    this.scrollToBottom();
   }
-  ngAfterViewChecked(){
-    if (this.chatMessages.length !== this.lastMsgCount){
+  ngAfterViewChecked() {
+    if (this.chatMessages.length !== this.lastMsgCount) {
       this.lastMsgCount = this.chatMessages.length;
       this.scrollToBottom();
     }
   }
-  
+
   // Helpers
   async toggleSidebar() {
     this.aiSidebar?.toggle();
@@ -330,15 +332,15 @@ export class AppComponent extends FormBase implements OnInit, OnDestroy, AfterVi
   handleChatKeypress(e: KeyboardEvent) {
     if (e.key === 'Enter') { this.sendChat(); }
   }
-  private defaultAppCtas () {
+  private defaultAppCtas() {
     return [
       { label: this.showMockApp ? 'Close Application' : 'Open Application' },
       { label: 'Upload Floorplan' }];
   }
 
-  private setMode(m: 'chat' | 'app'){
+  private setMode(m: 'chat' | 'app') {
     this.mode = m;
-    if (m === 'chat'){
+    if (m === 'chat') {
       this.awaitingField = undefined;
       this.chatCtas = [];
       this.showMockApp = false;
@@ -369,7 +371,7 @@ export class AppComponent extends FormBase implements OnInit, OnDestroy, AfterVi
     }
   }
 
-  resumeApplication(){
+  resumeApplication() {
     if (this.activeApplicationId) {
       this.setMode('app');
       this.computeNextFieldPrompt?.();
@@ -448,14 +450,17 @@ export class AppComponent extends FormBase implements OnInit, OnDestroy, AfterVi
     const label = (c.label || '').toLowerCase();
 
     // Detect and handle mock app CTAs
-    if (label.includes('open application') || (c.href && c.href.includes('/assets/mock'))) {
+    if (label.includes('open application')) {
       if (!this.activeApplicationId) {
         this.chatMessages.push({ role: 'assistant', content: 'No active application to open.' });
         this.scrollToBottom();
         return;
       }
-      this.openMockAppOnce();
-      setTimeout(() => this.refreshMockState(), 300);
+      this.showMockApp = true;
+      this.fetchFields().subscribe({
+        next: (ff) => this.hydrateFromServerFields(ff?.fields || []),
+        error: () => { }
+      });
       this.chatCtas = this.defaultAppCtas();
       return;
     }
@@ -495,7 +500,6 @@ export class AppComponent extends FormBase implements OnInit, OnDestroy, AfterVi
       });
     }
   }
-
   private computeNextFieldPrompt() {
     const body = { session_id: this.SESSION_ID, message: 'next field', selected_index: 'portal-index' };
     this.httpClient.post<any>(`${this.orchBase}/chat`, body).subscribe({
@@ -512,7 +516,7 @@ export class AppComponent extends FormBase implements OnInit, OnDestroy, AfterVi
             });
             this.scrollToBottom();
           }
-          if (this.showMockApp) { this.refreshMockState(); }
+
           return;
         }
 
@@ -547,15 +551,15 @@ export class AppComponent extends FormBase implements OnInit, OnDestroy, AfterVi
           this.chatCtas = (r?.ctas && r.ctas.length)
             ? r.ctas
             : [
-                { label: this.showMockApp ? 'Close Application' : 'Open Application' },
-                { label: 'Upload Floorplan' },
-                { label: 'Compute Fees' },
-                { label: 'Submit Application' }
-              ];
+              { label: this.showMockApp ? 'Close Application' : 'Open Application' },
+              { label: 'Upload Floorplan' },
+              { label: 'Compute Fees' },
+              { label: 'Submit Application' }
+            ];
         }
 
         this.scrollToBottom();
-        if (this.showMockApp) { this.refreshMockState(); }
+
       }
     });
   }
@@ -570,14 +574,14 @@ export class AppComponent extends FormBase implements OnInit, OnDestroy, AfterVi
         if (text) {
           this.chatMessages.push({ role: 'assistant', content: text });
           this.scrollToBottom();
-        } 
+        }
       }
     });
   }
 
-  /* 
-    Main function that controls the chat flow. In application mode, it will 
-    upsert field values to the backend directly instead of going through the 
+  /*
+    Main function that controls the chat flow. In application mode, it will
+    upsert field values to the backend directly instead of going through the
     main orchestrated /chat API.
     TODO: Add upsert logic to the orchestrator and simplify this function.
   */
@@ -603,6 +607,7 @@ export class AppComponent extends FormBase implements OnInit, OnDestroy, AfterVi
 
       this.upsertField(field.id, value).subscribe({
         next: (r) => {
+          this.setMockValue(field.id, value);
           if (r?.decision === 'warn' && r?.warnings?.length) {
             this.chatMessages.push({ role: 'assistant', content: `Saved "${field.label}". Warnings:\n- ${r.warnings.join('\n- ')}` });
             this.scrollToBottom();
@@ -610,9 +615,7 @@ export class AppComponent extends FormBase implements OnInit, OnDestroy, AfterVi
             this.chatMessages.push({ role: 'assistant', content: `Saved "${field.label}".` });
             this.scrollToBottom();
           }
-          if (this.showMockApp) {
-            this.postToMock({ type: 'setField', id: field.id, value });
-          }
+
           this.getReview().subscribe({
             next: (rev) => {
               this.fetchFields().subscribe({
@@ -629,7 +632,7 @@ export class AppComponent extends FormBase implements OnInit, OnDestroy, AfterVi
                       content: `Please complete the next field: <strong>${nf.label}</strong>${nf.required ? ' <span class="required-text">*Required</span>' : ''}`
                     });
                     this.scrollToBottom();
-                    if (this.showMockApp) { this.refreshMockState(); }
+
                   } else {
                     this.awaitingField = undefined;
                     if (rev?.warnings?.length) {
@@ -638,7 +641,7 @@ export class AppComponent extends FormBase implements OnInit, OnDestroy, AfterVi
                     }
                     this.chatMessages.push({ role: 'assistant', content: 'All required fields are complete. You can upload a floorplan, compute fees, and submit.' });
                     this.scrollToBottom();
-                    if (this.showMockApp) { this.refreshMockState(); }
+
                   }
                 },
                 error: () => { this.chatMessages.push({ role: 'assistant', content: 'Could not load fields.' }); this.scrollToBottom(); }
@@ -668,9 +671,9 @@ export class AppComponent extends FormBase implements OnInit, OnDestroy, AfterVi
         this.chatCtas = this.mode === 'app'
           ? ((res?.ctas && res.ctas.length) ? res.ctas : this.defaultAppCtas())
           : (res?.ctas || []).filter(c =>
-              (c?.href || c?.routerLink) &&
-              !/(^|\b)(open|close)\s+application\b|upload\s+floorplan|fees|submit/i.test(c?.label || '')
-            );
+            (c?.href || c?.routerLink) &&
+            !/(^|\b)(open|close)\s+application\b|upload\s+floorplan|fees|submit/i.test(c?.label || '')
+          );
 
         // clear default app CTAs if we’re in chat mode
         if (this.mode === 'chat' && !res?.ctas?.length) {
@@ -678,7 +681,7 @@ export class AppComponent extends FormBase implements OnInit, OnDestroy, AfterVi
         }
 
         const a = res?.rag?.answer || res?.rag?.summary || res?.message || 'OK';
-        if (res?.intent === 'START_APPLICATION'){
+        if (res?.intent === 'START_APPLICATION') {
           this.setMode('app');
           this.chatMessages.push({
             role: 'assistant',
@@ -686,17 +689,21 @@ export class AppComponent extends FormBase implements OnInit, OnDestroy, AfterVi
           })
           this.scrollToBottom();
         } else {
-            this.chatMessages.push({ role: 'assistant', content: a });
-            this.scrollToBottom();
+          this.chatMessages.push({ role: 'assistant', content: a });
+          this.scrollToBottom();
         }
 
         if (res?.application_id || res?.state?.active_application_id) {
           this.activeApplicationId = res.application_id || res.state.active_application_id;
+          this.fetchFields().subscribe({
+            next: (ff) => this.hydrateFromServerFields(ff?.fields || []),
+            error: () => { }
+          });
           if (this.mode === 'app') {
-              this.chatCtas = (res?.ctas && res.ctas.length) ? res.ctas : [
-                {label: this.showMockApp? 'Close Application' : 'Open Application'},
-                {label: 'Upload Floorplan'}
-              ]
+            this.chatCtas = (res?.ctas && res.ctas.length) ? res.ctas : [
+              { label: this.showMockApp ? 'Close Application' : 'Open Application' },
+              { label: 'Upload Floorplan' }
+            ]
           }
         }
         if (res?.intent === 'START_APPLICATION' && (res?.application_id || res?.state?.active_application_id)) {
@@ -721,7 +728,7 @@ export class AppComponent extends FormBase implements OnInit, OnDestroy, AfterVi
   /*
     Document intelligence based floorplan upload and screening.
     Runs some basic validation for scale text, load stamp, and professional
-    designations. ONLY supports floorplan validation, the other uploads are mocked. 
+    designations. ONLY supports floorplan validation, the other uploads are mocked.
     /upload: restricted to active applications
     /validate: for general screening without an application
   */
@@ -732,7 +739,11 @@ export class AppComponent extends FormBase implements OnInit, OnDestroy, AfterVi
 
     const fd = new FormData();
     fd.append('file', file);
-    this.isBusy = true; this.lastError = undefined;
+
+    this.isBusy = true;
+    this.lastError = undefined;
+
+    // Decide endpoint based on whether we have an active draft
     const url = this.activeApplicationId
       ? `${this.orchBase}/upload/floorplan`
       : `${this.orchBase}/validate/floorplan`;
@@ -741,101 +752,110 @@ export class AppComponent extends FormBase implements OnInit, OnDestroy, AfterVi
 
     this.httpClient.post<any>(url, fd, { params }).subscribe({
       next: (res) => {
-        const passed = res?.passed ?? res?.screening?.passed;
-        const reasons: string[] = res?.reasons ?? (res?.screening?.issues || []).map((i: any) => i?.message).filter(Boolean);
+        const passed: boolean = res?.passed ?? res?.screening?.passed ?? false;
+        const reasons: string[] =
+          res?.reasons
+          ?? (res?.screening?.issues || []).map((i: any) => i?.message).filter(Boolean)
+          ?? [];
+
+        // Update chat
         this.chatMessages.push({
           role: 'assistant',
           content: passed
             ? (this.activeApplicationId
-                ? 'Floorplan passed screening and was recorded.'
-                : 'Floorplan passed screening.')
+              ? 'Floorplan passed screening and was recorded.'
+              : 'Floorplan passed screening.')
             : `Screening issues:\n- ${reasons.length ? reasons.join('\n- ') : 'Unknown issue'}`
         });
         this.scrollToBottom();
-        // TODO: add back this guardrail after demo
-        // if (passed) {
-          this.computeNextFieldPrompt?.();
-        // }
+
+        // 👇 Reflect upload status in the mock component (immutably)
+        const targetId = (this as any).__uploadTargetId || 'floorPlan';
+        this.uploadStatuses = {
+          ...this.uploadStatuses,
+          [targetId]: passed ? 'ok' : 'missing'
+        };
+
+        // Optional: re-hydrate other fields (if your backend sets any on upload)
+        // this.fetchFields().subscribe({
+        //   next: (ff) => this.hydrateFromServerFields(ff?.fields || []),
+        //   error: () => {}
+        // });
+
+        // Continue the flow (compute next field)
+        this.computeNextFieldPrompt?.();
       },
       error: () => {
+        this.isBusy = false;
         this.lastError = 'Upload failed.';
         this.chatMessages.push({ role: 'assistant', content: 'Sorry—floorplan upload failed.' });
         this.scrollToBottom();
-      },
-      complete: () => { this.isBusy = false; input.value = ''; }
-    });
 
+        // Mark it as missing in UI
+        const targetId = (this as any).__uploadTargetId || 'floorPlan';
+        this.uploadStatuses = {
+          ...this.uploadStatuses,
+          [targetId]: 'missing'
+        };
+      },
+      complete: () => {
+        this.isBusy = false;
+        if (input) input.value = '';
+        // clear temporary upload target
+        (this as any).__uploadTargetId = undefined;
+      }
+    });
   }
 
   // Demo iframe wiring
   showMockApp = false;
 
-  private get demoFrame(): HTMLIFrameElement | null {
-    return document.getElementById('demoApp') as HTMLIFrameElement | null;
+  // private get demoFrame(): HTMLIFrameElement | null {
+  //   return document.getElementById('demoApp') as HTMLIFrameElement | null;
+  // }
+
+  // private postToMock(msg: any) {
+  //   try { this.demoFrame?.contentWindow?.postMessage(msg, '*'); } catch { }
+  // }
+
+  // private openMockAppOnce() {
+  //   if (!this.activeApplicationId) { return; }
+  //   if (!this.showMockApp) { this.showMockApp = true; }
+  // }
+
+
+  private setMockValue(id: string, value: any) {
+    this.mockValues = { ...this.mockValues, [id]: value };  // new reference -> change detection
   }
 
-  private postToMock(msg: any) {
-    try { this.demoFrame?.contentWindow?.postMessage(msg, '*'); } catch {}
+  private hydrateFromServerFields(fields: Array<{ id: string; value?: any }>) {
+    const incoming = (fields || []).reduce((acc, f) => {
+      acc[f.id] = f.value ?? '';
+      return acc;
+    }, {} as Record<string, any>);
+    this.mockValues = { ...this.mockValues, ...incoming };   // new reference
   }
-
-  private openMockAppOnce() {
-    if (!this.activeApplicationId) { return; }
-    if (!this.showMockApp) { this.showMockApp = true; }
-  }
-
-  private handleMockMessage = (evt: MessageEvent) => {
-    const msg = evt?.data || {};
-    if (!msg || typeof msg !== 'object') return;
-    switch (msg.type) {
-      case 'mock:init':
-      case 'mock:requestState':
-        this.refreshMockState();
-        break;
-      case 'mock:setField': {
-        const { field_id, value } = msg;
-        if (!field_id) return;
-        this.upsertField(field_id, value).subscribe({
-          next: () => this.refreshMockState(),
-          error: () => this.postToMock({ type: 'toast', level: 'error', text: 'Could not save field.' })
-        });
-        break;
-      }
-      case 'mock:submit':
-        this.submitApplication(true).subscribe({
-          next: (res) => this.postToMock({ type: 'submitted', ok: !!res?.ok, receipt_id: res?.receipt_id }),
-          error: () => this.postToMock({ type: 'toast', level: 'error', text: 'Submit failed.' })
-        });
-        break;
-      default:
-        break;
+  onMockValueChange(e: { id: string; value: any }) {
+    this.mockValues = { ...this.mockValues, [e.id]: e.value };
+    // optionally upsert when activeApplicationId exists
+    if (this.activeApplicationId) {
+      this.upsertField(e.id, e.value).subscribe({ next: () => { }, error: () => { } });
     }
-  };
+  }
 
-  private refreshMockState() {
-    // Guard for no active application
-    if (!this.activeApplicationId){
-      this.postToMock({ type: 'state', application_id: null, next_field: null, missing: [], warnings: [], fields: [] });
-      return;
-    }
-    // Gather latest application state for the iframe
-    const afterFields = (fields: any[]) => {
-      this.getReview().subscribe({
-        next: (rev) => {
-          this.postToMock({
-            type: 'state',
-            application_id: this.activeApplicationId || null,
-            next_field: this.awaitingField || null,
-            missing: rev?.missing || [],
-            warnings: rev?.warnings || [],
-            fields: fields || []
-          });
-        },
-        error: () => this.postToMock({ type: 'toast', level: 'error', text: 'Could not load review.' })
+  onMockUpload(fieldId: string) {
+    (this as any).__uploadTargetId = fieldId;
+    (document.getElementById('floorplanInput') as HTMLInputElement)?.click();
+  }
+
+  onMockSubmit() {
+    this.submitApplication(true).subscribe(res => {
+      this.chatMessages.push({
+        role: 'assistant', content: res?.ok
+          ? `Submitted. Receipt: ${res.receipt_id}`
+          : `Cannot submit: ${res?.error || 'Unknown error'}`
       });
-    };
-    this.fetchFields().subscribe({
-      next: (ff) => afterFields(ff?.fields || []),
-      error: () => afterFields([])
+      this.scrollToBottom();
     });
   }
 }
