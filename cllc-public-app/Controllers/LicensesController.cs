@@ -1278,7 +1278,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// GET a licence as PDF.
         [AllowAnonymous]
         [HttpGet("{licenceId}/pdf/{filename}")]
-        
+
         public async Task<IActionResult> GetLicencePDF(string licenceId, string filename)
         {
 
@@ -1341,7 +1341,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 License licenceVM = adoxioLicense.ToViewModel(_dynamicsClient);
 
                 // we will use these variables to track whether there are specific endorsements
-                var licenceHasSEA = -1; 
+                var licenceHasSEA = -1;
                 var licenceHasLounge = -1;
                 var licenceHasStore = -1;
                 var licenceHasCatering = -1;
@@ -1417,7 +1417,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 if (licenceHasSEA < 0 && licenceHasLounge < 0)
                 {
                         MicrosoftDynamicsCRMadoxioServiceareaCollection allServiceAreas = null;
-                        
+
                     try {
                          allServiceAreas= _dynamicsClient.Serviceareas.Get(filter: $"_adoxio_licenceid_value eq {licenceId} and statecode eq 0");
                     }
@@ -1428,19 +1428,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                         if (allServiceAreas != null && allServiceAreas.Value.Count > 0)
                         {
-                            
+
                             IEnumerable<MicrosoftDynamicsCRMadoxioServicearea> filteredServiceAreas = allServiceAreas.Value
                             // Filter out service areas that should not be printed on the licence
-                            // Context: It appears that the area category field is being utilized to dictate whether or 
-                            // not  a service area should be printed on the licence. In Dynamics, as of July 2025 at 
-                            // least, the field in Dynamics is labelled "Printed On Licence?", and the "Capacity" value 
+                            // Context: It appears that the area category field is being utilized to dictate whether or
+                            // not  a service area should be printed on the licence. In Dynamics, as of July 2025 at
+                            // least, the field in Dynamics is labelled "Printed On Licence?", and the "Capacity" value
                             // is set when the user selects "No" from the dropdown.
                             .Where(area => area.AdoxioAreacategory != (int)ServiceAreaCategoryEnum.Capacity)
                             // Filter out service areas that have invalid data (possibly a holdover from old data?)
                             .Where(area => area.AdoxioArealocation != null && area.AdoxioCapacity != null)
                             // Filter out service areas that are temporary extension areas. A temporary extension area
                             // is not printed on the licence because it is only relevant for a short period of time.
-                            .Where(area => area.AdoxioTemporaryextensionarea == false)
+                            .Where(area => area.AdoxioTemporaryextensionarea != true)
                             // Sort the service areas
                             .OrderBy(area => area.AdoxioAreanumber);
 
@@ -1467,14 +1467,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                             }
                             // now we're out of service areas
-                            // fill in the remaining cells, so the table makes sense 
+                            // fill in the remaining cells, so the table makes sense
                             for (int i = 0; i < leftover; i++)
                             {
                                 serviceAreaText += "<td class='space'>&nbsp;</td>";
                             }
 
                             serviceAreaText += "</tr></table>";
-                            }                        
+                            }
 
                 }
 
@@ -1484,13 +1484,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 MicrosoftDynamicsCRMadoxioHoursofserviceCollection hours = _dynamicsClient.Hoursofservices.Get(filter: $"_adoxio_licence_value eq {licenceId} and _adoxio_endorsement_value eq null and statecode eq 0");
 
-                if (hours.Value.Count > 0 && 
+                if (hours.Value.Count > 0 &&
                     adoxioLicense.AdoxioLicenceType.AdoxioName != "Wine Store" &&
-                    adoxioLicense.AdoxioLicenceType.AdoxioName != "Licensee Retail Store" && 
+                    adoxioLicense.AdoxioLicenceType.AdoxioName != "Licensee Retail Store" &&
                     adoxioLicense.AdoxioLicenceType.AdoxioName != "Rural Licensee Retail Store")
                 {
 
-                
+
                     MicrosoftDynamicsCRMadoxioHoursofservice hoursVal = hours.Value.First();
 
                     storeHours = $@"<h3 style=""text-align: center;"">HOURS OF SALE</h3>
@@ -1559,14 +1559,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         parameters.Add("establishmentCity", adoxioLicense.AdoxioLicencee?.Address1City);
                         parameters.Add("establishmentPostalCode", adoxioLicense.AdoxioLicencee?.Address1Postalcode);
                         break;
-                    default:                                                                           
+                    default:
                         parameters.Add("establishmentName", adoxioLicense.AdoxioEstablishment?.AdoxioName);
                         parameters.Add("licenceName", adoxioLicense.AdoxioEstablishment?.AdoxioName);
                         parameters.Add("establishmentStreet", adoxioLicense.AdoxioEstablishment?.AdoxioAddressstreet);
                         parameters.Add("establishmentCity", adoxioLicense.AdoxioEstablishment?.AdoxioAddresscity + ", B.C.");
-                        parameters.Add("establishmentPostalCode", adoxioLicense.AdoxioEstablishment?.AdoxioAddresspostalcode); 
+                        parameters.Add("establishmentPostalCode", adoxioLicense.AdoxioEstablishment?.AdoxioAddresspostalcode);
                         break;
-                
+
                 }
 
                 // determine which Act applies
@@ -1595,7 +1595,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         parameters.Add("dType", "Licence");
                         break;
                 }
-        
+
                 try
                 {
                     var templateName = "liquor_licence";
