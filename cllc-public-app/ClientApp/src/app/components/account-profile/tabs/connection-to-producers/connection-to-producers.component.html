@@ -9,12 +9,7 @@
         </div>
 
         <!-- CORPORATIONS -->
-        <div
-          *ngIf="
-            ['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation'].indexOf(
-              account.businessType
-            ) !== -1
-          ">
+        <div *ngIf="showCorporation">
           <div class="mb-5">
             <section class="mb-3">
               <p id="corp-connection-federal-producer" class="font-weight-bold">
@@ -95,7 +90,7 @@
         </div>
 
         <!---- LG or IN -->
-        <div *ngIf="['IndigenousNation', 'LocalGovernment'].indexOf(account.businessType) !== -1">
+        <div *ngIf="showLGorIN">
           <div class="mb-5">
             <section class="mb-3">
               <p id="in-connection-to-federal-producer" class="font-weight-bold">
@@ -120,7 +115,7 @@
                 <mat-radio-button [value]="0">No</mat-radio-button>
               </mat-radio-group>
             </section>
-            <section *ngIf="form.get('iNConnectionToFederalProducer').value == 'Yes'">
+            <section *ngIf="form.get('iNConnectionToFederalProducer').value === 1">
               <label for="in-connection-to-federal-producer-details">
                 Provide the name of the federal producer and details of the connection (e.g. percentage and type of
                 shares held).
@@ -135,7 +130,7 @@
         </div>
 
         <!-- PUBLIC -->
-        <div *ngIf="['PublicCorporation'].indexOf(account.businessType) !== -1">
+        <div *ngIf="showPublic">
           <div class="mb-5">
             <section class="mb-3">
               <p id="corp-connection-federal-producer" class="font-weight-bold">
@@ -254,7 +249,7 @@
         </div>
 
         <!-- SOLE PROPRIETORSHIP OR UNIVERSITY OR CHURCH -->
-        <div *ngIf="['SoleProprietorship', 'University', 'Church'].indexOf(account.businessType) !== -1">
+        <div *ngIf="showSoleProprietorshipORUniversityOrChurch">
           <div class="mb-5">
             <section class="mb-3">
               <p id="corp-connection-federal-producer" class="font-weight-bold">
@@ -322,7 +317,7 @@
             <section *ngIf="form.get('federalProducerConnectionToCorp').value === 1">
               <label for="federal-producer-connection-to-corp-details">
                 Provide the name of the federal producer and details of the connection (e.g. percentage and type of
-                shares held).s
+                shares held).
               </label>
               <textarea
                 id="federal-producer-connection-to-corp-details"
@@ -334,12 +329,7 @@
         </div>
 
         <!-- PARTNERSHIP OR GENERAL PARTNERSHIP OR LIMITED PARTNERSHIP OR LIMITED LIABILITY PARTNERSHIP -->
-        <div
-          *ngIf="
-            ['Partnership', 'GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(
-              account.businessType
-            ) !== -1
-          ">
+        <div *ngIf="showPartnership">
           <div class="mb-5">
             <section class="mb-3">
               <p id="partners-connection-federal-producer" class="font-weight-bold">
@@ -416,7 +406,7 @@
         </div>
 
         <!-- SOCIETY -->
-        <div *ngIf="['Society'].indexOf(account.businessType) !== -1">
+        <div *ngIf="showSociety">
           <div class="mb-5">
             <section class="mb-3">
               <p id="liquor-interest-label" class="font-weight-bold">
