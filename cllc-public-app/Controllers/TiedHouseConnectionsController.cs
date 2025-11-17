@@ -68,8 +68,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             catch (HttpOperationException httpOperationException)
             {
                 _logger.LogError(httpOperationException, "Error fetching liquor tied house connections.");
-                _logger.LogDebug($"Request: {JsonConvert.SerializeObject(httpOperationException.Request)}");
-                _logger.LogDebug($"Response: {JsonConvert.SerializeObject(httpOperationException.Response)}");
                 throw new Exception("Failed to fetch liquor tied house connections.");
             }
             catch (Exception exception)
@@ -107,8 +105,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             catch (HttpOperationException httpOperationException)
             {
                 _logger.LogError(httpOperationException, "Error fetching cannabis tied house connection.");
-                _logger.LogDebug($"Request: {JsonConvert.SerializeObject(httpOperationException.Request)}");
-                _logger.LogDebug($"Response: {JsonConvert.SerializeObject(httpOperationException.Response)}");
                 throw new Exception("Failed to fetch cannabis tied house connection.");
             }
             catch (Exception exception)
@@ -148,8 +144,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             catch (HttpOperationException httpOperationException)
             {
                 _logger.LogError(httpOperationException, "Error updating tied house connections");
-                _logger.LogDebug($"Request: {JsonConvert.SerializeObject(httpOperationException.Request)}");
-                _logger.LogDebug($"Response: {JsonConvert.SerializeObject(httpOperationException.Response)}");
                 throw new Exception("Unable to add tied house connection");
             }
             catch (Exception exception)
@@ -190,8 +184,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             catch (HttpOperationException httpOperationException)
             {
                 _logger.LogError(httpOperationException, "Error adding tied house connections");
-                _logger.LogDebug($"Request: {JsonConvert.SerializeObject(httpOperationException.Request)}");
-                _logger.LogDebug($"Response: {JsonConvert.SerializeObject(httpOperationException.Response)}");
                 throw new Exception("Unable to add tied house connection");
             }
             catch (Exception exception)
@@ -235,8 +227,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             catch (HttpOperationException httpOperationException)
             {
                 _logger.LogError(httpOperationException, "Error adding tied house connections for user");
-                _logger.LogDebug($"Request: {JsonConvert.SerializeObject(httpOperationException.Request)}");
-                _logger.LogDebug($"Response: {JsonConvert.SerializeObject(httpOperationException.Response)}");
                 throw new Exception("Failed to add tied house connection for user");
             }
             catch (Exception exception)
@@ -280,8 +270,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             catch (HttpOperationException httpOperationException)
             {
                 _logger.LogError(httpOperationException, "Error upserting cannabis tied house connection");
-                _logger.LogDebug($"Request: {JsonConvert.SerializeObject(httpOperationException.Request)}");
-                _logger.LogDebug($"Response: {JsonConvert.SerializeObject(httpOperationException.Response)}");
                 throw new Exception("Failed to upsert cannabis tied house connection");
             }
             catch (Exception exception)
@@ -316,8 +304,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             catch (HttpOperationException httpOperationException)
             {
                 _logger.LogError(httpOperationException, "Error updating cannabis tied house connection");
-                _logger.LogDebug($"Request: {JsonConvert.SerializeObject(httpOperationException.Request)}");
-                _logger.LogDebug($"Response: {JsonConvert.SerializeObject(httpOperationException.Response)}");
                 throw new Exception("Failed to update cannabis tied house connection");
             }
             catch (Exception exception)

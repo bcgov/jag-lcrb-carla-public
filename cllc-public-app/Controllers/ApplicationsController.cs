@@ -1360,8 +1360,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     httpOperationException,
                     "Error getting existing in-progress  Permanent Change Application"
                 );
-                _logger.LogDebug($"Request: {JsonConvert.SerializeObject(httpOperationException.Request)}");
-                _logger.LogDebug($"Response: {JsonConvert.SerializeObject(httpOperationException.Response)}");
                 throw;
             }
         }
@@ -1407,8 +1405,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             catch (HttpOperationException httpOperationException)
             {
                 _logger.LogError(httpOperationException, "Error creating permanent change application");
-                _logger.LogDebug($"Request: {JsonConvert.SerializeObject(httpOperationException.Request)}");
-                _logger.LogDebug($"Response: {JsonConvert.SerializeObject(httpOperationException.Response)}");
                 throw;
             }
         }
@@ -1733,7 +1729,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     adoxioApplication = _dynamicsClient.Applications.Create(adoxioApplication);
                 }
 
-
                 if (item.ServiceAreas != null && item.ServiceAreas.Count > 0)
                     AddServiceAreasToApplication(item.ServiceAreas, adoxioApplication.AdoxioApplicationid);
 
@@ -2011,8 +2006,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     catch (HttpOperationException httpOperationException)
                     {
                         _logger.LogError(httpOperationException, "Error upserting application extension");
-                        _logger.LogDebug($"Request: {JsonConvert.SerializeObject(httpOperationException.Request)}");
-                        _logger.LogDebug($"Response: {JsonConvert.SerializeObject(httpOperationException.Response)}");
                         throw;
                     }
                 }
@@ -2025,8 +2018,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             catch (HttpOperationException httpOperationException)
             {
                 _logger.LogError(httpOperationException, "Error updating application");
-                _logger.LogDebug($"Request: {JsonConvert.SerializeObject(httpOperationException.Request)}");
-                _logger.LogDebug($"Response: {JsonConvert.SerializeObject(httpOperationException.Response)}");
                 throw;
             }
             catch (Exception exception)
@@ -2044,8 +2035,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             catch (HttpOperationException httpOperationException)
             {
                 _logger.LogError(httpOperationException, "Error getting updated application");
-                _logger.LogDebug($"Request: {JsonConvert.SerializeObject(httpOperationException.Request)}");
-                _logger.LogDebug($"Response: {JsonConvert.SerializeObject(httpOperationException.Response)}");
                 throw;
             }
             catch (Exception exception)
@@ -2418,8 +2407,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             catch (HttpOperationException httpOperationException)
             {
                 _logger.LogError(httpOperationException, "Error getting PCL application for LE Review application");
-                _logger.LogDebug($"Request: {JsonConvert.SerializeObject(httpOperationException.Request)}");
-                _logger.LogDebug($"Response: {JsonConvert.SerializeObject(httpOperationException.Response)}");
                 throw;
             }
             catch (Exception error)
@@ -2482,8 +2469,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             catch (HttpOperationException httpOperationException)
             {
                 _logger.LogError(httpOperationException, "Error fetching in-progress LE Review applications");
-                _logger.LogDebug($"Request: {JsonConvert.SerializeObject(httpOperationException.Request)}");
-                _logger.LogDebug($"Response: {JsonConvert.SerializeObject(httpOperationException.Response)}");
                 return StatusCode(
                     StatusCodes.Status500InternalServerError,
                     "Error fetching in-progress LE Review applications"
