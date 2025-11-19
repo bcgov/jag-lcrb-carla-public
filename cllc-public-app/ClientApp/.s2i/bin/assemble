@@ -42,9 +42,6 @@ echo "[assemble] PHASE1=${PHASE1:-<empty>} PHASE2=${PHASE2:-<empty>}"
 if [ -n "${PHASE1}" ]; then
   echo "[assemble] PHASE1: installing Node dependencies..."
 
-  # build the application.
-  npm install @angular/cli@13.3.1
-
   if [ -f package-lock.json ]; then
     echo "[assemble] PHASE1: running npm ci."
     npm ci
