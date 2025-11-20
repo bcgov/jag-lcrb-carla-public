@@ -9,7 +9,7 @@
 # 3. Dotnet tests can be done
 # 4. Or a regular build for production of an application image can be done.
 
-set -ex
+set -e
 # Include filenames beginning with a '.' when installing the application source code.
 shopt -s dotglob
 
@@ -66,7 +66,7 @@ if [ -n "${PHASE2}" ]; then
 
   echo "[assemble] PHASE2: Building Angular app with base href: $BASE_HREF_VALUE"
   # Run Angular build
-  npm run build -- --configuration production --base-href "$BASE_HREF_VALUE/" --outputPath="/opt/app-root/src/dist/$CLEAN_BASE_HREF_VALUE" --verbose
+  npm run build -- --configuration production --base-href "$BASE_HREF_VALUE/" --outputPath="/opt/app-root/src/dist/$CLEAN_BASE_HREF_VALUE"
 
   # fix permissions
   fix-permissions /opt/app-root/src/dist
