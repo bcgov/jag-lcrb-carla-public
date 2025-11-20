@@ -9,7 +9,7 @@
 # 3. Dotnet tests can be done
 # 4. Or a regular build for production of an application image can be done.
 
-set -e
+set -ex
 # Include filenames beginning with a '.' when installing the application source code.
 shopt -s dotglob
 
@@ -37,13 +37,11 @@ sed -i 's^<!-- UI_GIT_COMMIT -->^'"$OPENSHIFT_BUILD_COMMIT"'^g' src/app/componen
 sed -i 's^<!-- UI_GIT_REPO -->^'"$OPENSHIFT_BUILD_SOURCE"'^g' src/app/components/version-info/version-info-dialog.component.html
 sed -i 's^<!-- UI_BUILD_DATE -->^'"$(date)"'^g' src/app/components/version-info/version-info-dialog.component.html
 
-echo "[assemble] PHASE1=${PHASE1:-<empty>} PHASE2=${PHASE2:-<empty>}"
-
 if [ -n "${PHASE1}" ]; then
   echo "[assemble] PHASE1: installing Node dependencies..."
 
-  if [ -f package-lock.json ]; then
-    echo "[assemble] PHASE1: running npm ci."
+  if [ -n "${USE_NPM_CI}" ] && [ -f package-lock.json ]; then
+    echo "[assemble] PHASE1: running npm ci (USE_NPM_CI is set and package-lock.json exists)."
     npm ci
   else
     echo "[assemble] PHASE1: running npm install."
@@ -68,7 +66,7 @@ if [ -n "${PHASE2}" ]; then
 
   echo "[assemble] PHASE2: Building Angular app with base href: $BASE_HREF_VALUE"
   # Run Angular build
-  npm run build -- --configuration production --base-href "$BASE_HREF_VALUE/" --outputPath="/opt/app-root/src/dist/$CLEAN_BASE_HREF_VALUE"
+  npm run build -- --configuration production --base-href "$BASE_HREF_VALUE/" --outputPath="/opt/app-root/src/dist/$CLEAN_BASE_HREF_VALUE" --verbose
 
   # fix permissions
   fix-permissions /opt/app-root/src/dist
