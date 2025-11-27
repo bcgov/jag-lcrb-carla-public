@@ -13,6 +13,8 @@ export class MockApplicationComponent {
   @Input() values: Record<string, any> = {};
   @Input() uploadStatuses: Record<string, UploadStatus> = {};
 
+  @Input() activeFieldId? : string;
+
   @Output() valueChange = new EventEmitter<{ id: string; value: any }>();
   @Output() uploadRequested = new EventEmitter<string>();
   @Output() submitRequested = new EventEmitter<void>();

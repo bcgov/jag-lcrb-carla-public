@@ -44,7 +44,11 @@
 
       <!-- General fields (no CSS grid; compact flex rows) -->
       <div *ngIf="isGrid(sec)" class="rows">
-        <div class="col" *ngFor="let f of (sec.fields || []); trackBy: trackById" [ngClass]="colClass(f.span)">
+        <div 
+          class="col"
+          *ngFor="let f of (sec.fields || []); trackBy: trackById"
+          [ngClass]="colClass(f.span)"
+          [class.ai-active-field]="f.id === activeFieldId">
 
           <!-- label (for all non-boolean types) -->
           <label class="label" *ngIf="f.type !== 'boolean'">
