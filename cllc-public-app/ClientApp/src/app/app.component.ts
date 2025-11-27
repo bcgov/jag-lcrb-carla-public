@@ -681,17 +681,29 @@ export class AppComponent extends FormBase implements OnInit, OnDestroy, AfterVi
         }
 
         const a = res?.rag?.answer || res?.rag?.summary || res?.message || 'OK';
+
+        let finalContent = a;
+        if (res?.intent === 'APPLICATION_STATUS' && Array.isArray(res.applications)) {
+          const lines = res.applications.map((app: any) =>
+            `<li><strong>${app.id}</strong> — ${app.status_label}</li>`
+          ).join('');
+
+          const prefix = res?.message ? `${res.message}<br/>` : '';
+          finalContent = `${prefix}<br/><ul>${lines}</ul>`;
+        }
+
         if (res?.intent === 'START_APPLICATION') {
           this.setMode('app');
           this.chatMessages.push({
             role: 'assistant',
             content: 'Started a Liquor Primary application draft. Your responses will be saved as field inputs for the application. Click the "More" button from the application toolbar to get more information on a field or click "Exit" at any time continue chatting.'
-          })
+          });
           this.scrollToBottom();
         } else {
-          this.chatMessages.push({ role: 'assistant', content: a });
+          this.chatMessages.push({ role: 'assistant', content: finalContent });
           this.scrollToBottom();
         }
+
 
         if (res?.application_id || res?.state?.active_application_id) {
           this.activeApplicationId = res.application_id || res.state.active_application_id;
@@ -769,7 +781,7 @@ export class AppComponent extends FormBase implements OnInit, OnDestroy, AfterVi
         });
         this.scrollToBottom();
 
-        // 👇 Reflect upload status in the mock component (immutably)
+        // Reflect upload status in the mock component (immutably)
         const targetId = (this as any).__uploadTargetId || 'floorPlan';
         this.uploadStatuses = {
           ...this.uploadStatuses,

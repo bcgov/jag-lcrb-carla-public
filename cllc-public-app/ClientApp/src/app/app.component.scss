@@ -515,7 +515,15 @@ button:focus {
   align-items: stretch;
 }
 .required-text { color: #c62828 !important; font-weight: 700; }
-.ai-new-btn { margin-bottom: 8px; }
+.ai-new-btn { 
+  background-color: #003366;
+  color: #ffffff;
+  margin-bottom: 8px; 
+}
+.ai-resume-btn {
+  background-color: #003366;
+  color: #ffffff;
+}
 
 
 .ai-actions {
@@ -540,7 +548,7 @@ button:focus {
   padding: 2px 8px;
   border-radius: 999px;
   font-size: 12px;
-  background: #337ab7;
+  background: #1a5a96;
   color: #ffffff;
   white-space: nowrap;
 }
