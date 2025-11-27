@@ -16,7 +16,7 @@
       <!-- Resume application banner -->
       <div *ngIf="mode==='chat' && activeApplicationId" class="ai-resume-banner">
         <span class="ai-note">Draft ready: {{ activeApplicationId }}</span>
-        <button mat-stroked-button (click)="resumeApplication()">Resume</button>
+        <button class="ai-resume-btn" mat-stroked-button (click)="resumeApplication()">Resume</button>
       </div>
 
       <!-- Application mode banner -->
@@ -174,9 +174,15 @@
               ></iframe>
             </div> -->
             <div [style.display]="showMockApp ? 'block' : 'none'" style="margin: 12px 0;">
-              <app-mock-application *ngIf="mockSchema" [schema]="mockSchema" [values]="mockValues"
-                [uploadStatuses]="uploadStatuses" (valueChange)="onMockValueChange($event)"
-                (uploadRequested)="onMockUpload($event)" (submitRequested)="onMockSubmit()">
+              <app-mock-application 
+                *ngIf="mockSchema"
+                [schema]="mockSchema"
+                [values]="mockValues"
+                [uploadStatuses]="uploadStatuses"
+                [activeFieldId]="awaitingField?.id"
+                (valueChange)="onMockValueChange($event)"
+                (uploadRequested)="onMockUpload($event)"
+                (submitRequested)="onMockSubmit()">
               </app-mock-application>
             </div>
             <router-outlet *ngIf="!showMockApp"></router-outlet>
