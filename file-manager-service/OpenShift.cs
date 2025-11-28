@@ -46,7 +46,10 @@ namespace Gov.Lclb.Cllb.Services.FileManager
 
         private static string GetFromEnvironmentVariable(string name, ref string cached)
         {
-            if (cached == null) cached = Environment.GetEnvironmentVariable(name) ?? string.Empty;
+            if (cached == null)
+            {
+                cached = Environment.GetEnvironmentVariable(name) ?? string.Empty;
+            }
             return cached;
         }
     }
@@ -63,8 +66,10 @@ namespace Gov.Lclb.Cllb.Services.FileManager
         private readonly OpenShiftCertificateLoader _certificateLoader;
         private readonly IOptions<OpenShiftIntegrationOptions> _options;
 
-        public KestrelOptionsSetup(IOptions<OpenShiftIntegrationOptions> options,
-            OpenShiftCertificateLoader certificateLoader)
+        public KestrelOptionsSetup(
+            IOptions<OpenShiftIntegrationOptions> options,
+            OpenShiftCertificateLoader certificateLoader
+        )
         {
             _options = options;
             _certificateLoader = certificateLoader;
@@ -73,24 +78,40 @@ namespace Gov.Lclb.Cllb.Services.FileManager
         public void Configure(KestrelServerOptions options)
         {
             if (_options.Value.UseHttps)
-                options.ListenAnyIP(8080, configureListen =>
-                {
-                    configureListen.UseHttps(_certificateLoader.ServiceCertificate);
-                    // enable Http2, for gRPC
-                    configureListen.Protocols = HttpProtocols.Http2;
-                    configureListen.UseConnectionLogging();
-                });
+            {
+                options.ListenAnyIP(
+                    8080,
+                    configureListen =>
+                    {
+                        configureListen.UseHttps(_certificateLoader.ServiceCertificate);
+                        // enable Http2, for gRPC
+                        configureListen.Protocols = HttpProtocols.Http2;
+                        configureListen.UseConnectionLogging();
+                    }
+                );
+            }
             else
-                options.ListenAnyIP(8080, configureListen =>
-                {
-                    // enable Http2, for gRPC
-                    configureListen.Protocols = HttpProtocols.Http2;
-                    configureListen.UseConnectionLogging();
-                });
+            {
+                options.ListenAnyIP(
+                    8080,
+                    configureListen =>
+                    {
+                        // enable Http2, for gRPC
+                        configureListen.Protocols = HttpProtocols.Http2;
+                        configureListen.UseConnectionLogging();
+                    }
+                );
+            }
 
-            // Also listen on port 8088 for health checks. Note that you won't be able to do gRPC calls on this port; 
+            // Also listen on port 8088 for health checks. Note that you won't be able to do gRPC calls on this port;
             // it is only required because the OpenShift 3.11 health check system does not seem to be compatible with HTTP2.
-            options.ListenAnyIP(8088, configureListen => { configureListen.Protocols = HttpProtocols.Http1; });
+            options.ListenAnyIP(
+                8088,
+                configureListen =>
+                {
+                    configureListen.Protocols = HttpProtocols.Http1;
+                }
+            );
         }
     }
 
@@ -101,9 +122,12 @@ namespace Gov.Lclb.Cllb.Services.FileManager
         private readonly ILogger<OpenShiftCertificateExpiration> _logger;
         private readonly IOptions<OpenShiftIntegrationOptions> _options;
 
-        public OpenShiftCertificateExpiration(IOptions<OpenShiftIntegrationOptions> options,
-            OpenShiftCertificateLoader certificateLoader, IHostApplicationLifetime applicationLifetime,
-            ILogger<OpenShiftCertificateExpiration> logger)
+        public OpenShiftCertificateExpiration(
+            IOptions<OpenShiftIntegrationOptions> options,
+            OpenShiftCertificateLoader certificateLoader,
+            IHostApplicationLifetime applicationLifetime,
+            ILogger<OpenShiftCertificateExpiration> logger
+        )
         {
             _options = options;
             _certificateLoader = certificateLoader;
@@ -117,6 +141,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
         protected override async Task ExecuteAsync(CancellationToken token)
         {
             if (_options.Value.UseHttps)
+            {
                 try
                 {
                     var certificate = _certificateLoader.ServiceCertificate;
@@ -127,11 +152,14 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                         var now = DateTime.Now;
                         var tillExpires = expiresAt - now;
                         if (tillExpires > TimeSpan.Zero)
+                        {
                             if (tillExpires > RestartSpan)
                             {
                                 // Wait until we are in the RestartSpan.
-                                var delay = tillExpires - RestartSpan
-                                            + TimeSpan.FromSeconds(new Random().Next((int) RestartSpan.TotalSeconds));
+                                var delay =
+                                    tillExpires
+                                    - RestartSpan
+                                    + TimeSpan.FromSeconds(new Random().Next((int)RestartSpan.TotalSeconds));
                                 if (delay.TotalMilliseconds > int.MaxValue)
                                 {
                                     // Task.Delay is limited to int.MaxValue.
@@ -143,16 +171,18 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                                     await Task.Delay(delay, token);
                                 }
                             }
+                        }
                     }
-                    while (loop) ;
+                    while (loop)
+                        ;
                     // Our certificate expired, Stop the application.
                     _logger.LogInformation(
-                        $"Certificate expires at {certificate.NotAfter.ToUniversalTime()}. Stopping application.");
+                        $"Certificate expires at {certificate.NotAfter.ToUniversalTime()}. Stopping application."
+                    );
                     _applicationLifetime.StopApplication();
                 }
-                catch (TaskCanceledException)
-                {
-                }
+                catch (TaskCanceledException) { }
+            }
         }
     }
 
@@ -171,6 +201,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             get
             {
                 if (_certificate == null)
+                {
                     if (_options.Value.UseHttps)
                     {
                         var certificateMountPoint = _options.Value.CertificateMountPoint;
@@ -178,6 +209,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                         var keyFile = Path.Combine(certificateMountPoint, "tls.key");
                         _certificate = CertificateLoader.LoadCertificateWithKey(certificateFile, keyFile);
                     }
+                }
 
                 return _certificate;
             }
@@ -202,11 +234,11 @@ namespace RedHat.OpenShift.Utils
                 var obj = new PemReader(reader).ReadObject();
                 if (obj is AsymmetricCipherKeyPair)
                 {
-                    var cipherKey = (AsymmetricCipherKeyPair) obj;
+                    var cipherKey = (AsymmetricCipherKeyPair)obj;
                     obj = cipherKey.Private;
                 }
 
-                var privKey = (RsaPrivateCrtKeyParameters) obj;
+                var privKey = (RsaPrivateCrtKeyParameters)obj;
                 return RSA.Create(DotNetUtilities.ToRSAParameters(privKey));
             }
         }
@@ -247,10 +279,14 @@ namespace RedHat.OpenShift.Utils
                 var bs = n.ToByteArrayUnsigned();
 
                 if (bs.Length == size)
+                {
                     return bs;
+                }
 
                 if (bs.Length > size)
+                {
                     throw new ArgumentException("Specified size too small", "size");
+                }
 
                 var padded = new byte[size];
                 Array.Copy(bs, 0, padded, size - bs.Length, bs.Length);
@@ -264,10 +300,15 @@ namespace Microsoft.AspNetCore.Hosting
 {
     public static class OpenShiftWebHostBuilderExtensions
     {
-        public static IWebHostBuilder UseOpenShiftIntegration(this IWebHostBuilder builder,
-            Action<OpenShiftIntegrationOptions> configureOptions)
+        public static IWebHostBuilder UseOpenShiftIntegration(
+            this IWebHostBuilder builder,
+            Action<OpenShiftIntegrationOptions> configureOptions
+        )
         {
-            if (configureOptions == null) throw new ArgumentNullException(nameof(configureOptions));
+            if (configureOptions == null)
+            {
+                throw new ArgumentNullException(nameof(configureOptions));
+            }
 
             if (PlatformEnvironment.IsOpenShift)
             {
