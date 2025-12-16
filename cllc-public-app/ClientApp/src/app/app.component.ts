@@ -55,6 +55,7 @@ export class AppComponent extends FormBase implements OnInit, OnDestroy, AfterVi
   parseInt = parseInt; // make available in template
   licenseeChangeFeatureOn: boolean;
   eligibilityFeatureOn: boolean;
+  aiAssistantFeatureOn: boolean;
   isEligibilityDialogOpen: boolean;
   showNavbar = true;
   testAPIResult = "";
@@ -86,6 +87,9 @@ export class AppComponent extends FormBase implements OnInit, OnDestroy, AfterVi
 
     featureFlagService.featureOn("Eligibility")
       .subscribe(x => this.eligibilityFeatureOn = x);
+
+    featureFlagService.featureOn("AIAssistant")
+      .subscribe(x => this.aiAssistantFeatureOn = x);
 
     this.isDevMode = isDevMode();
     this.router.events

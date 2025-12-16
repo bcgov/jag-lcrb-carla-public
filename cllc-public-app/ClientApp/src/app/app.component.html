@@ -198,7 +198,7 @@
           <button class="chat-button btn btn-primary btn-sm" (click)="openChat('en-CA', 'main')">
             <strong>Chat with us</strong>
           </button>
-          <button class="ai-sidebar-button btn btn-primary btn-sm" (click)="toggleSidebar()">
+          <button *ngIf="currentUser && aiAssistantFeatureOn" class="ai-sidebar-button btn btn-primary btn-sm" (click)="toggleSidebar()">
             <strong>AI Assistant</strong>
           </button>
           <button *ngIf="currentUser" type="button" class="feedback-button btn btn-outline-primary"
