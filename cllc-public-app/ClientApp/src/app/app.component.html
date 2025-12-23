@@ -42,15 +42,15 @@
               style="background:#f5f5f5; border-radius:8px; padding:8px 10px;">
             </div>
             <!-- Feedback buttons for assistant messages -->
-            <div *ngIf="m.role==='assistant' && i > 0" class="feedback-buttons" style="display:flex; gap:4px;">
+            <div *ngIf="m.role==='assistant' && i > 0" class="feedback-buttons" style="display:flex; gap:4px; margin-bottom:8px;">
               <button mat-icon-button
                       [color]="m.feedback === 'thumbs_up' ? 'primary' : ''"
                       (click)="submitFeedback(i, 'thumbs_up')"
                       matTooltip="Helpful"
                       [disabled]="m.feedback"
                       [style.opacity]="!m.feedback ? '0.5' : (m.feedback === 'thumbs_up' ? '1' : '0.2')"
-                      style="width: 28px; height: 28px;">
-                <mat-icon style="font-size: 16px; width: 16px; height: 16px;">thumb_up</mat-icon>
+                      style="width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;">
+                <mat-icon style="font-size: 16px; width: 16px; height: 16px; line-height: 16px;">thumb_up</mat-icon>
               </button>
               <button mat-icon-button
                       [color]="m.feedback === 'thumbs_down' ? 'warn' : ''"
@@ -58,8 +58,8 @@
                       matTooltip="Not helpful"
                       [disabled]="m.feedback"
                       [style.opacity]="!m.feedback ? '0.5' : (m.feedback === 'thumbs_down' ? '1' : '0.2')"
-                      style="width: 28px; height: 28px;">
-                <mat-icon style="font-size: 16px; width: 16px; height: 16px;">thumb_down</mat-icon>
+                      style="width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;">
+                <mat-icon style="font-size: 16px; width: 16px; height: 16px; line-height: 16px;">thumb_down</mat-icon>
               </button>
             </div>
           </div>
