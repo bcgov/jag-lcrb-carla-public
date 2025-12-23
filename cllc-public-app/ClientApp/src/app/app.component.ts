@@ -55,6 +55,7 @@ export class AppComponent extends FormBase implements OnInit, OnDestroy, AfterVi
   parseInt = parseInt; // make available in template
   licenseeChangeFeatureOn: boolean;
   eligibilityFeatureOn: boolean;
+  aiAssistantFeatureOn: boolean;
   isEligibilityDialogOpen: boolean;
   showNavbar = true;
   testAPIResult = "";
@@ -86,6 +87,9 @@ export class AppComponent extends FormBase implements OnInit, OnDestroy, AfterVi
 
     featureFlagService.featureOn("Eligibility")
       .subscribe(x => this.eligibilityFeatureOn = x);
+
+    featureFlagService.featureOn("AIAssistant")
+      .subscribe(x => this.aiAssistantFeatureOn = x);
 
     this.isDevMode = isDevMode();
     this.router.events
@@ -296,7 +300,7 @@ export class AppComponent extends FormBase implements OnInit, OnDestroy, AfterVi
               navigate the portal, and complete applications. Just ask a question below
               or chose any of the available actions. `
   };
-  chatMessages: Array<{ role: 'user' | 'assistant'; content: string }> = [];
+  chatMessages: Array<{ role: 'user' | 'assistant'; content: string; feedback?: 'thumbs_up' | 'thumbs_down'; timestamp?: number; intent?: string }> = [];
   isBusy = false;
   lastError?: string;
   awaitingField?: { id: string; label: string; type: string; required?: boolean; help?: string };
@@ -512,7 +516,9 @@ export class AppComponent extends FormBase implements OnInit, OnDestroy, AfterVi
           if (!this.chatMessages[this.chatMessages.length - 1]?.content?.includes(nf.label)) {
             this.chatMessages.push({
               role: 'assistant',
-              content: `Please complete the next field: <strong>${nf.label}</strong>${nf.required ? ' <span class="required-text">*Required</span>' : ''}`
+              content: `Please complete the next field: <strong>${nf.label}</strong>${nf.required ? ' <span class="required-text">*Required</span>' : ''}`,
+              intent: 'NEXT_FIELD',
+              timestamp: Date.now()
             });
             this.scrollToBottom();
           }
@@ -528,7 +534,9 @@ export class AppComponent extends FormBase implements OnInit, OnDestroy, AfterVi
           // Only non-form item(s) remain – steer to the floorplan upload
           this.chatMessages.push({
             role: 'assistant',
-            content: 'All form fields are complete. Please upload a stamped floorplan to continue.'
+            content: 'All form fields are complete. Please upload a stamped floorplan to continue.',
+            intent: 'NEXT_FIELD',
+            timestamp: Date.now()
           });
           this.chatCtas = [
             { label: this.showMockApp ? 'Close Application' : 'Open Application' },
@@ -538,14 +546,18 @@ export class AppComponent extends FormBase implements OnInit, OnDestroy, AfterVi
           // Some other non-form items remain (unlikely with your current schema, but safe)
           this.chatMessages.push({
             role: 'assistant',
-            content: 'Some items are still outstanding.'
+            content: 'Some items are still outstanding.',
+            intent: 'NEXT_FIELD',
+            timestamp: Date.now()
           });
           this.chatCtas = (r?.ctas && r.ctas.length) ? r.ctas : this.defaultAppCtas();
         } else {
           // Nothing missing at all – show submit path
           this.chatMessages.push({
             role: 'assistant',
-            content: 'All required fields are complete. You can compute fees and submit.'
+            content: 'All required fields are complete. You can compute fees and submit.',
+            intent: 'NEXT_FIELD',
+            timestamp: Date.now()
           });
           // Prefer backend CTAs if provided (it adds "Submit Application" when nothing is missing)
           this.chatCtas = (r?.ctas && r.ctas.length)
@@ -696,11 +708,18 @@ export class AppComponent extends FormBase implements OnInit, OnDestroy, AfterVi
           this.setMode('app');
           this.chatMessages.push({
             role: 'assistant',
-            content: 'Started a Liquor Primary application draft. Your responses will be saved as field inputs for the application. Click the "More" button from the application toolbar to get more information on a field or click "Exit" at any time continue chatting.'
+            content: 'Started a Liquor Primary application draft. Your responses will be saved as field inputs for the application. Click the "More" button from the application toolbar to get more information on a field or click "Exit" at any time continue chatting.',
+            intent: res?.intent,
+            timestamp: Date.now()
           });
           this.scrollToBottom();
         } else {
-          this.chatMessages.push({ role: 'assistant', content: finalContent });
+          this.chatMessages.push({
+            role: 'assistant',
+            content: finalContent,
+            intent: res?.intent,
+            timestamp: Date.now()
+          });
           this.scrollToBottom();
         }
 
@@ -725,7 +744,9 @@ export class AppComponent extends FormBase implements OnInit, OnDestroy, AfterVi
           this.awaitingField = res.next_field;
           this.chatMessages.push({
             role: 'assistant',
-            content: `Please complete the next field: <strong>${res.next_field.label}</strong>${res.next_field.required ? ' <span class="required-text">*Required</span>' : ''}`
+            content: `Please complete the next field: <strong>${res.next_field.label}</strong>${res.next_field.required ? ' <span class="required-text">*Required</span>' : ''}`,
+            intent: 'NEXT_FIELD',
+            timestamp: Date.now()
           });
           this.scrollToBottom();
           // this.fieldSummary(res.next_field);
@@ -868,6 +889,39 @@ export class AppComponent extends FormBase implements OnInit, OnDestroy, AfterVi
           : `Cannot submit: ${res?.error || 'Unknown error'}`
       });
       this.scrollToBottom();
+    });
+  }
+
+  submitFeedback(messageIndex: number, feedbackType: 'thumbs_up' | 'thumbs_down') {
+    const message = this.chatMessages[messageIndex];
+    if (!message || message.role !== 'assistant' || message.feedback) {
+      return; // Already has feedback or invalid message
+    }
+
+    // Find the user message that preceded this assistant response
+    const userMessage = messageIndex > 0 && this.chatMessages[messageIndex - 1].role === 'user'
+      ? this.chatMessages[messageIndex - 1].content
+      : undefined;
+
+    const feedbackData = {
+      session_id: this.SESSION_ID,
+      feedback_type: feedbackType,
+      assistant_message: message.content,
+      user_message: userMessage,
+      intent: message.intent,
+      timestamp: Date.now()
+    };
+
+    this.httpClient.post(`${this.orchBase}/feedback`, feedbackData).subscribe({
+      next: (res) => {
+        // Mark the message as having feedback
+        this.chatMessages[messageIndex].feedback = feedbackType;
+        console.error('Feedback submitted successfully', res);
+      },
+      error: (err) => {
+        console.error('Failed to submit feedback', err);
+        this.snackBar.open('Failed to submit feedback', 'Close', { duration: 3000 });
+      }
     });
   }
 }

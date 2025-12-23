@@ -34,11 +34,34 @@
 
       <!-- Chat Bubbles -->
       <div class="messages" #msgList style="height:60vh; overflow-y:auto;">
-        <div *ngFor="let m of chatMessages" class="msg-row" [ngClass]="m.role"
+        <div *ngFor="let m of chatMessages; let i = index" class="msg-row" [ngClass]="m.role"
           style="display:flex; gap:8px; margin:6px 0;">
           <mat-icon *ngIf="m.role==='assistant'">smart_toy</mat-icon>
-          <div class="bubble" [innerHTML]="m.content"
-            style="background:#f5f5f5; border-radius:8px; padding:8px 10px; flex:1;">
+          <div style="flex:1;">
+            <div class="bubble" [innerHTML]="m.content"
+              style="background:#f5f5f5; border-radius:8px; padding:8px 10px;">
+            </div>
+            <!-- Feedback buttons for assistant messages -->
+            <div *ngIf="m.role==='assistant' && i > 0" class="feedback-buttons" style="display:flex; gap:4px; margin-bottom:8px;">
+              <button mat-icon-button
+                      [color]="m.feedback === 'thumbs_up' ? 'primary' : ''"
+                      (click)="submitFeedback(i, 'thumbs_up')"
+                      matTooltip="Helpful"
+                      [disabled]="m.feedback"
+                      [style.opacity]="!m.feedback ? '0.5' : (m.feedback === 'thumbs_up' ? '1' : '0.2')"
+                      style="width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;">
+                <mat-icon style="font-size: 16px; width: 16px; height: 16px; line-height: 16px;">thumb_up</mat-icon>
+              </button>
+              <button mat-icon-button
+                      [color]="m.feedback === 'thumbs_down' ? 'warn' : ''"
+                      (click)="submitFeedback(i, 'thumbs_down')"
+                      matTooltip="Not helpful"
+                      [disabled]="m.feedback"
+                      [style.opacity]="!m.feedback ? '0.5' : (m.feedback === 'thumbs_down' ? '1' : '0.2')"
+                      style="width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;">
+                <mat-icon style="font-size: 16px; width: 16px; height: 16px; line-height: 16px;">thumb_down</mat-icon>
+              </button>
+            </div>
           </div>
         </div>
         <div #bottomAnchor></div>
@@ -198,7 +221,7 @@
           <button class="chat-button btn btn-primary btn-sm" (click)="openChat('en-CA', 'main')">
             <strong>Chat with us</strong>
           </button>
-          <button class="ai-sidebar-button btn btn-primary btn-sm" (click)="toggleSidebar()">
+          <button *ngIf="currentUser && aiAssistantFeatureOn" class="ai-sidebar-button btn btn-primary btn-sm" (click)="toggleSidebar()">
             <strong>AI Assistant</strong>
           </button>
           <button *ngIf="currentUser" type="button" class="feedback-button btn btn-outline-primary"
