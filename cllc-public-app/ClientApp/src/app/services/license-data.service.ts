@@ -28,10 +28,18 @@ export class LicenseDataService extends DataService {
    * @memberof LicenseDataService
    */
   getAutocomplete(queryParams: { name?: string; licenceNumber?: string }): Observable<RelatedLicence[]> {
+    const params = new URLSearchParams();
+    if (queryParams.name) {
+      params.append('name', queryParams.name);
+    }
+    if (queryParams.licenceNumber) {
+      params.append('licenceNumber', queryParams.licenceNumber);
+    }
+    const queryString = params.toString();
     return this.http
       .get<
         RelatedLicence[]
-      >(this.apiPath + `autocomplete?name=${queryParams.name}&licenceNumber=${queryParams.licenceNumber}`, { headers: this.headers })
+      >(this.apiPath + `autocomplete${queryString ? '?' + queryString : ''}`, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
