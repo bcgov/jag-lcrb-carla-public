@@ -35,9 +35,9 @@ export class RelatedLicencePickerComponent implements OnInit {
           this.autocompleteLicences = [];
           this.licenceRequestInProgress = true;
         }),
-        switchMap(value => this.licenceDataService.getAutocomplete(value))
+        switchMap(value => this.licenceDataService.getAutocomplete({ name: value, licenceNumber: value }))
       )
-      .subscribe(data => {        
+      .subscribe(data => {
         this.autocompleteLicences = data;
         this.licenceRequestInProgress = false;
         this.inputAutoComplete.openPanel();
