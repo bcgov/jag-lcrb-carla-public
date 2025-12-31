@@ -121,7 +121,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
 
             var _sharePointFileManager = new SharePointFileManager(_configuration);
 
-            List<SharePointFileManager.FileDetailsList> fileDetailsList = null;
+            List<SharePointFileDetailsList> fileDetailsList = null;
             try
             {
                 fileDetailsList = _sharePointFileManager
@@ -164,70 +164,48 @@ namespace Gov.Lclb.Cllb.Services.FileManager
 
         private string GetDocumentListTitle(string entityName)
         {
-            string listTitle;
             switch (entityName.ToLower())
             {
                 case "account":
-                    listTitle = SharePointFileManager.DefaultDocumentListTitle;
-                    break;
+                    return SharePointConstants.DefaultDocumentListTitle;
                 case "application":
-                    listTitle = SharePointFileManager.ApplicationDocumentListTitle;
-                    break;
+                    return SharePointConstants.ApplicationDocumentListTitle;
                 case "contact":
-                    listTitle = SharePointFileManager.ContactDocumentListTitle;
-                    break;
+                    return SharePointConstants.ContactDocumentListTitle;
                 case "worker":
-                    listTitle = SharePointFileManager.WorkerDocumentListTitle;
-                    break;
+                    return SharePointConstants.WorkerDocumentListTitle;
                 case "event":
-                    listTitle = SharePointFileManager.EventDocumentListTitle;
-                    break;
+                    return SharePointConstants.EventDocumentListTitle;
                 case "federal_report":
-                    listTitle = SharePointFileManager.FederalReportListTitle;
-                    break;
+                    return SharePointConstants.FederalReportListTitle;
                 case "licence":
-                    listTitle = SharePointFileManager.LicenceDocumentListTitle;
-                    break;
+                    return SharePointConstants.LicenceDocumentListTitle;
                 default:
-                    listTitle = entityName;
-                    break;
+                    return entityName;
             }
-
-            return listTitle;
         }
 
         private string GetDocumentTemplateUrlPart(string entityName)
         {
-            var listTitle = "";
             switch (entityName.ToLower())
             {
                 case "account":
-                    listTitle = SharePointFileManager.DefaultDocumentUrlTitle;
-                    break;
+                    return SharePointConstants.DefaultDocumentUrlTitle;
                 case "application":
-                    listTitle = "adoxio_application";
-                    break;
+                    return SharePointConstants.ApplicationDocumentUrlTitle;
                 case "contact":
-                    listTitle = SharePointFileManager.ContactDocumentListTitle;
-                    break;
+                    return SharePointConstants.ContactDocumentListTitle;
                 case "worker":
-                    listTitle = "adoxio_worker";
-                    break;
+                    return SharePointConstants.WorkerDocumentUrlTitle;
                 case "event":
-                    listTitle = SharePointFileManager.EventDocumentListTitle;
-                    break;
+                    return SharePointConstants.EventDocumentListTitle;
                 case "federal_report":
-                    listTitle = SharePointFileManager.FederalReportListTitle;
-                    break;
+                    return SharePointConstants.FederalReportListTitle;
                 case "licence":
-                    listTitle = SharePointFileManager.LicenceDocumentUrlTitle;
-                    break;
+                    return SharePointConstants.LicenceDocumentUrlTitle;
                 default:
-                    listTitle = entityName;
-                    break;
+                    return entityName;
             }
-
-            return listTitle;
         }
 
         private void CreateDocumentLibraryIfMissing(string listTitle, string documentTemplateUrl = null)
@@ -401,7 +379,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             }
 
             // Get the file details list in folder
-            List<SharePointFileManager.FileDetailsList> fileDetailsList = null;
+            List<SharePointFileDetailsList> fileDetailsList = null;
             var _sharePointFileManager = new SharePointFileManager(_configuration);
             try
             {
