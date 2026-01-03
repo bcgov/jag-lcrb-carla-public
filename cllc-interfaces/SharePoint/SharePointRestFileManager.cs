@@ -958,7 +958,6 @@ public class SharePointRestFileManager : ISharePointFileManager
         // Ensure we have a valid access token (auto-refresh if needed)
         await EnsureValidAccessTokenAsync();
 
-        bool result = false;
         string url =
             $"{ApiEndpoint}web/GetFileByServerRelativeUrl('{EscapeApostrophe(oldServerRelativeUrl)}')/moveto(newurl='{EscapeApostrophe(newServerRelativeUrl)}', flags=1)";
         HttpRequestMessage endpointRequest = new HttpRequestMessage(HttpMethod.Post, url);

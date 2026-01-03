@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
@@ -20,6 +21,12 @@ namespace Gov.Lclb.Cllb.Interfaces;
 /// </summary>
 public class SharePointGraphManager : ISharePointFileManager
 {
+    private const int UploadSessionThreshold = 4 * 1024 * 1024; // 4MB
+    private const int ChunkSize = 320 * 1024 * 10; // 3.2MB
+    private const int HttpClientTimeoutSeconds = 100;
+    private const int MaxAuthRetries = 3;
+    private const int InitialRetryDelayMs = 1000;
+
     private AuthenticationResult authenticationResult;
     private IConfidentialClientApplication confidentialClientApp;
     private const string GraphScope = "https://graph.microsoft.com/.default";
@@ -33,13 +40,15 @@ public class SharePointGraphManager : ISharePointFileManager
     {
         // Create the HttpClient for Graph API calls
         _Client = new HttpClient();
-        _Client.Timeout = TimeSpan.FromSeconds(100);
+        _Client.Timeout = TimeSpan.FromSeconds(HttpClientTimeoutSeconds);
 
         // SharePoint Online configuration
         string sharePointOdataUri = Configuration["SHAREPOINT_ODATA_URI"];
         string sharePointAadTenantId = Configuration["SHAREPOINT_AAD_TENANTID"];
         string sharePointClientId = Configuration["SHAREPOINT_CLIENT_ID"];
         string sharePointClientSecret = Configuration["SHAREPOINT_CLIENT_SECRET"];
+        string sharePointCertificatePath = Configuration["SHAREPOINT_CERTIFICATE_PATH"];
+        string sharePointCertificatePassword = Configuration["SHAREPOINT_CERTIFICATE_PASSWORD"];
 
         if (string.IsNullOrEmpty(sharePointOdataUri))
         {
@@ -56,21 +65,74 @@ public class SharePointGraphManager : ISharePointFileManager
             throw new ArgumentException("SHAREPOINT_CLIENT_ID configuration is required");
         }
 
-        if (string.IsNullOrEmpty(sharePointClientSecret))
-        {
-            throw new ArgumentException("SHAREPOINT_CLIENT_SECRET configuration is required");
-        }
-
         SiteUrl = sharePointOdataUri;
 
         // Configure OAuth authentication using MSAL with client credentials flow
         string authority = $"https://login.microsoftonline.com/{sharePointAadTenantId}";
 
-        confidentialClientApp = ConfidentialClientApplicationBuilder
+        var appBuilder = ConfidentialClientApplicationBuilder
             .Create(sharePointClientId)
-            .WithClientSecret(sharePointClientSecret)
-            .WithAuthority(new Uri(authority))
-            .Build();
+            .WithAuthority(new Uri(authority));
+
+        // Support both certificate and client secret authentication
+        if (!string.IsNullOrEmpty(sharePointCertificatePath))
+        {
+            // Certificate-based authentication
+            if (!File.Exists(sharePointCertificatePath))
+            {
+                throw new FileNotFoundException(
+                    $"Certificate file not found at path: {sharePointCertificatePath}"
+                );
+            }
+
+            // Load certificate with private key flags
+            // Use EphemeralKeySet for better cross-platform compatibility and to avoid permission issues
+            X509Certificate2 certificate;
+            X509KeyStorageFlags keyStorageFlags =
+                X509KeyStorageFlags.EphemeralKeySet | X509KeyStorageFlags.Exportable;
+
+            if (!string.IsNullOrEmpty(sharePointCertificatePassword))
+            {
+                certificate = new X509Certificate2(
+                    sharePointCertificatePath,
+                    sharePointCertificatePassword,
+                    keyStorageFlags
+                );
+            }
+            else
+            {
+                certificate = new X509Certificate2(
+                    sharePointCertificatePath,
+                    (string)null,
+                    keyStorageFlags
+                );
+            }
+
+            // Verify the certificate has a private key
+            if (!certificate.HasPrivateKey)
+            {
+                throw new InvalidOperationException(
+                    $"The certificate at '{sharePointCertificatePath}' does not contain a private key. "
+                        + "Please ensure you're using a .pfx/.p12 file that was exported with the private key included. "
+                        + ".cer files only contain the public key and won't work for authentication."
+                );
+            }
+
+            appBuilder = appBuilder.WithCertificate(certificate);
+        }
+        else if (!string.IsNullOrEmpty(sharePointClientSecret))
+        {
+            // Client secret authentication (existing method)
+            appBuilder = appBuilder.WithClientSecret(sharePointClientSecret);
+        }
+        else
+        {
+            throw new ArgumentException(
+                "Either SHAREPOINT_CLIENT_SECRET or SHAREPOINT_CERTIFICATE_PATH configuration is required"
+            );
+        }
+
+        confidentialClientApp = appBuilder.Build();
 
         // Standard headers for Graph API access
         _Client.DefaultRequestHeaders.Add("Accept", "application/json");
@@ -84,11 +146,11 @@ public class SharePointGraphManager : ISharePointFileManager
     /// </summary>
     private async Task EnsureValidAccessTokenAsync()
     {
-        int maxRetries = 3;
-        int retryDelayMs = 1000;
+        int retryDelayMs = InitialRetryDelayMs;
+
         Exception lastException = null;
 
-        for (int attempt = 0; attempt < maxRetries; attempt++)
+        for (int attempt = 0; attempt < MaxAuthRetries; attempt++)
         {
             try
             {
@@ -98,16 +160,12 @@ public class SharePointGraphManager : ISharePointFileManager
 
                 string newAuthHeader = $"Bearer {authenticationResult.AccessToken}";
 
-                Console.WriteLine("2-----------------------------------------");
-                Console.WriteLine(authenticationResult.AccessToken);
-                Console.WriteLine("2-----------------------------------------");
-
                 _Client.DefaultRequestHeaders.Remove("Authorization");
                 _Client.DefaultRequestHeaders.Add("Authorization", newAuthHeader);
 
                 return;
             }
-            catch (MsalServiceException ex) when (attempt < maxRetries - 1)
+            catch (MsalServiceException ex) when (attempt < MaxAuthRetries - 1)
             {
                 lastException = ex;
                 await Task.Delay(retryDelayMs);
@@ -116,7 +174,7 @@ public class SharePointGraphManager : ISharePointFileManager
             catch (MsalServiceException ex)
             {
                 throw new Exception(
-                    $"Failed to acquire Graph API access token after {maxRetries} attempts: {ex.Message}",
+                    $"Failed to acquire Graph API access token after {MaxAuthRetries} attempts: {ex.Message}",
                     ex
                 );
             }
@@ -132,7 +190,7 @@ public class SharePointGraphManager : ISharePointFileManager
         if (lastException != null)
         {
             throw new Exception(
-                $"Failed to acquire Graph API access token after {maxRetries} attempts",
+                $"Failed to acquire Graph API access token after {MaxAuthRetries} attempts",
                 lastException
             );
         }
@@ -164,6 +222,7 @@ public class SharePointGraphManager : ISharePointFileManager
 
         string responseContent = await response.Content.ReadAsStringAsync();
         var siteInfo = JsonConvert.DeserializeObject<JObject>(responseContent);
+
         SiteId = siteInfo["id"]?.ToString();
 
         if (string.IsNullOrEmpty(SiteId))
@@ -203,7 +262,7 @@ public class SharePointGraphManager : ISharePointFileManager
         await EnsureSiteIdResolvedAsync();
 
         string requestUrl =
-            $"{GraphApiEndpoint}sites/{SiteId}/lists?$filter=displayName eq '{listTitle}'";
+            $"{GraphApiEndpoint}sites/{SiteId}/lists?$filter=displayName eq '{EscapeApostrophe(listTitle)}'";
         var response = await _Client.GetAsync(requestUrl);
         response.EnsureSuccessStatusCode();
 
@@ -336,15 +395,24 @@ public class SharePointGraphManager : ISharePointFileManager
             throw new Exception($"Document library '{listTitle}' not found");
         }
 
-        var requestBody = new { name = folderName, folder = new { } };
+        // Use Drive API to create folder (consistent with file upload/delete operations)
+        string encodedFolderName = Uri.EscapeDataString(folderName);
+        string requestUrl =
+            $"{GraphApiEndpoint}sites/{SiteId}/lists/{listId}/drive/root:/{encodedFolderName}";
 
-        string requestUrl = $"{GraphApiEndpoint}sites/{SiteId}/lists/{listId}/items";
+        var requestBody = new { folder = new { }, name = folderName };
         var content = new StringContent(
             JsonConvert.SerializeObject(requestBody),
             Encoding.UTF8,
             "application/json"
         );
-        var response = await _Client.PostAsync(requestUrl, content);
+
+        // PATCH is used to create/update in Drive API
+        var request = new HttpRequestMessage(new HttpMethod("PATCH"), requestUrl)
+        {
+            Content = content
+        };
+        var response = await _Client.SendAsync(request);
         response.EnsureSuccessStatusCode();
     }
 
@@ -362,8 +430,10 @@ public class SharePointGraphManager : ISharePointFileManager
             return null;
         }
 
+        // Use Drive API to get folder (consistent with file operations)
+        string encodedFolderName = Uri.EscapeDataString(folderName);
         string requestUrl =
-            $"{GraphApiEndpoint}sites/{SiteId}/lists/{listId}/items?$filter=fields/FileLeafRef eq '{folderName}' and folder ne null&$expand=fields";
+            $"{GraphApiEndpoint}sites/{SiteId}/lists/{listId}/drive/root:/{encodedFolderName}";
         var response = await _Client.GetAsync(requestUrl);
 
         if (!response.IsSuccessStatusCode)
@@ -372,10 +442,7 @@ public class SharePointGraphManager : ISharePointFileManager
         }
 
         string responseContent = await response.Content.ReadAsStringAsync();
-        var items = JsonConvert.DeserializeObject<JObject>(responseContent);
-        var folder = items["value"]?.FirstOrDefault();
-
-        return folder != null ? JsonConvert.DeserializeObject(folder.ToString()) : null;
+        return JsonConvert.DeserializeObject(responseContent);
     }
 
     /// <summary>
@@ -419,10 +486,7 @@ public class SharePointGraphManager : ISharePointFileManager
             await CreateFolder(listTitle, folderName);
         }
 
-        // Graph API uses 4MB threshold for upload sessions
-        const int uploadSessionThreshold = 4 * 1024 * 1024; // 4MB
-
-        if (data.Length < uploadSessionThreshold)
+        if (data.Length < UploadSessionThreshold)
         {
             // Simple upload for small files
             return await SimpleUpload(listId, folderName, fileName, data, contentType);
@@ -505,13 +569,12 @@ public class SharePointGraphManager : ISharePointFileManager
         }
 
         // Step 2: Upload file in chunks
-        const int chunkSize = 320 * 1024 * 10; // 3.2MB chunks (recommended by Microsoft)
         int totalBytes = data.Length;
         int uploadedBytes = 0;
 
         while (uploadedBytes < totalBytes)
         {
-            int bytesToUpload = Math.Min(chunkSize, totalBytes - uploadedBytes);
+            int bytesToUpload = Math.Min(ChunkSize, totalBytes - uploadedBytes);
             byte[] chunk = new byte[bytesToUpload];
             Array.Copy(data, uploadedBytes, chunk, 0, bytesToUpload);
 
@@ -544,19 +607,42 @@ public class SharePointGraphManager : ISharePointFileManager
     }
 
     /// <summary>
-    /// Download a file from SharePoint with robust URL parsing.
+    /// Download a file from SharePoint.
+    /// NOTE: This method expects the full path including library name as first segment after site path.
+    /// For better reliability, extract listTitle from the path and use list-specific drive API.
     /// </summary>
     public async Task<byte[]> DownloadFile(string serverRelativeUrl)
     {
         await EnsureValidAccessTokenAsync();
         await EnsureSiteIdResolvedAsync();
 
-        // Parse server relative URL to extract the actual file path
-        // Remove site path from the server relative URL if present
+        // Parse to extract file path relative to site
         string filePath = ParseServerRelativeUrl(serverRelativeUrl);
 
-        string encodedPath = string.Join("/", filePath.Split('/').Select(Uri.EscapeDataString));
-        string requestUrl = $"{GraphApiEndpoint}sites/{SiteId}/drive/root:/{encodedPath}:/content";
+        // Extract library name (first segment) and remaining path
+        int firstSlash = filePath.IndexOf('/');
+        if (firstSlash <= 0)
+        {
+            throw new ArgumentException(
+                $"Invalid path format: {serverRelativeUrl}. Expected format: /library/folder/file.pdf"
+            );
+        }
+
+        string listTitle = filePath.Substring(0, firstSlash);
+        string pathInLibrary = filePath.Substring(firstSlash + 1);
+
+        var listId = await GetListIdByTitleAsync(listTitle);
+        if (string.IsNullOrEmpty(listId))
+        {
+            throw new Exception($"Document library '{listTitle}' not found");
+        }
+
+        string encodedPath = string.Join(
+            "/",
+            pathInLibrary.Split('/').Select(Uri.EscapeDataString)
+        );
+        string requestUrl =
+            $"{GraphApiEndpoint}sites/{SiteId}/lists/{listId}/drive/root:/{encodedPath}:/content";
 
         var response = await _Client.GetAsync(requestUrl);
 
@@ -598,15 +684,40 @@ public class SharePointGraphManager : ISharePointFileManager
 
     /// <summary>
     /// Delete a file from SharePoint.
+    /// NOTE: This method expects the full path including library name as first segment after site path.
     /// </summary>
     public async Task<bool> DeleteFile(string serverRelativeUrl)
     {
         await EnsureValidAccessTokenAsync();
         await EnsureSiteIdResolvedAsync();
 
+        // Parse to extract file path relative to site
         string filePath = ParseServerRelativeUrl(serverRelativeUrl);
-        string encodedPath = string.Join("/", filePath.Split('/').Select(Uri.EscapeDataString));
-        string requestUrl = $"{GraphApiEndpoint}sites/{SiteId}/drive/root:/{encodedPath}";
+
+        // Extract library name (first segment) and remaining path
+        int firstSlash = filePath.IndexOf('/');
+        if (firstSlash <= 0)
+        {
+            throw new ArgumentException(
+                $"Invalid path format: {serverRelativeUrl}. Expected format: /library/folder/file.pdf"
+            );
+        }
+
+        string listTitle = filePath.Substring(0, firstSlash);
+        string pathInLibrary = filePath.Substring(firstSlash + 1);
+
+        var listId = await GetListIdByTitleAsync(listTitle);
+        if (string.IsNullOrEmpty(listId))
+        {
+            throw new Exception($"Document library '{listTitle}' not found");
+        }
+
+        string encodedPath = string.Join(
+            "/",
+            pathInLibrary.Split('/').Select(Uri.EscapeDataString)
+        );
+        string requestUrl =
+            $"{GraphApiEndpoint}sites/{SiteId}/lists/{listId}/drive/root:/{encodedPath}";
 
         var response = await _Client.DeleteAsync(requestUrl);
 
@@ -631,32 +742,87 @@ public class SharePointGraphManager : ISharePointFileManager
     /// </summary>
     public async Task<bool> DeleteFile(string listTitle, string folderName, string fileName)
     {
+        await EnsureValidAccessTokenAsync();
+        await EnsureSiteIdResolvedAsync();
+
+        var listId = await GetListIdByTitleAsync(listTitle);
+        if (string.IsNullOrEmpty(listId))
+        {
+            throw new Exception($"Document library '{listTitle}' not found");
+        }
+
         folderName = FixFoldername(folderName);
-        string serverRelativeUrl = GetServerRelativeURL(listTitle, folderName) + "/" + fileName;
-        return await DeleteFile(serverRelativeUrl);
+        string encodedFolderName = Uri.EscapeDataString(folderName);
+        string encodedFileName = Uri.EscapeDataString(fileName);
+
+        string requestUrl =
+            $"{GraphApiEndpoint}sites/{SiteId}/lists/{listId}/drive/root:/{encodedFolderName}/{encodedFileName}";
+
+        var response = await _Client.DeleteAsync(requestUrl);
+
+        if (response.StatusCode == HttpStatusCode.NoContent || response.IsSuccessStatusCode)
+        {
+            return true;
+        }
+
+        if (response.StatusCode == HttpStatusCode.NotFound)
+        {
+            return true;
+        }
+
+        string errorContent = await response.Content.ReadAsStringAsync();
+        throw new Exception(
+            $"Failed to delete file '{fileName}': {response.StatusCode} - {errorContent}"
+        );
     }
 
     /// <summary>
     /// Rename or move a file.
+    /// NOTE: Both URLs must reference the same document library.
     /// </summary>
     public async Task<bool> RenameFile(string oldServerRelativeUrl, string newServerRelativeUrl)
     {
         await EnsureValidAccessTokenAsync();
         await EnsureSiteIdResolvedAsync();
 
+        // Parse old path
         string oldFilePath = ParseServerRelativeUrl(oldServerRelativeUrl);
+        int firstSlash = oldFilePath.IndexOf('/');
+        if (firstSlash <= 0)
+        {
+            throw new ArgumentException($"Invalid path format: {oldServerRelativeUrl}");
+        }
+
+        string listTitle = oldFilePath.Substring(0, firstSlash);
+        string oldPathInLibrary = oldFilePath.Substring(firstSlash + 1);
+
+        var listId = await GetListIdByTitleAsync(listTitle);
+        if (string.IsNullOrEmpty(listId))
+        {
+            throw new Exception($"Document library '{listTitle}' not found");
+        }
+
         string encodedOldPath = string.Join(
             "/",
-            oldFilePath.Split('/').Select(Uri.EscapeDataString)
+            oldPathInLibrary.Split('/').Select(Uri.EscapeDataString)
         );
+        string requestUrl =
+            $"{GraphApiEndpoint}sites/{SiteId}/lists/{listId}/drive/root:/{encodedOldPath}";
 
+        // Parse new path (must be in same library)
         string newFilePath = ParseServerRelativeUrl(newServerRelativeUrl);
+        if (!newFilePath.StartsWith(listTitle + "/"))
+        {
+            throw new ArgumentException(
+                $"Cannot move file across libraries. Old: {listTitle}, New path: {newFilePath}"
+            );
+        }
 
-        string requestUrl = $"{GraphApiEndpoint}sites/{SiteId}/drive/root:/{encodedOldPath}";
-
-        int lastSlash = newFilePath.LastIndexOf('/');
-        string newParentPath = lastSlash > 0 ? newFilePath.Substring(0, lastSlash) : "";
-        string newFileName = lastSlash >= 0 ? newFilePath.Substring(lastSlash + 1) : newFilePath;
+        string newPathInLibrary = newFilePath.Substring(listTitle.Length + 1);
+        int lastSlash = newPathInLibrary.LastIndexOf('/');
+        string newParentPath = lastSlash > 0 ? newPathInLibrary.Substring(0, lastSlash) : "";
+        string newFileName =
+            lastSlash >= 0 ? newPathInLibrary.Substring(lastSlash + 1) : newPathInLibrary;
 
         var requestBody = new
         {
@@ -754,12 +920,6 @@ public class SharePointGraphManager : ISharePointFileManager
                         fileDocType = fileName.Substring(0, fileDoctypeEnd);
                     }
 
-                    // Filter by document type if specified
-                    if (documentType != null && fileDocType != documentType)
-                    {
-                        continue;
-                    }
-
                     var fileDetails = new SharePointFileDetailsList
                     {
                         Name = fileName,
@@ -767,8 +927,14 @@ public class SharePointGraphManager : ISharePointFileManager
                         Length = file["size"]?.ToString(),
                         TimeCreated = file["createdDateTime"]?.ToString(),
                         TimeLastModified = file["lastModifiedDateTime"]?.ToString(),
-                        DocumentType = fileDocType
+                        DocumentType = null
                     };
+
+                    // Only set DocumentType if it matches the filter
+                    if (fileDoctypeEnd > -1 && fileDocType == documentType)
+                    {
+                        fileDetails.DocumentType = documentType;
+                    }
 
                     fileDetailsList.Add(fileDetails);
                 }
@@ -776,6 +942,12 @@ public class SharePointGraphManager : ISharePointFileManager
 
             // Check for next page
             requestUrl = items["@odata.nextLink"]?.ToString();
+        }
+
+        // Filter by document type at the end, like REST version
+        if (documentType != null)
+        {
+            fileDetailsList = fileDetailsList.Where(f => f.DocumentType == documentType).ToList();
         }
 
         return fileDetailsList;
@@ -795,8 +967,9 @@ public class SharePointGraphManager : ISharePointFileManager
             return false;
         }
 
+        string encodedFolderName = Uri.EscapeDataString(folderName);
         string requestUrl =
-            $"{GraphApiEndpoint}sites/{SiteId}/lists/{listId}/drive/root:/{folderName}";
+            $"{GraphApiEndpoint}sites/{SiteId}/lists/{listId}/drive/root:/{encodedFolderName}";
 
         var response = await _Client.DeleteAsync(requestUrl);
 
@@ -983,6 +1156,7 @@ public class SharePointGraphManager : ISharePointFileManager
         {
             return value;
         }
+
         return value.Replace("'", "''");
     }
 
@@ -996,7 +1170,7 @@ public class SharePointGraphManager : ISharePointFileManager
         Uri siteUri = new Uri(SiteUrl);
         string sitePath = siteUri.AbsolutePath.TrimStart('/').TrimEnd('/');
 
-        string serverRelativeUrl = "";
+        string serverRelativeUrl;
         if (!string.IsNullOrEmpty(sitePath))
         {
             serverRelativeUrl = $"/{sitePath}/";
@@ -1006,7 +1180,9 @@ public class SharePointGraphManager : ISharePointFileManager
             serverRelativeUrl = "/";
         }
 
-        serverRelativeUrl += $"{listTitle}/{folderName}";
+        serverRelativeUrl +=
+            Uri.EscapeDataString(listTitle) + "/" + Uri.EscapeDataString(folderName);
+
         return serverRelativeUrl;
     }
 
@@ -1019,7 +1195,9 @@ public class SharePointGraphManager : ISharePointFileManager
             "/",
             folderServerRelativeUrl.Split('/').Select(Uri.EscapeDataString)
         );
+
         string encodedFileName = Uri.EscapeDataString(fileName);
+
         return $"{GraphApiEndpoint}sites/{SiteId}/drive/root:/{encodedFolder}/{encodedFileName}:/content";
     }
 

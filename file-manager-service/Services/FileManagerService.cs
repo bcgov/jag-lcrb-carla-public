@@ -307,25 +307,26 @@ namespace Gov.Lclb.Cllb.Services.FileManager
         {
             var result = new UploadFileReply();
 
-            if (_configuration["DISABLE_SHAREPOINT_INTEGRATION"] == "true")
-            {
-                result.ResultStatus = ResultStatus.Success;
-                result.FileName = request.FileName;
-                return Task.FromResult(result);
-            }
-
             var logFileName = WordSanitizer.Sanitize(request.FileName);
             var logFolderName = WordSanitizer.Sanitize(request.FolderName);
 
-            var _sharePointFileManager = new SharePointFileManager(_configuration);
-
-            CreateDocumentLibraryIfMissing(
-                GetDocumentListTitle(request.EntityName),
-                GetDocumentTemplateUrlPart(request.EntityName)
-            );
-
             try
             {
+                if (_configuration["DISABLE_SHAREPOINT_INTEGRATION"] == "true")
+                {
+                    result.ResultStatus = ResultStatus.Success;
+                    result.FileName = request.FileName;
+                    return Task.FromResult(result);
+                }
+
+
+                var _sharePointFileManager = new SharePointFileManager(_configuration);
+
+                CreateDocumentLibraryIfMissing(
+                    GetDocumentListTitle(request.EntityName),
+                    GetDocumentTemplateUrlPart(request.EntityName)
+                );
+
                 var fileName = _sharePointFileManager
                     .AddFile(
                         GetDocumentTemplateUrlPart(request.EntityName),
