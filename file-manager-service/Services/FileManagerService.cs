@@ -92,7 +92,7 @@ public class FileManagerService : FileManager.FileManagerBase
 
         var logFolder = WordSanitizer.Sanitize(request.FolderName);
 
-        var listTitle = GetDocumentListTitle(request.EntityName);
+        var listTitle = GetDocumentTemplateUrlPart(request.EntityName);
 
         var _sharePointFileManager = new SharePointFileManager(_configuration, _loggerFactory);
 
@@ -122,7 +122,7 @@ public class FileManagerService : FileManager.FileManagerBase
             try
             {
                 _sharePointFileManager
-                    .CreateFolder(GetDocumentListTitle(request.EntityName), request.FolderName)
+                    .CreateFolder(GetDocumentTemplateUrlPart(request.EntityName), request.FolderName)
                     .GetAwaiter()
                     .GetResult();
                 folderExists = _sharePointFileManager
@@ -337,7 +337,7 @@ public class FileManagerService : FileManager.FileManagerBase
             var _sharePointFileManager = new SharePointFileManager(_configuration, _loggerFactory);
 
             CreateDocumentLibraryIfMissing(
-                GetDocumentListTitle(request.EntityName),
+                GetDocumentTemplateUrlPart(request.EntityName),
                 GetDocumentTemplateUrlPart(request.EntityName)
             );
 
@@ -483,7 +483,7 @@ public class FileManagerService : FileManager.FileManagerBase
             var _sharePointFileManager = new SharePointFileManager(_configuration, _loggerFactory);
 
             // Ask SharePoint whether this filename would be truncated upon upload
-            var listTitle = GetDocumentListTitle(request.EntityName);
+            var listTitle = GetDocumentTemplateUrlPart(request.EntityName);
             var maybeTruncated = _sharePointFileManager.GetTruncatedFileName(
                 request.FileName,
                 listTitle,
@@ -517,6 +517,12 @@ public class FileManagerService : FileManager.FileManagerBase
         }
     }
 
+    /// <summary>
+    /// Maps a generic entity name to its SharePoint document list `displayName`.
+    /// Example: "application" -> "Application".
+    /// </summary>
+    /// <param name="entityName"></param>
+    /// <returns></returns>
     private string GetDocumentListTitle(string entityName)
     {
         switch (entityName.ToLower())
@@ -542,6 +548,12 @@ public class FileManagerService : FileManager.FileManagerBase
         }
     }
 
+    /// <summary>
+    /// Maps a generic entity name to its SharePoint document list `name`.
+    /// Example: "application" -> "adoxio_application".
+    /// </summary>
+    /// <param name="entityName"></param>
+    /// <returns></returns>
     private string GetDocumentTemplateUrlPart(string entityName)
     {
         switch (entityName.ToLower())
