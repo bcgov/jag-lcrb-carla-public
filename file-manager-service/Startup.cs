@@ -134,11 +134,26 @@ namespace Gov.Lclb.Cllb.Services.FileManager
 
                 // Fix for bad SSL issues
 
+                var logConfig = new LoggerConfiguration().Enrich.FromLogContext().Enrich.WithExceptionDetails();
 
-                Log.Logger = new LoggerConfiguration()
-                    .Enrich.FromLogContext()
-                    .Enrich.WithExceptionDetails()
-                    .WriteTo.Console()
+                // Enable debug logging in development
+                if (env.IsDevelopment())
+                {
+                    logConfig
+                        .MinimumLevel.Debug()
+                        .WriteTo.Console(
+                            restrictedToMinimumLevel: LogEventLevel.Debug,
+                            outputTemplate: "[{Timestamp:yyyy-MM-dd HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}"
+                        );
+                }
+                else
+                {
+                    logConfig.WriteTo.Console(
+                        outputTemplate: "[{Timestamp:yyyy-MM-dd HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}"
+                    );
+                }
+
+                Log.Logger = logConfig
                     .WriteTo.EventCollector(
                         Configuration["SPLUNK_COLLECTOR_URL"],
                         sourceType: "filemanagerservice",
@@ -162,10 +177,19 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             }
             else
             {
-                Log.Logger = new LoggerConfiguration()
-                    .Enrich.FromLogContext()
-                    .Enrich.WithExceptionDetails()
-                    .WriteTo.Console()
+                var logConfig = new LoggerConfiguration().Enrich.FromLogContext().Enrich.WithExceptionDetails();
+
+                // Enable debug logging in development
+                if (env.IsDevelopment())
+                {
+                    logConfig.MinimumLevel.Debug();
+                }
+
+                Log.Logger = logConfig
+                    .WriteTo.Console(
+                        restrictedToMinimumLevel: env.IsDevelopment() ? LogEventLevel.Debug : LogEventLevel.Information,
+                        outputTemplate: "[{Timestamp:yyyy-MM-dd HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}"
+                    )
                     .CreateLogger();
             }
         }
