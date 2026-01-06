@@ -16,16 +16,6 @@ namespace Gov.Lclb.Cllb.Services.FileManager
     /// </summary>
     public static partial class FileManager
     {
-        public const string DefaultDocumentListTitle = "Account";
-        public const string AccountDocumentUrlTitle = "account";
-        public const string ApplicationDocumentListTitle = "Application";
-        public const string ApplicationDocumentUrlTitle = "adoxio_application";
-        public const string ContactDocumentListTitle = "contact";
-        public const string WorkerDocumentListTitle = "Worker Qualification";
-        public const string WorkerDocumentUrlTitle = "adoxio_worker";
-        public const string LicenceDocumentListTitle = "Licence";
-        public const string LicenceDocumentUrlTitle = "adoxio_licences";
-
         public static void CreateFolderIfNotExist(this FileManagerClient _fileManagerClient, ILogger _logger, string entityName, string folderName)
         {
             string logFolderName = WordSanitizer.Sanitize(folderName);
