@@ -1,4 +1,5 @@
-﻿using Gov.Lclb.Cllb.Interfaces.Models;
+﻿using Gov.Lclb.Cllb.Interfaces;
+using Gov.Lclb.Cllb.Interfaces.Models;
 using System;
 using System.Linq;
 
@@ -9,8 +10,6 @@ namespace Gov.Lclb.Cllb.Public.Models
     /// </summary>
     public static class AccountExtensions
     {
-        const string AccountDocumentListTitle = "account";
-
         private static string GetServerRelativeURL(string listTitle, string folderName)
         {
             string serverRelativeUrl = Uri.EscapeUriString(listTitle) + "/" + Uri.EscapeUriString(folderName);
@@ -37,7 +36,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                     {
                         string serverRelativeUrl = "";
 
-                        serverRelativeUrl += "/" + GetServerRelativeURL(AccountDocumentListTitle, location.Relativeurl);
+                        serverRelativeUrl += "/" + GetServerRelativeURL(SharePointConstants.AccountFolderInternalName, location.Relativeurl);
 
                         result = serverRelativeUrl;
                     }
@@ -49,7 +48,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 string accountIdCleaned = account.Accountid.ToUpper().Replace("-", "");
                 string folderName = $"_{accountIdCleaned}";
 
-                serverRelativeUrl += "/" + GetServerRelativeURL(AccountDocumentListTitle, folderName);
+                serverRelativeUrl += "/" + GetServerRelativeURL(SharePointConstants.AccountFolderInternalName, folderName);
 
                 result = serverRelativeUrl;
 
