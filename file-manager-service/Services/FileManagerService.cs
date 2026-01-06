@@ -532,9 +532,11 @@ public class FileManagerService : FileManager.FileManagerBase
             case "event":
                 return SharePointConstants.EventDocumentListTitle;
             case "federal_report":
-                return SharePointConstants.FederalReportListTitle;
+                return SharePointConstants.FederalReportDocumentListTitle;
             case "licence":
                 return SharePointConstants.LicenceDocumentListTitle;
+            case "special_event":
+                return SharePointConstants.SpecialEventDocumentListTitle;
             default:
                 return entityName;
         }
@@ -549,15 +551,17 @@ public class FileManagerService : FileManager.FileManagerBase
             case "application":
                 return SharePointConstants.ApplicationDocumentUrlTitle;
             case "contact":
-                return SharePointConstants.ContactDocumentListTitle;
+                return SharePointConstants.ContactDocumentUrlTitle;
             case "worker":
                 return SharePointConstants.WorkerDocumentUrlTitle;
             case "event":
-                return SharePointConstants.EventDocumentListTitle;
+                return SharePointConstants.EventDocumentUrlTitle;
             case "federal_report":
-                return SharePointConstants.FederalReportListTitle;
+                return SharePointConstants.FederalReportDocumentUrlTitle;
             case "licence":
                 return SharePointConstants.LicenceDocumentUrlTitle;
+            case "special_event":
+                return SharePointConstants.SpecialEventDocumentUrlTitle;
             default:
                 return entityName;
         }

@@ -37,6 +37,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                 .UseSerilog()
                 .UseOpenShiftIntegration(_ => _.CertificateMountPoint = "/var/run/secrets/service-cert")
                 .UseStartup<Startup>()
+                .UseUrls("http://localhost:5100", "https://localhost:5101")
                 .UseKestrel(options =>
                 {
                     options.Limits.MaxRequestBodySize = 512 * 1024 * 1024; // allow large transfers

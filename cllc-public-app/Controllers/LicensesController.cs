@@ -168,7 +168,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             // create a SharePointDocumentLocation link
             var folderName = licence.GetDocumentFolderName();
-            _fileManagerClient.CreateFolderIfNotExist(_logger, LicenceDocumentUrlTitle, folderName);
+            _fileManagerClient.CreateFolderIfNotExist(_logger, SharePointConstants.LicenceDocumentUrlTitle, folderName);
             _dynamicsClient.CreateLicenceDocumentLocation(licence, folderName, folderName);
         }
 

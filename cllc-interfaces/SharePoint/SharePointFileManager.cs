@@ -116,6 +116,11 @@ public class SharePointFileManager
 
                 string newAuthHeader = $"Bearer {authenticationResult.AccessToken}";
 
+                _logger.LogDebug(
+                    "EnsureValidAccessTokenAsync - Access Token {AccessToken}",
+                    authenticationResult.AccessToken
+                );
+
                 _Client.DefaultRequestHeaders.Remove("Authorization");
                 _Client.DefaultRequestHeaders.Add("Authorization", newAuthHeader);
 
@@ -195,6 +200,7 @@ public class SharePointFileManager
 
         // Graph API endpoint to get site by URL
         string requestUrl = $"{GraphApiEndpoint}sites/{hostname}:{sitePath}";
+
         _logger.LogDebug(
             "EnsureSiteIdResolvedAsync - Resolving site ID for {SiteUrl}, request URL: {RequestUrl}",
             SiteUrl,
@@ -238,6 +244,7 @@ public class SharePointFileManager
 
     /// <summary>
     /// Get list (document library) by title.
+    /// Matches by the list's internal name field.
     /// </summary>
     private async Task<string> GetListIdByTitleAsync(string listTitle)
     {
@@ -246,28 +253,49 @@ public class SharePointFileManager
 
         _logger.LogDebug("GetListIdByTitleAsync - Looking up list ID for: {ListTitle}", listTitle);
 
-        string requestUrl =
-            $"{GraphApiEndpoint}sites/{SiteId}/lists?$filter=displayName eq '{EscapeApostrophe(listTitle)}'";
+        string requestUrl = $"{GraphApiEndpoint}sites/{SiteId}/lists?$select=id,name,displayName";
+
+        _logger.LogDebug("GetListIdByTitleAsync - Request URL: {RequestUrl}", requestUrl);
 
         var response = await _Client.GetAsync(requestUrl);
         response.EnsureSuccessStatusCode();
 
         string responseContent = await response.Content.ReadAsStringAsync();
-        var lists = JsonConvert.DeserializeObject<JObject>(responseContent);
-        var list = lists["value"]?.FirstOrDefault();
+        var listsResponse = JsonConvert.DeserializeObject<JObject>(responseContent);
+        var allLists = listsResponse["value"]?.ToObject<List<JObject>>();
 
-        string listId = list?["id"]?.ToString();
+        if (allLists == null || !allLists.Any())
+        {
+            _logger.LogWarning("GetListIdByTitleAsync - No lists found in site");
+            return null;
+        }
+
+        // Find the list whose name matches the listTitle
+        var matchingList = allLists.FirstOrDefault(list =>
+        {
+            string name = list["name"]?.ToString();
+            return string.Equals(name, listTitle, StringComparison.OrdinalIgnoreCase);
+        });
+
+        string listId = matchingList?["id"]?.ToString();
 
         if (string.IsNullOrEmpty(listId))
         {
-            _logger.LogWarning("GetListIdByTitleAsync - List not found: {ListTitle}", listTitle);
+            _logger.LogWarning(
+                "GetListIdByTitleAsync - List not found with name: {ListTitle}",
+                listTitle
+            );
         }
         else
         {
+            string name = matchingList["name"]?.ToString();
+            string displayName = matchingList["displayName"]?.ToString();
             _logger.LogDebug(
-                "GetListIdByTitleAsync - Found list ID {ListId} for {ListTitle}",
+                "GetListIdByTitleAsync - Found list ID {ListId} for {ListTitle} (name: {Name}, displayName: {DisplayName})",
                 listId,
-                listTitle
+                listTitle,
+                name,
+                displayName
             );
         }
 
@@ -304,6 +332,9 @@ public class SharePointFileManager
         };
 
         string requestUrl = $"{GraphApiEndpoint}sites/{SiteId}/lists";
+
+        _logger.LogDebug("CreateDocumentLibrary - Request URL: {requestUrl}", requestUrl);
+
         var content = new StringContent(
             JsonConvert.SerializeObject(requestBody),
             Encoding.UTF8,
@@ -356,6 +387,8 @@ public class SharePointFileManager
         string requestUrl =
             $"{GraphApiEndpoint}sites/{SiteId}/lists/{listId}/drive/root:/{encodedFolderName}";
 
+        _logger.LogDebug("CreateFolder - Request URL: {RequestUrl}", requestUrl);
+
         var requestBody = new { folder = new { }, name = folderName };
         var content = new StringContent(
             JsonConvert.SerializeObject(requestBody),
@@ -394,6 +427,8 @@ public class SharePointFileManager
         string encodedFolderName = Uri.EscapeDataString(folderName);
         string requestUrl =
             $"{GraphApiEndpoint}sites/{SiteId}/lists/{listId}/drive/root:/{encodedFolderName}";
+
+        _logger.LogDebug("FolderExists - Request URL: {RequestUrl}", requestUrl);
 
         var response = await _Client.GetAsync(requestUrl);
 
@@ -489,10 +524,11 @@ public class SharePointFileManager
     {
         string encodedFolderName = Uri.EscapeDataString(folderName);
         string encodedFileName = Uri.EscapeDataString(fileName);
+
         string requestUrl =
             $"{GraphApiEndpoint}sites/{SiteId}/lists/{listId}/drive/root:/{encodedFolderName}/{encodedFileName}:/content";
 
-        _logger.LogDebug("SimpleUpload - Simple upload PUT request: {RequestUrl}", requestUrl);
+        _logger.LogDebug("SimpleUpload - Request URL: {RequestUrl}", requestUrl);
 
         var content = new ByteArrayContent(data);
         content.Headers.ContentType = new MediaTypeHeaderValue(contentType);
@@ -662,14 +698,13 @@ public class SharePointFileManager
             throw new Exception($"Document library '{listTitle}' not found");
         }
 
-        string encodedPath = string.Join(
-            "/",
-            pathInLibrary.Split('/').Select(Uri.EscapeDataString)
-        );
+        // Decode the path first in case it's already URL-encoded, then re-encode each segment
+        string decodedPath = Uri.UnescapeDataString(pathInLibrary);
+        string encodedPath = string.Join("/", decodedPath.Split('/').Select(Uri.EscapeDataString));
         string requestUrl =
             $"{GraphApiEndpoint}sites/{SiteId}/lists/{listId}/drive/root:/{encodedPath}:/content";
 
-        _logger.LogDebug("DownloadFile - Download GET request: {RequestUrl}", requestUrl);
+        _logger.LogDebug("DownloadFile - Request URL: {RequestUrl}", requestUrl);
 
         var response = await _Client.GetAsync(requestUrl);
 
@@ -768,7 +803,7 @@ public class SharePointFileManager
         string requestUrl =
             $"{GraphApiEndpoint}sites/{SiteId}/lists/{listId}/drive/root:/{encodedPath}";
 
-        _logger.LogDebug("DeleteFile - Delete request: {RequestUrl}", requestUrl);
+        _logger.LogDebug("DeleteFile - Request URL: {RequestUrl}", requestUrl);
 
         var response = await _Client.DeleteAsync(requestUrl);
 
@@ -826,6 +861,8 @@ public class SharePointFileManager
         string requestUrl =
             $"{GraphApiEndpoint}sites/{SiteId}/lists/{listId}/drive/root:/{encodedFolderName}/{encodedFileName}";
 
+        _logger.LogDebug("DeleteFile - Request URL: {RequestUrl}", requestUrl);
+
         var response = await _Client.DeleteAsync(requestUrl);
 
         if (response.StatusCode == HttpStatusCode.NoContent || response.IsSuccessStatusCode)
@@ -879,6 +916,8 @@ public class SharePointFileManager
         );
         string requestUrl =
             $"{GraphApiEndpoint}sites/{SiteId}/lists/{listId}/drive/root:/{encodedOldPath}";
+
+        _logger.LogDebug("RenameFile - Request URL: {RequestUrl}", requestUrl);
 
         // Parse new path (must be in same library)
         string newFilePath = ParseServerRelativeUrl(newServerRelativeUrl);
@@ -951,6 +990,11 @@ public class SharePointFileManager
         string encodedFolderName = Uri.EscapeDataString(folderName);
         string requestUrl =
             $"{GraphApiEndpoint}sites/{SiteId}/lists/{listId}/drive/root:/{encodedFolderName}:/children";
+
+        _logger.LogDebug(
+            "GetFileDetailsListInFolder - Initial request URL: {RequestUrl}",
+            requestUrl
+        );
 
         var fileDetailsList = new List<SharePointFileDetailsList>();
         int pageCount = 0;
@@ -1104,6 +1148,8 @@ public class SharePointFileManager
         string encodedFolderName = Uri.EscapeDataString(folderName);
         string requestUrl =
             $"{GraphApiEndpoint}sites/{SiteId}/lists/{listId}/drive/root:/{encodedFolderName}";
+
+        _logger.LogDebug("DeleteFolder - Request URL: {RequestUrl}", requestUrl);
 
         var response = await _Client.DeleteAsync(requestUrl);
 
