@@ -92,11 +92,11 @@ public class FileManagerService : FileManager.FileManagerBase
 
         var logFolder = WordSanitizer.Sanitize(request.FolderName);
 
-        var listTitle = GetDocumentTemplateUrlPart(request.EntityName);
+        var listTitle = GetSharePointFolderInternalName(request.EntityName);
 
         var _sharePointFileManager = new SharePointFileManager(_configuration, _loggerFactory);
 
-        CreateDocumentLibraryIfMissing(listTitle, GetDocumentTemplateUrlPart(request.EntityName));
+        CreateDocumentLibraryIfMissing(listTitle, GetSharePointFolderInternalName(request.EntityName));
 
         bool folderExists = false;
         try
@@ -122,7 +122,7 @@ public class FileManagerService : FileManager.FileManagerBase
             try
             {
                 _sharePointFileManager
-                    .CreateFolder(GetDocumentTemplateUrlPart(request.EntityName), request.FolderName)
+                    .CreateFolder(GetSharePointFolderInternalName(request.EntityName), request.FolderName)
                     .GetAwaiter()
                     .GetResult();
                 folderExists = _sharePointFileManager
@@ -177,7 +177,7 @@ public class FileManagerService : FileManager.FileManagerBase
         {
             fileDetailsList = _sharePointFileManager
                 .GetFileDetailsListInFolder(
-                    GetDocumentTemplateUrlPart(request.EntityName),
+                    GetSharePointFolderInternalName(request.EntityName),
                     request.FolderName,
                     request.DocumentType
                 )
@@ -337,13 +337,13 @@ public class FileManagerService : FileManager.FileManagerBase
             var _sharePointFileManager = new SharePointFileManager(_configuration, _loggerFactory);
 
             CreateDocumentLibraryIfMissing(
-                GetDocumentTemplateUrlPart(request.EntityName),
-                GetDocumentTemplateUrlPart(request.EntityName)
+                GetSharePointFolderInternalName(request.EntityName),
+                GetSharePointFolderInternalName(request.EntityName)
             );
 
             var fileName = _sharePointFileManager
                 .AddFile(
-                    GetDocumentTemplateUrlPart(request.EntityName),
+                    GetSharePointFolderInternalName(request.EntityName),
                     request.FolderName,
                     request.FileName,
                     request.Data.ToByteArray(),
@@ -406,7 +406,7 @@ public class FileManagerService : FileManager.FileManagerBase
         {
             fileDetailsList = _sharePointFileManager
                 .GetFileDetailsListInFolder(
-                    GetDocumentTemplateUrlPart(request.EntityName),
+                    GetSharePointFolderInternalName(request.EntityName),
                     request.FolderName,
                     request.DocumentType
                 )
@@ -483,7 +483,7 @@ public class FileManagerService : FileManager.FileManagerBase
             var _sharePointFileManager = new SharePointFileManager(_configuration, _loggerFactory);
 
             // Ask SharePoint whether this filename would be truncated upon upload
-            var listTitle = GetDocumentTemplateUrlPart(request.EntityName);
+            var listTitle = GetSharePointFolderInternalName(request.EntityName);
             var maybeTruncated = _sharePointFileManager.GetTruncatedFileName(
                 request.FileName,
                 listTitle,
@@ -518,62 +518,37 @@ public class FileManagerService : FileManager.FileManagerBase
     }
 
     /// <summary>
-    /// Maps a generic entity name to its SharePoint document list `displayName`.
-    /// Example: "application" -> "Application".
-    /// </summary>
-    /// <param name="entityName"></param>
-    /// <returns></returns>
-    private string GetDocumentListTitle(string entityName)
-    {
-        switch (entityName.ToLower())
-        {
-            case "account":
-                return SharePointConstants.DefaultDocumentListTitle;
-            case "application":
-                return SharePointConstants.ApplicationDocumentListTitle;
-            case "contact":
-                return SharePointConstants.ContactDocumentListTitle;
-            case "worker":
-                return SharePointConstants.WorkerDocumentListTitle;
-            case "event":
-                return SharePointConstants.EventDocumentListTitle;
-            case "federal_report":
-                return SharePointConstants.FederalReportDocumentListTitle;
-            case "licence":
-                return SharePointConstants.LicenceDocumentListTitle;
-            case "special_event":
-                return SharePointConstants.SpecialEventDocumentListTitle;
-            default:
-                return entityName;
-        }
-    }
-
-    /// <summary>
-    /// Maps a generic entity name to its SharePoint document list `name`.
+    /// Maps a generic entity name to its SharePoint document library `name`.
     /// Example: "application" -> "adoxio_application".
     /// </summary>
+    /// <remarks>
+    /// There are a handful of places in the existing portal code that pass generic names like "application" when making
+    /// file related calls. These could probably be replaced with the direct sharepoint constant
+    /// (e.g., SharePointConstants.ApplicationFolderInternalName), but for safety with the existing code, this function
+    /// has been left to do the mapping as it did originally.
+    /// </remarks>
     /// <param name="entityName"></param>
     /// <returns></returns>
-    private string GetDocumentTemplateUrlPart(string entityName)
+    private string GetSharePointFolderInternalName(string entityName)
     {
         switch (entityName.ToLower())
         {
             case "account":
-                return SharePointConstants.DefaultDocumentUrlTitle;
+                return SharePointConstants.AccountFolderInternalName;
             case "application":
-                return SharePointConstants.ApplicationDocumentUrlTitle;
+                return SharePointConstants.ApplicationFolderInternalName;
             case "contact":
-                return SharePointConstants.ContactDocumentUrlTitle;
+                return SharePointConstants.ContactFolderInternalName;
             case "worker":
-                return SharePointConstants.WorkerDocumentUrlTitle;
+                return SharePointConstants.WorkerFolderInternalName;
             case "event":
-                return SharePointConstants.EventDocumentUrlTitle;
+                return SharePointConstants.EventFolderInternalName;
             case "federal_report":
-                return SharePointConstants.FederalReportDocumentUrlTitle;
+                return SharePointConstants.FederalReportFolderInternalName;
             case "licence":
-                return SharePointConstants.LicenceDocumentUrlTitle;
+                return SharePointConstants.LicenceFolderDisplayName;
             case "special_event":
-                return SharePointConstants.SpecialEventDocumentUrlTitle;
+                return SharePointConstants.SpecialEventFolderInternalName;
             default:
                 return entityName;
         }

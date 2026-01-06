@@ -36,7 +36,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                     {
                         string serverRelativeUrl = "";
 
-                        serverRelativeUrl += "/" + GetServerRelativeURL(SharePointConstants.DefaultDocumentUrlTitle, location.Relativeurl);
+                        serverRelativeUrl += "/" + GetServerRelativeURL(SharePointConstants.AccountFolderInternalName, location.Relativeurl);
 
                         result = serverRelativeUrl;
                     }
@@ -48,7 +48,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 string accountIdCleaned = account.Accountid.ToUpper().Replace("-", "");
                 string folderName = $"_{accountIdCleaned}";
 
-                serverRelativeUrl += "/" + GetServerRelativeURL(SharePointConstants.DefaultDocumentUrlTitle, folderName);
+                serverRelativeUrl += "/" + GetServerRelativeURL(SharePointConstants.AccountFolderInternalName, folderName);
 
                 result = serverRelativeUrl;
 

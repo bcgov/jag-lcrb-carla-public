@@ -20,11 +20,13 @@ namespace Gov.Lclb.Cllb.Interfaces;
 /// </summary>
 public class SharePointFileManager
 {
+    private const int MaxUrlLength = 260; // default maximum URL length.
     private const int UploadSessionThreshold = 4 * 1024 * 1024; // 4MB
     private const int ChunkSize = 320 * 1024 * 10; // 3.2MB
     private const int HttpClientTimeoutSeconds = 100;
     private const int MaxAuthRetries = 3;
     private const int InitialRetryDelayMs = 1000;
+    private const string DocumentLibraryTemplate = "documentLibrary"; // Standard template for document libraries
 
     private AuthenticationResult authenticationResult;
     private IConfidentialClientApplication confidentialClientApp;
@@ -243,19 +245,32 @@ public class SharePointFileManager
     }
 
     /// <summary>
-    /// Get list (document library) by title.
-    /// Matches by the list's internal name field.
+    /// Get list (document library) by `name` or `displayName`.
+    /// Matches first by the list's internal `name` field, and then by `displayName` if not found.
     /// </summary>
-    private async Task<string> GetListIdByTitleAsync(string listTitle)
+    /// <remarks>
+    /// All of the LCRB sharepoint documents typically reside underneath a top-level folder corresponding to which
+    /// class of document it is (eg. Application, Contact, Account, etc). Each of these top-level folders is
+    /// represented as a SharePoint document library (list) with a `displayName` field like "Application" and and
+    /// internal `name` field like "adoxio_application".
+    /// </remarks>
+    /// <example>
+    /// GetDocumentLibraryIdByNameAsync("adoxio_application"); // returns the ID of the "Application" document library.
+    /// GetDocumentLibraryIdByNameAsync("Application"); // returns the ID of the "Application" document library.
+    /// </example>
+    private async Task<string> GetDocumentLibraryIdByNameAsync(string listTitle)
     {
         await EnsureValidAccessTokenAsync();
         await EnsureSiteIdResolvedAsync();
 
-        _logger.LogDebug("GetListIdByTitleAsync - Looking up list ID for: {ListTitle}", listTitle);
+        _logger.LogDebug(
+            "GetDocumentLibraryIdByNameAsync - Looking up list ID for: {ListTitle}",
+            listTitle
+        );
 
         string requestUrl = $"{GraphApiEndpoint}sites/{SiteId}/lists?$select=id,name,displayName";
 
-        _logger.LogDebug("GetListIdByTitleAsync - Request URL: {RequestUrl}", requestUrl);
+        _logger.LogDebug("GetDocumentLibraryIdByNameAsync - Request URL: {RequestUrl}", requestUrl);
 
         var response = await _Client.GetAsync(requestUrl);
         response.EnsureSuccessStatusCode();
@@ -266,7 +281,7 @@ public class SharePointFileManager
 
         if (allLists == null || !allLists.Any())
         {
-            _logger.LogWarning("GetListIdByTitleAsync - No lists found in site");
+            _logger.LogWarning("GetDocumentLibraryIdByNameAsync - No lists found in site");
             return null;
         }
 
@@ -277,12 +292,22 @@ public class SharePointFileManager
             return string.Equals(name, listTitle, StringComparison.OrdinalIgnoreCase);
         });
 
+        // If not found by name, try matching by displayName
+        if (matchingList == null)
+        {
+            matchingList = allLists.FirstOrDefault(list =>
+            {
+                string displayName = list["displayName"]?.ToString();
+                return string.Equals(displayName, listTitle, StringComparison.OrdinalIgnoreCase);
+            });
+        }
+
         string listId = matchingList?["id"]?.ToString();
 
         if (string.IsNullOrEmpty(listId))
         {
             _logger.LogWarning(
-                "GetListIdByTitleAsync - List not found with name: {ListTitle}",
+                "GetDocumentLibraryIdByNameAsync - List not found with name or displayName: {ListTitle}",
                 listTitle
             );
         }
@@ -291,7 +316,7 @@ public class SharePointFileManager
             string name = matchingList["name"]?.ToString();
             string displayName = matchingList["displayName"]?.ToString();
             _logger.LogDebug(
-                "GetListIdByTitleAsync - Found list ID {ListId} for {ListTitle} (name: {Name}, displayName: {DisplayName})",
+                "GetDocumentLibraryIdByNameAsync - Found list ID {ListId} for {ListTitle} (name: {Name}, displayName: {DisplayName})",
                 listId,
                 listTitle,
                 name,
@@ -328,7 +353,7 @@ public class SharePointFileManager
         var requestBody = new
         {
             displayName = documentTemplateUrlTitle,
-            list = new { template = "documentLibrary" }
+            list = new { template = DocumentLibraryTemplate }
         };
 
         string requestUrl = $"{GraphApiEndpoint}sites/{SiteId}/lists";
@@ -355,7 +380,7 @@ public class SharePointFileManager
     /// <returns>`true` if the document library exists; otherwise, `false`.</returns>
     public async Task<bool> DocumentLibraryExists(string listTitle)
     {
-        var listId = await GetListIdByTitleAsync(listTitle);
+        var listId = await GetDocumentLibraryIdByNameAsync(listTitle);
 
         if (string.IsNullOrEmpty(listId))
         {
@@ -376,7 +401,7 @@ public class SharePointFileManager
         await EnsureValidAccessTokenAsync();
         await EnsureSiteIdResolvedAsync();
 
-        var listId = await GetListIdByTitleAsync(listTitle);
+        var listId = await GetDocumentLibraryIdByNameAsync(listTitle);
         if (string.IsNullOrEmpty(listId))
         {
             throw new Exception($"Document library '{listTitle}' not found");
@@ -417,7 +442,7 @@ public class SharePointFileManager
         await EnsureValidAccessTokenAsync();
         await EnsureSiteIdResolvedAsync();
 
-        var listId = await GetListIdByTitleAsync(listTitle);
+        var listId = await GetDocumentLibraryIdByNameAsync(listTitle);
 
         if (string.IsNullOrEmpty(listId))
         {
@@ -469,7 +494,7 @@ public class SharePointFileManager
         await EnsureValidAccessTokenAsync();
         await EnsureSiteIdResolvedAsync();
 
-        var listId = await GetListIdByTitleAsync(listTitle);
+        var listId = await GetDocumentLibraryIdByNameAsync(listTitle);
         if (string.IsNullOrEmpty(listId))
         {
             _logger.LogError("UploadFile - Document library not found: {ListTitle}", listTitle);
@@ -661,7 +686,7 @@ public class SharePointFileManager
     /// Download a file from SharePoint.
     /// </summary>
     /// <example>
-    /// serverRelativeUrl: "https://bcgov.sharepoint.com/sites/lcrb-cllceDEV/account/TEST-FOLDER/NOTICE__MY-Notice.pdf"
+    /// serverRelativeUrl: "/sites/lcrb-cllceDEV/account/TEST-FOLDER/NOTICE__MY-Notice.pdf"
     /// </example>
     /// <param name="serverRelativeUrl"></param>
     /// <returns></returns>
@@ -691,7 +716,7 @@ public class SharePointFileManager
         string listTitle = filePath.Substring(0, firstSlash);
         string pathInLibrary = filePath.Substring(firstSlash + 1);
 
-        var listId = await GetListIdByTitleAsync(listTitle);
+        var listId = await GetDocumentLibraryIdByNameAsync(listTitle);
         if (string.IsNullOrEmpty(listId))
         {
             _logger.LogError("DownloadFile - Document library not found: {ListTitle}", listTitle);
@@ -732,10 +757,13 @@ public class SharePointFileManager
 
     /// <summary>
     /// Parse server relative URL to extract file path relative to the site.
-    /// Handles URLs like "/sites/sitename/documentlibrary/folder/file.pdf"
     /// </summary>
-    /// <param name="serverRelativeUrl"></param>
-    /// <returns></returns>
+    /// <example>
+    /// var result = ParseServerRelativeUrl("/sites/sitename/documentlibrary/folder/file.pdf")
+    /// // result = "documentlibrary/folder/file.pdf"
+    /// </example>
+    /// <param name="serverRelativeUrl">The server relative URL of the file. Ex: "/sites/sitename/documentlibrary/folder/file.pdf"</param>
+    /// <returns>The file path relative to the site. Ex: "documentlibrary/folder/file.pdf"</returns>
     private string ParseServerRelativeUrl(string serverRelativeUrl)
     {
         if (string.IsNullOrEmpty(serverRelativeUrl))
@@ -747,14 +775,14 @@ public class SharePointFileManager
 
         // If SiteUrl contains a site path, remove it from the server relative URL
         Uri siteUri = new Uri(SiteUrl);
-        string sitePath = siteUri.AbsolutePath.TrimStart('/').TrimEnd('/');
+        string sitePath = siteUri.AbsolutePath.TrimStart('/').TrimEnd('/'); // ex: "sites/sitename"
 
         if (!string.IsNullOrEmpty(sitePath) && path.StartsWith(sitePath + "/"))
         {
             path = path.Substring(sitePath.Length + 1);
         }
 
-        return path;
+        return path; // ex: "documentlibrary/folder/file.pdf"
     }
 
     /// <summary>
@@ -789,7 +817,7 @@ public class SharePointFileManager
         string listTitle = filePath.Substring(0, firstSlash);
         string pathInLibrary = filePath.Substring(firstSlash + 1);
 
-        var listId = await GetListIdByTitleAsync(listTitle);
+        var listId = await GetDocumentLibraryIdByNameAsync(listTitle);
         if (string.IsNullOrEmpty(listId))
         {
             _logger.LogError("DeleteFile - Document library not found: {ListTitle}", listTitle);
@@ -848,7 +876,7 @@ public class SharePointFileManager
         await EnsureValidAccessTokenAsync();
         await EnsureSiteIdResolvedAsync();
 
-        var listId = await GetListIdByTitleAsync(listTitle);
+        var listId = await GetDocumentLibraryIdByNameAsync(listTitle);
         if (string.IsNullOrEmpty(listId))
         {
             throw new Exception($"Document library '{listTitle}' not found");
@@ -904,7 +932,7 @@ public class SharePointFileManager
         string listTitle = oldFilePath.Substring(0, firstSlash);
         string oldPathInLibrary = oldFilePath.Substring(firstSlash + 1);
 
-        var listId = await GetListIdByTitleAsync(listTitle);
+        var listId = await GetDocumentLibraryIdByNameAsync(listTitle);
         if (string.IsNullOrEmpty(listId))
         {
             throw new Exception($"Document library '{listTitle}' not found");
@@ -971,7 +999,7 @@ public class SharePointFileManager
 
     /// <summary>
     /// Get file details list in a folder with pagination support.
-    /// /// </summary>
+    /// </summary>
     public async Task<List<SharePointFileDetailsList>> GetFileDetailsListInFolder(
         string listTitle, // EntityName
         string folderName, // FolderName
@@ -981,7 +1009,7 @@ public class SharePointFileManager
         await EnsureValidAccessTokenAsync();
         await EnsureSiteIdResolvedAsync();
 
-        var listId = await GetListIdByTitleAsync(listTitle);
+        var listId = await GetDocumentLibraryIdByNameAsync(listTitle);
         if (string.IsNullOrEmpty(listId))
         {
             return new List<SharePointFileDetailsList>();
@@ -1139,7 +1167,7 @@ public class SharePointFileManager
         await EnsureValidAccessTokenAsync();
         await EnsureSiteIdResolvedAsync();
 
-        var listId = await GetListIdByTitleAsync(listTitle);
+        var listId = await GetDocumentLibraryIdByNameAsync(listTitle);
         if (string.IsNullOrEmpty(listId))
         {
             return false;
@@ -1172,7 +1200,7 @@ public class SharePointFileManager
     )
     {
         return await AddFile(
-            SharePointConstants.DefaultDocumentListTitle,
+            SharePointConstants.AccountFolderDisplayName,
             folderName,
             fileName,
             fileData,
@@ -1224,7 +1252,7 @@ public class SharePointFileManager
     )
     {
         return await AddFile(
-            SharePointConstants.DefaultDocumentListTitle,
+            SharePointConstants.AccountFolderDisplayName,
             folderName,
             fileName,
             fileData,
@@ -1359,9 +1387,9 @@ public class SharePointFileManager
         string serverRelativeUrl = GetServerRelativeURL(listTitle, folderName);
         string fullPath = $"{serverRelativeUrl}/{fileName}";
 
-        if (fullPath.Length > SharePointConstants.MaxUrlLength)
+        if (fullPath.Length > MaxUrlLength)
         {
-            int delta = fullPath.Length - SharePointConstants.MaxUrlLength;
+            int delta = fullPath.Length - MaxUrlLength;
             maxLength -= delta;
             fileName = FixFilename(fileName, maxLength);
         }

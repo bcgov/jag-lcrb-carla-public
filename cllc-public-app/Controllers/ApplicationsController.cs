@@ -1847,7 +1847,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             _fileManagerClient.CreateFolderIfNotExist(
                 _logger,
-                SharePointConstants.ApplicationDocumentUrlTitle,
+                SharePointConstants.ApplicationFolderInternalName,
                 folderName
             );
 

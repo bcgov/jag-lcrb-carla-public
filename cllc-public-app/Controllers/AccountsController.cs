@@ -413,7 +413,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             var fileDetailsList = _fileManagerClient.GetFileDetailsListInFolder(
                 _logger,
-                SharePointConstants.DefaultDocumentUrlTitle,
+                SharePointConstants.AccountFolderInternalName,
                 accountId,
                 folderName
             );
