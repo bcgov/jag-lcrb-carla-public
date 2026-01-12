@@ -47,7 +47,7 @@
     <PackageReference Include="Spire.Doc" Version="11.9.19" />
     <PackageReference Include="Winista.MimeDetect" Version="1.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.32" />
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.35.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.6.1" />
   </ItemGroup>
 
 
