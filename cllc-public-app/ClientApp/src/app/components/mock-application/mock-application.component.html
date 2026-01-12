@@ -1,0 +1,102 @@
+<div class="mock-wrap">
+
+  <!-- Optional small title bar for context (matches your site tone) -->
+  <div class="mock-head">
+    <div class="mock-title">Liquor Primary Licence Application · <span class="muted">(Mock)</span></div>
+  </div>
+
+  <ng-container *ngIf="schema?.sections?.length">
+
+    <section class="sec" *ngFor="let sec of schema.sections; trackBy: trackById">
+      <h3 class="sec-title">{{ sec.title || sec.id }}</h3>
+
+      <!-- Uploads -->
+      <div *ngIf="isUploads(sec)" class="uploads">
+        <button type="button" class="upload-pill" *ngFor="let f of (sec.fields || []); trackBy: trackById"
+          (click)="uploadRequested.emit(f.id)">
+          <mat-icon class="ic">upload_file</mat-icon>
+          <span class="pill-text">{{ f.label || f.id }}</span>
+          <span class="pill-badge" [class.ok]="uploadStatuses?.[f.id] === 'ok'">
+            {{ uploadStatuses?.[f.id] === 'ok' ? 'uploaded' : 'missing' }}
+          </span>
+        </button>
+      </div>
+
+      <!-- Hours of Sale (compact) -->
+      <div *ngIf="isHours(sec)" class="hours">
+        <div class="hours-row" *ngFor="let d of days">
+          <div class="day">{{ d }}</div>
+
+          <mat-form-field appearance="outline" class="time">
+            <mat-label>Open</mat-label>
+            <input matInput [value]="getHour(d, 'open')" placeholder="10:00"
+              (input)="setHours(d, 'open', ($any($event.target)).value)" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="time">
+            <mat-label>Close</mat-label>
+            <input matInput [value]="getHour(d, 'close')" placeholder="01:30"
+              (input)="setHours(d, 'close', ($any($event.target)).value)" />
+          </mat-form-field>
+        </div>
+        <div class="note">Use 24-hour or 12-hour (am/pm) format; final validation happens on submit.</div>
+      </div>
+
+      <!-- General fields (no CSS grid; compact flex rows) -->
+      <div *ngIf="isGrid(sec)" class="rows">
+        <div 
+          class="col"
+          *ngFor="let f of (sec.fields || []); trackBy: trackById"
+          [ngClass]="colClass(f.span)"
+          [class.ai-active-field]="f.id === activeFieldId">
+
+          <!-- label (for all non-boolean types) -->
+          <label class="label" *ngIf="f.type !== 'boolean'">
+            {{ f.label || f.id }} <span *ngIf="f.required" class="req">*</span>
+          </label>
+
+          <!-- text/email/tel -->
+          <mat-form-field *ngIf="['string','email','tel'].includes(f.type)" appearance="outline" class="dense full">
+            <input matInput [attr.type]="f.type === 'string' ? 'text' : f.type" [value]="getVal(f.id, f.default || '')"
+              (input)="setVal(f.id, ($any($event.target)).value)" />
+          </mat-form-field>
+
+          <!-- number -->
+          <mat-form-field *ngIf="f.type === 'number'" appearance="outline" class="dense full">
+            <input matInput type="number" [value]="getVal(f.id, f.default ?? '')"
+              (input)="setVal(f.id, (($any($event.target)).valueAsNumber ?? parseFloat(($any($event.target)).value)))" />
+          </mat-form-field>
+
+          <!-- select -->
+          <mat-form-field *ngIf="f.type === 'select'" appearance="outline" class="dense full">
+            <mat-select [value]="getVal(f.id, f.default || '')" (selectionChange)="setVal(f.id, $event.value)">
+              <mat-option *ngFor="let opt of (f.options || [])" [value]="opt">{{ opt }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <!-- boolean (label is above, radios below in a column) -->
+          <div *ngIf="f.type === 'boolean'" class="field-boolean">
+            <div class="label">
+              {{ f.label || f.id }} <span *ngIf="f.required" class="req">*</span>
+            </div>
+            <mat-radio-group class="radio-inline" [value]="!!getVal(f.id, f.default === true)"
+              (change)="setVal(f.id, $event.value)">
+              <mat-radio-button [value]="true">Yes</mat-radio-button>
+              <mat-radio-button [value]="false">No</mat-radio-button>
+            </mat-radio-group>
+          </div>
+
+          <!-- file in non-upload sections (rare) -->
+          <button *ngIf="f.type === 'file'" type="button" class="upload-pill" (click)="uploadRequested.emit(f.id)">
+            <mat-icon class="ic">upload_file</mat-icon>
+            <span class="pill-text">{{ f.label || f.id }}</span>
+            <span class="pill-badge" [class.ok]="uploadStatuses?.[f.id] === 'ok'">
+              {{ uploadStatuses?.[f.id] === 'ok' ? 'uploaded' : 'missing' }}
+            </span>
+          </button>
+
+        </div>
+      </div>
+    </section>
+  </ng-container>
+</div>
