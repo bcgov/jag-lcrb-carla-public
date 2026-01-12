@@ -1,0 +1,149 @@
+{
+  "title": "Liquor Primary Application (Demo)",
+  "sections": [
+    {
+      "id": "uploads1",
+      "title": "Legal Entity Document Requirements",
+      "layout": "uploads",
+      "fields": [
+        {
+          "id": "centralSecuritiesRegister",
+          "label": "Central Securities Register (shareholder register)",
+          "type": "file"
+        },
+        { "id": "supportingBusinessForms", "label": "Supporting Business Forms", "type": "file" },
+        {
+          "id": "noticeOfArticles",
+          "label": "Notice of Articles (or Register of Directors and Officers)",
+          "type": "file"
+        },
+        { "id": "personalHistorySummary", "label": "Personal History Summary Documents", "type": "file" },
+        {
+          "id": "listOfShareholders",
+          "label": "Shareholders (individuals) Holding Less Than 10% Interest (or Non-Voting Shareholders)",
+          "type": "file"
+        }
+      ]
+    },
+    {
+      "id": "establishment",
+      "title": "Establishment details",
+      "layout": "grid",
+      "fields": [
+        {
+          "id": "establishmentName",
+          "label": "Proposed Establishment Name",
+          "type": "string",
+          "required": true,
+          "span": 6
+        },
+        { "id": "establishmentAddressStreet", "label": "Address", "type": "string", "required": true, "span": 6 },
+        { "id": "establishmentAddressCity", "label": "City", "type": "string", "required": true, "span": 4 },
+        {
+          "id": "establishmentAddressProvince",
+          "label": "Province",
+          "type": "string",
+          "default": "British Columbia",
+          "span": 4
+        },
+        {
+          "id": "establishmentAddressPostalCode",
+          "label": "Postal Code",
+          "type": "string",
+          "required": true,
+          "span": 4
+        },
+        { "id": "establishmentAddressCountry", "label": "Country", "type": "string", "default": "Canada", "span": 4 },
+        {
+          "id": "isOnINLand",
+          "label": "Is the proposed establishment on Treaty First Nation Land?",
+          "type": "boolean",
+          "required": false,
+          "span": 4
+        },
+        {
+          "id": "isPermittedInZoning",
+          "label": "Confirm that current zoning at the proposed location permits a Liquor Primary.",
+          "type": "boolean",
+          "required": false,
+          "span": 4
+        }
+      ]
+    },
+    {
+      "id": "uploads2",
+      "title": "Letter of Intent",
+      "layout": "uploads",
+      "fields": [{ "id": "letterOfIntent", "label": "Letter of Intent", "type": "file" }]
+    },
+    {
+      "id": "lgin",
+      "title": "Local Government / Indigenous Nation and Police Jurisdiction",
+      "layout": "grid",
+      "fields": [
+        { "id": "indigenousNation", "label": "Local Government / Indigenous Nation", "type": "string", "span": 6 },
+        { "id": "policeJurisdiction", "label": "Police Jurisdiction", "type": "string", "span": 6 }
+      ]
+    },
+    {
+      "id": "ops",
+      "title": "Establishment Operation Details",
+      "layout": "grid",
+      "fields": [
+        { "id": "establishmentEmail", "label": "Establishment Email", "type": "email", "span": 6 },
+        { "id": "establishmentPhone", "label": "Establishment Phone", "type": "tel", "span": 6 },
+        { "id": "isHasPatio", "label": "Will the establishment have a patio?", "type": "boolean", "span": 6 },
+        { "id": "establishmentType", "label": "Establishment Type", "type": "string", "required": true, "span": 6 },
+        { "id": "totalOccupantLoad", "label": "Total Occupant Load", "type": "number", "required": true, "span": 4 }
+      ]
+    },
+    {
+      "id": "uploads3",
+      "title": "Signage and Floor Plan",
+      "layout": "uploads",
+      "fields": [
+        { "id": "signageDocuments", "label": "Photos or renderings of the establishment's signage", "type": "file" },
+        { "id": "floorPlan", "label": "Floor Plan", "type": "file" },
+        { "id": "sitePlan", "label": "Site Plan", "type": "file" }
+      ]
+    },
+    {
+      "id": "hours",
+      "title": "Hours of Sale",
+      "layout": "hours"
+    },
+    {
+      "id": "applicant",
+      "title": "Application Contact Details",
+      "layout": "grid",
+      "fields": [
+        { "id": "contactPersonFirstName", "label": "First Name", "type": "string", "required": true, "span": 4 },
+        { "id": "contactPersonLastName", "label": "Last Name", "type": "string", "required": true, "span": 4 },
+        { "id": "contactPersonRole", "label": "Title / Position", "type": "string", "span": 4 },
+        { "id": "contactPersonPhone", "label": "Phone Number (main)", "type": "tel", "required": true, "span": 6 },
+        { "id": "contactPersonEmail", "label": "Email", "type": "email", "required": true, "span": 6 }
+      ]
+    },
+    {
+      "id": "declarations",
+      "title": "Declarations",
+      "layout": "grid",
+      "fields": [
+        {
+          "id": "authorizedToSubmit",
+          "label": "I understand and affirm that I am authorized to submit the application",
+          "type": "boolean",
+          "required": true,
+          "span": 12
+        },
+        {
+          "id": "isOwner",
+          "label": "I am the owner of the business in respect of which the licence is to be issued or will become the owner before the licence is issued.",
+          "type": "boolean",
+          "required": true,
+          "span": 12
+        }
+      ]
+    }
+  ]
+}
