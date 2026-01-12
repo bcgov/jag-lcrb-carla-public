@@ -82,6 +82,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             string serviceAccountUsername = Configuration["DYNAMICS_USERNAME"]; // Service account username
             string serviceAccountPassword = Configuration["DYNAMICS_PASSWORD"]; // Service account password
 
+            string bypassStsCertValidation = Configuration["BYPASS_STS_CERT_VALIDATION"]; // Bypass STS certificate validation (true/false)
+
             if (
                 string.IsNullOrEmpty(adfsOauth2Uri)
                 || string.IsNullOrEmpty(applicationGroupResource)
@@ -95,7 +97,31 @@ namespace Gov.Lclb.Cllb.Interfaces
                 return null;
             }
 
-            var stsClient = new HttpClient();
+            HttpClient stsClient;
+            if (
+                !string.IsNullOrEmpty(bypassStsCertValidation)
+                && bypassStsCertValidation.ToLower() == "true"
+            )
+            {
+                var httpClientHandler = new HttpClientHandler();
+                httpClientHandler.ClientCertificateOptions = ClientCertificateOption.Manual;
+                httpClientHandler.ServerCertificateCustomValidationCallback = (
+                    httpRequestMessage,
+                    cert,
+                    cetChain,
+                    policyErrors
+                ) =>
+                {
+                    // Ignore all certificate validation errors.
+                    return true;
+                };
+
+                stsClient = new HttpClient(httpClientHandler);
+            }
+            else
+            {
+                stsClient = new HttpClient();
+            }
 
             stsClient.DefaultRequestHeaders.Add("client-request-id", Guid.NewGuid().ToString());
             stsClient.DefaultRequestHeaders.Add("return-client-request-id", "true");
